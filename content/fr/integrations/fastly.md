@@ -1,6 +1,7 @@
 ---
 categories:
   - web
+  - log collection
 ddtype: crawler
 dependencies: []
 description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
@@ -59,7 +60,7 @@ Configurez l'endpoint Syslog de façon à transmettre des logs Fastly à votre a
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
-    Remarque : si vous ne placez pas la clé d'API Datadog avant le format de log Datadog/Fastly, vos logs n’apparaîtront pas dans Datadog. Consultez la [documentation Fastly][4] (en anglais) pour en savoir plus sur les variables de log.
+    Remarque : si vous ne placez pas la clé d'API Datadog avant le format de log Datadog/Fastly, vos logs n'apparaîtront pas dans Datadog. Consultez la [documentation Fastly][4] (en anglais) pour en savoir plus sur les variables de log.
 
 3. Définissez **Syslog Address** sur `intake.logs.datadoghq.com`.
 4. Définissez **Port** sur `10516`.

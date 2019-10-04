@@ -1,6 +1,6 @@
 ---
 title: Agent Configuration Files
-kind: faq
+kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
 ---
@@ -52,7 +52,7 @@ Note: [A full example of the `datadog.yaml` file is available in the `datadog-ag
 
 ## Agent configuration directory
 
-Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/datadog-agent/conf.d/<CHECK_NAME>`.
+Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -74,29 +74,25 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 ### Checks configuration files for Agent 6
 
-In order to provide a more flexible way to define the configuration for a check, from version 6.0.0, the Agent loads any valid YAML file contained in the folder:
-
-`/datadog-agent/conf.d/<CHECK_NAME>.d/`.
-
-Note: For log collection, to prevent duplicate logs from being sent to Datadog, the Agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
-
-This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
+An example for each Agent check configuration files can be found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` in order to enable the associated check. Note that the Agent loads any valid YAML file contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
 ```
-/datadog-agent/conf.d/http_check.d/
+/etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
 ```
 
-Autodiscovery template files are stored in the configuration folder as well. For example, consider `redisdb`:
+Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 
 ```
-/datadog-agent/conf.d/redisdb.d/
+/etc/datadog-agent/conf.d/redisdb.d/
 ├── auto_conf.yaml
 └── conf.yaml.example
 ```
 
-To preserve backwards compatibility, the Agent still picks up configuration files in the form `/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
+**Note**: For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
+
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -123,4 +119,4 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /agent/autodiscovery
+[2]: /agent/autodiscovery/integrations/#configuration

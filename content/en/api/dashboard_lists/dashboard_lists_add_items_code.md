@@ -5,14 +5,14 @@ order: 9.7
 external_redirect: /api/#add-items-to-a-dashboard-list
 ---
 
-##### Signature
+**SIGNATURE**:
 
-`POST /v1/dashboard/lists/manual/<LIST_ID>/dashboards`
+`POST /v2/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-dashboard-list-add-items" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-add-items" >}}

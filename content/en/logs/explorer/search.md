@@ -21,7 +21,7 @@ further_reading:
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
 ## Search syntax
 
@@ -55,7 +55,7 @@ The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~
 
 ### Attributes search
 #### Message attribute search
-To search for logs that contain `user=12345` in the message attribute use the following search:
+To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
 
 `user\=JaneDoe`
 
@@ -83,6 +83,16 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `service:web*` matches every log message that has a service starting with `web`.
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
+
+Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
+
+`service:*mongo`
+
+Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
+
+`*NETWORK*`
+
+However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
 ### Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:

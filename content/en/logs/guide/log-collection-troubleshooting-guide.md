@@ -56,7 +56,17 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 
 Otherwise there should be a similar message in the Agent `status`:
 
-{{< img src="logs/agent-log-executable-permission-issue.png" alt="Permission issue" responsive="true" style="width:70%;">}}
+```
+==========
+Logs Agent
+==========
+
+  test
+  ----
+    Type: file
+    Path: /var/log/application/error.log
+    Status: Error: file /var/log/application/error.log does not exist
+```
 
 Run the `namei` command to obtain more information about the file permissions:
 
@@ -176,9 +186,9 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [4]: https://docs.datadoghq.com/integrations/journald/#pagetitle
 [5]: https://codebeautify.org/yaml-validator
 [6]: /agent/docker/log/?tab=containerinstallation#filter-containers
-[7]: /agent/docker/log/?tab=dockerfile#examples
-[8]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[7]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
+[8]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [9]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api
 [11]: https://app.datadoghq.com/logs/livetail
-[12]: /logs/logging_without_limits/#exclusion-filters
+[12]: /logs/indexes/#exclusion-filters

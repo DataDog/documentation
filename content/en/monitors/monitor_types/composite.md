@@ -157,6 +157,7 @@ Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. 
 The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at one point in time:
 
 {{% table responsive="true" %}}
+
 |source | monitor A    | monitor B| monitor C | composite status (A && B && C) | alert triggered? |
 |-------|--------------|----------|-----------|--------------------------------|-------------------------|
 | web01 | Alert        | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|

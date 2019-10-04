@@ -168,7 +168,7 @@
             {{ range $i2, $subnav := $nav.children }}
 
               <li {{ if $.Scratch.Get (print "subnav_open_" $i1 "_" $i2) }}class="open"{{ end }}>
-                <a href="{{ $.Scratch.Get (print "subnav_url_" $i1 "_" $i2) }}" {{ if $.Scratch.Get (print "subnav_active_" $i1 "_" $i2) }}class="active"{{ end }}>{{ $subnav.name }}</a>
+                <a data-id="{{$subnav.id}}" href="{{ $.Scratch.Get (print "subnav_url_" $i1 "_" $i2) }}" {{ if $.Scratch.Get (print "subnav_active_" $i1 "_" $i2) }}class="active"{{ end }}>{{ $subnav.name }}</a>
 
                 <!-- Level 2 subnav -->
                 {{ if $subnav.children }}

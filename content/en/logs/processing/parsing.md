@@ -3,7 +3,7 @@ title: Parsing
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
-    - logs/parsing/
+    - /logs/parsing/
 further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"
@@ -11,7 +11,7 @@ further_reading:
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
 - link: "logs/logging_without_limits"
@@ -109,7 +109,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
-| `url`                                                          | Parses a UFL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
+| `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
 
 
 
@@ -154,6 +154,13 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 ## Examples
 Find below some examples demonstrating how to use parsers:
+
+* [Key value](#key-value)
+* [Parsing dates](#parsing-dates)
+* [Conditional patterns](#conditional-pattern)
+* [Optional attribute](#optional-attribute)
+* [Nested JSON](#nested-json)
+* [Regex](#regex)
 
 ### Key value
 
@@ -234,6 +241,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | **Raw string**                           | **Parsing rule**                                          | **Result**              |
 | :---                                     | :----                                                     | :----                   |
 | 14:20:15                                 | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
+| 02:20:15 PM                              | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
 | 11/10/2014                               | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
 | Thu Jun 16 08:29:03 2016                 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
 | Tue Nov 1 08:29:03 2016                  | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
@@ -290,6 +298,25 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 {{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
 
 {{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
+
+### Nested JSON
+
+Use the `json` *filter* to parse a JSON object nested after a raw text prefix:
+
+**Log**: 
+
+```
+Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
+```
+
+**Rule**:
+
+```
+parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
+```
+
+{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" responsive="true" style="width:80%;" >}}
+
 
 ### Regex
 Use the regex matcher to match any substring of your log message based on literal regex rules.

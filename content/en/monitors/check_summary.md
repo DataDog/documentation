@@ -1,5 +1,5 @@
 ---
-title: Check summary
+title: Check Summary
 kind: documentation
 description: "See the list of all your checks reporting to Datadog."
 further_reading:
@@ -19,15 +19,20 @@ further_reading:
 
 ## Overview
 
-This page let you see the list of all your checks reporting to Datadog:
+Datadog checks emit a status on each check run. Potential statuses are `OK`, `WARNING`, or `CRITICAL`.
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" style="width:80%;">}}
+The check summary page lists all your checks reporting to Datadog:
 
-Click on a check in order to have more details.
+ {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" style="width:70%;">}}
 
-{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" style="width:70%;">}}
+Click on a check name to see the tags associated with the check:
+
+{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" style="width:80%;">}}
+
+**Note**: For more insights on check statuses, utilize the [Check Status Widget][1].
 
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /graphing/widgets/check_status

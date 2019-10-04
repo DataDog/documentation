@@ -19,23 +19,27 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It uses fewer file descriptors
   * It has an all around decreased footprint
 
-* Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+* Agent 6 uses [two additional ports][1]:
+    * `5000` to expose its runtime metrics.
+    * `5001` for the [Agent CLI/GUI commands][2].
 
-* Custom build your Agent v6 and [DogStatsD][1] much easier and with many more configuration options, to include or exclude almost anything.
+    **Note**: You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+
+* Custom build your Agent v6 and [DogStatsD][3] much easier and with many more configuration options, to include or exclude almost anything.
 
 ### Agent v6 new functionalities
 
-To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][2] documentation, but here are the key differentiators:
+To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation, but here are the key differentiators:
 
-* [Distributions metrics][3] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
+* [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
 
-* [DogStatsD][1] can be used over a Unix socket instead of over UDP.
+* [DogStatsD][3] can be used over a Unix socket instead of over UDP.
 
-* [Live Process monitoring is available for Windows][4].
+* [Live Process monitoring is available for Windows][6].
 
-* [Prometheus OpenMetrics is supported natively][5].
+* [Prometheus OpenMetrics is supported natively][7].
 
-* [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][6].
+* [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
 
 ## Upgrade to Agent 6
 
@@ -71,6 +75,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -121,6 +126,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -172,7 +178,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 2. Set up the Datadog API repo on your system and import Datadog's APT key:
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
     ```
 
     Note: You might need to install `dirmngr` to import Datadog's APT key.
@@ -218,6 +224,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -258,7 +265,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 #### Manual Upgrade
 
-1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][7] of the repository
+1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][9] of the repository
 2. Install the DMG package
 3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
@@ -286,6 +293,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -338,12 +346,14 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
   gpgcheck=1
   repo_gpgcheck=0
   gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+         https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
   ```
   sudo zypper refresh
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   sudo zypper install datadog-agent
   ```
 
@@ -383,7 +393,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 2. Set up the Datadog API repo on your system and import Datadog's APT key:
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
     ```
 
     Note: You might need to install `dirmngr` to import Datadog's APT key.
@@ -419,7 +429,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 ### Windows
 
-Download the latest version available [from here][8] and run the installation package.
+Download the latest version available [from here][10] and run the installation package.
 
 Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
 
@@ -432,11 +442,13 @@ With:
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-[1]: /developers/dogstatsd/unix_socket
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[3]: /developers/metrics/distributions
-[4]: /graphing/infrastructure/process
-[5]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[6]: /logs
-[7]: https://github.com/DataDog/datadog-agent/releases
-[8]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[1]: /agent/?tab=agentv6#agent-architecture
+[2]: /agent/guide/agent-commands
+[3]: /developers/dogstatsd/unix_socket
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
+[5]: /developers/metrics/distributions
+[6]: /graphing/infrastructure/process
+[7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
+[8]: /logs
+[9]: https://github.com/DataDog/datadog-agent/releases
+[10]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi

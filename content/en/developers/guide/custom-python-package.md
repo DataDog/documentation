@@ -3,6 +3,7 @@ title: Adding a custom Python package to the Agent
 kind: documentation
 aliases:
 - /agent/custom_python_package
+- /agent/faq/custom_python_package
 further_reading:
 - link: "logs/"
   tag: "Documentation"
@@ -23,7 +24,7 @@ The Agent contains an embedded Python environment at `/opt/datadog-agent/embedde
 Python packages can be installed via the embedded `pip`:
 
 ```shell
-sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 ```
 
 {{% /tab %}}
@@ -34,7 +35,7 @@ The Agent contains an embedded Python environment at `/opt/datadog-agent/embedde
 Python packages can be installed via the embedded `pip`:
 
 ```shell
-sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 ```
 
 {{% /tab %}}
@@ -43,13 +44,19 @@ sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 
 Custom Python packages can be installed using the Agent's embedded Python using the following command in Powershell:
 
+For Agent versions <= 6.11:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>
+%PROGRAMFILES%\Datadog\"Datadog Agent"\embedded\python -m pip install <PACKAGE_NAME>
 ```
 
-Or the package can be added in the library zipped folder that can be found at 
+For Agent versions >= 6.12:
 ```
-C:\Program Files (x86)\Datadog\Datadog Agent\files
+%PROGRAMFILES%\Datadog\"Datadog Agent"\embedded<PYTHON_MAJOR_VERSION>\python -m pip install <PACKAGE_NAME>
+```
+
+Or the package can be added in the library zipped folder that can be found at
+```
+%PROGRAMFILES%\Datadog\Datadog Agent\files
 ```
 
 then [restart your Agent][1].
@@ -64,5 +71,3 @@ then [restart your Agent][1].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-

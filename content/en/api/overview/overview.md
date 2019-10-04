@@ -13,5 +13,5 @@ The Datadog API uses resource-oriented URLs, uses status codes to indicate the s
 
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS you can install coreutils via the [Homebrew package manager][2]: `brew install coreutils`
 
-[1]: /developers/guide/using-postman-with-datadog-apis
+[1]: /getting_started/api
 [2]: https://brew.sh

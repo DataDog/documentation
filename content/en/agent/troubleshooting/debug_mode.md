@@ -14,17 +14,42 @@ further_reading:
   text: "Get the Status of an Agent Check"
 ---
 
+## Agent
+
 To enable the Agent full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page][1] to locate this configuration file on your instance)
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+1. Modify your local `datadog.yaml` file. See [Agent main configuration file][1] for OS specific details.
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Restart the Datadog Agent. See the [Agent Commands][2] page for OS-specific details.
+3. Restart the Datadog Agent. See [Agent Commands][2] for OS specific details.
 
-4. Wait a few minutes to generate some logs. [See the Agent][3] documentation for the location of the logs.
+4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-## Obtaining debug logs from the container Agent
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: /agent/guide/agent-log-files/?tab=agentv6
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+1. Modify your local `datadog.conf` file. See [Agent main configuration file][1] for OS specific details.
+
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
+
+3. Restart the Datadog Agent. See [Agent Commands][2] for OS specific details.
+
+4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/?tab=agentv5#restart-the-agent
+[3]: /agent/guide/agent-log-files/?tab=agentv5
+{{% /tab %}}
+{{< /tabs >}}
+
+## Containerized Agent
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -50,7 +75,7 @@ If your container is already running:
     ```
 
 {{% /tab %}}
-{{% tab "Docker Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
 
@@ -79,10 +104,21 @@ Or the container can be restarted.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Agent log level
+
+The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
+
+| Option  | Fatal logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs | All logs  |
+|---------|------------|------------|-----------|-----------|------------|------------|-----------|
+| `OFF`   |            |            |           |           |            |            |           |
+| `FATAL` | {{< X >}}  |            |           |           |            |            |           |
+| `ERROR` | {{< X >}}  | {{< X >}}  |           |           |            |            |           |
+| `WARN`  | {{< X >}}  | {{< X >}}  | {{< X >}} |           |            |            |           |
+| `INFO`  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |           |
+| `DEBUG` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |           |
+| `TRACE` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |           |
+| `ALL`   | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /agent/guide/agent-commands
-[3]: /agent/guide/agent-log-files

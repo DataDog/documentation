@@ -30,7 +30,7 @@ Exemple : `count_not_null(system.cpu.user{*} by {host})` renvoie une série tem
 ## Autres fonctions
 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
-    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithme : implémentez la détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
     {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}

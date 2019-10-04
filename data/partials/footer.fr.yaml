@@ -1,8 +1,8 @@
 col1:
-  - name: produit
+  - name: product
     link: 'https://www.datadoghq.com/product/'
     title: Caractéristiques
-  - name: intégrations
+  - name: integrations
     link: 'https://www.datadoghq.com/product/integrations/'
     title: Intégrations
   - name: apm
@@ -17,23 +17,23 @@ col1:
   - name: synthetics
     link: 'https://www.datadoghq.com/synthetics/'
     title: Synthetics
-  - name: alertes
+  - name: alerts
     link: 'https://www.datadoghq.com/alerts/'
     title: Alertes
 col2:
-  - name: tarif
+  - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
     title: Tarif
   - name: documentation
     link: 'https://docs.datadoghq.com/'
     title: Documentation
-  - name: assistance
+  - name: support
     link: 'https://www.datadoghq.com/support/'
     title: Assistance
-  - name: ressources
+  - name: resources
     link: 'https://www.datadoghq.com/resources/'
     title: Ressources
-  - name: sécurité
+  - name: security
     link: 'https://www.datadoghq.com/security/'
     title: Sécurité
   - name: api
@@ -43,19 +43,19 @@ col3:
   - name: contact
     link: 'https://www.datadoghq.com/about/contact/'
     title: Contactez-nous
-  - name: partenaires
+  - name: partners
     link: 'https://www.datadoghq.com/partner-with-datadog/'
     title: Partenaires
-  - name: presse
+  - name: press
     link: 'https://www.datadoghq.com/about/press/'
     title: Presse
-  - name: notre équipe
+  - name: ourteam
     link: 'https://www.datadoghq.com/about/team/'
     title: Notre équipe
-  - name: recrutement
+  - name: careers
     link: 'https://www.datadoghq.com/careers/'
     title: Offres d'emploi
-  - name: mentions légales
+  - name: legal
     link: 'https://www.datadoghq.com/legal/'
     title: Mentions légales
   - name: analyst

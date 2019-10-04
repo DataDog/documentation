@@ -9,7 +9,7 @@ external_redirect: /api/#edit-an-application-key
 
 Edit an application key name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

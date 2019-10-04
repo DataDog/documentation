@@ -1,3 +1,68 @@
-{{ partial "platforms/platform-select-mobile.html" . }}
+{{ $dot := . }}
 
-{{ partial "platforms/platform-select-desktop.html" . }}
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+    {{ if (fileExists (print "data/partials/platforms." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
+    {{ end }}
+{{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+<!-- mobile site -->
+<div class="dropdown d-block d-sm-none" style="margin-bottom:24px;">
+    <a class="my-button btn btn-lg btn-block btn-outline-primary" href="#">
+        {{ if .Params.platform }}
+          {{ .Params.platform }}
+        {{ else }}
+          {{ i18n "choose_a_platform" }}
+        {{ end }}
+    </a>
+    <div id="popper" class="dropdown-menu" style="display:none;">
+        <div class="px-4 py-3">
+            <div class="row cards-dd platform-nav" style="margin-top:0">
+              {{ range (index $datafile .Params.links) }}
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
+                        <a class="card" href="{{ .link | absLangURL }}" style="margin-bottom:15px">
+                            <div class="card-body text-center">
+                                {{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) "class" "img-fluid" "alt" "platform" "style" "max-height:82px;") }}
+                            </div>
+                        </a>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- desktop site -->
+<div class="d-none d-sm-block">
+  {{ if .Get "desc" }}
+      <p>{{.Get "desc"}}</p>
+  {{else}}
+      <h3>{{ i18n "agent_started_sentence" }}</h3>
+  {{ end }}
+  <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
+      {{ range (index $datafile .Params.links) }}
+          <div class="col-6 col-sm-3 col-md-2-4 col-lg-2-4 col-xl-2-4">
+              <a class="card" href="{{ .link | absLangURL }}">
+                  <div class="card-body text-center">
+                      {{ $src := (print "icons/" .image)}}
+                      {{ $url := (print ($dot.Site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                      <picture class="mx-auto">
+                          <source srcset="{{ $url }}&w=138 1x, {{ $url }}&w=138&dpr=2 2x" media="(min-width: 1200px)">
+                          <source srcset="{{ $url }}&w=108 1x, {{ $url }}&w=108&dpr=2 2x" media="(min-width: 992px)">
+                          <source srcset="{{ $url }}&w=110 1x, {{ $url }}&w=110&dpr=2 2x" media="(min-width: 768px)">
+                          <source srcset="{{ $url }}&w=101 1x, {{ $url }}&w=101&dpr=2 2x" media="(min-width: 0px)">
+                          <img class="img-fluid" srcset="{{ $url }}&w=138" alt="integration">
+                      </picture>
+                  </div>
+              </a>
+          </div>
+      {{ end }}
+  </div>
+</div>

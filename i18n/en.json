@@ -111,6 +111,10 @@
     "other": "GET STARTED FREE"
   },
 
+  "get_started_free_short": {
+    "other": "GET STARTED FREE"
+  },
+
   "documentation_search": {
     "other": "Documentation Search"
   },
@@ -226,5 +230,9 @@
 
   "search": {
     "other": "Search"
+  },
+
+  "type": {
+    "other": "Type"
   }
 }

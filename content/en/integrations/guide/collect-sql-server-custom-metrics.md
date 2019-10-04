@@ -1,13 +1,13 @@
 ---
 title: Collect SQL Server Custom Metrics
-kind: faq
+kind: guide
 aliases:
   - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
 - link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
   tag: "Blog"
   text: "Create a stored procedure to generate and collect metrics"
-- link: "integrations/mysql/"
+- link: "/integrations/mysql/"
   tag: "Documentation"
   text: "Datadog-MySQL integration"
 ---
@@ -160,9 +160,13 @@ The stored procedure outputs the following custom metrics:
 
 ### Update the SQL Server integration configuration
 
-To collect metrics from a custom procedure, update the instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute:
+To collect metrics from a custom procedure, create a new instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute. A separate instance is required for any existing configuration. Instances with a stored procedure do not process anything but the stored procedure, for example:
 
 ```
+  - host: 127.0.0.1,1433
+    username: datadog
+    password: <PASSWORD>
+    database: master
   - host: 127.0.0.1,1433
     username: datadog
     password: <PASSWORD>
@@ -186,7 +190,7 @@ You can also specify:
 If your custom metrics are not appearing in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
 
 - The `<PROCEDURE_NAME>` is typed incorrectly.
-- The database username specified in the configuration may not have permission to run the stored procedure. 
+- The database username specified in the configuration may not have permission to run the stored procedure.
 
 ## Further Reading
 

@@ -92,7 +92,7 @@ logs_config:
 
 
 [1]: /agent/basic_agent_usage
-[2]: /logs/log_collection/#custom-log-collection
+[2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
@@ -190,18 +190,21 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
 See the [multi-line processing rule documentation][1] to get more pattern examples.
 
 
-[1]: /logs/log_collection/#multi-line-aggregation
+[1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 If you are running Kubernetes, pod annotations can be used.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: webapp
   template:
     metadata:
       annotations:
@@ -219,7 +222,7 @@ spec:
 Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
 
 
-[1]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[1]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -279,11 +282,20 @@ ac_exclude = ["name:datadog-agent"]
 {{% /tab %}}
 {{< /tabs >}}
 
+## Short Lived containers
+
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
+
+ Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
+
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][5]
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/journald
 [2]: /agent/autodiscovery
-[3]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
-[4]: /logs/log_collection/#custom-log-collection
+[3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[4]: /agent/logs/#custom-log-collection
+[5]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#short-lived-containers

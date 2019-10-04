@@ -127,7 +127,7 @@ Datadog offers 4 space aggregators:
 
 ## Apply functions (optional)
 
-Most of the functions are applied at the last step. From the ~300 points obtained after time (step 2) and space (step 3) aggregations, the function computes new values which can be seen on your graph.
+Functions can be applied to arithmetic in the `Formula` box when graphing data. Most of the functions are applied at the last step. From the ~300 points obtained after time (step 2) and space (step 3) aggregations, the function computes new values which can be seen on your graph.
 
 In this example the function `abs` makes sure that your results are positive numbers.
 

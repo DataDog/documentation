@@ -111,6 +111,6 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/debian
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /agent/troubleshooting
-[4]: /agent/faq/custom_python_package
+[4]: /developers/guide/custom-python-package

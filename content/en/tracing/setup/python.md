@@ -26,6 +26,8 @@ For Python Django applications, note that tracing is disabled when your applicat
 
 ## Installation and Getting Started
 
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=python" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=python" target=_blank>container-based</a> set ups.</div>
+
 To begin tracing applications written in Python, first [install and configure the Datadog Agent][1], see the additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
 
 Next, install the Datadog Tracing library, `ddtrace`, using pip:
@@ -118,7 +120,7 @@ The `ddtrace` library includes support for the following libraries:
 | [aiobotocore][36] | >= 0.2.3          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#aiobotocore |
 | [Boto2][36]       | >= 2.29.0         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#boto2       |
 | [Botocore][36]    | >= 1.4.51         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#botocore    |
-| [Celery][37]      | >= 3.1            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery      |
+| [Celery][37]      | >= 4.0.2          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery      |
 | [Futures][38]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures     |
 | [Grpc][39]        | >= 1.8.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#grpc        |
 | [httplib][40]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib     |

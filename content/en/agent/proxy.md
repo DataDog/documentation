@@ -34,7 +34,7 @@ Set different proxy servers for `https` and `http` requests in your Agent `datad
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
 
 <div class="alert alert-warning">
-The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="#proxy-for-logs">Proxy for Logs</a> section.
+Unless the Datadog Agent is configured to <a href="/agent/logs/?tab=tailexistingfiles#send-logs-over-https">forward logs in HTTPS</a>, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can **not** be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 </div>
 
 Setting an HTTP proxy for all `https` requests:
@@ -95,7 +95,7 @@ The Agent uses the following values in order of precedence:
 {{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
-The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="#proxy-for-logs">Proxy for Logs</a> section.
+The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 </div>
 
 Edit the `datadog.conf` file with your proxy information:
@@ -114,69 +114,6 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 [1]: /agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
-
-## Proxy for Logs
-
-Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
-
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
-
-{{< tabs >}}
-{{% tab "TCP" %}}
-
-If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in the `datadog.yaml` configuration file:
-
-```
-logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
-  logs_no_ssl: true
-```
-
-Those parameters can also be set with the following environment variables:
-
-* `DD_LOGS_CONFIG_LOGS_DD_URL`
-* `DD_LOGS_CONFIG_LOGS_NO_SSL`
-
-**Important note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
-
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
-    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
-    * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
-
-* Use the public key for TLS encryption for the SSL encryption:
-    * For [app.datadoghq.com][1] 
-    * For [app.datadoghq.eu][2]
-
-    On some systems, the full certificate chain may be required. If so, use this public key instead:
-
-    * For [app.datadoghq.com][3]
-    * For [app.datadoghq.eu][4]
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-To send your logs to your Datadog account via a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
-
-```
-logs_config:
-  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
-```
-
-This parameter can also be set with the following environment variable:
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Port 443
-
-The parameter `use_port_443` does not affect logs sent through a proxy. You need to configure the proxy itself to forward logs to `agent-443-intake.logs.datadoghq.com:443`.
 
 ## Using HAProxy as a Proxy
 
@@ -242,7 +179,7 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -278,9 +215,12 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
 ```
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
+**Note**: Download the certificate with the following command:
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Redhat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
@@ -333,7 +273,7 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -361,17 +301,20 @@ backend datadog-processes
     mode tcp
     option tcplog
     server mothership process.datadoghq.eu:443 check port 80
-    
+
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt
 ```
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
+**Note**: Download the certificate with the following command:
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Redhat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -406,7 +349,7 @@ Finally [restart the Agent][1].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -451,7 +394,7 @@ Finally [restart the Agent][1].
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}
@@ -474,7 +417,7 @@ This example `nginx.conf` can be used to proxy logs to the Datadog intake. It do
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
@@ -497,7 +440,7 @@ stream {
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
@@ -523,10 +466,9 @@ To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the
 ```yaml
 logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
-  logs_no_ssl: true
 ```
 
-The `logs_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
+Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 ## Using the Agent as a Proxy
 

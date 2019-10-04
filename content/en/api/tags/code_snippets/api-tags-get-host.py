@@ -7,6 +7,10 @@ options = {
 
 initialize(**options)
 
-# Get tags by host id.
+# Get tags by hostname
+hostname='<YOUR_HOSTNAME>'
 hosts = api.Hosts.search(q='hosts:')
-print api.Tag.get(hosts['results']['hosts'][0])
+
+for host in hosts['host_list']:
+    if host['name'] == hostname:
+        print(host['tags_by_source'])

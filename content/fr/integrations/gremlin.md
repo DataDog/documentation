@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: /assets/service_checks.json
 categories:
   - collaboration
   - issue tracking
@@ -71,8 +75,8 @@ Consultez [notre blog][6] pour en savoir plus sur la surveillance d'infrastructu
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
-[5]: http://docs.datadoghq.com/help/
-[6]: https://www.datadoghq.com/blog/
+[5]: https://docs.datadoghq.com/fr/help
+[6]: https://www.datadoghq.com/blog
 
 
 {{< get-dependencies >}}

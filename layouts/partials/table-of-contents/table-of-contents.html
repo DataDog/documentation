@@ -1,9 +1,9 @@
-<div class="d-none col-4 col-lg-2 col-xl-2 toc-container">
+<div class="d-none col-4 col-lg-2 col-xl-2 toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
     <div class="sticky toc">
         <h5>{{ i18n "toc" }}</h5>
         {{ .TableOfContents }}
     </div>
 </div>
-<div class="mobile-toc-toggle">
+<div class="mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }}  {{ end }}">
     <i class="icon-small-bookmark"></i>
 </div>

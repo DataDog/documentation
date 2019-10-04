@@ -24,377 +24,191 @@ further_reading:
   text: "Logging without limit"
 ---
 
-## Getting started with the Agent
+Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][3], and you can configure it to [filter out logs][4], [scrub sensitive data][5], or  aggregate [multi line logs][6]. Finally choose your application language below in order to get dedicated logging best practices.
+If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][7], [Syslog-ng][8], [NXlog][9], [FluentD][10], and [Logstash][11].
 
-Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface.
+Datadog Log Management also comes with a set of out of the box solutions to collect your logs and send them to Datadog:
 
-If you are not using the Agent already, follow [the Agent installation instructions][1].
+* [**Collect logs from your hosts**][12].
+* [**Collect logs from your applications**](?tab=ussite#application-log-collection).
+* [**Collect logs from a docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from your Cloud provider**](?tab=ussite#cloud-providers-log-collection).
 
-Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
-
-```
-logs_enabled: true
-```
-
-The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
-
-**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3].
-
-## Enabling log collection from integrations
-
-To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
+Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][13], [parsing][14], and [facets][15] in Datadog.
 
 <div class="alert alert-warning">
-Not all integrations include out of the box log configurations.  <a href="/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
+<a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
 </div>
 
-If an integration does not support logs by default, use the custom file configuration below.
+Find at the bottom of this page the [list of available Datadog Log collection endpoints](#datadog-logs-endpoints) if you want to send your logs directly to Datadog.
 
-## Custom log collection
+**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
 
-Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
+## Application Log collection
 
-1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4] named after your log source.
-2. Create a new `conf.yaml` file in this new folder.
-3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][5] to take into account this new configuration.
-5. [Run the Agent's status subcommand][6] to check if your custom configuration is correct.
+After you have [enabled log collection][1], configure your application language to generate logs:
 
-Below are examples of custom log collection setup:
+{{< partial name="logs/logs-languages.html" >}}
 
-{{< tabs >}}
-{{% tab "Tail existing files" %}}
+## Container Log collection
 
-To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
+The Datadog Agent can [collect logs directly from container stdout/stderr][16] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
+It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][17]. Autodiscovery can also be used to [configure log collection directly in the container labels][18]. In Kubernetes environments you can also leverage [the daemonset installation][19].
 
-```
-logs:
-  - type: file
-    path: <PATH_LOG_FILE>/<LOG_FILE_NAME>.log
-    service: <APP_NAME>
-    source: custom
-```
+Choose your environment below to get dedicated log collection instructions:
 
-**Note**: If you are using Windows with Agent v6 and tailing files for logs, make sure that those files have UTF8 encoding.
+{{< partial name="logs/logs-containers.html" >}}
 
+## Cloud Providers Log collection
 
-[1]: /agent/guide/agent-configuration-files
-{{% /tab %}}
+Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
-{{% tab "Stream logs from TCP/UDP" %}}
+{{< partial name="logs/logs-cloud.html" >}}
 
-To gather logs from your `<APP_NAME>` application that forwards its logs via TCP over port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
+## Custom Log forwarder
 
-```
-logs:
-  - type: tcp
-    port: 10518
-    service: <APP_NAME>
-    source: custom
-```
-
-If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting via UDP.
-
-**Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
-
-[1]: /agent/guide/agent-configuration-files
-{{% /tab %}}
-{{% tab "Stream logs from journald" %}}
-
-To gather logs from journald, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
-
-```yaml
-logs:
-  - type: journald
-    path: /var/log/journal/
-```
-
-Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
-
-[1]: /agent/guide/agent-configuration-files
-[2]: /integrations/journald
-{{% /tab %}}
-{{% tab "Windows Events" %}}
-
-Add the channels (from which you want to send Windows Events as log to Datadog) to the `conf.d/win32_event_log.d/conf.yaml` file manually, or via the Datadog Agent Manager.
-
-To see the channel list run the following command in a PowerShell:
-
-```
-Get-WinEvent -ListLog *
-```
-
-To see the most active channels, run the following command in a PowerShell:
-
-```
-Get-WinEvent -ListLog * | sort RecordCount -Descending
-```
-
-Then add the channels in your `win32_event_log.d/conf.yaml` configuration file:
-
-```
-logs:
-  - type: windows_event
-    channel_path: <CHANNEL_1>
-    source: <CHANNEL_1>
-    service: myservice
-    sourcecategory: windowsevent
-
-  - type: windows_event
-    channel_path: <CHANNEL_2>
-    source: <CHANNEL_2>
-    service: myservice
-    sourcecategory: windowsevent
-```
-
-Edit the `<CHANNEL_X>` parameters with the Windows channel name you want to collect events from.
-Set the corresponding `source` parameter to the same channel name to benefit from the [integration automatic processing pipeline setup][1].
-
-Finally, [restart the Agent][2].
-
-
-[1]: /logs/processing/pipelines/#integration-pipelines
-[2]: /agent/basic_agent_usage/windows
-{{% /tab %}}
-{{< /tabs >}}
-
-List of all available parameters for log collection:
-
-| Parameter        | Required | Description                                                                                                                                                                                                                                                                                                                                         |
-|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`           | Yes      | Type of log input source. Valid values are: **tcp**, **udp**, **file**, **windows_event**, **docker**, or **journald**.                                                                                                                                                                                                                             |
-| `port`           | Yes      | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                                           |
-| `path`           | Yes      | If `type` is **file** or **journald**, path of the file to gather logs from.                                                                                                                                                                                                                                                                        |
-| `channel_path`   | Yes      | If `type` is **windows_event**, list of windows event channels to collect log from.                                                                                                                                                                                                                                                                 |
-| `service`        | Yes      | Name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                    |
-| `source`         | Yes      | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][8] you are collecting, for example: `myapp` from `myapp.request.count`. |
-| `include_units`  | No       | If `type` is **journald**, list of specific journald units to include.                                                                                                                                                                                                                                                                              |
-| `exclude_units`  | No       | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                                              |
-| `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                         |
-| `tags`           | No       | Add tags to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                                    |
-
-## Advanced log collection functions
-
-If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
-
-### Filter logs
-
-To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
+Any custom process or [logging library][20] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
-{{% tab "exclude_at_match" %}}
+{{% tab "TCP US Site" %}}
 
-| Parameter          | Description                                                                                        |
-|--------------------|----------------------------------------------------------------------------------------------------|
-| `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
+The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
 
-For example, filtering out logs that contain a Datadog email address:
+You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: cardpayment
-    source: java
-    log_processing_rules:
-    - type: exclude_at_match
-      name: exclude_datadoghq_users
-      ## Regexp can be anything
-      pattern: \w+@datadoghq.com
+```
+<DATADOG_API_KEY> this is my log
 ```
 
+Test it manually with telnet:
+
+```
+telnet intake.logs.datadoghq.com 10514
+<DATADOG_API_KEY> Log sent directly via TCP
+```
+
+This produces the following result in your [live tail page][2]:
+
+{{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
+
+Datadog automatically parses attributes out of JSON formatted messages.
+
+```
+telnet intake.logs.datadoghq.com 10514
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
+
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+
+
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
-{{% tab "include_at_match" %}}
+{{% tab "TCP EU Site" %}}
 
-| Parameter          | Description                                                                       |
-|--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
+The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for insecure connections).
 
-For example, sending only logs that contain a Datadog email address:
+You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: cardpayment
-    source: java
-    log_processing_rules:
-    - type: include_at_match
-      name: include_datadoghq_users
-      ## Regexp can be anything
-      pattern: \w+@datadoghq.com
 ```
+<DATADOG_API_KEY> this is my log
+```
+
+Test it manually with telnet:
+
+```
+telnet tcp-intake.logs.datadoghq.eu 1883
+<DATADOG_API_KEY> Log sent directly via TCP
+```
+
+This produces the following result in your [live tail page][2]:
+
+{{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
+
+Datadog automatically parses attributes out of JSON formatted messages.
+
+```
+telnet tcp-intake.logs.datadoghq.eu 1883
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
+
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+
+
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/logs/livetail
+{{% /tab %}}
+{{% tab "HTTP" %}}
+
+To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation](https://docs.datadoghq.com/api/?lang=python#send-logs-over-http).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Scrub sensitive data in your logs
+## Datadog Logs Endpoints
 
-If your logs contain sensitive information that you want to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
+You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][21]).
 
-This replaces all matched groups with `replace_placeholder` parameter value.
-
-For example, redact credit card numbers:
-
-```yaml
-logs:
- - type: file
-   path: /my/test/file.log
-   service: cardpayment
-   source: java
-   log_processing_rules:
-      - type: mask_sequences
-        name: mask_credit_cards
-        replace_placeholder: "[masked_credit_card]"
-        ##One pattern that contains capture groups
-        pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
-```
-
-### Multi-line aggregation
-
-If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into one single entry until the given pattern is detected again.
-
-For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
-
-```
-2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
-        at com.example.myproject.Book.getTitle(Book.java:16)
-        at com.example.myproject.Author.getBookTitles(Author.java:25)
-        at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
-2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
-```
-
+Endpoints that can be used to send logs to Datadog:
 
 {{< tabs >}}
-{{% tab "Configuration file" %}}
+{{% tab "US Site" %}}
 
-To achieve this, you need to use the following `log_processing_rules`:
 
-```yaml
-logs:
- - type: file
-   path: /var/log/pg_log.log
-   service: database
-   source: postgresql
-   log_processing_rules:
-      - type: multi_line
-        name: new_log_start_with_date
-        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+| Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
+|-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `lambda-http-intake.logs.datadoghq.com` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                  |
+| `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
-{{% /tab %}}
-{{% tab "Docker" %}}
 
-In a docker environment use the `com.datadoghq.ad.logs` labels on your container to make sure that the log is properly collected, for example:
-
-```
- labels:
-    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
-```
+| Endpoint for unencrypted connections | Port    | Description                                                                                              |
+|--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
+| `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "EU Site" %}}
 
-In a Kubernetes environment use the `ad.datadoghq.com` pod annotations on your pods to make sure that the log is properly collected, for example:
+| Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
+|-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `lambda-http-intake.logs.datadoghq.eu` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                  |
+| `functions-intake.logs.datadoghq.eu`    | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
-```
-apiVersion: extensions/v1beta1
-kind: ReplicaSet
-metadata:
-  name: postgres
-spec:
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
-      labels:
-        app: database
-      name: postgres
-    spec:
-      containers:
-        - name: postgres
-          image: postgres:latest
-```
+
+| Endpoint for unencrypted connections | Port   | Description                                                                                                     |
+|--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
+| `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
+
 
 {{% /tab %}}
 {{< /tabs >}}
 
-More examples:
+To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][22].
 
-| **Raw string**           | **Pattern**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
 
-**Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
+## Reserved attributes
 
-### Tail multiple directories or whole directories by using wildcards
+Here are some key attributes you should pay attention to when setting up your project:
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
+| Attribute | Description                                                                                                                                                                                                                            |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
+| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
+| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][23] and has a dedicated layout in the Datadog Log UI.|
+| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
-* Using `path: /var/log/myapp/*.log`:
-  * Matches all `.log` file contained in the `/var/log/myapp/` directory.
-  * Doesn't match `/var/log/myapp/myapp.conf`.
+Your logs are collected and centralized into the [Log Explorer][24] view. You can also search, enrich, and alert on your logs.
 
-* Using `path: /var/log/myapp/*/*.log`:
-  * Matches `/var/log/myapp/log/myfile.log`.
-  * Matches `/var/log/myapp/errorLog/myerrorfile.log`
-  * Doesn't match `/var/log/myapp/mylogfile.log`.
+{{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
-Configuration example:
-
-```yaml
-logs:
- - type: file
-   path: /var/log/myapp/*.log
-   service: mywebapp
-   source: go
-```
-
-**Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
-
-### Using a Proxy for Logs
-
-[Refer to the Agent proxy documentation][10] to learn how to forward your Logs with a proxy.
-
-### Global processing rules
-
-Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` rules can be defined globally.
-
-{{< tabs >}}
-{{% tab "Configuration files" %}}
-
-In the `datadog.yaml` file:
-
-```
-logs_config:
-  processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healtcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
-```
-{{% /tab %}}
-{{% tab "Environment Variable" %}}
-
-The `DD_LOGS_CONFIG_PROCESSING_RULES` can be used to configure global processing rules:
-
-```
-DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-All the logs collected by the Datadog Agent are impacted by those processing rules.
-
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][11] to troubleshoot any issues.
-
-## How to get the most of your application logs
+### How to get the most of your application logs
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
@@ -412,11 +226,11 @@ To enable these functionalities use the following attribute names:
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-## Send your application logs in JSON
+### Send your application logs in JSON
 
 For integration frameworks, Datadog provides guidelines on how to log JSON into a file. JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog.
 
-##### The Advantage of Collecting JSON-formatted logs
+#### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, it is recommended to format these logs as JSON to avoid the need for custom parsing rules.
 
@@ -424,15 +238,27 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /agent
-[2]: /agent/kubernetes/daemonset_setup/#log-collection
-[3]: /agent/docker/log
-[4]: /agent/guide/agent-configuration-files
-[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: /tracing
-[8]: /developers/metrics/custom_metrics
-[9]: /tagging
-[10]: /agent/proxy/#proxy-for-logs
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[1]: /agent/logs
+[2]: /agent/logs/#tail-existing-files
+[3]: /agent/logs/#stream-logs-through-tcp-udp
+[4]: /agent/logs/#filter-logs
+[5]: /agent/logs/#scrub-sensitive-data-in-your-logs
+[6]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
+[7]: /integrations/rsyslog
+[8]: /integrations/syslog_ng
+[9]: /integrations/nxlog
+[10]: /integrations/fluentd/#log-collection
+[11]: /integrations/logstash/#log-collection
+[12]: /agent/logs/?tab=tailexistingfiles#custom-log-collection
+[13]: /logs/processing
+[14]: /logs/processing/parsing
+[15]: /logs/explorer/?tab=facets#setup
+[16]: /agent/docker/log
+[17]: /agent/autodiscovery/management
+[18]: /agent/autodiscovery/integrations
+[19]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
+[20]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
+[21]: /security/logs/#information-security
+[22]: /api/?lang=bash#send-logs-over-http
+[23]: /logs/explorer/patterns
+[24]: /logs/explore

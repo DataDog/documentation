@@ -16,7 +16,7 @@ When you are ready to take your data collection to the next level, head to the [
 
 #### Libraries
 
-Looking to know more about Datadog resources for your favorite language or platform? The [Libraries section][5] contains a list of official and community-contributed API and DogStatsD client libraries, APM (Tracing) libraries, and externally-supported community Integrations for a wide variety of platforms.
+Looking to know more about Datadog resources for your favorite language or platform? The [Libraries section][5] contains a list of official and community-contributed API and DogStatsD client libraries, APM & Distributed Tracing libraries, and externally-supported community Integrations for a wide variety of platforms.
 
 #### Metrics
 

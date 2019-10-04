@@ -1,0 +1,4 @@
+baseURL: https://docs-staging.datadoghq.com/
+buildfuture: true
+builddrafts: true
+enableGitInfo: true

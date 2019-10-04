@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-auto-doc clean-node clean-virt docker-start docker-stop help start stop
+.PHONY: clean clean-all clean-build clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -18,7 +18,6 @@ ifeq ($(wildcard $(CONFIG_FILE)),)
 endif
 include $(CONFIG_FILE)
 
-
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
@@ -27,7 +26,6 @@ clean: stop  ## clean all make installs.
 	make clean-build
 	make clean-integrations
 	make clean-auto-doc
-	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
@@ -36,19 +34,15 @@ clean-all: stop  ## clean everything.
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
-	make clean-docker
 
 clean-build:  ## remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
-
-clean-docker:  ## remove image.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true
-	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi || true
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
+	@rm -rf ./integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
@@ -59,12 +53,12 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
-		  -a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		-a -not -name 'cloudability.md' \
+		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
@@ -89,42 +83,14 @@ clean-auto-doc: ##remove all doc automatically created
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
+	@if [ content/en/tracing/setup/ruby.md ]; then \
+	rm -f content/en/tracing/setup/ruby.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
 
-clean-static:  ## remove compiled static assets
-	@if [ -d static/css ]; then rm -r static/css; fi
-	@if [ -d static/images ]; then rm -r static/images; fi
-	@if [ -d static/js ]; then rm -r static/js; fi
-	@if [ -d data/manifests ]; then rm -r data/manifests; fi
-
 clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
-
-docker-start: clean docker-stop  ## start container and run default commands to start hugo site.
-	@docker run -ti --name "docs" -v `pwd`:/src:cached \
-		-e FETCH_INTEGRATIONS=true \
-		-e GITHUB_TOKEN \
-		-e RUN_SERVER=${RUN_SERVER} \
-		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		-e DOGWEB=${DOGWEB} \
-		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		-e INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
-		-e USE_DOCKER=true \
-		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
-
-docker-stop:  ## kill the site and stop the running container.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || echo "nothing to clean."
-
-docker-tests: stop  ## run the tests through the docker container.
-	@docker run -tid --name "docs" -v `pwd`:/src:cached \
-		-e RUN_SERVER=true \
-		-e RUN_GULP=false \
-		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
-	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
-	@docker exec -ti docs run-tests.sh
-	@make docker-stop
 
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
@@ -146,7 +112,7 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 link-formatting: source-helpers
 	@local/bin/sh/format-links.sh $(ARGS)
 
-start: clean source-helpers ## start the gulp/hugo server.
+start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -154,9 +120,7 @@ start: clean source-helpers ## start the gulp/hugo server.
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		DOGWEB=${DOGWEB} \
-		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
+		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		run-site.sh; \
 	else \
 		FETCH_INTEGRATIONS="false" \
@@ -164,7 +128,7 @@ start: clean source-helpers ## start the gulp/hugo server.
 		RUN_SERVER=${RUN_SERVER} \
 		run-site.sh; fi
 
-stop:  ## stop the gulp/hugo server.
+stop:  ## stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x gulp || true
+	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true

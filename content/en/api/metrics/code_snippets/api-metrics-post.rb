@@ -2,9 +2,8 @@ require 'rubygems'
 require 'dogapi'
 
 api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
 
-dog = Dogapi::Client.new(api_key, app_key)
+dog = Dogapi::Client.new(api_key)
 
 # Submit one metric value.
 dog.emit_point('some.metric.name', 50.0, :host => "my_host.example.com")

@@ -6,8 +6,8 @@ external_redirect: /api/#remove-host-tags
 ---
 
 ## Remove host tags
-This endpoint allows you to remove all tags for a single host.
+This endpoint allows you to remove all user-assigned tags for a single host.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

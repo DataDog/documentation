@@ -1,0 +1,10 @@
+site_name: Surveillance d'applications et d'infrastructures avec Datadog
+meta_image: datadog_logo_share_tt.png
+meta_title: Débuter avec Datadog
+meta_description: 'Datadog, le principal prestataire de services de surveillance à l''échelle du cloud.'
+disclaimer: 'Cette page n''est pas encore disponible en français, sa traduction est en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction actuel, <a href="https://docs.datadoghq.com/fr/help/">n''hésitez pas à nous contacter</a>.'
+announcement_banner:
+  desktop_message: "Nouvelles annonces sur les technologies sans serveur et réseau ainsi que sur le RUM (Real-User Monitoring) dévoilées à la conférence Dash\_!"
+  mobile_message: "Nouvelles annonces dévoilées à la conférence Dash\_!"
+  link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
+  exclude: []

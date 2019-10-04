@@ -5,13 +5,15 @@ aliases:
   - /fr/basic_agent_usage/
   - /fr/guides/
   - /fr/faq/
+  - /fr/docs/
+  - /fr/guides/overview/
 disable_toc: true
 ---
 # Bienvenue dans la documentation de Datadog !
 
 *Si vous accédez à cette documentation pour la première fois, consultez ci-dessous une vue d'ensemble de Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Votre suite d'applications regorge de métadonnées inexploitées qui tentent de raconter une histoire : les choses ne fonctionnent pas aussi bien qu'elles le devraient.
 
@@ -21,7 +23,7 @@ Datadog recueille l'ensemble de ces métriques, événements et états de servic
 
 ## Collecte exhaustive
 
-Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
+Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 350 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
 
 Envoyez des métriques d'application custom en rédigeant quelques lignes de code. Utilisez vos propres gauges, counters, timers et histograms avec [DogStatsD][4] ou consultez [l'APM][5] pour tracer le temps d'exécution de n'importe quel chemin de code et découvrir l'impact sur les délais de réponse. Les [bibliothèques client][6] envoient vos [métriques custom][7] et données de trace à l'Agent Datadog, qui les transmet ensuite à Datadog.
 
@@ -38,10 +40,6 @@ Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combine
 Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] pour recevoir des notifications spéciales dans l'application.
 
 Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][18]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][18] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][19].
-
-<div class="col text-center">
-{{< img src="icons/fr-flag-round-50.png" alt="Documentation française" responsive="true" popup="false" href="https://docs.datadoghq.com/fr/" >}}
-</div>
 
 {{< partial name="support/support.html" >}}
 

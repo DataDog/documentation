@@ -1,29 +1,10 @@
 [
     {
         "agent_version": "5.5.0",
-        "integration":"consul",
         "groups": ["host", "check", "service", "consul_service_id"],
         "check": "consul.check",
-        "statuses": ["ok", "warning", "critical", "unknown"],
+        "statuses": ["ok", "warning", "critical"],
         "name": "Check de santé",
-        "description": "Renvoie OK si le service est disponible, renvoie WARNING en cas de problème et renvoie CRITICAL si le service est indisponible."
-    },
-    {
-        "agent_version": "5.5.0",
-        "integration":"consul",
-        "groups": ["host", "consul_url"],
-        "check": "consul.up",
-        "statuses": ["ok", "critical"],
-        "name": "Disponibilité",
-        "description": "Renvoie OK si le serveur Consul est disponible. Si ce n'est pas le cas, renvoie CRITICAL."
-    },
-    {
-        "agent_version": "5.5.0",
-        "integration":"consul",
-        "groups": ["host", "url"],
-        "check": "consul.can_connect",
-        "statuses": ["ok", "critical"],
-        "name": "Peut se connecter",
-        "description": "Renvoie OK si l'Agent peut envoyer des requêtes HTTP à Consul. Si ce n'est pas le cas, renvoie CRITICAL."
+        "description": "Renvoie ok si le service est disponible, renvoie warning en cas de problème et renvoie critical si le service est indisponible."
     }
 ]

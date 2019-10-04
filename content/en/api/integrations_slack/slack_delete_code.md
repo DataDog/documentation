@@ -5,13 +5,14 @@ order: 19.4
 external_redirect: /api/#delete-a-slack-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/integration/slack`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="slack_delete" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.slack_delete" >}}

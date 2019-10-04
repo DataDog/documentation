@@ -17,36 +17,45 @@ further_reading:
 {{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" >}}
 
 ## Overview
+After [creating your monitor][1], use the monitor status page to view the status over time. This page contains the following sections:
 
-Once you have [created your monitor][1], the Monitor Status page gives you a bird's eye view of your monitor status over time.
-This page is split in 3 main sections:
+* [Header](#header)
+* [Properties](#properties)
+* [Status and History](#status-and-history)
+* [Events](#events)
 
-* **[Properties](#properties)**
-* **[Status and History](#status-and-history)**
-* **[Events](#events)**
+These sections are open by default. The last three sections can be closed by using the toggle (&or;) icon to the left of the section name.
 
-These sections are open by default, and can be closed by using the little `>` icon to the left of the section name.
+## Header
+On the left, the header contains the monitor's status, time of status, and monitor title.
 
-### Monitor status options
-Some options are available in the upper right corner of the page:
+On the right, the header contains **Mute**, **Resolve**, and the **Settings** cog.
 
-* **Mute a monitor**:
-    Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime.
-    Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scopes or multiple monitors at the same time.
+### Mute
+Choose to mute a monitor directly on its status page. Use the **Scope** field to narrow your downtime. Refer to [Downtimes][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
-    NOTE: muting or unmuting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
+**Note**: Muting or unmuting a monitor with the UI deletes all scheduled downtimes associated with that monitor.
 
-    {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" style="width:30%;">}}
+### Resolve
+If your monitor is in an alert state, the **Resolve** button is visible. Use this button to resolve your monitor manually.
 
-* **Resolve a monitor**:
-    Resolve your monitor manually.
+The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
 
-* **Configuration options**:
-  Use the *cog* icon to display options available:
-    * [Edit][1]
-    * Clone
-    * [Export][3]
-    * Delete
+If a monitor is alerting because its current data corresponds to its `ALERT` state, `resolve` has the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
+
+Manually `resolve`-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case, the `resolve` function or the `Automatically resolve monitor after X hours` switches the monitor back to `OK` state.
+
+**Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
+
+### Settings
+Click the settings cog to display the options available:
+
+| Option | Description                                                                                                                                                                                                                                |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Edit   | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
+| Clone  | Make a copy of the current monitor.                                                                                                                                                                                                        |
+| Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
+| Delete | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                  |
 
 ## Properties
 
@@ -54,31 +63,32 @@ Some options are available in the upper right corner of the page:
 
 The *Properties* section is the overview of your monitor:
 
-- The status of your monitor
-- The monitor creator
-- The monitor ID ([for the monitor API][4])
-- Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
-- The monitor [query][5]
-- The monitor message
+* The status of your monitor
+* The monitor creator
+* The monitor ID ([for the monitor API][3])
+* Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
+* The monitor [query][4]
+* The monitor message
 
 Use the *cog* icon in the upper right corner of the page to [edit][1] your monitor properties.
 
 ## Status and History
 
-The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][6]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
+The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are [aggregated correctly][5]. Slide this bracket over the timeline to view previous monitor evaluation results:
 
-{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" responsive="true" width="80%" >}}
 
-For further investigation into your metrics evolution, use the [Metric Explorer][7] or a dedicated [Notebook][8].
+For further investigation into your metrics evolution, use the [Metric Explorer][6] or a dedicated [Notebook][7].
 
-**Note**: For the *Status* graph, if you see `None` or `no groups found` as group names, this is usually because:  
-- The monitor is newly created and has not evaluated yet.  
-- The monitor's query was recently changed.  
-- A host's name previously included in query has changed. Host name changes age out of the UI within 24 hours.
+**Note**: For the *Status* graph, if you see `None` or `no groups found` as group names, this is usually because:
+
+* The monitor is newly created and has not evaluated yet.
+* The monitor's query was recently changed.
+* A host's name previously included in the query has changed. Hostname changes age out of the UI within 24 hours.
 
 ## Events
 
-All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][9].
+All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][8].
 
 {{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" style="width:80%;" >}}
 
@@ -88,10 +98,9 @@ All events generated from your monitor are aggregated in this section. Those eve
 
 [1]: /monitors/monitor_types
 [2]: /monitors/downtimes
-[3]: /monitors/#export-your-monitor
-[4]: /api/?lang=python#monitors
-[5]: /graphing/functions
-[6]: /videos/datadog101-5-aggregation/?wtime=49s
-[7]: https://app.datadoghq.com/metric/explorer
-[8]: /graphing/notebooks
-[9]: /graphing/event_stream
+[3]: /api/?lang=python#monitors
+[4]: /graphing/functions
+[5]: /videos/datadog101-5-aggregation/?wtime=49s
+[6]: https://app.datadoghq.com/metric/explorer
+[7]: /graphing/notebooks
+[8]: /graphing/event_stream

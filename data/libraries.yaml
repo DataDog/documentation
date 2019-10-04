@@ -198,6 +198,11 @@ Classic:
       link: https://github.com/gphat/datadog-scala
       api: true
       authors: Cory Watson
+    - name: datadog4s
+      link: https://github.com/avast/datadog4s
+      dogstatsd: true
+      authors: Avast
+      notes: Toolkit for monitoring applications written in functional Scala using Datadog.
   - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog
@@ -265,3 +270,13 @@ Tracing:
       official: true
       authors: Datadog
       notes: gem is called 'ddtrace'.
+  - Scala:
+    - name: scala-opentracing
+      link: https://github.com/Colisweb/scala-opentracing
+      authors: Colisweb
+Log:
+  - Laravel:
+    - name: laravel-datadog-logger
+      link: https://github.com/myLocalInfluence/laravel-datadog-logger
+      notes: Logger, handler, and formatter created for DataDog log management on Laravel framework.
+      authors: Aurélien SCHILTZ

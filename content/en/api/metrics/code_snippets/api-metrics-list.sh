@@ -7,5 +7,5 @@ curl -G \
     "https://api.datadoghq.com/api/v1/metrics" \
     -d "api_key=${api_key}" \
     -d "application_key=${app_key}" \
-    -d "from=${from_time}"
+    -d "from=${from_time}" \
     -d "host=<HOSTNAME>"

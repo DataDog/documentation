@@ -49,7 +49,7 @@ Use facets, measures, tags, or even [free text search][1] to filter your Logstre
 
 Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
 ### Saved views
 
@@ -69,7 +69,7 @@ The Logstream is the list of logs that match the selected context. A context is 
 
 ### Logs Table
 
-The logstream is displayed in the logs table. 
+The logstream is displayed in the logs table.
 
 Configure the logs table content according to your needs and preferences with the "Options" button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
@@ -97,7 +97,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 Interact with the upper reserved attributes section:
 
-* with **Host**, to access the host dashboard or append the search request with the `host` of the log. 
+* with **Host**, to access the host dashboard or append the search request with the `host` of the log.
 * with **Service**, to see the trace in APM, append the search request with the trace ID (both require a `trace_id` attribute in the log: refer to [trace injection in logs][3]) or append search request with the `service` of the log.
 * with **Source**, to append the search request with the `source` of the log.
 
@@ -115,7 +115,7 @@ Copy the JSON log content to the clipboard through the **Export** button or keyb
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][1], log parsing, and having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][1], log parsing, and having [facets](#setup) and [measures](#setup) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
 Follow the [log graphing guide][2] to learn more about all the graphing options.
 
@@ -161,7 +161,7 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
 
 [1]: /logs/explorer/search
@@ -171,7 +171,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 {{% tab "Measures" %}}
 
-A measure is a attribute with a numerical value contained in your logs. Think of it as a "log metric".
+A measure is a attribute with a numerical value contained in your logs.
 
 **Create a Measure**:
 
@@ -202,10 +202,10 @@ Export your current Log Visualization with the *Export* functionality:
 
 {{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
-| Button                | Description                                                                                                          |
-| ----                  | -----                                                                                                                |
-| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
-| Export to CSV         | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
+| Button            | Description                                                                                                          |
+|-------------------|----------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
+| Export to CSV     | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
 
 [1]: /monitors/monitor_types/log
@@ -214,10 +214,10 @@ Export your current Log Visualization with the *Export* functionality:
 
 {{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
-| Button              | Description                                                                                                                                                                  |
-| ----                | -----                                                                                                                                                                        |
-| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.*                |
-| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2]. |
+| Button              | Description                                                                                                                                                   |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.* |
+| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2].                                                                                                    |
 
 
 [1]: /monitors/monitor_types/log

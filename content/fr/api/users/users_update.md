@@ -1,25 +1,25 @@
 ---
 title: Mettre à jour un utilisateur
 type: apicontent
-order: 25.4
+order: 34.4
 external_redirect: /api/#mettre-a-jour-un-utilisateur
 ---
 
 ## Mettre à jour un utilisateur
-Ne peut être utilisé qu'avec des clés d'application disponibles pour les administrateurs.
+Ne peut être utilisé qu'avec des clés d'application confiées aux administrateurs.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`id`** [*obligatoire*] :
-    Le handle de l'utilisateur.
+    le handle de l'utilisateur.
 * **`name`** [*facultatif*, *défaut*=**None**] :
-    Le nouveau nom de l'utilisateur.
+    le nouveau nom de l'utilisateur.
 * **`email`** [*facultatif*, *défaut*=**None**] :
-    Le nouvel e-mail de l'utilisateur.
+    la nouvelle adresse e-mail de l'utilisateur.
 * **`disabled`** [*facultatif*, *défaut*=**None**] :
-    Le nouveau statut « disabled » de l'utilisateur.
+    le nouveau statut de désactivation de l'utilisateur.
 * **`access_role`** [*facultatif*, *défaut*=**st**] :
-    Le rôle d'accès de l'utilisateur. Valeurs autorisées :
-    *  **st** (utilisateur standard), 
-    *  **adm** (administrateur),
-    *  **ro** (utilisateur en lecture seule).  
-
+    le rôle d'accès de l'utilisateur. Valeurs autorisées :
+    *  **st** (standard)
+    *  **adm** (admin)
+    *  **ro** (utilisateur read-only)

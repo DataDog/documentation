@@ -138,7 +138,19 @@ datadog:
  logsConfigContainerCollectAll: true
 ```
 
+### Enable Custom Metrics Collection
+
+To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][7] file to enable non-local traffic.
+
+```
+datadog:
+  (...)
+  nonLocalTraffic: true
+```
+
 ### Enable APM and Distributed Tracing
+
+**Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
 Update your [datadog-values.yaml][7] file with the following APM configuration:
 
@@ -146,6 +158,7 @@ Update your [datadog-values.yaml][7] file with the following APM configuration:
 datadog:
   (...)
   apmEnabled: true
+  nonLocalTraffic: true
 
 (...)
 
@@ -178,7 +191,7 @@ tracer.configure(
 )
 ```
 
-Refer to the [language-specific APM instrumentation docs][8] for more examples.
+Refer to the [language-specific APM instrumentation docs][9] for more examples.
 
 ### Enabling Process Collection
 
@@ -192,7 +205,7 @@ datadog:
 
 ### Enabling integrations with Helm
 
-The Datadog [entrypoint][9] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
+The Datadog [entrypoint][10] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
 
 ```yaml
 datadog:
@@ -231,5 +244,6 @@ This command removes all Kubernetes components associated with the chart and del
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: /tracing/setup
-[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
+[8]: /developers/dogstatsd
+[9]: /tracing/setup
+[10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

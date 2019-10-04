@@ -32,7 +32,7 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Management Service must implement the following configurations:
 
 * The Datadog Agent must be configured to submit logs to `tcp-encrypted-intake.logs.datadoghq.com`
-* The Datadog [log collection AWS Lambda function][5] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable
+* The Datadog [log collection AWS Lambda function][5] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable as well as setting `DD_USE_TCP` to `true`.
 * Other log sources besides the Datadog Agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
 
 The following sample configuration can be used with the Datadog Agent to submit logs to a HIPAA-ready endpoint directly (i.e. without a proxy):
@@ -44,10 +44,12 @@ logs_config:
   logs_no_ssl: false
 ```
 
+With the Docker Agent, pass in ```DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516``` as an environment variable.
+
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 
 * Users cannot request support via chat
-* The logs Live Tail is disabled
+* The logs Live Tail, Rehydrate from Archives, and Generate Metrics features are disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
 
@@ -59,6 +61,6 @@ If you have any questions about how the Log Management Service satisfies the app
 
 [1]: /security
 [2]: /logs/log_collection
-[3]: /logs/log_collection/#filter-logs
-[4]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
+[3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
+[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection

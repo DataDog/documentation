@@ -1,15 +1,20 @@
 ---
 title: List of API source attribute values
 kind: faq
+private: true
 ---
 
 |Integration name | API source attribute|
 |:---|:---|
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
-|Akamai|AKAMAI|
+|Akamai Datastream|AKAMAIDATASTREAM|
+|Akamai Mpulse|AKAMAIMPULSE|
 |Alibaba Cloud|ALIBABACLOUD|
+|Amazon Appstream|APPSTREAM|
+|Amazon Appsync|APPSYNC|
 |Amazon Api Gateway|APIGATEWAY|
+|Amazon Athena|ATHENA|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|
 |Amazon Cloudfront|CLOUDFRONT|
@@ -17,65 +22,113 @@ kind: faq
 |Amazon Cloudtrail|CLOUDTRAIL|
 |Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
+|Amazon Cognito|COGNITO|
+|Amazon Connect|AWSCONNECT|
 |Amazon Directconnect|DIRECTCONNECT|
+|Amazon Dms|AWSDMS|
 |Amazon Documentdb|DOCUMENTDB|
 |Amazon Dynamodb|DYNAMODB|
 |Amazon Ebs|EBS|
 |Amazon Ec2|EC2|
+|Amazon Ec2 Spot|EC2SPOT|
 |Amazon Ecs|ECS|
 |Amazon Efs|EFS|
 |Amazon Elasticache|ELASTICACHE|
 |Amazon Elasticbeanstalk|ELASTICBEANSTALK|
+|Amazon Elastic Transcoder|ELASTICTRANSCODER|
+|Amazon Mediaconnect|MEDIACONNECT|
+|Amazon Mediaconvert|MEDIACONVERT|
+|Amazon Mediapackage|MEDIAPACKAGE|
+|Amazon Mediatailor|MEDIATAILOR|
 |Amazon Elb|ELB|
 |Amazon Emr|EMR|
 |Amazon Es|ES|
+|Amazon Eventbridge|AWSEVENTHUB|
 |Amazon Firehose|FIREHOSE|
 |Amazon Gamelift|GAMELIFT|
+|Amazon Glue|GLUE|
 |Amazon Health|HEALTH|
+|Amazon Inspector|INSPECTOR|
 |Amazon Iot|IOT|
 |Amazon Kinesis|KINESIS|
 |Amazon Kms|KMS|
 |Amazon Lambda|LAMBDA|
+|Amazon Lex|AWSLEX|
 |Amazon App Mesh|AMAZONAPPMESH|
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
 |Amazon Msk|MSK|
+|Amazon Nat Gateway|NATGATEWAY|
+|Amazon Neptune|NEPTUNE|
 |Amazon Ops Works|OPSWORKS|
 |Amazon Polly|POLLY|
 |Amazon Rds|RDS|
 |Amazon Redshift|REDSHIFT|
+|Amazon Rekognition|REKOGNITION|
 |Amazon Route53|ROUTE53|
 |Amazon S3|S3|
+|Amazon Sagemaker|SAGEMAKER|
 |Amazon Ses|SES|
+|Amazon Shield|SHIELD|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
-|Amazon States|STATEMACHINE|
+|Amazon Step Functions|STEPFUNCTIONS|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
+|Amazon Translate|TRANSLATE|
+|Amazon Trusted Advisor|TRUSTEDADVISOR|
 |Amazon Waf|WAF|
+|Amazon Vpn|AWSVPN|
 |Amazon Web Services|CLOUDWATCH|
 |Amazon Workspaces|WORKSPACES|
 |Amazon Xray|AWSXRAY|
 |Ansible|ANSIBLE|
 |Apache|APACHE|
 |Api|API|
+|Azure Analysis Services|AZUREANALYSISSERVICES|
+|Azure Api Management|AZUREAPIMANAGEMENT|
+|Azure App Service Environment|AZUREAPPSERVICEENVIRONMENT|
+|Azure App Service Plan|AZUREAPPSERVICEPLAN|
 |Azure App Services|AZUREAPPSERVICES|
+|Azure Application Gateway|AZUREAPPLICATIONGATEWAY|
+|Azure Automation|AZUREAUTOMATION|
 |Azure Batch|AZUREBATCH|
 |Azure Blob Storage|AZUREBLOBSTORAGE|
+|Azure Cognitive Services|AZURECOGNITIVESERVICES|
+|Azure Container Instances|AZURECONTAINERINSTANCES|
+|Azure Container Service|AZURECONTAINERSERVICE|
+|Azure Cosmosdb|AZURECOSMOSDB|
+|Azure Customer Insights|AZURECUSTOMERINSIGHTS|
+|Azure Data Factory|AZUREDATAFACTORY|
+|Azure Data Lake Analytics|AZUREDATALAKEANALYTICS|
+|Azure Data Lake Store|AZUREDATALAKESTORE|
+|Azure Db For Mariadb|AZUREDBFORMARIADB|
 |Azure Db For Mysql|AZUREDBFORMYSQL|
 |Azure Db For Postgresql|AZUREDBFORPOSTGRESQL|
+|Azure Event Grid|AZUREEVENTGRID|
 |Azure Event Hub|AZUREEVENTHUB|
+|Azure Express Route|AZUREEXPRESSROUTE|
+|Azure File Storage|AZUREFILESTORAGE|
+|Azure Hd Insight|AZUREHDINSIGHT|
 |Azure Iot Hub|AZUREIOTHUB|
+|Azure Key Vault|AZUREKEYVAULT|
+|Azure Load Balancer|AZURELOADBALANCER|
 |Azure Logic App|AZURELOGICAPP|
+|Azure Network Interface|AZURENETWORKINTERFACE|
+|Azure Notification Hubs|AZURENOTIFICATIONHUBS|
+|Azure Public Ip Address|AZUREPUBLICIPADDRESS|
 |Azure Queue Storage|AZUREQUEUESTORAGE|
 |Azure Redis Cache|AZUREREDISCACHE|
+|Azure Relay|AZURERELAY|
+|Azure Search|AZURESEARCH|
 |Azure Service Bus|AZURESERVICEBUS|
 |Azure Sql Database|AZURESQLDATABASE|
 |Azure Sql Elastic Pool|AZURESQLELASTICPOOL|
 |Azure Storage|AZURESTORAGE|
+|Azure Stream Analytics|AZURESTREAMANALYTICS|
 |Azure Table Storage|AZURETABLESTORAGE|
-|Azure Vm|AZUREVM|
 |Azure Vm Scale Set|AZUREVMSCALESET|
+|Azure Vm|AZUREVM|
 |Azure|AZURE|
 |Bitbucket|BITBUCKET|
 |Btrfs|BTRFS|
@@ -119,17 +172,31 @@ kind: faq
 |Github|GITHUB|
 |Go Expvar|GOEXPVAR|
 |Google App Engine|GAE|
+|Google Cloud Apis|GCPAPIS|
 |Google Cloud Big Query|GCPBIGQUERY|
+|Google Cloud Bigtable|GCPBIGTABLE|
+|Google Cloud Composer|GCPCOMPOSER|
+|Google Cloud Dataflow|GCPDATAFLOW|
+|Google Cloud Dataproc|GCPDATAPROC|
 |Google Cloud Datastore|GCPDATASTORE|
+|Google Cloud Filestore|GCPFILESTORE|
 |Google Cloud Firebase|GCPFIREBASE|
+|Google Cloud Firestore|GCPFIRESTORE|
 |Google Cloud Functions|GCPCLOUDFUNCTIONS|
+|Google Cloud Interconnect|GCPINTERCONNECT|
+|Google Cloud Iot|GCPIOT|
+|Google Cloud Loadbalancing|GCPLOADBALANCING|
 |Google Stackdriver Logging|GCPLOGGING|
 |Google Cloud Ml|GCPML|
 |Google Cloud Platform|GCP|
 |Google Cloud Pubsub|GCPPUBSUB|
+|Google Cloud Redis|GCPREDIS|
+|Google Cloud Router|GCPROUTER|
 |Google Cloud Run|GCPCLOUDRUN|
 |Google Cloud Spanner|GCPSPANNER|
 |Google Cloud Storage|GCPSTORAGE|
+|Google Cloud Tasks|GCPTASKS|
+|Google Cloud Tpu|GCPTPU|
 |Google Cloud Vpn|GCPVPN|
 |Google Cloudsql|GCPCLOUDSQL|
 |Google Compute Engine|GCPCOMPUTE|
@@ -235,3 +302,4 @@ kind: faq
 |Yarn|YARN|
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
+

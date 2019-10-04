@@ -1,8 +1,0 @@
-<h1>tag.terms.html</h1>
-   <h1 id="title">{{ .Title }}</h1>
-   {{ $data := .Data }}
-    {{ range $key,$value := .Data.Terms.ByCount }}
-    {{ $link := absLangURL (print $data.Plural "/" ($value.Name | urlize) "/") }}
-    <h2><a href="{{ $link }}"> {{ $value.Name }} </a> {{ $value.Count }} </h2>
-    {{ end }}
-  </div>

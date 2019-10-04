@@ -1,6 +1,0 @@
-{{ $name := .Get "name" }}
-{{ $description := .Get "description" }}
-{{ $default := .Get "default" }}
-{{ $lang := .Get "lang" }}
-
-{{- partial "argument.html" (dict "context" . "name" $name "description" $description ) -}}

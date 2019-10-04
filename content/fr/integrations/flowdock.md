@@ -22,7 +22,7 @@ version: '1.0'
 
 Intégrez FlowDock pour :
 
-* Recevoir une notification lorsqu'un utilisateur envoie une publication sur votre flux
+* Être averti lorsque quelqu'un publie sur votre flux
 * Récupérer des alertes de monitor, des changements de statuts d'intégration et bien plus encore directement dans vos flux
 
 Datadog tire parti des fils de Flowdock pour éviter de polluer vos flux avec des notifications. Toutes les notifications d'un flux, et leurs notifications connexes, sont stockées dans leur propre fil. Par exemple, si une alerte de monitor est déclenchée puis résolue, les notifications correspondantes seront regroupées dans Flowdock.

@@ -5,14 +5,14 @@ order: 21.08
 external_redirect: /api/#create-an-application-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
-`POST /api/v1/application_key/<APP_KEY>`
+`POST /v1/application_key/<APP_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="create_app_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.create_app_key" >}}

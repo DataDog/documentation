@@ -42,19 +42,22 @@ Le check Linux_proc_extras est inclus avec le paquet de l'[Agent Datadog][1] : 
 
 Modifiez le fichier `linux_proc_extras.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple linux_proc_extras.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
+#### Collecte de métriques
+Le check Linux Proc Extras peut potentiellement générer des [métriques custom][6], qui peuvent avoir une incidence sur votre [facturation][7]. 
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `linux_proc_extras` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `linux_proc_extras` dans la section Checks.
 
 ## Données collectées
 ### Métriques
-Le check Linux proc extras n'inclut aucune métrique.
+Le check Linux Proc Extras n'inclut aucune métrique.
 
 ### Événements
-Le check Linux proc extras n'inclut aucun événement.
+Le check Linux Proc Extras n'inclut aucun événement.
 
 ### Checks de service
-Le check Linux proc extras n'inclut aucun check de service.
+Le check Linux Proc Extras n'inclut aucun check de service.
 
 ## Dépannage
 
@@ -65,6 +68,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [3]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/datadog_checks/linux_proc_extras/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[7]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 
 
 {{< get-dependencies >}}

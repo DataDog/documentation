@@ -14,7 +14,7 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.integrations) }}
+{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.integrations) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
@@ -51,7 +51,7 @@
           <tr>
             <td>
             <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-            <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
+            <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
             </td>
           </tr>
 
@@ -73,7 +73,7 @@
     <tr>
       <td>
       <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-      <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
+      <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
       </td>
     </tr>
   {{ end }}

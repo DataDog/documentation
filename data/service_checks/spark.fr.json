@@ -1,38 +1,18 @@
 [
     {
         "agent_version": "5.8.0",
-        "integration":"spark",
         "check": "spark.resource_manager.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Spark ResourceManager. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à ResourceManager de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.8.0",
-        "integration":"spark",
         "check": "spark.application_master.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Spark ApplicationMaster. Sinon renvoie `OK`."
-    },
-    {
-        "agent_version": "5.8.0",
-        "integration":"spark",
-        "check": "spark.standalone_master.can_connect",
-        "statuses": ["ok", "critical"],
-        "groups": ["host"],
-        "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Spark Standalone Master. Sinon renvoie `OK`."
-    },
-    {
-        "agent_version": "5.8.0",
-        "integration":"spark",
-        "check": "spark.mesos_master.can_connect",
-        "statuses": ["ok", "critical"],
-        "groups": ["host"],
-        "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Spark Mesos Master. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à ApplicationMaster de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

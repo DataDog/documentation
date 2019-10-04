@@ -7,13 +7,14 @@ external_redirect: /api/#list-logs
 
 ## Get a list of logs
 
-List endpoint returns logs that match a log search query. Results are paginated.
+List endpoint returns logs that match a log search query. [Results are paginated][1].
 
+**If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*required*]:
-    The search query - following the [Log search syntax][1] .
+    The search query - following the [Log search syntax][3] .
 * **`time.from`** [*required*]:
     Minimum timestamp for requested logs. Format can be either
     - an ISO-8601 string
@@ -30,7 +31,7 @@ List endpoint returns logs that match a log search query. Results are paginated.
    Equivalent to `time.timezone`. But value in seconds.
    If both timezone and offset are specified, timezone is ignored.
 * **`startAt`** [*optional*, *default*=**None**]:
-   Hash identifier of the first log to return in the list, available in a log `id` attribute. This parameter is used for the [pagination feature](#pagination).
+   Hash identifier of the first log to return in the list, available in a log `id` attribute. This parameter is used for the [pagination feature][1].
    **Note**: this parameter is ignored if the corresponding log is out of the scope of the specified time window.
 * **`sort`** [*optional*, *default*=**desc**]:
     Time-ascending `asc` or time-descending `desc`results.
@@ -39,16 +40,6 @@ List endpoint returns logs that match a log search query. Results are paginated.
 * **`index`** [*optional*, *default*=**main**]:
     For multi-index organizations, the log index in which the request is performed.
 
-##### PAGINATION
-
-Retrieve a log list longer than the 1000 logs limit with the Log List API Pagination feature:
-
-* for the first request, use no `startAt` parameter.
-* for the N-th request, use `nextLogId` of N-1th request result as the `startAt` parameter value.
-
-For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
-
-**If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
-
-[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[1]: /logs/guide/collect-multiple-logs-with-pagination
 [2]: https://docs.datadoghq.com/logs/archives
+[3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax

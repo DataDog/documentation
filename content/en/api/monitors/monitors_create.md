@@ -9,27 +9,28 @@ external_redirect: /api/#create-a-monitor
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 *   **`type`** [*required*]:
     The [type of the monitor][2], chosen from:
 
-| Monitor Type | type attribute value            |
-| :--------    | :-------                        |
-| anomaly      | `query alert`                   |
-| apm          | `query alert`                   |
-| composite    | `composite`                     |
-| custom       | `service check`                 |
-| event        | `event alert`                   |
-| forecast     | `query alert`                   |
-| host         | `service check`                 |
-| integration  | `query alert` or `service check`  |
-| live process | `process alert`                 |
-| logs         | `log alert`                     |
-| metric       | `query alert`                   |
-| network      | `service check`                 |
-| outlier      | `query alert`                   |
-| process      | `service check`                 |
-| watchdog     | `event alert`                   |
+| Monitor Type | type attribute value             |
+|:-------------|:---------------------------------|
+| anomaly      | `query alert`                    |
+| apm          | `query alert`                    |
+| composite    | `composite`                      |
+| custom       | `service check`                  |
+| event        | `event alert`                    |
+| forecast     | `query alert`                    |
+| host         | `service check`                  |
+| integration  | `query alert` or `service check` |
+| live process | `process alert`                  |
+| logs         | `log alert`                      |
+| metric       | `metric alert`                   |
+| network      | `service check`                  |
+| outlier      | `query alert`                    |
+| process      | `service check`                  |
+| watchdog     | `event alert`                    |
 
 *   **`query`** [*required*]:
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:
@@ -59,7 +60,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3.
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 10.
 
     ##### Event Alert Query
 
@@ -106,25 +107,25 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
         *   To mute the alert completely: `{'*': None}`
         *   To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-    *   **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
-
     *   **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
 
-    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
+    *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
+
+    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
-    *   **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
+    *   **`require_full_window`** a Boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
 
     *   **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.
 
     *   **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 
-    *   **`notify_audit`** a boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
+    *   **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 
-    *   **`locked`** a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
+    *   **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 
-    *   **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
+    *   **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 
@@ -160,8 +161,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
             Error: 400 - ["Invalid monitor option:<invalid option>"]
 
 
-
-[1]: /monitors/#export-your-monitor
+[1]: /monitors/monitor_types/#import
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /integrations/faq/list-of-api-source-attribute-value

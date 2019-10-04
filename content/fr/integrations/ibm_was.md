@@ -39,7 +39,7 @@ Ce check permet de surveiller [IBM Websphere Application Server (WAS)][1] avec l
 
 L'intégration Datadog/IBM WAS permet de recueillir les compteurs PMI activés depuis l'environnement WebSphere Application Server. Son implémentation nécessite d'activer le servlet PerfServlet, qui offre un moyen à Datadog de récupérer les données de performance issues de WAS.
 
-Par défaut, ce check recueille les métriques associées à JDBC, à JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][2] pour découvrir des exemples.
+Par défaut, ce check recueille les métriques associées à JDBC, au JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][2] pour découvrir des exemples.
 
 ### Installation
 
@@ -52,6 +52,13 @@ Le servlet de performance se déploie de la même manière que tout autre servle
 
 **Remarque** : depuis la version 6.1, vous devez activer la sécurité des applications pour faire fonctionner PerfServlet.
 
+### Modifier l'ensemble de statistiques actuellement surveillé
+Par défaut, votre serveur d'application est uniquement configuré pour la surveillance « Basic ». Pour bénéficier d'une visibilité totale sur votre JVM, vos connexions JDBC et vos connexions servlet, remplacez la valeur de l'ensemble de statistiques actuellement surveillé pour votre serveur d'application « Basic » par « All ».
+
+Depuis la console d'administration de WebSphere, vous pouvez accéder à ce réglage depuis `Application servers > <VOTRE_SERVEUR_APP> > Performance Monitoring Infrastructure (PMI)`.
+
+Une fois ce changement effectué, cliquez sur « Apply » pour enregistre la configuration et redémarrer votre serveur d'application. Les métriques JDBC, JVM et servlet supplémentaires apparaissent quelques instants plus tard dans Datadog.
+
 ### Configuration
 
 1. Modifiez le fichier `ibm_was.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance IBM WAS. Consultez le [fichier d'exemple ibm_was.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
@@ -60,7 +67,7 @@ Le servlet de performance se déploie de la même manière que tout autre servle
 
 #### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 ```
     logs_enabled: true
 ```

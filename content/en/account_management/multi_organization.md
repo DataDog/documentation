@@ -5,6 +5,7 @@ aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
+  - /account_management/multi_organisations
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
@@ -12,6 +13,8 @@ further_reading:
 ---
 
 It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1].
+
+Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
 
 The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
@@ -60,5 +63,5 @@ To configure SAML for multi-organizations, use the following procedure:
 [6]: /api
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /graphing/dashboards/screenboard/#backup-my-screenboard
-[9]: /monitors/#managing-monitors
+[9]: /monitors/manage_monitor
 [10]: /account_management/#managing-your-organizations

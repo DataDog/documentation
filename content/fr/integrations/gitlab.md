@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - collaboration
   - source control
@@ -42,7 +46,7 @@ Le check Gitlab est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez
 
 ### Configuration
 
-Modifiez le fichier `gitlab.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3], afin de rediriger vers l'endpoint de métriques Prometheus.
+Modifiez le fichier `gitlab.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3], afin de spécifier l'endpoint de métriques Prometheus.
 Consultez le [fichier d'exemple gitlab.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 **Remarque** : l'élément `allowed_metrics` de la section `init_config` vous permet d'indiquer les métriques à extraire.
@@ -96,10 +100,10 @@ Le check Gitlab Runner est inclus avec le paquet de l'[Agent Datadog][112] : v
 
 ### Configuration
 
-Modifiez le fichier `gitlab_runner.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][113], afin de rediriger vers l'endpoint de métriques Prometheus de Runner et vers le master Gitlab dans le but de disposer d'un check de service.
+Modifiez le fichier `gitlab_runner.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][113], afin de spécifier l'endpoint de métriques Prometheus de Runner et le master Gitlab, dans le but de disposer d'un check de service.
 Consultez le [fichier d'exemple gitlab_runner.d/conf.yaml][114] pour découvrir toutes les options de configuration disponibles.
 
-**Remarque** : l'élément `allowed_metrics` dans la section `init_config` vous permet d'indiquer les métriques à extraire.
+**Remarque** : l'élément `allowed_metrics` de la section `init_config` vous permet d'indiquer les métriques à extraire.
 
 **Attention** : certaines métriques doivent être transmises en tant que `rate` (p. ex., `ci_runner_errors`).
 

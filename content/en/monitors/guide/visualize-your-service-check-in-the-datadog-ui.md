@@ -3,6 +3,7 @@ title: Visualize your service check in the Datadog UI.
 kind: guide
 aliases:
     - /monitors/faq/visualize-your-service-check-in-the-datadog-ui
+    - /guides/services_checks/
 ---
 
 Service checks can be visualized and used in 3 Datadog sections:
@@ -40,7 +41,7 @@ In this form you can:
 
 Even if you can't graph a custom check over time as you would for metrics, you can still monitor it.
 Go to *monitor tab* > *new monitor*, then select the **custom check** section:
- 
+
 {{< img src="monitors/faq/check_monitor.png" alt="Check monitor" responsive="true" >}}
 
 Configure your custom check monitor: 
@@ -57,7 +58,7 @@ In this form, you can:
 
 Service check monitors for out-of-the-box Datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
 
-{{< img src="monitors/faq/haproxy_service_check.gif" alt="Haproxy service check" responsive="true" >}}
+{{< img src="monitors/faq/haproxy_service_check.mp4" alt="Haproxy service check" video="true" responsive="true" >}}
 
 Learn how to write an integration with the [integration developer documentation][5].
 

@@ -5,9 +5,14 @@ order: 34.3
 external_redirect: /api/#get-all-users
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/user`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-user-get-all" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-user-get-all" >}}

@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.DashboardList.get_items(4741)
+api.DashboardList.v2.get_items(4741)

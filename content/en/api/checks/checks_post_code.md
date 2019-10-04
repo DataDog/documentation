@@ -5,10 +5,14 @@ order: 6.1
 external_redirect: /api/#post-a-check-run
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/check_run`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-checks-post" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-checks-post" >}}

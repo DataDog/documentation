@@ -1,11 +1,12 @@
 ---
 title: Process collection with Agent v5
 kind: faq
+private: true
 ---
 
 ## Standard Agent Configuration
 
-**Live Processes is available in Datadog Agent version 5.16.0.**  
+**Live Processes is available in Datadog Agent version 5.16.0.**
 Refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][2] at:
@@ -19,7 +20,7 @@ and adding the following line to the `[Main]` section:
     process_agent_enabled: true
 ```
 
-After configuration is complete, [restart the Agent][3].  
+After configuration is complete, [restart the Agent][3].
 **Note**: To collect container information in the standard install, the `dd-agent` user needs to have permissions to access `docker.sock`.
 
 ## Docker container
@@ -50,7 +51,7 @@ In the [dd-agent.yaml][5] manifest used to create the DaemonSet, add the followi
   volumes:
     - hostPath:
         path: /etc/passwd
-      name: passwd    
+      name: passwd
 ```
 
 Refer to the standard [DaemonSet installation][6] and the [docker-dd-agent][4] information pages for further documentation.

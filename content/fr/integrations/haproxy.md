@@ -99,7 +99,7 @@ Consultez le [fichier d'exemple haproxy.yaml][5] pour découvrir toutes les opti
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-* La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
   ```
     logs_enabled: true

@@ -2,8 +2,7 @@ from datadog import initialize, api
 import time
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<YOUR_API_KEY>'
 }
 
 initialize(**options)

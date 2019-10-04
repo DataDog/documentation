@@ -50,7 +50,7 @@ sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 {{% /tab %}}
 {{< /tabs >}}
 
-If your issue continues, [reach out to the Datadog support team][1] with a [flare](#flare).
+If your issue continues, [reach out to the Datadog support team][1] with a [flare][2].
 
 ## Windows
 
@@ -59,8 +59,16 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
+For Agent versions >= 6.12:
+
 ```
-C:\Program Files\Datadog\Datadog agent\embedded\agent.exe check <CHECK_NAME>
+%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
+```
+
+For Agent versions <= 6.11:
+
+```
+%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
 {{% /tab %}}
@@ -93,7 +101,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 
 ## Systemd
 
-For [systems using systemd][2], use `journalctl` to assist with debugging.
+For [systems using systemd][3], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -131,4 +139,5 @@ sudo journalctl -u dd-agent.service
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /agent/troubleshooting/send_a_flare
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

@@ -7,14 +7,14 @@ further_reading:
   text: "Correlate Traces and Logs"
 ---
 
-Clicking on a trace opens a contextual panel that contains information about the trace, about the host and the correlated logs. However the log panel can be empty in some specific cases. Let's review how this can be fixed.
+Clicking on a [trace][1] opens a contextual panel that contains information about the trace, about the host and the correlated logs. However the log panel can be empty in some specific cases. Let's review how this can be fixed.
 
 {{< img src="tracing/faq/tracing_no_logs_in_trace.png" alt="Tracing missing logs" responsive="true" style="width:90%;">}}
 
 
 ## What logs are displayed in the trace panel?
 
-When looking at a trace, there are two types of logs that can be seen:
+When looking at a [trace][1], there are two types of logs that can be seen:
 
 * - `host`: Display logs from the trace's host within the trace timeframe
 * - `trace_id`: Display logs that have the corresponding trace id
@@ -29,15 +29,15 @@ If the log section is empty when the `host` option is set, go into the log explo
 
 - Logs are being sent from the host that emitted trace.
 - There are logs for that host within the trace timeframe.
-- The timestamp of the logs is properly set. Checkout [this specific guide][1] for more explanation about the log timestamp.
+- The timestamp of the logs is properly set. Checkout [this specific guide][2] for more explanation about the log timestamp.
 
 ### Trace_id option
 
-Make sure you have a `trace_id` standard attribute in your logs. You should see a trace icon next to the SERVICE name (black if trace is not sampled, grey if trace is sampled).
+Make sure you have a `trace_id` standard attribute in your logs. You should see a trace icon next to the [SERVICE][3] name (black if trace is not sampled, grey if trace is sampled).
 
 {{< img src="tracing/faq/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
 
-If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2].
+If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][4].
 The idea is then on the log side to:
 
 1. Extract the trace id in a log attribute
@@ -46,13 +46,16 @@ The idea is then on the log side to:
 {{< tabs >}}
 {{% tab "JSON logs" %}}
 
-For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
+For JSON logs, step 1 and 2 are done automatically. The tracer inject the [trace][1] and [span][2] id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][3].
 
-If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
+If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][4].
 
 
-[1]: /logs/processing/#edit-reserved-attributes
-[2]: https://app.datadoghq.com/logs/pipelines/remapping
+
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /logs/processing/#edit-reserved-attributes
+[4]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
 
@@ -68,13 +71,15 @@ Now it is possible that the log format is not covered by the integration pipelin
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-For raw logs without any integration, make sure that the custom parsing rule is extracting the trace and span ids as a string as on the following example:
+For raw logs without any integration, make sure that the custom parsing rule is extracting the [trace][1] and [span][2] ids as a string as on the following example:
 
 {{< img src="tracing/faq/tracing_custom_parsing.png" alt="Custom parser" responsive="true" style="width:90%;">}}
 
-* Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
+* Then define a [Trace remapper][3] on the extracted attribute to remap them to the official trace id of the logs.
 
-[1]: /logs/processing/processors/#trace-remapper
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /logs/processing/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -86,5 +91,7 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/#pagetitle
-[2]: /tracing/advanced/connect_logs_and_traces
+[1]: /tracing/visualization/#trace
+[2]: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/#pagetitle
+[3]: /tracing/visualization/#services
+[4]: /tracing/advanced/connect_logs_and_traces

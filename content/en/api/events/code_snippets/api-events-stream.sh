@@ -10,4 +10,4 @@ curl -G -H "Content-type: application/json" \
     -d "unaggregated=true"\
     -d "api_key=<YOUR_API_KEY>" \
     -d "application_key=<YOUR_APP_KEY>" \
-    'https://api.datadoghq.com/api/v1/events'
+    "https://api.datadoghq.com/api/v1/events"

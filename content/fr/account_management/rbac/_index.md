@@ -11,10 +11,10 @@ further_reading:
     text: RBAC pour Log Management
   - link: account_management/rbac/role_api
     tag: Documentation
-    text: Gérer des rôles et des autorisations avec l'API Role
+    text: Gérer des rôles et des autorisations avec l’API Rôle
 ---
 <div class="alert alert-warning">
-La fonctionnalité RBAC est uniquement disponible pour Log Management. Elle est actuellement en version bêta privée. Demandez à votre représentant commercial ou responsable du succès client d'activer cette fonctionnalité.
+La fonctionnalité RBAC est uniquement disponible pour Log Management. Demandez à votre représentant commercial ou responsable du succès client d'activer cette fonctionnalité.
 </div>
 
 ## Rôles
@@ -29,9 +29,9 @@ Les rôles suivants sont disponibles par défaut. Les utilisateurs sont associé
 
 | Rôle                   | Description                                                                                 |
 |------------------------|---------------------------------------------------------------------------------------------|
-| Administrateur Datadog          | Dispose des autorisations de lecture/écriture sur toutes les données et ressources d'un compte Datadog.                 |
-| Rôle standard Datadog  | Dispose des autorisations de lecture sur toutes les données et des autorisations d'écriture sur la plupart des ressources d'un compte Datadog. |
-| Rôle en lecture seule Datadog | Dispose des autorisations de lecture sur toutes les données, mais ne possède aucune autorisation d'écriture sur les ressources d'un compte Datadog.   |
+| Admin Datadog          | Dispose des autorisations de lecture/écriture sur toutes les données et ressources d'un compte Datadog.                 |
+| Rôle Standard Datadog  | Dispose des autorisations de lecture sur toutes les données et des autorisations d'écriture sur la plupart des ressources d'un compte Datadog. |
+| Rôle Read-Only Datadog | Dispose des autorisations de lecture sur toutes les données, mais ne possède aucune autorisation d'écriture sur les ressources d'un compte Datadog.   |
 
 ## Rôles personnalisés
 

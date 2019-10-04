@@ -19,9 +19,9 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you [trace][2] your application more precisely than you can with the Java Agent alone.
 
-**Setup**:
+#### Setup
 
 For Maven, add this to `pom.xml`:
 
@@ -56,10 +56,9 @@ compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
-Configure your application using environment variables or system properties as discussed in the [configuration][2] section.
+Configure your application using environment variables or system properties as discussed in the [configuration][3] section.
 
-
-**Manual Instrumentation with OpenTracing**:
+#### Manual instrumentation with OpenTracing
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
@@ -97,7 +96,7 @@ class InstrumentedClass {
 }
 ```
 
-Alternatively, wrap the code you want to trace in a `try-with-resources` statement:
+Alternatively, wrap the code you want to [trace][2] in a `try-with-resources` statement:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -125,18 +124,21 @@ If you’re not using `dd-java-agent.jar`, you must register a configured tracer
 
 ```java
 import datadog.opentracing.DDTracer;
-import datadog.trace.api.sampling.AllSampler;
-import datadog.trace.common.writer.DDAgentWriter;
-
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
+import datadog.trace.common.sampling.AllSampler;
+import datadog.trace.common.writer.DDAgentWriter;
+
+//For the API Example
+import datadog.trace.common.writer.Writer;
+import datadog.trace.common.sampling.Sampler;
 
 public class Application {
 
     public static void main(String[] args) {
 
         // Initialize the tracer from environment variables or system properties
-        Tracer tracer = new DDTracer();
+        DDTracer tracer = new DDTracer();
         GlobalTracer.register(tracer);
         // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
@@ -144,19 +146,18 @@ public class Application {
         // OR from the API
         Writer writer = new DDAgentWriter();
         Sampler sampler = new AllSampler();
-        Tracer tracer = new DDTracer(writer, sampler);
+        String service = "Service Name";
+        Tracer tracer = new DDTracer(service,writer, sampler);
         GlobalTracer.register(tracer);
-        // register the same tracer with the Datadog API
-        datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // ...
     }
 }
 ```
 
-**Manual Instrumentation for Async Traces**:
+#### Manual instrumentation for async traces
 
-Create asynchronous traces with manual instrumentation using the OpenTracing API.
+Create asynchronous [traces][2] with manual instrumentation using the OpenTracing API.
 
 ```java
 // Step 1: start the Scope/Span on the work submission thread
@@ -174,11 +175,76 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
+
+
+#### Create a distributed trace using manual instrumentation with OpenTracing
+
+```java
+// Step 1: Inject the Datadog headers in the client code
+try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
+    final Span span = scope.span();
+    HttpRequest request = /* your code here */;
+
+    tracer.inject(span.context(),
+                  Format.Builtin.HTTP_HEADERS,
+                  new MyHttpHeadersInjectAdapter(request));
+
+    // http request impl...
+}
+
+public static class MyHttpHeadersInjectAdapter implements TextMap {
+  private final HttpRequest httpRequest;
+
+  public HttpHeadersInjectAdapter(final HttpRequest httpRequest) {
+    this.httpRequest = httpRequest;
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    httpRequest.addHeader(key, value);
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
+  }
+}
+
+// Step 2: Extract the Datadog headers in the server code
+HttpRequest request = /* your code here */;
+
+final SpanContext extractedContext =
+  GlobalTracer.get().extract(Format.Builtin.HTTP_HEADERS,
+                             new MyHttpRequestExtractAdapter(request));
+
+try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
+    final Span span = scope.span(); // is a child of http client span in step 1
+    // http server impl...
+}
+
+public class MyHttpRequestExtractAdapter implements TextMap {
+  private final HttpRequest request;
+
+  public HttpRequestExtractAdapter(final HttpRequest request) {
+    this.request = request;
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    return request.headers().iterator();
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
+  }
+}
+```
 Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
-
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /tracing/languages/java/#configuration
+[2]: /tracing/visualization/#trace
+[3]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -228,10 +294,39 @@ For more advanced usage and configuration information see [Datadog Python Opentr
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][1] to be part of the beta.
+To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
+
+**Configuring Datadog tracer settings**
+
+The underlying Datadog tracer can be configured by passing options (which match `Datadog::Tracer`) when configuring the global tracer:
+
+```ruby
+# Where `options` is a Hash of options provided to Datadog::Tracer
+OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
+```
+
+It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][2] section.
+
+**Activating and configuring integrations**
+
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][3] and [traces][4] from OpenTracing instrumentation you have in your application.
+
+However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][5] for more details.
+
+**Supported serialization formats**
+
+| Type                           | Supported? | Additional information                                                                                                                                                                                                                                                                                        |
+|--------------------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                                                                                                                                                                                                                                                                                                               |
+| `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
+| `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
 
 
-[1]: /help
+[1]: /tracing/setup/ruby/#quickstart-for-opentracing
+[2]: /tracing/setup/ruby/#tracer-settings
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/#trace
+[5]: /tracing/setup/ruby/#integration-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -343,7 +438,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 
 [1]: https://github.com/opentracing/opentracing-php
-[2]: /tracing/languages/php/#automatic-instrumentation
+[2]: /tracing/setup/php/#automatic-instrumentation
 {{% /tab %}}
 {{% tab "C++" %}}
 

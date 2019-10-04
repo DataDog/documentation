@@ -9,7 +9,8 @@ external_redirect: '/api/#interroger-le-flux-d-evenements'
 Le [flux d'événements][1] peut être interrogé et filtré par période, priorité, sources et tags.
 Remarque : si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères « % », « \ » ou encore « n » peuvent s'afficher dans votre sortie.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`start`** [*obligatoire*] :
     Timestamp POSIX.
 * **`end`** [*obligatoire*] :

@@ -7,7 +7,10 @@ external_redirect: /api/#integration-pagerduty
 
 ## Integration PagerDuty
 
-Configure your Datadog-PagerDuty integration directly through the Datadog API.
-For more informations, see the [PagerDuty integration page][1].
+<mark>The PagerDuty endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
-[1]: /integrations/pagerduty
+Configure your Datadog-PagerDuty integration directly through the Datadog API.
+For more informations, see the [PagerDuty integration page][2].
+
+[1]: /help
+[2]: /integrations/pagerduty

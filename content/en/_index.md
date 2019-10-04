@@ -5,6 +5,8 @@ aliases:
   - /basic_agent_usage/
   - /guides/
   - /faq/
+  - /docs/
+  - /guides/overview/
 disable_toc: true
 ---
 
@@ -12,7 +14,7 @@ disable_toc: true
 
 *If you're new here, read below for a high-level view of Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
 
@@ -22,7 +24,7 @@ Datadog lets you collect all these metrics, events, and service states in one pl
 
 ## Collect Everything
 
-Collect a wealth of already-available data without writing any code. [Install the Datadog Agent][1] everywhere—every server, instance, VM, node, [container-running host][2]—then enable and configure any of the 200+ out-of-the-box [integrations][3] to start the metrics flowing to Datadog's backend.
+Collect a wealth of already-available data without writing any code. [Install the Datadog Agent][1] everywhere—every server, instance, VM, node, [container-running host][2]—then enable and configure any of the 350+ out-of-the-box [integrations][3] to start the metrics flowing to Datadog's backend.
 
 Submit custom application metrics by writing a little code. Instrument your own gauges, counters, timers, and histograms with [DogStatsD][4], or use [APM][5] to trace the execution time of any code path to see how it impacts overall request-response times. The [client libraries][6] send your [custom metrics][7] and trace data to the Datadog Agent, which then ships them off to Datadog.
 
@@ -39,10 +41,6 @@ Before long, you'll create custom [Screenboards][11] that combine all the graphs
 Once your graphs have exposed the problem areas, set up alerting conditions on your metrics using [Monitors][15]. You receive [emails][16] when the alerts fire, or set up the [Slack][17] integration for a dedicated, in-app notifications.
 
 When you're well aware of an ongoing problem, [silence its alerts][18]. When you're about to bring a service down for maintenance, [schedule a downtime][18] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, then create a [composite monitor][19] instead.
-
-<div class="col text-center">
-{{< img src="icons/fr-flag-round-50.png" alt="French Docs" responsive="true" popup="false" href="https://docs.datadoghq.com/fr/" >}}
-</div>
 
 {{< partial name="support/support.html" >}}
 

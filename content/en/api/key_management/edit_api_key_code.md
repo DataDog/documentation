@@ -5,14 +5,14 @@ order: 21.04
 external_redirect: /api/#edit-an-api-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
-`PUT /api/v1/api_key/<API_KEY>`
+`PUT /v1/api_key/<API_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="edit_api_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.edit_api_key" >}}

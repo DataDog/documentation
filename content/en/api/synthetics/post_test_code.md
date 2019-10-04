@@ -5,13 +5,14 @@ order: 29.1
 external_redirect: /api/#create-tests
 ---
 
-##### Signature
-`POST /api/v1/synthetics/tests/`
+**SIGNATURE**:
 
-##### Example Request
+`POST /v1/synthetics/tests/`
+
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="post_test" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.post_test" >}}

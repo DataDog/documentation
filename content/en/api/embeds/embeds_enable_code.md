@@ -5,9 +5,14 @@ order: 11.4
 external_redirect: /api/#enable-embed
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/graph/embed/<EMBED_ID>/enable`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-embeds-enable" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-embeds-enable" >}}

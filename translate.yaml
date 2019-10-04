@@ -15,6 +15,11 @@ sources:
   dst: "*.{lang}.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
+- src: "config/_default/params.en.yaml"
+  dst: "config/_default/params.{lang}.yaml"
+- src: "config/_default/menus/menus.en.yaml"
+  dst: "config/_default/menus/menus.{lang}.yaml"
+
 ignores:
   - "content/en/**/faq/*.md"
   - "**/*.fr.md"
@@ -27,6 +32,8 @@ filters:
 langs:
 - lang_country: "fr_FR"
   lang: "fr"
+- lang_country: "ja"
+  lang: "ja"
 github:
   org: 'DataDog'
   repo: 'documentation'

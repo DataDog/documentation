@@ -1,0 +1,4 @@
+baseURL: https://docs.datadoghq.com/
+buildfuture: false
+builddrafts: false
+enableGitInfo: true

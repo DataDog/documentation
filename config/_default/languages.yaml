@@ -1,0 +1,13 @@
+en:
+  languageName: "English"
+  #languageCode: "en-US"
+  weight: 1
+  contentDir: content/en
+fr:
+  languageName: "Français"
+  weight: 2
+  contentDir: content/fr
+ja:
+  languageName: "日本語"
+  weight: 3
+  contentDir: content/ja

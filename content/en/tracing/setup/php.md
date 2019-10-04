@@ -21,6 +21,8 @@ further_reading:
 
 ## Installation and Getting Started
 
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=php" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=php" target=_blank>container-based</a> set ups.</div>
+
 For descriptions of terminology used in APM, take a look at the [official documentation][1].
 
 For details about open-source contributions to the PHP tracer, refer to the [contributing guide][2].
@@ -52,9 +54,9 @@ $ apk add datadog-php-tracer.apk --allow-untrusted
 
 Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][8] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][9] from the host machine to help identify any issues.
 
-If you can't find your distribution, you can [manually install][9] the PHP extension.
+If you can't find your distribution, you can [manually install][10] the PHP extension.
 
 ## Automatic Instrumentation
 
@@ -62,7 +64,7 @@ Tracing is automatically instrumented by default. Once the extension is installe
 
 Even if Datadog does not officially support your web framework, you may not need any manual instrumentation. Datadog records generic web requests and creates generic traces for them. If you use one of the supported frameworks, however, Datadog sets more relevant metadata, which makes it easier to navigate through your services.
 
-Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][10].
+Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][11].
 
 Automatic instrumentation captures:
 
@@ -75,12 +77,9 @@ Automatic instrumentation captures:
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
 
-The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-```php
-putenv('DD_AGENT_HOST=localhost');
-putenv('DD_TRACE_AGENT_PORT=8126');
-```
+See [tracer configuration][12] for more information on how to set these variables.
 
 ## Compatibility
 
@@ -126,7 +125,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | Wordpress      |                    | _Coming Soon_   |
 | Yii            | 1.1                | _Coming Soon_   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
 #### CLI Library Compatibility
 
@@ -138,13 +137,14 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Laravel Artisan | 5.x                | Fully Supported |
 | Symfony Console |                    | _Coming Soon_   |
 
-Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
 #### Datastore Compatibility
 
 | Module                           | Versions                   | Support Type    |
 |:---------------------------------|:---------------------------|:----------------|
 | Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| CakePHP Console                  | 2.x                        | Fully Supported |
 | Elasticsearch                    | 1.x                        | Fully Supported |
 | Eloquent                         | Laravel supported versions | Fully Supported |
 | Memcached                        | *(Any Supported PHP)*      | Fully Supported |
@@ -160,7 +160,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
 #### Library Compatibility
 
@@ -172,7 +172,7 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 | Beanstalkd |                       | _Coming Soon_   |
 | ReactPHP   |                       | _Coming Soon_   |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
 ## Configuration
 
@@ -182,7 +182,7 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`][12] from the server config, virtual host, directory, or **.htaccess** file.
+Set using [`SetEnv`][14] from the server config, virtual host, directory, or **.htaccess** file.
 
 ```
 SetEnv DD_TRACE_DEBUG true
@@ -190,7 +190,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-Set using [`fastcgi_param`][13] from the `http`, `server`, or `location` contexts.
+Set using [`fastcgi_param`][15] from the `http`, `server`, or `location` contexts.
 
 ```
 fastcgi_param DD_TRACE_DEBUG true;
@@ -211,7 +211,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable distributed tracing                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
 | `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
@@ -221,8 +221,9 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`    | IPC-based configurable circuit breaker max consecutive failures             |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | The Agent request transfer timeout (in milliseconds)                        |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_TRACE_REPORT_HOSTNAME`           | `false`     | Enable hostname reporting on the root span                                  |
@@ -269,6 +270,10 @@ The `$*` wildcard matches without replacement.
 | `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
 | `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
  
+## Upgrading
+
+To upgrade the PHP tracer, [download the latest release][7] and follow the same steps as [installing the extension][18].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -278,15 +283,16 @@ The `$*` wildcard matches without replacement.
 [3]: /agent/?tab=agentv6
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
-[6]: /agent/apm/?tab=agent630#agent-configuration
+[6]: /tracing/send_traces
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
 [8]: https://app.datadoghq.com/apm/services
-[9]: /tracing/faq/php-tracer-manual-installation
-[10]: #library-compatibility
-[11]: /help
-[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[14]: /tracing/guide/distributed_tracing/?tab=php
+[9]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[10]: /tracing/faq/php-tracer-manual-installation
+[11]: #library-compatibility
+[12]: /help
+[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [15]: /tracing/troubleshooting
 [16]: #custom-url-to-resource-mapping
 [17]: #map-resource-names-to-normalized-uri
+[18]: #install-the-extension

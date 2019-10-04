@@ -1,7 +1,7 @@
 ---
 categories:
 - Source Control
-ddtype: crawler
+ddtype: library
 dependencies: []
 description: Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé vers Datadog.
 doc_link: https://docs.datadoghq.com/integrations/git/
@@ -39,22 +39,21 @@ sudo easy_install dogapi
 curl -L https://raw.github.com/DataDog/dogapi/master/examples/git-post-receive-hook > post-receive
 ```
 
-3. Configurez Git avec vos [clés Datadog][2] :
+3. Configurez Git avec vos [clés Datadog][1] :
 ```
 git config datadog.api <VOTRE_CLÉ_API_DATADOG>
 git config datadog.application <VOTRE_CLÉ_APP_DATADOG>
-```   
-
-4. Activez le webhook dans votre référentiel.
 ```
-install post-receive git_repository/.git/hooks/post-receive
-```
-(en partant du principe que votre référentiel s'intitule ```git_repository```)
 
-4. Installez l'intégration.
+4. Activez le hook dans votre référentiel Git avec `<NOM_RÉFÉRENTIEL_GIT>` :
+```
+install post-receive <NOM_RÉFÉRENTIEL_GIT>/.git/hooks/post-receive
+```
+
+5. Installez l'[intégration Datadog/Git][2].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: https://app.datadoghq.com/account/settings#api
+[2]:https://app.datadoghq.com/account/settings#integrations/git
 
 
 {{< get-dependencies >}}

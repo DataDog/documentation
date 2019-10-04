@@ -14,12 +14,12 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 
 ## Language
 
-* Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][3], etc. in the English language. This is the default language for all `*.md` files.  
+* Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], etc. in the English language. This is the default language for all `*.md` files.  
 * Use the Standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
 ### RFC 2119
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in the documentation are to be interpreted as described in [RFC 2119][5]. When writing in languages other than English, a best-effort must be made to adhere to this RFC.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in the documentation are to be interpreted as described in [RFC 2119][2]. When writing in languages other than English, a best-effort must be made to adhere to this RFC.
 
 ## Dos
 
@@ -98,7 +98,7 @@ This section sets the record straight (for the Docs site, not for all humankind)
 
 ### RFC 2606
 
-A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][6] four TLD names are reserved:
+A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][3] four TLD names are reserved:
 
 * `.test`
 * `.example`
@@ -113,12 +113,12 @@ Same goes for second level domain names, three are reserved:
 
 ## Words and Phrases
 
-The [Gobwords Style Guide][1] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
+The [Gobwords Style Guide][4] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
 | Word to avoid        | Workaround                                                                                 |
-| :------------------- | :----------------------------------------------------------------------------------------- |
+|----------------------|--------------------------------------------------------------------------------------------|
 | Currently            | Just omit it                                                                               |
 | Refer to/visit       | When preceding a link; use "See" or "Read"                                                 |
 | A number of          | This is vague. Slightly less vague: "a few", "several", "many".                            |
@@ -131,27 +131,38 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 
 ## Formating
 
+### Headers
+
+| Level                    | Case          |
+|--------------------------|---------------|
+| `<h1>` / `# Header`      | Title Case    |
+| `<h2>` / `## Header`     | Sentence case |
+| `<h3>` / `### Header`    | Sentence case |
+| `<h4>` / `#### Header`   | Sentence case |
+| `<h5>` / `##### Header`  | Sentence case |
+| `<h6>` / `###### Header` | Sentence case |
+
 ### Text
 
 Use text formatting to clarify and enhance content.
 
-| Formating   | Rule                                                                                                                    | Example                                               |
-| :---        | :------                                                                                                                 | :----                                                 |
+| Formating         | Rule                                                                                                                    | Example                                               |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `` `backquote` `` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
-| `**Bold**`    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
-| `*Italic*`    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
-| `[Link][3]`      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link][3]                                    |
+| `**Bold**`        | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| `*Italic*`        | Literally translated words, default values, functions, settings, and page names.                                        | Go the the *setting* page in your Datadog application |
+| `[Link][3]`       | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][5]. | Text with [a link][1]                                 |
 
 
 ### Fixed-width
 
 Images are displayed on the full width of a page by default. If your image doesn't need to be that large, use the `style="width:XX%;"` parameter within the image partial in order to scale the image proportionally.
 
-Learn more about [image partials][4].
+Learn more about [image partials][6].
 
-[1]: https://github.com/DataDog/gobwords/wiki/Style-guide
-[2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
-[3]: https://github.com/DataDog/documentation/wiki
-[4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
-[5]: https://tools.ietf.org/html/rfc2119
-[6]: https://tools.ietf.org/html/rfc2606
+[1]: https://github.com/DataDog/documentation/wiki
+[2]: https://tools.ietf.org/html/rfc2119
+[3]: https://tools.ietf.org/html/rfc2606
+[4]: https://github.com/DataDog/gobwords/wiki/Style-guide
+[5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
+[6]: https://github.com/DataDog/documentation/wiki/Import-an-Image

@@ -1,85 +1,54 @@
-<!-- set popup to true by default -->
-{{ if eq (.Get "popup") "false" }}
-  {{ $.Scratch.Set "popup" "false" }}
-{{ else }}
-  {{ $.Scratch.Set "popup" "true" }}
-{{ end }}
-{{ $isPopup := $.Scratch.Get "popup" }}
-
-{{ $img_width := .Get "width" }}
-{{ $img_height := .Get "height" }}
-{{ $wide :=  .Get "wide" }}
-{{ $video :=  .Get "video" }}
-
-{{/* set img path based on page type and what is passed */}}
-{{ $local_ref := (.Get "src") }}
-{{ $hash_ref := (index $.Site.Data.manifests.images $local_ref) }}
-{{ $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" $hash_ref) }}
-{{ $img := $.Scratch.Get "_img" }}
-
-{{ $image_type_arr := split (.Get "src") "." }}
-
-{{ $image_ext := index $image_type_arr 1 }}
-
-{{ if $wide }}
-
-    {{ $.Scratch.Set "imgix_w" "1170" }}
-
-{{ else }}
-
-    {{ $.Scratch.Set "imgix_w" "850" }}
-
-{{ end }}
-
-{{ $imgix_w := $.Scratch.Get "imgix_w" }}
-
-
-{{ if .Get "img_param" | len }}
-
-  {{ .Get "img_param" | $.Scratch.Add "img_param" }}
-
-{{ else }}
-
-  {{ $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") }}
-
-{{ end }}
-
-{{/* override default imgix request params for popup img */}}
-
-{{ if .Get "pop_param" | len }}
-
-  {{ .Get "pop_param" | $.Scratch.Add "pop_param" }}
-
-{{ else }}
-
-  {{ if eq $image_ext "gif" }}
-     {{ $.Scratch.Add "pop_param" "?fit=max&fm=gif" }}
-  {{ else }}
-     {{ $.Scratch.Add "pop_param" "?fit=max&auto=format" }}
-  {{ end }}
-
-
-{{ end }}
-
-{{ $img_param := $.Scratch.Get "img_param" }}
-{{ $pop_param := $.Scratch.Get "pop_param" }}
-
-{{ $figure_class :=  .Get "figure_class" }}
-<span class="shortcode-wrapper shortcode-img expand {{ if $wide }}wide-parent{{ end }}"><figure class="text-center {{ if $wide }}wide {{ end }}{{ $figure_class }}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
+{{- if eq (.Get "popup") "false" -}}
+  {{- $.Scratch.Set "popup" "false" -}}
+{{- else -}}
+  {{- $.Scratch.Set "popup" "true" -}}
+{{- end -}}
+{{- $isPopup := $.Scratch.Get "popup" -}}
+{{- $img_width := .Get "width" -}}
+{{- $img_height := .Get "height" -}}
+{{- $wide :=  .Get "wide" -}}
+{{- $video :=  .Get "video" -}}
+{{- $local_ref := (.Get "src") -}}
+{{- $hash_ref := $local_ref -}}
+{{- $.Scratch.Add "_img" (print "images/" $hash_ref) -}}
+{{- $img := $.Scratch.Get "_img" -}}
+{{- $image_type_arr := split (.Get "src") "." -}}
+{{- $image_ext := index $image_type_arr 1 -}}
+{{- if $wide -}}
+    {{- $.Scratch.Set "imgix_w" "1170" -}}
+{{- else -}}
+    {{- $.Scratch.Set "imgix_w" "850" -}}
+{{- end -}}
+{{- $imgix_w := $.Scratch.Get "imgix_w" -}}
+{{- if .Get "img_param" | len -}}
+  {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
+{{- else -}}
+  {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
+{{- end -}}
+{{- if .Get "pop_param" | len -}}
+  {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
+{{- else -}}
+  {{- if eq $image_ext "gif" -}}
+     {{- $.Scratch.Add "pop_param" "?fit=max&fm=gif" -}}
+  {{- else -}}
+     {{- $.Scratch.Add "pop_param" "?fit=max&auto=format" -}}
+  {{- end -}}
+{{- end -}}
+{{- $img_param := $.Scratch.Get "img_param" -}}
+{{- $pop_param := $.Scratch.Get "pop_param" -}}
+{{- $figure_class :=  .Get "figure_class" -}}
+<div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
 {{- if $video -}}
-    <video width="100%" height="auto"
+    <video width="{{$img_width | default "100%" }}" height="auto"
            muted
            playsinline
            autoplay
            loop >
       <source src="{{ print $img | relURL }}"
               type="video/mp4"
-              media="(min-width: 480px)" >
-      <source src="{{ print (replace $img ".mp4" "_small.mp4") | relURL }}"
-              type="video/mp4"
               media="(min-width: 0px)" >
-      <span class="play"></span>
-      <span class="pause"></span>
+      <div class="play"></div>
+      <div class="pause"></div>
     </video>
 {{- else -}}
     {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
@@ -119,4 +88,4 @@
       {{- end -}}
     {{- end -}}
   </figure>
-</span>
+</div>

@@ -34,7 +34,7 @@ For further assistance, contact [Datadog support][2]. To expedite your request i
 
 ## Mobile browsing
 
-The Datadog application is supported on all mobile browsers and is presented in mobile friendly format. If you are having issues or would like to provide feedback on the mobile browsing experience, contact [Datadog support][2].
+The Datadog application is partially supported on all mobile browsers and is presented in mobile friendly format. If you are having issues or would like to provide feedback on the mobile browsing experience, contact [Datadog support][2].
 
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues

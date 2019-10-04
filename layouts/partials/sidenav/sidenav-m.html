@@ -20,13 +20,13 @@
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
             <form class="docssearch" method="GET" action="{{ "search/" | absLangURL }}">
-                <div id="docssearchWrapper">
+                <div>
                     <input class="docssearch-input-m" name="s" type="docssearch" placeholder="Search documentation...">
                 </div>
             </form>
 
             <div class="sidenav-nav">
-                {{ partial "sidenav/nav.html" . }}
+                <!-- This is placed with js now for build speed increase -->
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ type: apicode
 order: 2
 external_redirect: /api/#authentication
 ---
-### EXAMPLE
-{{< code-snippets basename="api-auth" >}}
 
+**EXAMPLE**:
+
+{{< code-snippets basename="api-auth" >}}

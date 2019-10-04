@@ -5,14 +5,14 @@ order: 21.05
 external_redirect: /api/#delete-an-api-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
-`DELETE /api/v1/api_key/<API_KEY>`
+`DELETE /v1/api_key/<API_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="delete_api_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.delete_api_key" >}}

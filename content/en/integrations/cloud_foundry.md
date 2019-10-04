@@ -116,7 +116,7 @@ The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for 
 
 #### Log Collection
 
-**Enable log collection**:
+##### Enable log collection
 
 To start collecting logs from your application in Cloud Foundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
@@ -133,7 +133,7 @@ cf set-env <YOUR_APP_NAME> LOGS_CONFIG '[{"type":"tcp","port":"<PORT>","source":
 cf restage <YOUR_APP_NAME>
 ```
 
-**Configure log collection**:
+##### Configure log collection
 
 The following parameters can be used to configure log collection:
 
@@ -153,13 +153,21 @@ cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
 ```
 
+##### Notification in case of misconfigured proxy
+
+For Agent v6.12+, when using a [proxy configuration][12] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+
+If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
+
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy" responsive="true" >}}
+
 ### Build
 
 To build this buildpack, edit the relevant files and run the `./build` script. To upload it, run `./upload`.
 
 ### DogStatsD
 
-See [the DogStatsD documentation][12] for more information. There is [a list of DogStatsD libraries][13] compatible with a wide range of applications.
+See [the DogStatsD documentation][13] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
 
 ## Monitor Your Cloud Foundry Cluster
 
@@ -174,11 +182,11 @@ These integrations are meant for Cloud Foundry deployment administrators, not en
 
 ### Prerequisites
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][14] or [v2][15].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][15] or [v2][16].
 
 ### Install the Datadog Agent BOSH Release
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][16] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -190,7 +198,7 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-age
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][17].
+If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][18].
 
 #### Configure the Agent as an addon in your BOSH Director
 
@@ -253,7 +261,7 @@ The configuration under each check name should look the same as if you were conf
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
-To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][18] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][19] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 
@@ -280,7 +288,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][20] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
@@ -302,7 +310,7 @@ bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/da
 bosh upload-release -e <BOSH_ENV> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][20].
+If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][21].
 
 #### Configure a UAA client
 
@@ -313,10 +321,10 @@ uaa:
   clients:
     datadog-firehose-nozzle:
       access-token-validity: 1209600
-      authorities: doppler.firehose
+      authorities: doppler.firehose,cloud_controller.admin_read_only
       authorized-grant-types: client_credentials
       override: true
-      scope: doppler.firehose
+      scope: doppler.firehose,cloud_controller.admin_read_only
       secret: <YOUR_SECRET>
 ```
 
@@ -358,7 +366,7 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ```
 
-To see all available configuration options, check the [Datadog Firehose Nozzle repository][21].
+To see all available configuration options, check the [Datadog Firehose Nozzle repository][22].
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
@@ -386,7 +394,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 #### Verify the Nozzle is collecting
 
-On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
+On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
 
@@ -394,7 +402,7 @@ On the [Metrics explorer][22] page in Datadog, search for metrics beginning `clo
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][23], [network][24], [disk][25], and [ntp][26] metrics).
+The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][24], [network][25], [disk][26], and [ntp][27] metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
@@ -411,18 +419,19 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [9]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /tracing/setup
-[12]: /developers/dogstatsd
-[13]: /libraries
-[14]: https://bosh.io/docs/bosh-cli.html
-[15]: https://bosh.io/docs/cli-v2.html#install
-[16]: https://bosh.io/docs/runtime-config.html#addons
-[17]: https://github.com/DataDog/datadog-agent-boshrelease
-[18]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
-[19]: https://app.datadoghq.com/graphing/infrastructure/hostmap
-[20]: https://github.com/DataDog/datadog-firehose-nozzle-release
-[21]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
-[22]: https://app.datadoghq.com/metric/explorer
-[23]: /integrations/system/#metrics
-[24]: /integrations/network/#metrics
-[25]: /integrations/disk/#metrics
-[26]: /integrations/ntp/#metrics
+[12]: https://docs.datadoghq.com/agent/logs/proxy
+[13]: /developers/dogstatsd
+[14]: /libraries
+[15]: https://bosh.io/docs/bosh-cli.html
+[16]: https://bosh.io/docs/cli-v2.html#install
+[17]: https://bosh.io/docs/runtime-config.html#addons
+[18]: https://github.com/DataDog/datadog-agent-boshrelease
+[19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
+[20]: https://app.datadoghq.com/graphing/infrastructure/hostmap
+[21]: https://github.com/DataDog/datadog-firehose-nozzle-release
+[22]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
+[23]: https://app.datadoghq.com/metric/explorer
+[24]: /integrations/system/#metrics
+[25]: /integrations/network/#metrics
+[26]: /integrations/disk/#metrics
+[27]: /integrations/ntp/#metrics

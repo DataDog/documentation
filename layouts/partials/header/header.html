@@ -26,10 +26,13 @@
                         <li class="nav-item {{ if .children }}dropdown{{ end }}">
                             <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                             {{ if .children }}
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" {{ if eq .name "solutions" }}style="min-width:210px;"{{ end }}>
-                                    {{ range .children }}
-                                        <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  {{ range .children }}
+                                    {{ if eq .link "https://www.datadoghq.com/solutions/cloud-migration/" }}
+                                      <hr class="my-1 mx-1 border-gray-light" />
                                     {{ end }}
+                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                  {{ end }}
                                 </div>
                             {{ end }}
                         </li>
@@ -38,8 +41,8 @@
             </div>
             <div class="col-1 text-center">
                 <a href="https://www.datadoghq.com/" id="logo">
-                    {{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png" "class" "logo-img" "alt" "DataDog" "height" "75" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=70&h=75" "disable_lazy" "true") }}
-                    {{ partial "img.html" (dict "root" . "src" "dd-logo-200.png" "class" "logo-text" "alt" "DataDog" "height" "14" "img_param" "?ch=Width,DPR&fit=max&auto=format&h=14" "disable_lazy" "true") }}
+                    {{ partial "img.html" (dict "root" . "src" "dd_logo_n_70x75.png" "class" "logo-img" "alt" "DataDog" "height" "75" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=70&h=75" "disable_lazy" "true") }}
+                    {{ partial "img.html" (dict "root" . "src" "dd-logo-n-200.png" "class" "logo-text" "alt" "DataDog" "height" "14" "img_param" "?ch=Width,DPR&fit=max&auto=format&h=14" "disable_lazy" "true") }}
                 </a>
             </div>
             <div class="col">
@@ -49,15 +52,15 @@
                             <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                             {{ if .children }}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {{ range .children }}
+                              {{ range .children }}
                                 <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
-                                {{ end }}
+                              {{ end }}
                             </div>
                             {{ end }}
                         </li>
                     {{ end }}
                     <li class="nav-item nav-button">
-                        <a class="btn btn-outline-primary sign-up-trigger d-none d-xl-block" href="#" data-toggle="modal" data-target="#signupModal">{{ i18n "get_started_free" }}</a>
+                        <a class="btn btn-outline-primary sign-up-trigger d-none d-xl-block" href="#" data-toggle="modal" data-target="#signupModal" style="min-width:120px;">{{ i18n "get_started_free_short" }}</a>
                         <a class="btn btn-outline-primary sign-up-trigger d-sm-block d-xl-none" href="#" data-toggle="modal" data-target="#signupModal" style="min-width:120px;text-transform: uppercase;">{{ i18n "free_trial" }}</a>
                     </li>
                 </ul>

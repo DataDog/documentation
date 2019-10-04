@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: /assets/service_checks.json
 categories:
   - monitoring
 creates_events: true
@@ -11,7 +15,7 @@ guid: 0a849512-5823-4d9b-b378-aa9d8fb06231
 integration_id: gnatsd-streaming
 integration_title: Gnatsd_streaming
 is_public: true
-kind: intégration
+kind: integration
 maintainer: dev@goldstar.com
 manifest_version: 1.0.0
 metric_prefix: gnatsd.
@@ -44,7 +48,7 @@ Pour installer le check Gnatsd_streaming sur votre host :
 
 ### Configuration
 
-Modifiez le fichier `gnatsd_streaming.yaml` afin qu'il redirige vers votre serveur et votre port. Définissez ensuite les masters à surveiller.
+Modifiez le fichier `gnatsd_streaming.yaml` afin de spécifier votre serveur et votre port. Définissez ensuite les masters à surveiller.
 
 Vous pouvez modifier le nombre de canaux renvoyés dans une requête HTTP unique avec le paramètre `pagination`
 dans le fichier conf.yaml.

@@ -5,6 +5,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si aucun n'est capable de se connecter à l'endpoint de l'API ou si aucune instance d'application ne s'exécute. Renvoie `WARN` si aucune application n'est détectée. Des informations supplémentaires sur le statut de la réponse au moment de la collecte sont incluses dans le message du check."
+        "description": "Renvoie `CRITICAL` si aucun n'est capable de se connecter au endpoint de l'API ou si aucune instance d'application ne s'exécute. Renvoie `WARN` si aucune application n'est détectée. Des informations supplémentaires sur le statut de la réponse au moment de la collecte sont incluses dans le message du check."
     }
 ]

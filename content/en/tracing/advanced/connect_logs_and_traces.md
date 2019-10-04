@@ -16,9 +16,9 @@ further_reading:
   text: "Correlate request logs with traces automatically"
 ---
 
-The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed [trace][1].
 
-Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][1].
+Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][2].
 
 Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
 
@@ -30,9 +30,9 @@ Your language level logs *must* be turned into Datadog attributes in order for t
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
-**Note**: Currently only **slf4j** is supported for MDC autoinjection.
+**Note**: Only `slf4j` and `log4j` are supported for MDC autoinjection.
 
 If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
@@ -40,7 +40,7 @@ If the logs are already JSON formatted, there is nothing left to do. If the logs
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[1]: /tracing/languages/java/#configuration
+[1]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -115,10 +115,35 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
+This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][2], [Log4Net][3], and [Serilog][4].
+
+Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+
+Additionally, injection can be enabled in the code:
+
+```csharp
+using Datadog.Trace;
+using Datadog.Trace.Configuration;
+
+var settings = new TracerSettings { LogsInjectionEnabled = true };
+var tracer = new Tracer(settings);
+```
+
+**Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
+
+
+[1]: https://github.com/damianh/LibLog
+[2]: http://nlog-project.org
+[3]: https://logging.apache.org/log4net
+[4]: http://serilog.net
+[5]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -169,9 +194,9 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{< tabs >}}
 {{% tab "Java" %}}
 
-If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your [traces][1] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
-* Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each span to log (see examples below).
+* Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each [span][2] to log (see examples below).
 * Configure MDC to use the injected Keys:
   * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
   * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
@@ -222,19 +247,21 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][4].
 
-[See the Java logging documentation][1] for more details about specific logger implementation or to learn how to log in JSON.
+[See the Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
 
 
-[1]: /logs/log_collection/java/?tab=log4j#raw-format
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /logs/log_collection/java/#raw-format
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
 
 **Manual Trace ID Injection with Standard Library Logging**
 
-If you prefer to manually correlate your traces with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+If you prefer to manually correlate your [traces][1] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
 The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
@@ -295,13 +322,14 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
-[See the Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
+[See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 
-[1]: /logs/log_collection/python/#configure-the-datadog-agent
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /tracing/visualization/#trace
+[2]: /logs/log_collection/python/#configure-the-datadog-agent
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
 To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
@@ -344,7 +372,7 @@ See the [Ruby logging documentation][1] to verify the Ruby log integration is pr
 {{% /tab %}}
 {{% tab "Go" %}}
 
-The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
+The Go tracer exposes two API calls to allow printing [trace][1] and [span][2] identifiers along with log statements using exported methods from `SpanContext` type:
 
 ```go
 package main
@@ -371,11 +399,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][4].
 
 
-[1]: /tracing/languages/go/#configuration
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /logs/log_collection/go/#configure-your-logger
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -412,6 +442,27 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 [1]: /help
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+To manually inject trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values.
+
+Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message. For example:
+
+```csharp
+using Datadog.Trace;
+
+var traceId = CorrelationIdentifier.TraceId;
+var spanId = CorrelationIdentifier.SpanId;
+
+var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
+```
+
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+
+
+[1]: /logs/log_collection/csharp/#configure-your-logger
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
@@ -430,4 +481,5 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[1]: /tracing/visualization/#trace
+[2]: /agent/logs/#enabling-log-collection-from-integrations

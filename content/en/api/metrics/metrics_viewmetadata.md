@@ -8,6 +8,6 @@ external_redirect: /api/#view-metric-metadata
 
 The metrics metadata endpoint allows you to get metadata about a specific metric.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

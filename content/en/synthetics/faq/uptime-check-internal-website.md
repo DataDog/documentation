@@ -1,7 +1,6 @@
 ---
 title: Create an API Test for private website
 kind: faq
-beta: true
 further_reading:
 - link: "synthetics/"
   tag: "Documentation"

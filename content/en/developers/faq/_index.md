@@ -32,16 +32,15 @@ disable_toc: true
 * [I'm receiving a 202 but not seeing data][11]
 * [Data aggregation with DogStatsD/Threadstats][12]
 * [Is there an alternative to DogStatsD and the api to submit metrics? Threadstats][13]
-* [Can I call scripts and generate events from their results?][14]
 
 ### Libraries and Community Contributions
 
-* [OmniOS (and possibly OpenIndiana/Nexenta): install from source by tweaking the Agent install script ][15]
-* [Is it possible to integrate with ThousandEyes?][16]
-* [Deploying the Agent on RaspberryPI][17]
-* [How to Monitor Logs with Loggly Live Tail and Datadog][18]
-* [Hubot Script - Request snapshots in chat using the Datadog API][19]
-* [How do I collect metrics from Heroku with Datadog?][20]
+* [OmniOS (and possibly OpenIndiana/Nexenta): install from source by tweaking the Agent install script ][14]
+* [Is it possible to integrate with ThousandEyes?][15]
+* [Deploying the Agent on RaspberryPI][16]
+* [How to Monitor Logs with Loggly Live Tail and Datadog][17]
+* [Hubot Script - Request snapshots in chat using the Datadog API][18]
+* [How do I collect metrics from Heroku with Datadog?][19]
 
 [1]: /developers/faq/what-do-notifications-do-in-datadog
 [2]: /developers/faq/data-collection-resolution-retention
@@ -56,10 +55,9 @@ disable_toc: true
 [11]: /developers/faq/i-m-receiving-a-202-but-not-seeing-data
 [12]: /developers/faq/data-aggregation-with-dogstatsd-threadstats
 [13]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
-[14]: /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
-[15]: /developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script
-[16]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes
-[17]: /developers/faq/deploying-the-agent-on-raspberrypi
-[18]: /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
-[19]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api
-[20]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+[14]: /developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script
+[15]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes
+[16]: /developers/faq/deploying-the-agent-on-raspberrypi
+[17]: /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
+[18]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api
+[19]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog

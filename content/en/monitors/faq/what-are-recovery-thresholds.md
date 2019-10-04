@@ -34,7 +34,7 @@ Recovery thresholds reduce noise of a flapping monitor. This can increase confid
 ## Website UI
 Set the alert or warning recovery threshold when creating a monitor under **Set alert conditions**:
 
-{{< img src="monitors/faq/recovery_threshold.gif" alt="Update this" responsive="true">}}
+{{< img src="monitors/faq/recovery_threshold.mp4" alt=" recovery threshold" video="true" responsive="true" >}}
 
 ## API
 When you [create/edit a monitor via the API][1], use the attributes `critical_recovery` and `warning_recovery` in the `options.thresholds` attribute of your JSON monitor:

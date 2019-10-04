@@ -24,6 +24,8 @@ Datadog recommends certain best practices for naming metrics and tags.
 
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). This is described as pseudo-hierarchical because a hierarchy is not actually enforced, but the structure is used to infer certain relationships (e.g. "I see hostA and hostB are reporting 'http.nginx.\*', those must be web frontends").
 
+**Note**: Metric names are case sensitive in Datadog.
+
 **Rules and best practices for naming tags**:
 
 * Tags must start with a letter.
@@ -35,4 +37,3 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
 
 {{< partial name="whats-next/whats-next.html" >}}
-

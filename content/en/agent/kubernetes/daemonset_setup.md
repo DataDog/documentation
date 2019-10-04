@@ -33,7 +33,14 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Create manifest
-Create the following `datadog-agent.yaml` manifest.  
+Create the following `datadog-agent.yaml` manifest.
+
+Remember to encode your API key using `base64`:
+
+```
+echo -n <DD_API_KEY> | base64
+```
+
 **Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
 
 ```yaml
@@ -51,11 +58,14 @@ Create the following `datadog-agent.yaml` manifest.
 # data:
 #   api-key: "<YOUR_BASE64_ENCODED_DATADOG_API_KEY>"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
   template:
     metadata:
       labels:
@@ -69,25 +79,31 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            # Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
+            ## Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to collect StatsD metrics from other containers.
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
-            # Trace Collection (APM) - uncomment this section to enable APM
+            ## Trace Collection (APM) - uncomment this section to enable APM
             # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
           - name: DD_API_KEY
-            # Kubernetes Secrets - uncomment this section to supply API Key with secrets
-#            valueFrom:
-#              secretKeyRef:
-#                name: datadog-secret
-#                key: api-key
+            ## Kubernetes Secrets - uncomment this section to supply API Key with secrets
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: datadog-secret
+            #     key: api-key
+
+          ## Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site
           - name: DD_SITE
-            # Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site 
             value: "datadoghq.com"
+
+          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
+          - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+            value: "false"
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: DD_LEADER_ELECTION
@@ -100,6 +116,7 @@ spec:
                 fieldPath: status.hostIP
           - name: DD_APM_ENABLED
             value: "true"
+        ## Note these are the minimum suggested values for requests and limits. The amount of resources required by the Agent varies depending on the number of checks, integrations, and features enabled.
         resources:
           requests:
             memory: "256Mi"
@@ -110,8 +127,11 @@ spec:
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
-          - name: logpath
+          - name: logpodpath
             mountPath: /var/log/pods
+          ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
           - name: procdir
             mountPath: /host/proc
             readOnly: true
@@ -133,7 +153,11 @@ spec:
           name: procdir
         - hostPath:
             path: /var/log/pods
-          name: logpath
+          name: logpodpath
+        ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: logcontainerpath
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
@@ -190,19 +214,25 @@ To enable [Log collection][10] with your DaemonSet:
             value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
+        - name: DD_AC_EXCLUDE
+            value: "name:datadog-agent"
     (...)
     ```
 
-2. Mount the Docker socket or `/var/log/pods`
+Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
-The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). 
+2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
+
+The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes).
 
 Use log file collection when:
 
 * Docker is not the runtime
-* More than 10 containers are used within each pod 
+* More than 10 containers are used within each pod
 
 The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
+
+Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to this directory.
 
 {{< tabs >}}
 {{% tab "K8s File" %}}
@@ -211,17 +241,24 @@ The Docker API is optimized to get logs from one container at a time. When there
       (...)
         volumeMounts:
           (...)
-          - name: logpath
+          - name: logpodpath
               mountPath: /var/log/pods
+          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
       (...)
       volumes:
         (...)
         - hostPath:
             path: /var/log/pods
-            name: logpath
+            name: logpodpath
+        # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: logcontainerpath
       (...)
     ```
-    
+
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
@@ -230,18 +267,25 @@ The Docker API is optimized to get logs from one container at a time. When there
         volumeMounts:
           (...)
           - name: dockersocket
-              mountPath: /var/run/docker.sock
+            mountPath: /var/run/docker.sock
       (...)
       volumes:
         (...)
         - hostPath:
             path: /var/run/docker.sock
-            name: dockersocket
+          name: dockersocket
       (...)
     ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+The Datadog Agent follows the below logic to know where logs should be picked up from:
+
+1. The Agent looks for the Docker socket, if available it collects logs from there.
+2. If Docker socket is not available, the Agent looks for `/var/log/pods` and if available collects logs from there.
+
+If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` can be used (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to force the Agent to go for the file collection mode.
 
 
 3. Mount the `pointdir` volume in *volumeMounts*:
@@ -251,19 +295,37 @@ The Docker API is optimized to get logs from one container at a time. When there
         volumeMounts:
           (...)
           - name: pointdir
-              mountPath: /opt/datadog-agent/run
+            mountPath: /opt/datadog-agent/run
       (...)
       volumes:
         (...)
         - hostPath:
             path: /opt/datadog-agent/run
-            name: pointdir
+          name: pointdir
       (...)
     ```
-    
+
 The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-Use [Autodiscovery with Pod Annotations][14] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
+Use [Autodiscovery with Pod Annotations][11] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
+
+#### Short lived containers
+
+{{< tabs >}}
+{{% tab "K8s File" %}}
+
+By default the Agent looks every 5 seconds for new containers.
+
+For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
+
+{{% /tab %}}
+{{% tab "Docker Socket" %}}
+
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
+Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### APM and Distributed Tracing
 
@@ -278,7 +340,7 @@ To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCA
 (...)
 ```
 
-Then, forward the port of the Agent to the host. 
+Then, forward the port of the Agent to the host.
 
 ```
 (...)
@@ -320,11 +382,11 @@ tracer.configure(
 )
 ```
 
-Refer to the [language-specific APM instrumentation docs][11] for more examples.
+Refer to the [language-specific APM instrumentation docs][12] for more examples.
 
 ### Process Collection
 
-See [Process collection for Kubernetes][12].
+See [Process collection for Kubernetes][13].
 
 ### DogStatsD
 
@@ -339,11 +401,11 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][13]
+Learn more about this in the [Kubernetes DogStatsD documentation][14]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
-**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.
 Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
 The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
@@ -358,10 +420,10 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/faq/kubernetes-secrets
 [7]: /agent/docker/#environment-variables
-[8]: /agent/autodiscovery
+[8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /tracing/setup
-[12]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[13]: /agent/kubernetes/dogstatsd
-[14]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[11]: /agent/autodiscovery/integrations/?tab=kubernetes
+[12]: /tracing/setup
+[13]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[14]: /agent/kubernetes/dogstatsd

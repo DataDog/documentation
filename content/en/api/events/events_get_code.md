@@ -5,9 +5,14 @@ order: 12.2
 external_redirect: /api/#get-an-event
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/events/<EVENT_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-events-get" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-events-get" >}}

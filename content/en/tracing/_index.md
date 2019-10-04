@@ -1,52 +1,52 @@
 ---
-title: APM and Distributed Tracing
+
+title: APM & Distributed Tracing
+
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
-- link: "https://learn.datadoghq.com/course/view.php?id=4"
+- link: "/tracing/advanced/connect_logs_and_traces/"
+  tag: "Documentation"
+  text: "Connect logs and traces"
+- link: "/tracing/advanced/adding_metadata_to_spans"
+  tag: "Documentation"
+  text: "Adding metadata to spans"
+- link: "/tracing/advanced/runtime_metrics"
+  tag: "Documentation"
+  text: "Runtime metrics"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=17"
   tag: "Learning Center"
   text: "Introduction to Application Performance Monitoring"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
+  - /tracing/guide/distributed_tracing/
 disable_toc: true
 ---
 
-Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
+{{< wistia 2kgmb9wbsr >}}
+</br>
+## What is Datadog APM?
 
-Datadog APM is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
+ Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the [traces][1] across a distributed system, and we can show you systematic data about precisely what is happening to this request.
 
-{{< whatsnext desc="Get started with Datadog APM:">}}
-    {{< nextlink href="/agent/apm" >}} 1 - Configure your Agent to collect your application Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/setup" >}}2 - Set up your application to send traces to your Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/tracing/advanced" >}}3 - Enrich your traces with advanced settings{{< /nextlink >}}
-    {{< nextlink href="/tracing/visualization" >}}4 - Visualize services, resources, and traces in Datadog {{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_search_and_analytics" >}}5 - Use Trace Search and Analytics{{< /nextlink >}}
+## Overview
+
+{{< whatsnext desc="This section includes the following topics:">}}
+    {{< nextlink href="/tracing/send_traces/" >}}<u>Enable trace collection</u>: Install and configure the latest Datadog Agent to start sending traces. See an overview of all the possible settings for APM, including setting up APM in containerized environments such as Docker or Kubernetes.{{< /nextlink >}}
+    {{< nextlink href="/tracing/setup/" >}}<u>Instrument your application</u>: Add a tracing library to your application.{{< /nextlink >}}
+    {{< nextlink href="/tracing/advanced/" >}}<u>Enrich Tracing</u>: Enrich tracing by automatically injecting a trace-id into your logs, adding metadata to your spans, and collecting Runtime metrics associated with your traces.{{< /nextlink >}}
+    {{< nextlink href="/tracing/visualization/" >}}<u>Use the APM UI</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics. {{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_search_and_analytics/" >}}<u>Trace Search & Analytics</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics.{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/" >}}<u>Guides</u>: Additional helpful articles about APM & Distributed Tracing.{{< /nextlink >}}
+    {{< nextlink href="/tracing/troubleshooting/?tab=java" >}}<u>Troubleshooting</u>: Solve common tracing issues.{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Terminology
-
-| Term          | Definition                                                          | Note                                                                                                                                             |
-| :----         | :-----                                                              | :---                                                                                                                                             |
-| [Service][1]  | Name of a set of processes that do the same job                     | Services are displayed on the [Datadog Services list][2] and have [out of the box performances graphs][3].                                       |
-| [Resource][4] | Particular action for a service                                     | Resources are available on the [Resources list for each service][5] and have [out of the box performances graphs][6]                             |
-| [Trace][7]    | Representation of a request as it flows across a distributed system | A trace can be collected in [any language][8]. Traces are found in the [Traces list for each resources][9] or in the [Trace search directly][10] |
-| [Span][11]    | A logical unit of work in the system                                | Spans are associated with a [service][1] and optionally a [resource][4]. Each span consists of a start time, a duration, and optional tags.      |
-
-
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/home
-[2]: /tracing/visualization/services_list
-[3]: /tracing/visualization/service/#out-of-the-box-graphs
-[4]: /tracing/visualization/resource
-[5]: /tracing/visualization/service/#resources
-[6]: /tracing/visualization/resource/#out-of-the-box-graphs
-[7]: /tracing/visualization/trace
-[8]: /tracing/setup
-[9]: /tracing/visualization/resource/#traces
-[10]: /tracing/trace_search_and_analytics/search
-[11]: /tracing/visualization/trace/#spans
+
+
+
+[1]: /tracing/visualization/#trace

@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/goexpvar
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - languages
   - log collection
@@ -39,14 +43,14 @@ Si vous préférez instrumenter votre Go en utilisant seulement [dogstats-go][2]
 ## Implémentation
 ### Installation
 
-Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][3] sur toutes les instances sur lesquelles vous exécutez les services Go dont vous voulez recueillir les métriques.
+Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][3] sur toutes les instances sur lesquelles vous exécutez des services Go pour recueillir des métriques.
 
 ### Configuration
 #### Préparer votre service Go
 
-Si votre service Go n'utilise pas déjà le [paquet Expvar][4], vous devez l'importer (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (p. ex., si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le paquet à l'aide d'un identifiant vide (`import _ "expvar"`).
+Si votre service Go n'utilise pas déjà le [paquet Expvar][4], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (p. ex., si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le paquet à l'aide d'un identifiant vide (`import _ "expvar"`).
 
-Si votre service n'écoute pas déjà les requêtes HTTP (via le paquet http), [configurez une écoute][5] locale, uniquement pour l'Agent Datadog.
+Si votre service n'écoute pas déjà les requêtes HTTP (avec le paquet http), [configurez une écoute][5] locale, uniquement pour l'Agent Datadog.
 
 #### Connecter l'Agent
 
@@ -70,13 +74,16 @@ Si votre service n'écoute pas déjà les requêtes HTTP (via le paquet http), [
                 #  - "tag_name1:tag_value1"
     ```
 
-    Si vous ne configurez pas de liste `metrics`, l'Agent continuera à recueillir les métriques memstat. Utilisez `metrics` pour indiquer à l'Agent les variables expvar qui doivent être recueillies.
+    Si vous ne configurez pas de liste `metrics`, l'Agent continue de recueillir les métriques memstat. Utilisez `metrics` pour indiquer à l'Agent les variables expvar qui doivent être recueillies.
 
 2. [Redémarrez l'Agent][8] pour commencer à envoyer vos métriques memstat et expvar à Datadog.
 
+#### Collecte de métriques
+L'intégration Go Expar peut potentiellement générer des [métriques custom][13], qui peuvent avoir une incidence sur votre [facturation][14]. Par défaut, une limite de 350 métriques s'applique. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][11].
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][9] et cherchez `go_expvar` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][9] et cherchez `go_expvar` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -109,6 +116,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [10]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
 [12]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
+[13]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[14]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 
 
 {{< get-dependencies >}}

@@ -8,7 +8,8 @@ external_redirect: /api/#post-an-event
 ## Post an event
 This endpoint allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`title`** [*required*]:
     The event title. *Limited to 100 characters.*
     Use `msg_title` with [the Datadog Ruby library][1].
@@ -33,6 +34,10 @@ This endpoint allows you to post events to the stream. Tag them, set priority an
     The type of event being posted.
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...
     [Complete list of source attribute values][3]
+* **`related_event_id`** [*optional*, *default*=**None**]:
+    ID of the parent event. Must be sent as an integer (i.e. no quotes).
+* **`device_name`** [*optional*, *default*=**None**]:
+    A list of device names to post the event with.
 
 [1]: https://github.com/DataDog/dogapi-rb
 [2]: /graphing/event_stream/#markdown-events

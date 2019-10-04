@@ -5,13 +5,14 @@ order: 29.7
 external_redirect: /api/#get-tests
 ---
 
-##### Signature
-`GET /api/v1/synthetics/tests`
+**SIGNATURE**:
 
-##### Example Request
+`GET /v1/synthetics/tests`
+
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_tests" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_tests" >}}

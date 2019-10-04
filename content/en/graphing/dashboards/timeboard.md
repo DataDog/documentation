@@ -13,27 +13,32 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-## Change Timeboard name
+Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
-1. Click on the info icon on the top right corner of the Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" style="width:75%;">}}
-2. Click on the pencil icon to edit the title and description
-3. Click the checkmark to save changes
+## Event correlation
 
-## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph. You can set up correlation at two different times: when you set up the dashboard, or ad-hoc when you view the dashboard.
+
+### Individual graphs
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
 Set up event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. You can find details about adding events [using the UI][1] or via the JSON interface further down the page.
 
-## Event Correlation at View Time
+### Entire dashboard
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/event-search.png" alt="guides event correlation" responsive="true" style="width:75%;">}}
 
-Set up event correlation at view time by adding a query in the search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
+Set up event correlation at view time by clicking the *Search Events or Logs* link in the upper left, then select **Events**. Next, type a query in the search box. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard as an overlay. 
 
-## Correlation between Logs and Metrics
+## Correlation between logs and metrics
+
+### Search for logs in timeboards
+
+Click on the *Search Events or Logs* link in the upper left, then select **Logs**. Next, type a query in the search box. This overlays the frequency of logs on your timeseries widgets. Click on an individual log line to view its full content.
+
+{{< img src="graphing/dashboards/log-search.png" alt="Open Search Logs" responsive="true" style="width:75%;">}}
+ 
 
 ### Jump from a metric to its logs
 
@@ -43,7 +48,7 @@ Fast and easy correlation is key when troubleshooting an issue. Use the followin
 
 Select `View related logs` to jump to the Log Explorer page zoomed on the selected timeframe with the current context of your graph.
 
-### How do we define the search query ?
+### How do we define the search query?
 
 To define the most related logs, the following parameters are used:
 

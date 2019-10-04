@@ -1,0 +1,238 @@
+{
+  "beta_sentence": {
+    "other": "　ベータ - 問題についてのお問い合わせまたは報告は"
+  },
+
+  "additional_sentence": {
+    "other": "お役に立つドキュメント、リンクや記事"
+  },
+
+  "apiaccount_sentence1": {
+    "other": "Make sure you replace the API and/or APP key below"
+  },
+
+  "apiaccount_sentence2": {
+    "other": "with the ones for your account"
+  },
+
+  "install_agent_sentence": {
+    "other": "データを収集するためにエージェントをインストールし、設定"
+  },
+
+  "integrations_sentence": {
+    "other": "すべてのシステム、アプリケーション、そしてサービスからデータを収集"
+  },
+
+  "graphing_sentence": {
+    "other": "データを可視化して<br> インサイトを得る"
+  },
+
+  "alerting_sentence": {
+    "other": " <br> モニターと通知の作成と管理"
+  },
+
+  "apm_sentence": {
+    "other": " <br> パフォーマンス向上のためにコードを操作する"
+  },
+
+  "developer_tools_sentence": {
+    "other": "カスタムメトリクスを収集し <br> &amp; インテグレーションを作成"
+  },
+
+  "help_sentence": {
+    "other": "知識豊富なエンジニアがサポートします。"
+  },
+
+  "email_support_sentence": {
+    "other": "サポートチームへのお問い合わせは support@datadoghq.com まで"
+  },
+
+  "live_chat_support_sentence": {
+    "other": "ライブチャットサポートチームへのチャット（英語のみ）でのお問い合わせは、当社営業日 10 時～ 19 時 (東部標準時) に受け付けています。アプリ内チャットまたは<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>からご利用いただけます。"
+  },
+
+  "event_stream_support_sentence": {
+    "other": " <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a> のメッセージに @support-datadog を含めると、サポートチームにも送信されます。グラフのスナップショットを参照する場合に便利な方法です。\n"
+  },
+
+  "agent_started_sentence": {
+    "other": "Agentをインストールして開始するために、プラットフォームを選択してください。"
+  },
+
+  "choose_a_platform": {
+    "other": "Aプラットフォームを選択"
+  },
+
+  "get_started_datadog": {
+    "other": "Datadogを開始"
+  },
+
+  "all": {
+    "other": "すべて"
+  },
+
+  "free_trial": {
+    "other": "無償トライアル"
+  },
+
+  "agent_check": {
+    "other": "Agentチェック"
+  },
+
+  "statsd_check": {
+    "other": "StatsD チェック"
+  },
+
+  "crawler": {
+    "other": "クローラー"
+  },
+
+  "library_check": {
+    "other": "ライブラリ"
+  },
+
+  "terms": {
+    "other": "用語"
+  },
+
+  "privacy": {
+    "other": "プライバシー"
+  },
+
+  "cookies": {
+    "other": "クッキー"
+  },
+
+  "toc": {
+    "other": "目次"
+  },
+
+  "get_started_free": {
+    "other": "無償トライアルを開始"
+  },
+
+  "get_started_free_short": {
+    "other": "開始"
+  },
+
+  "documentation_search": {
+    "other": "ドキュメンテーションサーチ"
+  },
+
+  "guides": {
+    "one": "ガイド",
+    "other": "ガイド"
+  },
+
+  "tags": {
+    "one": "タグ",
+    "other": "タグ"
+  },
+
+  "language": {
+    "one": "言語",
+    "other": "言語"
+  },
+
+  "library": {
+    "one":  "ライブラリ",
+    "other": "ライブラリ"
+  },
+
+  "official": {
+    "other": "オフィシャル"
+  },
+
+  "api": {
+    "other": "API"
+  },
+
+  "docs": {
+    "other": "Docs"
+  },
+
+  "home": {
+    "other": "Home"
+  },
+
+  "datadog_docs": {
+    "other": "Datadog 文書"
+  },
+
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+
+  "author": {
+    "other": "Author"
+  },
+
+  "notes": {
+    "other": "Notes"
+  },
+
+  "agent": {
+    "other": "Agent"
+  },
+
+  "integrations": {
+    "one": "integration",
+    "other": "integrations"
+  },
+
+  "graphing": {
+    "other": "グラフ"
+  },
+
+  "alerting": {
+    "other": "アラート"
+  },
+
+  "apm_tracing": {
+    "other": "APM（トレース）"
+  },
+
+  "developer_tools": {
+    "other": "開発ツール"
+  },
+
+  "contact_us": {
+    "other": "お問い合わせ"
+  },
+
+  "status_page": {
+    "other": "Status Page"
+  },
+
+  "ops_twitter": {
+    "other": "Ops Twitter"
+  },
+
+  "email": {
+    "other": "Email"
+  },
+
+  "live_chat": {
+    "other": "ライブチャット"
+  },
+
+  "event_stream_messaging": {
+    "other": "イベントストリームのメッセージ"
+  },
+
+  "questions": {
+    "other": "ご質問は"
+  },
+
+  "search": {
+    "other": "検索"
+  },
+
+  "type": {
+    "other": "種類"
+  }
+}

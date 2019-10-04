@@ -3,40 +3,40 @@
         "agent_version": "5.6.0",
         "check": "openstack.neutron.api.up",
         "statuses": ["ok", "critical", "unknown"],
-        "name": "Est UP",
+        "name": "Disponibilité de l'API Neutron OpenStack",
         "groups": ["host", "keystone_server"],
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas interroger l'API Neutron,` UNKNOWN 's'il y a un problème avec l'API Keystone. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Neutron, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas."
     },
     {
         "agent_version": "5.6.0",
         "check": "openstack.nova.api.up",
         "statuses": ["ok", "critical", "unknown"],
-        "name": "Est UP",
+        "name": "Disponibilité de l'API Nova OpenStack",
         "groups": ["host", "keystone_server"],
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas interroger l'API Nova,` UNKNOWN` s'il y a un problème avec l'API Keystone. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Nova, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas."
     },
     {
         "agent_version": "5.6.0",
         "check": "openstack.keystone.api.up",
         "statuses": ["ok", "critical"],
-        "name": "Est UP",
-        "groups": ["host", "server"],
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas interroger l'API Keystone. Renvoie `OK` sinon."
+        "name": "Disponibilité de l'API Keystone OpenStack",
+        "groups": ["host", "keystone_server"],
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Keystone. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
         "check": "openstack.nova.hypervisor.up",
         "statuses": ["ok", "critical", "unknown"],
-        "name": "Est UP",
+        "name": "Disponibilité de l'hyperviseur Nova OpenStack",
         "groups": ["host", "hypervisor", "hypervisor_id", "virt_type"],
-        "description": "Renvoie `UNKNOWN` si l'agent est incapable d'obtenir l'état de l'hyperviseur, `CRITICAL` si l'hyperviseur est hors service. Renvoie `OK` sinon."
+        "description": "Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état de l'hyperviseur, renvoie `CRITICAL` si l'hyperviseur est indisponible ou renvoie `OK` pour les autres cas."
     },
     {
         "agent_version": "5.6.0",
         "check": "openstack.neutron.network.up",
         "statuses": ["ok", "critical", "unknown"],
-        "name": "Est UP",
+        "name": "Disponibilité du réseau Neutron OpenStack",
         "groups": ["host", "network", "network_name", "tenant_id"],
-        "description": "Renvoie `UNKNOWN` si l'agent ne peut pas obtenir l'état du réseau, `CRITICAL` si le réseau est mort. Renvoie `OK` sinon."
+        "description": "Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état du réseau, renvoie `CRITICAL` si le réseau est indisponible ou renvoie `OK` pour les autres cas."
     }
 ]

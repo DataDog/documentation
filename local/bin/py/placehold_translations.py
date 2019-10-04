@@ -22,13 +22,29 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
+def get_disclaimer_from_params(config_location, key):
+    try:
+        with open(os.path.dirname(config_location) + f'/params.{key}.yaml') as f:
+            c_yaml = yaml.load(f.read())
+            return c_yaml.get('disclaimer', '') or ''
+    except:
+        print("\x1b[31mERROR\x1b[0m: Error getting disclaimer")
+
+
 def get_languages(config_location):
     with open(config_location) as config:
         c = config.read()
         c_yaml = yaml.load(c)
         d = {}
-        for l in c_yaml["languages"]:
-            d.update({l: c_yaml["languages"][l]})
+        if 'en' in c_yaml:
+            # this is languages.yaml
+            d = c_yaml
+            for key, data in d.items():
+              data['disclaimer'] = get_disclaimer_from_params(config_location, key)
+        else:
+            # this is config.yaml
+            for l in c_yaml["languages"]:
+                d.update({l: c_yaml["languages"][l]})
         return d
 
 
@@ -78,7 +94,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         new_dest = "{content_path}{sub_path}{template}".format(content_path=content_path, sub_path=sub_path, template=ntpath.basename(template))
     else:
         new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
-    
+
     with open(template) as o_file:
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
@@ -96,7 +112,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
                 new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
             new_yml['aliases'] = new_aliases
         if new_glob["disclaimer"]:
-            disclaimer = "<div class='alert alert-info'><strong>NOTICE:</strong>%s</div>\n\n" % new_glob["disclaimer"]
+            disclaimer = "<div class='alert alert-info'>%s</div>\n\n" % new_glob["disclaimer"]
             new_content = disclaimer + content
             new_yml['placeholder'] = True
 
@@ -135,7 +151,7 @@ def main():
             files_location = files_location if files_location.endswith('/') else files_location + '/'
         lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"])
         diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])
-        print("building {0} placeholder pages for {1} ".format(len(diff), l))
+        print("\x1b[32mINFO\x1b[0m: building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
             create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
 

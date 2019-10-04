@@ -1,7 +1,7 @@
 ---
 title: Generate External IDs
 type: apicontent
-order: 15.5
+order: 15.06
 external_redirect: /api/#generate-external-ids
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#generate-external-ids
 
 Generate a new AWS external id for a given AWS account id and role name pair.
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`account_id`** [*required*]:

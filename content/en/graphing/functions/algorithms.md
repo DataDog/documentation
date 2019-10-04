@@ -35,7 +35,7 @@ The `outliers()` function has three parameters:
 * `TOLERANCE`: The tolerance of the outliers algorithm.
 * `PERCENTAGE`: The percentage of outlying points required to mark a series as an outlier (available only for MAD and scaledMAD algorithms)
 
-{{< img src="graphing/functions/algorithms/outlier.gif" alt="outlier detection" responsive="true" style="width:70%;">}}
+{{< img src="graphing/functions/algorithms/outlier.mp4" alt="outlier detection" video="true" responsive="true" width="70%" >}}
 
 See the [Outlier Monitor][2] page for more info.
 
@@ -52,7 +52,7 @@ The `forecast()` function has two parameters:
 
 A number of the graphing options disappear, as forecasts have a unique visualization. After successfully adding **Forecast**, your editor should show something like this:
 
-{{< img src="monitors/monitor_types/forecasts/query_editor.png" alt="query editor" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/algorithms/forecast_query.png" alt="query editor" responsive="true" style="width:80%;">}}
 
 ## Other functions
 

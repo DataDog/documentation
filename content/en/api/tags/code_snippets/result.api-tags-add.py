@@ -1,7 +1,9 @@
 {
-    'host': 'hostname',
-    'tags': [
-        'role:webserver',
-        'env:production'
-    ]
+  'Datadog': [
+    'host:dev-test',
+    'environment:test'
+  ],
+  'Users': [
+    'role:database'
+  ]
 }

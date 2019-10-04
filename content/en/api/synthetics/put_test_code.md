@@ -5,13 +5,14 @@ order: 29.3
 external_redirect: /api/#edit-test
 ---
 
-##### Signature
-`PUT /api/v1/synthetics/tests/${test_id}`
+**SIGNATURE**:
 
-##### Example Request
+`PUT /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>`
+
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="put_test" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.put_test" >}}

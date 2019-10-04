@@ -1,4 +1,5 @@
-{"users": [
+{
+  "users": [
     {
       "handle": "test@datadoghq.com",
       "name": "test user",
@@ -7,7 +8,8 @@
       "disabled": false,
       "role": null,
       "is_admin": false,
-      "email": "test@datadoghq.com"
+      "email": "test@datadoghq.com",
+      "icon": "https://www.gravatar.com/avatar/00000000000000000000000000000000"
     },
     {
       "handle": "test2@datadoghq.com",
@@ -17,5 +19,8 @@
       "disabled": false,
       "role": null,
       "is_admin": false,
-      "email": "test+1@datadoghq.com"
-}]}
+      "email": "test+1@datadoghq.com",
+      "icon": "https://www.gravatar.com/avatar/00000000000000000000000000000000"
+    }
+  ]
+}

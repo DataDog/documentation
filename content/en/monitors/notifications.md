@@ -31,12 +31,10 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
    what is going on.
 
 2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
-  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
+  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's **@-notification** syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
-
-***Note:*** *To avoid notification storms, Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
 
 ## Variables
 
@@ -44,7 +42,7 @@ Use variables to customize your monitor notifications, the available variables a
 
 | Variable                | Description                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
 | `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
 | `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
 | `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
@@ -97,34 +95,34 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 ## Conditional variables
 
-Conditional variables allow for different text to be [sent to different contacts](#toto) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+Conditional variables allow for different text to be [sent to different contacts](#notification) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
-Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and @ mentions in between.
+Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
 
 The conditional variables available are:
 
-| Conditional Variable       | Description                                               |
-|----------------------------|-----------------------------------------------------------|
-| `{{#is_alert}}`            | Show when monitor alerts                                  |
-| `{{^is_alert}}`            | Show unless monitor alerts                                |
-| `{{#is_match}}`            | Show when the context matches a string                    |
-| `{{^is_match}}`            | Show unless the context matches a string                  |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly            |
-| `{{^is_exact_match}}`      | Show unless the context matches a string exactly          |
-| `{{#is_no_data}}`          | Show when monitor notifies on missing data                |
-| `{{^is_no_data}}`          | Show unless monitor notifies on missing data              |
-| `{{#is_warning}}`          | Show when monitor warns                                   |
-| `{{^is_warning}}`          | Show unless monitor warns                                 |
-| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT   |
-| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK           |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK         |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK            |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK          |
-| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning       |
-| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning     |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data                 |
-| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data               |
+| Conditional Variable       | Description                                                         |
+|----------------------------|---------------------------------------------------------------------|
+| `{{#is_alert}}`            | Show when monitor alerts                                            |
+| `{{^is_alert}}`            | Show unless monitor alerts                                          |
+| `{{#is_match}}`            | Show when the context matches a string                              |
+| `{{^is_match}}`            | Show unless the context matches a string                            |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly                      |
+| `{{^is_exact_match}}`      | Show unless the context matches a string exactly                    |
+| `{{#is_no_data}}`          | Show when monitor notifies on missing data                          |
+| `{{^is_no_data}}`          | Show unless monitor notifies on missing data                        |
+| `{{#is_warning}}`          | Show when monitor warns                                             |
+| `{{^is_warning}}`          | Show unless monitor warns                                           |
+| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING, ALERT, or NO DATA   |
+| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING, ALERT, or NO DATA |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a WARNING to OK                     |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a WARNING to OK                   |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an ALERT to OK                      |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an ALERT to OK                    |
+| `{{#is_alert_to_warning}}` | Show when monitor transitions from ALERT to WARNING                 |
+| `{{^is_alert_to_warning}}` | Show unless monitor transitions from ALERT to WARNING               |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from NO DATA                             |
+| `{{^is_no_data_recovery}}` | Show unless monitor recovers from NO DATA                           |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.
@@ -259,7 +257,9 @@ Send the monitor notification to the appropriate endpoint:
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
 * Install the Slack integration to send your notifications directly in the appropriate channel.
 
-**Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+**Notes**:
+* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
 
 ### Integrations
 
@@ -268,20 +268,21 @@ Send the monitor notification to the appropriate endpoint:
 
 After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
-**@-mentions in Slack from monitor alert**:
+#### @-mentions in Slack from monitor alert
 
-Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
+
 For example this configuration:
-
 {{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Would produce this slack message:
-
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
+
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][1]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
 
 ```
 <!subteam^12345|testers>
@@ -290,7 +291,7 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
 e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
-**Using message template variables to dynamically create @-mentions**:
+### Using message template variables to dynamically create @-mentions
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.
 
@@ -300,8 +301,13 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
+Or create an **@-mention** that goes directly to a specific email:
 
-[1]: https://api.slack.com/methods/usergroups.list
+* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
+
+
+[1]: http://slack.com/account/settings
+[2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
 {{% tab "PagerDuty" %}}
 
@@ -320,7 +326,7 @@ After setting up the [Webhooks integration][1], type `@webhook` in your notifica
 
 ## Test monitor notifications
 
-**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 

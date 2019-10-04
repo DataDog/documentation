@@ -3,7 +3,7 @@ title: Metrics Summary
 kind: documentation
 description: "Consult the full list of metrics reporting to Datadog."
 aliases:
-  - graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
+  - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
 further_reading:
   - link: "graphing/metrics/explorer"
     tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of all the [metrics][2] reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Clicking on a metric brings up a panel with more detailed information.
 
-{{< img src="graphing/metrics/summary/summary.gif" alt="Summary" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/summary/summary.mp4" alt="Summary" video="true" responsive="true" width="80%" >}}
 
 ## Metric panel
 
@@ -25,35 +25,38 @@ The metric panel displays an overview for a given metric:
 
 Key information about your metric can be seen:
 
-* **Metric name**: The name of your metric to be used in the [metric explorer][3] or in [dashboard widgets][4].
-* **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending of its associated tags, Consult the [custom metrics documentation][5] to learn more.
-* **Number of host**: The total number of hosts reporting this metric.
-* **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [how to assign tags][7].
+* **Metric name**: The name of your metric in the [metric explorer][3], [dashboard widgets][4], etc.
+* **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending on its associated tags. Consult the [custom metrics documentation][5] to learn more.
+* **Number of hosts**: The total number of hosts reporting this metric.
+* **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [assigning tags][7].
 * **Metrics metadata**: All metadata attached to your metric:
-    * the metric description 
-    * the [metric unit][8]
-    * the [metric type][9] 
-    * the integration name, if this metric is coming from an [integration][10]
-    * the interval of collection of this metric.
+    * Metric description
+    * [Metric unit][8]
+    * [Metric type][9]
+    * The integration name, if this metric is coming from an [integration][10]
+    * The interval of collection of this metric
 
-### Metric metadata 
+### Metric metadata
 
-Every piece of metric metadata can be manually edited: 
+Every piece of metric metadata can be manually edited:
 
-* Edit the metric description to help understand what a metric does.
+#### Edit the metric description
 
-    If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation GitHub repository][11] for a fix.
+Editing the metric description can help you understand what a metric does.
+If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation GitHub repository][11].
 
-* Edit the metric unit or add a custom unit for a custom metrics.
+#### Edit the metric unit or add a custom unit
 
-    When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which shows up when hovering over a certain metric in your graph. Do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
+When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which shows up when hovering over a certain metric in your graph. Do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
 
-    {{< img src="graphing/metrics/summary/metrics_metadata.gif" alt="Metrics Metadata" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/summary/metrics_metadata.mp4" alt="Metrics Metadata" video="true" responsive="true" width="80%" >}}
 
-    Note: This does not change the way that a metric graph is displayed (only the units of measurement when hovering over a metric)
+**Note**: This does not change how a metric graph is displayed (only the units of measurement that raw values are considered as when hovering over a metric). Formatting is automatically applied for readability, for example bytes (`B`) may be displayed as kibibytes (`KiB`).
 
-* Edit the metric type to match the real metric type send. 
-    Warning: this changes your metric behavior in **ALL** your analytics and monitors; do this at your own risk.
+#### Edit the metric type
+
+Editing the metric type can help you match the real metric type send.
+**Warning**: This changes your metric behavior in **ALL** your analytics and monitors; do this at your own risk.
 
 ## Further reading
 

@@ -176,4 +176,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /tracing/trace_search_and_analytics/#automatic-configuration
-[3]: /agent/apm/#environment
+[3]: /tracing/send_traces

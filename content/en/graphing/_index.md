@@ -13,124 +13,24 @@ further_reading:
   text: "Building Better Dashboards"
 ---
 
-Graphs are the window to your monitored systems. You see graphs throughout Datadog, in email notifications, Slack, and other chat clients. Graphs are at the center of monitoring and observability, so it is essential to understand how to define graphs.
+Graphs are the window to your monitored systems. You see graphs throughout Datadog, in email notifications, Slack, and other integrations. You can define graphs for monitoring your infrastructure using metrics, monitors, dashboards, and notebooks.
 
-## The graphing editor
+## Overview
 
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, see [Graphing Primer using JSON][1].
-
-On each graph, a pencil icon opens the graph editor:
-
-{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" style="width:75%;" >}}
-
-The graphing editor has the following tabs:
-
-* **Share**: Embed the graph on any external web page.
-* **JSON**: The more flexible editor which requires knowledge of the graph definition language.
-* **Edit**: The default, GUI tab for graphing options.
-
-When you first open the graph editor, you are on the **Edit** tab. Here you can use the UI to choose most settings. Here is an example:
-
-{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
-
-Configuring a graph is a multi-step process:
-
-1. [Choose the metric to graph](#choose-the-metric-to-graph)
-2. [Select the visualization](#select-your-visualization)
-3. [Filter](#filter)
-4. [Aggregate and Rollup](#aggregate-and-rollup)
-5. [Apply additional functions](#advanced-graphing)
-6. [Title the graph](#create-a-title)
-
-## Choose the metric to graph
-
-When you create a graph, you probably have a metric in mind that you want to show. You can select that in the first dropdown under step #2, **Graph your data**. If you don't know which metric to use, you might want to start with the [Metrics Explorer][2] or a [Notebook][3]. You can also see a list of metrics in the [Metrics Summary][4].
-
-The Metrics Explorer allows you to play around with different graph settings in a more ad-hoc way. The Metrics Summary shows the type and default unit for a metric.
-
-## Select your visualization
-
-Once you have a metric in mind to display in your graph, select your visualization. Check the [list of all visualizations (widgets)][5].
-
-## Filter
-
-Once the metric and a visualization are in place, you can filter the hosts to be graphed. To the right of the metric is the **from** dropdown which defaults to *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Tagging documentation][6].
-
-## Aggregate and rollup
-### Aggregation method
-
-Next to the filter dropdown is the aggregation method. This defaults to **avg by** but can be changed to **max by**, **min by**, or **sum by**. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line. So if you are graphing a metric that is from 100 hosts, **sum by** adds up all of those values and displays the sum.
-
-### Aggregation groups
-
-After the aggregation method, determine what constitutes a line or grouping in a graph. If you choose host, then you have a line (on line graphs) for every host. If you choose role, then there is a line for every role. That line is made up of metrics from all the hosts in that role, aggregated using the method you chose above.
-
-### Rollup to aggregate over time
-
-Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time.
-
-In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data for more control over the graph.
-
-To use the rollup function, click the plus sign to the right of the aggregation group and choose `rollup` from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
-
-To create a single line that represents the total available disk space on average across all machines rolled up in 60-second buckets, you would use a query like this:
-
-{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" style="width:90%;">}}
-
-When switching to the JSON view, the query looks like this:
-
-```
-"q": "avg:system.disk.free{*}.rollup(avg, 60)"
-```
-
-For more about using the JSON view, see [Graphing Primer using JSON][1].
-
-## Advanced graphing
-
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. See the [list of available functions][7].
-
-The Datadog UI also supports the ability to graph your metrics with various arithmetic operations. Use: `+`, `-`, `/`, `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
-
-### Metric arithmetic using an Integer
-
-Modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`.
-
-{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" style="width:75%;" >}}
-
-### Arithmetic between two metrics
-
-To visualize the percentage of a metric by dividing one metric over another. For example:
-
-`jvm.heap_memory / jvm.heap_memory_max`
-
-This can be done in the same manner as above, utilizing the **Advanced...** option in the Graph Editor. From there, select **Add Query**. Each query is assigned a letter: the first metric is represented by **a**, the second metric is represented **b**, and so on.
-
-Then in the `Formula` box, enter the arithmetic for this example `a / b`:
-
-{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" style="width:75%;" >}}
-
-To display only your formula, un-check your metrics **a** and **b**:
-
-{{< img src="graphing/index/arithmetic_3_bis.png" alt="Arithmetic 3 bis" responsive="true" style="width:75%;" >}}
-
-**Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
-
-## Create a title
-
-If you don't enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that aptly describes the purpose of the graph. 
-
-## Save
-
-Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
+{{< whatsnext desc="This section includes the following topics:" >}}
+    {{< nextlink href="/graphing/using_graphs/" >}}<u>Using graphs</u>: Whether using metrics, monitors, dashboards, or notebooks, all graphs have basic functionality in common - start here for best practices in setting up graphs.{{< /nextlink >}}
+    {{< nextlink href="/graphing/dashboards" >}}<u>Dashboards</u>: A dashboard is Datadog's tool that visually tracks, analyzes, and displays key performance metrics to monitor the health of your infrastructure. Learn more about using dashboards (screenboards and timeboards), template variables, and sharing your graphs with internal or external team members.{{< /nextlink >}}
+    {{< nextlink href="/graphing/metrics/" >}}<u>Metrics</u>: When you connect an integration to Datadog, the integration sends metrics about your system back to Datadog. Once Datadog receives these metrics, you can build graphs to explore the data.{{< /nextlink >}}
+    {{< nextlink href="/graphing/correlations/" >}}<u>Metric Correlations</u>: Correlations search for other metrics that exhibit irregular behavior around a selected metric.{{< /nextlink >}}
+    {{< nextlink href="/graphing/notebooks" >}}<u>Notebooks</u>: Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data.{{< /nextlink >}}
+    {{< nextlink href="/graphing/event_stream/" >}}<u>Event Stream</u>: The event stream is a display of the most recent events generated by your infrastructure and the associated monitors.{{< /nextlink >}}
+    {{< nextlink href="/graphing/infrastructure/" >}}<u>Infrastructure</u>: The Infrastructure list page shows all hosts monitored by Datadog, including Host and Container Maps, Process Monitoring, and Serverless.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/" >}}<u>From the query to the graph</u>: This sections goes through several topics to give you advanced graphing functions: Algorithms, Arithmetic, Count, Interpolation, Rank, Rate, Regression, Rollup, Smoothing, and Timeshift.{{< /nextlink >}}
+    {{< nextlink href="/graphing/graphing_json/" >}}<u>Graphing with JSON</u>: Use the Datadog API to create your graphs.{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/" >}}<u>Widgets</u>: Find all of the types of visualizations you can create with Datadog.{{< /nextlink >}}
+    {{< nextlink href="/graphing/guide/" >}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using graphs.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /graphing/graphing_json
-[2]: https://app.datadoghq.com/metric/explorer
-[3]: https://app.datadoghq.com/notebook/list
-[4]: https://app.datadoghq.com/metric/summary
-[5]: /graphing/widgets
-[6]: /tagging
-[7]: /graphing/functions/#apply-functions-optional

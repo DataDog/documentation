@@ -14,13 +14,13 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-{{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" responsive="true" >}}
 
 ## Overview
 
-The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before they are [indexed][2] by Datadog, hence: 
+The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before they are [indexed][2] by Datadog, hence:
 
-1. All logs ingested by Datadog are displayed. ([It's logging without limits][2].)
+1. All logs ingested by Datadog are displayed. ([It's Logging without Limits][2]*)
 2. Displayed logs have been processed.
 3. The stream can be paused.
 4. You can't go back in time.
@@ -41,7 +41,7 @@ Use the [Live Tail search bar filtering features](#filtering-the-log-stream) to 
 
 ### Display Options
 
-Customize the Live Tail view to better highlight the relevant information in your logs. 
+Customize the Live Tail view to better highlight the relevant information in your logs.
 Click on the gear at the top right of the page to activate one of the options below:
 
 {{< img src="logs/live_tail/live_tail_column.png" alt="Live tail column" responsive="true" style="width:30%;">}}
@@ -54,7 +54,7 @@ Click on the gear at the top right of the page to activate one of the options be
 
 ## Filtering the log Stream
 
-A valid query in the search bar displays logs that match your search criteria. 
+A valid query in the search bar displays logs that match your search criteria.
 The search syntax is the same in the Live Tail views as in the other Log views, but here, your query is matched against all of the ingested logs and not just the indexed ones.
 
 ### JSON attributes
@@ -65,7 +65,7 @@ For example, to filter on the following `filename` attribute there are two optio
 
 {{< img src="logs/live_tail/live_tail_save.png" alt="Live tail save" responsive="true" style="width:50%;">}}
 
-1. Click on the attribute and add it to the search: 
+1. Click on the attribute and add it to the search:
 
     {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute" responsive="true" style="width:50%;">}}
 
@@ -78,6 +78,8 @@ To filter on all logs with a line number above 150 use the following query: `@li
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/processing/pipelines
-[2]: /logs/logging_without_limits
+[2]: /logs

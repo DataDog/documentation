@@ -58,7 +58,7 @@ L'intégration Capistrano n'inclut aucune métrique.
 
 ### Événements
 
-L'intégration Capistrano n’inclut aucun événement.
+L'intégration Capistrano n'inclut aucun événement.
 
 ### Checks de service
 L'intégration Capistrano n'inclut aucun check de service.

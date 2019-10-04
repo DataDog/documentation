@@ -1,7 +1,7 @@
 ---
 title: List all AWS integrations
 type: apicontent
-order: 15.1
+order: 15.01
 external_redirect: /api/#list-all-aws-integrations
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#list-all-aws-integrations
 
 List all Datadog-AWS integrations available in your Datadog organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

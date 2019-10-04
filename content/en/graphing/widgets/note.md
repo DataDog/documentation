@@ -1,5 +1,5 @@
 ---
-title: Note Widget
+title: Notes and Links Widget
 kind: documentation
 description: "Display text in your Screenboards."
 further_reading:
@@ -15,13 +15,11 @@ further_reading:
 ---
 
 
-The note widget is similar to [free text widget][1], but allows for more formatting options:
-
-{{< img src="graphing/widgets/note/note.png" alt="note widget" responsive="true" >}}
+The notes and links widget is similar to [free text widget][1], but allows for more formatting options:
 
 ## Setup
 
-{{< img src="graphing/widgets/note/note_setup.png" alt="Note widget setup" responsive="true"  style="width:80%;">}}
+{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup" responsive="true"  style="width:80%;">}}
 
 1. Enter the text you want to display. Note that Markdown is supported.
 2. Choose the text size and the note background color.

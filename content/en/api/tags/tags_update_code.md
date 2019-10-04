@@ -5,9 +5,14 @@ order: 30.4
 external_redirect: /api/#update-host-tags
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/tags/hosts/<HOSTNAME>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-tags-update" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-tags-update" >}}

@@ -111,6 +111,10 @@
     "other": "COMMENCER GRATUITEMENT"
   },
 
+  "get_started_free_short": {
+    "other": "COMMENCER"
+  },
+
   "documentation_search": {
     "other": "Recherche dans la documentation"
   },
@@ -144,7 +148,7 @@
   },
 
   "docs": {
-    "other": "Documentation"
+    "other": "Docs"
   },
 
   "home": {
@@ -226,5 +230,9 @@
 
   "search": {
     "other": "Recherche"
+  },
+
+  "type": {
+    "other": "Type"
   }
 }

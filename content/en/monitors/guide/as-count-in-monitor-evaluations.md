@@ -76,6 +76,8 @@ sum(last_5m):total
 
 In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. Aggregation methods other than **`sum`** (shown as _in total_ in-app) do not make sense to use with **`.as_count()`**.
 
+**Note**: Aggregation methods other than sum (shown as in total in-app) cannot be used with `.as_count()`.
+
 [Reach out to the Datadog support team][1] if you have any questions.
 
 

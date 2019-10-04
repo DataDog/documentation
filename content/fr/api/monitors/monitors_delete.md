@@ -1,12 +1,12 @@
 ---
 title: Supprimer un monitor
 type: apicontent
-order: 18.04
+order: 26.04
 external_redirect: /api/#supprimer-un-monitor
 ---
 
 ## Supprimer un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
-

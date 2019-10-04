@@ -25,168 +25,385 @@ further_reading:
 
 ## Trace sampling
 
-Due to the extremely high volume of traces in a web-scale application, sampling is applied to traces in Datadog.
-**Statistics (requests, errors, latency, etc.) are calculated based on the full volume of traces at the Agent level, and are therefore always accurate**.
+Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of [traces][1] is kept in Datadog based on the following rules.
+
+Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
 ### Statistics (Requests, Errors, Latencies etc.)
 
-Datadog APM computes aggregate statistics over all the traces instrumented, regardless of sampling:
+Datadog APM computes following aggregate statistics over all the traces instrumented, regardless of sampling:
 
 * Total requests and requests per second
 * Total errors and errors per second
 * Latency
 * Breakdown of time spent by service/type
-* [Apdex score][1] (web services only)
+* [Apdex score][2] (web services only)
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
 
-### Traces
+### Goal of Sampling
 
-To ensure keeping a representative sample set of traces, Datadog combines multiple sampling techniques, at various locations:
+The goal of sampling is to *keep* the traces that matter the most:
 
-* **Agent sampling**: Reduces the resources and network used by the Agent for sending traces to the backend. Configurable, default to a maximum of 10 traces per second.
+* Distributed traces
+* Low QPS Services
+* Representative variety set of traces
 
-* **Server sampling**: Looks at all reporting Agents, keeping samples representative of the overall infrastructure. Allows a volume up to 60 traces per minute per host.
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
 
-* **Client sampling**: Allows reduction of instrumentation overhead by only instrumenting a configurable percentage of the transactions. By default, it is disabled.
+### Sampling Rules
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" style="width:90%;">}}
+For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and Backend level in the following order.
 
-### Signature Sampling
+1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones.
 
-Signature Sampling ensures a sampling of a variety of [traces][2] (errors, successes) for each [resource][3] (endpoint, database query).
+    | Value                  | Type                        | Action                                                                                               |
+    | :--------------------- | :----------------           | :----------                                                                                          |
+    | **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
+    | **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
+    | **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
+    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
 
-Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
+    Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
-* `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
-* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT...`
+2. Trace Agent (Host or Container Level)- The Agent receives traces from various tracing clients and filters requests based on two rules -
+    * Ensure traces are kept across variety of traces. (across services, resources, HTTP status codes, errors)
+    * Ensure traces are kept for low volume resources (web endpoints, DB queries).
 
-A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of transactions happening in your system. This method ensures traces for resources with low volumes are still kept.
+    The Agent computes a `signature` for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
-Both the [Datadog Agent][4] and backend apply Signature Sampling to limit network consumption and the total volume of stored traces while still making a representative set of traces available to you.
+    * `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
+    * `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT...`
 
-### Priority Sampling for Distributed Tracing
+    A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of traces happening in your system. This method ensures traces for resources with low volumes are still kept.
 
-Because Signature Sampling decisions are made at the [Agent][4] level, it is not guaranteed that a trace will be complete when one is running a distributed architecture and requests are across multiple services, hosts, containers etc... This is because each host would need to choose to sample (keep) spans from the same trace.
+    Moreover, the Agent provides a service-based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
 
-**Priority Sampling is an additional sampling option in which you indicate whether a trace should be kept. Priority Sampling runs prior to Signature Sampling, and a decision is made at the beginning of a trace**. As the decision is propagated in the trace context, it has two main properties:
+    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][3].
 
-* It ensures completeness of traces distributed across hosts and services
-* Important traces can be kept
+3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
-#### How it works
+## Manually Control Trace Priority
 
-Each trace has a `sampling.priority` attribute, which is assigned at its inception and propagated along the entire trace:
+APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc).
 
-| Value                  | Type                        | Action                                                                                               |
-| :--------------------- | :----------------           | :----------                                                                                          |
-| **-1**                 | User input                  | The Agent drops the trace.                                                                           |
-| **0**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
-| **1**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
-| **2**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
+{{< tabs >}}
+{{% tab "Java" %}}
 
-Traces are automatically assigned a priority of **0** or **1**, with a proportion ensuring that the Agent won't have to sample more than it is allowed.  Override it by assigning a value of **2** if it is a trace that should be kept (critical transaction, debug mode, etc.).
+Manually keep a trace:
 
-**Note**: Spans dropped by priority sampler can still be sampled by the signature sampler. The backend can re-sample to keep up to 60 traces per minute per host. The distributed traces that are kept will all be complete.
+```java
+import datadog.trace.api.DDTags;
+import datadog.trace.api.interceptor.MutableSpan;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
 
-#### Using Priority Sampling
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        // Always keep the trace
+        ddspan.setTag(DDTags.MANUAL_KEEP, true);
+        // method impl follows
+    }
+}
+```
+Manually drop a trace:
 
-Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby][5], [Python][6], [Go][7], [Java][8]) as it is disabled by default.
+```java
+import datadog.trace.api.DDTags;
+import datadog.trace.api.interceptor.MutableSpan;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
 
-### Client rate sampling
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        // Always Drop the trace
+        ddspan.setTag(DDTags.MANUAL_DROP, true);
+        // method impl follows
+    }
+}
+```
 
-It is possible to disable the instrumentation for a percentage of transactions. Datadog Tracers are performant and can run with a minimal cost with thousands of requests per second, however client rate sampling can be used to further reduce the instrumentation footprint. In this case, no trace will be generated at all, and Datadog estimates aggregate statistics (requests per second, error rate, etc.). An example of this in Python can be found here: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#client-sampling.
 
-## Trace storage
+{{% /tab %}}
+{{% tab "Python" %}}
 
-Individual traces are stored for up to 4 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Manually keep a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    // Always Keep the Trace
+    span.set_tag(MANUAL_KEEP_KEY)
+    // method impl follows
+```
+
+Manually drop a trace:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+        //Always Drop the Trace
+        span.set_tag(MANUAL_DROP_KEY)
+        //method impl follows
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Manually keep a trace:
+
+```ruby
+Datadog.tracer.trace(name, options) do |span|
+
+  # Always Keep the Trace
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
+  # method impl follows
+end
+```
+Manually drop a trace:
+
+```ruby
+Datadog.tracer.trace(name, options) do |span|
+  # Always Drop the Trace
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
+  # method impl follows
+end
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Manually keep a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always keep this trace:
+    span.SetTag(ext.ManualKeep, true)
+    //method impl follows
+
+}
+```
+
+Manually drop a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always drop this trace:
+    span.SetTag(ext.ManualDrop, true)
+    //method impl follows
+}
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Manually keep a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always keep the trace
+span.setTag(tags.MANUAL_KEEP)
+//method impl follows
+
+```
+Manually drop a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always drop the trace
+span.setTag(tags.MANUAL_DROP)
+//method impl follows
+
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Manually keep a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive(operationName))
+{
+    var span = scope.Span;
+
+    // Always keep this trace
+    span.SetTag(Tags.ManualKeep, "true");
+    //method impl follows
+}
+```
+Manually drop a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive(operationName))
+{
+    var span = scope.Span;
+
+    // Always drop this trace
+    span.SetTag(Tags.ManualDrop, "true");
+    //method impl follows
+}
+```
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Manually keep a trace:
+
+```php
+
+$tracer = \OpenTracing\GlobalTracer::get();
+$span = $tracer->getActiveSpan();
+
+if (null !== $span) {
+  // Always keep this trace
+  $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+  //method impl follows
+}
+
+```
+
+Manually drop a trace:
+
+```php
+
+$tracer = \OpenTracing\GlobalTracer::get();
+$span = $tracer->getActiveSpan();
+
+if (null !== $span) {
+  // Always drop this trace
+  $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+  //method impl follows
+}
+
+```
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Manually keep a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+// Always keep this trace
+span->SetTag(datadog::tags::manual_keep, {});
+//method impl follows
+```
+Manually drop a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto another_span = tracer->StartSpan("operation_name");
+// Always drop this trace
+
+another_span->SetTag(datadog::tags::manual_drop, {});
+//method impl follows
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
+
+
+## Trace Storage
+
+Individual [traces][1] are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
 | 6 hours                |              100% |
 | Current day (UTC time) |               25% |
 | 6 days                 |               10% |
-| 4 months               |                1% |
+| 6 months               |                1% |
+
+**Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the above stated percent of traces over time.
 
 That is to say, on a given day you would see in the UI:
 
 * **100%** of sampled traces from the last six hours
 * **25%** of those from the previous hours of the current calendar day (starting at `00:00 UTC`)
 * **10%** from the previous six calendar days
-* **1%** of those from the previous four months (starting from the first day of the month four months ago)
-* **0%** of traces older than four months
+* **1%** of those from the previous six months (starting from the first day of the month six months ago)
+* **0%** of traces older than six months
 
 For example, at `9:00am UTC Wed, 12/20` you would see:
 
 * **100%** of traces sampled on `Wed 12/20 03:00 - 09:00`
 * **25%** of traces sampled on `Wed 12/20 00:00` - `Wed 12/20 02:59`
 * **10%** of traces sampled on `Thurs 12/14 00:00` - `Tue 12/19 23:59`
-* **1%** of traces sampled on `9/1 00:00` - `12/13 23:59`
-* **0%** of traces before `9/1 00:00`
+* **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
+* **0%** of traces before `7/1 00:00`
 
 Once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" responsive="true" >}}
 
-## Client implementation
-
-This section documents how the priority sampling is implemented in the clients directly.
-
-The `sampling.priority` is an attribute of the Context that has to be propagated over the wire next to the `trace_id` and `span_id` attributes. When propagated over HTTP, its header is `x-datadog-sampling-priority`. When creating remote spans from this propagated attribute, **the same sampling priority value has to be used for the remote trace**.
-
-The `sampling.priority` value must be the same across all the pieces of a trace (when spread across hosts or asynchronous tasks). So it should not be modified after any context propagation (remote call, fork, ...).
-
-The initial `sampling.priority` value is computed at the root span creation. The initial value can either be **0** or **1**. This initial decision is made by the client but the Agent provides a "rate" to decide if it should be a **0** or a **1**.
-The response of the Agent to any flush is a JSON containing a `rate_by_service` key which contains a mapping of services to a rate (between 0 and 1). This rate decides the probability of priority **1** being assigned to new traces:
-
-```json
-{
-  "rate_by_service": {
-    "webapp": 0.94,
-    "workers": 0.11
-  }
-}
-```
-
-With that example, if you create a new trace with a root span of service **webapp**, the Agent will pick between a `sampling.priority` of 1 (with a 94% chance) or a priority of 0 (with a 6% chance).
-This mechanism is meant to ensure that good proportion of low QPS services are sampled(high QPS services have a lower rate) and that the total resulting volume sampled aligns with the `max_traces_per_second` parameter configured in the Agent.
-
-The client allows a sampling priority of **-1** (drop the trace fully) or **2** (force its sampling). This should be done only before any context propagation. If this happens after the propagation of a context, the system can't ensure that the entire trace is sampled properly.
-
-When serialized/flushed to the Agent, the `sampling.priority` is stored in the `_sampling_priority_v1` key of the `metrics` attribute. Example with JSON (similar with msgpack).
-
-```json
-[
-  [
-    {
-      "trace_id": 1234,
-      "span_id": 5678,
-      "parent_id": 0,
-      "service": "webapp",
-      "name": "web.request",
-      "resource": "GET /health",
-      "type": "web",
-      "start": 1525077627,
-      "duration": 8976534,
-      "error": 0,
-      "meta": {},
-      "metrics": {
-        "_sampling_priority_v1": 1
-      }
-    }
-  ]
-]
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[2]: /tracing/visualization/trace
-[3]: /tracing/visualization/resource
-[4]: /agent
-[5]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
-[8]: /tracing/languages/java/#sampling-distributed-tracing
+
+[1]: /tracing/visualization/#trace
+[2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[3]: https://docs.datadoghq.com/security/tracing/#resource-filtering

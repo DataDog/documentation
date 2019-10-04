@@ -29,7 +29,7 @@ A one-step ksh install script is provided on the [Agent download page][1] within
 * **PROXY**: defaults to none. Specifies the proxy URI.
   * Example: `http://proxy.foo.com`
 * **PROXY_USER**: defaults to empty. Specifies the proxy server username.
-* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password.
+* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed.
 * **INSECURE**: defaults to `false`. Allows skipping TLS validation.
 
 Alternatively, download links for the latest releases can be found on [this page][2].

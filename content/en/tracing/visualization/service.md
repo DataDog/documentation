@@ -52,7 +52,11 @@ Datadog provides out of the box graphs for any given Service:
     * The **Total amount of errors**
     * The amount of **Errors per second**
     * The **% Error Rate**
-* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
+* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
+
+    This represents the total/relative/average time spent by traces from the current service to the other *services* or *type*.
+
+    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" style="width:90%;">}}
 
@@ -74,7 +78,7 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 ## Resources
 
-See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+See the list of [resources][6] associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
@@ -83,7 +87,7 @@ See the list of resources associated with your service. Resources are particular
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:
 
-{{< img src="tracing/visualization/service/resources_filtering.gif" alt="Resource filtering" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Resource filtering" video="true" responsive="true" width="90%" >}}
 
 ### Columns
 
@@ -106,3 +110,4 @@ Choose what to display in your resources list:
 [3]: /monitors/monitor_types/apm
 [4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
 [5]: /graphing/dashboards/timeboard
+[6]: /tracing/visualization/#resources

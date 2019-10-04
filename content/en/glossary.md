@@ -32,23 +32,23 @@ See the [Libraries documentation][3] for more information.
 
 #### Dashboard
 
-Dashboards are one of the primary ways to visualize your data. There are two types of dashboards: Screen Boards and Time Boards.
+Dashboards are one of the primary ways to visualize your data. There are two types of dashboards: Screenboards and Timeboards.
 
-Screen Boards are free-form dashboards which can include a variety of objects such as images, graphs, logs, and more. They are commonly used as status boards or story-telling tableaus, and can either update in real-time, or represent one or more fixed points in the past.
+[Screenboards][4] are dashboards with free-form layouts that can include a variety of objects, such as images, graphs, and logs. They are commonly used as status boards or storytelling views, and can either update in real-time, or represent one or more fixed points in the past.
 
-Time Boards have a more structured format, and represent a single point in time - either fixed or real-time - across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+[Timeboards][5] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 #### DogStatsD
 
-DogStatsD refers to two related things: a protocol based on [StatsD][4], and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
+DogStatsD refers to two related things: a protocol based on [StatsD][6], and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
 
-See the [DogStatsD documentation][5] for more information.
+See the [DogStatsD documentation][7] for more information.
 
 #### Integration
 
 An Integration is a way to get data from your systems into Datadog. Integrations gather data from a given source, ensure that those data are classified correctly, and provide some other assets to assist with configuration and usage. Data sources can be anything from daemons on a server, to cloud services, to third-party APIs, and more.
 
-See the [Integrations documentation][6] for more information.
+See the [Integrations documentation][8] for more information.
 
 #### Multiple-organization ("multi-org") accounts
 
@@ -56,15 +56,17 @@ Multi-org accounts allow a parent-organization to create multiple child-organiza
 
 #### Tracer
 
-Datadog supports distributed tracing via the APM Integration. This allows you to instrument your existing code and see requests as they pass through all your systems. It works across different languages, databases, and RPC frameworks. Many languages are [supported natively][7]; however, developers can add their own language support by creating a custom shipper.
+Datadog supports distributed tracing via the APM Integration. This allows you to instrument your existing code and see requests as they pass through all your systems. It works across different languages, databases, and RPC frameworks. Many languages are [supported natively][9]; however, developers can add their own language support by creating a custom shipper.
 
-See the [Tracing documentation][8] for more information.
+See the [Tracing documentation][10] for more information.
 
 [1]: /agent
 [2]: /api
 [3]: /developers/libraries
-[4]: https://www.datadoghq.com/blog/statsd
-[5]: /developers/dogstatsd
-[6]: /developers/integrations
-[7]: /developers/libraries/#apm-tracing-client-libraries
-[8]: /tracing
+[4]: /graphing/dashboards/screenboard
+[5]: /graphing/dashboards/timeboard
+[6]: https://www.datadoghq.com/blog/statsd
+[7]: /developers/dogstatsd
+[8]: /developers/integrations
+[9]: /developers/libraries/#apm-tracing-client-libraries
+[10]: /tracing

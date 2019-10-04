@@ -1,13 +1,18 @@
 ---
 title: Désactiver tous les monitors
 type: apicode
-order: 18.07
+order: 26.07
 external_redirect: /api/#desactiver-tous-les-monitors
 ---
 
-##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor/mute_all`
-##### Exemple de requête
+**SIGNATURE**:
+
+`POST /v1/monitor/mute_all`
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-mute-all" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-mute-all" >}}

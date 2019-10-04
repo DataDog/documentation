@@ -1,7 +1,18 @@
 {{ $announce := .Site.Params.announcement_banner }}
 {{ if not (in (slice "dg" "landing-page" "tshirt" "apm" "legal" "event" "webinar" "summit") .Type) }}
 <div class="announcement_banner text-center">
-    <a href="{{$announce.link}}">{{$announce.text | safeHTML }}</a>
+    <a href="{{$announce.link}}">
+        <span class="d-none d-md-block">
+            {{ $announce.desktop_message | safeHTML }}
+        </span>
+        <span class="d-block d-md-none">
+            {{ if $announce.mobile_message }}
+                {{ $announce.mobile_message | safeHTML }}
+            {{ else }}
+                {{ $announce.desktop_message | safeHTML }}
+            {{ end}}
+        </span>
+    </a>
     <i class="icon icon-small-x pull-right"></i>
 </div>
 <script>

@@ -3,9 +3,9 @@ title: Trace Analytics
 kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
 aliases:
-  - tracing/trace_search_analytics/analytics
-  - tracing/analytics
-  - tracing/visualization/analytics
+  - /tracing/trace_search_analytics/analytics
+  - /tracing/analytics
+  - /tracing/visualization/analytics
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -58,14 +58,13 @@ Use the query to control what's displayed in your Trace Analytic:
 
 ## Visualizations
 
-Select a Trace Analytic visualization type using the Analytic selector:
-
-{{< img src="tracing/trace_search_and_analytics/analytics/graph_selector.png" alt="Graph selector" responsive="true" style="width:30%;">}}
+Select a Trace Analytic visualization type using the Analytic selector.
 
 Available visualizations:
 
 * [Timeseries](#timeseries)
 * [Top List](#top-list)
+* [Table](#table)
 
 ### Timeseries
 
@@ -87,16 +86,21 @@ The top **pc99** **duration** of **Service**
 
 ### Table
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through traces corresponding to either dimension.
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
-The following Table Log Analytics shows:
-The evolution of the **top 10 Status Codes** according to their **Throughput**, along with the average **Duration** and over the last 15 minutes.
+* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+* When there are multiple measures, the top or bottom list is determined according to the first measure.
+* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+
+ **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+
+ The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="tracing/trace_search_and_analytics/analytics/trace_table_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
 ## Related Traces
 
-Select or click on a section of the graph to either zoom in the graph or see the list of traces corresponding to your selection:
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][3] corresponding to your selection:
 
 {{< img src="tracing/trace_search_and_analytics/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
 
@@ -106,16 +110,16 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Trace analytic:
 
-* To create a new [APM monitor][3]:
+* To create a new [APM monitor][4]:
     This feature is not available yet.
-* To an existing [Timeboard][4]:
-    This functionality is in beta, [contact the Datadog support team][5] to activate it for your organization.
+* To an existing [Timeboard][5]:
+    This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
 
 ## Traces in Dashboard
 
-Export [Trace Analytics][6] from the Trace search or build them directly in your [Dashboard][7] alongside metrics and logs.
+Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 
-[Learn more about the timeseries widget][8]
+[Learn more about the timeseries widget][9]
 
 ## Further Reading
 
@@ -123,9 +127,10 @@ Export [Trace Analytics][6] from the Trace search or build them directly in your
 
 [1]: /tracing/trace_search_and_analytics/search/#facets
 [2]: /tracing/trace_search_and_analytics/search/#measures
-[3]: /monitors/monitor_types/apm
-[4]: /graphing/dashboards/timeboard
-[5]: /help
-[6]: /graphing/widgets/timeseries
-[7]: /graphing/dashboards
-[8]: /graphing/widgets/timeseries
+[3]: /tracing/visualization/#trace
+[4]: /monitors/monitor_types/apm
+[5]: /graphing/dashboards/timeboard
+[6]: /help
+[7]: /graphing/widgets/timeseries
+[8]: /graphing/dashboards
+[9]: /graphing/widgets/timeseries

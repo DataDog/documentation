@@ -1,0 +1,17 @@
+environment: live
+img_url: "https://datadog-docs.imgix.net/"
+static_url: "https://docs.datadoghq.com/"
+ga: UA-21102638-5
+footer_scripts:
+- snowplow: true
+- adroll: true
+
+datadog:
+  clientToken: pub16bb5ef3e9bf55f156338987e27246c7
+  applicationId: 3493b4e7-ab12-4852-8836-ba96af7bc745
+  logging_handler: http
+
+algolia:
+  appId: EOIG7V0A2O
+  apiKey: c7ec32b3838892b10610af30d06a4e42
+  indexName: docsearch_docs_prod

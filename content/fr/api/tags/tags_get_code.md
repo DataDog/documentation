@@ -1,13 +1,18 @@
 ---
 title: Récupérer des tags
 type: apicode
-order: 28.1
+order: 30.1
 external_redirect: /api/#recuperer-des-tags
 ---
 
-##### Signature
-`GET https://api.datadoghq.com/api/v1/tags/hosts`
-##### Exemple de requête
+**SIGNATURE**:
+
+`GET /v1/tags/hosts`
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-tags-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-tags-get" >}}

@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-webhooks-integration
 
 Delete a given Datadog-Webhooks integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

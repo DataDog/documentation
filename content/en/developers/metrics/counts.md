@@ -32,6 +32,7 @@ Counters are used to count things.
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 | Method | Overview |
 | :----- | :------- |
 | dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |

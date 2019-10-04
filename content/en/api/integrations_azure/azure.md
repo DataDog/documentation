@@ -7,8 +7,10 @@ external_redirect: /api/#integration-azure
 
 ## Integration Azure
 
+<mark>The Azure endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+
 Configure your Datadog-Azure integration directly through the Datadog API.
-For more information, see the [Datadog-Azure integration page][1].
+For more information, see the [Datadog-Azure integration page][2].
 
-
-[1]: /integrations/azure
+[1]: /help
+[2]: /integrations/azure

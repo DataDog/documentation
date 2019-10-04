@@ -11,6 +11,7 @@ aliases:
     - /tracing/api/
     - /integrations/kubernetes_state/
     - /integrations/kube_proxy/
+    - /integrations/Kubernetes
 public_title: Datadog-Kubernetes Integration
 short_description: "Capture Pod scheduling events, track the status of your Kublets, and more"
 categories:

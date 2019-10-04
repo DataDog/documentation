@@ -5,11 +5,10 @@ order: 23
 external_redirect: /api/#logs-indexes
 ---
 
-
 ## Logs Indexes
 
 <div class="alert alert-warning">
-This endpoint is in public beta. If you have any feedback, <a href="/help">contact Datadog support</a>.
+This endpoint is in public beta and not supported in Datadog's client libraries. If you have any feedback, <a href="/help">contact Datadog support</a>.
 </div>
 
 The `Index` object describes the configuration of a log index. It has the following attributes:
@@ -37,7 +36,6 @@ The `Index` object describes the configuration of a log index. It has the follow
     The search query follows the [Log search syntax][1]
   * **`filter.sample_rate`** :
     The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
-
 
 **Note**:  You need an API and applications key with Admin right to interact with this endpoint.
 

@@ -4,7 +4,9 @@
     {{ .root.Scratch.Set "img_param" "?ch=Width,DPR&fit=max" }}
 {{ end }}
 {{ $img_param := .root.Scratch.Get "img_param" }}
-{{ $url := (print (.root.Site.Params.img_url) "images/" (index .root.Site.Data.manifests.images .src ) ($img_param)) | safeURL }}
+
+{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
+
 {{ $image_type_arr := split .src "." }}
 {{ $image_ext := index $image_type_arr 1 }}
 {{ $img_width := .width }}

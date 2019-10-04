@@ -3,10 +3,9 @@ title: Trace Search
 kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
-  - tracing/trace_search_analytics/analytics
-  - tracing/trace_search_analytics/
-  - tracing/trace_search/
-  - tracing/search
+  - /tracing/trace_search_analytics/
+  - /tracing/trace_search/
+  - /tracing/search
   - /tracing/getting_further/apm_events/
 further_reading:
 - link: "tracing/setup/"
@@ -24,16 +23,16 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "tracing/trace_search_analytics/analytics"
+- link: "tracing/trace_search_and_analytics/analytics"
   tag: "Documentation"
   text: "Analytics on your APM data at infinite cardinality"
 ---
 
 ## Overview
 
-Use Trace Search & Analytics to filter application performance metrics and [APM Events](#apm-events) by user-defined tags. It allows deep exploration of the web requests flowing through your service.
+Use [Trace Search & Analytics][1] to filter application performance metrics and [APM Events](#apm-events) by user-defined tags. It allows deep exploration of the web requests flowing through your service.
 
-Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog.
+Trace Search & Analytics can be enabled per APM [service][2] and per host. A service on which it is enabled exposes all its APM Events to Datadog.
 
 Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
@@ -46,19 +45,16 @@ In the Trace Search view you can:
 
 ## APM Events
 
-An APM event is generated every time a trace is generated. It corresponds to all the tags associated with the trace, plus the [top span][1] of the trace.
+When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an APM event. It's a record of the request including its duration, response code, and any [custom metadata][3].
+An APM event is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an APM event. If a request runs through a web service, listing service, and database service, the request will generate 3 APM events. To reduce the amount of APM Events generated, [explicitly turn on/off any APM event collection for a specific service][4].
 
-APM events aren't just traces: traces [get sampled][2] and APM events don't, and Datadog only keeps the top span information for the APM events, not the full trace.
-
-APM Events can be enriched with tags, like `customer`, `service`, `country`, `billing plan`, `request duration`, or `product` type. You can then [filter][3] and query on those tags in the Trace Search & Analytics UI.
-
-[Refer to the tagging section to learn how to assign tags to a trace][4].
+To start collecting APM events, [enable Trace Search & Analytics for your services][5].
 
 ### Complete traces
 
 {{< img src="tracing/trace_search_and_analytics/search/complete_trace.png" alt="Trace list" responsive="true">}}
 
-If checked, APM Events listed in the trace stream have a trace associated with them, so you can display the full trace with all its associated spans.
+If checked, APM Events listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
 
 ## Search bar
 
@@ -70,15 +66,14 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**Facet**](#facets)
+* A [**Facet**](#facet-search)
 
-* A [**Tag**](#tags)
+* A [**Tag**](#tags-search)
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
-|              |                                                                                                        |                              |
-| :----        | :----                                                                                                  | :----                        |
 | **Operator** | **Description **                                                                                       | **Example **                 |
+|:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
@@ -93,15 +88,15 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 ### Tags search
 
-Your traces inherit tags from [hosts][5] and [integrations][6] that generate them. They can be used in the search and as facets as well:
+Your traces inherit tags from [hosts][8] and [integrations][9] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
-| :----                                                          | :---                                                                        |
+|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
 | `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][7] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][10] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -131,9 +126,9 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 ### Escaping of special characters
 
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
-For instance, to search traces that contain `user=12345` in their `url` the following search must be entered:
+For instance, to search traces that contain `user=JaneDoe` in their `url` the following search must be entered:
 
-`@url:*user\=JaneDoe`
+`@url:*user\=JaneDoe*`
 
 The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
 If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
@@ -202,7 +197,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][8].
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][11].
 
 ### Facet Panel
 
@@ -214,11 +209,15 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#spans
-[2]: /tracing/guide/trace_sampling_and_storage
-[3]: /tracing/trace_search_and_analytics/search/#search
-[4]: /tagging/assigning_tags/#traces
-[5]: /graphing/infrastructure
-[6]: /integrations
-[7]: /tagging/#tags-best-practices
-[8]: /tracing/trace_search_and_analytics/analytics
+
+[1]: /tracing/visualization/#trace-search-analytics
+[2]: /tracing/visualization/#services
+[3]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[4]: /tracing/trace_search_and_analytics/?tab=java#configure-by-integration
+[5]: /tracing/trace_search_and_analytics/?tab=php#automatic-configuration
+[6]: /tracing/visualization/#trace
+[7]: /tracing/visualization/#spans
+[8]: /graphing/infrastructure
+[9]: /integrations
+[10]: /tagging/#tags-best-practices
+[11]: /tracing/trace_search_and_analytics/analytics

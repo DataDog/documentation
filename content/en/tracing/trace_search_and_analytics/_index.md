@@ -10,9 +10,8 @@ aliases:
 [Trace Search & Analytics][1] is used to filter APM events by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
-* [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
-**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
+**Note**: to use Trace Search, you must be using Agent v6.7+.
 
 ## Automatic Configuration
 
@@ -34,7 +33,7 @@ Trace Search & Analytics is available starting in version 0.25.0 of the Java tra
 Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
@@ -122,8 +121,6 @@ Trace Search & Analytics is available starting in version 0.17.0 of the PHP trac
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Trace search only works for web integrations.
-
 ## Configure Additional Services (optional)
 
 ### Configure by integration
@@ -144,7 +141,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/languages/java/#integrations
+[1]: /tracing/setup/java/#integrations
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -179,7 +176,7 @@ Where `integration` is the name of the integration. See the [list of available i
 - `nil` defers to global setting for analytics.
 
 
-[1]: /tracing/languages/ruby/#library-compatibility
+[1]: /tracing/setup/ruby/#library-compatibility
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -219,7 +216,7 @@ tracer.use('express', {
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/nodejs/#integrations
+[1]: /tracing/setup/nodejs/#integrations
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -253,18 +250,16 @@ Integration names can be found on the [integrations table][1].
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* System Property: `-Ddd.<INTEGRATION>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Symfony spans which comes in as a custom service, you can set the following to enable all Symfony Tracing in Trace Search & Analytics:
 
-* System Property: `-Ddd.jms.analytics.enabled=true`
-* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/php/#integrations
+[1]: /tracing/setup/php/#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -298,7 +293,12 @@ Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration.
+Database tracing is not captured by Trace Search & Analytics by default. Enable collection manually for each integration, for example:
+
+```go
+// Register the database driver with Analytics enabled.
+sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
+```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -348,7 +348,7 @@ tracer.use('mysqli', {
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on the service root span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -363,7 +363,7 @@ class MyClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_KEY, true);
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
 }
@@ -470,5 +470,14 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
+## Event filtering
+
+An [APM event][2] represents the top [span][3] for a [service], including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][4] has the benefit of reducing the number of billable APM events and has no effect on [trace][5] sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+
+{{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/trace_search_and_analytics/agent_trace_search
+[2]: /tracing/visualization/#apm-event
+[3]: /tracing/visualization/#spans
+[4]: https://app.datadoghq.com/apm/settings
+[5]: /tracing/visualization/#trace

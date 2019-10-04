@@ -1,0 +1,79 @@
+col1:
+  - name: product
+    link: 'https://www.datadoghq.com/product/'
+    title: 機能
+  - name: integrations
+    link: 'https://www.datadoghq.com/product/integrations/'
+    title: インテグレーション
+  - name: apm
+    link: 'https://www.datadoghq.com/apm/'
+    title: APM
+  - name: logs
+    link: 'https://www.datadoghq.com/log-management/'
+    title: ログ管理
+  - name: dashboards
+    link: 'https://www.datadoghq.com/dashboarding/'
+    title: 'ダッシュボード  '
+  - name: synthetics
+    link: 'https://www.datadoghq.com/synthetics/'
+    title: Synthetics
+  - name: alerts
+    link: 'https://www.datadoghq.com/alerts/'
+    title: アラート
+col2:
+  - name: pricing
+    link: 'https://www.datadoghq.com/pricing/'
+    title: 料金
+  - name: documentation
+    link: 'https://docs.datadoghq.com/'
+    title: Documentation
+  - name: support
+    link: 'https://www.datadoghq.com/support/'
+    title: サポート
+  - name: resources
+    link: 'https://www.datadoghq.com/resources/'
+    title: リソース
+  - name: security
+    link: 'https://www.datadoghq.com/security/'
+    title: セキュリティ
+  - name: api
+    link: api/
+    title: API
+col3:
+  - name: contact
+    link: 'https://www.datadoghq.com/about/contact/'
+    title: お問い合わせ
+  - name: partners
+    link: 'https://www.datadoghq.com/partner-with-datadog/'
+    title: パートナー
+  - name: press
+    link: 'https://www.datadoghq.com/about/press/'
+    title: プレス
+  - name: ourteam
+    link: 'https://www.datadoghq.com/about/team/'
+    title: チーム
+  - name: careers
+    link: 'https://www.datadoghq.com/careers/'
+    title: 採用情報
+  - name: legal
+    link: 'https://www.datadoghq.com/legal/'
+    title: 各種規約
+  - name: analyst
+    link: 'https://www.datadoghq.com/about/analyst/'
+    title: アナリストレポート
+col4:
+  - name: blog
+    link: 'https://www.datadoghq.com/blog/'
+    title: 英語ブログ
+  - name: bloges
+    link: 'https://www.datadoghq.com/es/blog/'
+    title: スペイン語
+  - name: blogja
+    link: 'https://www.datadoghq.com/ja/blog/'
+    title: 日本語
+  - name: instagram
+    link: 'https://www.instagram.com/datadoghq/'
+    title: Instagram
+  - name: twitter
+    link: 'https://twitter.com/datadoghq'
+    title: Twitter

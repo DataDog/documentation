@@ -9,24 +9,12 @@ curl -v -X POST -H "Content-type: application/json" \
 -d '{
     "service_hooks": [
       {
-        "account": "<SLACK_ACCOUNT_1>",
-        "url": "https://hooks.slack.com/services/1/1"
+        "account": "Main_Account",
+        "url": "https://hooks.slack.com/services/1/1/1"
       },
       {
-        "account": "<SLACK_ACCOUNT_2>",
-        "url": "https://hooks.slack.com/services/2/2"
-      }
-    ],
-    "channels": [
-      {
-        "channel_name": "<CHANNEL_NAME_1>",
-        "transfer_all_user_comments": "false",
-        "account": "<SLACK_ACCOUNT_1>"
-      },
-      {
-        "channel_name": "<CHANNEL_NAME_2>",
-        "transfer_all_user_comments": "false",
-        "account": "<SLACK_ACCOUNT_2>"
+        "account": "doghouse",
+        "url": "https://hooks.slack.com/services/2/2/2"
       }
     ]
   }' \

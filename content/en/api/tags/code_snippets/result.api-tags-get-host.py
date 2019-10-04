@@ -1,6 +1,9 @@
 {
-    'tags': [
-        'role:database',
-        'env:test'
-    ]
+  'Datadog': [
+    'host:dev-test',
+    'environment:test'
+  ],
+  'Users': [
+    'role:database'
+  ]
 }

@@ -5,13 +5,14 @@ order: 29.2
 external_redirect: /api/#status-test
 ---
 
-##### Signature
-`POST /api/v1/synthetics/tests/${test_id}/status`
+**SIGNATURE**:
 
-##### Example Request
+`POST /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/status`
+
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="put_status" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.put_status" >}}

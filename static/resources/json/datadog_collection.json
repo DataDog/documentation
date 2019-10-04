@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "353a07af-928a-46d4-b5f7-7d9af1e4ffe9",
+		"_postman_id": "2f439139-33c5-4f05-8fec-940d9f8d398e",
 		"name": "Datadog API Collection",
 		"description": "Collection of all Datadog Public endpoints.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -296,6 +296,52 @@
 					},
 					"response": [
 						{
+							"name": "Create a Comment Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"There is a problem with the database.\",\n    \"handle\": \"test@datadoghq.com\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382561676571697516,\n        \"message\": \"There is a problem with the database.\",\n        \"resource\": \"/api/v1/comments/1382561676571697516\",\n        \"url\": \"/event/jump_to?event_id=1382561676571697516\"\n    }\n}"
+						},
+						{
 							"name": "400 - Bad Request",
 							"originalRequest": {
 								"method": "POST",
@@ -387,52 +433,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
-						},
-						{
-							"name": "Create a Comment Example",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"There is a problem with the database.\",\n    \"handle\": \"test@datadoghq.com\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"api",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382561676571697516,\n        \"message\": \"There is a problem with the database.\",\n        \"resource\": \"/api/v1/comments/1382561676571697516\",\n        \"url\": \"/event/jump_to?event_id=1382561676571697516\"\n    }\n}"
 						},
 						{
 							"name": "200 - OK",
@@ -588,7 +588,7 @@
 							"variable": [
 								{
 									"key": "COMMENT_ID",
-									"value": "{{comment_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the comment to edit."
 								}
 							]
@@ -596,6 +596,59 @@
 						"description": "### Overview\n\nThis POST call allows for you to change a previously posted comment by commentId\n\n### Arguments\n\n* **`message`** [*optional*, *default* = **original message**]: The comment text.\n\n* **`handle`** [*optional*, *default* = **Application key owner**]: The handle of the user making the comment."
 					},
 					"response": [
+						{
+							"name": "Edit a Comment Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"My new comment message.\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments",
+										":EVENT_ID"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "EVENT_ID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
+						},
 						{
 							"name": "200 - OK",
 							"originalRequest": {
@@ -651,59 +704,6 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<NEW_COMMENT_MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
-						},
-						{
-							"name": "Edit a Comment Example",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"My new comment message.\"\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments",
-										":EVENT_ID"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}"
-										}
-									],
-									"variable": [
-										{
-											"key": "EVENT_ID",
-											"value": ""
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
 						}
 					]
 				},
@@ -858,58 +858,6 @@
 							"body": "{\n    \"comment\": {\n        \"resource\": \"/api/v1/comments/4889128764784349185\",\n        \"url\": \"/event/event?id=4889128764784349185\",\n        \"handle\": \"test_1@datadoghq.com\",\n        \"message\": \"<MESSAGE_REPLIED_TO_COMMENT>\",\n        \"related_event_id\": \"4889126983613267970\",\n        \"id\": 4889128764784349185\n    }\n}"
 						}
 					]
-				},
-				{
-					"name": "Delete a Comment",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/comments/:COMMENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"comments",
-								":COMMENT_ID"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{datadog_api_key}}",
-									"description": "Your Datadog API key"
-								},
-								{
-									"key": "application_key",
-									"value": "{{datadog_application_key}}",
-									"description": "Your Datadog application key"
-								}
-							],
-							"variable": [
-								{
-									"key": "COMMENT_ID",
-									"value": "{{comment_id}}",
-									"description": "ID of the comment to edit."
-								}
-							]
-						},
-						"description": "### Overview\n\nThiscall allows for you to DELETE a previously posted comment by with a given <COMMENT_ID>.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
-					},
-					"response": []
 				}
 			],
 			"description": "Comments are how discussion happens on Datadog. Create, edit, delete and reply to comments.",
@@ -1138,7 +1086,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "ID of the Dashboard to update"
 								}
 							]
@@ -1310,7 +1258,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "Id of the Dashboar to delete"
 								}
 							]
@@ -1476,7 +1424,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "Id of the Dashboard to GET"
 								}
 							]
@@ -1610,7 +1558,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/dashboard/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/dashboard?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -1620,8 +1568,7 @@
 							"path": [
 								"api",
 								"v1",
-								"dashboard",
-								""
+								"dashboard"
 							],
 							"query": [
 								{
@@ -1709,7 +1656,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "Dashboard list ID to fetch"
 								}
 							]
@@ -2187,7 +2134,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "The ID of the Dashboard list to update"
 								}
 							]
@@ -2419,7 +2366,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to delete"
 								}
 							]
@@ -2597,7 +2544,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashbord list to get items from"
 								}
 							]
@@ -2708,7 +2655,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to add item into"
 								}
 							]
@@ -2763,7 +2710,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to update"
 								}
 							]
@@ -2818,7 +2765,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to delete items from"
 								}
 							]
@@ -2970,7 +2917,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to update"
 								}
 							]
@@ -3017,7 +2964,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to delete"
 								}
 							]
@@ -3155,7 +3102,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to fetch"
 								}
 							]
@@ -3472,7 +3419,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the embed to fetch"
 								}
 							]
@@ -3517,7 +3464,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the Embed to enable"
 								}
 							]
@@ -3562,7 +3509,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the embed to revoke"
 								}
 							]
@@ -3760,7 +3707,7 @@
 							"variable": [
 								{
 									"key": "EVENT_ID",
-									"value": "{{event_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the event to fetch"
 								}
 							]
@@ -3880,176 +3827,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"event\": {\n        \"date_happened\": 1555676790,\n        \"alert_type\": \"info\",\n        \"resource\": \"/api/v1/events/4889114353672951410\",\n        \"title\": \"<EVENT_TITLE>\",\n        \"url\": \"/event/event?id=4889114353672951410\",\n        \"text\": \"<EVENT_TEXT>\",\n        \"tags\": [\n            \"tag_key_:_tag_value\"\n        ],\n        \"device_name\": null,\n        \"priority\": \"normal\",\n        \"host\": null,\n        \"id\": 4889114353672951410\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "Delete an Event",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
-						},
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/events/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"events",
-								":EVENT_ID"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{datadog_api_key}}",
-									"description": "Your Datadog API key"
-								},
-								{
-									"key": "application_key",
-									"value": "{{datadog_application_key}}",
-									"description": "Your Datadog application key"
-								}
-							],
-							"variable": [
-								{
-									"key": "EVENT_ID",
-									"value": "{{event_id}}",
-									"description": "ID of the event to delete"
-								}
-							]
-						},
-						"description": "### Overview\n\nDELETE event details by event_id\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
-					},
-					"response": [
-						{
-							"name": "200 - OK",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"events",
-										":EVENT_ID"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}",
-											"description": "Your Datadog application key"
-										}
-									],
-									"variable": [
-										{
-											"key": "EVENT_ID",
-											"value": "4889114353672951410",
-											"description": "ID of the event to delete"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:27:48 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "Set-Cookie",
-									"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:27:48 GMT; secure; HttpOnly"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "X-DD-Debug",
-									"value": "pEh3gYWQMYdKVVOh5Pkm23Q0brswOQx0EZl2X7y7zdDnXrgUIeNhlDkso3nnYL6e"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"deleted_event_id\": \"4889114353672951410\"\n}"
 						}
 					]
 				},
@@ -4216,7 +3993,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/graph/snapshot?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&metric_query={{metric_query}}&start={{from_ts}}&end={{to_ts}}&title={{title}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/graph/snapshot?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&metric_query=system.load.1{*}by{host}&start={{from_ts}}&end={{to_ts}}&title=Snapshot of system load by host",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4242,7 +4019,7 @@
 								},
 								{
 									"key": "metric_query",
-									"value": "{{metric_query}}",
+									"value": "system.load.1{*}by{host}",
 									"description": "The metric query to graph for the snapshot"
 								},
 								{
@@ -4257,7 +4034,7 @@
 								},
 								{
 									"key": "title",
-									"value": "{{title}}",
+									"value": "Snapshot of system load by host",
 									"description": "A title for the graph. If no title is specified, the graph doesn't have a title."
 								}
 							]
@@ -4643,7 +4420,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to mute"
 								}
 							]
@@ -4754,7 +4531,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to unmute"
 								}
 							]
@@ -4865,45 +4642,6 @@
 							},
 							"response": [
 								{
-									"name": "List AWS Accounts Example",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-											"protocol": "https",
-											"host": [
-												"api",
-												"datadoghq",
-												"com"
-											],
-											"path": [
-												"api",
-												"v1",
-												"integration",
-												"aws"
-											],
-											"query": [
-												{
-													"key": "api_key",
-													"value": "{{datadog_api_key}}",
-													"description": "Your Datadog API key"
-												},
-												{
-													"key": "application_key",
-													"value": "{{datadog_application_key}}",
-													"description": "Your Datadog application key"
-												}
-											]
-										}
-									},
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\"accounts\":\n    [{\n        \"account_id\": 112233445566,\n        \"role_name\": \"SomeDatadogRole\",\n        \"filter_tags\": [\n        \t'filter123'\n        ],\n        \"host_tags\": [\n        \t'account:demo'\n        \t],\n        \"account_specific_namespace_rules\": {\"opsworks\":false}\n    }]\n}"
-								},
-								{
 									"name": "No AWS accounts",
 									"originalRequest": {
 										"method": "GET",
@@ -4987,11 +4725,50 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"errors\": [\n        \"AWS Integration not yet installed. Please manually install it to add AWS accounts.\"\n    ]\n}"
+								},
+								{
+									"name": "List AWS Accounts Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\"accounts\":\n    [{\n        \"account_id\": 112233445566,\n        \"role_name\": \"SomeDatadogRole\",\n        \"filter_tags\": [\n        \t'filter123'\n        ],\n        \"host_tags\": [\n        \t'account:demo'\n        \t],\n        \"account_specific_namespace_rules\": {\"opsworks\":false}\n    }]\n}"
 								}
 							]
 						},
 						{
-							"name": "Create an AWS Account in Datadog",
+							"name": "Create an AWS integration",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -5031,7 +4808,173 @@
 										}
 									]
 								},
-								"description": "### Overview\n\nConfigure your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]: Your Datadog role delegation name. [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.\n\n* **`filter_tags`** [*optional*, *default*=**None**]: Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    [Read more about EC2 tagging in AWS tagging documentation][4].\n\n* **`host_tags`** [*optional*, *default*=**None**]: Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]: An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration\n[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation\n[4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
+								"description": "### Overview\n\nCreate a Datadog-Amazon Web Services integration.\n\n**Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]:\n\n    Your AWS Account ID without dashes.\n    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]:\n\n    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]:\n\n    Your Datadog role delegation name.\n    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].\n\n* **`filter_tags`** [*optional*, *default*=**None**]:\n\n    The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    For more information on EC2 tagging, see the [AWS tagging documentation][3].\n\n* **`host_tags`** [*optional*, *default*=**None**]:\n\n    Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:\n\n    An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: /integrations/amazon_web_services/#configuration\n[2]: /integrations/amazon_web_services/#installation\n[3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
+							},
+							"response": [
+								{
+									"name": "Creating an account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:25:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:25:21 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"external_id\": \"1234567890\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update an AWS integration",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&account_id=<ACCOUNT_ID>&role_name=<ROLE_NAME>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"{{datadog_site}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										},
+										{
+											"key": "account_id",
+											"value": "<ACCOUNT_ID>",
+											"description": "Your AWS Account ID without dashes you wish to update."
+										},
+										{
+											"key": "role_name",
+											"value": "<ROLE_NAME>",
+											"description": "Your Datadog role delegation name associated with the AWS Account ID you wish to update."
+										}
+									]
+								},
+								"description": "### Overview\n\nCreate a Datadog-Amazon Web Services integration.\n\n**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]:\n\n    Your AWS Account ID without dashes.\n    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]:\n\n    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]:\n\n    Your Datadog role delegation name.\n    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].\n\n* **`filter_tags`** [*optional*, *default*=**None**]:\n\n    The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    For more information on EC2 tagging, see the [AWS tagging documentation][3].\n\n* **`host_tags`** [*optional*, *default*=**None**]:\n\n    Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:\n\n    An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: /integrations/amazon_web_services/#configuration\n[2]: /integrations/amazon_web_services/#installation\n[3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
 							},
 							"response": [
 								{
@@ -5228,108 +5171,6 @@
 							},
 							"response": [
 								{
-									"name": "200 - OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-											"protocol": "https",
-											"host": [
-												"api",
-												"datadoghq",
-												"com"
-											],
-											"path": [
-												"api",
-												"v1",
-												"integration",
-												"aws",
-												"available_namespace_rules"
-											],
-											"query": [
-												{
-													"key": "api_key",
-													"value": "{{datadog_api_key}}",
-													"description": "Your Datadog API key"
-												},
-												{
-													"key": "application_key",
-													"value": "{{datadog_application_key}}",
-													"description": "Your Datadog application key"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Date",
-											"value": "Fri, 19 Apr 2019 12:23:16 GMT"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "Transfer-Encoding",
-											"value": "chunked"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Vary",
-											"value": "Accept-Encoding"
-										},
-										{
-											"key": "Pragma",
-											"value": "no-cache"
-										},
-										{
-											"key": "Cache-Control",
-											"value": "no-cache"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:23:16 GMT; secure; HttpOnly"
-										},
-										{
-											"key": "X-DD-VERSION",
-											"value": "35.1246853"
-										},
-										{
-											"key": "X-DD-Debug",
-											"value": "/GVHE8sGGDu2Pwj4vkrLHXcvRNw6txpVQGGgaqarvn67YsIjXAZ36tYtYz+JhwVU"
-										},
-										{
-											"key": "Content-Encoding",
-											"value": "gzip"
-										},
-										{
-											"key": "DD-POOL",
-											"value": "dogweb_sameorig"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=15724800;"
-										}
-									],
-									"cookie": [],
-									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
-								},
-								{
 									"name": "List available namespace rules",
 									"originalRequest": {
 										"method": "GET",
@@ -5406,6 +5247,108 @@
 										{
 											"key": "X-DD-Debug",
 											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
+								},
+								{
+									"name": "200 - OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws",
+												"available_namespace_rules"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 19 Apr 2019 12:23:16 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:23:16 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1246853"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "/GVHE8sGGDu2Pwj4vkrLHXcvRNw6txpVQGGgaqarvn67YsIjXAZ36tYtYz+JhwVU"
 										},
 										{
 											"key": "Content-Encoding",
@@ -5673,6 +5616,163 @@
 								"description": "Delete a Datadog-AWS Filtering rule"
 							},
 							"response": []
+						},
+						{
+							"name": "Generate new External IDs",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws/generate_new_external_id?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"{{datadog_site}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws",
+										"generate_new_external_id"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								},
+								"description": "### Overview\n\nGenerate a new AWS external id for a given AWS account id and role name pair.\n\n### Arguments\n\n\n* **`account_id`** [*required*]:\n\n    Your AWS Account ID without dashes.\n    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.\n\n* **`role_name`** [*required*]:\n\n    Your Datadog role delegation name.\n    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].\n\n[1]: /integrations/amazon_web_services/#configuration\n[2]: /integrations/amazon_web_services/#installation"
+							},
+							"response": [
+								{
+									"name": "Creating an account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:25:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:25:21 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"external_id\": \"1234567890\"\n}"
+								}
+							]
 						}
 					],
 					"description": "Configure your Datadog-AWS integration directly through Datadog API.\n\nMore Details Here: https://docs.datadoghq.com/integrations/amazon_web_services/",
@@ -6254,10 +6354,10 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6398,10 +6498,10 @@
 									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"<SERVICE_NAME_1>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"<SERVICE_NAME_2>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"subdomain\": \"<PAGERDUTY_SUB_DOMAIN>\",\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ],\n    \"api_token\": \"<PAGERDUTY_TOKEN>\"\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6443,10 +6543,10 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6488,10 +6588,10 @@
 									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"<SERVICE_NAME_1>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"<SERVICE_NAME_2>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/pagerduty?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6543,10 +6643,10 @@
 									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6684,13 +6784,13 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2/2\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6732,10 +6832,10 @@
 									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6774,13 +6874,13 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"<CHANNEL_NAME_3>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_1>\"\n        },\n        {\n            \"channel_name\": \"<CHANNEL_NAME_4>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_2>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"#channel_name_main_account\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#channel_name_doghouse\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6832,10 +6932,10 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6874,10 +6974,10 @@
 									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"<WEBHOOK_NAME>\",\n        \"url\": \"<WEBHOOK_URL>\",\n        \"use_custom_payload\": \"false\",\n        \"encode_as_form\": \"false\"\n      }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6917,10 +7017,10 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -6959,10 +7059,10 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"anotherone\",\n            \"url\": \"http://requestb.in/v1srg7v1\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/webhooks?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"{{datadog_site}}"
 									],
@@ -7023,7 +7123,7 @@
 					"name": "API Key",
 					"item": [
 						{
-							"name": "Get all API Key",
+							"name": "Get all API Keys",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -7131,7 +7231,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_GET?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7142,7 +7242,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_GET"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7158,8 +7258,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_GET",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_GET>"
 										}
 									]
 								},
@@ -7182,7 +7282,7 @@
 									"raw": "{\n    \"name\": \"<API_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_EDIT?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7193,7 +7293,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_EDIT"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7209,8 +7309,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_EDIT",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_EDIT>"
 										}
 									]
 								},
@@ -7233,7 +7333,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_DELETE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7244,7 +7344,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_DELETE"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7260,8 +7360,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_DELETE",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_DELETE>"
 										}
 									]
 								},
@@ -7277,7 +7377,7 @@
 					"name": "Application Key",
 					"item": [
 						{
-							"name": "Get all Application Key",
+							"name": "Get all Application Keys",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -7381,7 +7481,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7392,7 +7492,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7406,8 +7506,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_GET>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_GET>"
 										}
 									]
 								},
@@ -7430,7 +7530,7 @@
 									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7441,7 +7541,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7455,8 +7555,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_EDIT>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_EDIT>"
 										}
 									]
 								},
@@ -7479,7 +7579,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7490,7 +7590,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7504,8 +7604,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_DELETE>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_DELETE>"
 										}
 									]
 								},
@@ -7540,7 +7640,7 @@
 							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/{{datadog_api_key}}?ddsource=postman&service=postman&hostname={{hostname}}",
+							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/{{datadog_api_key}}?ddsource=postman&service=postman&hostname=<HOSTNAME>",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -7566,12 +7666,12 @@
 								},
 								{
 									"key": "hostname",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Host from which the log is sent."
 								}
 							]
 						},
-						"description": "### Overview\n\nSend your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n* Maximum content size per payload: 2MB\n* Maximum size for a single log: 256kB\n* Maximum array size if sending multiple logs in an array: 50 entries\n\n**Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.\n\n\n### Arguments\n\n| Item             | Description                                                                                                           |\n| ------           | ---------                                                                                                             |\n| Protocol         | http: 80<br>https: 443                                                                                                |\n| Host             | For Datadog US: `http-intake.logs.datadoghq.com` <br> For Datadog EU: `http-intake.logs.datadoghq.eu`                 |\n| Path             | `/v1/input/<DATADOG_API_KEY>`                                                                                         |\n| Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |\n| Method           | `POST`                                                                                                                |\n| Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |\n\n\n[Learn more about Log collection](https://docs.datadoghq.com/logs)"
+						"description": "### Overview\n\nSend your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n* Maximum content size per payload: 2MB\n* Maximum size for a single log: 256kB\n* Maximum array size if sending multiple logs in an array: 50 entries\n\n**Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.\n\n\n### Arguments\n\n| Item             | Description                                                                                                           |\n| ------           | ---------                                                                                                             |\n| Protocol         | http: 80<br>https: 443                                                                                                |\n| Host             | For Datadog US: `http-intake.logs.datadoghq.com` <br> For Datadog EU: `http-intake.logs.datadoghq.eu`                 |\n| Path             | `/v1/input/<DATADOG_API_KEY>`                                                                                         |\n| Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |\n| Method           | `POST`                                                                                                                |\n| Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |\n\n\n[Learn more about Log collection](https://docs.datadoghq.com/logs)"
 					},
 					"response": []
 				},
@@ -7642,7 +7742,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"limit\": 50,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
+							"raw": "{\n    \"limit\": 1000,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs-queries/list?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -7701,6 +7801,599 @@
 			]
 		},
 		{
+			"name": "Logs indexes",
+			"item": [
+				{
+					"name": "Get all indexes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get all Indexes\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint returns an array of the `Index` objects of your organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/:INDEX_NAME?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								":INDEX_NAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "INDEX_NAME",
+									"value": "<INDEX_NAME>",
+									"description": "Name of the index to get."
+								}
+							]
+						},
+						"description": "### Get an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint returns an `Index` identified by its name.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Index",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\": {\n        \"query\": \"<NEW_INDEX_FILTER_QUERY>\"\n    },\n    \"exclusion_filters\": [\n        {\n            \"name\": \"<INDEX_EXCLUSTION_FILTER_1>\",\n            \"is_enabled\": true,\n            \"filter\": {\n                \"query\": \"<INDEX_EXCLUSTION_FILTER_QUERY>\",\n                \"sample_rate\": 1\n            }\n        },\n        {\n            \"name\": \"<INDEX_EXCLUSTION_FILTER_2>\",\n            \"is_enabled\": true,\n            \"filter\": {\n                \"query\": \"<INDEX_EXCLUSTION_FILTER_QUERY_2>\",\n                \"sample_rate\": 1\n            }\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/:INDEX_NAME?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								":INDEX_NAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "INDEX_NAME",
+									"value": "main",
+									"description": "Name of the index"
+								}
+							]
+						},
+						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*required*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
+					},
+					"response": []
+				},
+				{
+					"name": "Get indexes order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/index-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"index-order"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get Indexes Order\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nUse the index order endpoints to control the processing _order_ of an organization's indexes. Use this endpoint only if you have more than one index for logs in your organization. Note that this index cannot be used to add or delete indexes.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Indexes Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"index_names\": [\n        \"<INDEX_NAME_2>\",\n        \"<INDEX_NAME_1>\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Update Indexes Order\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates the `IndexOrder` of your organization. It returns the `IndexOrder` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`index_names`**  [*required*]: Array of `Strings` identifying by their name(s) the index(es) of your organisation. Logs are tested against the query filter of each index one by one, following the order of the array. Logs are eventually stored in the first matching index.\n"
+					},
+					"response": []
+				}
+			],
+			"description": "## Logs Indexes\n\nThis endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)\n\nThe `Index` object describes the configuration of a log index. It has the following attributes:\n\n* **`name`** (Read Only):\n    The name of the index.\n* **`filter.query`** :\n    Only logs matching the filter criteria are considered for this index.\n    The search query followis the [Log search syntax][1]\n* **`num_retention_days`** (Read Only) :\n    The number of days before logs are deleted from this index\n* **`daily_limit`** (Read Only) :\n    The number of log-events you can send in this index before you are rate-limited.\n* **`is_rate_limited`** (Read Only) :\n    A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.\n* **`exclusion_filters`**\n    An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored.\n\n  * **`name`** :\n    The name of the exclusion filter\n  * **`is_enabled`** :\n    A boolean stating if the exclusion is active (will eventually exclude logs) or not.\n  * **`filter.query`** :\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter.\n    The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** :\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.\n\n\n**Note**:  You need an API and applications key with Admin right to interact with this endpoint.\n\n[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax\n",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b3fb9f17-ab4f-42ae-beb8-e2f3b529f633",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0d76bf9-68c2-44ef-8f28-43552805bf2d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Logs Pipelines",
+			"item": [
+				{
+					"name": "Get Pipeline Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipeline-order"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get Pipelines Order\n\nGet the current order of your Pipelines.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pipeline Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pipeline_ids\": [\n        \"<PIPELINE_1_ID>\",\n        \"<PIPELINE_2_ID>\",\n        \"<PIPELINE_3_ID>\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipeline-order"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Update Pipelines Order\n\nUpdate the order of your Pipelines.\n\n**Note**: Logs are processed sequentially. Reordering a pipeline may change the structure and content of the data processed by other pipelines and their processors.\n\n### Arguments\n\n* **`pipeline_ids`** [*required*]:\n    Ordered Array of `<PIPELINE_ID>` strings, the order of pipeline IDs in the array define the overall Pipelines order for Datadog?\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Pipelines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get all Pipelines\n\nGet all pipelines from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Pipeline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the Pipeline to get."
+								}
+							]
+						},
+						"description": "### Get a Pipeline\n\nGet a specific Pipeline from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Pipeline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"<PIPELINE_NAME>\",\n    \"is_enabled\": true,\n    \"filter\": {\n        \"query\": \"<PIPELINE_QUERY>\"\n    },\n    \"processors\": [\n        {\n            \"name\": \"Define date as the official timestamp of the log\",\n            \"is_enabled\": true,\n            \"sources\": [\n                \"date\"\n            ],\n            \"type\": \"date-remapper\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}"
+								}
+							]
+						},
+						"description": "### Create a Pipeline\n\nCreate a Pipeline in your Organization.\n\n### Arguments\n\n* **`name`** [*required*]:\n    Your pipeline name.\n\n* **`is_enabled`** [*optional*, *default*=**False**]:\n    Boolean value wether or note your pipeline is enabled\n\n* **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.\n\n* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api) to get the specific Scheme for each processor."
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Pipeline",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"<PIPELINE_NAME>\",\n    \"is_enabled\": true,\n    \"filter\": {\n        \"query\": \"<PIPELINE_QUERY>\"\n    },\n    \"processors\": [\n        {\n            \"name\": \"Define date as the official timestamp of the log\",\n            \"is_enabled\": true,\n            \"sources\": [\n                \"date\"\n            ],\n            \"type\": \"date-remapper\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the pipeline to update"
+								}
+							]
+						},
+						"description": "### Update a Pipeline\n\nUpdate a given pipeline configuration to change it's processors or their order.\n\n### Arguments\n\n* **`name`** [*required*]:\n    Your pipeline name.\n\n* **`is_enabled`** [*optional*, *default*=**False**]:\n    Boolean value wether or note your pipeline is enabled\n\n* **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.\n\n* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api) to get the specific Scheme for each processor."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Pipeline",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the pipeline to delete"
+								}
+							]
+						},
+						"description": "### Delete a Pipeline\n\nDelete a given pipeline from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				}
+			],
+			"description": "Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.\n\n* See the [Pipelines Configuration Page](https://app.datadoghq.com/logs/pipelines) to see the pipelines and processors currently configured in our UI.\n* See the [Pipeline documentation](https://docs.datadoghq.com/logs/processing) to learn more",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f760b013-36f2-435b-b77e-f3d5ae8c7c44",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c75ef9c8-86fd-4115-ae29-8be6a4d05596",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "Metrics",
 			"item": [
 				{
@@ -7721,7 +8414,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/metrics?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&from={{from_ts}}&host={{hostname}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/metrics?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&from={{from_ts}}&host=<HOSTNAME>",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7751,7 +8444,7 @@
 								},
 								{
 									"key": "host",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag."
 								}
 							]
@@ -7958,7 +8651,7 @@
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "{{metrics_name}}",
+									"value": "<METRIC_NAME>",
 									"description": "Name of the metric to retrieve metadata from."
 								}
 							]
@@ -8010,7 +8703,7 @@
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "{{metric_name}}",
+									"value": "<METRIC_NAME>",
 									"description": "Name of the metric to edit metadata from."
 								}
 							]
@@ -8037,7 +8730,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/search?q=metrics:{{metric_name}}&api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/search?q=metrics:<METRIC_NAME>&api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8052,7 +8745,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "metrics:{{metric_name}}",
+									"value": "metrics:<METRIC_NAME>",
 									"description": "Name of the metric to search on"
 								},
 								{
@@ -8188,7 +8881,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_GET>",
 									"description": "Id of the monitor you want to get info from"
 								}
 							]
@@ -8240,7 +8933,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_EDIT>",
 									"description": "Id of the monitor you want to edit info from"
 								}
 							]
@@ -8292,7 +8985,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_DELETE>",
 									"description": "Id of the monitor to Delete"
 								}
 							]
@@ -8388,7 +9081,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_MUTE>",
 									"description": "ID of the monitor to mute."
 								}
 							]
@@ -8441,7 +9134,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_UNMUTE>",
 									"description": "ID of the monitor to un-mute."
 								}
 							]
@@ -8815,7 +9508,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID_TO_GET>",
 									"description": "Datadog public organization ID."
 								}
 							]
@@ -8907,7 +9600,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID_TO_UPDATE>",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -8962,7 +9655,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID>",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -9041,14 +9734,14 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nCreate a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]\n\nA browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].\n\n##### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ - The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  ** `tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][3].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://app.datadoghq.com/synthetics/list\n[2]: https://docs.datadoghq.com/synthetics/browser_tests/#record-test\n[3]: https://docs.datadoghq.com/tagging/using_tags"
+						"description": "### Overview\n\nCreate a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]\n\nA browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].\n\n### Arguments\n\nThe main arguments for your test are:\n\n*   **`name`** - _required_ - A unique name for the test.\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n*   **`subtype`** - _required for SSL test_ - For a SSL API test, specify `ssl` as the value. Otherwise, you should omit this argument.\n*   **`request`** - _required_ - The request associated to your API and SSL test, refer to the Request section below to learn more.\n*   **`options`** - _required_ - List of options to customize your test, refer to the Options section below to learn more.\n*   **`message`** - _required_ - A description of the test.\n*   **`assertions`** - _required for API and SSL test_ - The assertions associated with your test, refer to the Assertions section below to learn more.\n*   **`locations`** - _required_ - A list of the locations to send the tests from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.\n*   **`tags`** - _optional_ - A list of tags used to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n\nFind below the available configuration options depending on the test you want to create.\n\n#### Request\n\nThe **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all necessary information to perform the request to your endpoint. It's a JSON object with the following attributes:\n\n*   **`method`** - _required API and browser test_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n*   **`url`** - _required API and browser test_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n*   **`host`** - _required SSL test_ - If creating a SSL test, specify the host to connect to.\n*   **`port`** - _required SSL test_ - If creating a SSL test, specify the port to connect to.\n*   **`basicAuth`** - _optional_ - If your endpoint is behind basic Auth, use this parameter to define your username and password with the following value: `{\"username\": \"<USERNAME>\", \"password\": \"<PASSWORD>\"}`.\n*   **`timeout`** - _optional_ - When the request should timeout.\n*   **`headers`** - _optional API test_ - Headers in the API request.\n*   **`body`** - _optional API test_ - The body for the API request. Accepts text strings (including JSON as a text string). Specify the type using the `Content-Type` `property` parameter and type, for example `application/json` or `text/plain` in the `headers` parameter.\n*   **`cookies`** - _optional API test_ - Cookies to send along with your API test request.\n\n#### Options\n\nThe **`options`** argument is required for the browser, API, and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:\n\n*  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, and 604800).\n*  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n*  **`min_location_failed`** - _optional_ - The minimum number of locations in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1). Default is 1.\n*  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n*  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.\n\n#### Assertions\n\nThe **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:\n\n*   **`type`** - _required_ - The part of the response that you want to assess. Possible types are:\n\n  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter.\n  * `body`: Use the `target` attribute to specify the expected value for the `body`.\n  * `responseTime`: Use the `target` attribute to specify the expected value for `responseTime`. For example: `\"target\":180000`.\n  * `statusCode`: Use the `target` attribute to specify the expected value for `statusCode`. For example: `\"target\":403`.\n  * `certificate`:  For SSL tests only, use the `target` attribute to specify the expected value for `certificate`. `\"target\":1` is a valid certificate, `\"target\":0` is a non-valid certificate.\n  * `property`: For SSL tests only, when you define a certificate `property`, you must specify the certificate property key in the `property` parameter, and the certificate property value with the `target`parameter.\n\n*   **`target`** - _required_ - The expected value for the assertion.\n*   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n| type        | Valid operator                                                            | Value type                                                                                                                                           |\n| ---           | ---                                                                         | ---                                                                                                                                                  |\n| `header`       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for `contains`/`does not contain`/`is`/`is not`.  [RegexString][3] for: `matches`/`does not match`. |\n| `body`          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n| `responseTime` | `lessThan`                                                                  | Integer                                                                                                                                              |\n| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |\n| `certificate` | `isInMoreThan` | Integer |\n| `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n\n[1]: https://app.datadoghq.com/synthetics/list\n[2]: /synthetics/browser_tests/#record-test\n[3]: https://en.wikipedia.org/wiki/Regular_expression"
 					},
 					"response": []
 				},
 				{
 					"name": "Start or pause a test",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -9091,7 +9784,7 @@
 							"variable": [
 								{
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"value": "<SYNTHETICS_TEST_ID>",
 									"description": "ID of the synthetics test to start/pause"
 								}
 							]
@@ -9116,7 +9809,7 @@
 							"raw": "{\n    \"config\": {\n        \"assertions\": [\n            {\n                \"operator\": \"is\",\n                \"type\": \"statusCode\",\n                \"target\": 403\n            },\n            {\n                \"operator\": \"is\",\n                \"property\": \"content-type\",\n                \"type\": \"header\",\n                \"target\": \"text/html\"\n            },\n            {\n                \"operator\": \"lessThan\",\n                \"type\": \"responseTime\",\n                \"target\": 2000\n            }\n        ],\n        \"request\": {\n            \"method\": \"GET\",\n            \"url\": \"https://datadoghq.com\",\n            \"timeout\": 30,\n            \"headers\": {\n                \"header1\": \"value1\",\n                \"header2\": \"value2\"\n            },\n            \"body\": \"body to send with the request\"\n        }\n    },\n    \"locations\": [\n        \"aws:us-east-2\",\n        \"aws:eu-central-1\",\n        \"aws:ap-northeast-1\",\n        \"aws:us-west-2\",\n        \"aws:ap-southeast-2\"\n    ],\n    \"message\": \"test\",\n    \"name\": \"Test\",\n    \"options\": {\n        \"tick_every\": 60,\n        \"min_failure_duration\": 0,\n        \"min_location_failed\": 1,\n        \"follow_redirects\": true\n    },\n    \"tags\": [\n        \"foo:bar\"\n    ],\n    \"type\": \"api\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9128,7 +9821,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID"
+								":PUBLIC_ID"
 							],
 							"query": [
 								{
@@ -9144,13 +9837,13 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
-									"description": "ID of the synthetics test to start/pause"
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"description": "ID of the test to Edit"
 								}
 							]
 						},
-						"description": "### Overview\n\nUse this method to update an existing Synthetics test. In order to update a test, you have to submit the same payload as creating a test.\n\nThe parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests.\n\nA browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].\n\nIn order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.\n\n### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://docs.datadoghq.com/synthetics/browser_tests/#record-test\n[2]: https://docs.datadoghq.com/tagging/using_tags"
+						"description": "### Overview\n\nUse this method to update an existing Synthetics test. In order to update a test, you have to submit the same payload as creating a test.\n\nThe parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests.\n\nA browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].\n\nIn order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.\n\n### Arguments\n\nThe main arguments for your test are:\n\n*   **`name`** - _required_ - A unique name for the test.\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n*   **`subtype`** - _required for SSL test_ - For a SSL API test, specify `ssl` as the value. Otherwise, you should omit this argument.\n*   **`request`** - _required_ - The request associated to your API and SSL test, refer to the Request section below to learn more.\n*   **`options`** - _required_ - List of options to customize your test, refer to the Options section below to learn more.\n*   **`message`** - _required_ - A description of the test.\n*   **`assertions`** - _required for API and SSL test_ - The assertions associated with your test, refer to the Assertions section below to learn more.\n*   **`locations`** - _required_ - A list of the locations to send the tests from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.\n*   **`tags`** - _optional_ - A list of tags used to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n\nFind below the available configuration options depending on the test you want to create.\n\n#### Request\n\nThe **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all necessary information to perform the request to your endpoint. It's a JSON object with the following attributes:\n\n*   **`method`** - _required API and browser test_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n*   **`url`** - _required API and browser test_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n*   **`host`** - _required SSL test_ - If creating a SSL test, specify the host to connect to.\n*   **`port`** - _required SSL test_ - If creating a SSL test, specify the port to connect to.\n*   **`basicAuth`** - _optional_ - If your endpoint is behind basic Auth, use this parameter to define your username and password with the following value: `{\"username\": \"<USERNAME>\", \"password\": \"<PASSWORD>\"}`.\n*   **`timeout`** - _optional_ - When the request should timeout.\n*   **`headers`** - _optional API test_ - Headers in the API request.\n*   **`body`** - _optional API test_ - The body for the API request. Accepts text strings (including JSON as a text string). Specify the type using the `Content-Type` `property` parameter and type, for example `application/json` or `text/plain` in the `headers` parameter.\n*   **`cookies`** - _optional API test_ - Cookies to send along with your API test request.\n\n#### Options\n\nThe **`options`** argument is required for the browser, API, and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:\n\n*  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, and 604800).\n*  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n*  **`min_location_failed`** - _optional_ - The minimum number of locations in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1). Default is 1.\n*  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n*  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.\n\n#### Assertions\n\nThe **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:\n\n*   **`type`** - _required_ - The part of the response that you want to assess. Possible types are:\n\n  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter.\n  * `body`: Use the `target` attribute to specify the expected value for the `body`.\n  * `responseTime`: Use the `target` attribute to specify the expected value for `responseTime`. For example: `\"target\":180000`.\n  * `statusCode`: Use the `target` attribute to specify the expected value for `statusCode`. For example: `\"target\":403`.\n  * `certificate`:  For SSL tests only, use the `target` attribute to specify the expected value for `certificate`. `\"target\":1` is a valid certificate, `\"target\":0` is a non-valid certificate.\n  * `property`: For SSL tests only, when you define a certificate `property`, you must specify the certificate property key in the `property` parameter, and the certificate property value with the `target`parameter.\n\n*   **`target`** - _required_ - The expected value for the assertion.\n*   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n| type        | Valid operator                                                            | Value type                                                                                                                                           |\n| ---           | ---                                                                         | ---                                                                                                                                                  |\n| `header`       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for `contains`/`does not contain`/`is`/`is not`.  [RegexString][3] for: `matches`/`does not match`. |\n| `body`          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n| `responseTime` | `lessThan`                                                                  | Integer                                                                                                                                              |\n| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |\n| `certificate` | `isInMoreThan` | Integer |\n| `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n\n[1]: /synthetics/browser_tests/#record-test\n[2]: /tagging/using_tags\n[3]: https://en.wikipedia.org/wiki/Regular_expression"
 					},
 					"response": []
 				},
@@ -9167,7 +9860,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"public_ids\": [\n        \"<TEST_ID_1>\",\n        \"<TEST_ID_2>\"\n    ]\n}"
+							"raw": "{\n    \"public_ids\": [\n        \"<SYNTHETICS_TEST_PUBLIC_ID_1>\",\n        \"<SYNTHETICS_TEST_PUBLIC_ID_2>\"\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/delete?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -9214,7 +9907,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID/results?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID/results?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9226,7 +9919,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID",
+								":PUBLIC_ID",
 								"results"
 							],
 							"query": [
@@ -9243,8 +9936,8 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
 									"description": "ID of the synthetics test to get results from"
 								}
 							]
@@ -9266,7 +9959,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID/results/:RESULT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID/results/:RESULT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9278,7 +9971,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID",
+								":PUBLIC_ID",
 								"results",
 								":RESULT_ID"
 							],
@@ -9296,13 +9989,13 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
-									"description": "ID of the synthetics test to get result from"
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"description": "ID of the synthetics test to get results from"
 								},
 								{
 									"key": "RESULT_ID",
-									"value": "{{synthetics_test_result_id}}",
+									"value": "<SYNTHETICS_TEST_RESULT_ID>",
 									"description": "ID of the synthetics test result."
 								}
 							]
@@ -9367,7 +10060,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/${test_id}?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9379,7 +10072,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}"
+								":PUBLIC_ID"
 							],
 							"query": [
 								{
@@ -9391,6 +10084,13 @@
 									"key": "application_key",
 									"value": "{{datadog_application_key}}",
 									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PUBLIC_ID",
+									"value": "SYNTHETICS_TEST_PUBLIC_ID",
+									"description": "ID of the synthetics test to get results from"
 								}
 							]
 						},
@@ -9411,7 +10111,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/browser/devices?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/browser/devices?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9428,11 +10128,13 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
@@ -9569,7 +10271,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to retrieve tags from."
 								}
 							]
@@ -9622,7 +10324,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Host name to add tags to."
 								}
 							]
@@ -9675,7 +10377,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname to update tags of."
 								}
 							]
@@ -9728,7 +10430,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname to delete tag from."
 								}
 							]
@@ -10315,7 +11017,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10326,7 +11028,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10342,9 +11044,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "Datadog user handle email, usually the same as the user email"
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10402,7 +11103,7 @@
 							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10413,7 +11114,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10429,9 +11130,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "The handle of the user."
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10449,7 +11149,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10460,7 +11160,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10476,9 +11176,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "Datadog user handle."
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10536,15 +11235,21 @@
 	],
 	"variable": [
 		{
-			"id": "ae54c8e4-523f-43ae-9f0f-3cb148ffea5a",
-			"key": "dd_api_key",
+			"id": "5a1497c2-0cf4-4f32-9191-724c75f45d48",
+			"key": "datadog_api_key",
 			"value": "xxxxx",
 			"type": "string"
 		},
 		{
-			"id": "a3db5baf-b743-4ff9-947b-37f23edce215",
-			"key": "dd_app_key",
+			"id": "2f92b8ea-c850-4e56-b0ca-56f5ca91bc6e",
+			"key": "datadog_application_key",
 			"value": "yyyyy",
+			"type": "string"
+		},
+		{
+			"id": "03904d68-6941-4383-94c9-cab1eadbbcb7",
+			"key": "datadog_site",
+			"value": "",
 			"type": "string"
 		}
 	]
