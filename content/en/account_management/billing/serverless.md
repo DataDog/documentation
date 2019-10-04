@@ -33,6 +33,8 @@ This filter excludes anything that is tagged with `env:staging` or `env:test1`.
 
 ### API
 
+The AWS API is only supported in the US site.
+
 **Listing the current tag filter rules**
 ```
 curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<api_key>&application_key=<app_key>' --data '{"account_id": "<aws_account_id>"}'
