@@ -1,6 +1,7 @@
 ---
 title: Event collection
 kind: documentation
+disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -19,26 +20,23 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-In order to collect events, you need the following environment variables in your `datadog-agent.yaml` manifest:
 
-```
-          - name: DD_COLLECT_KUBERNETES_EVENTS
-            value: "true"
-          - name: DD_LEADER_ELECTION
-            value: "true"
-```
-Enabling the leader election ensures that only one Agent collects the events.
+If it's not done already review the [setup instructions to install the Datadog Cluster Agent][1]. To enable event collection with the cluster Agent.
 
-**Note**: You must disable leader election in the Datadog Agent on your nodes before enabling leader election in the Datadog Cluster Agent. Otherwise, leader election may fail and some features such as the external metrics provider or the cluster level checks may not work.
+1. Disable leader election in your Datadog Node Agent Daemonset by setting the `leader_election` variable or `DD_LEADER_ELECTION` environment variable to `false`.
 
-#### Cluster metadata provider
+2. Set in your Cluster Agent deployment file the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
 
-In the Node Agent, set the environment variable `DD_CLUSTER_AGENT_ENABLED` to true.
+    ```
+    - name: DD_COLLECT_KUBERNETES_EVENTS
+      value: "true"
+    - name: DD_LEADER_ELECTION
+      value: "true"
+    ```
 
-The environment variable `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` can be set to specify how often the Node Agents hit the Datadog Cluster Agent.
-
-Disable the Kubernetes metadata tag collection with `DD_KUBERNETES_COLLECT_METADATA_TAGS`.
+Enabling the leader election like so ensures that only one Cluster Agent collects the events.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/cluster_agent/setup

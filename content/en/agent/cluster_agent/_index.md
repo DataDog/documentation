@@ -36,6 +36,8 @@ Using the Datadog Cluster Agent allows you to:
 * Enable the collection of cluster level data such as the monitoring of services or SPOF and events.
 * Leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
 
+**Note**: To leverage all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
+
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup your Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands</u>:List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
@@ -44,13 +46,11 @@ Using the Datadog Cluster Agent allows you to:
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Limitations
+## Performances
 
 The Datadog Cluster Agent implements a Go HTTP server (from `http/net`) to expose its API. This implementations is [largely sufficient][2] as the Datadog Cluster Agent should only be receiving calls from up to 5K nodes that are made every minute by default. Load testing the Datadog Cluster Agent, there were no problems handling 200 rq/s for an extended period of time.
 
 **Datadog recommends running 3 replicas of the Datadog Cluster Agent for infrastructures beyond a thousand nodes with the Agent.**
-
-**Note**: To leverage all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
 
 ## Further Reading
 
