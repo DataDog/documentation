@@ -21,11 +21,11 @@ further_reading:
 ---
 
 
-If it's not done already review the [setup instructions to install the Datadog Cluster Agent][1]. To enable event collection with the cluster Agent.
+If you haven't yet, review the [setup instructions to install the Datadog Cluster Agent][1] and enable event collection.
 
 1. Disable leader election in your Datadog Node Agent Daemonset by setting the `leader_election` variable or `DD_LEADER_ELECTION` environment variable to `false`.
 
-2. Set in your Cluster Agent deployment file the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
+2. In your Cluster Agent deployment file, set the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
 
       ```
         - name: DD_COLLECT_KUBERNETES_EVENTS
@@ -34,7 +34,7 @@ If it's not done already review the [setup instructions to install the Datadog C
           value: "true"
       ```
 
-Enabling the leader election like so ensures that only one Cluster Agent collects the events.
+Enabling the leader election in this way ensures that only one Cluster Agent collects the events.
 
 ## Further Reading
 
