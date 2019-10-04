@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Use an integration monitor to check if an installed integration is running. For more detailed monitoring, a metric monitor can be used to gauge specific information about an integration.
+Use an integration monitor to check if an installed [integration][1] is running. For more detailed monitoring, a metric monitor can be used to gauge specific information about an integration.
 
 ## Monitor creation
 
-To create an [integration monitor][1] in Datadog:
+To create an [integration monitor][2] in Datadog:
 
 1. Use the main navigation: *Monitors --> New Monitor --> Integration*.
 2. Search for an integration or select it from the list or images.
@@ -29,7 +29,7 @@ To create an [integration monitor][1] in Datadog:
 
 ### Integration Metric
 
-Create an integration metric monitor by following the instructions in the [metric monitor][2] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][3] page.
+Create an integration metric monitor by following the instructions in the [metric monitor][3] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][4] page.
 
 ### Integration Status
 
@@ -83,20 +83,21 @@ Set up a cluster alert:
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][2] documentation for information on [No data][4], [Auto resolve][5], and [Evaluation delay][6] options.
+See the [metric monitor][3] documentation for information on [No data][5], [Auto resolve][6], and [Evaluation delay][7] options.
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/integration
-[2]: /monitors/monitor_types/metric
-[3]: https://app.datadoghq.com/monitors/manage
-[4]: /monitors/monitor_types/metric/#no-data
-[5]: /monitors/monitor_types/metric/#auto-resolve
-[6]: /monitors/monitor_types/metric/#evaluation-delay
-[7]: /monitors/notifications
+[1]: /integrations
+[2]: https://app.datadoghq.com/monitors#create/integration
+[3]: /monitors/monitor_types/metric
+[4]: https://app.datadoghq.com/monitors/manage
+[5]: /monitors/monitor_types/metric/#no-data
+[6]: /monitors/monitor_types/metric/#auto-resolve
+[7]: /monitors/monitor_types/metric/#evaluation-delay
+[8]: /monitors/notifications
