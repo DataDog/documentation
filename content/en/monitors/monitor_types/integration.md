@@ -33,7 +33,7 @@ Create an integration metric monitor by following the instructions in the [metri
 
 ### Integration Status
 
-If the integration has a service check, the **Integration Status** tab is selectable.
+If the integration has a service check, the **Integration Status** tab is active.
 
 #### Pick a check
 
@@ -43,8 +43,8 @@ If there is only one check for the integration, no selection is necessary. Other
 
 Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
+* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed host name or tag is excluded.
 
 #### Set alert conditions
 
