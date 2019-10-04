@@ -2,7 +2,6 @@
 title: Synthetics Troubleshooting
 kind: documentation
 description: Troubleshoot common Synthetics issues.
-beta: true
 further_reading:
 - link: "synthetics/"
   tag: "Documentation"
