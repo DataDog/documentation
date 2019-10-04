@@ -240,9 +240,9 @@ To upgrade the PHP tracer, [download the latest release][7] and follow the same 
 [9]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
 [10]: /tracing/faq/php-tracer-manual-installation
 [11]: #library-compatibility
-[12]: /help
-[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[15]: /tracing/troubleshooting
-[16]: /tracing/troubleshooting/?tab=php
+[12]: /tracing/setup/php/#environment-variable-configuration
+[13]: /help
+[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[16]: /tracing/troubleshooting
 [17]: #install-the-extension
