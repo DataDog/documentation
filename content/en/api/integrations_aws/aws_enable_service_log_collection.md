@@ -9,7 +9,7 @@ external_redirect: /api/#enable-an-aws-service-log-collection
 
 Enable Automatic Log collection for your AWS services.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

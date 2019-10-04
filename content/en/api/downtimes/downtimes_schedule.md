@@ -7,7 +7,7 @@ external_redirect: /api/#schedule-monitor-downtime
 
 ## Schedule monitor downtime
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`scope`** [*required*]:
     The scope(s) to which the downtime applies, e.g. `host:app2`. Provide multiple scopes as a comma-separated list, e.g. `env:dev,env:prod`. The resulting downtime applies to sources that matches ALL provided scopes (i.e. `env:dev` **AND** `env:prod`), NOT any of them.
@@ -30,4 +30,3 @@ external_redirect: /api/#schedule-monitor-downtime
     *   **`week_days`** (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
     *   **`until_occurrences`** (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
     *   **`until_date`** (optional) the date at which the recurrence should end as a POSIX timestmap. **`until_occurences` and `until_date`** are mutually exclusive
-

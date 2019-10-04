@@ -11,7 +11,7 @@ Update a Datadog-Amazon Web Services integration.
 
 **Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

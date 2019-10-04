@@ -63,6 +63,12 @@ Vous pouvez créer et personnaliser deux types de dashboards : les [screenboard
 | Partage de l'ensemble du dashboard | Non                               | Oui                                               |
 | Partage en lecture seule       | Oui                              | Oui                                               |
 
+### Dashboards conseillés et utilisateurs actifs
+
+Que regarder ensuite ? Si vous n'êtes pas sûr(e), Datadog vous propose des suggestions pour visualiser les dashboards pertinents. Pour afficher les dashboards conseillés et les utilisateurs actifs, cliquez sur l'icône en forme d'accent circonflexe en regard du titre du dashboard. Ces dashboards sont conseillés en fonction de l'activité utilisateur dans votre organisation et de la fréquence à laquelle les utilisateurs passent de ce dashboard à d'autres dashboards existant. Vous pouvez également ajouter ou mettre à jour des descriptions de dashboard au format Markdown en cliquant sur `edit` depuis cette vue.
+
+{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Dashboards conseillés" responsive="true">}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

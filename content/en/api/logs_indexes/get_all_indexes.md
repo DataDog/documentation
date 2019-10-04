@@ -13,6 +13,6 @@ This endpoint is in public beta. If you have any feedback, <a href="/help">conta
 
 This endpoint returns an array of the `Index` objects of your organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

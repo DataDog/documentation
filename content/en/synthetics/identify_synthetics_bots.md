@@ -18,41 +18,54 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool.
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. To detect Datadog robots, use:
 
-Header attached to all Datadog API tests:
+* The [headers](#headers) attached to all Datadog robot requests.
+* Datadog's [**Synthetics IP ranges**][1].
+* The **Advanced options** configuration to set custom headers for your API and browser tests. You can also locally add **cookies, headers, or basic auth** to your API tests and **cookies and headers** to your browser tests.
+* The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#datadog-synthetics-browser-variable).
+
+#### Headers
+
+Use the header attached to Datadog robots to detect them for your API and browser tests:
+
+{{< tabs >}}
+{{% tab "API Tests" %}}
+
+The following header is attached to all Datadog API tests robots:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
-Header attached to all Datadog Browser tests:
+
+The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
+
+{{% /tab %}}
+{{% tab "Browser tests" %}}
+
+The following header is attached to all Datadog browser tests robots:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
-If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
+{{% /tab %}}
+{{< /tabs >}}
 
-Choose any or a variety of the following methods to identify the robots to make sure they are performing the actions you expect.
+##### APM headers
 
-1. You can use the [**headers set for APM integration**][1]. The `x-datadog-origin: synthetics` header, for instance, is added to all the requests launched for API tests. Using one of these headers allows you to filter these bot requests once in your analytics tool. No headers are added for browser tests.
+If APM is enabled, [**other APM specific headers**][2] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
-    If you want these requests to be completely removed, and not sent at all to your analytics tool, you can use the below JavaScript variable on your website, wrapped around your analytics tool code snippet:
+#### _DATADOG_SYNTHETICS_BROWSER variable
 
-    ```
-    if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-      initializeAnalytics()
-    }
-    ```
+When a Datadog robot is rendering your application, the `window._DATADOG_SYNTHETICS_BROWSER` variable is set to `true`. To remove the robot actions from your analytics data, wrap your analytics tool code with the following test:
 
-Alternatively, there are other ways to flag Datadog Synthetics robots:
-
-* You can use the **Advanced options** to set custom headers for your API and Browser tests.
-
-* You can locally add **cookies, headers or basic auth** to your API tests and **cookies and headers** to your Browser tests.
-
-* You can use Datadog's [**Synthetics IP ranges**][2].
+```javascript
+if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+  initializeAnalytics()
+}
+```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/apm/#how-are-traces-linked-to-checks
-[2]: https://ip-ranges.datadoghq.com/synthetics.json
+[1]: https://ip-ranges.datadoghq.com/synthetics.json
+[2]: /synthetics/apm/#how-are-traces-linked-to-tests

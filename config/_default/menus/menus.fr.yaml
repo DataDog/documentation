@@ -9,21 +9,27 @@ main:
     url: getting_started/agent/
     parent: getting_started
     weight: 1
-  - name: Datadog
-    url: getting_started/application/
-    parent: getting_started
-    weight: 2
   - name: Intégrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 3
+    weight: 2
   - name: Prometheus/Openmetrics
     identifier: getting_started_prometheus
     url: getting_started/integrations/prometheus
     parent: getting_started_integrations
+    weight: 201
+  - name: Datadog
+    identifier: getting_started_datadog
+    url: getting_started/application/
+    parent: getting_started
+    weight: 3
+  - name: Les monitors
+    identifier: getting_started_monitors
+    url: getting_started/application/monitors
+    parent: getting_started_datadog
     weight: 301
-  - name: Recueillir vos traces
+  - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
@@ -186,28 +192,28 @@ main:
     identifier: agent_autodiscovery
     parent: agent
     weight: 4
+  - name: Auto-Configuration
+    url: agent/autodiscovery/auto_conf/
+    parent: agent_autodiscovery
+    weight: 401
   - name: Modèles d'intégration
     url: agent/autodiscovery/integrations/
     parent: agent_autodiscovery
-    weight: 401
+    weight: 402
   - name: Identificateur de conteneur
     url: agent/autodiscovery/ad_identifiers/
     parent: agent_autodiscovery
-    weight: 402
+    weight: 403
   - name: Template Variables
     url: agent/autodiscovery/template_variables/
     parent: agent_autodiscovery
-    weight: 403
+    weight: 404
   - name: Extraction de tag
     url: agent/autodiscovery/tag/
     parent: agent_autodiscovery
-    weight: 404
+    weight: 405
   - name: Gestion de découverte
     url: agent/autodiscovery/management/
-    parent: agent_autodiscovery
-    weight: 405
-  - name: Dépannage
-    url: agent/autodiscovery/troubleshooting/
     parent: agent_autodiscovery
     weight: 406
   - name: Checks d'endpoints
@@ -218,6 +224,10 @@ main:
     url: agent/autodiscovery/clusterchecks/
     parent: agent_autodiscovery
     weight: 408
+  - name: Dépannage
+    url: agent/autodiscovery/troubleshooting/
+    parent: agent_autodiscovery
+    weight: 409
   - name: Collecte de logs
     url: agent/logs/
     identifier: agent_logs
@@ -253,7 +263,7 @@ main:
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
     weight: 802
-  - name: Status d'un Check
+  - name: Statut d'un check de l'Agent
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
     weight: 803
@@ -372,10 +382,6 @@ main:
     url: graphing/infrastructure/process/
     parent: graphing_infrastructure
     weight: 604
-  - name: Monitor de performance réseau
-    url: graphing/infrastructure/network_performance_monitor/
-    parent: graphing_infrastructure
-    weight: 605
   - name: Informatique sans serveur
     url: graphing/infrastructure/serverless/
     parent: graphing_infrastructure
@@ -434,11 +440,11 @@ main:
     parent: graphing
     identifier: graphing_json
     weight: 8
-  - name: Schéma JSON des Widgets
+  - name: Schéma JSON des widgets
     url: graphing/graphing_json/widget_json/
     parent: graphing_json
     weight: 801
-  - name: Schema JSON des requètes
+  - name: Schéma JSON des requêtes
     url: graphing/graphing_json/request_json/
     parent: graphing_json
     weight: 802
@@ -460,69 +466,69 @@ main:
     parent: alerting
     identifier: monitor_types
     weight: 1
-  - name: Anomalies
-    url: monitors/monitor_types/anomaly/
-    parent: monitor_types
-    weight: 101
-  - name: APM
-    url: monitors/monitor_types/apm/
-    parent: monitor_types
-    weight: 102
-    identifier: monitor_apm
-  - name: Composite
-    url: monitors/monitor_types/composite/
-    parent: monitor_types
-    weight: 103
-  - name: Check custom
-    url: monitors/monitor_types/custom_check/
-    parent: monitor_types
-    weight: 104
-  - name: Événements
-    url: monitors/monitor_types/event/
-    parent: monitor_types
-    weight: 105
-  - name: Prévision
-    url: monitors/monitor_types/forecasts/
-    parent: monitor_types
-    weight: 106
   - name: Host
     url: monitors/monitor_types/host/
     parent: monitor_types
-    weight: 107
-  - name: Intégration
-    url: monitors/monitor_types/integration/
-    parent: monitor_types
-    weight: 108
-  - name: Log
-    url: monitors/monitor_types/log/
-    parent: monitor_types
-    weight: 109
+    weight: 101
   - name: Métrique
     url: monitors/monitor_types/metric/
     parent: monitor_types
-    weight: 110
-  - name: Network
-    url: monitors/monitor_types/network/
+    weight: 102
+  - name: Anomalies
+    url: monitors/monitor_types/anomaly/
     parent: monitor_types
-    weight: 111
+    weight: 103
   - name: Singularité
     url: monitors/monitor_types/outlier/
     parent: monitor_types
-    weight: 112
-  - name: Processus
+    weight: 104
+  - name: Prévision
+    url: monitors/monitor_types/forecasts/
+    parent: monitor_types
+    weight: 105
+  - name: Intégration
+    url: monitors/monitor_types/integration/
+    parent: monitor_types
+    weight: 106
+  - name: Processes
     url: monitors/monitor_types/process/
     parent: monitor_types
-    weight: 113
-  - name: Analyse de traces
+    weight: 107
+  - name: Network
+    url: monitors/monitor_types/network/
+    parent: monitor_types
+    weight: 108
+  - name: Check custom
+    url: monitors/monitor_types/custom_check/
+    parent: monitor_types
+    weight: 109
+  - name: Event
+    url: monitors/monitor_types/event/
+    parent: monitor_types
+    weight: 110
+  - name: Logs
+    url: monitors/monitor_types/log/
+    parent: monitor_types
+    weight: 111
+  - name: Métriques de l'APM
+    url: monitors/monitor_types/apm/
+    parent: monitor_types
+    weight: 112
+    identifier: monitor_apm
+  - name: Analyses de traces
     url: monitors/monitor_types/trace_analytics
     parent: monitor_types
     identifier: monitors_trace_analytics
-    weight: 114
+    weight: 113
   - name: Watchdog
     url: monitors/monitor_types/watchdog/
     parent: monitor_types
-    weight: 115
+    weight: 114
     identifier: monitor_watchdog
+  - name: Composite
+    url: monitors/monitor_types/composite/
+    parent: monitor_types
+    weight: 115
   - name: Gérer des monitors
     url: monitors/manage_monitor/
     weight: 2
@@ -543,8 +549,8 @@ main:
     url: monitors/downtimes/
     weight: 6
     parent: alerting
-  - name: 'Widget pour les SLO '
-    url: monitors/slo_widget/
+  - name: Service Level Objectives
+    url: monitors/slos/
     weight: 7
     parent: alerting
   - name: Guides
@@ -820,7 +826,7 @@ main:
     url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 703
-  - name: Modèles de logs
+  - name: Log Patterns
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 704
@@ -838,7 +844,7 @@ main:
     pre: nav_synthetics
     identifier: synthetics
     weight: 100000
-  - name: API Tests
+  - name: Tests d'API
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
@@ -870,11 +876,31 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: Surveillance réseau
+    url: network_performance_monitoring/
+    pre: nav_network
+    identifier: npm
+    weight: 120000
+  - name: Installation
+    url: network_performance_monitoring/installation
+    parent: npm
+    identifier: npm_installation
+    weight: 1
+  - name: Page Réseau
+    url: network_performance_monitoring/network_table
+    parent: npm
+    identifier: npm_page
+    weight: 2
+  - name: Map Réseau
+    url: network_performance_monitoring/network_map
+    parent: npm
+    identifier: npm_map
+    weight: 3
   - name: Outils de développement
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 110000
+    weight: 130000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -941,7 +967,7 @@ main:
     url: developers/write_agent_check/
     parent: dev_tools
     weight: 5
-  - name: Écrire un check Prometheus
+  - name: Écrire un check OpenMetrics
     url: developers/prometheus/
     parent: dev_tools
     weight: 6
@@ -971,12 +997,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 120000
+    weight: 140000
   - name: Gestion de compte
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 130000
+    weight: 150000
   - name: Gestion d'équipe
     url: account_management/team/
     parent: account_management
@@ -1038,7 +1064,7 @@ main:
     url: 'https://www.datadoghq.com/security/'
     pre: nav_security
     identifier: security
-    weight: 140000
+    weight: 160000
   - name: Agent
     url: security/agent/
     parent: security
@@ -1059,14 +1085,14 @@ main:
     url: glossary/
     pre: nav_glossary
     identifier: glossary_top_level
-    weight: 150000
+    weight: 170000
   - name: Vidéos
     url: videos/
     pre: nav_videos
     identifier: video_top_level
-    weight: 160000
+    weight: 180000
   - name: Aide
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 170000
+    weight: 190000

@@ -5,14 +5,14 @@ order: 23.3
 external_redirect: /api/#update-an-index
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/logs/config/indexes/<INDEX_NAME>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="update_an_index" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.update_an_index" >}}

@@ -9,7 +9,7 @@ external_redirect: '/api/#create-a-pipeline'
 Créez un pipeline dans votre organisation.
 
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`name`** [*obligatoire*] :

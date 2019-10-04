@@ -11,7 +11,7 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 
 A browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].
 
-### Arguments
+**ARGUMENTS**:
 
 The main arguments for your test are:
 
@@ -27,7 +27,7 @@ The main arguments for your test are:
 
 Find below the available configuration options depending on the test you want to create.
 
-#### Request
+**REQUEST**:
 
 The **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all necessary information to perform the request to your endpoint. It's a JSON object with the following attributes:
 
@@ -41,7 +41,7 @@ The **`request`**  argument is required for the browser, API, and SSL tests. It'
 *   **`body`** - _optional API test_ - The body for the API request. Accepts text strings (including JSON as a text string). Specify the type using the `Content-Type` `property` parameter and type, for example `application/json` or `text/plain` in the `headers` parameter.
 *   **`cookies`** - _optional API test_ - Cookies to send along with your API test request.
 
-#### Options
+**OPTIONS**:
 
 The **`options`** argument is required for the browser, API, and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:
 
@@ -51,7 +51,7 @@ The **`options`** argument is required for the browser, API, and SSL tests. Use 
 *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a "Too many redirects" error). Valid values are `true` or `false`. Default value is `false`.
 *  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.
 
-#### Assertions
+**ASSERTIONS**:
 
 The **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:
 

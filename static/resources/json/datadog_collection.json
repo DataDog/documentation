@@ -10982,7 +10982,7 @@
 							"raw": "{\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"test user\",\n    \"access_role\": \"st\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10992,7 +10992,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"user"
 							],
 							"query": [
 								{
@@ -11017,7 +11017,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11027,7 +11027,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [
@@ -11059,7 +11059,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11069,7 +11069,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"user"
 							],
 							"query": [
 								{
@@ -11103,7 +11103,7 @@
 							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11113,7 +11113,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [
@@ -11149,7 +11149,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11159,7 +11159,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [

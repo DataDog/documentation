@@ -10,7 +10,7 @@ Pour effectuer une nouvelle installation de l'Agent v6 de Datadog, consultez le
 
 ## En quoi consiste l'Agent v6 ?
 
-L'Agent 6 est la toute dernière version majeure de l'Agent Datadog. La grande différence entre l'Agent 5 et l'Agent 6 est que les composants principaux de l'Agent 6 ont été entièrement réécrits en Golang. Cela permet à Datadog de tirer parti de la programmation concurrente : au lieu des trois processus que l'Agent v5 exécutait, à savoir *le redirecteur*, *le collecteur* et *DogStatsD*, il n'existe désormais plus qu'un seul processus : *l'Agent*. Cette version offre de nombreuses autres améliorations importantes :
+L'Agent 6 est la toute dernière version majeure de l'Agent Datadog. La grande différence entre l'Agent 5 et l'Agent 6 est que les composants principaux de l'Agent 6 ont été entièrement réécrits en Golang. Cela permet à Datadog de tirer parti de la programmation concurrente : au lieu des trois processus que l'Agent v5 exécutait, à savoir *le Forwarder*, *le Collector* et *DogStatsD*, il n'existe désormais plus qu'un seul processus : *l'Agent*. Cette version offre de nombreuses autres améliorations importantes :
 
 * L'Agent v6 a considérablement réduit l'utilisation des ressources par rapport à l'Agent v5 :
   * Charge processeur réduite

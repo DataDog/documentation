@@ -10,7 +10,8 @@ external_redirect: /api/#query-the-event-stream
 The [event stream][1] can be queried and filtered by time, priority, sources and tags.
 Note: if the event you're querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`start`** [*required*]:
     POSIX timestamp.
 * **`end`** [*required*]:

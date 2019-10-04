@@ -398,6 +398,15 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 | [VPC][48]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][49]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
+### Azure
+
+For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
+
+| Integration            | Datadog Tag Keys                                                                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable) |
+| Azure VMs integration  | All tags above plus: `host`, `size`, `operating_system`, `availability_zone`                                                                          |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

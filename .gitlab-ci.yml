@@ -199,6 +199,18 @@ test_missing_tms_live:
   only:
     - master
 
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  dependencies:
+    - build_live
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+  only:
+    - schedules
+
 #rollback_live:
 #  <<: *base_template
 #  stage: cleanup

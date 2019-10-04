@@ -5,9 +5,14 @@ order: 33.4
 external_redirect: /api/#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/top_avg_metrics`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-billing-usage-top-avg-metrics" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-top-avg-metrics" >}}

@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-pagerduty-integration
 
 Delete the Datadog-PagerDuty integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

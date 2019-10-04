@@ -105,24 +105,11 @@ The recommended number of open file descriptors is 1024. You can see this value 
 minfds = 100  # Your hard limit
 ```
 
-### The Collector
-The collector gathers all standard metrics every 15 seconds. It also supports the execution of python-based, user-provided checks, stored in `/etc/dd-agent/checks.d`. User-provided checks must inherit from the AgentCheck abstract class defined in `checks/init.py`. See [Writing a custom Agent check][6] for more details.
-
-### The Forwarder
-The Agent forwarder listens for incoming requests over HTTP to send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable.
-
-### DogStatsD
-DogStatsD is a python implementation of [Etsy's StatsD][7] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][8].
-
-
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
 [5]: /agent/faq/network
-[6]: /developers/write_agent_check/?tab=agentv5
-[7]: https://github.com/etsy/statsd
-[8]: /developers/dogstatsd
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -221,7 +208,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Ubuntu x86_64][3]                | Ubuntu 12.04+          |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5+       |
 | [Docker][5]                       | Version 1.12+          |
-| [Kubernetes][6]                   | Version 1.3+           |
+| [Kubernetes][6]                   | Version 1.3 to 1.8     |
 | [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4+           |
 | [Fedora x86_64][8]                | Fedora 26+             |
 | [MacOS][9]                        | macOS 10.10+           |
@@ -245,9 +232,9 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
-| OS                                | Supported versions                        |
-|-----------------------------------|-------------------------------------------|
-| [AIX][1]                          | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
+| OS       | Supported versions                        |
+|----------|-------------------------------------------|
+| [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
 
 

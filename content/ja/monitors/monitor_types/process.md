@@ -25,13 +25,13 @@ further_reading:
 
 ### コンフィグレーション
 
-1. **監視するプロセスを検索します。**  
+1. **監視するプロセスを検索します。**
   スペース区切りの文字列リストを指定できます。インフラストラクチャー上のすべてのプロセスに対して、部分一致のあいまい検索が実行されます。
   一致するプロセスとその数が下のテーブルに表示されます。
 
     {{< img src="monitors/monitor_types/process/search_process.png" alt="Search process" responsive="true" style="width:80%;">}}
 
-2. **タグを使用して、モニターの対象を特定の範囲に絞り込みます。**  
+2. **タグを使用して、モニターの対象を特定の範囲に絞り込みます。**
   選択したプロセスのステータスを報告しているホストまたはタグだけが表示されます。
 
     {{< img src="monitors/monitor_types/process/selecting_scope.png" alt="Selecting scope" responsive="true" style="width:80%;">}}
@@ -58,7 +58,7 @@ further_reading:
 
 ### コンフィグレーション
 
-1. **監視するプロセスを選択します。**  
+1. **監視するプロセスを選択します。**
   Agent でアクティブプロセスチェックが設定されているプロセスの名前が表示されます。
     {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" style="width:80%;">}}
 
@@ -72,11 +72,12 @@ further_reading:
     {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" style="width:80%;">}}
 
 4. **通知オプションを構成します。**
-    よく使用される通知オプションの詳細な設定手順については、[通知に関するドキュメント](#monitor-notifications)のページを参照してください。
+    よく使用される通知オプションの詳細な設定手順については、[通知に関するドキュメント][4]のページを参照してください。
 
-## その他の参考資料 
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/graphing/infrastructure/process
 [2]: /ja/monitors/notifications
 [3]: /ja/integrations/process
+[4]: /monitors/notifications

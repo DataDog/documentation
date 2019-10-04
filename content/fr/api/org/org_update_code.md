@@ -5,9 +5,14 @@ order: 27.3
 external_redirect: /api/#mettre-a-jour-une-organisation
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/org/<ID_PUBLIQUE>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-org-update" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-org-update" >}}

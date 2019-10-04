@@ -5,9 +5,14 @@ order: 26.03
 external_redirect: /api/#edit-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/monitor/<MONITOR_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-edit" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-edit" >}}

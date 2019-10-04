@@ -70,6 +70,20 @@ The Agent's [main configuration file][6] is `datadog.yaml`. For the Docker Agent
 | `DD_HOSTNAME` | Hostname to use for metrics (if autodetection fails)                                                                                                        |
 | `DD_TAGS`     | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                            |
 | `DD_SITE`     | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site. |
+| `DD_DD_URL`   | Optional setting to override the URL for metric submission. |
+| `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
+
+##### Proxy Settings 
+
+Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override the Agent proxy settings with the following environment variables:
+
+| Env Variable | Description |
+|---------------------|-------------------------------------------------------------------|
+| `DD_PROXY_HTTP` | An HTTP URL to use as a proxy for `http` requests. |
+| `DD_PROXY_HTTPS` | An HTTPS URL to use as a proxy for `https` requests. |
+| `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
+
+For more information about proxy settings, see the [Agent v6 Proxy documentation][7].
 
 ##### Optional collection Agents
 
@@ -77,13 +91,13 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | Enable [trace collection][7] with the trace Agent.                                                                                                        |
-| `DD_LOGS_ENABLED`          | Enable [log collection][8] with the logs Agent.                                                                                                            |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][9] with the process Agent. The [live container view][10] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][10] are disabled.|
+| `DD_APM_ENABLED`           | Enable [trace collection][8] with the Trace Agent.                                                                                                        |
+| `DD_LOGS_ENABLED`          | Enable [log collection][9] with the Logs Agent.                                                                                                            |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][10] with the Process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][10] and the [live container view][11] are disabled.|
 
 ##### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][11]:
+Send custom metrics with [the StatsD protocol][12]:
 
 | Env Variable                     | Description                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------|
@@ -92,12 +106,13 @@ Send custom metrics with [the StatsD protocol][11]:
 | `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count". |
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                           |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                   |
+| `DD_DOGSTATSD_TAGS`  | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][12].
+Learn more about [DogStatsD over Unix Domain Sockets][13].
 
 ##### Tagging
 
-Datadog automatically collects common tags from [Docker][13], [Kubernetes][14], [ECS][15], [Swarm, Mesos, Nomad, and Rancher][13]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker][14], [Kubernetes][15], [ECS][16], [Swarm, Mesos, Nomad, and Rancher][14]. To extract even more tags, use the following options:
 
 | Env Variable                            | Description                                               |
 |-----------------------------------------|-----------------------------------------------------------|
@@ -113,7 +128,11 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-Additional examples are available on the [Tag Assignment and Extraction][16] page.
+Additional examples are available on the [Tag Assignment and Extraction][17] page.
+
+##### Using secret files
+
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][18].
 
 ##### Ignore containers
 
@@ -124,7 +143,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][17] page.
+Additional examples are available on the [Container Discover Management][19] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -135,6 +154,9 @@ Additional examples are available on the [Container Discover Management][17] pag
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                              |
 
+**Note**: If you are using the containerd runtime, set `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` in order to see your containers on the containers page.
+
+You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 ### Validation
 Run the Docker Agent’s [status command](#commands) to verify installation.
 
@@ -155,16 +177,16 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| CPU         | [System][18]  |
-| Disk        | [Disk][19]    |
-| Docker      | [Docker][20]  |
-| File Handle | [System][18]  |
-| IO          | [System][18]  |
-| Load        | [System][18]  |
-| Memory      | [System][18]  |
-| Network     | [Network][21] |
-| NTP         | [NTP][22]     |
-| Uptime      | [System][18]  |
+| CPU         | [System][20]  |
+| Disk        | [Disk][21]    |
+| Docker      | [Docker][22]  |
+| File Handle | [System][20]  |
+| IO          | [System][20]  |
+| Load        | [System][20]  |
+| Memory      | [System][20]  |
+| Network     | [Network][23] |
+| NTP         | [NTP][24]     |
+| Uptime      | [System][20]  |
 
 ### Events
 The Docker Agent sends events to Datadog when an Agent is started or restarted.
@@ -182,7 +204,7 @@ The Docker integration sends metrics automatically with the Docker Agent. To con
 ### Autodiscovery
 Autodiscovery is enabled for the Docker Agent when using the one-step install by mounting `/var/run/docker.sock`.
 
-To add integrations using Autodiscovery, see the [Autodiscovery Integration Templates][23] page.
+To add integrations using Autodiscovery, see the [Autodiscovery Integration Templates][25] page.
 
 ### Mounting conf.d
 
@@ -217,23 +239,25 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [1]: /agent
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://app.datadoghq.com/account/settings#agent/docker
-[4]: /agent/#supported-os-versions
+[4]: /agent/basic_agent_usage/#supported-os-versions
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[7]: /tracing
-[8]: /logs
-[9]: /graphing/infrastructure/process
-[10]: /graphing/infrastructure/livecontainers
-[11]: https://docs.datadoghq.com/developers/dogstatsd
-[12]: /developers/dogstatsd/unix_socket
-[13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[14]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[16]: /agent/autodiscovery/tag/?tab=containerizedagent
-[17]: /agent/autodiscovery/management/?tab=containerizedagent
-[18]: /integrations/system/#metrics
-[19]: /integrations/disk/#metrics
-[20]: /integrations/docker_daemon/#metrics
-[21]: /integrations/network/#metrics
-[22]: /integrations/ntp/#metrics
-[23]: /agent/autodiscovery/integrations
+[7]: /agent/proxy/#agent-v6
+[8]: /tracing
+[9]: /logs
+[10]: /graphing/infrastructure/process
+[11]: /graphing/infrastructure/livecontainers
+[12]: https://docs.datadoghq.com/developers/dogstatsd
+[13]: /developers/dogstatsd/unix_socket
+[14]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[17]: /agent/autodiscovery/tag/?tab=containerizedagent
+[18]: /agent/guide/secrets-management/?tab=linux#pagetitle
+[19]: /agent/autodiscovery/management/?tab=containerizedagent
+[20]: /integrations/system/#metrics
+[21]: /integrations/disk/#metrics
+[22]: /integrations/docker_daemon/#metrics
+[23]: /integrations/network/#metrics
+[24]: /integrations/ntp/#metrics
+[25]: /agent/autodiscovery/integrations

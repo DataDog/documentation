@@ -13,7 +13,7 @@ Créer une intégration Datadog/Google Cloud Platform.
 * La méthode `POST` permet de mettre à jour la configuration de votre intégration en **ajoutant** votre nouvelle configuration à celle de votre organisation Datadog.
 * La méthode `PUT` permet de mettre à jour la configuration de votre intégration en **remplaçant** votre configuration actuelle par une nouvelle, envoyée à votre organisation Datadog.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Toutes les valeurs des champs suivants sont fournies par le fichier de clé du compte de service JSON créé dans la [console GCP des comptes de service][1]. Consultez les [instructions d'installation de l'intégration Datadog/Google Cloud Platform][2] pour découvrir comment générer une clé pour votre organisation.
 Pour davantage d'informations, consultez la [documentation relative au compte de service Google Cloud][3] (en anglais).

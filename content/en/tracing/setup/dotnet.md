@@ -369,7 +369,7 @@ To configure the Tracer using environment variables, set the variables before la
 For example, on Windows:
 ```cmd
 rem Set environment variables
-SET DD_TRACE_AGENT_URL=http://localhost:8080
+SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_SERVICE_NAME=MyService
 SET DD_ADONET_ENABLED=false
 
@@ -382,7 +382,7 @@ MyApplication.exe
 On Linux:
 ```bash
 # Set environment variables
-export DD_TRACE_AGENT_URL=http://localhost:8080
+export DD_TRACE_AGENT_URL=http://localhost:8126
 export DD_SERVICE_NAME=MyService
 export DD_ADONET_ENABLED=false
 
@@ -399,7 +399,7 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
 ```xml
 <configuration>
   <appSettings>
-    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8080"/>
+    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
     <add key="DD_SERVICE_NAME" value="MyService"/>
     <add key="DD_ADONET_ENABLED" value="false"/>
   </appSettings>
@@ -413,7 +413,7 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
 To configure the Tracer using an JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
 ```json
 {
-  "DD_TRACE_AGENT_URL": "http://localhost:8080",
+  "DD_TRACE_AGENT_URL": "http://localhost:8126",
   "DD_SERVICE_NAME": "MyService",
   "DD_ADONET_ENABLED": "false"
 }

@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: false
@@ -18,26 +22,50 @@ metric_prefix: cacti.
 metric_to_check: cacti.rrd.count
 name: cacti
 public_title: Intégration Datadog/Cacti
-short_description: Transmettez vos bases de données RRD à Datadog pour recevoir des alertes détaillées et créer de magnifiques graphiques. graphing.
+short_description: Transmettez vos données RRD Cacti à Datadog pour recevoir des alertes détaillées et créer de superbes graphiques. graphing.
 support: core
 supported_os:
   - linux
 ---
 ## Présentation
 
-Recueillez des métriques du service cacti en temps réel pour :
+Recueillez des métriques du service Cacti en temps réel pour :
 
-* Visualiser et surveiller les états de cacti
-* Être informé des failovers et des événements de cacti
+* Visualiser et surveiller les états de Cacti
+* Être informé des failovers et des événements de Cacti
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Cacti est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Cacti.
+Le check Cacti est inclus avec le paquet de l'[Agent Datadog][2]. Pour commencer à rassembler des métriques vous devez d'abord :
+- Installer les bibliothèques et en-têtes librrd
+- Installer les liaisons Python vers rrdtool
+
+#### Bibliothèques et en-têtes librrd
+
+Sur Debian/Ubuntu
+```shell
+sudo apt-get install librrd-dev
+```
+
+Sur RHEL/CentOS
+```shell
+sudo yum install rrdtool-devel
+```
+
+#### Liaisons Python
+
+Ajoutez ensuite le paquet Python `rrdtool` dans l'Agent avec la commande suivante.
+```shell
+sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
+```
 
 ### Configuration
 
-Créez un utilisateur Datadog avec des droits de lecture seule pour la base de données Cacti.
+Créez un utilisateur Datadog avec un accès en lecture seule à la base de données Cacti.
 
 ```shell
 sudo mysql -e "create user 'datadog'@'localhost' identified by '<motdepasse>';"
@@ -56,7 +84,7 @@ echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
 echo -e "\033[0;31mMissing SELECT grant\033[0m"
 ```
 
-Configurez l'Agent de façon à ce qu'il se connecte à MySQL et modifiez le fichier `cacti.d/conf.yaml`. Consultez le [fichier d'exemple cacti.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
+Configurez l'Agent de façon à ce qu'il se connecte à MySQL et modifiez le fichier `cacti.d/conf.yaml`. Consultez le [fichier d'exemple cacti.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 
 ```yaml
 init_config:
@@ -86,7 +114,7 @@ fi'
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][3] et cherchez `cacti` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][4] et cherchez `cacti` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -100,13 +128,21 @@ Le check Cacti n'inclut aucun événement.
 Le check Cacti n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+### Problèmes connus
+La bibliothèque Python utilisée par cette intégration provoque des fuites de mémoire dans certaines circonstances. Si vous rencontrez ce problème, vous pouvez installer le paquet [python-rrdtool][6] au lieu de rrdtool. Cet ancien paquet n'est plus mis à jour et n'est pas officiellement pris en charge par cette intégration, mais il a permis à d'autres utilisateurs de résoudre ce problème de mémoire.
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+Un [ticket Github][7] a été ouvert afin de suivre cette fuite de mémoire.
+
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
+
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
+[6]: https://github.com/pbanaszkiewicz/python-rrdtool
+[7]: https://github.com/commx/python-rrdtool/issues/25
+[8]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

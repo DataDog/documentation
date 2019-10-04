@@ -5,9 +5,14 @@ order: 10.1
 external_redirect: /api/#planifier-le-downtime-d-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/downtime`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-schedule-downtime" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-schedule-downtime" >}}

@@ -199,7 +199,7 @@ Datadog Agent と有効なインテグレーションのステータスを表示
 ```≫
 
 
-[1]: /ja/agent/#using-the-gui
+[1]: /ja/agent/basic_agent_usage/?tab=agentv6#gui
 [2]: /ja/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
