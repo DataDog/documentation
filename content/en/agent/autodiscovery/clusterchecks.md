@@ -45,7 +45,7 @@ Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery
 The following two configuration sources are currently supported. [They are described in the Autodiscovery documentation][4]:
 
 * You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
-* Kubernetes service annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+* Kubernetes Service annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
 Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
@@ -87,7 +87,7 @@ When the IP of a given resource is constant (eg. external service endpoint, publ
 
 #### Example: MySQL check on a CloudSQL database
 
-After setting up the CloudSQL instance and [datadog user][8], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
+After setting up a CloudSQL instance and a [Datadog user][8], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -99,11 +99,11 @@ instances:
     pass: '<YOUR_CHOSEN_PASSWORD>'
 ```
 
-The `cluster_check` field will inform the Cluster Agent to delegate this Check to one node-based Agent.
+The `cluster_check` field informs the Cluster Agent to delegate this check to one node-based Agent.
 
 ### Template Source: Kubernetes Service Annotations
 
-Similar to [annotating Kubernetes Pods][9], Services can be annotated with the following syntax:
+You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][9]:
 
 ```yaml
   ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
@@ -115,7 +115,7 @@ The `%%host%%` [template variable][10] is supported and is replaced by the servi
 
 #### Example: HTTP check on an nginx-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][11] to measure the latency of the load-balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][11] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -147,11 +147,11 @@ In addition, each pod should be monitored with the [NGINX check][12], as it enab
 
 ## Troubleshooting
 
-Due to their distributed nature, troubleshooting Cluster Checks is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
+Due to the distributed nature of Cluster Checks, troubleshooting them is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
 
 ### Kubernetes: find the leader Cluster Agent
 
-When leader-election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
+When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
 
 ```
 # kubectl get cm datadog-leader-election -o yaml
@@ -166,7 +166,7 @@ In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unres
 
 ### Autodiscovery in the Cluster Agent
 
-To ensure a configuration (static or autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
+To ensure a configuration (static or Autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
@@ -190,10 +190,10 @@ Auto-discovery IDs:
 
 ### Dispatching logic in the Cluster Agent
 
-The `clusterchecks` command allows to inspect the state of the dispatching logic, including:
+The `clusterchecks` command allows you to inspect the state of the dispatching logic, including:
 
 - which node-based Agents are actively reporting to the Cluster Agent
-- which Checks are dispatched on each node
+- which checks are dispatched on each node
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
@@ -252,7 +252,7 @@ Init Config:
 ===
 ```
 
-The Instance ID matches the one we had earlier.
+The Instance ID matches the one you had earlier.
 
 ### Agent status
 
