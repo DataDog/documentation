@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Live process monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert based on the behavior of any group of processes across hosts or tags.
+Live process monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert you based on the behavior of any group of processes across your hosts or tags.
 
 ## Monitor creation
 
