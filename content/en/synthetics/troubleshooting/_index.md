@@ -24,9 +24,8 @@ Sometimes you know you have a working endpoint because when you visit your websi
 
 This happens because cURL automatically sets a `user-agent` as a request header, and this also automatically happens when you visit the website in your browser. Datadog API tests don't automatically set a `user-agent`. This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx` status code.
 
-The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
+The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to any valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
 
-The `user-agent` is a standard value used to identify the device and browser accessing to the website. The site can then return information specific to the requester. For example, this is how mobile-optimized sites work. So, if you're on a Mac OS X-based computer using a Safari browser, your `user-agent` value is `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9`. When you're adding a `user-agent` manually to Datadog, you can use any valid `user-agent` value.
 
 {{< img src="synthetics/user-agent.gif" alt="Synthetics home page" responsive="true">}}
 
