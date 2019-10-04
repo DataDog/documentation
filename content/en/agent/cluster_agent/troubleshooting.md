@@ -23,7 +23,7 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-To execute the troubleshooting commands for the Cluster Agent, you first need to be inside the pod of the Cluster Agent or the Node Agent. For this, use:
+To execute the troubleshooting commands for the Cluster Agent, you first need to be inside the pod of the Cluster Agent or the node-based Agent. For this, use:
 
 ```
 kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
@@ -31,7 +31,7 @@ kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
 
 ## Datadog Cluster Agent
 
-To see what cluster level metadata is served by the Datadog Cluster Agent exec in the pod and run:
+To see what cluster level metadata is served by the Datadog Cluster Agent, `exec` into the pod and run:
 
 ```
 datadog-cluster-agent metamap
@@ -81,14 +81,14 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
 ```
 
-If you are not collecting events properly, make sure to have those environment variables set to true:
+If you are not collecting events properly, make sure to have those environment variables set to `true`:
 
-- The leader election `DD_LEADER_ELECTION`
-- The event collection `DD_COLLECT_KUBERNETES_EVENTS`
+- Leader election: `DD_LEADER_ELECTION`
+- Event collection: `DD_COLLECT_KUBERNETES_EVENTS`
 
 As well as the proper verbs listed in the RBAC (notably, `watch events`).
 
-If you have enabled those, check the Leader Election status and the kube_apiserver check with the following command:
+If you have enabled those, check the leader election status and the `kube_apiserver` check with the following command:
 
 ```
 datadog-cluster-agent status
@@ -135,7 +135,7 @@ If the Datadog Cluster Agent is enabled and correctly configured, you should see
    - Running: {Major:1 Minor:0 Pre:xxx Meta:xxx Commit:xxxxx}
 ```
 
-Make sure the Cluster Agent service was created before the agents' pods, so that the DNS is available in the environment variables:
+Make sure the Cluster Agent service was created before the Agents' pods, so that the DNS is available in the environment variables:
 
 ```
 root@datadog-agent-9d5bl:/# env | grep DATADOG_CLUSTER_AGENT | sort
@@ -151,7 +151,7 @@ root@datadog-agent-9d5bl:/# echo ${DD_CLUSTER_AGENT_AUTH_TOKEN}
 DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 ```
 
-Verify that the Node Agent is using the Datadog Cluster Agent as a tag provider:
+Verify that the node-based Agent is using the Datadog Cluster Agent as a tag provider:
 
 ```
 root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-collector"
@@ -167,10 +167,10 @@ Or look for error logs, such as:
 ## Custom Metric Server
 ### Cluster Agent status and flare
 
-If you are having issue with the Custom Metrics Server:
+If you are having issues with the Custom Metrics Server:
 
-* Make sure you have the Aggregation layer and the certificates set up.
-* Always make sure the metrics you want to autoscale on are available. As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric. If there is a typographic issue with your metric name or if the metric does not exist within your Datadog application the following error is raised:
+* Make sure you have the aggregation layer and the certificates set up.
+* Make sure the metrics you want to autoscale on are available. As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric. If there is a typographic issue with your metric name, or if the metric does not exist within your Datadog application, the following error is raised:
     ```
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
@@ -186,9 +186,9 @@ Run the `datadog-cluster-agent status` command to see the status of the External
     Number of external metrics detected: 2
 ```
 
-Errors with the External Metrics Provider process are displayed with this command. If you want a more verbose output, run the flare command: `datadog-cluster-agent flare`.
+Errors with the External Metrics Provider process are displayed with this command. If you want more verbose output, run the flare command: `datadog-cluster-agent flare`.
 
-The flare command generates a zip file containing the `custom-metrics-provider.log` where you can see an output as follows:
+The flare command generates a zip file containing the `custom-metrics-provider.log` where you can see output as follows:
 
 ```
   Custom Metrics Provider
@@ -219,11 +219,11 @@ The flare command generates a zip file containing the `custom-metrics-provider.l
     value: 268435456
 ```
 
-If the metric's flag `Valid` is set to false, the metric is not considered in the HPA pipeline.
+If the metric's flag `Valid` is set to `false`, the metric is not considered in the HPA pipeline.
 
 ### Describing the HPA manfest
 
-If you see the following mesage when describing the hpa manifest
+If you see the following mesage when describing the HPA manifest:
 
 ```
 Conditions:
@@ -242,20 +242,20 @@ autoscaling/v2beta1
 external.metrics.k8s.io/v1beta1
 ```
 
-The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider]() step.[1][1]
+The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider][1] step.
 
-If you see the following error when describing the hpa manifest
+If you see the following error when describing the HPA manifest:
 
 ```
   Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
-Make sure the Datadog Cluster Agent is running, and the service exposing the port `443` which name is registered in the APIService are up.
+Make sure the Datadog Cluster Agent is running, and the service exposing the port `443`, whose name is registered in the APIService, is up.
 
 ### Differences of value between Datadog and Kubernetes
 
-As Kubernetes autoscales your resources the current target is weighted by the number of replicas of the scaled Deployment.
-So the value returned by the Datadog Cluster Agent is fetched from Datadog and should be proportionally equal to the current target times the number of replicas.
+As Kubernetes autoscales your resources, the current target is weighted by the number of replicas of the scaled deployment.
+The value returned by the Datadog Cluster Agent is fetched from Datadog and should be proportionally equal to the current target times the number of replicas.
 
 Example:
 
