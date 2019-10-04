@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Purchase serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average of functions per hour across the month for your accounts.  Pro and Enterprise plans include 40 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 40 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
 ## Serverless Functions
 
@@ -13,17 +13,17 @@ Every hour, Datadog records the number of functions that were executed one or mo
 
 The billed number of functions is almost always significantly lower than the number you see on the Serverless page or in your AWS Console because of the average hourly metering. Functions that run infrequently are less likely to affect your bill, and sudden spikes in traffic won't cost you extra.
 
-For Serverless pricing information, see the infrastructure section in [Datadogs pricing page][1].
+For Serverless pricing information, see the infrastructure section in [Datadog's pricing page][1].
 
 ## Tracking Usage
 
-You can track the number of billable Serverless Functions in your account by checking the [Datadog Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
+You can track the number of billable Serverless functions in your account by checking the [Datadog Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
 
 To control the number of functions Datadog is monitoring, filter out particular functions by sorting by tag with the [UI](#ui) or by using the [API](#api).
 
 ### UI
 
-To use the UI to control the number of functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` set to the **to Lambdas with tag:** field.
+To use the UI to control the number of functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
 
 To add a blacklisted tag, include a `!` before the tag key. For example:
 
@@ -33,7 +33,7 @@ This filter excludes anything that is tagged with `env:staging` or `env:test1`.
 
 ### API
 
-The AWS API is only supported in the US site.
+The AWS API is only supported for the US site's endpoint.
 
 **Listing the current tag filter rules**
 ```
