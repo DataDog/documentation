@@ -15,22 +15,22 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-A Datadog metric is defined by the properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
+A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][1] to learn how to graph metrics within Datadog.
 
-| Property    | Description                                                                                                                                             |
-| ----        | ----                                                                                                                                                    |
-| `Name`      | The (name of your metric](#naming-metrics).                                                                                                             |
-| `Value`     | The value of your metric.                                                                                                                               |
-| `Timestamp` | The timestamp associated to the metric value. Note that metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
-| `Context`   | The set of tags associated to your metric.                                                                                                              |
-| `Type`      | The type of your metric. See the [metric type documentation][2].                                                                                        |
-| `interval`  | If the `type` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
+| Property    | Description                                                                                                                                               |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Name`      | The [name of your metric](#naming-metrics).                                                                                                               |
+| `Value`     | The value of your metric.                                                                                                                                 |
+| `Timestamp` | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `Context`   | The set of tags associated with your metric.                                                                                                              |
+| `Type`      | The type of your metric. See the [metric type documentation][2].                                                                                          |
+| `interval`  | If the `type` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                      |
 
-**If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metric][4].** Except for some standard integrations that do [emit some custom metrics by default][5].
+If a metric is not submitted from one of the [350+ Datadog integrations][3], it's considered a [Custom Metric][4]. **Note**: Some standard integrations [emit custom metrics][5].
 
 ### Naming metrics
 
-There are a few rules regarding metric names:
+Follow these rules for naming metrics:
 
 * Must start with a letter.
 * Must only contain ASCII alphanumerics, underscores, and periods.
@@ -45,10 +45,10 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 ### Submitting metrics
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
-    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Submit metrics with a custom Agent Check.{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}Submit metrics with DogStatsD.{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}Submit metrics with PowerShell.{{< /nextlink >}}
-    {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Submit metrics with Datadog's HTTP API.{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Alternatively you can use the [Dropwizard Java metrics library][6] with the [metrics-datadog][7] backend. Thanks to the people at [Vistar Media][8], [Coursera][9], and [Bazaarvoice][10] for their contributions.
