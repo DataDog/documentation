@@ -27,12 +27,12 @@ If it's not done already review the [setup instructions to install the Datadog C
 
 2. Set in your Cluster Agent deployment file the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
 
-    ```
-    - name: DD_COLLECT_KUBERNETES_EVENTS
-      value: "true"
-    - name: DD_LEADER_ELECTION
-      value: "true"
-    ```
+      ```
+        - name: DD_COLLECT_KUBERNETES_EVENTS
+          value: "true"
+        - name: DD_LEADER_ELECTION
+          value: "true"
+      ```
 
 Enabling the leader election like so ensures that only one Cluster Agent collects the events.
 
