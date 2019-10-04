@@ -74,18 +74,18 @@ config_providers:
 
 ### Custom checks
 
-Running [custom Agent Checks][7] as Cluster Checks is supported, as long as all node-based Agents are able to run it. This means your Checks' code:
+Running [custom Agent checks][7] as cluster checks is supported, as long as all node-based Agents are able to run it. This means your checks' code:
 
-- must be installed on all node-based Agents where the `clusterchecks` config provider is enabled
-- must not depend on local resources that are not accessible to all agents
+- Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
+- Must **not** depend on local resources that are not accessible to all Agents.
 
-## Setting up Check Configurations
+## Setting up check configurations
 
 ### Static configurations in files
 
 When the IP of a given resource is constant (eg. external service endpoint, public URL...), a static configuration can be passed to the Cluster Agent as yaml files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
 
-#### Example: MySQL check on CloudSQL database
+#### Example: MySQL check on a CloudSQL database
 
 After setting up the CloudSQL instance and [datadog user][8], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
 
