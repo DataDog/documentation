@@ -286,5 +286,5 @@ And indeed `824 * 3 replicas = 2472`.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
- step.
-[1]: ) step.[1]
+
+[1]: /agent/cluster_agent/external_metrics/#register-the-external-metrics-provider
