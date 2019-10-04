@@ -21,7 +21,7 @@ If you experience issues setting up or configuring Datadog Synthetics, use this 
 
 ### Failed requests on a working endpoint
 
-Sometimes you know you have a working endpoint because when you visit your website in a browser (or cURL it), you get `2xx` status code. But when setting an API test on this endpoints or when hitting `Test URL` to perform a fast test you get `5xx` or `4xx` status code.```
+Sometimes you know you have a working endpoint because when you visit your website in a browser (or cURL it), you get `2xx` status code. But when setting an API test on this endpoints or when hitting `Test URL` to perform a fast test you get `5xx` or `4xx` status code.
 
 This happens because cURL automatically sets a `user-agent` as a request header, and this also automatically happens when you visit the website in your browser. Datadog API tests don't automatically set a `user-agent`. This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx` status code.
 
