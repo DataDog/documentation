@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Purchase serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average of your accounts hourly functions across the month.  Pro and Enterprise plans include 40 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+Purchase serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average of functions per hour across the month for your accounts.  Pro and Enterprise plans include 40 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
 ## Serverless Functions
 
