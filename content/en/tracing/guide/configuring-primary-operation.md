@@ -15,11 +15,11 @@ The primary operation name of a service determines how a service is represented 
 
 As an example, a `web-store` service can have multiple endpoints which will be instrumented as resources. These resources will then share the same primary operation  as the entry-point into these resources is consistent, i.e. the resources `/user/home` and `/user/new` should both have the same primary operation `web.request`. In different languages a primary operation for a service may look like:
 
-| Service-type                 | Primary Operation   | 
-|------------------------------|---------------------|
-| web                          | ex. `servlet.request`, `flask.request`, `web.request`    | 
-| DB                           | `postgres.query`, `db.query`       |
-| custom-instrumentation       | `trace.annotation`, `method.call`| 
+| Service-type | Primary Operation |
+|------------------------|---------------------------------------------------|
+| web | `servlet.request`, `flask.request`, `web.request` |
+| db | `postgres.query`, `db.query` |
+| custom-instrumentation | `trace.annotation`, `method.call` |
 
 ## Configuring the Primary Operation
 
