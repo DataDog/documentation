@@ -6,7 +6,7 @@ external_redirect: /api/#recuperer-le-downtime-d-un-monitor
 ---
 
 ## Récupérer le downtime d'un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
-

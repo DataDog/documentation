@@ -5,9 +5,14 @@ order: 7.1
 external_redirect: /api/#create-a-comment
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/comments`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-comment-create" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-comment-create" >}}

@@ -5,12 +5,14 @@ order: 15.07
 external_redirect: "/api/#obtenir-la-liste-des-services-aws-prets-pour-les-logs"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /aws/logs/services`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="aws_get_available_log_services" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.aws_get_available_log_services" >}}

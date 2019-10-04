@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Hosts.search(q="metrics:system")
+api.Hosts.search(q="metrics:test")

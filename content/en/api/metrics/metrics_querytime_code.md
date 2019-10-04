@@ -5,9 +5,14 @@ order: 25.3
 external_redirect: /api/#query-time-series-points
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/query`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-metrics-query" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-metrics-query" >}}

@@ -37,7 +37,6 @@ The `Index` object describes the configuration of a log index. It has the follow
   * **`filter.sample_rate`** :
     The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
 
-
 **Note**:  You need an API and applications key with Admin right to interact with this endpoint.
 
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax

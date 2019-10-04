@@ -24,7 +24,7 @@ further_reading:
 * The destination for:
     * [APM][1] data is `trace.agent.datadoghq.com`
     * [Live Containers][2] data is `process.datadoghq.com`
-    * [Logs][3] data is `agent-intake.logs.datadoghq.com `
+    * [Logs][3] data is `agent-intake.logs.datadoghq.com ` for TCP traffic
     * All other Agent data:
         * **Agents < 5.2.0** `app.datadoghq.com`
         *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
@@ -61,8 +61,8 @@ The information is structured as JSON following this schema:
 
 Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json` or `https://ip-ranges.datadoghq.eu/<section>.json`, for example:
 
-* [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data
-* [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data for Datadog EU
+* [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data over TCP
+* [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data over TCP for Datadog EU
 * [https://ip-ranges.datadoghq.com/apm.json][8] for the IPs used to receive APM data
 * [https://ip-ranges.datadoghq.eu/apm.json][9] for the IPs used to receive APM data for Datadog EU
 
@@ -83,7 +83,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
   * `123/udp`: NTP - [More details on the importance of NTP][1].
-  * `10516/tcp`: port for the [Log collection][2]
+  * `10516/tcp`: port for the [Log collection][2] over TCP
   * `10255/tcp`: port for the [Kubernetes http kubelet][3]
   * `10250/tcp`: port for the [Kubernetes https kubelet][3]
 
@@ -105,7 +105,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 [2]: /logs
 [3]: /agent/basic_agent_usage/kubernetes
 [4]: /integrations/go_expvar
-[5]: /agent/#using-the-gui
+[5]: /agent/basic_agent_usage/?tab=agentv6#gui
 [6]: /tracing
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}

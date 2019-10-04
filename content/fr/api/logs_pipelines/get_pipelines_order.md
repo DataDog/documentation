@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-la-sequence-des-pipelines"
 
 Obtenir la séquence actuelle de vos pipelines.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

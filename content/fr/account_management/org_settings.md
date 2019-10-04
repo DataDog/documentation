@@ -4,11 +4,11 @@ kind: documentation
 ---
 [Les administrateurs][1] peuvent accéder aux [paramètres du compte de l'organisation][2] en cliquant, depuis le menu Account de la barre de navigation de gauche, sur Plan & Usage, ou en cliquant sur le bouton Go to organization settings en haut de la page Account Settings.
 
-## Paramètres du plan
+## Paramètres de la formule
 
-Pour passer à une offre supérieure ou inférieure, accédez à l'onglet Plan sur la page Organization Account Settings.
+Pour passer à une formule supérieure ou inférieure, accédez à l'onglet Plan sur la page Organization Account Settings.
 
-**Remarque** : contactez votre chargé de compte ou envoyez un e-mail à l'adresse [success@datadoghq.com][3] pour ajouter ou supprimer des fonctionnalités payantes qui ne sont pas comprises dans les plans standard.
+**Remarque** : contactez votre chargé de compte ou envoyez un e-mail à l'adresse [success@datadoghq.com][3] pour ajouter ou supprimer des fonctionnalités payantes qui ne sont pas comprises dans les formules standards.
 
 ## Rapports d'utilisation
 

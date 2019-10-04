@@ -405,7 +405,7 @@ skip_ssl_validation: true
 
 すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
 
-[1]: /ja/agent/#start-stop-restart-the-agent/#windows
+[1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -450,7 +450,7 @@ skip_ssl_validation: yes
 すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
 
 
-[1]: /ja/agent/#start-stop-restart-the-agent/#windows
+[1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}

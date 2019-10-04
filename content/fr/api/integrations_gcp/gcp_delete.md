@@ -9,7 +9,7 @@ external_redirect: "/api/#delete-a-gcp-integration"
 
 Supprimez une intégration Datadog/GCP donnée.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`project_id`** [*requis*] :
 

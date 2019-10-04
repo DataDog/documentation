@@ -8,27 +8,27 @@ external_redirect: '/api/#ajouter-un-webhook-a-une-integration-webhooks'
 
 Ajoutez un Webhook spécifique à une intégration Datadog/Webhooks.
 
-##### Arguments
+**ARGUMENTS** :
 
 
 * **`hooks`** [*obligatoire*] :
-   Tableau d'objets Webhook. Un objet Webhook est composé de :
+   tableau d'objets Webhook. Un objet Webhook est composé de :
 
     * **`name`** [*obligatoire*] :
-      Le nom de votre Webhook.
-      [Découvrez comment l'utiliser dans des notifications de monitor][1].
+      le nom de votre Webhook.
+      [Découvrez comment l'utiliser dans les notifications de monitor][1].
     * **`url`** [*obligatoire*] :
-      L'URL de votre Webhook.
+      l'URL de votre Webhook.
     * **`use_custom_payload`** [*facultatif*, *défaut*=**False**] :
-      Si défini sur **true**, vous permet de spécifier une charge utile personnalisée pour votre Webhook.
+      si défini sur **true**, vous permet de spécifier une charge utile personnalisée pour votre Webhook.
 
     * **`custom_payload`** [*facultatif*, *défaut*=**None**] :
-        Si `use_custom_payload` est défini sur **true**, spécifiez votre propre charge utile pour ajouter vos propres champs personnalisés à la requête en [utilisant ces variables][2].
+        si `use_custom_payload` est défini sur **true**, spécifiez votre propre charge utile pour ajouter vos propres champs personnalisés à la requête [en utilisant ces variables][2].
 
     * **`encode_as_form`** [*facultatif*, *défaut*=**False**] :
-        Si `use_custom_payload` est défini sur **true**, définissez sur **true** pour chiffrer l'URL de votre charge utile.
+        si `use_custom_payload` est défini sur **true**, définissez ce paramètre sur **true** pour encoder votre charge utile dans une URL.
     * **`headers`** [*facultatif*, *défaut*=**None**] :
-      En-têtes attachés à votre Webhook.
+      en-têtes associés à votre Webhook.
 
 [1]: /fr/monitors/notifications
 [2]: /fr/integrations/webhooks/#usage

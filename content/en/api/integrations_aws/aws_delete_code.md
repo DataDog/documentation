@@ -5,12 +5,14 @@ order: 15.04
 external_redirect: /api/#delete-an-aws-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `DELETE /v1/integration/aws`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_delete" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_delete" >}}

@@ -59,5 +59,5 @@ Pour configurer SAML pour plusieurs organisations, suivez la procédure suivante
 [6]: /fr/api
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /fr/graphing/dashboards/screenboard/#backup-my-screenboard
-[9]: /fr/monitors/#managing-monitors
+[9]: /fr/monitors/manage_monitor
 [10]: /fr/account_management/#managing-your-organizations

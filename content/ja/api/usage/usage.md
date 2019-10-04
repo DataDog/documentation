@@ -19,5 +19,4 @@ external_redirect: /api/#usage-metering
 * Synthetics チェックの 1 時間あたり使用量の取得
 * Fargate タスクの 1 時間あたり使用量の取得
 
-
 使用量データは、使用量が発生した時点から最大 72 時間遅延します。また、過去 15 か月分のデータが保持されます。

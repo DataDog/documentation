@@ -5,12 +5,14 @@ order: 15.03
 external_redirect: /api/#update-an-aws-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/integration/aws`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_update" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_update" >}}

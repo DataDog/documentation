@@ -6,6 +6,7 @@ external_redirect: /api/#reactiver-un-host
 ---
 
 ## Réactiver un host
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

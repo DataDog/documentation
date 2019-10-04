@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-pipeline
 
 Delete a given pipeline from your Organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

@@ -23,16 +23,16 @@ further_reading:
 ---
 The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, which helps you find and resolve issues in highly distributed systems.
 
-| Concept               | Description             |
-|-----------------------|-------------------------|
-| [Service](#services)               | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances.                                                            |
-| [Resource](#resources)              | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.   |
-| [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                          |
-| [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                                    |
-| [Trace metrics](#trace-metrics)         | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency.                                                                                                    |
-| [Trace Search & Analytics](#trace-search-analytics)                 | Trace Search & Analytics is used to filter APM events by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.            |
-| [APM event](#apm-event)                 | APM events represent 100% throughput of a request and can be used to search, query, and monitor in Trace Search & Analytics.             |
-| [Span tags](#span-tags)                | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Trace Search & Analytics*.            |
+| Concept                                             | Description                                                                                                                                                                                    |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Service](#services)                                | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances.                   |
+| [Resource](#resources)                              | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                        |
+| [Trace](#trace)                                     | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                       |
+| [Span](#spans)                                      | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                    |
+| [Trace metrics](#trace-metrics)                     | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency. |
+| [Trace Search & Analytics](#trace-search-analytics) | Trace Search & Analytics is used to filter APM events by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                   |
+| [APM event](#apm-event)                             | APM events represent 100% throughput of a request and can be used to search, query, and monitor in Trace Search & Analytics.                                                                   |
+| [Span tags](#span-tags)                             | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Trace Search & Analytics*.                                                                   |
 
 ## Services
 
@@ -72,7 +72,7 @@ A trace is used to track the time spent by an application processing a request a
 
 ## Spans
 
-A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#tagging-spans). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, which creates a parent-child relationship between the spans.
+A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#span-tags). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, which creates a parent-child relationship between the spans.
 
 For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Trace Search & Analytics][13].
 

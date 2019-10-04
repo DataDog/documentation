@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-For Linux based systems where the <code>service</code> wrapper command is not available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consult the list of alternatives</a>.
+For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
 ## Start, Stop, and Restart the Agent
@@ -200,7 +200,7 @@ A properly configured integration is displayed under **Running Checks** with no 
 ```
 
 
-[1]: /agent/#using-the-gui
+[1]: /agent/basic_agent_usage/?tab=agentv6#gui
 [2]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -234,6 +234,49 @@ A properly configured integration is displayed under **Checks** with no warnings
 | Platform   | Command                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Other commands
+
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
+```shell
+<AGENT_BINARY> --help
+```
+
+To run a sub-command, the Agent binary must be invoked:
+```shell
+<AGENT_BINARY> <SUB_COMMAND> <OPTIONS>
+```
+
+Some options have flags and options detailed under `--help`. For example, use help with the `check` sub-command:
+```shell
+<AGENT_BINARY> check --help
+```
+
+| Command         | Notes                                                                       |
+|-----------------|-----------------------------------------------------------------------------|
+| `check`           | Runs the specified check.                                                    |
+| `configcheck`     | Prints all configurations loaded and resolved of a running Agent.            |
+| `diagnose`        | Executes some connectivity diagnosis on your system.                         |
+| `flare`           | Collects a flare and send it to Datadog.                                     |
+| `health`          | Prints the current Agent health.                                             |
+| `help`            | Help about any command.                                                     |
+| `hostname`        | Prints the hostname used by the Agent.                                       |
+| `import`          | Imports and converts configuration files from previous versions of the Agent. |
+| `installservice`  | Installs the Agent within the service control manager.                      |
+| `launch-gui`      | Starts the Datadog Agent GUI.                                               |
+| `regimport`       | Imports the registry settings into `datadog.yaml`.                           |
+| `remove-service`  | Removes the Agent from the service control manager.                         |
+| `restart-service` | Restarts the Agent within the service control manager.                      |
+| `start-service`   | Starts the Agent within the service control manager.                        |
+| `stopservice`     | Stops the Agent within the service control manager.                         |
+| `jmx`             | JMX troubleshooting.                                                         |
+| `version`         | Prints the version info.                                                     |
 
 {{% /tab %}}
 {{< /tabs >}}

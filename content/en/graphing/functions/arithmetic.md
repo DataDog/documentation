@@ -9,7 +9,7 @@ kind: documentation
 | :----    | :-------                                | :---------              |
 | `abs()`  | Graph the absolute value of the metric. | `abs(<METRIC_NAME>{*})` |
 
-Transforms this sinus timeseries `sin{*}`:
+Transforms this sine timeseries `sin{*}`:
 
 {{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function" responsive="true" style="width:80%;">}}
 

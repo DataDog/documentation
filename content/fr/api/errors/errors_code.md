@@ -4,7 +4,8 @@ type: apicode
 order: 3
 external_redirect: /api/#reussites-et-erreurs
 ---
-##### Codes de statut
+
+**Codes de statut** :
 
 * `200 OK`
 * `201 Created`
@@ -21,7 +22,10 @@ external_redirect: /api/#reussites-et-erreurs
 * `429 Too Many Requests`
 * `500 Server Error`
 
-##### Exemple de réponse de type Error
+**Exemple de réponse de type Error** :
+
 {{< code-snippets basename="api-error" static="true" >}}
-##### Exemple de réponse de type Warning</h5>
+
+**Exemple de réponse de type Warning** :
+
 {{< code-snippets basename="api-warning" static="true" >}}

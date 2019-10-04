@@ -40,20 +40,11 @@ The parameters above can also be set with the following environment variables:
     * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
     * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
 
-* Use the public key for TLS encryption for the SSL encryption:
-    * For [app.datadoghq.com][1]
-    * For [app.datadoghq.eu][2]
+* Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
+    * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+    * `yum install ca-certificates` (CentOS, Redhat)
+  And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
-    On some systems, the full certificate chain may be required. If so, use this public key instead:
-
-    * For [app.datadoghq.com][3]
-    * For [app.datadoghq.eu][4]
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{% tab "SOCKS5" %}}
 
