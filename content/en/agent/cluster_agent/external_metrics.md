@@ -21,32 +21,32 @@ further_reading:
 
 ## Introduction
 
-The Horizontal Pod Autoscaling feature was introduced in [Kubernetes v1.2][1] to allow autoscaling off of basic metrics like `CPU`, but it requires a resource called metrics-server to run along side your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
+The Horizontal Pod Autoscaling feature was introduced in [Kubernetes v1.2][1] to allow autoscaling off of basic metrics like `CPU`, but it requires a resource called `metrics-server` to run alongside your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
 Custom metrics are user defined and are collected from within the cluster. As of Kubernetes v1.10, support for external metrics was introduced to autoscale off of any metric from outside the cluster that is collected for you by Datadog.
 
 The custom and external metric providers, as opposed to the metrics server, are resources that have to be implemented and registered by the user.
 
-As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for External Metrics. This documentation page explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
+As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This documentation page explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
 
 ## Requirements
 
-1. Running Kubernetes >v1.10 in order to be able to register the External Metrics Provider resource against the API Server.
-2. Having the Aggregation layer enabled, refer to the [Kubernetes aggregation layer configuration documentation][3] to learn how to enable it.
+1. Running Kubernetes >v1.10 in order to be able to register the External Metrics Provider resource against the API server.
+2. Having the aggregation layer enabled. Refer to the [Kubernetes aggregation layer configuration documentation][3].
 
-## Setup The Cluster Agent External metric server
-### Custom Metrics Server
+## Set up the Cluster Agent external metric server
+### Custom metrics server
 
-To enable the Custom Metrics Server, follow the instructions to [setup the Datadog Cluster Agent][4] but when editing the deployment manifest of the Datadog Cluster Agent in [Step 3 - Create the Cluster Agent and its service][5] follow those extra steps:
+To enable the Custom Metrics Server, follow the instructions to [set up the Datadog Cluster Agent][4], but when editing the deployment manifest of the Datadog Cluster Agent in [Step 3 - Create the Cluster Agent and its service][5], follow those extra steps:
 
-1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the Deployment of the Datadog Cluster Agent.
-2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
-3. Optional - Set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
+1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the deployment of the Datadog Cluster Agent.
+2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
+3. Optional: set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
 
 ### Register the External Metrics Provider
 
 Once the Datadog Cluster Agent is up and running:
 
-1. Create the  `datadog-custom-metrics-server` service exposing the port `443` with the following `custom-metric-server.yaml` manifest:
+1. Create the `datadog-custom-metrics-server` service, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
 
     ```yaml
     kind: Service
@@ -62,10 +62,10 @@ Once the Datadog Cluster Agent is up and running:
         targetPort: 443
     ```
 
-    And by running `kubectl apply -f custom-metric-server.yaml`
+    Apply this change by running `kubectl apply -f custom-metric-server.yaml`
 
 3. Download the [`rbac-hpa.yaml` RBAC rules file][7].
-2. Register the Cluster Agent as an External Metrics Provider via the service exposing the port `443` by apply the RBAC rules from above:
+2. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -85,7 +85,7 @@ spec:
           <TAG_KEY>:<TAG_VALUE>
 ```
 
-Find below an example HPA manifest to autoscale off a NGINX Deployment based of the `nginx.net.request_per_s` Datadog metric:
+**Example**: An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:
 
 ```yaml
 apiVersion: autoscaling/v2beta1
@@ -110,11 +110,11 @@ spec:
 ```
 
 Note in this manifest that:
-* The HPA is configured to autoscale the Deployment called `nginx`.
-* The maximum number of replicas created is `5` and the minimum is `1`.
-* The metric used is `nginx.net.request_per_s` and the scope is `kube_container_name: nginx`. Note that this metric format corresponds to the Datadog one.
+* The HPA is configured to autoscale the deployment called `nginx`.
+* The maximum number of replicas created is `5`, and the minimum is `1`.
+* The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This metric format corresponds to the Datadog one.
 
-Every 30 seconds Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA, as you can see [in the Kubernetes horizontal pod autoscale documentation][9] the largest of the proposed value will be the one chosen.
+Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][9], the largest of the proposed values is the one chosen.
 
 ## Further Reading
 
