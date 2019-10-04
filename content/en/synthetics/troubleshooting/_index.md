@@ -1,12 +1,12 @@
 ---
 title: Synthetics Troubleshooting
 kind: documentation
-description: Troubleshoot common Synthetics isses.
+description: Troubleshoot common Synthetics issues.
 beta: true
 further_reading:
 - link: "synthetics/"
   tag: "Documentation"
-  text: "Manage your tests"
+  text: "Manage your Synthetics tests"
 - link: "synthetics/browser_tests"
   tag: "Documentation"
   text: "Configure a Browser Test"
@@ -15,17 +15,17 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-If you experience issues setting up or configuring Datadog Synthetics, use this information to begin troubleshooting. If you continue to have trouble, [contact our awesome support team][1].
+If you experience issues setting up or configuring Datadog Synthetics, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
 
 ## API Tests
 
 ### Failed requests on a working endpoint
 
-You can sometimes get `5xx` or `4xx` when setting an API test on your endpoints. This happens most when hitting `Test URL` to perform a fast test, and then the error shows up in your regular test results. However, you know there's not actually an issue, because when you visit your website in a browser (or cURL it), you're getting `2xx`. 
+Sometimes you know you have a working endpoint because when you visit your website in a browser (or cURL it), you get `2xx` status code. But when setting an API test on this endpoints or when hitting `Test URL` to perform a fast test you get `5xx` or `4xx` status code.```
 
-This happens because cURL automatically sets a `user-agent` as a request header, and this also automatically happens when you visit the website in your browser. Datadog API tests don't automatically set a `user-agent`. This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx`.
+This happens because cURL automatically sets a `user-agent` as a request header, and this also automatically happens when you visit the website in your browser. Datadog API tests don't automatically set a `user-agent`. This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx` status code.
 
-The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to the `user-agent` value.
+The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
 
 The `user-agent` is a standard value used to identify the device and browser accessing to the website. The site can then return information specific to the requester. For example, this is how mobile-optimized sites work. So, if you're on a Mac OS X-based computer using a Safari browser, your `user-agent` value is `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9`. When you're adding a `user-agent` manually to Datadog, you can use any valid `user-agent` value.
 
