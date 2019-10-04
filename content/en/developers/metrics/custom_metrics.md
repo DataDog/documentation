@@ -5,24 +5,46 @@ aliases:
   - /getting_started/custom_metrics
 ---
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric. **Note**: Some standard integrations [emit custom metrics][2].
-
 ## Overview
+
+If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric. **Note**: Some standard integrations [emit custom metrics][2].
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags. In general, any metric you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4] is a custom metric.
 
-When using tags, one submitted metric could lead to **multiple unique tag combinations** that count towards your custom metrics count:
+## Allocation
 
-{{< tabs >}}
-{{% tab "Example 1" %}}
+You are allocated a certain number of custom metrics based on your Datadog pricing plan:
 
-* You submit the following metric name: `auth.exceptionCount`
+* **Pro**: 100 custom metrics per host
+* **Enterprise**: 200 custom metrics per host
+
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics could be used by a single host.
+
+Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
+
+{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
+
+There are no enforced [fixed rate limits][5] on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
+
+## Tracking
+
+Administrative users can see the total custom metrics per hour and the top 500 custom metrics by cardinality for their account on the [usage details page][7]. See the [Usage Details][8] documentation for more information.
+
+## Counting
+
+Using tags on custom metrics can lead to **multiple unique tag combinations** that affect your custom metrics allocation. The examples below show how custom metrics are counted.
+
+### Single host
+
+This example assumes you are submitting a custom metric on a single host.
+
+* You submit the metric named: `auth.exceptionCount`
 * Your code instrumentation submits the following possible tags associated with the metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
-* The logic behind your metric is the following:
+* The logic behind your metric tagging is:
 
     {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" >}}
 
-* In this situation, you have 6 different metrics. The unique metrics **per host** are:
+* In this situation, you have 6 different metrics. The unique metrics for a **single host** are:
 
     | Metric                | Tags                      |
     |-----------------------|---------------------------|
@@ -37,10 +59,63 @@ When using tags, one submitted metric could lead to **multiple unique tag combin
 
 * `auth.exceptionCount` with tags `method:X` and `exception:A`
 * `auth.exceptionCount` with tags `exception:A` and `method:X`
-{{% /tab %}}
-{{% tab "Example 2" %}}
 
-Suppose you are interested in measuring the average `temperature` in the US. You collect the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston, and Seattle. Each `temperature` measurement is tagged with the information about `city`, `state`, `region`, and `country`.
+### Multiple hosts
+
+When submitting custom metrics, host tags are automatically added to the metric as one unique tag combination. Reporting the custom metric from additional hosts creates multiple unique tag combinations.
+
+For example, you want insight on `request.count` from different services across your infrastructure.
+
+* You create the metric `service.request.count`.
+* You want to track successes and failures, so you create the tags:
+    * `status:success`
+    * `status:failure`
+* You want to track the metric by each service running on your infrastructure. You have three services per host:
+    * `service:database`
+    * `service:api`
+    * `service:webserver`
+* The logic behind your metric is:
+
+    {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" style="width:80%;">}}
+* If all services report both statuses, you have 1 x 2 x 3 = 6 custom metrics **per host**.
+
+There are less custom metrics if only a subset of services and statuses are reporting. For example, you have three hosts:
+
+* `host1` is reporting all possible configurations.
+* `host2` is reporting only successes across all services.
+* `host3` is reporting successes and failures for database and webserver services.
+
+Across your three hosts, there are 13 distinct metrics:
+
+{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
+
+#### Metric summary
+
+Your [metric summary page][9] shows the number of distinct metrics for a specific metric. For example, `service.request.count` with 1 host, 2 statuses, and 3 services = **6 distinct metrics**:
+
+{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:80%;">}}
+
+Adding a second host with 3 services and 1 status = **9 distinct metrics**:
+
+{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" style="width:80%;">}}
+
+Adding a third host with 2 services and 2 status = **13 distinct metrics**:
+
+{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" style="width:80%;">}}
+
+#### Query editor
+
+You can count your custom metrics by using the `count:` aggregator in the query editor. For counting the previous example, the query `count:service.request.count{*}` is used:
+
+{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator" responsive="true" style="width:80%;">}}
+
+{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:80%;">}}
+
+### Gauges, counts, histograms, and rates
+
+A [GAUGE][10] represents one value per second (examples: temperature or Kafka queue offset).
+
+Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `GAUGE` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York, and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
 |                              |    |    |    |    |    |    |    |
 |------------------------------|----|----|----|----|----|----|----|
@@ -50,9 +125,7 @@ Suppose you are interested in measuring the average `temperature` in the US. You
 | New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
 | Seattle, WA, Northwest, USA  | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
 
-Using the five timeseries above, you can determine the average temperature in the US, Northeast, or Florida.
-
-Each unique tag combination of `city`, `state`, `region`, and `country` represents a timeseries / custom metric:
+The total number of custom metrics associated with the `temperature` metric is five. Each unique tag combination of `city`, `state`, `region`, and `country` represents a custom metric:
 
 | Metric        | Tags                                                           |
 |---------------|----------------------------------------------------------------|
@@ -61,93 +134,6 @@ Each unique tag combination of `city`, `state`, `region`, and `country` represen
 | `temperature` | `city:boston`, `state:ma`, `region:northeast`, `country:usa`   |
 | `temperature` | `city:new_york`, `state:ny`, `region:northeast`, `country:usa` |
 | `temperature` | `city:seattle`, `state:wa`, `region:northwest`, `country:usa`  |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Allocated custom metrics
-
-You are allocated a certain number of custom metrics based on your Datadog pricing plan:
-
-* **Pro**: 100 custom metrics per host
-* **Enterprise**: 200 custom metrics per host
-
-These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics could be used by a single host.
-
-Using the same example, the graphic below show scenarios that do not exceed the allocated custom metric count:
-
-{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
-
-There are no enforced [fixed rate limits][5] on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
-
-## How do I check my custom metrics count?
-
-When creating a custom metric, all the host tags are automatically added to that metric as one unique tag combination, to which you'll add the tags linked to the metric itself. Those are the most important as they add to the actual metric count.
-
-Let's say you want to have insight into the `request.count` from different services across your infrastructure.
-
-* You create your metric `service.request.count`
-* You want to separate the requests that were successful from the failures. You create two tags to that effect:
-    * `status:success`
-    * `status:failure`
-* You want this metric to be reported by each service running on your infrastructure. Let's say you have 3 services per host:
-    * `service:database`
-    * `service:api`
-    * `service:webserver`
-
-The logic behind your metric is the following :
-
-{{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" style="width:75%;">}}
-
-From there, you can see that **on each host reporting this metric**, if all services report both successes and failures, you can have up to 1x2x3 = **6 custom metrics**.
-
-Let's say you have 3 hosts:
-
-* `host1` is reporting all possible configurations
-* `host2` is reporting only successes across all services
-* `host3` is reporting success and failures, but only for database and webserver services
-
-Across your 3 hosts, you'd have 13 distinct metrics, here is why :
-
-{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
-
-If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][7]. You can also see this metric count on your [metric summary page][8], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
-
-So if you only had the first host from the example above reporting, you'd have this:
-
-{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:70%;">}}
-
-Adding the second host:
-
-{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" style="width:70%;">}}
-
-Adding the third host as per the table above, you get your 13 distinct metrics:
-
-{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" style="width:70%;">}}
-
-Using the query editor, you can also find this using the count: aggregator
-
-{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator" responsive="true" style="width:70%;">}}
-
-Ultimately, you'll have 13 metrics using the following query: `count:service.request.count{*}`
-
-{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
-
-### Counting custom metrics from gauges, counts, histograms, and rates
-
-A [GAUGE][9] represents one value per second (examples: temperature or Kafka queue offset).
-
-Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a GAUGE metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
-
-|                              |    |    |    |    |    |    |    |
-|------------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast, USA  | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast, USA    | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast, USA   | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest, USA  | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
-
-The total number of custom metrics associated with the `temperature` GAUGE metric is five. Each unique string combination of `city`, `state`, `region` and `country` tagged to the temperature data counts as a custom metric (in other words a timeseries of data stored by Datadog).
 
 Using the five timeseries above, you can determine the average `temperature` in the US, Northeast, or Florida at query time.
 
@@ -178,7 +164,7 @@ Suppose you drop the `city` tag from the GAUGE `temperature` metric.
 
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four.
 
-### Counting custom metrics from distributions
+### Distributions
 
 A distribution metric gathers all values across all hosts emitting metric values in ten-second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from GAUGE. Distributions generate five timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count).
 
@@ -228,5 +214,6 @@ The total number of custom metrics emitted from the `age` distribution metric WI
 [5]: /api/#rate-limiting
 [6]: /account_management/billing/custom_metrics
 [7]: https://app.datadoghq.com/account/usage/hourly
-[8]: https://app.datadoghq.com/metric/summary
-[9]: https://docs.datadoghq.com/developers/metrics/gauges
+[8]: /account_management/billing/usage_details
+[9]: https://app.datadoghq.com/metric/summary
+[10]: https://docs.datadoghq.com/developers/metrics/gauges
