@@ -234,7 +234,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 #### Map Resource Names To Normalized URI
 
 <div class="alert alert-warning">
-This functionality is in public beta. For more information, contact <a href="/help">Datadog Support</a>. 
+This functionality is in public beta. For assistance, contact <a href="/help">Datadog Support</a>. 
 </div>
 
 When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
