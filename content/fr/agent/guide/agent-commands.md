@@ -11,7 +11,7 @@ further_reading:
     text: Dépannage de l'Agent
 ---
 <div class="alert alert-warning">
-Pour les systèmes basés sur Linux où la commande <code>service</code> wrapper n'est pas disponible, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consultez la liste des alternatives</a>.
+Pour les systèmes basés sur Linux où la commande <code>service</code> wrapper n'est pas disponible, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consultez la liste des alternatives</a>.
 </div>
 
 ## Démarrer, arrêter et redémarrer l'Agent

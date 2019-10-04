@@ -11,7 +11,7 @@ further_reading:
     text: Agent のトラブルシューティング
 ---
 <div class="alert alert-warning">
-<code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">代替リストを参照してください</a>。
+<code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">代替リストを参照してください</a>。
 </div>
 
 ## Agent の起動/停止/再起動
