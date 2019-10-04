@@ -27,6 +27,8 @@ When there are multiple primary operations defined for a Service the default is 
 
 {{< img src="tracing/guide/primary_operation/configuring-primary.png" alt="APM save" responsive="true" >}}
 
+** Note: You must be an admin user in your Datadog account to  adjust this setting.
+
 ## Viewing Stats for Additional Span Names
 
 To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a drop-down menu, however these will not be used to calculate service-level stats. This will not change the Service statistics.
