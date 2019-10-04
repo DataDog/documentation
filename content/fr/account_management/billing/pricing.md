@@ -45,7 +45,7 @@ Sauf mention contraire dans votre commande, Datadog calcule le prix facturé en 
 
 Pour toute question technique, contactez [l'assistance Datadog][3].
 
-Contactez votre responsable [commercial][4] ou votre [chargé de compte][5] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
+Contactez le [service commercial][4] ou votre [chargé de compte][5] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/developers/metrics/custom_metrics
