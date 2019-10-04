@@ -35,17 +35,17 @@ This feature requires a running [Cluster Agent][3].
 
 Then enable the cluster check feature:
 
-Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
+Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
 
 1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
-2. Pass your cluster name as `DD_CLUSTER_NAME`. It's injected as a `cluster_name` instance tag to all configurations, to help you scope your metrics.
-3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` envvar.
-4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects that.
+2. Pass your cluster name as `DD_CLUSTER_NAME`. To help you scope your metrics, Datadog injects your cluster name as a `cluster_name` instance tag to all configurations.
+3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
+4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
 
-Two configuration sources are currently supported, [described in the Autodiscovery documentation][4]:
+The following two configuration sources are currently supported. [They are described in the Autodiscovery documentation][4]:
 
-* yaml files can be mounted from a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
-* Kubernetes Services annotations requires setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+* You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
+* Kubernetes service annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
 Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
