@@ -151,8 +151,8 @@ If you did not use the MSI installer, set all four environment variables:
 ```
 COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-COR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
-DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
+COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
+DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 ```
 
 For example, to set them from a batch file before starting your application:
@@ -161,8 +161,8 @@ For example, to set them from a batch file before starting your application:
 rem Set environment variables
 SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-SET COR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
-SET DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
+SET COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
+SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 
 rem Start application
 example.exe
@@ -190,8 +190,8 @@ If you did not use the MSI installer, set all four environment variables:
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
-DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
+CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
+DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 ```
 
 For example, to set them from a batch file before starting your application:
@@ -200,8 +200,8 @@ For example, to set them from a batch file before starting your application:
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-SET CORECLR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
-SET DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
+SET CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
+SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 
 rem Start application
 dotnet.exe example.dll

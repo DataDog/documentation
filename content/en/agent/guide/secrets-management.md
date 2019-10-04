@@ -260,7 +260,7 @@ Secrets handle decrypted:
 
 Example on Windows (from an Administrator Powershell):
 ```
-PS C:\> & 'C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -314,7 +314,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**Note**: The Agent needs to be [restarted][3] to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][2] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -371,7 +371,7 @@ To do so, follow those steps:
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][3] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -403,5 +403,5 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
