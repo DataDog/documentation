@@ -115,7 +115,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | Laravel        | 4.2, 5.x           | Fully Supported |
 | Lumen          | 5.2+               | Fully Supported |
 | Slim           | 3.x                | Fully Supported |
-| Symfony        | 2.x, 3.3, 3.4, 4.x | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
 | Zend Framework | 1.12               | Fully Supported |
 | CakePHP        | 1.3, 3.x           | _Coming Soon_   |
 | CodeIgniter    | 2, 3               | _Coming Soon_   |
