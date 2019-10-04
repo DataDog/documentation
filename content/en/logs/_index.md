@@ -18,6 +18,8 @@ further_reading:
   text: "Introduction to Logs in Datadog"
 ---
 
+{{< vimeo 293195142 >}}
+
 Sometimes, your infrastructure may generate a volume of log events that is too large or has significant fluctuations. In this situation, you may need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.
 
 Datadog's log management removes these limitations by decoupling log ingestion from indexing. This enables you to cost-effectively collect, process, archive, explore, and monitor all your logs. This is called Logging without Limits*.
