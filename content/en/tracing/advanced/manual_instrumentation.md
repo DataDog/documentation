@@ -302,39 +302,43 @@ The `dd_trace()` function hooks into existing functions and methods to:
 For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
-dd_trace("CustomDriver", "doWork", function (...$args) {
-    // Start a new span
-    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
-    $span = $scope->getSpan();
+<?php
+  dd_trace("CustomDriver", "doWork", function (...$args) {
+      // Start a new span
+      $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+      $span = $scope->getSpan();
 
-    // Access object members via $this
-    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
+      // Access object members via $this
+      $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
-    try {
-        // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
-        $result = dd_trace_forward_call();
-        // Set a tag based on the return value
-        $span->setTag('doWork.size', count($result));
-        return $result;
-    } catch (Exception $e) {
-        // Inform the tracer that there was an exception thrown
-        $span->setError($e);
-        // Bubble up the exception
-        throw $e;
-    } finally {
-        // Close the span
-        $span->finish();
-    }
-});
+      try {
+          // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
+          $result = dd_trace_forward_call();
+          // Set a tag based on the return value
+          $span->setTag('doWork.size', count($result));
+          return $result;
+      } catch (Exception $e) {
+          // Inform the tracer that there was an exception thrown
+          $span->setError($e);
+          // Bubble up the exception
+          throw $e;
+      } finally {
+          // Close the span
+          $span->finish();
+      }
+  });
+?>
 ```
 
 The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
 
 ```php
-$rootSpan = \DDTrace\GlobalTracer::get()
-    ->getRootScope()
-    ->getSpan();
-$rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
+<?php
+  $rootSpan = \DDTrace\GlobalTracer::get()
+      ->getRootScope()
+      ->getSpan();
+  $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
+?>
 ```
 
 **Zend Framework 1 manual instrumentation**

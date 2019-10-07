@@ -228,12 +228,14 @@ scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 Add [tags][1] directly to a `DDTrace\Span` object by calling `Span::setTag()`. For example:
 
 ```php
-// Get the currently active span (can be null)
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-if (null !== $span) {
-  // Add a tag to the span
-  $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
-}
+<?php
+  // Get the currently active span (can be null)
+  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+  if (null !== $span) {
+    // Add a tag to the span
+    $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
+  }
+?>
 ```
 
 **Note**: `Tracer::getActiveSpan()` returns `null` if there is no active [span][2].

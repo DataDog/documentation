@@ -14,7 +14,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending metrics generated from your application to the [Agent](https://docs.datadoghq.com/agent/) over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
+DogStatsD works by sending metrics generated from your application to the [Agent][1] over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
 When DogStatsD is used to send a large volume of metrics to a single Agent, if proper measures are not taken, it is common to end up with the following symptoms:
 
@@ -34,7 +34,7 @@ Here are a few examples for supported clients:
 
 {{< tabs >}}
 {{% tab "Go" %}}
-Use Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
+Use Datadog's official Golang library [datadog-go][1]:
 
 ```go
 // Create a buffered dogstatsd client instance with 256 maximum buffered metrics
@@ -46,10 +46,11 @@ client, err := statsd.New("127.0.0.1:8125",
 // packets containing several metrics
 client.Gauge("kafka.health", 1, []string{"env:production", "partition:1", "partition:2"}, 1)
 ```
+[1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
 
 {{% tab "Python" %}}
-Use Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
+Use Datadog's official Python library [datadogpy][1]:
 
 ```python
 # Load the dogstats module.
@@ -60,10 +61,11 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('users.online', 123)
     batch.gauge('active.connections', 1001)
 ```
+[1]: https://github.com/DataDog/datadogpy
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-Use Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
+Use Datadog's official Ruby library [dogstatsd-ruby][1]:
 
 ```ruby
 require 'datadog/statsd'
@@ -77,10 +79,11 @@ statsd.batch do |s|
   s.gauge('users.online', 123)
 end
 ```
+[1]: https://github.com/DataDog/dogstatsd-ruby
 {{% /tab %}}
 
 {{% tab "Java" %}}
-Use Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
+Use Datadog's official Java library [java-dogstatsd-client][1]:
 
 ```java
 // Create a stats instance with a buffer size of 256
@@ -93,10 +96,11 @@ public void foo() {
     statsd.recordGaugeValue("bar", 100);
 }
 ```
+[1]: https://github.com/DataDog/java-dogstatsd-client
 {{% /tab %}}
 
 {{% tab "C#" %}}
-Use Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
+Use Datadog's official C# library [dogstatsd-csharp-client][1]:
 
 ```csharp
 // Create the transport
@@ -115,23 +119,27 @@ using (udp)
     s.Send();
 }
 ```
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{% /tab %}}
 
 {{% tab "PHP" %}}
-Use Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
+Use Datadog's official PHP library [php-datadogstatsd][1]:
 
 ```php
-require __DIR__ . '/vendor/autoload.php';
+<?php
+  require __DIR__ . '/vendor/autoload.php';
 
-use DataDog\BatchedDogStatsd;
+  use DataDog\BatchedDogStatsd;
 
-$client = new BatchedDogStatsd();
+  $client = new BatchedDogStatsd();
 
-// All metrics sent from this instance of the client will be buffered and sent in
-// packets containing several metrics
-$client->increment('your.data.point');
-$client->increment('your.data.point', .5);
+  // All metrics sent from this instance of the client will be buffered and sent in
+  // packets containing several metrics
+  $client->increment('your.data.point');
+  $client->increment('your.data.point', .5);
+?>
 ```
+[1]: https://github.com/DataDog/php-datadogstatsd
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -141,11 +149,11 @@ Please refer to your client documentation for additional details.
 
 It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample rate value for your client. For example, a sample rate of `0.5` halves the number of UDP packets sent. This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
-For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
+For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][2].
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][3]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ## Operating System kernel buffers
 
@@ -180,5 +188,6 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 26214400
 ```
 
-[1]: /developers/faq/dog-statsd-sample-rate-parameter-explained/
-[2]: /developers/dogstatsd/unix_socket/
+[1]: https://docs.datadoghq.com/agent
+[2]: /developers/faq/dog-statsd-sample-rate-parameter-explained
+[3]: /developers/dogstatsd/unix_socket
