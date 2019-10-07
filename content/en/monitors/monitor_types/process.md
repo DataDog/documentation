@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Live process monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert you based on the behavior of any group of processes across your hosts or tags.
+Live process monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert based on the count of any group of processes across hosts or tags.
 
 ## Monitor creation
 
@@ -24,7 +24,7 @@ To create a [live process monitor][2] in Datadog, use the main navigation: *Moni
 
 ### Select processes
 
-Search for a process to monitor using a space separated list of strings. The search performs a partial match, fuzzy search across all processes on your infrastructure. Use tags to refine your monitor to a specific scope.
+Search for a process to monitor using a space separated list of strings. The search performs a partial match, fuzzy search across all processes on your infrastructure. Search operators `AND`, `OR`, and `NOT` are supported. See the [Live Process Monitoring][3] page for details. Additionally, filter by tags to refine your monitor to a specific scope.
 
 Matching processes and counts are displayed below the search:
 
@@ -47,7 +47,7 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -55,4 +55,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /graphing/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process
-[3]: /monitors/notifications
+[3]: /graphing/infrastructure/process/#search-syntax
+[4]: /monitors/notifications
