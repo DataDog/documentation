@@ -1,5 +1,5 @@
 ---
-title: Network monitor
+title: Network Monitor
 kind: documentation
 description: "Check the status of TCP/HTTP endpoints"
 further_reading:
@@ -11,37 +11,44 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
 
-Network monitors cover the TCP and HTTP checks available in the Agent. Read the [HTTP check documentation][1] for details on Agent configuration.
+## Overview
 
-## Network Status
+Network monitors cover the TCP and HTTP checks available in the Agent. Read the [HTTP check][1] documentation for details on Agent configuration.
 
-1. Choose a **network check**. The available options are all monitored `HTTP` or `TCP` checks being submitted by your Agents.  
-    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick" responsive="true" style="width:80%;">}}
-2. Pick **monitor scope**. Only hosts or tags from the checks you selected are available.
-    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope" responsive="true" style="width:80%;">}}
-3. Select **alerting options**:
-    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" style="width:80%;">}}
+## Monitor creation
 
-    **Note**: Contrary to [metric monitors][2], it's not possible to get alerted after the endpoint is unavailable for `X` min. Instead you can only be alerted after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (Agent collection period) or 90 seconds without data.
+To create a [network monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
 
-4. Configure **notification options**. Refer to the [Notifications][3] documentation for a detailed walkthrough of the common notification options.
+### Network Status
 
-## Network Metric
+#### Pick a check
 
-1. Choose a **network metric**. You are able to choose either the `TCP` or `HTTP` response time metric.
+1. Choose a network check type (`ssl`, `http`, or `tcp`).
+2. Choose a specific check or `All monitored <TYPE> endpoints`.
 
-2. Pick the **monitor scope**. Only hosts or tags from the metric you selected are available.
+#### Pick monitor scope
 
-3. Select **alerting options**. Refer to the alert-conditions section in the [metric monitor][2] documentation for details.
+Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-4. Configure **notification options**. Refer to the [Notifications][3] documentation for a detailed walkthrough of the common notification options.
+* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed host name or tag is excluded.
+
+Select **alerting options**:
+
+**Note**: Contrary to [metric monitors][3], it's not possible to get alerted after the endpoint is unavailable for `X` min. Instead you can only be alerted after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (Agent collection period) or 90 seconds without data.
+
+### Network Metric
+
+Create a network metric monitor by following the instructions in the [metric monitor][4] documentation. Using the network metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][5] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /monitors/monitor_types/metric
-[3]: /monitors/notifications
+[2]: https://app.datadoghq.com/monitors#create/network
+[3]: /monitors/monitor_types/metric
+[4]: /monitors/notifications
+[5]: https://app.datadoghq.com/monitors/manage
