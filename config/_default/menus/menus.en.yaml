@@ -1089,6 +1089,11 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Troubleshooting"
+    url: "synthetics/troubleshooting/"
+    parent: "synthetics"
+    weight: 7
+
 ####################################
 ## Network Performance Monitoring ##
 ####################################
@@ -1356,16 +1361,6 @@ main:
     pre: "nav_glossary"
     identifier: "glossary_top_level"
     weight: 170000
-
-############
-## VIDEOS ##
-############
-
-  - name: "Videos"
-    url: "videos/"
-    pre: "nav_videos"
-    identifier: "video_top_level"
-    weight: 180000
 
 ##########
 ## HELP ##

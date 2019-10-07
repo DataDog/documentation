@@ -68,7 +68,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="developers/metrics/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" style="width:75%;">}}
 
-There are no enforced [fixed rate limits][5] on custom metric submission. If you're exceeding your default allotment, a Datadog support agent will reach out to you.
+There are no enforced [fixed rate limits][5] on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
 
 ## How do I check my custom metrics count?
 
@@ -101,7 +101,7 @@ Across your 3 hosts, you'd have 13 distinct metrics, here is why :
 
 {{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
 
-If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][6]. You can also see this metric count on your [metric summary page][7], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][7]. You can also see this metric count on your [metric summary page][8], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
 
 So if you only had the first host from the example above reporting, you'd have this:
 
@@ -124,7 +124,7 @@ Ultimately, you'll have 13 metrics using the following query: `count:service.req
 {{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
 
 ### Counting custom metrics from gauges, counts, histograms, and rates
-A [gauge][8] represents one value per second (examples: temperature or Kafka queue offset).
+A [gauge][9] represents one value per second (examples: temperature or Kafka queue offset).
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
@@ -167,7 +167,7 @@ Suppose you drop the `city` tag from the gauge `temperature` metric.
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four. 
 
 ### Counting custom metrics from distributions  
-A distribution metric gathers all values across all hosts emitting metric values in ten second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count). 
+A distribution metric gathers all values across all hosts emitting metric values in ten second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate five timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count). 
 
 Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state` :
 
@@ -176,7 +176,7 @@ Suppose you are interested in measuring the maximum `age` metric in the state of
 | Rochester, NY | 23,29,33,55,41,36,12,67 | 296 | 8 | 12 | 67 | 37 |
 | New York, NY | 18,22,26,31,29,40,23,35 | 215 | 8 | 18 | 40 | 28 |
 
-The total number of custom metrics or timeseries emitted from the `age` distribution metric is **eight (4 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`). 
+The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`). 
 
 To obtain the maximum `age` in the state of New York, you can reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
@@ -222,6 +222,7 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [3]: /integrations
 [4]: /account_management/billing/custom_metrics/#standard-integrations
 [5]: /api/#rate-limiting
-[6]: https://app.datadoghq.com/account/usage/hourly
-[7]: https://app.datadoghq.com/metric/summary
-[8]: https://docs.datadoghq.com/developers/metrics/gauges
+[6]: /account_management/billing/custom_metrics
+[7]: https://app.datadoghq.com/account/usage/hourly
+[8]: https://app.datadoghq.com/metric/summary
+[9]: https://docs.datadoghq.com/developers/metrics/gauges
