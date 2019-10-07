@@ -160,7 +160,7 @@ external_redirect: '/api/#create-a-monitor'
 
 
 
-[1]: /ja/monitors/#export-your-monitor
+[1]: /ja/monitors/monitor_types/#import
 [2]: /ja/monitors/monitor_types
 [3]: /ja/monitors/monitor_types/#define-the-conditions
 [4]: /ja/integrations/faq/list-of-api-source-attribute-value

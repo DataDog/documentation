@@ -11,6 +11,8 @@ If a metric is not submitted from one of the [350+ Datadog integrations][1] it's
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags. In general, any metric you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4] is a custom metric.
 
+There are no enforced [fixed rate limits][5] on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
+
 ## Allocation
 
 You are allocated a certain number of custom metrics based on your Datadog pricing plan:
@@ -46,14 +48,14 @@ This example assumes you are submitting a custom metric on a single host.
 
 * In this situation, you have 6 different metrics. The unique metrics for a **single host** are:
 
-    | Metric                | Tags                      |
-    |-----------------------|---------------------------|
-    | `auth.exceptionCount` | `method:X`                |
-    | `auth.exceptionCount` | `method:Y`                |
-    | `auth.exceptionCount` | `method:X`, `exception:A` |
-    | `auth.exceptionCount` | `method:X`, `exception:B` |
-    | `auth.exceptionCount` | `method:Y`, `exception:A` |
-    | `auth.exceptionCount` | `method:Y`, `exception:B` |
+| Metric                | Tags                      |
+|-----------------------|---------------------------|
+| `auth.exceptionCount` | `method:X`                |
+| `auth.exceptionCount` | `method:Y`                |
+| `auth.exceptionCount` | `method:X`, `exception:A` |
+| `auth.exceptionCount` | `method:X`, `exception:B` |
+| `auth.exceptionCount` | `method:Y`, `exception:A` |
+| `auth.exceptionCount` | `method:Y`, `exception:B` |
 
 **Note**: The ordering of tags does not effect the metric count. The following metrics are not unique:
 
@@ -91,6 +93,8 @@ Across your three hosts, there are 13 distinct metrics:
 
 #### Metric summary
 
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][7]. You can also see this metric count on your [metric summary page][9], where you'd see, clicking on the `service.request.count` metric, the exact number of unique tag combinations:
+
 Your [metric summary page][9] shows the number of distinct metrics for a specific metric. For example, `service.request.count` with 1 host, 2 statuses, and 3 services = **6 distinct metrics**:
 
 {{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:80%;">}}
@@ -117,13 +121,14 @@ A [GAUGE][10] represents one value per second (examples: temperature or Kafka qu
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `GAUGE` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York, and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
-|                              |    |    |    |    |    |    |    |
-|------------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast, USA  | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast, USA    | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast, USA   | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest, USA  | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|--------------------------------|------|------|------|------|------|------|------|
+| ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Orlando, FL, Southeast, USA    | 80   | 80   | 80   | 80   | 81   | 81   | 81   |
+| Miami, FL, Southeast, USA      | 82   | 82   | 82   | 82   | 82   | 82   | 82   |
+| Boston, MA, Northeast, USA     | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| New York, NY, Northeast, USA   | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| Seattle, WA, Northwest, USA    | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
+|                                |      |      |      |      |      |      |      ||
 
 The total number of custom metrics associated with the `temperature` metric is five. Each unique tag combination of `city`, `state`, `region`, and `country` represents a custom metric:
 
@@ -143,24 +148,26 @@ Using the five timeseries above, you can determine the average `temperature` in 
 
 Suppose you want to drop the `country` tag from the GAUGE `temperature` metric.
 
-|                         |    |    |    |    |    |    |    |
-|-------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast  | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast    | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast   | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest  | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|---------------------------|------|------|------|------|------|------|------|
+| ------------------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Orlando, FL, Southeast    | 80   | 80   | 80   | 80   | 81   | 81   | 81   |
+| Miami, FL, Southeast      | 82   | 82   | 82   | 82   | 82   | 82   | 82   |
+| Boston, MA, Northeast     | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| New York, NY, Northeast   | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| Seattle, WA, Northwest    | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
+|                           |      |      |      |      |      |      |      ||
 
 Even though there are five cities, four states, three regions, and one country, there are still five unique tag value combinations of `city`, `state`, `region`, and `country` that appear in the data. The total number of custom metrics emitted from the `temperature` metric is still five.
 
 Suppose you drop the `city` tag from the GAUGE `temperature` metric.
 
-|               |    |    |    |    |      |      |      |
-|---------------|----|----|----|----|------|------|------|
-| FL, Southeast | 81 | 81 | 81 | 81 | 81.5 | 81.5 | 81.5 |
-| MA, Northeast | 78 | 78 | 78 | 78 | 78   | 79   | 79   |
-| NY, Northeast | 79 | 79 | 79 | 79 | 79   | 79   | 79   |
-| WA, Northwest | 75 | 75 | 75 | 75 | 75   | 75   | 75   |
+|-----------------|------|------|------|------|--------|--------|--------|
+| --------------- | ---- | ---- | ---- | ---- | ------ | ------ | ------ |
+| FL, Southeast   | 81   | 81   | 81   | 81   | 81.5   | 81.5   | 81.5   |
+| MA, Northeast   | 78   | 78   | 78   | 78   | 78     | 79     | 79     |
+| NY, Northeast   | 79   | 79   | 79   | 79   | 79     | 79     | 79     |
+| WA, Northwest   | 75   | 75   | 75   | 75   | 75     | 75     | 75     |
+|                 |      |      |      |      |        |        |        ||
 
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four.
 
@@ -176,6 +183,7 @@ Suppose you are interested in measuring the maximum `age` metric in the state of
 | New York, NY  | 18,22,26,31,29,40,23,35      | 215 | 8     | 18      | 40      | 28                  |
 
 The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`).
+
 
 To obtain the maximum `age` in the state of New York, you can reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
@@ -216,4 +224,4 @@ The total number of custom metrics emitted from the `age` distribution metric WI
 [7]: https://app.datadoghq.com/account/usage/hourly
 [8]: /account_management/billing/usage_details
 [9]: https://app.datadoghq.com/metric/summary
-[10]: https://docs.datadoghq.com/developers/metrics/gauges
+[10]: /developers/metrics/gauges

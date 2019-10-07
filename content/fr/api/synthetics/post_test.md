@@ -10,7 +10,7 @@ Créez un test Synthetics pour initier et configurer les tests que vous souhaite
 
 Un test de navigateur est traité comme un test GET API. Cette méthode vous permet de créer un test de navigateur, mais vous devez utiliser l'interface graphique pour [enregistrer votre test][2].
 
-##### Arguments
+**ARGUMENTS** :
 
 *   **`assertions`** (_obligatoire_) : ce paramètre permet de définir exactement ce qui doit se produire pour qu'un test soit considéré comme réussi. Chaque assertion dispose des éléments suivants : `type`, `operator`, `target` et éventuellement une `property`.
     *   **`type`** (_test API obligatoire_) : la partie de la réponse que vous souhaitez évaluer. Les types possibles sont `header`, `body`, `responseTime` et `statusCode`. Lorsque vous définissez un en-tête, vous devez indiquer la clé du paramètre d'en-tête dans le paramètre `property` et la valeur du paramètre d'en-tête avec le paramètre `target`. Pour tous les autres types, utilisez `target` pour spécifier le corps, le délai de réponse et les messages d'erreur. Par exemple, `"type":"statusCode"` peut avoir `"target":403`.

@@ -11,7 +11,7 @@ Créez une intégration Datadog/PagerDuty.
 
 **Remarque** : tous les arguments sont requis lors de la création (`PUT`) d'une configuration PagerDuty.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`services`** :
     Le tableau des objets de service PagerDuty. Découvrez  comment configurer votre service Datadog avec la [documentation de PagerDuty][1]. Un objet de service PagerDuty est composé de ce qui suit :

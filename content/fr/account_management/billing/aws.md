@@ -25,7 +25,7 @@ Les hosts avec un Agent en cours d'exécution s'affichent toujours et sont inclu
 ## Dépannage
 Pour des questions techniques, contactez [l'assistance Datadog][4].
 
-Pour les questions relatives à la facturation, contactez votre gestionnaire de la [réussite client][5].
+Pour toute question concernant la facturation, contactez votre [chargé de compte][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /fr/tagging/using_tags/#integrations

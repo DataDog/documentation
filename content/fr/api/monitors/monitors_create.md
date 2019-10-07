@@ -160,7 +160,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 
 
 
-[1]: /fr/monitors/#export-your-monitor
+[1]: /fr/monitors/monitor_types/#import
 [2]: /fr/monitors/monitor_types
 [3]: /fr/monitors/monitor_types/#define-the-conditions
 [4]: /fr/integrations/faq/list-of-api-source-attribute-value

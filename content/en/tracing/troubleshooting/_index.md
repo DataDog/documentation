@@ -164,6 +164,14 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 Tracer.Instance = tracer;
 ```
 
+Location of the profiler log:
+
+| Platform | Path                                                          |
+|----------|---------------------------------------------------------------|
+| Linux    | `/var/log/datadog/dotnet-profiler.log`                        |
+| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\dotnet-profiler.log` |
+
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 

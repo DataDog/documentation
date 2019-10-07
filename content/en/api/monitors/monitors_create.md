@@ -161,7 +161,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
             Error: 400 - ["Invalid monitor option:<invalid option>"]
 
 
-[1]: /monitors/#export-your-monitor
+[1]: /monitors/monitor_types/#import
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /integrations/faq/list-of-api-source-attribute-value

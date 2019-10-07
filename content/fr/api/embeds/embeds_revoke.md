@@ -10,6 +10,6 @@ Révoque un embed spécifié.
 
 Renvoie un JSON contenant le message de réussite {success: [message]}. En cas d'échec, la valeur renvoyée correspond à un JSON contenant un message d'erreur {errors: [messages]}.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

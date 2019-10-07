@@ -212,14 +212,16 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.com.crt
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
 ```
 
-**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.com.crt][1] for the logs proxy configuration.
+**Note**: Download the certificate with the following command:
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Redhat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-[1]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
@@ -304,14 +306,16 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.eu.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt
 ```
 
-**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.eu.crt][1] for the logs proxy configuration.
+**Note**: Download the certificate with the following command:
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Redhat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
-[1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -345,7 +349,7 @@ Finally [restart the Agent][1].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -390,7 +394,7 @@ Finally [restart the Agent][1].
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}
@@ -462,10 +466,9 @@ To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the
 ```yaml
 logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
-  logs_no_ssl: true
 ```
 
-The `logs_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
+Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 ## Using the Agent as a Proxy
 

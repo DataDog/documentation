@@ -42,7 +42,7 @@ Use variables to customize your monitor notifications, the available variables a
 
 | Variable                | Description                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
 | `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
 | `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
 | `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |

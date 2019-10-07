@@ -8,7 +8,7 @@ external_redirect: '/api/#add-aws-log-lambda-arn'
 
 Attachez l'ARN du Lambda créé pour la [collecte de logs AWS de Datadog][1] à votre identifiant de compte AWS pour activer la collecte de logs.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*obligatoire*] :
 

@@ -40,9 +40,9 @@ Ajoutez des événements de systèmes associés pour ajouter plus de contexte à
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant du [template variable][2] sélectionné. |
+| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [Template Variable][2] sélectionnée. |
 
-#### Commandes de l'axe Y
+#### Commandes de l'axe des ordonnées
 
 Les commandes de l'axe des ordonnées sont disponibles via l'interface utilisateur et l'éditeur JSON. Grâce à ces commandes, vous pouvez :
 

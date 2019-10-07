@@ -131,7 +131,7 @@ On Windows:
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
-On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` for Agent versions >= 6.12):
+On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` for Agent versions >= 6.12):
 
 ```python
 import socket

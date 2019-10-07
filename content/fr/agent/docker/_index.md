@@ -216,7 +216,7 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [1]: /fr/agent
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://app.datadoghq.com/account/settings#agent/docker
-[4]: /fr/agent/#supported-os-versions
+[4]: /fr/agent/basic_agent_usage/#supported-os-versions
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [7]: /fr/tracing

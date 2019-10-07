@@ -23,7 +23,7 @@ Some parts of your system might not be available to robots without the right ide
 * The [headers](#headers) attached to all Datadog robot requests.
 * Datadog's [**Synthetics IP ranges**][1].
 * The **Advanced options** configuration to set custom headers for your API and browser tests. You can also locally add **cookies, headers, or basic auth** to your API tests and **cookies and headers** to your browser tests.
-* The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#_datadog_synthetics_browser-variable).
+* The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#datadog-synthetics-browser-variable).
 
 #### Headers
 

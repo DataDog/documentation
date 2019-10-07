@@ -8,6 +8,6 @@ external_redirect: /api/#recuperer-des-tags
 ## Récupérer des tags
 Renvoie un mappage des tags et hosts pour l'ensemble de votre infrastructure.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *Cet endpoint ne prend aucun argument JSON.*

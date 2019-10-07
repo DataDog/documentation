@@ -38,7 +38,7 @@ Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket 
 | Heroku       | Consultez la [documentation relative à Heroku][3]         |
 
 
-[1]: /fr/agent/#using-the-gui
+[1]: /fr/agent/basic_agent_usage/?tab=agentv6#gui
 [2]: /fr/agent/basic_agent_usage/windows/#agent-v6
 [3]: https://docs.datadoghq.com/fr/agent/faq/heroku-troubleshooting/#send-a-flare
 {{% /tab %}}
@@ -62,7 +62,7 @@ Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket 
 
 
 [1]: /fr/agent/basic_agent_usage/windows/#agent-v5
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
 {{% tab "Agent de cluster" %}}
 

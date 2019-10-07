@@ -23,48 +23,56 @@ Centralizing logs from various technologies and applications tends to generate t
 
 This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
 
-In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and - for instance - correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
+In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and—for instance—correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 
-Standard Attributes have been designed to help your organization to define its own Naming Convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
+Standard Attributes have been designed to help your organization to define its own naming convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
 
-Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
-The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
+### Setup standard attributes
 
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list), but your organization can decide to extend or modify this list.
+The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
-How these Standard Attributes will be suggested or enforced?
-Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information.
+To enforce standard attributes, administrators have the right to re-copy an existing set of non-standard attributes into a set of standard ones. This enables noncompliant logs sources to become compliant without losing any previous information.
 
-## Standard Attribute list
+### Standard attributes in Log Explorer
+
+Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
+
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
+
+If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align. 
+
+## Standard attribute list
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
 
-### Add Or Update Standard Attributes
+### Add or update standard attributes
 
 A standard attribute is defined by its:
 
-* `Path`: The path of the Standard attributes as you would find it in your JSON (e.g `network.client.ip`)
+* `Path`: The path of the standard attributes as you would find it in your JSON (e.g `network.client.ip`)
 * `Type` (`string`, `integer`, `double`, `boolean`): The type of the attribute which is used to cast element of the remapping list
 * `Description`: Human readable description of the attribute
-* `Remapping list`: Comma separated list of non-compliant attribute that should be remapped to the Standard one
+* `Remapping list`: Comma separated list of non-compliant attributes that should be remapped to standard ones
 
 The standard attribute panel pops when you add a new standard attribute or edit an existing one:
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-Any element of the standard attribute can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+Any element of the standard attributes can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
 
-### Standard Attribute Remapping Behaviour
+### Standard attribute remapping behavior
 
-After being processed in the pipelines, each log goes through the full list of Standard Attributes.
+After being processed in the pipelines, each log goes through the full list of standard attributes.
 For each entry of the standard attribute table, if the current log has an attribute matching the remapping list, the following is done:
 
-* The first attribute that matches the provided list is remapped, and the value is overridden by the new one if already existing
-* Datadog enforces the type of the remapped attribute (if this is not possible, the attribute is skipped and the next matching one of the list is used)
-* The original attribute is kept in the log
+* The first attribute that matches the provided list is remapped, and the value is overridden by the new one if already existing.
+* Datadog enforces the type of the remapped attribute. If this is not possible, the attribute is skipped and the next matching one of the list is used.
+* The original attribute is kept in the log.
 
 **Important Note**: By default, the type of an existing standard attribute is unchanged if the remapping list is empty. Add the standard attribute to its own remapping list to enforce its type.
 
@@ -74,9 +82,9 @@ To add or update a standard attribute, follow these rules:
 
 * A standard attribute cannot be added in the remapping list of another standard attribute.
 * A custom attribute can be remapped to only one standard attribute.
-* To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot be both standard attributes).
+* To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
 
-## Default Standard Attribute List
+## Default standard attribute list
 
 The default standard attribute list is split into 7 functional domains:
 
@@ -110,14 +118,14 @@ The following attributes are related to the geolocation of IP addresses used in 
 | **Fullname**                                 | **Type** | **Description**                                                         |
 | :---                                         | :---     | :----                                                                   |
 | `network.client.geoip.country.name`          | `string` | Name of the country |
-| `network.client.geoip.country.iso_code`      | `string` | [Iso Code][6] of the country (example: `US` for the United States, `FR` for France) |
-| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`) |
-| `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
-| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France) |
-| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France) |
-| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`) |
+| `network.client.geoip.country.iso_code`      | `string` | [ISO Code][6] of the country (example: `US` for the United States, `FR` for France) |
+| `network.client.geoip.continent.code`        | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`) |
+| `network.client.geoip.continent.name`        | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
+| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
+| `network.client.geoip.subdivision.iso_code`  | `string` | [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France) |
+| `network.client.geoip.city.name`             | `String` | The name of the city (example `Paris`, `New York`) |
 
-### HTTP Requests
+### HTTP requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
@@ -194,7 +202,7 @@ Performance metrics attributes.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15].
+Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][14] for [trace search][15].
 
 ### User related attributes
 

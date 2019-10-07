@@ -76,7 +76,7 @@ Cette section affiche les hostnames découverts par l'Agent (voir l'exemple ci-d
       gce: unable to retrieve hostname from GCE: Get http://169.254.169.254/computeMetadata/v1/instance/hostname: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
-## Collecteur
+## Collector
 ### Checks en cours d'exécution
 
 Cette section affiche une liste des instances de check en cours d'exécution, par exemple :
@@ -150,7 +150,7 @@ Si l'avertissement `the forwarder dropped transactions, there is probably an iss
 
 ### Transactions
 
-Cette section affiche les transactions effectuées par le forwarder, par exemple :
+Cette section affiche les transactions effectuées par le Forwarder, par exemple :
 ```text
     CheckRunsV1: 2
     Dropped: 0
@@ -226,7 +226,7 @@ Termes et descriptions :
 | Dogstatsd Metric Sample | Le nombre total de métriques envoyées du serveur DogStatsD vers l'aggregator.            |
 | Event                   | Le nombre total d'événements envoyés vers l'aggregator.                                       |
 | Service Check           | Le nombre total de checks de service envoyés vers l'aggregator.                               |
-| Flush                   | Le nombre de fois que des métriques agrégées ont été envoyées vers le forwarder pour les envoyer à Datadog. |
+| Flush                   | Le nombre de fois que des métriques agrégées ont été transmises au Forwarder pour les envoyer à Datadog. |
 
 
 ## DogStatsD

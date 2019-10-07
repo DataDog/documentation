@@ -5,12 +5,14 @@ order: 24.2
 external_redirect: "/api/#mettre-a-jour-la-sequence-des-pipelines"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/logs/config/pipeline-order`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="update_pipeline_order" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.update_pipeline_order" >}}

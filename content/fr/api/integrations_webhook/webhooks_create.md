@@ -12,7 +12,7 @@ Créez une intégration Datadog/Webhooks.
 
 * La méthode `POST` permet de mettre à jour la configuration de votre intégration en **ajoutant** votre nouvelle configuration à celle de votre organisation Datadog.
 
-##### ARGUMENTS
+**ARGUMENTS** :
 
 * **`hooks`** [*obligatoire*] :
    Tableau d'objets Webhook. Un objet Webhook est composé de :
@@ -29,7 +29,7 @@ Créez une intégration Datadog/Webhooks.
         Si `use_custom_payload` est défini sur **true**, spécifiez votre propre charge utile pour ajouter vos propres champs personnalisés à la requête en [utilisant ces variables][2].
 
     * **`encode_as_form`** [*facultatif*, *défaut*=**False**] :
-        Si `use_custom_payload` est défini sur **true**, définissez sur **true** pour chiffrer l'URL de votre charge utile.
+        si `use_custom_payload` est défini sur **true**, définissez ce paramètre sur **true** pour encoder votre charge utile dans une URL.
     * **`headers`** [*facultatif*, *défaut*=**None**] :
       En-têtes attachés à votre Webhook.
 
