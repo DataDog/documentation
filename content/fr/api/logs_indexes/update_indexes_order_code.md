@@ -5,14 +5,14 @@ order: 23.5
 external_redirect: "/api/#mettre-ajour-la-sequence-des-index"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/logs/config/index-order`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="update_indexes_order" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.update_indexes_order" >}}

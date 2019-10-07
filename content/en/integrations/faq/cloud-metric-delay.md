@@ -14,11 +14,20 @@ further_reading:
 
 When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pulled in by API with a crawler. You may see a delay in metrics due to constraints with the cloud provider API.
 
+## Summary
+
+| Provider   | Default crawler  |
+|------------|------------------|
+| AWS        | Every 10 minutes |
+| Azure      | Every 5 minutes  |
+| Cloudflare | Every 15 minutes |
+| GCP        | Every 5 minutes  |
+
 ## Cloud providers
 
-### AWS
+These are specifics related to particular cloud providers.
 
-For AWS, Datadog runs the default crawler every 10 minutes.
+### AWS
 
 AWS offers two levels of granularity for metrics (5 and 1 minute metrics). If you receive 5-minute metrics from CloudWatch, there can be ~15-20 minute delay in receiving your metrics. This is because CloudWatch makes your data available with a 5-10 minute latency plus the Datadog default of 10 minutes. Queueing and CloudWatch API limitations can add up to another 5 minutes. If you receive 1-minute metrics with CloudWatch, then their availability delay is about 2 minutes—so total latency to view your metrics may be ~10-12 minutes.
 
@@ -26,13 +35,9 @@ Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. T
 
 ### Azure
 
-For Azure, Datadog runs the default crawler every 5 minutes.
-
 Azure emits metrics with 1-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
 
 ### GCP
-
-For GCP, Datadog runs the default crawler every 5 minutes.
 
 GCP emits metrics with 1-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
 

@@ -5,11 +5,14 @@ order: 17.3
 external_redirect: "/api/#delete-a-gcp-integration"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/integration/gcp`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="gcp_delete" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.gcp_delete" >}}

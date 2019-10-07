@@ -5,9 +5,14 @@ order: 14.2
 external_redirect: /api/#nombre-de-hosts
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/hosts/totals`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-hosts-totals" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-hosts-totals" >}}

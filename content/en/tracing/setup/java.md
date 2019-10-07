@@ -327,7 +327,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/docker/apm
 [2]: /tracing/setup/docker
 [3]: /agent/kubernetes/daemonset_setup/#trace-collection
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md

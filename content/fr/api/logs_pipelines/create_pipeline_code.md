@@ -5,12 +5,14 @@ order: 24.5
 external_redirect: "/api/#create-a-pipeline"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/logs/config/pipelines`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="create_pipeline" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.create_pipeline" >}}

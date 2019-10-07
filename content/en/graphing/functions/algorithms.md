@@ -52,7 +52,7 @@ The `forecast()` function has two parameters:
 
 A number of the graphing options disappear, as forecasts have a unique visualization. After successfully adding **Forecast**, your editor should show something like this:
 
-{{< img src="monitors/monitor_types/forecasts/query_editor.png" alt="query editor" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/algorithms/forecast_query.png" alt="query editor" responsive="true" style="width:80%;">}}
 
 ## Other functions
 

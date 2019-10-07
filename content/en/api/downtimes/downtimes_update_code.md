@@ -5,9 +5,14 @@ order: 10.2
 external_redirect: /api/#update-monitor-downtime
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/downtime/<DOWNTIME_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-update-downtime" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-update-downtime" >}}

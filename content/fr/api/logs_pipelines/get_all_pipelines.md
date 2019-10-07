@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-toutes-les-pipelines"
 
 Obtenez tous les pipelines de votre organisation.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

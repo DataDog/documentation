@@ -5,12 +5,14 @@ order: 24.6
 external_redirect: "/api/#mettre-a-jour-un-pipeline"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/logs/config/pipelines/<ID_PIPELINE>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="update_pipeline" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.update_pipeline" >}}

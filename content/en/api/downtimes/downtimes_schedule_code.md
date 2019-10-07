@@ -5,9 +5,14 @@ order: 10.1
 external_redirect: /api/#schedule-monitor-downtime
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/downtime`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-schedule-downtime" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-schedule-downtime" >}}

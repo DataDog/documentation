@@ -5,13 +5,14 @@ order: 32.1
 external_redirect: /api/#send-traces
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT  http://localhost:8126/v0.3/traces`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="send_trace" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.send_trace" >}}

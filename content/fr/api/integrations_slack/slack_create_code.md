@@ -5,13 +5,14 @@ order: 19.2
 external_redirect: "/api/#creer-une-integration-slack"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/integration/slack`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="slack_create" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.slack_create" >}}

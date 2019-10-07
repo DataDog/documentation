@@ -7,7 +7,7 @@ external_redirect: /api/#post-a-check-run
 
 ## Post a check run
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`check`** *[required]*:
     The text for the message
@@ -24,11 +24,9 @@ external_redirect: /api/#post-a-check-run
 
 * **`tags`** *[required]*:
     A list of key:val tags for this check
-    
+
 * **`timestamp`** *[optional]*:
     POSIX timestamp of the event.
 
 * **`message`** *[optional]*:
     A description of why this status occurred
-
-

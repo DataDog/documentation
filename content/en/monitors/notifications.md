@@ -36,15 +36,13 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
 
-***Note:*** *To avoid notification storms, Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
-
 ## Variables
 
 Use variables to customize your monitor notifications, the available variables are:
 
 | Variable                | Description                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
 | `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
 | `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
 | `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |

@@ -6,7 +6,8 @@ external_redirect: /api/#mettre-a-jour-le-downtime-d-un-monitor
 ---
 
 ## Mettre à jour le downtime d'un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`id`** [*obligatoire*] :
     L'ID entier du downtime à mettre à jour.
@@ -31,4 +32,3 @@ external_redirect: /api/#mettre-a-jour-le-downtime-d-un-monitor
     *   **`week_days`** (facultatif) : la liste des jours de la semaine pour laquelle la répétition est activée. Valeurs autorisées : `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Seulement applicable lorsque la variable `type` a pour valeur `weeks`. **La première lettre doit être en majuscule.**
     *   **`until_occurrences`** (facultatif) ; nombre de récurrences du downtime. **`until_occurences` et `until_date`** sont mutuellement exclusifs.
     *   **`until_date`** (facultatif) : timestamp POSIX correspondant à la date à laquelle la récurrence doit se terminer. **`until_occurences` et` until_date`** sont mutuellement exclusifs.
-

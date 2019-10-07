@@ -9,6 +9,6 @@ external_redirect: "/api/#supprimer-un-pipeline"
 
 Supprimez un pipeline donné de votre organisation.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

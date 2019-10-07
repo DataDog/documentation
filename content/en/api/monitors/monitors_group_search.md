@@ -9,7 +9,7 @@ external_redirect: /api/#monitors-group-search
 
 Search and filter your monitor groups details.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*optional*]:
 

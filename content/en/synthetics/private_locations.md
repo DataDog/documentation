@@ -57,8 +57,8 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     Check if the endpoint corresponding to your Datadog Site is available from the host runing the worker:
 
-    * For the Datadog US site: `ping api.datadoghq.com`.
-    * For the Datadog EU site:   `ping api.datadoghq.eu`.
+    * For the Datadog US site: `curl https://api.datadoghq.com`.
+    * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
 
 5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 

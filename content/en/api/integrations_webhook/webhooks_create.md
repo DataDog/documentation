@@ -13,7 +13,7 @@ Create a Datadog-Webhooks integration.
 
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`hooks`** [*required*]:
     Array of Webhook objects. A Webhook object is composed by:

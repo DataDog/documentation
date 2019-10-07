@@ -9,7 +9,7 @@ external_redirect: /api/#recuperer-tous-les-utilisateurs
 
 Récupère la liste de tous les utilisateurs de l'organisation. Cette liste comprend tous les utilisateurs, même s'ils sont désactivés ou si leur compte n'a pas été vérifié.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

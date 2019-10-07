@@ -1,7 +1,6 @@
 ---
 title: Runtime Metrics
 kind: documentation
-beta: true
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
@@ -32,21 +31,24 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 
 {{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
 
-**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
+By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 
-By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent. Additionally, for:
 
-**Note**: To associate JVM metrics within Flame graphs, ensure the `env: tag`, (case-sensitive) is set and matching across your environment.
+* **Kubernetes**: You *must* [bind the DogstatsD port to a host port][4].
+* **ECS**: [Set the appropriate flags in your task definition][5].
 
+**Notes**:
+
+* For the runtime UI, `dd-trace-java` >= [`0.24.0`][6] is supported.
+* To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
-[3]: /developers/dogstatsd/#setup
-[4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[2]: /developers/dogstatsd/#setup
+[3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 {{% /tab %}}
 {{% tab "Python" %}}
 

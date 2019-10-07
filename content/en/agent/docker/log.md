@@ -197,11 +197,14 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 If you are running Kubernetes, pod annotations can be used.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: webapp
   template:
     metadata:
       annotations:
@@ -281,7 +284,7 @@ ac_exclude = ["name:datadog-agent"]
 
 ## Short Lived containers
 
-For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds. 
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
 
  Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 

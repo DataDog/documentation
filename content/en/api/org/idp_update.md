@@ -17,7 +17,8 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 ##### HEADERS
 * **`Content-Type: multipart/form-data`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`idp_file`** [*required*]:
      The path to the XML metadata file you wish to upload.
 
@@ -26,5 +27,6 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 ##### HEADERS
 * **`Content-Type: application/xml`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 The body must contain the contents of your IdP metadata XML file.

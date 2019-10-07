@@ -9,7 +9,7 @@ external_redirect: "/api/#set-gcp-integration-automute"
 
 Activez ou annulez la désactivation automatique pour une intégration Datadog/GCP donnée.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`project_id`** [*requis*] :
 

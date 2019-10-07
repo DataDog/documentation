@@ -43,8 +43,8 @@ class ServletImpl extends AbstractHttpServlet {
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
-      span.setTag("customer.id", 12345);
-      span.setTag("http.url", "/login");
+      span.setTag("customer.id", req.getParameter("customer_id"));
+      span.setTag("<TAG_KEY>", "<TAG_VALUE>");
     }
     // servlet impl
   }

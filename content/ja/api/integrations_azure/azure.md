@@ -11,6 +11,5 @@ external_redirect: '/api/#integration-azure'
 Datadog-Azure インテグレーションの構成は、Datadog API から直接行います。
 詳細については、[Datadog-Azure インテグレーションのページ][7]を参照してください。
 
-
 [1]: /ja/help
 [2]: /ja/integrations/azure

@@ -34,7 +34,7 @@ Define the configuration of your browser test.
     * Advanced Options (optional): Set custom request headers, cookies, or authenticate through Basic Auth.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
         * Authentication: Authenticate through HTTP Basic Authentication with a username and a password.
-        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
@@ -65,7 +65,7 @@ Tests can be only recorded from **[Google Chrome][7]**. To record your test, dow
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_check_assertions.png" alt="Browser Test assertions" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
@@ -80,7 +80,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
 | `Assert that an element is present on the page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
-| `Check an element's content`                            | Makes sure that a specific element is located or not on the current page.                                                        |
+| `Check an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
 | `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
 | `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
@@ -136,6 +136,12 @@ You can also use your variables in some assertions, including:
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
+
+#### Wait
+
+By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds. 
+
+**Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
 #### Test failure and errors
 

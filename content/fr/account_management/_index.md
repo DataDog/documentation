@@ -53,6 +53,10 @@ Vous pouvez définir votre fuseau horaire, vos notifications de bureau et vos ab
 * Weekly Pagerduty Report
 * Weekly Nagios Report
 
+## Supprimer votre compte
+
+Pour supprimer complètement votre compte Datadog, [contactez notre équipe d'assistance][13].
+
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
@@ -65,3 +69,4 @@ Vous pouvez définir votre fuseau horaire, vos notifications de bureau et vos ab
 [10]: /fr/account_management/org_settings
 [11]: /fr/integrations/github
 [12]: https://app.datadoghq.com/account/preferences
+[13]: /fr/help

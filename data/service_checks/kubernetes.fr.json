@@ -35,46 +35,46 @@
         "agent_version": "5.6.0",
         "integration":"kubernetes",
         "check": "kubernetes_state.node.ready",
-        "statuses": ["ok", "critical"],
+        "statuses": ["ok", "unknown", "critical"],
         "groups": ["host", "node"],
         "name": "Nœud prêt",
-        "description": "Renvoie `CRITICAL` si le nœud de cluster n'est pas prêt. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le nœud de cluster n'est pas prêt. Renvoie `UNKNOWN` si le statut est inconnu. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
         "integration":"kubernetes",
         "check": "kubernetes_state.node.out_of_disk",
-        "statuses": ["ok", "critical"],
+        "statuses": ["ok", "unknown", "critical"],
         "groups": ["host", "node"],
         "name": "Espace disque nœud saturé",
-        "description": "Renvoie `CRITICAL` si l'espace disque d'un nœud de cluster est saturé. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'espace disque d'un nœud de cluster est saturé. Renvoie `UNKNOWN` si le statut est inconnu. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
         "integration":"kubernetes",
         "check": "kubernetes_state.node.disk_pressure",
-        "statuses": ["ok", "critical"],
+        "statuses": ["ok", "unknown", "critical"],
         "groups": ["host", "node"],
         "name": "Pression du disque du nœud",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de disque. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de disque. Renvoie `UNKNOWN` si le statut est inconnu. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
         "integration":"kubernetes",
         "check": "kubernetes_state.node.memory_pressure",
-        "statuses": ["ok", "critical"],
+        "statuses": ["ok", "unknown", "critical"],
         "groups": ["host", "node"],
         "name": "Pression de la mémoire du nœud",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de la mémoire. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de la mémoire. Renvoie `UNKNOWN` si le statut est inconnu. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
         "integration":"kubernetes",
         "check": "kubernetes_state.node.network_unavailable",
-        "statuses": ["ok", "critical"],
+        "statuses": ["ok", "unknown", "critical"],
         "groups": ["host", "node"],
         "name": "Indisponibilité du réseau du nœud",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Renvoie `UNKNOWN` si le statut est inconnu. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",

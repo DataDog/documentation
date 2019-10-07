@@ -1,5 +1,5 @@
 ---
-title: Débuter avec l'APM
+title: Glossaire et procédure pas à pas de l'APM
 kind: documentation
 aliases:
   - /fr/tracing/terminology/
@@ -21,90 +21,133 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-L'APM recueille les métriques sur les performances de votre application avec quatre niveaux de granularité : au niveau des _services_, _ressources_, _traces_ et _spans_.
+L'interface de l'APM fournit de nombreux outils permettant de dépanner les performances des applications et de les mettre en corrélation avec l'ensemble du produit, ce qui vous aide à rechercher et à résoudre les problèmes liés aux systèmes hautement distribués.
+
+| Concept               | Description             |
+|-----------------------|-------------------------|
+| [Service](#services)               | Les services représentent les éléments constitutifs des architectures de microservices modernes. En d'autres termes, un service regroupe des endpoints, des requêtes ou des tâches afin de mettre des instances à l'échelle.                                                            |
+| [Ressource](#resources)              | Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan.   |
+| [Trace](#trace)                 | Une trace sert à suivre le temps que passe une application pour traiter une demande et le statut de cette demande. Chaque trace consiste en une ou plusieurs spans.                                                          |
+| [Span](#spans)                  | Une span représente une unité de travail logique dans un système distribué pour une période donnée. Les spans multiples construisent une trace.                                                                                                    |
+| [Métriques de trace](#trace-metrics)         | Les métriques de trace sont automatiquement collectées et conservées. Une politique de rétention de 15 mois s'y applique, tout comme pour les autres [métriques Datadog][1]. Elles peuvent être utilisées pour identifier et donner des alertes sur les hits, les erreurs ou la latence.                                                                                                    |
+| [Analyse et recherche de traces](#trace-search-analytics)                 | L'analyse et la recherche de traces sert à filtrer les événements de l'APM avec des tags définis par l'utilisateur (customer_id, error_type, app_name, par exemple) ou avec des tags d'infrastructure.            |
+| [Événement de l'APM](#apm-event)                 | Les événements de l'APM possèdent un débit de requête de 100 % et peuvent être utilisés pour effectuer des recherches, des interrogations et une surveillance dans l'analyse et la recherche de traces.             |
+| [Tags de span](#span-tags)                | Les tags de spans prennent la forme de paires clé-valeur pour corréler une demande dans la *Vue Trace* ou pour filtrer dans *l'analyse et la recherche de traces*.            |
 
 ## Services
 
-**Un service est un ensemble de processus qui ont la même fonction.**
-Par exemple, une simple application Web peut être composée de deux services :
+Après avoir [instrumenté votre application][2], la [Liste des services][3] devient votre page de destination principale pour les données de l'APM.
 
-* Un service `webapp` et un service `database`.
+{{< img src="tracing/visualization/service_list.png" alt="liste de services" responsive="true">}}
 
-Tandis qu'un environnement complexe peut se diviser en 6 services :
+Les services représentent les éléments constitutifs des architectures de microservices modernes. En d'autres termes, un service regroupe des endpoints, des requêtes ou des tâches afin de mettre des instances à l'échelle. Par exemple :
 
-* 3 services différents : `webapp`, `admin` et `query`.
-* 3 services externes : `master-db`, `replica-db` et `yelp-api`.
+* Un groupe d'URL d'endpoints peut être regroupé sous un service d'API.
+* Un groupe de requêtes de base de données regroupées dans un service de base de données.
+* Un groupe de tâches périodiques configurées dans le service crond.
 
-L'APM attribue automatiquement des noms à vos services. Cependant, vous pouvez également les nommer de manière explicite. Consultez les instructions pour : [Go][1], [Java][2], [Python][3] ou [Ruby][4].
+La capture d'écran ci-dessous montre un système distribué par microservices pour un développeur de sites de e-commerce. Il existe un `web-store`, `ad-server`, `payment-db`, et `auth-service`, tous représentés comme des services dans l'APM.
 
-Les noms de service :
+{{< img src="tracing/visualization/service_map.png" alt="service map" responsive="true">}}
 
-* **doivent être composés de caractères alphanumériques en minuscule ;**
-* **sont limités à 50 caractères ;**
-* **ne peuvent pas contenir d'espaces** (les espaces sont remplacées par des underscores) ;
-* doivent respecter les [règles portant sur les noms de métriques][5].
+Tous les services sont affichés [Liste de services][3] et représentés visuellement sur la [Service Map][4]. Chaque service possède sa propre [page de service][5], où des [métriques de trace] telles que le débit, la latence et les taux d'erreur peuvent être visualisées et inspectées. Utilisez ces métriques pour créer des widgets de dashboard ou des monitors et pour voir les performances de chaque ressource, telle qu'un endpoint web ou une requête de base de données appartenant au service.
 
-**Remarque** : les services doivent être associés à un type. L'APM attribue automatiquement l'un des quatre types suivants aux services : web, database, cache ou custom.
+{{< img src="tracing/visualization/service_page.mp4" video="true" alt="page services" responsive="true">}}
 
-Vous pouvez également [recevoir des alertes][6] sur une métrique au niveau des services. Découvrez comment surveiller des services dans l'APM en consultant les sections [Liste des services][7] et [Page Service][8].
+<div class="alert alert-info">
+Vous ne voyez pas les endpoints HTTP que vous espériez sur la page Service ? Dans l'APM, le nom du service n'est pas le seul facteur permettant aux endpoints de se connecter à un service. Ils peuvent également se connecter grâce au `span.name` de la span de point d'entrée de la trace. Par exemple, dans le service web-store ci-dessus, `web.request` constitue la span de point d'entrée.
+ Vous trouverez plus d'informations <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">en cliquant ici</a>.
+</div>
 
 ## Ressources
 
-**Une ressource est une action particulière pour un service**.
+Les ressources représentent un domaine particulier d'une application client. Il peut s'agir généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Dans un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, mises_a_jour_de_panier, ajouts_d_article, etc. Chaque ressource possède sa propre [page de ressources][6] avec des [métriques de trace](#metriques-de-trace) définies pour chaque endpoint spécifique. Les métriques de trace peuvent être utilisées comme n'importe quelle autre métrique de Datadog : elles peuvent être exportées vers un dashboard ou utilisées pour créer des monitors. La page Ressource affiche également le widget de résumé de span avec une vue agrégée des [spans](#spans) pour toutes les [traces](#trace), la distribution de latence des demandes et les traces indiquant les demandes adressées à cet endpoint.
 
-* **Pour une application Web** : il peut s'agir par exemple d'une URL canonique comme `/user/home` ou d'une fonction de gestionnaire comme `web.user.home` (souvent appelées « routes » dans les frameworks MVC).
-* **Pour une base de données SQL** : une requête, telle que `SELECT * FROM users WHERE id = ?`, constitue une ressource.
+{{< img src="tracing/visualization/resource_page.mp4" video="true" alt="page ressources" responsive="true">}}
 
-Les ressources doivent être regroupées sous un nom canonique, comme `/user/home`, au lieu d'utiliser des ressources séparées comme `/user/home?id=100` et `/user/home?id=200`. L'APM attribue automatiquement des noms à vos ressources. Cependant, vous pouvez également les nommer de manière explicite. Consultez les instructions pour : [Go][9], [Java][2], [Python][10] et [Ruby][11].
+## Trace
 
-Cliquez sur un [service][8] spécifique pour visualiser ces ressources.
+Une trace sert à suivre le temps que passe une application pour traiter une demande et le statut de cette demande. Chaque trace consiste en une ou plusieurs spans. Pendant la durée de la demande, vous pouvez voir les appels distribués sur tous les services (car un [ID de trace est injecté / extrait via des en-têtes HTTP [7]), les [bibliothèques instrumentées automatiquement][2], et [l'instrumentation manuelle][8] à l'aide d'outils open source tels que [OpenTracing][9] dans la vue Flamegraph. Dans la page Vue Trace, chaque trace collecte des informations qui la connectent à d'autres parties de la plate-forme, notamment la [connexion des logs aux traces][10], [l'ajout de tags aux spans][11] et la [collecte de métriques d'exécution][12].
 
-Les noms de ressource :
+{{< img src="tracing/visualization/trace_view.png" alt="vue trace" responsive="true">}}
 
-* **doivent être composés de caractères alphanumériques en minuscule ;**
-* **ne peuvent pas dépasser 5 000 octets.**
+## Spans
 
-[Recevez des alertes][12] sur une métrique au niveau des ressources. Découvrez comment surveiller des ressources dans l'APM en consultant la section [Page Ressource][13].
+Une span représente une unité de travail logique dans un système pour une période donnée. Chaque span se compose d'un `span.name`, d'une heure de début, d'une durée et de [tags de span](#tag-de-spans). Par exemple, une span peut décrire le temps passé sur un appel distribué sur une machine séparée ou le temps passé sur un petit composant dans le cadre d'une demande plus importante. Les spans peuvent être imbriquées les unes dans les autres, ce qui crée une relation parent-enfant entre les spans.
 
-### Cardinalité des ressources
+Pour l'exemple ci-dessous, la span `rack.request` constitue la span du point d'entrée de la trace. Cela signifie que la page de service web-store affiche des ressources constituées de traces ayant une span de point d’entrée nommée `rack.request.`. L’exemple montre également les tags ajoutés du côté de l'application (`merchant.name`, `merchant.tier`, etc). Ces tags définis par l'utilisateur peuvent être utilisés pour rechercher et analyser des données de l'APM dans [Analyse et recherche de traces][13].
 
-Lorsqu'une ressource comme une URL ou une requête SQL ne peut pas être agrégée, cela augmente considérablement la cardinalité des ressources (c'est-à-dire, le nombre de ressources agrégées uniques) à stocker dans Datadog.
+{{< img src="tracing/visualization/span_with_metadata.png" alt="span" responsive="true">}}
 
-Une cardinalité très importante de ressources restreint l'utilisation de Datadog :
+## Métriques de trace
 
-* Un nombre trop important d'entrées dans la liste des ressources n'est pas optimal pour la navigation.
-* Les statistiques sont moins pertinentes (car elles sont trop fragmentées).
+Les métriques de trace sont automatiquement collectées et conservées. Une politique de rétention de 15 mois s'y applique, tout comme pour les autres [métriques Datadog][1]. Elles peuvent être utilisées pour identifier et donner des alertes sur les hits, les erreurs ou la latence. Les métriques de trace sont taguées par l'host recevant les traces avec le service ou la ressource. Par exemple, après avoir instrumenté un service Web, des métriques de trace sont collectées pour la span de point d'entrée `web.request` dans le [Résumé des métriques][14].
 
-Par conséquent, nous avons défini une limite stricte sur la cardinalité des ressources pour un service donné.
+{{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="métriques de trace" responsive="true">}}
 
-### Trace
+### Dashboard
 
-**Une trace est utilisée pour suivre le délai de traitement d'une opération par une application. Chaque trace comprend au moins une span.**
+Les métriques de trace peuvent être exportées vers un dashboard à partir de la page *Service* ou *Ressource*. De plus, les métriques de trace peuvent être interrogées à partir d'un dashboard existant.
 
-Par exemple, une trace peut permettre de suivre le délai de traitement d'une requête Web compliquée. Même si la requête peut nécessiter plusieurs ressources et machines, tous ces appels de fonction et toutes ces sous-requêtes sont rassemblés dans une seule trace.
+{{< img src="tracing/visualization/trace_metric_dashboard.mp4" video="true" alt="dashboard de métriques de trace" responsive="true">}}
 
-### Spans
+### Surveillance
 
-**Unespan représente une unité logique de travail dans le système.**
+Les métriques de trace sont utiles pour la surveillance. Les monitors de l'APM peuvent être configurés sur la page [Nouveaux Monitors][15], [Service][5] ou [Ressource][6]. Un ensemble de monitors suggérés est disponible sur la page [Service][5] ou [Ressources][6].
 
-Les spans sont associées à un [service][8] et éventuellement à une [ressource][13]. Chaque span comprend une heure de début, une durée et des tags facultatifs. Une span peut par exemple peut décrire le temps passé pour un appel distribué sur une machine distincte ou le temps passé sur un composant minime dans le cadre d'une opération plus importante. Les spans peuvent être imbriquées, ce qui leur confère une relation parent-enfant.
+{{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="monitor de métriques de trace" responsive="true">}}
 
-{{< img src="getting_started/trace_span_image.png" alt="Image span trace" responsive="true" style="width:80%;">}}
+
+## Analyse et recherche de traces
+
+L'analyse et la recherche de traces sert à filtrer les [événements de l'APM] (#evenement-de-l-apm) avec tags définis par l'utilisateur (customer_id, error_type, app_name, par exemple) ou avec des tags d'infrastructure. Cela permet d'explorer en profondeur des requêtes web transitant par votre service, tout en permettant de rechercher, de représenter graphiquement et de surveiller le débit de 100 % des hits, des erreurs et du temps de latence. Cette fonctionnalité peut être activée avec la [configuration automatique][16].
+
+{{< vimeo 278748711 >}}
+
+## Événement de l'APM
+
+Les événements de l'APM possèdent un débit de requête à 100 % et peuvent être utilisés pour effectuer des recherches, des interrogations et une surveillance dans l'analyse et la recherche de traces avec les [tags](#tags-de-span) inclus dans les spans. Après avoir activé l'Analyse et la recherche de traces, le client de tracing analyse par défaut une span de point d’entrée pour les services Web, et offre la possibilité de [configurer des services supplémentaires][17] dans votre application. Par exemple, un service Java avec 100 demandes génère 100 événements de l'APM depuis sa span `servlet.request`. Si vous définissez `DD_TRACE_ANALYTICS_ENABLED = true`, le service` web-store` analyse toutes les spans de `rack.request` et les rend disponibles dans l'Analyse et la recherche de traces. Pour cet exemple, vous pouvez représenter graphiquement la latence la plus élevée au 99e centile des 10 meilleurs marchands. `merchant_name` est un tag défini par l'utilisateur qui a été appliqué à la span dans l'application.
+
+{{< img src="tracing/visualization/analyzed_span.mp4" video="true" alt="span analysée" responsive="true">}}
+
+
+<div class="alert alert-info">
+Vous pouvez exécuter une estimation du nombre d'événements de l'APM qui seraient générés à partir de vos services avec l'outil <a href="https://app.datadoghq.com/apm/docs/trace-search">Estimateur de span analysée</a>. Une fois ingérés, vous pouvez filtrer les événements de l'APM de 100 % à un pourcentage inférieur sur un plan service par service sous <a href="https://app.datadoghq.com/apm/settings">paramètres de l'APM </a>. Cela réduit les événements de l'APM facturables.
+</div>
+
+## Tags de span
+
+Les tags de spans prennent la forme de paires clé-valeur pour corréler une demande dans la *Vue Trace* ou pour filtrer dans *l'analyse et la recherche de traces*. Les tags peuvent être ajoutés à une seule span ou globalement à toutes les spans. Pour l'exemple ci-dessous, les requêtes (`merchant.store_name`,` merchant.tier`, etc.) ont été ajoutées en tant que tags ajoutés à la span.
+
+{{< img src="tracing/visualization/span_tag.png" alt="tag de span" responsive="true">}}
+
+Pour commencer à tagger des spans dans votre application, consultez cette [procédure pas à pas][18].
+
+Une fois qu'un tag a été ajouté à une span, recherchez et interrogez le tag dans Analyse et recherche de traces en cliquant sur le tag pour l'ajouter en tant que [facette][19]. Une fois effectué, la valeur de ce tag est stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le panneau de facettes et la requête du graphique de traces.
+
+{{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
+
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
-[2]: /fr/tracing/setup/java/#configuration
-[3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
-[4]: http://www.rubydoc.info/gems/ddtrace
-[5]: /fr/developers/metrics
-[6]: /fr/monitors/monitor_types/apm
-[7]: /fr/tracing/visualization/services_list
-[8]: /fr/tracing/visualization/service
-[9]: /fr/tracing/setup/go
-[10]: /fr/tracing/setup/python
-[11]: /fr/tracing/setup/ruby
-[12]: /fr/tracing/faq/how-to-create-a-monitor-over-every-resource-apm
-[13]: /fr/tracing/visualization/resource
+[1]: /fr/developers/faq/data-collection-resolution-retention
+[2]: /fr/tracing/setup
+[3]: /fr/tracing/visualization/services_list
+[4]: /fr/tracing/visualization/services_map
+[5]: /fr/tracing/visualization/service
+[6]: /fr/tracing/visualization/resource
+[7]: /fr/tracing/advanced/opentracing/?tab=java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[8]: /fr/tracing/advanced/manual_instrumentation
+[9]: /fr/tracing/advanced/opentracing
+[10]: /fr/tracing/advanced/connect_logs_and_traces
+[11]: /fr/tracing/advanced/adding_metadata_to_spans
+[12]: /fr/tracing/advanced/runtime_metrics
+[13]: /fr/tracing/trace_search_and_analytics
+[14]: https://app.datadoghq.com/metric/summary
+[15]: https://app.datadoghq.com/monitors#/create
+[16]: /fr/tracing/trace_search_and_analytics/#automatic-configuration
+[17]: /fr/tracing/trace_search_and_analytics/#configure-additional-services-optional
+[18]: /fr/tracing/advanced/adding_metadata_to_spans
+[19]: /fr/tracing/trace_search_and_analytics/search/#facets

@@ -6,7 +6,8 @@ external_redirect: /api/#update-monitor-downtime
 ---
 
 ## Update monitor downtime
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`id`** [*required*]:
     The integer id of the downtime to be updated
@@ -31,4 +32,3 @@ external_redirect: /api/#update-monitor-downtime
     *   **`week_days`** (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
     *   **`until_occurrences`** (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
     *   **`until_date`** (optional) the date at which the recurrence should end as a POSIX timestmap. **`until_occurences` and `until_date`** are mutually exclusive
-

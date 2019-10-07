@@ -260,7 +260,7 @@ Secrets handle decrypted:
 
 Example on Windows (from an Administrator Powershell):
 ```
-PS C:\> & 'C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights

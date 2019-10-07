@@ -9,7 +9,6 @@ aliases:
 La fonction [Analyse et recherche de traces][1] sert à filtrer les événements APM avec des tags définis par l'utilisateur, comme `customer_id`, `error_type` ou `app_name`, vous permettant ainsi de dépanner et filtrer vos requêtes. Pour l'activer, deux options s'offrent à vous :
 
 * Configurez votre traceur d'APM de façon à ce qu'il émette les analyses pertinentes à partir de vos services. Cela peut se faire de façon [automatique](#configuration-automatique) ou [manuelle](#instrumentation-personnalisee). Ensuite, [activez la recherche de traces dans Datadog][1] pour commencer à transmettre ces analyses.
-* [Configurez votre Agent Datadog de façon à ce qu'il émette les analyses pertinentes à partir de vos services][2].
 
 **Remarque** : pour utiliser la recherche de traces, vous devez utiliser l'Agent v6.7 ou une version ultérieure.
 
@@ -35,7 +34,7 @@ La fonction Analyse et recherche de traces est disponible à partir de la versio
 * Configuration du traceur : `ddtrace.config.analytics_enabled = True`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
- Une fois activée, l'interface Analyse et recherche de traces commence à afficher des résultats. Consultez la [page relative à la recherche de traces][1] pour commencer.
+ Une fois la fonction activée, l'interface Analyse et recherche de traces commence à afficher des résultats. Consultez la [page relative à la recherche de traces][1] pour commencer.
 
 
 [1]: https://app.datadoghq.com/apm/search
@@ -121,8 +120,6 @@ La fonction Analyse et recherche de traces est disponible à partir de la versio
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : la recherche de trace fonctionne uniquement pour les intégrations Web.
-
 ## Configurer d'autres services (facultatif)
 
 ### Configurer par intégration
@@ -150,7 +147,7 @@ Les noms des intégrations sont disponibles sur le [tableau des intégrations][1
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction Analyse et recherche de traces pour des intégrations spécifiques grâce au paramètre suivant :
 
 * Configuration du traceur : `ddtrace.config.<INTÉGRATION>.analytics_enabled = True`
-* Variable d'environnement : `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Variable d'environnement : `DD_<INTÉGRATION>_ANALYTICS_ENABLED=true`
 
 Utilisez ces options en plus de la configuration globale pour les intégrations qui envoient des services custom. Par exemple, si des spans Boto sont envoyées en tant que service custom, vous pouvez définir le code suivant pour activer le tracing de Boto dans la fonction Analyse et recherche de traces :
 
@@ -472,12 +469,12 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-## Filtrage des événements APM
-
-Un événement APM représente la span supérieure d'un service, métadonnées incluses. Une fois activés, les événements APM sont envoyés à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 événements APM depuis ses spans `servlet.request`, car chaque span `servlet.request` génère un événement APM. Le [filtrage d'événements APM][3] a l'avantage de réduire le nombre d'événements APM facturables sans aucune conséquence sur l'échantillonnage des traces. Lorsqu'un service est filtré et que moins de 100 % des événements sont envoyés, l'analyse des événements APM est mise à l'échelle pour afficher une estimation par défaut, et vous avez l'option d'afficher la valeur filtrée.
+Un [événement APM][2] représente la [span][3] supérieure d'un service, métadonnées incluses. Une fois activés, les événements APM sont envoyés à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 événements APM depuis ses spans `servlet.request`, car chaque span `servlet.request` génère un événement APM. Le [filtrage d'événements APM][4] a l'avantage de réduire le nombre d'événements APM facturables sans aucune conséquence sur l'échantillonnage des [traces][5]. Lorsqu'un service est filtré et que moins de 100 % des événements sont envoyés, l'analyse des événements APM est mise à l'échelle pour afficher une estimation par défaut, et vous avez l'option d'afficher la valeur filtrée.
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="Filtrage des événements APM" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /fr/tracing/trace_search_and_analytics/agent_trace_search
-[3]: https://app.datadoghq.com/apm/settings
+[2]: /fr/tracing/visualization/#apm-event
+[3]: /fr/tracing/visualization/#spans
+[4]: https://app.datadoghq.com/apm/settings
+[5]: /fr/tracing/visualization/#trace

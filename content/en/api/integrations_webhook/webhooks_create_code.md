@@ -5,12 +5,14 @@ order: 20.2
 external_redirect: /api/#create-a-webhooks-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/webhooks`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="webhooks_create" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.webhooks_create" >}}

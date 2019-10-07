@@ -11,7 +11,7 @@ Create a Datadog-Amazon Web Services integration.
 
 **Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

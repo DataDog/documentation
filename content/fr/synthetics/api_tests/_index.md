@@ -43,7 +43,7 @@ Définissez la requête que vous souhaitez que Datadog exécute :
         * Headers : les en-têtes définis remplacent les en-têtes par défaut du navigateur. Par exemple, vous pouvez modifier le user-agent dans l'en-tête de façon à [identifier les scripts Datadog][1].
         * Authentication : authentification HTTP de base avec nom d'utilisateur et mot de passe
         * Body : corps de la requête et type de corps (`text/plain`, `application/json`, `text/xml`, `text/html` ou `None`)
-        * Cookies : les cookies définis sont ajoutés aux cookies du navigateur par défaut. Définissez plusieurs cookies en suivant le format `cookie1=<VOTRE_COOKIE_1>; cookie2=<VOTRE_COOKIE_2>`.
+        * Cookies : les cookies définis sont ajoutés aux cookies du navigateur par défaut. Définissez plusieurs cookies en suivant le format  `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 3. **Name** : le nom de votre test d'API.
 4. **Select your tags** : les tags à appliquer à votre test navigateur. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée sur la [page Synthetics][2].

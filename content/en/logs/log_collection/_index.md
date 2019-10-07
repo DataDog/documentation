@@ -243,7 +243,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [3]: /agent/logs/#stream-logs-through-tcp-udp
 [4]: /agent/logs/#filter-logs
 [5]: /agent/logs/#scrub-sensitive-data-in-your-logs
-[6]: /agent/logs/#multi-line-aggregation
+[6]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
 [7]: /integrations/rsyslog
 [8]: /integrations/syslog_ng
 [9]: /integrations/nxlog

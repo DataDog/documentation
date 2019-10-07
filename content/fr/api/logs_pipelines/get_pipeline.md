@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-un-pipeline"
 
 Obtenez un pipeline spécifique de votre organisation.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

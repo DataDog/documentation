@@ -5,11 +5,14 @@ order: 17.1
 external_redirect: "/api/#list-all-gcp-integrations"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/integration/gcp`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="gcp_list" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.gcp_list" >}}

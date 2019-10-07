@@ -9,6 +9,6 @@ external_redirect: /api/#post-delete
 
 Use this method to delete one or many tests.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`public_ids`** - _required_ - A JSON list of the ID or IDs of the tests that you want to delete.
