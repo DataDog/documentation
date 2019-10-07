@@ -109,6 +109,6 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
-[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [3]: /ja/agent/troubleshooting
 [4]: /ja/developers/guide/custom-python-package
