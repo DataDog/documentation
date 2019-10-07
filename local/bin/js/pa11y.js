@@ -35,6 +35,12 @@ const includeUrls = [
   'api/index.html'
 ];
 
+// bad html files to exclude
+const excludeUrls = [
+  'google29bb7b242ea53c9b',
+  'google487da280cbe6a467'
+];
+
 // some results will contain errors from third parties, or should be excluded from pa11y output.
 // If you find an error from a 3rd party, exclude it by adding the string in this array from the issue.context result
 const filterBadResults = ['bid.g.doubleclick.net', '_hj'];
@@ -42,13 +48,15 @@ const filterBadResults = ['bid.g.doubleclick.net', '_hj'];
 const options = {
   pa11yConfig,
   directoryExclusions, // any directories to exclude
-  includeUrls, // any specific html files to include,
+  includeUrls, // any specific html files to include
+  excludeUrls, // any specific html files to exlude
   filterBadResults,
   publicDir: 'public', // output directory name
   baseUrl: 'https://docs.datadoghq.com', // site baseUrl to test
   outputFileName: 'docs-pa11y-output',
   outputFileType: 'csv', // csv or json
-  metricName: 'docs.pa11y.num_errors' // metric name
+  metricName: 'docs.pa11y.num_errors', // metric name
+  slackChannel: '#pa11y-test'
 };
 
 runPa11y(options);
