@@ -310,8 +310,10 @@ backend datadog-logs
 ```
 
 **Note**: Download the certificate with the following command:
+
         * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
         * `yum install ca-certificates` (CentOS, Redhat)
+        
 The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
