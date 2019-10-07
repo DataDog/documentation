@@ -15,7 +15,7 @@ Functions are used to submit metrics with a [custom Agent check][1]. Different f
 
 ### `monotonic_count()`
 
-This function is used to track a raw counter that **always increases**. You shouldn't normalize the values to a rate, or calculate the deltas before submitting, as the Agent does it for you. Samples that have a lower value than the previous sample are ignored (it usually means that the underlying raw counter has been reset). It can be called multiple times during a check's execution.
+This function is used to track a raw counter that always increases. The Datadog Agent normalizes the values to a rate and calculates the deltas. Samples that have a lower value than the previous sample are ignored. Lower values usually indicate the underlying raw counter has been reset. The function can be called multiple times during a check's execution.
 
 For example, submitting samples 2, 3, 6, 7 sends a value of 5 (7-2) during the first check execution. Submitting the samples 10, 11 on the same `monotonic_count` sends a value of 4 (11-7) during the second check execution.
 
@@ -103,7 +103,7 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 
 ### `rate()`
 
-This function submits the sampled raw value of your counter. You shouldn't normalize the values to a rate, or calculate the deltas before submitting, as the Agent does both for you. This function should only be called once during a check, otherwise it throws away any value that is less than a previously submitted value.
+This function submits the sampled raw value of your counter. The Datadog Agent normalizes the values to a rate and calculates the deltas. This function should only be called once during a check, otherwise it throws away any value that is less than a previously submitted value.
 
 **Note**: Metrics submitted with this function are stored as a `GAUGE` metric type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.
 
