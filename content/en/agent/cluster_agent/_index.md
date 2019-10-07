@@ -46,15 +46,8 @@ Using the Datadog Cluster Agent allows you to:
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Performance
-
-The Datadog Cluster Agent implements a Go HTTP server (from `http/net`) to expose its API. This implementation is [largely sufficient][2] as the Datadog Cluster Agent should only be receiving calls from up to 5K nodes that are made every minute by default. After load testing the Datadog Cluster Agent, there were no problems handling 200 rq/s for an extended period of time.
-
-**Datadog recommends running 3 replicas of the Datadog Cluster Agent for infrastructures beyond a thousand nodes with the Agent.**
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/CUSTOM_METRICS_SERVER.md
-[2]: https://github.com/valyala/fasthttp#http-server-performance-comparison-with-nethttp
