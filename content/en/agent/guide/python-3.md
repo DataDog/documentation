@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-This guide provides information and best practices on migrating checks between Python 2 and 3.
+This guide provides information and best practices on migrating checks between Python 2 and 3. Use Datadog's [Custom Check Compatibility][11] tool to see whether your custom checks are compatible with Python 3 or need to be migrated.
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
@@ -295,3 +295,4 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 [8]: https://pythonhosted.org/six/#
 [9]: https://pythonhosted.org/six/#module-six.moves
 [10]: https://nedbatchelder.com/text/unipain.html
+[11]: https://app.datadoghq.com/compatibility_check
