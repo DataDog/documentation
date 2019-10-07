@@ -25,7 +25,9 @@ Private locations allow you to monitor internal-facing applications or any priva
 
 ## Setup
 
-The private location worker is shipped as a Docker container. By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
+The private location worker is shipped as a Docker container, so it can run on a Linux based OS or Windows OS if the Docker engine is available on your host and can run in Linux containers mode.
+
+By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
 Once you created a private location, configuring a Synthetics API or Browser test from a private location is completely identical to the one of Datadog managed locations.
 
@@ -43,12 +45,10 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 3. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```
-    docker run --name synthetics-private-location-worker-<LOCATION_ID> \
-               --rm -v $(pwd)/synthetics-private-location-worker-<LOCATION_ID>.json:/etc/synthetics-private-location-worker-<LOCATION_ID>.json datadog/synthetics-private-location-worker node /datadog-synthetics-agent/dist/worker.js \
-               --config=/etc/synthetics-private-location-worker-<LOCATION_ID>.json
+    docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    **Note**: To scale a private location, add or remove workers on your host.
+    **Note**: To scale a private location, add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
@@ -57,8 +57,8 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     Check if the endpoint corresponding to your Datadog Site is available from the host runing the worker:
 
-    * For the Datadog US site: `ping api.datadoghq.com`.
-    * For the Datadog EU site:   `ping api.datadoghq.eu`.
+    * For the Datadog US site: `curl https://api.datadoghq.com`.
+    * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
 
 5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 

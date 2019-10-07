@@ -90,9 +90,9 @@ Wildcard searches work within facets with this syntax. This query returns all th
 
 Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
 
-`"*NETWORK*"`
+`*NETWORK*`
 
-However, this search term does not return logs that contain the string `NETWORK` if it is in a facet.
+However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
 ### Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:

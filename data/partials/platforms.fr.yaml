@@ -1,4 +1,7 @@
 platforms:
+  - name: aix
+    link: agent/basic_agent_usage/aix/
+    image: platform_aix.png
   - name: amazonlinux
     link: agent/basic_agent_usage/amazonlinux/
     image: platform_amazonlinux.png
@@ -35,9 +38,6 @@ platforms:
   - name: windows
     link: agent/basic_agent_usage/windows/
     image: platform_windows.png
-  - name: aix
-    link: agent/basic_agent_usage/aix/
-    image: platform_aix.png
   - name: source
     link: agent/basic_agent_usage/source/
     image: platform_fromsource.png

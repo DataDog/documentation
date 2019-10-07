@@ -8,5 +8,6 @@ external_redirect: /api/#get-a-dashboard
 ## Get a Dashboard
 Fetch an existing dashboard's definition.
 
-##### Arguments
+**ARGUMENTS**:
+
 *This endpoint takes no JSON arguments.*

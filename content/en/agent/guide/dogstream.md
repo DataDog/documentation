@@ -254,4 +254,4 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [8]: /agent/guide/agent-commands
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /help
-[11]: /agent/#send-a-flare
+[11]: /agent/troubleshooting/send_a_flare

@@ -8,7 +8,7 @@ external_redirect: '/api/#creer-une-organisation-enfant'
 
 Cet endpoint requiert la fonctionnalité de [compte multi-org][1] et doit être activé en [contactant l'assistance][2].
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*obligatoire*] :
     Le nom de la nouvelle organisation enfant, limité à 32 caractères.

@@ -28,9 +28,12 @@ Collecting logs is **disabled** by default in the Datadog Agent. Enable log coll
 logs_enabled: true
 ```
 
-The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+
+[See below to send logs over HTTPS](#send-logs-over-https).
 
 **Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][3]. If you're using Docker, [enable log collection for the containerized Agent][4].
+
 
 ## Enabling log collection from integrations
 
@@ -165,6 +168,28 @@ List of all available parameters for log collection:
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                         |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                                    |
 
+## Send logs over HTTPS
+
+To send logs over HTTPS with the Datadog Agent 6.14+, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
+
+```
+logs_config:
+  use_http: true
+```
+
+Or set the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`.
+Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.datadoghq.com` (US site) or `agent-http-intake.logs.datadoghq.eu` (EU site) on port 443.
+
+The Agent sends batches that have the following limits:
+
+* Maximum content size per payload: 1MB
+* Maximum size for a single log: 256kB
+* Maximum array size if sending multiple logs in an array: 200 entries logs.
+
+The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to TCP, which sends all logs in real time.
+
+When logs are sent through HTTPS, use the same [set of proxy settings][10] as the other data types to send logs through a web proxy.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -179,3 +204,4 @@ List of all available parameters for log collection:
 [7]: /tracing
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
+[10]: /agent/proxy

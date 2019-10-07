@@ -19,7 +19,7 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you [trace][2] your application more precisely than you can with the Java Agent alone.
 
 #### Setup
 
@@ -56,7 +56,7 @@ compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
-Configure your application using environment variables or system properties as discussed in the [configuration][2] section.
+Configure your application using environment variables or system properties as discussed in the [configuration][3] section.
 
 #### Manual instrumentation with OpenTracing
 
@@ -96,7 +96,7 @@ class InstrumentedClass {
 }
 ```
 
-Alternatively, wrap the code you want to trace in a `try-with-resources` statement:
+Alternatively, wrap the code you want to [trace][2] in a `try-with-resources` statement:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -157,7 +157,7 @@ public class Application {
 
 #### Manual instrumentation for async traces
 
-Create asynchronous traces with manual instrumentation using the OpenTracing API.
+Create asynchronous [traces][2] with manual instrumentation using the OpenTracing API.
 
 ```java
 // Step 1: start the Scope/Span on the work submission thread
@@ -243,7 +243,8 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /tracing/setup/java/#configuration
+[2]: /tracing/visualization/#trace
+[3]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -293,8 +294,6 @@ For more advanced usage and configuration information see [Datadog Python Opentr
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-### Setup
-
 To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
 
 **Configuring Datadog tracer settings**
@@ -310,22 +309,24 @@ It can also be configured by using `Datadog.configure` as described in the [Ruby
 
 **Activating and configuring integrations**
 
-By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive spans and traces from OpenTracing instrumentation you have in your application.
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][3] and [traces][4] from OpenTracing instrumentation you have in your application.
 
-However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][3] for more details.
+However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][5] for more details.
 
 **Supported serialization formats**
 
-| Type                           | Supported? | Additional information |
-| ------------------------------ | ---------- | ---------------------- |
-| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                        |
+| Type                           | Supported? | Additional information                                                                                                                                                                                                                                                                                        |
+|--------------------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                                                                                                                                                                                                                                                                                                               |
 | `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
-| `OpenTracing::FORMAT_BINARY`   | No         |                        |
+| `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
 
 
 [1]: /tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /tracing/setup/ruby/#tracer-settings
-[3]: /tracing/setup/ruby/#integration-instrumentation
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/#trace
+[5]: /tracing/setup/ruby/#integration-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
 

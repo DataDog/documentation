@@ -5,12 +5,14 @@ order: 15.05
 external_redirect: /api/#list-namespace-rules
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/integration/aws/available_namespace_rules`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_namespace" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_namespace" >}}

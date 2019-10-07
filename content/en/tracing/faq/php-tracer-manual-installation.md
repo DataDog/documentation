@@ -71,7 +71,7 @@ Datadog PHP tracer extension
 ...
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to see the traces.
+Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to see the [traces][6].
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
@@ -80,3 +80,4 @@ Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to
 [3]: #modify-the-ini-file
 [4]: https://github.com/DataDog/dd-trace-php/releases/latest
 [5]: https://app.datadoghq.com/apm/services
+[6]: /tracing/visualization/#trace

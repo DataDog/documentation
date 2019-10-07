@@ -16,7 +16,7 @@ This endpoint has been updated to reflect the new Dashboard API changes. Documen
     </ul>
 </div>
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *   **`dashboards`** [*required*]:
     The new list of dashboards for the dashboard list.

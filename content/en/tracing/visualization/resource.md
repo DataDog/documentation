@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" >}}
 
-A resource is a particular action for a given service (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][1]. For each resource, APM automatically generates a dashboard page covering:
+A resource is a particular action for a given [service][1] (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][2]. For each resource, APM automatically generates a dashboard page covering:
 
 * Key health metrics
 * Monitor status for all monitors associated with this service
@@ -39,7 +39,7 @@ Datadog provides out of the box graphs for any given resource:
     * The **% Error Rate**
 * Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
 
-    This represents the total/relative/average time spent by traces from the current service to the other *services* or *type*.
+    This represents the total/relative/average time spent by [traces][3] from the current service to the other *services* or *type*.
 
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
@@ -47,7 +47,7 @@ Datadog provides out of the box graphs for any given resource:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][2]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][4]:
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
 
@@ -65,7 +65,7 @@ Zoom on this graph to filter corresponding traces.
 
 ## Span Summary
 
-For a given resource, Datadog provides you a span analysis breakdown of all matching traces:
+For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
 
 {{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics" responsive="true" style="width:80%;">}}
 
@@ -85,7 +85,7 @@ The displayed metrics represent, per span:
 
 Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:
 
-[Refer to the dedicated trace documentation to learn more][3].
+[Refer to the dedicated trace documentation to learn more][6].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
 
@@ -93,6 +93,9 @@ Consult the list of traces associated with this resource. Filter/sort this list 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization
-[2]: /graphing/dashboards/timeboard
-[3]: /tracing/visualization/trace
+[1]: /tracing/visualization/#services
+[2]: /tracing/visualization
+[3]: /tracing/visualization/#trace
+[4]: /graphing/dashboards/timeboard
+[5]: /tracing/visualization/#spans
+[6]: /tracing/visualization/trace

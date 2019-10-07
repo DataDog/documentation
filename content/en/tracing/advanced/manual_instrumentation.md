@@ -17,16 +17,16 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s APM Terminology and familiarize yourself with the core concepts of Datadog APM.
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][1] and familiarize yourself with the core concepts of Datadog APM.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-If you aren't using a [supported framework instrumentation][1], or you would like additional depth in your application’s traces, you may want to manually instrument your code.
+If you aren't using a [supported framework instrumentation][1], or you would like additional depth in your application’s [traces][2], you may want to manually instrument your code.
 
 Do this either using the Trace annotation for simple method call tracing, or with the OpenTracing API for complex tracing.
 
-Datadog's Trace annotation is provided by the [dd-trace-api dependency][2].
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][3].
 
 **Example Usage**
 
@@ -42,8 +42,10 @@ public class MyJob {
 ```
 
 
+
 [1]: /tracing/setup/java/#compatibility
-[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: /tracing/visualization/#trace
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -87,7 +89,7 @@ Further API details can be found at [`ddtrace.Tracer()`][4]
 
 **Using the API**
 
-If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish spans however you may require:
+If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][5] however you may require:
 
 ```python
   span = tracer.trace('operations.of.interest')
@@ -101,8 +103,9 @@ If the above methods are still not enough to satisfy your tracing needs, a manua
 
 API details of the decorator can be found here:
 
-- [`ddtrace.Tracer.trace`][5]
-- [`ddtrace.Span.finish`][6]
+- [`ddtrace.Tracer.trace`][6]
+- [`ddtrace.Span.finish`][7]
+
 
 
 
@@ -110,8 +113,9 @@ API details of the decorator can be found here:
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
-[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+[5]: /tracing/visualization/#spans
+[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
+[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -174,7 +178,7 @@ func main() {
     span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
 }
 ```
-**Create a distributed trace by manually propagating the tracing context:**
+**Create a distributed [trace][3] by manually propagating the tracing context:**
 
 ```go
 package main
@@ -198,7 +202,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-**Then, on the server side, to continue the trace, start a new Span from the extracted `Context`:**
+**Then, on the server side, to continue the trace, start a new [Span][4] from the extracted `Context`:**
 
 ```go
 package main
@@ -222,14 +226,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 
+
 [1]: /tracing/setup/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[3]: /tracing/visualization/#trace
+[4]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 If you aren’t using supported library instrumentation (see [Library compatibility][1]), you may want to manually instrument your code.
 
-The following example initializes a Datadog Tracer and creates a span called `web.request`:
+The following example initializes a Datadog Tracer and creates a [span][2] called `web.request`:
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -239,17 +246,19 @@ span.setTag('http.url', '/login')
 span.finish()
 ```
 
-For more information on manual instrumentation, see the [API documentation][2].
+For more information on manual instrumentation, see the [API documentation][3].
+
 
 
 [1]: /tracing/setup/nodejs/#compatibility
-[2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
+[2]: /tracing/visualization/#spans
+[3]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 If you are not using libraries supported by automatic instrumentation (see [Integrations][1]), you can instrument your code manually.
 
-The following example uses the global `Tracer` and creates a custom span to trace a web request:
+The following example uses the global `Tracer` and creates a custom [span][2] to [trace][3] a web request:
 
 ```csharp
 using Datadog.Trace;
@@ -267,13 +276,15 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 
 [1]: /tracing/setup/dotnet/#integrations
+[2]: /tracing/visualization/#spans
+[3]: /tracing/visualization/#trace
 {{% /tab %}}
 
 {{% tab "PHP" %}}
 
 Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
-If you really need manual instrumentation, e.g., because you want to trace specific custom methods in your application, first install the PHP tracer dependency with Composer:
+If you really need manual instrumentation, e.g., because you want to [trace][2] specific custom methods in your application, first install the PHP tracer dependency with Composer:
 
 ```bash
 $ composer require datadog/dd-trace
@@ -283,8 +294,8 @@ $ composer require datadog/dd-trace
 
 The `dd_trace()` function hooks into existing functions and methods to:
 
-* Open a span before the code executes
-* Set additional tags or errors on the span
+* Open a [span][3] before the code executes
+* Set additional [tags][4] or errors on the span
 * Close the span when it is done
 * Modify the arguments or the return value
 
@@ -330,7 +341,7 @@ $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 
 Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
-First, [download the latest source code from the releases page][2]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+First, [download the latest source code from the releases page][5]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -342,19 +353,22 @@ resources.ddtrace = true
 
 Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
 
-While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your Composer file.
+While this [has been deprecated][6] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][7] API instead of adding `datadog/dd-trace` to your Composer file.
 
 
 
 
 [1]: /tracing/setup/php/#automatic-instrumentation
-[2]: https://github.com/DataDog/dd-trace-php/releases/latest
-[3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[4]: /tracing/advanced/opentracing/?tab=php
+[2]: /tracing/visualization/#trace
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/#span-tags
+[5]: https://github.com/DataDog/dd-trace-php/releases/latest
+[6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[7]: /tracing/advanced/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 
-To manually instrument your code, install the tracer as in the setup examples, and then use the tracer object to create spans.
+To manually instrument your code, install the tracer as in the setup examples, and then use the tracer object to create [spans][1].
 
 ```cpp
 {
@@ -369,7 +383,7 @@ To manually instrument your code, install the tracer as in the setup examples, a
 } // ... or when they are destructed (root_span finishes here).
 ```
 
-Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][1], which accept [generic `Reader` and `Writer` types][2]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][2], which accept [generic `Reader` and `Writer` types][3]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
 
 ```cpp
 // Allows writing propagation headers to a simple map<string, string>.
@@ -408,11 +422,14 @@ void example() {
 ```
 
 
-[1]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[2]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
+[1]: /tracing/visualization/#spans
+[2]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[3]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization

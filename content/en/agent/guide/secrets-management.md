@@ -63,7 +63,10 @@ In the above example, the secret’s handle is the string `user_array[1234]`.
 Secrets are resolved after [Autodiscovery][1] template variables are resolved, i.e. you can use them in a secret handle. For instance:
 
 ```
-“ENC[db_prod_password_%%host%%]”
+instances:
+  - server: %%host%%
+    user: ENC[db_prod_user_%%host%%]
+    password: ENC[db_prod_password_%%host%%]
 ```
 
 ### Providing an executable
@@ -75,6 +78,13 @@ The Agent caches secrets internally in memory to reduce the number of calls (use
 Since APM and Process Monitoring run in their own process/service, and since processes don't share memory, each needs to be able to load/decrypt secrets. Thus, if `datadog.yaml` contains secrets, each process might call the executable once. For example, storing the `api_key` as a secret in the `datadog.yaml` file with APM and Process Monitoring enabled might result in 3 calls to the secret backend.
 
 By design, the user-provided executable needs to implement any error handling mechanism that a user might require. Conversely, the Agent needs to be restarted if a secret has to be refreshed in memory (e.g. revoked password).
+
+Relying on a user-provided executable has multiple benefits:
+
+* Guaranteeing that the Agent does not attempt to load in memory parameters for which there isn't a secret handle.
+* Ability for the user to limit the visibility of the Agent to secrets that it needs (e.g., by restraining the acessable list of secrets in the key management backend)
+* Freedom and flexibility in allowing users to use any secrets management backend without having to rebuild the Agent.
+* Enabling each user to solve the initial trust problem from the Agent to their secrets management backend. This occurs in a way that leverages each user's preferred authentication method and fits into their continuous integration workflow.
 
 #### Configuration
 
@@ -250,7 +260,7 @@ Secrets handle decrypted:
 
 Example on Windows (from an Administrator Powershell):
 ```
-PS C:\> & 'C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -304,7 +314,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**Note**: The Agent needs to be [restarted][3] to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][2] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -361,7 +371,7 @@ To do so, follow those steps:
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][3] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -393,5 +403,5 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

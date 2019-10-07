@@ -56,7 +56,17 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 
 Otherwise there should be a similar message in the Agent `status`:
 
-{{< img src="logs/agent-log-executable-permission-issue.png" alt="Permission issue" responsive="true" style="width:70%;">}}
+```
+==========
+Logs Agent
+==========
+
+  test
+  ----
+    Type: file
+    Path: /var/log/application/error.log
+    Status: Error: file /var/log/application/error.log does not exist
+```
 
 Run the `namei` command to obtain more information about the file permissions:
 

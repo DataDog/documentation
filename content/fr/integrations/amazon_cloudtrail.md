@@ -1,6 +1,7 @@
 ---
 aliases:
   - /fr/integrations/awscloudtrail/
+  - /fr/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
 categories:
   - cloud
   - monitoring
@@ -12,12 +13,12 @@ description: Recevez des alertes concernant toute activité suspecte sur un comp
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_cloudtrail/'
 git_integration_title: amazon_cloudtrail
 has_logo: true
-integration_title: "AWS\_CloudTrail"
+integration_title: "Amazon\_CloudTrail"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudtrail
-public_title: "Intégration Datadog/AWS\_CloudTrail"
+public_title: Intégration Datadog/AmazonCloudTrail
 short_description: Recevez des alertes concernant toute activité suspecte sur un compte AWS.
 version: '1.0'
 ---
@@ -46,7 +47,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     | `s3:GetBucketLocation`      | Obtient la région du compartiment pour télécharger les pistes.                 |
     | `s3:GetObject`              | Récupère les pistes disponibles.                                       |
 
-   Placez cette stratégie avec votre principale stratégie AWS Datadog :
+   Ajoutez cette stratégie à votre stratégie IAM Datadog principale déjà existante :
 
     ```json
     {
@@ -67,10 +68,10 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     }
     ```
 
-    **Remarque** : l'ARN principal est celui répertorié [pendant le processus d'installation de l'intégration principale AWS][5].
+   **Remarque** : l'ARN principal est celui spécifié [durant le processus d'installation de l'intégration AWS principale][5]. Si vous mettez à jour de votre stratégie (au lieu d'en ajouter une nouvelle), vous n'aurez besoin ni du `SID` ni du `Principal`.
 
-2. Installez l'[intégration Datadog/AWS Cloudtrail][11] :
-    Sélectionnez le type d'événements sur le carré d'intégration à afficher en priorité normale (le filtre par défaut) dans le flux d'événements Datadog. Les comptes que vous avez configurés dans le carré Amazon Web Services apparaissent également ici. Pour visualiser les événements qui ne sont pas mentionnés ici, contactez [l'équipe d'assistance de Datadog][6].
+2. Installez l'[intégration Datadog/AWS Cloudtrail][6] :  
+    Depuis le carré de l'intégration, sélectionnez le type d'événement à afficher en priorité normale (le filtre par défaut) dans le flux d'événements Datadog. Les comptes que vous avez configurés dans le carré d'Amazon Web Services apparaissent également ici. Pour visualiser les événements qui ne sont pas mentionnés ici, contactez [l'assistance Datadog][7].
 
 ### Collecte de logs
 #### Activer la journalisation Cloudtrail
@@ -81,13 +82,13 @@ Lorsque vous définissez vos pistes, sélectionnez un compartiment S3 dans lequ
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][7].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Cloudtrail dana la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
 {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs Cloudtrail et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
 {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
 
-Une fois terminé, les logs s'affichent dans votre [Log Explorer sur Datadog][8].
+Une fois ces étapes terminées, les logs s'affichent dans votre [Datadog Log Explorer][9].
 
 ## Données collectées
 ### Métriques
@@ -102,20 +103,20 @@ L'intégration AWS Cloudtrail n'inclut aucun check de service.
 ## Dépannage
 ### Le carré CloudTrail ne s'affiche pas ou aucun compte n'est affiché
 
-Vous devez d'abord configurer le [carré Amazon Web Services][9], puis le carré CloudTrail.
+Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré Amazon Web Services][11].
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/fr/integrations/aws
-[10]: https://docs.datadoghq.com/fr/graphing/event_stream/
-[11]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
+[6]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
+[7]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[9]: https://app.datadoghq.com/logs
+[10]: https://docs.datadoghq.com/fr/graphing/event_stream
+[11]: https://docs.datadoghq.com/fr/integrations/aws
 
 
 {{< get-dependencies >}}

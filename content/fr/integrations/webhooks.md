@@ -34,7 +34,7 @@ Accédez au [carré d'intégration Webhook][1] et saisissez l'URL et le nom du w
 
 Pour utiliser votre webhook, ajoutez **@webhook-*nom_de_votre_webhook*** dans le texte de l'alerte de métrique qui déclenchera le webhook. Une requête POST sera envoyée à l'URL que vous avez spécifiée avec le contenu suivant au format JSON. Toutes les requêtes individuelles expirent au bout de 15 secondes.
 
-Vous pouvez également spécifier votre propre charge utile afin d'ajouter vos propres champs personnalisés à la requête. Cochez la case **Use Custom Payload** et spécifiez votre charge utile personnalisée en utilisant les variables ci-dessous. Si vous souhaitez encoder l'URL de votre charge utile, cochez la case **Encode as form** et spécifiez votre charge utile au format json.
+Vous pouvez également spécifier votre propre charge utile afin d'ajouter vos propres champs personnalisés à la requête. Cochez la case **Use Custom Payload** et spécifiez votre charge utile personnalisée en utilisant les variables ci-dessous. Si vous souhaitez encoder votre charge utile dans une URL, cochez la case **Encode as form** et spécifiez votre charge utile au format json.
 
 |Variable|Signification|
 |-----|-----|

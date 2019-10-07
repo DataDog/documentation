@@ -5,9 +5,14 @@ order: 11.4
 external_redirect: /api/#activer-un-embed
 ---
 
-##### Signature
-`GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>/enable`
-##### Exemple de requête
+**SIGNATURE**:
+
+`GET /v1/graph/embed/<ID_EMBED>/enable`
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-embeds-enable" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-embeds-enable" >}}

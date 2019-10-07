@@ -16,15 +16,15 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-3 col-lg-4 footer-side">
+            <div class="col-12 col-lg-12 col-xl-4 footer-side">
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <button type="button" class="btn btn-block btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">{{ i18n "free_trial" }}</button>
                     </div>
                 </div>
-                <span class="copyright d-none d-md-block">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
+                <span class="copyright d-none d-xl-block">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
             </div>
-            <div class="col-12 col-md-5 col-lg-4 mt-4 mt-md-0">
+            <div class="col-12 col-lg-6 col-xl-4 mt-4 mt-xl-0">
                 <p>Product</p>
                 <div class="row">
                     <div class="col-6">
@@ -42,14 +42,17 @@
                         </ul>
                     </div>
                 </div>
+                <div class="row d-none d-lg-block d-xl-none mt-4">
+                    <span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
+                </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4 mt-4 mt-md-0">
+            <div class="col-12 col-lg-6 col-xl-4 mt-4 mt-xl-0">
                 <div class="row">
                     <div class="col-4">
                         <p>About</p>
                         <ul class="list-unstyled">
                             {{ range $datafile.col3 }}
-                                {{ if .link }}<li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
+                                {{ if .link }}<li {{ if eq .title "Investor Relations" }}class="nowrap"{{ end }}><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
                             {{ end }}
                         </ul>
                     </div>
@@ -70,7 +73,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row d-inline-block d-md-none mt-4 mt-md-0">
+                <div class="row d-inline-block d-lg-none mt-4 mt-lg-0">
                     <div class="col-12"><span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span></div>
                 </div>
             </div>

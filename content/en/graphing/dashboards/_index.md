@@ -50,19 +50,29 @@ To add Dashboards to your Dashboard List, select their corresponding check boxes
 
 To create a Dashboard, click on the *New Dashboard* button in the upper right corner of the page. Datadog will then ask you to choose between creating a [Timeboard][2] or a [Screenboard][3] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
 
-{{< img src="graphing/dashboards/board_selection.jpg" alt="Dashboard selection" responsive="true" style="width:70%;">}}
-
 ### What is the difference between a Screenboard and a Timeboard?
 
 You have the capability to create and customize two types of Dashboards: [Screenboards][3] and [Timeboards][4]. To more clearly understand the differences between the two, consider the following:
 
 |                                | Timeboards                       | Screenboards                                      |
-| ---                            | ------------                     | -------------                                     |
+|--------------------------------|----------------------------------|---------------------------------------------------|
 | Time Scope                     | All graphs share same time scope | All graphs can have individual time scope         |
 | Layout                         | Graphs appear in a fixed grid    | Graphs are placed anywhere you like on the canvas |
 | Can Share Graphs Individually  | Yes                              | No                                                |
 | Can Share the Entire Dashboard | No                               | Yes                                               |
 | Sharing can be Read-Only       | Yes                              | Yes                                               |
+
+### Copy / import / export
+
+You can copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+
+| Option                          | Description                                                                                                                                                                |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Copy&nbsp;dashboard&nbsp;JSON   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
+| Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
+| Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
+
+{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copy dashboard" responsive="true" style="width:30%;">}}
 
 ### Suggested dashboards and active users
 

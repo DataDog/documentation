@@ -31,15 +31,16 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
-    * Advanced Options (optional): Use custom request headers or cookies.
+    * Advanced Options (optional): Set custom request headers, cookies, or authenticate through Basic Auth.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+        * Authentication: Authenticate through HTTP Basic Authentication with a username and a password.
+        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
 4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+6. **How often should Datadog run the test?** Intervals are available between every 15 minutes to once per week. [Contact support][4] to enable additional frequencies for your test.
 
 ### Alert conditions
 
@@ -49,14 +50,14 @@ An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from 
 
 To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][4]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
-2. Choose your [services][5] and/or team members to notify.
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+2. Choose your [services][6] and/or team members to notify.
 3. Click **Save Details and Record Test** to save your browser test.
 4. Start to record your test.
 
 ## Record test
 
-Tests can be only recorded from **[Google Chrome][6]**. To record your test, download the [Datadog Record Test extension for Google Chrome][7].
+Tests can be only recorded from **[Google Chrome][7]**. To record your test, download the [Datadog Record Test extension for Google Chrome][8].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
 
@@ -64,7 +65,7 @@ Tests can be only recorded from **[Google Chrome][6]**. To record your test, dow
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_check_assertions.png" alt="Browser Test assertions" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
@@ -79,7 +80,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
 | `Assert that an element is present on the page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
-| `Check an element's content`                            | Makes sure that a specific element is located or not on the current page.                                                        |
+| `Check an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
 | `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
 | `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
@@ -110,7 +111,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][8])
+* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][9])
 * **A Pattern**:
 
 | Pattern                 | Description                                         |
@@ -136,6 +137,12 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
+#### Wait
+
+By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds. 
+
+**Note**: This additional time is systematically added to **each run** of your browser test scenario.
+
 #### Test failure and errors
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
@@ -147,8 +154,8 @@ Common failure reasons include:
 | `Element located but it's invisible`             | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.                                                          |
 | `Cannot locate element` | The element cannot be found in the HTML.                                                                                                                             |
 | `Select did not have option`             | The specified option is missing from the dropdown menu.                                                                                     |
-| `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][9] for further details.  |
-| `General test failure`       | A general error message. [Contact support][9] for further details. |
+| `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][4] for further details.  |
+| `General test failure`       | A general error message. [Contact support][4] for further details. |
 
 ## Further Reading
 
@@ -157,9 +164,9 @@ Common failure reasons include:
 [1]: /synthetics/identify_synthetics_bots
 [2]: /api/?lang=bash#get-available-locations
 [3]: /synthetics/private_locations
-[4]: http://daringfireball.net/projects/markdown/syntax
-[5]: /integrations/#cat-notification
-[6]: https://www.google.com/chrome
-[7]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[8]: /synthetics/settings/#secure-credential
-[9]: /help
+[4]: /help
+[5]: http://daringfireball.net/projects/markdown/syntax
+[6]: /integrations/#cat-notification
+[7]: https://www.google.com/chrome
+[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[9]: /synthetics/settings/#secure-credential

@@ -9,11 +9,11 @@ external_redirect: /api/#get-all-users
 
 Get the list of all users in the organization. This list includes all users even if they are disabled or unverified.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.
 
-##### RESPONSE
+**RESPONSE**:
 
 - `users`: An array of user objects.
 

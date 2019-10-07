@@ -18,6 +18,6 @@ This endpoint has been updated to reflect the new Dashboard API changes. Documen
     </ul>
 </div>
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

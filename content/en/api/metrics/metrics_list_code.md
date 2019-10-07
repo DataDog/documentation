@@ -5,9 +5,14 @@ order: 25.1
 external_redirect: /api/#get-list-of-active-metrics
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/metrics`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-metrics-list" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-metrics-list" >}}

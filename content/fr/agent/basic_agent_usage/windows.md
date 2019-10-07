@@ -192,13 +192,13 @@ Pour connaître l'état de l'Agent version 3.9.1 à 5.1, accédez à `http://loc
 La commande info est disponible pour Powershell :
 
 ```
-& "C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+& "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 ou cmd.exe :
 
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 **Remarque** : pour les versions <= 6.11 de l'Agent, le chemin spécifié doit être `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`.
@@ -357,7 +357,7 @@ Une fois la configuration effectuée, [redémarrez l'Agent][13].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: /fr/agent/#supported-os-versions
+[2]: /fr/agent/basic_agent_usage/#supported-os-versions
 [3]: /fr/agent/faq/windows-agent-ddagent-user
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 [5]: https://app.datadoghq.com/account/settings#api

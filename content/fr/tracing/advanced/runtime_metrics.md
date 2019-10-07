@@ -227,3 +227,5 @@ Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /fr/tracing/visualization/#services

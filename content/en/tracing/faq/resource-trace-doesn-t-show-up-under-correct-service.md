@@ -5,7 +5,7 @@ kind: faq
 
 When using a custom instrumentation of your application, if you notice any resources/traces in the Datadog UI that aren't coupled the service you expect, the most likely scenario is explained below.
 
-A resource is connected to a service by more than the service Name - it is also done via the Name of the top-level span of the trace. This means that a service requires a top level name to be consistent across your resources.  
+A [resource][1] is connected to a [service][2] by more than the service Name - it is also done via the Name of the top-level [span][3] of the [trace][4]. This means that a service requires a top level name to be consistent across your resources.  
 See this in the following image in the address bar:
 
 {{< img src="tracing/faq/APM_service_name.png" alt="APM service Name" responsive="true" >}}
@@ -49,3 +49,14 @@ More examples and documentation can be found on our language-specific instrument
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## OpenTracing Top Level Spans
+
+To fix this when using OpenTracing, set the resource name to ensure that your resources are unique while sharing one consistent operation name for a service.
+
+In Java, this can be done by setting `DDTags.RESOURCE_NAME` from import `datadog.trace.api.DDTags`.
+
+[1]: /tracing/visualization/#resources
+[2]: /tracing/visualization/#services
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/#trace

@@ -26,12 +26,6 @@ Indexes are located on the [Configuration page][1] in the Indexes section. Doubl
 
 You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
-It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
-Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
-
-For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
-
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
 ## Exclusion Filters
 
@@ -41,7 +35,7 @@ For example, if some logs were captured only for troubleshooting purposes, you m
 
 To define a new index filter, click on the "add" button:
 
-{{< img src="logs/indexes/index_filters.png" alt="index fileters" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_filters.png" alt="index filters" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -75,6 +69,17 @@ Instead of changing your application logging level or using a complex internal f
 Enable or disable them in one click on the Pipeline page:
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
+
+## Multi indexes
+
+It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
+Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
+
+For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
+
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes" responsive="true" style="width:70%;">}}
+
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
 ## Further Reading
 

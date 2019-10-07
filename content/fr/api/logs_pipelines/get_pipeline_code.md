@@ -5,12 +5,14 @@ order: 24.4
 external_redirect: "/api/#obtenir-un-pipeline"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/logs/config/pipelines/<ID_PIPELINE>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="get_pipeline" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.get_pipeline" >}}

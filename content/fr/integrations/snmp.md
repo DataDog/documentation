@@ -208,7 +208,7 @@ PS> & 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' '<CHEMIN_VERS
 
 Versions >= 6.12 de l'Agent :
 ```
-PS> & 'C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe' '<CHEMIN_VERS_FICHIER>\mibdump.py' `
+PS> & 'C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe' '<CHEMIN_VERS_FICHIER>\mibdump.py' `
   --mib-source <CHEMIN_VERS_SOURCE_MIB> `
   --mib-source http://mibs.snmplabs.com/asn1/@mib@ `
   --destination-directory=<CHEMIN_VERS_DESTINATION_MIB> `

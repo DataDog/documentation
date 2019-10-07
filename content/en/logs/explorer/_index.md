@@ -115,7 +115,7 @@ Copy the JSON log content to the clipboard through the **Export** button or keyb
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][1], log parsing, and having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][1], log parsing, and having [facets](#setup) and [measures](#setup) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
 Follow the [log graphing guide][2] to learn more about all the graphing options.
 
@@ -161,7 +161,7 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
 
 [1]: /logs/explorer/search
@@ -202,10 +202,10 @@ Export your current Log Visualization with the *Export* functionality:
 
 {{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
-| Button                | Description                                                                                                          |
-| ----                  | -----                                                                                                                |
-| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
-| Export to CSV         | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
+| Button            | Description                                                                                                          |
+|-------------------|----------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
+| Export to CSV     | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
 
 [1]: /monitors/monitor_types/log
@@ -214,10 +214,10 @@ Export your current Log Visualization with the *Export* functionality:
 
 {{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
-| Button              | Description                                                                                                                                                                  |
-| ----                | -----                                                                                                                                                                        |
-| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.*                |
-| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2]. |
+| Button              | Description                                                                                                                                                   |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.* |
+| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2].                                                                                                    |
 
 
 [1]: /monitors/monitor_types/log

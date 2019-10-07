@@ -1,6 +1,4 @@
-$footer_height: 362px;
-$footer_height_fr: 410px;
-$footer_height_sm: 707px;
+$footer_height: 366px;
 $ddpurple:    #632CA6;
 $footer_bg_color: #110617;
 
@@ -16,7 +14,7 @@ body {
   &.fr,
   &.ja{
     /* Margin bottom by footer height on fr page */
-    margin-bottom: $footer_height_fr;
+    margin-bottom: $footer_height + 27px;
   }
 }
 
@@ -33,6 +31,7 @@ body {
 
     /* Set the fixed height of the footer here */
     height: $footer_height;
+
     background-color: $footer_bg_color;
     color:$footer-font-color;
     .container {
@@ -40,6 +39,9 @@ body {
       &> .row {
         margin-bottom: 50px;
       }
+    }
+    .copyright {
+      font-size: 16px;
     }
     p {
       border-bottom:1px solid $footer-font-color;
@@ -90,30 +92,45 @@ body {
         position:absolute;
         bottom:0;
         display:block;
-        font-size:16px;
       }
+    }
+    .nowrap{
+      white-space: nowrap;
     }
   }
   &.fr,
   &.ja {
     footer {
       /* Set the fixed height of the french footer here */
-      height: $footer_height_fr;
+      height: $footer_height + 27px;
     }
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   body, 
   body.fr,
   body.ja {
-    /* Margin bottom by footer height */
-    margin-bottom: $footer_height_sm;
+    margin-bottom: $footer_height + 82px;
   }
   body, 
   body.fr,
   body.ja {
     footer {
-      height:$footer_height_sm;
+      height: $footer_height + 82px;
+    }
+  }
+}
+@media (max-width: 991px) {
+  body, 
+  body.fr,
+  body.ja {
+    margin-bottom: $footer_height + 345px;
+  }
+  body, 
+  body.fr,
+  body.ja {
+    footer {
+      height: $footer_height + 345px;
       .footer-side {
         .btn {
           width:100%;

@@ -136,7 +136,7 @@ If you want to tweak the log layout, all items available can be found directly f
 
 Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml    
+```yaml
 ##Log section
 logs:
 
@@ -194,7 +194,7 @@ Once this is done, the log should have the following (for JSON format):
 }
 ```
 
-Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect ruby logs from the file.
+Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
 
 ### Good logging practices in your application
 
@@ -228,11 +228,11 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 In the file `config/initializers/lograge_rocketpants.rb ` (it can change depending on your project):
 
 ```ruby
-# Configure Lograge to work with rocket_pants' controllers      
-#       
-# Come from here:       
-#   https://github.com/Sutto/rocket_pants/issues/111        
-#       
+# Configure Lograge to work with rocket_pants' controllers
+#
+# Come from here:
+#   https://github.com/Sutto/rocket_pants/issues/111
+#
 app = Rails.application
 if app.config.lograge.enabled
   ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
@@ -257,7 +257,7 @@ Pass additional configuration to Grape:
 
 ```ruby
 use GrapeLogging::Middleware::RequestLogger,
-      instrumentation_key: 'grape', 
+      instrumentation_key: 'grape',
       include: [ GrapeLogging::Loggers::Response.new,
                  GrapeLogging::Loggers::FilterParameters.new ]
 ```

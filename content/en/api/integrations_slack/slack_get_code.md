@@ -5,13 +5,14 @@ order: 19.1
 external_redirect: /api/#get-slack-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/integration/slack`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="slack_get" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.slack_get" >}}

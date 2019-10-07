@@ -44,26 +44,46 @@ Le check Logstash n'est **PAS** inclus avec le paquet de l'[Agent Datadog][1].
 
 ### Installation
 
-Pour installer le check Logstash sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Logstash sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
-1. Installez le [kit de développement][2] sur n'importe quelle machine.
-2. Exécutez `ddev release build logstash` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][1].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/logstash/dist/<NOM_ARTEFACT>.whl`.
+1. Installez le [kit de développement][5].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `logstash`, exécutez :
+
+    ```
+    ddev -e release build logstash
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][6].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_LOGSTASH_ARTIFACT_>/<LOGSTASH_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-Pour configurer le check Logstash :
+1. Modifiez le fichier `logstash.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Logstash.
+  Consultez le [fichier d'exemple logstash.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-1. Créez un dossier `logstash.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent.
-2. Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
-3. Consultez le [fichier d'exemple logstash.yaml][3] et copiez son contenu dans le fichier `conf.yaml`.
-4. Modifiez le fichier `conf.yaml` pour commencer à recueillir vos [métriques][4] ou [logs][5].
-5. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][10].
 
 #### Collecte de métriques
 
-* Ajoutez cette configuration à votre fichier `conf.yaml` pour commencer à recueillir vos [métriques Logstash][7] :
+Ajoutez cette configuration à votre fichier `conf.yaml` pour commencer à recueillir vos [métriques Logstash][11] :
 
 ```
 init_config:
@@ -76,18 +96,19 @@ instances:
 
 Configurez-la de façon à spécifier votre serveur et votre port.
 
-Consultez le [fichier d'exemple conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
-* [Redémarrez l'Agent][6] pour commencer à envoyer vos métriques Logstash à Datadog.
+Consultez le [fichier d'exemple conf.yaml][12] pour découvrir toutes les options de configuration disponibles.
+
+Enfin, [redémarrez l'Agent][13] pour commencer à envoyer vos métriques Logstash à Datadog.
 
 #### Collecte de logs
 
-Datadog possède [un plug-in de sortie][8] pour Logstash qui s'occupe de l'envoi de vos logs à votre plateforme Datadog.
+Datadog possède [un plug-in de sortie][14] pour Logstash qui s'occupe de l'envoi de vos logs à votre plateforme Datadog.
 
 Pour installer ce plugin, exécutez la commande suivante :
 
 * `logstash-plugin install logstash-output-datadog_logs`
 
-Configurez ensuite le plug-in `datadog_logs` avec votre [clé d'API Datadog][9] :
+Configurez ensuite le plug-in `datadog_logs` avec votre [clé d'API Datadog][15] :
 
 ```
 output {
@@ -97,7 +118,7 @@ output {
 }
 ```
 
-Il est possible d'utiliser des paramètres supplémentaires pour changer l'endpoint utilisé afin de passer par un [proxy][10] :
+Il est possible d'utiliser des paramètres supplémentaires pour changer l'endpoint utilisé afin de passer par un [proxy][16] :
 
 * `host` : endpoint proxy lorsque des logs ne sont pas directement transmis à Datadog (valeur par défaut : `intake.logs.datadoghq.com`).
 * `port` : port proxy lorsque des logs ne sont pas directement transmis à Datadog (valeur par défaut : `10516`)
@@ -117,7 +138,7 @@ output {
 
 ##### Ajouter des métadonnées à vos logs
 
-Pour tirer pleinement parti de vos logs dans Datadog, il est important de leur associer les métadonnées appropriées, y compris le hostname et la source. Par défaut, le hostname et le timestamp sont normalement remappés comme il se doit grâce au [remappage pour les attributs réservés][11] de Datadog. Pour vous assurer que le service est correctement remappé, ajoutez la valeur de son attribut à la liste de remappage du service.
+Pour tirer pleinement parti de vos logs dans Datadog, il est important de leur associer les métadonnées appropriées, y compris le hostname et la source. Par défaut, le hostname et le timestamp sont normalement remappés comme il se doit grâce au [remappage pour les attributs réservés][17] de Datadog. Pour vous assurer que le service est correctement remappé, ajoutez la valeur de son attribut à la liste de remappage du service.
 
 ##### Source
 
@@ -133,11 +154,11 @@ filter {
  }
 ```
 
-Cela déclenche la [configuration automatique de l'intégration][12] dans Datadog.
+Cela déclenche la [configuration automatique de l'intégration][18] dans Datadog.
 
 ##### Tags personnalisés
 
-Les [tags de host][13] sont automatiquement configurés sur vos logs s'il existe un hostname correspondant dans votre [liste d'infrastructures][14]. Utilisez l'attribut `ddtags` pour ajouter des tags personnalisés à vos logs :
+Les [tags de host][19] sont automatiquement configurés sur vos logs s'il existe un hostname correspondant dans votre [liste d'infrastructures][20]. Utilisez l'attribut `ddtags` pour ajouter des tags personnalisés à vos logs :
 
 ```
 filter {
@@ -152,7 +173,7 @@ filter {
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][15] et cherchez `logstash` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][21] et cherchez `logstash` dans la section Checks.
 
 ## Compatibilité
 
@@ -185,24 +206,31 @@ Renvoie `Critical` si l'Agent n'est pas capable de se connecter à Logstash pour
 
 Vérifiez que le paramètre `url` dans `conf.yaml` est correctement configuré.
 
-Si vous avez besoin d'aide supplémentaire, contactez [l'assistance Datadog][16].
+Si vous avez besoin d'aide supplémentaire, contactez [l'assistance Datadog][23].
 
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[11]: #metrics
+[12]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
+[13]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[14]: https://github.com/DataDog/logstash-output-datadog_logs
+[15]: https://app.datadoghq.com/account/settings#api
+[16]: https://docs.datadoghq.com/fr/agent/proxy/?tab=agentv6#proxy-for-logs
+[17]: /fr/logs/#edit-reserved-attributes
+[18]: /fr/logs/processing/#integration-pipelines
+[19]: /fr/getting_started/tagging/assigning_tags
+[20]: https://app.datadoghq.com/infrastructure
+[21]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[22]: https://github.com/DataDog/integrations-extras/blob/master/logstash/metadata.csv
+[23]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[3]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
-[4]: #metric-collection
-[5]: #log-collection
-[6]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[7]: #metrics
-[8]: https://github.com/DataDog/logstash-output-datadog_logs
-[9]: https://app.datadoghq.com/account/settings#api
-[10]: https://docs.datadoghq.com/fr/agent/logs/proxy
-[11]: /fr/logs/#edit-reserved-attributes
-[12]: /fr/logs/processing/#integration-pipelines
-[13]: /fr/getting_started/tagging/assigning_tags
-[14]: https://app.datadoghq.com/infrastructure
-[15]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[16]: http://docs.datadoghq.com/help

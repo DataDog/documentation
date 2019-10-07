@@ -122,7 +122,7 @@ The `Logs` section aggregates logs from all recent invocations of the current fu
 
 ## Trace detail view
 
-Clicking on a particular trace opens the trace detail view for that trace. The X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span metadata, and structure of the overall trace.
+Clicking on a particular trace opens the trace detail view for that trace. The X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span tags, and structure of the overall trace.
 
 {{< img src="graphing/infrastructure/serverless/traces2.png" alt="Traces" responsive="true">}}
 

@@ -9,6 +9,6 @@ external_redirect: /api/#get-all-api-keys
 
 Get all API keys available for your account.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

@@ -15,7 +15,8 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-Logs make use of a different [set of proxy settings][1] than other data types forwarded by the Datadog Agent. This is because logs are transported over TCP/SSL, while other features submit data with HTTPS.
+By default, Datadog transports logs over TCP/SSL. Hence, there is a different [set of proxy settings][1] than other data types that the Datadog Agent forwards in HTTPS.
+Configure the Agent to send logs in HTTPS using the same set of proxy settings as other data types.
 
 {{< tabs >}}
 {{% tab "TCP" %}}
@@ -39,20 +40,11 @@ The parameters above can also be set with the following environment variables:
     * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
     * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
 
-* Use the public key for TLS encryption for the SSL encryption:
-    * For [app.datadoghq.com][1]
-    * For [app.datadoghq.eu][2]
+* Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
+    * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+    * `yum install ca-certificates` (CentOS, Redhat)
+  And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
-    On some systems, the full certificate chain may be required. If so, use this public key instead:
-
-    * For [app.datadoghq.com][3]
-    * For [app.datadoghq.eu][4]
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{% tab "SOCKS5" %}}
 
@@ -67,6 +59,13 @@ The parameter above can also be set with the following environment variable:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
+{{% /tab %}}
+{{% tab "HTTPS" %}}
+
+When the Agent is [configured to send logs through HTTPS][1], use the same [set of proxy settings][2] as the other data types in order to send logs through a web proxy.
+
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[2]: /agent/proxy
 {{% /tab %}}
 {{< /tabs >}}
 

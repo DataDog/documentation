@@ -5,9 +5,14 @@ order: 26.08
 external_redirect: /api/#unmute-all-monitors
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/unmute_all`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-unmute-all" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 *This endpoint does not return JSON on successful requests.*

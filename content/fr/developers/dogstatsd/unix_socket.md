@@ -118,7 +118,7 @@ volumes:
 
 ## Utiliser la détection de l'origine pour le tagging de conteneur
 
-La détection de l'origine permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDS reçoivent les mêmes tags de conteneur que les métriques Autodiscovery. **Remarque :** les tags `container_id`, `container_name` et `pod_name` ne sont pas ajoutés pour éviter de créer trop de contextes de métrique custom.
+La détection de l'origine permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDP reçoivent les mêmes tags de conteneur que les métriques Autodiscovery. **Remarque :** les tags `container_id`, `container_name` et `pod_name` ne sont pas ajoutés pour éviter de créer trop de contextes de métrique custom.
 
 Pour utiliser la détection de l'origine, activez l'option `dogstatsd_origin_detection` dans votre fichier `datadog.yaml` ou définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION=true`, puis [redémarrez votre Agent][2].
 

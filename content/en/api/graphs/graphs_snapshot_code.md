@@ -5,9 +5,14 @@ order: 13.1
 external_redirect: /api/#graph-snapshot
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/graph/snapshot`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-graph-snapshot" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-graph-snapshot" >}}
