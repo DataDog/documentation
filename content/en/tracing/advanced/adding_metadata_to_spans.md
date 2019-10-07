@@ -67,6 +67,7 @@ from ddtrace import tracer
 def handle_customer(customer_id):
   with tracer.trace('web.request') as span:
     span.set_tag('customer.id', customer_id)
+    span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
 ```
 
 The current span can be retrieved from the context to set its tag. This way, if a span was started by the instrumentation, you can retrieve the span and add custom tags. **Note**: If a span does not exist, `None` is returned:
@@ -81,6 +82,7 @@ def handle_customer(customer_id):
   current_span = tracer.current_span()
   if current_span:
     current_span.set_tag('customer.id', customer_id)
+    current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
 ```
 
 
@@ -97,6 +99,7 @@ Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 get '/posts' do
   Datadog.tracer.trace('web.request') do |span|
     span.set_tag('http.url', request.path)
+    span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
   end
 end
 ```
@@ -135,6 +138,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
     // Set tag
     span.SetTag("http.url", r.URL.Path)
+    span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
 }
 
 func main() {
@@ -182,9 +186,8 @@ app.get('/posts', (req, res) => {
   const span = tracer.startSpan('web.request')
 
   span.setTag('http.url', req.url)
-  span.addTags({
-    'http.method': req.method
-  })
+  span.addTags({'http.method': req.method})
+  span.addTags({'<TAG_KEY>': '<TAG_VALUE>'})
 })
 ```
 
