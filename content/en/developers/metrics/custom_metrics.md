@@ -184,7 +184,7 @@ Suppose you are interested in measuring the maximum `age` metric in the state of
 | Rochester, NY | 23,29,33,55,41,36,12,67      | 296 | 8     | 12      | 67      | 37                  |
 | New York, NY  | 18,22,26,31,29,40,23,35      | 215 | 8     | 18      | 40      | 28                  |
 
-The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY). Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`):
+The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`):
 
 | Metric      | Tags                         |
 |-------------|------------------------------|
