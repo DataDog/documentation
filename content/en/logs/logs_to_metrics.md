@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. Contact <a href="/help">Contact Datadog support</a> to enquire about enabling the feature for your account.
+This feature is in beta. Contact <a href="/help">Contact Datadog support</a> to enquire about enabling the feature for your account.
 </div>
 
 ## Overview
