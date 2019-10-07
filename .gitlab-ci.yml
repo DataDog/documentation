@@ -82,6 +82,18 @@ missing_tms_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  dependencies:
+    - build_preview
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env preview --dd_api_key $(get_secret 'dd-demo-api-key')
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 index_algolia_preview:
   <<: *base_template
   stage: post-deploy
@@ -199,17 +211,17 @@ test_missing_tms_live:
   only:
     - master
 
-test_pa11y:
-  <<: *base_template
-  stage: post-deploy
-  environment: "live"
-  dependencies:
-    - build_live
-  script:
-    - cp -r /etc/node_modules .
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
-  only:
-    - schedules
+# test_pa11y:
+#   <<: *base_template
+#   stage: post-deploy
+#   environment: "live"
+#   dependencies:
+#     - build_live
+#   script:
+#     - cp -r /etc/node_modules .
+#     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+#   only:
+#     - schedules
 
 #rollback_live:
 #  <<: *base_template
