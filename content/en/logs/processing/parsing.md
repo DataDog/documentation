@@ -31,7 +31,7 @@ Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
 * **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace,...)
 
-* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the MATCHER.
+* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the *Matcher*.
 
 * **Filter** (optional): a post-processor of the match to transform it
 
@@ -164,11 +164,11 @@ Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
-This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` where:
+This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
 * `separatorStr` : defines the separator. Default `=`
 * `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
-* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For example `<>` matches *test=<toto sda> test2=test*.
+* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined, the default behavior is replaced by allowing only defined quoting char. For example `<>` matches `test=<matchedStr> test2=test`.
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -231,8 +231,8 @@ Other examples:
 | key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
+| key:=valueStr           | `%{data::keyvalue(":=")}`           | {"key": "valueStr"}            |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
-| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
 
 ### Parsing dates
 
