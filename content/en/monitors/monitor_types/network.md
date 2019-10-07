@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Network monitors cover the TCP and HTTP checks available in the Agent. Read the [HTTP check][1] documentation for details on Agent configuration.
+Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation. 
 
 ## Monitor creation
 
-To create a [network monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
+To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
 
 ### Network Status
 
@@ -73,24 +73,25 @@ Set up a cluster alert:
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][3] documentation for information on [No data][4], [Auto resolve][5], and [Evaluation delay][6] options.
+See the [metric monitor][4] documentation for information on [No data][5], [Auto resolve][6], and [Evaluation delay][7] options.
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
 
 ### Network Metric
 
-Create a network metric monitor by following the instructions in the [metric monitor][7] documentation. Using the network metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][8] page.
+Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][9] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: https://app.datadoghq.com/monitors#create/network
-[3]: /monitors/monitor_types/metric
-[4]: /monitors/monitor_types/metric/#no-data
-[5]: /monitors/monitor_types/metric/#auto-resolve
-[6]: /monitors/monitor_types/metric/#evaluation-delay
-[7]: /monitors/notifications
-[8]: https://app.datadoghq.com/monitors/manage
+[2]: /integrations/tcp_check
+[3]: https://app.datadoghq.com/monitors#create/network
+[4]: /monitors/monitor_types/metric
+[5]: /monitors/monitor_types/metric/#no-data
+[6]: /monitors/monitor_types/metric/#auto-resolve
+[7]: /monitors/monitor_types/metric/#evaluation-delay
+[8]: /monitors/notifications
+[9]: https://app.datadoghq.com/monitors/manage
