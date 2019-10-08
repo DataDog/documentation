@@ -17,7 +17,7 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 Find below the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-| ---------  | ----            | -------- | ------------- | -----------                                                                                                   |
+|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `name`     | String          | yes      | -             | The name of the service check.                                                                                |
 | `status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |

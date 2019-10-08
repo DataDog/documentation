@@ -22,7 +22,7 @@ service_check(Name, Status, Tags, Hostname, Message)
 ```
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-| ---------  | ----            | -------- | ------------- | -----------                                                                                                   |
+|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `Name`     | String          | yes      | -             | The name of the service check.                                                                                |
 | `Status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `Tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |

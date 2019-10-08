@@ -214,7 +214,7 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 ### `self.type_overrides`
 
 
-`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.  
+`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 
 **Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check in order to not be counted as a custom metric.

@@ -14,7 +14,7 @@ aliases:
 Services Checks allow you to characterize the status of a service in order to monitor it within Datadog.  All status checks must have one of the following status codes:
 
 | Status Code | Description |
-| -----       | ----        |
+|-------------|-------------|
 | `0`         | OK          |
 | `1`         | Warning     |
 | `2`         | Critical    |

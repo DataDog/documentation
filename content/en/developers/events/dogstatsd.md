@@ -24,17 +24,17 @@ event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName
 
 **Definitions**:
 
-| Parameter      | Type            | Required | Description                                                                                             |
-|----------------|-----------------|----------|---------------------------------------------------------------------------------------------------------|
-| Title          | String          | Yes      | The title of the event                                                                                  |
-| Text           | String          | Yes      | The text body of the event                                                                              |
+| Parameter      | Type            | Required | Description                                                                                |
+|----------------|-----------------|----------|--------------------------------------------------------------------------------------------|
+| Title          | String          | Yes      | The title of the event                                                                     |
+| Text           | String          | Yes      | The text body of the event                                                                 |
 | Timestamp      | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
-| Hostname       | String          | No       | The name of the host                                                                                    |
-| AggregationKey | String          | No       | A key to use for aggregating events                                                                     |
-| Priority       | String          | No       | Specifies the priority of the event (`normal` or `low`).                                                |
-| SourceTypeName | String          | No       | The [source type][3] name                                                                               |
-| AlertType      | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                                           |
-| Tags           | List of strings | No       | A list of tags associated with this event.                                                              |
+| Hostname       | String          | No       | The name of the host                                                                       |
+| AggregationKey | String          | No       | A key to use for aggregating events                                                        |
+| Priority       | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
+| SourceTypeName | String          | No       | The [source type][3] name                                                                  |
+| AlertType      | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
+| Tags           | List of strings | No       | A list of tags associated with this event.                                                 |
 
 ### Examples
 
