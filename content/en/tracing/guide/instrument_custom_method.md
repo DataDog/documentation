@@ -173,33 +173,33 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 // [...]
 
 func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
-  // Trace the `write` function and capture the error if present
-  span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
-  defer func() {
-    span.Finish(tracer.WithError(err))
-  }()
+	// Trace the `write` function and capture the error if present
+	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
+	defer func() {
+		span.Finish(tracer.WithError(err))
+	}()
 
-  for _, t := range transactions {
-    if err := bl.persistTransaction(ctx, t); err != nil {
-      return err
-    }
-  }
-  return nil
+	for _, t := range transactions {
+		if err := bl.persistTransaction(ctx, t); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // persistTransaction is an inner function you may want to Trace. You can use the
 // same approach as before because the `ctx` you pass down includes out-of-the-box span
 // references to create a parent/child relationships.
 func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
-  id := transaction.ID
-  span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
-  defer span.Finish()
+	id := transaction.ID
+	span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
+	defer span.Finish()
 
-  if t, ok := bl.transactions[id]; ok {
-    return errors.New("duplicate entry")
-  }
-  bl.transactions[id] = transaction
-  return nil
+	if t, ok := bl.transactions[id]; ok {
+		return errors.New("duplicate entry")
+	}
+	bl.transactions[id] = transaction
+	return nil
 }
 ```
 
