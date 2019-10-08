@@ -1,7 +1,7 @@
 ---
 title: Event based SLO
 kind: documentation
-description: "Use metrics to define Service Level Objective"
+description: "Use metrics to define a Service Level Objective"
 further_reading:
 - link: "metrics"
   tag: "Documentation"

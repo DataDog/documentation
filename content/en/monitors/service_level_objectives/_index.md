@@ -46,7 +46,7 @@ To edit an SLO, hover over the SLO on the right, and click the edit pencil icon.
 
 ## Searching SLOs
 
-The [List Service Level Objectives][1] page lets you run an advanced search of all SLOs so you can view, delete or edit service tags for selected SLOs in bulk. You can also clone or fully edit any individual SLO in the search results.
+The [List Service Level Objectives][4] page lets you run an advanced search of all SLOs so you can view, delete or edit service tags for selected SLOs in bulk. You can also clone or fully edit any individual SLO in the search results.
 
 {{< img src="service_level_objectives/edit_slo/edit_slo_page.png" alt="edit slo page" responsive="true" >}}
 
