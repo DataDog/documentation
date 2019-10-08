@@ -38,7 +38,7 @@ If you provide a template for the same integration with multiple template source
 * Docker Labels
 * Files
 
-**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. Contact [Datadog support][7] for assistance.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable these integrations, use the Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter + node-level or cluster-level collector. This results in the exporter having access to the data, which exposes it using an http endpoint, which allows Datadog Autodiscovery to access it.
 
 ## Configuration
 
