@@ -28,6 +28,7 @@ Before you begin, you need to have a [Datadog account][2], a [Datadog API key][3
 
 1. [Install][5] and [configure][6] Fluent Bit by using their reccomended method of a configuration file.
 2. Update your [Fluent Bit configuration file][7] to add Datadog as an output plugin. For more information on the configuration parameters, see the [Configuration parameters table](#configuration-parameters). For an example `[OUTPUT]` configuration section, see the [Configuration file example](#configuration-file-example).
+3. Once you start sending logs from Fluent Bit, verify the logs on the [Datadog Logs Explorer page][8].
 
 #### Configuration parameters
 
@@ -38,7 +39,7 @@ Before you begin, you need to have a [Datadog account][2], a [Datadog API key][3
 | apikey | _Required_ - Your [Datadog API key][3]. |  |
 | dd\_service | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |  |
 | dd\_source | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |  |
-| dd\_tags | _Optional_ - The [tags][8] you want to assign to your logs in Datadog. |  |
+| dd\_tags | _Optional_ - The [tags][9] you want to assign to your logs in Datadog. |  |
 
 #### Configuration file example
 
@@ -56,7 +57,7 @@ Before you begin, you need to have a [Datadog account][2], a [Datadog API key][3
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][9].
+Need help? Contact [Datadog support][10].
 
 ## Further Reading
 
@@ -69,5 +70,6 @@ Need help? Contact [Datadog support][9].
 [5]: https://docs.fluentbit.io/manual/installation
 [6]: https://docs.fluentbit.io/manual/configuration
 [7]: https://docs.fluentbit.io/manual/configuration/file
-[8]: /tagging
-[9]: /help
+[8]: https://app.datadoghq.com/logs
+[9]: /tagging
+[10]: /help
