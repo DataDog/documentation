@@ -34,18 +34,23 @@
         <section class="row guides justify-content-center">
                 {{ range $i, $guide := $datafile.guides }}
                     <div class=" guide-col d-flex flex-column">
+                            <div class="inner-content">
+                            <div class="guide-no">{{ add $i 1}}.</div>
                         <h5 class="text-black text-uppercase pt-0">{{ $guide.title}} </h5>
-                        <p class="small">{{ $guide.desc }}</p>
-                        <div class="mt-auto">
-                                <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
+                        
+                            <p class="small">{{ $guide.desc }}</p>
+                            <div class="mt-auto">
+                                    <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
+                            </div>
                         </div>
+                        
                         
                     </div>
                     
                     {{ if ne $i 2 }}
-                    <div class="px-0 mx-0 right-arrow-container d-none d-md-block">
+                    <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
                         <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <path d="M0 0 L100 50 L0 100" />
+                            <path d="M0,0 L100,50 L0,100" />
                         </svg>
                     </div>
                     

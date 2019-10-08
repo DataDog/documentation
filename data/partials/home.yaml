@@ -1,15 +1,15 @@
 heading: Welcome to Datadog Docs!
 
 guides: 
-  - title: 1. Install the agent
+  - title: Install the agent
     desc: Start collecting events and metrics from hosts and send them to Datadog.
     link_text: View Guides
     link: getting_started/agent/
-  - title: 2. Set Up Integrations
+  - title: Set Up Integrations
     desc: Learn how to collect metrics, traces and logs with over 350+ integrations.
     link_text: View Guides
     link: getting_started/integrations/
-  - title: 3. Get Started in App
+  - title: Get Started in App
     desc: Discover how to use Datadog to create dashboards, graphs, monitors and more.
     link_text: View Guides
     link: getting_started/application/

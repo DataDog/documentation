@@ -183,6 +183,40 @@ $responsive-breakpoint: 768px
       }
     }
 
+    /* Main category (eg. Getting Started) */
+    .algolia-docsearch-suggestion--category-header {
+      display: none !important;
+    }
+
+    /* Category (eg. Downloads) */
+    .algolia-docsearch-suggestion--subcategory-column {
+      display: none !important;
+    }
+
+    .algolia-docsearch-suggestion--wrapper {
+      padding: 0 !important;
+    }
+
+    .algolia-docsearch-suggestion--content {
+      width: 100% !important;
+      // padding-left: 0 !important;
+      padding: 0 !important;
+      &.algolia-docsearch-suggestion--no-results {
+        padding: 8px 0 !important;
+      }
+      &::before {
+        display: none !important;
+      }
+    }
+
+    .algolia-docsearch-suggestion.algolia-docsearch-suggestion__secondary {
+      padding: 0 !important;
+    }
+
+    .algolia-docsearch-footer {
+      display: none !important;
+    }
+
     // Dropdown wrapper
     .ds-dropdown-menu {
       position: relative;
@@ -196,6 +230,33 @@ $responsive-breakpoint: 768px
       background: transparent;
       border: none;
       z-index: 999;
+      max-width: 100% !important;
+      & [class^="ds-dataset-"] {
+        padding: 0 !important;
+      }
+      .ds-dataset-1 {
+        padding: 0px !important;
+        border: none !important;
+      }
+        .ds-suggestion  {
+          padding: 4px 8px 8px !important;
+          &.ds-cursor {
+            background-color: rgba(69, 142, 225, 0.05) !important;
+            .algolia-docsearch-suggestion {
+              background-color: none;
+            }
+          }
+          
+          
+          &:not(:first-child) {
+            border-top: 1px solid $gray-border;
+          }
+
+          
+          
+        }
+      
+      
       @include layout-width($layout-width);
       @include shadow-type($box-shadow);
 
@@ -218,7 +279,7 @@ $responsive-breakpoint: 768px
       .ds-suggestions {
         position: relative;
         z-index: 1000;
-        margin-top: $padding/2;
+        margin-top: 0;
       }
 
       .ds-suggestion{

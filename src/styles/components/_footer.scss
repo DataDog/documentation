@@ -33,12 +33,6 @@ body {
         /* Set the fixed height of the footer here */
         background-color: $footer_bg_color;
         color: $footer-font-color;
-        @media (min-width: 992px) {
-            height: 480px;
-        }
-        @media (min-width: 1200px) {
-            height: 460px;
-        }
         p {
             border-bottom: 1px solid $footer-font-color;
             margin-bottom: 10px;
@@ -88,7 +82,6 @@ body {
         .footer-side {
             .btn {
                 text-transform: uppercase;
-                width: 163px;
                 cursor: pointer;
                 font-size: 18px;
                 color: #fff;
