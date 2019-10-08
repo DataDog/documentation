@@ -27,7 +27,7 @@ To create a [network monitor][3] in Datadog, use the main navigation: *Monitors 
 #### Pick a check
 
 * Choose a network check type (`ssl`, `http`, or `tcp`).
-* Choose a specific check or `All monitored <TYPE> endpoints`.
+* Choose a specific endpoint or `All monitored <TYPE> endpoints`.
 
 #### Pick monitor scope
 
@@ -53,7 +53,7 @@ Set up the check alert:
 
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
-    Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
+    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
 
 3. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
@@ -81,7 +81,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ### Network Metric
 
-Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][9] page.
+Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
