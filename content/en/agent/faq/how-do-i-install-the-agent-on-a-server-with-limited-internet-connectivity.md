@@ -26,7 +26,7 @@ Once the package has been transferred to the target system, it can be installed 
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.x86_64.rpm
 ```
 
-For Debian based distributions the command to install a deb file in current directory would be:
+To install a deb file in the current director for Debian based distributions:
 
 ```bash
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
