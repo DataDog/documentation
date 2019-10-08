@@ -70,11 +70,11 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).       |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
-| `numberExtStr`                                  | Matches a floating point number (with scientific notation support).                                                                |
+| `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
 | `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
 | `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
-| `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
+| `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
 | `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
