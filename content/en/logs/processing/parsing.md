@@ -49,7 +49,9 @@ You would have at the end this structured log:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
-**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+**Note**:
+- If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+- You must have unique rules names within the same Grok parser.
 
 ### Matcher and Filter
 
@@ -167,8 +169,20 @@ Find below some examples demonstrating how to use parsers:
 This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
 * `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
-* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined, the default behavior is replaced by allowing only defined quoting char. For example `<>` matches `test=<matchedStr> test2=test`.
+* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `test=@testStr`).
+* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). 
+  * When defined, the default behavior is replaced by allowing only defined quoting char.
+  * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
+  * Any string defined within the quoting chars is extracted as a value.
+    
+    For example, input: `test:=testStr test:=</$%@testStr2> test:="testStr3"`, parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, output: `{
+    "test": [
+      "testStr",
+      "/$%@testStr2"
+    ]
+  }`
+
+**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `test:=testStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -258,7 +272,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 
 ### Conditional pattern
 
-You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `|`.
+You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `(<REGEX_1>|<REGEX_2>)`.
 
 **Log**:
 ```
