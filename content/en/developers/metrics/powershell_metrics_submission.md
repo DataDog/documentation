@@ -1,5 +1,5 @@
 ---
-title: Metric submission via PowerShell
+title: "Metric submission: PowerShell"
 kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
@@ -10,7 +10,7 @@ Datadog can collect metrics via the Agent as well as via the API independently o
 
 ## Submitting metrics with PowerShell via the API
 
-This method doesn't require you to have the Agent installed on the system running the PowerShell script. This does, however, mean you have to explicitly pass your API key as well as an application key when making the POST request. [Fetch you API key from the Datadog application][1]
+This method doesn't require you to have the Agent installed on the system running the PowerShell script. You have to explicitly pass your API key as well as an application key when making the POST request. Start by [fetching your API key from the Datadog application][1].
 
 ```powershell
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0
@@ -52,7 +52,7 @@ postMetric($metric)($tags) # pass your metric as a parameter to postMetric()
 
 ## Submitting metrics with PowerShell via DogStatsD
 
-Having the Agent enables you to make use of its [DogStatsD][2] listener. The following example shows how you could send the same metric via DogStatsD. Notice that you no longer need to specify the API or application keys; this is information that's already in your local `datadog.yaml`.
+Having the Agent enables you to make use of its [DogStatsD][2] listener. The following example shows how you could send the same metric via DogStatsD. Notice that you no longer need to specify the API or application keys because it's already in your local `datadog.yaml`.
 
 ```powershell
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0

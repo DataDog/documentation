@@ -21,13 +21,13 @@ This page dives into the `OpenMetricsBaseCheck` interface for more advanced usag
 
 ## Advanced usage: OpenMetrics check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check (for example, metrics preprocessing), you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. The minimal configuration for checks based on this class include:
 
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
 - Implementing the `check()` method
 AND/OR
-- Create method named after the OpenMetric metric they will handle (see `self.prometheus_metric_name`)
+- Create a method named after the OpenMetric metric they will handle (see `self.prometheus_metric_name`)
 
 ## Writing a custom Prometheus check
 
@@ -57,7 +57,7 @@ Configuration for a Prometheus check is almost the same as a regular [Agent chec
 init_config:
 
 instances:
-    # url of the metrics endpoint of prometheus
+    # URL of the metrics endpoint of Prometheus
   - prometheus_endpoint: http://localhost:10055/metrics
 ```
 
@@ -72,7 +72,7 @@ class KubeDNSCheck(OpenMetricsBasicCheck):
 
 #### Overriding `self.NAMESPACE`
 
-`NAMESPACE` is the prefix metrics will have. It needs to be hardcoded in your check class:
+`NAMESPACE` is the metrics prefix. It needs to be hardcoded in your check class:
 
 ```python
 from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
@@ -85,7 +85,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 #### Overriding `self.metrics_mapper`
 
-`metrics_mapper` is a dictionary where the key is the metric to capture and the value is the corresponding metric name in Datadog.
+`metrics_mapper` is a dictionary where the key is the metric to capture, and the value is the corresponding metric name in Datadog.
 The reason for the override is so that metrics reported by the OpenMetrics checks are not counted as [custom metric][5]:
 
 ```python
@@ -116,7 +116,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][6] for easy debugging. For example:
+If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][6] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -214,10 +214,10 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 ### `self.type_overrides`
 
 
-`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
+`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 
-**Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check in order to not be counted as a custom metric.
+**Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check to not be counted as a custom metric.
 
 ## Further Reading
 
