@@ -108,6 +108,6 @@ Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /fr/agent/troubleshooting
 [4]: /fr/developers/guide/custom-python-package
