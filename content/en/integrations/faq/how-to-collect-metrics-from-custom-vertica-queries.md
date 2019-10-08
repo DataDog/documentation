@@ -50,7 +50,7 @@ In each instance, you can define the behavior of global custom queries using the
 
 | `global_custom_queries` value | Behavior |
 | ----- | -----|
-| `true` | `global_custom_queries` overrides `custom_queries` |
+| `true` | `global_custom_queries` overrides `custom_queries`. |
 | `false` | `custom_queries` overrides `global_custom_queries` |
 | `extend` | `global_custom_queries` is used in addition to `custom_queries` |
 
