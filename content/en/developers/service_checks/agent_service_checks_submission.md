@@ -1,5 +1,5 @@
 ---
-title: Service Check submission with a Agent Check
+title: "Service Check Submission: Agent Check"
 kind: documentation
 disable_toc: true
 further_reading:

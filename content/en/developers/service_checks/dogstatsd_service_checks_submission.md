@@ -1,5 +1,5 @@
 ---
-title: Service Checks submission with DogStatsD
+title: "Service Checks Submission: DogStatsD"
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 disable_toc: true
@@ -15,21 +15,29 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-After [installing DogStatsD][1], you can send Service Checks to Datadog with the following function:
+While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for service checks with code examples.
+
+## Function
+
+After [installing DogStatsD][1], you can send service checks to Datadog with the following function:
 
 ```
 service_check(Name, Status, Tags, Hostname, Message)
 ```
 
-| Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
-| `Name`     | String          | yes      | -             | The name of the service check.                                                                                |
-| `Status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
-| `Tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
-| `Hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
-| `Message`  | String          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
+Service check function parameters:
 
-Find below examples according to your language:
+| Parameter  | Type            | Required | Default Value | Description                                                                                                |
+|------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
+| `Name`     | String          | Yes      | -             | The name of the service check.                                                                             |
+| `Status`   | Float           | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
+| `Tags`     | List of strings | No       | -             | A list of tags to associate with the service check.                                                        |
+| `Hostname` | String          | No       | Current host  | The hostname to associate with the service check.                                                          |
+| `Message`  | String          | No       | -             | Additional information or a description of why the status occurred.                                        |
+
+### Code examples
+
+Choose your language for a service check code example:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -157,7 +165,7 @@ $statsd->service_check('Service.check.name', 0);
 {{% /tab %}}
 {{< /tabs >}}
 
-After a Service Check is reported, use it to trigger a [custom check monitor][2].
+After a service check is reported, use it to trigger a [custom check monitor][2].
 
 ## Further reading
 
