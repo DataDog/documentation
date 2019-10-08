@@ -58,7 +58,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		  -a -not -name 'cloudability.md' \
+		-a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'fluentbit.md' 
 		-a -not -name 'integration_sdk.md' \
