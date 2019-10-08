@@ -131,3 +131,5 @@ start: clean source-helpers ## start the webpack/hugo server.
 stop:  ## stop wepack watch/hugo server.
 	@echo "stopping previous..."
 	@pkill -x webpack || true
+	@pkill -x hugo server --renderToDisk || true
+	
