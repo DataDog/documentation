@@ -16,7 +16,7 @@ custom_queries:
     tags: <TAGS>
 ```
 
-Queries in Vertica resemble the same SQL queries used in other databases. Use the pipe symbol (`|`) in the `query` field to use a multi line script.
+Queries in Vertica resemble the same SQL queries used in other databases. Use the pipe symbol (`|`) in the `query` field to use a multi line query.
 
 The `columns` field is a list representing each column, ordered sequentially from left to right. The number of columns must equal the number of columns returned in the query. Each column requires two pieces of data: `name` and `type`:
 * The `name` field represents the suffix to append to `vertica.` in order to form the full metric name. 
