@@ -18,7 +18,9 @@ custom_queries:
 
 Queries in Vertica resemble the same SQL queries used in other databases. Use the pipe symbol (`|`) in the `query` field to use a multi line script.
 
-The `columns` field is a list representing each column, ordered sequentially from left to right. The number of columns must equal the number of columns returned in the query. Each column requires two pieces of data: `name` and `type`. The `name` field represents the suffix to append to `vertica.` in order to form the full metric name. The `type` field represents the submission method: `gauge`, `monotonic_count`, etc. Setting the `type` to `tag` results in tagging each metric in the row with the name and value of the item in this column. 
+The `columns` field is a list representing each column, ordered sequentially from left to right. The number of columns must equal the number of columns returned in the query. Each column requires two pieces of data: `name` and `type`:
+* The `name` field represents the suffix to append to `vertica.` in order to form the full metric name. 
+* The `type` field represents the submission method: `gauge`, `monotonic_count`, etc. Setting the `type` to `tag` results in tagging each metric in the row with the name and value of the item in this column. 
 
 The `tags` field is optional and represents a list of tags to apply to each metric.
 
