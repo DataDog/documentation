@@ -108,3 +108,4 @@ To submit a feature request, reach out to [Datadog Support][2].
 
 [1]: https://app.datadoghq.com/slo
 [2]: /monitors
+[3]: https://app.datadoghq.com/monitors#create/metric
