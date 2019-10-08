@@ -8,7 +8,7 @@ further_reading:
   text: "Write an Agent Custom Check"
 ---
 
-To submit a Service Check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
+To submit a service check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
 
 ```python
 self.service_check(name, status, tags=None, hostname=None, message=None)
@@ -18,17 +18,17 @@ Find below the different parameters and data types available for the `service_ch
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
 |------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
-| `name`     | String          | yes      | -             | The name of the service check.                                                                                |
+| `name`     | string          | yes      | -             | The name of the service check.                                                                                |
 | `status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
 | `hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
-| `message`  | String          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
+| `message`  | string          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
 
 ## Example
 
-Here is an example of a dummy Agent check sending only one Service Check periodically, refer to the dedicated [Writing a custom Agent check][1] documentation to learn more.
+Here is an example of a dummy Agent check sending only one service check periodically. Refer to the dedicated [Writing a Custom Agent Check][1] documentation to learn more.
 
-1. Create a new directory `service_check_example.d/` in the [`conf.d/` folder][2] of your Agent.
+1. Create a new directory, `service_check_example.d/`, in the [`conf.d/` folder][2] of your Agent.
 
 2. In your `service_check_example.d/` folder, create an empty configuration file named `service_check_example.yaml` with the following content:
 
@@ -36,8 +36,8 @@ Here is an example of a dummy Agent check sending only one Service Check periodi
     instances: [{}]
     ```
 
-3. Go now in the `/datadog-agent/checks.d/` folder.
-2. Create within this folder a custom check file named `service_check_example.py` with the content below:
+3. Go into the `/datadog-agent/checks.d/` folder.
+2. Within this folder, create a custom check file named `service_check_example.py` with the content below:
 
     ```python
     try:
@@ -55,7 +55,7 @@ Here is an example of a dummy Agent check sending only one Service Check periodi
 
 3. [Restart the Agent][3]
 
-4. Check that your custom check is correctly running with the [Agent Status command][4]. You should see something like this:
+4. Ensure that your custom check is correctly running with the [Agent status command][4]. You should see something like this:
 
     ```
     =========
