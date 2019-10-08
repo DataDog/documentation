@@ -38,7 +38,7 @@ custom_queries:
       - name: table_name
         type: tag
     tags:
-      - test:vertica
+      - env:dev
 ```
 
 ## Global custom queries
