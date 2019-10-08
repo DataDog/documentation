@@ -81,14 +81,12 @@ If at time `T_x` the state of all monitors `[m0, ..., m_n]` are all in `OK` stat
 
 Consider the following example:
 
-| Monitor        | t0 | t1 | t2    | t3 | t4    | t5 | t6 | t7 | t8 | t9 | t10   |
-|----------------|----|----|-------|----|-------|----|----|----|----|----|-------|
-| m0             | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
-| m1             | OK | OK | OK    | OK | OK    | OK | OK | OK | OK | OK | ALERT |
-| m2             | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
-|----------------|----|----|-------|----|-------|----|----|----|----|----|-------|
-| Overall Uptime | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
-|----------------|----|----|-------|----|-------|----|----|----|----|----|-------|
+| Monitor            | t0 | t1 | t2    | t3 | t4    | t5 | t6 | t7 | t8 | t9 | t10   |
+|--------------------|----|----|-------|----|-------|----|----|----|----|----|-------|
+| m0                 | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| m1                 | OK | OK | OK    | OK | OK    | OK | OK | OK | OK | OK | ALERT |
+| m2                 | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
 
 #### `OK` States
 
