@@ -37,7 +37,7 @@ Finally, add the following JVM argument when starting your application in your I
 
 **Note**:
 
-* The `-javaagent` needs to be run before the `-jar` file, adding it as a jvm option, not as an application argument, more info [here][16].
+* The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][16].
 
 * `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][4].
 
