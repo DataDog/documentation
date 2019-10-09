@@ -26,7 +26,7 @@ There are three metric types within the Datadog web application:
 * `RATE`
 * `GAUGE`
 
-But the following metric types are accepted:
+But the following metric submission types are accepted:
 
 * [COUNT](?tab=count#metric-type-definition)
 * [RATE](?tab=rate#metric-type-definition)
@@ -141,15 +141,15 @@ The `HISTOGRAM` metric type allows you to measure the statistical distribution o
 
 For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following metrics are produced by the Agent:
 
-| Aggregation                  | Description                                                                     | Datadog Metric Type |
-| ---------------------------- | ------------------------------------------------------------------------------- | ------------------- |
-| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.            | GAUGE               |
-| `<METRIC_NAME>.count`        | Gives you the count of those `X` values sent during the flush interval.         | COUNT               |
-| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                 | GAUGE               |
-| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.        | GAUGE               |
-| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval. | GAUGE               |
-| `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.        | GAUGE               |
-| `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.             | GAUGE               |
+| Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
+| `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
+| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
+| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
+| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
+| `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
+| `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
 
 **Note**:
 

@@ -158,7 +158,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
     instances: [{}]
     ```
 
-3. Create a custom check file named `metrics_example.py` in the `checks.d/` folder at the root of your [Agent's configuration directory][3] with the content below:
+3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
 
     ```python
     import random
