@@ -75,6 +75,8 @@ By default, the widget displays the error budget. The error budget represents th
 
 ### Overall Uptime Calculation
 
+{{< img src="monitors/slo/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
+
 The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
 
 If at time `T_x` the state of all monitors `[m0, ..., m_n]` are all in `OK` state, then the overall uptime for time `T_x` will be the `OK` state. However, if any number of monitors at time `T_x` have state `ALERT`, then the overall uptime for time `T_x` will be the `ALERT` state.
