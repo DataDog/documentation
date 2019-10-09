@@ -73,6 +73,33 @@ Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month,
 
 By default, the widget displays the error budget. The error budget represents the amount of time you are allowed to be in the red until you breach your defined SLO. This is calculated using the value entered into your conditional formatting and the time window selected. If nothing is selected, you will see an error message that states: _No Rules Specified_. You can change this by editing the widget.
 
+### Overall Uptime Calculation
+
+{{< img src="monitors/slo/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
+
+The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
+
+If at time `T_x` the state of all monitors `[m0, ..., m_n]` are all in `OK` state, then the overall uptime for time `T_x` will be the `OK` state. However, if any number of monitors at time `T_x` have state `ALERT`, then the overall uptime for time `T_x` will be the `ALERT` state.
+
+Consider the following example:
+
+| Monitor            | t0 | t1 | t2    | t3 | t4    | t5 | t6 | t7 | t8 | t9 | t10   |
+|--------------------|----|----|-------|----|-------|----|----|----|----|----|-------|
+| m0                 | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| m1                 | OK | OK | OK    | OK | OK    | OK | OK | OK | OK | OK | ALERT |
+| m2                 | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+
+#### `OK` States
+
+- At times `t0`, `t1`, `t3`, `t5`, `t6`, `t7`, `t8`, and `t9`, all of the monitors `m0`, `m1`, `m2` are in `OK` state, so the overall uptime for these times are in `OK` state.
+
+#### `ALERT` States
+
+- At time `t2`, monitor `m2` is in `ALERT` state, so the overall uptime at `t2` is in `ALERT` state.
+- At time `t4`, monitors `m0` and `m2` are in `ALERT` state, so the overall uptime at `t4` is in `ALERT` state.
+- At time `t10`, monitors `m0`, `m1`, and `m2` are in `ALERT` state, so the overall uptime at `t10` is in `ALERT` state.
+
 ## Feature requests
 
 To submit a feature request, reach out to [Datadog Support][2].
