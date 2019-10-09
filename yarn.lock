@@ -916,9 +916,9 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"a11y@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.7.tgz":
-  version "1.0.7"
-  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.7.tgz#57a3490f6a44bde558714b97dee55df1e8470ea0"
+"a11y@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.8.tgz":
+  version "1.0.8"
+  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.8.tgz#5cd555f57d1efc58bb879747723b7275ae3c6e41"
   dependencies:
     aws-sdk "^2.531.0"
     dogapi "^2.8.3"
