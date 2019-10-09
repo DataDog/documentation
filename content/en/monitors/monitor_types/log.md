@@ -1,5 +1,5 @@
 ---
-title: Log monitor
+title: Logs Monitor
 kind: documentation
 further_reading:
 - link: "monitors/notifications"
@@ -10,72 +10,55 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
-
-{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" >}}
 
 ## Overview
 
-Log monitors alert when a specified type of log exceeds a user-defined threshold over a given period of time.
+A logs monitor alerts when a specified type of log exceeds a user-defined threshold over a given period of time.
 
-## Setup
+## Monitor creation
 
-Construct a query to control what is monitored:
+To create a [logs monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-1. Define the search query:
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
-    The search query has the same behavior as [the log explorer search][1]
-    
-2. Choose a [Measure][1] or [Facet][2] to monitor. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays a count.
-    
-    {{< img src="monitors/monitor_types/log/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
-    
-3. Select the aggregation function for the [Measure][1] you want to monitor:
-    
-    {{< img src="monitors/monitor_types/log/agg_function.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+### Define the search query
 
-4. (Optional) Define the alert grouping:
-  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
-    With or without alert grouping defined, you get **one** alert when the aggregated value meets the conditions set below. Even if you split the query by host, a single notification is sent if several hosts meet the conditions set below. This is done to reduce notification noise.
+As you define the search query, the graph above the search fields updates.
 
-5. Set alert conditions. The following options can be used:
+* If you have [multiple log indexes][2], select the index to search.
+* Construct a search query using the same logic as a [log explorer search][3].
+* Choose a [facet][4] or [measure][5] to monitor.
+    * Facets display `Count`.
+    * Measures display `Measure` with an aggregation choice: `min`, `avg` (default), `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`.
+* Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
-  {{< img src="monitors/monitor_types/log/above_below.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+### Set alert conditions
 
-6. Configure your **notification options**:  
+* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* Alert threshold `<NUMBER>`
+* Warning threshold `<NUMBER>`
 
-  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+### Notifications
 
-  Refer to the [notifications][2] dedicated documentation page for detailed options.
-    
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
-## Notifications and log samples
+#### Log samples
 
-It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
-This is available for Slack, Jira, Webhook, Microsoft Teams, and email notifications.
-
-* Samples are not displayed for recovery notifications.
-
- **Enabling log samples in notifications**:
-    
-  {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
-    
-  **Example for a Slack notification** 
-
-  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
- 
-### Notifications for groups
+By default, a table of up to 10 samples of logs that triggered the monitor is added to the notification message.
+This is available for Slack, Jira, Webhook, Microsoft Teams, and email notifications. **Note**: Samples are not displayed for recovery notifications.
 
 Notifications from monitors split by group may include the list of the top 10 of breaching values instead of 10 log samples.
 
- **Enabling top 10 breaching values in notifications**
+To disable log samples, uncheck the box next to `Include a table of the top 10 breaching values` at the bottom of the **Say what's happening** section.
 
-{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
+##### Examples
 
-**Example for a Slack notification** 
+Ungrouped:
+{{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
 
- {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+Grouped:
+{{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
 
 ## No Data alerts and Below Conditions  
 
@@ -93,5 +76,9 @@ Examples:
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search
-[2]: /monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/log
+[2]: /logs/indexes
+[3]: /logs/explorer/search
+[4]: /logs/explorer/?tab=facets#setup
+[5]: /logs/explorer/?tab=measures#setup
+[6]: /monitors/notifications
