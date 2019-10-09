@@ -46,9 +46,9 @@ You have two web servers: `server:web_1` and `server:web_2`. Both deal with HTTP
 
 They both receive:
 
-  * 1 request per second for 30 seconds, then
-  * 2 requests per second for 30 seconds, then
-  * 0 requests for 30 seconds
+  * 10 requests for the first 30 seconds, then
+  * 20 requests for the next 30 seconds, then
+  * 0 requests for the last 30 seconds
 
 Then the pattern starts again.
 
@@ -91,8 +91,8 @@ For instance, say that the `number.of.requests.rate` metric is reported every 30
 
 Each data point represents the "rate" of requests. The metric then has the following shape:
 
-* `1` for the first 30 seconds
-* `2` for the second interval of 30 seconds
+* `0.33` for the first 30 seconds
+* `0.66` for the second interval of 30 seconds
 * `0` for the last interval of 30 seconds
 
 Then this pattern starts again, since the `RATE` is the normalized per-second variation of the number of requests:
@@ -142,9 +142,9 @@ The `HISTOGRAM` metric type allows you to measure the statistical distribution o
 For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following metrics are produced by the Agent:
 
 | Aggregation                  | Description                                                                     | Datadog Metric Type |
-|------------------------------|---------------------------------------------------------------------------------|---------------------|
+| ---------------------------- | ------------------------------------------------------------------------------- | ------------------- |
 | `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.            | GAUGE               |
-| `<METRIC_NAME>.count`        | Gives you the count of those `X` values sent during the flush interval.           | COUNT               |
+| `<METRIC_NAME>.count`        | Gives you the count of those `X` values sent during the flush interval.         | COUNT               |
 | `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                 | GAUGE               |
 | `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.        | GAUGE               |
 | `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval. | GAUGE               |
@@ -231,7 +231,7 @@ Datadog accepts metrics submitted from a variety of sources:
 Each source has its own limitations, and metric submission types do not always map exactly to the Datadog in-app stored types:
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
-|-------------------|--------------------------------------|-----------------|---------------------|
+| ----------------- | ------------------------------------ | --------------- | ------------------- |
 | [API][6]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [API][6]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [API][6]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
