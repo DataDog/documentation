@@ -355,7 +355,7 @@ Pour assigner facilement des tags, il est conseillé d'utiliser les intégration
 
 ### Amazon Web Services
 
-Les tags suivants sont recueillis à partir d'intégrations AWS. **Remarque** : certains tags s'affichent uniquement pour des métriques spécifiques.
+Les tags suivants sont recueillis à partir des intégrations AWS. **Remarque** : certains tags s'affichent uniquement pour des métriques spécifiques.
 
 | Intégration            | Clés de tag Datadog                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
