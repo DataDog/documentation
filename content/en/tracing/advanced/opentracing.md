@@ -15,7 +15,6 @@ further_reading:
 
 OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][1].
 
-
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -430,12 +429,12 @@ When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer
 
 ```php
 <?php
-
-$otTracer = \OpenTracing\GlobalTracer::get();
-$span = $otTracer->startActiveSpan('web.request')->getSpan();
-$span->setTag('span.type', 'web');
-$span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
-// ...Use OpenTracing as expected
+  $otTracer = \OpenTracing\GlobalTracer::get();
+  $span = $otTracer->startActiveSpan('web.request')->getSpan();
+  $span->setTag('span.type', 'web');
+  $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
+  // ...Use OpenTracing as expected
+?>
 ```
 
 

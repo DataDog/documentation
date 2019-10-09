@@ -60,6 +60,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'cloud_foundry.md' \
 		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
+		  -a -not -name 'fluentbit.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \

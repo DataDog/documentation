@@ -443,9 +443,9 @@ Applications with custom instrumentation can enable trace analytics by setting t
 
 ```php
 <?php
-// ... your existing span that you want to enable for Trace Search & Analytics
-$span->setTag(Tag::ANALYTICS_KEY, true);
-
+  // ... your existing span that you want to enable for Trace Search & Analytics
+  $span->setTag(Tag::ANALYTICS_KEY, true);
+?>
 ```
 
 {{% /tab %}}

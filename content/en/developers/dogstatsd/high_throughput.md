@@ -34,6 +34,7 @@ Here are a few examples for [official DogStatsD supported clients][3]:
 
 {{< tabs >}}
 {{% tab "Go" %}}
+
 By using Datadog's official Golang library [datadog-go][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
 
 ```go
@@ -61,6 +62,7 @@ func main() {
 {{% /tab %}}
 
 {{% tab "Python" %}}
+
 By using Datadog's official Python library [datadogpy][1], the example below creates a buffered DogStatsD client instance that sends up to 25 metrics in one packet when the block completes:
 
 ```python
@@ -71,10 +73,12 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     batch.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
+
 [1]: https://github.com/DataDog/datadogpy
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
+
 By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
 
 ```ruby
@@ -92,6 +96,7 @@ end
 {{% /tab %}}
 
 {{% tab "Java" %}}
+
 By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
 
 ```java
@@ -114,7 +119,7 @@ public class DogStatsdClient {
 [1]: https://github.com/DataDog/java-dogstatsd-client
 {{% /tab %}}
 {{% tab ".NET" %}}
-By using Datadog's official C# library [dogstatsd-csharp-client][1], the example below:
+By using Datadog's official C# library [dogstatsd-csharp-client][1], the example below creates a DogStatsD client with UDP as transport:
 
 ```csharp
 using StatsdClient;
@@ -136,9 +141,11 @@ public class DogStatsdClient
     }
 }
 ```
+
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{% /tab %}}
 {{% tab "PHP" %}}
+
 By using Datadog's official PHP library [php-datadogstatsd][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
 
 ```php
@@ -146,7 +153,7 @@ By using Datadog's official PHP library [php-datadogstatsd][1], the example belo
 
 require __DIR__ . '/vendor/autoload.php';
 
-use DataDog\BatchedDogStatsd;
+  use DataDog\BatchedDogStatsd;
 
 $client = new BatchedDogStatsd(
   array('host' => '127.0.0.1',
