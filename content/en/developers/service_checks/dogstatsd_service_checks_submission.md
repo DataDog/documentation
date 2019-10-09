@@ -30,7 +30,7 @@ Service check function parameters:
 | Parameter  | Type            | Required | Default Value | Description                                                                                                |
 |------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `Name`     | String          | Yes      | -             | The name of the service check.                                                                             |
-| `Status`   | Float           | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
+| `Status`   | Int           | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
 | `Tags`     | List of strings | No       | -             | A list of tags to associate with the service check.                                                        |
 | `Hostname` | String          | No       | Current host  | The hostname to associate with the service check.                                                          |
 | `Message`  | String          | No       | -             | Additional information or a description of why the status occurred.                                        |

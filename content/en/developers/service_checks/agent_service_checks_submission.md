@@ -19,7 +19,7 @@ Find below the different parameters and data types available for the `service_ch
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
 |------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `name`     | string          | yes      | -             | The name of the service check.                                                                                |
-| `status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
+| `status`   | int           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
 | `hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
 | `message`  | string          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
