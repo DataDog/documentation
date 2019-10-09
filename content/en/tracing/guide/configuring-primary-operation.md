@@ -11,7 +11,7 @@ APM Services calculate trace metrics for errors, throughput, and latency. These 
 
 ## Defining a Primary Operation for a Service
 
-The primary operation name of a service determines how that service is represented in the UI. Datadog backend automatically selects an operation name that is deemed the entry-point into the service based on the throughput of requests.
+The primary operation name of a service determines how that service is represented in the UI. The Datadog backend automatically selects an operation name that is deemed the entry-point into the service based on the throughput of requests.
 
 As an example, a `web-store` service can have multiple endpoints which are instrumented as resources. These resources then share the same primary operation because the entry-point into these resources is consistent. For example, the resources `/user/home` and `/user/new` should both have the same primary operation `web.request`. In different languages a primary operation for a service may look like:
 
@@ -21,13 +21,18 @@ As an example, a `web-store` service can have multiple endpoints which are instr
 | db                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
 
-## Configuring the Primary Operation
+### Configuring the Primary Operation
 
-When there are multiple primary operations defined for a Service, the highest request throughput determines the default. To override this behavior, adjust the span name that is reflected as the entry-point to the service [in-app][2].
+When there are multiple primary operations defined for a service, the highest request throughput determines the operation automatically selected to be the entry-point for the service. An admin user can set this setting manually:
+
+1. Go to the [APM settings page][2].
+2. Select the **Primary Operation Name** tab.
+3. Click on the edit icon for the service that you want to manually set.
+4. Click the **Set Manually** tab.
+5. Select the operation that you want reflected as the entry-point to the service.
+6. Click **Save**.
 
 {{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" responsive="true" >}}
-
-**Note**: You must be an admin user in your Datadog account to  adjust this setting.
 
 ## Viewing Stats for Additional Span Names
 
