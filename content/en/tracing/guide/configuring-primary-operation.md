@@ -25,7 +25,7 @@ As an example, a `web-store` service can have multiple endpoints which are instr
 
 When there are multiple primary operations defined for a Service, the highest request throughput determines the default. To override this behavior, adjust the span name that is reflected as the entry-point to the service [in-app][2].
 
-{{< img src="tracing/guide/primary_operation/configuring-primary.png" alt="APM save" responsive="true" >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" responsive="true" >}}
 
 **Note**: You must be an admin user in your Datadog account to  adjust this setting.
 
