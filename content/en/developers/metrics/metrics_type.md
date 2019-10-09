@@ -48,7 +48,7 @@ They both receive:
 
   * 10 requests for the first 30 seconds, then
   * 20 requests for the next 30 seconds, then
-  * 0 requests for the last 30 seconds
+  * 0 request for the last 30 seconds.
 
 Then the pattern starts again.
 
