@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
-        "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.1.tgz",
+        "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/add-slack/a11y-v1.0.4.tgz",
         "algoliasearch": "3.33.0",
         "bootstrap": ">=4.1.2",
         "del": "4.1.1",
