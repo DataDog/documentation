@@ -45,6 +45,8 @@ The following parameters can be used to configure the library to send logs to Da
 * Use `addLoggerGlobalContext` to add JSON attributes to all generated logs
 * Set `clientToken` to the value of the client token (**only client tokens can be used in this library**)
 
+In order to not miss any logs or errors, you should load and configure the library at the beginning of the head section of your pages.
+
 {{< tabs >}}
 {{% tab "US" %}}
 
