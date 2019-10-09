@@ -29,7 +29,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 * Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
 * Add `context` and extra custom attributes to each log sent.
 * Wrap and forward every JavaScript error automatically.
-* Forward JavaScript console logs.
+* Forward JavaScript errors.
 * Record real client IP addresses and user agents.
 * Optimized network usage with automatic bulk posts.
 
