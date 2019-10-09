@@ -19,8 +19,19 @@ const pa11yConfig = {
 // some html files in dist have weird characters, pa11y fails to read them, must exclude.
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
 const directoryExclusions = [
+  'account_management',
+  'getting_started',
+  'graphing',
   'api',
+  'faq',
   'fr',
+  'synthetics',
+  'security',
+  'tracing',
+  'logs',
+  'monitors',
+  'developers',
+  'agent',
   'en',
   'ja',
   'config',
