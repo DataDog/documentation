@@ -11,8 +11,8 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 
 ### When
 
-* 2nd Wednesday of each month at 10:00 AM Eastern Time.
-* 4th Wednesday of each month at 3:00 PM Eastern Time.
+* 2nd Wednesday of each month at 10:00 AM Eastern Time (New York).
+* 4th Wednesday of each month at 3:00 PM Eastern Time (New York).
 
 ### Guidelines and Caveats
 
@@ -31,6 +31,6 @@ Discover the full list of [Datadog open-source projects at GitHub][5].
 
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
-[3]: https://plus.google.com/hangouts/_/datadoghq.com/dd-officehours
+[3]: https://datadog.zoom.us/j/312430886
 [4]: /help
 [5]: https://github.com/DataDog

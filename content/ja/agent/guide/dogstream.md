@@ -253,4 +253,4 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 [8]: /ja/agent/guide/agent-commands
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /ja/help
-[11]: /ja/agent/#send-a-flare
+[11]: /ja/agent/troubleshooting/send_a_flare

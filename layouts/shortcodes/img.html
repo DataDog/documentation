@@ -1,4 +1,3 @@
-<!-- set popup to true by default -->
 {{- if eq (.Get "popup") "false" -}}
   {{- $.Scratch.Set "popup" "false" -}}
 {{- else -}}
@@ -9,61 +8,34 @@
 {{- $img_height := .Get "height" -}}
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
-
-{{/* set img path based on page type and what is passed */}}
 {{- $local_ref := (.Get "src") -}}
 {{- $hash_ref := $local_ref -}}
-
-{{ $.Scratch.Add "_img" (print "images/" $hash_ref)  }}
-
-{{ $img := $.Scratch.Get "_img" }}
-
+{{- $.Scratch.Add "_img" (print "images/" $hash_ref) -}}
+{{- $img := $.Scratch.Get "_img" -}}
 {{- $image_type_arr := split (.Get "src") "." -}}
-
 {{- $image_ext := index $image_type_arr 1 -}}
-
 {{- if $wide -}}
-
     {{- $.Scratch.Set "imgix_w" "1170" -}}
-
 {{- else -}}
-
     {{- $.Scratch.Set "imgix_w" "850" -}}
-
 {{- end -}}
-
 {{- $imgix_w := $.Scratch.Get "imgix_w" -}}
-
-
 {{- if .Get "img_param" | len -}}
-
   {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
-
 {{- else -}}
-
   {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
-
 {{- end -}}
-
-{{/* override default imgix request params for popup img */}}
-
 {{- if .Get "pop_param" | len -}}
-
   {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
-
 {{- else -}}
-
   {{- if eq $image_ext "gif" -}}
      {{- $.Scratch.Add "pop_param" "?fit=max&fm=gif" -}}
   {{- else -}}
      {{- $.Scratch.Add "pop_param" "?fit=max&auto=format" -}}
   {{- end -}}
-
 {{- end -}}
-
 {{- $img_param := $.Scratch.Get "img_param" -}}
 {{- $pop_param := $.Scratch.Get "pop_param" -}}
-
 {{- $figure_class :=  .Get "figure_class" -}}
 <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
 {{- if $video -}}

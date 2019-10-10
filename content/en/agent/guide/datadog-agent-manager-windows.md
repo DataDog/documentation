@@ -29,7 +29,7 @@ From the Windows start menu:
 
 From an elevated Powershell prompt:
 ```powershell
-& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
 ```
 
 The Datadog Agent Manager launches in your default web browser. The web address is `http://127.0.0.1:5002`.

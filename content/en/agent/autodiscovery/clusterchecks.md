@@ -31,7 +31,26 @@ This feature is currently supported on Kubernetes for versions 6.9.0+ of the Age
 
 ### Cluster Agent setup
 
-This feature requires a running [Cluster Agent with the Cluster Checks feature enabled][3].
+This feature requires a running [Cluster Agent][3].
+
+Then enable the cluster check feature:
+
+Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
+
+1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
+2. Pass your cluster name as `DD_CLUSTER_NAME`. To help you scope your metrics, Datadog injects your cluster name as a `cluster_name` instance tag to all configurations.
+3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
+4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
+
+The following two configuration sources are currently supported. [They are described in the Autodiscovery documentation][4]:
+
+* You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
+* Kubernetes Service annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+
+Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
+
+Refer to [the dedicated Cluster Checks Autodiscovery guide][5] for more configuration and troubleshooting details on this feature.
+
 
 ### Agent setup
 
@@ -51,24 +70,24 @@ config_providers:
     polling: true
 ```
 
-[Restart the Agent][4] to apply the configuration change.
+[Restart the Agent][6] to apply the configuration change.
 
 ### Custom checks
 
-Running [custom Agent Checks][5] as Cluster Checks is supported, as long as all node-based Agents are able to run it. This means your Checks' code:
+Running [custom Agent checks][7] as cluster checks is supported, as long as all node-based Agents are able to run it. This means your checks' code:
 
-- must be installed on all node-based Agents where the `clusterchecks` config provider is enabled
-- must not depend on local resources that are not accessible to all agents
+- Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
+- Must **not** depend on local resources that are not accessible to all Agents.
 
-## Setting up Check Configurations
+## Setting up check configurations
 
 ### Static configurations in files
 
 When the IP of a given resource is constant (eg. external service endpoint, public URL...), a static configuration can be passed to the Cluster Agent as yaml files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
 
-#### Example: MySQL check on CloudSQL database
+#### Example: MySQL check on a CloudSQL database
 
-After setting up the CloudSQL instance and [datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
+After setting up a CloudSQL instance and a [Datadog user][8], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -80,11 +99,11 @@ instances:
     pass: '<YOUR_CHOSEN_PASSWORD>'
 ```
 
-The `cluster_check` field will inform the Cluster Agent to delegate this Check to one node-based Agent.
+The `cluster_check` field informs the Cluster Agent to delegate this check to one node-based Agent.
 
 ### Template Source: Kubernetes Service Annotations
 
-Similar to [annotating Kubernetes Pods][7], Services can be annotated with the following syntax:
+You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][9]:
 
 ```yaml
   ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
@@ -92,11 +111,11 @@ Similar to [annotating Kubernetes Pods][7], Services can be annotated with the f
   ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][8] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+The `%%host%%` [template variable][10] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an nginx-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][9] to measure the latency of the load-balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][11] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -124,15 +143,15 @@ spec:
     run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
-Due to their distributed nature, troubleshooting Cluster Checks is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
+Due to the distributed nature of Cluster Checks, troubleshooting them is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
 
 ### Kubernetes: find the leader Cluster Agent
 
-When leader-election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
+When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
 
 ```
 # kubectl get cm datadog-leader-election -o yaml
@@ -147,7 +166,7 @@ In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unres
 
 ### Autodiscovery in the Cluster Agent
 
-To ensure a configuration (static or autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
+To ensure a configuration (static or Autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
@@ -171,10 +190,10 @@ Auto-discovery IDs:
 
 ### Dispatching logic in the Cluster Agent
 
-The `clusterchecks` command allows to inspect the state of the dispatching logic, including:
+The `clusterchecks` command allows you to inspect the state of the dispatching logic, including:
 
 - which node-based Agents are actively reporting to the Cluster Agent
-- which Checks are dispatched on each node
+- which checks are dispatched on each node
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
@@ -233,7 +252,7 @@ Init Config:
 ===
 ```
 
-The Instance ID matches the one we had earlier.
+The Instance ID matches the one you had earlier.
 
 ### Agent status
 
@@ -259,10 +278,12 @@ The Agent `status` command should show the check instance running and reporting 
 [1]: /agent/autodiscovery
 [2]: /agent/kubernetes/cluster
 [3]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[4]: /agent/guide/agent-commands
-[5]: /developers/write_agent_check
-[6]: /integrations/mysql
-[7]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[8]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
-[9]: /integrations/http_check
-[10]: /integrations/nginx
+[4]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[5]: /agent/autodiscovery/clusterchecks
+[6]: /agent/guide/agent-commands
+[7]: /developers/write_agent_check
+[8]: /integrations/mysql
+[9]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[10]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[11]: /integrations/http_check
+[12]: /integrations/nginx

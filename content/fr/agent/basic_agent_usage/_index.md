@@ -104,24 +104,11 @@ Il est recommandé de prévoir 1024 descripteurs de fichiers ouverts. Vous pouve
 minfds = 100  # Votre limite stricte
 ```
 
-### Le Collector
-Le Collector recueille la totalité des métriques standard toutes les 15 secondes. Il prend également en charge l'exécution de checks basés sur Python, fournis par l'utilisateur et stockés dans `/etc/dd-agent/checks.d`. Les checks fournis par l'utilisateur doivent hériter de la classe abstraite AgentCheck définie dans `checks/init.py`. Consultez la section [Écrire un check custom d'Agent][6] pour en savoir plus.
-
-### Le Forwarder
-Le redirecteur de l'Agent écoute les requêtes entrantes via HTTP pour envoyer à Datadog des métriques au format HTTPS. La mise en mémoire tampon empêche les divisions de réseau d'avoir un impact sur la transmission de métriques. Elles sont mises en mémoire tampon jusqu'à atteindre une certaine limite de taille ou de nombre de demandes en attente à envoyer. Les métriques les plus anciennes sont alors supprimées pour que l'empreinte de la mémoire du redirecteur reste gérable.
-
-### DogStatsD
-DogStatsD est une implémentation Python du daemon d'agrégation des métriques [StatsD d'Etsy][7]. Il est utilisé pour recevoir et déployer des métriques arbitraires via le protocole UDP, ce qui permet d'instrumenter du code personnalisé sans que l'ensemble du code souffre de latence. En savoir plus sur [DogStatsD][8].
-
-
 [1]: /fr/integrations
 [2]: /fr/developers/metrics/custom_metrics
 [3]: /fr/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /fr/agent/proxy/?tab=agentv5
 [5]: /fr/agent/faq/network
-[6]: /fr/developers/write_agent_check/?tab=agentv5
-[7]: https://github.com/etsy/statsd
-[8]: /fr/developers/dogstatsd
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -164,7 +151,7 @@ Certaines options disposent de leur propre ensemble de flags et d'options détai
 ## Interface graphique
 
 Vous pouvez configurer le port sur lequel l'interface graphique exécute le fichier `datadog.yaml`. Pour désactiver l'interface graphique, définissez la valeur du port sur `-1`.
-Pour Windows et macOS, l'interface graphique est activée par défaut et s'exécute sur le port `5002`. Pour Linux, l'interface graphique est désactivée par défaut.
+Sous Windows et macOS, l'interface graphique est activée par défaut et s'exécute sur le port `5002`. Sous Linux, l'interface graphique est désactivée par défaut.
 
 Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent launch-gui` pour ouvrir l'interface graphique dans votre navigateur web par défaut.
 
@@ -186,15 +173,15 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | Système d'exploitation                                | Versions prises en charge                                |
 |-----------------------------------|---------------------------------------------------|
 | [Amazon][1]                       | Amazon Linux 2                                    |
-| [Debian x86_64][2]                | Debian 7 (wheezy) et versions ultérieures, et SysVinit avec l'Agent 6.6.0 et versions ultérieures)  |
+| [Debian x86_64][2]                | Debian 7 (wheezy) et versions ultérieures, et SysVinit avec l'Agent 6.6.0 et versions ultérieures  |
 | [Ubuntu x86_64][3]                | Ubuntu 14.04 et versions ultérieures                                     |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6 et versions ultérieures                                  |
 | [Docker][5]                       | 1.12 et versions ultérieures                                     |
 | [Kubernetes][6]                   | 1.3 et versions ultérieures                                      |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 et versions ultérieures (non SysVinit)                       |
+| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 et versions ultérieures (SysVinit non pris en charge)                       |
 | [Fedora x86_64][8]                | Fedora 26 et versions ultérieures                                        |
 | [macOS][9]                        | macOS 10.12 et versions ultérieures                                      |
-| [Windows server 64 bits][10]       | Windows Server 2008r2 et versions ultérieures, et Server Core (non Nano) |
+| [Windows server 64 bits][10]       | Windows Server 2008r2 et versions ultérieures, et Server Core (Nano non pris en charge) |
 | [Windows 64 bits][10]              | Windows 7 et versions ultérieures                                        |
 
 **Remarque** : l'installation de la [source][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
@@ -244,9 +231,9 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 {{% /tab %}}
 {{% tab "Agent Unix" %}}
 
-| Système d'exploitation                                | Versions prises en charge                        |
-|-----------------------------------|-------------------------------------------|
-| [AIX][1]                          | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
+| Système d'exploitation       | Versions prises en charge                        |
+|----------|-------------------------------------------|
+| [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
 
 
@@ -254,7 +241,7 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 {{% /tab %}}
 {{< /tabs >}}
 
-## Traitement de l'Agent
+## Charge système de l'Agent
 
 Vous trouverez ci-dessous un exemple de la consommation en ressources de l'Agent Datadog. Des tests ont été effectués sur une instance `c5.xlarge` de machine EC2 AWS (4 VCPU/8 Go de RAM). Le `datadog-agent` de base s'exécutait avec un check de processus pour surveiller l'Agent. La consommation de ressources de l'Agent peut augmenter avec davantage d'intégrations.
 L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le nombre de beans exposés par les JVM surveillés. L'activation des Agents de trace et de processus augmente également la consommation de ressources.
@@ -262,33 +249,33 @@ L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-* Version test de l'Agent : 6.7.0
+* Version de l'Agent testé : 6.7.0
 * Processeur : ~ 0,12 % du processeur utilisé en moyenne
 * Mémoire : ~ 60 Mo de RAM utilisés (mémoire RSS)
 * Débit du réseau : ~ 86 B/s ▼ | 260 B/s ▲
 * Disque :
-  * Linux 350 Mo à 400 Mo selon la distribution
+  * Linux : 350 Mo à 400 Mo selon la distribution
   * Windows : 260 Mo
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-* Version test de l'Agent : 5.24.0
+* Version de l'Agent testé : 5.24.0
 * Processeur : ~ 0,35 % du processeur utilisé en moyenne
-* Mémoire : ~ 115 Mo de RAM utilisés.
-* Débit du réseau : ~ 1 900 B/s ▼ | 800 B/s ▲
+* Mémoire : ~ 115 Mo de RAM utilisés
+* Bande passante réseau : ~ 1 900 B/s ▼ | 800 B/s ▲
 * Disque :
-  * Linux 312 Mo
+  * Linux : 312 Mo
   * Windows : 295 Mo
 
-**Remarque** : depuis la v5.15 de l'Agent de conteneur, nous vous recommandons de définir les ressources du conteneur sur 256 Mo minimum suite à l'ajout de cache en mémoire. L'augmentation de la limite n'a pas pour but de revoir à la hausse l'utilisation habituelle, mais plutôt de s'adapter aux pics temporaires. La version 6 de l'Agent dispose d'une empreinte mémoire beaucoup plus limitée.
+**Remarque** : depuis la v5.15 de l'Agent de conteneur, nous vous conseillons d'allouer au moins 256 Mo de mémoire au conteneur en raison d'un cache plus large. L'augmentation de la limite n'a pas pour but de revoir à la hausse la charge habituelle, mais plutôt de s'adapter aux pics temporaires. La version 6 de l'Agent dispose d'une empreinte mémoire beaucoup plus limitée.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Outils de gestion de configuration
 
-Gérez l'Agent Datadog et les [intégrations][1] grâce aux outils de gestion de configurations :
+Gérez l'Agent Datadog et les [intégrations][1] grâce aux outils de gestion des configurations :
 
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
@@ -329,11 +316,11 @@ Gérez l'Agent Datadog et les [intégrations][1] grâce aux outils de gestion de
 
 ## Concepts avancés de l'Agent Datadog
 
-### Mettez à jour l'Agent
+### Mise à jour de l'Agent
 
-Pour mettre à jour manuellement le core de l'Agent Datadog entre deux versions mineures sur un host donné, exécutez la [commande d'installation correspondante pour votre plateforme][2].
+Pour mettre à jour manuellement les composants principaux de l'Agent Datadog vers une version mineure sur un host donné, exécutez la [commande d'installation correspondant à votre plateforme][2].
 
-Remarque : si vous souhaitez mettre à jour manuellement l'intégration d'un Agent spécifique, consultez le [guide de gestion des intégrations][3].
+Remarque : si vous souhaitez mettre à jour manuellement l'intégration d'un Agent, consultez le [guide de gestion des intégrations][3].
 
 ### Fichiers de configuration
 
@@ -341,7 +328,7 @@ Remarque : si vous souhaitez mettre à jour manuellement l'intégration d'un Ag
 
 ### Site de Datadog
 
-Pour envoyer vos données de l'Agent au [site Datadog Europe][5], modifiez le [principal fichier de configuration de l'Agent][6] `datadog.yaml` et définissez le paramètre `site` sur :
+Pour envoyer les données de votre Agent vers le [site européen de Datadog][5], modifiez le [principal fichier de configuration de l'Agent][6] `datadog.yaml` et définissez le paramètre `site` sur :
 
 `site: datadoghq.eu`
 

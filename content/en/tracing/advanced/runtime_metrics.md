@@ -1,7 +1,6 @@
 ---
 title: Runtime Metrics
 kind: documentation
-beta: true
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"

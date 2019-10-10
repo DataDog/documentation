@@ -73,6 +73,23 @@ To edit an individual SLO, hover over it and use the buttons to the far right in
 
 You can add tags directly to your SLOs for filtering on the [list SLOs][4] pages.
 
+### Overall Uptime Calculation
+
+{{< img src="monitors/slo/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
+
+The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
+
+If at time `T_x` the state of all monitors `[m0, ..., m_n]` are all in `OK` state, then the overall uptime for time `T_x` will be the `OK` state. However, if any number of monitors at time `T_x` have state `ALERT`, then the overall uptime for time `T_x` will be the `ALERT` state.
+
+Consider the following example:
+
+| Monitor            | t0 | t1 | t2    | t3 | t4    | t5 | t6 | t7 | t8 | t9 | t10   |
+|--------------------|----|----|-------|----|-------|----|----|----|----|----|-------|
+| m0                 | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| m1                 | OK | OK | OK    | OK | OK    | OK | OK | OK | OK | OK | ALERT |
+| m2                 | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+| **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+
 ## View your SLOs
 
 You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][4].

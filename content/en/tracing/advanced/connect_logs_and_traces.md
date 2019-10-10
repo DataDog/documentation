@@ -32,13 +32,13 @@ Your language level logs *must* be turned into Datadog attributes in order for t
 
 Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
-**Note**: Only `slf4j` and `log4j` are supported for MDC autoinjection.
-
-If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
+If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
+
+If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
 [1]: /tracing/setup/java/#configuration
 {{% /tab %}}
@@ -149,30 +149,34 @@ var tracer = new Tracer(settings);
 
 
 ```php
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-$append = sprintf(
-    ' [dd.trace_id=%d dd.span_id=%d]',
-    $span->getTraceId(),
-    $span->getSpanId()
-);
-my_error_logger('Error message.' . $append);
+  <?php
+  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+  $append = sprintf(
+      ' [dd.trace_id=%d dd.span_id=%d]',
+      $span->getTraceId(),
+      $span->getSpanId()
+  );
+  my_error_logger('Error message.' . $append);
+?>
 ```
 
 If the logger implements the [**monolog/monolog** library][1], use `Logger::pushProcessor()` to automatically append the identifiers to all the log messages:
 
 ```php
-$logger->pushProcessor(function ($record) {
-    $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-    if (null === $span) {
-        return $record;
-    }
-    $record['message'] .= sprintf(
-        ' [dd.trace_id=%d dd.span_id=%d]',
-        $span->getTraceId(),
-        $span->getSpanId()
-    );
-    return $record;
-});
+<?php
+  $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
+      $record['message'] .= sprintf(
+          ' [dd.trace_id=%d dd.span_id=%d]',
+          $span->getTraceId(),
+          $span->getSpanId()
+      );
+      return $record;
+  });
+?>
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].

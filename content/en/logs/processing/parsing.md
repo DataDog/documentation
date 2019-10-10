@@ -31,7 +31,7 @@ Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
 * **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace,...)
 
-* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the MATCHER.
+* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the *Matcher*.
 
 * **Filter** (optional): a post-processor of the match to transform it
 
@@ -49,7 +49,9 @@ You would have at the end this structured log:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
-**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+**Note**:
+- If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+- You must have unique rules names within the same Grok parser.
 
 ### Matcher and Filter
 
@@ -68,11 +70,11 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).       |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
-| `numberExtStr`                                  | Matches a floating point number (with scientific notation support).                                                                |
+| `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
 | `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
 | `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
-| `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
+| `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
 | `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
@@ -164,11 +166,23 @@ Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
-This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` where:
+This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
 * `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
-* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For example `<>` matches *test=<toto sda> test2=test*.
+* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `test=@testStr`).
+* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). 
+  * When defined, the default behavior is replaced by allowing only defined quoting char.
+  * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
+  * Any string defined within the quoting chars is extracted as a value.
+    
+    For example, input: `test:=testStr test:=</$%@testStr2> test:="testStr3"`, parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, output: `{
+    "test": [
+      "testStr",
+      "/$%@testStr2"
+    ]
+  }`
+
+**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `test:=testStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -231,8 +245,8 @@ Other examples:
 | key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
+| key:=valueStr           | `%{data::keyvalue(":=")}`           | {"key": "valueStr"}            |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
-| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
 
 ### Parsing dates
 
@@ -241,6 +255,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | **Raw string**                           | **Parsing rule**                                          | **Result**              |
 | :---                                     | :----                                                     | :----                   |
 | 14:20:15                                 | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
+| 02:20:15 PM                              | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
 | 11/10/2014                               | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
 | Thu Jun 16 08:29:03 2016                 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
 | Tue Nov 1 08:29:03 2016                  | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
@@ -257,7 +272,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 
 ### Conditional pattern
 
-You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `|`.
+You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `(<REGEX_1>|<REGEX_2>)`.
 
 **Log**:
 ```

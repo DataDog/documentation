@@ -104,7 +104,7 @@ Agent のすべての機能を利用するには、以下のポートを開き�
 [2]: /ja/logs
 [3]: /ja/agent/basic_agent_usage/kubernetes
 [4]: /ja/integrations/go_expvar
-[5]: /ja/agent/#using-the-gui
+[5]: /ja/agent/basic_agent_usage/?tab=agentv6#gui
 [6]: /ja/tracing
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}

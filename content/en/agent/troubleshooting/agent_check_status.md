@@ -62,13 +62,13 @@ Run the following script, with the proper `<CHECK_NAME>`:
 For Agent versions >= 6.12:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
+%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
 ```
 
 For Agent versions <= 6.11:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
+%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
 {{% /tab %}}

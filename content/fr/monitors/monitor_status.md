@@ -87,7 +87,7 @@ Tous les événements générés par votre monitor sont rassemblés dans cette s
 
 [1]: /fr/monitors/monitor_types
 [2]: /fr/monitors/downtimes
-[3]: /fr/monitors/#export-your-monitor
+[3]: /fr/monitors/monitor_types/#import
 [4]: /fr/api/?lang=python#monitors
 [5]: /fr/graphing/functions
 [6]: /fr/videos/datadog101-5-aggregation/?wtime=49s

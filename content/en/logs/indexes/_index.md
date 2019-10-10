@@ -29,9 +29,9 @@ You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashbo
 
 ## Exclusion Filters
 
-Index filters give dynamic control over what goes into your indexes.
+Index filters give dynamic control over what goes into your indexes. When set up, logs sampling is uniformly random, meaning the sampling has no impact on relative importance of each log. For example, if some logs were captured only for troubleshooting purposes, you may only want to index a given percentage of those logs with errors and warnings.
 
-For example, if some logs were captured only for troubleshooting purposes, you may only want to index those logs with errors and warnings. This can easily be achieved with exclusion filters.
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 To define a new index filter, click on the "add" button:
 
@@ -46,8 +46,6 @@ To configure an exclusion filter:
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
-
-**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 ### Reorder filters
 
