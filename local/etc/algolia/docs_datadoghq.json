@@ -159,7 +159,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -176,7 +176,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr",
+      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -191,7 +191,7 @@
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td, code-tabs table tbody tr td",
+      "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -208,7 +208,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
