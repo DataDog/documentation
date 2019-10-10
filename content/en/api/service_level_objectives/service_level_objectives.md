@@ -11,7 +11,7 @@ framework for defining clear targets around application performance, which ultim
 customer experience, balance feature development with platform stability, and improve communication with internal and 
 external users. 
 
-Refer to the [Creating Service Level Objectives page][2] for more information on creating SLOs.
+For more information on creating SLOs, see the [Configuring Service Level Objectives info][2].
 
-[1]: /service_level_objectives
-[2]: /service_level_objectives/slo_types
+[1]: /monitors/service_level_objectives
+[2]: /monitors/service_level_objectives/#configuration

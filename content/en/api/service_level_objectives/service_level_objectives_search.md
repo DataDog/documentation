@@ -7,7 +7,7 @@ external_redirect: /api/#search-service-level-objectives
 
 ## Search Service Level Objectives
 
-Search and filter your service level objectives details.
+Search and filter your service level objectives.
 
 **ARGUMENTS**:
 
@@ -17,7 +17,7 @@ Search and filter your service level objectives details.
 
 * **`query`** [*optional*]:
 
-    After entering a search query in your [List Service Level Objectives page][1] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [list service level objectives documentation][2] page to learn more.
+    After entering a search query in your [List Service Level Objectives page][1], use the query parameter value in the URL of the page as value for this parameter. For more information on building a query, see [Searching SLOs][2].
 
     The query can contain any number of space-separated monitor attributes, for instance `query="type:metric foo"`.
 
@@ -32,4 +32,4 @@ Search and filter your service level objectives details.
 
 
 [1]: https://app.datadoghq.com/slo
-[2]: /service_level_objectives/list_slo
+[2]: /monitors/service_level_objectives/#searching-slos

@@ -31,6 +31,7 @@ external_redirect: /api/#edit-a-service-level-objective
 
 #### Monitor Based SLO
 
+For more information, see [Monitor SLOs][1].
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
     Specify up to 20 monitor IDs directly for a monitor-based SLO. You can optionally on-create-dynamically select
     monitor IDs using the following option instead:
@@ -40,12 +41,14 @@ external_redirect: /api/#edit-a-service-level-objective
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 
-##### Metric Based SLO    
+##### Event Based SLO    
 * **`query`** [*required*]:
-    The query defines the metric-based SLO query. It requires two arguments:
+    The query defines the event-based SLO query. For more information, see [Event SLOs][2]. It requires two arguments:
     
     * **`numerator`** [*required*]:
-        Defines the sum of the `good` events
+        Defines the sum of the `good` events.
     * **`denominator`** [*required*]:
         Defines the sum of the `total` events. **Note: this should always be >= `good` events**
 
+[1]: /monitors/service_level_objectives/monitor
+[2]: /monitors/service_level_objectives/event

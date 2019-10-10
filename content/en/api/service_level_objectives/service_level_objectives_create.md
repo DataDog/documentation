@@ -12,12 +12,12 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 **ARGUMENTS**:
 
 * **`type`** [*required*]:
-    The [type of the SLO][2], chosen from:
+    The type of the SLO, chosen from:
 
 | SLO Type     | type attribute value             |
 |:-------------|:---------------------------------|
-| metric       | `metric`                         |
-| monitor      | `monitor`                        |
+| [event][2]       | `metric`                         |
+| [monitor][3]      | `monitor`                        |
 
 * **`name`** [*required*, *default* = **dynamic, based on query**]:
     The name of the SLO.
@@ -41,6 +41,8 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 
 ##### Monitor Based SLO
 
+For more information, see [Monitor SLOs][3].
+
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
     Specify up to 20 monitor IDs directly for a monitor-based SLO. You can optionally on-create-dynamically select
     monitor IDs using the following option instead:
@@ -52,7 +54,7 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 
 ##### Metric Based SLO    
 * **`query`** [*required*]:
-    The query defines the metric-based SLO query. It requires two arguments:
+    The query defines the metric-based SLO query. For more information, see [Event SLOs][2]. It requires two arguments:
     
     * **`numerator`** [*required*]:
         Defines the sum of the `good` events
@@ -61,4 +63,5 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 
 
 [1]: /service_level_objectives/#export-your-service-level-objective
-[2]: /service_level_objectives/slo_types
+[2]: /monitors/service_level_objectives/event
+[3]: /monitors/service_level_objectives/monitor
