@@ -249,7 +249,7 @@ Other examples:
 
 ### Parsing dates
 
-The date matcher transforms your timestamp in the EPOCH format.
+The date matcher transforms your timestamp in the EPOCH format (unit of measure **millisecond**).
 
 | **Raw string**                           | **Parsing rule**                                          | **Result**              |
 | :---                                     | :----                                                     | :----                   |
