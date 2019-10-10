@@ -175,7 +175,7 @@ This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList
   * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
   * Any string defined within the quoting chars is extracted as a value.
     
-    For example, given in input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output: `{
+    For example, input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output: `{
     "key": [
       "valueStr",
       "/$%@valueStr2"
