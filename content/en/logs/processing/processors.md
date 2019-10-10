@@ -470,6 +470,9 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
+* If you need to scale a unit of measure, see [Scale Filter][6].
+
+[6]:/logs/processing/parsing/?tab=filter#regex
 
 {{< tabs >}}
 {{% tab "UI" %}}
