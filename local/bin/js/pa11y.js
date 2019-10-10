@@ -19,19 +19,8 @@ const pa11yConfig = {
 // some html files in dist have weird characters, pa11y fails to read them, must exclude.
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
 const directoryExclusions = [
-  'account_management',
-  'getting_started',
-  'graphing',
   'api',
-  'faq',
   'fr',
-  'synthetics',
-  'security',
-  'tracing',
-  'logs',
-  'monitors',
-  'developers',
-  'agent',
   'en',
   'ja',
   'config',
@@ -67,7 +56,7 @@ const options = {
   outputFileName: 'docs-pa11y-output',
   outputFileType: 'csv', // csv or json
   metricName: 'docs.pa11y.num_errors', // metric name
-  slackChannel: ['#pa11y-test', '#guac-ops']
+  slackChannel: ['#documentation-ci', '#guac-ops']
 };
 
 runPa11y(options);
