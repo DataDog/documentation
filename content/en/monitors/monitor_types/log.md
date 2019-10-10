@@ -39,39 +39,32 @@ As you define the search query, the graph above the search fields updates.
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
 
+#### No data and below alerts
+
+To receive a notification if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query in the given timeframe. 
+
+When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
+
+**Examples**:
+
+* This monitor triggers if and only if there are no logs for all services:
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:60%;" >}}
+* This monitor triggers if there are no logs for the service `backend`:
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
+
 ### Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
 #### Log samples
 
-By default, a table of up to 10 samples of logs that triggered the monitor is added to the notification message.
-This is available for Slack, Jira, Webhook, Microsoft Teams, and email notifications. **Note**: Samples are not displayed for recovery notifications.
+By default, up to 10 log samples that triggered the monitor is added to the notification message.
+This is available for Slack, Jira, Webhook, Microsoft Teams, and Email notifications. Notifications from monitors split by group include the top 10 breaching values instead of log samples. **Note**: Samples are not displayed for recovery notifications.
 
-Notifications from monitors split by group may include the list of the top 10 of breaching values instead of 10 log samples.
+To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping:
 
-To disable log samples, uncheck the box next to `Include a table of the top 10 breaching values` at the bottom of the **Say what's happening** section.
-
-##### Examples
-
-Ungrouped:
-{{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
-
-Grouped:
-{{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
-
-## No Data alerts and Below Conditions  
-
-To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe. 
-
-However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.  
-
-Examples:  
-
-1. The following monitor triggers if and only if there are no logs for all of the services:  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:50%;" >}}
-2. The following monitor triggers if there are no logs for the service `backend`:  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:50%;" >}}
+* Ungrouped: `Include a sample of 10 logs in the alert notification`
+* Grouped: `Include a table of the top 10 breaching values`
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
