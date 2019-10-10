@@ -7,7 +7,7 @@ kind: faq
 
 Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
 
-Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing. 
+Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing.
 
 ### Metric exclusion
 
@@ -15,7 +15,7 @@ Use the [Google Cloud integration tile][1] to control your metric collection. Go
 
 {{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" responsive="true">}}
 
-When adding limits to existing Google Cloud projects within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 24 hours. During the transition period, GCE instances display a status of `???`. This does not count towards your billing.
+When adding limits to existing Google Cloud projects within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 2 hours. During the transition period, GCE instances display a status of `???`. This does not count towards your billing.
 
 Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to GCE instances without a running Agent.
 

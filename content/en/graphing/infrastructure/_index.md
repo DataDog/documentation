@@ -22,7 +22,7 @@ The Infrastructure list page shows all hosts monitored by your Datadog applicati
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" >}}
 
-Note: A host that has not sent data in 24 hours disappears from the infrastructure list; you can still query against it, but it won't appear in drop downs.
+Note: A host that has not sent data in 2 hours disappears from the infrastructure list; you can still query against it, but it won't appear in drop downs.
 
 ## Host details
 
@@ -69,15 +69,15 @@ the current rule fails and passes through to the next.
 **Note**: If an EC2 instance is an ECS host, Datadog uses the `instance-id` as the hostname, [even if the DNS hostname isn't an EC2 default][2]. If you don't wish to use the `instance-id`, set the hostname in the Agent configuration file.
 
 <div class="alert alert-warning">
-Hostnames should be unique within a Datadog account.<br> 
+Hostnames should be unique within a Datadog account.<br>
 Otherwise you may experience some inconsistencies on your host metric graphs.
 </div>
 
 ### Host Aliases
 
-A single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).  
+A single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
 
-Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent (detailed [above](#agent-host-names)) are added as aliases for the chosen canonical name.  
+Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent (detailed [above](#agent-host-names)) are added as aliases for the chosen canonical name.
 
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
@@ -86,13 +86,13 @@ in Datadog. From the Inspect panel, you can see (among other things) the list of
 
 ### Export your infrastructure list and Agent versions
 
-If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List. 
+If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List.
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" style="width:80%;">}}
 
-Clicking this link provides you with a JSON formatted list of all your hosts.  
+Clicking this link provides you with a JSON formatted list of all your hosts.
 
-At times it may also be prove useful to audit your current Agent version numbers to ensure you are running the latest version of the Agent or to update them following a new release.  
+At times it may also be prove useful to audit your current Agent version numbers to ensure you are running the latest version of the Agent or to update them following a new release.
 
 An easy way to accomplish this would be to use the following script that leverages the JSON permalink:
 
