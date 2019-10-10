@@ -1,7 +1,7 @@
 ---
-title: Erreurs de test d'API
+title: Erreurs de test API
 kind: documentation
-description: Description détaillée des erreurs de test d'API
+description: Description détaillée des erreurs de test API
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: Blog
@@ -11,12 +11,12 @@ further_reading:
   text: Gérer vos checks
 - link: synthetics/browser_tests
   tag: Documentation
-  text: Configurer un test navigateur
+  text: Configurer un test Browser
 ---
 
 ## Erreurs SSL
 
-Les erreurs SSL peuvent se produire durant l'exécution d'un test d'API. Elles diffèrent des échecs d'assertion associées aux tests SSL et peuvent survenir lors de n'importe quel type de test d'API.
+Les erreurs SSL peuvent se produire durant l'exécution d'un test API. Elles diffèrent des échecs d'assertion associées aux tests SSL et peuvent survenir lors de n'importe quel type de test API.
 
 {{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="Erreur SSL auto-signé" responsive="true" style="width:60%;" >}}
 

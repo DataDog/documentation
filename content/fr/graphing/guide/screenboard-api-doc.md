@@ -25,7 +25,7 @@ L'endpoint Screenboard vous permet de programmer la création, la mise à jour, 
 * **`widgets`** [*obligatoire*] :
     la liste des définitions de widget. Pour obtenir une définition de widget, utilisez l'*onglet JSON* dans l'IU de configuration de widget.
 * **`template_variables`** [*facultatif*, *défaut*=**None**] :
-    la liste des Template Variables utilisables pour la création de modèles de dashboard.
+    la liste des template variables utilisables pour la création de modèles de dashboard.
 * **`read_only`** [*facultatif*, *défaut*=**False**] :
     indique si le screenboard est en lecture seule ou non.
 
@@ -142,7 +142,7 @@ curl -X POST -H "Content-type: application/json" \
 * **`widgets`** [*obligatoire*] :
     la liste des définitions de widget. Pour obtenir une définition de widget, utilisez l'*onglet JSON* dans l'IU de configuration de widget.
 * **`template_variables`** [*facultatif*, *défaut*=**None**] :
-    la liste des Template Variables utilisables pour la création de modèles de dashboard.
+    la liste des template variables utilisables pour la création de modèles de dashboard.
 * **`width`** [*facultatif*, *défaut*=**None**] :
     largeur du screenboard en pixels.
 * **`height`** [*facultatif*, *défaut*=**None**] :

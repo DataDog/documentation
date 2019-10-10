@@ -21,7 +21,7 @@ L'intégration d'APM avec Synthetics vous permet de passer d'un test qui a éven
 En ayant à votre disposition les détails associés au réseau (grâce à votre test), ainsi qu'un backend, une infrastructure et des informations de journalisation (grâce à votre trace), vous pouvez accéder à un niveau de détails supérieur en ce qui concerne le comportement de votre application, tel que constaté par votre utilisateur.
 
 ## Utilisation
-Les déclarations sur cette page s'appliquent [aux tests d'API][1] et aux [tests de navigateur][2] pour l'APM, sauf indication contraire.
+Les déclarations sur cette page s'appliquent [aux tests API][1] et aux [tests Browser][2] pour l'APM, sauf indication contraire.
 
 ### Prérequis
 
@@ -31,7 +31,7 @@ Les déclarations sur cette page s'appliquent [aux tests d'API][1] et aux [tests
 
 Créez un test qui s'applique à votre serveur HTTP soumis à un tracing, et Datadog associe automatiquement la trace générée par votre serveur au résultat de check correspondant.
 
-Pour associer des résultats de test de navigateur, ajoutez à la liste blanche les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Utilisez `*` pour les caractères génériques :
+Pour associer des résultats de test Browser, ajoutez à la liste blanche les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Utilisez `*` pour les caractères génériques :
 ```text
 https://*.datadoghq.com/*
 ```
