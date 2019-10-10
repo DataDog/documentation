@@ -472,7 +472,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 * If you need to scale a unit of measure, see [Scale Filter][6].
 
-[6]:/logs/processing/parsing/?tab=filter#regex
+[6]:/logs/processing/parsing/?tab=filter#scale
 
 {{< tabs >}}
 {{% tab "UI" %}}
