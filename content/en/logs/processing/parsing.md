@@ -169,20 +169,20 @@ Find below some examples demonstrating how to use parsers:
 This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
 * `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `test=@testStr`).
+* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `key=@valueStr`).
 * `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). 
   * When defined, the default behavior is replaced by allowing only defined quoting char.
   * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
   * Any string defined within the quoting chars is extracted as a value.
     
-    For example, input: `test:=testStr test:=</$%@testStr2> test:="testStr3"`, parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, output: `{
-    "test": [
-      "testStr",
-      "/$%@testStr2"
+    For example, given in input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output: `{
+    "key": [
+      "valueStr",
+      "/$%@valueStr2"
     ]
   }`
 
-**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `test:=testStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -245,7 +245,6 @@ Other examples:
 | key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
-| key:=valueStr           | `%{data::keyvalue(":=")}`           | {"key": "valueStr"}            |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 
 ### Parsing dates
