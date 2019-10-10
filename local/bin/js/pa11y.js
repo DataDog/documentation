@@ -67,7 +67,7 @@ const options = {
   outputFileName: 'docs-pa11y-output',
   outputFileType: 'csv', // csv or json
   metricName: 'docs.pa11y.num_errors', // metric name
-  slackChannel: '#pa11y-test'
+  slackChannel: ['#pa11y-test', '#guac-ops']
 };
 
 runPa11y(options);
