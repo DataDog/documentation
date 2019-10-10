@@ -27,7 +27,7 @@ Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and 
 
 You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
 
-{{< img src="monitors/slo/create-slo.png" alt="create a slo" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/create-slo.png" alt="create a slo" responsive="true" >}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ You can also track success rate and event-based SLIs (Service Level Indicators).
 
 Once you have monitors set up, on the [main Service Level Objectives page][1], you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="monitors/slo/slo-overview.png" alt="slo main page" responsive="true" >}}
+{{< img src="monitors/service_level_objectives//slo-overview.png" alt="slo main page" responsive="true" >}}
 
 ## Edit an SLO
 
@@ -75,7 +75,7 @@ You can add tags directly to your SLOs for filtering on the [list SLOs][4] pages
 
 ### Overall Uptime Calculation
 
-{{< img src="monitors/slo/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
 
 The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
 
@@ -92,22 +92,18 @@ Consider the following example:
 
 ## View your SLOs
 
-You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][4].
+You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][2].
 
 {{< img src="service_level_objectives/slo_status/status_slo_history.mp4" alt="status slo history" video="true" responsive="true" width="80%" >}}
 
 ## SLO Widgets
 
-After creating your SLO, you can use the SLO dashboard widget to visualize the status of your SLOs along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][7] page.
+After creating your SLO, you can use the SLO dashboard widget to visualize the status of your SLOs along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][3] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo/new
-[2]: /api/#servicelevelobjectives
-[3]: /developers/libraries/#managing-service-level-objectives
-[4]: https://app.datadoghq.com/slo
-[5]: /monitors/service_level_objectives/monitor/
-[6]: /monitors/service_level_objectives/event/
-[7]: /graphing/widgets/slo/
+[2]: https://app.datadoghq.com/slo
+[3]: /graphing/widgets/slo
