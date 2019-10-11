@@ -41,7 +41,7 @@ Les identifiants sécurisés sont une association sécurisée de noms d'utilisat
 
 ### Localisations par défaut
 
-Sélectionnez les localisations par défaut des informations de tests d'API et Browser. Les options comprennent toutes les localisations gérées disponibles proposées par Datadog et les localisations privées que vous avez configurées pour votre compte.
+Sélectionnez les localisations par défaut des informations de tests API et Browser. Les options comprennent toutes les localisations gérées disponibles proposées par Datadog et les localisations privées que vous avez configurées pour votre compte.
 
 ### Intégration APM pour les tests Browser
 

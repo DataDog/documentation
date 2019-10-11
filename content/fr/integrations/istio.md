@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    Istio base dashboard: assets/dashboards/istio_overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -36,19 +37,21 @@ Utilisez l'Agent Datadog pour surveiller les performances d'Istio.
 
 * Recueillez des métriques sur les applications et les types de requêtes transmises.
 * Étudiez l'utilisation de la bande passante par les applications.
-* Découvrez la consommation de ressources d'Istio.
+* Visualisez les ressources consommées par Istio
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Istio est intégré à l'Agent Datadog. Il vous suffit donc d'[installer l'Agent][1] sur vos serveurs Istio ou dans votre cluster et de le rediriger vers Istio.
+Istio est intégré à l'Agent Datadog. [Installez l'Agent Datadog][2] sur vos serveurs Istio ou dans votre cluster et connectez-le à Istio.
 
 ### Configuration
 
-#### Connecter l'Agent
+#### Associer l'Agent
 
-Modifiez le fichier `istio.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour l'associer à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `istio.d/conf.yaml` (dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour connecter l'Agent à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][4]) pour découvrir toutes les options de configuration disponibles :
 
 ```
 init_config:
@@ -58,14 +61,38 @@ instances:
     mixer_endpoint: http://istio-telemetry.istio-system:15014/metrics
     galley_endpoint: http://istio-galley.istio-system:15014/metrics
     pilot_endpoint: http://istio-pilot.istio-system:15014/metrics
+    citadel_endpoint: http://istio-citadel.istio-system:15014/metrics
     send_histograms_buckets: true
 ```
 
-Les deux premiers endpoints sont requis pour garantir le fonctionnement du check. Consultez la [documentation Istio][4] (en anglais) pour en savoir plus sur l'adaptateur Prometheus.
+Chaque endpoint est facultatif, mais au moins l'un d'eux doit être configuré. Consultez la [documentation Istio][5] pour en savoir plus sur l'adaptateur Prometheus.
+
+#### Désactiver l'injection de sidecar
+
+Si vous installez l'[Agent Datadog dans un conteneur][10], Datadog vous conseille de désactiver l'injection de sidecar d'Istio au préalable.
+
+Ajoutez l'annotation `sidecar.istio.io/inject: "false"` au daemonset `datadog-agent` :
+
+```
+...
+spec:
+  ...
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+    ...
+```
+
+Vous pouvez également utiliser la commande `kubectl patch`.
+
+```
+kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
+```
 
 ### Validation
 
-[Lancez la sous-commande `info` de l'Agent][5] et cherchez `istio` dans la section Checks.
+[Lancez la sous-commande `info` de l'Agent][6] et cherchez `istio` dans la section Checks.
 
 ## Données collectées
 
@@ -80,21 +107,23 @@ Le check Istio n'inclut aucun événement.
 Le check Istio n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller le maillage de votre service Istio avec Datadog][8]
+- [Surveiller votre maillage de services Istio avec Datadog][9]
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
-[4]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
+[5]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[10]: https://docs.datadoghq.com/fr/agent/kubernetes
 
 
 {{< get-dependencies >}}
