@@ -400,8 +400,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 Use the Category Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
 Use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
-**Note**: The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
-Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+**Note**: 
+* The syntax of the query is the one of [Logs Explorer][1] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+* The names of the categories must be unique.
+
+[1]: /logs/explorer/search/#search-syntax
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -454,6 +458,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
+
+Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][1].
+
+[1]: /logs/processing/processors/?tab=ui#log-status-remapper
 
 ## Arithmetic processor
 
