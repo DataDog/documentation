@@ -18,7 +18,7 @@ aliases:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
+Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web server** integrations with one configuration parameter in the Tracing client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -127,7 +127,6 @@ Trace Search & Analytics is available starting in version 0.17.0 of the PHP trac
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 

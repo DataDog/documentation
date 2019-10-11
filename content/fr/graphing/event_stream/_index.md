@@ -145,7 +145,7 @@ http://catchpoint.com/session_id%3A123456
 * `@nomdonné` : envoie une notification à l'utilisateur 'nomdonné'.
 * `@test@exemple.com` envoie un e-mail à `test@exemple.com`.
 * Si vous échangez sur Slack, Webhooks, Pagerduty ou VictorOps, utilisez :
-    * `@slack-<COMPTE_SLACK>-<NOM_CANAL>` : publie l'événement ou le graphique sur ce canal.
+    * `@slack-<COMPTE_SLACK>-<NOM_CHAÎNE>` : publie l'événement ou le graphique sur cette chaîne.
     * `@webhook` : déclenche une alerte ou prévient l'élément associé à ce webhook. Consultez [notre article de blog sur les webhooks][7].
     * `@pagerduty` : envoie une alerte à Pagerduty. Vous pouvez également utiliser `@pagerduty-acknowledge` et `@pagerduty-resolve`.
 

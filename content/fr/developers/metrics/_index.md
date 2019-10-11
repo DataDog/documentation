@@ -31,7 +31,7 @@ Cette page fournit un aperçu sur la soumission de métriques. Pour plus d'infor
 
 Il existe plusieurs façons d'envoyer des métriques à Datadog :
 
-1. Directement via l'Agent Datadog. Découvrez comment [rédiger une intégration][4] ou jetez directement un œil au [code source de l'agrégateur][5].
+1. Directement via l'Agent Datadog. Découvrez comment [rédiger une intégration][4] ou jetez directement un œil au [code source de l'Aggregator][5].
 2. Via le serveur DogStatsD (fourni avec l'Agent Datadog) et une [bibliothèque client][6].
 3. Directement via l'[API HTTP][7] de Datadog.
 4. Via la [bibliothèque de métriques Java Dropwizard][8] avec le backend [metrics-datadog][9]. Nous tenons à remercier les équipes de [Vistar Media][10], [Coursera][11] et [Bazaarvoice][12] pour leurs contributions.

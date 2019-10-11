@@ -72,7 +72,7 @@ Intégrez des événements de systèmes associés pour ajouter plus de contexte 
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [Template Variable][7] sélectionnée. |
+| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][7] sélectionnée. |
 
 ##### Commandes de l'axe des ordonnées
 

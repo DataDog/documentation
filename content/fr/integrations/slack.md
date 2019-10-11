@@ -5,7 +5,7 @@ categories:
   - Collaboration
 ddtype: crawler
 dependencies: []
-description: Envoyez des alertes et des graphiques Datadog sur le canal Slack de votre équipe.
+description: Envoyez des alertes et des graphiques Datadog sur la chaîne Slack de votre équipe.
 doc_link: 'https://docs.datadoghq.com/integrations/slack/'
 git_integration_title: slack
 has_logo: true
@@ -15,7 +15,7 @@ kind: integration
 manifest_version: '1.0'
 name: slack
 public_title: Intégration Datadog/Slack
-short_description: Envoyez des alertes et des graphiques Datadog sur le canal Slack de votre équipe.
+short_description: Envoyez des alertes et des graphiques Datadog sur la chaîne Slack de votre équipe.
 version: '1.0'
 ---
 ## Présentation
@@ -41,7 +41,7 @@ Pour installer l'intégration Slack, accédez à son [carré d'intégration][1] 
 7. Cliquez sur *Save*.
 8. Ajoutez les **canaux Slack à utiliser pour transmettre les informations** :
     {{< img src="integrations/slack/slack_configuration.png" alt="Configuration de Slack" responsive="true">}}
-9. Si vous souhaitez être informé pour chaque nouveau commentaire sur un graphique, cochez la case **Transfer all user comments** pour chaque canal. Si vous ne cochez pas cette case, vous devrez utiliser la syntaxe `@slack-<NOM_COMPTE>-<NOM_CANAL>` pour que les commentaires soient publiés sur Slack. Vous devez utiliser `@slack-<NOM_CANAL>` si vous n'utilisez qu'un seul compte ou si vous souhaitez publier les commentaires sur le premier compte uniquement.
+9. Si vous souhaitez être informé pour chaque nouveau commentaire sur un graphique, cochez la case **Transfer all user comments** pour chaque chaîne. Si vous ne cochez pas cette case, vous devrez utiliser la syntaxe `@slack-<NOM_COMPTE>-<NOM_CHAÎNE>` pour que les commentaires soient publiés sur Slack. Vous devez utiliser `@slack-<NOM_CHAÎNE>` si vous n'utilisez qu'un seul compte ou si vous souhaitez publier les commentaires sur le premier compte uniquement.
 
 Vous pouvez également configurer l'envoi d'alertes vers Slack à partir de [monitors][4] et du [flux d'événements][5].
 

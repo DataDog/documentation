@@ -35,7 +35,11 @@ Finally, add the following JVM argument when starting your application in your I
 -javaagent:/path/to/the/dd-java-agent.jar
 ```
 
-Note that `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][4].
+**Note**:
+
+* The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][16].
+
+* `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][4].
 
 ## Automatic Instrumentation
 
@@ -347,3 +351,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [11]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [12]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [13]: https://github.com/openzipkin/b3-propagation
+[14]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[16]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html

@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: /assets/service_checks.json
 categories:
   - sécurité
   - monitoring
@@ -40,17 +44,40 @@ l'installer.
 
 ### Installation
 
-Pour installer le check Aqua sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Aqua sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
 
-1. Installez le [kit de développement][8] sur n'importe quelle machine.
-2. Exécutez `ddev release build aqua` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][2].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/dist/aqua/<NOM_ARTEFACT>.whl`.
+1. Installez le [kit de développement logiciel][6].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `aqua`, exécutez :
+
+    ```
+    ddev -e release build aqua
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][7].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_AQUA_ARTIFACT>/<AQUA_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][8].
 
 ### Configuration
 
-1. Modifiez le fichier `aqua.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent] (https://docs.datadoghq.com/agent/faq/agent-configuration-files/#repertoire-de-configuration-de-l-agent) pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Aqua.
-  Consultez le [fichier d'exemple conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `aqua.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][9] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Aqua.
+  Consultez le [fichier d'exemple conf.yaml][10] pour découvrir toutes les options de configuration disponibles.
 
 #### Collecte de métriques
 
@@ -65,7 +92,7 @@ instances:
 
 Modifiez les valeurs des paramètres `api_user` et `password` et configurez-les pour votre environnement.
 
-[Redémarrez l'Agent][4].
+[Redémarrez l'Agent][11].
 
 #### Collecte de logs
 
@@ -81,12 +108,12 @@ Pour recueillir des logs d'audit Aqua :
 3. Activez l'intégration Webhook.
 4. Ajoutez ensuite l'endpoint suivant : `https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>?ddsource=aqua`.
 
-* Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog](https://app.datadoghq.com/account/settings#api).
+* Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][12].
 * *Remarque* : pour les pays de l'UE, remplacez `.com` par `.eu` dans l'endpoint.
 
 Pour les logs d'exécution Aqua (**Disponible à partir des versions > 6.0 de l'Agent**) :
 
-* La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#collecte-de-logs) :
+* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet][13] :
 
 ```
 (...)
@@ -99,14 +126,14 @@ Pour les logs d'exécution Aqua (**Disponible à partir des versions > 6.0 de l
 (...)
 ```
 
-* Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#creer-un-manifeste).
+* Assurez-vous que le socket Docker est monté sur l'Agent Datadog, comme dans [ce manifeste][14].
 
-* [Redémarrez l'Agent][4].
+* [Redémarrez l'Agent][11].
 
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `aqua` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][15] et cherchez `aqua` dans la section Checks.
 
 ## Données collectées
 
@@ -118,7 +145,7 @@ Pour les logs d'exécution Aqua (**Disponible à partir des versions > 6.0 de l
 
 **aqua.can_connect**:
 
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à Aqua pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Aqua pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ### Événements
 
@@ -126,16 +153,25 @@ Aqua ne comprend aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][17].
 
 [1]: https://www.aquasec.com
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-[8]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[6]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: https://docs.datadoghq.com/fr/getting_started/integrations
+[9]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
+[10]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
+[11]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[12]: https://app.datadoghq.com/account/settings#api
+[13]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
+[14]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
+[15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[16]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
+[17]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
