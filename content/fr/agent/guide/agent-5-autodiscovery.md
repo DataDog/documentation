@@ -322,7 +322,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 
 ## Références
 
-### Template Variables utilisables
+### Template variables utilisables
 
 Les template variables suivantes sont prises en charge par l'Agent :
 

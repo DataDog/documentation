@@ -43,7 +43,7 @@ Partagez un screenboard entier en suivant la procédure suivante :
 2. Cliquez sur l'option *Generate public URL*.
 3. Utilisez l'URL créée pour donner un accès en direct et en lecture seule uniquement pour le contenu de ce screenboard.
 
-**Remarque** : si vous avez activé la [création de modèles][3], le menu déroulant de Template Variables n'est pas disponible dans les vues partagées et les widgets basés sur des requêtes d'APM et de log n'affichent aucune donnée.
+**Remarque** : si vous avez activé la [création de modèles][3], le menu déroulant de template variables n'est pas disponible dans les vues partagées et les widgets basés sur des requêtes d'APM et de log n'affichent aucune donnée.
 
 ### Appliquer des restrictions
 
@@ -51,7 +51,7 @@ Vous pouvez restreindre l'accès à votre embed en fonction de l'adresse IP. En
 
 Ces graphiques partagés peuvent être intégrés à des outils externes à l'aide de l'iframe fourni ou être directement partagés à l'aide de l'URL source incluse dans la zone de texte. Cette URL offre un accès externe sans qu'aucune autorisation supplémentaire ne soit nécessaire. Une fois cette fonctionnalité activée, vous pouvez gérer vos restrictions sur [la page relative à la sécurité de votre organisation][5].
 
-**Remarque** : si vous avez activé les [Template Variables de dashboard][3], les menus déroulants de Template Variables ne seront pas disponibles dans les vues partagées. Nous vous déconseillons de les utiliser si vous prévoyez de partager les vues en dehors de votre organisation.
+**Remarque** : si vous avez activé les [template variables de dashboard][3], les menus déroulants de template variables ne seront pas disponibles dans les vues partagées. Nous vous déconseillons de les utiliser si vous prévoyez de partager les vues en dehors de votre organisation.
 
 ## Révoquer des screenboards/graphiques partagés
 
