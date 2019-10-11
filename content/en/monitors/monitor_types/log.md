@@ -27,9 +27,9 @@ As you define the search query, the graph above the search fields updates.
 
 * If you have [multiple log indexes][2], select the index to search.
 * Construct a search query using the same logic as a [log explorer search][3].
-* Choose a [facet][4] or [measure][5] to monitor.
-    * Facets display `Count`.
-    * Measures display `Measure` with an aggregation choice: `min`, `avg` (default), `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`.
+* Choose to monitor over a log count, [facet][4], or [measure][5]:
+    * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the amount of logs over a selected time frame then compares it to the threshold conditions.
+    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 * Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
 ### Set alert conditions
@@ -41,7 +41,7 @@ As you define the search query, the graph above the search fields updates.
 
 #### No data and below alerts
 
-To receive a notification if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query in the given timeframe. 
+To receive a notification when all groups in a service have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
 When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
@@ -58,8 +58,14 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples
 
-By default, up to 10 log samples that triggered the monitor is added to the notification message.
-This is available for Slack, Jira, Webhook, Microsoft Teams, and Email notifications. Notifications from monitors split by group include the top 10 breaching values instead of log samples. **Note**: Samples are not displayed for recovery notifications.
+By default, when a logs monitor is triggered:
+
+* **Monitor over a log count**: Up to 10 log samples are added to the notification message.
+* **Monitor over a facet or measure**: The top 10 facet or measure values are added to the notification message.
+
+These are available for notifications sent to Slack, Jira, Webhook, Microsoft Teams, and Email. **Note**: Samples are not displayed for recovery notifications.
+
+Notifications from monitors split by group include the top 10 breaching values instead of log samples.
 
 To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping:
 
