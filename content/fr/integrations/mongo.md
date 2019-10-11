@@ -8,6 +8,7 @@ assets:
 categories:
   - data store
   - log collection
+  - autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
@@ -48,19 +49,20 @@ Vous pouvez également créer vos propres métriques à l'aide de requêtes pers
 ## Implémentation
 ### Installation
 
-Le check MongoDB est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos masters MongoDB.
+Le check MongoDB est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer.
 
 ### Configuration
 
-Modifiez le fichier `mongo.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) MongoDB. Consultez le [fichier d'exemple mongo.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Agent conteneurisé](#agent-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-#### Préparer MongoDB
+#### Host
+##### Préparer MongoDB
 
-Dans un interpréteur de commandes mongo, créez un utilisateur en lecture seule pour l'Agent Datadog dans la base de données `admin` :
+Dans un shell Mongo, créez un utilisateur en lecture seule pour l'Agent Datadog dans la base de données `admin` :
 
 ```
 # S'authentifier en tant qu'administrateur.
-utilisez admin
+use admin
 db.auth("admin", "<VOTRE_MOTDEPASSE_ADMIN_MONGODB>")
 
 # Sur MongoDB 2.x, utiliser la commande addUser.
@@ -78,66 +80,105 @@ db.createUser({
 })
 ```
 
-#### Collecte de métriques
+##### Collecte de métriques
 
-* Ajoutez ce bloc de configuration à votre fichier `mongo.d/conf.yaml` pour commencer à recueillir vos [métriques MongoDB](#metriques) :
+1. Modifiez le fichier `mongo.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple mongo.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-  ```
-  init_config:
-  instances:
-    - server: mongodb://datadog:<UNIQUEPASSWORD>@localhost:27017/admin
-      additional_metrics:
-        - collection       # collect metrics for each collection
-        - metrics.commands
-        - tcmalloc
-        - top
-  ```
-  Consultez le [ficher d'exemple mongo.yaml][4] pour découvrir toutes les options de configuration disponibles, notamment pour les métriques custom.
+    ```yaml
+      init_config:
+      instances:
+          ## @param server - string - required
+          ## Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
+          ## E.g. mongodb://datadog:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27016/admin
+          #
+        - server: "mongodb://datadog:<UNIQUEPASSWORD>@<HOST>:<PORT>/<DB_NAME>"
 
-* [Redémarrez l'Agent][5] pour commencer à envoyer des métriques MongoDB à Datadog.
+          ## @param replica_check - boolean - required - default: true
+          ## Whether or not to read from available replicas.
+          ## Disable this if any replicas are inaccessible to the agent.
+          #
+          replica_check: true
 
-#### Collecte de logs
+          ## @param additional_metrics - list of strings - optional
+          ## By default, the check collects a sample of metrics from MongoDB.
+          ## This  parameter instructs the check to collect additional metrics on specific topics.
+          ## Available options are:
+          ##   * `metrics.commands` - Use of database commands
+          ##   * `tcmalloc` -  TCMalloc memory allocator
+          ##   * `top` - Usage statistics for each collection
+          ##   * `collection` - Metrics of the specified collections
+          #
+          additional_metrics:
+            - metrics.commands
+            - tcmalloc
+            - top
+            - collection
+    ```
+
+2. [Redémarrez l'Agent][5].
+
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-  ```
-  logs_enabled: true
-  ```
+    ```yaml
+      logs_enabled: true
+    ```
 
-* Ajoutez ce bloc de configuration à votre fichier `mongo.d/conf.yaml` pour commencer à recueillir vos logs MongoDB :
+2. Ajoutez ce bloc de configuration à votre fichier `mongo.d/conf.yaml` pour commencer à recueillir vos logs MongoDB :
 
-  ```
-  logs:
-      - type: file
-        path: /var/log/mongodb/mongodb.log
-        service: mongo
-        source: mongodb
-  ```
-  Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-  Consultez le [fichier d'exemple mongo.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    ```yaml
+      logs:
+          - type: file
+            path: /var/log/mongodb/mongodb.log
+            service: mongo
+            source: mongodb
+    ```
 
-* [Redémarrez l'Agent][5].
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+    Consultez le [fichier d'exemple mongo.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][6].**
+3. [Redémarrez l'Agent][5].
+
+#### Agent conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                                                                                                                           |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `mongodb`                                                                                                                                                                       |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                                                                                                   |
+| `<CONFIG_INSTANCE>`  | `{"server": "mongodb://datadog:<MOTDEPASSEUNIQUE>@%%host%%:%%port%%/<NOM_BDD>", "replica_check": true, "additional_metrics": ["metrics.commands","tcmalloc","top","collection"]}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][5].
+
+| Paramètre      | Valeur                                       |
+|----------------|---------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "mongodb", "service": "mongo"}` |
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `mongo` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `mongo` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "mongo" >}}
 
 
-Consultez le [manuel MongoDB 3.0][9] (en anglais) pour en savoir plus sur certaines de ces métriques.
+Consultez la [documentation sur MongoDB 3.0][9] (en anglais) pour en savoir plus sur certaines de ces métriques.
 
-**REMARQUE** : les métriques suivantes ne sont PAS recueillies par défaut :
+**REMARQUE** : les métriques suivantes ne sont PAS recueillies par défaut. Utilisez le paramètre `additional_metrics` dans votre fichier `mongo.d/conf.yaml` pour les recueillir :
 
-|                          |                                                   |
-| ---                      | ---                                               |
 | Préfixe de la métrique            | Élément à ajouter à `additional_metrics` pour recueillir la métrique |
+|--------------------------|---------------------------------------------------|
 | mongodb.collection       | collection                                        |
 | mongodb.commands         | top                                               |
 | mongodb.getmore          | top                                               |
@@ -152,17 +193,16 @@ Consultez le [manuel MongoDB 3.0][9] (en anglais) pour en savoir plus sur certa
 | mongodb.tcmalloc         | tcmalloc                                          |
 | mongodb.metrics.commands | metrics.commands                                  |
 
+
 ### Événements
 
-**Changements d'état de réplication** :
-
-Ce check génère un événement pour chaque changement d'état de réplication d'un nœud Mongo.
+**Changements de statut de réplication** :<br>
+Ce check émet un événement chaque fois que le statut de réplication d'un nœud Mongo change.
 
 ### Checks de service
 
-`mongodb.can_connect` :
-
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à MongoDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**mongodb.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à MongoDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
@@ -170,8 +210,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 ## Pour aller plus loin
 Lisez notre série d'articles de blog à propos de la collecte de métriques MongoDB avec Datadog :
 
-* [Commencez par cet article][11] si vous utilisez le moteur de stockage WiredTiger.
-* [Cliquez ici][12] si vous utilisez le moteur de stockage MMAPv1.
+* [Surveillance des métriques de performance MongoDB (WiredTiger)][11]
+* [Surveillance des métriques de performance MongoDB (MMAP)][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
@@ -179,7 +219,7 @@ Lisez notre série d'articles de blog à propos de la collecte de métriques Mon
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/logs
+[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/mongo/metadata.csv
 [9]: https://docs.mongodb.org/manual/reference/command/dbStats
