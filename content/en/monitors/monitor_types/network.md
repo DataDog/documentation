@@ -1,14 +1,14 @@
 ---
 title: Network Monitor
 kind: documentation
-description: "Check the status of TCP/HTTP endpoints"
+description: "Check the status of TCP/HTTP endpoints."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
+  text: "Schedule downtime to mute a monitor."
 - link: "monitors/monitor_status"
   tag: "Documentation"
   text: "Check your monitor status"
@@ -33,8 +33,8 @@ To create a [network monitor][3] in Datadog, use the main navigation: *Monitors 
 
 Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed host name or tag is excluded.
+* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
 
 #### Set alert conditions
 
@@ -53,7 +53,7 @@ Set up the check alert:
 
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
-    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
+    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where the connection fails. If you set this value to `> 1`, the blip is ignored, but a problem with more than one consecutive failure triggers a notification.
 
 3. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
@@ -66,7 +66,7 @@ A cluster alert calculates the percent of checks in a given status and compares 
 
 Set up a cluster alert:
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
 
 2. Select the percentage for the alert threshold.
 
