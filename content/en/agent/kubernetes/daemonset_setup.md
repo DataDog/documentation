@@ -211,11 +211,11 @@ To enable [Log collection][10] with your DaemonSet:
       env:
         (...)
         - name: DD_LOGS_ENABLED
-            value: "true"
+          value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-            value: "true"
+          value: "true"
         - name: DD_AC_EXCLUDE
-            value: "name:datadog-agent"
+          value: "name:datadog-agent"
     (...)
     ```
 
@@ -258,7 +258,7 @@ Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to 
     volumeMounts:
       (...)
       - name: logpodpath
-          mountPath: /var/log/pods
+        mountPath: /var/log/pods
       # Docker runtime directory, replace this path with your container runtime logs directory,
       # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
       - name: logcontainerpath
@@ -268,7 +268,7 @@ Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to 
    (...)
     - hostPath:
         path: /var/log/pods
-        name: logpodpath
+      name: logpodpath
     # Docker runtime directory, replace this path with your container runtime logs directory,
     # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
     - hostPath:
