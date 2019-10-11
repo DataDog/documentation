@@ -1,8 +1,7 @@
 {{ with .File }}
-
     {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $.Page.Lang .Path ) }}
-
+    <a class="btn btn-primary" href="{{ trim $editLink "/" }}">Edit This Page</a>
 {{ end }}
 
-<a class="btn btn-primary" href="{{ trim $editLink "/" }}">Edit This Page</a>
+
 
