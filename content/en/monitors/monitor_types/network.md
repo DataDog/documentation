@@ -1,47 +1,97 @@
 ---
-title: Network monitor
+title: Network Monitor
 kind: documentation
-description: "Check the status of TCP/HTTP endpoints"
+description: "Check the status of TCP/HTTP endpoints."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
+  text: "Schedule downtime to mute a monitor."
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
 
-Network monitors cover the TCP and HTTP checks available in the Agent. Read the [HTTP check documentation][1] for details on Agent configuration.
+## Overview
 
-## Network Status
+Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation. 
 
-1. Choose a **network check**. The available options are all monitored `HTTP` or `TCP` checks being submitted by your Agents.  
-    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick" responsive="true" style="width:80%;">}}
-2. Pick **monitor scope**. Only hosts or tags from the checks you selected are available.
-    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope" responsive="true" style="width:80%;">}}
-3. Select **alerting options**:
-    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" style="width:80%;">}}
+## Monitor creation
 
-    **Note**: Contrary to [metric monitors][2], it's not possible to get alerted after the endpoint is unavailable for `X` min. Instead you can only be alerted after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (Agent collection period) or 90 seconds without data.
+To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
 
-4. Configure **notification options**. Refer to the [Notifications][3] documentation for a detailed walkthrough of the common notification options.
+### Network Status
 
-## Network Metric
+#### Pick a check
 
-1. Choose a **network metric**. You are able to choose either the `TCP` or `HTTP` response time metric.
+* Choose a network check type (`ssl`, `http`, or `tcp`).
+* Choose a specific endpoint or `All monitored <TYPE> endpoints`.
 
-2. Pick the **monitor scope**. Only hosts or tags from the metric you selected are available.
+#### Pick monitor scope
 
-3. Select **alerting options**. Refer to the alert-conditions section in the [metric monitor][2] documentation for details.
+Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-4. Configure **notification options**. Refer to the [Notifications][3] documentation for a detailed walkthrough of the common notification options.
+* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
+
+#### Set alert conditions
+
+In this section, choose between a **Check Alert** or **Cluster Alert**:
+
+{{< tabs >}}
+{{% tab "Check Alert" %}}
+
+A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
+
+Set up the check alert:
+
+1. Trigger a separate alert for each `<GROUP>` reporting your check.
+
+    Check grouping is specified either from a list of known groupings or by you. For network monitors, the per-check grouping is explicitly known. For example, the HTTP check is tagged with `host`, `instance`, and `url`.
+
+2. Trigger the alert after selected consecutive failures: `<NUMBER>`
+
+    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where the connection fails. If you set this value to `> 1`, the blip is ignored, but a problem with more than one consecutive failure triggers a notification.
+
+3. Resolve the alert after selected consecutive successes: `<NUMBER>`
+
+    Choose how many consecutive runs with the `OK` status resolve the alert.
+
+{{% /tab %}}
+{{% tab "Cluster Alert" %}}
+
+A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
+
+Set up a cluster alert:
+
+1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+
+2. Select the percentage for the alert threshold.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [metric monitor][4] documentation for information on [No data][5], [Auto resolve][6], and [Evaluation delay][7] options.
+
+#### Notifications
+
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+
+### Network Metric
+
+Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /monitors/monitor_types/metric
-[3]: /monitors/notifications
+[2]: /integrations/tcp_check
+[3]: https://app.datadoghq.com/monitors#create/network
+[4]: /monitors/monitor_types/metric
+[5]: /monitors/monitor_types/metric/#no-data
+[6]: /monitors/monitor_types/metric/#auto-resolve
+[7]: /monitors/monitor_types/metric/#evaluation-delay
+[8]: /monitors/notifications
+[9]: https://app.datadoghq.com/monitors/manage
