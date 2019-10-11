@@ -267,11 +267,12 @@
         "type": "xpath",
         "global": true
       }
-    },
+    }
   },
   "keep_tags": [
     "code"
   ],
+  "use_anchors": true,
   "selectors_exclude": [
     ".whatsnext",
     "#en-apprendre-plus",
