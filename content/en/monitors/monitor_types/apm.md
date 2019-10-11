@@ -4,7 +4,7 @@ kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
   - /monitors/monitor_types/trace_analytics
-  - /monitors/monitor_types/trace_search/
+  - /monitors/monitor_types/trace_search
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
@@ -19,16 +19,20 @@ further_reading:
 
 ## Overview
 
-APM monitors work like [metric monitors][1] - but with controls tailored specifically to APM. They allow you to alert at the service level on hits, errors, and a variety of latency measures.
+APM metric monitors work like regular [metric monitors][1] but with controls tailored specifically to APM. Use this monitor to get alerted at the service level on hits, errors, and a variety of latency measures.
+
+Trace analytics monitors allow you to visualize APM data over time and set up alerts based on APM events. For example, use this monitor to get alerted on a spike in slow requests.
 
 ## Monitor creation
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-### Select monitor scope
+Choose between an **APM Metrics** or **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
+
+### Select monitor scope
 
 Choose your [Primary tags][1], [Service][2], and [Resource][3] from the drop-down menus.
 
@@ -41,8 +45,9 @@ Choose a **Threshold** or **Anomaly** alert:
 An alert is triggered whenever a metric crosses a threshold.
 
 * Alert when `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
-* Alert when `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`%
-* of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
+* is `above`, `above or equal to`, `below`, or `below or equal to`
+* Alert threshold `<NUMBER>`
+* Warning threshold `<NUMBER>`
 * over the last `5 minutes`, `15 minutes`, `1 hour`, etc.
 
 #### Anomaly Alert
@@ -50,11 +55,9 @@ An alert is triggered whenever a metric crosses a threshold.
 An alert is triggered whenever a metric deviates from an expected pattern.
 
 * For `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
-* Alert threshold `<NUMBER>`
-* Warning threshold `<NUMBER>`
-* is `above`, `above or equal to`, `below`, or `below or equal to`
-
-* over the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* Alert when `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`%
+* of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
+* the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc.
 
 [1]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [2]: /tracing/visualization/service
@@ -62,12 +65,23 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-Trace Search & Analytics enables you to search, filter, and aggregate APM data based on the APM events running through your system and based on tags that you create. Trace Analytics monitoring allows you to set up custom monitors based on this data. Use these monitors to visualize the data over time and to set up alerts based on APM events - for example, if there is a spike in slow requests or anything else you can use APM events to track.
+### Define the search query
 
+* Construct a search query using the same logic as a [trace search][1].
+* Choose to monitor over a trace count, [facet][2], or [measure][3]:
+    * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the amount of traces over a selected time frame then compares it to the threshold conditions.
+    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
-Define your [trace search query][1].
+### Select alert conditions
 
-[1]: /tracing/trace_search_and_analytics/search
+* Trigger when the metric is `above` or `above or equal to`
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* Alert threshold: `<NUMBER>`
+* Warning threshold: `<NUMBER>`
+
+[1]: /tracing/trace_search_and_analytics/search/#search-bar
+[2]: /tracing/trace_search_and_analytics/search/#facet-search
+[3]: /tracing/trace_search_and_analytics/search/#numerical-values
 {{% /tab %}}
 {{< /tabs >}}
 

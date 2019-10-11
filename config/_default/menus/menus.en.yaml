@@ -655,25 +655,20 @@ main:
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
     weight: 112
-  - name: "APM Metrics"
+  - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
     weight: 113
     identifier: "monitor_apm"
-  - name: "APM Trace Analytics"
-    url: "monitors/monitor_types/trace_analytics"
-    parent: "monitor_types"
-    identifier: "monitors_trace_analytics"
-    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 115
+    weight: 114
     identifier: "monitor_watchdog"
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 116
+    weight: 115
 
 
   ## MONITORS -  Manage monitor
