@@ -272,7 +272,6 @@
   "keep_tags": [
     "code"
   ],
-  "use_anchors": true,
   "selectors_exclude": [
     ".whatsnext",
     "#en-apprendre-plus",
@@ -291,7 +290,8 @@
       "tags"
     ],
     "optionalWords": [
-      "the"
+      "the",
+      "without"
     ],
     "synonyms": [
       [
@@ -312,7 +312,7 @@
       ]
     ]
   },
-  "only_content_level": true,
+  "only_content_level": false,
   "user_agent": "Googlebot",
   "nb_hits": 94978
 }
