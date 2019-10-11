@@ -17,50 +17,6 @@
       "page_rank": 0
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
-      "selectors_key": "integrations",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "integrations"
-      ],
-      "page_rank": 90
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
-      "selectors_key": "docs",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ],
-        "section": [
-          "account_management",
-          "agent",
-          "developers",
-          "getting_started",
-          "graphing",
-          "logs",
-          "monitors",
-          "security",
-          "synthetics",
-          "tagging",
-          "tracing",
-          "watchdog"
-        ]
-      },
-      "tags": [
-        "docs"
-      ],
-      "page_rank": 100
-    },
-    {
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
@@ -104,6 +60,64 @@
         "guide"
       ],
       "page_rank": 10
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
+      "selectors_key": "getting_started",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ]
+      },
+      "tags": [
+        "getting_started"
+      ],
+      "page_rank": 200
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
+      "selectors_key": "integrations",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ]
+      },
+      "tags": [
+        "integrations"
+      ],
+      "page_rank": 90
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
+      "selectors_key": "docs",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ],
+        "section": [
+          "account_management",
+          "agent",
+          "developers",
+          "graphing",
+          "logs",
+          "monitors",
+          "security",
+          "synthetics",
+          "tagging",
+          "tracing",
+          "watchdog"
+        ]
+      },
+      "tags": [
+        "docs"
+      ],
+      "page_rank": 100
     }
   ],
   "stop_urls": [
@@ -157,17 +171,17 @@
     "docs.datadoghq.com/videos/"
   ],
   "selectors": {
-    "docs": {
+    "getting_started": {
       "lvl0": {
         "selector": ".h-100 .sidenav-nav > ul >li.open > a",
         "global": true,
-        "default_value": "Documentation"
+        "default_value": "Getting Started"
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -236,6 +250,23 @@
         "type": "xpath",
         "global": true
       }
+    },
+    "docs": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "Documentation"
+      },
+      "lvl1": ".main h1",
+      "lvl2": ".main h2",
+      "lvl3": ".main h3",
+      "lvl4": ".main h4",
+      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
     }
   },
   "keep_tags": [
@@ -259,7 +290,8 @@
       "tags"
     ],
     "optionalWords": [
-      "the"
+      "the",
+      "without"
     ],
     "synonyms": [
       [
