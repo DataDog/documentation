@@ -18,7 +18,7 @@ La fonction [Check de cluster][1] permet de découvrir automatiquement des servi
 
 L'[Agent de cluster][2] conserve les configurations et les expose aux Agents basés sur des nœuds afin qu'ils puissent les lire et les convertir en checks d'endpoints.
 
-Les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods renforçant le ou les endpoints du service surveillé.
+Les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods épaulant le ou les endpoints du service surveillé.
 
 Les Agents se connectent à l'Agent de Cluster toutes les 10 secondes et récupèrent les configurations de check à exécuter. Les métriques provenant des checks d'endpoints seront envoyées avec des tags de service, de pod et de host.
 
@@ -60,7 +60,7 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       name: nginx-758655469f-k8zrc
       ...
 ```
-De par leur nature, les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que les pods qui renforcent les endpoints du service `nginx`. Ainsi, seuls les Agents s'exécutant sur les nœuds `gke-cluster-default-pool-4658d5d4-k2sn` et `gke-cluster-default-pool-4658d5d4-p39c` planifient les checks sur les pods `nginx`.
+De par leur nature, les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que les pods qui épaulent les endpoints du service `nginx`. Ainsi, seuls les Agents s'exécutant sur les nœuds `gke-cluster-default-pool-4658d5d4-k2sn` et `gke-cluster-default-pool-4658d5d4-p39c` planifient les checks sur les pods `nginx`.
 
 Ce fonctionnement permet d'exploiter [Autodiscovery] [3] et de joindre des tags de pod et de conteneur aux métriques envoyées par ces pods.
 
@@ -111,7 +111,7 @@ La [template variable][7] `%%host%%` est prise en charge et remplacée par les f
 
 #### Exemple : check HTTP sur un service basé sur NGINX avec le check NGINX sur les endpoints du service
 
-La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][8] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][9] sur les pods qui renforcent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
+La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][8] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][9] sur les pods qui épaulent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
 
 ```yaml
 apiVersion: v1
@@ -152,7 +152,7 @@ spec:
 
 Le dépannage de checks d'endpoints est semblable au [dépannage de checks de cluster][10]. La seule différence se situe au niveau des Agents basés sur le nœud, où les checks d'endpoints planifiés apparaissent à côté du check de cluster.
 
-**Remarque** : les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods renforçant le ou les endpoints du service.
+**Remarque** : les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods épaulant le ou les endpoints du service.
 
 ### Autodiscovery dans l'Agent basé sur les nœuds
 
