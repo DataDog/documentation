@@ -46,6 +46,7 @@
             <div class="mainContent-wrapper col-12 col-lg-9 main">
               <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}" id="mainContent">
                 {{ block "main" . }}{{ end }}
+                {{ partial "page-edit.html" . }}
               </div>
             </div>
 

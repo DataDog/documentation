@@ -1,3 +1,4 @@
+
 {{ $dot := . }}
 
 <!-- get lang specific data file -->
@@ -12,7 +13,6 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
-
 <footer>
     <div class="container">
         <div class="row">
