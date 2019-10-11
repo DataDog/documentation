@@ -1,7 +1,7 @@
 ---
 title: Custom Check Monitor
 kind: documentation
-description: "Monitor status of arbitrary custom checks"
+description: "Monitor status of arbitrary custom checks."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
@@ -30,8 +30,8 @@ Choose a custom check from the drop-down box.
 
 Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed host name or tag is excluded.
+* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
 
 ### Set alert conditions
 
@@ -46,7 +46,7 @@ Set up the check alert:
 
 1. Trigger a separate alert for each `<GROUP>` reporting your check.
 
-    Check grouping is specified either from a list of known groupings or by you. For custom check monitors, the per-check grouping is unknown, so it must be specified by you.
+    Check grouping is specified either from a list of known groupings or by you. For custom check monitors, the per-check grouping is unknown, so you must specify it.
 
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
@@ -54,7 +54,7 @@ Set up the check alert:
 
 3. Choose `Do not notify` or `Notify` for Unknown status.
 
-4. Resolve the alert after selected consecutive successes: `<NUMBER>`
+4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
 
     Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` OK statuses.
 
@@ -65,7 +65,7 @@ A cluster alert calculates the percent of checks in a given status and compares 
 
 Set up a cluster alert:
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
 
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 
