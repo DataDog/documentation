@@ -37,9 +37,10 @@ The `http.request POST /charge/` span is taking a lot of time without having any
 
 {{< tabs >}}
 {{% tab "Java" %}}
-  In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-### Instument a method with a decorator
+**Instument a method with a decorator**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
 ```java
@@ -59,7 +60,8 @@ public class BackupLedger {
 }
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```java
@@ -90,9 +92,11 @@ public class BackupLedger {
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
-  In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-### Instument a method with a decorator
+In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+
+**Instument a method with a decorator**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
 ```python
@@ -109,7 +113,8 @@ class BackupLedger:
         # [...]
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```python
@@ -258,9 +263,11 @@ public void Write(List<Transaction> transactions)
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
-  In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
 
-### Instument a method with a wrapper
+In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
+
+**Instument a method with a wrapper**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `dd_trace()` function.
 
 ```php
@@ -287,7 +294,8 @@ This example adds a span to the `BackupLedger.write` method, which adds new rows
 ?>
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```php
