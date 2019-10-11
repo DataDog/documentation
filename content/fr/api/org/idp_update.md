@@ -17,7 +17,8 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ##### EN-TÊTES
 * **`Content-Type: multipart/form-data`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`idp_file`** [*obligatoire*] :
      le chemin vers le fichier de métadonnées XML que vous souhaitez importer.
 
@@ -26,5 +27,6 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ##### EN-TÊTES
 * **`Content-Type: application/xml`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 Le corps doit comprendre le contenu de votre fichier XML de métadonnées IdP.

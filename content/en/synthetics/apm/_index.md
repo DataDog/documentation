@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-{{< img src="synthetics/apm/synthetics-apm.gif" alt="APM and Synthetics" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetics" video="true" responsive="true" >}}
 
 ## Overview
 
@@ -27,7 +27,7 @@ Statements on this page apply to both [API][1] and [browser tests][2] for APM ex
 
 ### Prerequisites
 
-* Your service is [traced on the APM side][3].
+* Your service, and the endpoint your test is running on, is [traced on the APM side][3].
 * Your service uses an HTTP server.
 * Your HTTP server is using a library that supports distributed tracing.
 

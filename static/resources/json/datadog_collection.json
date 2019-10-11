@@ -4924,6 +4924,172 @@
 							]
 						},
 						{
+							"name": "Update an AWS integration",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&account_id=<ACCOUNT_ID>&role_name=<ROLE_NAME>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"{{datadog_site}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										},
+										{
+											"key": "account_id",
+											"value": "<ACCOUNT_ID>",
+											"description": "Your AWS Account ID without dashes you wish to update."
+										},
+										{
+											"key": "role_name",
+											"value": "<ROLE_NAME>",
+											"description": "Your Datadog role delegation name associated with the AWS Account ID you wish to update."
+										}
+									]
+								},
+								"description": "### Overview\n\nCreate a Datadog-Amazon Web Services integration.\n\n**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]:\n\n    Your AWS Account ID without dashes.\n    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]:\n\n    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]:\n\n    Your Datadog role delegation name.\n    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].\n\n* **`filter_tags`** [*optional*, *default*=**None**]:\n\n    The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    For more information on EC2 tagging, see the [AWS tagging documentation][3].\n\n* **`host_tags`** [*optional*, *default*=**None**]:\n\n    Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:\n\n    An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: /integrations/amazon_web_services/#configuration\n[2]: /integrations/amazon_web_services/#installation\n[3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
+							},
+							"response": [
+								{
+									"name": "Creating an account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:25:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:25:21 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"external_id\": \"1234567890\"\n}"
+								}
+							]
+						},
+						{
 							"name": "Delete an AWS Integration",
 							"request": {
 								"method": "DELETE",
@@ -6618,7 +6784,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2/2\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -6708,7 +6874,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"<CHANNEL_NAME_3>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_1>\"\n        },\n        {\n            \"channel_name\": \"<CHANNEL_NAME_4>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_2>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"#channel_name_main_account\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#channel_name_doghouse\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -7576,7 +7742,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"limit\": 50,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
+							"raw": "{\n    \"limit\": 1000,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs-queries/list?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -7766,12 +7932,12 @@
 							"variable": [
 								{
 									"key": "INDEX_NAME",
-									"value": "<INDEX_NAME>",
+									"value": "main",
 									"description": "Name of the index"
 								}
 							]
 						},
-						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*optional*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
+						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*required*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
 					},
 					"response": []
 				},
@@ -9568,14 +9734,14 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nCreate a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]\n\nA browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].\n\n##### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ - The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  ** `tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][3].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://app.datadoghq.com/synthetics/list\n[2]: https://docs.datadoghq.com/synthetics/browser_test/#record-test\n[3]: https://docs.datadoghq.com/tagging/using_tags"
+						"description": "### Overview\n\nCreate a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]\n\nA browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].\n\n### Arguments\n\nThe main arguments for your test are:\n\n*   **`name`** - _required_ - A unique name for the test.\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n*   **`subtype`** - _required for SSL test_ - For a SSL API test, specify `ssl` as the value. Otherwise, you should omit this argument.\n*   **`request`** - _required_ - The request associated to your API and SSL test, refer to the Request section below to learn more.\n*   **`options`** - _required_ - List of options to customize your test, refer to the Options section below to learn more.\n*   **`message`** - _required_ - A description of the test.\n*   **`assertions`** - _required for API and SSL test_ - The assertions associated with your test, refer to the Assertions section below to learn more.\n*   **`locations`** - _required_ - A list of the locations to send the tests from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.\n*   **`tags`** - _optional_ - A list of tags used to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n\nFind below the available configuration options depending on the test you want to create.\n\n#### Request\n\nThe **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all necessary information to perform the request to your endpoint. It's a JSON object with the following attributes:\n\n*   **`method`** - _required API and browser test_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n*   **`url`** - _required API and browser test_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n*   **`host`** - _required SSL test_ - If creating a SSL test, specify the host to connect to.\n*   **`port`** - _required SSL test_ - If creating a SSL test, specify the port to connect to.\n*   **`basicAuth`** - _optional_ - If your endpoint is behind basic Auth, use this parameter to define your username and password with the following value: `{\"username\": \"<USERNAME>\", \"password\": \"<PASSWORD>\"}`.\n*   **`timeout`** - _optional_ - When the request should timeout.\n*   **`headers`** - _optional API test_ - Headers in the API request.\n*   **`body`** - _optional API test_ - The body for the API request. Accepts text strings (including JSON as a text string). Specify the type using the `Content-Type` `property` parameter and type, for example `application/json` or `text/plain` in the `headers` parameter.\n*   **`cookies`** - _optional API test_ - Cookies to send along with your API test request.\n\n#### Options\n\nThe **`options`** argument is required for the browser, API, and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:\n\n*  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, and 604800).\n*  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n*  **`min_location_failed`** - _optional_ - The minimum number of locations in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1). Default is 1.\n*  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n*  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.\n\n#### Assertions\n\nThe **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:\n\n*   **`type`** - _required_ - The part of the response that you want to assess. Possible types are:\n\n  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter.\n  * `body`: Use the `target` attribute to specify the expected value for the `body`.\n  * `responseTime`: Use the `target` attribute to specify the expected value for `responseTime`. For example: `\"target\":180000`.\n  * `statusCode`: Use the `target` attribute to specify the expected value for `statusCode`. For example: `\"target\":403`.\n  * `certificate`:  For SSL tests only, use the `target` attribute to specify the expected value for `certificate`. `\"target\":1` is a valid certificate, `\"target\":0` is a non-valid certificate.\n  * `property`: For SSL tests only, when you define a certificate `property`, you must specify the certificate property key in the `property` parameter, and the certificate property value with the `target`parameter.\n\n*   **`target`** - _required_ - The expected value for the assertion.\n*   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n| type        | Valid operator                                                            | Value type                                                                                                                                           |\n| ---           | ---                                                                         | ---                                                                                                                                                  |\n| `header`       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for `contains`/`does not contain`/`is`/`is not`.  [RegexString][3] for: `matches`/`does not match`. |\n| `body`          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n| `responseTime` | `lessThan`                                                                  | Integer                                                                                                                                              |\n| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |\n| `certificate` | `isInMoreThan` | Integer |\n| `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n\n[1]: https://app.datadoghq.com/synthetics/list\n[2]: /synthetics/browser_tests/#record-test\n[3]: https://en.wikipedia.org/wiki/Regular_expression"
 					},
 					"response": []
 				},
 				{
 					"name": "Start or pause a test",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -9677,7 +9843,7 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nUse this method to update an existing Synthetics test. In order to update a test, you have to submit the same payload as creating a test.\n\nThe parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests.\n\nA browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].\n\nIn order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.\n\n### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://docs.datadoghq.com/synthetics/browser_test/#record-test\n[2]: https://docs.datadoghq.com/tagging/using_tags"
+						"description": "### Overview\n\nUse this method to update an existing Synthetics test. In order to update a test, you have to submit the same payload as creating a test.\n\nThe parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests.\n\nA browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].\n\nIn order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.\n\n### Arguments\n\nThe main arguments for your test are:\n\n*   **`name`** - _required_ - A unique name for the test.\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n*   **`subtype`** - _required for SSL test_ - For a SSL API test, specify `ssl` as the value. Otherwise, you should omit this argument.\n*   **`request`** - _required_ - The request associated to your API and SSL test, refer to the Request section below to learn more.\n*   **`options`** - _required_ - List of options to customize your test, refer to the Options section below to learn more.\n*   **`message`** - _required_ - A description of the test.\n*   **`assertions`** - _required for API and SSL test_ - The assertions associated with your test, refer to the Assertions section below to learn more.\n*   **`locations`** - _required_ - A list of the locations to send the tests from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.\n*   **`tags`** - _optional_ - A list of tags used to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n\nFind below the available configuration options depending on the test you want to create.\n\n#### Request\n\nThe **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all necessary information to perform the request to your endpoint. It's a JSON object with the following attributes:\n\n*   **`method`** - _required API and browser test_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n*   **`url`** - _required API and browser test_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n*   **`host`** - _required SSL test_ - If creating a SSL test, specify the host to connect to.\n*   **`port`** - _required SSL test_ - If creating a SSL test, specify the port to connect to.\n*   **`basicAuth`** - _optional_ - If your endpoint is behind basic Auth, use this parameter to define your username and password with the following value: `{\"username\": \"<USERNAME>\", \"password\": \"<PASSWORD>\"}`.\n*   **`timeout`** - _optional_ - When the request should timeout.\n*   **`headers`** - _optional API test_ - Headers in the API request.\n*   **`body`** - _optional API test_ - The body for the API request. Accepts text strings (including JSON as a text string). Specify the type using the `Content-Type` `property` parameter and type, for example `application/json` or `text/plain` in the `headers` parameter.\n*   **`cookies`** - _optional API test_ - Cookies to send along with your API test request.\n\n#### Options\n\nThe **`options`** argument is required for the browser, API, and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:\n\n*  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, and 604800).\n*  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n*  **`min_location_failed`** - _optional_ - The minimum number of locations in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1). Default is 1.\n*  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n*  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.\n\n#### Assertions\n\nThe **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:\n\n*   **`type`** - _required_ - The part of the response that you want to assess. Possible types are:\n\n  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter.\n  * `body`: Use the `target` attribute to specify the expected value for the `body`.\n  * `responseTime`: Use the `target` attribute to specify the expected value for `responseTime`. For example: `\"target\":180000`.\n  * `statusCode`: Use the `target` attribute to specify the expected value for `statusCode`. For example: `\"target\":403`.\n  * `certificate`:  For SSL tests only, use the `target` attribute to specify the expected value for `certificate`. `\"target\":1` is a valid certificate, `\"target\":0` is a non-valid certificate.\n  * `property`: For SSL tests only, when you define a certificate `property`, you must specify the certificate property key in the `property` parameter, and the certificate property value with the `target`parameter.\n\n*   **`target`** - _required_ - The expected value for the assertion.\n*   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n| type        | Valid operator                                                            | Value type                                                                                                                                           |\n| ---           | ---                                                                         | ---                                                                                                                                                  |\n| `header`       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for `contains`/`does not contain`/`is`/`is not`.  [RegexString][3] for: `matches`/`does not match`. |\n| `body`          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n| `responseTime` | `lessThan`                                                                  | Integer                                                                                                                                              |\n| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |\n| `certificate` | `isInMoreThan` | Integer |\n| `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |\n\n[1]: /synthetics/browser_tests/#record-test\n[2]: /tagging/using_tags\n[3]: https://en.wikipedia.org/wiki/Regular_expression"
 					},
 					"response": []
 				},
@@ -10816,7 +10982,7 @@
 							"raw": "{\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"test user\",\n    \"access_role\": \"st\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10826,7 +10992,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"user"
 							],
 							"query": [
 								{
@@ -10851,7 +11017,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10861,7 +11027,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [
@@ -10893,7 +11059,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10903,7 +11069,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"user"
 							],
 							"query": [
 								{
@@ -10937,7 +11103,7 @@
 							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10947,7 +11113,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [
@@ -10983,7 +11149,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10993,7 +11159,7 @@
 							"path": [
 								"api",
 								"v1",
-								"users",
+								"user",
 								":DATADOG_USER_HANDLE"
 							],
 							"query": [

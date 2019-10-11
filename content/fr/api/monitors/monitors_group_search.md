@@ -8,7 +8,7 @@ external_redirect: '/api/#rechercher-des-groupes-de-monitors'
 
 Recherchez et filtrez les informations des groupes de vos monitors.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*facultatif*] :
 

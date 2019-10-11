@@ -1,17 +1,18 @@
 ---
 title: Generate External IDs
 type: apicode
-order: 15.5
+order: 15.06
 external_redirect: /api/#generate-external-ids
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/integration/aws/generate_new_external_id`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="aws_generate_new_external_id" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_generate_new_external_id" >}}

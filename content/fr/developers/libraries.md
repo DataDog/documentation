@@ -6,17 +6,23 @@ aliases:
   - /fr/developers/faq/monitoring-akka/
 disable_toc: true
 ---
-## Bibliothèques pour l'API et DogStatsD
+## Bibliothèques de client pour l'API et DogStatsD
 
 Le tableau suivant répertorie les bibliothèques de client pour [DogStatsD][1] et l'API officielles et entretenues par la communauté. Certaines bibliothèques prennent en charge l'API et DogStatsD, mais la grande majorité se concentre sur l'un ou l'autre.
 
 {{< classic-libraries-table >}}
 
-## Bibliothèques de client pour l'APM (tracing)
+## Bibliothèques de client pour le tracing distribué et l'APM
 
 Le tableau suivant répertorie les bibliothèques de client pour les [traces][2] officielles et entretenues par la communauté.
 
 {{< tracing-libraries-table >}}
+
+## Bibliothèques de client du Log Management
+
+Le tableau suivant répertorie les bibliothèques de client du Log Management officielles et entretenues par la communauté.
+
+{{< log-libraries-table >}}
 
 ## Bibliothèques de client de la communauté Datadog
 
@@ -33,13 +39,13 @@ Grâce aux [API][3] de Datadog, vous pouvez rédiger un script pour sauvegarder 
 
 ### Gestion des monitors
 
-Plusieurs projets de notre communauté sont consacrés à la maintenance, à la gestion ou à la sauvegarde des monitors via l’[API][3] Datadog :
+Plusieurs projets de notre communauté sont consacrés à la maintenance, à la gestion ou à la sauvegarde des monitors via l'[API][3] Datadog :
 
 | Langage  | Bibliothèque          | Auteur               |
 | ---       | ---              | ---                  |
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
-| Ruby      | [interferon][14] | [Airnb][15]          |
+| Ruby      | [interferon][14] | [Airbnb][15]         |
 | Ruby      | [dogwatch][16]   | [Rapid7][17]         |
 | Terraform | [Terraform][18]  | [Terraform][19]      |
 
@@ -73,62 +79,66 @@ Il s'agit d'une application [ESL de FreeSwitch][28] afin d'exporter les statisti
 Vous pouvez importer des données dans Datadog depuis Google Analytics via l'API Datadog avec [cette bibliothèque][30] de [Bithaus][31].
 
 ### Heroku
-Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des siphons de log. Pour envoyer vos logs Heroku à Datadog, consultez [la documentation dédiée][32].
+Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des drains de log suivants. Pour envoyer vos logs Heroku à Datadog, consultez [la documentation dédiée][32].
 
-  * [Siphonnage de logs Heroku pour Datadog][33] rédigé en NodeJS par [Oz][34].
-  * [Siphonnage de logs Heroku pour Datadog][35] rédigé en Go par [Apiary][36].
+  * [Drain de logs Heroku pour Datadog][33] écrit en NodeJS par [Oz][34].
+  * [Drain de logs Heroku pour Datadog][35] écrit en Go par [Apiary][36].
 
 
 ### Jira
 Un [outil][37] qui permet de récupérer des données à partir de Jira et de les importer en tant que métriques dans Datadog.
 
+### K6
+
+K6, un outil de test de régression de charge et de performance développé par Load Impact, peut envoyer des résultats de test à Datadog à l'aide de [DogStatsD][1]. Pour activer cette fonctionnalité, consultez [le tutoriel][38].
+
 ### LaunchDarkly
-Un gestionnaire de webhooks [LaunchDarkly][60] qui enregistre les changements sous la forme d'événements Datadog.
+Un gestionnaire de webhooks [LaunchDarkly][39] qui enregistre les changements sous la forme d'événements Datadog.
 
 ### Sortie Logstash
-  * [Sortie Logstash pour Datadog][38]
-  * [Sortie Logstash pour DogStatsD][39]
+  * [Sortie Logstash pour Datadog][40]
+  * [Sortie Logstash pour DogStatsD][41]
 
 ### Moogsoft
-Un [écouteur][40] Moogsoft qui ingère les notifications Datadog.
+Un [écouteur][42] Moogsoft qui ingère les notifications Datadog.
 
 ### LUA NGINX
-  * Envoyez des [métriques custom][41] directement à partir des configurations NGINX à l'aide du module [nginx_lua_datadog][42] dans vos scripts LUA.
-  * [lua-resty-dogstatsd][43] est une extension développée [mediba inc][44]. Elle permet de transmettre des métriques, des événements et des checks de service au protocole [DogStatsD][1]. lua-resty-dogstatsd est fourni en tant que GPLv3 et repose sur l'API cosocket nginx.
+  * Envoyez des [métriques custom][43] directement à partir des configurations NGINX à l'aide du module [nginx_lua_datadog][44] dans vos scripts LUA.
+  * [lua-resty-dogstatsd][45] est une extension développée [mediba inc][46]. Elle permet de transmettre des métriques, des événements et des checks de service au protocole [DogStatsD][1]. lua-resty-dogstatsd est fourni en tant que GPLv3 et repose sur l'API cosocket nginx.
 
 ### OpenVPN
-  * Envoyez des informations sur [l'utilisation de la bande passante][45] OpenVPN et le nombre de connexions actives à Datadog.
-  * Envoyez des [informations de licence][46] OpenVPN à Datadog.
+  * Envoyez des informations sur [l'utilisation de la bande passante][47] OpenVPN et le nombre de connexions actives à Datadog.
+  * Envoyez des [informations de licence][48] OpenVPN à Datadog.
 
 ### Phusion Passenger
-Envoyez des métriques de santé depuis le serveur Passenger de Phusion à l'aide de [passenger-datadog-monitor][47] rédigé par [Stevenson Jean-Pierre][48].
+Envoyez des métriques de santé depuis le serveur Passenger de Phusion à l'aide de [passenger-datadog-monitor][49] rédigé par [Stevenson Jean-Pierre][50].
 
 ### Pid-stats
-Cette [bibliothèque][49] vous permet de générer des informations sur les processus depuis des fichiers pid donnés de StatsD. Elle a été créée par [GitterHQ][50].
+Cette [bibliothèque][51] vous permet de générer des informations sur les processus depuis des fichiers pid donnés de StatsD. Elle a été créée par [GitterHQ][52].
 
 ### Saltstack
-  * [Formules Saltstack pour Datadog][51]
-  * [Datadog Saltstack][52] rédigé par [Luca Cipriani][53].
+  * [Formules Saltstack pour Datadog][53]
+  * [Datadog Saltstack][54] rédigé par [Luca Cipriani][55].
 
 ### Sensu
-Utilisez ces [gestionnaires][54] Sensu pour envoyer automatiquement des métriques et des événements à Datadog.
+Utilisez ces [gestionnaires][56] Sensu pour envoyer automatiquement des métriques et des événements à Datadog.
 
 ### StackStorm
 
-Ce [pack d'intégration][55] StackStorm fournit une intégration d'action pour Datadog.
+Ce [pack d'intégration][57] StackStorm Datadog fournit une intégration d'action pour Datadog.
 
 ### Winston
-Un [transport][56] Winston-Datadog.
+Un [transport][58] Winston-Datadog.
 
 ## Ports de la communauté pour l'Agent
 
 ### FreeBSD
-  * [Port dd-agent FreeBSD][57]
+  * [Port dd-agent FreeBSD][59]
 
 ### NixOS
-  * [dd-agent nixpkg][58]
+  * [dd-agent nixpkg][60]
 
-Si vous rédigez une bibliothèque Datadog et que vous souhaitez l'ajouter à cette page, envoyez un e-mail à [code@datadoghq.com][59].
+Si vous rédigez une bibliothèque Datadog et que vous souhaitez l'ajouter à cette page, envoyez un e-mail à [code@datadoghq.com][61].
 
 [1]: /fr/developers/dogstatsd
 [2]: /fr/tracing
@@ -167,26 +177,27 @@ Si vous rédigez une bibliothèque Datadog et que vous souhaitez l'ajouter à ce
 [35]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [36]: https://apiary.io
 [37]: https://github.com/evernote/jiradog
-[38]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
-[39]: https://github.com/brigade/logstash-output-dogstatsd
-[40]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
-[41]: /fr/developers/metrics/custom_metrics
-[42]: https://github.com/simplifi/ngx_lua_datadog
-[43]: https://github.com/mediba-system/lua-resty-dogstatsd
-[44]: http://www.mediba.jp
-[45]: https://github.com/byronwolfman/dd-openvpn
-[46]: https://github.com/denniswebb/datadog-openvpn
-[47]: https://github.com/Sjeanpierre/passenger-datadog-monitor
-[48]: https://github.com/Sjeanpierre
-[49]: https://github.com/gitterHQ/pid-stats
-[50]: https://github.com/gitterHQ
-[51]: https://github.com/DataDog/datadog-formula
-[52]: https://gist.github.com/mastrolinux/6175280
-[53]: https://gist.github.com/mastrolinux
-[54]: https://github.com/sensu-plugins/sensu-plugins-datadog
-[55]: https://github.com/StackStorm-Exchange/stackstorm-datadog
-[56]: https://github.com/sparkida/winston-datadog
-[57]: https://github.com/urosgruber/dd-agent-FreeBSD
-[58]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
-[59]: mailto:code@datadoghq.com
-[60]: https://github.com/meetup/launch-dogly
+[38]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[39]: https://github.com/meetup/launch-dogly
+[40]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
+[41]: https://github.com/brigade/logstash-output-dogstatsd
+[42]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
+[43]: /fr/developers/metrics/custom_metrics
+[44]: https://github.com/simplifi/ngx_lua_datadog
+[45]: https://github.com/mediba-system/lua-resty-dogstatsd
+[46]: http://www.mediba.jp
+[47]: https://github.com/byronwolfman/dd-openvpn
+[48]: https://github.com/denniswebb/datadog-openvpn
+[49]: https://github.com/Sjeanpierre/passenger-datadog-monitor
+[50]: https://github.com/Sjeanpierre
+[51]: https://github.com/gitterHQ/pid-stats
+[52]: https://github.com/gitterHQ
+[53]: https://github.com/DataDog/datadog-formula
+[54]: https://gist.github.com/mastrolinux/6175280
+[55]: https://gist.github.com/mastrolinux
+[56]: https://github.com/sensu-plugins/sensu-plugins-datadog
+[57]: https://github.com/StackStorm-Exchange/stackstorm-datadog
+[58]: https://github.com/sparkida/winston-datadog
+[59]: https://github.com/urosgruber/dd-agent-FreeBSD
+[60]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
+[61]: mailto:code@datadoghq.com

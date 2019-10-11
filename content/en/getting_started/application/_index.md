@@ -1,5 +1,5 @@
 ---
-title: Getting started with the Datadog application
+title: Getting Started in Datadog
 kind: documentation
 further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=2"
@@ -7,7 +7,7 @@ further_reading:
   text: "Introduction to Datadog"
 ---
 
-This page gives a high level overview of Datadog's capabilities.
+This page gives a high level overview of the capabilities for the Datadog [US site][1] and [EU site][2].
 
 ## Integrations
 
@@ -74,24 +74,23 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 * Share a graph snapshot that appears in the stream.
 * Graphs can be embedded in an iframe. This enables you to give a 3rd party access to a live graph without also giving access to your data or any other information.
 
-## Monitoring
+## Monitors
 
-{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
+[Monitors][18] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
 
-[Monitoring][18] gives you the ability to be notified if the aggregate of a specific metric is above or below a certain threshold—across your entire infrastructure, or per machine (average, max, min, or sum).
+* Use any metric reporting to Datadog
+* Set up multi-alerts (by device, host, etc.)
+* Use `@` in alert messages to direct notifications to the right people
+* Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
 
-* Applies to any metric, e.g., revenue, data center temperature, etc.
-* Multi alerts (by device, host, etc.)
-* Set alert notification message, including @ capabilities
-
-{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" responsive="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: http://www.datadoghq.com/product
+[1]: https://app.datadoghq.com
+[2]: https://app.datadoghq.eu
 [3]: http://www.datadoghq.com/integrations
 [4]: /api
 [5]: https://github.com/DataDog/dd-agent

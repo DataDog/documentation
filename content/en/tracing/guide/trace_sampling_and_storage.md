@@ -25,7 +25,7 @@ further_reading:
 
 ## Trace sampling
 
-Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of traces is kept in Datadog based on the following rules.
+Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of [traces][1] is kept in Datadog based on the following rules.
 
 Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
@@ -37,7 +37,7 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 * Total errors and errors per second
 * Latency
 * Breakdown of time spent by service/type
-* [Apdex score][1] (web services only)
+* [Apdex score][2] (web services only)
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
 
@@ -79,7 +79,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
     Moreover, the Agent provides a service-based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
 
-    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][2].
+    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][3].
 
 3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
@@ -170,7 +170,7 @@ Manually keep a trace:
 Datadog.tracer.trace(name, options) do |span|
 
   # Always Keep the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP)
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
   # method impl follows
 end
 ```
@@ -179,7 +179,7 @@ Manually drop a trace:
 ```ruby
 Datadog.tracer.trace(name, options) do |span|
   # Always Drop the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP)
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
   # method impl follows
 end
 ```
@@ -302,31 +302,31 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 Manually keep a trace:
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // Always keep this trace
-  $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
-  //method impl follows
-}
-
+  if (null !== $span) {
+    // Always keep this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+    //method impl follows
+  }
+?>
 ```
 
 Manually drop a trace:
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // Always drop this trace
-  $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
-  //method impl follows
-}
-
+  if (null !== $span) {
+    // Always drop this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+    //method impl follows
+  }
+?>
 ```
 
 {{% /tab %}}
@@ -368,7 +368,7 @@ Note that trace priority should be manually controlled only before any context p
 
 ## Trace Storage
 
-Individual traces are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Individual [traces][1] are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
@@ -403,5 +403,7 @@ Once a trace has been viewed by opening a full page, it continues to be availabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[2]: https://docs.datadoghq.com/security/tracing/#resource-filtering
+
+[1]: /tracing/visualization/#trace
+[2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[3]: https://docs.datadoghq.com/security/tracing/#resource-filtering

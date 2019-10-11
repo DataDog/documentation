@@ -61,7 +61,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 **Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 [1]: /agent/docker/log/?tab=containerinstallation
-[2]: /logs/logging_without_limits/#exclusion-filters
+[2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -90,7 +90,7 @@ volumes:
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
 [1]: /agent/kubernetes/daemonset_setup
-[2]: /logs/logging_without_limits/#exclusion-filters
+[2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -107,7 +107,7 @@ Streaming logs can be searched with simple string matching. For more details abo
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true" responsive="true" >}}
 
 ### Indexed Logs
 

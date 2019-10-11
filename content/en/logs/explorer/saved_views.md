@@ -11,67 +11,49 @@ further_reading:
   text: "Learn how to process your logs"
 ---
 
-## Overview
+## Log Explorer Default View
 
-When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to promptly start investigating the right content.
-With Datadog, teams can define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
+The default log explorer view is loaded where you land on the Logs Search, Analytics, or Patterns pages from the main navigation menu, or enter the corresponding URLs into your browser.
 
-Datadog Saved Views allow you to save search customizations in the Log Explorer, including:
+The default view includes:
+
+* an empty query
+* a list of visible facets in the facet list
+* a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
+
+All edits on the facet list (see below) or in the page layout are automatically saved in this default view.
+
+{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection" responsive="true">}}
+
+
+## Saved Views
+
+Saved Views allow you to save search customizations in the Log Explorer, including:
 
 * A [search query][1]
 * A [selected subset of facets][2]
-* A set of [columns][3]
-* A customized default visualization ([logstream][4] or [log analytic][5])
+* A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
 
-Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query.
 
-{{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Saved Views selection" responsive="true">}}
+### Load a Saved View
 
-## Log Explorer Default View
+Select Saved Views directly in the left panel or in the search bar with autocompletion, which matches on either search name or query.
 
-By default, all facets are displayed for all users.
+{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Saved Views selection" responsive="true">}}
 
-Each user can define their own list of default facets and facet groups to display by using the *Manage Facets* button and then selecting the desired facets.
+Star Saved Views to marked them as favorites. Starred Saved Views are available directly from the main navigation menu.
 
-{{< img src="logs/explorer/saved_views/default_saved_views.png" alt="Saved Views selection" responsive="true">}}
+{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Saved Views load" video="true" responsive="true" >}}
 
-Once this has been done, the Log Explorer uses the default list of facets whenever it is opened. This also works when clicking on *Log Explorer - Default view* from the list of Saved Views:
+### Manage Saved Views
 
-{{< img src="logs/explorer/saved_views/default_views_selection.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
+To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*.
 
-## Create a Saved View
+Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button.
 
-To create a new Saved View:
-
-1. Enter a query in the [search bar][1]
-2. Select the columns to display (from the cog icon at the top-right of the page, or from a log's contextual panel)
-3. Select the list of [facets][2] to display
-4. Click the *Save as* button at the top of the screen
-5. Name it and click on *Save*
-
-{{< img src="logs/explorer/saved_views/saved_views_creation.gif" alt="Saved Views creation" responsive="true">}}
-
-## Update or remove an existing Saved View
-
-### Remove a Saved View
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Saved views creation" responsive="true" >}}
 
 Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
-
-{{< img src="logs/explorer/saved_views/remove_saved_views.png" alt="remove Saved Views" responsive="true" style="width:50%;">}}
-
-### Update a Saved View
-
-To update an existing Saved View, proceed exactly as if you were creating a new one but instead of saving it, select an existing Saved View from the drop down, click on *replace*, and confirm.
-
-{{< img src="logs/explorer/saved_views/update_saved_views.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
-
-## Revert a modification to a Saved View
-
-After selecting a Saved View, you can continue to refine and modify your search as needed for your troubleshooting purposes. After changing the view, you can always revert to the most recent saved version of the Saved View by selecting the **Revert** button.
-
-**Note**: The Revert button does not undo changes after they have been saved.
-
-{{< img src="logs/explorer/saved_views/revert_saved_views.png" alt="revert Saved Views" responsive="true" style="width:50%;">}}
 
 ## Further Reading
 
@@ -80,5 +62,5 @@ After selecting a Saved View, you can continue to refine and modify your search 
 [1]: /logs/explorer/search
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/?tab=logstream#visualization
-[4]: /logs/explorer/?tab=logstream#visualization
+[4]: /logs/explorer/patterns
 [5]: /logs/explorer/analytics

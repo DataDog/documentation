@@ -10,5 +10,5 @@ page=<PAGE_NUMBER>
 per_page=<PER_PAGE>
 sort=<SORT>
 
-curl -X GET -H "Content-type: application/json" -d \
-    "https://api.datadoghq.com/api/v1/monitor/search?api_key=${api_key}&application_key=${app_key}&query=${query}&page=${page}&pre_page=${per_page}&sort=${sort}"
+curl -X GET \
+    "https://api.datadoghq.com/api/v1/monitor/search?api_key=${api_key}&application_key=${app_key}&query=${query}&page=${page}&per_page=${per_page}&sort=${sort}"

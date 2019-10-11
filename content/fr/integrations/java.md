@@ -128,7 +128,7 @@ instances:
             - <NOM_REGEX_BEAN_EXCLU>
       - include:
           bean_regex: regex_topic=(.*?)
-          attribute: 
+          attribute:
             attribute1:
               metric_type: gauge
               alias: jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>
@@ -172,7 +172,7 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 [5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [7]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=files#setting-up-check-templates
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/?tab=kubernetes
 {{% /tab %}}
 {{< /tabs >}}
 

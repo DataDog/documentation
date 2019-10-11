@@ -29,7 +29,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
     After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or traces are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][5] and provide the relevant log entries with [a flare][6].
+If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][6] and provide the relevant log entries with [a flare][7].
 
 ## Tracer debug mode
 
@@ -138,7 +138,7 @@ Then check the Agent logs to see if there is more info about your issue:
 
 * If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
 
-* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure [the Agent can be reached](#agent-troubleshooting). If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
+* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
 
 If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][3] and provide the relevant log entries with [a flare][4].
 
@@ -163,6 +163,14 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 // optional: set the new tracer as the new default/global tracer
 Tracer.Instance = tracer;
 ```
+
+Location of the profiler log:
+
+| Platform | Path                                                          |
+|----------|---------------------------------------------------------------|
+| Linux    | `/var/log/datadog/dotnet-profiler.log`                        |
+| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\dotnet-profiler.log` |
+
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -194,9 +202,12 @@ make install
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /help
 [2]: /tracing/setup/#agent-configuration
 [3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
-[5]: /help
-[6]: /agent/troubleshooting/#send-a-flare
+[5]: /tracing/visualization/#trace
+[6]: /help
+[7]: /agent/troubleshooting/#send-a-flare

@@ -56,7 +56,7 @@ const commonConfig = env => {
     return {
         entry: {
             '@babel/polyfill': '@babel/polyfill',
-            'main-dd-js': './scripts/index.js',
+            'main-dd-js': './scripts/main-dd-js.js',
             'main-dd-css': './styles/style.scss'
         },
         output: {

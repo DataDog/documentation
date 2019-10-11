@@ -18,9 +18,9 @@ further_reading:
 
 ## Definition
 
-There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
+There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible [traces][1]. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
-Primary tags must follow a different set of rules from those of conventional [Datadog tags][1].
+Primary tags must follow a different set of rules from those of conventional [Datadog tags][2].
 
 ## Setup
 ### Environment
@@ -32,7 +32,7 @@ There are several ways to specify an environment when reporting data:
   Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:
-  Override the default tag used by the Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
+  Override the default tag used by the Agent in [the Agent configuration file][3]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     apm_config:
@@ -40,7 +40,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][3] to learn how to assign a tag to your traces.
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][4] to learn how to assign a tag to your traces.
 
 #### Viewing Data by Environment
 
@@ -50,7 +50,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 ## Add a second primary tag in Datadog
 
-If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][4] page to define, change, or remove your primary tags.
+If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][5] page to define, change, or remove your primary tags.
 
 Note:
 
@@ -73,7 +73,8 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging
-[2]: /agent/guide/agent-configuration-files/?tab=agentv6
-[3]: /tagging/assigning_tags/#traces
-[4]: https://app.datadoghq.com/apm/settings
+[1]: /tracing/visualization/#trace
+[2]: /tagging
+[3]: /agent/guide/agent-configuration-files/?tab=agentv6
+[4]: /tagging/assigning_tags/#traces
+[5]: https://app.datadoghq.com/apm/settings

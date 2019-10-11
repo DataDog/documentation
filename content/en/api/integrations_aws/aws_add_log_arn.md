@@ -1,17 +1,15 @@
 ---
 title: Add AWS Log Lambda ARN
 type: apicontent
-order: 15.7
+order: 15.08
 external_redirect: /api/#add-aws-log-lambda-arn
 ---
 
 ## Add AWS log lambda ARN
 
-<mark>This endpoint is in public beta.</mark>
-
 Attach the Lambda ARN of the Lambda created for the [Datadog-AWS log collection][1] to your AWS account ID to enable log collection.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

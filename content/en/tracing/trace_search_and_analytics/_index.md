@@ -10,16 +10,15 @@ aliases:
 [Trace Search & Analytics][1] is used to filter APM events by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
-* [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
-**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
+**Note**: to use Trace Search, you must be using Agent v6.7+.
 
 ## Automatic Configuration
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
+Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web server** integrations with one configuration parameter in the Tracing client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -122,15 +121,12 @@ Trace Search & Analytics is available starting in version 0.17.0 of the PHP trac
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Trace search only works for web integrations.
-
 ## Configure Additional Services (optional)
 
 ### Configure by integration
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
@@ -445,10 +441,10 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```php
-
-// ... your existing span that you want to enable for Trace Search & Analytics
-$span->setTag(Tag::ANALYTICS_KEY, true);
-
+<?php
+  // ... your existing span that you want to enable for Trace Search & Analytics
+  $span->setTag(Tag::ANALYTICS_KEY, true);
+?>
 ```
 
 {{% /tab %}}
@@ -473,12 +469,14 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-## APM Event Filtering
+## Event filtering
 
-An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [APM event][2] represents the top [span][3] for a [service], including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][4] has the benefit of reducing the number of billable APM events and has no effect on [trace][5] sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/trace_search_and_analytics/agent_trace_search
-[3]: https://app.datadoghq.com/apm/settings
+[2]: /tracing/visualization/#apm-event
+[3]: /tracing/visualization/#spans
+[4]: https://app.datadoghq.com/apm/settings
+[5]: /tracing/visualization/#trace

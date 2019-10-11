@@ -48,7 +48,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
 Windows:
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install datadog-vsphere==3.6.0
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration install datadog-vsphere==3.6.0
 ```
 
 The command installs the Python package of the integration and copies the configuration files (`conf.yaml.example`, `conf.yaml.default`, `auto_conf.yaml`) to the `conf.d` directory, overwriting the existing ones. The same thing is done during a full Agent upgrade. If a failure occurs while copying of the files, the command exits with a failure, but the version of the integration you specified still gets installed.
@@ -75,7 +75,7 @@ sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
 Windows:
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration remove datadog-vsphere
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration remove datadog-vsphere
 ```
 
 Removing an integration does not remove the corresponding configuration folder in the `conf.d` directory.
@@ -92,7 +92,7 @@ sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
 Windows:
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration show datadog-vsphere
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration show datadog-vsphere
 ```
 
 ### Freeze
@@ -105,7 +105,7 @@ sudo -u dd-agent -- datadog-agent integration freeze
 ```
 Windows:
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
 ```
 
 [1]: https://github.com/DataDog/integrations-core

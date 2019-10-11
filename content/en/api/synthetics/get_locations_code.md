@@ -5,13 +5,14 @@ order: 29.91
 external_redirect: /api/#get-locations
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/synthetics/locations`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_locations" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_locations" >}}

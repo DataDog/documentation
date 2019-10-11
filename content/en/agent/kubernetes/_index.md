@@ -31,7 +31,7 @@ There are a number of different ways to monitor your Kubernetes system using Dat
 To gather metrics, traces, and logs from your Kubernetes clusters, there are four options:
 
 * [Container installation][2] (**recommended**) -  The Agent runs inside a Pod. This implementation is sufficient for the majority of use cases, but does not monitor the starting phase of your Kubernetes cluster.
-* [Helm installation][3] - [Helm][4] is a package manger for Kubernetes that allows you to easily install the Datadog Agent and enable its various capabilities.
+* [Helm installation][3] - [Helm][4] is a package manager for Kubernetes that allows you to easily install the Datadog Agent and enable its various capabilities.
 * [Host installation][5] - If the kubelet runs into an issue, and the Agent as a container dies, you will lose visibility into the node. However, if the Agent runs *on* the node, you can monitor the kubelet throughout its lifecycle. If this is a significant concern for you, install the Agent as a host.
 * [Cluster Agent][6] - For systems with very large Kubernetes clusters, the Datadog Cluster Agent can help to alleviate server load.
 

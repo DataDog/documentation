@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import re
 from bs4 import BeautifulSoup
 from optparse import OptionParser
 
@@ -22,12 +23,11 @@ def find_private_url(path, exclusions):
             dirnames[:] = [d for d in dirnames if d not in exclusions]
             filenames[:] = [f for f in filenames if f.endswith('.html')]
             for filename in filenames:
-                with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as current_file:
-                        html = BeautifulSoup(current_file, "html.parser")
-
-                        if html.find_all('meta', {'name': 'robots', 'content': 'noindex, nofollow'}):
-                            print('skipping private: %s' % dirpath)
-                            private_urls.append(dirpath)
+              with open(os.path.join(dirpath, filename), 'rt', encoding='utf-8') as current_file:
+                html = BeautifulSoup(current_file, "html.parser")
+                if html.find_all('meta', {'name': 'robots', 'content': 'noindex, nofollow'}):
+                  print('\x1b[32mINFO\x1b[0m: Skipping private page: %s' % dirpath)
+                  private_urls.append(dirpath)
 
     return private_urls
 
@@ -39,12 +39,15 @@ def transform_url(private_urls):
     :return new_private_urls: A list of documentation URL links that correspond to private doc files.
     """
     new_private_urls = []
-
     for url in private_urls:
 
-        ## We add /$ to all links in order to make them all "final", in fact
-        ## Algolia stop_url parameter uses regex and not "perfect matching" link logic
-        new_private_urls.append(url.replace('public/','docs.datadoghq.com/') + '/$')
+        ## We check if the url is not a localised FAQ url, or an API page if so we don't include it in list of stopped url
+        ## Since Localised FAQs are not indexed anyway and the API page is indexed as a whole
+        if not (re.match(r"public/fr/.*/faq/.*", url) or re.match(r"public/ja/.*/faq/.*", url) or re.match(r"public/ja/api/.*", url) or re.match(r"public/fr/api/.*", url)):
+
+          ## We add /$ to all links in order to make them all "final", in fact
+          ## Algolia stop_url parameter uses regex and not "perfect matching" link logic
+          new_private_urls.append(url.replace('public/','docs.datadoghq.com/') + '/$')
 
     return new_private_urls
 
@@ -56,17 +59,19 @@ def update_algolia_private_url(docs_index_config,private_urls):
     :param private_urls: A list of documentation URL links that correspond to private doc files.
     """
     with open(docs_index_config, 'rt', encoding='utf-8') as json_file:
-        print("Configuration file {} correctly loaded.".format(docs_index_config))
+        print("\x1b[32mINFO\x1b[0m: Configuration file {} correctly loaded.".format(docs_index_config))
         config = json.load(json_file)
 
-        print("Adding list of private URLs.")
-        for url in private_urls:
-            config["stop_urls"].append(url)
+        print("\x1b[32mINFO\x1b[0m: Adding list of private URLs.")
 
-    print("Addition complete, updating Algolia main configuration file with the new one.")
+        ## adding list or private urls while removing duplicates + sorting the global list
+        config["stop_urls"] = sorted(list(dict.fromkeys(config["stop_urls"] + private_urls)))
+
+    print("\x1b[32mINFO\x1b[0m: Addition complete, updating Algolia main configuration file with the new one.")
 
     with open(docs_index_config, 'w+', encoding='utf-8') as json_file:
         json.dump(config, json_file)
+
 
 if __name__ == "__main__":
     parser = OptionParser(usage="usage: %prog [options] create placeholder pages for multi-language")
@@ -77,13 +82,13 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
     options = vars(options)
 
-    print("Detecting the list of URL to not index:\n")
+    print("\x1b[32mINFO\x1b[0m: Detecting the list of URL flagged noindex, nofollow:\n")
     private_urls = find_private_url('public', options["excluded_directory"] + options["excluded_language"])
 
-    print("Transforming links to make them match the algolia logic:\n")
+    print("\x1b[32mINFO\x1b[0m: Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
 
-    print("Updating Algolia docsearch configuration file:\n")
+    print("\x1b[32mINFO\x1b[0m: Updating Algolia docsearch configuration file:\n")
     update_algolia_private_url(options["config_location"],private_urls)
 
-    print("Algolia docsearch config update \o/")
+    print("\x1b[32mINFO\x1b[0m: Algolia docsearch config update \o/")

@@ -16,7 +16,7 @@ For servers with no direct internet access, the Agent can be configured to route
 
 If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
 
-The rpm packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/x86_64/][3]. 
+The rpm packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/x86_64/][3] and dep packages are available at [https://apt.datadoghq.com/pool/d/da/][4].
 
 **Note**: The package bundles all resources necessary to run the Agent and checks (whether the integration is enabled or not). In terms of hard requirements, Python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
 
@@ -26,13 +26,19 @@ Once the package has been transferred to the target system, it can be installed 
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.x86_64.rpm
 ```
 
-Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][4] for your organization. This can be done with a single command:
+To install a deb file in the current director for Debian based distributions:
 
 ```bash
-sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/dd-agent/datadog.yaml.example > /etc/dd-agent/datadog.yaml"
+sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-Then, [start the Agent][5] using the appropriate command for your system.
+Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][5] for your organization. This can be done with a single command:
+
+```bash
+sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-aent/datadog.yaml.example > /etc/datadog-aent/datadog.yaml.example"
+```
+
+Then, [start the Agent][6] using the appropriate command for your system.
 
 ## Further Reading
 
@@ -41,5 +47,6 @@ Then, [start the Agent][5] using the appropriate command for your system.
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
 [3]: https://yum.datadoghq.com/stable/6/x86_64
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: /agent/guide/agent-commands/#start-the-agent
+[4]: https://apt.datadoghq.com/pool/d/da/
+[5]: https://app.datadoghq.com/account/settings#api
+[6]: /agent/guide/agent-commands/#start-the-agent

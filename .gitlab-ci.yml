@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_upgrade-docs-webpack
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -55,10 +55,11 @@ build_preview:
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_preview_link_checks:
+link_checks_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
@@ -70,15 +71,27 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_missing_tms_preview:
+missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
-  allow_failure: true
   dependencies:
     - build_preview
   script:
     - check_missing_tms
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+index_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
+    - index_docsearch_algolia_preview
+  dependencies:
+    - build_preview
+  when: manual
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -102,15 +115,13 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
     - create_artifact
     - create_artifact_untracked
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   artifacts:
     when: on_success
     paths:
-      - local/etc/docsdatadoghq.json
       - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
     expire_in: 1 week
   only:
     - master
@@ -131,12 +142,24 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - cp ./local/etc/docsdatadoghq.json /etc/
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
+    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
+    - cat /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
     - build_live
   only:
     - schedules
+
+evaluate_missing_metrics:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  only:
+    - master
+
 
 manage_translations:on-schedule:
   <<: *base_template
@@ -150,6 +173,8 @@ manage_translations:on-schedule:
     - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
+
+
 
 #push_translations:
 #  <<: *base_template
@@ -167,13 +192,24 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
-  allow_failure: true
   dependencies:
     - build_live
   script:
     - check_missing_tms
   only:
     - master
+
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  dependencies:
+    - build_live
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template

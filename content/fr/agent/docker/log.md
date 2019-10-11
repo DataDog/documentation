@@ -196,11 +196,14 @@ Consultez la [documentation relative aux règles de traitement multiligne][1] po
 Si vous exécutez Kubernetes, vous pouvez utiliser les annotations de pod.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: webapp
   template:
     metadata:
       annotations:

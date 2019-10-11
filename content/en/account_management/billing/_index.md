@@ -13,7 +13,7 @@ Datadog meters the count of hosts, containers, and custom metrics hourly. The bi
 
 Hosts are defined as any instances with the Datadog Agent installed plus any AWS EC2s, GCP, Azure, or vSphere VMs monitored with our integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
-Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 24 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
+Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
 
 ### Containers
 
@@ -34,7 +34,7 @@ You can set specific email addresses to receive invoices on the [Plan][7] page u
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
 ## Further Reading
-  
+
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}Usage details{{< /nextlink >}}
@@ -42,6 +42,7 @@ You can set specific email addresses to receive invoices on the [Plan][7] page u
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}

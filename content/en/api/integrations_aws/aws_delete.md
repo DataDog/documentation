@@ -1,7 +1,7 @@
 ---
 title: Delete an AWS integration
 type: apicontent
-order: 15.3
+order: 15.04
 external_redirect: /api/#delete-an-aws-integration
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#delete-an-aws-integration
 
 Delete a given Datadog-AWS integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

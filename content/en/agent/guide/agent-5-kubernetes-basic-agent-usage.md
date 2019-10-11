@@ -8,6 +8,10 @@ aliases:
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
+<div class="alert alert-warning">
+The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
+</div>
+
 ## Overview
 
 Get metrics from Kubernetes in real time to:

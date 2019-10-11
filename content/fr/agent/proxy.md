@@ -86,7 +86,7 @@ Sur les hosts Unix, un proxy sur l'ensemble du système peut être défini avec 
 
 L'Agent utilise les valeurs suivantes par ordre de priorité :
 
-1. Les variables d'environnement `DD_PROXY_HTTPS`, `DD_PROXY_HTTP` et `DD_PROXY_NO_PROXY` 
+1. Les variables d'environnement `DD_PROXY_HTTPS`, `DD_PROXY_HTTP` et `DD_PROXY_NO_PROXY`
 2. Les variables d'environnement `HTTPS_PROXY`, `HTTP_PROXY` et `NO_PROXY`
 3. Les valeurs spécifiées dans `datadog.yaml`
 
@@ -193,25 +193,25 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.com:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.com:443 check port 80
+    server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.com:443 check port 80
+    server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 Une fois la configuration HAProxy effectuée, vous pouvez la recharger ou redémarrer HAProxy.
@@ -284,25 +284,25 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.eu:443 check port 80
+    server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.eu:443 check port 80
+    server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 Une fois la configuration HAProxy effectuée, vous pouvez la recharger ou redémarrer HAProxy.
@@ -342,7 +342,7 @@ Pour terminer, [redémarrez l'Agent][1].
 
 Pour vérifier que tout fonctionne correctement, consultez les statistiques HAProxy sur `http://haproxy.exemple.com:3833` ainsi que l'[aperçu de l'infrastructure][2].
 
-[1]: /fr/agent/#start-stop-restart-the-agent/#windows
+[1]: /fr/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -387,7 +387,7 @@ Pour terminer, [redémarrez l'Agent][1].
 Pour vérifier que tout fonctionne correctement, consultez les statistiques HAProxy sur `http://haproxy.exemple.com:3833` ainsi que l'[aperçu de l'infrastructure][2].
 
 
-[1]: /fr/agent/#start-stop-restart-the-agent/#windows
+[1]: /fr/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}

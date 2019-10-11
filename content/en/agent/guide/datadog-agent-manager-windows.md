@@ -8,9 +8,19 @@ further_reading:
 ---
 
 ## Overview
-After the Agent is [installed][1] on your Windows host, use the Datadog Agent Manager to manage the Agent graphically.
+The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can be configured in your `datadog.yaml` file. Setting the port to `-1` disables the GUI. By default it is enabled on port 5002 for Windows and Mac and is disabled on Linux.
+
+### Requirements
+
+1. Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
+
+2. The GUI is only launched if the user launching it has the correct user permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
+
+3. For security reasons, the GUI can only be accessed from the local network interface (localhost/127.0.0.1), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or container and access it from the host machine.
 
 ### Start the Datadog Agent Manager
+After the Agent is [installed][1] on your Windows host, start the Datadog Agent Manager to manage the Agent graphically.
+
 From the Windows start menu:
 
 * Click on the Datadog folder.
@@ -19,7 +29,7 @@ From the Windows start menu:
 
 From an elevated Powershell prompt:
 ```powershell
-& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
 ```
 
 The Datadog Agent Manager launches in your default web browser. The web address is `http://127.0.0.1:5002`.
@@ -31,18 +41,18 @@ The following sections provide information on the options in the left navigation
 #### General
 The general status page displays by default when launching the Datadog Agent Manager. It contains the following sections:
 
-| Section     | Description                                                                    |
-|-------------|--------------------------------------------------------------------------------|
+| Section     | Description                                                                     |
+|-------------|---------------------------------------------------------------------------------|
 | Agent Info  | Provides information on the Agent including version, log level, and file paths. |
 | System Info | Includes information on system time, ntp offset, Go, and Python versions.       |
 | Host Info   | Provides information on the host including OS, platform, procs, and uptime.     |
 | Hostnames   | Displays the hostnames and host tags found by the Agent.                        |
 | JMX Status  | A list of JMX checks with their status.                                         |
 | Forwarder   | Information on the Agent's forwarder including the status of your API key.      |
-| Endpoints   | Endpoints in use by the Agent.                                                 |
+| Endpoints   | Endpoints in use by the Agent.                                                  |
 | Logs Agent  | Information on the Logs Agent (if enabled).                                     |
 | Aggregator  | Information on the Agent's data aggregator.                                     |
-| DogStatsD   | Statistics on data sent with DogStatsD.                                           |
+| DogStatsD   | Statistics on data sent with DogStatsD.                                         |
 
 #### Collector
 The collector status page displays details on the Agent's running checks, for example:

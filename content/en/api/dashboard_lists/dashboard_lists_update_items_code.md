@@ -5,14 +5,14 @@ order: 9.8
 external_redirect: /api/#update-items-of-a-dashboard-list
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v2/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-dashboard-list-update-items" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-update-items" >}}

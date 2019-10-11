@@ -8,6 +8,6 @@ external_redirect: /api/#afficher-les-metadonnees-d-une-metrique
 
 L'endpoint des métadonnées de métriques vous permet d'obtenir des métadonnées sur une métrique spécifique.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

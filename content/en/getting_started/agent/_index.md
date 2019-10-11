@@ -64,23 +64,36 @@ Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][1
 ## Data Collected
 
 ### Metrics
+
+#### Agent
+
+The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][14] integration.
+
+| Metric                           | Description                                                                                                        |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **datadog.agent.python.version** | Shows a value of `1` if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
+| **datadog.agent.running**        | Shows a value of `1` if the Agent is currently reporting to Datadog.                                                 |
+| **datadog.agent.started**        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
+
+#### Checks
+
 Depending on your platform, the Agent has several core checks enabled by default that collect metrics.
 
 | Check       | Metrics       | Platforms          |
 |-------------|---------------|--------------------|
-| CPU         | [System][14]  | All                |
-| Disk        | [Disk][15]    | All                |
-| Docker      | [Docker][16]  | Docker             |
-| File Handle | [System][14]  | All except Mac     |
-| IO          | [System][14]  | All                |
-| Load        | [System][14]  | All except Windows |
-| Memory      | [System][14]  | All                |
-| Network     | [Network][17] | All                |
-| NTP         | [NTP][18]     | All                |
-| Uptime      | [System][14]  | All                |
-| Winproc     | [System][14]  | Windows            |
+| CPU         | [System][15]  | All                |
+| Disk        | [Disk][16]    | All                |
+| Docker      | [Docker][17]  | Docker             |
+| File Handle | [System][15]  | All except Mac     |
+| IO          | [System][15]  | All                |
+| Load        | [System][15]  | All except Windows |
+| Memory      | [System][15]  | All                |
+| Network     | [Network][18] | All                |
+| NTP         | [NTP][19]     | All                |
+| Uptime      | [System][15]  | All                |
+| Winproc     | [System][15]  | Windows            |
 
-To collect metrics from other technologies, see the [Integrations][19] page.
+To collect metrics from other technologies, see the [Integrations][20] page.
 
 ### Events
 The Agent sends events to Datadog when an Agent is started or restarted.
@@ -95,9 +108,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 ## Troubleshooting
 For help troubleshooting the Agent:
 
-* Visit the [Agent Troubleshooting][20] page.
-* View the [Agent Log Files][21]
-* Contact [Datadog support][22]
+* Visit the [Agent Troubleshooting][21] page.
+* View the [Agent Log Files][22]
+* Contact [Datadog support][23]
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -106,7 +119,7 @@ For help troubleshooting the Agent:
 ## Next Steps
 {{< whatsnext desc="After the Agent is installed:">}}
     {{< nextlink href="/getting_started/integrations" tag="Documentation" >}}Learn about Integrations{{< /nextlink >}}
-    {{< nextlink href="/getting_started" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
+    {{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /integrations
@@ -122,12 +135,13 @@ For help troubleshooting the Agent:
 [11]: /agent/guide/agent-commands/#start-the-agent
 [12]: /agent/guide/agent-commands/#stop-the-agent
 [13]: /agent/guide/agent-commands/#restart-the-agent
-[14]: /integrations/system/#metrics
-[15]: /integrations/disk/#metrics
-[16]: /integrations/docker_daemon/#metrics
-[17]: /integrations/network/#metrics
-[18]: /integrations/ntp/#metrics
-[19]: /getting_started/integrations
-[20]: /agent/troubleshooting
-[21]: /agent/guide/agent-log-files
-[22]: /help
+[14]: /integrations/agent_metrics
+[15]: /integrations/system/#metrics
+[16]: /integrations/disk/#metrics
+[17]: /integrations/docker_daemon/#metrics
+[18]: /integrations/network/#metrics
+[19]: /integrations/ntp/#metrics
+[20]: /getting_started/integrations
+[21]: /agent/troubleshooting
+[22]: /agent/guide/agent-log-files
+[23]: /help

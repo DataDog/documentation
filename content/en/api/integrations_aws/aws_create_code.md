@@ -1,16 +1,18 @@
 ---
 title: Create an AWS integration
 type: apicode
-order: 15.2
+order: 15.02
 external_redirect: /api/#create-an-aws-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/aws`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_create" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_create" >}}

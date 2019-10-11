@@ -5,12 +5,14 @@ order: 18.3
 external_redirect: /api/#add-new-services-and-schedules
 ---
 
-##### Signature
-`PUT /v1/integration/pagerduty`
+**SIGNATURE**:
 
-##### Example Request
+`POST /v1/integration/pagerduty`
+
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="pagerduty_add_services" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.pagerduty_add_services" >}}

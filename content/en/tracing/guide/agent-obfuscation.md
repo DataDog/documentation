@@ -5,7 +5,7 @@ private: true
 disable_toc: true
 ---
 
-Agent trace obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
+Agent [trace][1] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
 Currently this options only works with the following services:
 
@@ -20,7 +20,7 @@ Currently this options only works with the following services:
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
-Applies to spans of type `mongodb`, more specifically: to the `mongodb.query` span metadata.
+Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span tags.
 
 ```
 apm_config:
@@ -37,11 +37,11 @@ apm_config:
 ```
 
 * `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
-
+[1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
-Applies to spans of type `elasticsearch`, more specifically, to the `elasticsearch.body` span metadata:
+Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
 
 ```
 apm_config:
@@ -58,11 +58,11 @@ apm_config:
 ```
 
 * `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
-
+[1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Redis" %}}
 
-Applies to spans of type `redis`, more specifically, to the `redis.raw_command` span metadata:
+Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
 
 ```
 apm_config:
@@ -74,11 +74,11 @@ apm_config:
     redis:
       enabled: true
 ```
-
+[1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
-Applies to spans of type `memcached`, more specifically, to the `memcached.command` span metadata:
+Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
 
 ```
 apm_config:
@@ -90,11 +90,11 @@ apm_config:
     memcached:
       enabled: true
 ```
-
+[1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in spans of type `http`:
+HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
 
 ```
 apm_config:
@@ -110,7 +110,7 @@ apm_config:
 
 * `remove_query_string`: If true, obfuscates query strings in URLs.
 * `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
-
+[1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Stack Traces" %}}
 
@@ -127,3 +127,5 @@ apm_config:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /tracing/visualization/#trace

@@ -3,7 +3,7 @@ title: My trace-agent.log renders "empty `service`" error
 kind: faq
 ---
 
-If your Agent is not rendering your traces on the UI, the first place to look for errors is the `trace-agent.log`.
+If your Agent is not rendering your [traces][1] on the UI, the first place to look for errors is the `trace-agent.log`.
 
 You may see the following errors :
 
@@ -15,13 +15,13 @@ res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 
 ### Check that the service was properly defined
 
-Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page][1] leads you to the specific languages libraries we use.
+Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page][2] leads you to the specific languages libraries we use.
 
 ### My service is defined properly
 
 The issue is probably linked to the actual location of your code instrumentation.
 
-The goal here is to always have a Root span define when a Child span is called when an application is running.
+The goal here is to always have a Root [span][3] define when a Child span is called when an application is running.
 
 A wrong instrumentation can lead to a dissociation of that Child span to its Rootspan, either at every span call, or in some specific path calls in the application.
 
@@ -35,9 +35,11 @@ If the Child span isn't associated directly to the Root span, you could end up w
 
 ### Nope, my code is properly instrumented
 
-It's time to contact [the Datadog support team][2]!
+It's time to contact [the Datadog support team][4]!
 
 Send your flare, and details about the language/library you're using, and a snippet of your code instrumentation.
 
-[1]: /tracing/setup
-[2]: /help
+[1]: /tracing/visualization/#trace
+[2]: /tracing/setup
+[3]: /tracing/visualization/#spans
+[4]: /help

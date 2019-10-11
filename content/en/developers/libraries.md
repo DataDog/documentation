@@ -7,21 +7,27 @@ aliases:
 disable_toc: true
 ---
 
-## API and DogStatsD Client Libraries
+## API and DogStatsD client libraries
 
 The following table lists Datadog-official and community contributed API and [DogStatsD][1] client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
 
 {{< classic-libraries-table >}}
 
-## APM & Distributed Tracing Client Libraries
+## APM & Distributed Tracing client libraries
 
-The following table lists Datadog-official and community contributed [Trace][2] client libraries.
+The following table lists Datadog-official and community contributed [trace][2] client libraries.
 
 {{< tracing-libraries-table >}}
 
-## Datadog Client Community Libraries
+## Log management client libraries
 
-### Dashboards Backup
+The following table lists Datadog-official and community contributed log management client libraries.
+
+{{< log-libraries-table >}}
+
+## Datadog client community libraries
+
+### Dashboards backup
 
 Using Datadog [APIs][3], it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
@@ -32,7 +38,7 @@ Using Datadog [APIs][3], it's possible to write a script to backup your Dashboar
 | Ruby       | [kennel][8]      | [Zendesk][9]    |
 
 
-### Managing Monitors
+### Managing monitors
 
 There are multiple community projects available to maintain, manage, or backup monitors using the Datadog [API][3]:
 
@@ -40,11 +46,11 @@ There are multiple community projects available to maintain, manage, or backup m
 | ---       | ---              | ---                  |
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
-| Ruby      | [interferon][14] | [Airnb][15]          |
+| Ruby      | [interferon][14] | [Airbnb][15]         |
 | Ruby      | [dogwatch][16]   | [Rapid7][17]         |
 | Terraform | [Terraform][18]  | [Terraform][19]      |
 
-## Community Integrations
+## Community integrations
 
 ### Ansible
 In addition to the official Ansible integration, the [monitoring section][20] of the [ansible-modules-extras][21] repository contains modules that interact with Datadog.
@@ -125,7 +131,7 @@ This StackStorm Datadog [integration pack][57] supplies action integration for D
 ### Winston
 A Winston Datadog [transport][58].
 
-## Community Agent Ports
+## Community Agent ports
 
 ### FreeBSD
   * [FreeBSD dd-agent port][59]

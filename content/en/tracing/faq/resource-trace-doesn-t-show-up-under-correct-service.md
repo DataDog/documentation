@@ -5,7 +5,7 @@ kind: faq
 
 When using a custom instrumentation of your application, if you notice any resources/traces in the Datadog UI that aren't coupled the service you expect, the most likely scenario is explained below.
 
-A resource is connected to a service by more than the service Name - it is also done via the Name of the top-level span of the trace. This means that a service requires a top level name to be consistent across your resources.  
+A [resource][1] is connected to a [service][2] by more than the service Name - it is also done via the Name of the top-level [span][3] of the [trace][4]. This means that a service requires a top level name to be consistent across your resources.  
 See this in the following image in the address bar:
 
 {{< img src="tracing/faq/APM_service_name.png" alt="APM service Name" responsive="true" >}}
@@ -23,13 +23,19 @@ These resources, with a top level name of `web_identification` still appear in t
 An example of modifying the top level name for Python can be found below:
 
 ```
-   @tracer.wrap('tornado.notify', service='tornado-notification')
+   @tracer.wrap('tornado.notify', 
+                service='tornado-notification', 
+                resource='MainHandler.do_something')
     @tornado.gen.coroutine
-    def notify(self):
+    def do_something(self):
         # do something
 ```
 
 This function explicitly sets both the service name and Top Level Name, being `tornado-notification` and `tornado.notify` respectively.
+
+Also note that the resource name is set manually, `MainHandler.do_something`. 
+
+By default the resource name would be set to this as it's the name of the function and the class for which it lives under in Tornado.
 
 More examples and documentation can be found on our language-specific instrumentation documentation pages:
 
@@ -43,3 +49,14 @@ More examples and documentation can be found on our language-specific instrument
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## OpenTracing Top Level Spans
+
+To fix this when using OpenTracing, set the resource name to ensure that your resources are unique while sharing one consistent operation name for a service.
+
+In Java, this can be done by setting `DDTags.RESOURCE_NAME` from import `datadog.trace.api.DDTags`.
+
+[1]: /tracing/visualization/#resources
+[2]: /tracing/visualization/#services
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/#trace

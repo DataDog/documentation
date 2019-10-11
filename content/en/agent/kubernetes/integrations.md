@@ -1,5 +1,5 @@
 ---
-title: Custom Integrations
+title: Integration ConfigMap
 kind: documentation
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"

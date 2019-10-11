@@ -6,6 +6,7 @@ aliases:
   - /guides/
   - /faq/
   - /docs/
+  - /guides/overview/
 disable_toc: true
 ---
 

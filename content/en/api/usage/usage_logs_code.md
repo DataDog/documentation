@@ -5,9 +5,14 @@ order: 33.2
 external_redirect: /api/#get-hourly-usage-for-logs
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/logs`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-billing-usage-logs" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-logs" >}}

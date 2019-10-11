@@ -208,7 +208,7 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
 
 **Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
 
-So this example of span metadata is invalid:
+So this example of span tags is invalid:
 
 ```json
 {
@@ -253,14 +253,14 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Assign tag keys within [Distribution Metrics][1] (Beta) to create aggregate timeseries by applying sets of tags to a metric, for which a timeseries is created for every combination of tag values within the set.
+Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric -  this creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
-**Sets of tags are limited to groups of four**:
+** Apply up to ten tags. Exclusionary tags will not be accepted **:
 
-{{< img src="tagging/assigning_tags/distributionmetricstags.png" alt="Distribution Metrics Tags" responsive="true" style="width:80%;">}}
-
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /graphing/metrics/distributions
+[2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -397,6 +397,15 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 | [SQS][47]              | `queuename`                                                                                                                                                                                                   |
 | [VPC][48]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][49]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
+
+### Azure
+
+For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
+
+| Integration            | Datadog Tag Keys                                                                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable) |
+| Azure VMs integration  | All tags above plus: `host`, `size`, `operating_system`, `availability_zone`                                                                          |
 
 ## Further Reading
 

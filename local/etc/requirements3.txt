@@ -13,3 +13,4 @@ PyYAML==4.2b1
 tqdm==4.14.0
 Pygments==2.2.0
 datadog==0.16.0
+markdown2==2.3.8

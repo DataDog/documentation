@@ -8,7 +8,8 @@ external_redirect: /api/#post-an-event
 ## Post an event
 This endpoint allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`title`** [*required*]:
     The event title. *Limited to 100 characters.*
     Use `msg_title` with [the Datadog Ruby library][1].

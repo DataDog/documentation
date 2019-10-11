@@ -23,7 +23,7 @@ Regarding API rate limit policy:
 [1]: /help
 [2]: /api/#metrics
 [3]: /developers/metrics/custom_metrics
-[4]: /api/#query-time-series-points
+[4]: /api/#query-timeseries-points
 [5]: /api/?lang=bash#get-a-list-of-logs
 [6]: /api/#graphs
 [7]: /api/?lang=bash#logs

@@ -5,9 +5,14 @@ order: 14.3
 external_redirect: /api/#desactiver-un-host
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/host/<HOSTNAME>/mute`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-host-mute" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-host-mute" >}}

@@ -15,28 +15,29 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. Contact <a href="/help">Contact Datadog support</a> to enquire about enabling the feature for your account.
+This feature is in beta.
 </div>
 
 ## Overview
 
 Datadog’s [Logging without Limits][1]* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
 
-With log-based metrics, generate custom metrics from the count of logs that match a filter query and apply log attributes and tag keys as [metric tags][3] following the `<KEY>:<VALUE>` format.
+With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration.
 
 ## Generate a log-based metric
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" responsive="true" style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][4] of your Datadog account and select the *[Generate Metrics][5]* tab, then the **New Metric+** button.
+To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the *[Generate Metrics][4]* tab, then the **New Metric+** button.
 
 ### Add a new log-based metric
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Create a Logs to metric" responsive="true" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-3. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][5]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
+3. **Add dimensions to `group by`**: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [Tags][6] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+4. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
 **Note**: Data points for Log-based metrics are generated at one minute intervals.
 
@@ -59,12 +60,12 @@ Datadog would love to receive your feedback on this feature. You can submit your
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/logging_without_limits
-[2]: /logs/logging_without_limits/#exclusion-filters
-[3]: /tagging
-[4]: https://app.datadoghq.com/logs/pipelines
-[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[6]: /logs/explorer/search/#search-syntax
+[1]: /logs
+[2]: /logs/indexes/#exclusion-filters
+[3]: https://app.datadoghq.com/logs/pipelines
+[4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[5]: /logs/explorer/search/#search-syntax
+[6]: /tagging
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
 [9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform

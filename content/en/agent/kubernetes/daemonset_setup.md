@@ -34,6 +34,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest.
+
+Remember to encode your API key using `base64`:
+
+```
+echo -n <DD_API_KEY> | base64
+```
+
 **Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
 
 ```yaml
@@ -51,11 +58,14 @@ Create the following `datadog-agent.yaml` manifest.
 # data:
 #   api-key: "<YOUR_BASE64_ENCODED_DATADOG_API_KEY>"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
   template:
     metadata:
       labels:
@@ -201,80 +211,17 @@ To enable [Log collection][10] with your DaemonSet:
       env:
         (...)
         - name: DD_LOGS_ENABLED
-            value: "true"
+          value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-            value: "true"
+          value: "true"
+        - name: DD_AC_EXCLUDE
+          value: "name:datadog-agent"
     (...)
     ```
 
-2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
+    **Note**: Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
-The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes).
-
-Use log file collection when:
-
-* Docker is not the runtime
-* More than 10 containers are used within each pod
-
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
-
-Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to this directory.
-
-{{< tabs >}}
-{{% tab "K8s File" %}}
-
-    ```
-      (...)
-        volumeMounts:
-          (...)
-          - name: logpodpath
-              mountPath: /var/log/pods
-          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
-          - name: logcontainerpath
-            mountPath: /var/lib/docker/containers
-      (...)
-      volumes:
-        (...)
-        - hostPath:
-            path: /var/log/pods
-            name: logpodpath
-        # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: logcontainerpath
-      (...)
-    ```
-
-{{% /tab %}}
-{{% tab "Docker Socket" %}}
-
-    ```
-      (...)
-        volumeMounts:
-          (...)
-          - name: dockersocket
-            mountPath: /var/run/docker.sock
-      (...)
-      volumes:
-        (...)
-        - hostPath:
-            path: /var/run/docker.sock
-          name: dockersocket
-      (...)
-    ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-The Datadog Agent follows the below logic to know where logs should be picked up from:
-
-1. The Agent looks for the Docker socket, if available it collects logs from there.
-2. If Docker socket is not available, the Agent looks for `/var/log/pods` and if available collects logs from there.
-
-If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` can be used (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to force the Agent to go for the file collection mode.
-
-
-3. Mount the `pointdir` volume in *volumeMounts*:
+2. Mount the `pointdir` volume in *volumeMounts*:
 
     ```
       (...)
@@ -291,9 +238,76 @@ If you do want to collect logs from `/var/log/pods` even if the Docker socket is
       (...)
     ```
 
-The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
+    The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-Use [Autodiscovery with Pod Annotations][11] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
+
+The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
+
+* Docker is not the runtime
+* More than 10 containers are used within each pod
+
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files:
+
+{{< tabs >}}
+{{% tab "K8s File" %}}
+
+Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to this directory:
+
+```
+  (...)
+    volumeMounts:
+      (...)
+      - name: logpodpath
+        mountPath: /var/log/pods
+      # Docker runtime directory, replace this path with your container runtime logs directory,
+      # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+      - name: logcontainerpath
+        mountPath: /var/lib/docker/containers
+  (...)
+  volumes:
+   (...)
+    - hostPath:
+        path: /var/log/pods
+      name: logpodpath
+    # Docker runtime directory, replace this path with your container runtime logs directory,
+    # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+    - hostPath:
+        path: /var/lib/docker/containers
+      name: logcontainerpath
+  (...)
+```
+
+{{% /tab %}}
+{{% tab "Docker Socket" %}}
+
+Mount the docker socket into the Datadog Agent:
+
+```
+  (...)
+    volumeMounts:
+      (...)
+      - name: dockersocket
+        mountPath: /var/run/docker.sock
+  (...)
+  volumes:
+    (...)
+    - hostPath:
+        path: /var/run/docker.sock
+      name: dockersocket
+  (...)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The Datadog Agent follows the below logic to know where logs should be picked up from:
+
+1. The Agent looks for the Docker socket, if available it collects logs from there.
+2. If Docker socket is not available, the Agent looks for `/var/log/pods` and if available collects logs from there.
+
+**Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
+
+Finally, use [Autodiscovery with Pod Annotations][11] to enhance log collection for your containers.
 
 #### Short lived containers
 
@@ -307,11 +321,8 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
-For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 10 seconds. Therefore, by default, the Agent does not collect data for any container with a shorter life.
-
-You can override the polling interval by setting the `ad_config_poll_interval` parameter, which is equivalent to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
-
-For a Kubernetes environment, use the `K8s file` collection method that supports init, stopped, and short lived containers. No additional setup is required.
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
+Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -412,7 +423,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[11]: /agent/autodiscovery/integrations/?tab=kubernetes
 [12]: /tracing/setup
 [13]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [14]: /agent/kubernetes/dogstatsd

@@ -9,7 +9,7 @@ external_redirect: /api/#create-child-organization
 
 This endpoint requires the [multi-org account][1] feature and must be enabled by [contacting support][2].
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
     The name of the new child-organization, limited to 32 characters.

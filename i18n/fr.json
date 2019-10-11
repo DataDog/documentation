@@ -230,5 +230,9 @@
 
   "search": {
     "other": "Recherche"
+  },
+
+  "type": {
+    "other": "Type"
   }
 }

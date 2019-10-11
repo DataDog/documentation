@@ -9,11 +9,12 @@ external_redirect: /api/#get-user
 
 Get a user in the organization specified by the user's handle.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`id`** [*required*]:
     The handle of the user.
 
-##### RESPONSE
+**RESPONSE**:
 
 - `user`: A user object.
 

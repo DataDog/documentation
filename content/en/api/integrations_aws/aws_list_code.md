@@ -1,16 +1,18 @@
 ---
 title: List all AWS integrations
 type: apicode
-order: 15.1
+order: 15.01
 external_redirect: /api/#list-all-aws-integrations
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/integration/aws`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_list" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_list" >}}

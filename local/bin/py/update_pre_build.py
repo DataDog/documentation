@@ -12,6 +12,8 @@ import shutil
 import requests
 import yaml
 import pickle
+import markdown2
+
 from collections import OrderedDict
 from functools import partial, wraps
 from itertools import chain, zip_longest
@@ -106,7 +108,7 @@ class GitHub:
         )
         headers = self.headers()
         print(
-            "Getting latest sha from {}/{}..".format(
+            "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
                 repo, branch
             )
         )
@@ -119,7 +121,7 @@ class GitHub:
             )
             if sha:
                 print(
-                    "Getting tree from {}/{} @ {}".format(
+                    "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
                         repo, branch, sha
                     )
                 )
@@ -176,9 +178,7 @@ class PreBuild:
         self.options = opts
         self.list_of_contents = []
         self.tempdir = (
-            "/tmp"
-            if platform.system() == "Darwin"
-            else tempfile.gettempdir()
+            "./integrations_data"
         )
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),
@@ -342,7 +342,7 @@ class PreBuild:
         )
 
     @staticmethod
-    def csv_to_yaml(key_name, csv_filename, yml_filename):
+    def metric_csv_to_yaml(key_name, csv_filename, yml_filename):
         """
         Given a file path to a single csv file convert it to a yaml file
 
@@ -357,6 +357,11 @@ class PreBuild:
                 dict(line) for line in reader
             ]
         if yaml_data[key_name]:
+            # Transforming the metric description to html in order to interpret markdown in
+            # integrations metrics table.
+            # the char strip is to compensate for the lib adding <p> </p><br> tags
+            for metric in yaml_data[key_name]:
+                metric['description'] = str(markdown2.markdown(metric['description']))[3:-5]
             with open(
                 file=yml_filename,
                 mode="w",
@@ -403,7 +408,7 @@ class PreBuild:
         """
         This represents the overall workflow of the build of the documentation
         """
-        print("Processing")
+        print("\x1b[34mStarting Processing...\x1b[0m")
 
         self.extract_config()
 
@@ -420,7 +425,7 @@ class PreBuild:
         that needs to be pulled and processed.
         """
         print(
-            "Loading {} configuration file".format(
+            "\x1b[32mINFO\x1b[0m: Loading {} configuration file".format(
                 getenv("CONFIGURATION_FILE")
             )
         )
@@ -472,7 +477,7 @@ class PreBuild:
             repo_name = "../" + content["repo_name"] + sep
             if isdir(repo_name):
                 print(
-                        "local version of {} found".format(
+                        "\x1b[32mINFO\x1b[0m: Local version of {} found".format(
                             content["repo_name"]
                         )
                     )
@@ -482,7 +487,7 @@ class PreBuild:
                 )
             elif self.options.token:
                 print(
-                    "No local version of {} found, downloading content from upstream version".format(
+                    "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
                         content["repo_name"]
                     )
                 )
@@ -504,7 +509,7 @@ class PreBuild:
                         )
             else:
                 print(
-                    "No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
+                    "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
                         content["repo_name"]
                     )
                 )
@@ -549,7 +554,7 @@ class PreBuild:
 
             else:
                 print(
-                    "[ERROR] Unsuccessful Processing of {}".format(
+                    "\x1b[31mERROR\x1b[0m: Unsuccessful Processing of {}".format(
                         content
                     )
                 )
@@ -710,7 +715,7 @@ class PreBuild:
                         remove(input_file)
                     except OSError:
                         print(
-                            "the file {} was not found and could not be removed during merge action".format(
+                            "\x1b[31mERROR\x1b[0m: The file {} was not found and could not be removed during merge action".format(
                                 input_file
                             )
                         )
@@ -736,7 +741,7 @@ class PreBuild:
                         remove(input_file)
                     except OSError:
                         print(
-                            "the file {} was not found and could not be removed during discard action".format(
+                            "\x1b[31mERROR\x1b[0m: The file {} was not found and could not be removed during discard action".format(
                                 input_file
                             )
                         )
@@ -817,7 +822,7 @@ class PreBuild:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
-        self.csv_to_yaml(key_name, file_name, new_file_name)
+        self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
         """
@@ -913,7 +918,7 @@ class PreBuild:
             no_integration_issue = False
             manifest_json = {}
             print(
-                "WARNING: No manifest found for {}".format(
+                "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(
                     file_name
                 )
             )

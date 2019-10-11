@@ -13,12 +13,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-## Change Timeboard name
-
-1. Click on the info icon on the top right corner of the Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" style="width:75%;">}}
-2. Click on the pencil icon to edit the title and description
-3. Click the checkmark to save changes
+Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 ## Event correlation
 
@@ -53,7 +48,7 @@ Fast and easy correlation is key when troubleshooting an issue. Use the followin
 
 Select `View related logs` to jump to the Log Explorer page zoomed on the selected timeframe with the current context of your graph.
 
-### How do we define the search query ?
+### How do we define the search query?
 
 To define the most related logs, the following parameters are used:
 

@@ -1,17 +1,15 @@
 ---
 title: Enable an AWS service log collection
 type: apicontent
-order: 15.8
+order: 15.09
 external_redirect: /api/#enable-an-aws-service-log-collection
 ---
 
 ## Enable an AWS service log collection
 
-<mark>This endpoint is in public beta.</mark>
-
 Enable Automatic Log collection for your AWS services.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

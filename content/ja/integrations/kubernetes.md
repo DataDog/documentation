@@ -11,6 +11,7 @@ aliases:
   - /ja/tracing/api/
   - /ja/integrations/kubernetes_state/
   - /ja/integrations/kube_proxy/
+  - /ja/integrations/Kubernetes
 public_title: Datadog-Kubernetes インテグレーション
 short_description: Pod スケジュールイベントをキャプチャし、Kublets のステータスのトレースなどを実行します
 categories:
@@ -20,7 +21,7 @@ categories:
   - orchestration
   - log collection
 doc_link: /integrations/kubernetes/
-ddtype: チェック
+ddtype: check
 ---
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 

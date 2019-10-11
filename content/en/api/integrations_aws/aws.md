@@ -7,7 +7,10 @@ external_redirect: /api/#integration-aws
 
 ## Integration AWS
 
-Configure your Datadog-AWS integration directly through Datadog API.
-For more information, see the [AWS integration page][1].
+<mark>The AWS endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
-[1]: /integrations/amazon_web_services
+Configure your Datadog-AWS integration directly through Datadog API.
+For more information, see the [AWS integration page][2].
+
+[1]: /help
+[2]: /integrations/amazon_web_services

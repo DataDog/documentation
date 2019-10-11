@@ -6,7 +6,7 @@ external_redirect: /api/#desactiver-un-utilisateur
 ---
 
 ##### Signature
-`DELETE /v1/user/<USER_ID>`
+`DELETE /v1/users/<ID_UTILISATEUR>`
 ##### Exemple de requête
 {{< code-snippets basename="api-user-disable" >}}
 ##### Exemple de réponse

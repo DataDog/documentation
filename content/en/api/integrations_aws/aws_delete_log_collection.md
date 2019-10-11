@@ -1,17 +1,15 @@
 ---
 title: Delete AWS log collection
 type: apicontent
-order: 15.9
+order: 15.10
 external_redirect: /api/#delete-aws-log-collection
 ---
 
 ## Delete AWS log collection
 
-<mark>This endpoint is in public beta.</mark>
-
 Delete a Datadog-AWS log collection configuration by removing the specific Lambda ARN associated with a given AWS account.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

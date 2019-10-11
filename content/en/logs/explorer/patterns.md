@@ -35,12 +35,12 @@ Switch to the patterns view to automatically see your log patterns for the selec
 
 Each pattern comes with highlights, to get you straight to its characteristic features:
 
-* Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines. 
-* A mini graph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns. 
+* Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines.
+* A mini graph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns.
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
-{{< img src="logs/explorer/patterns/patterns_overview.gif" alt="Log Patterns" responsive="true" style="width:90%;">}}
+{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true" responsive="true" width="90%" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 

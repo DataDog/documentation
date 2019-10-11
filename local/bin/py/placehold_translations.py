@@ -28,7 +28,7 @@ def get_disclaimer_from_params(config_location, key):
             c_yaml = yaml.load(f.read())
             return c_yaml.get('disclaimer', '') or ''
     except:
-        print("Error getting disclaimer")
+        print("\x1b[31mERROR\x1b[0m: Error getting disclaimer")
 
 
 def get_languages(config_location):
@@ -151,7 +151,7 @@ def main():
             files_location = files_location if files_location.endswith('/') else files_location + '/'
         lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"])
         diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])
-        print("building {0} placeholder pages for {1} ".format(len(diff), l))
+        print("\x1b[32mINFO\x1b[0m: building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
             create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
 
