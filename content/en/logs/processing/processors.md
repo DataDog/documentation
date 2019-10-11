@@ -400,12 +400,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 Use the Category Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
 Use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
-**Note**: 
-* The syntax of the query is the one of [Logs Explorer][1] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+**Note**:
+
+* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
-
-[1]: /logs/explorer/search/#search-syntax
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -459,9 +458,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 {{% /tab %}}
 {{< /tabs >}}
 
-Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][1].
-
-[1]: /logs/processing/processors/?tab=ui#log-status-remapper
+Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][7].
 
 ## Arithmetic processor
 
@@ -478,9 +475,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
-* If you need to scale a unit of measure, see [Scale Filter][6].
-
-[6]:/logs/processing/parsing/?tab=filter#scale
+* If you need to scale a unit of measure, see [Scale Filter][8].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -615,3 +610,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /logs/guide/log-parsing-best-practice
 [5]: /tracing/advanced/connect_logs_and_traces
+[6]: /logs/explorer/search/#search-syntax
+[7]: /logs/processing/processors/?tab=ui#log-status-remapper
+[8]: /logs/processing/parsing/?tab=filter#scale
