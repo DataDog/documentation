@@ -312,7 +312,7 @@
       ]
     ]
   },
-  "only_content_level": false,
+  "only_content_level": true,
   "user_agent": "Googlebot",
   "nb_hits": 94978
 }
