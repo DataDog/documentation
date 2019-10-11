@@ -97,7 +97,7 @@ main:
             url: agent/autodiscovery/integrations
           - name: Identificateur de conteneur
             url: agent/autodiscovery/ad_identifiers
-          - name: Template Variables
+          - name: Template variables
             url: agent/autodiscovery/template_variables
           - name: Extraction de tag
             url: agent/autodiscovery/tag
@@ -158,7 +158,7 @@ main:
             url: graphing/dashboards/screenboard/
           - name: Timeboard
             url: graphing/dashboards/timeboard/
-          - name: Template Variables
+          - name: Template variables
             url: graphing/dashboards/template_variables/
           - name: Graphiques partagés
             url: graphing/dashboards/shared_graph/
@@ -405,7 +405,7 @@ main:
             url: logs/explorer/analytics
           - name: Vues enregistrées
             url: logs/explorer/saved_views
-          - name: Modèles de logs
+          - name: Log Patterns
             url: logs/explorer/patterns
       - name: Logging without Limits
         url: logs/logging_without_limits/
@@ -424,14 +424,14 @@ main:
     url: synthetics/
     pre: nav_synthetics
     children:
-      - name: API Tests
+      - name: Tests API
         url: synthetics/api_tests
-      - name: Browser Tests
+      - name: Tests Browser
         url: synthetics/browser_tests
       - name: Intégration APM
         url: synthetics/apm/
         children:
-          - name: Browser Tests
+          - name: Test Browser
             url: synthetics/apm/browser_tests
       - name: Identifier les Bots Synthetics
         url: synthetics/identify_synthetics_bots

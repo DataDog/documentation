@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-des-localisations"
 
 Obtenir une liste des localisations disponibles
 
-##### Arguments
+**ARGUMENTS**:
 
 *Cet endpoint ne prend aucun argument JSON*.

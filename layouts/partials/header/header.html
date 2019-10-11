@@ -27,9 +27,12 @@
                             <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                             {{ if .children }}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {{ range .children }}
-                                        <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                  {{ range .children }}
+                                    {{ if eq .link "https://www.datadoghq.com/solutions/cloud-migration/" }}
+                                      <hr class="my-1 mx-1 border-gray-light" />
                                     {{ end }}
+                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                  {{ end }}
                                 </div>
                             {{ end }}
                         </li>
@@ -49,9 +52,9 @@
                             <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                             {{ if .children }}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {{ range .children }}
+                              {{ range .children }}
                                 <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
-                                {{ end }}
+                              {{ end }}
                             </div>
                             {{ end }}
                         </li>

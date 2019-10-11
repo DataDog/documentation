@@ -143,7 +143,7 @@ logs_config:
     * `app.datadoghq.eu` の場合: `agent-intake.logs.datadoghq.eu` のポート `443`。SSL 暗号化をアクティブにします。
 
 * SSL 暗号化には、TLS 暗号化の公開鍵を使用します。
-    * [app.datadoghq.com][1] の場合 
+    * [app.datadoghq.com][1] の場合
     * [app.datadoghq.eu][2] の場合
 
     一部のシステムでは、証明書チェーン全体が必要になることがあります。その場合は、代わりにこの公開鍵を使用します。
@@ -227,7 +227,7 @@ frontend metrics-forwarder
     default_backend datadog-metrics
 
 # Agent がトレースを送信するために接続する
-# エンドポイントを宣言します (例: APM 構成セクションの "endpoint" 
+# エンドポイントを宣言します (例: APM 構成セクションの "endpoint"
 # の値)。
 frontend traces-forwarder
     bind *:3835
@@ -235,7 +235,7 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # Agent がプロセスを送信するために接続する
-# エンドポイントを宣言します (例: プロセス構成セクションの "url" 
+# エンドポイントを宣言します (例: プロセス構成セクションの "url"
 # の値)。
 frontend processes-forwarder
     bind *:3836
@@ -256,25 +256,25 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.com:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.com:443 check port 80
+    server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.com:443 check port 80
+    server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。
@@ -318,7 +318,7 @@ frontend metrics-forwarder
     default_backend datadog-metrics
 
 # Agent がトレースを送信するために接続する
-# エンドポイントを宣言します (例: APM 構成セクションの "endpoint" 
+# エンドポイントを宣言します (例: APM 構成セクションの "endpoint"
 # の値)。
 frontend traces-forwarder
     bind *:3835
@@ -326,7 +326,7 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # Agent がプロセスを送信するために接続する
-# エンドポイントを宣言します (例: プロセス構成セクションの "url" 
+# エンドポイントを宣言します (例: プロセス構成セクションの "url"
 # の値)。
 frontend processes-forwarder
     bind *:3836
@@ -347,25 +347,25 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.eu:443 check port 80
+    server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.eu:443 check port 80
+    server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。
@@ -405,7 +405,7 @@ skip_ssl_validation: true
 
 すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
 
-[1]: /ja/agent/#start-stop-restart-the-agent/#windows
+[1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -450,7 +450,7 @@ skip_ssl_validation: yes
 すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
 
 
-[1]: /ja/agent/#start-stop-restart-the-agent/#windows
+[1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}
@@ -473,7 +473,7 @@ skip_ssl_validation: yes
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
@@ -496,7 +496,7 @@ stream {
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
@@ -541,7 +541,7 @@ SSL/TLS 接続の確立は NGINX の `proxy_ssl on` オプションによって�
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
-3. `proxy-node` 上の非ローカルトラフィックを許可するために、`datadog.conf` の 
+3. `proxy-node` 上の非ローカルトラフィックを許可するために、`datadog.conf` の
      `# non_local_traffic: no` の行を `non_local_traffic: yes` に変更します。
 
 4. ポート 17123 経由で他のノードから `proxy-node` に到達できることを確認します。`proxy-node` で Agent を起動し、他のノードでも Agent を実行します。

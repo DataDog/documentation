@@ -29,25 +29,30 @@ main:
     url: getting_started/application/monitors
     parent: getting_started_datadog
     weight: 301
+  - name: Logs
+    identifier: getting_started_logs
+    url: getting_started/logs/
+    parent: getting_started
+    weight: 4
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 4
+    weight: 5
   - name: Tracing distribué
     identifier: getting_started_distributed_tracing
     url: getting_started/tracing/distributed-tracing/
     parent: getting_started_collect_traces
-    weight: 401
+    weight: 501
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 5
+    weight: 6
   - name: Centre d'apprentissage
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Tagging
     url: tagging/
     pre: nav_tagging
@@ -271,7 +276,7 @@ main:
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
     weight: 804
-  - name: Problèmes d'Autorisations
+  - name: Problèmes d'autorisation
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
     weight: 805
@@ -353,109 +358,113 @@ main:
     parent: graphing_metrics
     identifier: graphing_metrics_distributions
     weight: 304
+  - name: Corrélation de Métrique
+    url: graphing/correlations/
+    parent: graphing
+    weight: 4
   - name: Notebooks
     url: graphing/notebooks/
     parent: graphing
-    weight: 4
+    weight: 5
   - name: Le flux d'événements
     url: graphing/event_stream/
     parent: graphing
-    weight: 5
+    weight: 6
   - name: Infrastructure
     url: graphing/infrastructure/
     parent: graphing
     identifier: graphing_infrastructure
-    weight: 6
+    weight: 7
   - name: Map des conteneurs
     url: graphing/infrastructure/containermap/
     parent: graphing_infrastructure
-    weight: 601
+    weight: 701
   - name: La Hostmap
     url: graphing/infrastructure/hostmap/
     parent: graphing_infrastructure
-    weight: 602
+    weight: 702
   - name: Live containers
     url: graphing/infrastructure/livecontainers/
     parent: graphing_infrastructure
-    weight: 603
+    weight: 703
   - name: Live Processes
     url: graphing/infrastructure/process/
     parent: graphing_infrastructure
-    weight: 604
+    weight: 704
   - name: Informatique sans serveur
     url: graphing/infrastructure/serverless/
     parent: graphing_infrastructure
-    weight: 606
+    weight: 706
   - name: De la requête au graphique
     url: graphing/functions/
     parent: graphing
     identifier: graphing_functions
-    weight: 7
+    weight: 8
   - name: Algorithmes
     url: graphing/functions/algorithms/
     parent: graphing_functions
-    weight: 701
+    weight: 801
   - name: Opérations arithmétiques
     url: graphing/functions/arithmetic/
     parent: graphing_functions
-    weight: 702
+    weight: 802
   - name: Count
     url: graphing/functions/count/
     parent: graphing_functions
-    weight: 703
+    weight: 803
   - name: Interpolation
     url: graphing/functions/interpolation/
     parent: graphing_functions
-    weight: 704
+    weight: 804
   - name: Rang
     url: graphing/functions/rank/
     parent: graphing_functions
-    weight: 705
+    weight: 805
   - name: Taux
     url: graphing/functions/rate/
     parent: graphing_functions
-    weight: 706
+    weight: 806
   - name: Régression
     url: graphing/functions/regression/
     parent: graphing_functions
-    weight: 707
+    weight: 807
   - name: Rollup
     url: graphing/functions/rollup/
     parent: graphing_functions
-    weight: 708
+    weight: 808
   - name: Lissage
     url: graphing/functions/smoothing/
     parent: graphing_functions
-    weight: 709
+    weight: 809
   - name: Timeshift
     url: graphing/functions/timeshift/
     parent: graphing_functions
-    weight: 710
+    weight: 810
   - name: Beta
     url: graphing/functions/beta/
     parent: graphing_functions
-    weight: 711
+    weight: 811
   - name: Graphiques JSON
     url: graphing/graphing_json/
     parent: graphing
     identifier: graphing_json
-    weight: 8
+    weight: 9
   - name: Schéma JSON des widgets
     url: graphing/graphing_json/widget_json/
     parent: graphing_json
-    weight: 801
+    weight: 901
   - name: Schéma JSON des requêtes
     url: graphing/graphing_json/request_json/
     parent: graphing_json
-    weight: 802
+    weight: 902
   - name: Widgets
     url: graphing/widgets/
     parent: graphing
-    weight: 9
+    weight: 10
   - name: Guides
     url: graphing/guide/
     parent: graphing
-    weight: 10
+    weight: 11
   - name: Alertes
     url: monitors/
     pre: nav_alerting
@@ -826,7 +835,7 @@ main:
     url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 703
-  - name: Modèles de logs
+  - name: Log Patterns
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 704
@@ -872,7 +881,7 @@ main:
     url: synthetics/identify_synthetics_bots/
     parent: synthetics
     weight: 5
-  - name: Paramètres
+  - name: Settings
     url: synthetics/settings/
     parent: synthetics
     weight: 6
@@ -891,7 +900,7 @@ main:
     parent: npm
     identifier: npm_page
     weight: 2
-  - name: Map Réseau
+  - name: Carte réseau
     url: network_performance_monitoring/network_map
     parent: npm
     identifier: npm_map
@@ -927,7 +936,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_metrics
     weight: 2
-  - name: Métriques custom
+  - name: Custom Metrics
     url: developers/metrics/custom_metrics/
     parent: dev_tools_metrics
     weight: 201

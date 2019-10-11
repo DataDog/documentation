@@ -6,7 +6,7 @@ external_redirect: '/api/#mettre-a-jour-un-dashboard'
 ---
 ## Mettre à jour un dashboard
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`title`** [*obligatoire*] :
     Titre du dashboard.

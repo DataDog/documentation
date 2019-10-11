@@ -44,29 +44,37 @@ main:
     parent: "getting_started_datadog"
     weight: 301
 
+  ## GETTING STARTED - Logs
+
+  - name: "Logs"
+    identifier: "getting_started_logs"
+    url: "getting_started/logs/"
+    parent: "getting_started"
+    weight: 4
+
   ## GETTING STARTED - Traces
 
   - name: "Tracing"
     identifier: "getting_started_collect_traces"
     url: "getting_started/tracing/"
     parent: "getting_started"
-    weight: 4
+    weight: 5
   - name: "Distributed Tracing"
     identifier: "getting_started_distributed_tracing"
     url: "getting_started/tracing/distributed-tracing/"
     parent: "getting_started_collect_traces"
-    weight: 401
+    weight: 501
 
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
-    weight: 5
+    weight: 6
 
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 6
+    weight: 7
 
 #############
 ## TAGGING ##
@@ -199,34 +207,63 @@ main:
     url: "agent/kubernetes/host_setup/"
     parent: "agent_kubernetes"
     weight: 302
-  - name: "Cluster Agent"
-    url: "agent/kubernetes/cluster/"
-    parent: "agent_kubernetes"
-    weight: 303
   - name: "Using Helm"
     url: "agent/kubernetes/helm/"
     parent: "agent_kubernetes"
-    weight: 304
+    weight: 303
   - name: "Event Collection"
     url: "agent/kubernetes/event_collection/"
     parent: "agent_kubernetes"
-    weight: 305
+    weight: 304
   - name: "Custom Integrations"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
-    weight: 306
+    weight: 305
   - name: "Metrics"
     url: "agent/kubernetes/metrics/"
     parent: "agent_kubernetes"
-    weight: 307
+    weight: 306
   - name: "Custom Metrics & DogStatsD"
     url: "agent/kubernetes/dogstatsd/"
     parent: "agent_kubernetes"
-    weight: 308
+    weight: 307
   - name: "Legacy Versions"
     url: "agent/kubernetes/legacy/"
     parent: "agent_kubernetes"
-    weight: 309
+    weight: 308
+
+  ## AGENT - Datadog Cluster Agent
+
+  - name: "Cluster Agent"
+    url: "agent/cluster_agent/"
+    parent: "agent"
+    identifier: "agent_cluster"
+    weight: 4
+  - name: "Setup"
+    url: "agent/cluster_agent/setup/"
+    parent: "agent_cluster"
+    identifier: "cluster_agent_setup"
+    weight: 401
+  - name: "Event Collection"
+    url: "agent/cluster_agent/event_collection/"
+    parent: "agent_cluster"
+    identifier: "cluster_agent_event_collection"
+    weight: 402
+  - name: "Custom & External Metrics"
+    url: "agent/cluster_agent/external_metrics/"
+    parent: "agent_cluster"
+    identifier: "cluster_agent_external_metrics"
+    weight: 403
+  - name: "Commands & Options"
+    url: "agent/cluster_agent/commands/"
+    identifier: "cluster_agent_commands"
+    parent: "agent_cluster"
+    weight: 404
+  - name: "Troubleshooting"
+    url: "agent/cluster_agent/troubleshooting/"
+    identifier: "cluster_agent_troubleshooting"
+    parent: "agent_cluster"
+    weight: 405
 
   ## AGENT - Autodiscovery
 
@@ -234,43 +271,43 @@ main:
     url: "agent/autodiscovery/"
     identifier: "agent_autodiscovery"
     parent: "agent"
-    weight: 4
+    weight: 5
   - name: "Auto-Configuration"
     url: "agent/autodiscovery/auto_conf/"
     parent: "agent_autodiscovery"
-    weight: 401
+    weight: 501
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
     parent: "agent_autodiscovery"
-    weight: 402
+    weight: 502
   - name: "Container Identifier"
     url: "agent/autodiscovery/ad_identifiers/"
     parent: "agent_autodiscovery"
-    weight: 403
+    weight: 503
   - name: "Template Variables"
     url: "agent/autodiscovery/template_variables/"
     parent: "agent_autodiscovery"
-    weight: 404
+    weight: 504
   - name: "Tag Extraction"
     url: "agent/autodiscovery/tag/"
     parent: "agent_autodiscovery"
-    weight: 405
+    weight: 505
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
-    weight: 406
+    weight: 506
   - name: "Endpoints Checks"
     url: "agent/autodiscovery/endpointschecks/"
     parent: "agent_autodiscovery"
-    weight: 407
+    weight: 507
   - name: "Cluster Checks"
     url: "agent/autodiscovery/clusterchecks/"
     parent: "agent_autodiscovery"
-    weight: 408
+    weight: 508
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
-    weight: 409
+    weight: 509
 
   ## AGENT - LOGS
 
@@ -278,19 +315,15 @@ main:
     url: "agent/logs/"
     identifier: "agent_logs"
     parent: "agent"
-    weight: 5
+    weight: 6
   - name: "Advanced Log Collection"
     url: "agent/logs/advanced_log_collection"
     parent: "agent_logs"
-    weight: 501
+    weight: 601
   - name: "Proxy"
     url: "agent/logs/proxy"
     parent: "agent_logs"
-    weight: 502
-  - name: "Upgrade to Agent v6"
-    url: "agent/guide/upgrade-to-agent-v6/"
-    parent: "agent"
-    weight: 7
+    weight: 602
 
   ## AGENT - Proxy
 
@@ -298,51 +331,56 @@ main:
     url: "agent/proxy/"
     parent: "agent"
     identifier: "agent_proxy"
-    weight: 6
+    weight: 7
+
+  - name: "Upgrade to Agent v6"
+    url: "agent/guide/upgrade-to-agent-v6/"
+    parent: "agent"
+    weight: 8
 
   ## AGENT - Troubleshooting
   - name: "Troubleshooting"
     url: "agent/troubleshooting/"
     parent: "agent"
-    weight: 8
+    weight: 9
     identifier: "agent_troubleshooting"
   - name: "Debug Mode"
     url: "agent/troubleshooting/debug_mode/"
     parent: "agent_troubleshooting"
-    weight: 801
+    weight: 901
   - name: "Agent Flare"
     url: "agent/troubleshooting/send_a_flare/"
     parent: "agent_troubleshooting"
-    weight: 802
+    weight: 902
   - name: "Agent Check Status"
     url: "agent/troubleshooting/agent_check_status/"
     parent: "agent_troubleshooting"
-    weight: 803
+    weight: 903
   - name: "NTP Issues"
     url: "agent/troubleshooting/ntp/"
     parent: "agent_troubleshooting"
-    weight: 804
+    weight: 904
   - name: "Permission Issues"
     url: "agent/troubleshooting/permissions/"
     parent: "agent_troubleshooting"
-    weight: 805
+    weight: 905
   - name: "Integrations Issues"
     url: "agent/troubleshooting/integrations/"
     parent: "agent_troubleshooting"
-    weight: 806
+    weight: 906
 
   ## AGENT - Guides
   - name: "Guides"
     url: "agent/guide/"
     identifier: "agent_guides"
     parent: "agent"
-    weight: 9
+    weight: 10
 
   - name: "Security"
     identifier: "agent_security"
     url: "security/agent/"
     parent: "agent"
-    weight: 10
+    weight: 11
 
 ##################
 ## INTEGRATIONS ##
@@ -399,7 +437,7 @@ main:
     url: "graphing/dashboards/template_variables/"
     parent: "graphing_dashboards"
     weight: 203
-    identifier: "graphing_dashboards_temp_variables" # name is not unique so add identifier
+    identifier: "graphing_dashboards_temp_variables"
   - name: "Shared Graphs"
     url: "graphing/dashboards/shared_graph/"
     parent: "graphing_dashboards"
@@ -430,15 +468,20 @@ main:
     identifier: "graphing_metrics_distributions"
     weight: 304
 
+  - name: "Metric Correlations"
+    url: "graphing/correlations/"
+    parent: "graphing"
+    weight: 4
+
   - name: "Notebooks"
     url: "graphing/notebooks/"
     parent: "graphing"
-    weight: 4
+    weight: 5
 
   - name: "Event Stream"
     url: "graphing/event_stream/"
     parent: "graphing"
-    weight: 5
+    weight: 6
 
   ## GRAPHING - Infrastructure
 
@@ -446,27 +489,27 @@ main:
     url: "graphing/infrastructure/"
     parent: "graphing"
     identifier: "graphing_infrastructure"
-    weight: 6
+    weight: 7
   - name: "Container Map"
     url: "graphing/infrastructure/containermap/"
     parent: "graphing_infrastructure"
-    weight: 601
+    weight: 701
   - name: "Host Map"
     url: "graphing/infrastructure/hostmap/"
     parent: "graphing_infrastructure"
-    weight: 602
+    weight: 702
   - name: "Live Containers"
     url: "graphing/infrastructure/livecontainers/"
     parent: "graphing_infrastructure"
-    weight: 603
+    weight: 703
   - name: "Live Processes"
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
-    weight: 604
+    weight: 704
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
-    weight: 606
+    weight: 706
 
   ## GRAPHING - Functions
 
@@ -474,51 +517,51 @@ main:
     url: "graphing/functions/"
     parent: "graphing"
     identifier: "graphing_functions"
-    weight: 7
+    weight: 8
   - name: "Algorithms"
     url: "graphing/functions/algorithms/"
     parent: "graphing_functions"
-    weight: 701
+    weight: 801
   - name: "Arithmetic"
     url: "graphing/functions/arithmetic/"
     parent: "graphing_functions"
-    weight: 702
+    weight: 802
   - name: "Count"
     url: "graphing/functions/count/"
     parent: "graphing_functions"
-    weight: 703
+    weight: 803
   - name: "Interpolation"
     url: "graphing/functions/interpolation/"
     parent: "graphing_functions"
-    weight: 704
+    weight: 804
   - name: "Rank"
     url: "graphing/functions/rank/"
     parent: "graphing_functions"
-    weight: 705
+    weight: 805
   - name: "Rate"
     url: "graphing/functions/rate/"
     parent: "graphing_functions"
-    weight: 706
+    weight: 806
   - name: "Regression"
     url: "graphing/functions/regression/"
     parent: "graphing_functions"
-    weight: 707
+    weight: 807
   - name: "Rollup"
     url: "graphing/functions/rollup/"
     parent: "graphing_functions"
-    weight: 708
+    weight: 808
   - name: "Smoothing"
     url: "graphing/functions/smoothing/"
     parent: "graphing_functions"
-    weight: 709
+    weight: 809
   - name: "Timeshift"
     url: "graphing/functions/timeshift/"
     parent: "graphing_functions"
-    weight: 710
+    weight: 810
   - name: "Beta"
     url: "graphing/functions/beta/"
     parent: "graphing_functions"
-    weight: 711
+    weight: 811
 
   ## GRAPHING - Graphing JSON
 
@@ -526,26 +569,26 @@ main:
     url: "graphing/graphing_json/"
     parent: "graphing"
     identifier: "graphing_json"
-    weight: 8
+    weight: 9
 
   - name: "Widget JSON schema"
     url: "graphing/graphing_json/widget_json/"
     parent: "graphing_json"
-    weight: 801
+    weight: 901
   - name: "Request JSON schema"
     url: "graphing/graphing_json/request_json/"
     parent: "graphing_json"
-    weight: 802
+    weight: 902
 
   - name: "Widgets"
     url: "graphing/widgets/"
     parent: "graphing"
-    weight: 9
+    weight: 10
 
   - name: "Guides"
     url: "graphing/guide/"
     parent: "graphing"
-    weight: 10
+    weight: 11
 
 ##############
 ## ALERTING ##
@@ -592,41 +635,45 @@ main:
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
     weight: 107
+  - name: "Process Check"
+    url: "monitors/monitor_types/process_check/"
+    parent: "monitor_types"
+    weight: 108
   - name: "Network"
     url: "monitors/monitor_types/network/"
     parent: "monitor_types"
-    weight: 108
+    weight: 109
   - name: "Custom Check"
     url: "monitors/monitor_types/custom_check/"
     parent: "monitor_types"
-    weight: 109
+    weight: 110
   - name: "Event"
     url: "monitors/monitor_types/event/"
     parent: "monitor_types"
-    weight: 110
+    weight: 111
   - name: "Logs"
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
-    weight: 111
+    weight: 112
   - name: "APM Metrics"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
-    weight: 112
+    weight: 113
     identifier: "monitor_apm"
   - name: "APM Trace Analytics"
     url: "monitors/monitor_types/trace_analytics"
     parent: "monitor_types"
     identifier: "monitors_trace_analytics"
-    weight: 113
+    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 114
+    weight: 115
     identifier: "monitor_watchdog"
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 115
+    weight: 116
 
 
   ## MONITORS -  Manage monitor
@@ -1046,6 +1093,11 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Troubleshooting"
+    url: "synthetics/troubleshooting/"
+    parent: "synthetics"
+    weight: 7
+
 ####################################
 ## Network Performance Monitoring ##
 ####################################
@@ -1313,16 +1365,6 @@ main:
     pre: "nav_glossary"
     identifier: "glossary_top_level"
     weight: 170000
-
-############
-## VIDEOS ##
-############
-
-  - name: "Videos"
-    url: "videos/"
-    pre: "nav_videos"
-    identifier: "video_top_level"
-    weight: 180000
 
 ##########
 ## HELP ##

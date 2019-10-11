@@ -1,6 +1,8 @@
 ---
 title: Troubleshooting and Deep Dive for Kafka
 kind: faq
+aliases:
+  - /integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
 ---
 
 ## What is Kafka ?
@@ -29,49 +31,52 @@ The [Kafka Integration][4] uses [Datadog's JMXFetch][5] application to pull metr
 The [Kafka_Consumer Integration][6] collects metrics like our standard Python based checks. This uses an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
 
 ## Troubleshooting:
+### Older Agent versions
 
-There are a few common issues you may face when it comes to the Kafka Integration. Here is a common list of issues that could be affecting users.
+This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version](/agent/guide/upgrade-to-agent-v6/#upgrade-to-agent-6) to see these metrics.
 
-1. This first troubleshooting issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. Upgrade the Agent to the latest version to see these metrics.
+### Cannot connect to instance
 
-2. The second most common issue is the following error for the Kafka Integration:
-```
+You might see the following error for the Datadog-Kafka integration:
+```text
 instance #kafka-localhost-<PORT_NUM> [ERROR]: 'Cannot connect to instance localhost:<PORT_NUM>. java.io.IOException: Failed to retrieve RMIServer stub
 ```
-This error essentially means that the Datadog Agent is unable to connect to the Kafka instance to retrieve metrics from the exposed mBeans over the RMI protocol.
-This error can be resolved by including the following JVM (Java Virtual Machine) arguments when starting the Kafka instance (required for Producer, Consumer, and Broker as they are all separate Java instances)
-```
+
+This error means the Datadog Agent is unable to connect to the Kafka instance to retrieve metrics from the exposed mBeans over the RMI protocol. The error can be resolved by including the following Java Virtual Machine (JVM) arguments when starting the Kafka instance (required for all separate Java instances - producer, consumer, and broker).
+```text
 -Dcom.sun.management.jmxremote.port=<PORT_NUM> -Dcom.sun.management.jmxremote.rmi.port=<PORT_NUM>
 ```
 
-3. The next issue is one that affects the Kafka Integration. The issue is that people may not be seeing Consumer and Producer metrics in your account. By default we only collect broker based metrics.
-Additionally, there are cases where users are using custom Producer and Consumer clients that are not written in Java and/or not exposing mBeans, so having this enabled would still collect zero metrics. To start pulling in metrics, if you're running Java based Producers and Consumers, you can uncomment this section of the yaml file and point the Agent to the proper ports:
-```
-# - host: remotehost
-    # port: 9998 # Producer
-    # tags:
-    # kafka: producer0
-    # env: stage
-    # newTag: test
-    # - host: remotehost
-    # port: 9997 # Consumer
-    # tags:
-    # kafka: consumer0
-    # env: stage
-    # newTag: test
-```
-if you are running Producers and Consumers from other languages, this isn't an option, and you have to use another way to submit these metrics from your code, for instance through dogstatsd.
+### Missing producer and consumer metrics
 
-4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your `Kafka_Consumer.yaml` file that doesn't exist in your environment, you see the following error in `info.log`:
+By default Datadog only collects broker based metrics. 
+
+For Java based producers and consumers, add the following to the `conf.yaml` and update the settings as necessary.  See the [sample kafka.d/conf.yaml][9] for all available configuration options.
+```yaml
+- host: remotehost
+  port: 9998 # Producer
+  kafka: producer0
+- host: remotehost
+  port: 9997 # Consumer
+  kafka: consumer0
 ```
+
+**Note**: This method does not work if you are using custom producer and consumer clients written in other languages or not exposing mBeans. To submit your metrics from your code, use [DogStatsD][10].
+
+### Partition doesn't exist
+
+This issue is specifically for the Kafka Consumer Agent check. If you specify a partition in `kafka_consumer.d/conf.yaml` that doesn't exist in your environment, you see the following error:
+```text
 instance - #0 [Error]: ''
 ```
-The solution here would be to only specify the specific partition for your topic. This correlates to this specific line:
-```
-#my_topic [0, 1, 4, 12]
-```
 
-5. Partition Context Limitation: the number of partition contexts collection is limited to 200. If you require more contexts, [contact the Datadog support team][8].
+To remedy, specify the correct partition for your topic. This correlates to this line:
+```yaml
+#     <TOPIC_NAME_1>: [0, 1, 4, 12]
+```
+### Partition context limitation
+
+The number of partition contexts collection is limited to 200. If you require more contexts, contact [Datadog support][8].
 
 [1]: https://kafka.apache.org
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell
@@ -81,3 +86,5 @@ The solution here would be to only specify the specific partition for your topic
 [6]: /integrations/kafka/#agent-check-kafka-consumer
 [7]: /agent
 [8]: /help
+[9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
+[10]: /developers/dogstatsd

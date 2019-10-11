@@ -197,23 +197,25 @@ public class ShoppingCartController : Controller
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
 ```php
-namespace App\Http\Controllers;
+<?php
+  namespace App\Http\Controllers;
 
-use DDTrace\GlobalTracer;
+  use DDTrace\GlobalTracer;
 
-class ShoppingCartController extends Controller
-{
-    public shoppingCartAction (Request $request) {
-        // Get the currently active span
-        $span = GlobalTracer::get()->getActiveSpan();
-        if (null !== $span) {
-            // customer_id -> 254889
-            $span->setTag('customer_id', $request->get('customer_id'));
-        }
+  class ShoppingCartController extends Controller
+  {
+      public shoppingCartAction (Request $request) {
+          // Get the currently active span
+          $span = GlobalTracer::get()->getActiveSpan();
+          if (null !== $span) {
+              // customer_id -> 254889
+              $span->setTag('customer_id', $request->get('customer_id'));
+          }
 
-        // [...]
-    }
-}
+          // [...]
+      }
+  }
+?>
 ```
 
 {{% /tab %}}

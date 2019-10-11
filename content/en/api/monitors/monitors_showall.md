@@ -14,7 +14,7 @@ external_redirect: /api/#get-all-monitor-details
 * **`name`** [*optional*, default=**None**]:
     A string to filter monitors by name
 * **`tags`** [*optional*, *default*=**None**]:
-    A comma separated list indicating what tags, if any, should be used to filter the list of monitorsby scope, e.g. `host:host0`. For more information, see the `tags` parameter for the appropriate `query` argument in the [Create a monitor](#monitor-create) section above.
+    A comma separated list indicating what tags, if any, should be used to filter the list of monitorsby scope, e.g. `host:host0`. For more information, see the `tags` parameter for the appropriate `query` argument in the [Create a monitor](#create-a-monitor) section above.
 * **`monitor_tags`** [*optional*, *default*=**None**]:
     A comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI automatically have the **service** key prepended (e.g. `service:my-app`)
 * **`with_downtimes`** [*optional*, *default* = **true**]:
