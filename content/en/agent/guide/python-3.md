@@ -17,9 +17,9 @@ By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 ru
 
 1. Set the `python_version` configuration option [in your `datadog.yaml` configuration file][2]:
 
-```yaml
-python_version: 3
-```
+    ```yaml
+    python_version: 3
+    ```
 
 2. [Restart the Agent][3].
 
