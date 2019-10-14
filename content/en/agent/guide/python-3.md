@@ -293,6 +293,6 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 [6]: https://docs.python.org/3.1/library/2to3.html
 [7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
 [8]: https://code.visualstudio.com/docs/setup/setup-overview
-[9]: https://pythonhosted.org/six/#
+[9]: https://six.readthedocs.io
 [10]: https://six.readthedocs.io
 [11]: https://nedbatchelder.com/text/unipain.html
