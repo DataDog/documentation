@@ -46,19 +46,12 @@ L'Agent Datadog peut recueillir de nombreuses métriques à partir des bases de 
 
 Vous pouvez également créer vos propres métriques à l'aide de requêtes SQL personnalisées.
 
-**Remarque :** Cette intégration est également compatible avec [MariaDB](https://mariadb.org/), car elle sert de [« remplacement »][24] pour MySQL.
+**Remarque :** cette intégration est également compatible avec [MariaDB](https://mariadb.org/), car elle sert de [« remplacement »][24] pour MySQL.
 
 ## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
 Le check MySQL est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur MySQL.
-
-### Configuration
-
-Modifiez le fichier `mysql.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) MySQL. Consultez le [fichier d'exemple mysql.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 #### Préparer MySQL
 
@@ -69,17 +62,17 @@ mysql> CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<MOTDEPASSEUNIQUE>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Pour mySQL 8.0+, créez l'utilisateur `datadog` avec la méthode de hachage de mot de passe natif :
+Pour mySQL 8.0 et ultérieur, créez l'utilisateur `datadog` avec la méthode de hachage de mot de passe natif :
 
 ```
 mysql> CREATE USER 'datadog'@'localhost' IDENTIFIED WITH mysql_native_password by '<MOTDEPASSEUNIQUE>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-**Remarque** : `@'localhost'` fonctionne uniquement pour les connexions locales. Utilisez le hostname ou l'adresse IP de votre Agent pour les connexions à distance. Pour en savoir plus, consultez la [documentation de MySQL][6].
+**Remarque** : `@'localhost'` fonctionne uniquement pour les connexions locales. Utilisez le hostname ou l'adresse IP de votre Agent pour les connexions à distance. Pour en savoir plus, consultez la [documentation de MySQL][6] (en anglais).
 
 
-Vérifiez que l'utilisateur a bien été créé à l'aide des commandes suivantes. Remplacez ```<MOTDEPASSEUNIQUE>``` par le mot de passe que vous avez créé ci-dessus :
+Vérifiez que l'utilisateur a bien été créé à l'aide des commandes ci-dessous. Remplacez ```<MOTDEPASSEUNIQUE>``` par le mot de passe que vous avez créé ci-dessus :
 
 ```
 mysql -u datadog --password=<MOTDEPASSEUNIQUE> -e "show status" | \
@@ -102,7 +95,7 @@ mysql> GRANT PROCESS ON *.* TO 'datadog'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Pour mySQL 8.0+, définissez `max_user_connections` avec :
+Pour mySQL 8.0 ou ultérieur, définissez `max_user_connections` avec :
 
 ```
 mysql> ALTER USER 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;
@@ -124,7 +117,15 @@ mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-#### Collecte de métriques
+### Configuration
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+#### Host
+
+Modifiez le fichier `mysql.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) MySQL. Consultez le [fichier d'exemple mysql.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+
+##### Collecte de métriques
 
 * Ajoutez ce bloc de configuration à votre fichier `mysql.d/conf.yaml` pour recueillir vos [métriques MySQL](#metriques) :
 
@@ -148,15 +149,15 @@ Query OK, 0 rows affected (0.00 sec)
 
 **Remarque** : ajoutez des guillemets simples autour de votre mot de passe s'il contient un caractère spécial.
 
-Pour recueillir d'autres métriques de performances (`extra_performance_metrics`), l'option `performance_schema` doit être activée sur votre serveur MySQL, sans quoi `extra_performance_metrics` est défini sur `false`. Pour en savoir plus sur l'option `performance_schema`, [consultez la documentation de MySQL][7].
+Pour recueillir d'autres métriques de performances (`extra_performance_metrics`), l'option `performance_schema` doit être activée sur votre serveur MySQL, sans quoi `extra_performance_metrics` est défini sur `false`. Pour en savoir plus sur l'option `performance_schema`, [consultez la documentation de MySQL][7] (en anglais).
 
-Notez que l'utilisateur `datadog` doit être défini dans la configuration d'intégration de MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Vous pouvez également utiliser `sock`.
+Notez que l'utilisateur `datadog` doit être défini dans la configuration de l'intégration MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Vous pouvez également utiliser `sock`.
 
 Consultez notre [fichier d'exemple mysql.yaml][8] pour découvrir toutes les options de configuration disponibles, notamment pour les métriques custom.
 
 [Redémarrez l'Agent][9] pour commencer à envoyer des métriques MySQL à Datadog.
 
-#### Collecte de logs
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -180,7 +181,7 @@ Consultez notre [fichier d'exemple mysql.yaml][8] pour découvrir toutes les opt
     - Enregistrez le fichier et redémarrez MySQL à l'aide des commandes suivantes :
       `service mysql restart`
     - Assurez-vous que l'Agent dispose d'une autorisation de lecture pour le répertoire `/var/log/mysql` et tous ses fichiers. Vérifiez votre configuration de logrotate pour vous assurer que ces fichiers sont pris en compte et que les autorisations sont correctement définies.
-    - Dans `/etc/logrotate.d/mysql-server`, vous devriez voir des lignes de code similaires à ce qui suit :
+    - Dans `/etc/logrotate.d/mysql-server`, vous devriez voir des lignes similaires à ce qui suit :
 
       ```
         /var/log/mysql.log /var/log/mysql/mysql.log /var/log/mysql/mysql-slow.log {
@@ -229,12 +230,36 @@ Consultez notre [fichier d'exemple mysql.yaml][8] pour découvrir toutes les opt
 
 4. [Redémarrez l'Agent][9].
 
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                  |
+|----------------------|------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `mysql`                                                                |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                          |
+| `<CONFIG_INSTANCE>`  | `{"server": "%%host%%", "user": "datadog","pass": "<MOTDEPASSEUNIQUE>"}` |
+
+
+Consultez la [documentation relative aux template variables Autodiscovery][25] pour découvrir comment transmettre `<MOTDEPASSEUNIQUE>` en tant que variable d'environnement plutôt que sous forme d'étiquette.
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][5].
+
+| Paramètre      | Valeur                                     |
+|----------------|-------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "mysql", "service": "mysql"}` |
+
 ### Validation
 
 [Lancez la sous-commande status de l'Agent][11] et cherchez `mysql` dans la section Checks.
 
 ## Données collectées
-
 ### Métriques
 {{< get-metrics-from-git "mysql" >}}
 
@@ -388,7 +413,7 @@ Le check MySQL n'inclut aucun événement.
 
 ### Checks de service
 
-**mysql.replication.slave_running** <br>:
+**mysql.replication.slave_running** :<br>
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance MySQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`. Consultez [cette page][13] pour en savoir plus.
 
 **mysql.can_connect** :<br>
@@ -401,13 +426,13 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à MySQL pour re
 * [Puis-je utiliser une instance nommée au sein de l'intégration SQL Server ?][16]
 * [Puis-je configurer le check dd-agent MySQL sur mon Google Cloud SQL ?][17]
 * [Comment recueillir des métriques à partir de requêtes MySQL personnalisées][18]
-* [Vous souhaitez recueillir des métriques de performance SQL Server autres que celles disponibles dans la table sys.dm_os_performance_counters ? Essayez WMI][19]
+* [Vous souhaitez recueillir des métriques de performance SQL Server autres que celles disponibles dans la table sys.dm_os_performance_counters ? Essayez WMI.][19]
 * [Comment puis-je collecter plus de métriques à partir de mon intégration SQL Server ?][20]
 * [Utilisateur de la base de données avec des privilèges insuffisants][21]
 * [Comment recueillir des métriques avec une procédure stockée SQL ?][22]
 
 ## Pour aller plus loin
-Lisez notre [série d'articles de blog][23] à propos de la surveillance MySQL avec Datadog.
+Lisez notre [série d'articles de blog][23] (en anglais) à propos de la surveillance MySQL avec Datadog.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
@@ -432,6 +457,7 @@ Lisez notre [série d'articles de blog][23] à propos de la surveillance MySQL a
 [22]: https://docs.datadoghq.com/fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
 [23]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
 [24]: https://mariadb.com/kb/en/library/mariadb-vs-mysql-compatibility
+[25]: https://docs.datadoghq.com/fr/agent/autodiscovery/template_variables/
 
 
 {{< get-dependencies >}}
