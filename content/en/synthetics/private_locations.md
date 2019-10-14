@@ -74,17 +74,25 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 ## Configuration
 
-The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the laucnh command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only be prevalent for the a given launch:
 
-| Option         | Description                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| `dnsServer` | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)  [array] [default: `["8.8.8.8","1.1.1.1"]`]            |
-| `dnsUseHost`         | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)  [boolean] [default: false]                                |
-| `blacklistedRange`          | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)  [array] [default: IANA IPv4/IPv6 Special-Purpose Address Registry] |
-| `whitelistedRange`          | Grant access to IP ranges (has precedence over `--blacklistedRange`)  [array] [default: `none`] |
-| `site`          | Datadog site (`datadoghq.com` or `datadoghq.eu`)  [string] [required] [default: `"datadoghq.com"`] |
-| `proxy`          | Proxy URL  [string] |
-| `logFormat`          | Format log output  [choices: `"pretty"`, `"json"`] [default: `"pretty"`]. Setting your log format to `json` will allow you to have these logs automatically parsed when collected by Datadog. |
+| Option                   | Type             | Default                                              | Description                                                                                                                                                         |
+|--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dnsServer`              | Array of Strings | `["8.8.8.8","1.1.1.1"]`                              | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                  |
+| `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                       |
+| `blacklistedRange`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)                                                                 |
+| `whitelistedRange`       | Array of Strings | `none`                                               | Grant access to IP ranges (has precedence over `--blacklistedRange`)                                                                                                |
+| `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                    |
+| `proxy`                  | String           | `none`                                               | Proxy URL                                                                                                                                                           |
+| `logFormat`              | String           | `pretty`                                             | Format log output  [choices: `"pretty"`, `"json"`]. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog. |
+| `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                       |
+| `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                   |
+| `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                      |
+| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for assertion, in bytes.                                                                                                                     |
+| `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                              |
+
+
+**Note**: These options and more can be found by running the help command for the Datadog worker `docker run --rm datadog/synthetics-private-location-worker --help`.
 
 ### Proxy configuration
 
@@ -92,27 +100,9 @@ If the traffic has to go through a proxy, you need to set the `proxy` option to 
 
 ### DNS configuration
 
-By default, the worker will use `8.8.8.8` to perform DNS resolution. If it fails, it will make a second attempt to communicate with `1.1.1.1`. 
-If you are testing an internal URL, odds are that you might need to use an internal DNS server. In this case, you can either set the `dnsServer` option to a specific DNS IP address, or you can leverage `dnsUseHost` to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
+By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.
 
-### Whitelist IPs
-
-By default, we blacklist all IP ranges specified in [IANA IPv4/IPv6 Special-Purpose Address Registry][3]. You might therefore need to whitelist some IPs using the `whitelistedRange` option.  
-
-
-You can also set a variety of advanced options to customize the way your private locations handle their assigned tests:
-
-| Advanced Option         | Description                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| `concurrency`         | Maximum number of tests executed in parallel  [number] [default: 10]                               |
-| `maxTimeout` | Maximum test execution duration, in milliseconds  [number] [default: 1min]            |
-| `maxBodySize`          | Maximum HTTP body size for download, in bytes  [number] [default: 50Mb] |
-| `maxBodySizeIfProcessed`          | Maximum HTTP body size for assertion, in bytes  [number] [default: 5Mb] |
-| `regexTimeout`          | Maximum duration for regex execution, in milliseconds  [number] [default: 0.5sec] |
-
-These options and more can be found by running the help command `docker run --rm datadog/synthetics-private-location-worker --help`.
-
-**Note**: arguments set in the launch command will have precedence over the configuration file. However these options will not be stored, and will consequently only be prevalent for the specific launch. 
+If you are testing an internal URL and need to use an internal DNS servern set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
 
 ## Security
 
