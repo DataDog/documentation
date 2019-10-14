@@ -74,7 +74,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 ## Configuration
 
-The synthetics-private-location-worker comes with a number of options that can be set to configure your private locations:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations:
 
 | Option         | Description                                                                             |
 | ------------------- | --------------------------------------------------------------------------------------- |
@@ -112,7 +112,7 @@ You can also set a variety of advanced options to customize the way your private
 
 These options and more can be found by running the help command `docker run --rm datadog/synthetics-private-location-worker --help`.
 
-Note: arguments set in the launch command will have precedence over the configuration file. However these options will not be stored, and will consequently only be prevalent for the specific launch. 
+**Note**: arguments set in the launch command will have precedence over the configuration file. However these options will not be stored, and will consequently only be prevalent for the specific launch. 
 
 ## Security
 
