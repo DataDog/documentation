@@ -18,11 +18,11 @@ further_reading:
   text: "Why do my logs show up with an Info status even for Warnings or Errors?"
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the `dd-agent`. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact us][2] for further assistance.
+There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the `dd-agent`. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact Datadog support][2] for further assistance.
 
 ## The Agent needs to be restarted
 
-Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the agent][3].
+Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the Agent][3].
 
 ## Outbound traffic on port 10516 is blocked
 
@@ -39,7 +39,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to use the port `443` (this port is only available with the Datadog agent) by adding the following in `datadog.yaml`:
+- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to use the port `443` (this port is only available with the Datadog Agent) by adding the following in `datadog.yaml`:
 
 ```
 logs_config:
@@ -48,7 +48,7 @@ logs_config:
 
 ## Check the status of the agent
 
-Often, checking the [agent status][4] will help you troubleshoot what is happening.
+Often, checking the [Agent status command][4] results will help you troubleshoot what is happening.
 
 ## No new logs have been written
 
@@ -58,7 +58,7 @@ The Datadog Agent only collects logs that have been written after it has started
 
 The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
-In that case, you should see an error message when checking the [agent status][4]:
+In that case, you should see an error message when checking the [Agent status][4]:
 
 ```
 ==========
