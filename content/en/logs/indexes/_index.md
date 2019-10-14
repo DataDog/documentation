@@ -68,6 +68,14 @@ Enable or disable them in one click on the Pipeline page:
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
 
+### Set daily quota
+
+To control the number of logs that are stored within an Index, it is possible to set a daily quota. This quota is applied for all logs that should be stored (i.e after exclusion filters are applied).
+
+Update or remove this quota at any time when editing the Index: 
+
+{{< img src="logs/indexes/index_quota.png" alt="index details" responsive="true" style="width:70%;">}}
+
 ## Multi indexes
 
 It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
