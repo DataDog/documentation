@@ -48,7 +48,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 Le check Supervisor est inclus dans le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur les serveurs sur lesquels Supervisor s'exécute.
 
-### Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
+### Configuration
 
 #### Préparer supervisord
 
