@@ -1,8 +1,8 @@
 ---
-title: Add a Webhook to a Webhooks Integration
+title: Update a Webhooks Integration
 type: apicode
 order: 20.3
-external_redirect: /api/#add-a-webhook-to-a-webhooks-integration
+external_redirect: /api/#update-a-webhooks-integration
 ---
 
 **SIGNATURE**:
