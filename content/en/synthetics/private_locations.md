@@ -72,10 +72,52 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1] or [Synthetics Browser tests][2].
 
+## Configuration
+
+The synthetics-private-location-worker comes with a number of options that can be set to configure your private locations:
+
+| Option         | Description                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `dnsServer` | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)  [array] [default: `["8.8.8.8","1.1.1.1"]`]            |
+| `dnsUseHost`         | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)  [boolean] [default: false]                                |
+| `blacklistedRange`          | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)  [array] [default: IANA IPv4/IPv6 Special-Purpose Address Registry] |
+| `whitelistedRange`          | Grant access to IP ranges (has precedence over `--blacklistedRange`)  [array] [default: `none`] |
+| `site`          | Datadog site (`datadoghq.com` or `datadoghq.eu`)  [string] [required] [default: `"datadoghq.com"`] |
+| `proxy`          | Proxy URL  [string] |
+| `logFormat`          | Format log output  [choices: `"pretty"`, `"json"`] [default: `"pretty"`]. Setting your log format to `json` will allow you to have these logs automatically parsed when collected by Datadog. |
+
+### Proxy configuration
+
+If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be neeeded.
+
+### DNS configuration
+
+By default, the worker will use `8.8.8.8` to perform DNS resolution. If it fails, it will make a second attempt to communicate with `1.1.1.1`. 
+If you are testing an internal URL, odds are that you might need to use an internal DNS server. In this case, you can either set the `dnsServer` option to a specific DNS IP address, or you can leverage `dnsUseHost` to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
+
+### Whitelist IPs
+
+By default, we blacklist all IP ranges specified in [IANA IPv4/IPv6 Special-Purpose Address Registry][3]. You might therefore need to whitelist some IPs using the `whitelistedRange` option.  
+
+
+You can also set a variety of advanced options to customize the way your private locations handle their assigned tests:
+
+| Advanced Option         | Description                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `concurrency`         | Maximum number of tests executed in parallel  [number] [default: 10]                               |
+| `maxTimeout` | Maximum test execution duration, in milliseconds  [number] [default: 1min]            |
+| `maxBodySize`          | Maximum HTTP body size for download, in bytes  [number] [default: 50Mb] |
+| `maxBodySizeIfProcessed`          | Maximum HTTP body size for assertion, in bytes  [number] [default: 5Mb] |
+| `regexTimeout`          | Maximum duration for regex execution, in milliseconds  [number] [default: 0.5sec] |
+
+These options and more can be found by running the help command `docker run --rm datadog/synthetics-private-location-worker --help`.
+
+Note: arguments set in the launch command will have precedence over the configuration file. However these options will not be stored, and will consequently only be prevalent for the specific launch. 
+
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
-The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][3].
+The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][4].
 
 The test configurations are encrypted asymmetrically. The private key is used to decrypt the test configurations pulled by the workers from Datadog servers. The public key is used to encrypt the test results that are sent from the workers to Datadog's servers.
 
@@ -84,4 +126,5 @@ The test configurations are encrypted asymmetrically. The private key is used to
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /synthetics/api_tests
 [2]: /synthetics/browser_tests
-[3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
