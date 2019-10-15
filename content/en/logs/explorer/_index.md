@@ -71,7 +71,7 @@ The *Send To...* button allows you to send your current log explorer view to ano
 |-------------------|----------------------------------------------------------------------------------------------------------------------|
 | Export to Monitor | Export the query applied to your Logstream to create the log monitor query for a new [log monitor][1]       |
 | Export to CSV     | Export your current Logstream view with its selected columns into a CSV file. You can export up to 5000 logs at once. |
-| Share View     | Share a link to the view with teammates through email, Slack and more (see our [notification integrations][2]) to teammates using the Share View item. |
+| Share View     | Share a link to the current view with your teammates through email, Slack and more. See all [Datadog notification integrations][2] available. |
 
 
 [1]: /monitors/monitor_types/log
