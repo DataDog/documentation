@@ -151,12 +151,26 @@ For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` dur
 | Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
 | `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
-| `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
+| `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
 | `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
 | `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
 | `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
+
+
+For instance, say that the `request.response_time.histogram` metric is reported to Datadog through an Agent with the `HISTOGRAM` type for `server:web_1` with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
+
+| Metric Name                                    | Value  | Datadog Metric Type |
+|------------------------------------------------|--------|---------------------|
+| `request.response_time.histogram.avg`          | `1,88` | GAUGE               |
+| `request.response_time.histogram.count`        | `8`    | RATE                |
+| `request.response_time.histogram.median`       | `2`    | GAUGE               |
+| `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
+| `request.response_time.histogram.max`          | `3`    | GAUGE               |
+| `request.response_time.histogram.min`          | `1`    | GAUGE               |
+| `request.response_time.histogram.sum`          | `15`   | GAUGE               |
+
 
 **Note**:
 
@@ -186,9 +200,19 @@ Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side, all `DIS
 * Calculation of percentile aggregations
 * Customization of tagging
 
-For instance, say that the `request.response_time` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`
+For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a flush interval this would create the following metrics:
 
-Say `server:web_1` reports a metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Here, the p50 (median) for `server:web_1` is 2 and the p50 for `server:web_2` is `1`.  Aggregating by the average value server-side would result in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric.
+| Metric Name                                       | Value  | Datadog Metric Type |
+|---------------------------------------------------|--------|---------------------|
+| `request.response_time.distribution.avg`          | `1,73` | GAUGE               |
+| `request.response_time.distribution.count`        | `11`   | RATE                |
+| `request.response_time.distribution.median`       | `2`    | GAUGE               |
+| `request.response_time.distribution.95percentile` | `3`    | GAUGE               |
+| `request.response_time.distribution.max`          | `3`    | GAUGE               |
+| `request.response_time.distribution.min`          | `1`    | GAUGE               |
+| `request.response_time.distribution.sum`          | `19`   | GAUGE               |
+
+**Note**: In the example above, the p50 (median) for `server:web_1` is `2` and the p50 for `server:web_2` is `1`. Aggregating by the average value server-side would result in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric.
 
 Discover how to submit distribution metrics [with DogstatsD][1].
 
