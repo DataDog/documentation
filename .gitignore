@@ -14,7 +14,6 @@ content/integrations/*.md
 !content/integrations/rss.md
 !content/integrations/system.md
 !content/integrations/tcprtt.md
-!content/integrations/cloud_foundry.md
 !content/integrations/adobe_experience_manager.md
 !content/integrations/pivotal_platform.md
 
