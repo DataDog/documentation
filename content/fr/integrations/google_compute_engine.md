@@ -3,6 +3,7 @@ categories:
   - cloud
   - os & system
   - google cloud
+  - log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez des instances occupées et comparez les métriques d'utilisation de compte aux limites de quota.
@@ -27,21 +28,35 @@ Recueillez des métriques de Google Compute Engine pour :
 * Corréler les performances de vos machines virtuelles Compute Engine avec vos applications
 
 ## Implémentation
-### Installation
+### Collecte de métriques
+#### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
 
+### Collecte de logs
+
+Les logs Google Compute Engine sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][4].
+
+Une fois cette opération effectuée, exportez vos logs de Google Compute Engine depuis Stackdriver vers le Pub/sub :
+
+1. Accédez à [la page Stackdriver][11] et filtrez les logs de Google Compute Engine.
+2. Cliquez sur **Create Export** et nommez le récepteur.
+3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
+
+{{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Exportation des logs Google Compute Engine vers Pub Sub" responsive="true">}}
+
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ### Configuration
 #### Limiter la collecte de hosts
 
-Si vous souhaitez surveiller un sous-ensemble de vos instances GCE avec Datadog, assignez une étiquette GCE, comme `datadog:true`, à ces instances GCE. Indiquez ensuite ce tag dans la zone de texte **Optionally limit metrics collection** de votre [carré d'intégration Datadog/GCP][2]. Pour obtenir plus d'informations sur comment filtrer les machines virtuelles par tag, consultez la [documentation principale de Google Cloud Platform][3].
+Si vous souhaitez surveiller un sous-ensemble de vos instances GCE avec Datadog, appliquez un tag GCE tel que `datadog:true` aux instances GCE concernées. Indiquez ensuite ce tag dans la zone de texte **Optionally limit metrics collection** de votre [carré d'intégration Datadog/GCP][2]. Pour en savoir plus sur le filtrage des machines virtuelles par tag, consultez la [documentation principale de Google Cloud Platform][3].
 
 #### Désactivation automatique pour GCE
 
-Datadog peut désactiver de façon proactive des monitors dans le cadre d'un arrêt manuel d'instances Google Compute Engine (GCE) et d'une résiliation d'instance déclenchée par la mise à l'échelle automatique de GCE en fonction des statuts des hosts de l'API GCE. Les instances GCE automatiquement désactivées sont énumérées sur la page [Monitor Downtime][4] en cochant **Show automatically muted hosts**.
+Datadog peut désactiver de façon proactive des monitors dans le cadre d'un arrêt manuel d'instances Google Compute Engine (GCE) et d'une résiliation d'instance déclenchée par la mise à l'échelle automatique de GCE en fonction des statuts des hosts de l'API GCE. Les instances GCE automatiquement désactivées sont énumérées sur la page [Monitor Downtime][7] lorsque vous cochez l'option **Show automatically muted hosts**.
 
-Pour désactiver les monitors lors des arrêts planifiés de l'instance GCE, cochez la case **GCE automuting** dans le [carré d'intégration Google Cloud Platform][1].
+Pour désactiver les monitors en cas d'arrêt planifié d'une instance GCE, cochez la case **GCE automuting** dans le [carré d'intégration Google Cloud Platform][1].
 
 {{< img src="integrations/google_compute_engine/gce_automuting.png" alt="Désactivation automatique GCE" responsive="true">}}
 
@@ -75,6 +90,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [7]: https://www.datadoghq.com/blog/monitoring-google-compute-engine-performance
 [8]: https://www.datadoghq.com/blog/how-to-collect-gce-metrics
 [9]: https://www.datadoghq.com/blog/monitor-google-compute-engine-with-datadog
+[10]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[11]: https://console.cloud.google.com/logs/viewer
 
 
 {{< get-dependencies >}}

@@ -51,7 +51,7 @@ Remarque : [un exemple complet de fichier `datadog.yaml` est disponible dans le
 
 ## Répertoire de configuration de l'Agent
 
-Les anciennes versions de l'Agent Datadog stockaient les fichiers de configuration dans `/dd-agent/conf.d/`. Depuis la version 6.0, les fichiers de configuration sont stockés dans `/etc/datadog-agent/conf.d/<NOM_CHECK>`.
+Les anciennes versions de l'Agent Datadog stockaient les fichiers de configuration dans `/dd-agent/conf.d/`. Depuis la version 6.0, les fichiers de configuration sont stockés dans `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -73,13 +73,7 @@ Les anciennes versions de l'Agent Datadog stockaient les fichiers de configurati
 
 ### Fichiers de configuration des checks pour l'Agent 6
 
-Afin d'offrir une manière plus flexible de définir la configuration d'un check, à partir de la version 6.0.0, l'Agent charge tous les fichiers YAML valides dans le répertoire suivant :
-
-`/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`.
-
-Remarque : pour la collecte de logs, afin d'empêcher l'envoi de logs en double à Datadog, l'Agent n'accepte pas plusieurs fichiers YAML pointant vers la même source de log. Si plusieurs fichiers YAML pointent vers la même source de log, l'Agent récupère les fichiers dans l'ordre alphabétique et utilise le premier fichier.
-
-De cette manière, les configurations complexes peuvent être décomposées en plusieurs fichiers. Par exemple, une configuration pour `http_check` peut ressembler à :
+Pour chaque check de l'Agent, un exemple de configuration se trouve dans le fichier `conf.yaml.example` du répertoire `<NOM_CHECK>.d/` correspondant. Renommez ce fichier `conf.yaml` pour activer le check associé. Notez que l'Agent charge tous les fichiers YAML valides qui se trouvent dans le répertoire `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`. De cette manière, les configurations complexes peuvent être décomposées en plusieurs fichiers. Par exemple, la configuration de `http_check` peut ressembler à ceci :
 
 ```
 /etc/datadog-agent/conf.d/http_check.d/
@@ -87,7 +81,7 @@ De cette manière, les configurations complexes peuvent être décomposées en p
 └── frontend.yaml
 ```
 
-Les fichiers de modèle Autodiscovery sont également stockés dans le répertoire de configuration. Voici un exemple pour `redisdb` :
+Les fichiers de modèle Autodiscovery sont stockés dans le répertoire de configuration avec le fichier `auto_conf.yaml`. Par exemple, pour le check Redis, la configuration dans `redisdb.d/` est la suivante :
 
 ```
 /etc/datadog-agent/conf.d/redisdb.d/
@@ -95,12 +89,14 @@ Les fichiers de modèle Autodiscovery sont également stockés dans le répertoi
 └── conf.yaml.example
 ```
 
+**Remarque** : pour la collecte de logs, l'Agent n'accepte pas plusieurs fichiers YAML pointant vers la même source de log afin d'empêcher l'envoi de logs en double à Datadog. Si plusieurs fichiers YAML pointent vers la même source de log, l'Agent récupère les fichiers dans l'ordre alphabétique et utilise le premier fichier.
+
 Pour préserver la compatibilité avec les versions précédentes, l'Agent récupère toujours les fichiers de configuration au format  `/etc/datadog-agent/conf.d/<nom_check>.yaml`. Toutefois, la migration vers le nouveau format est fortement conseillée.
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme                             | Commandes                                                              |
+| Plateforme                             | Commande                                                              |
 | :--------                            | :-----                                                               |
 | Linux                                | `/etc/dd-agent/conf.d/`                                              |
 | CentOS                               | `/etc/dd-agent/conf.d/`                                              |

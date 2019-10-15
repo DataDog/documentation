@@ -2,7 +2,7 @@
 title: Supprimer une intégration Webhooks
 type: apicode
 order: 20.4
-external_redirect: "/api/#delete-a-webhooks-integration"
+external_redirect: "/api/#supprimer-une-integration-webhooks"
 ---
 
 **SIGNATURE**:

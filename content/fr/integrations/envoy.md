@@ -1,7 +1,12 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - cloud
   - web
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -16,7 +21,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: envoy.
-metric_to_check: envoy.stats.overflow
+metric_to_check: envoy.server.uptime
 name: envoy
 public_title: Intégration Datadog/Envoy
 short_description: Envoy est un proxy de périmètre et de service open source conçu pour les applications natives dans le cloud.
@@ -32,11 +37,13 @@ Ce check recueille les métriques d'observation système distribuées d'[Envoy][
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][15] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 Le check Envoy est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
-#### via Istio
+#### Via Istio
 
 Si vous utilisez Envoy avec [Istio][3], vous devez définir le [proxyAdminPort][5] d'Istio pour accéder à l'[endpoint administrateur][4] d'Envoy.
 
@@ -125,9 +132,9 @@ static_resources:
 | `metric_whitelist` | Une liste d'expressions régulières.                                                                                                                                             |
 | `metric_blacklist` | Une liste d'expressions régulières.                                                                                                                                             |
 | `cache_metrics`    | Résultats de cache des listes d'inclusion et d'exclusion pour réduire l'utilisation du processeur, en favorisant l'utilisation de la mémoire (valeur par défaut : `true`).                                                       |
-| `username`         | Le nom d'utilisateur à utiliser en cas d'authentification de base.                                                                                                                    |
-| `password`         | Le mot de passe à utiliser en cas d'authentification de base.                                                                                                                    |
-| `verify_ssl`       | Ce paramètre ordonne au check de valider les certificats SSL lors de la connexion à Envoy. Valeur par défaut : `true`. Définissez-le sur `false` si vous souhaitez désactiver la validation des certificats SSL.    |
+| `username`         | Le nom d'utilisateur à utiliser en cas d'authentification basique.                                                                                                                    |
+| `password`         | Le mot de passe à utiliser en cas d'authentification basique.                                                                                                                    |
+| `tls_verify`       | Ce paramètre oblige le check à valider les certificats TLS lors de la connexion à Envoy. Valeur par défaut : `true`. Définissez-le sur `false` pour désactiver la validation des certificats TLS.    |
 | `skip_proxy`       | S'il ce paramètre est défini sur `true`, le check ignore tous les paramètres de proxy activés et essaie d'interagir directement avec Envoy.                                                                              |
 | `timeout`          | Un délai d'expiration personnalisé pour les requêtes de réseau en secondes (valeur par défaut : 20).                                                                                                          |
 
@@ -142,7 +149,7 @@ Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certai
 'cluster.grpc.success': {
     'tags': (
         ('<NOM_CLUSTER>', ),
-        ('<SERVICE_GRPC>', '<METHODE_GRPC>', ),
+        ('<SERVICE_GRPC>', '<MÉTHODE_GRPC>', ),
         (),
     ),
     ...
@@ -154,13 +161,35 @@ Voici `3` séquences de tags : `('<NOM_CLUSTER>')`, `('<SERVICE_GRPC>', '<MÉTH
 
 `cluster.<NOM_CLUSTER>.grpc.<SERVICE_GRPC>.<MÉTHODE_GRPC>.success`
 
-Si seuls le nom de cluster et le service grpc vous intéressent, ajoutez le code suivant à votre liste d'inclusion :
+Si seuls le nom de cluster et le service gRPC vous intéressent, ajoutez le code suivant à votre liste d'inclusion :
 
 `^cluster\.<NOM_CLUSTER>\.grpc\.<SERVICE_GRPC>\.`
 
+#### Collecte de logs
+
+**Disponible à partir des versions > 6.0 de l'Agent**
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+      logs_enabled: true
+    ```
+
+2. Modifiez ensuite `envoy.d/conf.yaml` en supprimant la mise en commentaire des lignes `logs` en bas du fichier. Mettez à jour la ligne `path` en indiquant le bon chemin vers vos fichiers de log Envoy.
+
+    ```yaml
+      logs:
+        - type: file
+          path: /var/log/envoy.log
+          source: envoy
+          service: envoy
+    ```
+
+3. [Redémarrez l'Agent][9].
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][11] et recherchez `envoy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][11] et recherchez `envoy` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -175,9 +204,8 @@ Le check Envoy n'inclut aucun événement.
 
 ### Checks de service
 
-`envoy.can_connect` :
-
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à Envoy pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**envoy.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Envoy pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -198,6 +226,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][14].
 [12]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
 [14]: https://docs.datadoghq.com/fr/help
+[15]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

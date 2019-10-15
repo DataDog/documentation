@@ -2,7 +2,7 @@
 title: Énumérer toutes les intégrations GCP
 type: apicontent
 order: 17.1
-external_redirect: "/api/#list-all-gcp-integrations"
+external_redirect: "/api/#enumerer-toutes-les-integrations-gcp"
 ---
 
 ## Énumérer toutes les intégrations GCP
