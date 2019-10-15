@@ -61,7 +61,7 @@ This is an example of using a custom Agent check to send one event periodically.
 2. In this folder, create a custom check file named `event_example.py` with the following content:
 
     ```python
-    from checks import AgentCheck
+    from datadog_checks.base import AgentCheck
 
     __version__ = "1.0.0"
 

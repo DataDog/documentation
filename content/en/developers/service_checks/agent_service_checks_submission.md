@@ -40,7 +40,7 @@ Here is an example of a dummy Agent check sending only one service check periodi
 4. Within this folder, create a custom check file named `service_check_example.py` with the content below:
 
     ```python
-    from checks import AgentCheck
+    from datadog_checks.base import AgentCheck
 
     __version__ = "1.0.0"
 

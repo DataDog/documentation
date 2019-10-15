@@ -165,7 +165,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
     ```python
     import random
 
-    from checks import AgentCheck
+    from datadog_checks.base import AgentCheck
 
     __version__ = "1.0.0"
 
