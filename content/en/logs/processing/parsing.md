@@ -72,8 +72,8 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
 | `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
-| `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
-| `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
+| `integerStr`                                    | Matches an integer number and parses it as a string.                                                                        |
+| `integer`                                       | Matches an integer number and parses it as an integer number.                                                               |
 | `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
 | `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
