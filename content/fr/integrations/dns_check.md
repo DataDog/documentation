@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/dnscheck
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - network
   - web
@@ -34,16 +38,18 @@ Surveillez les délais de résolution et de correspondance des enregistrements D
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check DNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur le serveur à partir duquel vous allez sonder vos serveurs DNS.
+Le check DNS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur le serveur à partir duquel vous souhaitez sonder vos serveurs DNS.
 
-Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) mêmes host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les services DNS surveillés.
+Bien qu'il soit généralement préférable d'exécuter les checks axés sur des métriques sur le même host que celui du service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les services DNS surveillés.
 
 ### Configuration
 
-1. Modifiez le fichier `dns_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données DNS.
-    Consultez le [fichier d'exemple dns_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `dns_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données DNS.
+    Consultez le [fichier d'exemple dns_check.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
     ```yaml
       init_config:
@@ -59,11 +65,11 @@ Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des mét
 
     Si vous ne définissez pas l'option `nameserver`, le check utilise le serveur de noms configuré dans les paramètres de réseau local.
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos checks de service et délais de réponse DNS à Datadog.
+2. [Redémarrez l'Agent][5] pour commencer à envoyer vos checks de service et délais de réponse DNS à Datadog.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `dns_check` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `dns_check` dans la section Checks.
 
 ## Données collectées
 
@@ -87,15 +93,16 @@ Renvoie CRITICAL si l'Agent ne parvient pas à résoudre la requête. Si ce n'es
 Tags appliqués : `hostname` et `record_type`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/dns_check/datadog_checks/dns_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/dns_check/datadog_checks/dns_check/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

@@ -33,7 +33,7 @@ En réalité, le p50 (médiane) global est la médiane de l'ensemble complet [1,
 
 ### Calcul des agrégations par centiles
 
-Comme d'autres types de métrique, `gauge` ou `histogram` par exemple, le type de métrique `distribution` dispose des agrégations suivantes : `count`, `min`, `max`, `sum`, `avg`. Une métrique Distribution est initialement taguée de la même manière que d'autres métriques (avec des tags personnalisés définis dans le code) et est résolue avec le tag de host qui a signalé la métrique.
+Comme d'autres types de métriques, `gauge` ou `histogram` par exemple, le type de métrique `distribution` dispose des agrégations suivantes : `count`, `min`, `max`, `sum` et `avg`. Une métrique Distribution est initialement taguée de la même manière que d'autres métriques (avec des tags personnalisés définis dans le code) et est résolue avec le tag de host qui a signalé la métrique.
 
 Une métrique Distribution, en revanche, dispose d'agrégations par centiles supplémentaires (`p50`, `p75`, `p90`, `p95`, `p99`). Pour une métrique Distribution avec des agrégations par centiles durant un intervalle de transmission de 10 secondes, les agrégations suivantes sont disponibles : `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95` et `p99`.
 
@@ -53,7 +53,7 @@ Les différents types de métriques Datadog doivent être envoyés sous différe
 
 | Méthode | Présentation |
 | :----- | :------- |
-| `dog.distribution(String nom.metrique, double value, String... tags)` | Surveille la distribution statistique d'un ensemble de valeurs sur un ou plusieurs hosts. |
+| `dog.distribution(String nom.metrique, double valeur, String... tags)` | Surveille la distribution statistique d'un ensemble de valeurs sur un ou plusieurs hosts. |
 
 #### Exemple
 

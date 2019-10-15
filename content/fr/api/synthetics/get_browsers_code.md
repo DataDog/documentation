@@ -5,13 +5,14 @@ order: 29.9
 external_redirect: "/api/#obtenir-des-browsers"
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `GET /v1/synthetics/browser/devices`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_browsers" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_browsers" >}}

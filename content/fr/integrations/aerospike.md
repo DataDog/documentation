@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
@@ -10,7 +14,7 @@ git_integration_title: aerospike
 guid: 582de9e7-0c99-4037-9cc5-bc34612ce039
 integration_id: aerospike
 integration_title: Aerospike
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -33,20 +37,22 @@ Recueillez des métriques de la base de données Aerospike en temps réel pour 
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
+
 ### Installation
 
-Le check Aerospike est inclus avec le paquet de l'[Agent Datadog][2].
+Le check Aerospike est inclus avec le paquet de l'[Agent Datadog][1].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-1. Modifiez le fichier `aerospike.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performances Aerospike. Consultez le [fichier d'exemple aerospike.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `aerospike.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performances Aerospike. Consultez le [fichier d'exemple aerospike.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][2].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][4] et cherchez `aerospike` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `aerospike` dans la section Checks.
 
 ## Données collectées
 
@@ -65,14 +71,14 @@ Aerospike ne comprend aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://www.aerospike.com/products/aerospike-database-platform
-[2]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/aerospike/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[1]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[4]: https://github.com/DataDog/integrations-core/blob/master/aerospike/metadata.csv
+[5]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}
