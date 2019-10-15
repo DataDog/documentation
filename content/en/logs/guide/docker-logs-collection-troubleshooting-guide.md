@@ -3,13 +3,13 @@ title: Docker Log Collection Troubleshooting Guide
 kind: documentation
 ---
 
-There are a number of common issues that can get in the way when sending new container logs to Datadog via the Container Agent or a locally installed Host Agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [ email us ][1] for further assistance.
+There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.
 
 ## Logging isn't enabled
 {{< tabs >}} {{% tab "Container Installation" %}}
-Check if log collection has been enabled `DD_LOGS_ENABLED=true`.
+Check if the log collection is enabled `DD_LOGS_ENABLED=true`.
 {{% /tab %}} {{% tab "Host Installation" %}}
-Check if log collection has been enabled with `logs_enabled: true` in the `datadog.yaml` file.
+Check if the log collection is enabled `logs_enabled: true` in the `datadog.yaml` file.
 {{% /tab %}} {{< /tabs >}}
 ## Unable to connect to Docker socket
 
@@ -30,7 +30,7 @@ Logs Agent
 
 {{< tabs >}} {{% tab "Container Installation" %}}
 
-For the Container Agent, connection to the socket is handled by mounting the docker socket directly into the container. If this step hasn't been performed, you will see the following logs when the Agent starts:
+For the Container Agent, the connection to the socket is handled by mounting the docker socket directly into the container. If this step hasn't been performed, you see the following logs when the Agent starts:
 
 ```
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:51 in NewLauncher) | Could not setup the docker launcher: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
