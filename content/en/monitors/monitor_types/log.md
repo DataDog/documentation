@@ -29,7 +29,8 @@ As you define the search query, the graph above the search fields updates.
 * Construct a search query using the same logic as a [log explorer search][3].
 * Choose to monitor over a log count, [facet][4], or [measure][5]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the amount of logs over a selected time frame then compares it to the threshold conditions.
-    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 * Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
 ### Set alert conditions
