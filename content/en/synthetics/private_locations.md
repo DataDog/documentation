@@ -74,7 +74,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 ## Configuration
 
-The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only prevalent for a given launch:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However, these options aren't stored and are consequently only prevalent for a given launch:
 
 | Option                   | Type             | Default                                              | Description                                                                                                                                                         |
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
