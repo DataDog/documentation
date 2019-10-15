@@ -28,7 +28,8 @@ In this view you can:
 * [Build a context to explore your logs](#context).
 * [Visualize your logs as a filtered Logstream or Log Analytics](#visualization).
 * [Setup your log explorer view by creating facets and measure from your logs](#setup).
-* [Export the content of your Log explorer view to a monitor, a dashboard, or into a CSV file.](#export)
+* [Share the content of your explorer view to another page within Datadog or outside of Datadog.](#share-view)
+
 
 ## Context
 
@@ -55,13 +56,13 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
-### Send Views to
+### Share Views
 
-Export your current Log Visualization with the *Send To...* functionality:
+Export your current Log Visualization with the *Share* functionality:
 
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
-The *Send To...* button allows you to send your current log explorer view to another page within Datadog or outside of Datadog:
+The *Share* button allows you to send your current log explorer view to another page within Datadog or outside of Datadog:
 
 
 {{< tabs >}}
