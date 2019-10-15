@@ -51,11 +51,53 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 {{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
-### Saved views
+### Save Views
 
-Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations.
+Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
-Check the dedicated [saved views documentation][2] to learn more.
+### Send Views to
+
+Export your current Log Visualization with the *Send To...* functionality:
+
+{{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:30%;>}}
+
+The *Send To...* button is the go-to for interactions to sent a log explorer view in other contexts, inside Datadog or outside Datadog. Interactions vary depending on contexts (Export to Monitor is only available for Analytics view for instance).
+
+
+{{< tabs >}}
+{{% tab "Log Search" %}}
+
+{{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
+
+| Button            | Description                                                                                                          |
+|-------------------|----------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
+| Export to CSV     | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
+| Share View     | Share a link to the view with teammates through email, Slack and more (see our [notification integrations][2]) to teammates using the Share View item. |
+
+
+[1]: /monitors/monitor_types/log
+[2]: /integrations/#cat-notification
+{{% /tab %}}
+{{% tab "Log Analytics" %}}
+
+{{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
+
+| Button              | Description                                                                                                                                                   |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] |
+| Export to Dashboard | to embed the corresponding content in a widget in a [dashboard][2]. |
+| Generate new Metric | to [generate a metric][3] out of the current query |
+
+
+[1]: /monitors/monitor_types/log
+[2]: /graphing/dashboards/
+[3]: /logs/logs_to_metrics/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 ## Visualization
 
@@ -104,7 +146,11 @@ Interact with the upper reserved attributes section:
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-Copy the JSON log content to the clipboard through the **Export** button or keyboard interaction (Ctrl+C/Cmd+C).
+ 
+The **Send to...** Button is the go-to to share the log opened in side panel to other contexts. 
+
+* **Copy the JSON log** content to the clipboard (or use keyboard shortcut interaction (Ctrl+C/Cmd+C)).
+* **Share a link** to the log (along with the underlying view) to teammates through email, Slack and more (see our [notification integrations][5]) with Share Event interaction. 
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
@@ -193,37 +239,6 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Export
-
-Export your current Log Visualization with the *Export* functionality:
-
-{{< tabs >}}
-{{% tab "Logstream" %}}
-
-{{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
-
-| Button            | Description                                                                                                          |
-|-------------------|----------------------------------------------------------------------------------------------------------------------|
-| Export to Monitor | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
-| Export to CSV     | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
-
-
-[1]: /monitors/monitor_types/log
-{{% /tab %}}
-{{% tab "Log Analytics" %}}
-
-{{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
-
-| Button              | Description                                                                                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.* |
-| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2].                                                                                                    |
-
-
-[1]: /monitors/monitor_types/log
-[2]: /graphing/dashboards/timeboard
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
