@@ -25,12 +25,12 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 After [installing DogStatsD][1], the functions below are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
 
-| Parameter        | Type            | Required | Description                                                                                                                                        |
-|------------------|-----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | String          | Yes      | Name of the metric to submit.                                                                                                                      |
-| `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                 |
-| `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (no sample) and `1`. See the [Sample Rate section](#sample-rates) to learn more. |
-| `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                           |
+| Parameter        | Type            | Required | Description                                                                                                                                                                                    |
+|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`  | String          | Yes      | Name of the metric to submit.                                                                                                                                                                  |
+| `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                                                             |
+| `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
+| `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                                                                       |
 
 ### COUNT
 
@@ -1030,12 +1030,6 @@ statsd.increment('example_metric.increment', tags=["environment:dev","account:lo
 
 ```ruby
 statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
-```
-
-You can also pass a Hash to Tag a metric:
-
-```ruby
-statsd.increment('example_metric.increment', :tags => {environment:dev,account:local})
 ```
 
 {{% /tab %}}

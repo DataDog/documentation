@@ -200,7 +200,19 @@ Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side, all `DIS
 * Calculation of percentile aggregations
 * Customization of tagging
 
-For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a flush interval this would create the following metrics:
+For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following metrics are produced within Datadog:
+
+| Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
+| `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
+| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
+| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
+| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
+| `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
+| `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
+
+For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a flush interval this would create the following metrics within Datadog:
 
 | Metric Name                                       | Value  | Datadog Metric Type |
 |---------------------------------------------------|--------|---------------------|
