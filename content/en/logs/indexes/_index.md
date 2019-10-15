@@ -70,7 +70,7 @@ Enable or disable them in one click on the Pipeline page:
 
 ### Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). Once the daily quota is reached, logs are not indexed anymore and go to your Archives if those are set.
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). Once the daily quota is reached, logs are no longer indexed and go into your Archives if those are set.
 
 Update or remove this quota at any time when editing the Index: 
 
