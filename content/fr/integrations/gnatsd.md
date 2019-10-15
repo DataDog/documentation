@@ -31,42 +31,55 @@ supported_os:
 ---
 ## Présentation
 
-Recueillez des métriques du service gnatsd en temps réel pour :
+Recueillez des métriques du service Gnatsd en temps réel pour :
 
-* Visualiser et surveiller les états de gnatsd
-* Être informé des failovers et des événements de gnatsd
+* Visualiser et surveiller les états de Gnatsd
+* Être informé des failovers et des événements de Gnatsd
 
 ## Implémentation
 
 ### Installation
 
-Pour installer le check Gnatsd sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Gnatsd sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][1] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
 
-1. Installez le [kit de développement][3] sur n'importe quelle machine.
-2. Exécutez `ddev release build gnatsd` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][4].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/dist/gnatsd/<NOM_ARTEFACT>.whl`.
+1. Installez le [kit de développement][4].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `gnatsd`, exécutez :
+
+    ```
+    ddev -e release build gnatsd
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][5].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_GNATSD_ARTIFACT_>/<GNATSD_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
-Modifiez le fichier `gnatsd.yaml` afin de spécifier votre serveur et votre port. Définissez ensuite les masters à surveiller.
+1. Modifiez le fichier `gnatsd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#metriques) Gnatsd.
+   Consultez le [fichier d'exemple gnatsd.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-* host : permet de définir le host gnatsd à surveiller.
-* port : permet de définir le port de _surveillance_ utilisé par gnatsd.
-* tags : permet d'ajouter ces tags aux métriques enregistrées.
-* server_name : permet de définir le contenu à afficher dans Datadog.
+2. [Redémarrez l'Agent][9].
 
 ### Validation
 
-Lorsque vous exécutez `datadog-agent info`, voici ce qui s'affiche :
-
-    Checks
-    ======
-
-        gnatsd
-        -----------
-          - instance #0 [OK]
-          - Collected 23 metrics, 0 events & 1 service checks
+[Lancez la sous-commande status de l'Agent][10] et cherchez `gnatsd` dans la section Checks.
 
 ## Compatibilité
 
@@ -77,7 +90,7 @@ Le check gnatsd est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "gnatsd" >}}
 
 
-**Remarque** : si vous utilisez des noms de cluster Nats personnalisés, vos métriques possèdent le format suivant :  
+**Remarque** : si vous utilisez des noms de cluster Nats personnalisés, vos métriques présentent le format suivant :
 `gnatsd.connz.connections.nom_cluster.in_msgs`
 
 ### Événements
@@ -93,12 +106,20 @@ Ce check gnatsd applique les tags suivants à l'ensemble des checks de service r
 Renvoie `CRITICAL` si l'Agent n'est pas capable de recevoir la valeur 200 depuis l'endpoint de _surveillance_. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][2].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
-[2]: http://docs.datadoghq.com/help/
-[3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
+[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/gnatsd/datadog_checks/gnatsd/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[11]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

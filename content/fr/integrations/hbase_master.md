@@ -37,25 +37,46 @@ Recueillez des métriques du service Hbase_master en temps réel pour :
 
 ### Installation
 
-Pour installer le check Hbase_master sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Hbase_master sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][1] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
 
-1. [Téléchargez l'Agent Datadog][1].
-2. Créez un dossier `hbase_master.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent.
-3. Créez un fichier `conf.yaml` dans le dossier `hbase_master.d/` précédemment créé.
-4. Consultez le [fichier d'exemple hbase_master.yaml][2] et copiez son contenu dans le fichier `conf.yaml`.
-5. [Redémarrez l'Agent][3].
+1. Installez le [kit de développement][4].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `hbase_master`, exécutez :
+
+    ```
+    ddev -e release build hbase_master
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][5].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_HBASE_MASTER_ARTIFACT_>/<HBASE_MASTER_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
-Pour configurer le check Hbase_master :
+1. Modifiez le fichier `hbase_master.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#metrics) Hbase_master.
+  Consultez le [fichier d'exemple hbase_master.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-1. Ouvrez le fichier `conf.yaml` créé pendant l'installation.
-2. Modifiez le fichier `conf.yaml` afin qu'il redirige vers votre serveur et votre port. Définissez ensuite les masters à surveiller.
-3. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][9].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `hbase_master` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][10] et cherchez `hbase_master` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -69,14 +90,20 @@ Le check Hbase_master n'inclut aucun événement.
 Le check Hbase_master n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-extras/blob/master/hbase_master/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-extras/blob/master/hbase_master/metadata.csv
-[6]: http://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/hbase_master/datadog_checks/hbase_master/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[11]: https://github.com/DataDog/integrations-extras/blob/master/hbase_master/metadata.csv
+[12]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}
@@ -97,25 +124,46 @@ Le check HBase RegionServer n'est **PAS** inclus dans le paquet de l'[Agent Dat
 
 ### Installation
 
-Pour installer le check HBase RegionServer sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check HBase RegionServer sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
-1. [Téléchargez l'Agent Datadog][1].
-2. Créez un dossier `hbase_regionserver.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent. 
-3. Créez un fichier `conf.yaml` dans le dossier `hbase_regionserver.d/` précédemment créé.
-4. Consultez le [fichier d'exemple hbase_regionserver.yaml][2] et copiez son contenu dans le fichier `conf.yaml`.
-5. [Redémarrez l'Agent][3].
+1. Installez le [kit de développement][5].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `hbase_regionserver`, exécutez :
+
+    ```
+    ddev -e release build hbase_regionserver
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][6].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_HBASE_REGIONSERVER_ARTIFACT_>/<HBASE_REGIONSERVER_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-Pour configurer le check HBase RegionServer :
+1. Modifiez le fichier `hbase_regionserver.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metrics) HBase RegionServer.
+  Consultez le [fichier d'exemple hbase_regionserver.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-1. Ouvrez le fichier `conf.yaml` créé pendant l'installation.
-2. Modifiez le fichier `conf.yaml` afin qu'il redirige vers votre serveur et votre port. Définissez ensuite les masters à surveiller.
-3. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][10].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `hbase_regionserver` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][11] et cherchez `hbase_regionserver` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -129,14 +177,21 @@ Le check HBase RegionServer n'inclut aucun événement.
 Le check HBase RegionServer n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-extras/blob/master/hbase_regionserver/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-extras/blob/master/hbase_regionserver/metadata.csv
-[6]: http://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-extras/blob/master/hbase_regionserver/datadog_checks/hbase_regionserver/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[12]: https://github.com/DataDog/integrations-extras/blob/master/hbase_regionserver/metadata.csv
+[13]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}

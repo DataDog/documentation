@@ -11,8 +11,8 @@ external_redirect: /api/#delete-an-azure-integration
 
 **EXAMPLE REQUEST**:
 
-{{< code-snippets basename="azure_create" >}}
+{{< code-snippets basename="azure_delete" >}}
 
 **EXAMPLE RESPONSE**:
 
-{{< code-snippets basename="result.azure_create" >}}
+{{< code-snippets basename="result.azure_delete" >}}

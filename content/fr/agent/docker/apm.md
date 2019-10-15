@@ -26,7 +26,7 @@ Pour profiter du tracing depuis *tous les hosts*, utilisez plutôt la commande `
 
 Par exemple, la commande suivante permet à l'Agent de recevoir des traces depuis votre host uniquement :
 
-```bash
+```
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -52,15 +52,15 @@ Voici la liste de l'ensemble des variables d'environnements pour le tracing au s
 | `DD_APM_DD_URL`            | Endpoint de l'API Datadog vers lequel les traces sont envoyées. Pour le site européen de Datadog, définissez `DD_APM_DD_URL` sur `https://trace.agent.datadoghq.eu`. |
 | `DD_APM_RECEIVER_PORT`     | Port sur lequel le récepteur de traces de l'Agent Datadog effectue son écoute. Valeur par défaut : `8126`.                                          |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Autorise le trafic non local pour le [tracing depuis d'autres conteneurs](#tracing-depuis-d-autres-conteneurs).                             |
-| `DD_APM_IGNORE_RESOURCES`  | Configure les ressources que l'Agent doit ignorer. Utilisez des expressions régulières séparées par des virgules, par exemple : <code>"GET /ignorer-ceci,(GET&#124;POST) /et-cela"</code>. |
-| `DD_APM_ANALYZED_SPANS`    | Configure les spans à analyser pour les transactions. Utilisez des instances de <code>\<NOM_SERVICE>&#124;\<NOM_OPÉRATION>=1</code> séparées par des virgules, par exemple : <code>mon-app-express&#124;requete-express=1,mon-app-dotnet&#124;aspnet_core_mvc.requete=1</code>. |
-| `DD_APM_ENV`               | Définit l'[environnement][2] par défaut de vos traces.                                                                        |
+| `DD_APM_IGNORE_RESOURCES`  | Configurez les ressources que l'Agent doit ignorer. Utilisez des expressions régulières séparées par des virgules, par exemple : <code>"GET /ignorer-ceci,(GET&#124;POST) /et-cela"</code>. |
+| `DD_APM_ANALYZED_SPANS`    | Configurez les spans à analyser pour les transactions. Utilisez des instances de <code>\<NOM_SERVICE>&#124;\<NOM_OPÉRATION>=1</code> séparées par des virgules, par exemple : <code>mon-app-express&#124;express.request=1,mon-app-dotnet&#124;aspnet_core_mvc.request=1</code>. Vous pouvez également [l'activer automatiquement][2] à l'aide du paramètre de configuration dans le client de tracing.|
+| `DD_APM_ENV`               | Définit l'[environnement][3] par défaut de vos traces.                                                                        |
 | `DD_APM_MAX_EPS`           | Définit le nombre maximum d'événements APM par seconde.                                                                                   |
 | `DD_APM_MAX_TPS`           | Définit le nombre maximum de traces par seconde.                                                                                       |
 
 ## Tracing depuis d'autres conteneurs
 
-Comme pour DogStatsD, les traces peuvent être envoyées à l'Agent depuis d'autres conteneurs, que ce soit à l'aide des [réseaux Docker](#reseau-docker) ou de l'[IP de host Docker)(#ip-de-host).
+Comme pour DogStatsD, les traces peuvent être envoyées à l'Agent depuis d'autres conteneurs via les [réseaux Docker](#reseau-docker) ou l'[IP de host Docker](#ip-de-host).
 
 ### Réseau Docker
 
@@ -174,4 +174,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /fr/agent/apm/#environment
+[2]: /fr/tracing/trace_search_and_analytics/#automatic-configuration
+[3]: /fr/tracing/send_traces

@@ -1,2 +1,9 @@
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example 
+{
+  "usage" => [{
+    "hour" => "2019-10-07T00",
+    "check_calls_count" => 1233
+  }, {
+    "hour" => "2019-10-07T01",
+    "check_calls_count" => 1245
+  }]
+}

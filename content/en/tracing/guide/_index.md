@@ -25,6 +25,7 @@ disable_toc: true
 {{< whatsnext desc="Further Reading" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}

@@ -98,8 +98,8 @@ Termes et descriptions :
 | Instance ID            | L'ID de l'instance et le statut du check.                     |
 | Total Runs             | Le nombre total d'exécutions de l'instance.                  |
 | Metric Samples         | Le nombre de métriques récupérées.                                   |
-| Events                 | Le nombre d'événements déclenchés.                                  |
-| Service Checks         | Le nombre de checks de service signalés.                           |
+| Événements                 | Le nombre d'événements déclenchés.                                  |
+| Checks de service         | Le nombre de checks de service signalés.                           |
 | Average Execution Time | La durée d'exécution moyenne de l'instance.                      |
 | Last Run               | Le nombre durant la dernière exécution du check.                            |
 | Total                  | Le nombre total depuis le démarrage ou redémarrage de l'Agent le plus récent. |

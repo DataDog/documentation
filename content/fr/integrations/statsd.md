@@ -43,7 +43,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 Le check StatsD est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur les serveurs qui exécutent StatsD.
 
-### Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
+### Configuration
 
 1. Modifiez le fichier `statsd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple statsd.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 

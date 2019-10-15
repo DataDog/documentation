@@ -30,8 +30,17 @@ The solution to this problem is to manually set a `user-agent` in your API tests
 
 {{< img src="synthetics/user-agent.gif" alt="Synthetics home page" responsive="true">}}
 
+## API & Browser Tests
+
+### Forbidden errors
+
+When creating Synthetics tests, you might get `403 Forbidden` errors at first. It's coming from the `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>` header that is automatically being sent by Datadog.    
+Make sure this header is not blacklisted by your servers in order to remove this error.
+Additionally, you might also have to whitelist [Datadog Synthetics IP ranges][2] to make sure Datadog servers are allowed to send requests to your infrastructure.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
+[2]: https://ip-ranges.datadoghq.com/synthetics.json

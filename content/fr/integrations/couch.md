@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/couchdb
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - data store
   - log collection
@@ -43,15 +47,18 @@ Enregistrez des données CouchDB dans Datadog pour :
 Pour des raisons de performances, la version CouchDB que vous utilisez est mise en cache. Vous ne pouvez donc pas surveiller plusieurs versions d'instances CouchDB avec la même instance d'Agent.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check CouchDB est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs CouchDB.
+Le check CouchDB est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs CouchDB.
 
 ### Configuration
 
 #### Collecte de métriques
 
-1. Modifiez le fichier `couch.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance CouchDB. Consultez le [fichier d'exemple couch.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `couch.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance CouchDB. Consultez le [fichier d'exemple couch.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 2. Ajoutez ce bloc de configuration à votre fichier `couch.d/conf.yaml` pour commencer à recueillir vos [métriques CouchDB](#metriques) :
 
@@ -60,7 +67,7 @@ Le check CouchDB est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
 
       instances:
         - server: http://localhost:5984 # or wherever your CouchDB is listening
-        #user: <your_username>
+        #username: <your_username>
         #password: <your_password>
         #name: <A node's Erlang name> # Only for CouchDB 2.x
         #max_nodes_per_check: If no name is specified, the agent will scan all nodes up. As that may be very long, you can limit how many to collect per check. Default: 20
@@ -70,16 +77,16 @@ Le check CouchDB est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
 
     Vous pouvez également fournir des paramètres `db_whitelist` et `db_blacklist` pour contrôler les bases de données pour lesquelles l'Agent doit recueillir ou non des métriques.
 
-3. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques CouchDB à Datadog.
+3. [Redémarrez l'Agent][6] pour commencer à envoyer vos métriques CouchDB à Datadog.
 
 #### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-1. La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
     ```yaml
-    logs_enabled: true
+      logs_enabled: true
     ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `couch.d/conf.yaml` pour commencer à recueillir vos logs CouchDB :
@@ -93,13 +100,13 @@ Le check CouchDB est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
             service: couch
     ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple couch.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple couch.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `couch` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `couch` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -112,25 +119,27 @@ Le check CouchDB n'inclut aucun événement.
 
 ### Checks de service
 
-`couchdb.can_connect` : renvoie `Critical` si l'Agent n'est pas capable de se connecter à CouchDB pour recueillir des métriques.
+**couchdb.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à CouchDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 
-* [Surveiller les performances de CouchDB avec Datadog][9]
+* [Surveiller les performances de CouchDB avec Datadog][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/couch/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/couch/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
 
 
 {{< get-dependencies >}}

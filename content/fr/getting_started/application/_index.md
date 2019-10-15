@@ -1,12 +1,12 @@
 ---
-title: Débuter avec l'application Datadog
+title: Débuter avec Datadog
 kind: documentation
 further_reading:
   - link: 'https://learn.datadoghq.com/course/view.php?id=2'
     tag: Centre d'apprentissage
     text: Présentation de Datadog
 ---
-Cette page propose un aperçu des fonctionnalités de Datadog.
+Cette page propose un aperçu détaillé des fonctionnalités du [site américain][1] et du [site européen][2] de Datadog.
 
 ## Intégrations
 
@@ -25,7 +25,7 @@ Cette page propose un aperçu des fonctionnalités de Datadog.
 * Vous pouvez consulter les tags appliqués à toutes les machines. L'ajout de tags vous permet d'identifier les machines destinées à un but précis.
 * Datadog tente de catégoriser automatiquement vos serveurs. Si un tag a été ajouté sur une nouvelle machine, vous pouvez consulter immédiatement les statistiques liées à cette dernière en fonction de ce qui a précédemment été configuré pour ce tag. [En savoir plus sur l'ajout de tags][7].
 
-## La Hostmap
+## Hostmap
 
 {{< img src="getting_started/hostmap-overview.png" alt="aperçu hostmap" responsive="true" >}}
 
@@ -73,24 +73,23 @@ Les dashboards contiennent [des graphiques][14] avec des métriques enregistrant
 * Partagez un snapshot de graphique qui apparaît dans le flux d'événements.
 * Les graphiques peuvent être intégrés à un iframe. Cela permet à un tiers d'accéder au graphique en direct sans qu'il puisse accéder à vos données ou à toute autre information.
 
-## Monitoring
+## Monitors
 
-{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
+Les [monitors][18] fournissent des alertes et notifications basées sur des seuils de métriques, la disponibilité des intégrations, des endpoints réseau, et bien plus encore.
 
-Les fonctions de [monitoring][18] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique spécifique dépassent un certain seuil (sur l'ensemble de votre infrastructure, ou par machine : moyenne, max, min ou somme).
+* Utilisez n'importe quelle métrique transmise à Datadog.
+* Configurez des alertes multiples (par appareil, host, etc.).
+* Utilisez `@` dans les messages d'alerte pour acheminer les notifications vers les bonnes personnes
+* Planifiez des downtimes pour interrompre l'envoi de notifications relatives aux arrêts système, à la maintenance hors ligne, etc.
 
-* Vous pouvez appliquer des monitors à toutes les métriques : chiffre d'affaires, température du centre de données, etc.
-* Alertes multiples (par appareil, host, etc.)
-* Possibilité de définir un message de notification d'alerte, avec les fonctionnalités @
-
-{{< img src="getting_started/alert_setup.png" alt="configuration d'alerte" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="Configuration d'alerte" responsive="true" >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent
-[2]: http://www.datadoghq.com/product
+[1]: https://app.datadoghq.com
+[2]: https://app.datadoghq.eu
 [3]: http://www.datadoghq.com/integrations
 [4]: /fr/api
 [5]: https://github.com/DataDog/dd-agent

@@ -2,17 +2,17 @@
 title: Créer une clé d'application
 type: apicode
 order: 21.08
-external_redirect: "/api/#create-an-application-key"
+external_redirect: "/api/#creer-une-cle-d-application"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `POST /v1/application_key/<CLÉ_APPLICATION>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="create_app_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.create_app_key" >}}

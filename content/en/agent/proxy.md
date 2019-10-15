@@ -194,25 +194,25 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.com:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.com:443 check port 80
+    server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.com:443 check port 80
+    server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 **Note**: Download the certificate with the following command:
@@ -288,32 +288,32 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 80
+    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.eu:443 check port 80
+    server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.eu:443 check port 80
+    server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
 
         * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
         * `yum install ca-certificates` (CentOS, Redhat)
-        
+
 The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.

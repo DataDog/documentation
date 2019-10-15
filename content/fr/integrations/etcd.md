@@ -1,4 +1,9 @@
 ---
+assets:
+  dashboards:
+    Etcd Overview: assets/dashboards/etcd_overview.json
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - orchestration
   - containers
@@ -41,14 +46,17 @@ Recueillez des métriques d'etcd pour :
 * Corréler les performances d'etcd avec le reste de vos applications
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check etcd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre ou vos instances etcd.
+Le check etcd est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur votre ou vos instances etcd.
 
 ### Configuration
 
-1. Modifiez le fichier `etcd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance etcd.
-    Consultez le [fichier d'exemple etcd.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `etcd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance etcd.
+    Consultez le [fichier d'exemple etcd.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
     ```yaml
     init_config:
@@ -57,11 +65,11 @@ Le check etcd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez d
         - url: "https://server:port" # API endpoint of your Etcd instance
     ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `etcd` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][7] et cherchez `etcd` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -84,21 +92,22 @@ Renvoie « Critical » si l'Agent n'est pas capable de recueillir des métriqu
 Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent n'est pas capable d'atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
-Pour mieux comprendre comment (ou pourquoi) intégrer etcd à Datadog, lisez notre [article de blog][9] à ce sujet.
+Pour mieux comprendre comment (ou pourquoi) intégrer etcd à Datadog, lisez notre [article de blog][10] à ce sujet.
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/etcd/images/etcd_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://www.datadoghq.com/blog/monitor-etcd-performance
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/monitor-etcd-performance
 
 
 {{< get-dependencies >}}

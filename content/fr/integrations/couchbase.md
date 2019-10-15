@@ -1,6 +1,11 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -43,30 +48,61 @@ Et bien plus encore
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Couchbase est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Couchbase.
+Le check Couchbase est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos nœuds Couchbase.
 
 ### Configuration
 
-1. Modifiez le fichier `couchbase.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Couchbase.
-    Consultez le [fichier d'exemple couchbase.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `couchbase.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Couchbase.
+   Consultez le [fichier d'exemple couchbase.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-```
-init_config:
+#### Collecte de métriques
 
-instances:
-  - server: http://localhost:8091 # ou l'emplacement sur lequel votre Couchbase effectue son écoute
-    #user: <votre_nomutilisateur>
-    #password: <votre_motdepasse>
-```
+1.  Ajoutez ce bloc de configuration à votre fichier `couchbase.d/conf.yaml` pour commencer à recueillir vos [métriques Couchbase](#metriques) :
 
-2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques Couchbase à Datadog.
+      ```
+      init_config:
+
+      instances:
+        - server: http://localhost:8091 # or wherever your Couchbase is listening
+          #username: <your_username>
+          #password: <your_password>
+      ```
+
+2. [Redémarrez l'Agent][6] pour commencer à envoyer vos métriques Couchbase à Datadog.
+
+#### Collecte de logs
+
+**Disponible à partir des versions > 6.0 de l'Agent**
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+      logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `couchbase.d/conf.yaml` pour commencer à recueillir vos logs Apache :
+
+    ```yaml
+      logs:
+          - type: file
+            path: /var/log/couchdb/couch.log
+            source: couchdb
+            service: couchbase
+    ```
+
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+    Consultez le [fichier d'exemple couchbase.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][6].
 
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `couchbase` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][7] et cherchez `couchbase` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -94,22 +130,23 @@ Renvoie `Ok` pour les autres bas.
 Renvoie `Critical` si le nœud n'est pas sain. Si ce n'est pas le cas, renvoie `Ok`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 
-* [Surveiller des métriques clés de Couchbase][9]
+* [Surveiller des métriques clés de Couchbase][10].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couchbase/images/couchbase_graph.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/couchbase/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/couchbase/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
 
 
 {{< get-dependencies >}}
