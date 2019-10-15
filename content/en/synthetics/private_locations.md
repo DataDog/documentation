@@ -74,7 +74,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 ## Configuration
 
-The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the laucnh command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only be prevalent for the a given launch:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only prevalent for the a given launch:
 
 | Option                   | Type             | Default                                              | Description                                                                                                                                                         |
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -102,7 +102,7 @@ If the traffic has to go through a proxy, you need to set the `proxy` option to 
 
 By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.
 
-If you are testing an internal URL and need to use an internal DNS servern set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
+If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
 
 ## Security
 
