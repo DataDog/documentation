@@ -18,14 +18,14 @@ further_reading:
 
 A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][1] to learn how to graph metrics within Datadog.
 
-| Property    | Description                                                                                                                                               |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Name`      | The [name of your metric](#naming-metrics).                                                                                                               |
-| `Value`     | The value of your metric.                                                                                                                                 |
-| `Timestamp` | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
-| `Context`   | The set of tags associated with your metric.                                                                                                              |
-| `Type`      | The type of your metric. See the [metric type documentation][2].                                                                                          |
-| `interval`  | If the `type` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                      |
+| Property         | Description                                                                                                                                               |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
+| `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
+| `<TIMESTAMP`     | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `<CONTEXT>`      | The set of tags associated with your metric.                                                                                                              |
+| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][2].                                                                                          |
+| `<INTERVAL>`     | If the `<TYPE>` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
 
 If a metric is not submitted from one of the [350+ Datadog integrations][3], it's considered a [Custom Metric][4]. **Note**: Some standard integrations [emit custom metrics][5].
 
@@ -52,7 +52,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-Alternatively you can use the [Dropwizard Java metrics library][6] with the [metrics-datadog][7] backend. Thanks to the people at [Vistar Media][8], [Coursera][9], and [Bazaarvoice][10] for their contributions.
+You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][6] to submit your metrics
 
 ## Further reading
 
@@ -63,8 +63,4 @@ Alternatively you can use the [Dropwizard Java metrics library][6] with the [met
 [3]: /integrations
 [4]: /developers/metrics/custom_metrics
 [5]: /account_management/billing/custom_metrics/#standard-integrations
-[6]: https://github.com/dropwizard/metrics
-[7]: https://github.com/coursera/metrics-datadog
-[8]: http://www.vistarmedia.com
-[9]: https://www.coursera.org
-[10]: http://www.bazaarvoice.com
+[6]: /developers/libraries

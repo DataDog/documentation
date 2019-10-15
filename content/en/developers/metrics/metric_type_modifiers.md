@@ -17,12 +17,12 @@ A metric type is an indication of what you are trying to represent with your met
 
 Depending on your use case and submission method, one metric type may be more suited than the other for submission. For instance:
 
-| Metric type submitted | Use case                                                                                                                                                                        |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `RATE`                  | You want to monitor the number of requests received over time across several hosts.                                                                                              |
-| `RATE`                  | You do not have control over the consistency of temporal count submissions across your sources, so you're normalizing by each individual interval to be able to compare them upstream. |
-| `COUNT`                 | You want to count the number of times a function is called.                                                                                                                      |
-| `COUNT`                 | Counting the amount of revenue that have been made over a given amount of time.                                                                                                |
+| Metric type submitted | Use case                                                                                                                                                                               |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `RATE`                | You want to monitor the number of requests received over time across several hosts.                                                                                                    |
+| `RATE`                | You do not have control over the consistency of temporal count submissions across your sources, so you're normalizing by each individual interval to be able to compare them upstream. |
+| `COUNT`               | You want to count the number of times a function is called.                                                                                                                            |
+| `COUNT`               | Counting the amount of revenue that have been made over a given amount of time.                                                                                                        |
 
 Since `RATE` and `COUNT` aren't the same metric type, they don't have the same behavior or shape within Datadog graphs and monitors. To change metrics on the fly between `RATE` and `COUNT` representations, use Datadog's in-application modifier functions within your graphs and monitors.
 
@@ -30,10 +30,12 @@ Since `RATE` and `COUNT` aren't the same metric type, they don't have the same b
 
 The two main in-application modifiers are `as_count()` and `as_rate()`.
 
-| Modifiers    | Description                                                                                                                                                                                                                                                                                   |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Modifiers    | Description                                                                                                                                                                                                                                                                   |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
-| `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                         |
+| `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                     |
+
+**Note**: Metrics submitted from Agent checks do not have an interval associated, so the `as_count()` and `as_rate()` modifiers have no effect when a metric in-app type is RATE.
 
 Depending on the metric type you applied them to, the behavior differs:
 

@@ -85,7 +85,7 @@ func main() {
         log.Fatal(err)
     }
 
-    dogstatsd_client.Event("An error occurred", "Error message", alert_type: "error", [] string {
+    dogstatsd_client.Event("An error occurred", "Error message", alert_type: "error", []string{
         "env:dev"
     })
 }

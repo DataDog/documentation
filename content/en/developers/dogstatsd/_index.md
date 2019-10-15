@@ -86,7 +86,7 @@ $ gem install dogstatsd-ruby
 {{% /tab %}}
 {{% tab "Go" %}}
 
-```go
+```shell
 $ go get github.com/DataDog/datadog-go/statsd
 ```
 

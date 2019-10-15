@@ -23,7 +23,7 @@ For example, submitting samples 2, 3, 6, 7 sends a value of 5 (7-2) during the f
 
 Function template:
 ```python
-self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
+self.monotonic_count(name="<METRIC_NAME>",value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -42,7 +42,7 @@ This function submits the number of events that occurred during the check interv
 
 Function template:
 ```python
-self.count(name, value, tags=None, hostname=None, device_name=None)
+self.count(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -59,19 +59,21 @@ These **deprecated** functions are used to modify a count of events identified b
 
 **Note**: Metrics submitted with these functions are stored with a `RATE` type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to `10 seconds` for Agent checks. The value is generally the raw count value).
 
+Datadog recommends using the `count()` function even if you wish to increment/decrement by `1`. Indeed, if later down the road you wish to increment/decrement your metric by more than one, then you will have to use a different metric name since the metric type stored within Datadog is different (RATE for the `increment()`/`decrement()` functions vs COUNT for the `count()`).
+
 Function templates:
 ```python
-self.increment(name, value=1, tags=None, hostname=None, device_name=None)
+self.increment(name="<METRIC_NAME>", value=1, tags=None, hostname=None, device_name=None)
 ```
 
 ```python
-self.decrement(name, value=1, tags=None, hostname=None, device_name=None)
+self.decrement(name="<METRIC_NAME>", value=1, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
 | `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | `1`           | The increment/decrement value for the metric.                                       |
+| `value`       | Float           | No       | `1`           | The increment/decrement value for the metric.                                       |
 | `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
@@ -87,7 +89,7 @@ This function submits the value of a metric at a given timestamp. If called mult
 
 Function template:
 ```python
-self.gauge(name, value, tags=None, hostname=None, device_name=None)
+self.gauge(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -109,7 +111,7 @@ This function submits the sampled raw value of your counter. The Datadog Agent c
 
 Function template:
 ```python
-self.rate(name, value, tags=None, hostname=None, device_name=None)
+self.rate(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -132,7 +134,7 @@ This function submits the sample of a histogram metric that occurred during the 
 
 Function template:
 ```python
-self.histogram(name, value, tags=None, hostname=None, device_name=None)
+self.histogram(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -163,10 +165,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
     ```python
     import random
 
-    try:
-        from checks import AgentCheck
-    except ImportError:
-        from datadog_checks.checks import AgentCheck
+    from checks import AgentCheck
 
     __version__ = "1.0.0"
 

@@ -36,7 +36,14 @@ But the following metric submission types are accepted:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-Choosing a submission metric type depends on your use case and how your application is designed. Sometimes, incrementing a `COUNT` metric is easier than keeping track of a variable historical value that you would send with a `GAUGE` metric, and sometimes it's the other way around. If you want to combine multiple sources of submission—for example to calculate the average response time of different instances of a given service—then a `HISTOGRAM` or a `DISTRIBUTION` metric might be better suited. Refer to the [Metric Type Definition](#metric-type-definition) section below to learn more about the different metrics types available. Also, refer to the [Submission Types and Datadog In-App Types Section](#submission-types-and-datadog-in-app-types) to see how each metric type behaves between its submission and its storage within Datadog.
+
+Choosing a submission metric type depends on your use case and how your application is designed:
+
+* If you want to count states, you would use a `GAUGE` type. For instance, if you want to track the number of healthy nodes accross your infrastructure.
+* If you want to count events, you would use a `COUNT` or a `RATE` type. For instance, if you want to track the number of requests hitting your webservers.
+* If you want to combine multiple sources of submission, you would use a `HISTOGRAM` or a `DISTRIBUTION` type. For instance, if you want to track the 99 percentile response time of different hosts for a given service
+
+Refer to the [Metric Type Definition](#metric-type-definition) section below to learn more about the different metrics types available. Also, refer to the [Submission Types and Datadog In-App Types Section](#submission-types-and-datadog-in-app-types) to see how each metric type behaves between its submission and its storage within Datadog.
 
 ## Metric type definition
 
@@ -142,7 +149,7 @@ The `HISTOGRAM` metric type allows you to measure the statistical distribution o
 For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following metrics are produced by the Agent:
 
 | Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
 | `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
 | `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
 | `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
@@ -231,7 +238,7 @@ Datadog accepts metrics submitted from a variety of sources:
 Each source has its own limitations, and metric submission types do not always map exactly to the Datadog in-app stored types:
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
-| ----------------- | ------------------------------------ | --------------- | ------------------- |
+|-------------------|--------------------------------------|-----------------|---------------------|
 | [API][6]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [API][6]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [API][6]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |

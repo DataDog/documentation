@@ -11,13 +11,13 @@ further_reading:
 To submit a service check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
 
 ```python
-self.service_check(name, status, tags=None, hostname=None, message=None)
+self.service_check(name="<SERVICE_CHECK_NAME>", status="<STATUS>", tags=None, hostname=None, message=None)
 ```
 
 Find below the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-| ---------- | --------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `name`     | string          | yes      | -             | The name of the service check.                                                                                |
 | `status`   | int             | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
@@ -40,13 +40,9 @@ Here is an example of a dummy Agent check sending only one service check periodi
 4. Within this folder, create a custom check file named `service_check_example.py` with the content below:
 
     ```python
-    try:
-      from checks import AgentCheck
-    except ImportError:
-      from datadog_checks.checks import AgentCheck
+    from checks import AgentCheck
 
     __version__ = "1.0.0"
-
 
     class MyClass(AgentCheck):
       def check(self, instance):
