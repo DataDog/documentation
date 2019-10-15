@@ -59,15 +59,13 @@ Use Saved Views to automatically configure your Log Explorer with a preselected 
 
 Export your current Log Visualization with the *Send To...* functionality:
 
-{{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
 The *Send To...* button is the go-to for interactions to sent a log explorer view in other contexts, inside Datadog or outside Datadog. Available interactions vary depending on explorer page.
 
 
 {{< tabs >}}
 {{% tab "Log Search" %}}
-
-{{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
 | Button            | Description                                                                                                          |
 |-------------------|----------------------------------------------------------------------------------------------------------------------|
@@ -80,8 +78,6 @@ The *Send To...* button is the go-to for interactions to sent a log explorer vie
 [2]: /integrations/#cat-notification
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
-
-{{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
 
 | Button              | Description                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
