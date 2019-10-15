@@ -83,7 +83,7 @@ The *Send To...* button allows you to send your current log explorer view to ano
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] |
 | Export to Dashboard | to embed the corresponding content in a widget in a [dashboard][2]. |
-| Generate new Metric | to [generate a metric][3] out of the current query |
+| Generate new Metric | [Generate a new metric][3] out of the current analytic query.  |
 
 
 [1]: /monitors/monitor_types/log
