@@ -61,7 +61,7 @@ Export your current Log Visualization with the *Send To...* functionality:
 
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
-The *Send To...* button is the go-to for interactions to sent a log explorer view in other contexts, inside Datadog or outside Datadog. Available interactions vary depending on explorer page.
+The *Send To...* button allows you to send your current log explorer view to another page within Datadog or outside of Datadog:
 
 
 {{< tabs >}}
