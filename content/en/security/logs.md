@@ -52,6 +52,7 @@ Additionally, certain features are not available at the moment to customers who 
 * The logs Live Tail, Rehydrate from Archives, and Generate Metrics features are disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
+* You cannot share logs (nor traces) from the explorer through web integrations - see 
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
 
@@ -64,3 +65,4 @@ If you have any questions about how the Log Management Service satisfies the app
 [3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection
+[6]: /logs/explorer/#send-view-to
