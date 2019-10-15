@@ -52,7 +52,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 {{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
-### Save Views
+### Saved Views
 
 Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
@@ -63,7 +63,6 @@ Export your current Log Visualization with the *Share* functionality:
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
 The *Share* button allows you to send your current log explorer view to another page within Datadog or outside of Datadog:
-
 
 {{< tabs >}}
 {{% tab "Log Search" %}}
@@ -93,7 +92,6 @@ The *Share* button allows you to send your current log explorer view to another 
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 ## Visualization
@@ -144,7 +142,7 @@ Interact with the upper reserved attributes section:
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
  
-The **Send to...** Button is the go-to to share the log opened in side panel to other contexts. 
+The **Share** Button is the go-to to share the log opened in side panel to other contexts. 
 
 * **Copy the JSON log** content to the clipboard (or use keyboard shortcut interaction (Ctrl+C/Cmd+C)).
 * **Share a link** to the log (along with the underlying view) to teammates through email, Slack and more (see our [notification integrations][5]) with Share Event interaction. 
