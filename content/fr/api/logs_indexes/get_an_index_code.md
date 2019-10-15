@@ -5,14 +5,14 @@ order: 23.2
 external_redirect: "/api/#obtenir-un-index"
 ---
 
-**SIGNATURE**:
+**SIGNATURE** :
 
 `GET /v1/logs/config/indexes/<NOM_INDEX>`
 
-**EXEMPLE DE REQUÊTE**:
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_an_index" >}}
 
-**EXEMPLE DE RÉPONSE**:
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_an_index" >}}

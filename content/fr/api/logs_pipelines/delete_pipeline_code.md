@@ -5,14 +5,14 @@ order: 24.7
 external_redirect: "/api/#supprimer-un-pipeline"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `DELETE /v1/logs/config/pipelines`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="delete_pipeline" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.delete_pipeline" >}}

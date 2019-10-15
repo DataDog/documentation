@@ -38,22 +38,25 @@ Envoyez des événements depuis votre infrastructure surveillée par Nagios à D
 Ce check surveille les logs de votre serveur Nagios et envoie des événements à votre flux d'événements Datadog. Vous pouvez ainsi surveiller les bagottements de service, les changements d'état de host, les checks de service passif, les downtimes des services et de hosts, et plus encore. Ce check peut également envoyer des données de performance Nagios à Datadog sous forme de métriques.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Nagios est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Nagios.
+Le check Nagios est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Nagios.
 
 ### Configuration
 
-Modifiez le fichier `nagios.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple nagios.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `nagios.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple nagios.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-[Redémarrez l'Agent][4] pour commencer à envoyer vos événements Nagios et vos métriques de données de performance Nagios (facultatif) à Datadog.
+[Redémarrez l'Agent][5] pour commencer à envoyer vos événements et vos métriques de données de performance Nagios (facultatif) à Datadog.
 
 #### Collecte de métriques
-Le check Nagios peut potentiellement générer des [métriques custom][13], qui peuvent avoir une incidence sur votre [facturation][14]. 
+Le check Nagios peut potentiellement générer des [métriques custom][6], ce qui peut avoir une incidence sur votre [facture][7]. 
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `nagios` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `nagios` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -81,22 +84,23 @@ Le check surveille le log d'événements Nagios en recherchant les lignes de log
 Le check Nagios n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 
-* [Comprendre les alertes Nagios avec Datadog][7]
+* [Comprendre les alertes Nagios avec Datadog][10]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://www.datadoghq.com/blog/nagios-monitoring
-[8]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[9]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[7]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/nagios-monitoring
 
 
 {{< get-dependencies >}}

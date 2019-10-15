@@ -22,11 +22,12 @@ further_reading:
     tag: Documentation
     text: Configuration de l'APM ECS Fargate
 ---
-Pour utiliser l'APM, commencez par envoyer vos [traces][1] à Datadog, puis [configurez votre environnement](#configurer-votre-environnement). Vous pouvez envoyer des traces à Datadog de plusieurs manières en fonction de la configuration de votre système : en exécutant l'[Agent Datadog localement](#agent-datadog), [sur des conteneurs](#conteneurs) ou [via un autre type d'environnement](#-environnements-supplementaires). Pour consulter l'ensemble des étapes de configuration de l'APM, accédez à la section [Présentation de l'APM][2].
+Pour utiliser l'APM, commencez par envoyer vos [traces][1] à Datadog, puis [configurez votre environnement](#configurer-votre-environnement). Vous pouvez envoyer des traces à Datadog de plusieurs manières en fonction de la configuration de votre système : en exécutant l'[Agent Datadog localement](#agent-datadog), [sur des conteneurs](#conteneurs) ou [via un autre type d'environnement](#environnements-supplementaires). Pour consulter l'ensemble des étapes de configuration de l'APM, accédez à la section [Présentation de l'APM][2].
 
 ## Agent Datadog
 
 L'APM est activé par défaut dans l'Agent 6. Définissez `apm_non_local_traffic: true` dans votre [fichier de configuration principal `datadog.yaml`][3] si vous envoyez des traces depuis un environnement non local (comme un conteneur).
+
 Pour découvrir l'ensemble des paramètres disponibles pour l'APM, consultez le fichier de configuration [`datadog.example.yaml`][4] de l'Agent. Pour obtenir la liste complète des métriques envoyées à Datadog par l'Agent, consultez la page [Métriques APM envoyées par l'Agent Datadog][5]. Pour en savoir plus sur l'Agent Datadog, consultez la [documentation de l'Agent][6] ou reportez-vous au [modèle de configuration `datadog.yaml`][7].
 
 ## Conteneurs
@@ -35,11 +36,11 @@ Consultez les instructions de configuration spécifiques pour vous assurer que l
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
-Remarque : après avoir instrumenté votre application, par défaut, le client de traçage envoie les traces à `localhost:8126`.
+Remarque : après avoir instrumenté votre application, par défaut, le client de tracing envoie les traces à `localhost:8126`.
 
 ## Environnements supplémentaires
 
-Vous pouvez utiliser des moyens autres que l'Agent et les conteneurs pour recueillir des traces.
+Vous pouvez utiliser d'autres composants que l'Agent et les conteneurs pour recueillir des traces.
 
 ### Lambda - X-Ray
 
