@@ -74,7 +74,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 ## Configuration
 
-The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only prevalent for the a given launch:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However these options aren't stored and are consequently only prevalent for a given launch:
 
 | Option                   | Type             | Default                                              | Description                                                                                                                                                         |
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -88,7 +88,7 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                       |
 | `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                   |
 | `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                      |
-| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for assertion, in bytes.                                                                                                                     |
+| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                     |
 | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                              |
 
 
@@ -96,13 +96,13 @@ The `synthetics-private-location-worker` comes with a number of options that can
 
 ### Proxy configuration
 
-If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be neeeded.
+If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be needed.
 
 ### DNS configuration
 
 By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.
 
-If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config (usually using the config located in `etc/resolv.conf`)
+If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
 ## Security
 
