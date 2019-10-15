@@ -59,7 +59,7 @@ These **deprecated** functions are used to modify a count of events identified b
 
 **Note**: Metrics submitted with these functions are stored with a `RATE` type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to `10 seconds` for Agent checks. The value is generally the raw count value).
 
-Datadog recommends using the `count()` function even if you wish to increment/decrement by `1`. Indeed, if later down the road you wish to increment/decrement your metric by more than one, then you will have to use a different metric name since the metric type stored within Datadog is different (RATE for the `increment()`/`decrement()` functions vs COUNT for the `count()`).
+Datadog recommends using the `count()` function even if you wish to increment/decrement by `1`. Indeed, if later down the road you wish to increment/decrement your metric by more than one, then you will have to use a different metric name since the metric type stored within Datadog is different (`RATE` for the `increment()`/`decrement()` functions vs `COUNT` for the `count()`).
 
 Function templates:
 ```python
