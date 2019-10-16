@@ -69,8 +69,8 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 
 * Construct a search query using the same logic as a [trace search][1].
 * Choose to monitor over a trace count, [facet][2], or [measure][3]:
-    * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the amount of traces over a selected time frame then compares it to the threshold conditions.
-    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
+    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
 ### Select alert conditions
 
@@ -89,7 +89,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
-**Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual Resource pages (you can get there by clicking on the specific Resource listed on the [Services page][4]).
+**Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the [Services page][4]).
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
