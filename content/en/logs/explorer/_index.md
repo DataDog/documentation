@@ -96,17 +96,17 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 
 ## Visualization
 
-Switch between the Logstream and the Log Analytics modes by clicking on the *Log Mode* button in the upper left corner of the page:
+Switch between the Log Search and the Log Analytics modes by clicking on the *Log Mode* button in the upper left corner of the page:
 
 {{< tabs >}}
-{{% tab "Logstream" %}}
+{{% tab "Log Search" %}}
 
-The Logstream is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
+The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
 
 ### Logs Table
 
-The logstream is displayed in the logs table.
+The Log Search is displayed in the logs table.
 
 Configure the logs table content according to your needs and preferences with the "Options" button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
@@ -114,14 +114,11 @@ Log results are sorted by date—the most recent on top by default. You can also
 
 {{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
-
-
 ### Log Panel
 
 Click on any log line to open the log panel and see more details about it: raw message, extracted attributes, and tags (with host, service, and source tags on top).
 
 Some standard attributes—for instance, `error.stack`, `http.method`, or `duration`—have specific highlighted displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and remap your attributes with [standard attribute remappers][2].
-
 
 Interact with the attributes names and values in the lower JSON section to:
 
@@ -131,16 +128,13 @@ Interact with the attributes names and values in the lower JSON section to:
 
 {{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
 
-
 Interact with the upper reserved attributes section:
 
 * with **Host**, to access the host dashboard or append the search request with the `host` of the log.
 * with **Service**, to see the trace in APM, append the search request with the trace ID (both require a `trace_id` attribute in the log: refer to [trace injection in logs][3]) or append search request with the `service` of the log.
 * with **Source**, to append the search request with the `source` of the log.
 
-
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
-
  
 Use the **Share** button to share the log opened in side panel to other contexts. 
 
@@ -148,7 +142,6 @@ Use the **Share** button to share the log opened in side panel to other contexts
 * **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available. 
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
-
 
 [1]: /logs/explorer/search
 [2]: /logs/processing/attributes_naming_convention
