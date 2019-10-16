@@ -32,10 +32,14 @@ supported_os:
 Extrayez des métriques custom depuis n'importe quel endpoint Prometheus.
 
 <div class="alert alert-warning">
-Toutes les métriques récupérées par cette intégration sont considérées comme des [métriques custom][1].
+Toutes les métriques récupérées par cette intégration sont considérées comme étant des <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métriques custom</a>.
 </div>
 
+**Consultez la section [Collecte de métriques Prometheus[8] pour découvrir comment configurer un check Prometheus.**
+
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -70,6 +74,8 @@ Si `send_monotonic_counter: True`, l'Agent envoie les deltas des valeurs en ques
 
 Toutes les métriques recueillies par le check Prometheus sont transmises à Datadog en tant que métriques custom.
 
+Remarque : les données de compartiment d'une métrique histogram Prometheus `<NOM_MÉTRIQUE_HISTOGRAM>` sont conservées dans la métrique `<NOM_MÉTRIQUE_HISTOGRAM>.count`, dans Datadog. Les tags `upper_bound` indiquent le nom des compartiments. Pour accéder au compartiment `+Inf`, utilisez `upper_bound:none`.
+
 ### Événements
 Le check Prometheus n'inclut aucun événement.
 
@@ -86,13 +92,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 * [Configurer un check Prometheus][6]
 * [Écrire un check Prometheus personnalisé][7]
 
-[1]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
 [2]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help
 [5]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [6]: https://docs.datadoghq.com/fr/agent/prometheus
 [7]: https://docs.datadoghq.com/fr/developers/prometheus
+[8]: https://docs.datadoghq.com/fr/getting_started/integrations/prometheus/
+[9]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

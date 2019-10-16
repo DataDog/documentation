@@ -1096,6 +1096,7 @@ main:
   - name: "Troubleshooting"
     url: "synthetics/troubleshooting/"
     parent: "synthetics"
+    identifier: "synthetics_troubleshooting"
     weight: 7
 
 ####################################

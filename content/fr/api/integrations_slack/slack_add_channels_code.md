@@ -2,7 +2,7 @@
 title: Ajouter des canaux à l'intégration Slack
 type: apicode
 order: 19.3
-external_redirect: "/api/#add-channels-to-slack-integration"
+external_redirect: "/api/#ajouter-des-canaux-a-l-integration-slack"
 ---
 
 **SIGNATURE**:

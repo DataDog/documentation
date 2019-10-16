@@ -2,7 +2,7 @@
 title: Définir la désactivation automatique de l'intégration GCP
 type: apicontent
 order: 17.4
-external_redirect: "/api/#set-gcp-integration-automute"
+external_redirect: "/api/#definir-la-desactivation-automatique-de-l-integration-gcp"
 ---
 
 ## Définir la désactivation automatique de l'intégration GCP
