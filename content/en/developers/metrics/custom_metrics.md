@@ -72,7 +72,7 @@ A custom metric is uniquely identified by a unique combination of a metric name,
 
 For example, you create the metric `service.request.count` to gain insight from different services across your infrastructure.
 
-* To track successes and failures, you create the tags:
+* To track successes and failures, so you create the tag `status` with two tag values:
     * `status:success`
     * `status:failure`
 * You track the metric by each service running on your infrastructure:
@@ -121,13 +121,13 @@ You can count your custom metrics by using the `count:` aggregator in the query 
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a [GAUGE][10] metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York, and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
-| Tags                         | Temp 1 | Temp 2 | Temp 3 | Temp 4 | Temp 5 | Temp 6 | Temp 7 |
-|------------------------------|--------|--------|--------|--------|--------|--------|--------|
-| Orlando, FL, Southeast, USA  | 80     | 80     | 80     | 80     | 81     | 81     | 81     |
-| Miami, FL, Southeast, USA    | 82     | 82     | 82     | 82     | 82     | 82     | 82     |
-| Boston, MA, Northeast, USA   | 78     | 78     | 78     | 78     | 78     | 79     | 79     |
-| New York, NY, Northeast, USA | 79     | 79     | 79     | 79     | 79     | 79     | 79     |
-| Seattle, WA, Northwest, USA  | 75     | 75     | 75     | 75     | 75     | 75     | 75     |
+| Tags                         | 0-10 s | 10-20 s | 20-30 s | 30-40 s | 40-50 s | 50-60 s |
+|------------------------------|--------|---------|---------|---------|---------|---------|
+| Orlando, FL, Southeast, USA  | 80     | 80      | 80      | 80      | 81      | 81      |
+| Miami, FL, Southeast, USA    | 82     | 82      | 82      | 82      | 82      | 82      |
+| Boston, MA, Northeast, USA   | 78     | 78      | 78      | 78      | 78      | 79      |
+| New York, NY, Northeast, USA | 79     | 79      | 79      | 79      | 79      | 79      |
+| Seattle, WA, Northwest, USA  | 75     | 75      | 75      | 75      | 75      | 75      |
 
 The total number of custom metrics associated with the `temperature` metric is five. Each unique tag combination of `city`, `state`, `region`, and `country` represents a custom metric:
 
@@ -157,12 +157,12 @@ Suppose you drop the `country` tag from the `temperature` metric. There are stil
 
 Suppose you drop the `city` tag from the `temperature` metric. This consolidates the data from Orlando and Miami:
 
-| Tags          | Temp 1 | Temp 2 | Temp 3 | Temp 4 | Temp 5 | Temp 6 | Temp 7 |
-|---------------|--------|--------|--------|--------|--------|--------|--------|
-| FL, Southeast | 81     | 81     | 81     | 81     | 81.5   | 81.5   | 81.5   |
-| MA, Northeast | 78     | 78     | 78     | 78     | 78     | 79     | 79     |
-| NY, Northeast | 79     | 79     | 79     | 79     | 79     | 79     | 79     |
-| WA, Northwest | 75     | 75     | 75     | 75     | 75     | 75     | 75     |
+| Tags          | 0-10 s | 10-20 s | 20-30 s | 30-40 s | 40-50 s | 50-60 s |
+|---------------|--------|---------|---------|---------|---------|---------|
+| FL, Southeast | 81     | 81      | 81      | 81      | 81.5    | 81.5    |
+| MA, Northeast | 78     | 78      | 78      | 78      | 78      | 79      |
+| NY, Northeast | 79     | 79      | 79      | 79      | 79      | 79      |
+| WA, Northwest | 75     | 75      | 75      | 75      | 75      | 75      |
 
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics is four:
 
@@ -179,25 +179,12 @@ A distribution metric gathers all values across all hosts emitting metric values
 
 Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted as a distribution metric tagged with `city` and `state`:
 
-| Tags          | Values in 10s flush interval | Sum | Count | Minimum | Maximum | Average (Sum/Count) |
-|---------------|------------------------------|-----|-------|---------|---------|---------------------|
-| Rochester, NY | 23,29,33,55,41,36,12,67      | 296 | 8     | 12      | 67      | 37                  |
-| New York, NY  | 18,22,26,31,29,40,23,35      | 215 | 8     | 18      | 40      | 28                  |
+| Tags          | Values in 10s flush interval | Sum | Count | Minimum | Maximum | Average |
+|---------------|------------------------------|-----|-------|---------|---------|---------|
+| Rochester, NY | 23,29,33,55,41,36,12,67      | 296 | 8     | 12      | 67      | 37      |
+| New York, NY  | 18,22,26,31,29,40,23,35      | 215 | 8     | 18      | 40      | 28      |
 
-The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`):
-
-| Metric      | Tags                         |
-|-------------|------------------------------|
-| `age.sum`   | `city:rochester`, `state:ny` |
-| `age.count` | `city:rochester`, `state:ny` |
-| `age.min`   | `city:rochester`, `state:ny` |
-| `age.max`   | `city:rochester`, `state:ny` |
-| `age.avg`   | `city:rochester`, `state:ny` |
-| `age.sum`   | `city:new_york`, `state:ny`  |
-| `age.count` | `city:new_york`, `state:ny`  |
-| `age.min`   | `city:new_york`, `state:ny`  |
-| `age.max`   | `city:new_york`, `state:ny`  |
-| `age.avg`   | `city:new_york`, `state:ny`  |
+The total number of custom metrics or timeseries emitted from the `age` distribution metric is **ten (5 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores five timeseries (`sum`,`count`,`min`,`max`, `avg`).
 
 To obtain the maximum `age` in the state of New York, reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
@@ -214,20 +201,18 @@ Suppose you are interested in measuring the *median* `age` in the state of New Y
 
 Percentiles are NOT reaggregatable—you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)).
 
-Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations for the `city` and `state` tags:
+Therefore to provide you with the statistically valid percentile aggregations, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations for the `city` and `state` tags:
 
 | city tag  | state tag |
 |-----------|-----------|
-| Rochester | `null`    |
+| Rochester | `empty`   |
 | Rochester | NY        |
-| New York  | `null`    |
+| New York  | `empty`   |
 | New York  | NY        |
-| `null`    | NY        |
-| `null`    | `null`    |
+| `empty`   | NY        |
+| `empty`   | `empty`   |
 
-There are three potentially queryable values for the `city` tag: {Rochester, New York, `null`} and two values for the `state` tag: {NY, `null`}. The total number of custom metrics emitted from the `age` distribution metric WITH percentile aggregations is:
-
-{{< img src="developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
+There are three potentially queryable values for the `city` tag: {Rochester, New York, `empty`} and two values for the `state` tag: {NY, `empty`}.
 
 ## Further Reading
 
