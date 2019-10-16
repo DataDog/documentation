@@ -48,7 +48,9 @@ Once you created a private location, configuring a Synthetics API or Browser tes
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    **Note**: One worker can process up to 10 tests in parallel. To scale a private location, add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
+    One worker can process up to 10 tests in parallel by default. To scale a private location:
+      * Change the `concurrency` parameter value to allow more parallet tests from one worker.
+      * Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
