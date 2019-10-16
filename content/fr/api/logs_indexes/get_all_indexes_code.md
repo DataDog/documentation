@@ -2,7 +2,7 @@
 title: Obtenir tous les index
 type: apicode
 order: 23.1
-external_redirect: "/api/#get-all-indexes"
+external_redirect: "/api/#obtenir-tous-les-index"
 ---
 
 **SIGNATURE**:

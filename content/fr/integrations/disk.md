@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
@@ -30,18 +34,21 @@ supported_os:
 Recueillez les métriques relatives à l'utilisation du disque et aux E/S.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Disk est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Disk est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
 Le check Disk est activé par défaut, et l'Agent recueille des métriques sur toutes les partitions locales.
-Si vous souhaitez configurer le check avec des options personnalisées, modifiez le fichier `disk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple disk.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Si vous souhaitez configurer le check avec des options personnalisées, modifiez le fichier `disk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple disk.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `disk` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `disk` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -56,14 +63,15 @@ Le check Disk n'inclut aucun événement.
 Renvoie `CRITICAL` si le système de fichiers est en mode lecture seule.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

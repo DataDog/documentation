@@ -42,7 +42,7 @@ Si vous configurez Cloud Run sur GKE, activez [l'intégration Google Cloud Pl
 ### Collecte de logs
 
 Google Cloud Run expose également des [logs d'audit][3].
-Les logs Google Cloud Run sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub par le biais d'un redirecteur Push HTTP][4].
+Les logs Google Cloud Run sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][4].
 
 Une fois cette opération effectuée, exportez vos logs Google Cloud Run depuis Stackdriver vers le Pub/sub :
 

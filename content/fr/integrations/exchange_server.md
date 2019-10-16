@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
@@ -32,43 +36,23 @@ Recueillez des métriques de Microsoft Exchange Server pour :
 ## Implémentation
 ### Installation
 
-Le check Exchange est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check Exchange est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-1. Modifiez le fichier `exchange_server.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de performance Exchange Server.
+1. Modifiez le fichier `exchange_server.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Exchange Server.
+
   ```yaml
   init_config:
-
   instances:
-    # "." means the current host
     - host: .
-    #
-    #   The additional metrics is a list of additional counters to collect.  The
-    #   list is formatted as follows:
-    #   ['<counterset name>', <counter instance name>, '<counter name>', <metric name>, <metric type>]
-    #
-    #   <counterset name>  is the name of the PDH Counter Set (the name of the counter)
-    #   <counter instance name> is the specific counter instance to collect, for example
-    #           "Default Web Site".  Specify 'none' For all instances of the counter.
-    #   <counter name> is the individual counter to report
-    #   <metric name> is the name you want to show up in Datadog
-    #   <metric type> is from the standard choices for all agent checks, such as gauge,
-    #       rate, histogram or counter
-    #
-    #   additional_metrics:
-    #     - - MSExchange Content Filter Agent
-    #       - none
-    #       - Messages that Bypassed Scanning
-    #       - exchange.content_filter.bypassed_messages
-    #       - gauge
   ```
 
-2. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][4].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `exchange_server` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `exchange_server` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -82,11 +66,11 @@ Le check Exchange Server n'inclut aucun événement.
 Le check Exchange Server n'inclut aucun check de service.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/exchange_server/metadata.csv
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/exchange_server/metadata.csv
 
 
 {{< get-dependencies >}}

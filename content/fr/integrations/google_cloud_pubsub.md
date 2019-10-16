@@ -4,6 +4,7 @@ categories:
   - processing
   - messaging
   - google cloud
+  - log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Google Cloud PubSub.
@@ -28,9 +29,24 @@ Recueillez des métriques de Google Pub/Sub pour :
 * Corréler les performances de vos sujets et abonnements Pub/Sub avec vos applications
 
 ## Implémentation
-### Installation
+### Collecte de métriques
+#### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+
+### Collecte de logs
+
+Les logs de Google Cloud Pub/Sub sont recueillis via Stackdriver et envoyés à un Cloud Pub/Sub grâce à un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un redirecteur Push HTTP][4].
+
+Une fois cette opération effectuée, exportez vos logs de Google Cloud Pub/Sub depuis Stackdriver vers le Pub/sub :
+
+1. Accédez à [la page Stackdriver][5] et filtrez les logs de Google Cloud Pub/Sub.
+2. Cliquez sur **Create Export** et nommez le récepteur.
+3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
+
+{{< img src="integrations/google_cloud_pubsub/export_pubsub_subscription.png" alt="Exportation des logs Google Cloud Pub/Sub vers Pub Sub" responsive="true">}}
+
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
 ### Métriques
@@ -49,6 +65,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_pubsub/google_cloud_pubsub_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[5]: https://console.cloud.google.com/logs/viewer
 
 
 {{< get-dependencies >}}
