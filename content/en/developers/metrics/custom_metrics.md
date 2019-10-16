@@ -39,7 +39,7 @@ Administrative users can see the total custom metrics per hour and the top 500 c
 
 ## Counting
 
-Using tags on custom metrics changes the total number of **unique tag combinations**, which ultimately changes the total count of custom metrics created. The examples below show how custom metrics are counted.
+Using tags on custom metrics can change the total number of **unique tag combinations**, which ultimately changes the total count of custom metrics created. The examples below show how custom metrics are counted.
 
 ### Single host
 
