@@ -56,7 +56,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
-### Share Views
+### Share views
 
 Export your current Log Visualization with the *Share* functionality:
 
