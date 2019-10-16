@@ -52,7 +52,7 @@ Additionally, certain features are not available at the moment to customers who 
 * The logs Live Tail, Rehydrate from Archives, and Generate Metrics features are disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
-* You cannot [share][6] logs (nor traces) from the explorer through web integrations
+* You cannot [share][6] logs (nor traces) from the explorer through web integrations.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
 
