@@ -28,7 +28,7 @@ In this view you can:
 * [Build a context to explore your logs](#context).
 * [Visualize your logs as a filtered Logstream or Log Analytics](#visualization).
 * [Setup your log explorer view by creating facets and measure from your logs](#setup).
-* [Share the content of your explorer view to another page within Datadog or outside of Datadog.](#share-view)
+* [Share the content of your explorer view to another page within or outside of Datadog.](#share-views)
 
 
 ## Context
