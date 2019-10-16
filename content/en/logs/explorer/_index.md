@@ -58,7 +58,7 @@ Use Saved Views to automatically configure your Log Explorer with a preselected 
 
 ### Share views
 
-Export your current Log Visualization with the *Share* functionality:
+Export your current log visualization with the *share* functionality:
 
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
