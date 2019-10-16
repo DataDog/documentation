@@ -516,17 +516,17 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 {{% /tab %}}
 {{< /tabs >}}
 
-## String Builder processor
+## String builder processor
 
-Use the String Builder Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided template.
-This enables you to aggregate different attributes or raw string into a single attribute.
+Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template.
+This enables aggregation of different attributes or raw strings into a single attribute.
 
-The tempalte is defined by both raw text and blocks with syntax %{attribute_path}.
+The template is defined by both raw text and blocks with the syntax: `%{attribute_path}`.
 
 **Notes**:
 
-* The processor only accept attributes with values or array of values in the blocks (see examples in the UI section).
-* If an attribute cannot be used (object or array of object) it is either replaced by an empty string or the entire operation is skipped depending on the checkbox.
+* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
 
@@ -534,7 +534,7 @@ The tempalte is defined by both raw text and blocks with syntax %{attribute_path
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the String Builder Processor in the [Datadog Log configuration page][1]:
+Define the string builder processor on the [Datadog log configuration page][1]:
 
 {{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor" responsive="true" style="width:80%;">}}
 
@@ -563,7 +563,7 @@ With the following log:
 }
 ```
 
-With this log, we can use the following template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` which returns the following result:
+You can use the template: `Request %{http.method} %{http.url} was answered with response %{http.status_code}`, which returns the result:
 
 ```
 Request GET https://app.datadoghq.com/users was answered with response 200
@@ -571,18 +571,18 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 **Objects** 
 
-In this log `http` is an object and cannot be used in a block (i.e `%{http}` would fail) whereas `%{http.method}` or `%{http.status_code}` or `%{http.url}` would return the corresponding value.
+In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
 
 **Arrays**
 
-The blocks can also be used on arrays of values or on a specific attribute within an array. In our example, adding a block on `%{array_ids}` would return :
+Blocks can be used on arrays of values or on a specific attribute within an array. For the example log, adding the block `%{array_ids}` returns:
 
 ```
 123,456,789
 ```
 
-Whereas `%{array_users}` would not return anything as it is not a list of values but a list of object.
-However `%{arrays_user.first_name}` returns the list of `first_name` contained in the array:
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{arrays_user.first_name}` returns a list of `first_name` contained in the array:
 
 ```
 John,Jack
@@ -592,7 +592,7 @@ John,Jack
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following String Builder processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following string builder processor JSON payload:
 
 ```json
 {
@@ -607,12 +607,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following String Builder
 
 | Parameter        | Type    | Required | Description                                                                                                                                 |
 | ------           | -----   | -------- | -----                                                                                                                                       |
-| `type`           | String  | yes      | Type of the processor.                                                                                                                       |
-| `name`           | String  | no       | Name of the processor.                                                                                                                       |
-| `enabled`        | Boolean | no       | If the processors is enabled or not, default: `false`.                                                                                       |
-| `template`       | String  | yes      | Formula with one or more attributes and raw text.                                                                                           |
-| `target`         | String  | yes      | Name of the attribute that contains the result of the template.                                                                             |
-| `replaceMissing` | Boolean | no       | If `true`, it replaces all missing attributes of `template` by an empty string, `false` skip the operation if an attribute is missing. Default: `false`. |
+| `type`           | String  | Yes      | Type of the processor.                                                                                                                       |
+| `name`           | String  | No       | Name of the processor.                                                                                                                       |
+| `enabled`        | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                       |
+| `template`       | String  | Yes      | A formula with one or more attributes and raw text.                                                                                           |
+| `target`         | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
+| `replaceMissing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
 
 
 [1]: /api/?lang=bash#logs-pipelines
