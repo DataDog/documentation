@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-service-level-objective
 
 ## Create a service level objective
 
-If you manage and deploy SLOs programmatically, it's easier to define the SLO in the Datadog UI and [export its valid JSON][1].
+Create a JSON to define your SLO.
 
 **ARGUMENTS**:
 
@@ -16,8 +16,8 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 
 | SLO Type     | type attribute value             |
 |:-------------|:---------------------------------|
-| [event][2]       | `metric`                         |
-| [monitor][3]      | `monitor`                        |
+| [event][1]       | `metric`                         |
+| [monitor][2]      | `monitor`                        |
 
 * **`name`** [*required*, *default* = **dynamic, based on query**]:
     The name of the SLO.
@@ -41,7 +41,7 @@ If you manage and deploy SLOs programmatically, it's easier to define the SLO in
 
 ##### Monitor Based SLO
 
-For more information, see [Monitor SLOs][3].
+For more information, see [Monitor SLOs][1].
 
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
     Specify up to 20 monitor IDs directly for a monitor-based SLO. You can optionally on-create-dynamically select
@@ -52,9 +52,12 @@ For more information, see [Monitor SLOs][3].
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 
-##### Metric Based SLO    
+##### Event Based SLOs  
+
+There is one type of event based SLO, a metric query. For more information, see [Event SLOs][3].
+
 * **`query`** [*required*]:
-    The query defines the metric-based SLO query. For more information, see [Event SLOs][2]. It requires two arguments:
+    The query defines the metric-based SLO query. It requires two arguments:
     
     * **`numerator`** [*required*]:
         Defines the sum of the `good` events
@@ -62,6 +65,6 @@ For more information, see [Monitor SLOs][3].
         Defines the sum of the `total` events. **Note: this should always be >= `good` events**
 
 
-[1]: /service_level_objectives/#export-your-service-level-objective
-[2]: /monitors/service_level_objectives/event
-[3]: /monitors/service_level_objectives/monitor
+[1]: /monitors/service_level_objectives/monitor
+[2]: 
+[3]: /monitors/service_level_objectives/event

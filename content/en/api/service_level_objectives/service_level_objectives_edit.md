@@ -41,9 +41,12 @@ For more information, see [Monitor SLOs][1].
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 
-##### Event Based SLO    
+##### Event Based SLO
+
+There is one type of event based SLO, a metric query. For more information, see [Event SLOs][2].
+
 * **`query`** [*required*]:
-    The query defines the event-based SLO query. For more information, see [Event SLOs][2]. It requires two arguments:
+    The query defines the event-based SLO query. It requires two arguments:
     
     * **`numerator`** [*required*]:
         Defines the sum of the `good` events.
