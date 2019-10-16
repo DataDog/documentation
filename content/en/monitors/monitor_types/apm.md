@@ -34,7 +34,7 @@ Choose between an **APM Metrics** or **Trace Analytics** monitor:
 
 ### Select monitor scope
 
-Choose your [Primary tags][1], [Service][2], and [Resource][3] from the drop-down menus.
+Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
 
 ### Set alert conditions
 
