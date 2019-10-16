@@ -145,7 +145,7 @@ The **View in context** button updates the search request in order to show you t
 Use the **Share** button to share the log opened in side panel to other contexts. 
 
 * **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-* **Share a link** to the log (along with the underlying view) to teammates through email, Slack and more (see our [notification integrations][5]) with Share Event interaction. 
+* **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available. 
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
