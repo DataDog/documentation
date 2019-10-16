@@ -49,23 +49,33 @@ Pour ajouter des dashboards à votre liste de dashboards, cochez les cases corre
 
 Pour créer un dashboard, cliquez sur le bouton *New Dashboard* dans le coin supérieur droit de la page. Datadog vous demande alors de choisir entre la création d'un [timeboard][2] ou d'un [screenboard][3]. Sélectionnez l'une de ces options après avoir cliqué sur « New Dashboard » dans le menu déroulant « Dashboards ».
 
-{{< img src="graphing/dashboards/board_selection.jpg" alt="Sélection du dashboard" responsive="true" style="width:70%;">}}
-
 ### Quelle est la différence entre un screenboard et un timeboard ?
 
 Vous pouvez créer et personnaliser deux types de dashboards : les [screenboards][3] et les [timeboards][4]. Consultez le tableau ci-dessous pour mieux comprendre ce qui les différencie :
 
 |                                | Timeboards                       | Screenboards                                      |
-| ---                            | ------------                     | -------------                                     |
+|--------------------------------|----------------------------------|---------------------------------------------------|
 | Intervalle                     | Tous les graphiques possèdent le même intervalle. | Chaque graphique peut avoir son propre intervalle.         |
 | Disposition                         | Les graphiques s'affichent sur une grille fixe.    | Les graphiques peuvent être placés où bon vous semble sur le canevas. |
 | Partage de graphiques individuels  | Oui                              | Non                                                |
 | Partage de l'ensemble du dashboard | Non                               | Oui                                               |
 | Partage en lecture seule       | Oui                              | Oui                                               |
 
-### Dashboards conseillés et utilisateurs actifs
+### Copier, importer et exporter
 
-Que regarder ensuite ? Si vous n'êtes pas sûr(e), Datadog vous propose des suggestions pour visualiser les dashboards pertinents. Pour afficher les dashboards conseillés et les utilisateurs actifs, cliquez sur l'icône en forme d'accent circonflexe en regard du titre du dashboard. Ces dashboards sont conseillés en fonction de l'activité utilisateur dans votre organisation et de la fréquence à laquelle les utilisateurs passent de ce dashboard à d'autres dashboards existant. Vous pouvez également ajouter ou mettre à jour des descriptions de dashboard au format Markdown en cliquant sur `edit` depuis cette vue.
+Vous pouvez copier, importer ou exporter un fichier JSON du dashboard à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes 
+
+| Option                          | Description                                                                                                                                                                |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Copy&nbsp;dashboard&nbsp;JSON   | Copiez le fichier JSON du dashboard dans votre presse-papiers.                                                                                                                               |
+| Import&nbsp;dashboard&nbsp;JSON | Collez ou importez votre fichier JSON vers le dashboard. Cette option remplace tout le contenu du dashboard. Si le fichier JSON se trouve déjà dans votre presse-papiers, utilisez `Ctrl + V` (ou `Cmd + V` sur un Mac). |
+| Export&nbsp;dashboard&nbsp;JSON | Téléchargez un fichier JSON contenant le JSON de votre dashboard.                                                                                                                |
+
+{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copier un dashboard" responsive="true" style="width:30%;">}}
+
+### Suggestions de dashboards et utilisateurs actifs
+
+Si vous recherchez du contenu intéressant mais ne savez pas où le trouver, Datadog vous propose des suggestions de dashboards pertinents. Pour afficher les dashboards conseillés et les utilisateurs actifs, cliquez sur l'icône en forme d'accent circonflexe en regard du titre du dashboard. Ces dashboards sont conseillés en fonction de l'activité des utilisateurs de votre organisation et de la fréquence à laquelle ils passent de ce dashboard à d'autres dashboards existant. Vous pouvez également ajouter ou mettre à jour des descriptions de dashboard au format Markdown en cliquant sur `edit` depuis cette vue.
 
 {{< img src="graphing/dashboards/suggested_dashboards.png" alt="Dashboards conseillés" responsive="true">}}
 

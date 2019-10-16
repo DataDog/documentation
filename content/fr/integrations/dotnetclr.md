@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - languages
 creates_events: false
@@ -25,34 +29,35 @@ supported_os:
 ---
 ## Présentation
 
-Recueillez des métriques du service Dotnetclr en temps réel pour :
+Recueillez des métriques du service .NET CLR en temps réel pour :
 
-* Visualiser et surveiller les états de Dotnetclr
-* Être informé des failovers et des événements de Dotnetclr.
+* Visualiser et surveiller les états de .NET CLR
+* Être informé des failovers et des événements de .NET CLR
 
-## Installation
+## Implémentation
+### Installation
 
-Le check Dotnetclr est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check .NET CLR est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-## Configuration
+### Configuration
 
-1. Modifiez le fichier `dotnetclr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de performance Dotnetclr.
-    Consultez le [fichier d'exemple dotnetclr.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `dotnetclr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance .NET CLR.
+    Consultez le [fichier d'exemple dotnetclr.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][5].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][3] et cherchez `dotnetclr` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][4] et cherchez `dotnetclr` dans la section Checks.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/help
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

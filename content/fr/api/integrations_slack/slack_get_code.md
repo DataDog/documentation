@@ -2,7 +2,7 @@
 title: Obtenir l'intégration Slack
 type: apicode
 order: 19.1
-external_redirect: "/api/#get-slack-integration"
+external_redirect: "/api/#obtenir-l-integration-slack"
 ---
 
 **SIGNATURE**:
