@@ -248,8 +248,6 @@ span.finish()
 
 For more information on manual instrumentation, see the [API documentation][3].
 
-
-
 [1]: /tracing/setup/nodejs/#compatibility
 [2]: /tracing/visualization/#spans
 [3]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
@@ -273,7 +271,6 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
     // do some work...
 }
 ```
-
 
 [1]: /tracing/setup/dotnet/#integrations
 [2]: /tracing/visualization/#spans
@@ -360,8 +357,6 @@ Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., thr
 While this [has been deprecated][6] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][7] API instead of adding `datadog/dd-trace` to your Composer file.
 
 
-
-
 [1]: /tracing/setup/php/#automatic-instrumentation
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
@@ -424,7 +419,6 @@ void example() {
   // `headers` now populated with the headers needed to propagate the span.
 }
 ```
-
 
 [1]: /tracing/visualization/#spans
 [2]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter

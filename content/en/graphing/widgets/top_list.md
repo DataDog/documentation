@@ -28,7 +28,7 @@ The top list visualization enables you to display a list of Tag value like `host
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
     * Log Events: See [the log search documentation][3] to configure an APM event query.
 
-2. Optional: configure conditional formatting depending of your entries' values.
+2. Optional: configure conditional formatting depending on your entries' values.
 
 ### Options
 #### Global time

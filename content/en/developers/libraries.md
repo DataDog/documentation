@@ -32,7 +32,7 @@ The following table lists Datadog-official and community contributed log managem
 Using Datadog [APIs][3], it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 | Language   | Library          | Author          |
-| ---        | ---              | ---             |
+|------------|------------------|-----------------|
 | JavaScript | [dog-watcher][4] | [Brightcove][5] |
 | Ruby       | [doggy][6]       | [Shopify][7]    |
 | Ruby       | [kennel][8]      | [Zendesk][9]    |
@@ -43,7 +43,7 @@ Using Datadog [APIs][3], it's possible to write a script to backup your Dashboar
 There are multiple community projects available to maintain, manage, or backup monitors using the Datadog [API][3]:
 
 | Language  | Library          | Author               |
-| ---       | ---              | ---                  |
+|-----------|------------------|----------------------|
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
 | Ruby      | [interferon][14] | [Airbnb][15]         |
@@ -141,7 +141,7 @@ A Winston Datadog [transport][58].
 
 If you've written a Datadog library and would like to add it to this page, send an email to [code@datadoghq.com][61].
 
-[1]: /developers/dogstatsd
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /tracing
 [3]: /api
 [4]: https://github.com/brightcove/dog-watcher

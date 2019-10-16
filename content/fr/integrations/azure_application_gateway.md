@@ -42,11 +42,10 @@ L'intégration Azure Application Gateway n'inclut aucun événement.
 L'intégration Azure Application Gateway n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_application_gateway/azure_application_gateway_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/azure
+[2]: https://docs.datadoghq.com/fr/help

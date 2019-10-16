@@ -194,7 +194,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/dogstatsd
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd
 [3]: /developers/dogstatsd/unix_socket
 [4]: /agent/guide/agent-commands

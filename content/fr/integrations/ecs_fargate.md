@@ -240,10 +240,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 
 ## Pour aller plus loin
 
-* Article de blog : [Surveiller des applications AWS Fargate avec Datadog][25]
+* Article de blog : [Surveiller des applications AWS Fargate avec Datadog][24]
 * FAQ : [Configuration d'intégration pour ECS Fargate][7]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
 [2]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
 [3]: https://aws.amazon.com/cli
@@ -267,8 +270,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [21]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 [22]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
 [23]: https://docs.datadoghq.com/fr/tracing/setup
-[24]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/metadata.csv
-[25]: https://www.datadoghq.com/blog/monitor-aws-fargate
-
-
-{{< get-dependencies >}}
+[24]: https://www.datadoghq.com/blog/monitor-aws-fargate

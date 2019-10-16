@@ -192,10 +192,10 @@ By default, the Docker Agent collects metrics with the following core checks. To
 The Docker Agent sends events to Datadog when an Agent is started or restarted.
 
 ### Service checks
-**datadog.agent.up**:  
+**datadog.agent.up**: <br>
 Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
 
-**datadog.agent.check_status**:  
+**datadog.agent.check_status**: <br>
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 ## Integrations

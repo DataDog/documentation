@@ -55,7 +55,6 @@ Datadog.configure { |c| c.analytics_enabled = true }
  Une fois la fonction activée, la page [Analyse et recherche de traces] commence à afficher des informations.
 
 
-[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
