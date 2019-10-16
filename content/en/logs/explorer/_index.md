@@ -70,7 +70,7 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 | Button            | Description                                                                                                          |
 |-------------------|----------------------------------------------------------------------------------------------------------------------|
 | Export to Monitor | Export the query applied to your Logstream to create the log monitor query for a new [log monitor][1]       |
-| Export to CSV     | Export your current Logstream view with its selected columns into a CSV file. You can export up to 5000 logs at once. |
+| Export to CSV     | Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once. |
 | Share View     | Share a link to the current view with your teammates through email, Slack and more. See all [Datadog notification integrations][2] available. |
 
 
