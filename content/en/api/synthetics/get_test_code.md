@@ -2,7 +2,7 @@
 title: Get a test
 type: apicode
 order: 29.8
-external_redirect: /api/#get-test
+external_redirect: /api/#get-a-test
 ---
 
 **SIGNATURE**:

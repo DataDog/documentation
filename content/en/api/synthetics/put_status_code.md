@@ -2,7 +2,7 @@
 title: Start or pause a test
 type: apicode
 order: 29.2
-external_redirect: /api/#status-test
+external_redirect: /api/##start-or-pause-a-test
 ---
 
 **SIGNATURE**:

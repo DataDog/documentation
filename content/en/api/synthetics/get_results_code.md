@@ -2,7 +2,7 @@
 title: Get the most recent results
 type: apicode
 order: 29.5
-external_redirect: /api/#get-results
+external_redirect: /api/#get-the-most-recent-results
 ---
 
 **SIGNATURE**:
