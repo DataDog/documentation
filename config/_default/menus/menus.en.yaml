@@ -698,10 +698,23 @@ main:
     weight: 6
     parent: "alerting"
 
+  ## MONITORS -  SLOs
+  
   - name: "Service Level Objectives"
-    url: "monitors/slos/"
+    url: "monitors/service_level_objectives/"
     weight: 7
     parent: "alerting"
+    identifier: "slos"
+  
+  - name: "Monitor SLO"
+    url: "monitors/service_level_objectives/monitor/"
+    parent: "slos"
+    weight: 7.1
+  
+  - name: "Event SLO"
+    url: "monitors/service_level_objectives/event/"
+    parent: "slos"
+    weight: 7.2
 
   ## MONITORS -  Guides
 
@@ -709,8 +722,6 @@ main:
     url: "monitors/guide/"
     weight: 100
     parent: "alerting"
-
-
 
 #################
 ## TRACING/APM ##
