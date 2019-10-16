@@ -48,7 +48,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    **Note**: To scale a private location, add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
+    **Note**: One worker can process up to 10 tests in parallel. To scale a private location, add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
@@ -88,7 +88,7 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                       |
 | `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                   |
 | `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                      |
-| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                     |
+| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                |
 | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                              |
 
 
