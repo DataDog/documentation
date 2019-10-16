@@ -23,7 +23,7 @@ For example, submitting samples 2, 3, 6, 7 sends a value of 5 (7-2) during the f
 
 Function template:
 ```python
-self.monotonic_count(name="<METRIC_NAME>",value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
+self.monotonic_count(name,value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -42,7 +42,7 @@ This function submits the number of events that occurred during the check interv
 
 Function template:
 ```python
-self.count(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
+self.count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -63,11 +63,11 @@ Datadog recommends using the `count()` function even if you wish to increment/de
 
 Function templates:
 ```python
-self.increment(name="<METRIC_NAME>", value=1, tags=None, hostname=None, device_name=None)
+self.increment(name, value=1, tags=None, hostname=None, device_name=None)
 ```
 
 ```python
-self.decrement(name="<METRIC_NAME>", value=1, tags=None, hostname=None, device_name=None)
+self.decrement(name, value=1, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -89,7 +89,7 @@ This function submits the value of a metric at a given timestamp. If called mult
 
 Function template:
 ```python
-self.gauge(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
+self.gauge(name=, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -111,7 +111,7 @@ This function submits the sampled raw value of your counter. The Datadog Agent c
 
 Function template:
 ```python
-self.rate(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
+self.rate(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -134,7 +134,7 @@ This function submits the sample of a histogram metric that occurred during the 
 
 Function template:
 ```python
-self.histogram(name="<METRIC_NAME>", value=<METRIC_VALUE>, tags=None, hostname=None, device_name=None)
+self.histogram(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |

@@ -11,7 +11,7 @@ further_reading:
 To submit a service check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
 
 ```python
-self.service_check(name="<SERVICE_CHECK_NAME>", status="<STATUS>", tags=None, hostname=None, message=None)
+self.service_check(name, status, tags=None, hostname=None, message=None)
 ```
 
 Find below the different parameters and data types available for the `service_check()` function:

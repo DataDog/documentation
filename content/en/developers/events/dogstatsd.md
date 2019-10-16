@@ -19,22 +19,22 @@ further_reading:
 After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
 ```
-event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName, AlertType, Tags)
+event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <SOURCE_TYPE_NAME>, <ALERT_TYPE>, <TAGS>)
 ```
 
 **Definitions**:
 
-| Parameter      | Type            | Required | Description                                                                                |
-|----------------|-----------------|----------|--------------------------------------------------------------------------------------------|
-| Title          | String          | Yes      | The title of the event                                                                     |
-| Text           | String          | Yes      | The text body of the event                                                                 |
-| Timestamp      | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
-| Hostname       | String          | No       | The name of the host                                                                       |
-| AggregationKey | String          | No       | A key to use for aggregating events                                                        |
-| Priority       | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
-| SourceTypeName | String          | No       | The [source type][3] name                                                                  |
-| AlertType      | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
-| Tags           | List of strings | No       | A list of tags associated with this event.                                                 |
+| Parameter            | Type            | Required | Description                                                                                |
+|----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
+| `<TITLE>`            | String          | Yes      | The title of the event                                                                     |
+| `<TEXT>`             | String          | Yes      | The text body of the event                                                                 |
+| `<TIMESTAMP>`        | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
+| `<HOSTNAME>`         | String          | No       | The name of the host                                                                       |
+| `<AGGREGATION_KEY>`  | String          | No       | A key to use for aggregating events                                                        |
+| `<PRIORITY>`         | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
+| `<SOURCE_TYPE_NAME>` | String          | No       | The [source type][3] name                                                                  |
+| `<ALERT_TYPE>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
+| `<TAGS>`             | List of strings | No       | A list of tags associated with this event.                                                 |
 
 ### Examples
 

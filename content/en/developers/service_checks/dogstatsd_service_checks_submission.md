@@ -22,7 +22,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 After [installing DogStatsD][1], you can send service checks to Datadog with the following function:
 
 ```
-service_check("<SERVICE_CHECK_NAME>", <STATUS>, "<TAGS>", "<HOSTNAME>", "<MESSAGE>")
+service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 ```
 
 Service check function parameters:
