@@ -19,9 +19,9 @@ further_reading:
 
 ## Overview
 
-APM metric monitors work like regular [metric monitors][1] but with controls tailored specifically to APM. Use this monitor to get alerted at the service level on hits, errors, and a variety of latency measures.
+APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-Trace analytics monitors allow you to visualize APM data over time and set up alerts based on APM events. For example, use this monitor to get alerted on a spike in slow requests.
+Trace analytics monitors allow you to visualize APM data over time and set up alerts based on APM events. For example, use a trace analytics monitor to receive alerts on a spike in slow requests.
 
 ## Monitor creation
 
