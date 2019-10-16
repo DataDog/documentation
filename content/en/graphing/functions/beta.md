@@ -99,5 +99,5 @@ default_zero(avg:custom_metric{*})
 {{< /whatsnext >}}
 
 [1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
-[2]: /monitors/guide/as-count-in-monitor-evaluations/
-[3]: /developers/metrics/datagram_shell/#sending-metrics
+[2]: /monitors/guide/as-count-in-monitor-evaluations
+[3]: /developers/metrics

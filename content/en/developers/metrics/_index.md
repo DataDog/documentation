@@ -7,6 +7,7 @@ aliases:
   - /guides/metrics/
   - /metrictypes/
   - /units/
+  - /developers/metrics/datagram_shell
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
