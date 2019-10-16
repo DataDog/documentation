@@ -142,7 +142,7 @@ Interact with the upper reserved attributes section:
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
  
-The **Share** Button is the go-to to share the log opened in side panel to other contexts. 
+Use the **Share** button to share the log opened in side panel to other contexts. 
 
 * **Copy the JSON log** content to the clipboard (or use keyboard shortcut interaction (Ctrl+C/Cmd+C)).
 * **Share a link** to the log (along with the underlying view) to teammates through email, Slack and more (see our [notification integrations][5]) with Share Event interaction. 
