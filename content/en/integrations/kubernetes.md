@@ -166,7 +166,7 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 
 [1]: https://hub.docker.com/r/datadog/agent
 [2]: /agent/basic_agent_usage/kubernetes
-[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [4]: /agent
 [5]: /agent/autodiscovery
 [6]: https://app.datadoghq.com/account/settings#agent/kubernetes
