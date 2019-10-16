@@ -52,7 +52,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 {{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
-### Saved Views
+### Saved views
 
 Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
