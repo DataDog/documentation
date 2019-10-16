@@ -24,7 +24,7 @@ main:
     url: getting_started/application/
     parent: getting_started
     weight: 3
-  - name: Les monitors
+  - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/application/monitors
     parent: getting_started_datadog
@@ -160,7 +160,7 @@ main:
     url: agent/kubernetes/daemonset_setup/
     parent: agent_kubernetes
     weight: 301
-  - name: Configuration avec l'host
+  - name: Configuration de host
     url: agent/kubernetes/host_setup/
     parent: agent_kubernetes
     weight: 302
@@ -180,15 +180,15 @@ main:
     url: agent/kubernetes/metrics/
     parent: agent_kubernetes
     weight: 306
-  - name: Métriques Custom et DogStatsD
+  - name: Métriques custom et DogStatsD
     url: agent/kubernetes/dogstatsd/
     parent: agent_kubernetes
     weight: 307
-  - name: Version Antérieures
+  - name: Version antérieures
     url: agent/kubernetes/legacy/
     parent: agent_kubernetes
     weight: 308
-  - name: Cluster Agent
+  - name: Agent de cluster
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
@@ -203,12 +203,12 @@ main:
     parent: agent_cluster
     identifier: cluster_agent_event_collection
     weight: 402
-  - name: Métrique Externe
+  - name: Métriques externes et custom
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
     weight: 403
-  - name: Commandes & Options
+  - name: Commandes et options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
@@ -223,7 +223,7 @@ main:
     identifier: agent_autodiscovery
     parent: agent
     weight: 5
-  - name: Auto-Configuration
+  - name: Configuration automatique
     url: agent/autodiscovery/auto_conf/
     parent: agent_autodiscovery
     weight: 501
@@ -235,7 +235,7 @@ main:
     url: agent/autodiscovery/ad_identifiers/
     parent: agent_autodiscovery
     weight: 503
-  - name: Template Variables
+  - name: Template variables
     url: agent/autodiscovery/template_variables/
     parent: agent_autodiscovery
     weight: 504
@@ -251,7 +251,7 @@ main:
     url: agent/autodiscovery/endpointschecks/
     parent: agent_autodiscovery
     weight: 507
-  - name: Checks de Cluster
+  - name: Checks de cluster
     url: agent/autodiscovery/clusterchecks/
     parent: agent_autodiscovery
     weight: 508
@@ -277,7 +277,7 @@ main:
     parent: agent
     identifier: agent_proxy
     weight: 7
-  - name: Upgrade vers Agent v6
+  - name: Mise à niveau vers Agent v6
     url: agent/guide/upgrade-to-agent-v6/
     parent: agent
     weight: 8
@@ -298,7 +298,7 @@ main:
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
     weight: 903
-  - name: NTP
+  - name: Problèmes NTP
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
     weight: 904
@@ -335,7 +335,7 @@ main:
     pre: nav_graphing
     identifier: graphing
     weight: 60000
-  - name: Utiliser les Graphs
+  - name: Utiliser les graphiques
     url: graphing/using_graphs/
     parent: graphing
     identifier: graphing_using_graphs
@@ -353,7 +353,7 @@ main:
     url: graphing/dashboards/timeboard/
     parent: graphing_dashboards
     weight: 202
-  - name: Template Variables
+  - name: Template variables
     url: graphing/dashboards/template_variables/
     parent: graphing_dashboards
     weight: 203
@@ -375,7 +375,7 @@ main:
     url: graphing/metrics/explorer/
     parent: graphing_metrics
     weight: 302
-  - name: Summary
+  - name: Résumé
     url: graphing/metrics/summary/
     parent: graphing_metrics
     weight: 303
@@ -384,7 +384,7 @@ main:
     parent: graphing_metrics
     identifier: graphing_metrics_distributions
     weight: 304
-  - name: Corrélation de Métrique
+  - name: Corrélations de métriques
     url: graphing/correlations/
     parent: graphing
     weight: 4
@@ -392,7 +392,7 @@ main:
     url: graphing/notebooks/
     parent: graphing
     weight: 5
-  - name: Le flux d'événements
+  - name: Flux d'événements
     url: graphing/event_stream/
     parent: graphing
     weight: 6
@@ -401,11 +401,11 @@ main:
     parent: graphing
     identifier: graphing_infrastructure
     weight: 7
-  - name: Container Map
+  - name: Container map
     url: graphing/infrastructure/containermap/
     parent: graphing_infrastructure
     weight: 701
-  - name: La Hostmap
+  - name: Hostmap
     url: graphing/infrastructure/hostmap/
     parent: graphing_infrastructure
     weight: 702
@@ -413,7 +413,7 @@ main:
     url: graphing/infrastructure/livecontainers/
     parent: graphing_infrastructure
     weight: 703
-  - name: Live Processes
+  - name: Live processes
     url: graphing/infrastructure/process/
     parent: graphing_infrastructure
     weight: 704
@@ -434,7 +434,7 @@ main:
     url: graphing/functions/arithmetic/
     parent: graphing_functions
     weight: 802
-  - name: Count
+  - name: Total
     url: graphing/functions/count/
     parent: graphing_functions
     weight: 803
@@ -462,11 +462,11 @@ main:
     url: graphing/functions/smoothing/
     parent: graphing_functions
     weight: 809
-  - name: Timeshift
+  - name: Décalage temporel
     url: graphing/functions/timeshift/
     parent: graphing_functions
     weight: 810
-  - name: Beta
+  - name: Bêta
     url: graphing/functions/beta/
     parent: graphing_functions
     weight: 811
@@ -496,7 +496,7 @@ main:
     pre: nav_alerting
     identifier: alerting
     weight: 70000
-  - name: Les monitors
+  - name: Monitors
     url: monitors/monitor_types/
     parent: alerting
     identifier: monitor_types
@@ -509,7 +509,7 @@ main:
     url: monitors/monitor_types/metric/
     parent: monitor_types
     weight: 102
-  - name: Anomalies
+  - name: Anomalie
     url: monitors/monitor_types/anomaly/
     parent: monitor_types
     weight: 103
@@ -525,7 +525,7 @@ main:
     url: monitors/monitor_types/integration/
     parent: monitor_types
     weight: 106
-  - name: Processes
+  - name: Live process
     url: monitors/monitor_types/process/
     parent: monitor_types
     weight: 107
@@ -533,7 +533,7 @@ main:
     url: monitors/monitor_types/process_check/
     parent: monitor_types
     weight: 108
-  - name: Network
+  - name: Réseau
     url: monitors/monitor_types/network/
     parent: monitor_types
     weight: 109
@@ -541,7 +541,7 @@ main:
     url: monitors/monitor_types/custom_check/
     parent: monitor_types
     weight: 110
-  - name: Event
+  - name: Événement
     url: monitors/monitor_types/event/
     parent: monitor_types
     weight: 111
@@ -554,7 +554,7 @@ main:
     parent: monitor_types
     weight: 113
     identifier: monitor_apm
-  - name: Analyses de traces
+  - name: Analyses de traces de l'APM
     url: monitors/monitor_types/trace_analytics
     parent: monitor_types
     identifier: monitors_trace_analytics
@@ -601,7 +601,7 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 80000
-  - name: Activer la collecte de trace
+  - name: Activer la collecte de traces
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: tracing
@@ -665,7 +665,7 @@ main:
     parent: tracing
     identifier: tracing_advanced
     weight: 3
-  - name: Connect Logs and Traces
+  - name: Associer vos logs à vos traces
     url: tracing/advanced/connect_logs_and_traces/
     parent: tracing_advanced
     weight: 301
@@ -673,7 +673,7 @@ main:
     url: tracing/advanced/adding_metadata_to_spans/
     parent: tracing_advanced
     weight: 302
-  - name: Métriques de runtime
+  - name: Métriques d'exécution
     url: tracing/advanced/runtime_metrics/
     parent: tracing_advanced
     weight: 303
@@ -685,7 +685,7 @@ main:
     url: tracing/advanced/manual_instrumentation/
     parent: tracing_advanced
     weight: 305
-  - name: Configurer les Primary Tags
+  - name: Configurer les tags primaires
     url: tracing/advanced/setting_primary_tags_to_scope/
     parent: tracing_advanced
     weight: 306
@@ -731,7 +731,7 @@ main:
     url: tracing/trace_search_and_analytics/analytics/
     parent: tracing_search_analytics
     weight: 503
-  - name: Les monitors
+  - name: Monitors
     url: monitors/monitor_types/trace_analytics
     parent: tracing_search_analytics
     weight: 504
@@ -793,7 +793,7 @@ main:
     parent: log_collection
     identifier: log_collection_ruby
     weight: 108
-  - name: Autres Intégrations
+  - name: Autres intégrations
     url: 'integrations/#collecte-de-logs-cat'
     identifier: other_integrations
     parent: log_collection
@@ -888,7 +888,7 @@ main:
     parent: synthetics
     weight: 1
     id: api_tests
-  - name: Browser Tests
+  - name: Tests Browser
     url: synthetics/browser_tests/
     parent: synthetics
     identifier: synthetics_browser_tests
@@ -903,21 +903,22 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Browser Tests
+  - name: Tests Browser
     url: synthetics/apm/browser_tests
     parent: synthetics_apm
     weight: 401
-  - name: Identifier les Bots Synthetics
+  - name: Identifier les bots Synthetics
     url: synthetics/identify_synthetics_bots/
     parent: synthetics
     weight: 5
-  - name: Settings
+  - name: Paramètres
     url: synthetics/settings/
     parent: synthetics
     weight: 6
   - name: Dépannage
     url: synthetics/troubleshooting/
     parent: synthetics
+    identifier: synthetics_troubleshooting
     weight: 7
   - name: Surveillance réseau
     url: network_performance_monitoring/
@@ -957,7 +958,7 @@ main:
     url: developers/dogstatsd/datagram_shell/
     parent: dev_tools_dogstatsd
     weight: 102
-  - name: 'Usage Unix Domain Socket '
+  - name: Utilisation sur un socket de domaine Unix
     url: developers/dogstatsd/unix_socket/
     parent: dev_tools_dogstatsd
     weight: 103
@@ -986,11 +987,11 @@ main:
     url: developers/metrics/gauges/
     parent: dev_tools_metrics
     weight: 204
-  - name: Histogrammes
+  - name: Histograms
     url: developers/metrics/histograms/
     parent: dev_tools_metrics
     weight: 205
-  - name: Taux
+  - name: Rates
     url: developers/metrics/rates/
     parent: dev_tools_metrics
     weight: 206
@@ -1027,7 +1028,7 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 702
-  - name: Legacy
+  - name: Ancien Agent
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
     weight: 703

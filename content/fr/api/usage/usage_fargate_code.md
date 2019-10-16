@@ -2,7 +2,7 @@
 title: Obtenir l'utilisation horaire pour Fargate
 type: apicode
 order: 33.7
-external_redirect: "/api/#get-hourly-usage-for-fargate"
+external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-fargate"
 ---
 
 **SIGNATURE**:

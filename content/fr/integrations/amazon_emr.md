@@ -10,18 +10,14 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Elastic Map Reduce.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_emr/'
-further_reading:
-  - link: 'https://www.datadoghq.com/blog/spark-emr-monitoring/'
-    tag: Blog
-    text: "Surveiller des applications Apache\_Spark s'exécutant sur Amazon\_EMR"
 git_integration_title: amazon_emr
 has_logo: true
-integration_title: "AWS\_Elastic\_MapReduce"
+integration_title: "Amazon\_Elastic\_Map\_Reduce"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_emr
-public_title: Intégration Datadog/AWS Elastic Map Reduce
+public_title: "Intégration Datadog/Amazon\_Elastic\_Map\_Reduce"
 short_description: Surveillez des métriques clés d'Amazon Elastic Map Reduce.
 version: '1.0'
 ---
@@ -65,9 +61,6 @@ L'intégration AWS Elastic MapReduce n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services

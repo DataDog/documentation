@@ -13,13 +13,13 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
-{{< img src="logs/live_tail/live_tail_demo.gif" alt="Live Tail" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" responsive="true" >}}
 
 ## Présentation
 
 La fonctionnalité Live Tail vous offre la possibilité de visualiser tous vos événements de log à n'importe quel endroit de votre infrastructure, et ce quasiment en temps réel. Les logs sont affichés dès leur sortie de la [section Pipeline][1] et avant [leur indexation][2] par Datadog. Ainsi :
 
-1. Tous les logs ingérés par Datadog sont affichés. [Aucune limite ne s'applique][2].
+1. Tous les logs ingérés par Datadog sont affichés. ([La fonctionnalité Logging without Limits s'applique][2]*).
 2. Les logs affichés ont déjà été traités.
 3. Le flux peut être interrompu.
 4. Vous ne pouvez pas consulter les données historiques.
@@ -40,7 +40,7 @@ Utilisez les [fonctions de filtres de la barre de recherche Live Tail](#filtrer
 
 ### Options d'affichage
 
-Personnalisez la vue Live Tail pour mieux mettre en évidence les informations pertinentes de vos logs. 
+Personnalisez la vue Live Tail pour mieux mettre en évidence les informations pertinentes de vos logs.
 Cliquez sur l'icône en forme d'engrenage en haut à droite de la page pour activer l'une des options ci-dessous :
 
 {{< img src="logs/live_tail/live_tail_column.png" alt="Colonne Live Tail" responsive="true" style="width:30%;">}}
@@ -53,7 +53,7 @@ Cliquez sur l'icône en forme d'engrenage en haut à droite de la page pour acti
 
 ## Filtrer le flux de logs
 
-Une requête valide dans la barre de recherche affiche les logs qui correspondent à vos critères de recherche. 
+Une requête valide dans la barre de recherche affiche les logs qui correspondent à vos critères de recherche.
 La syntaxe de recherche de la vue Live Tail est la même que celle des autres vues de logs. Toutefois, avec la vue Live Tail, la recherche se fait dans tous les logs ingérés, et non pas uniquement dans ceux qui ont été indexés.
 
 ### Attributs JSON
@@ -77,6 +77,8 @@ Pour rechercher tous les logs dont le nombre de lignes est supérieur à 150, ut
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+*Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: /fr/logs/processing/pipelines
-[2]: /fr/logs/logging_without_limits
+[2]: /fr/logs
