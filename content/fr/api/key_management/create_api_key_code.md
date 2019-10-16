@@ -2,17 +2,17 @@
 title: Créer une clé d'API
 type: apicode
 order: 21.03
-external_redirect: "/api/#create-an-api-key"
+external_redirect: "/api/#creer-une-cle-d-api"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `POST /v1/api_key/<CLÉ_API>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="create_api_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.create_api_key" >}}

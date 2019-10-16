@@ -1,7 +1,7 @@
 ---
-title: Custom check monitor
+title: Custom Check Monitor
 kind: documentation
-description: "Monitor status of arbitrary custom checks"
+description: "Monitor status of arbitrary custom checks."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
@@ -16,28 +16,78 @@ further_reading:
 
 ## Overview
 
-Custom monitors encompass any service checks that are not reported by one of the out-of-the-box integrations included with the Agent.
+Custom check monitors include any service check not reported by one of the [350+ integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
 
-Refer to the [Agent checks guide][1] for detailed information on writing your own checks that send metrics, events, or service checks.
+## Monitor creation
 
-## Configuration
+To create a [custom check monitor][5] in Datadog, use the main navigation: *Monitors --> New Monitor --> Custom Check*.
 
-1. Select your **custom check**:  
-  {{< img src="monitors/monitor_types/custom_check/Selecting_custom_check.png" alt="selecting custom monitor" responsive="true" style="width:80%;">}}
-2. Select **host or tags** that you would like to monitor.  
-  {{< img src="monitors/monitor_types/custom_check/monitor_scope.png" alt="monitor scope" responsive="true" style="width:80%;">}}
-  The check runs for every unique set of tags from all monitored hosts. For example, the `Nginx` service check reports one status per `{host,port}`. So if you have multiple servers running on a single host, then each one alerts separately in the case of failure.
+### Pick a Custom Check
 
-3. Select your **alert options**:  
-  {{< img src="monitors/monitor_types/custom_check/monitor_options.png" alt="monitor options" responsive="true" style="width:80%;">}}
-  While each check run sends a status of either CRITICAL, WARNING or OK, you can choose at what consecutive conditions to cause a state change and a notification. For example, you might want to know immediately when your check fails and only have it recover if it stays that way. In this case you might choose to notify on 1 critical status, 1 warning status and 4 OK statuses.  
-  You can optionally **notify on no data** after a configurable timeframe. You must choose at least 2 minutes for your timeframe.
+Choose a custom check from the drop-down box.
 
-4. Configure your **notification options**:  
-  Refer to the [Notifications][2] dedicated documentation page for a detailed walkthrough of the common notification options.
+### Pick monitor scope
+
+Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+
+* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
+
+### Set alert conditions
+
+In this section, choose between a **Check Alert** or **Cluster Alert**:
+
+{{< tabs >}}
+{{% tab "Check Alert" %}}
+
+A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
+
+Set up the check alert:
+
+1. Trigger a separate alert for each `<GROUP>` reporting your check.
+
+    Check grouping is specified either from a list of known groupings or by you. For custom check monitors, the per-check grouping is unknown, so you must specify it.
+
+2. Trigger the alert after selected consecutive failures: `<NUMBER>`
+
+    Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `WARN` and `CRITICAL` status trigger a notification. For example, to be notified immediately when your check fails, trigger the monitor alert on `1` critical status or `1` warning status.
+
+3. Choose `Do not notify` or `Notify` for Unknown status.
+
+4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
+
+    Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` OK statuses.
+
+{{% /tab %}}
+{{% tab "Cluster Alert" %}}
+
+A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
+
+Set up a cluster alert:
+
+1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+
+2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [metric monitor][6] documentation for information on [No data][7], [Auto resolve][8], and [Evaluation delay][9] options.
+
+### Notifications
+
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/agent_checks
-[2]: /monitors/notifications
+[1]: /integrations
+[2]: /developers/write_agent_check
+[3]: /developers/dogstatsd
+[4]: /api/?lang=python#service-checks
+[5]: https://app.datadoghq.com/monitors#create/custom
+[6]: /monitors/monitor_types/metric
+[7]: /monitors/monitor_types/metric/#no-data
+[8]: /monitors/monitor_types/metric/#auto-resolve
+[9]: /monitors/monitor_types/metric/#evaluation-delay
+[10]: /monitors/notifications

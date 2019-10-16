@@ -1,5 +1,5 @@
 ---
-title: Tests d'API
+title: Tests API
 kind: documentation
 description: Simuler et surveiller vos requêtes HTTP à partir d'emplacements spécifiques
 aliases:
@@ -14,15 +14,15 @@ further_reading:
     text: Gérer vos checks
   - link: synthetics/browser_tests
     tag: Documentation
-    text: Configurer un test navigateur
+    text: Configurer un test Browser
 ---
 ## Présentation
 
-Les tests d'API vous permettent de surveiller vos endpoints d'API et de recevoir des alertes en cas d'échec ou de lenteur excessive. Ces checks vérifient que vos applications répondent aux requêtes et respectent les conditions que vous avez définies, comme le temps de réponse, le code de statut HTTP, ainsi que les contenus de l'en-tête et du corps de message. Utilisez l'[API Datadog][1] pour voir la liste complète.
+Les tests API vous permettent de surveiller vos endpoints d'API et de recevoir des alertes en cas d'échec ou de lenteur excessive. Ces checks vérifient que vos applications répondent aux requêtes et respectent les conditions que vous avez définies, comme le temps de réponse, le code de statut HTTP, ainsi que les contenus de l'en-tête et du corps de message. Utilisez l'[API Datadog][1] pour voir la liste complète.
 
 ## Configuration
 
-La configuration des tests d'API dépend du type de test d'API que vous souhaitez créer. Il existe deux types de test d'API : les [tests HTTP](?tab=httptest) et les [tests SSL](?tab=ssltest).
+La configuration des tests API dépend du type de test API que vous souhaitez créer. Il existe deux types de test API : les [tests HTTP](?tab=httptest) et les [tests SSL](?tab=ssltest).
 
 ### Créer une requête
 
@@ -45,9 +45,9 @@ Définissez la requête que vous souhaitez que Datadog exécute :
         * Body : corps de la requête et type de corps (`text/plain`, `application/json`, `text/xml`, `text/html` ou `None`)
         * Cookies : les cookies définis sont ajoutés aux cookies du navigateur par défaut. Définissez plusieurs cookies en suivant le format  `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-3. **Name** : le nom de votre test d'API.
-4. **Select your tags** : les tags à appliquer à votre test navigateur. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée sur la [page Synthetics][2].
-5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][3]. Vous pouvez également configurer un [emplacement privé][4] pour lancer un test d'API de Synthetics sur un endpoint privé qui n'est pas accessible à partir de l'Internet public.
+3. **Name** : le nom de votre test API.
+4. **Select your tags** : les tags à appliquer à votre test Browser. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée sur la [page Synthetics][2].
+5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][3]. Vous pouvez également configurer un [emplacement privé][4] pour lancer un test API de Synthetics sur un endpoint privé qui n'est pas accessible à partir de l'Internet public.
 6. **How often should we run the test?** : utilisez cette option pour définir la fréquence d'exécution du test. Cette fréquence peut aller d'une fois par minute à une fois par semaine.
 7. Cliquez sur **Test URL** pour essayer la configuration de requête. Un aperçu de la réponse devrait s'afficher sur le côté droit de votre écran.
 
@@ -63,9 +63,9 @@ Définissez la requête que vous souhaitez que Datadog exécute :
 
 1. **Choose request type** : choisissez `SSL` comme type de requête.
 2. Précisez le `Host` et le `Port` SSL. Le port est défini sur _443_ par défaut.
-3. **Name** : le nom de votre test d'API.
+3. **Name** : le nom de votre test API.
 4. **Select your tags** : les tags à appliquer à votre test navigateur. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée sur la [page Synthetics][1].
-5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][2]. Vous pouvez également configurer un [emplacement privé][3] pour lancer un test d'API de Synthetics sur un endpoint privé qui n'est pas accessible à partir de l'Internet public.
+5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][2]. Vous pouvez également configurer un [emplacement privé][3] pour lancer un test API de Synthetics sur un endpoint privé qui n'est pas accessible à partir de l'Internet public.
 6. **How often should we run the test?** : utilisez cette option pour définir la fréquence d'exécution du test. Cette fréquence peut aller d'une fois toutes les 5 minutes à une fois par semaine.
 7. Cliquez sur **Test Connection** pour essayer la configuration de requête. Un aperçu de la réponse devrait s'afficher sur le côté droit de votre écran.
 
@@ -87,7 +87,7 @@ La barre d'uptime s'affiche différemment sur vos résultats de test : l'uptime
 
 #### Assertions
 
-Lorsque vous exécutez un test d'API, vous devez définir au moins une assertion gérée par Datadog.
+Lorsque vous exécutez un test API, vous devez définir au moins une assertion gérée par Datadog.
 Une assertion est définie par un paramètre, une propriété facultative, un comparateur et une valeur cible.
 
 {{< tabs >}}
@@ -124,7 +124,7 @@ Si vous cliquez sur **Test URL**, l'assertion de base est automatiquement rensei
 
 {{< /tabs >}}
 
-Vous pouvez créer jusqu'à 10 assertions par test d'API en cliquant sur **Add new assertion** ou en cliquant directement sur l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **Add new assertion** ou en cliquant directement sur l'aperçu de la réponse :
 
 {{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Configurer les assertions" video="true" responsive="true" width="80%" >}}
 
@@ -148,11 +148,11 @@ Une notification est envoyée selon les conditions d'alerte définies. Pour conf
 
 1. Sélectionnez les utilisateurs et/ou les [services][3] auxquels envoyer les notifications. Notez que vous pouvez utiliser la [fonctionnalité `@-notification`][4] dans le champ **message**.
 2. Saisissez un **message** pour le test de l'API. Ce champ accepte l'utilisation du [format de mise en forme Markdown][5] standard. Les messages de notifications comprennent le **message** défini dans cette section ainsi que les informations sur les assertions qui ont échoué et les raisons de cet échec.
-3. Cliquez sur **Save** pour enregistrer votre test d'API.
+3. Cliquez sur **Save** pour enregistrer votre test API.
 
 Exemples de notifications :
 
-{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test d'API" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test API" responsive="true" style="width:80%;" >}}
 
 ## Calculs de temps des opérations réseau
 

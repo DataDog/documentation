@@ -2,7 +2,7 @@
 title: Supprimer une intégration GCP
 type: apicontent
 order: 17.3
-external_redirect: "/api/#delete-a-gcp-integration"
+external_redirect: "/api/#supprimer-une-integration-gcp"
 ---
 
 ## Supprimer une intégration GCP

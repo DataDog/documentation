@@ -48,7 +48,7 @@
                     "handle" => "test1@datadoghq.com",
                     "name" => "Author Name"
                 },
-                "url" => "/dash/qts-q2k-yq6/trace-api",
+                "url" => "/dashboard/qts-q2k-yq6/trace-api",
                 "created" => "2015-10-21T13:22:48.633391+00:00",
                 "modified" => "2018-03-16T13:39:39.517133+00:00",
                 "is_read_only" => false,
@@ -65,7 +65,7 @@
                     "handle" => "test2@datadoghq.com",
                     "name" => "Other Author Name"
                 },
-                "url" => "/screen/rys-xwq-geh/agent-stats",
+                "url" => "/dashboard/rys-xwq-geh/agent-stats",
                 "created" => "2014-06-18T18:19:00.974763+00:00",
                 "modified" => "2018-03-16T12:54:25.968134+00:00",
                 "is_read_only" => false,

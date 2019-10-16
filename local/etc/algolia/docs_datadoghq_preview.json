@@ -17,50 +17,6 @@
       "page_rank": 0
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
-      "selectors_key": "integrations",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "integrations"
-      ],
-      "page_rank": 90
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
-      "selectors_key": "docs",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ],
-        "section": [
-          "account_management",
-          "agent",
-          "developers",
-          "getting_started",
-          "graphing",
-          "logs",
-          "monitors",
-          "security",
-          "synthetics",
-          "tagging",
-          "tracing",
-          "watchdog"
-        ]
-      },
-      "tags": [
-        "docs"
-      ],
-      "page_rank": 100
-    },
-    {
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
@@ -104,6 +60,64 @@
         "guide"
       ],
       "page_rank": 10
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
+      "selectors_key": "getting_started",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ]
+      },
+      "tags": [
+        "getting_started"
+      ],
+      "page_rank": 200
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
+      "selectors_key": "integrations",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ]
+      },
+      "tags": [
+        "integrations"
+      ],
+      "page_rank": 90
+    },
+    {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
+      "selectors_key": "docs",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ],
+        "section": [
+          "account_management",
+          "agent",
+          "developers",
+          "graphing",
+          "logs",
+          "monitors",
+          "security",
+          "synthetics",
+          "tagging",
+          "tracing",
+          "watchdog"
+        ]
+      },
+      "tags": [
+        "docs"
+      ],
+      "page_rank": 100
     }
   ],
   "stop_urls": [
@@ -144,7 +158,6 @@
     "docs.datadoghq.com/logs/faq/$",
     "docs.datadoghq.com/logs/faq/how-to-set-up-only-logs/$",
     "docs.datadoghq.com/logs/guide/$",
-    "docs.datadoghq.com/logs/logs_to_metrics/$",
     "docs.datadoghq.com/monitors/faq/$",
     "docs.datadoghq.com/monitors/guide/$",
     "docs.datadoghq.com/resources/",
@@ -157,17 +170,17 @@
     "docs.datadoghq.com/videos/"
   ],
   "selectors": {
-    "docs": {
+    "getting_started": {
       "lvl0": {
         "selector": ".h-100 .sidenav-nav > ul >li.open > a",
         "global": true,
-        "default_value": "Documentation"
+        "default_value": "Getting Started"
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -184,7 +197,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr",
+      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -199,7 +212,7 @@
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td, code-tabs table tbody tr td",
+      "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -216,7 +229,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -231,6 +244,23 @@
       },
       "lvl1": ".main-api h2",
       "text": ".main-api p, h5[id*='rate-limit'] + ul > li",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "docs": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "Documentation"
+      },
+      "lvl1": ".main h1",
+      "lvl2": ".main h2",
+      "lvl3": ".main h3",
+      "lvl4": ".main h4",
+      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -259,7 +289,8 @@
       "tags"
     ],
     "optionalWords": [
-      "the"
+      "the",
+      "without"
     ],
     "synonyms": [
       [

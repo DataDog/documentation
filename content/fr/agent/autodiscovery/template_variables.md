@@ -1,5 +1,5 @@
 ---
-title: Template Variables Autodiscovery
+title: Template variables Autodiscovery
 kind: documentation
 disable_toc: true
 further_reading:
@@ -17,9 +17,9 @@ further_reading:
 Utilisez les template variables suivantes lors de la configuration d'Autodiscovery afin d'attribuer de façon dynamique les valeurs de votre conteneur :
 
 
-| Template Variable           | Description                                                                                                                                                                                                 |
+| Template variable           | Description                                                                                                                                                                                                 |
 | --------------------------  | ---                                                                                                                                                                                                         |
-| `"%%host%%"`                | Détecte automatiquement le réseau. Dans le cas des conteneurs à réseau unique, ce Template Variable renvoie l'adresse IP correspondante.                                                                                                                   |
+| `"%%host%%"`                | Détecte automatiquement le réseau. Dans le cas des conteneurs à réseau unique, cette template variable renvoie l'adresse IP correspondante.                                                                                                                   |
 | `"%%host_<NOM_RÉSEAU>%%"` | Indique le nom du réseau à utiliser, en cas d'association à plusieurs réseaux.                                                                                                                                      |
 | `"%%port%%"`                | Utilise le port exposé le plus élevé lorsque les ports sont **triés numériquement par ordre croissant**.<br> (p. ex. `8443` pour un conteneur qui expose les ports `80`, `443` et `8443`)                                    |
 | `"%%port_<NOMBRE_X>%%"`     | Utilise le port `<NOMBRE_X>` **trié numériquement par ordre croissant**.<br> (p. ex., si un conteneur expose les ports `80`, `443` et `8443`, `"%%port_0%%` correspond au port `80` et `"%%port_1%%"` au port `443`) |
@@ -30,10 +30,10 @@ Utilisez les template variables suivantes lors de la configuration d'Autodiscove
 
 **Alternative** :
 
-* Pour `"%%host%%"` : si l'Agent n'est pas capable de la trouver, l'IP de réseau `bridge` est utilisée comme valeur alternative pour cette Template Variable.
-* Pour `"%%host_<NOM_RÉSEAU>%%" : si le `<NOM_RÉSEAU>` spécifié n'a pas été trouvé, cette Template Variable se comporte comme `"%%host%%"`.
+* Pour `"%%host%%"` : si l'Agent n'est pas capable de la trouver, l'IP de réseau `bridge` est utilisée comme valeur alternative pour cette template variable.
+* Pour `"%%host_<NOM_RÉSEAU>%%" : si le `<NOM_RÉSEAU>` spécifié n'a pas été trouvé, cette template variable se comporte comme `"%%host%%"`.
 
-Les Template Variables ne sont pas toutes prises en charge, selon votre plateforme :
+Les template variables ne sont pas toutes prises en charge, selon votre plateforme :
 
 | Plateforme    | Identificateurs Auto-discovery  | Host | Port | Tag | Pid | Env | Hostname |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      |

@@ -103,7 +103,7 @@ Cette section repose sur des exemples pour expliquer le processus de calcul des 
 
 Le calcul de `A && B && C` par Datadog suit les conventions. Cependant, quels sont les statuts de monitor qui sont considérés comme « true » ou « false » ?
 
-Pour rappel, voici les six statuts qu'un monitor peut avoir (par ordre de gravité) :
+Pour rappel, voici les six statuts qu'un monitor peut avoir (par ordre de sévérité) :
 
 * `Ok`
 * `Warn`
@@ -130,16 +130,16 @@ Deux des quatre scénarios déclenchent une alerte, même si les monitors indivi
 
 ### Détermination du statut d'un monitor individuel
 
-Au lieu d'échantillonner régulièrement le statut actuel des monitors individuels, les monitors composite sont évalués à partir des résultats glissants de chaque monitor qui les compose. En effet, ils reposent sur le statut le plus grave de chaque monitor dans un délai de 5 minutes. Par exemple, pour un monitor composite défini par `A && B`, imaginons que les statuts des monitors qui le composent correspondent à ce qui suit (une minute d'intervalle sépare les timestamps) :
+Au lieu d'échantillonner régulièrement l'état actuel des monitors individuels, les monitors composite sont évalués à partir des résultats glissants de chaque monitor qui les compose. En effet, ils reposent sur le statut le plus grave de chaque monitor dans un délai de 5 minutes. Par exemple, pour un monitor composite défini par `A && B`, imaginons que les statuts des monitors qui le composent correspondent à ce qui suit (une minute d'intervalle sépare les timestamps) :
 
 |   | T0    | T1    | T2    |
 |---|-------|-------|-------|
 | A | Alert | OK    | OK    |
 | B | OK    | Alert | Alert |
 
-Le monitor composite se déclenche à T1, même si le monitor `A` possède techniquement un statut `OK`.
+Le monitor composite se déclenche à T1, même si le monitor `A` possède techniquement un état `OK`.
 
-Ce comportement s'explique par le fait qu'il est étonnamment difficile de définir le concept de simultanéité pour les systèmes d'alerte. Les programmes d'évaluation des monitors peuvent différer. De plus, en raison d'une éventuelle latence des métriques, il est possible que deux événements susceptibles d'être simultanés ne se réalisent pas au même moment une fois les monitors évalués. Un simple échantillonnage du statut actuel entraînerait certainement le non-déclenchement de plusieurs alertes pour le monitor composite.
+Ce comportement s'explique par le fait qu'il est étonnamment difficile de définir le concept de simultanéité pour les systèmes d'alerte. Les programmes d'évaluation des monitors peuvent différer. De plus, en raison d'une éventuelle latence des métriques, il est possible que deux événements susceptibles d'être simultanés ne se réalisent pas au même moment une fois les monitors évalués. Un simple échantillonnage de l'état actuel entraînerait certainement le non-déclenchement de plusieurs alertes pour le monitor composite.
 
 Ainsi, la résolution des monitors peut s'effectuer plusieurs minutes après celles des monitors qui le composent.
 

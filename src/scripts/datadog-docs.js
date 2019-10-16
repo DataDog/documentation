@@ -787,6 +787,11 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="graphing/guide"]');
     }
 
+    if (path.includes('logs/guide')) {
+        aPath = document.querySelector('.side [data-path*="logs/guide"]');
+        maPath = document.querySelector('header [data-path*="logs/guide"]');
+    }
+
     if (path.includes('security/logs')) {
         aPath = document.querySelectorAll('.side [data-path*="security/logs"]')[1];
         maPath = document.querySelectorAll('header [data-path*="security/logs"]')[1];

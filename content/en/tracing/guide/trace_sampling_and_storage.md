@@ -302,31 +302,31 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 Manually keep a trace:
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // Always keep this trace
-  $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
-  //method impl follows
-}
-
+  if (null !== $span) {
+    // Always keep this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+    //method impl follows
+  }
+?>
 ```
 
 Manually drop a trace:
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // Always drop this trace
-  $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
-  //method impl follows
-}
-
+  if (null !== $span) {
+    // Always drop this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+    //method impl follows
+  }
+?>
 ```
 
 {{% /tab %}}

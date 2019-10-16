@@ -2,7 +2,7 @@
 title: Créer un test
 type: apicode
 order: 29.1
-external_redirect: "/api/#create-tests"
+external_redirect: "/api/#creer-un-test"
 ---
 
 **SIGNATURE**:

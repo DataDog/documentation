@@ -425,6 +425,13 @@ https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host
 {{% /tab %}}
 {{< /tabs >}}
 
+### Comments
+
+To include a comment in the monitor message that only shows in the monitor edit screen, use the syntax:
+```text
+{{!-- this is a comment --}}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

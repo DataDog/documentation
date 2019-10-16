@@ -19,31 +19,6 @@ const commonConfig = env => {
             sortManifest: true,
             publicPath: 'static/'
         })
-        // new CopyPlugin([
-        //     {
-        //         from: 'images/',
-        //         to: '../images/[path][name].[contenthash:5].[ext]'
-        //     }
-        // ]),
-
-        // create manifest for images with hashes
-        // new StatsWriterPlugin({
-        //     fields  : ['assetsByChunkName', 'assets'],
-        //     filename: '../../data/image_manifest.json',
-        //     transform(stats) {
-        //         console.log('stats: ', stats);
-        //         const manifest = {};
-        //         stats.assets
-        //             .map(asset => asset.name)
-        //             .sort()
-        //             .forEach(file => {
-        //                 manifest[file.replace(/\.[a-f0-9]{5}\./, '.')] = file;
-        //                 // 5 is length of hash
-        //             });
-        //         return JSON.stringify(manifest, null, 2) + '\n';
-        //     }
-        // }),
-        // manifest2
     ];
 
     // check if the analyze script was run and add BundleAnalyzer plugin if true
@@ -67,6 +42,14 @@ const commonConfig = env => {
         context: path.join(__dirname, 'src'),
         module: {
             rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: 'eslint-loader',
+                    options: {
+                        // eslint options (if necessary)
+                    }
+                },
                 {
                     test: /\.(ttf|eot|svg|gif|png|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                     loader: 'file-loader?name=[path][name].[hash].[ext]'

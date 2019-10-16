@@ -3,7 +3,6 @@ aliases:
   - /fr/integrations/awses/
 categories:
   - cloud
-  - search
   - aws
   - log collection
 ddtype: crawler
@@ -12,12 +11,12 @@ description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_es/'
 git_integration_title: amazon_es
 has_logo: true
-integration_title: "AWS\_ES"
+integration_title: "Amazon\_Elasticsearch"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_es
-public_title: "Intégration Datadog/AWS\_ES"
+public_title: "Intégration Datadog/Amazon\_ElasticSearch"
 short_description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 version: '1.0'
 ---
@@ -39,8 +38,8 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon ES :
 
     * `es:ListTags` : ajoute des tags de domaine ES personnalisés aux métriques ES.
-    * `es:ListDomainNames` : ajoute des tags de domaine ES personnalisés aux métriques ES.
-    * `es:DescribeElasticsearchDomains` : ajoute des tags de domaine ES personnalisés aux métriques ES.
+    * `es:ListDomainNames` : énumère tous les domaines Amazon ES dont l'utilisateur actuel est le propriétaire dans la région active.
+    * `es:DescribeElasticsearchDomains` : collecte l'identifiant de domaine, l'endpoint de service de domaine et l'ARN de domaine pour tous les domaines en tant que tags.
 
     Pour en savoir plus sur les stratégies ES, consultez [la documentation disponible sur le site d'AWS][4].
 
@@ -62,13 +61,13 @@ L'intégration AWS ES n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

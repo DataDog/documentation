@@ -27,7 +27,7 @@ Grâce à la bibliothèque `datadog-logs`, vous pouvez envoyer des logs directem
 * Utilisez la bibliothèque en tant qu'enregistreur. Tous les logs sont transmis à Datadog sous forme de documents JSON.
 * Ajoutez du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé.
 * Incorporez et transmettez automatiquement chaque erreur JavaScript.
-* Transmettez des logs de console JavaScript.
+* Transmettez les erreurs JavaScript.
 * Enregistrez des user agents et des adresses IP de clients réels.
 * Optimisez l'utilisation du réseau grâce aux publications automatiques en bloc.
 
@@ -43,8 +43,10 @@ Les paramètres suivants peuvent être utilisés pour configurer la bibliothèqu
 * Utilisez `addLoggerGlobalContext` pour ajouter des attributs JSON à tous les logs générés.
 * Définissez `clientToken` sur la valeur du jeton client (**vous ne pouvez utiliser que des jetons client dans cette bibliothèque**).
 
+Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de configurer la bibliothèque au début de la section <head> de vos pages.
+
 {{< tabs >}}
-{{% tab "États-Unis" %}}
+{{% tab "Site américain de Datadog" %}}
 
 ```
 <html>
@@ -69,7 +71,7 @@ Les paramètres suivants peuvent être utilisés pour configurer la bibliothèqu
 ```
 
 {{% /tab %}}
-{{% tab "États-Unis" %}}
+{{% tab "Site européen de Datadog" %}}
 
 ```
 <html>
@@ -187,7 +189,7 @@ La bibliothèque contient un enregistreur par défaut, mais vous pouvez égaleme
 
 Chaque enregistreur peut être configuré avec son propre contexte, gestionnaire et niveau de log. Remarque : le `Global Context` est ajouté en haut du contexte de chaque enregistreur.
 
-Utilisez les éléments suivants pour définir un enregistreur personnalisé :
+Utilisez le bloc de configuration suivant pour définir un enregistreur personnalisé :
 
 ```
 window.DD_LOGS && DD_LOGS.createLogger (<NOM_ENREGISTREUR>, {
@@ -266,7 +268,7 @@ if (window.DD_LOGS) {
 
 ## Navigateurs pris en charge
 
-La bibliothèque `datadog-logs` prend en charge tous les navigateurs modernes pour ordinateurs de bureau et pour appareils mobiles. IE10 et IE11 sont également pris en charge.
+La bibliothèque `datadog-logs` prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles. IE10 et IE11 sont également pris en charge.
 
 ## Pour aller plus loin
 

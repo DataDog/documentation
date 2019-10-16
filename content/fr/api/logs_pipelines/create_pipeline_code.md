@@ -2,7 +2,7 @@
 title: Créer un pipeline
 type: apicode
 order: 24.5
-external_redirect: "/api/#create-a-pipeline"
+external_redirect: "/api/#creer-un-pipeline"
 ---
 
 **SIGNATURE**:

@@ -37,26 +37,26 @@ Pour installer l'intégration Hangouts Chat, accédez à son [carré d'intégra
 
 ### Configuration
 
-1. Ajoutez le bot de conversation Datadog à votre salon Google Hangouts avec `@DataDog`.
-2. Installez le bot de conversation Datadog dans votre salon Google Hangouts en saisissant `@Datadog install`.
-3. Le bot vous demande de vous connecter à votre compte Datadog et de le configurer en utilisant l'application Datadog.
-4. Ajoutez les `names` et `urls` des salons dans lesquelles vous souhaitez qu'il puisse envoyer des messages avec la [syntaxe `@-notification`][2].
+1. Ajoutez le chatbot Datadog à votre salon Google Hangouts avec `@DataDog`. Remarque : [mettez le chatbot Datadog sur liste blanche][2] en vue de l'ajouter à votre salon.
+2. Installez le chatbot Datadog dans votre salon Google Hangouts en saisissant `@Datadog install`.
+3. Acceptez l'invite du bot à vous connecter à votre compte Datadog et configurez-le depuis l'application Datadog.
+4. Ajoutez les `names` et `urls` des salons dans lesquels vous souhaitez que le chatbot puisse envoyer des messages avec la [fonctionnalité `@-notification`][3].
 
-### Résumé des commandes du bot de Datadog
+### Résumé des commandes du chatbot Datadog
 
 | Commandes                            | Description                                                                                                                                                                                                                                                  |
 | ----                               | ---                                                                                                                                                                                                                                                          |
-| `@Datadog install`                 | Lance le workflow d'installation. REMARQUE : si vous appartenez à plusieurs comptes Datadog, vous serez redirigé vers la page de sélection du compte lors du workflow d'installation.                                                                                            |
-| `@Datadog list installed accounts` | Renvoie la liste de tous les comptes qui ont installé le salon Hangouts Chat.                                                                                                                                                                                   |
-| `@Datadog remove account`          | Lance le workflow de suppression du salon Hangouts Chat pour compte Datadog spécifique. Une fiche est renvoyée avec les liens de désinstallation pour tous les comptes installés. Cliquez sur le compte que vous souhaitez désinstaller. Le bot Datadog envoie alors un message avec le nom du compte supprimé. |
+| `@Datadog install`                 | Lance le processus d'installation. REMARQUE : si vous appartenez à plusieurs comptes Datadog, vous serez redirigé vers une page de sélection du compte durant l'installation.                                                                                            |
+| `@Datadog list installed accounts` | Renvoie la liste de tous les comptes qui ont installé Hangouts Chat.                                                                                                                                                                                   |
+| `@Datadog remove account`          | Lance le processus de suppression de Hangouts Chat pour un compte Datadog spécifique. Une carte comportant les liens de désinstallation pour tous les comptes installés apparaît alors. Cliquez sur le compte que vous souhaitez désinstaller. Le chatbot Datadog enverra alors un message avec le nom du compte supprimé. |
 
 
-## Désinstaller un salon pour des comptes Datadog
+## Supprimer le chatbot pour un compte Datadog
 
-Vous pouvez désinstaller un salon Hangouts pour un compte Datadog de trois façons :
-1. La commande `@Datadog remove account` permet aux membres du salon de désinstaller le bot pour un compte Datadog sélectionné.
-2. Depuis un compte Datadog, vous pouvez supprimez un salon à l'aide du [carré d'intégration Google Hangouts Chat][3].
-3. La suppression du bot pour un salon le désinstalle sur tous les comptes installés.
+Vous pouvez désinstaller Hangouts Chat pour un compte Datadog de trois façons :
+1. La commande `@Datadog remove account` permet aux membres du salon de désinstaller le chatbot pour un compte Datadog sélectionné.
+2. Depuis un compte Datadog, vous pouvez supprimer un salon à l'aide du [carré d'intégration Google Hangouts Chat][4].
+3. La suppression du chatbot d'un salon entraîne sa désinstallation pour tous les comptes installés.
 
 ## Données collectées
 ### Métriques
@@ -74,8 +74,9 @@ L'intégration Google Hangouts Chat n'inclut aucun check de service.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_hangouts_chat
-[2]: https://docs.datadoghq.com/fr/developers/faq/what-do-notifications-do-in-datadog
-[3]: https://app.datadoghq.com/account/settings#integrations/google_hangouts_chat
+[2]: https://support.google.com/a/answer/6089179
+[3]: https://docs.datadoghq.com/fr/developers/faq/what-do-notifications-do-in-datadog
+[4]: https://app.datadoghq.com/account/settings#integrations/google_hangouts_chat
 
 
 {{< get-dependencies >}}

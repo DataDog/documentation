@@ -1,11 +1,12 @@
 ---
-title: Overview
+title: API Reference
 type: apicontent
 order: 1
 external_redirect: /api/#overview
 ---
-## Overview
-This section details Datadog's HTTP API for getting data in and out of Datadog.
+## API Reference
+
+Use the Datadog HTTP API to  programmatically access the Datadog platform.
 
 **To get started on Datadog HTTP API, use our [Datadog Postman collection][1]**
 

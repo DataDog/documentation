@@ -37,34 +37,37 @@ supported_os:
 Le check Kong de l'Agent surveille le nombre total de requêtes, les codes de réponse, les connexions client et bien plus encore.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Kong est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kong.
+Le check Kong est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Kong.
 
 ### Configuration
 
-Modifiez le fichier `kong.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
+Modifiez le fichier `kong.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
 
 #### Collecte de métriques
 
-Ajoutez ce bloc de configuration à votre fichier `kong.d/conf.yaml` pour commencer à recueillir vos [métriques Kong](#metriques) :
+1. Ajoutez ce bloc de configuration à votre fichier `kong.d/conf.yaml` pour commencer à recueillir vos [métriques Kong](#metriques) :
 
     ```yaml
-    init_config:
+      init_config:
 
-    instances:
-        # Chaque instance a besoin d'une URL `kong_status_url`. Les tags sont facultatifs.
-        -   kong_status_url: http://example.com:8001/status/
-            tags:
+      instances:
+        # Each instance needs a `kong_status_url`. Tags are optional.
+        - kong_status_url: http://example.com:8001/status/
+          tags:
             - instance:foo
-        #-   kong_status_url: http://example2.com:8001/status/
-        #    tags:
-        #    - instance:bar
+        - kong_status_url: http://example2.com:8001/status/
+          tags:
+            - instance:bar
     ```
 
-Consultez le [fichier d'exemple kong.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple kong.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques Kong à Datadog.
+2. [Redémarrez l'Agent][5].
 
 #### Collecte de logs
 
@@ -75,33 +78,32 @@ Les logs d'accès Kong sont générés par NGINX. L'emplacement par défaut est 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
     ```yaml
-    logs_enabled: true
+      logs_enabled: true
     ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `kong.d/conf.yaml` pour commencer à recueillir vos logs Kong :
 
-  ```yaml
-  logs:
-     - type: file
-       path: /var/log/nginx/access.log
-       service: <SERVICE>
-       source: kong
+    ```
+      logs:
+        - type: file
+          path: /var/log/nginx/access.log
+          service: <SERVICE>
+          source: kong
 
-     - type: file
-       path: /var/log/nginx/error.log
-       service: <SERVICE>
-       source: kong
-  ```
+        - type: file
+          path: /var/log/nginx/error.log
+          service: <SERVICE>
+          source: kong
+    ```
 
-Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-Consultez le [fichier d'exemple kong.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+   Consultez le [fichier d'exemple kong.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
-
-3. [Redémarrez l'Agent][3].
+3. [Redémarrez l'Agent][4].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `kong` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `kong` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -113,26 +115,26 @@ Le check Kong n'inclut aucun événement.
 
 ### Checks de service
 
-`kong.can_connect` :
-
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à Kong pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**kong.can_connect** :<br>
+renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Kong pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-* [Surveiller Kong avec notre nouvelle intégration Datadog][8]
+* [Surveiller Kong avec notre nouvelle intégration Datadog][9]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://www.datadoghq.com/blog/monitor-kong-datadog
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/monitor-kong-datadog
 
 
 {{< get-dependencies >}}

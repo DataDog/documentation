@@ -47,13 +47,13 @@ Alternatively, install it manually:
 
     ```php
     <?php
+      require __DIR__ . '/vendor/autoload.php';
 
-    require __DIR__ . '/vendor/autoload.php';
-
-    // load Monolog library
-    use Monolog\Logger;
-    use Monolog\Handler\StreamHandler;
-    use Monolog\Formatter\JsonFormatter;
+      // load Monolog library
+      use Monolog\Logger;
+      use Monolog\Handler\StreamHandler;
+      use Monolog\Formatter\JsonFormatter;
+    ?>
     ```
 
 {{% /tab %}}
@@ -72,11 +72,12 @@ Alternatively, install it manually:
 
 ```php
 <?php
-require __DIR__ . '/vendor/autoload.php';
+  require __DIR__ . '/vendor/autoload.php';
 
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
-use Zend\Log\Formatter\JsonFormatter;
+  use Zend\Log\Logger;
+  use Zend\Log\Writer\Stream;
+  use Zend\Log\Formatter\JsonFormatter;
+?>
 ```
 
 [1]: https://getcomposer.org
@@ -103,29 +104,29 @@ The following configuration enables the JSON formatting and writes the logs and 
 
 ```php
  <?php
+  require __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ . '/vendor/autoload.php';
+  // load Monolog library
+  use Monolog\Logger;
+  use Monolog\Handler\StreamHandler;
+  use Monolog\Formatter\JsonFormatter;
 
-// load Monolog library
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Formatter\JsonFormatter;
+  // create a log channel
+  $log = new Logger('channel_name');
 
-// create a log channel
-$log = new Logger('channel_name');
+  // create a Json formatter
+  $formatter = new JsonFormatter();
 
-// create a Json formatter
-$formatter = new JsonFormatter();
+  // create a handler
+  $stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
+  $stream->setFormatter($formatter);
 
-// create a handler
-$stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
-$stream->setFormatter($formatter);
+  // bind
+  $log->pushHandler($stream);
 
-// bind
-$log->pushHandler($stream);
-
-// an example
-$log->info('Adding a new user', array('username' => 'Seldaek'));
+  // an example
+  $log->info('Adding a new user', array('username' => 'Seldaek'));
+?>
 ```
 
 {{% /tab %}}
@@ -135,25 +136,25 @@ The following configuration enables the JSON formatting and writes the logs and 
 
 ```php
 <?php
+  use Zend\Log\Logger;
+  use Zend\Log\Writer\Stream;
+  use Zend\Log\Formatter\JsonFormatter;
 
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
-use Zend\Log\Formatter\JsonFormatter;
 
+  // create a logger
+  $logger = new Logger();
 
-// create a logger
-$logger = new Logger();
+  // create a writer
+  $writer = new Stream('file://' . __DIR__ . '/application-json.log');
 
-// create a writer
-$writer = new Stream('file://' . __DIR__ . '/application-json.log');
+  // create a Json formatter
+  $formatter = new JsonFormatter();
+  $writer->setFormatter($formatter);
 
-// create a Json formatter
-$formatter = new JsonFormatter();
-$writer->setFormatter($formatter);
-
-// bind
-$logger->addWriter($writer);
-Zend\Log\Logger::registerErrorHandler($logger);
+  // bind
+  $logger->addWriter($writer);
+  Zend\Log\Logger::registerErrorHandler($logger);
+?>
 ```
 
 Then [Stream your log files to Datadog][1]
@@ -211,32 +212,34 @@ logs:
 It's useful to add additional context data to your logs and events. Monolog makes this convenient by providing methods for setting thread-local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
 ```php
-$logger->info('Adding a new user', array('username' => 'Seldaek'));
+<?php
+  $logger->info('Adding a new user', array('username' => 'Seldaek'));
+?>
 ```
 
 Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (e.g., the session id, the request id, etc.):
 
 ```php
  <?php
+  $log->pushProcessor(function ($record) {
 
-$log->pushProcessor(function ($record) {
+      // record the current user
+      $user = Acme::getCurrentUser();
+      $record['context']['user'] = array(
+          'name' => $user->getName(),
+          'username' => $user->getUsername(),
+          'email' => $user->getEmail(),
+      );
 
-    // record the current user
-    $user = Acme::getCurrentUser();
-    $record['context']['user'] = array(
-        'name' => $user->getName(),
-        'username' => $user->getUsername(),
-        'email' => $user->getEmail(),
-    );
+      // Add various tags
+      $record['ddtags'] = array('key' => 'value');
 
-    // Add various tags
-    $record['ddtags'] = array('key' => 'value');
+      // Add various generic context
+      $record['extra']['key'] = 'value';
 
-    // Add various generic context
-    $record['extra']['key'] = 'value';
-
-    return $record;
-});
+      return $record;
+  });
+?>
 ```
 
 {{% /tab %}}
@@ -245,7 +248,9 @@ $log->pushProcessor(function ($record) {
 Much of the useful information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
 ```php
-$logger->info('Adding a new user', array('username' => 'Seldaek'));
+<?php
+  $logger->info('Adding a new user', array('username' => 'Seldaek'));
+?>
 ```
 
 But, most importantly, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
@@ -259,10 +264,12 @@ Use cases include:
 Take a peek to this code if you want to use it:
 
 ```php
-$logger->addProcessor(new Zend\Log\Processor\Backtrace());
-$logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
-$logger->addProcessor(new Zend\Log\Processor\ReferenceId());
-$logger->addProcessor(new Zend\Log\Processor\RequestId());
+<?php
+  $logger->addProcessor(new Zend\Log\Processor\Backtrace());
+  $logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
+  $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
+  $logger->addProcessor(new Zend\Log\Processor\RequestId());
+?>
 ```
 
 If you want to develop yours, [refer the Zend documentation][1].
@@ -280,72 +287,72 @@ Add a session Processor to add variable context within your logs:
 
     ```php
     <?php
+      namespace Acme\Bundle\MonologBundle\Log;
 
-    namespace Acme\Bundle\MonologBundle\Log;
+      use Symfony\Component\HttpFoundation\Session\Session;
 
-    use Symfony\Component\HttpFoundation\Session\Session;
+      class SessionRequestProcessor {
+        private $session;
+        private $sessionId;
+        private $requestId;
+        private $_server;
+        private $_get;
+        private $_post;
 
-    class SessionRequestProcessor {
-      private $session;
-      private $sessionId;
-      private $requestId;
-      private $_server;
-      private $_get;
-      private $_post;
+        public function __construct(Session $session) {
+          $this->session = $session;
+        }
 
-      public function __construct(Session $session) {
-        $this->session = $session;
-      }
+        public function processRecord(array $record) {
+          if (null === $this->requestId) {
+            if ('cli' === php_sapi_name()) {
+              $this->sessionId = getmypid();
+            } else {
+              try {
+                $this->session->start();
+                $this->sessionId = $this->session->getId();
+              } catch (\RuntimeException $e) {
+                $this->sessionId = '????????';
+              }
+            }
+            $this->requestId = substr(uniqid(), -8);
+            $this->_server = array(
+              'http.url' => (@$_SERVER['HTTP_HOST']).'/'.(@$_SERVER['REQUEST_URI']),
+              'http.method' => @$_SERVER['REQUEST_METHOD'],
+              'http.useragent' => @$_SERVER['HTTP_USER_AGENT'],
+              'http.referer' => @$_SERVER['HTTP_REFERER'],
+              'http.x_forwarded_for' => @$_SERVER['HTTP_X_FORWARDED_FOR']
+            );
+            $this->_post = $this->clean($_POST);
+            $this->_get = $this->clean($_GET);
+          }
+          $record['http.request_id'] = $this->requestId;
+          $record['http.session_id'] = $this->sessionId;
+          $record['http.url'] = $this->_server['http.url'];
+          $record['http.method'] = $this->_server['http.method'];
+          $record['http.useragent'] = $this->_server['http.useragent'];
+          $record['http.referer'] = $this->_server['http.referer'];
+          $record['http.x_forwarded_for'] = $this->_server['http.x_forwarded_for'];
 
-      public function processRecord(array $record) {
-        if (null === $this->requestId) {
-          if ('cli' === php_sapi_name()) {
-            $this->sessionId = getmypid();
-          } else {
-            try {
-              $this->session->start();
-              $this->sessionId = $this->session->getId();
-            } catch (\RuntimeException $e) {
-              $this->sessionId = '????????';
+          return $record;
+        }
+
+        protected function clean($array) {
+          $toReturn = array();
+          foreach(array_keys($array) as $key) {
+            if (false !== strpos($key, 'password')) {
+              // Do not add
+            } else if (false !== strpos($key, 'csrf_token')) {
+              // Do not add
+            } else {
+              $toReturn[$key] = $array[$key];
             }
           }
-          $this->requestId = substr(uniqid(), -8);
-          $this->_server = array(
-            'http.url' => (@$_SERVER['HTTP_HOST']).'/'.(@$_SERVER['REQUEST_URI']),
-            'http.method' => @$_SERVER['REQUEST_METHOD'],
-            'http.useragent' => @$_SERVER['HTTP_USER_AGENT'],
-            'http.referer' => @$_SERVER['HTTP_REFERER'],
-            'http.x_forwarded_for' => @$_SERVER['HTTP_X_FORWARDED_FOR']
-          );
-          $this->_post = $this->clean($_POST);
-          $this->_get = $this->clean($_GET);
+
+          return $toReturn;
         }
-        $record['http.request_id'] = $this->requestId;
-        $record['http.session_id'] = $this->sessionId;
-        $record['http.url'] = $this->_server['http.url'];
-        $record['http.method'] = $this->_server['http.method'];
-        $record['http.useragent'] = $this->_server['http.useragent'];
-        $record['http.referer'] = $this->_server['http.referer'];
-        $record['http.x_forwarded_for'] = $this->_server['http.x_forwarded_for'];
-
-        return $record;
       }
-
-      protected function clean($array) {
-        $toReturn = array();
-        foreach(array_keys($array) as $key) {
-          if (false !== strpos($key, 'password')) {
-            // Do not add
-          } else if (false !== strpos($key, 'csrf_token')) {
-            // Do not add
-          } else {
-            $toReturn[$key] = $array[$key];
-          }
-        }
-
-        return $toReturn;
-      }
-    }
+    ?>
     ```
 
 2. Wire the Processor with Symfony:
@@ -382,22 +389,23 @@ Integrate Monolog with your framework then configure your logger:
 
 ```php
  <?php
-// Check if the Monolog library is well loaded
-//use Monolog\Logger;
-//use Monolog\Handler\StreamHandler;
-//use Monolog\Formatter\JsonFormatter;
+  // Check if the Monolog library is well loaded
+  //use Monolog\Logger;
+  //use Monolog\Handler\StreamHandler;
+  //use Monolog\Formatter\JsonFormatter;
 
-// with the monolog instance
-$monolog = ...
+  // with the monolog instance
+  $monolog = ...
 
-///// Log shipper configuration
+  ///// Log shipper configuration
 
-$formatter = new JsonFormatter();
-$stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
-$stream->setFormatter($formatter);
+  $formatter = new JsonFormatter();
+  $stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
+  $stream->setFormatter($formatter);
 
-$monolog->pushHandler($stream);
-return $r;
+  $monolog->pushHandler($stream);
+  return $r;
+?>
 ```
 
 ### Symfony (v2+, v3+)
@@ -457,37 +465,43 @@ monolog:
 ### Laravel
 
 ```php
-//file: bootstrap/app.php
-$app->configureMonologUsing(function($monolog) {
-    $monolog->pushHandler(...);
+<?php
+  //file: bootstrap/app.php
+  $app->configureMonologUsing(function($monolog) {
+      $monolog->pushHandler(...);
 
-  // configure your logger below
-});
+    // configure your logger below
+  });
 
-return $app;
+  return $app;
+?>
 ```
 
 ### Silex
 
 ```php
-// file: bootstrap
-$app->extend('monolog', function($monolog, $app) {
-    $monolog->pushHandler(...);
-    // configure your logger below
-    return $monolog;
-});
+<?php
+  // file: bootstrap
+  $app->extend('monolog', function($monolog, $app) {
+      $monolog->pushHandler(...);
+      // configure your logger below
+      return $monolog;
+  });
+?>
 ```
 
 ### Lumen
 
 ```php
-//file: bootstrap/app.php
-$app->configureMonologUsing(function($monolog) {
-    $monolog->pushHandler(...);
-    // configure your logger below
-});
+<?php
+  //file: bootstrap/app.php
+  $app->configureMonologUsing(function($monolog) {
+      $monolog->pushHandler(...);
+      // configure your logger below
+  });
 
-return $app;
+  return $app;
+?>
 ```
 
 ### CakePHP
@@ -506,7 +520,9 @@ run `composer update`.
 Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:
 
 ```php
-include 'log.php';
+<?php
+  include 'log.php';
+?>
 ```
 
 A basic configuration, to replicate what Cake does but using Monolog would look something like this:

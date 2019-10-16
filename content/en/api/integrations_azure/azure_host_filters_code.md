@@ -11,8 +11,8 @@ external_redirect: /api/#update-an-azure-integration-host-filters
 
 **EXAMPLE REQUEST**:
 
-{{< code-snippets basename="azure_create" >}}
+{{< code-snippets basename="azure_host_filters" >}}
 
 **EXAMPLE RESPONSE**:
 
-{{< code-snippets basename="result.azure_create" >}}
+{{< code-snippets basename="result.azure_host_filters" >}}

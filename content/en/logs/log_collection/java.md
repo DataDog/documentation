@@ -543,5 +543,5 @@ To generate this final JSON document:
 [2]: /logs/processing/parsing
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /logs/?tab=euregion#datadog-logs-endpoints
+[5]: /logs/log_collection/?tab=eusite#datadog-logs-endpoints
 [6]: /logs/processing/parsing/#key-value
