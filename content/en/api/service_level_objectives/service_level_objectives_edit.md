@@ -29,7 +29,7 @@ external_redirect: /api/#edit-a-service-level-objective
     * **`warning_display`** [*optional*, *default* = **dynamic, based on query**]:
         A warning target display value that includes the requires level of precision.
 
-#### Monitor Based SLO
+## Monitor Based SLO
 
 For more information, see [Monitor SLOs][1].
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
@@ -41,9 +41,11 @@ For more information, see [Monitor SLOs][1].
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 
-##### Event Based SLO
+## Event Based SLO
 
 There is one type of event based SLO, a metric query. For more information, see [Event SLOs][2].
+
+### Metric Query
 
 * **`query`** [*required*]:
     The query defines the event-based SLO query. It requires two arguments:

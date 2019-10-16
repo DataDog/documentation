@@ -14,7 +14,7 @@ Create a JSON to define your SLO.
 * **`type`** [*required*]:
     The type of the SLO, chosen from:
 
-| SLO Type     | type attribute value             |
+| SLO Type     | supported value             |
 |:-------------|:---------------------------------|
 | [event][1]       | `metric`                         |
 | [monitor][2]      | `monitor`                        |
@@ -39,7 +39,7 @@ Create a JSON to define your SLO.
     * **`warning_display`** [*optional*, *default* = **dynamic, based on query**]:
         A warning target display value that includes the requires level of precision.
 
-##### Monitor Based SLO
+### Monitor Based SLO
 
 For more information, see [Monitor SLOs][1].
 
@@ -52,9 +52,11 @@ For more information, see [Monitor SLOs][1].
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 
-##### Event Based SLOs  
+### Event Based SLOs  
 
-There is one type of event based SLO, a metric query. For more information, see [Event SLOs][3].
+There is one type of event based SLO, a metric query. For more information, see [Event SLOs][2].
+
+#### Metric Query
 
 * **`query`** [*required*]:
     The query defines the metric-based SLO query. It requires two arguments:
@@ -66,5 +68,4 @@ There is one type of event based SLO, a metric query. For more information, see 
 
 
 [1]: /monitors/service_level_objectives/monitor
-[2]: 
-[3]: /monitors/service_level_objectives/event
+[2]: /monitors/service_level_objectives/event
