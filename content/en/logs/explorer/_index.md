@@ -82,7 +82,7 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 | Button              | Description                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Export to Monitor   | Export the query applied to your log analytics to create the query for a new [log monitor][1]. |
-| Export to Dashboard | Export the current analytic as a widget into an existing or a new [dashboard][2]. |
+| Export to Dashboard | Export the current analytic as a widget to an existing or new [dashboard][2]. |
 | Generate new Metric | [Generate a new metric][3] out of the current analytic query.  |
 
 
