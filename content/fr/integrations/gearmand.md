@@ -42,15 +42,18 @@ Recueillez des métriques de Gearman pour :
 * Corréler les performances de Gearman avec le reste de vos applications
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Gearman est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs de jobs Gearman.
+Le check Gearman est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs de jobs Gearman.
 
 ### Configuration
 
 
-1. Modifiez le fichier `gearmand.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de performance Gearman.
-    Consultez le [fichier d'exemple gearmand.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `gearmand.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Gearman.
+    Consultez le [fichier d'exemple gearmand.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
     ```yaml
     init_config:
 
@@ -59,11 +62,11 @@ Le check Gearman est inclus avec le paquet de l'[Agent Datadog][1] : vous n'ave
           port: 4730
     ```
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][5].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `gearmand` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `gearmand` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -80,15 +83,16 @@ Le check Gearmand n'inclut aucun événement.
 Renvoie `Critical` si l'Agent n'est pas capable de se connecter à Gearman pour recueillir des métriques.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/gearmand/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/gearmand/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

@@ -44,7 +44,7 @@ L'Agent Datadog récupère des métriques sur les conteneurs des définitions de
 
 L'endpoint Task Metadata est uniquement disponible au sein de la définition de la tâche. Ainsi, l'Agent Datadog doit être exécuté en tant que conteneur supplémentaire dans la définition de la tâche.
 
-Pour recueillir des métriques, il vous suffit de définir la variable d'environnement `ECS_FARGATE` sur `true` dans la définition de la tâche.
+Pour recueillir des métriques, il vous suffit de définir la variable d'environnement `ECS_FARGATE` sur `"true"` dans la définition de la tâche.
 
 ## Implémentation
 Les étapes ci-dessous détaillent la configuration de l'Agent de conteneur Datadog au sein d'AWS ECS Fargate. **Attention** : la version 6.11 de l'Agent Datadog, ou une version ultérieure, est requise pour profiter de l'ensemble des fonctionnalités de l'intégration Fargate.
@@ -85,7 +85,7 @@ Les instructions ci-dessous vous expliquent comment configurer la tâche à l'ai
 ##### Interface de ligne de commande d'AWS
 
 1. Téléchargez [datadog-agent-ecs-fargate.json][8].
-2. Mettez à jour le fichier JSON en ajoutant un **TASK_NAME** et votre [clé d'API Datadog][5]. Veuillez noter que la variable d'environnement `ECS_FARGATE` est déjà définie sur `true`.
+2. Mettez à jour le fichier JSON en ajoutant un **TASK_NAME** et votre [clé d'API Datadog][5]. Veuillez noter que la variable d'environnement `ECS_FARGATE` est déjà définie sur `"true"`.
 3. Ajoutez vos autres conteneurs, tels que votre app. Pour en savoir plus sur la collecte des métriques d'intégration, consultez la section [Configuration d'intégration pour ECS Fargate][7].
 3. Exécutez la commande suivante pour enregistrer la définition de tâche ECS :
 
@@ -240,10 +240,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 
 ## Pour aller plus loin
 
-* Article de blog : [Surveiller des applications AWS Fargate avec Datadog][25]
+* Article de blog : [Surveiller des applications AWS Fargate avec Datadog][24]
 * FAQ : [Configuration d'intégration pour ECS Fargate][7]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
 [2]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
 [3]: https://aws.amazon.com/cli
@@ -267,8 +270,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [21]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 [22]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
 [23]: https://docs.datadoghq.com/fr/tracing/setup
-[24]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/metadata.csv
-[25]: https://www.datadoghq.com/blog/monitor-aws-fargate
-
-
-{{< get-dependencies >}}
+[24]: https://www.datadoghq.com/blog/monitor-aws-fargate

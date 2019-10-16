@@ -1,2 +1,9 @@
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example
+{
+  "channels" => [], "service_hooks" => [{
+    "url" => "*****",
+    "account" => "Main_Account"
+  }, {
+    "url" => "*****",
+    "account" => "doghouse"
+  }]
+}

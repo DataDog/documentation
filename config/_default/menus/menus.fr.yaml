@@ -164,136 +164,162 @@ main:
     url: agent/kubernetes/host_setup/
     parent: agent_kubernetes
     weight: 302
-  - name: Cluster Agent
-    url: agent/kubernetes/cluster/
-    parent: agent_kubernetes
-    weight: 303
   - name: Helm
     url: agent/kubernetes/helm/
     parent: agent_kubernetes
-    weight: 304
+    weight: 303
   - name: Collecte d'événements
     url: agent/kubernetes/event_collection/
     parent: agent_kubernetes
-    weight: 305
+    weight: 304
   - name: Intégrations personnalisées
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
-    weight: 306
+    weight: 305
   - name: Métriques
     url: agent/kubernetes/metrics/
     parent: agent_kubernetes
-    weight: 307
+    weight: 306
   - name: Métriques Custom et DogStatsD
     url: agent/kubernetes/dogstatsd/
     parent: agent_kubernetes
-    weight: 308
+    weight: 307
   - name: Version Antérieures
     url: agent/kubernetes/legacy/
     parent: agent_kubernetes
-    weight: 309
+    weight: 308
+  - name: Cluster Agent
+    url: agent/cluster_agent/
+    parent: agent
+    identifier: agent_cluster
+    weight: 4
+  - name: Implémentation
+    url: agent/cluster_agent/setup/
+    parent: agent_cluster
+    identifier: cluster_agent_setup
+    weight: 401
+  - name: Collecte d'événements
+    url: agent/cluster_agent/event_collection/
+    parent: agent_cluster
+    identifier: cluster_agent_event_collection
+    weight: 402
+  - name: Métrique Externe
+    url: agent/cluster_agent/external_metrics/
+    parent: agent_cluster
+    identifier: cluster_agent_external_metrics
+    weight: 403
+  - name: Commandes & Options
+    url: agent/cluster_agent/commands/
+    identifier: cluster_agent_commands
+    parent: agent_cluster
+    weight: 404
+  - name: Dépannage
+    url: agent/cluster_agent/troubleshooting/
+    identifier: cluster_agent_troubleshooting
+    parent: agent_cluster
+    weight: 405
   - name: Autodiscovery
     url: agent/autodiscovery/
     identifier: agent_autodiscovery
     parent: agent
-    weight: 4
+    weight: 5
   - name: Auto-Configuration
     url: agent/autodiscovery/auto_conf/
     parent: agent_autodiscovery
-    weight: 401
+    weight: 501
   - name: Modèles d'intégration
     url: agent/autodiscovery/integrations/
     parent: agent_autodiscovery
-    weight: 402
+    weight: 502
   - name: Identificateur de conteneur
     url: agent/autodiscovery/ad_identifiers/
     parent: agent_autodiscovery
-    weight: 403
+    weight: 503
   - name: Template Variables
     url: agent/autodiscovery/template_variables/
     parent: agent_autodiscovery
-    weight: 404
+    weight: 504
   - name: Extraction de tag
     url: agent/autodiscovery/tag/
     parent: agent_autodiscovery
-    weight: 405
+    weight: 505
   - name: Gestion de découverte
     url: agent/autodiscovery/management/
     parent: agent_autodiscovery
-    weight: 406
+    weight: 506
   - name: Checks d'endpoints
     url: agent/autodiscovery/endpointschecks/
     parent: agent_autodiscovery
-    weight: 407
+    weight: 507
   - name: Checks de Cluster
     url: agent/autodiscovery/clusterchecks/
     parent: agent_autodiscovery
-    weight: 408
+    weight: 508
   - name: Dépannage
     url: agent/autodiscovery/troubleshooting/
     parent: agent_autodiscovery
-    weight: 409
+    weight: 509
   - name: Collecte de logs
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 5
+    weight: 6
   - name: Collecte de logs avancée
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 501
+    weight: 601
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 502
-  - name: Upgrade vers Agent v6
-    url: agent/guide/upgrade-to-agent-v6/
-    parent: agent
-    weight: 7
+    weight: 602
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 6
+    weight: 7
+  - name: Upgrade vers Agent v6
+    url: agent/guide/upgrade-to-agent-v6/
+    parent: agent
+    weight: 8
   - name: Dépannage
     url: agent/troubleshooting/
     parent: agent
-    weight: 8
+    weight: 9
     identifier: agent_troubleshooting
   - name: Mode debugging
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 801
+    weight: 901
   - name: Commande flare de l'Agent
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 802
+    weight: 902
   - name: Statut d'un check de l'Agent
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 803
+    weight: 903
   - name: NTP
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 804
+    weight: 904
   - name: Problèmes d'autorisation
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 805
+    weight: 905
   - name: Problèmes d'intégration
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 806
+    weight: 906
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 9
+    weight: 10
   - name: Sécurité
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 10
+    weight: 11
   - name: Intégrations
     url: integrations/
     identifier: integrations_top_level
@@ -375,7 +401,7 @@ main:
     parent: graphing
     identifier: graphing_infrastructure
     weight: 7
-  - name: Map des conteneurs
+  - name: Container Map
     url: graphing/infrastructure/containermap/
     parent: graphing_infrastructure
     weight: 701
@@ -503,41 +529,45 @@ main:
     url: monitors/monitor_types/process/
     parent: monitor_types
     weight: 107
+  - name: Check de processus
+    url: monitors/monitor_types/process_check/
+    parent: monitor_types
+    weight: 108
   - name: Network
     url: monitors/monitor_types/network/
     parent: monitor_types
-    weight: 108
+    weight: 109
   - name: Check custom
     url: monitors/monitor_types/custom_check/
     parent: monitor_types
-    weight: 109
+    weight: 110
   - name: Event
     url: monitors/monitor_types/event/
     parent: monitor_types
-    weight: 110
+    weight: 111
   - name: Logs
     url: monitors/monitor_types/log/
     parent: monitor_types
-    weight: 111
+    weight: 112
   - name: Métriques de l'APM
     url: monitors/monitor_types/apm/
     parent: monitor_types
-    weight: 112
+    weight: 113
     identifier: monitor_apm
   - name: Analyses de traces
     url: monitors/monitor_types/trace_analytics
     parent: monitor_types
     identifier: monitors_trace_analytics
-    weight: 113
+    weight: 114
   - name: Watchdog
     url: monitors/monitor_types/watchdog/
     parent: monitor_types
-    weight: 114
+    weight: 115
     identifier: monitor_watchdog
   - name: Composite
     url: monitors/monitor_types/composite/
     parent: monitor_types
-    weight: 115
+    weight: 116
   - name: Gérer des monitors
     url: monitors/manage_monitor/
     weight: 2
@@ -849,7 +879,7 @@ main:
     pre: nav_synthetics
     identifier: synthetics
     weight: 100000
-  - name: Tests d'API
+  - name: Tests API
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
@@ -881,6 +911,10 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: Dépannage
+    url: synthetics/troubleshooting/
+    parent: synthetics
+    weight: 7
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -932,7 +966,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_metrics
     weight: 2
-  - name: Custom Metrics
+  - name: Métriques custom
     url: developers/metrics/custom_metrics/
     parent: dev_tools_metrics
     weight: 201
@@ -1091,11 +1125,6 @@ main:
     pre: nav_glossary
     identifier: glossary_top_level
     weight: 170000
-  - name: Vidéos
-    url: videos/
-    pre: nav_videos
-    identifier: video_top_level
-    weight: 180000
   - name: Aide
     url: help/
     pre: nav_help

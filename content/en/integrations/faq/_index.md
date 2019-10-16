@@ -114,21 +114,28 @@ aliases:
 * [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][52]
 
 ## Unix
+
 * [How can I gather metrics from the UNIX shell?][53]
 
+## Vertica
+
+* [How to collect metrics from custom Vertica queries][54]
+
 ## VMWare
-* [Can I limit the number of VMs that are pulled in via the VMWare integration?][54]
+
+* [Can I limit the number of VMs that are pulled in via the VMWare integration?][55]
 
 ## Webhooks
-* [How to make a Trello Card using Webhooks][55]
+
+* [How to make a Trello Card using Webhooks][56]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][56]
-* [Collect Custom Windows Performance Counters over WMI][57]
-* [Windows Status Based Check][58]
-* [How to monitor events from the Windows Event Logs][59]
-* [How to retrieve WMI metrics][60]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][57]
+* [Collect Custom Windows Performance Counters over WMI][58]
+* [Windows Status Based Check][59]
+* [How to monitor events from the Windows Event Logs][60]
+* [How to retrieve WMI metrics][61]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration
@@ -183,10 +190,11 @@ aliases:
 [51]: /integrations/faq/redis-integration-error-unknown-command-config
 [52]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
 [53]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[54]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
-[55]: /integrations/faq/how-to-make-trello-card-using-webhooks
-[56]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
-[57]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi
-[58]: /integrations/faq/windows-status-based-check
-[59]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
-[60]: /integrations/faq/how-to-retrieve-wmi-metrics
+[54]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries
+[55]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
+[56]: /integrations/faq/how-to-make-trello-card-using-webhooks
+[57]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
+[58]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi
+[59]: /integrations/faq/windows-status-based-check
+[60]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
+[61]: /integrations/faq/how-to-retrieve-wmi-metrics

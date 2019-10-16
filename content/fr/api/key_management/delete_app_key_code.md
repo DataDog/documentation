@@ -2,17 +2,17 @@
 title: Supprimer une clé d'application
 type: apicode
 order: 21.10
-external_redirect: "/api/#delete-an-application-key"
+external_redirect: "/api/#supprimer-une-cle-d-application"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `DELETE /v1/application_key/<CLÉ_APPLICATION>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="delete_app_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.delete_app_key" >}}

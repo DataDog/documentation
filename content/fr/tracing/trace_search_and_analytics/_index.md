@@ -17,7 +17,7 @@ La fonction [Analyse et recherche de traces][1] sert à filtrer les événements
 {{< tabs >}}
 {{% tab "Java" %}}
 
-La fonction Analyse et recherche de traces est disponible à partir de la version 0.25.0 du client de tracing Java. Elle peut être activée de façon globale pour toutes les intégrations **Web** avec un paramètre de configuration unique dans le client de tracing :
+La fonction Analyse et recherche de traces est disponible à partir de la version 0.25.0 du client de tracing Java. Elle peut être activée de façon globale pour toutes les intégrations **de serveur Web** avec un paramètre de configuration unique dans le client de tracing :
 
 * Propriété système : `-Ddd.trace.analytics.enabled=true`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -55,7 +55,6 @@ Datadog.configure { |c| c.analytics_enabled = true }
  Une fois la fonction activée, la page [Analyse et recherche de traces] commence à afficher des informations.
 
 
-[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -126,7 +125,6 @@ La fonction Analyse et recherche de traces est disponible à partir de la versio
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction Analyse et recherche de traces pour des intégrations spécifiques grâce au paramètre suivant :
 
@@ -441,10 +439,10 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 Les applications utilisant une instrumentation personnalisée peuvent activer l'analyse en appliquant le tag `ANALYTICS_KEY` à la span racine du service :
 
 ```php
-
-// ... la span existante que vous souhaitez activer pour l'analyse et la recherche de traces
-$span->setTag(Tag::ANALYTICS_KEY, true);
-
+<?php
+  // ... la span existante que vous souhaitez activer pour l'analyse et la recherche de traces
+  $span->setTag(Tag::ANALYTICS_KEY, true);
+?>
 ```
 
 {{% /tab %}}
@@ -469,7 +467,9 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-Un [événement APM][2] représente la [span][3] supérieure d'un service, métadonnées incluses. Une fois activés, les événements APM sont envoyés à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 événements APM depuis ses spans `servlet.request`, car chaque span `servlet.request` génère un événement APM. Le [filtrage d'événements APM][4] a l'avantage de réduire le nombre d'événements APM facturables sans aucune conséquence sur l'échantillonnage des [traces][5]. Lorsqu'un service est filtré et que moins de 100 % des événements sont envoyés, l'analyse des événements APM est mise à l'échelle pour afficher une estimation par défaut, et vous avez l'option d'afficher la valeur filtrée.
+## Filtrage d'événements
+
+Un [événement APM][2] représente la [span][3] supérieure d'un service, métadonnées incluses. Une fois activés, les événements APM sont envoyés à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 événements APM depuis ses spans `servlet.request`, car chaque span `servlet.request` génère un événement APM. Le [filtrage d'événements APM][4] a l'avantage de réduire le nombre d'événements APM facturables sans aucune conséquence sur l'échantillonnage des [traces][5]. Lorsqu'un service est filtré et que moins de 100 % des événements sont envoyés, l'analyse des événements APM est mise à l'échelle pour afficher une estimation par défaut. Vous pouvez également afficher la valeur filtrée.
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="Filtrage des événements APM" responsive="true" style="width:100%;">}}
 

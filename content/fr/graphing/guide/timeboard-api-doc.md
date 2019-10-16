@@ -35,13 +35,13 @@ L'endpoint Timeboard vous permet de programmer la création, la mise à jour, la
           Le type de visualisation.
 
 * **`template_variables`** [*facultatif*, *défaut*=**None**] :
-    la liste des Template Variables utilisables pour la création de modèles de dashboard. Les définitions de Template Variables respectent le format suivant :
+    la liste des template variables utilisables pour la création de modèles de dashboard. Les définitions de template variables respectent le format suivant :
     * **`name`** [*obligatoire*] :
       Le nom de la variable.
     * **`prefix`** [*facultatif*, *défaut*=**None**] :
         le préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
     * **`default`** [*facultatif*, *défaut*=**None**] :
-        la valeur par défaut de la Template Variable lors du chargement du dashboard.
+        la valeur par défaut de la template variable lors du chargement du dashboard.
 
 ### Exemples
 
@@ -173,7 +173,7 @@ curl  -X POST -H "Content-type: application/json" \
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*facultatif*, *défaut*=**None**] :
-    la liste des Template Variables utilisables pour la création de modèles de dashboard. Les définitions de Template Variables respectent le format suivant :
+    la liste des template variables utilisables pour la création de modèles de dashboard. Les définitions de template variables respectent le format suivant :
     * **`name`** [*obligatoire*] :
      Le nom de la variable.
 
@@ -181,7 +181,7 @@ curl  -X POST -H "Content-type: application/json" \
     le préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
 
     * **`default`** [*facultatif*, *défaut*=**None**] :
-    la valeur par défaut de la Template Variable lors du chargement du dashboard.
+    la valeur par défaut de la template variable lors du chargement du dashboard.
 
 
 ### Exemples

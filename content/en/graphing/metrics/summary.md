@@ -69,7 +69,7 @@ Editing the metric type can help you match the real metric type send.
 [5]: /developers/metrics/custom_metrics
 [6]: /tagging
 [7]: /tagging/assigning_tags
-[8]: /developers/metrics/#units
-[9]: /developers/metrics/#metric-types
+[8]: /developers/metrics/metrics_units
+[9]: /developers/metrics/metrics_type
 [10]: /integrations
 [11]: https://github.com/DataDog/documentation/issues/new/choose

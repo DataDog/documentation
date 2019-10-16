@@ -7,6 +7,7 @@ int_png = filter(lambda x: x.endswith('.png'), os.listdir('static/images/integra
 int_ignore = ['_index.png',
               'agent_metrics.png',
               'azure_storage.png',                # Azure will deprecate soon
+              'azure_diagnostic_extension.png',   # Integration not recommended
               'datadog_checks_base.png',
               'datadog_checks_dev.png',
               'datadog_checks_downloader.png',
@@ -22,9 +23,11 @@ int_ignore = ['_index.png',
               'logos.png',
               'mesos_slave.png',
               'riak_repl.png',
+              'sendmail.png',                     # No logo available
               'sortdb.png',
               'snmpwalk.png',
               'stunnel.png',
+              'unbound.png',                      # No logo available
               'upsc.png'
               ]
 

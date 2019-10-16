@@ -72,8 +72,8 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
 | `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
-| `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
-| `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
+| `integerStr`                                    | Matches an integer number and parses it as a string.                                                                        |
+| `integer`                                       | Matches an integer number and parses it as an integer number.                                                               |
 | `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
 | `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
@@ -169,20 +169,20 @@ Find below some examples demonstrating how to use parsers:
 This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
 * `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `test=@testStr`).
+* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `key=@valueStr`).
 * `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). 
   * When defined, the default behavior is replaced by allowing only defined quoting char.
   * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
   * Any string defined within the quoting chars is extracted as a value.
     
-    For example, input: `test:=testStr test:=</$%@testStr2> test:="testStr3"`, parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, output: `{
-    "test": [
-      "testStr",
-      "/$%@testStr2"
+    For example, input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output: `{
+    "key": [
+      "valueStr",
+      "/$%@valueStr2"
     ]
   }`
 
-**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `test:=testStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -245,12 +245,11 @@ Other examples:
 | key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
-| key:=valueStr           | `%{data::keyvalue(":=")}`           | {"key": "valueStr"}            |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 
 ### Parsing dates
 
-The date matcher transforms your timestamp in the EPOCH format.
+The date matcher transforms your timestamp in the EPOCH format (unit of measure **millisecond**).
 
 | **Raw string**                           | **Parsing rule**                                          | **Result**              |
 | :---                                     | :----                                                     | :----                   |
@@ -264,7 +263,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | 2016-11-29T16:21:36.431+00:00            | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655                 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
+| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
 
 <sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see the [TZ database names][1].
 

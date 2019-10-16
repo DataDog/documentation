@@ -2,7 +2,7 @@
 title: Supprimer une intégration Slack
 type: apicode
 order: 19.4
-external_redirect: "/api/#delete-a-slack-integration"
+external_redirect: "/api/#supprimer-une-integration-slack"
 ---
 
 **SIGNATURE**:
