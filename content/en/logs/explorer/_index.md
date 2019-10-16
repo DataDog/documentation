@@ -62,7 +62,7 @@ Export your current log visualization with the *share* functionality:
 
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
 
-The *Share* button allows you to send your current log explorer view to another page within Datadog or outside of Datadog:
+Use the *share* button to send your current log explorer view to a CSV file, team member, or create a monitor:
 
 {{< tabs >}}
 {{% tab "Log Search" %}}
