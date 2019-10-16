@@ -328,4 +328,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [7]: /developers/dogstatsd/unix_socket
 [8]: /agent/guide/agent-commands
 [9]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[10]: /developers/metrics/datagram_shell
+[10]: /developers/metrics
