@@ -156,7 +156,7 @@ DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
-For example, to set them from a batch file before starting your application:
+For example, to set the environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -185,7 +185,7 @@ CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and environment variables `DD_INTEGRATIONS` and `DD_DOTNET_TRACER_HOME` set globally for all processes.
+`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and environment variables `DD_INTEGRATIONS` and `DD_DOTNET_TRACER_HOME` are set globally for all processes.
 
 If you did not use the MSI installer, set all five environment variables:
 
@@ -217,7 +217,7 @@ dotnet.exe example.dll
 
 {{% tab ".NET Core on Linux" %}}
 
-On Linux, these five environment variables are required to enable automatic instrumentation:
+On Linux, the following environment variables are required to enable automatic instrumentation:
 
 ```
 CORECLR_ENABLE_PROFILING=1
