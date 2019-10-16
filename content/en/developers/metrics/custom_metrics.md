@@ -16,7 +16,7 @@ further_reading:
 
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric. **Note**: Some standard integrations [emit custom metrics][2].
 
-A custom metric refers to a single, unique combination of a metric name, host, and any tags. In general, any metric you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4] is a custom metric.
+A custom metric refers to a unique combination of metric name, host, and tag values. In general, any metric you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4] is a custom metric.
 
 ## Allocation
 
@@ -35,17 +35,16 @@ There are no enforced [fixed rate limits][5] on custom metric submission. If you
 
 ## Tracking
 
-Administrative users can see the total custom metrics per hour and the top 500 custom metrics by cardinality for their account on the [usage details page][7]. See the [Usage Details][8] documentation for more information.
+Administrative users can see the total custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][7]. See the [Usage Details][8] documentation for more information.
 
 ## Counting
 
-Using tags on custom metrics can lead to **multiple unique tag combinations** that affect your custom metrics allocation. The examples below show how custom metrics are counted.
+Using tags on custom metrics changes the total number of **unique tag combinations**, which ultimately changes the total count of custom metrics created. The examples below show how custom metrics are counted.
 
 ### Single host
 
-This example assumes you are submitting a custom metric on a single host.
+This example assumes you are submitting a `COUNT` metric (`auth.exceptionCount`) on a single host.
 
-* You submit the metric named: `auth.exceptionCount`
 * Your code instrumentation submits the following possible tags associated with the metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
 * The logic behind your metric tagging is:
 
@@ -69,7 +68,7 @@ This example assumes you are submitting a custom metric on a single host.
 
 ### Multiple hosts
 
-When submitting custom metrics, host tags are automatically added to the metric as one unique tag combination. Reporting the custom metric from additional hosts creates multiple unique tag combinations.
+A custom metric is uniquely identified by a unique combination of a metric name, host, and tag values. Therefore, reporting a custom metric from multiple hosts results in multiple unique tag value combinations.
 
 For example, you create the metric `service.request.count` to gain insight from different services across your infrastructure.
 
@@ -83,21 +82,22 @@ For example, you create the metric `service.request.count` to gain insight from 
 * The logic behind your metric is:
 
     {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" style="width:80%;">}}
-* If all services report both statuses, you have 1 x 2 x 3 = 6 custom metrics **per host**.
 
-There are less custom metrics if only a subset of services and statuses are reporting. For example, you have three hosts:
+For this example, only a subset of services and statuses are reporting. You have three hosts:
 
 * `host1` is reporting all possible configurations.
 * `host2` is reporting only successes across all services.
 * `host3` is reporting successes and failures for database and webserver services.
 
-Across your three hosts, there are 13 distinct metrics:
+Across your three hosts, there are 13 distinct metrics (timeseries):
 
 {{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
 
+**Note**: If all services report both statuses, you have 1 x 2 x 3 = 6 custom metrics **per host**.
+
 #### Metric summary
 
-Your [metric summary page][9] shows the number of distinct metrics for a specific metric. For example, `service.request.count` with 1 host, 2 statuses, and 3 services = **6 distinct metrics**:
+The [Metric Summary page][9] displays the number of distinct metrics which is equivalent to number of distinct timeseries associated with a given metric name, host, tag values. For example, `service.request.count` with 1 host, 2 statuses, and 3 services = **6 distinct metrics**:
 
 {{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:80%;">}}
 
