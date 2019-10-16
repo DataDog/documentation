@@ -3,6 +3,8 @@ title: Troubleshooting
 type: apicontent
 order: 5
 external_redirect: /api/#troubleshooting
+aliases:
+- /developers/faq/i-m-receiving-a-202-but-not-seeing-data
 ---
 
 ## Troubleshooting
@@ -21,7 +23,7 @@ To check your timestamp is correct run:
 
 This outputs the current system's date, then makes a request to an API endpoint to grab the date on the Datadog end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
-There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the `priority` field must be one of the four given options.  
+There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the `priority` field must be one of the four given options.
 
 Any other text results in a 202 'success' but no event showing up. Having an invalid `source_type_name` don't prevent the event from showing up, but that field is dropped upon submission.
 

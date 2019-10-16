@@ -414,7 +414,7 @@ For Azure integrations, all metrics, events, and service checks receive the same
 [1]: /tagging/#defining-tags
 [2]: /agent/docker/#environment-variables
 [3]: /api
-[4]: /developers/dogstatsd
+[4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /graphing/#arithmetic-between-two-metrics
@@ -424,7 +424,7 @@ For Azure integrations, all metrics, events, and service checks receive the same
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [12]: /tracing/advanced/setting_primary_tags_to_scope
 [13]: /libraries
-[14]: /developers/dogstatsd/data_types/#host-tag-key
+[14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /integrations/amazon_api_gateway
 [16]: /integrations/amazon_auto_scaling
 [17]: /integrations/amazon_billing
