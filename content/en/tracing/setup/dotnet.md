@@ -53,7 +53,7 @@ How these components are installed on the host depends on the runtime environmen
 
 {{% tab ".NET Framework on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
@@ -65,7 +65,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 
 {{% tab ".NET Core on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
 Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][3] for instructions on how to add a NuGet package to your application.
 
@@ -144,18 +144,19 @@ COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`COR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
+`COR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and environment variables `DD_INTEGRATIONS` and `DD_DOTNET_TRACER_HOME` are set globally for all processes.
 
-If you did not use the MSI installer, set all four environment variables:
+If you did not use the MSI installer, set all five environment variables:
 
 ```
 COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
-For example, to set them from a batch file before starting your application:
+For example, to set the environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -163,6 +164,7 @@ SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+set DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
 rem Start application
 example.exe
@@ -183,15 +185,16 @@ CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
+`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and environment variables `DD_INTEGRATIONS` and `DD_DOTNET_TRACER_HOME` are set globally for all processes.
 
-If you did not use the MSI installer, set all four environment variables:
+If you did not use the MSI installer, set all five environment variables:
 
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
 For example, to set them from a batch file before starting your application:
@@ -202,6 +205,7 @@ SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+SET DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
 rem Start application
 dotnet.exe example.dll
@@ -213,13 +217,14 @@ dotnet.exe example.dll
 
 {{% tab ".NET Core on Linux" %}}
 
-On Linux, these four environment variables are required to enable automatic instrumentation:
+On Linux, the following environment variables are required to enable automatic instrumentation:
 
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
 For example, to set them from a bash file before starting your application:
@@ -230,6 +235,7 @@ export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 export DD_INTEGRATIONS=/opt/datadog/integrations.json
+export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # Start your application
 dotnet example.dll
@@ -248,6 +254,7 @@ Environment=CORECLR_ENABLE_PROFILING=1
 Environment=CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 Environment=CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
+Environment=DD_DOTNET_TRACER_HOME=/opt/datadog
 
 [Install]
 WantedBy=multi-user.target
@@ -260,6 +267,7 @@ ENV CORECLR_ENABLE_PROFILING=1
 ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
+ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
 {{% /tab %}}
