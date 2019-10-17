@@ -92,6 +92,29 @@
       "page_rank": 90
     },
     {
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/$",
+      "selectors_key": "docs",
+      "variables": {
+        "localisation": [
+          "",
+          "/fr",
+          "/ja"
+        ],
+        "section": [
+          "agent",
+          "logs",
+          "network_performance_monitoring",
+          "synthetics",
+          "tracing",
+          "watchdog"
+        ]
+      },
+      "tags": [
+        "docs homepage"
+      ],
+      "page_rank": 150
+    },
+    {
       "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
       "selectors_key": "docs",
       "variables": {
@@ -107,6 +130,7 @@
           "graphing",
           "logs",
           "monitors",
+          "network_performance_monitoring",
           "security",
           "synthetics",
           "tagging",
@@ -127,9 +151,7 @@
     "\\.json$",
     "\\?",
     "docs.datadoghq.com/account_management/faq/$",
-    "docs.datadoghq.com/account_management/rbac/$",
     "docs.datadoghq.com/account_management/rbac/log_management/$",
-    "docs.datadoghq.com/account_management/rbac/role_api/$",
     "docs.datadoghq.com/agent/faq/$",
     "docs.datadoghq.com/agent/faq/agent-5-process-collection/$",
     "docs.datadoghq.com/agent/faq/agent-downgrade/$",
@@ -139,14 +161,12 @@
     "docs.datadoghq.com/agent/guide/dogstream/$",
     "docs.datadoghq.com/developers/faq/$",
     "docs.datadoghq.com/developers/guide/$",
-    "docs.datadoghq.com/developers/metrics/distributions/$",
     "docs.datadoghq.com/fr/.*/faq/",
     "docs.datadoghq.com/fr/integrations/$",
     "docs.datadoghq.com/fr/search/",
     "docs.datadoghq.com/fr/videos/",
     "docs.datadoghq.com/graphing/faq/$",
     "docs.datadoghq.com/graphing/guide/$",
-    "docs.datadoghq.com/graphing/widgets/table/$",
     "docs.datadoghq.com/integrations/$",
     "docs.datadoghq.com/integrations/faq/$",
     "docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs/$",
@@ -296,6 +316,14 @@
       [
         "agent",
         "datadog agent"
+      ],
+      [
+        "DCA",
+        "Datadog Cluster Agent"
+      ],
+      [
+        "K8s",
+        "Kubernetes"
       ],
       [
         "microsoft azure",
