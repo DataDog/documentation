@@ -300,6 +300,9 @@ h5{
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
   }
+  p + ul, div + ul {
+    margin-bottom: 1rem;
+  }
 }
 
 /* codetabs inside content */
