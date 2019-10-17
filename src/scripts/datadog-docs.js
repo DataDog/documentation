@@ -438,26 +438,6 @@ $(document).ready(function () {
         $('.sidenav-nav').css('maxHeight', document.documentElement.clientHeight - header_h - padding);
     });
 
-    /* if($('.api-nav').length) {
-        var ref = document.querySelector('.api-popper-button');
-        var pop = document.getElementById('api-popper');
-        if(ref && pop) {
-            ref.addEventListener('click', function(e) {
-                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
-                var p = new Popper(ref, pop, {
-                    placement: "start-bottom",
-                    modifiers: {
-                        preventOverflow: { enabled: false },
-                        hide: {
-                            enabled: false
-                        }
-                    }
-                });
-                return false;
-            });
-        }
-    } */
-
     updateMainContentAnchors();
 
     $('.api-content h2[id]').each(function() {
