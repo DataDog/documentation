@@ -94,6 +94,7 @@ HEATMAP_SCHEMA = {
 | `yaxis`    | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
 | `events`   | object          | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+| `show_legend` | boolean | no | (screenboard only) Show the legend for this widget |
 
 
 Additional properties allowed in the `requests` object:
