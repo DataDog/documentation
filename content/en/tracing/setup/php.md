@@ -45,7 +45,7 @@ Once downloaded, install the package with one of the commands below.
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
 $ rpm -ivh datadog-php-tracer.rpm
 
-# using DEB package (Debian Jessie+ , Ubuntu 14.04+)
+# using DEB package (Debian Jessie+ , Ubuntu 14.04+ on supported PHP versions)
 $ dpkg -i datadog-php-tracer.deb
 
 # using APK package (Alpine)
