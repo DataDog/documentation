@@ -224,7 +224,8 @@ Like other metric types, such as `GAUGE` or `HISTOGRAM`, the `DISTRIBUTION` metr
 
 A distribution metrics also have additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created: 
+If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created:
+
 | Metric Name                                       | Value  | Datadog Metric Type |
 |---------------------------------------------------|--------|---------------------|
 | `request.response_time.distribution.p50`          | `2 `   | GAUGE               |
