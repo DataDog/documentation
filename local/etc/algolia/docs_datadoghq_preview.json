@@ -92,29 +92,6 @@
       "page_rank": 90
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)$",
-      "selectors_key": "docs",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ],
-        "section": [
-          "agent",
-          "logs",
-          "network_performance_monitoring",
-          "synthetics",
-          "tracing",
-          "watchdog"
-        ]
-      },
-      "tags": [
-        "docs homepage"
-      ],
-      "page_rank": 150
-    },
-    {
       "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
       "selectors_key": "docs",
       "variables": {
@@ -311,6 +288,21 @@
     "optionalWords": [
       "the",
       "without"
+    ],
+    "attributesToIndex": [
+      "unordered(hierarchy_camel.lvl0)",
+      "unordered(hierarchy.lvl0)",
+      "unordered(hierarchy_camel.lvl1)",
+      "unordered(hierarchy.lvl1)",
+      "unordered(hierarchy_camel.lvl2)",
+      "unordered(hierarchy.lvl2)",
+      "unordered(hierarchy_camel.lvl3)",
+      "unordered(hierarchy.lvl3)",
+      "unordered(hierarchy_camel.lvl4)",
+      "unordered(hierarchy.lvl4)",
+      "unordered(hierarchy_camel.lvl5)",
+      "unordered(hierarchy.lvl5)",
+      "content"
     ],
     "synonyms": [
       [
