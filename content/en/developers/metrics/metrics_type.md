@@ -144,9 +144,9 @@ Discover how to submit gauge metrics:
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-The `HISTOGRAM` metric type allows you to measure the statistical distribution of a set of values. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates the values that are sent during a defined time interval (usually defaults to 10 seconds with the Agent) and produces different metrics representing the different aggregations possible for the set of value. Depending on the aggregation, the metric type stored by Datadog is different.
+The `HISTOGRAM` metric type allows you to measure the statistical distribution of a set of values. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates the values that are sent during a defined time interval (usually defaults to 10 seconds with the Agent) and produces different timeseries representing the different aggregations possible for the set of values. Depending on the aggregation, the metric type stored by Datadog is different.
 
-For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following metrics are produced by the Agent:
+For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following timeseries are produced by the Agent by default:
 
 | Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
@@ -155,8 +155,6 @@ For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` dur
 | `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
 | `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
-| `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
-| `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
 
 
 For instance, say that the `request.response_time.histogram` metric is reported to Datadog through an Agent with the `HISTOGRAM` type for `server:web_1` with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
@@ -168,13 +166,11 @@ For instance, say that the `request.response_time.histogram` metric is reported 
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
-| `request.response_time.histogram.min`          | `1`    | GAUGE               |
-| `request.response_time.histogram.sum`          | `15`   | GAUGE               |
 
 
 **Note**:
 
-* Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+* Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog. `sum` and `min` are available for addition.
 * Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][2]. By default, only the `95pc` percentile is sent out to Datadog.
 
 Discover how to submit histogram metrics:
@@ -193,21 +189,19 @@ Discover how to submit histogram metrics:
 This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
-`DISTRIBUTION` is a metric type that allows you to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. `DISTRIBUTION` metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and to solve the problems created by Agent-level aggregation.
+A `DISTRIBUTION` is a metric type that allows you to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. `DISTRIBUTION` metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and to solve the problems created by Agent-level aggregation.
 
-Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side, all `DISTRIBUTION` metrics' raw data collected during the flush interval is sent to Datadog, and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during the flush interval, a `DISTRIBUTION` metric sends all the raw data during a flush interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging
 
-For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following metrics are produced within Datadog:
+For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following timeseries are produced within Datadog by default:
 
 | Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
 | `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
 | `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
-| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
-| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
 | `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
@@ -218,13 +212,9 @@ For instance, say that the `request.response_time.distribution` metric is report
 |---------------------------------------------------|--------|---------------------|
 | `request.response_time.distribution.avg`          | `1,73` | GAUGE               |
 | `request.response_time.distribution.count`        | `11`   | RATE                |
-| `request.response_time.distribution.median`       | `2`    | GAUGE               |
-| `request.response_time.distribution.95percentile` | `3`    | GAUGE               |
 | `request.response_time.distribution.max`          | `3`    | GAUGE               |
 | `request.response_time.distribution.min`          | `1`    | GAUGE               |
 | `request.response_time.distribution.sum`          | `19`   | GAUGE               |
-
-**Note**: In the example above, the p50 (median) for `server:web_1` is `2` and the p50 for `server:web_2` is `1`. Aggregating by the average value server-side would result in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric.
 
 Discover how to submit distribution metrics [with DogstatsD][1].
 
@@ -234,7 +224,17 @@ Like other metric types, such as `GAUGE` or `HISTOGRAM`, the `DISTRIBUTION` metr
 
 A distribution metrics also have additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-Percentile aggregations can be added in-app in the [Datadog Distribution Metric page][2].
+If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created: 
+| Metric Name                                       | Value  | Datadog Metric Type |
+|---------------------------------------------------|--------|---------------------|
+| `request.response_time.distribution.p50`          | `2 `   | GAUGE               |
+| `request.response_time.distribution.p75`          | `2`    | GAUGE               |
+| `request.response_time.distribution.p90`          | `3`    | GAUGE               |
+| `request.response_time.distribution.p95`          | `3`    | GAUGE               |
+| `request.response_time.distribution.p99`          | `3`    | GAUGE               |
+
+**Note**: In the example above, the p50 (median) for `server:web_1` is `2` and the p50 for `server:web_2` is `1`. Aggregating by the average value server-side would result in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric.
+
 
 ### Customization of tagging
 
