@@ -25,7 +25,7 @@ This section specifies the raw datagram format for metrics, events, and service 
 |-------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][1].                                    |
 | `<VALUE>`                           | Yes      | An integer or float.                                                                                                                             |
-| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2]                             |
+| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2].                            |
 | `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. The default is `1`, which samples 100% of the time. |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). See the [tagging documentation][3] for guidance on defining tags. |
 
