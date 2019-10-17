@@ -3,6 +3,8 @@ img_url: "https://datadog-docs.imgix.net/"
 static_url: "https://docs.datadoghq.com/"
 ga: UA-21102638-5
 header_scripts:
+  - datadog_monitoring: true
+  - hotjar: true
   - google-tag-manager: true
   - marketo: true
 footer_scripts:

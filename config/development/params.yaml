@@ -3,5 +3,11 @@ img_url: "http://localhost:1313/"
 corp_url: "https://www.datadoghq.com/"
 static_url: "http://localhost:1313/"
 
+header_scripts:
+  - datadog_monitoring: false
+  - hotjar: false
+  - google-tag-manager: false
+  - marketo: false
+
 datadog:
   logging_handler: console
