@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta and available for API Tests only. To enable Synthetics private locations for your account, use the corresponding sign-up form <a href="https://app.datadoghq.com/privatelocations/2019signup">for the Datadog US site</a> or <a href="https://app.datadoghq.eu/privatelocations/2019signup">for the Datadog EU site.</a>
+This feature is in public beta and available for API Tests only. 
 </div>
 
 ## Overview
