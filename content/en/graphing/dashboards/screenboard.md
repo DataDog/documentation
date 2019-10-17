@@ -55,6 +55,10 @@ When the global time selector is in use, widgets that are linked to global time 
 ## Public Dashboards
 Configure public screenboards by clicking on the upper right side cog icon and selecting `Configure sharing....`
 
+{{< img src="graphing/dashboards/screenboard/public_sharing.png" alt="Public Dashboard Configuration" responsive="true" style="width:70%;">}}
+
+Options allow users to change the default time range and select different template variable combinations.
+Note: The template variable option is only available if template variables have been set up on the dashboard.
 
 ## Tracking Changes
 A user can find all events related to Screenboard changes to the Screenboard they are following by searching `tags:audit, <Screenboard_name>` in the main [event stream][2], as each notification event is tagged with those two tags.
