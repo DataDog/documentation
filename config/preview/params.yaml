@@ -6,8 +6,13 @@ ga: UA-21102638-9
 header_scripts:
   - datadog_monitoring: true
   - hotjar: true
-  - google-tag-manager: true
-  - marketo: true
+  - google-site-tag: false
+  - google-tag-manager: false
+  - marketo: false
+
+footer_scripts:
+  - snowplow: false
+  - adroll: false
 
 datadog:
   clientToken: pub36877d3864fab670b5ae7e1d5d26cb08

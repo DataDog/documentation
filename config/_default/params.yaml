@@ -13,18 +13,14 @@ code_languages:
     key: ruby
   - display_name: Curl
     key: bash
+
 header_scripts:
-  - google-tag-manager: true
-  - marketo: true
-footer_scripts:
+  - datadog_monitoring: false
+  - hotjar: false
+  - google-tag-manager: false
+  - google-site-tag: false
   - marketo: false
 
-algolia:
-  appId: EOIG7V0A2O
-  apiKey: c7ec32b3838892b10610af30d06a4e42
-  indexName: docsearch_docs_prod
-
-datadog:
-  clientToken: pube66a8c26c2159b101d6c36b5317fa7f9
-  forwardErrorsToLogs: true
-  logging_handler: console
+footer_scripts:
+  - snowplow: false
+  - adroll: false
