@@ -133,6 +133,7 @@ TIMESERIES_SCHEMA = {
 | `events`   | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][13] to learn how to build the `EVENTS_SCHEMA`                        |
 | `markers`  | object           | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation][14] to learn how to build the `MARKERS_SCHEMA`                    |
 | `title`    | string           | no       | Title of your widget.                                                                                                                                    |
+| `show_legend` | boolean | no | (screenboard only) Show the legend for this widget |
 
 Additional properties allowed in each `request` object:
 
