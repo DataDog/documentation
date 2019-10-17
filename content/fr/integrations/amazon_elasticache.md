@@ -13,12 +13,12 @@ description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticache/'
 git_integration_title: amazon_elasticache
 has_logo: true
-integration_title: "AWS\_ElastiCache"
+integration_title: "Amazon\_ElastiCache"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_elasticache
-public_title: "Intégration Datadog/AWS\_ElastiCache"
+public_title: "Intégration Datadog/Amazon\_ElastiCache"
 short_description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
 version: '1.0'
 ---
@@ -67,7 +67,7 @@ Accédez d'abord à la console AWS, ouvrez la section ElastiCache, puis l'onglet
 
 {{< img src="integrations/awselasticache/elasticache2.png" alt="Clusters ElastiCache dans la console AWS" responsive="true">}}
 
-Cliquez ensuite sur le lien « node » pour accéder à son URL d'endpoint :
+Cliquez ensuite sur le lien du « node » pour accéder à son URL d'endpoint :
 
 {{< img src="integrations/awselasticache/elasticache3.png" alt="Lien node dans la console AWS" responsive="true">}}
 
@@ -124,18 +124,18 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 * [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
 * [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][12]  
 
-[1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/
-[2]: https://www.coursera.org/
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[2]: https://www.coursera.org
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html
 [7]: https://app.datadoghq.com/account/settings#integrations/amazon_elasticache
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
-[11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/
-[12]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics/
+[10]: https://docs.datadoghq.com/fr/help
+[11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[12]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics
 
 
 {{< get-dependencies >}}

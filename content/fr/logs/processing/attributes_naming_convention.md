@@ -166,11 +166,11 @@ Ces attributs fournissent des informations sur la signification des attributs us
 
 ### Code source
 
-Ces attributs sont liés aux données utilisées lorsqu'un log ou une erreur est généré(e) via un enregistreur dans une application personnalisée. Tous les attributs sont précédés par `logger` ou `error`.
+Ces attributs sont liés aux données utilisées lorsqu'un log ou une erreur est généré(e) via un logger dans une application personnalisée. Tous les attributs sont précédés par `logger` ou `error`.
 
 | **Nom complet**         | **Type** | **Description**                                                  |
 | :---                 | :---     | :----                                                            |
-| `logger.name`        | `string` | Le nom de l'enregistreur.                                          |
+| `logger.name`        | `string` | Le nom du logger.                                          |
 | `logger.thread_name` | `string` | Le nom du thread actuel lorsque le log est déclenché.            |
 | `logger.method_name` | `string` | Le nom de la méthode de la classe.                                           |
 | `error.kind`         | `string` | Le type ou la catégorie d'erreur (ou le code dans certains cas).                  |

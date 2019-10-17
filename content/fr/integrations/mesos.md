@@ -91,13 +91,20 @@ Le check Mesos-master n'inclut aucun événement.
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Master Mesos pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-* [Installation de Datadog sur Mesos avec DC/OS][6]
+* [Installation de Datadog sur Mesos avec DC/OS][7]
 
 
+[1]: https://docs.datadoghq.com/fr/integrations/mesos/#mesos-slave-integration
+[2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
+[3]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/datadog_checks/mesos_master/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-autodiscovery
+[5]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/metadata.csv
+[6]: https://docs.datadoghq.com/fr/help
+[7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
 
 
 {{< get-dependencies >}}
@@ -105,7 +112,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Intégration Mesos_slave
 
-![Dashboard Mesos Slave][7]
+![Dashboard Mesos Slave][101]
 
 ## Présentation
 
@@ -122,7 +129,7 @@ Ce check crée également un check de service pour chaque tâche d'exécuteur.
 ## Implémentation
 ### Installation
 
-Suivez les instructions décrites dans notre [article de blog][8] pour installer l'Agent Datadog sur chaque nœud slave Mesos via l'interface Web DC/OS.
+Suivez les instructions décrites dans notre [article de blog][102] pour installer l'Agent Datadog sur chaque nœud slave Mesos via l'interface Web DC/OS.
 
 ### Configuration
 #### DC/OS
@@ -135,7 +142,7 @@ Suivez les instructions décrites dans notre [article de blog][8] pour installer
 
 #### Marathon
 
-Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'interface Web Marathon ou en transmettant le JSON ci-dessous à l'URL de l'API. Vous devrez remplacer `<VOTRE_CLÉ_API_DATADOG>` par votre clé d'API, et le nombre d'instances par le nombre de nœuds slave sur votre cluster. De plus, vous devrez peut-être mettre à jour l'image Docker pour la faire correspondre à un tag plus récent. Pour obtenir la dernière version de l'image, accédez au [Docker Hub][9].
+Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'interface Web Marathon ou en transmettant le JSON ci-dessous à l'URL de l'API. Vous devrez remplacer `<VOTRE_CLÉ_API_DATADOG>` par votre clé d'API, et le nombre d'instances par le nombre de nœuds slave sur votre cluster. De plus, vous devrez peut-être mettre à jour l'image Docker pour la faire correspondre à un tag plus récent. Pour obtenir la dernière version de l'image, accédez au [Docker Hub][103].
 
 ```json
 {
@@ -240,23 +247,18 @@ Le check mesos_slave crée un check de service pour chaque tâche d'exécuteur, 
 | TASK_ERROR    | AgentCheck.CRITICAL            |
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][105].
 
 ## Pour aller plus loin
 
-* [Installation de Datadog sur Mesos avec DC/OS][8]
+* [Installation de Datadog sur Mesos avec DC/OS][102]
 
 
+[101]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
+[102]: https://www.datadoghq.com/blog/deploy-datadog-dcos
+[103]: https://hub.docker.com/r/datadog/agent/tags
+[104]: https://github.com/DataDog/integrations-core/blob/master/mesos_slave/metadata.csv
+[105]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
-[1]: https://docs.datadoghq.com/fr/integrations/mesos/#mesos-slave-integration
-[2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
-[3]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/datadog_checks/mesos_master/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-autodiscovery
-[5]: https://docs.datadoghq.com/fr/help
-[6]: https://www.datadoghq.com/blog/deploy-datadog-dcos
-[7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
-[8]: https://www.datadoghq.com/blog/deploy-datadog-dcos
-[9]: https://hub.docker.com/r/datadog/agent/tags
-[10]: https://docs.datadoghq.com/fr/help

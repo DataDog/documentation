@@ -2,12 +2,17 @@
 title: Obtenir un dashboard
 type: apicode
 order: 8.4
-external_redirect: "/api/#get-a-dashboard"
+external_redirect: "/api/#obtenir-un-dashboard"
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `GET /v1/dashboard/<ID_DASHBOARD>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE** :
+
 {{< code-snippets basename="api-dashboard-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE** :
+
 {{< code-snippets basename="result.api-dashboard-get" >}}

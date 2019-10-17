@@ -6,13 +6,14 @@ external_redirect: '/api/#liste-des-logs'
 ---
 ## Récupérer la liste des logs
 
-Le endpoint List renvoie les logs qui correspondent à une requête de recherche de log. Les résultats sont paginés.
+Le endpoint List renvoie les logs qui correspondent à une requête de recherche de log. [Les résultats sont paginés][1].
 
+**Si vous songez à archiver des logs pour votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*obligatoire*] :
-    la requête de recherche ; elle respecte la [syntaxe de recherche de log][1].
+    requête de recherche respectant la [syntaxe de recherche de log][3].
 * **`time.from`** [*obligatoire*] :
     timestamp minimal pour les logs demandés. Sa valeur peut correspondre à l'un des formats suivants :
     - Une chaîne ISO-8601
@@ -29,7 +30,7 @@ Le endpoint List renvoie les logs qui correspondent à une requête de recherche
    correspond à `time.timezone`, mais avec une valeur en secondes.
    Si vous spécifiez à la fois un fuseau horaire et un décalage, le fuseau horaire est ignoré.
 * **`startAt`** [*facultatif*, *défaut*=**None**] :
-   identificateur de hachage du premier log à renvoyer dans la liste, disponible dans l'attribut `id` du log. Ce paramètre est utilisé pour la [fonctionnalité de pagination](#pagination).
+   l'identificateur de hachage du premier log à renvoyer dans la liste, disponible dans l'attribut `id` du log. Ce paramètre est utilisé pour la [fonctionnalité de pagination][1].
    **Remarque** : ce paramètre est ignoré lorsque le log correspondant n'est pas inclus dans l'intervalle spécifié.
 * **`sort`** [*facultatif*, *défaut*=**desc**] :
     résultats dans l'ordre chronologique croissant (`asc`) ou décroissant (`desc`).
@@ -38,16 +39,6 @@ Le endpoint List renvoie les logs qui correspondent à une requête de recherche
 * **`index`** [*facultatif*, *défaut*=**main**] :
     pour les organisations avec plusieurs index, l'index de log sur lequel la requête porte.
 
-##### PAGINATION
-
-Récupérez une liste de logs contenant plus de 1 000 logs (soit la limite) avec la fonctionnalité Pagination de l'API Log List :
-
-* pour la première requête, utilisez le paramètre `startAt`.
-* pour la requête N, utilisez le `nextLogId` du résultat N - 1 de la requête en tant que valeur du paramètre `startAt`.
-
-Pour contrôler davantage les résultats de la pagination, vous devez utiliser un paramètre `time` absolu. N'utilisez pas le mot-clé `now`.
-
-**Si vous songez à archiver des logs pour votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**
-
-[1]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
+[1]: /fr/logs/guide/collect-multiple-logs-with-pagination
 [2]: https://docs.datadoghq.com/fr/logs/archives
+[3]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax

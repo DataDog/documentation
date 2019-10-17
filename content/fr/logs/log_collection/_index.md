@@ -209,7 +209,7 @@ Vos logs sont recueillis et rassemblés dans la vue [Log Explorer][24]. Vous pou
 
 ### Comment tirer le meilleur parti de vos logs d'application
 
-Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom de l'enregistreur, le thread actuel, le type d'erreur et la trace de pile.
+Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom du logger, le thread actuel, le type d'erreur et la trace de pile.
 
 {{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Trace de pile" responsive="true" >}}
 
@@ -217,7 +217,7 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 
 | Attribut            | Description                                                      |
 |----------------------|------------------------------------------------------------------|
-| `logger.name`        | Le nom de l'enregistreur                                               |
+| `logger.name`        | Le nom du logger                                               |
 | `logger.thread_name` | Le nom du thread actuel                                       |
 | `error.stack`        | La trace de pile actuelle                                               |
 | `error.message`      | Le message d'erreur contenu dans la trace de pile                       |

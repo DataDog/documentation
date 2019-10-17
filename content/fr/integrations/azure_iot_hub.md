@@ -18,12 +18,14 @@ short_description: Surveillez des métriques clés d'Azure IoT Hub.
 version: '1.0'
 ---
 ## Présentation
- Azure IoT Hub est un service entièrement géré qui permet d'effectuer des communications fiables, sécurisées et bidirectionnelles entre des millions d'appareils IoT.
+Azure IoT Hub est un service entièrement géré qui permet d'établir des communications fiables, sécurisées et bidirectionnelles entre des millions d'appareils IoT.
 
 Recueillez des métriques d'Azure IoT Hub pour :
 
 * Visualiser les performances de vos hubs IoT
 * Corréler les performances de vos hubs IoT avec vos applications
+
+Azure Provisioning Service est un service d'assistance pour IoT Hub qui permet un approvisionnement juste à temps et sans intervention sur le bon Hub IoT. Aucune intervention humaine n'est requise, ce qui permet aux clients d'approvisionner des millions de périphériques de manière sécurisée et évolutive.
 
 ## Implémentation
 ### Installation
