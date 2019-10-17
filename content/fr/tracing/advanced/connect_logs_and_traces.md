@@ -31,7 +31,7 @@ Vos logs *doivent* être convertis en attributs Datadog afin que la corrélation
 
 Activez l'injection dans la [configuration][1] du traceur Java en ajoutant le paramètre `-Ddd.logs.injection=true` comme argument de démarrage jvm ou via la variable d'environnement `DD_LOGS_INJECTION=true`.
 
-Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre enregistreur :
+Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre logger :
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
@@ -45,7 +45,7 @@ Si vos logs sont au format JSON et que vous utilisez Logback, vous n'avez plus r
 
 Activez l'injection avec la variable d'environnement `DD_LOGS_INJECTION=true` lorsque vous utilisez `ddtrace-run`.
 
-**Remarque** : l'auto-injection prend en charge la bibliothèque standard `logging`, ainsi que toutes les bibliothèques qui complètent le module de bibliothèque standard, comme la bibliothèque `json_log_formatter`. `ddtrace-run` appelle `logging.basicConfig` avant l'exécution de votre application. Si l'enregistreur racine possède un gestionnaire configuré, votre application doit modifier directement l'enregistreur racine et le gestionnaire.
+**Remarque** : l'auto-injection prend en charge la bibliothèque standard `logging`, ainsi que toutes les bibliothèques qui complètent le module de bibliothèque standard, comme la bibliothèque `json_log_formatter`. `ddtrace-run` appelle `logging.basicConfig` avant l'exécution de votre application. Si le logger racine possède un gestionnaire configuré, votre application doit modifier directement le logger racine et le gestionnaire.
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -75,7 +75,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un logger `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'logger Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -159,7 +159,7 @@ var tracer = new Tracer(settings);
 ?>
 ```
 
-Si l'enregistreur implémente la [bibliothèque **monolog/monolog**][1], utilisez `Logger::pushProcessor()` pour ajouter automatiquement les identifiants aux messages de log :
+Si le logger implémente la [bibliothèque **monolog/monolog**][1], utilisez `Logger::pushProcessor()` pour ajouter automatiquement les identifiants aux messages de log :
 
 ```php
 <?php
@@ -244,7 +244,7 @@ finally {
 }
 ```
 
-Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id` et `dd.span_id` à votre pattern de log :
+Modifiez ensuite la configuration de votre logger en ajoutant `dd.trace_id` et `dd.span_id` à votre pattern de log :
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
@@ -252,7 +252,7 @@ Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id
 
 **Remarque** : si vous n'utilisez pas une [intégration de log Datadog][3] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][4].
 
-[Consultez la documentation relative à la journalisation Java][3] pour en savoir plus sur l'implémentation d'un enregistreur spécifique ou découvrir comment créer des logs au format JSON.
+[Consultez la documentation relative à la journalisation Java][3] pour en savoir plus sur l'implémentation d'un logger spécifique ou découvrir comment créer des logs au format JSON.
 
 
 [1]: /fr/tracing/visualization/#trace
@@ -318,7 +318,7 @@ structlog.configure(
 log = structlog.get_logger()
 ```
 
-Une fois l'enregistreur configuré, si vous exécutez une fonction tracée qui logue un événement, vous obtenez les informations du traceur injecté :
+Une fois le logger configuré, si vous exécutez une fonction tracée qui logue un événement, vous obtenez les informations du traceur injecté :
 
 ```
 >>> traced_func()
@@ -335,7 +335,7 @@ Une fois l'enregistreur configuré, si vous exécutez une fonction tracée qui l
 [3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Pour ajouter des ID de trace à votre propre enregistreur, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
+Pour ajouter des ID de trace à votre propre logger, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
 
 Pour s'assurer du bon fonctionnement de la corrélation des logs, vérifiez que les éléments suivants sont inclus dans chaque message :
 
@@ -416,7 +416,7 @@ L'exemple ci-dessus explique comment utiliser le contexte de la span dans le paq
 
 Si votre bibliothèque de journalisation n'est pas compatible avec l'injection automatique, mais que vous utilisez des logs au format JSON, vous pouvez effectuer une injection manuelle directement dans votre code.
 
-Exemple d'utilisation de `console` comme enregistreur sous-jacent :
+Exemple d'utilisation de `console` comme logger sous-jacent :
 
 ```javascript
 const tracer = require('dd-trace')

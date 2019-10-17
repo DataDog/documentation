@@ -46,7 +46,7 @@ Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes
 [1]: /fr/agent
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [3]: /fr/integrations
-[4]: /fr/developers/dogstatsd
+[4]: /fr/developers/metrics/dogstatsd_metrics_submission
 [5]: /fr/tracing
 [6]: /fr/developers/libraries
 [7]: /fr/developers/metrics/custom_metrics

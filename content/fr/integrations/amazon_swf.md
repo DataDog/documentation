@@ -12,12 +12,12 @@ description: Surveillez des métriques clés d'Amazon Simple Workflow Service.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_swf/'
 git_integration_title: amazon_swf
 has_logo: true
-integration_title: "AW\_Simple\_Workflow\_Service"
+integration_title: "Amazon\_Simple\_Workflow\_Service"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_swf
-public_title: Intégration Datadog/AWS Simple Workflow Service
+public_title: "Intégration Datadog/Amazon\_Simple\_Workflow\_Service"
 short_description: Surveillez des métriques clés d'Amazon Simple Workflow Service.
 version: '1.0'
 ---
