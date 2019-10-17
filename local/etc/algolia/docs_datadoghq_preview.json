@@ -92,7 +92,7 @@
       "page_rank": 90
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/$",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)$",
       "selectors_key": "docs",
       "variables": {
         "localisation": [
