@@ -27,7 +27,7 @@ Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journal
 
 Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][1].
 
-## Configurer votre enregistreur
+## Configurer votre logger
 {{< tabs >}}
 {{% tab "SeriLog" %}}
 
@@ -41,10 +41,10 @@ Installez Serilog via NuGet. Exécutez la commande suivante dans la console de g
 PM> Install-Package Serilog.Sinks.File
 ```
 
-Lancez ensuite l'enregistreur directement sur votre application :
+Lancez ensuite le logger directement sur votre application :
 
 ```csharp
-// Instancier l'enregistreur
+// Instancier le logger
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
@@ -135,7 +135,7 @@ namespace Datadog
     class Program
     {
 
-        // Initialiser un enregistreur
+        // Initialiser un logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
@@ -201,7 +201,7 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
   <!-- Insérer ici le reste de votre configuration... -->
 ```
 
-Instanciez votre enregistreur et commencez à déclencher vos événements :
+Instanciez votre logger et commencez à déclencher vos événements :
 
 ```csharp
 using log4net;
@@ -210,7 +210,7 @@ namespace Datadog
 {
     class Program
     {
-        // Obtenir l'enregistreur de classe actuelle
+        // Obtenir le logger de classe actuelle
         private static ILog logger = LogManager.GetLogger(typeof(Program));
 
 
@@ -298,7 +298,7 @@ Exécutez la commande suivante dans la console de gestion de paquet :
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Initialisez ensuite directement l'enregistreur dans votre application. N'oubliez pas d'[ajouter votre `<CLÉ_API>`][2].
+Initialisez ensuite directement le logger dans votre application. N'oubliez pas d'[ajouter votre `<CLÉ_API>`][2].
 
 ```
 var log = new LoggerConfiguration()

@@ -29,7 +29,9 @@ Recueillez des métriques de Machine Virtuelle Azure pour :
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1].
+
+Pour les machines virtuelles déployées avec **ARM**, vous devez activer Diagnostics et sélectionner les métriques des machines virtuelles que vous souhaitez recueillir. Consultez la section [Activer Diagnostics][7] pour obtenir des instructions.
 
 ## Données collectées
 ### Métriques
@@ -57,6 +59,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [4]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
 [5]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
 [6]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
+[7]: https://docs.datadoghq.com/fr/integrations/faq/azure-troubleshooting/#enable-diagnostics
 
 
 {{< get-dependencies >}}

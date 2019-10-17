@@ -588,10 +588,6 @@ main:
     url: monitors/downtimes/
     weight: 6
     parent: alerting
-  - name: Service Level Objectives
-    url: monitors/slos/
-    weight: 7
-    parent: alerting
   - name: Guides
     url: monitors/guide/
     weight: 100

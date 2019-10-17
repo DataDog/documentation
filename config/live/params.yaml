@@ -2,6 +2,9 @@ environment: live
 img_url: "https://datadog-docs.imgix.net/"
 static_url: "https://docs.datadoghq.com/"
 ga: UA-21102638-5
+header_scripts:
+  - google-tag-manager: true
+  - marketo: true
 footer_scripts:
 - snowplow: true
 - adroll: true

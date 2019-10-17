@@ -12,12 +12,12 @@ description: "Surveillez des métriques clés d'AWS\_Storage\_Gateway."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_storage_gateway/'
 git_integration_title: amazon_storage_gateway
 has_logo: true
-integration_title: "AWS\_Storage\_Gateway"
+integration_title: "Amazon\_Storage\_Gateway"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_storage_gateway
-public_title: Intégration Datadog/AWS Storage Gateway
+public_title: "Intégration Datadog/Amazon\_Storage\_Gateway"
 short_description: "Surveillez des métriques clés d'AWS\_Storage\_Gateway."
 version: '1.0'
 ---

@@ -37,18 +37,20 @@ Recevez des métriques de vos applications/serveurs Windows avec Windows Managem
 * Visualiser leurs performances.
 * Corréler leur activité avec le reste de vos applications.
 
+**Remarque :** il est recommandé d'utiliser plutôt le [check PDH][14] dans tous les cas, car il est moins coûteux et donc plus évolutif.
+
 ## Implémentation
 ### Installation
 
 Si vous recueillez uniquement des métriques standard à partir de Microsoft Windows et d'autres applications groupées, aucune procédure d'installation n'est requise. Si vous devez définir de nouvelles métriques à collecter à partir de votre application, vous disposez alors de plusieurs options :
 
-1.  Envoyez des compteurs de performance avec System.Diagnostics dans .NET, puis accédez à ceux-ci via WMI.
+1.  Envoyez des compteurs de performance avec System.Diagnostics dans .NET, puis accédez-y via WMI.
 2.  Implémentez un fournisseur WMI basé sur un objet COM pour votre application. Cette méthode est conseillée si vous utilisez un langage non pris en charge par .NET.
 
 Pour en savoir plus sur System.Diagnostics, consultez la [documentation MSDN][2]. Après avoir ajouté votre métrique, vous devriez être en mesure de la retrouver dans WMI. Pour parcourir les espaces de nommage WMI, vous pouvez utiliser cet outil pratique : [WMI Explorer][3]. Les mêmes informations peuvent être obtenues avec Powershell [ici][4]. Consultez également les informations fournies dans cet [article de la base de connaissances Datadog][5].
 
-Si vous attribuez la catégorie Ma_Nouvelle_Métrique à une nouvelle métrique, le chemin WMI est
-`\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_Ma_Nouvelle_Métrique`
+Si vous attribuez la catégorie Ma_Nouvelle_Métrique à une nouvelle métrique, le chemin WMI correspond à ce qui suit :
+`\\<NomOrdinateur>\ROOT\CIMV2:Win32_PerfFormattedData_Ma_Nouvelle_Métrique`
 
 Si la métrique ne s'affiche pas dans WMI, essayez d'exécuter `winmgmt /resyncperf` pour forcer le système à réenregistrer les bibliothèques de performances avec WMI.
 
@@ -87,18 +89,18 @@ La configuration par défaut utilise la clause de filtre pour limiter les métri
 
 Les définitions de métriques comprennent trois composants :
 
-* Propriété de classe dans WMI
+* La propriété de classe dans WMI
 * Le nom de la métrique, tel qu'il apparaît dans Datadog
-* Le type de métrique.
+* Le type de métrique
 
 #### Options de configuration
-*Cette fonction est disponible à partir de la version 5.3 de l'Agent*
+*Cette fonction est disponible à partir de la version 5.3 de l'Agent.*
 
 Chaque requête WMI a deux options obligatoires, `class` et `metrics`, ainsi que six options facultatives : `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` et `tag_queries`.
 
 * `class` est le nom de la classe WMI, par exemple `Win32_OperatingSystem` ou `Win32_PerfFormattedData_PerfProc_Process`. De nombreux noms de classe standard sont disponibles dans la [documentation MSDN][6]. Les classes `Win32_FormattedData_*` fournissent par défaut de nombreux compteurs de performances utiles.
 
-* `metrics` est la liste des métriques que vous souhaitez capturer, chaque élément dans la
+* `metrics` est la liste des métriques que vous souhaitez capturer, chaque élément de la
 liste étant un ensemble `[<NOM_PROPRIÉTÉ_WMI>, <NOM_MÉTRIQUE>, <TYPE_MÉTRIQUE>]` : 
   *  `<NOM_PROPRIÉTÉ_WMI>` ressemble à `NumberOfUsers` ou `ThreadCount`. Les propriétés standard sont également disponibles dans la documentation MSDN pour chaque classe.
   *  `<NOM_MÉTRIQUE>` est le nom que vous souhaitez voir apparaître dans Datadog.
@@ -121,7 +123,7 @@ Consultez [MSDN][8] pour en savoir plus.
   * `<PROPRIÉTÉ_SOURCE_LIEN>` contient la valeur du lien
   * `<CLASSE_CIBLE>` est la classe à lier
   * `<PROPRIÉTÉ_CLASSE_CIBLE_LIEN>` est la propriété de classe cible à lier
-  * `<PROPRIÉTÉ_CIBLE>` contient la valeur à tagger
+  * `<PROPRIÉTÉ_CIBLE>` contient la valeur à taguer
 
   On obtient alors une requête WMI :
   `SELECT '<PROPRIÉTÉ_CIBLE>' FROM '<CLASSE_CIBLE>' WHERE '<PROPRIÉTÉ_CLASSE_CIBLE_LIEN>' = '<PROPRIÉTÉ_SOURCE_LIEN>'`
@@ -131,7 +133,7 @@ Si vous définissez cette option, tout numéro d'instance sera supprimé des val
 </div>
 
 #### Collecte de métriques
-Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facture][10]. 
+Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facturation][10]. 
 
 ### Validation
 
@@ -163,6 +165,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/wmi_check/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
+[14]: https://docs.datadoghq.com/fr/integrations/pdh_check/
 
 
 {{< get-dependencies >}}

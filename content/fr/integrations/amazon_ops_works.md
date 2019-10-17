@@ -12,12 +12,12 @@ description: "Surveillez l'utilisation des ressources AWS\_OpsWorks."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ops_works/'
 git_integration_title: amazon_ops_works
 has_logo: true
-integration_title: "AWS\_OpsWorks"
+integration_title: "Amazon\_OpsWorks"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ops_works
-public_title: "Intégration Datadog/AWS\_OpsWorks"
+public_title: "Intégration Datadog/Amazon\_OpsWorks"
 short_description: "Surveillez l'utilisation des ressources AWS\_OpsWorks."
 version: '1.0'
 ---

@@ -411,7 +411,7 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[4]: /developers/dogstatsd
+[4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [6]: https://github.com/cloudfoundry/multi-buildpack
 [7]: https://github.com/cloudfoundry/multi-buildpack#usage
@@ -420,7 +420,7 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /tracing/setup
 [12]: https://docs.datadoghq.com/agent/logs/proxy
-[13]: /developers/dogstatsd
+[13]: /developers/metrics/dogstatsd_metrics_submission
 [14]: /libraries
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install

@@ -13,12 +13,12 @@ description: 'Surveillez les taux d''erreur, le nombre de requêtes et les volum
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_cloudfront/'
 git_integration_title: amazon_cloudfront
 has_logo: true
-integration_title: "AWS\_CloudFront"
+integration_title: "Amazon\_CloudFront"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudfront
-public_title: "Intégration Datadog/AWS\_CloudFront"
+public_title: "Intégration Datadog/Amazon\_CloudFront"
 short_description: 'Surveillez les taux d''erreur, le nombre de requêtes et les volumes de téléchargement et de chargement.'
 version: '1.0'
 ---

@@ -61,5 +61,5 @@ Then your Agent's MySQL check would run that query to collect a metric called "m
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example#L54-L71
-[2]: /developers/dogstatsd
+[2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /api

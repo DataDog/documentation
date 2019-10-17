@@ -63,12 +63,12 @@ Le Forwarder de l'Agent envoie à Datadog des métriques au format HTTPS. La mis
 Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agrégation des métriques [StatsD d'Etsy][5]. Il est utilisé pour recevoir et déployer des métriques arbitraires via le protocole UDP ou sur un socket Unix, ce qui permet d'instrumenter du code personnalisé sans que l'ensemble du code souffre de latence. En savoir plus sur [DogStatsD][6].
 
 
-[1]: /fr/developers/dogstatsd/data_types/#metrics
+[1]: /fr/developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /fr/tracing/guide/terminology
 [3]: /fr/agent/guide/network/?tab=agentv6#open-ports
 [4]: /fr/developers/write_agent_check/?tab=agentv6
 [5]: https://github.com/etsy/statsd
-[6]: /fr/developers/dogstatsd
+[6]: /fr/developers/metrics/dogstatsd_metrics_submission
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

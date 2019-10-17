@@ -13,6 +13,9 @@ code_languages:
     key: ruby
   - display_name: Curl
     key: bash
+header_scripts:
+  - google-tag-manager: true
+  - marketo: true
 footer_scripts:
   - marketo: false
 

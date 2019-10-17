@@ -12,12 +12,12 @@ description: "Surveillez des métriques clés d'Amazon\_Firehose."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_firehose/'
 git_integration_title: amazon_firehose
 has_logo: true
-integration_title: "AWS\_Firehose"
+integration_title: "Amazon\_Firehose"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_firehose
-public_title: "Intégration Datadog/AWS\_Firehose"
+public_title: "Intégration Datadog/Amazon\_Firehose"
 short_description: "Surveillez des métriques clés d'Amazon\_Firehose."
 version: '1.0'
 ---

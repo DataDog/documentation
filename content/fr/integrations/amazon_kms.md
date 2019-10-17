@@ -12,12 +12,12 @@ description: "Surveillez l'expiration de vos clés Amazon\_KMS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kms/'
 git_integration_title: amazon_kms
 has_logo: true
-integration_title: "AWS\_Key\_Management\_Service"
+integration_title: "Amazon\_Key\_Management\_Service"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_kms
-public_title: Intégration Datadog/AWS Key Management Service
+public_title: "Intégration Datadog/Amazon\_Key\_Management\_Service"
 short_description: "Surveillez l'expiration de vos clés Amazon\_KMS."
 version: '1.0'
 ---

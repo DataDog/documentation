@@ -12,12 +12,12 @@ description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, le
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
 git_integration_title: amazon_ses
 has_logo: true
-integration_title: "AWS\_SES"
+integration_title: "Amazon\_SES"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ses
-public_title: "Intégration Datadog/AWS\_SES"
+public_title: "Intégration Datadog/Amazon\_SES"
 short_description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, les messages rejetés, et more.'
 version: '1.0'
 ---

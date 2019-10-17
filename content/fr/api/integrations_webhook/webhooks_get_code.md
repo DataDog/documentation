@@ -2,7 +2,7 @@
 title: Obtenir une intégration Webhooks
 type: apicode
 order: 20.1
-external_redirect: "/api/#get-a-webhooks-integration"
+external_redirect: "/api/#obtenir-une-integration-webhooks"
 ---
 
 **SIGNATURE**:

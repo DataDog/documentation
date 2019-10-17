@@ -41,9 +41,11 @@ Plus particulièrement, pour l'Agent de conteneur, Datadog effectue régulièrem
 
 Si vous pensez avoir trouvé un bug dans la sécurité de Datadog, contactez-nous à l'adresse [security@datadoghq.com][11]. Nous vous répondrons dans un délai de 24 heures. Vous pouvez télécharger la [clé PGP][12] de Datadog si jamais vous souhaitez chiffrer vos communications. Merci de ne pas communiquer publiquement le problème tant que nous n'avons pas eu occasion de le traiter.
 
-## Gestion des secrets [BÊTA]
+## Gestion des secrets
 
 Les clients qui ne peuvent pas stocker de secrets en texte brut dans les fichiers de configuration de l'Agent peuvent utiliser le paquet de [gestion des secrets][13]. Ce paquet permet à l'Agent d'appeler un exécutable fourni par l'utilisateur pour gérer la récupération ou le déchiffrement des secrets, qui sont ensuite chargés en mémoire par l'Agent. Les utilisateurs peuvent concevoir leur exécutable en fonction de leur service de gestion de clés préféré, de leur méthode d'authentification et de leur flux de travail d'intégration continue.
+
+Pour en savoir plus, consultez la documentation relative à la [gestion des secrets][14].
 
 ### Pour aller plus loin
 
@@ -62,3 +64,4 @@ Les clients qui ne peuvent pas stocker de secrets en texte brut dans les fichier
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[14]: /fr/agent/guide/secrets-management

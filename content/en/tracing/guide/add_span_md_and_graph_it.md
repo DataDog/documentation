@@ -279,11 +279,9 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" responsive="true" style="width:90%;">}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
