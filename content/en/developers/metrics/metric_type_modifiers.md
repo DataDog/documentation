@@ -35,7 +35,7 @@ The two main in-application modifiers are `as_count()` and `as_rate()`.
 | `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
 | `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                     |
 
-**Note**: Metrics submitted from Agent checks do not have an interval associated, so the `as_count()` and `as_rate()` modifiers have no effect when a metric in-app type is RATE.
+**Note**: Metrics submitted from Agent based integrations do not have an interval associated to them, so the `as_count()` and `as_rate()` modifiers have no effect upon an Agent integration metric with the `RATE` in-app type.
 
 Depending on the metric type you applied them to, the behavior differs:
 
@@ -48,7 +48,7 @@ Depending on the metric type you applied them to, the behavior differs:
 * Effect of `as_rate()`:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
-  * Divides the result post-aggregation by the sampling interval in order to normalize it. For example `[1,1,1,1].as_rate()` for a rollup interval of 20s produces `[0.05, 0.05, 0.05, 0.05]`.
+  * Divides the result post-aggregation by the sampling interval in order to normalize it. For example, the following points submitted every second `[1,1,1,1].as_rate()` with a rollup interval of 20s would produce `[0.05, 0.05, 0.05, 0.05]`.
 
 **Note**: There is no normalization on very small intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
@@ -59,7 +59,7 @@ Depending on the metric type you applied them to, the behavior differs:
 * Effect of `as_count()`:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM.
-  * Multiply the result post-aggregation by the sampling interval. For example `[0.05, 0.05, 0.05, 0.05].as_count()` for a rollup interval of 20s produces `[1,1,1,1]`.
+  * Multiply the result post-aggregation by the sampling interval. For example, the following points submitted every second `[0.05, 0.05, 0.05, 0.05].as_count()` with a rollup interval of 20s would produce `[1,1,1,1]`.
 * Effect of `as_rate()`:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
