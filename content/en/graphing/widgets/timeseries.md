@@ -118,7 +118,8 @@ TIMESERIES_SCHEMA = {
         "yaxis":   AXIS_SCHEMA,
         "events":  EVENTS_SCHEMA,
         "markers": MARKERS_SCHEMA,
-        "title":   {"type": "string"}
+        "title":   {"type": "string"},
+        "show_legend": {"type": "boolean"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false
