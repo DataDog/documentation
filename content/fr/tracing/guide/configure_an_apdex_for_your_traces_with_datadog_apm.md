@@ -42,7 +42,7 @@ Saisissez directement votre seuil pour afficher la distribution de vos requêtes
 
 {{< img src="tracing/faq/apdex_update.png" alt="Mise à jour Apdex" responsive="true" >}}
 
-Vous pouvez ensuite enregistrer votre widget pour suivre l'évolution de votre score Apdex au fil du temps :
+Vous pouvez ensuite enregistrer votre widget pour suivre l'évolution de votre score Apdex :
 
 {{< img src="tracing/faq/apm_save.png" alt="Enregistrement Apdex" responsive="true" >}}
 

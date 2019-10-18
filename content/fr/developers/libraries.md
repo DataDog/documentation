@@ -6,7 +6,7 @@ aliases:
   - /fr/developers/faq/monitoring-akka/
 disable_toc: true
 ---
-## Bibliothèques de client pour l'API et DogStatsD
+## Bibliothèques client pour DogstatsD et les API
 
 Le tableau suivant répertorie les bibliothèques de client pour [DogStatsD][1] et l'API officielles et entretenues par la communauté. Certaines bibliothèques prennent en charge l'API et DogStatsD, mais la grande majorité se concentre sur l'un ou l'autre.
 

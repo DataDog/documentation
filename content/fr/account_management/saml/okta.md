@@ -14,7 +14,7 @@ further_reading:
 ---
 Il est conseillé de configurer Datadog en tant qu'application Okta manuellement, et non en utilisant une configuration prédéfinie.
 
-[Consultez la documentation relative à Okta pour découvrir comment configurer SAML 2.0 pour Datadog.][1]
+[Consultez la documentation relative à Okta pour découvrir comment configurer SAML 2.0 pour Datadog][1]
 
 ## Détails généraux
 

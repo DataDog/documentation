@@ -1,7 +1,7 @@
 ---
 title: Supprimer des tests
 type: apicontent
-order: 29.4
+order: 30.4
 external_redirect: "/api/#envoyer-une-suppression"
 ---
 
