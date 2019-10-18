@@ -53,7 +53,7 @@ Si l'APM est activé pour cette application et que vous souhaitez améliorer la 
 
 ### Journalisation dans un fichier
 
-Dans votre fichier Bootstrap ou dans votre code, déclarez l'enregistreur comme suit :
+Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
@@ -87,7 +87,7 @@ var winston = require('winston');
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.File)({
-            name: '<NOM_ENREGISTREUR>',
+            name: '<NOM_LOGGER>',
             filename: '<NOM_FICHIER>.log',
       json: true,
             level: 'info'

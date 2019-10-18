@@ -7,14 +7,14 @@ export function moveToAnchor(id, animate, amount) {
         // calc from objects instead
         if($(window).width() <= 991) {
             // at mobile
-            amount = $('body > header').height();
+            amount = 64.5;
             if($('.announcement_banner.open').length) {
                 amount += $('.announcement_banner.open').height();
             }
             $('.api-nav > div').each(function() { amount += $(this).height(); });
         } else {
             // at desktop
-            amount = $('body > header').height();
+            amount = 64.5;
             if($('.announcement_banner.open').length) {
                 amount += $('.announcement_banner.open').height();
             }

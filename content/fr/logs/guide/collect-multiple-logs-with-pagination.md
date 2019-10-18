@@ -17,7 +17,7 @@ further_reading:
     text: Découvrir comment explorer vos logs
   - link: logs/logging_without_limits
     tag: Documentation
-    text: Logging without Limits
+    text: Logging without Limits*
 ---
 ## Présentation
 
@@ -93,5 +93,7 @@ Pour voir toutes vos pages de logs, continuez à renvoyer votre requête avec le
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+*Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: /fr/api/?lang=bash#get-a-list-of-logs

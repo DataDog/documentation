@@ -15,7 +15,7 @@ git_integration_title: systemd
 guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd
 integration_title: Systemd
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

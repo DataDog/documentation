@@ -128,7 +128,7 @@ instances:
             - <NOM_REGEX_BEAN_EXCLU>
       - include:
           bean_regex: regex_topic=(.*?)
-          attribute:
+          attribute: 
             attribute1:
               metric_type: gauge
               alias: jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>
@@ -172,7 +172,7 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 [5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [7]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/?tab=kubernetes
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=files#setting-up-check-templates
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -338,6 +338,15 @@ Les checks JMX possèdent également une configuration par défaut qui recueille
 
 {{< get-metrics-from-git >}}
 
+**Remarque** : définissez `new_gc_metrics: true` dans votre fichier [jmx.d/conf.yaml][12] pour remplacer les métriques suivantes :
+
+```
+jvm.gc.cms.count   => jvm.gc.minor_collection_count
+                      jvm.gc.major_collection_count
+jvm.gc.parnew.time => jvm.gc.minor_collection_time
+                      jvm.gc.major_collection_time
+```
+
 ## Dépannage
 
 Consultez la liste des [commandes et la FAQ de dépannage JMX][7].
@@ -356,6 +365,7 @@ Consultez la liste des [commandes et la FAQ de dépannage JMX][7].
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
 [10]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [11]: https://docs.datadoghq.com/fr/getting_started/integrations/#setting-up-an-integration
+[12]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
 
 
 {{< get-dependencies >}}

@@ -11,12 +11,12 @@ description: Surveillez des métriques clés d'Amazon Internet of Things.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_iot/'
 git_integration_title: amazon_iot
 has_logo: true
-integration_title: "AWS\_Internet\_of\_Things"
+integration_title: "Amazon\_Internet\_of\_Things"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_iot
-public_title: Intégration Datadog/AWS Internet of Things
+public_title: "Intégration Datadog/Amazon\_ Internet\_of\_Things"
 short_description: Surveillez des métriques clés d'Amazon Internet of Things.
 version: '1.0'
 ---

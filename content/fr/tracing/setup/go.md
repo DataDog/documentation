@@ -28,7 +28,7 @@ Pour connaître la définition des termes utilisés dans l'APM, consultez la [se
 Consultez le [document sur la migration][4] si vous devez migrer d'une ancienne version du traceur (p. ex. v<0.6.x) vers la dernière version.
 
 ### Installation
-<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=go" target=_blank> basées sur un host</a> et <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=go" target=_blank>basées sur un conteneur</a>.</div>
+<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=go" target=_blank> basées sur un host</a> et les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=go" target=_blank>basées sur un conteneur</a>.</div>
 
 Commencez par [installer et configurer l'Agent Datadog][5]. Consultez la documentation supplémentaire relative au [traçage d'applications Docker][6] ou au [traçage d'applications Kubernetes][7].
 

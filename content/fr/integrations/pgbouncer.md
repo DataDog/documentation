@@ -37,7 +37,7 @@ Le check PgBouncer surveille les métriques du pool de connexions et vous permet
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -85,7 +85,7 @@ stats_users = datadog
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
     ```yaml
-    logs_enabled: true
+      logs_enabled: true
     ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `pgbouncer.d/conf.yaml` pour commencer à recueillir vos logs Pgbouncer :
@@ -104,26 +104,26 @@ stats_users = datadog
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `pgbouncer` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `pgbouncer` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "pgbouncer" >}}
 
 
-Remarque : toutes les métriques ne sont pas disponibles avec toutes les versions de PgBouncer.
+**Remarque** : les métriques ne sont pas toutes disponibles pour toutes les versions de PgBouncer.
 
 ### Événements
 Le check PgBouncer n'inclut aucun événement.
 
 ### Checks de service
 
-`pgbouncer.can_connect` :
-
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à PgBouncer pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**pgbouncer.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à PgBouncer pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
+
 
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent

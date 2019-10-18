@@ -43,12 +43,13 @@ L'intégration Amazon Elastic Transcoder n'inclut aucun événement.
 L'intégration Amazon Elastic Transcoder n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-
-
-{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-elastic-transcoder
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elastic_transcoder/amazon_elastic_transcoder_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/
+
+
+{{< get-dependencies >}}

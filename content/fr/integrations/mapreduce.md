@@ -39,17 +39,20 @@ Recueillez des métriques du service MapReduce en temps réel pour :
 * Être informé des failovers et des événements de MapReduce
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Mapreduce est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check Mapreduce est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `mapreduce.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `mapreduce.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `mapreduce` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `mapreduce` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -71,27 +74,28 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Application 
 Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-* [Vue d'ensemble de l'architecture Hadoop][8]
-* [Comment surveiller des métriques Hadoop][9]
-* [Comment recueillir des métriques Hadoop][10]
-* [Comment surveiller Hadoop avec Datadog][11]
+* [Vue d'ensemble de l'architecture Hadoop][9]
+* [Comment surveiller des métriques Hadoop][10]
+* [Comment recueillir des métriques Hadoop][11]
+* [Comment surveiller Hadoop avec Datadog][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[9]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[10]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[11]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[12]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
 
 
 {{< get-dependencies >}}

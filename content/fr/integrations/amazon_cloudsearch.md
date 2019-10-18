@@ -12,12 +12,12 @@ description: 'Surveillez l''utilisation de vos index, le nombre de requêtes ré
 doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
 git_integration_title: amazon_cloudsearch
 has_logo: true
-integration_title: "AWS\_CloudSearch"
+integration_title: "Amazon\_CloudSearch"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudsearch
-public_title: "Intégration Datadog/AWS\_CloudSearch"
+public_title: "Intégration Datadog/Amazon\_CloudSearch"
 short_description: 'Surveillez l''utilisation de vos index, le nombre de requêtes réussies, et plus encore.'
 version: '1.0'
 ---

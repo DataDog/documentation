@@ -169,7 +169,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
-Consult Ned Batchelder’s [Pragmatic Unicode][10] for further details.
+Consult Ned Batchelder’s [Pragmatic Unicode][11] for further details.
 
 ### Print
 

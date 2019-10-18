@@ -16,7 +16,7 @@ L'objet `Index` décrit la configuration d'un index de log. Voici ses attributs�
     nom de l'index.
 * **`filter.query`** :
     seuls les logs qui correspondent aux critères du filtre sont pris en compte pour cet index.
-    requête de recherche respecte la [syntaxe de recherche de log][1].
+    requête de recherche respectant la [syntaxe de recherche de log][1].
 * **`num_retention_days`** (lecture seule) :
     nombre de jours avant la suppression des logs de cet index.
 * **`daily_limit`** (lecture seule) :

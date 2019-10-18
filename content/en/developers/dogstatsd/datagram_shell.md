@@ -25,7 +25,7 @@ This section specifies the raw datagram format for metrics, events, and service 
 |-------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][1].                                    |
 | `<VALUE>`                           | Yes      | An integer or float.                                                                                                                             |
-| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2])                            |
+| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2].                            |
 | `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. The default is `1`, which samples 100% of the time. |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). See the [tagging documentation][3] for guidance on defining tags. |
 
@@ -53,9 +53,9 @@ Here are some example datagrams:
 | `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
 | `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
-| `k:aggregation_key`                  | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
+| `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
 | `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
-| `s:source_type_name`                 | No       | Add a source type to the event. No default.                                                                            |
+| `s:<SOURCE_TYPE_NAME>`               | No       | Add a source type to the event. No default.                                                                            |
 | `t:<ALERT_TYPE>`                     | No       | Set to `error`, `warning`, `info` or `success`. Default `info`.                                                        |
 | `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
 
@@ -98,7 +98,7 @@ _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 
 For Linux and other Unix-like OS, use Bash. For Windows, use PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits).
 
-DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is  `127.0.0.1` and the collector port over UDP port is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
+DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is  `127.0.0.1` and the collector port over UDP is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -199,7 +199,7 @@ To send metrics, events, or service checks on containerized environments, refer 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
+[2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /developers/dogstatsd
 [4]: /agent/kubernetes/dogstatsd
 [5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing

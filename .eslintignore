@@ -8,4 +8,3 @@ src/scripts/components/header.js
 src/scripts/components/integrations.js
 src/scripts/components/platforms.js
 src/scripts/components/sidenav.js
-src/scripts/components/table-of-contents.js
