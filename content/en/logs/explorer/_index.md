@@ -183,9 +183,7 @@ Note: To leverage the most out of your Log explorer view, make sure your logs at
 {{< tabs >}}
 {{% tab "Facets" %}}
 
-A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics, such as the number of logs represented. This is also a switch to easily filter your data.
-
-Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
 {{< img src="logs/explorer/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
