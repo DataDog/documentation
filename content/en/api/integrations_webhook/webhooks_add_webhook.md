@@ -5,7 +5,7 @@ order: 20.3
 external_redirect: /api/#update-a-webhooks-integration
 ---
 
-## Add a Webhook to a Webhooks Integration
+## Update a Webhooks Integration
 
 Add a specific Webhook to a Datadog Webhooks integration.
 
