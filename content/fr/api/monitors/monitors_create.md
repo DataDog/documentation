@@ -48,7 +48,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 
     *   `change_aggr` : change, pct_change.
     *   `time_aggr` : avg, sum, max, min. [En savoir plus][3].
-    *   `time_window` : last_#m (1, 5, 10, 15 ou 30), last_#h (1, 2 ou 4) ou last_#d (1 ou 2).
+    *   `time_window` : last\_#m (1, 5, 10, 15 ou 30), last\_#h (1, 2 ou 4) ou last_#d (1 ou 2).
     *   `timeshift` : #m_ago (5, 10, 15 ou 30), #h_ago (1, 2 ou 4) ou 1d_ago.
 
     Utilisez ce paramètre pour créer un monitor outlier à l'aide de la requête suivante : `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`.
