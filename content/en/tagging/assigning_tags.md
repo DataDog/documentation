@@ -400,7 +400,7 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 
 ### Azure
 
-For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
+For Azure integrations, metrics, events, and service checks receive the following tags:
 
 | Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                                          |
 |-------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
