@@ -34,6 +34,9 @@ Recueillez des métriques du service linux_proc_extras en temps réel pour :
 * Être informé des failovers et des événements de linux_proc_extras.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 Le check Linux_proc_extras est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
@@ -43,11 +46,11 @@ Le check Linux_proc_extras est inclus avec le paquet de l'[Agent Datadog][1] : 
 Modifiez le fichier `linux_proc_extras.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple linux_proc_extras.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 #### Collecte de métriques
-Le check Linux Proc Extras peut potentiellement générer des [métriques custom][6], qui peuvent avoir une incidence sur votre [facturation][7]. 
+Le check Linux Proc Extras peut potentiellement générer des [métriques custom][4], ce qui peut avoir une incidence sur votre [facture][5]. 
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][4] et cherchez `linux_proc_extras` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `linux_proc_extras` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -61,15 +64,16 @@ Le check Linux Proc Extras n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/datadog_checks/linux_proc_extras/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://docs.datadoghq.com/fr/help
-[6]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[7]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

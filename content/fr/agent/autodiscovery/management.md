@@ -36,7 +36,6 @@ Pour supprimer un conteneur Docker donné avec le nom `<NOM>` d'Autodiscovery, a
 ac_exclude: [name:<NOM>]
 ```
 
-
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
@@ -65,11 +64,12 @@ Dans l'exemple suivant, la configuration indique à l'Agent d'ignorer certains c
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-**Remarque** : vous pouvez également utiliser une expression régulière pour tout ignorer : `DD_AC_EXCLUDE = "image:dockercloud/*"`.
-
+Vous pouvez également utiliser une expression régulière pour tout ignorer : `DD_AC_EXCLUDE = "image:dockercloud/*"`.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Remarque** : si vous utilisez Kubernetes, le conteneur `<NOM>` correspond au `.spec.containers[0].name` dans votre manifeste.
 
 ## Inclure des conteneurs
 
@@ -92,7 +92,6 @@ Pour inclure un conteneur Docker donné avec le nom `<NOM>` d'Autodiscovery, ajo
 ac_include: [name:<NOM>]
 ```
 
-
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
@@ -109,7 +108,7 @@ Pour inclure un conteneur Docker donné avec le nom `<NOM>` d'Autodiscovery, ajo
 DD_AC_INCLUDE = "name:<NOM>"
 ```
 
-Par exemple, si vous souhaitez surveiller uniquement des images `ubuntu` ou `debian` et exclure le reste, indiquez ce qui suit :
+Par exemple, si vous souhaitez surveiller uniquement les images `ubuntu` ou `debian` et exclure le reste, indiquez ce qui suit :
 
 ```
 DD_AC_EXCLUDE = "image:.*"
@@ -119,6 +118,7 @@ DD_AC_INCLUDE = "image:ubuntu image:debian"
 {{% /tab %}}
 {{< /tabs >}}
 
+**Remarque** : si vous utilisez Kubernetes, le conteneur `<NOM>` correspond au `.spec.containers[0].name` dans votre manifeste.
 
 ### Conteneurs pause
 
