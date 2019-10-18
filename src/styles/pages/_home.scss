@@ -122,8 +122,6 @@
             padding: 16px 41px;
             flex: 1 1 auto;
             width: 25%;
-            
-            
 
             .inner-content {
                 position: relative;
@@ -180,7 +178,12 @@
             a {
                 padding: 10px 27px;
                 box-shadow: 0px 1px 1px rgba(30, 5, 36, 0.16),
-            0px 1px 4px rgba(30, 5, 36, 0.24);
+                    0px 1px 4px rgba(30, 5, 36, 0.24);
+                transition: box-shadow ease-in-out 0.16s;
+                &:hover {
+                    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.16),
+                        0px 4px 12px rgba(0, 0, 0, 0.24);
+                }
             }
             svg {
                 width: 15px;

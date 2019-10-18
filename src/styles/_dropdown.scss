@@ -570,4 +570,8 @@ $responsive-breakpoint: 768px
   color: #8821A2 !important;
   background: #F9F0FB !important;
   box-shadow: none !important;
-} 
+}
+
+.algolia-docsearch-suggestion--subcategory-column, .algolia-docsearch-suggestion--text {
+  color: #4B4B4B !important;
+}
