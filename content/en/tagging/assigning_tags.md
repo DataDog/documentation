@@ -402,12 +402,14 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 
 For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
 
-| Integration                             | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                                        |
-|-----------------------------------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All Azure integrations                  | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                                                   |
-| Azure VMs integration                   | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                                                 |
-| Azure App Service Plans                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                                        |
-| Azure App Services Web Apps & Functions | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, plus (as applicable): `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version` |
+| Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                                          |
+|-------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations                                | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                                                     |
+| Azure VMs integration                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                                                   |
+| Azure App Service Plans<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                                          |
+| Azure App Services Web Apps & Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`<br>Plus (as applicable): `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version` |
+
+<sup>(1)</sup>*Resource-specific tags are in beta.*
 
 ## Further Reading
 
