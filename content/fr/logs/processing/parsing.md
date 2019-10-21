@@ -11,7 +11,7 @@ further_reading:
   - link: logs/faq/how-to-investigate-a-log-parsing-issue
     tag: FAQ
     text: "Comment étudier un problème de parsing de log\_?"
-  - link: logs/faq/log-parsing-best-practice
+  - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: "Parsing de log\_: bonnes pratiques à adopter"
   - link: logs/logging_without_limits
@@ -30,7 +30,7 @@ Les règles de parsing peuvent être écrites avec la syntaxe `%{MATCHER:EXTRACT
 
 * **Matcher**: règle (éventuellement une référence à une autre règle token) qui décrit à quoi s'attendre (number, word, notSpace, etc.).
 
-* **Extract** (facultatif) : un identifiant représentant la destination d'enregistrement pour le morceau de texte correspondant au MATCHER.
+* **Extract** (facultatif) : un identifiant représentant la destination d'enregistrement pour le morceau de texte correspondant au *Matcher*.
 
 * **Filter** (facultatif) : un post-processeur de la correspondance afin de la transformer.
 
@@ -48,7 +48,9 @@ On obtient alors ce log structuré :
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Exemple de parsing 1" responsive="true" style="width:80%;">}}
 
-**Remarque** : si vous cumulez plusieurs règles de parsing dans un seul parser Grok, une seule d'entre elles peut renvoyer un log donné. La première qui correspond en totalité est celle qui effectue le parsing.
+**Remarque** :
+- Si vous cumulez plusieurs règles de parsing dans un seul parser Grok, une seule d'entre elles peut renvoyer un log donné. La première qui correspond en totalité est celle qui effectue le parsing.
+- Les noms des règles au sein d'un même parser Grok doivent être uniques.
 
 ### Matcher et filtre
 
@@ -67,11 +69,11 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `boolean("truePattern", "falsePattern")`        | Renvoie et analyse une valeur booléenne qui définit de façon facultative les expressions true et false (par défaut 'true' et 'false' en ignorant la casse).       |
 | `numberStr`                                     | Renvoie un nombre décimal à virgule flottante et l'analyse en tant que chaîne.                                                                 |
 | `number`                                        | Renvoie un nombre décimal à virgule flottante et l'analyse en tant que nombre à double précision.                                                |
-| `numberExtStr`                                  | Renvoie un nombre à virgule flottante (avec prise en charge de la notation scientifique).                                                                |
+| `numberExtStr`                                  | Renvoie un nombre à virgule flottante (avec prise en charge de la notation scientifique) et l'analyse en tant que chaîne.                                                                |
 | `numberExt`                                     | Renvoie un nombre à virgule flottante (avec prise en charge de la notation scientifique) et l'analyse en tant que nombre à double précision.                     |
-| `integerStr`                                    | Renvoie un nombre entier décimal et l'analyse en tant que chaîne.                                                                        |
-| `integer`                                       | Renvoie un nombre entier décimal et l'analyse en tant que nombre entier.                                                               |
-| `integerExtStr`                                 | Renvoie un nombre entier (avec prise en charge de la notation scientifique).                                                                      |
+| `integerStr`                                    | Renvoie un nombre entier et l'analyse en tant que chaîne.                                                                        |
+| `integer`                                       | Renvoie un nombre entier et l'analyse en tant que nombre entier.                                                               |
+| `integerExtStr`                                 | Renvoie un nombre entier (avec prise en charge de la notation scientifique) et l'analyse en tant que chaîne.                                                                      |
 | `integerExt`                                    | Renvoie un nombre entier (avec prise en charge de la notation scientifique) et l'analyse en tant que nombre entier.                                   |
 | `word`                                          | Renvoie les caractères a à z, A à Z, 0 à 9, y compris le caractère _ (underscore).                                                                                                      |
 | `doubleQuotedString`                            | Renvoie une chaîne entre guillemets.                                                                                                    |
@@ -102,7 +104,7 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `rubyhash`                                                     | Analyse un hash Ruby correctement formaté (par exemple, `{nom=> "John", "poste" => {"entreprise" => "Grosse entreprise", "titre" => "Directeur technique"}}`).                                    |
 | `useragent([decodeuricomponent:true/false])`                   | Analyse un user agent et renvoie un objet JSON qui contient l'appareil, le système d'exploitation et le navigateur représenté par l'Agent. [En savoir plus sur le processeur d'user-agent][1]. |
 | `querystring`                                                  | Extrait toutes les paires clé/valeur d'une chaîne de requête URL correspondante (par exemple, `?productId=superproduct&promotionCode=superpromo`).                                |
-| `decodeuricomponent`                                           | Ce filtre décode les composants d'un URI.                                                                                                                  |
+| `decodeuricomponent`                                           | Ce filtre décode les composants d'un URI. Par exemple, il permet de transformer `%2Fservice%2Ftest` en `/service/test`.                                                                                                                  |
 | `lowercase`                                                    | Renvoie la chaîne en minuscules.                                                                                                                           |
 | `uppercase`                                                    | Renvoie la chaîne en majuscules.                                                                                                                           |
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extrait une expression clé/valeur et renvoie un objet JSON. [Consulter les exemples de filtres clé/valeur](#cle-valeur).                                                        |
@@ -154,13 +156,32 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 ## Exemples
 Vous trouverez ci-dessous plusieurs exemples d'utilisations des parsers :
 
+* [Key/value](#key-value)
+* [Parsing de dates](#parsing-dates)
+* [Modèles conditionnels](#conditional-pattern)
+* [Attribut facultatif](#optional-attribute)
+* [JSON imbriqué](#nested-json)
+* [Regex](#regex)
+
 ### Key/value
 
-Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])`, où :
+Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])`, où :
 
 * `separatorStr` : définit le séparateur. Par défaut, `=`.
-* `characterWhiteList` : définit des caractères supplémentaires non échappés. Par défaut, `\\w.\\-_@`.
-* `quotingStr` : définit les guillemets. Le comportement par défaut détecte les guillemets (`<>`, `"\"\""`, etc.). Lorsqu'il est défini, le comportement par défaut est remplacé en autorisant uniquement les caractères de guillemets définis. Par exemple `<>` correspond à *test=<toto sda> test2=test*.
+* `characterWhiteList` : définit des caractères supplémentaires non échappés. Par défaut, `\\w.\\-_@`. Uniquement utilisé pour les valeurs sans guillemets (par exemple, `key=@valueStr`).
+* `quotingStr` : définit des guillemets. Par défaut, permet de détecter les guillemets (`<>`, `"\"\""`, etc.). 
+  * Lorsqu'il est défini, le comportement par défaut est remplacé et seuls les guillemets définis sont alors autorisés.
+  * Les entrées sont toujours mises en correspondance en ignorant les guillemets, quelle que soit la valeur définie pour `quotingStr`. 
+  * Toute chaîne définie entre les guillemets est extraite en tant que valeur.
+
+    Par exemple, l'entrée `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"` avec la règle de parsing `parsing_rule  {data::keyvalue(":=","","<>")}` donne la sortie suivante : `{
+    "key": [
+      "valueStr",
+      "/$%@valueStr2"
+    ]
+  }`
+
+**Remarque** : si vous définissez un filtre *keyvalue* sur un objet `data` et que ce filtre n'est pas mis en correspondance, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
 
 Utilisez des filtres tels que **keyvalue()** pour mapper plus facilement des chaînes à des attributs :
 
@@ -179,7 +200,7 @@ rule %{data::keyvalue}
 {{< img src="logs/processing/parsing/parsing_example_2.png" alt="Exemple de parsing 2" responsive="true" style="width:80%;">}}
 
 Vous n'avez pas besoin de spécifier le nom de vos paramètres, car ils sont déjà contenus dans le log.
-Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre modèle de règles, vous obtenez :
+Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre pattern de règles, vous obtenez :
 
 {{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Exemple de parsing 2 bis" responsive="true" style="width:80%;">}}
 
@@ -224,15 +245,15 @@ Autres exemples :
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
-| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
 
 ### Parsing de dates
 
-Le matcher de date convertit votre timestamp au format EPOCH.
+Le matcher de date convertit votre timestamp au format EPOCH (unité de mesure : **millisecondes**).
 
 | **Chaîne brute**                           | **Règle de parsing**                                          | **Résultat**              |
 | :---                                     | :----                                                     | :----                   |
 | 14:20:15                                 | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
+| 02:20:15 PM                              | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
 | 11/10/2014                               | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
 | Thu Jun 16 08:29:03 2016                 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
 | Tue Nov 1 08:29:03 2016                  | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
@@ -241,7 +262,7 @@ Le matcher de date convertit votre timestamp au format EPOCH.
 | 2016-11-29T16:21:36.431+00:00            | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655                 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
+| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
 
 <sup>1</sup> Utilisez ce format si vous effectuez vos propres localisations et que vos timestamps ne sont _pas_ au fuseau UTC. Les identifiants de fuseaux horaires sont extraits de la base de données TZ. Pour en savoir plus, consultez les [noms des bases de données TZ][1].
 
@@ -249,7 +270,7 @@ Le matcher de date convertit votre timestamp au format EPOCH.
 
 ### Modèle conditionnel
 
-Il arrive que vos logs se présentent dans deux formats différents, avec un unique attribut comme seule différence. Ces cas peuvent être traités avec une seule règle, en utilisant des instructions conditionnelles avec `|`.
+Il arrive que vos logs se présentent dans deux formats différents, avec un unique attribut comme seule différence. Ces cas peuvent être traités avec une seule règle, en utilisant des instructions conditionnelles avec `(<REGEX_1>|<REGEX_2>)`.
 
 **Log** :
 ```
@@ -289,6 +310,25 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 {{< img src="logs/processing/parsing/parsing_example_5.png" alt="Exemple de parsing 5" responsive="true" style="width:80%;" >}}
 
 {{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Exemple de parsing 5 bis" responsive="true" style="width:80%;" >}}
+
+### JSON imbriqué
+
+Utilisez le *filtre* `json` pour effectuer le parsing d'un objet JSON imbriqué après un préfixe de texte brut :
+
+**Log** :
+
+```
+Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
+```
+
+**Règle** :
+
+```
+parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
+```
+
+{{< img src="logs/processing/parsing/nested_json.png" alt="Exemple de parsing d'objet JSON imbriqué" responsive="true" style="width:80%;" >}}
+
 
 ### Regex
 Utilisez le matcher regex pour identifier une sous-chaîne de votre message de log en fonction de règles littérales regex.

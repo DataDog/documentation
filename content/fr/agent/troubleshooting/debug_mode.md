@@ -13,7 +13,7 @@ further_reading:
     tag: Dépannage de l'Agent
     text: Obtenir le statut d'un check de l'Agent
 ---
-## Agent host
+## Agent
 
 Pour activer le mode debugging complet de l'Agent :
 
@@ -48,7 +48,7 @@ Pour activer le mode debugging complet de l'Agent :
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent de conteneur
+## Agent conteneurisé
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -107,16 +107,16 @@ Le conteneur peut également être redémarré.
 
 Les niveaux de log de l'Agent suivants sont disponibles pour `log_level` ou `DD_LOG_LEVEL` :
 
-| Option  | Logs critiques | Logs d'erreur | Logs d'avertissement | Logs d'information | Logs de debugging | Logs de trace | Tous les logs |
-|---------|------------|------------|-----------|-----------|------------|------------|----------|
-| `OFF`   |            |            |           |           |            |            |          |
-| `FATAL` | X          |            |           |           |            |            |          |
-| `ERROR` | X          | X          |           |           |            |            |          |
-| `WARN`  | X          | X          | X         |           |            |            |          |
-| `INFO`  | X          | X          | X         | X         |            |            |          |
-| `DEBUG` | X          | X          | X         | X         | X          |            |          |
-| `TRACE` | X          | X          | X         | X         | X          | X          |          |
-| `ALL`   | X          | X          | X         | X         | X          | X          | X        |
+| Option  | Logs critiques | Logs d'erreur | Logs d'avertissement | Logs d'information | Logs de debugging | Logs de trace | Tous les logs  |
+|---------|------------|------------|-----------|-----------|------------|------------|-----------|
+| `OFF`   |            |            |           |           |            |            |           |
+| `FATAL` | {{< X >}}  |            |           |           |            |            |           |
+| `ERROR` | {{< X >}}  | {{< X >}}  |           |           |            |            |           |
+| `WARN`  | {{< X >}}  | {{< X >}}  | {{< X >}} |           |            |            |           |
+| `INFO`  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |           |
+| `DEBUG` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |           |
+| `TRACE` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |           |
+| `ALL`   | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} |
 
 ## Pour aller plus loin
 
