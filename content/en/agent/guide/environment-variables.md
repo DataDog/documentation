@@ -45,7 +45,7 @@ In general, use the following rules:
       # DD_CLUSTER_AGENT_CMD_PORT=5005
    ```
 
-* The nesting of config options with **user-defined** keys must be json-formatted:
+* The nesting of config options with **user-defined** keys must be JSON-formatted:
    ```yaml
       docker_env_as_tags:
         ENVVAR_NAME: tag_name
