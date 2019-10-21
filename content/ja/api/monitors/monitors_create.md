@@ -48,7 +48,7 @@ external_redirect: '/api/#create-a-monitor'
 
     *   `change_aggr` change、pct_change
     *   `time_aggr` avg、sum、max、min [詳細はこちら][3]
-    *   `time_window` last\_#m (1、5、10、15、30)、last\_#h (1、2、4)、または last_#d (1 または 2)
+    *   `time_window` last_#m (1、5、10、15、30)、last_#h (1、2、4)、または last_#d (1 または 2)
     *   `timeshift` #m_ago (5、10、15、30)、#h_ago (1、2、4)、または 1d_ago
 
     次のクエリを使用して、外れ値モニターを作成できます: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`
