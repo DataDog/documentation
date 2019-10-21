@@ -1,8 +1,8 @@
 ---
 title: Get available locations
 type: apicontent
-order: 30.91
-external_redirect: /api/#get-available-locations
+order: 31.91
+external_redirect: /api/#get-locations
 ---
 
 ## Get available locations

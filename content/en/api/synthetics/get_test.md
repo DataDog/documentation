@@ -1,8 +1,8 @@
 ---
 title: Get a test
 type: apicontent
-order: 30.8
-external_redirect: /api/#get-a-test
+order: 31.8
+external_redirect: /api/#get-test
 ---
 
 ## Get a test

@@ -1,7 +1,7 @@
 ---
 title: ログの 1 時間あたり使用量の取得
 type: apicontent
-order: 33.2
+order: 34.2
 external_redirect: "/api/#get-hourly-usage-for-logs"
 ---
 

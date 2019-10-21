@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour la séquence des index
 type: apicode
-order: 23.5
+order: 24.5
 external_redirect: "/api/#mettre-ajour-la-sequence-des-index"
 ---
 

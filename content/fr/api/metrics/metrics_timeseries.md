@@ -1,7 +1,7 @@
 ---
 title: Envoyer des points de séries temporelles
 type: apicontent
-order: 25.2
+order: 26.2
 external_redirect: '/api/#envoyer-des-points-de-series-temporelles'
 ---
 ## Envoyer des points de séries temporelles

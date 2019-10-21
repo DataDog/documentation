@@ -1,7 +1,7 @@
 ---
 title: Démarrer ou interrompre un test
 type: apicode
-order: 30.2
+order: 31.2
 external_redirect: "/api/#test-de-statut"
 ---
 

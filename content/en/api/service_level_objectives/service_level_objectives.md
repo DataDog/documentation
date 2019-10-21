@@ -1,7 +1,7 @@
 ---
 title: Service Level Objectives
 type: apicontent
-order: 29
+order: 30
 external_redirect: /api/#servicelevelobjectives
 ---
 ## Service Level Objectives

@@ -1,7 +1,7 @@
 ---
 title: Slack インテグレーションの取得
 type: apicontent
-order: 19.1
+order: 20.1
 external_redirect: "/api/#get-slack-integration"
 ---
 

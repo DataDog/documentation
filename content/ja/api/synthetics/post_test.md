@@ -1,7 +1,7 @@
 ---
 title: テストの作成
 type: apicontent
-order: 29.1
+order: 30.1
 external_redirect: '/api/#create-tests'
 ---
 ## テストの作成

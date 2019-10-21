@@ -1,8 +1,8 @@
 ---
 title: Get all tests
 type: apicode
-order: 30.7
-external_redirect: /api/#get-all-tests
+order: 31.7
+external_redirect: /api/#get-tests
 ---
 
 **SIGNATURE**:

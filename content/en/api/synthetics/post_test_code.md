@@ -1,8 +1,8 @@
 ---
 title: Create a test
 type: apicode
-order: 30.1
-external_redirect: /api/#create-a-test
+order: 31.1
+external_redirect: /api/#create-tests
 ---
 
 **SIGNATURE**:

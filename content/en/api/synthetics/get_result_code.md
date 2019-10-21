@@ -1,8 +1,8 @@
 ---
 title: Get a specific result
 type: apicode
-order: 30.6
-external_redirect: /api/#get-a-specific-result
+order: 31.6
+external_redirect: /api/#get-result
 ---
 
 **SIGNATURE**:
