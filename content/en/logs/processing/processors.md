@@ -516,6 +516,109 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 {{% /tab %}}
 {{< /tabs >}}
 
+## String builder processor
+
+Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template.
+This enables aggregation of different attributes or raw strings into a single attribute.
+
+The template is defined by both raw text and blocks with the syntax: `%{attribute_path}`.
+
+**Notes**:
+
+* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
+* If the target attribute already exists, it is overwritten by the result of the template.
+* Results of the template cannot exceed 256 characters.
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Define the string builder processor on the [Datadog log configuration page][1]:
+
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor" responsive="true" style="width:80%;">}}
+
+**Example**
+
+With the following log:
+
+```
+{
+	"http": {
+		"method": "GET",
+		"status_code": 200,
+		"url": "https://app.datadoghq.com/users"
+	},
+	"array_ids": [123, 456, 789],
+	"array_users": [
+    {
+			"first_name": "John",
+			"last_name": "Doe"
+		},
+		{
+			"first_name": "Jack",
+			"last_name": "London"
+		}
+	]
+}
+```
+
+You can use the template: `Request %{http.method} %{http.url} was answered with response %{http.status_code}`, which returns the result:
+
+```
+Request GET https://app.datadoghq.com/users was answered with response 200
+```
+
+**Objects** 
+
+In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
+
+**Arrays**
+
+Blocks can be used on arrays of values or on a specific attribute within an array. For the example log, adding the block `%{array_ids}` returns:
+
+```
+123,456,789
+```
+
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{arrays_user.first_name}` returns a list of `first_name` contained in the array:
+
+```
+John,Jack
+```
+
+[1]: https://app.datadoghq.com/logs/pipelines
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following string builder processor JSON payload:
+
+```json
+{
+    "type": "string-builder-processor",
+    "name": "<PROCESSOR_NAME>",
+    "enabled": true,
+    "template": "<STRING_BUILDER_TEMPLATE>",
+    "target": "<TARGET_ATTRIBUTE>",
+    "replaceMissing": true
+}
+```
+
+| Parameter        | Type    | Required | Description                                                                                                                                 |
+| ------           | -----   | -------- | -----                                                                                                                                       |
+| `type`           | String  | Yes      | Type of the processor.                                                                                                                       |
+| `name`           | String  | No       | Name of the processor.                                                                                                                       |
+| `enabled`        | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                       |
+| `template`       | String  | Yes      | A formula with one or more attributes and raw text.                                                                                           |
+| `target`         | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
+| `replaceMissing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
+
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
 ## GeoIP Parser
 
 The GeoIP parser takes an IP address attribute and extracts if available the Continent, Country, Subdivision, and City information in the target attribute path.
