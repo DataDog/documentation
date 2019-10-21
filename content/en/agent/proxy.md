@@ -73,7 +73,7 @@ proxy:
       - host2
 ```
 
-**Proxy with environment variables**:
+#### Environment variables
 
 Starting with Agent v6.4, you can set your proxy settings through environment variables:
 
