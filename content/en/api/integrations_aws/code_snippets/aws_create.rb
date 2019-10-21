@@ -14,4 +14,4 @@ config = {
   "account_specific_namespace_rules": {"auto_scaling": false, "opsworks": false}
 }
 
-dog.create_integration('aws',config)
+dog.create_aws_integration(config)
