@@ -94,11 +94,11 @@ Toute métrique envoyant des informations à Datadog peut être évaluée par un
 
 #### Groupe d'alertes
 
-Les alertes sont automatiquement groupées en fonction de votre sélection à l'étape `Grouper par` lors de la définition de votre métrique. Si aucun groupe n'est spécifié, le groupage par défaut est `alerte simple`. Si des groupes sont sélectionnés, le groupage par défaut est `alerte multiple`.
+Les alertes sont automatiquement regroupées en fonction de l'option choisie dans le champ `Group by` lors de la définition de votre métrique. Si aucun groupe n'est spécifié, le paramètre de regroupement par défaut est `Simple Alert`. Si des groupes sont sélectionnés, le paramètre de regroupement par défaut est `Multi Alert`.
 
-Les alertes simples agrègent vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies. Ces alertes sont particulièrement utiles pour surveiller une métrique depuis un seul host ou pour une métrique agrégée sur de nombreux hosts.
+Les alertes simples agrègent vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies. Ces alertes sont particulièrement utiles pour surveiller une métrique issue d'un seul host ou une métrique agrégée à partir de nombreux hosts.
 
-Les alertes multiples appliquent l'alerte à chaque source en fonction de vos paramètres de groupe. Vous recevez une alerte pour chaque groupe qui répond aux conditions définies. Par exemple, vous pouvez grouper `system.disk.in_use` par `host` et `device` pour recevoir une alerte distincte pour chaque device de host qui manque d'espace.
+Les alertes multiples appliquent l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour chaque groupe qui répond aux conditions définies. Par exemple, vous pouvez regrouper `system.disk.in_use` par `host` et `device` pour recevoir une alerte distincte pour chaque appareil de host qui manque d'espace disque.
 
 ### Définir vos conditions d'alerte
 
@@ -107,9 +107,9 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 {{< tabs >}}
 {{% tab "Seuil" %}}
 
-* Déclenche lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to`
-* le seuil `on average`, `at least once`, `at all times` ou `in total`
-* durant les dernières `5 minutes`, `15 minutes`, `1 hour`, etc.
+* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieur ou égale à, inférieure ou égale à)
+* la valeur seuil `on average`, `at least once`, `at all times` ou `in total` (en moyenne, au moins une fois, en permanence ou au total)
+* sur `5 minutes`, `15 minutes`, `1 hour`, etc.
 
 **Définitions** :
 
@@ -125,7 +125,7 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 * La valeur `average`, `maximum`, `minimum` ou `in total` (moyenne, maximale, minimale ou totale)
 * du `change` ou `% change` (changement ou changement relatif)
-* mesurée il y a `5 minutes`, `15 minutes`, `1 hour`, etc.
+* mesurée sur `5 minutes`, `15 minutes`, `1 hour`, etc.
 * par rapport à la valeur mesurée `5 minutes`, `15 minutes`, `1 hour`, etc. plus tôt
 * est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure, inférieure ou égale à) la valeur seuil.
 
@@ -162,7 +162,7 @@ Ce paramètre vous permet de choisir à quel moment un monitor doit être évalu
 
 **Require** (par défaut) : le monitor n'est pas évalué tant que des données ne sont pas disponibles pour l'ensemble de l'intervalle de mesure. Par exemple, lorsqu'un nouveau host est mis en place, sa charge processeur peut augmenter pendant une ou deux minutes. L'envoi d'une alerte n'est pas nécessaire si la charge processeur revient rapidement à la normale.
 
-**Do not require** : le monitor est évalué dès qu'il est reconnu. Choisissez cette option si vos points de données sont très éloignés. Dans le cas contraire, le monitor risque de ne pas être évalué car l'intervalle de mesure ne sera jamais considéré comme « comblé ».
+**Do not require** : le monitor est évalué dès qu'il est reconnu. Choisissez cette option si vos points de données sont très éloignés. Sinon, le monitor risque de ne pas être évalué car l'intervalle de mesure ne sera jamais considéré comme « comblé ».
 
 #### No data
 
