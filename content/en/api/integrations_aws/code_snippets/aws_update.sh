@@ -11,6 +11,8 @@ curl -X PUT \
   "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}&account_id=<YOUR_AWS_ACCOUNT_ID>&role_name=<ROLE_NAME>" \
   -H 'Content-Type: application/json' \
   -d '{
+    "account_id": "<NEW_ACCOUNT_ID>",
+    "role_name": "<NEW_ROLE_NAME>",
     "filter_tags": [
         "<TAG_KEY>:<TAG_VALUE>"
     ],
