@@ -7,7 +7,7 @@ external_redirect: /api/#get-list-of-aws-log-ready-services
 
 **SIGNATURE**:
 
-`GET /aws/logs/services`
+`GET /v1/integration/aws/logs/services`
 
 **EXAMPLE REQUEST**:
 
