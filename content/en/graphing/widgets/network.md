@@ -37,7 +37,7 @@ The network widget supplements the [Network Performance Monitoring][2] feature b
 
 3. Select the type of data you want to view: bytes sent, bytes received, or retransmits.
 
-    {{< img src="graphing/widgets/network/network_5.png" alt="Image" responsive="true" width="80%" >}}
+    {{< img src="graphing/widgets/network/network_5-2.png" alt="Image" responsive="true" width="80%" >}}
 
 4. Select your preferred visualization settings. You can choose to view the data in many colors and as lines, areas, or bars.
 
