@@ -165,7 +165,7 @@ Kubernetes サービスを統合する方法 (または統合すべき理由) �
 
 [1]: https://hub.docker.com/r/datadog/agent
 [2]: /ja/agent/basic_agent_usage/kubernetes
-[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [4]: /ja/agent
 [5]: /ja/agent/autodiscovery
 [6]: https://app.datadoghq.com/account/settings#agent/kubernetes

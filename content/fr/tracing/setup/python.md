@@ -25,6 +25,8 @@ Pour les applications Python Django, notez que le tracing est désactivé lorsqu
 
 ## Installation et démarrage
 
+<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=python" target=_blank> basées sur un host</a> et les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=python" target=_blank>basées sur un conteneur</a>.</div>
+
 Pour commencer le tracing d'applications écrites en Python, vous devez d'abord [installer et configurer l'Agent Datadog][1]. Pour obtenir davantage d'informations, consultez la documentation relative au [tracing d'applications Docker][2] ou au [tracing d'applications Kubernetes][3].
 
 Installez ensuite la bibliothèque de tracing Datadog, `ddtrace`, avec pip :

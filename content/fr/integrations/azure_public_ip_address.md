@@ -21,7 +21,7 @@ version: 1
 ---
 ## Présentation
 
-Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet une connectivité entrante et une connectivité sortante à partir d’Internet.
+Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet une connectivité entrante et une connectivité sortante à partir d'Internet.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'adresse IP publique Azure.
 
