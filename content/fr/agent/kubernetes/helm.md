@@ -57,23 +57,23 @@ Consultez la [documentation du Tiller de Helm][2] pour en savoir plus.
 Si RBAC est activé sur votre cluster Kubernetes, utilisez la configuration RBAC suivante pour déployer Tiller.
 
 ```yaml
-apiVersion: v1  
-kind: ServiceAccount  
-metadata:  
- name: tiller  
- namespace: kube-system  
----  
-apiVersion: rbac.authorization.k8s.io/v1beta1  
-kind: ClusterRoleBinding  
-metadata:  
- name: tiller  
-roleRef:  
- apiGroup: rbac.authorization.k8s.io  
- kind: ClusterRole  
- name: cluster-admin  
-subjects:  
- - kind: ServiceAccount  
-   name: tiller  
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: tiller
+ namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+ name: tiller
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+ - kind: ServiceAccount
+   name: tiller
    namespace: kube-system
 ```
 
@@ -116,7 +116,7 @@ Ce chart ajoute l'Agent Datadog à l'ensemble des nœuds dans votre cluster via 
 
 ## Configurer le chart Helm Datadog
 
-Pour configurer le chart, il est conseillé d'utiliser un fichier YAML spécifiant les valeurs des paramètres du chart.
+Pour configurer le chart, il est conseillé d'utiliser un fichier YAML spécifiant les valeurs des paramètres du chart :
 
 1.  **Copiez le fichier [`datadog-values.yaml`][7] par défaut.**
 2.  Définissez le paramètre `apiKey` avec votre [clé d'API Datadog][4].
@@ -243,6 +243,6 @@ Cette commande supprime tous les composants Kubernetes associés au chart et sup
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: /fr/developers/dogstatsd
+[8]: /fr/developers/metrics/dogstatsd_metrics_submission
 [9]: /fr/tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
