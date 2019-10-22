@@ -14,7 +14,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The network widget supplements the [Network Performance Monitoring][2] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between endpoints. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data. 
+The network widget supplements the [Network Performance Monitoring][2] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between services, hosts, containers, and any other Datadog tag. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data. 
 
 
 {{< img src="graphing/widgets/network/network_1.png" alt="Image" responsive="true" width="80%" >}}
@@ -33,7 +33,7 @@ The network widget supplements the [Network Performance Monitoring][2] feature b
 
     You can also filter down to a specific service, host, etc., by adding tags to the source and destination search bars.
 
-    {{< img src="graphing/widgets/network/network_4.png" alt="Image" responsive="true" width="80%" >}}
+    {{< img src="graphing/widgets/network/network_4-2.png" alt="Image" responsive="true" width="80%" >}}
 
 3. Select the type of data you want to view: bytes sent, bytes received, or retransmits.
 
@@ -41,7 +41,7 @@ The network widget supplements the [Network Performance Monitoring][2] feature b
 
 4. Select your preferred visualization settings. You can choose to view the data in many colors and as lines, areas, or bars.
 
-    {{< img src="graphing/widgets/network/network_6.png" alt="Image" responsive="true" width="80%" >}}
+    {{< img src="graphing/widgets/network/network_6.png" alt="Image" responsive="true" width="60%" >}}
 
 ## API
 
