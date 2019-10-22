@@ -324,7 +324,7 @@ logs:
     # Pour les logs multiligne, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante.
     #log_processing_rules:
     #  - type: multi_line
-    #    name: nouveau_début_log_avec_date
+    #    name: new_log_start_with_date
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 

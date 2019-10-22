@@ -51,7 +51,11 @@ Datadog fournit des graphiques par défaut pour chaque service :
     * Le **nombre total d'erreurs**
     * Le nombre **d'erreurs par seconde**
     * Le **taux d'erreur**
-* Sous-services : lorsque plusieurs services sont impliqués, un quatrième graphique est disponible. Il décrit la **durée totale**, le **% de temps passé** et la **durée moyenne par requête** de votre service en fonction de *services* ou du *type*. Pour les services comme *Postgres* ou *Redis*, qui sont des opérations "finales" n'appelant pas d'autres services, ce graphique n'est pas disponible.
+* Sous-services : lorsque plusieurs services sont impliqués, un quatrième graphique est disponible. Il présente la **durée totale**, le **% de temps passé** et la **durée moyenne par requête** de votre service en fonction des *services* ou des *types* de service.
+
+    Cela représente le temps total/relatif/moyen passé par les traces du service actuel par rapport aux autres *services* ou *types* de service.
+
+    **Remarque** : pour les services comme *Postgres* ou *Redis*, qui sont des opérations « finales » qui n'appellent pas d'autres services, aucun graphique de sous-services n'est disponible.
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Graphiques par défaut pour les services" responsive="true" style="width:90%;">}}
 
@@ -73,7 +77,7 @@ Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un cent
 
 ## Ressources
 
-Consultez la liste de ressources associées à votre service. Les ressources sont des actions particulières pour vos services (généralement des endpoints individuels ou des requêtes). Pour en savoir plus sur les ressources, consultez [Débuter avec l'APM][1]. Triez les ressources de ce service par requêtes, latence, erreurs et durée pour identifier les zones à trafic élevé ou les problèmes potentiels. Notez que ces colonnes de métrique peuvent être personnalisées (voir l'image ci-dessous).
+Consultez la liste des [ressources][6] associées à votre service. Les ressources sont des actions particulières pour vos services (généralement des endpoints ou des requêtes spécifiques). Pour en savoir plus sur les ressources, consultez [Débuter avec l'APM][1]. Triez les ressources de ce service par requêtes, latence, erreurs et durée pour identifier les zones à trafic élevé ou les problèmes potentiels. Notez que ces colonnes de métrique peuvent être personnalisées (voir l'image ci-dessous).
 
 {{< img src="tracing/visualization/service/resources.png" alt="Ressources" responsive="true" style="width:90%;">}}
 
@@ -82,7 +86,7 @@ Consultez la liste de ressources associées à votre service. Les ressources son
 ### Filtrer la liste des ressources
 Filtrez votre liste de ressources avec une requête pour un filtrage textuel de base :
 
-{{< img src="tracing/visualization/service/resources_filtering.gif" alt="Filtrage de ressources" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Filtrage de ressources" video="true" responsive="true" width="90%" >}}
 
 ### Colonnes
 
@@ -105,3 +109,4 @@ Choisissez ce que vous souhaitez afficher dans votre liste de ressources :
 [3]: /fr/monitors/monitor_types/apm
 [4]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
 [5]: /fr/graphing/dashboards/timeboard
+[6]: /fr/tracing/visualization/#resources

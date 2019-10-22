@@ -432,7 +432,7 @@ class Logger {
       tracer.inject(span.context(), formats.LOG, record)
     }
 
-    console.log(record)
+    console.log(JSON.stringify(record))
   }
 }
 

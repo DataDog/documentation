@@ -55,7 +55,7 @@ API Gateway ログを有効化します。
 6. JSON 形式を選択し (CLF と CSV もサポートされています)、ログ形式のボックスに以下を追加することをお勧めします。
 
     ```
-    {  
+    {
         "requestId":"$context.requestId",
         "ip":"$context.identity.sourceIp",
         "caller":"$context.identity.caller",
