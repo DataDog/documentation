@@ -1,7 +1,7 @@
 ---
 title: カスタムメトリクスの 1 時間あたり使用量の取得
 type: apicontent
-order: 33.3
+order: 34.3
 external_redirect: '/api/#get-hourly-usage-for-custom-metrics'
 ---
 ## カスタムメトリクスの 1 時間あたり使用量の取得

@@ -1,7 +1,7 @@
 ---
 title: Obtenir un test
 type: apicontent
-order: 30.8
+order: 31.8
 external_redirect: "/api/#obtenir-un-test"
 ---
 

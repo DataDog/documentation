@@ -1,7 +1,7 @@
 ---
 title: Créer une intégration Slack
 type: apicode
-order: 19.2
+order: 20.2
 external_redirect: "/api/#creer-une-integration-slack"
 ---
 

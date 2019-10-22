@@ -1,0 +1,1 @@
+[{u'services': [u'list', u'of', u'enabled', u'services'], u'account_id': u'<AWS_ACCOUNT_ID>', u'lambdas': []}]

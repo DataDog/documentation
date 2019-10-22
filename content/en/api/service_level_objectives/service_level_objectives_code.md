@@ -1,6 +1,6 @@
 ---
 title: Service Level Objectives
 type: apicode
-order: 29
+order: 30
 external_redirect: /api/#servicelevelobjectives
 ---

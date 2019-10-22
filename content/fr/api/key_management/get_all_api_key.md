@@ -1,7 +1,7 @@
 ---
 title: Obtenir toutes les clés d'API
 type: apicontent
-order: 21.01
+order: 22.01
 external_redirect: "/api/#obtenir-toutes-les-cles-d-api"
 ---
 

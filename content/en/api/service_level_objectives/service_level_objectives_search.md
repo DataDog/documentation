@@ -1,7 +1,7 @@
 ---
 title: Search Service Level Objectives
 type: apicontent
-order: 29.07
+order: 30.07
 external_redirect: /api/#search-service-level-objectives
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 時系列ポイントのポスト
 type: apicontent
-order: 25.2
+order: 26.2
 external_redirect: '/api/#post-time-series-points'
 ---
 ## 時系列ポイントのポスト

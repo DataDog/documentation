@@ -1,7 +1,7 @@
 ---
 title: Set GCP integration automute
 type: apicode
-order: 17.4
+order: 18.4
 external_redirect: /api/#set-gcp-integration-automute
 ---
 

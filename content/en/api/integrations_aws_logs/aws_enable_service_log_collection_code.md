@@ -1,7 +1,7 @@
 ---
 title: Enable an AWS service log collection
 type: apicode
-order: 15.09
+order: 16.09
 external_redirect: /api/#enable-an-aws-service-log-collection
 ---
 

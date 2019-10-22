@@ -1,7 +1,7 @@
 ---
 title: Add AWS log ARN
 type: apicode
-order: 15.08
+order: 16.08
 external_redirect: /api/#add-aws-log-arn
 ---
 

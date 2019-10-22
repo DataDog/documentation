@@ -1,7 +1,7 @@
 ---
 title: Get host tags
 type: apicode
-order: 31.2
+order: 32.2
 external_redirect: /api/#get-host-tags
 ---
 

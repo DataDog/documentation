@@ -1,7 +1,7 @@
 ---
 title: Screenboards
 type: apicontent
-order: 28
+order: 29
 external_redirect: /api/#screenboards
 ---
 ## Screenboards

@@ -1,7 +1,7 @@
 ---
 title: Réactiver un monitor
 type: apicontent
-order: 26.10
+order: 27.10
 external_redirect: /api/#reactiver-un-monitor
 ---
 

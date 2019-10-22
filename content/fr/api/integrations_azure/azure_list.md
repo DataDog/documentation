@@ -1,7 +1,7 @@
 ---
 title: Énumérer toutes les intégrations Azure
 type: apicontent
-order: 16.1
+order: 17.1
 external_redirect: "/api/#enumerer-toutes-les-integrations-azure"
 ---
 

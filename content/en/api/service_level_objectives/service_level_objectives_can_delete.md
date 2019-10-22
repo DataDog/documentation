@@ -1,7 +1,7 @@
 ---
 title: Check if a service level objective can be deleted
 type: apicontent
-order: 29.03
+order: 30.03
 external_redirect: /api/#can-delete-a-service-level-objective-s
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Delete Pipeline
 type: apicode
-order: 24.7
+order: 25.7
 external_redirect: /api/#delete-a-pipeline
 ---
 

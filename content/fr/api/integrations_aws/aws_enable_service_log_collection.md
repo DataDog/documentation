@@ -1,7 +1,7 @@
 ---
 title: Activer la collecte de logs d'un service AWS
 type: apicontent
-order: 15.09
+order: 16.09
 external_redirect: '/api/#activer-la-collecte-de-logs-d-un-service-aws'
 ---
 ## Activer la collecte de logs d'un service AWS

@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour des logs
 type: apicontent
-order: 33.2
+order: 34.2
 external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-des-logs"
 ---
 

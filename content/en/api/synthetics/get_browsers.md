@@ -1,7 +1,7 @@
 ---
 title: Get devices for browser checks
 type: apicontent
-order: 30.9
+order: 31.9
 external_redirect: /api/#get-browsers
 ---
 

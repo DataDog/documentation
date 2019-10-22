@@ -1,6 +1,6 @@
 ---
 title: Organisations
 type: apicode
-order: 27
+order: 28
 external_redirect: /api/#organisations
 ---

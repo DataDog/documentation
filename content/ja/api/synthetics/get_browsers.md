@@ -1,7 +1,7 @@
 ---
 title: ブラウザチェック用デバイスの取得
 type: apicontent
-order: 29.9
+order: 30.9
 external_redirect: "/api/#get-browsers"
 ---
 

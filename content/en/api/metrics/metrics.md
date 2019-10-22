@@ -1,7 +1,7 @@
 ---
 title: Metrics
 type: apicontent
-order: 25
+order: 26
 external_redirect: /api/#metrics
 ---
 ## Metrics

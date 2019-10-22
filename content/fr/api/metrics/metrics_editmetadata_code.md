@@ -1,7 +1,7 @@
 ---
 title: Modifier les métadonnées d'une métrique
 type: apicode
-order: 25.5
+order: 26.5
 external_redirect: /api/#modifier-les-metadonnees-d-une-metrique
 ---
 

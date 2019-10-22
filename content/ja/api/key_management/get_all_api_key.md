@@ -1,7 +1,7 @@
 ---
 title: すべての API キーの取得
 type: apicontent
-order: 21.01
+order: 22.01
 external_redirect: "/api/#get-all-api-keys"
 ---
 

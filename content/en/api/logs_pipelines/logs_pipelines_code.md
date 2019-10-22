@@ -1,6 +1,6 @@
 ---
 title: Logs Pipelines
 type: apicode
-order: 24
+order: 25
 external_redirect: /api/#logs-pipelines
 ---

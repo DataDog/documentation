@@ -1,7 +1,7 @@
 ---
 title: Désactiver tous les monitors
 type: apicode
-order: 26.07
+order: 27.07
 external_redirect: /api/#desactiver-tous-les-monitors
 ---
 

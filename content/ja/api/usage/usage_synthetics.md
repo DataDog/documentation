@@ -1,7 +1,7 @@
 ---
 title: Synthetics の 1 時間あたり使用量の取得
 type: apicontent
-order: 33.6
+order: 34.6
 external_redirect: '/api/#get-hourly-usage-for-synthetics'
 ---
 ## Synthetics の 1 時間あたり使用量の取得
