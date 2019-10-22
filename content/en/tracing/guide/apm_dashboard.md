@@ -55,7 +55,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     | Parameter | Value                         | Description                                                                                                          |
     | ------    | -----                         | -----                                                                                                                |
-    | `metric`  | `trace.rack.reqesusts.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
+    | `metric`  | `trace.rack.requests.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
     | `from`    | `service:web-store`           | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
     | `sum by`  | `http.status_code`            | Breaking down the chart by http status codes.                                                                        |
 
