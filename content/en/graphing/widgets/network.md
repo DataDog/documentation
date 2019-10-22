@@ -41,7 +41,7 @@ The network widget supplements the [Network Performance Monitoring][2] feature b
 
 4. Select your preferred visualization settings. You can choose to view the data in many colors and as lines, areas, or bars.
 
-    {{< img src="graphing/widgets/network/network_6.png" alt="Image" responsive="true" width="40%" >}}
+    {{< img src="graphing/widgets/network/network_6.png" alt="Image" responsive="false" width="40%" >}}
 
 ## API
 
