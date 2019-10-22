@@ -12,12 +12,7 @@ further_reading:
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
-## Changer le nom d'un screenboard
-
-1. Cliquez sur l'icône d'information en haut du screenboard.
-    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" style="width:75%;">}}
-2. Remplacez le nom par celui de votre choix.
-3. Cliquez sur Save Changes.
+Les screenboards sont des dashboards qui vous permettent de représenter librement de nombreux objets tels que des images, des graphiques ou des logs. Généralement utilisés pour visualiser les statuts de vos services et pour mettre en récit vos données, ils peuvent être mis à jour en temps réel ou représenter un ou plusieurs points fixes historiques.
 
 ## Lecture seule
 

@@ -20,6 +20,8 @@ further_reading:
 ---
 ## Installation et démarrage
 
+<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=php" target=_blank> basées sur un host</a> et <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=php" target=_blank>basées sur un conteneur</a>.</div>
+
 Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][1].
 
 Pour découvrir comment effectuer des contributions open source au traceur PHP, consultez le [guide relatif aux contributions][2].
@@ -39,10 +41,10 @@ Installez l'extension PHP à l'aide de l'un des [paquets pré-compilés pour les
 Une fois téléchargé, installez le paquet avec l'une des commandes ci-dessous.
 
 ```bash
-# avec le paquet RPM (RHEL/Centos 6+, Fedora 20+)
+# avec le paquet (RHEL/Centos 6+, Fedora 20+)
 $ rpm -ivh datadog-php-tracer.rpm
 
-# avec le paquet DEB (Debian Jessie+ , Ubuntu 14.04+)
+# avec le paquet (Debian Jessie ou ultérieur, Ubuntu 14.04+ sur les versions PHP prises en charge)
 $ dpkg -i datadog-php-tracer.deb
 
 # avec le paquet APK (Alpine)
@@ -51,9 +53,9 @@ $ apk add datadog-php-tracer.apk --allow-untrusted
 
 Redémarrez PHP (PHP-FPM ou le SAPI Apache), puis consultez un endpoint de votre application pour lequel le tracing est activé. Affichez l'[interface de l'APM][8] pour visualiser les traces.
 
-**Remarque** : quelques minutes peuvent s'écouler avant que les traces soient visibles dans l'interface graphique.
+**Remarque** : quelques minutes peuvent s'écouler avant que les traces soient visibles dans l'UI. Si, une fois ce délai passé, elles n'apparaissent toujours pas, [exécutez le script de diagnostic dd-doctor.php] depuis la machine du host afin d'identifier les éventuels problèmes.
 
-Si vous ne trouvez pas votre distribution, vous pouvez [installer manuellement][9] l'extension PHP.
+Si vous ne trouvez pas votre distribution, vous pouvez [installer manuellement][10] l'extension PHP.
 
 ## Instrumentation automatique
 
@@ -61,7 +63,7 @@ Le tracing est automatiquement instrumenté par défaut. Une fois l'extension in
 
 Même si Datadog ne prend pas officiellement en charge votre framework Web, une instrumentation manuelle n'est pas forcément nécessaire. Datadog enregistre les requêtes Web génériques et crée des traces génériques pour celles-ci. Toutefois, lorsque vous utilisez l'un des frameworks pris en charge, Datadog définit des métadonnées plus pertinentes, ce qui facilite la navigation dans vos services.
 
-L'instrumentation automatique fonctionne en modifiant l'exécution de PHP pour wrapper certaines fonctions et méthodes afin de les tracer. Le traceur PHP prend en charge l'instrumentation automatique pour [plusieurs bibliothèques][10].
+L'instrumentation automatique fonctionne en modifiant l'exécution de PHP pour wrapper certaines fonctions et méthodes afin de les tracer. Le traceur PHP prend en charge l'instrumentation automatique pour [plusieurs bibliothèques][11].
 
 L'instrumentation automatique capture :
 
@@ -76,7 +78,7 @@ Configurez vos traceurs d'applications de façon à envoyer des traces à un hos
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 
-Consultez la [configuration du traceur][11] pour découvrir comment définir ces variables.
+Consultez la [configuration du traceur][12] pour découvrir comment définir ces variables.
 
 ## Compatibilité
 
@@ -99,7 +101,7 @@ L'APM PHP prend en charge les SAPI suivantes :
 | cli            | Prise en charge complète |
 | fpm            | Prise en charge complète |
 
-### Les intégrations
+### Intégrations
 
 #### Compatibilité des frameworks Web
 
@@ -108,19 +110,21 @@ Si le framework Web que vous utilisez ne figure pas dans la liste ci-dessous, vo
 | Module         | Versions           | Type de prise en charge    |
 |:---------------|:-------------------|:----------------|
 | CakePHP        | 2.x                | Prise en charge complète |
+| CodeIgniter    | 2.x                | PHP 7           |
 | Laravel        | 4.2, 5.x           | Prise en charge complète |
 | Lumen          | 5.2+               | Prise en charge complète |
 | Slim           | 3.x                | Prise en charge complète |
-| Symfony        | 2.x, 3.3, 3.4, 4.x | Prise en charge complète |
-| Framework Zend | 1.12               | Prise en charge complète |
-| CodeIgniter    | 2, 3               | _Disponible prochainement_   |
+| Symfony        | 3.3, 3.4, 4.x      | Prise en charge complète |
+| WordPress      | 4.x                | PHP 7           |
+| Zend Framework | 1.12               | Prise en charge complète |
+| CodeIgniter    | 3.x                | _Disponible prochainement_   |
 | Drupal         |                    | _Disponible prochainement_   |
 | Magento        | 2                  | _Disponible prochainement_   |
 | Phalcon        | 1.3, 3.4           | _Disponible prochainement_   |
-| Wordpress      |                    | _Disponible prochainement_   |
+| Slim           | 2.x                | _Disponible prochainement_   |
 | Yii            | 1.1                | _Disponible prochainement_   |
 
-Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][12] pour obtenir de l'aide.
+Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
 
 #### Compatibilité des bibliothèques CLI
 
@@ -128,17 +132,17 @@ Le tracing depuis le CLI SAPI est désactivé par défaut. Pour activer le traci
 
 | Module          | Versions           | Type de prise en charge    |
 |:----------------|:-------------------|:----------------|
+| Console CakePHP | 2.x                | Prise en charge complète |
 | Laravel Artisan | 5.x                | Prise en charge complète |
 | Console Symfony |                    | _Disponible prochainement_   |
 
-Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][12] pour obtenir de l'aide.
+Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
 
 #### Compatibilité des datastores
 
 | Module                           | Versions                   | Type de prise en charge    |
 |:---------------------------------|:---------------------------|:----------------|
 | Amazon RDS (avec PDO ou MySQLi) | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| Console CakePHP                  | 2.x                        | Prise en charge complète |
 | Elasticsearch                    | 1.x                        | Prise en charge complète |
 | Eloquent                         | Versions prises en charge par Laravel | Prise en charge complète |
 | Memcached                        | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
@@ -154,7 +158,7 @@ Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit con
 | PHPredis                         | 4                          | _Disponible prochainement_   |
 | Solarium                         | 4.2                        | _Disponible prochainement_   |
 
-Votre datastore préféré n'est pas disponible ? Datadog élargit continuellement la liste des datastores pris en charge. Contactez l'[équipe Datadog][12] pour obtenir de l'aide.
+Votre datastore préféré n'est pas disponible ? Datadog élargit continuellement la liste des datastores pris en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
 
 #### Compatibilité des bibliothèques
 
@@ -166,7 +170,7 @@ Votre datastore préféré n'est pas disponible ? Datadog élargit continuellem
 | Beanstalkd |                       | _Disponible prochainement_   |
 | ReactPHP   |                       | _Disponible prochainement_   |
 
-Vos bibliothèques préférées ne sont pas disponibles ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][12] pour obtenir de l'aide.
+Vos bibliothèques préférées ne sont pas disponibles ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
 
 ## Configuration
 
@@ -176,7 +180,7 @@ Le traceur PHP peut être configuré à l'aide de variables d'environnement.
 
 ### Apache
 
-Défini avec [`SetEnv`][13] depuis la configuration du serveur, le host virtuel, le répertoire ou le fichier **.htaccess**.
+Défini avec [`SetEnv`][14] depuis la configuration du serveur, le host virtuel, le répertoire ou le fichier **.htaccess**.
 
 ```
 SetEnv DD_TRACE_DEBUG true
@@ -184,7 +188,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-Défini avec [`fastcgi_param`][14] depuis les contextes `http`, `server`, ou `location`.
+Défini avec [`fastcgi_param`][15] depuis les contextes `http`, `server`, ou `location`.
 
 ```
 fastcgi_param DD_TRACE_DEBUG true;
@@ -207,16 +211,70 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Active le tracing de scripts PHP depuis le CLI                                  |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le tracing distribué doit être activé ou non                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | Liste au format CSV des extensions désactivées ; p. ex. `curl,mysqli`                        |
+| `DD_PRIORITY_SAMPLING`               | `true`      | Active ou non l'échantillonnage prioritaire.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | Le taux d'échantillonnage des traces. Entre `0.0` et `1.0` (par défaut)         |
 | `DD_SERVICE_NAME`                    | ``          | Le nom par défaut de l'application                                                        |
+| `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC` | `5000`  | Délai de nouvelle tentative du disjoncteur configurable basé sur IPC (en millisecondes)         |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Délai d'expiration de la connexion de l'Agent (en millisecondes)                              |
+| `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`    | Nombre maximal de tentatives du disjoncteur configurable basé sur IPC (en millisecondes)             |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | Le port de l'Agent                                                       |
-| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Le temps maximum que l'Agent est autorisé à prendre (en millisecondes)                 |
+| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Délai d'expiration du transfert de la requête de l'Agent (en millisecondes)                        |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Le temps maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans les intégrations Web       |
-| `DD_TRACE_DEBUG`                     | `false`     | Activer le [mode debugging][15] pour le traceur                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Active le [mode debugging][15] pour le traceur                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Activer le traceur partout                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags à appliquer à toutes les spans : p. ex. `key1:value1,key2:value2`                |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans une intégration spécifique |
+| `DD_TRACE_REPORT_HOSTNAME`           | `false`     | Active la transmission du hostname sur la span racine                                  |
+| `DD_TRACE_RESOURCE_URI_MAPPING`      | `null`      | Fichier CSV comprenant les règles de mappage de l'URL au nom de la ressource, p. ex. :  `/foo/*,/bar/$*/baz` ; [voir la section Mappage personnalisé de l'URL à la ressource][16] |
+| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED` | `false` | Active les URL en tant que noms de ressources ; [voir la section Mappage des noms de ressources aux URI normalisées][17] |
+| `DD_<INTÉGRATION>_ANALYTICS_ENABLED` | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans une intégration spécifique |
+
+#### Mappage des noms de ressources aux URI normalisées
+
+<div class="alert alert-warning">
+Cette fonctionnalité est en bêta publique. Si vous avez besoin d'aide, contactez <a href="/help">l'assistance Datadog</a>. 
+</div>
+
+Lorsque le paramètre `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true` est défini, l'URL est utilisée afin de créer le nom de ressource de la trace, en suivant le format `<MÉTHODE_REQUÊTE_HTTP> <URL_NORMALISÉE>`. La chaîne de requête est supprimée de l'URL. Cela vous permet de gagner en visibilité sur les frameworks personnalisés qui ne sont pas instrumentés automatiquement en normalisant les URL et en regroupant les endpoints génériques sous une unique ressource.
+
+| Requête HTTP                       | Nom de la ressource |
+|:-----------------------------------|:--------------|
+| **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
+| **POST** request to `/bar?foo=bar` | `POST /bar`   |
+
+Les ID numériques, les UUID (avec et sans tiret) et les hachages hexadécimaux de 32 à 512 octets sont automatiquement remplacés par le caractère `?`.
+
+| URL (requête GET)                              | Nom de la ressource      |
+|:-----------------------------------------------|:-------------------|
+| `/user/123/show`                               | `GET /user/?/show` |
+| `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
+| `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
+| `/book/0dbf3596`                               | `GET /book/?`      |
+
+##### Mappage personnalisé de l'URL à la ressource
+
+Lorsque [les noms de ressources d'URL sont activés][17], le mappage d'URL personnalisé se configure via `DD_TRACE_RESOURCE_URI_MAPPING`. Ce paramètre accepte une liste CSV de règles de mappage. Les wildcards `*` (modification gourmande avec remplacement par le caractère `?`) et `$*` (modification gourmande sans remplacement) sont pris en charge. Exemple : `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`.
+
+Les règles sont appliquées dans leur ordre d'affichage dans `DD_TRACE_RESOURCE_URI_MAPPING`. Les règles moins gourmandes doivent figurer avant les règles gourmandes. Exemple : `/foo/$*/bar,/foo/*`. 
+
+Le wildcard `*` wildcard est remplacé par `?`.
+
+| Règle de mappage   | URL (requête GET)  | Nom de la ressource    |
+|:---------------|:-------------------|:-----------------|
+| `/foo/*`       | `/foo/bar`         | `GET /foo/?`     |
+| `/foo/*/bar`   | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
+| `/foo-*-bar`   | `/foo-secret-bar`  | `GET /foo-?-bar` |
+
+Le wildcard `$*` est mis en correspondance sans être remplacé.
+
+| Règle de mappage        | URL (requête GET)           | Nom de la ressource              |
+|:--------------------|:----------------------------|:---------------------------|
+| `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
+| `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
+
+## Mise à niveau
+
+Pour mettre à niveau le traceur PHP, [téléchargez la dernière version][7] et suivez les mêmes étapes que lors de l'[installation de l'extension][18].
 
 ## Pour aller plus loin
 
@@ -230,10 +288,13 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [6]: /fr/tracing/send_traces
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
 [8]: https://app.datadoghq.com/apm/services
-[9]: /fr/tracing/faq/php-tracer-manual-installation
-[10]: #library-compatibility
-[11]: /fr/help
-[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[14]: /fr/tracing/troubleshooting
-[15]: /fr/tracing/troubleshooting/?tab=php
+[9]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[10]: /fr/tracing/faq/php-tracer-manual-installation
+[11]: #library-compatibility
+[12]: /fr/tracing/setup/php/#environment-variable-configuration
+[13]: /fr/help
+[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[16]: #custom-url-to-resource-mapping
+[17]: #map-resource-names-to-normalized-uri
+[18]: #install-the-extension

@@ -135,26 +135,26 @@ Si vous souhaitez modifier la structure du log, tous les éléments disponibles 
 
 Créez un fichier `ruby.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
 
-```yaml    
-##Section log
+```yaml
+##Section Log
 logs:
 
-    ## - type : (obligatoire) type de fichier de la source d'entrée de log (tcp/udp/file)
-    ##   port / path : (obligatoire) définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file
-    ##   service : (obligatoire) nom du service propriétaire du log.
-    ##   source : (obligatoire) attribut qui définit l'intégration qui envoie les logs
-    ##   sourcecategory : (facultatif) attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source
-    ##   tags : (facultatif) ajoute des tags à chaque log recueilli
+    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
+    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
+    ##   service (obligatoire) : nom du service propriétaire du log.
+    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
+    ##   sourcecategory (facultatif) : attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
+    ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
 
   - type: fichier
     path: /chemin/vers/votre/log/ruby.log
     service: ruby
     source: ruby
     sourcecategory: sourcecode
-    # Pour les logs multilignes, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante
+    # Pour les logs multiligne, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante.
     #log_processing_rules:
     #  - type: multi_line
-    #    name: nouveau_début_log_avec_date
+    #    name: new_log_start_with_date
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
@@ -193,7 +193,7 @@ Une fois cette opération terminée, le log doit avoir le format suivant (pour J
 }
 ```
 
-[Configurez ensuite l'Agent Datadog](#configurer-l-agent-datadog) de façon à collecter les logs Ruby à partir du fichier.
+[Configurez ensuite l'Agent Datadog](#configurez-votre-agent-datadog) de façon à collecter les logs Ruby à partir du fichier.
 
 ### Conseils pour la journalisation dans votre application
 
@@ -227,11 +227,11 @@ Le hash sera converti au format JSON et vous pourrez alors analyser l'utilisateu
 Dans le fichier `config/initializers/lograge_rocketpants.rb` (variable selon votre projet) :
 
 ```ruby
-# Configuration de Lograge de façon à le faire fonctionner avec les contrôleurs de rocket_pants      
-#       
-# Tiré de :       
-#   https://github.com/Sutto/rocket_pants/issues/111        
-#       
+# Configuration de Lograge pour le faire fonctionner avec les contrôleurs de rocket_pants
+#
+# Tiré de :
+#   https://github.com/Sutto/rocket_pants/issues/111
+#
 app = Rails.application
 if app.config.lograge.enabled
   ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
@@ -264,7 +264,7 @@ use GrapeLogging::Middleware::RequestLogger,
 Créez le fichier `config/initializers/instrumentation.rb` et ajoutez la configuration suivante :
 
 ```ruby
-# Abonnement à la demande Grape et utilisation d'un enregistreur de logs dédié à Grape
+# S'abonner à la requête Grape et enregistrer les logs avec un logger dédié à Grape
 grape_logger = Logging.logger['Grape']
 ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notification_id, payload|
     grape_logger.info payload
