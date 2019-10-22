@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour Fargate
 type: apicontent
-order: 33.7
+order: 34.7
 external_redirect: '/api/#obtenir-l-utilisation-horaire-pour-fargate'
 ---
 ## Obtenir l'utilisation horaire pour Fargate

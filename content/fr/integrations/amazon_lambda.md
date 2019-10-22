@@ -87,7 +87,7 @@ Si votre fonction Lambda utilise un runtime Python, installez la couche Lambda d
 
 #### Installer et utiliser la couche Datadog
 
-La couche Lambda de Datadog prend en charge Python, Node et Ruby. Go est également pris en charge avec un [package][23] à inclure dans votre projet. Si vous souhaitez que Datadog prenne en charge un certain runtime, contactez l'[équipe d'assistance Datadog][14].
+La couche Lambda de Datadog prend en charge Python, Node et Ruby. Go est également pris en charge avec un [package][14] à inclure dans votre projet. Si vous souhaitez que Datadog prenne en charge un certain runtime, contactez l'[équipe d'assistance Datadog][14].
 
 1. Accédez à la fonction Lambda à laquelle vous souhaitez ajouter la couche dans votre console AWS.
 2. Cliquez sur **Layers** sur la page principale de votre fonction.
@@ -106,13 +106,13 @@ La couche Lambda de Datadog prend en charge Python, Node et Ruby. Go est égalem
 
     | Langage | Runtime                                                    | Versions             |
     |----------|------------------------------------------------------------|----------------------|
-    | Python   | `Python27`, `Python36`, `Python37`                         | [Dernière version][21] |
-    | Node     | `Node8-10`, `Node10-x`                                     | [Dernière version][22] |
-    | Ruby     | `Ruby`                                                     | [Dernière version][25] |
+    | Python   | `Python27`, `Python36`, `Python37`                         | [Dernière version][16] |
+    | Node     | `Node8-10`, `Node10-x`                                     | [Dernière version][17] |
+    | Ruby     | `Ruby`                                                     | [Dernière version][18] |
 
     **Utilisateurs Go :** Go étant compilé de manière statique, vous devez inclure le [package][23] dans votre projet au lieu d'utiliser une couche Lambda.
 
-5. Accédez à la section **Environment Variables** de votre fonction et définissez les variables d'environnement suivantes avec votre [clé d'API Datadog][15] :
+5. Accédez à la section **Environment Variables** de votre fonction et définissez les variables d'environnement suivantes avec votre [clé d'API Datadog][19] :
     * DD_API_KEY ou DD_KMS_API_KEY (si la clé est chiffrée via KMS)
 6. Pour les **métriques custom totalement asynchrones et recueillies quasiment en temps réel**, vous pouvez définir la variable d'environnement `DD_FLUSH_TO_LOG` sur `True`. Les métriques seront envoyées via les logs CloudWatch au lieu des appels d'API. **Remarque** : cette option nécessite l'installation de la **dernière version** de la [fonction Lambda de collecte de logs AWS avec Datadog][8]. Si vous souhaitez que les métriques soient uniquement transmises à partir des logs CloudWatch, vous **DEVEZ** configurer la variable d'environnement `DD_FORWARD_LOG` sur `False` sur la [fonction Lambda de collecte de logs AWS avec Datadog[8] afin d'empêcher l'envoi des logs traditionnels à Datadog. 
 
@@ -224,19 +224,19 @@ lambda_metric(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, tags=[<LISTE_TAGS>])
 
 Où :
 
-* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][16].
+* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][20].
 
 * `<VALEUR_MÉTRIQUE>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
 
 * `<LISTE_TAGS>` est facultatif et formaté, par exemple : `['owner:Datadog', 'env:demo', 'cooltag']`.
 
-**Remarque** : à l'heure actuelle, jusqu'à 3 tags peuvent être appliqués à une métrique. Si vous souhaitez appliquer davantage de tags à ces métriques, contactez l'[équipe d'assistance Datadog][14] pour augmenter cette limite pour votre organisation.
+**Remarque** : à l'heure actuelle, jusqu'à 3 tags peuvent être appliqués à une métrique. Si vous souhaitez appliquer davantage de tags à ces métriques, contactez l'[équipe d'assistance Datadog][15] pour augmenter cette limite pour votre organisation.
 
-Vous trouverez des instructions détaillées pour installer et configurer les couches Lambda dans la [documentation principale d'AWS][17].
+Vous trouverez des instructions détaillées pour installer et configurer les couches Lambda dans la [documentation principale d'AWS][21].
 
 #### Exécution dans un VPC
 
-Si votre fonction Lambda est associée à un VPC et envoie des métriques custom de manière synchrone, vérifiez qu'elle a bien [accès à Internet][24].
+Si votre fonction Lambda est associée à un VPC et envoie des métriques custom de manière synchrone, vérifiez qu'elle a bien [accès à Internet][22].
 
 
 #### Utiliser les logs CloudWatch
@@ -257,14 +257,14 @@ Où :
 
 * `<TYPE_MÉTRIQUE>` correspond à `count`, `gauge`, `histogram` ou `check`.
 
-* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][16].
+* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][20].
 
 * `<LISTE_TAGS>` est facultatif et précédé du caractère `#`, et ses valeurs sont séparées par une virgule.
     Le tag `function_name:<nom_de_la_fonction>` est automatiquement appliqué aux métriques custom.
 
 **Remarque** : la somme de chaque timestamp est utilisée pour les totaux et la dernière valeur d'un timestamp donné est utilisée pour les gauges. Nous ne conseillons pas d'afficher une déclaration de log chaque fois que vous incrémentez une métrique, car cela augmente la durée d'analyse de vos logs. Mettez à jour de façon continue la valeur de la métrique dans votre code et affichez une déclaration de log pour cette métrique avant la fin de la fonction.
 
-Pour fonctionner dans un [VPC][19], la couche Lambda doit avoir accès à [Internet][20]. Si vous utilisez un VPC, loguez vos métriques custom dans les logs CloudWatch afin de permettre à Datadog de les analyser.
+Pour fonctionner dans un [VPC][23], la couche Lambda doit avoir accès à [Internet][24]. Si vous utilisez un VPC, loguez vos métriques custom dans les logs CloudWatch afin de permettre à Datadog de les analyser.
 
 ## Données collectées
 ### Métriques
@@ -282,7 +282,7 @@ L'intégration AWS Lambda n'inclut aucun événement.
 L'intégration AWS Lambda n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][15].
 
 ## Pour aller plus loin
 
@@ -301,18 +301,18 @@ Besoin d'aide ? Contactez [l'assistance Datadog][14].
 [11]: https://app.datadoghq.com/logs
 [12]: https://aws.amazon.com/xray
 [13]: https://docs.datadoghq.com/fr/developers/metrics/distributions
-[14]: https://docs.datadoghq.com/fr/help
-[15]: https://app.datadoghq.com/account/settings#api
-[16]: https://docs.datadoghq.com/fr/developers/metrics
-[17]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[18]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[19]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/
-[20]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
-[21]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[22]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-[23]: https://github.com/DataDog/datadog-lambda-go/releases
-[24]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
-[25]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
+[14]: https://github.com/DataDog/datadog-lambda-go/releases
+[15]: https://docs.datadoghq.com/fr/help
+[16]: https://github.com/DataDog/datadog-lambda-layer-python/releases
+[17]: https://github.com/DataDog/datadog-lambda-layer-js/releases
+[18]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
+[19]: https://app.datadoghq.com/account/settings#api
+[20]: https://docs.datadoghq.com/fr/developers/metrics
+[21]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[22]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
+[23]: https://docs.datadoghq.com/fr/integrations/amazon_vpc
+[24]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
+[25]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
 
 
 {{< get-dependencies >}}
