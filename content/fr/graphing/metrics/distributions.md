@@ -5,7 +5,7 @@ description: Calculez les centiles globaux de l'intégralité de votre ensemble 
 aliases:
   - /fr/developers/faq/characteristics-of-datadog-histograms/
 further_reading:
-  - link: 'developers/dogstatsd/data_types#distributions'
+  - link: developers/metrics/dogstatsd_metrics_submission
     tag: Documentation
     text: Utilisation des distributions dans DogStatsD
 ---
@@ -55,5 +55,5 @@ Pour en savoir plus sur le nombre de métriques custom créées à partir de mé
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/distributions
+[1]: /fr/developers/metrics/metrics_type
 [2]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics

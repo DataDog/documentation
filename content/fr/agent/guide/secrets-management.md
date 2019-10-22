@@ -259,9 +259,9 @@ Secrets handle decrypted:
 
 Exemple sous Windows (en tant qu'administrateur Powershell)  :
 ```
-PS C:\> & 'C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
-Executable path: C:/chemin/vers/votre/executable.exe
+Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
 
 Rights Detail:
@@ -269,7 +269,7 @@ Acl list:
 stdout:
 
 
-Path   : Microsoft.PowerShell.Core\FileSystem::C:/chemin/vers/votre/executable.exe
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\path\to\you\executable.exe
 Owner  : BUILTIN\Administrators
 Group  : WIN-ITODMBAT8RG\None
 Access : NT AUTHORITY\SYSTEM Allow  FullControl
@@ -313,7 +313,7 @@ password: <déchiffré_motdepasse2>
 ===
 ```
 
-**Remarque** : vous devez [redémarrer][3] l'Agent pour prendre en compte les modifications apportées aux fichiers de configuration.
+**Remarque** : vous devez [redémarrer][2] l'Agent pour prendre en compte les modifications apportées aux fichiers de configuration.
 
 ### Débugging de secret_backend_command
 
@@ -370,7 +370,7 @@ Pour ce faire, suivez ces étapes :
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-Vous pouvez désormais vous connecter en tant que `ddagentuser` pour tester votre exécutable. Datadog possède un [script Powershell] [2] pour vous aider à tester votre exécutable à partir d'un autre utilisateur. Il vous permet de changer de contexte utilisateur et reproduire la façon dont votre Agent exécute l'exécutable.
+Vous pouvez désormais vous connecter en tant que `ddagentuser` pour tester votre exécutable. Datadog possède un [script Powershell][3] pour vous aider à tester votre exécutable à partir d'un autre utilisateur. Il vous permet de changer de contexte utilisateur et reproduire la façon dont votre Agent exécute l'exécutable.
 
 Exemple d'utilisation :
 
@@ -401,5 +401,5 @@ Si votre fichier `datadog.yaml` contient des secrets et que l'Agent refuse de d�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/autodiscovery
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

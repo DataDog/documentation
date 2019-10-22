@@ -15,13 +15,13 @@ further_reading:
     tag: Blog
     text: "Création d'un contexte avec la Service\_Map (Datadog + Airbnb)"
 ---
-La Service Map déconstruit votre application pour afficher tous les services qui la composent et dessiner les dépendances observées entre ces services en temps réel, ce qui vous permet d'identifier les goulots d'étranglement et de comprendre la circulation des données dans votre architecture.
+La Service Map affiche l'ensemble des [services][1] qui composent votre application et fait apparaître en temps réel les dépendances observées entre ces services, vous permettant ainsi d'identifier les goulots d'étranglement et de visualiser les flux de données au sein de votre architecture.
 
 {{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Présentation de Service Map" responsive="true">}}
 
 ## Implémentation
 
-La Service Map permet de visualiser les données recueillies par l'APM Datadog. Aucune configuration n'est requise pour afficher les services.
+La Service Map permet de visualiser les données recueillies par l'APM Datadog. Aucune configuration n'est requise pour afficher les [services][1].
 
 ## Comment l'utiliser
 
@@ -31,13 +31,13 @@ La Service Map a été conçue pour fournir un aperçu de vos services et de le
 
 La Service Map peut être filtrée en fonction du type de service (webserver, database, cache, etc.) ou d'une correspondance de chaîne approximative. Cette fonctionnalité est particulièrement utile dans un environnement de micro-services composé de centaines de milliers de nœuds.
 
-Il est possible d'ajouter des services à un contexte via l'option `env` et une [dimension de première classe][1] (facultative). Lorsque vous utilisez les menus déroulants pour sélectionner un contexte différent, une Service Map composée des services correspondants à ce contexte apparaît alors. Ces services ne peuvent pas appeler ni être appelés par d'autres services dans d'autres environnements.
+Les services sont également filtrés en fonction de leur `env` et d'une [dimension primaire][2] (facultative). Lorsque vous utilisez les menus déroulants pour sélectionner un contexte différent, une nouvelle carte illustrant les services correspondants à ce contexte est alors générée. Ces services ne peuvent pas appeler ni être appelés par des services dans d'autres environnements.
 
 ## Inspection
 
 Lorsque vous survolez un service avec la souris, cela le met en évidence et affiche le trafic de requêtes correspondant s'affiche sous forme de lignes animées afin de mieux identifier le sens de transfert des données.
 
-{{< img src="tracing/visualization/services_map/servicemap-anim.gif" alt="Service Map" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true" responsive="true" width="90%" >}}
 
 Lorsque vous cliquez sur un service, une option vous permettant de l'inspecter apparaît. Il est ainsi possible d'isoler le service, d'afficher la source des requêtes provenant d'autres services, et de visualiser les requêtes pour les données envoyées par ce service vers d'autres services. Généralement, les services sur la gauche sont plus proches de vos clients, tandis que ceux sur la droite sont plus susceptibles de correspondre à l'origine d'un problème.
 
@@ -69,11 +69,11 @@ En outre, les monitors peuvent être tagués par service dans la section « Say
 
 ### Nœuds et arêtes
 
-Les nœuds représentent les services tels qu'ils sont instrumentés dans l'APM. Ils sont identiques à ceux de votre page [Services][3]. Les arêtes représentent les appels agrégés d'un service à l'autre. Ces interactions sont illustrées sur le graphique de performances pour chaque trace individuelle.
+Les nœuds représentent les services tels qu'ils sont instrumentés dans l'APM et correspondent à ceux qui apparaissent sur votre page [Services][3]. Les arêtes représentent les appels agrégés d'un service à l'autre. Ces interactions sont illustrées dans le graphique de performances pour chaque [trace][4] individuelle.
 
 Les nouveaux services ou les nouvelles connexions s'affichent peu de temps après leur instrumentation et deviennent obsolètes si aucune trace correspondante n'est détectée pendant deux semaines. Ce système prend en compte les services qui ne fonctionnent que rarement, mais qui jouent un rôle essentiel dans un système opérationnel.
 
-{{< img src="tracing/visualization/services_map/servicenodes.gif" alt="Nœuds Service Map" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true" responsive="true" width="90%">}}
 
 ### Couleur
 
@@ -86,5 +86,7 @@ Les monitors ne se limitent pas aux monitors d'APM. Le tag service décrit ci-de
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/tracing/setup/first_class_dimensions
-[2]: https://app.datadoghq.com/apm/services
+[1]: /fr/tracing/visualization/#services
+[2]: /fr/tracing/setup/first_class_dimensions
+[3]: https://app.datadoghq.com/apm/services
+[4]: /fr/tracing/visualization/#trace
