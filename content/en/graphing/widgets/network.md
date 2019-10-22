@@ -3,6 +3,9 @@ title: Network Widget
 kind: documentation
 description: "Displays a timeseries of network data."
 further_reading:
+- link: "network_performance_monitoring/"
+  tag: "Documentation"
+  text: "Network Performance Monitoring"
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
@@ -11,7 +14,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The network widget supplements the network performance monitoring product by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between endpoints. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data. 
+The network widget supplements the [Network Performance Monitoring][2] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between endpoints. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data. 
 
 
 {{< img src="graphing/widgets/network/network_1.png" alt="Image" video="true" responsive="true" width="80%" >}}
@@ -42,32 +45,44 @@ The network widget supplements the network performance monitoring product by all
 
 ## API
 
-
-
-## API
-
-The dedicated [widget JSON schema definition][1] for the image widget is:
+The dedicated [widget JSON schema definition][1] for the network widget is:
 
 ```
-IMAGE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["image"]},
-        "url": {"type": "string"},
-        "sizing": {"enum": ["zoom", "fit", "center"]},
-        "margin": {"enum": ["small", "large"]}
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
+{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "network_query": {
+        "index": "netflow-search",
+        "search": {
+          "query": ""
+        },
+        "groupBy": [
+          {
+            "facet": {source_entity_type}
+          },
+          {
+            "facet": {destination_entity_type}
+          }
+        ],
+        "compute": {
+          "aggregation": "sum",
+          "facet": {type of data you’d like to display}
+        }
+      },
+      "style": {
+        "palette": {color},
+        "type": "solid",
+        "width": "normal"
+      },
+      "type": "area",
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "autoscale": true
 }
 ```
-
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the image widget use `image`|
-|`url`|string|yes|URL of the image|
-|`sizing`|string|no|How to size the image on the widget. Available values are: `zoom`, `fit` or `center`
-|`margin`|string|no|Size of the margins around the image. Available values are: `small` or `large`
 
 
 ## Further Reading
@@ -75,3 +90,4 @@ IMAGE_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/graphing_json/widget_json
+[2]: /network_performance_monitoring
