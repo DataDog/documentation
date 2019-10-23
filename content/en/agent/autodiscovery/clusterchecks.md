@@ -79,6 +79,32 @@ Running [custom Agent checks][7] as cluster checks is supported, as long as all 
 - Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
 - Must **not** depend on local resources that are not accessible to all Agents.
 
+### Advanced dispatching logic using dedicated cluster check runners
+
+The [Datadog Helm Chart][13] offers the possibility to deploy, via the `clusterchecksDeployment` field, a set of Datadog Agents configured to run cluster checks only.
+
+Running cluster checks using dedicated cluster check runners allows the Cluster Agent to use an advanced cluster check dispatching logic that takes into account the check instances execution time and metric samples in order to optimize the checks dispatching and distribution between cluster check runners.
+
+#### Advanced Dispatching - Cluster Agent setup
+
+In addition to the steps mentioned [above][14], `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` must be set to `true`.
+
+#### Advanced Dispatching - Cluster Check Runner setup
+
+The following environment variables are required to configure the Cluster Check Runners to expose their check stats, the stats are consumed by the Cluster Agent and used to optimize the cluster checks dispatching logic.
+
+```
+  env:
+    - name: DD_CLC_RUNNER_ENABLED
+      value: "true"
+    - name: DD_CLC_RUNNER_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+```
+
+**Note**: The advanced dispatching logic is only supported when using dedicated cluster check runners. For now, the feature does not support regular node Agents.
+
 ## Setting up check configurations
 
 ### Static configurations in files
@@ -287,3 +313,5 @@ The Agent `status` command should show the check instance running and reporting 
 [10]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
 [11]: /integrations/http_check
 [12]: /integrations/nginx
+[13]: https://github.com/helm/charts/tree/master/stable/datadog
+[14]: /agent/autodiscovery/clusterchecks/#cluster-agent-setup
