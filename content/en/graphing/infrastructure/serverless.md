@@ -27,31 +27,18 @@ The Serverless dashboard requires no installation of its own, but it relies on t
 
     This integration populates the summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
 
-    **Note**: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][4].
+    **Note**: Metrics in the Serverless page are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][4].
 
-2. [AWS X-Ray integration][5] (optional)
-    This integration provides traces for Lambda functions in the function detail page and allows the detection of Lambda function cold start.
+2. [AWS X-Ray integration][5] (recommended)
+    This integration provides full end-to-end tracing for requests hit your Lambda functions. The traces appear in the Serverless function detail page and in Datadog APM.
 
-    Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
-    ```
-    xray:BatchGetTraces,
-    xray:GetTraceSummaries
-    ```
-    If using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
-
-    Recommended X-Ray setup:
-
-    - Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
-
-    - Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See an [example of this in Python][6].
-
-    - Datadog's X-Ray integration supports custom subsegments and annotations as well.
+    To enable this, refer to the [AWS X-Ray integration documentation][6].
 
     **Note**: Traces are delayed ~5 minutes, as this is the speed at which Datadog polls AWS X-Ray APIs.
 
-3. AWS CloudWatch Logs (optional)
+3. AWS CloudWatch Logs (recommended)
 
-    Install this if you want to see logs from your Lambda functions in the function detail page. This also populates the additional metrics such as Memory Used (avg) and Last Start in your functions table.
+    Install this to see logs from your Lambda functions in the function detail page. This also populates the additional metrics such as Memory Used (avg) and Last Start in your functions table.
 
     To enable this, refer to the [documentation for sending Lambda logs to Datadog][2].
 
@@ -149,4 +136,4 @@ The errors tab bubbles up exceptions that occured during the duration of the tra
 [3]: /integrations/amazon_web_services
 [4]: /help
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[6]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
+[6]: /integrations/amazon_xray
