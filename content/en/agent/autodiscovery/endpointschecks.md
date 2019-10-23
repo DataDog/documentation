@@ -71,8 +71,6 @@ This works like that to leverage [autodiscovery][3], and attach pod and containe
 
 ### Cluster Agent setup
 
-This feature requires a running [Cluster Agent with the Cluster Checks feature enabled][4].
-
 Enable the `kube_endpoints` configuration provider and listener on the Datadog **Cluster** Agent. This can be done by setting the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables:
 
 ```
@@ -80,7 +78,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: It's required to enable [Cluster Checks][1] if the monitored Endpoints are not backed by pods. This can be done by adding the `kube_services` configuration provider and listener:
+**Note**: It's required to [enable Cluster Checks][4] if the monitored Endpoints are not backed by pods. This can be done by adding the `kube_services` configuration provider and listener:
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
