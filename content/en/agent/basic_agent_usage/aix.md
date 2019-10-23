@@ -36,9 +36,9 @@ Alternatively, download links for the latest releases can be found on [this page
 
 The installer may be executed as follows (as root):
 
-```shell
+{{< code-block lang="bash" wrap="true" >}}
 installp -aXYgd ./datadog-unix-agent-<version>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
-```
+{{< /code-block >}}
 
 This installs the Agent in `/opt/datadog-agent`.
 
@@ -96,13 +96,13 @@ DogStatsD relies on the same configuration file defined for the Agent, where a D
 
 To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
 
-```
+{{< code-block lang="yaml" filename="/etc/datadog-agent/datadog.yaml" >}}
 dogstatsd:                        # DogStatsD configuration options
   enabled: true                   # disabled by default
   bind_host: localhost            # address we'll be binding to
   port: 8125                      # DogStatsD UDP listening port
   non_local_traffic: false        # listen to non-local traffic
-```
+{{< /code-block >}}
 
 **Note:** DogStatsD does not daemonize and runs in the foreground.
 
@@ -112,9 +112,9 @@ There are also facilities to run the Agent via the known Python supervisor. This
 
 To remove an installed Agent, run the following `installp` command:
 
-```
+{{< code-block lang="bash" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
-```
+{{< /code-block >}}
 
 Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 

@@ -51,11 +51,11 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="filename.py" >}}
 from datadog import initialize, statsd
 import time
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -66,14 +66,14 @@ while(1):
   statsd.increment('example_metric.increment', tags=["environment:dev"])
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="filename.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -84,14 +84,14 @@ while true do
     statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="filename.go" >}}
 package main
 
 import (
@@ -100,12 +100,12 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
-    for {
+    for {ÿ
 
         statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
         statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -113,24 +113,24 @@ func main() {
         time.Sleep(10)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```java
+{{< code-block lang="java" filename="filename.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
             Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
             Statsd.count("example_metric.count", 2, ["environment:dev"]);
@@ -138,23 +138,23 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="filename.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -164,7 +164,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
             DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
             DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
@@ -172,14 +172,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="filename.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -192,12 +192,12 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->increment('example_metric.increment', array('environment'=>'dev'));
     $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
