@@ -164,12 +164,21 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 Tracer.Instance = tracer;
 ```
 
+The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
+
 Location of the profiler log:
 
 | Platform | Path                                                          |
 |----------|---------------------------------------------------------------|
 | Linux    | `/var/log/datadog/dotnet-profiler.log`                        |
 | Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\dotnet-profiler.log` |
+
+Location of additional logs when debug is enabled:
+
+| Platform | Path                                                          |
+|----------|---------------------------------------------------------------|
+| Linux    | `/var/log/datadog/`                        |
+| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\` |
 
 
 {{% /tab %}}
