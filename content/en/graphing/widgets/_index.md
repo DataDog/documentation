@@ -24,7 +24,6 @@ aliases:
     {{< nextlink href="/graphing/widgets/image" >}}Image{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/network" >}}Network{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/note" >}}Notes and Links{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
