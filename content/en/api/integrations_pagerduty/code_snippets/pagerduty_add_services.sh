@@ -5,7 +5,10 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -v -X POST -H "Content-type: application/json" \
+curl -v -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
       "services": [
         {
@@ -19,4 +22,4 @@ curl -v -X POST -H "Content-type: application/json" \
       ],
       "schedules": ["<SCHEDULE_1>", "<SCHEDULE_2>"],
   }' \
-"https://api.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/pagerduty"

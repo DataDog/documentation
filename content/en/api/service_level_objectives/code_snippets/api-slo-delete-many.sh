@@ -7,5 +7,9 @@ app_key=<YOUR_APP_KEY>
 slo_ids=<YOUR_SLO_IDS_CSV>
 
 # Delete a SLO
-curl -X DELETE -H "Content-Type: applicaton/json" -d '[${slo_ids}]' \
-  "https://api.datadoghq.com/api/v1/slo/?api_key=${api_key}&application_key=${app_key}"
+curl -X DELETE \
+-H "Content-Type: applicaton/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d '[${slo_ids}]' \
+"https://api.datadoghq.com/api/v1/slo/"

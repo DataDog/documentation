@@ -10,4 +10,6 @@ offset=<OFFSET>
 limit=<LIMIT>
 
 curl -X GET \
-    "https://api.datadoghq.com/api/v1/slo?api_key=${api_key}&application_key=${app_key}&query=${query}&offset=${page}&limit=${per_page}"
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/slo?query=${query}&offset=${page}&limit=${per_page}"
