@@ -31,7 +31,8 @@ Datadog Log Management also comes with a set of out of the box solutions to coll
 
 * [**Collect logs from your hosts**][12].
 * [**Collect logs from your applications**](?tab=ussite#application-log-collection).
-* [**Collect logs from a docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a Docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a serverless environment**](?tab=ussite#serverless-log-collection).
 * [**Collect logs from your Cloud provider**](?tab=ussite#cloud-providers-log-collection).
 
 Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][13], [parsing][14], and [facets][15] in Datadog.
@@ -58,6 +59,11 @@ It is possible to collect logs from all your containers or [only a subset filter
 Choose your environment below to get dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
+
+## Serverless Log collection
+
+Datadog can collect logs from AWS Lambda. 
+
 
 ## Cloud Providers Log collection
 
@@ -144,8 +150,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{% tab "HTTP" %}}
 
-To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation](https://docs.datadoghq.com/api/?lang=python#send-logs-over-http).
+To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation][1].
 
+[1]: https://docs.datadoghq.com/api/?lang=python#send-logs-over-http
 {{% /tab %}}
 {{< /tabs >}}
 
