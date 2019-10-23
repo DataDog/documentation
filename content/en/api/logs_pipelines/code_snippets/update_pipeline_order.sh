@@ -5,12 +5,15 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -X PUT "https://api.datadoghq.com/api/v1/logs/config/pipeline-order?api_key=${api_key}&application_key=${app_key}" \
-  -H 'Content-Type: application/json' \
-  -d '{
+curl -X PUT \
+-H 'Content-Type: application/json' \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d '{
     "pipeline_ids": [
         "<PIPELINE_1_ID>",
         "<PIPELINE_2_ID>",
         "<PIPELINE_3_ID>"
     ]
-}'
+}' \
+"https://api.datadoghq.com/api/v1/logs/config/pipeline-order"

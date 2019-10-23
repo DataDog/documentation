@@ -7,10 +7,13 @@ app_key=<YOUR_APP_KEY>
 monitor_id=<YOUR_MONITOR_ID>
 
 # Edit a monitor
-curl -X PUT -H "Content-type: application/json" \
+curl -X PUT \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
       "query": "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 100",
       "name": "Bytes received on host0",
       "message": "We may need to add web hosts if this is consistently high."
 }' \
-    "https://api.datadoghq.com/api/v1/monitor/${monitor_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/monitor/${monitor_id}"

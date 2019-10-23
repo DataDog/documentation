@@ -6,7 +6,10 @@ api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
 # Create an AWS Account in Datadog
-curl -X POST -H "Content-type: application/json" \
+curl -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
         "account_id": "<AWS_ACCOUNT_ID>",
         "filter_tags": ["<KEY>:<VALUE>"],
@@ -17,4 +20,4 @@ curl -X POST -H "Content-type: application/json" \
         	"opsworks": false
         }
     }'\
-"https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/aws"

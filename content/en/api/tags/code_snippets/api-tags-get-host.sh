@@ -5,9 +5,15 @@ app_key=<YOUR_APP_KEY>
 host=$1
 
 # Find a host to add a tag to
-host_name=$(curl -G "https://api.datadoghq.com/api/v1/search" \
-    -d "api_key=${api_key}" \
-    -d "application_key=${app_key}" \
-	-d "q=hosts:$host" | cut -d'"' -f6)
+host_name=$(curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d "api_key=${api_key}" \
+-d "application_key=${app_key}" \
+-d "q=hosts:$host" | cut -d'"' -f6 \
+"https://api.datadoghq.com/api/v1/search")
 
-curl "https://api.datadoghq.com/api/v1/tags/hosts/${host_name}?api_key=${api_key}&application_key=${app_key}"
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/tags/hosts/${host_name}"

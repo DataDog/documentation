@@ -9,4 +9,7 @@ to_ts=<to epoch timestamp>
 from_ts=<from epoch timestamp>
 
 # Get SLO history
-curl -X GET "https://api.datadoghq.com/api/v1/slo/${slo_id}?api_key=${api_key}&application_key=${app_key}&from_ts=${from_ts}&to_ts={$to_ts}"
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/slo/${slo_id}?from_ts=${from_ts}&to_ts={$to_ts}"
