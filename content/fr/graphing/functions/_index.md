@@ -188,4 +188,4 @@ Documentation relative à [StatsD/DogStatsD][11].
 [8]: /fr/graphing/functions/rollup
 [9]: /fr/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [10]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[11]: /fr/developers/dogstatsd
+[11]: /fr/developers/metrics/dogstatsd_metrics_submission

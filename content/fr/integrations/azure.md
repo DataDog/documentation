@@ -63,17 +63,18 @@ Les intégrations connexes comprennent :
 | [Event Grid][54]                | Un service pour gérer le routage des événements qui permet une consommation d'événements uniforme à l'aide d'un modèle pub/sub.       |
 | [Event Hubs][9]                  | Un service géré de flux de données à grande échelle                                                                   |
 | [ExpressRoute][57]              | Un service pour étendre vos réseaux locaux dans le cloud.                                             |
+| [Pare-feu][71]                  | Un service de sécurité réseau basé sur le cloud pour protéger les ressources de votre réseau virtuel Azure.                            |
 | [HDInsights][55]                | Un service cloud conçu pour traiter d'importants volumes de données.                                                   |
 | [IOT Hub][10]                   | Connexion, surveillance et gestion de milliards de ressources IoT                                                       |
-| [Key Vault][53]                 | Un service qui protège et gère les clés de chiffrement et les secrets utilisés par les services et applications cloud. |
+| [Key Vault][53]                 | Un service conçu pour protéger et gérer les clés de chiffrement et les secrets utilisés par les services et applications cloud. |
 | [Load Balancer][58]             | Permet de mettre à l'échelle vos applications et d'assurer la haute disponibilité de vos services.                                    |
 | [Logic App][11]                 | Conception de solutions d'intégration puissantes                                                                      |
 | [Network Interfaces][59]        | Permet la mise en communication d'une machine virtuelle avec Internet, Azure et des ressources locales.                                 |
 | [Notification Hubs][61]         | Un moteur de notifications Push qui vous permet d'envoyer des notifications vers toutes les plateformes depuis n'importe quel backend.                     |
-| [Public IP Address][60]         | Une ressource qui permet d'effectuer des communications entrantes et une connectivité sortante à partir d'Internet.                |
+| [Adresse IP publique][60]         | Une ressource qui permet d'assurer une connectivité entrante et une connectivité sortante à partir d'Internet.                |
 | [Redis Cache][12]               | Cache de données géré                                                                                        |
 | [Relay][62]                     | Permet l'exposition sécurisée des services exécutés dans votre réseau d'entreprise sur le cloud public.                          |
-| [Search][63]                    | Un service de recherche basé sur le cloud qui fournit des outils permettant d'ajouter une expérience de recherche riche.             |
+| [Recherche][63]                    | Un service de recherche basé sur le cloud qui fournit des outils permettant d'ajouter une expérience de recherche riche.             |
 | Stockage                         | Stockage d'[objets blob][65], de [fichiers][66], de [files d'attente][67] et de [tables][68].                                      |
 | [Stream Analytics][64]          | Un moteur de traitement d'événements pour analyser d'importants volumes de données diffusées à partir d'appareils.                        |
 | [SQL Database][14]              | Base de données relationnelle fortement évolutive dans le cloud                                                          |
@@ -211,7 +212,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 
 ##### Créer l'application Web
 
-1. Sous **Azure Active Directory**, accédez à **Inscriptions d'applications** et cliquez sur **Nouvelle inscription** :
+1. Sous **Azure Active Directory**, accédez à **Inscriptions des applications** et cliquez sur **Nouvelle inscription d'application** :
 
 2. Saisissez les informations suivantes et cliquez sur le bouton **Créer**. **Remarque** : le nom et l'URL de connexion ne sont pas utilisés et sont seulement requis dans le cadre du processus de configuration. 
   * Nom : `Datadog Auth`
@@ -247,7 +248,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 2. Pour cette même application, accédez à **Gérer** -> **Certificats et secrets**.
 3. Ajoutez un nouveau *Clé secrète client* intitulée `datadogClientSecret`, sélectionnez un intervalle pour *Date d'expiration* et cliquez sur **Ajouter** :
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="client secret azure" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure" responsive="true" popup="true" style="width:80%">}}
 
 3. Une fois la valeur de la clé indiquée, collez-la dans le [carré d'intégration Azure de Datadog][1], sous **Client Secret**, puis cliquez sur **Install Integration** ou **Update Configuration**.
 
@@ -295,14 +296,14 @@ Pour recueillir des logs à partir de l'ensemble de vos services Azure sauf App�
 
 Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer votre première fonction à l'aide du portail Azure][6].
 
-1. Dans le [portail Azure][2], accédez à *Applications de fonctions -> Fonctions* et cliquez sur **Nouvelle fonction** :
+1. Dans le [portail Azure][2], accédez à *Applications de fonctions -> Fonctions* et cliquez sur **Nouvelle fonction**.
 2. Choisissez de générer votre fonction **Dans le portail** et utilisez le modèle de déclencheur Event Hub (sous **Autres modèles…**). Si besoin, installez l'extension `Microsoft.Azure.WebJobs.Extensions.EventHubs`.
 3. Nommez votre fonction sous le champ **Nom**.
 4. Sélectionnez ou ajoutez votre **Connexion de l'Event Hub**.
-5. Sélectionnez le language JavaScript dans le menu de droite.
+5. Sélectionnez le langage JavaScript dans le menu de droite.
 6. Sélectionnez le **Groupe de consommateurs Event Hub** et le **Nom de l'Event Hub** à partir desquels vous souhaitez récupérer des logs.
 7. Cliquez sur **Créer**.
-8. Créez un fichier `index.js` et ajoutez le [code Datadog/Fonction Azure][7] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][8]).
+8. Créez un fichier `index.js` et ajoutez le [code de la fonction Datadog/Azure][7] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][8]).
 9. Enregistrez la fonction.
 10. Pour **Intégrer**, définissez **Nom du paramètre d'événement** sur `eventHubMessages`, et cliquez sur **Enregistrer**.
 11. Vérifiez que vos logs sont présents dans le [Log Explorer de Datadog][9] pour confirmer que la fonction est bien configurée.
@@ -321,11 +322,11 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 
 {{% tab "Stockage Blob" %}}
 
-Pour recueillir des logs à partir de l'ensemble de vos services Azure sauf App Services, suivez cette méthode globale :
+Pour recueillir des logs à partir de l'ensemble de vos Azure App Services, suivez cette méthode globale :
 
-1. Configurez [Stockage Blob Azure][1] depuis le [portail Azure][2], [Explorer_Stockage_Azure][6], [Azure CLI][3], ou [Powershell][4].
+1. Configurez [Stockage Blob Azure][1] depuis le [portail Azure][2], [Azure Storage Explorer][6], [Azure CLI][3] ou [Powershell][4].
 2. [Configurez la fonction Datadog/Azure](#creer-une-fonction-stockage-blob-azure) qui transmet les logs depuis votre stockage blob vers Datadog.
-3. [Configurez vos Azure App Services pour transférer leurs logs au Stockage Blob][5].
+3. [Configurez vos Azure App Services de façon à transférer leurs logs au Stockage Blob][5].
 
 #### Créer une fonction Stockage Blob Azure
 
@@ -335,9 +336,9 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 2. Choisissez de générer votre fonction **Dans le portail** et utilisez le modèle de déclencheur de Stockage Blob (sous **Autres modèles…**). Si besoin, installez l'extension `Microsoft.Azure.WebJobs.Extensions.Storage`.
 3. Nommez votre fonction sous le champ **Nom**.
 4. Sélectionnez ou ajoutez votre **Connexion du compte de stockage**.
-5. Sélectionnez le language JavaScript dans le menu de droite.
+5. Sélectionnez le langage JavaScript dans le menu de droite.
 6. Cliquez sur **Créer**.
-7. Créez un fichier `index.js` et ajoutez le [code Datadog/Fonction Azure][8] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][9]).
+7. Créez un fichier `index.js` et ajoutez le [code de la fonction Datadog/Azure][8] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][9]).
 8. Enregistrez la fonction.
 9. Pour **Intégrer**, définissez **Nom du paramètre Blob** sur `blobContent`, et cliquez sur **Save**.
 10. Vérifiez que vos logs sont présents dans le [Log Explorer de Datadog][10] pour confirmer que la fonction est bien configurée.
@@ -397,6 +398,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][40].
 [32]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quickstart-cli
 [33]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quickstart-powershell
 [34]: https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitor-stream-monitoring-data-event-hubs
+[37]: https://app.datadoghq.com/account/settings#api
 [39]: https://azure.microsoft.com/en-us/services/event-hubs
 [40]: https://docs.datadoghq.com/fr/help
 [41]: https://docs.datadoghq.com/fr/integrations/azure_analysis_services
@@ -429,6 +431,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][40].
 [68]: https://docs.datadoghq.com/fr/integrations/azure_table_storage
 [69]: https://docs.datadoghq.com/fr/integrations/azure_app_service_plan
 [70]: https://docs.datadoghq.com/fr/integrations/azure_app_service_environment
+[71]: https://docs.datadoghq.com/fr/integrations/azure_firewall/
 
 
 {{< get-dependencies >}}

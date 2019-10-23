@@ -75,7 +75,7 @@ This feature requires a running [Cluster Agent with the Cluster Checks feature e
 
 Enable the `endpointschecks` configuration providers on the Datadog **Node** Agent. This can be done in two ways:
 
-- By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable:
+- By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"

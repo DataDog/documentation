@@ -1,5 +1,5 @@
 ---
-title: Gestion de découverte de conteneurs
+title: Gestion de la découverte de conteneurs
 kind: documentation
 further_reading:
   - link: /agent/autodiscovery/integrations

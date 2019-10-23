@@ -28,9 +28,9 @@ Vous pouvez utiliser des logs indexés pour la [recherche à facettes][2], l'[an
 
 ## Filtres d'exclusion
 
-Les filtres d'index vous permettent de contrôler de façon dynamique les éléments ajoutés à vos index.
+Les filtres d'index vous permettent de contrôler de façon dynamique le contenu ajouté à vos index. Lorsque l'échantillonnage de logs est configuré, celui-ci est aléatoire et uniforme : l'importance relative de chaque log n'est pas affectée. Par exemple, si certains logs ont été recueillis à des seules fins de dépannage, il peut être préférable d'indexer un certain pourcentage des logs correspondant à des erreurs ou à des avertissements.
 
-Par exemple, si certains logs ont été capturés à des seules fins de dépannage (Troubleshooting), vous aurez peut-être uniquement besoin d'indexer les logs qui contiennent des erreurs et des avertissements. Pour ce faire, il vous suffit d'utiliser des filtres d'exclusion.
+**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
 
 Pour définir un nouveau filtre d'index, cliquez sur le bouton d'ajout :**
 
@@ -46,13 +46,11 @@ Pour configurer un filtre d'exclusion :
 
     {{< img src="logs/indexes/index_filter_details.png" alt="détails du filtre d'index" responsive="true" style="width:80%;">}}
 
-**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
-
 ### Réorganiser les filtres
 
 L'ordre des filtres d'exclusion rentre en considération. Contrairement à la façon dont plusieurs pipelines peuvent traiter un log, si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée.
 
-Réorganisez votre pipeline pour vous assurer que les filtres d'exclusion appropriés s'appliquent à votre log. Par exemple, il est recommandé de configurer les filtres en organisant les requêtes de sorte qu'elles apparaissent des moins inclusives au plus inclusives.
+Réorganisez votre pipeline pour vous assurer que les filtres d'exclusion appropriés s'appliquent à votre log. Par exemple, il est conseillé de configurer les filtres de façon à ce que les requêtes les plus inclusives soient traitées en premier.
 
 Pour réorganiser votre filtre d'exclusion, faites-le glisser et déposez-le dans l'ordre de votre choix.
 
@@ -61,7 +59,7 @@ Pour réorganiser votre filtre d'exclusion, faites-le glisser et déposez-le dan
 ### Activer/désactiver des filtres
 
 Même si les logs ne nécessitent pas tous une indexation journalière, ils peuvent parfois s'avérer pertinents dans certaines situations.
-Les logs de débogage, par exemple, ne sont pas toujours utiles, mais ils peuvent devenir indispensables durant un processus de dépannage complexe ou lors du lancement d'une nouvelle version de production.
+Les logs de debugging, par exemple, ne sont pas toujours utiles, mais peuvent devenir indispensables durant une opération de dépannage complexe ou lors du lancement d'une nouvelle version de production.
 
 Au lieu de modifier le niveau de journalisation de votre application ou d'utiliser un outil de filtrage interne complexe, vous pouvez modifier les éléments indexés directement avec les filtres d'index de Datadog.
 
@@ -69,16 +67,27 @@ Vous pouvez les activer ou les désactiver en un seul clic depuis la page Pipeli
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="activer les filtres d'index" responsive="true" style="width:80%;">}}
 
-## Plusieurs index
+### Définir un quota journalier
+
+Il est possible de définir un quota journalier pour limiter le nombre de logs stockés dans un index au cours d'une journée. Ce quota est appliqué à l'ensemble des logs qui auraient dû être stockés (c'est-à-dire une fois les filtres d'exclusion appliqués).
+Une fois ce quota atteint, les logs ne sont plus indexés. Ils restent toutefois disponibles pour le [live tailing][7] et continuent à être [envoyés vers vos archives][8] et utilisés pour [générer des métriques][9].
+
+Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
+
+{{< img src="logs/indexes/index_quota.png" alt="détails de l'index" responsive="true" style="width:70%;">}}
+
+**Remarque** : le quota journalier d'un index est automatiquement réinitialisé à 14 h 00 UTC (16 h 00 CET, 10 h 00 EDT, 7 h 00 PDT).
+
+## Index multiples
 
 Il est également possible de configurer plusieurs index avec différentes périodes de rétention (**fonctionnalité disponible en version bêta privée**).
 Les logs entrent dans le premier index qui correspond à leur filtre. Il est donc important d'organiser minutieusement vos index.
 
 Par exemple, si vous créez un premier index filtré sur l'attribut `status:notice`, un deuxième index filtré sur l'attribut `status:error` et un dernier index sans filtre (l'équivalent de `*`), tous vos logs de notifications seront envoyés vers le premier index, tous vos logs d'erreur iront dans le deuxième index et tout le reste ira dans le dernier.
 
-{{< img src="logs/indexes/multi_index.png" alt="Plusieurs index" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/multi_index.png" alt="Index multiples" responsive="true" style="width:70%;">}}
 
-Plusieurs index permettent également de définir des règles d'accès pour les données contenues dans chaque index. [Vous trouverez plus d'informations dans la documentation relative au contrôle d'accès à base de rôle][6].
+L'utilisation d'index multiples vous permet également de définir des règles d'accès pour les données contenues dans chaque index. [Vous trouverez plus d'informations dans la documentation relative au contrôle d'accès à base de rôles][6].
 
 ## Pour aller plus loin
 
@@ -92,3 +101,6 @@ Plusieurs index permettent également de définir des règles d'accès pour les 
 [4]: /fr/logs/explorer/analytics/#dashboard
 [5]: /fr/monitors/monitor_types/log
 [6]: /fr/account_management/rbac
+[7]: https://docs.datadoghq.com/fr/logs/live_tail/#overview
+[8]: https://docs.datadoghq.com/fr/logs/archives/
+[9]: https://docs.datadoghq.com/fr/logs/logs_to_metrics/

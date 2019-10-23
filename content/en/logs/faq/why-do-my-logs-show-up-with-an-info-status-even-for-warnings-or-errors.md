@@ -68,5 +68,5 @@ There are specific status formats that must be adhered to for the remapping to w
 
 [1]: /logs/processing/parsing/?tab=matcher
 [2]: /logs/processing/processors/#log-status-remapper
-[3]: /logs/#reserved-attributes
-[4]: /logs/#edit-reserved-attributes
+[3]: /logs/processing/#reserved-attributes
+[4]: /logs/processing/#edit-reserved-attributes

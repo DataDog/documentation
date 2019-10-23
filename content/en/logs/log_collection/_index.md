@@ -31,7 +31,8 @@ Datadog Log Management also comes with a set of out of the box solutions to coll
 
 * [**Collect logs from your hosts**][12].
 * [**Collect logs from your applications**](?tab=ussite#application-log-collection).
-* [**Collect logs from a docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a Docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a serverless environment**](?tab=ussite#serverless-log-collection).
 * [**Collect logs from your Cloud provider**](?tab=ussite#cloud-providers-log-collection).
 
 Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][13], [parsing][14], and [facets][15] in Datadog.
@@ -59,6 +60,11 @@ Choose your environment below to get dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
 
+## Serverless Log collection
+
+Datadog can collect logs from AWS Lambda. 
+
+
 ## Cloud Providers Log collection
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
@@ -77,10 +83,12 @@ The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` fo
 You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 ```
-<DATADOG_API_KEY> this is my log
+<DATADOG_API_KEY> <PAYLOAD>
 ```
 
-Test it manually with telnet:
+**Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
+
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -91,7 +99,7 @@ This produces the following result in your [live tail page][2]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-Datadog automatically parses attributes out of JSON formatted messages.
+In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -111,10 +119,12 @@ The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` fo
 You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 ```
-<DATADOG_API_KEY> this is my log
+<DATADOG_API_KEY> <PAYLOAD>
 ```
 
-Test it manually with telnet:
+**Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
+
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -125,7 +135,7 @@ This produces the following result in your [live tail page][2]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-Datadog automatically parses attributes out of JSON formatted messages.
+In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -140,8 +150,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{% tab "HTTP" %}}
 
-To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation](https://docs.datadoghq.com/api/?lang=python#send-logs-over-http).
+To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation][1].
 
+[1]: https://docs.datadoghq.com/api/?lang=python#send-logs-over-http
 {{% /tab %}}
 {{< /tabs >}}
 

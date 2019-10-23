@@ -2,7 +2,8 @@
 aliases:
   - /fr/integrations/hipchat/
 categories:
-  - Collaboration
+  - collaboration
+  - notification
 ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog sur la chaîne Slack de votre équipe.

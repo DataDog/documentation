@@ -40,7 +40,7 @@ Ce check surveille la taille de toutes les files d'attente Postfix.
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -127,31 +127,27 @@ La convention de nommage et les destinations des fichiers log sont configurables
     mail.debug                                  /var/log/maillog
 ```
 
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre fichier `datadog.yaml` :
+    ```yaml
+      logs_enabled: true
+    ```
 
-  ```
-  logs_enabled: true
-  ```
+2. Ajoutez le bloc de configuration suivant à votre fichier `postfix.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postfix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-* Ajoutez le bloc de configuration suivant à votre fichier `postfix.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postfix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+    ```yaml
+      logs:
+        - type: file
+          path: /var/log/mail.log
+          source: postfix
+          service: myapp
+    ```
 
-  ```
-  logs:
-    - type: file
-      path: /var/log/mail.log
-      source: postfix
-      service: myapp
-  ```
-
-* [Redémarrez l'Agent][7].
-
-**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][8].**
-
+3. [Redémarrez l'Agent][7].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][9] et cherchez `postfix` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][9] et cherchez `postfix` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -169,6 +165,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
+Documentation, liens et articles supplémentaires utiles :
+
 * [Surveiller les performances de files d'attente Postfix][7]
 
 
@@ -179,7 +177,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [5]: https://github.com/DataDog/integrations-core/blob/master/postfix/datadog_checks/postfix/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [7]: https://www.datadoghq.com/blog/monitor-postfix-queues
-[8]: https://docs.datadoghq.com/fr/logs
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/postfix/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help

@@ -12,12 +12,7 @@ further_reading:
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
-## Modifier le nom d'un timeboard
-
-1. Cliquez sur l'icône d'information dans le coin supérieur droit du timeboard :
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="nom du timeboard" responsive="true" style="width:75%;">}}
-2. Cliquez sur l'icône en forme de crayon pour modifier le titre et la description.
-3. Cliquez sur la coche pour enregistrer les modifications
+Les timeboards possèdent une disposition automatique. Ils représentent un seul point (fixe ou en temps réel) sur l'ensemble du dashboard. Ils sont généralement utilisés pour le dépannage, la corrélation et l'exploration globale des données.
 
 ## Corrélation d'événements
 
@@ -35,9 +30,9 @@ Pour activer la corrélation d'événements au moment de la configuration, modif
 
 Configurez la corrélation d'événements au moment de l'affichage en cliquant sur le lien *Search Events or Logs* en haut à gauche, puis sur **Events**. Ensuite, entrez une requête dans la barre de recherche. Cela remplace tous les événements ajoutés au moment de la configuration et applique les événements à l'ensemble des graphiques de ce dashboard en les superposant.
 
-## Corrélation entre les logs et les métriques
+## Corréler vos logs avec vos métriques
 
-### Recherche de logs dans les timeboards
+### Rechercher des logs dans les timeboards
 
 Cliquez sur le lien *Search Events or Logs* en haut à gauche, puis sélectionnez **Logs**. Ensuite, saisissez une requête dans la barre de recherche. La fréquence des logs s'affiche alors en superposition sur vos widgets de séries temporelles. Cliquez sur un log spécifique pour afficher l'ensemble de son contenu.
 

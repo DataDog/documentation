@@ -542,5 +542,5 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [2]: /ja/logs/processing/parsing
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /ja/logs/?tab=euregion#datadog-logs-endpoints
+[5]: /ja/logs/log_collection/?tab=eusite#datadog-logs-endpoints
 [6]: /ja/logs/processing/parsing/#key-value
