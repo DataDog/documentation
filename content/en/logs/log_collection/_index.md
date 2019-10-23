@@ -82,7 +82,7 @@ You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 **Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
 
-Test it manually with telnet, example of `<PAYLOAD>` in raw format:
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -118,7 +118,7 @@ You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 **Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
 
-Test it manually with telnet, example of `<PAYLOAD>` in raw format:
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
