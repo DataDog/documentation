@@ -114,13 +114,16 @@ The alert conditions vary slightly based on the chosen detection method.
 
 **Definitions**:
 
-| Option                  | Description                                                                                                                                                                                                      |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                      |
-| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above. |
-| at&nbsp;all&nbsp;times  | If every point in the generated series is outside the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below.   |
-| in&nbsp;total           | If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` function to your monitor query.                                                           |
+| Option                  | Description                                                                                                                                                                                                                   |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                                   |
+| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above.              |
+| at&nbsp;all&nbsp;times  | If all points in the evaluation window for your query are across the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below. |
+| in&nbsp;total           | If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` function to your monitor query.                                                                        |
 
+**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
+
+[1]: /monitors/guide/as-count-in-monitor-evaluations
 {{% /tab %}}
 {{% tab "Change" %}}
 
