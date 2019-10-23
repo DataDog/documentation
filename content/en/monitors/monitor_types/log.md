@@ -70,8 +70,17 @@ Notifications from monitors split by group include the top 10 breaching values i
 
 To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping:
 
-* Ungrouped: `Include a sample of 10 logs in the alert notification`
 * Grouped: `Include a table of the top 10 breaching values`
+* Ungrouped: `Include a sample of 10 logs in the alert notification`
+
+#### Examples
+
+Include a table of the top 10 breaching values:
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+
+Include a sample of 10 logs in the alert notification:
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
