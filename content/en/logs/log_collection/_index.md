@@ -62,7 +62,7 @@ Choose your environment below to get dedicated log collection instructions:
 
 ## Serverless Log collection
 
-Datadog can collect logs from AWS Lambda. To enable this, refer to the [AWS Lambda integration documentation][20].
+Datadog collects logs from AWS Lambda. To enable this, refer to the [AWS Lambda integration documentation][20].
 
 ## Cloud Providers Log collection
 
