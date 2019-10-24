@@ -281,6 +281,14 @@ ac_exclude = ["name:datadog-agent"]
 {{% /tab %}}
 {{< /tabs >}}
 
+## Conteneurs de courte durée
+
+Dans un environnement Docker, l'Agent reçoit les mises à jour de conteneurs en temps réel via les événements Docker. L'Agent extrait et met à jour la configuration toutes les secondes depuis les étiquettes de conteneur (Autodiscovery)
+
+À partir de l'Agent v6.14+, l'Agent recueille les logs de tous les conteneurs (qu'ils soient exécutés ou arrêtés). Par conséquent, les logs des conteneurs de courte durée qui ont été lancés ou arrêtés il y a moins d'une seconde sont également recueillis tant qu'ils ne sont pas supprimés.
+
+Pour les environnements Kubernetes, consultez la [documentation relative aux conteneurs de courte durée Kubernetes][5]
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -289,3 +297,4 @@ ac_exclude = ["name:datadog-agent"]
 [2]: /fr/agent/autodiscovery
 [3]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [4]: /fr/agent/logs/#custom-log-collection
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#short-lived-containers

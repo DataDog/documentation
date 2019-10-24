@@ -8,7 +8,7 @@ external_redirect: /api/#rechercher-des-hosts
 ## Rechercher des hosts
 Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les hosts actifs au cours des trois dernières heures sont inclus. Les résultats sont paginés avec un maximum de 100 résultats par recherche.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`filter`** [*facultatif*, *défaut*=**None**] :
     chaîne de requête pour filtrer les résultats de la recherche.
@@ -22,3 +22,5 @@ Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les ho
     résultat des hosts à partir desquels commencer la recherche.
 * **`count`** [*facultatif*, *défaut*=**100**] :
      nombre de hosts à renvoyer, max. 100.
+* **`from`** [*facultatif*, *défaut*=**now - 2 hours**] :
+    le nombre de secondes depuis l'epoch UNIX à partir duquel la recherche de hosts doit être effectuée.

@@ -102,11 +102,10 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
 
 1. Si vous ne l'avez pas déjà fait, configurez [d'abord l'intégration Google Cloud Platform](#installation).
 2. [Créer un Cloud Pub/Sub](#creer-un-cloud-pub-sub)
-3. [Valider votre domaine Datadog pour envoyer les logs de GCP à Datadog](#valider-le-domaine-datadog)
-4. [Configurer le Pub/Sub pour transmettre les logs à Datadog](#configurer-le-pub-sub-pour-transmettre-les-logs-a-datadog)
-5. [Configurer les exportations depuis les logs Stackdriver vers le Pub/Sub](#exporter-les-logs-de-stackdriver-vers-le-pub-sub).
+3. [Configurer le Pub/Sub pour transmettre les logs à Datadog](#configurer-le-pub-sub-pour-transmettre-les-logs-a-datadog)
+4. [Configurer les exportations depuis les logs Stackdriver vers le Pub/Sub](#exporter-les-logs-de-stackdriver-vers-le-pub-sub).
 
-**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs Pub/Sub. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
+**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
 
 #### Créer un Cloud Pub/Sub
 
@@ -115,85 +114,6 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
     {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Créer un sujet" responsive="true" style="width:80%;">}}
 
 2. Donnez un nom clair à ce sujet, comme `export-logs-to-datadog`, et cliquez sur *Save*.
-
-#### Valider le domaine Datadog
-
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
-
-Pour valider le domaine, vous devez demander à Google de générer un fichier HTML qui est utilisé comme identifiant unique. Cela permet à Google de valider l'endpoint Datadog et d'y transmettre les logs.
-
-1. Connectez-vous à la [Google Search Console][1].
-2. Dans la section `URL`, ajoutez https://gcp-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>` ([vous trouverez votre clé d'API Datadog ici][2]).
-3. Téléchargez le fichier HTML en local :
-
-    {{< img src="integrations/google_cloud_platform/download_html_file.png" alt="Télécharger le fichier HTML" responsive="true" style="width:80%;">}}
-
-4. Transmettez ce fichier HTML à Datadog avec la commande suivante :
-    ```
-    curl -X POST -H "Content-type: application/json" -d '{"file_contents": "google-site-verification: <GOOGLE_FILE_NAME>.html"}' "https://app.datadoghq.com/api/latest/integration/gcp_logs_site_verification?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>"
-    ```
-
-    Les informations à saisir pour `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` figurent dans la [section API Datadog][2]. Le résultat attendu de cette commande est `{}`.
-
-5. Cliquez sur *Verify* dans la console Google et attendez que le message de confirmation s'affiche.
-6. Accédez à la [page des identifiants de l'API dans la console GCP][3] et cliquez sur `add domain`.
-
-    {{< img src="integrations/google_cloud_platform/credential_page.png" alt="Page des identifiants" responsive="true" style="width:40%;">}}
-
-7. Saisissez le même endpoint qu'avant et cliquez sur `add` :
-
-    {{< img src="integrations/google_cloud_platform/download_domain.png" alt="Télécharger le domaine" responsive="true" style="width:80%;">}}
-
-Lorsque vous avez terminé, cliquez sur le lien `Search Console` de la fenêtre contextuelle pour confirmer l'activation :
-
-{{< img src="integrations/google_cloud_platform/properly_enabled.png" alt="Propriété activée" responsive="true" style="width:70%;">}}
-
-Le projet GCP peut désormais être configuré de façon à transmettre les logs du Pub/Sub à Datadog.
-
-[1]: https://search.google.com/search-console/welcome
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://console.cloud.google.com/apis/credentials/domainverification
-
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
-
-Pour valider le domaine, vous devez demander à Google de générer un fichier HTML qui est utilisé comme identifiant unique. Cela permet à Google de valider l'endpoint Datadog et d'y transmettre les logs.
-
-1. Connectez-vous à la [Google Search Console][1].
-2. Dans la section `URL`, ajoutez `https://gcp-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DATADOG>` ([vous trouverez votre clé d'API Datadog ici][2]).
-3. Téléchargez le fichier HTML en local :
-
-    {{< img src="integrations/google_cloud_platform/download_html_file.png" alt="Télécharger le fichier HTML" responsive="true" style="width:80%;">}}
-
-4. Transmettez ce fichier HTML à Datadog avec la commande suivante :
-    ```
-    curl -X POST -H "Content-type: application/json" -d '{"file_contents": "google-site-verification: <GOOGLE_FILE_NAME>.html"}' "https://app.datadoghq.eu/api/latest/integration/gcp_logs_site_verification?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>"
-    ```
-
-    Les informations à saisir pour `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` figurent dans la [section API Datadog][2]. Le résultat attendu de cette commande est `{}`.
-
-5. Cliquez sur *Verify* dans la console Google et attendez que le message de confirmation s'affiche.
-6. Accédez à la [page des identifiants de l'API dans la console GCP][3] et cliquez sur `add domain`.
-
-    {{< img src="integrations/google_cloud_platform/credential_page.png" alt="Page des identifiants" responsive="true" style="width:40%;">}}
-
-7. Saisissez le même endpoint qu'avant et cliquez sur `add` :
-
-    {{< img src="integrations/google_cloud_platform/download_domain.png" alt="Télécharger le domaine" responsive="true" style="width:80%;">}}
-
-Lorsque vous avez terminé, cliquez sur le lien `Search Console` de la fenêtre contextuelle pour confirmer l'activation :
-
-{{< img src="integrations/google_cloud_platform/properly_enabled.png" alt="Propriété activée" responsive="true" style="width:70%;">}}
-
-Le projet GCP peut désormais être configuré de façon à transmettre les logs du Pub/Sub à Datadog.
-
-[1]: https://search.google.com/search-console/welcome
-[2]: https://app.datadoghq.eu/account/settings#api
-[3]: https://console.cloud.google.com/apis/credentials/domainverification
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Configurer le Pub/Sub pour transmettre les logs à Datadog
 
@@ -212,8 +132,6 @@ Le projet GCP peut désormais être configuré de façon à transmettre les logs
 
 Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
 
-**Remarque** : si vous constatez une erreur à l'étape 3, cela signifie que le site Datadog n'a pas été validé. Consultez les [étapes de validation du domaine](#valider-le-domaine) pour vérifier qu'il est bien validé.
-
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
@@ -228,8 +146,6 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 3. Cliquez sur `Create` en bas.
 
 Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
-
-**Remarque** : si vous constatez une erreur à l'étape 3, cela signifie que le site Datadog n'a pas été validé. Consultez les [étapes de validation du domaine](#valider-le-domaine) pour vérifier qu'il est bien validé.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -246,11 +162,11 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 
 **Remarque** : il est possible de créer plusieurs exportations de Stackdriver vers le même Pub/Sub en utilisant plusieurs récepteurs.
 
-**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs Pub/Sub. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
+**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
 
 #### Surveiller la redirection de log
 
-Les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs Pub/Sub.
+Les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements.
 
 Pour être automatiquement notifié lorsque vous atteignez ces quotas, activez [l'intégration Métriques Pub/Sub][46] et configurez un monitor sur la métrique `gcp.pubsub.subscription.backlog_bytes` filtrée sur l'abonnement qui exporte les logs vers Datadog. L'exemple ci-dessous permet de s'assurer que les logs ne dépassent jamais 1 Mo :
 

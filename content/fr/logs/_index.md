@@ -21,7 +21,7 @@ further_reading:
 
 Votre infrastructure peut parfois générer un volume d'événements de log trop important ou ayant des fluctuations significatives. Dans cette situation, vous devrez peut-être choisir quels logs envoyer vers une solution de gestion de logs, et quels logs archiver. En revanche, le filtrage de vos logs avant leur envoi peut empêcher un traitement exhaustif des logs ou accidentellement supprimer des données précieuses.
 
-La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Cela vous permet de recueillir, de traiter, d'archiver, d'explorer et de surveiller tous vos logs de façon rentable. C'est ce que nous appelons Logging without Limits*.
+La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation, vous permettant ainsi de recueillir, de traiter et d'archiver tous vos logs de façon rentable. Cette fonctionnalité s'intitule Logging without Limits*.
 
 {{< whatsnext desc="Avec Logging without Limits*, vous pouvez :">}}
   {{< nextlink href="/logs/log_collection">}}<u>Collecte de logs et intégrations</u> : Ingérer tous vos logs depuis vos hosts, conteneurs et fournisseurs de cloud.{{< /nextlink >}}

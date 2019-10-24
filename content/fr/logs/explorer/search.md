@@ -10,7 +10,7 @@ further_reading:
     text: Effectuer des analyses de logs
   - link: logs/explorer/patterns
     tag: Documentation
-    text: Détecter les modèles dans vos logs
+    text: Détecter les patterns dans vos logs
   - link: logs/processing
     tag: Documentation
     text: Apprendre à traiter vos logs
@@ -89,9 +89,9 @@ Les wildcards peuvent être utilisés au sein d'une facette avec cette syntaxe. 
 
 Les wildcards peuvent également être utilisés pour effectuer une recherche de texte brut dans un log qui ne fait pas partie d'une facette. La requête suivante renvoie tous les logs contenant le texte `NETWORK` :
 
-`"*NETWORK*"`
+`*NETWORK*`
 
-En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette ne seront pas renvoyés.
+En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette mais pas du message de log ne seront pas renvoyés.
 
 ### Valeurs numériques
 Utilisez les caractères `<`, `>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer tous les logs avec un délai de réponse supérieur à 100 ms :
