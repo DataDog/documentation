@@ -154,7 +154,7 @@ To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log
 ## Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
-You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][22]).
+Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][22].
 
 Endpoints that can be used to send logs to Datadog:
 
