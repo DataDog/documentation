@@ -38,7 +38,7 @@ The Serverless dashboard requires no installation of its own, but it relies on t
 
 3. AWS CloudWatch Logs (recommended)
 
-    Install this to see logs from your Lambda functions in the function detail page. This also populates the additional metrics such as Memory Used (avg) and Last Start in your functions table.
+    Install this to see logs from your Lambda functions in the function detail page. This also populates additional metrics, such as Memory Used (avg) and Last Start in your functions table.
 
     To enable this, refer to the [documentation for sending Lambda logs to Datadog][2].
 
