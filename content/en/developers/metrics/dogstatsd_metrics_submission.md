@@ -55,7 +55,7 @@ Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 from datadog import initialize, statsd
 import time
 
-options = {ÿ
+options = {
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -100,12 +100,12 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {ÿ
+func main() {
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {ÿ
+    if err != nil {
         log.Fatal(err)
     }
-    for {ÿ
+    for {
 
         statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
         statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -125,12 +125,12 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {ÿ
+public class DogStatsdClient {
 
-    public static void main(String[] args) throws Exception {ÿ
+    public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {ÿ
+        for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
             Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
             Statsd.count("example_metric.count", 2, ["environment:dev"]);
@@ -150,11 +150,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{ÿ
+{
     public static void Main()
-    {ÿ
+    {
         var dogstatsdConfig = new StatsdConfig
-        {ÿ
+        {
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -164,7 +164,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {ÿ
+        {
             DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
             DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
             DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
@@ -192,7 +192,7 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {ÿ
+while (TRUE) {
     $statsd->increment('example_metric.increment', array('environment'=>'dev'));
     $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
