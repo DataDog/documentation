@@ -50,8 +50,12 @@ You would have at the end this structured log:
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
 **Note**:
-- If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
-- You must have unique rules names within the same Grok parser.
+
+* If you have multiple parsing rules in a single Grok parser:
+  * only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+  * you can reference parsing rules defined above in the list.
+* You must have unique rules names within the same Grok parser.
+* The rule name must contain only: alphanumeric characters and `_`, `.`. It must start by alphanumeric.
 
 ### Matcher and Filter
 
