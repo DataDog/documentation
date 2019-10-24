@@ -1,5 +1,5 @@
 ---
-title: Composite monitor
+title: Composite Monitor
 kind: documentation
 aliases:
     - /guides/composite_monitors
@@ -16,43 +16,43 @@ further_reading:
   text: "Check your monitor status"
 ---
 
+## Overview
+
 Composite monitors combine individual monitors into one monitor to define more specific alert conditions.
 
-Choose existing monitors to create a composite monitor, for example monitor A and monitor B. Then set a trigger condition using boolean operators (e.g. "A && B"). The composite monitor triggers when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
+Choose existing monitors to create a composite monitor, for example monitor `a` and monitor `b`. Then set a trigger condition using boolean operators (e.g. `a && b`). The composite monitor triggers when the individual monitors simultaneously have values that cause the composite's trigger condition to be true.
 
-With regard to configuration, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
+For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
-_Note: we refers variously to 'individual monitors', 'constituent monitors', and 'non-composite monitors'. They all mean the same thing: the monitors that a composite monitor uses to calculate its status._
+**Note**: The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
 
 ## Monitor creation
 
 To create a [composite monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Composite*.
 
 ### Select monitors and set triggering conditions
+#### Select monitors
 
-Choose up to 10 individual monitors to use in the new composite monitor. Monitors can be of different alert types. They can be all simple alerts, all multi-alerts, or a combination of the two. No individual monitor may itself be a composite monitor.
+Choose up to 10 individual monitors to use in a composite monitor. Monitors can be of different alert types (simple alerts, multi-alerts, or a combination of the two). No individual monitor may itself be a composite monitor. After you choose your first monitor, the UI shows its alert type and current status.
 
-After you choose your first monitor, the UI shows its alert type and current status:
+If you choose a multi-alert monitor, the UI shows its group-by clause and how many unique sources are currently reporting, for example: `Returns 5 host groups`.
 
-{{< img src="monitors/monitor_types/composite/create-composite-2.png" alt="create composite 2" responsive="true" style="width:80%;">}}
+When you combine multi-alert monitors, this information helps you choose monitors that pair together naturally. You should choose monitors that have the same group-by. If you don't, the UI warns you that such a composite monitor may never trigger:
 
-If you choose a multi-alert monitor, the UI shows its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI warns you that such a composite monitor may never trigger:
+```
+Group Matching Error
+The selected monitors in the expression may not lead to a
+composite result because they have not evaluated any
+common groupings or have less than 2 selected monitors.
+```
 
-{{< img src="monitors/monitor_types/composite/create-composite-4.png" alt="create composite 4" responsive="true" style="width:80%;">}}
+Even if you choose multi-alert monitors with the same group-by, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#how-composite-monitors-select-common-reporting-sources).
 
-Even if you choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
+When you select a second monitor that doesn't cause a warning, the UI populates the **Trigger when** field with the default trigger condition `a && b` and shows the status of the proposed composite monitor.
 
-{{< img src="monitors/monitor_types/composite/create-composite-5.png" alt="create composite 5" responsive="true" style="width:80%;">}}
+#### Set triggering conditions
 
-Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no common reporting sources (also called common groupings). As long as there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. To understand why, [read more below](#how-composite-monitors-select-common-reporting-sources).
-
-When you select a second monitor that doesn't cause a warning in the UI, the UI populates the **Trigger when** field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
-
-{{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"  responsive="true" style="width:80%;">}}
-
-### Set a trigger condition
-
-In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (a, b, c, etc). Use parentheses to control operator precedence and create more complex conditions.
+In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (`a`, `b`, `c`, etc). Use parentheses to control operator precedence and create more complex conditions.
 
 The following are all valid trigger conditions:
 
@@ -62,37 +62,25 @@ a || b && !c
 (a || b) && (c || d)
 ```
 
-Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
+#### No data
 
-{{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status" responsive="true" style="width:80%;">}}
+`Do not notify` or `Notify` when the composite monitor is in no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings.
 
-In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things-a metric, tags, an aggregation function like `avg`, a group-by clause, etc-a composite monitor's query is its trigger condition defined in terms of its constituent monitors.
+### Notifications
 
-For two non-composite monitors with the following queries:
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
 
+## API
+
+When using the API, a non-composite monitor's query can encapsulate a metric, tags, an aggregation function like `avg`, a group-by clause, etc. A composite monitor's query is defined in terms of its constituent monitors using monitor IDs.
+
+For example, two non-composite monitors have the following queries:
+```text
+"avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # Monitor ID: 1234
+"avg(last_1m):avg:system.cpu.system{role:database} > 50" # Monitor ID: 5678
 ```
-"avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # monitor ID: 1234
-"avg(last_1m):avg:system.cpu.system{role:database} > 50" # monitor ID: 5678
-```
 
-a composite monitor's query is `"1234 && 5678"`, `"!1234 || 5678"`, etc.
-
-### Configure behavior for `No Data`
-
-As with a non-composite monitor, you may configure whether or not a composite monitor triggers when it has the `No Data` status. Whatever you choose here doesn't affect the constituent monitors' `notify_no_data` settings.
-
-### Write a notification message
-
-Write a notification message as you would with any other monitor, using the `@-syntax` (e.g. `@you@example.com`) to notify individuals or teams:
-
-{{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" style="width:80%;">}}
-
-Adding template variables like `{{a.value}}` and `{{b.value}}` to the monitor message shows the individual monitor values.
-
-
-### Save the monitor
-
-After setting any other miscellaneous options, click **Save**. Remember: each option you select only affects the composite monitor, not its constituent monitors.
+A composite monitor's query combining the monitors above could be `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 
 ## How composite monitors work
 
@@ -203,3 +191,4 @@ Use your best judgment to choose multi-alert monitors that makes sense together.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
+[2]: /monitors/notifications
