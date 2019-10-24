@@ -30,7 +30,7 @@ The Serverless dashboard requires no installation of its own, but it relies on t
     **Note**: Metrics in the Serverless page are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][4].
 
 2. [AWS X-Ray integration][5] (recommended)
-    This integration provides full end-to-end tracing for requests hit your Lambda functions. The traces appear in the Serverless function detail page and in Datadog APM.
+    This integration provides full end-to-end tracing for requests that hit your Lambda functions. The traces appear in the Serverless function detail page and in Datadog APM.
 
     To enable this, refer to the [AWS X-Ray integration documentation][6].
 
