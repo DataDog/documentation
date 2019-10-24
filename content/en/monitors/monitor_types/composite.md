@@ -13,7 +13,7 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
 
 Composite monitors combine individual monitors into one monitor to define more specific alert conditions.
@@ -24,13 +24,11 @@ With regard to configuration, a composite monitor is independent of its constitu
 
 _Note: we refers variously to 'individual monitors', 'constituent monitors', and 'non-composite monitors'. They all mean the same thing: the monitors that a composite monitor uses to calculate its status._
 
-## Creating composite monitors
+## Monitor creation
 
-In the Datadog application, go to the [**New Monitor**][1] page and click **Composite** in the list of monitor types:
+To create a [composite monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Composite*.
 
-{{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" >}}
-
-### Choose individual monitors
+### Select monitors and set triggering conditions
 
 Choose up to 10 individual monitors to use in the new composite monitor. Monitors can be of different alert types. They can be all simple alerts, all multi-alerts, or a combination of the two. No individual monitor may itself be a composite monitor.
 
@@ -120,12 +118,12 @@ The not (!) operator causes a status-individual or composite-to be either `Ok`, 
 
 Consider a composite monitor that uses three individual monitors-A, B, and C-and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
-| monitor A   | monitor B  | monitor C  | composite status        | alert triggered? |
-|-------------|------------|------------|-------------------------|-------------------------|
-| Unknown (T) | Warn (T)   | Unknown (T)| Warn (T)                |<i class="fa fa-check" aria-hidden="true"></i>
-| Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
-| Alert (T)   | Warn (T)   | Unknown (T)| Alert (T)               |<i class="fa fa-check" aria-hidden="true"></i>
-| Skipped (F) | No Data (F)| Unknown (T)| Skipped (F)             |
+| monitor A   | monitor B   | monitor C   | composite status | alert triggered? |
+|-------------|-------------|-------------|------------------|------------------|
+| Unknown (T) | Warn (T)    | Unknown (T) | Warn (T)         | {{< X >}}        |
+| Skipped (F) | Ok (F)      | Unknown (T) | Ok (F)           |                  |
+| Alert (T)   | Warn (T)    | Unknown (T) | Alert (T)        | {{< X >}}        |
+| Skipped (F) | No Data (F) | Unknown (T) | Skipped (F)      |                  |
 
 Two of the four scenarios trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (and in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
@@ -158,12 +156,12 @@ The previous table showed the composite monitor status across four points in tim
 
 {{% table responsive="true" %}}
 
-|source | monitor A    | monitor B| monitor C | composite status (A && B && C) | alert triggered? |
-|-------|--------------|----------|-----------|--------------------------------|-------------------------|
-| web01 | Alert        | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
-| web02 | Ok           | Warn     | Alert     | Ok                             |
-| web03 | Warn         | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
-| web04 | Skipped      | Warn     | Alert     | Skipped                        |
+| source | monitor A | monitor B | monitor C | composite status (A && B && C) | alert triggered?                               |
+|--------|-----------|-----------|-----------|--------------------------------|------------------------------------------------|
+| web01  | Alert     | Warn      | Alert     | Alert                          | <i class="fa fa-check" aria-hidden="true"></i> |
+| web02  | Ok        | Warn      | Alert     | Ok                             |                                                |
+| web03  | Warn      | Warn      | Alert     | Alert                          | <i class="fa fa-check" aria-hidden="true"></i> |
+| web04  | Skipped   | Warn      | Alert     | Skipped                        |                                                |
 {{% /table %}}
 
 In this cycle, you would receive two alerts.
@@ -174,10 +172,10 @@ Now consider a scenario where monitor B is multi-alert, too, and is also grouped
 
 Here's an example cycle:
 
-|source | monitor A | monitor B | monitor C  | composite status (A && B && C) |alert triggered?|
-|-------|-----------|-----------|------------|--------------------------------|----------------|
-| web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
-| web05 | Ok        | Ok        | Alert      | Ok                             |
+| source | monitor A | monitor B | monitor C | composite status (A && B && C) | alert triggered?                               |
+|--------|-----------|-----------|-----------|--------------------------------|------------------------------------------------|
+| web04  | Unknown   | Warn      | Alert     | Alert                          | <i class="fa fa-check" aria-hidden="true"></i> |
+| web05  | Ok        | Ok        | Alert     | Ok                             |                                                |
 
 In this cycle, you would receive one alert.
 
@@ -204,4 +202,4 @@ Use your best judgment to choose multi-alert monitors that makes sense together.
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create
+[1]: https://app.datadoghq.com/monitors#create/composite
