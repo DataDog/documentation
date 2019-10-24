@@ -81,5 +81,5 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 [33]: /agent/autodiscovery/template_variables
 [34]: /agent/autodiscovery/integrations/?tab=file#configuration
 [35]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
-[36]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[37]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
+[36]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[37]: /agent/autodiscovery/integrations/?tab=docker#configuration
