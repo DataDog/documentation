@@ -285,7 +285,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 ```json
 {
     "type": "attribute-remapper",
-    "name": "Define <SOURCE_ATTRIBUTE> as the official message of the log",
+    "name": "Remap <SOURCE_ATTRIBUTE> to <TARGET_ATTRIBUTE>",
     "is_enabled": true,
     "source_type": "attribute",
     "sources": ["<SOURCE_ATTRIBUTE>"],
