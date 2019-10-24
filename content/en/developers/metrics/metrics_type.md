@@ -30,7 +30,6 @@ The following metric submission types are accepted:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-****RUTH: I'm struggling with what to call these types. Intuitively it's difficult for customers to understand why looking up a metric submitted as a distribution in the metrics summary page would return the metric type of a Gauge in the Metrics Summary detail sidepanel****
 Once a metric is submitted, there are 3 metric storage types within the Datadog web application:
 
 * `COUNT`
@@ -48,7 +47,8 @@ You have two web servers: `server:web_1` and `server:web_2`. Both web servers co
   * 20 HTTP requests for the next 30 seconds, then
   * 0 HTTP requests for the next 30 seconds.
 
-****RUTH: can we add a title for metric submission types here before having a tabular table?****
+### Metric submission types
+
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
@@ -119,10 +119,6 @@ Each value/data point represents the total number of requests received at a poin
 * `10` for the first 30 seconds
 * `20` for the second interval of 30 seconds
 * `null` for the last interval of 30 seconds
-
-
-**** RUTH: this image needs to be replaced with something similar to the count one. Basically without .as_count() modification, a gauge/count/rate will all act the same: their default rollup will be avg. 
-{{< img src="developers/metrics/metric_types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
 
 Discover how to submit gauge metrics:
 
