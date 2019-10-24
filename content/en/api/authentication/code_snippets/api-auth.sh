@@ -1,4 +1,4 @@
 
 
-curl "https://api.datadoghq.com/api/v1/validate?api_key=<YOUR_API_KEY>"
+curl "https://api.datadoghq.com/api/v1/validate" -H "DD-API-KEY: <YOUR_API_KEY>"
 

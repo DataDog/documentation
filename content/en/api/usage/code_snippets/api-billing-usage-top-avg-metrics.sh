@@ -3,9 +3,9 @@ app_key=<YOUR_APP_KEY>
 
 month=$(date +%Y-%m)
 
-curl -G \
-    "https://api.datadoghq.com/api/v1/usage/top_avg_metrics" \
-    -d "api_key=${api_key}" \
-    -d "application_key=${app_key}" \
-    -d "month=${month}" \
-    -d "names=aws.ec2.spot_history,system.processes.number"
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d "month=${month}" \
+-d "names=aws.ec2.spot_history,system.processes.number" \
+"https://api.datadoghq.com/api/v1/usage/top_avg_metrics"

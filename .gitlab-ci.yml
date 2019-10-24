@@ -137,19 +137,19 @@ test_live_link_checks:
   only:
     - master
 
-# index_algolia:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
-#    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
-#    - cat /etc/docs_datadoghq.com
-#    - index_docsearch_algolia
-#  dependencies:
-#    - build_live
-#  only:
-#    - schedules
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
+    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
+    - cat /etc/docs_datadoghq.com
+    - index_docsearch_algolia
+  dependencies:
+    - build_live
+  only:
+    - schedules
 
 evaluate_missing_metrics:
   <<: *base_template
