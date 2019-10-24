@@ -139,7 +139,7 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 | DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
 | `INVALID_REQUEST` | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
 | `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time.                                                                                                                                        |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. A `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. A `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).                                                                                                                                      |
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 
