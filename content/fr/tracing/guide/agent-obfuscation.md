@@ -4,8 +4,7 @@ kind: guide
 private: true
 disable_toc: true
 ---
-
-L'obfuscation des traces de l'Agent est désactivée par défaut. Activez-le dans votre fichier de configuration `datadog.yaml` pour obfusquer toutes les informations associées à vos traces.
+L'obfuscation des [traces][1] de l'Agent est désactivée par défaut. Activez-la dans votre fichier de configuration `datadog.yaml` pour obfusquer toutes les informations associées à vos traces.
 
 Ces options ne fonctionnent actuellement qu'avec les services suivants :
 
@@ -20,7 +19,7 @@ Ces options ne fonctionnent actuellement qu'avec les services suivants :
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
-Applique les spans de type `mongodb`, plus précisément aux métadonnées de span `mongodb.query` :
+S'applique aux [spans][1] de type `mongodb`, plus précisément aux spans de tag `mongodb.query` : 
 
 ```
 apm_config:
@@ -37,11 +36,11 @@ apm_config:
 ```
 
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
-
+[1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
-Applique les spans de type `elasticsearch`, plus précisément aux métadonnées de span `elasticsearch.body` :
+S'applique aux [spans][1] de type `elasticsearch`, plus précisément aux tags de span `elasticsearch.body` :
 
 ```
 apm_config:
@@ -58,11 +57,11 @@ apm_config:
 ```
 
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
-
+[1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Redis" %}}
 
-Applique les spans de type `redis`, plus précisément aux métadonnées de span `redis.raw_command` :
+S'applique aux [spans][1] de type `redis`, plus précisément aux tags de span `redis.raw_command` :
 
 ```
 apm_config:
@@ -74,11 +73,11 @@ apm_config:
     redis:
       enabled: true
 ```
-
+[1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
-Applique les spans de type `memcached`, plus précisément aux métadonnées de span `memcached.command` :
+S'applique aux [spans][1] de type `memcached`, plus précisément aux tags de span `memcached.command` :
 
 ```
 apm_config:
@@ -90,11 +89,11 @@ apm_config:
     memcached:
       enabled: true
 ```
-
+[1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "HTTP" %}}
 
-Règles d'obfuscation HTTP pour les métadonnées `http.url` dans les spans de type `http` :
+Règles d'obfuscation HTTP pour les métadonnées `http.url` dans les [spans][1] de type `http` :
 
 ```
 apm_config:
@@ -108,9 +107,9 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string` : si ce paramètre est défini sur true, il obfusque les chaînes de requête dans les URL.
+* `remove_query_string` : définir ce paramètre sur true pour obfusquer les chaînes de requête dans les URL.
 * `remove_paths_with_digits` : si ce paramètre est défini sur true, les segments de chemin des URL contenant des chiffres sont remplacés par le caractère « ? ».
-
+[1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Traces de pile" %}}
 
@@ -127,3 +126,5 @@ apm_config:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /fr/tracing/visualization/#trace

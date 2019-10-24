@@ -6,12 +6,12 @@ Toutes les deux semaines, Datadog procède à des revues de code et assure des h
 
 ### Lieu
 
-Les heures de permanence sont assurées sur le canal #integrations du [Slack dédié à la communauté de Datadog][1] ([demander une invitation][2]), ainsi que sur [Google Hangouts][3].
+Les heures de permanence sont assurées sur la chaîne #integrations du [Slack dédié à la communauté de Datadog][1] ([demander une invitation][2]), ainsi que sur [Google Hangouts][3].
 
 ### Date
 
-* Chaque deuxième mercredi du mois, à 10h00 (New York).
-* Chaque quatrième mercredi du mois, à 15h00 (New York).
+* Chaque deuxième mercredi du mois, à 16 h (UTC+2, Paris)
+* Chaque quatrième mercredi du mois, à 21 h (UTC+2, Paris)
 
 ### Conseils et mises en garde
 

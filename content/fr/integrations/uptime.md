@@ -22,7 +22,7 @@ metric_prefix: uptime
 metric_to_check: uptime.response_time
 name: uptime
 public_title: Intégration Datadog/Uptime
-short_description: Uptime et la surveillance des performances facilitée
+short_description: Surveillez l'uptime et les performances en toute simplicité
 support: contrib
 supported_os:
   - linux
