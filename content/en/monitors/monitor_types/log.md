@@ -70,7 +70,7 @@ By default, when a logs monitor is triggered, samples or values are added to the
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, and email. **Note**: Samples are not displayed for recovery notifications.
 
-To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+To disable log samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
 
 #### Examples
 
