@@ -18,4 +18,4 @@ config = {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-puts dog.update_aws_account(existing_config, config)
+dog.update_aws_account(existing_config, config)
