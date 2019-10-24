@@ -173,6 +173,8 @@ spec:
           image: postgres:latest
 ```
 
+**Note**: Be sure to escape regex characters in your patterns when performing multi-line aggregation with pod annotations. E.g. `\d` becomes `\\d`, `\w` becomes `\\w` etc.
+
 {{% /tab %}}
 {{< /tabs >}}
 
