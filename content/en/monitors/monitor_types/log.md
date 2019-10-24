@@ -25,13 +25,15 @@ To create a [logs monitor][1] in Datadog, use the main navigation: *Monitors -->
 
 As you define the search query, the graph above the search fields updates.
 
-* If you have [multiple log indexes][2], select the index to search.
-* Construct a search query using the same logic as a [log explorer search][3].
-* Choose to monitor over a log count, [facet][4], or [measure][5]:
+1. If you have [multiple log indexes][2], select the index to search.
+2. Construct a search query using the same logic as a [log explorer search][3].
+3. Choose to monitor over a log count, [facet][4], or [measure][5]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the amount of logs over a selected time frame then compares it to the threshold conditions.
-    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-* Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
+    * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+4. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
+
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
 
 ### Set alert conditions
 
@@ -59,19 +61,16 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples
 
-By default, when a logs monitor is triggered:
+By default, when a logs monitor is triggered, samples or values are added to the notification message.
 
-* **Monitor over a log count**: Up to 10 log samples are added to the notification message.
-* **Monitor over a facet or measure**: The top 10 facet or measure values are added to the notification message.
+| Monitor over     | Added to notification message                                                                            |
+|------------------|----------------------------------------------------------------------------------------------------------|
+| Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
+| Facet or measure | The top 10 facet or measure values.                                                                      |
 
 These are available for notifications sent to Slack, Jira, Webhook, Microsoft Teams, and Email. **Note**: Samples are not displayed for recovery notifications.
 
-Notifications from monitors split by group include the top 10 breaching values instead of log samples.
-
-To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping:
-
-* Grouped: `Include a table of the top 10 breaching values`
-* Ungrouped: `Include a sample of 10 logs in the alert notification`
+To disable log samples, uncheck the box next at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
 
 #### Examples
 
