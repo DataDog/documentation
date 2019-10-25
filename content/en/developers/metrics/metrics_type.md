@@ -18,9 +18,21 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-A metric's type affects how the given metric is aggregated in queries and values displayed in graph visualizations within Datadog. Different metric types can have different default time aggregation functions and different [Metric Type modifiers][1]. A metric's type is displayed on the details sidepanel for the given metric on the [Metrics Summary page][2]. Note: Changing the metric type in this details sidepanel can potentially change metric behavior in all existing visualizations and monitors; potentially rendering historical data as nonsensical.
+Each metric submitted to Datadog has a “Metric Type.” This Metric Type affects how [Metric Type modifiers][1] and functions interact with data when queried and graphed, and can affect how the data is handled when ingested via the Agent and DogstatsD.
 
-The following metric submission types are accepted:
+A metric's type is can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog received that same metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, if necessary.
+
+## Metric Types: Ingestion
+
+Datadog stores metrics under a few canonical types. There are three metric types Datadog stores:
+
+* `COUNT`
+* `RATE`
+* `GAUGE`
+
+However, we accept a wider range of Metric Types. To do this, we map certain types to others - we'll go into detail about this after describing the types themselves.
+
+We **accept** the following metric types:
 
 * [COUNT](?tab=count#metric-type-definition)
 * [RATE](?tab=rate#metric-type-definition)
@@ -30,11 +42,7 @@ The following metric submission types are accepted:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-Once a metric is submitted, there are 3 metric storage types within the Datadog web application:
 
-* `COUNT`
-* `RATE`
-* `GAUGE`
 
 Refer to the [Metric Type Definition](#metric-type-definition) section below to learn more about the different metrics types available. Also, refer to the [Submission Types and Datadog In-App Types Section](#submission-types-and-datadog-in-app-types) to see how each metric type behaves between its submission and its storage within Datadog.
 
