@@ -234,7 +234,7 @@ Define the Log Message remapper processor in the [Datadog Log configuration page
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log service remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Remapper JSON payload:
 
 ```json
 {
@@ -272,7 +272,7 @@ Constraints on the tag/attribute name are explained in the [Tag Best Practice do
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Log message remapper processor in the [Datadog Log configuration page][1]. For example, here, it remaps `user` to `user.firstname`
+Define the remapper processor in the [Datadog Log configuration page][1]. For example, here, it remaps `user` to `user.firstname`
 
 {{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile" responsive="true" style="width:80%;" >}}
 
@@ -280,7 +280,7 @@ Define the Log message remapper processor in the [Datadog Log configuration page
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON payload:
 
 ```json
 {
@@ -378,18 +378,18 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
     "is_enabled": true,
     "sources": ["http.useragent"],
     "target": "http.useragent_details",
-    "encoded": false
+    "is_encoded": false
 }
 ```
 
-| Parameter    | Type             | Required | Description                                                                                                                |
-| ------       | -----            | -------- | -----                                                                                                                      |
-| `type`       | String           | yes      | Type of the processor.                                                                                                     |
-| `name`       | String           | no       | Name of the processor.                                                                                                     |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`.                                                                      |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.useragent`.                                                                      |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.useragent_details`. |
-| `encoded`    | Boolean          | no       | Define if the source attribute is url encoded or not, default: `false`.                                                     |
+| Parameter       | Type             | Required | Description                                                                                                                |
+| ------          | -----            | -------- | -----                                                                                                                      |
+| `type`          | String           | yes      | Type of the processor.                                                                                                     |
+| `name`          | String           | no       | Name of the processor.                                                                                                     |
+| `is_enabled`    | Boolean          | no       | If the processors is enabled or not, default: `false`.                                                                      |
+| `sources`       | Array of Strings | no       | Array of source attributes, default: `http.useragent`.                                                                      |
+| `target`        | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.useragent_details`. |
+| `is_encoded`    | Boolean          | no       | Define if the source attribute is url encoded or not, default: `false`.                                                     |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -505,9 +505,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic pro
 | Parameter            | Type    | Required | Description                                                                                                                                 |
 | ------               | -----   | -------- | -----                                                                                                                                       |
 | `type`               | String  | yes      | Type of the processor.                                                                                                                      |
-| `name`.              | String  | no       | Name of the processor.                                                                                                                      |
+| `name`               | String  | no       | Name of the processor.                                                                                                                      |
 | `is_enabled`         | Boolean | no       | If the processors is enabled or not, default: `false`.                                                                                       |
-| `expression`.        | String  | yes      | Arithmetic operation between one or more log attributes.                                                                                    |
+| `expression`         | String  | yes      | Arithmetic operation between one or more log attributes.                                                                                    |
 | `target`             | String  | yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                 |
 | `is_replace_missing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
 
@@ -611,7 +611,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 | `name`               | String  | No       | Name of the processor.                                                                                                                       |
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                       |
 | `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                           |
-| `target`.            | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
+| `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
 | `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
 
 
@@ -654,7 +654,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 
 | Parameter    | Type             | Required | Description                                                                                                              |
 | ------       | -----            | -------- | -----                                                                                                                    |
-| `type`.      | String           | yes      | Type of the processor.                                                                                                   |
+| `type`       | String           | yes      | Type of the processor.                                                                                                   |
 | `name`       | String           | no       | Name of the processor.                                                                                                   |
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                    |
 | `sources`    | Array of Strings | no       | Array of source attributes, default: `network.cient.ip`                                                                  |
@@ -699,7 +699,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `type`       | String           | yes      | Type of the processor.                                 |
 | `name`       | String           | no       | Name of the processor.                                 |
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`. |
-| `sources`.   | Array of Strings | no       | Array of source attributes, default: `http.useragent`. |
+| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.useragent`. |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
