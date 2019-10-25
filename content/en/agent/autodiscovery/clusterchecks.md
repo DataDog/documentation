@@ -83,7 +83,7 @@ Running [custom Agent checks][7] as cluster checks is supported, as long as all 
 
 The [Datadog Helm Chart][13] offers the possibility to deploy, via the `clusterchecksDeployment` field, a set of Datadog Agents configured to run cluster checks only.
 
-Running cluster checks using dedicated cluster check runners allows the Cluster Agent to use an advanced cluster check dispatching logic that takes into account the check instances execution time and metric samples in order to optimize the checks dispatching and distribution between cluster check runners.
+Using dedicated cluster check runners allows the Cluster Agent to use an advanced dispatching logic, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
 
 #### Advanced Dispatching - Cluster Agent setup
 
