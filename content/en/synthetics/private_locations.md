@@ -62,7 +62,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
     * For the Datadog US site: `curl https://api.datadoghq.com`.
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
 
-5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
