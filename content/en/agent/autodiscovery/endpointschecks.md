@@ -78,7 +78,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: It's required to [enable Cluster Checks][4] if the monitored Endpoints are not backed by pods. This can be done by adding the `kube_services` configuration provider and listener:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
@@ -105,7 +105,7 @@ config_providers:
     polling: true
 ```
 
-**Note**: It's required to enable [Cluster Checks][1] if the monitored Endpoints are not backed by pods. This can be done by adding the `clusterchecks` configuration provider:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `clusterchecks` configuration provider:
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
