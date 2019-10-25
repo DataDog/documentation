@@ -33,21 +33,21 @@ Consultez la [documentation relative aux bibliothèques][3] pour en savoir plus.
 
 Les dashboards représentent l'un des principaux outils de visualisation de vos données. Il existe deux types de dashboards : les screenboards et les timeboards.
 
-Les screenboards sont des dashboards libres qui peuvent inclure de nombreux objets comme des images, des graphiques, des logs et bien plus encore. Ils sont généralement utilisés pour représenter des statuts ou pour une réelle mise en récit et peuvent être mis à jour en temps réel. Ils peuvent également inclure un ou plusieurs points fixes historiques.
+Les [screenboards][4] sont des dashboards libres qui peuvent inclure de nombreux objets comme des images, des graphiques et des logs. Ils sont généralement utilisés pour représenter des statuts ou pour une réelle mise en récit et peuvent être mis à jour en temps réel. Ils peuvent également inclure un ou plusieurs points fixes historiques.
 
-Les timeboards possèdent un format plus structuré. Ils représentent un seul point (fixe ou en temps réel) sur l'ensemble du dashboard. Ils sont généralement utilisés pour le dépannage, la corrélation et l'exploration globale des données.
+Les [timeboards][5] possèdent une disposition automatique. Ils représentent un seul point (fixe ou en temps réel) sur l'ensemble du dashboard. Ils sont généralement utilisés pour le dépannage, la corrélation et l'exploration globale des données.
 
 #### DogStatsD
 
-Le terme DogStatsD est utilisé pour désigner deux notions : le protocole basé sur [StatsD][4] et l'application de transmission de métriques qui implémente ce protocole. Le protocole DogStatsD est une extension du protocole StatsD comprenant quelques modifications spécifiques à la plateforme Datadog. L'application DogStatsD est un service qui est fourni avec l'Agent et qui est utilisé comme système léger de transfert de données
+Le terme DogStatsD est utilisé pour désigner deux notions : le protocole basé sur [StatsD][6] et l'application de transmission de métriques qui implémente ce protocole. Le protocole DogStatsD est une extension du protocole StatsD comprenant quelques modifications spécifiques à la plateforme Datadog. L'application DogStatsD est un service fourni avec l'Agent et utilisé comme système léger de transfert de données.
 
-Consultez la [documentation relative à DogStatsD][5] pour en savoir plus.
+Consultez la [documentation relative à DogStatsD][7] pour en savoir plus.
 
 #### Intégration
 
 Une intégration permet de récupérer les données de vos systèmes et de les transmettre à Datadog. Les intégrations recueillent des données à partir d'une source de donnée, s'assurent que ces données sont correctement organisées et fournissent d'autres ressources facilitant la configuration et l'exploitation. Les sources de données peuvent être, entre autres, des daemons sur un serveur, des services cloud ou encore des API tierces.
 
-Consultez la [documentation relative aux intégrations][6] pour en savoir plus.
+Consultez la [documentation relative aux intégrations][8] pour en savoir plus.
 
 #### Comptes multiorganisations (« multi-org »)
 
@@ -55,15 +55,17 @@ Les comptes multi-org permettent à une organisation parent de créer plusieurs 
 
 #### Traceur
 
-Datadog prend en charge le tracing distribué via l'intégration de l'APM. Cela vous permet d'instrumenter votre code existant et de consulter les requêtes transmises à tous vos systèmes en temps réel. Le tracing est pris en charge par différents langages, bases de données et frameworks RPC. De nombreux langages [sont nativement pris en charge][7]. Toutefois, les développeurs peuvent ajouter leur propre prise en charge linguistique en créant des shippers personnalisés.
+Datadog prend en charge le tracing distribué via l'intégration de l'APM. Cela vous permet d'instrumenter votre code existant et de consulter les requêtes transmises à tous vos systèmes en temps réel. Le tracing est pris en charge par différents langages, bases de données et frameworks RPC. De nombreux langages [sont nativement pris en charge][9]. Toutefois, les développeurs peuvent ajouter leur propre prise en charge de langue en créant des shippers personnalisés.
 
-Consultez la [documentation relative au tracing][8] pour en savoir plus.
+Consultez la [documentation relative au tracing][10] pour en savoir plus.
 
 [1]: /fr/agent
 [2]: /fr/api
 [3]: /fr/developers/libraries
-[4]: https://www.datadoghq.com/blog/statsd
-[5]: /fr/developers/dogstatsd
-[6]: /fr/developers/integrations
-[7]: /fr/developers/libraries/#apm-tracing-client-libraries
-[8]: /fr/tracing
+[4]: /fr/graphing/dashboards/screenboard
+[5]: /fr/graphing/dashboards/timeboard
+[6]: https://www.datadoghq.com/blog/statsd
+[7]: /fr/developers/dogstatsd
+[8]: /fr/developers/integrations
+[9]: /fr/developers/libraries/#apm-distributed-tracing-client-libraries
+[10]: /fr/tracing
