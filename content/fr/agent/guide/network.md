@@ -23,12 +23,12 @@ further_reading:
 * Destinations des données :
     * Données de l'[APM][1] : `trace.agent.datadoghq.com`
     * Données de [Live Containers][2] : `process.datadoghq.com`
-    * Données de [logs][3] : `agent-intake.logs.datadoghq.com `
+    * Données de [logs][3] : `agent-intake.logs.datadoghq.com ` pour le trafic TCP
     * Toutes les autres données de l'Agent :
         * **Agents < 5.2.0** : `app.datadoghq.com`
         *  **Agents >= 5.2.0** : `<version>-app.agent.datadoghq.com`
 
-Cette décision a été prise après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions commencent à partir de l'Agent v5.2.0, où chaque version de l'Agent appelle un endpoint différent en fonction du *redirecteur*. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.datadoghq.com`. Par conséquent, vous devez ajouter `*.agent.datadoghq.com` à la liste blanche de vos pare-feux.
+Cette décision a été prise après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions commencent à partir de l'Agent v5.2.0, où chaque version de l'Agent appelle un endpoint différent en fonction du *Forwarder*. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.datadoghq.com`. Par conséquent, vous devez ajouter `*.agent.datadoghq.com` à la liste blanche de vos pare-feux.
 
 Ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur les pages suivantes :
 
@@ -60,8 +60,8 @@ Les informations sont structurées au format JSON selon le schéma suivant :
 
 Chaque section comprend un endpoint dédié à l'adresse `https://ip-ranges.datadoghq.com/<section>.json` ou `https://ip-ranges.datadoghq.eu/<section>.json`, par exemple :
 
-* [https://ip-ranges.datadoghq.com/logs.json][6] pour les adresses IP utilisées pour recevoir les données de log
-* [https://ip-ranges.datadoghq.eu/logs.json][7] pour les adresses IP utilisées pour recevoir les données de log via le site européen de Datadog
+* [https://ip-ranges.datadoghq.com/logs.json][6] pour les adresses IP utilisées pour recevoir les données des logs via TCP
+* [https://ip-ranges.datadoghq.eu/logs.json][7] pour les adresses IP utilisées pour recevoir les données des logs via TCP, pour le site européen de Datadog
 * [https://ip-ranges.datadoghq.com/apm.json][8] pour les adresses IP utilisées pour recevoir les données d'APM
 * [https://ip-ranges.datadoghq.eu/apm.json][9] pour les adresses IP utilisées pour recevoir les données d'APM via le site européen de Datadog
 
@@ -82,7 +82,7 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 
   * `443/tcp` : port pour la plupart des données de l'Agent (métriques, APM, Live Processes/conteneurs)
   * `123/udp` : NTP [(En savoir plus sur l'importance de NTP)][1]
-  * `10516/tcp` : port pour la [collecte de logs][2]
+  * `10516/tcp` : port pour la [collecte de logs][2] via TCP
   * `10255/tcp` : port pour le [kubelet http Kubernetes][3]
   * `10250/tcp` : port pour le [kubelet https Kubernetes][3]
 
@@ -123,7 +123,7 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
       * `fe80::1`
 
   * `8126/tcp` : port pour le [récepteur de l'APM][2]
-  * `17123/tcp` : redirecteur de l'Agent, utilisé pour la mise en mémoire tampon du trafic en cas de perte de communication entre l'Agent et Datadog
+  * `17123/tcp` : Forwarder de l'Agent, utilisé pour la mise en mémoire tampon du trafic en cas de perte de communication entre l'Agent et Datadog
   * `17124/tcp` : redirecteur pour la prise en charge de Graphite (facultatif)
 
 

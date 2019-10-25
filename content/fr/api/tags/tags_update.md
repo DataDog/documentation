@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour les tags d'un host
 type: apicontent
-order: 30.4
+order: 31.4
 external_redirect: '/api/#mettre-a-jour-les-tags-d-un-host'
 ---
 ## Mettre à jour les tags d'un host

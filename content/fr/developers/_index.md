@@ -7,7 +7,7 @@ aliases:
   - /fr/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 ---
 {{< whatsnext desc="Cette section aborde les sujets suivants :" >}}
-    {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u> : présentation des fonctionnalités de DogstatsD, y compris sa configuration, le format des datagrammes et l'envoi de données.{{< /nextlink >}}
+    {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u> : présentation des fonctionnalités de DogStatsD, y compris sa configuration, le format des datagrammes et l'envoi de données.{{< /nextlink >}}
     {{< nextlink href="/developers/metrics" >}}<u>Métriques</u> : plongez au cœur des métriques de Datadog. Cette section explique les différents types de métriques, ce qu'elles représentent, comment les envoyer et comment elles sont utilisées dans l'écosystème Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/events" >}}<u>Événements</u> : découvrez comment envoyer des événements à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Checks de service</u> : apprenez à envoyer des checks de service à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
