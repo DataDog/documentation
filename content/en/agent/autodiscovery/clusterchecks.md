@@ -87,11 +87,11 @@ Using dedicated cluster check runners allows the Cluster Agent to use an advance
 
 #### Advanced Dispatching - Cluster Agent setup
 
-In addition to the steps mentioned [above][14], `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` must be set to `true`.
+In addition to the steps mentioned in the [Cluster Agent Setup][14] section, you must set `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` to `true`.
 
 #### Advanced Dispatching - Cluster Check Runner setup
 
-The following environment variables are required to configure the Cluster Check Runners to expose their check stats, the stats are consumed by the Cluster Agent and used to optimize the cluster checks dispatching logic.
+The following environment variables are required to configure the cluster check runners to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
 
 ```
   env:
@@ -103,7 +103,7 @@ The following environment variables are required to configure the Cluster Check 
           fieldPath: status.podIP
 ```
 
-**Note**: The advanced dispatching logic is only supported when using dedicated cluster check runners. For now, the feature does not support regular node Agents.
+**Note**: The advanced dispatching logic is only supported when using dedicated cluster check runners. This feature does not support regular node Agents.
 
 ## Setting up check configurations
 
