@@ -25,7 +25,7 @@ The Agents connect to the Cluster Agent every 10 seconds and retrieve the check 
 
 This feature is currently supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
 
-Starting with version 1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed Endpoint into a regular Cluster Check. The [Cluster Check][1] feature needs to be enabled alongside Endpoints Checks in this case.
+Starting with version 1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][1] feature alongside Endpoints Checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
 ```
