@@ -103,7 +103,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
     Les événements qui se sont produits récemment (dans Datadog ou dans des services externes comme Ansible, Chef, etc.) s'affichent alors au sein du dashboard : ceux-ci comprennent notamment les déploiements, les tâches terminées ou les alertes de monitors. Ces événements peuvent être corrélés avec les métriques représentées dans le dashboard.
 
-   Enfin, vous avez également la possibilité d'utiliser des template variables. Ces dernières correspondent à un ensemble de valeurs qui permettent à chaque utilisateur de contrôler les widgets d'un dashboard de façon dynamique, sans avoir à modifier les widgets eux-mêmes.
+   Enfin, assurez-vous d'utiliser les template variables. Ces dernières correspondent à un ensemble de valeurs qui permettent à chaque utilisateur de contrôler les widgets d'un dashboard de façon dynamique, sans avoir à modifier les widgets eux-mêmes.
 
 10. **Cliquez sur `Add Template Variables`** dans la zone de configuration. **Cliquez sur `Add Variable +`**, nommez la template variable et choisissez le tag que la variable doit contrôler.
 
