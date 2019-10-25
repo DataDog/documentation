@@ -168,7 +168,7 @@ spec:
 
 Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][10]—the only difference is on the node-based Agents, where scheduled Endpoints Checks appear alongside the Cluster Check.
 
-**Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an Endpoint is not backed by a pod, the Cluster Agent converts the check into a Cluster Check which can be run by any node Agent.
+**Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a Cluster Check. This Cluster Check can be run by any node Agent.
 
 ### Autodiscovery in the node-based Agent
 
