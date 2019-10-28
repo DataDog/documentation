@@ -20,7 +20,7 @@ further_reading:
 
 Composite monitors combine individual monitors into one monitor to define more specific alert conditions.
 
-Choose existing monitors to create a composite monitor, for example monitor `a` and monitor `b`. Then set a trigger condition using boolean operators (e.g. `a && b`). The composite monitor triggers when the individual monitors simultaneously have values that cause the composite's trigger condition to be true.
+Choose existing monitors to create a composite monitor, for example monitor `A` and monitor `B`. Then set a trigger condition using boolean operators such as `A && B`. The composite monitor triggers when the individual monitors simultaneously have values that cause the composite monitor's trigger condition to be true.
 
 For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
@@ -35,9 +35,9 @@ To create a [composite monitor][1] in Datadog, use the main navigation: *Monitor
 
 Choose up to 10 individual monitors to use in a composite monitor. Monitors can be of different alert types (simple alerts, multi-alerts, or a combination of the two). No individual monitor may itself be a composite monitor. After you choose your first monitor, the UI shows its alert type and current status.
 
-If you choose a multi-alert monitor, the UI shows its group-by clause and how many unique sources are currently reporting, for example: `Returns 5 host groups`.
+If you choose a multi-alert monitor, the UI shows the monitor's group-by clause and how many unique sources are currently reporting, for example: `Returns 5 host groups`. When you combine multi-alert monitors, this information helps you choose monitors that pair together naturally.
 
-When you combine multi-alert monitors, this information helps you choose monitors that pair together naturally. You should choose monitors that have the same group-by. If you don't, the UI warns you that such a composite monitor may never trigger:
+You should choose monitors that have the same groups. If you don't, the UI warns you that such a composite monitor may never trigger:
 
 ```
 Group Matching Error
@@ -46,13 +46,13 @@ composite result because they have not evaluated any
 common groupings or have less than 2 selected monitors.
 ```
 
-Even if you choose multi-alert monitors with the same group-by, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#how-composite-monitors-select-common-reporting-sources).
+Even if you choose multi-alert monitors with the same groups, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning, the UI populates the **Trigger when** field with the default trigger condition `a && b` and shows the status of the proposed composite monitor.
 
 #### Set triggering conditions
 
-In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form (`a`, `b`, `c`, etc). Use parentheses to control operator precedence and create more complex conditions.
+In the **Trigger when** field, write your desired trigger condition using boolean operators, referring to individual monitors by their labels in the form `a`, `b`, `c`, etc. Use parentheses to control operator precedence and create more complex conditions.
 
 The following are all valid trigger conditions:
 
@@ -64,7 +64,7 @@ a || b && !c
 
 #### No data
 
-`Do not notify` or `Notify` when the composite monitor is in no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings.
+`Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings.
 
 ### Notifications
 
@@ -72,9 +72,9 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-When using the API, a non-composite monitor's query can encapsulate a metric, tags, an aggregation function like `avg`, a group-by clause, etc. A composite monitor's query is defined in terms of its constituent monitors using monitor IDs.
+When using the API, a non-composite monitor's query can encapsulate a metric, tags, aggregation function like `avg`, group-by clause, etc. A composite monitor's query is defined in terms of its constituent monitors using monitor IDs.
 
-For example, two non-composite monitors have the following queries:
+For example, two non-composite monitors have the following queries and IDs:
 ```text
 "avg(last_1m):avg:system.mem.free{role:database} < 2147483648" # Monitor ID: 1234
 "avg(last_1m):avg:system.cpu.system{role:database} > 50" # Monitor ID: 5678
@@ -116,7 +116,7 @@ Two of the four scenarios trigger an alert, even though not all of the individua
 
 ### Component monitor status
 
-Composite monitors are evaluated by using a sliding window of monitor results for each component monitor (specifically, they use the most severe status from the past five minutes for each component monitor). For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
+Composite monitors are evaluated by using a sliding window of monitor results for each component monitor. Specifically, they use the most severe status from the past five minutes for each component monitor. For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
 
 | Monitor | T0    | T1    | T2    |
 |---------|-------|-------|-------|
