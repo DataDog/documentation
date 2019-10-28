@@ -109,9 +109,9 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
   * Cela permet à Datadog d'envoyer les données de configuration à la CMDB ServiceNow. Vous pouvez ajouter des tags aux hosts qui ont été associés aux CI de la CMDB ServiceNow dans Datadog. **Remarque** : l'option « Enable adding Datadog hosts into ServiceNow CMDB » doit être activée pour que la fonctionnalité de synchronisation de tag fonctionne.
 
   * Par défaut, aucun tag n'est synchronisé entre ServiceNow et Datadog. Trois sources de données différentes peuvent être utilisées pour les tags :
-    * Les étiquettes
-    * Les services métiers
-    * Les attributs des éléments de configuration (CI)
+    * Labels
+    * Business Services
+    * Configuration Item (CI) attributes
 
   * Dans l'exemple de configuration ci-dessous, les étiquettes et les services métiers sont ajoutés en tant que tags, ainsi que les attributs `sys_id` and `sys_class_name`
 
