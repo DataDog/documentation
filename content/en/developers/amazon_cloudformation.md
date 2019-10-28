@@ -5,13 +5,13 @@
 ​
 [AWS CloudFormation][1] gives you templates to describe, configure, and provision all of the AWS resources in your environment at once. The Datadog-AWS CloudFormation provider allows you to interact with the supported Datadog resources. To get started:
 
-1. In your terminal, use the [cfn-cli tool][2] to register a Datadog resource.
+1. In your terminal, use the [aws-cli tool][2] to register a Datadog resource.
 
     ```shell
     aws cloudformation register-type \
         --region <REGION> \
         --type RESOURCE \
-        --type-name “<DATADOG_RESOURCE_NAME>” \
+        --type-name "<DATADOG_RESOURCE_NAME>" \
         --schema-handler-package <LINK_TO_S3_OR_GITHUB_RELEASE>
     ```
 
@@ -19,6 +19,7 @@
     * `<REGION>`: Your AWS region.
     * `<DATADOG_RESOURCE_NAME>`: The name of the resource to register, refer to the table below to see the supported resources.
     * `<LINK_TO_S3_OR_GITHUB_RELEASE>`: Link to the S3 or Github release for the resource.
+      * S3 link: `s3://datadog-cloudformation-resources/<RESOURCE_FOLDER>/<RESOURCE_FOLDER>-1.0.0.zip`
 
 2. In your AWS account, [create your AWS stack][3] that includes any of the registered Datadog resources.
 
