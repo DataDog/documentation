@@ -10,9 +10,6 @@ further_reading:
 - link: "/logs/guide"
   tag: "Guide"
   text: Additional helpful articles about log collection and processing.
-- link: "tracing/advanced/connect_logs_and_traces/?tab=java"
-  tag: "Documentation"
-  text: "Connect Logs and Traces"
 - link: "https://learn.datadoghq.com"
   tag: "Learning Center"
   text: "Introduction to Logs in Datadog"
@@ -29,6 +26,7 @@ Datadog's log management removes these limitations by decoupling log ingestion f
   {{< nextlink href="/logs/processing">}}<u>Processing</u>: Process and enrich all of your logs with pipelines and processors. {{< /nextlink >}}
   {{< nextlink href="/logs/live_tail">}}<u>Live Tail</u>: See your ingested logs in real time across all your environments.{{< /nextlink >}}
   {{< nextlink href="/logs/logs_to_metrics">}}<u>Generate Metrics</u>: Generate Metrics from Ingested Logs.{{< /nextlink >}}
+  {{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}<u>Connect Logs and Traces</u>: See the exact trace correlated to the observed log.{{< /nextlink >}}
   {{< nextlink href="/logs/archives">}}<u>Archives</u>: Archive all enriched logs into S3 buckets.{{< /nextlink >}}
   {{< nextlink href="/logs/indexes">}}<u>Index</u>: Dynamically decide what to include or exclude from your indexes to control your costs.{{< /nextlink >}}
 {{< /whatsnext >}}
