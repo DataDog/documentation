@@ -244,7 +244,7 @@ L'Agent recherche les fichiers Python MIB convertis en indiquant le chemin de de
 
 ##### Profils
 
-Le check permet de définir des profils de configuration afin de réutiliser des définitions de métriques sur plusieurs instances. Les profils définissent les métriques de la même manière que les instances, soit directement dans le fichier de configuration, soit dans des fichiers distincts. Chaque instance ne peut correspondre qu'à un seul profil. Vous pouvez par exemple définir un profil dans la section `init_config` :
+Le check vous permet de définir des profils afin de regrouper des configurations et ainsi appliquer des définitions de métriques à plusieurs instances. Les profils définissent les métriques de la même manière que les instances, soit directement dans le fichier de configuration, soit dans des fichiers distincts. Chaque instance ne peut correspondre qu'à un seul profil. Vous pouvez par exemple définir un profil dans la section `init_config` :
 
 ```yaml
 init_config:
@@ -305,7 +305,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 
 ### Métriques custom
-Le check SNMP peut potentiellement générer des [métriques custom][10], qui peuvent avoir une incidence sur votre [facturation][11]. 
+Les métriques recueillies par l'intégration SNMP sont considérées comme des [métriques custom][10], ce qui peut avoir une incidence sur votre [facture][11].
 
 ### Validation
 

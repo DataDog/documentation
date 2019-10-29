@@ -1,8 +1,8 @@
 ---
 aliases:
-  - /fr/integrations/awsrds/
-  - /fr/integrations/rds/
-  - /fr/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
+  - /integrations/awsrds/
+  - /integrations/rds/
+  - /integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
 categories:
   - cloud
   - data store
@@ -205,7 +205,7 @@ Pour savoir comment surveiller les métriques de performance MySQL d'Amazon RDS
 ### Collecte de logs
 #### Activer la journalisation RDS
 
-Vous pouvez transmettre des logs MySQL, MariaDB et Postgres à Amazon CloudWatch. Suivez les instructions figurant [ici][11] pour commencer à envoyer vos logs RDS à CloudWatch.
+Vous pouvez transmettre des logs MySQL, MariaDB et Postgres à Amazon CloudWatch. Suivez les instructions figurant [ici][11] pour commencer à envoyer vos logs RDS à CloudWatch. 
 
 #### Envoyer des logs à Datadog
 
@@ -233,7 +233,7 @@ L'intégration AWS RDS comprend des événements liés aux instances de base de
 
 ### Checks de service
 **aws.rds.read_replica_status**
-Surveille le statut du [réplica en lecture][15]. Ce check renvoie l'un des statuts suivants :
+Surveille le statut du [réplica en lecture][16]. Ce check renvoie l'un des statuts suivants :
 
 * OK - En cours de réplication ou de connexion
 * CRITICAL - Erreur ou terminé
@@ -241,15 +241,12 @@ Surveille le statut du [réplica en lecture][15]. Ce check renvoie l'un des stat
 * UNKNOWN - Autre
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][16].
+Besoin d'aide ? Contactez [l'assistance Datadog][17].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-
-{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -264,5 +261,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 [12]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [13]: https://app.datadoghq.com/logs
 [14]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
-[15]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[16]: https://docs.datadoghq.com/fr/help
+[15]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
+[16]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
+[17]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
