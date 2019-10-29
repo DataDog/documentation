@@ -73,7 +73,7 @@ Tests can be only recorded from **[Google Chrome][7]**. To record your test, dow
 ### Actions
 #### Assertion
 
-{{< img src="synthetics/browser_tests/assertions_browser_check.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
 Assertions allow you to check if an element, a content, or some text is available in the current page. You can also check if a specific email was sent.   
 The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
