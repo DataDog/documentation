@@ -4,29 +4,37 @@ kind: documentation
 aliases:
   - /fr/monitoring
 ---
-Pour [créer un monitor][1] dans Datadog, passez le curseur sur **Monitors** dans le menu principal et cliquez sur **New Monitor** dans le sous-menu. Pour programmer la création d'un monitor, consultez la documentation relative à l'[API Datadog][2] ou aux [bibliothèques entretenues par la communauté][3].
+## Création
 
-{{< whatsnext desc="Choisissez votre type de monitor :">}}
-    {{< nextlink href="/monitors/monitor_types/host" >}}Host{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/metric" >}}Métrique{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomalie{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/forecasts" >}}Prévision{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/integration" >}}Intégration{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/process" >}}Live Process{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/network" >}}Réseau{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/custom_check" >}}Check custom{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/event" >}}Événement{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/log" >}}Logs{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/apm" >}}Métriques APM{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/app_analytics" >}}Analyse de traces{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
-{{< /whatsnext >}}
+Pour [créer un monitor][1] dans Datadog, passez le curseur sur **Monitors** dans le menu principal et cliquez sur **New Monitor** dans le sous-menu. Pour programmer la création d'un monitor, consultez la documentation relative à l'[API Datadog][2] ou aux [bibliothèques maintenues par la communauté][3].
 
-## Contrôler des monitors
+Sélectionnez un type de monitor :
 
-Pour tous les types de monitor, les modifications qui y sont apportées crée dans le [flux d'événements][4] un événement qui explique la modification et affiche l'utilisateur à son origine.
+* [Host][4]
+* [Métrique][5]
+* [Anomalie][6]
+* [Outlier][7]
+* [Prévision][8]
+* [Intégration][9]
+* [Live Process][10]
+* [Check de processus][11]
+* [Réseau][12]
+* [Check custom][13]
+* [Événement][14]
+* [Logs][15]
+* [APM][16]
+* [Watchdog][17]
+* [Composite][18]
+
+## Importation
+
+[Importez un monitor][19] vers Datadog au format JSON via la navigation principale : *Monitors --> New Monitor --> Import*.
+
+Vous pouvez exporter un monitor au format JSON depuis la page de statut du monitor. Cliquez sur l'icône des paramètres en forme d'engrenage (en haut à droite) et sélectionnez **Export** depuis le menu.
+
+## Audit
+
+Quel que soit le type de monitor utilisé, toute modification crée dans le [flux d'événements][20] un événement qui explique la modification et affiche l'utilisateur à son origine.
 
 Si vous avez apporté des modifications à un monitor, vous pouvez consulter des exemples en effectuant la recherche d'événement suivante :
 ```
