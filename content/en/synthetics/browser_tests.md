@@ -94,7 +94,7 @@ Advanced options for assertions allow you to specify an X-path or a CSS class or
 The navigation action allow you to:
 
 * Refresh the current page of the scenario.
-* Follow a specific link. In the "Enter link URL" box, users must prepend URLs with `http` or `https`.
+* Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
 * Go to an email and click link. After creating the [email variable][9], and recording the step that will trigger the email, that step will allow you to access your Synthetics inbox. You then need to choose the email you're interested and click the link you want your browser test to click on.
 
 #### Hover
