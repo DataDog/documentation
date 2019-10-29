@@ -63,7 +63,7 @@ Use [Autodiscovery with Pod Annotations][8] to configure log collection to add m
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][6].
 
-[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [2]: /agent
 [3]: /agent/autodiscovery
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
