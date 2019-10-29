@@ -73,6 +73,8 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktraces if available
 * A total count of traces (e.g., web requests) flowing through the system
 
+**Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
+
 ## Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
@@ -118,6 +120,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | Symfony        | 3.3, 3.4, 4.x      | Fully Supported |
 | WordPress      | 4.x                | PHP 7           |
 | Zend Framework | 1.12               | Fully Supported |
+| Yii            | 2.0                | Fully Supported |
 | CodeIgniter    | 3.x                | _Coming Soon_   |
 | Drupal         |                    | _Coming Soon_   |
 | Magento        | 2                  | _Coming Soon_   |
@@ -205,35 +208,36 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 ### Environment Variable Configuration
 
-| Env variable                         | Default     | Note                                                                        |
-|:-------------------------------------|:------------|:----------------------------------------------------------------------------|
-| `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
-| `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
-| `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable distributed tracing                                       |
-| `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
-| `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
-| `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
-| `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC` | `5000`  | IPC-based configurable circuit breaker retry time (in milliseconds)         |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | The Agent connection timeout (in milliseconds)                              |
-| `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`    | IPC-based configurable circuit breaker max consecutive failures             |
-| `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
-| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | The Agent request transfer timeout (in milliseconds)                        |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
-| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
-| `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
-| `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
-| `DD_TRACE_REPORT_HOSTNAME`           | `false`     | Enable hostname reporting on the root span                                  |
-| `DD_TRACE_RESOURCE_URI_MAPPING`      | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED` | `false` | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17] |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
+| Env variable                              | Default     | Note                                                                                                              |
+|-------------------------------------------|-------------|-------------------------------------------------------------------------------------------------------------------|
+| `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                               |
+| `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                               |
+| `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                             |
+| `DD_INTEGRATIONS_DISABLED`                | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                                                              |
+| `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                              |
+| `DD_SAMPLING_RATE`                        | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)                                               |
+| `DD_SERVICE_NAME`                         | ``          | The default app name                                                                                              |
+| `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                               |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                             |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | The Agent connection timeout (in milliseconds)                                                                    |
+| `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | IPC-based configurable circuit breaker max consecutive failures                                                   |
+| `DD_TRACE_AGENT_PORT`                     | `8126`      | The Agent port number                                                                                             |
+| `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | The Agent request transfer timeout (in milliseconds)                                                              |
+| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag to enable trace analytics for relevant spans in web integrations                                             |
+| `DD_TRACE_CLI_ENABLED`                    | `false`     | Enable tracing of PHP scripts from the CLI                                                                        |
+| `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode][16] for the tracer                                                                            |
+| `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                        |
+| `DD_TRACE_GLOBAL_TAGS`                    | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                      |
+| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                          |
+| `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                        |
+| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
+| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17]                                  |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable trace analytics for relevant spans in a specific integration                                       |
 
 #### Map Resource Names To Normalized URI
 
 <div class="alert alert-warning">
-This functionality is in public beta. For assistance, contact <a href="/help">Datadog Support</a>. 
+This functionality is in public beta. For assistance, contact <a href="/help">Datadog Support</a>.
 </div>
 
 When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
@@ -272,7 +276,7 @@ The `$*` wildcard matches without replacement.
 |:--------------------|:----------------------------|:---------------------------|
 | `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
 | `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
- 
+
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][7] and follow the same steps as [installing the extension][18].
