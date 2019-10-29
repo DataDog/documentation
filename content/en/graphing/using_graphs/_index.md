@@ -16,7 +16,7 @@ Whether using metrics, monitors, dashboards, notebooks, etc., all graphs in Data
 
 Interact with the graphing editor by using the UI (default method) or writing JSON (advanced method). This page covers using the UI. To learn more about using JSON, see [Graphing with JSON][1].
 
-On dashboards, open the graphing editor by clicking on the pencil icon in the upper right corner. The graphing editor has the following tabs:
+On widgets, open the graphing editor by clicking on the pencil icon in the upper right corner. The graphing editor has the following tabs:
 
 * **Share**: Embed the graph on any external web page.
 * **JSON**: The more flexible editor which requires knowledge of the graph definition language.
@@ -42,11 +42,11 @@ Select your visualization from the available [widgets][2].
 
 ### Choose the metric to graph
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, start with the [Metrics Explorer][3] or a [Notebook][4]. You can also see a list of metrics in the [Metrics Summary][5].
+Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, start with the [Metrics Explorer][3] or a [Notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
 
 ### Filter
 
-Your chosen metric can be filtered by host or any tag using the **from** dropdown to the right of the metric. The default is `(everywhere)`. To learn more about tags, refer to the [Tagging][6] documentation.
+Your chosen metric can be filtered by host or any tag using the **from** dropdown to the right of the metric. The default is *(everywhere)*. To learn more about tags, refer to the [Tagging][6] documentation.
 
 ### Aggregate and rollup
 #### Aggregation method
@@ -55,7 +55,7 @@ Next to the filter dropdown is the aggregation method. This defaults to `avg by`
 
 #### Aggregation groups
 
-Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose host, there's a line for every host. Each line is made up of the selected metric on a particular host aggregated using the chosen method.
+Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there's a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
 
 #### Rollup to aggregate over time
 
@@ -85,7 +85,7 @@ The Datadog UI also supports the ability to graph your metrics with various arit
 
 #### Metric arithmetic using an integer
 
-Modify the display value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
+Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
 {{< img src="graphing/using_graphs/arithmetic_2.png" alt="Arithmetic 2" responsive="true" style="width:75%;" >}}
 
@@ -96,13 +96,13 @@ Visualize the percentage of a metric by dividing one metric over another, for ex
 jvm.heap_memory / jvm.heap_memory_max
 ```
 
-Use the **Advanced...** option in the graph editor and select **Add Query**. Each query is assigned a letter: the first metric is represented by `a`, the second metric is represented `b`, etc.
+Use the **Advanced...** option in the graph editor and select **Add Query**. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example):
 
 {{< img src="graphing/using_graphs/arithmetic_3.png" alt="Arithmetic 3" responsive="true" style="width:75%;" >}}
 
-To display only the formula on the graph, click on the check marks next to the metrics `a` and `b`.
+To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
