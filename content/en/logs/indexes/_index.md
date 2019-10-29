@@ -68,6 +68,17 @@ Enable or disable them in one click on the Pipeline page:
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
 
+### Set daily quota
+
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). 
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][7], [sent to your archives][8], and used to [generate metrics from logs][9].
+
+Update or remove this quota at any time when editing the Index: 
+
+{{< img src="logs/indexes/index_quota.png" alt="index details" responsive="true" style="width:70%;">}}
+
+**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
+
 ## Multi indexes
 
 It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
@@ -91,3 +102,6 @@ Multiple indexes also provide the ability to define access rules on the data con
 [4]: /logs/explorer/analytics/#dashboard
 [5]: /monitors/monitor_types/log
 [6]: /account_management/rbac
+[7]: https://docs.datadoghq.com/logs/live_tail/#overview
+[8]: https://docs.datadoghq.com/logs/archives/
+[9]: https://docs.datadoghq.com/logs/logs_to_metrics/

@@ -5,14 +5,14 @@ order: 17.2
 external_redirect: "/api/#creer-une-integration-gcp"
 ---
 
-**SIGNATURE**:
+**SIGNATURE** :
 
 `POST /v1/integration/gcp`
 
-**EXEMPLE DE REQUÊTE**:
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="gcp_create" >}}
 
-**EXEMPLE DE RÉPONSE**:
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.gcp_create" >}}

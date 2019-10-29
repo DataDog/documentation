@@ -63,7 +63,9 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-Any element of the standard attributes can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+Any element of the standard attributes can then be filled or updated. 
+
+**Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
 
 ### Standard attribute remapping behavior
 

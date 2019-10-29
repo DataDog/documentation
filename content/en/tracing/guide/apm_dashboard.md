@@ -55,7 +55,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     | Parameter | Value                         | Description                                                                                                          |
     | ------    | -----                         | -----                                                                                                                |
-    | `metric`  | `trace.rack.reqesusts.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
+    | `metric`  | `trace.rack.requests.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
     | `from`    | `service:web-store`           | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
     | `sum by`  | `http.status_code`            | Breaking down the chart by http status codes.                                                                        |
 
@@ -103,7 +103,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
-    One final capability to make sure you use are template variables. There are a set of values that dynamically control the widgets on the dashboards that every users can use without having to edit the widgets themselves.
+    Finally, make sure to use template variables. These are a set of values that dynamically control the widgets on the dashboards that every users can use without having to edit the widgets themselves.
 
 10. **Click on `Add Template Variables`** in the control panel. **Click `Add Variable +`**, name the template variable and choose the tag that the variable will control.
 

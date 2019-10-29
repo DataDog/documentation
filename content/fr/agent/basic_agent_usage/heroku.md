@@ -141,9 +141,19 @@ Pour réduire la taille du slug, les binaires facultatifs `trace-agent` et `proc
 
 Pour réduire la taille de votre slug, assurez-vous que `DD_APM_ENABLED` est défini sur `false` si vous n'utilisez pas les fonctionnalités de l'APM et que `DD_PROCESS_AGENT` n'est pas défini sur `true` si vous n'utilisez pas la surveillance de processus.
 
+## Debugging
+
+Pour exécuter les commandes de debbuging/d'information énumérées dans la [documentation de l'Agent][21], utilisez la commande `agent-wrapper`.
+
+Par exemple, pour afficher le statut de votre Agent Datadog et des intégrations activées, exécutez :
+
+```
+agent-wrapper status
+```
+
 ## Collecte de logs Heroku
 
-Le buildpack Heroku Datadog ne recueille pas de log. Pour configurer la collecte de logs, consultez le [guide dédié][17].
+Le buildpack Heroku Datadog ne recueille pas de logs. Pour configurer la collecte de logs, consultez le [guide dédié][17].
 
 ## Éléments non pris en charge
 
@@ -182,3 +192,4 @@ Assurez-vous que `DD_DYNO_HOST est défini sur `true` et que la valeur de `NOM_A
 [18]: https://docs.datadoghq.com/fr/developers/libraries/#heroku
 [19]: https://github.com/DataDog/heroku-buildpack-datadog/releases
 [20]: https://devcenter.heroku.com/articles/dyno-metadata
+[21]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information

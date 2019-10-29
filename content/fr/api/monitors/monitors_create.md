@@ -8,27 +8,28 @@ external_redirect: '/api/#creer-un-monitor'
 
 Si vous programmez la gestion et le déploiement des monitors, vous pouvez définir plus facilement le monitor dans l'IU Datadog et [exporter son JSON valide][1].
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 *   **`type`** [*obligatoire*] :
     le [type de monitor][2]. Vous trouverez sous-dessous les différentes valeurs autorisées :
 
-| Type de monitor | Valeur de l'attribut du type            |
-| :--------    | :-------                        |
-| anomaly      | `query alert`                   |
-| apm          | `query alert`                   |
-| composite    | `composite`                     |
-| custom       | `service check`                 |
-| event        | `event alert`                   |
-| forecast     | `query alert`                   |
-| host         | `service check`                 |
-| integration  | `query alert` ou `service check`  |
-| live process | `process alert`                 |
-| logs         | `log alert`                     |
-| metric       | `metric alert`                  |
-| network      | `service check`                 |
-| outlier      | `query alert`                   |
-| process      | `service check`                 |
-| watchdog     | `event alert`                   |
+| Type de monitor | Valeur de l'attribut du type             |
+|:-------------|:---------------------------------|
+| anomaly      | `query alert`                    |
+| apm          | `query alert`                    |
+| composite    | `composite`                      |
+| custom       | `service check`                  |
+| event        | `event alert`                    |
+| forecast     | `query alert`                    |
+| host         | `service check`                  |
+| integration  | `query alert` ou `service check` |
+| live process | `process alert`                  |
+| logs         | `log alert`                      |
+| metric       | `metric alert`                   |
+| network      | `service check`                  |
+| outlier      | `query alert`                    |
+| process      | `service check`                  |
+| watchdog     | `event alert`                    |
 
 *   **`query`** [*obligatoire*] :
     le paramètre query définit à quel moment le monitor se déclenche. La syntaxe de la requête dépend du type de monitor que vous créez :
@@ -58,7 +59,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 
     *   **`check`** : nom du check, par exemple datadog.agent.up.
     *   **`tags`** : un ou plusieurs tags entre guillemets (séparés par des virgules) ou « * ». Exemple : `.over("env:prod", "role:db")`.
-    *   **`count`** doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez envoyer une notification pour les statuts 1 Critical, 3 Ok et 2 Warning, « count » doit prendre pour valeur 3.
+    *   **`count`** doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez recevoir une notification à partir de 1 statut Critical, 3 statuts Ok et 2  statuts Warning, « count » doit prendre pour valeur 3. La valeur maximale est de 10.
 
     ##### Requête d'alerte d'événement
 
@@ -157,7 +158,6 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
     Si une option de monitor non valide fait partie de la requête, la réponse sera :
 
             Error: 400 - ["Invalid monitor option:<option non valide>"]
-
 
 
 [1]: /fr/monitors/monitor_types/#import

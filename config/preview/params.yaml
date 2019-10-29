@@ -3,6 +3,17 @@ img_url: "https://datadog-docs-staging.imgix.net/"
 static_url: "https://docs-staging.datadoghq.com/"
 ga: UA-21102638-9
 
+header_scripts:
+  - datadog_monitoring: true
+  - hotjar: true
+  - google-site-tag: false
+  - google-tag-manager: false
+  - marketo: false
+
+footer_scripts:
+  - snowplow: false
+  - adroll: false
+
 datadog:
   clientToken: pub36877d3864fab670b5ae7e1d5d26cb08
   applicationId: c4e83ad8-4eda-4d2e-aae1-d943abce0463

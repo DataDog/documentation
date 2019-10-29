@@ -8,6 +8,7 @@ assets:
 categories:
   - web
   - caching
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -40,32 +41,42 @@ Le check Memcache de l'Agent vous permet de surveiller l'utilisation de la mémo
 ## Implémentation
 ### Installation
 
-Le check Memcache est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Memcache.
+Le check Memcache est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Memcache.
 
 ### Configuration
 
-1. Modifiez le fichier `mcache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
-  Consultez le [fichier d'exemple mcache.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+#### Host
+
+1. Modifiez le fichier `mcache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
+  Consultez le [fichier d'exemple mcache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
     ```yaml
       init_config:
 
       instances:
-        - url: localhost  # url used to connect to the memcached instance
-          port: 11212 # optional; default is 11211
-      #    socket: /path/to/memcache/socket # alternative to url/port; 'dd-agent' user must have read/write permission
-          options:
-            items: false # set to true to collect items stats
-            slabs: false # set to true to collect slabs stats
-      #    tags:
-      #    - optional_tag
+        ## @param url - string - required
+        ## url used to connect to the Memcached instance.
+        #
+        - url: localhost
     ```
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques Memcache à Datadog.
+2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques Memcache à Datadog.
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                 |
+|----------------------|---------------------------------------|
+| `<NOM_INTÉGRATION>` | `mcache`                              |
+| `<CONFIG_INIT>`      | vide ou `{}`                         |
+| `<CONFIG_INSTANCE>`  | `{"url": "%%host%%","port": "11211"}` |
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `mcache` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `mcache` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -85,25 +96,26 @@ Le check Mcache n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à Memcache pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-* [Améliorer la vitesse de vos applications Web en surveillant Memcached][8]
-* [Instrumenter les métriques de performance Memcached avec DogStatsD][9]
-* [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][10]
+* [Améliorer la vitesse de vos applications Web en surveillant Memcached][9]
+* [Instrumenter les métriques de performance Memcached avec DogStatsD][10]
+* [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/mcache/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
-[9]: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
-[10]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/mcache/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
+[10]: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
+[11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 
 
 {{< get-dependencies >}}

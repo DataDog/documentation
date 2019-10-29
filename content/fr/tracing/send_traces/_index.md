@@ -38,13 +38,19 @@ Consultez les instructions de configuration spécifiques pour vous assurer que l
 </br>
 Remarque : après avoir instrumenté votre application, par défaut, le client de tracing envoie les traces à `localhost:8126`.
 
+## Environnement sans serveur
+
+### AWS Lambda
+
+Pour en savoir plus sur la configuration de Lambda - X-Ray, consultez la [documentation sur l'intégration Amazon X-Ray][8].
+
+### Google App Engine, AAS
+
+L'APM Datadog requiert l'envoi de données de trace à un Agent en cours d'exécution. Pour activer la collecte de trace dans un environnement sans serveur, il est possible de configurer une machine virtuelle distincte qui accepte le trafic de traces de manière externe.
+
 ## Environnements supplémentaires
 
 Vous pouvez utiliser d'autres composants que l'Agent et les conteneurs pour recueillir des traces.
-
-### Lambda - X-Ray
-
-Pour en savoir plus sur la configuration de Lambda - X-Ray, consultez la [documentation sur l'intégration Amazon X-Ray][8].
 
 ### Heroku
 
@@ -53,10 +59,6 @@ Le tracing est activé par défaut lors de la surveillance avec Heroku. Pour en 
 ### Cloud Foundry
 
 Le tracing est activé par défaut lors de la surveillance avec Cloud Foundry. Pour en savoir plus sur la configuration du tracing pour Cloud Foundry, consultez la [documentation Cloud Foundry][10].
-
-### Autres (GAE, AAS, environnement sans serveur)
-
-L'APM Datadog requiert actuellement l'envoi de données de trace à un Agent en cours d'exécution. Pour activer la collecte de trace dans un environnement sans serveur, il est possible de configurer une machine virtuelle distincte qui accepte le trafic de traces de manière externe.
 
 ## Configurer votre environnement
 

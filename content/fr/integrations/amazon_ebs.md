@@ -12,12 +12,12 @@ description: 'Surveillez l''âge des snapshots, l''IOPS, les durées de lecture/
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ebs/'
 git_integration_title: amazon_ebs
 has_logo: true
-integration_title: "AWS\_Elastic\_Block\_Store"
+integration_title: "Amazon\_Elastic\_Block\_Store"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ebs
-public_title: Intégration Datadog/AWS Elastic Block Store
+public_title: "Intégration Datadog/Amazon\_Elastic\_Block\_Store"
 short_description: 'Surveillez l''âge des snapshots, l''IOPS, les durées de lecture/écriture, et plus encore.'
 version: '1.0'
 ---

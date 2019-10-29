@@ -50,7 +50,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   `change_aggr` change, pct_change
     *   `time_aggr` avg, sum, max, min [Learn more][3]
-    *   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)
+    *   `time_window` last\_#m (1, 5, 10, 15, or 30), last\_#h (1, 2, or 4), or last_#d (1 or 2)
     *   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
     Use this to create an outlier monitor using the following query: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`

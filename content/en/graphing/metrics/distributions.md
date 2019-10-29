@@ -5,7 +5,7 @@ description: Compute global percentiles across your entire dataset.
 aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
 further_reading:
-  - link: "developers/dogstatsd/data_types#distributions"
+  - link: "developers/metrics/dogstatsd_metrics_submission"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
@@ -55,5 +55,5 @@ For more information on counting custom metrics created from gauge, count, histo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/distributions
+[1]: /developers/metrics/metrics_type
 [2]: https://docs.datadoghq.com/developers/metrics/custom_metrics

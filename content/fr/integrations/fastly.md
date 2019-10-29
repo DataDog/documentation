@@ -66,9 +66,8 @@ Configurez l'endpoint Syslog de façon à transmettre des logs Fastly à votre a
 4. Définissez **Port** sur `10516`.
 5. Définissez **TLS** sur `yes`.
 6. Définissez **TLS Hostname** sur `intake.logs.datadoghq.com`.
-7. Copiez le [certificat TLS][5] dans la case **TLS CA Certificate**.
-8. Dans la section des options avancées, sélectionnez le **log line format** `Blank`.
-9. Enfin, enregistrez l'endpoint et déployez le service. Patientez quelques secondes pour que [votre compte Datadog][6] reçoivent les premiers logs.
+7. Dans la section des options avancées, sélectionnez le **log line format** `Blank`.
+8. Enfin, enregistrez l'endpoint et déployez le service. Patientez quelques secondes pour que [votre compte Datadog][5] reçoive les premiers logs.
 
 ## Données collectées
 
@@ -85,16 +84,15 @@ L'intégration Fastly n'inclut aucun événement.
 L'intégration Fastly n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly
 [2]: https://docs.datadoghq.com/resources/json/fastly_format.json
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
-[5]: https://docs.datadoghq.com/resources/crt/intake.logs.datadoghq.com.crt
-[6]: https://app.datadoghq.com/logs
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[5]: https://app.datadoghq.com/logs
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

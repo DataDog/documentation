@@ -45,7 +45,7 @@ Once downloaded, install the package with one of the commands below.
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
 $ rpm -ivh datadog-php-tracer.rpm
 
-# using DEB package (Debian Jessie+ , Ubuntu 14.04+)
+# using DEB package (Debian Jessie+ , Ubuntu 14.04+ on supported PHP versions)
 $ dpkg -i datadog-php-tracer.deb
 
 # using APK package (Alpine)
@@ -254,7 +254,7 @@ Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hash
 
 ##### Custom URL-To-Resource Mapping
 
-When [URL resource names are enabled][17], custom URL mapping is configured via `DD_TRACE_RESOURCE_URI_MAPPING` which accepts a CSV list of mapping rules. The wildcards `*` (greedy with replacement `?` character) and `$*` (greedy without replacement) are supported, e.g. `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`.
+When [URL resource names are enabled][17], custom URL mapping is configured via `DD_TRACE_RESOURCE_URI_MAPPING` which accepts a CSV list of mapping rules. The wildcards `*` and `$*` are supported, so `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`. In this context, `*` is a greedy match with a replacement character `?`, and `$*` performs a greedy match without replacement
 
 Rules are applied in the same order as they appear in `DD_TRACE_RESOURCE_URI_MAPPING`. Less greedy rules should appear in the list before more greedy rules, e.g. `/foo/$*/bar,/foo/*`
 

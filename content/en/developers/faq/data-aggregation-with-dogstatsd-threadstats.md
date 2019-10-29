@@ -54,9 +54,9 @@ For instance, during the flush interval of 10 seconds (between 10:00:00 and 10:0
 2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
 3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
-[Find more information about Threadstats aggregation][4].
+For more information, see the [Threadstats aggregation][4] documentation.
 
-[1]: /developers/dogstatsd
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
 [3]: /developers/metrics
 [4]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

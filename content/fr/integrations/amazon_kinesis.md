@@ -13,12 +13,12 @@ description: Surveillez des métriques clés d'Amazon Kinesis.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
 git_integration_title: amazon_kinesis
 has_logo: true
-integration_title: "AWS\_Kinesis"
+integration_title: "Amazon\_Kinesis"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_kinesis
-public_title: Intégration Datadog/AWS Kinesis
+public_title: "Intégration Datadog/Amazon\_Kinesis"
 short_description: Surveillez des métriques clés d'Amazon Kinesis.
 version: '1.0'
 ---

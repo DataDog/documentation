@@ -42,10 +42,10 @@ class ServletImpl extends AbstractHttpServlet {
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
-      span.setTag("customer.id", 12345);
-      span.setTag("http.url", "/login");
+      span.setTag("customer.id", req.getParameter("customer_id"));
+      span.setTag("<CLÉ_TAG>", "<VALEUR_TAG>");
     }
-    // servlet impl
+    // mise en œuvre de servlet
   }
 }
 ```
@@ -62,10 +62,11 @@ Ajoutez directement des [tags][1] à une [span][2] en appelant `set_tag`. Par ex
 ```python
 from ddtrace import tracer
 
-@app.route('/customer/<int:id_client>')
+@app.route('/customer/<int:customer_id>')
 def handle_customer(customer_id):
   with tracer.trace('web.request') as span:
     span.set_tag('customer.id', customer_id)
+    span.set_tag('<CLÉ_TAG>', '<VALEUR_TAG>')
 ```
 
 La span actuelle peut être récupérée à partir du contexte afin d'appliquer ses tags. Ainsi, si une span a été initiée par l'instrumentation, vous pouvez la récupérer et ajouter des tags personnalisés. **Remarque** : si une span n'existe pas, `None` est renvoyé :
@@ -80,6 +81,7 @@ def handle_customer(customer_id):
   current_span = tracer.current_span()
   if current_span:
     current_span.set_tag('customer.id', customer_id)
+    current_span.set_tag('<CLÉ_TAG>', '<VALEUR_TAG>')
 ```
 
 
@@ -96,6 +98,7 @@ Ajoutez directement des [tags][1] aux objets `Datadog::Span` en appelant `#set_t
 get '/posts' do
   Datadog.tracer.trace('web.request') do |span|
     span.set_tag('http.url', request.path)
+    span.set_tag('<CLÉ_TAG>', '<VALEUR_TAG>')
   end
 end
 ```
@@ -132,8 +135,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // Définir le tag
+    // Set tag
     span.SetTag("http.url", r.URL.Path)
+    span.SetTag("<CLÉ_VALUE>", "<VALEUR_TAG>")
 }
 
 func main() {
@@ -181,9 +185,8 @@ app.get('/posts', (req, res) => {
   const span = tracer.startSpan('web.request')
 
   span.setTag('http.url', req.url)
-  span.addTags({
-    'http.method': req.method
-  })
+  span.addTags({'http.method': req.method})
+  span.addTags({'<CLÉ_TAG>': '<VALEUR_TAG>'})
 })
 ```
 
@@ -227,12 +230,14 @@ scope.Span.SetTag("<CLÉ_TAG>", "<VALEUR_TAG>");
 Ajoutez directement des [tags][1] à un objet `DDTrace\Span` en appelant `Span::setTag()`. Par exemple :
 
 ```php
-// Récupérer la span actuellement active (peut être null)
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-if (null !== $span) {
-  // Ajouter un tag à la span
-  $span->setTag('<CLÉ_TAG>', '<VALEUR_TAG>');
-}
+<?php
+  // Récupérer la span actuellement active (peut être null)
+  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+  if (null !== $span) {
+    // Ajouter un tag à la span
+    $span->setTag('<CLÉ_TAG>', '<VALEUR_TAG>');
+  }
+?>
 ```
 
 **Remarque** : `Tracer::getActiveSpan()` renvoie `null` si aucune [span][2] n'est active.

@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta and available for API Tests only. To enable Synthetics private locations for your account, use the corresponding sign-up form <a href="https://app.datadoghq.com/privatelocations/2019signup">for the Datadog US site</a> or <a href="https://app.datadoghq.eu/privatelocations/2019signup">for the Datadog EU site.</a>
+This feature is in public beta and available for API Tests only. 
 </div>
 
 ## Overview
@@ -48,7 +48,9 @@ Once you created a private location, configuring a Synthetics API or Browser tes
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    **Note**: To scale a private location, add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
+    One worker can process up to 10 tests in parallel by default. To scale a private location:
+      * Change the `concurrency` parameter value to allow more parallel tests from one worker.
+      * Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` requests depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
@@ -60,7 +62,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
     * For the Datadog US site: `curl https://api.datadoghq.com`.
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
 
-5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
@@ -88,7 +90,7 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                       |
 | `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                   |
 | `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                      |
-| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                     |
+| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                |
 | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                              |
 
 

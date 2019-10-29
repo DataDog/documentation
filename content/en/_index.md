@@ -47,7 +47,7 @@ When you're well aware of an ongoing problem, [silence its alerts][18]. When you
 [1]: /agent
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [3]: /integrations
-[4]: /developers/dogstatsd
+[4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /tracing
 [6]: /developers/libraries
 [7]: /developers/metrics/custom_metrics

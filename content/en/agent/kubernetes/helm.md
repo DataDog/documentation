@@ -1,5 +1,5 @@
 ---
-title: Deploying Datadog in Kubernetes using Helm 
+title: Deploying Datadog in Kubernetes using Helm
 kind: documentation
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"
@@ -13,7 +13,7 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-Helm is a package management tool for Kubernetes. 
+Helm is a package management tool for Kubernetes.
 
 ## Installing Helm
 
@@ -58,23 +58,23 @@ Refer to [Helm's Tiller documentation][2] for further details.
 If your Kubernetes cluster is RBAC-enabled, use the following RBAC to deploy Tiller.
 
 ```yaml
-apiVersion: v1  
-kind: ServiceAccount  
-metadata:  
- name: tiller  
- namespace: kube-system  
----  
-apiVersion: rbac.authorization.k8s.io/v1beta1  
-kind: ClusterRoleBinding  
-metadata:  
- name: tiller  
-roleRef:  
- apiGroup: rbac.authorization.k8s.io  
- kind: ClusterRole  
- name: cluster-admin  
-subjects:  
- - kind: ServiceAccount  
-   name: tiller  
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: tiller
+ namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+ name: tiller
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+ - kind: ServiceAccount
+   name: tiller
    namespace: kube-system
 ```
 
@@ -113,11 +113,11 @@ helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
-**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6]. 
+**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6].
 
 ## Configuring the Datadog Helm chart
 
-As a best practice, a YAML file that specifies the values for the chart parameters should be provided to configure the chart: 
+As a best practice, a YAML file that specifies the values for the chart parameters should be provided to configure the chart:
 
 1.  **Copy the default [`datadog-values.yaml`][7] value file.**
 2.  Set the `apiKey` parameter with your [Datadog API key][4].
@@ -244,6 +244,6 @@ This command removes all Kubernetes components associated with the chart and del
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: /developers/dogstatsd
+[8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

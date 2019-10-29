@@ -8,7 +8,7 @@ When you submit events to your Datadog account from a [custom Agent check][1], t
 ```python
 
 import time
-from checks import AgentCheck
+from datadog_checks.base import AgentCheck
 from utils import get_hostname
 
 hostname = get_hostname(self.agentConfig)

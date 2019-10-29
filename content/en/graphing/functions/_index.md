@@ -1,5 +1,5 @@
 ---
-title: From the query to the graph 
+title: From the query to the graph
 kind: documentation
 aliases:
   - /examples/
@@ -35,7 +35,7 @@ Now, follow each step executed by the Datadog backend to perform the query and r
 At each step, this article notes the effect of each parameter of the query.
 **Before the query, storage: data is stored separately depending on the tags**
 
-The metric `system.disk.total` (collected by default by the [datadog-agent][3]) is seen from different sources.  
+The metric `system.disk.total` (collected by default by the [datadog-agent][3]) is seen from different sources.
 
 This is because this metric is reported by different hosts, and also because each datadog-agent collects this metric per device. It adds to the metric `system.disk.total` the tag `device:tmpfs` when sending data associated to the disk with the same name, etc.
 
@@ -66,7 +66,7 @@ The idea is then to aggregate data from these sources together to give you a met
 
 [More information about timeseries and tag cardinality][5]
 
-**Parameter involved: scope**  
+**Parameter involved: scope**
 You can use more than one tag, e.g. `{host:moby, device:udev}` if you want to fetch data responding to both tags.
 
 ## Proceed to time-aggregation
@@ -118,12 +118,12 @@ Note: Of course, if there is only one source (for instance, if we had chosen the
 
 **Parameter involved: space aggregator**
 
-Datadog offers 4 space aggregators: 
+Datadog offers 4 space aggregators:
 
 * `max`
 * `min`
 * `avg`
-* `sum` 
+* `sum`
 
 ## Apply functions (optional)
 
@@ -147,8 +147,8 @@ In this example the function `abs` makes sure that your results are positive num
 {{< /whatsnext >}}
 
 ### Grouped queries, arithmetic, as_count/rate
- 
-#### Grouped queries 
+
+#### Grouped queries
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" style="width:75%;">}}
 
@@ -189,4 +189,4 @@ Documentation about [StatsD/DogStatsD][11].
 [8]: /graphing/functions/rollup
 [9]: /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [10]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[11]: /developers/dogstatsd
+[11]: /developers/metrics/dogstatsd_metrics_submission

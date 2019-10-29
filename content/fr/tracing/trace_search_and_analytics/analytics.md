@@ -57,14 +57,13 @@ Utilisez la requête pour contrôler ce qui s'affiche dans votre analyse de trac
 
 ## Visualisations
 
-Sélectionnez un type de visualisation d'analyse de traces à l'aide du sélecteur d'analyse :
-
-{{< img src="tracing/trace_search_and_analytics/analytics/graph_selector.png" alt="Sélecteur de graphique" responsive="true" style="width:30%;">}}
+Sélectionnez un type de visualisation d'analyse de traces à l'aide du sélecteur d'analyse.
 
 Visualisations disponibles :
 
-* [Timeseries (Série temporelle)](#timeseries)
+* [Série temporelle](#timeseries)
 * [Top List (Valeurs les plus élevées)](#top-list)
+* [Table (Tableau)](#table)
 
 ### Série temporelle
 
@@ -85,16 +84,21 @@ la **durée** de **pc99** (99e centile) la plus élevée d'un **service**
 
 ### Table (Tableau)
 
-Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][2] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures pour les éléments qui s'affichent en haut. Mettez à jour la requête de recherche ou explorez les traces correspondant à l'une des dimensions.
+Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][2] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
 
-L'analyse de logs avec un tableau suivante illustre :
-l'évolution des **10 premiers services** en fonction de leur **durée**, avec leur **débit** moyen au cours des 15 dernières minutes.
+* Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la seconde dans la fourchette des valeurs les plus élevées de la première dimension, puis de la troisième dans la fourchette des valeurs les plus élevées de la seconde dimension.
+* Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
+* Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
+
+ **Remarque** : la visualisation d'une seule mesure et d'une seule dimension sous forme de tableau est identique à celle d'une top list. Seul l'affichage diffère.
+
+ L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
 {{< img src="tracing/trace_search_and_analytics/analytics/trace_table_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
 
 ## Traces associées
 
-Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des traces correspondant à votre sélection :
+Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des [traces][3] correspondant à votre sélection :
 
 {{< img src="tracing/trace_search_and_analytics/analytics/view_traces.png" alt="afficher les traces" responsive="true" style="width:40%;">}}
 
@@ -104,16 +108,16 @@ Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou cons
 
 Exportez votre analyse de traces :
 
-* Pour créer un [monitor d'APM ][3] :
+* Pour créer un [monitor d'APM ][4] :
     Cette fonctionnalité n'est pas encore disponible.
-* Vers un [timeboard][4] existant :
-    Cette fonctionnalité est en version bêta. [Contactez l'assistance Datadog][5] afin de l'activer pour votre organisation.
+* Vers un [timeboard][5] existant :
+    Cette fonctionnalité est en version bêta. [Contactez l'assistance Datadog][6] afin de l'activer pour votre organisation.
 
 ## Traces dans les dashboards
 
-Exportez les [analyses de traces][6] de la recherche de traces ou créez-les directement dans votre [dashboard][7] aux côtés des métriques et des logs.
+Exportez les [analyses de traces][7] de la recherche de traces ou créez-les directement dans votre [dashboard][8] aux côtés des métriques et des logs.
 
-[En savoir plus sur le widget des séries temporelles][8]
+[En savoir plus sur le widget Série temporelle][9]
 
 ## Pour aller plus loin
 
@@ -121,9 +125,10 @@ Exportez les [analyses de traces][6] de la recherche de traces ou créez-les dir
 
 [1]: /fr/tracing/trace_search_and_analytics/search/#facets
 [2]: /fr/tracing/trace_search_and_analytics/search/#measures
-[3]: /fr/monitors/monitor_types/apm
-[4]: /fr/graphing/dashboards/timeboard
-[5]: /fr/help
-[6]: /fr/graphing/widgets/timeseries
-[7]: /fr/graphing/dashboards
-[8]: /fr/graphing/widgets/timeseries
+[3]: /fr/tracing/visualization/#trace
+[4]: /fr/monitors/monitor_types/apm
+[5]: /fr/graphing/dashboards/timeboard
+[6]: /fr/help
+[7]: /fr/graphing/widgets/timeseries
+[8]: /fr/graphing/dashboards
+[9]: /fr/graphing/widgets/timeseries

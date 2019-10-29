@@ -48,7 +48,7 @@ Le check PHP-FPM permet de surveiller l'état de votre pool FPM ainsi que les pe
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Utilisez ensuite la méthode `lambda_metric` pour envoyer des métriques custom depuis votre fonction vers Datadog :
 
@@ -65,7 +65,7 @@ instances:
   - status_url: http://localhost/status # ou l'URL définie pour pm.status_path dans votre .ini PHP
     ping_url: http://localhost/ping     # ou l'URL définie pour ping.path dans votre .ini PHP
     ping_reply: pong                    # la réponse attendue au ping ; par défaut, il s'agit de « pong »
- #  user: <VOTRE_NOMUTILISATEUR>     # si les URL définies pour status_url et ping_url nécessitent une authentification HTTP basique
+ #  username: <VOTRE_NOMUTILISATEUR>     # si les URL définies pour status_url et ping_url nécessitent une authentification HTTP basique
  #  password: <VOTRE_MOTDEPASSE> # si les URL définies pour status_url et ping_url nécessitent une authentification HTTP basique
  #  http_host: <HOST>         # si votre pool FPM est uniquement accessible via un vhost HTTP spécifique
  #  tags:
@@ -78,8 +78,8 @@ Options de configuration :
 * `ping_url` (obligatoire) : l'URL pour la page de ping de PHP-FPM, définie dans le fichier de configuration du pool FPM (ping.path).
 * `use_fastcgi` (facultatif) : communiquez directement avec PHP-FPM en utilisant FastCGI.
 * `ping_reply` (obligatoire) : réponse envoyée par ping_url. Si aucune réponse n'est définie, il s'agit de `pong`.
-* `user` (facultatif) : utilisé si les pages de statut et de ping nécessitent une authentification basique.
-* `password` (facultatif) : utilisé si les pages de statut et de ping nécessitent une authentification basique.
+* `username` (facultatif) : utilisé si l'authentification basique a été définie sur les pages de statut et de ping.
+* `password` (facultatif) : utilisé si l'authentification basique a été définie sur les pages de statut et de ping.
 * `http_host` (facultatif) : si votre pool FPM est uniquement accessible via un vhost HTTP spécifique, indiquez-le ici.
 
 [Redémarrez l'Agent][6] pour commencer à envoyer des métriques PHP-FPM à Datadog.
