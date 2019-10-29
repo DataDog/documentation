@@ -121,7 +121,7 @@ To create a variable, first give it a name then define its value from:
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
 
-* **An Email**: Generate a random Synthetics email address that you will use in your steps to assert on the email that was sent or to perform actions on the sent email (eg. click confirmation link).
+* **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 
 ##### Use the variable
 
