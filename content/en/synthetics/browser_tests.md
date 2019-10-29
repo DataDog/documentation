@@ -107,7 +107,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 ##### Create a variable
 
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true" responsive="true" style="width:80%;">}}
 
 To create a variable, first give it a name then define its value from:
 
