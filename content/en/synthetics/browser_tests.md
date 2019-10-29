@@ -75,17 +75,17 @@ Tests can be only recorded from **[Google Chrome][7]**. To record your test, dow
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
-Assertions allow you to check if an element, a content, or some text is available in the current page. You can also check if a specific email was sent.   
+Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.   
 The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
 
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
 | `Test that an element is present on the active page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
-| `Test an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
+| `Test an element's content`                            | Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
 | `Test that some text is present on the active page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is not present on the active page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
-| `Test the content of the URL of the active page`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
-| `Test that an email was received`                         | This asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][9]. |
+| `Test the content of the URL of the active page`                         | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
+| `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][9]. |
 
 Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
 
@@ -95,7 +95,7 @@ The navigation action allow you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click link. This step allows you to access your Synthetics mail inbox after creating an [email variable][9] to choose the email you are interested in and click the link you want your browser test to click on.
+* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][9]. Choose the email you are interested in and click the link you want your browser test to click on.
 
 #### Hover
 
