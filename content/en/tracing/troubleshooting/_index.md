@@ -166,7 +166,7 @@ Tracer.Instance = tracer;
 
 The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
 
-Logs (Profiler and Tracer) are saved in the following directories:
+Logs files are saved in the following directories:
 
 | Platform | Path                                                          |
 |----------|---------------------------------------------------------------|
