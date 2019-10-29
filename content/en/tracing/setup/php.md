@@ -73,7 +73,7 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktraces if available
 * A total count of traces (e.g., web requests) flowing through the system
 
-**Note**: If you are not using any autoloading mechanism (i.e. you are neither using composer nor registering any autoloader through `spl_autoload_register`) you need to set the following environment variable in order for automatic instrumentation to be triggered: `DD_TRACE_NO_AUTOLOADER=true`.
+**Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
 
 ## Change Agent Hostname
 
@@ -228,7 +228,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode][16] for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                        |
 | `DD_TRACE_GLOBAL_TAGS`                    | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                      |
-| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable autonstrumentation when you are not using any form of autoloader                          |
+| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                          |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                        |
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17]                                  |
