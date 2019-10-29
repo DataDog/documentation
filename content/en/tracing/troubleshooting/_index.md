@@ -171,7 +171,7 @@ Logs files are saved in the following directories:
 | Platform | Path                                                          |
 |----------|---------------------------------------------------------------|
 | Linux    | `/var/log/datadog/`                        |
-| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\` |
+| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 
 
 {{% /tab %}}
