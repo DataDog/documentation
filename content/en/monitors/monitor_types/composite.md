@@ -64,7 +64,7 @@ a || b && !c
 
 #### No data
 
-`Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings.
+`Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings, but in order for a composite to alert on No Data, both the individual monitors and the composite monitor must be set to `Notify` when data is missing.
 
 ### Notifications
 
@@ -116,7 +116,7 @@ Two of the four scenarios trigger an alert, even though not all of the individua
 
 ### Component monitor status
 
-Composite monitors are evaluated by using a sliding window of monitor results for each component monitor. Specifically, they use the most severe status from the past five minutes for each component monitor. For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
+Composite monitors are evaluated by using a sliding window of monitor results for each component monitor. Specifically, **they use the most severe status from the past five minutes for each component monitor**. For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
 
 | Monitor | T0    | T1    | T2    |
 |---------|-------|-------|-------|
