@@ -18,7 +18,7 @@ short_description: "Surveillez des métriques clés d'Amazon\_Translate."
 version: 1
 ---
 ## Présentation
-Amazon Translate est un service de traduction par machine neurale pour la traduction de texte de l'anglais ou vers l'anglais sur un ensemble de langues prises en charge.
+Amazon Translate est un service de traduction automatique neuronale pour la traduction de texte vers et depuis un vaste nombre de langues.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Translate.
 

@@ -2,17 +2,17 @@
 title: Modifier une clé d'API
 type: apicode
 order: 21.04
-external_redirect: "/api/#edit-an-api-key"
+external_redirect: "/api/#modifier-une-cle-d-api"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `PUT /v1/api_key/<CLÉ_API>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="edit_api_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.edit_api_key" >}}

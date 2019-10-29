@@ -5,7 +5,10 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -X POST -H "Content-type: application/json" \
+curl -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
         "type": "service_account",
         "project_id": "<GCP_PROJECT_ID>",
@@ -19,4 +22,4 @@ curl -X POST -H "Content-type: application/json" \
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
         "host_filters": "<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>"
     }' \
-"https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/gcp"

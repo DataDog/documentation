@@ -15,7 +15,6 @@ further_reading:
 
 OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][1].
 
-
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -248,8 +247,6 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Support for OpenTracing in the Python tracer is currently in beta.
-
 **Setup**:
 
 OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package :
@@ -429,11 +426,13 @@ $ composer require opentracing/opentracing:1.0.0-beta5
 When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
 
 ```php
-$otTracer = \OpenTracing\GlobalTracer::get();
-$span = $otTracer->startActiveSpan('web.request')->getSpan();
-$span->setTag('span.type', 'web');
-$span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
-// ...Use OpenTracing as expected
+<?php
+  $otTracer = \OpenTracing\GlobalTracer::get();
+  $span = $otTracer->startActiveSpan('web.request')->getSpan();
+  $span->setTag('span.type', 'web');
+  $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
+  // ...Use OpenTracing as expected
+?>
 ```
 
 

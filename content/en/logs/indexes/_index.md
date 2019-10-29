@@ -29,9 +29,9 @@ You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashbo
 
 ## Exclusion Filters
 
-Index filters give dynamic control over what goes into your indexes.
+Index filters give dynamic control over what goes into your indexes. When set up, logs sampling is uniformly random, meaning the sampling has no impact on relative importance of each log. For example, if some logs were captured only for troubleshooting purposes, you may only want to index a given percentage of those logs with errors and warnings.
 
-For example, if some logs were captured only for troubleshooting purposes, you may only want to index those logs with errors and warnings. This can easily be achieved with exclusion filters.
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 To define a new index filter, click on the "add" button:
 
@@ -46,8 +46,6 @@ To configure an exclusion filter:
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
-
-**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 ### Reorder filters
 
@@ -69,6 +67,17 @@ Instead of changing your application logging level or using a complex internal f
 Enable or disable them in one click on the Pipeline page:
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
+
+### Set daily quota
+
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). 
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][7], [sent to your archives][8], and used to [generate metrics from logs][9].
+
+Update or remove this quota at any time when editing the Index: 
+
+{{< img src="logs/indexes/index_quota.png" alt="index details" responsive="true" style="width:70%;">}}
+
+**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
 ## Multi indexes
 
@@ -93,3 +102,6 @@ Multiple indexes also provide the ability to define access rules on the data con
 [4]: /logs/explorer/analytics/#dashboard
 [5]: /monitors/monitor_types/log
 [6]: /account_management/rbac
+[7]: https://docs.datadoghq.com/logs/live_tail/#overview
+[8]: https://docs.datadoghq.com/logs/archives/
+[9]: https://docs.datadoghq.com/logs/logs_to_metrics/

@@ -9,12 +9,12 @@ description: Surveillez les événements du service AWS Health quasiment en temp
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_health'
 git_integration_title: amazon_health
 has_logo: true
-integration_title: AWS Health
+integration_title: "Amazon\_Health"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_health
-public_title: "Intégration Datadog/AWS\_Health"
+public_title: "Intégration Datadog/Amazon\_Health"
 short_description: Surveillez la santé du service AWS.
 version: '1.0'
 ---

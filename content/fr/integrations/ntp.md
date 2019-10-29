@@ -46,6 +46,9 @@ Serveurs NTP atteints par défaut :
 * `3.datadog.pool.ntp.org`
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 Le check NTP est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
@@ -58,11 +61,12 @@ L'Agent active le check NTP par défaut. Si toutefois vous souhaitez le configur
 init_config:
 
 instances:
-  - offset_threshold : 60 # secondes de différence entre l'horloge locale et le serveur NTP pour que le check de service ntp.in_sync affiche le statut CRITICAL. Valeur par défaut ‭: 60.
-#   host: pool.ntp.org # définir cette option pour utiliser un serveur NTP de votre choix.
-#   port: 1234         # définir conjointement avec le host.
-#   version: 3         # pour utiliser une version spécifique de NTP.
-#   timeout: 5         # délai d'attente d'une réponse du serveur NTP en secondes. Valeur par défaut : 1.
+  - offset_threshold : 60 # Nombre de secondes de décalage entre l'horloge locale et le serveur NTP à partir duquel le check de service ntp.in_sync doit envoyer un statut CRITICAL. Valeur par défaut ‭: 60.
+#   host: pool.ntp.org # Définir cette option pour utiliser le serveur NTP de votre choix.
+#   port: 1234         # Définir en même temps que le host.
+#   version: 3         # Pour utiliser une version spécifique de NTP.
+#   timeout: 5         # Délai d'attente d'une réponse du serveur NTP en secondes. Valeur par défaut : 1.
+#   use_local_defined_servers: false # Utiliser les serveurs NTP définis dans le localhost. Valeur par défaut : false.
 ```
 
 Options de configuration :
@@ -71,6 +75,7 @@ Options de configuration :
 * `port` (facultatif) : le port à utiliser.
 * `version` (facultatif) : version de NTP.
 * `timeout` (facultatif) : délai de réponse.
+* `use_local_defined_servers` (facultatif) : définir sur True pour utiliser les serveurs NTP définis dans le localhost. Pour les systèmes Unix, les serveurs définis dans /etc/ntp.conf et etc/xntp.conf sont utilisés. Pour les systèmes Windows, les serveurs définis dans la clé de registre HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Parameters\NtpServer sont utilisés. **Attention** : si vous activez cette option, le check NTP ne sera pas en mesure de détecter les problèmes en cas de dérèglement de l'horloge du serveur NTP cible du système.
 
 [Redémarrez l'Agent][4] pour prendre en compte le changement de configuration.
 
@@ -97,11 +102,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/ntp/datadog_checks/ntp/data/conf.yaml.default
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/ntp.d/conf.yaml.default
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/ntp/metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

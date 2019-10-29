@@ -400,8 +400,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 Use the Category Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
 Use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
-**Note**: The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
-Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+**Note**:
+
+* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+* The names of the categories must be unique.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -455,6 +458,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 {{% /tab %}}
 {{< /tabs >}}
 
+Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][7].
+
 ## Arithmetic processor
 
 Use the Arithmetic Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula.
@@ -470,6 +475,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
+* If you need to scale a unit of measure, see [Scale Filter][8].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -504,6 +510,109 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `expression`     | String  | yes      | Arithmetic operation between one or more log attributes.                                                                                    |
 | `target`         | String  | yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                 |
 | `replaceMissing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
+
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
+## String builder processor
+
+Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template.
+This enables aggregation of different attributes or raw strings into a single attribute.
+
+The template is defined by both raw text and blocks with the syntax: `%{attribute_path}`.
+
+**Notes**:
+
+* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
+* If the target attribute already exists, it is overwritten by the result of the template.
+* Results of the template cannot exceed 256 characters.
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Define the string builder processor on the [Datadog log configuration page][1]:
+
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor" responsive="true" style="width:80%;">}}
+
+**Example**
+
+With the following log:
+
+```
+{
+	"http": {
+		"method": "GET",
+		"status_code": 200,
+		"url": "https://app.datadoghq.com/users"
+	},
+	"array_ids": [123, 456, 789],
+	"array_users": [
+    {
+			"first_name": "John",
+			"last_name": "Doe"
+		},
+		{
+			"first_name": "Jack",
+			"last_name": "London"
+		}
+	]
+}
+```
+
+You can use the template: `Request %{http.method} %{http.url} was answered with response %{http.status_code}`, which returns the result:
+
+```
+Request GET https://app.datadoghq.com/users was answered with response 200
+```
+
+**Objects** 
+
+In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
+
+**Arrays**
+
+Blocks can be used on arrays of values or on a specific attribute within an array. For the example log, adding the block `%{array_ids}` returns:
+
+```
+123,456,789
+```
+
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{arrays_user.first_name}` returns a list of `first_name` contained in the array:
+
+```
+John,Jack
+```
+
+[1]: https://app.datadoghq.com/logs/pipelines
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following string builder processor JSON payload:
+
+```json
+{
+    "type": "string-builder-processor",
+    "name": "<PROCESSOR_NAME>",
+    "enabled": true,
+    "template": "<STRING_BUILDER_TEMPLATE>",
+    "target": "<TARGET_ATTRIBUTE>",
+    "replaceMissing": true
+}
+```
+
+| Parameter        | Type    | Required | Description                                                                                                                                 |
+| ------           | -----   | -------- | -----                                                                                                                                       |
+| `type`           | String  | Yes      | Type of the processor.                                                                                                                       |
+| `name`           | String  | No       | Name of the processor.                                                                                                                       |
+| `enabled`        | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                       |
+| `template`       | String  | Yes      | A formula with one or more attributes and raw text.                                                                                           |
+| `target`         | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
+| `replaceMissing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
 
 
 [1]: /api/?lang=bash#logs-pipelines
@@ -604,3 +713,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /logs/guide/log-parsing-best-practice
 [5]: /tracing/advanced/connect_logs_and_traces
+[6]: /logs/explorer/search/#search-syntax
+[7]: /logs/processing/processors/?tab=ui#log-status-remapper
+[8]: /logs/processing/parsing/?tab=filter#matcher-and-filter

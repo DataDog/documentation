@@ -27,7 +27,7 @@ Statements on this page apply to both [API][1] and [browser tests][2] for APM ex
 
 ### Prerequisites
 
-* Your service is [traced on the APM side][3].
+* Your service, and the endpoint your test is running on, is [traced on the APM side][3].
 * Your service uses an HTTP server.
 * Your HTTP server is using a library that supports distributed tracing.
 
@@ -47,6 +47,7 @@ The following Datadog tracing libraries are supported:
 * [Java][6]
 * [Ruby][7]
 * [JavaScript][8]
+* [PHP][9]
 
 ### How are traces linked to tests?
 
@@ -55,7 +56,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 * `x-datadog-trace-id`, generated from the Synthetics backend. Allows Datadog to link the trace with the test result.
 * `x-datadog-parent-id: 0`
 * `x-datadog-origin: synthetics`, to make sure the generated traces don't affect your APM quotas. See below.
-* `x-datadog-sampling-priority: 1`, [to make sure that the Agent keeps the trace][9].
+* `x-datadog-sampling-priority: 1`, [to make sure that the Agent keeps the trace][10].
 
 ### How are APM quotas affected?
 
@@ -63,7 +64,7 @@ The `x-datadog-origin: synthetics` header specifies to the APM backend that the 
 
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][10].
+These traces are retained [just like your classical APM traces][11].
 
 ## Further Reading
 
@@ -77,5 +78,6 @@ These traces are retained [just like your classical APM traces][10].
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[9]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#how-it-works
-[10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#trace-storage
+[9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#how-it-works
+[11]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#trace-storage

@@ -11,12 +11,12 @@ description: "Surveillez des métriques clés d'AWS\_Polly."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_polly/'
 git_integration_title: amazon_polly
 has_logo: true
-integration_title: "AWS\_Polly"
+integration_title: "Amazon\_Polly"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_polly
-public_title: "Intégration Datadog/AWS\_Polly"
+public_title: "Intégration Datadog/Amazon\_Polly"
 short_description: "Surveillez des métriques clés d'AWS\_Polly."
 version: '1.0'
 ---

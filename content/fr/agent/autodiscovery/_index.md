@@ -38,25 +38,26 @@ Les fichiers de configuration sont statiques, et les options réseau configurée
 
 Le fonctionnement général de la fonction Autodiscovery de l'Agent Datadog est le suivant :
 
-1. **Création et chargement du modèle d'intégration** : lorsque l'Agent démarre avec Autodiscovery activé, il charge les modèles d'intégration ainsi que les [identifiants de conteneur Autodiscovery][3] depuis l'ensemble des [sources disponibles][2]. Les fichiers de configuration statiques ne conviennent pas aux checks qui recueillent des données en provenance d'endpoints réseau qui changent constamment, comme le host ou les ports. Autodiscovery utilise donc des [**Template Variables**][4] pour la configuration du modèle d'intégration. Ces configurations de modèle d'intégration peuvent être chargées dans l'Agent de quatre façons différentes :
+1. **Création et chargement du modèle d'intégration** : lorsque l'Agent démarre avec Autodiscovery activé, il charge les modèles d'intégration ainsi que les [identifiants de conteneur Autodiscovery][3] depuis l'ensemble des [sources disponibles][2]. Les fichiers de configuration statiques ne conviennent pas aux checks qui recueillent des données en provenance d'endpoints réseau qui changent constamment, comme le host ou les ports. Autodiscovery utilise donc des [**Template Variables**][4] pour la configuration du modèle d'intégration. Ces configurations de modèle d'intégration peuvent être chargées dans l'Agent de cinq façons différentes :
 
-  * [Utiliser un fichier de configuration monté dans l'Agent][5]
-  * [Utiliser une base de données clé/valeur][6]
-  * [Utiliser les annotations Kubernetes][7]
-  * [Utiliser les étiquettes Docker][8]
+  * [Via un fichier de configuration inclus avec l'Agent][5]
+  * [Via un fichier de configuration monté dans l'Agent][6]
+  * [Via une base de données clé/valeur][7]
+  * [Via des annotations Kubernetes][8]
+  * [Via des étiquettes Docker][9]
 
-2. **Application d'un modèle d'intégration à un conteneur spécifique** : contrairement à une implémentation classique de l'Agent, l'Agent n'exécute pas tous les checks tout le temps : il détermine les checks à activer en examinant les conteneurs exécutés sur le même host que l'Agent et les modèles d'intégration chargés correspondants. L'Agent recherche alors les événements Kubernetes/Docker (création, destruction, démarrage et arrêt de conteneur) avant d'activer, de désactiver et de régénérer les configurations de check statiques lors de ces événements. Lorsque l'Agent inspecte les conteneurs en cours d'exécution, il vérifie si chaque conteneur correspond à l'un des [identifiants de conteneur Autodiscovery][3] présents dans les modèles d'intégration chargés. À chaque correspondance, l'Agent génère une configuration de check statique en remplaçant les [Template Variables][9] par les valeurs spécifiques du conteneur correspondant. Il active ensuite le check avec la configuration statique.
+2. **Application d'un modèle d'intégration à un conteneur spécifique** : contrairement à une implémentation classique de l'Agent, l'Agent n'exécute pas tous les checks tout le temps : il détermine les checks à activer en examinant les conteneurs exécutés sur le même host que l'Agent et les modèles d'intégration chargés correspondants. L'Agent recherche alors les événements Kubernetes/Docker (création, destruction, démarrage et arrêt de conteneur) avant d'activer, de désactiver et de régénérer les configurations de check statiques lors de ces événements. Lorsque l'Agent inspecte les conteneurs en cours d'exécution, il vérifie si chaque conteneur correspond à l'un des [identifiants de conteneur Autodiscovery][3] présents dans les modèles d'intégration chargés. À chaque correspondance, l'Agent génère une configuration de check statique en remplaçant les [Template Variables][10] par les valeurs spécifiques du conteneur correspondant. Il active ensuite le check avec la configuration statique.
 
 ## Configuration
 
-Si vous exécutez l'Agent en tant que binaire sur un host, activez Autodiscovery en suivant les instructions de l'onglet [Agent Host](?tab=hostagent). Si vous exécutez l'Agent en tant que conteneur, activez Autodiscovery en suivant les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent).
+Si vous exécutez l'Agent en tant que binaire sur un host, activez Autodiscovery en suivant les instructions de l'onglet [Agent](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, activez Autodiscovery en suivant les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent).
 
 ### Autodiscovery avec Docker
 
 {{< tabs >}}
-{{% tab "Agent Host" %}}
+{{% tab "Agent" %}}
 
-Pour activer Autodiscovery sur les conteneurs Docker, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
+Pour activer Autodiscovery sur des conteneurs Docker, ajoutez le bloc de configuration suivant au [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
 ```yaml
 listeners:
@@ -70,7 +71,7 @@ config_providers:
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
-Pour activer automatiquement Autodiscovery sur les conteneurs Docker, montez `/var/run/docker.sock` dans l'Agent conteneurisé.
+Pour activer automatiquement Autodiscovery sur des conteneurs Docker, montez `/var/run/docker.sock` dans l'Agent conteneurisé.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -78,9 +79,9 @@ Pour activer automatiquement Autodiscovery sur les conteneurs Docker, montez `/v
 ### Autodiscovery avec Kubernetes
 
 {{< tabs >}}
-{{% tab "Agent Host" %}}
+{{% tab "Agent" %}}
 
-Pour activer Autodiscovery sur les conteneurs dans Kubernetes, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
+Pour activer Autodiscovery sur des conteneurs dans Kubernetes, ajoutez le bloc de configuration suivant au [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
 ```yaml
 listeners:
@@ -97,7 +98,7 @@ config_providers:
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
-Pour activer Autodiscovery sur les conteneurs dans Kubernetes, ajoutez la variable d'environnement suivante lors du démarrage de l'Agent conteneurisé :
+Pour activer Autodiscovery sur des conteneurs dans Kubernetes, ajoutez la variable d'environnement suivante lors du démarrage de l'Agent conteneurisé :
 
 ```
 KUBERNETES=true
@@ -106,19 +107,19 @@ KUBERNETES=true
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : pour les utilisateurs de Kubernetes, une [intégration CRI][10] et une [intégration CRI-O][11] sont disponibles.
+**Remarque** : pour les utilisateurs de Kubernetes, une [intégration CRI][11] et une [intégration CRI-O][12] sont disponibles.
 
 ### Autodiscovery avec ECS Fargate
 
 {{< tabs >}}
-{{% tab "Agent Host" %}}
+{{% tab "Agent" %}}
 
 ECS Fargate ne peut pas être surveillé lorsque l'Agent Datadog est exécuté en tant que binaire sur un host. Consultez les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent#autodiscovery-avec-ecs-fargate).
 
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
-Pour activer Autodiscovery sur les conteneurs dans ECS Fargate, ajoutez la variable d'environnement suivante lors du démarrage de l'Agent conteneurisé :
+Pour activer Autodiscovery sur des conteneurs dans ECS Fargate, ajoutez la variable d'environnement suivante lors du démarrage de l'Agent conteneurisé :
 
 ```
 ECS_FARGATE=true
@@ -135,10 +136,11 @@ ECS_FARGATE=true
 [2]: /fr/agent/autodiscovery/integrations
 [3]: /fr/agent/autodiscovery/ad_identifiers
 [4]: /fr/agent/autodiscovery/template_variables
-[5]: /fr/agent/autodiscovery/integrations/?tab=file#configuration
-[6]: /fr/agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
-[7]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[8]: /fr/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[9]: /fr/agent/autodiscovery/template_variables
-[10]: /fr/integrations/cri
-[11]: /fr/integrations/crio
+[5]: /fr/agent/autodiscovery/auto_conf
+[6]: /fr/agent/autodiscovery/integrations/?tab=file#configuration
+[7]: /fr/agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
+[8]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[9]: /fr/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
+[10]: /fr/agent/autodiscovery/template_variables
+[11]: /fr/integrations/cri
+[12]: /fr/integrations/crio

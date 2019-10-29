@@ -18,12 +18,12 @@ Select a monitor type:
 * [Forecast][8]
 * [Integration][9]
 * [Live Process][10]
-* [Network][11]
-* [Custom Check][12]
-* [Event][13]
-* [Logs][14]
-* [APM Metrics][15]
-* [APM Trace Analytics][16]
+* [Process Check][11]
+* [Network][12]
+* [Custom Check][13]
+* [Event][14]
+* [Logs][15]
+* [APM][16]
 * [Watchdog][17]
 * [Composite][18]
 
@@ -57,12 +57,12 @@ The notify setting sends an email with the monitor audit event to all people who
 [8]: /monitors/monitor_types/forecasts
 [9]: /monitors/monitor_types/integration
 [10]: /monitors/monitor_types/process
-[11]: /monitors/monitor_types/network
-[12]: /monitors/monitor_types/custom_check
-[13]: /monitors/monitor_types/event
-[14]: /monitors/monitor_types/log
-[15]: /monitors/monitor_types/apm
-[16]: /monitors/monitor_types/trace_analytics
+[11]: /monitors/monitor_types/process_check
+[12]: /monitors/monitor_types/network
+[13]: /monitors/monitor_types/custom_check
+[14]: /monitors/monitor_types/event
+[15]: /monitors/monitor_types/log
+[16]: /monitors/monitor_types/apm
 [17]: /monitors/monitor_types/watchdog
 [18]: /monitors/monitor_types/composite
 [19]: https://app.datadoghq.com/monitors#create/import

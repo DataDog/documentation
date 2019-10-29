@@ -59,7 +59,7 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /fr/developers/metrics/#metric-types
+[2]: /fr/developers/metrics/metrics-type
 {{% /tab %}}
 {{% tab "Find" %}}
 
@@ -90,7 +90,7 @@ Cela génère une métrique `gauge` `mongo.example2.user.age` avec deux tags : 
 **Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /fr/developers/metrics/#metric-types
+[2]: /fr/developers/metrics/metrics_type
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 

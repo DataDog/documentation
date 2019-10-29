@@ -28,7 +28,7 @@ Datadog Real User Monitoring enables you to visualize and analyze the performanc
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Add in Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
 3. Paste the [generated code snippet](#generated-code-snippet) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application.
-4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events and logs from your user's browsers.
+4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
 
 **Note**: Your application shows up on the application list page as "pending" until Datadog starts receiving data.
 
@@ -77,7 +77,7 @@ For security reasons, [API keys][2] cannot be used to configure the script to se
 
 ### Supported browsers
 
-The `datadog-logs` library supports all modern desktop and mobile browsers, including IE10 and IE11.
+The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
 
 ## Data collected
 

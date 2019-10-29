@@ -15,7 +15,7 @@ further_reading:
 Vous trouverez ci-dessous un guide détaillé pour configurer Azure AD en tant que fournisseur d'identité SAML dans Datadog :
 **Remarque** : un abonnement Azure AD Premium est requis pour configurer ce service.
 
-#### Configuration 
+#### Configuration
 
 1. Accédez au site `https://portal.azure.com/`.
 

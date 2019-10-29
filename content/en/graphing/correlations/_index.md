@@ -18,7 +18,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Correlations is in private beta. Request early access by contacting <a href="/help">Datadog Support</a>.
+Correlations is in public beta. Request access by contacting <a href="/help">Datadog Support</a>.
 </div>
 
 ## Overview

@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-This guide provides information and best practices on migrating checks between Python 2 and 3.
+This guide provides information and best practices on migrating checks between Python 2 and 3. Use Datadog's [Custom Check Compatibility][1] tool to see whether your custom checks are compatible with Python 3 or need to be migrated.
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
@@ -15,13 +15,13 @@ Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes.
 
 By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime:
 
-1. Set the `python_version` configuration option [in your `datadog.yaml` configuration file][1]:
+1. Set the `python_version` configuration option [in your `datadog.yaml` configuration file][2]:
 
-```yaml
-python_version: 3
-```
+    ```yaml
+    python_version: 3
+    ```
 
-2. [Restart the Agent][2].
+2. [Restart the Agent][3].
 
 Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` is ignored.
 
@@ -40,7 +40,7 @@ For example, for the Containerized Agent v6.14.0, select the `datadog/agent:6.14
 
 ### ddev
 
-The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][3].
+The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][4].
 
 #### Installation
 
@@ -79,22 +79,22 @@ Validating python3 compatibility of ~/dev/my-check.py…
 
 While `ddev` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
 
-For more details about ddev, refer to the [ddev documentation][4].
+For more details about ddev, refer to the [ddev documentation][5].
 
 ### 2to3
 
-[2to3][5] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
+[2to3][6] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
 
 
 ```bash
 $ 2to3 foo.py
 ```
 
-Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][5].
+Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][6].
 
 ### Editors
 
-Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][6] or as a clickable box on the bottom in [Visual Studio Code][7].
+Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][7] or as a clickable box on the bottom in [Visual Studio Code][8].
 
 ## Python Migration
 
@@ -114,51 +114,51 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Six
 
-[Six][8] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
+[Six][9] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
 
 ### Dictionary methods
 
 In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` methods are not available.
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
-| `for key in mydict.iterkeys():` <br/> &nbsp;&nbsp;`  ...` | `for key in mydict:`<br/> &nbsp;&nbsp;`  ...` |
-| `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...`|
-| `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...` | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...` |
+| Python 2                                                         | Python 2 and 3                                                                                         |
+|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `for key in mydict.iterkeys():` <br/> &nbsp;&nbsp;`  ...`        | `for key in mydict:`<br/> &nbsp;&nbsp;`  ...`                                                          |
+| `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...` |
+| `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...`     | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...`    |
 
 Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, make a copy first. To retrieve a dictionary’s keys/items/values as a list:
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
-| `mykeylist = mydict.keys()` | `mykeylist = list(mydict)` |
-| `myitemlist = mydict.items()` | `myitemlist = list(mydict.items())` |
+| Python 2                        | Python 2 and 3                       |
+|---------------------------------|--------------------------------------|
+| `mykeylist = mydict.keys()`     | `mykeylist = list(mydict)`           |
+| `myitemlist = mydict.items()`   | `myitemlist = list(mydict.items())`  |
 | `myvaluelist = mydict.values()` | `myvaluelist = list(mydict.values()` |
 
 The `dict.has_key()` method is deprecated in Python 2 and is removed in Python 3. Use the `in` operator instead.
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
+| Python 2                             | Python 2 and 3  |
+|--------------------------------------|-----------------|
 | `mydict.has_key('foo') //deprecated` | `foo in mydict` |
 
 ### Standard Library Changes
 
 Python 3 features a reorganized standard library, where a number of modules and functions were renamed or moved. Importing moved modules through `six.moves` works on both Python versions.
 
-| Python 2 | Python 3 | Python 2 and 3 |
-| --- | --- | --- |
+| Python 2            | Python 3             | Python 2 and 3                      |
+|---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consult the [six documentation][9] for the list of renamed modules. Note that the `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
+Consult the [Six documentation][9] for the list of renamed modules. Note that the `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
 
 ### Unicode
 
 Python 2 treats Unicode text and binary-encoded data the same, and tries to automatically convert between bytes and strings. This works as long as all characters are ASCII, but leads to unexpected behavior when it encounters non-ASCII characters.
 
-| type | literal | Python 2 | Python 3 |
-| --- | --- | --- | --- |
-| bytes | b'...' | binary | binary |
-| str | '...' | binary | text |
-| unicode | u'...' | text | text |
+| type    | literal | Python 2 | Python 3 |
+|---------|---------|----------|----------|
+| bytes   | b'...'  | binary   | binary   |
+| str     | '...'   | binary   | text     |
+| unicode | u'...'  | text     | text     |
 
 Text data is Unicode code points; you must encode with `.encode(encoding)` for storage or transmission. Binary data is encoded code points represented as a sequence of bytes that must be decoded with `.decode(encoding)` back to text. When reading text from a file, the `open` function from the `io` package is handy because the data read is already decoded into Unicode:
 
@@ -169,14 +169,14 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
-Consult Ned Batchelder’s [Pragmatic Unicode][10] for further details.
+Consult Ned Batchelder’s [Pragmatic Unicode][11] for further details.
 
 ### Print
 
 In Python 3, print is explicitly treated as a function; to turn print into a function regardless of the Python version, put `from __future__ import print_function` at the top of any file using the old print statement and add parentheses to perform the function call.
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
+| Python 2      | Python 2 and 3                                                    |
+|---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
 
@@ -232,10 +232,10 @@ Datadog provides a utility function, `round_value`, in `datadog_checks_base` to 
 
 Python 3 features different syntax for except and raise.
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
+| Python 2                                                                                     | Python 2 and 3                                                                                 |
+|----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
-| `raise Exception, args` | `raise Exception(args)` |
+| `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
 
 ### Relative Imports
@@ -257,14 +257,14 @@ In Python 2, if you are inside a package, this package’s own modules take prec
 
 In Python 3, import forms not starting with `.` are interpreted as absolute imports. Using `from math import gcd` imports the `gcd` from the standard library.
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
+| Python 2               | Python 2 and 3          |
+|------------------------|-------------------------|
 | `from math import gcd` | `from .math import gcd` |
 
 Or, for extra readability:
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
+| Python 2               | Python 2 and 3                   |
+|------------------------|----------------------------------|
 | `from math import gcd` | `from mypackage.math import gcd` |
 
 
@@ -274,24 +274,24 @@ Several functions in Python 2 that return lists now return iterators in Python 3
 
 The simplest fix to retain Python 2 behavior is to wrap these functions with a call to `list`:
 
-| Python 2 | Python 2 and 3 |
-| --- | --- |
-| `map(myfunction, myiterable)`| `list(map(myfunction, myiterable))` |
+| Python 2                         | Python 2 and 3                         |
+|----------------------------------|----------------------------------------|
+| `map(myfunction, myiterable)`    | `list(map(myfunction, myiterable))`    |
 | `filter(myfunction, myiterable)` | `list(filter(myfunction, myiterable))` |
-| `zip(myiterable1, myiterable2)` | `list(zip(myiterable1, myiterable2))` |
+| `zip(myiterable1, myiterable2)`  | `list(zip(myiterable1, myiterable2))`  |
 
 The `xrange` function is removed in Python 3; instead, the `range` function returns an iterable `range` object. Import `range` with `from six.moves import range`.
 
 Use the built-in `next` function instead of calling the `next` method. For instance, rewrite `iterator.next()` as `next(iterator)`.
 
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /developers/integrations/new_check_howto/#building
-[4]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
-[5]: https://docs.python.org/3.1/library/2to3.html
-[6]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
-[7]: https://code.visualstudio.com/docs/setup/setup-overview
-[8]: https://pythonhosted.org/six/#
-[9]: https://pythonhosted.org/six/#module-six.moves
+[1]: https://app.datadoghq.com/compatibility_check
+[2]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /developers/integrations/new_check_howto/#building
+[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
+[6]: https://docs.python.org/3.1/library/2to3.html
+[7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
+[8]: https://code.visualstudio.com/docs/setup/setup-overview
+[9]: https://six.readthedocs.io
 [10]: https://nedbatchelder.com/text/unipain.html

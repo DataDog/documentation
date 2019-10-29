@@ -2,7 +2,7 @@
 title: Obtenir une intégration PagerDuty
 type: apicode
 order: 18.1
-external_redirect: "/api/#get-a-pagerduty-integration"
+external_redirect: "/api/#obtenir-une-integration-pagerduty"
 ---
 
 **SIGNATURE**:

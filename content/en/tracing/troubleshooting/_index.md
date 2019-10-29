@@ -40,7 +40,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 {{< tabs >}}
 {{% tab "Java" %}}
 
-To enable debug mode for the Datadog Java Tracer, set the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
+To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
 **Note**: Datadog Java Tracer implements SL4J SimpleLogger. As such, [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 

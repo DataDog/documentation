@@ -12,12 +12,12 @@ description: Surveillez des métriques clés d'Amazon Elastic File System.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
 git_integration_title: amazon_efs
 has_logo: true
-integration_title: "AWS\_Elastic\_File\_System"
+integration_title: "Amazon\_Elastic\_File\_System"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_efs
-public_title: Intégration Datadog/AWS Elastic File System
+public_title: "Intégration Datadog/Amazon\_Elastic\_File\_System"
 short_description: Surveillez des métriques clés d'Amazon Elastic File System.
 version: '1.0'
 ---

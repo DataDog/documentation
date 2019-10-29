@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
-        "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.0.tgz",
+        "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "3.33.0",
         "bootstrap": ">=4.1.2",
         "del": "4.1.1",
@@ -80,6 +80,7 @@
         "eslint-config-airbnb": "^17.1.1",
         "eslint-config-prettier": "^6.0.0",
         "eslint-config-standard": "^13.0.1",
+        "eslint-loader": "^3.0.2",
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-node": "^9.1.0",
         "eslint-plugin-prettier": "^3.1.0",

@@ -47,11 +47,11 @@ For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integratio
 
 ### Google App Engine, AAS
 
-Datadog APM currently requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to setup a separate VM that accepts trace traffic externally.
+Datadog APM requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to configure a separate VM that accepts trace traffic externally.
 
 ## Additional environments
 
-There are alternernates to the Agent and containers that you can use to collect traces.
+There are alternatives to the Agent and containers that you can use to collect traces.
 
 ### Heroku
 

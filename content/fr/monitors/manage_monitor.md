@@ -1,5 +1,5 @@
 ---
-title: Gérer un monitor
+title: Gérer des monitors
 kind: documentation
 further_reading:
   - link: monitors/monitor_types
@@ -18,11 +18,11 @@ La page [Manage Monitors][1] vous permet d'effectuer des recherches avancées pa
 
 ## Trouver les monitors
 
-Les recherches avancées vous permettent d'interroger les monitors selon un ensemble de différents attributs :
+Les recherches avancées vous permettent d'interroger les monitors en combinant différents attributs :
 
 * `title` et `message` : recherche de texte
 * `status` : Alert, Warn, No Data, Ok
-* `scope` : p. ex. *, role:master-db
+* `scope` : *, role:master-db
 * `type` : metric, integration, apm, etc.
 * `muted`
 * `creator`
@@ -30,8 +30,8 @@ Les recherches avancées vous permettent d'interroger les monitors selon un ense
 * `service` : tags
 * `team` : tags
 * `env` : tags
-* `notification` : la cible de notification du monitor, p. ex. : vous@exemple.com, slack-équipe-surveillance
-* `metric` : la métrique _ou_ le check de service surveillé, p. ex. system.cpu.user, http.can_connect
+* `notification` : la cible de notification du monitor, comme vous@exemple.com ou slack-équipe-surveillance
+* `metric` : la métrique _ou_ le check de service surveillé, comme system.cpu.user ou http.can_connect
 
 Pour lancer une recherche, rédigez votre requête en utilisant les cases à cocher sur la gauche et/ou la barre de recherche en haut. Lorsque vous cochez les cases, la barre de recherche est mise à jour avec la requête équivalente. De même, lorsque vous modifiez la requête de la barre de recherche (ou rédigez vous-même votre propre requête), les cases à cocher se mettent à jour pour refléter les modifications. Peu importe votre méthode, les résultats de la requête sont toujours mis à jour en temps réel lorsque vous modifiez la requête. Vous n'avez pas besoin de cliquer sur un bouton « Rechercher ».
 
@@ -69,6 +69,27 @@ Attention, prenez en compte les éléments suivants concernant les champs avec d
 * Vous pouvez utiliser le caractère `.`, avec ou sans guillemets, puisqu'il apparaît souvent dans plusieurs champs. La requête `metric: system.cpu.idle` est donc valide.
 * Vous ne pouvez pas utiliser de recherche avec des wildcards dans les chaînes entre guillemets : `"chef-client*"`, bien que syntaxiquement valide, ne renverra pas un monitor intitulé `"chef-client failing"` car `*` est traité littéralement.
 
+## Exporter et importer des monitors
+
+### Exportation
+
+Exportez la configuration de votre monitor au format JSON afin de l'utiliser pour gérer et déployer des monitors à l'aide de programmes. Vous pouvez exporter la configuration JSON d'un monitor de l'une des deux façons suivantes, à l'aide de l'interface utilisateur de Datadog :
+
+1. Accédez à la [page Monitor Status][5] d'un monitor existant et sélectionnez **Export** dans son [menu Settings][6], dans le coin supérieur droit de la page.
+2. Cliquez sur le bouton **Export Monitor** en bas de l'écran lors de la [création d'un monitor][7].
+
+### Importation
+
+Importez une configuration JSON de monitor depuis un compte Datadog vers un autre compte Datadog à l'aide de l'interface utilisateur. Pour ce faire, suivez les instructions ci-dessous :
+
+1. Accédez à la [page Monitor Status][5] du monitor de votre choix.
+2. Sélectionnez l'option **Export** dans le menu [Settings][6], dans le coin supérieur droit de la page.
+3. Cliquez sur le bouton **Copy** pour copier le JSON du monitor dans votre presse-papiers.
+4. Basculez vers le compte Datadog de destination de votre choix.
+5. Accédez à la [page New Monitor][8] et sélectionnez **Import**.
+5. Collez (et modifiez, si nécessaire) le JSON copié dans la zone de texte.
+6. Cliquez sur le bouton **Save** pour terminer la création du monitor.
+
 ## Gérer les monitors choisis
 
 Une fois que vous avez trouvé les monitors que vous recherchiez, sélectionnez un ou plusieurs d'entre eux que vous souhaitez mettre à jour en cochant les cases à côté de chaque résultat. Vous pouvez sélectionner tous les résultats en cochant la case située tout en haut à côté de l'en-tête de la colonne STATUS. Modifiez plusieurs monitors à la fois à l'aide des boutons en haut à droite des résultats de recherche : Mute, Resolve, Delete et Edit Service Tags.
@@ -79,9 +100,9 @@ Pour modifier un monitor, passez le curseur dessus et utilisez les boutons à l'
 
 {{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="gérer-monitors-curseur-clone" responsive="true" style="width:80%;" >}}
 
-## Gérer les monitors déclenchés avec une granularité au niveau du groupe
+### Gérer les monitors déclenchés avec une granularité au niveau des groupes
 
-Vous pouvez désactiver ou [résoudre][2] plusieurs monitors déclenchés à la fois depuis la page [Triggered Monitors][5]. Celle-ci fonctionne de la même manière que la page [Manage Monitors](#gerer-les-monitors) : les monitors peuvent être recherchés via leurs attributs en utilisant les mêmes cases à cocher ou la même syntaxe de requête. La page Triggered Monitors présente toutefois certaines différences notables : seuls les monitors avec un statut déclenché (Alert, Warn ou No Data) sont affichés, et _chaque groupe_ (c'est-à-dire chaque source de transmission) de chaque monitor possède son propre rang.
+Vous pouvez désactiver ou [résoudre][2] plusieurs monitors déclenchés à la fois depuis la page [Triggered Monitors][9]. Celle-ci fonctionne de la même manière que la page Manage Monitors : les monitors peuvent être recherchés via leurs attributs en utilisant les mêmes cases à cocher ou la même syntaxe de requête. La page Triggered Monitors présente toutefois certaines différences notables : seuls les monitors avec un statut déclenché (Alert, Warn ou No Data) sont affichés, et _chaque groupe_ (c'est-à-dire chaque source de transmission) de chaque monitor possède son propre rang.
 
 Partons du principe que vous avez un monitor intitulé « latence élevée » et que ses valeurs sont regroupées par host. Si 14 hosts présentent un statut déclenché parmi un total de 20, la page Triggered Monitor affiche 14 rangées lorsque vous recherchez le monitor par son titre (p. ex. `latence élevée` ou `title:
 « latence élevée »`) dans la barre de recherche. Vous pouvez ainsi facilement désactiver ou [résoudre][2] un monitor pour certaines sources de transmission uniquement (bien sûr, il est également possible de le désactiver ou de le résoudre pour l'ensemble des sources).
@@ -92,11 +113,11 @@ Lorsque vous rédigez vos requêtes de recherche, vous pouvez utiliser tous les 
 * Cette page ajoute le champ `triggered`, qui vous permet de filtrer les monitors selon leur durée de déclenchement.
 * Cette page ajoute également le champ `group`, qui vous permet d'affiner les résultats de recherche pour les monitors regroupés selon plusieurs tags. Supposons que vous ayez un monitor groupé selon `host` et` env`. Vous recherchez ce monitor par titre et obtenez quatre lignes, pour lesquelles les groupes sont `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod` et `host:web02,env:prod`. Utilisez le champ `group` pour afficher uniquement, par exemple, les hosts de prod (`group:"env:prod"`) ou les hosts web02 (`group:"host:web02"`).
 
-## Surveiller des tags
+### Surveiller des tags
 
 {{< img src="monitors/manage_monitor/monitor-tags.png" alt="Tags de monitor" responsive="true" style="width:30%;" >}}
 
-Vous avez la possibilité d'ajouter des tags directement à vos monitors afin de filtrer ces derniers sur les pages [Triggered Monitors][5] ou [Manage Monitors][1], ou encore afin de [planifier un downtime][6].
+Vous avez la possibilité d'ajouter des tags directement à vos monitors afin de filtrer ces derniers sur les pages [Triggered Monitors][9] ou [Manage Monitors][1], ou encore afin de [planifier un downtime][10].
 
 ## Pour aller plus loin
 
@@ -106,5 +127,9 @@ Vous avez la possibilité d'ajouter des tags directement à vos monitors afin de
 [2]: /fr/monitors/monitor_status/#resolve
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[5]: https://app.datadoghq.com/monitors/triggered
-[6]: /fr/monitors/downtimes
+[5]: /fr/monitors/monitor_status
+[6]: /fr/monitors/monitor_status/#settings
+[7]: /fr/monitors/monitor_types
+[8]: https://app.datadoghq.com/monitors#/create
+[9]: https://app.datadoghq.com/monitors/triggered
+[10]: /fr/monitors/downtimes

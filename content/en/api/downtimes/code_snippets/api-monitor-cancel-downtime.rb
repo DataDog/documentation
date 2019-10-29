@@ -6,5 +6,5 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-# Cancel downtime
+
 dog.cancel_downtime(1655)

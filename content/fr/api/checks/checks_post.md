@@ -7,28 +7,26 @@ external_redirect: /api/#envoyer-le-resultat-d-un-check
 
 ## Envoyer le résultat d'un check
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`check`** *[obligatoire]* :
-  Le texte du message.
+  le texte du message.
 
 * **`host_name`** *[obligatoire]* :
-    Le nom du host qui soumet le check.
+    le nom du host qui soumet le check.
 
-* **`status`** *[facultatif]* :
-  L'entier du statut du check :
+* **`status`** *[obligatoire]* :
+  l'entier du statut du check :
     * 0 : OK
     * 1 : WARNING
     * 2 : CRITICAL
     * 3 : UNKNOWN
 
+* **`tags`** *[obligatoire]* :
+    la liste des tags key:val pour ce check.
 
-* **`timestamp`** *[faculatif]* :
-  Timestamp POSIX de l'événement.
+* **`timestamp`** *[facultatif]* :
+  timestamp POSIX de l'événement.
 
 * **`message`** *[facultatif]* :
-    La description de la raison pour laquelle ce statut est généré.
-
-* **`tags`** *[facultatif]* :
-    La liste des tags key:val pour ce check.
-
+  une description de la raison pour laquelle ce statut est généré.

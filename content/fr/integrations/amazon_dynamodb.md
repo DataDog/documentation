@@ -12,12 +12,12 @@ description: 'Surveillez la taille des tables, la capacité de lecture/écriture
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_dynamodb/'
 git_integration_title: amazon_dynamodb
 has_logo: true
-integration_title: "AWS\_DynamoDB"
+integration_title: Amazon DynamoDB
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb
-public_title: "Intégration Datadog/AWS\_DynamoDB"
+public_title: "Intégration Datadog/Amazon\_DynamoDB"
 short_description: 'Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.'
 version: '1.0'
 ---

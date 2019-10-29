@@ -207,7 +207,7 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONNEMENT>");
 
 **Remarque** : les métadonnées span doivent respecter une arborescence. Chaque nœud de l'arborescence est séparé par le caractère `.` et ne peut posséder qu'un seul type. Ainsi, un nœud ne peut pas être un objet (avec des nœuds inférieurs) ET une chaîne de caractères.
 
-Cet exemple de métadonnées span n'est donc pas valide :
+Cet exemple de tags de span n'est donc pas valide :
 
 ```json
 {
@@ -259,7 +259,7 @@ Créez des agrégations par centiles dans les [métriques de distribution][1] en
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor" responsive="true" style="width:80%;">}}
 
 [1]: /fr/graphing/metrics/distributions
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: /fr/developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Intégrations" %}}
 
@@ -355,7 +355,7 @@ Pour assigner facilement des tags, il est conseillé d'utiliser les intégration
 
 ### Amazon Web Services
 
-Les tags suivants sont recueillis à partir d'intégrations AWS. **Remarque** : certains tags s'affichent uniquement pour des métriques spécifiques.
+Les tags suivants sont recueillis à partir des intégrations AWS. **Remarque** : certains tags s'affichent uniquement pour des métriques spécifiques.
 
 | Intégration            | Clés de tag Datadog                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -397,6 +397,15 @@ Les tags suivants sont recueillis à partir d'intégrations AWS. **Remarque** :
 | [VPC][48]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][49]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
+### Azure
+
+Pour les intégrations Azure, métriques, les événements et les checks de service reçoivent tous les mêmes tags, à l'exception des ressources de l'intégration Machines virtuelles Azure, qui se voient appliquer des tags supplémentaires.
+
+| Intégration            | Clés de tag Datadog                                                                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Toutes les intégrations Azure | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (le cas échéant) |
+| Intégration Machines virtuelles Azure  | Tous les tags mentionnés ci-dessus, plus : `host`, `size`, `operating_system`, `availability_zone`                                                                          |
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -404,7 +413,7 @@ Les tags suivants sont recueillis à partir d'intégrations AWS. **Remarque** :
 [1]: /fr/tagging/#defining-tags
 [2]: /fr/agent/docker/#environment-variables
 [3]: /fr/api
-[4]: /fr/developers/dogstatsd
+[4]: /fr/developers/metrics/dogstatsd_metrics_submission
 [5]: /fr/integrations
 [6]: /fr/agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /fr/graphing/#arithmetic-between-two-metrics
@@ -414,7 +423,7 @@ Les tags suivants sont recueillis à partir d'intégrations AWS. **Remarque** :
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [12]: /fr/tracing/advanced/setting_primary_tags_to_scope
 [13]: /fr/libraries
-[14]: /fr/developers/dogstatsd/data_types/#host-tag-key
+[14]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /fr/integrations/amazon_api_gateway
 [16]: /fr/integrations/amazon_auto_scaling
 [17]: /fr/integrations/amazon_billing

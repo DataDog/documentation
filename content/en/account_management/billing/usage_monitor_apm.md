@@ -49,6 +49,6 @@ Learn more about Event Filtering and usage control [here][7].
 [2]: /account_management/billing/apm_distributed_tracing
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /monitors/monitor_types/trace_analytics
+[5]: /monitors/monitor_types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/search/analytics
 [7]: /account_management/billing/usage_control_apm

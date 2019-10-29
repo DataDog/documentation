@@ -13,12 +13,12 @@ description: 'Surveillez la latence des requêtes, le nombre de demandes par typ
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
 git_integration_title: amazon_s3
 has_logo: true
-integration_title: "AWS\_S3"
+integration_title: "Amazon\_S3"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_s3
-public_title: "Intégration Datadog/AWS\_S3"
+public_title: "Intégration Datadog/Amazon\_S3"
 short_description: 'Surveillez la latence des requêtes, le nombre de demandes par type, la taille des compartiments, and more.'
 version: '1.0'
 ---
@@ -73,13 +73,13 @@ Sélectionnez ensuite le compartiment s3 dans lequel les logs doivent être réd
 
 #### Étapes de l'installation manuelle
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog](/integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda).
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][10].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs S3 dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
 {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs S3 et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
 {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Log de Datadog][10] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][11] pour commencer à explorer vos logs !
 
 ## Données collectées
 ### Métriques
@@ -98,9 +98,9 @@ L'intégration AWS S3 n'inclut aucun check de service.
 
 ### Log chiffré CloudTrail
 
-Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs Cloudtrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][12].
+Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs Cloudtrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][13].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
@@ -109,9 +109,10 @@ Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS 
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
-[10]: https://app.datadoghq.com/logs
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_s3/amazon_s3_metadata.csv
-[12]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-encrypt-decrypt-one-account
+[10]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[11]: https://app.datadoghq.com/logs
+[12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_s3/amazon_s3_metadata.csv
+[13]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-encrypt-decrypt-one-account
 
 
 {{< get-dependencies >}}

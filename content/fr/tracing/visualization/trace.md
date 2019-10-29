@@ -18,7 +18,7 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-Affichez une trace individuelle pour voir toutes ses spans et métadonnées associées. Chaque trace peut être affichée sous forme de graphique de performances ou de liste (regroupée par service ou host).
+Affichez une [trace][1] individuelle pour voir toutes ses [spans][2] et métadonnées associées. Chaque trace peut être affichée sous forme de graphique de performances ou de liste (regroupée par [service][3] ou host).
 
 {{< img src="tracing/visualization/trace/trace.png" alt="Trace" responsive="true" style="width:90%;">}}
 
@@ -28,22 +28,22 @@ Calculez les détails du temps d'exécution et ajustez le jeu de couleurs par **
 
 Utilisez la molette de la souris pour zoomer sur le graphique :
 
-{{< img src="tracing/visualization/trace/trace_zoom.gif" alt="Erreur de trace" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Erreur de trace" video="true" responsive="true" width="90%" >}}
 
-L'affichage sous forme de liste regroupe les ressources par service et les trie en fonction du nombre de spans correspondant. Les services sont triés par pourcentage de temps d'exécution relatif mesuré par la trace dans chaque service :
+L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et les trie en fonction du nombre de spans correspondant. Les services sont triés en fonction du pourcentage de temps d'exécution relatif associé à la trace dans chaque service :
 
 {{< img src="tracing/visualization/trace/trace_list.png" alt="Liste des traces" responsive="true" style="width:90%;">}}
 
 ### Plus d'informations
 
 {{< tabs >}}
-{{% tab "Métadonnées de span" %}}
+{{% tab "Tags de span" %}}
 
 Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la trace de pile est fournie :
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Erreur de trace" responsive="true" style="width:90%;">}}
 
-Si vous analysez une trace qui signale une erreur et que les règles de tags à signification particulière sont appliquées, l'erreur s'affiche de façon distincte. Lors de l'envoi de vos traces, vous pouvez ajouter des attributs au paramètre `meta`. 
+Si vous analysez une [trace][1] qui signale une erreur et que les règles de tags à signification particulière sont appliquées, l'erreur s'affiche de façon distincte. Lors de l'envoi de vos traces, vous pouvez ajouter des attributs au paramètre `meta`. 
 
 Certains attributs ont des significations particulières qui se traduisent par un mode d'affichage spécial ou un comportement spécifique dans Datadog :
 
@@ -56,6 +56,7 @@ Certains attributs ont des significations particulières qui se traduisent par u
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Formatage des erreurs" responsive="true" >}}
 
+[1]: /fr/tracing/visualization/#trace
 {{% /tab %}}
 {{% tab "Informations sur le host" %}}
 
@@ -78,3 +79,8 @@ Consultez les logs associés à votre service au moment où la trace s'est produ
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/tracing/visualization/#spans
+[3]: /fr/tracing/visualization/#services
+[4]: /fr/tracing/visualization/#resources

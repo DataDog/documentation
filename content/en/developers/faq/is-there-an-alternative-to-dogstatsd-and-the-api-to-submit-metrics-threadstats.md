@@ -53,5 +53,5 @@ Source code: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstat
 
 [1]: https://github.com/DataDog/datadogpy/tree/master/datadog
 [2]: /api
-[3]: /developers/dogstatsd
+[3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: https://github.com/DataDog/datadogpy

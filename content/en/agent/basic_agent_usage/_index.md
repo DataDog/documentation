@@ -64,12 +64,12 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
 
 
-[1]: /developers/dogstatsd/data_types/#metrics
+[1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology
 [3]: /agent/guide/network/?tab=agentv6#open-ports
 [4]: /developers/write_agent_check/?tab=agentv6
 [5]: https://github.com/etsy/statsd
-[6]: /developers/dogstatsd
+[6]: /developers/metrics/dogstatsd_metrics_submission
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

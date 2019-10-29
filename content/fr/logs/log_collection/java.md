@@ -36,7 +36,7 @@ Exception in thread "main" java.lang.NullPointerException
 En demandant à votre bibliothèque de journalisation de créer des logs au format JSON :
 
 * vous garantissez qu'un paramètre stack_trace est correctement associé au bon LogEvent ;
-* vous vous assurez que tous les attributs d'un événement de log sont correctement extraits (sévérité, nom de l'enregistreur, nom du thread, etc.) ;
+* vous vous assurez que tous les attributs d'un événement de log sont correctement extraits (sévérité, nom du logger, nom du thread, etc.) ;
 * vous permettez l'accès au [MDC][1], qui consiste en des attributs à associer à n'importe quel événement de log.
 
 **Pour envoyer vos logs à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog.**
@@ -45,7 +45,7 @@ Il est fortement conseillé de configurer vos bibliothèques de journalisation a
 
 Vous trouverez ci-dessous des exemples de configuration pour les bibliothèques de journalisation `log4j`, `slf4j` et `log4j2` :
 
-## Configurer votre enregistreur
+## Configurer votre logger
 
 ### Format brut
 
@@ -187,7 +187,70 @@ Si l'APM est activé pour cette application et que vous souhaitez améliorer la 
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-Il existe une disposition JSON log4j2 qui peut être utilisée comme dans cet [exemple][1].
+Il existe une structure JSON log4j2 par défaut qui peut être utilisée. Ajoutez l'appender suivant à votre fichier `log4j2.xml` : 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <JSONLayout compact="true" eventEol="true" properties="true"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
+```
+
+* Puis ajoutez les dépendances suivantes dans votre fichier `pom.xml` :
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>datadog</groupId>
+    <artifactId>assistance</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>
+```
 
 **Ajouter des identifiants de trace à vos logs**
 
@@ -261,17 +324,17 @@ logs:
     # Pour les logs multiligne, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante.
     #log_processing_rules:
     #  - type: multi_line
-    #    name: nouveau_début_log_avec_date
+    #    name: new_log_start_with_date
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-## Journalisation sans agent
+## Logging sans agent
 
-Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
+Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Cette configuration n'est pas recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application ; il peut toutefois arriver qu'il soit impossible d'enregistrer les logs dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 
 Vous devez suivre deux étapes pour configurer l'application Java afin de diffuser des logs directement à Datadog :
 
-1. Ajoutez la bibliothèque de journalisation Logback à votre code (ou créez un pont entre  votre enregistreur actuel et la bibliothèque).
+1. Ajoutez la bibliothèque de journalisation Logback à votre code (ou créez un pont entre  votre logger actuel et la bibliothèque).
 2. Configurez-la pour qu'elle envoie les logs à Datadog.
 
 ### Créer un pont entre les bibliothèques de journalisation Java et Logback
@@ -375,7 +438,7 @@ Pour ajouter Logback [logstash-logback-encoder][1] à votre classpath, ajoutez l
 
 ### Configuration de Logback
 
-Configurez l'enregistreur Logback de façon à diffuser les logs directement à Datadog en ajoutant le code suivant à votre fichier `logback.xml` :
+Configurez le logger Logback de façon à diffuser les logs directement à Datadog en ajoutant le code suivant à votre fichier `logback.xml` :
 
 ```
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
@@ -418,7 +481,7 @@ Enrichissez vos événements de log avec des attributs contextuels.
 
 Le [parser key/value][6] extrait n'importe quelle expression `<key>=<value>` identifiée dans un événement de log.
 
-Pour enrichir vos événements de log dans Java, vous pouvez réécrire vos messages dans votre code et ajouter des séquences `<key>=<value>`.
+Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<key>=<value>`.
 
 Par exemple, si vous avez :
 
@@ -479,5 +542,5 @@ Pour générer ce document JSON final :
 [2]: /fr/logs/processing/parsing
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /fr/logs/?tab=euregion#datadog-logs-endpoints
+[5]: /fr/logs/log_collection/?tab=eusite#datadog-logs-endpoints
 [6]: /fr/logs/processing/parsing/#key-value

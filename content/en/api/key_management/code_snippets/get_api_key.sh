@@ -6,5 +6,7 @@ api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
 curl -X GET \
-  "https://app.datadoghq.com/api/v1/api_key/<API_KEY_TO_GET>?api_key=${api_key}&application_key=${app_key}" \
-  -H 'Content-Type: application/json'
+-H 'Content-Type: application/json' \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://app.datadoghq.com/api/v1/api_key/<API_KEY_TO_GET>"

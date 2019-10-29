@@ -2,7 +2,7 @@
 title: Créer une intégration Webhooks
 type: apicontent
 order: 20.2
-external_redirect: '/api/#create-a-webhooks-integration'
+external_redirect: '/api/#creer-une-integration-webhooks'
 ---
 ## Créer une intégration Webhooks
 
@@ -12,7 +12,7 @@ Créez une intégration Datadog/Webhooks.
 
 * La méthode `POST` permet de mettre à jour la configuration de votre intégration en **ajoutant** votre nouvelle configuration à celle de votre organisation Datadog.
 
-##### ARGUMENTS
+**ARGUMENTS** :
 
 * **`hooks`** [*obligatoire*] :
    Tableau d'objets Webhook. Un objet Webhook est composé de :

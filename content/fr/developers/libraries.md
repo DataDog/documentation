@@ -6,7 +6,7 @@ aliases:
   - /fr/developers/faq/monitoring-akka/
 disable_toc: true
 ---
-## Bibliothèques de client pour l'API et DogStatsD
+## Bibliothèques client pour DogstatsD et les API
 
 Le tableau suivant répertorie les bibliothèques de client pour [DogStatsD][1] et l'API officielles et entretenues par la communauté. Certaines bibliothèques prennent en charge l'API et DogStatsD, mais la grande majorité se concentre sur l'un ou l'autre.
 
@@ -31,7 +31,7 @@ Le tableau suivant répertorie les bibliothèques de client du Log Management of
 Grâce aux [API][3] de Datadog, vous pouvez rédiger un script pour sauvegarder les définitions de votre dashboard sous forme de code. Consultez les projets suivants pour obtenir des exemples de réalisation de ces sauvegardes :
 
 | Langage   | Bibliothèque          | Auteur          |
-| ---        | ---              | ---             |
+|------------|------------------|-----------------|
 | JavaScript | [dog-watcher][4] | [Brightcove][5] |
 | Ruby       | [doggy][6]       | [Shopify][7]    |
 | Ruby       | [kennel][8]      | [Zendesk][9]    |
@@ -42,7 +42,7 @@ Grâce aux [API][3] de Datadog, vous pouvez rédiger un script pour sauvegarder 
 Plusieurs projets de notre communauté sont consacrés à la maintenance, à la gestion ou à la sauvegarde des monitors via l'[API][3] Datadog :
 
 | Langage  | Bibliothèque          | Auteur               |
-| ---       | ---              | ---                  |
+|-----------|------------------|----------------------|
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
 | Ruby      | [interferon][14] | [Airbnb][15]         |
@@ -140,7 +140,7 @@ Un [transport][58] Winston-Datadog.
 
 Si vous rédigez une bibliothèque Datadog et que vous souhaitez l'ajouter à cette page, envoyez un e-mail à [code@datadoghq.com][61].
 
-[1]: /fr/developers/dogstatsd
+[1]: /fr/developers/metrics/dogstatsd_metrics_submission
 [2]: /fr/tracing
 [3]: /fr/api
 [4]: https://github.com/brightcove/dog-watcher

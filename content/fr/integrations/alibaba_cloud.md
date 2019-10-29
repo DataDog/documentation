@@ -20,10 +20,6 @@ public_title: "Intégration Datadog/Alibaba\_Cloud"
 short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
 version: 1
 ---
-<div class="alert alert-warning">
-Cette intégration est actuellement disponible en version bêta publique.
-</div>
-
 ## Présentation
 
 Connectez Datadog à Alibaba Cloud pour recueillir les métriques en provenance des services suivants :
@@ -59,7 +55,7 @@ Dans votre compte Alibaba Cloud :
 1. Créez un utilisateur dans l'onglet *RAM* à l'aide des paramètres suivants :
     *  `Logon Name` : Datadog
     *  `Display Name` : Datadog 
-    *  `description`: utilisateur Datadog pour l'intégration Datadog/Alibaba Cloud
+    *  `description` : utilisateur Datadog pour l'intégration Datadog/Alibaba Cloud
 
 2. Sélectionnez *Programmatic Access* :
 

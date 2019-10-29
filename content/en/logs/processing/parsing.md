@@ -21,21 +21,20 @@ further_reading:
 
 ## Overview
 
-If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
-The Grok syntax provides an easier way to parse logs than pure regular expressions.
-The main usage of the Grok Parser is to extract attributes from semi-structured text messages.
+Datadog automatically parses JSON-formatted logs. For other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
+The Grok syntax provides an easier way to parse logs than pure regular expressions. The Grok Parser enables you to extract attributes from semi-structured text messages.
 
-Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
+Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc.
 
-Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
+You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
-* **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace,...)
+* **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace, etc.)
 
-* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the MATCHER.
+* **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the *Matcher*.
 
-* **Filter** (optional): a post-processor of the match to transform it
+* **Filter** (optional): a post-processor of the match to transform it.
 
-Example for this classic unstructured log:
+Example for a classic unstructured log:
 ```
 john connected on 11/08/2017
 ```
@@ -45,15 +44,21 @@ With the following parsing rule:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-You would have at the end this structured log:
+After processing, the following structured log is generated:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
-**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+**Note**:
+
+* If you have multiple parsing rules in a single Grok parser:
+  * Only one can match any given log. The first one that matches, from top to bottom, is the one that does the parsing.
+  * Each rule can reference parsing rules defined above itself in the list.
+* You must have unique rule names within the same Grok parser.
+* The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 
 ### Matcher and Filter
 
-Here is the list of all the matchers and filters natively implemented by Datadog:
+Here is a list of all the matchers and filters natively implemented by Datadog:
 
 {{< tabs >}}
 {{% tab "Matcher" %}}
@@ -65,14 +70,14 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
 | `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
 | `notSpace`                                      | Matches any string until the next space.                                                                                           |
-| `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).       |
+| `boolean("truePattern", "falsePattern")`        | Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).       |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
-| `numberExtStr`                                  | Matches a floating point number (with scientific notation support).                                                                |
+| `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
-| `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
-| `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
-| `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
+| `integerStr`                                    | Matches an integer number and parses it as a string.                                                                        |
+| `integer`                                       | Matches an integer number and parses it as an integer number.                                                               |
+| `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
 | `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
@@ -103,7 +108,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
 | `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1]. |
 | `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
-| `decodeuricomponent`                                           | This core filter decodes URI components.                                                                                                                  |
+| `decodeuricomponent`                                           | This core filter decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                                                                                  |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                           |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                           |
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
@@ -121,27 +126,27 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 
 ## Advanced Settings
 
-At the bottom of your grok processor tiles there is an Advanced Settings section:
+At the bottom of your Grok processor tiles, there is an Advanced Settings section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" responsive="true" style="width:80%;">}}
 
-* Use the **Extract from** field to apply your grok processor on a given attribute instead of the default `message` attribute.
+* Use the **Extract from** field to apply your Grok processor on a given attribute instead of the default `message` attribute.
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules which is useful when you have several rules in the same grok parser that uses the same tokens.
+* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
-Example for this classic unstructured log:
+Example for a classic unstructured log:
 
 ```
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-You could use the following parsing rule:
+Use the following parsing rule:
 
 ```
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-with the following helpers:
+With the following helpers:
 
 ```
 user %{word:user.name} id:%{integer:user.id}
@@ -153,7 +158,8 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" responsive="true" style="width:80%;">}}
 
 ## Examples
-Find below some examples demonstrating how to use parsers:
+
+Some examples demonstrating how to use parsers:
 
 * [Key value](#key-value)
 * [Parsing dates](#parsing-dates)
@@ -164,11 +170,27 @@ Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
-This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
-* `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
-* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For example `<>` matches *test=<toto sda> test2=test*.
+* `separatorStr`: defines the separator. Defaults to `=`.
+* `characterWhiteList`: defines additional non-escaped value chars. Defaults to `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
+* `quotingStr`: defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, etc.). 
+  * When defined, the default behavior is replaced by allowing only defined quoting character.
+  * Datadog always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. 
+  * Any string defined within the quoting characterss is extracted as a value.
+    
+    For example, input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output:
+    
+  ```
+  {
+    "key": [
+      "valueStr",
+      "/$%@valueStr2"
+    ]
+  }
+  ```
+
+**Note**: If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
@@ -232,11 +254,10 @@ Other examples:
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
-| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
 
 ### Parsing dates
 
-The date matcher transforms your timestamp in the EPOCH format.
+The date matcher transforms your timestamp in the EPOCH format (unit of measure **millisecond**).
 
 | **Raw string**                           | **Parsing rule**                                          | **Result**              |
 | :---                                     | :----                                                     | :----                   |
@@ -250,7 +271,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | 2016-11-29T16:21:36.431+00:00            | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655                 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
+| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
 
 <sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see the [TZ database names][1].
 
@@ -258,7 +279,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 
 ### Conditional pattern
 
-You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `|`.
+You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `(<REGEX_1>|<REGEX_2>)`.
 
 **Log**:
 ```

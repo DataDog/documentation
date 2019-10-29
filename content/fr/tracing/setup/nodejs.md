@@ -23,13 +23,15 @@ further_reading:
 ---
 ## Installation et démarrage
 
+<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=node" target=_blank> basées sur un host</a> et <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=node" target=_blank>basées sur un conteneur</a>.</div>
+
 Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][1].
 
 Pour obtenir des détails sur la configuration et l'utilisation de l'API, consultez la [documentation relative à l'API][2] de Datadog.
 
 Pour en savoir plus sur les contributions, consultez le [guide de développement][3].
 
-### Démarrage rapide
+### Prise en main
 
 <div class="alert alert-warning">
 Cette bibliothèque <strong>DOIT</strong> être importée et initialisée avant tous les autres modules instrumentés. Lors de l'utilisation d'un transcompilateur, vous <strong>DEVEZ</strong> importer et initialiser la bibliothèque de tracing dans un fichier externe, puis importer ce fichier en entier pendant la compilation de votre application. Cela empêche l'accès aux variables avant leur définition et garantit que la bibliothèque de tracing est importée et initialisée avant l'importation des autres modules instrumentés.
@@ -154,13 +156,14 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 | [q][43]          | `>=1`     | Prise en charge complète |
 | [when][44]       | `>=3`     | Prise en charge complète |
 
-#### Compatibilité des enregistreurs
+#### Compatibilité des loggers
 
-| Module        | Versions | Type de prise en charge    |
-|---------------|----------|-----------------|
-| [bunyan][45]  | `>=1`    | Prise en charge complète |
-| [pino][46]    | `>=2`    | Prise en charge complète |
-| [winston][47] | `>=1`    | Prise en charge complète |
+| Module           | Versions  | Type de prise en charge    |
+|------------------|-----------|-----------------|
+| [bunyan][45]     | `>=1`     | Prise en charge complète |
+| [paperplane][46] | `>=2.3.2` | Prise en charge complète |
+| [pino][47]       | `>=2`     | Prise en charge complète |
+| [winston][48]    | `>=1`     | Prise en charge complète |
 
 ## Pour aller plus loin
 
@@ -211,5 +214,6 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 [43]: https://github.com/kriskowal/q
 [44]: https://github.com/cujojs/when
 [45]: https://github.com/trentm/node-bunyan
-[46]: http://getpino.io
-[47]: https://github.com/winstonjs/winston
+[46]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[47]: http://getpino.io
+[48]: https://github.com/winstonjs/winston
