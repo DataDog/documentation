@@ -85,7 +85,7 @@ The default timeout for each step is approximately 60 seconds. You can override 
 | `Test that some text is present on the active page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is not present on the active page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
 | `Test the content of the URL of the active page`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
-| `Test that an email was received`                         | This asserts that an email was sent, and whether specific values (`string`, `number`, `regex`) are present within the subject or the body of the email. This assertion leverages the [email variable][9]. |
+| `Test that an email was received`                         | This asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][9]. |
 
 Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
 
