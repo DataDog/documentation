@@ -84,7 +84,7 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-**The `RATE` metric submission type represents the number of events over a defined time interval (flush interval) that's normalized per-second. A `RATE` can be used to track the rate of requests hitting your webservers.
+**The `RATE` metric submission type represents the number of events over a defined time interval (flush interval) that's normalized per-second.** A `RATE` can be used to track the rate of requests hitting your webservers.
 
 **Note**: A `RATE` is different from the `COUNT` metric submission type, which represents the number of events in the flush interval.
 
