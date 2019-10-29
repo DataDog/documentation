@@ -30,7 +30,7 @@ Matching processes and counts are displayed below the search:
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" responsive="true" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with the total number of processes found.
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found.  For more granular data, visit your [Live Process Page][5].
 
 #### Alert grouping
 
@@ -57,3 +57,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: https://app.datadoghq.com/monitors#create/live_process
 [3]: /graphing/infrastructure/process/#search-syntax
 [4]: /monitors/notifications
+[5]: https://app.datadoghq.com/process
