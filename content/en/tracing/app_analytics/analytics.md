@@ -6,7 +6,7 @@ aliases:
   - /tracing/trace_search_analytics/analytics
   - /tracing/analytics
   - /tracing/visualization/analytics
-  - /tracing/app_analytics/analytics/
+  - /tracing/trace_search_and_analytics/analytics/
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"

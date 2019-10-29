@@ -291,7 +291,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [6]: /fr/tracing/visualization/#resources
 [7]: https://app.datadoghq.com/apm/search
 [8]: https://docs.datadoghq.com/fr/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/fr/tracing/app_analytics/search
+[9]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/search
 [10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/fr/tracing/app_analytics/analytics
+[11]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/analytics
 [12]: https://docs.datadoghq.com/fr/tracing/guide/alert_anomalies_p99_database

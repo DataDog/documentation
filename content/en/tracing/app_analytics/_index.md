@@ -3,7 +3,7 @@ title: App Analytics
 kind: documentation
 aliases:
   - /tracing/visualization/search/
-  - /tracing/app_analytics/
+  - /tracing/trace_search_and_analytics/
 ---
 
 {{< vimeo 278748711 >}}
