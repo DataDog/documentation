@@ -878,7 +878,7 @@ main:
     parent: "app_analytics"
     weight: 503
   - name: "Monitors"
-    url: "/monitors/monitor_types/apm/"
+    url: "monitors/monitor_types/apm/"
     parent: "app_analytics"
     weight: 504
 
