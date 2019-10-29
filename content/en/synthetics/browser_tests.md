@@ -75,15 +75,17 @@ Tests can be only recorded from **[Google Chrome][7]**. To record your test, dow
 
 {{< img src="synthetics/browser_tests/assertions_browser_check.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
-Assertions allow you to check if an element, a content, or some text is available in the current page. The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
+Assertions allow you to check if an element, a content, or some text is available in the current page. You can also check if a specific email was sent.   
+The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
 
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
-| `Assert that an element is present on the page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
-| `Check an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
-| `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
-| `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
-| `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
+| `Test that an element is present on the active page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
+| `Test an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
+| `Test that some text is present on the active page` | Asserts that some specific text is present on the current page.                                                                  |
+| `Assert that some text is not present on the active page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
+| `Test the content of the URL of the active page`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
+| `Test that an email was received`                         | This asserts that an email was sent, and whether specific values (`string`, `number`, `regex`) are present within the subject or the body of the email. This assertion leverages the [email variable][9]. |
 
 Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
 
@@ -92,9 +94,8 @@ Advanced options for assertions allow you to specify an X-path or a CSS class or
 The navigation action allow you to:
 
 * Refresh the current page of the scenario.
-* Follow a specific link.
-
-**Note**: In the "Enter link URL" box, users must prepend URLs with `http` or `https`.
+* Follow a specific link. In the "Enter link URL" box, users must prepend URLs with `http` or `https`.
+* Go to an email and click link. After creating the [email variable][9], and recording the step that will trigger the email, that step will allow you to access your Synthetics inbox. You then need to choose the email you're interested and click the link you want your browser test to click on.
 
 #### Hover
 
@@ -111,7 +112,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][9])
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][10])
 * **A Pattern**:
 
 | Pattern                 | Description                                         |
@@ -119,6 +120,8 @@ To create a variable, first give it a name then define its value from:
 | `{{ numeric(n) }}`      | Generates a numeric string with n digits.           |
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
+
+* **An Email**: Generate a random Synthetics email address that you will use in your steps to assert on the email that was sent or to perform actions on the sent email (eg. click confirmation link).
 
 ##### Use the variable
 
@@ -132,6 +135,7 @@ You can also use your variables in some assertions, including:
 * Assert text is present on the page
 * Assert the page does not contain text
 * Check main page URL's content
+* Check that an email was received
 
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
@@ -169,4 +173,5 @@ Common failure reasons include:
 [6]: /integrations/#cat-notification
 [7]: https://www.google.com/chrome
 [8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[9]: /synthetics/settings/#secure-credential
+[9]: /synthetics/browser_tests/#create-a-variable
+[10]: /synthetics/settings/#secure-credential
