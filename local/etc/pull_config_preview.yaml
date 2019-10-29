@@ -12,7 +12,7 @@
     #   - dd/utils/context/source.py
 
     - action: integrations
-      branch: prod
+      branch: kaylyn/tab-fix
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
