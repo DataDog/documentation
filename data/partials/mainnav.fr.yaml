@@ -260,7 +260,7 @@ main:
           - name: Processus
             url: monitors/monitor_types/process/
           - name: Analyse de traces
-            url: monitors/monitor_types/trace_analytics/
+            url: monitors/monitor_types/app_analytics/
           - name: Watchdog
             url: monitors/monitor_types/watchdog/
       - name: Gérer des monitors
@@ -338,16 +338,16 @@ main:
           - name: Service Map
             url: tracing/visualization/services_map
       - name: Analyse et recherche de traces
-        url: tracing/trace_search_and_analytics/
+        url: tracing/app_analytics/
         children:
           - name: Configuration de l'Agent
-            url: tracing/trace_search_and_analytics/agent_trace_search
+            url: tracing/app_analytics/agent_trace_search
           - name: Recherche de traces
-            url: tracing/trace_search_and_analytics/search
+            url: tracing/app_analytics/search
           - name: Analyse de traces
-            url: tracing/trace_search_and_analytics/analytics
+            url: tracing/app_analytics/analytics
           - name: Les monitors
-            url: monitors/monitor_types/trace_analytics
+            url: monitors/monitor_types/app_analytics
       - name: API des traces
         url: 'api/#tracing'
       - name: Bibliothèques

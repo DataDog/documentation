@@ -23,7 +23,7 @@ further_reading:
   - link: tracing/visualization/trace
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: tracing/trace_search_and_analytics/analytics
+  - link: tracing/app_analytics/analytics
     tag: Documentation
     text: Analyse des données de votre APM avec une cardinalité infinie
 ---
@@ -51,7 +51,7 @@ Pour commencer à recueillir des événements APM, [activez l'analyse et la rech
 
 ### Traces complètes
 
-{{< img src="tracing/trace_search_and_analytics/search/complete_trace.png" alt="Liste de traces" responsive="true">}}
+{{< img src="tracing/advanced/search/complete_trace.png" alt="Liste de traces" responsive="true">}}
 
 Si cette option est sélectionnée, les événements APM répertoriés dans le flux de traces disposent d'une trace, ce qui vous permet d'afficher la [trace][6] complète avec l'intégralité de la [span][7] associée.
 
@@ -120,7 +120,7 @@ Vous pouvez également effectuer une recherche d'attribut numérique dans une pl
 
 La saisie de requête complexe peut être fastidieuse. Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="tracing/trace_search_and_analytics/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche " responsive="true" style="width:60%;">}}
+{{< img src="tracing/advanced/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche " responsive="true" style="width:60%;">}}
 
 ### Échappement de caractères spéciaux
 
@@ -138,7 +138,7 @@ Si un attribut est appelé `user.first name`, effectuez une recherche sur cet at
 
 Ne perdez pas de temps à créer les mêmes vues tous les jours. Les recherches enregistrées contiennent votre requête de recherche, les colonnes et l'horizon temporel. Ils sont alors disponibles dans la barre de recherche grâce à la correspondance de saisie automatique du nom de la recherche ou de la requête.
 
-{{< img src="tracing/trace_search_and_analytics/search/saved_search.png" alt="Recherche enregistrée" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/saved_search.png" alt="Recherche enregistrée" responsive="true" style="width:80%;">}}
 
 Pour supprimer une recherche enregistrée, cliquez sur l'icone en forme de corbeille sous le menu déroulant de recherche de traces. 
 
@@ -146,41 +146,41 @@ Pour supprimer une recherche enregistrée, cliquez sur l'icone en forme de corbe
 
 L'intervalle vous permet d'afficher les traces dans une période donnée. Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante :
 
-{{< img src="tracing/trace_search_and_analytics/search/timerange.png" style="width:50%;" alt="Intervalle" responsive="true" >}}
+{{< img src="tracing/advanced/search/timerange.png" style="width:50%;" alt="Intervalle" responsive="true" >}}
 
 ## Flux de traces
 Le flux de traces regroupe la liste des traces qui correspondent au contexte sélectionné. Un contexte est défini par un filtre de [barre de recherche](#barre-de-recherche) et un [intervalle](#intervalle).
 
 Cliquez sur l'en-tête de colonne **date** pour trier la liste.
 
-{{< img src="tracing/trace_search_and_analytics/search/trace_list.png" alt="Liste de traces" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/trace_list.png" alt="Liste de traces" responsive="true" style="width:80%;">}}
 
 ### Afficher une trace complète
 
 Cliquez sur une trace quelconque pour afficher plus de détails :
 
-{{< img src="tracing/trace_search_and_analytics/search/trace_in_tracestream.png" alt="Trace dans le flux de traces" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/trace_in_tracestream.png" alt="Trace dans le flux de traces" responsive="true" style="width:80%;">}}
 
 ### Colonnes
 
 Pour ajouter plus de détails de trace à la liste, cliquez sur le bouton **Columns** et sélectionnez les facettes que vous souhaitez voir :
 
-{{< img src="tracing/trace_search_and_analytics/search/trace_list_with_column.png" alt="Liste des traces avec les colonnes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/trace_list_with_column.png" alt="Liste des traces avec les colonnes" responsive="true" style="width:80%;">}}
 
 ### Affichage multiligne
 
-{{< img src="tracing/trace_search_and_analytics/search/multi_line_display.png" alt="Affichage multiligne" responsive="true" style="width:30%;">}}
+{{< img src="tracing/advanced/search/multi_line_display.png" alt="Affichage multiligne" responsive="true" style="width:30%;">}}
 
 Choisissez d'afficher une, trois ou dix lignes à partir de vos traces. L'affichage de trois et dix lignes vous donne une meilleure compréhension de l'attribut `error.stack`.
 
 * Avec une ligne affichée :
-{{< img src="tracing/trace_search_and_analytics/search/1_multi_line.png" alt="Affichage multiligne à 1 ligne" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/1_multi_line.png" alt="Affichage multiligne à 1 ligne" responsive="true" style="width:80%;">}}
 
 * Avec trois lignes affichées :
-{{< img src="tracing/trace_search_and_analytics/search/3_multi_line.png" alt="Affichage multiligne avec 3 lignes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/3_multi_line.png" alt="Affichage multiligne avec 3 lignes" responsive="true" style="width:80%;">}}
 
 * Avec dix lignes affichées :
-{{< img src="tracing/trace_search_and_analytics/search/10_multi_line.png" alt="Affichage multiligne avec 10 lignes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/10_multi_line.png" alt="Affichage multiligne avec 10 lignes" responsive="true" style="width:80%;">}}
 
 ## Facettes
 
@@ -188,13 +188,13 @@ Une facette présente toutes les valeurs distinctes d'un attribut ou d'un tag en
 
 Les facettes vous permettent de faire pivoter ou de filtrer vos ensembles de données en fonction d'un attribut donné. Les facettes peuvent correspondre à des utilisateurs, des services, etc.
 
-{{< img src="tracing/trace_search_and_analytics/search/facets_demo.png" alt="Demonstration facettes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/facets_demo.png" alt="Demonstration facettes" responsive="true" style="width:80%;">}}
 
 ### Créer une facette
 
 Pour commencer à utiliser un attribut en tant que facette ou dans une recherche, cliquez dessus et ajoutez-le en tant que facette :
 
-{{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
+{{< img src="tracing/advanced/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et la [requête de graphique de trace][11].
 
@@ -202,7 +202,7 @@ Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes
 
 Utilisez les facettes pour filtrer facilement vos traces. La barre de recherche et l'URL reflètent automatiquement vos sélections.
 
-{{< img src="tracing/trace_search_and_analytics/search/facet_panel.png" alt="Volet facettes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/search/facet_panel.png" alt="Volet facettes" responsive="true" style="width:80%;">}}
 
 ## Pour aller plus loin
 
@@ -212,11 +212,11 @@ Utilisez les facettes pour filtrer facilement vos traces. La barre de recherche 
 [1]: /fr/tracing/visualization/#trace-search-analytics
 [2]: /fr/tracing/visualization/#services
 [3]: /fr/tracing/advanced/adding_metadata_to_spans/?tab=java
-[4]: /fr/tracing/trace_search_and_analytics/?tab=java#configure-by-integration
-[5]: /fr/tracing/trace_search_and_analytics/?tab=php#automatic-configuration
+[4]: /fr/tracing/app_analytics/?tab=java#configure-by-integration
+[5]: /fr/tracing/app_analytics/?tab=php#automatic-configuration
 [6]: /fr/tracing/visualization/#trace
 [7]: /fr/tracing/visualization/#spans
 [8]: /fr/graphing/infrastructure
 [9]: /fr/integrations
 [10]: /fr/tagging/#tags-best-practices
-[11]: /fr/tracing/trace_search_and_analytics/analytics
+[11]: /fr/tracing/app_analytics/analytics

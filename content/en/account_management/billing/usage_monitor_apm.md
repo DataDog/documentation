@@ -15,7 +15,7 @@ If you are an admin of your account, you can view your account usage using the [
 | Metric | Description |
 | ------- | -------- |
 | APM Hosts | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
-| APM Events | Shows the sum of all APM events indexed over all hours in the current month. |
+| Analyzed Spans | Shows the sum of all Analyzed Spans indexed over all hours in the current month. |
 | Fargate Tasks | Shows the average of all Fargate tasks over all hours in the current month. |
 
 ### Set Alert on APM Hosts
@@ -29,18 +29,18 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 3.  Define the rate you would like to set as a warning or error.
 4. Define an explicit notification: The volume of hosts on this env just got too high has exceeded the allocated threshold value. Scale down the number of APM enabled hosts.
 
-### Set Alert on APM events
+### Set Alert on Analyzed Spans
 
-To get alerts in case a code deployment causes a spike in APM events generated, set up [trace analytics monitors][5] on APM events. Get notified at any moment if the APM event volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in Analyzed Spans generated, set up [App Analytics monitors][5] on Analyzed Spans. Get notified at any moment if the APM event volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 
 {{< img src="tracing/faq/apm_events_monitor.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
 
-1. Go to [Trace Analytics view][6] in APM
+1. Go to [App Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
 5. Define the APM event volume rate you would like to set as a warning or error.
-6. Define an explicit notification: The volume of APM Events on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
+6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
 
 Learn more about Event Filtering and usage control [here][7].
 

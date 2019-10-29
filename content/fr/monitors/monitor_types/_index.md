@@ -19,7 +19,7 @@ Pour [créer un monitor][1] dans Datadog, passez le curseur sur **Monitors** dan
     {{< nextlink href="/monitors/monitor_types/event" >}}Événement{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/log" >}}Logs{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm" >}}Métriques APM{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/trace_analytics" >}}Analyse de traces{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/app_analytics" >}}Analyse de traces{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -243,7 +243,7 @@ La partie inférieure de cette vue comprend des informations supplémentaires su
 
 
 ## Exploiter vos tags de span personnalisés avec l'analyse et la recherche de traces
-<div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>activé la fonctionnalité Analyse et recherche de traces.</a></div>
+<div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>activé la fonctionnalité Analyse et recherche de traces.</a></div>
 
 4) **Accédez à la [page Recherche de traces][7]**.
 
@@ -291,7 +291,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [6]: /fr/tracing/visualization/#resources
 [7]: https://app.datadoghq.com/apm/search
 [8]: https://docs.datadoghq.com/fr/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/search
+[9]: https://docs.datadoghq.com/fr/tracing/app_analytics/search
 [10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/analytics
+[11]: https://docs.datadoghq.com/fr/tracing/app_analytics/analytics
 [12]: https://docs.datadoghq.com/fr/tracing/guide/alert_anomalies_p99_database

@@ -1,17 +1,19 @@
 ---
 title: Agent trace Search Configuration
 kind: Documentation
+aliases:
+  - /tracing/app_analytics/agent_trace_search/
 ---
 
-[Trace Search & Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+[App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—either [automatically][2] or [manually][3].
 * Configure the Datadog Agent to emit the relevant analytics from your services (instructions below).
 
-**Note**: To enable trace search and analytics with the Agent, [services][1] must be already flowing into Datadog.
+**Note**: To enable App Analytics with the Agent, [services][1] must be already flowing into Datadog.
 
-1. Once [your services are set up][4], navigate to the [Trace Search & Analytics docs page][5] to find a list of [services][6] and [resource][7] names available for use in Trace Search.
-3. Select the `environment` and `services` from which to extract [APM events][8].
+1. Once [your services are set up][4], navigate to the [App Analytics docs page][5] to find a list of [services][6] and [resource][7] names available for use in Trace Search.
+3. Select the `environment` and `services` from which to extract [Analyzed Spans][8].
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}
@@ -58,11 +60,11 @@ For example, if you have a Python service named `python-api`, and it's running F
 
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /tracing/trace_search_and_analytics/#automatic-configuration
-[3]: /tracing/trace_search_and_analytics/#custom-instrumentation
+[2]: /tracing/app_analytics/#automatic-configuration
+[3]: /tracing/app_analytics/#custom-instrumentation
 [4]: /tracing/setup
 [5]: https://app.datadoghq.com/apm/docs/trace-search
 [6]: /tracing/visualization/#services
 [7]: /tracing/visualization/#resources
-[8]: /tracing/trace_search_and_analytics/search/#apm-events
+[8]: /tracing/advanced/search/#apm-events
 [9]: /tracing/visualization/#trace

@@ -14,7 +14,7 @@ Si vous êtes un administrateur de votre compte, vous pouvez consulter les infor
 | Métrique | Description |
 | ------- | -------- |
 | APM Hosts | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel. |
-| APM Events | Affiche la somme de tous les événements APM indexés pour toutes les heures du mois actuel. |
+| Analyzed Spans | Affiche la somme de tous les événements APM indexés pour toutes les heures du mois actuel. |
 | Fargate Tasks | Affiche le nombre total moyen de tâches Fargate pour toutes les heures du mois actuel. |
 
 ### Définir une alerte pour un host d'APM
@@ -34,7 +34,7 @@ Pour être notifié lorsqu'un déploiement de code entraîne une augmentation so
 
 {{< img src="tracing/faq/apm_events_monitor.mp4" alt="Vue d'analyse" video="true" responsive="true" style="width:90%;">}}
 
-1. Accédez à la vue [Trace Analytics][6] dans l'APM
+1. Accédez à la vue [App Analytics][6] dans l'APM
 2. Sélectionnez `env` (vous pouvez sélectionner `*`)
 3. Sélectionnez `count` (vous pouvez sélectionner `*`)
 4. Sélectionnez Export -> Export to Monitor

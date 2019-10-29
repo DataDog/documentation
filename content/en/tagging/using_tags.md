@@ -165,25 +165,25 @@ Example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 ## APM
 
 {{< tabs >}}
-{{% tab "Trace Search & Analytics" %}}
+{{% tab "App Analytics" %}}
 
 For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
 
-[1]: /tracing/trace_search_and_analytics/search
-[2]: /tracing/trace_search_and_analytics/search/#search-bar
+[1]: /tracing/app_analytics/search
+[2]: /tracing/advanced/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [Trace Search & Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
+After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [App Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" responsive="true" style="width:80%;">}}
 
 
 [1]: /tagging/assigning_tags
-[2]: /tracing/trace_search_and_analytics/search
+[2]: /tracing/app_analytics/search
 [3]: /monitors/manage_monitor
 [4]: /logs/explorer/search
 [5]: /graphing/infrastructure/hostmap

@@ -221,14 +221,14 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | The Agent request transfer timeout (in milliseconds)                        |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
-| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
+| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable App Analytics for relevant spans in web integrations       |
 | `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_TRACE_REPORT_HOSTNAME`           | `false`     | Enable hostname reporting on the root span                                  |
 | `DD_TRACE_RESOURCE_URI_MAPPING`      | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED` | `false` | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17] |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable App Analytics for relevant spans in a specific integration |
 
 #### Map Resource Names To Normalized URI
 

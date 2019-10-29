@@ -245,7 +245,7 @@ Les intégrations [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [L
 [12]: /fr/integrations/amazon_rds
 [13]: /fr/integrations/elastic
 [14]: /fr/logs/explorer/?tab=measures#setup
-[15]: /fr/tracing/trace_search_and_analytics/search
+[15]: /fr/tracing/app_analytics/search
 [16]: /fr/integrations/rsyslog
 [17]: /fr/integrations/nxlog
 [18]: /fr/integrations/syslog_ng

@@ -125,7 +125,7 @@ Pour commencer à tagger des spans dans votre application, consultez cette [proc
 
 Une fois qu'un tag a été ajouté à une span, recherchez et interrogez le tag dans Analyse et recherche de traces en cliquant sur le tag pour l'ajouter en tant que [facette][19]. Une fois effectué, la valeur de ce tag est stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le panneau de facettes et la requête du graphique de traces.
 
-{{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
+{{< img src="tracing/advanced/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
 
 
 ## Pour aller plus loin
@@ -144,10 +144,10 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez le tag 
 [10]: /fr/tracing/advanced/connect_logs_and_traces
 [11]: /fr/tracing/advanced/adding_metadata_to_spans
 [12]: /fr/tracing/advanced/runtime_metrics
-[13]: /fr/tracing/trace_search_and_analytics
+[13]: /fr/tracing/app_analytics
 [14]: https://app.datadoghq.com/metric/summary
 [15]: https://app.datadoghq.com/monitors#/create
-[16]: /fr/tracing/trace_search_and_analytics/#automatic-configuration
-[17]: /fr/tracing/trace_search_and_analytics/#configure-additional-services-optional
+[16]: /fr/tracing/app_analytics/#automatic-configuration
+[17]: /fr/tracing/app_analytics/#configure-additional-services-optional
 [18]: /fr/tracing/advanced/adding_metadata_to_spans
-[19]: /fr/tracing/trace_search_and_analytics/search/#facets
+[19]: /fr/tracing/advanced/search/#facets
