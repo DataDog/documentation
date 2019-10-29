@@ -95,7 +95,7 @@ The navigation action allow you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click link. After creating the [email variable][9], and recording the step that will trigger the email, that step will allow you to access your Synthetics inbox. You then need to choose the email you're interested and click the link you want your browser test to click on.
+* Go to an email and click link. This step allows you to access your Synthetics mail inbox after creating an [email variable][9] to choose the email you are interested in and click the link you want your browser test to click on.
 
 #### Hover
 
@@ -112,7 +112,8 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Global Variable**: Store and use global variables through [Synthetics Settings][10])
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][10]).
+* **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
 | Pattern                 | Description                                         |
@@ -120,8 +121,6 @@ To create a variable, first give it a name then define its value from:
 | `{{ numeric(n) }}`      | Generates a numeric string with n digits.           |
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
-
-* **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 
 ##### Use the variable
 
