@@ -206,7 +206,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 }
 ```
 
-| Parameter.   | Type             | Required | Description                                           |
+| Parameter    | Type             | Required | Description                                           |
 | ------       | -----            | -------- | -----                                                 |
 | `type`       | String           | yes      | Type of the processor.                                |
 | `name`       | String           | no       | Name of the processor.                                |
