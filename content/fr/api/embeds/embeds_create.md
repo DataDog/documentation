@@ -14,10 +14,11 @@ Remarque : si un embed existe déjà pour la même requête dans une organisati
 
 Si vous souhaitez utiliser des template variables, consultez la section [Graphiques intégrables avec des template variables][1].
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`graph_json`** [*obligatoire*] :
     La définition du graphique en JSON. Même format que celui disponible dans l'onglet JSON de l'éditeur de graphiques dans Datadog.
-* **`timeframe`** [*facultatif*, *défaut*=**1_hour**] :  
+* **`timeframe`** [*facultatif*, *défaut*=**1_hour**] :
     Le timegrame pour le graphique. Doit correspondre à l'une des valeurs suivantes :
     * **1_hour**
     * **4_hours**
@@ -29,7 +30,7 @@ Si vous souhaitez utiliser des template variables, consultez la section [Graphiq
     * **small**
     * **medium**
     * **large**
-    * **xlarge**.
+    * **xlarge**
 * **`legend`** [*facultatif*, *défaut*=**no**] :
     Le flag déterminant si le graphique inclut ou non une légende. Valeurs autorisées : **yes** ou **no**.
 * **`title`** [*facultatif*, *défaut*=**Embed created through API**] :

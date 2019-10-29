@@ -7,6 +7,10 @@ aliases:
 ---
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" responsive="true" >}}
 
+<div class="alert alert-warning">
+L'Agent Datadog v5 est pris en charge jusqu'à la version 1.8 de Kubernetes. Pour la version la plus récente de Kubernetes, utilisez l'Agent Datadog v6.
+</div>
+
 ## Présentation
 
 Recueillez des métriques de Kubernetes en temps réel pour :
@@ -86,9 +90,9 @@ Remplacez `VOTRE_CLÉ_API` par [votre clé d'API][6] ou utilisez les [secrets Ku
 
 **Remarque** : ce manifeste active la fonctionnalité de configuration automatique d'Autodiscovery. Pour la désactiver, retirez la définition de la variable d'environnement `SD_BACKEND`. Pour découvrir comment configurer Autodiscovery, consultez la [documentation dédiée][9].
 
-#### Installation de host
+#### Installation du host
 
-Installer le paquet `dd-check-kubernetes` manuellement ou avec votre gestionnaire de configuration préféré.
+Installez le paquet `dd-check-kubernetes` manuellement ou avec votre gestionnaire de configuration préféré.
 
 ### Configuration
 
@@ -105,7 +109,7 @@ instances:
 Consultez le [fichier d'exemple kubernetes.yaml][10] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
-#### Exécution du conteneur
+#### Exécution de conteneur
 
 Pour vérifier que l'Agent Datadog s'exécute dans votre environnement en tant que DaemonSet, exécutez :
 
@@ -180,7 +184,7 @@ spec:
     app: kube-state-metrics
 ```
 
-Ensuite, déployez-le en exécutant :
+Déployez-le ensuite en exécutant :
 ```
 kubectl create -f kube-state-metrics.yaml
 ```
@@ -190,13 +194,13 @@ Le manifeste ci-dessus utilise le conteneur public `kube-state-metrics` de Googl
 Si vous configurez votre service Métriques Kubernetes State pour une utilisation sur une autre URL ou un autre port, vous pouvez configurer l'Agent Datadog en définissant le paramètre `kube_state_url` dans `conf.d/kubernetes_state.yaml`, puis en redémarrant l'Agent.
 Pour en savoir plus, consultez le [fichier kubernetes_state.yaml.example][14]. Si vous avez activé [Autodiscovery][9], l'URL kube-state est configurée et gérée automatiquement.
 
-#### Installation de host
+#### Installation sur un host
 
-Lee paquet `dd-check-kubernetes_state` peut être installé manuellement ou via votre gestionnaire de configuration préféré (pour CentOS/AWS, vous trouverez [votre paquet rpm ici][15] et les instructions d'installation sur [cette page][16].
+Le paquet `dd-check-kubernetes_state` peut être installé manuellement ou via votre gestionnaire de configuration préféré (pour CentOS/AWS, vous trouverez [votre paquet rpm ici][15] et les instructions d'installation sur [cette page][16].
 Ensuite, modifiez le fichier `kubernetes_state.yaml` de façon à spécifier votre serveur et votre port, et définissez les masters à surveiller. Consultez le [fichier exemple kubernetes_state.yaml][14] pour découvrir toutes les options de configuration.
 
 ### Validation
-#### Validation du conteneur
+#### Validation de conteneur
 Pour vérifier que l'Agent Datadog s'exécute dans votre environnement en tant que DaemonSet, exécutez :
 
     kubectl get daemonset
