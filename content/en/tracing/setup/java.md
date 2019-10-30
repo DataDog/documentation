@@ -174,7 +174,8 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
- 
+| Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
+
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
