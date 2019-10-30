@@ -150,9 +150,10 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 You can run browser tests within other browser tests:
 
-{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true">}}
+{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true" style="width:40%;">}}
 
 Advanced options (optional) allow you to choose where you want your subtest to be played:
+
 * Main: Subtest will be played in your main tab, in sequence with other steps. This is the default option.
 * New: Subtest will be played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
 * Specific tab: Subtest will be played in a numbered tab which can be reused in other steps outside of the subtest.
