@@ -470,11 +470,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-## Event filtering
+## Span filtering
 
-An [APM event][2] represents the top [span][3] for a [service], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering Analyzed Spans][4] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][5] sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [Analyzed Span][2] represents the top [span][3] for a [service], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][4] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][5] sampling. Once a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/visualization/#apm-event

@@ -27,7 +27,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | ----------- | --------------------------------------------------------------------- |
 | `host`      | Correlation between metrics, traces, processes, and logs              |
 | `device`    | Segregation of metrics, traces, processes, and logs by device or disk   |
-| `source`    | Event filtering and automated pipeline creation for log management    |
+| `source`    | Span filtering and automated pipeline creation for log management    |
 | `service`   | Correlation between metrics, traces, and logs                         |
 
 ## Why It Matters

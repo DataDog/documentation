@@ -7,9 +7,9 @@ kind: faq
 
 | Billing Parameter | Price  | App Analytics  | Billing |
 | -----------------------|---------------|-------------------------------------------|-------------|
-|  [APM Host][11]  | $31 per underlying [APM host][11] per month | 1 million additional Analyzed Spans included per month with every APM host. | Datadog records the number of [APM hosts][12] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][12] |
-| [Fargate][11] | $2 per concurrent task per month | No Analyzed Spans included in pricing. | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][11]|
-| [APM Event][12] | $1.70 per million Analyzed Spans per month | Billed when usage is in excess of Analyzed Spans included with every APM host | An APM event is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. [More information.][12] | 
+|  [APM Host][10]  | $31 per underlying [APM host][10] per month | 1 million additional Analyzed Spans included per month with every APM host. | Datadog records the number of [APM hosts][11] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][11] |
+| [Fargate][10] | $2 per concurrent task per month | No Analyzed Spans included in pricing. | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][10]|
+| [Analyzed Span][11] | $1.70 per million Analyzed Spans per month | Billed when usage is in excess of Analyzed Spans included with every APM host | An Analyzed Span is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. [More information.][11] | 
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent. 
 
@@ -17,7 +17,7 @@ For more information, see the [Pricing page][4].
 
 ## Sample Deployment Scenarios
 
-**Sample cases illustrate annual billing rates with default 15 days APM event retention. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.**
+**Sample cases illustrate annual billing rates with default 15 days Analyzed Span retention. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.**
 
 ### Case 1: Hosts and Analyzed Spans
 
@@ -80,7 +80,7 @@ For Kubernetes, APM is priced by nodes not by pods.
 ### FAQs
 **1. What is classified as an APM host for billing?**
 
-A [host][11] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][12]. 
+A [host][10] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][11]. 
 
 **2. How is billing calculated if I deploy one agent per container?**
 
@@ -98,11 +98,11 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **5. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][11] deployed with agents sending traces and not services. App Analytics is billed on the basis of [APM event][3] count. To estimate how many Analyzed Spans each of your service can send, use the [Event Estimator][9].
+APM is billed on the basis of [hosts][10] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Analyzed Span][3] count. To estimate how many Analyzed Spans each of your service can send, use the [Event Estimator][9].
 
 **6. Can I use App Analytics without APM?**
 
-No. App Analytics is an additional functionality available along with APM which billed on the basis [APM event volume][10]. 
+No. App Analytics is an additional functionality available along with APM which billed on the basis Analyzed Span volume. 
 
 ## Further Reading
   
@@ -114,13 +114,12 @@ No. App Analytics is an additional functionality available along with APM which 
 
 [1]: /tracing
 [2]: /tracing/app_analytics/?tab=java
-[3]: /tracing/visualization/#apm-event
+[3]: /tracing/visualization/
 [4]: https://www.datadoghq.com/pricing
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com
 [7]: /tracing/send_traces/#datadog-agent
 [8]: /tracing/send_traces/#containers
 [9]: /account_management/billing/
-[10]: /account_management/billing/apm_distributed_tracing/#case-1-hosts-and-apm-events
-[11]: /account_management/billing/pricing/#infrastructure-monitoring
-[12]: /account_management/billing/pricing/#apm
+[10]: /account_management/billing/pricing/#infrastructure-monitoring
+[11]: /account_management/billing/pricing/#apm

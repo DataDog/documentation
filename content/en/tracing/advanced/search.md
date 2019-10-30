@@ -46,8 +46,8 @@ In the Trace Search view you can:
 
 ## Analyzed Spans
 
-When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an APM event. It's a record of the request including its duration, response code, and any [custom metadata][3].
-An APM event is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an APM event. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any APM event collection for a specific service][4].
+When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][3].
+An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][4].
 
 To start collecting Analyzed Spans, [enable App Analytics for your services][5].
 

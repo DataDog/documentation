@@ -10,7 +10,7 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.
 
-{{< img src="tracing/faq/usage_page.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+{{< img src="tracing/faq/usage_page.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
 
 | Metric | Description |
 | ------- | -------- |
@@ -31,7 +31,7 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 
 ### Set Alert on Analyzed Spans
 
-To get alerts in case a code deployment causes a spike in Analyzed Spans generated, set up [App Analytics monitors][5] on Analyzed Spans. Get notified at any moment if the APM event volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in Analyzed Spans generated, set up [App Analytics monitors][5] on Analyzed Spans. Get notified at any moment if the Analyzed Span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 
 {{< img src="tracing/faq/apm_events_monitor.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
 
@@ -39,10 +39,10 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
-5. Define the APM event volume rate you would like to set as a warning or error.
+5. Define the Analyzed Span volume rate you would like to set as a warning or error.
 6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
 
-Learn more about Event Filtering and usage control [here][7].
+Learn more about Span filtering and usage control [here][7].
 
 
 [1]: https://www.datadoghq.com/pricing

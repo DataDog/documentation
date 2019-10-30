@@ -29,8 +29,8 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][3] to configure a metric query.
-    * Analyzed Spans: See [the trace search documentation][4] to configure an APM event query.
-    * Log Events: See [the log search documentation][5] to configure an APM event query.
+    * Analyzed Spans: See [the trace search documentation][4] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][5] to configure an Analyzed Span query.
 
 2. Customize your graph with the available [options](#options).
 
