@@ -38,7 +38,7 @@ Datadog's log management removes these limitations by decoupling log ingestion f
 {{< /whatsnext >}}
 {{< whatsnext desc="Once your logs are indexed, you can leverage the pillars of observability:">}}
   {{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}<u>Connect Logs and Traces</u>: See the exact trace correlated with the observed log.{{< /nextlink >}}
-  {{< nextlink href="/graphing/dashboards/timeboard/#correlation-between-logs-and-metrics">}}<u>Connect Logs and Metrics</u>: See the exact metric correlated with the observed log.{{< /nextlink >}}
+  {{< nextlink href="/graphing/dashboards/timeboard/#correlation-between-logs-and-metrics">}}<u>Correlate Logs and Metrics</u>: See the exact metric correlated with the observed log.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
