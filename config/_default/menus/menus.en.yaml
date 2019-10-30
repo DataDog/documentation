@@ -1041,19 +1041,25 @@ main:
   - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/?tab=java"
     parent: "log_management"
-    identifier: "log_traces_correlation"
+    identifier: "logs_traces_correlation"
     weight: 8
+    
+  - name: "Connect Logs and Metrics"
+    url: "graphing/dashboards/timeboard/#correlation-between-logs-and-metrics"
+    parent: "log_management"
+    identifier: "logs_metrics_correlation"
+    weight: 9
 
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
     identifier: "log_guides"
-    weight: 9
+    weight: 10
 
   - name: "Security"
     url: "security/logs/"
     parent: "log_management"
-    weight: 10
+    weight: 11
 
 ################
 ## SYNTHETICS ##
