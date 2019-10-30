@@ -1038,7 +1038,7 @@ main:
     parent: "log_explorer"
     weight: 704
     
-  - name: "Correlate with Traces"
+  - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/?tab=java"
     parent: "log_management"
     identifier: "log_traces_correlation"
