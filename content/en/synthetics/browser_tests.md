@@ -146,6 +146,21 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
+#### Subtests
+
+You can run browser tests within other browser tests:
+
+{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true">}}
+
+Advanced options (optional) allow you to choose where you want your subtest to be played:
+* Main: Subtest will be played in your main tab, in sequence with other steps. This is the default option.
+* New: Subtest will be played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
+* Specific tab: Subtest will be played in a numbered tab which can be reused in other steps outside of the subtest.
+
+Opening your subtest in the main tab means that your subtest will be the continuation of your main test: it will use the URL from the previous step (ie. the start URL of your main test if subtest is set as a first step and the last page URL otherwise). Opening your subtest in a new tab or in a specific tab means that the test will start running from the subtest start URL.
+
+**Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will keep on being called as part of your main test, but will not be executed individually.
+
 #### Test failure and errors
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
