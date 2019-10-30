@@ -26,7 +26,7 @@ Les monitors d'analyse de trace vous permettent de visualiser l'évolution des d
 
 Pour créer un [monitor d'APM][2] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> APM*.
 
-Choisissez un monitor de **métriques d'APM** ou d'**analyse de trace** :
+Choisissez un monitor **APM Metrics** ou **Trace Analytics** :
 
 {{< tabs >}}
 {{% tab "Métriques d'APM" %}}
@@ -55,7 +55,7 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 
 * Pour `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`, `p75 latency`, `p90 latency`, ou `p99 latency`
 * Envoyez une alerte lorsque `<ALERT_THRESHOLD>` %, `<WARNING_THRESHOLD>` %
-* des valeurs sont `<NOMBRE>` déviations `above or below`, `above` ou `below` (supérieur ou inférieur, supérieure, inférieure)
+* des valeurs dévient de `<NOMBRE>` et sont `above or below`, `above` ou `below` (supérieur ou inférieur, supérieure, inférieure)
 * à la prévision durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
 
 [1]: /fr/tracing/advanced/setting_primary_tags_to_scope/#environment
@@ -68,8 +68,8 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 
 * Créez une requête de recherche en utilisant la même logique qu'une [recherche de trace][1].
 * Choisissez de surveiller un nombre de traces, une [facette][2] ou une [mesure][3] :
-    * **Surveiller un compte de trace** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de traces sur une période sélectionnée, puis le compare aux conditions de seuil.
-    * **Surveiller une facette ou une mesure** : si vous sélectionnez une facette, le monitor envoie une alerte sur le `Unique value count` (nombre de valeurs uniques) de la facette. Si vous sélectionnez une mesure, le processus appliqué est semblable à celui d'un monitor de métrique. Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
+    * **Monitor over a trace count** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de traces sur une période sélectionnée, puis le compare aux conditions de seuil.
+    * **Monitor over a facet or measure** : si vous sélectionnez une facette, le monitor envoie une alerte sur le `Unique value count` (nombre de valeurs uniques) de la facette. Si vous sélectionnez une mesure, le processus appliqué est semblable à celui d'un monitor de métrique. Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
 
 ### Sélectionner les conditions d'alerte
 

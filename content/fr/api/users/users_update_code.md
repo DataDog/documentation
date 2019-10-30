@@ -1,14 +1,19 @@
 ---
 title: Mettre à jour un utilisateur
 type: apicode
-order: 34.4
+order: 35.4
 external_redirect: /api/#mettre-a-jour-un-utilisateur
 ---
 
 
-##### Signature
-`PUT /v1/users/<ID_UTILISATEUR>`
-##### Exemple de requête
+**SIGNATURE** :
+
+`PUT /v1/user/<ID_UTILISATEUR>`
+
+**EXEMPLE DE REQUÊTE** :
+
 {{< code-snippets basename="api-user-update" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE** :
+
 {{< code-snippets basename="result.api-user-update" >}}
