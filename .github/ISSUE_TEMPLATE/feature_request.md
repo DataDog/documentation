@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for the Datadog documentation
+about: Suggest an idea for the Datadog documentation. To request a product feature, please [file a ticket with our support team](https://docs.datadoghq.com/help/)
 
 ---
 
