@@ -334,6 +334,12 @@ h5{
           color:$ddpurple;
         }
       }
+      
+    }
+  }
+  .nav-tabs-mobile {
+    .dropdown-item:hover {
+      color: white;
     }
   }
   .nav-tabs {
