@@ -70,8 +70,8 @@ Tests can be only recorded from **[Google Chrome][7]**. To record your test, dow
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
 
-### Actions
-#### Assertion
+## Actions
+### Assertion
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
@@ -89,7 +89,7 @@ The default timeout for each step is approximately 60 seconds. You can override 
 
 Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
 
-#### Navigation
+### Navigation
 
 The navigation action allow you to:
 
@@ -97,15 +97,15 @@ The navigation action allow you to:
 * Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
 * Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][9]. Choose the email you are interested in and click the link you want your browser test to click on.
 
-#### Hover
+### Hover
 
 This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
 
 After selecting the Hover action, click on the element you want to choose to create a new step.
 
-#### Variable
+### Variable
 
-##### Create a variable
+#### Create a variable
 
 {{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true" responsive="true" style="width:50%;">}}
 
@@ -122,7 +122,7 @@ To create a variable, first give it a name then define its value from:
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
 
-##### Use the variable
+#### Use the variable
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
@@ -140,13 +140,13 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
-#### Wait
+### Wait
 
 By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds. 
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
-#### Subtests
+## Subtests
 
 You can run browser tests within other browser tests:
 
@@ -154,15 +154,15 @@ You can run browser tests within other browser tests:
 
 Advanced options (optional) allow you to choose where you want your subtest to be played:
 
-* Main: Subtest will be played in your main tab, in sequence with other steps. This is the default option.
-* New: Subtest will be played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
-* Specific tab: Subtest will be played in a numbered tab which can be reused in other steps outside of the subtest.
+* **Main**: Subtest is played in your main tab, in sequence with other steps. This is the default option.
+* **New**: Subtest is played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
+* **Specific tab**: Subtest is played in a numbered tab which can be reused in other steps outside of the subtest.
 
-Opening your subtest in the main tab means that your subtest will be the continuation of your main test: it will use the URL from the previous step (ie. the start URL of your main test if subtest is set as a first step and the last page URL otherwise). Opening your subtest in a new tab or in a specific tab means that the test will start running from the subtest start URL.
+Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step (i.e. the start URL of your main test if subtest is set as a first step and the last page URL otherwise). Opening your subtest in a new tab or in a specific tab means that the test starts running from the subtest start URL.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will keep on being called as part of your main test, but will not be executed individually.
 
-#### Test failure and errors
+## Test failure and errors
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
 
