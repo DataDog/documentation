@@ -79,18 +79,14 @@ Define the request you want to be executed by Datadog:
 
 ### Alert Conditions
 
-#### An alert is triggered if any assertion fails for X minutes from any n of N locations
-
-Set alert conditions to determine the circumstances under which you want a test to send an alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+Set alert conditions to determine the circumstances under which you want a test to send a notification alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
-#### Consider location to be failed after N retries
-
-You can decide to have your test immediately re-trigger a test run in case of a failed test result. The new test will be executed from the same location. 
+**Note**: You can decide the amount of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location. 
 
 #### Assertions
 
