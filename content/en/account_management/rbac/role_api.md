@@ -48,11 +48,11 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
 {{< tabs >}}
 {{% tab "Example" %}}
 
-```sh
+{{< code-block lang="bash" filename="roles.sh" >}}
 curl -X GET "https://app.datadoghq.com/api/v2/roles" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
-```
+{{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
 
@@ -60,7 +60,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{% tab "Response" %}}
 
-```json
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
     "meta": {
         "page": {
@@ -95,7 +95,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
     ]
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -331,7 +331,7 @@ main:
             url: tracing/visualization/services_list
           - name: Page Service
             url: tracing/visualization/service
-          - name: Page Resource
+          - name: Page Ressource
             url: tracing/visualization/resource
           - name: Vue Trace
             url: tracing/visualization/trace

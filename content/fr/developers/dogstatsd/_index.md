@@ -44,7 +44,7 @@ DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version
 
 ### Agent
 
-Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modifier ce réglage, configurez l'option `dogstatsd_port` dans le [fichier de configuration principal de l'Agent][8] et redémarrez l'Agent. Vous pouvez également configurer DogStatsD afin d'utiliser [un socket de domaine Unix][9]. Pour activer un port UDP pour un serveur DogStatsD de l'Agent personnalisé :
+Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modifier ce réglage, configurez l'option `dogstatsd_port` dans le [fichier de configuration principal de l'Agent][6] et redémarrez l'Agent. Vous pouvez également configurer DogStatsD afin d'utiliser [un socket de domaine Unix][7]. Pour activer un port UDP personnalisé pour un serveur DogStatsD de l'Agent :
 
 1. Modifiez votre fichier `datadog.yaml` en supprimant la mise en commentaire des paramètres `use_dogstatsd` et `dogstatsd_port` :
 
