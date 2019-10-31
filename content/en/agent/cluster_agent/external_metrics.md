@@ -48,7 +48,7 @@ Once the Datadog Cluster Agent is up and running:
 
 1. Create the `datadog-custom-metrics-server` service, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
 
-    ```yaml
+    ```
     kind: Service
     apiVersion: v1
     metadata:
