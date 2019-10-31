@@ -21,13 +21,23 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 ## Dashboard List
 
-Search, view, and create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
+Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
 
 {{< img src="graphing/dashboards/dashboard_list2.png" alt="Dashboard List page" responsive="true" >}}
 
+### New list
+
+To create a dashboard list, click on the **New List +** button in the upper right.
+
+The list's title is automatically set with the user's first name. For example, if John Doe created a dashboard, the default title is `John's list`. To change a list's title, click on the title and the text becomes editable.
+
+To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
+
+{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
+
 ### Lists
 
-The left sidebar displays preset and shared, editable lists. You can hide this sidebar using the **Hide Controls** link.
+The left sidebar displays favorite, preset, and shared, editable lists. You can hide this sidebar using the **Hide Controls** link.
 
 #### Favorite Lists
 
@@ -68,35 +78,25 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
-### New list
+## New Dashboard
 
-To create a dashboard list, click on the **New List +** button in the upper right.
+To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose between creating a [Timeboard][3] or a [Screenboard][4].
 
-The list's title is automatically set with the user's first name. For example, if John Doe created a dashboard, the default title is `John's list`. To change a list's title, click on the title and the text becomes editable.
+### Screenboard vs Timeboard
 
-To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
+Datadog offers two types of dashboards: [Screenboards][4] and [Timeboards][5]. To more clearly understand the differences between the two, consider the following:
 
-{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
-
-## Create a Dashboard
-
-To create a Dashboard, click on the *New Dashboard* button in the upper right corner of the page. Datadog will then ask you to choose between creating a [Timeboard][3] or a [Screenboard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
-
-### What is the difference between a Screenboard and a Timeboard?
-
-You have the capability to create and customize two types of Dashboards: [Screenboards][4] and [Timeboards][5]. To more clearly understand the differences between the two, consider the following:
-
-|                                | Timeboards                       | Screenboards                                      |
-|--------------------------------|----------------------------------|---------------------------------------------------|
-| Time Scope                     | All graphs share same time scope | All graphs can have individual time scope         |
-| Layout                         | Graphs appear in a fixed grid    | Graphs are placed anywhere you like on the canvas |
-| Can Share Graphs Individually  | Yes                              | No                                                |
-| Can Share the Entire Dashboard | No                               | Yes                                               |
-| Sharing can be Read-Only       | Yes                              | Yes                                               |
+|                            | Timeboards                            | Screenboards                              |
+|----------------------------|---------------------------------------|-------------------------------------------|
+| Time Scope                 | All graphs share the same time scope. | Graphs can have individual time scopes.   |
+| Layout                     | Graphs are displayed in a fixed grid. | Graphs are placed anywhere on the canvas. |
+| Share graphs individually  | Yes                                   | No                                        |
+| Share the entire dashboard | No                                    | Yes                                       |
+| Sharing can be read-only   | Yes                                   | Yes                                       |
 
 ### Copy / import / export
 
-You can copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+From an individual dashboard, you can copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -108,7 +108,7 @@ You can copy, import, or export a dashboard's JSON using the settings cog (upper
 
 ### Suggested dashboards and active users
 
-If you’re not sure where to look next, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
 
 {{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" responsive="true">}}
 
