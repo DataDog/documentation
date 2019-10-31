@@ -4,7 +4,8 @@
     {
       "name": "i-deadbeef",
       "up": true,
-      "is_muted": false,
+      'is_muted': true,
+      'mute_timeout': 1560010000,
       "last_reported_time": 1560000000,
       "apps": [
         "agent"
