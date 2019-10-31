@@ -53,7 +53,7 @@ To start collecting Analyzed Spans, [enable App Analytics for your services][5].
 
 ### Complete traces
 
-{{< img src="tracing/advanced/search/complete_trace.png" alt="Trace list" responsive="true">}}
+{{< img src="tracing/app_analytics/search/complete_trace.png" alt="Trace list" responsive="true">}}
 
 If checked, Analyzed Spans listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
 
@@ -74,7 +74,7 @@ There are two types of *terms*:
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
 | **Operator** | **Description **                                                                                       | **Example **                 |
-|:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
+| :----------- | :----------------------------------------------------------------------------------------------------- | :--------------------------- |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
@@ -92,7 +92,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 Your traces inherit tags from [hosts][8] and [integrations][9] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
-|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
+| :------------------------------------------------------------- | :-------------------------------------------------------------------------- |
 | `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
@@ -122,7 +122,7 @@ It is also possible to search for numerical attributes within a specific range. 
 
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="tracing/advanced/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
 
 ### Escaping of special characters
 
@@ -140,7 +140,7 @@ If an attribute is called `user.first name`, perform a search on this attribute 
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="tracing/advanced/search/saved_search.png" alt="Saved Search" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search" responsive="true" style="width:80%;">}}
 
 To delete a saved search, click on the bin icon under the Trace search drop-down.
 
@@ -148,41 +148,41 @@ To delete a saved search, click on the bin icon under the Trace search drop-down
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="tracing/advanced/search/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
+{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
 
 ## Trace Stream
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
 Sort the list by clicking the **date** column header.
 
-{{< img src="tracing/advanced/search/trace_list.png" alt="Trace list" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list.png" alt="Trace list" responsive="true" style="width:80%;">}}
 
 ### Displaying a full Trace
 
 Click on any trace to see more details about it:
 
-{{< img src="tracing/advanced/search/trace_in_tracestream.png" alt="Trace in tracestream" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" responsive="true" style="width:80%;">}}
 
 ### Columns
 
 To add more Trace details to the list, click the **Columns** button and select any Facets you want to see:
 
-{{< img src="tracing/advanced/search/trace_list_with_column.png" alt="Trace list with columns" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" responsive="true" style="width:80%;">}}
 
 ### Multi-line display
 
-{{< img src="tracing/advanced/search/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
 
 Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
 
 * With one line displayed:
-{{< img src="tracing/advanced/search/1_multi_line.png" alt="1 line Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" responsive="true" style="width:80%;">}}
 
 * With three lines displayed:
-{{< img src="tracing/advanced/search/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" style="width:80%;">}}
 
 * With ten lines displayed:
-{{< img src="tracing/advanced/search/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" style="width:80%;">}}
 
 ## Facets
 
@@ -190,13 +190,13 @@ A Facet displays all the distinct values of an attribute or a tag as well as pro
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
-{{< img src="tracing/advanced/search/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
-{{< img src="tracing/advanced/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
 Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][11].
 
@@ -204,7 +204,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/advanced/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
