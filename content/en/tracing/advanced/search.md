@@ -29,34 +29,6 @@ further_reading:
   text: "Analytics on your APM data at infinite cardinality"
 ---
 
-## Overview
-
-Use [App Analytics][1] to filter application performance metrics and [Analyzed Spans](#apm-events) by user-defined tags. It allows deep exploration of the web requests flowing through your service.
-
-App Analytics can be enabled per APM [service][2] and per host. A service on which it is enabled exposes all its Analyzed Spans to Datadog.
-
-Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
-
-In the Trace Search view you can:
-
-* [Interact with the Time range](#time-range)
-* [Display lists of Traces](#trace-stream)
-* [Use Facets to filter your Trace Stream](#facets)
-* [Enter search queries](#search-bar)
-
-## Analyzed Spans
-
-When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][3].
-An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][4].
-
-To start collecting Analyzed Spans, [enable App Analytics for your services][5].
-
-### Complete traces
-
-{{< img src="tracing/advanced/search/complete_trace.png" alt="Trace list" responsive="true">}}
-
-If checked, Analyzed Spans listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
-
 ## Search bar
 
 All search parameters are contained in the url of the page, so it is very simple to share your view.
@@ -89,7 +61,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 ### Tags search
 
-Your traces inherit tags from [hosts][8] and [integrations][9] that generate them. They can be used in the search and as facets as well:
+Your traces inherit tags from [hosts][1] and [integrations][2] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -97,7 +69,7 @@ Your traces inherit tags from [hosts][8] and [integrations][9] that generate the
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][10] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][3] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -198,7 +170,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/advanced/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][11].
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][4].
 
 ### Facet Panel
 
@@ -211,14 +183,7 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/visualization/#trace-search-analytics
-[2]: /tracing/visualization/#services
-[3]: /tracing/advanced/adding_metadata_to_spans/?tab=java
-[4]: /tracing/app_analytics/?tab=java#configure-by-integration
-[5]: /tracing/app_analytics/?tab=php#automatic-configuration
-[6]: /tracing/visualization/#trace
-[7]: /tracing/visualization/#spans
-[8]: /graphing/infrastructure
-[9]: /integrations
-[10]: /tagging/#tags-best-practices
-[11]: /tracing/app_analytics/analytics
+[1]: /graphing/infrastructure
+[2]: /integrations
+[3]: /tagging/#tags-best-practices
+[4]: /tracing/app_analytics/analytics

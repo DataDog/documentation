@@ -28,9 +28,33 @@ further_reading:
   text: "Global search of all your traces with tags"
 ---
 
-Switch between the Trace search and the App Analytics modes by clicking on the *Trace Mode* button:
+## Overview
 
-{{< img src="tracing/app_analytics/analytics/switch_analytics.png" alt="Switch analytics" responsive="true" style="width:40%;">}}
+Use [App Analytics][1] to filter application performance metrics and [Analyzed Spans](#apm-events) by user-defined tags. It allows deep exploration of the web requests flowing through your service.
+
+App Analytics can be enabled per APM [service][2] and per host. A service on which it is enabled exposes all its Analyzed Spans to Datadog.
+
+Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
+
+In the Trace Search view you can:
+
+* [Interact with the Time range](#time-range)
+* [Display lists of Traces](#trace-stream)
+* [Use Facets to filter your Trace Stream](#facets)
+* [Enter search queries](#search-bar)
+
+## Analyzed Spans
+
+When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][3].
+An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][4].
+
+To start collecting Analyzed Spans, [enable App Analytics for your services][5].
+
+### Complete traces
+
+{{< img src="tracing/advanced/search/complete_trace.png" alt="Trace list" responsive="true">}}
+
+If checked, Analyzed Spans listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
 
 ## App Analytics query
 

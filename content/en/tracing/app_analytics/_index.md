@@ -10,7 +10,7 @@ aliases:
 
 [App Analytics][1], formerly known as Trace Search & Analytics, is used to filter Analyzed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
-* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
+* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
 **Note**: to use Trace Search, you must be using Agent v6.7+.
 
@@ -476,7 +476,7 @@ An [Analyzed Span][2] represents the top [span][3] for a [service], including it
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event
 [3]: /tracing/visualization/#spans
 [4]: https://app.datadoghq.com/apm/settings
