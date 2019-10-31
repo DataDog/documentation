@@ -152,15 +152,15 @@ You can run browser tests within other browser tests:
 
 {{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true" width="40%" >}}
 
-Advanced options (optional) allow you to choose where you want your subtest to be played:
+Advanced options also allow you to choose where you want your subtest to be played:
 
-* **Main**: Subtest is played in your main tab, in sequence with other steps. This is the default option.
-* **New**: Subtest is played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
-* **Specific tab**: Subtest is played in a numbered tab which can be reused by other subtests.
+* **Main** (default): Subtest is played in your main tab, in sequence with other steps.
+* **New**: Subtest is played in a new tab, which is closed at the end of the subtest i.e. the tab cannot be reused.
+* **Specific tab**: Subtest is played in a numbered tab, which can be reused by other subtests.
 
-Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab or in a specific tab means that the test starts running from the subtest start URL.
+Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
 
-**Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will keep on being called as part of your main test, but will not be executed individually.
+**Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
 ## Test failure and errors
 
