@@ -14,19 +14,19 @@ Les clés d'API sont uniques à votre organisation. Une clé d'API est requise p
 
 Les clés d'application sont utilisées conjointement avec la clé d'API de votre organisation afin de vous donner un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et doivent être nommées. La clé d'application est utilisée pour loguer toutes les requêtes effectuées via l'API.
 
-## Jetons client
+## Tokens client
 
-Pour gérer vos jetons client, accédez à la section `Client Tokens` de la [page de configuration des API Datadog][1], comme illustré ici :
+Pour gérer vos tokens client, accédez à la section `Client Tokens` de la [page de configuration des API Datadog][1], comme illustré ici :
 
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Jetons client" responsive="true" >}}
+{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Tokens client" responsive="true" >}}
 
-Les jetons client sont uniques à votre organisation. Un jeton client est requis par le [collecteur de log du navigateur Web][2] pour envoyer des logs à Datadog, et par la fonctionnalité [Real User Monitoring][3] pour envoyer des événements et des logs à Datadog.
+Les tokens client sont uniques à votre organisation. Un token client est requis par le [collecteur de log du navigateur Web][2] pour envoyer des logs à Datadog, et par la fonctionnalité [Real User Monitoring][3] pour envoyer des événements et des logs à Datadog.
 
-Pour des raisons de sécurité, vous ne pouvez pas utiliser les clés d'API pour envoyer des données à un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un jeton client.
+Pour des raisons de sécurité, vous ne pouvez pas utiliser les clés d'API pour envoyer des données à un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un token client.
 
-## Ajouter une clé ou un jeton
+## Ajouter une clé ou un token
 
-Pour ajouter une clé d'API, une clé d'application ou un jeton client Datadog, accédez à [Integration -> APIs][4], entrez un nom pour votre clé ou jeton, et cliquez sur **Create API key**, **Create Application Key** ou **Create Client Token**.
+Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][4], entrez un nom pour votre clé ou token, et cliquez sur **Create API key**, **Create Application Key** ou **Create Client Token**.
 
 **Remarque** :
 
@@ -34,9 +34,9 @@ Pour ajouter une clé d'API, une clé d'application ou un jeton client Datadog, 
 * Les noms de clé doivent être uniques au sein de votre organisation.
 * Les noms de clé d'application ne peuvent pas être vides.
 
-## Supprimer une clé ou un jeton
+## Supprimer une clé ou un token
 
-Pour supprimer une clé d'API, une clé d'application ou un jeton client Datadog, accédez à [Integration -> APIs][4] et cliquez sur le bouton **Revoke** correspondant à la clé ou au jeton que vous souhaitez supprimer :
+Pour supprimer une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][4] et cliquez sur le bouton **Revoke** correspondant à la clé ou au token que vous souhaitez supprimer :
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Clés d'application" responsive="true" >}}
 

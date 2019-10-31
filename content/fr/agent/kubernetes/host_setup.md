@@ -1,5 +1,5 @@
 ---
-title: Configuration de host avec Kubernetes
+title: Exécuter l'Agent sur un host avec Kubernetes
 kind: documentation
 further_reading:
   - link: agent/autodiscovery
@@ -7,7 +7,7 @@ further_reading:
     text: Autodiscovery avec l'Agent Docker
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
   - link: agent/kubernetes/integrations
     tag: documentation
     text: Intégrations personnalisées
@@ -62,7 +62,7 @@ Utilisez [Autodiscovery avec les annotations de pod][8] pour configurer la colle
 ## Pour aller plus loin
 Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, consultez la série d'[articles de blog de Datadog][6].
 
-[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [2]: /fr/agent
 [3]: /fr/agent/autodiscovery
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
