@@ -1,4 +1,5 @@
 module.exports = {
+    "site": "docs",
     "production": {
         serverUrl: "https://docs.datadoghq.com/",
         branches: ["master"],
