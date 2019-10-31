@@ -156,9 +156,9 @@ Advanced options (optional) allow you to choose where you want your subtest to b
 
 * **Main**: Subtest is played in your main tab, in sequence with other steps. This is the default option.
 * **New**: Subtest is played in a new tab, which will be closed at the end of the subtest (and thus cannot be re-used).
-* **Specific tab**: Subtest is played in a numbered tab which can be reused in other steps outside of the subtest.
+* **Specific tab**: Subtest is played in a numbered tab which can be reused by other subtests.
 
-Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step (i.e. the start URL of your main test if subtest is set as a first step and the last page URL otherwise). Opening your subtest in a new tab or in a specific tab means that the test starts running from the subtest start URL.
+Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab or in a specific tab means that the test starts running from the subtest start URL.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will keep on being called as part of your main test, but will not be executed individually.
 
