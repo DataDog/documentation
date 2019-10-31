@@ -79,18 +79,18 @@ import (
     "time"
 )
 
-func main() {ÿ
+func main() {
 
     dogstatsd_client, err: = statsd.New("127.0.0.1:8125")
 
-    if err != nil {ÿ
+    if err != nil {
         log.Fatal(err)
     }
 
     dogstatsd_client.ServiceCheck("application.service_check", 0,
-        time.Time, []string{}, []string{ÿ
+        time.Time, []string{}, []string{
             "Application is OK"
-        }, []string{ÿ
+        }, []string{
             "env:dev"
         })
 }
@@ -104,9 +104,9 @@ import com.timgroup.statsd.ServiceCheck;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 
-public class DogStatsdClient {ÿ
+public class DogStatsdClient {
 
-    public static void main(String[] args) throws Exception {ÿ
+    public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
 
@@ -127,11 +127,11 @@ public class DogStatsdClient {ÿ
 using StatsdClient;
 
 public class DogStatsdClient
-{ÿ
+{
     public static void Main()
-    {ÿ
+    {
         var dogstatsdConfig = new StatsdConfig
-        {ÿ
+        {
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
