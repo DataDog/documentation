@@ -1041,10 +1041,10 @@ main:
   - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/?tab=java"
     parent: "log_management"
-    identifier: "logs_traces_correlation"
+    identifier: "logs_traces_connection"
     weight: 8
     
-  - name: "Connect Logs and Metrics"
+  - name: "Correlate Logs with Metrics"
     url: "graphing/dashboards/timeboard/#correlation-between-logs-and-metrics"
     parent: "log_management"
     identifier: "logs_metrics_correlation"
