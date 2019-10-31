@@ -17,7 +17,7 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 Find below the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
+| ---------- | --------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
 | `name`     | string          | yes      | -             | The name of the service check.                                                                                |
 | `status`   | int             | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
@@ -39,7 +39,7 @@ Here is an example of a dummy Agent check sending only one service check periodi
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
 4. Within this folder, create a custom check file named `service_check_example.py` with the content below:
 
-    ```python
+    {{< code-block lang="python" filename="service_check_example.py" >}}
     from datadog_checks.base import AgentCheck
 
     __version__ = "1.0.0"
@@ -47,7 +47,7 @@ Here is an example of a dummy Agent check sending only one service check periodi
     class MyClass(AgentCheck):
       def check(self, instance):
           self.service_check('example_service_check', 0, message='Example application is up and running.')
-    ```
+    {{< /code-block >}}
 
 5. [Restart the Agent][3]
 

@@ -162,7 +162,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
 
-    ```python
+    {{< code-block lang="python" filename="metric_example.py" >}}
     import random
 
     from datadog_checks.base import AgentCheck
@@ -212,7 +212,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
                 random.randint(0, 10),
                 tags="metric_submission_type:histogram",
             )
-    ```
+    {{< /code-block >}}
 
 4. [Restart the Agent][4].
 

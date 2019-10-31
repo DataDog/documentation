@@ -32,7 +32,7 @@ self.event(
 The following keys and data types are available in the event dictionary:
 
 | Key                | Type            | Required | Description                                                   |
-|--------------------|-----------------|----------|---------------------------------------------------------------|
+| ------------------ | --------------- | -------- | ------------------------------------------------------------- |
 | `timestamp`        | Integer         | Yes      | The epoch timestamp for the event                             |
 | `event_type`       | String          | Yes      | The event name                                                |
 | `msg_title`        | String          | Yes      | The title of the event                                        |
@@ -60,7 +60,7 @@ This is an example of using a custom Agent check to send one event periodically.
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
 2. In this folder, create a custom check file named `event_example.py` with the following content:
 
-    ```python
+    {{< code-block lang="python" filename="event_example.py" >}}
     from datadog_checks.base import AgentCheck
 
     __version__ = "1.0.0"
@@ -68,7 +68,7 @@ This is an example of using a custom Agent check to send one event periodically.
     class MyClass(AgentCheck):
         def check(self, instance):
             self.event(
-                {
+                {ÿ
                     "timestamp": time.time(),
                     "event_type": "Error",
                     "msg_title": "Example Event",
@@ -76,7 +76,7 @@ This is an example of using a custom Agent check to send one event periodically.
                     "alert_type": "error",
                 }
             )
-    ```
+    {{< /code-block >}}
 
 3. [Restart the Agent][4].
 

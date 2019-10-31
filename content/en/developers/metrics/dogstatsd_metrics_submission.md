@@ -26,7 +26,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 After [installing DogStatsD][1], the functions below are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
 
 | Parameter        | Type            | Required | Description                                                                                                                                                                                    |
-|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<METRIC_NAME>`  | String          | Yes      | Name of the metric to submit.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                                                             |
 | `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
@@ -35,7 +35,7 @@ After [installing DogStatsD][1], the functions below are available for submittin
 ### COUNT
 
 | Method                                                        | Description                                               | Storage type                                                                                                                                            |
-|---------------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
 | `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
 | `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
@@ -51,11 +51,11 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="python" filename="filename.py" >}}
+{{< code-block lang="python" filename="count_metric.py" >}}
 from datadog import initialize, statsd
 import time
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -73,7 +73,7 @@ while(1):
 
 Run the following Ruby code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="ruby" filename="filename.rb" >}}
+{{< code-block lang="ruby" filename="count_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -91,7 +91,7 @@ end
 
 Run the following Go code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="go" filename="filename.go" >}}
+{{< code-block lang="go" filename="count_metric.go" >}}
 package main
 
 import (
@@ -100,12 +100,12 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
-    for {
+    for {ÿ
 
         statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
         statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -120,17 +120,17 @@ func main() {
 
 Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="java" filename="filename.java" >}}
+{{< code-block lang="java" filename="count_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
             Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
             Statsd.count("example_metric.count", 2, ["environment:dev"]);
@@ -145,16 +145,16 @@ public class DogStatsdClient {
 
 Run the following .NET code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="csharp" filename="filename.cs" >}}
+{{< code-block lang="csharp" filename="count_metric.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -164,7 +164,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
             DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
             DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
@@ -179,7 +179,7 @@ public class DogStatsdClient
 
 Run the following PHP code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< code-block lang="php" filename="filename.php" >}}
+{{< code-block lang="php" filename="count_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -192,7 +192,7 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->increment('example_metric.increment', array('environment'=>'dev'));
     $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
@@ -213,7 +213,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 ### GAUGE
 
 | Method                                                        | Datadog Storage type                                                                                                                                      |
-|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period. |
 
 #### Code examples
@@ -225,11 +225,11 @@ Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about th
 
 Run the following Python code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="gauge_metric.py" >}}
 from datadog import initialize, statsd
 import time
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -242,14 +242,14 @@ while(1):
   i += 1
   statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="gauge_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -261,14 +261,14 @@ while true do
     statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="gauge_metric.go" >}}
 package main
 
 import (
@@ -277,58 +277,58 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
     var i float64
-    for {
+    for {ÿ
         i += 1
         statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
         time.Sleep(10)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Run the following Java code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```java
+{{< code-block lang="java" filename="gauge_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordGaugeValue("example_metric.gauge", i, ["environment:dev"]);
             Thread.sleep(10000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="gauge_metric.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -338,20 +338,20 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(100000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="gauge_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -365,12 +365,12 @@ $statsd = new DogStatsd(
   );
 
 $i = 0;
-while (TRUE) {
+while (TRUE) {ÿ
     $i++;
     $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -382,7 +382,7 @@ After running the code above, your metric data is available to graph in Datadog:
 ### SET
 
 | Method                                                      | Datadog Storage type                                                                                                                                           |
-|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period. |
 
 #### Code examples
@@ -394,12 +394,12 @@ Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the 
 
 Run the following Python code to submit a DogStatsD `SET` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="set_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -410,14 +410,14 @@ while(1):
   i += 1
   statsd.set('example_metric.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `SET` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="set_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -428,14 +428,14 @@ while true do
     statsd.set('example_metric.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `SET` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="set_metric.go" >}}
 package main
 
 import (
@@ -446,35 +446,35 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
     var i float64
-    for {
+    for {ÿ
         i += 1
         statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
         time.Sleep(rand.Intn(10))
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `SET` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="set_metric.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -484,20 +484,20 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(random.Next(100000));
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `SET` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="set_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -512,12 +512,12 @@ $statsd = new DogStatsd(
 
 $i = 0;
 
-while (TRUE) {
+while (TRUE) {ÿ
     $i++;
     $statsd->set('example_metric.set', i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -529,7 +529,7 @@ After running the code above, your metrics data is available to graph in Datadog
 ### HISTOGRAM
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
-|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
 
 #### Configuration
@@ -546,12 +546,12 @@ The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-
 
 Run the following Python code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="histogram_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -561,14 +561,14 @@ initialize(**options)
 while(1):
   statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="histogram_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -577,14 +577,14 @@ while true do
     statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="histogram_metric.go" >}}
 package main
 
 import (
@@ -594,57 +594,57 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
 
-    for {
+    for {ÿ
         statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
         time.Sleep(2)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Run the following Java code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```java
+{{< code-block lang="java" filename="histogram_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), ["environment:dev"]);
             Thread.sleep(2000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="histogram_metric.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -654,20 +654,20 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="histogram_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -680,11 +680,11 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -692,7 +692,7 @@ while (TRUE) {
 The above instrumentation produces the following metrics:
 
 | Metric                                  | Description                             |
-|-----------------------------------------|-----------------------------------------|
+| --------------------------------------- | --------------------------------------- |
 | `example_metric.histogram.count`        | Number of times this metric was sampled |
 | `example_metric.histogram.avg`          | Average time of the sampled values      |
 | `example_metric.histogram.median`       | Median sampled value                    |
@@ -708,7 +708,7 @@ After running the code above, your metrics data is available to graph in Datadog
 `TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measure timing data only: for example, the amount of time a section of code takes to execute.
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
-|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
 
 ##### Configuration
@@ -724,12 +724,12 @@ Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn mo
 
 In Python, timers are created with a decorator:
 
-```python
+{{< code-block lang="python" filename="timers.py" >}}
 from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -742,11 +742,11 @@ def my_function():
 
 while(1):
   my_function()
-```
+{{< /code-block >}}
 
 or with a context manager:
 
-```python
+{{< code-block lang="python" filename="context_manager.py" >}}
 from datadog import statsd
 import time
 import random
@@ -763,7 +763,7 @@ def my_function():
 
 while(1):
   my_function()
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -771,7 +771,7 @@ while(1):
 As DogStatsD receives the timer metric data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
 | Metric                              | Description                             |
-|-------------------------------------|-----------------------------------------|
+| ----------------------------------- | --------------------------------------- |
 | `example_metric.timer.count`        | Number of times this metric was sampled |
 | `example_metric.timer.avg`          | Average time of the sampled values      |
 | `example_metric.timer.median`       | Median sampled value                    |
@@ -787,7 +787,7 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 Distribution metrics are in BETA. [Contact Datadog support][9] to enable the feature for your account.
 
 | Method                                                | Datadog Storage type                                                                                          |
-|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
 
 #### Code examples
@@ -799,12 +799,12 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 
 Run the following Python code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="distribution_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -814,14 +814,14 @@ initialize(**options)
 while(1):
   statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="distribution_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -830,14 +830,14 @@ while true do
     statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="distribution_metric.go" >}}
 package main
 
 import (
@@ -847,57 +847,57 @@ import (
     "github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
     statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
+    if err != nil {ÿ
         log.Fatal(err)
     }
 
-    for {
+    for {ÿ
         statsd.Distribution("example_metric.distribution", rand.Intn(20), []string{"environment:dev"}, 1)
         time.Sleep(2)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Run the following Java code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```java
+{{< code-block lang="java" filename="distribution_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), ["environment:dev"]);
             Thread.sleep(2000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="distribution_metric.cs" >}}
 using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -907,20 +907,20 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="distribution_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -933,11 +933,11 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -955,7 +955,7 @@ A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` 
 Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
 | Metric Type | Sample rate correction                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 | `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
 | `SET`       | No correction. The value received is kept as is.                                                                                                                               |
