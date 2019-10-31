@@ -162,9 +162,9 @@ Some integrations allow you to optionally limit metrics using tags.
 
 The [AWS integration tile][1] has the tag filters `to hosts with tag` and `to Lambdas with tag`.
 
-These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that define a filter which is used for collecting your EC2 or Lambda resources. These `<KEY>:<VALUE>` pairs can be used to both whitelist and blacklist tags. To add a blacklisted tag, include a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.
+These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting your EC2 or Lambda resources. You can use these `<KEY>:<VALUE>` to both whitelist and blacklist tags. To add a blacklisted tag, include a `!` before the tag key. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters).
 
-The filter includes resources where any whitelisted tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
+The filters include resources where any whitelisted tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
 
 ```
 datadog:monitored,env:production
@@ -186,7 +186,7 @@ Read more about AWS tagging in the [EC2][2] and [Lambda][3] documentation.
 
 The [Azure integration tile][1] has the tag filter `Optionally filter to VMs with tag`.
 
-This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter which is used for collecting metrics from Azure VMs. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored.
+This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from Azure VMs. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored.
 
 VMs matching a given tag can also be excluded by adding `!` before the tag, for example:
 
@@ -200,9 +200,9 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 The [Google Cloud integration tile][1] has the tag filter `to hosts with tag`.
 
-This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VALUE>`) that defines a filter which is used for collecting metrics from GCP. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined labels are imported into Datadog. The rest are ignored.
+This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from GCP. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only hosts that match one of the defined labels are imported into Datadog. The rest are ignored.
 
-Hosts matching a given label can also be excluded by adding `!` before the tag, for example:
+You can exclude hosts matching a given label by adding `!` before the tag, for example:
 
 ```
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
