@@ -68,7 +68,7 @@ This is an example of using a custom Agent check to send one event periodically.
     class MyClass(AgentCheck):
         def check(self, instance):
             self.event(
-                {ÿ
+                {
                     "timestamp": time.time(),
                     "event_type": "Error",
                     "msg_title": "Example Event",
