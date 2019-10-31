@@ -146,7 +146,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
-## Subtests
+### Subtests
 
 You can run browser tests within other browser tests:
 
