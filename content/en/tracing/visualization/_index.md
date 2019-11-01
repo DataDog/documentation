@@ -101,8 +101,6 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 App Analytics is used to filter [Analyzed Spans](#apm-event) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][16].
 
-{{< vimeo 278748711 >}}
-
 ## Analyzed Span
 
 Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics by the [tags](#span-tags) included on the span. After enabling App Analytics, the tracing client analyzes an entry-point span for web services by default, with the ability to [configure additional services][17] in your application. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans. If you set `DD_TRACE_ANALYTICS_ENABLED=true` the `web-store` service analyzes all `rack.request` spans and makes them available in App Analytics. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
