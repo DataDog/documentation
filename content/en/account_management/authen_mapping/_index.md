@@ -30,7 +30,7 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 
 | Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
-| `POST`  | `/v1/authn_mappings`  | JSON       |
+| `POST`  | `/v2/authn_mappings`  | JSON       |
 
 ##### ARGUMENTS
 
@@ -45,10 +45,10 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 {{% tab "Example" %}}
 
 {{< code-block lang="bash" filename="roles.sh" >}}
-{ÿ
+{ï¿½
   "type": "string",
-  "data": {ÿ
-    "attributes": {ÿ
+  "data": {ï¿½
+    "attributes": {ï¿½
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "attribute_key": "string",
       "attribute_key": "string"
@@ -64,9 +64,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{ÿ
-  "data": {ÿ
-    "attributes": {ÿ
+{ï¿½
+  "data": {ï¿½
+    "attributes": {ï¿½
       "created_at": "string",
       "created_by": "string",
       "uuid": "10000000-abcd-efgh-ijkl-000000000000",
@@ -75,15 +75,15 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     },
     "type": "string",
     "id": "string",
-    "relationships": {ÿ
-      "saml_assertion_attributes": {ÿ
-        "data": {ÿ
+    "relationships": {ï¿½
+      "saml_assertion_attributes": {ï¿½
+        "data": {ï¿½
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {ÿ
-        "data": {ÿ
+      "roles": {ï¿½
+        "data": {ï¿½
           "id": "string",
           "type": "roles"
         }
@@ -91,19 +91,19 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   },
   "included": [
-    {ÿ
-      "data": {ÿ
+    {ï¿½
+      "data": {ï¿½
         "id": "string",
         "type": "roles",
-        "attributes": {ÿ
+        "attributes": {ï¿½
           "created_at": "string",
           "modified_at": "string",
           "uuid": "00000000-0000-0000-0000-000000000000",
           "name": "string"
         },
-        "relationships": {ÿ
+        "relationships": {ï¿½
           "data": [
-            {ÿ
+            {ï¿½
               "id": "string",
               "type": "permissions"
             }
@@ -111,11 +111,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
       }
     },
-    {ÿ
-      "data": {ÿ
+    {ï¿½
+      "data": {ï¿½
         "id": 0,
         "type": "authn_mappings",
-        "attributes": {ÿ
+        "attributes": {ï¿½
           "id": 6,
           "attribute_key": "string",
           "attribute_value": "string"
@@ -135,7 +135,7 @@ Returns a list of AuthN Mappings
 
 | Method | Endpoint path            | Required payload |
 |--------|-------------------------|------------------|
-| `GET`  | `/v1/authn_mappings` | optional queries       |
+| `GET`  | `/v2/authn_mappings` | optional queries       |
 
 ##### ARGUMENTS
 
@@ -152,7 +152,7 @@ Returns a list of AuthN Mappings
 {{% tab "Example" %}}
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v1/authn_mappings" \
+curl -X GET "https://app.datadoghq.com/api/v2/authn_mappings" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
@@ -255,7 +255,7 @@ Returns a specific AuthN Mapping by UUID.
 {{% tab "Example" %}}
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v1/authn_mappings/{UUID}" \
+curl -X GET "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
@@ -339,7 +339,7 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 | Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
-| `PATCH`  | `/v1/authn_mappings/{UUID}`  | JSON       |
+| `PATCH`  | `/v2/authn_mappings/{UUID}`  | JSON       |
 
 ##### ARGUMENTS
 
@@ -355,7 +355,7 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 ```sh
 curl -X PATCH \
-         "https://app.datadoghq.com/api/v1/authn_mappings/{UUID}" \
+         "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
@@ -450,7 +450,7 @@ Deletes a specific AuthN Mapping.
 
 | Method   | Endpoint path            | Required payload |
 |----------|-------------------------|------------------|
-| `DELETE` | `/v1/authn_mappings/{UUID}` | URL parameter |
+| `DELETE` | `/v2/authn_mappings/{UUID}` | URL parameter |
 
 ##### ARGUMENTS
 
@@ -461,7 +461,7 @@ Deletes a specific AuthN Mapping.
 {{% tab "Example" %}}
 
 ```sh
-curl -X DELETE "https://app.datadoghq.com/api/v1/authn_mappings/{UUID}" \
+curl -X DELETE "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
