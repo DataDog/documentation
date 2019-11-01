@@ -36,7 +36,7 @@ App Analytics can be enabled per APM [service][2] and per host. A service on whi
 
 Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
-In the Trace Search view you can:
+In the App Analytics view you can:
 
 * [Interact with the Time range](#time-range)
 * [Display lists of Traces](#trace-stream)
@@ -51,8 +51,6 @@ An Analyzed Span is represented by a single span with attached metadata for the 
 To start collecting Analyzed Spans, [enable App Analytics for your services][5].
 
 ### Complete traces
-
-{{< img src="tracing/advanced/search/complete_trace.png" alt="Trace list" responsive="true">}}
 
 If checked, Analyzed Spans listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
 
