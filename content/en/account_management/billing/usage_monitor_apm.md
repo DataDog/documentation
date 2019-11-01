@@ -33,8 +33,6 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 
 To get alerts in case a code deployment causes a spike in Analyzed Spans generated, set up [App Analytics monitors][5] on Analyzed Spans. Get notified at any moment if the Analyzed Span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 
-{{< img src="tracing/faq/apm_events_monitor.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
-
 1. Go to [App Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
