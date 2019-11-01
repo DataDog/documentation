@@ -335,9 +335,17 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add [tags][1] to all the generated [spans][2]. See the [.NET configuration][3]
+section for details on how environment variables are set.
 
-[1]: /help
+```ini
+DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
+```
+
+[1]: /tracing/visualization/#span-tags
+[2]: /tracing/visualization/#spans
+[3]: /tracing/setup/dotnet/#configuration
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
