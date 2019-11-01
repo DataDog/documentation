@@ -38,7 +38,7 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 5. Define the Analyzed Span volume rate you would like to set as a warning or error.
 6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
 
-Learn more about Span filtering and usage control [here][7].
+Learn more about Analyzed Span filtering and usage control [here][7].
 
 
 [1]: https://www.datadoghq.com/pricing
