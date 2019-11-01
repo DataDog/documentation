@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics to monitor the health of your infrastructure.
+A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
 ## Dashboard List
 
@@ -29,7 +29,7 @@ Search, view, or create dashboards and lists on the [Dashboard List][1] page. By
 
 To create a dashboard list, click on the **New List +** button in the upper right.
 
-The list's title is automatically set with the user's first name. For example, if John Doe created a dashboard, the default title is `John's list`. To change a list's title, click on the title and the text becomes editable.
+The list's title is automatically set with the user's first name. For example, if John Doe creates a dashboard, the default title is `John's list`. To change a list's title, click on the title for the text to become editable.
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
@@ -41,7 +41,7 @@ The left sidebar displays favorite, preset, and shared, editable lists. You can 
 
 #### Favorite Lists
 
-Favorite lists are dashboard lists starred by the current user logged into Datadog. **Note**: If you have no starred lists, the *Favorite Lists* category is hidden.
+Favorite lists are dashboard lists starred by the current logged in user. **Note**: If you have no starred lists, the *Favorite Lists* category is hidden.
 
 #### Preset Lists
 
@@ -52,8 +52,8 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account.   |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.                |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.    |
-| Created By You           | Custom dashboards created by the user currently logged into Datadog.        |
-| Frequently Viewed By You | All dashboards frequently viewed by the user currently logged into Datadog. |
+| Created By You           | Custom dashboards created by the user currently logged in user.       |
+| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user. |
 
 #### Shared, Editable Lists
 
@@ -65,7 +65,7 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| Star       | All dashboards starred by the user currently logged into Datadog.                        |
+| Star       | All dashboards starred by the currently logged in user.                        |
 | Icon       | An icon indicating the type of dashboard (timeboard or screenboard).                     |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Modified   | The last modified date of a custom dashboard.                                            |
@@ -74,21 +74,21 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 #### Popularity
 
-An organization's most popular dashboard displays five popularity bars. All other Dashboards are relative to this dashboard. Popularity is based on the amount of traffic a dashboard receives. Popularity is updated daily, so new dashboards have zero popularity bars for up to 24 hours.
+An organization's most popular dashboard displays five popularity bars. All other dashboards are relative to this dashboard. Popularity is based on the amount of traffic a dashboard receives. Popularity is updated daily; new dashboards have zero popularity bars for up to 24 hours.
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
 ## New Dashboard
 
-To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose between creating a [Timeboard][3] or a [Screenboard][4].
+To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose between creating a [timeboard][3] or a [screenboard][4].
 
-### Screenboard vs Timeboard
+### Screenboard vs. timeboard
 
-Datadog offers two types of dashboards: [Screenboards][4] and [Timeboards][5]. To more clearly understand the differences between the two, consider the following:
+Datadog offers two types of dashboards: [screenboards][4] and [timeboards][5]. To more clearly understand the differences between the two, consider the following:
 
 |                            | Timeboards                            | Screenboards                              |
 |----------------------------|---------------------------------------|-------------------------------------------|
-| Time Scope                 | All graphs share the same time scope. | Graphs can have individual time scopes.   |
+| Time scope                 | All graphs share the same time scope. | Graphs can have individual time scopes.   |
 | Layout                     | Graphs are displayed in a fixed grid. | Graphs are placed anywhere on the canvas. |
 | Share graphs individually  | Yes                                   | No                                        |
 | Share the entire dashboard | No                                    | Yes                                       |
