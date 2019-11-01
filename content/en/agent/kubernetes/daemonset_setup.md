@@ -187,9 +187,7 @@ NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELE
 datadog-agent   2         2         2         2            2           <none>          16h
 ```
 
-### Kubernetes cluster name auto detection
-
-Since version 6.5.0 of the Datadog Agent, the Agent configuration contains a cluster name attribute to be used in Kubernetes clusters, so that host aliases are unique. This attribute can be set using the `DD_CLUSTER_NAME` environment variable.
+### Kubernetes Cluster Name Auto Detection
 
 Starting with version 6.11.0, the Datadog Agent can auto-detect the Kubernetes cluster name on Google GKE, Azure AKS, and AWS EKS. This feature facilitates the identification of nodes across Kubernetes clusters by adding an alias which contains the cluster name as a suffix on the node name.
 
