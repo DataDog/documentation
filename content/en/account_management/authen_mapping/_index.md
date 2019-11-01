@@ -45,10 +45,10 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 {{% tab "Example" %}}
 
 {{< code-block lang="bash" filename="roles.sh" >}}
-{�
+{
   "type": "string",
-  "data": {�
-    "attributes": {�
+  "data": {
+    "attributes": {
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "attribute_key": "string",
       "attribute_key": "string"
@@ -64,9 +64,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{�
-  "data": {�
-    "attributes": {�
+{
+  "data": {
+    "attributes": {
       "created_at": "string",
       "created_by": "string",
       "uuid": "10000000-abcd-efgh-ijkl-000000000000",
@@ -75,15 +75,15 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     },
     "type": "string",
     "id": "string",
-    "relationships": {�
-      "saml_assertion_attributes": {�
-        "data": {�
+    "relationships": {
+      "saml_assertion_attributes": {
+        "data": {
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {�
-        "data": {�
+      "roles": {
+        "data": {
           "id": "string",
           "type": "roles"
         }
@@ -91,19 +91,19 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   },
   "included": [
-    {�
-      "data": {�
+    {
+      "data": {
         "id": "string",
         "type": "roles",
-        "attributes": {�
+        "attributes": {
           "created_at": "string",
           "modified_at": "string",
           "uuid": "00000000-0000-0000-0000-000000000000",
           "name": "string"
         },
-        "relationships": {�
+        "relationships": {
           "data": [
-            {�
+            {
               "id": "string",
               "type": "permissions"
             }
@@ -111,11 +111,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
       }
     },
-    {�
-      "data": {�
+    {
+      "data": {
         "id": 0,
         "type": "authn_mappings",
-        "attributes": {�
+        "attributes": {
           "id": 6,
           "attribute_key": "string",
           "attribute_value": "string"
