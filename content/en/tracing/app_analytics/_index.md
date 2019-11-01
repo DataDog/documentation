@@ -12,7 +12,7 @@ aliases:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
-**Note**: to use Trace Search, you must be using Agent v6.7+.
+**Note**: to use App Analytics, you must be using Agent v6.7+.
 
 ## Automatic Configuration
 
@@ -24,10 +24,10 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -36,10 +36,10 @@ App Analytics is available starting in version 0.19.0 of the Python tracing clie
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -67,11 +67,11 @@ App Analytics is available starting in version 1.11.0 of the Go tracing client, 
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][2] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][2] to get started.
 
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-[2]: https://app.datadoghq.com/apm/search
+[2]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -87,10 +87,10 @@ You can also use the following configuration parameter:
 
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -104,10 +104,10 @@ App Analytics is available starting in version 1.1.0 of the .NET tracing client,
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -115,10 +115,10 @@ App Analytics is available starting in version 0.17.0 of the PHP tracing client,
 
  * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{< /tabs >}}
 
