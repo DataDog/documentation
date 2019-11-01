@@ -445,6 +445,7 @@ Setting Name          | Property Name          | Description                    
 `DD_ENV`              | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
 `DD_SERVICE_NAME`     | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 `DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
+`DD_TRACE_GLOBAL_FLAGS` | `GlobalTags` | If specified, adds all of the specified tags to all generated spans.  |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 

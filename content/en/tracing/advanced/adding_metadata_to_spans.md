@@ -335,8 +335,10 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add [tags][1] to all the generated [spans][2]. See the [.NET configuration][3]
-section for details on how environment variables are set.
+Add [tags][1] to all the generated [spans][2] by configuring the tracer. There are a few ways to set the configuration, as shown in the
+[.NET configuration][3] section.
+
+This example sets the environment variable:
 
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
