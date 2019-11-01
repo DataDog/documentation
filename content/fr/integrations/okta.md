@@ -29,7 +29,7 @@ Pour activer l'intégration Datadog/Okta :
 
 1. Accédez à votre compte Okta.
 1. Accédez à *Security* -> *API* -> *Tokens*.
-2. Ajoutez un jeton API et copiez-le.
+2. Ajoutez un token API et copiez-le.
 
 ### Configuration
 
@@ -37,7 +37,7 @@ Pour activer l'intégration Datadog/Okta :
 2. Ouvrez le [carré d'intégration Okta][2].
 3. Entrez un nom de compte pour le champ `Account name`. Il sert à identifier votre compte Okta dans Datadog. Celui-ci ne peut contenir que des caractères alphanumériques et des underscores.
 4. Saisissez un domaine dans le champ `Domain`. il s'agit du domaine unique du compte utilisé pour exiger des logs à partir de votre compte Okta. Le domaine doit correspondre à une URL valide.
-5. Saisissez une clé d'API dans le champ `API key`. Il s'agit du jeton API provenant de votre compte Okta.
+5. Saisissez une clé d'API dans le champ `API key`. Il s'agit du token API provenant de votre compte Okta.
 6. Cliquez sur *Save*.
 
 ## Données collectées
@@ -54,9 +54,9 @@ L'intégration Okta n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://app.datadoghq.com/account/settings
-[2]: https://app.datadoghq.com/account/settings#integrations/okta
-[3]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings
+[2]: https://app.datadoghq.com/account/settings#integrations/okta
+[3]: https://docs.datadoghq.com/fr/help

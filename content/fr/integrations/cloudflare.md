@@ -31,8 +31,9 @@ Installez l'intégration avec le [carré d'intégration Cloudflare][1] de Datado
 3. Nommez le compte. Ce nom est arbitraire. Il est utilisé dans le tag `account` de vos métriques.
 
 Lorsque vous utilisez un token d'API, assurez-vous qu'il dispose des autorisations suivantes :
-* *Zone* > *Zone* > *Read*
-* *Zone* > *Analytics* > *Read*
+
+- *Zone* > *Zone* > *Read*
+- *Zone* > *Analytics* > *Read*
 
 ## Données collectées
 ### Métriques
@@ -46,11 +47,10 @@ L'intégration Cloudflare n'inclut aucun événement.
 L'intégration Cloudflare n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/cloudflare
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/cloudflare
+[2]: https://docs.datadoghq.com/fr/help

@@ -51,7 +51,7 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```python
+{{< code-block lang="python" filename="filename.py" >}}
 from datadog import initialize, statsd
 import time
 
@@ -66,14 +66,14 @@ while(1):
   statsd.increment('example_metric.increment', tags=["environment:dev"])
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Run the following Ruby code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```ruby
+{{< code-block lang="ruby" filename="filename.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -84,14 +84,14 @@ while true do
     statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Run the following Go code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```go
+{{< code-block lang="go" filename="filename.go" >}}
 package main
 
 import (
@@ -113,14 +113,14 @@ func main() {
         time.Sleep(10)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```java
+{{< code-block lang="java" filename="filename.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -138,14 +138,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Run the following .NET code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```csharp
+{{< code-block lang="csharp" filename="filename.cs" >}}
 using StatsdClient;
 using System;
 
@@ -172,14 +172,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following PHP code to submit a DogStatsD `COUNT` metric to Datadog:
 
-```php
+{{< code-block lang="php" filename="filename.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -197,7 +197,7 @@ while (TRUE) {
     $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

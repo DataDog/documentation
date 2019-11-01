@@ -18,9 +18,9 @@ short_description: Utilisez VictorOps comme canal de notification pour les alert
 version: '1.0'
 ---
 ## Présentation
-Envoyez des alertes Datadog à VictorOps et bénéficiez d'un contrôle précis des processus d'acheminement et de réaffectation.
-Accédez plus rapidement aux détails des problèmes et réduisez leur délai de résolution.
-Créer des alertes en spécifiant **@victorops**
+
+Utilisez l'intégration Datadog/VictorOps pour envoyer des alertes Datadog à VictorOps et bénéficier d'un contrôle précis des processus d'acheminement et de réaffectation. Accédez plus rapidement aux détails des problèmes et réduisez leur délai de résolution en créant des alertes contenant **@victorops** :
+
 * Depuis votre flux d'événements
 * En prenant un snapshot
 * Lorsqu'une alerte sur une métrique est déclenchée
@@ -63,7 +63,7 @@ Les caractères spéciaux ne sont pas autorisés dans les noms. Les lettres maju
 Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/integrations/datadog/20140523/alert'.
 
 
-[1]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/help

@@ -40,7 +40,7 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 3. **Triez le tableau des ressources selon la p99 latency (latence au 99e centile)** et cliquez sur la ressource la plus lente.
    **Remarque** : si vous ne voyez pas la colonne p99 latency, cliquez sur l'icône en forme d'engrenage `Change Columns` et activez l'option `p99`.
 
-    La page d'une [ressource][4] affiche les métriques de haut niveau sur cette ressource, telles que le débit, la latence et le taux d'erreur, ainsi que la répartition de la latence en fonction des différents services en aval de la ressource. De plus, elle affiche les [traces][1] spécifiques qui traversent la ressource et une vue agrégée des [spans][5] qui composent ces traces.
+    La page [Ressource][4] affiche les métriques de haut niveau sur cette ressource, telles que le débit, la latence et le taux d'erreur, ainsi que la répartition de la latence en fonction des différents services en aval de la ressource. De plus, elle affiche les [traces][1] spécifiques qui traversent la ressource et une vue agrégée des [spans][5] qui composent ces traces.
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine" responsive="true" style="width:90%;">}}
 

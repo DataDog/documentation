@@ -2,7 +2,7 @@
 title: Create a test
 type: apicontent
 order: 30.1
-external_redirect: /api/#create-tests
+external_redirect: /api/#create-a-test
 ---
 
 ## Create a test
@@ -68,14 +68,14 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
 *   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.
 *   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:
 
-| type        | Valid operator                                                            | Value type                                                                                                                                           |
-| ---           | ---                                                                         | ---                                                                                                                                                  |
+| type           | Valid operator                                                              | Value type                                                                                                 |
+|----------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `header`       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for `contains`/`does not contain`/`is`/`is not`.  [RegexString][3] for: `matches`/`does not match`. |
-| `body`          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |
-| `responseTime` | `lessThan`                                                                  | Integer                                                                                                                                              |
-| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |
-| `certificate` | `isInMoreThan` | Integer |
-| `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |
+| `body`         | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |
+| `responseTime` | `lessThan`                                                                  | Integer                                                                                                    |
+| `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                    |
+| `certificate`  | `isInMoreThan`                                                              | Integer                                                                                                    |
+| `property`     | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: /synthetics/browser_tests/#record-test

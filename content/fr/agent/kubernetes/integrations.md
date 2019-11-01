@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
   - link: agent/kubernetes/daemonset_setup
     tag: documentation
-    text: Configuration de DaemonSet avec Kubernetes
+    text: Exécuter l'Agent avec un DaemonSet Kubernetes
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
 ---
 ## ConfigMap
 

@@ -58,13 +58,13 @@ init_config:
 instances:
   - name: My Website
     server: teamcity.mycompany.com
- #  serveur : user:password@teamcity.mycompany.com # Si vous définissez basic_http_authentication sur true.
- #  basic_http_authentication : true # Valeur par défaut : false.
-    build_configuration : MyWebsite_Deploy # L'ID du build interne de la configuration de build que vous souhaitez suivre.
- #  host_affected : msicalweb6 # Par défaut, hostname du host de l'Agent.
- #  is_deployment : true       # Les événements utilisent le mot 'deployment' dans leurs messages.
- #  ssl_validation : false     # Valeur par défaut : true.
- #  tags :                     # Ajoute des tags personnalisés aux événements.
+ #  serveur : user:password@teamcity.mycompany.com # Si vous définissez basic_http_authentication sur true
+ #  basic_http_authentication: true # Valeur par défaut : false
+    build_configuration: MyWebsite_Deploy # L'ID du build interne de la configuration de build que vous souhaitez suivre
+ #  host_affected: msicalweb6 # Par défaut, hostname du host de l'Agent
+ #  is_deployment: true       # Les événements utilisent le mot 'deployment' dans leurs messages
+ #  tls_verify: false     # Valeur par défaut : true
+ #  tags:                     # Ajoute des tags personnalisés aux événements
  #    - test
 ```
 
@@ -94,6 +94,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 * [Suivez l'impact sur les performances des modifications du code avec TeamCity et Datadog.][9]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login
@@ -103,6 +106,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog
-
-
-{{< get-dependencies >}}

@@ -2,7 +2,7 @@
 title: Get devices for browser checks
 type: apicode
 order: 30.9
-external_redirect: /api/#get-browsers
+external_redirect: /api/#get-devices-for-browser-checks
 ---
 
 **SIGNATURE**:

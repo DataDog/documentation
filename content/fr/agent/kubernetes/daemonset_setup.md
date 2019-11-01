@@ -1,5 +1,5 @@
 ---
-title: Configuration de DaemonSet avec Kubernetes
+title: Exécuter l'Agent avec un DaemonSet Kubernetes
 kind: documentation
 further_reading:
   - link: agent/autodiscovery
@@ -7,7 +7,7 @@ further_reading:
     text: Autodiscovery avec l'Agent Docker
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
   - link: agent/kubernetes/integrations
     tag: documentation
     text: Intégrations personnalisées

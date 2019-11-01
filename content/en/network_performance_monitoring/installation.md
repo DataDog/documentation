@@ -7,16 +7,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
+- link: "/integrations/snmp"
+  tag: "Documentation"
+  text: "SNMP integration"
 ---
 
 <div class="alert alert-warning">
 This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
-Network performance monitoring requires Datadog Agent v6.13+ and a Linux kernel version 4.4.0+ for eBPF support. The following platforms are supported:
+Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog requires a Linux kernel version 4.4.0+. The following platforms are supported:
 
 * Ubuntu 16.04+
 * Debian 9+
@@ -24,11 +24,17 @@ Network performance monitoring requires Datadog Agent v6.13+ and a Linux kernel 
 * SUSE 15+
 * CentOS/RHEL 7.6+
 
-**Note**: Windows and macOS platforms are not supported.
+**Note**: Datadog does not support Windows and macOS platforms because they are not eBPF-compatible.
+
+The following provisioning systems are supported:
+
+* Daemonset / Helm: See the [Datadog Helm chart][1]
+* Chef: See the [Datadog Chef recipe][2]
+* Ansible
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][1] based on your system setup:
+To enable network performance monitoring, configure it in your [Agent's main configuration file][3] based on your system setup:
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -178,4 +184,7 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
+[2]: https://github.com/DataDog/chef-datadog
+[3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
