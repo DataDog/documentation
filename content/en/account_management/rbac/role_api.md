@@ -48,11 +48,11 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
 {{< tabs >}}
 {{% tab "Example" %}}
 
-```sh
+{{< code-block lang="bash" filename="roles.sh" >}}
 curl -X GET "https://app.datadoghq.com/api/v2/roles" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
-```
+{{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
 
@@ -60,32 +60,32 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{% tab "Response" %}}
 
-```json
-{
-    "meta": {
-        "page": {
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+{ÿ
+    "meta": {ÿ
+        "page": {ÿ
             "total_count": 7
         }
     },
     "data": [
-	    {
+	    {ÿ
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+                "attributes": {ÿ
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
                 "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
-            "relationships": {
-                "permissions": {
+            "relationships": {ÿ
+                "permissions": {ÿ
                     "data": [
-                        {
+                        {ÿ
                             "type": "permissions",
                             "id": "$PERMISSION_UUID"
                         },
-                        {
+                        {ÿ
                             "type": "permissions",
                             "id": "$PERMISSION_UUID"
                         }
@@ -95,7 +95,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
     ]
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

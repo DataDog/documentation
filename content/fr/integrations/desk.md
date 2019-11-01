@@ -29,7 +29,7 @@ Associez Desk à Datadog pour :
 ### Configuration
 
 Depuis votre compte Desk, ajoutez une application d'API en accédant à Settings -> API -> My Applications (privilèges d'administrateur requis).
-Remplissez le formulaire comme indiqué, en laissant les deux derniers champs d'URL vides. Desk génère alors une clé d'application, un secret d'application, un jeton d'accès à l'API et un secret de jeton d'accès à l'API.
+Remplissez le formulaire comme indiqué, en laissant les deux derniers champs d'URL vides. Desk génère alors une clé d'application, un secret d'application, un token d'accès à l'API et un secret de token d'accès à l'API.
 
 {{< img src="integrations/desk/desk_config.png" alt="configuration desk" responsive="true" popup="true">}}
 
@@ -48,13 +48,12 @@ L'intégration Desk n'inclut aucun événement.
 L'intégration Desk n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/desk
-[2]: https://app.datadoghq.com/screen/integration/desk
-[3]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/desk
+[2]: https://app.datadoghq.com/screen/integration/desk
+[3]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
+[4]: https://docs.datadoghq.com/fr/help

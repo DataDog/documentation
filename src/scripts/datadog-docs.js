@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
 import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
+import codeTabs from './components/codetabs';
 
 import { moveToAnchor } from './helpers/moveToAnchor';
 
@@ -591,7 +592,9 @@ function updateMainContentAnchors(){
         if(!e.target.parentElement.id) {
             e.preventDefault();
             const id = e.target.hash.split('#').join('');
-            moveToAnchor(id);
+            if (id) {
+                moveToAnchor(id);
+            }
         }
     });
 }
@@ -604,98 +607,6 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-function codeTabs(){
-    if($('.code-tabs').length > 0) {
-        // page load set code tab titles
-        $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
-          const navTabsMobile = $(this).closest('.code-tabs').find('.nav-tabs-mobile .dropdown-menu');
-          const navTabs = $(this).closest('.code-tabs').find('.nav-tabs');
-              const title = $(this).attr('title');
-          const lang = title.toLowerCase().replace(/\W/g, '');
-          navTabs.append(`<li><a href="#" data-lang="${lang}">${title}</a></li>`);
-          navTabsMobile.append(`<a class="dropdown-item" href="#" data-lang="${lang}">${title}</a>`);
-        });
-
-        // page load if we have a lang in url activate those tabs, otherwise activate first
-        const sPageURL = decodeURIComponent(window.location.search.substring(1));
-        const sURLVariables = sPageURL.split('&');
-        const tab = sURLVariables.filter(function(item) {
-           return item.split('=')[0] === 'tab';
-        }).map(function(item) {
-            return item.split('=')[1];
-        }).toString();
-
-        function activateTab(el) {
-            const tab = el.parent();
-                 const tabIndex = tab.index();
-                 const tabPanel = el.closest('.code-tabs');
-                 const tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
-             tabPanel.find('.active').removeClass('active');
-             tab.addClass('active');
-             tabPane.addClass('active');
-             tabPane.addClass('show');
-             el.closest('.code-tabs').find('.nav-tabs-mobile .title-dropdown').text(tab.text());
-        }
-
-        // clicking a tab open them all
-        $('.code-tabs .nav-tabs a').click(function(e){
-          e.preventDefault();
-
-          // prepare
-          const currentOffset = $(this).offset().top - $(document).scrollTop();
-
-          // find all
-          const lang = $(this).data('lang');
-          $('.code-tabs .nav-tabs').each(function() {
-             const navtabs = $(this);
-             const links = $(this).find('a:first');
-             const langLinks = $(this).find(`a[data-lang="${lang}"]`);
-             if(langLinks.length) {
-                 langLinks.each(function() {
-                     activateTab($(this));
-                 });
-             } else {
-                 // set first lang selected if nothing selected
-                 if(navtabs.find('.active').length === 0) {
-                     links.each(function() {
-                         activateTab($(this));
-                     });
-                 }
-             }
-          });
-
-          const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-          history.replaceState(null, null, `${url  }?tab=${  lang  }${window.location.hash}`)
-
-          // restore
-          $(document).scrollTop($(this).offset().top - currentOffset);
-        });
-
-        // mobile tabs trigger desktop ones
-        $('.code-tabs .nav-tabs-mobile .dropdown-menu a').click(function(e){
-            e.preventDefault();
-            const ctabs = $(this).parents('.code-tabs');
-            const lang = $(this).data('lang');
-            const desktopTab = ctabs.find(`.nav-tabs a[data-lang="${lang}"]`);
-            if(desktopTab) {
-              desktopTab.click();
-            }
-        });
-
-        // activate language from url or first
-        if(tab === '') {
-            $('.code-tabs .nav-tabs li:first a').click();
-        } else {
-            const match = $(`.code-tabs .nav-tabs a[data-lang="${tab}"]:first`);
-            if(match.length) {
-                match.click();
-            } else {
-                $('.code-tabs .nav-tabs li:first a').click();
-            }
-        }
-    }
 }
 
 // Get sidebar

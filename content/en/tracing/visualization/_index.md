@@ -23,16 +23,16 @@ further_reading:
 ---
 The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, which helps you find and resolve issues in highly distributed systems.
 
-| Concept                                             | Description                                                                                                                                                                                    |
-|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Service](#services)                                | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances.                   |
-| [Resource](#resources)                              | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                        |
-| [Trace](#trace)                                     | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                       |
-| [Span](#spans)                                      | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                    |
-| [Trace metrics](#trace-metrics)                     | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency. |
-| [App Analytics](#trace-search-analytics) | App Analytics is used to filter Analyzed Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                   |
-| [Analyzed Span](#apm-event)                             | Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                   |
-| [Span tags](#span-tags)                             | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*.                                                                   |
+| Concept                                  | Description                                                                                                                                                                                    |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Service](#services)                     | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances.                   |
+| [Resource](#resources)                   | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                        |
+| [Trace](#trace)                          | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                       |
+| [Span](#spans)                           | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                    |
+| [Trace metrics](#trace-metrics)          | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency. |
+| [App Analytics](#trace-search-analytics) | App Analytics is used to filter Analyzed Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                          |
+| [Analyzed Span](#apm-event)              | Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                          |
+| [Span tags](#span-tags)                  | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*.                                                                              |
 
 ## Services
 
@@ -122,7 +122,7 @@ To get started tagging spans in your application, check out this [walkthrough][1
 
 After a tag has been added to a span, search and query on the tag in App Analytics by clicking on the tag to add it as a [facet][19]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
-{{< img src="tracing/advanced/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
 
 ## Further Reading

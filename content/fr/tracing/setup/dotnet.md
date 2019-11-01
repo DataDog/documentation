@@ -52,7 +52,7 @@ La manière dont ces composants sont installés sur le host dépendent de l'envi
 
 {{% tab "Framework .NET sur Windows" %}}
 
-Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à votre application : x64 pour 64 bits ou x86 pour 32 bits. Vous pouvez installer les deux en parallèle si nécessaire.
+Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à l'infrastructure de votre système d'exploitation.
 
 - Bibliothèque native : déployée dans `Program Files` par défaut et enregistrée par le programme d'installation MSI comme bibliothèque COM dans le registre Windows.
 - Bibliothèques gérées : déployées dans le Global Assembly Cache (GAC) par le programme d'installation MSI, auquel n'importe quelle application .NET peut accéder.
@@ -64,7 +64,7 @@ Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI
 
 {{% tab "Core .NET sur Windows" %}}
 
-Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à votre application : x64 pour 64 bits ou x86 pour 32 bits. Vous pouvez installer les deux en parallèle si nécessaire.
+Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à l'infrastructure de votre système d'exploitation.
 
 Ajoutez le [paquet NuGet][2] `Datadog.Trace.ClrProfiler.Managed` à votre application, en vérifiant que la version du paquet correspond à celle du programme d'installation MSI ci-dessus. Consultez la [documentation NuGet][3] pour découvrir comment ajouter un paquet NuGet à votre application.
 
@@ -143,25 +143,27 @@ COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`COR_PROFILER_PATH` n'est pas requise, car le programme d'installation MSI enregistre le chemin de la bibliothèque COM native dans le registre Windows, et `DD_INTEGRATIONS` est définie globalement pour tous les processus.
+`COR_PROFILER_PATH` n'est pas requise, car le programme d'installation MSI enregistre le chemin de la bibliothèque COM native dans le registre Windows, et les variables d'environnement `DD_INTEGRATIONS` et `DD_DOTNET_TRACER_HOME` sont définies globalement pour tous les processus.
 
-Si vous n'avez pas utilisé le programme d'installation MSI, définissez ces quatre variables d'environnement :
+Si vous n'avez pas utilisé le programme d'installation MSI, définissez les cinq variables d'environnement :
 
 ```
 COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
-Par exemple, pour les définir à partir d'un fichier batch avant de démarrer votre application :
+Par exemple, pour définir les variables d'environnement à partir d'un fichier de commandes avant de démarrer votre application :
 
 ```bat
-rem Set environment variables
+rem Définir les variables d'environnement
 SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+set DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
 rem Démarrer l'application
 example.exe
@@ -182,15 +184,16 @@ CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`CORECLR_PROFILER_PATH` n'est pas requise, car le programme d'installation MSI enregistre le chemin de la bibliothèque COM native dans le registre Windows, et `DD_INTEGRATIONS` est définie globalement pour tous les processus.
+`CORECLR_PROFILER_PATH` n'est pas requise, car le programme d'installation MSI enregistre le chemin de la bibliothèque COM native dans le registre Windows, et les variables d'environnement `DD_INTEGRATIONS` et `DD_DOTNET_TRACER_HOME` sont définies globalement pour tous les processus.
 
-Si vous n'avez pas utilisé le programme d'installation MSI, définissez ces quatre variables d'environnement :
+Si vous n'avez pas utilisé le programme d'installation MSI, définissez les cinq variables d'environnement :
 
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
 Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
@@ -201,6 +204,7 @@ SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
+SET DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
 rem Démarrer l'application
 dotnet.exe example.dll
@@ -212,13 +216,14 @@ dotnet.exe example.dll
 
 {{% tab "Core .NET sur Linux" %}}
 
-Sous Linux, ces quatre variables d'environnement sont requises pour activer l'instrumentation automatique :
+Sous Linux, les variables d'environnement suivantes sont requises pour activer l'instrumentation automatique :
 
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
 Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
@@ -229,9 +234,10 @@ export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 export DD_INTEGRATIONS=/opt/datadog/integrations.json
+export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # Démarrer votre application
-dotnet exemple.dll
+dotnet example.dll
 ```
 
 Pour définir les variables d'environnement pour un service `systemd`, utilisez `Environment=` :
@@ -241,12 +247,13 @@ Pour définir les variables d'environnement pour un service `systemd`, utilisez 
 Description=exemple
 
 [Service]
-ExecStart=/usr/bin/dotnet /app/exemple.dll
+ExecStart=/usr/bin/dotnet /app/example.dll
 Restart=always
 Environment=CORECLR_ENABLE_PROFILING=1
 Environment=CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 Environment=CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
+Environment=DD_DOTNET_TRACER_HOME=/opt/datadog
 
 [Install]
 WantedBy=multi-user.target
@@ -259,6 +266,7 @@ ENV CORECLR_ENABLE_PROFILING=1
 ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
+ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
 {{% /tab %}}

@@ -45,7 +45,7 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
 </script>
 <script>
   window.DD_RUM.init({
-    clientToken: '<JETON_CLIENT>',
+    clientToken: '<TOKEN_CLIENT>',
     applicationId: '<ID_APPLICATION>',
   });
 </script>
@@ -61,7 +61,7 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
 </script>
 <script>
   window.DD_RUM.init({
-    clientToken: '<JETON_CLIENT>',
+    clientToken: '<TOKEN_CLIENT>',
     applicationId: '<ID_APPLICATION>',
   });
 </script>
@@ -70,9 +70,9 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
 {{% /tab %}}
 {{< /tabs >}}
 
-### Jetons client
+### Tokens client
 
-Pour des raisons de sécurité, les [clés d'API][2] ne peuvent pas être utilisées pour configurer le script afin qu'il envoie des données depuis les navigateurs, car elles seront exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [jeton client][3]. Pour en savoir plus sur la configuration d'un jeton client, consultez la [documentation relative aux jetons client][3].
+Pour des raisons de sécurité, les [clés d'API][2] ne peuvent pas être utilisées pour configurer le script afin qu'il envoie des données depuis les navigateurs, car elles seront exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][3]. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation relative aux tokens client][3].
 
 ### Navigateurs pris en charge
 

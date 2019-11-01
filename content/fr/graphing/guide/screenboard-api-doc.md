@@ -44,8 +44,8 @@ options = {
 
 initialize(**options)
 
-board_title = "Mon screenboard"
-description = "Screenboard d'informations."
+board_title = "My Screenboard"
+description = "An informative screenboard."
 width = 1024
 widgets = [{
     "type": "image",
@@ -53,7 +53,7 @@ widgets = [{
     "width": 32,
     "y": 7,
     "x": 32,
-    "url": "https://chemin/vers/image.jpg"
+    "url": "https://path/to/image.jpg"
 }]
 template_variables = [{
     "name": "host1",
