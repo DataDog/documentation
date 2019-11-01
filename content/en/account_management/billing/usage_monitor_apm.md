@@ -10,8 +10,6 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.
 
-{{< img src="tracing/faq/usage_page.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
-
 | Metric | Description |
 | ------- | -------- |
 | APM Hosts | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
