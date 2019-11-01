@@ -58,13 +58,13 @@ init_config:
 instances:
   - name: My Website
     server: teamcity.mycompany.com
- #  serveur : user:password@teamcity.mycompany.com # Si vous définissez basic_http_authentication sur true.
- #  basic_http_authentication : true # Valeur par défaut : false.
-    build_configuration : MyWebsite_Deploy # L'ID du build interne de la configuration de build que vous souhaitez suivre.
- #  host_affected : msicalweb6 # Par défaut, hostname du host de l'Agent.
- #  is_deployment : true       # Les événements utilisent le mot 'deployment' dans leurs messages.
- #  ssl_validation : false     # Valeur par défaut : true.
- #  tags :                     # Ajoute des tags personnalisés aux événements.
+ #  serveur : user:password@teamcity.mycompany.com # Si vous définissez basic_http_authentication sur true
+ #  basic_http_authentication: true # Valeur par défaut : false
+    build_configuration: MyWebsite_Deploy # L'ID du build interne de la configuration de build que vous souhaitez suivre
+ #  host_affected: msicalweb6 # Par défaut, hostname du host de l'Agent
+ #  is_deployment: true       # Les événements utilisent le mot 'deployment' dans leurs messages
+ #  tls_verify: false     # Valeur par défaut : true
+ #  tags:                     # Ajoute des tags personnalisés aux événements
  #    - test
 ```
 
