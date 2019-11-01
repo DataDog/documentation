@@ -1,5 +1,5 @@
 ---
-title: Page Resource
+title: Page Ressource
 kind: documentation
 further_reading:
   - link: tracing/setup/
