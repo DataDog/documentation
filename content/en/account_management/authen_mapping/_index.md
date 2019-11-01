@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Ask your sales representative or customer success manager to enable this feature.
+Ask your customer success manager or <a href="/help">Datadog Support</a> to enable this feature.
 </div>
 
 If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog.
