@@ -51,9 +51,9 @@ Additional options are available for [timeseries widgets][1].
 
 ## Copy / paste widgets
 
-Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac).
+Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac). Similarly, groups of widgets can be copied on timeboards by selecting the group widget OR on screenboards by `shift + click` on multiple graphs.
 
-The copied widget can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
+The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
 
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
