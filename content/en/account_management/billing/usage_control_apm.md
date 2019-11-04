@@ -23,13 +23,9 @@ Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] 
 
 ### Analyzed Span Estimator
 
-{{< img src="tracing/faq/event_estimator.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
-
-To estimate the number of events a service is sending per day or per month, use the [Event Estimator page][7]. This is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
+To estimate the number of Analyzed Spans a service is sending per day or per month, use the [Analyzed Span Estimator page][7]. This is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
 ### Analyzed Span Filtering
-
-{{< img src="tracing/faq/event_filtering.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
 
 [Span filtering][8] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. 
 
