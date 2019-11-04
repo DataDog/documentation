@@ -1,6 +1,7 @@
 #!/bin/sh
 
-for f in $(git diff  --diff-filter=ACMRTUXB --name-only --staged | grep -E '^content/en/[^.]+\.md$')
+# We want all file except the deleted ones hence the --diff-filter=ACMRTUXB
+for f in $(git diff --diff-filter=ACMRTUXB --name-only --staged | grep -E '^content/en/[^.]+\.md$')
 do
     echo "---Link formatting $f"
     if local/bin/py/format_link.py -f "$f"; then

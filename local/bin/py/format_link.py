@@ -4,13 +4,22 @@ from optparse import OptionParser
 
 
 def prepare_file(file):
+    """
+    Goes through a file and parses it into different sections. Those sections are a list of lines and are put within an Array.
+    The first item of the Array is the main section, all other item if any are sub sections, a.k.a tabs within the page.
+    :param file: file to break down into sections
+    :return: array of sections, each section is a list of lines within this section
+    """
 
+    # A state machine is used here, the function takes line within the file one by one, and depending of the states, either
+    # 1. Consider it is in the main section
+    # 2. Consider it is within a tabs group
+    # 3. Consider within a tab
+    #
+    # We keep the {{< tabs >}} lines and co. in the main section since it will be used to inline the proper content afterwards.
     state = "main"
-    # main_section: an array of line representing the main section of the document
 
     main_section = []
-
-    # sub_sections: an array of array of lines representing the different independant sub-sections of the document
     sub_sections = []
     temp_section = []
     i = 0
@@ -35,12 +44,24 @@ def prepare_file(file):
                     temp_section = []
                 else:
                     temp_section.append(line)
-        file_broken = [main_section]
-        file_broken = file_broken + sub_sections
-        return file_broken
+
+        if state == "main":
+            file_broken = [main_section]
+            file_broken = file_broken + sub_sections
+            return file_broken
+        else:
+            return 0
 
 
 def process_section(section, regex_skip_sections_start, regex_skip_sections_end):
+    """
+    Goes through a section. A section is an array of lines
+
+    :param section: array of lines to handle
+    :param regex_skip_sections_start: regex defining the start line that indicates a block of line that shouldn't be processed
+    :param regex_skip_sections_end: regex defining the end line that indicates a block of line that shouldn't be processed
+    :return: section_with_references which is an array of lines.
+    """
 
     regex_link_inlined = r"\s\[.*?\]\((?!#)(.*?)\)"
     regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (.*)"
@@ -52,6 +73,7 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
     section_without_references = []
 
     # Collecting all references and removing them from section
+    # looking at each line, if a line is a reference then we remove it and store the reference.
 
     for line in section:
         if skip:
@@ -72,6 +94,8 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
     skip = False
 
     # Inlining refrences
+    # Looking at each line, it replaces reference link [.*][\d] by the full inlined link
+
     section_with_all_links = []
     for line in section_without_references:
         if skip:
@@ -89,6 +113,7 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
     skip = False
 
     # Collecting all links from file
+    # Looking at each line, it extracts all links it can found and add it to all_links array
 
     all_links = []
     for line in section_with_all_links:
@@ -102,10 +127,12 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
                 line_links = re.findall(regex_link_inlined, line, re.MULTILINE)
                 if not line_links == []:
                     for link in line_links:
+                        # If the link is already in the array, then it doesn't add it to avoid duplicated link
                         if link not in all_links:
                             all_links.append(link)
 
-    # Adding reference in text
+    # Now that all link are extracted, it creates a new section with all inlined referenced link
+
     section_with_references = []
 
     for line in section_with_all_links:
@@ -125,7 +152,7 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
                     i += 1
         section_with_references.append(line)
 
-    # Adding refrerence at the end of the section
+    # Finally it adds all refrerences at the end of the section
 
     i = 1
 
@@ -168,22 +195,47 @@ if __name__ == "__main__":
     )
 
     options, args = parser.parse_args()
+    not_issue = True
 
     prepared_file = prepare_file(options.file)
 
-    final_text = []
+    if prepared_file != 0:
+        final_text = []
 
-    regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
-    regex_skip_sections_start = r"(```|\{\{< code-block)"
+        regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
+        regex_skip_sections_start = r"(```|\{\{< code-block)"
 
-    for section in prepared_file:
-        final_text.append(
-            array_line_to_text(
-                process_section(
-                    section, regex_skip_sections_start, regex_skip_sections_end
+        for section in prepared_file:
+            try:
+                final_text.append(
+                    array_line_to_text(
+                        process_section(
+                            section, regex_skip_sections_start, regex_skip_sections_end
+                        )
+                    )
+                )
+
+            except:
+                not_issue = False
+                print(
+                    "\x1b[31mERROR\x1b[0m: There was an issue processing section:\n {}".format(
+                        section
+                    )
+                )
+
+        if not_issue:
+            with open(options.file, "w") as final_file:
+                final_file.write(str(inline_section(final_text)))
+        else:
+            print(
+                "\x1b[31mERROR\x1b[0m: FAILURE: There was an issue formating file: {} \n ".format(
+                    file
                 )
             )
-        )
 
-    with open(options.file, "w") as final_file:
-        final_file.write(str(inline_section(final_text)))
+    else:
+        print(
+            "\x1b[31mERROR\x1b[0m: Couldn't split the file into multiple section correctly, check the file: {}".format(
+                options.file
+            )
+        )
