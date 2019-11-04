@@ -20,7 +20,7 @@ further_reading:
 
 Each metric submitted to Datadog has a “Metric Type.” This Metric Type affects how [Metric Type modifiers][1] and functions interact with data when queried and graphed, and can affect how the data is handled when ingested via the Agent and DogstatsD.
 
-A metric's type is can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog received that same metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, if necessary.
+A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog receives that same metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, and only if necessary.
 
 ## Metric Types: Ingestion
 
@@ -43,17 +43,17 @@ We **accept** the following metric types:
 * [TIMERS](?tab=timers#metric-type-definition)
 
 
+When submitting data via the API (except to our Distributions endpoint, or when using Marlo'd metrics), Datadog will simply store the data and metric type received. No aggregation will occur at the time of submission. Most metrics, however, are sent via Agent check or DogstatsD. In those cases, aggregation will occur - this will depend on Metric type. Let's dig into how Datadog handles Metric Type, before discussing how types are mapped at submission time.
 
-Refer to the [Metric Type Definition](#metric-type-definition) section below to learn more about the different metrics types available. Also, refer to the [Submission Types and Datadog In-App Types Section](#submission-types-and-datadog-in-app-types) to see how each metric type behaves between its submission and its storage within Datadog.
 
 ## Metric type definition
 
-To better understand the different metrics types, what they represent, and how to modify them within Datadog, consider the following example:
+To better understand and modify each Metric Type within Datadog, consider the following example. Remember that once submitted, raw metric data will not change by editing metric type. Let's explore what happens when this metric is **submitted** as each type:
 
-You have two web servers: `server:web_1` and `server:web_2`. Both web servers continuously receive:
+Two web servers are reporting via the Datadog Agent: `server:web_1` and `server:web_2`. Both web servers continuously receive:
   * 10 HTTP requests for the first 30 seconds, then
   * 20 HTTP requests for the next 30 seconds, then
-  * 0 HTTP requests for the next 30 seconds.
+  * 15 HTTP requests for the next 30 seconds.
 
 ### Metric submission types
 
