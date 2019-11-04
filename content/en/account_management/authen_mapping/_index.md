@@ -34,21 +34,21 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 
 ##### ARGUMENTS
 
-* **`role_uuid`** [*required*, *default*=**?**]:
-?
-* **`attribute_key`** [*required*, *default*=**?**]:
-?
-* **`attribute_value`** [*required*, *default*=**?**]:
-?
+* **`role_uuid`** [*required*, *default*=none]:
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding your `role_uuid`, see the [Role API documentation][1].
+* **`attribute_key`** [*required*, *default*=none]:
+ The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
+* **`attribute_value`** [*required*, *default*=none]:
+  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
 {{% tab "Example" %}}
 
 {{< code-block lang="bash" filename="roles.sh" >}}
-{
-  "type": "string",
-  "data": {
-    "attributes": {
+{ÿ
+  "type": "authnmapping",
+  "data": {ÿ
+    "attributes": {ÿ
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "attribute_key": "string",
       "attribute_key": "string"
@@ -64,9 +64,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{
-  "data": {
-    "attributes": {
+{ÿ
+  "data": {ÿ
+    "attributes": {ÿ
       "created_at": "string",
       "created_by": "string",
       "uuid": "10000000-abcd-efgh-ijkl-000000000000",
@@ -75,15 +75,15 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     },
     "type": "string",
     "id": "string",
-    "relationships": {
-      "saml_assertion_attributes": {
-        "data": {
+    "relationships": {ÿ
+      "saml_assertion_attributes": {ÿ
+        "data": {ÿ
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {
-        "data": {
+      "roles": {ÿ
+        "data": {ÿ
           "id": "string",
           "type": "roles"
         }
@@ -91,19 +91,19 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   },
   "included": [
-    {
-      "data": {
+    {ÿ
+      "data": {ÿ
         "id": "string",
         "type": "roles",
-        "attributes": {
+        "attributes": {ÿ
           "created_at": "string",
           "modified_at": "string",
           "uuid": "00000000-0000-0000-0000-000000000000",
           "name": "string"
         },
-        "relationships": {
+        "relationships": {ÿ
           "data": [
-            {
+            {ÿ
               "id": "string",
               "type": "permissions"
             }
@@ -111,11 +111,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
       }
     },
-    {
-      "data": {
+    {ÿ
+      "data": {ÿ
         "id": 0,
         "type": "authn_mappings",
-        "attributes": {
+        "attributes": {ÿ
           "id": 6,
           "attribute_key": "string",
           "attribute_value": "string"
@@ -483,3 +483,5 @@ HTTP/2 204
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/rbac/role_api/?tab=datadogussite#get-all-roles
