@@ -109,9 +109,9 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
   * Cela permet à Datadog d'envoyer les données de configuration à la CMDB ServiceNow. Vous pouvez ajouter des tags aux hosts qui ont été associés aux CI de la CMDB ServiceNow dans Datadog. **Remarque** : l'option « Enable adding Datadog hosts into ServiceNow CMDB » doit être activée pour que la fonctionnalité de synchronisation de tag fonctionne.
 
   * Par défaut, aucun tag n'est synchronisé entre ServiceNow et Datadog. Trois sources de données différentes peuvent être utilisées pour les tags :
-    * Les étiquettes
-    * Les services métiers
-    * Les attributs des éléments de configuration (CI)
+    * Labels
+    * Business Services
+    * Configuration Item (CI) attributes
 
   * Dans l'exemple de configuration ci-dessous, les étiquettes et les services métiers sont ajoutés en tant que tags, ainsi que les attributs `sys_id` and `sys_class_name`
 
@@ -128,7 +128,7 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
 Les notifications Datadog mentionnant @servicenow remplissent les tables intermédiaires sélectionnées dans votre carré ServiceNow. Veuillez noter que pour les étapes décrites ci-dessous, nous partons du principe que vous avez déjà configuré le carré d'intégration dans la page d'intégrations Datadog. Procédez ainsi comme suit :
 
 1. Depuis la liste déroulante, sélectionnez la table intermédiaire vers laquelle vous souhaitez envoyer les notifications.
-2. Pour vérifier que l'intégration est correctement configurée, ajoutez @servicenow dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes de la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappings et les transformations que vous avez créés.
+2. Pour vérifier que l'intégration est correctement configurée, ajoutez @servicenow dans une notification de monitor ou dans un commentaire d'événement. Les données brutes remplissent les lignes de la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappings et les transformations que vous avez créés.
 3. [Utilisez des transform maps](personnaliser-les-donnees-avec-des-transform-maps) pour personnaliser le format des données envoyées aux tables.
 3. [Configurer le carré d'intégration ServiceNow dans Datadog](#configure-the-servicenow-tile-in-datadog)
 
