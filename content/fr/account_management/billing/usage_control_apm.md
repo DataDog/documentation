@@ -39,10 +39,10 @@ Vous pouvez également choisir d'activer l'analyse et la recherche de traces par
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/account_management/billing/apm_distributed_tracing
 [3]: /fr/tracing/visualization/#apm-event
-[4]: /fr/tracing/trace_search_and_analytics
+[4]: /fr/tracing/app_analytics
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com
 [7]: https://app.datadoghq.com/apm/docs/trace-search
 [8]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
 [9]: https://docs.datadoghq.com/fr/tracing/guide/trace_sampling_and_storage/
-[10]: tracing/trace_search_and_analytics/?tab=java#configure-additional-services-optional
+[10]: tracing/app_analytics/?tab=java#configure-additional-services-optional

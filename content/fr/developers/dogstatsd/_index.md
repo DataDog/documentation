@@ -40,11 +40,11 @@ Lorsque DogStatsD reçoit des données, il agrège de nombreux points de donnée
 
 ## Implémentation
 
-DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version 6 de l'Agent. Si vous ne devez pas changer ce port, passez directement à la [configuration de DogStatsD dans votre code](#code). Vous pouvez également consulter la documentation relative à la configuration de DogStatsD pour [Docker][11] et [Kubernetes][12]
+DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version 6 de l'Agent. Si vous ne devez pas changer ce port, passez directement à la [configuration de DogStatsD dans votre code](#code). Vous pouvez également consulter la documentation relative à la configuration de DogStatsD pour [Docker][6] et [Kubernetes][7]
 
 ### Agent
 
-Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modifier ce réglage, configurez l'option `dogstatsd_port` dans le [fichier de configuration principal de l'Agent][6] et redémarrez l'Agent. Vous pouvez également configurer DogStatsD afin d'utiliser [un socket de domaine Unix][7]. Pour activer un port UDP personnalisé pour un serveur DogStatsD de l'Agent :
+Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modifier ce réglage, configurez l'option `dogstatsd_port` dans le [fichier de configuration principal de l'Agent][8] et redémarrez l'Agent. Vous pouvez également configurer DogStatsD afin d'utiliser [un socket de domaine Unix][9]. Pour activer un port UDP pour un serveur DogStatsD de l'Agent personnalisé :
 
 1. Modifiez votre fichier `datadog.yaml` en supprimant la mise en commentaire des paramètres `use_dogstatsd` et `dogstatsd_port` :
 
@@ -323,10 +323,8 @@ Si vous souhaitez approfondir vos connaissances sur le format des datagrammes ut
 [3]: /fr/developers/metrics/custom_metrics
 [4]: /fr/developers/events/dogstatsd
 [5]: /fr/developers/service_checks/dogstatsd_service_checks_submission
-[6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[7]: /fr/developers/dogstatsd/unix_socket
+[6]: /fr/agent/docker/?tab=standard#dogstatsd-custom-metrics
+[7]: /fr/agent/kubernetes/dogstatsd
 [8]: /fr/agent/guide/agent-commands
 [9]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
 [10]: /fr/developers/metrics
-[11]: /fr/agent/docker/?tab=standard#dogstatsd-custom-metrics
-[12]: /fr/agent/kubernetes/dogstatsd/

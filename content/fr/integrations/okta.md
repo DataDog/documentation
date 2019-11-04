@@ -54,9 +54,9 @@ L'intégration Okta n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://app.datadoghq.com/account/settings
-[2]: https://app.datadoghq.com/account/settings#integrations/okta
-[3]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings
+[2]: https://app.datadoghq.com/account/settings#integrations/okta
+[3]: https://docs.datadoghq.com/fr/help

@@ -207,9 +207,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://aws.amazon.com/app-mesh
-[2]: https://docs.datadoghq.com/fr/integrations/envoy/#metrics
-[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
+[1]: https://aws.amazon.com/app-mesh
+[2]: https://docs.datadoghq.com/fr/integrations/envoy/#metrics
+[3]: https://docs.datadoghq.com/fr/help
