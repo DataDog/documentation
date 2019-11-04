@@ -536,21 +536,43 @@ class PreBuild:
         for content in self.list_of_contents:
             # print("Processing content: {}".format(content))
             if content["action"] == "integrations":
-                self.process_integrations(content)
+                try:
+                    self.process_integrations(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif content["action"] == "source":
-
-                self.process_source_attribute(content)
+                try:
+                    self.process_source_attribute(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif (
                 content["action"] == "pull-and-push-folder"
             ):
-
-                self.pull_and_push_folder(content)
+                try:
+                    self.pull_and_push_folder(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif content["action"] == "pull-and-push-file":
 
-                self.pull_and_push_file(content)
+                try:
+                    self.pull_and_push_file(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             else:
                 print(
