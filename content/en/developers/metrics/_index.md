@@ -23,12 +23,12 @@ A Datadog metric is defined by the properties below. Refer to the [Metrics Intro
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
-| `<TIMESTAMP>`     | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
 | `<CONTEXT>`      | The set of tags associated with your metric.                                                                                                              |
-| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][2].                                                                                          |
+| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation](/developers/metrics/metrics_type).                                                           |
 | `<INTERVAL>`     | If the `<TYPE>` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
 
-If a metric is not submitted from one of the [350+ Datadog integrations][3], it's considered a [Custom Metric][4]. **Note**: Some standard integrations [emit custom metrics][5].
+If a metric is not submitted from one of the [350+ Datadog integrations](/integrations), it's considered a [Custom Metric](/developers/metrics/custom_metrics). **Note**: Some standard integrations [emit custom metrics](/account_management/billing/custom_metrics/#standard-integrations).
 
 ### Naming metrics
 
@@ -53,15 +53,11 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][6] to submit your metrics
+You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][2] to submit your metrics
 
 ## Further reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/metrics/introduction
-[2]: /developers/metrics/metrics_type
-[3]: /integrations
-[4]: /developers/metrics/custom_metrics
-[5]: /account_management/billing/custom_metrics/#standard-integrations
-[6]: /developers/libraries
+[2]: /developers/libraries
+
