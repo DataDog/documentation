@@ -30,7 +30,7 @@ Matching processes and counts are displayed below the search:
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" responsive="true" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found.  For more granular data, visit your [Live Process Page][4].
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found.  For more granular data, visit your [Live Process Page][5].
 
 #### Alert grouping
 
@@ -47,7 +47,7 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -56,5 +56,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: /graphing/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process
 [3]: /graphing/infrastructure/process/#search-syntax
-[4]: https://app.datadoghq.com/process
-[5]: /monitors/notifications
+[4]: /monitors/notifications
+[5]: https://app.datadoghq.com/process

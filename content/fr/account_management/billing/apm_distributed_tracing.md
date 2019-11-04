@@ -112,7 +112,7 @@ Non. La fonctionnalité Analyse et recherche de traces est uniquement disponible
 
 
 [1]: /fr/tracing
-[2]: /fr/tracing/app_analytics
+[2]: /fr/tracing/trace_search_and_analytics
 [3]: /fr/tracing/visualization/#apm-event
 [4]: https://www.datadoghq.com/pricing
 [5]: mailto:sales@datadoghq.com

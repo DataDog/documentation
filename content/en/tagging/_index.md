@@ -27,7 +27,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | ----------- | --------------------------------------------------------------------- |
 | `host`      | Correlation between metrics, traces, processes, and logs              |
 | `device`    | Segregation of metrics, traces, processes, and logs by device or disk   |
-| `source`    | Span filtering and automated pipeline creation for log management    |
+| `source`    | Event filtering and automated pipeline creation for log management    |
 | `service`   | Correlation between metrics, traces, and logs                         |
 
 ## Why It Matters
@@ -90,7 +90,7 @@ After you have [assigned tags][3] at the host and [integration][10] level, start
 | [Monitors][14]       | Manage monitors, create monitors, or manage downtime                                             |
 | [Metrics][15]        | Filter and group with the metric explorer                                                        |
 | [Integrations][16]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][17]            | Filter App Analytics or jump to other areas with the service map                    |
+| [APM][17]            | Filter trace search and analytics or jump to other areas with the service map                    |
 | [Notebooks][18]      | Filter and group metrics on graphs                                                               |
 | [Logs][19]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
 | [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |

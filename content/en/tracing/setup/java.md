@@ -37,14 +37,14 @@ Finally, add the following JVM argument when starting your application in your I
 
 **Note**:
 
-* The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][4].
+* The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][16].
 
-* `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][5].
+* `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][4].
 
 ## Automatic Instrumentation
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][6]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the [Byte Buddy framework][7] to find the classes defined for instrumentation and modify those class bytes accordingly.
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][5]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the [Byte Buddy framework][6] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -83,11 +83,11 @@ Beta integrations are disabled by default but can be enabled individually.
 | Grizzly                      | 2.0+       | Fully Supported | `grizzly`                                      |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
-| Jetty (non-Servlet)          | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
+| Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Play                         | 2.4-2.7    | Fully Supported | `play`                                         |
-| Ratpack                      | 1.4+       | [Beta][8]       | `ratpack`                                      |
-| Spark Java                   | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
+| Ratpack                      | 1.4+       | [Beta][7]       | `ratpack`                                      |
+| Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                               |
 
@@ -101,7 +101,7 @@ Grizzly Instrumentation is disabled by default. Add one of the following configu
 * System Property: `dd.jmxfetch.grizzly.enabled=true`
 * Environment Variable: `DD_JMXFETCH_GRIZZLY_ENABLED=true`
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -127,7 +127,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Data Store Compatibility
 
@@ -161,7 +161,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Other Framework Compatibility
 
@@ -175,13 +175,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-* [Submitting a pull request][9] with instrumentation for inclusion in a future release.
-* Contacting [Datadog support][8] and submitting a feature request.
+* [Submitting a pull request][8] with instrumentation for inclusion in a future release.
+* Contacting [Datadog support][7] and submitting a feature request.
 
 ## Configuration
 
@@ -231,13 +231,13 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 * If the same key type is set for both, the system property configuration takes priority.
 * System properties can be used as JVM parameters.
-* By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][10].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][11], and that port `8125` is open on the Agent container.
-In Kubernetes, [bind the DogStatsD port to a host port][12]; in ECS, [set the appropriate flags in your task definition][13].
+* By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][9].
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
+In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][14] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][13] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Currently two styles are
@@ -342,14 +342,16 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [1]: /agent/docker/apm
 [2]: /tracing/setup/docker
 [3]: /agent/kubernetes/daemonset_setup/#trace-collection
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
-[6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[7]: http://bytebuddy.net
-[8]: /help
-[9]: https://github.com/DataDog/documentation#outside-contributors
-[10]: /developers/dogstatsd/#setup
-[11]: /agent/docker/#dogstatsd-custom-metrics
-[12]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[13]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[14]: https://github.com/openzipkin/b3-propagation
+[4]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
+[5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[6]: http://bytebuddy.net
+[7]: /help
+[8]: https://github.com/DataDog/documentation#outside-contributors
+[9]: /developers/dogstatsd/#setup
+[10]: /agent/docker/#dogstatsd-custom-metrics
+[11]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[12]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[13]: https://github.com/openzipkin/b3-propagation
+[14]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[16]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html

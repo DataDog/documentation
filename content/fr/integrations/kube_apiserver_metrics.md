@@ -87,15 +87,16 @@ Kube_apiserver_metrics n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-
-
-{{< get-dependencies >}}
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/datadog_checks/kube_apiserver_metrics/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/clusterchecks
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=kubernetes
 [6]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}

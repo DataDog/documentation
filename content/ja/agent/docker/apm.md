@@ -174,5 +174,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /ja/tracing/app_analytics/#automatic-configuration
+[2]: /ja/tracing/trace_search_and_analytics/#automatic-configuration
 [3]: /ja/tracing/send_traces

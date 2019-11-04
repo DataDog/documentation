@@ -55,17 +55,18 @@ logs_config:
   container_collect_all: true
 ```
 
-[Redémarrez l'Agent][5].
+[Redémarrez l'Agent][7].
 
-Utilisez [Autodiscovery avec les annotations de pod][6] pour configurer la collecte de logs de façon à ajouter des règles de traitement multiligne ou pour personnaliser les attributs `source` et `service`.
+Utilisez [Autodiscovery avec les annotations de pod][8] pour configurer la collecte de logs de façon à ajouter des règles de traitement multiligne ou pour personnaliser les attributs `source` et `service`.
 
 ## Pour aller plus loin
-Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, consultez la série d'[articles de blog de Datadog][7].
+Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, consultez la série d'[articles de blog de Datadog][6].
 
 [1]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [2]: /fr/agent
 [3]: /fr/agent/autodiscovery
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/?tab=kubernetes
-[7]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+[5]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
+[6]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/?tab=kubernetes
