@@ -30,8 +30,8 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Trace](#trace)                          | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                       |
 | [Span](#spans)                           | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                    |
 | [Trace metrics](#trace-metrics)          | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency. |
-| [App Analytics](#trace-search-analytics) | App Analytics is used to filter Analyzed Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                          |
-| [Analyzed Span](#apm-event)              | Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                          |
+| [App Analytics](#app-analytics) | App Analytics is used to filter Analyzed Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                          |
+| [Analyzed Span](#analyzed-span)              | Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                          |
 | [Span tags](#span-tags)                  | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*.                                                                              |
 
 ## Services
@@ -99,7 +99,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 ## App Analytics
 
-App Analytics is used to filter [Analyzed Spans](#apm-event) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][16].
+App Analytics is used to filter [Analyzed Spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][16].
 
 {{< wistia vrmqr812sz >}}
 
