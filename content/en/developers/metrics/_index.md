@@ -60,4 +60,3 @@ You can also use one of the [Datadog-official and community contributed API and 
 
 [1]: /graphing/metrics/introduction
 [2]: /developers/libraries
-
