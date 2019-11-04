@@ -99,7 +99,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 ## App Analytics
 
-App Analytics is used to filter [Analyzed Spans](#apm-event) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][16].
+App Analytics is used to filter [Analyzed Spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][16].
 
 {{< wistia vrmqr812sz >}}
 
