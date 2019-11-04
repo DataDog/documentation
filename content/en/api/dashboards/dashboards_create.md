@@ -18,8 +18,8 @@ external_redirect: /api/#create-a-dashboard
     * **`id`** [*optional*, *default*=**auto-generated integer**]:
         ID of the widget.
     * **`layout`** [*required* for widgets in dashboards with `free` layout_type only]. The structure of the layout follows this form:
-        - **`x`** [*required*] The position of the widget on the x (vertical) axis. Should be a non-negative integer.
-        - **`y`** [*required*] The position of the widget on the y (horizontal) axis. Should be a non-negative integer.
+        - **`x`** [*required*] The position of the widget on the x (horizontal) axis. Should be a non-negative integer.
+        - **`y`** [*required*] The position of the widget on the y (vertical) axis. Should be a non-negative integer.
         - **`width`** [*required*] The width of the widget. Should be a non-negative integer.
         - **`height`** [*required*] The height of the widget. Should be a non-negative integer.
 * **`layout_type`** [*required*]:

@@ -182,9 +182,7 @@ Remarque : pour tirer le meilleur parti de votre vue Log Explorer, assurez-vous
 {{< tabs >}}
 {{% tab "Facettes" %}}
 
-Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre de logs représentés. Son activation permet également de filtrer facilement vos données.
-
-Les facettes vous permettent de faire pivoter ou de filtrer vos ensembles de données en fonction d'un attribut donné. Les facettes peuvent correspondre à des utilisateurs, des services, etc.
+Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre de logs représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher.
 
 {{< img src="logs/explorer/facets_demo.png" alt="Démonstration de facettes" responsive="true" style="width:80%;">}}
 

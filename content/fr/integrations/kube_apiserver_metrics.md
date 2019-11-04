@@ -63,7 +63,7 @@ Attention : votre ou vos apiserver doivent être exécutés en tant que pods. L
 Vous pouvez également exécuter le check en configurant directement les endpoints dans le fichier `kube_apiserver_metrics.d/conf.yaml`, dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4].
 Consultez le [fichier d'exemple kube_apiserver_metrics.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-Par défaut, l'Agent qui exécute le check essaie d'obtenir le jeton de porteur du compte du service dans le but d'effectuer l'authentification auprès de APIServer. Si vous n'utilisez pas de système RBAC, définissez `bearer_token_auth` sur `false`.
+Par défaut, l'Agent qui exécute le check essaie d'obtenir le token de porteur du compte du service dans le but d'effectuer l'authentification auprès de APIServer. Si vous n'utilisez pas de système RBAC, définissez `bearer_token_auth` sur `false`.
 
 Enfin, si vous exécutez l'Agent Datadog sur les nœuds principaux, vous pouvez faire appel à [Autodiscovery][5] pour programmer l'exécution du check. Si vous exécutez l'image officielle `k8s.gcr.io/kube-apiserver`, cette opération s'effectue automatiquement.
 

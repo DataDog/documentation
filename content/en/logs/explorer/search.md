@@ -60,13 +60,13 @@ To search for logs that contain `user=JaneDoe` in the message attribute use the 
 `user\=JaneDoe`
 
 #### Facets search
-To search on a specific facet, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
-**Note**: Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is be applied to spaces within log attributes. Log attributes should not contain spaces, but if they do, spaces must be escaped. If an attribute is called `user.first name`, perform a search on this attribute by escaping the space: `@user.first\ name:myvalue`
+**Note**: Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is applied to spaces within log facet names. Log facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`
 
 Examples:
 

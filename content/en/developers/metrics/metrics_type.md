@@ -43,18 +43,19 @@ Refer to the [Metric Type Definition](#metric-type-definition) section below to 
 To better understand the different metrics types, what they represent, and how to modify them within Datadog, consider the following example:
 
 You have two web servers: `server:web_1` and `server:web_2`. Both web servers continuously receive:
-  * 10 HTTP requests for the first 30 seconds, then
-  * 20 HTTP requests for the next 30 seconds, then
-  * 0 HTTP requests for the next 30 seconds.
+
+* 10 HTTP requests for the first 30 seconds, then
+* 20 HTTP requests for the next 30 seconds, then
+* 0 HTTP requests for the next 30 seconds.
 
 ### Metric submission types
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-**The `COUNT` metric submission type represents the number of events that occur in a defined time interval, otherwise known as a flush interval**. This number of events can accumulate or decrease over time -- it is not monotonically increasing. A `COUNT` can be used to track the number of requests hitting your webservers or number of errors. 
+**The `COUNT` metric submission type represents the number of events that occur in a defined time interval, otherwise known as a flush interval**. This number of events can accumulate or decrease over time -- it is not monotonically increasing. A `COUNT` can be used to track the number of requests hitting your webservers or number of errors.
 
-**Note**: A `COUNT` is different from the `RATE` metric type, which represents this count of events normalized _per second_ given the defined time interval. 
+**Note**: A `COUNT` is different from the `RATE` metric type, which represents this count of events normalized _per second_ given the defined time interval.
 
 For example, suppose the `number.of.requests.count` metric is reported every 30 seconds to Datadog with the `COUNT` type on `server:web_1`.
 
@@ -65,7 +66,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 * `null` for the last interval of 30 seconds
 **Note**: for a `COUNT` metric, when a `0` value is submitted, `null` is stored within Datadog.
 
-When graphed, this `COUNT` metric looks like the following: 
+When graphed, this `COUNT` metric looks like the following:
 
 {{< img src="developers/metrics/metric_types/count_metric.png" alt="Count Metric" responsive="true">}}
 
@@ -83,7 +84,7 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-**The `RATE` metric submission type represents the number of events over a defined time interval (flush interval) that's normalized per-second. A `RATE` can be used to track the rate of requests hitting your webservers.
+**The `RATE` metric submission type represents the number of events over a defined time interval (flush interval) that's normalized per-second.** A `RATE` can be used to track the rate of requests hitting your webservers.
 
 **Note**: A `RATE` is different from the `COUNT` metric submission type, which represents the number of events in the flush interval.
 
@@ -96,7 +97,7 @@ Each value/data point represents the "rate" of requests. The metric then reports
 * `null` for the last interval of 30 seconds
 Then this pattern of `0.33`, `0.66`, `0`, repeats. **Note**: for a `RATE` metric, when a `0` value is submitted, `null` is stored within Datadog.
 
-Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following: 
+Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following:
 
 {{< img src="developers/metrics/metric_types/rate_metric.png" alt="Rate Metric" responsive="true">}}
 
@@ -186,23 +187,23 @@ Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during th
 
 For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following timeseries are available to query by default:
 
-| Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| `avg:<METRIC_NAME>`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
-| `count:<METRIC_NAME>`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
-| `max:<METRIC_NAME>`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
-| `min:<METRIC_NAME>`          | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
-| `sum:<METRIC_NAME>`          | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
+| Aggregation           | Description                                                                                                                                               | Datadog Metric Type |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `avg:<METRIC_NAME>`   | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
+| `count:<METRIC_NAME>` | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
+| `max:<METRIC_NAME>`   | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
+| `min:<METRIC_NAME>`   | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
+| `sum:<METRIC_NAME>`   | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
 
 For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a given flush interval, this would create the following metrics within Datadog:
 
-| Metric Name                                       | Value  | Datadog Metric Type |
-|---------------------------------------------------|--------|---------------------|
-| `avg:request.response_time.distribution`          | `1,73` | GAUGE               |
-| `count:request.response_time.distribution`        | `11`   | RATE                |
-| `max:request.response_time.distribution`          | `3`    | GAUGE               |
-| `min:request.response_time.distribution`          | `1`    | GAUGE               |
-| `sum:request.response_time.distribution`          | `19`   | GAUGE               |
+| Metric Name                                | Value  | Datadog Metric Type |
+|--------------------------------------------|--------|---------------------|
+| `avg:request.response_time.distribution`   | `1,73` | GAUGE               |
+| `count:request.response_time.distribution` | `11`   | RATE                |
+| `max:request.response_time.distribution`   | `3`    | GAUGE               |
+| `min:request.response_time.distribution`   | `1`    | GAUGE               |
+| `sum:request.response_time.distribution`   | `19`   | GAUGE               |
 
 Discover how to submit distribution metrics [with DogstatsD][1].
 
@@ -214,13 +215,13 @@ Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be ad
 
 If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created:
 
-| Metric Name                                       | Value  | Datadog Metric Type |
-|---------------------------------------------------|--------|---------------------|
-| `p50:request.response_time.distribution`          | `2 `   | GAUGE               |
-| `p75:request.response_time.distribution`          | `2`    | GAUGE               |
-| `p90:request.response_time.distribution`          | `3`    | GAUGE               |
-| `p95:request.response_time.distribution`          | `3`    | GAUGE               |
-| `p99:request.response_time.distribution`          | `3`    | GAUGE               |
+| Metric Name                              | Value | Datadog Metric Type |
+|------------------------------------------|-------|---------------------|
+| `p50:request.response_time.distribution` | `2 `  | GAUGE               |
+| `p75:request.response_time.distribution` | `2`   | GAUGE               |
+| `p90:request.response_time.distribution` | `3`   | GAUGE               |
+| `p95:request.response_time.distribution` | `3`   | GAUGE               |
+| `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
 **Note**: In the example above, the p50 (median) for `server:web_1` is `2` and the p50 for `server:web_2` is `1`. Agent-side aggregation would result in taking the median of these two median values, resulting in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric's server-side aggregation.
 

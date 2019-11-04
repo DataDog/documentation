@@ -1,5 +1,5 @@
 ---
-title: Surveillance de performance réseau
+title: Surveillance des performances réseau
 kind: documentation
 disable_toc: true
 description: Explorez les métriques pour la communication point à point sur votre infrastructure.

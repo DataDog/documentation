@@ -2,7 +2,7 @@
 title: Get a specific result
 type: apicontent
 order: 30.6
-external_redirect: /api/#get-result
+external_redirect: /api/#get-a-specific-result
 ---
 
 ## Get a specific result

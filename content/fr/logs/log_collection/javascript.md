@@ -31,9 +31,9 @@ Grâce à la bibliothèque `datadog-logs`, vous pouvez envoyer des logs directem
 * Enregistrez des user agents et des adresses IP de clients réels.
 * Optimisez l'utilisation du réseau grâce aux publications automatiques en bloc.
 
-## Obtenir un jeton client
+## Obtenir un token client
 
-Pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la bibliothèque `datadog-logs`, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [jeton client][2]. Pour en savoir plus sur la configuration d'un jeton client, consultez la [documentation relative aux jetons client][2].
+Pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la bibliothèque `datadog-logs`, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][2]. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation relative aux tokens client][2].
 
 ## Configurer le logger JavaScript
 
@@ -41,7 +41,7 @@ Les paramètres suivants peuvent être utilisés pour configurer la bibliothèqu
 
 * Définissez `forwardErrorsToLogs` sur `false` pour désactiver la collecte d'erreurs de console et d'erreurs JS automatique.
 * Utilisez `addLoggerGlobalContext` pour ajouter des attributs JSON à tous les logs générés.
-* Définissez `clientToken` sur la valeur du jeton client (**vous ne pouvez utiliser que des jetons client dans cette bibliothèque**).
+* Définissez `clientToken` sur la valeur du token client (**vous ne pouvez utiliser que des tokens client dans cette bibliothèque**).
 
 Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de configurer la bibliothèque au début de la section <head> de vos pages.
 
@@ -54,9 +54,9 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <title>Exemple pour envoyer des logs à Datadog.</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
     <script>
-      // Définir votre jeton client.
+      // Définir votre token client.
       window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<JETON_CLIENT>',
+        clientToken: '<TOKEN_CLIENT>',
         forwardErrorsToLogs: true,
       });
 
@@ -79,9 +79,9 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <title>Exemple pour envoyer des logs à Datadog.</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
     <script>
-      // Définir votre jeton client.
+      // Définir votre token client.
       window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<JETON_CLIENT>',
+        clientToken: '<TOKEN_CLIENT>',
         forwardErrorsToLogs: true,
       });
 

@@ -146,7 +146,7 @@ services:
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
 
 Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
 
@@ -400,12 +400,17 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 
 ### Azure
 
-For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
+Azure integration metrics, events, and service checks receive the following tags:
 
-| Integration            | Datadog Tag Keys                                                                                                                                      |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All Azure integrations | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable) |
-| Azure VMs integration  | All tags above plus: `host`, `size`, `operating_system`, `availability_zone`                                                                          |
+| Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                  |
+|-------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations                                | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                             |
+| Azure VM integrations                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                           |
+| Azure App Service Plans<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                  |
+| Azure App Services Web Apps & Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version` |
+| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                            | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`                                                                                                                            |
+
+<sup>(1)</sup>*Resource-specific tags are in beta.*
 
 ## Further Reading
 

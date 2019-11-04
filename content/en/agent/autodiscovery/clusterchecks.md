@@ -79,32 +79,6 @@ Running [custom Agent checks][7] as cluster checks is supported, as long as all 
 - Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
 - Must **not** depend on local resources that are not accessible to all Agents.
 
-### Advanced dispatching logic using dedicated cluster check runners
-
-The [Datadog Helm Chart][13] offers the possibility to deploy, via the `clusterchecksDeployment` field, a set of Datadog Agents configured to run cluster checks only.
-
-Using dedicated cluster check runners allows the Cluster Agent to use an advanced dispatching logic, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
-
-#### Advanced Dispatching - Cluster Agent setup
-
-In addition to the steps mentioned in the [Cluster Agent Setup][14] section, you must set `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` to `true`.
-
-#### Advanced Dispatching - Cluster Check Runner setup
-
-The following environment variables are required to configure the cluster check runners to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
-
-```
-  env:
-    - name: DD_CLC_RUNNER_ENABLED
-      value: "true"
-    - name: DD_CLC_RUNNER_HOST
-      valueFrom:
-        fieldRef:
-          fieldPath: status.podIP
-```
-
-**Note**: The advanced dispatching logic is only supported when using dedicated cluster check runners. This feature does not support regular node Agents.
-
 ## Setting up check configurations
 
 ### Static configurations in files
