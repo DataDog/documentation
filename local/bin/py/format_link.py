@@ -42,7 +42,7 @@ def prepare_file(file):
 
 def process_section(section, regex_skip_sections_start, regex_skip_sections_end):
 
-    regex_link_inlined = r"\s\[.*?\]\((.*?)\)\s"
+    regex_link_inlined = r"\s\[.*?\]\((.*?)\)"
     regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (.*)"
 
     split_text_without_references = r"((.|\n)*)\n\[\d\]: .*"
@@ -106,7 +106,6 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
                             all_links.append(link)
 
     # Adding reference in text
-
     section_with_references = []
 
     for line in section_with_all_links:
