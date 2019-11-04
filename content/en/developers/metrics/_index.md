@@ -19,6 +19,7 @@ further_reading:
 
 A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][1] to learn how to graph metrics within Datadog.
 
+
 | Property         | Description                                                                                                                                               |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
