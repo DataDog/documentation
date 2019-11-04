@@ -102,7 +102,6 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `number`                                                       | Parses a match as double precision number.                                                                                                                |
 | `integer`                                                      | Parses a match as an integer number.                                                                                                                      |
 | `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                              |
-| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a Unix timestamp. [See date Filter examples](#parsing-dates).                                         |
 | `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
 | `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
@@ -174,27 +173,13 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList 
 
 * `separatorStr`: defines the separator. Defaults to `=`.
 * `characterWhiteList`: defines additional non-escaped value chars. Defaults to `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, etc.). 
-  * When defined, the default behavior is replaced by allowing only defined quoting character.
-  * Datadog always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. 
-  * Any string defined within the quoting characterss is extracted as a value.
-    
-    For example, input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output:
-    
-  ```
-  {
-    "key": [
-      "valueStr",
-      "/$%@valueStr2"
-    ]
-  }
-  ```
+* `quotingStr`: defines quotes. Default behavior detects quotes (`<>`, `""`, etc.). 
 
 **Note**: If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
-log:
+Log:
 
 ```
 user=john connect_date=11/08/2017 id=123 action=click
@@ -215,7 +200,7 @@ If you add an **extract** attribute `my_attribute` in your rule pattern you woul
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
 
-log:
+Log:
 
 ```
 user: john connect_date: 11/08/2017 id: 123 action: click
@@ -231,7 +216,7 @@ rule %{data::keyvalue(": ")}
 
 If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
 
-log:
+Log:
 
 ```
 url=https://app.datadoghq.com/event/stream user=john
@@ -254,6 +239,30 @@ Other examples:
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
+
+**Multiple QuotingString example**:  When quotingstring are defined, the default behavior is replaced by allowing only defined quoting character.
+The keyvalue always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters are extracted.
+
+Log:
+
+  ```
+  key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
+  ```
+
+Rule:
+
+  ```
+  rule %{data::keyvalue(":=","","<>")}
+  ```
+
+Result:
+    
+  ```
+  {
+    "key1": "valueStr",
+    "key2": "/valueStr2"
+  }
+  ```
 
 ### Parsing dates
 
