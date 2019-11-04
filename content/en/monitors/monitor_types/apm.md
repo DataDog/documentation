@@ -3,7 +3,7 @@ title: APM Monitor
 kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
-  - /monitors/monitor_types/app_analytics
+  - /monitors/monitor_types/trace_analytics
   - /monitors/monitor_types/trace_search
 further_reading:
 - link: "monitors/notifications"
@@ -21,13 +21,13 @@ further_reading:
 
 APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-App Analytics monitors allow you to visualize APM data over time and set up alerts based on Analyzed Spans. For example, use a App Analytics monitor to receive alerts on a spike in slow requests.
+Trace analytics monitors allow you to visualize APM data over time and set up alerts based on APM events. For example, use a trace analytics monitor to receive alerts on a spike in slow requests.
 
 ## Monitor creation
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-Choose between an **APM Metrics** or **App Analytics** monitor:
+Choose between an **APM Metrics** or **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -63,7 +63,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 [2]: /tracing/visualization/service
 [3]: /tracing/visualization/resource
 {{% /tab %}}
-{{% tab "App Analytics" %}}
+{{% tab "Trace Analytics" %}}
 
 ### Define the search query
 
@@ -79,9 +79,9 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
-[1]: /tracing/advanced/search/#search-bar
-[2]: /tracing/advanced/search/#facet-search
-[3]: /tracing/advanced/search/#numerical-values
+[1]: /tracing/trace_search_and_analytics/search/#search-bar
+[2]: /tracing/trace_search_and_analytics/search/#facet-search
+[3]: /tracing/trace_search_and_analytics/search/#numerical-values
 {{% /tab %}}
 {{< /tabs >}}
 

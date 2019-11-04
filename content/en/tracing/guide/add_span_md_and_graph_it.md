@@ -242,12 +242,12 @@ The bottom part of the view includes additional information about the trace or a
 <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
 
-## Leverage your custom span tags with App Analytics
-<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>enabled App Analytics</a></div>
+## Leverage your custom span tags with Trace Search & Analytics
+<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>enabled Trace Search and Analytics</a></div>
 
 4) **Navigate to the [Trace Search page][7]**.
 
-The Trace Search page allows you to identify specific [Traces][8] and Analyzed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][9]).
+The Trace Search page allows you to identify specific [Traces][8] and APM Events you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][9]).
 
 5) **Find a trace that has the new tag**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
 
@@ -261,9 +261,9 @@ You can now determine the displayed name of your facet and where to place it in 
 
 You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
 
-6) **Navigate to the [App Analytics][10] page**
+6) **Navigate to the [Trace Analytics][10] page**
 
-The App Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [App Analytics overview][11].
+The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][11].
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
@@ -291,7 +291,7 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [6]: /tracing/visualization/#resources
 [7]: https://app.datadoghq.com/apm/search
 [8]: https://docs.datadoghq.com/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/tracing/advanced/search
+[9]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/search
 [10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/tracing/app_analytics/analytics
+[11]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/analytics
 [12]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database

@@ -87,7 +87,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
 7. **Accédez à l'[analyse de traces][4]**.
 
-    Cet exemple illustre la marche à suivre pour mesurer la latence au sein d'une application, en classant les résultats par marchands afin d'identifier les 10 marchands qui présentent la latence la plus élevée. Depuis l'écran App Analytics, exportez le graphique vers le dashboard et affichez-le dans celui-ci :
+    Cet exemple illustre la marche à suivre pour mesurer la latence au sein d'une application, en classant les résultats par marchands afin d'identifier les 10 marchands qui présentent la latence la plus élevée. Depuis l'écran Trace Analytics, exportez le graphique vers le dashboard et affichez-le dans celui-ci :
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" responsive="true" style="width:90%;">}}
 

@@ -27,11 +27,11 @@ Datadog APM allows you to create dashboards based on your business priorities an
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
 Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web-server ahead of any major events like Black Friday.
 
-This guides walks you through adding trace metrics to a dashboard, correlating them with infrastructure metrics and then how to export a App Analytics query. This guide covers adding widgets to the dashboard in three ways:
+This guides walks you through adding trace metrics to a dashboard, correlating them with infrastructure metrics and then how to export a Trace Analytics query. This guide covers adding widgets to the dashboard in three ways:
 
 * Copying an existing APM graph _( Step 1. 2. & 3.)_
 * Creating it manually. _(Step 4. & 5. )_
-* Exporting a App Analytics query. _(Step 7.)_
+* Exporting a Trace Analytics query. _(Step 7.)_
 
 1. **Open the [Service List page][1]** and choose the `web-store` service.
 
@@ -85,9 +85,9 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     This setup can show whether a spike in latency is assocaited with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
 
-7. **Go to [App Analytics][4]**.
+7. **Go to [Trace Analytics][4]**.
 
-    This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the App Analytics screen, export the graph to the dashboard and view it there:
+    This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the Trace Analytics screen, export the graph to the dashboard and view it there:
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" responsive="true" style="width:90%;">}}
 

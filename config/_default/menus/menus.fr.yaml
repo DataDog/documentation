@@ -554,11 +554,6 @@ main:
     parent: monitor_types
     weight: 113
     identifier: monitor_apm
-  - name: Analyses de traces
-    url: monitors/monitor_types/app_analytics
-    parent: monitor_types
-    identifier: monitors_trace_analytics
-    weight: 114
   - name: Watchdog
     url: monitors/monitor_types/watchdog/
     parent: monitor_types
@@ -724,24 +719,24 @@ main:
     parent: tracing_vis
     weight: 405
   - name: Analyse et recherche de traces
-    url: tracing/app_analytics/
+    url: tracing/trace_search_and_analytics/
     parent: tracing
     identifier: tracing_search_analytics
     weight: 5
   - name: Configuration de l'Agent
-    url: tracing/app_analytics/agent_trace_search/
+    url: tracing/trace_search_and_analytics/agent_trace_search/
     parent: tracing_search_analytics
     weight: 501
   - name: Recherche de traces
-    url: tracing/advanced/search/
+    url: tracing/trace_search_and_analytics/search/
     parent: tracing_search_analytics
     weight: 502
   - name: Analyse de traces
-    url: tracing/app_analytics/analytics/
+    url: tracing/trace_search_and_analytics/analytics/
     parent: tracing_search_analytics
     weight: 503
-  - name: Les monitors
-    url: monitors/monitor_types/app_analytics
+  - name: Monitors
+    url: monitors/monitor_types/trace_analytics
     parent: tracing_search_analytics
     weight: 504
   - name: Guides

@@ -1,7 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
-description: "Display the evolution of one or more metrics, log events, Analyzed Spans, or process metrics over time."
+description: "Display the evolution of one or more metrics, log events, APM events, or process metrics over time."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -17,7 +17,7 @@ further_reading:
   text: "Explore your data in full-screen graph mode"
 ---
 
-The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Analyzed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
+The timeseries visualization allows you to display the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
 {{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
 
@@ -29,8 +29,8 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][3] to configure a metric query.
-    * Analyzed Spans: See [the trace search documentation][4] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][5] to configure an Analyzed Span query.
+    * APM Events: See [the trace search documentation][4] to configure an APM event query.
+    * Log Events: See [the log search documentation][5] to configure an APM event query.
 
 2. Customize your graph with the available [options](#options).
 
@@ -179,7 +179,7 @@ Additional properties allowed in each `request` object:
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
 [3]: /graphing
-[4]: /tracing/advanced/search/#search-bar
+[4]: /tracing/trace_search_and_analytics/search/#search-bar
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [6]: /graphing/event_stream
 [7]: /graphing/dashboards/template_variables
