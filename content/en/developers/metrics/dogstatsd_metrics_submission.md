@@ -44,7 +44,7 @@ After [installing DogStatsD][1], the functions below are available for submittin
 
 #### Code examples
 
-Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
+Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types](/developers/metrics/metrics_type/?tab=count#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -218,7 +218,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 #### Code examples
 
-Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
+Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types](/developers/metrics/metrics_type/?tab=gauge#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -387,7 +387,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 #### Code examples
 
-Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `SET` type in the [metric types][6] documentation.
+Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `SET` type in the [metric types](/developers/metrics/metrics_type/?tab=set#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -530,7 +530,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type](/developers/metrics/metrics_type/?tab=histogram#metric-type-definition) documentation to learn more. |
 
 #### Configuration
 
@@ -539,7 +539,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 #### Code examples
 
-The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types](/developers/metrics/metrics_type/?tab=histogram#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -709,7 +709,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type](/developers/metrics/metrics_type/?tab=histogram#metric-type-definition) documentation to learn more. |
 
 ##### Configuration
 
@@ -717,7 +717,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types](/developers/metrics/metrics_type/?tab=histogram#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -792,7 +792,7 @@ Distribution metrics are in BETA. [Contact Datadog support][9] to enable the fea
 
 #### Code examples
 
-The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][11] documentation.
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types](/developers/metrics/metrics_type/?tab=distribution#metric-type-definition) documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1080,6 +1080,7 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/dogstatsd
 [2]: /developers/metrics/metrics_type/?tab=count#metric-type-definition
 [3]: /graphing/functions/arithmetic/#cumulative-sum
