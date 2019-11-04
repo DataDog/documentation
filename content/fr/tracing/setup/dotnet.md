@@ -158,14 +158,14 @@ DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 Par exemple, pour définir les variables d'environnement à partir d'un fichier de commandes avant de démarrer votre application :
 
 ```bat
-rem Définir les variables d'environnement
+rem Set environment variables
 SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 set DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
-rem Démarrer l'application
+rem Start application
 example.exe
 ```
 
@@ -199,14 +199,14 @@ DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
 
 ```bat
-rem Définir les variables d'environnement
+rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 SET DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
-rem Démarrer l'application
+rem Start application
 dotnet.exe example.dll
 ```
 
@@ -375,12 +375,12 @@ Pour configurer le traceur à l'aide de variables d'environnement, définissez-l
 
 Par exemple, sous Windows :
 ```cmd
-rem Définir les variables d'environnement
+rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_SERVICE_NAME=MonService
 SET DD_ADONET_ENABLED=false
 
-rem Démarrer l'application
+rem Launch application
 MonApplication.exe
 ```
 
