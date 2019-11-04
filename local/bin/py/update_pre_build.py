@@ -539,7 +539,7 @@ class PreBuild:
                 try:
                     self.process_integrations(content)
                 except:
-                    print("Unsuccessful processing of {}".format(
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
                             content
                         )
                     )
@@ -548,7 +548,7 @@ class PreBuild:
                 try:
                     self.process_source_attribute(content)
                 except:
-                    print("Unsuccessful processing of {}".format(
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
                             content
                         )
                     )
@@ -559,7 +559,7 @@ class PreBuild:
                 try:
                     self.pull_and_push_folder(content)
                 except:
-                    print("Unsuccessful processing of {}".format(
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
                             content
                         )
                     )
@@ -569,7 +569,7 @@ class PreBuild:
                 try:
                     self.pull_and_push_file(content)
                 except:
-                    print("Unsuccessful processing of {}".format(
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
                             content
                         )
                     )
