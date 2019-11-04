@@ -105,13 +105,6 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
-	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
-
-# ARGS=<file> will format that file
-# ARGS=<directory> will recursively format all english markdown files inside <directory>
-# empty ARGS will format all english markdown files inside content/en/
-link-formatting: source-helpers
-	@local/bin/sh/format-links.sh $(ARGS)
 
 start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."
