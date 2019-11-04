@@ -43,11 +43,11 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 Le check MapR est inclus avec le paquet de l'[Agent Datadog][2], mais il nécessite des opérations d'installation supplémentaires.
 
-1. Créez un utilisateur `dd-agent` associé à un mot de passe sur chaque nœud dans le cluster avec un `UID`/`GID` identique pour qu'il soit reconnu par MapR. Consultez la documentation [Managing users and groups][10] (en anglais) pour obtenir des informations supplémentaires.
+1. Créez un utilisateur `dd-agent` associé à un mot de passe sur chaque nœud dans le cluster avec un `UID`/`GID` identique pour qu'il soit reconnu par MapR. Consultez la documentation [Managing users and groups][3] (en anglais) pour obtenir des informations supplémentaires.
 2. Installez l'Agent sur chaque nœud à surveiller.
 3. Installez la bibliothèque *mapr-streams-library* avec la commande suivante : `/opt/datadog-agent/embedded/bin/pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python`. Si vous utilisez Python 3 avec l'Agent 6, remplacez `pip` par `pip3`.
 4. Ajoutez `/opt/mapr/lib/` à `/etc/ld.so.conf` (ou un fichier dans `/etc/ld.so.conf.d/`). Cette opération permet à la bibliothèque *mapr-streams-library* utilisée par l'Agent de trouver les bibliothèques partagées MapR.
-5. Générez un [ticket à long terme][8] pour l'utilisateur `dd-agent`.
+5. Générez un [ticket à long terme][4] pour l'utilisateur `dd-agent`.
 6. Assurez-vous que l'utilisateur `dd-agent` peut lire le ticket.
 7. Configurez l'intégration (voir ci-dessous).
 
@@ -57,13 +57,13 @@ Le check MapR est inclus avec le paquet de l'[Agent Datadog][2], mais il nécess
 ### Configuration
 #### Collecte de métriques
 
-1. Modifiez le fichier `mapr.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour recueillir vos données de performance MapR. Consultez le [fichier d'exemple mapr.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `mapr.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour recueillir vos données de performance MapR. Consultez le [fichier d'exemple mapr.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 2. Définissez le paramètre `ticket_location` dans la configuration sur le chemin du ticket à long terme que vous avez créé.
-3. [Redémarrez l'Agent][4].
+3. [Redémarrez l'Agent][6].
 
 #### Collecte de logs
 
-MapR utilise FluentD pour les logs. Utilisez le [plug-in FluentD pour Datadog][11] afin de recueillir des logs MapR.
+MapR utilise FluentD pour les logs. Utilisez le [plug-in FluentD pour Datadog][7] afin de recueillir des logs MapR.
 La commande suivante télécharge et installe le plug-in dans le répertoire approprié.
 
 `curl https://raw.githubusercontent.com/DataDog/fluent-plugin-datadog/master/lib/fluent/plugin/out_datadog.rb -o /opt/mapr/fluentd/fluentd-<VERSION>/lib/fluentd-<VERSION>-linux-x86_64/lib/app/lib/fluent/plugin/out_datadog.rb`
@@ -89,12 +89,12 @@ Ensuite, mettez à jour `/opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/fluentd
   </store>
 ```
 
-Consultez la documentation de [fluent_datadog_plugin][11] (en anglais) pour en savoir plus sur les options disponibles.
+Consultez la documentation de [fluent_datadog_plugin][7] (en anglais) pour en savoir plus sur les options disponibles.
 
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `mapr` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][8] et cherchez `mapr` dans la section Checks.
 
 ## Données collectées
 
@@ -113,23 +113,17 @@ Le check MapR n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-[1]: https://mapr.com
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://mapr.com/docs/61/MapR_Streams/MapRStreamsPythonExample.html
-[8]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html
-[9]: https://mapr.com/docs/60/MapR_Streams/MapRStreamCAPISetup.html
-[10]: https://mapr.com/docs/61/AdministratorGuide/c-managing-users-and-groups.html
-[11]: https://www.rubydoc.info/gems/fluent-plugin-datadog
-[12]: https://mapr.com/docs/61/AdvancedInstallation/SettingUptheClient-install-mapr-client.html
-[13]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
-[14]: http://upstart.ubuntu.com/cookbook/#environment-variables
-[15]: https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines
 
 
 {{< get-dependencies >}}
+[1]: https://mapr.com
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://mapr.com/docs/61/AdministratorGuide/c-managing-users-and-groups.html
+[4]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html
+[5]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://www.rubydoc.info/gems/fluent-plugin-datadog
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[9]: https://docs.datadoghq.com/fr/help

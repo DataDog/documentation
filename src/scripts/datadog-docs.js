@@ -703,9 +703,9 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="account_management/billing"]');
     }
 
-    if (path.includes('monitors/monitor_types/trace_analytics')) {
-        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/trace_analytics"]');
-        maPath = document.querySelector('header [data-path*="monitors/monitor_types/trace_analytics"]');
+    if (path.includes('monitors/monitor_types/app_analytics')) {
+        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/app_analytics"]');
+        maPath = document.querySelector('header [data-path*="monitors/monitor_types/app_analytics"]');
     }
 
     if (path.includes('developers/guide')) {

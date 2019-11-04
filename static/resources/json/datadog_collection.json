@@ -10931,7 +10931,7 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nGet hourly usage For Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
+						"description": "### Overview\n\nGet hourly usage For Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Analyzed Spans indexed.\n* **`hour`**: The hour for the usage."
 					},
 					"response": []
 				},

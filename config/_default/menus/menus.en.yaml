@@ -805,32 +805,36 @@ main:
     parent: "tracing"
     identifier: "tracing_advanced"
     weight: 3
+  - name: "Trace Search"
+    url: "tracing/advanced/search/"
+    parent: "tracing_advanced"
+    weight: 301
   - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
-    weight: 301
+    weight: 302
   - name: "Adding Span Tags"
     url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
-    weight: 302
+    weight: 303
   - name: "Runtime Metrics"
     url: "tracing/advanced/runtime_metrics/"
     parent: "tracing_advanced"
-    weight: 303
+    weight: 304
   - name: "OpenTracing"
     url: "tracing/advanced/opentracing/"
     parent: "tracing_advanced"
-    weight: 304
+    weight: 305
   - name: "Manual Instrumentation"
     url: "tracing/advanced/manual_instrumentation/"
     parent: "tracing_advanced"
-    weight: 305
+    weight: 306
   - name: "Setting Primary Tags to scope "
     url: "tracing/advanced/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
-    weight: 306
+    weight: 307
 
-  ## TACING - Using the APM UI
+  ## TRACING - Using the APM UI
 
   - name: "APM Glossary"
     url: "tracing/visualization/"
@@ -860,26 +864,22 @@ main:
 
   ## TRACING - Trace Search
 
-  - name: "Trace Search & Analytics"
-    url: "tracing/trace_search_and_analytics/"
+  - name: "App Analytics"
+    url: "tracing/app_analytics/"
     parent: "tracing"
-    identifier: "tracing_search_analytics"
+    identifier: "app_analytics"
     weight: 5
   - name: "Agent Configuration"
-    url: "tracing/trace_search_and_analytics/agent_trace_search/"
-    parent: "tracing_search_analytics"
+    url: "tracing/app_analytics/agent_trace_search/"
+    parent: "app_analytics"
     weight: 501
-  - name: "Trace Search"
-    url: "tracing/trace_search_and_analytics/search/"
-    parent: "tracing_search_analytics"
-    weight: 502
-  - name: "Trace Analytics"
-    url: "tracing/trace_search_and_analytics/analytics/"
-    parent: "tracing_search_analytics"
+  - name: "Viewing Analytics"
+    url: "tracing/app_analytics/analytics/"
+    parent: "app_analytics"
     weight: 503
   - name: "Monitors"
-    url: "monitors/monitor_types/trace_analytics"
-    parent: "tracing_search_analytics"
+    url: "monitors/monitor_types/apm/"
+    parent: "app_analytics"
     weight: 504
 
   - name: "Guides"

@@ -19,6 +19,6 @@ Get hourly usage For Trace Search.
 **RESPONSE**:
 
 * **`indexed_events_count`**:
-    Contains the number of Trace Search events indexed.
+    Contains the number of Analyzed Spans indexed.
 * **`hour`**:
     The hour for the usage.

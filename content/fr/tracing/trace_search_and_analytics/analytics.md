@@ -22,13 +22,13 @@ further_reading:
   - link: tracing/visualization/trace
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: tracing/trace_search_and_analytics/search
+  - link: tracing/app_analytics/search
     tag: Documentation
     text: Recherche globale sur toutes vos traces avec des tags
 ---
 Passez du mode de recherche de traces au mode d'analyse de traces en cliquant sur le bouton *Trace Mode* :
 
-{{< img src="tracing/trace_search_and_analytics/analytics/switch_analytics.png" alt="Changement d'analyse" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/switch_analytics.png" alt="Changement d'analyse" responsive="true" style="width:40%;">}}
 
 ## Requête d'analyse de traces
 
@@ -36,24 +36,24 @@ Utilisez la requête pour contrôler ce qui s'affiche dans votre analyse de trac
 
 1. Choisissez la métrique `Duration` ou une [facette][1] à analyser. La sélection de la métrique `Duration` vous permet de choisir la fonction d'agrégation, tandis que la [facette][1] affiche le nombre de valeurs uniques.
 
-    {{< img src="tracing/trace_search_and_analytics/analytics/choose_measure_facet.png" alt="choisir mesure ou facette" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choisir mesure ou facette" responsive="true" style="width:50%;">}}
 
 2. Sélectionnez la fonction d'agrégation pour la métrique `Duration` :
 
-   {{< img src="tracing/trace_search_and_analytics/analytics/agg_function.png" alt="fonction d'agrégation" responsive="true" style="width:50%;">}}
+   {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="fonction d'agrégation" responsive="true" style="width:50%;">}}
 
 3. Utilisez un [tag][2] ou une [facette][1] pour fractionner votre analyse.
 
-    {{< img src="tracing/trace_search_and_analytics/analytics/split_by.png" alt="fractionnement" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="fractionnement" responsive="true" style="width:50%;">}}
 
 4. Choisissez d'afficher les *X* valeurs les plus **élevées** ou **faibles** en fonction de la [facette][1] ou de la `Duration` sélectionnée.
 
-    {{< img src="tracing/trace_search_and_analytics/analytics/top_bottom_button.png" alt="bouton top/bottom" responsive="true" style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="bouton top/bottom" responsive="true" style="width:20%;">}}
 
 5. Sélectionnez les laps de temps de l'analyse.
   Si vous changez l'intervalle global, cela modifie la liste des valeurs de laps de temps disponibles.
 
-    {{< img src="tracing/trace_search_and_analytics/analytics/timesteps.png" alt="Laps de temps" responsive="true" style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Laps de temps" responsive="true" style="width:30%;">}}
 
 ## Visualisations
 
@@ -71,7 +71,7 @@ Visualisez l'évolution de la métrique `Duration` (ou d'une [facette][1] corres
 
 L'analyse de traces avec une série temporelle suivante illustre : l'évolution de la **durée** de **pc99** (99e centile) toutes les **5 minutes** pour chaque **service**.
 
-{{< img src="tracing/trace_search_and_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle" responsive="true" style="width:90%;">}}
 
 ### Top List
 
@@ -80,7 +80,7 @@ Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de leur
 L'analyse de traces suivante avec une Top List illustre :
 la **durée** de **pc99** (99e centile) la plus élevée d'un **service**
 
-{{< img src="tracing/trace_search_and_analytics/analytics/top_list_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
 
 ### Table (Tableau)
 
@@ -94,17 +94,17 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 
  L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
-{{< img src="tracing/trace_search_and_analytics/analytics/trace_table_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
 
 ## Traces associées
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des [traces][3] correspondant à votre sélection :
 
-{{< img src="tracing/trace_search_and_analytics/analytics/view_traces.png" alt="afficher les traces" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="afficher les traces" responsive="true" style="width:40%;">}}
 
 ## Exportation
 
-{{< img src="tracing/trace_search_and_analytics/analytics/export_button.png" alt="Bouton d'exportation de votre analyse" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Bouton d'exportation de votre analyse" responsive="true" style="width:40%;">}}
 
 Exportez votre analyse de traces :
 
@@ -123,8 +123,8 @@ Exportez les [analyses de traces][7] de la recherche de traces ou créez-les dir
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/trace_search_and_analytics/search/#facets
-[2]: /fr/tracing/trace_search_and_analytics/search/#measures
+[1]: /fr/tracing/advanced/search/#facets
+[2]: /fr/tracing/advanced/search/#measures
 [3]: /fr/tracing/visualization/#trace
 [4]: /fr/monitors/monitor_types/apm
 [5]: /fr/graphing/dashboards/timeboard
