@@ -28,7 +28,7 @@ Les webhooks vous permettent de :
 ## Implémentation
 ### Configuration
 
-Accédez au [carré d'intégration Webhook][1] et saisissez l'URL et le nom du webhook que vous souhaitez utiliser.
+Accédez au carré d'intégration Webhook et saisissez l'URL et le nom du webhook que vous souhaitez utiliser.
 
 ## Utilisation
 
@@ -122,8 +122,5 @@ et comme charge utile :
 ```
 
 Ne cochez pas la case « Encode as form ».
-
-[1]: https://app.datadoghq.com/account/settings#integrations/webhooks
-
 
 {{< get-dependencies >}}

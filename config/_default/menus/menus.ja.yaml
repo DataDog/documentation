@@ -692,20 +692,20 @@ main:
   ## TRACING - Trace Search
 
   - name: "トレース検索と分析"
-    url: "tracing/trace_search_and_analytics/"
+    url: "tracing/app_analytics/"
     parent: "tracing"
     identifier: "tracing_search_analytics"
     weight: 5
   - name: "Agent 構成"
-    url: "tracing/trace_search_and_analytics/agent_trace_search/"
+    url: "tracing/app_analytics/agent_trace_search/"
     parent: "tracing_search_analytics"
     weight: 501
   - name: "トレース検索"
-    url: "tracing/trace_search_and_analytics/search/"
+    url: "tracing/advanced/search/"
     parent: "tracing_search_analytics"
     weight: 502
   - name: "トレース分析"
-    url: "tracing/trace_search_and_analytics/analytics/"
+    url: "tracing/app_analytics/analytics/"
     parent: "tracing_search_analytics"
     weight: 503
 

@@ -106,9 +106,12 @@ Le check OpenShift n'inclut aucun événement.
 Le check OpenShift n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes
 [2]: https://docs.openshift.org/latest/admin_guide/manage_scc.html
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup
@@ -117,8 +120,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [6]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/openshift/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[9]: https://docs.datadoghq.com/fr/help

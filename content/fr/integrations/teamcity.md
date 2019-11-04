@@ -94,6 +94,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 * [Suivez l'impact sur les performances des modifications du code avec TeamCity et Datadog.][9]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login
@@ -103,6 +106,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog
-
-
-{{< get-dependencies >}}

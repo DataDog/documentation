@@ -29,7 +29,7 @@ Dans la plupart des cas, ces inconvénients peuvent être atténués en ajustant
 
 Certaines clients StatsD et DogStatsD envoient par défaut une métrique par datagramme. Cela ajoute une charge importante au niveau du client, du système d'exploitation et de l'Agent. Si votre client prend en charge la mise en mémoire tampon de plusieurs métriques dans un datagramme, activez cette option pour réduire considérablement les volumes d'échange.
 
-Voici quelques exemples de [clients DogStatsD officiels pris en charge][3] :
+Voici quelques exemples de [clients DogStatsD officiels pris en charge][2] :
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -172,11 +172,11 @@ $client->increment('exemple_métrique.increment', $sampleRate->0.5 , array('envi
 
 Vous pouvez réduire le trafic depuis votre client DogStatsD vers l'Agent en définissant une valeur de taux d'échantillonnage pour votre client. Par exemple, un taux d'échantillonnage de `0.5` réduit de moitié le nombre de paquets UDP transmis. Cette solution constitue un compromis acceptable : vous réduisez le trafic, mais perdez légèrement en précision et en granularité.
 
-Pour en savoir plus et obtenir des exemples de code, consultez le paragraphe [Sample Rate de la page DogStatsD][4].
+Pour en savoir plus et obtenir des exemples de code, consultez le paragraphe [Sample Rate de la page DogStatsD][3].
 
 ### Utiliser DogStatsD sur UDS (Unix Domain Socket)
 
-UDS est un protocole de communication inter-processus utilisé pour [transporter les charges utiles de DogStatsD][2]. Comparé au protocole UDP, il présente une charge très limitée et réduit l'empreinte globale de DogStatsD sur votre système.
+UDS est un protocole de communication inter-processus utilisé pour [transporter les charges utiles de DogStatsD][4]. Comparé au protocole UDP, il présente une charge très limitée et réduit l'empreinte globale de DogStatsD sur votre système.
 
 ## Utiliser les mémoires tampon du noyau du système
 
@@ -214,7 +214,6 @@ dogstatsd_so_rcvbuf: 26214400
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent
-[2]: /fr/developers/dogstatsd/unix_socket
-[3]: /fr/developers/dogstatsd/#code
-[4]: /fr/developers/metrics/dogstatsd_metrics_submission/#sample-rates
-[5]: /fr/developers/dogstatsd/unix_socket
+[2]: /fr/developers/dogstatsd/#code
+[3]: /fr/developers/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /fr/developers/dogstatsd/unix_socket
