@@ -134,10 +134,6 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
         section_with_references.append("[" + str(i) + "]: " + link + "\n")
         i += 1
 
-    # Adding final new line if there was references
-    if not all_links == []:
-        section_with_references.append("\n")
-
     return section_with_references
 
 
