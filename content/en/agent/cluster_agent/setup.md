@@ -164,9 +164,11 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 2. In the `agent.yaml` manifest, replace `<DD_API_KEY>` with [your Datadog API key][4]:
 
-3. In the `agent.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
+3. In the `agent.yaml` manifest, replace `<DD_SITE>` with the Datadog site you are using, i.e. `datadoghq.com` or `datadoghq.eu`. This value defaults to `datadoghq.com`.
 
-4. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
+4. In the `agent.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
+
+5. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
 
 ### Verification
 
