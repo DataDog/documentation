@@ -139,7 +139,7 @@ def collect_all_links(
     regex_skip_sections_start,
     regex_skip_sections_end,
 ):
-    regex_link_inlined = r"\[.*?\]\((?!#)(.*?)\)"
+    regex_link_inlined = r"\[.*?\]\((?!#\?)(.*?)\)"
     all_links = []
     skip = False
     for line in section_with_all_links:
@@ -337,13 +337,13 @@ if __name__ == "__main__":
         default=None,
     )
 
-    no_issue = True
     options, args = parser.parse_args()
 
     regex_skip_sections_end = (r"(```|\{\{< \/code-block >\}\})")
     regex_skip_sections_start = r"(```|\{\{< code-block)"
 
     if options.file:
+      no_issue = True
       try:
           final_text = format_link_file(
               options.file,
@@ -361,15 +361,18 @@ if __name__ == "__main__":
     elif options.directory != None:
         print(options.directory)
         for filepath in glob.iglob(options.directory + '**/*.md', recursive=True):
+          no_issue = True
+          print('Formating file {}'.format(filepath))
           try:
             final_text = format_link_file(
-                options.file,
+                filepath,
                 regex_skip_sections_start,
                 regex_skip_sections_end,
             )
           except:
+            print('\x1b[31mERROR\x1b[0m: Processing file {}'.format(filepath))
             no_issue = False
 
-        if no_issue:
-          with open(options.file, "w") as final_file:
-            final_file.write(str(inline_section(final_text)))
+          if no_issue:
+            with open(filepath, "w") as final_file:
+              final_file.write(str(inline_section(final_text)))
