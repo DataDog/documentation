@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 import re
+import glob
 from optparse import OptionParser
 
 
 def array_line_to_text(array_of_lines):
+    """
+    Transforms an array of line into one single string
+    :param array_of_lines: Array of lines
+    :return text: All lines from the array concatenated into one string
+    """
     text = ""
     for line in array_of_lines:
         text += str(line)
@@ -15,7 +21,7 @@ def prepare_file(file):
     Goes through a file and parses it into different sections. Those sections are a list of lines and are put within an Array.
     The first item of the Array is the main section, all other item if any are sub sections, a.k.a tabs within the page.
     :param file: file to break down into sections
-    :return: array of sections, each section is a list of lines within this section
+    :return array_of_sections: Each section is a list of lines within this section
     """
 
     # A state machine is used here, the function takes line within the file one by one, and depending of the states, either
@@ -41,7 +47,9 @@ def prepare_file(file):
                 main_section.append(line)
                 if re.search(r"{{% tab ", line.strip()):
                     state = "tab"
-                if re.search(r"{{< /tabs >}}", line.strip()):
+                if re.search(
+                    r"{{< /tabs >}}", line.strip()
+                ):
                     state = "main"
             elif state == "tab":
                 if re.search(r"{{% /tab %}}", line.strip()):
@@ -60,24 +68,15 @@ def prepare_file(file):
             return 0
 
 
-def process_section(section, regex_skip_sections_start, regex_skip_sections_end):
-    """
-    Goes through a section. A section is an array of lines
-
-    :param section: array of lines to handle
-    :param regex_skip_sections_start: regex defining the start line that indicates a block of line that shouldn't be processed
-    :param regex_skip_sections_end: regex defining the end line that indicates a block of line that shouldn't be processed
-    :return: section_with_references which is an array of lines.
-    """
-
-    regex_link_inlined = r"\[.*?\]\((?!#)(.*?)\)"
-    regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (.*)"
-
-    split_text_without_references = r"((.|\n)*)\n\[\d\]: .*"
-
+def remove_reference(
+    section,
+    regex_skip_sections_start,
+    regex_skip_sections_end,
+):
     skip = False
     all_references = []
     section_without_references = []
+    regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (.*)"
 
     # Collecting all references and removing them from section
     # looking at each line, if a line is a reference then we remove it and store the reference.
@@ -92,17 +91,30 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
             if re.search(regex_skip_sections_start, line):
                 section_without_references.append(line)
                 skip = True
-            elif re.search(regex_bottom_reference_link, line):
-                reference = re.search(regex_bottom_reference_link, line)
-                all_references.append([reference.group(1), reference.group(2)])
+            elif re.search(
+                regex_bottom_reference_link, line
+            ):
+                reference = re.search(
+                    regex_bottom_reference_link, line
+                )
+                all_references.append(
+                    [reference.group(1), reference.group(2)]
+                )
             else:
                 section_without_references.append(line)
 
-    # Inlining refrences
-    # Looking at each line, it replaces reference link [.*][\d] by the full inlined link
+    return [all_references, section_without_references]
 
+
+def inlining_all_links(
+    section_without_references,
+    all_references,
+    regex_skip_sections_start,
+    regex_skip_sections_end,
+):
     section_with_all_links = []
     skip = False
+
     for line in section_without_references:
         if skip:
             if re.search(regex_skip_sections_end, line):
@@ -113,15 +125,23 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
             else:
                 for reference in all_references:
                     curent_link = "][" + reference[0] + "]"
-                    line = line.replace(curent_link, "](" + reference[1] + ")")
+                    line = line.replace(
+                        curent_link,
+                        "](" + reference[1] + ")",
+                    )
         section_with_all_links.append(line)
 
-    skip = False
+    return section_with_all_links
 
-    # Collecting all links from file
-    # Looking at each line, it extracts all links it can found and add it to all_links array
 
+def collect_all_links(
+    section_with_all_links,
+    regex_skip_sections_start,
+    regex_skip_sections_end,
+):
+    regex_link_inlined = r"\[.*?\]\((?!#)(.*?)\)"
     all_links = []
+    skip = False
     for line in section_with_all_links:
         if skip:
             if re.search(regex_skip_sections_end, line):
@@ -130,15 +150,26 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
             if re.search(regex_skip_sections_start, line):
                 skip = True
             else:
-                line_links = re.findall(regex_link_inlined, line, re.MULTILINE)
+                line_links = re.findall(
+                    regex_link_inlined, line, re.MULTILINE
+                )
                 if not line_links == []:
                     for link in line_links:
                         # If the link is already in the array, then it doesn't add it to avoid duplicated link
                         if link not in all_links:
                             all_links.append(link)
+    return all_links
 
-    # Now that all link are extracted, it creates a new section with all inlined referenced link
+
+def transform_link_to_references(
+    section_with_all_links,
+    all_links,
+    regex_skip_sections_start,
+    regex_skip_sections_end,
+):
     section_with_references = []
+
+    skip = False
 
     for line in section_with_all_links:
         if skip:
@@ -150,18 +181,78 @@ def process_section(section, regex_skip_sections_start, regex_skip_sections_end)
             else:
                 i = 1
                 for link in all_links:
-                    link_to_reference = "](" + str(link) + ")"
-                    line = line.replace(link_to_reference, "][" + str(i) + "]")
+                    link_to_reference = (
+                        "](" + str(link) + ")"
+                    )
+                    line = line.replace(
+                        link_to_reference,
+                        "][" + str(i) + "]",
+                    )
 
                     i += 1
         section_with_references.append(line)
+
+    return section_with_references
+
+
+def process_section(
+    section,
+    regex_skip_sections_start,
+    regex_skip_sections_end,
+):
+    """
+    Goes through a section. A section is an array of lines
+
+    :param section: array of lines to handle
+    :param regex_skip_sections_start: regex defining the start line that indicates a block of line that shouldn't be processed
+    :param regex_skip_sections_end: regex defining the end line that indicates a block of line that shouldn't be processed
+    :return: section_with_references which is an array of lines.
+    """
+
+    references_and_section = remove_reference(
+        section,
+        regex_skip_sections_start,
+        regex_skip_sections_end,
+    )
+
+    all_references = references_and_section[0]
+    section_without_references = references_and_section[1]
+
+    # Inlining refrences
+    # Looking at each line, it replaces reference link [.*][\d] by the full inlined link
+    section_with_all_links = inlining_all_links(
+        section_without_references,
+        all_references,
+        regex_skip_sections_start,
+        regex_skip_sections_end,
+    )
+
+    # Collecting all links from file
+    # Looking at each line, it extracts all links it can found and add it to all_links array
+
+    all_links = collect_all_links(
+        section_with_all_links,
+        regex_skip_sections_start,
+        regex_skip_sections_end,
+    )
+
+    # Now that all link are extracted, it creates a new section with all inlined referenced link
+
+    section_with_references = transform_link_to_references(
+        section_with_all_links,
+        all_links,
+        regex_skip_sections_start,
+        regex_skip_sections_end,
+    )
 
     # Finally it adds all refrerences at the end of the section
 
     i = 1
 
     for link in all_links:
-        section_with_references.append("[" + str(i) + "]: " + link + "\n")
+        section_with_references.append(
+            "[" + str(i) + "]: " + link + "\n"
+        )
         i += 1
 
     return section_with_references
@@ -172,67 +263,113 @@ def inline_section(file_prepared):
     # inlining sections
     final_text = str(file_prepared[0])
     i = 1
-    regex_section = r"({{% tab \".*?\" %}}\n(.*?){{% /tab %}})"
+    regex_section = (
+        r"({{% tab \".*?\" %}}\n(.*?){{% /tab %}})"
+    )
     # taking into account that adding a section text creates an offset for the whole file
     offset = 0
     offset_current = 0
-    for section in re.finditer(regex_section, file_prepared[0], re.MULTILINE):
+    for section in re.finditer(
+        regex_section, file_prepared[0], re.MULTILINE
+    ):
         offset = offset_current + section.end() - 12
-        final_text = final_text[:offset] + str(file_prepared[i]) + final_text[offset:]
-        offset_current = offset_current + len(file_prepared[i])
+        final_text = (
+            final_text[:offset]
+            + str(file_prepared[i])
+            + final_text[offset:]
+        )
+        offset_current = offset_current + len(
+            file_prepared[i]
+        )
 
         i = i + 1
     return final_text
 
 
-if __name__ == "__main__":
-    parser = OptionParser(usage="usage: %prog [options] file")
-    parser.add_option(
-        "-f", "--file", help="file to format link in reference", default=None,
-    )
-
-    options, args = parser.parse_args()
-    not_issue = True
-
-    prepared_file = prepare_file(options.file)
+def format_link_file(
+    file, regex_skip_sections_start, regex_skip_sections_end
+):
+    prepared_file = prepare_file(file)
+    no_issue = True
 
     if prepared_file != 0:
         final_text = []
-
-        regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
-        regex_skip_sections_start = r"(```|\{\{< code-block)"
-
         for section in prepared_file:
             try:
                 final_text.append(
                     array_line_to_text(
                         process_section(
-                            section, regex_skip_sections_start, regex_skip_sections_end
+                            section,
+                            regex_skip_sections_start,
+                            regex_skip_sections_end,
                         )
                     )
                 )
-
             except:
-                not_issue = False
+                no_issue = False
                 print(
                     "\x1b[31mERROR\x1b[0m: There was an issue processing section:\n {}".format(
                         section
                     )
                 )
-
-        if not_issue:
-            with open(options.file, "w") as final_file:
-                final_file.write(str(inline_section(final_text)))
-        else:
-            print(
-                "\x1b[31mERROR\x1b[0m: FAILURE: There was an issue formating file: {} \n ".format(
-                    options.file
-                )
-            )
-
+        return final_text
     else:
         print(
             "\x1b[31mERROR\x1b[0m: Couldn't split the file into multiple section correctly, check the file: {}".format(
-                options.file
+                file
             )
         )
+
+if __name__ == "__main__":
+    parser = OptionParser(
+        usage="usage: %prog [options] file"
+    )
+    parser.add_option(
+        "-f",
+        "--file",
+        help="File to format link in reference",
+        default=None,
+    )
+    parser.add_option(
+        "-d",
+        "--directory",
+        help="Directory to format link in reference for all markdown file",
+        default=None,
+    )
+
+    no_issue = True
+    options, args = parser.parse_args()
+
+    regex_skip_sections_end = (r"(```|\{\{< \/code-block >\}\})")
+    regex_skip_sections_start = r"(```|\{\{< code-block)"
+
+    if options.file:
+      try:
+          final_text = format_link_file(
+              options.file,
+              regex_skip_sections_start,
+              regex_skip_sections_end,
+          )
+      except:
+          no_issue = False
+
+      if no_issue:
+          with open(options.file, "w") as final_file:
+              final_file.write(
+                  str(inline_section(final_text))
+              )
+    elif options.directory != None:
+        print(options.directory)
+        for filepath in glob.iglob(options.directory + '**/*.md', recursive=True):
+          try:
+            final_text = format_link_file(
+                options.file,
+                regex_skip_sections_start,
+                regex_skip_sections_end,
+            )
+          except:
+            no_issue = False
+
+        if no_issue:
+          with open(options.file, "w") as final_file:
+            final_file.write(str(inline_section(final_text)))
