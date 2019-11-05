@@ -12,7 +12,7 @@ aliases:
 
 ## Overview
 
-Keeping your logs in a storage-optimized archive for longer periods of time is a great way to meet compliance requirements and retain auditability for ad-hoc investigations within budget. Once your logs are being archived for the long-term, you always have access to them should you ever need to investigate something unexpected or that might have happened a long time ago.
+Keeping your logs in a storage-optimized archive for longer periods of time enables you to meet compliance requirements, and to keep auditability for ad hoc investigations within budget. Once your logs are archived for the long term, you have access to them should you ever need to investigate something unexpected—or that might have happened a long time ago.
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own bucket in Google Cloud Storage (GCS). 
 
@@ -26,7 +26,7 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 
   {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
 
-4. Go to your [Archives page][7] in Datadog, and select the Add a new archive option at the bottom. Only Datadog users with admin status can complete this and the following step.
+4. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 
 5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
 
