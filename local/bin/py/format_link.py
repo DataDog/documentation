@@ -6,20 +6,6 @@ import glob
 from optparse import OptionParser
 
 
-def array_line_to_text(array_of_lines):
-    """
-    Transforms an array of line into one single string
-
-    :param array_of_lines: Array of lines.
-    :return text: All lines from the array concatenated into one string.
-    """
-
-    text = ''
-    for line in array_of_lines:
-        text += str(line)
-    return text
-
-
 def prepare_file(file):
     """
     Goes through a file and parses it into different sections. Those sections are a list of lines and are put within an Array.
@@ -367,9 +353,9 @@ def format_link_file(file, regex_skip_sections_start,
     final_text = []
     for section in prepared_file:
         try:
-            final_text.append(array_line_to_text(process_section(section,
-                                                                 regex_skip_sections_start,
-                                                                 regex_skip_sections_end)))
+            final_text.append(''.join(process_section(section,
+                                                      regex_skip_sections_start,
+                                                      regex_skip_sections_end)))
         except:
             print(
                 '\x1b[31mERROR\x1b[0m: There was an issue processing a section for file: {}'.format(file))
