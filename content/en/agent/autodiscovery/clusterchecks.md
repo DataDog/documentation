@@ -287,5 +287,3 @@ The Agent `status` command should show the check instance running and reporting 
 [10]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
 [11]: /integrations/http_check
 [12]: /integrations/nginx
-[13]: https://github.com/helm/charts/tree/master/stable/datadog
-[14]: /agent/autodiscovery/clusterchecks/#cluster-agent-setup

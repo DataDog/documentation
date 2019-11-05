@@ -32,7 +32,7 @@ You can also track success rate and event-based SLIs (Service Level Indicators).
 ### Configuration
 
 1. On the [SLO page][1], select **New SLO +**.
-2. Define the source for your monitors. Monitor types are [Event based][5] and [Monitor based][4].
+2. Define the source for your monitors. Monitor types are [Event based][2] and [Monitor based][3].
 3. Set your target uptime. Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling). For 7 days, the widget is restricted to two decimal places. For 30 days and up, it’s restricted to two to three decimal places.
 4. Finally, give the SLO a title, describe it in more detail, add tags, and save it.
 
@@ -46,7 +46,7 @@ To edit an SLO, hover over the SLO on the right, and click the edit pencil icon.
 
 ## Searching SLOs
 
-The [List Service Level Objectives][2] page lets you run an advanced search of all SLOs so you can view, delete or edit service tags for selected SLOs in bulk. You can also clone or fully edit any individual SLO in the search results.
+The [List Service Level Objectives][4] page lets you run an advanced search of all SLOs so you can view, delete or edit service tags for selected SLOs in bulk. You can also clone or fully edit any individual SLO in the search results.
 
 Advanced search lets you query SLOs by any combination of SLO attributes:
 
@@ -65,7 +65,7 @@ To edit an individual SLO, hover over it and use the buttons to the far right in
 
 ### SLO Tags
 
-When you create or edit an SLO, you can add tags for filtering on the [list SLOs][2] pages.
+When you create or edit an SLO, you can add tags for filtering on the [list SLOs][4] pages.
 
 ### Overall Uptime Calculation
 
@@ -86,7 +86,7 @@ Consider the following example:
 
 ## View your SLOs
 
-You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][2].
+You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][4].
 
 ## SLO Widgets
 
@@ -97,7 +97,6 @@ After creating your SLO, you can use the SLO dashboard widget to visualize the s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo/new
-[2]: https://app.datadoghq.com/slo
+[2]: /monitors/service_level_objectives/monitor/
 [3]: /graphing/widgets/slo
-[5]: /monitors/service_level_objectives/monitor/
-[6]: /monitors/service_level_objectives/event/
+[4]: https://app.datadoghq.com/slo

@@ -265,40 +265,39 @@ Each source has its own limitations, and metric submission types do not always m
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
 |-------------------|--------------------------------------|-----------------|---------------------|
-| [API][6]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
-| [API][6]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
-| [API][6]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
-| [DogStatsD][7]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
-| [DogStatsD][8]    | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT        |
-| [DogStatsD][9]    | `dog.count(...)`                     | COUNT           | RATE                |
-| [DogStatsD][9]    | `dog.increment(...)`                 | COUNT           | RATE                |
-| [DogStatsD][9]    | `dog.decrement(...)`                 | COUNT           | RATE                |
-| [DogStatsD][10]   | `dog.set(...)`                       | SET             | GAUGE               |
-| [DogStatsD][11]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
-| [Agent check][12] | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][13] | `self.increment(...)`                | COUNT           | RATE                |
-| [Agent check][13] | `self.decrement(...)`                | COUNT           | RATE                |
-| [Agent check][14] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
-| [Agent check][15] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
-| [Agent check][16] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
-| [Agent check][17] | `self.rate(...)`                     | RATE            | GAUGE               |
-| [Agent check][18] | `self.set(...)`                      | SET             | GAUGE               |
+| [API][3]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
+| [API][3]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
+| [API][3]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
+| [DogStatsD][6]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
+| [DogStatsD][7]    | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT        |
+| [DogStatsD][8]    | `dog.count(...)`                     | COUNT           | RATE                |
+| [DogStatsD][8]    | `dog.increment(...)`                 | COUNT           | RATE                |
+| [DogStatsD][8]    | `dog.decrement(...)`                 | COUNT           | RATE                |
+| [DogStatsD][9]   | `dog.set(...)`                       | SET             | GAUGE               |
+| [DogStatsD][10]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][11] | `self.count(...)`                    | COUNT           | COUNT               |
+| [Agent check][12] | `self.increment(...)`                | COUNT           | RATE                |
+| [Agent check][12] | `self.decrement(...)`                | COUNT           | RATE                |
+| [Agent check][13] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Agent check][14] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Agent check][15] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][16] | `self.rate(...)`                     | RATE            | GAUGE               |
+| [Agent check][17] | `self.set(...)`                      | SET             | GAUGE               |
 
 [1]: /developers/metrics/metric_type_modifiers
 [2]: /graphing/metrics/summary
 [3]: /api/?lang=python#post-timeseries-points
 [4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /developers/metrics/agent_metrics_submission
-[6]: /api/?lang=python#post-timeseries-points
-[7]: /developers/metrics/dogstatsd_metrics_submission/#gauge
-[8]: /developers/metrics/dogstatsd_metrics_submission/#distribution
-[9]: /developers/metrics/dogstatsd_metrics_submission/#count
-[10]: /developers/metrics/dogstatsd_metrics_submission/#set
-[11]: /developers/metrics/dogstatsd_metrics_submission/#histogram
-[12]: /developers/metrics/agent_metrics_submission/?tab=count#count
-[13]: /developers/metrics/agent_metrics_submission/?tab=count#increment-decrement
-[14]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[15]: /developers/metrics/agent_metrics_submission/?tab=gauge
-[16]: /developers/metrics/agent_metrics_submission/?tab=histogram
-[17]: /developers/metrics/agent_metrics_submission/?tab=rate
-[18]: /developers/integrations
+[6]: /developers/metrics/dogstatsd_metrics_submission/#gauge
+[7]: /developers/metrics/dogstatsd_metrics_submission/#distribution
+[8]: /developers/metrics/dogstatsd_metrics_submission/#count
+[9]: /developers/metrics/dogstatsd_metrics_submission/#set
+[10]: /developers/metrics/dogstatsd_metrics_submission/#histogram
+[11]: /developers/metrics/agent_metrics_submission/?tab=count#count
+[12]: /developers/metrics/agent_metrics_submission/?tab=count#increment-decrement
+[13]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[14]: /developers/metrics/agent_metrics_submission/?tab=gauge
+[15]: /developers/metrics/agent_metrics_submission/?tab=histogram
+[16]: /developers/metrics/agent_metrics_submission/?tab=rate
+[17]: /developers/integrations

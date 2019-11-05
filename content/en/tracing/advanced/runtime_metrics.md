@@ -103,18 +103,17 @@ end
 
 Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][3] in Datadog.
 
-By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][4].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][5], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][6]; in ECS, [set the appropriate flags in your task definition][7].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
+In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
-[4]: /developers/metrics/dogstatsd_metrics_submission/#setup
-[5]: /agent/docker/#dogstatsd-custom-metrics
-[6]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[7]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[4]: /agent/docker/#dogstatsd-custom-metrics
+[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Go" %}}
 

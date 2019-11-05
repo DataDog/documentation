@@ -226,9 +226,6 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][3] for details                                                                                                                |
 
-[1]: /agent/docker/apm
-[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[3]: /tracing/advanced/connect_logs_and_traces/?tab=java
 {{% /table %}}
 
 **Note**:
@@ -344,8 +341,8 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/docker/apm
-[2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[3]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html

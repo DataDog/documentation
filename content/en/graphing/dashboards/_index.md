@@ -52,7 +52,7 @@ To create a Dashboard, click on the *New Dashboard* button in the upper right co
 
 ### What is the difference between a Screenboard and a Timeboard?
 
-You have the capability to create and customize two types of Dashboards: [Screenboards][3] and [Timeboards][4]. To more clearly understand the differences between the two, consider the following:
+You have the capability to create and customize two types of Dashboards: [Screenboards][3] and [Timeboards][2]. To more clearly understand the differences between the two, consider the following:
 
 |                                | Timeboards                       | Screenboards                                      |
 |--------------------------------|----------------------------------|---------------------------------------------------|
@@ -87,4 +87,3 @@ If you’re not sure where to look next, Datadog offers suggestions for viewing 
 [1]: /graphing
 [2]: /graphing/dashboards/timeboard
 [3]: /graphing/dashboards/screenboard
-[4]: /graphing/dashboards/timeboard
