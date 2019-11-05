@@ -88,7 +88,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 
 ### Windows
 
-It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise the Agent may not be cleanly removed.
+It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
