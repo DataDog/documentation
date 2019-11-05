@@ -52,7 +52,7 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account.   |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.                |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.    |
-| Created By You           | Custom dashboards created by the user currently logged in user.       |
+| Created By You           | Custom dashboards created by the currently logged in user.       |
 | Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user. |
 
 #### Shared, Editable Lists
