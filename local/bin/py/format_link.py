@@ -139,7 +139,7 @@ def collect_all_links(
     regex_skip_sections_start,
     regex_skip_sections_end,
 ):
-    regex_link_inlined = r"\[.*?\]\((?!#\?)(.*?)\)"
+    regex_link_inlined = r"\[.*?\]\((?![#?])(.*?)\)"
     all_links = []
     skip = False
     for line in section_with_all_links:
