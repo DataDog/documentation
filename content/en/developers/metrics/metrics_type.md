@@ -276,8 +276,6 @@ Each source has its own limitations, and metric submission types do not always m
 | [DogStatsD][10]   | `dog.set(...)`                       | SET             | GAUGE               |
 | [DogStatsD][11]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
 | [Agent check][12] | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][13] | `self.increment(...)`                | COUNT           | RATE                |
-| [Agent check][13] | `self.decrement(...)`                | COUNT           | RATE                |
 | [Agent check][14] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
 | [Agent check][15] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 | [Agent check][16] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
