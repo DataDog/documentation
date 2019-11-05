@@ -28,13 +28,13 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 
 4. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 
-5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
+5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optional: input a prefix directory for all the content of your log archives. Then save your archive. 
 
   {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
 
-From the moment that your archive settings are successfully configured in your Datadog account, all the logs that Datadog ingests are enriched by your processing Pipelines and subsequently forwarded to your archive.
+Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted, so **you should check back on your storage bucket in 15 minutes** to make sure the archives have successfully been getting uploaded from your Datadog account.
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted, so **you should check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
 
 ## Format of the Archives
 
@@ -59,13 +59,13 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 }
 ```
 
-**Note**: Archives only include log content which consists of the message, custom attributes, and reserved attributes of your log events. The log tags (metadata that connects your log data to related metrics and traces) are not included.
+**Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. The log tags (metadata that connects your log data to related metrics and traces) are not included.
 
 ## Multiple Archives
 
 Admins can route specific logs to an archive by adding a query in the archive’s filter field. Logs enter the first archive whose filter they match on, so it is important to order your archives carefully.
 
-For example, if you create a first archive filtered to the env:prod tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path and the rest would go to the other.
+For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
 
 Logs enter the first archive whose filter they match on.
 
