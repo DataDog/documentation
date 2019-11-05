@@ -7,7 +7,9 @@ options = {
 
 initialize(**options)
 
-api.Gcp.delete(
+api.Gcp.update(
     project_id="<GCP_PROJECT_ID>",
-    client_email="<GCP_CLIENT_EMAIL>"
+    client_email="<GCP_CLIENT_EMAIL>",
+    automute=True,
+    host_filters="<NEW>:<FILTERS>"
 )

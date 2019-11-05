@@ -6,10 +6,11 @@ app_key = '<YOUR_APP_KEY>'
 
 config= {
   "project_id": "<GCP_PROJECT_ID>",
-  "client_email": "<CLIENT_EMAIL>",
-  "automute": false
+  "client_email": "<GCP_CLIENT_EMAIL>",
+  "automute": true,
+  "host_filters": "<NEW>:<FILTERS>"
 }
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.update_integration('gcp', config)
+dog.update_gcp_integration(config)
