@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# We want all file except the deleted ones hence the --diff-filter=ACMRTUXB
+# We want all files in content/en only except the deleted ones hence the --diff-filter=ACMRTUXB
 for f in $(git diff --diff-filter=ACMRTUXB --name-only --staged | grep -E '^content/en/[^.]+\.md$')
 do
     echo "---Link formatting $f"
