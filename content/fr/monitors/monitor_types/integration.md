@@ -58,7 +58,7 @@ Paramètres d'une alerte de check :
 
 1. Déclencher une alerte différente pour chaque `<GROUPE>` évalué par votre check.
 
-    Les groupes d'un check sont définis en fonction d'une liste de groupes connus ou par vous. Pour les monitors d'intégration, les groupes pour chaque check sont explicitement connu. Par exemple, l'intégration Postgres reçoit les tags `db`, `host` et `port`.
+    Les groupes d'un check sont définis en fonction d'une liste de groupes connus ou par vous. Pour les monitors d'intégration, les groupes pour chaque check sont explicitement connus. Par exemple, l'intégration Postgres reçoit les tags `db`, `host` et `port`.
 
 2. Déclencher l'alerte après le nombre d'échecs consécutifs sélectionné : `<NOMBRE>`
 

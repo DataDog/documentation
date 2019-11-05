@@ -9,7 +9,7 @@ further_reading:
 ---
 ## Introduction
 
-La version 1.2 de Kubernetes a introduit la fonction d'[autoscaling des pods horizontaux][1]. Depuis la version 1.6 de Kubernetes, l'autoscaling peut être effectué en fonction de métriques custom définies par l'utilisateur et collectées au sein du cluster. La version 1.10 de Kubernetes a introduit la prise en charge des métriques externes, permettant ainsi de réaliser l'autoscaling en fonction de n'importe quelle métrique extérieure au cluster et collectée par Datadog. L'utilisateur doit implémenter et enregistrer les fournisseurs de métriques custom et externes (et non le serveur de métriques). À partir de la version 1.0.0, le serveur de métriques custom inclus dans [l'Agent de cluster Datadog][2] implémente l'interface du fournisseur de métriques externes.
+La version 1.2 de Kubernetes a introduit la fonction d'[autoscaling des pods horizontaux][1]. Depuis la version 1.6 de Kubernetes, l'autoscaling peut être effectué en fonction de métriques custom définies par l'utilisateur et collectées au sein du cluster. La version 1.10 de Kubernetes a introduit la prise en charge des métriques externes, permettant ainsi de réaliser l'autoscaling en fonction de n'importe quelle métrique extérieure au cluster et collectée par Datadog. Contrairement au serveur de métriques, les fournisseurs de métriques externes et custom sont des ressources qui doivent être implémentées et enregistrées par l'utilisateur. À partir de la version 1.0.0, le serveur de métriques custom inclus dans [l'Agent de cluster Datadog][2] implémente l'interface du fournisseur de métriques externes.
 
 Ce guide explique comment configurer et activer l'autoscaling de votre charge de travail Kubernetes en fonction de vos métriques Datadog.
 
