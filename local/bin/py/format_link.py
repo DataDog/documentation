@@ -114,7 +114,7 @@ def remove_reference(section, regex_skip_sections_start,
     skip = False
     all_references = []
     section_without_references = []
-    regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (.*)"
+    regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (\S*)"
 
     # Collecting all references and removing them from section
     # looking at each line, if a line is a reference then we remove it and store the reference.
@@ -195,7 +195,7 @@ def collect_all_links(section_with_all_links,
     :param regex_skip_sections_end: regex defining the end line that indicates a block of line that shouldn't be processed.
     :return all_links: An array of all unique links that where found within a section.
     """
-    regex_link_inlined = r"\[.*?\]\((?![#?])(.*?)\)"
+    regex_link_inlined = r"\[.*?\]\((?![#?])(\S*?)\)"
     all_links = []
     skip = False
     for line in section_with_all_links:
