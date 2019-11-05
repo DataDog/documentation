@@ -191,9 +191,8 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             )
     ```
 
-1. [Restart the Agent][4].
-
-2. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
+4. [Restart the Agent][4].
+5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
 
     ```
     =========
@@ -216,7 +215,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
         (...)
     ```
-3. Verify your metrics are reporting to Datadog on your [Metric Summary page][6]:
+6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6]:
 
 {{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary" responsive="true" style="width:80%;">}}
 
