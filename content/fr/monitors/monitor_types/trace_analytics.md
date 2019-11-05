@@ -20,7 +20,7 @@ further_reading:
   - link: tracing/visualization/trace
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: tracing/trace_search_and_analytics/search
+  - link: tracing/app_analytics/search
     tag: Documentation
     text: Recherche globale sur toutes vos traces avec des tags
 ---
@@ -32,7 +32,7 @@ L'analyse et la recherche de traces vous permettent de rechercher, filtrer et ag
 
 1. Pour [créer un nouveau monitor][1], passez le curseur sur **Monitors** dans le menu principal et cliquez sur **New Monitor** dans le sous-menu. Pour programmer la création d'un monitor, consultez la documentation relative à l'[API Datadog][2] ou aux [bibliothèques entretenues par la communauté][3].
 2. Sur la page du nouveau monitor, sélectionnez le monitor **APM**.
-3. Sélectionnez *Trace Analytics* puis définissez votre [requête de recherche de trace][4] :
+3. Sélectionnez *App Analytics* puis définissez votre [requête de recherche de trace][4] :
     {{< img src="monitors/monitor_types/trace_search/trace_search.png" alt="Monitor de recherche de traces" responsive="true" style="width:75%;" >}}
 4. Définissez vos conditions d'alerte.
 5. Nommez et décrivez votre monitor.
@@ -46,5 +46,5 @@ L'analyse et la recherche de traces vous permettent de rechercher, filtrer et ag
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /fr/api/#monitors
 [3]: /fr/developers/libraries/#managing-monitors
-[4]: /fr/tracing/trace_search_and_analytics/search
+[4]: /fr/tracing/advanced/search
 [5]: /fr/monitors/notifications

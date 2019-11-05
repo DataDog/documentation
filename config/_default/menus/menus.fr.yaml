@@ -873,15 +873,25 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 704
+  - name: Associer vos logs à vos traces
+    url: tracing/advanced/connect_logs_and_traces/?tab=java
+    parent: log_management
+    identifier: logs_traces_connection
+    weight: 8
+  - name: Corrélation entre les logs et les métriques
+    url: 'graphing/dashboards/timeboard/#correlation-between-logs-and-metrics'
+    parent: log_management
+    identifier: logs_metrics_correlation
+    weight: 9
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 8
+    weight: 10
   - name: Sécurité
     url: security/logs/
     parent: log_management
-    weight: 9
+    weight: 11
   - name: Synthetics
     url: 'https://www.datadoghq.com/synthetics/'
     pre: nav_synthetics
@@ -939,7 +949,7 @@ main:
     parent: npm
     identifier: npm_page
     weight: 2
-  - name: Carte réseau
+  - name: Map Réseau
     url: network_performance_monitoring/network_map
     parent: npm
     identifier: npm_map
@@ -976,12 +986,12 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 201
-  - name: Envoi de métriques - Check de l'Agent
+  - name: Envoi de checks de service - Check de l'Agent
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
     weight: 202
-  - name: Envoi de métriques - DogStatsD
+  - name: Envoi de checks de service - DogStatsD
     url: developers/metrics/dogstatsd_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_dogstatsd

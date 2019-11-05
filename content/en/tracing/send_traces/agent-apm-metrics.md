@@ -25,8 +25,8 @@ Find below the list of out-of-the-box metrics sent by the Datadog Agent when [AP
 | `datadog.trace_agent.receiver.spans_filtered`         | Count | Total bytes of payloads filtered by the Agent                                                                                   |
 | `datadog.trace_agent.receiver.services_received`      | Count | Services received in `/v0.x/` services endpoints.                                                                               |
 | `datadog.trace_agent.receiver.services_bytes`         | Count | Bytes accepted in `/v0.x/` services endpoints.                                                                                  |
-| `datadog.trace_agent.receiver.events_extracted`       | Count | Total APM events sampled.                                                                                                       |
-| `datadog.trace_agent.receiver.events_sampled`         | Count | Total APM events sampled by the `max_events_per_second` parameter sampler.                                                      |
+| `datadog.trace_agent.receiver.events_extracted`       | Count | Total Analyzed Spans sampled.                                                                                                       |
+| `datadog.trace_agent.receiver.events_sampled`         | Count | Total Analyzed Spans sampled by the `max_events_per_second` parameter sampler.                                                      |
 | `datadog.trace_agent.receiver.payload_accepted`       | Count | Number of payloads accepted by the Agent.                                                                                       |
 | `datadog.trace_agent.receiver.payload_refused`        | Count | Number of payloads rejected by the receiver because of the sampling.                                                            |
 | `datadog.trace_agent.receiver.suicide`                | Count | Number of times the Agent killed itself due to excessive memory use (150% of max_memory).                                       |
@@ -51,7 +51,7 @@ Find below the list of out-of-the-box metrics sent by the Datadog Agent when [AP
 | `datadog.trace_agent.service_writer.services`         | Count | Number of services flushed.                                                                                                      |
 | `datadog.trace_agent.events.max_eps.max_rate`         | Gauge | Same as the Agent config's `max_events_per_second` parameter.                                                                   |
 | `datadog.trace_agent.events.max_eps.reached_max`      | Gauge | Is set to `1` every time `max_events_per_second` is reached, otherwise it's `0`.                                                |
-| `datadog.trace_agent.events.max_eps.current_rate`     | Gauge | Count of APM Events per second received by the Agent                                                                            |
+| `datadog.trace_agent.events.max_eps.current_rate`     | Gauge | Count of Analyzed Spans per second received by the Agent                                                                            |
 | `datadog.trace_agent.events.max_eps.sample_rate`      | Gauge | Sample rate applied by the Agent to Events it received                                                                          |
 
 [1]: /tracing/setup
