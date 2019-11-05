@@ -11,8 +11,8 @@ external_redirect: /api/#check-aws-lambda
 
 **EXAMPLE REQUEST**:
 
-{{< code-snippets basename="aws_logs_check_services" >}}
+{{< code-snippets basename="aws_logs_check_lambda" >}}
 
 **EXAMPLE RESPONSE**:
 
-{{< code-snippets basename="result.aws_logs_check_services" >}}
+{{< code-snippets basename="result.aws_logs_check_lambda" >}}
