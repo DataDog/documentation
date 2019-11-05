@@ -88,12 +88,14 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 
 ### Windows
 
-**It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
+It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise the Agent may not be cleanly removed.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-Uninstall the Agent using Add/Remove Programs; alternatively, it's possible to to use Powershell as well. Here is a one-liner:
+Uninstall the Agent using Add/Remove Programs.
+
+Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
@@ -102,7 +104,9 @@ Uninstall the Agent using Add/Remove Programs; alternatively, it's possible to t
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one-liner:
+Uninstall the Agent using Add/Remove Programs.
+
+Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
