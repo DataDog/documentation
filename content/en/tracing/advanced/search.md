@@ -8,6 +8,7 @@ aliases:
   - /tracing/search
   - /tracing/getting_further/apm_events/
   - /tracing/trace_search_and_analytics/search/
+  - /tracing/app_analytics/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -46,7 +47,7 @@ There are two types of *terms*:
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
 | **Operator** | **Description **                                                                                       | **Example **                 |
-| :----------- | :----------------------------------------------------------------------------------------------------- | :--------------------------- |
+|:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
@@ -64,7 +65,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 Your traces inherit tags from [hosts][1] and [integrations][2] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
-| :------------------------------------------------------------- | :-------------------------------------------------------------------------- |
+|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
 | `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
