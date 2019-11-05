@@ -359,7 +359,6 @@ if __name__ == "__main__":
                   str(inline_section(final_text))
               )
     elif options.directory != None:
-        print(options.directory)
         for filepath in glob.iglob(options.directory + '**/*.md', recursive=True):
           no_issue = True
           print('Formating file {}'.format(filepath))
