@@ -95,23 +95,24 @@ Run the following Go code to submit a DogStatsD `COUNT` metric to Datadog:
 package main
 
 import (
-    "log"
-    "time"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
-    for {
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for {
 
-        statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
-        statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
-        statsd.Count("example_metric.count", 2, []string{"environment:dev"}, 1)
-        time.Sleep(10)
-    }
+		statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
+		statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
+		statsd.Count("example_metric.count", 2, []string{"environment:dev"}, 1)
+		time.Sleep(10 * time.Second)
+	}
 }
 {{< /code-block >}}
 
@@ -272,22 +273,23 @@ Run the following Go code to submit a DogStatsD `GAUGE` metric to Datadog:
 package main
 
 import (
-    "log"
-    "time"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
-    var i float64
-    for {
-        i += 1
-        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
-        time.Sleep(10)
-    }
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var i float64
+	for {
+		i += 1
+		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
+		time.Sleep(10 * time.Second)
+	}
 }
 ```
 
@@ -439,24 +441,25 @@ Run the following Go code to submit a DogStatsD `SET` metric to Datadog:
 package main
 
 import (
-    "log"
-    "time"
-    "math/rand"
-    "strconv"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"math/rand"
+	"strconv"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
-    var i float64
-    for {
-        i += 1
-        statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-        time.Sleep(rand.Intn(10))
-    }
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var i float64
+	for {
+		i += 1
+		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
+		time.Sleep(rand.Intn(10) * time.Second)
+	}
 }
 ```
 
@@ -588,22 +591,23 @@ Run the following Go code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 package main
 
 import (
-    "log"
-    "time"
-    "math/rand"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"math/rand"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    for {
-        statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
-        time.Sleep(2)
-    }
+	for {
+		statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
+		time.Sleep(2 * time.Second)
+	}
 }
 ```
 
@@ -841,22 +845,23 @@ Run the following Go code to submit a DogStatsD `DISTRIBUTION` metric to Datadog
 package main
 
 import (
-    "log"
-    "time"
-    "math/rand"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"math/rand"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    for {
-        statsd.Distribution("example_metric.distribution", rand.Intn(20), []string{"environment:dev"}, 1)
-        time.Sleep(2)
-    }
+	for {
+		statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
+		time.Sleep(2 * time.Second)
+	}
 }
 ```
 
