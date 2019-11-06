@@ -1,7 +1,7 @@
 ---
 title: Check if a monitor can be deleted
 type: apicode
-order: 26.14
+order: 26.04
 external_redirect: /api/#check-if-a-monitor-can-be-deleted
 ---
 
