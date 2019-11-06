@@ -15,9 +15,9 @@ public_title: Datadog-Carbon Black Integration
 short_description: Collect your Carbon Black Defense Logs
 version: '1.0'
 ---
-
-
 ## Overview
+
+Use the Datadog-Carbon Black integration in order to forwards your Carbon Black Defense logs within Datadog.
 
 ## Setup
 ### Installation
