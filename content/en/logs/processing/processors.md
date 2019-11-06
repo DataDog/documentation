@@ -26,7 +26,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 **Notes**:
 
-* The processor can save up to 5 samples.
+* The grok parser processor can save up to 5 samples.
 * Each sample may be up to 5000 characters in length.
 
 {{< tabs >}}
@@ -50,7 +50,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 "is_enabled": true,
 "source": "message",
 "samples": [
-    "samplelog 1>",
+    "sample log 1",
     "sample log 2"
     ],
 "grok": {
@@ -66,7 +66,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
 | `sources`            | Array of Strings | yes      | Name of the log attribute to parse, default: `message`. |
-| `samples`            | Array of strings | no       | Example logs for this grok parser.
+| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
