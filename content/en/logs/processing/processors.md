@@ -24,6 +24,11 @@ The different kinds of Processors are explained below.
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2].
 
+**Notes**:
+
+* The processor can save up to 5 samples.
+* Each sample may be up to 5000 characters in length.
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
@@ -44,6 +49,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 "name": "Parsing Log message",
 "is_enabled": true,
 "source": "message",
+"samples": [
+    "samplelog 1>",
+    "sample log 2"
+    ],
 "grok": {
     "support_rules": "<SUPPORT_RULES>",
     "match_rules":"<MATCH_RULES>"
@@ -57,6 +66,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
 | `sources`            | Array of Strings | yes      | Name of the log attribute to parse, default: `message`. |
+| `samples`            | Array of strings | no       | Example logs for this grok parser.
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
@@ -525,7 +535,7 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 
 **Notes**:
 
-* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* The processor only accepts attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
