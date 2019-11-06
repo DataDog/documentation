@@ -89,9 +89,10 @@ Finally, to find the `<CB_DEFENSE_SERVER_URL>`, within your Cb defense dashboard
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][(/help).
+Need help? Contact [Datadog support][5].
 
 [1]: https://github.com/carbonblack/cb-defense-syslog-tls
 [2]: https://github.com/carbonblack/cb-defense-syslog-tls#installation
 [3]: https://github.com/carbonblack/cb-defense-syslog-tls#installation-via-docker
 [4]: https://app.datadoghq.com/account/settings#api
+[5]: /help
