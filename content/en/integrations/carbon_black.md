@@ -6,7 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Collect your Carbon Black Defense Logs
 doc_link: https://docs.datadoghq.com/integrations/carbon_black/
-has_logo: false
+has_logo: true
 integration_title: Carbon Black
 is_public: true
 kind: integration
@@ -29,7 +29,7 @@ First, install and setup the [Cb Defense log shipper][1]. The shipper is availab
 
 ### Configuration
 
-Use the configuration file below to foward your logs to Datadog with the Cb Defense shipper:
+Use the configuration file below for your Cb Defense shipper in order to foward your logs to Datadog:
 
 {{< tabs >}}
 {{% tab "Datadog US Site" %}}
