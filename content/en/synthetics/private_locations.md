@@ -61,6 +61,8 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
     * For the Datadog US site: `curl https://api.datadoghq.com`.
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
+    
+**Note**: Since test configurations are pulled and test results are pushed via HTTPS, you need to make sure to allow outbound traffic on port 443.
 
 5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
