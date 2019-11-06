@@ -350,9 +350,9 @@ def algorithm_two():
 
 Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][14].
 
-## Integration Inheritance
+## Integration inheritance
 
-The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: For web-based integrations, `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
+The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
 ### Amazon Web Services
 
@@ -412,6 +412,14 @@ Azure integration metrics, events, and service checks receive the following tags
 
 <sup>(1)</sup>*Resource-specific tags are in beta.*
 
+### Google Cloud Platform
+
+See the [Google Cloud Platform integration][50] documentation.
+
+### Web integrations
+
+For web-based integrations, `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -465,3 +473,4 @@ Azure integration metrics, events, and service checks receive the following tags
 [47]: /integrations/amazon_sqs
 [48]: /integrations/amazon_vpc
 [49]: /integrations/amazon_workspaces
+[50]: /integrations/google_cloud_platform/#tags-assigned
