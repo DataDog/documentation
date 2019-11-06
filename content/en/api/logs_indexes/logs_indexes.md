@@ -7,10 +7,6 @@ external_redirect: /api/#logs-indexes
 
 ## Logs Indexes
 
-<div class="alert alert-warning">
-This endpoint is in public beta and not supported in Datadog's client libraries. If you have any feedback, <a href="/help">contact Datadog support</a>.
-</div>
-
 The `Index` object describes the configuration of a log index. It has the following attributes:
 
 * **`name`** (Read Only):
