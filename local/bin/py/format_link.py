@@ -51,9 +51,7 @@ def prepare_file(file):
     if state != 'main':
         raise ValueError
 
-    file_broken = [main_section]
-    file_broken = file_broken + sub_sections
-    return file_broken
+    return [main_section] + sub_sections
 
 
 def check_references(all_references):
