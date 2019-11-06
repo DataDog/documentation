@@ -47,12 +47,13 @@ def prepare_file(file):
                     temp_section = []
                 else:
                     temp_section.append(line)
-    if state == 'main':
-        file_broken = [main_section]
-        file_broken = file_broken + sub_sections
-        return file_broken
-    else:
-        raise
+
+    if state != 'main':
+        raise ValueError
+
+    file_broken = [main_section]
+    file_broken = file_broken + sub_sections
+    return file_broken
 
 
 def check_references(all_references):
@@ -69,21 +70,24 @@ def check_references(all_references):
 
     for reference in all_references:
         if reference not in all_references_deduped:
-            if reference[0] not in reference_indexes_used:
-                reference_indexes_used.append(reference[0])
+
+            reference_index, reference_val = reference
+
+            if reference_index not in reference_indexes_used:
+                reference_indexes_used.append(reference_index)
                 all_references_deduped.append(reference)
             else:
                 duplicated_references.append(reference)
                 is_duplicated = True
 
     if is_duplicated:
-        print('\x1b[31mERROR\x1b[0m: Some references are duplicated:')
         for duplicated_reference in duplicated_references:
+            duplicated_reference_index, duplicated_reference_val = duplicated_reference
             print('Duplicated reference: [{}]: {}'.format(
-                duplicated_reference[0], duplicated_reference[1]))
-        raise
-    else:
-        return all_references_deduped
+                duplicated_reference_index, duplicated_reference_val))
+        raise AssertionError
+
+    return all_references_deduped
 
 
 def remove_reference(section, regex_skip_sections_start,
@@ -115,6 +119,7 @@ def remove_reference(section, regex_skip_sections_start,
             if re.search(regex_skip_sections_start, line):
                 section_without_references.append(line)
                 skip = True
+
             elif re.search(regex_bottom_reference_link, line):
 
                 reference = re.search(regex_bottom_reference_link, line)
@@ -124,19 +129,21 @@ def remove_reference(section, regex_skip_sections_start,
                 section_without_references.append(line)
     # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
     if skip:
-        print('\x1b[31mERROR\x1b[0m: A skip section is not closed')
-        raise
-    else:
+        raise ValueError
+
+    try:
         all_references_checked = check_references(all_references)
-        return [all_references_checked, section_without_references]
+    except AssertionError:
+        raise AssertionError
+
+    return [all_references_checked, section_without_references]
 
 
 def inlining_all_links(
-    section_without_references,
-    all_references,
-    regex_skip_sections_start,
-    regex_skip_sections_end,
-):
+        section_without_references,
+        all_references,
+        regex_skip_sections_start,
+        regex_skip_sections_end):
     """
     Goes through a section with a list of references and inline all references.
 
@@ -158,16 +165,20 @@ def inlining_all_links(
                 skip = True
             else:
                 for reference in all_references:
-                    curent_link = '][' + reference[0] + ']'
-                    line = line.replace(curent_link, '](' + reference[1] + ')')
+                    reference_index, reference_val = reference
+
+                    curent_link = '][' + reference_index + ']'
+
+                    line = line.replace(
+                        curent_link, '](' + reference_val + ')')
+
         section_with_all_links.append(line)
 
     # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
     if skip:
-        print('\x1b[31mERROR\x1b[0m: A skip section is not closed')
-        raise
-    else:
-        return section_with_all_links
+        raise ValueError
+
+    return section_with_all_links
 
 
 def collect_all_links(section_with_all_links,
@@ -204,10 +215,9 @@ def collect_all_links(section_with_all_links,
 
     # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
     if skip:
-        print('\x1b[31mERROR\x1b[0m: A skip section is not closed')
-        raise
-    else:
-        return all_links
+        raise ValueError
+
+    return all_links
 
 
 def transform_link_to_references(
@@ -238,20 +248,19 @@ def transform_link_to_references(
             if re.search(regex_skip_sections_start, line):
                 skip = True
             else:
-                i = 1
-                for link in all_links:
+                for i, link in enumerate(all_links):
                     link_to_reference = '](' + str(link) + ')'
-                    line = line.replace(link_to_reference, '][' + str(i) + ']')
-                    i += 1
+                    # i is incremented by one in order to start references indexes at 1
+                    line = line.replace(link_to_reference,
+                                        '][' + str(i + 1) + ']')
 
         section_with_references.append(line)
 
     # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
     if skip:
-        print('\x1b[31mERROR\x1b[0m: A skip section is not closed')
-        raise
-    else:
-        return section_with_references
+        raise ValueError
+
+    return section_with_references
 
 
 def process_section(section, regex_skip_sections_start,
@@ -264,12 +273,15 @@ def process_section(section, regex_skip_sections_start,
     :param regex_skip_sections_end: regex defining the end line that indicates a block of line that shouldn't be processed.
     :return section_with_references: Returns the section but with all link set as reference.
     """
-
-    references_and_section = remove_reference(section,
-                                              regex_skip_sections_start, regex_skip_sections_end)
-
-    all_references = references_and_section[0]
-    section_without_references = references_and_section[1]
+    try:
+        all_references, section_without_references = remove_reference(
+            section, regex_skip_sections_start, regex_skip_sections_end)
+    except AssertionError:
+        print('\x1b[31mERROR\x1b[0m: Some references are duplicated.')
+        raise AssertionError
+    except ValueError:
+        print('\x1b[31mERROR\x1b[0m: A skip section is not closed')
+        raise ValueError
 
     # Inlining refrences
     # Looking at each line, it replaces reference link [.*][\d] by the full inlined link
@@ -294,11 +306,11 @@ def process_section(section, regex_skip_sections_start,
 
     # Finally it adds all refrerences at the end of the section
 
-    i = 1
+    for i, link in enumerate(all_links):
 
-    for link in all_links:
-        section_with_references.append('[' + str(i) + ']: ' + link + '\n')
-        i += 1
+        # 1 is added to i in order to start references link index at 1 instead of 0
+
+        section_with_references.append('[' + str(i + 1) + ']: ' + link + '\n')
 
     return section_with_references
 
@@ -313,23 +325,32 @@ def inline_section(file_prepared):
     # inlining sections
 
     final_text = str(file_prepared[0])
-    i = 1
+
     regex_section = r"({{% tab \".*?\" %}}\n(.*?){{% /tab %}})"
 
     # taking into account that adding a section text creates an offset for the whole file
 
     offset = 0
     offset_current = 0
+
+    # Since we use the .end() of the section match, we need to shift to the length of the partial to inline
+    # the section content above
+    PARTIAL_LENGTH = len('{{% /tab %}}')
+
     try:
-        for section in re.finditer(regex_section, file_prepared[0],
-                                   re.MULTILINE):
-            offset = offset_current + section.end() - 12
-            final_text = final_text[:offset] + str(file_prepared[i]) \
-                + final_text[offset:]
-            offset_current = offset_current + len(file_prepared[i])
-            i = i + 1
+        for i, section in enumerate(re.finditer(regex_section, file_prepared[0], re.MULTILINE)):
+
+            offset = offset_current + section.end() - PARTIAL_LENGTH
+
+            # 1 is added to i since file_prepared[0] represents the main section.
+
+            final_text = final_text[:offset] + \
+                str(file_prepared[i + 1]) + final_text[offset:]
+
+            offset_current = offset_current + len(file_prepared[i + 1])
+
     except:
-        raise
+        raise IndexError
 
     return final_text
 
@@ -347,10 +368,12 @@ def format_link_file(file, regex_skip_sections_start,
 
     try:
         prepared_file = prepare_file(file)
-    except:
+    except ValueError:
         print("\x1b[31mERROR\x1b[0m: Couldn't split the file into multiple section correctly for file: {}".format(file))
+        raise ValueError
 
     final_text = []
+
     for section in prepared_file:
         try:
             final_text.append(''.join(process_section(section,
@@ -359,12 +382,14 @@ def format_link_file(file, regex_skip_sections_start,
         except:
             print(
                 '\x1b[31mERROR\x1b[0m: There was an issue processing a section for file: {}'.format(file))
+            raise ValueError
 
     try:
         file_with_references = str(inline_section(final_text))
-    except:
+    except IndexError:
         print(
             '\x1b[31mERROR\x1b[0m: Could not inline sections properly for file: {}'.format(file))
+        raise ValueError
 
     return file_with_references
 
@@ -383,33 +408,29 @@ if __name__ == '__main__':
     regex_skip_sections_start = r"(```|\{\{< code-block)"
 
     if options.file:
-        no_issue = True
         try:
             final_text = format_link_file(options.file,
                                           regex_skip_sections_start, regex_skip_sections_end)
-        except:
-            no_issue = False
-
-        if no_issue:
             with open(options.file, 'w') as final_file:
                 final_file.write(final_text)
+        except:
+            print('\x1b[31mERROR\x1b[0m: Processing file {}'.format(
+                options.file))
 
     elif options.directory:
         for filepath in glob.iglob(options.directory + '**/*.md',
                                    recursive=True):
-            no_issue = True
+
             print('\x1b[32mINFO\x1b[0m: Formating file {}'.format(filepath))
             try:
                 final_text = format_link_file(filepath,
                                               regex_skip_sections_start,
                                               regex_skip_sections_end)
+                with open(filepath, 'w') as final_file:
+                    final_file.write(final_text)
             except:
                 print(
                     '\x1b[31mERROR\x1b[0m: Processing file {}'.format(filepath))
-                no_issue = False
 
-            if no_issue:
-                with open(filepath, 'w') as final_file:
-                    final_file.write(final_text)
     else:
         print('\x1b[31mERROR\x1b[0m: Please specify a file or a directory')
