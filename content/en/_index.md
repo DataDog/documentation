@@ -28,19 +28,19 @@ Collect a wealth of already-available data without writing any code. [Install th
 
 Submit custom application metrics by writing a little code. Instrument your own gauges, counters, timers, and histograms with [DogStatsD][4], or use [APM][5] to trace the execution time of any code path to see how it impacts overall request-response times. The [client libraries][6] send your [custom metrics][7] and trace data to the Datadog Agent, which then ships them off to Datadog.
 
-Some of your stack may be SaaS, not servers. Datadog can [poll many of these services][8], and the integrations for them are the easiest of all to install-no Agent required.
+Some of your stack may be SaaS, not servers. Datadog can [poll many of these services][3], and the integrations for them are the easiest of all to install-no Agent required.
 
 ## Visualize It
 
-As soon as the data is captured, you'll see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events, such as an application deployment, as they pour into your [Event Stream][9]. Filter for a group of hosts in the [Infrastructure Map][10]. Get an overall picture of how a given service (say, MySQL) is running via its default dashboard.
+As soon as the data is captured, you'll see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events, such as an application deployment, as they pour into your [Event Stream][8]. Filter for a group of hosts in the [Infrastructure Map][9]. Get an overall picture of how a given service (say, MySQL) is running via its default dashboard.
 
-Before long, you'll create custom [Screenboards][11] that combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you discover problems: skewing their metric values using other metrics, applying [anomaly][12], [outlier][13], or [forecasts][14] detection, overlaying events onto them, and more.
+Before long, you'll create custom [Screenboards][10] that combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you discover problems: skewing their metric values using other metrics, applying [anomaly][11], [outlier][12], or [forecasts][13] detection, overlaying events onto them, and more.
 
 ## Monitor It
 
-Once your graphs have exposed the problem areas, set up alerting conditions on your metrics using [Monitors][15]. You receive [emails][16] when the alerts fire, or set up the [Slack][17] integration for a dedicated, in-app notifications.
+Once your graphs have exposed the problem areas, set up alerting conditions on your metrics using [Monitors][14]. You receive [emails][15] when the alerts fire, or set up the [Slack][16] integration for a dedicated, in-app notifications.
 
-When you're well aware of an ongoing problem, [silence its alerts][18]. When you're about to bring a service down for maintenance, [schedule a downtime][18] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, then create a [composite monitor][19] instead.
+When you're well aware of an ongoing problem, [silence its alerts][17]. When you're about to bring a service down for maintenance, [schedule a downtime][17] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, then create a [composite monitor][18] instead.
 
 {{< partial name="support/support.html" >}}
 
@@ -51,15 +51,14 @@ When you're well aware of an ongoing problem, [silence its alerts][18]. When you
 [5]: /tracing
 [6]: /developers/libraries
 [7]: /developers/metrics/custom_metrics
-[8]: /integrations
-[9]: /graphing/event_stream
-[10]: /graphing/infrastructure
-[11]: /graphing/dashboards/screenboard
-[12]: /monitors/monitor_types/anomaly
-[13]: /monitors/monitor_types/outlier
-[14]: /monitors/monitor_types/forecasts
-[15]: /monitors
-[16]: /monitors/notifications
-[17]: /integrations/slack
-[18]: /monitors/downtimes
-[19]: /monitors/monitor_types/composite
+[8]: /graphing/event_stream
+[9]: /graphing/infrastructure
+[10]: /graphing/dashboards/screenboard
+[11]: /monitors/monitor_types/anomaly
+[12]: /monitors/monitor_types/outlier
+[13]: /monitors/monitor_types/forecasts
+[14]: /monitors
+[15]: /monitors/notifications
+[16]: /integrations/slack
+[17]: /monitors/downtimes
+[18]: /monitors/monitor_types/composite

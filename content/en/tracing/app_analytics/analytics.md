@@ -142,7 +142,7 @@ Export your App Analytics:
 
 Export [App Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 
-[Learn more about the timeseries widget][9]
+[Learn more about the timeseries widget][7]
 
 ## Further Reading
 
@@ -156,4 +156,3 @@ Export [App Analytics][7] from the Trace search or build them directly in your [
 [6]: /help
 [7]: /graphing/widgets/timeseries
 [8]: /graphing/dashboards
-[9]: /graphing/widgets/timeseries

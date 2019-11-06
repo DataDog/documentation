@@ -64,7 +64,7 @@ To change the collection interval of your check, use `min_collection_interval` i
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
-For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
+ For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
 
 ```yaml
 init_config:
@@ -72,7 +72,7 @@ init_config:
 instances:
   - min_collection_interval: 30
 ```
- {{% /tab %}}
+{{% /tab %}}
 {{% tab "Agent v5" %}}
 For Agent 5, `min_collection_interval` is added to the `init_config` section to define how often the check is run globally.
 
@@ -93,10 +93,10 @@ To verify your check is running, use the following command:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
- ```
+  ```
 sudo -u dd-agent -- datadog-agent check <check_name>
 ```
- {{% /tab %}}
+{{% /tab %}}
 {{% tab "Agent v5" %}}
  ```
 sudo -u dd-agent -- dd-agent check <check_name>

@@ -436,7 +436,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][8], [Datadog-HTTP check integration][9].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][7], [Datadog-HTTP check integration][8].
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -618,6 +618,5 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 [4]: /integrations/postfix
 [5]: /integrations/cassandra/#agent-check-cassandra-nodetool
 [6]: /integrations/gunicorn
-[7]: /help
-[8]: /integrations/apache/#setup
-[9]: /integrations/http_check/#setup
+[7]: /integrations/apache/#setup
+[8]: /integrations/http_check/#setup

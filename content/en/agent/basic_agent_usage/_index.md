@@ -164,7 +164,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
-3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
+3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
 ## Supported OS versions
 

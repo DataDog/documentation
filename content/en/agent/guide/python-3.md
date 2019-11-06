@@ -294,4 +294,3 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 [7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
 [8]: https://code.visualstudio.com/docs/setup/setup-overview
 [9]: https://six.readthedocs.io
-[10]: https://nedbatchelder.com/text/unipain.html

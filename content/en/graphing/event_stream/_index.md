@@ -67,14 +67,9 @@ Combine prefixes to construct more complex searches. For example, if you wanted 
 * `@test@example.com` Sends an email to `test@example.com`.
 * If you have Slack, Webhooks, Pagerduty, or VictorOps, use:
     * `@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` – posts the event or graph to that channel.
-    * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][7]!
+    * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][2]!
     * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
 
 [1]: https://app.datadoghq.com/event/stream
-[2]: /integrations
-[3]: /agent/agent_checks
-[4]: /api/#events
-[5]: https://app.datadoghq.com
-[6]: http://daringfireball.net/projects/markdown/syntax#lin
-[7]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+[2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

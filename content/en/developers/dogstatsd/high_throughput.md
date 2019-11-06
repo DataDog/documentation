@@ -177,7 +177,7 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used to [transport DogStatsD payloads][5]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ## Operating System kernel buffers
 
@@ -218,4 +218,3 @@ dogstatsd_so_rcvbuf: 26214400
 [2]: /developers/dogstatsd/unix_socket
 [3]: /developers/dogstatsd/#code
 [4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates
-[5]: /developers/dogstatsd/unix_socket

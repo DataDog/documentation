@@ -44,7 +44,7 @@ logs_config:
   logs_no_ssl: false
 ```
 
-With the Docker Agent, pass in ```DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516``` as an environment variable.
+With the Docker Agent, pass in `DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516` as an environment variable.
 
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 

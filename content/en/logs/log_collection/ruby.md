@@ -21,7 +21,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-It's recommended to use `lograge` here as it helps to bring some sanity to logs that are noisy and hardly parseable. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][1].
+It's recommended to use `lograge` here as it helps to bring some sanity to logs that are noisy and hardly parseable. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][1]).
 
 Instead of having a Rail logging output like this:
 
@@ -274,7 +274,7 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes)
+[1]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes
 [2]: https://github.com/roidrage/lograge#installation
 [3]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
 [4]: /tracing/advanced/connect_logs_and_traces/?tab=ruby
