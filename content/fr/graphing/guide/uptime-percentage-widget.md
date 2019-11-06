@@ -1,5 +1,5 @@
 ---
-title: Personnaliser le widget du pourcentage de la disponibilité
+title: Personnaliser le widget Pourcentage de disponibilité
 kind: guide
 author: Boyan Syarov
 further_reading:

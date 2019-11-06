@@ -3,7 +3,7 @@ footer_blurb_desc: Our friendly, knowledgeable solutions engineers are here to h
 col1:
   - name: product
     link: 'https://www.datadoghq.com/product/'
-    title: Caractéristiques
+    title: Fonctionnalités
   - name: integrations
     link: 'https://www.datadoghq.com/product/integrations/'
     title: Intégrations
@@ -25,7 +25,7 @@ col1:
 col2:
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
-    title: Tarif
+    title: Tarifs
   - name: documentation
     link: 'https://docs.datadoghq.com/'
     title: Documentation
@@ -44,7 +44,7 @@ col2:
 col3:
   - name: contact
     link: 'https://www.datadoghq.com/about/contact/'
-    title: Contactez-nous
+    title: Nous contacter
   - name: partners
     link: 'https://www.datadoghq.com/partner-with-datadog/'
     title: Partenaires
@@ -60,9 +60,12 @@ col3:
   - name: legal
     link: 'https://www.datadoghq.com/legal/'
     title: Mentions légales
+  - name: investors
+    link: 'https://investors.datadoghq.com/'
+    title: Relations avec les investisseurs
   - name: analyst
     link: 'https://www.datadoghq.com/about/analyst/'
-    title: Rapports d'analyse
+    title: Rapports d'analystes
 col4:
   - name: blog
     link: 'https://www.datadoghq.com/blog/'

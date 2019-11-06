@@ -11,56 +11,69 @@ further_reading:
     text: Planifier un downtime pour désactiver un monitor
   - link: monitors/monitor_status
     tag: Documentation
-    text: Consulter le statut de votre monitor
+    text: Vérifier le statut de votre monitor
 ---
 ## Présentation
 
-Les monitors d'événements vous permettent de recevoir une alerte lorsqu'un événement correspondant à votre requête se produit.
+Les monitors d'événements vous permettent de recevoir une alerte lorsqu'un événement correspondant à votre requête de recherche se produit.
 
-1. Sélectionnez la requête et les paramètres (statut, priorité, sources et tags) à surveiller :
-    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="sélection monitor d'événement" responsive="true" style="width:80%;">}}
-2. Sélectionnez le groupe d'alertes :
-    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="groupe d'alerte monitor d'événement" responsive="true" style="width:80%;">}}
+## Création d'un monitor
 
-3. Sélectionnez les **conditions d'alerte**. Les options **threshold value** et **timeframe** vous permettent de définir le nombre d'occurrences d'un événement requis pendant un intervalle pour déclencher le monitor.
-    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="conditions d'alerte monitor d'événement" responsive="true" style="width:80%;">}}
+Pour créer un [monitor d'événement][1] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Event*.
 
-    **Remarque** : certains fournisseurs accumulent un retard considérable entre l'**envoi** d'un événement et sa réalisation. Lorsque c'est le cas, Datadog antidate l'événement afin d'indiquer la date de sa réalisation. Cela peut entraîner des comportements anormaux pour les monitors. En cas de problème, contactez l'[assistance Datadog][1].
-4. Configurez vos **options de notification** :
-   Reportez-vous à la page de la documentation dédiée aux [notifications][2] pour en savoir plus.
+### Sélectionnez les événements à prendre en considération
 
-## Utiliser des tags d'événement dans la page Event Monitors
+Lorsque vous remplissez les paramètres ci-dessous, la liste des événements située au-dessus des champs de recherche est filtrée.
 
-Depuis la page Event Monitors, vous pouvez utiliser les tags envoyés par des événements pour identifier les événements et personnaliser les actions et les messages du monitor. Définissez d'abord les paramètres de recherche pour la recherche d'événements plein texte. Si vous recherchez un tag spécifique, vous pouvez également l'inclure dans la recherche. Par exemple :
+* Inclure les événements contenant `<TEXTE>`
+* dont le statut est `error`, `warning`, `info` ou `success`
+* et la priorité `all`, `normal` ou `low`
+* en provenance de `<SOURCE>`
+* pour `<TAGS>`
+* en excluant `<TAGS>`
 
-`Mon exemple d'événement #exemple-tag`
+Sélectionnez votre groupe d'alertes :
 
-{{< img src="monitors/monitor_types/event/define_event.png" alt="définition_événement" responsive="true" style="width:80%;">}}
+* L'option **Simple alert** agrège vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies.
+* L'option **Multi alert** applique l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour chaque groupe qui répond aux conditions définies.
 
-## Utiliser des template variables d'événements dans des notifications
+### Définir vos conditions d'alerte
 
-Ajoutez des informations spécifiques à un événement dans les notifications de votre monitor d'événement. Voici les template variables disponibles :
+* Le nombre était `above`, `above or equal to`, `below` ou `below or equal to` (supérieur, supérieur ou égal à, inférieur, inférieur ou égal à)
+* `<NOMBRE_SEUIL>`
+* au cours de l'intervalle écoulé suivant : `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-| Template variable        | Définition                                                               |
-|--------------------------|--------------------------------------------------------------------------|
-| `{{event.id}}`           | ID de l'événement.                                                          |
-| `{{event.title}}`        | Titre de l'événement.                                                       |
-| `{{event.text}}`         | Texte de l'événement.                                                        |
-| `{{event.host.name}}`    | Hostname à l'origine de l'événement.                                        |
-| `{{event.tags.tagname}}` | Tags liés à l'événement ; remplacez `tagname` par le nom de votre tag. |
+ **Remarque** : certains fournisseurs accusent d'un retard considérable entre l'**envoi** d'un événement et sa réalisation. Les événements concernés sont antidatés par Datadog afin d'indiquer l'heure à laquelle ils se sont produits ; toutefois, cela signifie qu'un événement entrant est susceptible d'être placé en dehors de la fenêtre d'évaluation actuelle du monitor. Afin de prendre en compte la différence temporelle, élargissez la fenêtre d'évaluation de votre monitor. Si vous avez besoin d'aide pour l'ajustement des paramètres de vos monitors, contactez l'[assistance Datadog][2].
 
-{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="notification_événément_modèle" responsive="true" style="width:60%;">}}
+### Notifications
 
-Utilisez `event.tags` et `event.tags.tagname` pour récupérer les valeurs de vos tags dans le markdown. Par exemple :
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][3].
 
-{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
+#### Template variables d'événements
 
-Lorsque votre alerte se déclenche, tous les événements correspondants qui possèdent le tag dans Datadog apparaissent dans le message :
+Les monitors d'événements disposent de template variables spécifiques que vous pouvez inclure dans le message de notification :
 
-{{< img src="monitors/monitor_types/event/triggered_event.png" alt="événement_déclenché" responsive="true" style="width:60%;">}}
+| Template variable          | Définition                                                                     |
+|----------------------------|--------------------------------------------------------------------------------|
+| `{{event.id}}`             | L'ID de l'événement.                                                           |
+| `{{event.title}}`          | Le titre de l'événement.                                                        |
+| `{{event.text}}`           | Le texte de l'événement.                                                         |
+| `{{event.host.name}}`      | Le nom du host qui a généré l'événement.                                 |
+| `{{event.tags}}`           | La liste des tags associés à l'événement.                                          |
+| `{{event.tags.<CLÉ_TAG>}}` | La valeur d'une clé de tag spécifique associée à l'événement. Consultez l'exemple ci-dessous. |
+
+##### {{event.tags.&lt;CLÉ_TAG&gt;}}
+
+Concernant les tags `env:test`, `env:staging` et `env:prod` :
+
+* `env` correspond à la clé de tag.
+* `test`, `staging` et `prod` correspondent aux valeurs du tag.
+
+La template variable est `{{event.tags.env}}`. Le résultat de l'utilisation de la template variable est `test`, `staging` ou `prod`.
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/help
-[2]: /fr/monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/event
+[2]: /fr/help
+[3]: /fr/monitors/notifications

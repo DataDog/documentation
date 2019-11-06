@@ -34,7 +34,7 @@ disable_toc: true
     {{< nextlink href="/tracing/setup/" >}}<u>Instrumenter votre application</u> : Ajoutez une bibliothèque de tracing à votre application.{{< /nextlink >}}
     {{< nextlink href="/tracing/advanced/" >}}<u>Enrichir vos traces</u> : Enrichissez vos traces en injectant automatiquement un ID de trace dans vos logs, en ajoutant des métadonnées à vos spans, et en recueillant des métriques d'exécution associées à vos traces.{{< /nextlink >}}
     {{< nextlink href="/tracing/visualization/" >}}<u>Utiliser l'UI de l'APM</u> : Visualisez les données de votre APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés. {{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_search_and_analytics/" >}}<u>Analyse et recherche de traces</u> : Visualisez les données de votre APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés.{{< /nextlink >}}
+    {{< nextlink href="/tracing/app_analytics/" >}}<u>Analyse et recherche de traces</u> : Visualisez les données de votre APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés.{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/" >}}<u>Guides</u> : Accédez à des articles d'aide supplémentaires à propos de l'APM et du tracing distribué.{{< /nextlink >}}
     {{< nextlink href="/tracing/troubleshooting/?tab=java" >}}<u>Dépannage</u> : Résolvez les problèmes de tracing courants.{{< /nextlink >}}
 {{< /whatsnext >}}

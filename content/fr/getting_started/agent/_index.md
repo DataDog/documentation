@@ -63,40 +63,53 @@ Consultez la page relative aux [commandes de l'Agent][10] pour [démarrer][11], 
 ## Données collectées
 
 ### Métriques
-En fonction de votre plateforme, l'Agent présente plusieurs checks principaux activés par défaut qui recueillent des métriques.
+
+#### Agent
+
+Les métriques ci-dessous sont disponibles pour la version 6 de l'Agent. Si vous disposez de la version 5, consultez l'intégration [Métriques de l'Agent][14].
+
+| Métrique                           | Description                                                                                                        |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **datadog.agent.python.version** | Affiche une valeur de `1` si l'Agent transmet actuellement des données à Datadog. Le tag `python_version` est ajouté à la métrique. |
+| **datadog.agent.running**        | Affiche une valeur de `1` si l'Agent transmet actuellement des données à Datadog.                                                 |
+| **datadog.agent.started**        | Un nombre d'une valeur de `1` envoyé lorsque l'Agent se lance (disponible pour les versions 6.12 et ultérieures).                                        |
+
+#### Checks
+
+En fonction de votre plateforme, l'Agent présente plusieurs checks de base activés par défaut qui recueillent des métriques.
 
 | Check       | Métriques       | Plateformes          |
 |-------------|---------------|--------------------|
-| CPU         | [Système][14]  | Tout                |
-| Disk        | [Disque][15]    | Tout                |
-| Docker      | [Docker][16]  | Docker             |
-| File Handle | [Système][14]  | Toutes sauf Mac     |
-| IO          | [Système][14]  | Tout                |
-| Load        | [Système][14]  | Toutes sauf Windows |
-| Memory      | [Système][14]  | Tout                |
-| Network     | [Réseau][17] | Tout                |
-| NTP         | [NTP][18]     | Tout                |
-| Uptime      | [Système][14]  | Tout                |
-| Winproc     | [Système][14]  | Windows            |
+| CPU         | [Système][15]  | Toutes                |
+| Disk        | [Disque][16]    | Toutes                |
+| Docker      | [Docker][17]  | Docker             |
+| File Handle | [Système][15]  | Toutes sauf Mac     |
+| IO          | [Système][15]  | Toutes                |
+| Load        | [Système][15]  | Toutes sauf Windows |
+| Memory      | [Système][15]  | Toutes                |
+| Network     | [Réseau][18] | Toutes                |
+| NTP         | [NTP][19]     | Toutes                |
+| Uptime      | [Système][15]  | Toutes                |
+| Winproc     | [Système][15]  | Windows            |
 
-Pour recueillir des métriques provenant d'autres technologies, consultez la page relative aux [intégrations][19].
+Pour recueillir des métriques provenant d'autres technologies, consultez la page relative aux [intégrations][20].
 
 ### Événements
 L'Agent envoie des événements à Datadog lorsqu'un Agent est démarré ou redémarré.
 
 ### Checks de service
-**datadog.agent.up** :  
+**datadog.agent.up** : 
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
-**datadog.agent.check_status** :  
+**datadog.agent.check_status** : 
 Renvoie `CRITICAL` si un check de l'Agent n'est pas capable d'envoyer des métriques à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 Pour obtenir de l'aide pour le dépannage de l'Agent :
 
-* Consultez la page [Dépannage de l'Agent][20].
-* Consultez les [fichiers de log de l'Agent][21]
-* Contactez l'[assistance Datadog][22]
+* Consultez la page [Dépannage de l'Agent][21].
+* Consultez la page [Fichiers de log de l'Agent][22].
+* Contactez [l'assistance Datadog][23].
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
@@ -109,7 +122,7 @@ Pour obtenir de l'aide pour le dépannage de l'Agent :
 {{< /whatsnext >}}
 
 [1]: /fr/integrations
-[2]: /fr/developers/dogstatsd
+[2]: /fr/developers/metrics/dogstatsd_metrics_submission
 [3]: /fr/api
 [4]: /fr/graphing/infrastructure/process
 [5]: /fr/logs
@@ -121,12 +134,13 @@ Pour obtenir de l'aide pour le dépannage de l'Agent :
 [11]: /fr/agent/guide/agent-commands/#start-the-agent
 [12]: /fr/agent/guide/agent-commands/#stop-the-agent
 [13]: /fr/agent/guide/agent-commands/#restart-the-agent
-[14]: /fr/integrations/system/#metrics
-[15]: /fr/integrations/disk/#metrics
-[16]: /fr/integrations/docker_daemon/#metrics
-[17]: /fr/integrations/network/#metrics
-[18]: /fr/integrations/ntp/#metrics
-[19]: /fr/getting_started/integrations
-[20]: /fr/agent/troubleshooting
-[21]: /fr/agent/guide/agent-log-files
-[22]: /fr/help
+[14]: /fr/integrations/agent_metrics
+[15]: /fr/integrations/system/#metrics
+[16]: /fr/integrations/disk/#metrics
+[17]: /fr/integrations/docker_daemon/#metrics
+[18]: /fr/integrations/network/#metrics
+[19]: /fr/integrations/ntp/#metrics
+[20]: /fr/getting_started/integrations
+[21]: /fr/agent/troubleshooting
+[22]: /fr/agent/guide/agent-log-files
+[23]: /fr/help

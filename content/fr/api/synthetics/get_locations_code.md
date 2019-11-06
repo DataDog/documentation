@@ -1,17 +1,18 @@
 ---
 title: Obtenir des localisations disponibles
 type: apicode
-order: 29.91
+order: 30.91
 external_redirect: "/api/#obtenir-des-localisations"
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `GET /v1/synthetics/locations`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_locations" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_locations" >}}

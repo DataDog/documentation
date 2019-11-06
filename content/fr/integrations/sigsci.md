@@ -68,39 +68,43 @@ Pour utiliser l'intégration Datadog/Signal Sciences, vous devez être un clien
 
 ### Configuration
 
-**Intégration des métriques**
+#### Collecte de métriques
 
-- Installez l'[agent Signal Sciences][8]
+1. Installez l'[agent Signal Sciences][8].
 
-- Configurez l'agent Signal Sciences afin de le faire utiliser DogStatsD :
+2. Configurez l'agent Signal Sciences afin de le faire utiliser DogStatsD :
 
-  Ajoutez la ligne suivante au fichier agent.config de chaque agent :
+   Ajoutez la ligne suivante au fichier agent.config de chaque Agent :
     ```
     statsd-type = "dogstatsd"
     ```
 
-    Une fois le fichier mis à jour, le client statsd de l'agent prend alors en charge les tags. Des métriques telles que `sigsci.agent.signal.<type_signal>` sont envoyées en tant que `sigsci.agent.signal` et reçoivent le tag `signal_type:<type_signal>`.
+     Une fois le fichier mis à jour, le client statsd de l'agent prend alors en charge les tags. Des métriques telles que `sigsci.agent.signal.<type_signal>` sont envoyées en tant que `sigsci.agent.signal` et reçoivent le tag `signal_type:<type_signal>`.
 
     *Exemple :* `sigsci.agent.signal.http404` => `sigsci.agent.signal` avec le tag `signal_type:http404`
 
-- Configurez l'agent SigSci de façon à envoyer des métriques à l'Agent Datadog :
+    Si vous utilisez Kubernetes pour exécuter l'Agent Datadog, assurez-vous d'activer le trafic DogStatsD non local comme indiqué dans la [documentation relative à DogStatsD pour Kubernetes] (https://docs.datadoghq.com/agent/kubernetes/dogstatsd/).
 
-  Ajoutez la ligne suivante au fichier agent.config de chaque agent :
-  ```
-  statsd-address=<datadog agent hostname:port>
-  ```
+3. Configurez l'agent SigSci de façon à envoyer des métriques à l'Agent Datadog :
 
-- Dans Datadog, vérifiez que le dashboard « Signal Sciences - Overview » a bien été créé et qu'il reçoit des métriques.
+    Ajoutez la ligne suivante au fichier agent.config de chaque Agent :
+    ```
+    statsd-address="<DATADOG_AGENT_HOSTNAME>:<DATADOG_AGENT_PORT>"
+    ```
 
-**Intégration des événements**
+4. Cliquez sur le bouton pour installer l'intégration.
 
-- Dans Datadog, [créez une clé d'API][2].
+5. Dans Datadog, vérifiez que le dashboard « Signal Sciences - Overview » a bien été créé et qu'il reçoit des métriques.
 
-- Dans votre [dashboard Signal Sciences][3] sur la barre de navigation du site, cliquez sur Manage > Integrations puis sur l'option Add à proximité de l'intégration Datadog Event.
+#### Collecte d'événements
 
-- Saisissez la clé d'API dans le champ API Key correspondant.
+1. Dans Datadog, [créez une clé d'API][2].
 
-- Cliquez sur Add.
+2. Dans votre [dashboard Signal Sciences][3] sur la barre de navigation du site, cliquez sur Manage > Integrations puis sur l'option Add à proximité de l'intégration Datadog Event.
+
+3. Saisissez la clé d'API dans le champ _API Key_ correspondant.
+
+4. Cliquez sur _Add_.
 
 
 **Besoin d'informations supplémentaires ?**

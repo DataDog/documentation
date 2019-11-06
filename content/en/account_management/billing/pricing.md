@@ -30,7 +30,7 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 * Datadog records the number of **APM hosts** you are concurrently monitoring in the Datadog APM service once an hour. 
    * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. 
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* An **APM event** is an individual request against an individual service in your stack. Datadog charges based on the total number of APM events submitted to the Datadog APM service.
+* An **Analyzed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service.
 
 ### Log management
 
@@ -40,7 +40,13 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 ### Synthetics
 
 * An **API test** is an HTTP or HTTPS request against a single URL. Datadog charges per ten thousand API tests runs executed to the Datadog Synthetics service.
-* A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser. Datadog charges per thousand browser tests executed to the Datadog Synthetics service. 
+* A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser. Datadog charges per thousand browser tests executed to the Datadog Synthetics service.
+
+### Network Performance Monitoring
+
+* Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth-highest measurement.
+* Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
 
 ## Troubleshooting
 

@@ -39,13 +39,19 @@ See the specific setup instructions to ensure that the Agent is configured to re
 </br>
 Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.
 
-## Additional environments
+## Serverless
 
-There are alternernates to the Agent and containers that you can use to collect traces.
-
-### Lambda - X-Ray
+### AWS Lambda
 
 For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][8]
+
+### Google App Engine, AAS
+
+Datadog APM requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to configure a separate VM that accepts trace traffic externally.
+
+## Additional environments
+
+There are alternatives to the Agent and containers that you can use to collect traces.
 
 ### Heroku
 
@@ -54,10 +60,6 @@ Tracing is enabled by default when monitoring with Heroku. For more information 
 ### Cloud Foundry
 
 Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][10].
-
-### Other(GAE, AAS, Serverless)
-
-Datadog APM currently requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to setup a separate VM that accepts trace traffic externally.
 
 ## Configure your environment
 

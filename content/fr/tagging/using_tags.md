@@ -171,8 +171,8 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Tags recherche de traces" responsive="true" style="width:80%;">}}
 
 
-[1]: /fr/tracing/trace_search_and_analytics/search
-[2]: /fr/tracing/trace_search_and_analytics/search/#search-bar
+[1]: /fr/tracing/advanced/search
+[2]: /fr/tracing/advanced/search/#search-bar
 {{% /tab %}}
 {{% tab "Service map" %}}
 
@@ -182,7 +182,7 @@ Après avoir [assigné des tags][1], utilisez la Service map pour accéder facil
 
 
 [1]: /fr/tagging/assigning_tags
-[2]: /fr/tracing/trace_search_and_analytics/search
+[2]: /fr/tracing/advanced/search
 [3]: /fr/monitors/manage_monitor
 [4]: /fr/logs/explorer/search
 [5]: /fr/graphing/infrastructure/hostmap

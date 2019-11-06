@@ -7,4 +7,7 @@ app_key=<YOUR_APP_KEY>
 slo_id=<YOUR_SLO_ID>
 
 # Get a SLO
-curl -X GET "https://api.datadoghq.com/api/v1/slo/${slo_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/slo/${slo_id}"

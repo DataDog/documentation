@@ -1,8 +1,8 @@
 ---
-title: Delete a test
+title: Delete tests
 type: apicode
 order: 30.4
-external_redirect: /api/#post-delete
+external_redirect: /api/#delete-tests
 ---
 
 **SIGNATURE**:

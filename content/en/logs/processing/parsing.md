@@ -21,21 +21,20 @@ further_reading:
 
 ## Overview
 
-If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
-The Grok syntax provides an easier way to parse logs than pure regular expressions.
-The main usage of the Grok Parser is to extract attributes from semi-structured text messages.
+Datadog automatically parses JSON-formatted logs. For other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
+The Grok syntax provides an easier way to parse logs than pure regular expressions. The Grok Parser enables you to extract attributes from semi-structured text messages.
 
-Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
+Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc.
 
-Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
+You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
-* **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace,...)
+* **Matcher**: rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace, etc.)
 
 * **Extract** (optional): an identifier representing the capture destination for the piece of text matched by the *Matcher*.
 
-* **Filter** (optional): a post-processor of the match to transform it
+* **Filter** (optional): a post-processor of the match to transform it.
 
-Example for this classic unstructured log:
+Example for a classic unstructured log:
 ```
 john connected on 11/08/2017
 ```
@@ -45,17 +44,21 @@ With the following parsing rule:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-You would have at the end this structured log:
+After processing, the following structured log is generated:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
 **Note**:
-- If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
-- You must have unique rules names within the same Grok parser.
+
+* If you have multiple parsing rules in a single Grok parser:
+  * Only one can match any given log. The first one that matches, from top to bottom, is the one that does the parsing.
+  * Each rule can reference parsing rules defined above itself in the list.
+* You must have unique rule names within the same Grok parser.
+* The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 
 ### Matcher and Filter
 
-Here is the list of all the matchers and filters natively implemented by Datadog:
+Here is a list of all the matchers and filters natively implemented by Datadog:
 
 {{< tabs >}}
 {{% tab "Matcher" %}}
@@ -67,7 +70,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
 | `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
 | `notSpace`                                      | Matches any string until the next space.                                                                                           |
-| `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).       |
+| `boolean("truePattern", "falsePattern")`        | Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).       |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
 | `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
@@ -99,7 +102,6 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `number`                                                       | Parses a match as double precision number.                                                                                                                |
 | `integer`                                                      | Parses a match as an integer number.                                                                                                                      |
 | `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                              |
-| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a Unix timestamp. [See date Filter examples](#parsing-dates).                                         |
 | `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
 | `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
@@ -123,27 +125,27 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 
 ## Advanced Settings
 
-At the bottom of your grok processor tiles there is an Advanced Settings section:
+At the bottom of your Grok processor tiles, there is an Advanced Settings section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" responsive="true" style="width:80%;">}}
 
-* Use the **Extract from** field to apply your grok processor on a given attribute instead of the default `message` attribute.
+* Use the **Extract from** field to apply your Grok processor on a given attribute instead of the default `message` attribute.
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules which is useful when you have several rules in the same grok parser that uses the same tokens.
+* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
-Example for this classic unstructured log:
+Example for a classic unstructured log:
 
 ```
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-You could use the following parsing rule:
+Use the following parsing rule:
 
 ```
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-with the following helpers:
+With the following helpers:
 
 ```
 user %{word:user.name} id:%{integer:user.id}
@@ -155,7 +157,8 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" responsive="true" style="width:80%;">}}
 
 ## Examples
-Find below some examples demonstrating how to use parsers:
+
+Some examples demonstrating how to use parsers:
 
 * [Key value](#key-value)
 * [Parsing dates](#parsing-dates)
@@ -166,27 +169,17 @@ Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
-This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
 
-* `separatorStr` : defines the separator. Default `=`
-* `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`. Used only for non quoted values (e.g. `key=@valueStr`).
-* `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). 
-  * When defined, the default behavior is replaced by allowing only defined quoting char.
-  * We always match inputs without any quoting chars, regardless to what is specified in `quotingStr`. 
-  * Any string defined within the quoting chars is extracted as a value.
-    
-    For example, input: `key:=valueStr key:=</$%@valueStr2> key:="valueStr3"`, with parsing rule: `parsing_rule  {data::keyvalue(":=","","<>")}`, produces as output: `{
-    "key": [
-      "valueStr",
-      "/$%@valueStr2"
-    ]
-  }`
+* `separatorStr`: defines the separator. Defaults to `=`.
+* `characterWhiteList`: defines additional non-escaped value chars. Defaults to `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
+* `quotingStr`: defines quotes. Default behavior detects quotes (`<>`, `""`, etc.). 
 
-**Note**: If you define a *keyvalue* filter on `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+**Note**: If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
-log:
+Log:
 
 ```
 user=john connect_date=11/08/2017 id=123 action=click
@@ -207,7 +200,7 @@ If you add an **extract** attribute `my_attribute` in your rule pattern you woul
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
 
-log:
+Log:
 
 ```
 user: john connect_date: 11/08/2017 id: 123 action: click
@@ -223,7 +216,7 @@ rule %{data::keyvalue(": ")}
 
 If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
 
-log:
+Log:
 
 ```
 url=https://app.datadoghq.com/event/stream user=john
@@ -246,6 +239,30 @@ Other examples:
 | key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
+
+**Multiple QuotingString example**:  When quotingstring are defined, the default behavior is replaced by allowing only defined quoting character.
+The keyvalue always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters are extracted.
+
+Log:
+
+  ```
+  key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
+  ```
+
+Rule:
+
+  ```
+  rule %{data::keyvalue(":=","","<>")}
+  ```
+
+Result:
+    
+  ```
+  {
+    "key1": "valueStr",
+    "key2": "/valueStr2"
+  }
+  ```
 
 ### Parsing dates
 

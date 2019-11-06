@@ -3,7 +3,10 @@ app_key=<YOUR_APP_KEY>
 
 metric_name="system.net.bytes_sent"
 
-curl -X PUT -H "Content-type: application/json" \
+curl -X PUT \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
       "type": "gauge",
       "description": "my custom description",
@@ -11,5 +14,5 @@ curl -X PUT -H "Content-type: application/json" \
       "unit": "byte",
       "per_unit": "second"
 }' \
-    "https://api.datadoghq.com/api/v1/metrics/${metric_name}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/metrics/${metric_name}"
 

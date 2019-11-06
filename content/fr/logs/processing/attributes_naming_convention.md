@@ -190,7 +190,7 @@ Les attributs liés à une base de données sont précédés par `db`.
 | `db.operation` | `string` | L'opération effectuée (« query », « update », « delete », etc.).                                                                   |
 | `db.user`      | `string` | L'utilisateur à l'origine de l'opération.                                                                                                     |
 
-Les intégrations [Cassandra][10], [MySQL][11], [RDS][12], [Elasticsearch][13], etc. reposent sur ces attributs.
+Les intégrations [Cassandra][9], [MySQL][10], [RDS][11], [Elasticsearch][12], etc. reposent sur ces attributs.
 
 ### Performances
 
@@ -201,7 +201,7 @@ Attributs des métriques de performance.
 | `duration`   | `number` | Toute durée en **nanosecondes** : le délai de réponse HTTP, le délai d'interrogation d'une base de données, la latence, etc. |
 
 
-Étant donné que cet attribut est affiché et utilisé comme [mesure][14] par défaut pour la [recherche de traces][15], nous vous conseillons d'y faire appel ou tout du moins de configurer un remappage vers celui-ci.
+Étant donné que cet attribut est affiché et utilisé comme [mesure][13] par défaut pour la [recherche de traces][14], nous vous conseillons d'y faire appel ou tout du moins de configurer un remappage vers celui-ci.
 
 ### Attributs associés à l'utilisateur
 
@@ -225,7 +225,7 @@ Ces attributs sont liés aux données ajoutées par un Agent syslog-shipper ou l
 | `syslog.timestamp` | `string` | Le timestamp du log. Généralement remappé vers l'attribut réservé `date`.       |
 | `syslog.env`       | `string` | Le nom de l'environnement d'où provient la source des logs.                      |
 
-Les intégrations [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [Logstash][20], etc. reposent sur ces attributs.
+Les intégrations [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc. reposent sur ces attributs.
 
 ## Pour aller plus loin
 
@@ -239,15 +239,14 @@ Les intégrations [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [L
 [6]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [7]: /fr/integrations/amazon_elb
 [8]: /fr/logs/processing/processors/#url-parser
-[9]: /fr/logs/processing/processors/#user-agent-parser
-[10]: /fr/integrations/cassandra
-[11]: /fr/integrations/mysql
-[12]: /fr/integrations/amazon_rds
-[13]: /fr/integrations/elastic
-[14]: /fr/logs/explorer/?tab=measures#setup
-[15]: /fr/tracing/trace_search_and_analytics/search
-[16]: /fr/integrations/rsyslog
-[17]: /fr/integrations/nxlog
-[18]: /fr/integrations/syslog_ng
-[19]: /fr/integrations/fluentd
-[20]: /fr/integrations/logstash
+[9]: /fr/integrations/cassandra
+[10]: /fr/integrations/mysql
+[11]: /fr/integrations/amazon_rds
+[12]: /fr/integrations/elastic
+[13]: /fr/logs/explorer/?tab=measures#setup
+[14]: /fr/tracing/advanced/search
+[15]: /fr/integrations/rsyslog
+[16]: /fr/integrations/nxlog
+[17]: /fr/integrations/syslog_ng
+[18]: /fr/integrations/fluentd
+[19]: /fr/integrations/logstash

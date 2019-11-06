@@ -15,33 +15,54 @@ further_reading:
 ---
 ## Présentation
 
-Chaque processus de collecte de l'Agent Datadog transmet une pulsation du nom de `datadog.agent.up`
-avec le statut `UP`. Vous pouvez surveiller cette pulsation sur un ou plusieurs hosts.
+Chaque processus de l'Agent Datadog transmet un check de service du nom de `datadog.agent.up` avec le statut `OK`. Vous pouvez surveiller ce check pour un ou plusieurs hosts à l'aide d'un monitor de host.
 
-## Configuration
+## Création d'un monitor
 
-1. Sélectionnez votre ****host en fonction d'un nom ou de tag(s). Précisez un ou plusieurs tags pour surveiller tous les hosts caractérisés par le tag ou la combinaison de tags.
-    {{< img src="monitors/monitor_types/host/host_monitor_pick_hosts.png" alt="sélection des hosts monitor de host" responsive="true" style="width:80%;">}}
+Pour créer un [monitor de host][1] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Host*.
 
-2. Choisissez entre une **Check Alert** et une **Cluster Alert**.
+### Choisir les hosts par nom ou par tag
 
-3. **Check Alert** : lorsqu'un host cesse de transmettre des données, une alerte est déclenchée.
-    Sélectionnez l'option **no-data timeframe**. Vous recevrez alors une notification en cas d'arrêt de transmission de données par la pulsation pendant un délai dépassant le nombre de minutes précisé.
-    {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="aucun intervalle de données monitor de host" responsive="true" style="width:80%;">}}
+Sélectionnez les hosts à surveiller en spécifiant les hostnames ou des tags, ou sélectionnez `All Monitored Hosts`. Si vous souhaitez exclure certains hosts, spécifiez leurs hostnames ou des tags dans le second champ.
 
-4. **Cluster Alert** : lorsqu'un certain pourcentage de hosts cesse de transmettre des données, une alerte est déclenchée.
-    * Choisissez si vous souhaitez regrouper ou non vos hosts dans un cluster en fonction d'un tag.
-        {{< img src="monitors/monitor_types/host/cluster_alert.png" alt="Cluster alert" responsive="true" style="width:80%;">}}
+* Le champ Include utilise la logique `AND`. Tous les hostnames et tags spécifiés doivent correspondre à un host pour que celui-ci soit inclus.
+* Le champ Exclude utilise la logique `OR`. Tout host correspondant à l'un des hostnames ou tags est exclu.
 
-    * Sélectionnez le pourcentage des seuils d'alerte/avertissement pour votre monitor de host. 
-        {{< img src="monitors/monitor_types/host/cluster_alert_setup.png" alt="configuration cluster alert" responsive="true" style="width:75%;">}} 
+### Définir vos conditions d'alerte
 
-    * Sélectionnez l'option **no-data timeframe**. Vous recevrez alors une notification en cas d'arrêt de transmission de données par la pulsation pendant un délai dépassant le nombre de minutes précisé pour le pourcentage de host défini dans le cluster sélectionné.
+Dans cette section, utilisez les options **Check Alert** et **Cluster Alert** pour choisir entre une alerte de check ou une alerte de cluster :
 
-5. Configurez vos **options de notification** :
-    Reportez-vous à la page de la documentation relative aux [notifications][1] pour découvrir les différentes options de base des notifications.
+{{< tabs >}}
+{{% tab "Alerte de check" %}}
+
+Une alerte de check surveille si un host cesse de transmettre des données pendant une période donnée. Lorsque trop de temps s'écoule après l'exécution d'un check, cela peut signifier que le host ne parvient pas à transmettre de données.
+
+Saisissez le nombre de minutes pendant lequel l'absence de données doit être vérifiée. La valeur par défaut est de 2 minutes.
+
+Si `datadog.agent.up` cesse d'envoyer un statut `OK` pendant une durée supérieure au nombre de minutes indiqué, une alerte se déclenche.
+
+{{% /tab %}}
+{{% tab "Alerte de cluster" %}}
+
+Une alerte de cluster surveille si un certain pourcentage de hosts ont cessé de transmettre des données pendant une période donnée.
+
+Pour configurer une alerte de cluster :
+
+1. Choisissez si vos hosts doivent être regroupés en fonction d'un tag ou non. `Ungrouped` calcule le pourcentage de statuts sur l'ensemble des hosts inclus. `Grouped` calcule le pourcentage de statuts pour chaque groupe.
+2. Sélectionnez les seuils d'alerte et d'avertissement en pourcentage. Il est possible de ne définir qu'un seul de ces paramètres (alerte ou avertissement).
+3. Saisissez le nombre de minutes pendant lequel l'absence de données doit être vérifiée. La valeur par défaut est de 2 minutes.
+
+Si `datadog.agent.up` cesse d'envoyer un statut `OK` pendant une durée supérieure au nombre de minutes indiqué, une alerte se déclenche.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Notifications
+
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][2].
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/host
+[2]: /fr/monitors/notifications

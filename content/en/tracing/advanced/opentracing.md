@@ -247,8 +247,6 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Support for OpenTracing in the Python tracer is currently in beta.
-
 **Setup**:
 
 OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package :

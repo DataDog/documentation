@@ -37,6 +37,8 @@ Utilisez l'intégration OpenLDAP pour recueillir des métriques à partir du bac
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 L'intégration OpenLDAP est fournie avec l'Agent. Pour commencer à recueillir vos métriques OpenLDAP, suivez ces étapes :
@@ -119,18 +121,18 @@ Consultez le [fichier d'exemple openldap.yaml][2] pour découvrir toutes les opt
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```
-    logs_enabled: true
+    ```yaml
+      logs_enabled: true
     ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `openldap.d/conf.yaml` pour commencer à recueillir vos logs Openldap :
 
-    ```yaml
-    logs:
-      - type: file
-      path: /var/log/slapd.log
-      source: openldap
-      service: <SERVICE_NAME>
+    ```
+      logs:
+        - type: file
+          path: /var/log/slapd.log
+          source: openldap
+          service: <SERVICE_NAME>
     ```
 
    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple openldap.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
@@ -157,18 +159,13 @@ Le check OpenLDAP n'inclut aucun événement.
 
 ### Checks de service
 
-**openldap.can_connect**
-
+**openldap.can_connect**:<br>
 Renvoie `CRITICAL` si l'intégration ne parvient pas à se connecter au serveur OpenLDAP à surveiller. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-## Développement
-
-Consultez la [documentation sur les outils de développement][7]
-pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
@@ -176,7 +173,7 @@ pour découvrir comment tester et développer des intégrations reposant sur l'A
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/openldap/metadata.csv
 [6]: https://docs.datadoghq.com/fr/help
-[7]: https://docs.datadoghq.com/fr/developers
+[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

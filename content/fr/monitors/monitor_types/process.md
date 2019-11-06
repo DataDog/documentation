@@ -1,5 +1,5 @@
 ---
-title: Monitor de processus
+title: Monitor de live processes
 kind: documentation
 description: Vérifier si un processus est en cours d'exécution sur un host
 further_reading:
@@ -11,73 +11,49 @@ further_reading:
     text: Planifier un downtime pour désactiver un monitor
   - link: monitors/monitor_status
     tag: Documentation
-    text: Consulter le statut de votre monitor
+    text: Vérifier le statut de votre monitor
 ---
 ## Présentation
 
-Les monitors de processus sont configurés pour vérifier le statut d'un ou de plusieurs processus. Les monitors de processus sont évalués toutes les minutes.
+Les monitors de live processes tirent parti des données recueillies par l'[Agent de processus][1]. Créez des monitors qui vous envoient des états d'alerte ou d'avertissement selon le nombre d'éléments d'un groupe de processus associés à des hosts ou tags.
 
-## Monitors de live processes
+## Création d'un monitor
 
-{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="monitor de live processes" responsive="true" style="width:35%;">}}
+Pour créer un [monitor de live process][2] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Live Process*.
 
-Les monitors de live processes tirent parti des données collectées par l'[Agent de processus][1], qui vous permet de créer des monitors de manière centralisée. Ces monitors envoient des états d'alerte ou d'avertissement en fonction du comportement des groupes de processus associés à un host ou un tag.
+### Sélectionner des processus
 
-### Configuration
+Recherchez un processus à surveiller en indiquant une liste de chaînes séparées par des espaces. Cela lance une recherche approximative avec correspondance partielle dans l'ensemble des processus de votre infrastructure. Vous pouvez utiliser les opérateurs de recherche `AND`, `OR` et `NOT`. Consultez la page [Surveillance de live processes][3] pour en savoir plus. Vous pouvez également appliquer un filtre basé sur des tags pour affiner le contexte de votre monitor.
 
-1. **Recherchez le processus à surveiller.**  
-  Il peut s'agir d'une liste de chaînes séparées par des espaces. Cette option effectue une recherche approximative de correspondance partielle dans l'ensemble des processus de votre infrastructure.
-  Les processus et le nombre de processus qui correspondent à la recherche sont affichés dans le tableau ci-dessous :
+Les processus et les totaux correspondants s'affichent sous la recherche :
 
-    {{< img src="monitors/monitor_types/process/search_process.png" alt="Rechercher des processus" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus" responsive="true" style="width:90%;">}}
 
-2. **Utilisez des tags pour préciser le contexte spécifique de votre monitor.**  
-  Seuls les tags ou les hosts qui renvoient un statut pour le processus sélectionné sont affichés.
+Une fois votre recherche définie, un graphique s'affiche au-dessus des critères de recherche. Celui-ci représente le nombre total approximatif de processus trouvés. Pour obtenir des données plus granulaires, consultez votre [page Live Process][5].
 
-    {{< img src="monitors/monitor_types/process/selecting_scope.png" alt="Sélectionner le contexte" responsive="true" style="width:80%;">}}
+#### Groupe d'alertes
 
-    **Remarque** : le graphique affichant l'évolution du nombre de processus dans le contexte pour le monitor au fil du temps se trouve au-dessus de la section *Select process*.  
-    La sélection de `multi-alert` permet de fractionner ce graphique afin d'afficher une ligne par groupe.
+`Simple Alert` (valeur par défaut) : agrège vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies.
 
-3. **Sélectionnez les options d'alerte.**
+`Multi Alert` : applique l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour chaque groupe qui répond aux conditions définies.
 
-    {{< img src="monitors/monitor_types/process/set_alert_conditions.png" alt="Définir les conditions d'alerte" responsive="true" style="width:80%;">}}
+### Définir vos conditions d'alerte
 
-4. **Configurez vos options de notification**.  
-  Reportez-vous à la page de la documentation dédiée aux [notifications][2] pour en savoir plus.
+* Le total était `above`, `above or equal to`, `below` ou `below or equal to` (supérieur, supérieur ou égal à, inférieur, inférieur ou égal à)
+* au seuil durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
 
-## Check de processus
+Les seuils vous permettent de déclencher une alerte lorsqu'une certaine valeur numérique est dépassée. Datadog dispose de deux types de notifications : les alertes et les avertissements. Les monitors de live processes se rétablissent automatiquement en fonction du seuil d'alerte ou d'avertissement.
 
-{{< img src="monitors/monitor_types/process/process_check_select.png" alt="check de processus" responsive="true" style="width:35%;">}}
+### Notifications
 
-Un monitor de check de processus surveille le statut généré par le check de service `process.up`, qui est transmis par le check dans l'Agent. Au niveau de l'Agent, vous pouvez configurer des seuils en fonction du nombre de processus correspondants.
-
-Consultez la page [Check de processus][3] pour obtenir davantage d'informations sur la configuration.
-
-Pour chaque processus, un statut de check de service unique est généré. Via cette interface de création, vous pouvez choisir les checks à surveiller ainsi que les conditions de notification.
-
-### Configuration
-
-1. **Choisissez le processus à surveiller.**  
-  Les noms configurés dans les Agents présentant un check de processus actif s'affichent.
-    {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="sélectionner le monitor de processus" responsive="true" style="width:80%;">}}
-
-2. **Choisissez le contexte du monitor**.
-  Seuls les tags ou les hosts qui renvoient un statut pour le processus sélectionné sont affichés.
-    {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="contexte du monitor de processus" responsive="true" style="width:80%;">}}
-
-3. **Sélectionnez les options d'alerte** :
-
-    Le monitor est évalué toutes les minutes. Par conséquent, si vous définissez un seuil de `X consecutive failures`, cela signifie que le processus était indisponible pendant `X consecutive minutes`.
-    {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="conditions d'alerte du monitor de processus" responsive="true" style="width:80%;">}}
-
-4. **Configurez vos options de notification** :  
-    Reportez-vous à la page de la documentation relative aux [notifications][4] pour découvrir les différentes options de base des notifications.
+Pour obtenir des instructions détaillées sur les sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][4].
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /fr/graphing/infrastructure/process
-[2]: /fr/monitors/notifications
-[3]: /fr/integrations/process
+[2]: https://app.datadoghq.com/monitors#create/live_process
+[3]: /fr/graphing/infrastructure/process/#search-syntax
 [4]: /fr/monitors/notifications
+[5]: https://app.datadoghq.com/process

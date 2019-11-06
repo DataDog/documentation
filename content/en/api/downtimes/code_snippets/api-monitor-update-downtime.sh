@@ -4,16 +4,22 @@ downtime_id=4336
 
 # Create a downtime to update
 currenttime=$(date +%s)
-downtime_id=$(curl -X POST -H "Content-type: application/json" \
--d "{
+downtime_id=$(curl -X POST \
+    -H "Content-type: application/json" \
+    -H "DD-API-KEY: ${api_key}" \
+    -H "DD-APPLICATION-KEY: ${app_key}" \
+    -d "{
       \"scope\": \"env:prod\",
       \"start\": \"${currenttime}\"
-  }" \
-    "https://api.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+    }" \
+    "https://api.datadoghq.com/api/v1/downtime}" | jq '.id')
 
-curl -X PUT -H "Content-type: application/json" \
+curl -X PUT \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
       "scope": "env:staging",
       "message": "Doing some testing on staging"
 }' \
-    "https://api.datadoghq.com/api/v1/downtime/${downtime_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/downtime/${downtime_id}"

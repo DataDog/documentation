@@ -79,12 +79,14 @@ Define the request you want to be executed by Datadog:
 
 ### Alert Conditions
 
-Set alert conditions to determine the circumstances under which you want a test to send an alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+Set alert conditions to determine the circumstances under which you want a test to send a notification alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
+
+**Note**: You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
 
 #### Assertions
 
@@ -139,7 +141,7 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 | DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
 | `INVALID_REQUEST` | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
 | `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time.                                                                                                                                        |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. A `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. A `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).                                                                                                                                      |
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 

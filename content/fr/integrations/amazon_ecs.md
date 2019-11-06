@@ -132,8 +132,8 @@ Pour l'Agent v6.10+, le mode AWSVPC est pris en charge à la fois pour les conte
 1. Pour les applications et l'Agent en mode AWSVPC, les groupes de sécurité doivent être configurés pour permettre :
   * au groupe de sécurité de l'Agent de se connecter aux conteneurs d'application sur les ports concernés.
   * au groupe de sécurité de l'Agent de se connecter aux instances du host sur le port TCP 51678. Le conteneur de l'Agent ECS doit s'exécuter en mode réseau host (par défaut) ou avoir un port relié au host.
-<br><br>
-2. Pour les applications en mode AWSVPC et l'Agent en mode pont, les groupes de sécurité doivent être configurés pour permettre au groupe de sécurité des instances de host de se connecter aux conteneurs d'application sur les ports concernés.
+
+2. Pour les applications en mode AWSVPC et l'Agent en mode pont, les groupes de sécurité doivent être configurés de façon à autoriser le groupe de sécurité des instances de host à se connecter aux conteneurs d'application sur les ports concernés.
 
 ### Collecte de logs
 
@@ -185,7 +185,7 @@ Pour recueillir tous les logs écrits par des applications s'exécutant dans vos
 
 #### Activer la collecte de logs pour des intégrations
 
-L'attribut `source` est utilisé pour identifier l'intégration à utiliser pour chaque conteneur. Contournez-le directement dans vos conteneurs pour commencer à utiliser la [collecte de logs pour une intégration][15]. Lisez le [guide sur Autodiscovery pour les logs][16] de Datadog pour en savoir plus sur ce processus.
+L'attribut `source` est utilisé pour identifier l'intégration à utiliser pour chaque conteneur. Contournez-le directement dans vos étiquettes de conteneurs pour commencer à [recueillir les logs d'une intégration][15]. Lisez le [guide sur Autodiscovery pour les logs][16] de Datadog pour en savoir plus sur ce processus.
 
 ### Collecte de processus
 
