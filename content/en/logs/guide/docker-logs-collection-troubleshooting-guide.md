@@ -3,14 +3,25 @@ title: Docker Log Collection Troubleshooting Guide
 kind: documentation
 ---
 
-There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.
+There are a number of common problems that arise when sending new container logs to Datadog, whether you are using the Container Agent or a locally installed Host Agent. If you experience issues sending new logs to Datadog, this list may help you troubleshoot. If you continue to have trouble after reviewing the items on this page, [contact our support team][1] for further assistance.
 
 ## Logging isn't enabled
-{{< tabs >}} {{% tab "Container Installation" %}}
-Check if the log collection is enabled `DD_LOGS_ENABLED=true`.
-{{% /tab %}} {{% tab "Host Installation" %}}
-Check if the log collection is enabled `logs_enabled: true` in the `datadog.yaml` file.
-{{% /tab %}} {{< /tabs >}}
+
+Check whether log collection is enabled.
+
+{{< tabs >}} 
+{{% tab "Container Installation" %}}
+
+Check that `DD_LOGS_ENABLED=true` is set in your environment variables.
+
+{{% /tab %}} 
+{{% tab "Host Installation" %}}
+
+Check your `datadog.yaml` file for `logs_enabled: true`
+
+{{% /tab %}} 
+{{< /tabs >}}
+
 ## Unable to connect to Docker socket
 
 When the Agent is unable to connect to the Docker socket, the "Logs Agent" section of the Agent status displays `Status: Pending` to indicate that it hasn't started collecting container logs.
