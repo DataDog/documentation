@@ -44,14 +44,20 @@ We **accept** the following metric types:
 
 ## Submission Method
 
-Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation will occur when multiple points arrive in a short timeframe (i.e., in one interval). The Agent will combine values with identical tags together before sending a single representative value to Datadog for that interval. This combined value is what we then store, with a single timestamp. How this occurs varies by Metric Type - we'll dig in more below.
+Data is submitted to Datadog in three main ways:
+
+* [Agent Check][5]
+* [DogStatsD][4]
+* [Datadog API][3]
+
+Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation will occur when multiple points arrive in a short timeframe (i.e., in one interval). The Agent will combine values that belong in the same time series (i.e. those with identical tags) together before sending a single representative value to Datadog for that interval. This combined value is what we then store, with a single timestamp. How this occurs varies by Metric Type - we'll dig in more below.
 
 In contrast, data submitted directly to our API is not aggregated by Datadog before storage (except in the case of Distributions). The values sent to Datadog are stored as-is, and the Metric Type is updated if necessary.
 
 Let's examine how each Metric Type is aggregated before it's stored. Remember, this won't generally occur for API submissions.
 
 
-### Metric Aggregation before Storage, by Type
+### Metric Aggregation Before Storage, By Type
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
@@ -149,6 +155,7 @@ Discover how to submit gauge metrics:
 [2]: /developers/metrics/dogstatsd_metrics_submission/#gauge
 [3]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
+<!--
 {{% tab "HISTOGRAM" %}}
 
 **The `HISTOGRAM` metric submission type allows you to measure the statistical distribution of a set of values**. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates (on the Agent-side) the values that are sent during a defined time interval (the default flush interval is 10s) and produces different timeseries representing the different aggregations possible for the set of values. Depending on the aggregation, the metric type stored by Datadog is different.
@@ -268,18 +275,19 @@ Discover how to submit set metrics:
 **The `TIMER` metric type is an implementation of the `HISTOGRAM` metric type within DogStatsD** (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. See the [TIMER DogStatsD documentation][1] to learn how to instrument your code to submit `TIMER`s.
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#timers
-{{% /tab %}}
+{{% /tab %}} -->
 {{< /tabs >}}
 
-## Submission types and Datadog in-app types
+## Mapping to Datadog In-app Types
 
-Datadog accepts metrics submitted from a variety of sources:
+Datadog accepts metrics submitted from three sources:
 
-* [Datadog API][3]
-* [DogStatsD][4]
 * [Agent Check][5]
+* [DogStatsD][4]
+* [Datadog API][3]
 
-Each source has its own limitations, and metric submission types do not always map exactly to the Datadog in-app stored types:
+These sources submit data as various submission types, which map to the three canonical in-app storage types in Datadog - `COUNT`, `RATE`, and `GAUGE`:
+
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
