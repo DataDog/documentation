@@ -360,7 +360,7 @@ curl -X PATCH \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
          -d '{
              "data": {
-                 "authn_mappings",
+                 "type": "authn_mappings",
                  "attributes": {
                       "role_uuid": "00000000-0000-0000-0000-000000000000",
                       "attribute_key": "string",
