@@ -362,7 +362,7 @@ curl -X PATCH \
              "data": {
                  "type": "authn_mappings",
                  "attributes": {
-                      "role_uuid": "00000000-0000-0000-0000-000000000000",
+                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
                       "attribute_value": "string"
                 }
@@ -383,7 +383,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       "created_at": "timestamp",
       "created_by": "string",
       "uuid": "123e4567-e89b-12d3-a456-426655440000",
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
+      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
@@ -411,7 +411,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         "attributes": {
           "created_at": "timestamp",
           "modified_at": "string",
-          "uuid": "00000000-0000-0000-0000-000000000000",
+          "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
         "relationships": {
