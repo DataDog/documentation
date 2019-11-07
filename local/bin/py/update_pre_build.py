@@ -5,9 +5,7 @@ import fnmatch
 import glob
 import json
 import linecache
-import platform
 import re
-import tempfile
 import shutil
 from json import JSONDecodeError
 
@@ -18,7 +16,7 @@ import markdown2
 
 from collections import OrderedDict
 from functools import partial, wraps
-from itertools import chain, zip_longest
+from itertools import chain
 from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
@@ -32,6 +30,7 @@ from os.path import (
     abspath,
     normpath,
 )
+
 
 def cache_by_sha(func):
     """ only downloads fresh file, if we don't have one or we do and the sha has changed """
@@ -52,11 +51,7 @@ def cache_by_sha(func):
                 cache = pickle.load(pf)
         cache_sha = cache.get("sha", False)
         input_sha = list_item.get("sha", False)
-        if (
-            cache_sha
-            and input_sha
-            and cache_sha == input_sha
-        ):
+        if (cache_sha and input_sha and cache_sha == input_sha):
             # do nothing as we have the up to date file already
             return None
         else:
@@ -363,7 +358,8 @@ class PreBuild:
             # integrations metrics table.
             # the char strip is to compensate for the lib adding <p> </p><br> tags
             for metric in yaml_data[key_name]:
-                metric['description'] = str(markdown2.markdown(metric['description']))[3:-5]
+                metric['description'] = str(
+                    markdown2.markdown(metric['description']))[3:-5]
             with open(
                 file=yml_filename,
                 mode="w",
@@ -416,7 +412,11 @@ class PreBuild:
 
         self.local_or_upstream()
 
-        self.process_filenames()
+        try:
+            self.process_filenames()
+        except ValueError:
+            print("\x1b[32mINFO\x1b[0m: Processing files failed, stoping build")
+            raise Exception
 
         self.merge_integrations()
 
@@ -450,15 +450,8 @@ class PreBuild:
                     ]
                     content_temp["globs"] = content["globs"]
 
-                    if (
-                        content["action"]
-                        == "pull-and-push-folder"
-                        or content["action"]
-                        == "pull-and-push-file"
-                    ):
-                        content_temp["options"] = content[
-                            "options"
-                        ]
+                    if (content["action"] == "pull-and-push-folder" or content["action"] == "pull-and-push-file"):
+                        content_temp["options"] = content["options"]
 
                     self.list_of_contents.append(
                         content_temp
@@ -478,11 +471,8 @@ class PreBuild:
         for content in self.list_of_contents:
             repo_name = "../" + content["repo_name"] + sep
             if isdir(repo_name):
-                print(
-                        "\x1b[32mINFO\x1b[0m: Local version of {} found".format(
-                            content["repo_name"]
-                        )
-                    )
+                print("\x1b[32mINFO\x1b[0m: Local version of {} found".format(
+                    content["repo_name"]))
                 content["globs"] = self.update_globs(
                     repo_name,
                     content["globs"],
@@ -508,14 +498,13 @@ class PreBuild:
                         sep,
                     ),
                     content["globs"],
-                        )
+                )
             else:
                 print(
                     "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
                         content["repo_name"]
                     )
                 )
-
 
     def update_globs(self, new_path, globs):
         """
@@ -541,47 +530,39 @@ class PreBuild:
                 try:
                     self.process_integrations(content)
                 except:
-                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
-                            content
-                        )
-                    )
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
+                    raise ValueError
 
             elif content["action"] == "source":
                 try:
                     self.process_source_attribute(content)
                 except:
-                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
-                            content
-                        )
-                    )
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
+                    raise ValueError
 
-            elif (
-                content["action"] == "pull-and-push-folder"
-            ):
+            elif (content["action"] == "pull-and-push-folder"):
                 try:
                     self.pull_and_push_folder(content)
                 except:
-                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
-                            content
-                        )
-                    )
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
+                    raise ValueError
 
             elif content["action"] == "pull-and-push-file":
 
                 try:
                     self.pull_and_push_file(content)
                 except:
-                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
-                            content
-                        )
-                    )
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
+                    raise ValueError
 
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Unsuccessful Processing of {}".format(
-                        content
-                    )
-                )
+                    "\x1b[31mERROR\x1b[0m: Unsuccessful Processing of {}".format(content))
+                raise ValueError
 
     def process_integrations(self, content):
         """
@@ -619,12 +600,14 @@ class PreBuild:
         ) as f:
             file_content = f.read()
 
-            ## If options include front params, then the H1 title of the source file is striped
-            ## and the options front params are inlined
+            # If options include front params, then the H1 title of the source file is striped
+            # and the options front params are inlined
 
             if "front_matters" in content["options"]:
-                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"]) + "---\n"
-                file_content = re.sub(r'^(#{1}).*', front_matters, file_content, count=1)
+                front_matters = "---\n" + \
+                    yaml.dump(content["options"]["front_matters"]) + "---\n"
+                file_content = re.sub(
+                    r'^(#{1}).*', front_matters, file_content, count=1)
 
         with open(
             "{}{}{}".format(
@@ -874,8 +857,7 @@ class PreBuild:
                     item = [
                         d
                         for d in self.datafile_json
-                        if d.get("name", "").lower()
-                        == data_name
+                        if d.get("name", "").lower() == data_name
                     ]
                     if len(item) > 0:
                         item[0].update(data)
@@ -883,10 +865,7 @@ class PreBuild:
                     self.datafile_json.append(data)
             except JSONDecodeError:
                 print(
-                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
-                    file_name
-                  )
-                )
+                    "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(file_name))
 
     def process_service_checks(self, file_name):
         """
@@ -920,17 +899,10 @@ class PreBuild:
             )
         )
         metrics = metrics[0] if len(metrics) > 0 else None
-        metrics_exist = (
-            metrics
-            and exists(metrics)
-            and linecache.getline(metrics, 2)
-        )
-        service_check = glob.glob(
-            "{file}.json".format(
-                file=self.data_service_checks_dir
-                + basename(dirname(file_name))
-            )
-        )
+        metrics_exist = (metrics and exists(metrics)
+                         and linecache.getline(metrics, 2))
+        service_check = glob.glob("{file}.json".format(
+            file=self.data_service_checks_dir + basename(dirname(file_name))))
         service_check = (
             service_check[0]
             if len(service_check) > 0
@@ -950,10 +922,7 @@ class PreBuild:
                 no_integration_issue = False
                 manifest_json = {}
                 print(
-                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
-                    manifest
-                  )
-                )
+                    "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(manifest))
         else:
             no_integration_issue = False
             manifest_json = {}
@@ -1003,11 +972,7 @@ class PreBuild:
                 new_file_name, result, dependencies
             )
             if not exist_already and no_integration_issue:
-                with open(
-                    self.content_integrations_dir
-                    + new_file_name,
-                    "w",
-                ) as out:
+                with open(self.content_integrations_dir + new_file_name, "w", ) as out:
                     out.write(result)
 
     def add_integration_frontmatter(
@@ -1025,8 +990,7 @@ class PreBuild:
             item = [
                 d
                 for d in self.datafile_json
-                if d.get("name", "").lower()
-                == basename(file_name).replace(".md", "")
+                if d.get("name", "").lower() == basename(file_name).replace(".md", "")
             ]
             if item and len(item) > 0:
                 item[0]["kind"] = "integration"
