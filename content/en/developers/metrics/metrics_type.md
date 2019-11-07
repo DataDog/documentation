@@ -44,11 +44,11 @@ We **accept** the following metric types:
 
 ## Submission Method
 
-Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation may occur when multiple points arrive in a short timeframe. The Agent will combine values with identical tags together before sending a single representative value to Datadog. This combined value is what we then store. How this occurs varies by Metric Type - we'll dig in more below.
+Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation will occur when multiple points arrive in a short timeframe (i.e., in one interval). The Agent will combine values with identical tags together before sending a single representative value to Datadog for that interval. This combined value is what we then store, with a single timestamp. How this occurs varies by Metric Type - we'll dig in more below.
 
 In contrast, data submitted directly to our API is not aggregated by Datadog before storage (except in the case of Distributions). The values sent to Datadog are stored as-is, and the Metric Type is updated if necessary.
 
-Let's examine how each Metric Type is aggregated before it's stored.
+Let's examine how each Metric Type is aggregated before it's stored. Remember, this won't generally occur for API submissions.
 
 
 ### Metric Aggregation before Storage, by Type
@@ -56,24 +56,26 @@ Let's examine how each Metric Type is aggregated before it's stored.
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-**The `COUNT` metric submission type represents the number of events that occur in a defined time interval, otherwise known as a flush interval**. This number of events can accumulate or decrease over time -- it is not monotonically increasing. A `COUNT` can be used to track the number of requests hitting your webservers or number of errors.
 
-**Note**: A `COUNT` is different from the `RATE` metric type, which represents this count of events normalized _per second_ given the defined time interval.
+A `COUNT` represents the total sum of the values submitted in one interval. A `COUNT` is used to add up the number of occurences of something in that time - total connections made to a database, or the number of requests to an endpoint, for example. This number can accumulate or decrease over time - it is not monotonically increasing.
 
-For example, suppose the `number.of.requests.count` metric is reported every 30 seconds to Datadog with the `COUNT` type on `server:web_1`.
+For example, suppose a webserver is running the Datadog Agent, tracking the number HTTP requests received as a `COUNT` metric. This webserver receives:
 
-Each value/data point for this metric submitted as a `COUNT` represents the number of requests—the "count" of requests—received during the 30 second flush interval. The metric then reports the following values:
+* `30` requests in the first 10 seconds
+* `70` requests in the second interval of 10 seconds
+* `50` requests in the third interval of 10 seconds
 
-* `10` for the first 30 seconds
-* `20` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds
-**Note**: for a `COUNT` metric, when a `0` value is submitted, `null` is stored within Datadog.
+The Agent then simply reports the following values:
+
+* `30` for the first 10 seconds
+* `70` for the next 10 seconds
+* `50` for the final 10 seconds
 
 When graphed, this `COUNT` metric looks like the following:
 
-{{< img src="developers/metrics/metric_types/count_metric.png" alt="Count Metric" responsive="true">}}
+{{< img src="developers/metrics/metric_types/count_of_http_requests2.png" alt="Count Metric" responsive="true">}}
 
-Note: StatsD counts show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
+Note: DogstatsD counts show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
 
 Discover how to submit count metrics:
 
@@ -87,22 +89,25 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-**The `RATE` metric submission type represents the number of events over a defined time interval (flush interval) that's normalized per-second.** A `RATE` can be used to track the rate of requests hitting your webservers.
+A `RATE` represents the frequency at which something occurs, per second. A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
 
-**Note**: A `RATE` is different from the `COUNT` metric submission type, which represents the number of events in the flush interval.
+To get this value, the Agent sums the values received in one interval, then divides by the length of that interval, yielding a value per unit time.
 
-For instance, say that the `number.of.requests.rate` metric is reported every 30 seconds to Datadog with the `RATE` type in `server:web_1`.
+For example, suppose a webserver is running the Datadog Agent, tracking the number HTTP requests received as a `RATE` metric. This webserver receives:
 
-Each value/data point represents the "rate" of requests. The metric then reports the following values:
+* `30` requests in the first 10 seconds
+* `70` requests in the second interval of 10 seconds
+* `50` requests in the third interval of 10 seconds
 
-* `0.33` for the first 30 seconds
-* `0.66` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds
-Then this pattern of `0.33`, `0.66`, `0`, repeats. **Note**: for a `RATE` metric, when a `0` value is submitted, `null` is stored within Datadog.
+The Agent sums up the requests received in a given interval, then divides by the length of that interval. The Agent then reports the following normalized per-second values:
 
-Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following:
+* `3` for the first 10 seconds
+* `7` for the next 10 seconds
+* `5` for the final 10 seconds
 
-{{< img src="developers/metrics/metric_types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+When graphed, this `RATE` metric looks like the following:
+
+{{< img src="developers/metrics/metric_types/rate_of_http_requests2" alt="Rate Metric" responsive="true">}}
 
 Discover how to submit rate metrics:
 
