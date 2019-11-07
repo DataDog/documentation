@@ -135,18 +135,18 @@ Pour recueillir des métriques custom depuis le conteneur de votre application e
     "links": [ "dd-agent:dd-agent"]
     ```
 
-Consultez [DogStatsD et Docker][16] pour en savoir plus.
+Consultez la section [DogStatsD et Docker][7] pour en savoir plus.
 
 ### Configuration alternative de l'Agent Datadog
-Suivez ces étapes pour installer l'Agent Datadog dans Elastic Beanstalk à l'aide de la [personnalisation d'environnement avancée avec fichiers de configuration (.ebextensions)][7].
+Suivez ces étapes pour installer l'Agent Datadog dans Elastic Beanstalk à l'aide de la [personnalisation d'environnement avancée avec fichiers de configuration (.ebextensions)][8].
 
-1. Créez un dossier intitulé `.ebextensions` à la racine de votre [groupe source d'application][8].
-2. Téléchargez [99datadog.config][9] et placez-le dans `.ebextensions`.
+1. Créez un dossier intitulé `.ebextensions` à la racine de votre [groupe source d'application][9].
+2. Téléchargez [99datadog.config][10] et placez-le dans `.ebextensions`.
 3. Dans `option_settings`, mettez à jour la configuration avec votre [clé d'API Datadog][4].
-4. Déployez votre application avec la [console Elastic Beanstalk][10], [l'interface de ligne de commande EB][11] ou [l'interface de ligne de commande AWS][12].
+4. Déployez votre application avec la [console Elastic Beanstalk][11], [l'interface de ligne de commande EB][12] ou [l'interface de ligne de commande AWS][13].
 
 #### Paramètres supplémentaires
-Ajoutez des paramètres supplémentaires à `datadog.yaml` en mettant à jour la section `"/configure_datadog_yaml.sh"` de [99datadog.config][9]. La ligne ci-dessous active l'Agent de processus Datadog.
+Ajoutez des paramètres supplémentaires à `datadog.yaml` en mettant à jour la section `"/configure_datadog_yaml.sh"` de [99datadog.config][10]. La ligne ci-dessous active l'Agent de processus Datadog.
 
 ```
 echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
@@ -166,10 +166,10 @@ L'intégration AWS Elastic Beanstalk n'inclut aucun événement.
 L'intégration AWS Elastic Beanstalk n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][15].
 
 ## Pour aller plus loin
-- Article de blog : [Déployer Datadog sur AWS Elastic Beanstalk][15] (en anglais)
+- Article de blog : [Déployer Datadog sur AWS Elastic Beanstalk][16] (en anglais)
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
@@ -177,16 +177,16 @@ Besoin d'aide ? Contactez [l'assistance Datadog][14].
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
-[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
-[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[9]: https://docs.datadoghq.com/fr/config/99datadog.config
-[10]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
-[11]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
+[7]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
+[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
+[9]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[10]: https://docs.datadoghq.com/fr/config/99datadog.config
+[11]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [12]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
-[13]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
-[14]: https://docs.datadoghq.com/fr/help
-[15]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
-[16]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker/
+[13]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
+[14]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
+[15]: https://docs.datadoghq.com/fr/help
+[16]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
 
 
 {{< get-dependencies >}}
