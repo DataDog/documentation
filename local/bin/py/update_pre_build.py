@@ -414,7 +414,7 @@ class PreBuild:
         try:
             self.local_or_upstream()
         except:
-            if getenv("LOCAL"):
+            if getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode.")
             else:
@@ -425,7 +425,7 @@ class PreBuild:
         try:
             self.process_filenames()
         except:
-            if getenv("LOCAL"):
+            if getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Local mode detected: Processing files failed, documentation is now in degraded mode.")
             else:
@@ -436,7 +436,7 @@ class PreBuild:
         try:
             self.merge_integrations()
         except:
-            if getenv("LOCAL"):
+            if getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Local mode detected: Integration merge failed, documentation is now in degraded mode.")
             else:
@@ -523,7 +523,7 @@ class PreBuild:
                     ),
                     content["globs"],
                 )
-            elif getenv("LOCAL"):
+            elif getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Local mode detected: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
                 content["action"] = "Not Available"
@@ -567,7 +567,7 @@ class PreBuild:
                 elif content["action"] == "pull-and-push-file":
                     self.pull_and_push_file(content)
                 elif content["action"] == "Not Available":
-                    if getenv("LOCAL"):
+                    if getenv("LOCAL") == 'True':
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(
                             content["repo_name"]))
                 else:
@@ -575,7 +575,7 @@ class PreBuild:
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
             except:
-                if getenv("LOCAL"):
+                if getenv("LOCAL") == 'True':
                     print(
                         "\x1b[33mWARNING\x1b[0m: Unsuccessful processing of {}".format(content))
                 else:
@@ -878,8 +878,13 @@ class PreBuild:
                 else:
                     self.datafile_json.append(data)
             except JSONDecodeError:
-                print(
-                    "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(file_name))
+                if getenv("LOCAL") == 'True':
+                    print(
+                        "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(file_name))
+                else:
+                    print(
+                        "\x1b[31mERROR\x1b[0m: manifest could not be parsed {}".format(file_name))
+                    raise JSONDecodeError
 
     def process_service_checks(self, file_name):
         """
@@ -935,16 +940,24 @@ class PreBuild:
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
-                print(
-                    "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(manifest))
+                if getenv("LOCAL") == 'True':
+                    print(
+                        "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(manifest))
+                else:
+                    print(
+                        "\x1b[31mERROR\x1b[0m: manifest could not be parsed {}".format(manifest))
+                    raise JSONDecodeError
         else:
             no_integration_issue = False
             manifest_json = {}
-            print(
-                "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(
-                    file_name
-                )
-            )
+            if getenv("LOCAL") == 'True':
+                print(
+                    "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(file_name))
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: No manifest found for {}".format(file_name))
+                raise ValueError
+
         dependencies = self.add_dependencies(file_name)
         new_file_name = "{}.md".format(
             basename(dirname(file_name))
