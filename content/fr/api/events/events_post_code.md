@@ -5,9 +5,14 @@ order: 12.1
 external_redirect: /api/#envoyer-un-evenement
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/events`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-events-post" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-events-post" >}}

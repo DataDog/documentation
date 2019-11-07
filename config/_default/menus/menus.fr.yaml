@@ -588,11 +588,11 @@ main:
     weight: 7
     parent: alerting
     identifier: slos
-  - name: SLO pour un monitor
+  - name: SLO basé sur des monitors
     url: monitors/service_level_objectives/monitor/
     parent: slos
     weight: 7.1
-  - name: SLO pour un événement
+  - name: SLO basé sur des événements
     url: monitors/service_level_objectives/event/
     parent: slos
     weight: 7.2
