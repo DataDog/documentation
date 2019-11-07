@@ -197,8 +197,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         "id": "timestamp",
         "type": "roles",
         "attributes": {
-          "created_at": "string",
-          "modified_at": "string",
+          "created_at": "timestamp",
+          "modified_at": "timestamp",
           "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
