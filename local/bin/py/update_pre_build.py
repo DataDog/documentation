@@ -416,24 +416,33 @@ class PreBuild:
         except:
             if getenv("LOCAL"):
                 print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode")
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode.")
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build")
+                    "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build.")
                 sys.exit(1)
 
         try:
             self.process_filenames()
-        except ValueError:
+        except:
             if getenv("LOCAL"):
                 print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Processing files failed, documentation is now in degraded mode")
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Processing files failed, documentation is now in degraded mode.")
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Processing files failed, stoping build")
+                    "\x1b[31mERROR\x1b[0m: Processing files failed, stoping build.")
                 sys.exit(1)
 
-        self.merge_integrations()
+        try:
+            self.merge_integrations()
+        except:
+            if getenv("LOCAL"):
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Integration merge failed, documentation is now in degraded mode.")
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
+                sys.exit(1)
 
     def extract_config(self):
         """
@@ -514,6 +523,10 @@ class PreBuild:
                     ),
                     content["globs"],
                 )
+            elif getenv("LOCAL"):
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+                content["action"] = "Not Available"
             else:
                 print(
                     "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
@@ -542,43 +555,33 @@ class PreBuild:
         """
         for content in self.list_of_contents:
             # print("Processing content: {}".format(content))
-            if content["action"] == "integrations":
-                try:
+            try:
+                if content["action"] == "integrations":
                     self.process_integrations(content)
-                except:
-                    print(
-                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
-                    raise ValueError
-
-            elif content["action"] == "source":
-                try:
+                elif content["action"] == "source":
                     self.process_source_attribute(content)
-                except:
-                    print(
-                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
-                    raise ValueError
 
-            elif (content["action"] == "pull-and-push-folder"):
-                try:
+                elif (content["action"] == "pull-and-push-folder"):
                     self.pull_and_push_folder(content)
-                except:
-                    print(
-                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
-                    raise ValueError
 
-            elif content["action"] == "pull-and-push-file":
-
-                try:
+                elif content["action"] == "pull-and-push-file":
                     self.pull_and_push_file(content)
-                except:
+                elif content["action"] == "Not Available":
+                    if getenv("LOCAL"):
+                        print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(
+                            content["repo_name"]))
+                else:
+                    print(
+                        "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
+                    raise ValueError
+            except:
+                if getenv("LOCAL"):
+                    print(
+                        "\x1b[33mWARNING\x1b[0m: Unsuccessful processing of {}".format(content))
+                else:
                     print(
                         "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
                     raise ValueError
-
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
-                raise ValueError
 
     def process_integrations(self, content):
         """
@@ -610,10 +613,7 @@ class PreBuild:
         See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-files to learn more
         :param content: object with a file_name, a file_path, and options to apply
         """
-
-        with open(
-            "".join(content["globs"]), mode="r+"
-        ) as f:
+        with open("".join(content["globs"]), mode="r+") as f:
             file_content = f.read()
 
             # If options include front params, then the H1 title of the source file is striped
@@ -644,10 +644,8 @@ class PreBuild:
         :param content: content to process
         """
 
-        for file_name in chain.from_iterable(
-            glob.iglob(pattern, recursive=True)
-            for pattern in content["globs"]
-        ):
+        for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
+
             with open(file_name, mode="r+") as f:
                 file_content = f.read()
 

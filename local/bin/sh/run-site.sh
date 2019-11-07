@@ -6,7 +6,7 @@ GITHUB_TOKEN=${GITHUB_TOKEN:="False"}
 RUN_WEBPACK=${RUN_WEBPACK:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
-LOCAL=${LOCAL:=true}
+LOCAL=${LOCAL:=True}
 
 if [ ${RUN_SERVER} == true ]; then
 	# integrations
@@ -18,17 +18,10 @@ if [ ${RUN_SERVER} == true ]; then
 			echo "No GITHUB TOKEN was found. skipping any data sync that relies on pulling from web.\n"
 			echo "Add all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\n"
 			update_pre_build.py
-      exit_status=$?
 		fi
 		if [[ ${args} != "" ]]; then
 			update_pre_build.py ${args}
-      exit_status=$?
 		fi
-    if [ exit_status != 0 & [ ! ${LOCAL} ] ]; then
-      echo $LOCAL
-      echo "\n Error detected in the update_pre_build.py script, please fix.\n"
-      exit 0
-    fi
 	fi
 
 	# placeholders
