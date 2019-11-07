@@ -1,5 +1,5 @@
 ---
-title: Edit a Service Level Objective
+title: Edit a SLO
 type: apicontent
 order: 29.03
 external_redirect: /api/#edit-a-service-level-objective

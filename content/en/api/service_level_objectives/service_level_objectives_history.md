@@ -1,5 +1,5 @@
 ---
-title: Get a service level objective's history
+title: Get a SLO's history
 type: apicontent
 order: 29.03
 external_redirect: /api/#get-a-service-level-objective-s-history

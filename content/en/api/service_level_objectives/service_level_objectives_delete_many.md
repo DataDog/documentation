@@ -1,11 +1,11 @@
 ---
-title: Delete many Service Level Objectives
+title: Delete multiple SLOs
 type: apicontent
 order: 29.05
 external_redirect: /api/#delete-many-service-level-objectives
 ---
 
-## Delete many Service Level Objectives
+## Delete multiple Service Level Objectives
 
 **ARGUMENTS**:
 

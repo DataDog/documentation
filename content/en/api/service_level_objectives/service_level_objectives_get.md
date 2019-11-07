@@ -1,5 +1,5 @@
 ---
-title: Get a service level objective's details
+title: Get a SLO's details
 type: apicontent
 order: 29.02
 external_redirect: /api/#get-a-service-level-objective-s-details
