@@ -44,17 +44,23 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< code-block lang="bash" filename="roles.sh" >}}
-{
-  "type": "authnmapping",
-  "data": {
-    "attributes": {
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
-      "attribute_key": "string",
-      "attribute_value": "string"
-    }
-  }
-}
+```sh
+curl -X POST \
+         "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+         -d '{
+             "data": {
+                 "type": "authn_mappings",
+                 "attributes": {
+                      "id": "123e4567-e89b-12d3-a456-426655445555",
+                      "attribute_key": "string",
+                      "attribute_value": "string"
+                }
+             }
+         }'
+```
 {{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
@@ -338,16 +344,16 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 | Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
-| `PATCH`  | `/v2/authn_mappings/{UUID}`  | JSON       |
+| `PATCH`  | `/v2/authn_mappings/{ID}`  | JSON       |
 
 ##### ARGUMENTS
 
-* **`{UUID}`** [*required*, no default]:
-  Replace `{UUID}` with the UUID of the AuthN Mapping you want to update.
-* **`role_uuid`** [*required*]:
-?
-* **`attribute_key`** [*required*]:
-?
+* **`id`** [*required*, *default*=none]:
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding your `role_uuid`, see the [Role API documentation][1].
+* **`attribute_key`** [*required*, *default*=none]:
+ The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
+* **`attribute_value`** [*required*, *default*=none]:
+  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -362,7 +368,7 @@ curl -X PATCH \
              "data": {
                  "type": "authn_mappings",
                  "attributes": {
-                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
+                      "id": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
                       "attribute_value": "string"
                 }
