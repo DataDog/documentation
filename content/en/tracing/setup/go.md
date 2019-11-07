@@ -88,8 +88,11 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kafka (sarama)][47]    | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][48]                      |
 | [Google API][49]        | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][50]               |
 | [go-restful][51]        | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][52]                 |
+| [Twirp][53]        | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][54]                 |
+| [Vault][55]        | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][56]                 |
 
-**Note**: The [integrations documentation][53] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+
+**Note**: The [integrations documentation][57] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 Packages must be imported, i.e.:
 
@@ -134,7 +137,7 @@ func main() {
 }
 ```
 
-For more tracer settings, see available options in the [configuration documentation][54].
+For more tracer settings, see available options in the [configuration documentation][58].
 
 ## Change Agent Hostname
 
@@ -219,5 +222,9 @@ func main() {
 [50]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api
 [51]: https://github.com/emicklei/go-restful
 [52]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful
-[53]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[54]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[53]: https://github.com/twitchtv/twirp
+[54]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp
+[55]: https://github.com/hashicorp/vault
+[56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault
+[57]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[58]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
