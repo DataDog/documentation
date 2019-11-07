@@ -67,7 +67,7 @@ nav_sections:
         link: security/
         icon: lock.svg
         desc: Learn how Datadog protects your data
-      - title: Developers Tools
+      - title: Developer Tools
         link: developers/
         icon: wrench.svg
         desc: Develop for the Datadog platform
