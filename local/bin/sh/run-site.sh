@@ -24,9 +24,6 @@ if [ ${RUN_SERVER} == true ]; then
 			update_pre_build.py ${args}
       exit_status=$?
 		fi
-    if [ ! ${LOCAL} ]; then
-      echo "ON EST UPSTREAM"
-    fi
     if [ exit_status != 0 & [ ! ${LOCAL} ] ]; then
       echo $LOCAL
       echo "\n Error detected in the update_pre_build.py script, please fix.\n"

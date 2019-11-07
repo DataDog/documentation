@@ -408,7 +408,7 @@ class PreBuild:
         This represents the overall workflow of the build of the documentation
         """
         print("\x1b[34mStarting Processing...\x1b[0m")
-
+        sys.exit(1)
         self.extract_config()
 
         try:
