@@ -1,6 +1,7 @@
 heading: Welcome to Datadog Docs!
 
-guides: 
+guides:
+    # There can be only 3 guides in this section
   - title: Install the agent
     desc: Start collecting events and metrics from hosts and send them to Datadog.
     link_text: View Guides
@@ -14,7 +15,8 @@ guides:
     link_text: View Guides
     link: getting_started/application/
 
-nav_sections: 
+nav_sections:
+    # For a better rendering, sections should include sub-sections with multiple of 4.
   - nav_section:
     - name: 'Platform'
     - navtiles:
@@ -83,4 +85,3 @@ popular_searches:
   - title: Integration Setup
     link: integrations/
     weight: 40
-  
