@@ -57,7 +57,7 @@ Let's examine how each Metric Type is aggregated before it's stored. Remember, t
 {{% tab "COUNT" %}}
 
 
-A `COUNT` represents the total sum of the values submitted in one interval. A `COUNT` is used to add up the number of occurences of something in that time - total connections made to a database, or the number of requests to an endpoint, for example. This number can accumulate or decrease over time - it is not monotonically increasing.
+**A `COUNT` represents the total sum of the values submitted in one interval.** A `COUNT` is used to add up the number of occurences of something in that time - total connections made to a database, or the number of requests to an endpoint, for example. This number can accumulate or decrease over time - it is not monotonically increasing.
 
 For example, suppose a webserver is running the Datadog Agent, tracking the number HTTP requests received as a `COUNT` metric. This webserver receives:
 
@@ -89,7 +89,7 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-A `RATE` represents the frequency at which something occurs, per second. A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
+**A `RATE` represents the frequency at which something occurs, per second.** A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
 
 To get this value, the Agent sums the values received in one interval, then divides by the length of that interval, yielding a value per unit time.
 
@@ -119,15 +119,25 @@ Discover how to submit rate metrics:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-**The `GAUGE` metric submission type represents a value of a particular thing reporting continuously over time.** It is a snapshot of the last recorded value of a particular thing during a defined time interval (flush interval). A `GAUGE` can be used to represent the temperature or memory usage.
+**A `GAUGE` metric is a single value summarizing an entire interval.**  A `GAUGE` is a representative snapshot for that period of time. Good examples are temperature, request latency, or memory usage. The last value submitted to the Agent during a given interval **is** the value of the metric at that time - no summing, averaging, or aggregation occurs to the data in that interval before storage.
 
-For instance, say that the `number.of.requests.gauge` metric is reported every 30 seconds to Datadog with the `GAUGE` type in `server:web_1`.
+`GAUGE` metrics are ideal for taking a measure of something. Reading a room's temperature three times in 10 seconds should not yield 210 degrees F, if the temperature is 70 degrees F. A `GAUGE` would correctly report a value of 70.
 
-Each value/data point represents the total number of requests received at a point in time. The metric then reports the following values:
+For example, suppose a webserver is running the Datadog agent, tracking the latency of each request in milliseconds. During each 10 second interval, the Agent receives the following latency values from the webserver:
 
-* `10` for the first 30 seconds
-* `20` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds
+* `429, 455, and 437` during the first 10 seconds
+* `377 and 344` during the second interval of 10 seconds
+* `822, 400, and 596` during the last interval of 30 seconds
+
+The Agent then reports only the final value seen in each interval:
+
+* `437` for the first 10 seconds
+* `344` for the next 10 seconds
+* `596` for the final 10 seconds
+
+When graphed, this `GAUGE` metric looks like the following:
+
+{{< img src="developers/metrics/metric_types/gauge-http_request_latency2.png" alt="Gauge Metric" responsive="true">}}
 
 Discover how to submit gauge metrics:
 
