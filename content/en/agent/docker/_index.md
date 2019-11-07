@@ -23,6 +23,8 @@ further_reading:
 ## Overview
 The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub.
 
+Images are available for 64-bit x86 and Arm v8 architectures.
+
 ## Setup
 If you haven’t installed the Docker Agent, see below or the [in-app installation instructions][3]. See the Agent documentation for [supported versions][4].
 
