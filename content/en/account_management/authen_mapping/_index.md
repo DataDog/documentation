@@ -276,7 +276,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
-    "id": "string",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
       "saml_assertion_attributes": {
         "data": {
