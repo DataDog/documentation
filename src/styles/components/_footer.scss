@@ -1,142 +1,99 @@
-$footer_height: 366px;
-$ddpurple:    #632CA6;
+$footer_height: 490px;
+$footer_height_fr: 410px;
+$footer_height_sm: 100%;
+$ddpurple: #632ca6;
 $footer_bg_color: #110617;
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
+
+$footer-font-color: rgba(255, 255, 255, 0.5);
+$footer-font-color-hover: rgba(255, 255, 255, 1);
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: $footer_height;
-
-  &.fr,
-  &.ja{
-    /* Margin bottom by footer height on fr page */
-    margin-bottom: $footer_height + 27px;
-  }
-}
-
-$footer-font-color: rgba(255,255,255,.5);
-$footer-font-color-hover: rgba(255,255,255,1);
-
-body {
-  footer {
-    z-index:3;
-    position: absolute;
-    bottom: 0;
-    line-height:0;
-    width: 100%;
-
-    /* Set the fixed height of the footer here */
-    height: $footer_height;
-
-    background-color: $footer_bg_color;
-    color:$footer-font-color;
-    .container {
-      margin-top: 30px;
-      &> .row {
-        margin-bottom: 50px;
-      }
-    }
-    .copyright {
-      font-size: 16px;
-    }
-    p {
-      border-bottom:1px solid $footer-font-color;
-      margin-bottom:10px;
-      font-weight:600;
-      color:$footer-font-color;
-      font-size:16px;
-      padding-bottom:6px;
-    }
-    a {
-      font-size:16px;
-      color:$footer-font-color;
-      &:hover {
-        color: $footer-font-color-hover;
-      }
-    }
-    ul {
-      margin:0;
-      li {
-        padding:0;
-        margin:0;
-        line-height: 24px;
-        font-size: 16px;
-      }
-    }
-    .footer-legal {
-      font-weight:600;
-      text-align:center;
-      font-size: 16px;
-      a {
-        color:#fff;
-        padding:0 5px;
-      }
-    }
-    .footer-side {
-      .btn {
-        padding:11px 20px 12px;
-        text-transform: uppercase;
-        width:163px;
-        cursor:pointer;
-        font-size:18px;
-        color:#fff;
-        &:hover {
-          color:$ddpurple;
+    &.fr,
+    &.ja {
+        /* Margin bottom by footer height on fr page */
+        footer {
+            height: 100%;
+            @media (min-width: 992px) {
+                height: 580px;
+            }
+            @media (min-width: 1200px) {
+                height: 520px;
+            }
         }
-      }
-      .copyright {
-        position:absolute;
-        bottom:0;
-        display:block;
-      }
     }
-    .nowrap{
-      white-space: nowrap;
-    }
-  }
-  &.fr,
-  &.ja {
     footer {
-      /* Set the fixed height of the french footer here */
-      height: $footer_height + 27px;
-    }
-  }
-}
-@media (max-width: 1200px) {
-  body, 
-  body.fr,
-  body.ja {
-    margin-bottom: $footer_height + 82px;
-  }
-  body, 
-  body.fr,
-  body.ja {
-    footer {
-      height: $footer_height + 82px;
-    }
-  }
-}
-@media (max-width: 991px) {
-  body, 
-  body.fr,
-  body.ja {
-    margin-bottom: $footer_height + 345px;
-  }
-  body, 
-  body.fr,
-  body.ja {
-    footer {
-      height: $footer_height + 345px;
-      .footer-side {
-        .btn {
-          width:100%;
+        position:relative;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        /* Set the fixed height of the footer here */
+        background-color: $footer_bg_color;
+        color: $footer-font-color;
+        p {
+            border-bottom: 1px solid $footer-font-color;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: $footer-font-color;
+            font-size: 16px;
+            padding-bottom: 6px;
         }
-      }
+        a {
+            font-size: 16px;
+            color: $footer-font-color;
+            &:hover {
+                color: $footer-font-color-hover;
+            }
+        }
+        ul {
+            margin: 0;
+            li {
+                padding: 0;
+                margin: 0;
+                line-height: 24px;
+                font-size: 16px;
+            }
+        }
+        .contact-btn-container {
+            .btn {
+                width: 100%;
+                max-width: auto;
+                @media (min-width: 992px) {
+                    max-width: 170px;
+                }
+            }
+        }
+        .dd-logo {
+            max-width: 155px;
+        }
+        .footer-legal {
+            font-weight: 600;
+            text-align: center;
+            font-size: 16px;
+            a {
+                display: inline-block;
+                color: #fff;
+                padding: 0 5px;
+            }
+        }
+        .footer-side {
+            .btn {
+                text-transform: uppercase;
+                cursor: pointer;
+                font-size: 18px;
+                color: #fff;
+                &:hover {
+                    color: $ddpurple;
+                }
+            }
+            .copyright {
+                display: block;
+                font-size: 16px;
+            }
+        }
     }
-  }
 }
-
