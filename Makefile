@@ -122,6 +122,7 @@ start: clean source-helpers ## start the webpack/hugo server.
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
+		LOCAL=${LOCAL}\
 		run-site.sh; \
 	else \
 		FETCH_INTEGRATIONS="false" \

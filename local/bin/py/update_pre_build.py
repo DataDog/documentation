@@ -4,6 +4,7 @@ import csv
 import fnmatch
 import glob
 import json
+import sys
 import linecache
 import re
 import shutil
@@ -410,13 +411,17 @@ class PreBuild:
 
         self.extract_config()
 
-        self.local_or_upstream()
+        try:
+            self.local_or_upstream()
+        except:
+            print("\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build")
+            sys.exit(1)
 
         try:
             self.process_filenames()
         except ValueError:
-            print("\x1b[32mINFO\x1b[0m: Processing files failed, stoping build")
-            raise Exception
+            print("\x1b[31mERROR\x1b[0m: Processing files failed, stoping build")
+            sys.exit(1)
 
         self.merge_integrations()
 
@@ -477,7 +482,7 @@ class PreBuild:
                     repo_name,
                     content["globs"],
                 )
-            elif self.options.token:
+            elif self.options.token != "False":
                 print(
                     "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
                         content["repo_name"]
@@ -499,12 +504,16 @@ class PreBuild:
                     ),
                     content["globs"],
                 )
+            elif getenv("LOCAL"):
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected, content from {} is not displayed ".format(content["repo_name"]))
             else:
                 print(
-                    "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
+                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
                         content["repo_name"]
                     )
                 )
+                raise ValueError
 
     def update_globs(self, new_path, globs):
         """
