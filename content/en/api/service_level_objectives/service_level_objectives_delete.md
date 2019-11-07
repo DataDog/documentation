@@ -11,4 +11,6 @@ Permanently delete a SLO.
 
 **ARGUMENTS**:
 
-This endpoint takes no JSON arguments.
+* **`force`** [*optional*]:
+
+    Boolean: Force delete SLO.  Required if SLO exists in a dashboard.  Default `false`
