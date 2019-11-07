@@ -8,7 +8,6 @@ RUN_SERVER := true
 RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/etc/pull_config_preview.yaml"
 
-LOCAL:= True
 LOCALBIN := local/bin
 LOCALETC := local/etc
 
