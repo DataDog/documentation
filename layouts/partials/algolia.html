@@ -28,7 +28,7 @@ var search_desktop = docsearch({
                         }
                      }, 'info')
                   }
-            },400
+            },1000
          )
      },
 
@@ -45,7 +45,7 @@ search_desktop.autocomplete.on('keyup', function(e) {
          $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
          $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
       }
-      
+
    } else {
       $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
       $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
@@ -62,7 +62,7 @@ if (searchBtn) {
       if (docsearchInput.value !== '') {
          window.location = '{{ absLangURL "search/" }}?s='+docsearchInput.value;
       }
-      
+
    })
 }
 
@@ -73,7 +73,7 @@ search_desktop.autocomplete.on('autocomplete:closed', function(e) {
          $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
          $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
       }
-      
+
    } else {
       $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
       $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
