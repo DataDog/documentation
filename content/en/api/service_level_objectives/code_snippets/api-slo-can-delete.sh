@@ -10,4 +10,4 @@ slo_id=<YOUR_SLO_ID>
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
-"https://api.datadoghq.com/api/v1/slo/can_delete"
+"https://api.datadoghq.com/api/v1/slo/can_delete?ids=${slo_id}"
