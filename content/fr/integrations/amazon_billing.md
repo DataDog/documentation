@@ -40,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Ajoutez l'autorisation suivante à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon Billing. Pour en savoir plus sur les stratégies AWS Budgets, consultez [la documentation disponible sur le site d'AWS][4].
 
     | Autorisation AWS       | Description                      |
-    |----------------------|----------------------------------|
+    | -------------------- | -------------------------------- |
     | `budgets:ViewBudget` | utilisée pour afficher les métriques sur les budgets AWS |
 
 3. Activez les métriques Billing depuis la [console AWS][5].
@@ -51,9 +51,22 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 **Remarque** : les métriques AWS Budgets ne peuvent être recueillies qu'à partir du compte principal AWS.
 
+### Collecte de logs
+#### Activer le logging
+
+Configurez Amazon Billing de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_billing` dans le préfixe.
+
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Billing dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][9]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
+
 ## Surveillance de l'utilisation de CloudWatch
 
-Après avoir configuré vos autorisations AWS afin d'ajouter l'autorisation `budgets:ViewBudget`, vous pouvez surveiller la facturation CloudWatch à l'aide de cette intégration. 
+Après avoir configuré vos autorisations AWS afin d'ajouter l'autorisation `budgets:ViewBudget`, vous pouvez surveiller la facturation CloudWatch à l'aide de cette intégration.
 
 Les métriques AWS Billing sont disponibles environ toutes les 4 heures. Vous devrez peut-être patienter 4 heures pour que les métriques soient recueillies par Datadog.
 
@@ -96,7 +109,10 @@ Si les métriques `aws.billing.actual_spend`, `aws.billing.forecasted_spend` ou 
 [5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
 [7]: https://console.aws.amazon.com/billing/home?#/createbudget
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[10]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
 
 
 {{< get-dependencies >}}

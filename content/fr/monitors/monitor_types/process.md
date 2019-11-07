@@ -29,7 +29,7 @@ Les processus et les totaux correspondants s'affichent sous la recherche :
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus" responsive="true" style="width:90%;">}}
 
-Une fois votre recherche définie, un graphique s'affiche au-dessus des critères de recherche. Celui-ci représente le nombre total approximatif de processus trouvés. Pour obtenir des données plus granulaires, consultez votre [page Live Process][5].
+Une fois votre recherche définie, un graphique s'affiche au-dessus des critères de recherche. Celui-ci représente le nombre total approximatif de processus trouvés. Pour obtenir des données plus granulaires, consultez votre [page Live Process][4].
 
 #### Groupe d'alertes
 
@@ -46,7 +46,7 @@ Les seuils vous permettent de déclencher une alerte lorsqu'une certaine valeur 
 
 ### Notifications
 
-Pour obtenir des instructions détaillées sur les sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][4].
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
@@ -55,5 +55,5 @@ Pour obtenir des instructions détaillées sur les sections **Say what's happeni
 [1]: /fr/graphing/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process
 [3]: /fr/graphing/infrastructure/process/#search-syntax
-[4]: /fr/monitors/notifications
-[5]: https://app.datadoghq.com/process
+[4]: https://app.datadoghq.com/process
+[5]: /fr/monitors/notifications
