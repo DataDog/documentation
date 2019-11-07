@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
 </div>
 
 ## Overview
