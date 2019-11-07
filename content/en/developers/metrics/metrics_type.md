@@ -20,17 +20,17 @@ further_reading:
 
 Each metric submitted to Datadog has a “Metric Type.” This Metric Type affects how [Metric Type modifiers][1] and functions interact with data when queried and graphed, and can affect how the data is handled when ingested via the Agent and DogstatsD.
 
-A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog receives that same metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, and only if necessary.
+A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog receives that data for that metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, and only if necessary.
 
-## Metric Types: Ingestion
+## Metric Types: Storage vs. Submission
 
-Datadog stores metrics under a few canonical types. There are three metric types Datadog stores:
+Datadog stores metric data under a few canonical types. There are three Metric Types Datadog stores:
 
 * `COUNT`
 * `RATE`
 * `GAUGE`
 
-However, we accept a wider range of Metric Types. To do this, we map certain types to others - we'll go into detail about this after describing the types themselves.
+However, we accept a wider range of Metric Types. We map the submitted metric types to one of the three types we store when we receive the data - we'll go into detail about this after describing the types themselves.
 
 We **accept** the following metric types:
 
@@ -42,28 +42,16 @@ We **accept** the following metric types:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
+## Submission Method
 
-When submitting data via the API (except to our Distributions endpoint, or when using Marlo'd metrics), Datadog will simply store the data and metric type received. No aggregation will occur at the time of submission. Most metrics, however, are sent via Agent check or DogstatsD. In those cases, aggregation will occur - this will depend on Metric type. Let's dig into how Datadog handles Metric Type, before discussing how types are mapped at submission time.
+Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation may occur when multiple points arrive in a short timeframe. The Agent will combine values with identical tags together before sending a single representative value to Datadog. This combined value is what we then store. How this occurs varies by Metric Type - we'll dig in more below.
+
+In contrast, data submitted directly to our API is not aggregated by Datadog before storage (except in the case of Distributions). The values sent to Datadog are stored as-is, and the Metric Type is updated if necessary.
+
+Let's examine how each Metric Type is aggregated before it's stored.
 
 
-## Metric type definition
-
-To better understand and modify each Metric Type within Datadog, consider the following example. Remember that once submitted, raw metric data will not change by editing metric type. Let's explore what happens when this metric is **submitted** as each type:
-
-<<<<<<< HEAD
-You have two web servers: `server:web_1` and `server:web_2`. Both web servers continuously receive:
-
-* 10 HTTP requests for the first 30 seconds, then
-* 20 HTTP requests for the next 30 seconds, then
-* 0 HTTP requests for the next 30 seconds.
-=======
-Two web servers are reporting via the Datadog Agent: `server:web_1` and `server:web_2`. Both web servers continuously receive:
-  * 10 HTTP requests for the first 30 seconds, then
-  * 20 HTTP requests for the next 30 seconds, then
-  * 15 HTTP requests for the next 30 seconds.
->>>>>>> 60b8f66e8fa57099a8604ecbb2f8431cccc13f97
-
-### Metric submission types
+### Metric Aggregation before Storage, by Type
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
@@ -153,7 +141,7 @@ Discover how to submit gauge metrics:
 For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following timeseries are produced by the Agent by default:
 
 | Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
 | `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
 | `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
@@ -164,7 +152,7 @@ For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` dur
 For instance, say that the `request.response_time.histogram` metric is reported to Datadog through an Agent with the `HISTOGRAM` type for `server:web_1` with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
 
 | Metric Name                                    | Value  | Datadog Metric Type |
-|------------------------------------------------|--------|---------------------|
+| ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1,88` | GAUGE               |
 | `request.response_time.histogram.count`        | `8`    | RATE                |
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
@@ -203,7 +191,7 @@ Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during th
 For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following timeseries are available to query by default:
 
 | Aggregation           | Description                                                                                                                                               | Datadog Metric Type |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | `avg:<METRIC_NAME>`   | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
 | `count:<METRIC_NAME>` | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
 | `max:<METRIC_NAME>`   | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
@@ -213,7 +201,7 @@ For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` 
 For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a given flush interval, this would create the following metrics within Datadog:
 
 | Metric Name                                | Value  | Datadog Metric Type |
-|--------------------------------------------|--------|---------------------|
+| ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1,73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | RATE                |
 | `max:request.response_time.distribution`   | `3`    | GAUGE               |
@@ -231,7 +219,7 @@ Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be ad
 If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created:
 
 | Metric Name                              | Value | Datadog Metric Type |
-|------------------------------------------|-------|---------------------|
+| ---------------------------------------- | ----- | ------------------- |
 | `p50:request.response_time.distribution` | `2 `  | GAUGE               |
 | `p75:request.response_time.distribution` | `2`   | GAUGE               |
 | `p90:request.response_time.distribution` | `3`   | GAUGE               |
@@ -279,7 +267,7 @@ Datadog accepts metrics submitted from a variety of sources:
 Each source has its own limitations, and metric submission types do not always map exactly to the Datadog in-app stored types:
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
-|-------------------|--------------------------------------|-----------------|---------------------|
+| ----------------- | ------------------------------------ | --------------- | ------------------- |
 | [API][6]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [API][6]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [API][6]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
