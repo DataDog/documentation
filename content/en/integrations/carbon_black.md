@@ -17,19 +17,19 @@ version: '1.0'
 ---
 ## Overview
 
-Use the Datadog-Carbon Black integration in order to forwards your Carbon Black Defense logs within Datadog.
+Use the Datadog-Carbon Black integration in order to forward your Carbon Black Defense logs to Datadog.
 
 ## Setup
 ### Installation
 
-First, install and setup the [Cb Defense log shipper][1]. The shipper is available for:
+First, install and setup the [Carbon Black Defense log shipper][1]. The shipper is available for:
 
-* [RPM based linux distributions][2]
+* [RPM based Linux distributions][2]
 * [Docker][3]
 
 ### Configuration
 
-Use the configuration file below for your Cb Defense shipper in order to foward your logs to Datadog:
+The configuration file below enables your Carbon Black Defense shipper to forward your logs to Datadog:
 
 {{< tabs >}}
 {{% tab "Datadog US Site" %}}
@@ -74,18 +74,18 @@ siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 {{% /tab %}}
 {{< /tabs >}}
 
-Replace `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to make it work.
+Replace the `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to complete your configuration.
 
-First, get your `<DATADOG_API_KEY>` from the [Datadog API key][4] page.
+First, replace `<DATADOG_API_KEY>` with your Datadog API key, found on the [Datadog API key][4] page.
 
-Then to get your Carbon Black Defense API KEY, and API ID, generate them from within the your Carbon Black :
+Next, to obtain your Carbon Black Defense API key and API ID, generate them from within Carbon Black:
 
 1. Go to *Settings* -> *API KEYS* -> *Add API Key*.
-2. Enter a Name for your key.
-3. Select the **SIEM** Access Level for the key.
-4. Once the key is created, report the `<CB_DEFENSE_API_SECRET_KEY>` and `<CB_DEFENSE_API_ID>` into your Cb Defense log shipper configuration file.
+2. Enter a name for your key.
+3. Select the **SIEM** access level for the key.
+4. Once the key is created, use your new API key and API ID to replace the `<CB_DEFENSE_API_SECRET_KEY>` and `<CB_DEFENSE_API_ID>` placeholder in your Carbon Black Defense log shipper configuration file.
 
-Finally, to find the `<CB_DEFENSE_SERVER_URL>`, within your Cb defense dashboard, go to *Settings* -> *API KEYS* -> *Download* that displays the URL and its Access Levels Descriptions.
+You can find your Carbon Black Defense server URL within your Carbon Black dashboard. Go to *Settings* -> *API KEYS* -> *Download* to find this URL and its access level descriptions. Use this value to replace the `<CB_DEFENSE_SERVER_URL>` placeholder.
 
 ## Troubleshooting
 
