@@ -67,7 +67,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 
 Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][3] for instructions on how to add a NuGet package to your application.
+**Note:** If you need to instrument a [web forms](https://dotnet.microsoft.com/apps/aspnet/web-forms) application, add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][3] for instructions on how to add a NuGet package to your application. Be sure to keep this package in sync with your MSI version.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
@@ -80,8 +80,6 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
-
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][1] to your application, matching the package version to the package below. Refer to the [NuGet documentation][2] for instructions on how to add a NuGet package to your application.
 
 Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][3].
 
