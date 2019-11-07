@@ -158,14 +158,14 @@ DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 Par exemple, pour définir les variables d'environnement à partir d'un fichier de commandes avant de démarrer votre application :
 
 ```bat
-rem Définir les variables d'environnement
+rem Set environment variables
 SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET COR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 set DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
-rem Démarrer l'application
+rem Start application
 example.exe
 ```
 
@@ -199,14 +199,14 @@ DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
 
 ```bat
-rem Définir les variables d'environnement
+rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET CORECLR_PROFILER_PATH=%PROGRAMFILES%\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 SET DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 
-rem Démarrer l'application
+rem Start application
 dotnet.exe example.dll
 ```
 
@@ -375,12 +375,12 @@ Pour configurer le traceur à l'aide de variables d'environnement, définissez-l
 
 Par exemple, sous Windows :
 ```cmd
-rem Définir les variables d'environnement
+rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_SERVICE_NAME=MonService
 SET DD_ADONET_ENABLED=false
 
-rem Démarrer l'application
+rem Launch application
 MonApplication.exe
 ```
 
@@ -453,15 +453,15 @@ Nom du paramètre                 | Nom de la propriété              | Descrip
 `DD_TRACE_DEBUG`             | S. O.                        | Active ou désactive le mode debugging du profileur CLR. Valeurs acceptées : `true` (par défaut) ou `false`                                                                                                                                                                                            |
 `DD_TRACE_LOG_PATH`          | S. O.                        | Définit le chemin du fichier de log du profileur CLR.<br/><br/>Valeur par défaut pour Windows : `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Valeur par défaut pour Linux : `/var/log/datadog/dotnet-profiler.log`                                                                                         |
 `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Définit une liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si cette propriété n'est pas définie, toutes les intégrations sont activées. Accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides sont les noms d'intégration énumérés dans la section [Intégrations][9] ci-dessus.                           |
-`DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Raccourci qui active les paramètres d'analyse et de recherche de trace par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut)                                                                                                                                            |
+`DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Raccourci qui active les paramètres d'analyse d'app par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                            |
 
 Le tableau suivant énumère les variables de configuration qui sont uniquement disponibles en utilisant l'instrumentation automatique, et qui peuvent être définies pour chaque intégration. La première colonne, _Nom du paramètre_, indique le nom de variable utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne, _Nom de la propriété_, indique le nom de la propriété équivalente dans la classe `IntegrationSettings` lors de la modification des paramètres du code. Accédez à ces propriétés à l'aide de l'indexeur `TracerSettings.Integrations[string integrationName]`. Les noms d'intégration sont énumérés dans la section [Intégrations][9] ci-dessus.
 
 Nom du paramètre                             | Nom de la propriété              | Description                                                                                                                        |
 ---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 `DD_<INTÉGRATION>_ENABLED`               | `Enabled`                  | Active ou désactive une intégration spécifique. Valeurs acceptées : `true` (par défaut) ou `false`.                                         |
-`DD_<INTÉGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Active ou désactive l'analyse et la recherche de trace pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
-`DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Définit le taux d'échantillonnage pour l'analyse et la recherche de trace pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
+`DD_<INTÉGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Active ou désactive l'analyse d'app pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
+`DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Définit le taux d'échantillonnage pour l'analyse d'app pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
 
 ## Pour aller plus loin
 

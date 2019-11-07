@@ -3,7 +3,7 @@ categories:
   - cloud
   - data store
   - aws
-  - collecte de logs
+  - log collection
 ddtype: crawler
 dependencies: []
 description: "Surveillez vos métriques et vos logs AWS\_DocumentDB."
@@ -39,12 +39,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Installez l'[intégration Datadog/AWS DocumentDB][3].
 
 ### Collecte de logs
+#### Activer le logging
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs DocumentDB. 
-Consultez la section [Configurer manuellement des déclencheurs][5] dans la documentation sur AWS.
+Configurez Amazon DocumentDB de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_documentdb` dans le préfixe.
 
-Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vos logs !
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon DocumentDB dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][5]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
 
 ## Données collectées
 ### Métriques
@@ -69,9 +74,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_documentdb
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#manually-setup-triggers
-[6]: https://app.datadoghq.com/logs
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_documentdb/amazon_documentdb_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 
