@@ -36,7 +36,7 @@ build_preview:
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     CONFIGURATION_FILE: "./local/etc/pull_config_preview.yaml"
-    LOCAL: False
+    LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -106,7 +106,7 @@ build_live:
     URL: ${LIVE_DOMAIN}
     UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations"
     CONFIGURATION_FILE: "./local/etc/pull_config.yaml"
-    LOCAL: False
+    LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"

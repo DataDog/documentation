@@ -414,14 +414,24 @@ class PreBuild:
         try:
             self.local_or_upstream()
         except:
-            print("\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build")
-            sys.exit(1)
+            if getenv("LOCAL"):
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode")
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build")
+                sys.exit(1)
 
         try:
             self.process_filenames()
         except ValueError:
-            print("\x1b[31mERROR\x1b[0m: Processing files failed, stoping build")
-            sys.exit(1)
+            if getenv("LOCAL"):
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Processing files failed, documentation is now in degraded mode")
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: Processing files failed, stoping build")
+                sys.exit(1)
 
         self.merge_integrations()
 
@@ -504,12 +514,9 @@ class PreBuild:
                     ),
                     content["globs"],
                 )
-            elif getenv("LOCAL"):
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected, content from {} is not displayed ".format(content["repo_name"]))
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
+                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
                         content["repo_name"]
                     )
                 )
@@ -570,7 +577,7 @@ class PreBuild:
 
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Unsuccessful Processing of {}".format(content))
+                    "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                 raise ValueError
 
     def process_integrations(self, content):
