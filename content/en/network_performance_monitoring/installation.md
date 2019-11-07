@@ -13,18 +13,21 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
 </div>
 
-Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog requires a Linux kernel version 4.4.0+. The following platforms are supported:
+Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
+
+Supported platforms include:
 
 * Ubuntu 16.04+
 * Debian 9+
 * Fedora 26+
 * SUSE 15+
-* CentOS/RHEL 7.6+
 
-**Note**: Datadog does not support Windows and macOS platforms because they are not eBPF-compatible.
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][4]. 
+
+**Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
 The following provisioning systems are supported:
 
@@ -188,3 +191,4 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 [1]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
 [2]: https://github.com/DataDog/chef-datadog
 [3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[4]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
