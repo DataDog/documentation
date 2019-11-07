@@ -45,10 +45,10 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 {{% tab "Example" %}}
 
 {{< code-block lang="bash" filename="roles.sh" >}}
-{�
+{
   "type": "authnmapping",
-  "data": {�
-    "attributes": {�
+  "data": {
+    "attributes": {
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "attribute_key": "string",
       "attribute_value": "string"
