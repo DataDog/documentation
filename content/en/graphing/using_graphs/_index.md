@@ -108,7 +108,7 @@ To display only the formula on your graph, click on the check marks next to the 
 
 ### Create a title
 
-If you do nott enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph. 
+If you do not enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph. 
 
 ### Save
 
