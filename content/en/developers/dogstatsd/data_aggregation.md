@@ -32,7 +32,7 @@ For instance, if you have a [COUNT metric][3] that is incremented 1,000 times (+
 
 **Note**: With the StatsD protocol, the StatsD client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][2] server (embedded in the Datadog Agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
-### Aggregation rules per metric type
+## Aggregation rules per metric type
 
 Among all values received during the same flush interval, the aggregated value send depends of the [metric type][4]:
 
