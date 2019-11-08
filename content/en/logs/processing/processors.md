@@ -64,6 +64,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 {{% /tab %}}
 {{< /tabs >}}
 
+Up to 5 samples can be save with the Processor. 
+All samples have a status that shows `match` or `no match` which highlights if one of the parsing rule of the grok parser matches this sample or not.
+Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
+
 ## Log Date Remapper
 
 As Datadog receives logs, it timestamps them using the value(s) from any of these default attributes:
