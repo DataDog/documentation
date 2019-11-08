@@ -14,24 +14,23 @@ var search_desktop = docsearch({
      autocompleteOptions: {
         autoselect: false
      },
-
-    if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
       queryHook: function(query){
-           clearTimeout(algoliaTimer);
-           algoliaTimer = setTimeout(
-              function(){
-                 if (query.length > 0) {
-                       window.datadog_logger.log('Algolia Search', {
-                          "browser": {
-                             "algolia": {
-                                "search": query.toLowerCase()
-                             }
-                          }
-                       }, 'info')
+        if(window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+          clearTimeout(algoliaTimer);
+          algoliaTimer = setTimeout(
+            function(){
+              if (query.length > 0) {
+                window.datadog_logger.log('Algolia Search', {
+                  "browser": {
+                    "algolia": {
+                      "search": query.toLowerCase()
                     }
-              },1000
-           )
-      }
+                  }
+                }, 'info')
+              }
+            },1000
+          )
+        }
     },
      debug: false // Set debug to true if you want to inspect the dropdown
 });
