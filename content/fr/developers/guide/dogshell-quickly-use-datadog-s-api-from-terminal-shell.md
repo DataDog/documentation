@@ -20,13 +20,13 @@ dog metric post test_metric 1
 Si votre fichier `.dogrc` n'a pas encore été créé (c'est-à-dire, le dogshell n'a pas encore été initialisé), voici ce qui s'affiche :
 
 ```
-~/.dogrc does not exist. Would you like to create it? [Y/n] 
+~/.dogrc does not exist. Would you like to create it? [Y/n]
 ```
 
 Choisissez « Y ». La réponse suivante s'affiche :
 
 ```
-What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api) 
+What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api)
 ```
 
 Collez votre clé d'API pour accéder à l'étape suivante :
@@ -87,6 +87,6 @@ dog metric post -h
 {{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" responsive="true" >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /fr/developers/dogstatsd
+[2]: /fr/developers/metrics/dogstatsd_metrics_submission
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

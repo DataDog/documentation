@@ -843,10 +843,14 @@ main:
     url: logs/archives/s3/
     parent: log_archives
     weight: 501
+  - name: Archivage sur GCS
+    url: logs/archives/gcs/
+    parent: log_archives
+    weight: 502
   - name: Réintégration à partir des archives
     url: logs/archives/rehydrating
     parent: log_archives
-    weight: 502
+    weight: 503
   - name: Index
     url: logs/indexes
     parent: log_management
@@ -895,7 +899,7 @@ main:
   - name: Synthetics
     url: 'https://www.datadoghq.com/synthetics/'
     pre: nav_synthetics
-    identifier: synthetics
+    identifier: Synthetics
     weight: 100000
   - name: Tests API
     url: synthetics/api_tests/
@@ -914,7 +918,7 @@ main:
     weight: 3
   - name: Intégration APM
     url: synthetics/apm/
-    parent: synthetics
+    parent: Synthetics
     identifier: synthetics_apm
     weight: 4
   - name: Tests Browser
@@ -931,7 +935,7 @@ main:
     weight: 6
   - name: Dépannage
     url: synthetics/troubleshooting/
-    parent: synthetics
+    parent: Synthetics
     identifier: synthetics_troubleshooting
     weight: 7
   - name: Surveillance réseau

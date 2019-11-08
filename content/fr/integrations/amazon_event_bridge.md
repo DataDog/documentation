@@ -37,11 +37,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 3. L'intégration AWS EventBridge est installée automatiquement avec l'intégration AWS.
 
 ### Configuration
-1. Accédez au carré d'[intégration Datadog/Amazon EventBridge][3] pour consulter la liste des comptes AWS intégrés dans Datadog et à partir desquels vous pouvez créer des bus d'événements.
+1. Accédez au carré d'[intégration Datadog/Amazon EventBridge][2] pour consulter la liste des comptes AWS intégrés dans Datadog et à partir desquels vous pouvez créer des bus d'événements.
 2. Dans le compte AWS de votre choix, créez un bus d'événements. Pour ce faire, saisissez un nom et sélectionnez la région de votre choix.
 3. Depuis des alertes Datadog, utilisez la syntaxe `@awseventbridge-<MON_BUS_ÉVÉNEMENTS>` pour envoyer des notifications d'alerte à vos bus d'événements.
-4. Dans AWS, associez vos bus d'événements à des cibles telles que Lambda, Kinesis, et [de nombreux autres services][4] afin de créer des workflows basés sur des événements.
-5. Consultez la [console AWS][5], dans la page de notre partenaire, pour parcourir des exemples de cas d'utilisation de Datadog.
+4. Dans AWS, associez vos bus d'événements à des cibles telles que Lambda, Kinesis, et [de nombreux autres services][3] afin de créer des workflows basés sur des événements.
+5. Consultez la [console AWS][4], dans la page de notre partenaire, pour parcourir des exemples de cas d'utilisation de Datadog.
 6. Pour supprimer un bus d'événements dans Datadog, passez le curseur sur le bus d'événements de votre choix et cliquez sur l'icône en forme de corbeille.
 
 
@@ -56,14 +56,13 @@ L'intégration Amazon EventBridge n'inclut aucun événement.
 L'intégration Amazon EventBridge n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-event-bridge
-[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html
-[5]: https://console.aws.amazon.com/events/home#/partners/datadoghq.com?page=overview
-[6]: https://docs.datadoghq.com/fr/help/
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon-event-bridge
+[3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html
+[4]: https://console.aws.amazon.com/events/home#/partners/datadoghq.com?page=overview
+[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

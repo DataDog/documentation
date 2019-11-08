@@ -51,19 +51,19 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer la journalisation SQS
 
-Consultez la page [Journalisation des appels d'API Amazon SQS à l'aide d'AWS CloudTrail][8] pour configurer votre journal de suivi. Lorsque vous définissez un journal de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
+Consultez la page [Journalisation des appels d'API Amazon SQS à l'aide d'AWS CloudTrail][6] pour configurer votre journal de suivi. Lorsque vous définissez un journal de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
 
 {{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation Cloudtrail" responsive="true" responsive="true" popup="true" style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][9].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][7].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 qui contient vos logs d'Amazon SQS dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
 {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs d'Amazon SQS et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
 {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
 
-Utilisez ensuite le [Log Explorer de Datadog][10] pour visualiser vos logs.
+Utilisez ensuite le [Log Explorer de Datadog][8] pour visualiser vos logs.
 
 ## Données collectées
 ### Métriques
@@ -79,18 +79,18 @@ L'intégration AWS SQS n'inclut aucun événement.
 L'intégration AWS SQS n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_sqs
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
-[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[10]: https://app.datadoghq.com/logs
+[6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
+[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[8]: https://app.datadoghq.com/logs
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
+[10]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
