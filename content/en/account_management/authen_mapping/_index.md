@@ -34,8 +34,10 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 ##### ARGUMENTS
 
+* **`id`** [*required*, *default*=none]:
+  The UUID of the `authinmap` being updated. For more information about finding your UUID, see the [Role API documentation][1].
 * **`role_uuid`** [*required*, *default*=none]:
-  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding your `role_uuid`, see the [Role API documentation][1].
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you are updating, see the [Role API documentation][1].
 * **`attribute_key`** [*required*, *default*=none]:
  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*required*, *default*=none]:
@@ -53,8 +55,9 @@ curl -X POST \
          -d '{
              "data": {
                  "type": "authn_mappings",
+                 "id": "123e4567-e89b-12d3-a456-426655440000",
                  "attributes": {
-                      "id": "123e4567-e89b-12d3-a456-426655445555",
+                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
                       "attribute_value": "string"
                 }
@@ -349,7 +352,9 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 ##### ARGUMENTS
 
 * **`id`** [*required*, *default*=none]:
-  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding your `role_uuid`, see the [Role API documentation][1].
+  The UUID of the `authinmap` being updated. For more information about finding your UUID, see the [Role API documentation][1].
+* **`role_uuid`** [*required*, *default*=none]:
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you are updating, see the [Role API documentation][1].
 * **`attribute_key`** [*required*, *default*=none]:
  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*required*, *default*=none]:
@@ -367,6 +372,7 @@ curl -X PATCH \
          -d '{
              "data": {
                  "type": "authn_mappings",
+                 "role_uuid": "123e4567-e89b-12d3-a456-426655440000",
                  "attributes": {
                       "id": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
