@@ -67,7 +67,7 @@ left:
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'
-    title: Notre entreprise
+    title: À propos de
     children:
       - name: about_contact
         link: 'https://www.datadoghq.com/about/contact/'
