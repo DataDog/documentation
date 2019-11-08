@@ -21,11 +21,11 @@ To use the screenboard global time selector, at least one time-based widget must
 
 The global time selector sets the same timeframe for all widgets using the `Global Time` option on the same screenboard. You can select a moving window in the past (`The Past Hour`, `The Past Day`, etc.) or a fixed period with the `Select Range` option. If a moving window is chosen, the widgets are updated every few milliseconds to move along with the time window.
 
-When the global time selector is used, widgets that are linked to global time show data for that period. Widgets that are not linked to global time show the data for their local timeframe as applied to the global window. For instance, if the global time selector is set to the fixed period January 1, 2019 through January 2, 2019, a widget set to the local timeframe `The Past Minute` shows the last minute of January 2, 2019 from 11:59pm.
+Widgets not linked to global time show the data for their local timeframe as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local timeframe for `The Past Minute` shows the last minute of January 2, 2019 from 11:59pm.
 
 ## TV mode
 
-Screenboards are useful for displaying key performance metrics on large screens or TVs. To enable TV mode, use the keyboard shortcut `K` or the TV icon.
+Screenboards are useful for displaying key performance metrics on large screens or TVs. To enable TV mode, use the keyboard shortcut `K` or click the TV icon on the screenboard.
 
 ## Settings
 
@@ -39,7 +39,9 @@ Toggle between UTC time and your default time zone.
 
 ### Notifications
 
-If notifications are activated for a specific screenboard, an event is created in the [event stream][2]. This event provides information about the change including the user who made the change. Additionally, individual users who activate a screenboard notification receive an email alert.
+If notifications are activated for a screenboard, an event is created in the [event stream][2]. This event provides information on text changes, widget changes, screenboard cloning, and screenboard deletion along with the name of the user performing the action.
+
+Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a screenboard.
 
 Change events for dashboards with notifications enabled can be seen in the event stream by searching:
 
@@ -51,32 +53,21 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 ### Permissions
 
-As the Dashboard creator (or an [Administrator][3]), you can activate Read-Only mode, disabling all non-admin edits to this dashboard. You can change these preferences at any time.
+For a screenboard, the creator or any [administrator][3] can activate read-only mode, which disables all non-admin edits to the screenboard.
 
-Only [account Administrators][3] and the Screenboard creator can activate read-only mode for a Screenboard.
-Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Screenboard.
-
-If a user decides to track changes for a Screenboard, the following Screenboard changes are reported to the user through an event in the [event stream][2]:
-
-1. Text changes (title, description)
-
-2. Widget changes
-    - iframe, free_text, image, and note widget changes are reported in the [event stream][2] if a new widget is added or it is removed. There are no specifics about the widget specifying content. It says "a text_widget was added to the Screenboard" in the event.
-    - All other widget changes are reported in the [event stream][2] if a new widget is added, edited, or removed. The event specifies the title of the widget in question and say something like "the widget titled 'xyz' was edited"
-3. Screenboard cloning
-
-4. Screenboard deletion
-
-In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.
-Even in read-only mode, non-administrator users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in full-screen. Any tile rearrangement by a non-administrator user do not persist if the Screenboard is set to read-only.
+In read-only mode, non-administrative users can clone the screenboard, rearrange tiles, snapshot a tile, and view a tile in full-screen. Any tile rearrangement by a non-administrative user does not persist.
 
 ### Clone dashboard
 
-x
+Use this option to copy the entire screenboard to a new screenboard. You are prompted to name the clone.
 
 ### Copy, Import, or Export dashboard JSON
 
 Refer to the [main dashboard documentation][4] for details on copying, importing, or exporting dashboard JSON.
+
+### Delete dashboard
+
+Use this option to permanently delete your screenboard. You are prompted to confirm deletion.
 
 ## Further Reading
 
