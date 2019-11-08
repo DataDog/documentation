@@ -897,9 +897,9 @@ main:
     parent: log_management
     weight: 11
   - name: Synthetics
-    url: 'https://www.datadoghq.com/synthetics/'
+    url: synthetics/
     pre: nav_synthetics
-    identifier: Synthetics
+    identifier: synthetics
     weight: 100000
   - name: Tests API
     url: synthetics/api_tests/
@@ -918,7 +918,7 @@ main:
     weight: 3
   - name: Intégration APM
     url: synthetics/apm/
-    parent: Synthetics
+    parent: synthetics
     identifier: synthetics_apm
     weight: 4
   - name: Tests Browser
@@ -935,7 +935,7 @@ main:
     weight: 6
   - name: Dépannage
     url: synthetics/troubleshooting/
-    parent: Synthetics
+    parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 7
   - name: Surveillance réseau
@@ -1176,7 +1176,7 @@ main:
     parent: account_management
     weight: 7
   - name: Sécurité
-    url: 'https://www.datadoghq.com/security/'
+    url: /security/
     pre: nav_security
     identifier: security
     weight: 160000

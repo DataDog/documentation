@@ -2,7 +2,7 @@
 title: Supprimer plusieurs intervalles de Service Level Objectives
 type: apicode
 order: 29.06
-external_redirect: "/api/#bulk-delete-service-level-objectives-time-frames"
+external_redirect: "/api/#supprimer-plusieurs-intervalles-de-service-level-objectives"
 ---
 
 **SIGNATURE** :

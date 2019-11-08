@@ -1,4 +1,4 @@
-heading: "Bienvenue dans la documentation de Datadog\_!"
+heading: Bienvenue dans la documentation de Datadog !
 guides:
   - title: Installer l'Agent
     desc: Commencez à recueillir des événements et des métriques à partir de vos hosts et envoyez-les à Datadog.
