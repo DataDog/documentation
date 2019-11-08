@@ -24,6 +24,7 @@ Note: only Datadog users with admin status can create, modify, or delete log arc
 
 {{< whatsnext desc="This section includes the following topics:" >}}
     {{< nextlink href="/logs/archives/s3" >}}<u>Archive to S3</u>: Set up forwarding logs to your Amazon S3 bucket.{{< /nextlink >}}
+    {{< nextlink href="/logs/archives/gcs" >}}<u>Archive to GCS</u>: Set up forwarding logs to your Google Cloud Storage.{{< /nextlink >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
 
