@@ -20,13 +20,13 @@ Datadog DogStatsD implements the StatsD protocol [with some differences][1]. It 
 
 This article describes why and how the aggregation is performed over your data.
 
-## Why aggregate metrics?
+## Why aggregate metrics ?
 
 HTTP calls take time. The aggregation is meant to improve performance by reducing the number of API calls.
 
 For instance, if you have a [COUNT metric][3] that is incremented 1,000 times (+1 each time) over a short amount of time, instead of making 1,000 separate API calls, the DogStatsD server aggregates it into a few API calls. Depending on the situation (see below), the library may submit—for instance—1 datapoint with value 1,000 or X aggregate datapoints with a cumulated value of 1,000.
 
-## How is aggregation performed with the DogStatsD server?
+## How is aggregation performed with the DogStatsD server ?
 
 [DogStatsD][2] uses a *flush interval* of 10 seconds. Every 10 seconds, [DogStatsD][2] checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
 
@@ -36,13 +36,13 @@ For instance, if you have a [COUNT metric][3] that is incremented 1,000 times (+
 
 Among all values received during the same flush interval, the aggregated value send depends of the [metric type][4]:
 
-| Metric Type                                                                          | Aggregation performed over one flush interval                                                                                                                  |
-|--------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [GAUGE][5]         | The latest datapoint received is sent.                                                                                                                         |
-| [COUNT][3]         | The sum of all received datapoint is sent.                                                                                                                     |
+| Metric Type    | Aggregation performed over one flush interval                                                                                                                  |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [GAUGE][5]     | The latest datapoint received is sent.                                                                                                                         |
+| [COUNT][3]     | The sum of all received datapoint is sent.                                                                                                                     |
 | [HISTOGRAM][6] | The min, max, sum, avg, 95 percentiles, count and median of all datapoint received is sent. See the [HISTOGRAM metric documentation page][7] for more details. |
-| [SET][8]             | The number of different datapoint is sent.                                                                                                                     |
-| [RATE][9]           | The value difference divided by the time difference of the last 2 datapoints received.                                                                         |
+| [SET][8]       | The number of different datapoint is sent.                                                                                                                     |
+| [RATE][9]      | The value difference divided by the time difference of the last 2 datapoints received.                                                                         |
 
 ## Further Reading
 
