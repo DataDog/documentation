@@ -266,8 +266,6 @@ Then you need to set the error to `true` and add *at least* the `error.msg`, `er
 **Note**: Any relevant error metadata explained in [the Trace View docs][4] can also be added.
 If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan` and use `setError(true)` (See [source code][5]).
 
-
-
 [1]: https://github.com/opentracing/opentracing-java
 [2]: /tracing/visualization/#trace
 [3]: /tracing/setup/java/#configuration
