@@ -24,15 +24,7 @@ A metric's type can be viewed on the details sidepanel on the [Metrics Summary p
 
 ## Metric Types: Storage vs. Submission
 
-Datadog stores metric data under a few canonical types. There are three Metric Types Datadog stores:
-
-* `COUNT`
-* `RATE`
-* `GAUGE`
-
-However, we accept a wider range of Metric Types. We map the submitted metric types to one of the three types we store when we receive the data - we'll go into detail about this after describing the types themselves.
-
-We **accept** the following metric types:
+Datadog accepts a wide range of **Metric Submission Types**:
 
 * [COUNT](?tab=count#metric-type-definition)
 * [RATE](?tab=rate#metric-type-definition)
@@ -41,6 +33,14 @@ We **accept** the following metric types:
 * [DISTRIBUTION](?tab=distribution#metric-type-definition)
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
+
+When we receive data, we map the submitted metric type to one of three in-app **Metric Types**. Datadog stores metric data under a few canonical types:
+
+* `COUNT`
+* `RATE`
+* `GAUGE`
+
+We'll go into detail about this mapping after discussing the types themselves.
 
 ## Submission Method
 
@@ -95,7 +95,7 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-**A `RATE` represents the frequency at which something occurs, per second.** A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
+**A `RATE` metric represents the frequency at which something occurs, per second.** A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
 
 To get this value, the Agent sums the values received in one interval, then divides by the length of that interval, yielding a value per unit time.
 
@@ -125,11 +125,11 @@ Discover how to submit rate metrics:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-**A `GAUGE` metric is a single value summarizing an entire interval.**  A `GAUGE` is a representative snapshot for that period of time. Good examples are temperature, request latency, or memory usage. The last value submitted to the Agent during a given interval **is** the value of the metric at that time - no summing, averaging, or aggregation occurs to the data in that interval before storage.
+**A `GAUGE` metric is a single value summarizing an entire interval.**  A `GAUGE` is a representative snapshot for that period of time. The last value submitted to the Agent during a given interval **is** the value of the metric at that time - no summing, averaging, or aggregation occurs to the data in that interval before storage.
 
-`GAUGE` metrics are ideal for taking a measure of something. Reading a room's temperature three times in 10 seconds should not yield 210 degrees F, if the temperature is 70 degrees F. A `GAUGE` would correctly report a value of 70.
+`GAUGE` metrics are ideal for taking a measure of something. Suppose a webserver is running the Datadog agent, tracking the latency of each request in milliseconds. If each request has a latency of 300ms, checking request latency three times in one interval should not report 900ms - a `GAUGE` would correctly report 300ms.
 
-For example, suppose a webserver is running the Datadog agent, tracking the latency of each request in milliseconds. During each 10 second interval, the Agent receives the following latency values from the webserver:
+ For example, during each 10 second interval, suppose the Agent receives the following latency values from the webserver:
 
 * `429, 455, and 437` during the first 10 seconds
 * `377 and 344` during the second interval of 10 seconds
@@ -294,6 +294,7 @@ These sources submit data as various submission types, which map to the three ca
 | [API][6]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [API][6]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [API][6]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
+| [API][6]          | `<placeholder, may share, may not>`  | DISTRIBUTION    | GAUGE, COUNT        |
 | [DogStatsD][7]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 | [DogStatsD][8]    | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT        |
 | [DogStatsD][9]    | `dog.count(...)`                     | COUNT           | RATE                |
