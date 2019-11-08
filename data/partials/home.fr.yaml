@@ -1,0 +1,82 @@
+heading: "Bienvenue dans la documentation de Datadog\_!"
+guides:
+  - title: Installer l'Agent
+    desc: Commencez à recueillir des événements et des métriques à partir de vos hosts et envoyez-les à Datadog.
+    link_text: Consulter les guides
+    link: getting_started/agent/
+  - title: Configurer des intégrations
+    desc: "Apprenez à recueillir des métriques, des traces et des logs avec plus de 350\_intégrations."
+    link_text: Consulter les guides
+    link: getting_started/integrations/
+  - title: Prendre en main l'application
+    desc: 'Découvrez comment utiliser Datadog pour créer des dashboards, des graphiques, des monitors, et plus encore.'
+    link_text: Consulter les guides
+    link: getting_started/application/
+nav_sections:
+  - nav_section:
+      - name: Plateforme
+      - navtiles:
+          - title: Agent
+            link: agent/
+            icon: agent.svg
+            desc: Installer et configurer l'Agent Datadog pour recueillir et envoyer des données
+          - title: Intégrations
+            link: integrations/
+            icon: integration.svg
+            desc: 'Rassembler des données depuis vos systèmes, apps et services'
+          - title: Dashboards
+            link: graphing/dashboards/
+            icon: dashboard.svg
+            desc: Visualiser vos données pour mieux les comprendre
+          - title: Alertes
+            link: monitors/
+            icon: attention-circled.svg
+            desc: Créer et gérer des monitors et des notifications
+          - title: APM et tracing distribué
+            link: tracing/
+            icon: trace.svg
+            desc: Étudier précisément les performances de votre application
+          - title: Log Management
+            link: logs/
+            icon: logs.svg
+            desc: 'Recueillir, traiter, explorer, surveiller et archiver vos logs'
+          - title: Synthetics
+            link: 'https://www.datadoghq.com/synthetics/'
+            icon: synthetics.svg
+            desc: 'Garantir la disponibilité de l''application, identifier les problèmes locaux et surveiller les performances'
+          - title: Watchdog
+            link: watchdog/
+            icon: watchdog.svg
+            desc: Afficher automatiquement les tendances des métriques de votre application
+  - nav_section:
+      - name: Configuration
+      - navtiles:
+          - title: API
+            link: api/
+            icon: code.svg
+            desc: Utiliser l'API Datadog
+          - title: Gestion de compte
+            link: account_management/
+            icon: cog.svg
+            desc: Gérer les réglages de votre compte
+          - title: Sécurité
+            link: 'https://www.datadoghq.com/security/'
+            icon: lock.svg
+            desc: Découvrir comment Datadog protège vos données
+          - title: Outils de développement
+            link: developers/
+            icon: wrench.svg
+            desc: Développer des outils pour la plateforme Datadog
+popular_searches:
+  - title: Documentation sur l'API
+    link: api/
+    weight: 10
+  - title: Installation d'Agent
+    link: getting_started/agent/
+    weight: 20
+  - title: Collecte de logs
+    link: logs/log_collection/
+    weight: 30
+  - title: Configuration d'intégration
+    link: integrations/
+    weight: 40
