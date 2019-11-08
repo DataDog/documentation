@@ -10,6 +10,9 @@ further_reading:
 - link: "/integrations/snmp"
   tag: "Documentation"
   text: "SNMP integration"
+- link: "/graphing/widgets/network"
+  tag: "Documentation"
+  text: "Network Widget"
 ---
 
 <div class="alert alert-warning">
