@@ -4,6 +4,7 @@ aliases:
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez vos déploiements en temps réel et mesurez leur durée.
@@ -40,6 +41,21 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Installez l'[intégration Datadog/AWS Codebuild][3].
 
+### Collecte de logs
+#### Activer le logging
+
+Configurez Amazon CodeBuild de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_codebuild` est défini en tant que *Target prefix*.
+
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon CodeBuild dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][5]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_codebuild" >}}
@@ -52,13 +68,16 @@ L'intégration AWS CodeBuild n'inclut aucun événement.
 L'intégration AWS_CodeBuild n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-codebuild
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
