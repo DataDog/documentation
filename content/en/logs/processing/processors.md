@@ -44,6 +44,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 "name": "Parsing Log message",
 "is_enabled": true,
 "source": "message",
+"samples": [
+    "sample log 1",
+    "sample log 2"
+    ],
 "grok": {
     "support_rules": "<SUPPORT_RULES>",
     "match_rules":"<MATCH_RULES>"
@@ -56,7 +60,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `type`               | String           | yes      | Type of the processor.                                  |
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
-| `sources`            | Array of Strings | yes      | Name of the log attribute to parse, default: `message`. |
+| `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
+| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               | 
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
@@ -64,8 +69,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 {{% /tab %}}
 {{< /tabs >}}
 
-Up to 5 samples can be save with the Processor. 
-All samples have a status that shows `match` or `no match` which highlights if one of the parsing rule of the grok parser matches this sample or not.
+Up to 5 samples can be saved with the Processor, and each sample can be up to 5000 characters in length. 
+All samples have a status that shows `match` or `no match` which highlights if one of the parsing rules of the grok parser matches this sample or not.
 Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
@@ -529,7 +534,7 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 
 **Notes**:
 
-* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* The processor only accepts attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
