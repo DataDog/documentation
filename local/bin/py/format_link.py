@@ -315,42 +315,29 @@ def process_section(section, regex_skip_sections_start,
 
 def inline_section(file_prepared):
     """
-    Takes a prepared file and transform it into the final file that can be written back.
+    Takes a prepared file (and Array of sections prepared) and transform it into the final file that can be written back.
 
     :param file_prepared: Array of sections, where the first item is the main section, an all the other one are sub sections in order of appearance.
     :return final_text: Returns text with all sections with reference link inlined in the main section.
     """
     # inlining sections
 
-    final_text = str(file_prepared[0])
+    final_text = []
 
-    regex_section = r"({{% tab \".*?\" %}}\n(.*?){{% /tab %}})"
+    end_section_pattern = r"\s*{{% /tab %}}.*"
 
-    # taking into account that adding a section text creates an offset for the whole file
-
-    offset = 0
-    offset_current = 0
-
-    # Since we use the .end() of the section match, we need to shift to the length of the partial to inline
-    # the section content above
-    PARTIAL_LENGTH = len('{{% /tab %}}')
+    i = 1
 
     try:
-        for i, section in enumerate(re.finditer(regex_section, file_prepared[0], re.MULTILINE)):
-
-            offset = offset_current + section.end() - PARTIAL_LENGTH
-
-            # 1 is added to i since file_prepared[0] represents the main section.
-
-            final_text = final_text[:offset] + \
-                str(file_prepared[i + 1]) + final_text[offset:]
-
-            offset_current = offset_current + len(file_prepared[i + 1])
-
+        for line in file_prepared[0]:
+            if re.match(end_section_pattern, line):
+                final_text += file_prepared[i]
+                i += 1
+            final_text.append(line)
     except:
-        raise IndexError
+        raise ValueError
 
-    return final_text
+    return ''.join(final_text)
 
 
 def format_link_file(file, regex_skip_sections_start,
@@ -374,17 +361,17 @@ def format_link_file(file, regex_skip_sections_start,
 
     for section in prepared_file:
         try:
-            final_text.append(''.join(process_section(section,
-                                                      regex_skip_sections_start,
-                                                      regex_skip_sections_end)))
+            final_text.append(process_section(section,
+                                              regex_skip_sections_start,
+                                              regex_skip_sections_end))
         except:
             print(
                 '\x1b[31mERROR\x1b[0m: There was an issue processing a section for file: {}'.format(file))
             raise ValueError
 
     try:
-        file_with_references = str(inline_section(final_text))
-    except IndexError:
+        file_with_references = inline_section(final_text)
+    except ValueError:
         print(
             '\x1b[31mERROR\x1b[0m: Could not inline sections properly for file: {}'.format(file))
         raise ValueError
