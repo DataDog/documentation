@@ -32,6 +32,7 @@ external_redirect: /api/#edit-a-service-level-objective
 ## Monitor Based SLO
 
 For more information, see [Monitor SLOs][1].
+
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
     Specify up to 20 monitor IDs directly for a monitor-based SLO. You can optionally on-create-dynamically select
     monitor IDs using the following option instead:
