@@ -8,7 +8,7 @@ guides:
     desc: "Apprenez à recueillir des métriques, des traces et des logs avec plus de 350\_intégrations."
     link_text: Consulter les guides
     link: getting_started/integrations/
-  - title: Prendre en main l'application
+  - title: Débuter avec Datadog
     desc: 'Découvrez comment utiliser Datadog pour créer des dashboards, des graphiques, des monitors, et plus encore.'
     link_text: Consulter les guides
     link: getting_started/application/
