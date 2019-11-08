@@ -35,12 +35,14 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon Lex de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_lex` dans le préfixe.
+Configurez Amazon Lex de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_lex` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs Cloudwatch qui contient vos logs Amazon Lex dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Lex dans la console AWS :
 
     * [Ajouter un déclencheur manuel sur le compartiment S3][5]
     * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
@@ -50,7 +52,7 @@ Configurez Amazon Lex de façon à ce que ses logs soient envoyés vers un compa
 {{< get-metrics-from-git "amazon_lex" >}}
 
 
-### Events
+### Événements
 L'intégration Amazon Lex n'inclut aucun événement.
 
 ### Checks de service

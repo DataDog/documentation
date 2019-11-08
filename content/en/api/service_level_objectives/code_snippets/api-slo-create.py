@@ -17,8 +17,10 @@ api.ServiceLevelObjective.create(
     type="metric",
     name="Custom Metric SLO",
     description="SLO tracking custom service SLO",
-    numerator="sum:my.custom.metric{type:good}.as_count()",
-    denominator="sum:my.custom.metric{*}.as_count()",
+    query={
+        "numerator": "sum:my.custom.metric{type:good}.as_count()",
+        "denominator": "sum:my.custom.metric{*}.as_count()"
+    },
     tags=tags,
     thresholds=thresholds
 )

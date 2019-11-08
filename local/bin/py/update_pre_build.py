@@ -9,6 +9,8 @@ import platform
 import re
 import tempfile
 import shutil
+from json import JSONDecodeError
+
 import requests
 import yaml
 import pickle
@@ -859,25 +861,32 @@ class PreBuild:
             if "name" in d
         ]
         with open(file_name) as f:
-            data = json.load(f)
-            data_name = data.get("name", "").lower()
-            if data_name in [
-                k
-                for k, v in self.integration_mutations.items()
-                if v.get("action") == "merge"
-            ]:
-                data["is_public"] = False
-            if data_name in names:
-                item = [
-                    d
-                    for d in self.datafile_json
-                    if d.get("name", "").lower()
-                    == data_name
-                ]
-                if len(item) > 0:
-                    item[0].update(data)
-            else:
-                self.datafile_json.append(data)
+            try:
+                data = json.load(f)
+                data_name = data.get("name", "").lower()
+                if data_name in [
+                    k
+                    for k, v in self.integration_mutations.items()
+                    if v.get("action") == "merge"
+                ]:
+                    data["is_public"] = False
+                if data_name in names:
+                    item = [
+                        d
+                        for d in self.datafile_json
+                        if d.get("name", "").lower()
+                        == data_name
+                    ]
+                    if len(item) > 0:
+                        item[0].update(data)
+                else:
+                    self.datafile_json.append(data)
+            except JSONDecodeError:
+                print(
+                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
+                    file_name
+                  )
+                )
 
     def process_service_checks(self, file_name):
         """
@@ -935,7 +944,16 @@ class PreBuild:
         )
 
         if exists(manifest):
-            manifest_json = json.load(open(manifest))
+            try:
+                manifest_json = json.load(open(manifest))
+            except JSONDecodeError:
+                no_integration_issue = False
+                manifest_json = {}
+                print(
+                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
+                    manifest
+                  )
+                )
         else:
             no_integration_issue = False
             manifest_json = {}

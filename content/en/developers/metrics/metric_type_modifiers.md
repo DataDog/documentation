@@ -35,8 +35,6 @@ The two main in-application modifiers are `as_count()` and `as_rate()`.
 | `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
 | `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                     |
 
-**Note**: Metrics submitted from Agent based integrations do not have an interval associated to them, so the `as_count()` and `as_rate()` modifiers have no effect upon an Agent integration metric with the `RATE` in-app type.
-
 Depending on the metric type you applied them to, the behavior differs:
 
 {{< tabs >}}

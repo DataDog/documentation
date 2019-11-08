@@ -32,7 +32,7 @@ left:
     title: Clients
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
-    title: Tarif
+    title: Tarifs
   - name: solutions
     link: '#'
     title: Solutions
@@ -86,7 +86,7 @@ right:
         title: Offres d'emploi
       - name: about_analyst
         link: 'https://www.datadoghq.com/about/analyst/'
-        title: Rapports d'analyse
+        title: Rapports d'analystes
       - name: about_investors
         link: 'https://investors.datadoghq.com/'
         title: Relations avec les investisseurs

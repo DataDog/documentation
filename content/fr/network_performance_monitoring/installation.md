@@ -7,15 +7,15 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: Blog
     text: Surveillance des performances réseau
-  - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
-    tag: Blog
-    text: "Monitoring 101\_: définir des alertes pertinentes"
+  - link: /integrations/snmp
+    tag: Documentation
+    text: Intégration SNMP
 ---
 <div class="alert alert-warning">
 Cette fonctionnalité est actuellement en version bêta : pour y accéder, remplissez le <a href="https://app.datadoghq.com/network/2019signup">formulaire de demande d'accès à l'outil de surveillance des performances réseau de Datadog</a>.
 </div>
 
-La surveillance des performances réseau nécessite la version 6.13+ de l'Agent Datadog ainsi que la version 4.4.0+ du kernel Linux pour bénéficier de la prise en charge d'eBPF. Les plates-formes suivantes sont prises en charge :
+La surveillance des performances réseau nécessite la version 6.13+ de l'Agent Datadog. Ce produit étant basé sur eBPF, une version 4.4.0+ du kernel Linux est également requise. Les plates-formes suivantes sont prises en charge :
 
 * Ubuntu 16.04+
 * Debian 9+
@@ -23,11 +23,17 @@ La surveillance des performances réseau nécessite la version 6.13+ de l'Agent 
 * SUSE 15+
 * CentOS/RHEL 7.6+
 
-**Remarque** : Windows et macOS ne sont pas pris en charge.
+**Remarque** : Windows et macOS n'étant pas compatibles avec eBPF, ces deux plates-formes ne sont pas prises en charge.
+
+Les systèmes de provisionnement suivants sont pris en charge :
+
+* Daemonset/Helm : voir le [chart Helm Datadog][1]
+* Chef : voir la [recette Chef pour Datadog][2]
+* Ansible
 
 ## Implémentation
 
-Pour activer la surveillance des performances réseau, configurez-la dans le [fichier de configuration principal de votre Agent][1] en fonction de la configuration de votre système :
+Pour activer la surveillance des performances réseau, configurez-la dans le [fichier de configuration principal de votre Agent][3] en fonction de la configuration de votre système :
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -177,4 +183,7 @@ Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
+[2]: https://github.com/DataDog/chef-datadog
+[3]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file

@@ -588,11 +588,11 @@ main:
     weight: 7
     parent: alerting
     identifier: slos
-  - name: SLO pour un monitor
+  - name: SLO basé sur des monitors
     url: monitors/service_level_objectives/monitor/
     parent: slos
     weight: 7.1
-  - name: SLO pour un événement
+  - name: SLO basé sur des événements
     url: monitors/service_level_objectives/event/
     parent: slos
     weight: 7.2
@@ -669,30 +669,34 @@ main:
     parent: tracing
     identifier: tracing_advanced
     weight: 3
+  - name: Recherche de traces
+    url: tracing/advanced/search/
+    parent: tracing_advanced
+    weight: 301
   - name: Associer vos logs à vos traces
     url: tracing/advanced/connect_logs_and_traces/
     parent: tracing_advanced
-    weight: 301
+    weight: 302
   - name: Ajouter des tags de span
     url: tracing/advanced/adding_metadata_to_spans/
     parent: tracing_advanced
-    weight: 302
+    weight: 303
   - name: Métriques d'exécution
     url: tracing/advanced/runtime_metrics/
     parent: tracing_advanced
-    weight: 303
+    weight: 304
   - name: OpenTracing
     url: tracing/advanced/opentracing/
     parent: tracing_advanced
-    weight: 304
+    weight: 305
   - name: Instrumentation manuelle
     url: tracing/advanced/manual_instrumentation/
     parent: tracing_advanced
-    weight: 305
+    weight: 306
   - name: Configurer les tags primaires
     url: tracing/advanced/setting_primary_tags_to_scope/
     parent: tracing_advanced
-    weight: 306
+    weight: 307
   - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
@@ -718,26 +722,22 @@ main:
     url: tracing/visualization/services_map/
     parent: tracing_vis
     weight: 405
-  - name: Analyse et recherche de traces
-    url: tracing/trace_search_and_analytics/
+  - name: App Analytics
+    url: tracing/app_analytics/
     parent: tracing
-    identifier: tracing_search_analytics
+    identifier: app_analytics
     weight: 5
   - name: Configuration de l'Agent
-    url: tracing/trace_search_and_analytics/agent_trace_search/
-    parent: tracing_search_analytics
+    url: tracing/app_analytics/agent_trace_search/
+    parent: app_analytics
     weight: 501
-  - name: Recherche de traces
-    url: tracing/trace_search_and_analytics/search/
-    parent: tracing_search_analytics
-    weight: 502
-  - name: Analyse de traces
-    url: tracing/trace_search_and_analytics/analytics/
-    parent: tracing_search_analytics
+  - name: Visualiser les analyses
+    url: tracing/app_analytics/analytics/
+    parent: app_analytics
     weight: 503
   - name: Monitors
-    url: monitors/monitor_types/trace_analytics
-    parent: tracing_search_analytics
+    url: monitors/monitor_types/apm/
+    parent: app_analytics
     weight: 504
   - name: Guides
     url: tracing/guide/

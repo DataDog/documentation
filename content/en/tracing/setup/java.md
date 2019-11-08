@@ -80,13 +80,13 @@ Beta integrations are disabled by default but can be enabled individually.
 | Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration) |
 |------------------------------|------------|-----------------|------------------------------------------------|
 | Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
-| Grizzly                      | 2.0+       | Fully Supported | `grizzly`                                      |
+| Grizzly                      | 2.0+       | [Beta][8]       | `grizzly`                                      |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)          | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Play                         | 2.4-2.7    | Fully Supported | `play`                                         |
-| Ratpack                      | 1.4+       | [Beta][8]       | `ratpack`                                      |
+| Ratpack                      | 1.4+       | Fully Supported | `ratpack`                                      |
 | Spark Java                   | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                               |
@@ -94,12 +94,11 @@ Beta integrations are disabled by default but can be enabled individually.
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
-Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
+Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
-Grizzly Instrumentation is disabled by default. Add one of the following configurations to enable it:
-
-* System Property: `dd.jmxfetch.grizzly.enabled=true`
-* Environment Variable: `DD_JMXFETCH_GRIZZLY_ENABLED=true`
+Beta Instrumentation is disabled by default. Add one of the following configurations to enable it:
+* System Property: `-Ddd.integration.<integration-name>.enabled=true`
+* Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 
@@ -122,6 +121,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Play WSClient            | 1.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
@@ -139,7 +139,6 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
 | Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
-| Hibernate               | 3.5+     | Fully Supported | `hibernate`                                                                              |
 | JDBC                    | N/A      | Fully Supported | `jdbc`                                                                                   |
 | Jedis                   | 1.4+     | Fully Supported | `redis`                                                                                  |
 | Lettuce                 | 5.0+     | Fully Supported | `lettuce`                                                                                |
@@ -169,12 +168,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework        | Versions | Support Type    | Instrumentation Names (used for configuration) |
 |------------------|----------|-----------------|------------------------------------------------|
-| Slf4J MDC        | 1+       | Fully Supported | `mdc` (See also `dd.logs.injection` config)    |
-| JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
 | Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| Hibernate        | 3.5+     | Fully Supported | `hibernate`                                    |
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
-| Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
+| JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
+| Slf4J MDC        | 1+       | Fully Supported | `mdc` (See also `dd.logs.injection` config)    |
 | Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
+| Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
 
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 

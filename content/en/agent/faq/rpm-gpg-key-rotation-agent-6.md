@@ -86,7 +86,7 @@ gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
 
 **Note**: This method doesn't work on SUSE-based systems. [Use the import command instead](#import-command).
 
-[1]: https://yum.datadoghq.com/
+[1]: https://yum.datadoghq.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/chef-datadog
 [4]: https://github.com/DataDog/ansible-datadog
