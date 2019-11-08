@@ -33,7 +33,7 @@ Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Managem
 
 * The Datadog Agent must be configured to submit logs to `tcp-encrypted-intake.logs.datadoghq.com`
 * The Datadog [log collection AWS Lambda function][5] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable as well as setting `DD_USE_TCP` to `true`
-* The [GCP push forwarder][] must be configured to submit logs to `gcp-encrypted-intake.logs.datadoghq.com`
+* The [GCP push forwarder][7] must be configured to submit logs to `gcp-encrypted-intake.logs.datadoghq.com`
 * Other log sources besides the Datadog Agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
 
 The following sample configuration can be used with the Datadog Agent to submit logs to a HIPAA-ready endpoint directly (i.e. without a proxy):
