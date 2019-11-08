@@ -1,11 +1,16 @@
 ---
 title: Is there an alternative to DogStatsD and the API to submit metrics? Threadstats.
 kind: faq
+further_reading:
+- link: "https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/"
+  tag: "Github"
+  text: "Threadstats Source code"
+- link: "http://datadogpy.readthedocs.org/en/latest/#datadog-threadstats-module"
+  tag: "Read The Doc"
+  text: "Threadstats Documentation"
 ---
 
-There is an alternative, but it's **only in Python**.
-
-Threadstats comes with our Python [datadogpy library][1] that includes:
+There is an alternative, but it's **only in Python**. Threadstats comes with Datadog Python [datadogpy library][1] that includes:
 
 1. API, a Python wrapper around [Datadog's API][2]
 2. Dogshell, that makes it possible to make direct and simple API calls with "dog" shell commands as soon as you have installed datadogpy on your machine
@@ -32,11 +37,29 @@ Threadstats is good for you if...
 2. You don't want to install the Datadog Agent
 3. Or you want more flexibility than DogStatsD has to offer; for instance, you want to send metrics with timestamps
 
-## References
+## Threadstats variations with DogStatsD
 
-Documentation: http://datadogpy.readthedocs.org/en/latest/#datadog-threadstats-module
+As in [DogStatsD](/developers/dogstatsd), Threadstats performs data aggregation for performance reasons.
 
-Source code: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/
+### Variations
+
+* The main difference is that metrics received by Threadstats may already have a timestamp
+* Metrics are not aggregated via a centralized server, but they are aggregated and flushed in a Python thread of your script. So you'll get a per-script aggregation instead of a per host aggregation
+
+To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll-up interval.
+
+* The flush interval defines the time interval between two consecutive {data aggregation + data submission}.
+* The roll up interval defines the data granularity after aggregation.
+
+### Example with flush_interval=10 and roll_up_interval=5
+
+For instance, during the flush interval of 10 seconds (between 10:00:00 and 10:00:10), Threadstats receives 5 datapoints for the same metric name (a counter) and same tags, with {timestamps, values} being:
+
+1. {09:30:15, 1}, {10:00:00, 2}, {10:00:04,1}, {10:00:05,1}, {10:00:09,1} # 1- original datapoints
+2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
+3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
+
+For more information, see the [Threadstats aggregation](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py) documentation.
 
 ## Tips
 
@@ -50,6 +73,10 @@ Source code: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstat
 
 * Datadog doesn't accept data too far in the past or future; timestamps should not be more than 10 minutes in the future or more than 1 hour in the past.
 * If you submit a datapoint during a flush interval, and then you submit a datapoint with same metric name and timestamp in another flush, only the last datapoint is stored in Datadog. If histogram data (with same timestamp) is expected to arrive at a different time for instance, Datadog strongly recommends using a large flush interval to capture them in the same flush.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadogpy/tree/master/datadog
 [2]: /api
