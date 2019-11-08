@@ -1,5 +1,5 @@
 ---
-title: Watchdog monitor
+title: Watchdog Monitor
 kind: documentation
 description: "Algorithmically detects application and infrastructure issues."
 further_reading:
@@ -13,57 +13,54 @@ further_reading:
 
 ## Overview
 
-[Watchdog][1] is an algorithmic feature for APM that automatically detects application and infrastructure issues, by continuously observing trends and patterns in application metrics—like error rate, request rate, and latency—and looking for unexpected behavior. 
-
-Watchdog monitors allow you to set up monitors and receive alert notifications when Watchdog detects a potential problem in your systems.
+[Watchdog][1] is an algorithmic feature for APM that automatically detects application and infrastructure issues, by continuously observing trends and patterns in application metrics looking for atypical behavior. 
 
 **Note**: Watchdog is an APM feature, and Watchdog monitors are only available to APM customers.
 
-## Creating a Watchdog Monitor
-* Choose "Watchdog" on the [New Monitor][2] page.
+## Monitor creation
 
-* The graph at the top of the [Create Monitor][3] page shows the number of Watchdog events over time, along with a list of events.
+To create a [Watchdog monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Watchdog*.
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-create-top.png" alt="Watchdog" responsive="true" style="width:80%;">}}
+### Select story type
 
-* Select what type of story you want your monitor to be based on: Service or Infrastructure
+In this section, choose between an **APM** or **Infrastructure** story:
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-1.png" alt="Select story type" responsive="true" style="width:80%;">}}
+{{< tabs >}}
+{{% tab "APM" %}}
 
-* If you've chosen a Service story, select the sources you want to be alerted on.
+An APM story is created when Watchdog detects anomalous behavior on your system’s services or their child resources.
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-2.png" alt="Select sources" responsive="true" style="width:80%;">}}
+### Select sources
 
-* Configure your notification message. You can use [template variables][4] to customize your message.
+Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-3.png" alt="Say what's happening" responsive="true" style="width:80%;">}}
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
 
-Choosing the “Include triggering tags in notification title” option appends the service name, resource name, and primary tag (e.g. availability-zone) to the title.
+[1]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[2]: /tracing/visualization/service
+[3]: /tracing/visualization/resource
+{{% /tab %}}
+{{% tab "Infrastructure" %}}
 
-* Configure the recipients of your notification.
+Infrastructure-wide stories include network degradations detected in your cloud provider’s regions.
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-4.png" alt="Notify your team" responsive="true" style="width:80%;">}}
+After selecting Infrastructure, the graph at the top of the monitor creation page displays Watchdog events over time, along with a list of events.
 
-## Template variables in notifications
+### Select sources
 
-* `{{event.id}}`: ID of the event
-* `{{event.title}}`: Title of the event, which also provides story details
+No selection is necessary. You are notified when Watchdog detects issues across your infrastructure.
 
-## Watchdog Alerts
+{{% /tab %}}
+{{< /tabs >}}
 
-Watchdog monitors appear in the [Manage Monitors][5] page, as well as in the [Triggered Monitors][6] page, when you filter for monitors with the type “Watchdog”.
+### Notifications
 
-Once you receive an alert, you can see more information about the underlying Watchdog story that triggered the alert by scrolling down the [Triggered Monitors][6] page to the events section and clicking on the details link.
-
-{{< img src="monitors/monitor_types/watchdog/wmonitor-triggered.png" alt="Events" responsive="true" style="width:80%;">}}
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /watchdog
-[2]: https://app.datadoghq.com/monitors#/create
-[3]: https://app.datadoghq.com/monitors#create/watchdog
-[4]: /monitors/notifications/?tab=is_alertis_warning#variables
-[5]: https://app.datadoghq.com/monitors/manage
-[6]: https://app.datadoghq.com/monitors/triggered
+[2]: https://app.datadoghq.com/monitors#create/watchdog
+[3]: /monitors/notifications
