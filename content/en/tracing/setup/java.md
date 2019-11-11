@@ -121,7 +121,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
-| Play WSClient            | 1.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
