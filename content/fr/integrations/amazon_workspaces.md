@@ -57,7 +57,7 @@ Configurez Amazon WorkSpaces de façon à ce que ses logs soient envoyés vers u
 
 Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
-### Events
+### Événements
 L'intégration AWS WorkSpaces n'inclut aucun événement.
 
 ### Checks de service

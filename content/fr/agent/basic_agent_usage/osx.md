@@ -20,11 +20,9 @@ further_reading:
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour macOS. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
-Contrairement aux autres Agents, l'Agent Datadog pour macOS n'intègre pas la fonctionnalité de gestion des traces par défaut. Cette fonctionnalité peut être installée séparément en suivant les [instructions fournies dans le référentiel GitHub de l'Agent][2].
-
 Par défaut, l'Agent est installé dans une sandbox à l'emplacement `/opt/datadog-agent`. Vous pouvez déplacer ce dossier où vous le souhaitez. Toutefois, cette documentation part du principe que l'emplacement d'installation par défaut est utilisé.
 
-**Remarque** : macOS 10.12 et versions ultérieures sont prises en charge par l'Agent v6. macOS 10.10 et versions ultérieures sont prises en charge par l'Agent v5.
+**Remarque** : macOS 10.12 et les versions ultérieures sont prises en charge par l'Agent v6. macOS 10.10 et les versions ultérieures sont prises en charge par l'Agent v5.
 
 ## Commandes
 
@@ -46,7 +44,7 @@ Dans l'Agent v6, le gestionnaire de service `launchctl` fourni par le système 
 
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 | Description                        | Commande                            |
 | ---------------------------------- | ---------------------------------- |
@@ -77,7 +75,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 [1]: /fr/integrations
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
@@ -94,19 +92,18 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][3].
+[Consultez la documentation relative au dépannage de l'Agent][2].
 
 ## Utilisation de l'Agent intégré
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][4].
+Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][3].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/trace-agent/README.md#run-on-macos
-[3]: /fr/agent/troubleshooting
-[4]: /fr/developers/guide/custom-python-package
+[2]: /fr/agent/troubleshooting
+[3]: /fr/developers/guide/custom-python-package

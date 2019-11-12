@@ -13,7 +13,7 @@ kind: faq
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent. 
 
-For more information, see the [Pricing page][4].
+For more information, see the [Pricing page][5].
 
 ## Sample Deployment Scenarios
 
@@ -84,7 +84,7 @@ A [host][10] is a physical or virtual operating system instance. Datadog records
 
 **2. How is billing calculated if I deploy one agent per container?**
 
-It is recommended to [setup running][8] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (No. of containers)
+It is recommended to [setup running][9] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (No. of containers)
 
 **3. What happens to my bill if I have to suddenly scale my environment?**
 
@@ -106,7 +106,7 @@ No. App Analytics is an additional functionality available along with APM which 
 
 ## Further Reading
   
-{{< whatsnext>}}
+{{< whatsnext >}}
     {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usage{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
