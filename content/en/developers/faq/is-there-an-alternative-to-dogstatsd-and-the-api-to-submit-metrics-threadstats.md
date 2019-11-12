@@ -10,7 +10,7 @@ further_reading:
   text: "Threadstats Documentation"
 ---
 
-There is an alternative, but it's **only in Python**. Threadstats comes with Datadog Python [datadogpy library][1] that includes:
+There is an alternative, but it is **only in Python**. Threadstats comes with the [Datadog Python Library][1] and includes:
 
 1. API, a Python wrapper around [Datadog's API][2]
 2. Dogshell, that makes it possible to make direct and simple API calls with "dog" shell commands as soon as you have installed datadogpy on your machine
@@ -43,8 +43,8 @@ As in [DogStatsD](/developers/dogstatsd), Threadstats performs data aggregation 
 
 ### Variations
 
-* The main difference is that metrics received by Threadstats may already have a timestamp
-* Metrics are not aggregated via a centralized server, but they are aggregated and flushed in a Python thread of your script. So you'll get a per-script aggregation instead of a per host aggregation
+* Unlike with DogStatsD, metrics received by Threadstats may already have timestamps.
+* Metrics are not aggregated via a centralized server; rather, they are aggregated and flushed in a Python thread in your script. Thus, aggregation is per script rather than per host.
 
 To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll-up interval.
 
@@ -53,11 +53,15 @@ To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll
 
 ### Example with flush_interval=10 and roll_up_interval=5
 
-For instance, during the flush interval of 10 seconds (between 10:00:00 and 10:00:10), Threadstats receives 5 datapoints for the same metric name (a counter) and same tags, with {timestamps, values} being:
+Consider an instance where, during a flush interval of 10 seconds (between 10:00:00 and 10:00:10), Threadstats receives 5 datapoints for the same metric name (a counter) and same tags, with the following {`timestamp`, `value`} pairs:
 
-1. {09:30:15, 1}, {10:00:00, 2}, {10:00:04,1}, {10:00:05,1}, {10:00:09,1} # 1- original datapoints
-2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
-3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
+`{09:30:15, 1}, {10:00:00, 2}, {10:00:04,1}, {10:00:05,1}, {10:00:09,1} `
+Next, every datapoint in the same `roll_up_interval` (5 seconds) gets the same timestamp:
+
+`{09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1}`
+
+Finally, data is aggregated by timestamp. The following 4 values are then submitted to Datadog: 
+`{09:30:10, 1}, {10:00:00, 3}, {10:00:05,2}`
 
 For more information, see the [Threadstats aggregation](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py) documentation.
 
