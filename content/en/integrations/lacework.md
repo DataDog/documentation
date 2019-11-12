@@ -32,17 +32,18 @@ This is a *push integration* which means that Lacework pushes logs/events to Dat
 
         | Datadog Type     | Description                                           |
         |------------------|-------------------------------------------------------|
-        | `Logs Details`   | Sends Lacework detailed logs to Datadog logs platform |
-        | `Logs Summary`   | Sends Lacework summary to Datadog logs platform       |
-        | `Events Summary` | Sends Lacework summary to Datadog Events platform     |
+        | `Logs Details`   | Sends Lacework detailed logs to Datadog logs platform. |
+        | `Logs Summary`   | Sends Lacework summary to Datadog logs platform.       |
+        | `Events Summary` | Sends Lacework summary to Datadog Events platform.     |
 
     * **Datadog Site**:
         * Select `com` if you use Datadog US region.
         * Select `eu` if you use Datadog EU region.
     * **API KEY**: Enter your Datadog API key.
-    * **Alert Security Level**: Select the minimum log severity level to forward.
+    * **Alert Security Level**: Select the minimum log severity level of forwarded logs.
 
 ## Troubleshooting
 
 Need help? Contact [Datadog support][1].
+
 [1]: /help
