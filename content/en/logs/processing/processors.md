@@ -49,8 +49,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
     "sample log 2"
     ],
 "grok": {
-    "support_rules": "<SUPPORT_RULES>",
-    "match_rules":"<MATCH_RULES>"
+    "support_rules": "<SUPPORT_RULES>",
+    "match_rules": "<MATCH_RULES>"
     }
 }
 ```
