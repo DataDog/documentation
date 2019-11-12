@@ -1,4 +1,5 @@
 heading: Datadog ドキュメントへようこそ！
+
 guides:
   - title: エージェントをインストール
     desc: ホストからイベントおよびメトリクスを収集し、Datadog に送信します。
@@ -14,59 +15,59 @@ guides:
     link: getting_started/application/
 nav_sections:
   - nav_section:
-  - name: プラットフォーム
-      - navtiles:
-        - title: エージェント
-          link: agent/
-          icon: agent.svg
-          desc: Datadog のエージェントをインストールして構成し、データを収集、送信
-        - title: インテグレーション
-          link: integrations/
-          icon: integration.svg
-          desc: 'システム、アプリケーション、サービスからデータを収集'
-        - title: "ダッシュボード  "
-          link: graphing/dashboards/
-          icon: dashboard.svg
-          desc: データを可視化して詳細な情報を把握
-        - title: アラート設定
-          link: monitors/
-          icon: attention-circled.svg
-          desc: モニターおよび通知の作成と管理
-        - title: APM と分散型トレーシング
-          link: tracing/
-          icon: trace.svg
-          desc: アプリケーションのパフォーマンスを詳しく理解
-        - title: ログ管理
-          link: logs/
-          icon: logs.svg
-          desc: 'ログの収集、処理、確認、監視、アーカイブ'
-        - title: Synthetics
-          link: synthetics/
-          icon: synthetics.svg
-          desc: 'アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡'
-        - title: Watchdog
-          link: watchdog/
-          icon: watchdog.svg
-          desc: アプリケーションのメトリクスについて傾向を自動的に表示
+    - name: プラットフォーム
+    - navtiles:
+      - title: エージェント
+        link: agent/
+        icon: agent.svg
+        desc: Datadog のエージェントをインストールして構成し、データを収集、送信
+      - title: インテグレーション
+        link: integrations/
+        icon: integration.svg
+        desc: 'システム、アプリケーション、サービスからデータを収集'
+      - title: "ダッシュボード  "
+        link: graphing/dashboards/
+        icon: dashboard.svg
+        desc: データを可視化して詳細な情報を把握
+      - title: アラート設定
+        link: monitors/
+        icon: attention-circled.svg
+        desc: モニターおよび通知の作成と管理
+      - title: APM と分散型トレーシング
+        link: tracing/
+        icon: trace.svg
+        desc: アプリケーションのパフォーマンスを詳しく理解
+      - title: ログ管理
+        link: logs/
+        icon: logs.svg
+        desc: 'ログの収集、処理、確認、監視、アーカイブ'
+      - title: Synthetics
+        link: synthetics/
+        icon: synthetics.svg
+        desc: 'アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡'
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog.svg
+        desc: アプリケーションのメトリクスについて傾向を自動的に表示
   - nav_section:
-      - name: コンフィギュレーション
-      - navtiles:
-          - title: API
-            link: api/
-            icon: code.svg
-            desc: Datadog API の使用
-          - title: アカウントの管理
-            link: account_management/
-            icon: cog.svg
-            desc: アカウント設定の管理
-          - title: セキュリティ
-            link: security/
-            icon: lock.svg
-            desc: Datadog のデータ保護方法について
-          - title: 開発ツール
-            link: developers/
-            icon: wrench.svg
-            desc: Datadog プラットフォームの開発
+    - name: コンフィギュレーション
+    - navtiles:
+      - title: API
+        link: api/
+        icon: code.svg
+        desc: Datadog API の使用
+      - title: アカウントの管理
+        link: account_management/
+        icon: cog.svg
+        desc: アカウント設定の管理
+      - title: セキュリティ
+        link: security/
+        icon: lock.svg
+        desc: Datadog のデータ保護方法について
+      - title: 開発ツール
+        link: developers/
+        icon: wrench.svg
+        desc: Datadog プラットフォームの開発
 popular_searches:
   - title: API ドキュメント
     link: api/
