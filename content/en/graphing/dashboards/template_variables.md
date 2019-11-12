@@ -16,7 +16,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-Template variables allow you to dynamically apply specific metric values to one or more widgets in each dashboard. 
+Template variables allow you to dynamically apply specific metric or log values to one or more widgets in each dashboard. 
 
 ## Add a Template Variable
 
