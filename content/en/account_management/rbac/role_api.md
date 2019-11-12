@@ -338,6 +338,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
             "display_type": "other",
             "uuid": "$PERMISSION_UUID"
@@ -383,6 +384,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
             "display_type": "other",
             "uuid": "<PERMISSION_UUID>"
@@ -436,6 +438,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
             "display_type": "other",
             "uuid": "<PERMISSION_UUID>"
@@ -489,6 +492,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a read metric",
             "name": "logs_metrics_read",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
             "display_type": "other",
             "uuid": "$DIFFERENT_PERMISSION_UUID"
