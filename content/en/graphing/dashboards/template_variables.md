@@ -40,7 +40,7 @@ Once created, notice that you have statistics upon your template variables usage
 
 Decide if you want to remove/add this template variable to all of your graph widgets with the respective **Remove From All** and **Add to All** buttons.
 
-#### Template variables with logs and APM queries
+### Template variables with logs and APM queries
 
 Template variables work with log and APM query based widgets because metrics, logs, and APM share the same tags.
 Additionally, you can define log or APM template variables based on [log][2] or APM facets. These template variables start with `@`.
@@ -49,20 +49,20 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 **Note**: Using the `Add to all` button adds the template variable to all log/APM widgets.
 
-#### Template Variable Saved Views
+### Template Variable Saved Views
 
-##### Creating a Saved View of Template Variables
+#### Creating a Saved View of Template Variables
 
 {{< img src="graphing/dashboards/template_variables/default_view.png" alt="Image Description" responsive="true" style="width:100%;">}}
 
 To the left of the template variables on a dashboard, there is a dropdown listed as “(Default Value)”. When you make a change to a template variable value, the value is not automatically saved to a View. 
 To save the current values of the template variables in a View, click on the dropdown menu and click “Save selections as view”. From there, you will be prompted to enter a unique name for the View. After saving, this View will be listed in the dropdown menu. By clicking on this View you can return to the template variables' previously saved values. 
 
-##### Delete a Saved View
+#### Delete a Saved View
 
 To delete a View, click on the dropdown again and click “Manage views...”. From there, a popup with each of the saved Views will be displayed with the trash bin icon next to each for deletion. Click the trash bin icon to delete that View.
 
-##### Modify a Saved View
+#### Modify a Saved View
 
 {{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Image Description" responsive="true" style="width:100%;">}}
 
