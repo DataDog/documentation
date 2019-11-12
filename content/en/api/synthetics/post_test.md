@@ -2,7 +2,7 @@
 title: Create a test
 type: apicontent
 order: 31.1
-external_redirect: /api/#create-tests
+external_redirect: /api/#create-a-test
 ---
 
 ## Create a test
