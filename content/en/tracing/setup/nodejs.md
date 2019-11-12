@@ -126,6 +126,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                 | Versions | Support Type    | Notes                                            |
 |------------------------|----------|-----------------|--------------------------------------------------|
 | [cassandra-driver][24] | `>=3`    | Fully Supported |                                                  |
+| [couchbase][49]        | `^2.4.2` | Fully Supported |                                                  |
 | [elasticsearch][25]    | `>=10`   | Fully Supported | Supports `@elastic/elasticsearch` versions `>=5` |
 | [ioredis][26]          | `>=2`    | Fully Supported |                                                  |
 | [knex][27]             | `>=0.8`  | Fully Supported | This integration is only for context propagation |
@@ -218,3 +219,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [46]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [47]: http://getpino.io
 [48]: https://github.com/winstonjs/winston
+[49]: https://github.com/couchbase/couchnode
