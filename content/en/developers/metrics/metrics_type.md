@@ -18,9 +18,7 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-Each metric submitted to Datadog has a “Metric Type.” This Metric Type affects how [Metric Type modifiers][1] and functions interact with data when queried and graphed, and can affect how the data is handled when ingested via the Agent and DogstatsD.
-
-A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. It is updated (i.e. modified) when Datadog receives that data for that metric with a different type than it had previously, or when modified in the Metric Summary page. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors - it should be done deliberately and with care, and only if necessary.
+Each metric submitted to Datadog has a “Metric Type.” This Metric Type affects how the metric is stored, queried and graphed, as well as how the metric interacts with additional [Metric Type modifiers][1] and functions.
 
 ## Metric Types: Storage vs. Submission
 
@@ -40,32 +38,30 @@ When we receive data, we map the submitted metric type to one of three in-app **
 * `RATE`
 * `GAUGE`
 
-We'll go into detail about this mapping after discussing the types themselves.
+A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. The metric type can be modified in this side panel; however, this should be done deliberately with care and only if necessary. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors.
 
 ## Submission Method
 
 Data is submitted to Datadog in three main ways:
 
-* [Agent Check][5]
+* [Agent Check][5] 
 * [DogStatsD][4]
 * [Datadog API][3]
 
-Most data we receive arrives via the Agent. For data submitted through an Agent Check, or via DogstatsD, aggregation will occur when multiple points arrive in a short timeframe (i.e., in one interval). The Agent will combine values that belong in the same time series (i.e. those with identical tags) together before sending a single representative value to Datadog for that interval. This combined value is what we then store, with a single timestamp. How this occurs varies by Metric Type - we'll dig in more below.
+Most data we receive is submitted via the Agent. For data submitted through an Agent Check or DogstatsD, aggregation will occur when multiple points arrive in a short time interval. During that time interval, the Agent will combine values that belong in the same time series (i.e. values with identical tags) and send a single representative value for that interval. This combined value is stored with a single timestamp. The way values are combined/aggregated varies depending on metric type.
 
-In contrast, data submitted directly to our API is not aggregated by Datadog before storage (except in the case of Distributions). The values sent to Datadog are stored as-is, and the Metric Type is updated if necessary.
+Data submitted directly to our API is not aggregated by Datadog before storage (except in the case of Distributions). The raw values sent to Datadog are stored as-is. 
 
-Let's examine how each Metric Type is aggregated before it's stored. Remember, this won't generally occur for API submissions.
-
-
-### Metric Aggregation Before Storage, By Type
+### Metric Submission Types
+This table discusses each Metric Submission Type (via Agent or DogStatsD) and how it's aggregated before being mapped into in-app Metric Type. Note, no aggregation occurs for API metric submissions.
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
 
-**A `COUNT` represents the total sum of the values submitted in one interval.** A `COUNT` is used to add up the number of occurences of something in that time - total connections made to a database, or the number of requests to an endpoint, for example. This number can accumulate or decrease over time - it is not monotonically increasing.
+**The `COUNT` metric submission type represents the total number of event that occur in one time interval.** A `COUNT` is used to add up the values of something in that time- total connections made to a database, or the total number of requests to an endpoint, for example. This number can accumulate or decrease over time - it is not monotonically increasing.
 
-For example, suppose a webserver is running the Datadog Agent, tracking the number HTTP requests received as a `COUNT` metric. This webserver receives:
+For example, suppose a webserver is running the Datadog Agent, and you're tracking the number of HTTP requests received as a `COUNT` metric. This webserver receives:
 
 * `30` requests in the first 10 seconds
 * `70` requests in the second interval of 10 seconds
@@ -74,8 +70,8 @@ For example, suppose a webserver is running the Datadog Agent, tracking the numb
 The Agent then simply reports the following values:
 
 * `30` for the first 10 seconds
-* `70` for the next 10 seconds
-* `50` for the final 10 seconds
+* `70` for the second interval of 10 seconds
+* `50` for the third interval of 10 seconds
 
 When graphed, this `COUNT` metric looks like the following:
 
@@ -95,11 +91,11 @@ Discover how to submit count metrics:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-**A `RATE` metric represents the frequency at which something occurs, per second.** A `RATE` is used to track how often something is happening - this could be the frequency of connections made to a database, or the flow of requests made to an endpoint.
+**The `RATE` metric submission type represents the total number of event occurences per second.** A `RATE` is used to track how often something is happening - the frequency of connections made to a database, or the flow of requests made to an endpoint.
 
-To get this value, the Agent sums the values received in one interval, then divides by the length of that interval, yielding a value per unit time.
+The Agent sums the values received in one time interval, then divides by the length of that time interval, yielding a value per unit time.
 
-For example, suppose a webserver is running the Datadog Agent, tracking the number HTTP requests received as a `RATE` metric. This webserver receives:
+For example, suppose a webserver is running the Datadog Agent, and you're tracking the number of HTTP requests received as a `RATE` metric. This webserver receives:
 
 * `30` requests in the first 10 seconds
 * `70` requests in the second interval of 10 seconds
@@ -108,8 +104,8 @@ For example, suppose a webserver is running the Datadog Agent, tracking the numb
 The Agent sums up the requests received in a given interval, then divides by the length of that interval. The Agent then reports the following normalized per-second values:
 
 * `3` for the first 10 seconds
-* `7` for the next 10 seconds
-* `5` for the final 10 seconds
+* `7` for the second interval of 10 seconds
+* `5` for the the third interval of 10 seconds
 
 When graphed, this `RATE` metric looks like the following:
 
@@ -125,21 +121,21 @@ Discover how to submit rate metrics:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-**A `GAUGE` metric is a single value summarizing an entire interval.**  A `GAUGE` is a representative snapshot for that period of time. The last value submitted to the Agent during a given interval **is** the value of the metric at that time - no summing, averaging, or aggregation occurs to the data in that interval before storage.
+**The `GAUGE` metric submission type represents a snapshot of one time interval.**  This representative snapshot value is the last value submitted to the Agent during the time interval.
 
-`GAUGE` metrics are ideal for taking a measure of something. Suppose a webserver is running the Datadog agent, tracking the latency of each request in milliseconds. If each request has a latency of 300ms, checking request latency three times in one interval should not report 900ms - a `GAUGE` would correctly report 300ms.
+`GAUGE` metrics are ideal for taking a measure of something reporting continuously. Suppose a webserver is running the Datadog agent, tracking the request latency in milliseconds. If each request has a latency of 300ms, checking request latency three times in one time interval should not report 900ms - the `GAUGE` would report 300ms.
 
- For example, during each 10 second interval, suppose the Agent receives the following latency values from the webserver:
+ For example, suppose the Agent receives the following latency values during each 10 second interval from the webserver:
 
-* `429, 455, and 437` during the first 10 seconds
-* `377 and 344` during the second interval of 10 seconds
-* `822, 400, and 596` during the last interval of 30 seconds
+* `429, 455, and 437` in the first 10 seconds
+* `377 and 344` in the second interval of 10 seconds
+* `822, 400, and 596` in the third interval of 10 seconds
 
-The Agent then reports only the final value seen in each interval:
+The Agent reports only the final value seen in each interval:
 
 * `437` for the first 10 seconds
-* `344` for the next 10 seconds
-* `596` for the final 10 seconds
+* `344` for the the second interval of 10 seconds
+* `596` for the the third interval of 10 seconds
 
 When graphed, this `GAUGE` metric looks like the following:
 
@@ -158,24 +154,25 @@ Discover how to submit gauge metrics:
 <!--
 {{% tab "HISTOGRAM" %}}
 
-**The `HISTOGRAM` metric submission type allows you to measure the statistical distribution of a set of values**. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates (on the Agent-side) the values that are sent during a defined time interval (the default flush interval is 10s) and produces different timeseries representing the different aggregations possible for the set of values. Depending on the aggregation, the metric type stored by Datadog is different.
+**The `HISTOGRAM` metric submission type represents a statistical distribution calculated at the Agent of a set of values in one time interval**. `HISTOGRAM` is stored in-app as 5 different timeseries representing the distribution of the set of values in that time interval. It is an extension of the [StatsD timing metric type][1]. A `HISTOGRAM` can be used to represent response time on a host or total event duration on a host.
 
-For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following timeseries are produced by the Agent by default:
+For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during one time interval, the Agent aggregates the set of values to produce the following 5 representative timeseries by default:
 
-| Aggregation                  | Description                                                                                                                                               | Datadog Metric Type |
+| Aggregation                  | Description                                                                                                                                               | Datadog In-App Metric Type |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
-| `<METRIC_NAME>.count`        | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
-| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                                                                                           | GAUGE               |
-| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
-| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
+| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values in the time interval.                                                                                      | GAUGE               |
+| `<METRIC_NAME>.count`        | Gives you the total number of points submitted in the time interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
+| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the time interval.                                                                                           | GAUGE               |
+| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the time interval.                                                                                  | GAUGE               |
+| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent in the time interval.                                                                           | GAUGE               |
 
+For example, suppose a webserver is running the Datadog Agent, and you're tracking the response times received as a `HISTOGRAM` metric. In the one time interval, the webserver receives the set of values [1,1,1,2,2,2,3,3]. 
 
-For instance, say that the `request.response_time.histogram` metric is reported to Datadog through an Agent with the `HISTOGRAM` type for `server:web_1` with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
+The Agent aggregates the set of values to create the 5 timeseries representing the distribution of the set of values [1,1,1,2,2,2,3,3]. The 5 timeseries are submitted to Datadog and stored as the following in-app metric types: 
 
-| Metric Name                                    | Value  | Datadog Metric Type |
+| Metric Name                                    | Value  | Datadog In-App Metric Type |
 | ---------------------------------------------- | ------ | ------------------- |
-| `request.response_time.histogram.avg`          | `1,88` | GAUGE               |
+| `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `8`    | RATE                |
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
@@ -203,16 +200,16 @@ Discover how to submit histogram metrics:
 This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
-**A `DISTRIBUTION` is a metric submission type that allows you to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.** `DISTRIBUTION` metrics are designed to instrument logical objects, like services, independently from the underlying hosts.
+**The `DISTRIBUTION` metric submission type represents a statistical distribution calculated over your entire infrastructure of a set of values in one time interval.** A `DISTRIBUTION` metric allows you to aggregate values sent from multiple hosts over one time interval.  A `DISTRIBUTION` can be used to represent request latency for your entire infrastructure or customer basket size. 
 
-Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during the flush interval, a `DISTRIBUTION` metric sends all the raw data during a flush interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
+Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during one time interval, a `DISTRIBUTION` metric sends the raw data during that time interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging
 
-For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following timeseries are available to query by default:
+For example, if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` during an interval, the following 5 timeseries are available to query by default:
 
-| Aggregation           | Description                                                                                                                                               | Datadog Metric Type |
+| Aggregation           | Description                                                                                                                                               | Datadog In-App Metric Type |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | `avg:<METRIC_NAME>`   | Gives you the average of those `X` values during the flush interval.                                                                                      | GAUGE               |
 | `count:<METRIC_NAME>` | Gives you the number of points sampled during the interval, i.e. `X`. The Agent then sends it as a `RATE` so it would show in app the value `X/interval`. | RATE                |
@@ -220,27 +217,32 @@ For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` 
 | `min:<METRIC_NAME>`   | Gives you the minimum value of those `X` sent during the flush interval.                                                                                  | GAUGE               |
 | `sum:<METRIC_NAME>`   | Gives you the sum of all `X` values sent during the flush interval.                                                                                       | GAUGE               |
 
-For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for `server:web_1` and `server:web_2`. Say `server:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a given flush interval, this would create the following metrics within Datadog:
+For instance, suppose there are two webservers each running the Datadog Agent, and you're tracking the response time of requests received by those webservers as a `DISTRIBUTION` metric. During one time interval, webserver 1 reports the set of response times: [1,1,1,2,2,2,3,3], and webserver 2 reports the set of response times: [1,1,2]. By default, Datadog calculates the following 5 timeseries:
 
-| Metric Name                                | Value  | Datadog Metric Type |
-| ------------------------------------------ | ------ | ------------------- |
-| `avg:request.response_time.distribution`   | `1,73` | GAUGE               |
-| `count:request.response_time.distribution` | `11`   | RATE                |
-| `max:request.response_time.distribution`   | `3`    | GAUGE               |
-| `min:request.response_time.distribution`   | `1`    | GAUGE               |
-| `sum:request.response_time.distribution`   | `19`   | GAUGE               |
+| Metric Name                                | Value  |
+| ------------------------------------------ | ------ |
+| `avg:request.response_time.distribution`   | `1.73` |
+| `count:request.response_time.distribution` | `11`   |
+| `max:request.response_time.distribution`   | `3`    |
+| `min:request.response_time.distribution`   | `1`    |
+| `sum:request.response_time.distribution`   | `19`   |
 
-Discover how to submit distribution metrics [with DogstatsD][1].
+Discover how to submit distribution metrics:
+* [with DogstatsD][1]
+* [with the Datadog API][2]
+
+[1]: /developers/metrics/dogstatsd_metrics_submission/#distribution
+[2]: /api/?lang=python#post-timeseries-points
 
 ### Calculation of percentile aggregations
 
-Like other metric types, such as `GAUGE` or `HISTOGRAM`, the `DISTRIBUTION` metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
+Like other metric types, such as `GAUGE` or `HISTOGRAM`, the `DISTRIBUTION` metric type has the following aggregations available by default: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
 
-Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. That is, for a distribution metric with added percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
+Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics such that the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the following timeseries would be additionally created:
+If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][2]), the 5 following timeseries would be additionally created:
 
-| Metric Name                              | Value | Datadog Metric Type |
+| Metric Name                              | Value | Datadog In-App Metric Type |
 | ---------------------------------------- | ----- | ------------------- |
 | `p50:request.response_time.distribution` | `2 `  | GAUGE               |
 | `p75:request.response_time.distribution` | `2`   | GAUGE               |
