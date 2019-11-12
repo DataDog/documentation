@@ -39,11 +39,11 @@ Le check hérite des valeurs de `AgentCheck` et envoie un gauge de valeur `1` po
 {{< code-block lang="python" filename="hello.py" >}}
 # le bloc try/except suivant rend le check custom compatible avec toutes les versions de l'Agent
 try:
-    # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent…
-    from checks import AgentCheck
+    # Premier essai d'importation de la classe de base à partir des nouvelles versions de l'Agent…
+    from datadog_checks.base.checks import AgentCheck
 except ImportError:
-    # …si la commande ci-dessus a échoué, le check s'exécute dans l'Agent version 6 ou ultérieure
-    from datadog_checks.checks import AgentCheck
+    # …si la commande ci-dessus a échoué, le check s'exécute dans une version de l'Agent inférieure à 6.6.0
+    from checks import AgentCheck
 
 # Le contenu de la variable spéciale __version__ sera indiqué dans la page de statut de l'Agent
 __version__ = "1.0.0"
