@@ -2,7 +2,7 @@
 title: Get available locations
 type: apicode
 order: 31.91
-external_redirect: /api/get-available-locations
+external_redirect: /api/#get-available-locations
 ---
 
 **SIGNATURE**:
