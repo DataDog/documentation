@@ -61,7 +61,7 @@ In read-only mode, non-administrative users can clone the screenboard, rearrange
 
 Use this option to copy the entire screenboard to a new screenboard. You are prompted to name the clone.
 
-### Copy, Import, or Export dashboard JSON
+### Copy, import, or export dashboard JSON
 
 Refer to the [main dashboard documentation][4] for details on copying, importing, or exporting dashboard JSON.
 
