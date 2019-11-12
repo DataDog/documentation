@@ -2,7 +2,6 @@
 categories:
 - log collection
 - Security
-ddtype: crawler
 dependencies: []
 description: Ingest and process your Alcide logs
 doc_link: https://docs.datadoghq.com/integrations/alcide/
