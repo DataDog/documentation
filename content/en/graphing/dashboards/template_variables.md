@@ -49,22 +49,26 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 **Note**: Using the `Add to all` button adds the template variable to all log/APM widgets.
 
-#### Template variable presets
+#### Template Variable Saved Views
 
-##### Creating a Preset of Template Variables
+##### Creating a Saved View of Template Variables
 
-To the left of the template variables on a dashboard, there is a dropdown listed as “(Default Value)”. When you make a change to a template variable value, the value is not automatically saved to a preset. 
-To save the current values of the template variables in a preset, click on the dropdown menu and click “Save Selections as preset”. From there, you will be prompted to enter a unique name for the preset. After saving, this preset will be listed in the dropdown menu. By clicking on this preset you can return to the template variables' previously saved values. 
+{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Image Description" responsive="true" style="width:100%;">}}
 
-##### Delete a Preset
+To the left of the template variables on a dashboard, there is a dropdown listed as “(Default Value)”. When you make a change to a template variable value, the value is not automatically saved to a View. 
+To save the current values of the template variables in a View, click on the dropdown menu and click “Save selections as view”. From there, you will be prompted to enter a unique name for the View. After saving, this View will be listed in the dropdown menu. By clicking on this View you can return to the template variables' previously saved values. 
 
-To delete a preset, click on the dropdown again and click “Manage preset...”. From there, a popup with each of the saved presets will be displayed with the trash bin icon next to each for deletion. Click the trash bin icon to delete that preset.
+##### Delete a Saved View
 
-##### Modify a Preset
+To delete a View, click on the dropdown again and click “Manage views...”. From there, a popup with each of the saved Views will be displayed with the trash bin icon next to each for deletion. Click the trash bin icon to delete that View.
 
-To modify the “(Default Value)” preset, click on the pencil icon and update the template variable values. Then click “Done” to save. 
+##### Modify a Saved View
 
-If any values in the other presets are changed, save the view as a new preset, and then delete the original preset. 
+{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Image Description" responsive="true" style="width:100%;">}}
+
+To modify the “(Default Value)” View, click on the pencil icon and update the template variable values. Then click “Done” to save. 
+
+If any values in the other Views are changed, save the values as a new View, and then delete the original View. 
 
 ## Use Template Variables
 
