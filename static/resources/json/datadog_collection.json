@@ -9052,7 +9052,7 @@
 								}
 							]
 						},
-						"description": "## Check if a monitor can be deleted\n\n**ARGUMENTS**:\n\n* **`monitor_ids`**\n    The comma-separated list of monitor ids to check if they can be deleted."
+						"description": "### Overview \n\nCheck if a monitor can be deleted\n\n### ARGUMENTS\n\n* **`monitor_ids`**\n    The comma-separated list of monitor ids to check if they can be deleted."
 					},
 					"response": []
 				},
