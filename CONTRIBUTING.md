@@ -96,6 +96,8 @@ This section sets the record straight (for the Docs site, not for all humankind)
 
 * **Code substitution**: When adding something to a code block that isn't meant literally, use the format `<DATADOG_API_KEY>`. *Don't* use `$DATADOG_API_KEY`, `{DATADOG API KEY}`, and certainly not the naked `DATADOG_API_KEY`.
 
+* **Numbers**: Spell out nine and below, and write out the actual number for 10 and above. Do not use commas in four figure numbers, for example, `5000`.
+
 ### RFC 2606
 
 A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][3] four TLD names are reserved:
