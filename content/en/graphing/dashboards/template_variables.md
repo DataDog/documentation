@@ -56,7 +56,7 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 {{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:75%;">}}
 
 To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view. 
-To save the current values of the template variables in a View, click on the dropdown menu and click “Save selections as view”. From there, you will be prompted to enter a unique name for the View. After saving, this View will be listed in the dropdown menu. By clicking on this View you can return to the template variables' previously saved values. 
+To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables. 
 
 #### Delete a saved view
 
