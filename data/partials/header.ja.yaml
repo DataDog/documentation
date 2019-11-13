@@ -1,109 +1,115 @@
 left:
   - name: product
-    link: 'https://www.datadoghq.com/product/'
+    link: 'https://www.datadoghq.com/ja/product/'
     title: 製品
     children:
       - name: product_features
-        link: 'https://www.datadoghq.com/product/'
+        link: 'https://www.datadoghq.com/ja/product/'
         title: 機能
       - name: product_integrations
-        link: 'https://www.datadoghq.com/product/integrations/'
+        link: 'https://www.datadoghq.com/ja/product/integrations/'
         title: インテグレーション
       - name: product_apm
-        link: 'https://www.datadoghq.com/apm/'
+        link: 'https://www.datadoghq.com/ja/apm/'
         title: APM
       - name: product_logs
-        link: 'https://www.datadoghq.com/log-management/'
+        link: 'https://www.datadoghq.com/ja/log-management/'
         title: ログ管理
       - name: product_dashboards
-        link: 'https://www.datadoghq.com/dashboarding/'
+        link: 'https://www.datadoghq.com/ja/dashboarding/'
         title: ダッシュボード
       - name: product_synthetics
-        link: 'https://www.datadoghq.com/synthetics/'
+        link: 'https://www.datadoghq.com/ja/synthetics/'
         title: Synthetics
       - name: product_alerts
-        link: 'https://www.datadoghq.com/alerts/'
+        link: 'https://www.datadoghq.com/ja/alerts/'
         title: アラート
       - name: product_api
         link: api
         title: API
   - name: customers
-    link: 'https://www.datadoghq.com/customers/'
+    link: 'https://www.datadoghq.com/ja/customers/'
     title: お客様
   - name: pricing
-    link: 'https://www.datadoghq.com/pricing/'
+    link: 'https://www.datadoghq.com/ja/pricing/'
     title: 料金
   - name: solutions
     link: '#'
-    title: お客様事例
+    title: ソリューション
     children:
       - name: solutions_financial
-        link: 'https://www.datadoghq.com/solutions/financial-services/'
+        link: 'https://www.datadoghq.com/ja/solutions/financial-services/'
         title: 金融サービス
       - name: solutions_manufacturing
-        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+        link: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
         title: 製造 / 物流
       - name: solutions_healthcare
-        link: 'https://www.datadoghq.com/solutions/healthcare/'
+        link: 'https://www.datadoghq.com/ja/solutions/healthcare/'
         title: 医療 / ライフサイエンス
       - name: solutions_retail
-        link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
+        link: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
         title: 小売業 / eコマース
       - name: solutions_media
-        link: 'https://www.datadoghq.com/solutions/media-entertainment/'
+        link: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
         title: メディア / エンターテインメント
       - name: solutions_gaming
-        link: 'https://www.datadoghq.com/solutions/gaming/'
+        link: 'https://www.datadoghq.com/ja/solutions/gaming/'
         title: ゲーム業界
       - name: solutions_cloudmigration
-        link: "https://www.datadoghq.com/solutions/cloud-migration/"
-        title: "Cloud Migration"
+        link: "https://www.datadoghq.com/ja/solutions/cloud-migration/"
+        title: "クラウド移行"
       - name: solutions_monitoringconsolidation
-        link: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
-        title: "Monitoring Consolidation"
+        link: "https://www.datadoghq.com/ja/solutions/monitoring-consolidation/"
+        title: "統合監視"
       - name: solutions_devops
-        link: "https://www.datadoghq.com/solutions/devops/"
+        link: "https://www.datadoghq.com/ja/solutions/devops/"
         title: "DevOps"
         
 right:
   - name: about
-    link: 'https://www.datadoghq.com/about/'
+    link: 'https://www.datadoghq.com/ja/about/'
     title: 会社情報
     children:
       - name: about_contact
-        link: 'https://www.datadoghq.com/about/contact/'
+        link: 'https://www.datadoghq.com/ja/about/contact/'
         title: お問い合わせ
       - name: about_partners
-        link: 'https://www.datadoghq.com/partner-with-datadog/'
+        link: 'https://www.datadoghq.com/ja/partner-with-datadog/'
         title: パートナー
       - name: about_press
-        link: 'https://www.datadoghq.com/about/press/'
+        link: 'https://www.datadoghq.com/ja/about/press/'
         title: プレス
       - name: about_team
-        link: 'https://www.datadoghq.com/about/team/'
-        title: チーム
+        link: 'https://www.datadoghq.com/ja/about/leadership/'
+        title: 経営陣
       - name: about_careers
-        link: 'https://www.datadoghq.com/careers/'
+        link: 'https://www.datadoghq.com/ja/careers/'
         title: 採用情報
       - name: about_analyst
-        link: 'https://www.datadoghq.com/about/analyst/'
+        link: 'https://www.datadoghq.com/ja/about/analyst/'
         title: アナリストレポート
+      - name: about_investor
+        link: 'https://investors.datadoghq.com/'
+        title: Investor Relations
+      - name: about_timeline
+        link: 'https://www.datadoghq.com/ja/about/timeline/'
+        title: 沿革
   - name: blog
-    link: 'https://www.datadoghq.com/blog/'
+    link: 'https://www.datadoghq.com/ja/blog/'
     title: ブログ
     children:
       - name: blog_themonitor
-        link: 'https://www.datadoghq.com/blog/'
+        link: 'https://www.datadoghq.com/ja/blog/'
         title: モニター
       - name: blog_engineering
-        link: 'https://www.datadoghq.com/blog/engineering/'
+        link: 'https://www.datadoghq.com/ja/blog/engineering/'
         title: エンジニアリング
-      - name: blog_community
-        link: 'https://www.datadoghq.com/blog/community/'
-        title: コミュニティ
       - name: blog_pupculture
-        link: 'https://www.datadoghq.com/blog/pup-culture/'
+        link: 'https://www.datadoghq.com/ja/blog/pup-culture/'
         title: 企業文化
+      - name: blog_community
+        link: 'https://www.datadoghq.com/ja/blog/community/'
+        title: コミュニティ
   - name: docs
     link: ''
     title: ドキュメント
