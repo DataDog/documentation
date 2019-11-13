@@ -16,7 +16,7 @@ further_reading:
   text: "Dynamically assign and collect tags from your application"
 ---
 
-Sometimes a check configuration used by a Datadog-Agent integration can be to big to fit within Autodiscovery labels/annotations like for JMX integrations for instance. If it's the case you should use [Autodiscovery Container Identifiers][1].
+JMX-based integrations configuration used by the Datadog Agent can be too big to fit within Autodiscovery labels/annotations. To manipulate them you should use [Autodiscovery Container Identifiers][1].
 
 Find below an example with the Datadog-Kafka integration that leverage JMX to collect metrics and the Datadog Agent to send them to Datadog for:
 
@@ -25,7 +25,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-1. Enable the Kafka integration by renaming `conf.yaml.example` into `conf.yaml` in the [kafka integration directory][1]: `/etc/datadog-agent/conf.d/kafka.d`
+1. Enable the Kafka integration by renaming `conf.yaml.example` into `conf.yaml` in the [Kafka integration directory][1]: `/etc/datadog-agent/conf.d/kafka.d`
 
 2. Replace the parameters values from `conf.yaml` to fit the Agent Autodiscovery logic:
     The configuration files have by default host parameters value, if you are using the Agent with Autodiscovery you should use the [Autodiscovery Template Variables][2] instead.
@@ -42,7 +42,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-3. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the begining of your `conf.yaml` file:
+3. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
       ad_identifiers:
@@ -62,7 +62,6 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
 
 4. [Enable Autodiscovery for your Agent][4].
 
-
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [2]: /agent/autodiscovery/template_variables
 [3]: https://docs.datadoghq.com/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
@@ -70,16 +69,23 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-1. Get the configuration files associated to the Datadog-Kafka integration.
-    They can be found in your [integrations configuration directory][1] `/etc/datadog-agent/conf.d/kafka.d`:
+1. Get the configuration files `conf.yaml` and `metrics.yaml` associated to the Datadog-Kafka integration. They can be found in your [integrations configuration directory][1]. Find below the list of JMX based integration with their associated files:
 
-      * [metrics.yaml][2]
-      * [conf.yaml.example][3]
+    | Integration         | Metrics file        | Configuration file       |
+    |---------------------|---------------------|--------------------------|
+    | [ActiveMq][2]       | [metrics.yaml][3]   | [conf.yaml.example][4]   |
+    | [Cassandra][5]      | [metrics.yaml][6]   | [conf.yaml.example][7]   |
+    | [Hive][8]           | [metrics.yaml][9]   | [conf.yaml.example][10]  |
+    | [Jboss Wildfly][11] | [metrics.yaml][12]  | [conf.yaml.example][13]  |
+    | [Kafka][14]         | [metrics.yaml][15]  | [conf.yaml.example][16]  |
+    | [Solr][17]          | [metrics.yaml][18]  | [conf.yaml.example][19]  |
+    | [Presto][20]        | [metrics.yaml][21]  | [conf.yaml.example][22]  |
+    | [Tomcat][23]        | [metrics.yaml][24]  | [conf.yaml.example][25]  |
 
 2. Rename `conf.yaml.example` into `conf.yaml`.
 3. Replace the parameters values from `conf.yaml` to fit the Agent Autodiscovery logic:
-    The configuration files have by default host parameters value, if you are using the Agent with Autodiscovery you should use the [Autodiscovery Template Variables][4] instead.
-    For this example you should change the `host` parameter value from `localhost` to `%%host%%`:
+    The configuration files have by default host parameters value, if you are using the Agent with Autodiscovery you should use the [Autodiscovery Template Variables][26] instead.
+    For this example change the `host` parameter value from `localhost` to `%%host%%`:
 
     ```yaml
       instances:
@@ -92,7 +98,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-4. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the begining of your `conf.yaml` file:
+4. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
       ad_identifiers:
@@ -108,22 +114,44 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][5] as `ad_identifiers` if need be.
+    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][27] as `ad_identifiers` if need be.
 
-5. [After enabling Autodiscovery for your Agent][6], mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/kafka.d` folder.
+5. [After enabling Autodiscovery for your Agent][28], mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/kafka.d` folder.
 
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
-[3]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[4]: /agent/autodiscovery/template_variables
-[5]: https://docs.datadoghq.com/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
-[6]: /agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
+[2]: /integrations/activemq
+[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
+[4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[5]: /integartions/cassandra
+[6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
+[7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
+[8]: /integrations/hive
+[9]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
+[10]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
+[11]: /integrtions/jboss_wildfly
+[12]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
+[14]: /integrations/kafka
+[15]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
+[16]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
+[17]: /integrations/solr
+[18]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
+[19]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[20]: /integrations/presto
+[21]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
+[22]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
+[23]: /integrations/tomcat
+[24]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
+[25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[26]: /agent/autodiscovery/template_variables
+[27]: https://docs.datadoghq.com/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
+[28]: /agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Container Preparation
 
-Once the Agent is configured and running, use the `com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER` label/annotations for your kafka container to apply the Check configuration through autodiscovery:
+Once the Agent is configured and running, use the `com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER` label/annotations for your Kafka container to apply the Check configuration through autodiscovery:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
