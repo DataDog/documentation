@@ -62,7 +62,7 @@ To save the current values of the template variables in a View, click on the dro
 
 To delete a View, click on the dropdown again and click “Manage views...”. From there, a popup with each of the saved Views will be displayed with the trash bin icon next to each for deletion. Click the trash bin icon to delete that View.
 
-#### Modify a Saved View
+#### Modify a saved view
 
 {{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Manage View Popup" responsive="true" style="width:75%;">}}
 
