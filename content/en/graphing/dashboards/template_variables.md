@@ -26,6 +26,7 @@ To create your first template variable in the dashboard, click **Add Template Va
 
 A template variable is defined by:
 
+
 * **Name**:
     The value of your template variable displayed in your graph query.
 * **Tag or Attribute**:
