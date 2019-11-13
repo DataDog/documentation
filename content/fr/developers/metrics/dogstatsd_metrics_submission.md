@@ -25,7 +25,7 @@ Les utilisateurs de StatsD connaissent déjà les métriques [COUNT](#count), [G
 Une fois [DogStatsD installé][1], les fonctions ci-dessous peuvent être utilisées pour envoyer vos métriques à Datadog en fonction du type de métrique. Ces fonctions ont les paramètres suivants en commun :
 
 | Paramètre        | Type            | Obligatoire | Description                                                                                                                                                                                    |
-|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<NOM_MÉTRIQUE>`  | Chaîne          | Oui      | Le nom de la métrique à envoyer.                                                                                                                                                                  |
 | `<VALEUR_MÉTRIQUE>` | Double          | Oui      | La valeur associée à votre métrique.                                                                                                                                                             |
 | `<TAUX_ÉCHANTILLONNAGE>`  | Double          | Non       | Le taux d'échantillonnage à appliquer à votre métrique. Toutes les valeurs comprises entre `0` (tout est échantillonné et rien n'est envoyé) à `1` (pas d'échantillonnage) sont acceptées. Pour en savoir plus, consultez la [section sur les taux d'échantillonnage](#taux-d-echantillonnage). |
@@ -34,7 +34,7 @@ Une fois [DogStatsD installé][1], les fonctions ci-dessous peuvent être utilis
 ### COUNT
 
 | Méthode                                                        | Description                                               | Type de stockage                                                                                                                                            |
-|---------------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `increment(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisé pour incrémenter une métrique COUNT.                         | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
 | `decrement(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisé pour décrémenter une métrique COUNT.                         | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
 | `count(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Utilisé pour incrémenter une métrique COUNT à partir d'une `valeur` quelconque | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
@@ -50,7 +50,7 @@ Dans cet exemple, une métrique `COUNT` stockée en tant que métrique `RATE` es
 
 Exécutez le code Python suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```python
+{{< code-block lang="python" filename="count_metric.py" >}}
 from datadog import initialize, statsd
 import time
 
@@ -65,14 +65,14 @@ while(1):
   statsd.increment('exemple_métrique.increment', tags=["environment:dev"])
   statsd.decrement('exemple_métrique.decrement', tags=["environment:dev"])
   time.sleep(10)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Exécutez le code Ruby suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```ruby
+{{< code-block lang="ruby" filename="count_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -83,24 +83,25 @@ while true do
     statsd.count('exemple_métrique.count', 2, tags: ['environment:dev'])
     sleep 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Exécutez le code Go suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```go
+{{< code-block lang="go" filename="count_metric.go" >}}
 package main
 
 import (
     "log"
     "time"
+
     "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
+    statsd, err := statsd.New("127.0.0.1:8125")
     if err != nil {
         log.Fatal(err)
     }
@@ -109,17 +110,17 @@ func main() {
         statsd.Incr("exemple_métrique.increment", []string{"environment:dev"}, 1)
         statsd.Decr("exemple_métrique.decrement", []string{"environment:dev"}, 1)
         statsd.Count("exemple_métrique.count", 2, []string{"environment:dev"}, 1)
-        time.Sleep(10)
+        time.Sleep(10 * time.Second)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Exécutez le code Java suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```java
+{{< code-block lang="java" filename="count_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -137,14 +138,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Exécutez le code .NET suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```csharp
+{{< code-block lang="csharp" filename="count_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -171,14 +172,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Exécutez le code PHP suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-```php
+{{< code-block lang="php" filename="count_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -196,7 +197,7 @@ while (TRUE) {
     $statsd->decrement('exemple_métrique.decrement', array('environment'=>'dev'));
     sleep(10);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -212,7 +213,7 @@ La valeur étant envoyée en tant que `COUNT`, elle est stockée en tant que `RA
 ### GAUGE
 
 | Méthode                                                        | Type de stockage dans Datadog                                                                                                                                      |
-|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `gauge(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Stockée en tant que métrique `GAUGE` dans Datadog. Chaque valeur de la série temporelle stockée correspond à la dernière valeur gauge envoyée pour cette métrique durant l'intervalle de transmission de StatsD. |
 
 #### Exemples de code
@@ -224,7 +225,7 @@ Dans cet exemple, une métrique `GAUGE` stockée en tant que métrique `GAUGE` e
 
 Exécutez le code Python suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```python
+{{< code-block lang="python" filename="gauge_metric.py" >}}
 from datadog import initialize, statsd
 import time
 
@@ -241,14 +242,14 @@ while(1):
   i += 1
   statsd.gauge('exemple_métrique.gauge', i, tags=["environment:dev"])
   time.sleep(10)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Exécutez le code Ruby suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```ruby
+{{< code-block lang="ruby" filename="gauge_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -260,24 +261,25 @@ while true do
     statsd.gauge('exemple_métrique.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Exécutez le code Go suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```go
+{{< code-block lang="go" filename="gauge_metric.go" >}}
 package main
 
 import (
     "log"
     "time"
+
     "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
+    statsd, err := statsd.New("127.0.0.1:8125")
     if err != nil {
         log.Fatal(err)
     }
@@ -285,17 +287,17 @@ func main() {
     for {
         i += 1
         statsd.Gauge("exemple_métrique.gauge", i, []string{"environment:dev"}, 1)
-        time.Sleep(10)
+        time.Sleep(10 * time.Second)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Exécutez le code Java suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```java
+{{< code-block lang="java" filename="gauge_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -311,14 +313,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Exécutez le code .NET suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```csharp
+{{< code-block lang="csharp" filename="gauge_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -343,14 +345,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Exécutez le code PHP suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-```php
+{{< code-block lang="php" filename="gauge_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -369,7 +371,7 @@ while (TRUE) {
     $statsd->gauge('exemple_métrique.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -381,7 +383,7 @@ Une fois le code ci-dessus exécuté, les données de votre métrique peuvent ê
 ### SET
 
 | Méthode                                                      | Type de stockage dans Datadog                                                                                                                                           |
-|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `set(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Stockée en tant que type `GAUGE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au nombre de valeurs uniques envoyées à StatsD pour une métrique durant l'intervalle de transmission. |
 
 #### Exemples de code
@@ -393,7 +395,7 @@ Envoyez une métrique `SET`, stockée comme métrique `GAUGE`, à Datadog. Pour 
 
 Exécutez le code Python suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
 
-```python
+{{< code-block lang="python" filename="set_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
@@ -409,14 +411,14 @@ while(1):
   i += 1
   statsd.set('exemple_métrique.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Exécutez le code Ruby suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
 
-```ruby
+{{< code-block lang="ruby" filename="set_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -427,26 +429,27 @@ while true do
     statsd.set('exemple_métrique.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Exécutez le code Go suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
 
-```go
+{{< code-block lang="go" filename="set_metric.go" >}}
 package main
 
 import (
     "log"
-    "time"
     "math/rand"
     "strconv"
+    "time"
+
     "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
+    statsd, err := statsd.New("127.0.0.1:8125")
     if err != nil {
         log.Fatal(err)
     }
@@ -454,17 +457,17 @@ func main() {
     for {
         i += 1
         statsd.Set("exemple_métrique.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-        time.Sleep(rand.Intn(10))
+        time.Sleep(rand.Intn(10) * time.Second)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Exécutez le code .NET suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
 
-```csharp
+{{< code-block lang="csharp" filename="set_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -489,14 +492,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Exécutez le code PHP suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
 
-```php
+{{< code-block lang="php" filename="set_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -516,7 +519,7 @@ while (TRUE) {
     $statsd->set('exemple_métrique.set', i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -528,7 +531,7 @@ Une fois le code ci-dessus exécuté, les données de vos métriques peuvent êt
 ### HISTOGRAM
 
 | Méthode                                                            | Type de stockage dans Datadog                                                                                                                                              |
-|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `histogram(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
 
 #### Configuration
@@ -545,7 +548,7 @@ Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Dans cet exemple,
 
 Exécutez le code Python suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```python
+{{< code-block lang="python" filename="histogram_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
@@ -560,14 +563,14 @@ initialize(**options)
 while(1):
   statsd.histogram('exemple_métrique.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Exécutez le code Ruby suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```ruby
+{{< code-block lang="ruby" filename="histogram_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -576,42 +579,43 @@ while true do
     statsd.set('exemple_métrique.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Exécutez le code Go suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```go
+{{< code-block lang="go" filename="histogram_metric.go" >}}
 package main
 
 import (
     "log"
-    "time"
     "math/rand"
+    "time"
+
     "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
+    statsd, err := statsd.New("127.0.0.1:8125")
     if err != nil {
         log.Fatal(err)
     }
 
     for {
         statsd.Histogram("exemple_métrique.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
-        time.Sleep(2)
+        time.Sleep(2 * time.Second)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Exécutez le code Java suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```java
+{{< code-block lang="java" filename="histogram_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -627,14 +631,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Exécutez le code .NET suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```csharp
+{{< code-block lang="csharp" filename="histogram_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -659,14 +663,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Exécutez le code PHP suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
-```php
+{{< code-block lang="php" filename="histogram_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -683,7 +687,7 @@ while (TRUE) {
     $statsd->histogram('exemple_métrique.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -691,7 +695,7 @@ while (TRUE) {
 L'instrumentation ci-dessus génère les métriques suivantes :
 
 | Métrique                                  | Description                             |
-|-----------------------------------------|-----------------------------------------|
+| --------------------------------------- | --------------------------------------- |
 | `exemple_métrique.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
 | `exemple_métrique.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
 | `exemple_métrique.histogram.median`       | La valeur échantillonnée médiane                    |
@@ -707,7 +711,7 @@ Une fois le code ci-dessus exécuté, les données de vos métriques peuvent êt
 Dans DogStatsD, le type de métrique `TIMER` est une implémentation du type de métrique `HISTOGRAM` (à ne pas confondre avec les timers de StatsD standard). Il mesure uniquement les données temporelles, telles que la durée d'exécution d'une section de code.
 
 | Méthode                                                        | Type de stockage dans Datadog                                                                                                                                              |
-|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `timed(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
 
 ##### Configuration
@@ -723,7 +727,7 @@ Dans cet exemple, une métrique `TIMER` stockée en tant que métrique `GAUGE` e
 
 Dans Python, les timers sont créés avec un décorateur :
 
-```python
+{{< code-block lang="python" filename="timers.py" >}}
 from datadog import initialize, statsd
 import time
 import random
@@ -741,11 +745,11 @@ def my_function():
 
 while(1):
   my_function()
-```
+{{< /code-block >}}
 
 ou avec un gestionnaire de contexte :
 
-```python
+{{< code-block lang="python" filename="context_manager.py" >}}
 from datadog import statsd
 import time
 import random
@@ -762,7 +766,7 @@ def my_function():
 
 while(1):
   my_function()
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -770,7 +774,7 @@ while(1):
 Lorsque DogStatsD reçoit les données de la métrique timer, il calcule la distribution statistique des temps de rendu, puis envoie les métriques suivantes à Datadog :
 
 | Métrique                              | Description                             |
-|-------------------------------------|-----------------------------------------|
+| ----------------------------------- | --------------------------------------- |
 | `exemple_métrique.timer.count`        | Le nombre d'échantillonnages de cette métrique |
 | `exemple_métrique.timer.avg`          | La durée moyenne des valeurs échantillonnées      |
 | `exemple_métrique.timer.median`       | La valeur échantillonnée médiane                    |
@@ -786,7 +790,7 @@ DogStatsD traite les métriques `TIMER` en tant que métriques `HISTOGRAM`. Que 
 Les métriques de distribution sont en version bêta. [Contactez l'assistance Datadog][9] pour activer cette fonctionnalité pour votre compte.
 
 | Méthode                                                | Type de stockage dans Datadog                                                                                          |
-|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `distribution(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAGS>)` | Stockée en tant que métrique `DISTRIBUTION` dans Datadog. Pour en savoir plus, consultez la [documentation sur les métriques de distribution][10]. |
 
 #### Exemples de code
@@ -798,7 +802,7 @@ Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemp
 
 Exécutez le code Python suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```python
+{{< code-block lang="python" filename="distribution_metric.py" >}}
 from datadog import initialize, statsd
 import time
 import random
@@ -813,14 +817,14 @@ initialize(**options)
 while(1):
   statsd.distribution('exemple_métrique.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Exécutez le code Ruby suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```ruby
+{{< code-block lang="ruby" filename="distribution_metric.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -829,42 +833,43 @@ while true do
     statsd.distribution('exemple_métrique.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Exécutez le code Go suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```go
+{{< code-block lang="go" filename="distribution_metric.go" >}}
 package main
 
 import (
     "log"
-    "time"
     "math/rand"
+    "time"
+
     "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err: = statsd.New("127.0.0.1:8125")
+    statsd, err := statsd.New("127.0.0.1:8125")
     if err != nil {
         log.Fatal(err)
     }
 
     for {
-        statsd.Distribution("exemple_métrique.distribution", rand.Intn(20), []string{"environment:dev"}, 1)
-        time.Sleep(2)
+        statsd.Distribution("exemple_métrique.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
+        time.Sleep(2 * time.Second)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 Exécutez le code Java suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```java
+{{< code-block lang="java" filename="distribution_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -880,14 +885,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Exécutez le code .NET suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```csharp
+{{< code-block lang="csharp" filename="distribution_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -912,14 +917,14 @@ public class DogStatsdClient
         }
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Exécutez le code PHP suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-```php
+{{< code-block lang="php" filename="distribution_metric.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -936,7 +941,7 @@ while (TRUE) {
     $statsd->distribution('exemple_métrique.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -954,7 +959,7 @@ Un taux d'échantillonnage de `1` signifie que les métriques sont envoyées 100
 Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<TAUX_ÉCHANTILLONNAGE>` pour corriger la valeur de la métrique en fonction du type de métrique, c'est-à-dire pour estimer ce qu'elle aurait été sans échantillonnage :
 
 | Type de métrique | Correction du taux d'échantillonnage                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `COUNT`     | Les valeurs reçues sont multipliées par (`1/<TAUX_ÉCHANTILLONNAGE>`). On peut raisonnablement supposer que pour un point de données reçu, `1/<TAUX_ÉCHANTILLONNAGE>` ont été échantillonnés avec la même valeur. |
 | `GAUGE`     | Aucune correction. La valeur reçue est conservée.                                                                                                                               |
 | `SET`       | Aucune correction. La valeur reçue est conservée.                                                                                                                               |
