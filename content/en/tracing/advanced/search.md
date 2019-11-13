@@ -177,7 +177,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:30%;">}}
 
 ## Further Reading
 
