@@ -20,7 +20,7 @@ Template variables allow you to dynamically apply specific metric or log values 
 
 ## Add a Template Variable
 
-To create your first template variable in the dashboard, click **Add Template Variables**. If there template variables are already defined, click on the *-pencil-* icon to open the template variable editor. Once in edit mode click on **Add Variable +** to add another template variable. 
+To create your first template variable in the dashboard, click **Add Template Variables**. If template variables are already defined, click on the *-pencil-* icon to open the template variable editor. Once in edit mode, click on **Add Variable +** to add another template variable. 
 
 {{< img src="graphing/dashboards/template_variables/edit_mode_template_variable.png" alt="Edit template variable" responsive="true" style="width:40%;">}}
 
