@@ -66,7 +66,7 @@ To delete a View, click on the dropdown again and click “Manage views...”. F
 
 {{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Manage View Popup" responsive="true" style="width:75%;">}}
 
-To modify the “(Default Value)” View, click on the pencil icon and update the template variable values. Then click “Done” to save. 
+To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. 
 
 If any values in the other views are changed, save the values as a new view, and then delete the original view. 
 
