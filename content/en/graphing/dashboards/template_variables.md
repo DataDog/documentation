@@ -51,7 +51,7 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 ### Template Variable Saved Views
 
-#### Creating a Saved View of Template Variables
+#### Creating a saved view of template variables
 
 {{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:75%;">}}
 
