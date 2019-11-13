@@ -36,10 +36,10 @@ For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied 
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
-**Note**: When upgrading the Datadog Agent on a Domain Controller (or on any host where the user has supplied a username for the Agent), you need to supply the DDAGENTUSER_NAME (but not the DDAGENTUSER_PASSWORD):
+**Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
 
 ```shell
-  Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME>
+  Msiexec /i ddagent.msi <DDAGENTUSER_NAME>=<DOMAIN>\<USERNAME>
 ```
 
 ### Installation with Chef
