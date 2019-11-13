@@ -50,7 +50,7 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 **Note**: Using the `Add to all` button adds the template variable to all log/APM widgets.
 
-### Template Variable Saved Views
+### Template variable saved views
 
 #### Creating a saved view of template variables
 
