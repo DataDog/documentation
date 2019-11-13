@@ -16,25 +16,25 @@ public_title: Datadog-Lacework Integration
 
 ## Overview
 
-Use the Datadog-Lacework integration in order to forward your Lacework logs to Datadog.
+Use the Datadog Lacework integration to forward your Lacework logs to Datadog.
 
 ## Setup
 
-This is a *push integration* which means that Lacework pushes logs/events to Datadog. All configuration needed happens on Lacework's dashboard. Datadog automatically enables the right logs processing pipeline when it detects Lacework logs.
+Lacework pushes logs and events to Datadog, so all configuration is done on Lacework's dashboard. Datadog automatically enables the right logs processing pipeline when it detects Lacework logs.
 
 ### Configuration
 
-1. Go to *Settings* and select *Integrations*
+1. In Lacework, go to *Settings* and select *Integrations*.
 2. In the *Outgoing* section (on the left panel) select Datadog.
 3. Fill in the following details:
-    * **Name** : Enter a name for the integration like `Datadog-Lacework`
+    * **Name** : Enter a name for the integration like `Datadog-Lacework`.
     * **Datadog Type**: Select the type of logs sent to Datadog:
 
         | Datadog Type     | Description                                           |
         |------------------|-------------------------------------------------------|
-        | `Logs Details`   | Sends Lacework detailed logs to Datadog logs platform. |
-        | `Logs Summary`   | Sends Lacework summary to Datadog logs platform.       |
-        | `Events Summary` | Sends Lacework summary to Datadog Events platform.     |
+        | `Logs Details`   | Sends Lacework detailed logs to the Datadog logs platform. |
+        | `Logs Summary`   | Sends a Lacework summary to the Datadog logs platform.       |
+        | `Events Summary` | Sends a Lacework summary to the Datadog Events platform.     |
 
     * **Datadog Site**:
         * Select `com` if you use Datadog US region.
