@@ -88,7 +88,7 @@ See [tracer configuration][12] for more information on how to set these variable
 PHP APM supports the following PHP versions:
 
 | Version | Support type    |
-| :------ | :-------------- |
+|:--------|:----------------|
 | 7.3.x   | Fully Supported |
 | 7.2.x   | Fully Supported |
 | 7.1.x   | Fully Supported |
@@ -99,7 +99,7 @@ PHP APM supports the following PHP versions:
 PHP APM supports the following SAPI's:
 
 | SAPI           | Support type    |
-| :------------- | :-------------- |
+|:---------------|:----------------|
 | apache2handler | Fully Supported |
 | cli            | Fully Supported |
 | fpm            | Fully Supported |
@@ -111,7 +111,7 @@ PHP APM supports the following SAPI's:
 If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
 | Module         | Versions      | Support Type    |
-| :------------- | :------------ | :-------------- |
+|:---------------|:--------------|:----------------|
 | CakePHP        | 2.x           | Fully Supported |
 | CodeIgniter    | 2.x           | PHP 7           |
 | Laravel        | 4.2, 5.x      | Fully Supported |
@@ -135,7 +135,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
 | Module          | Versions | Support Type    |
-| :-------------- | :------- | :-------------- |
+|:----------------|:---------|:----------------|
 | CakePHP Console | 2.x      | Fully Supported |
 | Laravel Artisan | 5.x      | Fully Supported |
 | Symfony Console |          | _Coming Soon_   |
@@ -145,7 +145,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 #### Datastore Compatibility
 
 | Module                           | Versions                   | Support Type    |
-| :------------------------------- | :------------------------- | :-------------- |
+|:---------------------------------|:---------------------------|:----------------|
 | Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
 | Elasticsearch                    | 1.x                        | Fully Supported |
 | Eloquent                         | Laravel supported versions | Fully Supported |
@@ -167,7 +167,7 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 #### Library Compatibility
 
 | Module     | Versions              | Support Type    |
-| :--------- | :-------------------- | :-------------- |
+|:-----------|:----------------------|:----------------|
 | Curl       | *(Any Supported PHP)* | Fully Supported |
 | Guzzle     | 5.x                   | Fully Supported |
 | Guzzle     | 6.x                   | Fully Supported |
@@ -209,7 +209,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 ### Environment Variable Configuration
 
 | Env variable                              | Default     | Note                                                                                                              |
-| ----------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------|-------------|-------------------------------------------------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                               |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                               |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                             |
@@ -243,14 +243,14 @@ This functionality is in public beta. For assistance, contact <a href="/help">Da
 When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
-| :--------------------------------- | :------------ |
+|:-----------------------------------|:--------------|
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
 Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
 
 | URL (GET request)                              | Resource Name      |
-| :--------------------------------------------- | :----------------- |
+|:-----------------------------------------------|:-------------------|
 | `/user/123/show`                               | `GET /user/?/show` |
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
@@ -265,7 +265,7 @@ Rules are applied in the same order as they appear in `DD_TRACE_RESOURCE_URI_MAP
 The `*` wildcard is replaced with `?`.
 
 | Mapping Rule | URL (GET request)  | Resource Name    |
-| :----------- | :----------------- | :--------------- |
+|:-------------|:-------------------|:-----------------|
 | `/foo/*`     | `/foo/bar`         | `GET /foo/?`     |
 | `/foo/*/bar` | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
 | `/foo-*-bar` | `/foo-secret-bar`  | `GET /foo-?-bar` |
@@ -273,7 +273,7 @@ The `*` wildcard is replaced with `?`.
 The `$*` wildcard matches without replacement.
 
 | Mapping Rule        | URL (GET request)           | Resource Name              |
-| :------------------ | :-------------------------- | :------------------------- |
+|:--------------------|:----------------------------|:---------------------------|
 | `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
 | `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
 
@@ -287,7 +287,7 @@ To upgrade the PHP tracer, [download the latest release][7] and follow the same 
 
 [1]: /tracing/visualization
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[3]: /agent/?tab=agentv6
+[3]: /tracing/send_traces
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
 [6]: /tracing/send_traces
