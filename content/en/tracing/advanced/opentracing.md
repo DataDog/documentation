@@ -257,9 +257,7 @@ Then you need to set the error to `true` and add *at least* the `error.msg`, `er
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
       Tags.ERROR.set(span, true);
-      span.setTag("error.msg", "<ERROR_MESSAGE>");
-      span.setTag("error.type", "<EXCEPTION_NAME>");
-      span.setTag("error.stack", "<ERROR_STACK>");
+      span.log(Collections.singletonMap(Fields.ERROR_OBJECT, ex));
     }
 ```
 
