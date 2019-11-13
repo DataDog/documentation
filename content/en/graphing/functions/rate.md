@@ -6,39 +6,44 @@ kind: documentation
 ## Per second
 
 | Function       | Description                                                | Example                        |
-| :----          | :-------                                                   | :---------                     |
+|:---------------|:-----------------------------------------------------------|:-------------------------------|
 | `per_second()` | Graph the rate at which the metric is changing per second. | `per_second(<METRIC_NAME>{*})` |
 
 
 ## Per minute
 
 | Function       | Description                                                | Example                        |
-| :----          | :-------                                                   | :---------                     |
+|:---------------|:-----------------------------------------------------------|:-------------------------------|
 | `per_minute()` | Graph the rate at which the metric is changing per minute. | `per_minute(<METRIC_NAME>{*})` |
 
 ## Per hour
 
 | Function     | Description                                              | Example                      |
-| :----        | :-------                                                 | :---------                   |
+|:-------------|:---------------------------------------------------------|:-----------------------------|
 | `per_hour()` | Graph the rate at which the metric is changing per hour. | `per_hour(<METRIC_NAME>{*})` |
 
 ## Delta time
 
-| Function | Description                                         | Example                |
-| :----    | :-------                                            | :---------             |
+| Function | Description                                                    | Example                |
+|:---------|:---------------------------------------------------------------|:-----------------------|
 | `dt()`   | Graph the time difference in seconds between submitted points. | `dt(<METRIC_NAME>{*})` |
 
 ## Delta value
 
 | Function | Description                    | Example                  |
-| :----    | :-------                       | :---------               |
+|:---------|:-------------------------------|:-------------------------|
 | `diff()` | Graph the delta of the metric. | `diff(<METRIC_NAME>{*})` |
 
+## Monotonic Delta value
+
+| Function           | Description                                                                     | Example                            |
+|:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|
+| `monotonic_diff()` | Graph the delta of the metric like `diff()` but only if this delta is positive. | `monotonic_diff(<METRIC_NAME>{*})` |
 
 ## Derivative
 
 | Function       | Description                                   | Example                        |
-| :----          | :-------                                      | :---------                     |
+|:---------------|:----------------------------------------------|:-------------------------------|
 | `derivative()` | Graph the derivative (diff/dt) of the metric. | `derivative(<METRIC_NAME>{*})` |
 
 ## Other functions
