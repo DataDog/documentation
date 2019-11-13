@@ -96,7 +96,7 @@ This section sets the record straight (for the Docs site, not for all humankind)
 
 * **Code substitution**: When adding something to a code block that isn't meant literally, use the format `<DATADOG_API_KEY>`. *Don't* use `$DATADOG_API_KEY`, `{DATADOG API KEY}`, and certainly not the naked `DATADOG_API_KEY`.
 
-* **Numbers**: Spell out nine and below, and write out the actual number for 10 and above. Do not use commas in four figure numbers, for example, `5000`.
+* **Numbers**: Use words for single digit numbers (zero through nine ). Use numbers for multiple digit numbers (10 and above), decimals (0.9, 1.5, 10.3, etc.), and percents (1%, 1.5%, 10%, etc.). Do not use commas in four figure numbers, for example, `5000`.
 
 ### RFC 2606
 
