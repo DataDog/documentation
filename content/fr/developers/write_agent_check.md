@@ -40,7 +40,7 @@ Le check hérite des valeurs de `AgentCheck` et envoie un gauge de valeur `1` po
 # le bloc try/except suivant rend le check custom compatible avec toutes les versions de l'Agent
 try:
     # Premier essai d'importation de la classe de base à partir des nouvelles versions de l'Agent…
-    from datadog_checks.base.checks import AgentCheck
+    from datadog_checks.base import AgentCheck
 except ImportError:
     # …si la commande ci-dessus a échoué, le check s'exécute dans une version de l'Agent inférieure à 6.6.0
     from checks import AgentCheck
