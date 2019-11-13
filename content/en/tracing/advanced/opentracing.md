@@ -243,7 +243,7 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 
 #### Set errors
 
-To customize an error associated to one of your span, you must import the `io.opentracing.Span`, `io.opentracing.tag.Tags`, and `io.opentracing.util.GlobalTracer` library in the method where the error occurs:
+To customize an error associated to one of your spans, import the `io.opentracing.Span`, `io.opentracing.tag.Tags`, and `io.opentracing.util.GlobalTracer` libraries into the method where the error occurs:
 
 ```java
 import io.opentracing.Span;
@@ -251,7 +251,7 @@ import io.opentracing.tag.Tags;
 import io.opentracing.util.GlobalTracer;
 ```
 
-Then you need to set the error to `true` and add *at least* the `error.msg`, `error.type`, and `error.stack` tag to your span.
+Then, set the error to `true` and add *at least* the `error.msg`, `error.type`, and `error.stack` tags to your span.
 
 ```java
     final Span span = GlobalTracer.get().activeSpan();
@@ -261,8 +261,8 @@ Then you need to set the error to `true` and add *at least* the `error.msg`, `er
     }
 ```
 
-**Note**: Any relevant error metadata explained in [the Trace View docs][4] can also be added.
-If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan` and use `setError(true)` (See [source code][5]).
+**Note**: Any relevant error metadata explained in the [Trace View docs][4] can also be added.
+If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [source code][5] for more details.
 
 [1]: https://github.com/opentracing/opentracing-java
 [2]: /tracing/visualization/#trace
