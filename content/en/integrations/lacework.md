@@ -9,7 +9,7 @@ categories:
 - security
 doc_link: /integrations/lacework/
 has_logo: true
-integration_title: lacework
+integration_title: Lacework
 is_public: true
 public_title: Datadog-Lacework Integration
 ---
@@ -30,8 +30,8 @@ This is a *push integration* which means that Lacework pushes logs/events to Dat
     * **Name** : Enter a name for the integration like `Datadog-Lacework`
     * **Datadog Type**: Select the type of logs sent to Datadog:
 
-        | Datadog Type     | Description                                           |
-        |------------------|-------------------------------------------------------|
+        | Datadog Type     | Description                                            |
+        |------------------|--------------------------------------------------------|
         | `Logs Details`   | Sends Lacework detailed logs to Datadog logs platform. |
         | `Logs Summary`   | Sends Lacework summary to Datadog logs platform.       |
         | `Events Summary` | Sends Lacework summary to Datadog Events platform.     |
@@ -39,11 +39,12 @@ This is a *push integration* which means that Lacework pushes logs/events to Dat
     * **Datadog Site**:
         * Select `com` if you use Datadog US region.
         * Select `eu` if you use Datadog EU region.
-    * **API KEY**: Enter your Datadog API key.
+    * **API KEY**: Enter your [Datadog API key][1].
     * **Alert Security Level**: Select the minimum log severity level of forwarded logs.
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][1].
+Need help? Contact [Datadog support][2].
 
-[1]: /help
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: /help
