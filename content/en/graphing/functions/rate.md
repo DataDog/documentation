@@ -38,7 +38,7 @@ kind: documentation
 
 | Function           | Description                                                                     | Example                            |
 |:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|
-| `monotonic_diff()` | Graph the delta of the metric like `diff()` but only if this delta is positive. | `monotonic_diff(<METRIC_NAME>{*})` |
+| `monotonic_diff()` | Graph the delta of the metric like `diff()` but only if the delta is positive. | `monotonic_diff(<METRIC_NAME>{*})` |
 
 ## Derivative
 
