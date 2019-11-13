@@ -58,7 +58,7 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view. 
 To save the current values of the template variables in a View, click on the dropdown menu and click “Save selections as view”. From there, you will be prompted to enter a unique name for the View. After saving, this View will be listed in the dropdown menu. By clicking on this View you can return to the template variables' previously saved values. 
 
-#### Delete a Saved View
+#### Delete a saved view
 
 To delete a View, click on the dropdown again and click “Manage views...”. From there, a popup with each of the saved Views will be displayed with the trash bin icon next to each for deletion. Click the trash bin icon to delete that View.
 
