@@ -69,8 +69,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 {{% /tab %}}
 {{< /tabs >}}
 
-Up to 5 samples can be saved with the Processor, and each sample can be up to 5000 characters in length. 
-All samples have a status that shows `match` or `no match` which highlights if one of the parsing rules of the grok parser matches this sample or not.
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length.
+All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
