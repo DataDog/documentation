@@ -68,7 +68,7 @@ To delete a View, click on the dropdown again and click “Manage views...”. F
 
 To modify the “(Default Value)” View, click on the pencil icon and update the template variable values. Then click “Done” to save. 
 
-If any values in the other Views are changed, save the values as a new View, and then delete the original View. 
+If any values in the other views are changed, save the values as a new view, and then delete the original view. 
 
 ## Use Template Variables
 
