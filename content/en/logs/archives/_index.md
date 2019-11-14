@@ -27,18 +27,18 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 
 {{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" responsive="true" style="width:75%;">}}
 
-## Create and Configure a Storage Bucket
+## Create and configure a storage bucket
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Go into your [AWS Console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
+Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
 Next, grant Datadog permissions to write log archives to your S3 bucket. US site users do this with role delegation. EU site users do this with the bucket policy.
 
 1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS Cloudwatch.
 
-2. Add the following two permission statements to [the IAM policies of your Datadog role][5] (be sure to edit the bucket names and, if desired, specify the paths that contain your log archives). The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][6]. The `PutObject` permission is sufficient for uploading archives.
+2. Add the following two permission statements to [the IAM policies of your Datadog role][5]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][6]. The `PutObject` permission is sufficient for uploading archives.
 
 
     ```
@@ -69,13 +69,13 @@ Next, grant Datadog permissions to write log archives to your S3 bucket. US site
         ]
     }
     ```
-3. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+3. Go to your [Archives page][7] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 
 4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
 
     {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog" responsive="true" style="width:75%;">}}
 
-### Server Side Encryption (SSE)
+### Server side encryption (SSE)
 
 To add server side encryption to your S3 log archives, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
