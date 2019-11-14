@@ -70,7 +70,7 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque**: La vérification `window.DD_LOGS` sert à éviter les problèmes liés au chargement du script.
+**Remarque**: le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
 
 ### Tokens client
 
