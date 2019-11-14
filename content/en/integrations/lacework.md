@@ -12,6 +12,10 @@ has_logo: true
 integration_title: Lacework
 is_public: true
 public_title: Datadog-Lacework Integration
+further_reading:
+- link: "https://www.lacework.com/datadog/"
+  tag: "Lacework.com"
+  text: "Lacework-Datadog documentation."
 ---
 
 ## Overview
@@ -45,6 +49,10 @@ Lacework pushes logs and events to Datadog, so all configuration is done on Lace
 ## Troubleshooting
 
 Need help? Contact [Datadog support][2].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /help
