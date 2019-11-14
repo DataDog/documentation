@@ -190,8 +190,8 @@ $statsd->event('An error occurred.',
 
 **Note**:
 
-* Sending events with this method uses cURL for API request.
-* You should use try/catch block with it to avoid throwing warnings/errors on communication issues with Datadog API.
+* Sending events with this method uses cURL for API requests.
+* You should use a `try`/`catch` code block to avoid warnings or errors on communication issues with Datadog API.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
