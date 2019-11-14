@@ -10,7 +10,7 @@ further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/metrics_type"
+- link: "developers/metrics/types"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -55,7 +55,7 @@ Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 from datadog import initialize, statsd
 import time
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -101,12 +101,12 @@ import (
 	"github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
 	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
+	if err != nil {ÿ
 		log.Fatal(err)
 	}
-	for {
+	for {ÿ
 
 		statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
 		statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -126,12 +126,12 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
             Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
             Statsd.count("example_metric.count", 2, ["environment:dev"]);
@@ -151,11 +151,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -165,7 +165,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
             DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
             DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
@@ -193,7 +193,7 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->increment('example_metric.increment', array('environment'=>'dev'));
     $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
@@ -230,7 +230,7 @@ Run the following Python code to submit a DogStatsD `GAUGE` metric to Datadog:
 from datadog import initialize, statsd
 import time
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -279,13 +279,13 @@ import (
 	"github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
 	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
+	if err != nil {ÿ
 		log.Fatal(err)
 	}
 	var i float64
-	for {
+	for {ÿ
 		i += 1
 		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
 		time.Sleep(10 * time.Second)
@@ -303,12 +303,12 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordGaugeValue("example_metric.gauge", i, ["environment:dev"]);
             Thread.sleep(10000);
         }
@@ -326,11 +326,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -340,7 +340,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(100000);
         }
@@ -367,7 +367,7 @@ $statsd = new DogStatsd(
   );
 
 $i = 0;
-while (TRUE) {
+while (TRUE) {ÿ
     $i++;
     $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
@@ -401,7 +401,7 @@ from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -449,13 +449,13 @@ import (
 	"github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
 	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
+	if err != nil {ÿ
 		log.Fatal(err)
 	}
 	var i float64
-	for {
+	for {ÿ
 		i += 1
 		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
 		time.Sleep(rand.Intn(10) * time.Second)
@@ -473,11 +473,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -487,7 +487,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(random.Next(100000));
         }
@@ -515,7 +515,7 @@ $statsd = new DogStatsd(
 
 $i = 0;
 
-while (TRUE) {
+while (TRUE) {ÿ
     $i++;
     $statsd->set('example_metric.set', i, array('environment'=>'dev'));
     sleep(rand(0, 10));
@@ -554,7 +554,7 @@ from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -598,13 +598,13 @@ import (
 	"github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
 	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
+	if err != nil {ÿ
 		log.Fatal(err)
 	}
 
-	for {
+	for {ÿ
 		statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
 		time.Sleep(2 * time.Second)
 	}
@@ -621,12 +621,12 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), ["environment:dev"]);
             Thread.sleep(2000);
         }
@@ -644,11 +644,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -658,7 +658,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
@@ -684,7 +684,7 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
@@ -733,7 +733,7 @@ from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -808,7 +808,7 @@ from datadog import initialize, statsd
 import time
 import random
 
-options = {
+options = {ÿ
     'statsd_host':'127.0.0.1',
     'statsd_port':8125
 }
@@ -852,13 +852,13 @@ import (
 	"github.com/DataDog/datadog-go/statsd"
 )
 
-func main() {
+func main() {ÿ
 	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
+	if err != nil {ÿ
 		log.Fatal(err)
 	}
 
-	for {
+	for {ÿ
 		statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
 		time.Sleep(2 * time.Second)
 	}
@@ -875,12 +875,12 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
-public class DogStatsdClient {
+public class DogStatsdClient {ÿ
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {ÿ
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {ÿ
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), ["environment:dev"]);
             Thread.sleep(2000);
         }
@@ -898,11 +898,11 @@ using StatsdClient;
 using System;
 
 public class DogStatsdClient
-{
+{ÿ
     public static void Main()
-    {
+    {ÿ
         var dogstatsdConfig = new StatsdConfig
-        {
+        {ÿ
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
@@ -912,7 +912,7 @@ public class DogStatsdClient
         var random = new Random(0);
 
         for (int i = 0; i < 10; i++)
-        {
+        {ÿ
             DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
@@ -938,7 +938,7 @@ $statsd = new DogStatsd(
      )
   );
 
-while (TRUE) {
+while (TRUE) {ÿ
     $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
@@ -1086,13 +1086,13 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
-[2]: /developers/metrics/metrics_type/?tab=count#metric-type-definition
+[2]: /developers/metrics/types/?tab=count#metric-type-definition
 [3]: /graphing/functions/arithmetic/#cumulative-sum
 [4]: /graphing/functions/arithmetic/#integral
-[5]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
-[6]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
-[7]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
+[5]: /developers/metrics/types/?tab=gauge#metric-type-definition
+[6]: /developers/metrics/types/?tab=set#metric-type-definition
+[7]: /developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [9]: /help
 [10]: /graphing/metrics/distributions
-[11]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[11]: /developers/metrics/types/?tab=distribution#metric-type-definition

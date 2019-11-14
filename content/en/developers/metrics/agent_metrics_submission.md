@@ -224,7 +224,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/write_agent_check
-[2]: /developers/metrics/metrics_type
+[2]: /developers/metrics/types
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information

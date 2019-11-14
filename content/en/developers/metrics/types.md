@@ -9,6 +9,7 @@ aliases:
  - /developers/metrics/histograms/
  - /developers/metrics/rates/
  - /developers/metrics/sets/
+ - /developers/metrics_type/
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -68,7 +69,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 
 When graphed, this `COUNT` metric looks like the following:
 
-{{< img src="developers/metrics/metric_types/count_metric.png" alt="Count Metric" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" responsive="true">}}
 
 Note: StatsD counts show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
 
@@ -99,7 +100,7 @@ Then this pattern of `0.33`, `0.66`, `0`, repeats. **Note**: for a `RATE` metric
 
 Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following:
 
-{{< img src="developers/metrics/metric_types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" responsive="true">}}
 
 Discover how to submit rate metrics:
 
@@ -276,13 +277,13 @@ Each source has its own limitations, and metric submission types do not always m
 | [DogStatsD][10]   | `dog.set(...)`                       | SET             | GAUGE               |
 | [DogStatsD][11]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
 | [Agent check][12] | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][14] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
-| [Agent check][15] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
-| [Agent check][16] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
-| [Agent check][17] | `self.rate(...)`                     | RATE            | GAUGE               |
-| [Agent check][18] | `self.set(...)`                      | SET             | GAUGE               |
+| [Agent check][13] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Agent check][14] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Agent check][15] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][16] | `self.rate(...)`                     | RATE            | GAUGE               |
+| [Agent check][17] | `self.set(...)`                      | SET             | GAUGE               |
 
-[1]: /developers/metrics/metric_type_modifiers
+[1]: /developers/metrics/type_modifiers
 [2]: /graphing/metrics/summary
 [3]: /api/?lang=python#post-timeseries-points
 [4]: /developers/metrics/dogstatsd_metrics_submission
@@ -294,9 +295,8 @@ Each source has its own limitations, and metric submission types do not always m
 [10]: /developers/metrics/dogstatsd_metrics_submission/#set
 [11]: /developers/metrics/dogstatsd_metrics_submission/#histogram
 [12]: /developers/metrics/agent_metrics_submission/?tab=count#count
-[13]: /developers/metrics/agent_metrics_submission/?tab=count#increment-decrement
-[14]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[15]: /developers/metrics/agent_metrics_submission/?tab=gauge
-[16]: /developers/metrics/agent_metrics_submission/?tab=histogram
-[17]: /developers/metrics/agent_metrics_submission/?tab=rate
-[18]: /developers/integrations
+[13]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[14]: /developers/metrics/agent_metrics_submission/?tab=gauge
+[15]: /developers/metrics/agent_metrics_submission/?tab=histogram
+[16]: /developers/metrics/agent_metrics_submission/?tab=rate
+[17]: /developers/integrations
