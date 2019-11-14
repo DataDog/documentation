@@ -70,7 +70,7 @@ Setting the value without a secret results in the token being readable in the `P
 
 3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent. See [Step 3 - Create the Cluster Agent and its service](#step-3-create-the-cluster-agent-and-its-service)) and [Step 2 - Enable the Datadog Cluster Agent](#step-2-enable-the-datadog-agent).
 
-[1]: 
+[1]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
@@ -111,7 +111,7 @@ Setting the value without a secret results in the token being readable in the `P
 
 1. Download the following manifests:
 
-  * [`datadog-cluster-agent_service.yaml`: The Cluster Agent Service manifest.][3]
+  * [`datadog-cluster-agent_service.yaml`: The Cluster Agent Service manifest][3]
   * [`cluster-agent.yaml`: Cluster Agent manifest][4]
 
 2. In the `cluster-agent.yaml` manifest, replace `<YOUR_API_KEY>` with [your Datadog API key][5]:
