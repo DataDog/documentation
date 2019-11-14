@@ -14,7 +14,7 @@ further_reading:
   text: "Log Explorer"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without Limits\*"
+  text: "Logging without Limits*"
 ---
 
 ## Archives
@@ -169,6 +169,6 @@ Logs enter the first archive whose filter they match on.
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*Logging without Limits is a trademark of Datadog, Inc.
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/archives/rehydrating
