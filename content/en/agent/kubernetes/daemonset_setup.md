@@ -35,13 +35,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
-Remember to encode your API key using `base64` if you are using RBAC:
+Remember to encode your API key using `base64` if you are using `secret`s:
 
 ```
 echo -n <YOUR_API_KEY> | base64
 ```
 
-**Note**: You may need a higher memory limit for Kube State Metrics or high DogStatsD usage.
+**Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
 
 ```yaml
 # datadog-agent.yaml
@@ -92,7 +92,7 @@ spec:
         env:
           - name: DD_API_KEY
             value: "<YOUR_API_KEY>"
-            ## Kubernetes Secrets - use this section instead of `value` to supply the API Key with secrets
+            ## Kubernetes secrets - use this section instead of `value` to supply the API Key with secrets
             # valueFrom:
             #   secretKeyRef:
             #     name: datadog-secret
