@@ -45,7 +45,7 @@ Paste the generated code snippet into the head tag (in front of any other script
   type="text/javascript">
 </script>
 <script>
-  window.DD_RUM.init({
+  window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
@@ -61,7 +61,7 @@ Paste the generated code snippet into the head tag (in front of any other script
   type="text/javascript">
 </script>
 <script>
-  window.DD_RUM.init({
+  window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
@@ -70,6 +70,8 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the library.
 
 ### Client Tokens
 
