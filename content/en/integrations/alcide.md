@@ -42,7 +42,7 @@ In Alcide, select the *Integrations* tab and go to the *Detections Integrations 
 
 6. Optionally, you can create whitelist and blacklist filters on entities using the *Entities Matching* and *Entities Not Matching* boxes.
 
-Then, go to the *Selected Audit Entries Integration Configuration* section, located underneath the previous one. This section is used to configure integrations for audit logs.
+Then, go to the *Selected Audit Entries Integration Configuration* section, located underneath the previous section. This section is used to configure integrations for audit logs.
 
 1. Select **HTTP API** as your target.
 
