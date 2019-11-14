@@ -433,7 +433,7 @@ To configure the Tracer using an JSON file, create `datadog.json` in the instrum
 
 ### Configuration Variables
 
-The following tables list the supported configuration variables. In each table, the first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `TracerSettings` class when changing settings in the code.
+The following tables list the supported configuration variables. In each table, the first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `TracerSettings` class when changing settings in the code.
 
 The first table below lists configuration variables that are available for both automatic and manual instrumentation.
 
@@ -457,7 +457,7 @@ The following table lists configuration variables that are available only when u
 | `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section above.                       |
 | `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
 
 | Setting Name                             | Property Name         | Description                                                                                                           |
 |------------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------|
