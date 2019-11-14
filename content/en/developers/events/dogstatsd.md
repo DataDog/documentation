@@ -25,7 +25,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 **Definitions**:
 
 | Parameter            | Type            | Required | Description                                                                                |
-| -------------------- | --------------- | -------- | ------------------------------------------------------------------------------------------ |
+|----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
 | `<TITLE>`            | String          | Yes      | The title of the event                                                                     |
 | `<TEXT>`             | String          | Yes      | The text body of the event                                                                 |
 | `<TIMESTAMP>`        | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
@@ -165,6 +165,35 @@ $statsd->event('An error occurred.',
   );
 {{< /code-block >}}
 
+With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
+To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
+
+{{< code-block lang="php" filename="event_through_api.php" >}}
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('api_key' => '<DATADOG_API_KEY>',
+          'app_key' => '<DATADOG_APPLICATION_KEY>',
+     )
+  );
+
+$statsd->event('An error occurred.',
+    array( 'text' => 'Error message',
+           'alert_type' => 'error'
+    )
+  );
+{{< /code-block >}}
+
+**Note**:
+
+* Sending events with this method uses cURL for API request.
+* You should use try/catch block with it to avoid throwing warnings/errors on communication issues with Datadog API.
+
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
