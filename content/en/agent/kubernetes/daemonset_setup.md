@@ -33,15 +33,15 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Create manifest
-Create the following `datadog-agent.yaml` manifest.
+Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
-Remember to encode your API key using `base64`:
+Remember to encode your API key using `base64` if you are using RBAC:
 
 ```
-echo -n <DD_API_KEY> | base64
+echo -n <YOUR_API_KEY> | base64
 ```
 
-**Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
+**Note**: You may need a higher memory limit for Kube State Metrics or high DogStatsD usage.
 
 ```yaml
 # datadog-agent.yaml
@@ -56,7 +56,7 @@ echo -n <DD_API_KEY> | base64
 #     app: "datadog"
 # type: Opaque
 # data:
-#   api-key: "<YOUR_BASE64_ENCODED_DATADOG_API_KEY>"
+#   api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -91,7 +91,8 @@ spec:
             protocol: TCP
         env:
           - name: DD_API_KEY
-            ## Kubernetes Secrets - uncomment this section to supply API Key with secrets
+            value: "<YOUR_API_KEY>"
+            ## Kubernetes Secrets - use this section instead of `value` to supply the API Key with secrets
             # valueFrom:
             #   secretKeyRef:
             #     name: datadog-secret
@@ -163,14 +164,14 @@ spec:
           name: cgroups
 ```
 
-Replace `<YOUR_API_KEY>` with [your Datadog API key][3] or use [Kubernetes secrets][4] to set your API key as an [environment variable][5]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][6]. Consult the [Docker integration][7] to discover all of the configuration options.
+Replace `<YOUR_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
 
 Deploy the DaemonSet with the command:
 ```
 kubectl create -f datadog-agent.yaml
 ```
 
-**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][8].
+**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][9].
 
 ### Verification
 
@@ -195,14 +196,14 @@ Starting with version 6.11.0, the Datadog Agent can auto-detect the Kubernetes c
 
 On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags.
 
-**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][9] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
+**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][10] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
 
 
 ## Enable capabilities
 
 ### Log Collection
 
-To enable [Log collection][10] with your DaemonSet:
+To enable [Log collection][11] with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
 
@@ -307,7 +308,7 @@ The Datadog Agent follows the below logic to know where logs should be picked up
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
-Finally, use [Autodiscovery with Pod Annotations][11] to enhance log collection for your containers.
+Finally, use [Autodiscovery with Pod Annotations][12] to enhance log collection for your containers.
 
 #### Short lived containers
 
@@ -382,11 +383,11 @@ tracer.configure(
 )
 ```
 
-Refer to the [language-specific APM instrumentation docs][12] for more examples.
+Refer to the [language-specific APM instrumentation docs][13] for more examples.
 
 ### Process Collection
 
-See [Process collection for Kubernetes][13].
+See [Process collection for Kubernetes][14].
 
 ### DogStatsD
 
@@ -401,7 +402,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][14]
+Learn more about this in the [Kubernetes DogStatsD documentation][15]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -415,15 +416,16 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://hub.docker.com/r/datadog/agent
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://kubernetes.io/docs/concepts/configuration/secret
-[5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
-[6]: /agent/faq/kubernetes-secrets
-[7]: /agent/docker/#environment-variables
-[8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
-[9]: /integrations/amazon_ec2/#configuration
-[10]: /logs
-[11]: /agent/autodiscovery/integrations/?tab=kubernetes
-[12]: /tracing/setup
-[13]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[14]: /agent/kubernetes/dogstatsd
+[3]: /integrations/containerd/#installation-on-containers
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://kubernetes.io/docs/concepts/configuration/secret
+[6]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
+[7]: /agent/faq/kubernetes-secrets
+[8]: /agent/docker/#environment-variables
+[9]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
+[10]: /integrations/amazon_ec2/#configuration
+[11]: /logs
+[12]: /agent/autodiscovery/integrations/?tab=kubernetes
+[13]: /tracing/setup
+[14]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[15]: /agent/kubernetes/dogstatsd
