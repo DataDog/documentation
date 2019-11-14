@@ -161,11 +161,11 @@ Logs enter the first archive whose filter they match on.
 
 {{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on." responsive="true" style="width:75%;">}}
 
-## Further Reading
-
-{{< whatsnext desc="This section includes the following topics:" >}}
+{{< whatsnext desc="Next, learn how to access your archived log content from Datadog:" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

@@ -999,18 +999,10 @@ main:
     parent: "log_management"
     identifier: "log_archives"
     weight: 5
-  - name: "Archive to AWS S3"
-    url: "logs/archives/s3/"
-    parent: "log_archives"
-    weight: 501
-  - name: "Archive to GCS"
-    url: "logs/archives/gcs/"
-    parent: "log_archives"
-    weight: 502
   - name: "Rehydrate from Archives"
     url: "logs/archives/rehydrating"
     parent: "log_archives"
-    weight: 503
+    weight: 501
 
   - name: "Indexes"
     url: "logs/indexes"
