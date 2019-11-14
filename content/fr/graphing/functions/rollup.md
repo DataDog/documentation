@@ -14,7 +14,7 @@ Notez que les cumuls doivent normalement être évités dans les requêtes du [m
 
 Ces fonctions sont prévues uniquement pour les métriques envoyées comme taux ou counters via StatsD. Ces fonctions n'ont aucun effet sur les autres types de métrique. Pour en savoir plus sur l'utilisation des fonctions  `.as_count()` et `.as_rate()`, consultez [notre article de blog][2].
 
-Remarque : [la seule requête disponible avec `as_count()` est `sum()`][3] (sauf en cas d'utilisation d'un résumé de cumul), qui est la seule fonction mathématique fiable pour ce type de comportement. Pour en savoir plus, consultez la [documentation détaillée relative aux modificateurs au sein de l'application][4].
+Remarque : [la seule requête disponible avec `as_count()` est `sum()`][3] (sauf en cas d'utilisation d'un résumé de cumul), qui est la seule fonction mathématique fiable pour ce type de comportement. Pour en savoir plus, consultez la [documentation détaillée relative aux modificateurs intégrées à l'application][4].
 
 ## Autres fonctions
 
