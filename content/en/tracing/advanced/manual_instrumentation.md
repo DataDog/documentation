@@ -302,11 +302,11 @@ For example, the following snippet traces the `CustomDriver::doWork()` method, a
 <?php
   dd_trace("CustomDriver", "doWork", function (...$args) {
       // Start a new span
-      $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+      $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
       $span = $scope->getSpan();
 
       // Access object members via $this
-      $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
+      $span->setTag(\DDTrace\Tag::RESOURCE_NAME, $this->workToDo);
 
       try {
           // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
