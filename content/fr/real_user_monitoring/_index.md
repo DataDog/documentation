@@ -44,7 +44,7 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
   type="text/javascript">
 </script>
 <script>
-  window.DD_RUM && window.DD_RUM.init({
+  window.DD_RUM.init({
     clientToken: '<TOKEN_CLIENT>',
     applicationId: '<ID_APPLICATION>',
   });
@@ -60,7 +60,7 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
   type="text/javascript">
 </script>
 <script>
-  window.DD_RUM && window.DD_RUM.init({
+  window.DD_RUM.init({
     clientToken: '<TOKEN_CLIENT>',
     applicationId: '<ID_APPLICATION>',
   });
@@ -69,8 +69,6 @@ Collez l'extrait de code généré dans le tag d'en-tête (avant tous les autres
 
 {{% /tab %}}
 {{< /tabs >}}
-
-**Remarque**: le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
 
 ### Tokens client
 

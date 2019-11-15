@@ -81,7 +81,7 @@ Utilisez le bouton de *partage* pour envoyer votre vue Log Explorer actuelle à 
 | Bouton              | Description                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Export to Monitor   | Exportez la requête appliquée à votre analyse de logs pour créer la requête de votre nouveau [log monitor][1]. |
-| Export to Dashboard | Exportez l'analyse actuelle sous la forme d'un widget dans un nouveau [tableau de bord][2] ou un tableau de bord existant. |
+| Export to Dashboard | Exportez l'analyse actuelle sous la forme d'un widget dans un nouveau [dashboard][2] ou un dashboard existant. |
 | Generate new Metric | [Générez une nouvelle métrique][3] à partir de la requête d'analyse actuelle.  |
 
 

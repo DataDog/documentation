@@ -33,7 +33,7 @@ public_title: "Intégration Datadog/Amazon\_RDS"
 short_description: "Surveillez un ensemble de métriques relatives à Amazon\_RDS."
 version: '1.0'
 ---
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="Tableau de bord RDS" responsive="true" popup="true">}}
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="Dashboard RDS" responsive="true" popup="true">}}
 
 ## Présentation
 

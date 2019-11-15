@@ -1,5 +1,5 @@
 ---
-title: Tableaux de bord et métriques de trace Datadog
+title: Dashboards et métriques de trace Datadog
 kind: video
 language: fr
 wistiaid: hc545nswvk
