@@ -298,7 +298,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
     "is_enabled": true,
     "source_type": "attribute",
     "sources": ["<SOURCE_ATTRIBUTE>"],
-    "target": "<TARGET_ATTRIBUTE",
+    "target": "<TARGET_ATTRIBUTE>",
     "target_type": "tag",
     "preserve_source": false,
     "override_on_conflict": false
