@@ -178,5 +178,5 @@ Response time is the sum of these network timings.
 [1]: /api/?lang=bash#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
 [3]: /integrations/#cat-notification
-[4]: /developers/faq/what-do-notifications-do-in-datadog
+[4]: /monitors/notifications/#notification
 [5]: http://daringfireball.net/projects/markdown/syntax
