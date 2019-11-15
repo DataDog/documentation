@@ -130,7 +130,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
     ## Define the destination for the logs
     ruleset(name="infiles") {
-         action(type="omfwd" target="tcp-intake.logs.datadoghq.eu" protocol="tcp" port="1883" template="DatadogFormat")
+         action(type="omfwd" target="tcp-intake.logs.datadoghq.com" protocol="tcp" port="1883" template="DatadogFormat")
     }
     ```
 
@@ -149,7 +149,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.com" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
         }
         ```
 
@@ -312,7 +312,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
     ## Define the destination for the logs
-    *.* @@tcp-intake.logs.datadoghq.eu:1883;DatadogFormat
+    *.* @@tcp-intake.logs.datadoghq.com:1883;DatadogFormat
     ```
 
 4. (Optional) TLS Encryption:
@@ -334,7 +334,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         $ActionSendStreamDriverMode 1
         $ActionSendStreamDriverAuthMode x509/name
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
-        *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
+        *.* @@tcp-intake.logs.datadoghq.com:443;DatadogFormat
         ```
 
 5. Restart Rsyslog and your new logs are forwarded directly to your Datadog account.
