@@ -35,7 +35,7 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
-Remember to encode your API key using `base64` if you are using `secret`s:
+Remember to encode your API key using `base64` if you are using secrets:
 
 ```
 echo -n <YOUR_API_KEY> | base64
