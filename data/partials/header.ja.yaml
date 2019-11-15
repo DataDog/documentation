@@ -37,7 +37,7 @@ left:
     link: '#'
     title: お客様事例
     children:
-      - name: solutions_retail
+      - name: solutions_financial
         link: 'https://www.datadoghq.com/ja/solutions/financial-services/'
         title: 金融サービス
       - name: solutions_manufacturing
@@ -52,7 +52,7 @@ left:
       - name: solutions_media
         link: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
         title: メディア / エンターテインメント
-      - name: solutions_healthcare
+      - name: solutions_gaming
         link: 'https://www.datadoghq.com/ja/solutions/gaming/'
         title: ゲーム業界
       - name: solutions_cloudmigration
