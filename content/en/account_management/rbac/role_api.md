@@ -60,7 +60,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{% tab "Response" %}}
 
-{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
     "meta": {
         "page": {
@@ -71,11 +71,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 	    {
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+            "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -95,7 +94,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
     ]
 }
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -132,7 +131,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -198,7 +196,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -256,7 +253,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -340,8 +336,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "created": "2000-02-29T14:26:26.983187+00:00",
             "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "$PERMISSION_UUID"
+            "display_type": "other"
         }
     }]
 }
@@ -386,8 +381,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "created": "2000-02-29T14:26:26.983187+00:00",
             "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "<PERMISSION_UUID>"
+            "display_type": "other"
         }
     }]
 }
@@ -440,8 +434,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "created": "2000-02-29T14:26:26.983187+00:00",
             "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "<PERMISSION_UUID>"
+            "display_type": "other"
         }
     }]
 }
@@ -494,8 +487,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "created": "2000-02-29T14:26:26.983187+00:00",
             "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "$DIFFERENT_PERMISSION_UUID"
+            "display_type": "other"
         }
     }]
 }

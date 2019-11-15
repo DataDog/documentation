@@ -5,7 +5,7 @@ kind: integration
 description: 'Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 short_description: 'Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 categories:
-  - Collecte de logs
+  - log collection
 doc_link: /integrations/syslog_ng/
 aliases:
   - /fr/logs/log_collection/syslog_ng
@@ -75,14 +75,17 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     ```
 
 4. Chiffrement TLS (facultatif) :
-    Pour activer le chiffrement TLS :
 
-    1. Téléchargez le [certificat][1] de Datadog et enregistrez-le dans `/etc/syslog-ng/certs.d/datadoghq.crt`.
+    * Téléchargez le certificat d'autorité de certification :
 
-    2. Modifiez la destination comme suit :
+     ```
+    sudo apt-get install ca-certificates
+     ```
+
+    * Modifiez la destination comme suit :
 
         ```
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/etc/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
         ```
 
     Pour en savoir plus sur les paramètres et les fonctionnalités de TLS pour Syslog-ng, consultez la [documentation officielle][2] (en anglais).
@@ -143,14 +146,17 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     ```
 
 4. Chiffrement TLS (facultatif) :
-   Pour activer le chiffrement TLS :
 
-    1. Téléchargez le [certificat][1] de Datadog et enregistrez-le dans `/etc/syslog-ng/certs.d/datadoghq.crt`.
+    * Téléchargez le certificat d'autorité de certification :
 
-    2. Modifiez la destination comme suit :
+     ```
+    sudo apt-get install ca-certificates
+      ```
+
+    * Modifiez la destination comme suit :
 
         ```
-        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted) ca_dir('/etc/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
         ```
 
     Pour en savoir plus sur les paramètres et les fonctionnalités de TLS pour Syslog-ng, consultez la [documentation officielle][2] (en anglais).
@@ -158,7 +164,6 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
 5. Redémarrez Syslog-ng.
 
 
-[1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
 {{< /tabs >}}
