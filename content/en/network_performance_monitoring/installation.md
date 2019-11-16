@@ -47,19 +47,11 @@ To enable network performance monitoring, configure it in your [Agent's main con
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. Enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
-
-    ```
-    process_config:
-      enabled: "true"
-    ```
-    Learn more about [Datadog Live Processes data collection][2].
-
-2. Copy the system-probe example configuration:<br>
+1. Copy the system-probe example configuration:<br>
 `sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml`
-3. Modify the system-probe configuration file to set the enable flag to `true`.<br>
+2. Modify the system-probe configuration file to set the enable flag to `true`.<br>
 
-4. Optionally uncomment the `system_probe_config` parameter to add a custom object:
+3. Optionally uncomment the `system_probe_config` parameter to add a custom object:
     ```
     ## @param system_probe_config - custom object - optional
     ## (...)
@@ -67,7 +59,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     system_probe_config:
     ```
 
-5. Enter specific configurations for your System Probe data collection:
+4. Enter specific configurations for your System Probe data collection:
     ```
     system_probe_config:
         ## @param enabled - boolean - optional - default: false
@@ -76,11 +68,10 @@ To enable network performance monitoring with the Datadog Agent, use the followi
         enabled: true
     ```
 
-6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
-7. [Restart the Agent][3]: `sudo service datadog-agent restart`
+5. Start the system-probe: `sudo service datadog-agent-sysprobe start`
+6. [Restart the Agent][3]: `sudo service datadog-agent restart`
 
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /graphing/infrastructure/process
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
