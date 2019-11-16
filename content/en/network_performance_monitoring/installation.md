@@ -15,10 +15,6 @@ further_reading:
   text: "Network Widget"
 ---
 
-<div class="alert alert-warning">
-Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
-</div>
-
 Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
 
 Supported platforms include:
