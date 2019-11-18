@@ -70,7 +70,7 @@ Choisissez ce que vous souhaitez afficher dans votre liste des services :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/setup
+[1]: /fr/tracing/send_traces
 [2]: /fr/tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
 [4]: /fr/tracing/visualization/service
