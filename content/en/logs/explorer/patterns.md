@@ -48,9 +48,9 @@ Click on a pattern to see a sample of underlying logs, and eventually display on
 
 Selecting a pattern opens a contextual panel that displays a sample of underlying logs. Three buttons are available in the top-right corner:
 
-* View all logs matching the pattern query.
-* Graph the evolution of this pattern over time.
-* See an automatically generated parsing rule associated to this pattern:
+* **Parsing Rule**: See an automatically generated parsing rule associated to this pattern (see screenshot below).
+* **View All**: View all logs matching the pattern query.
+* **Graph**: Graph the evolution of this pattern over time.
 
 {{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Log Patterns Parsing Rules" responsive="true" style="width:80%;">}}
 
