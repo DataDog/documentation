@@ -34,7 +34,7 @@ Consider a [COUNT metric][3] that is incremented 1,000 times (+1 each time) over
 
 ## Aggregation rules per metric type
 
-Among all values received during the same flush interval, the aggregated value send depends of the [metric type][4]:
+Among all values received during the same flush interval, the aggregated value send depends on the [metric type][4]:
 
 | Metric Type    | Aggregation performed over one flush interval                                                                                                                  |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
