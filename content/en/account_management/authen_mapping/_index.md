@@ -62,6 +62,7 @@ curl -X POST \
              }
          }'
 ```
+{{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
