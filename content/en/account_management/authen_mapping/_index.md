@@ -62,7 +62,6 @@ curl -X POST \
              }
          }'
 ```
-{{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -71,9 +70,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{
-  "data": {
-    "attributes": {
+{ÿ
+  "data": {ÿ
+    "attributes": {ÿ
       "created_at": "2019-11-04 17:41:29.015504",
       "created_by": "string",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
@@ -81,15 +80,15 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     },
     "type": "authn_mappings",
     "id": "string",
-    "relationships": {
-      "saml_assertion_attributes": {
-        "data": {
+    "relationships": {ÿ
+      "saml_assertion_attributes": {ÿ
+        "data": {ÿ
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {
-        "data": {
+      "roles": {ÿ
+        "data": {ÿ
           "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
@@ -97,18 +96,18 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   },
   "included": [
-    {
-      "data": {
+    {ÿ
+      "data": {ÿ
         "id": "string",
         "type": "roles",
-        "attributes": {
+        "attributes": {ÿ
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
           "name": "string"
         },
-        "relationships": {
+        "relationships": {ÿ
           "data": [
-            {
+            {ÿ
               "id": "123e4567-e89b-12d3-a456-426655441000",
               "type": "permissions"
             }
@@ -116,11 +115,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
       }
     },
-    {
-      "data": {
+    {ÿ
+      "data": {ÿ
         "id": 6,
         "type": "saml_assertion_attributes",
-        "attributes": {
+        "attributes": {ÿ
           "id": 6,
           "attribute_key": "string",
           "attribute_value": "string"
