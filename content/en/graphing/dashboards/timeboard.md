@@ -34,18 +34,18 @@ Timeboard settings are the same as screenboards with the exception of generating
 
 ## Adding graphs
 
-After [creating your timeboard][8], add graphs using the **Edit widgets** button or the **Add graph** link, then drag the appropriate [widget][9] onto the timeboard.
+After [creating your timeboard][8], add graphs using the **Edit widgets** button or **Add graph** link, then drag the appropriate [widget][9] onto the timeboard.
 
 ## Search
 ### Events
 
-Set up events overlay by clicking the **Search...** link in the upper left, select **Events**, and enter a [query][10] in the search box. This replaces event overlays added at design time, and applies to all graphs on the dashboard. The overlay shows the occurrence of events on your timeseries graphs with a list of events on the right.
+Set up an overlay of events by clicking the **Search...** link in the upper left, select **Events**, and enter a [query][10] in the search box. This replaces event overlays added at design time, and applies to all graphs on the timeboard. The overlay shows the occurrence of events on your timeseries graphs with a list of events on the right.
 
 {{< img src="graphing/dashboards/timeboard/events_overlay.png" alt="Events overlay" responsive="true" style="width:75%;">}}
 
 ### Logs
 
-Set up logs overlay by clicking the **Search...** link in the upper left, select **Logs**, and enter a [query][11] in the search box. The overlay shows the frequency of logs on your timeseries graphs with a list of logs on the right.
+Set up an overlay of logs by clicking the **Search...** link in the upper left, select **Logs**, and enter a [query][11] in the search box. The overlay shows the frequency of logs on your timeseries graphs with a list of logs on the right.
 
 ## Graph menu
 
@@ -56,17 +56,17 @@ Left click on any dashboard timeseries graph to open an options menu:
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|
 | Annotate this graph    | Write a comment or notify members of your team about a graph. |
-| View in full screen    | View the graph in full screen.                                |
+| View in full screen    | View the graph in [full screen mode][12].                     |
 | Copy tags to clipboard | Copy the tags to your clipboard that display on hover.        |
-| View related processes | Jump to the [Live Processes][12] page scoped to your graph.   |
-| View related hosts     | Jump to the [Host Map][13] page scoped to your graph.         |
-| View related logs      | Jump to the [Log Explorer][14] page scoped to your graph.     |
+| View related processes | Jump to the [Live Processes][13] page scoped to your graph.   |
+| View related hosts     | Jump to the [Host Map][14] page scoped to your graph.         |
+| View related logs      | Jump to the [Log Explorer][15] page scoped to your graph.     |
 
 ### Logs search query
 
-When viewing related logs, the search query is defined using the following parameters:
+The search query for **View related logs** is defined using the following parameters:
 
-* **Timeframe**: Focuses on the selected data point and uses the graph bucket size to display data before and after the selected point.
+* **Timeframe**: is focused on the selected data point, and uses the graph time bucket size to display data before and after the selected point.
 * **Integration prefix**: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
 * **Tags**: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
 
@@ -85,6 +85,7 @@ When viewing related logs, the search query is defined using the following param
 [9]: /graphing/widgets
 [10]: /graphing/event_stream/#event-query-language
 [11]: /logs/explorer/search/#search-syntax
-[12]: https://app.datadoghq.com/process
-[13]: https://app.datadoghq.com/infrastructure/map
-[14]: https://app.datadoghq.com/logs
+[12]: /graphing/widgets/#full-screen
+[13]: https://app.datadoghq.com/process
+[14]: https://app.datadoghq.com/infrastructure/map
+[15]: https://app.datadoghq.com/logs
