@@ -59,7 +59,7 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /fr/developers/metrics/metrics-type
+[2]: /fr/developers/metrics/metrics_type
 {{% /tab %}}
 {{% tab "Find" %}}
 
