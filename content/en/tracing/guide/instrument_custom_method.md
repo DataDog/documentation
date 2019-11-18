@@ -349,7 +349,7 @@ The span summary table provides aggregate information about the spans that make 
 
     {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-You've now successfully added custom spans to your codebase, making them available on the flame graph and in [Trace Search & Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
+You've now successfully added custom spans to your codebase, making them available on the flame graph and in [App Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
 
 ## Further Reading
 

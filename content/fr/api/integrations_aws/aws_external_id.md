@@ -2,13 +2,13 @@
 title: Générer des ID externes
 type: apicontent
 order: 15.06
-external_redirect: '/api/#generer-desID-externes'
+external_redirect: '/api/#generer-des-id-externes'
 ---
 ## Générer des ID externes
 
 Générer un nouvel ID externe AWS pour une paire compte AWS/nom de rôle donnée.
 
-**ARGUMENTS**:
+**ARGUMENTS** :
 
 
 * **`account_id`** [*obligatoire*] :

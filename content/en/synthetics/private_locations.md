@@ -29,7 +29,7 @@ The private location worker is shipped as a Docker container, so it can run on a
 
 By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
-Once you created a private location, configuring a Synthetics API or Browser test from a private location is completely identical to the one of Datadog managed locations.
+Once you created a private location, configuring a Synthetics API test from a private location is completely identical to the one of Datadog managed locations.
 
 ### Create a new private location
 
@@ -61,8 +61,10 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     * For the Datadog US site: `curl https://api.datadoghq.com`.
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
+    
+**Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
 
-5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
@@ -72,7 +74,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:70%;">}}
 
-6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1] or [Synthetics Browser tests][2].
+6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
 
 ## Configuration
 
@@ -82,7 +84,7 @@ The `synthetics-private-location-worker` comes with a number of options that can
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dnsServer`              | Array of Strings | `["8.8.8.8","1.1.1.1"]`                              | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                  |
 | `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                       |
-| `blacklistedRange`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)                                                                 |
+| `blacklistedRange`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)                                                                 |
 | `whitelistedRange`       | Array of Strings | `none`                                               | Grant access to IP ranges (has precedence over `--blacklistedRange`)                                                                                                |
 | `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                    |
 | `proxy`                  | String           | `none`                                               | Proxy URL                                                                                                                                                           |
@@ -109,7 +111,7 @@ If you are testing an internal URL and need to use an internal DNS server you ca
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
-The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][4].
+The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][3].
 
 The test configurations are encrypted asymmetrically. The private key is used to decrypt the test configurations pulled by the workers from Datadog servers. The public key is used to encrypt the test results that are sent from the workers to Datadog's servers.
 
@@ -117,6 +119,5 @@ The test configurations are encrypted asymmetrically. The private key is used to
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /synthetics/api_tests
-[2]: /synthetics/browser_tests
-[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html

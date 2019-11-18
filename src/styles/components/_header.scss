@@ -71,8 +71,6 @@ body > header {
         padding-right:12px;
         &:hover,
         &.active {
-          //transition: all .2s;
-          //color: $ddpurple;
           color: #333;
           background-color: #fff;
           border-color: #c8c8c8;
@@ -80,7 +78,6 @@ body > header {
       }
       &:hover {
         a {
-          //transition: all .2s;
           color: #333;
           background-color: #fff;
           border-color: #c8c8c8;
@@ -95,7 +92,6 @@ body > header {
         margin:0;
       }
       .btn {
-        padding: 8.5px 8px 9.5px;
         min-width: 200px;
         font-size:18px;
         letter-spacing: .4px;

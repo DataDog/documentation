@@ -82,7 +82,7 @@ By design, the user-provided executable needs to implement any error handling me
 Relying on a user-provided executable has multiple benefits:
 
 * Guaranteeing that the Agent does not attempt to load in memory parameters for which there isn't a secret handle.
-* Ability for the user to limit the visibility of the Agent to secrets that it needs (e.g., by restraining the acessable list of secrets in the key management backend)
+* Ability for the user to limit the visibility of the Agent to secrets that it needs (e.g., by restraining the accessible list of secrets in the key management backend)
 * Freedom and flexibility in allowing users to use any secrets management backend without having to rebuild the Agent.
 * Enabling each user to solve the initial trust problem from the Agent to their secrets management backend. This occurs in a way that leverages each user's preferred authentication method and fits into their continuous integration workflow.
 

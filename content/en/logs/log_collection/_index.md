@@ -31,7 +31,8 @@ Datadog Log Management also comes with a set of out of the box solutions to coll
 
 * [**Collect logs from your hosts**][12].
 * [**Collect logs from your applications**](?tab=ussite#application-log-collection).
-* [**Collect logs from a docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a Docker environment**](?tab=ussite#container-log-collection).
+* [**Collect logs from a serverless environment**](?tab=ussite#serverless-log-collection).
 * [**Collect logs from your Cloud provider**](?tab=ussite#cloud-providers-log-collection).
 
 Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][13], [parsing][14], and [facets][15] in Datadog.
@@ -59,6 +60,10 @@ Choose your environment below to get dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
 
+## Serverless Log collection
+
+Datadog collects logs from AWS Lambda. To enable this, refer to the [AWS Lambda integration documentation][20].
+
 ## Cloud Providers Log collection
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
@@ -67,7 +72,7 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 ## Custom Log forwarder
 
-Any custom process or [logging library][20] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
+Any custom process or [logging library][21] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
 {{% tab "TCP US Site" %}}
@@ -77,10 +82,12 @@ The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` fo
 You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 ```
-<DATADOG_API_KEY> this is my log
+<DATADOG_API_KEY> <PAYLOAD>
 ```
 
-Test it manually with telnet:
+**Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
+
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -91,7 +98,7 @@ This produces the following result in your [live tail page][2]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-Datadog automatically parses attributes out of JSON formatted messages.
+In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -111,10 +118,12 @@ The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` fo
 You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 ```
-<DATADOG_API_KEY> this is my log
+<DATADOG_API_KEY> <PAYLOAD>
 ```
 
-Test it manually with telnet:
+**Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
+
+Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -125,7 +134,7 @@ This produces the following result in your [live tail page][2]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-Datadog automatically parses attributes out of JSON formatted messages.
+In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -140,15 +149,16 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{% tab "HTTP" %}}
 
-To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation](https://docs.datadoghq.com/api/?lang=python#send-logs-over-http).
+To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation][1].
 
+[1]: https://docs.datadoghq.com/api/?lang=python#send-logs-over-http
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
-You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][21]).
+Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][22].
 
 Endpoints that can be used to send logs to Datadog:
 
@@ -159,9 +169,11 @@ Endpoints that can be used to send logs to Datadog:
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `agent-http-intake.logs.datadoghq.com`  | `443`   | Used by the Agent to send logs in protobuf format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
+| `http-intake.logs.datadoghq.com`        | `443`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                         |
 | `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-| `lambda-http-intake.logs.datadoghq.com` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                  |
+| `lambda-http-intake.logs.datadoghq.com` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
 | `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 
@@ -169,15 +181,18 @@ Endpoints that can be used to send logs to Datadog:
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in protobuf format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
+| `http-intake.logs.datadoghq.eu`        | `443`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                         |
 | `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-| `lambda-http-intake.logs.datadoghq.eu` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                  |
+| `lambda-http-intake.logs.datadoghq.eu`  | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
 | `functions-intake.logs.datadoghq.eu`    | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 
@@ -186,25 +201,27 @@ Endpoints that can be used to send logs to Datadog:
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
 
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{< /tabs >}}
 
-To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][22].
+To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][23].
 
 
 ## Reserved attributes
 
 Here are some key attributes you should pay attention to when setting up your project:
 
-| Attribute | Description                                                                                                                                                                                                                            |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
+| Attribute | Description                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][23] and has a dedicated layout in the Datadog Log UI.|
+| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][24] and has a dedicated layout in the Datadog Log UI.|
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
-Your logs are collected and centralized into the [Log Explorer][24] view. You can also search, enrich, and alert on your logs.
+
+Your logs are collected and centralized into the [Log Explorer][25] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
@@ -257,8 +274,9 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [17]: /agent/autodiscovery/management
 [18]: /agent/autodiscovery/integrations
 [19]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
-[20]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
-[21]: /security/logs/#information-security
-[22]: /api/?lang=bash#send-logs-over-http
-[23]: /logs/explorer/patterns
-[24]: /logs/explore
+[20]: /integrations/amazon_lambda/#log-collection
+[21]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
+[22]: /security/logs/#information-security
+[23]: /api/?lang=bash#send-logs-over-http
+[24]: /logs/explorer/patterns
+[25]: /logs/explore

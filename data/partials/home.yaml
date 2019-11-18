@@ -1,0 +1,87 @@
+heading: Welcome to Datadog Docs!
+
+guides:
+    # There can be only 3 guides in this section
+  - title: Install the agent
+    desc: Start collecting events and metrics from hosts and send them to Datadog.
+    link_text: View Guides
+    link: getting_started/agent/
+  - title: Set Up Integrations
+    desc: Learn how to collect metrics, traces and logs with over 350+ integrations.
+    link_text: View Guides
+    link: getting_started/integrations/
+  - title: Get Started in App
+    desc: Discover how to use Datadog to create dashboards, graphs, monitors and more.
+    link_text: View Guides
+    link: getting_started/application/
+
+nav_sections:
+    # For a better rendering, sections should include sub-sections with multiple of 4.
+  - nav_section:
+    - name: 'Platform'
+    - navtiles:
+      - title: Agent
+        link: agent/
+        icon: agent.svg
+        desc: Install & configure the Datadog Agent to collect and send data
+      - title: Integrations
+        link: integrations/
+        icon: integration.svg
+        desc: Gather data from your systems, apps, & services
+      - title: Dashboards
+        link: graphing/dashboards/
+        icon: dashboard.svg
+        desc: Visualize your data to gain insight
+      - title: Alerting
+        link: monitors/
+        icon: attention-circled.svg
+        desc: Create & manage monitors & notifications
+      - title: APM & Distributed Tracing
+        link: tracing/
+        icon: trace.svg
+        desc: Gain insight on your application's performance
+      - title: Log Management
+        link: logs/
+        icon: logs.svg
+        desc: Collect, process, explore, monitor, & archive your logs
+      - title: Synthetics
+        link: synthetics/
+        icon: synthetics.svg
+        desc: Ensure application uptime, identify regional issues, & track performance
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog.svg
+        desc: Automatically see trends in your applications metrics
+  - nav_section:
+    - name: 'Configuration'
+    - navtiles:
+      - title: API
+        link: api/
+        icon: code.svg
+        desc: Use the Datadog API
+      - title: Account Management
+        link: account_management/
+        icon: cog.svg
+        desc: Control your account settings
+      - title: Security
+        link: security/
+        icon: lock.svg
+        desc: Learn how Datadog protects your data
+      - title: Developer Tools
+        link: developers/
+        icon: wrench.svg
+        desc: Develop for the Datadog platform
+
+popular_searches:
+  - title: API documentation
+    link: api/
+    weight: 10
+  - title: Agent Installation
+    link: getting_started/agent/
+    weight: 20
+  - title: Log Collection
+    link: logs/log_collection/
+    weight: 30
+  - title: Integration Setup
+    link: integrations/
+    weight: 40

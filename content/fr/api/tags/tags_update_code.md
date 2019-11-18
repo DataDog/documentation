@@ -1,13 +1,18 @@
 ---
 title: Mettre à jour les tags d'un host
 type: apicode
-order: 30.4
+order: 31.4
 external_redirect: /api/#mettre-a-jour-les-tags-d-un-host
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/tags/hosts/<HOSTNAME>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-tags-update" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-tags-update" >}}

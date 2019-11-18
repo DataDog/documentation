@@ -11,7 +11,7 @@ L'interface graphique de Datadog Agent Manager v6 repose sur l'utilisation d'un 
 
 ### Exigences
 
-1. Les cookies doivent être activés dans votre navigateur. L'interface graphique génère et enregistre un jeton dans votre navigateur, qui est utilisé pour authentifier toutes les communications effectuées avec le serveur de l'interface graphique.
+1. Les cookies doivent être activés dans votre navigateur. L'interface graphique génère et enregistre un token dans votre navigateur, qui est utilisé pour authentifier toutes les communications effectuées avec le serveur de l'interface graphique.
 
 2. L'interface graphique se lance uniquement si l'utilisateur dispose des autorisations nécessaires. Si vous parvenez à ouvrir `datadog.yaml`, vous pouvez utiliser l'interface graphique.
 
@@ -28,7 +28,7 @@ Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Man
 
 Depuis une invite Powershell avec élévation de privilèges :
 ```powershell
-& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
 ```
 
 Datadog Agent Manager se lance dans votre navigateur Web par défaut. L'adresse Web est `http://127.0.0.1:5002`.

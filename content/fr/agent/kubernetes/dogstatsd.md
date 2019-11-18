@@ -178,7 +178,7 @@ func main(){
 }
 ```
 
-Vous pouvez également incrémenter une métrique custom pour chacune des fonctions de votre gestionnaire. Par exemple, pour chaque appel de la fonction `InfoHandler`, la valeur de la métrique `request_count` augmente de 1 lorsque le tag `endpoint:info` est appliqué à ce point de donnée :
+Vous pouvez également incrémenter une métrique custom pour chacune des fonctions handler. Par exemple, pour chaque appel de la fonction `InfoHandler`, la valeur de la métrique `request_count` augmente de 1 lorsque le tag `endpoint:info` est appliqué à ce point de donnée :
 
 ```go
 func InfoHandler(rw http.ResponseWriter, req *http.Request) {

@@ -3,6 +3,13 @@
 @import "webfonts";
 @import "icons";
 
+// base
+@import "base/variables";
+@import "base/mixins";
+@import "base/colors";
+@import "base/typography";
+@import "base/helpers";
+
 // vendor
 @import "vendor/pygments.scss";
 

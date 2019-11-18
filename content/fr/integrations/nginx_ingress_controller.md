@@ -85,8 +85,26 @@ Par exemple, ces annotations activent les checks `nginx` et `nginx-ingress-contr
 ```text
 ad.datadoghq.com/nginx-ingress-controller.check_names: '["nginx","nginx_ingress_controller"]'
 ad.datadoghq.com/nginx-ingress-controller.init_configs: '[{},{}]'
-ad.datadoghq.com/nginx-ingress-controller.instances: '[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]'
+ad.datadoghq.com/nginx-ingress-controller.instances: '[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]'
 ad.datadoghq.com/nginx-ingress-controller.logs: '[{"service": "controller", "source":"nginx-ingress-controller"}]'
+```
+
+**Remarque** : à partir de la version 0.23.0 de `nginx-ingress-controller`, le serveur `nginx` qui effectuait son écoute sur le port `18080` a été supprimé. Il peut être rétabli en ajoutant le `http-snippet` suivant à la ConfigMap de configuration :
+
+```text
+  http-snippet: |
+    server {
+      listen 18080;
+
+      location /nginx_status {
+        allow all;
+        stub_status on;
+      }
+
+      location / {
+        return 404;
+      }
+    }
 ```
 
 ### Validation

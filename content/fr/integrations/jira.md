@@ -28,7 +28,7 @@ JIRA est un système de suivi de tickets et de projets pour les équipes logicie
 
 1. Accédez à votre compte Jira.
 
-2. Accédez aux paramètres (icône en forme d'engrenage) –> **Applications** :
+2. Accédez aux paramètres (icône en forme d'engrenage) –> **Produits** :
 
     {{< img src="integrations/jira/JiraInstallation2.png" alt="Accès à Jira" responsive="true" style="width:25%">}}
 

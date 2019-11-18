@@ -1,5 +1,5 @@
 ---
-title: Template Variables
+title: Template variables
 kind: documentation
 aliases:
   - /fr/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
@@ -26,17 +26,28 @@ Une Template Variable sans clé est déjà appliquée sur les nouveaux dashboard
 Une fois dans l'éditeur, cliquez sur **Add Variable +** pour créer votre première Template Variable. Elle est définie par les paramètres suivants :
 
 * **Name** *(obligatoire)* :
-  la valeur à afficher pour votre Template Variable dans vos requêtes de graphique.
-* **Tag Group** *(obligatoire)* :
-    si vos tags respectent les [recommandations relatives aux tags][1] et utilisent le format `key:value`, le Tag Group correspond à la valeur `key` de vos tags.
-* **Default Tag** *(facultatif)* :
-  la valeur par défaut pour le Tag Group de votre Template Variable.
+   la valeur à afficher pour votre Template Variable dans votre requête de graphique.
+* **Tag or Attribute** *(obligatoire)* :
+
+    * Tag : si vos tags respectent les [recommandations relatives aux tags][1] (format `key:value`), le *Tag* correspond à la valeur `key` de vos tag.
+    * Attribute : utilisez une [facette ou une mesure comme Template Variable](#template-variables-avec-requêtes-d-APM-et-de-log).
+* **Default Value** *(facultatif)* :
+    la valeur par défaut pour le tag ou l'attribut de votre Template Variable.
 
 Une fois votre Template Variable créée, vous remarquerez que l'interface affiche désormais des statistiques concernant son utilisation dans vos graphiques. Sur l'image ci-dessous, la Template Variable n'est utilisée dans aucun des graphiques du dashboard :
 
-{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="Statistiques d'utilisation de la TV" responsive="true" style="width:40%;">}}
+{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="Statistiques TV" responsive="true" style="width:70%;">}}
 
-Vous pouvez ajouter cette Template Variable à tous vos widgets de graphique ou la supprimer en cliquant sur les boutons **Remove From All** et **Add to All**, respectivement.
+Vous pouvez ajouter cette Template Variable à tous vos widgets de graphique ou la supprimer en cliquant sur les boutons **Add to All** et **Remove From All**, respectivement.
+
+#### Template Variables avec requêtes d'APM et de log
+
+Étant donné que les métriques, les logs et l'APM partagent les mêmes tags, les Template Variables peuvent être utilisées conjointement avec des widgets reposant sur l'utilisation de requêtes d'APM et de log.
+De plus, il est possible de définir des Template Variables de log ou d'APM basées sur vos facettes de [log][2] ou d'APM. Ces Template Variables commencent par le caractère `@`.
+
+{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="template variables de log" responsive="true" style="width:85%;">}}
+
+**Remarque** : le bouton `Add to all` permet d'ajouter la Template Variable à l'ensemble des widgets de log ou d'APM.
 
 ## Utiliser les Template Variables
 
@@ -44,29 +55,20 @@ Vous pouvez ajouter cette Template Variable à tous vos widgets de graphique ou 
 
 Une fois votre Template Variable définie, celle-ci apparaît dans les options affichées pour le champ `from` :
 
-{{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template Variable dans un graphique" responsive="true" style="width:50%;">}}
+{{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template variable dans un graphique" responsive="true" style="width:50%;">}}
 
 Une fois le graphique enregistré, la valeur de cette Template Variable est sélectionnée en haut de votre dashboard :
 
 {{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Sélection d'une Template Variable" responsive="true" style="width:75%;">}}
 
-#### Template Variables avec requêtes d'APM et de log
+#### Widget Note
 
-Étant donné que les métriques, les logs et l'APM partagent les mêmes tags, les Template Variables peuvent être utilisées sur les widgets créés à partir de requêtes d'APM et de log.
-De plus, il est possible de définir des Template Variables de log/d'APM basées sur vos facettes de [log][2] ou d'APM. Ces Template Variables commencent par le caractère `@`.
+Même si le widget Note ne contient aucun graphique, vous pouvez afficher :
 
-{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="Template Variables de log" responsive="true" style="width:85%;">}}
+* La Template Variable sélectionnée avec la syntaxe `$<CLÉ_TEMPLATE_VARIABLE>`
+* La valeur de la Template Variable sélectionnée avec la syntaxe `$<CLÉ_TEMPLATE_VARIABLE>.value`
 
-**Remarque** : si vous utilisez le bouton `Add to all`, cette Template Variable sera uniquement ajoutée à l'ensemble des widgets de log/d'APM.
-
-#### Widget de note
-
-Même si le widget de note ne contient aucun graphique, vous pouvez afficher :
-
-* La Template Variable sélectionnée avec la syntaxe `$<CLÉ_TEMPLATE_VARIABLE>`.
-* La valeur de la Template Variable sélectionnée avec la syntaxe `$<CLÉ_TEMPLATE_VARIABLE>.value`.
-
-Par exemple, si la configuration du widget de note est la suivante :
+Par exemple, si la configuration du widget Note est la suivante :
 
 ```
 $env
@@ -76,7 +78,7 @@ $env.value
 
 La sélection de la valeur `dev` pour la Template Variable `$env` se traduira par le résultat suivant :
 
-{{< img src="graphing/dashboards/template_variables/template_variable_note_widget.png" alt="Template Variables dans le widget de note" responsive="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/template_variables/template_variable_note_widget.png" alt="Template variables dans le widget de note" responsive="true" style="width:30%;">}}
 
 ### Superposer des événements
 
@@ -86,9 +88,9 @@ Les valeurs des Template Variables de dashboard peuvent être directement recuei
 
 **Remarque** : les Template Variables de dashboard doivent être des tags de métrique ; les tags issus des événements ne peuvent pas être utilisés comme Template Variables de dashboard.
 
-#### Template Variable unique
+#### Template variable unique
 
-Par exemple, pour rechercher des événements partageant le même tag region, utilisez : `tags:region:$region.value`.
+Par exemple, pour rechercher des événements dans le flux d'événements partageant le même tag region, utilisez : `tags:region:$region.value`.
 
 {{< img src="graphing/dashboards/template_variables/tv5.png" alt="tv5" responsive="true" style="width:75%;">}}
 

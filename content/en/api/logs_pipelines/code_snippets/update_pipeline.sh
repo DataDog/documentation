@@ -7,9 +7,10 @@ app_key=<DD_APP_KEY>
 pipeline_id=<PIPELINE_ID>
 
 curl -X PUT \
-  "https://api.datadoghq.com/api/v1/logs/config/pipelines/${pipeline_id}?api_key=${api_key}&application_key=${app_key}" \
-  -H 'Content-Type: application/json' \
-  -d '{
+-H 'Content-Type: application/json' \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d '{
     "name": "<NEW_PIPELINE_NAME>",
     "is_enabled": true,
     "filter": {
@@ -25,4 +26,5 @@ curl -X PUT \
             "type": "date-remapper"
         }
     ]
-}'
+}' \
+"https://api.datadoghq.com/api/v1/logs/config/pipelines/${pipeline_id}"

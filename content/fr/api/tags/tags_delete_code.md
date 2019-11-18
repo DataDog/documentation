@@ -1,7 +1,7 @@
 ---
 title: Supprimer les tags d'un host
 type: apicode
-order: 30.5
+order: 31.5
 external_redirect: /api/#supprimer-les-tags-d-un-host
 ---
 

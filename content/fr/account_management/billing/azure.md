@@ -14,7 +14,7 @@ Utilisez le [carré d'intégration Datadog/Azure][1] pour filtrer vos machines v
 
 {{< img src="account_management/billing/azure_vm_filter.png" alt="Filtre de machine virtuelle Azure" responsive="true">}}
 
-Lorsque vous ajoutez des limites à des locataires Azure existants depuis le carré d'intégration, les machines virtuelles précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 24 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
+Lorsque vous appliquez des limites à des locataires Azure existants depuis le carré d'intégration, les machines virtuelles précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
 Les machines virtuelles sur lesquelles un Agent est exécuté s'affichent toujours et sont prises en compte dans votre facture. L'application de limites concerne uniquement les machines virtuelles sur lesquelles aucun Agent n'est exécuté.
 

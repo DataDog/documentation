@@ -5,7 +5,7 @@ kind: integration
 description: Recueillez des logs d'application Sinatra.
 short_description: Recueillez des logs d'application Sinatra.
 categories:
-  - Collecte de logs
+  - log collection
 aliases:
   - /fr/logs/log_collection/nxlog
 has_logo: true
@@ -55,7 +55,7 @@ end
 
 Découvrez plus de détails dans la [documentation relative aux recettes Rack][6].
 
-Cet enregistreur utilise le format Apache Access commun et génère des logs au format suivant :
+Ce logger utilise le format Apache Access commun et génère des logs au format suivant :
 
 ```
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004

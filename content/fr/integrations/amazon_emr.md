@@ -32,18 +32,31 @@ Activez cette intégration pour visualiser dans Datadog vos métriques d'EMR.
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
-### Configuration
+### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `EMR` est cochée dans la section concernant la collecte des métriques.
 
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon EMR. Pour en savoir plus sur les stratégies EMR, consultez [la documentation du site Web d'AWS][4].
 
     | Autorisation AWS                     | Description                         |
-    |------------------------------------|-------------------------------------|
+    | ---------------------------------- | ----------------------------------- |
     | `elasticmapreduce:ListClusters`    | Énumère les clusters disponibles.            |
     | `elasticmapreduce:DescribeCluster` | Ajoute des tags aux métriques EMR de CloudWatch. |
 
 3. Installez l'[intégration Datadog/AWS EMR][5].
+
+### Collecte de logs
+#### Activer le logging
+
+Configurez Amazon EMR de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_emr` dans le préfixe.
+
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][6].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon EMR dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][7]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
 
 ## Données collectées
 ### Métriques
@@ -59,7 +72,7 @@ L'intégration AWS Elastic MapReduce n'inclut aucun événement.
 L'intégration AWS Elastic MapReduce n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
@@ -67,8 +80,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticmapreduce.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_emr
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_emr/amazon_emr_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_emr/amazon_emr_metadata.csv
+[10]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

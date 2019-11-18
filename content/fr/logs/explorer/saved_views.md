@@ -10,67 +10,49 @@ further_reading:
     tag: Documentation
     text: Apprendre à traiter vos logs
 ---
-## Présentation
+## Vue par défaut du Log Explorer
 
-Lorsque plusieurs équipes partagent le même compte, ou lorsque vos logs ont de nombreuses sources différentes, il est important de pouvoir commencer rapidement l'examen du bon contenu.
-Avec Datadog, les équipes peuvent définir et partager des vues Log Explorer de manière à ce que tout le monde puisse commencer le dépannage avec le même contexte prédéfini.
+La vue Log Explorer par défaut est chargée à l'endroit auquel vous accédez : sur la page de recherche de logs, des analyses ou des patterns, à partir du menu de navigation principal. Vous pouvez alternativement entrer les URL correspondantes dans votre navigateur.
 
-Les vues enregistrées Datadog vous permettent d'enregistrer des recherches personnalisées dans le Log Explorer, y compris :
+La vue par défaut comprend :
+
+* une requête vide
+* les facettes visibles dans la liste des facettes
+* une disposition de page basique (comprenant par exemple la configuration des tables pour la recherche, des options de visualisation pour les analyses, etc.)
+
+Toutes les modifications apportées à la liste des facettes (voir ci-dessous) ou dans la disposition de la page sont automatiquement enregistrées dans cette vue par défaut.
+
+{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
+
+
+## Vues enregistrées
+
+Les vues enregistrées vous permettent d'enregistrer des recherches personnalisées dans le Log Explorer, y compris :
 
 * Une [requête de recherche][1]
 * Un [sous-ensemble de facettes][2]
-* Un ensemble de [colonnes][3]
-* Une visualisation par défaut personnalisée ([flux de logs][4] ou [analyse de logs][5])
+* Une visualisation par défaut personnalisée ([flux de logs][3], [patterns de logs][4] ou [analyse de logs][5] avec leurs propriétés de visualisation spécifiques)
 
-Les vues personnalisées peuvent ensuite être directement sélectionnées dans le volet de gauche ou dans la barre de recherche grâce à l'auto-complétion, qui fonctionne avec le nom ou la requête de recherche.
 
-{{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
+### Charger une vue enregistrée
 
-## Vue par défaut du Log Explorer
+Sélectionnez les vues enregistrées directement dans le volet de gauche ou dans la barre de recherche, à l'aide de la saisie automatique, qui correspondent au nom de la recherche ou à la requête.
 
-Par défaut, toutes les facettes s'affichent pour tous les utilisateurs.
+{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
 
-Chaque utilisateur peut définir sa propre liste de facettes et de groupes de facettes par défaut à afficher en utilisant le bouton *Manage Facets*, puis en sélectionnant les facettes souhaitées.
+Ajoutez une étoile aux vues enregistrées pour les ajouter à vos favoris. Vous pouvez accéder aux vues enregistrées marquées d'une étoile directement à partir du menu de navigation principal.
 
-{{< img src="logs/explorer/saved_views/default_saved_views.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
+{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Chargement des vues enregistrées" video="true" responsive="true" >}}
 
-Une fois la sélection effectuée, le Log Explorer affiche la liste de facettes par défaut lorsqu'il est ouvert. Les facettes par défaut peuvent également être affichées en cliquant sur *Log Explorer - Default view* depuis la liste Saved Views :
+### Gérer les vues enregistrées
 
-{{< img src="logs/explorer/saved_views/default_views_selection.png" alt="Sélection d'une vue enregistrée" responsive="true" style="width:50%;">}}
+Pour créer une vue enregistrée, cliquez sur le bouton *Save as* en haut de l'écran. Nommez votre vue et cliquez sur *Save*.
 
-## Créer une vue enregistrée
+Vous pouvez filtrer vos données à partir d'une vue enregistrée. Si besoin, mettez à jour la vue afin d'effectuer un suivi de la requête ou de la configuration de la disposition de page. Pour ce faire, cliquez sur le bouton "Save As".
 
-Pour créer une vue enregistrée :
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Création d'une vue enregistrée" responsive="true" >}}
 
-1. Entrez une requête dans la [barre de recherche][1]
-2. Sélectionnez les colonnes à afficher (depuis l'icône en forme d'engrenage en haut à droite de la page, ou depuis le volet contextuel du log)
-3. Sélectionnez la liste de [facettes][2] à afficher
-4. Cliquez sur le bouton *Save As* en haut de l'écran
-5. Nommez votre vue et cliquez sur *Save*
-
-{{< img src="logs/explorer/saved_views/saved_views_creation.gif" alt="Création d'une vue enregistrée" responsive="true">}}
-
-## Mettre à jour ou supprimer une vue enregistrée existante
-
-### Supprimer une vue enregistrée
-
-Les vues enregistrées peuvent être supprimées directement depuis la liste Saved View dans le Log Explorer. Passez le curseur sur le nom de la vue enregistrée pour afficher le bouton **Delete**. Cliquez sur ce dernier et confirmez.
-
-{{< img src="logs/explorer/saved_views/remove_saved_views.png" alt="Suppression d'une vue enregistrée" responsive="true" style="width:50%;">}}
-
-### Mettre à jour une vue enregistrée
-
-Pour mettre à jour une vue enregistrée existante, faites exactement comme si vous vouliez créer une nouvelle vue. Toutefois, au lieu de l'enregistrer, sélectionnez une vue enregistrée existante dans le menu déroulant, cliquez sur *Replace* et confirmez.
-
-{{< img src="logs/explorer/saved_views/update_saved_views.png" alt="Sélection d'une vue enregistrée" responsive="true" style="width:50%;">}}
-
-## Annuler la modification d'une vue enregistrée
-
-Après avoir sélectionné une vue enregistrée, vous pouvez continuer d'affiner et de modifier votre recherche si nécessaire à des fins de dépannage. Après avoir modifié la vue, vous pouvez toujours revenir à la version enregistrée la plus récente de la vue enregistrée en sélectionnant le bouton **Revert**.
-
-**Remarque** : le bouton Revert ne permet pas d'annuler des modifications déjà enregistrées.
-
-{{< img src="logs/explorer/saved_views/revert_saved_views.png" alt="Rétablir une vue enregistrée" responsive="true" style="width:50%;">}}
+Les vues enregistrées peuvent être supprimées directement depuis la liste Saved View dans le Log Explorer. Passez le curseur sur le nom de la vue enregistrée pour afficher le bouton **Delete**. Cliquez ensuite sur ce dernier et confirmez.
 
 ## Pour aller plus loin
 
@@ -79,5 +61,5 @@ Après avoir sélectionné une vue enregistrée, vous pouvez continuer d'affiner
 [1]: /fr/logs/explorer/search
 [2]: /fr/logs/explorer/?tab=facets#setup
 [3]: /fr/logs/explorer/?tab=logstream#visualization
-[4]: /fr/logs/explorer/?tab=logstream#visualization
+[4]: /fr/logs/explorer/patterns
 [5]: /fr/logs/explorer/analytics

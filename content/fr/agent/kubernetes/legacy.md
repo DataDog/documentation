@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: agent/kubernetes/daemonset_setup
   tag: documentation
-  text: Configuration de DaemonSet avec Kubernetes
+  text: Exécuter l'Agent avec un DaemonSet Kubernetes
 - link: agent/kubernetes/host_setup
   tag: documentation
-  text: Configuration de host avec Kubernetes
+  text: Exécuter l'Agent sur un host avec Kubernetes
 - link: agent/kubernetes/metrics
   tag: documentation
   text: Métriques Kubernetes
@@ -43,7 +43,7 @@ La configuration par défaut concerne la version 1.7.6 de Kubernetes et les ver
   * Si `DD_KUBERNETES_KUBELET_HOST` est désactivé, l'Agent récupère le hostname du nœud à partir de Docker et tente de se connecter. Consultez `docker info | grep "Name:"` et vérifiez que le nom peut être résolu et qu'il est accessible.
   * Si l'adresse IP de la passerelle Docker par défaut est constante sur l'ensemble de votre cluster, envoyez cette IP dans la variable d'environnement `DD_KUBERNETES_KUBELET_HOST`. Vous pouvez récupérer l'IP avec la commande `ip addr show | grep docker0`.
 
-- La configuration par défaut repose sur l'[authentification par Bearer Token][4] vers le serveur API et Kubelet. Pour la version 1.3, le Kubelet ne prend pas en charge l'authentification à l'aide d'un jeton de porteur, configurez les certificats client du compte de service `datadog-agent` et envoyez-les à l'Agent.
+- La configuration par défaut repose sur l'[authentification par Bearer Token][4] vers le serveur API et Kubelet. Pour la version 1.3, le Kubelet ne prend pas en charge l'authentification à l'aide d'un token de porteur, configurez les certificats client du compte de service `datadog-agent` et envoyez-les à l'Agent.
 
 ## Pour aller plus loin
 

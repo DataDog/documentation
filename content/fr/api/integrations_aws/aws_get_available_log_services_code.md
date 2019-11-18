@@ -7,7 +7,7 @@ external_redirect: "/api/#obtenir-la-liste-des-services-aws-compatibles-avec-la-
 
 **SIGNATURE** :
 
-`GET /aws/logs/services`
+`GET /v1/integration/aws/logs/services`
 
 **EXEMPLE DE REQUÊTE** :
 

@@ -48,11 +48,11 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
 {{< tabs >}}
 {{% tab "Example" %}}
 
-```sh
+{{< code-block lang="bash" filename="roles.sh" >}}
 curl -X GET "https://app.datadoghq.com/api/v2/roles" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
-```
+{{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
 
@@ -71,11 +71,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 	    {
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+            "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -132,7 +131,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -198,7 +196,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -256,7 +253,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": "$ROLE_UUID",
                 "name": "$ROLE_NAME"
             },
             "relationships": {
@@ -338,9 +334,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "$PERMISSION_UUID"
+            "display_type": "other"
         }
     }]
 }
@@ -383,9 +379,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "<PERMISSION_UUID>"
+            "display_type": "other"
         }
     }]
 }
@@ -436,9 +432,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a custom metric",
             "name": "logs_metrics_write",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "<PERMISSION_UUID>"
+            "display_type": "other"
         }
     }]
 }
@@ -489,9 +485,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "description": "Update a read metric",
             "name": "logs_metrics_read",
             "created": "2000-02-29T14:26:26.983187+00:00",
+            "restricted": false,
             "group_name": "Logs",
-            "display_type": "other",
-            "uuid": "$DIFFERENT_PERMISSION_UUID"
+            "display_type": "other"
         }
     }]
 }

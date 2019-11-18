@@ -104,12 +104,12 @@ right:
           - name: blog_engineering
             link: "https://www.datadoghq.com/blog/engineering/"
             title: "Engineering"
-          - name: blog_community
-            link: "https://www.datadoghq.com/blog/community/"
-            title: "Community"
           - name: blog_pupculture
             link: "https://www.datadoghq.com/blog/pup-culture/"
             title: "Pup Culture"
+          - name: blog_community
+            link: "https://www.datadoghq.com/blog/community/"
+            title: "Community"
   - name: docs
     link: ""
     title: "Docs"

@@ -7,28 +7,40 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
+- link: "/integrations/snmp"
+  tag: "Documentation"
+  text: "SNMP integration"
+- link: "/graphing/widgets/network"
+  tag: "Documentation"
+  text: "Network Widget"
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
 </div>
 
-Network performance monitoring requires Datadog Agent v6.13+ and a Linux kernel version 4.4.0+ for eBPF support. The following platforms are supported:
+Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
+
+Supported platforms include:
 
 * Ubuntu 16.04+
 * Debian 9+
 * Fedora 26+
 * SUSE 15+
-* CentOS/RHEL 7.6+
 
-**Note**: Windows and macOS platforms are not supported.
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][4]. 
+
+**Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
+
+The following provisioning systems are supported:
+
+* Daemonset / Helm: See the [Datadog Helm chart][1]
+* Chef: See the [Datadog Chef recipe][2]
+* Ansible: See the [Datadog Ansible role][5]
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][1] based on your system setup:
+To enable network performance monitoring, configure it in your [Agent's main configuration file][3] based on your system setup:
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -76,40 +88,35 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 To enable network performance monitoring with Kubernetes, use the following configuration:
 
 ```yaml
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: datadog-agent
   namespace: default
 spec:
-  selector:
-    matchLabels:
-      app: datadog-agent
   template:
     metadata:
       labels:
         app: datadog-agent
       name: datadog-agent
       annotations:
-        container.apparmor.security.beta.kubernetes.io/datadog-agent: unconfined
+        container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:latest
+      - image: datadog/agent:6.12.0
         imagePullPolicy: Always
         name: datadog-agent
-        securityContext:
-          capabilities:
-            add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN"]
         ports:
           - {containerPort: 8125, name: dogstatsdport, protocol: UDP}
           - {containerPort: 8126, name: traceport, protocol: TCP}
         env:
-          - {name: DD_API_KEY, value: <DATADOG_API_KEY>}
+          - {name: DD_API_KEY, value: <YOUR_API_KEY>}
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
+          - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
@@ -137,6 +144,29 @@ spec:
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
+      - name: system-probe
+        image: datadog/agent:6.12.0
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN"]
+        command:
+          - /opt/datadog-agent/embedded/bin/system-probe
+        env:
+          - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
+          - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
+        resources:
+          requests:
+            memory: "150Mi"
+            cpu: "200m"
+          limits:
+            memory: "150Mi"
+            cpu: "200m"
+        volumeMounts:
+          - {name: procdir, mountPath: /host/proc, readOnly: true}
+          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
+          - {name: debugfs, mountPath: /sys/kernel/debug}
+          - {name: s6-run, mountPath: /var/run/s6}
       volumes:
         - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
         - {name: procdir, hostPath: {path: /proc}}
@@ -178,4 +208,9 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
+[2]: https://github.com/DataDog/chef-datadog
+[3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[4]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
+[5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe 

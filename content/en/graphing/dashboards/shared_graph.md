@@ -36,7 +36,7 @@ To share a Graph from a [Timeboard][1] or a [Screenboard][2]:
 
 **Note**: The Share functionality is not available for APM and Log queries.
 
-## Sharing a Screenboard
+## Screenboard sharing
 
 Share a Screenboard entirely with the following process:
 

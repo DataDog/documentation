@@ -413,7 +413,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[4]: /ja/developers/dogstatsd
+[4]: /ja/developers/metrics/dogstatsd_metrics_submission
 [5]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [6]: https://github.com/cloudfoundry/multi-buildpack
 [7]: https://github.com/cloudfoundry/multi-buildpack#usage
@@ -422,7 +422,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /ja/tracing/setup
 [12]: https://docs.datadoghq.com/ja/agent/logs/proxy
-[13]: /ja/developers/dogstatsd
+[13]: /ja/developers/metrics/dogstatsd_metrics_submission
 [14]: /ja/libraries
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install

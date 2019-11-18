@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    oracle: assets/dashboards/oracle_overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,15 +38,17 @@ Recueillez des métriques de serveurs d'Oracle Database en temps réel pour vis
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 #### Prérequis
-Pour utiliser l'intégration Oracle, installez les bibliothèques Oracle Instant Client ou téléchargez le pilote JDBC d'Oracle. En raison des restrictions de licence, ces bibliothèques ne sont pas comprises dans l'Agent Datadog, mais peuvent être téléchargées directement sur Oracle.
+Pour utiliser l'intégration Oracle, installez les bibliothèques Oracle Instant Client ou téléchargez le pilote JDBC d'Oracle. En raison des restrictions de licence, ces bibliothèques ne sont pas intégrées à l'Agent Datadog, mais peuvent être téléchargées directement sur le site d'Oracle.
 
 ##### Pilote JDBC
 
 - [Téléchargez le fichier jar du pilote JDBC][2].
-- Ajoutez le chemin au fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration de check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][3]).
+- Ajoutez le chemin vers le fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration du check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][3]).
 
 ##### Oracle Instant Client
 
@@ -53,7 +56,7 @@ Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote J
 
 1. Accédez à la [page de téléchargement][4] et installez les paquets SDK et Basic d'Instant Client.
 
-    Si vous utilisez Linux, lorsque les bibliothèques Instant Client sont installées, vérifiez que l'éditeur de liens du runtime peut trouver les bibliothèques. Par exemple, avec `ldconfig` :
+    Si vous utilisez Linux, une fois les bibliothèques Instant Client installées, vérifiez que l'éditeur de liens à l'exécution peut trouver les bibliothèques. Par exemple, avec `ldconfig` :
 
     ```
     # Put the library location in an ld configuration file.
@@ -214,6 +217,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
+[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

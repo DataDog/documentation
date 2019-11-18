@@ -41,6 +41,9 @@ Recueillez des métriques du service OpenStack en temps réel pour :
 * Être informé des failovers et des événements OpenStack
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][12] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 Pour recueillir des métriques OpenStack, vous devez [installer l'Agent][2] sur vos hosts exécutant des hyperviseurs.
@@ -163,6 +166,7 @@ Consultez également nos articles de blog suivants :
 [9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
+[12]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

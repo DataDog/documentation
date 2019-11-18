@@ -47,7 +47,7 @@ Recueillez des métriques du service PostgreSQL en temps réel pour :
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lors de l'exécution de l'Agent sur un host. Consultez la [documentation Modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -118,48 +118,49 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 
 #### Collecte de logs
 
+**Disponible à partir des versions > 6.0 de l'Agent**
+
 Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucune information détaillée. Il est conseillé d'enregistrer les logs dans un fichier en incluant les détails supplémentaires spécifiés en tant que préfixe dans la ligne de log.
 
-* Modifiez votre fichier de configuration PostgreSQL `/etc/postgresql/<version>/main/postgresql.conf` et supprimez la mise en commentaire du paramètre suivant dans la section concernant les logs :
+1. Modifiez votre fichier de configuration PostgreSQL `/etc/postgresql/<version>/main/postgresql.conf` et supprimez la mise en commentaire du paramètre suivant dans la section concernant les logs :
 
-  ```
-  logging_collector = on
-  log_directory = 'pg_log'  # directory where log files are written,
-                            # can be absolute or relative to PGDATA
-  log_filename = 'pg.log'   #log file name, can include pattern
-  log_statement = 'all'     #log all queries
-  log_line_prefix= '%m [%p] %d %a %u %h %c '
-  log_file_mode = 0644
-  ## For Windows
-  #log_destination = 'eventlog'
-  ```
+    ```conf
+      logging_collector = on
+      log_directory = 'pg_log'  # directory where log files are written,
+                                # can be absolute or relative to PGDATA
+      log_filename = 'pg.log'   #log file name, can include pattern
+      log_statement = 'all'     #log all queries
+      log_line_prefix= '%m [%p] %d %a %u %h %c '
+      log_file_mode = 0644
+      ## For Windows
+      #log_destination = 'eventlog'
+    ```
 
-* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+2. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-  ```
-  logs_enabled: true
-  ```
+    ```yaml
+      logs_enabled: true
+    ```
 
-*  Ajoutez ce bloc de configuration à votre fichier `postgres.d/conf.yaml` pour commencer à recueillir vos logs PostgreSQL :
+3.  Ajoutez ce bloc de configuration à votre fichier `postgres.d/conf.yaml` pour commencer à recueillir vos logs PostgreSQL :
 
-  ```
-  logs:
-      - type: file
-        path: /var/log/pg_log/pg.log
-        source: postgresql
-        sourcecategory: database
-        service: myapp
-        #To handle multi line that starts with yyyy-mm-dd use the following pattern
-        #log_processing_rules:
-        #  - type: multi_line
-        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-        #    name: new_log_start_with_date
-  ```
-* Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    ```yaml
+      logs:
+          - type: file
+            path: /var/log/pg_log/pg.log
+            source: postgresql
+            sourcecategory: database
+            service: myapp
+            #To handle multi line that starts with yyyy-mm-dd use the following pattern
+            #log_processing_rules:
+            #  - type: multi_line
+            #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+            #    name: new_log_start_with_date
+    ```
 
-* [Redémarrez l'Agent][6].
+    Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][7].**
+4. [Redémarrez l'Agent][6].
 
 ### Validation
 
@@ -199,7 +200,6 @@ Documentation, liens et articles supplémentaires utiles :
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/logs
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/metadata.csv
 [10]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained

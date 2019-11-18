@@ -17,7 +17,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
 1. **Make sure the Agent has APM enabled**:
 
-    Run the following command on the Agent host: `netstat -anp | grep 8126`.
+    Run the following command on the Agent host: `netstat -van | grep 8126`.
 
     If you don't see an entry, then the Agent is not listening on port `8126`, which usually means either that the Agent is not running or that APM is not enabled in your `datadog.yaml` file. See the [APM Agent setup documentation][2] for more information.
 
@@ -164,12 +164,14 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 Tracer.Instance = tracer;
 ```
 
-Location of the profiler log:
+The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
+
+Logs files are saved in the following directories:
 
 | Platform | Path                                                          |
 |----------|---------------------------------------------------------------|
-| Linux    | `/var/log/datadog/dotnet-profiler.log`                        |
-| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\dotnet-profiler.log` |
+| Linux    | `/var/log/datadog/`                        |
+| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 
 
 {{% /tab %}}

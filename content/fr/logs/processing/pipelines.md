@@ -24,9 +24,9 @@ further_reading:
 
 Datadog analyse automatiquement les logs au format JSON. Lorsque vos logs ne sont pas au format JSON, Datadog vous permet d'optimiser leur utilisation en les faisant passer par un pipeline de traitement.
 
-Avec les pipelines, vous analysez et enrichissez vos logs grâce à un ensemble de [processeurs](#processeurs). Cela vous permet d'extraire des informations ou des attributs utiles à partir de texte semi-structuré pour les réutiliser en tant que [facettes][1].
+Avec les pipelines, vous analysez et enrichissez vos logs grâce à un ensemble de [processeurs][1]. Cela vous permet d'extraire des informations ou des attributs utiles à partir de texte semi-structuré pour les réutiliser en tant que [facettes][2].
 
-Chaque log qui passe par les pipelines est testé avec chaque filtre de pipeline. Si l'un des logs correspond à un filtre, tous les [processeurs](#processeurs) du pipeline sont appliqués de façon séquentielle avant de passer au pipeline suivant.
+Chaque log qui passe par les pipelines est testé avec chaque filtre de pipeline. Si l'un des logs correspond à un filtre, tous les [processeurs][1] du pipeline sont appliqués de façon séquentielle avant de passer au pipeline suivant.
 
 Ainsi, un pipeline de traitement peut transformer ce log :
 
@@ -48,9 +48,9 @@ Par exemple, un premier pipeline peut être défini pour extraire le préfixe du
 
 Les filtres vous permettent de limiter les types de logs auxquels un pipeline s'applique.
 
-La syntaxe d'un filtre est identique à celle de la [barre de recherche][1].
+La syntaxe d'un filtre est identique à celle de la [barre de recherche][2].
 
-**Attention, les filtres de pipeline sont appliqués avant les processeurs de pipeline. Par conséquent, vous ne pouvez pas appliquer de filtre à un attribut qui est extrait dans le pipeline.**
+**Attention : les filtres de pipeline sont appliqués avant tout traitement par les processeurs du pipeline. Par conséquent, vous ne pouvez pas appliquer de filtre à partir d'un attribut qui est extrait dans le pipeline.**
 
 Le flux de logs affiche les logs auxquels votre pipeline s'applique :
 
@@ -62,17 +62,17 @@ Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les 
 
  Un pipeline peut contenir des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
 
- {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="pipelines imbriqués" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="pipelines imbriqués" responsive="true" style="width:80%;">}}
 
  Il est possible de faire glisser un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
 
- {{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.gif" alt="Créer des pipelines imbriqués avec un glisser-déposer" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Créer des pipelines imbriqués avec un glisser-déposer" video="true" responsive="true" width="80%" >}}
 
 ## Pipelines spéciaux
 
 ### Pipeline d'attribut réservé
 
-Datadog dispose d'[une liste d'attributs réservés][2], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
+Datadog dispose d'[une liste d'attributs réservés][3], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
 Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le pipeline des attributs réservés pour remapper l'attribut de vos logs vers un attribut figurant dans la liste des attributs réservés.
 
 Par exemple, imaginons un service qui génère les logs ci-dessous :
@@ -95,7 +95,7 @@ On obtient alors le log suivant :
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="log après remappage" responsive="true" style="width:70%;">}}
 
-Si vous souhaitez remapper un attribut vers un des attributs réservés dans un pipeline personnalisé, utilisez le [remappeur de statut de log][3] ou le [remappeur de dates de log][4].
+Si vous souhaitez remapper un attribut vers un des attributs réservés dans un pipeline personnalisé, utilisez le [remappeur de statut de log][4] ou le [remappeur de dates de log][5].
 
 ### Pipelines d'intégration
 
@@ -103,7 +103,7 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour cert
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline" responsive="true" style="width:80%;">}}
 
-Pour afficher la liste complète des pipelines d'intégration, consultez la page des [références relatives aux pipelines d'intégration][5].
+Pour afficher la liste complète des pipelines d'intégration, consultez la page des [références relatives aux pipelines d'intégration][6].
 
 ## Limites des pipelines
 
@@ -125,15 +125,16 @@ Les événements de log qui ne respectent pas ces limitations sont susceptibles 
 * Le nombre maximum de processeurs par pipeline est de 20.
 * Le nombre maximum de règles de parsing au sein d'un processeur Grok est de 10. Nous nous réservons le droit de désactiver les règles de parsing moins performantes qui pourraient avoir une incidence sur les performances du service de Datadog.
 
-[Contactez l'assistance][6] si vous atteignez l'une de ces limites, car il est possible que Datadog puisse vous fournir une solution mieux adaptée à vos besoins.
+[Contactez l'assistance][7] si vous atteignez l'une de ces limites. Datadog pourra peut-être vous proposer une solution mieux adaptée à vos besoins.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/search
-[2]: /fr/logs/processing/#reserved-attributes
-[3]: /fr/logs/processing/processors/#log-status-remapper
-[4]: /fr/logs/processing/processors/#log-date-remapper
-[5]: /fr/logs/faq/integration-pipeline-reference
-[6]: /fr/help
+[1]: /fr/logs/processing/processors
+[2]: /fr/logs/explorer/search
+[3]: /fr/logs/processing/#reserved-attributes
+[4]: /fr/logs/processing/processors/#log-status-remapper
+[5]: /fr/logs/processing/processors/#log-date-remapper
+[6]: /fr/logs/faq/integration-pipeline-reference
+[7]: /fr/help

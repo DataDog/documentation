@@ -42,10 +42,11 @@ Azure Cognitive Services インテグレーションには、イベントは含�
 Azure Cognitive Services インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_cognitive_services/azure_cognitive_services_metadata.csv
+[3]: https://docs.datadoghq.com/ja/help/
 
 
 {{< get-dependencies >}}
-[1]: https://docs.datadoghq.com/ja/integrations/azure
-[2]: https://docs.datadoghq.com/ja/help
