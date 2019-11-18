@@ -55,5 +55,5 @@ Pour en savoir plus sur le nombre de métriques custom créées à partir de mé
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/metrics_type
+[1]: /fr/developers/metrics/types
 [2]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
