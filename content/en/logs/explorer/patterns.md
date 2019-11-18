@@ -46,7 +46,7 @@ Click on a pattern to see a sample of underlying logs, and eventually display on
 
 {{< img src="logs/explorer/patterns/patterns_action.png" alt="Log Patterns Actions" responsive="true" style="width:80%;">}}
 
-When slecting a pattern, in addition of displaying the pattern and a sample of underlying logs, three buttons are available in the top-right corner of the panel to:
+Selecting a pattern opens a contextual panel that displays a sample of underlying logs. Three buttons are available in the top-right corner:
 
 * View all logs matching the pattern query.
 * Graph the evolution of this pattern over time.
