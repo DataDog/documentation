@@ -42,7 +42,7 @@ Among all values received during the same flush interval, the aggregated value s
 | [COUNT][3]     | The sum of all received datapoints is sent.                                                                                                                     |
 | [HISTOGRAM][6] | The min, max, sum, avg, 95 percentiles, count, and median of all datapoints received is sent. See the [HISTOGRAM metric documentation page][7] for more details. |
 | [SET][8]       | The number of different datapoints is sent.                                                                                                                     |
-| [RATE][9]      | The value difference divided by the time difference of the last 2 datapoints received.                                                                         |
+| [DISTRIBUTION][9]      | Aggregated as global distributions.                                                                         |
 
 ## Further Reading
 
@@ -56,4 +56,4 @@ Among all values received during the same flush interval, the aggregated value s
 [6]: /developers/metrics/metrics_type/?tab=histogram#metric-submission-types
 [7]: /developers/metrics/metrics_type/?tab=histogram#metric-submission-types
 [8]: /developers/metrics/metrics_type/?tab=set#metric-submission-types
-[9]: /developers/metrics/metrics_type/?tab=rate#metric-submission-types
+[9]: /developers/metrics/metrics_type/?tab=distribution#metric-submission-types
