@@ -37,7 +37,7 @@ further_reading:
 
 イベントタイムラインウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-≪```
+```
 EVENT_TIMELINE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -51,7 +51,7 @@ EVENT_TIMELINE_SCHEMA = {
     "required": ["type", "query"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
