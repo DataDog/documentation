@@ -14,7 +14,7 @@ Ask your customer success manager or <a href="/help">Datadog Support</a> to enab
 
 If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog.
 
-**Note**: If you are a SAML user and you have been using the existing beta Federated Mapping mechanism (roles_v2_saml), you should transition to using this API.
+**Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
 
 ## Requests
 
@@ -26,7 +26,7 @@ All the API endpoints below can have two different host endpoints:
 ### Create a new Authentication mapping
 
 
-Create a new AuthN Mapping from json body. Returns the newly created AuthN Mapping.
+Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Mapping.
 
 | Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
@@ -34,8 +34,10 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 
 ##### ARGUMENTS
 
+* **`id`** [*required*, *default*=none]:
+  The UUID of the `authinmap` being updated. For more information about finding your UUID, see the [Role API documentation][1].
 * **`role_uuid`** [*required*, *default*=none]:
-  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding your `role_uuid`, see the [Role API documentation][1].
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you are updating, see the [Role API documentation][1].
 * **`attribute_key`** [*required*, *default*=none]:
  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*required*, *default*=none]:
@@ -44,17 +46,24 @@ Create a new AuthN Mapping from json body. Returns the newly created AuthN Mappi
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< code-block lang="bash" filename="roles.sh" >}}
-{�
-  "type": "authnmapping",
-  "data": {�
-    "attributes": {�
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
-      "attribute_key": "string",
-      "attribute_key": "string"
-    }
-  }
-}
+```sh
+curl -X POST \
+         "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+         -d '{
+             "data": {
+                 "type": "authn_mappings",
+                 "id": "123e4567-e89b-12d3-a456-426655440000",
+                 "attributes": {
+                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
+                      "attribute_key": "string",
+                      "attribute_value": "string"
+                }
+             }
+         }'
+```
 {{< /code-block >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
@@ -67,13 +76,12 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {
   "data": {
     "attributes": {
-      "created_at": "string",
+      "created_at": "timestamp",
       "created_by": "string",
-      "uuid": "10000000-abcd-efgh-ijkl-000000000000",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "saml_assertion_attribute_id": 0
     },
-    "type": "string",
+    "type": "authn_mappings",
     "id": "string",
     "relationships": {
       "saml_assertion_attributes": {
@@ -84,7 +92,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       },
       "roles": {
         "data": {
-          "id": "string",
+          "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
       }
@@ -98,7 +106,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         "attributes": {
           "created_at": "string",
           "modified_at": "string",
-          "uuid": "00000000-0000-0000-0000-000000000000",
+          "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
         "relationships": {
@@ -114,7 +122,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     {
       "data": {
         "id": 0,
-        "type": "authn_mappings",
+        "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
           "attribute_key": "string",
@@ -140,7 +148,7 @@ Returns a list of AuthN Mappings
 ##### ARGUMENTS
 
 * **`sort`** [*optional*, *default*=**yes**]:
-  Sort attribute and direction - `yes` sorts in descending order, `no` sorts in ascending order.
+  Sort attribute and direction—`yes` sorts in descending order, `no` sorts in ascending order.
 * **`page_number`** [*optional*, *default*=**0**, *minimum*=**0**]:
   The page of results to return. 
 * **`page_size`** [*optional*, *default*=**10**]:
@@ -168,7 +176,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": [
     {
       "type": "authn_mapping",
-      "id": "string",
+      "id": "123e4567-e89b-12d3-a456-426655440000",
       "relationships": {
         "saml_assertion_attributes": {
           "data": {
@@ -178,16 +186,16 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         },
         "roles": {
           "data": {
-            "id": "string",
+            "id": "123e4567-e89b-12d3-a456-426655440000",
             "type": "roles"
           }
         }
       },
       "attributes": {
-        "created_at": "string",
+        "created_at": "timestamp",
         "created_by": "string",
-        "uuid": "10000000-abcd-efgh-ijkl-000000000000",
-        "role_uuid": "00000000-0000-0000-0000-000000000000",
+        "uuid": "123e4567-e89b-12d3-a456-426655440000",
+        "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
         "saml_assertion_attribute_id": 0
       }
     }
@@ -195,18 +203,18 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "included": [
     {
       "data": {
-        "id": "string",
+        "id": "timestamp",
         "type": "roles",
         "attributes": {
-          "created_at": "string",
-          "modified_at": "string",
-          "uuid": "00000000-0000-0000-0000-000000000000",
+          "created_at": "timestamp",
+          "modified_at": "timestamp",
+          "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
         "relationships": {
           "data": [
             {
-              "id": "string",
+              "id": "123e4567-e89b-12d3-a456-426655440000",
               "type": "permissions"
             }
           ]
@@ -216,7 +224,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     {
       "data": {
         "id": 0,
-        "type": "authn_mappings",
+        "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
           "attribute_key": "string",
@@ -270,14 +278,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {
   "data": {
     "attributes": {
-      "created_at": "string",
+      "created_at": "timestamp",
       "created_by": "string",
-      "uuid": "10000000-abcd-efgh-ijkl-000000000000",
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
+      "uuid": "123e4567-e89b-12d3-a456-426655440000",
+      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
     },
-    "type": "string",
-    "id": "string",
+    "type": "authn_mappings",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
       "saml_assertion_attributes": {
         "data": {
@@ -287,7 +295,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       },
       "roles": {
         "data": {
-          "id": "string",
+          "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
       }
@@ -296,18 +304,18 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "included": [
     {
       "data": {
-        "id": "string",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "type": "roles",
         "attributes": {
-          "created_at": "string",
+          "created_at": "timestamp",
           "modified_at": "string",
-          "uuid": "00000000-0000-0000-0000-000000000000",
+          "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
         "relationships": {
           "data": [
             {
-              "id": "string",
+              "id": "123e4567-e89b-12d3-a456-426655440000",
               "type": "permissions"
             }
           ]
@@ -317,7 +325,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     {
       "data": {
         "id": 0,
-        "type": "authn_mappings",
+        "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
           "attribute_key": "string",
@@ -339,16 +347,18 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 | Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
-| `PATCH`  | `/v2/authn_mappings/{UUID}`  | JSON       |
+| `PATCH`  | `/v2/authn_mappings/{ID}`  | JSON       |
 
 ##### ARGUMENTS
 
-* **`{UUID}`** [*required*, no default]:
-  Replace `{UUID}` with the UUID of the AuthN Mapping you want to update.
-* **`role_uuid`** [*required*, *default*=**?**]:
-?
-* **`attribute_key`** [*required*, *default*=**?**]:
-?
+* **`id`** [*required*, *default*=none]:
+  The UUID of the `authinmap` being updated. For more information about finding your UUID, see the [Role API documentation][1].
+* **`role_uuid`** [*required*, *default*=none]:
+  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you are updating, see the [Role API documentation][1].
+* **`attribute_key`** [*required*, *default*=none]:
+ The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
+* **`attribute_value`** [*required*, *default*=none]:
+  The `attribute_key` and the `attribute_value` are key/value pairs defined in their SAML assertions from their Identity Providers. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -361,9 +371,10 @@ curl -X PATCH \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
          -d '{
              "data": {
-                 "authn_mappings",
+                 "type": "authn_mappings",
+                 "role_uuid": "123e4567-e89b-12d3-a456-426655440000",
                  "attributes": {
-                      "role_uuid": "00000000-0000-0000-0000-000000000000",
+                      "id": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
                       "attribute_value": "string"
                 }
@@ -381,13 +392,13 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {
   "data": {
     "attributes": {
-      "created_at": "string",
+      "created_at": "timestamp",
       "created_by": "string",
-      "uuid": "10000000-abcd-efgh-ijkl-000000000000",
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
+      "uuid": "123e4567-e89b-12d3-a456-426655440000",
+      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
     },
-    "type": "string",
+    "type": "authn_mappings",
     "id": "string",
     "relationships": {
       "saml_assertion_attributes": {
@@ -398,7 +409,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       },
       "roles": {
         "data": {
-          "id": "string",
+          "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
       }
@@ -407,18 +418,18 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "included": [
     {
       "data": {
-        "id": "string",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "type": "roles",
         "attributes": {
-          "created_at": "string",
+          "created_at": "timestamp",
           "modified_at": "string",
-          "uuid": "00000000-0000-0000-0000-000000000000",
+          "uuid": "123e4567-e89b-12d3-a456-426655440000",
           "name": "string"
         },
         "relationships": {
           "data": [
             {
-              "id": "string",
+              "id": "123e4567-e89b-12d3-a456-426655440000",
               "type": "permissions"
             }
           ]
@@ -428,7 +439,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     {
       "data": {
         "id": 0,
-        "type": "authn_mappings",
+        "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
           "attribute_key": "string",
