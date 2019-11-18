@@ -46,13 +46,13 @@ Click on a pattern to see a sample of underlying logs, and eventually display on
 
 ## Pattern Actions
 
-When clicking on a pattern, in addition of displaying the pattern and sample of underlying logs, three buttons are available at the top to perform the following actions:
-
 {{< img src="logs/explorer/patterns/patterns_action.png" alt="Log Patterns Actions" responsive="true" style="width:80%;">}}
 
-- View all logs matching the pattern query
-- Graph the evolution of this pattern over time
-- See the automatically generated parsing rule associated to this pattern:
+When slecting a pattern, in addition of displaying the pattern and a sample of underlying logs, three buttons are available in the top-right corner of the panel to:
+
+* View all logs matching the pattern query.
+* Graph the evolution of this pattern over time.
+* See an automatically generated parsing rule associated to this pattern:
 
 {{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Log Patterns Parsing Rules" responsive="true" style="width:80%;">}}
 
