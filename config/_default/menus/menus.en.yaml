@@ -1113,6 +1113,33 @@ main:
     identifier: "synthetics_troubleshooting"
     weight: 7
 
+###################
+## UX Monitoring ##
+###################
+
+
+  - name: "UX Monitoring"
+    url: "real_user_monitoring/"
+    pre: "nav_rum"
+    identifier: "rum"
+    weight: 110000
+
+  - name: "Setup"
+    url: "real_user_monitoring/setup"
+    parent: "rum"
+    identifier: "rum_setup"
+    weight: 1
+  - name: "Views Explorer"
+    url: "real_user_monitoring/views_explorer"
+    parent: "rum"
+    identifier: "rum_views_explorer"
+    weight: 2
+  - name: "RUM Analytics"
+    url: "real_user_monitoring/rum_analytics"
+    parent: "rum"
+    identifier: "rum_analytics"
+    weight: 3
+
 ####################################
 ## Network Performance Monitoring ##
 ####################################
@@ -1451,4 +1478,4 @@ main:
     url: "help/"
     pre: "nav_help"
     identifier: "help_top_level"
-    weight: 190000
+    weight: 180000
