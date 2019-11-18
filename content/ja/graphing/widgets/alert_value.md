@@ -46,7 +46,7 @@ further_reading:
 
 アラート値ウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
 
-≪```
+```
 ALERT_VALUE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -61,7 +61,7 @@ ALERT_VALUE_SCHEMA = {
     "required": ["type", "alert_id"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
