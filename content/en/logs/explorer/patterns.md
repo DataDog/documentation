@@ -31,12 +31,10 @@ The patterns view is helpful for detecting and filtering noisy error patterns th
 
 ## See log trends and newcomers over time
 
-Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query.
+Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query. Each pattern comes with highlights, to get you straight to its characteristic features:
 
-Each pattern comes with highlights, to get you straight to its characteristic features:
-
-* Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines.
 * A mini graph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns.
+* Sections of logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
