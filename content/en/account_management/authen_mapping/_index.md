@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The Federated Authentication to Role Mapping API is currently in closed beta. Functionality and performance might not be working quite like we want it to and we reserve the right to change the functionality at any time without warning. Ask your customer success manager or <a href="/help">Datadog Support</a> to enable this feature.
+The Federated Authentication to Role Mapping API is currently in closed beta. Functionality and performance may not be ideal, and we reserve the right to change the functionality at any time without warning. Ask your customer success manager or <a href="/help">Datadog Support</a> to enable this feature.
 </div>
 
 If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog.
@@ -64,7 +64,7 @@ curl -X POST \
 ```
 {{< /code-block >}}
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -145,7 +145,7 @@ Returns a list of AuthN Mappings
 ##### ARGUMENTS
 
 * **`sort`** [*optional*, *default*=**+**]:
-  Sort attribute and direction— defaults to ascending order, `-` sorts in decending order.
+  Sort attribute and direction—defaults to ascending order, `-` sorts in descending order.
 * **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
   The page of results to return. 
 * **`page[size]`** [*optional*, *default*=**10**]:
