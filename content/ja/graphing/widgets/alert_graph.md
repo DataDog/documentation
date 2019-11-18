@@ -54,7 +54,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 アラートグラフウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
 
-≪```
+```
 ALERT_GRAPH_SCHEMA = {
     "type": "object",
     "properties": {
@@ -66,7 +66,7 @@ ALERT_GRAPH_SCHEMA = {
     "required": ["type", "alert_id", "viz_type"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
