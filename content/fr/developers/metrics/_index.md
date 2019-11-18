@@ -59,7 +59,7 @@ Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/graphing/metrics/introduction
-[2]: /fr/developers/metrics/metrics_type
+[2]: /fr/developers/metrics/types
 [3]: /fr/integrations
 [4]: /fr/developers/metrics/custom_metrics
 [5]: /fr/account_management/billing/custom_metrics/#standard-integrations

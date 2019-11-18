@@ -38,7 +38,7 @@ Voici quelques exemples de datagrammes :
 * `users.online:1|c|@0.5|#country:china` : surveille les utilisateurs chinois actifs et utilisez un taux d'échantillonnage.
 
 [1]: /fr/developers/metrics/#naming-metrics
-[2]: /fr/developers/metrics/metrics_type
+[2]: /fr/developers/metrics/types
 [3]: /fr/tagging
 {{% /tab %}}
 {{% tab "Événements" %}}

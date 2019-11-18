@@ -82,7 +82,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [4]: https://docs.datadoghq.com/fr/logs/explorer
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-[6]: http://docs.datadoghq.com/help
+[6]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
