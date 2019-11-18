@@ -31,8 +31,9 @@ Datadog の [Cloudflare インテグレーションタイル][1]を使用して�
 3. アカウントの名前を追加します。この名前は任意で、メトリクスの `account` タグ内で使用されます。
 
 API トークンを使用する際は、トークンが以下のアクセス許可を持つことを確認してください。
-* Zone >  Zone >  Read
-* Zone >  Analytics >  Read
+
+- Zone >  Zone >  Read
+- Zone >  Analytics >  Read
 
 ## 収集データ
 ### メトリクス

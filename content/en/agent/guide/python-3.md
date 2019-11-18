@@ -169,7 +169,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
-Consult Ned Batchelder’s [Pragmatic Unicode][11] for further details.
+Consult Ned Batchelder’s [Pragmatic Unicode][10] for further details.
 
 ### Print
 
@@ -294,4 +294,4 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 [7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
 [8]: https://code.visualstudio.com/docs/setup/setup-overview
 [9]: https://six.readthedocs.io
-[10]: https://nedbatchelder.com/text/unipain.html
+[10]: 

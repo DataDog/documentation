@@ -6,6 +6,4 @@ curl -X GET \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 -d "api_key=${api_key}" \
 -d "application_key=${app_key}" \
--d "q=metrics:test" \
-"https://api.datadoghq.com/api/v1/search"
-
+"https://api.datadoghq.com/api/v1/search?q=metrics:aws"

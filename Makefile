@@ -54,9 +54,11 @@ clean-integrations:  ## remove built integrations files.
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'alcide.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
+			-a -not -name 'carbon_black.md' \
 	    -a -not -name 'cloud_foundry.md' \
 		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
@@ -65,6 +67,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
+			-a -not -name 'lacework.md' \
 	    -a -not -name 'marklogic.md' \
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \

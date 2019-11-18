@@ -17,7 +17,10 @@ La commande `flare` rassemble tous les fichiers de configuration et tous les log
 **Confirmez l'importation de l'archive pour l'envoyer immédiatement à l'assistance Datadog**.
 L'Agent Datadog est entièrement open source, ce qui vous permet de [vérifier le comportement du code][1]. Une demande de confirmation s'affiche avant l'envoi des informations, ce qui signifie que vous pouvez les passer en revue si vous le souhaitez.
 
-Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket d'assistance Datadog. Si vous n'indiquez pas d'ID de ticket, la commande vous demande de spécifier l'adresse e-mail que vous utilisez pour vous connecter à votre organisation et crée un ticket d'assistance.
+Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket d'assistance Datadog (le cas échéant), puis saisissez l'adresse e-mail associée.
+Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail que vous utilisez pour vous connecter à Datadog afin de créer un ticket d'assistance.
+
+
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}

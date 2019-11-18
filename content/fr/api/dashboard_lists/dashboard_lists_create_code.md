@@ -5,14 +5,14 @@ order: 9.3
 external_redirect: /api/#creer-une-liste-de-dashboards
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/dashboard/lists/manual`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="api-dashboard-list-create" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-create" >}}

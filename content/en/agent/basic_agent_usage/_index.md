@@ -26,7 +26,7 @@ further_reading:
 
 Agent v6 is a complete rewrite in Go of the Agent v5. V6 offers better performances, smaller footprint, and more features. It is the default Datadog Agent (v5 is no longer in active development).
 
-Agent v6 is a composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
+Agent v6 is composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
 * The Collector is in charge of running checks and collecting metrics.
 * The Forwarder sends payloads to Datadog.

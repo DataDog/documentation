@@ -16,7 +16,7 @@ const siteEnv = document.querySelector('html').dataset.env;
 
 let gaTag = '';
 let indexName = '';
-if (siteEnv === 'preview') {
+if (siteEnv === 'preview' || siteEnv === 'development' ) {
     gaTag = 'UA-21102638-9';
     indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
@@ -703,9 +703,9 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="account_management/billing"]');
     }
 
-    if (path.includes('monitors/monitor_types/trace_analytics')) {
-        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/trace_analytics"]');
-        maPath = document.querySelector('header [data-path*="monitors/monitor_types/trace_analytics"]');
+    if (path.includes('monitors/monitor_types/app_analytics')) {
+        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/app_analytics"]');
+        maPath = document.querySelector('header [data-path*="monitors/monitor_types/app_analytics"]');
     }
 
     if (path.includes('developers/guide')) {
@@ -954,8 +954,13 @@ function reloadWistiaVidScripts(vidId){
 const sideNav = document.querySelector('.side .sidenav-nav');
 const mobileNav = document.querySelector('header .sidenav-nav');
 
-sideNav.addEventListener('click', navClickEventHandler);
-mobileNav.addEventListener('click', navClickEventHandler);
+if (sideNav) {
+    sideNav.addEventListener('click', navClickEventHandler);
+}
+
+if (mobileNav) {
+    mobileNav.addEventListener('click', navClickEventHandler);
+}
 
 function navClickEventHandler(event){
     event.stopPropagation();

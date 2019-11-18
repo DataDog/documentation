@@ -183,7 +183,7 @@ L'APM Datadog vous permet de tracer toutes les interactions d'une requête avec 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing
-[2]: /fr/tracing/setup
+[2]: /fr/tracing/send_traces
 [3]: https://app.datadoghq.com/apm/home
 [4]: /fr/tracing/visualization/services_list
 [5]: /fr/tracing/visualization/service

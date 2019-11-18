@@ -5,7 +5,7 @@ kind: integration
 description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 short_description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 categories:
-  - Collecte de logs
+  - log collection
 doc_link: /integrations/rsyslog/
 aliases:
   - /fr/logs/log_collection/rsyslog

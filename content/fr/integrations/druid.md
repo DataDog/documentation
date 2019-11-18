@@ -16,7 +16,7 @@ git_integration_title: druid
 guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
 integration_title: Druid
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

@@ -10,7 +10,7 @@ further_reading:
     text: Real User Monitoring
   - link: /logs/processing/attributes_naming_convention/
     tag: Documentation
-    text: Attributs standard Datadog
+    text: Attributs standards Datadog
 ---
 <div class="alert alert-warning">
 Cette fonctionnalité est en version bêta. Inscrivez-vous via <a href="https://app.datadoghq.com/rum/2019signup">le site américain de Datadog</a> ou le <a href="https://app.datadoghq.eu/rum/2019signup">site européen de Datadog</a> pour activer Real User Monitoring/Datadog sur votre compte.
@@ -89,7 +89,7 @@ Le script Real User Monitoring/Datadog envoie trois types d'événements princip
 - Les événements relatifs au chargement des ressources
 - [Événements et mesures personnalisés][4].
 
-Les contextes qui suivent la logique des [attributs standard Datadog][5] sont ensuite joints automatiquement à tous les événements envoyés à Datadog :
+Les contextes qui suivent la logique des [attributs standards Datadog][5] sont ensuite joints automatiquement à tous les événements envoyés à Datadog :
 
 * [Requêtes HTTP][6]
 * [Détails de l'URL][7]

@@ -10,9 +10,10 @@ further_reading:
     text: Présentation de Datadog
 ---
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
-    {{< nextlink href="/getting_started/agent" >}}<u>Agent</u> : Débuter avec l'Agent de Datadog.{{< /nextlink >}}
-    {{< nextlink href="/getting_started/application" >}}<u>Application Datadog</u> : Découvrir comment utiliser l'UI Datadog : dashboards, liste d'infrastructures, cartes, etc.{{< /nextlink >}}
-    {{< nextlink href="/getting_started/integrations" >}}<u>Intégrations</u> : Découvrir comment collecter des métriques, des traces et des logs avec les intégrations Datadog.{{< /nextlink >}}
-    {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u> : En savoir plus sur le tracing en définissant l'Agent afin qu'il trace une petite application.{{< /nextlink >}}
-    {{< nextlink href="/getting_started/api" >}}<u>API</u> : Débuter sur l'API HTTP de Datadog.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/agent" >}}<u>Agent</u> : prenez en main l'Agent Datadog.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/application" >}}<u>Application Datadog</u> : découvrez comment utiliser l'interface Datadog, notamment les dashboard, la liste d'infrastructures, les cartes, etc.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/integrations" >}}<u>Intégrations</u> : apprenez à recueillir des métriques, des traces et des logs grâce aux intégrations Datadog.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/logs" >}}<u>Logs</u> : envoyez vos premiers logs et traitez-les pour les enrichir.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u> : découvrez le fonctionnement du tracing en configurant l'Agent de façon à tracer une application légère.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/api" >}}<u>API</u> : apprenez à utiliser l'API HTTP Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}

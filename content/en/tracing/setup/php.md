@@ -110,23 +110,23 @@ PHP APM supports the following SAPI's:
 
 If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
-| Module         | Versions           | Support Type    |
-|:---------------|:-------------------|:----------------|
-| CakePHP        | 2.x                | Fully Supported |
-| CodeIgniter    | 2.x                | PHP 7           |
-| Laravel        | 4.2, 5.x           | Fully Supported |
-| Lumen          | 5.2+               | Fully Supported |
-| Slim           | 3.x                | Fully Supported |
-| Symfony        | 3.3, 3.4, 4.x      | Fully Supported |
-| WordPress      | 4.x                | PHP 7           |
-| Zend Framework | 1.12               | Fully Supported |
-| Yii            | 2.0                | Fully Supported |
-| CodeIgniter    | 3.x                | _Coming Soon_   |
-| Drupal         |                    | _Coming Soon_   |
-| Magento        | 2                  | _Coming Soon_   |
-| Phalcon        | 1.3, 3.4           | _Coming Soon_   |
-| Slim           | 2.x                | _Coming Soon_   |
-| Yii            | 1.1                | _Coming Soon_   |
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| CakePHP        | 2.x           | Fully Supported |
+| CodeIgniter    | 2.x           | PHP 7           |
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Lumen          | 5.2+          | Fully Supported |
+| Slim           | 3.x           | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| WordPress      | 4.x           | PHP 7           |
+| Zend Framework | 1.12          | Fully Supported |
+| Yii            | 2.0           | Fully Supported |
+| CodeIgniter    | 3.x           | _Coming Soon_   |
+| Drupal         |               | _Coming Soon_   |
+| Magento        | 2             | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
+| Slim           | 2.x           | _Coming Soon_   |
+| Yii            | 1.1           | _Coming Soon_   |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
@@ -134,11 +134,11 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
-| Module          | Versions           | Support Type    |
-|:----------------|:-------------------|:----------------|
-| CakePHP Console | 2.x                | Fully Supported |
-| Laravel Artisan | 5.x                | Fully Supported |
-| Symfony Console |                    | _Coming Soon_   |
+| Module          | Versions | Support Type    |
+|:----------------|:---------|:----------------|
+| CakePHP Console | 2.x      | Fully Supported |
+| Laravel Artisan | 5.x      | Fully Supported |
+| Symfony Console |          | _Coming Soon_   |
 
 Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][13] for help.
 
@@ -214,7 +214,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                               |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                             |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                                                              |
-| `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                              |
+| `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                               |
 | `DD_SAMPLING_RATE`                        | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)                                               |
 | `DD_SERVICE_NAME`                         | ``          | The default app name                                                                                              |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                               |
@@ -223,16 +223,16 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | IPC-based configurable circuit breaker max consecutive failures                                                   |
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | The Agent port number                                                                                             |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | The Agent request transfer timeout (in milliseconds)                                                              |
-| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag to enable trace analytics for relevant spans in web integrations                                             |
+| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag to enable app analytics for relevant spans in web integrations                                               |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | Enable tracing of PHP scripts from the CLI                                                                        |
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode][16] for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                        |
 | `DD_TRACE_GLOBAL_TAGS`                    | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                      |
-| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                          |
+| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                       |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                        |
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17]                                  |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable trace analytics for relevant spans in a specific integration                                       |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable app analytics for relevant spans in a specific integration                                         |
 
 #### Map Resource Names To Normalized URI
 
@@ -264,11 +264,11 @@ Rules are applied in the same order as they appear in `DD_TRACE_RESOURCE_URI_MAP
 
 The `*` wildcard is replaced with `?`.
 
-| Mapping Rule   | URL (GET request)  | Resource Name    |
-|:---------------|:-------------------|:-----------------|
-| `/foo/*`       | `/foo/bar`         | `GET /foo/?`     |
-| `/foo/*/bar`   | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
-| `/foo-*-bar`   | `/foo-secret-bar`  | `GET /foo-?-bar` |
+| Mapping Rule | URL (GET request)  | Resource Name    |
+|:-------------|:-------------------|:-----------------|
+| `/foo/*`     | `/foo/bar`         | `GET /foo/?`     |
+| `/foo/*/bar` | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
+| `/foo-*-bar` | `/foo-secret-bar`  | `GET /foo-?-bar` |
 
 The `$*` wildcard matches without replacement.
 
@@ -287,7 +287,7 @@ To upgrade the PHP tracer, [download the latest release][7] and follow the same 
 
 [1]: /tracing/visualization
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[3]: /agent/?tab=agentv6
+[3]: /tracing/send_traces
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
 [6]: /tracing/send_traces

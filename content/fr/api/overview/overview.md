@@ -1,11 +1,12 @@
 ---
-title: Présentation
+title: Référence API
 type: apicontent
 order: 1
 external_redirect: '/api/#presentation'
 ---
-## Présentation
-Cette section décrit l'API HTTP de Datadog afin de transmettre des données vers et depuis Datadog.
+## Référence API
+
+Utilisez l'API HTTP Datadog pour accéder à la plateforme Datadog à l'aide de programmes.
 
 **Pour débuter sur l'API HTTP Datadog, utilisez notre [collection Postman de Datadog][1]**
 

@@ -184,7 +184,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 [1]: /tracing/setup/envoy
 [2]: /tracing/setup/nginx
-[3]: /tracing/setup
+[3]: /tracing/send_traces
 [4]: https://github.com/opentracing/opentracing-cpp
 [5]: https://github.com/opentracing/opentracing-cpp/#cc98
 [6]: /help

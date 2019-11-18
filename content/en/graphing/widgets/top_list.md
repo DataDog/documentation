@@ -25,8 +25,8 @@ The top list visualization enables you to display a list of Tag value like `host
 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][1] to configure a metric query.
-    * APM Events: See [the trace search documentation][2] to configure an APM event query.
-    * Log Events: See [the log search documentation][3] to configure an APM event query.
+    * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][3] to configure an Analyzed Span query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 
@@ -90,7 +90,7 @@ Additional properties allowed in the `request` object:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing
-[2]: /tracing/trace_search_and_analytics/search/#search-bar
+[2]: /tracing/advanced/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [4]: /graphing/graphing_json/widget_json
 [5]: /graphing/graphing_json/request_json

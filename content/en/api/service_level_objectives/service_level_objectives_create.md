@@ -46,9 +46,6 @@ For more information, see [Monitor SLOs][1].
 * **`monitor_ids`** [*required*, *default* = **empty list**]:
     Specify up to 20 monitor IDs directly for a monitor-based SLO. You can optionally on-create-dynamically select
     monitor IDs using the following option instead:
-* **`monitor_search`** [*optional*]:
-    Optional way to specify monitor IDs on create is to use a monitor search. On first create or edit, it will dynamically
-    search for the provided parameters and select up to the first 50 monitors matching the query.
 * **`groups`** [*optional*, *default* = **empty list**]:
     **Note: Only valid on single monitor SLOs** Specify the selected groups as a sub query of the selected monitor.
 

@@ -5,9 +5,14 @@ order: 10.3
 external_redirect: /api/#annuler-le-downtime-d-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/downtime/<DOWNTIME_ID>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-cancel-downtime" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 *Cet endpoint ne renvoie aucun objet JSON pour les requêtes réussies.*

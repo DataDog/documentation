@@ -121,7 +121,7 @@ Consultez également nos solutions de [gestion des logs][31], [APM][32] et [Synt
 
 La première étape de dépannage d'une intégration consiste à utiliser un plug-in dans votre éditeur de code ou à utiliser l'un de nombreux outils en ligne pour vérifier la validité du YAML. L'étape suivante consiste à suivre toutes les étapes de [dépannage de l'Agent][34].
 
-Si les problèmes persistent, contactez [notre superbe équipe d'assistance][35].
+Si les problèmes persistent, contactez [notre formidable équipe d'assistance][35].
 
 ## Termes clés
 

@@ -3876,10 +3876,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"start\":<START_DATE>,\n\t\"end\":<END_DATE>\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/events",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/events?start={{from_ts}}&end={{to_ts}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -3890,6 +3890,16 @@
 								"api",
 								"v1",
 								"events"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "{{from_ts}}"
+								},
+								{
+									"key": "end",
+									"value": "{{to_ts}}"
+								}
 							]
 						},
 						"description": "### Overview\n\nThe [event stream](https://docs.datadoghq.com/graphing/event_stream) can be queried and filtered by time, priority, sources and tags.\nNote: if the event you're querying contains markdown formatting of any kind, you may see characters such as %,\\,n in your output\n\n### Arguments\n\n* **`start`** [*required*]: POSIX timestamp.\n* **`end`** [*required*]: POSIX timestamp.\n* **`priority`** [*optional*, *default*=**None**]: Priority of your events: **low** or **normal**.\n* **`sources`** [*optional*, *default*=**None**]: A comma separated string of sources.\n* **`tags`** [*optional*, *default*=**None**]: A comma separated string of tags. To use a negative tag filter, prefix your tag with `-`. See the [Event Stream documentation](https://docs.datadoghq.com/graphing/event_stream/#event-query-language) to learn more.\n* **`unaggregated`** [*optional*, *default*=*false*]: Set unaggregated to `true` to return all events within the specified [`start`,`end`] timeframe. Otherwise if an event is aggregated to a parent event with a timestamp outside of the timeframe, it won't be available in the output."
@@ -9003,6 +9013,50 @@
 					"response": []
 				},
 				{
+					"name": "Can delete a Monitor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
+								"key": "DD-APPLICATION-KEY",
+								"value": "{{datadog_application_key}}",
+								"description": "Your Datadog application key",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/monitor/can_delete?monitor_id=<MONITOR_ID>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"monitor",
+								"can_delete"
+							],
+							"query": [
+								{
+									"key": "monitor_id",
+									"value": "<MONITOR_ID>",
+									"description": "Comma-separated list of monitor IDs to check if they can be deleted."
+								}
+							]
+						},
+						"description": "### Overview \n\nCheck if a monitor can be deleted\n\n### ARGUMENTS\n\n* **`monitor_ids`**\n    The comma-separated list of monitor ids to check if they can be deleted."
+					},
+					"response": []
+				},
+				{
 					"name": "Delete a Monitor",
 					"request": {
 						"method": "DELETE",
@@ -10931,7 +10985,7 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nGet hourly usage For Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
+						"description": "### Overview\n\nGet hourly usage for Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
 					},
 					"response": []
 				},

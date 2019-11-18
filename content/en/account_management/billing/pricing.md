@@ -30,7 +30,7 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 * Datadog records the number of **APM hosts** you are concurrently monitoring in the Datadog APM service once an hour. 
    * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. 
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* An **APM event** is an individual request against an individual service in your stack. Datadog charges based on the total number of APM events submitted to the Datadog APM service.
+* An **Analyzed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service.
 
 ### Log management
 

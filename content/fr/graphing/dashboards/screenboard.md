@@ -12,73 +12,67 @@ further_reading:
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
-Les screenboards sont des dashboards qui vous permettent de représenter librement de nombreux objets tels que des images, des graphiques ou des logs. Généralement utilisés pour visualiser les statuts de vos services et pour mettre en récit vos données, ils peuvent être mis à jour en temps réel ou représenter un ou plusieurs points fixes historiques.
+Les screenboards sont des dashboards qui vous permettent de représenter librement de nombreux objets tels que des images, des graphiques ou des logs. Généralement utilisés pour visualiser les statuts de vos services et pour mettre en récit vos données, ils peuvent être mis à jour en temps réel ou représenter des points fixes historiques.
 
-## Lecture seule
+## Sélecteur d'intervalle global
 
-[Un administrateur][1] ou le créateur d'un screenboard peut passer un screenboard en lecture seule en cliquant sur l'icône en forme d'engrenage (dans le coin supérieur droit du screenboard), puis en accédant au lien **Permissions** :
+Pour utiliser le sélecteur d'intervalle global sur un screenboard, au moins un widget affichant des données sur un intervalle de temps doit utiliser l'option `Global Time`. Pour définir cette option, modifiez un widget en accédant à **Set display preferences** ou ajoutez-en un autre (global time est le paramètre par défaut).
 
-{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Lecture seule" responsive="true" style="width:30%;">}}
+Le sélecteur d'intervalle global vous permet de définir le même intervalle de temps pour tous les widgets  qui utilisent l'option `Global Time` au sein d'un même screenboard. Vous pouvez sélectionner un intervalle dynamique situé dans le passé (`The Past Hour`, `The Past Day`, etc.) ou un intervalle fixe avec l'option `Select Range`. Si vous avez choisi un intervalle dynamique, les widgets sont mis à jour toutes les quelques millisecondes afin de refléter votre sélection.
 
-**Cliquez sur Yes dans la fenêtre de confirmation pour passer le screenboard en lecture seule.**
+Les widgets qui n'utilisent pas l'intervalle global affichent les données correspondant à leur intervalle local en fonction de l'intervalle global. Par exemple, si l'intervalle global s'étend du 1er janvier 2019 au 2 janvier 2019 et que l'intervalle local d'un widget est défini sur `The Past Minute`, celui-ci affichera la dernière minute du 2 janvier 2019 à partir de 23 h 59.
 
-Seuls les [administrateurs de compte][1] et le créateur du screenboard peuvent passer le screenboard en mode lecture seule.
-Tous les utilisateurs de l'organisation peuvent cependant s'abonner au screenboard afin de recevoir des notifications de modification.
+## Mode TV
 
-Si un utilisateur décide d'activer le suivi des modifications pour un screenboard, les modifications suivantes du screenboard sont signalées à l'utilisateur via un événement dans [le flux d'événements][2] :
+Les screenboards sont particulièrement utiles pour afficher des métriques de performance clé en grand format, notamment sur une TV. Pour activer le mode TV, utilisez le raccourci clavier `K` ou cliquez sur l'icône TV d'un screenboard.
 
-1. Les changements de texte (titre et description)
+## Paramètres
 
-2. Les changements de widget
-    - Les changements de widget iframe, free_text, image et note sont signalés dans le [flux d'événements][2] en cas d'ajout ou de suppression d'un widget. Le message ne précise pas la nature du changement de contenu. L'événement indique juste « a text_widget was added to the Screenboard ».
-    - Toutes les autres modifications de widget (ajout, modification ou suppression de widget) sont signalées dans le [flux d'événements][2]. L'événement spécifie le titre du widget en question et indique le message « the widget titled 'xyz' was edited ».
-3. Les duplications de screenboard
+### Generate public URL
 
-4. Les suppressions de screenboard
+Partagez un screenboard avec d'autres personnes en dehors de Datadog en générant une URL publique. Pour en savoir plus, consultez la page [Partager un screenboard][1].
 
-Afin d'empêcher les changements énumérés ci-dessus, un administrateur (à savoir, un administrateur de compte ou le créateur du screenboard) peut activer la vue en lecture seule. Cela désactive toutes les modifications de carrés ou de texte par des non-administrateurs dans le screenboard et empêche sa suppression.
-En mode lecture seule, les utilisateurs non-administrateurs peuvent toujours dupliquer le screenboard, réorganiser les carrés, prendre un snapshot de chaque carré et afficher le carré en plein écran. Si le screenboard est en mode lecture seule, les réarrangements de carrés par un non-administrateur sont uniquement temporaires.
+### Display UTC time
 
-## Sélecteur de période globale
+Basculez entre l'heure UTC et votre fuseau horaire par défaut.
 
-Les screenboards disposent d'une option qui permet de définir le même intervalle de temps pour tous les widgets d'un même screenboard. Il peut être utilisé pour choisir une période dynamique située dans le passé (la dernière heure, les trois derniers mois, etc.) ou une période fixe située entre deux dates. Si une période dynamique est choisie, tous les widgets mettent à jour la période de temps affichée à quelques millisecondes d'intervalle afin de refléter l'option choisie.
+### Notifications
 
-{{< img src="graphing/dashboards/screenboard/global_time_screenboard.png" alt="Sélecteur de période globale" responsive="true" style="width:50%;">}}
+Si les notifications sont activées pour un screenboard, un événement est créé dans le [flux d'événements][2]. Cet événement permet d'être informé en cas de modification du texte, de modification d'un widget, de duplication d'un screenboard ou de suppression d'un screenboard, ainsi que du nom de l'utilisateur à l'origine de cette action.
 
-Pour utiliser le sélecteur de période globale, le screenboard doit comporter au moins un widget affichant les données correspondant à une période de temps. Lorsque vous créez ou modifiez un widget de ce type, accédez à **Set display preferences** et sélectionnez « Global Time » dans le menu déroulant *Show*. Remarque : « Global Time » est le paramètre par défaut.
+Les utilisateurs ayant activé les notifications reçoivent également une alerte par e-mail. Tous les utilisateurs de l'organisation peuvent choisir de recevoir des notifications en cas de modification d'un screenboard, même s'ils ne disposent pas de droits d'administration.
 
-{{< img src="graphing/dashboards/screenboard/widget_selector.png" alt="Sélecteur de période du widget" responsive="true" style="width:70%;">}}
+Lorsque les notifications sont activées pour un dashboard, vous pouvez consulter les événements de modification depuis le flux d'événements avec la recherche suivante :
 
-Lorsque le sélecteur de période globale est utilisé, les widgets configurés pour utiliser ce paramètre affichent les données correspondant à cette période. Les autres widgets affichent les données correspondant à la période locale en fonction de la période globale. Par exemple, si le sélecteur de période globale est défini sur une période fixe allant du 1er janvier 2018 au 2 janvier 2018, un widget défini sur la période locale « The Last Minute » affichera la dernière minute du 2 janvier, à partir de 23 h 59.
+```
+tags:audit,dash
+```
 
+Pour restreindre votre recherche à un dashboard spécifique, spécifiez le nom du dashboard dans la recherche.
 
-Lorsque vous partagez un screenboard public, vous pouvez définir un intervalle global avant le partage :
+### Permissions
 
-{{< img src="graphing/dashboards/screenboard/public_sharing.png" alt="Sélecteur de période globale" responsive="true" style="width:70%;">}}
+Le créateur et les [administrateurs][3] d'un screenboard ont la possibilité d'activer le mode lecture seule, qui empêche toute modification du screenboard par les utilisateurs classiques.
 
+En mode lecture seule, les utilisateurs non-administrateurs peuvent toujours dupliquer le timeboard, réorganiser les carrés, prendre un snapshot d'un carré ou afficher un carré en plein écran. Tout réarrangement des carrés par un non-administrateur sera uniquement temporaire.
 
-## Suivi des modifications
-Un utilisateur peut trouver tous les événements liés aux changements d'un screenboard sur le screenboard qu'il suit en recherchant `tags:audit, <Nom_screenboard>` dans le principal [flux d'événements][2]. En effet, chaque événement de notification possède ces deux tags.
+### Clone dashboard
 
-## Audit de dashboards
+Utilisez cette option pour copier le screenboard entier et en créer un autre à l'identique. Vous devrez donner un nom au nouveau screenboard.
 
-Les notifications des dashboards vous permettent de suivre les modifications à des fins d'audit. Toute modification crée dans le [flux d'événements][2] un événement qui explique la modification et affiche l'utilisateur à son origine.
+### Copy/Import/Export dashboard JSON
 
-Si des modifications sont apportées à vos dashboards, consultez-les avec la recherche d'événement suivante :
+Consultez la [documentation principale sur les dashboards][4] pour découvrir comment copier, importer ou exporter le JSON d'un dashboard.
 
-https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
+### Delete dashboard
 
-Cette fonctionnalité peut être activée en suivant les étapes suivantes :
-
-1. Dans le coin supérieur droit d'un dashboard, cliquez sur l'icône en forme d'engrenage :
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="Activer les notifications" responsive="true" style="width:30%;">}}
-
-2. Sélectionnez l'option **Notifications** et activez les notifications :
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt="Fenêtre contextuelle des notifications" responsive="true" style="width:40%;">}}
+Utilisez cette option pour supprimer définitivement votre screenboard. Vous serez invité à confirmer votre choix.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/account_management/team/#datadog-user-roles
+[1]: /fr/graphing/dashboards/shared_graph/#screenboard-sharing
 [2]: /fr/graphing/event_stream
+[3]: /fr/account_management/team/#datadog-user-roles
+[4]: /fr/graphing/dashboards/#copy-import-export

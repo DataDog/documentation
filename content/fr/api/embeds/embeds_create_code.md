@@ -5,9 +5,14 @@ order: 11.2
 external_redirect: /api/#creer-un-embed
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/graph/embed`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-embeds-create" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-embeds-create" >}}

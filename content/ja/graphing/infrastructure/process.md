@@ -27,10 +27,10 @@ Datadog のプロセスモニタリングを使用すると、デプロイに含
 
 Datadog Agent をインストールしたら、[Agent のメイン構成ファイル][1]を編集し、次のパラメーターを `true` に設定して、ライブプロセスの収集を有効にします。
 
-≪```
+```
 process_config:
   enabled: "true"
-```≫
+```
 
 `enabled` の値は文字列で、以下のオプションがあります。
 
@@ -52,10 +52,10 @@ process_config:
 
 [Docker Agent][1] の手順に従って、必要に応じて他のカスタム設定に加えて、以下の属性を渡します。
 
-≪```
+```
 -v /etc/passwd:/etc/passwd:ro
 -e DD_PROCESS_AGENT_ENABLED=true
-```≫
+```
 
 **注**:
 
@@ -69,7 +69,7 @@ process_config:
 
 Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内に、以下の環境変数、ボリュームマウント、およびボリュームを追加します。
 
-≪```
+```
  env:
     - name: DD_PROCESS_AGENT_ENABLED
       value: "true"
@@ -81,7 +81,7 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
     - hostPath:
         path: /etc/passwd
       name: passwd
-```≫
+```
 
 詳細については、標準の [Daemonset インストール][2]のページおよび [Docker Agent][3] の情報ページを参照してください。
 
@@ -98,19 +98,19 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
 
 ライブプロセスページに機密データが表示されないように、Agent はプロセスコマンドラインからの機密性の高い引数をスクラビングします。この機能はデフォルトで有効になっており、以下の語のいずれかと一致するプロセス引数は、値が表示されません。
 
-≪```
+```
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
-```≫
+```
 
 **注**: この一致では、**大文字と小文字は区別されません**。
 
 `datadog.yaml` ファイルの `process_config` セクションの下にある `custom_sensitive_words` フィールドを使用すると、独自のリストを定義して、デフォルトのリストと統合することができます。ワイルドカード (`*`) を使用して、一致の範囲を独自に定義できます。ただし、ワイルドカード (`'*'`) 単独の使用は、機密語としてサポートされていません。
 
-≪```
+```
 process_config:
   scrub_args: true
   custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
-```≫
+```
 
 **注**: `custom_sensitive_words` 内の語には、英数字、アンダースコア、およびワイルドカード (`'*'`) のみを使用できます。ワイルドカードのみの機密語はサポートされていません。
 
@@ -122,10 +122,10 @@ process_config:
 
 `datadog.yaml` 構成ファイルで `strip_proc_arguments` フラグを有効にすることで、プロセスの**すべての**引数をスクラビングすることもできます。
 
-≪```
+```
 process_config:
   strip_proc_arguments: true
-```≫
+```
 
 ## 検索、フィルタリング、ピボット
 

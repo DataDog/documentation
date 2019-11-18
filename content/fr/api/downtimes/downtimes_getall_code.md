@@ -5,9 +5,14 @@ order: 10.6
 external_redirect: /api/#recuperer-tous-les-downtimes-de-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/downtime`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-get-downtimes" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-get-downtimes" >}}

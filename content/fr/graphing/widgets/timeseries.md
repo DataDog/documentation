@@ -178,7 +178,7 @@ Propriétés supplémentaires autorisées dans chaque objet `request` :
 [1]: /fr/graphing/dashboards/timeboard
 [2]: /fr/graphing/dashboards/screenboard
 [3]: /fr/graphing
-[4]: /fr/tracing/trace_search_and_analytics/search/#search-bar
+[4]: /fr/tracing/advanced/search/#search-bar
 [5]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
 [6]: /fr/graphing/event_stream
 [7]: /fr/graphing/dashboards/template_variables

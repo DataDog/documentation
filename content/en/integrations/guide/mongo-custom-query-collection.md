@@ -60,7 +60,7 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /developers/metrics/metrics-type
+[2]: /developers/metrics/types
 {{% /tab %}}
 {{% tab "Find" %}}
 
@@ -91,7 +91,7 @@ This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `nam
 **Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /developers/metrics/metrics_type
+[2]: /developers/metrics/types
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 

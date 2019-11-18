@@ -44,9 +44,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 "name": "Parsing Log message",
 "is_enabled": true,
 "source": "message",
+"samples": [
+    "sample log 1",
+    "sample log 2"
+    ],
 "grok": {
-    "support_rules": "<SUPPORT_RULES>",
-    "match_rules":"<MATCH_RULES>"
+    "support_rules": "<SUPPORT_RULES>",
+    "match_rules": "<MATCH_RULES>"
     }
 }
 ```
@@ -56,13 +60,18 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `type`               | String           | yes      | Type of the processor.                                  |
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
-| `sources`            | Array of Strings | yes      | Name of the log attribute to parse, default: `message`. |
+| `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
+| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               | 
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
+
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length.
+All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
 
@@ -289,7 +298,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
     "is_enabled": true,
     "source_type": "attribute",
     "sources": ["<SOURCE_ATTRIBUTE>"],
-    "target": "<TARGET_ATTRIBUTE",
+    "target": "<TARGET_ATTRIBUTE>",
     "target_type": "tag",
     "preserve_source": false,
     "override_on_conflict": false
@@ -402,7 +411,7 @@ Use categories to create groups for an analytical view (for example, URL groups,
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
 
@@ -458,7 +467,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 {{% /tab %}}
 {{< /tabs >}}
 
-Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][7].
+Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][6].
 
 ## Arithmetic processor
 
@@ -475,7 +484,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
-* If you need to scale a unit of measure, see [Scale Filter][8].
+* If you need to scale a unit of measure, see [Scale Filter][7].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -525,7 +534,7 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 
 **Notes**:
 
-* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* The processor only accepts attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
@@ -668,7 +677,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a trace id in the application logs][5] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a trace id in the application logs][8] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -712,7 +721,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [2]: /logs/processing/parsing
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /logs/guide/log-parsing-best-practice
-[5]: /tracing/advanced/connect_logs_and_traces
-[6]: /logs/explorer/search/#search-syntax
-[7]: /logs/processing/processors/?tab=ui#log-status-remapper
-[8]: /logs/processing/parsing/?tab=filter#matcher-and-filter
+[5]: /logs/explorer/search/#search-syntax
+[6]: /logs/processing/processors/?tab=ui#log-status-remapper
+[7]: /logs/processing/parsing/?tab=filter#matcher-and-filter
+[8]: /tracing/advanced/connect_logs_and_traces

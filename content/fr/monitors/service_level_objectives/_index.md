@@ -21,7 +21,7 @@ Utilisez le widget dédié aux SLO et à la disponibilité pour surveiller vos S
 
 L'*uptime* ou la disponibilité correspond à la durée pendant laquelle un monitor affichait un statut *up* (OK) comparé à un statut *down* (non OK). Le statut est représenté par des barres de couleur verte (disponible) et rouge (non disponible). Exemple : `99 % du temps, la latence est inférieure à 200 ms`.
 
-Vous pouvez également surveiller le taux de réussite et les SLI (indicateurs de niveau de service) basés sur des événements. Par exemple : `99 % des requêtes sont effectuées avec succès`
+Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des événements. Par exemple : `99 % des requêtes sont effectuées avec succès`
 
 {{< img src="monitors/service_level_objectives/create-slo.png" alt="créer un slo" responsive="true" >}}
 
