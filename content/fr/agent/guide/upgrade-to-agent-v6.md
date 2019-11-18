@@ -445,7 +445,7 @@ Où :
 [2]: /fr/agent/guide/agent-commands
 [3]: /fr/developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /fr/developers/metrics/metrics_type
+[5]: /fr/developers/metrics/types
 [6]: /fr/graphing/infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /fr/logs

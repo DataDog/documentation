@@ -52,7 +52,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 分布ウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-≪```
+```
 DISTIBUTION_SCHEMA = {
     "type": "object",
     "properties": {
@@ -68,7 +68,7 @@ DISTIBUTION_SCHEMA = {
     "required": ["type", "requests"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
@@ -79,7 +79,7 @@ DISTIBUTION_SCHEMA = {
 
 `request` オブジェクトでは、以下のプロパティも使用できます。
 
-≪```json
+```json
 {
     "style": {
         "type": "object",
@@ -89,7 +89,7 @@ DISTIBUTION_SCHEMA = {
         "additionalProperties": false
     }
 }
-```≫
+```
 
 | パラメーター       | タイプ   | 必須 | 説明                           |
 | ------          | -----  | -------- | ----                                  |
