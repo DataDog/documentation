@@ -33,4 +33,4 @@ Remarque : [la seule requête disponible avec `as_count()` est `sum()`][3] (sau
 [1]: /fr/monitors/monitor_types/metric
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [3]: /fr/graphing/faq/as_count_validation
-[4]: /fr/developers/metrics/metric_type_modifiers
+[4]: /fr/developers/metrics/type_modifiers
