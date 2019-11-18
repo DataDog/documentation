@@ -11,17 +11,17 @@ further_reading:
 ---
 `REQUEST_SCHEMA` の一般的な書式は、1 つ以上の `request` の配列です。
 
-≪```
+```
 "requests": [
   {
     "q": "function(aggregation method:metric{scope} [by {group}])"
   }
 ]
-```≫
+```
 
 `requests` パラメーターが複数の `request` を持っている場合、ウィジェットはそれらをすべて表示します。
 
-≪```
+```
 "requests": [
   {
     "q": "<METRIC_1>{<SCOPE_1>}"
@@ -33,7 +33,7 @@ further_reading:
     "log_query": "<METRIC_3>{<SCOPE_3>}"
   }
 ]
-```≫
+```
 
 {{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
 
@@ -76,7 +76,7 @@ further_reading:
 
 以下の例では、5 分間の負荷と、それを 2 倍にした値をグラフ化します。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -88,11 +88,11 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 系列の加減乗除も可能です。Datadog は、この時点では整合性を強制しません。したがって、リンゴをオレンジで割ることもできます。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -101,7 +101,7 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 ## 積み上げ系列
 
@@ -109,13 +109,13 @@ further_reading:
 
 関連する時系列どうしの場合は、次の構文を使用して積み上げ面グラフとして描画できます。
 
-≪```
+```
 "requests": [
   {
     "q": "metric1{scope}, metric2{scope}, metric3{scope}"
   }
 ]
-```≫
+```
 
 チャートごとに 1 つのクエリではなく、すべてのクエリを 1 つにまとめたり、クエリを連結することができます。
 
@@ -125,23 +125,23 @@ further_reading:
 
 それには、任意のメトリクスに対して以下のように指定します。
 
-≪```
+```
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
   }
 ]
-```≫
+```
 
 この場合は 1 つのクエリしか持てません。ただし、デバイスまたはホストとデバイスの組み合わせで分割することもできます。
 
-≪```
+```
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
   }
 ]
-```≫
+```
 
 すべてのタグ付きホストのトラフィックを取得するには、ホストとネットワークデバイスで分割します。
 
@@ -149,7 +149,7 @@ further_reading:
 
 以下に、パラメーターとして 1 つだけメトリクスを受け取る `rate()` 関数の例を示します。`top()` と `top_offset()` 以外の他の関数の構文も同じです。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -159,11 +159,11 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 以下に、`top()` 関数を使用する例を示します。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -173,13 +173,13 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 これは、クエリウィンドウ内で `system.cpu.iowait` の最大値のトップ 5 系列をグラフ化して表示します。
 
 たとえば、最大値が 6 位から 10 位のホストを表示するには、代わりに `top_offset` を使用します。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -189,11 +189,11 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 以下に、`week_before()` 関数を使用する例を示します。
 
-≪```json
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -202,7 +202,7 @@ further_reading:
     }
   ]
 }
-```≫
+```
 
 ## その他の参考資料
 

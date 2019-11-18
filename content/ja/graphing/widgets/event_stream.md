@@ -40,7 +40,7 @@ further_reading:
 
 イベントストリームウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-≪```
+```
 EVENT_STREAM_SCHEMA = {
     "type": "object",
     "properties": {
@@ -55,7 +55,7 @@ EVENT_STREAM_SCHEMA = {
     "required": ["type", "query"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
