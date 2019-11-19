@@ -68,7 +68,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
-- Managed libraries: deployed together with your application when it is published.
+- Managed libraries: deployed together the native library.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -108,7 +108,7 @@ apk add libc6-compat
 ```
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
-- Managed libraries: deployed together with your application when it is published.
+- Managed libraries: deployed together the native library.
 - Environment variables: [additional configuration][2] required.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
