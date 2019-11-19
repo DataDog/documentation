@@ -66,7 +66,7 @@ Left click on any dashboard timeseries graph to open an options menu:
 
 The search query for **View related logs** is defined using the following parameters:
 
-* **Timeframe**: is focused on the selected data point, and uses the graph time bucket size to display data before and after the selected point.
+* **Timeframe**: Focused on the selected data point, and uses the graph time bucket size to display data before and after the selected point.
 * **Integration prefix**: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
 * **Tags**: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
 
