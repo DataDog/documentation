@@ -42,7 +42,7 @@ try:
     # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent…
     from checks import AgentCheck
 except ImportError:
-    # …si la commande ci-dessus a échoué, le check s'exécute dans l'Agent version 6 ou ultérieure
+    # …si la commande ci-dessus a échoué, le check s'exécute dans l'Agent version 6 ou ultérieure
     from datadog_checks.checks import AgentCheck
 
 # Le contenu de la variable spéciale __version__ sera indiqué dans la page de statut de l'Agent
