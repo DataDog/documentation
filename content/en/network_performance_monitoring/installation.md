@@ -15,7 +15,7 @@ further_reading:
   text: "Network Widget"
 ---
 
-Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
+Network performance monitoring requires Datadog Agent v6.14+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
 
 Supported platforms include:
 
