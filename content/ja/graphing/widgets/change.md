@@ -72,7 +72,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 変化ウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
 
-≪```
+```
 CHANGE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -88,7 +88,7 @@ CHANGE_SCHEMA = {
     "required": ["type", "requests"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
@@ -99,7 +99,7 @@ CHANGE_SCHEMA = {
 
 `request` オブジェクトでは、以下のプロパティも使用できます。
 
-≪```json
+```json
 {
     "change_type":   {"enum": ["absolute", "relative"]},
     "compare_to":    {"enum": ["hour_before", "day_before", "week_before", "month_before"]},
@@ -108,7 +108,7 @@ CHANGE_SCHEMA = {
     "order_dir":     {"enum": ["asc", "desc"]},
     "show_present":  {"type": "boolean"}
 }
-```≫
+```
 
 | パラメーター       | タイプ    | 必須 | 説明                                                                                                                    |
 | ------          | -----   | -----    | --------                                                                                                                       |
