@@ -3,7 +3,7 @@ title: Datadog-Heroku Buildpack troubleshooting
 kind: faq
 ---
 
-To start debugging Heroku, use the agent-wrapper command with the information/debugging commands [listed in the Agent’s documentation][1].
+To start debugging Heroku, use the `agent-wrapper` command with the information/debugging commands [listed in the Agent’s documentation][1].
 
 For example, to display the status of your Datadog Agent and enabled integrations, run:
 
