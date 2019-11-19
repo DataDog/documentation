@@ -7,7 +7,7 @@ aliases:
 ---
 
 <div class="alert alert-warning">
-	Log Archive Rehydrating is in public beta. Request early access by contacting <a href="/help">Datadog Support</a>. Rehydrating is currently only supported for AWS S3 Archives, and for users of the Datadog US site. <a href="https://forms.gle/X4jhi13Rd2pFSuSHA">Send feedback for this feature</a>.
+	Log Archive Rehydrating is in public beta. Request early access by contacting <a href="/help">Datadog Support</a>. Rehydrating is currently only supported for users of the Datadog US site. <a href="https://forms.gle/X4jhi13Rd2pFSuSHA">Send feedback for this feature</a>.
 </div>
 
 ## Overview
