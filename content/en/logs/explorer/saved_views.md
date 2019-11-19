@@ -45,6 +45,12 @@ Star Saved Views to marked them as favorites. Starred Saved Views are available 
 
 {{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Saved Views load" video="true" responsive="true" >}}
 
+### Share a Saved View
+
+Copy-paste a Saved View short-link to share it with your teammates.
+
+{{< img src="logs/explorer/saved_views/saved_view_share.png" alt="Saved Views selection" responsive="true">}}
+
 ### Manage Saved Views
 
 To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*.
