@@ -62,7 +62,9 @@ Le volet de l'attribut standard s'affiche lorsque vous ajoutez un nouvel attribu
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Définir un attribut standard" responsive="true" style="width:80%;">}}
 
-Tous les éléments des attributs standards peuvent être renseignés ou mis à jour. **Remarque** : il est uniquement possible de mettre à jour ou d'ajouter des informations pour un attribut standard d'un log récemment ingéré.
+Tous les éléments des attributs standards peuvent être renseignés ou mis à jour. 
+
+**Remarque** : il est uniquement possible de mettre à jour ou d'ajouter des informations pour un attribut standard d'un log récemment ingéré.
 
 ### Comportement de remappage des attributs standards
 
@@ -73,7 +75,7 @@ Pour chaque entrée du tableau des attributs standards, si un attribut du log ac
 * Datadog applique le type d'attribut remappé. Si ce n'est pas possible, l'attribut est ignoré et la prochaine correspondance de la liste est utilisée.
 * L'attribut d'origine est conservé dans le log.
 
-**Remarque importante** : par défaut, le type d'un attribut standard existant reste inchangé si la liste de remappage est vide. Ajoutez l'attribut standard à sa propre liste de remappage pour appliquer son type.
+**Remarque importante** : par défaut, le type d'un attribut standard existant reste inchangé si la liste de remappage est vide. Ajoutez l'attribut standard à sa propre liste de remappage pour modifier son type.
 
 #### Validation
 
@@ -103,7 +105,7 @@ Les attributs suivants sont liés aux données de communication réseau. Tous le
 | :---                       | :---     | :----                                                                                    |
 | `network.client.ip`        | `string` | L'adresse IP du client à l'origine de la connexion TCP.                          |
 | `network.destination.ip`   | `string` | L'adresse IP à laquelle le client est connecté.                                                  |
-| `network.client.port`      | `number` | Le port du client qui a établi la connexion.                                    |
+| `network.client.port`      | `number` | Le port du client à l'origine de la connexion.                                    |
 | `network.destination.port` | `number` | Le port TCP auquel le client s'est connecté.                                                    |
 | `network.bytes_read`       | `number` | Le nombre total d'octets transmis depuis le client vers le serveur lorsque le log est envoyé. |
 | `network.bytes_written`    | `number` | Le nombre total d'octets transmis depuis le serveur vers le client lorsque le log est envoyé. |
@@ -122,7 +124,7 @@ Les attributs suivants sont liés à la géolocalisation des adresses IP utilis�
 | `network.client.geoip.continent.name`        | `string` | Nom du continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
 | `network.client.geoip.subdivision.name`      | `string` | Nom du premier niveau de division du pays (par exemple : `California` aux États-Unis ou le département de la `Sarthe` en France) |
 | `network.client.geoip.subdivision.iso_code`  | `string` | [Code ISO][6] du premier niveau de division du pays (par exemple : `CA` aux États-Unis ou le département `SA` en France) |
-| `network.client.geoip.city.name`             | `String` | Le nom de la ville (par exemple : `Paris`, `New York`) |
+| `network.client.geoip.city.name`             | `string` | Le nom de la ville (par exemple : `Paris`, `New York`) |
 
 ### Requêtes HTTP
 
@@ -149,8 +151,8 @@ Ces attributs fournissent des informations sur les éléments parsés de l'URL H
 | **Nom complet**                   | **Type** | **Description**                                                                        |
 | :---                           | :---     | :----                                                                                 |
 | `http.url_details.host`        | `string` | La partie du host HTTP de l'URL.                                                        |
-| `http.url_details.port`        | `number` | La partie du port HTTP de l'URL.                                                        |
-| `http.url_details.path`        | `string` | La partie du chemin HTTP de l'URL.                                                        |
+| `http.url_details.port`        | `number` | La partie de l'URL correspondant au port HTTP.                                                        |
+| `http.url_details.path`        | `string` | La partie de l'URL correspondant au chemin HTTP.                                                        |
 | `http.url_details.queryString` | `object` | Les parties de chaîne de requête HTTP de l'URL décomposées en attributs key/value des paramètres de requête. |
 | `http.url_details.scheme`      | `string` | Le nom du protocole de l'URL (HTTP ou HTTPS).                                          |
 
@@ -166,12 +168,12 @@ Ces attributs fournissent des informations sur la signification des attributs us
 
 ### Code source
 
-Ces attributs sont liés aux données utilisées lorsqu'un log ou une erreur est généré(e) via un enregistreur dans une application personnalisée. Tous les attributs sont précédés par `logger` ou `error`.
+Ces attributs sont liés aux données utilisées lorsqu'un log ou une erreur est généré(e) via un logger dans une application personnalisée. Tous les attributs sont précédés par `logger` ou `error`.
 
 | **Nom complet**         | **Type** | **Description**                                                  |
 | :---                 | :---     | :----                                                            |
-| `logger.name`        | `string` | Le nom de l'enregistreur.                                          |
-| `logger.thread_name` | `string` | Le nom du thread actuel lorsque le log est déclenché.            |
+| `logger.name`        | `string` | Le nom du logger.                                          |
+| `logger.thread_name` | `string` | Le nom du thread actuel lorsque le log est envoyé.            |
 | `logger.method_name` | `string` | Le nom de la méthode de la classe.                                           |
 | `error.kind`         | `string` | Le type ou la catégorie d'erreur (ou le code dans certains cas).                  |
 | `error.message`      | `string` | Un message d'une ligne lisible et concis décrivant l'événement. |
@@ -245,7 +247,7 @@ Les intégrations [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [L
 [12]: /fr/integrations/amazon_rds
 [13]: /fr/integrations/elastic
 [14]: /fr/logs/explorer/?tab=measures#setup
-[15]: /fr/tracing/trace_search_and_analytics/search
+[15]: /fr/tracing/advanced/search
 [16]: /fr/integrations/rsyslog
 [17]: /fr/integrations/nxlog
 [18]: /fr/integrations/syslog_ng

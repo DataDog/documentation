@@ -1,65 +1,67 @@
+footer_blurb_heading: Can't find something?
+footer_blurb_desc: Our friendly, knowledgeable solutions engineers are here to help!
 col1:
   - name: product
-    link: 'https://www.datadoghq.com/product/'
+    link: 'https://www.datadoghq.com/ja/product/'
     title: 機能
   - name: integrations
-    link: 'https://www.datadoghq.com/product/integrations/'
+    link: 'https://www.datadoghq.com/ja/product/integrations/'
     title: インテグレーション
   - name: apm
-    link: 'https://www.datadoghq.com/apm/'
+    link: 'https://www.datadoghq.com/ja/apm/'
     title: APM
   - name: logs
-    link: 'https://www.datadoghq.com/log-management/'
+    link: 'https://www.datadoghq.com/ja/log-management/'
     title: ログ管理
   - name: dashboards
-    link: 'https://www.datadoghq.com/dashboarding/'
+    link: 'https://www.datadoghq.com/ja/dashboarding/'
     title: 'ダッシュボード  '
   - name: synthetics
-    link: 'https://www.datadoghq.com/synthetics/'
+    link: 'https://www.datadoghq.com/ja/synthetics/'
     title: Synthetics
   - name: alerts
-    link: 'https://www.datadoghq.com/alerts/'
+    link: 'https://www.datadoghq.com/ja/alerts/'
     title: アラート
 col2:
   - name: pricing
-    link: 'https://www.datadoghq.com/pricing/'
+    link: 'https://www.datadoghq.com/ja/pricing/'
     title: 料金
   - name: documentation
     link: 'https://docs.datadoghq.com/'
     title: Documentation
   - name: support
-    link: 'https://www.datadoghq.com/support/'
+    link: 'https://www.datadoghq.com/ja/support/'
     title: サポート
   - name: resources
-    link: 'https://www.datadoghq.com/resources/'
+    link: 'https://www.datadoghq.com/ja/resources/'
     title: リソース
   - name: security
-    link: 'https://www.datadoghq.com/security/'
+    link: 'https://www.datadoghq.com/ja/security/'
     title: セキュリティ
   - name: api
     link: api/
     title: API
 col3:
   - name: contact
-    link: 'https://www.datadoghq.com/about/contact/'
+    link: 'https://www.datadoghq.com/ja/about/contact/'
     title: お問い合わせ
   - name: partners
-    link: 'https://www.datadoghq.com/partner-with-datadog/'
+    link: 'https://www.datadoghq.com/ja/partner-with-datadog/'
     title: パートナー
   - name: press
-    link: 'https://www.datadoghq.com/about/press/'
+    link: 'https://www.datadoghq.com/ja/about/press/'
     title: プレス
   - name: ourteam
-    link: 'https://www.datadoghq.com/about/team/'
+    link: 'https://www.datadoghq.com/ja/about/team/'
     title: チーム
   - name: careers
-    link: 'https://www.datadoghq.com/careers/'
+    link: 'https://www.datadoghq.com/ja/careers/'
     title: 採用情報
   - name: legal
-    link: 'https://www.datadoghq.com/legal/'
+    link: 'https://www.datadoghq.com/ja/legal/'
     title: 各種規約
   - name: analyst
-    link: 'https://www.datadoghq.com/about/analyst/'
+    link: 'https://www.datadoghq.com/ja/about/analyst/'
     title: アナリストレポート
 col4:
   - name: blog

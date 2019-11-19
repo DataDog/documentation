@@ -33,13 +33,13 @@ Intégrez Zendesk à Datadog pour :
 ## Implémentation
 ### Installation
 
-Pour installer cette intégration, générez un jeton d'API Zendesk :
+Pour installer cette intégration, générez un token d'API Zendesk :
 
 1. Accédez à la page des paramètres de l'API en cliquant sur l'icône *Admin* en forme d'engrenage dans le menu de gauche, puis en sélectionnant *API* dans la section *Channels* du menu.
-2. Activez l'accès par jeton via l'option Token Access si ce n'est pas déjà fait.
-3. Cliquez sur le symbole plus pour créer un nouveau jeton.
-4. Saisissez la description du jeton d'API avec des informations pertinentes, p. ex. « Intégration Datadog/Zendesk »
-5. Copiez le jeton d'API. ***Important*** : vous devez temporairement enregistrer ce jeton, car il sera masqué une fois enregistré.
+2. Activez l'accès par token via l'option Token Access si ce n'est pas déjà fait.
+3. Cliquez sur le symbole plus pour créer un nouveau token.
+4. Saisissez la description du token d'API avec des informations pertinentes, p. ex. « Intégration Datadog/Zendesk »
+5. Copiez le token d'API. ***Important*** : vous devez temporairement enregistrer ce token, car il sera masqué une fois enregistré.
 6. Cliquez sur *Save*.
 
 Pour terminer la configuration de cette intégration, saisissez vos informations dans [Datadog][1] :
@@ -47,7 +47,7 @@ Pour terminer la configuration de cette intégration, saisissez vos informations
 7. Accédez au [carré d'intégration Zendesk][2] et cliquez sur l'onglet *Configuration*.
 8. Saisissez votre domaine Zendesk. Il s'agit du texte qui s'affiche devant `zendesk.com`. par exemple, si votre URL Zendesk est `https://mon-entreprise.zendesk.com`, votre domaine est `mon-entreprise`.
 9. Saisissez votre nom d'utilisateur Zendesk.
-10. Saisissez le jeton d'API Zendesk que vous avez reçu à l'étape 5 ci-dessus.
+10. Saisissez le token d'API Zendesk que vous avez reçu à l'étape 5 ci-dessus.
 11. Cliquez sur le bouton Install Integration.
 
 ### Utilisation des déclencheurs Zendesk pour envoyer des logs

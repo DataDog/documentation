@@ -53,31 +53,6 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
-### `increment() / decrement()`
-
-These **deprecated** functions are used to modify a count of events identified by a metric key string by `1` at each call. It can be called multiple times during a check's execution, and is handled by the aggregator `Counter` class. If you want to increment/decrement by more than one, use the `count()` function.
-
-**Note**: Metrics submitted with these functions are stored with a `RATE` type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to `10 seconds` for Agent checks. The value is generally the raw count value).
-
-Datadog recommends using the `count()` function even if you wish to increment/decrement by `1`. Indeed, if later down the road you wish to increment/decrement your metric by more than one, then you will have to use a different metric name since the metric type stored within Datadog is different (`RATE` for the `increment()`/`decrement()` functions vs `COUNT` for the `count()`).
-
-Function templates:
-```python
-self.increment(name, value=1, tags=None, hostname=None, device_name=None)
-```
-
-```python
-self.decrement(name, value=1, tags=None, hostname=None, device_name=None)
-```
-
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
-|---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | No       | `1`           | The increment/decrement value for the metric.                                       |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
-
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
@@ -162,7 +137,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
 
-    ```python
+    {{< code-block lang="python" filename="metric_example.py" >}}
     import random
 
     from datadog_checks.base import AgentCheck
@@ -176,12 +151,14 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
                 2,
                 tags="metric_submission_type:count",
             )
-            self.decrement(
+            self.count(
                 "example_metric.decrement",
+                -1,
                 tags="metric_submission_type:count",
             )
-            self.increment(
+            self.count(
                 "example_metric.increment",
+                1,
                 tags="metric_submission_type:count",
             )
             self.rate(
@@ -212,10 +189,9 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
                 random.randint(0, 10),
                 tags="metric_submission_type:histogram",
             )
-    ```
+    {{< /code-block >}}
 
 4. [Restart the Agent][4].
-
 5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
 
     ```
@@ -248,7 +224,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/write_agent_check
-[2]: /developers/metrics/metrics_type
+[2]: /developers/metrics/types
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information

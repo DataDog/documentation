@@ -1,5 +1,5 @@
 ---
-title: Monitor forecast
+title: Monitor de prévisions
 kind: documentation
 aliases:
   - /fr/guides/forecasts/
@@ -14,91 +14,107 @@ further_reading:
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
-Les prévisions sont une fonctionnalité algorithmique qui vous permet de prédire le comportement futur d'une métrique. Elles sont particulièrement utiles pour les métriques qui possèdent de fortes tendances ou des modèles récurrents.
+## Présentation
 
-Par exemple, si votre application commence la journalisation à un taux plus rapide, les prévisions peuvent vous prévenir une semaine en avance que vos disques n'auront plus d'espace libre, ce qui vous confère suffisamment de temps pour mettre à jour votre stratégie de rotation de logs. Vous pouvez également utiliser des prévisions sur des métriques métier, telles que le nombre d'inscriptions d'utilisateurs, pour suivre votre avancement par rapport à vos objectifs trimestriels.
+Les prévisions sont une fonctionnalité algorithmique qui vous permet de prédire le comportement futur d'une métrique. Elles sont particulièrement utiles pour les métriques qui possèdent de fortes tendances ou des modèles récurrents. Par exemple, si votre application commence à enregistrer davantage de logs, les prévisions peuvent vous prévenir une semaine en avance que vos disques n'auront plus d'espace libre, ce qui vous confère suffisamment de temps pour mettre à jour votre stratégie de rotation. Vous pouvez également utiliser les prévisions sur vos métriques opérationnelles, telles que le nombre d'inscriptions d'utilisateurs, pour suivre votre avancement par rapport à vos objectifs trimestriels.
 
-## Fonction forecast
+## Création d'un monitor
 
-Le langage de requête de Datadog est doté d'une fonction `forecast`. Lorsque vous appliquez cette fonction à une série, elle renvoie les résultats habituels ainsi qu'une prévision des futures valeurs.
+Pour créer un [monitor de prévisions][1] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Forecast*.
 
-## Créer un monitor
+### Définir la métrique
 
-Vous pouvez créer des monitors qui se déclenchent lorsqu'il est prévu que des métriques atteignent un certain seuil. L'alerte se déclenche lorsqu'une partie de la plage de valeurs prédites dépasse le seuil. En pratique, cela peut par exemple être utilisé pour surveiller un groupe de disques affichant des schémas d'utilisation similaires : `max:system.disk.in_use{service:service_name, device:/data} by {host}`.
+Toutes les métriques actuellement transmises à Datadog peuvent être surveillées. Pour obtenir des informations supplémentaires, consultez la page [Monitor de métrique][2].
 
-Accédez à la [page Monitor][1] pour les **alertes de prévision**. Remplissez ensuite la section **Define the metric** comme pour n'importe quel autre monitor.
+Une fois la métrique définie, le monitor de prévisions génère deux graphiques d'aperçu dans l'éditeur :
+{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Graphiques de l'éditeur" responsive="true" style="width:95%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/alert_conditions.png" alt="conditions d'alerte" responsive="true" style="width:80%;">}}
+* Le graphique **Historical View** vous permet d'explorer les données de métriques antérieures sur différentes périodes.
+* Le graphique **Evaluation Preview** affiche une combinaison de données de métriques historiques et prévisionnelles.
 
-Vous devez définir trois options pour configurer une alerte de prévision :
+### Définir vos conditions d'alerte
 
-* Le seuil de déclenchement de l'alerte. Pour une métrique comme `system.disk.in_use`, définissez le seuil sur 1.0. À l'inverse, pour une métrique comme `system.mem.pct_usable`, définissez-le sur 0.0. Un [seuil d'annulation][2] est également requis.
-* La condition de déclenchement de l'alerte. Pour une métrique comme `system.disk.in_use`, choisissez « above or equal to ». À l'inverse, pour une métrique comme `system.mem.pct_usable`, choisissez « below or equal to ».
-* Choisissez combien de temps à l'avance vous souhaitez recevoir l'alerte avant que votre métrique atteigne son seuil critique.
+* Déclencher une alerte lorsque la limite de confiance des prévisions passe `above` ou `below`
+* du seuil au cours de la période à venir qui suit : `24 hours`, `1 week`, `1 month`, etc.
+* Seuil d'alerte : >= `<NOMBRE>`
+* [Seuil de rétablissement][3] d'alerte : < `<NOMBRE>`
 
-{{< img src="monitors/monitor_types/forecasts/alert_advanced.png" alt="alerte avancée" responsive="true" style="width:80%;" >}}
+#### Options avancées
 
-Datadog définit automatiquement pour vous les options **Advanced** en analysant votre métrique. Veuillez noter que tout changement apporté à la section **Define the metric** peut modifier les réglages des options avancées.
+Datadog analyse automatiquement la métrique choisie et définit plusieurs paramètres pour vous. Cependant, les options peuvent être modifiées dans **Advanced Options** :
 
-* Vous pouvez sélectionner l'algorithme de prévision utilisé. Consultez la section [Algorithmes de prévision](#algorithmes-de-prevision) pour découvrir comment choisir le bon algorithme en fonction de vos besoins. Chaque algorithme possède également des paramètres supplémentaires, qui sont décrits dans la section suivante.
-* Datadog recommande l'utilisation d'intervalles importants entre chaque point pour éviter que les prévisions n'aient trop de valeurs parasites.
-* Le nombre d'écarts contrôle la largeur de la plage des valeurs prédites. Indiquez 1 ou 2 pour prévoir avec précision la plupart des points « normaux ».
+{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Options avancées" responsive="true" style="width:80%;">}}
 
-Indiquez ensuite si vous souhaitez que le monitor exige une période complète de données pour lancer l'évaluation. Si vous choisissez « Requires », le monitor est contraint d'ignorer (à savoir, d'afficher l'état de monitor « No Data ») toutes les séries qui ne possèdent pas de données depuis l'heure de début de l'intervalle indiqué dans le graphique de période d'évaluation.
+| Option                     | Description                                                                                                             |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [Algorithme](#algorithms)   | Algorithme de prévision (`linear` ou `seasonal`)                                                                         |
+| Modèle                      | Modèle de prévision (`default`, `simple` ou `reactive`) pour l'algorithme linear                                        |
+| Caractère saisonnier                | Caractère saisonnier d'une prévision (`hourly`, `daily` ou `weekly`) pour l'algorithme saisonnier                         |
+| [Changement d'heure][4] | Disponible pour les monitors de prévisions `seasonal` avec le caractère saisonnier `daily` ou `weekly`.                            |
+| [Rollup][5]                | L'intervalle de cumul. L'utilisation d'un intervalle important entre les différents points permet de limiter l'influence des valeurs parasites sur les prévisions.                        |
+| Déviations                 | La largeur de la plage des valeurs prédites. Une valeur de 1 ou 2 est généralement suffisante pour prévoir la plupart des points « normaux ». |
 
-Suivez toutes les étapes du formulaire New Monitor (**Say what's happening**, etc.) et cliquez sur **Save** pour créer un monitor forecast.
+##### Algorithmes
 
-Les pages Monitor Edit et Monitor Status disposent d'un contexte historique vous permettant d'étudier le comportement historique de la métrique. Cela vous permet d'obtenir des informations pertinentes sur les données prises en compte par l'algorithme de prévision lors de la détermination des futures valeurs.
+Les algorithmes de prévision disponibles sont `linear` et `seasonal` :
 
-## Algorithmes de prévision
+{{< tabs >}}
+{{% tab "Linear" %}}
 
-Il existe deux différents algorithmes de prévision :
+Utilisez l'algorithme linear pour les métriques qui évoluent de façon stable et n'affichent pas de tendance saisonnière récurrente. La sensibilité de l'algorithme linear aux changements de niveau peut être ajustée en sélectionnant l'un des trois modèles disponibles :
 
-**Linear** : utilisez cet algorithme pour les métriques qui n'ont pas de modèle saisonnier récurrent et sont susceptibles de présenter des tendances régulières. Sur les tableaux de bord, l'algorithme linear utilise les données affichées pour créer une prévision sur une durée identique. Par exemple, si vous définissez le sélecteur de durée sur « The Past Week », la fonction utilise les données de la semaine précédente pour prédire les valeurs de la semaine suivante. Pour les monitors, vous pouvez définir explicitement la période de données historiques à utiliser. Par défaut, celle-ci est définie sur une semaine. 
-
-{{< img src="monitors/monitor_types/forecasts/linear.png" alt="linear" responsive="true" style="width:80%;" >}}
-
-L'algorithme linear possède trois _modèles_ différents. Ils contrôlent la sensibilité de l'algorithme aux changements de niveau.
-
-Le modèle « simple » effectue une régression linéaire robuste sur l'ensemble des données historiques.
-
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
-
-Le modèle « reactive » extrapole plus facilement le comportement récent, mais est davantage susceptible de trop s'ajuster aux valeurs parasites, aux pics ou aux creux.
-
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
-
-Le modèle « default » combine les caractéristiques des deux premiers modèles et s'ajuste à la dernière tendance. Il extrapole une ligne tout en ignorant les valeurs parasites récentes.
+| Modèle    | Description                                                                                |
+|----------|--------------------------------------------------------------------------------------------|
+| Default  | S'ajuste à la dernière tendance et extrapole les données tout en ignorant les valeurs parasites récentes. |
+| Simple   | Effectue une régression linéaire robuste sur l'ensemble des données historiques.                                |
+| Reactive | Extrapole plus facilement le comportement récent, mais est davantage susceptible de trop s'ajuster aux valeurs parasites, aux pics et aux creux.  |
 
 {{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
 
-**Seasonal** : utilisez cet algorithme pour les métriques saisonnières. Datadog détecte automatiquement le caractère saisonnier de la métrique dans les monitors et choisit une période d'une semaine, d'un jour ou d'une heure. Cet algorithme nécessite au moins deux périodes de données historiques pour prévoir des valeurs. Vous pouvez utiliser jusqu'à six périodes.
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
 
-Exemples d'options sur le caractère saisonnier :
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
 
-* **weekly** : l'algorithme estime que les valeurs de ce lundi seront similaires à celles des anciens lundis.
-* **daily** : l'algorithme estime que les valeurs d'aujourd'hui à 19 h seront similaires à celles des autres jours à 19 h.
-* **hourly** : l'algorithme estime que les valeurs de 17 h 15 seront similaires à celles de 17 h 15, 16 h 15, etc.
+{{% /tab %}}
+{{% tab "Seasonal" %}}
+
+Utilisez l'algorithme seasonal pour les métriques qui affichent des tendances récurrentes. Il est possible de choisir parmi trois _caractères saisonniers_ différents :
+
+| Option  | Description                                                                                                                                        |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Hourly  | L'algorithme s'attend à ce qu'une même minute d'une heure donnée se comporte comme celles des heures précédentes. Par exemple, les données de 17 h 15 doivent être similaires à celles de 16 h 15, 15 h 15, etc.      |
+| Daily   | L'algorithme s'attend à ce qu'une heure donnée se comporte comme celles des jours précédents. Par exemple, les données du jour pour 17 h doivent être similaires à celles de 17 h la veille.                                |
+| Weekly  | L'algorithme s'attend à ce qu'un jour de la semaine donné se comporte comme ceux des semaines précédentes. Par exemple, les données d'un mardi doivent être similaires à celles des mardis précédents.        |
+
+**Remarque** : cet algorithme exige au moins deux saisons de données historiques et utilise jusqu'à six saisons pour les prévisions.
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
 
-### Accéder aux options avancées
+{{% /tab %}}
+{{< /tabs >}}
 
-Cliquez sur l'onglet **Advanced** de la page **New Monitor** pour accéder aux options avancées. Pour les définir dans les dashboards (à l'aide de l'onglet JSON) ou dans l'API, utilisez le format suivant :
+### Notifications
 
-Pour linear : `forecast(nom_métrique, 'linear', 1, interval='60m', history='1w', model='default')`. Valeurs autorisées pour `model` : `default`, `simple` ou `reactive`.
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][6].
 
-Pour seasonal : `forecast(nom_métrique, 'seasonal', 1, interval='60m', seasonality='weekly')`, Valeurs autorisées pour `seasonality` : `hourly`, `daily` ou `weekly`.
+## API
 
-Si vous utilisez l'API, indiquez les heures de départ et de fin de la prévision. SI vous souhaitez prévoir les valeurs de la prochaine journée, indiquez l'heure de départ `now` et l'heure de fin `1 day ahead`.
+Pour automatiser la création de monitors de prévisions, consultez la [documentation de référence sur l'API Datadog][7]. Datadog vous conseille d'[exporter le JSON d'un monitor][8] pour créer la requête pour l'API.
 
-### Attention
+## Dépannage
 
-Les fonctions ne peuvent pas toutes être imbriquées dans des appels de la fonction `forecast()`. Vous ne pouvez notamment pas inclure les fonctions suivantes dans un monitor forecast ou dans une requête de dashboard : `anomalies()`, `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()` ou `trend_line()`.
+Les fonctions suivantes ne peuvent pas être imbriquées dans des appels de la fonction `forecast()` :<br>
+`anomalies`, `cumsum`, `integral`, `outliers`, `piecewise_constant`, `robust_trend` ou `trend_line`
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" responsive="true" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
-[2]: /fr/monitors/faq/what-are-recovery-thresholds
+[2]: /fr/monitors/monitor_types/metric/#define-the-metric
+[3]: /fr/monitors/faq/what-are-recovery-thresholds
+[4]: /fr/monitors/faq/how-to-update-anomaly-monitor-timezone
+[5]: /fr/graphing/functions/rollup
+[6]: /fr/monitors/notifications
+[7]: /fr/api/#create-a-monitor
+[8]: /fr/monitors/monitor_status/#settings

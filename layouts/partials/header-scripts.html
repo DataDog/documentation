@@ -1,0 +1,35 @@
+{{ if .Params.header_scripts }}
+    {{ range $k, $v := .Params.header_scripts }}
+
+        {{ range $i, $tag := $v }}
+
+            {{ if eq $tag true }}
+
+                {{ $script_tag := $i | printf "head_scripts/%s"  }}
+
+                {{ partial $script_tag . }}
+
+            {{ end }}
+
+        {{ end }}
+
+    {{ end }}
+{{ end }}
+
+{{ $dot := . }}
+
+{{ range $k, $v := .Site.Params.header_scripts }}
+
+    {{ range $i, $tag := $v }}
+
+        {{ if eq $tag true }}
+
+            {{ $script_tag := $i | printf "head_scripts/%s"  }}
+
+            {{ partial $script_tag $dot }}
+
+        {{ end }}
+
+    {{ end }}
+
+{{ end }}

@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Trace Search
 type: apicontent
-order: 33.5
+order: 34.5
 external_redirect: /api/#get-hourly-usage-for-trace-search
 ---
 
@@ -19,6 +19,6 @@ Get hourly usage For Trace Search.
 **RESPONSE**:
 
 * **`indexed_events_count`**:
-    Contains the number of Trace Search events indexed.
+    Contains the number of Analyzed Spans indexed.
 * **`hour`**:
     The hour for the usage.

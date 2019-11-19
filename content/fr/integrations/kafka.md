@@ -70,7 +70,7 @@ Après avoir configuré `kafka.yaml`, [redémarrez l'Agent][10] pour commencer �
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-1. Kafka utilise l'enregistreur `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties` :
+1. Kafka utilise le logger `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties` :
 
     ```
       # Set root logger level to INFO and its only appender to R

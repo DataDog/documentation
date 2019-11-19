@@ -21,7 +21,7 @@ version: 1
 ---
 ## Présentation
 
-Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet une connectivité entrante et une connectivité sortante à partir d’Internet.
+Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet une connectivité entrante et une connectivité sortante à partir d'Internet.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'adresse IP publique Azure.
 
@@ -42,10 +42,11 @@ L'intégration Adresse IP publique Azure n'inclut aucun événement.
 L'intégration Adresse IP publique Azure n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][2].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
+[1]: https://docs.datadoghq.com/fr/integrations/azure/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_public_ip_address/azure_public_ip_address_metadata.csv
+[3]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
-[1]: https://docs.datadoghq.com/fr/integrations/azure
-[2]: https://docs.datadoghq.com/fr/help

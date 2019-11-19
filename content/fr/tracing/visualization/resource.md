@@ -1,5 +1,5 @@
 ---
-title: Page Resource
+title: Page Ressource
 kind: documentation
 further_reading:
   - link: tracing/setup/
@@ -17,7 +17,7 @@ further_reading:
 ---
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" >}}
 
-Une ressource est une action particulière pour un service donné (généralement, un endpoint ou une requête). Découvrez davantage d'informations les ressources sur la page [Débuter avec l'APM][1]. Pour chaque ressource, l'APM génère automatiquement une page de dashboard avec les éléments suivants :
+Une ressource est une action particulière pour un [service][1] donné (généralement, un endpoint ou une requête). Découvrez davantage d'informations sur les ressources sur la page [Débuter avec l'APM][2]. Pour chaque ressource, l'APM génère automatiquement une page de dashboard avec les éléments suivants :
 
 * Métriques de santé clés
 * Le statut de tous les monitors associés à ce service
@@ -36,13 +36,17 @@ Datadog fournit des graphiques par défaut pour chaque ressource :
     * Le **nombre total d'erreurs**
     * Le nombre **d'erreurs par seconde**
     * Le **taux d'erreur en %**
-* Sous-services : lorsque plusieurs services sont impliqués, un quatrième graphique est disponible. Il décrit la **durée totale**, le **% de temps passé** et la **durée moyenne par requête** de votre service en fonction de *services* ou du *type*. Pour les services comme *Postgres* ou *Redis*, qui sont des opérations "finales" n'appelant pas d'autres services, ce graphique n'est pas disponible.
+* Sous-services : lorsque plusieurs services sont impliqués, un quatrième graphique est disponible. Il décrit la **durée totale**, le **% de temps passé** et la **durée moyenne par requête** de votre service en fonction des *services* ou des *types* de service.
+
+    Cela représente le temps total/relatif/moyen passé par les [traces][3] du service actuel par rapport aux autres *services* ou *types* de service.
+
+    **Remarque** : pour les services comme *Postgres* ou *Redis*, qui sont des opérations « finales » qui n'appellent pas d'autres services, aucun graphique de sous-services n'est disponible.
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Graphiques par défaut des ressources" responsive="true" style="width:90%;">}}
 
 ### Export to Timeboard
 
-En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [timeboard][2] existant :
+En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [timeboard][4] existant :
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Enregistrer en tant que timeboard" responsive="true" style="width:40%;">}}
 
@@ -58,20 +62,20 @@ Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un cent
 
 Zoomez sur ce graphique pour filtrer les traces correspondantes.
 
-## Statistiques des spans
+## Résumé des spans
 
-Pour une ressource donnée, Datadog vous offre une analyse détaillée des spans pour toutes les traces correspondantes :
+Pour une ressource donnée, Datadog vous offre une analyse détaillée des [spans][5] pour toutes les traces correspondantes :
 
 {{< img src="tracing/visualization/resource/span_stats.png" alt="Statistiques des spans" responsive="true" style="width:80%;">}}
 
 Les métriques affichées représentent, par span :
 
-| Métriques            | Description                                                                                             |
+| Métrique            | Description                                                                                             |
 | ------            | --------                                                                                                |
-| `Avg Span/trace`  | Le nombre moyen d'occurrences du span, pour les traces qui incluent la ressource actuelle, où le span est présent au moins une fois. |
-| `% of traces`     | Le pourcentage des traces qui incluent la ressource actuelle, où le span est présent au moins une fois. |
-| `Avg duration`    | La durée moyenne pendant laquelle le span est actif, pour les traces qui incluent la ressource actuelle, où le span est présent au moins une fois.                |
-| `Avg % Exec Time` | Le ratio moyen du temps d'exécution pendant lequel le span est actif, pour les traces qui incluent la ressource actuelle, où le span est présent au moins une fois. |
+| `Avg Span/trace`  | Le nombre moyen d'occurrences de la span pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois. |
+| `% of traces`     | Le pourcentage de traces qui incluent la ressource actuelle, où la span est présente au moins une fois. |
+| `Avg duration`    | La durée moyenne de la span pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois.                |
+| `Avg % Exec Time` | Le pourcentage de temps d'exécution moyen pendant lequel la span est active pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois. |
 
 **Remarque** : un span est considéré comme actif lorsqu'il n'attend pas la fin d'un span enfant. Les spans actifs à un moment donné et pour une trace donnée regroupent tous les spans terminaux (c'est-à-dire les spans sans enfants).
 
@@ -80,7 +84,7 @@ Les métriques affichées représentent, par span :
 
 Consultez la liste des traces associées à cette ressource. Filtrez ou triez cette liste pour afficher les traces rapides/lentes et les traces avec ou sans erreur :
 
-[Consultez la documentation relative aux traces pour en savoir plus][3].
+[Consultez la documentation relative aux traces pour en savoir plus][6].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Liste des traces" responsive="true" style="width:90%;">}}
 
@@ -88,6 +92,9 @@ Consultez la liste des traces associées à cette ressource. Filtrez ou triez ce
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization
-[2]: /fr/graphing/dashboards/timeboard
-[3]: /fr/tracing/visualization/trace
+[1]: /fr/tracing/visualization/#services
+[2]: /fr/tracing/visualization
+[3]: /fr/tracing/visualization/#trace
+[4]: /fr/graphing/dashboards/timeboard
+[5]: /fr/tracing/visualization/#spans
+[6]: /fr/tracing/visualization/trace

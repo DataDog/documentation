@@ -63,7 +63,9 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-Any element of the standard attributes can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+Any element of the standard attributes can then be filled or updated. 
+
+**Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
 
 ### Standard attribute remapping behavior
 
@@ -246,7 +248,7 @@ Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng
 [12]: /integrations/amazon_rds
 [13]: /integrations/elastic
 [14]: /logs/explorer/?tab=measures#setup
-[15]: /tracing/trace_search_and_analytics/search
+[15]: /tracing/advanced/search
 [16]: /integrations/rsyslog
 [17]: /integrations/nxlog
 [18]: /integrations/syslog_ng

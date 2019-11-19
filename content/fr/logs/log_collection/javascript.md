@@ -24,24 +24,24 @@ Envoyez des logs à Datadog à partir de navigateurs Web ou d'autres clients Jav
 
 Grâce à la bibliothèque `datadog-logs`, vous pouvez envoyer des logs directement à Datadog depuis les clients JS et bénéficier des fonctionnalités suivantes :
 
-* Utilisez la bibliothèque en tant qu'enregistreur. Tous les logs sont transmis à Datadog sous forme de documents JSON.
+* Utilisez la bibliothèque en tant que logger. Tous les logs sont transmis à Datadog sous forme de documents JSON.
 * Ajoutez du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé.
 * Incorporez et transmettez automatiquement chaque erreur JavaScript.
 * Transmettez les erreurs JavaScript.
 * Enregistrez des user agents et des adresses IP de clients réels.
 * Optimisez l'utilisation du réseau grâce aux publications automatiques en bloc.
 
-## Obtenir un jeton client
+## Obtenir un token client
 
-Pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la bibliothèque `datadog-logs`, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [jeton client][2]. Pour en savoir plus sur la configuration d'un jeton client, consultez la [documentation relative aux jetons client][2].
+Pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la bibliothèque `datadog-logs`, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][2]. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation relative aux tokens client][2].
 
-## Configurer l'enregistreur JavaScript
+## Configurer le logger JavaScript
 
 Les paramètres suivants peuvent être utilisés pour configurer la bibliothèque afin d'envoyer des logs à Datadog :
 
 * Définissez `forwardErrorsToLogs` sur `false` pour désactiver la collecte d'erreurs de console et d'erreurs JS automatique.
 * Utilisez `addLoggerGlobalContext` pour ajouter des attributs JSON à tous les logs générés.
-* Définissez `clientToken` sur la valeur du jeton client (**vous ne pouvez utiliser que des jetons client dans cette bibliothèque**).
+* Définissez `clientToken` sur la valeur du token client (**vous ne pouvez utiliser que des tokens client dans cette bibliothèque**).
 
 Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de configurer la bibliothèque au début de la section <head> de vos pages.
 
@@ -54,9 +54,9 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <title>Exemple pour envoyer des logs à Datadog.</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
     <script>
-      // Définir votre jeton client.
+      // Définir votre token client.
       window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<JETON_CLIENT>',
+        clientToken: '<TOKEN_CLIENT>',
         forwardErrorsToLogs: true,
       });
 
@@ -79,9 +79,9 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <title>Exemple pour envoyer des logs à Datadog.</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
     <script>
-      // Définir votre jeton client.
+      // Définir votre token client.
       window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<JETON_CLIENT>',
+        clientToken: '<TOKEN_CLIENT>',
         forwardErrorsToLogs: true,
       });
 
@@ -149,7 +149,7 @@ On obtient le résultat suivant :
 }
 ```
 
-L'enregistreur ajoute les informations suivantes par défaut :
+Le logger ajoute les informations suivantes par défaut :
 
 * `http.url`
 * `session_id`
@@ -174,7 +174,7 @@ Seuls les logs avec un statut égal ou supérieur au niveau indiqué sont envoy�
 
 ### Modifier la destination
 
-Par défaut, les enregistreurs envoient des logs à Datadog. Il est également possible de configurer l'enregistreur de façon à ce qu'il envoie des logs à la console ou qu'il n'envoie aucun log. Cette fonction, appliquée à un environnement de développement, vous permet de conserver une copie locale des logs.
+Par défaut, les loggers envoient des logs à Datadog. Il est également possible de configurer le logger de façon à ce qu'il envoie des logs à la console ou qu'il n'envoie aucun log. Cette fonction, appliquée à un environnement de développement, vous permet de conserver une copie locale des logs.
 
 Utilisez la fonction `setHandler` avec les valeurs `http` (par défaut), `console` ou `silent` :
 ```
@@ -183,16 +183,16 @@ window.DD_LOGS && DD_LOGS.logger.setHandler('<GESTIONNAIRE>')
 
 **Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
 
-### Définir plusieurs enregistreurs
+### Définir plusieurs loggers
 
-La bibliothèque contient un enregistreur par défaut, mais vous pouvez également définir d'autres enregistreurs. Cette option est très utile lorsque plusieurs équipes travaillent sur un même projet.
+La bibliothèque contient un logger par défaut, mais vous pouvez également définir d'autres loggers. Cette option est très utile lorsque plusieurs équipes travaillent sur un même projet.
 
-Chaque enregistreur peut être configuré avec son propre contexte, gestionnaire et niveau de log. Remarque : le `Global Context` est ajouté en haut du contexte de chaque enregistreur.
+Chaque logger peut être configuré avec son propre contexte, gestionnaire et niveau de log. Remarque : le `Global Context` est ajouté en haut du contexte de chaque logger.
 
-Utilisez le bloc de configuration suivant pour définir un enregistreur personnalisé :
+Utilisez le bloc de configuration suivant pour définir un logger personnalisé :
 
 ```
-window.DD_LOGS && DD_LOGS.createLogger (<NOM_ENREGISTREUR>, {
+window.DD_LOGS && DD_LOGS.createLogger (<NOM_LOGGER>, {
     level?: 'debug' | 'info' | 'warn' | 'error'
     handler?: 'http' | 'console' | 'silent'
     context?: <ATTRIBUTS_JSON>
@@ -200,21 +200,21 @@ window.DD_LOGS && DD_LOGS.createLogger (<NOM_ENREGISTREUR>, {
 ```
 
 Ces paramètres peuvent également être définis avec les fonctions `setContext`, `setLevel` et `setHandler`.
-Une fois l'enregistreur créé, vous pouvez y accéder depuis n'importe quelle partie de votre code JavaScript avec la fonction `getLogger` :
+Une fois le logger créé, vous pouvez y accéder depuis n'importe quelle partie de votre code JavaScript avec la fonction `getLogger` :
 
 ```
 if (window.DD_LOGS) {
-    const my_logger = DD_LOGS.getLogger('<NOM_ENREGISTREUR>')
+    const my_logger = DD_LOGS.getLogger('<NOM_LOGGER>')
 }
 ```
 
 **Exemple :**
 
 
-Imaginons que vous disposez d'un enregistreur d'inscription, défini avec tous les autres enregistreurs :
+Imaginons que vous disposez d'un logger d'inscription, défini avec tous les autres loggers :
 
 ```
-# créer un enregistreur
+# créer un logger
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.createLogger('signupLogger')
     signupLogger.addContext('env', 'staging')
@@ -243,7 +243,7 @@ if (window.DD_LOGS) {
 Il est possible de définir le contexte entier en un appel. Cela permet également de remplacer les attributs précédemment définis (le cas échéant) :
 
 ```
-# Pour un enregistreur
+# Pour un logger
 if (window.DD_LOGS) {
     my_logger.setContext(<ATTRIBUTS_JSON>)
 }

@@ -11,4 +11,6 @@ per_page=<PER_PAGE>
 sort=<SORT>
 
 curl -X GET \
-    "https://api.datadoghq.com/api/v1/monitor/search?api_key=${api_key}&application_key=${app_key}&query=${query}&page=${page}&per_page=${per_page}&sort=${sort}"
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/monitor/search?query=${query}&page=${page}&per_page=${per_page}&sort=${sort}"

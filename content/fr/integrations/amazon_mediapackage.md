@@ -2,6 +2,7 @@
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elemental\_MediaPackage."
@@ -31,6 +32,21 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Installez l'[intégration Datadog/Amazon Elemental MediaPackage][3].
 
+### Collecte de logs
+#### Activer le logging
+
+Configurez Amazon Elemental MediaPackage de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_mediapackage` est défini en tant que *Target prefix*.
+
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Elemental MediaPackage dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][5]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_mediapackage" >}}
@@ -43,12 +59,16 @@ L'intégration Amazon Elemental MediaPackage n'inclut aucun événement.
 L'intégration Amazon Elemental MediaPackage n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-
-
-{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-mediapackage
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediapackage/amazon_mediapackage_metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}

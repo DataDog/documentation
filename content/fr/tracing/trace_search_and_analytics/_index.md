@@ -55,6 +55,7 @@ Datadog.configure { |c| c.analytics_enabled = true }
  Une fois la fonction activée, la page [Analyse et recherche de traces] commence à afficher des informations.
 
 
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -471,7 +472,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 Un [événement APM][2] représente la [span][3] supérieure d'un service, métadonnées incluses. Une fois activés, les événements APM sont envoyés à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 événements APM depuis ses spans `servlet.request`, car chaque span `servlet.request` génère un événement APM. Le [filtrage d'événements APM][4] a l'avantage de réduire le nombre d'événements APM facturables sans aucune conséquence sur l'échantillonnage des [traces][5]. Lorsqu'un service est filtré et que moins de 100 % des événements sont envoyés, l'analyse des événements APM est mise à l'échelle pour afficher une estimation par défaut. Vous pouvez également afficher la valeur filtrée.
 
-{{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="Filtrage des événements APM" responsive="true" style="width:100%;">}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Filtrage des événements APM" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /fr/tracing/visualization/#apm-event

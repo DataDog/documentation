@@ -68,9 +68,6 @@ Lorsque l'Agent est [configuré pour envoyer les logs via HTTPS][1], utilisez le
 {{% /tab %}}
 {{< /tabs >}}
 
-### Port 443
-
-Le paramètre `use_port_443` n'affecte pas les logs envoyés par proxy. Vous devez configurer le proxy de façon à transférer les logs vers `agent-443-intake.logs.datadoghq.com:443`.
 
 ## Pour aller plus loin
 

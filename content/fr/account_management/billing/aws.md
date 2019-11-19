@@ -18,7 +18,7 @@ Utilisez le [carré d'intégration Datadog/AWS][1] pour contrôler la collecte d
 
 **Remarque** : Datadog ne facture pas les métriques ELB, car elles ne peuvent pas être exclues par filtrage.
 
-Lorsque vous ajoutez des limites à des comptes AWS existants dans le carré d'intégration, les instances précédemment découvertes peuvent rester dans la [liste d'infrastructure][3] jusqu'à 24 heures. Durant cette période de transition, les instances EC2 affichent le statut `???`. Elles ne s'ajoutent pas à votre facturation.
+Lorsque vous appliquez des limites à des comptes AWS existants depuis le carré d'intégration, les instances précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les instances EC2 affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
 Les hosts avec un Agent en cours d'exécution s'affichent toujours et sont inclus dans la facturation. L'utilisation de l'option de limite s'applique uniquement aux instances EC2 sans Agent en cours d'exécution.
 

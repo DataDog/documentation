@@ -34,4 +34,4 @@ Note: [The only available query with `as_count()` is `sum()`][3] (unless using a
 [1]: /monitors/monitor_types/metric
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [3]: /graphing/faq/as_count_validation
-[4]: /developers/metrics/metric_type_modifiers
+[4]: /developers/metrics/type_modifiers

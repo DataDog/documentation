@@ -128,29 +128,32 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 
 The Kubernetes check includes the following service checks:
 
-* `kubernetes.kubelet.check`:
+* `kubernetes.kubelet.check`: <br>
   If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` or `NO DATA` state.
 
-* `kubernetes.kubelet.check.ping`:
+* `kubernetes.kubelet.check.ping`:<br>
   If `CRITICAL` or `NO DATA`, Kubelet's API isn't available
 
-* `kubernetes.kubelet.check.syncloop`:
+* `kubernetes.kubelet.check.syncloop`:<br>
   If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
 
-* `kubernetes_state.node.ready`:
+* `kubernetes_state.node.ready`:<br>
   Returns `CRITICAL` if a cluster node is not ready. Returns `OK` otherwise.
 
-* `kubernetes_state.node.out_of_disk`:
+* `kubernetes_state.node.out_of_disk`:<br>
   Returns `CRITICAL` if a cluster node is out of disk space. Returns `OK` otherwise.
 
-* `kubernetes_state.node.disk_pressure`:
+* `kubernetes_state.node.disk_pressure`:<br>
   Returns `CRITICAL` if a cluster node is in a disk pressure state. Returns `OK` otherwise.
 
-* `kubernetes_state.node.memory_pressure`:
+* `kubernetes_state.node.memory_pressure`:<br>
   Returns `CRITICAL` if a cluster node is in a memory pressure state. Returns `OK` otherwise.
 
-* `kubernetes_state.node.network_unavailable`:
+* `kubernetes_state.node.network_unavailable`:<br>
   Returns `CRITICAL` if a cluster node is in a network unavailable state. Returns `OK` otherwise.
+
+* `kubernetes_state.cronjob.on_schedule_check`:<br>
+  Returns `CRITICAL` if a cron job scheduled time is in the past. Returns `OK` otherwise.
 
 ## Troubleshooting
 

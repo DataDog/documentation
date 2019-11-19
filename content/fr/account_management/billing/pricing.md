@@ -7,7 +7,7 @@ further_reading:
     tag: Tarification
     text: Tarification Datadog
 ---
-Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir plus, consultez la page [Pricing][1].
+Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir plus, consultez la page des [Tarifs][1].
 
 ## Calcul du prix
 

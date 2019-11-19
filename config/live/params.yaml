@@ -2,9 +2,17 @@ environment: live
 img_url: "https://datadog-docs.imgix.net/"
 static_url: "https://docs.datadoghq.com/"
 ga: UA-21102638-5
+
+header_scripts:
+  - datadog_monitoring: true
+  - hotjar: true
+  - google-site-tag: true
+  - google-tag-manager: true
+  - marketo: true
+
 footer_scripts:
-- snowplow: true
-- adroll: true
+  - snowplow: true
+  - adroll: true
 
 datadog:
   clientToken: pub16bb5ef3e9bf55f156338987e27246c7

@@ -156,7 +156,7 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 | [q][43]          | `>=1`     | Prise en charge complète |
 | [when][44]       | `>=3`     | Prise en charge complète |
 
-#### Compatibilité des enregistreurs
+#### Compatibilité des loggers
 
 | Module           | Versions  | Type de prise en charge    |
 |------------------|-----------|-----------------|

@@ -31,8 +31,9 @@ Installez l'intégration avec le [carré d'intégration Cloudflare][1] de Datado
 3. Nommez le compte. Ce nom est arbitraire. Il est utilisé dans le tag `account` de vos métriques.
 
 Lorsque vous utilisez un token d'API, assurez-vous qu'il dispose des autorisations suivantes :
-* *Zone* > *Zone* > *Read*
-* *Zone* > *Analytics* > *Read*
+
+- *Zone* > *Zone* > *Read*
+- *Zone* > *Analytics* > *Read*
 
 ## Données collectées
 ### Métriques

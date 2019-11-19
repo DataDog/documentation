@@ -9,7 +9,7 @@ kind: documentation
 | :----    | :-------                                | :---------              |
 | `abs()`  | メトリクスの絶対値をグラフ化します。 | `abs(<METRIC_NAME>{*})` |
 
-この正弦波時系列 `sin{*}` を
+変換するのは、この正弦波時系列 `sin{*}` です。 
 
 {{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function" responsive="true" style="width:80%;">}}
 

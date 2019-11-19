@@ -1,12 +1,9 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 to_time=$(date +%s)
-from_time=$(date -v -1d +%s)
+from_time=$(date --date='1 day ago' +%s)
 
-curl -G \
-    "https://api.datadoghq.com/api/v1/query" \
-    -d "api_key=${api_key}" \
-    -d "application_key=${app_key}" \
-    -d "from=${from_time}" \
-    -d "to=${to_time}" \
-    -d "query=system.cpu.idle{*}by{host}"
+curl -X GET \
+    -H "DD-API-KEY: ${api_key}" \
+    -H "DD-APPLICATION-KEY: ${app_key}" \
+    "https://api.datadoghq.com/api/v1/query?&query=avg:system.cpu.user\{*\}by\{host\}&from=${from_time}&to=${to_time}"

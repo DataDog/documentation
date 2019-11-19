@@ -19,15 +19,19 @@ Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count
 
 It is recommended that containers are monitored with a single containerized Agent per host. This Agent collects both container and host metrics. If you choose to install the Agent directly in each container, each container is counted as a host from a billing perspective.  More details can be found in the [Agent installation][3] documentation.
 
+### Serverless
+
+Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 40 custom metrics per billed function. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. For more information, see the [Serverless billing page][4] and the [Datadog Pricing page][5].
+
 ## Invoicing
 
-If you pay by credit card, receipts are available to [Administrators][4] for previous months under [Billing History][5].
+If you pay by credit card, receipts are available to [Administrators][6] for previous months under [Billing History][7].
 
-If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][6].
+If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][8].
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Plan][7] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Plan][9] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" responsive="true">}}
 
@@ -43,6 +47,7 @@ You can set specific email addresses to receive invoices on the [Plan][7] page u
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
@@ -52,7 +57,9 @@ You can set specific email addresses to receive invoices on the [Plan][7] page u
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /graphing/infrastructure
 [3]: /agent
-[4]: /account_management/team/#datadog-user-roles
-[5]: https://app.datadoghq.com/account/billing_history
-[6]: mailto:billing@datadoghq.com
-[7]: https://app.datadoghq.com/account/billing
+[4]: https://docs.datadoghq.com/account_management/billing/serverless
+[5]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
+[6]: /account_management/team/#datadog-user-roles
+[7]: https://app.datadoghq.com/account/billing_history
+[8]: mailto:billing@datadoghq.com
+[9]: https://app.datadoghq.com/account/billing

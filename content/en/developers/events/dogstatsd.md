@@ -43,7 +43,7 @@ View errors and exceptions in Datadog with a DogStatsD event:
 {{< tabs >}}
 {{% tab "Python" %}}
 
-```python
+{{< code-block lang="python" filename="event.py" >}}
 from datadog import initialize, statsd
 
 options = {
@@ -54,47 +54,50 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
-```ruby
+
+{{< code-block lang="ruby" filename="event.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-```go
+{{< code-block lang="go" filename="event.go" >}}
 package main
 
 import (
-    "log"
-    "github.com/DataDog/datadog-go/statsd"
+	"log"
+	"time"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 
-    dogstatsd_client, err: = statsd.New("127.0.0.1:8125")
+	dogstatsdClient, err := statsd.New("127.0.0.1:8125")
 
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    dogstatsd_client.Event("An error occurred", "Error message", alert_type: "error", []string{
-        "env:dev"
-    })
+	if err != nil {
+		log.Fatal(err)
+	}
+	for {
+		dogstatsdClient.SimpleEvent("An error occurred", "Error message")
+		time.Sleep(10 * time.Second)
+	}
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
-```java
+{{< code-block lang="java" filename="event.java" >}}
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
@@ -114,12 +117,12 @@ public class DogStatsdClient {
         Statsd.event(event)
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-```csharp
+{{< code-block lang="csharp" filename="event.cs" >}}
 using StatsdClient;
 
 public class DogStatsdClient
@@ -137,12 +140,12 @@ public class DogStatsdClient
         DogStatsd.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-```php
+{{< code-block lang="php" filename="event.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -160,8 +163,37 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
-```
+{{< /code-block >}}
 
+With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
+To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
+
+{{< code-block lang="php" filename="event_through_api.php" >}}
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('api_key' => '<DATADOG_API_KEY>',
+          'app_key' => '<DATADOG_APPLICATION_KEY>',
+     )
+  );
+
+$statsd->event('An error occurred.',
+    array( 'text' => 'Error message',
+           'alert_type' => 'error'
+    )
+  );
+{{< /code-block >}}
+
+**Note**:
+
+* Sending events with this method uses cURL for API requests.
+* You should use a `try`/`catch` code block to avoid warnings or errors on communication issues with the Datadog API.
+
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 

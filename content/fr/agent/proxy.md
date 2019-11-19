@@ -72,7 +72,7 @@ proxy:
       - host2
 ```
 
-**Proxy avec variables d'environnement** :
+#### Variables d'environnement
 
 À partir de l'Agent v6.4, vous pouvez définir vos paramètres de proxy via des variables d'environnement :
 

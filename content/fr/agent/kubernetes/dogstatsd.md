@@ -178,7 +178,7 @@ func main(){
 }
 ```
 
-Vous pouvez également incrémenter une métrique custom pour chacune des fonctions de votre gestionnaire. Par exemple, pour chaque appel de la fonction `InfoHandler`, la valeur de la métrique `request_count` augmente de 1 lorsque le tag `endpoint:info` est appliqué à ce point de donnée :
+Vous pouvez également incrémenter une métrique custom pour chacune des fonctions handler. Par exemple, pour chaque appel de la fonction `InfoHandler`, la valeur de la métrique `request_count` augmente de 1 lorsque le tag `endpoint:info` est appliqué à ce point de donnée :
 
 ```go
 func InfoHandler(rw http.ResponseWriter, req *http.Request) {
@@ -193,7 +193,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/developers/dogstatsd
+[1]: /fr/developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd
 [3]: /fr/developers/dogstatsd/unix_socket
 [4]: /fr/agent/guide/agent-commands

@@ -24,7 +24,7 @@ further_reading:
 ---
 ## Échantillonnage de traces
 
-L'échantillonnage de traces s'applique aux applications Web avec un volume élevé, pour lesquelles une petite quantité de traces est conservée dans Datadog selon les règles suivantes.
+L'échantillonnage de traces est idéal pour les applications Web à volume élevé : un échantillon proportionnel de [traces][1] est alors conservé dans Datadog selon les règles suivantes.
 
 Les statistiques (requêtes, erreurs, latence, etc.) sont calculées en fonction du volume total de traces au niveau de l'Agent et sont donc toujours exactes.
 
@@ -36,7 +36,7 @@ L'APM Datadog calcule les statistiques agrégées suivantes parmi toutes les tra
 * Erreurs totales et erreurs par seconde
 * Latence
 * Données détaillées du temps passé par service/type
-* [Score Apdex][1] (services Web uniquement)
+* [Score Apdex][2] (services Web uniquement)
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Les statistiques agrégées sont générées à partir de données non échantillonnées." responsive="true" style="width:90%;">}}
 
@@ -78,7 +78,7 @@ Concernant le cycle de vie d'une trace, les décisions sont prises au niveau du 
 
     De plus, le nombre de traces conservées par l'Agent depuis le client de tracing est déterminé en fonction du service afin de garantir la conservation des traces des services présentant un QPS (nombre de requêtes par seconde) faible.
 
-    Vous avez la possibilité de filtrer manuellement les endpoints de ressources qui ne sont pas intéressants au niveau de l'Agent en utilisant la fonction de [filtrage de ressources][2].
+    Vous avez la possibilité d'ignorer manuellement les endpoints ressources qui ne sont pas intéressants au niveau de l'Agent en utilisant les [filtres de ressources][3].
 
 3. Serveur/backend DD : le serveur reçoit les traces des différents Agents exécutés sur vos hosts et applique des règles d'échantillonnage afin de garantir que chaque Agent soit représenté. Pour cela, il détermine les traces à conserver en fonction de la signature marquée par l'Agent.
 
@@ -169,7 +169,7 @@ Pour conserver manuellement une trace :
 Datadog.tracer.trace(name, options) do |span|
 
   # toujours conserver la trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP)
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
   # ajouter ensuite l'implémentation de la méthode
 end
 ```
@@ -177,8 +177,8 @@ Pour supprimer manuellement une trace :
 
 ```ruby
 Datadog.tracer.trace(name, options) do |span|
-  # toujours supprimer la trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP)
+  # toujours filtrer la trace
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
   # ajouter ensuite l'implémentation de la méthode
 end
 ```
@@ -301,31 +301,31 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 Pour conserver manuellement une trace :
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // toujours conserver cette trace
-  $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
-  // ajouter ensuite l'implémentation de la méthode
-}
-
+  if (null !== $span) {
+    // toujours conserver cette trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+    // ajouter ensuite l'implémentation de la méthode
+  }
+?>
 ```
 
 Pour supprimer manuellement une trace :
 
 ```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
 
-$tracer = \OpenTracing\GlobalTracer::get();
-$span = $tracer->getActiveSpan();
-
-if (null !== $span) {
-  // toujours supprimer cette trace
-  $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
-  // ajouter ensuite l'implémentation de la méthode
-}
-
+  if (null !== $span) {
+    // toujours filtrer cette trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+    // ajouter ensuite l'implémentation de la méthode
+  }
+?>
 ```
 
 {{% /tab %}}
@@ -367,7 +367,7 @@ Notez que la priorité des traces doit être contrôlée manuellement  uniquemen
 
 ## Stockage de traces
 
-Les traces individuelles sont stockées pendant un maximum de 6 mois. Pour déterminer la durée de conservation d'une trace spécifique, l'Agent prend une décision d'échantillonnage au début du cycle de vie de la trace. Dans le backend Datadog, les traces échantillonnées sont conservées selon des compartiments de temps :
+Les [traces][1] individuelles sont stockées pendant une durée maximale de 6 mois. Pour déterminer la durée pendant laquelle une trace sera stockée, l'Agent prend une décision d'échantillonnage tôt dans le cycle de vie de la trace. Dans le backend de Datadog, les traces échantillonnées sont conservées en fonction de compartiments temporels :
 
 | Compartiment de rétention       |  % du flux conservé |
 | :--------------------- | :---------------- |
@@ -402,5 +402,7 @@ Une fois qu'une trace a été consultée en ouvrant une page entière, elle rest
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[2]: https://docs.datadoghq.com/fr/security/tracing/#resource-filtering
+
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[3]: https://docs.datadoghq.com/fr/security/tracing/#resource-filtering

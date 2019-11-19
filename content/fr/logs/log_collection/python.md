@@ -22,7 +22,7 @@ further_reading:
 ---
 ## Présentation
 
-Utilisez votre enregistreur Python préféré pour écrire des logs dans un fichier sur votre host. Surveillez ensuite le fichier avec l'Agent Datadog pour envoyer vos logs vers Datadog.
+Utilisez votre logger Python préféré pour écrire des logs dans un fichier sur votre host. Surveillez ensuite le fichier avec l'Agent Datadog pour envoyer vos logs vers Datadog.
 
 ## Implémentation
 
@@ -30,7 +30,7 @@ Les logs Python sont assez complexes à gérer, principalement à cause des trac
 Pour répondre à ce cas de figure, nous vous conseillons d'utiliser un formateur JSON lors de l'écriture des logs afin de :
 
 * Garantir que chaque paramètre stack_trace est correctement associé au bon log
-* Vous assurer que tous les attributs d'un événement de log sont correctement extraits (sévérité, nom de l'enregistreur, nom du thread, etc.)
+* Vous assurer que tous les attributs d'un événement de log sont correctement extraits (sévérité, nom du logger, nom du thread, etc.)
 
 Vous trouverez ci-dessous des exemples de configuration pour les bibliothèques de journalisation suivantes :
 

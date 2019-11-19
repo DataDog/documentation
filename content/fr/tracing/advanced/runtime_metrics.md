@@ -1,7 +1,6 @@
 ---
 title: Métriques de runtime
 kind: documentation
-beta: true
 further_reading:
   - link: tracing/advanced/connect_logs_and_traces
     tags: Enrichir vos traces
@@ -31,19 +30,24 @@ Les métriques JVM peuvent être visualisées conjointement à vos services Java
 
 {{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="Runtime JVM" responsive="true" >}}
 
-**Remarque** : pour l'IU de runtime, `dd-trace-java` >= [`0.24.0`][2] est pris en charge.
+Par défaut, les métriques de runtime de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][2].
 
-Par défaut, les métriques de runtime de votre application sont envoyées à l'Agent Datadog par le biais de DogStatsD sur le port `8125`. Veillez à ce que [DogStatsD soit activé pour l'Agent][3].
-Si vous exécutez l'Agent en tant que conteneur, assurez-vous que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est défini sur true][4] et que le port `8125` est ouvert sur l'Agent.
-Dans Kubernetes, [associez le port DogstatsD à un port de host][5] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][6].
+Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur true][3] et que le port `8125` est ouvert sur l'Agent. En outre, pour :
 
+* **Kubernetes** : vous *devez* [associer le port DogStatsD à un port du host][4].
+* **ECS** : [définissez les flags adéquats dans la définition de votre tâche][5].
+
+**Remarques :**
+
+* Pour l'IU de runtime, `dd-trace-java` >= [`0.24.0`][6] est pris en charge.
+* Pour associer des métriques JVM dans des graphiques de performances, veillez à ce que `env: tag` (sensible à la casse) soit défini et corresponde sur l'ensemble de votre environnement.
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
-[3]: /fr/developers/dogstatsd/#setup
-[4]: /fr/agent/docker/#dogstatsd-custom-metrics
-[5]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[6]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[2]: /fr/developers/dogstatsd/#setup
+[3]: /fr/agent/docker/#dogstatsd-custom-metrics
+[4]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -64,7 +68,7 @@ Dans Kubernetes, [associez le port DogstatsD à un port de host][5] ; dans ECS,
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
-[3]: /fr/developers/dogstatsd/#setup
+[3]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
 [4]: /fr/agent/docker/#dogstatsd-custom-metrics
 [5]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [6]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
@@ -104,9 +108,9 @@ Dans Kubernetes, [associez le port DogstatsD à un port de host][6] ; dans ECS,
 
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /fr/developers/dogstatsd/#setup
+[2]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
-[4]: /fr/developers/dogstatsd/#setup
+[4]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
 [5]: /fr/agent/docker/#dogstatsd-custom-metrics
 [6]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [7]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
@@ -134,7 +138,7 @@ Dans Kubernetes, [associez le port DogstatsD à un port de host][4] ; dans ECS,
 
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /fr/developers/dogstatsd/#setup
+[2]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /fr/agent/docker/#dogstatsd-custom-metrics
 [4]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [5]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
@@ -166,7 +170,7 @@ Les métriques suivantes sont recueillies par défaut après l'activation des m�
 
 Datadog fournit non seulement ces métriques sur votre page Service de l'APM, mais également un [dashboard de runtime JVM par défaut][1] comportant les tags `service` et `runtime-id` appliqués à ces métriques.
 
-En outre, vous pouvez ajouter des métriques JMX à l'aide de fichiers de configuration qui sont transmis à `jmxfetch.metrics-configs`. Il est également possible d'activer chaque intégration JMX de Datadog à l'aide du paramètre `dd.integration.<nom>`. Cela intègre automatiquement la configuration des [fichiers de configuration JMX existants][2]. Consultez l'[intégration JMX][3] pour en savoir plus sur la configuration.
+En outre, vous pouvez ajouter des métriques JMX à l'aide de fichiers de configuration qui sont transmis à `dd.jmxfetch.config.dir` et `dd.jmxfetch.config`. Il est également possible d'activer chaque intégration JMX de Datadog à l'aide du paramètre `dd.jmxfetch.<NOM_INTÉGRATION>.enabled=true`. Cela intègre automatiquement la configuration des [fichiers de configuration JMX existants][2] de Datadog. Consultez la section relative à l'[intégration JMX][3] pour en savoir plus sur la configuration.
 
 [1]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics

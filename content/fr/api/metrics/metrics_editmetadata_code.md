@@ -5,9 +5,14 @@ order: 25.5
 external_redirect: /api/#modifier-les-metadonnees-d-une-metrique
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/metrics/<NOM_MÉTRIQUE>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-metric-metadata-update" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-metric-metadata-update" >}}

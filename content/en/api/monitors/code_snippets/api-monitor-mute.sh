@@ -7,4 +7,8 @@ app_key=<YOUR_APP_KEY>
 monitor_id=<YOUR_MONITOR_ID>
 
 # Mute a monitor
-curl -X POST -H "Content-type: application/json" "https://api.datadoghq.com/api/v1/monitor/${monitor_id}/mute?api_key=${api_key}&application_key=${app_key}"
+curl -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/monitor/${monitor_id}/mute"

@@ -4,11 +4,11 @@ assets:
   monitors: {}
   service_checks: /assets/service_checks.json
 categories:
-- provisioning
+  - provisioning
 creates_events: true
 ddtype: check
 dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md'
 display_name: Nomad
 git_integration_title: nomad
 guid: 09fec09d-69ef-435f-bb0d-f586652b9bc7
@@ -25,11 +25,10 @@ public_title: Intégration Datadog/Nomad
 short_description: Planifier et déployer facilement des applications à n'importe quelle échelle
 support: contrib
 supported_os:
-- linux
-- mac_os
-- windows
+  - linux
+  - mac_os
+  - windows
 ---
-
 ## Présentation
 
 Rassemblez des métriques à partir de vos clusters Nomad pour :
@@ -41,7 +40,7 @@ Rassemblez des métriques à partir de vos clusters Nomad pour :
 
 ### Installation
 
-Nomad transmet des métriques à Datadog via DogStatsD. Pour activer l'intégration Nomad, [installez l'Agent Datadog][1] sur chaque client et host du serveur.  
+Nomad transmet des métriques à Datadog via DogStatsD. Pour activer l'intégration Nomad, [installez l'Agent Datadog][1] sur chaque client et chaque host du serveur.
 
 ### Configuration
 
@@ -57,7 +56,7 @@ telemetry {
 }
 ```
 
-Rechargez ou redémarrez ensuite l'Agent Nomad sur chaque host. Les métriques Nomad devraient alors commencer à être envoyées à votre compte Datadog.
+Rechargez ou redémarrez ensuite l'agent Nomad sur chaque host. Les métriques Nomad devraient alors commencer à être envoyées à votre compte Datadog.
 
 ## Données collectées
 ### Métriques
@@ -75,7 +74,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
-[3]: http://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

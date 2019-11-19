@@ -6,6 +6,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -49,9 +50,11 @@ Istio est intégré à l'Agent Datadog. [Installez l'Agent Datadog][2] sur vos s
 
 ### Configuration
 
-#### Associer l'Agent
+Modifiez le fichier `istio.d/conf.yaml` (dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour connecter l'Agent à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][4]) pour découvrir toutes les options de configuration disponibles.
 
-Modifiez le fichier `istio.d/conf.yaml` (dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour connecter l'Agent à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][4]) pour découvrir toutes les options de configuration disponibles :
+#### Collecte de métriques
+
+Ajoutez ce bloc de configuration à votre fichier `istio.d/conf.yaml` pour commencer à recueillir vos métriques Istio :
 
 ```
 init_config:
@@ -67,11 +70,11 @@ instances:
 
 Chaque endpoint est facultatif, mais au moins l'un d'eux doit être configuré. Consultez la [documentation Istio][5] pour en savoir plus sur l'adaptateur Prometheus.
 
-#### Désactiver l'injection de sidecar
+##### Désactiver l'injection de sidecar
 
 Si vous installez l'[Agent Datadog dans un conteneur][10], Datadog vous conseille de désactiver l'injection de sidecar d'Istio au préalable.
 
-Ajoutez l'annotation `sidecar.istio.io/inject: "false"` au daemonset `datadog-agent` :
+Ajoutez l'annotation `sidecar.istio.io/inject: "false"` au DaemonSet `datadog-agent` :
 
 ```
 ...
@@ -89,6 +92,30 @@ Vous pouvez également utiliser la commande `kubectl patch`.
 ```
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
+
+#### Collecte de logs
+
+Istio contient deux types de logs : les logs d'accès Envoy recueillis via l'[intégration Envoy][12], ainsi que les [logs Istio][11].
+
+**Disponible à partir des versions > 6.0 de l'Agent**
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
+
+    ```
+      (...)
+        env:
+          (...)
+          - name: DD_LOGS_ENABLED
+              value: "true"
+          - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+              value: "true"
+      (...)
+    ```
+
+2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5]. Si vous n'utilisez pas Docker, montez le répertoire `/var/log/pods`.
+
+3. [Redémarrez l'Agent][2].
+
 
 ### Validation
 
@@ -124,6 +151,8 @@ Documentation, liens et articles supplémentaires utiles :
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
 [10]: https://docs.datadoghq.com/fr/agent/kubernetes
+[11]: https://istio.io/docs/tasks/telemetry/logs/collecting-logs/
+[12]: https://docs.datadoghq.com/fr/integrations/envoy/#log-collection
 
 
 {{< get-dependencies >}}

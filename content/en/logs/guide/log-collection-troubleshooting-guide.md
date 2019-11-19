@@ -39,12 +39,14 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to use the port `443` (this port is only available with the Datadog Agent) by adding the following in `datadog.yaml`:
+- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
 ```
 logs_config:
-  use_port_443: true
+  use_http: true
 ```
+
+See the [HTTPS log forwarding section][15] for more information.
 
 ## Check the status of the agent
 
@@ -196,3 +198,4 @@ Check if logs appear in the [Datadog Live Tail][13]. If they appear in the Live 
 [12]: https://app.datadoghq.com/account/settings#api
 [13]: https://app.datadoghq.com/logs/livetail
 [14]: /logs/indexes/#exclusion-filters
+[15]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https

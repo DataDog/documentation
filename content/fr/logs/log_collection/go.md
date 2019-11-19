@@ -27,7 +27,7 @@ Pour envoyer vos logs Go à Datadog, nous vous recommandons d'activer la journal
 
 Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][2].
 
-## Configurer votre enregistreur
+## Configurer votre logger
 
 Pour une configuration Go classique, ouvrez un fichier `main.go` et collez le code suivant :
 
@@ -104,7 +104,7 @@ Logs:
 
 Voici quelques conseils :
 
-* Attribuez toujours à l'enregistreur un nom correspondant à la fonctionnalité ou au service que vous essayez de fournir.
+* Attribuez toujours au logger un nom correspondant à la fonctionnalité ou au service que vous essayez de fournir.
 * Enregistrez beaucoup de données de DEBUG et loguez plus précisément les données INFO, WARNING et FATAL, car il s'agit des niveaux de logs que vous obtiendrez dans vos environnements de production.
 * Commencez doucement et essayez de créer d'abord des logs pour les données importantes, plutôt que de voir les choses en grand. Ajoutez ensuite ce qui vous manque après en avoir discuté avec votre équipe.
 * Utilisez des métadonnées. Ajoutez du contexte à tous vos logs afin de rapidement filtrer les utilisateurs, les clients ou les attributs métiers capitaux.

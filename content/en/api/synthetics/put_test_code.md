@@ -1,8 +1,8 @@
 ---
 title: Edit a test
 type: apicode
-order: 29.3
-external_redirect: /api/#edit-test
+order: 30.3
+external_redirect: /api/#edit-a-test
 ---
 
 **SIGNATURE**:

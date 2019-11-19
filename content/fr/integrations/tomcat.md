@@ -265,7 +265,7 @@ init_config:
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-1. Tomcat utilise l'enregistreur `log4j` par défaut. Pour activer l'écriture des logs dans un fichier et personnaliser le format du log, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
+1. Tomcat utilise le logger `log4j` par défaut. Pour activer l'écriture des logs dans un fichier et personnaliser le format du log, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
 
     ```
       log4j.rootLogger = INFO, CATALINA

@@ -5,9 +5,14 @@ order: 11.5
 external_redirect: /api/#revoquer-un-embed
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `GET /v1/graph/embed/<EMBED_ID>/revoke`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE** :
+
 {{< code-snippets basename="api-embeds-revoke" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE** :
+
 {{< code-snippets basename="result.api-embeds-revoke" >}}

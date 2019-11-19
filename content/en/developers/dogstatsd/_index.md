@@ -41,7 +41,7 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't need to change this port, see directly how to [setup DogStatsD in your code](#code).
+DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't need to change this port, see directly how to [setup DogStatsD in your code](#code). Also see relevant DogStatsD setup documentation for [Docker][11] and [Kubernetes][12].
 
 ### Agent
 
@@ -329,3 +329,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [8]: /agent/guide/agent-commands
 [9]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [10]: /developers/metrics
+[11]: /agent/docker/?tab=standard#dogstatsd-custom-metrics
+[12]: /agent/kubernetes/dogstatsd/

@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for custom metrics
 type: apicontent
-order: 33.3
+order: 34.3
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 

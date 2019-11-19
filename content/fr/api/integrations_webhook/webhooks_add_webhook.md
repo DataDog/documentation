@@ -1,10 +1,10 @@
 ---
-title: Ajouter un Webhook à une intégration Webhooks
+title: Mettre à jour une intégration Webhooks
 type: apicontent
 order: 20.3
-external_redirect: '/api/#ajouter-un-webhook-a-une-integration-webhooks'
+external_redirect: '/api/#mettre-a-jour-une-integration-webhooks'
 ---
-## Ajouter un Webhook à une intégration Webhooks
+## Mettre à jour une intégration Webhooks
 
 Ajoutez un Webhook spécifique à une intégration Datadog/Webhooks.
 

@@ -74,13 +74,13 @@ The `ddtrace` library includes support for a number of web frameworks, including
 
 | Framework                | Supported Version | PyPi Datadog Documentation                                         |
 |--------------------------|-------------------|--------------------------------------------------------------------|
-| [aiohttp][5]            | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
+| [aiohttp][5]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][6]              | >= 0.11           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][7]              | >= 1.8            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [djangorestframework][7] | >= 3.4            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [Falcon][8]              | >= 1.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon  |
 | [Flask][9]               | >= 0.10           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
-| [Molten][10]              | >= 0.7.0          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten  |
+| [Molten][10]             | >= 0.7.0          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten  |
 | [Pylons][11]             | >= 0.9.6          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
 | [Pyramid][12]            | >= 1.7            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
 | [Tornado][13]            | >= 4.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
@@ -133,7 +133,7 @@ The `ddtrace` library includes support for the following libraries:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /tracing/send_traces
 [2]: /tracing/setup/docker
 [3]: /agent/kubernetes/daemonset_setup/#trace-collection
 [4]: http://pypi.datadoghq.com/trace/docs
