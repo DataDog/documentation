@@ -23,6 +23,8 @@ Supported platforms include:
 * Debian 9+
 * Fedora 26+
 * SUSE 15+
+* Amazon AMI 2016.03+
+* Amazon Linux 2
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][4]. 
 
