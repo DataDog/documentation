@@ -45,8 +45,11 @@ To enable network performance monitoring, configure it in your [Agent's main con
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. Copy the system-probe example configuration:<br>
-`sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml`
+1. Copy the system-probe example configuration:
+    ```
+    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    ```
+
 2. Modify the system-probe configuration file to set the enable flag to `true`.<br>
 
 3. Optionally uncomment the `system_probe_config` parameter to add a custom object:
