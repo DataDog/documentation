@@ -843,10 +843,14 @@ main:
     url: logs/archives/s3/
     parent: log_archives
     weight: 501
+  - name: Archivage sur GCS
+    url: logs/archives/gcs/
+    parent: log_archives
+    weight: 502
   - name: Réintégration à partir des archives
     url: logs/archives/rehydrating
     parent: log_archives
-    weight: 502
+    weight: 503
   - name: Index
     url: logs/indexes
     parent: log_management
@@ -893,7 +897,7 @@ main:
     parent: log_management
     weight: 11
   - name: Synthetics
-    url: 'https://www.datadoghq.com/synthetics/'
+    url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
     weight: 100000
@@ -1172,7 +1176,7 @@ main:
     parent: account_management
     weight: 7
   - name: Sécurité
-    url: 'https://www.datadoghq.com/security/'
+    url: /security/
     pre: nav_security
     identifier: security
     weight: 160000

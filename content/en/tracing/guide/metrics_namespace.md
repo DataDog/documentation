@@ -23,7 +23,7 @@ aliases:
 ---
 
 ## Overview
-The [trace metrics][1] namespace is `trace.<name>.<metrics>{<tags>}` where
+The [trace metrics][1] namespace is `trace.<name>.<metrics>{<tags>}`.
 
 Tracing application metrics are collected after [enabling trace collection][2] and [instrumenting your application][3]. These metrics are available for dashboards and monitors.
 

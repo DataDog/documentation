@@ -16,23 +16,24 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-Dashboard template variables apply a new scope to one or more widgets in your dashboard, allowing you to dynamically explore metrics across different sets of tags by using variables instead of specific tags.
+Template variables allow you to dynamically apply specific metric or log values to one or more widgets in each dashboard. 
 
-## Define a Template Variable
+## Add a Template Variable
 
-New dashboards start with a keyless template variable applied. Click on the *pencil* icon to open the template variable edit mode:
+To create your first template variable in the dashboard, click **Add Template Variables**. If template variables are already defined, click on the *-pencil-* icon to open the template variable editor. Once in edit mode, click on **Add Variable +** to add another template variable. 
 
 {{< img src="graphing/dashboards/template_variables/edit_mode_template_variable.png" alt="Edit template variable" responsive="true" style="width:40%;">}}
 
-Once in the edit mode click on **Add Variable +** to create your first Template Variable, it is defined by:
+A template variable is defined by:
 
-* **Name** *-required-*:
+
+* **Name**:
     The value of your template variable displayed in your graph query.
-* **Tag or Attribute** *-required-*:
+* **Tag or Attribute**:
 
     * Tag: If you follow [tagging best practices][1] (`key:value` format), the *Tag* is the `key` of your tag.
     * Attribute: Use a [facet or measure as the template variable](#template-variables-with-logs-and-apm-queries).
-* **Default Value** *-optional-*:
+* **Default Value**:
     The default value for your template variable tag or attribute.
 
 Once created, notice that you have statistics upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
@@ -41,7 +42,7 @@ Once created, notice that you have statistics upon your template variables usage
 
 Decide if you want to remove/add this template variable to all of your graph widgets with the respective **Remove From All** and **Add to All** buttons.
 
-#### Template variables with logs and APM queries
+### Template variables with logs and APM queries
 
 Template variables work with log and APM query based widgets because metrics, logs, and APM share the same tags.
 Additionally, you can define log or APM template variables based on [log][2] or APM facets. These template variables start with `@`.
@@ -49,6 +50,27 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 {{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
 
 **Note**: Using the `Add to all` button adds the template variable to all log/APM widgets.
+
+### Template variable saved views
+
+#### Creating a saved view of template variables
+
+{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:75%;">}}
+
+To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view. 
+To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables. 
+
+#### Delete a saved view
+
+To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
+
+#### Modify a saved view
+
+{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Manage View Popup" responsive="true" style="width:75%;">}}
+
+To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. 
+
+If any values in the other views are changed, save the values as a new view, and then delete the original view. 
 
 ## Use Template Variables
 

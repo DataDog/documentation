@@ -196,9 +196,11 @@ $responsive-breakpoint: 768px
       background: transparent;
       border: none;
       z-index: 999;
+      max-width: 100% !important;
+      
       @include layout-width($layout-width);
-      @include shadow-type($box-shadow);
-
+      box-shadow: 0px 1px 0px rgba(30, 5, 36, 0.16), 0px 23px 32px -8px rgba(0, 0, 0, 0.26);
+      
       // Arrow
       &:before {
         display: none;
@@ -562,4 +564,14 @@ $responsive-breakpoint: 768px
       }
     }
   }
+}
+
+.algolia-docsearch-suggestion--highlight {
+  color: #8821A2 !important;
+  background: #F9F0FB !important;
+  box-shadow: none !important;
+}
+
+.algolia-docsearch-suggestion--subcategory-column, .algolia-docsearch-suggestion--text {
+  color: #4B4B4B !important;
 }

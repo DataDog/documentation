@@ -83,13 +83,13 @@ dogstreams が動作していることをテストする場合は、Agent の監
 
 標準形式ではないが、特定の文字で合理的に区切られたログからメトリクスを収集する例を考えます。このログは、次のように記録されています。
 
-≪```
+```
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
-```≫
+```
 
 ログパーサーを次のように設定して、Datadog アカウント内のこのログデータからメトリクスを収集できます。
 
-≪```python
+```python
 
 import time
 from datetime import datetime
@@ -106,13 +106,13 @@ def my_log_parser(logger, test):
         'metric_type': 'gauge',
     }
     return (metric_name, date, metric_value, metric_attributes)
-```≫
+```
 
 次に、`datadog.conf` を構成して、以下の dogstream オプションを追加します。
-≪```
+```
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (注: Windows ユーザーは "/" をエスケープした "\\" に置き換える必要があります。)
-```≫
+```
 
 この例は、名前が "user.crashes"、値が 24 のゲージタイプのメトリクスを収集し、末尾で指定されている 3 つのアプリケーションをタグとして付加しています。
 
@@ -149,13 +149,13 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 任意の関連情報を自由に追加できる場合に、ログからイベントを収集するとします。このログは、次のように特定の文字で合理的に区切られて記録されています。
 
-≪```
+```
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
-```≫
+```
 
 次のようにログパーサーを設定して、Datadog の[イベントストリーム][4]内に、このログデータから取得したイベントを作成できます。
 
-≪```python
+```python
 
 import time
 from datetime import datetime
@@ -181,13 +181,13 @@ def my_log_parser(logger, line):
         'alert_type': 'error'
     }
     return logged_event
-```≫
+```
 
 次に、`datadog.conf` を構成して、以下の Dogstream オプションを追加します。
-≪```
+```
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B.注: Windows ユーザーは "/" をエスケープした "\\" に置き換える必要があります。)
-```≫
+```
 
 このパーサーを使用して上のログ行をパースすると、Datadog に次のイベントが作成されます。
 
@@ -197,30 +197,30 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 メトリクスやイベントをプラットフォームに送信するためのカスタムパーサーをセットアップできたら、`datadog.conf` で次のような設定を行います。
 
-≪```
+```
  dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
-```≫
+```
 
 また、parsers_module.py で、次のように関数を定義します。
-≪```python
+```python
 
 def custom_parser(logger, line)
-```≫
+```
 
 さらに関数のパリティを変更して、[こちらの Agent サンプル][5]で示されているように追加のパラメーターを受け取ることができます。
 
 たとえば、構成ファイルを次のように変更します。
 
-≪```
+```
 dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1:customvar2
-```≫
+```
 
 パース関数は次のようになります。
 
-≪```python
+```python
 
 def custom_parser(logger, line, parser_state, *parser_args):
-```≫
+```
 
 **parser_args** には、(customvar1, customvar2) に対応するタプルパラメーターが含まれます。これらは、parser_args[0] および parser_args[1] としてコードで使用できます。
 
@@ -230,9 +230,9 @@ def custom_parser(logger, line, parser_state, *parser_args):
 
 この場合、構成ファイルで次のようにします。
 
-≪```
+```
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
-```≫
+```
 
 ## カスタムログパーサーのトラブルシューティング
 

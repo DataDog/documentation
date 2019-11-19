@@ -62,7 +62,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 ### Tags search
 
-Your traces inherit tags from [hosts][1] and [integrations][2] that generate them. They can be used in the search and as facets as well:
+Your traces inherit tags from hosts and [integrations][1] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -70,7 +70,7 @@ Your traces inherit tags from [hosts][1] and [integrations][2] that generate the
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][3] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][2] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -171,20 +171,17 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][4].
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
 
 ### Facet Panel
 
 Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:30%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /graphing/infrastructure
-[2]: /integrations
-[3]: /tagging/#tags-best-practices
-[4]: /tracing/app_analytics/analytics
+[1]: /integrations
+[2]: /tagging/#tags-best-practices

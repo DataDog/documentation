@@ -18,7 +18,7 @@ git_integration_title: mapr
 guid: 7d1de422-85a6-47cc-9962-427a9499d109
 integration_id: mapr
 integration_title: MapR
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

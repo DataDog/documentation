@@ -278,10 +278,10 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
 The .NET Tracer supports automatic instrumentation on the following runtimes:
 
-| Runtime                | Versions | OS              |
-| ---------------------- | -------- | --------------- |
-| .NET Framework         | 4.5+     | Windows         |
-| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux  |
+| Runtime                | Versions | OS             |
+|------------------------|----------|----------------|
+| .NET Framework         | 4.5+     | Windows        |
+| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux |
 
 <sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][2] for more details.
 
@@ -291,20 +291,20 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library            | NuGet package name                       | Package versions     | Integration Name     |
-| ------------------------------- | ---------------------------------------- | -------------------- | -------------------- |
-| ASP.NET MVC                     | `Microsoft.AspNet.Mvc`                   | 5.1.0+ and 4.0.40804 | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
-| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                      | `AspNet`             |
-| WCF                             | built-in                                 |                      | `Wcf`                |
-| ADO.NET <sup>2</sup>            | built-in                                 |                      | `AdoNet`             |
-| WebClient / WebRequest          | built-in                                 |                      | `WebRequest`         |
-| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
-| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
-| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
+| Framework or library           | NuGet package name                       | Package versions     | Integration Name     |
+|--------------------------------|------------------------------------------|----------------------|----------------------|
+| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+ and 4.0.40804 | `AspNetMvc`          |
+| ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
+| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
+| ASP.NET Web Forms <sup>1</sup> | built-in                                 |                      | `AspNet`             |
+| WCF                            | built-in                                 |                      | `Wcf`                |
+| ADO.NET <sup>2</sup>           | built-in                                 |                      | `AdoNet`             |
+| WebClient / WebRequest         | built-in                                 |                      | `WebRequest`         |
+| HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
+| Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
+| Redis (ServiceStack client)    | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
+| Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
+| MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
 
 Notes:
 
@@ -325,7 +325,7 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
 | Runtime        | Versions | OS                    |
-| -------------- | -------- | --------------------- |
+|----------------|----------|-----------------------|
 | .NET Framework | 4.5+     | Windows               |
 | .NET Core      | 2.0+     | Windows, Linux, macOS |
 | Mono           | 5.4+     | Windows, Linux, macOS |
@@ -433,42 +433,43 @@ To configure the Tracer using an JSON file, create `datadog.json` in the instrum
 
 ### Configuration Variables
 
-The following tables list the supported configuration variables. In each table, the first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `TracerSettings` class when changing settings in the code.
+The following tables list the supported configuration variables. In each table, the first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `TracerSettings` class when changing settings in the code.
 
 The first table below lists configuration variables that are available for both automatic and manual instrumentation.
 
-Setting Name          | Property Name          | Description                                                                                                                                                                                                       |
---------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-`DD_TRACE_AGENT_URL`  | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
-`DD_AGENT_HOST`       | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
-`DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-`DD_ENV`              | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
-`DD_SERVICE_NAME`     | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
-`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
+| Setting Name            | Property Name          | Description                                                                                                                                                                                                       |
+|-------------------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_AGENT_URL`    | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
+| `DD_AGENT_HOST`         | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
+| `DD_TRACE_AGENT_PORT`   | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
+| `DD_ENV`                | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
+| `DD_SERVICE_NAME`       | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
+| `DD_LOGS_INJECTION`     | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
+| `DD_TRACE_GLOBAL_FLAGS` | `GlobalTags`           | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
-Setting Name                 | Property Name              | Description                                                                                                                                                                                                                                                                                  |
------------------------------| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-`DD_TRACE_ENABLED`           | `TraceEnabled`             | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`.     |
-`DD_TRACE_DEBUG`             | N/A                        | Enables or disables the CLR profiler's debug mode. Valid values are: `true` or `false` (default).                                                                                                                                                                                            |
-`DD_TRACE_LOG_PATH`          | N/A                        | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                         |
-`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section above.                           |
-`DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                            |
+| Setting Name                 | Property Name              | Description                                                                                                                                                                                                                                                                              |
+|------------------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_ENABLED`           | `TraceEnabled`             | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
+| `DD_TRACE_DEBUG`             | N/A                        | Enables or disables the CLR profiler's debug mode. Valid values are: `true` or `false` (default).                                                                                                                                                                                        |
+| `DD_TRACE_LOG_PATH`          | N/A                        | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                     |
+| `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section above.                       |
+| `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
 
-Setting Name                             | Property Name              | Description                                                                                                                        |
----------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-`DD_<INTEGRATION>_ENABLED`               | `Enabled`                  | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                                         |
-`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable App Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
-`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the App Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
+| Setting Name                             | Property Name         | Description                                                                                                           |
+|------------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `DD_<INTEGRATION>_ENABLED`               | `Enabled`             | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`    | Enables or disable App Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
+| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate` | Sets the App Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/apm
+[1]: /tracing/send_traces
 [2]: https://github.com/dotnet/coreclr/issues/18448
 [3]: /help
 [4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed

@@ -21,7 +21,7 @@ La page Infrastructure list affiche tous les hosts surveillés par votre applica
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" >}}
 
-Remarque : un host qui n'a pas envoyé de données lors der dernières 24 heures disparaît de la page Infrastructure list. Vous pouvez toujours l'interroger, mais il n'apparaîtra pas dans les listes déroulantes.
+Remarque : si un host n'a pas envoyé de données depuis 2 heures, celui-ci disparaît de votre liste d'infrastructures. Vous pouvez toujours l'interroger, mais il n'apparaîtra pas dans les listes déroulantes.
 
 ## Détails du host
 
@@ -68,7 +68,7 @@ la règle actuelle échoue et la règle suivante est appliquée.
 **Remarque** : si une instance EC2 est un host ECS, Datadog utilise `instance-id` comme hostname, [même si le hostname du DNS n'est pas défini sur EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le hostname dans le fichier de configuration de l'Agent.
 
 <div class="alert alert-warning">
-Les hostnames doivent être uniques au sein d'un même compte Datadog.<br> 
+Les hostnames doivent être uniques au sein d'un même compte Datadog.<br>
 Si vous ne respectez pas cette règle, vous risquez de rencontrer des incohérences sur les graphiques des métriques de votre host.
 </div>
 
@@ -85,13 +85,13 @@ de Datadog. Le volet Inspect contient notamment la liste des alias associés à 
 
 ### Exporter votre liste d'infrastructures et les versions de l'Agent
 
-Si vous avez besoin d'afficher ou d'exporter la liste des hosts transmis à Datadog, utilisez le permalien « API JSON » en bas de la page Infrastructure List.
+Si vous avez besoin d'afficher ou d'exporter la liste des hôtes transmettant des données à Datadog, utilisez le permalien « API JSON » en bas de la liste d'infrastructures.
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" style="width:80%;">}}
 
 En cliquant sur ce lien, vous obtenez une liste au format JSON de tous vos hosts.
 
-Il peut parfois s'avérer utile de vérifier vos numéros de version d'Agent actuels afin de vous assurer que vous exécutez bien la dernière version de l'Agent, ou d'effectuer des mises à jour après la publication d'une nouvelle version.
+Il peut parfois s'avérer utile de vérifier les numéros de version actuels de vos Agents afin de vous assurer que vous exécutez bien la dernière version, ou de les mettre à jour après la publication d'une nouvelle version.
 
 Pour y parvenir, il vous suffit par exemple d'utiliser le script suivant, qui tire parti du permalien JSON :
 

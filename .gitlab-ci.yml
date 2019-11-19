@@ -12,9 +12,9 @@ variables:
 
 # ================== copy scripts =============== #
 before_script:
-  - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
-  - find local/etc/ -type f -exec cp {} /etc \;  # load configs
-  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
+  - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
+  - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
+  - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -76,6 +76,8 @@ missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
+  variables:
+    GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
@@ -194,6 +196,8 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   dependencies:
     - build_live
   script:
@@ -237,6 +241,8 @@ post_success_event_to_dd_live:
   <<: *base_template
   stage: cleanup
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   when: on_success
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
@@ -248,6 +254,8 @@ post_failure_event_to_dd_live:
   <<: *base_template
   stage: cleanup
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   when: on_failure
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"

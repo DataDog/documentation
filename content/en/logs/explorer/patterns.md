@@ -31,18 +31,28 @@ The patterns view is helpful for detecting and filtering noisy error patterns th
 
 ## See log trends and newcomers over time
 
-Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query.
+Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query. Each pattern comes with highlights, to get you straight to its characteristic features:
 
-Each pattern comes with highlights, to get you straight to its characteristic features:
-
-* Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines.
 * A mini graph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns.
+* Sections of logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
 {{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true" responsive="true" width="90%" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
+
+## Pattern Actions
+
+{{< img src="logs/explorer/patterns/patterns_action.png" alt="Log Patterns Actions" responsive="true" style="width:80%;">}}
+
+Selecting a pattern opens a contextual panel that displays a sample of underlying logs. Three buttons are available in the top-right corner:
+
+* **Parsing Rule**: See an automatically generated parsing rule associated to this pattern (see screenshot below).
+* **View All**: View all logs matching the pattern query.
+* **Graph**: Graph the evolution of this pattern over time.
+
+{{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Log Patterns Parsing Rules" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
