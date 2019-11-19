@@ -39,7 +39,7 @@ heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 
 ## Send a flare
 
-Generate a flare by running the [agent-wrapper command][1]:
+Generate a flare by running the [`agent-wrapper` command][1]:
 
 ```shell
 agent-wrapper flare
