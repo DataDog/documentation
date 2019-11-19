@@ -68,18 +68,16 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
-- Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][4] to set these environment variables.
+- Managed libraries: deployed together with your application when it is published.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[4]: ?tab=netcoreonwindows#required-environment-variables
+[2]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][3].
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -110,13 +108,11 @@ apk add libc6-compat
 ```
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
-- Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: [additional configuration][4] required.
+- Managed libraries: deployed together with your application when it is published.
+- Environment variables: [additional configuration][2] required.
 
-[1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: ?tab=netcoreonlinux#required-environment-variables
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: ?tab=netcoreonlinux#required-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -289,7 +285,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 | Framework or library           | NuGet package name                       | Package versions     | Integration Name     |
 |--------------------------------|------------------------------------------|----------------------|----------------------|
-| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+ and 4.0.40804 | `AspNetMvc`          |
+| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+               | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
 | ASP.NET Web Forms <sup>1</sup> | built-in                                 |                      | `AspNet`             |
@@ -301,7 +297,6 @@ The .NET Tracer can instrument the following libraries automatically:
 | Redis (ServiceStack client)    | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
-
 Notes:
 
 <sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application. Be sure to keep this package in sync with your MSI version.
