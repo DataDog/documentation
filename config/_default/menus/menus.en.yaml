@@ -1311,11 +1311,17 @@ main:
     parent: "dev_tools_integrations"
     weight: 903
 
+  - name: "Amazon CloudFormation"
+    url: "developers/amazon_cloudformation/"
+    parent: "dev_tools"
+    identifier: "dev_tools_aws_cloudformation"
+    weight: 10
+
   - name: "Guides"
     url: "developers/guide/"
     parent: "dev_tools"
     identifier: "dev_tools_guides"
-    weight: 10
+    weight: 11
 
 #########
 ## API ##
