@@ -12,4 +12,4 @@ curl -X GET \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
-"https://api.datadoghq.com/api/v1/graph/snapshot?metric_query=system.load.1{*}&start=${currenttime2}&end=${currenttime}"
+"https://api.datadoghq.com/api/v1/graph/snapshot?metric_query=system.load.1\{*\}&start=${currenttime2}&end=${currenttime}"
