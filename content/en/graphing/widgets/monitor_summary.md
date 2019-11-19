@@ -13,7 +13,7 @@ further_reading:
 
 The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query.
 
-{{< img src="graphing/widgets/monitor_summary/monitor_summary.png" alt="monitor summary " responsive="true">}}
+{{< img src="graphing/widgets/monitor_summary/monitor_summary.png" alt="monitor summary" responsive="true">}}
 
 ## Setup
 
@@ -21,17 +21,36 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
 ### Configuration
 
-1. Enter a [monitor query][1] to display the monitor summary widget over a subset of your monitors.
-2. Choose to display only the `count` of monitors per monitor status type, the full `list` of monitors, or `both`.
+1. Select one of the three summary types: `Monitor`, `Group` or `Combined`
+    - The `Monitor` summary type lists statuses and names of monitors matching the [monitor query][1]. Multi-alert monitors have only one row in the results list and their status is the multi-alert monitor’s overall status. The Status Counts are the number of matching monitors with each status type.
+
+    {{< img src="graphing/widgets/monitor_summary/monitor_summary_type.png" alt="monitor summary type" responsive="true" style="width:80%;">}}
+
+    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi-alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi-alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the Triggered Monitors page. The Status Counts are the number of matching monitor groups with each status type.
+
+    {{< img src="graphing/widgets/monitor_summary/group_summary_type.png" alt="group summary type" responsive="true" style="width:80%;">}}
+
+    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi-alert monitors have only one row in the results list like in the `Monitor` summary type but the status column displays the number of groups in each status type that match the. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
+
+    {{< img src="graphing/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" responsive="true" style="width:80%;">}}
+
+2. Enter a monitor query to display the monitor summary widget over a subset of your monitors. 
+    - If you have template variables created in your dashboard and wish to include them in your monitor query, simply type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard will appear for you to select your desired template variable.
+
+    **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the Triggered Monitors page.
 
 ## Options
+#### Display preferences
+
+Choose to show only the `Count` of monitors per monitor status type, a `List` of monitors, or `Both`. The `Text` and `Background` options specify whether the status colors should be applied to the text or background of the Status Counts. The `Hide empty status counts` option, when enabled, will only show the Status Counts for statuses that have more than zero monitors in the result list.
+
+{{< img src="graphing/widgets/monitor_summary/display_preferences.png" alt="display preferences" responsive="true" style="width:80%;">}}
+
 #### Title
 
-Display a custom title for your widget by activating the `Show a Title` check box:
+Display a custom title for your widget by checking the `Show a title` check box. You can also optionally define the title’s size and alignment:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
-
-Optionally define its size and alignment.
+{{< img src="graphing/widgets/monitor_summary/widget_title.png" alt="widget title" responsive="true" style="width:80%;">}}
 
 ## API
 
@@ -43,6 +62,7 @@ MANAGE_STATUS_SCHEMA = {
     "properties": {
         "type": {"enum": ["manage_status"]},
         "query": {"type": "string"},
+        "summary_type": {"enum": ["monitors", "groups", "combined"]},
         "display_format": {"enum": ["counts", "countsAndList", "list"]},
         "color_preference": {"enum": ["background", "text"]},
         "hide_zero_counts": {"type": "boolean"},
@@ -59,6 +79,7 @@ MANAGE_STATUS_SCHEMA = {
 | ------     | -----           | -----    | -----                                                                                                                                                        |
 | `type`| string|yes|Type of the widget, for the monitor summary widget use `manage_status`|
 |`query`|string|yes|Query to filter the monitors with|
+|`summary_type`|string|no|Which summary type should be used|
 |`display_format`|string|no|What to display on the widget. Available values are: `counts`, `countsAndList` or `list`
 |`color_preference`|string|no|Which color to use on the widget. Available values are:`background` or `text`
 |`hide_zero_counts`|Boolean|no|Whether to show counts of 0 or not|
