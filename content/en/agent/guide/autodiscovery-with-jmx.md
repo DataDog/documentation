@@ -16,9 +16,9 @@ further_reading:
   text: "Dynamically assign and collect tags from your application"
 ---
 
-JMX-based integrations configuration used by the Datadog Agent can be too big to fit within Autodiscovery labels/annotations. To manipulate them you should use [Autodiscovery Container Identifiers][1].
+JMX-based integration configurations used by the Datadog Agent can be too big to fit within Autodiscovery labels/annotations. Use [Autodiscovery Container Identifiers][1].
 
-Find below an example with the Datadog-Kafka integration that leverage JMX to collect metrics and the Datadog Agent to send them to Datadog for:
+The Datadog-Kafka integration example below leverages JMX to collect metrics and the Datadog Agent to send them to Datadog.
 
 ### Agent preparation
 
@@ -28,8 +28,8 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
 1. Enable the Kafka integration by renaming `conf.yaml.example` into `conf.yaml` in the [Kafka integration directory][1]: `/etc/datadog-agent/conf.d/kafka.d`
 
 2. Replace the parameters values from `conf.yaml` to fit the Agent Autodiscovery logic:
-    The configuration files have by default host parameters value, if you are using the Agent with Autodiscovery you should use the [Autodiscovery Template Variables][2] instead.
-    For this example you should change the `host` parameter value from `localhost` to `%%host%%`:
+    The configuration files have host parameter values by default. If you are using the Agent with Autodiscovery, use the [Autodiscovery Template Variables][2] instead.
+    In the following example, change the `host` parameter value from `localhost` to `%%host%%`:
 
     ```yaml
       instances:
@@ -42,7 +42,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-3. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
+3. To specify to the Agent that you want to apply this configuration file to your Kafka containers, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
       ad_identifiers:
@@ -58,7 +58,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][3] as `ad_identifiers` if need be.
+    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][3] as `ad_identifiers` if needed.
 
 4. [Enable Autodiscovery for your Agent][4].
 
@@ -83,9 +83,9 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
     | [Tomcat][23]        | [metrics.yaml][24]  | [conf.yaml.example][25]  |
 
 2. Rename `conf.yaml.example` into `conf.yaml`.
-3. Replace the parameters values from `conf.yaml` to fit the Agent Autodiscovery logic:
-    The configuration files have by default host parameters value, if you are using the Agent with Autodiscovery you should use the [Autodiscovery Template Variables][26] instead.
-    For this example change the `host` parameter value from `localhost` to `%%host%%`:
+3. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic:
+     The configuration files have host parameter values by default. If you are using the Agent with Autodiscovery, use the [Autodiscovery Template Variables][26] instead.
+    In the following example, change the `host` parameter value from `localhost` to `%%host%%`:
 
     ```yaml
       instances:
@@ -98,7 +98,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-4. To specify to the Agent to apply this configuration file to your Kafka containers you have to configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
+4. To specify to the Agent that you want to apply this configuration file to your Kafka containers, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
       ad_identifiers:
@@ -114,7 +114,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
       # (...)
     ```
 
-    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][27] as `ad_identifiers` if need be.
+    **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][27] as `ad_identifiers` if needed.
 
 5. [After enabling Autodiscovery for your Agent][28], mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/kafka.d` folder.
 
@@ -151,7 +151,7 @@ Find below an example with the Datadog-Kafka integration that leverage JMX to co
 
 ### Container Preparation
 
-Once the Agent is configured and running, use the `com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER` label/annotations for your Kafka container to apply the Check configuration through autodiscovery:
+Once the Agent is configured and running, use the `com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER` label/annotations for your Kafka container to apply the check configuration through Autodiscovery:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -173,8 +173,8 @@ spec:
 
 **Note**:
 
-* To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
-* If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
+* To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, _not_ by image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
+* If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, ReplicaSets, or deployments, add pod annotations under `.spec.template.metadata`.
 
 {{% /tab %}}
 {{% tab "Docker" %}}
