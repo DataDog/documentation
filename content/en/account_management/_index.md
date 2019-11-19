@@ -52,7 +52,7 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 
 ## Appearance
 
-You can view Datadog in dark mode by hovering over your avatar in the sidebar or pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
 To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog’s appearance to the theme you’ve set at the OS level:
 
