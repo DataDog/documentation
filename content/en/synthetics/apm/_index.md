@@ -53,10 +53,13 @@ The following Datadog tracing libraries are supported:
 
 Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
 
-* `x-datadog-trace-id`, generated from the Synthetics backend. Allows Datadog to link the trace with the test result.
-* `x-datadog-parent-id: 0`
-* `x-datadog-origin: synthetics`, to make sure the generated traces don't affect your APM quotas. See below. For browser tests, the header is `x-datadog-origin: synthetics-browser`.
-* `x-datadog-sampling-priority: 1`, [to make sure that the Agent keeps the trace][10].
+| Header                                 | Description                                                                                                             |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `x-datadog-trace-id`                   | Generated from the Synthetics backend. Allows Datadog to link the trace with the test result.                           |
+| `x-datadog-parent-id: 0`               |                                                                                                                         |
+| `x-datadog-origin: synthetics`         | To make sure the generated traces from your API tests [don't affect your APM quotas](#how-are-apm-quotas-affected).     |
+| `x-datadog-origin: synthetics-browser` | To make sure the generated traces from your Browser tests [don't affect your APM quotas](#how-are-apm-quotas-affected). |
+| `x-datadog-sampling-priority: 1`       | [To make sure that the Agent keeps the trace][10].                                                                      |
 
 ### How are APM quotas affected?
 
