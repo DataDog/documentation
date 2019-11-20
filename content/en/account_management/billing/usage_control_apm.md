@@ -24,7 +24,7 @@ Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] 
 ### Analyzed Span Estimator
 [Analyzed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
-Steps to estimate the total number of Analyzed Spans expected to be sent per service per day or per month:
+To estimate the total number of analyzed spans expected to be sent per service per day or per month, follow these steps:
 
 1. Enable APM for all the Hosts that you want to estimate the Volume of Analyzed Spans for.
 2. On the [Estimator screen][7], select the services that you want to turn APM Analytics on.
