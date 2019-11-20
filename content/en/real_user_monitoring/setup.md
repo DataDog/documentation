@@ -4,10 +4,15 @@ kind: documentation
 description: ""
 beta: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
-  tag: "Blog"
-  text: "Real User Monitoring"
+- link: "/real_user_monitoring/views_explorer"
+  tag: "Documentation"
+  text: "Explore your views within Datadog"
+- link: "/real_user_monitoring/rum_analytics"
+  tag: "Documentation"
+  text: "Build analytics upon your views"
 ---
+
+To setup Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Add in Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
@@ -61,6 +66,10 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 For security reasons, [API keys][2] cannot be used to configure the script to send data from browsers, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum
 [2]: /account_management/api-app-keys/#api-keys
