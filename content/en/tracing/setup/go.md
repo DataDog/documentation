@@ -150,19 +150,15 @@ supported:
 * Datadog: `Datadog`
 * B3: `B3`
 
-Injection styles can be configured using the environment Variable
-`DD_PROPAGATION_STYLE_INJECTION=Datadog,B3`
+Injection styles can be configured using the environment variable
+`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
-The value of the property or environment variable is a comma separated list of
-header styles that are enabled for injection. By default only Datadog injection
-style is enabled.
-
-Extraction styles can be configured using the environment Variable
+Extraction styles can be configured using the environment variable
 `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
 
-The value of the property or environment variable is a comma separated list of
-header styles that are enabled for extraction. By default onlyDatadog extraction
-style is enabled.
+The values of these environment variables are comma separated lists of
+header styles that are enabled for injection or extraction. By default only
+Datadog extraction style is enabled.
 
 If multiple extraction styles are enabled extraction attempt is done
 on the order those styles are configured and first successful
