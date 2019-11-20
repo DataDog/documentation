@@ -11,7 +11,7 @@ aliases:
 
 The *[account settings][1]* page in Datadog allows you to control how you appear to others in your organization; switch or leave organizations; manage your notification preferences and more.
 
-## Setting your profile
+### Profile
 
 Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address and organizational role here.
 
@@ -19,7 +19,7 @@ To update your picture, create an account on [Gravatar][2] and associate it with
 
 If you log in to Datadog using Google authentication, your email address is provided by your Google account and is *not* editable within Datadog. To change your email address in Google, refer to the [Google documentation][3].
 
-## Managing your organizations
+### Organizations
 
 The *account settings* page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
@@ -40,19 +40,27 @@ If you are an organization administrator, reference the additional documentation
 * [Manage multi-organization accounts][9]
 * [Change your Datadog plan and view usage and billing history][10]
 
-## Connecting to GitHub
+### Preferences
 
-If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
-
-## Preferences
-
-You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][12] within the *account settings* page. Under email subscriptions, you have access to the following reports:
+You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][11] within the *account settings* page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
 * Weekly Monitor Report
 * Weekly Pagerduty Report
 * Weekly Nagios Report
+
+## Appearance
+
+View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+
+To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog’s appearance to the theme you’ve set at the OS level:
+
+{{< img src="account_management/dark-mode-toggle.png" alt="Dark mode" responsive="true" style="width:60%;">}}
+
+## Connecting to GitHub
+
+If you have installed the [GitHub integration][12] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
 ## Deleting your account
 
@@ -68,6 +76,6 @@ To delete your Datadog account completely, [contact our support team][13].
 [8]: /account_management/org_settings#change-your-organization-name
 [9]: /account_management/multi_organization
 [10]: /account_management/org_settings
-[11]: /integrations/github
-[12]: https://app.datadoghq.com/account/preferences
+[11]: https://app.datadoghq.com/account/preferences
+[12]: /integrations/github
 [13]: /help
