@@ -676,24 +676,24 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 ## Lookup Processor
 
 Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
-For example, use this Lookup processor to map an internal service ID into a friendly human readable service name. Indeed if machines prefer to manipulate IDs, humans tend to prefer names. 
-Or use it to check if the mac address that just attempted to connect to the production environment belongs to your list of stolen machines.
+For example, you can use the Lookup Processor to map an internal service ID into a human readable service name. 
+Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor" responsive="true" style="width:80%;">}}
 
-The processor perform the following actions:
+The processor performs the following actions:
 
-* Look if the current log contains the source attribute
-* Check if the source attribute value exist in the mapping table
-  * If it does, create the target attribute with the corresponding value in the table
-  * If it does not find it in the mapping table, optionally create the target attribute with the filled default value
+* Looks if the current log contains the source attribute.
+* Checks if the source attribute value exists in the mapping table.
+  * If it does, creates the target attribute with the corresponding value in the table.
+  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
 
-Fill the mapping table either manually be entering a list of `source_key,target_value` or by uploading a CSV file.
+You can fill the mapping table by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
 
-The size limit for the mapping table is 100Kb (limit applies across all lookup processors of the platform).
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -716,11 +716,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 | ------          | -----            | -------- | -----      |
 | `type`          | String           | yes      | Type of the processor.|
 | `name`          | String           | no       | Name of the processor.|
-| `is_enabled`    | Boolean          | yes      | If the processors is enabled or not, default: `false`|
-| `source`        | String           | yes      | Source attribute used to perform the lookup |
-| `target`        | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the default_lookup if not found in the mapping list|
-| `lookup_table`  | Array of strings | yes      | Mapping table of value for the source attribute and their associated target attribute value formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
-| `default_lookup`| String           | no       | Value set to the target attribute if the source value is not found in the list|
+| `is_enabled`    | Boolean          | yes      | If the processor is enabled or not. Default: `false`|
+| `source`        | String           | yes      | Source attribute used to perform the lookup. |
+| `target`        | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.|
+| `lookup_table`  | Array of strings | yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
+| `default_lookup`| String           | no       | Value to set the target attribute if the source value is not found in the list.|
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
