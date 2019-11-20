@@ -40,9 +40,7 @@ Choose the type of variable you want to create:
 4. Optional - Select **Tags** to associate to your variable.
 5. Optional - Enter a **Description** for your variable.
 
-
-{{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
-https://cl.ly/7ffe0eed3c3b 
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value" responsive="true" style="width:80%;">}}
 
 {{% /tab %}} 
 
