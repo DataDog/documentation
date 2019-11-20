@@ -55,7 +55,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 * `x-datadog-trace-id`, generated from the Synthetics backend. Allows Datadog to link the trace with the test result.
 * `x-datadog-parent-id: 0`
-* `x-datadog-origin: synthetics`, to make sure the generated traces don't affect your APM quotas. See below.
+* `x-datadog-origin: synthetics`, to make sure the generated traces don't affect your APM quotas. See below. For browser tests, the header is `x-datadog-origin: synthetics-browser`.
 * `x-datadog-sampling-priority: 1`, [to make sure that the Agent keeps the trace][10].
 
 ### How are APM quotas affected?
