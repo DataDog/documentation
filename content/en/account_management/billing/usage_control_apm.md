@@ -33,7 +33,7 @@ To estimate the total number of analyzed spans expected to be sent per service p
 {{< img src="tracing/faq/apm_span_estimator.png" alt="Analyzed Span Estimator">}}
 
 
-4. Total cost can be estimated by multiiplying the Total Volume * [Analyzed Span Retention Pricing][8]
+4. To estimate total cost, multiply the total volume * [analyzed span retention pricing][8].
 
 Ex. 1,750,000,000 Analyzed Spans per month for 15 days (default retention)
 
