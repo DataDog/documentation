@@ -26,11 +26,11 @@ Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] 
 
 Steps to estimate the total number of Analyzed Spans expected to be sent per service per day or per month:
 
-1. Enable APM for all the Hosts that you want to estimate the Analyzed 
+1. Enable APM for all the Hosts that you want to estimate the Volume of Analyzed Spans for.
 2. On the [Estimator screen][7], select the services that you want to turn APM Analytics on.
 3. Total Estimated Volume denotes the Estimated Total Volume of Analyzed Spans for all services per day and per month. Each row corresponding to the service represents the Estimated Volume of Analyzed Spans for that service per day.
 
-{{< img src="tracing/faq/apm_span_estimator.png" alt="Analyzed Span Estimator" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/faq/apm_span_estimator.png" alt="Analyzed Span Estimator">}}
 
 
 4. Total cost can be estimated by multiiplying the Total Volume * [Analyzed Span Retention Pricing][8]
