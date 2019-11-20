@@ -56,7 +56,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | Header                                 | Description                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | `x-datadog-trace-id`                   | Generated from the Synthetics backend. Allows Datadog to link the trace with the test result.                           |
-| `x-datadog-parent-id: 0`               |                                                                                                                         |
+| `x-datadog-parent-id: 0`               | To have Synthetics be the root span of the generated trace.                                                                                                                        |
 | `x-datadog-origin: synthetics`         | To make sure the generated traces from your API tests [don't affect your APM quotas](#how-are-apm-quotas-affected).     |
 | `x-datadog-origin: synthetics-browser` | To make sure the generated traces from your Browser tests [don't affect your APM quotas](#how-are-apm-quotas-affected). |
 | `x-datadog-sampling-priority: 1`       | [To make sure that the Agent keeps the trace][10].                                                                      |
