@@ -16,13 +16,15 @@ further_reading:
 
 La fonction [Check de cluster][1] permet de découvrir automatiquement des services de cluster à charge équilibrée (p. ex. les services Kubernetes) et d'effectuer des checks sur ces derniers. La fonction Checks d'endpoints repose sur le même principe et permet de surveiller l'ensemble des endpoints derrière des services de cluster.
 
-L'[Agent de cluster][2] conserve les configurations et les expose aux Agents basés sur des nœuds afin qu'ils puissent les lire et les convertir en checks d'endpoints.
+L'[Agent de cluster][2] conserve les configurations et les expose aux Agents de nœud afin qu'ils puissent les lire et les convertir en checks d'endpoints.
 
-Les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods épaulant le ou les endpoints du service surveillé.
+Les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods qui exposent le ou les endpoints du service surveillé.
 
 Les Agents se connectent à l'Agent de Cluster toutes les 10 secondes et récupèrent les configurations de check à exécuter. Les métriques provenant des checks d'endpoints seront envoyées avec des tags de service, de pod et de host.
 
 Cette fonction est actuellement prise en charge par Kubernetes pour les versions 6.12.0 et ultérieures de l'Agent et les versions 1.3.0 et ultérieures de l'Agent de cluster.
+
+À partir de la version 1.4.0 de l'Agent de cluster, chaque check pour un endpoint non exposé par un pod est converti en check de cluster classique. Pour tirer parti de cette fonctionnalité, assurez-vous d'activer les [checks de cluster][1] ainsi que les checks d'endpoints.
 
 #### Exemple : trois pods NGINX exposés par le service `nginx`
 ```
@@ -60,7 +62,7 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       name: nginx-758655469f-k8zrc
       ...
 ```
-De par leur nature, les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que les pods qui épaulent les endpoints du service `nginx`. Ainsi, seuls les Agents s'exécutant sur les nœuds `gke-cluster-default-pool-4658d5d4-k2sn` et `gke-cluster-default-pool-4658d5d4-p39c` planifient les checks sur les pods `nginx`.
+De par leur nature, les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que les pods qui exposent les endpoints du service `nginx`. Ainsi, seuls les Agents s'exécutant sur les nœuds `gke-cluster-default-pool-4658d5d4-k2sn` et `gke-cluster-default-pool-4658d5d4-p39c` planifient les checks sur les pods `nginx`.
 
 Ce fonctionnement permet d'exploiter [Autodiscovery] [3] et de joindre des tags de pod et de conteneur aux métriques envoyées par ces pods.
 
@@ -68,19 +70,33 @@ Ce fonctionnement permet d'exploiter [Autodiscovery] [3] et de joindre des tags 
 
 ### Configuration de l'Agent de cluster
 
-Cette fonction requiert un [Agent de cluster en cours d'exécution avec la fonction Checks de cluster activée][4].
+Activez le fournisseur de configuration et le service d'écoute `kube_endpoints` dans l'Agent de **cluster** Datadog. Pour ce faire, définissez les variables d'environnement `DD_EXTRA_CONFIG_PROVIDERS` et `DD_EXTRA_LISTENERS` :
+
+```
+DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
+DD_EXTRA_LISTENERS="kube_endpoints"
+```
+
+**Remarque** : si les endpoints surveillés ne sont pas exposés par des pods, vous devez [activer les checks de cluster][4]. Pour ce faire, ajoutez le fournisseur de configuration et le service d'écoute `kube_services` :
+
+```
+DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
+DD_EXTRA_LISTENERS="kube_endpoints kube_services"
+```
+
+[Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
 
 ### Configuration de l'Agent
 
 Activez les fournisseurs de configuration `endpointschecks` dans l'Agent **de nœud** Datadog. Pour ce faire, deux solutions s'offrent à vous :
 
-- Vous pouvez définir la variable d'environnement `DD_EXTRA_CONFIG_PROVIDERS` :
+- Vous pouvez définir la variable d'environnement `DD_EXTRA_CONFIG_PROVIDERS`. Si plusieurs valeurs doivent être définies, séparez-les par des espaces dans la chaîne :
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
 ```
 
-- Ou vous pouvez l'ajouter dans le fichier de configuration `datadog.yaml` :
+- Vous pouvez également l'ajouter dans le fichier de configuration `datadog.yaml` :
 
 ```yaml
 config_providers:
@@ -88,30 +104,29 @@ config_providers:
     polling: true
 ```
 
-[Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
+**Remarque** : si les endpoints surveillés ne sont pas exposés par des pods, vous devez [activer les checks de cluster][1]. Pour ce faire, ajoutez le fournisseur de configuration `clusterchecks` :
 
-**Remarque** : pour activer les checks de cluster et les checks d'endpoints, les fournisseurs de configuration `clusterchecks` et `endpointschecks` doivent tous deux être activés dans l'Agent **de nœud** Datadog.
+```
+DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
+```
+
+[Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
 
 ## Implémentation des configurations de check via les annotations de services Kubernetes
 
 De même qu'avec [l'annotation de pods Kubernetes][6], les services peuvent être annotés avec la syntaxe suivante :
 
 ```yaml
-  ad.datadoghq.com/service.check_names: '[<NOM_CHECK>]'
-  ad.datadoghq.com/service.init_configs: '[<CONFIG_INIT>]'
-  ad.datadoghq.com/service.instances: '[<CONFIG_INSTANCE>]'
   ad.datadoghq.com/endpoints.check_names: '[<NOM_CHECK>]'
   ad.datadoghq.com/endpoints.init_configs: '[<CONFIG_INIT>]'
   ad.datadoghq.com/endpoints.instances: '[<CONFIG_INSTANCE>]'
 ```
 
-La [template variable][7] `%%host%%` est prise en charge et remplacée par les fournisseurs d'identité du service et des endpoints. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés aux instances.
-
-**Remarque** : pour l'instant, il est nécessaire de définir les annotations `ad.datadoghq.com/service.*` et `ad.datadoghq.com/endpoints.*` pour activer les checks d'endpoints sur les endpoints du service.
+La [template variable][7] `%%host%%` est prise en charge et remplacée par les IP des endpoints. Les tags `kube_namespace`, `kube_service` et `kube_endpoint_ip` sont automatiquement ajoutés aux instances.
 
 #### Exemple : check HTTP sur un service basé sur NGINX avec le check NGINX sur les endpoints du service
 
-La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][8] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][9] sur les pods qui épaulent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
+La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][8] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][9] sur les pods qui exposent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
 
 ```yaml
 apiVersion: v1
@@ -150,52 +165,87 @@ spec:
 
 ## Dépannage
 
-Le dépannage de checks d'endpoints est semblable au [dépannage de checks de cluster][10]. La seule différence se situe au niveau des Agents basés sur le nœud, où les checks d'endpoints planifiés apparaissent à côté du check de cluster.
+Le dépannage de checks d'endpoints est semblable au [dépannage de checks de cluster][10]. La seule différence se situe au niveau des Agents de nœud, où les checks d'endpoints planifiés apparaissent à côté du check de cluster.
 
-**Remarque** : les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods épaulant le ou les endpoints du service.
+**Remarque** : les checks d'endpoints sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods qui exposent le ou les endpoints du service. Si un endpoint n'est pas exposé par un pod, l'Agent de cluster convertit le check en check de cluster. Le check de cluster peut être exécuté par n'importe quel Agent de nœud.
 
-### Autodiscovery dans l'Agent basé sur les nœuds
+### Autodiscovery dans l'Agent de nœud
 
-La commande `configcheck` de l'Agent doit afficher l'instance, avec la source `endpoints-checks` :
+La commande `configcheck` de l'Agent devrait renvoyer l'instance, avec la source de `endpoints-checks` :
 
 ```
 # kubectl exec <NOM_POD_AGENT_NŒUD> agent configcheck
 ...
 === nginx check ===
-Source: endpoints-checks
-Instance ID: nginx:My Nginx Service Endpoints:96eff84ce7d742b9
-name: My Nginx Service Endpoints
-nginx_status_url: http://10.0.0.116/nginx_status/
+Configuration provider: endpoints-checks
+Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
+Instance ID: nginx:My Nginx Service Endpoints:2f7fd6b090782d6b
+name: My Nginx Endpoints
+nginx_status_url: http://10.0.0.75/nginx_status/
 tags:
-- kube_deployment:nginx
-- kube_namespace:default
-- kube_service:nginx
 - pod_phase:running
+- kube_deployment:nginx
+- kube_service:nginx
+- kube_namespace:default
+- kube_endpoint_ip:10.0.0.75
+- cluster_name:cluster
 ~
 Init Config:
 {}
 Auto-discovery IDs:
-* kube_endpoint://default/nginx
-* kubernetes_pod://e8667db4-5f8e-11e9-ae71-42010af0016b
-* kube_service://6c964fcf-5d35-11e9-ae71-42010af0016b
+* kube_endpoint_uid://default/nginx/10.0.0.75
+* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
+State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 ===
 ```
 
-### Statut de l'Agent
+### Commande status de l'Agent
 
-La commande `status` de l'Agent doit indiquer que l'instance de check est en cours d'exécution et envoie correctement des informations.
+La commande `status` de l'Agent devrait indiquer que l'instance de check est en cours d'exécution et qu'elle envoie correctement des informations.
 
 ```
 # kubectl exec <NOM_POD_AGENT_NŒUD> agent status
 ...
-    nginx (3.1.0)
+    nginx (3.4.0)
     -------------
-      Instance ID: nginx:My Nginx Service Endpoints:96eff84ce7d742b9 [OK]
-      Total Runs: 2
-      Metric Samples: Last Run: 7, Total: 14
+      Instance ID: nginx:My Nginx Service Endpoints:2f7fd6b090782d6b [OK]
+      Configuration Source: kube_endpoints:kube_endpoint_uid://default/nginx/
+      Total Runs: 443
+      Metric Samples: Last Run: 7, Total: 3,101
       Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 2
-      Average Execution Time : 86ms
+      Service Checks: Last Run: 1, Total: 443
+      Average Execution Time : 5ms
+```
+
+### Autodiscovery dans l'Agent de cluster
+
+La commande `clusterchecks` de l'Agent devrait renvoyer l'instance, avec la source de `kubernetes-endpoints` :
+
+```
+# kubectl exec <NOM_POD_AGENT_CLUSTER> agent clusterchecks
+...
+===== 3 Pod-backed Endpoints-Checks scheduled =====
+
+=== nginx check ===
+Configuration provider: kubernetes-endpoints
+Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
+Instance ID: nginx:My Nginx Service Endpoints:f139adc46c81828e
+name: My Nginx Endpoints
+nginx_status_url: http://10.0.0.75/nginx_status/
+tags:
+- kube_service:nginx
+- kube_namespace:default
+- kube_endpoint_ip:10.0.0.75
+- cluster_name:cluster
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* kube_endpoint_uid://default/nginx/10.0.0.75
+* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
+State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
+===
+...
 ```
 
 ## Pour aller plus loin
