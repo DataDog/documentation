@@ -28,88 +28,106 @@ When you are monitoring a containerized infrastructure, one challenge that arise
 
 To solve this issue, you can use Datadog’s Autodiscovery feature to automatically identify the services running on a specific container and gather data from those services. Whenever a container starts, the Datadog Agent identifies which services are running on this new container, looks for the corresponding monitoring configuration, and starts to collect metrics.
 
-## Configuration
+Autodiscovery lets you define configuration templates for Agent checks and specify which containers each checks should apply to. 
 
-### Running the Agent on a host
+**For example**, imagine that you have deployed a simple guestbook application on Docker. It stores each guestbook entry in a Redis database. You are using a container orchestrator for scheduling, so you do not know the host IP address or port number to use for the Datadog Agent to connect to the Redis service. You enable Autodiscovery, and you create a configuration template for Redis that uses `%%host%%` and `%%port%%` variables. The Datadog Agent retrieves the actual host IP and port number from the Docker API and begins to gather Redis metrics for your application.
 
-{{< tabs >}}
-{{% tab "Docker" %}}
+The Agent then watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
 
-tk
+## Setup
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+Setting up Autodiscovery for your infrastructure requires the following two steps:
 
-tk
+1. [Enable Autodiscovery](#enable-autodiscovery) for your Datadog Agent.
+2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. Note that Datadog provides auto-configuration templates for [some common containerized services][3], including Apache and Redis.
 
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
+### Enable Autodiscovery 
 
-tk
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Running the Agent as a container
+#### With the Agent on a host
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-tk
+Add the following configuration block in the `datadog.yaml` [configuration file][1]. 
 
+```
+listeners:
+  - name: docker
+config_providers:
+  - name: docker
+    polling: true
+```
+
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-tk
+Add the following configuration block in the `datadog.yaml` [configuration file][1]. 
 
+```
+listeners:
+  - name: kubelet
+config_providers:
+  - name: kubelet
+    polling: true
+  # needed to support legacy docker label config templates
+  - name: docker
+    polling: true
+```
+
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
 
-tk
+ECS Fargate cannot be monitored with the Datadog Agent running as a binary on a host. 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Examples
+#### With the Agent as a container
 
-### Setting up a single check
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-### Setting up one check with multiple configurations
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent.
 
-### Setting up multiple checks
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
-### Using the Cluster Agent
+To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
-## How it works
+```
+KUBERNETES=true
+```
 
-In a traditional non-container environment, the Datadog Agent configuration is&mdash;like the environment in which it runs&mdash;static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).When an Agent Check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
-**With Autodiscovery enabled, the Agent runs checks differently.**
+To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
-The overall process of Datadog Agent Autodiscovery is:
+```
+ECS_FARGATE=true
+```
 
-1. **Create and Load Integration template**: When the Agent starts with Autodiscovery enabled, it loads integration templates from all [available template sources][1]; along with the [Autodiscovery container identifiers][2]. Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints like host or ports, so Autodiscovery uses [**Template Variables**][3] for integration template configuration. Those integration template configurations can be loaded into the Agent in 5 main ways:
+{{% /tab %}}
+{{< /tabs >}}
 
-  * [Using auto-configuration file shipped with the Agent][4]
-  * [Using a configuration file mounted within the Agent][5]
-  * [Using Key-Value Store][6]
-  * [Using Kubernetes Annotations][7]
-  * [Using Docker Labels][8]
+### Integration Templates
 
-2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Kubernetes/Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][2] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
+Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][3], including Apache and Redis, based on default Autodiscovery configuration files.
+
+To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][4] documentation for further details.
+
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/integrations
-[2]: /agent/autodiscovery/ad_identifiers
-[3]: /agent/autodiscovery/template_variables
-[4]: /agent/autodiscovery/auto_conf
-[5]: /agent/autodiscovery/integrations/?tab=file#configuration
-[6]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
-[7]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[8]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[9]: /agent/autodiscovery/template_variables
+
+[1]: /agent/autodiscovery/ad_identifiers
+[2]: /agent/autodiscovery/template_variables
+[3]: /agent/autodiscovery/auto_conf
+[4]: /agent/autodiscovery/integrations/?tab=kubernetes
