@@ -46,14 +46,16 @@ The type of interpolation described in this article is also not performed for ar
 
 ## How to control interpolation?
 
-The default interpolation for all metric types is linear and is performed up to 5 min after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers for when used on any metric type. Lean more about [metric types][2].
+The default interpolation for all metric types is linear and is performed up to 5 min after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][2].
 
-The fill modifier controls interpolation parameters:
+The `.fill()` modifier controls interpolation parameters:
 
-* `fill(linear, X)`: Gives you a linear interpolation up to X seconds after real samples.
-* `fill(last, X)`: Replicates the last sample value up to X secs.
-* `fill(zero, X)`: Inserts 0 where the interpolation is needed up to X secs.
-* `fill(null, X)`: Disables interpolation, the value of X doesn't matter.
+| Modifier          | Description                                                          |
+|-------------------|----------------------------------------------------------------------|
+| `fill(linear, X)` | Gives you a linear interpolation up to X seconds after real samples. |
+| `fill(last, X)`   | Replicates the last sample value up to X secs.                       |
+| `fill(zero, X)`   | Inserts 0 where the interpolation is needed up to X secs.            |
+| `fill(null, X)`   | Disables interpolation, the value of X doesn't matter.               |
 
 ## FAQ
 
@@ -73,5 +75,5 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
 
 [1]: /graphing/functions
-[2]: /developers/metrics
+[2]: /developers/metrics/types
 [3]: /graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why
