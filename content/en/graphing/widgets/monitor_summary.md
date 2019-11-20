@@ -30,7 +30,7 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
     {{< img src="graphing/widgets/monitor_summary/group_summary_type.png" alt="group summary type" responsive="true" style="width:80%;">}}
 
-    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi-alert monitors have only one row in the results list like in the `Monitor` summary type but the status column displays the number of groups in each status type that match the. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
+    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi-alert monitors have only one row in the results list like in the `Monitor` summary type but the groups column displays the number of groups in each status type instead of the monitor’s overall status. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
 
     {{< img src="graphing/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" responsive="true" style="width:80%;">}}
 
