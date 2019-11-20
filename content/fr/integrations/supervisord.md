@@ -7,6 +7,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - os & system
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -41,12 +42,9 @@ supported_os:
 Ce check surveille la disponibilité, l'état et le nombre de processus s'exécutant sous supervisord.
 
 ## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][10] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check Supervisor est inclus dans le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur les serveurs sur lesquels Supervisor s'exécute.
+Le check Supervisor est inclus dans le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur les serveurs qui exécutent Supervisor.
 
 ### Configuration
 
@@ -84,7 +82,9 @@ Si supervisor est exécuté en mode root, assurez-vous que `chmod` est défini d
 
 Rechargez supervisord.
 
-#### Associer l'Agent
+#### Host
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 Modifiez le fichier `supervisord.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de [configuration de votre Agent][3]. Consultez le [fichier d'exemple supervisord.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
@@ -119,6 +119,15 @@ Consultez [un exemple de check de configuration][4] pour obtenir les description
 
 [Redémarrez l'Agent][5] pour commencer à envoyer des métriques Supervisord à Datadog.
 
+#### Environnement conteneurisé
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][10] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                          |
+|----------------------|--------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `supervisord`                                                                  |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                  |
+| `<CONFIG_INSTANCE>`  | `{"host":"%%host%%", "port":"9001", "user":"<NOMUTILISATEUR>", "pass":"<MOTDEPASSE>"}` |
+
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][6] et cherchez `supervisord` dans la section Checks.
@@ -142,10 +151,10 @@ Renvoie CRITICAL si l'Agent n'est pas capable de se connecter au serveur HTTP ou
 
 L'Agent envoie ce check de service pour tous les processus enfants de supervisord (si aucune des options `proc_names` ou `proc_regex` n'est configurée) OU un ensemble de processus enfants (ceux qui sont configurés dans `proc_names` et/ou `proc_regex`), en appliquant le tag `supervisord_process:<nom_processus>` à chaque check de service.
 
-Ce tableau montre `supervisord.process.status` renvoyé pour chaque état de supervisord :
+Ce tableau montre le `supervisord.process.status` renvoyé pour chaque statut de supervisord :
 
 | supervisord status | supervisord.process.status |
-| ---                | ---                        |
+|--------------------|----------------------------|
 | STOPPED            | CRITICAL                   |
 | STARTING           | UNKNOWN                    |
 | RUNNING            | OK                         |

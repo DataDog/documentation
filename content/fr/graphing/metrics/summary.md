@@ -68,7 +68,7 @@ Modifiez le type de métrique pour mieux identifier le type de métrique réelle
 [5]: /fr/developers/metrics/custom_metrics
 [6]: /fr/tagging
 [7]: /fr/tagging/assigning_tags
-[8]: /fr/developers/metrics/metrics_units
-[9]: /fr/developers/metrics/metrics_type
+[8]: /fr/developers/metrics/units
+[9]: /fr/developers/metrics/types
 [10]: /fr/integrations
 [11]: https://github.com/DataDog/documentation/issues/new/choose

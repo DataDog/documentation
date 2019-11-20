@@ -40,4 +40,4 @@ La charge utile totale pèse environ 100 octets. Cependant, avec l'API DogStats
         la liste de tags associés à la métrique.
 
 [1]: /fr/developers/dogstatsd
-[2]: /fr/developers/metrics/metrics_type
+[2]: /fr/developers/metrics/types

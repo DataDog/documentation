@@ -1,5 +1,5 @@
 ---
-title: Log monitor
+title: Log Monitors
 kind: documentation
 further_reading:
   - link: monitors/notifications
@@ -10,87 +10,82 @@ further_reading:
     text: Planifier un downtime pour désactiver un monitor
   - link: monitors/monitor_status
     tag: Documentation
-    text: Consulter le statut de votre monitor
+    text: Vérifier le statut de votre monitor
 ---
-{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Aperçu log monitor" responsive="true" >}}
-
 ## Présentation
 
 Les log monitors envoient une alerte lorsqu'un type de log spécifié dépasse un seuil défini par l'utilisateur sur une période donnée.
 
-## Implémentation
+## Création d'un monitor
 
-Rédigez une requête pour contrôler ce qui doit être surveillé :
+Pour créer un [log monitor][1] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Logs*.
 
-1. Définissez la requête de recherche :
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Définir la requête de recherche" responsive="true" style="width:50%;" >}}
-    La requête de recherche possède le même comportement que [la recherche du Log Explorer][1]
+### Définir la requête de recherche
 
-2. Choisissez une [mesure][1] ou une [facette][2] à surveiller. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][2] affichent le nombre de valeurs.
+À mesure que vous définissez votre requête de recherche, le graphique au-dessus des champs de recherche se met à jour.
 
-    {{< img src="monitors/monitor_types/log/choose_measure_facet.png" alt="choisir mesure ou facette" responsive="true" style="width:50%;">}}
+1. Si vous avez [plusieurs index de logs][2], sélectionnez l'index dans lequel la recherche doit être effectuée.
+2. Créez votre requête de recherche en utilisant la même logique que pour une [recherche dans le Log Explorer][1].
+3. Choisissez de surveiller un nombre de logs, une [facette][4] ou une [mesure][5] :
+    * **Monitor over a log count** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de logs sur une période sélectionnée, puis le compare aux conditions de seuil.
+    * **Monitor over a facet** : si vous sélectionnez une [facette][4], le monitor envoie une alerte en fonction du `Unique value count` (nombre de valeurs uniques) de la facette.
+    * **Monitor over a measure** : si vous sélectionnez une [mesure][5], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
+4. Définissez les groupes d'alertes (facultatif). **Remarque** : que vous définissiez ou non des groupes d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions définies. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies définies. Ce système permet de réduire le nombre de notifications reçues.
 
-3. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous souhaitez surveiller :
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Monitor Below pour le service backend" responsive="true" style="width:60%;" >}}
 
-    {{< img src="monitors/monitor_types/log/agg_function.png" alt="fonction d'agrégation pour l'analyse de logs" responsive="true" style="width:50%;">}}
+### Définir vos conditions d'alerte
 
-4. Définissez le groupe d'alertes (facultatif) :
-  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Définir des conditions d'alerte" responsive="true" style="width:50%;" >}}
-    Que vous définissiez ou non le groupe d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions ci-dessous. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies ci-dessous. Ce système permet de réduire le nombre de notifications reçues.
+* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieur ou égale à, inférieure ou égale à)
+* au seuil durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
+* Seuil d'alerte `<NOMBRE>`
+* Seuil d'avertissement `<NOMBRE>`
 
-5. Définissez les conditions d'alerte. Vous pouvez utiliser les options suivantes :
+#### Absence de données et alertes Below
 
-  {{< img src="monitors/monitor_types/log/above_below.png" alt="fonction d'agrégation pour l'analyse de logs" responsive="true" style="width:50%;">}}
+Définissez la condition `below 1` pour recevoir une notification lorsque les groupes d'un service ont tous arrêté d'envoyer des logs. Vous serez ainsi alerté lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné pour tous les groupes d'agrégation.
 
-6. Configurez vos **options de notification** :
+Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte se déclenche **uniquement** s'il existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.  
 
-  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Définir des conditions d'alerte" responsive="true" style="width:50%;" >}}
+**Exemples** :
 
-  Reportez-vous à la page de la documentation relative aux [notifications][2] pour obtenir plus d'informations.
+* Le monitor suivant se déclenche uniquement s'il n'y a aucun log pour tous les services :
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service" responsive="true" style="width:60%;" >}}
+* Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :  
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend" responsive="true" style="width:60%;" >}}
 
+### Notifications
 
-## Exemples de logs et de notifications
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][6].
 
-Vous pouvez ajouter jusqu'à 10 exemples de logs qui ont déclenché le monitor dans le message de notification.
-Cette option est disponible avec Slack, Jira, Webhook, Microsoft Teams et les notifications par e-mail.
+#### Exemples de log
 
-* Les exemples ne sont pas affichés pour les notifications de rétablissement.
+Par défaut, lorsqu'un log monitor se déclenche, le message de notification envoyé comprend des exemples de log ou les valeurs principales.
 
- **Activer les exemples de logs dans les notifications** :
+| Élément surveillé     | Informations ajoutées au message de notification                                                                            |
+|------------------|----------------------------------------------------------------------------------------------------------|
+| Nombre de logs        | Alertes groupées : les 10 principales valeurs dépassant le seuil et les nombres de logs correspondants.<br>Alertes non groupées : jusqu'à 10 exemples de logs. |
+| Facette ou mesure | Les valeurs les plus élevées pour la facette ou la mesure.                                                                      |
 
-  {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activer les exemples de logs dans les messages" responsive="true" style="width:50%;" >}}
+Ces informations peuvent être envoyées via Slack, Jira, Webhook, Microsoft Teams ou e-mail. **Remarque** : les notifications de rétablissement n'affichent aucun exemple de log.
 
-  **Exemple pour une notification Slack** 
+Pour désactiver les exemples de logs, décochez la case correspondante en bas de la section **Say what's happening**. Le texte affiché à côté de la case reflète les groupes définis pour votre monitor (comme indiqué ci-dessus).
 
-  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Exemple de notification Slack" responsive="true" style="width:50%;" >}}
+#### Exemples
 
-### Notifications pour les groupes
+Inclure un tableau des 10 principales valeurs dépassant le seuil :
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 principales valeurs dépassant le seuil" responsive="true" style="width:60%;" >}}
 
-Les notifications provenant de monitors répartis par groupe peuvent comprendre les 10 principales valeurs dépassant le seuil plutôt que 10 exemples de logs.
+Inclure 10 exemples de log dans la notification d'alerte :
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="10 exemples de log" responsive="true" style="width:60%;" >}}
 
- **Activer l'affichage des 10 principales valeurs dépassant le seuil dans les notifications**
-
-{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activer les exemples de logs dans les messages" responsive="true" style="width:50%;" >}}
-
-**Exemple pour une notification Slack** 
-
- {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Exemple de notifications Slack" responsive="true" style="width:50%;" >}}
-
-## Aucune alerte de données et conditions Below
-
-Définissez la condition `below 1` afin d'être informé en l'absence de la réception d'un ensemble de logs. Cette condition vous envoie une notification lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné.
-
-Notez cependant que lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte est déclenchée **si et seulement s'il** existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.  
-
-Exemples :
-
-1. Le monitor suivant se déclenche si et seulement s'il n'y a aucun log pour tous les services :
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service" responsive="true" style="width:50%;" >}}
-2. Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend" responsive="true" style="width:50%;" >}}
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/search
-[2]: /fr/monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/log
+[2]: /fr/logs/indexes
+[3]: /fr/logs/explorer/search
+[4]: /fr/logs/explorer/?tab=facets#setup
+[5]: /fr/logs/explorer/?tab=measures#setup
+[6]: /fr/monitors/notifications

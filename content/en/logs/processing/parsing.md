@@ -107,7 +107,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
 | `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1]. |
 | `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
-| `decodeuricomponent`                                           | This core filter decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                                                                                  |
+| `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                                                                                  |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                           |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                           |
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
@@ -169,7 +169,7 @@ Some examples demonstrating how to use parsers:
 
 ### Key value
 
-This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
 
 * `separatorStr`: defines the separator. Defaults to `=`.
 * `characterWhiteList`: defines additional non-escaped value chars. Defaults to `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
@@ -193,12 +193,12 @@ rule %{data::keyvalue}
 
 {{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" style="width:80%;">}}
 
-You don't need to specify the name of your parameters as they were already contained in the log.
-If you add an **extract** attribute `my_attribute` in your rule pattern you would have:
+You don't need to specify the name of your parameters as they are already contained in the log.
+If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
 
 {{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" style="width:80%;">}}
 
-If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
+If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
 Log:
 
@@ -214,7 +214,7 @@ rule %{data::keyvalue(": ")}
 
 {{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" responsive="true" style="width:80%;" >}}
 
-If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
+If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the whitelist in the parsing rule:
 
 Log:
 
@@ -240,8 +240,8 @@ Other examples:
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 
-**Multiple QuotingString example**:  When quotingstring are defined, the default behavior is replaced by allowing only defined quoting character.
-The keyvalue always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters are extracted.
+**Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
+The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
 
 Log:
 
@@ -282,13 +282,13 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
 
-<sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see the [TZ database names][1].
+<sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see [TZ database names][1].
 
-**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][2] in a subsequent Processor.
+**Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
 
 ### Conditional pattern
 
-You might have logs with two possible formats which differ in only one attribute. These cases can be handled with a single rule, using conditionals with `(<REGEX_1>|<REGEX_2>)`.
+If you have logs with two possible formats which differ in only one attribute, set a single rule using conditionals with `(<REGEX_1>|<REGEX_2>)`.
 
 **Log**:
 ```
@@ -297,7 +297,7 @@ john connected on 11/08/2017
 ```
 
 **Rule**:
-Note that "id" is an integer and not a string thanks to the "integer" matcher in the rule.
+Note that "id" is an integer and not a string.
 
 ```
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -311,7 +311,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 ### Optional attribute
 
-Some logs contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
+Some logs contain values that only appear part of the time. In this case, make attribute extraction optional with `()?`.
 
 **Log**:
 ```
@@ -323,7 +323,7 @@ john 1234 connected on 11/08/2017
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
+**Note**: A rule will not match if you include a space after the first word in the optional section.
 
 {{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
 
@@ -331,7 +331,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 ### Nested JSON
 
-Use the `json` *filter* to parse a JSON object nested after a raw text prefix:
+Use the `json` filter to parse a JSON object nested after a raw text prefix:
 
 **Log**: 
 
@@ -349,7 +349,7 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 
 ### Regex
-Use the regex matcher to match any substring of your log message based on literal regex rules.
+Use the regex matcher to match any substring of your log message.
 
 **Log**:
 
@@ -358,7 +358,6 @@ john_1a2b3c4 connected on 11/08/2017
 ```
 
 **Rule**:
-Here we just look for the id to extract
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```

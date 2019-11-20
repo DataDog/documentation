@@ -63,7 +63,7 @@ Microsoft Teams インテグレーションには、サービスのチェック�
 ## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/developers/faq/what-do-notifications-do-in-datadog
+[1]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [2]: https://docs.datadoghq.com/ja/help
 
 

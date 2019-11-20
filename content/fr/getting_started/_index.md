@@ -11,7 +11,7 @@ further_reading:
 ---
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/getting_started/agent" >}}<u>Agent</u> : prenez en main l'Agent Datadog.{{< /nextlink >}}
-    {{< nextlink href="/getting_started/application" >}}<u>Application Datadog</u> : découvrez comment utiliser l'interface Datadog, notamment les tableaux de bord, la liste d'infrastructures, les cartes, etc.{{< /nextlink >}}
+    {{< nextlink href="/getting_started/application" >}}<u>Application Datadog</u> : découvrez comment utiliser l'interface Datadog, notamment les dashboard, la liste d'infrastructures, les cartes, etc.{{< /nextlink >}}
     {{< nextlink href="/getting_started/integrations" >}}<u>Intégrations</u> : apprenez à recueillir des métriques, des traces et des logs grâce aux intégrations Datadog.{{< /nextlink >}}
     {{< nextlink href="/getting_started/logs" >}}<u>Logs</u> : envoyez vos premiers logs et traitez-les pour les enrichir.{{< /nextlink >}}
     {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u> : découvrez le fonctionnement du tracing en configurant l'Agent de façon à tracer une application légère.{{< /nextlink >}}
