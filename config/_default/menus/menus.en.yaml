@@ -1343,10 +1343,17 @@ main:
     identifier: "account_management"
     weight: 150000
 
+  ## ACCOUNT MANAGEMENT - TEAM
+
   - name: "Team management"
     url: "account_management/team/"
     parent: "account_management"
+    identifier: "account_management_team"
     weight: 1
+  - name: "User Roles"
+    url: "account_management/team/roles/"
+    parent: "account_management_team"
+    weight: 101
 
   - name: "Organization settings"
     url: "account_management/org_settings/"
