@@ -11,4 +11,4 @@ config = {
     "lambda_arn": 'arn:aws:lambda:<REGION>:<AWS_ACCOUNT_ID>:function:<LAMBDA_FUNCTION_NAME>'
   }
 
-dog.add_aws_logs_lambda(config)
+dog.aws_logs_add_lambda(config)

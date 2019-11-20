@@ -6,4 +6,4 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.azure_list
+dog.azure_integration_list

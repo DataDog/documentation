@@ -11,4 +11,4 @@ config = {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.generate_external_id(config)
+dog.aws_integration_generate_external_id(config)

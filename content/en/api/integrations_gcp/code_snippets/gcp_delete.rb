@@ -11,4 +11,4 @@ config = {
     "client_email": "<GCP_CLIENT_EMAIL>"
   }
 
-dog.delete_gcp_integration(config)
+dog.gcp_integration_delete(config)

@@ -11,4 +11,4 @@ config = {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.delete_aws_integration(config)
+dog.aws_integration_delete(config)

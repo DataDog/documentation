@@ -13,4 +13,4 @@ config= {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.update_gcp_integration(config)
+dog.gcp_integration_update(config)

@@ -11,4 +11,4 @@ config = {
     "lambda_arn": 'arn:aws:lambda:<REGION>:<AWS_ACCOUNT_ID>:function:<LAMBDA_FUNCTION_NAME>'
   }
 
-dog.delete_aws_logs_integration(config)
+dog.aws_logs_integration_delete(config)

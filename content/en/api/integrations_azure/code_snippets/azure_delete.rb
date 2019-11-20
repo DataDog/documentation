@@ -11,4 +11,4 @@ config = {
     "client_id": '<AZURE_CLIENT_ID>'
   }
 
-dog.delete_azure_integration(config)
+dog.azure_integration_delete(config)

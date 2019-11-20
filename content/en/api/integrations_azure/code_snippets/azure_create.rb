@@ -13,4 +13,4 @@ config= {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.create_azure_integration(config)
+dog.azure_integration_create(config)

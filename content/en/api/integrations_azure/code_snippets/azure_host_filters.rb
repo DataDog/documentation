@@ -12,4 +12,4 @@ config= {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.update_azure_host_filters(config)
+dog.azure_integration_update_host_filters(config)

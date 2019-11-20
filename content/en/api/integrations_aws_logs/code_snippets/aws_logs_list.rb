@@ -6,4 +6,4 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.list_aws_logs_integrations
+dog.aws_logs_integrations_list

@@ -15,4 +15,4 @@ config = {
   "client_secret": "<AZURE_CLIENT_SECRET>"
 }
 
-dog.update_azure_integration(config)
+dog.azure_integration_update(config)
