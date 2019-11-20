@@ -19,24 +19,49 @@ further_reading:
 
 On the [Synthetics settings page][1], you can adjust the following settings:
 
-- [Secure Credentials](#secure-credentials)
+- [Global Variables](#global-variables)
 - [Private Locations][2]
 - [Variables][3]
 - [Default settings](#default-settings)
     - [Default Locations](#default-locations)
     - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
-## Secure Credentials
+## Global Variables
 
-Secure credentials are a secure username / password pair that can be used as [variables][3] for browser tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new secure credential:
+Global variables can be used by multiple API tests and [browser tests][3]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
+Choose the type of variable you want to create:
 
-1. Click *New Secure Credential* in the upper right corner of the settings page.
-2. Enter a **Credential Name**.
-3. Enter the given  `Username`/`Password`.
-4. Select **tags** to associate to your Credential.
-5. Optional - Enter a Description for your Credential.
+{{< tabs >}} 
+{{% tab "Specify Value" %}} 
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+2. Enter the given **Value**.
+3. Decide whether to make your variable secure or not. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional - Select **Tags** to associate to your variable.
+5. Optional - Enter a **Description** for your variable.
+
 
 {{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
+https://cl.ly/7ffe0eed3c3b 
+
+{{% /tab %}} 
+
+{{% tab "Create From HTTP Test" %}} 
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+2. Pick the test you want to extract your variable from.
+3. Decide whether to make your variable secure or not. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional - Select **Tags** to associate to your variable.
+5. Optional - Enter a **Description** for your variable.
+6. Decide whether to extract your variable from the response headers, or from the response body.
+    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][4].
+    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][4], or to use full response body.
+
+{{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
+
+{{% /tab %}} 
+
+{{< /tabs >}}
 
 ## Default Settings
 
@@ -58,3 +83,4 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
 [3]: /synthetics/browser_tests/#variable
+[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
