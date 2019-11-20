@@ -35,7 +35,7 @@ To estimate the total number of analyzed spans expected to be sent per service p
 
 4. To estimate total cost, multiply the total volume * [analyzed span retention pricing][8].
 
-Ex. 1,750,000,000 Analyzed Spans per month for 15 days (default retention)
+For example, if you have 1,750,000,000 analyzed spans per month for 15 days (default retention), you can calculate:
 
 1,750,000,000 Analyzed Spans per month * $1.70 / 1 million Analyzed Spans
 =$2,975/mo for App Analytics
