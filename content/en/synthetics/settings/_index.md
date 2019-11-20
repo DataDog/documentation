@@ -19,16 +19,15 @@ further_reading:
 
 On the [Synthetics settings page][1], you can adjust the following settings:
 
-- [Global Variables](#global-variables)
+- [Variables](#variables)
 - [Private Locations][2]
-- [Variables][3]
 - [Default settings](#default-settings)
     - [Default Locations](#default-locations)
     - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
-## Global Variables
+## Variables
 
-Global variables can be used by multiple API tests and [browser tests][3]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
+Variables are global and can be used by multiple API tests and [browser tests][3]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
 Choose the type of variable you want to create:
 
 {{< tabs >}} 
@@ -55,7 +54,7 @@ Choose the type of variable you want to create:
     * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][4].
     * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][4], or to use full response body.
 
-{{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Credential" responsive="true" style="width:80%;">}}
 
 {{% /tab %}} 
 
