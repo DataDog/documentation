@@ -1,21 +1,30 @@
 ---
 title: Rollup
 kind: documentation
+disable_toc: true
 ---
 
 `.rollup()`
 
-Recommended for expert users only. Datadog rolls up data points automatically, based on the in-app metric type: `gauge` metrics are averaged by default, whereas `count` and `rate` metrics are summed. Appending this function to the end of a query allows you to override the default behavior: to control the rollup method, or the number of raw points rolled up into a single point plotted on the graph.
+Recommended for expert users only. Datadog rolls up data points automatically, based on the in-app metric type: `GAUGE` type metrics are averaged by default, whereas `COUNT` and `RATE` metrics are summed. Appending this function to the end of a query allows you to override the default behavior: to control the rollup method, or the number of raw points rolled up into a single point plotted on the graph.
 
-The function takes two parameters, method and time: `.rollup(method,time)`. The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+The function takes two parameters, method and time: `.rollup(method,time)`. The method can be `sum`/`min`/`max`/`count`/`avg` and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. Datadog impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
 
-Note that rollups should usually be avoided in [monitor][1] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, users should delay the evaluation of the monitor by (at least) the length of the rollup interval.
+Here is a bar graph displaying a week's worth of cpu usage for a host without using the `.rollup()` function:
 
-## .as_count() or as_rate()
+{{< img src="graphing/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
 
-These functions are only intended for metrics submitted as rates or counters via StatsD. These functions have no effect for other metric types. For more details about how to use `.as_count()` and `.as_rate()` see [our blog post][2].
+And here is the same metric, graphed using a day-long rollup with `.rollup(86400)`:
 
-Note: [The only available query with `as_count()` is `sum()`][3] (unless using a rollup summary), which is the only mathematical accurate function with such behavior. Learn more with the [detailed documentation about in-application modifiers][4].
+{{< img src="graphing/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
+
+Rollups should usually be avoided in [monitor][1] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
+
+**Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets `.rollup(sum)` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
+
+  {{< img src="graphing/functions/rollup/as_count.png" alt="as_count" responsive="true" style="width:50%;">}}
+
+For more details about how to use `.as_count()` and `.as_rate()` see [our blog post][2] or learn more about the effects of those functions with the [detailed documentation about in-application modifiers][3].
 
 ## Other functions
 
@@ -33,5 +42,4 @@ Note: [The only available query with `as_count()` is `sum()`][3] (unless using a
 
 [1]: /monitors/monitor_types/metric
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[3]: /graphing/faq/as_count_validation
-[4]: /developers/metrics/type_modifiers
+[3]: /developers/metrics/type_modifiers
