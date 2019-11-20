@@ -51,7 +51,7 @@ Additionally, certain features are not available at the moment to customers who 
 
 * Users cannot request support via chat
 * Rehydration from Log Archives is disabled
-* Generation of Metrics from logs is disabled
+* Generation of metrics from logs is disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
 * You cannot [share][6] logs (nor traces) from the explorer through web integrations.
