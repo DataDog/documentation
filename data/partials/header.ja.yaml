@@ -103,12 +103,12 @@ right:
       - name: blog_engineering
         link: 'https://www.datadoghq.com/ja/blog/engineering/'
         title: エンジニアリング
-      - name: blog_community
-        link: 'https://www.datadoghq.com/ja/blog/community/'
-        title: コミュニティ
       - name: blog_pupculture
         link: 'https://www.datadoghq.com/ja/blog/pup-culture/'
         title: 企業文化
+      - name: blog_community
+        link: 'https://www.datadoghq.com/ja/blog/community/'
+        title: コミュニティ
   - name: docs
     link: ''
     title: ドキュメント

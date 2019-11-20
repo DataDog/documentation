@@ -15,11 +15,7 @@ further_reading:
   text: "Network Widget"
 ---
 
-<div class="alert alert-warning">
-Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
-</div>
-
-Network performance monitoring requires Datadog Agent v6.13+. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+. 
+Network performance monitoring requires [Datadog Agent v6.14+][1]. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
 
 Supported platforms include:
 
@@ -27,39 +23,36 @@ Supported platforms include:
 * Debian 9+
 * Fedora 26+
 * SUSE 15+
+* Amazon AMI 2016.03+
+* Amazon Linux 2
 
-There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][4]. 
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2].
 
 **Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
 The following provisioning systems are supported:
 
-* Daemonset / Helm: See the [Datadog Helm chart][1]
-* Chef: See the [Datadog Chef recipe][2]
+* Daemonset / Helm: See the [Datadog Helm chart][3]
+* Chef: See the [Datadog Chef recipe][4]
 * Ansible: See the [Datadog Ansible role][5]
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][3] based on your system setup:
+To enable network performance monitoring, configure it in your [Agent's main configuration file][6] based on your system setup:
 
 {{< tabs >}}
 {{% tab "Agent" %}}
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. Enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
-
+1. Copy the system-probe example configuration:
     ```
-    process_config:
-      enabled: "true"
+    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
-    Learn more about [Datadog Live Processes data collection][2].
 
-2. Copy the system-probe example configuration:<br>
-`sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml`
-3. Modify the system-probe configuration file to set the enable flag to `true`.<br>
+2. Modify the system-probe configuration file to set the enable flag to `true`.<br>
 
-4. Optionally uncomment the `system_probe_config` parameter to add a custom object:
+3. Optionally uncomment the `system_probe_config` parameter to add a custom object:
     ```
     ## @param system_probe_config - custom object - optional
     ## (...)
@@ -67,7 +60,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     system_probe_config:
     ```
 
-5. Enter specific configurations for your System Probe data collection:
+4. Enter specific configurations for your System Probe data collection:
     ```
     system_probe_config:
         ## @param enabled - boolean - optional - default: false
@@ -76,12 +69,10 @@ To enable network performance monitoring with the Datadog Agent, use the followi
         enabled: true
     ```
 
-6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
-7. [Restart the Agent][3]: `sudo service datadog-agent restart`
+5. Start the system-probe: `sudo service datadog-agent-sysprobe start`
+6. [Restart the Agent][1]: `sudo service datadog-agent restart`
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /graphing/infrastructure/process
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -209,8 +200,9 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
-[2]: https://github.com/DataDog/chef-datadog
-[3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[4]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe 
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
+[3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
+[4]: https://github.com/DataDog/chef-datadog
+[5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file

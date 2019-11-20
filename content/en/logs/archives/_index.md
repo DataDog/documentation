@@ -93,10 +93,6 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
 {{% tab "Google Cloud Storage" %}}
 
-<div class="alert alert-warning">
-    GCS Archives are in private beta. Request early access by contacting <a href="/help">Datadog Support</a>. GCS Archives do not yet support rehydration.
-</div>
-
 1. Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 
 2. Set up the [GCP integration][3] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCS Service Account that Datadog can use][4] to integrate with.
