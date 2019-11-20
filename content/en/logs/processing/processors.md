@@ -673,6 +673,60 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Lookup Processor
+
+Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
+For example, use this Lookup processor to map an internal service ID into a friendly human readable service name. Indeed if machines prefer to manipulate IDs, humans tend to prefer names. 
+Or use it to check if the mac address that just attempted to connect to the production environment belongs to your list of stolen machines.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor" responsive="true" style="width:80%;">}}
+
+The processor perform the following actions:
+
+* Look if the current log contains the source attribute
+* Check if the source attribute value exist in the mapping table
+  * If it does, create the target attribute with the corresponding value in the table
+  * If it does not find it in the mapping table, optionally create the target attribute with the filled default value
+
+Fill the mapping table either manually be entering a list of `source_key,target_value` or by uploading a CSV file.
+
+The size limit for the mapping table is 100Kb (limit applies across all lookup processors of the platform).
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Processor JSON payload:
+
+```json
+{
+  "type" : "lookup-processor",
+  "name" : "<PROCESSOR_NAME>",
+  "is_enabled" : true,
+  "source" : "<SOURCE_ATTRIBUTE>",
+  "target" : "<TARGET_ATTRIBUTE>",
+  "lookup_table" : [ "key1,value1", "key2,value2" ],
+  "default_lookup" : "<DEFAULT_TARGET_VALUE>",
+}
+```
+
+| Parameter       | Type             | Required | Description|
+| ------          | -----            | -------- | -----      |
+| `type`          | String           | yes      | Type of the processor.|
+| `name`          | String           | no       | Name of the processor.|
+| `is_enabled`    | Boolean          | yes      | If the processors is enabled or not, default: `false`|
+| `source`        | String           | yes      | Source attribute used to perform the lookup |
+| `target`        | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the default_lookup if not found in the mapping list|
+| `lookup_table`  | Array of strings | yes      | Mapping table of value for the source attribute and their associated target attribute value formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
+| `default_lookup`| String           | no       | Value set to the target attribute if the source value is not found in the list|
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Trace Remapper
 
 There are two ways to improve correlation between application traces and logs:
