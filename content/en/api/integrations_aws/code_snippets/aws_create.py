@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Aws.create(
+api.AwsIntegration.create(
     account_id="<AWS_ACCOUNT_ID>",
     host_tags=["tag:example"],
     filter_tags=["filter:example"],

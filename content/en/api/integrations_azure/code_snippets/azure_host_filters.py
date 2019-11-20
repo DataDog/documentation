@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Azure.update_host_filters(
+api.AzureIntegration.update_host_filters(
     tenant_name="<AZURE_TENANT_NAME>",
     host_filters="new:filters",
     client_id="<AZURE_CLIENT_ID>"

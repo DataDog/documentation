@@ -8,7 +8,7 @@ options = {
 initialize(**options)
 
 # For account_id/role_name
-api.Aws.update(
+api.AwsIntegration.update(
     account_id="<EXISTING_AWS_ACCOUNT_ID>",
     role_name="<EXISTING_AWS_ROLE_NAME>",
     new_account_id="<NEW_AWS_ACCOUNT_ID>",

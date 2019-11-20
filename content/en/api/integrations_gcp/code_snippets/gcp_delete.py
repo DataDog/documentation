@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Gcp.delete(
+api.GcpIntegration.delete(
     project_id="<GCP_PROJECT_ID>",
     client_email="<GCP_CLIENT_EMAIL>"
 )

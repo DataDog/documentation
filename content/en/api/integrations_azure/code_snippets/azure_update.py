@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Azure.update(
+api.AzureIntegration.update(
     tenant_name="<EXISTING_AZURE_TENANT_NAME>",
     new_tenant_name="<NEW_AZURE_TENANT_NAME>",
     host_filters="new:filters",

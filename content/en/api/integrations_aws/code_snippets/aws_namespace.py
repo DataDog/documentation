@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Aws.list_namespace_rules()
+api.AwsIntegration.list_namespace_rules()

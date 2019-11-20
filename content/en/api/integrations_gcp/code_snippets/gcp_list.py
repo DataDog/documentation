@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Gcp.list()
+api.GcpIntegration.list()

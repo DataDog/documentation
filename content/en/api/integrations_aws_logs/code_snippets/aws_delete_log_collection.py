@@ -10,4 +10,4 @@ initialize(**options)
 account_id = "<AWS_ACCOUNT_ID>"
 lambda_arn = "arn:aws:lambda:<REGION>:<AWS_ACCOUNT_ID>:function:<LAMBDA_FUNCTION_NAME>"
 
-api.AwsLogs.delete_config(account_id=account_id, lambda_arn=lambda_arn)
+api.AwsLogsIntegration.delete_config(account_id=account_id, lambda_arn=lambda_arn)

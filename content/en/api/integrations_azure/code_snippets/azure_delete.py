@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Azure.delete(
+api.AzureIntegration.delete(
     tenant_name="<AZURE_TENANT_NAME>",
     client_id="<AZURE_CLIENT_ID>"
 )

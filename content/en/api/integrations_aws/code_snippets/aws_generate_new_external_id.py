@@ -10,4 +10,4 @@ initialize(**options)
 account_id = "<AWS_ACCOUNT_ID>"
 role_name = "<AWS_ROLE_NAME>"
 
-api.Aws.generate_new_external_id(account_id=account_id, role_name=role_name)
+api.AwsIntegration.generate_new_external_id(account_id=account_id, role_name=role_name)

@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.AwsLogs.list_log_services()
+api.AwsLogsIntegration.list_log_services()

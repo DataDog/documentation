@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.AwsLogs.list()
+api.AwsLogsIntegration.list()

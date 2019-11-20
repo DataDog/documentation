@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Azure.list()
+api.AzureIntegration.list()

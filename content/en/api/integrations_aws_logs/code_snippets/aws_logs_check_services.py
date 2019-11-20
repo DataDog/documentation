@@ -10,4 +10,4 @@ initialize(**options)
 account_id = "<AWS_ACCOUNT_ID"
 services = ["s3", "elb", "elbv2", "cloudfront", "redshift", "lambda"]
 
-api.AwsLogs.check_services(account_id=account_id, services=services)
+api.AwsLogsIntegration.check_services(account_id=account_id, services=services)

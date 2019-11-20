@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Aws.list()
+api.AwsIntegration.list()

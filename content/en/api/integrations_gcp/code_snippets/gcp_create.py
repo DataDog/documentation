@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-api.Gcp.create(
+api.GcpIntegration.create(
     type="service_account",
     project_id="<GCP_PROJECT_ID>",
     private_key_id="<GCP_PRIVATE_KEY_ID>",
