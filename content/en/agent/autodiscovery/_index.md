@@ -30,9 +30,10 @@ To solve this issue, you can use Datadog’s Autodiscovery feature to automatica
 
 Autodiscovery lets you define configuration templates for Agent checks and specify which containers each checks should apply to. 
 
+The Agent watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
+
 **For example**, imagine that you have deployed a simple guestbook application on Docker. It stores each guestbook entry in a Redis database. You are using a container orchestrator for scheduling, so you do not know the host IP address or port number to use for the Datadog Agent to connect to the Redis service. You enable Autodiscovery, and you create a configuration template for Redis that uses `%%host%%` and `%%port%%` variables. The Datadog Agent retrieves the actual host IP and port number from the Docker API and begins to gather Redis metrics for your application.
 
-The Agent then watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
 
 ## Setup
 
