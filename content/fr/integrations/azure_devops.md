@@ -12,7 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
 git_integration_title: azure_devops
 has_logo: true
 integration_title: Microsoft Azure DevOps
-is_public: false
+is_public: true
 kind: integration
 manifest_version: 1
 name: azure_devops
