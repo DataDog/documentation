@@ -17,7 +17,7 @@ The `fill()` function has two parameters:
     * **zero**: Fills the gap with a zero value.
     * **null**: Deactivates the interpolation.
 
-* `LIMIT`: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
+* `LIMIT` [*optional*, *default*=**300**, *maximum*=**600**]: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
 
 ## Other functions
 
