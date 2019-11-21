@@ -5,7 +5,7 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data-store
+  - data store
   - os & system
   - processing
   - log collection
