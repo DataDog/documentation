@@ -54,7 +54,7 @@ Choose the type of variable you want to create:
     * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][5].
     * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][5], or to use full response body.
 
-{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Credential" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:60%;">}}
 
 {{% /tab %}} 
 
