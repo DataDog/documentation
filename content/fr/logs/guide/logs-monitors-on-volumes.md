@@ -10,7 +10,7 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
-Recevez une notification dès que les volumes de votre infrastructure grandissent de manière imprévue, peu importe leur contexte (`service`, `availibility-zone`, etc.) :
+Recevez une notification dès que les volumes de votre infrastructure grandissent de manière imprévue, peu importe leur contexte (`service`, `availability-zone`, etc.) :
 
 1. Accédez à la vue [Log Explorer de Datadog][1]
 2. Créez une [requête de recherche][2] qui correspond au volume à surveiller.
