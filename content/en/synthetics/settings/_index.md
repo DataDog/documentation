@@ -81,5 +81,5 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_test#use-variables
+[3]: /synthetics/api_tests#use-variables
 [4]: /synthetics/browser_tests#use-variables
