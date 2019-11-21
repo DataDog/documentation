@@ -27,7 +27,7 @@ On the [Synthetics settings page][1], you can adjust the following settings:
 
 ## Variables
 
-Variables are global and can be used by multiple API tests and [browser tests][3]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
+Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
 Choose the type of variable you want to create:
 
 {{< tabs >}} 
@@ -51,8 +51,8 @@ Choose the type of variable you want to create:
 4. Optional - Select **Tags** to associate to your variable.
 5. Optional - Enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
-    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][4].
-    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][4], or to use full response body.
+    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][5].
+    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][5], or to use full response body.
 
 {{< img src="synthetics/settings/variable_specifyvalue.png" alt="Credential" responsive="true" style="width:80%;">}}
 
@@ -79,5 +79,6 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
-[3]: /synthetics/browser_tests/#variable
-[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[3]: /synthetics/api_test#use-variables
+[4]: /synthetics/browser_tests#use-variables
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
