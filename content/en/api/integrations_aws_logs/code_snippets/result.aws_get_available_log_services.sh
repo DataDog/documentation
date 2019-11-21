@@ -1,1 +1,1 @@
-{}
+[{"id":"s3","label":"S3 Access Logs"},{"id":"elb","label":"Classic ELB Access Logs"},{"id":"elbv2","label":"Application ELB Access Logs"},{"id":"cloudfront","label":"CloudFront Access Logs"},{"id":"redshift","label":"Redshift Logs"},{"id":"lambda","label":"Lambda Cloudwatch Logs"}]
