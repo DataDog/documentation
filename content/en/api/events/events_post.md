@@ -40,5 +40,5 @@ This endpoint allows you to post events to the stream. Tag them, set priority an
     A list of device names to post the event with.
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /developers/events/email.md#markdown
+[2]: content/en/developers/events/email.md#markdown
 [3]: /integrations/faq/list-of-api-source-attribute-value
