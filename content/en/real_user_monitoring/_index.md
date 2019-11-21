@@ -29,7 +29,7 @@ The `datadog-rum` library supports all modern desktop and mobile browsers. Resou
 
 ## Data collected
 
-The Datadog-Real User Monitoring script sends to Datadog three main types of events:
+By default, all data collected is kept at full granularity for 15 days. The Datadog-Real User Monitoring script sends to Datadog three main types of events:
 
 - Events about pages loading:
     - DOM interactive time

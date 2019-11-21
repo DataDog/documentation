@@ -21,7 +21,7 @@ The time range feature allows you to display view in the view steam or Analytics
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="real_user_monitoring/views_explorer/rum_time_selector.png" alt="Rum time selector" responsive="true" style="width:40%;">}}
+{{< img src="real_user_monitoring/rum_explorer/rum_time_selector.png" alt="Rum time selector" responsive="true" style="width:40%;">}}
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
@@ -76,7 +76,7 @@ You can search for numerical attribute within a specific range. For instance, re
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="real_user_monitoring/views_explorer/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/rum_explorer/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
 
 #### Examples
 
@@ -97,13 +97,13 @@ Note: To leverage the most out of your views explorer page, make sure your views
 
 A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of views represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
-{{< img src="real_user_monitoring/views_explorer/rum_facet.png" alt="Facets demo" responsive="true" style="width:80%;">}}
+{{< img src="real_user_monitoring/rum_explorer/rum_facet.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
 **Create a Facet**:
 
 To start using an attribute as a facet or in the search, click on it and add it as a facet in the:
 
-{{< img src="real_user_monitoring/views_explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
+{{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
 
@@ -117,7 +117,7 @@ A measure is a attribute with a numerical value contained in your views.
 
 To start using an attribute as a measure, click on a numerical attribute of your views:
 
-{{< img src="real_user_monitoring/views_explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
+{{< img src="real_user_monitoring/rum_explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
 
@@ -125,7 +125,7 @@ Once this is done, the value of this attribute is stored **for all new views** a
 
 Each measure has its own unit that is then used for display in the views explorer columns and RUM Analytics.
 
-{{< img src="real_user_monitoring/views_explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+{{< img src="real_user_monitoring/rum_explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
 [1]: /real_user_monitoring/ruma_analyics
 {{% /tab %}}

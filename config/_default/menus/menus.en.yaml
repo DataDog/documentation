@@ -1113,12 +1113,12 @@ main:
     identifier: "synthetics_troubleshooting"
     weight: 7
 
-###################
-## UX Monitoring ##
-###################
+##########################
+## Real User Monitoring ##
+##########################
 
 
-  - name: "UX Monitoring"
+  - name: "Real User Monitoring"
     url: "real_user_monitoring/"
     pre: "nav_rum"
     identifier: "rum"
