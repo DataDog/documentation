@@ -46,6 +46,8 @@ Define the configuration of your browser test.
 
 You can use the [variables defined in the `Settings`][5] in the URL and Advanced Options of your browser tests. To display your list of variables, you need to type in `{{` in the field of interest.
 
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
+
 ### Alert conditions
 
 An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations.
