@@ -20,13 +20,13 @@ Template variables allow you to dynamically filter one or more widgets in a dash
 
 ## Create
 
-To create your first template variable in the dashboard, click **Add Template Variables**. If template variables are already defined, click on the *pencil* icon to open the template variable editor. Once in edit mode, click on **Add Variable +** to add another template variable.
+To create your first template variable in the dashboard, click **Add Template Variables**. If template variables are already defined, click on the *pencil* icon to open the template variable editor. Once in edit mode, click on **Add Variable +** to add a template variable.
 
 A template variable is defined by:
 
 * **Name**: A unique name for the template variable. This name is used to filter content on your dashboard.
 * **Tag or Attribute**:
-    * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>` part of your tag.
+    * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
     * Attribute: Use a [facet or measure as the template variable](#logs-and-apm-queries).
 * **Default Value**:
     The default value for your template variable tag or attribute.
@@ -40,7 +40,7 @@ After creating a template variable, Datadog displays the number of sources using
 ### Logs and APM queries
 
 Template variables work with log and APM widgets because metrics, logs, and APM share the same tags.
-Additionally, you can define log or APM template variables based on [log][2] or APM facets. These template variables start with `@`, for example `@http.status_code`.
+Additionally, you can define log or APM template variables based on [log][2] or APM facets. These variables start with `@`, for example: `@http.status_code`.
 
 **Note**: Using **Add to all** for this type of template variable adds the variable to all log and APM widgets.
 
@@ -71,7 +71,7 @@ Template variables are used in widgets and event overlays.
 
 ### Widgets
 
-Defined a template variables display as options in the `from` field when creating or editing a widget. For example, if you create the template variable `env`, the option `$env` is available.
+When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you create the template variable `env`, the option `$env` is available.
 
 After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
 
@@ -79,18 +79,18 @@ After the widget is saved, the value of the template variable is the one selecte
 
 #### Text
 
-For text based widgets, you can display a template variable name and value with `$<TEMPLATE_VARIABLE_NAME>` or display just the value with `$<TEMPLATE_VARIABLE_NAME>.value`. For example with a template variable named `env` and a selected value of `dev`:
+For text based widgets, you can display a template variable name and value with `$<TEMPLATE_VARIABLE_NAME>` or display just the value with `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env` and a selected value of `dev`:
 
 * `$env` displays `env:dev`
 * `$env.value` displays `dev`
 
 ### Events overlay
 
-The [events overlay][3] search allows you to correlate metrics and events. Use template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
+Use the [events overlay][3] search with template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
 
 Values from dashboard template variables can be directly captured by using the `$<TEMPLATE_VARIABLE_KEY>.value` syntax in the event search field.
 
-**Note**: Dashboard template variables must be metric tags; event-supplied tags cannot be used as dashboard template variables.
+**Note**: Dashboard template variables must be metric tags, not event tags.
 
 #### Single template variable
 
@@ -122,4 +122,4 @@ Find below an example that uses the `env` tags together with the `hosts` `tag` i
 
 [1]: /tagging/#defining-tags
 [2]: /logs/explorer/?tab=facets#setup
-[3]: /graphing/event_stream
+[3]: /graphing/dashboards/timeboard/#events
