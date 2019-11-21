@@ -14,9 +14,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-## Default Datadog User Roles
-
-Datadog provides 3 user roles:
+Datadog provides 3 user roles by default:
 
 | Role          | Description                                                                                                                                                                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -27,7 +25,7 @@ Datadog provides 3 user roles:
 ## Create a custom Role
 
 <div class="alert alert-warning">
-This feature is in private beta. <a href="/help">Contact Datadog support</a>. to get it enabled for your Account.
+This feature is in private beta. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
 </div>
 
 To create a custom Role:
@@ -35,7 +33,7 @@ To create a custom Role:
 1. Go in your [Datadog Roles page][6].
 2. Select **New Role** in the upper right corner of the page.
 3. Give a name to your Role.
-4. Select the permission associated to this.
+4. Select the permission associated with this.
 
 {{< img src="account_management/team/create_role.png" alt="Create a custom Role" responsive="true" style="width:90%;">}}
 
@@ -51,7 +49,7 @@ All permissions have up to 3 options that can be selected: Read, Write, and Othe
 |-----------------|-------------|-------------|----------------------------------------------|
 | Admin           | *undefined* | *undefined* | Read and write permission to all of Datadog  |
 | Standard        | *undefined* | *undefined* | Read and write permission to most of Datadog |
-| Read-Only       | *undefined* | *undefined* | Read permission to most of datadog           |
+| Read-Only       | *undefined* | *undefined* | Read permission to most of Datadog           |
 
 #### Logs
 
