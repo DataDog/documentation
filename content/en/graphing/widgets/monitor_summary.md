@@ -26,7 +26,7 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
     {{< img src="graphing/widgets/monitor_summary/monitor_summary_type.png" alt="monitor summary type" responsive="true" style="width:80%;">}}
 
-    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi-alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi-alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the Triggered Monitors page. The Status Counts are the number of matching monitor groups with each status type.
+    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi-alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi-alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the [Triggered Monitors page][3]. The Status Counts are the number of matching monitor groups with each status type.
 
     {{< img src="graphing/widgets/monitor_summary/group_summary_type.png" alt="group summary type" responsive="true" style="width:80%;">}}
 
@@ -37,7 +37,7 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 2. Enter a monitor query to display the monitor summary widget over a subset of your monitors. 
     - If you have template variables created in your dashboard and wish to include them in your monitor query, simply type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard will appear for you to select your desired template variable.
 
-    **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the Triggered Monitors page.
+    **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors page][3].
 
 ## Options
 #### Display preferences
@@ -94,3 +94,4 @@ MANAGE_STATUS_SCHEMA = {
 
 [1]: /monitors/manage_monitor
 [2]: /graphing/graphing_json/widget_json
+[3]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
