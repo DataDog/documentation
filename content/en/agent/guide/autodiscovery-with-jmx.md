@@ -117,7 +117,7 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
     **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][27] as `ad_identifiers` if needed.
 
 5. [After enabling Autodiscovery for your Agent][28], mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/kafka.d/` folder.
-6. (Optional) - If you can't mount those file in the Agent container (like on AWS ECS for instance), you need to re-build the Agent docker image with those two configuration file in it:
+6. (Optional) - If you can't mount those files in the Agent container (like on AWS ECS), you should re-build the Agent docker image with those two configuration files in it:
 
     ```
     FROM datadog/agent:latest
