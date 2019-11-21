@@ -53,7 +53,6 @@ curl -X POST \
          -d '{
              "data": {
                  "type": "authn_mappings",
-                 "id": "123e4567-e89b-12d3-a456-426655440000",
                  "attributes": {
                       "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "string",
@@ -146,7 +145,7 @@ Returns a list of AuthN Mappings
 * **`sort`** [*optional*, *default*=**+**]:
   Sort attribute and direction—defaults to ascending order, `-` sorts in descending order.
 * **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
-  The page of results to return. 
+  The page of results to return.
 * **`page[size]`** [*optional*, *default*=**10**]:
   The number of results to return on each page.
 * **`filter`** [*optional*, no default]:
