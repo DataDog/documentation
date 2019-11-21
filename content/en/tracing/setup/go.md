@@ -145,10 +145,7 @@ Datadog APM tracer supports [B3 headers extraction][58] and injection for distri
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Currently two styles are
-supported:
-
-* Datadog: `Datadog`
-* B3: `B3`
+supported: `Datadog` and `B3`.
 
 Injection styles can be configured using the environment variable
 `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
@@ -160,8 +157,8 @@ The values of these environment variables are comma separated lists of
 header styles that are enabled for injection or extraction. By default only
 Datadog extraction style is enabled.
 
-If multiple extraction styles are enabled extraction attempt is done
-on the order those styles are configured and first successful
+If multiple extraction styles are enabled, extraction attempts are made
+in the order that those styles are specified and the first successful
 extracted value is used.
 
 ## Change Agent Hostname
