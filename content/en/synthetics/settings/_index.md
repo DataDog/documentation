@@ -51,10 +51,10 @@ Choose the type of variable you want to create:
 4. Optional - Select **Tags** to associate to your variable.
 5. Optional - Enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
-    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][1].
-    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][1], or to use full response body.
+    * **Extract the value from response header**: use the full response header for your variable, or you parse it with a [regex][1].
+    * **Extract the value from response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:60%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 
