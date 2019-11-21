@@ -51,10 +51,12 @@ Choose the type of variable you want to create:
 4. Optional - Select **Tags** to associate to your variable.
 5. Optional - Enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
-    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][5].
-    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][5], or to use full response body.
+    * Extract the value from response header. You can either decide to use the full response header for your variable, or you can parse it with a [regex][1].
+    * Extract the value from response body. You can decide to parse the response body of the request with a JSON path, with a [regex][1], or to use full response body.
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:60%;">}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 
 {{% /tab %}} 
 
@@ -81,4 +83,3 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 [2]: /synthetics/private_locations
 [3]: /synthetics/api_test#use-variables
 [4]: /synthetics/browser_tests#use-variables
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
