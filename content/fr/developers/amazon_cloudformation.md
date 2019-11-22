@@ -1,5 +1,6 @@
 ---
-{kind: documentation, title: Datadog/Amazon CloudFormation}
+kind: documentation
+title: Datadog/Amazon CloudFormation
 ---
 
 ​
