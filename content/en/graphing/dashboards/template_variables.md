@@ -33,7 +33,7 @@ A template variable is defined by:
 
 After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable is used in one out of two graphs:
 
-{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" style="width:70%;">}}
+{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" style="width:85%;">}}
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
@@ -48,7 +48,7 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 #### Create
 
-{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:85%;">}}
 
 To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view. 
 To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables. 
@@ -57,13 +57,11 @@ To save the current values of the template variables in a view, click on the dro
 
 To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
-#### Modify
-
 {{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Manage View Popup" responsive="true" style="width:75%;">}}
 
-To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. 
+#### Modify
 
-If any values in the other views are changed, save the values as a new view, and then delete the original view. 
+To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view. 
 
 ## Use
 
@@ -92,29 +90,33 @@ Values from dashboard template variables can be directly captured by using the `
 
 **Note**: Dashboard template variables must be metric tags, not event tags.
 
-#### Single template variable
+#### Dashboard
 
-For example, to search for events in the event stream with the same region tag, use: `tags:region:$region.value`.
+From your dashboard, search the event stream with template variables using the format:
 
-{{< img src="graphing/dashboards/template_variables/tv5.png" alt="tv5" responsive="true" style="width:75%;">}}
+```
+tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
+```
 
-In the following example, the template variable resolves to `tags:region:ap-south-1`. After those events are brought up in the event search overlay, the timing of the events are marked by pink bars in the graphs to show the timing of events:
+For example, searching for `tags:region:$region.value` with a value of `us-east1` for the `region` template variable displays events tagged with `region:us-east1`. Additionally, the timing of the events are marked by pink bars in the graphs.
 
-{{< img src="graphing/dashboards/template_variables/tv7.png" alt="tv7" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_dashboard.png" alt="Search dashboard" responsive="true" style="width:85%;">}}
 
-#### Multiple template variables
+Use commas to search using multiple template variables, for example: `tags:role:$role.value,env:$env.value`
 
-Use multiple template variables in the search field to display all corresponding events tagged. The following example uses the query `tags:role:$role.value,env:$env.value`
+**Note**: Once you hit *enter* to search, `$region.value` updates to the value in the template variable drop-down.
 
-{{< img src="graphing/dashboards/template_variables/tv8.png" alt="tv8" responsive="true" style="width:85%;">}}
+#### Widgets
 
-#### Associating template variables with other tags
+From your widgets, overlay the timing of the events using template variables with the format:
 
-Use the `$<TEMPLATE_VARIABLE_KEY>.value` syntax to capture the resolved `key:value` from a given template variable and use it with other filters.
+```
+tags:$<TEMPLATE_VARIABLE_NAME>
+```
 
-Find below an example that uses the `env` tags together with the `hosts` `tag` in the search term `tags:env:$env.value hosts:$host.value`
+For example, enter `tags:$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down:
 
-{{< img src="graphing/dashboards/template_variables/tv9.png" alt="tv9" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_widget.png" alt="Search widget" responsive="true" style="width:85%;">}}
 
 ## Further Reading
 
