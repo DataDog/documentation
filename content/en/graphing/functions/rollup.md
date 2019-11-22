@@ -7,7 +7,7 @@ kind: documentation
 
 *Recommended for expert users only.*
 
-Appending the `.rollup()` function at the end of a query allows you to do a custom [time aggregation][1], i.e it defines what are the time intervals for your graph and how data points are aggregated within a given time interval.
+Appending the `.rollup()` function at the end of a query allows you to do a custom [time aggregation][1], i.e. it defines what are the time intervals for your graph and how data points are aggregated within a given time interval.
 
 The function takes two parameters, `<METHOD>` and `<TIME>`: `.rollup(<METHOD>,<TIME>)`.
 
@@ -20,7 +20,7 @@ You can use either one individually, or both together like `.rollup(sum,120)` fo
 
 {{< img src="graphing/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
 
-And now it is the same metric, graphed using a day-long rollup with `.rollup(86400)`:
+And now it is the same metric, graphed using a day-long rollup with `.rollup(avg,86400)`:
 
 {{< img src="graphing/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
 
@@ -28,7 +28,7 @@ And now it is the same metric, graphed using a day-long rollup with `.rollup(864
 
 When graphing, Datadog imposes a limit of 350 points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric.
 
-If a custom `.rollup()` function is applied and is lower than the Datadog limit, the Datadog limit is used instead. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than 350 points.
+A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and the time interval to rollup. However, if a custom `.rollup()` function is applied and uses a smaller time interval than the Datadog limit, the Datadog limit is used instead while still using the specified rollup method. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than 350 points.
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
