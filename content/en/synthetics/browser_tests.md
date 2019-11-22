@@ -44,7 +44,7 @@ Define the configuration of your browser test.
 
 ### Use variables
 
-You can use the [variables defined in the `Settings`][5] in the URL and Advanced Options of your browser tests. To display your list of variables, you need to type in `{{` in the field of interest.
+You can use the [variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
 

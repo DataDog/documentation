@@ -27,7 +27,7 @@ On the [Synthetics settings page][1], you can adjust the following settings:
 
 ## Variables
 
-Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the `Variables` tab of your `Settings` page, and click *New Variable* in the upper right corner of your page.  
+Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Variables** tab of your **Settings** page, and click **New Variable** in the upper right corner of your page.  
 Choose the type of variable you want to create:
 
 {{< tabs >}} 
@@ -35,9 +35,9 @@ Choose the type of variable you want to create:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter the given **Value**.
-3. Decide whether to make your variable secure or not. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
-4. Optional - Select **Tags** to associate to your variable.
-5. Optional - Enter a **Description** for your variable.
+3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional: select **Tags** to associate to your variable.
+5. Optional: enter a **Description** for your variable.
 
 {{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value" responsive="true" style="width:80%;">}}
 
@@ -47,9 +47,9 @@ Choose the type of variable you want to create:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Pick the test you want to extract your variable from.
-3. Decide whether to make your variable secure or not. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
-4. Optional - Select **Tags** to associate to your variable.
-5. Optional - Enter a **Description** for your variable.
+3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional: select **Tags** to associate to your variable.
+5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
     * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
