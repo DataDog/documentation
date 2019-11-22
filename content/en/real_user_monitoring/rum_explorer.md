@@ -1,19 +1,19 @@
 ---
-title: Views Explorer
+title: RUM Explorer
 kind: documentation
 description: ""
 beta: true
 further_reading:
 - link: "/real_user_monitoring/rum_analytics"
   tag: "Documentation"
-  text: "Build analytics upon your views"
+  text: "Build analytics upon your events."
 ---
 
-The Views Explorer allow you to explore all your views collected from your different applications.
+The RUM Explorer allow you to explore all your events collected from your different applications.
 
 ## Context
 
-Build up a context to explore your views in your views explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and Analytics.
+Build up a context to explore your events in your RUM explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your events and Analytics.
 
 ### Time Range
 
@@ -38,11 +38,11 @@ There are two types of terms:
 
 To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
-| **Operator** | **Description**                                                                                       |
-|--------------|-------------------------------------------------------------------------------------------------------|
-| `AND`        | **Intersection**: both terms are in the selected views (if nothing is added, AND is taken by default) |
-| `OR`         | **Union**: either term is contained in the selected views                                             |
-| `-`          | **Exclusion**: the following term is NOT in the view                                                  |
+| **Operator** | **Description**                                                                                        |
+|--------------|--------------------------------------------------------------------------------------------------------|
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) |
+| `OR`         | **Union**: either term is contained in the selected events                                             |
+| `-`          | **Exclusion**: the following term is NOT in the view                                                   |
 
 #### Facets search
 
@@ -56,19 +56,19 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 Searching on a facet value that contains special characters requires escaping or double quotes. The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
-The same logic is applied to spaces within views facet names. Views facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`.
+The same logic is applied to spaces within events facet names. Events facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`.
 
 ##### Wildcards
 
-To perform a multi-character wildcard search, use the `*` symbol. For instance, `@http.url:https:\/\/*` matches every views that has an url starting with `https://`.
+To perform a multi-character wildcard search, use the `*` symbol. For instance, `@http.url:https:\/\/*` matches every events that has an url starting with `https://`.
 
 ##### Numerical values
 
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all views that have a duration over 100ms with:
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all events that have a duration over 100ms with:
 
 `@duration:>100`
 
-You can search for numerical attribute within a specific range. For instance, retrieve all your views with a duration between 100ms and 300ms:
+You can search for numerical attribute within a specific range. For instance, retrieve all your events with a duration between 100ms and 300ms:
 
 `@duration:[100 TO 300]`
 
@@ -80,22 +80,22 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 #### Examples
 
-| Search query                                                 | Description                                                                                                                                         |
-|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                      | Searches all views containing `/api/v1/test` in the attribute `http.url_details.path`.                                                              |
-| `@http.url:\/api\/v1\/*`                                     | Searches all views containing a value in `http.url` attribute that start with `/api/v1/`                                                            |
-| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all views with a `duration` between 100 and 300 ms, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
+| Search query                                                 | Description                                                                                                                                          |
+|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `@http.url_details.path:"/api/v1/test"`                      | Searches all events containing `/api/v1/test` in the attribute `http.url_details.path`.                                                              |
+| `@http.url:\/api\/v1\/*`                                     | Searches all events containing a value in `http.url` attribute that start with `/api/v1/`                                                            |
+| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all events with a `duration` between 100 and 300 ms, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
 ## Facets & Measures
 
-After [being collected][1], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Analytics][2].
+After [being collected][1], your events attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Analytics][2].
 
-Note: To leverage the most out of your views explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
+Note: To leverage the most out of your RUM explorer page, make sure your events attributes follow [Datadog attribute naming convention][3].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
 
-A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of views represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
+A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
 {{< img src="real_user_monitoring/rum_explorer/rum_facet.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
@@ -105,25 +105,25 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new events** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
 
 [1]: /real_user_monitoring/rum_analyics
 {{% /tab %}}
 {{% tab "Measures" %}}
 
-A measure is a attribute with a numerical value contained in your views.
+A measure is a attribute with a numerical value contained in your events.
 
 **Create a Measure**:
 
-To start using an attribute as a measure, click on a numerical attribute of your views:
+To start using an attribute as a measure, click on a numerical attribute of your events:
 
 {{< img src="real_user_monitoring/rum_explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new events** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
 
 **Select the Measure Unit**:
 
-Each measure has its own unit that is then used for display in the views explorer columns and RUM Analytics.
+Each measure has its own unit that is then used for display in the RUM explorer columns and RUM Analytics.
 
 {{< img src="real_user_monitoring/rum_explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
