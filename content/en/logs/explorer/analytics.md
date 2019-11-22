@@ -138,15 +138,16 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 {{% tab "Map" %}}
 
-Visualize the top values according to a chosen [measure][2] on a map.
+Visualize the top values according to a chosen [measure][2] on a map. The [facet][1] according to which you group by has to be a facet whose value are Country Isocodes (2 characters). Datadog's [GeoIP Processor][3] naturally generates such kind values.
 
-
- The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+The following Table Log Analytics shows the top 10 country per number of logs (e.g. error logs) collected with Datadog's [Browser Agent][4], over the last 2 days:
 
 {{< img src="logs/explorer/analytics/map_example.png" alt="table example" responsive="true" style="width:90%;">}}
 
 [1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/?tab=measures#setup
+[3]: /logs/processing/processors/?tab=ui#geoip-parser
+[4]: /logs/log_collection/javascript/?tab=us
 {{% /tab %}}
 
 {{< /tabs >}}
