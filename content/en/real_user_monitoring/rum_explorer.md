@@ -2,7 +2,6 @@
 title: RUM Explorer
 kind: documentation
 description: ""
-beta: true
 further_reading:
 - link: "/real_user_monitoring/rum_analytics"
   tag: "Documentation"
@@ -86,6 +85,12 @@ Use the search bar's autocomplete feature to complete your query using existing 
 | `@http.url:\/api\/v1\/*`                                     | Searches all events containing a value in `http.url` attribute that start with `/api/v1/`                                                            |
 | `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all events with a `duration` between 100 and 300 ms, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
+## Vizualisation
+
+Click on any event to open the event panel and see more details about it: Resources, Traces, Errors, User Action, Long task, Logs, and Attributes:
+
+{{< img src="real_user_monitoring/rum_explorer/rum_views.png" alt="Rum View" responsive="true" style="width:80%;">}}
+
 ## Facets & Measures
 
 After [being collected][1], your events attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Analytics][2].
@@ -117,7 +122,7 @@ A measure is a attribute with a numerical value contained in your events.
 
 To start using an attribute as a measure, click on a numerical attribute of your events:
 
-{{< img src="real_user_monitoring/rum_explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
+{{< img src="real_user_monitoring/rum_explorer/create_measure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new events** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
 
@@ -125,9 +130,9 @@ Once this is done, the value of this attribute is stored **for all new events** 
 
 Each measure has its own unit that is then used for display in the RUM explorer columns and RUM Analytics.
 
-{{< img src="real_user_monitoring/rum_explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+{{< img src="real_user_monitoring/rum_explorer/edit_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
-[1]: /real_user_monitoring/ruma_analyics
+[1]: /real_user_monitoring/rum_analyics
 {{% /tab %}}
 {{< /tabs >}}
 

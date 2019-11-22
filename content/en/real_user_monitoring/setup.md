@@ -38,6 +38,15 @@ Paste the generated code snippet into the head tag (in front of any other script
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
+
+  // OPTIONAL
+
+  // add global metadata attribute--one attribute can be added at a time
+  window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+
+  // Entirely replace the default context for all your views
+  window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+
 </script>
 ```
 
@@ -54,6 +63,14 @@ Paste the generated code snippet into the head tag (in front of any other script
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
+
+  // OPTIONAL
+  // add global metadata attribute--one attribute can be added at a time
+  window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+
+  // Entirely replace the default context for all your views
+  window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+
 </script>
 ```
 
@@ -65,7 +82,6 @@ Paste the generated code snippet into the head tag (in front of any other script
 ### Client Tokens
 
 For security reasons, [API keys][2] cannot be used to configure the script to send data from browsers, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
-
 
 ## Further Reading
 

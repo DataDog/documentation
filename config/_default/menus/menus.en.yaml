@@ -1139,6 +1139,11 @@ main:
     parent: "rum"
     identifier: "rum_analytics"
     weight: 3
+  - name: "Settings"
+    url: "real_user_monitoring/settings"
+    parent: "rum"
+    identifier: "rum_analytics_settings"
+    weight: 4
 
 ####################################
 ## Network Performance Monitoring ##
