@@ -136,7 +136,7 @@ Returns a list of AuthN Mappings
 
 | Method | Endpoint path        | Required payload          |
 |--------|----------------------|---------------------------|
-| `GET`  | `/v2/authn_mappings` | optional query parameters |
+| `GET`  | `/v2/authn_mappings` | Optional query parameters |
 
 ##### ARGUMENTS
 
