@@ -136,6 +136,19 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 [2]: /logs/explorer/?tab=measures#setup
 {{% /tab %}}
 
+{{% tab "Map" %}}
+
+Visualize the top values according to a chosen [measure][2] on a map.
+
+
+ The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+
+{{< img src="logs/explorer/analytics/map_example.png" alt="table example" responsive="true" style="width:90%;">}}
+
+[1]: /logs/explorer/?tab=facets#setup
+[2]: /logs/explorer/?tab=measures#setup
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Related logs
