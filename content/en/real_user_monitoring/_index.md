@@ -29,14 +29,15 @@ The `datadog-rum` library supports all modern desktop and mobile browsers. Resou
 
 ## Data collected
 
-By default, all data collected is kept at full granularity for 15 days. The Datadog-Real User Monitoring script sends to Datadog three main types of events:
+By default, all data collected is kept at full granularity for 15 days. The Datadog-Real User Monitoring script sends to Datadog 5 main types of events:
 
-- Events about pages loading:
-    - DOM interactive time
-    - First paint time
-    - First contentful paint time
-- Events about resources loading
-- [Custom events and measures][1].
+| Event Category | Description                                                                                                                                                                                                                                                                                                                                              |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| View           | Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .                                                                                                                                                       |
+| Resource       | A resource event can be generated for images, XHR/Fetch, CSS, JS libraries. It contains information about the resource like its name and its associated loading duration.                                                                                                                                                                                |
+| Long task      | Any task in a browser that blocks the main thread for more than 50ms is considered as a long task and gets a specific event generation. This causes input latency, event handling latency etc. Only available in Chrome and Opera. See the [Long Task MDN documentation][1] for more info. |
+| Error          | Everytime an error is logged in the browser consol, RUM catches it and send it as an Error Event to Datadog.                                                                                                                                                                                                                                             |
+| User Action    | A User Action event is a custom event that can be generated for a given user action.                                                                                                                                                                                                                                                                     |
 
 The following contexts-following the [Datadog Standard Attributes][2] logic-are then attached automatically to all events sent to Datadog:
 
@@ -50,7 +51,8 @@ The following contexts-following the [Datadog Standard Attributes][2] logic-are 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/javascript/?tab=us#send-a-custom-log-entry
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
 [2]: /logs/processing/attributes_naming_convention
 [3]: /logs/processing/attributes_naming_convention/#http-requests
 [4]: /logs/processing/attributes_naming_convention/#url-details-attributes
