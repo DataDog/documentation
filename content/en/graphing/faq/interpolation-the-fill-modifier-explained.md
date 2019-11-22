@@ -46,7 +46,7 @@ The type of interpolation described in this article is also not performed for ar
 
 ## How to control interpolation?
 
-The default interpolation for all metric types is linear and is performed up to 5 min after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][2].
+The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][2].
 
 The `.fill()` modifier controls interpolation parameters:
 
