@@ -24,7 +24,7 @@ On the [SLO page][1], select **New SLO +**. Then select **Event**.
 There are two queries to define. The first query defines the sum of the good events, while the second query defines the sum of
 the total events.
 
-Datadog reccomends the `sum by` aggregator and to add all events.
+Datadog recommends the `sum by` aggregator and to add all events.
 
 **Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`.
 The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events

@@ -14,91 +14,77 @@ further_reading:
 ---
 Les timeboards possèdent une disposition automatique. Ils représentent un seul point (fixe ou en temps réel) sur l'ensemble du dashboard. Ils sont généralement utilisés pour le dépannage, la corrélation et l'exploration globale des données.
 
-## Corrélation d'événements
+**Remarque** : tous les graphiques d'un timeboard sont contrôlé par un unique paramètre. Pour modifier l'intervalle d'un graphique précis, utilisez un [screenboard][1].
 
-La corrélation d'événements désigne la superposition d'événements en haut d'un graphique de dashboard. Vous pouvez activer la corrélation à deux moments différents : lorsque vous configurez le dashboard ou au moment de son affichage.
+## Mode TV
 
-### Graphiques individuels
+Utilisez le mode TV pour afficher votre timeboard sur de grands écrans ou des téléviseurs en cliquant sur l'icône TV sur le timeboard ou en utilisant le raccourci clavier `F`.
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides corrélation d'événements sur un screenboard" responsive="true" style="width:90%;">}}
+## Paramètres
 
-Pour activer la corrélation d'événements au moment de la configuration, modifiez le graphique de votre choix sur les timeboards et screenboards et ajoutez des événements au graphique. Vous trouverez plus d'informations sur l'ajout d'événements [à l'aide de l'IU][1] ou via l'interface JSON en bas de la page.
+Les réglages des timeboards sont les mêmes que ceux des screenboards, à l'exception de la création d'URL publiques :
 
-### Dashboard complet
+* [Display UTC time][2]
+* [Notifications][3]
+* [Permissions][4]
+* [Clone dashboard][5]
+* [Copy, import, or export dashboard JSON][6]
+* [Delete dashboard][7]
 
-{{< img src="graphing/dashboards/event-search.png" alt="guides corrélation d'événements" responsive="true" style="width:75%;">}}
+## Ajout de graphiques
 
-Configurez la corrélation d'événements au moment de l'affichage en cliquant sur le lien *Search Events or Logs* en haut à gauche, puis sur **Events**. Ensuite, entrez une requête dans la barre de recherche. Cela remplace tous les événements ajoutés au moment de la configuration et applique les événements à l'ensemble des graphiques de ce dashboard en les superposant.
+Après avoir [créé votre timeboard][8], ajoutez des graphiques à l'aide du bouton **Edit widgets** ou du lien **Add graph**, puis faites glisser le [widget][9] approprié vers le timeboard.
 
-## Corréler vos logs avec vos métriques
+## Recherche
+### Événements
 
-### Rechercher des logs dans les timeboards
+Pour configurer une superposition d'événements, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Événements**, puis saisissez une [requête][10] dans la zone de recherche. Cela remplace les superpositions d'événements ajoutées lors de la conception du timeboard et applique les réglages à l'ensemble des graphiques. La superposition affiche le nombre d'occurrences des événements sur vos graphiques de séries temporelles et présente la liste des événements à droite de la fenêtre.
 
-Cliquez sur le lien *Search Events or Logs* en haut à gauche, puis sélectionnez **Logs**. Ensuite, saisissez une requête dans la barre de recherche. La fréquence des logs s'affiche alors en superposition sur vos widgets de séries temporelles. Cliquez sur un log spécifique pour afficher l'ensemble de son contenu.
+{{< img src="graphing/dashboards/timeboard/events_overlay.png" alt="Superposition d'événements" responsive="true" style="width:75%;">}}
 
-{{< img src="graphing/dashboards/log-search.png" alt="Ouvrir la recherche de logs" responsive="true" style="width:75%;">}}
+### Logs
 
+Pour configurer une superposition de logs, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Logs**, puis saisissez une [requête][11] dans la zone de recherche. La superposition affiche le nombre d'occurrences des logs sur vos graphiques de séries temporelles et présente la liste des logs à droite de la fenêtre.
 
-### Passer d'une métrique à ses logs
+## Menu des graphiques
 
-Une corrélation rapide et facile est essentielle lorsque vous dépannez un problème. Utilisez le raccourci suivant depuis n'importe quel graphique de série temporelle pour ouvrir un menu contextuel avec les logs les plus pertinents.
+Cliquez sur un graphique de série temporelle d'un dashboard pour ouvrir le menu des options :
 
-{{< img src="graphing/dashboards/related_logs.png" alt="Logs associés" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/timeboard/metric_to_logs.png" alt="Logs associés" responsive="true" style="width:80%;">}}
 
-Sélectionnez `View related logs` pour accéder à la page Log Explorer et zoomer sur l'intervalle sélectionné avec le contexte actuel de votre graphique.
+| Option                 | Description                                                   |
+|------------------------|---------------------------------------------------------------|
+| Annotate this graph    | Rédigez un commentaire ou envoyez une alerte à des membres d'équipe à propos de ce graphique. |
+| View in full screen    | Affichez le graphique [en plein écran][12].                     |
+| Copy tags to clipboard | Copiez dans votre presse-papiers les tags qui s'affichent lorsque vous passez votre curseur.        |
+| View related processes | Accédez à la page [Live Processes][13] en appliquant un filtre basé sur votre graphique.   |
+| View related hosts     | Accédez à la page [Host Map][14] en appliquant un filtre basé sur votre graphique.         |
+| View related logs      | Accédez à la page [Log Explorer][15] en appliquant un filtre basé sur votre graphique.     |
 
-### Comment les requêtes de recherche sont-elles définies ?
+### Requête de recherche de logs
 
-Pour définir les logs les plus pertinents, les paramètres suivants sont utilisés :
+La requête de recherche pour **View related logs** est définie à l'aide des paramètres suivants :;
 
-* *Intervalle* : applique le point de données sélectionné et utilise la taille de compartiment du graphique pour afficher les données avant et après le point sélectionné.
-* *Préfixe d'intégration* : si la métrique provient d'une intégration, Datadog filtre l'attribut `source` avec le nom de l'intégration.
-* *Tags* : tous les tags utilisés dans le graphique (*template variable*, *split by*, *filter by*) sont automatiquement ajoutés à la requête de recherche.
-
-## Lecture seule
-
-[Un administrateur][2] ou le créateur d'un timeboard peut passer un timeboard en lecture seule en cliquant sur l'icône en forme d'engrenage (dans le coin supérieur droit du timeboard), puis en accédant au lien **Permissions** :
-
-{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Lecture seule" responsive="true" style="width:30%;">}}
-
-**Cliquez sur Yes dans la fenêtre de confirmation pour passer le timeboard en lecture seule.**
-
-Seuls les comptes [administrateurs][2] et le créateur du timeboard peuvent passer le timeboard en lecture seule. Tous les utilisateurs de l'organisation peuvent cependant s'abonner au timeboard afin de recevoir des notifications de modification.
-
-Si un utilisateur décide d'activer le suivi des modifications pour un timeboard, les modifications suivantes du timeboard sont signalées à l'utilisateur via un événement dans [le flux d'événements][1] :
-
-1. Les changements de texte (titre et description)
-2. Les changements de carré
-3. Les duplications de timeboard
-4. Les suppressions de timeboard
-
-Afin d'empêcher les changements énumérés ci-dessus, un administrateur (à savoir, des administrateurs de compte ou le créateur du timeboard) peut activer la vue en lecture seule. Cela désactive toutes les modifications de carrés ou de texte par des non-administrateurs dans le timeboard et empêche sa suppression.
-
-En mode lecture seule, les utilisateurs non-administrateurs peuvent toujours dupliquer le timeboard, réorganiser les carrés, prendre un snapshot de chaque carré et afficher le carré en plein écran. Si le timeboard est défini en lecture seule, les réarrangements de carrés par un non-administrateur sont uniquement temporaires.
-
-## Suivi des modifications
-
-Un utilisateur peut trouver tous les événements liés aux changements d'un timeboard sur le timeboard qu'il suit en recherchant `tags:audit, <Nom_timeboard>` dans le flux d'événements principal. En effet, chaque événement de notification possède ces deux tags.
-
-## Audit de dashboards
-
-Les notifications des dashboards vous permettent de suivre les modifications à des fins d'audit. Toute modification crée dans le flux d'événements un événement qui explique la modification et affiche l'utilisateur à son origine.
-
-Consultez les modifications avec la recherche d'événements suivante :
-
-https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
-
-Cette fonctionnalité peut être activée en suivant les étapes ci-dessous :
-
-1. Dans le coin supérieur droit d'un dashboard, cliquez sur l'icône en forme d'engrenage :
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="Activer les notifications" responsive="true" style="width:30%;">}}
-
-2. Sélectionnez l'option **Notifications** et activez les notifications :
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt="Fenêtre contextuelle des notifications" responsive="true" style="width:30%;">}}
+* **Intervalle** : ce paramètre, axé sur le point de données sélectionné, utilise la taille de compartiment temporel du graphique pour afficher les données avant et après le point sélectionné.
+* **Préfixe d'intégration** : si la métrique provient d'une intégration, Datadog filtre l'attribut `source` avec le nom de l'intégration.
+* **Tags** : tous les tags utilisés dans le graphique (*template variable*, *split by*, *filter by*) sont automatiquement ajoutés à la requête de recherche.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/graphing/event_stream
-[2]: /fr/account_management/team/#datadog-user-roles
+[1]: /fr/graphing/dashboards/screenboard
+[2]: /fr/graphing/dashboards/screenboard/#display-utc-time
+[3]: /fr/graphing/dashboards/screenboard/#notifications
+[4]: /fr/graphing/dashboards/screenboard/#permissions
+[5]: /fr/graphing/dashboards/screenboard/#clone-dashboard
+[6]: /fr/graphing/dashboards/screenboard/#copy-import-or-export-dashboard-json
+[7]: /fr/graphing/dashboards/screenboard/#delete-dashboard
+[8]: /fr/graphing/dashboards/#new-dashboard
+[9]: /fr/graphing/widgets
+[10]: /fr/graphing/event_stream/#event-query-language
+[11]: /fr/logs/explorer/search/#search-syntax
+[12]: /fr/graphing/widgets/#full-screen
+[13]: https://app.datadoghq.com/process
+[14]: https://app.datadoghq.com/infrastructure/map
+[15]: https://app.datadoghq.com/logs

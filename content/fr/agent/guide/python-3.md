@@ -293,4 +293,4 @@ Utilisez la fonction `next` intégrée au lieu d'appeler la méthode `next`. Par
 [7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
 [8]: https://code.visualstudio.com/docs/setup/setup-overview
 [9]: https://six.readthedocs.io
-[10]:
+[10]: https://nedbatchelder.com/text/unipain.html
