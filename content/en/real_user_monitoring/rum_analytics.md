@@ -70,7 +70,7 @@ Noteworthy facts about stacking:
 * Stacking options are for bar and area displays only. Line displays are always overlapping.
 * When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
 * Stacking may not make sense when you have non-unique values in the split facet.
-* Stacking may not make sense for some aggregration methods for measures.
+* Stacking may not make sense for some aggregation methods for measures.
 
 The following timeseries RUM Analytics shows:
 
@@ -105,7 +105,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
 * The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
- **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+ **Note**: A table visualization used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
  The following Table RUM Analytics shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
 
