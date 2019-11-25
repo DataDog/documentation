@@ -672,11 +672,65 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Processeur de correspondances
+
+Utilisez le Lookup Processor (processeur de correspondances) pour mapper un attribut de log à une valeur lisible enregistrée dans la table de mappage des processeurs.
+Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus facilement lisible. 
+Vous pouvez également vous en servir pour vérifier si l'adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
+
+{{< tabs >}}
+{{% tab "IU" %}}
+
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances" responsive="true" style="width:80%;">}}
+
+Le processeur effectue les actions suivantes :
+
+* Vérifie si le log actuel contient l'attribut source.
+* Vérifie si l'attribut source est présent dans la table de mappage.
+  * S'il est présent, le processeur crée l'attribut source avec la valeur correspondante dans la table.
+  * S'il ne parvient pas à trouver la valeur dans la table de mappage, il crée un attribut cible avec la valeur par défaut (facultatif).
+
+Vous pouvez renseigner la table de mappage en ajoutant manuellement une liste de paires `source_key,target_value` ou en important un fichier CSV.
+
+La limite de poids pour la table de mappage est de 100 Ko. Cette limite s'applique à l'ensemble des processeurs de correspondances sur la plateforme.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le processeur de correspondances :
+
+```json
+{
+  "type" : "lookup-processor",
+  "name" : "<NOM_PROCESSEUR>",
+  "is_enabled" : true,
+  "source" : "<ATTRIBUT_SOURCE>",
+  "target" : "<ATTRIBUT_CIBLE>",
+  "lookup_table" : [ "key1,value1", "key2,value2" ],
+  "default_lookup" : "<VALEUR_CIBLE_PARDÉFAUT>",
+}
+```
+
+| Paramètre       | Type             | Obligatoire | Description|
+| ------          | -----            | -------- | -----      |
+| `type`          | Chaîne           | oui      | Le type du processeur.|
+| `name`          | Chaîne           | non       | Le nom du processeur.|
+| `is_enabled`    | Booléen          | oui      | Indique si le processeur est activé ou non. Valeur par défaut : `false`|
+| `source`        | Chaîne           | oui      | L'attribut source utilisé pour la mise en correspondance. |
+| `target`        | Chaîne           | oui      | Le nom de l'attribut qui contient la valeur correspondante dans la liste de mappage ou la valeur `default_lookup` si la valeur correspondante ne figure pas dans la liste de mappage.|
+| `lookup_table`  | Tableau de chaînes | oui      | Table de mappage contenant les valeurs des attributs sources et les valeurs des attributs cibles associées. Format : [ "source_key1,target_value1", "source_key2,target_value2" ] |
+| `default_lookup`| Chaîne           | non       | Valeur à définir pour l'attribut cible si la valeur source ne figure pas dans la liste.|
+
+[1]: /fr/api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Remappeur de traces
 
 Il existe deux façons d'améliorer la corrélation entre les traces et les logs d'application :
 
-1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][8] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
+1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][7] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
 
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
@@ -722,5 +776,4 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 [4]: /fr/logs/guide/log-parsing-best-practice
 [5]: /fr/logs/explorer/search/#search-syntax
 [6]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
-[7]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /fr/tracing/advanced/connect_logs_and_traces
+[7]: /fr/tracing/advanced/connect_logs_and_traces
