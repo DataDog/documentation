@@ -5,7 +5,7 @@ order: 29.07
 external_redirect: /api/#search-slo-s
 ---
 
-## Search Service Level Objectives
+## Search SLOs
 
 Search and filter your service level objectives.
 

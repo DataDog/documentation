@@ -5,7 +5,7 @@ order: 29.06
 external_redirect: /api/#bulk-delete-slo-timeframes
 ---
 
-## Bulk Delete Service Level Objective Timeframes
+## Bulk Delete SLO Timeframes
 
 **ARGUMENTS**:
 

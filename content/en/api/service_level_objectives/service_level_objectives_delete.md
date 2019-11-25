@@ -5,7 +5,7 @@ order: 29.04
 external_redirect: /api/#delete-a-slo
 ---
 
-## Delete a Service Level Objective
+## Delete a SLO
 
 Permanently delete a SLO.
 

@@ -5,7 +5,7 @@ order: 29.03
 external_redirect: /api/#check-if-a-slo-can-be-deleted
 ---
 
-## Check if a service level objective can be deleted
+## Check if a SLO can be deleted
 
 Check if a SLO can be safely deleted.
 

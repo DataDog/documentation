@@ -5,7 +5,7 @@ order: 29.05
 external_redirect: /api/#delete-multiple-slos
 ---
 
-## Delete multiple Service Level Objectives
+## Delete multiple SLOs
 
 **ARGUMENTS**:
 

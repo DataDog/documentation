@@ -5,7 +5,7 @@ order: 29.03
 external_redirect: /api/#get-a-slo-s-history
 ---
 
-## Get a service level objective's history
+## Get a SLO's history
 
 Get a specific SLO's history, regardless of it's SLO type.
 
