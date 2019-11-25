@@ -18,13 +18,9 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta. Signup for <a href="https://app.datadoghq.com/rum/2019signup">Datadog US Site</a> or <a href="https://app.datadoghq.eu/rum/2019signup">Datadog EU Site</a>  to enable Datadog-Real User Monitoring for your account.
-</div>
-
 ## What is Real User Monitoring?
 
-Datadog Real User Monitoring enables you to visualize and analyze the performance of your front end applications as seen by your users. It follows the latency from the frontend to the backend using advanced visualizations. The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
+Datadog Real User Monitoring enables you to visualize and analyze the performance of your front end applications as seen by your users. It follows the latency from the frontend to the backend using advanced visualizations. The `datadog-browser-agent` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup">}}<u>Setup</u>: Setup Real User Monitoring over your application.{{< /nextlink >}}

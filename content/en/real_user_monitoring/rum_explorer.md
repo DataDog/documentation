@@ -16,7 +16,7 @@ Build up a context to explore your events in your RUM explorer page first by sel
 
 ### Time Range
 
-The time range feature allows you to display view in the view steam or Analytics within a given time period.
+It appears directly under the search bar as a timeline. The time range feature allows you to display view in the view steam or Analytics within a given time period.
 
 Quickly change the time range by selecting a preset range from the dropdown:
 

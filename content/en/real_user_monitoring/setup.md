@@ -39,14 +39,6 @@ Paste the generated code snippet into the head tag (in front of any other script
     applicationId: '<APPLICATION_ID>',
   });
 
-  // OPTIONAL
-
-  // add global metadata attribute--one attribute can be added at a time
-  window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
-
-  // Entirely replace the default context for all your views
-  window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
-
 </script>
 ```
 
@@ -64,13 +56,6 @@ Paste the generated code snippet into the head tag (in front of any other script
     applicationId: '<APPLICATION_ID>',
   });
 
-  // OPTIONAL
-  // add global metadata attribute--one attribute can be added at a time
-  window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
-
-  // Entirely replace the default context for all your views
-  window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
-
 </script>
 ```
 
@@ -78,6 +63,26 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{< /tabs >}}
 
 **Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the library.
+
+## Advanced Configuration
+
+### Add global metadata
+
+Once RUM initialized, add extra metadata to all RUM event collected from your application with the `addRumGlobalContext` API:
+
+```js
+// add global metadata attribute--one attribute can be added at a time
+window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+```
+
+### Replace default context
+
+Once RUM initialized you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
+
+```js
+// Entirely replace the default context for all your views
+window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+```
 
 ### Client Tokens
 

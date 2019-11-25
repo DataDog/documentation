@@ -19,8 +19,7 @@ Rum analytics extend the views explorer page with views data aggregation and spl
 From an analytics visualization, you can, additionally:
 
 * create a widget in a dashboard out of that visualization
-* create a monitor out of that query
-* deep dive into subsets of the views list, depending on the interactions that the visualization enables
+* deep dive into subsets of the events list, depending on the interactions that the visualization enables
 
 ## Build an analytics query
 
