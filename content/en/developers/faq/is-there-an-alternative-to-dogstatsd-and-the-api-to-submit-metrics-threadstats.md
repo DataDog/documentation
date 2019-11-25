@@ -48,7 +48,7 @@ As in [DogStatsD](/developers/dogstatsd), Threadstats performs data aggregation 
 
 To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll-up interval.
 
-* The flush interval defines the time interval between two consecutive {data aggregation + data submission}.
+* The flush interval defines the time interval between two consecutive data aggregation-and-submission events.
 * The roll up interval defines the data granularity after aggregation.
 
 ### Example with flush_interval=10 and roll_up_interval=5
