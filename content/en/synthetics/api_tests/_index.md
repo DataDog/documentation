@@ -79,9 +79,12 @@ Define the request you want to be executed by Datadog:
 
 ### Alert Conditions
 
-_For HTTP test only_
+Set alert conditions to determine the circumstances under which you want a test to send a notification alert:
 
-Set alert conditions to determine the circumstances under which you want a test to send a notification alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+{{< tabs >}}
+{{% tab "HTTP Test" %}}
+
+When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
@@ -89,6 +92,13 @@ Set alert conditions to determine the circumstances under which you want a test 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
 **Note**: You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
+{{% /tab %}}
+{{% tab "SSL Test" %}}
+
+If any of the assertions defined fails for a given location, an alert is triggered.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Assertions
 
