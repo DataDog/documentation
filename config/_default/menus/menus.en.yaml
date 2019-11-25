@@ -1129,7 +1129,7 @@ main:
     parent: "rum"
     identifier: "rum_setup"
     weight: 1
-  - name: "RUM Explorer"
+  - name: "Views Explorer"
     url: "real_user_monitoring/rum_explorer"
     parent: "rum"
     identifier: "rum_views_explorer"

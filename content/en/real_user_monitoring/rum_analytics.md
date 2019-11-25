@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"
   text: "Real User Monitoring"
+- link: "/real_user_monitoring/rum_explorer"
+  tag: "Documentation"
+  text: "Explore your views within Datadog"
 ---
 
 ## Overview

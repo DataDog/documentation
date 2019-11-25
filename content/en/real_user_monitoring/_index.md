@@ -9,7 +9,7 @@ further_reading:
   text: "Real User Monitoring"
 - link: "/real_user_monitoring/rum_explorer"
   tag: "Documentation"
-  text: "Explore your events within Datadog"
+  text: "Explore your views within Datadog"
 - link: "/real_user_monitoring/rum_analytics"
   tag: "Documentation"
   text: "Build analytics upon your events"
@@ -24,7 +24,7 @@ Datadog Real User Monitoring enables you to visualize and analyze the performanc
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup">}}<u>Setup</u>: Setup Real User Monitoring over your application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/rum_explorer/">}}<u>RUM Explorer</u>: Discover the RUM Explorer page, how to add Facets and Measures.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/rum_explorer/">}}<u>Views Explorer</u>: Discover the Views Explorer page, how to add Facets and Measures.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/rum_analytics">}}<u>RUM Analytics</u>: Perform RUM Analytics over all your events.{{< /nextlink >}}
 {{< /whatsnext >}}
 
