@@ -1,6 +1,6 @@
 ---
 title: Custom Metrics Billing
-kind: faq
+kind: documentation
 aliases:
   - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
@@ -25,7 +25,7 @@ Integrations limited to 350 custom metrics by default:
 * [ActiveMQ XML][4]
 * [Go-Expvar][5]
 
-Integrations with no default limit: 
+Integrations with no default limit:
 
 * [Agent Metrics][6]
 * [Directory][7]

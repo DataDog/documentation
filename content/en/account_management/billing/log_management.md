@@ -1,6 +1,6 @@
 ---
 title: Log management billing
-kind: faq
+kind: documentation
 ---
 
 ## Pricing

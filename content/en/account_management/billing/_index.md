@@ -42,6 +42,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}Usage details{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
