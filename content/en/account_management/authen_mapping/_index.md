@@ -27,9 +27,9 @@ All the API endpoints below can have two different host endpoints:
 
 Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Mapping.
 
-| Method | Endpoint path | Required payload |
-|--------|--------------|------------------|
-| `POST`  | `/v2/authn_mappings`  | JSON       |
+| Method | Endpoint path        | Required payload |
+|--------|----------------------|------------------|
+| `POST` | `/v2/authn_mappings` | JSON             |
 
 ##### ARGUMENTS
 
@@ -68,24 +68,24 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{ÿ
-  "data": {ÿ
-    "attributes": {ÿ
+{
+  "data": {
+    "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
     "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {ÿ
-      "saml_assertion_attributes": {ÿ
-        "data": {ÿ
+    "relationships": {
+      "saml_assertion_attributes": {
+        "data": {
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {ÿ
-        "data": {ÿ
+      "roles": {
+        "data": {
           "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
@@ -93,18 +93,18 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   },
   "included": [
-    {ÿ
-      "data": {ÿ
+    {
+      "data": {
         "id": "123e4567-e89b-12d3-a456-426655440000",
         "type": "roles",
-        "attributes": {ÿ
+        "attributes": {
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
           "name": "Developer Role"
         },
-        "relationships": {ÿ
+        "relationships": {
           "data": [
-            {ÿ
+            {
               "id": "123e4567-e89b-12d3-a456-426655441000",
               "type": "permissions"
             }
@@ -112,11 +112,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
       }
     },
-    {ÿ
-      "data": {ÿ
+    {
+      "data": {
         "id": 6,
         "type": "saml_assertion_attributes",
-        "attributes": {ÿ
+        "attributes": {
           "id": 6,
           "attribute_key": "member-of",
           "attribute_value": "Development"
@@ -240,9 +240,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Returns a specific AuthN Mapping by UUID.
 
-| Method | Endpoint path | Required payload                           |
-|--------|--------------|--------------------------------------------|
-| `GET` | `/authn_mappings/{UUID}`  | URL parameter |
+| Method | Endpoint path            | Required payload |
+|--------|--------------------------|------------------|
+| `GET`  | `/authn_mappings/{UUID}` | URL parameter    |
 
 ##### ARGUMENTS
 
