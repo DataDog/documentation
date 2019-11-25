@@ -2,7 +2,7 @@
 title: Search SLOs
 type: apicontent
 order: 29.07
-external_redirect: /api/#search-service-level-objectives
+external_redirect: /api/#search-slo-s
 ---
 
 ## Search Service Level Objectives

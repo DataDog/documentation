@@ -2,7 +2,7 @@
 title: Create a SLO
 type: apicontent
 order: 29.01
-external_redirect: /api/#create-a-service-level-objective
+external_redirect: /api/#create-a-slo
 ---
 
 ## Create a service level objective
