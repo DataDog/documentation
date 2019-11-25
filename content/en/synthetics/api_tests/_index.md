@@ -95,7 +95,7 @@ The uptime bar is displayed differently on your test result: location uptime is 
 {{% /tab %}}
 {{% tab "SSL Test" %}}
 
-If any of the assertions defined fails for a given location, an alert is triggered.
+If one of the assertions defined fails for a given location, an alert is triggered.
 
 {{% /tab %}}
 {{< /tabs >}}
