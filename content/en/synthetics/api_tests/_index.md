@@ -129,7 +129,7 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 | Type        | Operator                                                                        | Value type                 |
 |-------------|---------------------------------------------------------------------------------|----------------------------|
 | certificate | `expires in more than`                                                          | _Integer (number of days)_ |
-| property    | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]  |
+| property    | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_  |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
 
