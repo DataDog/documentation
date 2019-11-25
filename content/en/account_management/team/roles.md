@@ -39,7 +39,7 @@ To create a custom Role:
 
 Once a role is created you can [add this role to existing users][7].
 
-### List of availables permissions
+### List of available permissions
 
 All permissions have up to 3 options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact over each available permission.
 
