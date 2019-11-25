@@ -145,12 +145,18 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 
+### Use variables
+
+You can use the [variables defined in the `Settings`][3] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
+
+{{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Using Variables in API tests" video="true" responsive="true" width="80%" >}}
+
 ### Notify your team
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Select users and/or [services][4] to send the notifications to. Note that you can use the [`@-notification` feature][5] in the **message** field.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your API test.
 
 Notifications example:
@@ -177,6 +183,7 @@ Response time is the sum of these network timings.
 
 [1]: /api/?lang=bash#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
-[3]: /integrations/#cat-notification
-[4]: /monitors/notifications/#notification
-[5]: http://daringfireball.net/projects/markdown/syntax
+[3]: /synthetics/settings#variables
+[4]: /integrations/#cat-notification
+[5]: /monitors/notifications/#notification
+[6]: http://daringfireball.net/projects/markdown/syntax

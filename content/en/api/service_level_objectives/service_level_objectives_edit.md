@@ -1,11 +1,11 @@
 ---
-title: Edit a Service Level Objective
+title: Edit a SLO
 type: apicontent
 order: 29.03
-external_redirect: /api/#edit-a-service-level-objective
+external_redirect: /api/#edit-a-slo
 ---
 
-## Edit A Service Level Objective
+## Edit a SLO
 
 **ARGUMENTS**:
 
@@ -17,8 +17,8 @@ external_redirect: /api/#edit-a-service-level-objective
     A list of tags to associate with your SLO.
 * **`thresholds`** [*optional*, *default*=**None**]:
     A list of Target thresholds, do not specify if not changing.
-    
-    * **`timeframe`** [*required*]: 
+
+    * **`timeframe`** [*required*]:
         The timeframe to apply to the target value. Valid options are `7d`, `30d`, `90d`.
     * **`target`** [*required*]:
         The target value to associate with the SLI that defines the SLO.
@@ -47,7 +47,7 @@ There is one type of event based SLO, a metric query. For more information, see 
 
 * **`query`** [*required*]:
     The query defines the event-based SLO query. It requires two arguments:
-    
+
     * **`numerator`** [*required*]:
         Defines the sum of the `good` events.
     * **`denominator`** [*required*]:
