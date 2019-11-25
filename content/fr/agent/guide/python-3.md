@@ -168,7 +168,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # le contenu sera décodé en unicode en utilisant ‘utf-8’ ; ce ne sont pas des octets !
 ```
 
-Consultez l'article [Pragmatic Unicode][11] (en anglais) de Ned Batchelder pour en savoir plus.
+Consultez l'article [Pragmatic Unicode][10] (en anglais) de Ned Batchelder pour en savoir plus.
 
 ### Print
 

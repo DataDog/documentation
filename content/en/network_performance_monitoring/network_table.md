@@ -13,11 +13,10 @@ further_reading:
 - link: "/network_performance_monitoring/installation"
   tag: "Documentation"
   text: "Collect your Network Data with the Datadog Agent."
+- link: "/graphing/widgets/network"
+  tag: "Documentation"
+  text: "Network Widget"
 ---
-
-<div class="alert alert-warning">
-Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
-</div>
 
 {{< img src="network_performance_monitoring/network_table/main_page.png" alt="Main page" responsive="true">}}
 
@@ -74,7 +73,7 @@ The network table breaks down the _Volume_, _Throughput_, and _Retransmits_ metr
 
 {{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
 
-**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations, which indicate external traffic outside of your private network.
+**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
 Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
 

@@ -2,6 +2,7 @@
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_EC2\_Spot."
@@ -31,6 +32,10 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Installez l'[intégration Datadog/Amazon EC2 Spot][3].
 
+### Collecte de logs
+
+Utilisez l'[Agent Datadog][4] ou un autre log shipper tel que [Rsyslog][5] pour envoyer vos logs vers Datadog.
+
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_ec2_spot" >}}
@@ -43,13 +48,15 @@ L'intégration Amazon EC2 Spot n'inclut aucun événement.
 L'intégration Amazon EC2 Spot n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2-spot
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/agent/logs
+[5]: https://docs.datadoghq.com/fr/integrations/rsyslog
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

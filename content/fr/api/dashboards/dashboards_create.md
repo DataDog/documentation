@@ -16,6 +16,11 @@ external_redirect: '/api/#creer-un-dashboard'
       [Définition du widget.][1]
     * **`id`** [*facultatif*, *valeur par défaut*=**entier généré automatiquement**] :
       ID du widget.
+    * **`layout`** [*obligatoire* pour les widgets de dashboard dont le layout_type est `free` uniquement]. La structure de la disposition respecte le format suivant :
+        - **`x`** [*obligatoire*] La position du widget sur l'axe des abscisses (X). Doit être un entier non négatif.
+        - **`y`** [*obligatoire*] La position du widget sur l'axe des ordonnées (Y). Doit être un entier non négatif.
+        - **`width`** [*obligatoire*] La largeur du widget. Doit être un entier non négatif.
+        - **`height`** [*obligatoire*] La hauteur du widget. Doit être un entier non négatif.
 * **`layout_type`** [*obligatoire*] :
   Type de disposition du dashboard. Valeurs possibles : `ordered` (timeboard précédent) ou `free` (disposition du screenboard précédent)
 * **`description`** [*facultatif*, *défaut*=**None**] :
@@ -29,7 +34,7 @@ external_redirect: '/api/#creer-un-dashboard'
     * **`name`** [*obligatoire*] :
       Nom de la variable.
     * **`default`** [*facultatif*, *défaut*=**None**] :
-        Valeur par défaut de la template variable lors du chargement du dashboard.
+        la valeur par défaut de la template variable lors du chargement du dashboard.
     * **`prefix`** [*facultatif*, *défaut*=**None**] :
         Préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
 

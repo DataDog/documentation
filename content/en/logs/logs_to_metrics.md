@@ -39,7 +39,7 @@ To generate a new log-based metric, go to the [Configuration page][3] of your Da
 3. **Add dimensions to `group by`**: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [Tags][6] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 4. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
-**Note**: Data points for Log-based metrics are generated at one minute intervals.
+**Note**: Data points for Log-based metrics are generated at ten second intervals.
 
 ### Update a log-based metric
 

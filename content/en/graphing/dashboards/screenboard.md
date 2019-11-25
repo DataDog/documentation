@@ -13,73 +13,67 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, and can either update in real-time, or represent one or more fixed points in the past.
+Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
-## Read Only
+## Global time selector
 
-[An Administrator][1] or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
+To use the screenboard global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in a widget's editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
+The global time selector sets the same timeframe for all widgets using the `Global Time` option on the same screenboard. You can select a moving window in the past (`The Past Hour`, `The Past Day`, etc.) or a fixed period with the `Select Range` option. If a moving window is chosen, the widgets are updated every few milliseconds to move along with the time window.
 
-**Click "Yes" on the confirmation window to make the Screenboard read-only**
+Widgets not linked to global time show the data for their local timeframe as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local timeframe for `The Past Minute` shows the last minute of January 2, 2019 from 11:59pm.
 
-Only [account Administrators][1] and the Screenboard creator can activate read-only mode for a Screenboard.
-Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Screenboard.
+## TV mode
 
-If a user decides to track changes for a Screenboard, the following Screenboard changes are reported to the user through an event in the [event stream][2]:
+Screenboards are useful for displaying key performance metrics on large screens or TVs. To enable TV mode, use the keyboard shortcut `K` or click the TV icon on the screenboard.
 
-1. Text changes (title, description)
+## Settings
 
-2. Widget changes
-    - iframe, free_text, image, and note widget changes are reported in the [event stream][2] if a new widget is added or it is removed. There are no specifics about the widget specifying content. It says "a text_widget was added to the Screenboard" in the event.
-    - All other widget changes are reported in the [event stream][2] if a new widget is added, edited, or removed. The event specifies the title of the widget in question and say something like "the widget titled 'xyz' was edited"
-3. Screenboard cloning
+### Generate public URL
 
-4. Screenboard deletion
+Share a screenboard with external users by generating a public URL. For more details, see [Screenboard sharing][1].
 
-In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.
-Even in read-only mode, non-administrator users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in full-screen. Any tile rearrangement by a non-administrator user do not persist if the Screenboard is set to read-only.
+### Display UTC time
 
-## Global Time Selector
+Toggle between UTC time and your default time zone.
 
-Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past ("The Past Hour," "The Past 3 Months," etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window.
+### Notifications
 
-{{< img src="graphing/dashboards/screenboard/global_time_screenboard.png" alt="Global Time Selector" responsive="true" style="width:50%;">}}
+If notifications are activated for a screenboard, an event is created in the [event stream][2]. This event provides information on text changes, widget changes, screenboard cloning, and screenboard deletion along with the name of the user performing the action.
 
-In order to use the global time selector, the screenboard must have at least one time-based widget that is linked to "Global Time." When creating or editing a time-based widget, go to **Set display preferences** and select "Global Time" in the *Show* drop-down menu. Note: "Global Time" is the default setting.
+Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a screenboard.
 
-{{< img src="graphing/dashboards/screenboard/widget_selector.png" alt="Widget time selector" responsive="true" style="width:70%;">}}
+Change events for dashboards with notifications enabled can be seen in the event stream by searching:
 
-When the global time selector is in use, widgets that are linked to global time show data for that period. Widgets that are not linked to global time show the data for their local timeframe as applied to the global window. For instance, if the global time selector is set to the fixed period January 1st 2018 through January 2nd 2018, a widget set to the local timeframe "The Last Minute" shows the last minute of January 2nd, from 11:59pm.
+```
+tags:audit,dash
+```
 
+To limit the search to a specific dashboard, include the dashboard's name in the search.
 
-When sharing a public Screenboard, you can set a global timeframe ahead of sharing:
+### Permissions
 
-{{< img src="graphing/dashboards/screenboard/public_sharing.png" alt="Widget time selector" responsive="true" style="width:70%;">}}
+For a screenboard, the creator or any [administrator][3] can activate read-only mode, which disables all non-admin edits to the screenboard.
 
+In read-only mode, non-administrative users can clone the screenboard, rearrange tiles, snapshot a tile, and view a tile in full-screen. Any tile rearrangement by a non-administrative user does not persist.
 
-## Tracking Changes
-A user can find all events related to Screenboard changes to the Screenboard they are following by searching `tags:audit, <Screenboard_name>` in the main [event stream][2], as each notification event is tagged with those two tags.
+### Clone dashboard
 
-## Auditing Dashboards
+Use this option to copy the entire screenboard to a new screenboard. You are prompted to name the clone.
 
-In dashboards, notifications provide the ability to track changes for audit purposes. Any change creates an event in the [event stream][2] that explains the change and displays the user that made the actual change.
+### Copy, import, or export dashboard JSON
 
-If any changes are made to your dashboards, they can be seen with the following event search:
+Refer to the [main dashboard documentation][4] for details on copying, importing, or exporting dashboard JSON.
 
-https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
+### Delete dashboard
 
-This feature can be enabled by following these simple steps:
-
-1. At the top right corner of a dashboard, click on the gear icon:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" style="width:30%;">}}
-
-2. Select **Notifications** option and enable the notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:40%;">}}
+Use this option to permanently delete your screenboard. You are prompted to confirm deletion.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/team/#datadog-user-roles
+[1]: /graphing/dashboards/shared_graph/#screenboard-sharing
 [2]: /graphing/event_stream
+[3]: /account_management/team/#datadog-user-roles
+[4]: /graphing/dashboards/#copy-import-export

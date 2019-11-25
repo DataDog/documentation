@@ -5,17 +5,19 @@ $(document).ready(function () {
         //$('.modal').css('overflow', 'scroll');
         var regURL = 'https://app.datadoghq.com/signup_corp';
         var mobileURL = 'https://app.datadoghq.com/signup_corp?mobile=true';
+        var lang_param = '';
+        var lang = '';
 
         if(document.documentElement.lang){
             lang = document.documentElement.lang;
-        }else{
+        } else{
             lang = ddc.lang;
         }
 
-        if (lang && lang === "fr"){
-            var lang_param = "?lang=fr";
-        }else {
-            var lang_param = '';
+        if (lang === 'fr' || lang === 'ja') {
+            lang_param = `?lang=${lang}`;
+        } else {
+            lang_param = '';
         }
         // Detect Mobile Devices
 

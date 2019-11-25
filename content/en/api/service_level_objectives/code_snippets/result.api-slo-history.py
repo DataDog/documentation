@@ -1,3 +1,4 @@
+## Monitor Based
 {
   "data": {
     "errors": null,
@@ -382,6 +383,99 @@
         ]
       }
     ]
+  },
+  "error": null
+}
+
+## Event Based
+{
+  "data": {
+    "errors": null,
+    "to_ts": 1571766900,
+    "series": {
+      "res_type": "time_series",
+      "interval": 3600,
+      "resp_version": 2,
+      "denominator": {
+        "count": 2,
+        "sum": 3698988,
+        "metadata": {
+          "query_index": 1,
+          "aggr": "sum",
+          "scope": "env:prod,status:good",
+          "metric": "foo.count",
+          "expression": "sum:foo.count{env:prod,status:good}.as_count()",
+          "unit": null
+        },
+        "values": [
+          1738124,
+          1960864
+        ],
+        "times": [
+          1571256000000,
+          1571259600000
+        ]
+      },
+      "numerator": {
+        "count": 2,
+        "sum": 3698988,
+        "metadata": {
+          "query_index": 0,
+          "aggr": "sum",
+          "scope": "env:prod",
+          "metric": "foo.count",
+          "expression": "sum:foo.count{env:prod}.as_count()",
+          "unit": null
+        },
+        "values": [
+          1738124,
+          1960864
+        ],
+        "times": [
+          1571256000000,
+          1571259600000
+        ]
+      },
+      "from_date": 1571162100000,
+      "group_by": [],
+      "to_date": 1571766900000,
+      "timing": "0.830218076706",
+      "query": "sum:foo.count{env:prod}.as_count(), sum:foo.count{env:prod,status:good}.as_count()",
+      "message": ""
+    },
+    "thresholds": {
+      "7d": {
+        "warning": 99.5,
+        "warning_display": "99.500",
+        "target": 99,
+        "target_display": "99.000",
+        "timeframe": "7d"
+      },
+      "30d": {
+        "warning": 99.5,
+        "warning_display": "99.500",
+        "target": 99,
+        "target_display": "99.000",
+        "timeframe": "30d"
+      },
+      "90d": {
+        "warning": 99.5,
+        "warning_display": "99.500",
+        "target": 99,
+        "target_display": "99.000",
+        "timeframe": "90d"
+      }
+    },
+    "overall": {
+      "uptime": 100,
+      "span_precision": 0,
+      "precision": {
+        "7d": 0,
+        "30d": 0,
+        "90d": 0
+      }
+    },
+    "from_ts": 1571162100
   },
   "error": null
 }

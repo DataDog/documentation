@@ -149,7 +149,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
         }
         ```
 
@@ -333,7 +333,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         $ActionSendStreamDriver gtls
         $ActionSendStreamDriverMode 1
         $ActionSendStreamDriverAuthMode x509/name
-        $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
+        $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
         *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
 

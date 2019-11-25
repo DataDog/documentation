@@ -6,10 +6,6 @@ external_redirect: '/api/#logs-indexes'
 ---
 ## ログインデックス
 
-<div class="alert alert-warning">
-このエンドポイントは公開ベータ版です。Datadog のクライアントライブラリでサポートされていません。フィードバックがありましたら、<a href="/help">Datadog のサポートチームまでお寄せください</a>。
-</div>
-
 `Index` オブジェクトはログインデックスの構成を記述します。次の属性を持ちます。
 
 * **`name`** (読み取り専用):

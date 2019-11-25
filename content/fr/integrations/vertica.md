@@ -5,7 +5,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
 - data store
-- Collecte de logs
+- log collection
 creates_events: false
 ddtype: check
 dependencies:

@@ -108,11 +108,16 @@ To display only the formula on your graph, click on the check marks next to the 
 
 ### Create a title
 
-If you do nott enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph. 
+If you do not enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph. 
 
 ### Save
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
+
+## Additional options
+### Event overlays
+
+View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][10].
 
 ## Further Reading
 
@@ -127,3 +132,4 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [7]: /graphing/metrics/introduction
 [8]: /graphing/functions/rollup
 [9]: /graphing/functions/#apply-functions-optional
+[10]: /graphing/event_stream/#event-query-language

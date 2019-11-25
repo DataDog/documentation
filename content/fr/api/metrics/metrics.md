@@ -7,7 +7,7 @@ external_redirect: /api/#metriques
 ## Métriques
 L'endpoint métrique vous permet de :
 
-* Envoyez vos données de métriques afin de les afficher sur les tableaux de bord de Datadog.
+* Envoyez vos données de métriques afin de les afficher sur les dashboards de Datadog.
 * Interroger les métriques de n'importe quelle période
 
 Comme dans l'interface utilisateur de Datadog, un graphique ne peut contenir qu'un nombre défini de points. Lorsque la durée d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.

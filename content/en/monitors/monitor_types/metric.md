@@ -87,11 +87,11 @@ Any metric currently reporting to Datadog is available for monitors. Use the edi
 |---------------------|----------|------------|-------------------|
 | Select a metric     | Yes      | None       | `system.cpu.user` |
 | Define the from     | No       | Everywhere | `env:prod`        |
-| Exclude tags        | No       | None       | `role:testing`    |
+| Exclude [tags][2]        | No       | None       | `role:testing`    |
 | Specify aggregation | Yes      | `avg by`   | `sum by`          |
 | Group by            | No       | Everything | `host`            |
 
-**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
+**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][3].
 
 #### Alert grouping
 
@@ -147,7 +147,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3].
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][4].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -194,13 +194,14 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /graphing/using_graphs/#advanced-graphing
-[3]: /monitors/faq/what-are-recovery-thresholds
-[4]: /monitors/notifications
+[2]: /tagging/using_tags/?tab=assignment
+[3]: /graphing/using_graphs/#advanced-graphing
+[4]: /monitors/faq/what-are-recovery-thresholds
+[5]: /monitors/notifications

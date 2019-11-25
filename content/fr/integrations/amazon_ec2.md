@@ -61,35 +61,35 @@ Pour désactiver les monitors lors des arrêts planifiés de l'instance EC2, coc
 
 ### Installer l'Agent avec AWS Systems Manager
 
-Suivez les étapes ci-dessous pour installer l'Agent Datadog sur une instance EC2 à l'aide d'AWS Systems Manager. Consultez [](https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/#pagetitle) pour découvrir les avantages de l'installation de l'Agent sur vos instances AWS EC2.
+Suivez les étapes ci-dessous pour installer l'Agent Datadog sur une instance EC2 à l'aide d'AWS Systems Manager. Consultez la section [Pourquoi installer l'Agent Datadog sur mes instances cloud ?][8] pour découvrir les avantages de l'installation de l'Agent sur vos instances AWS EC2.
 
 #### Parameter Store
 
-Dans le [Parameter Store]](https://console.aws.amazon.com/systems-manager/parameters), créez un paramètre ayant les propriétés suivantes :
+Dans le [Parameter Store][9], créez un paramètre ayant les propriétés suivantes :
 
 * Name : `dd-api-key-for-ssm`
 * Description : (facultatif)
 * Type : `SecureString`
 * KMS key source : `My current account`
 * KMS Key ID : utilisez la valeur sélectionnée par défaut.
-* Value : votre [clé d'API Datadog](https://app.datadoghq.com/account/settings#api)
+* Valeur : votre [clé d'API Datadog][10]
 
 #### Systems Manager
 
 ##### Documents
 
-Dans le Systems Manager, créez un [Document](https://console.aws.amazon.com/systems-manager/documents) :
+Dans le Systems Manager, créez un [Document][11] :
 
 * Name : `dd-agent-install`
 * Target type : (facultatif)
 * Document type : `Command document`
 * Content : `JSON`
 
-Si vous utilisez le site américain de Datadog, utilisez le fichier [dd-agent-install-us-site.json](https://docs.datadoghq.com/resources/json/dd-agent-install-us-site.json) après y avoir spécifié votre `<RÉGION_AWS>` sous `runCommand` (p. ex., `us-east-1`). Si vous êtes sur le site européen de Datadog, utilisez plutôt le fichier [dd-agent-install-eu-site.json](https://docs.datadoghq.com/resources/json/dd-agent-install-eu-site.json).
+Si vous utilisez le site américain de Datadog, utilisez le fichier [dd-agent-install-us-site.json][12] après y avoir spécifié votre `<RÉGION_AWS>` sous `runCommand` (p. ex., `us-east-1`). Si vous êtes sur le site européen de Datadog, utilisez plutôt le fichier [dd-agent-install-eu-site.json][13].
 
 ##### Run Command
 
-Sous [Run Command](https://console.aws.amazon.com/systems-manager/run-command/executing-commands), cliquez sur le bouton **Run command** et suivez les étapes ci-dessous :
+Sous [Run Command][14], cliquez sur le bouton **Run command** et suivez les étapes ci-dessous :
 
 * **Command document** :
     * Cliquez sur la zone de recherche et sélectionnez *Owner -> Owned by me*.
@@ -102,11 +102,12 @@ Sous [Run Command](https://console.aws.amazon.com/systems-manager/run-command/ex
 * **Autres sections* (facultatif) :
     * Modifiez les autres sections en fonction de votre configuration si vous le souhaitez.
 
-Cliquez sur le bouton **Run** ; une page de confirmation montrant le statut s'affiche. Patientez jusqu'à la fin puis vérifiez la [liste d'infrastructures](https://app.datadoghq.com/infrastructure) dans Datadog.
+Cliquez sur le bouton **Run** ; une page de confirmation montrant le statut s'affiche alors. Patientez jusqu'à la fin, puis vérifiez la [liste d'infrastructures][15] dans Datadog.
 
 ### Collecte de logs
 
-Utilisez l'[Agent Datadog][8] ou un autre [log shipper][9] pour envoyer vos logs vers Datadog.
+Utilisez l'[Agent Datadog][16] ou un autre [log shipper][17] pour envoyer vos logs vers Datadog.
+
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_ec2" >}}
@@ -114,7 +115,7 @@ Utilisez l'[Agent Datadog][8] ou un autre [log shipper][9] pour envoyer vos logs
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
-**Remarque** : `aws.ec2.instance_age` n'est pas recueillie par défaut avec l'intégration Datadog/EC2. [Contactez-nous][11] pour activer la collecte de cette métrique.
+**Remarque** : `aws.ec2.instance_age` n'est pas recueillie par défaut avec l'intégration Datadog/EC2. [Contactez-nous][19] pour activer la collecte de cette métrique.
 
 ### Checks de service
 L'intégration AWS EC2 n'inclut aucun check de service.
@@ -125,13 +126,13 @@ L'intégration AWS EC2 comprend des événements pour les maintenances planifi�
 {{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="Événements AWS EC2" responsive="true">}}
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][20].
 
 ## Pour aller plus loin
 
-* [Métriques clés pour la surveillance EC2][13]
-* [Comment recueillir des métriques EC2][14]
-* [Comment surveiller les instances EC2 avec Datadog][15]
+* [Métriques clés pour la surveillance EC2][21]
+* [Comment recueillir des métriques EC2][22]
+* [Comment surveiller des instances EC2 avec Datadog][23]
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
@@ -141,14 +142,22 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_ec2
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [7]: https://app.datadoghq.com/monitors#downtime
-[8]: https://docs.datadoghq.com/fr/logs
-[9]: https://docs.datadoghq.com/fr/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
-[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/amazon_ec2_metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://docs.datadoghq.com/fr/help
-[13]: https://www.datadoghq.com/blog/ec2-monitoring
-[14]: https://www.datadoghq.com/blog/collecting-ec2-metrics
-[15]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
+[8]: https://docs.datadoghq.com/fr/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[9]: https://console.aws.amazon.com/systems-manager/parameters
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://console.aws.amazon.com/systems-manager/documents
+[12]: https://docs.datadoghq.com/resources/json/dd-agent-install-us-site.json
+[13]: https://docs.datadoghq.com/resources/json/dd-agent-install-eu-site.json
+[14]: https://console.aws.amazon.com/systems-manager/run-command/executing-commands
+[15]: https://app.datadoghq.com/infrastructure
+[16]: https://docs.datadoghq.com/fr/agent/logs
+[17]: https://docs.datadoghq.com/fr/integrations/rsyslog
+[18]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/amazon_ec2_metadata.csv
+[19]: https://docs.datadoghq.com/fr/help
+[20]: https://docs.datadoghq.com/fr/help
+[21]: https://www.datadoghq.com/blog/ec2-monitoring
+[22]: https://www.datadoghq.com/blog/collecting-ec2-metrics
+[23]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
 
 
 {{< get-dependencies >}}
