@@ -22,7 +22,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 2. **Choose the time period** for which you wish to rehydrate log events. The time period must be older than 24 hours.
 
-3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message. You must include a service argument.
+3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message.
 
 4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
@@ -112,7 +112,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a Service Account with the Storage Object Viewer role. You can grant this role to your Datadog Service Account from the [GCP IAM Admin page][1] by editing the Service Account's permissions, adding another role, and then selecting Storage > Storage Object Viewer. 
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer. 
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" responsive="true" style="width:75%;">}}
 
@@ -130,4 +130,3 @@ In order to rehydrate log events from your archives, Datadog uses a Service Acco
 [5]: /logs/explorer/search
 [6]: /logs/?tab=ussite#reserved-attributes
 [7]: /logs/archives/
-[8]: https://forms.gle/X4jhi13Rd2pFSuSHA
