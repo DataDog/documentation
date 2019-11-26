@@ -9,9 +9,6 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-<div class="alert alert-warning">
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
-</div>
 
 ## Overview
 

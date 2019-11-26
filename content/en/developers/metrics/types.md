@@ -198,9 +198,9 @@ Discover how to submit histogram metrics:
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-**The `DISTRIBUTION` metric submission type represents a statistical distribution calculated over your entire infrastructure of a set of values in one time interval.** A `DISTRIBUTION` metric allows you to aggregate values sent from multiple hosts over one time interval. A `DISTRIBUTION` can be used to represent request latency for your entire infrastructure or customer basket size.
+**A `DISTRIBUTION` is a metric submission type that allows you to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.** `DISTRIBUTION` metrics are designed to instrument logical objects, like services, independently from the underlying hosts.
 
-Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during one time interval, a `DISTRIBUTION` metric sends the raw data during that time interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
+Unlike the `HISTOGRAM` metric type, which aggregates on the Agent side during the flush interval, a `DISTRIBUTION` metric sends all the raw data during a flush interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging

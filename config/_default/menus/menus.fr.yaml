@@ -839,18 +839,10 @@ main:
     parent: log_management
     identifier: log_archives
     weight: 5
-  - name: "Archivage sur AWS\_S3"
-    url: logs/archives/s3/
-    parent: log_archives
-    weight: 501
-  - name: Archivage sur GCS
-    url: logs/archives/gcs/
-    parent: log_archives
-    weight: 502
   - name: Réintégration à partir des archives
     url: logs/archives/rehydrating
     parent: log_archives
-    weight: 503
+    weight: 501
   - name: Index
     url: logs/indexes
     parent: log_management
@@ -986,7 +978,7 @@ main:
     identifier: dev_tools_metrics
     weight: 2
   - name: Types de métriques
-    url: developers/metrics/metrics_type/
+    url: developers/metrics/types/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 201
@@ -1011,12 +1003,12 @@ main:
     identifier: dev_tools_metrics_api
     weight: 205
   - name: Modificateurs de type de métriques
-    url: developers/metrics/metric_type_modifiers/
+    url: developers/metrics/type_modifiers/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_modifiers
     weight: 206
   - name: Unités des métriques
-    url: developers/metrics/metrics_units/
+    url: developers/metrics/units/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_units
     weight: 207
@@ -1103,11 +1095,16 @@ main:
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
     weight: 903
+  - name: Amazon CloudFormation
+    url: developers/amazon_cloudformation/
+    parent: dev_tools
+    identifier: dev_tools_aws_cloudformation
+    weight: 10
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 10
+    weight: 11
   - name: API
     url: api/
     pre: nav_api
