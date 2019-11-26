@@ -72,7 +72,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
 6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
-7. [Restart the Agent][1]: `sudo service datadog-agent restart`
+7. [Restart the Agent][2]: `sudo service datadog-agent restart`
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
