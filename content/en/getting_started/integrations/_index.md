@@ -2,7 +2,7 @@
 title: Introduction to Integrations
 kind: documentation
 aliases:
-- /getting_started/integrations
+- "/getting_started/integrations"
 further_reading:
 - link: "https://learn.datadoghq.com/"
   tag: "Learning Center"
@@ -11,18 +11,18 @@ further_reading:
   tag: "Integrations"
   text: "Datadog's full list of integrations"
 ---
-- [Setting up an integration](#setting-up-an-integration)
-  - [API and Application keys](#api-and-application-keys)
-  - [Installation](#installation)
-  - [Configuring Agent integrations](#configuring-agent-integrations)
-  - [Tagging](#tagging)
-  - [Validation](#validation)
-- [Installing multiple integrations](#installing-multiple-integrations)
-- [Security practices](#security-practices)
-- [What's next?](#what-s-next)
-- [Troubleshooting](#troubleshooting)
-- [Key terms](#key-terms)
-- [Further Reading](#further-reading)
+* [Setting up an integration](#setting-up-an-integration)
+  * [API and Application keys](#api-and-application-keys)
+  * [Installation](#installation)
+  * [Configuring Agent integrations](#configuring-agent-integrations)
+  * [Tagging](#tagging)
+  * [Validation](#validation)
+* [Installing multiple integrations](#installing-multiple-integrations)
+* [Security practices](#security-practices)
+* [What's next?](#whats-next)
+* [Troubleshooting](#troubleshooting)
+* [Key terms](#key-terms)
+* [Further Reading](#further-reading)
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
