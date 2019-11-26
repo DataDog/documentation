@@ -45,7 +45,7 @@ To enable network performance monitoring, configure it in your [Agent's main con
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. [Enable live process collection](https://docs.datadoghq.com/graphing/infrastructure/process/?tab=linuxwindows#installation) if you have not done so already. 
+1. If you haven't already, enable [live process collection][1] first. 
 
 2. Copy the system-probe example configuration:
     ```
