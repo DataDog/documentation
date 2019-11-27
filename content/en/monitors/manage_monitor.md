@@ -17,7 +17,7 @@ Use the [Manage Monitors][1] page to search your monitors and delete, mute, reso
 
 {{< img src="monitors/manage_monitor/page.png" alt="manage monitor page" responsive="true" >}}
 
-## Search monitors
+## Search
 
 To search your monitors, construct a query using the attribute checkboxes on the left and/or the search bar at the top. When you select attributes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write a new one), the attribute checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query. **Note**: There is no *search* button to click.
 
@@ -78,15 +78,23 @@ Check any number of boxes to find your monitors. The following rules apply:
 
 For attributes with a large number of values across your monitors, use the attribute search bar to find the correct value.
 
-## Manage chosen Monitors
+## Manage
 
-When you have found the monitors you were looking for, select one or more that you wish to update using the checkboxes next to each result. You can select all results with the top checkbox next to the *STATUS* column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Tags.
+After searching, select one or more monitors to update using the checkboxes next to each result. Select all results with the top checkbox next to the *STATUS* column heading. Modify the monitors in bulk using the buttons at the top right of the search results:
 
-To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
+| Option    | Description                                                                |
+|-----------|----------------------------------------------------------------------------|
+| Mute      | Mute the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever` |
+| Unmute    | If the selected monitors are muted, unmute them.                           |
+| Resolve   | [Resolve][5] the alert for the selected monitors.                          |
+| Delete    | Permanently delete the selected monitors.                                  |
+| Edit Tags | Edit the monitor tags for the selected monitors.                           |
 
-### Manage Triggered Monitors with group-level granularity
+To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-You can mute or [resolve][5] triggered monitors in bulk using the [Triggered Monitors page][6]. It's similar to the Manage Monitors page-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
+### Triggered monitors
+
+You can mute or [resolve][5] triggered monitors in bulk using the [Triggered Monitors][6] page. It's similar to the Manage Monitors page-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
 
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page shows 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
 "high latency"`). This lets you easily mute or [resolve][5] a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
