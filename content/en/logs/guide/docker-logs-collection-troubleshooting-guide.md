@@ -29,8 +29,9 @@ Logs Agent
     Inputs: 497f0cc8b673397ed31222c0f94128c27a480cb3b2022e71d42a8299039006fb
 ```
 
-3. If your status doesn't look like the above, refer to the troubleshooting tips in the following sections.
+3. If the Logs Agent Status doesn't look like the above, refer to the troubleshooting tips in the following sections.
 
+4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#if-the-logs-agent-status-shows-no-errors)
 
 ## The Logs Agent shows "not running" in its status 
 If you see the following message when you run the Agent Status command:
@@ -45,15 +46,28 @@ Logs Agent
 
 This means that you did not enable logging in the Agent. 
 
-{{< tabs >}} {{% tab "Container Installation" %}}
 To enable logging for the Container Agent, set the following environment variable: `DD_LOGS_ENABLED=true`.
-{{% /tab %}} {{% tab "Host Installation" %}}
-To enable logging for the Host Agent, set `logs_enabled: true` in the `datadog.yaml` file.
-{{% /tab %}} {{< /tabs >}}
 
-## Unable to connect to Docker socket
+## The Logs Agent shows no logs processed or sent
+If the Logs Agent Status shows no integrations and you see `LogsProcessed: 0 and LogsSent: 0`:
 
-When the Agent is unable to connect to the Docker socket, the "Logs Agent" section of the Agent status displays `Status: Pending` to indicate that it hasn't started collecting container logs.
+```
+==========
+Logs Agent
+==========
+    LogsProcessed: 0
+    LogsSent: 0
+```
+
+This status means that logs are enabled but you haven't specified which containers the Agent should collect from. 
+
+1. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
+
+2. To configure the Agent to collect from other containers, set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL`. 
+
+## The Logs Agent shows "Status: Pending"
+
+If the Logs Agent Status shows `Status: Pending`:
 
 ``` 
 ==========
@@ -68,9 +82,15 @@ Logs Agent
     Status: Pending
 ```
 
-{{< tabs >}} {{% tab "Container Installation" %}}
+This status means that the Logs Agent is running but it hasn't started collecting container logs. There can be a few reasons for this:
 
-For the container Agent, the connection to the socket is handled by mounting the Docker socket directly into the container. If this step hasn't been performed, you see the following logs when the Agent starts:
+### Docker Daemon started after the Host Agent
+
+If the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection.
+
+### You didn't mount the docker socket when you started the Container Agent
+
+In order For the Container Agent to collect logs from Docker containers, it needs to have access to the Docker socket. If it doesn't have access, the following logs appear in `agent.log`:
 
 ```
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:51 in NewLauncher) | Could not setup the docker launcher: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
@@ -85,8 +105,9 @@ And this log appears when the Agent attempts to run the container check:
 ```
 
 Relaunch the Agent container with the following option: `-v /var/run/docker.sock:/var/run/docker.sock:ro` to allow access to the Docker socket.
-{{% /tab %}} {{% tab "Host Installation" %}}
-If you're using the host Agent, the user `dd-agent` needs to be added to the Docker group in order to have permission to read from the Docker socket. If the Agent user isn't added to the Docker user group, the Agent Status command shows `Status: Pending` under "Logs Agent". You should also see the following error logs in the Agent log file at `/var/log/datadog/agent.log`:
+
+### (Host Agent only) the "dd-agent" user is not part of the Docker group
+If you're using the Host Agent, the user `dd-agent` needs to be added to the Docker group in order to have permission to read from the Docker socket. If you see the following error logs in the `agent.log` file:
 
 ```
 2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
@@ -94,68 +115,14 @@ If you're using the host Agent, the user `dd-agent` needs to be added to the Doc
 ```
 
  To add the host Agent to the Docker user group, perform the following command: `usermod -a -G docker dd-agent`.
-{{% /tab %}} {{< /tabs >}}
 
-{{< tabs >}} {{% tab "Container Installation" %}}
-## container_collect_all isn't set
-Sometimes when you run the Agent status command the Log Status shows no integrations and you see `LogsProcessed: 0 and LogsSent: 0`.
+## If the Logs Agent Status shows no errors
+If the Logs Agent Status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
-```
-==========
-Logs Agent
-==========
-    LogsProcessed: 0
-    LogsSent: 0
-```
+* the required port (10516) for sending logs to Datadog is being blocked 
+* your container is using a different logging driver than the Agent expects
 
-When you see this, it means that the Agent isn't collecting any log files from your integrations. For the container Agent, this can happen if you haven't set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL`—since without this option, the container Agent does not try to collect logs from other containers. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
-
-Add the following environment variable to allow the Agent to detect containers: `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`.
-
-{{% /tab %}} {{% tab "Host Installation" %}}
-When you see this, it means that the Agent isn't collecting any log files from your integrations. For the host Agent, this can happen if you haven't set the parameter `container_collect_all` in your `datadog.yaml` to `true`. Without this option, the container Agent doesn't try to collect logs from other containers.
-
-Add the following lines in your `datadog.yaml` file to allow the Agent to detect containers:
-
-```
-logs_config:
-  container_collect_all: true
-```
-
-## Docker Daemon started after the Host Agent
-
-If the Docker Daemon is started after the host Agent is already running, you may see the logs Agent reporting as `Status: Pending`. In this case, restart the Agent to trigger container collection.
-
-## Containers are using the journald logging driver
-When containers are set up to use the journald logging driver, the Agent needs to be configured to collect logs from Journald. To collect logs from the journald logging driver you need to set up the journald integration [following this documentation][2].
-
-{{< tabs >}} {{% tab "Container Installation" %}}
-For the Docker Agent, you will need to mount the yaml file into your container following the instructions [here][3].
-
-If you're unsure of which logging driver your containers are using, use `docker inspect <container-name>` to see what logging driver you have set. By default, Docker uses JSON files for logging, and you should see the following in your Docker Inspect if that is the case:
-
-```
-"LogConfig": {
-    "Type": "json-file",
-    "Config": {}
-},
-```
-
-If the container is set to journald you'll see the following:
-
-```
-"LogConfig": {
-    "Type": "journald",
-    "Config": {}
-},
-```
-
-For more information on setting log drivers for Docker containers, [see this documentation][4].
-{{% /tab %}} {{% tab "Host Installation" %}}
-For the host Agent, remember to add the `dd-agent` user to the `systemd-journal` group by running `usermod -a -G systemd-journal dd-agent`.
-{{% /tab %}} {{< /tabs >}}
-
-## Outbound traffic on port 10516 is blocked
+### Outbound traffic on port 10516 is blocked
 
 The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
@@ -170,14 +137,39 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to ask the Datadog Agent to use the port `443` to forward them (only available with the Datadog Agent) by adding the following in `datadog.yaml`:
+If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in datadog.yaml:
 
 ```
 logs_config:
-  use_port_443: true
+  use_http: true
 ```
 
+### Your containers are not using the JSON logging driver
+Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.
+
+1. If you're unsure of which logging driver your containers are using, use `docker inspect <container-name>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:
+
+```
+"LogConfig": {
+    "Type": "json-file",
+    "Config": {}
+},
+```
+
+2. If the container is set to the journald logging driver the following block appears in the Docker Inspect:
+
+```
+"LogConfig": {
+    "Type": "journald",
+    "Config": {}
+},
+```
+
+3. To collect logs from the journald logging driver, set up the journald integration [following this documentation][2].
+
+4. Mount the YAML file into your container following the instructions [here][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
+
 [1]: https://docs.datadoghq.com/help
-[2]: /integrations/journald/#configuration
+[2]: /integrations/journald/#setup
 [3]: /agent/docker/?tab=standard#mounting-conf-d
 [4]: /config/containers/logging/journald/
