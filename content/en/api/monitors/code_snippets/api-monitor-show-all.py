@@ -8,4 +8,4 @@ options = {
 initialize(**options)
 
 # Get all monitor details
-print api.Monitor.get_all()
+print(api.Monitor.get_all())
