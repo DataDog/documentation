@@ -444,7 +444,7 @@ Web integrations are authentication based. Metrics are collected with API calls.
 [14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
 [16]: /integrations/amazon_api_gateway
-[17]: /integrations/aws_auto_scaling
+[17]: /integrations/amazon_auto_scaling
 [18]: /integrations/amazon_billing
 [19]: /integrations/amazon_cloudfront
 [20]: /integrations/amazon_codedeploy
