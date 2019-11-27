@@ -1,6 +1,6 @@
 ---
 title: Google Cloud integration billing
-kind: faq
+kind: documentation
 ---
 
 ## Overview
