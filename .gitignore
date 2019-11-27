@@ -46,6 +46,7 @@ content/en/integrations/*.md
 content/en/developers/integrations/*.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/integrations/faq/list-of-api-source-attribute-value.md
+content/en/developers/amazon_cloudformation.md
 
 # Logs
 /logs/*

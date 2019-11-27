@@ -138,7 +138,7 @@ MySQL の[メトリクス](#metric-collection)と[ログ](#log-collection)の収
       pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
       port: <YOUR_MYSQL_PORT> # e.g. 3306
       options:
-          replication: 0
+          replication: false
           galera_cluster: true
           extra_status_metrics: true
           extra_innodb_metrics: true

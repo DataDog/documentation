@@ -114,6 +114,11 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
 
+## Additional options
+### Event overlays
+
+View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -127,3 +132,4 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [7]: /graphing/metrics/introduction
 [8]: /graphing/functions/rollup
 [9]: /graphing/functions/#apply-functions-optional
+[10]: /graphing/event_stream/#event-query-language

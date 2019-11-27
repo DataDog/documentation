@@ -139,6 +139,28 @@ func main() {
 
 For more tracer settings, see available options in the [configuration documentation][57].
 
+### B3 Headers Extraction and Injection
+
+The Datadog APM tracer supports [B3 headers extraction][58] and injection for distributed tracing.
+
+Distributed headers injection and extraction is controlled by
+configuring injection/extraction styles. Two styles are
+supported: `Datadog` and `B3`.
+
+Configure injection styles using the environment variable
+`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+
+Configure extraction styles using the environment variable
+`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+
+The values of these environment variables are comma separated lists of
+header styles that are enabled for injection or extraction. By default only
+the `Datadog` extraction style is enabled.
+
+If multiple extraction styles are enabled, extraction attempts are made
+in the order that those styles are specified. The first successfully
+extracted value is used.
+
 ## Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
@@ -227,3 +249,4 @@ func main() {
 [55]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault
 [56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [57]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[58]: https://github.com/openzipkin/b3-propagation

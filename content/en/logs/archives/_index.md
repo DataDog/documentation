@@ -81,6 +81,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save." responsive="true" style="width:75%;">}}
 
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
@@ -88,14 +89,9 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [5]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [6]: /logs/archives/rehydrating
 [7]: https://app.datadoghq.eu/logs/pipelines/archives
-
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
-
-<div class="alert alert-warning">
-    GCS Archives are in private beta. Request early access by contacting <a href="/help">Datadog Support</a>. GCS Archives do not yet support rehydration.
-</div>
 
 1. Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 
@@ -111,6 +107,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
   {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
 
+
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
 [3]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
@@ -118,7 +115,6 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [5]: https://console.cloud.google.com/apis/credentials
 [6]: https://console.cloud.google.com/iam-admin/iam
 [7]: https://app.datadoghq.com/logs/pipelines/archives
-
 {{% /tab %}}
 {{< /tabs >}}
 
