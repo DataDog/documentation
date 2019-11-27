@@ -62,6 +62,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -79,8 +80,11 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            ## Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
-            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to collect StatsD metrics from other containers.
+            ## Custom metrics via DogStatsD - uncomment this section to enable
+            ## custom metrics collection.
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
+            ## from other containers.
+            #
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
@@ -90,34 +94,32 @@ spec:
             name: traceport
             protocol: TCP
         env:
-          - name: DD_API_KEY
-            value: "<YOUR_API_KEY>"
-            ## Kubernetes secrets - use this section instead of `value` to supply the API Key with secrets
-            # valueFrom:
-            #   secretKeyRef:
-            #     name: datadog-secret
-            #     key: api-key
+          ## Set the Datadog API Key related to your Organization
+          ## If you use the Kubernetes Secret use the following env variable:
+          ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
+          - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
 
-          ## Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site
-          - name: DD_SITE
-            value: "datadoghq.com"
+          ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
+          - {name: DD_SITE, value: "datadoghq.com"}
 
           ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
-          - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-            value: "false"
-          - name: DD_COLLECT_KUBERNETES_EVENTS
-            value: "true"
-          - name: DD_LEADER_ELECTION
-            value: "true"
-          - name: KUBERNETES
-            value: "true"
+          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
+          - {name: KUBERNETES, value: "true"}
+          - {name: DD_HEALTH_PORT, value: "5555"}
+          - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
+          - {name: DD_LEADER_ELECTION, value: "true" }
+          - {name: DD_APM_ENABLED, value: "true" }
+
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-          - name: DD_APM_ENABLED
-            value: "true"
-        ## Note these are the minimum suggested values for requests and limits. The amount of resources required by the Agent varies depending on the number of checks, integrations, and features enabled.
+
+        ## Note these are the minimum suggested values for requests and limits.
+        ## The amount of resources required by the Agent varies depending on:
+        ## * The number of checks
+        ## * The number of integrations enabled
+        ## * The number of features enabled
         resources:
           requests:
             memory: "256Mi"
@@ -126,42 +128,34 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - name: dockersocket
-            mountPath: /var/run/docker.sock
-          - name: logpodpath
-            mountPath: /var/log/pods
-          ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
-          - name: logcontainerpath
-            mountPath: /var/lib/docker/containers
-          - name: procdir
-            mountPath: /host/proc
-            readOnly: true
-          - name: cgroups
-            mountPath: /host/sys/fs/cgroup
-            readOnly: true
+          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: procdir, mountPath: /host/proc, readOnly: true}
+          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
+          - {name: s6-run, mountPath: /var/run/s6}
+          - {name: logpodpath, mountPath: /var/log/pods}
+          ## Docker runtime directory, replace this path with your container runtime
+          ## logs directory, or remove this configuration if `/var/log/pods`
+          ## is not a symlink to any other directory.
+          - {name: logcontainerpath, mountPath: /var/lib/docker/containers}
         livenessProbe:
-          exec:
-            command:
-            - ./probe.sh
+          httpGet:
+            path: /health
+            port: 5555
           initialDelaySeconds: 15
-          periodSeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
       volumes:
-        - hostPath:
-            path: /var/run/docker.sock
-          name: dockersocket
-        - hostPath:
-            path: /proc
-          name: procdir
-        - hostPath:
-            path: /var/log/pods
-          name: logpodpath
-        ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: logcontainerpath
-        - hostPath:
-            path: /sys/fs/cgroup
-          name: cgroups
+        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: procdir, hostPath: {path: /proc}}
+        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
+        - {name: s6-run, emptyDir: {}}
+        - {name: logpodpath, hostPath: {path: /var/log/pods}}
+        ## Docker runtime directory, replace this path with your container runtime
+        ## logs directory, or remove this configuration if `/var/log/pods`
+        ## is not a symlink to any other directory.
+        - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
 Replace `<YOUR_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
