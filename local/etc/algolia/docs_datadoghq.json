@@ -27,6 +27,7 @@
           "monitors",
           "tracing",
           "logs",
+          "real_user_monitoring",
           "developers",
           "account_management",
           "synthetics"
@@ -48,6 +49,8 @@
           "monitors",
           "tracing",
           "logs",
+          "synthetics",
+          "real_user_monitoring",
           "developers"
         ],
         "localisation": [
@@ -106,9 +109,10 @@
           "developers",
           "graphing",
           "logs",
+          "synthetics",
+          "real_user_monitoring",
           "monitors",
           "security",
-          "synthetics",
           "tagging",
           "tracing",
           "watchdog"
