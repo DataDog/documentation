@@ -69,9 +69,9 @@ Remplacez les paramÃ¨tres fictifs `<VOTRE_CLÃ‰_API_DATADOG>` et `<VOTRE_CLÃ‰_APP
 {{% tab "RÃ©ponse" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
-{ÿ
-  "data": {ÿ
-    "attributes": {ÿ
+{
+  "data": {
+    "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
       "created_by": "string",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
@@ -79,15 +79,15 @@ Remplacez les paramÃ¨tres fictifs `<VOTRE_CLÃ‰_API_DATADOG>` et `<VOTRE_CLÃ‰_APP
     },
     "type": "authn_mappings",
     "id": "string",
-    "relationships": {ÿ
-      "saml_assertion_attributes": {ÿ
-        "data": {ÿ
+    "relationships": {
+      "saml_assertion_attributes": {
+        "data": {
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {ÿ
-        "data": {ÿ
+      "roles": {
+        "data": {
           "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
         }
@@ -95,18 +95,18 @@ Remplacez les paramÃ¨tres fictifs `<VOTRE_CLÃ‰_API_DATADOG>` et `<VOTRE_CLÃ‰_APP
     }
   },
   "included": [
-    {ÿ
-      "data": {ÿ
+    {
+      "data": {
         "id": "string",
         "type": "roles",
-        "attributes": {ÿ
+        "attributes": {
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
           "name": "string"
         },
-        "relationships": {ÿ
+        "relationships": {
           "data": [
-            {ÿ
+            {
               "id": "123e4567-e89b-12d3-a456-426655441000",
               "type": "permissions"
             }
@@ -114,11 +114,11 @@ Remplacez les paramÃ¨tres fictifs `<VOTRE_CLÃ‰_API_DATADOG>` et `<VOTRE_CLÃ‰_APP
         }
       }
     },
-    {ÿ
-      "data": {ÿ
+    {
+      "data": {
         "id": 6,
         "type": "saml_assertion_attributes",
-        "attributes": {ÿ
+        "attributes": {
           "id": 6,
           "attribute_key": "string",
           "attribute_value": "string"
