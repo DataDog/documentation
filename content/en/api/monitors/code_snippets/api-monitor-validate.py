@@ -13,7 +13,7 @@ monitor_options = {"thresholds": {"critical": 90.0}}
 
 # Validate a monitor's definition
 api.Monitor.validate(
-  type=monitor_type,
-  query=query,
-  options=monitor_options,
+    type=monitor_type,
+    query=query,
+    options=monitor_options,
 )
