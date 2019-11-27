@@ -16,7 +16,7 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 
 ### Infrastructure monitoring
 
-* A **host** is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour.
+* A **host** is a physical or virtual operating system instance. Once an hour, Datadog records the number of hosts you are concurrently monitoring in the infrastructure service.
    * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Datadog records the number of containers you are concurrently monitoring in the Datadog Infrastructure service at five-minute intervals. Datadog charges monthly based on the fractional hours of monitored containers.
@@ -52,7 +52,7 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 
 * A **session** is a user journey on your web application. It expires after 15 minutes of inactivity.
 
-* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors and long tasks. All of this is included in the user session. Datadog charges per ten thousand sessions ingested in the Datadog Real User Monitoring (RUM) service.
+* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
 ## Troubleshooting
 

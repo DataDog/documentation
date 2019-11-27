@@ -68,7 +68,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ### Add global metadata
 
-Once RUM initialized, add extra metadata to all RUM event collected from your application with the `addRumGlobalContext` API:
+Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM events collected from your application with the `addRumGlobalContext` API:
 
 ```js
 // add global metadata attribute--one attribute can be added at a time
@@ -77,7 +77,7 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 ### Replace default context
 
-Once RUM initialized you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
+Once Real User Monitoring (RUM) initialized you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
 
 ```js
 // Entirely replace the default context for all your views
@@ -86,7 +86,7 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 
 ### Client Tokens
 
-For security reasons, [API keys][2] cannot be used to configure the script to send data from browsers, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
+For security reasons, [API keys][2] cannot be used to configure the script to send data from browsers as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
 
 ## Further Reading
 

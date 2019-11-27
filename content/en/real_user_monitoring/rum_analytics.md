@@ -13,34 +13,34 @@ further_reading:
 
 ## Overview
 
-Rum analytics extend the views explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
+Real User Monitoring (RUM) analytics extend the views explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
 
-* the query that filters the set of views to analyze
-* the dimensions over which to split data
-* the visualization method for aggregates and splits
+* The query that filters the set of views to analyze.
+* The dimensions over which to split data.
+* The visualization method for aggregates and splits.
 
 From an analytics visualization, you can, additionally:
 
-* create a widget in a dashboard out of that visualization
-* deep dive into subsets of the events list, depending on the interactions that the visualization enables
+* Create a widget in a dashboard out of that visualization.
+* Dive deeper into subsets of the events list, depending on the interactions that the visualization enables.
 
 ## Build an analytics query
 
 Use the query to control what's displayed in your RUM Analytics:
 
-1. Choose a [Measure][1] or [Facet][2] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
+1. Choose a [measure][1] or [facet][2] to graph. [measure][1] lets you choose the aggregation function whereas [facet][2] displays the unique count.
 
     {{< img src="real_user_monitoring/rum_analytics/measure_selection.png" alt="measure selection" responsive="true" style="width:50%;">}}
-2. Select the aggregation function for the [Measure][1] you want to graph:
+2. Select the aggregation function for the [measure][1] you want to graph:
 
     {{< img src="real_user_monitoring/rum_analytics/aggregation.png" alt="aggregation function for RUM Analytics" responsive="true" style="width:50%;">}}
 
-3. Use a [Facet][2] to split your graph.
+3. Use a [facet][2] to split your graph.
 
     {{< img src="real_user_monitoring/rum_analytics/break_down.png" alt="split by facet RUM Analytics" responsive="true" style="width:50%;">}}
 
 4. Choose the time interval for your graph.
-  Changing the global timeframe changes the list of available Timesteps values.
+  Changing the global timeframe changes the list of available timestep values.
 
     {{< img src="real_user_monitoring/rum_analytics/roll_up.png" alt="rollup" responsive="true" style="width:50%;">}}
 
@@ -50,7 +50,7 @@ Use the query to control what's displayed in your RUM Analytics:
 
 ## Visualizations
 
-Select a RUM Analytics visualization type using the graph selector:
+Select a RUM analytics visualization type using the graph selector:
 
 {{< img src="real_user_monitoring/rum_analytics/graph_selector.png" alt="RUM Analytics graph selector" responsive="true" style="width:50%;">}}
 
@@ -63,9 +63,9 @@ Visualize the evolution of a single [measure][1] (or a [facet][2] unique count o
 
 You have additional display options for timeseries:
 
-* whether you display lines, bars, or areas
-* data stacking option, by value, or by percentage
-* color set
+* Whether you display lines, bars, or areas.
+* Data stacking option: by value or by percentage.
+* Color set.
 
 Noteworthy facts about stacking:
 
@@ -75,7 +75,7 @@ Noteworthy facts about stacking:
 * Stacking may not make sense when you have non-unique values in the split facet.
 * Stacking may not make sense for some aggregation methods for measures.
 
-The following timeseries RUM Analytics shows:
+The following timeseries RUM analytics shows:
 
 The evolution of the **Browser Family** according to the **90th percentile** of **DOM interactive time** over the last 7 days.
 
@@ -90,7 +90,7 @@ The evolution of the **Browser Family** according to the **90th percentile** of 
 
 Visualize the top values from a [facet][1] according to the chosen [measure][2]:
 
-The following Top List RUM Analytics shows:
+The following Top List RUM analytics shows:
 
 The evolution of the **top 10 URL Paths** according to the number of **unique Sessions ID** over the last day.
 
@@ -102,7 +102,7 @@ The evolution of the **top 10 URL Paths** according to the number of **unique Se
 {{% /tab %}}
 {{% tab "Table" %}}
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through events corresponding to either dimension.
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top value. Update search query or drill through events corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -110,7 +110,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
  **Note**: A table visualization used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
- The following Table RUM Analytics shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
+ The following table, Real User Monitoring (RUM) Analytics, shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
 
 {{< img src="real_user_monitoring/rum_analytics/rum_table_example.png" alt="RUM table example" responsive="true" style="width:90%;">}}
 

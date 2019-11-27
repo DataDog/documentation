@@ -36,7 +36,7 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
 5. Define the Analyzed Span volume rate you would like to set as a warning or error.
-6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
+6. Define an explicit notification: The volume of Analyzed Spans on this service is too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
 Learn more about Analyzed Span filtering and usage control [here][7].
 

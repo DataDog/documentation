@@ -12,11 +12,11 @@ The Views Explorer allow you to explore all your views collected from your diffe
 
 ## Context
 
-Build up a context to explore your views in your Views explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and Analytics.
+Build up a context to explore your views in your Views Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and analytics.
 
 ### Time Range
 
-It appears directly under the search bar as a timeline. The time range feature allows you to display view in the view steam or Analytics within a given time period.
+It appears directly under the search bar as a timeline. The time range feature allows you to display view in the view steam or analytics within a given time period.
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -45,7 +45,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 #### Facets search
 
-To search on a specific attribute, first [add it as a facet](#facets--measures) and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, first [add it as a facet](#facets-measures) and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
@@ -87,15 +87,15 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 ## Vizualisation
 
-Click on any view to open the views panel and see more details about it: Resources, Traces, Errors, User Action, Long task, Logs, and Attributes:
+Click on any view (Resources, Traces, Errors, User Action, Long task, Logs, or Attributes) to open the views panel and see more details about it:
 
 {{< img src="real_user_monitoring/rum_explorer/rum_views.png" alt="Rum View" responsive="true" style="width:80%;">}}
 
 ## Facets & Measures
 
-After [being collected][1], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Analytics][2].
+After [being collected][1], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][2].
 
-Note: To leverage the most out of your Views explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
+Note: To leverage the most out of your Views Explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -110,9 +110,9 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM analytics query][1].
 
-[1]: /real_user_monitoring/rum_analyics
+[1]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{% tab "Measures" %}}
 
@@ -124,7 +124,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="real_user_monitoring/rum_explorer/create_measure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the Facet Panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM analytics query][1].
 
 **Select the Measure Unit**:
 
@@ -132,7 +132,7 @@ Each measure has its own unit that is then used for display in the Views explore
 
 {{< img src="real_user_monitoring/rum_explorer/edit_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
-[1]: /real_user_monitoring/rum_analyics
+[1]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{< /tabs >}}
 
