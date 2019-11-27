@@ -48,6 +48,10 @@ nav_sections:
         link: synthetics/
         icon: synthetics.svg
         desc: Ensure application uptime, identify regional issues, & track performance
+      - title: Real User Monitoring
+        link: real_user_monitoring/
+        icon: rum.svg
+        desc: Visualize and analyze the performance of your front end applications.
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg

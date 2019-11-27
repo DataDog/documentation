@@ -27,7 +27,7 @@ To use APM, start by sending your [traces][1] to Datadog, and then [configure yo
 
 ## Datadog Agent
 
-APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][3] if you are sending traces from a nonlocal environment (like a container).
+APM is enabled by default in Agent 6. If you are sending traces from a nonlocal environment (like a container), set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][3].
 
 To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][4] configuration file. For all of the metrics sent to Datadog by the Agent, see [APM metrics sent by the Datadog Agent][5]. For more information about the Datadog Agent, see the [Agent documentation][6] or refer to the [`datadog.yaml` configuration template][7].
 
@@ -84,7 +84,7 @@ Next, [Instrument your application][14]. For the full overview of all of the ste
 [1]: /tracing/visualization/#trace
 [2]: /tracing
 [3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[4]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
+[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics
 [6]: /agent
 [7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

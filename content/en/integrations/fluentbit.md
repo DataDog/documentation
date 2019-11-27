@@ -35,7 +35,7 @@ Before you begin, you need to have a [Datadog account][2], a [Datadog API key][3
 | Key | Description | Default |
 |-------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | Host | _Required_ - The Datadog server where you are sending your logs. | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
-| TLS | _Required_ - End-to-end security communications security protocol. Datadog recommends leaving this `on`. | `on` |
+| TLS | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`. | `off` |
 | apikey | _Required_ - Your [Datadog API key][3]. |  |
 | dd\_service | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |  |
 | dd\_source | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |  |

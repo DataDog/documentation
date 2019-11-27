@@ -65,6 +65,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 * `10` for the first 30 seconds
 * `20` for the second interval of 30 seconds
 * `null` for the last interval of 30 seconds
+
 **Note**: for a `COUNT` metric, when a `0` value is submitted, `null` is stored within Datadog.
 
 When graphed, this `COUNT` metric looks like the following:
@@ -119,8 +120,12 @@ For instance, say that the `number.of.requests.gauge` metric is reported every 3
 Each value/data point represents the total number of requests received at a point in time. The metric then reports the following values:
 
 * `10` for the first 30 seconds
-* `20` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds
+* `30` for the second interval of 30 seconds (10 + 20 requests)
+* `30` for the last interval of 30 seconds (no new request are received so the value stays the same)
+
+When graphed, this `GAUGE` metric looks like the following:
+
+{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
 
 Discover how to submit gauge metrics:
 
@@ -174,10 +179,6 @@ Discover how to submit histogram metrics:
 [4]: /developers/metrics/dogstatsd_metrics_submission/#histogram
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
-
-<div class="alert alert-warning">
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
-</div>
 
 **A `DISTRIBUTION` is a metric submission type that allows you to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.** `DISTRIBUTION` metrics are designed to instrument logical objects, like services, independently from the underlying hosts.
 

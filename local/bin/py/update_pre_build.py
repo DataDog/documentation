@@ -1045,7 +1045,7 @@ class PreBuild:
                     del item[0]["type"]
                 item[0]["dependencies"] = dependencies
                 fm = yaml.dump(
-                    item[0], default_flow_style=False
+                    item[0], width=150, default_style='"', default_flow_style=False
                 ).rstrip()
             else:
                 fm = {"kind": "integration"}

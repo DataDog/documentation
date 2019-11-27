@@ -20,9 +20,7 @@ Since commitments are monthly, if you over-generate log events for 1 day it may 
 
 There are several places where you can see the number of log events you have sent to Datadog.
 
-1. On the [Usage page][1], there is a column which shows the hourly number of indexed log events:
-
-    {{< img src="account_management/billing/log-events01.png" alt="Log Events" responsive="true">}}
+1. On the [Usage page][1], there is a Month-to-Date and a graph named `Indexed Logs` and which shows the hourly number of indexed log events:
 
 2. On the [Configuration page][2], double-click on an index to see the number of log events that were indexed in the past couple days.
 

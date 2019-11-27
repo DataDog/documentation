@@ -79,7 +79,12 @@ Define the request you want to be executed by Datadog:
 
 ### Alert Conditions
 
-Set alert conditions to determine the circumstances under which you want a test to send a notification alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+Set alert conditions to determine the circumstances under which you want a test to send a notification alert:
+
+{{< tabs >}}
+{{% tab "HTTP Test" %}}
+
+When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
@@ -87,20 +92,26 @@ Set alert conditions to determine the circumstances under which you want a test 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
 **Note**: You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
+{{% /tab %}}
+{{% tab "SSL Test" %}}
+
+If one of the assertions defined fails for a given location, an alert is triggered.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Assertions
 
-When running an API test, you must define at least one assertion that should be monitored by Datadog.
-An assertion is defined by a parameter, an optional property, a comparator, and a target value.
+When running an API test, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, an optional property, a comparator, and a target value.
 
 {{< tabs >}}
 
 {{% tab "HTTP Test" %}}
 
-| Type          | Operator                                                                        | Value type                            |
-| ------------- | ------------------------------------------------------------------------------- | ------------------------------------- |
-| Status Code   | `is`, `is not`                                                                  | _Integer_                             |
-| Response time | `lessThan`                                                                     | _Integer (ms)_                        |
+| Type          | Operator                                                                        | Value type                 |
+|---------------|---------------------------------------------------------------------------------|----------------------------|
+| Status Code   | `is`, `is not`                                                                  | _Integer_                  |
+| Response time | `lessThan`                                                                      | _Integer (ms)_             |
 | Headers       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | Body          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 
@@ -115,14 +126,16 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 
 {{% tab "SSL Test" %}}
 
-| Type        | Operator               | Value type                 |
-| ----------- | ---------------------- | -------------------------- |
-| certificate | `expires in more than` | _Integer (number of days)_ |
+| Type        | Operator                                                                        | Value type                 |
+|-------------|---------------------------------------------------------------------------------|----------------------------|
+| certificate | `expires in more than`                                                          | _Integer (number of days)_ |
+| property    | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_  |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
 
 - `certificate` _expires in more than_ 10 days
 
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -135,13 +148,13 @@ You can create up to 10 assertions per API test by clicking on **Add new asserti
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. These reasons include:
 
-| Error           | Description                                                                                                                                                                                    |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
-| DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
-| `INVALID_REQUEST` | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. A `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. A `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).                                                                                                                                      |
+| Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc.                                                                                                                                                                                                                                                         |
+| DNS               | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
+| `INVALID_REQUEST` | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
+| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                                                                                                                                                                                                                                                                                      |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. A `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. A `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 
@@ -167,8 +180,8 @@ Notifications example:
 
 The Synthetics details page displays the following network timings:
 
-| Timing                    | Description                                                                                           |
-|---------------------------|-------------------------------------------------------------------------------------------------------|
+| Timing                      | Description                                                                                           |
+|-----------------------------|-------------------------------------------------------------------------------------------------------|
 | `DNS`                       | Time spent resolving the DNS name of the last request.                                                |
 | `Connect`                   | Time spent establishing a connection to the server.                                                   |
 | `SSL`                       | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
