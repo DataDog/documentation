@@ -106,9 +106,11 @@
           "developers",
           "graphing",
           "logs",
+          "synthetics",
+          "real_user_monitoring",
+          "network_performance_monitoring",
           "monitors",
           "security",
-          "synthetics",
           "tagging",
           "tracing",
           "watchdog"
