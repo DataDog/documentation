@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring (RUM) analytics extend the views explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
+The RUM Analytics extend the RUM Explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
 
 * The query that filters the set of views to analyze.
 * The dimensions over which to split data.
@@ -50,7 +50,7 @@ Use the query to control what's displayed in your RUM Analytics:
 
 ## Visualizations
 
-Select a RUM analytics visualization type using the graph selector:
+Select a RUM Analytics visualization type using the graph selector:
 
 {{< img src="real_user_monitoring/rum_analytics/graph_selector.png" alt="RUM Analytics graph selector" responsive="true" style="width:50%;">}}
 
@@ -75,7 +75,7 @@ Noteworthy facts about stacking:
 * Stacking may not make sense when you have non-unique values in the split facet.
 * Stacking may not make sense for some aggregation methods for measures.
 
-The following timeseries RUM analytics shows:
+The following RUM Analytics timeseries shows:
 
 The evolution of the **Browser Family** according to the **90th percentile** of **DOM interactive time** over the last 7 days.
 
@@ -90,7 +90,7 @@ The evolution of the **Browser Family** according to the **90th percentile** of 
 
 Visualize the top values from a [facet][1] according to the chosen [measure][2]:
 
-The following Top List RUM analytics shows:
+The following RUM Analytics Top List shows:
 
 The evolution of the **top 10 URL Paths** according to the number of **unique Sessions ID** over the last day.
 
@@ -110,7 +110,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
  **Note**: A table visualization used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
- The following table, Real User Monitoring (RUM) Analytics, shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
+ The following RUM Analytics table shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
 
 {{< img src="real_user_monitoring/rum_analytics/rum_table_example.png" alt="RUM table example" responsive="true" style="width:90%;">}}
 

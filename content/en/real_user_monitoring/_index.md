@@ -20,11 +20,11 @@ further_reading:
 
 ## What is Real User Monitoring?
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the performance of your front end applications as seen by your users. It follows the latency from the frontend to the backend using advanced visualizations. The `datadog-browser-agent` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the performance of your front end applications as seen by your users. It follows the latency from the frontend to the backend using advanced visualizations. The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup">}}<u>Setup</u>: Setup Real User Monitoring over your application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/rum_explorer/">}}<u>Views Explorer</u>: Discover the Views Explorer page, how to add Facets and Measures.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/rum_explorer/">}}<u>RUM Explorer</u>: Discover the RUM Explorer page, how to add Facets and Measures.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/rum_analytics">}}<u>RUM Analytics</u>: Perform RUM Analytics over all your events.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -37,7 +37,7 @@ By default, all data collected is kept at full granularity for 15 days. The Data
 | View           | Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .                                                                                         |
 | Resource       | A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.                                                                                                                  |
 | Long task      | Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation. This causes input latency, event handling latency, etc. Only available in Chrome and Opera. See the [Long Task MDN documentation][1] for more information. |
-| Error          | Every time an error is logged in the browser console, RUM catches it and sends it as an Error Event to Datadog.                                                                                                                                                                               |
+| Error          | Every time a front end error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.                                                                                                                                                                               |
 | User Action    | A User Action event is a custom event that can be generated for a given user action.                                                                                                                                                                                                       |
 
 The following contexts—following the [Datadog Standard Attributes][2] logic—are attached automatically to all events sent to Datadog:
