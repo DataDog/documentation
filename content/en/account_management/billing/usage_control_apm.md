@@ -47,6 +47,7 @@ For cost control, you can reduce the number of billable Analyzed Spans by [filte
 
 You can also choose to enable App Analytics per service, or per integration in code using [these language specific instructions][11].
 
+
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing
 [3]: /tracing/visualization/#apm-event
@@ -56,6 +57,5 @@ You can also choose to enable App Analytics per service, or per integration in c
 [7]: https://app.datadoghq.com/apm/docs/trace-search
 [8]: /account_management/billing/usage_control_apm/#choose-analyzed-span-retention
 [9]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
-[10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/
+[10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage
 [11]: tracing/app_analytics/?tab=java#configure-additional-services-optional
-
