@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The RUM Analytics extend the RUM Explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
+Real User Monitoring (RUM) Analytics extend the RUM Explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
 
 * The query that filters the set of views to analyze.
 * The dimensions over which to split data.

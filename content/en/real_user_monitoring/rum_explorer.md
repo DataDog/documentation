@@ -8,7 +8,7 @@ further_reading:
   text: "Build analytics upon your events."
 ---
 
-The RUM Explorer allow you to explore all your views collected from your different applications.
+The Real User Monitoring (RUM) Explorer allow you to explore all your views collected from your different applications.
 
 ## Context
 

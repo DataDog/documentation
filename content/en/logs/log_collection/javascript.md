@@ -28,8 +28,8 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 * Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
 * Add `context` and extra custom attributes to each log sent.
-* Wrap and forward every front end error automatically.
-* Forward front end errors.
+* Wrap and forward every frontend error automatically.
+* Forward frontend errors.
 * Record real client IP addresses and user agents.
 * Optimized network usage with automatic bulk posts.
 
@@ -41,7 +41,7 @@ For security reasons, [API keys][1] cannot be used to configure the `datadog-log
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
-* Set `forwardErrorsToLogs` to `false` to turn off automatic front end error collection.
+* Set `forwardErrorsToLogs` to `false` to turn off automatic frontend error collection.
 * Use `addLoggerGlobalContext` to add JSON attributes to all generated logs
 * Set `clientToken` to the value of the client token (**only client tokens can be used in this library**)
 
