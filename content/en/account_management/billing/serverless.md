@@ -1,6 +1,6 @@
 ---
 title: Serverless billing
-kind: faq
+kind: documentation
 ---
 
 ## Overview

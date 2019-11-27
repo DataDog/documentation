@@ -56,8 +56,8 @@ Choose the type of variable you want to create:
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:80%;">}}
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}} 
 
 {{< /tabs >}}
