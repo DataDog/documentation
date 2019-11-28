@@ -14,7 +14,7 @@ La page Usage contient les sections suivantes :
 
 ### Month-to-Date Summary
 
-Cette section résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom, des hosts APM, des événements APM, des logs, des synthetics et de toute autre partie de la plateforme que vous avez utilisée au cours du mois.
+Cette section résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom, des hosts APM, des spans analysées, des logs, des synthetics et de toute autre partie de la plateforme que vous avez utilisée au cours du mois.
 
 {{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" responsive="true">}}
 
@@ -37,7 +37,7 @@ Cet onglet présente l'utilisation horaire, quotidienne, mensuelle et annuelle d
 | Custom Metrics     | Affiche le nombre moyen des [métriques custom][2] distinctes pour toutes les heures du mois actuel.       |
 | Ingested Logs      | Affiche la somme de tous les octets de logs ingérés pour toutes les heures du mois actuel.                        |
 | Indexed Logs       | Affiche la somme de tous les événements de log indexés pour toutes les heures du mois actuel.                        |
-| Analyzed Spans         | Affiche la somme de tous les événements APM indexés pour toutes les heures du mois actuel.                        |
+| Spans analysées         | Affiche la somme de toutes les spans analysées indexées pour toutes les heures du mois actuel.                        |
 | Synthetics API Tests | Affiche la somme de tous les tests API Synthetics pour toutes les heures du mois actuel.                      |
 | Synthetics Browser Tests | Affiche la somme de tous les tests Browser Synthetics pour toutes les heures du mois actuel.              |
 | Fargate Tasks      | Affiche la somme de toutes les tâches Fargate pour toutes les heures du mois actuel.                            |

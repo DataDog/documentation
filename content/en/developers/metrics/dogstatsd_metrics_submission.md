@@ -10,7 +10,7 @@ further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/metrics_type"
+- link: "developers/metrics/types"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -26,7 +26,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 After [installing DogStatsD][1], the functions below are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
 
 | Parameter        | Type            | Required | Description                                                                                                                                                                                    |
-| ---------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | String          | Yes      | Name of the metric to submit.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                                                             |
 | `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
@@ -35,7 +35,7 @@ After [installing DogStatsD][1], the functions below are available for submittin
 ### COUNT
 
 | Method                                                        | Description                                               | Storage type                                                                                                                                            |
-| ------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
 | `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
 | `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
@@ -214,7 +214,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 ### GAUGE
 
 | Method                                                        | Datadog Storage type                                                                                                                                      |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period. |
 
 #### Code examples
@@ -384,7 +384,7 @@ After running the code above, your metric data is available to graph in Datadog:
 ### SET
 
 | Method                                                      | Datadog Storage type                                                                                                                                           |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period. |
 
 #### Code examples
@@ -532,7 +532,7 @@ After running the code above, your metrics data is available to graph in Datadog
 ### HISTOGRAM
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
 
 #### Configuration
@@ -696,7 +696,7 @@ while (TRUE) {
 The above instrumentation produces the following metrics:
 
 | Metric                                  | Description                             |
-| --------------------------------------- | --------------------------------------- |
+|-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | Number of times this metric was sampled |
 | `example_metric.histogram.avg`          | Average time of the sampled values      |
 | `example_metric.histogram.median`       | Median sampled value                    |
@@ -712,7 +712,7 @@ After running the code above, your metrics data is available to graph in Datadog
 `TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measure timing data only: for example, the amount of time a section of code takes to execute.
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
 
 ##### Configuration
@@ -770,12 +770,39 @@ while(1):
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+{{< code-block lang="php" filename="timer.php" >}}
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+function runfunction() {
+    sleep(rand(0, 20));
+}
+
+while (TRUE) {
+  $start_time = microtime(TRUE);
+  runfunction();
+  $statsd->microtiming('example_metric.timer', microtime(TRUE) - $start_time);
+}
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 As DogStatsD receives the timer metric data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
 | Metric                              | Description                             |
-| ----------------------------------- | --------------------------------------- |
+|-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | Number of times this metric was sampled |
 | `example_metric.timer.avg`          | Average time of the sampled values      |
 | `example_metric.timer.median`       | Median sampled value                    |
@@ -791,7 +818,7 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 Distribution metrics are in BETA. [Contact Datadog support][9] to enable the feature for your account.
 
 | Method                                                | Datadog Storage type                                                                                          |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
 
 #### Code examples
@@ -960,7 +987,7 @@ A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` 
 Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
 | Metric Type | Sample rate correction                                                                                                                                                         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 | `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
 | `SET`       | No correction. The value received is kept as is.                                                                                                                               |
@@ -1086,13 +1113,13 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
-[2]: /developers/metrics/metrics_type/?tab=count#metric-type-definition
+[2]: /developers/metrics/types/?tab=count#metric-type-definition
 [3]: /graphing/functions/arithmetic/#cumulative-sum
 [4]: /graphing/functions/arithmetic/#integral
-[5]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
-[6]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
-[7]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
+[5]: /developers/metrics/types/?tab=gauge#metric-type-definition
+[6]: /developers/metrics/types/?tab=set#metric-type-definition
+[7]: /developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [9]: /help
 [10]: /graphing/metrics/distributions
-[11]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[11]: /developers/metrics/types/?tab=distribution#metric-type-definition

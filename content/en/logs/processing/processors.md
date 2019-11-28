@@ -44,9 +44,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 "name": "Parsing Log message",
 "is_enabled": true,
 "source": "message",
+"samples": [
+    "sample log 1",
+    "sample log 2"
+    ],
 "grok": {
-    "support_rules": "<SUPPORT_RULES>",
-    "match_rules":"<MATCH_RULES>"
+    "support_rules": "<SUPPORT_RULES>",
+    "match_rules": "<MATCH_RULES>"
     }
 }
 ```
@@ -56,13 +60,18 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `type`               | String           | yes      | Type of the processor.                                  |
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
-| `sources`            | Array of Strings | yes      | Name of the log attribute to parse, default: `message`. |
+| `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
+| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               | 
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
+
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length.
+All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
 
@@ -289,7 +298,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
     "is_enabled": true,
     "source_type": "attribute",
     "sources": ["<SOURCE_ATTRIBUTE>"],
-    "target": "<TARGET_ATTRIBUTE",
+    "target": "<TARGET_ATTRIBUTE>",
     "target_type": "tag",
     "preserve_source": false,
     "override_on_conflict": false
@@ -525,7 +534,7 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 
 **Notes**:
 
-* The processor only accept attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* The processor only accepts attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
@@ -663,6 +672,60 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
+
+## Lookup Processor
+
+Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
+For example, you can use the Lookup Processor to map an internal service ID into a human readable service name. 
+Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor" responsive="true" style="width:80%;">}}
+
+The processor performs the following actions:
+
+* Looks if the current log contains the source attribute.
+* Checks if the source attribute value exists in the mapping table.
+  * If it does, creates the target attribute with the corresponding value in the table.
+  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
+
+You can fill the mapping table by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
+
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Processor JSON payload:
+
+```json
+{
+  "type" : "lookup-processor",
+  "name" : "<PROCESSOR_NAME>",
+  "is_enabled" : true,
+  "source" : "<SOURCE_ATTRIBUTE>",
+  "target" : "<TARGET_ATTRIBUTE>",
+  "lookup_table" : [ "key1,value1", "key2,value2" ],
+  "default_lookup" : "<DEFAULT_TARGET_VALUE>",
+}
+```
+
+| Parameter       | Type             | Required | Description|
+| ------          | -----            | -------- | -----      |
+| `type`          | String           | yes      | Type of the processor.|
+| `name`          | String           | no       | Name of the processor.|
+| `is_enabled`    | Boolean          | yes      | If the processor is enabled or not. Default: `false`|
+| `source`        | String           | yes      | Source attribute used to perform the lookup. |
+| `target`        | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.|
+| `lookup_table`  | Array of strings | yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
+| `default_lookup`| String           | no       | Value to set the target attribute if the source value is not found in the list.|
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Trace Remapper
 

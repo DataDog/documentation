@@ -52,7 +52,7 @@ further_reading:
 
 チェックステータスウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
 
-≪```
+```
 CHECK_STATUS_SCHEMA = {
     "type": "object",
     "properties": {
@@ -67,7 +67,7 @@ CHECK_STATUS_SCHEMA = {
     "required": ["type", "check", "grouping"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |

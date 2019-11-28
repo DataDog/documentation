@@ -1,6 +1,6 @@
 ---
 title: Containers billing
-kind: faq
+kind: documentation
 ---
 
 ## Overview

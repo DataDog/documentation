@@ -66,23 +66,17 @@ Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI
 
 Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à l'infrastructure de votre système d'exploitation.
 
-Ajoutez le [paquet NuGet][2] `Datadog.Trace.ClrProfiler.Managed` à votre application, en vérifiant que la version du paquet correspond à celle du programme d'installation MSI ci-dessus. Consultez la [documentation NuGet][3] pour découvrir comment ajouter un paquet NuGet à votre application.
-
 - Bibliothèque native : déployée dans `Program Files` par défaut et enregistrée par le programme d'installation MSI comme bibliothèque COM dans le registre Windows.
-- Bibliothèques gérées : déployées en même temps que votre application lors de sa publication (via le paquet NuGet).
-- Variables d'environnement : ajoutées par le programme d'installation MSI pour IIS uniquement, Les applications qui ne s'exécutent pas dans IIS requièrent une [configuration supplémentaire][4] pour définir ces variables d'environnement.
+- Bibliothèques gérées : déployées en même temps que la bibliothèque native.
+- Variables d'environnement : ajoutées par le programme d'installation MSI pour IIS uniquement. Les applications qui ne s'exécutent pas dans IIS requièrent une [configuration supplémentaire][2] pour définir ces variables d'environnement.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[4]: ?tab=netcoreonwindows#required-environment-variables
+[2]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab "Core .NET sur Linux" %}}
 
-Ajoutez le [paquet NuGet][1] `Datadog.Trace.ClrProfiler.Managed` à votre application, en vérifiant que la version du paquet correspond à celle du paquet ci-dessous. Consultez la [documentation NuGet][2] pour découvrir comment ajouter un paquet NuGet à votre application.
-
-Installez le traceur .NET sur le host à l'aide d'un des paquets disponibles sur la [page des versions][3] de `dd-trace-dotnet`.
+Installez le traceur .NET sur le host à l'aide d'un des paquets disponibles sur la [page des versions][1] de `dd-trace-dotnet`.
 
 Pour Debian ou Ubuntu, téléchargez et installez le paquet Debian :
 
@@ -113,13 +107,11 @@ apk add libc6-compat
 ```
 
 - Bibliothèque native : déployée par défaut dans `/opt/datadog/` ou manuellement si vous utilisez le paquet `tar`.
-- Bibliothèques gérées : déployées en même temps que votre application lors de sa publication (via le paquet NuGet).
-- Variables d'environnement : [configuration supplémentaire][4] requise.
+- Bibliothèques gérées : déployées en même temps que la bibliothèque native.
+- Variables d'environnement : [configuration supplémentaire][2] requise.
 
-[1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: ?tab=netcoreonlinux#required-environment-variables
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: ?tab=netcoreonlinux#required-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -132,7 +124,7 @@ apk add libc6-compat
 
 {{< tabs >}}
 
-{{% tab "Framework .NET sur Windows" %}}
+{{% tab ".NET Framework sur Windows" %}}
 
 Si vous avez utilisé le programme d'installation MSI sur Windows, les variables d'environnement requises sont déjà définies pour IIS. Après le redémarrage d'IIS, le traceur .NET est activé. Si votre application s'exécute sur IIS et que vous avez utilisé le programme d'installation MSI, vous pouvez ignorer le reste de cette section.
 
@@ -169,11 +161,11 @@ rem Start application
 example.exe
 ```
 
-**Remarque** : Pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
+**Remarque** : pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
 
 {{% /tab %}}
 
-{{% tab "Core .NET sur Windows" %}}
+{{% tab ".NET Core sur Windows" %}}
 
 Si vous avez utilisé le programme d'installation MSI sur Windows, les variables d'environnement requises sont déjà définies pour IIS. Après le redémarrage d'IIS, le traceur .NET est activé. Si votre application s'exécute sur IIS et que vous avez utilisé le programme d'installation MSI, vous pouvez ignorer le reste de cette section.
 
@@ -196,7 +188,7 @@ DD_INTEGRATIONS=%PROGRAMFILES%\Datadog\.NET Tracer\integrations.json
 DD_DOTNET_TRACER_HOME=%PROGRAMFILES%\Datadog\.NET Tracer
 ```
 
-Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
+Par exemple, pour les définir à partir d'un fichier batch avant de démarrer votre application :
 
 ```bat
 rem Set environment variables
@@ -210,11 +202,11 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-**Remarque** : Pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
+**Remarque** : pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
 
 {{% /tab %}}
 
-{{% tab "Core .NET sur Linux" %}}
+{{% tab ".NET Core sur Linux" %}}
 
 Sous Linux, les variables d'environnement suivantes sont requises pour activer l'instrumentation automatique :
 
@@ -226,7 +218,7 @@ DD_INTEGRATIONS=/opt/datadog/integrations.json
 DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
-Par exemple, pour les définir à partir d'un fichier Batch avant de démarrer votre application :
+Par exemple, pour les définir à partir d'un fichier batch avant de démarrer votre application :
 
 ```bash
 # Définir les variables d'environnement
@@ -259,7 +251,7 @@ Environment=DD_DOTNET_TRACER_HOME=/opt/datadog
 WantedBy=multi-user.target
 ```
 
-Pour définir les variables d'environnement sur un conteneur Linux, utilisez `ENV` :
+Pour définir les variables d'environnement sur un conteneur Linux dans Docker, utilisez `ENV` :
 
 ```
 ENV CORECLR_ENABLE_PROFILING=1
@@ -277,10 +269,10 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
 Le traceur .NET prend en charge l'instrumentation automatique sur les runtimes suivants :
 
-| Runtime                | Versions | Système d'exploitation              |
-| ---------------------- | -------- | --------------- |
-| Framework .NET         | 4.5+     | Windows         |
-| Core .NET <sup>1</sup> | 2.0+     | Windows, Linux  |
+| Runtime                | Versions | Système d'exploitation             |
+|------------------------|----------|----------------|
+| .NET Framework         | 4.5+     | Windows        |
+| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux |
 
 <sup>1</sup> Les versions 2.1.0, 2.1.1, et 2.1.2 de .NET Core souffrent d'un problème qui peut empêcher les profileurs de fonctionner correctement. Ce problème est résolu dans .NET Core 2.1.3. Consultez [ce ticket GitHub][2] pour en savoir plus.
 
@@ -290,24 +282,23 @@ Votre framework préféré n'est pas disponible ? Datadog élargit continuellem
 
 Le traceur .NET peut instrumenter automatiquement les bibliothèques suivantes :
 
-| Framework ou bibliothèque            | Nom du paquet NuGet                       | Versions du paquet     | Nom de l'intégration     |
-| ------------------------------- | ---------------------------------------- | -------------------- | -------------------- |
-| ASP.NET MVC                     | `Microsoft.AspNet.Mvc`                   | 5.1.0+ et 4.0.40804 | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
-| Core ASP.NET MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup>  | Intégré                                 |                      | `AspNet`             |
-| WCF                             | Intégré                                 |                      | `Wcf`                |
-| ADO.NET <sup>2</sup>            | Intégré                                 |                      | `AdoNet`             |
-| WebClient / WebRequest          | Intégré                                 |                      | `WebRequest`         |
-| HttpClient / HttpClientHandler  | Intégré ou `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
-| Redis (client StackExchange)    | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
-| Redis (client ServiceStack)     | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
-| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
-
+| Framework ou bibliothèque           | Nom du paquet NuGet                       | Versions du paquet     | Nom de l'intégration     |
+|--------------------------------|------------------------------------------|----------------------|----------------------|
+| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+               | `AspNetMvc`          |
+| ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
+| Core ASP.NET MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
+| ASP.NET Web Forms <sup>1</sup> | Intégré                                 |                      | `AspNet`             |
+| WCF                            | Intégré                                 |                      | `Wcf`                |
+| ADO.NET <sup>2</sup>           | Intégré                                 |                      | `AdoNet`             |
+| WebClient / WebRequest         | Intégré                                 |                      | `WebRequest`         |
+| HttpClient / HttpClientHandler | Intégré ou `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
+| Redis (client StackExchange)   | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
+| Redis (client ServiceStack)    | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
+| Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
+| MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
 Remarques :
 
-<sup>1</sup> L'intégration `AspNet` permet l'instrumentation de n'importe quelle application ASP.NET basée sur `System.Web.HttpApplication`, notamment des applications développées avec Web Forms, MVC, Web API et d'autres frameworks Web. Pour activer l'intégration `AspNet`, vous devez ajouter le paquet NuGet [`Datadog.Trace.ClrProfiler.Managed`][4] à votre application.
+<sup>1</sup> L'intégration `AspNet` permet l'instrumentation de n'importe quelle application ASP.NET basée sur `System.Web.HttpApplication`, notamment des applications développées avec Web Forms, MVC, Web API et d'autres frameworks Web. Pour activer l'intégration `AspNet`, vous devez ajouter le paquet NuGet [`Datadog.Trace.ClrProfiler.Managed`][4] à votre application. Assurez-vous d'utiliser le paquet correspondant à votre version du MSI.
 
 <sup>2</sup> L'intégration ADO.NET tente d'instrumenter **tous** les fournisseurs ADO.NET. Nous avons testé SQL Server (`System.Data.SqlClient`) et PostgreSQL (`Npgsql`). Les autres fournisseurs (MySQL, SQLite, Oracle) n'ont pas été testés mais devraient fonctionner.
 
@@ -317,15 +308,15 @@ Votre framework préféré n'est pas disponible ? Datadog élargit continuellem
 
 Pour instrumenter manuellement votre code, ajoutez le [paquet NuGet][5] `Datadog.Trace` à votre application. Dans votre code, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouvelles spans.
 
-Pour en savoir plus sur l'instrumentation manuelle et l'utilisation de tags personnalisés, consultez la [documentation relative à l'instrumentation manuelle][6].
+Pour en savoir plus sur l'instrumentation manuelle et l'application de tags personnalisés, consultez la [documentation relative à l'instrumentation manuelle][6].
 
 ### Runtimes compatibles
 
 L'instrumentation manuelle est prise en charge sur le Framework .NET 4.5+ pour Windows et sur n'importe quelle plateforme où .NET Standard 2.0 (ou une version supérieure) est implémenté.
 
 | Runtime        | Versions | Système d'exploitation                    |
-| -------------- | -------- | --------------------- |
-| Framework .NET | 4.5+     | Windows               |
+|----------------|----------|-----------------------|
+| .NET Framework | 4.5+     | Windows               |
 | Core .NET      | 2.0+     | Windows, Linux, macOS |
 | Mono           | 5.4+     | Windows, Linux, macOS |
 
@@ -337,7 +328,7 @@ Il existe plusieurs façons de configurer le traceur .NET :
 
 - en code .NET ;
 - en définissant des variables d'environnement ;
-- en modifiant le fichier `app.config`/`web.config` de l'application (Framework .NET uniquement) ;
+- en modifiant le fichier `app.config`/`web.config` de l'application (.NET Framework uniquement) ;
 - en créant un fichier `datadog.json`.
 
 {{< tabs >}}
@@ -348,7 +339,7 @@ Pour configurer le traceur dans le code de l'application, créez un `TracerSetti
 ```csharp
 using Datadog.Trace;
 
-// lire les sources de configuration par défaut (env vars, web.config, datadog.json)
+// lire les sources de configuration par défaut (variables d'environnement, web.config, datadog.json)
 var settings = TracerSettings.FromDefaultSources();
 
 // modifier certains paramètres
@@ -384,7 +375,7 @@ rem Launch application
 MonApplication.exe
 ```
 
-**Remarque** : Pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
+**Remarque** : pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes `HKLM\System\CurrentControlSet\Services\{nom du service}\Environment` dans le registre Windows.
 
 Sur Linux :
 ```bash
@@ -436,38 +427,39 @@ Les tableaux suivants énumèrent les variables de configuration prises en charg
 
 Le premier tableau ci-dessous énumère les variables de configuration disponibles à la fois pour une instrumentation automatique ou manuelle.
 
-Nom du paramètre          | Nom de la propriété          | Description                                                                                                                                                                                                       |
---------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-`DD_TRACE_AGENT_URL`  | `AgentUri`             | Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. La valeur par défaut est `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
-`DD_AGENT_HOST`       | S. O.                    | Définit le host où les traces sont envoyées (le host qui exécute l'Agent). Peut être un hostname ou une adresse IP. Ignoré si `DD_TRACE_AGENT_URL` est défini. La valeur par défaut est `localhost`.                                       |
-`DD_TRACE_AGENT_PORT` | S. O.                    | Définit le port où les traces sont envoyées (le port où l'Agent écoute les connexions). Ignoré si `DD_TRACE_AGENT_URL` est défini. La valeur par défaut est `8126`.                                                     |
-`DD_ENV`              | `Environment`          | Lorsqu'il est défini, ce paramètre ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées. Consultez la documentation relative à la [configuration de l'Agent][8] pour en savoir plus sur le tag `env`.                                                              |
-`DD_SERVICE_NAME`     | `ServiceName`          | Lorsqu'il est spécifié, ce paramètre définit le nom du service par défaut. Sinon, le traceur .NET tente de déterminer automatiquement le nom du service à partir du nom de l'application (p. ex. nom de l'application IIS, exécutable du processus ou nom du processus). |
-`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Active ou désactive l'injection automatique d'identificateurs de corrélation dans les logs de l'application.                                                                                                                         |
+| Nom du paramètre            | Nom de la propriété          | Description                                                                                                                                                                                                       |
+|-------------------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_AGENT_URL`    | `AgentUri`             | Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. La valeur par défaut est `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
+| `DD_AGENT_HOST`         | S. O.                    | Définit le host où les traces sont envoyées (le host qui exécute l'Agent). Peut être un hostname ou une adresse IP. Ignoré si `DD_TRACE_AGENT_URL` est défini. La valeur par défaut est `localhost`.                                       |
+| `DD_TRACE_AGENT_PORT`   | S. O.                    | Définit le port où les traces sont envoyées (le port où l'Agent écoute les connexions). Ignoré si `DD_TRACE_AGENT_URL` est défini. La valeur par défaut est `8126`.                                                     |
+| `DD_ENV`                | `Environment`          | Lorsqu'il est défini, ce paramètre ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées. Consultez la documentation relative à la [configuration de l'Agent][8] pour en savoir plus sur le tag `env`.                                                              |
+| `DD_SERVICE_NAME`       | `ServiceName`          | Lorsqu'il est spécifié, ce paramètre définit le nom du service par défaut. Sinon, le traceur .NET tente de déterminer automatiquement le nom du service à partir du nom de l'application (p. ex. nom de l'application IIS, exécutable du processus ou nom du processus). |
+| `DD_LOGS_INJECTION`     | `LogsInjectionEnabled` | Active ou désactive l'injection automatique d'identificateurs de corrélation dans les logs de l'application.                                                                                                                         |
+| `DD_TRACE_GLOBAL_FLAGS` | `GlobalTags`           | Lorsqu'il est défini, ce paramètre ajoute tous les tags spécifiés à l'ensemble des spans générées.                                                                                                                                              |
 
 Le tableau suivant énumère les variables de configuration qui sont disponibles uniquement lors de l'utilisation de l'instrumentation automatique.
 
-Nom du paramètre                 | Nom de la propriété              | Description                                                                                                                                                                                                                                                                                  |
------------------------------| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-`DD_TRACE_ENABLED`           | `TraceEnabled`             | Active ou désactive toute instrumentation automatique. Lorsque la variable d'environnement est définie sur `false`, le profileur CLR est entièrement désactivé. Pour les autres méthodes de configuration, le profileur CLR est quand même chargé, mais aucune trace n'est générée. Valeurs acceptées : `true` (par défaut) ou `false`.     |
-`DD_TRACE_DEBUG`             | S. O.                        | Active ou désactive le mode debugging du profileur CLR. Valeurs acceptées : `true` (par défaut) ou `false`                                                                                                                                                                                            |
-`DD_TRACE_LOG_PATH`          | S. O.                        | Définit le chemin du fichier de log du profileur CLR.<br/><br/>Valeur par défaut pour Windows : `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Valeur par défaut pour Linux : `/var/log/datadog/dotnet-profiler.log`                                                                                         |
-`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Définit une liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si cette propriété n'est pas définie, toutes les intégrations sont activées. Accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides sont les noms d'intégration énumérés dans la section [Intégrations][9] ci-dessus.                           |
-`DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Raccourci qui active les paramètres d'analyse d'app par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                            |
+| Nom du paramètre                 | Nom de la propriété              | Description                                                                                                                                                                                                                                                                              |
+|------------------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_ENABLED`           | `TraceEnabled`             | Active ou désactive toute instrumentation automatique. Lorsque la variable d'environnement est définie sur `false`, le profileur CLR est entièrement désactivé. Pour les autres méthodes de configuration, le profileur CLR est quand même chargé, mais aucune trace n'est générée. Valeurs acceptées : `true` (par défaut) ou `false`. |
+| `DD_TRACE_DEBUG`             | S. O.                        | Active ou désactive le mode debugging du profileur CLR. Valeurs acceptées : `true` (par défaut) ou `false`                                                                                                                                                                                        |
+| `DD_TRACE_LOG_PATH`          | S. O.                        | Définit le chemin du fichier de log du profileur CLR.<br/><br/>Valeur par défaut pour Windows : `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Valeur par défaut pour Linux : `/var/log/datadog/dotnet-profiler.log`                                                                                     |
+| `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Définit une liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si cette propriété n'est pas définie, toutes les intégrations sont activées. Accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides sont les noms d'intégration énumérés dans la section [Intégrations][9] ci-dessus.                       |
+| `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Raccourci qui active les paramètres d'analyse d'app par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                                     |
 
-Le tableau suivant énumère les variables de configuration qui sont uniquement disponibles en utilisant l'instrumentation automatique, et qui peuvent être définies pour chaque intégration. La première colonne, _Nom du paramètre_, indique le nom de variable utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne, _Nom de la propriété_, indique le nom de la propriété équivalente dans la classe `IntegrationSettings` lors de la modification des paramètres du code. Accédez à ces propriétés à l'aide de l'indexeur `TracerSettings.Integrations[string integrationName]`. Les noms d'intégration sont énumérés dans la section [Intégrations][9] ci-dessus.
+Le tableau suivant énumère les variables de configuration qui sont uniquement disponibles en utilisant l'instrumentation automatique, et qui peuvent être définies pour chaque intégration. La première colonne, _Nom du paramètre_, indique le nom de variable utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne, _Nom de la propriété_, indique le nom de la propriété équivalente dans la classe `IntegrationSettings` lors de la modification des paramètres dans le code. Accédez à ces propriétés à l'aide de l'indexeur `TracerSettings.Integrations[string integrationName]`. Les noms d'intégration sont énumérés dans la section [Intégrations][9] ci-dessus.
 
-Nom du paramètre                             | Nom de la propriété              | Description                                                                                                                        |
----------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-`DD_<INTÉGRATION>_ENABLED`               | `Enabled`                  | Active ou désactive une intégration spécifique. Valeurs acceptées : `true` (par défaut) ou `false`.                                         |
-`DD_<INTÉGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Active ou désactive l'analyse d'app pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
-`DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Définit le taux d'échantillonnage pour l'analyse d'app pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
+| Nom du paramètre                             | Nom de la propriété         | Description                                                                                                           |
+|------------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `DD_<INTÉGRATION>_ENABLED`               | `Enabled`             | Active ou désactive une intégration spécifique. Valeurs acceptées : `true` (par défaut) ou `false`.                            |
+| `DD_<INTÉGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`    | Active ou désactive l'analyse d'app pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
+| `DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate` | Définit le taux d'échantillonnage pour l'analyse d'app pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/apm
+[1]: /fr/tracing/send_traces
 [2]: https://github.com/dotnet/coreclr/issues/18448
 [3]: /fr/help
 [4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed

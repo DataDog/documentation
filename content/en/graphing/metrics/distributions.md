@@ -9,9 +9,6 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-<div class="alert alert-warning">
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
-</div>
 
 ## Overview
 
@@ -55,5 +52,5 @@ For more information on counting custom metrics created from gauge, count, histo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/metrics_type
+[1]: /developers/metrics/types
 [2]: https://docs.datadoghq.com/developers/metrics/custom_metrics

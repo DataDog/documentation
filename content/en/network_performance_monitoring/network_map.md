@@ -17,10 +17,6 @@ further_reading:
   text: "Network Widget"
 ---
 
-<div class="alert alert-warning">
-Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
-</div>
-
 ## Overview
 
 The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problem areas. 

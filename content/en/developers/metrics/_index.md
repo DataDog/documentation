@@ -60,7 +60,7 @@ You can also use one of the [Datadog-official and community contributed API and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/metrics/introduction
-[2]: /developers/metrics/metrics_type
+[2]: /developers/metrics/types
 [3]: /integrations
 [4]: /developers/metrics/custom_metrics
 [5]: /account_management/billing/custom_metrics/#standard-integrations

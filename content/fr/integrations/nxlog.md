@@ -5,7 +5,7 @@ kind: integration
 description: 'Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 short_description: 'Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 categories:
-  - Collecte de logs
+  - log collection
 doc_link: /integrations/nxlog/
 aliases:
   - /fr/logs/log_collection/nxlog
@@ -108,27 +108,24 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 ### Chiffrement TLS avec NxLog
 
-1. Téléchargez la [clé publique pour le chiffrement TLS][1] des logs.
+1. Téléchargez le [certificat d'autorité de certification][1].
 
-2. Téléchargez le [certificat d'autorité de certification][2].
-
-3. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer le transfert sécurisé via le port 10516 :
+2. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer les transferts sécurisés via le port 10516 :
 
     ```
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
       Port    10516
-      Exec    $raw_event="<YOUR_API_KEY> " + $raw_event;
-      CertFile <CERT_DIR>/intake.logs.datadoghq.com.crt
-      CAFile   <CERT_DIR>/SFSRootCAG2.pem
+      Exec    to_syslog_ietf();
+      Exec    $raw_event="my_api_key " + $raw_event;
+      CAFile  <CERT_DIR>/ca-certificates.crt
       AllowUntrusted FALSE
     </Output>
     ```
 
 
-[1]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[2]: https://www.amazontrust.com/repository/SFSRootCAG2.pem
+[1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
@@ -214,27 +211,24 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 ### Chiffrement TLS avec NxLog
 
-1. Téléchargez la [clé publique pour le chiffrement TLS][1] des logs.
+1. Téléchargez le [certificat d'autorité de certification][1].
 
-2. Téléchargez le [certificat d'autorité de certification][2].
-
-3. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer le transfert sécurisé via le port 443 :
+2. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer les transferts sécurisés via le port 443 :
 
     ```
     <Output out>
       Module  om_ssl
-      Host    tcp-intake.logs.datadoghq.eu
+      Host    intake.logs.datadoghq.com
       Port    443
-      Exec    $raw_event="<DATADOG_API_KEY> " + $raw_event;
-      CertFile <CERT_DIR>/intake.logs.datadoghq.eu.crt
-      CAFile   <CERT_DIR>/datadog.ca.eu.pem
+      Exec    to_syslog_ietf();
+      Exec    $raw_event="my_api_key " + $raw_event;
+      CAFile  <CERT_DIR>/ca-certificates.crt
       AllowUntrusted FALSE
     </Output>
     ```
 
 
-[1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-[2]: /resources/crt/datadog.ca.eu.pem
+[1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{< /tabs >}}
 

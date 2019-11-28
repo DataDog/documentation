@@ -10,7 +10,7 @@ Datadog facture chaque Agent installé sur un serveur vCenter et chaque machine 
 
 Utilisez le fichier `vsphere.yaml` pour filtrer vos machines virtuelles surveillées par Datadog en utilisant une expression régulière. Consultez le [fichier d'exemple vsphere.d/conf.yaml][1] pour voir un exemple.
 
-Lorsque vous ajoutez des limites à des machines virtuelles existantes, les machines virtuelles précédemment identifiées peuvent rester dans la [liste d'infrastructures][2] jusqu'à 24 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
+Lorsque vous appliquez des limites à des machines virtuelles existantes, les machines virtuelles précédemment identifiées peuvent rester dans la [liste d'infrastructures][2] jusqu'à 24 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
 ## Dépannage
 Pour toute question technique, contactez [l'assistance Datadog][3].

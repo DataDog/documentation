@@ -5,7 +5,7 @@ kind: integration
 description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 short_description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
 categories:
-  - Collecte de logs
+  - log collection
 doc_link: /integrations/rsyslog/
 aliases:
   - /fr/logs/log_collection/rsyslog
@@ -148,7 +148,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
         ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
         }
         ```
 
@@ -332,7 +332,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
         $ActionSendStreamDriver gtls
         $ActionSendStreamDriverMode 1
         $ActionSendStreamDriverAuthMode x509/name
-        $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
+        $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
         *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
 

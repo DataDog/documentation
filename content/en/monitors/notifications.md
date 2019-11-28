@@ -5,6 +5,7 @@ description: Setting up monitor notifications
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
+  - /developers/faq/what-do-notifications-do-in-datadog
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"

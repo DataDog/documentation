@@ -121,7 +121,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
-| Play WSClient            | 1.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
@@ -194,7 +194,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | System Property                        | Environment Variable                   | Default              | Description                                                                                                                                                                                                             |
 |----------------------------------------|----------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`               | When `false` tracing agent is disabled.                                                                                                                                                                                 |
-| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`               | Optional path to a file were configuration properties are provided one per each line. For instance, the file path can be provided as via `-Dtrace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.trace.enabled=<SERVICE_NAME>`                                                                                           |
+| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`               | Optional path to a file were configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.trace.enabled=<SERVICE_NAME>`                                                                                           |
 | `dd.service.name`                      | `DD_SERVICE_NAME`                      | `unnamed-java-app`   | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                      |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`               | (Example: `mysql:my-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                          |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`      | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                                                     |
@@ -317,6 +317,7 @@ Java APM has minimal impact on the overhead of an application:
 
 * No collections maintained by Java APM grow unbounded in memory
 * Reporting traces does not block the application thread
+* Java APM loads additional classes for trace collection and library instrumentation
 * Java APM typically adds no more than a 3% increase in CPU usage
 * Java APM typically adds no more than a 3% increase in JVM heap usage
 

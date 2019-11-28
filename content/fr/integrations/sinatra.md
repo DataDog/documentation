@@ -5,7 +5,7 @@ kind: integration
 description: Recueillez des logs d'application Sinatra.
 short_description: Recueillez des logs d'application Sinatra.
 categories:
-  - Collecte de logs
+  - log collection
 aliases:
   - /fr/logs/log_collection/nxlog
 has_logo: true

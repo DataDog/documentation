@@ -36,13 +36,13 @@ instances: [{}]
 
 Le check hérite des valeurs de `AgentCheck` et envoie un gauge de valeur `1` pour `hello.world` sur chaque appel. Voici ce qui est indiqué dans le fichier `checks.d/hello.py` :
 
-```python
+{{< code-block lang="python" filename="hello.py" >}}
 # le bloc try/except suivant rend le check custom compatible avec toutes les versions de l'Agent
 try:
-    # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent...
+    # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent…
     from checks import AgentCheck
 except ImportError:
-    # ... si la commande ci-dessus a échoué, le check s'exécute dans la version6 de l'Agent ou dans une version ultérieure
+    # …si la commande ci-dessus a échoué, le check s'exécute dans l'Agent version 6 ou ultérieure
     from datadog_checks.checks import AgentCheck
 
 # Le contenu de la variable spéciale __version__ sera indiqué dans la page de statut de l'Agent
@@ -52,7 +52,7 @@ __version__ = "1.0.0"
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
-```
+{{< /code-block >}}
 
 Pour en savoir plus sur l'interface fournie par la classe de base, consultez la [documentation relative à l'API][5].
 
@@ -137,7 +137,7 @@ from datadog_checks.utils.subprocess_output import get_subprocess_output
 class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
-        file_count = len(files.split('\n')) - 1  #len() renvoie par défaut un nombre entier
+        file_count = len(files.split('\n')) - 1  #len() renvoie un entier par défaut
         self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 

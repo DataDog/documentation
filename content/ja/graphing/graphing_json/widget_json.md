@@ -21,7 +21,7 @@ Datadog の Y 軸コントロールには以下の機能があります。
 
 スキーマは次のとおりです。
 
-≪```
+```
 AXIS_SCHEMA = {
     "type": "object",
     "properties": {
@@ -32,7 +32,7 @@ AXIS_SCHEMA = {
     },
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター      | タイプ    | 説明                                                                                          | デフォルト  |
 | ------         | -----   | --------                                                                                             | ----     |
@@ -45,7 +45,7 @@ AXIS_SCHEMA = {
 
 Datadog から取得した任意のイベントを重ねて表示できます。一般的な `events` の書式は次のとおりです。
 
-≪```
+```
 EVENTS_SCHEMA = {
     "type": "array",
     "items": {
@@ -57,7 +57,7 @@ EVENTS_SCHEMA = {
         "additionalProperties": false
     }
 }
-```≫
+```
 
 `<EVENT_QUERY>` 構文の詳細については、[イベントストリームのドキュメント][2]を参照してください。
 
@@ -65,29 +65,29 @@ EVENTS_SCHEMA = {
 
 ホスト X とタグ Y のイベントを表示する場合は、次のとおりです。
 
-≪```
+```
 "events": [
   {
     "q": "host:X tags:Y"
   }
 ]
-```≫
+```
 
 すべてのエラーを表示する場合は、次のとおりです。
 
-≪```
+```
 "events": [
   {
     "q": "status:error"
   }
 ]
-```≫
+```
 
 ## マーカースキーマ
 
 マーカーを使用すると、視覚的な条件付き書式をグラフに追加できます。`markers` の書式は次のとおりです。
 
-≪```
+```
 MARKERS_SCHEMA = {
     "type": "array",
     "items": {
@@ -101,7 +101,7 @@ MARKERS_SCHEMA = {
         "additionalProperties": false
     }
 }
-```≫
+```
 
 | パラメーター      | タイプ   | 説明                                                                                                                |
 | ------         | -----  | --------                                                                                                                   |
@@ -118,7 +118,7 @@ MARKERS_SCHEMA = {
 
 上のマーカーには、以下の構成が適用されています。
 
-≪```
+```
 { (...)
   "widgets": [
     {
@@ -146,13 +146,13 @@ MARKERS_SCHEMA = {
       },
 (...)
 },
-```≫
+```
 
 ## 条件付き書式スキーマ
 
 条件付き書式を使用すると、データに適用されたルールに応じて、ウィジェットのコンテンツや背景の色を設定できます。
 
-≪```
+```
 CONDITIONAL_FORMATS_SCHEMA = {
     "type": "array",
     "items": {
@@ -170,7 +170,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
         "additionalProperties": false
     }
 }
-```≫
+```
 
 | パラメーター         | タイプ   | 説明                                                                                                                                                                                                                                                                      |
 | ------            | -----  | --------                                                                                                                                                                                                                                                                         |
@@ -184,7 +184,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
 
 利用できるタイムフレームは使用しているウィジェットに依存しますが、一般的な `time` の書式は次のとおりです。
 
-≪```
+```
 TIME_SCHEMA = {
     "type": "object",
     "properties": {
@@ -208,7 +208,7 @@ TIME_SCHEMA = {
     },
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター         | タイプ   | 説明                                                                                                                                                                                                                                                                      |
 | ------            | -----  | --------                                                                                                                                                                                                                                                                         |
@@ -218,11 +218,11 @@ TIME_SCHEMA = {
 
 10 分のタイムフレームが必要な場合、次のように使用します。
 
-≪```
+```
 "time": {
   "live_span": "10m"
 }
-```≫
+```
 
 
 ## その他の参考資料

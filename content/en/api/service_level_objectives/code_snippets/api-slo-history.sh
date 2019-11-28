@@ -12,4 +12,4 @@ from_ts=<from epoch timestamp>
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
-"https://api.datadoghq.com/api/v1/slo/${slo_id}?from_ts=${from_ts}&to_ts={$to_ts}"
+"https://api.datadoghq.com/api/v1/slo/${slo_id}/history?from_ts=${from_ts}&to_ts={$to_ts}"

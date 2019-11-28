@@ -97,7 +97,7 @@ L'intégration AWS SNS n'inclut aucun check de service.
 ## Dépannage
 
 ### AWS GovCloud et AWS Chine
-Nous ne prenons actuellement pas en charge les notifications SNS depuis Datadog vers les rubriques dans GovCloud ou Chine.
+Nous ne prenons actuellement pas en charge les notifications SNS envoyés depuis Datadog vers des rubriques dans GovCloud ou Chine.
 
 ### Autres problèmes
 Besoin d'aide ? Contactez [l'assistance Datadog][7].

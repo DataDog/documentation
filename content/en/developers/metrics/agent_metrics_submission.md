@@ -137,7 +137,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
 
-    {{< code-block lang="python" filename="metric_example.py" >}}
+    {{< code-block lang="python" filename="metrics_example.py" >}}
     import random
 
     from datadog_checks.base import AgentCheck
@@ -224,7 +224,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/write_agent_check
-[2]: /developers/metrics/metrics_type
+[2]: /developers/metrics/types
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information

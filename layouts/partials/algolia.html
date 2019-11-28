@@ -14,24 +14,24 @@ var search_desktop = docsearch({
      autocompleteOptions: {
         autoselect: false
      },
-
-     queryHook: function(query){
-         clearTimeout(algoliaTimer);
-         algoliaTimer = setTimeout(
+      queryHook: function(query){
+        if(window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+          clearTimeout(algoliaTimer);
+          algoliaTimer = setTimeout(
             function(){
-               if (query.length > 0) {
-                     window.datadog_logger.log('Algolia Search', {
-                        "browser": {
-                           "algolia": {
-                              "search": query.toLowerCase()
-                           }
-                        }
-                     }, 'info')
+              if (query.length > 0) {
+                window.datadog_logger.log('Algolia Search', {
+                  "browser": {
+                    "algolia": {
+                      "search": query.toLowerCase()
+                    }
                   }
+                }, 'info')
+              }
             },1000
-         )
-     },
-
+          )
+        }
+    },
      debug: false // Set debug to true if you want to inspect the dropdown
 });
 var desktop_enable_enter = true;
@@ -45,7 +45,7 @@ search_desktop.autocomplete.on('keyup', function(e) {
          $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
          $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
       }
-      
+
    } else {
       $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
       $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
@@ -62,7 +62,7 @@ if (searchBtn) {
       if (docsearchInput.value !== '') {
          window.location = '{{ absLangURL "search/" }}?s='+docsearchInput.value;
       }
-      
+
    })
 }
 
@@ -73,7 +73,7 @@ search_desktop.autocomplete.on('autocomplete:closed', function(e) {
          $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
          $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
       }
-      
+
    } else {
       $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
       $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
