@@ -1198,7 +1198,7 @@ main:
 
   ## DEVELOPERS - Metrics
 
-  - name: "Metrics"
+  - name: "Custom Metrics"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
@@ -1239,11 +1239,6 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
     weight: 207
-  - name: "Custom Metrics"
-    url: "developers/metrics/custom_metrics/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_custom_metrics"
-    weight: 208
 
   ## DEVELOPERS - Events
 
