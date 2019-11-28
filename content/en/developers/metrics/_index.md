@@ -1,7 +1,6 @@
 ---
 title: Custom Metrics
 kind: documentation
-disable_toc: true
 aliases:
   - /metrics/
   - /guides/metrics/
@@ -32,7 +31,7 @@ A custom metric refers to **a unique combination of metric name, host, and tag v
 A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][1] to learn how to graph metrics within Datadog.
 
 | Property         | Description                                                                                                                                               |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
@@ -81,7 +80,7 @@ Find below some example of how to count your custom metrics, depending on your [
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
 
-**Note**: This example uses a `COUNT` metric type, but the count of custom metrics would have been the same with a `GAUGE` or a `RATE` metric type.
+**Note**: This example uses a [`COUNT` metric type](/developers/metrics/types/?tab=count), but the count of custom metrics would have been the same with a [`GAUGE`](/developers/metrics/types/?tab=gauge) or a [`RATE`](/developers/metrics/types/?tab=rate) metric type.
 
 Suppose you’re submitting a metric, `request.Count`, from two hosts (A,B), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
 
@@ -92,10 +91,10 @@ Let’s assume that in your data, endpoint `X` is supported by both hosts, but f
 
 {{< img src="developers/metrics/custom_metrics_host.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
 
-`request.Count` reports then **4 custom metrics**. The custom metrics are listed below:
+There are then **4 Custom metrics**, one for each unique combinations of metric name, host, and tag values for your `request.Count` metric. The custom metrics are listed below:
 
 | Metric Name     | Tag Values                           |
-|-----------------|--------------------------------------|
+| --------------- | ------------------------------------ |
 | `request.Count` | `host:A`, `endpoint:X`, `status:200` |
 | `request.Count` | `host:B`, `endpoint:X`, `status:200` |
 | `request.Count` | `host:B`, `endpoint:X`, `status:400` |
@@ -104,14 +103,53 @@ Let’s assume that in your data, endpoint `X` is supported by both hosts, but f
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-A HISTOGRAM metric generates five custom metrics (to support client-side aggregations of `count`, `sum`, `min`, `max`, and `avg`) instead of one custom metric (unique tag value combination) that a Gauge/Count/Rate emits. Learn more about HISTOGRAM metric type.
+**A HISTOGRAM metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the Agent-side aggregations: `count`, `sum`, `min`, `max`, and `avg`. [Learn more about HISTOGRAM metric type](/developers/metrics/types/?tab=histogram).
 
+Suppose you have a histogram metric measuring `request.Latency` for two endpoints `X` and `Y`  on a single host:
+
+|| INSERT IMAGE  ||
+
+The number of unique tag value combinations submitted for a `HISTOGRAM` metric with this tagging scheme is 2, but the Agent generates [5 custom metrics](/developers/metrics/types/?tab=histogram) for each of the original 2 unique tag value combinations to account for each Agent-side aggregations: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 10 custom metrics for this `HISTOGRAM` metric: :
+
+| Metric Name       | Tag Values             | Aggregations                            |
+| ----------------- | ---------------------- | --------------------------------------- |
+| `request.Latency` | `host:A`, `endpoint:X` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:A`, `endpoint:Y` | `count`, `sum`, `min`, `max`, and `avg` |
 
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
-A distribution metric generates five custom metrics (to support server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`) instead of one custom metric (unique tag value combination) that a Gauge/Count/Rate emits. Lern more about DISTRIBUTION metric type
+**A DISTRIBUTION metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the server-side aggregations  `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type](/developers/metrics/types/?tab=distribution).
 
+Suppose you have a distribution metric measuring `request.Latency` in which the following tag value combinations are present in your data as shown below:
+
+{{< img src="developers/metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
+
+The number of unique combinations of metric name, host, and tag values submitted for a `GAUGE` metric with this tagging scheme is 4:
+
+| Metric Name       | Tag Values                           |
+| ----------------- | ------------------------------------ |
+| `request.Latency` | `host:A`, `endpoint:X`, `status:200` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:200` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:400` |
+| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` |
+
+Given `request.Latency` is submitted as a `DISTRIBUTION`, Datadog [stores 5 custom metrics](/developers/metrics/types/?tab=distribution) for each of the original 4 unique tag value combinations to account for server side-aggregations: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 20 custom metrics for this `DISTRIBUTION` metric:
+
+| Metric Name       | Tag Values                           | Aggregations                            |
+| ----------------- | ------------------------------------ | --------------------------------------- |
+| `request.Latency` | `host:A`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:400` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+
+##### Distribution Metrics with Additional Percentile Aggregations
+
+[Adding additional percentile aggregations](/graphing/metrics/distributions/#aggregations): `p50`, `p75`, `p90`, `p95`, `p99`) to your DISTRIBUTION metric increases the number of distinct custom metrics by raising the ammount of aggregations. The final number of metric is:
+
+```
+Number_of_distinct_tag_combinations * ( 5 + Number_of_additional_percentile_aggregations_choosen)
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -121,14 +159,14 @@ A distribution metric generates five custom metrics (to support server-side aggr
 Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular/detailed tag. Let’s suppose you’re measuring temperature in the US and you’ve tagged your temperature metric by country and region. You submit the following data to Datadog:
 
 | Metric Name   | Tag Values                         |
-|---------------|------------------------------------|
+| ------------- | ---------------------------------- |
 | `temperature` | `country:USA`, `region: Northeast` |
 | `temperature` | `country:USA`, `region: Southeast` |
 
 Suppose you wanted to add the tag `City` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag does increase the number of custom metrics since it provides more detail and granularity to your dataset as shown below:
 
 | Metric Name   | Tag Values                                          |
-|---------------|-----------------------------------------------------|
+| ------------- | --------------------------------------------------- |
 | `temperature` | `country:USA`, `region: Northeast`, `city: NYC`     |
 | `temperature` | `country:USA`, `region: Southeast`, `city: Orlando` |
 | `temperature` | `country:USA`, `region: Southeast`, `city: Miami`   |
