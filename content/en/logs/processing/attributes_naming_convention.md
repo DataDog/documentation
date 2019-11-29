@@ -144,6 +144,7 @@ Typical integrations relying on these attributes include [Apache][1], Rails, [AW
 | `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.|
 | `http.request_id`  | `string` | The ID of the HTTP request.                                                                       |
 | `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
+| `http.version`     | `string` | The version of HTTP used for the request. |
 
 #### URL details attributes
 
