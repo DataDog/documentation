@@ -38,7 +38,6 @@ Paste the generated code snippet into the head tag (in front of any other script
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
-
 </script>
 ```
 
@@ -55,7 +54,6 @@ Paste the generated code snippet into the head tag (in front of any other script
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
   });
-
 </script>
 ```
 
