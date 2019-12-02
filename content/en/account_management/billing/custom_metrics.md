@@ -19,7 +19,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
 
 Contact [Sales][3] or your [Customer Success][4] Manager to discuss custom metrics for your account.
 
@@ -29,7 +29,7 @@ Administrative users (those with [Datadog Admin roles][5] can see the total cust
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the Metrics Summary page; it’s listed as “Currently reporting # distinct metrics…” as shown below:
 
-{{< img src="account_management/billing/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
+{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
 
 ## Counting Custom Metrics
 
@@ -56,7 +56,7 @@ Suppose you’re submitting a metric, `request.Count`, from two hosts (A,B), whi
 
 Let’s assume that in your data, endpoint `X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
 
-{{< img src="developers/metrics/custom_metrics_host.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/custom_metrics_host.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
 
 There are then **4 Custom metrics**, one for each unique combinations of metric name, host, and tag values for your `request.Count` metric. The custom metrics are listed below:
 
@@ -94,7 +94,7 @@ The number of unique tag value combinations submitted for a `HISTOGRAM` metric w
 
 Suppose you have a distribution metric measuring `request.Latency` in which the following tag value combinations are present in your data as shown below:
 
-{{< img src="developers/metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
 
 The number of unique combinations of metric name, host, and tag values submitted for a `GAUGE` metric with this tagging scheme is 4:
 

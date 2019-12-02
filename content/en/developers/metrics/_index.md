@@ -20,15 +20,15 @@ further_reading:
 
 ## Overview
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric (with [some exception]](/account_management/billing/custom_metrics/#standard-integrations)).
+If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric (with [some exception][2]).
 
-A custom metric refers to **a unique combination of metric name, host, and tag values**. In general, any metric you send using [DogStatsD][2], or through a [custom Agent Check][3] is a custom metric. There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][4].
+A custom metric refers to **a unique combination of metric name, host, and tag values**. In general, any metric you send using [DogStatsD][3], or through a [custom Agent Check][4] is a custom metric. There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][5].
 
-**Note**: Administrative users (those with [Datadog Admin roles][5] can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][6]. Learn more about [how Custom metrics are counted][4].
+**Note**: Administrative users (those with [Datadog Admin roles][6] can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][7]. Learn more about [how Custom metrics are counted][5].
 
 ## Metric definition
 
-A Datadog metric is defined by the properties below. Refer to the [Metrics Introductionumentation][7] to learn how to graph metrics within Datadog.
+A Datadog metric is defined by the properties below. Refer to the [Metrics Introductionumentation][8] to learn how to graph metrics within Datadog.
 
 | Property         | Description                                                                                                                                               |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ A Datadog metric is defined by the properties below. Refer to the [Metrics Intro
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
 | `<CONTEXT>`      | The set of tags associated with your metric.                                                                                                              |
-| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][8].                                                                                          |
+| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][9].                                                                                          |
 | `<INTERVAL>`     | If the `<TYPE>` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
 
 ### Naming custom metrics
@@ -62,18 +62,19 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][9] to submit your metrics
+You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][10] to submit your metrics
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations
-[2]: /developers/metrics/dogstatsd_metrics_submission
-[3]: /developers/metrics/agent_metrics_submission
-[4]: /account_management/billing/custom_metrics
-[5]: /account_management/team
-[6]: https://app.datadoghq.com/account/usage/hourly
-[7]: /graphing/metrics/introduction
-[8]: /developers/metrics/types
-[9]: /developers/libraries
+[2]: /account_management/billing/custom_metrics/#standard-integrations
+[3]: /developers/metrics/dogstatsd_metrics_submission
+[4]: /developers/metrics/agent_metrics_submission
+[5]: /account_management/billing/custom_metrics/#counting-custom-metrics
+[6]: /account_management/team
+[7]: https://app.datadoghq.com/account/usage/hourly
+[8]: /graphing/metrics/introduction
+[9]: /developers/metrics/types
+[10]: /developers/libraries
