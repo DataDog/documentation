@@ -42,7 +42,7 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-The “Notify” section allows you to configure zero or more notification target for each rule case. 
+The “Notify” section allows you to configure zero or more notification targets for each rule case. 
 
 #### Time windows
 
