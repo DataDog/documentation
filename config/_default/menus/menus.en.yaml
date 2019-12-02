@@ -1166,6 +1166,27 @@ main:
     identifier: "npm_map"
     weight: 3
 
+#########################
+## Security Monitoring ##
+#########################
+
+  - name: "Security Monitoring"
+    url: "security_monitoring/"
+    pre: "nav_security_monitoring"
+    identifier: "security_monitoring"
+    weight: 125000
+
+  - name: "Explorer"
+    url: "security_monitoring/explorer"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_explorer"
+    weight: 1
+  - name: "Detection Rules"
+    url: "security_monitoring/detection_rules"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_detection_rules"
+    weight: 2
+
 ################
 ## DEVELOPERS ##
 ################
