@@ -21,29 +21,27 @@ further_reading:
 
 Datadog’s [Logging without Limits][1]&trade; removes logging limitations by decoupling log ingestion and indexing to give flexibility around log management. High volume log indexing is helpful when monitoring every aspect of a service, but it can be a distraction when serious problems occur.
 
-For example, you may not find it beneficial to monitor every debug status log from a web server as you know this is not relevant for troubleshooting. It’s more beneficial to filter these logs so when an issue occurs you can quickly drill down to the source of the problem and resolve it.
+For example, you may not find it beneficial to monitor every 200 response code log from a web server as you know this is not relevant for troubleshooting. It’s more beneficial to filter these logs so when an issue occurs you can quickly drill down to the source of the problem and resolve it.
 
 This guide uses Logging without Limits&trade; to identify a noisy logging service and status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track data over time.
 
 ## 1. Identify a noisy logging service and status
 
-Your noisiest logging service will contain several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status. In this example, *Wildcard2* is the noisiest service and *DEBUG* is the noisiest status.
-
-{{< img src="logs/guide/identifying-noisy-logging-service.gif" alt="Identify a Noisy Logging Service" responsive="true" style="width:75%;">}}
+Your noisiest logging service will contain several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
 
 **To identify your noisiest logging service and status**:
 
 1. In Log Explorer, select graph view located next to the search bar. 
 2. Below the search bar, set `count` * group by `service` and `limit` to top 10.
 3. Select `Top List` from the dropdown menu next to `hide controls`.
-4. Click on the first listed service and select `search for` in the populated menu. This generates a search, which is visible in the search bar above, based on your `service` tag.
+4. Click on the first listed service and select `search for` in the populated menu. This generates a search, which is visible in the search bar above, based on your `service` facet.
 5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
-6. Click on the first listed status and select `search for` in the populated menu. This will add your `status` tag to the search.
+6. Click on the first listed status and select `search for` in the populated menu. This will add your `status` facet to the search.
 
-**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any tag, such as `host` or `client name` vs. `service` or `status`.
+**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `client name` vs. `service` or `status`.
 
 ## 2. Identify noisy logs with log patterns
-In this example, debug is found to be the noisiest status. Switch to the [patterns][2] view, located next to the graph view, to view the patterns associated with your service and status.
+Switch to the [patterns][2] view, located next to the graph view, to view the patterns associated with your service and status.
 
 {{< img src="logs/guide/log-patterns.png" alt="Log Patterns View" responsive="true" style="width:75%;">}}
 
@@ -51,7 +49,7 @@ The patterns view is helpful when identifying and filtering noisy patterns. It s
 
 ## 3. Set an exclusion filter for noisy logs
 
-The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom parsing rule based on the selected pattern. In this example, the parsing rule includes the service, *Wildcard2*, the status, *DEBUG*, and the associated content, such as date and time, for the pattern. This parsing rule is required when creating an [exclusion filter][3]. Exclusion filters remove noisy logs from your Log Explorer, but these logs still have the ability to be tracked with custom metrics.
+The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom parsing rule based on the selected pattern. This parsing rule is required when creating an [exclusion filter][3]. Exclusion filters remove noisy logs from your Log Explorer, but these logs still have the ability to be tracked with custom metrics.
 
 **To create an exclusion filter for your top log pattern**:
 
