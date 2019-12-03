@@ -33,9 +33,9 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 4. Save your rule.
 
-2. After setting up the Lambda function and its rule, add IAM Access Analyzer as a trigger by choosing **CloudWatch Events** as a trigger and creating a `IAM_ACCESS_RULE`:
+2. Add IAM Access Analyzer as a trigger for your Lambda function. Choose **CloudWatch Events** as a trigger and create an `IAM_ACCESS_RULE`:
 
-3. Once done, visit your [Log Explorer][2] to start exploring your logs.
+3. Visit your [Log Explorer][2] to start exploring your logs.
 
 [1]: /integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs
