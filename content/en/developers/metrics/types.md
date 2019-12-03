@@ -19,11 +19,11 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-Each metric submitted to Datadog has a “Metric Type.” Metric Type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [Metric Type modifiers][1] and functions.
+Each metric submitted to Datadog has a **metric type**. Metric type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [metric type modifiers][1] and functions.
 
 ## Metric Types: Storage vs. Submission
 
-Datadog accepts a wide range of **Metric Submission Types**:
+Datadog accepts a wide range of **metric submission types**:
 
 * [COUNT](?tab=count#metric-type-definition)
 * [RATE](?tab=rate#metric-type-definition)
@@ -33,13 +33,13 @@ Datadog accepts a wide range of **Metric Submission Types**:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-When data is received, the submitted metric type is mapped to one of three in-app **Metric Types**. Datadog stores metric data under a few canonical types:
+When data is received, the submitted metric type is mapped to one of three in-app **Metric Types**. Datadog stores metric data under the following canonical types:
 
 * `COUNT`
 * `RATE`
 * `GAUGE`
 
-A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. The metric type can be modified in this side panel; however, this should be done deliberately with care and only if necessary. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors.
+A metric's type can be viewed on the details sidepanel on the [Metrics Summary page][2]. The metric type can be modified in this side panel. However, this should be done carefully and only if necessary. Modifying metric type *can* change how functions and modifiers interact with your data, potentially affecting graphs and monitors.
 
 ## Submission Method
 
@@ -49,12 +49,12 @@ Data is submitted to Datadog in three main ways:
 * [DogStatsD][4]
 * [Datadog API][3]
 
-Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogstatsD, aggregation occur when multiple points arrive in a short time interval. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp. The way in which values are combined and aggregated varies, depending on metric type.
+Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, aggregation occurs when multiple points arrive in a short time interval. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp. The way in which values are combined and aggregated varies, depending on metric type.
 
 Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of Distributions). The raw values sent to Datadog are stored as-is.
 
-### Metric Submission Types
-This table discusses each Metric Submission Type (through Agent or DogStatsD) and how it is aggregated before being mapped into in-app Metric Type. **Note**: no aggregation occurs for API metric submissions.
+### Metric submission types
+This table discusses each metric submission type (through Agent or DogStatsD) and how it is aggregated before being mapped to an in-app metric type. **Note**: no aggregation occurs for API metric submissions.
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
@@ -103,7 +103,7 @@ For example, suppose a webserver is running the Datadog Agent, and you're tracki
 * `70` requests in the second interval of 10 seconds
 * `50` requests in the third interval of 10 seconds
 
-The Agent sums up the requests received in a given interval, then divides by the length of that interval. The Agent then reports the following normalized per-second values:
+The Agent sums the requests received in a given interval, then divides by the length of that interval. The Agent then reports the following normalized per-second values:
 
 * `3` for the first 10 seconds
 * `7` for the second interval of 10 seconds
@@ -125,7 +125,7 @@ Discover how to submit rate metrics:
 
 **The `GAUGE` metric submission type represents a snapshot of one time interval.**  This representative snapshot value is the last value submitted to the Agent during the time interval.
 
-`GAUGE` metrics are ideal for taking a measure of something reporting continuously. Suppose a webserver is running the Datadog Agent, tracking the request latency in milliseconds. If each request has a latency of 300ms, checking request latency three times in one time interval should not report 900ms—instead, the `GAUGE` would report 300ms.
+`GAUGE` metrics are ideal for taking a measure of something reporting continuously. Suppose a webserver is running the Datadog Agent, tracking the request latency in milliseconds. If each request has a latency of 300ms, checking request latency three times in one time interval should not report 900ms—instead, the `GAUGE` reports 300ms.
 
  For example, suppose the Agent receives the following latency values during each 10 second interval from the webserver:
 
