@@ -60,7 +60,7 @@ The selected pattern contextual panel lists every instance (event) of a log patt
 5. Select “Add an Exclusion Filter”.
 6. Input the filter name, define the exclusion query by pasting the parsing rule you copied, and set an exclusion percentage.
 
-You can also generate the parsing rule by selecting the `View All` button in the pattern contextual panel and selecting the **</>** option next to the search bar.
+You can also generate the parsing rule by clicking the **View All** button in the pattern contextual panel and selecting the **</>** option next to the search bar.
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
