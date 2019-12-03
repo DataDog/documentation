@@ -354,6 +354,8 @@ To collect events from your AWS EKS Fargate pods, run a Datadog Cluster Agent ov
 1. [Setup the Datadog Cluster Agent][10].
 2. [Enable Event collection for your Cluster Agent][11].
 
+Optionally, deploy cluster check runners in addition to setting up the Datadog Cluster Agent to enable cluster checks.
+
 **Note**: You can also collect events if you run the DCA in a pod in Fargate.
 
 ## Troubleshooting
