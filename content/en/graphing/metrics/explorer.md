@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [Notebook][2], [Screenboard][3], or [Timeboard][4].
+The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2], [screenboard][3], or [timeboard][4].
 
 ## Graphing
 
