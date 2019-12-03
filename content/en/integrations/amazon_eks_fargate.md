@@ -1,21 +1,21 @@
 ---
-"categories":
-- "cloud"
-- "aws"
-- "log collection"
-"ddtype": "check"
-"description": "Amazon EKS on AWS Fargate is a managed Kubernetes service that automates certain aspects of deployment and maintenance for any standard Kubernetes environment."
-"short_description": "Amazon EKS on AWS Fargate is a managed Kubernetes service"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_eks_fargate/"
-"git_integration_title": "amazon_eks_fargate"
-"has_logo": "true"
-"integration_title": "Amazon EKS on AWS Fargate"
-"is_public": "true"
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "amazon_eks_fargate"
-"public_title": "Datadog-Amazon EKS on AWS Fargate"
-"version": "1.0"
+categories:
+- cloud
+- aws
+- log collection
+ddtype: check
+description: Amazon EKS on AWS Fargate is a managed Kubernetes service that automates certain aspects of deployment and maintenance for any standard Kubernetes environment.
+short_description: Amazon EKS on AWS Fargate is a managed Kubernetes service.
+doc_link: https://docs.datadoghq.com/integrations/amazon_eks_fargate/
+git_integration_title: amazon_eks_fargate
+has_logo: true
+integration_title: Amazon EKS on AWS Fargate
+is_public: true
+kind: integration
+manifest_version: 1.0
+name: amazon_eks_fargate
+public_title: Datadog-Amazon EKS on AWS Fargate
+version: 1.0
 ---
 
 ## Overview
