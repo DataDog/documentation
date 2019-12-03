@@ -3,7 +3,6 @@ categories:
 - cloud
 - aws
 - log collection
-ddtype: check
 description: Amazon EKS on AWS Fargate is a managed Kubernetes service that automates certain aspects of deployment and maintenance for any standard Kubernetes environment.
 short_description: Amazon EKS on AWS Fargate is a managed Kubernetes service.
 doc_link: https://docs.datadoghq.com/integrations/amazon_eks_fargate/
@@ -32,8 +31,8 @@ Running the Agent as a sidecar of your application pod with custom RBAC enables 
 
 * Kubernetes metrics collection from the pod running your application containers and the Agent
 * [Autodiscovery][2]
-* Configure custom Agent Checks to target containers in the same pod
-* Enable APM and DogStatsD for containers in the same pod
+* Configuration of custom Agent Checks to target containers in the same pod
+* APM and DogStatsD for containers in the same pod
 
 ### EC2 Node 
 
@@ -48,11 +47,11 @@ To get the best observability coverage monitoring workloads in AWS EKS Fargate, 
 * [EC2][7] (if you are running an EC2 pod)
 
 
-Also, set up integrations for any other AWS services you are running with EKS (for example, [ELB][5])
+Also, set up integrations for any other AWS services you are running with EKS (for example, [ELB][5]).
 
 #### Manual Installation
 
-To install, download the custom Agent image - `datadog/agent:eks-fargate-beta`.
+To install, download the custom Agent image: `datadog/agent:eks-fargate-beta`.
 
 If the Agent is running as a sidecar, it can communicate only with containers on the same pod. Run an Agent for every pod you wish to monitor. 
 
@@ -131,7 +130,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent-dev:eks-fargate
+     - image: datadog/agent:eks-fargate-beta
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -191,7 +190,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent-dev:eks-fargate
+     - image: datadog/agent:eks-fargate-beta
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -249,7 +248,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent-dev:eks-fargate
+     - image: datadog/agent:eks-fargate-beta
        name: datadog-agent
        ## Enabling port 8125 for DogStatsD metric collection
        ports:
@@ -313,7 +312,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent-dev:eks-fargate
+     - image: datadog/agent:eks-fargate-beta
        name: datadog-agent
        ## Enabling port 8126 for Trace collection
        ports:
