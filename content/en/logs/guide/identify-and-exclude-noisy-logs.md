@@ -27,7 +27,7 @@ This guide uses Logging without Limits&trade; to identify a noisy logging servic
 
 ## 1. Identify a noisy logging service and status
 
-Your noisiest logging service will contain several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
+Your noisiest logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
 
 **To identify your noisiest logging service and status**:
 
