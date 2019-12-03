@@ -13,63 +13,69 @@ further_reading:
     text: "Metrics Distributions"
 ---
 
-The [Metrics Summary page][1] displays a list of all the [metrics][2] reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Clicking on a metric brings up a panel with more detailed information.
+## Overview
 
-{{< img src="graphing/metrics/summary/summary.mp4" alt="Summary" video="true" responsive="true" width="80%" >}}
+The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Click on a metric name to display a panel with more detailed information.
 
 ## Metric panel
 
-The metric panel displays an overview for a given metric:
+The metric panel displays key information for a given metric.
 
 {{< img src="graphing/metrics/summary/metric_panel.png" alt="Metric panel" responsive="true" style="width:80%;">}}
 
-Key information about your metric can be seen:
+### Metric name
 
-* **Metric name**: The name of your metric in the [metric explorer][3], [dashboard widgets][4], etc.
-* **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending on its associated tags. Consult the [custom metrics documentation][5] to learn more.
-* **Number of hosts**: The total number of hosts reporting this metric.
-* **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [assigning tags][7].
-* **Metrics metadata**: All metadata attached to your metric:
-    * Metric description
-    * [Metric unit][8]
-    * [Metric type][9]
-    * The integration name, if this metric is coming from an [integration][10]
-    * The interval of collection of this metric
+The name of your metric in the [metric explorer][2], [dashboards][3], etc.
+ 
+### Number of distinct metrics
 
-### Metric metadata
+A metric can correspond to multiple distinct metrics depending on its associated tags. Learn more in the [custom metrics][4] documentation.
 
-Every piece of metric metadata can be manually edited:
+### Hosts
 
-#### Edit the metric description
+The total number of hosts reporting a metric along with a list of hosts.
 
-Editing the metric description can help you understand what a metric does.
-If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation GitHub repository][11].
+### Tags
 
-#### Edit the metric unit or add a custom unit
+The total number of tags attached to a metric along with a list of tags. Learn more in the [tagging][5] documentation.
 
-When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which shows up when hovering over a certain metric in your graph. Do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
+### Metrics metadata
 
-{{< img src="graphing/metrics/summary/metrics_metadata.mp4" alt="Metrics Metadata" video="true" responsive="true" width="80%" >}}
+The metadata attached to your metric. Most of the metadata can be edited on the metric summary page or with the [Datadog API][6].
 
-**Note**: This does not change how a metric graph is displayed (only the units of measurement that raw values are considered as when hovering over a metric). Formatting is automatically applied for readability, for example bytes (`B`) may be displayed as kibibytes (`KiB`).
+#### Metric description
 
-#### Edit the metric type
+The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][7]. Use this field to update the descriptions for your [custom metrics][4].
 
-Editing the metric type can help you match the real metric type send.
-**Warning**: This changes your metric behavior in **ALL** your analytics and monitors; do this at your own risk.
+#### Metric unit
+
+The unit for your metric (byte, second, request, query, etc), see the [metric unit][8] page for more details.
+
+When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which displays when hovering over the metric in your graph. **Note**: This does not change how a metric graph is displayed (only the units of measurement that raw values are considered as when hovering over a metric). Formatting is automatically applied for readability, for example bytes (`B`) may be displayed as kibibytes (`KiB`).
+
+#### Metric type
+
+The type for your metric (gauge, rate, or count), see the [metric type][8] page for more details.
+
+**Warning**: Editing the metric type changes the metric behavior for **ALL** your analytics and monitors.
+
+#### Integration name
+
+If the metric is coming from a supported [integration][7], the metadata lists the integration name. This information cannot be edited.
+
+#### Interval
+
+The collection interval for the metric in seconds.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /developers/metrics
-[3]: /graphing/metrics/explorer
-[4]: /graphing/functions
-[5]: /developers/metrics/custom_metrics
-[6]: /tagging
-[7]: /tagging/assigning_tags
+[2]: /graphing/metrics/explorer
+[3]: /graphing/dashboards
+[4]: /developers/metrics/custom_metrics
+[5]: /tagging
+[6]: /api/?lang=python#edit-metric-metadata
+[7]: /integrations
 [8]: /developers/metrics/units
-[9]: /developers/metrics/types
-[10]: /integrations
-[11]: https://github.com/DataDog/documentation/issues/new/choose
