@@ -38,7 +38,7 @@ Your noisiest logging service contains several logs, some of which may be irrele
 5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
 6. Click on the first listed status and select `search for` in the populated menu. This will add your `status` facet to the search.
 
-**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `client name` vs. `service` or `status`.
+**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `client name` versus `service` or `status`.
 
 ## 2. Identify noisy logs with log patterns
 Switch to the [patterns][2] view, located next to the graph view, to view the patterns associated with your service and status.
