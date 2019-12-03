@@ -13,43 +13,47 @@ further_reading:
 
 ## Overview
 
-The [Metrics Explorer][1] is a basic interface for examining metrics you send to Datadog. For more advanced options, create a [Notebook][2], [Screenboard][3], or [Timeboard][4].
+The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [Notebook][2], [Screenboard][3], or [Timeboard][4].
 
 ## Graphing
 
-Click on the **Graph** text box to see a list of metrics you are sending to Datadog. Search the list by typing in the text box. Select a metric to populate a real-time graph visualizations on the right side. Each metric you select creates a separate graph.
+Click on the **Graph** text box to see a list of metrics you have sent to Datadog. Search the list by typing in the text box. Select a metric to populate a real-time graph visualization on the right side. Each metric you select creates a separate graph. Above the graphs, you can specify the time frame and graph size.
 
-{{< img src="graphing/metrics/explorer/explorer.png" alt="Metrics Explorer" responsive="true" style="width:60%;" >}}
+{{< img src="graphing/metrics/explorer/graphs.png" alt="Metrics Explorer" responsive="true" style="width:80%;" >}}
 
-Control time-frame and graph size.d
+**Note**: The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
 
 ### Scope
 
-"Over" allows you to narrow your results by tag. Under "One graph per", you can choose to split a metric into multiple graphs by host, container, region, team, and more.
-
-{{< img src="graphing/metrics/explorer/split-by-team.png" alt="Split By Team" responsive="true" style="width:60%;">}}
+Define scope with the **Over** text box by selecting or searching for tags. For example, see only the metrics for a specific host, cluster, environment, region, etc.
 
 ### Grouping
 
-"One graph per"
+Define grouping with the **One graph per** text box by selecting or searching for tag keys. For example, split a metric into multiple graphs by host, container, region, environment, etc. Metrics tagged with the `<KEY>:<VALUE>` format can be grouped. 
 
 ### Space aggregation
 
-"On each graph, aggregate with the"
+Define [space aggregation][5] with the **On each graph, aggregate with the** text box. The options are:
+
+* Average of reported values (default)
+* Max of reported values
+* Min of reported values
+* Sum of reported values
 
 ### Options
 
-By default, up to 20 graphs are shown. You can change this number by clicking on the "Options" gear.
+You can update the following options for the metrics explorer:
+
+* Prefix graph titles with `<VALUE>`: The default is blank.
+* Show up to `<NUMBER>` graphs at a time: The default is 20.
 
 ### Export
 
-You can also export these graphs to new and existing timeboards.
-
-Individual graphs or all graphs.
+Export all graphs to a new or existing timeboard with the buttons at the bottom left. Individual graphs can be exported by clicking the export icon on the top right of each graph.
 
 ### Snapshot
 
-An individual graph
+Create a snapshot of an individual graph by clicking the camera icon on the top right of a graph.
 
 ## Further reading
 
@@ -59,3 +63,4 @@ An individual graph
 [2]: /graphing/notebooks
 [3]: /graphing/dashboards/screenboard
 [4]: /graphing/dashboards/timeboard
+[5]: /graphing/metrics/introduction/#space-aggregation
