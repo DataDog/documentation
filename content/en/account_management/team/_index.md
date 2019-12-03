@@ -11,7 +11,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-The Team section of Datadog allows you to manage your users and their associated Roles:
+Datadog's **Team** section allows you to manage your users and their associated roles:
 
 {{< img src="account_management/team/team_page.png" alt="Team Page" responsive="true">}}
 
@@ -27,25 +27,25 @@ To add members to a team:
 
 {{< img src="account_management/team/invite_user.png" alt="Add Member To Team" responsive="true" style="width:80%;">}}
 
-The new user will receive an email with a link to log in. Until it's done, the user is marked as: status `Pending`.
+The new user will receive an email with a link to log in. The user is marked with status `Pending` until they log in.
 To re-send an invite, select the *Edit* button on the right of the user line, then click *Resend Invite*:
 
 {{< img src="account_management/team/resend_invite.png" alt="Resend invite" responsive="true" style="width:80%;">}}
 
-## Edit a user roles
+## Edit a user's roles
 
 Only team administrators can promote members:
 
 1. Go to the [Team Page][1].
-2. Select the *Edit* button on the right of the user line
-3. Select the new [user roles][2] for this user
+2. Select the *Edit* button on the right of the user line.
+3. Select the new [user roles][2] for this user.
 4. **Save** the new setting.
 
 {{< img src="account_management/team/user_role_update.png" alt="User role update" responsive="true" style="width:80%;">}}
 
 ## Disable existing members
 
-You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. that are not supposed to be removed.
+Only administrators of the team can disable members. You cannot permanently remove users, as they might own events, dashboards, etc. that are not supposed to be removed.
 
 1. Go to the [Team Page][1].
 2. Select the *Edit* button on the right of the user line
@@ -54,7 +54,7 @@ You must be an administrator of the team to disable members. You cannot permanen
 
 {{< img src="account_management/team/disable_user.png" alt="Disable User" responsive="true" style="width:80%;" >}}
 
-**Note**: Disabled team members disappear from the administrator's team page UI automatically after one month.
+**Note**: Disabled team members disappear from the administrator's team page automatically after one month.
 
 ## Further Reading
 
