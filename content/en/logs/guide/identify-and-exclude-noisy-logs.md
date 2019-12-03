@@ -72,7 +72,7 @@ When a log pattern is excluded from Log Explorer, it still is available to view 
 
 ### Add a new log-based metric
 
-To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][7], then the New Metric+ button.
+To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][7], then the **New Metric+** button.
 
 1. Under Define Query, select the **</>** option and input your parsing rule.
 2. Select the field you would like to track: Select * to generate a count of all logs matching your query or enter a log attribute (e.g., @network.bytes_written) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
