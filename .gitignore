@@ -18,7 +18,6 @@ content/integrations/*.md
 !content/integrations/adobe_experience_manager.md
 !content/integrations/alcide.md
 !content/integrations/amazon_eks_fargate.md
-!content/integrations/iam_access_analyser.md
 
 # Ignoring all automated content
 # Developers/integrations
@@ -46,7 +45,6 @@ content/en/integrations/*.md
 !content/en/integrations/adobe_experience_manager.md
 !content/en/integrations/alcide.md
 !content/en/integrations/amazon_eks_fargate.md
-!content/en/integrations/iam_access_analyser.md
 content/en/developers/integrations/*.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/integrations/faq/list-of-api-source-attribute-value.md
