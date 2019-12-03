@@ -25,8 +25,11 @@ Amazon EKS on AWS Fargate is a managed Kubernetes service that automates certain
 ## Setup
 
 These steps cover the setup of the Datadog Agent in a container within Amazon EKS on AWS Fargate where you run the Agent as a sidecar of your application pod with custom RBAC. 
+
 AWS Fargate nodes are not physical nodes, which means they exclude [host-based system-checks][1], like CPU, memory, etc.
+
 Running the Agent as a sidecar of your application pod with custom RBAC enables these features:
+
 * Kubernetes metrics collection from the pod running your application containers and the Agent
 * [Autodiscovery][2]
 * Configure custom Agent Checks to target containers in the same pod
