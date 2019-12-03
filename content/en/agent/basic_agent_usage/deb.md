@@ -22,6 +22,8 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for Debian. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
+Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+
 **Note**: Debian 7 (wheezy) and above (we support SysVinit in Agent 6.6.0 above) are supported.
 
 ## Commands
