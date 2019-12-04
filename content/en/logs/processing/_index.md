@@ -107,7 +107,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][17]
+If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][17].
 
 ### *host* attribute
 
