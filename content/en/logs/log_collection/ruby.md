@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /logs/languages/ruby
 further_reading:
-- link: "(https://github.com/roidrage/lograge"
+- link: "https://github.com/roidrage/lograge"
   tag: "Github"
   text: "Lograge Documentation"
 - link: "logs/processing"
@@ -65,7 +65,7 @@ This section describe the minimum setup required in order to forward your Rails 
     # Lograge config
     config.lograge.enabled = true
 
-    # This specifues to log in JSON format
+    # This specifies to log in JSON format
     config.lograge.formatter = Lograge::Formatters::Json.new
 
     ## Disables log collocration
