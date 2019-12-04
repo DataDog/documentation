@@ -102,7 +102,7 @@ Template variables that return numerical values support arithmetic operations. T
 
 Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
 
-To illustrate with a real example, the `{{last_triggered_at_epoch}}` returns he UTC date/time when the monitor last triggered in epoch milliseconds format and you could use the eval syntax to subtract 15 minutes from the variable’s value by including the following in your monitor notification message:
+For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
 
 `{{eval "last_triggered_at_epoch-15*60*1000"}}`
 
