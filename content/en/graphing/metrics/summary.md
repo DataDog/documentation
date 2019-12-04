@@ -49,15 +49,15 @@ The metric description helps you understand what a metric does. Descriptions are
 
 #### Metric unit
 
-The unit for your metric (byte, second, request, query, etc), see the [metric unit][8] page for more details.
+The unit for your metric (byte, second, request, query, etc.). See the [metric unit][8] page for more details.
 
-When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which displays when hovering over the metric in your graph. **Note**: This does not change how a metric graph is displayed (only the units of measurement that raw values are considered as when hovering over a metric). Formatting is automatically applied for readability, for example bytes (`B`) may be displayed as kibibytes (`KiB`).
+When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] that displays when hovering over the metric in your graph. **Note**: This does not change how a metric graph is displayed—it only changes the units of measurement that raw values are considered as, when hovering over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kibibytes (`KiB`).
 
 #### Metric type
 
-The type for your metric (gauge, rate, or count), see the [metric type][8] page for more details.
+The type for your metric (gauge, rate, or count). See the [metric type][8] page for more details.
 
-**Warning**: Editing the metric type changes the metric behavior for **ALL** your analytics and monitors.
+**Warning**: Editing the metric type changes that metric's behavior for **ALL** your analytics and monitors.
 
 #### Integration name
 
