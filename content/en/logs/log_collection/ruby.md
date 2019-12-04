@@ -105,7 +105,7 @@ This section describe the minimum setup required in order to forward your Rails 
 
 4. [Restart the Agent][6]
 
-## Further Reading
+## Getting further
 
 ### Inject trace IDs in your logs
 
@@ -188,6 +188,8 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
     grape_logger.info payload
 end
 ```
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
