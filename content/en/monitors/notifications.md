@@ -98,7 +98,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so: 
 
-`{{eval “name_of_template_variable+1-2*3/4”}}`
+`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
 
 Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`”`)
 
