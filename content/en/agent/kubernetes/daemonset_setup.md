@@ -184,20 +184,15 @@ datadog-agent   2         2         2         2            2           <none>   
 
 ### Kubernetes cluster name auto detection
 
-Since version 6.5.0 of the Datadog Agent, the Agent configuration contains a cluster name attribute to be used in Kubernetes clusters, so that host aliases are unique. This attribute can be set using the `DD_CLUSTER_NAME` environment variable.
+For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name on Google GKE, Azure AKS, and AWS EKS. If detected, an alias which contains the cluster name as a suffix on the node name is added to all data collected to facilitates the identification of nodes across Kubernetes clusters. On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags. On AWS, it is required to add the `ec2:DescribeInstances` [permission][10] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
 
-Starting with version 6.11.0, the Datadog Agent can auto-detect the Kubernetes cluster name on Google GKE, Azure AKS, and AWS EKS. This feature facilitates the identification of nodes across Kubernetes clusters by adding an alias which contains the cluster name as a suffix on the node name.
-
-On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags.
-
-**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][10] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
-
+**Note**: You can manually set this cluster name value with Agent v6.5+ thanks to the Agent configuration parameter [`clusterName`][11] or the `DD_CLUSTER_NAME` environment variable.
 
 ## Enable capabilities
 
 ### Log Collection
 
-To enable [Log collection][11] with your DaemonSet:
+To enable [Log collection][12] with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
 
@@ -302,7 +297,7 @@ The Datadog Agent follows the below logic to know where logs should be picked up
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
-Finally, use [Autodiscovery with Pod Annotations][12] to enhance log collection for your containers.
+Finally, use [Autodiscovery with Pod Annotations][13] to enhance log collection for your containers.
 
 #### Short lived containers
 
@@ -377,11 +372,11 @@ tracer.configure(
 )
 ```
 
-Refer to the [language-specific APM instrumentation docs][13] for more examples.
+Refer to the [language-specific APM instrumentation docs][14] for more examples.
 
 ### Process Collection
 
-See [Process collection for Kubernetes][14].
+See [Process collection for Kubernetes][15].
 
 ### DogStatsD
 
@@ -396,7 +391,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][15]
+Learn more about this in the [Kubernetes DogStatsD documentation][16]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -418,8 +413,9 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/docker/#environment-variables
 [9]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [10]: /integrations/amazon_ec2/#configuration
-[11]: /logs
-[12]: /agent/autodiscovery/integrations/?tab=kubernetes
-[13]: /tracing/setup
-[14]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[15]: /agent/kubernetes/dogstatsd
+[11]: https://github.com/helm/charts/blob/2d905afa38f59b73e1043252022dfc934aff588d/stable/datadog/values.yaml#L72
+[12]: /logs
+[13]: /agent/autodiscovery/integrations/?tab=kubernetes
+[14]: /tracing/setup
+[15]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[16]: /agent/kubernetes/dogstatsd
