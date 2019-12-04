@@ -348,14 +348,14 @@ spec:
 
 ## Events Collection
 
-To collect events from your AWS EKS Fargate pods, run a Datadog Cluster Agent over an AWS EKS EC2 pod within your Kubernetes cluster:
+To collect events from your AWS EKS Fargate API server, run a Datadog Cluster Agent over an AWS EKS EC2 pod within your Kubernetes cluster:
 
 1. [Setup the Datadog Cluster Agent][10].
 2. [Enable Event collection for your Cluster Agent][11].
 
 Optionally, deploy cluster check runners in addition to setting up the Datadog Cluster Agent to enable cluster checks.
 
-**Note**: You can also collect events if you run the DCA in a pod in Fargate.
+**Note**: You can also collect events if you run the Datadog Cluster Agent in a pod in Fargate.
 
 ## Troubleshooting
 
