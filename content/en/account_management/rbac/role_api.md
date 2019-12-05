@@ -126,29 +126,29 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 ```json
 {
 	"data": {
-            "type": "roles",
-            "id": "$ROLE_UUID",
-            "attributes": {
-                "name": "$ROLE_NAME",
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122
-            },
-            "relationships": {
-                "permissions": {
-                    "data": [
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        },
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        }
-                    ]
-                }
+        "type": "roles",
+        "id": "$ROLE_UUID",
+        "attributes": {
+            "name": "$ROLE_NAME",
+            "created_at": "2000-02-29T16:50:43.607749+00:00",
+            "modified_at": "2000-02-29T16:50:43.607749+00:00",
+            "user_count": 2122
+        },
+        "relationships": {
+            "permissions": {
+                "data": [
+                    {
+                        "type": "permissions",
+                        "id": "$PERMISSION_UUID"
+                    },
+                    {
+                        "type": "permissions",
+                        "id": "$PERMISSION_UUID"
+                    }
+                ]
             }
         }
+    }
 }
 ```
 
@@ -191,19 +191,19 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 ```json
 {
 	"data": {
-            "type": "roles",
-            "id": "$ROLE_UUID",
-            "attributes": {
-                "name": "$ROLE_NAME",
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "modified_at": "2000-02-29T16:50:43.607749+00:00"
-            },
-            "relationships": {
-                "permissions": {
-                    "data": []
-                }
+        "type": "roles",
+        "id": "$ROLE_UUID",
+        "attributes": {
+            "name": "$ROLE_NAME",
+            "created_at": "2000-02-29T16:50:43.607749+00:00",
+            "modified_at": "2000-02-29T16:50:43.607749+00:00"
+        },
+        "relationships": {
+            "permissions": {
+                "data": []
             }
         }
+    }
 }
 
 ```
@@ -247,19 +247,19 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 ```json
 {
 	"data": {
-            "type": "roles",
-            "id": "$ROLE_UUID",
-            "attributes": {
-                "name": "$ROLE_NAME",
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "modified_at": "2000-02-29T16:50:43.607749+00:00"
-            },
-            "relationships": {
-                "permissions": {
-                    "data": []
-                }
+        "type": "roles",
+        "id": "$ROLE_UUID",
+        "attributes": {
+            "name": "$ROLE_NAME",
+            "created_at": "2000-02-29T16:50:43.607749+00:00",
+            "modified_at": "2000-02-29T16:50:43.607749+00:00"
+        },
+        "relationships": {
+            "permissions": {
+                "data": []
             }
         }
+    }
 }
 
 ```
@@ -541,38 +541,40 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "total_count": 1
         }
     },
-	"data": [{
-        "type": "users",
-        "id": "$USER_UUID",
-        "attributes": {
-            "name": "Example user",
-            "handle": "user@example.org",
-            "created_at": "2000-02-29T14:26:26.983187+00:00",
-            "email": "user@example.org",
-            "icon": "https://secure.gravatar.com/avatar/abc123abc123",
-            "title": null,
-            "verified": true,
-            "disabled": false,
-            "allowed_login_methods": [],
-            "status": "Active"
-        },
-        "relationships": {
-            "roles": {
-                "data": [
-                    {
-                        "type": "roles",
-                        "id": "$ROLE_UUID"
-                    }
-                ]
+	"data": [
+        {
+            "type": "users",
+            "id": "$USER_UUID",
+            "attributes": {
+                "name": "Example user",
+                "handle": "user@example.org",
+                "created_at": "2000-02-29T14:26:26.983187+00:00",
+                "email": "user@example.org",
+                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+                "title": null,
+                "verified": true,
+                "disabled": false,
+                "allowed_login_methods": [],
+                "status": "Active"
             },
-            "org": {
-                "data": {
-                    "type": "orgs",
-                    "id": "$ORG_UUID"
+            "relationships": {
+                "roles": {
+                    "data": [
+                        {
+                            "type": "roles",
+                            "id": "$ROLE_UUID"
+                        }
+                    ]
+                },
+                "org": {
+                    "data": {
+                        "type": "orgs",
+                        "id": "$ORG_UUID"
+                    }
                 }
             }
         }
-    }]
+    ]
 }
 ```
 
@@ -617,38 +619,40 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "total_count": 1
         }
     },
-	"data": [{
-        "type": "users",
-        "id": "$USER_UUID",
-        "attributes": {
-            "name": "Example user",
-            "handle": "user@example.org",
-            "created_at": "2000-02-29T14:26:26.983187+00:00",
-            "email": "user@example.org",
-            "icon": "https://secure.gravatar.com/avatar/abc123abc123",
-            "title": null,
-            "verified": true,
-            "disabled": false,
-            "allowed_login_methods": [],
-            "status": "Active"
-        },
-        "relationships": {
-            "roles": {
-                "data": [
-                    {
-                        "type": "roles",
-                        "id": "$ROLE_UUID"
-                    }
-                ]
+	"data": [
+        {
+            "type": "users",
+            "id": "$USER_UUID",
+            "attributes": {
+                "name": "Example user",
+                "handle": "user@example.org",
+                "created_at": "2000-02-29T14:26:26.983187+00:00",
+                "email": "user@example.org",
+                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+                "title": null,
+                "verified": true,
+                "disabled": false,
+                "allowed_login_methods": [],
+                "status": "Active"
             },
-            "org": {
-                "data": {
-                    "type": "orgs",
-                    "id": "$ORG_UUID"
+            "relationships": {
+                "roles": {
+                    "data": [
+                        {
+                            "type": "roles",
+                            "id": "$ROLE_UUID"
+                        }
+                    ]
+                },
+                "org": {
+                    "data": {
+                        "type": "orgs",
+                        "id": "$ORG_UUID"
+                    }
                 }
             }
         }
-    }]
+    ]
 }
 ```
 
