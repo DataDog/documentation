@@ -200,7 +200,7 @@ A properly configured integration is displayed under **Running Checks** with no 
 ```
 
 
-[1]: /agent/basic_agent_usage/?tab=agentv6#gui
+[1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}

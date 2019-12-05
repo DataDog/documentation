@@ -93,7 +93,7 @@ logs_config:
 
 [1]: /agent/basic_agent_usage
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

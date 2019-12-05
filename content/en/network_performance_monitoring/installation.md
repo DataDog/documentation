@@ -76,7 +76,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 
 [1]: https://docs.datadoghq.com/graphing/infrastructure/process/?tab=linuxwindows#installation
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -209,4 +209,4 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 [3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
 [4]: https://github.com/DataDog/chef-datadog
 [5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

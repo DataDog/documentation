@@ -119,7 +119,7 @@ This example can be extended to additional use cases:
 [2]: /graphing/widgets/query_value
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: /agent/guide/agent-configuration-files
-[5]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[5]: /agent/guide/agent-commands/#restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: /monitors/monitor_types/metric
