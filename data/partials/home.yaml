@@ -52,6 +52,10 @@ nav_sections:
         link: real_user_monitoring/
         icon: rum.svg
         desc: Visualize and analyze the performance of your front end applications.
+      - title: Network Performance
+        link: network_performance_monitoring/
+        icon: network.svg
+        desc: Gain visibiliy into your network traffic using tagged objects
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg
