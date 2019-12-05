@@ -839,9 +839,9 @@ Certain permissions can be granted within a limited scope. This can be done manu
 
 | Permission Name                | Scope Name | Format                                   | Description                                                     |
 |--------------------------------|------------|------------------------------------------|-----------------------------------------------------------------|
-| `logs_read_index_data`         | indexes    | list of index names (string)             | Grant read on only certain log indexes.                         |
-| `logs_write_exclusion_filters` | indexes    | list of index names (string)             | Grant update on the exclusion filters for only certain indexes. |
-| `logs_write_processors`        | pipelines  | list of processing pipeline ids (string) | Grant update on only the processors of certain pipelines.       |
+| `logs_read_index_data`         | indexes    | list of index names (string)             | Grant read on only certain log indexes                          |
+| `logs_write_exclusion_filters` | indexes    | list of index names (string)             | Grant update on the exclusion filters for only certain indexes  |
+| `logs_write_processors`        | pipelines  | list of processing pipeline ids (string) | Grant update on only the processors of certain pipelines        |
 
 For example, to grant read access only on two indexes named `main` and `support` to a role named `support`, your API call  looks like this:
 
