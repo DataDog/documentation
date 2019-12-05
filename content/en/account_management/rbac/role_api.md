@@ -852,8 +852,7 @@ curl -X POST \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "data":
-                {
+                "data": {
                     "type": "permissions",
                     "id": <PERMISSION_UUID>,
                     "scope": {
@@ -875,8 +874,7 @@ curl -X POST \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "data":
-                {
+                "data": {
                     "type": "permissions",
                     "id": <PERMISSION_UUID>,
                     "scope": {
