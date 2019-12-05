@@ -442,7 +442,7 @@ With:
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-[1]: /agent/?tab=agentv6#agent-architecture
+[1]: /agent/#agent-architecture
 [2]: /agent/guide/agent-commands
 [3]: /developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md

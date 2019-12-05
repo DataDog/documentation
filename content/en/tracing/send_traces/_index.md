@@ -83,7 +83,7 @@ Next, [Instrument your application][14]. For the full overview of all of the ste
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing
-[3]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics
 [6]: /agent

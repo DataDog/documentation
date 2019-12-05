@@ -208,7 +208,7 @@ make install
 
 [1]: /help
 [2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
+[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
 [5]: /tracing/visualization/#trace
 [6]: /help

@@ -56,7 +56,7 @@ instances:
       - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example

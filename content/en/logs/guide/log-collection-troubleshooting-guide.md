@@ -186,10 +186,10 @@ Check if logs appear in the [Datadog Live Tail][13]. If they appear in the Live 
 
 [1]: /logs
 [2]: /help
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[4]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: /agent/guide/agent-commands/#agent-status-and-information
 [5]: https://en.wikipedia.org/wiki/Chmod
-[6]: https://docs.datadoghq.com/integrations/journald/#pagetitle
+[6]: https://docs.datadoghq.com/integrations/journald/
 [7]: https://codebeautify.org/yaml-validator
 [8]: /agent/docker/log/?tab=containerinstallation#filter-containers
 [9]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
