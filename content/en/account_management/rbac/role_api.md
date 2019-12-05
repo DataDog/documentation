@@ -42,7 +42,7 @@ Number of roles to return for a given page.
 Sort roles depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
     Options: **name**, **modified_at**
 * **`filter`**[*optional*, *default*=**None**]:
-    Filter all roles by the given string.
+Filter all roles by the given string.
 
 
 {{< tabs >}}
@@ -677,6 +677,18 @@ Get all users of a role
 | Method   | Endpoint path                  | Required payload |
 |----------|--------------------------------|------------------|
 | `GET`    | `/v2/roles/<ROLE_UUID>/users`  | No Payload       |
+
+##### ARGUMENTS
+
+* **`page[size]`** [*optional*, *default*=**0**]:
+Page number of users to return for a given page.
+* **`page[count]`** [*optional*, *default*=**10**]:
+Number of users to return for a given page.
+* **`sort`** [*optional*, *default*=**name**]:
+Sort users depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
+    Options: **name**, **modified_at**
+* **`filter`**[*optional*, *default*=**None**]:
+Filter all users by the given string.
 
 {{< tabs >}}
 {{% tab "Example" %}}
