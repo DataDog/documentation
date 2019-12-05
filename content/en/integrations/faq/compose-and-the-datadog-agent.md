@@ -7,9 +7,9 @@ kind: faq
 
 While the [single container installation instructions][2] gets the stock Datadog Agent container running, you may want to enable integrations for other containerized services that are part of your Compose application. To do this, you need to combine integration YAML files with the base Datadog Agent image to create your Datadog Agent container. Then, add your container to the Compose YAML.
 
-##### Example: Monitoring Redis
+### Redis example
 
-The following is an example of how you can monitor a Redis container using Compose. The example file structure is:
+The following is an example of how you can monitor a Redis container using Compose. The file structure is:
 
     |- docker-compose.yml
     |- datadog
@@ -17,7 +17,7 @@ The following is an example of how you can monitor a Redis container using Compo
         |- conf.d
            |-redisdb.yaml
 
-First, take a look at the `docker-compose.yml` that describes how your containers work together and sets some of the configuration details for the containers.
+The `docker-compose.yml` file describes how your containers work together and sets some of the configuration details for the containers.
 
 {{< tabs >}}
 {{% tab "US site" %}}
@@ -63,7 +63,7 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and the standard Redis port 6379:
+The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and to use the standard Redis port:
 
     init_config:
 
@@ -71,7 +71,7 @@ The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tel
       - host: redis
         port: 6379
 
-For a more complete example, see the [Docker Compose example project on GitHub][4].
+For a detailed example, see the [Docker Compose example project on GitHub][4].
 
 [1]: https://docs.docker.com/compose/overview
 [2]: /agent/docker
