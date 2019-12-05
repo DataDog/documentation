@@ -27,7 +27,7 @@ Si vous n'avez pas encore installé l'Agent Datadog, consultez les informations 
 #### Interface graphique
 
 1. Téléchargez [le fichier d'installation de l'Agent Datadog][5].
-2. Exécutez le fichier d'installation (en tant qu'**administrateur**) en ouvrant `ddagent-cli-6.14.2.msi`.
+2. Exécutez le fichier d'installation (en tant qu'**administrateur**) en ouvrant `ddagent-cli-6.14.3.msi`.
 3. Suivez les instructions à l'écran, acceptez l'accord de licence et entrez votre [clé d'API Datadog][6].
 4. Une fois l'installation terminée, vous avez la possibilité de lancer Datadog Agent Manager.
 
@@ -40,12 +40,12 @@ Vous pouvez également installer l'Agent avec une ligne de commande pour ajouter
 
 Invite de commande :
 ```cmd
-start /wait msiexec /qn /i ddagent-cli-6.14.2.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"
+start /wait msiexec /qn /i ddagent-cli-6.14.3.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"
 ```
 
 Powershell :
 ```powershell
-Start-Process -Wait msiexec -ArgumentList '/qn /i ddagent-cli-6.14.2.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"'
+Start-Process -Wait msiexec -ArgumentList '/qn /i ddagent-cli-6.14.3.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"'
 ```
 
 Chaque élément de configuration est ajouté en tant que propriété dans la ligne de commande. Les options de configuration en ligne de commande suivantes sont disponibles à l'installation de l'Agent sur Windows :
@@ -362,7 +362,7 @@ Une fois la configuration effectuée, [redémarrez l'Agent][14].
 [2]: /fr/agent/basic_agent_usage/#supported-os-versions
 [3]: /fr/agent/faq/windows-agent-ddagent-user
 [4]: /fr/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
+[5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.3.msi
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /fr/agent/proxy
 [8]: /fr/agent/guide/datadog-agent-manager-windows
