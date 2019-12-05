@@ -29,8 +29,8 @@ All the API endpoints below can have two different host endpoints:
 Returns all roles, including their names and UUIDs.
 
 | Method | Endpoint path | Required payload |
-|--------|--------------|------------------|
-| `GET`  | `/v2/roles`  | No Payload       |
+|--------|--------------|-------------------|
+| `GET`  | `/v2/roles`  | No Payload        |
 
 ##### ARGUMENTS
 
@@ -105,8 +105,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Returns a specific role, including its name and UUID.
 
 | Method | Endpoint path            | Required payload |
-|--------|-------------------------|------------------|
-| `GET`  | `/v2/roles/<ROLE_UUID>` | No Payload       |
+|--------|-------------------------|-------------------|
+| `GET`  | `/v2/roles/<ROLE_UUID>` | No Payload        |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -161,8 +161,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Creates a new role. Returns role name and UUID.
 
 | Method | Endpoint path | Required payload                           |
-|--------|--------------|--------------------------------------------|
-| `POST` | `/v2/roles`  | **type="roles"**<br>**attributes["name"]** |
+|--------|---------------|--------------------------------------------|
+| `POST` | `/v2/roles`   | **type="roles"**<br>**attributes["name"]** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -200,7 +200,12 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         },
         "relationships": {
             "permissions": {
-                "data": []
+                "data": [
+                    {
+                        "type": "permissions",
+                        "id": "$PERMISSION_UUID"
+                    },
+                ]
             }
         }
     }
@@ -215,9 +220,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Updates an existing role's name. Returns role name and UUID.
 
-| Method  | Endpoint path            | Required payload                           |
-|---------|-------------------------|--------------------------------------------|
-| `PATCH` | `/v2/roles/<ROLE_UUID>` | **type="roles"**<br>**attributes["name"]** |
+| Method  | Endpoint path            | Required payload                                                |
+|---------|--------------------------|-----------------------------------------------------------------|
+| `PATCH` | `/v2/roles/<ROLE_UUID>`  | **type="roles"**<br>**id="ROLE_UUID"**<br>**attributes["name"]**|
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -231,6 +236,7 @@ curl -X PATCH \
          -d '{
              "data": {
                  "type": "roles",
+                 "id": <ROLE_UUID>,
                  "attributes": {
                      "name": <ROLE_NAME>
                 }
@@ -256,7 +262,12 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         },
         "relationships": {
             "permissions": {
-                "data": []
+                "data": [
+                    {
+                        "type": "permissions",
+                        "id": "$PERMISSION_UUID"
+                    },
+                ]
             }
         }
     }
@@ -272,8 +283,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Deletes a role.
 
 | Method   | Endpoint path            | Required payload |
-|----------|-------------------------|------------------|
-| `DELETE` | `/v2/roles/<ROLE_UUID>` | No Payload       |
+|----------|-------------------------|-------------------|
+| `DELETE` | `/v2/roles/<ROLE_UUID>` | No Payload        |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -351,8 +362,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Returns a list of all permissions for a single role.
 
 | Method | Endpoint path                        | Required payload |
-|--------|-------------------------------------|------------------|
-| `GET`  | `/v2/roles/<ROLE_UUID>/permissions` | No Payload       |
+|--------|--------------------------------------|------------------|
+| `GET`  | `/v2/roles/<ROLE_UUID>/permissions`  | No Payload       |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -398,8 +409,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Adds a permission to a role.
 
 | Method | Endpoint path                        | Required payload                                                  |
-|--------|-------------------------------------|-------------------------------------------------------------------|
-| `POST` | `/v2/roles/<ROLE_UUID>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
+|--------|--------------------------------------|-------------------------------------------------------------------|
+| `POST` | `/v2/roles/<ROLE_UUID>/permissions`  | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -453,8 +464,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Removes a permission from a role.
 
 | Method   | Endpoint path                        | Required payload                                                  |
-|----------|-------------------------------------|-------------------------------------------------------------------|
-| `DELETE` | `/v2/roles/<ROLE_UUID>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
+|----------|--------------------------------------|-------------------------------------------------------------------|
+| `DELETE` | `/v2/roles/<ROLE_UUID>/permissions`  | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -508,8 +519,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Adds a user to a role.
 
 | Method | Endpoint path                  | Required payload                                        |
-|--------|-------------------------------|---------------------------------------------------------|
-| `POST` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
+|--------|--------------------------------|---------------------------------------------------------|
+| `POST` | `/v2/roles/<ROLE_UUID>/users`  | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -586,8 +597,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 Removes a user from a role.
 
 | Method   | Endpoint path                  | Required payload                                        |
-|----------|-------------------------------|---------------------------------------------------------|
-| `DELETE` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
+|----------|--------------------------------|---------------------------------------------------------|
+| `DELETE` | `/v2/roles/<ROLE_UUID>/users`  | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
