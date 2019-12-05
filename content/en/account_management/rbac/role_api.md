@@ -64,6 +64,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {
     "meta": {
         "page": {
+            "total_filtered_count": 7,
             "total_count": 7
         }
     },
@@ -72,10 +73,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "type": "roles",
             "id": "$ROLE_UUID",
             "attributes": {
+                "name": "$ROLE_NAME",
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "name": "$ROLE_NAME"
+                "user_count": 2122
             },
             "relationships": {
                 "permissions": {
@@ -127,11 +128,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 	"data": {
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+            "attributes": {
+                "name": "$ROLE_NAME",
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "name": "$ROLE_NAME"
+                "user_count": 2122
             },
             "relationships": {
                 "permissions": {
@@ -192,11 +193,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 	"data": {
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+            "attributes": {
+                "name": "$ROLE_NAME",
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 0,
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "name": "$ROLE_NAME"
+                "modified_at": "2000-02-29T16:50:43.607749+00:00"
             },
             "relationships": {
                 "permissions": {
@@ -249,11 +249,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 	"data": {
             "type": "roles",
             "id": "$ROLE_UUID",
-                "attributes": {
+            "attributes": {
+                "name": "$ROLE_NAME",
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 0,
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "name": "$ROLE_NAME"
+                "modified_at": "2000-02-29T16:50:43.607749+00:00"
             },
             "relationships": {
                 "permissions": {
@@ -326,19 +325,21 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-	"data": [{
-        "type": "permissions",
-        "id": "$PERMISSION_UUID",
-        "attributes": {
-            "display_name": "Logs metrics write",
-            "description": "Update a custom metric",
-            "name": "logs_metrics_write",
-            "created": "2000-02-29T14:26:26.983187+00:00",
-            "restricted": false,
-            "group_name": "Logs",
-            "display_type": "other"
+	"data": [
+        {
+            "type": "permissions",
+            "id": "$PERMISSION_UUID",
+            "attributes": {
+                "name": "logs_metrics_write",
+                "display_name": "Logs metrics write",
+                "description": "Update a custom metric",
+                "created": "2000-02-29T14:26:26.983187+00:00",
+                "group_name": "Logs",
+                "display_type": "other",
+                "restricted": false
+            }
         }
-    }]
+    ]
 }
 ```
 
@@ -371,19 +372,21 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-	"data": [{
-        "type": "permissions",
-        "id": "$PERMISSION_UUID",
-        "attributes": {
-            "display_name": "Logs metrics write",
-            "description": "Update a custom metric",
-            "name": "logs_metrics_write",
-            "created": "2000-02-29T14:26:26.983187+00:00",
-            "restricted": false,
-            "group_name": "Logs",
-            "display_type": "other"
+	"data": [
+        {
+            "type": "permissions",
+            "id": "$PERMISSION_UUID",
+            "attributes": {
+                "name": "logs_metrics_write",
+                "display_name": "Logs metrics write",
+                "description": "Update a custom metric",
+                "created": "2000-02-29T14:26:26.983187+00:00",
+                "group_name": "Logs",
+                "display_type": "other",
+                "restricted": false
+            }
         }
-    }]
+    ]
 }
 ```
 
@@ -424,19 +427,21 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-	"data": [{
-        "type": "permissions",
-        "id": "$PERMISSION_UUID",
-        "attributes": {
-            "display_name": "Logs metrics write",
-            "description": "Update a custom metric",
-            "name": "logs_metrics_write",
-            "created": "2000-02-29T14:26:26.983187+00:00",
-            "restricted": false,
-            "group_name": "Logs",
-            "display_type": "other"
+	"data": [
+        {
+            "type": "permissions",
+            "id": "$PERMISSION_UUID",
+            "attributes": {
+                "name": "logs_metrics_write",
+                "display_name": "Logs metrics write",
+                "description": "Update a custom metric",
+                "created": "2000-02-29T14:26:26.983187+00:00",
+                "group_name": "Logs",
+                "display_type": "other",
+                "restricted": false
+            }
         }
-    }]
+    ]
 }
 ```
 
@@ -477,19 +482,21 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-	"data": [{
-        "type": "permissions",
-        "id": "$DIFFERENT_PERMISSION_UUID",
-        "attributes": {
-            "display_name": "Logs metrics read",
-            "description": "Update a read metric",
-            "name": "logs_metrics_read",
-            "created": "2000-02-29T14:26:26.983187+00:00",
-            "restricted": false,
-            "group_name": "Logs",
-            "display_type": "other"
+	"data": [
+        {
+            "type": "permissions",
+            "id": "$DIFFERENT_PERMISSION_UUID",
+            "attributes": {
+                "name": "logs_metrics_write",
+                "display_name": "Logs metrics write",
+                "description": "Update a custom metric",
+                "created": "2000-02-29T14:26:26.983187+00:00",
+                "group_name": "Logs",
+                "display_type": "other",
+                "restricted": false
+            }
         }
-    }]
+    ]
 }
 ```
 
@@ -502,7 +509,7 @@ Adds a user to a role.
 
 | Method | Endpoint path                  | Required payload                                        |
 |--------|-------------------------------|---------------------------------------------------------|
-| `POST` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_HANDLE** |
+| `POST` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -516,7 +523,7 @@ curl -X POST \
          -d '{
              "data": {
                  "type": "users",
-                 "id": "user@example.org"
+                 "id": <USER_UUID>
              }
          }'
 ```
@@ -529,18 +536,41 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
+    "meta": {
+        "page": {
+            "total_count": 1
+        }
+    },
 	"data": [{
         "type": "users",
-        "id": "user@example.org",
+        "id": "$USER_UUID",
         "attributes": {
-            "handle": "user@example.org",
             "name": "Example user",
-            "title": null,
+            "handle": "user@example.org",
             "created_at": "2000-02-29T14:26:26.983187+00:00",
-            "org_id": 99,
-            "disabled": false,
+            "email": "user@example.org",
+            "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+            "title": null,
             "verified": true,
-            "email": "user@example.org"
+            "disabled": false,
+            "allowed_login_methods": [],
+            "status": "Active"
+        },
+        "relationships": {
+            "roles": {
+                "data": [
+                    {
+                        "type": "roles",
+                        "id": "$ROLE_UUID"
+                    }
+                ]
+            },
+            "org": {
+                "data": {
+                    "type": "orgs",
+                    "id": "$ORG_UUID"
+                }
+            }
         }
     }]
 }
@@ -555,7 +585,7 @@ Removes a user from a role.
 
 | Method   | Endpoint path                  | Required payload                                        |
 |----------|-------------------------------|---------------------------------------------------------|
-| `DELETE` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_HANDLE** |
+| `DELETE` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -569,7 +599,7 @@ curl -X DELETE \
          -d '{
              "data": {
                  "type": "users",
-                 "id": "user@example.org"
+                 "id": <USER_UUID>
              }
          }'
 ```
@@ -582,18 +612,41 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
+    "meta": {
+        "page": {
+            "total_count": 1
+        }
+    },
 	"data": [{
         "type": "users",
-        "id": "user2@example.org",
+        "id": "$USER_UUID",
         "attributes": {
-            "handle": "user2@example.org",
-            "name": "Example user 2",
-            "title": null,
+            "name": "Example user",
+            "handle": "user@example.org",
             "created_at": "2000-02-29T14:26:26.983187+00:00",
-            "org_id": 99,
-            "disabled": false,
+            "email": "user@example.org",
+            "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+            "title": null,
             "verified": true,
-            "email": "user2@example.org"
+            "disabled": false,
+            "allowed_login_methods": [],
+            "status": "Active"
+        },
+        "relationships": {
+            "roles": {
+                "data": [
+                    {
+                        "type": "roles",
+                        "id": "$ROLE_UUID"
+                    }
+                ]
+            },
+            "org": {
+                "data": {
+                    "type": "orgs",
+                    "id": "$ORG_UUID"
+                }
+            }
         }
     }]
 }
