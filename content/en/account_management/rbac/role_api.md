@@ -670,6 +670,102 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
+### Get users of role
+
+Get all users of a role
+
+| Method   | Endpoint path                  | Required payload |
+|----------|--------------------------------|------------------|
+| `GET`    | `/v2/roles/<ROLE_UUID>/users`  | No Payload       |
+
+{{< tabs >}}
+{{% tab "Example" %}}
+
+```sh
+curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/users" \
+     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
+```
+
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].  See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Response" %}}
+
+```json
+{
+    "included": [
+        {
+            "type": "roles",
+            "id": "$ROLE_UUID",
+            "attributes": {
+                "name": "$ROLE_NAME",
+                "created_at": "2000-02-29T16:50:43.607749+00:00",
+                "modified_at": "2000-02-29T16:50:43.607749+00:00"
+            },
+            "relationships": {
+                "permissions": {
+                    "data": [
+                        {
+                            "type": "permissions",
+                            "id": "$PERMISSION_UUID"
+                        },
+                        {
+                            "type": "permissions",
+                            "id": "$PERMISSION_UUID"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "meta": {
+        "page": {
+            "total_filtered_count": 1,
+            "total_count": 1
+        }
+    },
+	"data": [
+        {
+            "type": "users",
+            "id": "$USER_UUID",
+            "attributes": {
+                "name": "Example user",
+                "handle": "user@example.org",
+                "created_at": "2000-02-29T14:26:26.983187+00:00",
+                "email": "user@example.org",
+                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+                "title": null,
+                "verified": true,
+                "disabled": false,
+                "allowed_login_methods": [],
+                "status": "Active"
+            },
+            "relationships": {
+                "roles": {
+                    "data": [
+                        {
+                            "type": "roles",
+                            "id": "$ROLE_UUID"
+                        }
+                    ]
+                },
+                "org": {
+                    "data": {
+                        "type": "orgs",
+                        "id": "$ORG_UUID"
+                    }
+                }
+            }
+        }
+    ]
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Permission UUIDs
 
 In order to grant or remove a global permission to/from a role, use the UUID for both the role and the permission.
