@@ -847,32 +847,44 @@ For example, to grant read access only on two indexes named `main` and `support`
 
 ```sh
 curl -X POST \
-  "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}" \
-  -H "Content-type: application/json" \
-  -d '{
-      	"scope": {
-      		"indexes": [
-      			"main",
-      			"support"
-      		]
-      	}
-      }'
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "data": {
+                    "type": "permissions",
+                    "id": <PERMISSION_UUID>,
+                    "scope": {
+                        "indexes": [
+                            "main",
+                            "support"
+                        ]
+                    }
+                }
+            }'
 ```
 
 To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively, your API call  looks like this:
 
 ```sh
 curl -X POST \
-    "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
-    -H "Content-type: application/json" \
-    -d '{
-          "scope": {
-            "pipelines": [
-        		  "abcd-1234",
-        		  "bcde-2345"
-        	 ]
-         }
-       }'
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "data": {
+                    "type": "permissions",
+                    "id": <PERMISSION_UUID>,
+                    "scope": {
+                        "pipelines": [
+                            "abcd-1234",
+                            "bcde-2345"
+                        ]
+                    }
+                }
+            }'
 ```
 
 ## Further Reading
