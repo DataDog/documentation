@@ -16,7 +16,6 @@ further_reading:
 
 ## Agent Major version main changes
 
-
 Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
@@ -141,3 +140,12 @@ minfds = 100  # Your hard limit
 [5]: /agent/faq/network
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /agent/#agent-architecture
+[2]: /agent/guide/agent-commands
+[3]: /developers/dogstatsd/unix_socket
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
+[5]: /developers/metrics/types
+[6]: /graphing/infrastructure/process
+[7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
+[8]: /logs
