@@ -450,4 +450,4 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /ja/logs
 [9]: https://github.com/DataDog/datadog-agent/releases
-[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.3.msi
+[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
