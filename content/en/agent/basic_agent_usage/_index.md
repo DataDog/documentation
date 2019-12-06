@@ -128,7 +128,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
-3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
+3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
 ## Supported OS versions
 
@@ -217,7 +217,7 @@ With Agent v6+ the command line interface is sub-command based. To run a sub-com
 | `check`           | Run the specified check                                                        |
 | `configcheck`     | Print all configurations loaded & resolved of a running Agent                  |
 | `diagnose`        | Execute some connectivity diagnosis on your system                             |
-| `flare`           | [Collect a flare and send it to Datadog](/agent/troubleshooting/send_a_flare/) |
+| `flare`           | [Collect a flare and send it to Datadog][1] |
 | `health`          | Print the current Agent health                                                 |
 | `help`            | Help about any command                                                         |
 | `hostname`        | Print the hostname used by the Agent                                           |
@@ -226,12 +226,12 @@ With Agent v6+ the command line interface is sub-command based. To run a sub-com
 | `launch-gui`      | Starts the Datadog Agent GUI                                                   |
 | `regimport`       | Import the registry settings into datadog.yaml                                 |
 | `remove-service`  | Removes the Agent from the service control manager                             |
-| `restart`         | [Restart the Agent](/agent/guide/agent-commands/#restart-the-agent)            |
+| `restart`         | [Restart the Agent][2]            |
 | `restart-service` | Restarts the Agent within the service control manager                          |
-| `start`           | [Start the Agent](/agent/guide/agent-commands/#start-the-agent)                |
+| `start`           | [Start the Agent][3]                |
 | `start-service`   | Starts the Agent within the service control manager                            |
-| `status`          | [Print the current Agent status](/agent/guide/agent-commands/#service-status)  |
-| `stop`            | [Stop the Agent](/agent/guide/agent-commands/#stop-the-agent)                  |
+| `status`          | [Print the current Agent status][4]  |
+| `stop`            | [Stop the Agent][5]                  |
 | `stopservice`     | Stops the Agent within the service control manager                             |
 | `version`         | Print the version info                                                         |
 
@@ -241,20 +241,6 @@ With Agent v6+ the command line interface is sub-command based. To run a sub-com
 ```
 <AGENT_BIN_PATH> check --help
 ```
-
-## GUI
-
-You can configure the port on which the GUI runs in the `datadog.yaml` file. To disable the GUI, set the port's value to `-1`. For Windows and macOS, the GUI is enabled by default and runs on port `5002`. For Linux, the GUI is disabled by default. When the Agent is running, use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
-
-**Note**: The Agent GUI isn't supported on 32-bit Windows platforms.
-
-### Requirements
-
-1. Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
-
-2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
-
-3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1g`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
 ## Agent Overhead
 
@@ -290,7 +276,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 ## Configuration management tools
 
-Manage the Datadog Agent and [Integrations][1] using configuration management tools:
+Manage the Datadog Agent and [Integrations][6] using configuration management tools:
 
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
@@ -333,32 +319,37 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][2].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][3].
+Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][8].
 
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][4].
+[See the dedicated documentation for Agent configuration files][9].
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][5], edit your [Agent main configuration file][6] `datadog.yaml` and set the `site` parameter to:
+To send your Agent data to the [Datadog EU site][10], edit your [Agent main configuration file][11] `datadog.yaml` and set the `site` parameter to:
 
 `site: datadoghq.eu`
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][7]
+[See the dedicated documentation for Agent log files][12]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: /agent/guide/integration-management
-[4]: /agent/guide/agent-configuration-files
-[5]: https://app.datadoghq.eu
-[6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[7]: /agent/guide/agent-log-files
+[1]: /agent/troubleshooting/send_a_flare/
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/guide/agent-commands/#start-the-agent
+[4]: /agent/guide/agent-commands/#service-status
+[5]: /agent/guide/agent-commands/#stop-the-agent
+[6]: /integrations
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: /agent/guide/integration-management
+[9]: /agent/guide/agent-configuration-files
+[10]: https://app.datadoghq.eu
+[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[12]: /agent/guide/agent-log-files
