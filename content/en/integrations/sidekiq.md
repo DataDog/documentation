@@ -55,5 +55,5 @@ The Sidekiq integration is included in the [Datadog Agent][1] package, so you do
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[4]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: /agent/guide/agent-commands/#agent-status-and-information

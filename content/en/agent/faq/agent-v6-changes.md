@@ -89,9 +89,9 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][6].                                                         |
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/upgrade-to-agent-v6
-[3]: /agent/proxy/?tab=agentv6
+[3]: /agent/proxy/
 [4]: /integrations/disk
 [5]: /logs
 [6]: /integrations/amazon_web_services
@@ -165,7 +165,7 @@ The precedence order of Agent v6 proxy options is different from previous versio
 
 There are differences in hostname resolution between Agent v5 and Agent v6. For details, see the [dedicated documentation][1].
 
-[1]: /agent/faq/how-datadog-agent-determines-the-hostname/?tab=agentv6#agent-versions
+[1]: /agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -409,7 +409,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 `sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://github.com/jiaqi/jmxterm
-[2]: /integrations/faq/troubleshooting-jmx-integrations/?tab=agentv62#agent-troubleshooting
+[2]: /integrations/faq/troubleshooting-jmx-integrations/2#agent-troubleshooting
 {{% /tab %}}
 {{% tab "System" %}}
 
@@ -564,8 +564,8 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /agent/guide/dogstream
 [4]: /integrations/go-metro
-[5]: /agent/guide/agent-log-files/?tab=agentv6
-[6]: /agent/guide/agent-commands/?tab=agentv6
+[5]: /agent/guide/agent-log-files/
+[6]: /agent/guide/agent-commands/
 [7]: https://docs.datadoghq.com/agent/autodiscovery
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks

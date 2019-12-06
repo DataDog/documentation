@@ -348,7 +348,7 @@ Find below the manual upgrade instructions for:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Download the latest version available [from here][10] and run the installation package.
+Download the latest version available [from here][1] and run the installation package.
 
 Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
 
@@ -361,8 +361,8 @@ With:
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
 
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.3.msi
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -379,14 +379,3 @@ https://github.com/DataDog/datadog-agent/releases
 {{% /tab %}}
 {{< /tabs >}}
 
-
-[1]: /agent/?tab=agentv6#agent-architecture
-[2]: /agent/guide/agent-commands
-[3]: /developers/dogstatsd/unix_socket
-[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /developers/metrics/types
-[6]: /graphing/infrastructure/process
-[7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: /logs
-[9]: https://github.com/DataDog/datadog-agent/releases
-[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
