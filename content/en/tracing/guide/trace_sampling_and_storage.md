@@ -62,7 +62,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
     | **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
     | **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
     | **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
-    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
+    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all Spans marked for `MANUAL_KEEP` are counted as billable spans. |
 
     Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
@@ -79,7 +79,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
     Moreover, the Agent provides a service-based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
 
-    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][3].
+    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][4].
 
 3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
@@ -406,4 +406,5 @@ Once a trace has been viewed by opening a full page, it continues to be availabl
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[3]: https://docs.datadoghq.com/security/tracing/#resource-filtering
+[3]: /tracing/app_analytics/#span-filtering
+[4]: https://docs.datadoghq.com/security/tracing/#resource-filtering
