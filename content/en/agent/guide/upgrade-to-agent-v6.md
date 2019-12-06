@@ -442,13 +442,13 @@ With:
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-[1]: /agent/?tab=agentv6#agent-architecture
+[1]: /agent/#agent-architecture
 [2]: /agent/guide/agent-commands
 [3]: /developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /developers/metrics/distributions
+[5]: /developers/metrics/types
 [6]: /graphing/infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /logs
 [9]: https://github.com/DataDog/datadog-agent/releases
-[10]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.3.msi

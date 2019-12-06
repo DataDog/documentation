@@ -169,7 +169,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 ### DogStatsD
 
-See [the DogStatsD documentation][13] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
+See [the DogStatsD documentation][4] for more information. There is [a list of DogStatsD libraries][13] compatible with a wide range of applications.
 
 ## Monitor Your Pivotal Platform Cluster
 
@@ -184,11 +184,11 @@ These integrations are meant for Pivotal Platform deployment administrators, not
 
 ### Prerequisites
 
-You must have a working Pivotal Platform deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][15] or [v2][16].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][14] or [v2][15].
 
 ### Install the Datadog Agent BOSH Release
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][16] (the same way a Director deploys the BOSH Agent to all nodes).
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -200,7 +200,7 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-age
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][18].
+If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][17].
 
 #### Configure the Agent as an addon in your BOSH Director
 
@@ -263,7 +263,7 @@ The configuration under each check name should look the same as if you were conf
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
-To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][19] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][18] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 
@@ -290,7 +290,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][20] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
@@ -312,7 +312,7 @@ bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/da
 bosh upload-release -e <BOSH_ENV> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][21].
+If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][20].
 
 #### Configure a UAA client
 
@@ -368,7 +368,7 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ```
 
-To see all available configuration options, check the [Datadog Firehose Nozzle repository][22].
+To see all available configuration options, check the [Datadog Firehose Nozzle repository][21].
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
@@ -396,7 +396,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 #### Verify the Nozzle is collecting
 
-On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
+On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
 
@@ -404,7 +404,7 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning `clo
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][24], [network][25], [disk][26], and [ntp][27] metrics).
+The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][23], [network][24], [disk][25], and [ntp][26] metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
@@ -413,7 +413,7 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[4]: /developers/dogstatsd
+[4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [6]: https://github.com/cloudfoundry/multi-buildpack
 [7]: https://github.com/cloudfoundry/multi-buildpack#usage
@@ -422,18 +422,17 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /tracing/setup
 [12]: https://docs.datadoghq.com/agent/logs/proxy
-[13]: /developers/dogstatsd
-[14]: /libraries
-[15]: https://bosh.io/docs/bosh-cli.html
-[16]: https://bosh.io/docs/cli-v2.html#install
-[17]: https://bosh.io/docs/runtime-config.html#addons
-[18]: https://github.com/DataDog/datadog-agent-boshrelease
-[19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
-[20]: https://app.datadoghq.com/graphing/infrastructure/hostmap
-[21]: https://github.com/DataDog/datadog-firehose-nozzle-release
-[22]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
-[23]: https://app.datadoghq.com/metric/explorer
-[24]: /integrations/system/#metrics
-[25]: /integrations/network/#metrics
-[26]: /integrations/disk/#metrics
-[27]: /integrations/ntp/#metrics
+[13]: /libraries
+[14]: https://bosh.io/docs/bosh-cli.html
+[15]: https://bosh.io/docs/cli-v2.html#install
+[16]: https://bosh.io/docs/runtime-config.html#addons
+[17]: https://github.com/DataDog/datadog-agent-boshrelease
+[18]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
+[19]: https://app.datadoghq.com/graphing/infrastructure/hostmap
+[20]: https://github.com/DataDog/datadog-firehose-nozzle-release
+[21]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
+[22]: https://app.datadoghq.com/metric/explorer
+[23]: /integrations/system/#metrics
+[24]: /integrations/network/#metrics
+[25]: /integrations/disk/#metrics
+[26]: /integrations/ntp/#metrics

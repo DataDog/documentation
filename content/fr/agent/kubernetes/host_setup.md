@@ -1,5 +1,5 @@
 ---
-title: Configuration de host avec Kubernetes
+title: Exécuter l'Agent sur un host avec Kubernetes
 kind: documentation
 further_reading:
   - link: agent/autodiscovery
@@ -7,7 +7,7 @@ further_reading:
     text: Autodiscovery avec l'Agent Docker
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
   - link: agent/kubernetes/integrations
     tag: documentation
     text: Intégrations personnalisées
@@ -41,8 +41,8 @@ Vous pouvez recueillir vos logs depuis des conteneurs s'exécutant dans Kubernet
 
 Si vous n'utilisez pas Docker ou si vous utilisez plus de 10 conteneurs par pod, il est conseillé de passer par les fichiers de log Kubernetes.
 
-Nous vous recommandons également de tirer parti des DaemonSets pour [déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds][4]. 
-Vous pouvez également activer manuellement la collecte de logs à partir d'un nœud spécifique en ajoutant les paramètres suivants dans le fichier `datadog.yaml` :
+Nous vous conseillons également de tirer parti des DaemonSets pour [déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds][4].
+Pour activer manuellement la collecte de logs à partir d'un nœud spécifique, ajoutez les paramètres suivants dans le fichier `datadog.yaml` :
 
 ```
 logs_enabled: true
@@ -62,11 +62,11 @@ Utilisez [Autodiscovery avec les annotations de pod][8] pour configurer la colle
 ## Pour aller plus loin
 Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, consultez la série d'[articles de blog de Datadog][6].
 
-[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[1]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [2]: /fr/agent
 [3]: /fr/agent/autodiscovery
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [5]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [6]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/?tab=kubernetes

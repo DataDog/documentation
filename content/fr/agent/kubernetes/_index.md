@@ -9,10 +9,10 @@ aliases:
 further_reading:
   - link: agent/kubernetes/daemonset_setup
     tag: documentation
-    text: Configuration de DaemonSet avec Kubernetes
+    text: Exécuter l'Agent avec un DaemonSet Kubernetes
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
   - link: agent/kubernetes/metrics
     tag: documentation
     text: Métriques Kubernetes
@@ -54,7 +54,7 @@ Pour obtenir plus d'informations sur l'utilisation de ConfigMaps dans Kubernetes
 
 ## Dépannage
 
-* [Puis-je installer l'Agent sur mon ou mes nœuds principaux sur mon Kubernetes ?][10]
+* [Est-il possible d'installer l'Agent sur mon ou mes nœuds Kubernetes maîtres ?][10]
 * [Pourquoi mon check Kubernetes échoue-t-il et affiche-t-il une erreur ConnectTimeout sur le port 10250 ?][11]
 * [Authentification client auprès de l'apiserver et de kubelet][12]
 * [Utilisation de l'autorisation RBAC avec votre intégration Kubernetes][13]

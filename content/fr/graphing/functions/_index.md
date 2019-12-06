@@ -65,7 +65,7 @@ Il faut alors agréger les données de ces sources afin de fournir une métrique
 
 [Cliquez ici pour obtenir plus d'informations sur les séries temporelles et la cardinalité des tags][5].
 
-**Paramètre impliqué : contexte**  
+**Paramètre impliqué : scope**  
 Vous pouvez utiliser plusieurs tags, p. ex. `{host:moby, device:udev}`, si vous souhaitez récupérer les données correspondant aux deux tags.
 
 ## Effectuer l'agrégation temporelle
@@ -95,7 +95,7 @@ Notre backend calcule une série d'agrégats locaux pour chaque source correspon
 
 Toutefois, vous pouvez contrôler les paramètres de cette agrégation.
 
-**Paramètre impliqué : cumul (facultatif)**
+**Paramètre impliqué : rollup (facultatif)**
 Comment utiliser la [fonction de cumul][8] ?
 
 Dans cet exemple, `rollup(avg,60)` définit une période d'agrégation de 60 secondes. Ainsi, l'intervalle de X minutes est découpé en Y intervalles de 1 minute chacune. Les données d'une minute donnée sont agrégées en un point unique qui s'affiche sur votre graphique (après l'étape 3, l'agrégation spatiale).
@@ -130,7 +130,7 @@ Des fonctions peuvent être appliquées à l'arithmétique dans la case `Formula
 
 Dans cet exemple, la fonction `abs` veille à ce que vos résultats correspondent à des nombres positifs.
 
-**Paramètre impliqué : fonction**
+**Paramètre impliqué : function**
 
 {{< whatsnext desc="Choisissez votre type de fonctions" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
@@ -188,4 +188,4 @@ Documentation relative à [StatsD/DogStatsD][11].
 [8]: /fr/graphing/functions/rollup
 [9]: /fr/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [10]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[11]: /fr/developers/dogstatsd
+[11]: /fr/developers/metrics/dogstatsd_metrics_submission

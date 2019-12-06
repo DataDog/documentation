@@ -17,7 +17,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
 1. **Make sure the Agent has APM enabled**:
 
-    Run the following command on the Agent host: `netstat -anp | grep 8126`.
+    Run the following command on the Agent host: `netstat -van | grep 8126`.
 
     If you don't see an entry, then the Agent is not listening on port `8126`, which usually means either that the Agent is not running or that APM is not enabled in your `datadog.yaml` file. See the [APM Agent setup documentation][2] for more information.
 
@@ -29,7 +29,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
     After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][6] and provide the relevant log entries with [a flare][7].
+If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
 
 ## Tracer debug mode
 
@@ -40,7 +40,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 {{< tabs >}}
 {{% tab "Java" %}}
 
-To enable debug mode for the Datadog Java Tracer, set the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
+To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
 **Note**: Datadog Java Tracer implements SL4J SimpleLogger. As such, [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 
@@ -164,12 +164,14 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 Tracer.Instance = tracer;
 ```
 
-Location of the profiler log:
+The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
+
+Logs files are saved in the following directories:
 
 | Platform | Path                                                          |
 |----------|---------------------------------------------------------------|
-| Linux    | `/var/log/datadog/dotnet-profiler.log`                        |
-| Windows  | `C:\ProgramData\Datadog .NET Tracer\logs\dotnet-profiler.log` |
+| Linux    | `/var/log/datadog/`                        |
+| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 
 
 {{% /tab %}}
@@ -206,8 +208,7 @@ make install
 
 [1]: /help
 [2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
+[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
 [5]: /tracing/visualization/#trace
-[6]: /help
-[7]: /agent/troubleshooting/#send-a-flare
+[6]: /agent/troubleshooting/#send-a-flare

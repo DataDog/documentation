@@ -7,7 +7,8 @@ external_redirect: '/api/#envoyer-un-evenement'
 ## Envoyer un événement
 Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, définissez leur priorité et regroupez-les avec d'autres événements.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`title`** [*obligatoire*] :
     Le titre de l'événement. *Limité à 100 caractères*.
     Utilisez `msg_title` avec [la bibliothèque Datadog Ruby][1].
@@ -32,7 +33,11 @@ Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, d�
     Le type d'événement envoyé.
     Valeurs autorisées : **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**, etc. 
     [Liste complète des valeurs d'attributs source][3]
+* **`related_event_id`** [*facultatif*, *défaut*=**None**] :
+    ID de l'événement parent. Doit être envoyé sous la forme d'un entier (c'est-à-dire sans apostrophes).
+* **`device_name`** [*facultatif*, *défaut*=**None**] :
+  La liste des noms d'appareils avec lesquels publier l'événement.
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /fr/graphing/event_stream/#markdown-events
+[2]: /fr/developers/events/email#markdown
 [3]: /fr/integrations/faq/list-of-api-source-attribute-value

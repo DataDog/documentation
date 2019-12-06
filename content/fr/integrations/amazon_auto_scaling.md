@@ -37,7 +37,7 @@ Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
-### Configuration
+### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `AutoScaling` est cochée dans la section concernant la collecte des métriques.
 
@@ -45,8 +45,8 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 3. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][4] afin de recueillir des métriques Amazon Auto Scaling. Pour en savoir plus sur les stratégies Auto Scaling, [consultez la documentation du site Web d'AWS][5].
 
-    | Autorisation AWS                          | Description                                                                                                                                                                                                                                             |
-    |-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Autorisation AWS                          | Description                                                                                                                                                                                                                                              |
+    | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `autoscaling:DescribeAutoScalingGroups` | Utilisé pour énumérer tous les groupes Auto Scaling.                                                                                                                                                                                                        |
     | `autoscaling:DescribePolicies`          | Énumère les stratégies disponibles (pour la saisie automatique dans les événements et les monitors).                                                                                                                                                                                    |
     | `autoscaling:DescribeTags`              | Utilisé pour énumérer les tags d'un groupe Auto Scaling donné. Cette autorisation permet d'ajouter des tags de groupe Auto Scaling personnalisés aux métriques CloudWatch des groupes Auto Scaling.                                                                                                                                               |
@@ -55,6 +55,18 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 4. Installez l'[intégration Datadog/AWS Auto Scaling][6].
 
+### Collecte de logs
+#### Activer le logging
+
+Configurez Amazon Auto Scaling de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_auto_scaling` dans le préfixe.
+
+#### Envoyer des logs à Datadog
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][7].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Auto Scaling dans la console AWS :
+
+    * [Ajouter un déclencheur manuel sur le compartiment S3][8]
+    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][9]
 
 
 ## Données collectées
@@ -74,9 +86,9 @@ L'intégration AWS Auto Scaling n'inclut aucun check de service.
 
 ## Dépannage
 
-Pour que les métriques de groupes Auto Scaling commencent à apparaître dans Datadog, activez-les d'abord dans votre console AWS. Pour ce faire, [consultez les instructions relatives à l'activation des métriques de groupes Auto Scaling sur le site d'AWS][9]. Notez qu'après leur activation, l'affichage de ces métriques peut prendre un certain temps.
+Pour que les métriques de groupes Auto Scaling commencent à apparaître dans Datadog, activez-les d'abord dans votre console AWS. Pour ce faire, [consultez les instructions relatives à l'activation des métriques de groupes Auto Scaling sur le site d'AWS][11]. Notez qu'après leur activation, l'affichage de ces métriques peut prendre un certain temps.
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -84,9 +96,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_auto_scaling/amazon_auto_scaling_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics
+[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_auto_scaling/amazon_auto_scaling_metadata.csv
+[11]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics
+[12]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

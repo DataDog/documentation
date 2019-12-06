@@ -87,11 +87,11 @@ Any metric currently reporting to Datadog is available for monitors. Use the edi
 |---------------------|----------|------------|-------------------|
 | Select a metric     | Yes      | None       | `system.cpu.user` |
 | Define the from     | No       | Everywhere | `env:prod`        |
-| Exclude tags        | No       | None       | `role:testing`    |
+| Exclude [tags][2]        | No       | None       | `role:testing`    |
 | Specify aggregation | Yes      | `avg by`   | `sum by`          |
 | Group by            | No       | Everything | `host`            |
 
-**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
+**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][3].
 
 #### Alert grouping
 
@@ -114,13 +114,16 @@ The alert conditions vary slightly based on the chosen detection method.
 
 **Definitions**:
 
-| Option                  | Description                                                                                                                                                                                                      |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                      |
-| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above. |
-| at&nbsp;all&nbsp;times  | If every point in the generated series is outside the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below.   |
-| in&nbsp;total           | If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` function to your monitor query.                                                           |
+| Option                  | Description                                                                                                                                                                                                                   |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                                   |
+| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above.              |
+| at&nbsp;all&nbsp;times  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below. |
+| in&nbsp;total           | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query.                                                                        |
 
+**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
+
+[1]: /monitors/guide/as-count-in-monitor-evaluations
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -144,7 +147,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3].
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][4].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -191,13 +194,14 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /graphing/using_graphs/#advanced-graphing
-[3]: /monitors/faq/what-are-recovery-thresholds
-[4]: /monitors/notifications
+[2]: /tagging/using_tags/?tab=assignment
+[3]: /graphing/using_graphs/#advanced-graphing
+[4]: /monitors/faq/what-are-recovery-thresholds
+[5]: /monitors/notifications

@@ -72,7 +72,7 @@ Intégrez des événements de systèmes associés pour ajouter plus de contexte 
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [Template Variable][7] sélectionnée. |
+| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][7] sélectionnée. |
 
 ##### Commandes de l'axe des ordonnées
 
@@ -178,7 +178,7 @@ Propriétés supplémentaires autorisées dans chaque objet `request` :
 [1]: /fr/graphing/dashboards/timeboard
 [2]: /fr/graphing/dashboards/screenboard
 [3]: /fr/graphing
-[4]: /fr/tracing/trace_search_and_analytics/search/#search-bar
+[4]: /fr/tracing/advanced/search/#search-bar
 [5]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
 [6]: /fr/graphing/event_stream
 [7]: /fr/graphing/dashboards/template_variables

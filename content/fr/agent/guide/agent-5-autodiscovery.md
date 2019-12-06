@@ -138,7 +138,7 @@ sd_backend_port: 4001
 # Pour modifier ce paramètre, supprimez la mise en commentaire de cette option et modifiez sa valeur.
 # sd_template_dir: /datadog/check_configs
 
-# Si votre stockage Consul requiert une authentification par jeton pour la découverte des services, vous pouvez définir ce jeton ici.
+# Si votre stockage Consul requiert une authentification par token pour la découverte des services, vous pouvez définir ce token ici.
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 ```
 
@@ -322,7 +322,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 
 ## Références
 
-### Template Variables utilisables
+### Template variables utilisables
 
 Les template variables suivantes sont prises en charge par l'Agent :
 

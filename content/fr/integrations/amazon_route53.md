@@ -62,8 +62,6 @@ Configurez Amazon Route 53 pour enregistrer des informations sur les requêtes 
 
 #### Activer la journalisation Route 53
 
-
-
 Accédez à votre console AWS Route 53 et sélectionnez la zone hébergée pour laquelle vous souhaitez configurer la journalisation. Cliquez sur la case d'option et sélectionnez « configure query logging ».
 {{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="activer la journalisation route 53" responsive="true" popup="true" style="width:70%;">}}
 

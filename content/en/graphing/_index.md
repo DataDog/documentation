@@ -1,6 +1,7 @@
 ---
 title: Graphing
 kind: documentation
+disable_toc: true
 aliases:
     - /guides/graphing
     - /graphing/miscellaneous/metrics_arithmetic

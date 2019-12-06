@@ -41,35 +41,46 @@ Le check Neo4j n'est **PAS** inclus avec le paquet de l'[Agent Datadog][1].
 
 ### Installation
 
-Pour installer le check Neo4j sur votre host :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Neo4j sur votre host. Consultez notre guide de l'Agent relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version antérieure à 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
-1. Installez le [kit de développement][7] sur n'importe quelle machine.
-2. Exécutez `ddev release build neo4j` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][1].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/neo4j/dist/<NOM_ARTEFACT>.whl`.
+1. Installez le [kit de développement][5].
+2. Clonez le dépôt integrations-extras :
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `neo4j`, exécutez :
+
+    ```
+    ddev -e release build neo4j
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][6].
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_NEO4J_ARTIFACT_>/<NEO4J_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-Pour configurer le check Neo4j :
+1. Modifiez le fichier `neo4j.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Neo4j.
+  Consultez le [fichier d'exemple neo4j.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-1. Créez un dossier `neo4j.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent.
-2. Créez un fichier `conf.yaml` dans le dossier `neo4j.d/` précédemment créé.
-3. Consultez le [fichier d'exemple neo4j.yaml][2] et copiez son contenu dans le fichier `conf.yaml`.
-4. Modifiez le fichier `conf.yaml` pour configurer les serveurs à surveiller :
-
-    * `neo4j_url` : spécifiez l'URL du serveur (p. ex. `http://ec2-54-85-23-10.compute-1.amazonaws.com`).
-    * `port` : spécifiez le port HTTP utilisé par Neo4j. *Par défaut, il s'agit de 7474*.
-    * `username` : spécifiez un nom d'utilisateur Neo4j valide.
-    * `password` : spécifiez le mot de passe correspondant au nom d'utilisateur.
-    * `connect_timeout` : définit la durée pendant laquelle la connexion au serveur Neo4j tentera d'être établie.
-    * `server_name` : spécifiez le nom à afficher dans Datadog.
-    * `version` : spécifiez la version de Neo4j.
-
-5. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][10].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `neo4j` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][11] et cherchez `neo4j` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -89,15 +100,21 @@ Le check Neo4j applique les tags suivants à l'ensemble des checks de service re
 Renvoie `CRITICAL` si l'Agent n'est pas capable de recevoir la valeur 200 depuis l'endpoint de _surveillance_. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
-[6]: http://docs.datadoghq.com/help/
-[7]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[12]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
+[13]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}

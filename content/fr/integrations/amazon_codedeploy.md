@@ -12,12 +12,12 @@ description: Surveillez vos déploiements en temps réel et mesurez leur durée.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_codedeploy/'
 git_integration_title: amazon_codedeploy
 has_logo: true
-integration_title: "AWS\_CodeDeploy"
+integration_title: "Amazon\_CodeDeploy"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_codedeploy
-public_title: "Intégration Datadog/AWS\_CodeDeploy"
+public_title: "Intégration Datadog/Amazon\_CodeDeploy"
 short_description: Surveillez vos déploiements en temps réel et mesurez leur durée.
 version: '1.0'
 ---

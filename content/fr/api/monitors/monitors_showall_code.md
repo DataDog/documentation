@@ -5,9 +5,14 @@ order: 26.05
 external_redirect: /api/#recuperer-tous-les-details-d-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/monitor`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-show-all" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-show-all" >}}

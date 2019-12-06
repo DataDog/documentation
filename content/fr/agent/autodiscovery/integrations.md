@@ -37,7 +37,7 @@ Si vous définissez un modèle pour une même intégration via plusieurs sources
 * Étiquettes Docker
 * Fichiers
 
-**Remarque** : les intégrations prises en charge suivantes requièrent des étapes supplémentaires pour fonctionner avec Autodiscovery : [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5] et [Gunicorn][6]. Contactez [l'assistance Datadog][7] pour obtenir de l'aide.
+**Remarque** : certaines intégrations prises en charge ne fonctionnent pas avec Autodiscovery par défaut, car elles nécessitent un accès à l'arborescence des processus ou au système de fichiers : c'est le cas de [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5] et [Gunicorn][6]. Pour activer Autodiscovery pour ces intégrations, utilisez l'exportateur Prometheus officiel dans le pod, puis faites appel à Autodiscovery dans l'Agent pour identifier le pod et interroger l'endpoint. Par exemple, le modèle standard dans Kubernetes est le suivant : adaptateur sidecar avec collecteur au niveau du nœud ou du cluster. L'exportateur peut ainsi accéder aux données et les exposer via un endpoint HTTP, ce qui permet à Autodiscovery d'y accéder à son tour.
 
 ## Configuration
 

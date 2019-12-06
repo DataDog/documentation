@@ -38,7 +38,7 @@ If you provide a template for the same integration with multiple template source
 * Docker Labels
 * Files
 
-**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. Contact [Datadog support][7] for assistance.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
 
 ## Configuration
 
@@ -436,7 +436,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][8], [Datadog-HTTP check integration][9].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][7], [Datadog-HTTP check integration][8].
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -618,6 +618,5 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 [4]: /integrations/postfix
 [5]: /integrations/cassandra/#agent-check-cassandra-nodetool
 [6]: /integrations/gunicorn
-[7]: /help
-[8]: /integrations/apache/#setup
-[9]: /integrations/http_check/#setup
+[7]: /integrations/apache/#setup
+[8]: /integrations/http_check/#setup

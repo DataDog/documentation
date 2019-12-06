@@ -5,91 +5,55 @@ description: Calculez les centiles globaux de l'intégralité de votre ensemble 
 aliases:
   - /fr/developers/faq/characteristics-of-datadog-histograms/
 further_reading:
-  - link: 'developers/dogstatsd/data_types#distributions'
+  - link: developers/metrics/dogstatsd_metrics_submission
     tag: Documentation
     text: Utilisation des distributions dans DogStatsD
 ---
 <div class="alert alert-warning">
-Cette fonctionnalité est en version bêta. <a href="/help">Contactez l'assistance Datadog</a> afin d'activer les métriques de distribution pour votre compte.
+Cette fonctionnalité est en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance Datadog</a> afin d'activer les métriques de distribution pour votre compte.
 </div>
 
 ## Présentation
 
-Les distributions sont un [type de métrique][1] et peuvent être comparées à une version globale de la [métrique histogram][2], qui mesure la distribution statistique des valeurs discrètes sur un seul host. Les distributions observent les valeurs envoyées par plusieurs hosts afin de mesurer les distributions statistiques dans toute votre infrastructure. Cela vous permet de calculer les centiles globaux de l'intégralité de votre ensemble de données.
+Les métriques Distribution agrègent les valeurs envoyées par plusieurs hosts lors d'un intervalle de transmission afin de mesurer les distributions statistiques dans l'ensemble de votre infrastructure.
 
-Les distributions globales sont conçues pour instrumenter des objets logiques, comme des services, indépendamment des hosts sous-jacents. Ils fournissent également des statistiques concernant le comportement des métriques dans votre infrastructure.
+Les distributions globales sont conçues pour instrumenter des objets logiques, comme des services, indépendamment des hosts sous-jacents. Contrairement aux [histogrammes][1] qui effectuent l'agrégation au niveau de l'Agent, les distributions globales envoient toutes les données brutes recueillies durant un intervalle de transmission, et l'agrégation se fait du côté serveur. La structure de données sous-jacente n'ayant pas été agrégée et représentant les données brutes, les distributions présentent deux caractéristiques importantes :
 
-Consultez la [section Outils de développement][3] pour en savoir plus sur les spécificités de ce type de métrique. Vous pouvez également poursuivre votre lecture pour apprendre à manipuler et à visualiser les distributions dans l'interface.
+* **Calcul des agrégations par centile** : les agrégations par centile (p50, p75, p90, p95, p99) sont calculées à partir des données brutes sur tous les hosts. Elles sont donc globalement exactes.
+
+* **Personnalisation du tagging** : cette fonctionnalité vous permet de contrôler le schéma de tagging pour les métriques pour lesquelles une granularité au niveau des hosts n'est pas nécessaire (p. ex. les transactions par seconde pour un service de paiement).
+
+Consultez la [section Outils de développement][1] pour découvrir les détails d'implémentation. Remarque : étant donné que les distributions sont un nouveau type de métrique, elles doivent être instrumentées avec de nouveaux noms de métrique lors de leur envoi à Datadog.
 
 ## Agrégations
 
-Le nouveau flux de travail de tagging pour les distributions vous permet de définir les agrégations disponibles dans les requêtes. Dans un premier temps, Datadog conserve une seule série temporelle, pour `*` (toutes les occurrences), et ignore tous les tags. Agrégez manuellement votre métrique en fonction de plusieurs ensembles de tags choisis parmi la liste des tags normalement disponibles. Pour des raisons pratiques, Datadog crée également des agrégations pour toutes les combinaisons composées d'un maximum de quatre tags personnalisés qui sont appliqués à chaque métrique.
+Comme d'autres types de métriques, `gauges` ou `histograms` par exemple, les distributions disposent des agrégations suivantes : `count`, `min`, `max`, `sum` et `avg`. Les distributions sont initialement taguées de la même manière que d'autres métriques (avec des tags personnalisés définis dans le code) et sont résolues avec le tag de host qui a signalé la métrique. Vous pouvez également calculer des agrégations par centiles pour un ensemble de tags (jusqu'à 10) spécifiés sur la page [Métriques de distribution][2]. Cela fournit des agrégations pour `p50`, `p75`, `p90`, `p95` et `p99`.
 
-Grâce à l'[IU de distribution][4], créez davantage de séries temporelles agrégées. Pour ce faire, appliquez un ensemble de tags à une métrique afin de créer une série temporelle pour chaque combinaison de valeurs de tag dans l'ensemble.
+{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="UI des métriques de distribution" responsive="true" style="width:80%;">}}
 
-**Les ensembles ne peuvent pas comprendre plus de quatre tags.**
+Après avoir choisi d'appliquer des agrégations par centile sur une métrique de distribution, ces agrégations sont automatiquement disponibles dans l'interface graphique :
 
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Métrique de distribution" responsive="true" >}}
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Métrique de distribution bis" responsive="true" style="width:80%;">}}
 
-Lorsque vous créez votre propre graphique, des agrégations spatiales supplémentaires sont automatiquement disponibles pour les métriques de distribution dans l'IU :
+## Personnaliser le tagging
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Métrique de distribution bis" responsive="true" >}}
+Les distributions vous permettent de contrôler le tagging pour les métriques pour lesquelles une granularité au niveau des hosts est inutile.
 
-## Étude de cas
+Pour personnaliser le tagging, passez le curseur sur votre métrique dans le tableau, puis cliquez sur l'icône en forme de crayon pour apporter des modifications. Dans la fenêtre contextuelle qui s'affiche, sélectionnez *Custom...*. Une _liste blanche_ apparaît, avec les tags que vous avez définis par défaut dans le code. Vous pouvez en supprimer ou ajouter des tags liés aux hosts.
 
-`my.service.latency` est une métrique envoyée à 500 hosts.
+**Remarque** : la personnalisation de tags via liste blanche ne permet pas d'exclure de tags. L'ajout de tags débutant par `!` n'est pas accepté.
 
-Chaque host est tagué avec l'une des trois `Availability Zones` (conformément aux tags de l'intégration AWS) et l'un des 20 `Roles` de Chef, le système d'approvisionnement de Datadog.
+{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Métrique de distribution" responsive="true" style="width:80%;">}}
 
-De plus, le tag `Status` est appliqué à cette métrique. Il comprend 2 valeurs : `Status:Success` ou `Status:Fail` et `Result`. Ce dernier possède également 2 valeurs : `Result:Open` ou `Result:Close`.
+## Nombre de métriques de distribution
 
-##### 1er scénario
+Les métriques de distribution avec agrégations par centiles (`p50`, `p75`, `p90`, `p95` et `p99`) génèrent des métriques custom ou des séries temporelles de façon différentes que les gauges, counts, histograms et distributions avec agrégations sans centiles (`sum`, `count`, `min`, `max` et `avg`). Les centiles ne pouvant pas être regroupés, Datadog conserve cinq séries temporelles pour chaque combinaison de tags pouvant faire l'objet d'une requête. Ce nombre n'est pas aligné à celui des métriques custom générées à partir des gauges, counts, histograms ou distributions avec agrégations sans centiles (qui dépend du nombre unique de combinaisons de valeurs de tag se trouvant dans vos données).
 
-Par défaut, Datadog crée des agrégations pour `my.service.latency` pour chaque combinaison de tags de métrique custom `Status` et `Result`.
-
-Vous pouvez alors envoyer, par exemple, la requête `{my.service.latency for Status:success, Result:closed}`, mais pas `{my.service.latency for Availability-Zone: US-East-1a}`
-
-Cette action crée (2 + 1) * (2 + 1) * 10 = 90 séries temporelles.
-
-##### 2e scénario
-
-Vous effectuez une agrégation à partir de `{Status, Result, Host}` à la place des valeurs par défaut.
-Les requêtes disponibles comprennent, par exemple :
-
-* `{my.service.latency for Status:success, Result:closed, Host: i-deadbeef}`
-* `{my.service.latency for Status:fail, host: i-deadbeef}`
-
-La requête suivante n'est pas disponible :
-
-* `{my.service.latency for Availability-Zone: US-East-1a}`
-
-Cette action crée (2 + 1) * (2 + 1) * (500 + 1) * 10 = 45 090 séries temporelles.
-
-##### 3e scénario
-
-Vous agrégez à partir de `{Availability-Zone, Status}`, en plus de `{Status, Result, Host}`.
-
-Les requêtes disponibles comprennent :
-
-* `{my.service.latency for AZ: US-East-1a}`
-* `{my.service.latency for AZ: US-West-2b, Status: Success}`
-*  N'importe quelle requête du scénario précédent
-
-La série temporelle agrégée selon `Availability-Zone` et `Host` n'a pas été demandée, donc `{my.service.latency for AZ:US-East-1a, Host:i-deadbeef}` n'est pas disponible.
-
-Cette action crée (3 + 1) * (2 + 1) * 10 = 120 séries temporelles, en plus des 45 090 précédentes, pour un total de 45 210 séries temporelles.
-
-Comme vous pouvez le voir, l'agrégation de plusieurs ensembles de tags augmente de façon cumulative le nombre de séries temporelles, ce qui limite la croissance des séries temporelles.
-
-Le gif suivant illustre comment inspecter des agrégations créées pour une métrique, `intake.batch_api_keys_for_org`. Ici, vous pourriez interroger `{availability-zone, role}` ou `{instance-type, role}`, mais pas `{availability-zone, instance-type}`.
-
-{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Tagging_distributions" responsive="true" >}}
+Pour en savoir plus sur le nombre de métriques custom créées à partir de métriques gauge, count, histogram ou distribution avec agrégation sans centiles, reportez-vous à la page sur les [métriques custom][2]. 
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics
-[2]: /fr/developers/metrics/histograms
-[3]: /fr/developers/metrics/distributions
-[4]: https://app.datadoghq.com/metric/distribution_metrics
+[1]: /fr/developers/metrics/types
+[2]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics

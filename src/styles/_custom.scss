@@ -1,3 +1,7 @@
+:root {
+  font-size: 16px;
+}
+
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins/breakpoints";
@@ -9,6 +13,7 @@
 
 /* Bootstrap variable customization here */
 $ddpurple:    #632CA6;
+$codesnippet-filename-bg: rgba(119,0,255, 0.15);
 
 $theme-colors: (
         primary: $ddpurple,
@@ -24,15 +29,19 @@ $theme-colors: (
         white: #FFF
 );
 
+$spacer: 1rem !default;
+
 $spacers: (
-        0: 0,
-        1: ($spacer * .25),
-        2: ($spacer * .5),
-        3: $spacer,
-        4: ($spacer * 1.5),
-        5: ($spacer * 3),
-        // my pixel sized spacing
-        40: ($spacer * 2.5)
+  0: 0,
+  1: ($spacer * 0.625),
+  2: ($spacer * 1.25),
+  3: ($spacer * 1.875),
+  4: ($spacer * 2.5),
+  5: ($spacer * 3.125),
+  6: ($spacer * 3.75),
+  7: ($spacer * 4.375),
+  8: ($spacer * 5),
+  9: ($spacer * 5.625)
 );
 
 $font-family-sans-serif: "NationalWeb", Helvetica, Arial, sans-serif;

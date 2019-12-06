@@ -56,7 +56,7 @@ Refer to [the dedicated Cluster Checks Autodiscovery guide][5] for more configur
 
 Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent. This can be done in two ways:
 
-- By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable:
+- By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
 ```
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
@@ -276,14 +276,14 @@ The Agent `status` command should show the check instance running and reporting 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: /agent/kubernetes/cluster
-[3]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
+[2]: /agent/cluster_agent
+[3]: /agent/cluster_agent/setup
 [4]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
 [5]: /agent/autodiscovery/clusterchecks
 [6]: /agent/guide/agent-commands
 [7]: /developers/write_agent_check
 [8]: /integrations/mysql
-[9]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[10]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[9]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[10]: /agent/autodiscovery/template_variables
 [11]: /integrations/http_check
 [12]: /integrations/nginx

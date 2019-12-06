@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-print api.Tag.get_all()
+print(api.Tag.get_all())

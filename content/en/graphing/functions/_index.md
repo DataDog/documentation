@@ -1,5 +1,5 @@
 ---
-title: From the query to the graph 
+title: From the query to the graph
 kind: documentation
 aliases:
   - /examples/
@@ -35,7 +35,7 @@ Now, follow each step executed by the Datadog backend to perform the query and r
 At each step, this article notes the effect of each parameter of the query.
 **Before the query, storage: data is stored separately depending on the tags**
 
-The metric `system.disk.total` (collected by default by the [datadog-agent][3]) is seen from different sources.  
+The metric `system.disk.total` (collected by default by the [datadog-agent][3]) is seen from different sources.
 
 This is because this metric is reported by different hosts, and also because each datadog-agent collects this metric per device. It adds to the metric `system.disk.total` the tag `device:tmpfs` when sending data associated to the disk with the same name, etc.
 
@@ -60,13 +60,13 @@ As you may have guessed, the backend finds five matching sources (see previous p
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" style="width:70%;">}}
 
-The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at [step 3][4].
+The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at [step 3](#proceed-to-space-aggregation).
 
 **Note**: The tagging system adopted by Datadog is simple and powerful. You don't have to know or specify the sources to combine—you just have to give a tag, i.e. an ID, and Datadog combines all data with this ID and not the rest. For instance, you don't need to know the number of hosts or devices you have when you query `system.disk.total{*}`. Datadog aggregates data from all sources for you.
 
-[More information about timeseries and tag cardinality][5]
+[More information about timeseries and tag cardinality][4]
 
-**Parameter involved: scope**  
+**Parameter involved: scope**
 You can use more than one tag, e.g. `{host:moby, device:udev}` if you want to fetch data responding to both tags.
 
 ## Proceed to time-aggregation
@@ -77,7 +77,7 @@ However, before combining all data from the different sources (step 3), Datadog 
 
 ### Why?
 
-As Datadog stores data at a 1 second granularity, it cannot display all real data on graphs. [See this article to learn more on how data is aggregated in graphs][6]
+As Datadog stores data at a 1 second granularity, it cannot display all real data on graphs. [See this article to learn more on how data is aggregated in graphs][5]
 
 For a graph on a 1-week time window, it would require sending hundreds of thousands of values to your browser—and besides, not all these points could be graphed on a widget occupying a small portion of your screen. For these reasons, Datadog is forced to proceed to data aggregation and to send a limited number of points to your browser to render a graph.
 
@@ -87,7 +87,7 @@ For instance, on a one-day view with the 'lines' display, you'll have one datapo
 
 ### How?
 
-By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][7].
+By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][6].
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. What you generally see on graph is not the real values submitted but local aggregates.
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" style="width:75%;">}}
@@ -97,7 +97,7 @@ Our backend computes a series of local aggregates for each source corresponding 
 However, you can control how this aggregation is performed.
 
 **Parameter involved: rollup (optional)**
-How to use the ['rollup' function][8]?
+How to use the ['rollup' function][7]?
 
 In this example, `rollup(avg,60)` defines an aggregate period of 60 seconds. So the X minutes interval is sliced into Y intervals of 1 minute each. Data within a given minute is aggregated into a single point that shows up on your graph (after step 3, the space aggregation).
 
@@ -114,16 +114,16 @@ In this example, for each minute, Datadog computes the average across all source
 
 The value obtained (25.74GB) is the average of the values reported by all sources (see previous image).
 
-Note: Of course, if there is only one source (for instance, if we had chosen the scope `{host:moby, device:/dev/disk}` for the query), using `sum`/`avg`/`max`/`min` has no effect as no space aggregation needs to be performed. [See here for more information][9].
+Note: Of course, if there is only one source (for instance, if we had chosen the scope `{host:moby, device:/dev/disk}` for the query), using `sum`/`avg`/`max`/`min` has no effect as no space aggregation needs to be performed. [See here for more information][8].
 
 **Parameter involved: space aggregator**
 
-Datadog offers 4 space aggregators: 
+Datadog offers 4 space aggregators:
 
 * `max`
 * `min`
 * `avg`
-* `sum` 
+* `sum`
 
 ## Apply functions (optional)
 
@@ -147,8 +147,8 @@ In this example the function `abs` makes sure that your results are positive num
 {{< /whatsnext >}}
 
 ### Grouped queries, arithmetic, as_count/rate
- 
-#### Grouped queries 
+
+#### Grouped queries
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" style="width:75%;">}}
 
@@ -175,18 +175,17 @@ Arithmetic is applied after time and space aggregation as well—([step 4: Apply
 `As_count` and `as_rate` are time aggregators specific to rates and counters submitted via StatsD/DogStatsD. They make it possible to view metrics as a rate per second, or to see them as raw counts.
 Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 
-More information in [this blog post][10].
-Documentation about [StatsD/DogStatsD][11].
+More information in [this blog post][9].
+Documentation about [StatsD/DogStatsD][10].
 
 
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
 [3]: /agent
-[4]: #proceed-to-space-aggregation
-[5]: /developers/metrics/custom_metrics
-[6]: /graphing/faq/how-is-data-aggregated-in-graphs
-[7]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
-[8]: /graphing/functions/rollup
-[9]: /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
-[10]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[11]: /developers/dogstatsd
+[4]: /developers/metrics/custom_metrics
+[5]: /graphing/faq/how-is-data-aggregated-in-graphs
+[6]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[7]: /graphing/functions/rollup
+[8]: /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
+[9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
+[10]: /developers/metrics/dogstatsd_metrics_submission

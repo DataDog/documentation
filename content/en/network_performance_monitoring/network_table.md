@@ -7,17 +7,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
+- link: "/integrations/snmp"
+  tag: "Documentation"
+  text: "SNMP integration"
 - link: "/network_performance_monitoring/installation"
   tag: "Documentation"
   text: "Collect your Network Data with the Datadog Agent."
+- link: "/graphing/widgets/network"
+  tag: "Documentation"
+  text: "Network Widget"
 ---
-
-<div class="alert alert-warning">
-This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
-</div>
 
 {{< img src="network_performance_monitoring/network_table/main_page.png" alt="Main page" responsive="true">}}
 
@@ -60,8 +59,8 @@ The following graphs are available:
 
 | Graph | Description |
 | -------- | ------ |
-| **Throughput** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
-| **Bandwidth** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
+| **Volume** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
+| **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
 | **Retransmits** | TCP is a connection-oriented protocol that guarantees in-order delivery of packets. Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
 
 On each graph, select the settings cog in the upper right corner to change the Y-axis scale or the graph type displayed:
@@ -70,11 +69,11 @@ On each graph, select the settings cog in the upper right corner to change the Y
 
 ### Table
 
-The network table breaks down the _Throughput_, _Bandwidth_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your query.
+The network table breaks down the _Volume_, _Throughput_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your query.
 
 {{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
 
-**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations, which indicate external traffic outside of your private network.
+**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
 Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
 

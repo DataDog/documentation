@@ -23,15 +23,15 @@ Datadog est un produit SaaS : les clients doivent établir une connexion sortan
 
 ## Obfuscation des logs de l'Agent
 
-L'Agent Datadog génère des logs locaux afin de prendre en charge le [dépannage de l'Agent][6], si nécessaire. Par mesure de sécurité, ces logs locaux sont filtrés pour certains mots-clés et expressions qui pourraient potentiellement indiquer des informations d'identification (par ex., la clé d'API, le mot de passe, les mots-clés des jetons, etc.), qui sont alors obfusquées avant d'être écrites sur le disque.
+L'Agent Datadog génère des logs locaux afin de prendre en charge le [dépannage de l'Agent][6], si nécessaire. Par mesure de sécurité, ces logs locaux sont filtrés pour certains mots-clés et expressions qui pourraient potentiellement indiquer des informations d'identification (par ex., la clé d'API, le mot de passe, les mots-clés des tokens, etc.), qui sont alors obfusquées avant d'être écrites sur le disque.
 
 ## Serveur HTTPS local
 
-L'Agent v6 expose une API HTTPS locale pour faciliter la communication entre un Agent en cours d'exécution et des outils d'Agent (par ex., les commandes `datadog-agent`). Le serveur d'API n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`), et l'authentification est exécutée par un jeton qui est seulement lisible par l'utilisateur avec lequel l'Agent s'exécute. La communication vers l'API HTTPS est chiffrée pendant l'envoi afin d'éviter les écoutes clandestines sur `localhost`.
+L'Agent v6 expose une API HTTPS locale pour faciliter la communication entre un Agent en cours d'exécution et des outils d'Agent (par ex., les commandes `datadog-agent`). Le serveur d'API n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`), et l'authentification est exécutée par un token qui est seulement lisible par l'utilisateur avec lequel l'Agent s'exécute. La communication vers l'API HTTPS est chiffrée pendant l'envoi afin d'éviter les écoutes clandestines sur `localhost`.
 
 ## Interface graphique de l'Agent
 
-L'Agent v6 est fourni avec une interface graphique par défaut, qui se lance dans votre navigateur Web configuré par défaut. L'interface graphique n'apparaît que si l'utilisateur qui l'exécute dispose des bonnes autorisations utilisateur. Il doit notamment pouvoir ouvrir le fichier de configuration de l'Agent. L'interface graphique n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`). Enfin, les cookies de l'utilisateur doivent être activés, car l'interface graphique génère et enregistre un jeton utilisé pour l'authentification de toutes les communications avec le serveur de l'interface graphique, ainsi que pour la protection contre la falsification de requête intersites. L'interface graphique peut également être désactivée, si besoin.
+L'Agent v6 est fourni avec une interface graphique par défaut, qui se lance dans votre navigateur Web configuré par défaut. L'interface graphique n'apparaît que si l'utilisateur qui l'exécute dispose des bonnes autorisations utilisateur. Il doit notamment pouvoir ouvrir le fichier de configuration de l'Agent. L'interface graphique n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`). Enfin, les cookies de l'utilisateur doivent être activés, car l'interface graphique génère et enregistre un token utilisé pour l'authentification de toutes les communications avec le serveur de l'interface graphique, ainsi que pour la protection contre la falsification de requête intersites. L'interface graphique peut également être désactivée, si besoin.
 
 ## Analyses de la sécurité de l'Agent
 
@@ -41,9 +41,11 @@ Plus particulièrement, pour l'Agent de conteneur, Datadog effectue régulièrem
 
 Si vous pensez avoir trouvé un bug dans la sécurité de Datadog, contactez-nous à l'adresse [security@datadoghq.com][11]. Nous vous répondrons dans un délai de 24 heures. Vous pouvez télécharger la [clé PGP][12] de Datadog si jamais vous souhaitez chiffrer vos communications. Merci de ne pas communiquer publiquement le problème tant que nous n'avons pas eu occasion de le traiter.
 
-## Gestion des secrets [BÊTA]
+## Gestion des secrets
 
 Les clients qui ne peuvent pas stocker de secrets en texte brut dans les fichiers de configuration de l'Agent peuvent utiliser le paquet de [gestion des secrets][13]. Ce paquet permet à l'Agent d'appeler un exécutable fourni par l'utilisateur pour gérer la récupération ou le déchiffrement des secrets, qui sont ensuite chargés en mémoire par l'Agent. Les utilisateurs peuvent concevoir leur exécutable en fonction de leur service de gestion de clés préféré, de leur méthode d'authentification et de leur flux de travail d'intégration continue.
+
+Pour en savoir plus, consultez la documentation relative à la [gestion des secrets][14].
 
 ### Pour aller plus loin
 
@@ -62,3 +64,4 @@ Les clients qui ne peuvent pas stocker de secrets en texte brut dans les fichier
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[14]: /fr/agent/guide/secrets-management

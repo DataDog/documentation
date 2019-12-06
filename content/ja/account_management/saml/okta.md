@@ -61,4 +61,4 @@ Okta でアプリケーションの構成が完了する前に `IDP.XML` ファ�
 [1]: http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-DataDog.html
 [2]: https://app.datadoghq.com/saml/saml_setup
 [3]: /ja/account_management/saml
-[4]: https://support.okta.com/help/Documentation/Knowledge_Article/23445146-Acquiring-the-IDPXML-metadata-file-for-a-SAML-Template-App
+[4]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

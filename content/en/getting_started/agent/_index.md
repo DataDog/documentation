@@ -99,10 +99,10 @@ To collect metrics from other technologies, see the [Integrations][20] page.
 The Agent sends events to Datadog when an Agent is started or restarted.
 
 ### Service Checks
-**datadog.agent.up**:  
+**datadog.agent.up**:
 Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
 
-**datadog.agent.check_status**:  
+**datadog.agent.check_status**:
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 ## Troubleshooting
@@ -123,7 +123,7 @@ For help troubleshooting the Agent:
 {{< /whatsnext >}}
 
 [1]: /integrations
-[2]: /developers/dogstatsd
+[2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /api
 [4]: /graphing/infrastructure/process
 [5]: /logs

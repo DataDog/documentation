@@ -75,7 +75,7 @@ Pour les applications Python, utilisez la commande suivante :
 
 À ce stade, vous devriez recevoir un certain nombre de métriques pour votre environnement. Vous pouvez également choisir d'instrumenter davantage votre application à l'aide de la bibliothèque du langage de votre application.
 
-Consultez la [page Bibliothèques][2] pour découvrir la liste de l'ensemble des bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté.
+Consultez la [page Bibliothèques][2] pour découvrir la liste de l'ensemble des bibliothèques client de Datadog et sa communauté pour DogStatsD et les API.
 
 ## Données collectées
 ### Métriques

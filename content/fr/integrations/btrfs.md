@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
@@ -34,20 +38,23 @@ Recueillez des métriques du service Btrfs en temps réel pour :
 * Être informé des failovers et des événements de Btrfs
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Btrfs est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs qui utilisent au moins un système de fichiers Btrfs.
+Le check Btrfs est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs qui utilisent au moins un système de fichiers Btrfs.
 
 ### Configuration
 
-1. Configurez l'Agent selon vos besoins, puis modifiez le fichier `btrfs.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
-    Consultez le [fichier d'exemple btrfs.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Configurez l'Agent selon vos besoins, puis modifiez le fichier `btrfs.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4].
+    Consultez le [fichier d'exemple btrfs.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `btrfs` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][7] et cherchez `btrfs` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -61,16 +68,17 @@ Le check Btrfs n'inclut aucun événement.
 Le check Btrfs n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/btrfs/images/btrfs_metric.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/btrfs/datadog_checks/btrfs/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/btrfs/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/btrfs/datadog_checks/btrfs/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/btrfs/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

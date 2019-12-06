@@ -1,13 +1,13 @@
 ---
-title: Intégrations personnalisées
+title: Intégration d'une ConfigMap
 kind: documentation
 further_reading:
   - link: agent/kubernetes/daemonset_setup
     tag: documentation
-    text: Configuration de DaemonSet avec Kubernetes
+    text: Exécuter l'Agent avec un DaemonSet Kubernetes
   - link: agent/kubernetes/host_setup
     tag: documentation
-    text: Configuration de host avec Kubernetes
+    text: Exécuter l'Agent sur un host avec Kubernetes
 ---
 ## ConfigMap
 
@@ -26,10 +26,13 @@ metadata:
   namespace: default
 data:
   http-config: |-
+    ad_identifiers:
+      - httpd
+      - my-custom-httpd
     init_config:
     instances:
-    - name: Mon service
-      url: mon.service:port/healthz
+    - name: My service
+      url: my.service:port/healthz
       tags:
         - service:critical
 ---
@@ -51,6 +54,8 @@ Dans le manifeste de votre Agent (DaemonSet/deployment), ajoutez le code suivant
               path: http_check.yaml
 [...]
 ```
+
+**Remarque** : consultez la documentation sur l'[identificateur de conteneur Autodiscovery][2] pour découvrir comment utiliser `ad_identifiers` afin d'appliquer des modèles de fichier de configuration Autodiscovery aux conteneurs.
 
 ### Monter un fichier de configuration personnalisé dans un conteneur avec une ConfigMap
 
@@ -106,12 +111,13 @@ data:
 
 ## Annotations
 
-Il est également possible d'activer les intégrations via les annotations contenues dans le manifeste de votre application.
-Pour ce faire, vous pouvez utiliser Autodiscovery. Pour en savoir plus, consultez la section [Autodiscovery][2].
+Il est également possible d'activer des intégrations via les annotations contenues dans le manifeste de votre application.
+Pour ce faire, vous pouvez utiliser Autodiscovery. Pour en savoir plus, consultez la section [Autodiscovery][3].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/http_check
-[2]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[2]: /fr/agent/autodiscovery/ad_identifiers
+[3]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration

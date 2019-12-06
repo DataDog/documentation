@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/docker
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - containers
   - log collection
@@ -55,7 +59,7 @@ Pour recueillir des métriques Docker sur tous vos conteneurs, exécutez **un** 
 
 Dans les deux cas, pour que le check Docker n'échoue pas, vos hosts requièrent l'activation de la gestion de mémoire cgroup. Consultez le [référentiel docker-dd-agent][3] pour savoir comment l'activer.
 
-#### Installation du host
+#### Installation sur un host
 
 1. Vérifiez si Docker est en cours d'exécution sur le host.
 2. Installez l'Agent comme décrit dans [les instructions d'installation de l'Agent][4] pour le système d'exploitation de votre host.
@@ -67,7 +71,7 @@ Dans les deux cas, pour que le check Docker n'échoue pas, vos hosts requièrent
 
 #### Installation de conteneur
 
-1. Vérifiez si Docker est en cours d'exécution sur le host.
+1. Vérifiez que Docker est en cours d'exécution sur le host.
 2. Conformément aux [instructions d'installation du conteneur Docker][8], exécutez ce qui suit :
 
         docker run -d --name dd-agent \
@@ -88,7 +92,7 @@ Dans la commande ci-dessus, vous pouvez transmettre votre clé d'API à l'Agent 
 | TAGS                                                                                              | Définit des tags de host en tant que chaîne délimitée par des virgules. Vous pouvez ajouter des tags simples et des tags clé/valeur sont disponibles. Par exemple : `-e TAGS="tag-simple, clé-tag:valeur-tag"`.                                                                           |
 | EC2_TAGS                                                                                          | Cette fonctionnalité permet à l'Agent d'envoyer des requêtes et d'enregistrer des tags personnalisés à l'aide de l'API EC2 lors du démarrage. Pour l'activer, utilisez la commande `-e EC2_TAGS=yes`. Remarque : cette fonctionnalité nécessite d'avoir associé un rôle IAM à l'instance.        |
 | NON_LOCAL_TRAFFIC                                                                                 | Cette fonctionnalité permet de transmettre des données StatsD à partir de n'importe quelle adresse IP externe. Pour l'activer, utilisez la commande `-e NON_LOCAL_TRAFFIC=yes`. Elle est utilisée pour transmettre les métriques depuis d'autres conteneurs ou systèmes. Consultez la [configuration réseau][10] pour en savoir plus. |
-| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD                                                | Définit les informations de configuration du proxy. Pour en savoir plus, consultez la [documentation relative au proxy de l'Agent][11].                                                                                                                                  |
+| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD                                                | Définit les informations de configuration du proxy. **Remarque** : `PROXY_PASSWORD` est obligatoire pour la transmission d'un mot de passe d'authentification. Il ne peut pas être renommé. Pour en savoir plus, consultez la [documentation relative au proxy de l'Agent][11].                                                                                                                                  |
 | SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Active et configure Autodiscovery. Pour en savoir plus, consultez le [guide sur Autodiscovery][12].                                                                                                                                   |
 
 **Remarque** : ajoutez `--restart=unless-stopped` si vous souhaitez limiter les redémarrages de votre Agent.
@@ -180,7 +184,7 @@ L'intégration Docker génère les événements suivants :
 ### Checks de service
 
 **docker.service_up** :
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`.
 
 **docker.container_health** :
 Ce check de service est seulement disponible pour l'Agent v5. Renvoie `CRITICAL` si un conteneur n'est pas sain, renvoie `UNKNOWN` si l'état de santé est inconnu ou renvoie `OK` pour les autres cas.
@@ -188,34 +192,31 @@ Ce check de service est seulement disponible pour l'Agent v5. Renvoie `CRITICAL
 **docker.exit** :
 Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Si ce n'est pas le cas, renvoie `OK`.
 
-**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][19] et redémarrez l'Agent.
+**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][20] et redémarrez l'Agent.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][20].
+Besoin d'aide ? Contactez [l'assistance Datadog][21].
 
 ## Pour aller plus loin
 ### Base de connaissances
 
-* [Compose et l'Agent Datadog][21]
-* [DogStatsD et Docker][22]
+* [Compose et l'Agent Datadog][22]
+* [DogStatsD et Docker][23]
 
 ### Blog Datadog
 
-Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][23]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance du Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur l'utilisation de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
+Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][24]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance de Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur la surveillance de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
 
 Nous avons également rédigé plusieurs autres articles de blog détaillés pour vous aider à tirer le meilleur parti de Datadog et de Docker :
 
-* [Comment surveiller les métriques de ressource Docker][24]
-* [Comment recueillir des métriques Docker][25]
-* [8 faits surprenants sur l'adoption concrète de Docker][26]
-* [Surveiller Docker sur AWS ECS][27]
-* [Dockeriser Datadog][28]
-* [Surveiller Docker avec Datadog][29]
+* [Comment surveiller les métriques de ressource Docker][25]
+* [Comment recueillir des métriques Docker][26]
+* [8 faits surprenants sur l'adoption concrète de Docker][27]
+* [Surveiller Docker sur AWS ECS][28]
+* [Optimiser Datadog pour Docker][29]
+* [Surveiller Docker avec Datadog][30]
 
 
-
-
-{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/docker.png
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://github.com/DataDog/docker-dd-agent#cgroups
@@ -233,15 +234,19 @@ Nous avons également rédigé plusieurs autres articles de blog détaillés pou
 [15]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [16]: https://hub.docker.com/r/datadog/docker-dd-agent
 [17]: https://hub.docker.com/r/datadog/agent
-[18]: /fr/agent/basic_agent_usage/?tab=agentv6#cli
-[19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
-[20]: https://docs.datadoghq.com/fr/help
-[21]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
-[22]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
-[23]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
-[24]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
-[25]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
-[26]: https://www.datadoghq.com/docker-adoption
-[27]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
-[28]: https://www.datadoghq.com/blog/docker-performance-datadog
-[29]: https://www.datadoghq.com/blog/monitor-docker-datadog
+[18]: https://docs.datadoghq.com/fr/agent/#cli
+[19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/metadata.csv
+[20]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
+[21]: https://docs.datadoghq.com/fr/help
+[22]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
+[23]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
+[24]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+[25]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+[26]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+[27]: https://www.datadoghq.com/docker-adoption
+[28]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
+[29]: https://www.datadoghq.com/blog/docker-performance-datadog
+[30]: https://www.datadoghq.com/blog/monitor-docker-datadog
+
+
+{{< get-dependencies >}}

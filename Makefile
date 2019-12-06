@@ -54,17 +54,21 @@ clean-integrations:  ## remove built integrations files.
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'alcide.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
+			-a -not -name 'amazon_eks_fargate.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'pivotal_platform.md' \
 		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 		  -a -not -name 'fluentbit.md' \
+			-a -not -name 'iam_access_analyzer.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
+			-a -not -name 'lacework.md' \
 	    -a -not -name 'marklogic.md' \
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \
@@ -86,6 +90,8 @@ clean-auto-doc: ##remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
+	@if [ content/en/developers/amazon_cloudformation.md ]; then \
+	rm -f content/en/developers/amazon_cloudformation.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
@@ -105,13 +111,6 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
-	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
-
-# ARGS=<file> will format that file
-# ARGS=<directory> will recursively format all english markdown files inside <directory>
-# empty ARGS will format all english markdown files inside content/en/
-link-formatting: source-helpers
-	@local/bin/sh/format-links.sh $(ARGS)
 
 start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."

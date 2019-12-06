@@ -2,17 +2,17 @@
 title: Obtenir la séquence des index
 type: apicode
 order: 23.4
-external_redirect: "/api/#get-indexes-order"
+external_redirect: "/api/#obtenir-la-sequence-des-index"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `GET /v1/logs/config/index-order`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_indexes_order" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_indexes_order" >}}

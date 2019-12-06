@@ -3,7 +3,15 @@ title: Datadog-Heroku Buildpack troubleshooting
 kind: faq
 ---
 
-Verify the Datadog Agent is listening by sending a custom metric: 
+To start debugging Heroku, use the `agent-wrapper` command with the information/debugging commands [listed in the Agent’s documentation][1].
+
+For example, to display the status of your Datadog Agent and enabled integrations, run:
+
+```shell
+agent-wrapper status
+```
+
+Next, verify the Datadog Agent is listening by sending a custom metric:
 
 ```shell
 # From your project directory:
@@ -31,22 +39,10 @@ heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 
 ## Send a flare
 
-Generate a flare by running:
+Generate a flare by running the [`agent-wrapper` command][1]:
 
 ```shell
-# From your project directory:
-heroku run bash
-
-# Once your Dyno has started and you are at the command line, send a flare:
-agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
+agent-wrapper flare
 ```
 
-The flare contains the environment information and Datadog Agent configuration. However, since this is a new, stand-alone dyno, the logs are sparse and may not contain full log information.
-
-Generate a more complete flare by setting your API key as an environment variable by running:
-
-```shell
-heroku ps:exec
-DD_API_KEY=<API KEY>
-agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
-```
+[1]: /agent/guide/agent-commands/#agent-status-and-information

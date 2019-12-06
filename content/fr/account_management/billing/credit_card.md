@@ -1,6 +1,6 @@
 ---
 title: Paiements par carte bancaire
-kind: faq
+kind: documentation
 disable_toc: true
 ---
 ## Présentation

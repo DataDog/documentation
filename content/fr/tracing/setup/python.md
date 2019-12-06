@@ -25,6 +25,8 @@ Pour les applications Python Django, notez que le tracing est désactivé lorsqu
 
 ## Installation et démarrage
 
+<div class="alert alert-info">Si vous avez déjà un compte Datadog, vous trouverez des instructions détaillées dans nos guides intégrés à l'application pour les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=python" target=_blank> basées sur un host</a> et les configurations <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=python" target=_blank>basées sur un conteneur</a>.</div>
+
 Pour commencer le tracing d'applications écrites en Python, vous devez d'abord [installer et configurer l'Agent Datadog][1]. Pour obtenir davantage d'informations, consultez la documentation relative au [tracing d'applications Docker][2] ou au [tracing d'applications Kubernetes][3].
 
 Installez ensuite la bibliothèque de tracing Datadog, `ddtrace`, avec pip :
@@ -71,13 +73,13 @@ La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris
 
 | Framework                | Version prise en charge | Documentation PyPi de Datadog                                         |
 |--------------------------|-------------------|--------------------------------------------------------------------|
-| [aiohttp][5]            | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
+| [aiohttp][5]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][6]              | >= 0.11           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][7]              | >= 1.8            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [djangorestframework][7] | >= 3.4            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [Falcon][8]              | >= 1.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon  |
 | [Flask][9]               | >= 0.10           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
-| [Molten][10]              | >= 0.7.0          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten  |
+| [Molten][10]             | >= 0.7.0          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten  |
 | [Pylons][11]             | >= 0.9.6          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
 | [Pyramid][12]            | >= 1.7            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
 | [Tornado][13]            | >= 4.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
@@ -130,7 +132,7 @@ La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/setup
+[1]: /fr/tracing/send_traces
 [2]: /fr/tracing/setup/docker
 [3]: /fr/agent/kubernetes/daemonset_setup/#trace-collection
 [4]: http://pypi.datadoghq.com/trace/docs

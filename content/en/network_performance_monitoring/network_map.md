@@ -6,17 +6,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
+- link: "/integrations/snmp"
+  tag: "Documentation"
+  text: "SNMP integration"
 - link: "/network_performance_monitoring/installation"
   tag: "Documentation"
   text: "Collect your Network Data with the Datadog Agent."
+- link: "/graphing/widgets/network"
+  tag: "Documentation"
+  text: "Network Widget"
 ---
-
-<div class="alert alert-warning">
-This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
-</div>
 
 ## Overview
 

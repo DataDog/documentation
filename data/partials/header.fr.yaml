@@ -32,11 +32,20 @@ left:
     title: Clients
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
-    title: Tarif
+    title: Tarifs
   - name: solutions
     link: '#'
     title: Solutions
     children:
+      - name: solutions_financial
+        link: 'https://www.datadoghq.com/solutions/financial-services/'
+        title: Services financiers
+      - name: solutions_manufacturing
+        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+        title: Production et logistique
+      - name: solutions_healthcare
+        link: 'https://www.datadoghq.com/solutions/healthcare/'
+        title: Santé et sciences de la vie
       - name: solutions_retail
         link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
         title: Commerce de détail et électronique
@@ -46,15 +55,15 @@ left:
       - name: solutions_gaming
         link: 'https://www.datadoghq.com/solutions/gaming/'
         title: Jeux vidéo
-      - name: solutions_manufacturing
-        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
-        title: Production et logistique
-      - name: solutions_financial
-        link: 'https://www.datadoghq.com/solutions/financial-services/'
-        title: Services financiers
-      - name: solutions_healthcare
-        link: 'https://www.datadoghq.com/solutions/healthcare/'
-        title: Santé et sciences de la vie
+      - name: solutions_cloudmigration
+        link: 'https://www.datadoghq.com/solutions/cloud-migration/'
+        title: Migration sur le cloud
+      - name: solutions_monitoringconsolidation
+        link: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
+        title: Unification de la surveillance
+      - name: solutions_devops
+        link: 'https://www.datadoghq.com/solutions/devops/'
+        title: DevOps
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'
@@ -77,7 +86,7 @@ right:
         title: Offres d'emploi
       - name: about_analyst
         link: 'https://www.datadoghq.com/about/analyst/'
-        title: Rapports d'analyse
+        title: Rapports d'analystes
       - name: about_investors
         link: 'https://investors.datadoghq.com/'
         title: Relations avec les investisseurs
