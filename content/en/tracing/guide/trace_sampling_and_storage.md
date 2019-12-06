@@ -57,12 +57,12 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
 1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones.
 
-    | Value                  | Type                        | Action                                                                                               |
-    | :--------------------- | :----------------           | :----------                                                                                          |
-    | **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
-    | **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
-    | **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
-    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all Spans marked for `MANUAL_KEEP` are counted as billable spans. |
+    | Value           | Type                        | Action                                                                                                                                                                                                                         |
+    |:----------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | **MANUAL_DROP** | User input                  | The Agent drops the trace.                                                                                                                                                                                                     |
+    | **AUTO_DROP**   | Automatic sampling decision | The Agent drops the trace.                                                                                                                                                                                                     |
+    | **AUTO_KEEP**   | Automatic sampling decision | The Agent keeps the trace.                                                                                                                                                                                                     |
+    | **MANUAL_KEEP** | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all spans marked for `MANUAL_KEEP` are counted as billable spans. |
 
     Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
@@ -370,12 +370,12 @@ Note that trace priority should be manually controlled only before any context p
 
 Individual [traces][1] are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
-| Retention bucket       |  % of stream kept |
-| :--------------------- | :---------------- |
-| 6 hours                |              100% |
-| Current day (UTC time) |               25% |
-| 6 days                 |               10% |
-| 6 months               |                1% |
+| Retention bucket       | % of stream kept |
+|:-----------------------|:-----------------|
+| 6 hours                | 100%             |
+| Current day (UTC time) | 25%              |
+| 6 days                 | 10%              |
+| 6 months               | 1%               |
 
 **Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the above stated percent of traces over time.
 
