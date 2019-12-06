@@ -36,7 +36,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 Optionally, install the Agent with the command line to add custom settings.
 
 1. Download the [Datadog Agent installer][5].
-2. Run one of the following commands inside the directory where you downloaded the installer.  
+2. Run one of the following commands inside the directory where you downloaded the installer.
    **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
 Command prompt:
@@ -79,7 +79,7 @@ To verify your installation, follow the instructions in the [Agent Status and In
 The execution of the Agent is controlled by the Windows Service Control Manager.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * The main executable name is `agent.exe`.
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
@@ -127,12 +127,12 @@ You can also use Windows Powershell, where available:
 Use the [Datadog Agent Manager][8] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
-The main Agent configuration file is located at:  
+{{% tab "Agent v6 & v7" %}}
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.yaml`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\` OR  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\` OR
 `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -141,11 +141,11 @@ Configuration files for [integrations][1] are in:
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-The main Agent configuration file is located at:  
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.conf`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\` OR  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\` OR
 `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -158,7 +158,7 @@ Configuration files for [integrations][1] are in:
 ### Agent Status and Information
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 To verify the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
 
@@ -213,7 +213,7 @@ or cmd.exe:
 ### Logs location
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 
@@ -237,7 +237,7 @@ Need help? Contact [Datadog support][1].
 
 ### Send a flare
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * Navigate to [http://127.0.0.1:5002][1] to display the Datadog Agent Manager.
 

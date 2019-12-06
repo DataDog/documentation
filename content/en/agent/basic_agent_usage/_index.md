@@ -22,7 +22,7 @@ further_reading:
 ## Agent Architecture
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Agent v6 is a complete rewrite in Go of the Agent v5. V6 offers better performances, smaller footprint, and more features. It is the default Datadog Agent (v5 is no longer in active development).
 
@@ -169,7 +169,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 ## Supported OS versions
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | OS                                | Supported versions                                |
 |-----------------------------------|---------------------------------------------------|
@@ -248,7 +248,7 @@ An example of the Datadog Agent resource consumption is below. Tests were made o
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * Agent Test version: 6.7.0
 * CPU: ~ 0.12% of the CPU used on average

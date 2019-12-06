@@ -24,7 +24,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform     | Command                                                 |
 | ------------ | ------------------------------------------------------- |

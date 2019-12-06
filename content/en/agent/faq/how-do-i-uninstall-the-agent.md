@@ -12,7 +12,7 @@ Choose your platform to see dedicated instructions to uninstall the Agent:
 ### Debian/Ubuntu
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 ```
 sudo apt-get --purge remove datadog-agent -y
@@ -31,7 +31,7 @@ sudo apt-get --purge remove datadog-agent -y
 ### CentOS/RHEL/Fedora/Amazon Linux
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 ```
 sudo yum remove datadog-agent
@@ -49,7 +49,7 @@ sudo yum remove datadog-agent
 ### Mac OS
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. Stop and close the Datadog Agent via the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.
@@ -91,7 +91,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Uninstall the Agent using Add/Remove Programs.
 

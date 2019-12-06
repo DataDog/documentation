@@ -19,7 +19,7 @@ further_reading:
 To enable the Agent full debug mode:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. Modify your local `datadog.yaml` file. See [Agent main configuration file][1] for OS specific details.
 
@@ -52,7 +52,7 @@ To enable the Agent full debug mode:
 ## Containerized Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 **Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 

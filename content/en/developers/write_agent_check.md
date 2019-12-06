@@ -63,7 +63,7 @@ For more details about the interface provided by the base class, browse the [API
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
 
 ```yaml
@@ -92,7 +92,7 @@ instances: [{}]
 To verify your check is running, use the following command:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
  ```
 sudo -u dd-agent -- datadog-agent check <check_name>
 ```

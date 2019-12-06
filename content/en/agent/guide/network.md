@@ -77,7 +77,7 @@ You should whitelist all of these IPs. While only a subset are active at any giv
 Open the following ports in order to benefit from all the Agent functionalities:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * **Outbound**:
 
