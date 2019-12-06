@@ -140,7 +140,7 @@ There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CAR
 
 ## Instrument your code to send metrics to DogStatsD
 
-Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics.
+Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
 
 **[See the full list of Datadog DogStatsD Client Libraries][16]**
 
@@ -189,6 +189,8 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 }
 ```
 
+Also refer to the dedicated documentation for sending [metrics][18], [events][19], and [service checks][20] to Datadog with DogStatsD. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -211,3 +213,6 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [15]: /tagging/assigning_tags/#environment-variables
 [16]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [17]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[18]: /developers/metrics/dogstatsd_metrics_submission/?tab=python
+[19]: /developers/events/dogstatsd/?tab=python
+[20]: /developers/service_checks/dogstatsd_service_checks_submission/?tab=python

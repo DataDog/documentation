@@ -6,6 +6,7 @@ aliases:
   - /guides/dogstatsd/
   - /guides/DogStatsD/
   - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
+  - /integrations/faq/dogstatsd-and-docker
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -64,10 +65,54 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 
 2. [Restart your Agent][10].
 
+#### DogStatsD and Docker
+
+Libraries that communicate over HTTP using the [Datadog API][11] don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD need the library configured to connect with the Agent. Each library handles this configuration differently, so refer to the individual library's documentation for more details.
+
+After your code is configured, run your custom application container using [the `--link` option][12] to create a network connection between your application container and the Datadog Agent container.
+
+##### Example: Monitoring a basic Python application
+
+To monitor your application, run the Datadog container using the [Basic Docker Agent usage][13] instructions. The `docker run` command sets the name of the container to `dd-agent`.
+
+Next, instrument your code. Here's a basic Flask-based web application:
+
+```python
+from flask import Flask
+from datadog import initialize, statsd
+
+# Initialize DogStatsD and set the host.
+initialize(statsd_host = 'dd-agent')
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    # Increment a Datadog counter.
+    statsd.increment('my_webapp.page.views')
+
+    return "Hello World!"
+
+if __name__ == "__main__"
+    app.run()
+```
+
+In our example code above, the DogStatsD host must match the Datadog Agent container name, `dd-agent`.
+
+After building the web application container, run it and use the `--link` argument to setup a network connection to the Datadog Agent container:
+
+```
+docker run -d --name my-web-app \
+    --link dd-agent:dd-agent
+    my-web-app
+```
+
+For another example using DogStatsD and Docker, see the [Docker Compose example project on GitHub][14].
+
 ### Code
 #### Install the DogStatsD client
 
-Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][11] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
+Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][15] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -317,7 +362,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][12] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][16] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
 [2]: /developers/metrics/dogstatsd_metrics_submission
@@ -329,5 +374,9 @@ If you're interested in learning more about the datagram format used by DogStats
 [8]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [9]: /developers/dogstatsd/unix_socket
 [10]: /agent/guide/agent-commands
-[11]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[12]: /developers/metrics
+[11]: /api
+[12]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports
+[13]: /agent/docker/#how-to-run-it
+[14]: https://github.com/DataDog/docker-compose-example
+[15]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[16]: /developers/metrics
