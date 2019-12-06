@@ -34,10 +34,10 @@ Returns all roles, including their names and UUIDs.
 
 ##### ARGUMENTS
 
-* **`page[size]`** [*optional*, *default*=**0**]:
-Page number of roles to return for a given page.
-* **`page[count]`** [*optional*, *default*=**10**]:
+* **`page[size]`** [*optional*, *default*=**10**]:
 Number of roles to return for a given page.
+* **`page[number]`** [*optional*, *default*=**0**]:
+Specific page number to return.
 * **`sort`** [*optional*, *default*=**name**]:
 Sort roles depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
   * Options: **name**, **modified_at**, **user_count**
@@ -684,10 +684,10 @@ Get all users of a role
 
 ##### ARGUMENTS
 
-* **`page[size]`** [*optional*, *default*=**0**]:
-Page number of users to return for a given page.
-* **`page[count]`** [*optional*, *default*=**10**]:
+* **`page[size]`** [*optional*, *default*=**10**]:
 Number of users to return for a given page.
+* **`page[number]`** [*optional*, *default*=**0**]:
+Specific page number to return.
 * **`sort`** [*optional*, *default*=**name**]:
 Sort users depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
   * Options: **name**, **email**, **status**
