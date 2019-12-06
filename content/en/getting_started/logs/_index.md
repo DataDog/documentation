@@ -94,7 +94,7 @@ This produces the following result in the [Log Explorer Page][2]:
 
 ### Install the Agent
 
-To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][7]:
+To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
@@ -115,7 +115,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://r
 
 #### Validation
 
-Verify the Agent is running with the [status command][8] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
+Verify the Agent is running with the [status command][7] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
 
 ```
 ==========
@@ -125,11 +125,11 @@ Logs Agent
   Logs Agent is not running
 ```
 
-**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
+**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
 
 ### Enable log collection
 
-To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][10] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
+To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][9] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
 
 ```yaml
 ## @param logs_enabled - boolean - optional - default: false
@@ -153,7 +153,7 @@ $ echo "First line of log" >> log_file_to_monitor.log
 
 To specify to the Agent to monitor this log file:
 
-1. Create a new configuration folder in the [configuration directory of the Agent][11]:
+1. Create a new configuration folder in the [configuration directory of the Agent][10]:
 
     ```
     sudo mkdir /etc/datadog-agent/conf.d/custom_log_collection.d/
@@ -179,7 +179,7 @@ To specify to the Agent to monitor this log file:
 
 ##### Validation
 
-If the log configuration is correct, the [status command][8] `sudo datadog-agent status` outputs:
+If the log configuration is correct, the [status command][7] `sudo datadog-agent status` outputs:
 
 ```
 ==========
@@ -218,8 +218,7 @@ This produces the following result in the [Log Explorer Page][2]:
 [4]: https://www.vagrantup.com/intro/getting-started/index.html
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: /agent/guide/agent-commands/#agent-information
-[9]: https://app.datadoghq.com/infrastructure
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /agent/guide/agent-commands/#agent-information
+[8]: https://app.datadoghq.com/infrastructure
+[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[10]: /agent/guide/agent-configuration-files/#agent-configuration-directory

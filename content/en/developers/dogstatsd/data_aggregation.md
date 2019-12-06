@@ -40,9 +40,9 @@ Among all values received during the same flush interval, the aggregated value s
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [GAUGE][5]        | The latest datapoint received is sent.                                                                                                                           |
 | [COUNT][3]        | The sum of all received datapoints is sent.                                                                                                                      |
-| [HISTOGRAM][6]    | The min, max, sum, avg, 95 percentiles, count, and median of all datapoints received is sent. See the [HISTOGRAM metric documentation page][7] for more details. |
-| [SET][8]          | The number of different datapoints is sent.                                                                                                                      |
-| [DISTRIBUTION][9] | Aggregated as global distributions.                                                                                                                              |
+| [HISTOGRAM][6]    | The min, max, sum, avg, 95 percentiles, count, and median of all datapoints received is sent. See the [HISTOGRAM metric documentation page][6] for more details. |
+| [SET][7]          | The number of different datapoints is sent.                                                                                                                      |
+| [DISTRIBUTION][8] | Aggregated as global distributions.                                                                                                                              |
 
 ## Further Reading
 
@@ -54,6 +54,5 @@ Among all values received during the same flush interval, the aggregated value s
 [4]: /developers/metrics/types
 [5]: /developers/metrics/types/?tab=gauge#metric-submission-types
 [6]: /developers/metrics/types/?tab=histogram#metric-submission-types
-[7]: /developers/metrics/types/?tab=histogram#metric-submission-types
-[8]: /developers/metrics/types/?tab=set#metric-submission-types
-[9]: /developers/metrics/types/?tab=distribution#metric-submission-types
+[7]: /developers/metrics/types/?tab=set#metric-submission-types
+[8]: /developers/metrics/types/?tab=distribution#metric-submission-types
