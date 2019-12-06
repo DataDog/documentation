@@ -285,20 +285,43 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+               | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup> | built-in                                 |                      | `AspNet`             |
+| ASP.NET Web Forms              | built-in                                 |                      | `AspNet`             |
 | WCF                            | built-in                                 |                      | `Wcf`                |
-| ADO.NET <sup>2</sup>           | built-in                                 |                      | `AdoNet`             |
+| ADO.NET <sup>1</sup>           | built-in                                 |                      | `AdoNet`             |
 | WebClient / WebRequest         | built-in                                 |                      | `WebRequest`         |
 | HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
 | Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
 | Redis (ServiceStack client)    | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
-Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application. Be sure to keep this package in sync with your MSI version.
+<sup>1</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
-<sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
+**Note**: The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. **To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application.** Be sure to keep this package in sync with your MSI version.
+
+To install this package, use one the following commands:
+
+{{< tabs >}}
+
+{{% tab "Package Manager" %}}
+`Install-Package Datadog.Trace.ClrProfiler.Managed -Version 1.10.0`
+{{% /tab %}}
+
+{{% tab ".NET CLI" %}}
+`dotnet add package Datadog.Trace.ClrProfiler.Managed --version 1.10.0`
+{{% /tab %}}
+
+{{% tab "Package Reference" %}}
+`<PackageReference Include="Datadog.Trace.ClrProfiler.Managed" Version="1.10.0" />`
+
+**Note**: Copy this XML node into your project file.
+{{% /tab %}}
+
+{{% tab "Paket CLI" %}}
+`paket add Datadog.Trace.ClrProfiler.Managed --version 1.10.0`
+{{% /tab %}}
+
+{{< /tabs >}}
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
