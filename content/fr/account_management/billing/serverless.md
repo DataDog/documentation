@@ -1,6 +1,6 @@
 ---
 title: Facturation des fonctions sans serveur
-kind: faq
+kind: documentation
 ---
 ## Présentation
 

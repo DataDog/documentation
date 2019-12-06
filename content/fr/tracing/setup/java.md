@@ -242,9 +242,7 @@ Dans Kubernetes, [liez le port DogStatsD à un port de host][12] ; dans ECS, [d
 
 Le traceur de l'APM Datadog prend en charge [l'extraction et l'injection d'en-têtes B3][14] pour le tracing distribué.
 
-L'injection d'en-têtes distribuées est contrôlée par
-la configuration des styles d'injection/extraction. Deux styles sont
-actuellement pris en charge :
+L'injection et l'extraction distribuées d'en-têtes sont contrôlées en configurant des styles d'injection/extraction. Deux styles sont actuellement pris en charge :
 
 * Datadog : `Datadog`
 * B3 : `B3`

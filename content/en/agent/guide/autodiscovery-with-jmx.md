@@ -62,7 +62,7 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 
 4. [Enable Autodiscovery for your Agent][4].
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/autodiscovery/template_variables
 [3]: https://docs.datadoghq.com/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [4]: /agent/autodiscovery/?tab=agent#docker-autodiscovery
@@ -127,7 +127,7 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 
     Then use this new custom image as the regular containerized Agent.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /integrations/activemq
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example

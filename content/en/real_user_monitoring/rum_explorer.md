@@ -1,5 +1,5 @@
 ---
-title: Views Explorer
+title: RUM Explorer
 kind: documentation
 description: ""
 further_reading:
@@ -8,11 +8,11 @@ further_reading:
   text: "Build analytics upon your events."
 ---
 
-The Views Explorer allow you to explore all your views collected from your different applications.
+The Real User Monitoring (RUM) Explorer allow you to explore all your views collected from your different applications.
 
 ## Context
 
-Build up a context to explore your views in your Views Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and analytics.
+Build up a context to explore your views in your RUM Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and analytics.
 
 ### Time Range
 
@@ -63,11 +63,11 @@ To perform a multi-character wildcard search, use the `*` symbol. For instance, 
 
 ##### Numerical values
 
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all views that have a duration over 100ms with:
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all views that have a duration over 100ns with:
 
 `@duration:>100`
 
-You can search for numerical attribute within a specific range. For instance, retrieve all your views with a duration between 100ms and 300ms:
+You can search for numerical attribute within a specific range. For instance, retrieve all your views with a duration between 100ns and 300ns:
 
 `@duration:[100 TO 300]`
 
@@ -83,11 +83,11 @@ Use the search bar's autocomplete feature to complete your query using existing 
 |--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `@http.url_details.path:"/api/v1/test"`                      | Searches all views containing `/api/v1/test` in the attribute `http.url_details.path`.                                                              |
 | `@http.url:\/api\/v1\/*`                                     | Searches all views containing a value in `http.url` attribute that start with `/api/v1/`                                                            |
-| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all views with a `duration` between 100 and 300 ms, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
+| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all views with a `duration` between 100 and 300 ns, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
 ## Vizualisation
 
-Click on any view (Resources, Traces, Errors, User Action, Long task, Logs, or Attributes) to open the views panel and see more details about it:
+Click on any view to open the views panel and see more details (Resources, Traces, Errors, User Action, Long task, Logs, or Attributes) about it:
 
 {{< img src="real_user_monitoring/rum_explorer/rum_views.png" alt="Rum View" responsive="true" style="width:80%;">}}
 
@@ -95,7 +95,7 @@ Click on any view (Resources, Traces, Errors, User Action, Long task, Logs, or A
 
 After [being collected][1], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][2].
 
-Note: To leverage the most out of your Views Explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
+Note: To leverage the most out of your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -110,13 +110,13 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM Analytics query][1].
 
 [1]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{% tab "Measures" %}}
 
-A measure is a attribute with a numerical value contained in your views.
+A measure is an attribute with a numerical value contained in your views.
 
 **Create a Measure**:
 
@@ -124,11 +124,11 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="real_user_monitoring/rum_explorer/create_measure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM Analytics query][1].
 
 **Select the Measure Unit**:
 
-Each measure has its own unit that is then used for display in the Views explorer columns and RUM Analytics.
+Each measure has its own unit that is then used for display in the RUM Explorer columns and RUM Analytics.
 
 {{< img src="real_user_monitoring/rum_explorer/edit_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 

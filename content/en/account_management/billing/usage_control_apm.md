@@ -58,4 +58,4 @@ You can also choose to enable App Analytics per service, or per integration in c
 [8]: /account_management/billing/usage_control_apm/#choose-analyzed-span-retention
 [9]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
 [10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage
-[11]: tracing/app_analytics/?tab=java#configure-additional-services-optional
+[11]: /tracing/app_analytics/?tab=java#configure-additional-services-optional

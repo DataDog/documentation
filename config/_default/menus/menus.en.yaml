@@ -1129,7 +1129,7 @@ main:
     parent: "rum"
     identifier: "rum_setup"
     weight: 1
-  - name: "Views Explorer"
+  - name: "RUM Explorer"
     url: "real_user_monitoring/rum_explorer"
     parent: "rum"
     identifier: "rum_views_explorer"
@@ -1191,10 +1191,16 @@ main:
     url: "/developers/dogstatsd/unix_socket"
     parent: "dev_tools_dogstatsd"
     weight: 102
+
   - name: "High Throughput Data"
     url: "developers/dogstatsd/high_throughput/"
     parent: "dev_tools_dogstatsd"
     weight: 103
+
+  - name: "Data Aggregation"
+    url: "developers/dogstatsd/data_aggregation/"
+    parent: "dev_tools_dogstatsd"
+    weight: 104
 
   ## DEVELOPERS - Metrics
 
