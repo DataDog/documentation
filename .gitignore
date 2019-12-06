@@ -41,13 +41,10 @@ content/en/integrations/*.md
 !content/en/integrations/system.md
 !content/en/integrations/tcprtt.md
 !content/en/integrations/adobe_experience_manager.md
-<<<<<<< HEAD
 !content/en/integrations/pivotal_platform.md
-=======
 !content/en/integrations/alcide.md
 !content/en/integrations/amazon_eks_fargate.md
 !content/en/integrations/iam_access_analyzer.md
->>>>>>> master
 content/en/developers/integrations/*.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/integrations/faq/list-of-api-source-attribute-value.md
