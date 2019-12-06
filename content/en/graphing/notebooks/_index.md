@@ -1,79 +1,113 @@
 ---
 title: Notebooks
 kind: documentation
+further_reading:
+- link: "graphing/dashboards/screenboard"
+  tag: "Documentation"
+  text: "Create a Screenboard"
+- link: "graphing/dashboards/timeboard"
+  tag: "Documentation"
+  text: "Create a Timeboard"
 ---
 
-Notebooks combine graphs and text in a linear, cell-based format. They're designed to help you explore and share stories with your data.
+## Overview
 
-You can use a notebook to create and share data-driven stories with teammates, such as incident investigations, postmortems, runbooks, and infrastructure documentation. 
+Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data such as incident investigations, postmortems, runbooks, and infrastructure documentation.
 
-## Sharing and permissions
+{{< img src="graphing/notebooks/demo_notebook.png" alt="demo notebook" responsive="true" style="width:100%;">}}
 
-Anyone on your team can open or edit any notebook, but a notebook can only be deleted by its creator.
+## Notebook List
+
+The [Notebook List][1] allows you to view and search previously created notebooks. For each notebook, the name, creator, and last modified date are displayed. The notebooks are grouped by:
+
+* **My Notebooks**: Notebooks created by you.
+* **Other Notebooks**: Notebooks created by other members of your team.
+
+### Sharing and permissions
+
+Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator.
 
 Edits to another user's notebook are not saved automatically. If you attempt to save changes to someone else's notebook, a copy is created unless you explicitly choose to overwrite the original.
 
-A new notebook is unsaved by default.
+## New Notebook
 
-## Important features
+Create a [new notebook][2] from the main navigation: *Notebooks > New Notebook*.
 
-### Multiple time frames
-
-By default, all graph cells adhere to the global time frame set in the notebook header. However, individual cells can be unlocked from the global time and set to an independent time frame.
-
-This allows for the comparison of metrics over multiple, distinct periods of time within a single notebook. It allows you to build a coherent timeline of an event and makes notebooks suited for incident investigations.
+A new notebook is not saved by default. You must click the **Save** button.
 
 ### Types of content
 
-Metrics in a notebook are graphed using the standard query editor that appears throughout Datadog. Notebooks support three types of visualizations: timeseries, heatmaps, and distributions.
+Notebooks support visualizations and text cells.
 
-Like in the Metrics Explorer, a metric can be compared across different groups in your infrastructure. For example, if a metric is reporting across multiple hosts, a notebook lets you generate separate graphs that show the metric's behavior on each host.
+#### Visualization
 
-Text in a notebook is formatted with Markdown, which means notebooks can include headings and subheadings, links, images, bulleted and numbered lists, and code blocks.
+Metrics in a notebook are graphed using the Datadog query editor. Notebooks support:
 
-## Specific usage instructions
+* [Timeseries][3]
+* [Heatmap][4]
+* [Distribution][5]
+* [Log stream][6]
+
+#### Text
+
+Text in a notebook is formatted with Markdown, which enables the use of headings, subheadings, links, images, lists, and code blocks.
 
 ### Manipulating cells
 
-When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press "Enter". To close a cell, click outside it or press `⌘ + Enter`. Only one cell may be open at any time.
+When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press `Enter`. To close a cell, click outside it or press `CMD + Enter`. Only one cell may be open at a time.
 
-{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" >}}
+To insert, clone, or delete cells, click the gear icon that appears to the left of the cell number or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 
-To insert, clone, or delete cells, click the gear icon that appears to the left of the cell number—or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
+### Time frames
 
-Cells also may be re-ordered by using keyboard shortcuts.
+By default, all graph cells adhere to the global time frame set in the notebook header. However, individual cells can be unlocked from the global time and set to an independent time frame. This allows for the comparison of metrics over multiple, distinct periods of time within a single notebook, which is suited for incident investigations.
 
-### Changing time frames
+To set an individual time frame, click the clock icon in the top-right corner of a graph cell. Then, uncheck *Lock this cell to global time frame* and set your preferred time frame:
 
-A time indicator appears in the top-right corner of each graph cell. If the cell is locked to the global time, it reads "Global Time." Otherwise, it specifies the cell's independent time frame.
+{{< img src="graphing/notebooks/time_selector.png" alt="Time Selector" responsive="true" style="width:60%;">}}
 
-To unlock a cell from global time, click this time indicator.
+**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
 
-{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" style="width:40%;">}}
+### Expand
 
-Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook's global time frame instead.
+Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][7] page.
 
-### Splitting by tag and other graph options
+### Layout options
 
-To split a graph by tag, change a graph's size, or toggle the visibility of a graph legend, click the grid icon at the right edge of the cell.
+The following layout options are available by clicking the grid icon on the right side of the cell:
 
-Legends are disabled automatically when the graph size has been set to XS or S. Changing these settings affects only the target cell; the layout of other graph cells is unaffected.
+* **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
+* **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
+* **Grouping**: Display one graph per source grouping.
 
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/layout_options.png" alt="layout options" responsive="true" style="width:50%;">}}
 
-### Linking to individual cells
+**Note**: Changing any of these settings only affects the targeted cell.
 
-To copy the URL for a specific cell, click the link icon at the right edge of the cell. Direct linking is available for both graph and Markdown cells.
+### Link to individual cells
 
-When a user visits the URL for a specific cell, its notebook is opened to show the cell in question at the top of the viewport. Links are absolute, which means a cell's URL remains the same if it's moved to a new position within its notebook.
+Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
 
-{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" style="width:40%;">}}
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute, which means a cell's URL remains the same if it's moved to a new position within the notebook.
 
-### Saving, renaming, and deleting a notebook
+### Save, rename, clone, delete
 
-To save a notebook, press `⌘ + S` or click the "Save" button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don't lose work, you'll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
+Save a notebook with `CMD + S` or click the **Save** button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. Also, a notebook can be saved manually at any time between autosaves. To ensure you don't lose work, you are prompted for confirmation if you attempt to leave a notebook with unsaved changes.
 
-To rename a notebook, click the name field in the notebook header.
+Rename a notebook by clicking the name field in the notebook header.
 
-To delete a notebook that you've created, delete it from the Notebook List page, or from the individual notebook page using the settings cog.
+Clone any notebook from the individual notebook by using the settings cog at the top right.
 
+Delete a notebook (created by you) from the notebook list page, or inside the individual notebook by using the settings cog at the top right.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook
+[3]: /graphing/widgets/timeseries
+[4]: /graphing/widgets/heat_map
+[5]: /graphing/widgets/distribution
+[6]: /graphing/widgets/log_stream
+[7]: /graphing/widgets/#full-screen
