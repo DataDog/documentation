@@ -29,7 +29,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
     After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][6] and provide the relevant log entries with [a flare][7].
+If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
 
 ## Tracer debug mode
 
@@ -211,5 +211,4 @@ make install
 [3]: /agent/troubleshooting/#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
 [5]: /tracing/visualization/#trace
-[6]: /help
-[7]: /agent/troubleshooting/#send-a-flare
+[6]: /agent/troubleshooting/#send-a-flare

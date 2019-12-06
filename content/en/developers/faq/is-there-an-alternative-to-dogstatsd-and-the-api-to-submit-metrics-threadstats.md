@@ -39,7 +39,7 @@ Threadstats is good for you if...
 
 ## Threadstats variations with DogStatsD
 
-As in [DogStatsD](/developers/dogstatsd), Threadstats performs data aggregation for performance reasons.
+As in [DogStatsD][5], Threadstats performs data aggregation for performance reasons.
 
 ### Variations
 
@@ -63,7 +63,7 @@ Next, every datapoint in the same `roll_up_interval` (5 seconds) gets the same t
 Finally, data is aggregated by timestamp. The following 4 values are then submitted to Datadog: 
 `{09:30:10, 1}, {10:00:00, 3}, {10:00:05,2}`
 
-For more information, see the [Threadstats aggregation](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py) documentation.
+For more information, see the [Threadstats aggregation][6] documentation.
 
 ## Tips
 
@@ -86,3 +86,5 @@ For more information, see the [Threadstats aggregation](https://github.com/DataD
 [2]: /api
 [3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: https://github.com/DataDog/datadogpy
+[5]: /developers/dogstatsd
+[6]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py
