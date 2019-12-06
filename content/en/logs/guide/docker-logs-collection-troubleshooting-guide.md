@@ -63,7 +63,7 @@ This status means that logs are enabled but you haven't specified which containe
 
 1. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
 
-2. To configure the Agent to collect from other containers, set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL`. 
+2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`. 
 
 ## The Logs Agent shows "Status: Pending"
 
@@ -90,18 +90,12 @@ If the Docker Daemon starts while the host Agent is already running, restart the
 
 ### You didn't mount the docker socket when you started the Container Agent
 
-In order For the Container Agent to collect logs from Docker containers, it needs to have access to the Docker socket. If it doesn't have access, the following logs appear in `agent.log`:
+In order for the Container Agent to collect logs from Docker containers, it needs to have access to the Docker socket. If it doesn't have access, the following logs appear in `agent.log`:
 
 ```
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:51 in NewLauncher) | Could not setup the docker launcher: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:58 in NewLauncher) | Could not setup the kubernetes launcher: /var/log/pods not found
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:61 in NewLauncher) | Container logs won't be collected
-```
-
-And this log appears when the Agent attempts to run the container check:
-
-```
-2019-10-09 14:12:27 UTC | PROCESS | CRITICAL | (collector.go:91 in runCheck) | Unable to run check 'container': temporary failure in detector, will retry later: No collector detected
 ```
 
 Relaunch the Agent container with the following option: `-v /var/run/docker.sock:/var/run/docker.sock:ro` to allow access to the Docker socket.
@@ -137,12 +131,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in datadog.yaml:
-
-```
-logs_config:
-  use_http: true
-```
+If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
 
 ### Your containers are not using the JSON logging driver
 Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.
