@@ -539,7 +539,7 @@ curl -X POST \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also by found by heading to [https://app.datadoghq.com/api/v2/current_user] and looking under data type `users` for `id`.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also be found through the https://app.datadoghq.com/api/v2/current_user endpoint and under data type, `users`, for `id`.
 
 See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
 
@@ -619,7 +619,7 @@ curl -X DELETE \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also by found by heading to [https://app.datadoghq.com/api/v2/current_user] and looking under data type `users` for `id`.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also be found through the https://app.datadoghq.com/api/v2/current_user endpoint and under data type, `users`, for `id`.
 
 See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
 
