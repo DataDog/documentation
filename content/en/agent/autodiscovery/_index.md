@@ -121,7 +121,40 @@ ECS_FARGATE=true
 
 Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][3], including Apache and Redis, based on default Autodiscovery configuration files.
 
+You can define an integration template in multiple forms: as Kubernetes pod annotations, Docker labels, a configuration file mounted within the Agent, a ConfigMap, and key-value stores.
+
+The following is an example of a Redis integration template defined in Kubernetes pod annotations. It contains a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+  annotations:
+    ad.datadoghq.com/redis.check_names: '["redisdb"]'
+    ad.datadoghq.com/redis.init_configs: '[{}]'
+    ad.datadoghq.com/redis.instances: |
+      [
+        {
+          "host": "%%host%%",
+          "port":"6379",
+          "password":"%%env_REDIS_PASSWORD%%"
+        }
+      ]
+    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
+  labels:
+    name: redis
+spec:
+  containers:
+    - name: redis
+      image: httpd
+      ports:
+        - containerPort: 80
+```
+
 To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][4] documentation for further details.
+
+
 
 
 
