@@ -97,7 +97,9 @@ To automatically enable Autodiscovery over Docker containers, mount `/var/run/do
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
+Autodiscovery is enabled by default on Kubernetes.
+
+To verify this, ensure the following environment variable is set:
 
 ```
 KUBERNETES=true
