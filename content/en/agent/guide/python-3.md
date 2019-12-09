@@ -1,6 +1,10 @@
 ---
 title: Python 3 Custom Check Migration
 kind: guide
+further_reading:
+- link: "agent/version/upgrade_to_agent_v7"
+  tag: "Documentation"
+  text: "Upgrade to Agent v7"
 ---
 
 ## Overview
@@ -9,38 +13,11 @@ This guide provides information and best practices on migrating checks between P
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
-## Agent configuration
-
-Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
-
-By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime:
-
-1. Set the `python_version` configuration option [in your `datadog.yaml` configuration file][2]:
-
-    ```yaml
-    python_version: 3
-    ```
-
-2. [Restart the Agent][3].
-
-Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` is ignored.
-
-This is an Agent-wide configuration option: **all Python checks launched by an Agent use the same Python runtime**.
-
-### Containerized Agent
-
-The official Containerized Agent images only include one of the two Python runtimes. To switch to one of the other runtime, choose the appropriate Agent image:
-
-* **Python 2** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>`, or `datadog/agent:<AGENT_VERSION>-jmx` for images supporting JMX checks.
-* **Python 3** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>-py3`, or `datadog/agent:<AGENT_VERSION>-py3-jmx` for images supporting JMX checks.
-
-For example, for the Containerized Agent v6.14.0, select the `datadog/agent:6.14.0` or `datadog/agent:6.14.0-jmx` images to use the default Python runtime (Python 2), and select the `datadog/agent:6.14.0-py3` or `datadog/agent:6.14.0-py3-jmx` images to use the Python 3 runtime.
-
 ## Editors and Tools
 
 ### ddev
 
-The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][4].
+The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][2].
 
 #### Installation
 
@@ -79,22 +56,22 @@ Validating python3 compatibility of ~/dev/my-check.py…
 
 While `ddev` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
 
-For more details about ddev, refer to the [ddev documentation][5].
+For more details about ddev, refer to the [ddev documentation][3].
 
 ### 2to3
 
-[2to3][6] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
+[2to3][4] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
 
 
 ```bash
 $ 2to3 foo.py
 ```
 
-Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][6].
+Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][4].
 
 ### Editors
 
-Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][7] or as a clickable box on the bottom in [Visual Studio Code][8].
+Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][5] or as a clickable box on the bottom in [Visual Studio Code][6].
 
 ## Python Migration
 
@@ -114,7 +91,7 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Six
 
-[Six][9] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
+[Six][7] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
 
 ### Dictionary methods
 
@@ -148,7 +125,7 @@ Python 3 features a reorganized standard library, where a number of modules and 
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consult the [Six documentation][9] for the list of renamed modules. Note that the `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
+Consult the [Six documentation][7] for the list of renamed modules. Note that the `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
 
 ### Unicode
 
@@ -169,7 +146,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
-Consult Ned Batchelder’s [Pragmatic Unicode][10] for further details.
+Consult Ned Batchelder’s [Pragmatic Unicode][8] for further details.
 
 ### Print
 
@@ -284,14 +261,15 @@ The `xrange` function is removed in Python 3; instead, the `range` function retu
 
 Use the built-in `next` function instead of calling the `next` method. For instance, rewrite `iterator.next()` as `next(iterator)`.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/compatibility_check
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /developers/integrations/new_check_howto/#building
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
-[6]: https://docs.python.org/3.1/library/2to3.html
-[7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
-[8]: https://code.visualstudio.com/docs/setup/setup-overview
-[9]: https://six.readthedocs.io
-[10]: https://nedbatchelder.com/text/unipain.html
+[2]: /developers/integrations/new_check_howto/#building
+[3]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
+[4]: https://docs.python.org/3.1/library/2to3.html
+[5]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
+[6]: https://code.visualstudio.com/docs/setup/setup-overview
+[7]: https://six.readthedocs.io
+[8]: https://nedbatchelder.com/text/unipain.html

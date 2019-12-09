@@ -348,14 +348,6 @@ main:
     url: "agent/versions/upgrade_to_agent_v6/"
     parent: "agent_versions"
     weight: 802
-  - name: "Agent v6 changes"
-    url: "agent/versions/agent_v6_changes/"
-    parent: "agent_versions"
-    weight: 803
-  - name: "Agent v7 changes"
-    url: "agent/versions/agent_v7_changes"
-    parent: "agent_versions"
-    weight: 804
 
   ## AGENT - Troubleshooting
   - name: "Troubleshooting"

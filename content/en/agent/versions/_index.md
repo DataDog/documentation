@@ -2,20 +2,34 @@
 title: Agent Version differences
 kind: documentation
 further_reading:
-- link: "agent/faq/how-datadog-agent-determines-the-hostname"
+- link: "agent/version/upgrade_to_agent_v7"
+  tag: "Documentation"
+  text: "Upgrade to Agent v7"
+- link: "agent/version/upgrade_to_agent_v6"
+  tag: "Documentation"
+  text: "Upgrade to Agent v6"
+- link: "agent/faq/agent_v6_changes"
   tag: "FAQ"
-  text: "How does Datadog determine the Agent hostname?"
-- link: "agent/guide/agent-commands"
-  tag: "FAQ"
-  text: "List of all Agent commands"
-- link: "agent/guide/agent-configuration-files"
-  tag: "FAQ"
-  text: "Location of all Agent configuration files"
+  text: "Agent v6 Changes"
 ---
 
-## Agent version 6 main changes
 
-Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
+## Version differences
+
+{{< tabs >}}
+{{% tab "Agent v7 vs v6" %}}
+
+Agent v7 is the latest major version of the Datadog Agent. The main change from Agent v6 is that this version only includes support for Python 3 for integrations and Custom checks.
+
+See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent and migrate your Python 2 custom Checks to a compatible Python 3 version.
+
+[1]: /agent/version/upgrade_to_agent_v7
+{{% /tab %}}
+{{% tab "Agent v6 vs v5" %}}
+
+**Agent version 6 main changes**:
+
+The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
   * It has decreased CPU usage
@@ -31,7 +45,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * Custom build your Agent v6 and [DogStatsD][3] much easier and with many more configuration options, to include or exclude almost anything.
 
-### Agent v6 new functionalities
+**Agent v6 new functionalities**:
 
 To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation, but here are the key differentiators:
 
@@ -46,6 +60,7 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 * [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
 
 
+
 [1]: /agent/#agent-architecture
 [2]: /agent/guide/agent-commands
 [3]: /developers/dogstatsd/unix_socket
@@ -54,3 +69,9 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 [6]: /graphing/infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /logs
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

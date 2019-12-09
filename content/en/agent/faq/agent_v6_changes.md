@@ -1,10 +1,10 @@
 ---
-title: Datadog Agent v6 Changes
+title: Agent v6 Changes
 kind: documentation
 aliases:
  - /agent/faq/agent-v6-changes
 further_reading:
-- link: "agent/guide/upgrade-to-agent-v6/"
+- link: "agent/version/upgrade_to_agent_v6/"
   tag: "Documentation"
   text: "Upgrade to Datadog Agent v6"
 - link: "agent/faq/how-datadog-agent-determines-the-hostname/"
