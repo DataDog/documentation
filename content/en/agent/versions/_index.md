@@ -2,10 +2,10 @@
 title: Agent Version differences
 kind: documentation
 further_reading:
-- link: "agent/version/upgrade_to_agent_v7"
+- link: "agent/versions/upgrade_to_agent_v7"
   tag: "Documentation"
   text: "Upgrade to Agent v7"
-- link: "agent/version/upgrade_to_agent_v6"
+- link: "agent/versions/upgrade_to_agent_v6"
   tag: "Documentation"
   text: "Upgrade to Agent v6"
 - link: "agent/faq/agent_v6_changes"
@@ -21,9 +21,13 @@ further_reading:
 
 Agent v7 is the latest major version of the Datadog Agent. The main change from Agent v6 is that this version only includes support for Python 3 for integrations and Custom checks.
 
-See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent and migrate your Python 2 custom Checks to a compatible Python 3 version.
+See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent to version 7. Follow the [Python 3 Custom Check Migration guide][2] to check and migrate your custom check to Python 3.
 
-[1]: /agent/version/upgrade_to_agent_v7
+**Note**: You can test this migration with Agent v6, by [Using Python 3 with Datadog Agent v6][3].
+
+[1]: /agent/versions/upgrade_to_agent_v7
+[2]: /agent/guide/python-3
+[3]: /agent/guide/agent-v6-python-3
 {{% /tab %}}
 {{% tab "Agent v6 vs v5" %}}
 

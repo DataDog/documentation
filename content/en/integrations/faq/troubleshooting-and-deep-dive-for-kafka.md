@@ -85,7 +85,7 @@ The number of partition contexts collection is limited to 200. If you require mo
 [5]: https://github.com/DataDog/jmxfetch
 [6]: /integrations/kafka/#agent-check-kafka-consumer
 [7]: /agent
-[8]: /agent/version/upgrade_to_agent_v6/
+[8]: /agent/versions/upgrade_to_agent_v6/
 [9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [10]: /developers/dogstatsd
 [11]: /help

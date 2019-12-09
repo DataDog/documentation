@@ -2,7 +2,7 @@
 title: Python 3 Custom Check Migration
 kind: guide
 further_reading:
-- link: "agent/version/upgrade_to_agent_v7"
+- link: "agent/versions/upgrade_to_agent_v7"
   tag: "Documentation"
   text: "Upgrade to Agent v7"
 ---
@@ -22,6 +22,7 @@ The Datadog developer package,`ddev`, contains functions to help you [verify tha
 #### Installation
 
 Start by installing the developer toolkit:
+
 ```bash
 $ pip install "datadog-checks-dev[cli]"
 ```
@@ -61,7 +62,6 @@ For more details about ddev, refer to the [ddev documentation][3].
 ### 2to3
 
 [2to3][4] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
-
 
 ```bash
 $ 2to3 foo.py

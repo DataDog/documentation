@@ -3,7 +3,7 @@ title: Use Python 3 with Datadog Agent v6
 kind: guide
 disable_toc: true
 further_reading:
-- link: "agent/version/upgrade_to_agent_v7"
+- link: "agent/versions/upgrade_to_agent_v7"
   tag: "Documentation"
   text: "Upgrade to Agent v7"
 ---
@@ -26,8 +26,6 @@ By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 ru
 Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` is ignored.
 
 This is an Agent-wide configuration option: **all Python checks launched by an Agent use the same Python runtime**.
-
-
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#restart-the-agent
