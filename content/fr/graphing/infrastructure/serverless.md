@@ -16,7 +16,7 @@ further_reading:
 
 L'informatique sans serveur consiste à écrire du code orienté événement et à l'importer dans un fournisseur de cloud afin qu'il gère toutes les ressources de calcul sous-jacentes. [L'informatique sans serveur Datadog][1] regroupe en une unique vue les métriques, traces et logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur.
 
-Activez l'intégration [AWS Lambda][2] pour commencer à recueillir des métriques custom et Cloudwatch depuis vos fonctions Lambda.
+Activez l'intégration [AWS Lambda][2] pour commencer à recueillir des métriques custom et CloudWatch depuis vos fonctions Lambda.
 
 ## Installation
 
@@ -26,31 +26,18 @@ Le dashboard dédié ne nécessite aucune installation. Il repose cependant sur 
 
     Cette intégration remplit les graphiques de synthèse et le principal tableau de fonctions. Installez cette intégration et vérifiez sur votre compte que les métriques Lambda sont transmises.
 
-    **Remarque** : les métriques de l'IU des fonctions Cloud sont retardées ~10 minutes. Il s'agit de la vitesse par défaut à laquelle Datadog interroge les API AWS. Pour savoir si ce délai peut être réduit, contactez l'[assistance Datadog][4].
+    **Remarque** : il existe un décalage d'environ 10 minutes entre l'envoi des métriques et leur affichage sur la page Serverless. Il s'agit de la fréquence par défaut à laquelle Datadog interroge les API AWS. Pour savoir si ce délai peut être réduit, contactez l'[assistance Datadog][4].
 
-2. [Intégration AWS X-Ray][5] (facultative)
-    Cette intégration fournit des traces pour les fonctions Lambda dans la page détaillée des fonctions et permet la détection du démarrage à froid des fonctions Lambda.
+2. [Intégration AWS X-Ray][5] (conseillé)
+    Cette intégration permet un tracing de bout en bout complet des requêtes qui accèdent à vos fonctions Lambda. Les traces s'affichent sur la page détaillée de votre fonction sans serveur et dans l'APM Datadog.
 
-    Installez l'intégration X-Ray et ajoutez les autorisations suivantes au document de stratégie dans votre rôle AWS/Datadog :
-    ```
-    xray:BatchGetTraces,
-    xray:GetTraceSummaries
-    ```
-    Si vous utilisez une clé principale client pour chiffrer les traces, ajoutez la méthode `kms:Decrypt` à la stratégie au sein de laquelle la ressource correspond à la clé principale client utilisée pour X-Ray.
+    Pour activer cette fonctionnalité, consultez la [documentation sur l'intégration AWS X-Ray][6].
 
-    Configuration X-Ray conseillée :
+    **Remarque** : il existe un décalage d'environ 5 minutes entre l'envoi des traces et leur affichage sur l'interface. Il s'agit de la fréquence à laquelle Datadog interroge les API AWS X-Ray.
 
-    - Accédez à la fonction Lambda dans la console AWS que vous souhaitez instrumenter. Dans la section « Debugging and error handling », cochez la case « Enable active tracing ». Cela permet d'activer X-Ray pour cette fonction.
+3. Logs AWS CloudWatch (conseillé)
 
-    - Importez le SDK X-Ray dans votre fonction et ajustez toutes les bibliothèques prises en charge. X-Ray trace alors automatiquement tous les appels AWS et toutes les autres intégrations X-Ray prises en charge. Consultez un [exemple de ce processus dans Python][6].
-
-    - L'intégration X-Ray de Datadog prend en charge les annotations et les sous-segments personnalisés.
-
-    **Remarque** : les traces sont retardées d'environ 5 minutes. Il s'agit de la vitesse à laquelle Datadog interroge les API AWS X-Ray.
-
-3. Logs AWS CloudWatch (facultatifs)
-
-    Installez cette intégration si vous souhaitez visualiser les logs de vos fonctions Lambda dans la page détaillée des fonctions. Elle permet également de remplir votre tableau de fonctions avec les métriques supplémentaires, comme Memory Used (avg) et Last Start.
+    Installez cette intégration si vous souhaitez visualiser les logs de vos fonctions Lambda sur la page détaillée des fonctions. Elle permet également d'ajouter des métriques supplémentaires sur le tableau de vos fonctions, telles que Memory Used (avg) et Last Start.
 
     Pour l'activer, consultez la [documentation relative à l'envoi de logs Lambda à Datadog][2].
 
@@ -77,13 +64,13 @@ Ajoutez les autorisations suivantes dans votre stratégie IAM Datadog :
 
 ### Filtrage
 
-Utilisez la fonctionnalité de recherche à facettes qui figure à gauche de la page pour limiter le nombre de fonctions affichées. Tous les tags personnalisés et AWS peuvent être utilisés en tant que filtres.
+Utilisez la fonctionnalité de recherche à facettes sur la gauche de la page pour limiter le nombre de fonctions affichées. Tous les tags personnalisés et AWS peuvent être utilisés en tant que filtres.
 
 ### Sélectionner des métriques dans le tableau
 
-L'icône en forme d'engrenage des paramètres vous permet de cocher ou de décocher des colonnes de métriques dans le tableau de fonctions. Vous trouverez ci-dessous la liste des métriques, le type d'intégration associé ainsi qu'une mention indiquant si la colonne s'affiche ou non par défaut :
+L'icône en forme d'engrenage des paramètres vous permet de cocher ou de décocher des colonnes de métriques dans le tableau de fonctions. Vous trouverez ci-dessous un tableau de métriques, les types d'intégration qui leur sont associés ainsi qu'une mention indiquant si la colonne s'affiche ou non par défaut :
 
-| Métrique                | Type   | Valeur par défaut |
+| Métrique                | Type   | Default |
 |-----------------------|--------|---------|
 | Invocations           | Métrique | Oui     |
 | Duration (Avg)        | Métrique | Oui     |
@@ -103,7 +90,7 @@ Cliquez sur une fonction spécifique dans le tableau de synthèse des fonctions 
 
 {{< img src="graphing/infrastructure/serverless/functiondetailview.png" alt="Informatique sans serveur - Vue détaillée des fonctions" responsive="true">}}
 
-### Sélecteur de durée et graphiques de synthèse
+### Graphiques de synthèse et sélecteur d'intervalle
 
 Utilisez les graphiques de synthèse en haut de l'écran et le sélecteur de durée pour afficher l'intervalle qui vous intéresse. Tout changement d'intervalle entraîne la mise à jour de la page entière, y compris des traces et logs affichés.
 
@@ -125,15 +112,15 @@ Cliquez sur une trace spécifique pour ouvrir la vue détaillée de cette trace.
 
 {{< img src="graphing/infrastructure/serverless/traces2.png" alt="Traces" responsive="true">}}
 
-Datadog fournit des traces sans serveur spécialement formatées pour améliorer leur lisibilité et facilité d'utilisation. Cliquez sur la span d'une autre fonction Lambda pour créer un lien vers la page détaillée de la fonction. Vous pourrez ainsi facilement accéder à une autre fonction qui fait partie de la trace.
+Datadog fournit des traces sans serveur spécialement formatées pour améliorer leur lisibilité et facilité d'utilisation. Cliquez sur la span à partir d'une autre fonction Lambda pour créer un lien vers la page détaillée de la fonction. Vous pouvez ainsi passer d'une fonction de la trace à une autre en toute simplicité.
 
 ### Logs
 
-Tous les logs de cette fonction et toutes les fonctions appelées sont également indiqués dans la page détaillée. Affinez l'intervalle de la page en sélectionnant un moment précis pour afficher les logs d'un instant donné pertinent. Cliquez sur les logs du tableau pour afficher tous leurs détails.
+Tous les logs émis par une fonction et toutes les fonctions que celle-ci appelle s'affichent également sur la page détaillée. Affinez l'intervalle de la page en sélectionnant un moment précis pour afficher les logs d'un instant donné. Cliquez sur les logs du tableau pour afficher tous leurs détails.
 
 {{< img src="graphing/infrastructure/serverless/logs.png" alt="logs" responsive="true">}}
 
-### Erreurs
+### Errors
 
 L'onglet des erreurs remonte les exceptions qui se sont produites pendant la durée de la trace. Cette fonctionnalité permet de comprendre rapidement les problèmes survenus pendant l'exécution.
 
@@ -148,4 +135,4 @@ L'onglet des erreurs remonte les exceptions qui se sont produites pendant la dur
 [3]: /fr/integrations/amazon_web_services
 [4]: /fr/help
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[6]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
+[6]: /fr/integrations/amazon_xray

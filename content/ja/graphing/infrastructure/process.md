@@ -45,8 +45,8 @@ process_config:
 設定が完了したら、[Agent を再起動][2]します。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /ja/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[1]: /ja/agent/guide/agent-configuration-files/
+[2]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
