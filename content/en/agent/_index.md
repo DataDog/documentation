@@ -26,7 +26,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Agent v7 is available. <a href="/agent/version/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
+Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## Overview
