@@ -60,6 +60,7 @@ clean-integrations:  ## remove built integrations files.
 			-a -not -name 'amazon_eks_fargate.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'pivotal_platform.md' \
+			-a -not -name 'carbon_black.md' \
 		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 		  -a -not -name 'fluentbit.md' \
