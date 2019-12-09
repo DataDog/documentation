@@ -441,7 +441,7 @@ Où :
 
 **Remarque** : `datadog.conf` est automatiquement converti en `datadog.yaml` lors de l'upgrade.
 
-[1]: /fr/agent/?tab=agentv6#agent-architecture
+[1]: /fr/agent/#agent-architecture
 [2]: /fr/agent/guide/agent-commands
 [3]: /fr/developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md

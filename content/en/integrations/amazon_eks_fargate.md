@@ -79,6 +79,7 @@ rules:
     resources:
       - nodes/metrics
       - nodes/spec
+      - nodes/stats
       - nodes/proxy
       - nodes/pods
       - nodes/healthz

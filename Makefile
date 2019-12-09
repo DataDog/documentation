@@ -59,8 +59,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'amazon_vpc.md' \
 			-a -not -name 'amazon_eks_fargate.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
-			-a -not -name 'carbon_black.md' \
-	    -a -not -name 'cloud_foundry.md' \
+	    -a -not -name 'pivotal_platform.md' \
 		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 		  -a -not -name 'fluentbit.md' \
@@ -112,13 +111,6 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
-	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
-
-# ARGS=<file> will format that file
-# ARGS=<directory> will recursively format all english markdown files inside <directory>
-# empty ARGS will format all english markdown files inside content/en/
-link-formatting: source-helpers
-	@local/bin/sh/format-links.sh $(ARGS)
 
 start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."

@@ -117,9 +117,9 @@ Tag spans in the form of key-value pairs to correlate a request in the *Trace Vi
 
 {{< img src="tracing/visualization/span_tag.png" alt="span tag" responsive="true">}}
 
-To get started tagging spans in your application, check out this [walkthrough][18].
+To get started tagging spans in your application, check out this [walkthrough][11].
 
-After a tag has been added to a span, search and query on the tag in App Analytics by clicking on the tag to add it as a [facet][19]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
+After a tag has been added to a span, search and query on the tag in App Analytics by clicking on the tag to add it as a [facet][18]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
@@ -145,5 +145,4 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 [15]: https://app.datadoghq.com/monitors#/create
 [16]: /tracing/app_analytics/#automatic-configuration
 [17]: /tracing/app_analytics/#configure-additional-services-optional
-[18]: /tracing/advanced/adding_metadata_to_spans
-[19]: /tracing/advanced/search/#facets
+[18]: /tracing/advanced/search/#facets

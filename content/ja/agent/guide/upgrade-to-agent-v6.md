@@ -441,7 +441,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **注**: アップグレード時に、`datadog.conf` は自動的に `datadog.yaml` にアップグレードされます。
 
-[1]: /ja/agent/?tab=agentv6#agent-architecture
+[1]: /ja/agent/#agent-architecture
 [2]: /ja/agent/guide/agent-commands
 [3]: /ja/developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md

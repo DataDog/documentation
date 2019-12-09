@@ -1,54 +1,56 @@
 ---
-integration_title: Cloud Foundry
-name: cloudfoundry
+integration_title: Pivotal Platform
+name: pivotal_platform
 kind: integration
-git_integration_title: cloud_foundry
+git_integration_title: pivotal_platform
 newhlevel: true
 updated_for_agent: 6.0
-description: "Track the health of your Cloud Foundry VMs and the jobs they run."
+description: "Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run."
 is_public: true
-public_title: Datadog-Cloud Foundry Integration
-short_description: "Track the health of your Cloud Foundry VMs and the jobs they run."
+public_title: Datadog-Pivotal Platform Integration
+short_description: "Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run."
 categories:
 - provisioning
 - configuration & deployment
 - log collection
-doc_link: /integrations/cloud_foundry/
+aliases:
+  - /integrations/cloud_foundry/
+doc_link: /integrations/pivotal_platform/
 ddtype: check
 ---
 
 ## Overview
 
-Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your [application on Cloud Foundry](#monitor-your-applications-on-cloud-foundry) and your [Cloud Foundry cluster](#monitor-your-cloud-foundry-cluster).
+Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your [application on Pivotal Platform](#monitor-your-applications-on-pivotal-platform) and your [Pivotal Platform cluster](#monitor-your-pivotal-platform-cluster).
 
-There are three main components for the Cloud Foundry integration with Datadog. First, use the Buildback to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
+There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
 
-For Pivotal Cloud Foundry, you have the option to install the Datadog integration tiles with Ops Manager:
+For Pivotal Platform, you have the option to install the Datadog integration tiles with Ops Manager:
 
-* [Datadog Cluster Monitoring for PCF][1]
-* [Datadog Application Monitoring for PCF][2]
+* [Datadog Cluster Monitoring for Pivotal Platform][1]
+* [Datadog Application Monitoring for Pivotal Platform][2]
 
-## Monitor Your Applications on Cloud Foundry
+## Monitor Your Applications on Pivotal Platform
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][3] for Cloud Foundry that installs a [Datadog DogStatsD binary][4] and Datadog Agent in the container your app is running on.
+Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][3] for Pivotal Platform that installs a [Datadog DogStatsD binary][4] and Datadog Agent in the container your app is running on.
 
 ### Setup
 
-#### Cloud Foundry < 1.12
+#### Pivotal Platform < 1.12
 
-Our buildpack uses the Cloud Foundry [multi-buildpack][5] feature that was introduced in version `1.12`.
+Our buildpack uses the Pivotal Platform [multi-buildpack][5] feature that was introduced in version `1.12`.
 
-For older versions, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][6]. You must install and configure this backport in order to use Datadog's buildpack:
+For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][6]. You must install and configure this backport in order to use Datadog's buildpack:
 
 1. **Upload the multi-buildpack back-port.**
-  Download the latest [multi-build pack release][6] and upload it to your Cloud Foundry environment.
+  Download the latest [multi-build pack release][6] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
 2. **Add a multi-buildpack manifest to your application.**
-  As detailed [on the multi-buildpack back-port repo][7], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
+  As detailed [on the multi-buildpack back-port repo][7], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
 
       ```yaml
       buildpacks:
@@ -63,33 +65,33 @@ For older versions, Cloud Foundry provides a back-port of this feature in the fo
 
     Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-    **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to [cloud foundry documentation][8] about buildpacks.
+    **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to [Pivotal Platform documentation][8] about buildpacks.
 
 3. **Push your application with the multi-buildpack**
-  Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application:
+  Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
     ```
 
-#### Cloud Foundry >= 1.12
+#### Pivotal Platform >= 1.12
 
-1. **Upload the Datadog Cloud Foundry Buildpack.**
-  Download the latest Datadog [build pack release][9] and upload it to your Cloud Foundry environment.
+1. **Upload the Datadog Pivotal Platform Buildpack.**
+  Download the latest Datadog [build pack release][9] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
 2. **Push your application with the Datadog buildpack and your buildpacks.**
-  The process to push your application with multiple buildpacks is described in the [Cloud Foundry documentation][8].
+  The process to push your application with multiple buildpacks is described in the [Pivotal Platform documentation][8].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-  **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Cloud Foundry documentation][8] about buildpacks.
+  **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Pivotal Platform documentation][8] about buildpacks.
 
 #### Meta-Buildpack **(deprecated)**
 
@@ -118,7 +120,7 @@ The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for 
 
 ##### Enable log collection
 
-To start collecting logs from your application in Cloud Foundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
+To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```
 cf set-env <YOUR_APP_NAME> RUN_AGENT true
@@ -144,7 +146,7 @@ The following parameters can be used to configure log collection:
 
 **Example**:
 
-A Java application named `app01` is running in Cloud Foundry. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
+A Java application named `app01` is running in Pivotal Platform. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
 ```
 # Redirect Stdout/Stderr to port 10514
@@ -167,9 +169,9 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 ### DogStatsD
 
-See [the DogStatsD documentation][13] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
+See [the DogStatsD documentation][4] for more information. There is [a list of DogStatsD libraries][13] compatible with a wide range of applications.
 
-## Monitor Your Cloud Foundry Cluster
+## Monitor Your Pivotal Platform Cluster
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
@@ -177,16 +179,16 @@ There are two points of integration with Datadog, each of which achieves a diffe
 * **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
-These integrations are meant for Cloud Foundry deployment administrators, not end users.
+These integrations are meant for Pivotal Platform deployment administrators, not end users.
 </div>
 
 ### Prerequisites
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][15] or [v2][16].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][14] or [v2][15].
 
 ### Install the Datadog Agent BOSH Release
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][16] (the same way a Director deploys the BOSH Agent to all nodes).
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -198,7 +200,7 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-age
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][18].
+If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][17].
 
 #### Configure the Agent as an addon in your BOSH Director
 
@@ -261,7 +263,7 @@ The configuration under each check name should look the same as if you were conf
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
-To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][19] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][18] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 
@@ -273,7 +275,7 @@ bosh update runtime-config runtime.yml
 bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 ```
 
-#### Redeploy your Cloud Foundry deployment
+#### Redeploy your Pivotal Platform deployment
 
 ```
 # BOSH CLI v1
@@ -288,7 +290,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][20] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
@@ -298,7 +300,7 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 ### Deploy the Datadog Firehose Nozzle
 
-Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing Cloud Foundry deployment that has a working Loggregator Firehose.
+Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing Pivotal Platform deployment that has a working Loggregator Firehose.
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -310,7 +312,7 @@ bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/da
 bosh upload-release -e <BOSH_ENV> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][21].
+If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][20].
 
 #### Configure a UAA client
 
@@ -332,7 +334,7 @@ Redeploy the deployment to add the user.
 
 #### Add Nozzle jobs
 
-Configure one or more Nozzle jobs in your main Cloud Foundry deployment manifest (e.g. cf-manifest.yml):
+Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
 
 ```
 jobs:
@@ -366,7 +368,7 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ```
 
-To see all available configuration options, check the [Datadog Firehose Nozzle repository][22].
+To see all available configuration options, check the [Datadog Firehose Nozzle repository][21].
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
@@ -394,7 +396,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 #### Verify the Nozzle is collecting
 
-On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
+On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
 
@@ -402,7 +404,7 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning `clo
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][24], [network][25], [disk][26], and [ntp][27] metrics).
+The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][23], [network][24], [disk][25], and [ntp][26] metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
@@ -420,18 +422,17 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /tracing/setup
 [12]: https://docs.datadoghq.com/agent/logs/proxy
-[13]: /developers/metrics/dogstatsd_metrics_submission
-[14]: /libraries
-[15]: https://bosh.io/docs/bosh-cli.html
-[16]: https://bosh.io/docs/cli-v2.html#install
-[17]: https://bosh.io/docs/runtime-config.html#addons
-[18]: https://github.com/DataDog/datadog-agent-boshrelease
-[19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
-[20]: https://app.datadoghq.com/graphing/infrastructure/hostmap
-[21]: https://github.com/DataDog/datadog-firehose-nozzle-release
-[22]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
-[23]: https://app.datadoghq.com/metric/explorer
-[24]: /integrations/system/#metrics
-[25]: /integrations/network/#metrics
-[26]: /integrations/disk/#metrics
-[27]: /integrations/ntp/#metrics
+[13]: /libraries
+[14]: https://bosh.io/docs/bosh-cli.html
+[15]: https://bosh.io/docs/cli-v2.html#install
+[16]: https://bosh.io/docs/runtime-config.html#addons
+[17]: https://github.com/DataDog/datadog-agent-boshrelease
+[18]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
+[19]: https://app.datadoghq.com/graphing/infrastructure/hostmap
+[20]: https://github.com/DataDog/datadog-firehose-nozzle-release
+[21]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
+[22]: https://app.datadoghq.com/metric/explorer
+[23]: /integrations/system/#metrics
+[24]: /integrations/network/#metrics
+[25]: /integrations/disk/#metrics
+[26]: /integrations/ntp/#metrics

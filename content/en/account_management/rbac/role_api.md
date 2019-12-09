@@ -34,10 +34,10 @@ Returns all roles, including their names and UUIDs.
 
 ##### ARGUMENTS
 
-* **`page[size]`** [*optional*, *default*=**0**]:
-Page number of roles to return for a given page.
-* **`page[count]`** [*optional*, *default*=**10**]:
+* **`page[size]`** [*optional*, *default*=**10**]:
 Number of roles to return for a given page.
+* **`page[number]`** [*optional*, *default*=**0**]:
+Specific page number to return.
 * **`sort`** [*optional*, *default*=**name**]:
 Sort roles depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
   * Options: **name**, **modified_at**, **user_count**
@@ -539,7 +539,9 @@ curl -X POST \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also be found through the https://app.datadoghq.com/api/v2/current_user endpoint, specifically `id` under data type, `users`.
+
+See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -617,7 +619,9 @@ curl -X DELETE \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].  See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. `USER_UUID` can also be found through the https://app.datadoghq.com/api/v2/current_user endpoint, specifically `id` under data type, `users`.
+
+See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -680,10 +684,10 @@ Get all users of a role
 
 ##### ARGUMENTS
 
-* **`page[size]`** [*optional*, *default*=**0**]:
-Page number of users to return for a given page.
-* **`page[count]`** [*optional*, *default*=**10**]:
+* **`page[size]`** [*optional*, *default*=**10**]:
 Number of users to return for a given page.
+* **`page[number]`** [*optional*, *default*=**0**]:
+Specific page number to return.
 * **`sort`** [*optional*, *default*=**name**]:
 Sort users depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
   * Options: **name**, **email**, **status**

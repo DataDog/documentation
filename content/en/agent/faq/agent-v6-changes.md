@@ -50,7 +50,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 ##### Changed
 
 | Previous Name               | Updated Name                 | Notes                                                                                             |
-| --------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+|-----------------------------|------------------------------|---------------------------------------------------------------------------------------------------|
 | `proxy_host`                | `proxy`                      | Proxy settings are now expressed as a list of URIs. See the [proxy][3] documentation for details. |
 | `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection.                                                                      |
 | `collector_log_file`        | `log_file`                   |                                                                                                   |
@@ -61,7 +61,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 ##### Removed
 
 | Name                         | Notes                                                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `proxy_port`                 | Superseded by `proxy`, see the [proxy][3] documentation for details.                                                  |
 | `proxy_user`                 | Superseded by `proxy`, see the [proxy][3] documentation for details.                                                  |
 | `proxy_password`             | Superseded by `proxy`, see the [proxy][3] documentation for details.                                                  |
@@ -129,7 +129,7 @@ To keep backwards compatibility, the Agent picks up configuration files in the f
 Agent v6 supports the following options in a check's `instance` section:
 
 | Option                    | Description                                                                                                               |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | `min_collection_interval` | Set a different run interval in seconds, for checks that should run less frequently than the default, 15-second interval. |
 | `empty_default_hostname`  | Submit metrics, events, and service checks with no hostname when set to `true`.                                           |
 | `tags`                    | Send custom tags in addition to the tags sent by the check.                                                               |
@@ -147,7 +147,7 @@ Most of the environment variables used in Agent v6 are **different** from previo
 For v6.4.0+, the Agent proxy settings can be overridden with the following environment variables:
 
 | Env variable        | Description                                                       |
-| ------------------- | ----------------------------------------------------------------- |
+|---------------------|-------------------------------------------------------------------|
 | `DD_PROXY_HTTP`     | The URL to use as a proxy for `http` requests.                    |
 | `DD_PROXY_HTTPS`    | The URL to use as a proxy for `https` requests.                   |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
@@ -212,7 +212,7 @@ The lifecycle commands didn't change if the `service` wrapper command is availab
 For example, on Ubuntu, the _lifecycle commands_ are:
 
 | Command                              | Description                            |
-| ------------------------------------ | -------------------------------------- |
+|--------------------------------------|----------------------------------------|
 | `sudo service datadog-agent start`   | Start the Agent as a service.          |
 | `sudo service datadog-agent stop`    | Stop the Agent service.                |
 | `sudo service datadog-agent restart` | Restart the Agent service.             |
@@ -226,7 +226,7 @@ If the `service` wrapper command is not available on your system, use:
 If you're unsure which init system your distribution uses by default, refer to the table below:
 
 | distribution \ init system      | upstart                   | systemd                   | sysvinit                                  | Notes                         |
-| ------------------------------- | ------------------------- | ------------------------- | ----------------------------------------- | ----------------------------- |
+|---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
 | Amazon Linux (<= 2017.09)       | <i class="icon-tick"></i> |                           |                                           |                               |
 | Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-tick"></i> |                                           |                               |
 | CentOS/RHEL 6                   | <i class="icon-tick"></i> |                           |                                           |                               |
@@ -243,7 +243,7 @@ If you're unsure which init system your distribution uses by default, refer to t
 With Agent v6+, other functionalities are provided by the Agent binary itself as sub-commands and shouldn't be invoked with `service`/`systemctl`/`initctl`. Here are a few examples:
 
 | Agent v5 Command                                  | Agent v6 Command                                       | Notes                          |
-| ------------------------------------------------- | ------------------------------------------------------ | ------------------------------ |
+|---------------------------------------------------|--------------------------------------------------------|--------------------------------|
 | `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of a running Agent |
 | `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                     |
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display Agent usage            |
@@ -274,7 +274,7 @@ The major changes for Agent v6 on MacOS are:
 **Example changes**:
 
 | Agent v5 Command                   | Agent v6 Command                                     | Description                    |
-| ---------------------------------- | ---------------------------------------------------- | ------------------------------ |
+|------------------------------------|------------------------------------------------------|--------------------------------|
 | `datadog-agent start`              | `launchctl start com.datadoghq.agent` or systray app | Start the Agent as a service   |
 | `datadog-agent stop`               | `launchctl stop com.datadoghq.agent` or systray app  | Stop the Agent service         |
 | `datadog-agent restart`            | _run `stop` then `start`_ or systray app             | Restart the Agent service      |
@@ -397,7 +397,7 @@ Agent v6 does not ship the `jmxterm` JAR. To download and use `jmxterm`, refer t
 Troubleshooting command syntax has changed. These commands are available for v6.2.0+, for earlier versions, refer to the [JMX Agent troubleshooting][2]:
 
 | Command                                                | Description                                                                                                                                                     |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instance configurations.                                                                                        |
 | `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that match one of your instance configurations but are not being collected because it would exceed the number of metrics that can be collected. |
 | `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are collected by your current instances configuration.                                                                                     |
@@ -409,7 +409,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 `sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://github.com/jiaqi/jmxterm
-[2]: /integrations/faq/troubleshooting-jmx-integrations/2#agent-troubleshooting
+[2]: /integrations/faq/troubleshooting-jmx-integrations/#agent-troubleshooting
 {{% /tab %}}
 {{% tab "System" %}}
 

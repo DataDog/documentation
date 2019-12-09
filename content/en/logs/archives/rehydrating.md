@@ -18,11 +18,11 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 ### Add new historical views
 
-1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation][4] are available for rehydrating.
+1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
 2. **Choose the time period** for which you wish to rehydrate log events. The time period must be older than 24 hours.
 
-3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message.
+3. **Input the query**. The query syntax is the same as that of the [log explorer search][4], but is limited to log attributes, [reserved attributes][5], and free text search on the message.
 
 4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
@@ -58,7 +58,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][7] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][6] to archive your logs in the available destinations.
 
 ### Permissions
 
@@ -104,10 +104,10 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" responsive="true" style="width:75%;">}}
 
+
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
-
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
@@ -116,8 +116,8 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" responsive="true" style="width:75%;">}}
 
-[1]: https://console.cloud.google.com/iam-admin/iam
 
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -126,7 +126,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [1]: /logs/explorer
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
-[4]: #permissions
-[5]: /logs/explorer/search
-[6]: /logs/?tab=ussite#reserved-attributes
-[7]: /logs/archives/
+[4]: /logs/explorer/search
+[5]: /logs/?tab=ussite#reserved-attributes
+[6]: /logs/archives/

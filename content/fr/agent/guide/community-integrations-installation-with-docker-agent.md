@@ -52,7 +52,7 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 [1]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: /fr/getting_started/integrations
-[4]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -91,9 +91,9 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /fr/getting_started/integrations
-[5]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[5]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
