@@ -18,7 +18,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They are desig
 
 ## Notebook List
 
-The [Notebook List][1] allows you to view and search previously created notebooks. For each notebook, the name, creator, and last modified date are displayed. The notebooks are grouped by:
+The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. The notebooks are grouped by:
 
 * **My Notebooks**: Notebooks created by you.
 * **Other Notebooks**: Notebooks created by other members of your team.
@@ -88,7 +88,7 @@ The following layout options are available by clicking the grid icon on the righ
 
 Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
 
-When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute, which means a cell's URL remains the same if it's moved to a new position within the notebook.
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute: a cell's URL remains the same even if it is moved to a new position within the notebook.
 
 ### Save, rename, clone, delete
 
