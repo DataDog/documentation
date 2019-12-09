@@ -112,7 +112,7 @@ To make sure the Log Management solution functions in an optimal way, we set the
 
 ### Limits applied to ingested log events
 
-* The size of a log event should not exceed 256K bytes.
+* The size of a log event should not exceed 25K bytes.
 * Log events can be submitted up to 6h in the past and 2h in the future.
 * A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's key should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
