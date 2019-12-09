@@ -36,7 +36,7 @@ Pour supprimer un conteneur Docker donné avec le nom `<NOM>` d'Autodiscovery, a
 ac_exclude: [name:<NOM>]
 ```
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
@@ -92,7 +92,7 @@ Pour inclure un conteneur Docker donné avec le nom `<NOM>` d'Autodiscovery, ajo
 ac_include: [name:<NOM>]
 ```
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
@@ -129,4 +129,4 @@ Pour désactiver cette fonctionnalité et inclure les conteneurs pause dans le p
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
