@@ -1,6 +1,13 @@
 ---
 title: Compose and the Datadog Agent
 kind: faq
+further_reading:
+- link: "https://github.com/DataDog/docker-compose-example"
+  tag: "Github"
+  text: "Using Docker Compose with Datadog Example"
+- link: "/agent/docker"
+  tag: "Documentation"
+  text: "Datadog Docker Agent documentation"
 ---
 
 [Compose][1] is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.
@@ -33,9 +40,9 @@ services:
     image: datadog/agent:latest
     environment:
      - DD_API_KEY=${DD_API_KEY}
-    volumes:
+   volumes:
      - /var/run/docker.sock:/var/run/docker.sock
-     - /proc/mounts:/host/proc/mounts:ro
+     - /proc/:/host/proc/:ro
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
@@ -54,9 +61,9 @@ services:
     environment:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE=datadoghq.eu
-    volumes:
+   volumes:
      - /var/run/docker.sock:/var/run/docker.sock
-     - /proc/mounts:/host/proc/mounts:ro
+     - /proc/:/host/proc/:ro
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
@@ -71,9 +78,10 @@ The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tel
       - host: redis
         port: 6379
 
-For a detailed example, see the [Docker Compose example project on GitHub][4].
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.docker.com/compose/overview
 [2]: /agent/docker
 [3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[4]: https://github.com/DataDog/docker-compose-example
