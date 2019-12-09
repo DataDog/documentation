@@ -24,7 +24,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
 [Learn more about the APM & Distributed Tracing terminology][4]
 
-**Note**: Each span within a trace should use the same `trace_id`. However, `trace_id` and `span_id` require different values. To avoid unexpected value returns, use different values or a unique scheme.
+**Note**: Each span within a trace should use the same `trace_id`. However, `trace_id` and `span_id` must have different values.
 
 **ARGUMENTS**:
 
