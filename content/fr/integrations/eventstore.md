@@ -112,7 +112,7 @@ Besoin d'aide ? Contactez le [responsable de la maintenance][12] de cette inté
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
 
