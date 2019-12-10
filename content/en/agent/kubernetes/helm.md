@@ -47,7 +47,7 @@ For other platforms and methods of installing Helm, refer to the [Helm documenta
 
 ### Installing the Helm server (Tiller)
 
-**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart][11] if this applies to you. 
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart][#installing-the-datadog-helm-chart] if this applies to you. 
 
 
 If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
@@ -264,4 +264,3 @@ This command removes all Kubernetes components associated with the chart and del
 [8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
-[11]: https://docs.datadoghq.com/agent/kubernetes/helm/?tab=macoshomebrew#installing-the-datadog-helm-chart
