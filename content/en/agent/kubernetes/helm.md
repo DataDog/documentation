@@ -47,7 +47,7 @@ For other platforms and methods of installing Helm, refer to the [Helm documenta
 
 ### Installing the Helm server (Tiller)
 
-**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart][#installing-the-datadog-helm-chart] if this applies to you. 
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you. 
 
 
 If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
