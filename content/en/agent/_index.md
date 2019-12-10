@@ -50,7 +50,6 @@ Packages are available for 64-bit x86 and Arm v8 architectures. For other archit
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
