@@ -23,7 +23,7 @@ Datadog’s [Logging without Limits][1]&trade; removes logging limitations by de
 
 For example, you may not find it beneficial to monitor every 200 response code log from a web server, as you know this is not relevant for troubleshooting. It’s more beneficial to filter these logs so when an issue occurs, you can quickly drill down to the source of the problem and resolve it.
 
-This guide uses Logging without Limits&trade; to identify a noisy logging service and status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track data over time.
+This guide uses Logging without Limits&trade; to identify a noisy logging service and status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track KPI over time.
 
 ## 1. Identify a noisy logging service and status
 
@@ -47,18 +47,18 @@ Switch to the [patterns][2] view, located next to the graph view, to view the pa
 
 The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel will populate with information about your noisiest status pattern.
 
-## 3. Set an exclusion filter for noisy logs
+## 3. Exclude noisy logs with an exclusion filter
 
-The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom parsing rule based on the selected pattern. This parsing rule is required when creating an [exclusion filter][3]. Exclusion filters remove noisy logs from your Log Explorer, but these logs still have the ability to be tracked with custom metrics.
+The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index. Note that excluded logs are still available in the [live tail view](/logs/live_tail/) and can be [sent to log archives](/logs/archives/), or used to [generate metrics](/logs/logs_to_metrics/).
 
 **To create an exclusion filter for your top log pattern**:
 
 1. Click on your top pattern from the pattern view list.
-2. Click the parsing rule button in the top right corner to automatically generate a parsing rule associated with this pattern.
-3. Copy the parsing rule and navigate to the Configuration page under Logs in the main left hand navigation.
+2. Click the *View All* button in the top right corner to automatically generate the search query associated with this pattern.
+3. Copy the search query and navigate to the Configuration page under Logs in the main left hand navigation.
 4. Select indexes and click on your associated index. This will populate the option to add an exclusion filter.
 5. Select “Add an Exclusion Filter”.
-6. Input the filter name, define the exclusion query by pasting the parsing rule you copied, and set an exclusion percentage.
+6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
 
 You can also generate the parsing rule by clicking the **View All** button in the pattern contextual panel and selecting the **</>** option next to the search bar.
 
@@ -68,15 +68,15 @@ Exclusion filters can be disabled at any time by toggling the disable option to 
 
 ## 4. Generate metrics to monitor excluded logs
 
-When a log pattern is excluded from Log Explorer, it still is available to view in [Live Tail][4]. However, you can continue to monitor excluded logs over time to generate KPIs from logs at ingest level by creating a new [log-based metric][5]. You can also create an [anomaly detection][6] monitor to notify you of any important changes to an excluded status.
+When a subset of logs is excluded from your index, those logs are still available to view in [Live Tail][4]. Moreover, you can generate KPIs from those excluded logs over time at ingest level by creating a new [log-based metric][5]. This metric can then be used for example to create an [anomaly detection][6] monitor to notify you of any unexpected changes.
 
 ### Add a new log-based metric
 
 To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][7], then the **New Metric+** button.
 
-1. Under Define Query, select the **</>** option and input your parsing rule.
+1. Under Define Query, input the search query you got from the pattern in step 2.
 2. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
-3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][8] following the <KEY>:<VALUE> format. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][8] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 4. Name your metric: Log-based metric names must follow the [naming metric convention][10].
 
 ### Create an anomaly detection monitor
@@ -90,7 +90,7 @@ Anomaly detection is an algorithmic feature that identifies when a metric is beh
 4. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
 5. Save the monitor.
 
-When an anomaly is detected, an alert will appear in [Monitors -> Trigger Monitors][12].
+When an anomaly is detected, an alert appears in [Monitors -> Trigger Monitors][12].
 
 ## Further Reading
 
