@@ -36,7 +36,7 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][3].
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
-[2]: /account/settings#api
+[2]: https://app.datadoghq.com/account/settings#api
 [3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
