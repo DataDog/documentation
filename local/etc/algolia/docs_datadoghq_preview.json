@@ -27,6 +27,7 @@
           "monitors",
           "tracing",
           "logs",
+          "synthetics",
           "developers",
           "account_management",
           "synthetics"
@@ -109,6 +110,8 @@
           "monitors",
           "security",
           "synthetics",
+          "real_user_monitoring",
+          "network_performance_monitoring",
           "tagging",
           "tracing",
           "watchdog"
@@ -308,6 +311,11 @@
       [
         "aws",
         "amazon web service"
+      ],
+      [
+        "RUM",
+        "rum",
+        "real user monitoring"
       ]
     ]
   },

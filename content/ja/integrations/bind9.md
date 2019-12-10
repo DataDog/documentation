@@ -123,11 +123,11 @@ Agent ベースのインテグレーションのテストおよび開発方法�
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [6]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [7]: https://docs.datadoghq.com/ja/getting_started/integrations
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: #metrics
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#service-status
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [13]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
 [14]: https://docs.datadoghq.com/ja/developers
 

@@ -149,7 +149,7 @@ To verify the result, search for the metrics using the [Metrics Explorer][5]:
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [3]: https://docs.mongodb.com/manual/reference/command
-[4]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: /graphing/metrics/explorer
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /agent/guide/agent-log-files

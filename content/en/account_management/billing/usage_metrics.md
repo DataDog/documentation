@@ -1,6 +1,6 @@
 ---
 title: Estimated Usage Metrics
-kind: faq
+kind: documentation
 ---
 
 ## Overview
@@ -20,14 +20,13 @@ Datadog calculates your current estimated usage in near real-time. Estimate usag
 
 Estimated usage metrics are generally available for the following usage types:
 
-| Usage Type         | Metric                                                                                              |
-|--------------------|-----------------------------------------------------------------------------------------------------|
-| Infrastructure Hosts       | `datadog.estimated_usage.hosts`                                                                     |
-| Containers         | `datadog.estimated_usage.containers`                                                                |
-| Custom Metrics     | `datadog.estimated_usage.metrics.custom`                                                            |
+| Usage Type           | Metric                                   |
+|----------------------|------------------------------------------|
+| Infrastructure Hosts | `datadog.estimated_usage.hosts`          |
+| Containers           | `datadog.estimated_usage.containers`     |
+| Custom Metrics       | `datadog.estimated_usage.metrics.custom` |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" responsive="true">}}
-
 
 ### Multi-Org usage
 

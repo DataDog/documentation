@@ -31,7 +31,7 @@ Screenboards are useful for displaying key performance metrics on large screens 
 
 ### Generate public URL
 
-Share a screenboard with external users by generating a public URL. For more details, see [Screenboard sharing][1].
+Share a screenboard with external users by generating a public URL. For more details, see [sharing screenboards][1].
 
 ### Display UTC time
 
@@ -73,7 +73,7 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/shared_graph/#screenboard-sharing
+[1]: /graphing/dashboards/shared_graph/#screenboards
 [2]: /graphing/event_stream
 [3]: /account_management/team/#datadog-user-roles
 [4]: /graphing/dashboards/#copy-import-export

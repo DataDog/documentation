@@ -1,6 +1,6 @@
 ---
 title: Estimate and Control APM Usage
-kind: faq
+kind: documentation
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
@@ -22,16 +22,31 @@ App Analytics Pricing depends on the retention policy of Analyzed Spans. You can
 Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.
 
 ### Analyzed Span Estimator
+[Analyzed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
-To estimate the number of Analyzed Spans a service is sending per day or per month, use the [Analyzed Span Estimator page][7]. This is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
+To estimate the total number of analyzed spans expected to be sent per service per day or per month, follow these steps:
+
+1. Enable APM on all the hosts for which you want to estimate the volume of Analyzed Spans.
+2. In the [**Analyzed Span Estimator** view][7], select the services that you want to turn APM Analytics on.
+3. **Total Estimated APM Volume** denotes the estimated total volume of Analyzed Spans for all services, per day and per month. Each row corresponding to the service represents the estimated volume of analyzed spans for that service, per day.
+
+  {{< img src="tracing/faq/apm_span_estimator.png" alt="Analyzed Span Estimator">}}
+
+4. To estimate total cost, multiply the total volume * [analyzed span retention pricing][8].
+
+For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (default retention), you can calculate:
+
+1,750,000,000 Analyzed Spans per month * $1.70 / 1 million Analyzed Spans = **$2,975 per month** for App Analytics
 
 ### Analyzed Span Filtering
 
-[Span filtering][8] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span.
+[Span filtering][9] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span.
 
-For cost control, you can reduce the number of billable Analyzed Spans by [filtering Analyzed Spans][8]. This has no effect on [Trace Sampling][9]. If a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+For cost control, you can reduce the number of billable Analyzed Spans by [filtering Analyzed Spans][9]. This has no effect on [Trace Sampling][10]. If a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-You can also choose to enable App Analytics per service, or per integration in code using [these language specific instructions][10].
+
+You can also choose to enable App Analytics per service, or per integration in code using [these language specific instructions][11].
+
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing
@@ -40,6 +55,7 @@ You can also choose to enable App Analytics per service, or per integration in c
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com
 [7]: https://app.datadoghq.com/apm/docs/trace-search
-[8]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
-[9]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage
-[10]: tracing/app_analytics/?tab=java#configure-additional-services-optional
+[8]: /account_management/billing/usage_control_apm/#choose-analyzed-span-retention
+[9]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
+[10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage
+[11]: /tracing/app_analytics/?tab=java#configure-additional-services-optional

@@ -286,8 +286,8 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 
 
 [1]: https://app.datadoghq.com/compatibility_check
-[2]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /developers/integrations/new_check_howto/#building
 [5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
 [6]: https://docs.python.org/3.1/library/2to3.html

@@ -135,14 +135,14 @@ Export your App Analytics:
 
 * To create a new [APM monitor][4]:
     This feature is not available yet.
-* To an existing [Timeboard][5]:
+* To an existing [Timeboard][8]:
     This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
 
 ## Traces in Dashboard
 
-Export [App Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
+Export [App Analytics][7] from the Trace search or build them directly in your [Dashboard][9] alongside metrics and logs.
 
-[Learn more about the timeseries widget][9]
+[Learn more about the timeseries widget][7]
 
 ## Further Reading
 
@@ -152,8 +152,8 @@ Export [App Analytics][7] from the Trace search or build them directly in your [
 [2]: /tracing/advanced/search/#measures
 [3]: /tracing/visualization/#trace
 [4]: /monitors/monitor_types/apm
-[5]: /graphing/dashboards/timeboard
+[5]: /tracing/app_analytics
 [6]: /help
 [7]: /graphing/widgets/timeseries
-[8]: /graphing/dashboards
-[9]: /graphing/widgets/timeseries
+[8]: /graphing/dashboards/timeboard
+[9]: /graphing/dashboards

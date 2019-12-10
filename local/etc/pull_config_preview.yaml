@@ -84,13 +84,13 @@
 
   - repo_name: datadog-cloudformation-resources
     contents:
-      - action: pull-and-push-file
-        branch: master
-        globs:
-          - 'README.md'
-        options:
-          dest_path: '/developers/'
-          file_name: 'amazon_cloudformation.md'
-          front_matters:
-            title: Datadog-Amazon CloudFormation
-            kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/developers/'
+        file_name: 'amazon_cloudformation.md'
+        front_matters:
+          title: Datadog-Amazon CloudFormation
+          kind: documentation

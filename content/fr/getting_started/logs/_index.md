@@ -218,7 +218,7 @@ On obtient alors ce qui suit sur la [page Log Explorer][2] :
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/account/settings#api
-[8]: /fr/agent/guide/agent-commands/?tab=agentv6#agent-information
+[8]: /fr/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[11]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[10]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory

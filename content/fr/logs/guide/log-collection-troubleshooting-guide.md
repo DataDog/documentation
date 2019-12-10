@@ -185,10 +185,10 @@ Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][13].
 
 [1]: /fr/logs
 [2]: /fr/help
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[4]: /fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: /fr/agent/guide/agent-commands/#restart-the-agent
+[4]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://en.wikipedia.org/wiki/Chmod
-[6]: https://docs.datadoghq.com/fr/integrations/journald/#pagetitle
+[6]: https://docs.datadoghq.com/fr/integrations/journald/
 [7]: https://codebeautify.org/yaml-validator
 [8]: /fr/agent/docker/log/?tab=containerinstallation#filter-containers
 [9]: /fr/agent/autodiscovery/integrations/?tab=dockerlabel#configuration

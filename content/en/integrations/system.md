@@ -127,7 +127,7 @@ The System Swap check does not include any service checks.
 [2]: /integrations/disk
 [3]: /integrations/process
 [4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
 [7]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example
