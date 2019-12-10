@@ -21,7 +21,8 @@ further_reading:
 
 Datadog’s [Logging without Limits][1]&trade; removes logging limitations by decoupling log ingestion and indexing to give flexibility around log management. High volume log indexing is helpful when monitoring every aspect of a service, but it can be a distraction when serious problems occur.
 
-For example, you may not find it beneficial to monitor every 200 response code log from a web server, as you know this is not relevant for troubleshooting. It’s more beneficial to filter these logs so when an issue occurs, you can quickly drill down to the source of the problem and resolve it.
+For example, you may not find it beneficial to monitor every 200 response code log from a web server, as it's not always relevant for troubleshooting issues. While 4xx and 5xx response code are critical to investigate problems. 
+However, exhaustive KPI (i.e. Number of requests, ratio of errors, number of visitors...) should be computed upon all logs (including the 200 response code logs).
 
 This guide uses Logging without Limits&trade; to identify a noisy logging service and status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track KPI over time.
 
