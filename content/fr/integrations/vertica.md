@@ -1,31 +1,31 @@
 ---
-assets:
-  dashboards: {}
-  monitors: {}
-  service_checks: assets/service_checks.json
-categories:
+"assets":
+  "dashboards": {}
+  "monitors": {}
+  "service_checks": assets/service_checks.json
+"categories":
 - data store
 - log collection
-creates_events: false
-ddtype: check
-dependencies:
+"creates_events": !!bool "false"
+"ddtype": check
+"dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/vertica/README.md"
-display_name: Vertica
-git_integration_title: vertica
-guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
-integration_id: vertica
-integration_title: Vertica
-is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vertica.
-metric_to_check: vertica.connection.active
-name: vertica
-public_title: Intégration Datadog/Vertica
-short_description: Surveillez le stockage des projections de Vertica, l'utilisation de ses licences, et plus encore.
-support: core
-supported_os:
+"display_name": Vertica
+"git_integration_title": vertica
+"guid": 884d1895-6791-487c-ac8e-7ccaad45db0b
+"integration_id": vertica
+"integration_title": Vertica
+"is_public": !!bool "true"
+"kind": integration
+"maintainer": help@datadoghq.com
+"manifest_version": 1.0.0
+"metric_prefix": vertica.
+"metric_to_check": vertica.connection.active
+"name": vertica
+"public_title": Intégration Datadog/Vertica
+"short_description": Surveillez le stockage des projections de Vertica, l'utilisation de ses licences, et plus encore.
+"support": core
+"supported_os":
 - linux
 - mac_os
 - windows

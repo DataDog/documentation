@@ -52,7 +52,7 @@ GROUP_SCHEMA = {
 | Parameter     | Type             | Required | Description                                                                                                                                             |
 | ------        | -----            | -------- | -----                                                                                                                                                   |
 | `type`        | string           | yes      | Type of widget, for the group widget use `group`.                                                                                                   |
-| `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `WIDGET_DEFINITION`. |
+| `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][2] to learn how to build the `WIDGET_DEFINITION`. |
 | `layout_type` | string           | yes      | Layout type of the group, value available is `ordered`                                                                                                  |
 | `title`       | string           | no       | Title of your widget.                                                                                                                                   |
 
@@ -63,4 +63,3 @@ GROUP_SCHEMA = {
 
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/widget_json

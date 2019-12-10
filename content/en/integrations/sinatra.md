@@ -93,5 +93,5 @@ This logger uses the common Apache Access format and generates logs in the follo
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
 [6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
-[7]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[8]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: /agent/guide/agent-commands/#restart-the-agent

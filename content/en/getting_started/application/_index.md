@@ -9,6 +9,8 @@ further_reading:
 
 This page gives a high level overview of the capabilities for the Datadog [US site][1] and [EU site][2].
 
+**Note**: The navigation of the Datadog application switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+
 ## Integrations
 
 {{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}

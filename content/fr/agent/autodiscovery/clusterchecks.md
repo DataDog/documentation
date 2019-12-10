@@ -275,16 +275,14 @@ La commande `status` de l'Agent doit indiquer que l'instance de check est en cou
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/autodiscovery
-[2]: /fr/agent/kubernetes/cluster
-[3]: /fr/agent/kubernetes/cluster/#cluster-checks-autodiscovery
+[2]: /fr/agent/cluster_agent
+[3]: /fr/agent/cluster_agent/setup
 [4]: /fr/agent/autodiscovery/clusterchecks/#setting-up-check-configurations
 [5]: /fr/agent/autodiscovery/clusterchecks
 [6]: /fr/agent/guide/agent-commands
 [7]: /fr/developers/write_agent_check
 [8]: /fr/integrations/mysql
-[9]: /fr/agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[10]: /fr/agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[9]: /fr/agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[10]: /fr/agent/autodiscovery/template_variables
 [11]: /fr/integrations/http_check
 [12]: /fr/integrations/nginx
-[13]: https://github.com/helm/charts/tree/master/stable/datadog
-[14]: /fr/agent/autodiscovery/clusterchecks/#cluster-agent-setup

@@ -253,7 +253,7 @@ supported:
 Injection styles can be configured using:
 
 * System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-* Environment Variable: `DD_PROPAGATION_STYLE_INJECTION=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
 The value of the property or environment variable is a comma (or
 space) separated list of header styles that are enabled for

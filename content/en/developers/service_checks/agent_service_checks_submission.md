@@ -3,7 +3,7 @@ title: "Service Check Submission: Agent Check"
 kind: documentation
 disable_toc: true
 further_reading:
-- link: "developers/write_agent_check/?tab=agentv6"
+- link: "developers/write_agent_check/"
   tag: "Documentation"
   text: "Write an Agent Custom Check"
 ---
@@ -85,5 +85,5 @@ Here is an example of a dummy Agent check sending only one service check periodi
 [1]: /developers/write_agent_check
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
 [5]: https://app.datadoghq.com/check/summary

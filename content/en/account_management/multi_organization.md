@@ -41,7 +41,7 @@ The custom sub-domain feature is not enabled by default. Contact [Datadog suppor
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
 
-For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][10], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
 ## Setting up SAML
 
@@ -64,4 +64,3 @@ To configure SAML for multi-organizations, use the following procedure:
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /graphing/dashboards/screenboard/#backup-my-screenboard
 [9]: /monitors/manage_monitor
-[10]: /account_management/#managing-your-organizations

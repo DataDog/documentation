@@ -112,8 +112,8 @@ Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Ag
 
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#stop-the-agent
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#start-the-agent
+[2]: /fr/agent/guide/agent-commands/#stop-the-agent
+[3]: /fr/agent/guide/agent-commands/#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -152,6 +152,6 @@ Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour d�
 [2]: /fr/agent/guide/agent-log-files
 [3]: /fr/agent/faq/error-restarting-agent-already-listening-on-a-configured-port
 [4]: /fr/agent/faq/network
-[5]: /fr/agent/guide/agent-commands/?tab=agentv6#start-the-agent
+[5]: /fr/agent/guide/agent-commands/#start-the-agent
 [6]: /fr/help
 [7]: /fr/integrations/process

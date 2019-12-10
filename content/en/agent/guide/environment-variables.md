@@ -11,7 +11,7 @@ further_reading:
   - link: "/logs/log_collection/#container-log-collection"
     tag: "Documentation"
     text: "Container log collection"
-  - link: "/agent/proxy/?tab=agentv6#environment-variables"
+  - link: "/agent/proxy/#environment-variables"
     tag: "Documentation"
     text: "Proxy environment variables"
 ---
@@ -24,7 +24,7 @@ For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#
 
 For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables.
 
-## General use 
+## General use
 
 In general, use the following rules:
 
@@ -69,6 +69,6 @@ In general, use the following rules:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /agent/proxy/?tab=agentv6#environment-variables
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/proxy/#environment-variables
 [3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go

@@ -32,7 +32,7 @@ An integration, at the highest level, is when you assemble a unified system from
 
 Datadog provides three main types of integrations:
 
-* **Agent-based integrations** are installed with the Datadog Agent and use a Python class called `check` to define the metrics to collect.
+* **Agent-based integrations** are installed with the Datadog Agent and use a Python class method called `check` to define the metrics to collect.
 * **Authentication (crawler) based integrations** are set up in the [Datadog App][2] where you provide credentials for obtaining metrics with the API. These include popular integrations like [Slack][3],[AWS][4],[Azure][5], and [PagerDuty][6].
 * **Library integrations** use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8], or [Python][9].
 
@@ -153,7 +153,7 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [7]: /api
 [8]: /integrations/node
 [9]: /integrations/python
-[10]: /developers/write_agent_check/?tab=agentv6
+[10]: /developers/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
@@ -165,11 +165,11 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [19]: https://app.datadoghq.com/account/settings#agent
 [20]: https://app.datadoghq.com/account/settings#agent/docker
 [21]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[22]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[22]: /agent/guide/agent-commands/#restart-the-agent
 [23]: /developers/integrations/new_check_howto/#param-specification
 [24]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [25]: /tagging
-[26]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[26]: /agent/guide/agent-commands/#agent-status-and-information
 [27]: /security
 [28]: /graphing/metrics/explorer
 [29]: /graphing
@@ -177,9 +177,9 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [31]: /logs
 [32]: /tracing
 [33]: /synthetics
-[34]: /agent/troubleshooting/?tab=agentv6
+[34]: /agent/troubleshooting/
 [35]: /help
-[36]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[36]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [37]: https://app.datadoghq.com/event/stream
 [38]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [39]: /developers/metrics

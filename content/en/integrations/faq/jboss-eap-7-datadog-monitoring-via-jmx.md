@@ -46,9 +46,9 @@ For `<socket-binding-group name="full-ha-sockets" default-interface="public">`, 
 
 
 Add an application user for the Application Realm:
- 
+
 ```
-JBoss_EAP_INSTALL_DIR/bin/add_user.sh 
+JBoss_EAP_INSTALL_DIR/bin/add_user.sh
 ```
 
 **Note**: Be sure to add to the Application Realm.
@@ -76,7 +76,7 @@ Edit `/etc/datadog-agent/conf.d/jmx.d/conf.yaml` file to activate the jmx integr
 
 ```
 init_config:
- 
+
   custom_jar_paths:
     - JBoss_EAP_INSTALL_LOCATION/bin/client/jboss-cli-client.jar
 
@@ -102,7 +102,7 @@ Finally, run the [Datadog Agent status command][3] to ensure Datadog can connect
 ========
 JMXFetch
 ========
- Initialized checks 
+ Initialized checks
 08/10/2018 4
  ==================
  jmx
@@ -117,5 +117,5 @@ JMXFetch
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/centos
-[2]: /agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[3]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/guide/agent-commands/#agent-status-and-information

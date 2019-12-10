@@ -79,7 +79,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/#pagetitle
+[1]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /fr/tracing/visualization/#resources

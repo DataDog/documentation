@@ -45,7 +45,7 @@ config_providers:
 
 
 [1]: /ja/agent/docker/log/?tab=hostinstallation
-[2]: /ja/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}

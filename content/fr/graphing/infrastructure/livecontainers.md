@@ -45,7 +45,7 @@ config_providers:
 
 
 [1]: /fr/agent/docker/log/?tab=hostinstallation
-[2]: /fr/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
