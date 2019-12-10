@@ -30,6 +30,8 @@ This guide uses Logging without Limits&trade; to identify a noisy logging servic
 
 Your noisiest logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
 
+{{< img src="logs/guide/logging-without-limits.gif" alt="Log Patterns View" responsive="true" style="width:100%;">}}
+
 **To identify your noisiest logging service and status**:
 
 1. In Log Explorer, select graph view located next to the search bar. 
@@ -44,24 +46,24 @@ Your noisiest logging service contains several logs, some of which may be irrele
 ## 2. Identify noisy logs with log patterns
 Switch to the [patterns][2] view, located next to the graph view, to view the patterns associated with your service and status.
 
-{{< img src="logs/guide/log-patterns.png" alt="Log Patterns View" responsive="true" style="width:75%;">}}
+{{< img src="logs/guide/patterns.png" alt="Log Patterns View" responsive="true" style="width:100%;">}}
 
 The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel will populate with information about your noisiest status pattern.
 
 ## 3. Exclude noisy logs with an exclusion filter
 
-The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index. Note that excluded logs are still available in the [live tail view](/logs/live_tail/) and can be [sent to log archives](/logs/archives/), or used to [generate metrics](/logs/logs_to_metrics/).
+The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index. Note that excluded logs are still available in the [live tail view][3] and can be [sent to log archives][4], or used to [generate metrics][5].
 
 **To create an exclusion filter for your top log pattern**:
 
+{{< img src="logs/guide/exclusion-filter.png" alt="Log Patterns View" responsive="true" style="width:100%;">}}
+
 1. Click on your top pattern from the pattern view list.
 2. Click the *View All* button in the top right corner to automatically generate the search query associated with this pattern.
-3. Copy the search query and navigate to the Configuration page under Logs in the main left hand navigation.
-4. Select indexes and click on your associated index. This will populate the option to add an exclusion filter.
+3. Select the `</>` option to the right of the search query and copy the search query.
+4. Navigate to the Configuration page under Logs in the main left hand navigation. Select indexes and click on your associated index. This will populate the option to add an exclusion filter.
 5. Select “Add an Exclusion Filter”.
 6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
-
-You can also generate the parsing rule by clicking the **View All** button in the pattern contextual panel and selecting the **</>** option next to the search bar.
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
@@ -69,29 +71,29 @@ Exclusion filters can be disabled at any time by toggling the disable option to 
 
 ## 4. Generate metrics to monitor excluded logs
 
-When a subset of logs is excluded from your index, those logs are still available to view in [Live Tail][4]. Moreover, you can generate KPIs from those excluded logs over time at ingest level by creating a new [log-based metric][5]. This metric can then be used for example to create an [anomaly detection][6] monitor to notify you of any unexpected changes.
+{{< img src="logs/guide/generate-metric.png" alt="Log Patterns View" responsive="true" style="width:75%;">}}
+
+When a subset of logs is excluded from your index, those logs are still available to view in [Live Tail][6]. Moreover, you can generate KPIs from those excluded logs over time at ingest level by creating a new [log-based metric][7]. This metric can then be used for example to create an [anomaly detection][8] monitor to notify you of any unexpected changes.
 
 ### Add a new log-based metric
-
-To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][7], then the **New Metric+** button.
+To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][9], then the **New Metric+** button.
 
 1. Under Define Query, input the search query you got from the pattern in step 2.
 2. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
-3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][8] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-4. Name your metric: Log-based metric names must follow the [naming metric convention][10].
+3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][10] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][11]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+4. Name your metric: Log-based metric names must follow the [naming metric convention][12].
 
 ### Create an anomaly detection monitor
-{{< img src="logs/guide/anomaly-detection-monitor.gif" alt="Anomaly Detection Monitor" responsive="true" style="width:75%;">}}
-
 Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs will alert you of any changes based on your set alert conditions.
 
-1. To set an anomaly detection monitor, go to [Monitors -> New Monitor -> Anomaly][11].
-2. Set the detection method as anomaly detection.
-3. Define your metric by selecting the **</>** option and paste your parsing rule into the search bar.
-4. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
-5. Save the monitor.
+{{< img src="logs/guide/anomaly-alert.png" alt="Log Patterns View" responsive="true" style="width:75%;">}}
 
-When an anomaly is detected, an alert appears in [Monitors -> Trigger Monitors][12].
+1. To set an anomaly detection monitor, go to [Monitors -> New Monitor -> Anomaly][13].
+2. Enter the log-based metric you defined in the previous section.
+3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
+4. Save the monitor.
+
+When an anomaly is detected, an alert will be sent to all who are tagged. This alert can also be found in [Monitors -> Trigger Monitors][14].
 
 ## Further Reading
 
@@ -99,13 +101,15 @@ When an anomaly is detected, an alert appears in [Monitors -> Trigger Monitors][
 
 [1]: /logs
 [2]: /logs/explorer/patterns
-[3]: /logs/indexes/#exclusion-filters
-[4]: /logs/live_tail/#overview
+[3]: /logs/live_tail
+[4]: /logs/archives
 [5]: /logs/logs_to_metrics
-[6]: /monitors/monitor_types/anomaly
-[7]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[8]: /tagging
-[9]: /developers/metrics/custom_metrics
-[10]: /developers/metrics/#naming-metrics
-[11]: https://app.datadoghq.com/monitors#create/anomaly
-[12]: https://app.datadoghq.com/monitors/triggered
+[6]: /logs/live_tail/#overview
+[7]: /logs/logs_to_metrics
+[8]: /monitors/monitor_types/anomaly
+[9]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[10]: /tagging
+[11]: /developers/metrics/custom_metrics
+[12]: /developers/metrics/#naming-metrics
+[13]: https://app.datadoghq.com/monitors#create/anomaly
+[14]: https://app.datadoghq.com/monitors/triggered
