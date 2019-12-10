@@ -31,7 +31,7 @@ const getPath = (data) => {
     return a.pathname;
 }
 
-export function handleLanguageBasedRedirects(debug=false) {
+export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
 
 	const supportedLanguages = navigator.language || navigator.browserLanguage;
