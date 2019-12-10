@@ -7,7 +7,10 @@ kind: documentation
 
 *Recommended for expert users only.*
 
-Appending the `.rollup()` function at the end of a query allows you to do a custom [time aggregation][1], i.e. it defines what are the time intervals for your graph and how data points are aggregated within a given time interval.
+Appending the `.rollup()` function at the end of a query allows you to do a custom [time aggregation][1], i.e. this function enables you to define:
+
+* The time intervals for a given graph  ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
+* How data points are aggregated within a given time interval.
 
 The function takes two parameters, `<METHOD>` and `<TIME>`: `.rollup(<METHOD>,<TIME>)`.
 
@@ -24,7 +27,7 @@ And now it is the same metric, graphed using a day-long rollup with `.rollup(avg
 
 {{< img src="graphing/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
 
-## Maximum number of points displayed
+## Rollup Interval: Enforced vs Custom
 
 When graphing, Datadog imposes a limit of 350 points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric.
 
