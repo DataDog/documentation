@@ -28,8 +28,16 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-XXXXXXX
+1. [Download the Datadog Agent installer][1].
+2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2]: `<DATADOG_API_KEY>`
+4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
+**Note**: Links to all available versions of the Windows Installer are [provided in JSON format][3].
+
+[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
+[2]: /account/settings#api
+[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -60,8 +68,10 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-XXXXX
+1. Upgrade your Agent to version 6 following the [Manual upgrade process][1].
+2. Follow the [From Agent v6 to Agent v7](#from-agent-v6-to-agent-v7) upgrade instructions.
 
+[1]: /agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
