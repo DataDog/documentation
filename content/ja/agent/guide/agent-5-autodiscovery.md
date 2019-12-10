@@ -3,7 +3,7 @@ title: Agent v5 を使用したオートディスカバリー
 kind: ガイド
 private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+  - /ja/agent/faq/agent-5-autodiscovery
 ---
 <div class="alert alert-info">
 オートディスカバリーは、これまでのサービスディスカバリーのことです。Agent のコード内や一部の構成オプションでは、引き続きサービスディスカバリーと呼びます。
