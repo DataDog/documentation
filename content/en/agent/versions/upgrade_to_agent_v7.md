@@ -30,7 +30,7 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 
 1. [Download the Datadog Agent installer][1].
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2]: `<DATADOG_API_KEY>`
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][3].
