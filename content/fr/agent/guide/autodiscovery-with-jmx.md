@@ -61,7 +61,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 
 4. [Activez Autodiscovery sur votre Agent][4].
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /fr/agent/autodiscovery/template_variables
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [4]: /fr/agent/autodiscovery/?tab=agent#docker-autodiscovery
@@ -126,7 +126,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 
    Ensuite, utilisez cette nouvelle image personnalisée en tant qu'Agent conteneurisé classique.
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /fr/integrations/activemq
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example

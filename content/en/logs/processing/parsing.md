@@ -55,6 +55,7 @@ After processing, the following structured log is generated:
   * Each rule can reference parsing rules defined above itself in the list.
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
+* Properties with null or empty values are not displayed.
 
 ### Matcher and Filter
 
@@ -172,12 +173,15 @@ Some examples demonstrating how to use parsers:
 This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
 
 * `separatorStr`: defines the separator. Defaults to `=`.
-* `characterWhiteList`: defines additional non-escaped value chars. Defaults to `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes. Default behavior detects quotes (`<>`, `""`, etc.). 
+* `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
+* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
 
-**Note**: If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+**Note**: 
 
-Use filters such as **keyvalue()** to more-easily map strings to attributes:
+* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
+* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+
+Use filters such as **keyvalue** to more-easily map strings to attributes:
 
 Log:
 

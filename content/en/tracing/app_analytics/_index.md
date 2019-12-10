@@ -476,9 +476,12 @@ An [Analyzed Span][2] represents the top [span][3] for a [service][4], including
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
 
+**Note**: If you have [manually configured the sampling priority][7] to `MANUAL_KEEP` for a given service. Analyzed Spans filtering is then overridden for that service which means that its spans are billable spans.
+
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /tracing/visualization/#trace
+[7]: /tracing/guide/trace_sampling_and_storage/#sampling-rules

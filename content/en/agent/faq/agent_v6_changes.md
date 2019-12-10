@@ -411,7 +411,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 `sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://github.com/jiaqi/jmxterm
-[2]: /integrations/faq/troubleshooting-jmx-integrations/2#agent-troubleshooting
+[2]: /integrations/faq/troubleshooting-jmx-integrations/#agent-troubleshooting
 {{% /tab %}}
 {{% tab "System" %}}
 

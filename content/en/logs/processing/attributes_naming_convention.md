@@ -131,7 +131,7 @@ The following attributes are related to the geolocation of IP addresses used in 
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][7], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][3], web applications servers, etc.
 
 #### Common attributes
 
@@ -148,7 +148,7 @@ Typical integrations relying on these attributes include [Apache][1], Rails, [AW
 
 #### URL details attributes
 
-These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][8]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][7]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                        |
 | :---                           | :---     | :----                                                                                 |
@@ -160,7 +160,7 @@ These attributes provide details about the parsed parts of the HTTP URL. They ar
 
 #### User-Agent attributes
 
-These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][9]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][8]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :---                                    | :---     | :----                                          |
@@ -194,7 +194,7 @@ Database related attributes are prefixed by `db`.
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][10], [MySQL][11], [RDS][12], [Elasticsearch][13], etc.
+Typical integrations relying on these attributes are: [Cassandra][9], [MySQL][10], [RDS][11], [Elasticsearch][12], etc.
 
 ### Performance
 
@@ -205,7 +205,7 @@ Performance metrics attributes.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][14] for [trace search][15].
+Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][13] for [trace search][14].
 
 ### User related attributes
 
@@ -229,7 +229,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [Logstash][20], etc.
+Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc.
 
 ## Further Reading
 
@@ -241,17 +241,16 @@ Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng
 [4]: /integrations/nginx
 [5]: /integrations/haproxy
 [6]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[7]: /integrations/amazon_elb
-[8]: /logs/processing/processors/#url-parser
-[9]: /logs/processing/processors/#user-agent-parser
-[10]: /integrations/cassandra
-[11]: /integrations/mysql
-[12]: /integrations/amazon_rds
-[13]: /integrations/elastic
-[14]: /logs/explorer/?tab=measures#setup
-[15]: /tracing/advanced/search
-[16]: /integrations/rsyslog
-[17]: /integrations/nxlog
-[18]: /integrations/syslog_ng
-[19]: /integrations/fluentd
-[20]: /integrations/logstash
+[7]: /logs/processing/processors/#url-parser
+[8]: /logs/processing/processors/#user-agent-parser
+[9]: /integrations/cassandra
+[10]: /integrations/mysql
+[11]: /integrations/amazon_rds
+[12]: /integrations/elastic
+[13]: /logs/explorer/?tab=measures#setup
+[14]: /tracing/advanced/search
+[15]: /integrations/rsyslog
+[16]: /integrations/nxlog
+[17]: /integrations/syslog_ng
+[18]: /integrations/fluentd
+[19]: /integrations/logstash

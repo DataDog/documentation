@@ -9,13 +9,14 @@ content/integrations/*.md
 !content/integrations/_index.md
 !content/integrations/cloudability.md
 !content/integrations/cloudcheckr.md
+!content/integrations/carbon_black.md
 !content/integrations/jenkins.md
 !content/integrations/kubernetes.md
 !content/integrations/rss.md
 !content/integrations/system.md
 !content/integrations/tcprtt.md
-!content/integrations/cloud_foundry.md
 !content/integrations/adobe_experience_manager.md
+!content/integrations/pivotal_platform.md
 !content/integrations/alcide.md
 !content/integrations/amazon_eks_fargate.md
 !content/integrations/iam_access_analyzer.md
@@ -40,8 +41,8 @@ content/en/integrations/*.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcprtt.md
-!content/en/integrations/cloud_foundry.md
 !content/en/integrations/adobe_experience_manager.md
+!content/en/integrations/pivotal_platform.md
 !content/en/integrations/alcide.md
 !content/en/integrations/amazon_eks_fargate.md
 !content/en/integrations/iam_access_analyzer.md

@@ -344,10 +344,10 @@ This example sets the environment variable:
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
+
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 [3]: /tracing/setup/dotnet/#configuration
-
 {{% /tab %}}
 {{% tab "PHP" %}}
 

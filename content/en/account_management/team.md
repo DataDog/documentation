@@ -29,7 +29,7 @@ Datadog provides 3 user roles:
 
 * **Standard users** can view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.
 
-* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or where a member of one business unit needs to share a [dashboard][6] with someone outside their unit.
+* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or where a member of one business unit needs to share a [dashboard][2] with someone outside their unit.
 
 ## Disable existing members
 
@@ -56,4 +56,3 @@ Datadog provides 3 user roles:
 [3]: /monitors
 [4]: /graphing/event_stream
 [5]: /graphing/notebooks
-[6]: /graphing/dashboards

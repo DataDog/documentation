@@ -218,7 +218,7 @@ $ echo "New line of log in the log file" >> log_file_to_monitor.log
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/account/settings#api
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6#agent-information
+[8]: /ja/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[11]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[10]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory

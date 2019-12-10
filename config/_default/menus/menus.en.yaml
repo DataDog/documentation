@@ -1052,7 +1052,7 @@ main:
     weight: 8
 
   - name: "Correlate Logs with Metrics"
-    url: "graphing/dashboards/timeboard/#correlation-between-logs-and-metrics"
+    url: "graphing/dashboards/timeboard/#graph-menu"
     parent: "log_management"
     identifier: "logs_metrics_correlation"
     weight: 9

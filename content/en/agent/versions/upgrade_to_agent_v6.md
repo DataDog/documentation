@@ -361,8 +361,7 @@ With:
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.3.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

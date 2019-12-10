@@ -55,5 +55,3 @@ In each instance, you can define the behavior of global custom queries using the
 | `extend` | `global_custom_queries` is used in addition to `custom_queries`. |
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/vertica/datadog_checks/vertica/data/conf.yaml.example#L54-L71
-[2]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/ConceptsGuide/Other/Transactions.htm
-[3]: /api

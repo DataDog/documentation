@@ -67,6 +67,6 @@ logs:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/help
