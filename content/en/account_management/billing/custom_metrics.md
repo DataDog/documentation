@@ -37,7 +37,7 @@ For more real-time tracking of the count of custom metrics for a particular metr
 
 A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag):
 
-* Reporting the same metric name on different hosts results in multiple custom metrics.
+* Reporting the same metric name on multiple hosts results in multiple custom metrics.
 * Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric -- see Example 3 and 4 below.
 * Reordering of tag values doesn’t add uniqueness, the following combinations are the same custom metric:
 
