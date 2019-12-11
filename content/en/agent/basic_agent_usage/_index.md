@@ -206,17 +206,17 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 ## CLI
 
-With Agent v6+ the command line interface is sub-command based. To run a sub-command, first invoke the Agent binary:
+With Agent v6+, the command line interface is based on subcommands. To run a subcommand, first invoke the Agent binary:
 
 ```
 <AGENT_BIN_PATH> <SUB_COMMAND> <OPTIONS>
 ```
 
-| Sub-Command       | Notes                                                                      |
+| Subcommand       | Notes                                                                      |
 |-------------------|----------------------------------------------------------------------------|
 | `check`           | Run the specified check                                                    |
 | `configcheck`     | Print all configurations loaded & resolved of a running Agent              |
-| `diagnose`        | Execute some connectivity diagnosis on your system                         |
+| `diagnose`        | Execute connectivity diagnosis on your system                         |
 | `flare`           | [Collect a flare and send it to Datadog][1]                                |
 | `health`          | Print the current Agent health                                             |
 | `help`            | Help about any command                                                     |
@@ -224,7 +224,7 @@ With Agent v6+ the command line interface is sub-command based. To run a sub-com
 | `import`          | Import and convert configuration files from previous versions of the Agent |
 | `installservice`  | Installs the Agent within the service control manager                      |
 | `launch-gui`      | Starts the Datadog Agent GUI                                               |
-| `regimport`       | Import the registry settings into datadog.yaml                             |
+| `regimport`       | Import the registry settings into `datadog.yaml`                             |
 | `remove-service`  | Removes the Agent from the service control manager                         |
 | `restart`         | [Restart the Agent][2]                                                     |
 | `restart-service` | Restarts the Agent within the service control manager                      |
@@ -236,7 +236,7 @@ With Agent v6+ the command line interface is sub-command based. To run a sub-com
 | `version`         | Print the version info                                                     |
 
 
-**Note**: Some options have their own set of flags and options detailed in a help message. For example, to see how to use the `check` sub-command, run:
+**Note**: Some options have their own set of flags and options detailed in a help message. For example, to see how to use the `check` subcommand, run:
 
 ```
 <AGENT_BIN_PATH> check --help
