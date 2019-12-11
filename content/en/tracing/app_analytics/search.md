@@ -8,7 +8,7 @@ aliases:
   - /tracing/search
   - /tracing/getting_further/apm_events/
   - /tracing/trace_search_and_analytics/search/
-  - /tracing/app_analytics/search
+  - /tracing/advanced/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -125,6 +125,16 @@ The time range allows you to display traces within a given time period. Quickly 
 
 ## Trace Stream
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+
+### Analyzed Spans
+
+When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][3].
+An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][4].
+
+To start collecting Analyzed Spans, [enable App Analytics for your services][5].
+
+**Note**: Select If selected, Analyzed Spans listed in the trace stream have a sampled trace associated with them, so you can display the full [trace][6] with all its associated [spans][7].
+
 
 Sort the list by clicking the **date** column header.
 

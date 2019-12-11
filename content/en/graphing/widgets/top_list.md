@@ -65,11 +65,11 @@ TOPLIST_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                      |
+| Parameter  | Type             | Required | Description                                                                                                                                                  |
+|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`     | string           | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                       |
 | `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+| `title`    | string           | no       | Title of your widget.                                                                                                                                        |
 
 
 Additional properties allowed in the `request` object:
@@ -81,7 +81,7 @@ Additional properties allowed in the `request` object:
 ```
 
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
-| ------                | -----  | ----     | -------                                                                                                                                                         |
+|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
 
@@ -90,7 +90,7 @@ Additional properties allowed in the `request` object:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing
-[2]: /tracing/advanced/search/#search-bar
+[2]: /tracing/app_analytics/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [4]: /graphing/graphing_json/widget_json
 [5]: /graphing/graphing_json/request_json
