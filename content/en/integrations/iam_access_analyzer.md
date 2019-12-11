@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - log collection
+- security
 ddtype: crawler
 description: 
 short_description: 
@@ -27,15 +28,23 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 
-2. Create a new rule in CloudWatch EventBridge with the `aws.access-analyzer` Event type:
+2. Create a new rule in AWS EventBridge.
 
-3. Define the Datadog Lambda function as the target.
+3. Define a custom event pattern with the following:
 
-4. Save your rule.
+```
+{
+  "source": [
+    "aws.access-analyzer"
+  ]
+}
+```
 
-2. Add IAM Access Analyzer as a trigger for your Lambda function. Choose **CloudWatch Events** as a trigger and create an `IAM_ACCESS_RULE`:
+4. Select an event bus and define the Datadog Lambda function as the target.
 
-3. Visit your [Log Explorer][2] to start exploring your logs.
+5. Save your rule.
 
-[1]: /integrations/amazon_web_services/#create-a-new-lambda-function
+6. Visit your [Log Explorer][2] to start exploring your logs.
+
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [2]: https://app.datadoghq.com/logs
