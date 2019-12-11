@@ -71,11 +71,11 @@ For a given resource, Datadog provides you a [span][5] analysis breakdown of all
 
 The displayed metrics represent, per span:
 
-| Metric            | Description                                                                                             |
-| ------            | --------                                                                                                |
-| `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once. |
-| `% of traces`     | Percentage of traces including the current resource where the span is present at least once. |
-| `Avg duration`    | Average duration of the span, for traces including the current resource, where the span is present at least once.                |
+| Metric            | Description                                                                                                                                        |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.                     |
+| `% of traces`     | Percentage of traces including the current resource where the span is present at least once.                                                       |
+| `Avg duration`    | Average duration of the span, for traces including the current resource, where the span is present at least once.                                  |
 | `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
@@ -83,9 +83,7 @@ The displayed metrics represent, per span:
 
 ## Traces
 
-Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:
-
-[Refer to the dedicated trace documentation to learn more][6].
+Consult the list of [traces][6] associated with this resource thanks to the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
 
@@ -99,3 +97,4 @@ Consult the list of traces associated with this resource. Filter/sort this list 
 [4]: /graphing/dashboards/timeboard
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace
+[7]: /tracing/advanced/search
