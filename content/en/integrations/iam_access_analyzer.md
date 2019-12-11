@@ -30,7 +30,7 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 2. Create a new rule in AWS EventBridge.
 
-3. Define a custom event pattern with the following 
+3. Define a custom event pattern with the following:
 
 ```
 {
