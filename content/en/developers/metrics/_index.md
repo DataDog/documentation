@@ -67,7 +67,7 @@ You can also use one of the [Datadog-official and community contributed API and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<sup>(1)</sup> *[Some integrations do emit custom metrics][9]*
+<br><sup>(1)</sup> *[Some integrations do emit custom metrics][9]*
 
 [1]: /integrations
 [2]: /developers/metrics/dogstatsd_metrics_submission
