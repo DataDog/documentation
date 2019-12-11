@@ -32,13 +32,13 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 3. Define a custom event pattern with the following:
 
-```
-{
-  "source": [
-    "aws.access-analyzer"
-  ]
-}
-```
+	```
+	{
+	  "source": [
+	    "aws.access-analyzer"
+	  ]
+	}
+	```
 
 4. Select an event bus and define the Datadog Lambda function as the target.
 
