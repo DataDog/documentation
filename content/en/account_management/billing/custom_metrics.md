@@ -38,29 +38,29 @@ For more real-time tracking of the count of custom metrics for a particular metr
 A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag):
 
 * Reporting the same metric name on multiple hosts results in multiple custom metrics.
-* Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric -- see Example 3 and 4 below.
+* Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric. See the [Effect of Adding Tags](#effect-of-adding-tags) section.
 * Reordering of tag values doesn’t add uniqueness, the following combinations are the same custom metric:
 
   *  `metric_name{tag_1:value_1, tag_2:value_2}`
   *  `metric_name{tag_2:value_2, tag_1:value_1}`
 
-Find below some example of how to count your custom metrics, depending on your [submision type][9], the amount of custom metrics counted may differ:
+Find below some example of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submision type][9]:
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
 
-**Note**: This example uses a [`COUNT` metric type][1], but the count of custom metrics would have been the same with a [`GAUGE`][2] or a [`RATE`][3] metric type.
+The number of custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated the same way as shown below:
 
-Suppose you’re submitting a metric, `request.Count`, from two hosts (A,B), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
+Suppose you’re submitting a metric, `request.Count`, from two hosts (`host:A`,`host:B`), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
 
-* `endpoint`  that can take the value `X` or `Y`
-* `status` that can take the value `200` or `400`
+* `endpoint`  that can take the value `endpoint:X` or `endpoint:Y`
+* `status` that can take the value `status:200` or `status:400`
 
-Let’s assume that in your data, endpoint `X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
+Let’s assume that in your data, endpoint `endpoint:X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
 
 {{< img src="account_management/billing/custom_metrics/custom_metrics_host.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
 
-There are then **4 Custom metrics**, one for each unique combinations of metric name, host, and tag values for your `request.Count` metric. The custom metrics are listed below:
+`request.Count` reports then **4 distinct custom metrics**. The custom metrics are listed below:
 
 | Metric Name     | Tag Values                           |
 |-----------------|--------------------------------------|
@@ -69,73 +69,6 @@ There are then **4 Custom metrics**, one for each unique combinations of metric 
 | `request.Count` | `host:B`, `endpoint:X`, `status:400` |
 | `request.Count` | `host:B`, `endpoint:Y`, `status:200` |
 
-[1]: /developers/metrics/types/?tab=count
-[2]: /developers/metrics/types/?tab=gauge
-[3]: /developers/metrics/types/?tab=rate
-{{% /tab %}}
-{{% tab "Histogram" %}}
-
-**A HISTOGRAM metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the Agent-side aggregations: `count`, `sum`, `min`, `max`, and `avg`. [Learn more about HISTOGRAM metric type][1].
-
-Suppose you have a histogram metric measuring `request.Latency` for two endpoints `X` and `Y`  on a single host:
-
-|| INSERT IMAGE  ||
-
-The number of unique tag value combinations submitted for a `HISTOGRAM` metric with this tagging scheme is 2, but the Agent generates [5 custom metrics][1] for each of the original 2 unique tag value combinations to account for each Agent-side aggregations: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 10 custom metrics for this `HISTOGRAM` metric: :
-
-| Metric Name       | Tag Values             | Aggregations                            |
-|-------------------|------------------------|-----------------------------------------|
-| `request.Latency` | `host:A`, `endpoint:X` | `count`, `sum`, `min`, `max`, and `avg` |
-| `request.Latency` | `host:A`, `endpoint:Y` | `count`, `sum`, `min`, `max`, and `avg` |
-
-[1]: /developers/metrics/types/?tab=histogram
-{{% /tab %}}
-{{% tab "Distribution" %}}
-
-**A DISTRIBUTION metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the server-side aggregations  `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
-
-Suppose you have a distribution metric measuring `request.Latency` in which the following tag value combinations are present in your data as shown below:
-
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
-
-The number of unique combinations of metric name, host, and tag values submitted for a `GAUGE` metric with this tagging scheme is 4:
-
-| Metric Name       | Tag Values                           |
-|-------------------|--------------------------------------|
-| `request.Latency` | `host:A`, `endpoint:X`, `status:200` |
-| `request.Latency` | `host:B`, `endpoint:X`, `status:200` |
-| `request.Latency` | `host:B`, `endpoint:X`, `status:400` |
-| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` |
-
-Given `request.Latency` is submitted as a `DISTRIBUTION`, Datadog [stores 5 custom metrics][1] for each of the original 4 unique tag value combinations to account for server side-aggregations: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 20 custom metrics for this `DISTRIBUTION` metric:
-
-| Metric Name       | Tag Values                           | Aggregations                            |
-|-------------------|--------------------------------------|-----------------------------------------|
-| `request.Latency` | `host:A`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
-| `request.Latency` | `host:B`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
-| `request.Latency` | `host:B`, `endpoint:X`, `status:400` | `count`, `sum`, `min`, `max`, and `avg` |
-| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
-
-##### Distribution Metrics with Additional Percentile Aggregations
-
-[Adding additional percentile aggregations][2]: `p50`, `p75`, `p90`, `p95`, or `p99` to a distribution metric increases the number of distinct custom metrics reported. In order to support additional globally accurate percentile aggregations, a dedicated custom metric is created for a given aggregation per every potentially queryable tag value combination in your data. For instance let's say you have two hosts: `A` and `B` and you want to calculate the global `p50` (the median) of your requests latency over a given interval:
-
-| Host | Requests Latencies measured (in ms) | p50 |
-|------|-------------------------------------|-----|
-| A    | 10,20,30,40,50,60,70,80,90,100,110  | 60  |
-| B    | 10,15,20,25,30                      | 20  |
-
-The overall `p50` of latency for your request is **NOT** `avg(60,20)=40 ms`, the correct `p50` is: `median(10,10,15,20,20,25,30,30,40,50,60,70,80,90,100,110)=35 ms`
-
-For other metric types, like GAUGE and COUNT, Datadog can combine/aggregate the most granular data to obtain globally accurate results. Percentiles can’t be recombined; therefore, they are precomputed and stored individually in a dedicated custom metric per every potentially queryable tag value combination in your data
-
-**Note**: You can control [which percentile aggregation are performed][2] over [which tag combination][3] for any DISTRIBUTION metric.
-
-[1]: /developers/metrics/types/?tab=distribution
-[2]: /graphing/metrics/distributions/#aggregations
-[3]: /graphing/metrics/distributions/#customize-tagging
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Effect of Adding Tags
 
@@ -164,6 +97,77 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 
 * `temperature:{country:USA, state:Florida, city:Orlando}`
 * `temperature{country:USA, state:Florida, city:Miami}`
+
+[1]: /developers/metrics/types/?tab=count#metric-submission-types
+[2]: /developers/metrics/types/?tab=rate#metric-submission-types
+[3]: /developers/metrics/types/?tab=gauge#metric-submission-types
+{{% /tab %}}
+{{% tab "Histogram" %}}
+
+**A HISTOGRAM metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the Agent-side aggregations: `count`, `sum`, `min`, `max`, and `avg`. [Learn more about HISTOGRAM metric type][1].
+
+Suppose you have a histogram metric measuring `request.Latency` for two endpoints `endpoint:X` and `endpoint:Y`  on a single host:
+
+|| INSERT IMAGE  ||
+
+The number of unique tag value combinations submitted for a `HISTOGRAM` metric with this tagging scheme is 2, but the Agent generates [up to 5 custom metrics][1] for each of the original 2 unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 10 custom metrics for this `HISTOGRAM` metric: :
+
+| Metric Name       | Tag Values             | Aggregations                            |
+|-------------------|------------------------|-----------------------------------------|
+| `request.Latency` | `host:A`, `endpoint:X` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:A`, `endpoint:Y` | `count`, `sum`, `min`, `max`, and `avg` |
+
+[1]: /developers/metrics/types/?tab=histogram
+[2]: /developers/metrics/types/?tab=histogram#metric-submission-types
+{{% /tab %}}
+{{% tab "Distribution" %}}
+
+**A DISTRIBUTION metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the server-side aggregations  `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
+
+Suppose you have a distribution metric measuring `request.Latency` in which the following tag value combinations are present in your data as shown below:
+
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
+
+The number of unique combinations of metric name, host, and tag values submitted for a `GAUGE` metric with [this tagging scheme is 4](#counting-custom-metrics?tab=countrategauge):
+
+| Metric Name       | Tag Values                           |
+|-------------------|--------------------------------------|
+| `request.Latency` | `host:A`, `endpoint:X`, `status:200` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:200` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:400` |
+| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` |
+
+Given `request.Latency` is submitted as a `DISTRIBUTION`, Datadog [stores 5 custom metrics][1] for each of the original 4 unique tag value combinations to account for server side-aggregations: `count`, `sum`, `min`, `max`, and `avg`.
+
+This results in a total of 20 custom metrics for this `DISTRIBUTION` metric:
+
+| Metric Name       | Tag Values                           | Aggregations                            |
+|-------------------|--------------------------------------|-----------------------------------------|
+| `request.Latency` | `host:A`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:X`, `status:400` | `count`, `sum`, `min`, `max`, and `avg` |
+| `request.Latency` | `host:B`, `endpoint:Y`, `status:200` | `count`, `sum`, `min`, `max`, and `avg` |
+
+##### Distribution Metrics with Additional Percentile Aggregations
+
+[Adding additional percentile aggregations][2]: `p50`, `p75`, `p90`, `p95`, or `p99` to a distribution metric increases the number of distinct custom metrics reported. In order to support additional globally accurate percentile aggregations, a dedicated custom metric is created for a given aggregation per every potentially queryable tag value combination in your data. For instance let's say you have two hosts: `host:A` and `host:B` and you want to calculate the global `p50` (the median) of your requests latency over a given interval:
+
+| Host     | Requests Latencies measured (in ms) | p50 |
+|----------|-------------------------------------|-----|
+| `host:A` | 10,20,30,40,50,60,70,80,90,100,110  | 60  |
+| `host:B` | 10,15,20,25,30                      | 20  |
+
+The overall `p50` of latency for your request is **NOT** `avg(60,20)=40 ms`, the correct `p50` is: `median(10,10,15,20,20,25,30,30,40,50,60,70,80,90,100,110)=35 ms`
+
+For other metric types, like GAUGE and COUNT, Datadog can combine/aggregate the most granular data to obtain globally accurate results. Percentiles can’t be recombined; therefore, they are precomputed and stored individually in a dedicated custom metric per every potentially queryable tag value combination in your data
+
+**Note**: You can control [which percentile aggregation are performed][2] over [which tag combination][3] for any DISTRIBUTION metric.
+
+[1]: /developers/metrics/types/?tab=distribution
+[2]: /graphing/metrics/distributions/#aggregations
+[3]: /graphing/metrics/distributions/#customize-tagging
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Standard integrations
 
