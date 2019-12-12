@@ -38,11 +38,11 @@ To enforce standard attributes, administrators have the right to re-copy an exis
 
 ### Standard attributes in Log Explorer
 
-Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
+Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics).
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
-If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align. 
+If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align.
 
 ## Standard attribute list
 
@@ -63,7 +63,7 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-Any element of the standard attributes can then be filled or updated. 
+Any element of the standard attributes can then be filled or updated.
 
 **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
 
@@ -104,7 +104,7 @@ The default standard attribute list is split into 7 functional domains:
 The following attributes are related to the data used in network communication. All fields and metrics are prefixed by `network`.
 
 | **Fullname**               | **Type** | **Description**                                                                          |
-| :---                       | :---     | :----                                                                                    |
+|:---------------------------|:---------|:-----------------------------------------------------------------------------------------|
 | `network.client.ip`        | `string` | The IP address of the client that initiated the TCP connection.                          |
 | `network.destination.ip`   | `string` | The IP address the client connected to.                                                  |
 | `network.client.port`      | `number` | The port of the client that initiated the connection.                                    |
@@ -118,15 +118,15 @@ Typical integrations relying on these attributes include [Apache][1], [Varnish][
 
 The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
 
-| **Fullname**                                 | **Type** | **Description**                                                         |
-| :---                                         | :---     | :----                                                                   |
-| `network.client.geoip.country.name`          | `string` | Name of the country |
-| `network.client.geoip.country.iso_code`      | `string` | [ISO Code][6] of the country (example: `US` for the United States, `FR` for France) |
-| `network.client.geoip.continent.code`        | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`) |
-| `network.client.geoip.continent.name`        | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
-| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code`  | `string` | [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France) |
-| `network.client.geoip.city.name`             | `String` | The name of the city (example `Paris`, `New York`) |
+| **Fullname**                                | **Type** | **Description**                                                                                                                      |
+|:--------------------------------------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| `network.client.geoip.country.name`         | `string` | Name of the country                                                                                                                  |
+| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][6] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.continent.code`       | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
+| `network.client.geoip.continent.name`       | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
+| `network.client.geoip.subdivision.name`     | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
+| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.city.name`            | `String` | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ### HTTP requests
 
@@ -136,35 +136,34 @@ Typical integrations relying on these attributes include [Apache][1], Rails, [AW
 
 #### Common attributes
 
-
-| **Fullname**       | **Type** | **Description**                                                                                    |
-| :---               | :---     | :----                                                                                              |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                      |
-| `http.status_code` | `number` | The HTTP response status code.                                                                    |
-| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                |
-| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.|
-| `http.request_id`  | `string` | The ID of the HTTP request.                                                                       |
-| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
-| `http.version`     | `string` | The version of HTTP used for the request. |
+| **Fullname**       | **Type** | **Description**                                                                                           |
+|:-------------------|:---------|:----------------------------------------------------------------------------------------------------------|
+| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
+| `http.status_code` | `number` | The HTTP response status code.                                                                            |
+| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                        |
+| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested. |
+| `http.request_id`  | `string` | The ID of the HTTP request.                                                                               |
+| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes).          |
+| `http.version`     | `string` | The version of HTTP used for the request.                                                                 |
 
 #### URL details attributes
 
 These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][7]. All attributes are prefixed by `http.url_details`.
 
-| **Fullname**                   | **Type** | **Description**                                                                        |
-| :---                           | :---     | :----                                                                                 |
-| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                        |
-| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                        |
-| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                        |
+| **Fullname**                   | **Type** | **Description**                                                                         |
+|:-------------------------------|:---------|:----------------------------------------------------------------------------------------|
+| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                          |
+| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                          |
+| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                          |
 | `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                          |
+| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                            |
 
 #### User-Agent attributes
 
 These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][8]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
-| :---                                    | :---     | :----                                          |
+|:----------------------------------------|:---------|:-----------------------------------------------|
 | `http.useragent_details.os.family`      | `string` | The OS family reported by the User-Agent.      |
 | `http.useragent_details.browser.family` | `string` | The Browser Family reported by the User-Agent. |
 | `http.useragent_details.device.family`  | `string` | The Device family reported by the User-Agent.  |
@@ -174,7 +173,7 @@ These attributes provide details about the meanings of user-agents' attributes. 
 These attributes are related to the data used when a log or an error is generated via a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
 
 | **Fullname**         | **Type** | **Description**                                                  |
-| :---                 | :---     | :----                                                            |
+|:---------------------|:---------|:-----------------------------------------------------------------|
 | `logger.name`        | `string` | The name of the logger.                                          |
 | `logger.thread_name` | `string` | The name of the current thread when the log is fired.            |
 | `logger.method_name` | `string` | The class method name.                                           |
@@ -189,8 +188,8 @@ Typical integrations relying on these attributes are: *Java*, *NodeJs*, *.NET*, 
 Database related attributes are prefixed by `db`.
 
 | **Fullname**   | **Type** | **Description**                                                                                                                       |
-| :---           | :---     | :----                                                                                                                                 |
-| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.   |
+|:---------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------|
+| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
 | `db.statement` | `string` | A database statement for the given database type. E.g., for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
@@ -202,7 +201,7 @@ Typical integrations relying on these attributes are: [Cassandra][9], [MySQL][10
 Performance metrics attributes.
 
 | **Fullname** | **Type** | **Description**                                                                                   |
-| :---         | :---     | :----                                                                                             |
+|:-------------|:---------|:--------------------------------------------------------------------------------------------------|
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
@@ -213,7 +212,7 @@ Datadog advises you to rely or at least remap on this attribute since Datadog di
 All attributes and measures are prefixed by `usr`.
 
 | **Fullname** | **Type** | **Description**         |
-| :---         | :---     | :----                   |
+|:-------------|:---------|:------------------------|
 | `usr.id`     | `string` | The user identifier.    |
 | `usr.name`   | `string` | The user friendly name. |
 | `usr.email`  | `string` | The user email.         |
@@ -223,7 +222,7 @@ All attributes and measures are prefixed by `usr`.
 These attributes are related to the data added by a syslog or a log-shipper agent. All fields and metrics are prefixed by `syslog`.
 
 | **Fullname**       | **Type** | **Description**                                                               |
-| :---               | :---     | :----                                                                         |
+|:-------------------|:---------|:------------------------------------------------------------------------------|
 | `syslog.hostname`  | `string` | The hostname                                                                  |
 | `syslog.appname`   | `string` | The application name. Generally remapped to the `service` reserved attribute. |
 | `syslog.severity`  | `number` | The log severity. Generally remapped to the `status` reserved attribute.      |
@@ -236,18 +235,18 @@ Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng
 
 All attributes and measures are prefixed by `dns`.
 
-| **Fullname**            | **Type** | **Description**         |
-| :---                    | :---     | :----                   |
-| `dns.id`                | `string` | The dns query identifier.    |
-| `dns.question.name`     | `string` | The URL who’s IP address the dns question wish to find. |
-| `dns.question.type`     | `string` | A two octet code which specifies the type of the dns question (example "AAAA"). |
-| `dns.question.class`    | `string` | The class the dns question is looking up (i.e IN when using the internet). |
-| `dns.question.size`     | `number` | The size in bytes of the dns question.  |
-| `dns.answer.name`       | `string` | The domain name that was queried. |
-| `dns.answer.type`       | `string` | A two octet code which specifies the type of the dns answer. |
-| `dns.answer.class`      | `string` | The class the dns answer. |
-| `dns.answer.size`       | `number` | The size in bytes of the dns answer.  |
-| `dns.flags.rcode`       | `string` | The dns reply code.  |
+| **Fullname**         | **Type** | **Description**                                                           |
+|:---------------------|:---------|:--------------------------------------------------------------------------|
+| `dns.id`             | `string` | The DNS query identifier.                                                 |
+| `dns.question.name`  | `string` | The IP address URL the DNS question wish to find.                         |
+| `dns.question.type`  | `string` | A two octet code which specifies the DNS question type (example "AAAA").  |
+| `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
+| `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
+| `dns.answer.name`    | `string` | The queried domain name.                                                  |
+| `dns.answer.type`    | `string` | A two octet code which specifies the DNS answer type .                    |
+| `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
+| `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
+| `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
 
 
 ## Further Reading
