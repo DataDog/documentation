@@ -93,9 +93,11 @@ To create an alert condition using custom assertions:
 
 {{< tabs >}}
 {{% tab "HTTP Test" %}}
-1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][8], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
+1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][1], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
 
 2. Enter an message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
+
+    **Note**: You can use [webhooks][2] in a message body. The webhook will send a payload to alert your services when an alert is triggered. To use a webhook in an alert message, add `@webhook-*name_of_the_webhook` in the message body to trigger the webhook. For example: `{{location.name}} is down! @webhook-servicename`
 
 3. Click the **Save test** button. Your test is now populated in its own page, which includes details on properties, history, and test results.
 
@@ -111,12 +113,22 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
 You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
+
+{{< img src="synthetics/retry-test.png" alt="Fast Retry" responsive="true" style="width:80%;">}}
+
+To create a fast retry for location failures, configure an alert to trigger if a test fails in at least one location and set the test to retry one or more times before it is marked as failed.
+
+
+[1]: /synthetics/api_tests/?tab=httptest#assertions
+[2]: /integrations/webhooks
 {{% /tab %}}
 {{% tab "SSL Test" %}}
 
-1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][8], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
+1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][1], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
 
 2. Enter an message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
+
+    **Note**: You can use [webhooks][2] in a message body. The webhook will send a payload to alert your services when an alert is triggered. To use a webhook in an alert message, add `@webhook-*name_of_the_webhook` in the message body to trigger the webhook. For example: `{{location.name}} is down! @webhook-servicename`
 
 3. Click the **Save test** button. Your test is now populated in its own page, which includes details on properties, history, and test results.
 
@@ -124,6 +136,9 @@ An **API test** homepage will automatically populate after save. This page inclu
 
 **Notes for SSL Tests**: If one of the assertions defined fails for a given location, an alert is triggered. Two default assertions are created: certificate is valid and certificate expires in more than x days. Custom assertions can be created on `certificate expires in more than x days & on property`. There are no alert conditions for SSL.
 
+
+[1]: /synthetics/api_tests/?tab=httptest#assertions
+[2]: /integrations/webhooks
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -166,7 +181,7 @@ Tests can be only recorded from **[Google Chrome][2]**. To record your test, dow
 2. Click on **Start recording** to begin recording your browser test. Navigate on your page in the iframe on the right of the page, or in the pop up you just opened.
 3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:75%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, this will ensure your test ended up on the expected page and found the expected element. This will allow your test to use a different set of keys to perform the recorded journey and confirm it landed on the expected element although some changes on the UI might have happened since the test was first recorded.
 
@@ -176,7 +191,7 @@ Tests can be only recorded from **[Google Chrome][2]**. To record your test, dow
 
 6. Use the email variable as an input step in a test to trigger an email.
 
-    {{< img src="synthetics/testing-variable.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/testing-variable.png" alt="Browser Test steps" responsive="true" style="width:100%;">}}
 
 7. Click the **Assertion** button under *Add New*. Select an assertion, such as `Test that an email was received`.
     
@@ -185,7 +200,7 @@ Tests can be only recorded from **[Google Chrome][2]**. To record your test, dow
 8. Select the subject condition and click **Use variable**. Select the email variable you created. This assigns the email variable you created to the assertion. Select the body condition and click **Use variable**. Select the email variable you created.
 9. Once you have finished your Scenario, click on **Save and Launch Test**.
 
-{{< img src="synthetics/browser_tests/context-panel.gif" alt="Context panel" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/context-panel.gif" alt="Context panel" responsive="true" style="width:100%;">}}
 
 A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces. To review this information, click on the `error`, `resources`, or `traces` button located next to the sample result action.
 
@@ -197,7 +212,7 @@ To create a private location:
 
 1. In the Datadog app, hover over **UX Monitoring** and select *Settings* -> *Private Locations*. Create a new private location:
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:100%;">}}
 
 2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
@@ -230,11 +245,11 @@ To create a private location:
 
   * In your private locations list, in the Settings section:
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:100%;">}}
 
   * In the form when creating a test, below the Private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:75%;">}}
 
 6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][5].
 
@@ -252,11 +267,11 @@ To create a private location:
 [2]: https://www.google.com/chrome/
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: https://www.datadoghq.com/
-[5]: /synthetics/api_tests/
-[6]: https://docs.datadoghq.com/api/?lang=bash#create-a-test
+[5]: /synthetics/api_tests
+[6]: /api/?lang=bash#create-a-test
 [7]: /synthetics/api_tests/?tab=httptest#test-failure
 [8]: /synthetics/api_tests/?tab=httptest#assertions
-[9]: /synthetics/browser_tests/
+[9]: /synthetics/browser_tests
 [10]: /synthetics/identify_synthetics_bots
 [11]: /synthetics/private_locations
 [12]: /help
