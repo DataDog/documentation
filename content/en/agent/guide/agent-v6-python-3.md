@@ -8,7 +8,7 @@ further_reading:
   text: "Upgrade to Agent v7"
 ---
 
-Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
+Starting with v6.14.0, the Agent v6 integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
 
 By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime:
 

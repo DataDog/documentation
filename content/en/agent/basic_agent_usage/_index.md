@@ -24,7 +24,7 @@ further_reading:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Agent v7 and v7 are composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
+Agent v6 and v7 are composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
 * The Collector is in charge of running checks and collecting metrics.
 * The Forwarder sends payloads to Datadog.
