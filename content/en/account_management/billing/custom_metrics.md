@@ -41,8 +41,8 @@ For more real-time tracking of the count of custom metrics for a particular metr
 * Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric. See the [Effect of Adding Tags](#effect-of-adding-tags) section.
 * Reordering of tag values doesn’t add uniqueness, the following combinations are the same custom metric:
 
-  *  `metric_name{tag_1:value_1, tag_2:value_2}`
-  *  `metric_name{tag_2:value_2, tag_1:value_1}`
+  *  `metric_name{env:dev, service:foo}`
+  *  `metric_name{service:foo, env:dev}`
 
 Find below some example of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submision type][9]:
 
