@@ -21,7 +21,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="account_management/billing/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics" responsive="true" >}}
 
 Contact [Sales][3] or your [Customer Success][4] Manager to discuss custom metrics for your account or purchase an additional custom metrics packages.
 
@@ -35,7 +35,7 @@ For more real-time tracking of the count of custom metrics for a particular metr
 
 ## Counting Custom Metrics
 
-A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag):
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**:
 
 * Reporting the same metric name on multiple hosts results in multiple custom metrics.
 * Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric. See the [Effect of Adding Tags](#effect-of-adding-tags) section.
@@ -51,14 +51,14 @@ Find below some example of how to count your custom metrics. The number of custo
 
 The number of custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated the same way as shown below:
 
-Suppose you’re submitting a metric, `request.Count`, from two hosts (`host:A`,`host:B`), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
+Suppose you’re submitting a metric, `request.count`, from two hosts (`host:A`,`host:B`), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
 
 * `endpoint`  that can take the value `endpoint:X` or `endpoint:Y`
 * `status` that can take the value `status:200` or `status:400`
 
 Let’s assume that in your data, endpoint `endpoint:X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
 
-{{< img src="account_management/billing/custom_metrics/custom_metrics_host.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_count.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
 
 `request.Count` reports then **4 distinct custom metrics**. The custom metrics are listed below:
 
