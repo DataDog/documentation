@@ -14,7 +14,7 @@ further_reading:
 ---
 
 
-## Version differences
+## Changes between major Agent versions
 
 {{< tabs >}}
 {{% tab "Agent v7 vs v6" %}}

@@ -32,12 +32,11 @@ This is an Agent-wide configuration option: **all Python checks launched by an A
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-The official Containerized Agent images only include one of the two Python runtimes. To switch from one to another runtime, choose the appropriate Agent image:
+As the only change between Agent v6.x and Agent v7.x is that the Agent v7.x includes the Python 3 runtime (contrary to Agent v6.x includes the Python 2 runtime)To switch from one to another runtime, choose the appropriate Agent image:
 
-* **Python 2** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>`, or `datadog/agent:<AGENT_VERSION>-jmx` for images supporting JMX checks.
-* **Python 3** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>-py3`, or `datadog/agent:<AGENT_VERSION>-py3-jmx` for images supporting JMX checks.
+* **Python 2** runtime: Agent v6 images have the following format: `datadog/agent:6.<AGENT_MINOR_VERSION>`, or `datadog/agent:6.<AGENT_MINOR_VERSION>-jmx` for images supporting JMX checks.
 
-For example, for the Containerized Agent v6.14.0, select the `datadog/agent:6.14.0` or `datadog/agent:6.14.0-jmx` images to use the default Python runtime (Python 2), and select the `datadog/agent:6.14.0-py3` or `datadog/agent:6.14.0-py3-jmx` images to use the Python 3 runtime.
+* **Python 3** runtime: Agent v7 images have the following format: `datadog/agent:7.<AGENT_MINOR_VERSION>`, or `datadog/agent:7.<AGENT_MINOR_VERSION>-jmx` for images supporting JMX checks.
 
 {{% /tab %}}
 {{< /tabs >}}
