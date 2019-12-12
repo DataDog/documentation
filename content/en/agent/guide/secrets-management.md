@@ -114,7 +114,7 @@ On Linux, the executable set as `secret_backend_command` must:
 On Windows, the executable set as `secret_backend_command` must:
 
 * Have read/exec for `ddagentuser` (the user used to run the Agent).
-* Have no rights for any user or group except for the `Administrators` group, the built-in Local System account, or the agent user context (`ddagentuser` by default)
+* Have no rights for any user or group except for the `Administrators` group, the built-in Local System account, or the Agent user context (`ddagentuser` by default)
 * Be a valid Win32 application so the Agent can execute it.
 
 {{% /tab %}}
