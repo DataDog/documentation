@@ -122,41 +122,7 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## Docker environment
 
-### Log collection is not enabled
-
-1. Make sure the Datadog Agent has access to the Docker socket
-2. Check if the Agent user is in the Docker group: `usermod -a -G docker dd-agent`
-3. Check if log collection has been enabled `DD_LOGS_ENABLED=true` in the configuration
-
-### Configuration issues
-
-At least one valid log configuration must be set to start log collection. There are several options to configure log collection; ensure that at least one of them is activated:
-
-1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][9])
-
-2. Autodiscovery via [container labels][10]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
-
-```
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
-
-3. Autodiscovery in Kubernetes via [pod annotations][11]. In this case, ensure that `datadog.yaml` has the kubelet listener and config provider:
-
-```
-listeners:
-  - name: kubelet
-config_providers:
-  - name: kubelet
-    polling: true
-```
-
-### Journald
-
-When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][7] as there is a specific file used to mount to the Agent.
+See the [Docker Log Collection Troubleshooting Guide][16]
 
 ## Serverless environment
 
@@ -199,3 +165,4 @@ Check if logs appear in the [Datadog Live Tail][14]. If they appear in the Live 
 [13]: https://app.datadoghq.com/account/settings#api
 [14]: https://app.datadoghq.com/logs/livetail
 [15]: /logs/indexes/#exclusion-filters
+[16]: /logs/guide/docker-logs-collection-troubleshooting-guide
