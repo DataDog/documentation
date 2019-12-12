@@ -5,11 +5,11 @@ Datadog Synthetics offers two different ways to monitor your applications: API t
 
 By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetics][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
 
-This guide shows you how to set up your first Synthetics test with Datadog. Follow the sections below to configure your API, browser test, or private location for internal-facing apps or private URLs.
+This guide shows you how to set up your first Synthetics test with Datadog. Follow the sections below to configure an API test, browser test, or private location for internal-facing apps or private URLs.
 
 ## Prerequisites
 
-The browser tests can be only recorded from **[Google Chrome][2]**. Datadog will prompt you to download this extension during the creation of the test. You can also download the [Datadog Record Test extension for Google Chrome][3].
+Browser tests can be only recorded from **[Google Chrome][2]**. Datadog will prompt you to download the Datadog Record Test extension during the creation of the test. You can also [download this extension directly from the Chrome Web Store][3].
 
 ## Create a Datadog account
 
@@ -71,7 +71,7 @@ Once the URL is tested, a response preview will populate in a panel to the right
 
 This panel shows the request as well as the response preview of your API call. It also automates the creation of assertions on the status code, content-type header, and response time of the request.
 
-You can create custom assertions: in the Headers section of this panel's response preview, click on any header to auto-populate a header assertion. It is also possible to manually add [assertions][8], on body, header, response type, or status code by clicking on New Assertion.
+You can create custom assertions: in the Headers section of this panel's response preview, click on any header to auto-populate a header assertion. It is also possible to manually add [assertions][8] on body, header, response type, or status code by clicking on New Assertion.
 
 For example, set an assertion on status code being a 200, and select the server listed in the response preview header. This will send you a notification when there is a server error on the server that's assimilated with your API endpoint.
 
