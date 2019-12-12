@@ -238,12 +238,12 @@ All attributes and measures are prefixed by `dns`.
 | **Fullname**         | **Type** | **Description**                                                           |
 |:---------------------|:---------|:--------------------------------------------------------------------------|
 | `dns.id`             | `string` | The DNS query identifier.                                                 |
-| `dns.question.name`  | `string` | The IP address URL the DNS question wish to find.                         |
-| `dns.question.type`  | `string` | A two octet code which specifies the DNS question type (example "AAAA").  |
+| `dns.question.name`  | `string` | The IP address URL that the DNS question wishes to find.                         |
+| `dns.question.type`  | `string` | A two octet code which specifies the DNS question type (example: "AAAA").  |
 | `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The queried domain name.                                                  |
-| `dns.answer.type`    | `string` | A two octet code which specifies the DNS answer type .                    |
+| `dns.answer.type`    | `string` | A two octet code which specifies the DNS answer type.                    |
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
