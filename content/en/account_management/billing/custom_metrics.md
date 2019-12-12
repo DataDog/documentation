@@ -108,7 +108,7 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 
 Suppose you have a histogram metric measuring `request.Latency` for two endpoints `endpoint:X` and `endpoint:Y`  on a single host:
 
-|| INSERT IMAGE  ||
+{{< img src="account_management/billing/custom_metrics/request_latency_single_host.png" alt="request_latency_single_host" responsive="true" style="width:80%;">}}
 
 The number of unique tag value combinations submitted for a `HISTOGRAM` metric with this tagging scheme is 2, but the Agent generates [up to 5 custom metrics][1] for each of the original 2 unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `count`, `sum`, `min`, `max`, and `avg`. This results in a total of 10 custom metrics for this `HISTOGRAM` metric: :
 
