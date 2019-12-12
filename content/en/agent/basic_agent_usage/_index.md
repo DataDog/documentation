@@ -24,9 +24,7 @@ further_reading:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Agent v6 is a complete rewrite in Go of the Agent v5. V6 offers better performances, smaller footprint, and more features. It is the default Datadog Agent (v5 is no longer in active development).
-
-Agent v6 is composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
+Agent v7 and v7 are composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
 * The Collector is in charge of running checks and collecting metrics.
 * The Forwarder sends payloads to Datadog.
@@ -212,28 +210,28 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 <AGENT_BIN_PATH> <SUB_COMMAND> <OPTIONS>
 ```
 
-| Subcommand        | Notes                                                                         |
-|-------------------|-------------------------------------------------------------------------------|
-| `check`           | Run the specified check.                                                      |
-| `configcheck`     | Print all configurations loaded & resolved of a running Agent.                |
-| `diagnose`        | Execute connectivity diagnosis on your system.                                |
-| `flare`           | [Collect a flare and send it to Datadog][1].                                  |
-| `health`          | Print the current Agent health.                                               |
-| `help`            | Help about any command.                                                       |
-| `hostname`        | Print the hostname used by the Agent.                                         |
-| `import`          | Import and convert configuration files from previous versions of the Agent.   |
-| `installservice`  | Install the Agent within the service control manager.                         |
-| `launch-gui`      | Start the Datadog Agent GUI.                                                  |
-| `regimport`       | Import the registry settings into `datadog.yaml`.                             |
-| `remove-service`  | Remove the Agent from the service control manager.                            |
-| `restart`         | [Restart the Agent][2].                                                       |
-| `restart-service` | Restart the Agent within the service control manager.                         |
-| `start`           | [Start the Agent][3].                                                         |
-| `start-service`   | Start the Agent within the service control manager.                           |
-| `status`          | [Print the current Agent status][4].                                          |
-| `stop`            | [Stop the Agent][5].                                                          |
-| `stopservice`     | Stop the Agent within the service control manager.                            |
-| `version`         | Print version info.                                                           |
+| Subcommand        | Notes                                                                       |
+|-------------------|-----------------------------------------------------------------------------|
+| `check`           | Run the specified check.                                                    |
+| `configcheck`     | Print all configurations loaded & resolved of a running Agent.              |
+| `diagnose`        | Execute connectivity diagnosis on your system.                              |
+| `flare`           | [Collect a flare and send it to Datadog][1].                                |
+| `health`          | Print the current Agent health.                                             |
+| `help`            | Help about any command.                                                     |
+| `hostname`        | Print the hostname used by the Agent.                                       |
+| `import`          | Import and convert configuration files from previous versions of the Agent. |
+| `installservice`  | Install the Agent within the service control manager.                       |
+| `launch-gui`      | Start the Datadog Agent GUI.                                                |
+| `regimport`       | Import the registry settings into `datadog.yaml`.                           |
+| `remove-service`  | Remove the Agent from the service control manager.                          |
+| `restart`         | [Restart the Agent][2].                                                     |
+| `restart-service` | Restart the Agent within the service control manager.                       |
+| `start`           | [Start the Agent][3].                                                       |
+| `start-service`   | Start the Agent within the service control manager.                         |
+| `status`          | [Print the current Agent status][4].                                        |
+| `stop`            | [Stop the Agent][5].                                                        |
+| `stopservice`     | Stop the Agent within the service control manager.                          |
+| `version`         | Print version info.                                                         |
 
 
 **Note**: Some options have their own set of flags and options detailed in a help message. For example, to see how to use the `check` subcommand, run:
