@@ -149,9 +149,9 @@ After a few minutes, your trace displays in Datadog under the `flask` service. C
 [4]: https://www.vagrantup.com/intro/getting-started/index.html
 [5]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: /agent/guide/agent-commands/?tab=agentv6#agent-information
+[7]: /agent/guide/agent-commands/#agent-information
 [8]: https://app.datadoghq.com/infrastructure
-[9]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[10]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[10]: /agent/guide/agent-commands/#restart-the-agent
 [11]: https://app.datadoghq.com/apm/services
 [12]: https://app.datadoghq.com/apm/traces

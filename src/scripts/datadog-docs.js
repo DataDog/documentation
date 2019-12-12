@@ -68,7 +68,7 @@ $(document).ready(function () {
     // algolia
     $('.ds-hint').css('background', 'transparent');
 
-    if (document.documentElement.dataset.relpermalink === '/search/') {
+    if (window.location.href.indexOf('/search/')) {
 
         const client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         const results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);

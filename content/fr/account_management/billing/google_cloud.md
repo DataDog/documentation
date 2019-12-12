@@ -1,6 +1,6 @@
 ---
 title: "Facturation de l'intégration Google\_Cloud"
-kind: faq
+kind: documentation
 ---
 ## Présentation
 

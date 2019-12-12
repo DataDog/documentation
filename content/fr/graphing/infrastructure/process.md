@@ -45,8 +45,8 @@ En outre, certaines options de configuration peuvent être définies en tant que
 Une fois la configuration effectuée, [redémarrez l'Agent][2].
 
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[1]: /fr/agent/guide/agent-configuration-files/
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 

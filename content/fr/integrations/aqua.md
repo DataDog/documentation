@@ -169,7 +169,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][17].
 [12]: https://app.datadoghq.com/account/settings#api
 [13]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
 [14]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
-[15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [16]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
 [17]: https://docs.datadoghq.com/fr/help
 

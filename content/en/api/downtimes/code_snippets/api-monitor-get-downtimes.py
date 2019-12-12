@@ -8,4 +8,4 @@ options = {
 initialize(**options)
 
 # Get all downtimes
-print api.Downtime.get_all()
+print(api.Downtime.get_all())

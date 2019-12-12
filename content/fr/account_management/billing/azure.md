@@ -1,6 +1,6 @@
 ---
 title: Facturation de l'intégration Azure
-kind: faq
+kind: documentation
 ---
 ## Présentation
 

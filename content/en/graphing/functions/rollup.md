@@ -13,9 +13,9 @@ Note that rollups should usually be avoided in [monitor][1] queries, because of 
 
 ## .as_count() or as_rate()
 
-These functions are only intended for metrics submitted as rates or counters via StatsD. These functions have no effect for other metric types. For more details about how to use `.as_count()` and `.as_rate()` see [our blog post][2].
+These functions are only intended for metrics submitted as rates or counters via StatsD. These functions have no effect for other metric types. For more details about how to use `.as_count()` and `.as_rate()` see [our Metric Type Modifiers documentation][2].
 
-Note: [The only available query with `as_count()` is `sum()`][3] (unless using a rollup summary), which is the only mathematical accurate function with such behavior. Learn more with the [detailed documentation about in-application modifiers][4].
+Note: [The only available query with `as_count()` is `sum()`][3] (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 
 ## Other functions
 
@@ -32,6 +32,5 @@ Note: [The only available query with `as_count()` is `sum()`][3] (unless using a
 {{< /whatsnext >}}
 
 [1]: /monitors/monitor_types/metric
-[2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
+[2]: /developers/metrics/type_modifiers/?tab=count
 [3]: /graphing/faq/as_count_validation
-[4]: /developers/metrics/type_modifiers

@@ -53,5 +53,5 @@ The Marklogic integration is included in the [Datadog Agent][1] package, so you 
 [Run the Agent's `status` subcommand][3] and look for `marklogic` under the Checks section.
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/guide/agent-commands/#agent-status-and-information

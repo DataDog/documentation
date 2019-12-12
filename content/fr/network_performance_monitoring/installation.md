@@ -70,6 +70,7 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
 
 5. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`
 6. [[Redémarrez l'Agent][1].]: `sudo service datadog-agent restart`
+7. Activez la sonde-système pour démarrer au démarrage: `sudo service enable datadog-agent-sysprobe`
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
