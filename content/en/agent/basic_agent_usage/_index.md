@@ -276,7 +276,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection** 
 
-The below results are obtained from the collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][8] enabled. It shows the evolution of resource usage for the different compression level available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][8] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
