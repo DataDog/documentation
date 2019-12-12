@@ -97,6 +97,7 @@ The default standard attribute list is split into 7 functional domains:
 * [Performance](#performance)
 * [User related attributes](#user-related-attributes)
 * [Syslog and log shippers](#syslog-and-log-shippers)
+* [DNS](#dns)
 
 ### Network
 
@@ -230,6 +231,24 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
 Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc.
+
+### DNS
+
+All attributes and measures are prefixed by `dns`.
+
+| **Fullname**            | **Type** | **Description**         |
+| :---                    | :---     | :----                   |
+| `dns.id`                | `string` | The dns query identifier.    |
+| `dns.question.name`     | `string` | The URL who’s IP address the dns question wish to find. |
+| `dns.question.type`     | `string` | A two octet code which specifies the type of the dns question (example "AAAA"). |
+| `dns.question.class`    | `string` | The class the dns question is looking up (i.e IN when using the internet). |
+| `dns.question.size`     | `number` | The size in bytes of the dns question.  |
+| `dns.answer.name`       | `string` | The domain name that was queried. |
+| `dns.answer.type`       | `string` | A two octet code which specifies the type of the dns answer. |
+| `dns.answer.class`      | `string` | The class the dns answer. |
+| `dns.answer.size`       | `number` | The size in bytes of the dns answer.  |
+| `dns.flags.rcode`       | `string` | The dns reply code.  |
+
 
 ## Further Reading
 
