@@ -6,7 +6,7 @@ Toutes les deux semaines, Datadog procède à des revues de code et assure des h
 
 ### Lieu
 
-Les heures de permanence sont assurées sur la chaîne #integrations du [Slack dédié à la communauté de Datadog][1] ([demander une invitation][2]), ainsi que sur une [vidéoconférence Zoom][3].
+Les heures de permanence sont assurées sur la chaîne #integrations du [Slack dédié à la communauté de Datadog][1] ([demander une invitation][2]), ainsi que sur [Google Hangouts][3].
 
 ### Date
 
