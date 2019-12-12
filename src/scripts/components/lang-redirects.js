@@ -10,6 +10,7 @@ const enabledSubdomains = [
 ];
 const cookiePath = '/';
 
+
 const getUrlVars = () => {
 	const vars = {};
 	const href = window.location.href.replace(window.location.hash, '');
@@ -19,26 +20,21 @@ const getUrlVars = () => {
     return vars;
 }
 
-const getDomain = (data) => {
+const getUrlParts = (data) => {
     const a = document.createElement('a');
     a.href = data;
-    return a.hostname;
+    return {hostname: a.hostname, pathname: a.pathname};
 }
 
-const getPath = (data) => {
-    const a = document.createElement('a');
-    a.href = data;
-    return a.pathname;
-}
 
 export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
 
 	const supportedLanguages = navigator.language || navigator.browserLanguage;
-	const baseURL = getDomain(window.location.href);
+	const baseURL = getUrlParts(window.location.href).hostname;
 	const subdomain = baseURL.split('.')[0];
 	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
-	let uri = getPath(window.location.href);
+	let uri = getUrlParts(window.location.href).pathname;
 	let previewPath = '';
 	let acceptLanguage = "en";
 	let logMsg = '';
