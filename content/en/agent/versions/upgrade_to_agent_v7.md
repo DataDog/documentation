@@ -48,6 +48,8 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box between Python 2 and Python 3 Custom Checks. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your Custom Check from Python 2 to Python 3.
+
 ## From Agent v5 to Agent v7
 
 Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
@@ -82,8 +84,9 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.github
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your Custom Check from Python 2 to Python 3.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/guide/python-3
