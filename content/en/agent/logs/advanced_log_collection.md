@@ -104,6 +104,24 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
+**Note**: The `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. See the following example:
+
+```
+pattern: (data:) values
+replace_placeholder: "$1 [masked_values]"
+
+Resulting string: "data: [masked_values]"
+```
+
+If you want a string to follow the capture group with no space in between, use the format `${<group_number>}`:
+
+```
+pattern: (Data)Dog
+replace_placeholder: "${1}dog"
+
+Resulting string: "Datadog"
+```
+
 ## Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
