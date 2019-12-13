@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 
 const allowedLanguages = ['en', 'ja', 'fr'];
+const redirectLanguages = ['ja']
 const enabledSubdomains = [
 	'docs',
 	'docs-staging',
@@ -9,7 +10,6 @@ const enabledSubdomains = [
 	'localhost'
 ];
 const cookiePath = '/';
-
 
 const getUrlVars = () => {
 	const vars = {};
@@ -30,7 +30,7 @@ const getUrlParts = (data) => {
 export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
 
-	const supportedLanguages = navigator.language || navigator.browserLanguage;
+	const supportedLanguage = navigator.language.split('-')[0] || navigator.browserLanguage.split('-')[0];
 	const baseURL = getUrlParts(window.location.href).hostname;
 	const subdomain = baseURL.split('.')[0];
 	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
@@ -38,7 +38,6 @@ export function handleLanguageBasedRedirects() {
 	let previewPath = '';
 	let acceptLanguage = "en";
 	let logMsg = '';
-
 
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
@@ -60,12 +59,14 @@ export function handleLanguageBasedRedirects() {
 		acceptLanguage = Cookies.get('lang_pref');
 		logMsg = `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
 	}
-	else if ( supportedLanguages && subMatch.length ) {
-		logMsg = `Set acceptLanguage based on navigator.language header value: ${  supportedLanguages  } ; DEBUG: ${ supportedLanguages.startsWith('ja') }`;
+	/*
+		Currently, we only want to redirect based on accept-language for Japanese language sites.
+		When we decide to enable this for other languages, update this function to account for that
+	*/
+	else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
+		logMsg = `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
 
-		if ( supportedLanguages.startsWith('ja') ) {
-			acceptLanguage = 'ja';
-		}
+		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang));
 	}
 
 	if ( subMatch.length && !uri.includes(`/${  acceptLanguage  }/`) ) {
