@@ -266,7 +266,7 @@ All attributes and measures are prefixed by `dns`.
 [11]: /integrations/amazon_rds
 [12]: /integrations/elastic
 [13]: /logs/explorer/?tab=measures#setup
-[14]: /tracing/advanced/search
+[14]: /tracing/app_analytics/search
 [15]: /integrations/rsyslog
 [16]: /integrations/nxlog
 [17]: /integrations/syslog_ng

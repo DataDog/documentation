@@ -8,7 +8,7 @@ aliases:
   - /tracing/search
   - /tracing/getting_further/apm_events/
   - /tracing/trace_search_and_analytics/search/
-  - /tracing/app_analytics/search
+  - /tracing/advanced/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -124,11 +124,18 @@ The time range allows you to display traces within a given time period. Quickly 
 {{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
 
 ## Trace Stream
+
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
-Sort the list by clicking the **date** column header.
+### Traces vs Analyzed Spans
 
-{{< img src="tracing/app_analytics/search/trace_list.png" alt="Trace list" responsive="true" style="width:80%;">}}
+Chose to display a sampled trace associated with your Analyzed Spans in the trace steam with the toggle in the upper right corner of the trace stream:
+
+{{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span" responsive="true" >}}
+
+If **Traces** is selected, Analyzed Spans listed in the trace stream have a sampled trace associated with them. If **Analyzed Spans** is selected, only the Analyzed Spans are listed in the trace stream.
+
+When a request hits a [service][3] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][4]. An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request generates 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][5]. To start collecting Analyzed Spans, [enable App Analytics for your services][5].
 
 ### Displaying a full Trace
 
@@ -185,3 +192,6 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 
 [1]: /integrations
 [2]: /tagging/#tags-best-practices
+[3]: /tracing/visualization/#services
+[4]: /tracing/advanced/adding_metadata_to_spans/
+[5]: /tracing/app_analytics/#configure-additional-services-optional
