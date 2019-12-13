@@ -20,7 +20,7 @@ In this view, you can:
 
 * [Build a context](#context) to explore your Security Signals.
 * [Visualize your Security Signals](#visualization) as a filtered Security Signals table or Security Signals Analytics.
-* [Share the content](#share-views) of your Security Signal Explorer view to another page within or outside of Datadog.
+* Inspect a security signal in the [Security Signal Panel](#security-signal-panel).
 
 ## Context
 
