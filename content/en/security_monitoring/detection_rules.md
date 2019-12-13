@@ -36,6 +36,8 @@ Rule cases, such as `a > 3`, are evaluated as case statements. Thus, the first c
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-the-search-query) are referenced in this section. 
 
+**Note**: The query label must preceed the operator. For example, `a < 3` is allowed; `3 > a` is not allowed.
+
 Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated. 
 
 #### Severity and notification
