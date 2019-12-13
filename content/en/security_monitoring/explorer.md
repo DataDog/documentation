@@ -65,7 +65,7 @@ The Security Signals Table displays the list of signals that match the selected 
 
 The Security Signals search results are displayed in the Security Signals Table.
 
-Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button. Only faceted attributes are available for columns.
+Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button. All signal attributes are available for columns.
 
 Security Signal results are sorted by date—the most recent on top by default. You can also inverse-sort by date, with the least recent (within the limits of the time range) on top.
 
@@ -80,7 +80,7 @@ Click on any Security Signal to open the Security Signal Panel and see more deta
 #### Explanation of the above example
 
 - **Severity**: The `HIGH` indicator in the top left denotes the severity of the highest case matched.
-- **Signal generation time**: Located to the right of the severity indicator, this denotes when any of the cases first matched. It is not updated.
+- **Signal generation time**: Located to the right of the severity indicator, this denotes when any of the cases first matched. It is never updated.
 - **Title**: `Account Take Over (ATO) - Potential successful brute-force` in the above example. The title of the signal, appended by the name of the highest case which matched.
 - **First Seen**: The first seen time when a signal was matched during the [time window][2]. Unlike signal generation time, this timestamp is updated if the query and time window conditions are met. 
 - **Last Seen**: The last seen time when a signal was matched during the [time window][2]. Unlike signal generation time, this timestamp is updated if the query and time window conditions are met. 
