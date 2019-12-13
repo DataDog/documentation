@@ -332,14 +332,20 @@ Integration names can be found on the [integrations table][1].
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
-```javascript
-tracer.use('mysqli', {
-  analytics: true
-})
-```
+Database tracing is not captured by App Analytics by default. You can enable or disable App Analytics for individual integrations using the following setting:
 
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for `mysqli`:
+
+* Environment Variable: `DD_MYSQLI_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][1].
+
+
+
+[1]: /tracing/setup/php/#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
