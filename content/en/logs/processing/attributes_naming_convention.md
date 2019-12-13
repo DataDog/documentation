@@ -97,6 +97,7 @@ The default standard attribute list is split into 7 functional domains:
 * [Performance](#performance)
 * [User related attributes](#user-related-attributes)
 * [Syslog and log shippers](#syslog-and-log-shippers)
+* [DNS](#dns)
 
 ### Network
 
@@ -134,7 +135,6 @@ These attributes are related to the data commonly used in HTTP requests and acce
 Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][3], web applications servers, etc.
 
 #### Common attributes
-
 
 | **Fullname**       | **Type** | **Description**                                                                                           |
 |:-------------------|:---------|:----------------------------------------------------------------------------------------------------------|
@@ -231,6 +231,24 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 
 Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc.
 
+### DNS
+
+All attributes and measures are prefixed by `dns`.
+
+| **Fullname**         | **Type** | **Description**                                                           |
+|:---------------------|:---------|:--------------------------------------------------------------------------|
+| `dns.id`             | `string` | The DNS query identifier.                                                 |
+| `dns.question.name`  | `string` | The IP address URL that the DNS question wishes to find.                  |
+| `dns.question.type`  | `string` | A [two octet code][20] which specifies the DNS question type.             |
+| `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
+| `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
+| `dns.answer.name`    | `string` | The queried domain name.                                                  |
+| `dns.answer.type`    | `string` | A [two octet code][20] which specifies the DNS answer type.               |
+| `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
+| `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
+| `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -254,3 +272,4 @@ Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng
 [17]: /integrations/syslog_ng
 [18]: /integrations/fluentd
 [19]: /integrations/logstash
+[20]: https://en.wikipedia.org/wiki/List_of_DNS_record_types

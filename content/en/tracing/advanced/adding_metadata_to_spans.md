@@ -255,11 +255,11 @@ Add [tags][1] directly to a `DDTrace\Span` object by calling `Span::setTag()`. F
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Add [tags][1] to all [spans][2] by configuring the tracer with the system property `dd.trace.global.tags`:
+Add [tags][1] to all [spans][2] by configuring the tracer with the system property `Ddd.trace.global.tags`:
 
 ```bash
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -dd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
+     -Ddd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
 [1]: /tracing/visualization/#span-tags

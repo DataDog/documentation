@@ -108,6 +108,10 @@ By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it f
 
 If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
+### Special-purpose IPv4 whitelisting 
+
+If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][2]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
+
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
