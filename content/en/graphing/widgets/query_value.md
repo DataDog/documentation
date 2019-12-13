@@ -72,7 +72,7 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type             | Required | Description                                                                                                                                                  |
 |---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget; for the query value widget use `query_value`                                                                                                 |
+| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                 |
 | `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `autoscale`   | Boolean          | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string           | no       | Display a unit of your choice on the widget.                                                                                                                 |
