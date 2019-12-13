@@ -1,7 +1,7 @@
 {
-  "@babel/polyfill.js": "static/@babel/polyfill.js",
-  "main-dd-css.css": "static/main-dd-css.css",
-  "main-dd-css.js": "static/main-dd-css.js",
-  "main-dd-js.js": "static/main-dd-js.js",
-  "vendor.js": "static/vendor.js"
+  "@babel/polyfill.js": "static/@babel/polyfill.27d7e.js",
+  "main-dd-css.css": "static/main-dd-css.4ca03.css",
+  "main-dd-css.js": "static/main-dd-css.be0cd.js",
+  "main-dd-js.js": "static/main-dd-js.159d1.js",
+  "vendor.js": "static/vendor.869fa.js"
 }

@@ -1,0 +1,6 @@
+{{ $link := .link }}
+{{ $date := .date }}
+
+{{ $date := dateFormat "Jan 2, 2006" $date }}
+
+Last Updated: {{ $date }} <a class="btn btn-link" href="{{ trim $link "/" }}">Edit in Github</a>
