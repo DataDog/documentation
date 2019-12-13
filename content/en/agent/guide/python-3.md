@@ -10,6 +10,10 @@ further_reading:
   text: "Use Python 3 with Datadog Agent v6"
 ---
 
+<div class="alert alert-info">
+Only Agent v7+ support running Python 3 Custom Checks by default. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the latest Agent version</a> to run your Python 3 Custom Checks natively. Or <a href="/agent/guide/agent-v6-python-3">enable the Python 3 runtime</a> for your Agent v6.14+ if you would like to test your Custom Checks migration without upgrading your Agent.
+</div>
+
 ## Overview
 
 This guide provides information and best practices on migrating checks between Python 2 and 3. Use Datadog's [Custom Check Compatibility][1] tool to see whether your custom checks are compatible with Python 3 or need to be migrated.
