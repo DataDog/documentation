@@ -98,7 +98,7 @@ Rename a notebook by clicking the name field in the notebook header.
 
 Clone any notebook from the individual notebook by using the settings cog at the top right.
 
-Delete a notebook (created by you) from the notebook list page, or inside the individual notebook by using the settings cog at the top right.
+Delete a notebook from the notebook list page, or inside the individual notebook by using the settings cog at the top right. You can only delete notebooks that you have created.
 
 ## Further Reading
 
