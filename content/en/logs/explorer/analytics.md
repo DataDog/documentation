@@ -138,9 +138,9 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 {{% tab "Map" %}}
 
-Visualize the top values according to a chosen [measure][2] on a map. To group by a [facet][1] use a facet whose value is a two-character country ISO code, for example `US` or `FR`. Datadog's [GeoIP Processor][3] automatically generates these values.
+Visualize the top values according to a chosen [measure][2] on a map. To group by a [facet][1], use a facet whose value is a two-character country ISO code, for example `US` or `FR`. Datadog's [GeoIP Processor][3] automatically generates these values.
 
-The following Table Log Analytics shows the top 10 country per number of error logs collected with Datadog's [Browser Agent][4], over the last 2 days:
+The following Table Log Analytics shows the top 10 country per number of error logs collected with Datadog's [Browser Agent][4] over the last 2 days:
 
 {{< img src="logs/explorer/analytics/map_example.png" alt="table example" responsive="true" style="width:90%;">}}
 
