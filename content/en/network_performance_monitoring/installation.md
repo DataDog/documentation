@@ -99,7 +99,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:6.12.0
+      - image: datadog/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:
@@ -140,7 +140,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       - name: system-probe
-        image: datadog/agent:6.12.0
+        image: datadog/agent:latest
         imagePullPolicy: Always
         securityContext:
           capabilities:
