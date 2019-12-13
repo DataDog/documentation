@@ -1,3 +1,1 @@
-#
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example
+['200', { 'cancelled_ids' => [123_456_789, 123_456_790] }]

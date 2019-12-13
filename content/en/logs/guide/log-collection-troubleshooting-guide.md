@@ -122,19 +122,19 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## Docker environment
 
-See the [Docker Log Collection Troubleshooting Guide][16]
+See the [Docker Log Collection Troubleshooting Guide][9]
 
 ## Serverless environment
 
 ### Logs from lambda functions are not visible in Log Explorer page
 
-See the [Datadog-AWS Log integration][12] to configure your environment. If you still do not see your logs, double-check the following points:
+See the [Datadog-AWS Log integration][10] to configure your environment. If you still do not see your logs, double-check the following points:
 
 #### Lambda function configuration
 
 Check Datadog lambda configuration parameter:
 
-* `<API_KEY>` : Should be set with your [Datadog API key][13] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
+* `<API_KEY>` : Should be set with your [Datadog API key][11] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
 
 #### The lambda function is triggered
@@ -143,7 +143,7 @@ Check that Datadog lambda function is actually triggered by leveraging `aws.lamb
 
 ## Expectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][14]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][15] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][13] that could match your logs.
 
 ## Further Reading
 
@@ -158,11 +158,8 @@ Check if logs appear in the [Datadog Live Tail][14]. If they appear in the Live 
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: https://docs.datadoghq.com/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /agent/docker/log/?tab=containerinstallation#filter-containers
-[10]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[11]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[12]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[13]: https://app.datadoghq.com/account/settings#api
-[14]: https://app.datadoghq.com/logs/livetail
-[15]: /logs/indexes/#exclusion-filters
-[16]: /logs/guide/docker-logs-collection-troubleshooting-guide
+[9]: /logs/guide/docker-logs-collection-troubleshooting-guide
+[10]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[11]: https://app.datadoghq.com/account/settings#api
+[12]: https://app.datadoghq.com/logs/livetail
+[13]: /logs/indexes/#exclusion-filters
