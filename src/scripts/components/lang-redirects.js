@@ -59,10 +59,6 @@ export function handleLanguageBasedRedirects() {
 		acceptLanguage = Cookies.get('lang_pref');
 		logMsg = `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
 	}
-	/*
-		Currently, we only want to redirect based on accept-language for Japanese language sites.
-		When we decide to enable this for other languages, update this function to account for that
-	*/
 	else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
 		logMsg = `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
 
