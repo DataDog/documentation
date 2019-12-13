@@ -116,7 +116,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
 [6]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/openshift/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
 
