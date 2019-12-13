@@ -22,17 +22,17 @@ further_reading:
 Datadog’s [Logging without Limits][1]&trade; removes logging limitations by decoupling log ingestion and indexing to give flexibility around log management. High volume log indexing is helpful when monitoring every aspect of a service, but it can be a distraction when serious problems occur.
 
 For example, you may not find it beneficial to monitor every 200 response code log from a web server, as it's not always relevant for troubleshooting issues. While 4xx and 5xx response code are critical to investigate problems. 
-However, exhaustive KPI (i.e. Number of requests, ratio of errors, number of visitors...) should be computed upon all logs (including the 200 response code logs).
+However, exhaustive KPIs (i.e. Number of requests, ratio of errors, number of visitors...) should be computed upon all logs (including the 200 response code logs).
 
-This guide uses Logging without Limits&trade; to identify a noisy logging service and status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track KPI over time.
+This guide uses Logging without Limits&trade; to identify a noisy logging service status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track KPI over time.
 
-## 1. Identify a noisy logging service and status
+## 1. Identify a noisy logging service status
 
 Your noisiest logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
 
 {{< img src="logs/guide/logging-without-limits.gif" alt="Log Patterns View" responsive="true" style="width:100%;">}}
 
-**To identify your noisiest logging service and status**:
+**To identify your noisiest logging service status**:
 
 1. In Log Explorer, select graph view located next to the search bar. 
 2. Below the search bar, set `count` * group by `service` and `limit` to top 10.
@@ -79,7 +79,7 @@ When a subset of logs is excluded from your index, those logs are still availabl
 To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][9], then the **New Metric+** button.
 
 1. Under Define Query, input the search query you got from the pattern in step 2.
-2. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+2. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (e.g., `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
 3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][10] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][11]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 4. Name your metric: Log-based metric names must follow the [naming metric convention][12].
 
