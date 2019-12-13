@@ -78,22 +78,41 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
       display:block !important;
     }
 
+    .toc a {
+      color: $darkGreyGrey;
+    }
+    .toc_open {
+      color: $studioViolet;
+    }
+
+    .toc_open + ul a {
+      color: $studioViolet;
+    }
+
     // all scrolled link styles
     .toc_scrolled {
-      color: #555;
-      background:$highlightcolor;
+      // color: #555;
+      // background:$highlightcolor;
+      border-left: 4px solid $studioViolet !important;
     }
 
     // level 1 list
     &> ul {
       &> li {
-
         // level 2 list
         &> ul {
           &> li {
-            margin-top: 10px;
+            // First top level item
+            &:nth-child(1) > a { 
+              padding-top: 12px;
+            }
+            // First top level item
+            &:last-child > a { 
+              padding-bottom: 12px;
+            }
+            // margin-top: 10px;
             &.toc_scrolled {
-              background:none;
+              background:none;              
               &> a {
                 position: relative;
                 &:before {
@@ -108,10 +127,15 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
               }
             }
             a {
-              color: #555;
+              padding: 4px 0px 4px 15px;
+              border-left: 4px solid $ddgray;
               font-size: 18px;
-              line-height: 24px;
+              // line-height: 24px;
               font-weight:600;
+            }
+            // First level a tag
+            & > a:first-child:not(.toc_open) {
+              color: $dimGreyGrey;
             }
 
             // level 3 list
@@ -119,8 +143,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
               display: none;
               & > li {
                 a {
-                  font-weight: 200;
-                  font-size: 15px;
+                  font-weight: normal;
+                  font-size: 11px;
+                  line-height: 190%;
+                  color: $darkGreyGrey;
                 }
 
                 // level 4 list
