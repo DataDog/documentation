@@ -33,7 +33,7 @@ Define the Grok processor in the [Datadog Log configuration page][1]:
 
 Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample. Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
-Click "Parse my logs" to kickstart a set of 3 parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in - you can momentaneously deactivate or sample down exclusion filters to make this work for you.
+Click **Parse my logs** to kickstart a set of 3 parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in - you can momentaneously deactivate or sample down exclusion filters to make this work for you.
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
