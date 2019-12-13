@@ -42,7 +42,7 @@ Define the request you want to be executed by Datadog:
 4. **Select your tags**: Select the tags attached to your API test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
 5. **Locations**: Select which Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location](#set-up-a-private-location) to run a Synthetics API test on a private endpoint not accessible from the public internet.
 6. **How often should Datadog run the test?** Set the interval for how often the test will run. Intervals are available between every one minute to once per week.
-7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+7. Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
 [1]: /synthetics
 [2]: /api/?lang=bash#get-available-locations
@@ -67,7 +67,7 @@ Define the request you want to be executed by Datadog:
 
 #### Assertions
 
-Once the URL is tested, a response preview will populate in a panel to the right of the configuration options. If the test fails, review the error [here][7].
+Once the URL is tested, a response preview will populate in a panel to the right of the configuration options. If the test fails, you can [review the error][7].
 
 This panel shows the request as well as the response preview of your API call. It also automates the creation of assertions on the status code, content-type header, and response time of the request.
 
@@ -95,7 +95,7 @@ To create an alert condition using custom assertions:
 {{% tab "HTTP Test" %}}
 1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][1], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
 
-2. Enter an message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
+2. Enter a message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
 
     **Note**: You can use [webhooks][2] in a message body. The webhook will send a payload to alert your services when an alert is triggered. To use a webhook in an alert message, add `@webhook-*name_of_the_webhook` in the message body to trigger the webhook. For example: `{{location.name}} is down! @webhook-servicename`
 
@@ -241,15 +241,15 @@ To create a private location:
     
 **Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
 
-5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+5. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
     {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:100%;">}}
 
-  * In the form when creating a test, below the Private locations section:
+  * In the form when creating a test, below the private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:75%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list" responsive="true" style="width:75%;">}}
 
 6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][5].
 
