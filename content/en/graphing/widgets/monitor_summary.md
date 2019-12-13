@@ -34,7 +34,7 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
     {{< img src="graphing/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" responsive="true" style="width:80%;">}}
 
-2. Enter a monitor query to display the monitor summary widget over a subset of your monitors. 
+2. Enter a monitor query to display the monitor summary widget over a subset of your monitors.
     - If you have template variables created in your dashboard and wish to include them in your monitor query, type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard appears for you to select your desired template variable.
 
     **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors page][2].
@@ -82,19 +82,18 @@ MANAGE_STATUS_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the monitor summary widget use `manage_status`|
-|`query`|string|yes|Query to filter the monitors with|
-|`summary_type`|string|no|Which summary type should be used|
-|`display_format`|string|no|What to display on the widget. Available values are: `counts`, `countsAndList` or `list`
-|`color_preference`|string|no|Which color to use on the widget. Available values are:`background` or `text`
-|`hide_zero_counts`|Boolean|no|Whether to show counts of 0 or not|
-|`show_last_triggered`|Boolean|no|Whether to show the time that has elapsed since the monitor/group triggered|
-|`title`|string|no|Title of the widget|
-|`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
-
+| Parameter             | Type    | Required | Description                                                                              |
+|-----------------------|---------|----------|------------------------------------------------------------------------------------------|
+| `type`                | string  | yes      | Type of the widget, for the monitor summary widget use `manage_status`                   |
+| `query`               | string  | yes      | Query to filter the monitors with                                                        |
+| `summary_type`        | string  | no       | Which summary type should be used                                                        |
+| `display_format`      | string  | no       | What to display on the widget. Available values are: `counts`, `countsAndList` or `list` |
+| `color_preference`    | string  | no       | Which color to use on the widget. Available values are:`background` or `text`            |
+| `hide_zero_counts`    | Boolean | no       | Whether to show counts of 0 or not                                                       |
+| `show_last_triggered` | Boolean | no       | Whether to show the time that has elapsed since the monitor/group triggered              |
+| `title`               | string  | no       | Title of the widget                                                                      |
+| `title_size`          | string  | no       | Size of the title                                                                        |
+| `title_align`         | string  | no       | How to align the title. Available values are: `center`, `left`, or `right`               |
 
 ## Further Reading
 
