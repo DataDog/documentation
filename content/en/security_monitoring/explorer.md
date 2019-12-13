@@ -19,12 +19,12 @@ From the Security Signals Explorer, you can triage security signals.
 In this view, you can:
 
 * [Build a context](#context) to explore your Security Signals.
-* [Visualize your logs](#visualization) as a filtered Security Signals table or Security Signals Analytics.
+* [Visualize your Security Signals](#visualization) as a filtered Security Signals table or Security Signals Analytics.
 * [Share the content](#share-views) of your Security Signal Explorer view to another page within or outside of Datadog.
 
 ## Context
 
-Build up a context to explore your signals in your Security Signals Explorer view. First, select the proper time range. Then, use the search bar to filter your signals.
+Build up a context to explore your signals in your Security Signals Explorer view. First, select the proper time range. Then, use the [search](#search) bar to filter your signals.
 
 ### Time range
 
@@ -48,22 +48,22 @@ Export your current security signal visualization with the *share* functionality
 {{< img src="security_monitoring/explorer/share_security_signals_view.png" alt="Share Security Signals view" responsive="true" style="width:60%;">}}
 
 
-Use the *share* button to send your current log explorer view to a team member.
+Use the *share* button to send your current Security Signal explorer view to a team member.
 
 
 ## Visualization
 
-Switch between the Security Signals Search and the Security Signals Analytics modes by clicking on the *Signal Mode* button in the upper left corner of the page:
+Switch between the Security Signals Table and the Security Signals Analytics modes by clicking on the *Signal Mode* button in the upper left corner of the page:
 
 {{< img src="security_monitoring/explorer/visualization_switch.png" alt="Visualization switch" responsive="true" style="width:50%;">}}
 
 
-The Security Signals Search is the list of signals that match the selected context. A context is defined by a [search bar](#search) filter and a [time range](#time-range).
+The Security Signals Table displays the list of signals that match the selected context. A context is defined by a [search bar](#search) filter and a [time range](#time-range).
 
 
 ### Security Signals Table
 
-The Security Signals Search is displayed in the Security Signals table.
+The Security Signals search results are displayed in the Security Signals Table.
 
 Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button. Only faceted attributes are available for columns.
 
@@ -75,7 +75,7 @@ Security Signal results are sorted by date—the most recent on top by default. 
 
 Click on any Security Signal to open the Security Signal Panel and see more details about it: signal creation date, first seen date, last seen date, classification, tags, security signal message, and the samples that triggered the Security Signal.
  
-Use the **Share** button to share the log opened in side panel to other contexts. 
+Use the **Share** button to share the Security Signal opened in side panel to a team member or any other Datadog notification integration. 
 
 {{< img src="security_monitoring/explorer/share_signal.png" alt="Share Signal" responsive="true" style="width:50%;">}}
 
