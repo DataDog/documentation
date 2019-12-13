@@ -6,6 +6,10 @@ aliases:
   - /agent/guide/upgrade-to-agent-v6
 ---
 
+<div class="alert alert-info">
+Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
+</div>
+
 ## Upgrade to Agent 6
 
 If you have Agent v5 already installed, a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format. Select your platform below for specific instructions. You can either download the [DMG package and install it manually](#manual-upgrade), or use the [one-line install script](#one-step-upgrade).
