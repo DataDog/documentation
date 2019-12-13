@@ -1,6 +1,6 @@
 ---
 title: Estimate and Control APM Usage
-kind: faq
+kind: documentation
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
@@ -40,7 +40,7 @@ For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (def
 
 ### Analyzed Span Filtering
 
-[Span filtering][9] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. 
+[Span filtering][9] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span.
 
 For cost control, you can reduce the number of billable Analyzed Spans by [filtering Analyzed Spans][9]. This has no effect on [Trace Sampling][10]. If a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
@@ -58,4 +58,4 @@ You can also choose to enable App Analytics per service, or per integration in c
 [8]: /account_management/billing/usage_control_apm/#choose-analyzed-span-retention
 [9]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
 [10]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage
-[11]: tracing/app_analytics/?tab=java#configure-additional-services-optional
+[11]: /tracing/app_analytics/?tab=java#configure-additional-services-optional

@@ -84,7 +84,7 @@ To create a dashboard, click on the **New Dashboard +** button in the upper righ
 
 ### Screenboard vs. timeboard
 
-Datadog offers two types of dashboards: [screenboards][4] and [timeboards][5]. To more clearly understand the differences between the two, consider the following:
+Datadog offers two types of dashboards: [screenboards][4] and [timeboards][3]. To more clearly understand the differences between the two, consider the following:
 
 |                            | Timeboards                            | Screenboards                              |
 |----------------------------|---------------------------------------|-------------------------------------------|
@@ -120,4 +120,3 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 [2]: /help
 [3]: /graphing/dashboards/timeboard
 [4]: /graphing/dashboards/screenboard
-[5]: /graphing/dashboards/timeboard

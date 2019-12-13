@@ -29,9 +29,9 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /agent/guide/agent-log-files/?tab=agentv6
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/guide/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

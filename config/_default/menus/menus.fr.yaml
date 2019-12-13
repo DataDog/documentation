@@ -930,6 +930,26 @@ main:
     parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 7
+  - name: Real User Monitoring
+    url: real_user_monitoring/
+    pre: nav_rum
+    identifier: rum
+    weight: 110000
+  - name: Configuration
+    url: real_user_monitoring/setup
+    parent: rum
+    identifier: rum_setup
+    weight: 1
+  - name: RUM Explorer
+    url: real_user_monitoring/rum_explorer
+    parent: rum
+    identifier: rum_views_explorer
+    weight: 2
+  - name: Analyses RUM
+    url: real_user_monitoring/rum_analytics
+    parent: rum
+    identifier: rum_analytics
+    weight: 3
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -972,6 +992,10 @@ main:
     url: developers/dogstatsd/high_throughput/
     parent: dev_tools_dogstatsd
     weight: 103
+  - name: Agrégation de données
+    url: developers/dogstatsd/data_aggregation/
+    parent: dev_tools_dogstatsd
+    weight: 104
   - name: Métriques
     url: developers/metrics/
     parent: dev_tools
@@ -1202,4 +1226,4 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 190000
+    weight: 180000

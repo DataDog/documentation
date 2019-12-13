@@ -56,7 +56,7 @@ instances:
       - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
@@ -156,9 +156,9 @@ Find below the full list of parameters that can be used for your `instances`:
 
 ## From custom to official integration
 
-By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][10]!
+By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][11] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][10] integration.
 
 ## Further Reading
 
@@ -173,5 +173,4 @@ Official integrations have their own dedicated directories. There's a default in
 [7]: https://docs.datadoghq.com/tagging
 [8]: /graphing/metrics/distributions
 [9]: https://github.com/DataDog/integrations-core/issues/1303
-[10]: /developers/prometheus
-[11]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[10]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

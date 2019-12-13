@@ -114,7 +114,7 @@ public class DogStatsdClient {
           .withAlertType(Event.AlertType.ERROR)
           .build();
 
-        Statsd.event(event)
+        Statsd.recordEvent(event);
     }
 }
 {{< /code-block >}}
