@@ -72,7 +72,7 @@ This section describe the minimum setup required in order to forward your Rails 
     config.colorize_logging = false
 
     # Log to a dedicated file
-    config.lograge.logger = ActiveSupport::BufferedLogger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
+    config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
