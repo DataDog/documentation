@@ -35,18 +35,18 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
     {{< img src="graphing/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" responsive="true" style="width:80%;">}}
 
 2. Enter a monitor query to display the monitor summary widget over a subset of your monitors. 
-    - If you have template variables created in your dashboard and wish to include them in your monitor query, simply type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard will appear for you to select your desired template variable.
+    - If you have template variables created in your dashboard and wish to include them in your monitor query, type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard appears for you to select your desired template variable.
 
     **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors page][2].
 
 ## Options
 #### Display preferences
 
-Choose to show only the `Count` of monitors per monitor status type, a `List` of monitors, or `Both`. The `Text` and `Background` options specify whether the status colors should be applied to the text or background of the Status Counts. The `Hide empty status counts` option, when enabled, will only show the Status Counts for statuses that have more than zero monitors in the result list.
+Choose to show only the `Count` of monitors per monitor status type, a `List` of monitors, or `Both`. The `Text` and `Background` options specify whether the status colors should be applied to the text or background of the Status Counts. The `Hide empty Status Counts` option, when enabled, only shows the Status Counts for statuses that have more than zero monitors in the result list.
 
 {{< img src="graphing/widgets/monitor_summary/display-preferences.png" alt="display preferences" responsive="true" style="width:80%;">}}
 
-Selecting the `Show triggered column` option will filter the results to monitors or groups that are in a triggered state (`Alert`, `Warn`, or `No Data`) and sorts them from most recently triggered to least recently triggered. An additional column will appear indicating the amount of time that has elapsed since the monitor/group last triggered.
+Selecting the `Show triggered column` option filters the results to monitors or monitor groups that are in a triggered state (`Alert`, `Warn`, or `No Data`) and sorts them from most recently triggered to least recently triggered. An additional column is added indicating the amount of time that has elapsed since the monitor/group last triggered.
 
 {{< img src="graphing/widgets/monitor_summary/monitor-summary.png" alt="display preferences" responsive="true" style="width:80%;">}}
 
