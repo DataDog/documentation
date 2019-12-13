@@ -82,7 +82,8 @@ Click on any Security Signal to open the Security Signal Panel and see more deta
 - **Severity**: The `HIGH` indicator in the top left denotes the severity of the highest case matched.
 - **Signal generation time**: Located to the right of the severity indicator, this denotes when any of the cases first matched. It is not updated.
 - **Title**: `Account Take Over (ATO) - Potential successful brute-force` in the above example. The title of the signal, appended by the name of the highest case which matched.
-- **First Seen**: The first seen time when a signal was first matched during the [time window][2].
+- **First Seen**: The first seen time when a signal was matched during the [time window][2]. Unlike signal generation time, this timestamp is updated if the query and time window conditions are met. 
+- **Last Seen**: The last seen time when a signal was matched during the [time window][2]. Unlike signal generation time, this timestamp is updated if the query and time window conditions are met. 
 - **Class**: The classification of the security signal, derived from the `security:{classification}` tag.
 - **Group By Values**: Shown here as `USR.NAME`, the group by name and value are displayed here. You can click on the group by value and choose to filter based on it, or create it as a facet if it is not already created.
 - **Tags**: Tags associated with the Detection Rule are available here. Click on any of these tags and choose to filter on them, or create them as facets if they are not already created.
