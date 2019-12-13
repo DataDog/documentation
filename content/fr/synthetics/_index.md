@@ -1,7 +1,6 @@
 ---
 title: Synthetics
 kind: documentation
-beta: true
 description: Assurez-vous que les aspects les plus importants de votre produit fonctionnent correctement à différents endroits du monde.
 aliases:
   - /fr/integrations/synthetics/
@@ -15,9 +14,10 @@ further_reading:
   - link: synthetics/browser_tests
     tag: Documentation
     text: Configurer un test Browser
+  - link: synthetics/identify_synthetics_bots
+    tag: Documentation
+    text: Identifier les Bots Synthetics
 ---
-<div class="alert alert-warning">Synthetics est actuellement uniquement disponible aux États-Unis. Des tests Browser sont disponibles en version bêta : pour demander à y accéder, veuillez remplir le <a href="https://app.datadoghq.com/synthetics/beta">formulaire de demande d'accès à Datadog Synthetics</a>.</div>
-
 ## Présentation
 
 Datadog Synthetics vous offre encore plus de visibilité sur la plateforme Datadog. En surveillant vos applications et les endpoints de l'API grâce à des simulations de requêtes utilisateur et au rendu de votre navigateur, Synthetics vous aide à garantir la disponibilité, à identifier les problèmes par région et à suivre les performances de l'application. En associant Synthetics à vos métriques, vos traces et vos logs, Datadog vous permet d'observer le fonctionnement de tous vos systèmes du point de vue de vos utilisateurs.
@@ -26,14 +26,14 @@ Datadog Synthetics vous offre encore plus de visibilité sur la plateforme Data
 
 ## Recherche
 
-La recherche avancée vous permet d'interroger les checks selon un ensemble de différents attributs :
+La recherche avancée vous permet d'interroger les checks en combinant différents attributs :
 
 * `title` et `message` : recherche de texte
 * `status` : Alert, No Data, Ok
 * `creator`
 * `region`
 * `muted`
-* `notification` 
+* `notification`
 * `tags`
 
 Pour lancer une recherche, rédigez votre requête en utilisant les cases à cocher sur la gauche et/ou la barre de recherche en haut. La barre de recherche est mise à jour avec la requête équivalente lorsque vous cochez des cases. De même, lorsque vous modifiez la requête de la barre de recherche (ou rédigez vous-même votre propre requête), les cases à cocher se mettent à jour pour refléter ces modifications. Les résultats de la requête sont toujours mis à jour en temps réel lorsque vous modifiez la requête. Vous n'avez pas besoin de cliquer sur un bouton « Rechercher ».
@@ -54,13 +54,17 @@ Enfin, les caractères suivants sont réservés : `-`, `(`, `)`, `"`, `~`, `*`,
 
 ## Créer un check
 
-Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [test API][2] ou un [test Browser][3].
+Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [test API][2] ou un [test Browser][3]. Si un test échoue, l'endpoint n'est pas testé une seconde fois : l'uptime considère directement que l'endpoint est `down`.
 
 {{< img src="synthetics/create_a_check.png" alt="Créer un check" responsive="true" style="width:80%;">}}
 
 ## Métriques
 
-Les métriques suivantes sont générées par des checks.
+Les métriques suivantes sont générées par les checks Synthetics :
+
+* Les métriques qui commencent par `synthetics.browser.*` proviennent de vos [tests Browser][4].
+* Les métriques qui commencent par `synthetics.http.*` proviennent de vos [tests API HTTP][5].
+* Les métriques qui commencent par `synthetics.ssl.*` proviennent de vos [test API SSL][6].
 
 {{< get-metrics-from-git "synthetics" >}}
 
@@ -71,3 +75,6 @@ Les métriques suivantes sont générées par des checks.
 [1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [2]: /fr/synthetics/api_tests
 [3]: /fr/synthetics/browser_tests
+[4]: /fr/synthetics/browser_tests
+[5]: /fr/synthetics/api_tests/?tab=httptest
+[6]: /fr/synthetics/api_tests/?tab=ssltest

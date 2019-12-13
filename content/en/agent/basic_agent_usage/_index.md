@@ -26,7 +26,7 @@ further_reading:
 
 Agent v6 is a complete rewrite in Go of the Agent v5. V6 offers better performances, smaller footprint, and more features. It is the default Datadog Agent (v5 is no longer in active development).
 
-Agent v6 is a composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
+Agent v6 is composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
 * The Collector is in charge of running checks and collecting metrics.
 * The Forwarder sends payloads to Datadog.
@@ -64,12 +64,12 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
 
 
-[1]: /developers/dogstatsd/data_types/#metrics
+[1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology
-[3]: /agent/guide/network/?tab=agentv6#open-ports
-[4]: /developers/write_agent_check/?tab=agentv6
+[3]: /agent/guide/network/#open-ports
+[4]: /developers/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /developers/dogstatsd
+[6]: /developers/metrics/dogstatsd_metrics_submission
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -164,7 +164,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
-3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
+3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
 ## Supported OS versions
 
@@ -187,7 +187,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
-[1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv6
+[1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb
 [3]: /agent/basic_agent_usage/ubuntu
 [4]: /agent/basic_agent_usage/redhat
@@ -346,5 +346,5 @@ To send your Agent data to the [Datadog EU site][5], edit your [Agent main confi
 [3]: /agent/guide/integration-management
 [4]: /agent/guide/agent-configuration-files
 [5]: https://app.datadoghq.eu
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [7]: /agent/guide/agent-log-files

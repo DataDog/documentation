@@ -1,7 +1,7 @@
 ---
 title: Disable user
 type: apicontent
-order: 34.5
+order: 35.5
 external_redirect: /api/#disable-user
 ---
 

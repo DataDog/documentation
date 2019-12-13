@@ -31,11 +31,11 @@ supported_os:
 
 Extrayez des métriques custom depuis des endpoints OpenMetrics.
 
-**Remarque** : toutes les métriques récupérées par cette intégration sont considérées comme des [métriques custom][1].
+<div class="alert alert-warning">Toutes les métriques récupérées par cette intégration sont considérées comme des <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métriques custom</a>.</div>
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque vous exécutez l'Agent sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -43,19 +43,21 @@ Le check OpenMetrics est inclus à partir de la [version 6.6.0 de l'Agent Datad
 
 ### Configuration
 
-Modifiez le fichier `openmetrics.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][4] pour ajouter les différentes instances OpenMetrics pour lesquelles vous souhaitez récupérer des métriques.
+Modifiez le fichier `openmetrics.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple openmetrics.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-Chaque instance est au minimum composée des paramètres suivants :
+Pour chaque instance, les paramètres suivants sont requis :
 
-* `prometheus_url` : indique l'itinéraire des métriques (**remarque :** doit être unique).
-* `namespace` : espace de nommage à ajouter en préfixe pour toutes les métriques (permet d'éviter les conflits entre les noms de métriques).
-* `metrics` : la liste des métriques à récupérer en tant que métriques custom. Il vous suffit d'ajouter vos métriques à la liste `- nom_métrique` ou de les renommer avec `- nom_métrique: renamed`. Vous pouvez également utiliser le wildcard `*`, par exemple `- metric*`, afin de récupérer toutes les métriques correspondantes. Utilisez prudemment ce wildcard, car il peut entraîner l'envoi de nombreuses métriques custom.
+| Paramètre        | Description                                                                                                                                                                                                                                                              |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `prometheus_url` | L'URL sur laquelle les métriques de votre application sont exposées par Prometheus (doit être unique).                                                                                                                                                                                       |
+| `namespace`      | L'espace de nommage à ajouter devant le nom de chaque métrique.                                                                                                                                                                                                                                 |
+| `metrics`        | La liste des métriques à récupérer en tant que métriques custom. Ajoutez chaque métrique à la liste en spécifiant le `nom_métrique` ou utilisez `nom_métrique: renamed` pour la renommer. Utilisez le wildcard `*` (`metric*`) pour récupérer toutes les métriques correspondantes. **Remarque** : l'utilisation des wildcards peut engendrer l'envoi d'un grand nombre de métriques custom. |
 
-Il existe également plusieurs paramètres plus avancés (`ssl`, `labels joining`, `tags`,...) dont l'utilisation est expliquée dans [l'exemple de configuration `conf.yaml`][5].
+Pour obtenir d'autres exemples de configuration, consultez la section [collecte de métriques Prometheus et OpenMetrics][10].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `openmetrics` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `openmetrics` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -79,15 +81,15 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 * [Configurer un check OpenMetrics][8]
 * [Écrire un check OpenMetrics personnalisé][9]
 
-[1]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://docs.datadoghq.com/fr/agent/openmetrics
+[5]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [7]: https://docs.datadoghq.com/fr/help
 [8]: https://docs.datadoghq.com/fr/agent/openmetrics
 [9]: https://docs.datadoghq.com/fr/developers/openmetrics
+[10]: https://docs.datadoghq.com/fr/getting_started/integrations/prometheus
 
 
 {{< get-dependencies >}}

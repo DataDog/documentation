@@ -1,6 +1,6 @@
 ---
 title: Facturation des conteneurs
-kind: faq
+kind: documentation
 ---
 ## Présentation
 

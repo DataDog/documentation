@@ -43,7 +43,7 @@ Enter your threshold directly to visualize your request distribution:
 
 {{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" responsive="true" >}}
 
-You can then save your widget to follow your Apdex evolution above time:
+You can then save your widget to follow your Apdex evolution over time:
 
 {{< img src="tracing/faq/apm_save.png" alt="Apdex Save" responsive="true" >}}
 

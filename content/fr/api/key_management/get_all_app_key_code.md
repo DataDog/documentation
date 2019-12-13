@@ -5,14 +5,14 @@ order: 21.06
 external_redirect: "/api/#obtenir-toutes-les-cles-d-application"
 ---
 
-**SIGNATURE**:
+**SIGNATURE** :
 
 `GET /v1/application_key/`
 
-**EXEMPLE DE REQUÊTE**:
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_all_app_key" >}}
 
-**EXEMPLE DE RÉPONSE**:
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_all_app_key" >}}

@@ -7,4 +7,7 @@ app_key=<YOUR_APP_KEY>
 monitor_id=<YOUR_MONITOR_ID>
 
 # Unmute a monitor
-curl -X POST "https://api.datadoghq.com/api/v1/monitor/${monitor_id}/unmute?api_key=${api_key}&application_key=${app_key}"
+curl -X POST \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/monitor/${monitor_id}/unmute"

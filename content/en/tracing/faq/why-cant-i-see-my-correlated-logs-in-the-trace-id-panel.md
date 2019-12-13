@@ -67,7 +67,7 @@ Here is an example with the Java integration pipeline:
 
 Now it is possible that the log format is not covered by the integration pipeline. In this case, clone the pipeline and [follow our parsing troubleshooting guide][1] to make sure it fits your format.
 
-[1]: /logs/faq/how-to-investigate-a-log-parsing-issue/#pagetitle
+[1]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -92,6 +92,6 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/#pagetitle
+[2]: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
 [3]: /tracing/visualization/#services
 [4]: /tracing/advanced/connect_logs_and_traces

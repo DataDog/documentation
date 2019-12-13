@@ -38,7 +38,7 @@ Pour obtenir davantage d'informations sur l'utilisation des intégrations Datado
 
     * datadogpy
     * pyyaml (installer avec `pip install pyyaml`)
-
+    * Pour les utilisateurs Mac OS X : si vous exécutez la version 2.7.10 ou une version antérieure de Python installée sur l'OS, effectuez une mise à niveau vers une nouvelle version d'OpenSSL - `pip install pyopenssl idna`.
 2.  Dupliquez le [référentiel GitHub ansible-datadog-callback][2].
 3.  Copiez `datadog_callback.py` dans votre répertoire de rappel de playbook (par défaut, callback_plugins/ dans le répertoire racine de votre playbook). Créez ce répertoire s'il n'existe pas.
 4.  Créez un fichier `datadog_callback.yml` dans le même répertoire que `datadog_callback.py` et définissez son contenu avec votre clé d'API tel que suit :
@@ -51,7 +51,7 @@ Pour installer l'Agent Datadog en utilisant Ansible, consultez la [documentation
 
 ### Collecte de logs
 
-[Consultez l'exemple de playbook][7] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs à l'aide d'Ansible.
+[Consultez l'exemple de playbook][4] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs à l'aide d'Ansible.
 
 ## Données collectées
 ### Métriques
@@ -65,14 +65,14 @@ L'intégration Ansible n'inclut aucun événement.
 L'intégration Ansible n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/
+[1]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring
 [2]: https://github.com/datadog/ansible-datadog-callback
 [3]: https://app.datadoghq.com/account/settings#agent/ansible
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
-[7]: https://github.com/DataDog/ansible-datadog#example-playbooks
+[4]: https://github.com/DataDog/ansible-datadog#example-playbooks
+[5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
+[6]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

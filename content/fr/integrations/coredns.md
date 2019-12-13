@@ -1,5 +1,9 @@
 ---
 aliases: []
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - containers
   - network
@@ -17,6 +21,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: coredns.
+metric_to_check: coredns.request_count
 name: coredns
 public_title: Intégration Datadog/CoreDNS
 short_description: CoreDNS recueille des métriques relatives au DNS dans Kubernetes.
@@ -28,17 +33,20 @@ supported_os:
 Recueillez des métriques de CoreDNS en temps réel pour visualiser et surveiller les échecs de DNS et les hits et miss de cache.
 
 ## Implémentation
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer ces instructions aux environnements conteneurisés.
+
 ### Installation
 
 Le check CoreDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `coredns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de rediriger vers votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple coredns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `coredns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple coredns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 #### Utilisation de la découverte de services
 
-Si vous utilisez un pod dd-agent (daemon set) pour chaque nœud de travail Kubernetes, utilisez les annotations suivantes sur votre pod kube-dns pour récupérer automatiquement les données.
+Si vous utilisez un pod dd-agent (daemon set) pour chaque nœud worker Kubernetes, utilisez les annotations suivantes sur votre pod core-dns pour récupérer automatiquement les données.
 
 ```yaml
 metadata:
@@ -70,7 +78,9 @@ Le check CoreDNS n'inclut aucun événement.
 
 ### Checks de service
 
-Le check CoreDNS n'inclut aucun check de service.
+`coredns.prometheus.health` :
+
+Renvoie `CRITICAL` si l'Agent ne peut pas accéder aux endpoints des métriques.
 
 ## Dépannage
 
@@ -84,9 +94,10 @@ pour découvrir comment tester et développer des intégrations reposant sur l'A
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/developers
 [3]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
 [6]: http://docs.datadoghq.com/help
+[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

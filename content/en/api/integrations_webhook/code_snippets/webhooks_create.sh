@@ -5,15 +5,16 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -v -X POST -H "Content-type: application/json" \
+curl -v -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
     "hooks": [
       {
         "name": "<WEBHOOK_NAME>",
-        "url": "<WEBHOOK_URL>",
-        "use_custom_payload": "false",
-        "encode_as_form": "false"
+        "url": "<WEBHOOK_URL>"
       }
     ]
 }' \
-"https://api.datadoghq.com/api/v1/integration/webhooks?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/webhooks"

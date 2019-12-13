@@ -1,6 +1,6 @@
 ---
 title: Serverless billing
-kind: faq
+kind: documentation
 ---
 
 ## Overview
@@ -63,6 +63,6 @@ For billing questions, contact your [Customer Success][3] Manager.
 [1]: https://www.datadoghq.com/pricing/#section-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: app.datadoghq.com/account/usage
+[4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [6]: /help

@@ -1,37 +1,20 @@
 ---
 title: Outils de développement
 kind: documentation
+disable_toc: true
 description: 'Tout ce qu''il y a à savoir sur le développement pour la plateforme Datadog, notamment des exemples de configurations et de code, ainsi que de nombreuses références.'
+aliases:
+  - /fr/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 ---
-Cette section comprend des détails techniques, des exemples de code et des articles de référence pour une mise en œuvre rapide.
-
-#### Checks custom
-
-Vous cherchez àt transmettre vos propres checks custom ? Commencez par lire les sections sur les [checks de l'Agent][1] et les [checks Prometheus][2], qui contiennent un grand nombre d'exemples de configurations et de code. Vous pourrez ensuite passer à la [section DogStatsD][3] pour apprendre à utiliser le service d'agrégation de métriques intégré à l'Agent.
-
-#### Intégrations
-
-Si vous vous sentez prêt à découvrir des concepts plus avancés sur la collecte de données, passez à la [section Intégrations][4]. Celle-ci vous explique comment mettre en place une intégration complète pour votre application ou votre service préféré.
-
-#### Bibliothèques
-
-Vous souhaitez en savoir plus sur les ressources Datadog pour votre langue ou votre plateforme préférée ? La [section Bibliothèques][5] énumère les bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté, les bibliothèques pour l'APM et le tracing distribué et les intégrations de la communauté soutenues par des ressources extérieures pour une grande variété de plateformes.
-
-#### Métriques
-
-Notre [section Métriques][6] permet d'y voir plus clair dans les métriques de Datadog. Cette section explique les différents types de métriques, ce qu'elles représentent et comment elles sont utilisées dans l'écosystème Datadog. Vous pouvez également consulter la section [Métriques custom][7] pour en savoir plus sur l'utilisation de vos propres métriques personnalisées.
-
-#### Heures de permanence
-
-Pour finir, ne manquez pas les [heures de permanence de Datadog][8] pour échanger directement avec les ingénieurs internes à propos du développement pour Datadog.
-
-Merci pour votre visite et bienvenue dans la communauté des contributeurs !
-
-[1]: /fr/developers/integrations
-[2]: /fr/developers/prometheus
-[3]: /fr/developers/dogstatsd
-[4]: /fr/developers/integrations
-[5]: /fr/developers/libraries
-[6]: /fr/developers/metrics
-[7]: /fr/developers/metrics/custom_metrics
-[8]: /fr/developers/office_hours
+{{< whatsnext desc="Cette section aborde les sujets suivants :" >}}
+    {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u> : présentation des fonctionnalités de DogStatsD, y compris sa configuration, le format des datagrammes et l'envoi de données.{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics" >}}<u>Métriques</u> : plongez au cœur des métriques de Datadog. Cette section explique les différents types de métriques, ce qu'elles représentent, comment les envoyer et comment elles sont utilisées dans l'écosystème Datadog.{{< /nextlink >}}
+    {{< nextlink href="/developers/events" >}}<u>Événements</u> : découvrez comment envoyer des événements à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks" >}}<u>Checks de service</u> : apprenez à envoyer des checks de service à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
+    {{< nextlink href="/developers/libraries" >}}<u>Bibliothèques</u> : liste des bibliothèques client officielles et de la communauté pour l'API Datadog, le client DogStatsD, l'APM et le tracing distribué et les intégrations de la communauté soutenues par des ressources extérieures pour une grande variété de plateformes.{{< /nextlink >}}
+    {{< nextlink href="/developers/office_hours" >}}<u>Heure de permanence</u> : heure de permanence régulière de Datadog ; c'est l'occasion idéale d'échanger avec des ingénieurs à propos du développement pour Datadog.{{< /nextlink >}}
+    {{< nextlink href="/developers/write_agent_check" >}}<u>Écrire un check custom</u> : découvrez comment transmettre des métriques, des événements et des checks de service à l'aide de votre propre check custom.{{< /nextlink >}}
+    {{< nextlink href="/developers/prometheus" >}}<u>Écrire un check Prometheus</u> : apprenez à transmettre vos propres métriques Prometheus avec un check custom d'Agent dédié.{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/" >}}<u>Intégrations</u> : pour gérer des tâches plus complexes, créez une intégration Datadog et partagez-la avec la communauté.{{< /nextlink >}}
+    {{< nextlink href="/developers/guide/" >}}<u>Guides</u> : articles d'aide supplémentaires sur des particularités techniques, exemples de code et documentation de référence.{{< /nextlink >}}
+{{< /whatsnext >}}

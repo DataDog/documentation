@@ -15,7 +15,6 @@ further_reading:
 
 OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][1].
 
-
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -176,7 +175,6 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
 }
 ```
 
-
 #### Create a distributed trace using manual instrumentation with OpenTracing
 
 ```java
@@ -240,15 +238,39 @@ public class MyHttpRequestExtractAdapter implements TextMap {
   }
 }
 ```
+
 Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
+
+#### Set errors
+
+To customize an error associated to one of your spans, import the `io.opentracing.Span`, `io.opentracing.tag.Tags`, and `io.opentracing.util.GlobalTracer` libraries into the method where the error occurs:
+
+```java
+import io.opentracing.Span;
+import io.opentracing.tag.Tags;
+import io.opentracing.util.GlobalTracer;
+```
+
+Then, set the error to `true` and add *at least* the `error.msg`, `error.type`, and `error.stack` tags to your span.
+
+```java
+    final Span span = GlobalTracer.get().activeSpan();
+    if (span != null) {
+      Tags.ERROR.set(span, true);
+      span.log(Collections.singletonMap(Fields.ERROR_OBJECT, ex));
+    }
+```
+
+**Note**: Any relevant error metadata explained in the [Trace View docs][4] can also be added.
+If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [source code][5] for more details.
 
 [1]: https://github.com/opentracing/opentracing-java
 [2]: /tracing/visualization/#trace
 [3]: /tracing/setup/java/#configuration
+[4]: /tracing/visualization/trace/?tab=spantags#more-information
+[5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/MutableSpan.java#L51
 {{% /tab %}}
 {{% tab "Python" %}}
-
-Support for OpenTracing in the Python tracer is currently in beta.
 
 **Setup**:
 

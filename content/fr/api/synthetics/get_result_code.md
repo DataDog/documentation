@@ -1,7 +1,7 @@
 ---
 title: Obtenir un résultat spécifique
 type: apicode
-order: 29.6
+order: 30.6
 external_redirect: "/api/#obtenir-un-resultat"
 ---
 

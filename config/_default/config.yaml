@@ -18,3 +18,6 @@ defaultContentLanguageInSubdir: false
 
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 contentDir: "content/en"
+
+# gitinfo vars
+enableGitInfo: true

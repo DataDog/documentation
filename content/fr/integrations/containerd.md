@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - containers
 creates_events: true
@@ -35,7 +39,34 @@ Containerd est un check de base de l'Agent 6 et doit donc être configuré dans
 
 Dans `datadog.yaml`, configurez votre `cri_socket_path` pour que l'Agent puisse interroger Containerd. Dans `containerd.d/conf.yaml`, configurez les réglages d'instance du check (tel que `filters`) pour les événements.
 
-**Remarque** : si vous utilisez l'Agent dans un conteneur et définissez la variable d'environnement `DD_CRI_SOCKET_PATH`, cela active automatiquement le check `Containerd` avec la configuration par défaut.
+#### Installation sur des conteneurs
+
+Si vous utilisez l'Agent dans un conteneur et définissez la variable d'environnement `DD_CRI_SOCKET_PATH` sur le socket Containerd, le check `Containerd` est automatiquement activé avec la configuration par défaut.
+
+Par exemple, pour installer l'intégration sur Kubernetes, modifiez votre manifeste `datadog-agent.yaml` pour mapper le socket Containerd du nœud host vers le daemonset et définissez le `DD_CRI_SOCKET_PATH` sur le mountPath du daemonset :
+
+```
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: datadog-agent
+spec:
+  template:
+    spec:
+      containers:
+        - name: datadog-agent
+          ...
+          env:
+            - name: DD_CRI_SOCKET_PATH
+              value: "/var/run/containerd/containerd.sock"
+          volumeMounts:
+            - name: containerdsocket
+              mountPath: /var/run/containerd/containerd.sock
+          volumes:
+            - hostPath:
+                path: /var/run/containerd/containerd.sock
+              name: containerdsocket
+```
 
 ### Configuration
 
@@ -73,7 +104,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/help
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
 
 

@@ -51,7 +51,7 @@ Le check Gunicorn de l'Agent Datadog est inclus avec le paquet de l'[Agent Datad
 
 Le check Gunicorn nécessite que l'environnement Python de votre application Gunicorn dispose du paquet [`setproctitle`][4]. Sans celui-ci, l'Agent Datadog signalera toujours qu'il ne parvient pas à trouver le processus maître `gunicorn` (et donc, qu'il ne peut pas non plus trouver de workers). Installez le paquet `setproctitle` dans l'environnement Python de votre application si vous souhaitez recueillir la métrique `gunicorn.workers`.
 
-### Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
+### Configuration
 
 Modifiez le fichier `gunicorn.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Gunicorn.
 Consultez le [fichier d'exemple gunicorn.yaml][6] pour découvrir toutes les options de configuration disponibles.

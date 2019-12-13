@@ -1,6 +1,6 @@
 ---
 title: "Facturation de l'intégration Google\_Cloud"
-kind: faq
+kind: documentation
 ---
 ## Présentation
 
@@ -14,7 +14,7 @@ Utilisez le [carré d'intégration Google Cloud][1] pour contrôler la collecte
 
 {{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" responsive="true">}}
 
-Lorsque vous appliquez des limites à des projets Google Cloud depuis le carré d'intégration, les instances précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 24 heures. Durant cette période de transition, les instances GCE affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
+Lorsque vous appliquez des limites à des projets Google Cloud depuis le carré d'intégration, les instances précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les instances GCE affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
 Les hosts sur lesquels un Agent est exécuté s'affichent toujours et sont pris en compte dans votre facture. L'application de limites concerne uniquement les instances GCE sur lesquelles aucun Agent n'est exécuté.
 

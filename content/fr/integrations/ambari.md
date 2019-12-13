@@ -36,7 +36,7 @@ Ce check permet de surveiller [Ambari][1] avec l'Agent Datadog.
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -105,8 +105,8 @@ Si la collecte de métriques de service est activée avec `collect_service_metri
 Renvoie `OK` si le cluster est accessible. Si ce n'est pas le cas, renvoie `CRITICAL`.
 
 **ambari.state** :<br>
-Renvoie `OK` si le service est installé ou en cours d'exécution, `WARNING` si le service est en cours d'arrêt ou de désinstallation,
-ou `CRITICAL` si le service est désinstallé ou arrêté. Pour obtenir la liste complète, consultez [ce fichier][8].
+Renvoie `OK` si le service est installé ou en cours d'exécution, `WARNING` si le service est en cours d'arrêt ou de désinstallation
+ou `CRITICAL` si le service est désinstallé ou arrêté.
 
 ### Événements
 
@@ -119,8 +119,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://ambari.apache.org
 [2]: https://docs.datadoghq.com/fr/agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
 [7]: https://github.com/DataDog/integrations-core/blob/master/ambari/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help

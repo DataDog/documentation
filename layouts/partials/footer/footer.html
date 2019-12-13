@@ -15,16 +15,29 @@
 {{ $datafile := ($.Scratch.Get "data") }}
 <footer>
     <div class="container">
+        <div class="row pt-3 pb-0 pb-lg-6">
+            <div class="col-12 col-lg-9">
+                <h2 class="text-white text-center text-md-left font-semibold">{{ $datafile.footer_blurb_heading }}</h2>
+                <p class="text-white text-center text-md-left font-regular border-0 font-22 my-0 py-0">{{ $datafile.footer_blurb_desc }}</p>
+            </div>
+            <div class="col-12 col-lg-3 text-left text-lg-right contact-btn-container">
+                <a href="{{ "help/" | absLangURL }}" class="btn btn-primary btn-inline-block mt-3 mb-4 my-lg-0  text-white text-uppercase">{{ i18n "contact_us" }}</a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-12 col-lg-12 col-xl-4 footer-side">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <button type="button" class="btn btn-block btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">{{ i18n "free_trial" }}</button>
+            <div class="col-12 col-lg-3 col-xl-4 mb-4 mb-lg-0 footer-side">
+                <div class="row align-items-center">
+                    <div class="col-6 col-md-4 d-block d-lg-none">
+                            {{ partial "img.html" (dict "root" . "src" "dd_logo_white.png" "class" "dd-logo d-inline-block w-100" "alt" "DataDog" "height" "" "img_param" "?ch=Width,DPR&fit=max&auto=format" "disable_lazy" "true") }}
+                        
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-10 col-xl-6 offset-0 offset-sm-2 offset-md-5 offset-lg-0 text-right text-lg-left">
+                            <button type="button" class="btn d-block w-100 btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">{{ i18n "free_trial" }}</button>
                     </div>
                 </div>
-                <span class="copyright d-none d-xl-block">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
+                <span class="copyright d-none d-lg-block mt-4">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
             </div>
-            <div class="col-12 col-lg-6 col-xl-4 mt-4 mt-xl-0">
+            <div class="col-12 col-lg-5 col-xl-4">
                 <p>Product</p>
                 <div class="row">
                     <div class="col-6">
@@ -42,11 +55,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row d-none d-lg-block d-xl-none mt-4">
-                    <span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
-                </div>
             </div>
-            <div class="col-12 col-lg-6 col-xl-4 mt-4 mt-xl-0">
+            <div class="col-12 col-lg-4 col-xl-4">
                 <div class="row">
                     <div class="col-4">
                         <p>About</p>
@@ -79,7 +89,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 footer-legal">
+            <div class="col-sm-12 footer-legal py-1 mt-3">
                 <a href="https://www.datadoghq.com/legal/terms/">{{ i18n "terms" }}</a> |
                 <a href="https://www.datadoghq.com/legal/privacy/">{{ i18n "privacy" }}</a> |
                 <a href="https://www.datadoghq.com/legal/cookies/">{{ i18n "cookies" }}</a>

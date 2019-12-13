@@ -43,6 +43,7 @@
         // TODO: enable/auto-lint it everywhere
         "arrow-parens": ["off", "as-needed"],
         // Need to figure out first what convention we want here
+        "import/newline-after-import": "off",
         "import/extensions": "off",
         "import/no-extraneous-dependencies": [
             "error",

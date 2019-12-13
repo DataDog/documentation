@@ -32,14 +32,14 @@ Si vous constatez des erreurs que vous ne comprenez pas, ou si les [traces][5] s
 
 ## Mode debugging du traceur
 
-Les paramètres de debugging de Datadog servent à diagnostiquer les problèmes ou à auditer les données de trace. Nous vous déconseillons d'activer le mode debugging sur vos systèmes de production, car cela augmente le nombre d'événements envoyés à vos enregistreurs. Utilisez cette fonctionnalité avec parcimonie, et uniquement à des fins de debugging.
+Les paramètres de debugging de Datadog servent à diagnostiquer les problèmes ou à auditer les données de trace. Nous vous déconseillons d'activer le mode debugging sur vos systèmes de production, car cela augmente le nombre d'événements envoyés à vos loggers. Utilisez cette fonctionnalité avec parcimonie, et uniquement à des fins de debugging.
 
 Le mode debugging est désactivé par défaut. Pour l'activer, suivez les instructions correspondant au langage utilisé :
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` lors du démarrage de la JVM.
+Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag `-Ddd.trace.debug=true` au démarrage du JVM ou ajoutez la variable d'environnement `DD_TRACE_DEBUG=true`.
 
 **Remarque** : le traceur Java Datadog implémente SL4J SimpleLogger. [Tous ses paramètres peuvent donc être appliqués][1], comme l'enregistrement dans un fichier de log dédié : `-Ddatadog.slf4j.simpleLogger.logFile=<NOUVEAU_CHEMIN_FICHIER_LOG>`
 
@@ -62,11 +62,11 @@ end
 
 **Logs d'application** :
 
-Par défaut, tous les logs sont traités par l'enregistreur Ruby de base. Lorsque vous utilisez Rails, les messages s'affichent dans le fichier de log de votre application.
+Par défaut, tous les logs sont traités par le logger Ruby de base. Lorsque vous utilisez Rails, les messages s'affichent dans le fichier de log de votre application.
 
 Les messages de log du client Datadog sont indiqués par `[ddtrace]`. Vous pouvez donc les isoler des autres messages.
 
-De plus, vous pouvez modifier l'enregistreur par défaut et le remplacer par un enregistreur personnalisé. Pour ce faire, utilisez l'attribut ``log`` du traceur.
+De plus, vous pouvez modifier le logger par défaut et le remplacer par un logger personnalisé. Pour ce faire, utilisez l'attribut ``log`` du traceur.
 
 ```ruby
 f = File.new("<NOMFICHIER>.log", "w+")           # Les messages de log doivent être ici
@@ -113,7 +113,7 @@ const tracer = require('dd-trace').init({
 
 Par défaut, la journalisation à partir de cette bibliothèque est désactivée. Pour obtenir les informations de debugging et les erreurs envoyées aux logs, les options `debug` doivent être définies sur `true` dans la méthode [init()][1].
 
-Le traceur enregistre ensuite les informations de debugging dans `console.log()` et les erreurs dans `console.error()`. Ce comportement peut être modifié en transmettant un enregistreur personnalisé au traceur. Celui-ci doit contenir des méthodes `debug()` et `error()` capables de gérer respectivement les messages et les erreurs.
+Le traceur enregistre ensuite les informations de debugging dans `console.log()` et les erreurs dans `console.error()`. Ce comportement peut être modifié en transmettant un logger personnalisé au traceur. Celui-ci doit contenir des méthodes `debug()` et `error()` capables de gérer respectivement les messages et les erreurs.
 
 Par exemple :
 
@@ -137,7 +137,7 @@ Vérifiez ensuite les logs de l'Agent à la recherche d'informations supplément
 
 * Si la trace a été correctement envoyée à l'Agent, vous devriez voir des entrées de log `Response from the Agent: OK`. Cela indique que le traceur fonctionne correctement. Le problème réside donc au niveau de l'Agent. Consultez le [guide de dépannage de l'Agent][2] pour en savoir plus.
 
-* Si une erreur a été signalée par l'Agent (ou l'Agent n'a pas pu être atteint), vous verrez des entrées de log `Error from the Agent`. Dans ce cas, validez votre configuration réseau pour vérifier que [l'Agent peut être atteint](#depannage-agent). Si vous êtes sûr que le réseau fonctionne et que l'erreur vient de l'Agent, reportez-vous au [guide de dépannage de l'Agent][2].
+* Si une erreur est signalée par l'Agent (ou qu'aucune communication avec l'Agent ne peut être établie), des entrées `Error from the Agent` apparaissent alors dans le log. Dans ce cas, validez votre configuration réseau pour vérifier que la connexion à l'Agent est possible. Si vous êtes sûr que le réseau est opérationnel et que l'erreur provient de l'Agent, consultez le [Guide de dépannage de l'Agent][2].
 
 Si aucune de ces entrées de log n'est présente, aucune requête n'a été envoyée à l'Agent, ce qui signifie que le traceur n'instrumente pas votre application. Dans ce cas, [contactez l'assistance Datadog][3] et envoyez les entrées de log pertinentes avec [un flare][4].
 
@@ -162,6 +162,16 @@ var tracer = Tracer.Create(isDebugEnabled: true);
 // facultatif : définir le nouveau traceur en tant que nouveau traceur global/par défaut
 Tracer.Instance = tracer;
 ```
+
+La variable d'environnement `DD_TRACE_DEBUG` peut également être définie sur `true`.
+
+Les fichiers de log sont enregistrés dans les répertoires suivants :
+
+| Plateforme | Chemin                                                          |
+|----------|---------------------------------------------------------------|
+| Linux    | `/var/log/datadog/`                        |
+| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
+
 
 {{% /tab %}}
 {{% tab "PHP" %}}

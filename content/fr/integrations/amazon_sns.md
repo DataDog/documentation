@@ -12,12 +12,12 @@ description: "Envoyez des messages Amazon\_SNS à Datadog ou envoyez des alertes
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
 git_integration_title: amazon_sns
 has_logo: true
-integration_title: "AWS\_SNS"
+integration_title: "Amazon\_SNS"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_sns
-public_title: "Intégration Datadog/AWS\_SNS"
+public_title: "Intégration Datadog/Amazon\_SNS"
 short_description: "Envoyez des messages Amazon\_SNS à Datadog ou envoyez des alertes Datadog à SNS. SNS."
 version: '1.0'
 ---
@@ -51,13 +51,14 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte d'événements
 #### Recevoir des messages d'Amazon SNS dans le flux d'événements
 
-1.  Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur Create subscription.
+1. Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur Create subscription.
 
 2. Sélectionnez https et saisissez l'URL Webhook suivante :
+    ```
+    https://app.datadoghq.com/intake/webhook/sns?api_key=<API KEY>
+    ```
 
-```
-https://app.datadoghq.com/intake/webhook/sns?api_key=<CLÉ API>
-```
+3. N'activez pas « raw message delivery ».
 
 #### Envoyer des notifications SNS depuis Datadog
 
@@ -96,7 +97,7 @@ L'intégration AWS SNS n'inclut aucun check de service.
 ## Dépannage
 
 ### AWS GovCloud et AWS Chine
-Nous ne prenons actuellement pas en charge les notifications SNS depuis Datadog vers les rubriques dans GovCloud ou Chine.
+Nous ne prenons actuellement pas en charge les notifications SNS envoyés depuis Datadog vers des rubriques dans GovCloud ou Chine.
 
 ### Autres problèmes
 Besoin d'aide ? Contactez [l'assistance Datadog][7].

@@ -68,7 +68,7 @@ Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez p
 
 Les fonctions de parsing personnalisées doivent :
 
-- accepter deux paramètres : un objet enregistreur Python (pour le debugging) et un paramètre de chaîne spécifiant la ligne à parser.
+- accepter deux paramètres : un objet logger Python (pour le debugging) et un paramètre de chaîne spécifiant la ligne à parser.
 - renvoyer un tuple ou une liste de tuples sous la forme :
 
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`

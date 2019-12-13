@@ -182,7 +182,7 @@ Configurez vos traceurs d'applications de façon à envoyer des traces à un hos
 
 [1]: /fr/tracing/setup/envoy
 [2]: /fr/tracing/setup/nginx
-[3]: /fr/tracing/setup
+[3]: /fr/tracing/send_traces
 [4]: https://github.com/opentracing/opentracing-cpp
 [5]: https://github.com/opentracing/opentracing-cpp/#cc98
 [6]: /fr/help

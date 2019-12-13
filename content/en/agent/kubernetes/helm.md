@@ -1,5 +1,5 @@
 ---
-title: Deploying Datadog in Kubernetes using Helm 
+title: Deploying Datadog in Kubernetes using Helm
 kind: documentation
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"
@@ -13,7 +13,7 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-Helm is a package management tool for Kubernetes. 
+Helm is a package management tool for Kubernetes.
 
 ## Installing Helm
 
@@ -47,6 +47,9 @@ For other platforms and methods of installing Helm, refer to the [Helm documenta
 
 ### Installing the Helm server (Tiller)
 
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you. 
+
+
 If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
 
 ```bash
@@ -58,23 +61,23 @@ Refer to [Helm's Tiller documentation][2] for further details.
 If your Kubernetes cluster is RBAC-enabled, use the following RBAC to deploy Tiller.
 
 ```yaml
-apiVersion: v1  
-kind: ServiceAccount  
-metadata:  
- name: tiller  
- namespace: kube-system  
----  
-apiVersion: rbac.authorization.k8s.io/v1beta1  
-kind: ClusterRoleBinding  
-metadata:  
- name: tiller  
-roleRef:  
- apiGroup: rbac.authorization.k8s.io  
- kind: ClusterRole  
- name: cluster-admin  
-subjects:  
- - kind: ServiceAccount  
-   name: tiller  
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: tiller
+ namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+ name: tiller
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+ - kind: ServiceAccount
+   name: tiller
    namespace: kube-system
 ```
 
@@ -107,17 +110,31 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
+{{< tabs >}}
+{{% tab "Helm v1/v2" %}} 
+
 ```bash
 helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 
+{{% /tab %}}
+
+{{% tab "Helm v3+" %}}
+
+```bash
+helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
-**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6]. 
+**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6].
 
 ## Configuring the Datadog Helm chart
 
-As a best practice, a YAML file that specifies the values for the chart parameters should be provided to configure the chart: 
+As a best practice, a YAML file that specifies the values for the chart parameters should be provided to configure the chart:
 
 1.  **Copy the default [`datadog-values.yaml`][7] value file.**
 2.  Set the `apiKey` parameter with your [Datadog API key][4].
@@ -244,6 +261,6 @@ This command removes all Kubernetes components associated with the chart and del
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: /developers/dogstatsd
+[8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

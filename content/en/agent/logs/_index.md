@@ -188,6 +188,20 @@ The Agent sends batches that have the following limits:
 
 The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to TCP, which sends all logs in real time.
 
+**Configure the batch wait time**
+
+To change the maximum time the Datadog Agent waits to fill each batch, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
+
+```
+logs_config:
+  batch_wait: 2
+```
+
+Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable. 
+The value is in seconds and must be an integer between 1 and 10.
+
+**HTTPS Proxy configuration**
+
 When logs are sent through HTTPS, use the same [set of proxy settings][10] as the other data types to send logs through a web proxy.
 
 ## Further Reading

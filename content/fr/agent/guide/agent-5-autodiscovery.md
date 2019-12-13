@@ -3,7 +3,7 @@ title: Autodiscovery avec l'Agent v5
 kind: guide
 private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+  - /fr/agent/faq/agent-5-autodiscovery
 ---
 <div class="alert alert-info">
 Autodiscovery était autrefois appelé Service Discovery. Il est toujours appelé Service Discovery dans l'ensemble du code de l'Agent et dans certaines options de configuration.
@@ -138,7 +138,7 @@ sd_backend_port: 4001
 # Pour modifier ce paramètre, supprimez la mise en commentaire de cette option et modifiez sa valeur.
 # sd_template_dir: /datadog/check_configs
 
-# Si votre stockage Consul requiert une authentification par jeton pour la découverte des services, vous pouvez définir ce jeton ici.
+# Si votre stockage Consul requiert une authentification par token pour la découverte des services, vous pouvez définir ce token ici.
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 ```
 

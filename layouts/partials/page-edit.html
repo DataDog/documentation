@@ -1,7 +1,48 @@
-{{ with .File }}
-    {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $.Page.Lang .Path ) }}
-    <a class="btn btn-primary" href="{{ trim $editLink "/" }}">Edit This Page</a>
+{{ $.Scratch.Set "editURL" "" }}
+
+{{ if .Params.dependencies }}
+{{/* Files with dependencies link to corresponding URL */}}
+
+    {{ $deps := .Params.dependencies }}
+    {{ $depsIsArray := reflect.IsSlice $deps }}
+
+    {{ if $depsIsArray }}
+
+        {{ range $dep := $deps }}
+
+            {{ if in $dep "/blob/" }}
+        
+                {{/* Find Replace /blob/ to /edit/ */}}
+                {{ $tmpURL := replace $dep "/blob/" "/edit/" }}
+                
+                {{/* Set Scratch */}}
+                {{ $.Scratch.Set "editURL" $tmpURL }}
+                {{ $editURL := $.Scratch.Get "editURL" }}
+
+                {{ with $.File }}
+                    <a class="btn btn-link" href="{{ trim $editURL "/" }}">Edit in Github</a>
+                {{ end }}
+
+            {{ end }}
+
+        {{ end }}
+
+    {{ end }}
+
+{{ else if (in .File.Path "/integrations/") }}
+{{/* Files with integrations path and no dependencies link to new issue */}}
+
+    {{ $.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new/choose" }}
+    {{ $editURL := $.Scratch.Get "editURL" }}
+
+    {{ with .File }}
+        <a class="btn btn-link" href="{{ trim $editURL "/" }}">Edit in Github</a>
+    {{ end }}
+    
+{{ else }}
+{{/* Not in integrations edit existing docs file */}}
+
+        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $.Page.Lang .File.Path ) }}
+        {{ partial "page-edit-body.html" (dict "ctx" "asdf" "link" "asdf" "date" .Lastmod ) }}
+
 {{ end }}
-
-
-

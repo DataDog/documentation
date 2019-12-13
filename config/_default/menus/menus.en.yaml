@@ -655,25 +655,20 @@ main:
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
     weight: 112
-  - name: "APM Metrics"
+  - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
     weight: 113
     identifier: "monitor_apm"
-  - name: "APM Trace Analytics"
-    url: "monitors/monitor_types/trace_analytics"
-    parent: "monitor_types"
-    identifier: "monitors_trace_analytics"
-    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 115
+    weight: 114
     identifier: "monitor_watchdog"
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 116
+    weight: 115
 
 
   ## MONITORS -  Manage monitor
@@ -703,10 +698,23 @@ main:
     weight: 6
     parent: "alerting"
 
+  ## MONITORS -  SLOs
+
   - name: "Service Level Objectives"
-    url: "monitors/slos/"
+    url: "monitors/service_level_objectives/"
     weight: 7
     parent: "alerting"
+    identifier: "slos"
+
+  - name: "Monitor SLO"
+    url: "monitors/service_level_objectives/monitor/"
+    parent: "slos"
+    weight: 7.1
+
+  - name: "Event SLO"
+    url: "monitors/service_level_objectives/event/"
+    parent: "slos"
+    weight: 7.2
 
   ## MONITORS -  Guides
 
@@ -714,8 +722,6 @@ main:
     url: "monitors/guide/"
     weight: 100
     parent: "alerting"
-
-
 
 #################
 ## TRACING/APM ##
@@ -799,32 +805,36 @@ main:
     parent: "tracing"
     identifier: "tracing_advanced"
     weight: 3
+  - name: "Trace Search"
+    url: "tracing/advanced/search/"
+    parent: "tracing_advanced"
+    weight: 301
   - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
-    weight: 301
+    weight: 302
   - name: "Adding Span Tags"
     url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
-    weight: 302
+    weight: 303
   - name: "Runtime Metrics"
     url: "tracing/advanced/runtime_metrics/"
     parent: "tracing_advanced"
-    weight: 303
+    weight: 304
   - name: "OpenTracing"
     url: "tracing/advanced/opentracing/"
     parent: "tracing_advanced"
-    weight: 304
+    weight: 305
   - name: "Manual Instrumentation"
     url: "tracing/advanced/manual_instrumentation/"
     parent: "tracing_advanced"
-    weight: 305
+    weight: 306
   - name: "Setting Primary Tags to scope "
     url: "tracing/advanced/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
-    weight: 306
+    weight: 307
 
-  ## TACING - Using the APM UI
+  ## TRACING - Using the APM UI
 
   - name: "APM Glossary"
     url: "tracing/visualization/"
@@ -854,26 +864,22 @@ main:
 
   ## TRACING - Trace Search
 
-  - name: "Trace Search & Analytics"
-    url: "tracing/trace_search_and_analytics/"
+  - name: "App Analytics"
+    url: "tracing/app_analytics/"
     parent: "tracing"
-    identifier: "tracing_search_analytics"
+    identifier: "app_analytics"
     weight: 5
   - name: "Agent Configuration"
-    url: "tracing/trace_search_and_analytics/agent_trace_search/"
-    parent: "tracing_search_analytics"
+    url: "tracing/app_analytics/agent_trace_search/"
+    parent: "app_analytics"
     weight: 501
-  - name: "Trace Search"
-    url: "tracing/trace_search_and_analytics/search/"
-    parent: "tracing_search_analytics"
-    weight: 502
-  - name: "Trace Analytics"
-    url: "tracing/trace_search_and_analytics/analytics/"
-    parent: "tracing_search_analytics"
+  - name: "Viewing Analytics"
+    url: "tracing/app_analytics/analytics/"
+    parent: "app_analytics"
     weight: 503
   - name: "Monitors"
-    url: "monitors/monitor_types/trace_analytics"
-    parent: "tracing_search_analytics"
+    url: "monitors/monitor_types/apm/"
+    parent: "app_analytics"
     weight: 504
 
   - name: "Guides"
@@ -993,14 +999,10 @@ main:
     parent: "log_management"
     identifier: "log_archives"
     weight: 5
-  - name: "Archive to AWS S3"
-    url: "logs/archives/s3/"
-    parent: "log_archives"
-    weight: 501
   - name: "Rehydrate from Archives"
     url: "logs/archives/rehydrating"
     parent: "log_archives"
-    weight: 502
+    weight: 501
 
   - name: "Indexes"
     url: "logs/indexes"
@@ -1032,16 +1034,28 @@ main:
     parent: "log_explorer"
     weight: 704
 
+  - name: "Connect Logs and Traces"
+    url: "tracing/advanced/connect_logs_and_traces/?tab=java"
+    parent: "log_management"
+    identifier: "logs_traces_connection"
+    weight: 8
+
+  - name: "Correlate Logs with Metrics"
+    url: "graphing/dashboards/timeboard/#graph-menu"
+    parent: "log_management"
+    identifier: "logs_metrics_correlation"
+    weight: 9
+
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
     identifier: "log_guides"
-    weight: 8
+    weight: 10
 
   - name: "Security"
     url: "security/logs/"
     parent: "log_management"
-    weight: 9
+    weight: 11
 
 ################
 ## SYNTHETICS ##
@@ -1096,7 +1110,35 @@ main:
   - name: "Troubleshooting"
     url: "synthetics/troubleshooting/"
     parent: "synthetics"
+    identifier: "synthetics_troubleshooting"
     weight: 7
+
+##########################
+## Real User Monitoring ##
+##########################
+
+
+  - name: "Real User Monitoring"
+    url: "real_user_monitoring/"
+    pre: "nav_rum"
+    identifier: "rum"
+    weight: 110000
+
+  - name: "Setup"
+    url: "real_user_monitoring/setup"
+    parent: "rum"
+    identifier: "rum_setup"
+    weight: 1
+  - name: "RUM Explorer"
+    url: "real_user_monitoring/rum_explorer"
+    parent: "rum"
+    identifier: "rum_views_explorer"
+    weight: 2
+  - name: "RUM Analytics"
+    url: "real_user_monitoring/rum_analytics"
+    parent: "rum"
+    identifier: "rum_analytics"
+    weight: 3
 
 ####################################
 ## Network Performance Monitoring ##
@@ -1134,27 +1176,29 @@ main:
     identifier: "dev_tools"
     weight: 130000
 
-  ## DEVELOPERS - DogStatsD
-
   - name: "DogStatsD"
     url: "developers/dogstatsd/"
     parent: "dev_tools"
     identifier: "dev_tools_dogstatsd"
     weight: 1
-  - name: "Data Types and Tags"
-    url: "developers/dogstatsd/data_types/"
+
+  - name: "Datagram Format"
+    url: "developers/dogstatsd/datagram_shell"
     parent: "dev_tools_dogstatsd"
     weight: 101
-  - name: "Datagram and Shell Usage"
-    url: "developers/dogstatsd/datagram_shell/"
+
+  - name: "Unix Domain Socket"
+    url: "/developers/dogstatsd/unix_socket"
     parent: "dev_tools_dogstatsd"
     weight: 102
-  - name: "Unix Domain Socket usage"
-    url: "developers/dogstatsd/unix_socket/"
+
+  - name: "High Throughput Data"
+    url: "developers/dogstatsd/high_throughput/"
     parent: "dev_tools_dogstatsd"
     weight: 103
-  - name: "Sending large volumes of metrics"
-    url: "developers/dogstatsd/high_throughput/"
+
+  - name: "Data Aggregation"
+    url: "developers/dogstatsd/data_aggregation/"
     parent: "dev_tools_dogstatsd"
     weight: 104
 
@@ -1165,54 +1209,120 @@ main:
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
     weight: 2
+
+  - name: "Metrics Types"
+    url: "developers/metrics/types/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_metrics_type"
+    weight: 201
+  - name: "Submission - Agent Check "
+    url: "developers/metrics/agent_metrics_submission/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_agent"
+    weight: 202
+  - name: "Submission - DogStatsD"
+    url: "developers/metrics/dogstatsd_metrics_submission/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_dogstatsd"
+    weight: 203
+  - name: "Submission - Powershell"
+    url: "developers/metrics/powershell_metrics_submission"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_powershell"
+    weight: 204
+  - name: "Submission - API "
+    url: "api/#post-timeseries-points"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_api"
+    weight: 205
+  - name: "Metric Type Modifiers"
+    url: "developers/metrics/type_modifiers/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_modifiers"
+    weight: 206
+  - name: "Metrics Units"
+    url: "developers/metrics/units/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_units"
+    weight: 207
   - name: "Custom Metrics"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
-    weight: 201
-  - name: "Counts"
-    url: "developers/metrics/counts/"
-    parent: "dev_tools_metrics"
-    weight: 202
-  - name: "Distributions"
-    url: "developers/metrics/distributions/"
-    parent: "dev_tools_metrics"
-    weight: 203
-  - name: "Gauges"
-    url: "developers/metrics/gauges/"
-    parent: "dev_tools_metrics"
-    weight: 204
-  - name: "Histograms"
-    url: "developers/metrics/histograms/"
-    parent: "dev_tools_metrics"
-    weight: 205
-  - name: "Rates"
-    url: "developers/metrics/rates/"
-    parent: "dev_tools_metrics"
-    weight: 206
-  - name: "Sets"
-    url: "developers/metrics/sets/"
-    parent: "dev_tools_metrics"
-    weight: 207
+    identifier: "dev_tools_metrics_custom_metrics"
+    weight: 208
+
+  ## DEVELOPERS - Events
+
+  - name: "Events"
+    url: "developers/events/"
+    parent: "dev_tools"
+    identifier: "dev_tools_events"
+    weight: 3
+
+  - name: "Custom Agent Check"
+    url: "developers/events/agent/"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_agent"
+    weight: 301
+  - name: "DogStatsD"
+    url: "developers/events/dogstatsd/"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_dogstatsd"
+    weight: 302
+  - name: "Email"
+    url: "developers/events/email/"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_mail"
+    weight: 303
+  - name: "API"
+    url: "api/#post-an-event"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_api"
+    weight: 304
+
+  ## DEVELOPERS - Service Checks
+
+  - name: "Service Checks"
+    url: "developers/service_checks/"
+    parent: "dev_tools"
+    identifier: "dev_tools_service_check"
+    weight: 4
+
+  - name: "Submission - Agent Check "
+    url: "developers/service_checks/agent_service_checks_submission/"
+    parent: "dev_tools_service_check"
+    identifier: "dev_tools_service_check_agent_check"
+    weight: 401
+  - name: "Submission - DogStatsD"
+    url: "developers/service_checks/dogstatsd_service_checks_submission/"
+    parent: "dev_tools_service_check"
+    identifier: "dev_tools_service_check_dogstatsd"
+    weight: 402
+  - name: "Submission - API"
+    url: "https://docs.datadoghq.com/api/#service-checks"
+    parent: "dev_tools_service_check"
+    identifier: "dev_tools_service_check_api"
+    weight: 403
 
   - name: "Libraries"
     url: "developers/libraries/"
     parent: "dev_tools"
-    weight: 3
+    weight: 5
 
   - name: "Community Office Hours"
     url: "developers/office_hours/"
     parent: "dev_tools"
-    weight: 4
+    weight: 6
 
   - name: "Write a Custom Check"
     url: "developers/write_agent_check/"
     parent: "dev_tools"
-    weight: 5
+    weight: 7
 
   - name: "Write an OpenMetrics Check"
     url: "developers/prometheus/"
     parent: "dev_tools"
-    weight: 6
+    weight: 8
 
   ## DEVELOPERS -  Integrations
 
@@ -1220,25 +1330,31 @@ main:
     url: "developers/integrations/"
     parent: "dev_tools"
     identifier: "dev_tools_integrations"
-    weight: 7
+    weight: 9
   - name: "Create a new Integration"
     url: "developers/integrations/new_check_howto/"
     parent: "dev_tools_integrations"
-    weight: 701
+    weight: 901
   - name: "Python"
     url: "developers/integrations/python/"
     parent: "dev_tools_integrations"
-    weight: 702
+    weight: 902
   - name: "Legacy"
     url: "developers/integrations/legacy/"
     parent: "dev_tools_integrations"
-    weight: 703
+    weight: 903
+
+  - name: "Amazon CloudFormation"
+    url: "developers/amazon_cloudformation/"
+    parent: "dev_tools"
+    identifier: "dev_tools_aws_cloudformation"
+    weight: 10
 
   - name: "Guides"
     url: "developers/guide/"
     parent: "dev_tools"
     identifier: "dev_tools_guides"
-    weight: 8
+    weight: 11
 
 #########
 ## API ##
@@ -1374,4 +1490,4 @@ main:
     url: "help/"
     pre: "nav_help"
     identifier: "help_top_level"
-    weight: 190000
+    weight: 180000

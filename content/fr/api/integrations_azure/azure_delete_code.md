@@ -5,11 +5,14 @@ order: 16.3
 external_redirect: "/api/#supprimer-une-integration-azure"
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `DELETE /v1/integration/azure`
 
-##### Exemple de requête
-{{< code-snippets basename="azure_create" >}}
+**EXEMPLE DE REQUÊTE** :
 
-##### Exemple de réponse
-{{< code-snippets basename="result.azure_create" >}}
+{{< code-snippets basename="azure_delete" >}}
+
+**EXEMPLE DE RÉPONSE** :
+
+{{< code-snippets basename="result.azure_delete" >}}

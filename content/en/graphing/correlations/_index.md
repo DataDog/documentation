@@ -18,7 +18,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Correlations is in private beta. Request early access by contacting <a href="/help">Datadog Support</a>.
+Correlations is in public beta. Request access by contacting <a href="/help">Datadog Support</a>.
 </div>
 
 ## Overview
@@ -43,12 +43,13 @@ You can start your metric correlations exploration from any of your dashboards, 
 
 ### Edit
 
-You can customize the default search parameters by clicking the **Edit Search** button.
+You can customize the default search parameters by clicking the **Edit Search** button, or by clicking on the graph.
 
 * Click and drag on the graph to set the timeframe for your correlations search. If an area is already selected (pink box), you can move or resize the selection.
 * Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
 * `Auto-select` or `Custom select` from specific categories. For custom metrics, at least one selection is required.
 * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
+* Use the tag filter box to scope the search by a tag.
 
 {{< img src="graphing/correlations/edit_search.png" alt="Edit search" responsive="true" style="width:80%;">}}
 

@@ -36,13 +36,14 @@ The [Agent's main configuration file][1] has transitioned from **INI** to **YAML
 Agent v5 `datadog.conf` --> Agent v6 `datadog.yaml`
 
 To transition between Agent configuration paths and formats, use the Agent command:
-```bash
+{{< code-block lang="bash" >}}
 sudo -u dd-agent -- datadog-agent import
-```
+{{< /code-block >}}
+
 
 This command parses an existing `datadog.conf` and converts supported parameters to the new format in `datadog.yaml`. The command also copies configuration files for checks that are currently enabled. For more details, see [Upgrade to Datadog Agent v6][2].
 
-#### Configuration options
+#### Options
 
 The following Agent configuration options were changed or removed in Agent v6. Configuration options removed were either superseded by other options, or related to features that work differently from previous versions.
 
@@ -51,7 +52,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | Previous Name               | Updated Name                 | Notes                                                                                             |
 |-----------------------------|------------------------------|---------------------------------------------------------------------------------------------------|
 | `proxy_host`                | `proxy`                      | Proxy settings are now expressed as a list of URIs. See the [proxy][3] documentation for details. |
-| `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection.                                                                       |
+| `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection.                                                                      |
 | `collector_log_file`        | `log_file`                   |                                                                                                   |
 | `syslog_host`               | `syslog_uri`                 | The Syslog configuration is now expressed as a URI.                                               |
 |                             | `syslog_pem`                 | Syslog configuration client certificate for TLS client validation.                                |
@@ -88,9 +89,9 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][6].                                                         |
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/upgrade-to-agent-v6
-[3]: /agent/proxy/?tab=agentv6
+[3]: /agent/proxy/
 [4]: /integrations/disk
 [5]: /logs
 [6]: /integrations/amazon_web_services
@@ -100,11 +101,11 @@ The following Agent configuration options were changed or removed in Agent v6. C
 Agent v6 loads any valid YAML file in: `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.d/`. This enables complex configurations to be broken down into multiple files.
 
 For example, configuration files for the `http_check` could be:
-```text
+{{< code-block lang="text" >}}
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
-```
+{{< /code-block >}}
 
 The Agent doesn't load configuration files from any sub-directories within the `<CHECK_NAME>.d` folder. For example, this configuration is **NOT** loaded:
 ```text
@@ -164,7 +165,7 @@ The precedence order of Agent v6 proxy options is different from previous versio
 
 There are differences in hostname resolution between Agent v5 and Agent v6. For details, see the [dedicated documentation][1].
 
-[1]: /agent/faq/how-datadog-agent-determines-the-hostname/?tab=agentv6#agent-versions
+[1]: /agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -210,8 +211,8 @@ The major changes for Agent v6 on Linux are:
 The lifecycle commands didn't change if the `service` wrapper command is available on your system.
 For example, on Ubuntu, the _lifecycle commands_ are:
 
-| Command                              | Description                           |
-|--------------------------------------|---------------------------------------|
+| Command                              | Description                            |
+|--------------------------------------|----------------------------------------|
 | `sudo service datadog-agent start`   | Start the Agent as a service.          |
 | `sudo service datadog-agent stop`    | Stop the Agent service.                |
 | `sudo service datadog-agent restart` | Restart the Agent service.             |
@@ -408,7 +409,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 `sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://github.com/jiaqi/jmxterm
-[2]: /integrations/faq/troubleshooting-jmx-integrations/?tab=agentv62#agent-troubleshooting
+[2]: /integrations/faq/troubleshooting-jmx-integrations/#agent-troubleshooting
 {{% /tab %}}
 {{% tab "System" %}}
 
@@ -563,8 +564,8 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /agent/guide/dogstream
 [4]: /integrations/go-metro
-[5]: /agent/guide/agent-log-files/?tab=agentv6
-[6]: /agent/guide/agent-commands/?tab=agentv6
+[5]: /agent/guide/agent-log-files/
+[6]: /agent/guide/agent-commands/
 [7]: https://docs.datadoghq.com/agent/autodiscovery
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks

@@ -29,7 +29,7 @@ Associez Desk à Datadog pour :
 ### Configuration
 
 Depuis votre compte Desk, ajoutez une application d'API en accédant à Settings -> API -> My Applications (privilèges d'administrateur requis).
-Remplissez le formulaire comme indiqué, en laissant les deux derniers champs d'URL vides. Desk génère alors une clé d'application, un secret d'application, un jeton d'accès à l'API et un secret de jeton d'accès à l'API.
+Remplissez le formulaire comme indiqué, en laissant les deux derniers champs d'URL vides. Desk génère alors une clé d'application, un secret d'application, un token d'accès à l'API et un secret de token d'accès à l'API.
 
 {{< img src="integrations/desk/desk_config.png" alt="configuration desk" responsive="true" popup="true">}}
 
