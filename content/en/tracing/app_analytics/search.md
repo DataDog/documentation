@@ -129,7 +129,7 @@ The Trace Stream is the list of traces that match the selected context. A contex
 
 ### Traces vs Analyzed Spans
 
-Chose to display a sampled trace associated with your Analyzed spans in the trace steam with the toggle in the upper right corner of the trace stream:
+Chose to display a sampled trace associated with your Analyzed Spans in the trace steam with the toggle in the upper right corner of the trace stream:
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span" responsive="true" >}}
 
