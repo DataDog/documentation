@@ -83,7 +83,7 @@ The displayed metrics represent, per span:
 
 ## Traces
 
-Consult the list of [traces][6] associated with this resource thanks to the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
+Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
 
