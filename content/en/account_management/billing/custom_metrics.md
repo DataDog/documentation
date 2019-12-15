@@ -44,7 +44,7 @@ For more real-time tracking of the count of custom metrics for a particular metr
   *  `metric_name{env:dev, service:foo}`
   *  `metric_name{service:foo, env:dev}`
 
-Find below some example of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submision type][9]:
+Below are examples of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submission type][9]:
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
