@@ -81,7 +81,7 @@ Let’s suppose you’re measuring temperature in the US and you’ve tagged you
 | `temperature` | `country:USA`, `region: Northeast` |
 | `temperature` | `country:USA`, `region: Southeast` |
 
-Suppose you wanted to add the tag `City` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag does increase the number of custom metrics since it provides more detail and granularity to your dataset as shown below:
+Suppose you wanted to add the tag `City` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
 
 | Metric Name   | Tag Values                                          |
 |---------------|-----------------------------------------------------|
