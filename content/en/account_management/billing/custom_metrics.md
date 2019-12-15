@@ -17,7 +17,7 @@ You are allocated a certain number of custom metrics based on your Datadog prici
 * Enterprise: 200 custom metrics per host.
 
 The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month.
-These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics could be used by a single host.
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host.
 
 Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
