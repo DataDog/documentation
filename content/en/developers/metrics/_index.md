@@ -22,7 +22,7 @@ further_reading:
 
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric<sup>(1)</sup>.
 
-A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][2], or through a [custom Agent Check][3] is a custom metric. Custom metrics allow you to track your KPIs from your application: Number of visitors, average customer basket size, distribution of performances for a custom algorithm.. There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][4].
+A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][2] or through a [custom Agent Check][3] is a custom metric. Custom metrics allow you to track your KPIs from your application: Number of visitors, average customer basket size, distribution of performances for a custom algorithm. There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][4].
 
 **Note**: User with the Datadog Admin roles can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][4].
 
