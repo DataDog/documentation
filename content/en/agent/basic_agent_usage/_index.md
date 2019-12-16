@@ -274,6 +274,46 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 {{% /tab %}}
 {{< /tabs >}}
 
+**Log Collection** 
+
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][8] enabled. It shows the evolution of resource usage for the different compression levels available.
+
+{{< tabs >}}
+{{% tab "HTTP compression level 6" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1.5% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 14 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{% tab "HTTP compression level 1" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 20 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{% tab "HTTP Uncompressed" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 0.7% of the CPU used on average
+* Memory: ~ 90MB of RAM used (RSS memory)
+* Network bandwidth: ~ 200 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Configuration management tools
 
 Manage the Datadog Agent and [Integrations][1] using configuration management tools:
@@ -348,3 +388,4 @@ To send your Agent data to the [Datadog EU site][5], edit your [Agent main confi
 [5]: https://app.datadoghq.eu
 [6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [7]: /agent/guide/agent-log-files
+[8]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
