@@ -388,4 +388,4 @@ To send your Agent data to the [Datadog EU site][5], edit your [Agent main confi
 [5]: https://app.datadoghq.eu
 [6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [7]: /agent/guide/agent-log-files
-[8]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[8]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
