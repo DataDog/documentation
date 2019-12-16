@@ -1,7 +1,7 @@
 ---
 title: インデックスの取得
 type: apicontent
-order: 23.2
+order: 24.2
 external_redirect: "/api/#get-an-index"
 ---
 

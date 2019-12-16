@@ -1,7 +1,7 @@
 ---
 title: Désactiver un monitor
 type: apicontent
-order: 26.09
+order: 26.10
 external_redirect: /api/#desactiver-un-monitor
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: AWS サービスのログ収集の有効化
 type: apicontent
-order: 15.09
+order: 16.09
 external_redirect: '/api/#enable-an-aws-service-log-collection'
 ---
 ## AWS サービスのログ収集の有効化

@@ -1,7 +1,7 @@
 ---
 title: Get a service level objective's history
 type: apicode
-order: 29.03
+order: 30.03
 external_redirect: /api/#get-a-service-level-objective-s-history
 ---
 

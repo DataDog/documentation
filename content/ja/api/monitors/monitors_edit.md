@@ -1,7 +1,7 @@
 ---
 title: モニターの編集
 type: apicontent
-order: 26.03
+order: 27.03
 external_redirect: /api/#edit-a-monitor
 ---
 

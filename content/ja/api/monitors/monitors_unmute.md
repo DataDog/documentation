@@ -1,7 +1,7 @@
 ---
 title: モニターのミュート解除
 type: apicontent
-order: 26.10
+order: 27.10
 external_redirect: /api/#unmute-a-monitor
 ---
 

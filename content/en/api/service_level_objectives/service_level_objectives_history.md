@@ -1,7 +1,7 @@
 ---
 title: Get a SLO's history
 type: apicontent
-order: 29.03
+order: 30.03
 external_redirect: /api/#get-a-slo-s-history
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: インデックス順序の更新
 type: apicontent
-order: 23.5
+order: 24.5
 external_redirect: "/api/#update-indexes-order"
 ---
 

@@ -27,9 +27,9 @@ All the API endpoints below can have two different host endpoints:
 
 Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Mapping.
 
-| Method | Endpoint path | Required payload |
-|--------|--------------|------------------|
-| `POST`  | `/v2/authn_mappings`  | JSON       |
+| Method | Endpoint path        | Required payload |
+|--------|----------------------|------------------|
+| `POST` | `/v2/authn_mappings` | JSON             |
 
 ##### ARGUMENTS
 
@@ -240,9 +240,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Returns a specific AuthN Mapping by UUID.
 
-| Method | Endpoint path | Required payload                           |
-|--------|--------------|--------------------------------------------|
-| `GET` | `/authn_mappings/{UUID}`  | URL parameter |
+| Method | Endpoint path            | Required payload |
+|--------|--------------------------|------------------|
+| `GET`  | `/authn_mappings/{UUID}` | URL parameter    |
 
 ##### ARGUMENTS
 

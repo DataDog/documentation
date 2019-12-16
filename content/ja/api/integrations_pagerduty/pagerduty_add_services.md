@@ -1,7 +1,7 @@
 ---
 title: 新しいサービスとスケジュールの追加
 type: apicontent
-order: 18.3
+order: 19.3
 external_redirect: "/api/#add-new-services-and-schedules"
 ---
 

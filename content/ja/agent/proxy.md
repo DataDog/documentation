@@ -33,7 +33,7 @@ Agent `datadog.yaml` 構成ファイルで、`https` リクエスト用と `http
 Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたリクエストでも、プロキシサーバーで SSL をアクティブにできます。`datadog.yaml` ファイルの構成例を以下にいくつか挙げます。
 
 <div class="alert alert-warning">
-メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="/agent/logs/proxy">ログのプロキシ</a>」セクションを参照してください。
+Datadog Agent が <a href="/agent/logs/?tab=tailexistingfiles#send-logs-over-https">ログを HTTPS で転送する</a>ように構成されていない限り、メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
 </div>
 
 すべての `https` リクエストに対して HTTP プロキシを設定する例
@@ -72,7 +72,7 @@ proxy:
       - host2
 ```
 
-**環境変数を使用したプロキシ**:
+#### 環境変数
 
 Agent v6.4 より、以下の環境変数を使用してプロキシ設定を行えるようになりました。
 
@@ -94,7 +94,7 @@ Agent は、これらの値を以下の優先順で使用します。
 {{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
-メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="/agent/logs/proxy">ログのプロキシ</a>」セクションを参照してください。
+メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
 </div>
 
 `datadog.conf` ファイルを編集してプロキシ情報を設定します。
@@ -114,74 +114,11 @@ proxy_password: my_password
 {{% /tab %}}
 {{< /tabs >}}
 
-## ログのプロキシ
-
-ログコレクションには、バージョン 6.0 以降の Agent が必要です。古いバージョンの Agent には、ログの収集に使用される `Log collection` インターフェイスが含まれません。
-
-ログは、Datadog Agent によって転送される他のデータの種類とは異なるプロキシ設定を利用します。ログは TCP/SSL 経由で転送され、その他の機能は HTTPS 経由でデータを送信するからです。
-
-{{< tabs >}}
-{{% tab "TCP" %}}
-
-TCP 通信にプロキシを使用する場合は、`datadog.yaml` 構成ファイルの次のパラメーターを使用して、TCP 経由でプロキシにログを送信するように Datadog Agent を構成します。
-
-```
-logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
-  logs_no_ssl: true
-```
-
-これらのパラメーターを次の環境変数で設定することもできます。
-
-* `DD_LOGS_CONFIG_LOGS_DD_URL`
-* `DD_LOGS_CONFIG_LOGS_NO_SSL`
-
-**重要**: パラメーター `logs_no_ssl` は、Agent が SSL 証明書のホスト名 (`agent-intake.logs.datadoghq.com` または `agent-intake.logs.datadoghq.eu`) とプロキシホスト名との不一致を無視するために必要です。ただし、プロキシと Datadog インテークエンドポイントの間では SSL 暗号化接続を使用する必要があります。
-
-* 次に、`<PROXY_PORT>` をリスニングし、受信されたログを以下に転送するようにプロキシを構成します。
-    * `app.datadoghq.com` の場合: `agent-intake.logs.datadoghq.com` のポート `10516`。SSL 暗号化をアクティブにします。
-    * `app.datadoghq.eu` の場合: `agent-intake.logs.datadoghq.eu` のポート `443`。SSL 暗号化をアクティブにします。
-
-* SSL 暗号化には、TLS 暗号化の公開鍵を使用します。
-    * [app.datadoghq.com][1] の場合
-    * [app.datadoghq.eu][2] の場合
-
-    一部のシステムでは、証明書チェーン全体が必要になることがあります。その場合は、代わりにこの公開鍵を使用します。
-
-    * [app.datadoghq.com][3] の場合
-    * [app.datadoghq.eu][4] の場合
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-SOCKS5 プロキシサーバー経由で Datadog アカウントにログを送信するには、`datadog.yaml` 構成ファイルで次の設定を使用します。
-
-```
-logs_config:
-  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
-```
-
-このパラメーターを次の環境変数で設定することもできます。
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### ポート 443
-
-パラメーター `use_port_443` は、プロキシから送信されるログに影響しません。ログを `agent-443-intake.logs.datadoghq.com:443` に転送するには、プロキシ自体を構成する必要があります。
-
 ## HAProxy をプロキシとして使用する
 
-[HAProxy][1] は、TCP および HTTP アプリケーションにプロキシを提供する、無料、高速、高信頼性のソリューションです。通常、HAProxy は、プールサーバーへの着信リクエストを分散するためのロードバランサーとして使用されますが、外部接続がないホストから Datadog への Agent トラフィックをプロキシ転送するためにも使用されます。
+[HAProxy][1] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
 
-ネットワークにすぐに使用できる Web プロキシがなく、多数の Agent をプロキシ転送する場合は、最適なオプションです。ケースによっては、1 つの HAProxy インスタンスで、ネットワーク内のローカル Agent トラフィックを十分に処理できます。各プロキシは約 1,000 の Agent に対応できます。(これは、特に m3.xl インスタンスのパフォーマンスに基づき、控えめに見積もった数字です。ネットワーク関連のさまざまな変数がプロキシの負荷に影響します。デプロイの際は常に注意を払ってください。詳細については、[HAProxy ガイド][2]をご参照ください。)
+これが最高のオプションになるのは、ネットワークにすぐに使えるウェブプロキシがなく、大量の Agent をプロキシしたい場合です。各プロキシは 1000 以上の Agent に対応できるため、場合によっては、1 つの HAProxy インスタンスだけでネットワーク内のローカル Agent トラフィックを十分処理できます。(この数値は、m3.xl インスタンスのパフォーマンスに基づく控えめな見積もりである点にご注意ください。膨大なネットワーク関連の変数がプロキシの負荷に影響を与える場合があります。いつも通り、注意深く見守りながらデプロイしてください。詳しくは、[HAProxy のドキュメント][2]を参照してください。)
 
 `agent ---> haproxy ---> Datadog`
 
@@ -202,7 +139,7 @@ global
 
 # 妥当なデフォルト値
 defaults
-    ログ     global
+    log     global
     option  dontlognull
     retries 3
     option  redispatch
@@ -212,7 +149,7 @@ defaults
 
 # ポート 3833 で HAProxy 統計情報の表示を宣言します
 # このページを表示するための資格情報は不要です
-# 一度セットアップ行うとオフにできます
+# 一度セットアップを行うとオフにできます。
 listen stats
     bind *:3833
     mode http
@@ -243,7 +180,7 @@ frontend processes-forwarder
     default_backend datadog-processes
 
 # Agent がログを送信するために接続する
-# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)。
+# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)
 frontend logs_frontend
     bind *:10514
     mode tcp
@@ -277,9 +214,12 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
-HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。
+**注**: 次のコマンドで証明書をダウンロードしてください:
+        * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
+        * `yum install ca-certificates` (CentOS、Redhat)
+CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
-`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みすることで** (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
@@ -293,7 +233,7 @@ global
 
 # 妥当なデフォルト値
 defaults
-    ログ     global
+    log     global
     option  dontlognull
     retries 3
     option  redispatch
@@ -303,7 +243,7 @@ defaults
 
 # ポート 3833 で HAProxy 統計情報の表示を宣言します
 # このページを表示するための資格情報は不要です
-# 一度セットアップ行うとオフにできます
+# 一度セットアップを行うとオフにできます。
 listen stats
     bind *:3833
     mode http
@@ -334,7 +274,7 @@ frontend processes-forwarder
     default_backend datadog-processes
 
 # Agent がログを送信するために接続する
-# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)。
+# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)
 frontend logs_frontend
     bind *:10514
     mode tcp
@@ -365,12 +305,17 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。
+**注**: 次のコマンドで証明書をダウンロードしてください:
 
-`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みすることで** (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+        * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
+        * `yum install ca-certificates` (CentOS、Redhat)
+
+CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
+
+HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -380,8 +325,7 @@ HAProxy 構成が完成したら、リロードするか、HAProxy を再起動�
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。
-この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
+`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
 `dd_url: https://haproxy.example.com:3834`
 
@@ -410,8 +354,7 @@ skip_ssl_validation: true
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。
-この `dd_url` 設定は、`datadog.conf` ファイルにあります。
+`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
 
 `dd_url: https://haproxy.example.com:3834`
 
@@ -425,21 +368,21 @@ endpoint = https://haproxy.example.com:3835
 endpoint = https://haproxy.example.com:3836
 ```
 
-スーパーバイザー構成を編集して、SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python がエラーと見なさないようにするために必要です。スーパーバイザー構成は、次の場所にあります。
+Supervisor 構成を編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor 構成は次の場所にあります:
 
-* `/etc/dd-agent/supervisor_ddagent.conf` (Debian ベースのシステム)
-* `/etc/dd-agent/supervisor.conf` (Red Hat ベースのシステム)
-* `/opt/local/datadog/supervisord/supervisord.conf` (SmartOS)
-* `/usr/local/etc/datadog/supervisord/supervisord.conf` (FreeBSD)
-* `~/.datadog-agent/supervisord/supervisord.conf` (macOS)
+* Debian ベースのシステムの場合、`/etc/dd-agent/supervisor_ddagent.conf`
+* Red Hat ベースのシステムの場合、`/etc/dd-agent/supervisor.conf`
+* SmartOS の場合、`/opt/local/datadog/supervisord/supervisord.conf`
+* FreeBSD の場合、`/usr/local/etc/datadog/supervisord/supervisord.conf`
+* macOS の場合、`~/.datadog-agent/supervisord/supervisord.conf`
 
-スーパーバイザーファイルが `<SUP_FILE>` にあるとします。
+Supervisor ファイルが `<SUP_FILE>` にあると仮定すると、
 
 ```bash
 sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
 ```
 
-Windows Agent の場合は、構成ファイル `datadog.conf` を編集し、次のオプションを追加します。
+Windows Agent の場合は、構成ファイル `datadog.conf` を編集してこのオプションを追加します:
 
 ```
 skip_ssl_validation: yes
@@ -482,7 +425,7 @@ events {
 # Datadog ログの TCP プロキシ
 stream {
     server {
-        listen 10514; # プロキシリスニングポート
+        listen 10514; #プロキシリスニングポート
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -505,7 +448,7 @@ events {
 # Datadog ログの TCP プロキシ
 stream {
     server {
-        listen 10514; # プロキシリスニングポート
+        listen 10514; #プロキシリスニングポート
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
@@ -522,10 +465,9 @@ Datadog Agent v6 をログコレクターとして使用するには、`datadog.
 ```yaml
 logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
-  logs_no_ssl: true
 ```
 
-SSL/TLS 接続の確立は NGINX の `proxy_ssl on` オプションによって処理されるため、`logs_no_ssl` パラメーターは、`true` に設定されます。**メモ**: ログインテークへの接続を暗号化できるプロキシを使用しない場合は、このオプションを `false` に設定します。
+NGINX は単にトラフィックを Datadog に転送しているだけで、トラフィックの解読または暗号化は行わないため、`logs_no_ssl` パラメーターを変更しないでください。
 
 ## Agent をプロキシとして使用する
 
@@ -541,7 +483,7 @@ SSL/TLS 接続の確立は NGINX の `proxy_ssl on` オプションによって�
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
-3. `proxy-node` 上の非ローカルトラフィックを許可するために、`datadog.conf` の
+3. `proxy-node` 上の非ローカルトラフィックを許可するために、`datadog.conf` の 
      `# non_local_traffic: no` の行を `non_local_traffic: yes` に変更します。
 
 4. ポート 17123 経由で他のノードから `proxy-node` に到達できることを確認します。`proxy-node` で Agent を起動し、他のノードでも Agent を実行します。
@@ -557,6 +499,7 @@ SSL/TLS 接続の確立は NGINX の `proxy_ssl on` オプションによって�
 6. [インフラストラクチャーページ][4] で、すべてのノードがデータを Datadog に報告していることを確認します。
 
 ## その他の参考資料
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

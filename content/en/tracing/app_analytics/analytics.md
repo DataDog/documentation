@@ -43,22 +43,11 @@ In the App Analytics view you can:
 * [Use Facets to filter your Trace Stream](#facets)
 * [Enter search queries](#search-bar)
 
-## Analyzed Spans
-
-When a request hits a [service][2] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][3].
-An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request will generate 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][4].
-
-To start collecting Analyzed Spans, [enable App Analytics for your services][5].
-
-### Complete traces
-
-If checked, Analyzed Spans listed in the trace stream have a trace associated with them, so you can display the full [trace][6] with all its associated [span][7].
-
 ## App Analytics query
 
 Use the query to control what's displayed in your App Analytics:
 
-1. Choose the `Duration` metric or a [Facet][1] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas [Facet][1] displays the unique count.
+1. Choose the `Duration` metric or a [Facet][3] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas [Facet][3] displays the unique count.
 
     {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
 
@@ -66,11 +55,11 @@ Use the query to control what's displayed in your App Analytics:
 
     {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" responsive="true" style="width:50%;">}}
 
-3. Use [Tag][2] or [Facet][1] to split your Analytic.
+3. Use [Tag][4] or [Facet][3] to split your Analytic.
 
     {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" responsive="true" style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [Facet][1] or `Duration`.
+4. Choose to display either the *X* **top** or **bottom** values according to the selected [Facet][3] or `Duration`.
 
     {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
 
@@ -91,7 +80,7 @@ Available visualizations:
 
 ### Timeseries
 
-Visualize the evolution of the `Duration` metric (or a [Facet][1] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][1].
+Visualize the evolution of the `Duration` metric (or a [Facet][3] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][3].
 
 The following timeseries App Analytics shows:
 The evolution of the **pc99** **duration** by steps of **5min** for each **Service**
@@ -100,7 +89,7 @@ The evolution of the **pc99** **duration** by steps of **5min** for each **Servi
 
 ### Top List
 
-Visualize the top values from a [Facet][1] according to their `Duration` (or a [Facet][1] unique count of values):
+Visualize the top values from a [Facet][3] according to their `Duration` (or a [Facet][3] unique count of values):
 
 The following Top List App Analytics shows:
 The top **pc99** **duration** of **Service**
@@ -109,7 +98,7 @@ The top **pc99** **duration** of **Service**
 
 ### Table
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a [facet][3] according to a chosen [measure][5] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -123,7 +112,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 ## Related Traces
 
-Select or click on a section of the graph to either zoom in the graph or see the list of [traces][3] corresponding to your selection:
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][6] corresponding to your selection:
 
 {{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
 
@@ -133,27 +122,29 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your App Analytics:
 
-* To create a new [APM monitor][4]:
+* To create a new [APM monitor][7]:
     This feature is not available yet.
 * To an existing [Timeboard][8]:
-    This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
+    This functionality is in beta, [contact the Datadog support team][9] to activate it for your organization.
 
 ## Traces in Dashboard
 
-Export [App Analytics][7] from the Trace search or build them directly in your [Dashboard][9] alongside metrics and logs.
+Export [App Analytics][1] from the Trace search or build them directly in your [Dashboard][10] alongside metrics and logs.
 
-[Learn more about the timeseries widget][7]
+[Learn more about the timeseries widget][11].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/advanced/search/#facets
-[2]: /tracing/advanced/search/#measures
-[3]: /tracing/visualization/#trace
-[4]: /monitors/monitor_types/apm
-[5]: /tracing/app_analytics
-[6]: /help
-[7]: /graphing/widgets/timeseries
+[1]: /tracing/app_analytics/
+[2]: /tracing/visualization/#services
+[3]: /tracing/app_analytics/search/#facets
+[4]: /tagging
+[5]: /tracing/app_analytics/search/#measures
+[6]: /tracing/visualization/#trace
+[7]: /monitors/monitor_types/apm
 [8]: /graphing/dashboards/timeboard
-[9]: /graphing/dashboards
+[9]: /help
+[10]: /graphing/dashboards
+[11]: /graphing/widgets/timeseries

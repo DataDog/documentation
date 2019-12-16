@@ -7,12 +7,12 @@ imgix:
   png: "?fm=png&auto=format&lossless=1"
   gif: ""
 code_languages:
+  - display_name: Curl
+    key: bash
   - display_name: Python
     key: python
   - display_name: Ruby
     key: ruby
-  - display_name: Curl
-    key: bash
 
 header_scripts:
   - datadog_monitoring: false

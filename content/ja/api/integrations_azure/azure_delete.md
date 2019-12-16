@@ -1,7 +1,7 @@
 ---
 title: Azure インテグレーションの削除
 type: apicontent
-order: 16.3
+order: 17.3
 external_redirect: '/api/#delete-an-azure-integration'
 ---
 ## Azure インテグレーションの削除

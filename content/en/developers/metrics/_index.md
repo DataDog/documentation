@@ -30,14 +30,14 @@ A custom metric is identified by **a unique combination of a metric's name and t
 
 A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][6] to learn how to graph metrics within Datadog.
 
-| Property         | Description                                                                                                                                               |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
-| `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
-| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
-| `<TAGS>`         | The set of tags associated with your metric.                                                                                                              |
-| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][7].                                                                                          |
-| `<INTERVAL>`     | If the `<TYPE>` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
+| Property         | Description                                                                                                                                                                                                                                                                                                             |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                                                                                                                                                                                             |
+| `<METRIC_VALUE>` | The value of your metric.                                                                                                                                                                                                                                                                                               |
+| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.                                                                                                                                                               |
+| `<TAGS>`         | The set of tags associated with your metric.                                                                                                                                                                                                                                                                            |
+| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][7].                                                                                                                                                                                                                                |
+| `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][8] or [COUNT][9], it defines the corresponding [interval][10]. |
 
 ### Naming custom metrics
 
@@ -48,7 +48,6 @@ The following custom metric naming convention must be followed:
   * Other characters, including spaces, are converted to underscores.
   * Unicode is _not_ supported.
 * Metric names must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
-
 
 **Note**: Metric names are case sensitive in Datadog.
 
@@ -61,13 +60,13 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][8] to submit your metrics
+You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][11] to submit your metrics
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br><sup>(1)</sup> *[Some integrations do emit custom metrics][9]*
+<br><sup>(1)</sup> *[Some integrations do emit custom metrics][12]*
 
 [1]: /integrations
 [2]: /developers/metrics/dogstatsd_metrics_submission
@@ -76,5 +75,8 @@ You can also use one of the [Datadog-official and community contributed API and 
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /graphing/metrics/introduction
 [7]: /developers/metrics/types
-[8]: /developers/libraries
-[9]: /account_management/billing/custom_metrics/#standard-integrations
+[8]: /developers/metrics/types/?tab=rate#metric-submission-types
+[9]: /developers/metrics/types/?tab=count#metric-submission-types
+[10]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
+[11]: /developers/libraries
+[12]: /account_management/billing/custom_metrics/#standard-integrations

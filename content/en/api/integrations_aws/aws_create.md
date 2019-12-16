@@ -18,14 +18,20 @@ Create a Datadog-Amazon Web Services integration.
     Your AWS Account ID without dashes.
     [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
 
-* **`access_key_id`** [*optional*, *default*=**None**]:
-
-    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
-
 * **`role_name`** [*required*]:
 
     Your Datadog role delegation name.
     For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].
+
+* **`access_key_id`** [*required*]:
+
+    Your AWS access key ID. 
+    Only required if your AWS account is a GovCloud or China account.
+
+* **`secret_access_key`** [*required*]:
+
+    Your AWS secret access key. 
+    Only required if your AWS account is a GovCloud or China account.
 
 * **`filter_tags`** [*optional*, *default*=**None**]:
 

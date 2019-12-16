@@ -1,7 +1,7 @@
 ---
 title: Update host tags
 type: apicode
-order: 31.4
+order: 32.4
 external_redirect: /api/#update-host-tags
 ---
 

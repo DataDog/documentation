@@ -1,7 +1,7 @@
 ---
 title: Check if a SLO can be deleted
 type: apicontent
-order: 29.03
+order: 30.03
 external_redirect: /api/#check-if-a-slo-can-be-deleted
 ---
 

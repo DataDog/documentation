@@ -1,7 +1,7 @@
 ---
 title: アプリケーションキーの取得
 type: apicontent
-order: 21.07
+order: 22.07
 external_redirect: "/api/#get-an-application-key"
 ---
 
