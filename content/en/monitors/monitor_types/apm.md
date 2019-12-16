@@ -79,9 +79,9 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
-[1]: /tracing/advanced/search/#search-bar
-[2]: /tracing/advanced/search/#facet-search
-[3]: /tracing/advanced/search/#numerical-values
+[1]: /tracing/app_analytics/search/#search-bar
+[2]: /tracing/app_analytics/search/#facet-search
+[3]: /tracing/app_analytics/search/#numerical-values
 {{% /tab %}}
 {{< /tabs >}}
 

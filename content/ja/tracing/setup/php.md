@@ -213,7 +213,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AUTOFINISH_SPANS`                     | `false`     | トレーサーがフラッシュされた時点でSpanを自動終了させるかどうか                                               |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | 分散型トレーシングの有効にするかどうか                                                                             |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | 無効な拡張機能一覧（CSV 形式）。例、`curl,mysqli`                                                              |
-| `DD_PRIORITY_SAMPLING`                    | `true`      | プライオリティ サンプリングを有効にするかどうか                                                                               |
+| `DD_PRIORITY_SAMPLING`                    | `true`      | 優先度付きサンプリングを有効にするかどうか                                                                               |
 | `DD_SAMPLING_RATE`                        | `1.0`       | トレースのサンプリングレート。`0.0`〜`1.0` (デフォルト)                                               |
 | `DD_SERVICE_NAME`                         | ``          | デフォルトのアプリ名                                                                                              |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC ベースの構成可能なサーキットブレーカーの再試行時間（ミリ秒）                                               |
