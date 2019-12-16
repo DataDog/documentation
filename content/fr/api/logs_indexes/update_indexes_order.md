@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour la séquence des index
 type: apicontent
-order: 24.5
+order: 23.5
 external_redirect: "/api/#mettre-ajour-la-sequence-des-index"
 ---
 

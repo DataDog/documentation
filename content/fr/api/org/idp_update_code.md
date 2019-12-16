@@ -1,7 +1,7 @@
 ---
 title: Importer les métadonnées IdP
 type: apicode
-order: 28.4
+order: 27.4
 external_redirect: /api/#importer-les-metadonnees-IdP
 ---
 

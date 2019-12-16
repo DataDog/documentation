@@ -1,7 +1,7 @@
 ---
 title: Ajouter l'ARN de Lambda pour les logs AWS
 type: apicontent
-order: 16.08
+order: 15.08
 external_redirect: '/api/#ajouter-l-arn-de-lambda-pour-les-logs-aws'
 ---
 ## Ajouter l'ARN de Lambda pour les logs AWS

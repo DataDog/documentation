@@ -1,7 +1,7 @@
 ---
 title: Définir la désactivation automatique de l'intégration GCP
 type: apicode
-order: 18.4
+order: 17.4
 external_redirect: "/api/#definir-la-desactivation-automatique-de-l-integration-gcp"
 ---
 

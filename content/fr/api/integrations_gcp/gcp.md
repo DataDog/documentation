@@ -1,7 +1,7 @@
 ---
 title: Intégration GCP
 type: apicontent
-order: 18
+order: 17
 external_redirect: '/api/#integration-gcp'
 ---
 ## Intégration GCP

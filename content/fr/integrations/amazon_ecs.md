@@ -303,22 +303,19 @@ Pour réduire les données parasites, l'intégration AWS ECS est automatiquemen
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" responsive="true">}}
 
-Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/AWS ECS, contactez [l'assistance Datadog][21].
+Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/AWS ECS, contactez [l'assistance Datadog][22].
 
 ### Checks de service
 
 * **aws.ecs.agent_connected** : renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][21].
+Besoin d'aide ? Contactez [l'assistance Datadog][22].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-
-{{< get-dependencies >}}
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://docs.datadoghq.com/fr/integrations/faq/agent-5-amazon-ecs
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=docker#how-to-set-it-up
@@ -333,10 +330,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][21].
 [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
 [13]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
 [14]: https://docs.datadoghq.com/fr/agent/autodiscovery
-[15]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog
+[15]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 [16]: https://docs.datadoghq.com/fr/logs/processing/#log-processing
 [17]: https://docs.datadoghq.com/fr/logs/log_collection/docker/?tab=containerinstallation#activate-log-integrations
 [18]: https://github.com/DataDog/datadog-trace-agent
 [19]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [20]: https://docs.datadoghq.com/fr/tracing/advanced_usage/?tab=java#change-agent-hostname
-[21]: https://docs.datadoghq.com/fr/help
+[21]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
+[22]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}

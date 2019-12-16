@@ -1,7 +1,7 @@
 ---
 title: Ajout de nouveaux services et calendriers
 type: apicontent
-order: 19.3
+order: 18.3
 external_redirect: "/api/#ajout-de-nouveaux-services-et-calendriers"
 ---
 

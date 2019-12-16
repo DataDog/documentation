@@ -1,7 +1,7 @@
 ---
 title: Créer une clé d'application
 type: apicode
-order: 22.08
+order: 21.08
 external_redirect: "/api/#creer-une-cle-d-application"
 ---
 

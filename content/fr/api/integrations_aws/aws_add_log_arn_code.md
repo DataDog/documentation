@@ -1,7 +1,7 @@
 ---
 title: Ajouter l'ARN pour les logs AWS
 type: apicode
-order: 16.08
+order: 15.08
 external_redirect: "/api/#ajouter-l-arn-pour-les-logs-aws"
 ---
 

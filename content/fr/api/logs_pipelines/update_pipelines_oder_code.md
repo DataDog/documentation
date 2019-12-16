@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour la séquence des pipelines
 type: apicode
-order: 25.2
+order: 24.2
 external_redirect: "/api/#mettre-a-jour-la-sequence-des-pipelines"
 ---
 

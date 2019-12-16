@@ -1,7 +1,7 @@
 ---
 title: Obtenir des localisations disponibles
 type: apicontent
-order: 31.91
+order: 30.91
 external_redirect: "/api/#obtenir-des-localisations"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Obtenir la séquence des pipelines
 type: apicode
-order: 25.1
+order: 24.1
 external_redirect: "/api/#obtenir-la-sequence-des-pipelines"
 ---
 

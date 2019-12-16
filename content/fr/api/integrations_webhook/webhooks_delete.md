@@ -1,7 +1,7 @@
 ---
 title: Supprimer une intégration Webhooks
 type: apicontent
-order: 21.4
+order: 20.4
 external_redirect: "/api/#supprimer-une-integration-webhooks"
 ---
 

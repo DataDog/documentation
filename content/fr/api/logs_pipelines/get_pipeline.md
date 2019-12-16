@@ -1,7 +1,7 @@
 ---
 title: Obtenir un pipeline
 type: apicontent
-order: 25.4
+order: 24.4
 external_redirect: "/api/#obtenir-un-pipeline"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Obtenir une clé d'API
 type: apicontent
-order: 22.02
+order: 21.02
 external_redirect: "/api/#obtenir-une-cle-d-api"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un index
 type: apicontent
-order: 24.3
+order: 23.3
 external_redirect: '/api/#mettre-a-jour-un-index'
 ---
 ## Mettre à jour un index

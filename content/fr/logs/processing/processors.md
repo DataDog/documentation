@@ -730,7 +730,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Il existe deux façons d'améliorer la corrélation entre les traces et les logs d'application :
 
-1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][7] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
+1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][8] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
 
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
@@ -776,4 +776,5 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 [4]: /fr/logs/guide/log-parsing-best-practice
 [5]: /fr/logs/explorer/search/#search-syntax
 [6]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
-[7]: /fr/tracing/advanced/connect_logs_and_traces
+[7]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
+[8]: /fr/tracing/advanced/connect_logs_and_traces

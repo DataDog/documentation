@@ -1,7 +1,7 @@
 ---
 title: Créer une intégration GCP
 type: apicode
-order: 18.2
+order: 17.2
 external_redirect: "/api/#creer-une-integration-gcp"
 ---
 

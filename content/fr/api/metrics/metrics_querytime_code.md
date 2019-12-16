@@ -1,7 +1,7 @@
 ---
 title: Interroger les points de séries temporelles
 type: apicode
-order: 26.3
+order: 25.3
 external_redirect: /api/#interroger-les-points-de-series-temporelles
 ---
 

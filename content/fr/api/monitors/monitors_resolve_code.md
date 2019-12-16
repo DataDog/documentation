@@ -1,7 +1,7 @@
 ---
 title: Résoudre un monitor
 type: apicode
-order: 27.06
+order: 26.07
 external_redirect: /api/#resoudre-un-monitor
 ---
 

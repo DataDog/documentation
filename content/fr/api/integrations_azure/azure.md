@@ -1,7 +1,7 @@
 ---
 title: Intégration Azure
 type: apicontent
-order: 17
+order: 16
 external_redirect: '/api/#integration-azure'
 ---
 ## Intégration Azure

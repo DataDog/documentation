@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour les filtres de host d'une intégration Azure
 type: apicontent
-order: 17.4
+order: 16.4
 external_redirect: '/api/#mettre-a-jour-les-filtres-d-host-d-une-integration-azure'
 ---
 ## Mettre à jour les filtres de host d'une intégration Azure

@@ -1,7 +1,7 @@
 ---
 title: Obtenir la liste des services AWS compatibles avec la collecte de logs
 type: apicode
-order: 16.07
+order: 15.07
 external_redirect: "/api/#obtenir-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs"
 ---
 

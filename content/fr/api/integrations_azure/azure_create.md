@@ -1,7 +1,7 @@
 ---
 title: Créer une intégration Azure
 type: apicontent
-order: 17.2
+order: 16.2
 external_redirect: '/api/#creer-une-integration-azure'
 ---
 ## Créer une intégration Azure

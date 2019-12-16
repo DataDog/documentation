@@ -1,7 +1,7 @@
 ---
 title: Modifier une clé d'API
 type: apicode
-order: 22.04
+order: 21.04
 external_redirect: "/api/#modifier-une-cle-d-api"
 ---
 

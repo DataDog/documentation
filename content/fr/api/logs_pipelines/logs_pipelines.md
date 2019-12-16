@@ -1,7 +1,7 @@
 ---
 title: Pipelines de logs
 type: apicontent
-order: 25
+order: 24
 external_redirect: '/api/#pipelines-de-logs'
 ---
 ## Pipelines de logs

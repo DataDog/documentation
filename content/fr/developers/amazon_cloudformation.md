@@ -44,7 +44,7 @@ title: "Datadog/Amazon\_CloudFormation"
 
 4. Dans votre compte AWS, [créez une pile AWS][3] qui comprend les ressources Datadog ajoutées.
 
-Pour en savoir plus sur les commandes et les workflows disponibles, consultez la [documentation AWS officielle][4].
+Pour en savoir plus sur les commandes et les workflows disponibles, consultez la [documentation AWS officielle][14].
 
 ## Ressources disponibles
 
@@ -52,10 +52,10 @@ Les ressources Datadog suivantes peuvent être ajoutées à votre compte AWS. Co
 
 | Ressource                | Nom                          | Description                                             | Dossier                      | Lien vers la ressource     |
 |-------------------------|-------------------------------|---------------------------------------------------------|-----------------------------|-------------|
-| Intégration Datadog/AWS | `Datadog::Integrations::AWS`  | [Gérer votre intégration Datadog/Amazon Web Services][5] | `datadog-integrations-aws`  | [Télécharger][6]  |
-| Monitors                | `Datadog::Monitors::Monitor`  | [Créer, modifier et supprimer des monitors Datadog][7]       | `datadog-monitors-monitor`  | [Télécharger][8]  |
-| Downtimes               | `Datadog::Monitors::Downtime` | [Activer ou désactiver des downtimes pour vos monitors][9]     | `datadog-monitors-downtime` | [Télécharger][10]  |
-| Utilisateur                    | `Datadog::IAM::User`          | [Créer et gérer des utilisateurs Datadog][11]                 | `datadog-iam-user`          | [Télécharger][12] |
+| Intégration Datadog/AWS | `Datadog::Integrations::AWS`  | [Gérer votre intégration Datadog/Amazon Web Services][4] | `datadog-integrations-aws`  | [Télécharger][5]  |
+| Monitors                | `Datadog::Monitors::Monitor`  | [Créer, modifier et supprimer des monitors Datadog][6]       | `datadog-monitors-monitor`  | [Télécharger][7]  |
+| Downtimes               | `Datadog::Monitors::Downtime` | [Activer ou désactiver des downtimes pour vos monitors][8]     | `datadog-monitors-downtime` | [Télécharger][9]  |
+| Utilisateur                    | `Datadog::IAM::User`          | [Créer et gérer des utilisateurs Datadog][10]                 | `datadog-iam-user`          | [Télécharger][11] |
 
 ## Développement
 
@@ -68,7 +68,7 @@ Le référentiel `Datadog/datadog-cloudformation-resources` contient :
 
 Pour définir le fournisseur Datadog/AWS CloudFormation, suivez les instructions ci-dessous :
 
-1. Créez [datadog-api-client-java][13] :
+1. Créez [datadog-api-client-java][12] :
 
     ```
     git clone git@github.com:DataDog/datadog-api-client-java.git
@@ -111,19 +111,19 @@ Pour définir le fournisseur Datadog/AWS CloudFormation, suivez les instruction
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html
-[2]: https://aws.amazon.com/cli
+[2]: https://aws.amazon.com/cli/
 [3]: https://console.aws.amazon.com/cloudformation/home
-[4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
-[5]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-integrations-aws-handler
-[6]: s3://datadog-cloudformation-resources/datadog-integrations-aws/datadog-integrations-aws-1.0.1.zip
-[7]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-monitor-handler
-[8]: s3://datadog-cloudformation-resources/datadog-monitors-monitor/datadog-monitors-monitor-1.0.1.zip
-[9]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtime-handler
-[10]: s3://datadog-cloudformation-resources/datadog-monitors-downtime/datadog-monitors-downtime-1.0.1.zip
-[11]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/ddatadog-iam-user-handler
-[12]: s3://datadog-cloudformation-resources/datadog-iam-user/datadog-iam-user-1.0.1.zip
-[13]: https://github.com/DataDog/datadog-api-client-java
-[14]: https://docs.datadoghq.com/fr/help
+[4]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-integrations-aws-handler
+[5]: s3://datadog-cloudformation-resources/datadog-integrations-aws/datadog-integrations-aws-1.0.1.zip
+[6]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-monitor-handler
+[7]: s3://datadog-cloudformation-resources/datadog-monitors-monitor/datadog-monitors-monitor-1.0.1.zip
+[8]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtime-handler
+[9]: s3://datadog-cloudformation-resources/datadog-monitors-downtime/datadog-monitors-downtime-1.0.1.zip
+[10]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/ddatadog-iam-user-handler
+[11]: s3://datadog-cloudformation-resources/datadog-iam-user/datadog-iam-user-1.0.1.zip
+[12]: https://github.com/DataDog/datadog-api-client-java
+[13]: https://docs.datadoghq.com/fr/help/
+[14]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html

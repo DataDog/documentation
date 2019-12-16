@@ -1,7 +1,7 @@
 ---
 title: Envoyer des logs via HTTP
 type: apicode
-order: 23.1
+order: 22.1
 external_redirect: "/api/#envoyer-des-logs-via-http"
 ---
 

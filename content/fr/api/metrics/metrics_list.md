@@ -1,7 +1,7 @@
 ---
 title: Récupérer la liste des métriques actives
 type: apicontent
-order: 26.1
+order: 25.1
 external_redirect: '/api/#recuperer-la-liste-des-metriques-actives'
 ---
 ## Récupérer la liste des métriques actives

@@ -1,7 +1,7 @@
 ---
 title: Gestion des clés
 type: apicontent
-order: 22
+order: 21
 external_redirect: '/api/#gestion-des-cles'
 ---
 ## Gestion des clés

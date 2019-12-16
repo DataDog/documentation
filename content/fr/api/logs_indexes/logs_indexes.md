@@ -1,7 +1,7 @@
 ---
 title: Index de logs
 type: apicontent
-order: 24
+order: 23
 external_redirect: '/api/#index-de-logs'
 ---
 ## Index de logs

@@ -1,7 +1,7 @@
 ---
 title: Supprimer la collecte de logs AWS
 type: apicode
-order: 16.10
+order: 15.10
 external_redirect: "/api/#supprimer-la-collecte-de-logs-aws"
 ---
 

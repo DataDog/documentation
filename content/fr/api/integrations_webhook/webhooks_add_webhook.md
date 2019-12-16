@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour une intégration Webhooks
 type: apicontent
-order: 21.3
+order: 20.3
 external_redirect: '/api/#mettre-a-jour-une-integration-webhooks'
 ---
 ## Mettre à jour une intégration Webhooks

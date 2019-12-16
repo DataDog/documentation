@@ -1,7 +1,7 @@
 ---
 title: Afficher les métadonnées d'une métrique
 type: apicode
-order: 26.4
+order: 25.4
 external_redirect: /api/#afficher-les-metadonnees-d-une-metrique
 ---
 

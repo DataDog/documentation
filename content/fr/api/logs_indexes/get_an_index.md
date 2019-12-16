@@ -1,7 +1,7 @@
 ---
 title: Obtenir un index
 type: apicontent
-order: 24.2
+order: 23.2
 external_redirect: "/api/#obtenir-un-index"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Passer un test
 type: apicode
-order: 31.8
+order: 30.8
 external_redirect: "/api/#passer-test"
 ---
 

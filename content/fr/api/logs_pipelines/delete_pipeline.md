@@ -1,7 +1,7 @@
 ---
 title: Supprimer un pipeline
 type: apicontent
-order: 25.7
+order: 24.7
 external_redirect: "/api/#supprimer-un-pipeline"
 ---
 

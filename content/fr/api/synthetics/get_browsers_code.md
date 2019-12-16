@@ -1,7 +1,7 @@
 ---
 title: Obtenir des appareils pour les checks Browser
 type: apicode
-order: 31.9
+order: 30.9
 external_redirect: "/api/#obtenir-des-browsers"
 ---
 

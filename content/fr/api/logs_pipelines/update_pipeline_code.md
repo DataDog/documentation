@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un pipeline
 type: apicode
-order: 25.6
+order: 24.6
 external_redirect: "/api/#mettre-a-jour-un-pipeline"
 ---
 

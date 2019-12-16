@@ -1,7 +1,7 @@
 ---
 title: Modifier une clé d'application
 type: apicode
-order: 22.09
+order: 21.09
 external_redirect: "/api/#modifier-une-cle-d-application"
 ---
 
