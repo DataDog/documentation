@@ -53,7 +53,7 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
 ### The Collector
 
-The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Python2.7 interpreter to run integrations and [custom checks][4].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python2.7 interpreter to run integrations and [custom checks][4].
 
 ### The Forwarder
 
