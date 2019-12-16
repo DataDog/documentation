@@ -30,14 +30,14 @@ A custom metric is identified by **a unique combination of a metric's name and t
 
 A Datadog metric is defined by the properties below. Refer to the [Metrics Introduction documentation][6] to learn how to graph metrics within Datadog.
 
-| Property         | Description                                                                                                                                                                                                                                                                                                             |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                                                                                                                                                                                             |
-| `<METRIC_VALUE>` | The value of your metric.                                                                                                                                                                                                                                                                                               |
-| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.                                                                                                                                                               |
-| `<TAGS>`         | The set of tags associated with your metric.                                                                                                                                                                                                                                                                            |
-| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][7].                                                                                                                                                                                                                                |
-| `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][8] or [COUNT][9], it defines the corresponding [interval][10]. |
+| Property         | Description                                                                                                                                               |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
+| `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
+| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `<TAGS>`         | The set of tags associated with your metric.                                                                                                              |
+| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][7].                                                                                          |
+| `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][8] or [COUNT][9], it defines the corresponding [interval][10].                                                    |
 
 ### Naming custom metrics
 
