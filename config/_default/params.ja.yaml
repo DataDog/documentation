@@ -5,6 +5,6 @@ meta_description: Datadogが大規模なクラウドのモニタリングサー�
 disclaimer: このページは英語では対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
   desktop_message: ネットワーク パフォーマンス モニタリングの正式提供を開始しました！
-  mobile_message: ネットワーク パフォーマンス モニタリング提供開始！
+  mobile_message: ネットワーク パフォーマンス モニタリング提供開始!
   link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
   exclude: []
