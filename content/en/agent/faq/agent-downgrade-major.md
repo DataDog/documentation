@@ -1,6 +1,8 @@
 ---
 title: Downgrade the Agent to a prior major version
 kind: faq
+aliases:
+- /agent/faq/agent-downgrade
 ---
 
 ## Downgrade the Agent from v7 to v6

@@ -131,7 +131,6 @@
     "docs.datadoghq.com/account_management/faq/$",
     "docs.datadoghq.com/agent/faq/$",
     "docs.datadoghq.com/agent/faq/agent-5-process-collection/$",
-    "docs.datadoghq.com/agent/faq/agent-downgrade/$",
     "docs.datadoghq.com/agent/guide/$",
     "docs.datadoghq.com/agent/guide/agent-5-autodiscovery/$",
     "docs.datadoghq.com/agent/guide/agent-5-kubernetes-basic-agent-usage/$",

@@ -1,6 +1,8 @@
 ---
-title: Downgrade the Agent to a prior minor version
+title: Downgrade the Agent v6 to a prior minor version
 kind: faq
+aliases:
+- /agent/faq/downgrade-datadog-agent
 ---
 
 For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to version `6.X.Y`.

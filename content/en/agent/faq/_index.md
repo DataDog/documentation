@@ -9,8 +9,8 @@ aliases:
 
 {{< whatsnext desc="List of Frequently Asked Questions:">}}
     {{< nextlink href="agent/faq/host-metrics-with-the-container-agent" >}}Host Metrics with the Container Agent{{< /nextlink >}}
-    {{< nextlink href="agent/faq/agent-downgrade" >}}Downgrade the Agent to a prior major version{{< /nextlink >}}
-    {{< nextlink href="agent/faq/downgrade-datadog-agent" >}}Downgrade the Agent to a prior minor version{{< /nextlink >}}
+    {{< nextlink href="agent/faq/agent-downgrade-major" >}}Downgrade the Agent to a prior major version{{< /nextlink >}}
+    {{< nextlink href="agent/faq/agent-downgrade-minor" >}}Downgrade the Agent to a prior minor version{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-datadog-agent-determines-the-hostname" >}}How does Datadog determine the Agent hostname?{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity" >}}How do I install the Agent on a server with limited internet connectivity?{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
