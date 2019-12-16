@@ -74,14 +74,14 @@ export function handleLanguageBasedRedirects() {
 
 			if ( curLang.length ) {
 				logMsg += `; Current Lang: ${curLang}`;
-				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }` );
+				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '') );
 			}
 		}
 		else {
 			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			window.location.replace( `${ previewPath }/${ acceptLanguage }${ uri }` );
+			window.location.replace( `${ previewPath }/${ acceptLanguage }/${ uri }`.replace('//', '') );
 		}
 	}
 
