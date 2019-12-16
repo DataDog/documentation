@@ -11,7 +11,7 @@ further_reading:
     text: Agent のトラブルシューティング
 ---
 <div class="alert alert-warning">
-<code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">代替リストを参照してください</a>。
+<code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">代替リストを参照してください</a>。
 </div>
 
 ## Agent の起動/停止/再起動
@@ -185,7 +185,7 @@ Datadog Agent と有効なインテグレーションのステータスを表示
 
 以下に示すように、適切に構成されたインテグレーションは、**Running Checks** の下に警告やエラーなしで表示されます。
 
-≪```
+```
   Running Checks
   ==============
 
@@ -196,10 +196,10 @@ Datadog Agent と有効なインテグレーションのステータスを表示
       Events: 0, Total: 0
       Service Checks: 0, Total: 0
       Average Execution Time : 0ms
-```≫
+```
 
 
-[1]: /ja/agent/basic_agent_usage/?tab=agentv6#gui
+[1]: /ja/agent/basic_agent_usage/#gui
 [2]: /ja/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -215,7 +215,7 @@ Datadog Agent と有効なインテグレーションのステータスを表示
 
 以下に示すように、適切に構成されたインテグレーションは、**Checks** の下に警告やエラーなしで表示されます。
 
-≪```
+```
   Checks
   ======
 
@@ -223,7 +223,7 @@ Datadog Agent と有効なインテグレーションのステータスを表示
    -------
      - instance #0 [OK]
      - Collected 15 metrics, 0 events & 1 service check
-```≫
+```
 
 
 [1]: /ja/agent/basic_agent_usage/windows/#status-and-information
@@ -237,6 +237,49 @@ Datadog Agent と有効なインテグレーションのステータスを表示
 {{% /tab %}}
 {{< /tabs >}}
 
+## その他のコマンド
+
+[app.datadoghq.com][3] の場合
+
+Agent v6 のコマンドラインインターフェイスは、サブコマンドベースです。利用可能なサブコマンドのリストを確認するには、次を実行します:
+```shell
+<エージェント_バイナリ> --help
+```
+
+サブコマンドを実行するには、Agent バイナリを呼び出す必要があります:
+```shell
+<エージェント_バイナリ> <サブ_コマンド> <オプション>
+```
+
+一部のオプションにはフラグとオプションがあり、`--help` で詳細に説明されています。たとえば、`check` サブコマンドのヘルプを使用するには、次を実行します。
+```shell
+<エージェント_バイナリ> check --help
+```
+
+| コマンド         | Notes                                                                       |
+|-----------------|-----------------------------------------------------------------------------|
+| `check`           | 指定されたチェックを実行します。                                                    |
+| `configcheck`     | 実行中の Agent のうちロード済みかつ解決済みの構成をすべて出力します。            |
+| `diagnose`        | システムに対して接続診断を実行します。                         |
+| `flare`           | フレアを収集して Datadog に送信します。                                     |
+| `health`          | 現在の Agent の状態を出力します。                                             |
+| `help`            | 任意のコマンドのヘルプ。                                                     |
+| `hostname`        | Agent が使用するホスト名を出力します。                                       |
+| `import`          | 以前のバージョンの Agent から構成ファイルをインポートして変換します。 |
+| `installservice`  | サービスコントロールマネージャー内で Agent をインストールします。                      |
+| `launch-gui`      | Datadog Agent GUI を起動します。                                               |
+| `regimport`       | レジストリ設定を `datadog.yaml` にインポートします。                           |
+| `remove-service`  | サービスコントロールマネージャーから Agent を削除します。                         |
+| `restart-service` | サービスコントロールマネージャー内で Agent を再起動します。                      |
+| `start-service`   | サービスコントロールマネージャー内で Agent を起動します。                        |
+| `stopservice`     | サービスコントロールマネージャー内で Agent を停止します。                         |
+| `jmx`             | JMX トラブルシューティング。                                                         |
+| `version`         | バージョン情報を出力します。                                                     |
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## その他の参考資料
+
 
 {{< partial name="whats-next/whats-next.html" >}}

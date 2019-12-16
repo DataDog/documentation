@@ -36,14 +36,14 @@ instances: [{}]
 
 チェック自体は `AgentCheck` を継承し、呼び出しごとに `hello.world` のゲージ `1` を送信します。`checks.d/hello.py` は以下のようになります。
 
-```python
-# 次の try/except ブロックは、このカスタムチェックがどの Agent バージョンとも互換性を持つようにします
+{{< code-block lang="python" filename="hello.py" >}}
+# 次の try/except ブロックを使うと、カスタムチェックがどの Agent バージョンとも互換性を持つようになります
 try:
-    # 最初に、古いバージョンの Agent から基本クラスのインポートを試みます
-    from checks import AgentCheck
+    # 最初に、古いバージョンの Agent から基本クラスのインポートを試みます...
+    from datadog_checks.base import AgentCheck
 except ImportError:
     # ...失敗した場合は、Agent バージョン 6 以降で実行します
-    from datadog_checks.checks import AgentCheck
+    from checks import AgentCheck
 
 # 特別な変数 __version__ の内容は Agent のステータスページに表示されます
 __version__ = "1.0.0"
@@ -52,7 +52,7 @@ __version__ = "1.0.0"
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
-```
+{{< /code-block >}}
 
 基本クラスから提供されるインターフェイスの詳細については、[API のドキュメント][5]を参照してください。
 
@@ -90,8 +90,7 @@ instances: [{}]
 
 チェックが実行されていることを確認するには、次のコマンドを使用します。
 
-{{< tabs >}}
-{{% tab "Agent v6" %}}
+[app.datadoghq.com][3] の場合
  ```
 sudo -u dd-agent -- datadog-agent check <check_name>
 ```
@@ -137,7 +136,7 @@ from datadog_checks.utils.subprocess_output import get_subprocess_output
 class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
-        file_count = len(files.split('\n') - 1  # len() はデフォルトで int 値を返します
+        file_count = len(files.split('\n')) - 1  #len() はデフォルトで int 値を返します
         self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 
