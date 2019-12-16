@@ -59,7 +59,7 @@ See the list of all hosts in your account from the [Infrastructure List][4]. The
 There are differences in hostname resolution between Agent v5 and Agent v6.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 ### Linux/MacOS
 

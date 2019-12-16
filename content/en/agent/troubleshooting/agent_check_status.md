@@ -22,7 +22,7 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 To test an Agent check, run:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 ```
 sudo -u dd-agent datadog-agent check <CHECK_NAME>
@@ -55,7 +55,7 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 ## Windows
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
@@ -104,7 +104,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 For [systems using systemd][3], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 The following command shows the status of the Datadog Agent.
 
 ```
