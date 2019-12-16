@@ -78,7 +78,7 @@ export function handleLanguageBasedRedirects() {
 			}
 		}
 		else {
-			let dest = `${ previewPath }/${ acceptLanguage }/${ uri }`.replace('//', '/');
+			const dest = `${ previewPath }/${ acceptLanguage }/${ uri }`.replace('//', '/');
 
 			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect to ${ dest }`;
 
