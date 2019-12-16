@@ -75,7 +75,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 
 {{% tab ".NET Core on Linux" %}}
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][1].
+Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
 For Debian or Ubuntu, download and install the Debian package:
 
