@@ -27,11 +27,11 @@ On the [Synthetics settings page][1], you can adjust the following settings:
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.  
+Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
-{{< tabs >}} 
-{{% tab "Specify Value" %}} 
+{{< tabs >}}
+{{% tab "Specify Value" %}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter the given **Value**.
@@ -41,12 +41,12 @@ Choose the type of variable you want to create:
 
 {{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value" responsive="true" style="width:80%;">}}
 
-{{% /tab %}} 
+{{% /tab %}}
 
-{{% tab "Create From HTTP Test" %}} 
+{{% tab "Create From HTTP Test" %}}
 
 <div class="alert alert-warning">
-This feature is in private beta, reach out to support to turn on this feature for your account. 
+This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
 </div>
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -61,7 +61,7 @@ This feature is in private beta, reach out to support to turn on this feature fo
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-{{% /tab %}} 
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -73,7 +73,7 @@ Choose the default locations for your browser and API tests details. Options inc
 
 ### APM integration for Browser Tests
 
-Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section. 
+Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
 
 Use `*` to whitelist wider domain names. For example, adding `https://*.datadoghq.com/*` whitelists everything on `https://datadoghq.com/`.
 
