@@ -7,8 +7,7 @@ external_redirect: /api/#get-list-of-aws-log-ready-services
 
 ## Get list of AWS log ready services
 
-Get the list of current AWS services that Datadog offers automatic log collection.
-Use returned service IDs with the `services` parameter for the [Enable an AWS service log collection][1] API endpoint.
+Get the list of current AWS services for which Datadog offers automatic log collection. Use returned service IDs with the `services` parameter for the [Enable an AWS service log collection][1] API endpoint.
 
 **ARGUMENTS**:
 

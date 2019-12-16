@@ -7,15 +7,14 @@ external_redirect: /api/#check-aws-lambda
 
 ## Check that AWS Lambda Function exists
 
-Check function that verifies whether a given Lambda exists within a given AWS account. 
-This endpoint can be polled continuously without blocking.
+Check function that verifies whether a given Lambda exists within a given AWS account. This endpoint can be polled continuously without blocking.
 
-Returns a status of 'created' when it's checking if the Lambda exists in the account.
-Returns a status of 'waiting' while checking.
-Returns a status of 'checked and ok' if the Lambda exists.
-Returns a status of 'error' if the Lambda does not exist.
+* Returns a status of `created` when it's checking if the Lambda exists in the account.
+* Returns a status of `waiting` while checking.
+* Returns a status of `checked and ok` if the Lambda exists.
+* Returns a status of `error` if the Lambda does not exist.
 
-NOTE: You MUST have the given AWS account configured in the main AWS Integration tile for this to successfully verify.
+**Note**: You must have the given AWS account configured in the main AWS Integration tile for this to successfully verify.
 
 **ARGUMENTS**:
 
