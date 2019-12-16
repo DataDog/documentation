@@ -1,7 +1,7 @@
 ---
 title: Get all Pipelines
 type: apicode
-order: 24.3
+order: 25.3
 external_redirect: /api/#get-all-pipelines
 ---
 

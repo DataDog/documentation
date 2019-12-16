@@ -1,7 +1,7 @@
 ---
 title: モニターの削除
 type: apicontent
-order: 26.04
+order: 27.04
 external_redirect: /api/#delete-a-monitor
 ---
 

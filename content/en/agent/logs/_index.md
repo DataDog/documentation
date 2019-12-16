@@ -241,4 +241,3 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
 [10]: /agent/proxy
-[11]: /agent/basic_agent_usage/?tab=agentv6#agent-overhead

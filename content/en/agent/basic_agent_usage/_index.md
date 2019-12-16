@@ -276,7 +276,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection** 
 
-The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][8] enabled. It shows the evolution of resource usage for the different compression levels available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][1] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -316,7 +316,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 ## Configuration management tools
 
-Manage the Datadog Agent and [Integrations][1] using configuration management tools:
+Manage the Datadog Agent and [Integrations][2] using configuration management tools:
 
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
@@ -359,33 +359,33 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][2].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][3].
 
-Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][3].
+Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][4].
 
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][4].
+[See the dedicated documentation for Agent configuration files][5].
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][5], edit your [Agent main configuration file][6] `datadog.yaml` and set the `site` parameter to:
+To send your Agent data to the [Datadog EU site][6], edit your [Agent main configuration file][7] `datadog.yaml` and set the `site` parameter to:
 
 `site: datadoghq.eu`
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][7]
+[See the dedicated documentation for Agent log files][8]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: /agent/guide/integration-management
-[4]: /agent/guide/agent-configuration-files
-[5]: https://app.datadoghq.eu
-[6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[7]: /agent/guide/agent-log-files
-[8]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[2]: /integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: /agent/guide/integration-management
+[5]: /agent/guide/agent-configuration-files
+[6]: https://app.datadoghq.eu
+[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /agent/guide/agent-log-files

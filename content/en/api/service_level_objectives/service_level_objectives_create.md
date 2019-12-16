@@ -1,7 +1,7 @@
 ---
 title: Create a SLO
 type: apicontent
-order: 29.01
+order: 30.01
 external_redirect: /api/#create-a-slo
 ---
 

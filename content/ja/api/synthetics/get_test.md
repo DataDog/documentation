@@ -1,7 +1,7 @@
 ---
 title: テストの取得
 type: apicontent
-order: 29.8
+order: 30.8
 external_redirect: "/api/#get-test"
 ---
 

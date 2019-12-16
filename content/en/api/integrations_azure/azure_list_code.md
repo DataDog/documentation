@@ -1,7 +1,7 @@
 ---
 title: List all Azure integrations
 type: apicode
-order: 16.1
+order: 17.1
 external_redirect: /api/#list-all-azure-integrations
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 特定の結果の取得
 type: apicontent
-order: 29.6
+order: 30.6
 external_redirect: "/api/#get-result"
 ---
 

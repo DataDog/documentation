@@ -1,7 +1,7 @@
 ---
 title: Bulk Delete Service Level Objective Timeframes
 type: apicode
-order: 29.06
+order: 30.06
 external_redirect: /api/#bulk-delete-service-level-objectives-time-frames
 ---
 

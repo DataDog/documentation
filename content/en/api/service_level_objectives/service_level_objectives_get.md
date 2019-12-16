@@ -1,7 +1,7 @@
 ---
 title: Get a SLO's details
 type: apicontent
-order: 29.02
+order: 30.02
 external_redirect: /api/#get-a-slo-s-details
 ---
 

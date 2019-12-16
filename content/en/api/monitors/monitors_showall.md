@@ -1,7 +1,7 @@
 ---
 title: Get all monitor details
 type: apicontent
-order: 26.06
+order: 27.06
 external_redirect: /api/#get-all-monitor-details
 ---
 

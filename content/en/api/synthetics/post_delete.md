@@ -1,7 +1,7 @@
 ---
 title: Delete tests
 type: apicontent
-order: 30.4
+order: 31.4
 external_redirect: /api/#delete-tests
 ---
 

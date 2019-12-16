@@ -1,7 +1,7 @@
 ---
 title: Search SLOs
 type: apicontent
-order: 29.07
+order: 30.07
 external_redirect: /api/#search-slo-s
 ---
 
