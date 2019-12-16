@@ -1,7 +1,7 @@
 ---
 title: モニター
 type: apicontent
-order: 27
+order: 26
 external_redirect: '/api/#monitors'
 ---
 ## モニター
