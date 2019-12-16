@@ -1,7 +1,7 @@
 ---
 title: Key Management
 type: apicontent
-order: 22
+order: 21
 external_redirect: '/api/#key-management'
 ---
 ## Key Management

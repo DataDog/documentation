@@ -1,7 +1,7 @@
 ---
 title: Organizations
 type: apicontent
-order: 28
+order: 27
 external_redirect: '/api/#organizations'
 ---
 ## Organizations

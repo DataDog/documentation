@@ -1,7 +1,7 @@
 ---
 title: ログインデックス
 type: apicontent
-order: 24
+order: 23
 external_redirect: '/api/#logs-indexes'
 ---
 ## ログインデックス

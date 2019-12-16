@@ -1,7 +1,7 @@
 ---
 title: ログパイプライン
 type: apicontent
-order: 25
+order: 24
 external_redirect: '/api/#logs-pipelines'
 ---
 ## ログパイプライン

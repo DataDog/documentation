@@ -1,7 +1,7 @@
 ---
 title: HTTP を使用したログの送信
 type: apicontent
-order: 23.1
+order: 22.1
 external_redirect: "/api/#send-logs-over-http"
 ---
 
