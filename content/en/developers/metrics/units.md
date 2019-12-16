@@ -41,6 +41,8 @@ Units are also displayed at the bottom of timeboard graphs, and metric descripti
 
 {{< img src="developers/metrics/units/annotated_ops.png" alt="Annotated ops" responsive="true" style="width:70%;">}}
 
+To change a metric unit, navigate to the [metric summary] page and select a metric. Click **Edit** under **Metadata** and select a unit, such as `bit` or `byte` from the dropdown menu.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
