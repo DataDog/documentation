@@ -90,7 +90,8 @@ instances: [{}]
 
 チェックが実行されていることを確認するには、次のコマンドを使用します。
 
-[app.datadoghq.com][3] の場合
+{{< tabs >}}
+{{% tab "Agent v6" %}}
  ```
 sudo -u dd-agent -- datadog-agent check <check_name>
 ```
