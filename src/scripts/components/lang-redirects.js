@@ -29,7 +29,6 @@ const getUrlParts = (data) => {
 
 export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
-
 	const supportedLanguage = navigator.language.split('-')[0] || navigator.browserLanguage.split('-')[0];
 	const baseURL = getUrlParts(window.location.href).hostname;
 	const subdomain = baseURL.split('.')[0];
@@ -41,7 +40,7 @@ export function handleLanguageBasedRedirects() {
 
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
-		ex: /mybranch/myfeature/index.html => /ja/mybranch/myfeature/index.html
+		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
 	*/
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
 		previewPath = uri.split('/').slice(0,3).join('/');
@@ -66,11 +65,11 @@ export function handleLanguageBasedRedirects() {
 		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang));
 	}
 
-	if ( subMatch.length && !uri.includes(`/${  acceptLanguage  }/`) ) {
+	if ( subMatch.length && !uri.includes(`/${ acceptLanguage }/`) ) {
+		const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
+
 		if (acceptLanguage === 'en') {
 			logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
-
-			const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
 
 			if ( curLang.length ) {
 				logMsg += `; Current Lang: ${curLang}`;
@@ -78,7 +77,7 @@ export function handleLanguageBasedRedirects() {
 			}
 		}
 		else {
-			const dest = `${ previewPath }/${ acceptLanguage }/${ uri }`.replace('//', '/');
+			const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
 
 			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect to ${ dest }`;
 
