@@ -16,14 +16,11 @@ You are allocated a certain number of custom metrics based on your Datadog prici
 * Pro: 100 custom metrics per host.
 * Enterprise: 200 custom metrics per host.
 
-The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month.
-These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host.
-
-Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics" responsive="true" >}}
 
-Contact [Sales][3] or your [Customer Success][4] Manager to discuss custom metrics for your account or purchase an additional custom metrics packages.
+The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][3] or your [Customer Success][4] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Tracking Custom metrics
 
@@ -39,7 +36,7 @@ For more real-time tracking of the count of custom metrics for a particular metr
 
 * Reporting the same metric name on multiple hosts results in multiple custom metrics.
 * Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric. See the [Effect of Adding Tags](#effect-of-adding-tags) section.
-* Reordering of tag values doesn’t add uniqueness, the following combinations are the same custom metric:
+* Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
 
   *  `metric_name{env:dev, service:foo}`
   *  `metric_name{service:foo, env:dev}`
@@ -49,18 +46,18 @@ Below are examples of how to count your custom metrics. The number of custom met
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
 
-The number of custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated the same way as shown below:
+The number of custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated with the same logic as shown below:
 
 Suppose you’re submitting a metric, `request.count`, from two hosts (`host:A`,`host:B`), which counts the number of endpoint requests. You’re submitting this metric with two tag keys:
 
-* `endpoint`  that can take the value `endpoint:X` or `endpoint:Y`
-* `status` that can take the value `status:200` or `status:400`
+* `endpoint`  that has the value `endpoint:X` or `endpoint:Y`.
+* `status` that has the value `status:200` or `status:400`.
 
-Let’s assume that in your data, endpoint `endpoint:X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
+Let’s assume that in your data, `endpoint:X` is supported by both hosts, but fails only on `host:B`, and requests to `endpoint:Y` are always successful and only appears on `host:B` as shown below:
 
 {{< img src="account_management/billing/custom_metrics/request_count.png" alt="Custom metrics host" responsive="true" style="width:80%;">}}
 
-`request.Count` reports then **4 distinct custom metrics**. The custom metrics are listed below:
+`request.Count` reports **4 distinct custom metrics**. The custom metrics are listed below:
 
 | Metric Name     | Tag Values                           |
 |-----------------|--------------------------------------|
@@ -68,7 +65,6 @@ Let’s assume that in your data, endpoint `endpoint:X` is supported by both hos
 | `request.Count` | `host:B`, `endpoint:X`, `status:200` |
 | `request.Count` | `host:B`, `endpoint:X`, `status:400` |
 | `request.Count` | `host:B`, `endpoint:Y`, `status:200` |
-
 
 ### Effect of Adding Tags
 
@@ -122,13 +118,13 @@ The number of unique tag value combinations submitted for a `HISTOGRAM` metric w
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
-**A DISTRIBUTION metric generates five custom metrics** for each unique combination of metric name, host, and tag values to support the server-side aggregations  `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
+The number of custom metrics from a [DISTRIBUTION metric][1] is 5x the number of custom metrics emitted from a COUNT/RATE/GAUGE. For each unique combination of metric name and tag values, a DISTRIBUTION generates 5 custom metrics that represent the global statistical distribution of values. These 5 custom metrics represent server-side aggregations of count, sum, min, max, and avg. [Learn more about DISTRIBUTION metric type][1].
 
 Suppose you have a distribution metric measuring `request.Latency` in which the following tag value combinations are present in your data as shown below:
 
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
 
-The number of unique combinations of metric name, host, and tag values submitted for a `GAUGE` metric with [this tagging scheme is 4](#counting-custom-metrics?tab=countrategauge):
+Given [this same tagging scheme](#counting-custom-metrics?tab=countrategauge), the number of unique combinations of metric and tag values submitted for a `GAUGE` metric is 4:
 
 | Metric Name       | Tag Values                           |
 |-------------------|--------------------------------------|
@@ -137,7 +133,7 @@ The number of unique combinations of metric name, host, and tag values submitted
 | `request.Latency` | `host:B`, `endpoint:X`, `status:400` |
 | `request.Latency` | `host:B`, `endpoint:Y`, `status:200` |
 
-Given `request.Latency` is submitted as a `DISTRIBUTION`, Datadog [stores 5 custom metrics][1] for each of the original 4 unique tag value combinations to account for server side-aggregations: `count`, `sum`, `min`, `max`, and `avg`.
+Since `request.Latency` is submitted as a `DISTRIBUTION`, Datadog [stores 5 custom metrics][1] for each of the original 4 unique tag value combinations to account for server side-aggregations: `count`, `sum`, `min`, `max`, and `avg`.
 
 This results in a total of 20 custom metrics for this `DISTRIBUTION` metric:
 
@@ -150,7 +146,7 @@ This results in a total of 20 custom metrics for this `DISTRIBUTION` metric:
 
 ##### Distribution Metrics with Additional Percentile Aggregations
 
-[Adding additional percentile aggregations][2]: `p50`, `p75`, `p90`, `p95`, or `p99` to a distribution metric increases the number of distinct custom metrics reported. In order to support additional globally accurate percentile aggregations, a dedicated custom metric is created for a given aggregation per every potentially queryable tag value combination in your data. For instance let's say you have two hosts: `host:A` and `host:B` and you want to calculate the global `p50` (the median) of your requests latency over a given interval:
+[Adding additional percentile aggregations][2] (p50, p75, p90, p95, and p99) to a distribution metric increases the number of distinct custom metrics reported. In order to support these additional globally accurate percentile aggregations, **5 custom metrics are created per every potentially queryable tag value combination in your data**.
 
 | Host     | Requests Latencies measured (in ms) | p50 |
 |----------|-------------------------------------|-----|
@@ -161,7 +157,7 @@ The overall `p50` of latency for your request is **NOT** `avg(60,20)=40 ms`, the
 
 For other metric types, like GAUGE and COUNT, Datadog can combine/aggregate the most granular data to obtain globally accurate results. Percentiles can’t be recombined; therefore, they are precomputed and stored individually in a dedicated custom metric per every potentially queryable tag value combination in your data
 
-**Note**: You can control [which percentile aggregation are performed][2] over [which tag combination][3] for any DISTRIBUTION metric.
+**Note**: You can control over [which tag combination][3] percentile aggregation are performed for any DISTRIBUTION metric.
 
 [1]: /developers/metrics/types/?tab=distribution
 [2]: /graphing/metrics/distributions/#aggregations
