@@ -1,7 +1,7 @@
 ---
 title: Delete an application key
 type: apicode
-order: 21.10
+order: 22.10
 external_redirect: /api/#delete-an-application-key
 ---
 

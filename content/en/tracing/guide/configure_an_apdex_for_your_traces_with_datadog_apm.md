@@ -19,7 +19,7 @@ To define your apdex, you need to be an administrator of your Datadog account. T
 
 * Satisfied requests have a response time below **T**
 * Tolerated requests have a response time equal to/above **T** and below/equal to **4T**
-* Frustrated requests have a response time above **4T**
+* Frustrated requests have a response time above **4T** or returns an error
 
 Once the threshold is defined and your requests are categorized, the apdex is defined as:
 

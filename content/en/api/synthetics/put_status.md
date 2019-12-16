@@ -1,7 +1,7 @@
 ---
 title: Start or pause a test
 type: apicontent
-order: 30.2
+order: 31.2
 external_redirect: /api/#start-or-pause-a-test
 ---
 

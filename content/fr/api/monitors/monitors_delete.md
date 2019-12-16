@@ -1,7 +1,7 @@
 ---
 title: Supprimer un monitor
 type: apicontent
-order: 26.04
+order: 26.05
 external_redirect: /api/#supprimer-un-monitor
 ---
 

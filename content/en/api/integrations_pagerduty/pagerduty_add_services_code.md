@@ -1,7 +1,7 @@
 ---
 title: Add new services and schedules
 type: apicode
-order: 18.3
+order: 19.3
 external_redirect: /api/#add-new-services-and-schedules
 ---
 

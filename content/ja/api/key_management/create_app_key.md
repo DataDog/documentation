@@ -1,7 +1,7 @@
 ---
 title: アプリケーションキーの作成
 type: apicontent
-order: 21.08
+order: 22.08
 external_redirect: "/api/#create-an-application-key"
 ---
 

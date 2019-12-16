@@ -4,7 +4,7 @@ categories:
   - log collection
 ddtype: ライブラリ
 dependencies: []
-description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装
+description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装。
 doc_link: 'https://docs.datadoghq.com/integrations/python/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
@@ -18,7 +18,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション
-short_description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装
+short_description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装。
 version: '1.0'
 ---
 ## 概要

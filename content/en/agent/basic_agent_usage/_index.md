@@ -52,6 +52,7 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
 ### The Collector
+
 The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Python2.7 interpreter to run integrations and [custom checks][4].
 
 ### The Forwarder
@@ -59,8 +60,8 @@ The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Py
 The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable. Logs are sent over an SSL-encrypted TCP connection to Datadog.
 
 ### DogStatsD
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
 
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology
@@ -83,6 +84,7 @@ Agent v5 is composed of four major components, each written in Python running as
 **Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps’ best friend`.
 
 ### Supervision, Privileges, and Network Ports
+
 A SupervisorD master process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
 
 The following [ports][3] are open for operations:
@@ -93,12 +95,11 @@ The following [ports][3] are open for operations:
 | tcp/17124 | The forwarder for graphite support  |
 | udp/8125  | DogStatsD                           |
 
-
 All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][4]. For information on IP ranges to allow, see [Network Traffic][5].
 
 The recommended number of open file descriptors is 1024. You can see this value with the command `ulimit -a`. If you have a hard limitation below the recommended value, for example Shell Fork Bomb Protection, one solution is to add the following in `superisord.conf`:
 
-```
+```conf
 [supervisord]
 minfds = 100  # Your hard limit
 ```
@@ -113,8 +114,7 @@ minfds = 100  # Your hard limit
 
 ## GUI
 
-You can configure the port on which the GUI runs in the `datadog.yaml` file. To disable the GUI, set the port's value to `-1`.
-For Windows and macOS, the GUI is enabled by default and runs on port `5002`. For Linux, the GUI is disabled by default.
+You can configure the port on which the GUI runs in the `datadog.yaml` file. To disable the GUI, set the port's value to `-1`. For Windows and macOS, the GUI is enabled by default and runs on port `5002`. For Linux, the GUI is disabled by default.
 
 When the Agent is running, use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
 
@@ -179,7 +179,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
-
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /agent/basic_agent_usage/deb
 [3]: /agent/basic_agent_usage/ubuntu
@@ -233,7 +232,6 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `stopservice`     | Stop the Agent within the service control manager.                          |
 | `version`         | Print version info.                                                         |
 
-
 **Note**: Some options have their own set of flags and options detailed in a help message. For example, to see how to use the `check` subcommand, run:
 
 ```
@@ -272,6 +270,46 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 {{% /tab %}}
 {{< /tabs >}}
 
+**Log Collection**:
+
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][1] enabled. It shows the evolution of resource usage for the different compression levels available.
+
+{{< tabs >}}
+{{% tab "HTTP compression level 6" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1.5% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 14 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{% tab "HTTP compression level 1" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 1% of the CPU used on average
+* Memory: ~ 95MB of RAM used.
+* Network bandwidth: ~ 20 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{% tab "HTTP Uncompressed" %}}
+
+* Agent Test version: 6.15.0
+* CPU: ~ 0.7% of the CPU used on average
+* Memory: ~ 90MB of RAM used (RSS memory)
+* Network bandwidth: ~ 200 KB/s ▲
+* Disk:
+  * Linux 350MB to 400MB depending on the distribution
+  * Windows: 260MB
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Configuration management tools
 
 Manage the Datadog Agent and [Integrations][6] using configuration management tools:
@@ -282,7 +320,6 @@ Manage the Datadog Agent and [Integrations][6] using configuration management to
 * [Chef GitHub project][1]
 * [Installing Datadog Agent with Chef][2]
 
-
 [1]: https://github.com/DataDog/chef-datadog
 [2]: https://app.datadoghq.com/account/settings#integrations/chef
 {{% /tab %}}
@@ -290,7 +327,6 @@ Manage the Datadog Agent and [Integrations][6] using configuration management to
 
 * [Puppet GitHub project][1]
 * [Installing Datadog Agent with Puppet][2]
-
 
 [1]: https://github.com/DataDog/puppet-datadog-agent
 [2]: https://app.datadoghq.com/account/settings#integrations/puppet
@@ -300,14 +336,12 @@ Manage the Datadog Agent and [Integrations][6] using configuration management to
 * [Ansible GitHub project][1]
 * [Installing Datadog Agent with Ansible][2]
 
-
 [1]: https://github.com/DataDog/ansible-datadog
 [2]: https://app.datadoghq.com/account/settings#agent/ansible
 {{% /tab %}}
 {{% tab "SaltStack" %}}
 
 * [Installing Datadog Agent with Saltstack][1]
-
 
 [1]: https://github.com/DataDog/datadog-formula
 {{% /tab %}}
@@ -334,6 +368,7 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 ### Log location
 
 [See the dedicated documentation for Agent log files][12]
+
 
 ## Further Reading
 

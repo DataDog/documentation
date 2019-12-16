@@ -1,7 +1,7 @@
 ---
 title: テストの編集
 type: apicontent
-order: 29.3
+order: 30.3
 external_redirect: '/api/#edit-tests'
 ---
 ## テストの編集

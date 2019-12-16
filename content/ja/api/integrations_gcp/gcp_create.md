@@ -1,7 +1,7 @@
 ---
 title: 新しい GCP インテグレーションの作成
 type: apicontent
-order: 17.2
+order: 18.2
 external_redirect: '/api/#create-a-gcp-integration'
 ---
 ## 新しい GCP インテグレーションの作成
