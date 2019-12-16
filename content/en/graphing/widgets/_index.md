@@ -65,10 +65,10 @@ A copied widget can also be shared outside of Datadog as a static image stored i
 ## Export Graphs
 
 ### PNG
-To convert any widget to a PNG file, click the export button in the upper right hand side of the widget, and select “Download as PNG” to download the graph in PNG format. 
+To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select “Download as PNG”. 
 
 ### CSV
-To export data from a timeseries, table, or toplist widget to a CSV file, click the export button in the upper right hand side of the widget, and select “Download as CSV” to download the data in CSV format. 
+To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”. 
 
 
 [1]: /graphing/widgets/timeseries#full-screen
