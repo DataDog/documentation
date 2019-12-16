@@ -46,22 +46,22 @@ export function handleLanguageBasedRedirects() {
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
 		previewPath = uri.split('/').slice(0,3).join('/');
 		uri = uri.replace(previewPath, '');
-		logMsg = `Preview path is ${ previewPath }, URI set to: ${ uri } `;
+		logMsg += `Preview path is ${ previewPath }, URI set to: ${ uri } `;
 	}
 
 	// order of precedence: url > cookie > header
 	if ( params['lang_pref'] && allowedLanguages.indexOf(params['lang_pref']) !== -1 ) {
 		acceptLanguage = params['lang_pref'];
-		logMsg = `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
+		logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
 		Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 	}
 	else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 		acceptLanguage = Cookies.get('lang_pref');
-		logMsg = `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
+		logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
 	}
 	else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
-		logMsg = `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
+		logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
 
 		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang));
 	}
@@ -74,14 +74,16 @@ export function handleLanguageBasedRedirects() {
 
 			if ( curLang.length ) {
 				logMsg += `; Current Lang: ${curLang}`;
-				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '') );
+				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 			}
 		}
 		else {
-			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect`;
+			let dest = ${ previewPath }/${ acceptLanguage }/${ uri }.replace('//', '/');
+
+			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect to ${ dest }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			window.location.replace( `${ previewPath }/${ acceptLanguage }/${ uri }`.replace('//', '') );
+			window.location.replace( dest );
 		}
 	}
 

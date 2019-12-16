@@ -93,6 +93,23 @@ describe(`Ensure JA site redirects are working based on navigator.language setti
         window.location = { href: '', replace: jest.fn(), };
     });
 
+    it('should redirect a preview site as expected', () => {
+        window.location.href = 'https://docs-staging.datadoghq.com/nsollecito/lang-redirects/agent/basic_agent_usage/?lang_pref=ja';
+
+        redirect.handleLanguageBasedRedirects();
+
+        expect(window.location.replace).toHaveBeenCalled();
+    });
+
+    it('should redirect a preview site as expected', () => {
+        window.location.href = 'https://docs-staging.datadoghq.com/nsollecito/lang-redirects/monitors/monitor_types/';
+
+        redirect.handleLanguageBasedRedirects();
+
+        expect(window.location.replace).toHaveBeenCalled();
+    });
+
+
     it('should not redirect when JA site is requested and JA navigator.language matches', () => {
         window.location.href = 'http://localhost:3000/ja/product/index.html';
 
