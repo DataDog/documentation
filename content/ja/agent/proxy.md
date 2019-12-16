@@ -221,7 +221,8 @@ CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` に�
 
 HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
-`app.datadoghq.com` の場合: `agent-intake.logs.datadoghq.com` のポート `10516`。SSL 暗号化をアクティブにします。
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
 
 ```
 # 基本的な構成
@@ -321,7 +322,8 @@ HAProxy 構成が完成したら、リロードするか、HAProxy を再起動�
 
 #### Datadog Agent 構成
 
-[app.datadoghq.com][3] の場合
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 `dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
@@ -349,7 +351,8 @@ skip_ssl_validation: true
 
 [1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-パラメーター `use_port_443` は、プロキシから送信されるログに影響しません。ログを `agent-443-intake.logs.datadoghq.com:443` に転送するには、プロキシ自体を構成する必要があります。
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 `dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
 
@@ -406,7 +409,8 @@ skip_ssl_validation: yes
 
 この例 `nginx.conf` を使用して、Datadog インテークにログをプロキシ転送できます。これは、TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントの間で内部的なプレーンテキストログを暗号化します。
 
-`DD_LOGS_CONFIG_LOGS_DD_URL`
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
 
 ```
 user nginx;
@@ -428,7 +432,8 @@ stream {
 }
 ```
 
-`app.datadoghq.com` の場合: `agent-intake.logs.datadoghq.com` のポート `10516`。SSL 暗号化をアクティブにします。
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
 
 ```
 user nginx;
