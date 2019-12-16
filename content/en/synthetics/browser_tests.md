@@ -118,7 +118,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Variable**: Store and use global variables through [Synthetics Settings][11]).
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][11]).
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
