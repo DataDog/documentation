@@ -7,10 +7,12 @@ aliases:
 
 ## Downgrade the Agent from v7 to v6
 
-If you followed the instructions to [upgrade from v6 to v7][1], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
-
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+First, [uninstall Agent v7 from your system][1].
+
+Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
 
 | Platform     | Command                                                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -22,33 +24,42 @@ If you followed the instructions to [upgrade from v6 to v7][1], run the Agent in
 | Ubuntu       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 | SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 
+[1]: /agent/faq/how-do-i-uninstall-the-agent
+[2]: /agent/versions/upgrade_to_agent_v6
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. [Download the Datadog Agent installer][1].
-2. Run the installer (as **Administrator**) by opening `datadog-agent-6-latest.amd64.msi`.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
-4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
+1. [Uninstall Agent v7 from your system][1].
+2. [Download the Datadog Agent installer][2].
+3. Run the installer (as **Administrator**) by opening `datadog-agent-6-latest.amd64.msi`.
+4. Follow the prompts, accept the license agreement, and enter your [Datadog API key][3].
+5. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-**Note**: Links to all available versions of the Windows Installer are [provided in JSON format][3].
+**Note**: Links to all available versions of the Windows Installer are [provided in JSON format][4].
 
-[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[1]: /agent/faq/how-do-i-uninstall-the-agent
+[2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
+
+First, [uninstall Agent v7 from your system][1].
+
+Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
 
 ```shell
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
 ```
 
+[1]: /agent/faq/how-do-i-uninstall-the-agent
+[2]: /agent/versions/upgrade_to_agent_v6
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Downgrade the Agent from v6 to v5
 
-This guide assumes you upgraded to the Agent v6 using our [upgrade guide][2], choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
+This guide assumes you upgraded to the Agent v6 using our [upgrade guide][1], choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -172,5 +183,4 @@ Run the agent installer package for the latest 5.x version,  instructions can be
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /agent/versions/upgrade_to_agent_v6
-[2]: /agent/guide/upgrade-to-agent-v6
+[1]: /agent/guide/upgrade-to-agent-v6
