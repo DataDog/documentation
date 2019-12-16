@@ -45,7 +45,7 @@ export function handleLanguageBasedRedirects() {
 	*/
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
 		previewPath = uri.split('/').slice(0,3).join('/');
-		uri = uri.replace(preview_path, '');
+		uri = uri.replace(previewPath, '');
 	}
 
 	// order of precedence: url > cookie > header
