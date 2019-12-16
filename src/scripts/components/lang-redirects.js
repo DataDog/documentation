@@ -46,6 +46,7 @@ export function handleLanguageBasedRedirects() {
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
 		previewPath = uri.split('/').slice(0,3).join('/');
 		uri = uri.replace(previewPath, '');
+		logMsg = `Preview path is ${ previewPath }, URI set to: ${ uri } `;
 	}
 
 	// order of precedence: url > cookie > header
@@ -80,7 +81,7 @@ export function handleLanguageBasedRedirects() {
 			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			window.location.replace( `${ previewPath }/${ acceptLanguage }/${ uri }` );
+			window.location.replace( `${ previewPath }/${ acceptLanguage }${ uri }` );
 		}
 	}
 
