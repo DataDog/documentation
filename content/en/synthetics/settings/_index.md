@@ -45,19 +45,23 @@ Choose the type of variable you want to create:
 
 {{% tab "Create From HTTP Test" %}} 
 
+<div class="alert alert-warning">
+This feature is in private beta, reach out to [support][1] to turn on this feature for your account. 
+</div>
+
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Pick the test you want to extract your variable from.
 3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
-    * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
-    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
+    * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][2].
+    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][2], or use the full response body.
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:80%;">}}
 
-
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[1]: /help
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}} 
 
 {{< /tabs >}}
