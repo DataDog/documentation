@@ -34,9 +34,6 @@ gtag('js', new Date());
 gtag('config', gaTag);
 
 $(document).ready(function () {
-    // redirect based on lang_pref
-    handleLanguageBasedRedirects();
-
     window.history.replaceState({}, '', window.location.href);
 
     const sidenavHTML = $('.container .sidenav-nav').clone();

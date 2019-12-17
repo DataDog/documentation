@@ -74,12 +74,12 @@ console.log(`AcceptLanguage: ${ acceptLanguage }`);
 		if (acceptLanguage === 'en') {
 			logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
 
-			if ( curLang.length ) {
-				logMsg += `; Current Lang: ${curLang}`;
+			// if ( curLang.length ) {
+			// 	logMsg += `; Current Lang: ${curLang}`;
 
-				console.log(`LogMsg79: ${ logMsg }`);
-				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
-			}
+			// 	console.log(`LogMsg79: ${ logMsg }`);
+			// 	window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
+			// }
 		}
 		else if (acceptLanguage !== curLang) {
 			const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
@@ -98,3 +98,5 @@ console.log(`AcceptLanguage: ${ acceptLanguage }`);
 
 	// debug ? console.log(logMsg) : '';
 }
+
+window.addEventListener('load', handleLanguageBasedRedirects, false);
