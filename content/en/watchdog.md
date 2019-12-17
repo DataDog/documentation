@@ -84,13 +84,13 @@ Typing in the `Filter stories` search box also to search over your stories titl
 
 Facets are associated with your watchdog stories allowing to filter them by:
 
-| Facet           | Description                                                                                              |
-|-----------------|----------------------------------------------------------------------------------------------------------|
-| Story Category  | Either Display all `apm` or all `infratructure` stories.                                                 |
-| Story Type      | Upon which metrics from APM or infrastructure integrations stories should be displayed.                  |
-| APM Environment | The [APM Environment][11] to display stories from.         |
-| APM Primary Tag | The [defined APM primary tag][12] to display stories from. |
-| APM Service     | The [APM Service][13] to display stories from.                             |
+| Facet           | Description                                                                             |
+|-----------------|-----------------------------------------------------------------------------------------|
+| Story Category  | Either Display all `apm` or all `infratructure` stories.                                |
+| Story Type      | Upon which metrics from APM or infrastructure integrations stories should be displayed. |
+| APM Environment | The [APM Environment][11] to display stories from.                                      |
+| APM Primary Tag | The [defined APM primary tag][12] to display stories from.                              |
+| APM Service     | The [APM Service][13] to display stories from.                                          |
 
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
