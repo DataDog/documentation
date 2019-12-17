@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Only Agent v7+ support running Python 3 Custom Checks by default. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the latest Agent version</a> to run your Python 3 Custom Checks natively. Or <a href="/agent/guide/agent-v6-python-3">enable the Python 3 runtime</a> for your Agent v6.14+ if you would like to test your Custom Checks migration without upgrading your Agent.
+Only Agent v7+ supports running Python 3 custom checks by default. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the latest Agent version</a> to run your Python 3 custom checks natively. Or <a href="/agent/guide/agent-v6-python-3">enable the Python 3 runtime</a> for your Agent v6.14+ if you would like to test your custom checks migration without upgrading your Agent.
 </div>
 
 ## Overview

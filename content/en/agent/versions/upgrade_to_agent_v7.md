@@ -8,7 +8,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Agent v7 only supports Python 3 Custom Checks. You should <a href="/agent/guide/python-3">check if your Custom Check are Python 3 compatible</a> before upgrading to Agent 7.
+Agent v7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">Check if your custom checks are Python 3 compatible</a> before upgrading to Agent 7.
 </div>
 
 ## From Agent v6 to Agent v7
@@ -71,7 +71,7 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. Upgrade your Agent to version 6 following the [Manual upgrade process][1].
+1. Upgrade your Agent to version 6 following the [manual upgrade process][1].
 2. Follow the [From Agent v6 to Agent v7](#from-agent-v6-to-agent-v7) upgrade instructions.
 
 [1]: /agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
@@ -85,7 +85,7 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.github
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your Custom Check from Python 2 to Python 3.
+**Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your custom check from Python 2 to Python 3.
 
 ## Further Reading
 

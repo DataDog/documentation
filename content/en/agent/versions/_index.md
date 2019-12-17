@@ -19,9 +19,9 @@ further_reading:
 {{< tabs >}}
 {{% tab "Agent v7 vs v6" %}}
 
-Agent v7 is the latest major version of the Datadog Agent. The only change from Agent v6 is that **this version only includes support for Python 3 for Integrations and Custom Checks**.
+Agent v7 is the latest major version of the Datadog Agent. The only change from Agent v6 is that **this version only includes support for Python 3 for integrations and custom checks**.
 
-See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent to version 7. All official Integrations support Python 3 out-of-the-box. Follow the [Python 3 Custom Check Migration guide][2] to migrate your custom checks to Python 3.
+See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent to version 7. All official integrations support Python 3 out-of-the-box. Follow the [Python 3 Custom Check Migration guide][2] to migrate your custom checks to Python 3.
 
 **Note**: You can test this migration with Agent v6, by [Using Python 3 with Datadog Agent v6][3].
 
@@ -36,10 +36,10 @@ See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agen
 The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
-  * It has decreased CPU usage
-  * It has decrease memory usage
-  * It uses fewer file descriptors
-  * It has an all around decreased footprint
+  * Decreased CPU usage
+  * Decreased memory usage
+  * Fewer file descriptors
+  * All around decreased footprint
 
 * Agent 6 uses [two additional ports][1]:
     * `5000` to expose its runtime metrics.
@@ -51,7 +51,7 @@ The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rew
 
 **Agent v6 new functionalities**:
 
-To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation, but here are the key differentiators:
+To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation. The following are key differentiators:
 
 * [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
 
