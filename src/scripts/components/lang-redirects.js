@@ -64,6 +64,8 @@ export function handleLanguageBasedRedirects() {
 
 		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
 	}
+// eslint-disable-next-line no-console
+console.log(`AcceptLanguage: ${ acceptLanguage }`);
 
 	if ( subMatch.length && !uri.includes(`/${ acceptLanguage }/`) ) {
 		const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
@@ -73,6 +75,8 @@ export function handleLanguageBasedRedirects() {
 
 			if ( curLang.length ) {
 				logMsg += `; Current Lang: ${curLang}`;
+				// eslint-disable-next-line no-console
+				console.log(`LogMsg79: ${ logMsg }`);
 				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 			}
 		}
@@ -82,6 +86,8 @@ export function handleLanguageBasedRedirects() {
 			logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
+			// eslint-disable-next-line no-console
+			console.log(`LogMsg89: ${ logMsg }`);
 			window.location.replace( dest );
 		}
 	}

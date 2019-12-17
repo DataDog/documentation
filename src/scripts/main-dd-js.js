@@ -1,6 +1,5 @@
 import 'bootstrap';
 
-import './components/lang-redirects';
 import './datadog-docs';
 
 import './components/announcement_banner';
@@ -9,7 +8,7 @@ import './components/codenav';
 import './components/global-modals';
 import './components/header';
 import './components/platforms';
-
+import './components/lang-redirects';
 
 // TODO: split up code from datadog-docs.js into modules after webpack migration
 // import './components/sidenav';
