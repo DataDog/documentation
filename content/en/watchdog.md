@@ -70,11 +70,7 @@ Additionally, Watchdog suggests one or more monitors that are configured to trig
 
 ## Filter Stories
 
-To filter your Watchdog stories, use:
-
-* The Time range
-* The search bar.
-* Facets
+You can use the time range, search bar, or facets to filter your Watchdog stories:
 
 ##### Time range
 
@@ -88,13 +84,13 @@ Typing in the **Filter stories** search box enables you to search over your stor
 
 Facets are associated with your Watchdog stories, allowing you to filter them by:
 
-| Facet           | Description                                                                             |
-|-----------------|-----------------------------------------------------------------------------------------|
-| Story Category  | Display all `apm` or all `infrastructure` stories.                                |
+| Facet           | Description                                                                        |
+|-----------------|------------------------------------------------------------------------------------|
+| Story Category  | Display all `apm` or all `infrastructure` stories.                                 |
 | Story Type      | Which metrics from APM or infrastructure integrations stories should be displayed. |
-| APM Environment | The [APM Environment][12] to display stories from.                                      |
-| APM Primary Tag | The [defined APM primary tag][13] to display stories from.                              |
-| APM Service     | The [APM Service][14] to display stories from.                                          |
+| APM Environment | The [APM Environment][12] to display stories from.                                 |
+| APM Primary Tag | The [defined APM primary tag][13] to display stories from.                         |
+| APM Service     | The [APM Service][14] to display stories from.                                     |
 
 ## Watchdog in the Services List
 
