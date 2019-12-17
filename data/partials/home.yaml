@@ -44,6 +44,10 @@ nav_sections:
         link: logs/
         icon: logs.svg
         desc: Collect, process, explore, monitor, & archive your logs
+      - title: Security Monitoring 
+        link: security_monitoring/
+        icon: lock.svg
+        desc: Detect threats in real time and investigate security alerts
       - title: Synthetics
         link: synthetics/
         icon: synthetics.svg
