@@ -72,6 +72,8 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
 6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
+**Note**: If the service wrapper is not available on your system, run the following command instead: `sudo initctl start datadog-agent-sysprobe`
+
 7. [Restart the Agent][2]: `sudo service datadog-agent restart`
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 

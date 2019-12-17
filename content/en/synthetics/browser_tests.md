@@ -42,9 +42,9 @@ Define the configuration of your browser test.
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every 15 minutes to once per week. [Contact support][4] to enable additional frequencies for your test.
 
-### Use variables
+### Use global variables
 
-You can use the [variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
 
@@ -118,7 +118,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Variable**: Store and use global variables through [Synthetics Settings][11]).
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][11]).
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
@@ -190,7 +190,7 @@ Common failure reasons include:
 [2]: /api/?lang=bash#get-available-locations
 [3]: /synthetics/private_locations
 [4]: /help
-[5]: /synthetics/settings#variables
+[5]: /synthetics/settings#global-variables
 [6]: http://daringfireball.net/projects/markdown/syntax
 [7]: /integrations/#cat-notification
 [8]: https://www.google.com/chrome
