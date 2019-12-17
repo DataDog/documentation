@@ -70,6 +70,8 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Managed libraries: deployed together with the native library.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netcoreonwindows#required-environment-variables) to set these environment variables.
 
+**Note:** The `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer requires for automatic instrumentation in .NET Core. Instead, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2] below for details.
+
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
