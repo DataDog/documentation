@@ -60,7 +60,9 @@ export function handleLanguageBasedRedirects() {
 			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }`);
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
+			if ( acceptLanguage !== 'en') {
+				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
+			}
 		}
 		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 			acceptLanguage = Cookies.get('lang_pref');
