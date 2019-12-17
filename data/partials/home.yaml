@@ -59,7 +59,7 @@ nav_sections:
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg
-        desc: Automatically see trends in your applications metrics
+        desc: Automatically see trends in your applications & infrastructure metrics
   - nav_section:
     - name: 'Configuration'
     - navtiles:
