@@ -1,3 +1,4 @@
+/* eslint no-console: ["error", { allow: ["log", "warn"] }] */
 import Cookies from 'js-cookie';
 
 const allowedLanguages = ['en', 'ja', 'fr'];
@@ -56,6 +57,8 @@ export function handleLanguageBasedRedirects() {
 			acceptLanguage = params['lang_pref'];
 			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
+			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }`);
+
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 			window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 		}
@@ -77,6 +80,8 @@ export function handleLanguageBasedRedirects() {
 				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
+
+				console.log(`Log Msg 84: ${ logMsg }; Accept-Language: ${ acceptLanguage }`);
 
 				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 				window.location.replace( dest );
