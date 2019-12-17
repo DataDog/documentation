@@ -16,7 +16,11 @@ further_reading:
   text: "Collect your traces"
 ---
 
-{{< vimeo 278057125 >}}
+<div class="alert alert-warning">
+Watchdog infrastructure stories are in private beta. <a href="/help">Contact Datadog support</a> to get it enabled for your organization.
+</div>
+
+{{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Overview
 
@@ -91,8 +95,6 @@ Facets are associated with your watchdog stories allowing to filter them by:
 | APM Environment | The [APM Environment][12] to display stories from.                                      |
 | APM Primary Tag | The [defined APM primary tag][13] to display stories from.                              |
 | APM Service     | The [APM Service][14] to display stories from.                                          |
-
-{{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Watchdog in the Services List
 
