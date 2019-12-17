@@ -64,7 +64,8 @@ export function handleLanguageBasedRedirects() {
 
 		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
 	}
-// eslint-disable-next-line no-console
+
+/* eslint no-console: ["error", { allow: ["log", "warn"] }] */
 console.log(`AcceptLanguage: ${ acceptLanguage }`);
 
 	if ( subMatch.length && !uri.includes(`/${ acceptLanguage }/`) ) {
@@ -75,7 +76,7 @@ console.log(`AcceptLanguage: ${ acceptLanguage }`);
 
 			if ( curLang.length ) {
 				logMsg += `; Current Lang: ${curLang}`;
-				// eslint-disable-next-line no-console
+
 				console.log(`LogMsg79: ${ logMsg }`);
 				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 			}
@@ -86,7 +87,7 @@ console.log(`AcceptLanguage: ${ acceptLanguage }`);
 			logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			// eslint-disable-next-line no-console
+
 			console.log(`LogMsg89: ${ logMsg }`);
 			window.location.replace( dest );
 		}
