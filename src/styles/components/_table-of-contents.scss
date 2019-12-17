@@ -78,11 +78,16 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
       display:block !important;
     }
 
+    .toc_open ~ ul li:last-child a:last-child {
+      padding-bottom: 12px;
+    }
+
     .toc a {
       color: $darkGreyGrey;
     }
     .toc_open {
       color: $studioViolet;
+      font-weight: 600;
     }
 
     .toc_open + ul a {
@@ -94,6 +99,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
       // color: #555;
       // background:$highlightcolor;
       border-left: 4px solid $studioViolet !important;
+      font-weight: 600;
     }
 
     // level 1 list
@@ -127,11 +133,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
               }
             }
             a {
-              padding: 4px 0px 4px 15px;
+              padding: 6px 0px 6px 15px;
               border-left: 4px solid $ddgray;
               font-size: 18px;
               // line-height: 24px;
-              font-weight:600;
+              // font-weight:600;
             }
             // First level a tag
             & > a:first-child:not(.toc_open) {

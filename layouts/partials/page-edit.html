@@ -1,3 +1,4 @@
+{{ $ctx := . }}
 {{ $.Scratch.Set "editURL" "" }}
 
 {{ if .Params.dependencies }}
@@ -17,10 +18,10 @@
                 
                 {{/* Set Scratch */}}
                 {{ $.Scratch.Set "editURL" $tmpURL }}
-                {{ $editURL := $.Scratch.Get "editURL" }}
+                {{ $editLink := $.Scratch.Get "editURL" }}
 
                 {{ with $.File }}
-                    <a class="btn btn-link" href="{{ trim $editURL "/" }}">Edit in Github</a>
+                    {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
                 {{ end }}
 
             {{ end }}
@@ -33,16 +34,16 @@
 {{/* Files with integrations path and no dependencies link to new issue */}}
 
     {{ $.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new/choose" }}
-    {{ $editURL := $.Scratch.Get "editURL" }}
+    {{ $editLink := $.Scratch.Get "editURL" }}
 
     {{ with .File }}
-        <a class="btn btn-link" href="{{ trim $editURL "/" }}">Edit in Github</a>
+        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
     {{ end }}
     
 {{ else }}
 {{/* Not in integrations edit existing docs file */}}
 
         {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $.Page.Lang .File.Path ) }}
-        {{ partial "page-edit-body.html" (dict "ctx" "asdf" "link" "asdf" "date" .Lastmod ) }}
+        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
 
 {{ end }}
