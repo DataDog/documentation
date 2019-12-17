@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'intégration Slack
 type: apicontent
-order: 19.1
+order: 20.1
 external_redirect: "/api/#obtenir-l-integration-slack"
 ---
 

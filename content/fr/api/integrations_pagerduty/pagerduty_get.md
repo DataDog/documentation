@@ -1,7 +1,7 @@
 ---
 title: Obtenir une intégration PagerDuty
 type: apicontent
-order: 18.1
+order: 19.1
 external_redirect: "/api/#obtenir-une-integration-pagerduty"
 ---
 

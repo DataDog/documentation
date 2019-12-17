@@ -1,7 +1,7 @@
 ---
 title: Obtenir une clé d'application
 type: apicode
-order: 21.07
+order: 22.07
 external_redirect: "/api/#obtenir-une-cle-d-application"
 ---
 
