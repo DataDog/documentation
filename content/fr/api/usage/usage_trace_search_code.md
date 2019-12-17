@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour la recherche de traces
 type: apicode
-order: 34.5
+order: 35.5
 external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces"
 ---
 

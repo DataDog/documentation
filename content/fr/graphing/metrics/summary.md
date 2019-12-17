@@ -12,63 +12,69 @@ further_reading:
     tag: Documentation
     text: Distributions de métriques
 ---
-La [page Metrics Summary][1] affiche la liste de toutes les [métriques][2] transmises à Datadog pendant un intervalle de temps donné : l'heure précédente, le jour précédent ou la semaine précédente. Cette liste peut être filtrée par nom. Lorsque vous cliquez sur une métrique, un volet comportant des informations plus détaillées apparaît.
+## Présentation
 
-{{< img src="graphing/metrics/summary/summary.mp4" alt="Résumé" video="true" responsive="true" width="80%" >}}
+La [page Metrics Summary][1] affiche la liste de vos métriques transmises à Datadog pendant un intervalle de temps donné : l'heure précédente, le jour précédent ou la semaine précédente. Cette liste peut être filtrée par nom. Cliquez sur le nom d'une métrique pour afficher un volet comportant des informations plus détaillées.
 
 ## Volet de métrique
 
-Le volet de métrique affiche des informations générales sur une métrique donnée :
+Le volet de métrique affiche des informations essentielles concernant une métrique donnée.
 
 {{< img src="graphing/metrics/summary/metric_panel.png" alt="Volet de métrique" responsive="true" style="width:80%;">}}
 
-Les principales informations concernant votre métrique que vous pourrez y trouver sont les suivantes :
+### Le nom de la métrique
 
-* **Nom de la métrique** : le nom de métrique à utiliser dans l'[explorateur de métriques][3], les [widgets de dashboard][4], etc.
-* **Nombre de métriques distinctes** : le nom d'une métrique peut correspondre à plusieurs métriques distinctes en fonction des tags qui lui sont associés. Consultez la [documentation relative aux métriques custom][5] pour en savoir plus.
-* **Nombre de hosts** : le nombre total de hosts qui transmettent cette métrique.
-* **Nombre de tags** : le nombre total de tags associés à cette métrique. En savoir plus sur le [tagging][6] et la [façon d'assigner des tags][7].
-* **Métadonnées de métriques** : toutes les métadonnées associées à votre métrique :
-    * Description de la métrique
-    * L'[unité de la métrique][8]
-    * [Type de métrique][9]
-    * Le nom de l'intégration, si cette métrique provient d'une [intégration][10]
-    * L'intervalle de collecte de cette métrique
+Le nom de votre métrique dans l'[explorateur de métriques][2], les [dashboards][3], etc.
 
-### Métadonnées de métrique 
+### Nombre de métriques distinctes
 
-Chaque métadonnée de métrique peut être modifiée manuellement : 
+Une métrique peut correspondre à plusieurs métriques distinctes en fonction des tags qui lui sont associés. Pour en savoir plus, consultez la documentation relative aux [métriques custom][4].
 
-#### Modifier la description d'une métrique
+### Hosts
 
-Modifiez la description de la métrique pour mieux comprendre à quoi elle sert.
-Si une métrique provient d'une intégration et que sa description est incorrecte, [signalez un problème dans le référentiel GitHub dédié à la documentation de Datadog][11].
+Le nombre total de hosts qui transmettent une métrique avec une liste des hosts.
 
-#### Modifier l'unité d'une métrique ou ajouter une unité personnalisée
+### Tags
 
-Lors de l'envoi de métriques custom à Datadog, vous pouvez modifier l'[unité de mesure][1] qui s'affiche lorsque vous passez le curseur sur certaines métriques dans votre graphique. Pour ce faire, sélectionnez votre métrique custom dans la liste, puis sélectionnez l'unité de mesure que vous souhaitez utiliser comme illustré ci-dessous :
+Le nombre total de tags associés à une métrique avec une liste des tags. Pour en savoir plus, consultez la documentation relative au [tagging][5].
 
-{{< img src="graphing/metrics/summary/metrics_metadata.mp4" alt="Métadonnées de métrique" video="true" responsive="true" width="80%" >}}
+### Métadonnées de métriques
 
-**Remarque** : ces changements n'ont aucune incidence sur les graphiques de métriques (ils affectent uniquement les unités de mesure utilisées lorsque vous passez le curseur sur des valeurs brutes). Des règles de formatage sont automatiquement appliquées pour améliorer la lisibilité : par exemple, les octets (`B`) peuvent être affichés en tant que kibioctets (`KiB`).
+Les métadonnées associées à votre métrique. La plupart des métadonnées peuvent être modifiées sur la page de résumé des métriques ou avec l'[API Datadog][6].
 
-#### Modifier le type de métrique
+#### Description de la métrique
 
-Modifiez le type de métrique pour mieux identifier le type de métrique réellement envoyé.
-**Avertissement** : cela modifie le comportement de votre métrique dans **TOUS** vos monitors et analyses. Faites preuve de prudence lorsque vous modifiez cette information.
+La description de la métrique vous aide à mieux comprendre à quoi elle sert. Les descriptions sont prédéfinies pour les métriques provenant d'[intégrations][7] prises en charge. Utilisez ce champ pour mettre à jour les descriptions de vos [métriques custom][4].
+
+#### Unité de la métrique
+
+L'unité de votre métrique (byte, second, request, query, etc.). Consultez la page relative aux [unités de métriques][8] pour en savoir plus.
+
+Lors de l'envoi de métriques custom à Datadog, il est possible de modifier l'[unité de mesure][1] qui s'affiche lorsque vous passez le curseur sur la métrique dans votre graphique. **Remarque** : ces changements n'ont aucune incidence sur les graphiques de métriques (ils affectent uniquement les unités de mesure utilisées lorsque vous passez le curseur sur des valeurs brutes). Des règles de formatage sont automatiquement appliquées pour améliorer la lisibilité. Par exemple, les octets (`B`) peuvent être affichés en tant que kibioctets (`KiB`).
+
+#### Type de métrique
+
+Le type de votre métrique (gauge, rate ou count). Consultez la page relative aux [types de métrique][8] pour en savoir plus.
+
+**Avertissement** : si vous modifiez le type de métrique, cela modifie le comportement de cette métrique pour **TOUS** vos monitors et analyses.
+
+#### Nom de l'intégration
+
+Si la métrique provient d'une [intégration][7] prise en charge, les métadonnées répertorient le nom de l'intégration. Cette information ne peut pas être modifiée.
+
+#### Intervalle
+
+L'intervalle de collecte de la métrique en secondes.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /fr/developers/metrics
-[3]: /fr/graphing/metrics/explorer
-[4]: /fr/graphing/functions
-[5]: /fr/developers/metrics/custom_metrics
-[6]: /fr/tagging
-[7]: /fr/tagging/assigning_tags
+[2]: /fr/graphing/metrics/explorer
+[3]: /fr/graphing/dashboards
+[4]: /fr/developers/metrics/custom_metrics
+[5]: /fr/tagging
+[6]: /fr/api/?lang=python#edit-metric-metadata
+[7]: /fr/integrations
 [8]: /fr/developers/metrics/units
-[9]: /fr/developers/metrics/types
-[10]: /fr/integrations
-[11]: https://github.com/DataDog/documentation/issues/new/choose

@@ -1,7 +1,7 @@
 ---
 title: Réactiver un monitor
 type: apicode
-order: 26.11
+order: 27.11
 external_redirect: /api/#reactiver-un-monitor
 ---
 

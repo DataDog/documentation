@@ -26,9 +26,9 @@ Tous les endpoints d'API ci-dessous peuvent avoir deux endpoints de host différ
 
 Crée un mappage d'authentification à partir d'un corps JSON. Renvoie le mappage d'authentification qui vient d'être créé.
 
-| Méthode | Chemin de l'endpoint | Charge utile requise |
-|--------|--------------|------------------|
-| `POST`  | `/v2/authn_mappings`  | JSON       |
+| Méthode | Chemin de l'endpoint        | Charge utile requise |
+|--------|----------------------|------------------|
+| `POST` | `/v2/authn_mappings` | JSON             |
 
 ##### ARGUMENTS
 
@@ -239,9 +239,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Renvoie un mappage d'authentification spécifique via son UUID.
 
-| Méthode | Chemin de l'endpoint | Charge utile requise                           |
-|--------|--------------|--------------------------------------------|
-| `GET` | `/authn_mappings/{UUID}`  | Paramètre d'URL |
+| Méthode | Chemin de l'endpoint            | Charge utile requise |
+|--------|--------------------------|------------------|
+| `GET`  | `/authn_mappings/{UUID}` | Paramètre d'URL    |
 
 ##### ARGUMENTS
 
