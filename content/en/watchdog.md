@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Watchdog infrastructure stories are in private beta. <a href="/help">Contact Datadog support</a> to get it enabled for your organization.
+Watchdog infrastructure stories are in private beta. <a href="/help">Contact Datadog support</a> to have them enabled for your organization.
 </div>
 
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
@@ -26,27 +26,27 @@ Watchdog infrastructure stories are in private beta. <a href="/help">Contact Dat
 
 Watchdog is an algorithmic feature for APM performances and infrastructure integration metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
 
-* APM application metrics like:
+* APM metrics:
   * Hits (request rate)
   * Error rate
   * Latency
 
-* Infrastructure metrics from integrations like:
-  * [System][1]: Host-level memory usage (Memory leak), TCP retransmit rate..
+* Infrastructure metrics from integrations:
+  * [System][1]: Host-level memory usage (memory leaks), TCP retransmit rate, etc.
   * [Redis][2]
   * [PostgreSQL][3]
-  * [Nginx][4]
-  * [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], [DynamoDB][9] Amazon services.
+  * [NGINX][4]
+  * [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
 
 Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
 ## Story details
 
-Clicking on the story shows further details the detected irregularity:
+Clicking on the story shows further details about the detected irregularity:
 
 {{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
 
-The graph in this story shows the latency values of the ELB in three different availability zones. Watchdog for infrastructure detected similar anomalies in this metric from a single load balancer enabled in three availability zones, and automatically grouped these findings together in a single story. After a period of consistently low latency, the metric in all three AZs rises sharply—in the highlighted area of the graph, which indicates the timeframe of the anomaly.
+The graph in this story shows the latency values of the ELB in three different availability zones. Watchdog detected similar anomalies in this metric from a single load balancer enabled in three availability zones, and automatically grouped these findings together in a single story. After a period of consistently low latency, the metric in all three AZs rises sharply—in the highlighted area of the graph, which indicates the timeframe of the anomaly.
 
 ##### Expected bounds
 
@@ -62,11 +62,11 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 ##### Monitors
 
-Monitors associated with your stories are displayed at the bottom. Monitors displayed would have included in their scope the metric of the current story and its associated tags:
+Monitors associated with your stories are displayed at the bottom. Each monitor displayed has the metric of the current story and its associated tags included in its scope.
 
 {{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors" responsive="true" style="width:75%;">}}
 
-Additionally Watchdog suggests one or more monitors that are configured to trigger if the story would happen again. Click the **Enable Monitor** button to enable them for your organization. See [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
+Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
 
 ## Filter Stories
 
@@ -82,16 +82,16 @@ Use the time range selector in the upper right to view stories detected in a spe
 
 ##### Search bar
 
-Typing in the `Filter stories` search box also to search over your stories title.
+Typing in the **Filter stories** search box enables you to search over your story titles.
 
 ##### Facets
 
-Facets are associated with your watchdog stories allowing to filter them by:
+Facets are associated with your Watchdog stories, allowing you to filter them by:
 
 | Facet           | Description                                                                             |
 |-----------------|-----------------------------------------------------------------------------------------|
-| Story Category  | Either display all `apm` or all `infratructure` stories.                                |
-| Story Type      | Upon which metrics from APM or infrastructure integrations stories should be displayed. |
+| Story Category  | Display all `apm` or all `infrastructure` stories.                                |
+| Story Type      | Which metrics from APM or infrastructure integrations stories should be displayed. |
 | APM Environment | The [APM Environment][12] to display stories from.                                      |
 | APM Primary Tag | The [defined APM primary tag][13] to display stories from.                              |
 | APM Service     | The [APM Service][14] to display stories from.                                          |
