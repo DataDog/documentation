@@ -76,10 +76,10 @@ export function handleLanguageBasedRedirects() {
 				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 			}
 		}
-		else {
+		else if (acceptLanguage !== curLang) {
 			const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
 
-			logMsg += `; acceptLanguage ${  acceptLanguage  } not in URL, triggering redirect to ${ dest }`;
+			logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 			window.location.replace( dest );
