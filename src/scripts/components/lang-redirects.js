@@ -62,7 +62,7 @@ export function handleLanguageBasedRedirects() {
 	else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
 		logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
 
-		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang));
+		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
 	}
 
 	if ( subMatch.length && !uri.includes(`/${ acceptLanguage }/`) ) {
