@@ -207,7 +207,6 @@ Example using the `CISCO-TCP-MIB.my`:
 
  # ls /opt/datadog-agent/pysnmp/custom_mibpy/
 CISCO-SMI.py CISCO-SMI.pyc CISCO-TCP-MIB.py CISCO-TCP-MIB.pyc
-
 ```
 
 The Agent looks for the converted MIB Python files by specifying the destination path with `mibs_folder` in the [SNMP YAML configuration][8].
@@ -247,7 +246,7 @@ instances:
 If necessary, additional metrics can be defined in the instances. These metrics are collected alongside those in the profile.
 
 #### Containerized
-For containerized environments, see the [Autodiscovery Integration Templates][16] for guidance on applying the parameters below.
+For containerized environments, see the [Autodiscovery Integration Templates][10] for guidance on applying the parameters below.
 
 ##### SNMP v1
 
@@ -255,7 +254,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][16
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------                                                        |
 | `<INTEGRATION_NAME>`   | `snmp`                                                                                                                                                                                             |
 | `<INIT_CONFIG>`        | `{"mibs_folder":"<PATH_TO_ADDITIONAL_MIBS>"}`                                                                                                                                                      |
-| `<INSTANCE_CONFIG>`    | ```{"ip_address":"%%host%%", "port":"161", "community_string":"<COMMUNITY_NAME>", "snmp_version":"1", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}``` |
+| `<INSTANCE_CONFIG>`    | `{"ip_address":"%%host%%", "port":"161", "community_string":"<COMMUNITY_NAME>", "snmp_version":"1", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}` |
 
 ##### SNMP v2
 
@@ -263,7 +262,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][16
 | ---------------------- | ------------------------------------------------------------------------------------------------                                                                               |
 | `<INTEGRATION_NAME>`   | `snmp`                                                                                                                                                                         |
 | `<INIT_CONFIG>`        | `{"mibs_folder":"<PATH_TO_ADDITIONAL_MIBS>"}`                                                                                                                                  |
-| `<INSTANCE_CONFIG>`    | ```{"ip_address":"%%host%%", "port":"161", "community_string":"<COMMUNITY_NAME>", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}``` |
+| `<INSTANCE_CONFIG>`    | `{"ip_address":"%%host%%", "port":"161", "community_string":"<COMMUNITY_NAME>", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}` |
 
 ##### SNMP v3
 
@@ -273,15 +272,15 @@ For containerized environments, see the [Autodiscovery Integration Templates][16
 | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------      |
 | `<INTEGRATION_NAME>`   | `snmp`                                                                                                                                                                                                                                                                                                                 |
 | `<INIT_CONFIG>`        | `{"mibs_folder":"<PATH_TO_ADDITIONAL_MIBS>"}`                                                                                                                                                                                                                                                                          |
-| `<INSTANCE_CONFIG>`    | ```{"ip_address":"%%host%%", "port":"161", "snmp_version":"3", "user":"<USER_NAME>", "authKey":"<PASSWORD>", "privKey":"<PRIVACY_TYPE_KEY>", "authProtocol":"<AUTHENTICATION_PROTOCOL>", "privProtocol":"<PRIVACY_TYPE>", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}``` |
+| `<INSTANCE_CONFIG>`    | `{"ip_address":"%%host%%", "port":"161", "snmp_version":"3", "user":"<USER_NAME>", "authKey":"<PASSWORD>", "privKey":"<PRIVACY_TYPE_KEY>", "authProtocol":"<AUTHENTICATION_PROTOCOL>", "privProtocol":"<PRIVACY_TYPE>", "metrics":[{"MIB":"<MIB_NAME>","symbol":"<SYMBOL>"},{"OID":"<OID>","name":"<OID_NAME>"}]}` |
 
 
 ### Custom metrics
-Metrics collected by the SNMP integration are considered [custom metrics][10], which impacts your [bill][11].
+Metrics collected by the SNMP integration are considered [custom metrics][11], which impacts your [bill][12].
 
 ### Validation
 
-[Run the Agent's status subcommand][12] and look for `snmp` under the Checks section.
+[Run the Agent's status subcommand][13] and look for `snmp` under the Checks section.
 
 ## Data Collected
 ### Metrics
@@ -299,14 +298,14 @@ Returns `CRITICAL` if the Agent cannot collect SNMP metrics, otherwise returns `
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][13].
+Need help? Contact [Datadog support][14].
 
 ## Further Reading
 
 Additional helpful documentation, links, and articles:
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?][14]
-* [Monitoring Unifi devices using SNMP and Datadog][15]
+* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?][15]
+* [Monitoring Unifi devices using SNMP and Datadog][16]
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -318,10 +317,10 @@ Additional helpful documentation, links, and articles:
 [7]: https://github.com/DataDog/dd-agent/blob/master/CHANGELOG.md#dependency-changes-3
 [8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example#L3
 [9]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/developers/metrics/custom_metrics
-[11]: https://docs.datadoghq.com/account_management/billing/custom_metrics
-[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://docs.datadoghq.com/help
-[14]: https://docs.datadoghq.com/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-[15]: https://medium.com/server-guides/monitoring-unifi-devices-using-snmp-and-datadog-c8093a7d54ca
-[16]: https://docs.datadoghq.com/agent/autodiscovery/integrations
+[10]: https://docs.datadoghq.com/agent/autodiscovery/integrations
+[11]: https://docs.datadoghq.com/developers/metrics/custom_metrics
+[12]: https://docs.datadoghq.com/account_management/billing/custom_metrics
+[13]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://docs.datadoghq.com/help
+[15]: https://docs.datadoghq.com/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
+[16]: https://medium.com/server-guides/monitoring-unifi-devices-using-snmp-and-datadog-c8093a7d54ca
