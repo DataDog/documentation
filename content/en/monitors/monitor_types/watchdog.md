@@ -42,7 +42,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Infrastructure-wide stories detects issues over the following integrations:
+Infrastructure-wide stories can detect issues over the following integrations:
 
 * [System][1]: Host-level memory usage (Memory leak), TCP retransmit rate..
 * [Redis][2]

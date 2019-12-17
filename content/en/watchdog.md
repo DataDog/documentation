@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performances and infrastructure integrations metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performances and infrastructure integration metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
 
 * APM application metrics like:
   * Hits (request rate)
@@ -34,7 +34,7 @@ Watchdog is an algorithmic feature for APM performances and infrastructure integ
   * [Nginx][4]
   * [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], [DynamoDB][9] Amazon services.
 
-Watchdog looks for irregularities in metrics, like a sudden spike in hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
+Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
 ## Story details
 
@@ -58,7 +58,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 ##### Monitors
 
-Monitors associated with your stories are display at the bottom. Monitors displayed would have included in their scope the metric of the current story and its associated tags:
+Monitors associated with your stories are displayed at the bottom. Monitors displayed would have included in their scope the metric of the current story and its associated tags:
 
 {{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors" responsive="true" style="width:75%;">}}
 
@@ -86,7 +86,7 @@ Facets are associated with your watchdog stories allowing to filter them by:
 
 | Facet           | Description                                                                             |
 |-----------------|-----------------------------------------------------------------------------------------|
-| Story Category  | Either Display all `apm` or all `infratructure` stories.                                |
+| Story Category  | Either display all `apm` or all `infratructure` stories.                                |
 | Story Type      | Upon which metrics from APM or infrastructure integrations stories should be displayed. |
 | APM Environment | The [APM Environment][12] to display stories from.                                      |
 | APM Primary Tag | The [defined APM primary tag][13] to display stories from.                              |
