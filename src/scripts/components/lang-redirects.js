@@ -35,7 +35,7 @@ export function handleLanguageBasedRedirects() {
 	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
 	let uri = getUrlParts(window.location.href).pathname;
 	let previewPath = '';
-	let acceptLanguage = "en";
+	let acceptLanguage = '';
 	let logMsg = '';
 
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
