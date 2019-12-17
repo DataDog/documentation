@@ -7,6 +7,10 @@ further_reading:
   text: "Search through all of your security signals and perform Security Analytics"
 ---
 
+<div class="alert alert-warning">
+Security Monitoring Threat Detection Rules are in private beta.
+</div>
+
 ## Overview
 
 Use Detection Rules to define conditional logic that is applied to all ingested logs. When at least one case defined in a Detection Rule is matched over a given period of time, Datadog generates a Security Signal.
