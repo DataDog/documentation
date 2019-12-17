@@ -272,10 +272,14 @@ main:
     identifier: "agent_autodiscovery"
     parent: "agent"
     weight: 5
+  - name: "Basic Autodiscovery"
+    url: "agent/autodiscovery/basic_autodiscovery"
+    parent: "agent_autodiscovery"
+    weight: 500
   - name: "Auto-Configuration"
     url: "agent/autodiscovery/auto_conf/"
     parent: "agent_autodiscovery"
-    weight: 501
+    weight: 502
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
     parent: "agent_autodiscovery"
@@ -296,12 +300,12 @@ main:
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
     weight: 506
-  - name: "Endpoints Checks"
-    url: "agent/autodiscovery/endpointschecks/"
-    parent: "agent_autodiscovery"
-    weight: 507
   - name: "Cluster Checks"
     url: "agent/autodiscovery/clusterchecks/"
+    parent: "agent_autodiscovery"
+    weight: 507
+  - name: "Endpoints Checks"
+    url: "agent/autodiscovery/endpointschecks/"
     parent: "agent_autodiscovery"
     weight: 508
   - name: "Troubleshooting"

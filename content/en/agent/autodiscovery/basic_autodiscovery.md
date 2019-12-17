@@ -127,18 +127,23 @@ The following is an example of a Redis integration template defined in Kubernete
 apiVersion: v1
 kind: Pod
 metadata:
+  ## name of your Pod
   name: redis
   annotations:
+    ## names of check; matches name in integrations_core repo
     ad.datadoghq.com/redis.check_names: '["redisdb"]'
+    ## some configs, like minimum collection interval
     ad.datadoghq.com/redis.init_configs: '[{}]'
     ad.datadoghq.com/redis.instances: |
       [
+        ## config to run for one instance of check
         {
           "host": "%%host%%",
           "port":"6379",
           "password":"%%env_REDIS_PASSWORD%%"
         }
       ]
+    ## setup for logs collection
     ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
   labels:
     name: redis
@@ -151,8 +156,6 @@ spec:
 ```
 
 To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][4] documentation for further details.
-
-
 
 
 
