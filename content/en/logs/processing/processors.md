@@ -419,7 +419,7 @@ Use categories to create groups for an analytical view (for example, URL groups,
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("Success" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
+Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
 
 {{< img src="logs/processing/processors/category_processor.png" alt="Category Processor" responsive="true" style="width:80%;" >}}
 
