@@ -3,7 +3,7 @@ title: Datadog Tips & Tricks - Datadog Autodiscovery on Docker with Labels using
 kind: video
 language: en
 wistiaid: 5tms8vvod4
-videos:
+"video-categories":
     - Datadog Tips & Tricks
     - Introduction
     - Docker

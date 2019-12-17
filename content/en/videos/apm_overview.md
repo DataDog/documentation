@@ -3,7 +3,7 @@ title: APM Overview
 kind: video
 language: en
 wistiaid: 2kgmb9wbsr
-videos:
+"video-categories":
     - apm
     - datadog-101
     - traces
