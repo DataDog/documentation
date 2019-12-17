@@ -167,29 +167,11 @@ This results in `request.Latency` with percentile aggregation enabled reporting 
 
 The following standard integrations can potentially emit custom metrics.
 
-Integrations limited to 350 custom metrics by default:
-
-* [ActiveMQ XML][10]
-* [Go-Expvar][11]
-
-Integrations with no default limit:
-
-* [Agent Metrics][12]
-* [Directory][13]
-* [Linux Proc Extras][14]
-* [Nagios][15]
-* [PDH Check][16]
-* [Prometheus][17]
-* [SNMP][18]
-* [Windows Services][19]
-* [WMI][20]
-
-Many other integrations can be configured to collect custom metrics, for example:
-
-* [MySQL][21]
-* [Oracle][22]
-* [Postgres][23]
-* [SQL Server][24]
+| Type of integrations                             | Integrations                                                                                                                                                  |
+|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.        | [ActiveMQ XML][10] / [Go-Expvar][11]                                                                                                                          |
+| No default limit upon custom metrics collection. | [Agent Metrics][12] /[Directory][13] /[Linux Proc Extras][14] /[Nagios][15] /[PDH Check][16] /[Prometheus][17] /[SNMP][18] /[Windows Services][19] /[WMI][20] |
+| Can be configured to collect custom metrics.     | [MySQL][21] /[Oracle][22] /[Postgres][23] /[SQL Server][24]                                                                                                   |
 
 ## Troubleshooting
 
