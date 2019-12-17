@@ -1,5 +1,5 @@
 function codeTabs() {
-    if ($('.code-tabs').length > 0) {
+    if ($('.code-tabs').length > 0 && window.location.search.indexOf('lang_pref') === -1) {
         // page load set code tab titles
         $('.code-tabs .tab-content')
             .find('.tab-pane')
@@ -58,7 +58,7 @@ function codeTabs() {
                     });
                 }
             });
-            
+
 
             const url = window.location.href
                 .replace(window.location.hash, '')
