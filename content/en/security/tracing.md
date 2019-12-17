@@ -9,6 +9,8 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+
 This article is part of a [series on data security][1].
 
 The APM product supports multiple libraries and includes extensible tooling that allows customers the flexibility to submit nearly any data point they choose. This article describes the main filtering controls available for customers to control what APM data they submit to Datadog.
