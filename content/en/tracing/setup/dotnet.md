@@ -282,7 +282,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 | Framework or library           | NuGet package name                       | Package versions     | Integration Name     |
 |--------------------------------|------------------------------------------|----------------------|----------------------|
-| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 4.0+               | `AspNetMvc`          |
+| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 4.0-5.0+               | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
 | ASP.NET Web Forms              | built-in                                 |                      | `AspNet`             |
