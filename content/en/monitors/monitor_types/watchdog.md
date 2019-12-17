@@ -57,9 +57,9 @@ After selecting Infrastructure, the graph at the top of the monitor creation pag
 No selection is necessary. You are notified when Watchdog detects issues across your infrastructure.
 
 
-[1]: /integraitons/system
+[1]: /integrations/system
 [2]: /integrations/redis
-[3]: /integrations/postgressql
+[3]: /integrations/postgres
 [4]: /integrations/nginx
 [5]: /integrations/amazon_web_services
 [6]: /integrations/amazon_s3

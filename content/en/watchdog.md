@@ -62,7 +62,7 @@ Monitors associated with your stories are display at the bottom. Monitors displa
 
 {{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors" responsive="true" style="width:75%;">}}
 
-Additionally Watchdog suggests one or more monitors that are configured to trigger if the story would happen again. Click the **Enable Monitor** button to enable them for your organization.
+Additionally Watchdog suggests one or more monitors that are configured to trigger if the story would happen again. Click the **Enable Monitor** button to enable them for your organization. See [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
 
 ## Filter Stories
 
@@ -88,19 +88,19 @@ Facets are associated with your watchdog stories allowing to filter them by:
 |-----------------|-----------------------------------------------------------------------------------------|
 | Story Category  | Either Display all `apm` or all `infratructure` stories.                                |
 | Story Type      | Upon which metrics from APM or infrastructure integrations stories should be displayed. |
-| APM Environment | The [APM Environment][11] to display stories from.                                      |
-| APM Primary Tag | The [defined APM primary tag][12] to display stories from.                              |
-| APM Service     | The [APM Service][13] to display stories from.                                          |
+| APM Environment | The [APM Environment][12] to display stories from.                                      |
+| APM Primary Tag | The [defined APM primary tag][13] to display stories from.                              |
+| APM Service     | The [APM Service][14] to display stories from.                                          |
 
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Watchdog in the Services List
 
-When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][14]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
+When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][15]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
 {{< img src="watchdog/service_list.png" alt="Watchdog service list" responsive="true" style="width:75%;" >}}
 
-If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][14] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
+If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][15] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
 
 {{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" style="width:75%;">}}
 
@@ -108,9 +108,9 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integraitons/system
+[1]: /integrations/system
 [2]: /integrations/redis
-[3]: /integrations/postgressql
+[3]: /integrations/postgres
 [4]: /integrations/nginx
 [5]: /integrations/amazon_web_services
 [6]: /integrations/amazon_s3
@@ -118,7 +118,8 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 [8]: /integrations/amazon_cloudfront
 [9]: /integrations/amazon_dynamodb
 [10]: https://app.datadoghq.com/apm/watchdog
-[11]: /tracing/send_traces/#configure-your-environment
-[12]: /tracing/advanced/setting_primary_tags_to_scope/
-[13]: /tracing/visualization/#services
-[14]: /tracing/visualization/services_list
+[11]: /monitors/monitor_types/watchdog/
+[12]: /tracing/send_traces/#configure-your-environment
+[13]: /tracing/advanced/setting_primary_tags_to_scope/
+[14]: /tracing/visualization/#services
+[15]: /tracing/visualization/services_list
