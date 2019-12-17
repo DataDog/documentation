@@ -13,9 +13,7 @@ further_reading:
 
 ## Overview
 
-[Watchdog][1] is an algorithmic feature for APM that automatically detects application and infrastructure issues, by continuously observing trends and patterns in application metrics looking for atypical behavior.
-
-**Note**: Watchdog is an APM feature, and Watchdog monitors are only available to APM customers.
+[Watchdog][1] is an algorithmic feature for APM performances and infrastructure integration metrics that automatically detects potential application and infrastructure issues.
 
 ## Monitor creation
 
