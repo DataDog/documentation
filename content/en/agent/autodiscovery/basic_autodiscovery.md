@@ -30,8 +30,32 @@ Autodiscovery lets you define configuration templates for Agent checks and speci
 
 The Agent watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
 
-**For example**, imagine that you have deployed a simple guestbook application on Docker. It stores each guestbook entry in a Redis database. You are using a container orchestrator for scheduling, so you do not know the host IP address or port number to use for the Datadog Agent to connect to the Redis service. You enable Autodiscovery, and you create a configuration template for Redis that uses `%%host%%` and `%%port%%` variables. Upon container creation, the Datadog Agent retrieves the actual host IP and port number from the Docker API. It generates a static check configuration and begins to gather Redis metrics for your application.
+## How It Works
 
+{{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview" responsive="true" style="width:60%;">}}
+
+In the figure above, there is a host node with three pods, including a Redis pod and an Agent pod. The Kubelet, which schedules containers, runs as a binary on this node, and exposes the endpoints `/metrics` and `/pods`. Every 10 seconds, the Agent queries `/pods` and finds the Redis spec. It can also see information about the Redis pod itself.
+
+The Redis spec in this example includes the following annotations:
+
+```
+annotations:
+  ad.datadoghq.com/redis.check_names: '["redisdb"]'
+  ad.datadoghq.com/redis.init_configs: '[{}]'
+  ad.datadoghq.com/redis.instances: |
+    [
+      {
+        "host": "%%host%%",
+        "port":"6379",
+        "password":"%%env_REDIS_PASSWORD%%"
+      }
+    ]
+  ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
+```
+
+In the above example, `check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. Note that in this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
+
+From this, the Agent generates a static check configuration.
 
 ## Setup
 
