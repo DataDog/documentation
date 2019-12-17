@@ -157,7 +157,7 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 3. To collect logs from the journald logging driver, set up the journald integration [following the Datadog-Journald documentation][2].
 
-4. Mount the YAML file into your container following the instructions [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
+4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
 
 [1]: https://docs.datadoghq.com/help
 [2]: /integrations/journald/#setup
