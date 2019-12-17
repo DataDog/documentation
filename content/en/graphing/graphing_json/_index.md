@@ -77,4 +77,4 @@ TEMPLATE_VARIABLE_SCHEMA = {
 [1]: /graphing/dashboards/timeboard
 [2]: /api/#dashboards
 [3]: /graphing/graphing_json/widget_json
-[4]: /graphing/dashboards/template_variables
+[4]: /graphing/dashboards/template_variables 
