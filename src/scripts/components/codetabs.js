@@ -1,5 +1,5 @@
 function codeTabs() {
-    if ($('.code-tabs').length > 0 && window.location.search.indexOf('lang_pref') === -1) {
+    if ($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content')
             .find('.tab-pane')

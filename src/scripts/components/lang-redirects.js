@@ -98,5 +98,3 @@ console.log(`AcceptLanguage: ${ acceptLanguage }`);
 
 	// debug ? console.log(logMsg) : '';
 }
-
-window.addEventListener('load', handleLanguageBasedRedirects, false);
