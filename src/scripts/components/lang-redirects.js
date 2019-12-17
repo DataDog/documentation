@@ -38,6 +38,8 @@ export function handleLanguageBasedRedirects() {
 	let acceptLanguage = 'en';
 	let logMsg = '';
 
+	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
+
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
 		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
@@ -48,55 +50,43 @@ export function handleLanguageBasedRedirects() {
 		logMsg += `Preview path is ${ previewPath }, URI set to: ${ uri } `;
 	}
 
-	// order of precedence: url > cookie > header
-	if ( params['lang_pref'] && allowedLanguages.indexOf(params['lang_pref']) !== -1 ) {
-		acceptLanguage = params['lang_pref'];
-		logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
-
-		Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-	}
-	else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
-		acceptLanguage = Cookies.get('lang_pref');
-		logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
-	}
-	else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
-		logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
-
-		acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
-	}
-
-/* eslint no-console: ["error", { allow: ["log", "warn"] }] */
-console.log(`AcceptLanguage: ${ acceptLanguage }`);
-
-	if ( subMatch.length && !uri.includes(`/${ acceptLanguage }/`) ) {
-		const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
-
-		if (acceptLanguage === 'en') {
-			logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
-
-			// if ( curLang.length ) {
-			// 	logMsg += `; Current Lang: ${curLang}`;
-
-			// 	console.log(`LogMsg79: ${ logMsg }`);
-			// 	window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
-			// }
-		}
-		else if (acceptLanguage !== curLang) {
-			const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
-
-			logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
+	if ( subMatch.length ) {
+		// order of precedence: url > cookie > header
+		if ( params['lang_pref'] && allowedLanguages.indexOf(params['lang_pref']) !== -1 ) {
+			acceptLanguage = params['lang_pref'];
+			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-
-			console.log(`LogMsg89: ${ logMsg }`);
-			window.location.replace( dest );
+			window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
 		}
+		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
+			acceptLanguage = Cookies.get('lang_pref');
+			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
+		}
+		else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
+			logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
+
+			acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
+		}
+
+		if ( !uri.includes(`/${ acceptLanguage }/`) ) {
+			if (acceptLanguage === 'en') {
+				logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
+			}
+			else if (acceptLanguage !== curLang) {
+				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
+
+				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
+
+				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
+				window.location.replace( dest );
+			}
+		}
+
+		/* eslint no-unused-expressions: "off", no-undef: "off" */
+		window.DD_LOGS && DD_LOGS.logger.debug(logMsg, { requested_url: baseURL, subdomain, uri, acceptLanguage });
+		// debug ? console.log(logMsg) : '';
 	}
-
-	/* eslint no-unused-expressions: "off", no-undef: "off" */
-	window.DD_LOGS && DD_LOGS.logger.debug(logMsg, { requested_url: baseURL, subdomain, uri, acceptLanguage });
-
-	// debug ? console.log(logMsg) : '';
 }
 
 window.addEventListener('load', handleLanguageBasedRedirects, false);

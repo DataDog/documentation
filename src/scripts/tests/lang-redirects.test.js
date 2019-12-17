@@ -32,16 +32,16 @@ describe(`Ensure EN site loads and redirects as expected `, () => {
         expect(window.document.cookie).toContain('lang_pref=en');
     });
 
-    it('should redirect based on navigator.language when lang_pref is not set via cookie or URL', () => {
+    it('should not redirect when lang_pref is not set via cookie or URL', () => {
         window.location.href = 'http://localhost:3000/ja/product/';
 
         redirect.handleLanguageBasedRedirects();
 
-        expect(window.location.replace).toHaveBeenCalled();
+        expect(window.location.replace).not.toHaveBeenCalled();
     });
 
 
-    it('should redirect when lang_pref cookie value contains EN', () => {
+    it('should not redirect when lang_pref cookie value contains EN', () => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
             value: 'lang_pref=en',
@@ -51,8 +51,7 @@ describe(`Ensure EN site loads and redirects as expected `, () => {
 
         redirect.handleLanguageBasedRedirects();
 
-        expect(window.location.replace).toHaveBeenCalled();
-        expect(window.document.cookie).toContain('lang_pref=en');
+        expect(window.location.replace).not.toHaveBeenCalled();
     });
 
     it('should ignore when domain doest not match enabledSubdomains', () => {
