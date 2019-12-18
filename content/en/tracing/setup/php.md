@@ -215,7 +215,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                             |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                                                              |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                               |
-| `DD_SAMPLING_RATE`                        | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)                                               |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default). It was `DD_SAMPLING_RATE` before v0.36.0     |
 | `DD_SERVICE_NAME`                         | ``          | The default app name                                                                                              |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                               |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                             |
