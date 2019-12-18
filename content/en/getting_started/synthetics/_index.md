@@ -1,4 +1,5 @@
 ## Overview
+
 Datadog Synthetics offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetics helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
 
 {{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
@@ -9,206 +10,133 @@ This guide shows you how to set up your first Synthetics test with Datadog. Foll
 
 ## Prerequisites
 
-Browser tests can be only recorded from **[Google Chrome][2]**. Datadog will prompt you to download the Datadog Record Test extension during the creation of the test. You can also [download this extension directly from the Chrome Web Store][3].
+If you haven't already, create a [Datadog account][2].
 
-## Create a Datadog account
+## Configure your first tests
 
-If you haven't already, create a [Datadog account][4].
+### Create a browser test
 
-## Configure your first test
+[Browser tests][3] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
-### Create an API test
+In this example, a browser test is configured to map a user's journey from adding an item to cart to successful checkout. If any step during the browser test fails, it throws an error that is recorded in Datadog as a **Test Result**.
 
-[API tests][5] help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as response time, HTTP status code, and header or body contents. Use the [Datadog API][6] to see the full list.
+{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test" responsive="true" style="width:90%;" >}}
 
-To configure an API test:
+#### Configure your test
+
+1. In the Datadog application, hover over **UX Monitoring** in the left hand menu and select **Synthetics Test**. 
+2. In the top right corner, click the **New Test** button. 
+3. Select **Browser Test**.
+4. Define the configuration of your browser test:
+    - Add a URL. In this example the URL is https://www.shopist.io/.
+    - Name the test.
+    - Set tags to help organize tests.
+    - Choose devices and locations for testing. In this example, the test is only run on **Large Laptop** & on **English speaking countries**.
+    - Specify a test frequency.
+    - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
+        `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
+        `Retry 1 time before location is marked as failed`
+    - Write an alert message and specify who to notify when the alert is triggered.
+    - Click **Save & Edit Recording**.
+
+{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test" responsive="true" style="width:90%;">}}
+
+#### Record your test steps
+
+Once the test configuration is saved, Datadog will prompt you to download the [Datadog test recorder][4] extension. Browser tests can be only recorded on **[Google Chrome][5]**. Download and install the extension.
+
+Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the actions are recorded and used to create steps within the browser test. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each. 
+
+For example, to record test steps that map a user's journey from adding an item to cart to successful checkout:
+
+1. Navigate to one of the furniture sections, for instance **Chairs**, and select **Add to cart**.
+2. Click on **Cart**, click **Checkout**.
+3. Add the **assertion** “Test text is present on the active page” to confirm the words “Thank you” are on the page. 
+    **Note**: Your last browser test step must be an **assertion**. This will ensure your test ended up on the expected page and found the expected element. 
+4. Save the test.
+
+{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps" responsive="true" style="width:90%;">}}
+
+**Note**: the website used in this example regularly throws an error causing it to intentionally fail. A notification email will be triggered when the test failure occurs.
+
+#### Test results
+
+A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces.
+
+In this example, the browser test homepage shows that a recent test failed and an alert was received via email. Click on the failed test under **Test Results** or in the email. The failed test step is highlighted with a red `x`. Click the failed test to begin troubleshooting. 
+
+The **Errors & Warnings** tab provides a list of javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
+
+{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Browser test failure" responsive="true" style="width:100%;">}}
+
+Datadog also has an [APM integration with Synthetics][6] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run. To link browser test results with APM, whitelist the URLs you want the APM integration headers added to. Use * for wildcards: `https://*.datadoghq.com/*`
+
+Alerts triggered with the APM integration populate under **Test Results**.
+
+## Create an API test
+
+[API tests][7] help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as response time, HTTP status code, and header or body contents. Use the [Datadog API][8] to see the full list.
+
+In this example, an API test is created to ensure your website is constantly up and providing responses in a specific amount of time.
+
+### Configure the request
 
 1. In the Datadog application, hover over **UX Monitoring** in the left hand menu and select **Synthetics Test**. 
 2. In the top right corner, click the **New Test** button. 
 3. Select **API test**.
-4. Define the configuration of your API test.
+4. Define the configuration of your API test:
+    - Add a start URL.
+    - Select **Advance Options** to use custom request headers, authentication credentials, body content, or cookies.
+    - Add one or two tags, like `prod`, to help organize and filter tests.
+    - Select locations for testing.
+    - Click the **Test URL** button.
 
-{{< tabs >}}
+#### Define your alert conditions
 
-{{% tab "HTTP Test" %}}
+Now that the test is completed, if you did not create any [assertions][9], they are automatically populated. API tests require at least one assertion to be monitored by Datadog. An assertion is defined by a parameter, an optional property, a comparator, and a target value.
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request" responsive="true" style="width:80%;" >}}
+In this example, three default assertions are populated when testing the URL:
+```
+When status code is 200
+And header content-type is text/html; charset=utf
+And response time less than 2000 ms
+```
 
-Define the request you want to be executed by Datadog:
+These assertions define the alert condition and can be customized. To add a custom assertion, click on any response header in the response preview. You can also click the **New Assertion** button to add an assertion manually, (e.g., `body` contains `Shop.ist`.)
 
-1. **Choose request type**: `HTTP`
-2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
-3. **Name**: Set the name of your API test.
-4. **Select your tags**: Select the tags attached to your API test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
-5. **Locations**: Select which Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location](#set-up-a-private-location) to run a Synthetics API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Set the interval for how often the test will run. Intervals are available between every one minute to once per week.
-7. Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
+To configure the manual retry of a test when it fails, set:
+```
+An alert is triggered if your test fails for x minutes from any x of x locations`
+Retry x time before location is marked as failed
+```
 
-[1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
-{{% /tab %}}
+Once alert conditions are set, create a message for the alert and specify what services and team members to receive the alert notification email and click **Save Test**. You can also use [integrations][10], such as Slack, Pagerduty, webhooks, etc., to receive alert notifications.
 
-{{% tab "SSL Test" %}}
+{{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure" responsive="true" style="width:90%;">}}
 
-{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request" responsive="true" style="width:80%;" >}}
+### Test results
 
-1. **Choose request type**: `SSL`
-2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
-3. **Name**: The name of your API test.
-4. **Select your tags**: Select the tags attached to your API test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
-5. **Locations**: Select which Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location](#set-up-a-private-location) to run a Synthetics API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Set the interval for how often the test will run. Intervals are available between once every minute to once per week.
-7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
-[1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
-{{% /tab %}}
+An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces. 
 
-{{< /tabs >}}
+To troubleshoot a failed test, scroll to the Test Results section and click on the **Test Results** tab. Click on the failed test, labeled as `Alert`, to view detailed test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to resolve the issue.
 
-#### Assertions
+{{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure" responsive="true" style="width:90%;">}}
 
-Once the URL is tested, a response preview will populate in a panel to the right of the configuration options. If the test fails, you can [review the error][7].
+Datadog also has an [APM integration with Synthetics][6] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run. To link browser test results with APM, whitelist the URLs you want the APM integration headers added to. Use * for wildcards: `https://*.datadoghq.com/*`
 
-This panel shows the request as well as the response preview of your API call. It also automates the creation of assertions on the status code, content-type header, and response time of the request.
+Alerts triggered with the APM integration populate under **Test Results**. Click the result link given to review test details and traces.
 
-You can create custom assertions: in the Headers section of this panel's response preview, click on any header to auto-populate a header assertion. It is also possible to manually add [assertions][8] on body, header, response type, or status code by clicking on New Assertion.
+## Set up your first private location
 
-For example, set an assertion on status code being a 200, and select the server listed in the response preview header. This will send you a notification when there is a server error on the server that's assimilated with your API endpoint.
+Private locations allow you to monitor internal-facing applications or any private URLs that aren’t accessible from the public internet. They can also be used to create a new custom Synthetics location.
 
-#### Alert conditions
+The private location worker is shipped as a Docker container, so it can run on a Linux based OS or Windows OS if the Docker engine is available on your host and can run in Linux containers mode.
 
-Alert conditions determine the circumstances under which you want a test to send a notification alert. You can decide to be alerted after a specific amount of downtime and/or when failures are happening on a specific number of locations. To configure, set the pre-populated input areas in the given alert condition:
+By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
-`An alert is triggered if your test fails for x minutes from any x of x locations.`
+Once you created a private location, configuring a [Synthetics API test][#configure-the-request] from a private location is completely identical to the one of Datadog managed locations.
 
-By default, Synthetics tests do not retry after a failed result for a given location. If you want a location to be considered failed only after a certain number of retries, pre-populate the given alert condition:
-
-`Retry x times before location is marked as failed.`
-
-Configure the `minutes`, `locations`, and `retry` time and an alert will automatically generate when these conditions are met.
-
-#### Set assertions and alert conditions
-
-To create an alert condition using custom assertions:
-
-{{< tabs >}}
-{{% tab "HTTP Test" %}}
-1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][1], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
-
-2. Enter a message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
-
-    **Note**: You can use [webhooks][2] in a message body. The webhook will send a payload to alert your services when an alert is triggered. To use a webhook in an alert message, add `@webhook-*name_of_the_webhook` in the message body to trigger the webhook. For example: `{{location.name}} is down! @webhook-servicename`
-
-3. Click the **Save test** button. Your test is now populated in its own page, which includes details on properties, history, and test results.
-
-An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, and all events and test results. Click on any test result for more information such as test details, assertions, and response details.
-
-**Notes for HTTP Tests**:
-
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
-
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
-* At one moment during the last *X* minutes, at least *n* locations were in failure
-
-The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
-
-You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
-
-{{< img src="synthetics/retry-test.png" alt="Fast Retry" responsive="true" style="width:80%;">}}
-
-To create a fast retry for location failures, configure an alert to trigger if a test fails in at least one location and set the test to retry one or more times before it is marked as failed.
-
-
-[1]: /synthetics/api_tests/?tab=httptest#assertions
-[2]: /integrations/webhooks
-{{% /tab %}}
-{{% tab "SSL Test" %}}
-
-1. In the **Headers** section of this panel, click on any header to auto-populate an alert condition under *Make a request* in the test configuration options. You can also manually add an [assertion][1], such as `body`, `header`, `response type`, or `status code` to create customized alert conditions.
-
-2. Enter an message associated with the alert condition and who the message should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
-
-    **Note**: You can use [webhooks][2] in a message body. The webhook will send a payload to alert your services when an alert is triggered. To use a webhook in an alert message, add `@webhook-*name_of_the_webhook` in the message body to trigger the webhook. For example: `{{location.name}} is down! @webhook-servicename`
-
-3. Click the **Save test** button. Your test is now populated in its own page, which includes details on properties, history, and test results.
-
-An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, and all events and test results. Click on any test result for more information such as test details, assertions, and response details. 
-
-**Notes for SSL Tests**: If one of the assertions defined fails for a given location, an alert is triggered. Two default assertions are created: certificate is valid and certificate expires in more than x days. Custom assertions can be created on `certificate expires in more than x days & on property`. There are no alert conditions for SSL.
-
-
-[1]: /synthetics/api_tests/?tab=httptest#assertions
-[2]: /integrations/webhooks
-{{% /tab %}}
-{{< /tabs >}}
-
-### Create a browser test
-
-[Browser tests][9] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
-
-To create a browser test:
-
-1. In the Datadog application, hover over **UX Monitoring** in the left hand menu and select *Synthetics Test*. 
-2. In the top right corner, click the *New Test* button. 
-3. Select *Browser Test*. 
-4. Define the configuration of your browser test:
-
-    1. **Starting URL**: Set the URL from which your browser test starts the scenario.
-        * Advanced Options (optional): Set custom request headers, cookies, or authenticate through Basic Auth.
-            * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][10].
-            * Authentication: Authenticate through HTTP Basic Authentication with a username and a password.
-            * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-
-    2. **Name**: Set the name of your browser test.
-    3. **Select your tags**: Select the tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
-    4. **Devices**: Select which devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
-    5. **Locations**: Select which Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][6]. You can also set up a [Private Location][11] to run a Synthetics Browser test on a private URL not accessible from the public internet.
-    6. **How often should Datadog run the test?** Set the interval for how often the test will run. Intervals are available between every 15 minutes to once per week. [Contact support][12] to enable additional frequencies for your test.
-    7. **Alert conditions**: Set the conditions that need to be met (`minutes`, `locations`, and `retry`) to trigger an alert.
-    8. **Notify your team**: Enter an message associated with the alert condition and who the alert should be sent to. Use `@` to tag people in the body of the message and select, from the dropdown list, who to send the alert to. You can also type in an email address in this location to send to any team or member that is not listed.
-    9. Once you've input all required fields, click the **Save Details & Record Test** button.
-
-#### Record a test with variables and assertions
-
-Tests can be only recorded from **[Google Chrome][2]**. To record your test, download the [Datadog Record Test extension for Google Chrome][3].
-
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
-
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
-
-    **Note**: you can open a pop up in incognito mode by clicking **Open In A Pop Up** + `Shift`. This is particularly useful to record login workflows as the incognito mode will allow you to record your test without any cached browser data.
-
-2. Click on **Start recording** to begin recording your browser test. Navigate on your page in the iframe on the right of the page, or in the pop up you just opened.
-3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
-4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:75%;">}}
-
-    **Note**: **Your last browser test step must be an Assertion**, this will ensure your test ended up on the expected page and found the expected element. This will allow your test to use a different set of keys to perform the recorded journey and confirm it landed on the expected element although some changes on the UI might have happened since the test was first recorded.
-
-5. Click the **Variables** button under *Add New*. Select `Pattern`, `Element`, `Global Variable`, or `Email` from the dropdown menu. For example, select `Email` and Datadog will create a special email variable that allows you to test that an email was sent by the browser test and received by one of our dedicated email servers.
-
-    **Note**: Email assertions require the use of an email variable. For example, if you want to check that a body contains a specific name, create an email variable as noted above and add it to your assertion.
-
-6. Use the email variable as an input step in a test to trigger an email.
-
-    {{< img src="synthetics/testing-variable.png" alt="Browser Test steps" responsive="true" style="width:100%;">}}
-
-7. Click the **Assertion** button under *Add New*. Select an assertion, such as `Test that an email was received`.
-    
-    [Assertions][13] allow you to check whether an element, some content, or some text is available on the current page. With assertions, you can check the URL of a page or verify that a specific email was sent. For example, you can create an assertion that checks whether an email was sent and whether specific values (string, number, regex) are present within the email subject or body. You first need to create an email variable to be able to use the email assertion. 
-    
-8. Select the subject condition and click **Use variable**. Select the email variable you created. This assigns the email variable you created to the assertion. Select the body condition and click **Use variable**. Select the email variable you created.
-9. Once you have finished your Scenario, click on **Save and Launch Test**.
-
-    {{< img src="synthetics/browser_tests/context-panel.gif" alt="Context panel" responsive="true" style="width:100%;">}}
-
-A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces. To review this information, click on the `error`, `resources`, or `traces` button located next to the sample result action.
-
-### Set up a private location
-
-[Private locations][11] allow you to monitor internal-facing applications or any private URLs that aren’t accessible from the public internet. They can also be used to create a new custom Synthetics location. 
-
-To create a private location:
+To configure a private location:
 
 1. In the Datadog app, hover over **UX Monitoring** and select *Settings* -> *Private Locations*. Create a new private location:
 
@@ -216,32 +144,15 @@ To create a private location:
 
 2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
-    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen.
-    **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
+3. Copy and paste the first tooltip to create your private location configuration file.
+
+    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
 3. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
-    ```
-    docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
-    ```
+    `docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker`
 
-    To scale a private location:
-      * Change the `concurrency` parameter value to allow more parallel tests from one worker.
-      * Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
-
-4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
-
-    * For the Datadog US site: `api.datadoghq.com/api/`.
-    * For the Datadog EU site: `api.datadoghq.eu/api/`.
-
-    Check if the endpoint corresponding to your Datadog Site is available from the host running the worker:
-
-    * For the Datadog US site: `curl https://api.datadoghq.com`.
-    * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
-    
-**Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
-
-5. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+4. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
@@ -251,12 +162,24 @@ To create a private location:
 
     {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list" responsive="true" style="width:75%;">}}
 
-6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][5].
+    You will also see private location logs populating similar to this example:
+    ```
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
+    2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
+    ```
+
+6. You are now able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][7]. Create an API test.
+7. Select the new private location under **Private Locations**.
+8. Click the **Save Test** button.
+
+For a more advanced setup, use the command `docker run --rm datadog/synthetics-private-location-worker --help and check`.
 
 ## Next Steps
 
 {{< whatsnext desc="After you set up your first Synthetics test:">}}
-    {{< nextlink href="/synthetics/apm/" tag="Documentation" >}}Learn about APM integration with Synthetics{{< /nextlink >}}
+    {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
+    {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
     {{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
     {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 
@@ -264,15 +187,12 @@ To create a private location:
 
 
 [1]: https://app.datadoghq.com/synthetics/list
-[2]: https://www.google.com/chrome/
-[3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: https://www.datadoghq.com/
-[5]: /synthetics/api_tests
-[6]: /api/?lang=bash#create-a-test
-[7]: /synthetics/api_tests/?tab=httptest#test-failure
-[8]: /synthetics/api_tests/?tab=httptest#assertions
-[9]: /synthetics/browser_tests
-[10]: /synthetics/identify_synthetics_bots
-[11]: /synthetics/private_locations
-[12]: /help
-[13]: /synthetics/browser_tests/#assertion
+[2]: https://www.datadoghq.com/
+[3]: /synthetics/browser_tests
+[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[5]: https://www.google.com/chrome/
+[6]: /synthetics/apm/
+[7]: /synthetics/api_tests
+[8]: /api/?lang=bash#create-a-test
+[9]: /synthetics/api_tests/?tab=httptest#assertions
+[10]: /integrations
