@@ -73,6 +73,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 **Note:** The `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core after version `1.11.0`. Instead, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2] below for details.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
