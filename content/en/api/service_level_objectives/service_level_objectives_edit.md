@@ -1,7 +1,7 @@
 ---
 title: Edit a SLO
 type: apicontent
-order: 30.03
+order: 30.04
 external_redirect: /api/#edit-a-slo
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Delete a Service Level Objective
 type: apicode
-order: 30.04
+order: 30.06
 external_redirect: /api/#delete-a-service-level-objective
 ---
 
