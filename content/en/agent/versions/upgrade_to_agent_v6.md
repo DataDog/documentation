@@ -12,7 +12,7 @@ Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to 
 
 ## Upgrade to Agent 6
 
-If you have Agent v5 already installed, a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format. Select your platform below for specific instructions. You can either download the [DMG package and install it manually](#manual-upgrade), or use the [one-line install script](#one-step-upgrade).
+If you have Agent v5 already installed, a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and check configurations according to the new v6 format. Select your platform below for specific instructions. You can either download the [DMG package and install it manually](#manual-upgrade), or use the [one-line install script](#one-step-upgrade).
 
 ## One-step Upgrade
 
@@ -31,7 +31,7 @@ The Agent v6 installer can automatically convert v5 configurations during the up
 | Ubuntu       | `DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 | SUSE         | `DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 
-**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -47,7 +47,7 @@ The Agent v6 installer can automatically convert v5 configurations during the up
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
 ```
 
-**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -352,7 +352,7 @@ Find below the manual upgrade instructions for:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Download the latest version available [from here][1] and run the installation package.
+Download the [latest version available][1] and run the installation package.
 
 Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
 
@@ -369,9 +369,9 @@ With:
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][9] of the repository
-2. Install the DMG package
-3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
+1. Download the DMG package of the latest Agent version. Use the latest macOS release listed on the [release page][9] of the repository.
+2. Install the DMG package.
+3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`.
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
     `datadog-agent import /opt/datadog-agent/etc/ /opt/datadog-agent/etc/`
 

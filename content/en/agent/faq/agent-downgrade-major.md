@@ -59,7 +59,7 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 
 ## Downgrade the Agent from v6 to v5
 
-This guide assumes you upgraded to the Agent v6 using our [upgrade guide][1], choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
+This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If so, choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
 
 {{< tabs >}}
 {{% tab "Linux" %}}

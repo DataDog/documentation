@@ -15,7 +15,7 @@ Choose your platform to see dedicated instructions to uninstall the Agent:
 {{% tab "Agent v6 & v7" %}}
 
 ```
-sudo apt-get remove --purge datadog-agent -y
+sudo apt-get remove datadog-agent -y
 ```
 
 This command removes the Agent, but does not remove:

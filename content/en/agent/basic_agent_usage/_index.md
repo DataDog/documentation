@@ -53,7 +53,7 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
 ### The Collector
 
-The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python2.7 interpreter to run integrations and [custom checks][4].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
 
 ### The Forwarder
 
@@ -61,7 +61,7 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 ### DogStatsD
 
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology
