@@ -43,7 +43,7 @@ Datadog Agent を embed しホストを監視する [Docker コンテナ][1] を
 
 ```
 docker run -d --name datadog-agent \
-           -e DD_API_KEY=<YOUR_API_KEY> \
+           -e DD_API_KEY=<API キー> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_AC_EXCLUDE="name:datadog-agent" \

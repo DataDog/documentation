@@ -1,5 +1,5 @@
 ---
-title: ランタイム・メトリクス
+title: ランタイムメトリクス
 kind: documentation
 further_reading:
   - link: tracing/advanced/connect_logs_and_traces
