@@ -70,6 +70,8 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Managed libraries: deployed together with the native library.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netcoreonwindows#required-environment-variables) to set these environment variables.
 
+**Note:** The `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core after version `1.11.0`. Instead, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2] below for details.
+
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
@@ -297,28 +299,36 @@ The .NET Tracer can instrument the following libraries automatically:
 
 <sup>1</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
-**Note**: The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. **To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application.** Be sure to keep this package in sync with your MSI version.
+**Note**: The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. **To enable the `AspNet` integration, you must add the [`Datadog.Trace.AspNet`][4] NuGet package to your application.** Be sure to keep this package in sync with your MSI version.
 
 To install this package, use one the following commands:
 
 {{< tabs >}}
 
 {{% tab "Package Manager" %}}
-`Install-Package Datadog.Trace.ClrProfiler.Managed -Version 1.10.0`
+```powershell
+Install-Package Datadog.Trace.AspNet -Version <TRACER_VERSION>
+```
 {{% /tab %}}
 
 {{% tab ".NET CLI" %}}
-`dotnet add package Datadog.Trace.ClrProfiler.Managed --version 1.10.0`
+```cmd
+dotnet add package Datadog.Trace.AspNet --version <TRACER_VERSION>
+```
 {{% /tab %}}
 
 {{% tab "Package Reference" %}}
-`<PackageReference Include="Datadog.Trace.ClrProfiler.Managed" Version="1.10.0" />`
+```xml
+<PackageReference Include="Datadog.Trace.AspNet" Version="<TRACER_VERSION>" />
+```
 
 **Note**: Copy this XML node into your project file.
 {{% /tab %}}
 
 {{% tab "Paket CLI" %}}
-`paket add Datadog.Trace.ClrProfiler.Managed --version 1.10.0`
+```cmd
+paket add Datadog.Trace.AspNet --version TRACER_VERSION
+```
 {{% /tab %}}
 
 {{< /tabs >}}
