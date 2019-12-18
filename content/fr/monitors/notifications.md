@@ -48,6 +48,7 @@ Utilisez les variables pour personnaliser vos notifications de monitor. Voici le
 | `{{ok_threshold}}`      | Affiche la valeur qui a rétabli l'état du monitor.                                                  |
 | `{{comparator}}`        | Affiche la valeur relationnelle sélectionnée dans la section *Set alert conditions* du monitor.         |
 | `{{last_triggered_at}}` | Affiche la date et l'heure au format UTC du dernier déclenchement du monitor.                                     |
+| `{{last_triggered_at_epoch}}` | Affiche la date et l'heure UTC du dernier déclenchement du monitor, au format EPOCH en millisecondes.  |
 
 **Remarque** : lorsque vous saisissez des valeurs décimales pour des seuils, si votre valeur est `<1`, ajoutez un `0` au début du nombre. Par exemple, utilisez `0.5` et non `,5`.
 
@@ -59,14 +60,13 @@ Par exemple, si vous déclenchez une alerte pour chaque tag **host**, alors un c
 
 Cette fonctionnalité fonctionne également pour les tags personnalisés. Si vous ajoutez un tag personnalisé avec la syntaxe `key:value`, vous pouvez alors regrouper les données en fonction des clés de tag. Cela permet de créer des alertes multiples (avec déclenchement distinct) pour chaque **value**. De plus, la variable `.name` du tag peut être utilisée dans votre message de monitor.
 
-Remarques :
+Remarque :
 
 * Le contenu des template variables est échappé par défaut. Si votre variable comporte du JSON ou du code que vous ne souhaitez PAS échapper, utilisez trois accolades plutôt que deux (par exemple, `{{{event.text}}}`).
 
 * Pour consulter la liste complète des template variables contextuelles disponibles pour votre monitor, cliquez sur le lien **Use message template variables** ou sur la liste de suggestions qui apparaît lorsque vous saisissez `{{` pour commencer le nom d'une template variable. Les variables disponibles varient en fonction de la combinaison de métriques, de tags et d'autres fonctionnalités du monitor sur lequel vous travaillez.
 
 * Les template variables de tags peuvent également être utilisées dans les titres de monitor (noms). Cependant, les variables sont uniquement insérées dans le texte des événements enfants de Datadog (et non pas dans le texte de l'événement parent, qui affiche un résumé des agrégations).
-
 
 * Certains tags qui identifient votre contexte de déclenchement sont automatiquement insérés dans le titre de vos alertes multiples.
 
@@ -93,6 +93,18 @@ Par exemple, si vous envoyez une métrique avec le tag `dot.key.test:five` et qu
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_avec_point" responsive="true" style="width:80%;">}}
 
+### Opérations arithmétiques des template variables
+
+Les template variables qui renvoient des valeurs numériques prennent en charge les opérations arithmétiques. Pour effectuer une opération arithmétique sur une template variable, utilisez la syntaxe `eval`, comme indiqué ci-dessous :
+
+`{{eval "<NOM_TEMPLATE_VARIABLE>+1-2*3/4"}}`
+
+Remarque : n'oubliez pas de placer des guillemets (`"`) autour du nom de la template variable et de l'expression arithmétique.
+
+Ainsi, pour soustraire 15 minutes (15 * 60 * 1 000 millisecondes) à la template variable `{{last_triggered_at_epoch}}`, ajoutez ce qui suit à votre message de notification : 
+
+`{{eval "last_triggered_at_epoch-15*60*1000"}}`
+
 ## Variables conditionnelles
 
 Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#notifications) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
@@ -113,16 +125,16 @@ Voici la liste des variables conditionnelles disponibles :
 | `{{^is_no_data}}`          | S'affiche sauf si le monitor indique que des données sont manquantes.                        |
 | `{{#is_warning}}`          | S'affiche en cas d'avertissement du monitor.                                             |
 | `{{^is_warning}}`          | S'affiche sauf en cas d'avertissement du monitor.                                           |
-| `{{#is_recovery}}`         | S'affiche lorsque le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA.   |
-| `{{^is_recovery}}`         | S'affiche sauf si le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA. |
+| `{{#is_recovery}}`         | S'affiche lorsque le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA.   |
+| `{{^is_recovery}}`         | S'affiche sauf si le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA. |
 | `{{#is_warning_recovery}}` | S'affiche lorsque le monitor passe d'un état WARNING à OK.                     |
 | `{{^is_warning_recovery}}` | S'affiche sauf si le monitor passe d'un état WARNING à OK.                   |
 | `{{#is_alert_recovery}}`   | S'affiche lorsque le monitor passe d'un état ALERT à OK.                      |
 | `{{^is_alert_recovery}}`   | S'affiche sauf si le monitor passe d'un état ALERT à OK.                    |
-| `{{#is_alert_to_warning}}` | S'affiche lorsque le monitor passe d'un état ALERT à un état WARNING.                 |
-| `{{^is_alert_to_warning}}` | S'affiche sauf si le monitor passe d'un état ALERT à un état WARNING.               |
-| `{{#is_no_data_recovery}}` | S'affiche lorsque le monitor est rétabli depuis un état NO DATA.                             |
-| `{{^is_no_data_recovery}}` | S'affiche sauf si le monitor est rétabli depuis un état NO DATA.                           |
+| `{{#is_alert_to_warning}}` | S'affiche lorsque le monitor passe d'un état ALERT à WARNING.                 |
+| `{{^is_alert_to_warning}}` | S'affiche sauf si le monitor passe d'un état ALERT à WARNING.               |
+| `{{#is_no_data_recovery}}` | S'affiche lorsque le monitor est rétabli depuis un état NO DATA.                             |
+| `{{^is_no_data_recovery}}` | S'affiche sauf si le monitor est rétabli depuis un état NO DATA.                           |
 
 Ces template variables apparaissent égalent dans la zone d'aide « Use message template variables »,
 à l'étape 3 de l'éditeur de monitors.
@@ -326,7 +338,7 @@ Après avoir configuré l'[intégration Webhooks][1], saisissez `@webhook` dans 
 
 ## Tester les notifications d'un monitor
 
-**Les notifications de test sont prises en charge pour les types de monitors suivants** : host, métrique, anomalie, outlier, prévision, intégration (check uniquement), processus (check uniquement), réseau (check uniquement), check custom, événement et composite.
+**Les notifications de test sont prises en charge pour les types de monitors suivants** : host, metric, anomaly, outlier, forecast, integration (check uniquement), process (check uniquement), network (check uniquement), custom check, event et composite.
 
 Après avoir défini votre monitor, testez la notification de votre monitor pour tous ses états avec le bouton *Test Notifications* en bas à droite de la page du monitor :
 
@@ -345,7 +357,7 @@ Après avoir défini votre monitor, testez la notification de votre monitor pour
   {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
 
 ## Configuration avancée de notifications
-### Inclure des liens vers des dashboards
+### Inclure des liens vers certains dashboards
 
 De nombreuses organisations souhaitent inclure davantage de contexte dans leurs alertes. Des liens rapides vers des dashboards pertinents au sein d'une alerte accélèrent considérablement le processus de correction et le délai de résolution.
 
