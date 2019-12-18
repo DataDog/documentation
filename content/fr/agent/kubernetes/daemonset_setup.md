@@ -61,6 +61,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -78,8 +79,11 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            ## Métriques custom via DogStatsD - retirer la mise en commentaire de cette section pour activer la collecte de métriques custom
-            ## Définir DD_DOGSTATSD_NON_LOCAL_TRAFFIC sur true pour recueillir les métriques StatsD issues d'autres conteneurs.
+            ## Métriques custom via DogStatsD - retirer la mise en commentaire de cette section pour activer
+            ## la collecte de métriques custom.
+            ## Définir DD_DOGSTATSD_NON_LOCAL_TRAFFIC sur « true » pour recueillir les métriques
+            ## StatsD issues d'autres conteneurs.
+            #
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
@@ -89,34 +93,32 @@ spec:
             name: traceport
             protocol: TCP
         env:
-          - name: DD_API_KEY
-            value: "<VOTRE_CLÉ_API>"
-            ## Secrets Kubernetes - utiliser cette section au lieu de `value` pour spécifier la clé d'API à l'aide des secrets
-            # valueFrom:
-            #   secretKeyRef:
-            #     name: datadog-secret
-            #     key: api-key
+          ## Configurer la clé d'API Datadog associée à votre organisation
+          ## En cas d'utilisation du secret Kubernetes, utiliser la variable d'environnement suivante :
+          ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
+          - {name: DD_API_KEY, value: "<VOTRE_CLÉ_API>"}
 
-          ## Définir DD_SITE sur datadoghq.eu pour envoyer les données de votre Agent vers le site européen de Datadog
-          - name: DD_SITE
-            value: "datadoghq.com"
+          ## Définir DD_SITE sur « datadoghq.eu » pour envoyer les données de votre Agent vers le site européen de Datadog
+          - {name: DD_SITE, value: "datadoghq.com"}
 
           ## Définir DD_DOGSTATSD_NON_LOCAL_TRAFFIC sur true pour activer la collecte StatsD.
-          - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-            value: "false"
-          - name: DD_COLLECT_KUBERNETES_EVENTS
-            value: "true"
-          - name: DD_LEADER_ELECTION
-            value: "true"
-          - name: KUBERNETES
-            value: "true"
+          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
+          - {name: KUBERNETES, value: "true"}
+          - {name: DD_HEALTH_PORT, value: "5555"}
+          - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
+          - {name: DD_LEADER_ELECTION, value: "true" }
+          - {name: DD_APM_ENABLED, value: "true" }
+
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-          - name: DD_APM_ENABLED
-            value: "true"
-        ## Les valeurs ci-dessous correspondent aux minimums suggérés pour les requêtes et les limites. La quantité de ressources sollicitées par l'Agent dépend du nombre de checks, d'intégrations et de fonctionnalités activés.
+
+        ## Les valeurs ci-dessous correspondent aux minimums suggérés pour les requêtes et les limites.
+        ## La quantité de ressources sollicitées par l'Agent dépend des éléments suivants :
+        ## * Le nombre de checks
+        ## * Le nombre d'intégrations activées
+        ## * Le nombre de fonctionnalités activées
         resources:
           requests:
             memory: "256Mi"
@@ -125,42 +127,34 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - name: dockersocket
-            mountPath: /var/run/docker.sock
-          - name: logpodpath
-            mountPath: /var/log/pods
-          ## Répertoire du runtime Docker. Remplacer ce chemin par celui du répertoire de vos logs de runtime de conteneur, ou supprimer cette configuration si `/var/log/pods` n'est pas un lien symbolique vers un autre répertoire.
-          - name: logcontainerpath
-            mountPath: /var/lib/docker/containers
-          - name: procdir
-            mountPath: /host/proc
-            readOnly: true
-          - name: cgroups
-            mountPath: /host/sys/fs/cgroup
-            readOnly: true
+          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: procdir, mountPath: /host/proc, readOnly: true}
+          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
+          - {name: s6-run, mountPath: /var/run/s6}
+          - {name: logpodpath, mountPath: /var/log/pods}
+          ## Répertoire du runtime Docker : remplacer ce chemin par celui du répertoire de vos logs
+          ## de runtime de conteneur, ou supprimer cette configuration si `/var/log/pods`
+          ## n'est pas un lien symbolique vers un autre répertoire.
+          - {name: logcontainerpath, mountPath: /var/lib/docker/containers}
         livenessProbe:
-          exec:
-            command:
-            - ./probe.sh
+          httpGet:
+            path: /health
+            port: 5555
           initialDelaySeconds: 15
-          periodSeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
       volumes:
-        - hostPath:
-            path: /var/run/docker.sock
-          name: dockersocket
-        - hostPath:
-            path: /proc
-          name: procdir
-        - hostPath:
-            path: /var/log/pods
-          name: logpodpath
-        ## Répertoire du runtime Docker. Remplacer ce chemin par celui du répertoire de vos logs de runtime de conteneur, ou supprimer cette configuration si `/var/log/pods` n'est pas un lien symbolique vers un autre répertoire.
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: logcontainerpath
-        - hostPath:
-            path: /sys/fs/cgroup
-          name: cgroups
+        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: procdir, hostPath: {path: /proc}}
+        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
+        - {name: s6-run, emptyDir: {}}
+        - {name: logpodpath, hostPath: {path: /var/log/pods}}
+        ## Répertoire du runtime Docker : remplacer ce chemin par celui du répertoire de vos logs
+        ## de runtime de conteneur, ou supprimer cette configuration si `/var/log/pods`
+        ## n'est pas un lien symbolique vers un autre répertoire.
+        - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
 Remplacez `<VOTRE_CLÉ_API>` par [votre clé d'API Datadog][4] ou utilisez des [secrets Kubernetes][5] pour définir votre clé d'API en tant que [variable d'environnement][6]. Si vous choisissez d'utiliser des secrets Kubernetes, consultez les [instructions de configuration d'une clé d'API avec des secrets Kubernetes][7] de Datadog. Consultez la section relative à l'[intégration Docker][8] pour découvrir toutes les options de configuration.
@@ -189,20 +183,15 @@ datadog-agent   2         2         2         2            2           <none>   
 
 ### Détection automatique du nom de cluster Kubernetes
 
-Depuis la version 6.5.0 de l'Agent Datadog, la configuration de l'Agent comprend un attribut de nom de cluster à utiliser dans les clusters Kubernetes afin d'obtenir des alias de host uniques. Cet attribut peut être défini grâce à la variable d'environnement `DD_CLUSTER_NAME`.
+Avec l'Agent v6.11+, l'Agent Datadog peut détecter automatiquement le nom du cluster Kubernetes sur Google GKE, Azure AKS et AWS EKS. Si un alias qui comprend le nom du cluster sous forme de suffixe dans le nom du nœud est détecté, il est ajouté à toutes les données recueillies pour faciliter l'identification des nœuds parmi les clusters Kubernetes. Sur Google GKE et Azure AKS, le nom du cluster est récupéré depuis l'API du fournisseur de cloud. Pour AWS EKS, le nom du cluster est récupéré à partir des tags d'instance EC2. Sur AWS, vous devez ajouter l'[autorisation][10] `ec2:DescribeInstances` à votre stratégie IAM Datadog afin de permettre à l'Agent d'interroger les tags d'instance EC2.
 
-Depuis la version 6.11.0, l'Agent Datadog peut détecter automatiquement le nom du cluster Kubernetes sur Google GKE, Azure AKS et AWS EKS. Cette fonctionnalité simplifie l'identification des nœuds sur tous les clusters Kubernetes en ajoutant un alias qui comprend le nom du cluster sous forme de suffixe dans le nom du nœud.
-
-Sur Google GKE et Azure AKS, le nom du cluster est récupéré depuis l'API du fournisseur de cloud. Pour AWS EKS, le nom du cluster est récupéré à partir des tags d'instance EC2.
-
-**Remarque** : sur AWS, vous devez ajouter l'[autorisation][10] `ec2:DescribeInstances` à votre stratégie IAM Datadog afin de permettre à l'Agent d'interroger les tags d'instance EC2.
-
+**Remarque** : avec l'Agent v6.5+, le nom du cluster peut être défini manuellement via le paramètre de configuration [`clusterName`][11] ou la variable d'environnement `DD_CLUSTER_NAME`.
 
 ## Activer les fonctionnalités
 
 ### Collecte de logs
 
-Pour activer la [collecte de logs][11] avec votre DaemonSet :
+Pour activer la [collecte de logs][12] avec votre DaemonSet :
 
 1. Définissez les variables `DD_LOGS_ENABLED` et `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` sur true dans votre section *env* :
 
@@ -243,8 +232,8 @@ Pour activer la [collecte de logs][11] avec votre DaemonSet :
 
 L'Agent peut collecter les logs de deux façons : depuis le socket Docker et depuis les fichiers de logs Kubernetes (automatiquement gérés par Kubernetes). Utilisez la collecte via les fichiers de logs lorsque :
 
-* Le Docker n'est pas le runtime.
-* Plus de 10 conteneurs sont utilisés au sein de chaque pod.
+* Docker n'est pas le runtime
+* Plus de 10 conteneurs sont utilisés au sein de chaque pod
 
 L'API Docker est optimisée pour obtenir les logs d'un conteneur à la fois. Lorsqu'un conteneur contient un grand nombre de pods, la collecte de logs via le socket Docker peut solliciter davantage de ressources qu'en passant par les fichiers.
 
@@ -307,7 +296,7 @@ L'Agent Datadog suit la logique suivante pour savoir où collecter les logs :
 
 Remarque : si vous souhaitez recueillir les logs à partir de `/var/log/pods` même lorsque le socket Docker est monté, vous pouvez définir la variable d'environnement `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (ou `logs_config.k8s_container_use_file` dans `datadog.yaml`) sur `true` pour forcer l'Agent à passer par les fichiers.
 
-Enfin, utilisez [Autodiscovery avec les annotations de pod][12] pour optimiser la collecte de logs pour vos conteneurs.
+Enfin, utilisez [Autodiscovery avec les annotations de pod][13] pour optimiser la collecte de logs pour vos conteneurs.
 
 #### Conteneurs de courte durée
 
@@ -382,11 +371,11 @@ tracer.configure(
 )
 ```
 
-Consultez la [documentation sur l'APM propre à votre langage][13] pour obtenir davantage d'exemples.
+Consultez la [documentation sur l'APM propre à votre langage][14] pour obtenir davantage d'exemples.
 
 ### Collecte de processus
 
-Consultez la section relative à la [collecte de processus pour Kubernetes][14].
+Consultez la section relative à la [collecte de processus pour Kubernetes][15].
 
 ### DogStatsD
 
@@ -401,7 +390,7 @@ Pour envoyer des métriques custom via DogStatsD, définissez la variable `DD_DO
 (...)
 ```
 
-Pour en savoir plus, consultez [la documentation relative à DogStatsD pour Kubernetes][15].
+Pour en savoir plus, consultez la [documentation relative à DogStatsD pour Kubernetes][16]
 
 Pour envoyer des métriques custom via DogStatsD depuis vos pods d'application, supprimez la mise en commentaire de la ligne `# hostPort: 8125` dans votre manifeste `datadog-agent.yaml`. Vous exposez ainsi le port DogStatsD sur chacun de vos nœuds Kubernetes.
 
@@ -423,8 +412,9 @@ Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votr
 [8]: /fr/agent/docker/#environment-variables
 [9]: /fr/agent/autodiscovery/?tab=agent#how-to-set-it-up
 [10]: /fr/integrations/amazon_ec2/#configuration
-[11]: /fr/logs
-[12]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
-[13]: /fr/tracing/setup
-[14]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
-[15]: /fr/agent/kubernetes/dogstatsd
+[11]: https://github.com/helm/charts/blob/2d905afa38f59b73e1043252022dfc934aff588d/stable/datadog/values.yaml#L72
+[12]: /fr/logs
+[13]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
+[14]: /fr/tracing/setup
+[15]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
+[16]: /fr/agent/kubernetes/dogstatsd
