@@ -62,7 +62,7 @@ export function handleLanguageBasedRedirects() {
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 			if ( curLang !== acceptLanguage ) {
-				window.location.replace( window.location.origin + uri.replace(/\/+/g,'/') );
+				window.location.replace( window.location.origin + `${ previewPath }/${ uri }`.replace(/\/+/g,'/') );
 			}
 		}
 		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
