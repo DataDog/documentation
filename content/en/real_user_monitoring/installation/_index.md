@@ -1,5 +1,5 @@
 ---
-title: RUM Installation
+title: RUM Get started
 kind: documentation
 aliases:
 - /real_user_monitoring/setup

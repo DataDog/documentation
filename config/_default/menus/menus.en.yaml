@@ -1126,7 +1126,7 @@ main:
 
   ## RUM - Installation
 
-  - name: "Installation"
+  - name: "Get Started"
     url: "real_user_monitoring/installation/"
     parent: "rum"
     identifier: "rum_install"

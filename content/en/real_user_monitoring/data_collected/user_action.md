@@ -1,5 +1,5 @@
 ---
-title: RUM User Action
+title: RUM Custom User Action
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
