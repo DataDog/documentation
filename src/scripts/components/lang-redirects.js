@@ -57,12 +57,10 @@ export function handleLanguageBasedRedirects() {
 			acceptLanguage = params['lang_pref'];
 			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
-			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }`);
+			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }; curLang: ${ curLang }; origin: ${ window.location.origin }; URI: ${ uri }`);
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			if ( acceptLanguage !== 'en') {
-				window.location.replace( `${ window.location.origin }/${ uri.replace(curLang, '') }`.replace('//', '/') );
-			}
+			window.location.replace( window.location.origin + `/${ uri.replace(curLang, '') }`.replace(/\/+/g,'/') );
 		}
 		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 			acceptLanguage = Cookies.get('lang_pref');
@@ -79,7 +77,7 @@ export function handleLanguageBasedRedirects() {
 				logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
 			}
 			else if (acceptLanguage !== curLang) {
-				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace('//', '/');
+				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace(/\/+/g,'/');
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
