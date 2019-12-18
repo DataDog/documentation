@@ -6,7 +6,7 @@ kind: faq
 To pull custom AWS tags for an EC2 instance through the Datadog Agent without using the AWS integration, follow these steps:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. Create a IAM role for the **instance** using the [AWS documentation][1].
 2. For the policy section, specify the permissions: `"ec2:Describe*"`, `"ec2:Get*"`.

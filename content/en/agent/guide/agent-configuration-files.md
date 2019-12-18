@@ -10,7 +10,7 @@ aliases:
 The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                              |
 | :--------                            | :--------                            |
@@ -55,7 +55,7 @@ Note: [A full example of the `datadog.yaml` file is available in the `datadog-ag
 Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                        |
 | :--------                            | :--------                      |

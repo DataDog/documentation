@@ -8,7 +8,6 @@ external_redirect: /api/#integration-aws
 ## Integration AWS
 
 Configure your Datadog-AWS integration directly through Datadog API.
-For more information, see the [AWS integration page][2].
+For more information, see the [AWS integration page][1].
 
-[1]: /help
-[2]: /integrations/amazon_web_services
+[1]: /integrations/amazon_web_services
