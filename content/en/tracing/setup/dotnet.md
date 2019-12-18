@@ -57,33 +57,27 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netframeworkonwindows#required-environment-variables) to set these environment variables.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: ?tab=netframeworkonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Windows" %}}
 
 Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches the OS architecture.
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][3] for instructions on how to add a NuGet package to your application.
-
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
-- Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][4] to set these environment variables.
+- Managed libraries: deployed together with the native library.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netcoreonwindows#required-environment-variables) to set these environment variables.
+
+**Note:** The `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core after version `1.11.0`. Instead, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2] below for details.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[4]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][1] to your application, matching the package version to the package below. Refer to the [NuGet documentation][2] for instructions on how to add a NuGet package to your application.
-
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][3].
+Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -114,13 +108,10 @@ apk add libc6-compat
 ```
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
-- Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: [additional configuration][4] required.
+- Managed libraries: deployed together with the native library.
+- Environment variables: [additional configuration](?tab=netcoreonlinux#required-environment-variables) required.
 
-[1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: ?tab=netcoreonlinux#required-environment-variables
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -293,12 +284,12 @@ The .NET Tracer can instrument the following libraries automatically:
 
 | Framework or library           | NuGet package name                       | Package versions     | Integration Name     |
 |--------------------------------|------------------------------------------|----------------------|----------------------|
-| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+ and 4.0.40804 | `AspNetMvc`          |
+| ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 5.1.0+               | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup> | built-in                                 |                      | `AspNet`             |
+| ASP.NET Web Forms              | built-in                                 |                      | `AspNet`             |
 | WCF                            | built-in                                 |                      | `Wcf`                |
-| ADO.NET <sup>2</sup>           | built-in                                 |                      | `AdoNet`             |
+| ADO.NET <sup>1</sup>           | built-in                                 |                      | `AdoNet`             |
 | WebClient / WebRequest         | built-in                                 |                      | `WebRequest`         |
 | HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
 | Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
@@ -306,11 +297,41 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+               | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+               | `MongoDb`            |
 
-Notes:
+<sup>1</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application.
+**Note**: The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. **To enable the `AspNet` integration, you must add the [`Datadog.Trace.AspNet`][4] NuGet package to your application.** Be sure to keep this package in sync with your MSI version.
 
-<sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
+To install this package, use one the following commands:
+
+{{< tabs >}}
+
+{{% tab "Package Manager" %}}
+```powershell
+Install-Package Datadog.Trace.AspNet -Version <TRACER_VERSION>
+```
+{{% /tab %}}
+
+{{% tab ".NET CLI" %}}
+```cmd
+dotnet add package Datadog.Trace.AspNet --version <TRACER_VERSION>
+```
+{{% /tab %}}
+
+{{% tab "Package Reference" %}}
+```xml
+<PackageReference Include="Datadog.Trace.AspNet" Version="<TRACER_VERSION>" />
+```
+
+**Note**: Copy this XML node into your project file.
+{{% /tab %}}
+
+{{% tab "Paket CLI" %}}
+```cmd
+paket add Datadog.Trace.AspNet --version TRACER_VERSION
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
@@ -454,10 +475,10 @@ The following table lists configuration variables that are available only when u
 | `DD_TRACE_ENABLED`           | `TraceEnabled`             | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_DEBUG`             | N/A                        | Enables or disables the CLR profiler's debug mode. Valid values are: `true` or `false` (default).                                                                                                                                                                                        |
 | `DD_TRACE_LOG_PATH`          | N/A                        | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                     |
-| `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section above.                       |
+| `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.                       |
 | `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Property Name_, indicates the name of the equivalent property on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations](#integrations) section above.
 
 | Setting Name                             | Property Name         | Description                                                                                                           |
 |------------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -477,4 +498,3 @@ The following table lists configuration variables that are available only when u
 [6]: /tracing/advanced/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [8]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[9]: #integrations

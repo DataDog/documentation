@@ -8,7 +8,7 @@
         },
         {
             "created_by": "jane@example.com",
-            "name": "<APP_KEY_NAME_2>",
+            "name": "<API_KEY_NAME_2>",
             "key": "2111111111111111aaaaaaaaaaaaaaaa",
             "created": "2019-04-05 09:19:53"
         }

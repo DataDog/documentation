@@ -28,7 +28,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file.
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
@@ -324,7 +324,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 #### Datadog Agent configuration
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
 This `dd_url` setting can be found in the `datadog.yaml` file.

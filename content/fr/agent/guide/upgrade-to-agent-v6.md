@@ -441,13 +441,13 @@ Où :
 
 **Remarque** : `datadog.conf` est automatiquement converti en `datadog.yaml` lors de l'upgrade.
 
-[1]: /fr/agent/?tab=agentv6#agent-architecture
+[1]: /fr/agent/#agent-architecture
 [2]: /fr/agent/guide/agent-commands
 [3]: /fr/developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /fr/developers/metrics/metrics_type
+[5]: /fr/developers/metrics/types
 [6]: /fr/graphing/infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /fr/logs
 [9]: https://github.com/DataDog/datadog-agent/releases
-[10]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
+[10]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi

@@ -168,7 +168,7 @@ Voici des exemples d'utilisation des parsers :
 
 ### Key/value
 
-Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList [, quotingStr]]])`, où :
+Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])`, où :
 
 * `separatorStr` définit le séparateur. Valeur par défaut : `=`.
 * `characterWhiteList` définit des caractères supplémentaires non échappés. Valeur par défaut : `\\w.\\-_@`. Uniquement utilisé pour les valeurs sans guillemets (par exemple, `key=@valueStr`).
@@ -193,11 +193,11 @@ rule %{data::keyvalue}
 {{< img src="logs/processing/parsing/parsing_example_2.png" alt="Exemple de parsing 2" responsive="true" style="width:80%;">}}
 
 Vous n'avez pas besoin de spécifier le nom de vos paramètres, car ils sont déjà contenus dans le log.
-Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre pattern de règles, vous obtenez :
+Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre modèle de règles, vous obtenez :
 
 {{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Exemple de parsing 2 bis" responsive="true" style="width:80%;">}}
 
-Si le caractère `=` n'est pas le séparateur par défaut entre votre clé et vos valeurs, ajoutez à votre règle de parsing un paramètre avec le séparateur souhaité.
+Si le caractère `=` n'est pas le séparateur par défaut entre votre clé et vos valeurs, ajoutez à votre règle de parsing un paramètre avec un séparateur.
 
 Log :
 
@@ -213,7 +213,7 @@ rule %{data::keyvalue(": ")}
 
 {{< img src="logs/processing/parsing/key_value_parser.png" alt="Parser key/value" responsive="true" style="width:80%;" >}}
 
-Si le log contient des caractères spéciaux dans une valeur d'attribut, tels que le caractère `/` dans une URL, ajoutez-les à la liste blanche de la règle de parsing :
+Si les logs contiennent des caractères spéciaux dans une valeur d'attribut, tels que `/` dans une URL, ajoutez-les à la liste blanche de la règle de parsing :
 
 Log :
 
@@ -239,8 +239,8 @@ Autres exemples :
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 
-**Exemple avec plusieurs QuotingString** : lorsque des QuotingString sont définies, le comportement par défaut est ignoré, et seul le guillemet défini est autorisé.
-Le filtre keyvalue met toujours en correspondance des entrées sans guillemet, peu importe la valeur de `quotingStr`. Lorsque des guillemets sont utilisés, le paramètre `characterWhiteList` est ignoré, puisque tout le contenu entre les guillemets est extrait.
+**Exemple avec plusieurs QuotingString** : lorsque plusieurs QuotingString sont définies, le comportement par défaut est ignoré, et seul le guillemet défini est autorisé.
+Le filtre key/value met toujours en correspondance des entrées sans guillemet, peu importe la valeur de `quotingStr`. Lorsque des guillemets sont utilisés, le paramètre `characterWhiteList` est ignoré, puisque tout le contenu entre les guillemets est extrait.
 
 Log :
 
@@ -287,7 +287,7 @@ Le matcher de date convertit votre timestamp au format EPOCH (unité de mesure 
 
 ### Pattern conditionnel
 
-Il arrive que vos logs se présentent dans deux formats différents, avec un unique attribut comme seule différence. Ces cas peuvent être traités avec une seule règle, en utilisant des instructions conditionnelles avec `(<REGEX_1>|<REGEX_2>)`.
+Si vous avez des logs qui se présentent dans deux formats différents, avec un unique attribut comme seule différence, définissez une seule règle en utilisant des instructions conditionnelles avec `(<REGEX_1>|<REGEX_2>)`.
 
 **Log** :
 ```
@@ -296,7 +296,7 @@ john connected on 11/08/2017
 ```
 
 **Règle** :
-Notez que « id » est un nombre entier et non une chaîne grâce au matcher « integer » de la règle.
+Notez que « id » est un nombre entier et non une chaîne.
 
 ```
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -310,7 +310,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 ### Attribut facultatif
 
-Certains logs contiennent des valeurs qui n'apparaissent que de temps en temps. Dans ce cas, vous pouvez rendre l'extraction d'attributs facultative avec `()?` afin de l'extraire uniquement lorsque l'attribut est présent dans votre logs.
+Certains logs contiennent des valeurs qui n'apparaissent que de temps en temps. Dans ce cas, vous pouvez rendre l'extraction d'attributs facultative avec `()?`.
 
 **Log** :
 ```
@@ -322,7 +322,7 @@ john 1234 connected on 11/08/2017
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Remarque** : vous devrez généralement inclure l'espace dans la partie facultative afin de ne pas obtenir deux espaces, ce qui empêcherait la règle de fonctionner.
+**Remarque** : la règle ne fonctionnera pas si vous ajoutez une espace après le premier mot dans la section facultative.
 
 {{< img src="logs/processing/parsing/parsing_example_5.png" alt="Exemple de parsing 5" responsive="true" style="width:80%;" >}}
 
@@ -330,7 +330,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 ### JSON imbriqué
 
-Utilisez le *filtre* `json` pour effectuer le parsing d'un objet JSON imbriqué après un préfixe de texte brut :
+Utilisez le filtre `json` pour effectuer le parsing d'un objet JSON imbriqué après un préfixe en texte brut :
 
 **Log** :
 
@@ -348,7 +348,7 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 
 ### Regex
-Utilisez le matcher regex pour identifier une sous-chaîne de votre message de log en fonction de règles littérales regex.
+Utilisez le matcher regex pour identifier une sous-chaîne de votre message de log.
 
 **Log** :
 
@@ -357,7 +357,6 @@ john_1a2b3c4 connected on 11/08/2017
 ```
 
 **Règle** :
-Nous cherchons ici l'ID à extraire.
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```

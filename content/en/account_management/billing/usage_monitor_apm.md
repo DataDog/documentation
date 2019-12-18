@@ -1,6 +1,6 @@
 ---
 title: View and Alert on APM Usage
-kind: faq
+kind: documentation
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
@@ -10,11 +10,11 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.
 
-| Metric | Description |
-| ------- | -------- |
-| APM Hosts | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
-| Analyzed Spans | Shows the sum of all Analyzed Spans indexed over all hours in the current month. |
-| Fargate Tasks | Shows the average of all Fargate tasks over all hours in the current month. |
+| Metric         | Description                                                                              |
+|----------------|------------------------------------------------------------------------------------------|
+| APM Hosts      | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
+| Analyzed Spans | Shows the sum of all Analyzed Spans indexed over all hours in the current month.         |
+| Fargate Tasks  | Shows the average of all Fargate tasks over all hours in the current month.              |
 
 ### Set Alert on APM Hosts
 
@@ -36,7 +36,7 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
 5. Define the Analyzed Span volume rate you would like to set as a warning or error.
-6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
+6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
 Learn more about Analyzed Span filtering and usage control [here][7].
 

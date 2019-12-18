@@ -1,7 +1,7 @@
 ---
 title: 時系列ポイントのクエリ
 type: apicontent
-order: 25.3
+order: 26.3
 external_redirect: '/api/#query-time-series-points'
 ---
 ## 時系列ポイントのクエリ

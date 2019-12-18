@@ -1,4 +1,17 @@
 ## Simple Raw Message
+## API key passed in headers
+
+curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
+     -H "Content-Type: text/plain" \
+     -H "DD-API-KEY: <API_KEY>" \
+     -d 'hello world'
+
+## API key passed in path
+
+curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY> \
+     -H "Content-Type: text/plain" \
+     -d 'hello world'
+
 ## Log attributes can be passed as query parameters
 
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddtags=env:prod,user:my-user \

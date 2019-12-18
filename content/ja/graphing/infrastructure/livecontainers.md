@@ -30,14 +30,14 @@ htop、ctop、kubectl などの基盤ツールを手本として、ライブコ�
 {{% tab "Linux/Windows" %}}
 [Datadog Agent][1] をインストールしたら、ログ収集を有効にします。[Agent のメイン構成ファイル][2]を編集して、以下のパラメーターを更新します。
 
-≪```
+```
 logs_enabled: true
 listeners:
   - name: docker
 config_providers:
   - name: docker
     polling: true
-```≫
+```
 **注**:
 
 * [Docker Agent][1] ではなく標準インストールでコンテナ情報を収集するには、``dd-agent` ユーザーが **docker.sock** へのアクセス許可を持つ必要があります。
@@ -45,17 +45,17 @@ config_providers:
 
 
 [1]: /ja/agent/docker/log/?tab=hostinstallation
-[2]: /ja/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 
 [Docker Agent][1] の手順に従い、必要に応じて他のカスタム設定に加えて、以下の属性を渡します。
 
-≪```
+```
 -e DD_LOGS_ENABLED=true
 -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-```≫
+```
 
 **注**: ログはデフォルトでインデックス化されますが、[除外フィルター][2]を設定して、インデックスや独自の Live Tail データ受信を細かく制御することができます。
 
@@ -66,7 +66,7 @@ config_providers:
 {{% tab "Kubernetes" %}}
 [DaemonSet][1] の作成に使用された `dd-agent.yaml` マニフェスト内に、以下の環境変数、ボリュームマウント、およびボリュームを追加します。
 
-≪```
+```
   env:
     - name: DD_LOGS_ENABLED
         value: "true"
@@ -82,7 +82,7 @@ volumes:
       path: /opt/datadog-agent/run
       name: pointerdir
 
-```≫
+```
 
 **注**:
 
@@ -206,10 +206,10 @@ ECS の `ecs_task_name` や `ecs_task_version` でピボットすると、更新
 
 たとえば、名前が frontend で始まるコンテナ以外のすべての Debian イメージを除外するには、`datadog.yaml` ファイルに次の 2 つの構成行を追加します。
 
-≪```
+```
 ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
-```≫
+```
 
 **注**: Agent 5 の場合は、これをメインの `datadog.conf` 構成ファイルに追加する代わりに、`datadog.yaml` ファイルを明示的に `/etc/datadog-agent/` に追加してください。プロセス Agent は、ここにすべての構成オプションがあることを前提とするためです。この構成は、コンテナをリアルタイム収集から除外するだけで、オートディスカバリーからは**除外しません**。
 

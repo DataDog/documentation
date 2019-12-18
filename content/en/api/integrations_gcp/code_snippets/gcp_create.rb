@@ -20,4 +20,4 @@ config= {
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.create_integration('gcp', config)
+dog.gcp_integration_create(config)

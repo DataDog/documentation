@@ -1,3 +1,3 @@
-["200", {
-    "deleted_monitor_id" => 62625
+['200', {
+  'deleted_monitor_id' => 62_625
 }]

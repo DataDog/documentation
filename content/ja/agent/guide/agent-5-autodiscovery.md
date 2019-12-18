@@ -3,7 +3,7 @@ title: Agent v5 を使用したオートディスカバリー
 kind: ガイド
 private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+  - /ja/agent/faq/agent-5-autodiscovery
 ---
 <div class="alert alert-info">
 オートディスカバリーは、これまでのサービスディスカバリーのことです。Agent のコード内や一部の構成オプションでは、引き続きサービスディスカバリーと呼びます。
@@ -97,7 +97,7 @@ Agent は、自分の `conf.d/auto_conf` ディレクトリでオートディス
 
 以下に、docker-dd-agent を使用してパッケージ化された `apache.yaml` テンプレートを示します。
 
-≪```yaml
+```yaml
 docker_images:
   - httpd
 
@@ -105,7 +105,7 @@ init_config:
 
 instances:
   - apache_status_url: http://%%host%%/server-status?auto
-```≫
+```
 
 これは、最小の [Apache チェック構成][21]とほぼ同じですが、`docker_images` オプションがあることがわかります。この必須オプションを使用して、コンテナ識別子を指定できます。オートディスカバリーは、同じホスト上で `httpd` イメージを実行するすべてのコンテナにこのテンプレートを適用します。
 
@@ -121,7 +121,7 @@ _すべての_ `httpd` イメージです。あるコンテナが `library/httpd
 
 `datadog.conf` ファイルで、`sd_config_backend`、`sd_backend_host`、および `sd_backend_port` オプションをそれぞれ、key-value ストアの種類 (`etcd`、`consul`、または `zookeeper`)、IP アドレス、およびポートに設定します。
 
-≪```
+```
 # 現時点でサポートされているのは Docker だけなので、この行をコメント解除するだけです。
 service_discovery_backend: docker
 
@@ -140,7 +140,7 @@ sd_backend_port: 4001
 
 # Consul ストアがサービスディスカバリーのトークン認証を要求する場合は、ここでトークンを定義できます。
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
-```≫
+```
 
 Consul を使用し、Consul クラスターが認証を要求する場合は、`consul_token` を設定します。
 
@@ -150,7 +150,7 @@ Consul を使用し、Consul クラスターが認証を要求する場合は、
 
 環境変数を使用する場合は、コンテナの起動時に、同じオプションをコンテナに渡します。
 
-≪```
+```
 docker service create \
   --name dd-agent \
   --mode global \
@@ -163,7 +163,7 @@ docker service create \
   -e SD_BACKEND_HOST=127.0.0.1 \
   -e SD_BACKEND_PORT=4001 \
   datadog/docker-dd-agent:latest
-```≫
+```
 
 オートディスカバリーを有効にするためのオプションの名前は、`datadog.conf` では `service_discovery_backend` ですが、環境変数では `SD_BACKEND` です。
 
@@ -171,7 +171,7 @@ docker service create \
 
 key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。オートディスカバリーは、以下のような key-value 階層を前提とします。
 
-≪```
+```
 /datadog/
   check_configs/
     docker_image_1/                 # コンテナ識別子 (httpd など)
@@ -179,7 +179,7 @@ key-value ストアがテンプレートソースとして有効になってい�
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
-```≫
+```
 
 各テンプレートは、チェック名、`init_config`、`instances` の 3 つが組になっています。ここでは、前のセクションのようにオートディスカバリーにコンテナ識別子を指定するための `docker_images` オプションは必要ありません。key-value ストアの場合は、コンテナ識別子が `check_config` の最初のレベルのキーになります。(また、前のセクションで説明したファイルベースのテンプレートでは、この例のようなチェック名は必要なく、Agent はチェック名をファイル名から推測していました。)
 
@@ -187,12 +187,12 @@ key-value ストアがテンプレートソースとして有効になってい�
 
 以下の etcd コマンドを実行すると、前のセクションの例と同等の Apache チェックテンプレートが作成されます。
 
-≪```
+```
 etcdctl mkdir /datadog/check_configs/httpd
 etcdctl set /datadog/check_configs/httpd/check_names '["apache"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
 etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
-```≫
+```
 
 3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をチェック構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
 
@@ -202,11 +202,11 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 以下の etcd コマンドを実行すると、同じ Apache テンプレートが作成され、Apache コンテナによって作成された Web サイトが使用可能かどうかを監視する [HTTP チェック][23]テンプレートが追加されます。
 
-≪```
+```
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/library/httpd:latest/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
-```≫
+```
 
 ここでも、各リストの順番が重要です。Agent は、構成の各部分が 3 つのリストの同じインデックスにある場合にのみ、HTTP チェック構成を正しく生成します (この例では、同じインデックス 1)。
 
@@ -216,12 +216,12 @@ etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_sta
 
 オートディスカバリーは、以下のようなアノテーションを前提とします。
 
-≪```
+```
 annotations:
   service-discovery.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
   service-discovery.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
   service-discovery.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
-```≫
+```
 
 形式は、key-value ストアの形式に似ています。異なる点は以下のとおりです。
 
@@ -234,7 +234,7 @@ Kubernetes ポッドを直接定義する (`kind: Pod`) 場合は、各ポッド
 
 以下のポッドアノテーションは、`apache` コンテナ用の 2 つのテンプレート (前のセクションの最後のテンプレートと同等) を定義します。
 
-≪```
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -251,13 +251,13 @@ spec:
       image: httpd # NOT this
       ports:
         - containerPort: 80
-```≫
+```
 
 #### Deployment の例: Apache チェックと HTTP チェック
 
 Deployment からポッドを定義する場合は、テンプレートアノテーションを Deployment のメタデータに追加しないでください。Agent はこれを参照しません。以下のように指定して、アノテーションを追加します。
 
-≪```
+```
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata: # ここにテンプレートを追加しないでください
@@ -278,7 +278,7 @@ spec:
         image: httpd # NOT this
         ports:
         - containerPort: 80
-```≫
+```
 
 ### テンプレートソース: Docker ラベルアノテーション
 
@@ -287,24 +287,24 @@ spec:
 オートディスカバリーは、ファイルの種類に応じて、ラベルが以下の例のようになっていることを前提とします。
 
 **Dockerfile**
-≪```
+```
 LABEL "com.datadoghq.ad.check_names"='[<CHECK_NAME>]'
 LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
 LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
-```≫
+```
 
 **docker-compose.yaml**
-≪```
+```
 labels:
   com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
-```≫
+```
 
 **docker run コマンド**
-≪```
+```
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
-```≫
+```
 
 #### Docker の例: NGINX Dockerfile
 
@@ -361,7 +361,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 
 オートディスカバリーで、構成したチェックのいくつかがロードされているかどうかが不明な場合は、Agent の `configcheck` 初期化スクリプトコマンドを使用します。たとえば、Redis テンプレートがデフォルトの `auto_conf/redisdb.yaml` ファイルではなく、Kubernetes アノテーションからロードされていることを確認するには、次のようにします。
 
-≪```
+```
 # docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck
 .
 ..
@@ -369,11 +369,11 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 Check "redisdb":
   source --> Kubernetes Pod Annotation
   config --> {'instances': [{u'host': u'10.244.1.32', u'port': u'6379', 'tags': [u'image_name:kubernetes/redis-slave', u'kube_namespace:guestbook', u'app:redis', u'role:slave', u'docker_image:kubernetes/redis-slave:v2', u'image_tag:v2', u'kube_replication_controller:redis-slave']}], 'init_config': {}}
-```≫
+```
 
 オートディスカバリーが JMX ベースのチェックをロードしているかどうかを確認するには、次のようにします。
 
-≪```
+```
 # docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
 timestamp: 1499296559130
 checks:
@@ -381,7 +381,7 @@ checks:
   initialized_checks:
     SD-jmx_0:
     - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
-```≫
+```
 
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example

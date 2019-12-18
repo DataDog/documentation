@@ -26,7 +26,7 @@ further_reading:
 
 たとえば、次のコマンドを使用すると、Agent はユーザーのホストからのみトレースを受信します。
 
-≪```
+```
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -34,7 +34,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
-```≫
+```
 ## Docker APM Agent の環境変数
 
 Docker Agent 内のトレースに利用可能なすべての環境変数をリストします。
@@ -55,7 +55,7 @@ Docker Agent 内のトレースに利用可能なすべての環境変数をリ�
 | `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。たとえば、<code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code> のようになります。 |
 | `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りの <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code> 形式です。たとえば、<code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code> のようになります。Tracing Client の構成パラメーターを使用して、[自動で有効にする][2]こともできます。|
 | `DD_APM_ENV`               | デフォルトのトレース[環境][3]を設定します。                                                                        |
-| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 APM イベント数を設定します。                                                                                   |
+| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                   |
 | `DD_APM_MAX_TPS`           | 1 秒あたりの最大トレース数を設定します。                                                                                       |
 
 ## 他のコンテナからのトレース
@@ -66,13 +66,13 @@ DogStatsD と同様に、[Docker ネットワーク](#docker-network)または [
 
 最初に、ユーザー定義のブリッジネットワークを作成します。
 
-≪```bash
+```bash
 docker network create <NETWORK_NAME>
-```≫
+```
 
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
-≪```bash
+```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
@@ -88,7 +88,7 @@ docker run -d --name datadog-agent \
 docker run -d --name app \
               --network <NETWORK_NAME> \
               company/app:latest
-```≫
+```
 
 これで `app` コンテナ内のホスト名 `datadog-agent` が公開されます。
 `docker-compose` を使用している場合、`<NETWORK_NAME>` パラメーターは、`docker-compose.yml` の `networks` セクションに定義されている名前になります。
@@ -101,41 +101,41 @@ docker run -d --name app \
 {{% tab "Java" %}}
 環境変数を使用して Java Agent 構成を更新します。
 
-≪```bash
+```bash
 DD_AGENT_HOST=datadog-agent \
 DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
-```≫
+```
 
 または、システムプロパティを使用して更新します。
 
-≪```bash
+```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
      -Ddd.agent.host=datadog-agent \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
-```≫
+```
 {{% /tab %}}
 {{% tab "Python" %}}
-≪```python
+```python
 from ddtrace import tracer
 
 tracer.configure(
     hostname='datadog-agent',
     port=8126,
 )
-```≫
+```
 {{% /tab %}}
 {{% tab "Ruby" %}}
-≪```ruby
+```ruby
 Datadog.configure do |c|
   c.tracer hostname: 'datadog-agent',
            port: 8126
 end
-```≫
+```
 {{% /tab %}}
 {{% tab "Go" %}}
-≪```go
+```go
 package main
 
 import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
@@ -144,15 +144,15 @@ func main() {
     tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
     defer tracer.Stop()
 }
-```≫
+```
 {{% /tab %}}
 {{% tab "Node.js" %}}
-≪```javascript
+```javascript
 const tracer = require('dd-trace').init({
   hostname: 'datadog-agent',
   port: 8126
 })
-```≫
+```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,11 +163,11 @@ Agent コンテナポート `8126` は、直接ホストにリンクしている
 
 次の Python Tracer の例では、デフォルトのルートを `172.17.0.1` と仮定しています。
 
-≪```python
+```python
 from ddtrace import tracer
 
 tracer.configure(hostname='172.17.0.1', port=8126)
-```≫
+```
 
 ## その他の参考資料
 

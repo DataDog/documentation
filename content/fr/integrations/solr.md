@@ -24,7 +24,7 @@ name: solr
 process_signatures:
   - solr start
 public_title: Intégration Datadog/Solr
-short_description: 'Surveillez les taux de requêtes, les erreurs des gestionnaires, les miss et expulsions du cache, et plus encore. and more.'
+short_description: 'Surveillez les taux de requêtes, les erreurs des gestionnaires, les miss et expulsions du cache, et plus encore.'
 support: core
 supported_os:
   - linux
@@ -39,7 +39,7 @@ Le check Solr permet de surveiller l'état et les performances d'un cluster Solr
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -265,17 +265,17 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance So
 La commande `datadog-agent jmx` a été ajoutée dans la version 4.1.0.
 
   * Énumérer les attributs qui correspondent à au moins l'une de vos configurations d'instance :
-`sudo /etc/init.d/datadog-agent jmx list_matching_attributes`
+`sudo datadog-agent jmx list matching`
   * Énumérer les attributs qui correspondent à l'une de vos configurations d'instance, mais qui ne sont pas recueillis afin de ne pas dépasser le nombre maximum de métriques pouvant être recueillies :
-`sudo /etc/init.d/datadog-agent jmx list_limited_attributes`
+`sudo datadog-agent jmx list limited`
   * Énumérer les attributs qui seront recueillis par vos configurations d'instance actuelles :
-`sudo /etc/init.d/datadog-agent jmx list_collected_attributes`
+`sudo datadog-agent jmx list collected`
   * Énumérer les attributs qui ne correspondent à aucune de vos configurations d'instance :
-`sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes`
+`sudo datadog-agent jmx list not-matching`
   * Énumérer l'ensemble des attributs disponibles dont le type est pris en charge par JMXFetch :
-`sudo /etc/init.d/datadog-agent jmx list_everything`
+`sudo datadog-agent jmx list everything`
   * Démarrer la collecte de métriques en fonction de votre configuration actuelle et les afficher dans la console :
-`sudo /etc/init.d/datadog-agent jmx collect`
+`sudo datadog-agent jmx collect`
 
 ## Pour aller plus loin
 ### Parsing d'une valeur de chaîne en tant que nombre

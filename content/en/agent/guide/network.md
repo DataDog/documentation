@@ -77,7 +77,7 @@ You should whitelist all of these IPs. While only a subset are active at any giv
 Open the following ports in order to benefit from all the Agent functionalities:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * **Outbound**:
 
@@ -105,7 +105,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 [2]: /logs
 [3]: /agent/basic_agent_usage/kubernetes
 [4]: /integrations/go_expvar
-[5]: /agent/basic_agent_usage/?tab=agentv6#gui
+[5]: /agent/basic_agent_usage/#gui
 [6]: /tracing
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}

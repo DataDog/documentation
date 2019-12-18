@@ -23,7 +23,7 @@ The `top()` function has three parameters:
     - `min`: Min of all metrics values.
     - `sum`: Sum of all metrics values. 
     - `last`: Last metrics value.
-    - `l2norm`: Uses the [norm][1] of the timeseries, which is always positive, to rank the series.
+    - `l2norm`: Uses the [norm][1]#p-normL2) of the timeseries, which is always positive, to rank the series.
     - `area`: Signed area under the curve being graphed, which can be negative
     
 * `DIR`: The direction of ranking; choose between:
@@ -32,7 +32,7 @@ The `top()` function has three parameters:
 
 The `top()` method also has convenience functions of the following form, all of which take a single series list as input:
 
-`[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()`
+`[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm][2]`
 
 For example, `bottom10_min()` retrieves the 10 lowest-valued series using the `min` metric.
 
@@ -50,4 +50,5 @@ For example, `bottom10_min()` retrieves the 10 lowest-valued series using the `m
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)#p-normL2
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics
+[2]: 

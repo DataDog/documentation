@@ -38,7 +38,7 @@ hostname: mymachine.mydomain
 ### Add tags
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 The Agent configuration file (`datadog.yaml`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent (see YAML formats below).
 
@@ -406,13 +406,15 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 
 Azure integration metrics, events, and service checks receive the following tags:
 
-| Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                  |
-|-------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All Azure integrations                                | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                             |
-| Azure VM integrations                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                           |
-| Azure App Service Plans<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                  |
-| Azure App Services Web Apps & Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version` |
-| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                            | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`                                                                                                                            |
+| Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                                 |
+|-------------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations                                | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                                            |
+| Azure VM integrations                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                                          |
+| Azure App Service Plans<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                                 |
+| Azure App Services Web Apps & Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version`                |
+| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                  | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`. <br>For replication Links only:  `state` `primary_server_name` `primary_server_region` `secondary_server_name` `secondary_server_region` |
+| Azure Load Balancer<sup>(1)</sup>                     | `azure.network_loadbalancers.*`             | `sku_name`                                                                                                                                                                                                       |
+| Azure Usage and Quota<sup>(1)</sup>                   | `azure.usage.*`                             | `usage_category`, `usage_name`                                                                                                                                                                                   |
 
 <sup>(1)</sup>*Resource-specific tags are in beta.*
 

@@ -104,7 +104,7 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 [2]: /fr/logs
 [3]: /fr/agent/basic_agent_usage/kubernetes
 [4]: /fr/integrations/go_expvar
-[5]: /fr/agent/basic_agent_usage/?tab=agentv6#gui
+[5]: /fr/agent/basic_agent_usage/#gui
 [6]: /fr/tracing
 {{% /tab %}}
 {{% tab "Agent v5 et v4" %}}

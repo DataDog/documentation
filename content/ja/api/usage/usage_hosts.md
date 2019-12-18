@@ -1,7 +1,7 @@
 ---
 title: ホストとコンテナの 1 時間あたり使用量の取得
 type: apicontent
-order: 33.1
+order: 34.1
 external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 

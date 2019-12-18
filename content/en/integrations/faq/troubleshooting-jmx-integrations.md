@@ -24,7 +24,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * Content of `/var/log/datadog/agent.log`
 * Output of the [info command][1]

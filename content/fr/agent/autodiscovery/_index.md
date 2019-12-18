@@ -67,7 +67,7 @@ config_providers:
     polling: true
 ```
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 
@@ -94,7 +94,7 @@ config_providers:
     polling: true
 ```
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
 

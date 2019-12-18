@@ -27,6 +27,7 @@
           "monitors",
           "tracing",
           "logs",
+          "synthetics",
           "developers",
           "account_management",
           "synthetics"
@@ -109,6 +110,8 @@
           "monitors",
           "security",
           "synthetics",
+          "real_user_monitoring",
+          "network_performance_monitoring",
           "tagging",
           "tracing",
           "watchdog"
@@ -132,7 +135,6 @@
     "docs.datadoghq.com/account_management/rbac/role_api/$",
     "docs.datadoghq.com/agent/faq/$",
     "docs.datadoghq.com/agent/faq/agent-5-process-collection/$",
-    "docs.datadoghq.com/agent/faq/agent-downgrade/$",
     "docs.datadoghq.com/agent/guide/$",
     "docs.datadoghq.com/agent/guide/agent-5-autodiscovery/$",
     "docs.datadoghq.com/agent/guide/agent-5-kubernetes-basic-agent-usage/$",
@@ -308,6 +310,11 @@
       [
         "aws",
         "amazon web service"
+      ],
+      [
+        "RUM",
+        "rum",
+        "real user monitoring"
       ]
     ]
   },

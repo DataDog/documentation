@@ -5,7 +5,7 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data-store
+  - data store
   - os & system
   - processing
   - log collection
@@ -118,8 +118,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [1]: https://mapr.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/fr/help
 [7]: https://mapr.com/docs/61/MapR_Streams/MapRStreamsPythonExample.html
 [8]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html

@@ -1,7 +1,7 @@
 ---
 title: Mesure d'utilisation
 type: apicontent
-order: 34
+order: 35
 external_redirect: /api/#mesure-d-utilisation
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Send traces
 type: apicontent
-order: 33.1
+order: 34.1
 external_redirect: /api/#send-traces
 ---
 
@@ -24,7 +24,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
 [Learn more about the APM & Distributed Tracing terminology][4]
 
-**Note**: Each span within a trace should use the same trace_id.
+**Note**: Each span within a trace should use the same `trace_id`. However, `trace_id` and `span_id` must have different values.
 
 **ARGUMENTS**:
 

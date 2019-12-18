@@ -62,7 +62,7 @@ Click the name of an integration for a condensed dashboard of metrics for that i
 
 ### Shapes and colors
 
-By default the color of each host is set to represent the percentage of CPU usage on that host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the `Color by` selector.  
+By default the color of each host is set to represent the percentage of CPU usage on that host, where the color ranges from green (0% utilized) to orange (100% utilized). You can select different metrics from the `Color by` selector.  
 
 Host Maps can also communicate an additional, optional metric with the size of the hexagon: use the `Size by` selector. 
 

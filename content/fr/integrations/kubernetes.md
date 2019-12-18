@@ -127,29 +127,32 @@ Depuis la version 5.17.0, l'Agent Datadog prend en charge [l'option d'élection
 
 Le check Kubernetes contient les checks de service suivants :
 
-* `kubernetes.kubelet.check` :
+* `kubernetes.kubelet.check`: <br>
   s'il renvoie `CRITICAL`, `kubernetes.kubelet.check.ping` ou `kubernetes.kubelet.check.syncloop` est dans un état `CRITICAL` ou `NO DATA`.
 
-* `kubernetes.kubelet.check.ping` :
+* `kubernetes.kubelet.check.ping`:<br>
   s'il renvoie `CRITICAL` ou `NO DATA`, l'API Kubelet n'est pas disponible.
 
-* `kubernetes.kubelet.check.syncloop` :
+* `kubernetes.kubelet.check.syncloop`:<br>
   s'il renvoie `CRITICAL` ou `NO DATA`, la boucle de synchronisation de Kubelet qui met à jour les conteneurs ne fonctionne pas.
 
-* `kubernetes_state.node.ready` :
+* `kubernetes_state.node.ready`:<br>
   renvoie `CRITICAL` si le nœud du cluster n'est pas prêt. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.out_of_disk` :
+* `kubernetes_state.node.out_of_disk`:<br>
   renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.disk_pressure` :
+* `kubernetes_state.node.disk_pressure`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de disque. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.memory_pressure` :
+* `kubernetes_state.node.memory_pressure`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de la mémoire. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.network_unavailable` :
+* `kubernetes_state.node.network_unavailable`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Si ce n'est pas le cas, renvoie `OK`.
+
+* `kubernetes_state.cronjob.on_schedule_check`:<br>
+  Renvoie `CRITICAL` si la date de planification d'une tâche cron est située dans le passé. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

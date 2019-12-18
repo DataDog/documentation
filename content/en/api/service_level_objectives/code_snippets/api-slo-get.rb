@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'dogapi'
 
 api_key = '<YOUR_API_KEY>'

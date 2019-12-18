@@ -57,12 +57,12 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
 1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones.
 
-    | Value                  | Type                        | Action                                                                                               |
-    | :--------------------- | :----------------           | :----------                                                                                          |
-    | **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
-    | **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
-    | **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
-    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
+    | Value           | Type                        | Action                                                                                                                                                                                                                         |
+    |:----------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | **MANUAL_DROP** | User input                  | The Agent drops the trace.                                                                                                                                                                                                     |
+    | **AUTO_DROP**   | Automatic sampling decision | The Agent drops the trace.                                                                                                                                                                                                     |
+    | **AUTO_KEEP**   | Automatic sampling decision | The Agent keeps the trace.                                                                                                                                                                                                     |
+    | **MANUAL_KEEP** | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all spans marked for `MANUAL_KEEP` are counted as billable spans. |
 
     Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
@@ -79,7 +79,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
     Moreover, the Agent provides a service-based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
 
-    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][3].
+    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][4].
 
 3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
@@ -370,12 +370,12 @@ Note that trace priority should be manually controlled only before any context p
 
 Individual [traces][1] are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
-| Retention bucket       |  % of stream kept |
-| :--------------------- | :---------------- |
-| 6 hours                |              100% |
-| Current day (UTC time) |               25% |
-| 6 days                 |               10% |
-| 6 months               |                1% |
+| Retention bucket       | % of stream kept |
+|:-----------------------|:-----------------|
+| 6 hours                | 100%             |
+| Current day (UTC time) | 25%              |
+| 6 days                 | 10%              |
+| 6 months               | 1%               |
 
 **Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the above stated percent of traces over time.
 
@@ -406,4 +406,5 @@ Once a trace has been viewed by opening a full page, it continues to be availabl
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[3]: https://docs.datadoghq.com/security/tracing/#resource-filtering
+[3]: /tracing/app_analytics/#span-filtering
+[4]: https://docs.datadoghq.com/security/tracing/#resource-filtering

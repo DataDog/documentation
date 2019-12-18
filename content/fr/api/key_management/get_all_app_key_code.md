@@ -1,7 +1,7 @@
 ---
 title: Obtenir toutes les clés d'application
 type: apicode
-order: 21.06
+order: 22.06
 external_redirect: "/api/#obtenir-toutes-les-cles-d-application"
 ---
 

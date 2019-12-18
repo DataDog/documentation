@@ -14,6 +14,9 @@ footer_scripts:
   - snowplow: false
   - adroll: false
 
+hotjar:
+  id: 1022108
+
 datadog:
   clientToken: pub36877d3864fab670b5ae7e1d5d26cb08
   applicationId: c4e83ad8-4eda-4d2e-aae1-d943abce0463

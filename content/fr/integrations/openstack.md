@@ -41,31 +41,25 @@ Recueillez des métriques du service OpenStack en temps réel pour :
 * Être informé des failovers et des événements OpenStack
 
 ## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][12] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Pour recueillir des métriques OpenStack, vous devez [installer l'Agent][2] sur vos hosts exécutant des hyperviseurs.
-
-**Remarque** : l'installation de l'intégration OpenStack est susceptible d'augmenter le nombre de machines virtuelles surveillées par Datadog, ce qui peut avoir une incidence sur votre facturation. Pour en savoir plus, consultez la section Facturation de notre FAQ.
+Pour recueillir vos métriques OpenStack, vous devez [installer l'Agent][2] sur vos hosts exécutant des hyperviseurs.
 
 ### Configuration
+#### Préparer OpenStack
+Configurez ensuite un rôle et un utilisateur Datadog avec votre serveur d'identité :
 
-1. Commencez par configurer un rôle et un utilisateur Datadog avec votre serveur d'identité.
+```console
+openstack role create datadog_monitoring
+openstack user create datadog \
+    --password my_password \
+    --project my_project_name
+openstack role add datadog_monitoring \
+    --project my_project_name \
+    --user datadog
+```
 
-    ```
-    openstack role create datadog_monitoring
-    openstack user create datadog \
-        --password my_password \
-        --project my_project_name
-    openstack role add datadog_monitoring \
-        --project my_project_name \
-        --user datadog
-    ```
-
-2. Modifiez vos fichiers policy.json afin d'accorder les autorisations nécessaires.
-```role:datadog_monitoring``` doit pouvoir accéder aux opérations suivantes :
+Enfin, mettez à jour vos fichiers `policy.json` afin d'accorder les autorisations nécessaires. `role:datadog_monitoring` doit pouvoir accéder aux opérations suivantes :
 
 **Nova**
 
@@ -106,9 +100,46 @@ Pour recueillir des métriques OpenStack, vous devez [installer l'Agent][2] sur 
 
 Vous devrez peut-être redémarrer vos services d'API Keystone, Neutron et Nova pour que les modifications apportées au fichier policy.json prennent effet.
 
-3. Configurez l'Agent Datadog pour le connecter à votre serveur Keystone, puis spécifiez les projets à surveiller. Modifiez le fichier `openstack.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple openstack.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+**Remarque** : l'installation de l'intégration OpenStack est susceptible d'augmenter le nombre de machines virtuelles surveillées par Datadog, ce qui peut avoir une incidence sur votre facturation. Pour en savoir plus, consultez la section Facturation de notre FAQ.
 
-4. [Redémarrez l'Agent][5].
+#### Configuration de l'Agent
+
+1. Configurez l'Agent Datadog pour le connecter à votre serveur Keystone, puis spécifiez les projets à surveiller. Modifiez le fichier `openstack.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] avec la configuration ci-dessous. Consultez le [fichier d'exemple openstack.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+
+    ```yaml
+        init_config:
+
+            ## @param keystone_server_url - string - required
+            ## Where your identity server lives.
+            ## Note that the server must support Identity API v3
+            #
+            keystone_server_url: "https://<KEYSTONE_SERVER_ENDPOINT>:<PORT>/"
+
+        instances:
+
+            ## @param name - string - required
+            ## Unique identifier for this instance.
+            #
+          - name: "<INSTANCE_NAME>"
+
+            ## @param user - object - required
+            ## User credentials
+            ## Password authentication is the only auth method supported.
+            ## `user` object expects the parameter `username`, `password`,
+            ## and `user.domain.id`.
+            ##
+            ## `user` should resolve to a structure like:
+            ##
+            ##  {'password': '<PASSWORD>', 'name': '<USERNAME>', 'domain': {'id': '<DOMAINE_ID>'}}
+            #
+            user:
+              password: "<PASSWORD>"
+              name: datadog
+              domain:
+                id: "<DOMAINE_ID>"
+    ```
+
+2. [Redémarrez l'Agent][5].
 
 ### Validation
 
@@ -123,30 +154,32 @@ Vous devrez peut-être redémarrer vos services d'API Keystone, Neutron et Nova 
 Le check OpenStack n'inclut aucun événement.
 
 ### Checks de service
-**openstack.neutron.api.up**
+**openstack.neutron.api.up** :
 
 Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Neutron, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
 
-**openstack.nova.api.up**
+**openstack.nova.api.up** :
 
 Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Nova, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
 
-**openstack.keystone.api.up**
+**openstack.keystone.api.up** :
 
 Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Keystone. Si ce n'est pas le cas, renvoie `OK`.
 
-**openstack.nova.hypervisor.up**
+**openstack.nova.hypervisor.up** :
 
 Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état de l'hyperviseur, renvoie `CRITICAL` si l'hyperviseur est indisponible ou renvoie `OK` pour les autres cas.
 
-**openstack.neutron.network.up**
+**openstack.neutron.network.up** :
 
 Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état du réseau, renvoie `CRITICAL` si le réseau est indisponible ou renvoie `OK` pour les autres cas.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
+
 Pour mieux comprendre comment (ou pourquoi) intégrer le service de calcul Nova d'OpenStack à Datadog, lisez notre [série d'articles de blog][9] à ce sujet.
 
 Consultez également nos articles de blog suivants :
@@ -157,16 +190,15 @@ Consultez également nos articles de blog suivants :
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
-[12]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

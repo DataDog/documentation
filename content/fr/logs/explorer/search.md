@@ -59,13 +59,13 @@ Pour rechercher les logs qui contiennent `user=AliceMartin` dans l'attribut mess
 `user\=AliceMartin`
 
 #### Recherche à facettes
-Pour effectuer une recherche sur une facette spécifique, [ajoutez-la comme facette][1] puis utilisez `@` pour spécifier que vous faites une recherche sur une facette.
+Pour effectuer une recherche en fonction d'un attribut spécifique, [ajoutez-le comme facette][1] puis utilisez `@` pour indiquer que vous faites une recherche à partir d'une facette.
 
 Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer la valeur **url** sur *www.datadoghq.com*, saisissez :
 
 `@url:www.datadoghq.com`
 
-**Remarque** : effectuer une recherche sur une valeur de facette qui contient des caractères spéciaux requiert l'utilisation du caractère d'échappement ou de guillemets. La même logique s'applique aux espaces dans les attributs de log. Les attributs de log ne doivent pas contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées du caractère d'échappement. Si un attribut est appelé `user.first name`, effectuez une recherche sur cet attribut en ajoutant un caractère d'échappement devant l'espace : `@user.first\ name:mavaleur`
+**Remarque** : lorsque vous recherchez une valeur de facette qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets. La même logique s'applique aux espaces dans les attributs de log. Les attributs de log ne sont pas supposés contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées d'un caractère d'échappement. Si un attribut est appelé `user.first name`, effectuez une recherche en fonction de cet attribut en ajoutant un caractère d'échappement devant l'espace : `@user.first\ name:mavaleur`
 
 Exemples :
 

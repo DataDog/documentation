@@ -119,8 +119,8 @@ Agent が監視対象の Presto インスタンスに接続できず、メトリ
 [4]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/integrations/java
 [6]: https://docs.datadoghq.com/ja/help
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/presto/metadata.csv
 
 

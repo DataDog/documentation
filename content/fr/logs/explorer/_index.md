@@ -85,10 +85,10 @@ Utilisez le bouton de *partage* pour envoyer votre vue Log Explorer actuelle à 
 | Generate new Metric | [Générez une nouvelle métrique][3] à partir de la requête d'analyse actuelle.  |
 
 
+
 [1]: /fr/monitors/monitor_types/log
 [2]: /fr/graphing/dashboards/
 [3]: /fr/logs/logs_to_metrics/
-
 {{% /tab %}}
 {{< /tabs >}}
 

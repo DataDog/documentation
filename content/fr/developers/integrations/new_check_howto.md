@@ -601,6 +601,6 @@ Pour les versions >= 6.12 de l'Agent: :
 [13]: https://docs.datadoghq.com/fr/developers/metrics/metrics_units/
 [14]: https://docs.datadoghq.com/fr/getting_started/tagging
 [15]: https://packaging.python.org/tutorials/distributing-packages
-[16]: https://docs.datadoghq.com/fr/agent/?tab=agentv6
+[16]: https://docs.datadoghq.com/fr/agent/
 [17]: https://en.wikipedia.org/wiki/YAML
 [18]: http://yaml-online-parser.appspot.com/

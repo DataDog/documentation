@@ -199,7 +199,7 @@ Une intégration correctement configurée s'affiche dans la section **Running Ch
 ```
 
 
-[1]: /fr/agent/basic_agent_usage/?tab=agentv6#gui
+[1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}

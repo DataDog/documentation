@@ -1,7 +1,7 @@
 ---
 title: Update Indexes order
 type: apicode
-order: 23.5
+order: 24.5
 external_redirect: /api/#update-indexes-order
 ---
 

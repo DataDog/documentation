@@ -47,6 +47,9 @@ For other platforms and methods of installing Helm, refer to the [Helm documenta
 
 ### Installing the Helm server (Tiller)
 
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you. 
+
+
 If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
 
 ```bash
@@ -107,9 +110,23 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
+{{< tabs >}}
+{{% tab "Helm v1/v2" %}} 
+
 ```bash
 helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
+
+{{% /tab %}}
+
+{{% tab "Helm v3+" %}}
+
+```bash
+helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 

@@ -1,7 +1,7 @@
 ---
 title: GCP インテグレーションのオートミュートの設定
 type: apicontent
-order: 17.4
+order: 18.4
 external_redirect: "/api/#set-gcp-integration-automute"
 ---
 

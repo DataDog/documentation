@@ -19,7 +19,7 @@ further_reading:
 To enable the Agent full debug mode:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. Modify your local `datadog.yaml` file. See [Agent main configuration file][1] for OS specific details.
 
@@ -29,9 +29,9 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /agent/guide/agent-log-files/?tab=agentv6
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/guide/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -52,7 +52,7 @@ To enable the Agent full debug mode:
 ## Containerized Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 **Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 
@@ -108,16 +108,15 @@ Or the container can be restarted.
 
 The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
-| Option  | Fatal logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs | All logs  |
-|---------|------------|------------|-----------|-----------|------------|------------|-----------|
-| `OFF`   |            |            |           |           |            |            |           |
-| `FATAL` | {{< X >}}  |            |           |           |            |            |           |
-| `ERROR` | {{< X >}}  | {{< X >}}  |           |           |            |            |           |
-| `WARN`  | {{< X >}}  | {{< X >}}  | {{< X >}} |           |            |            |           |
-| `INFO`  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |           |
-| `DEBUG` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |           |
-| `TRACE` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |           |
-| `ALL`   | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} |
+| Option  | Critical logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs |
+|---------|---------------|------------|-----------|-----------|------------|------------|
+| `OFF`   |               |            |           |           |            |            |
+| `CRIT`  | {{< X >}}     |            |           |           |            |            |
+| `ERROR` | {{< X >}}     | {{< X >}}  |           |           |            |            |
+| `WARN`  | {{< X >}}     | {{< X >}}  | {{< X >}} |           |            |            |
+| `INFO`  | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |
+| `DEBUG` | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
+| `TRACE` | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
 
 ## Further Reading
 
