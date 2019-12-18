@@ -22,49 +22,46 @@ To provide flexibility in allowing code to run multiple on versions of the Agent
 
 ## Editors and Tools
 
-### ddev
+### pylint
 
-The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][2].
+`pylint` contains functions to help you [verify that your custom checks are compatible with Python 3][2].
 
 #### Installation
 
-Start by installing the developer toolkit:
+Start by installing via [pip][3] on Python 2:
 
 ```bash
-$ pip install "datadog-checks-dev[cli]"
+$ python2 -m pip install pylint
 ```
+
+Replace `python2` in the above command if the path to your Python 2 interpreter is different.
 
 #### Usage
 
-Run the `validate` command to verify that your custom check or integration runs on Python 3. Replace `CHECK` with a valid path to a Python module or package folder:
+Run the `pylint` command to verify that your custom check or integration runs on Python 3. Replace `CHECK` with a valid path to a Python module or package folder:
 
 ```bash
-$ ddev validate py3 [OPTIONS] CHECK
+$ python2 -m pylint -sn --py3k CHECK
 ```
 
 For example:
 
 ```bash
-$ ddev validate py3 ~/dev/my-check.py
-Validating python3 compatibility of ~/dev/my-check.py...
-Incompatibilities were found for ~/dev/my-check.py:
-File ~/dev/my-check.py:
-  Line 2, column 0: print statement used
-  Line 834, column 21: division w/o __future__ statement
-  Line 850, column 25: division w/o __future__ statement
+$ python2 -m pylint -sn --py3k ~/dev/my-check.py
+************* Module my-check
+E:  4, 4: print statement used (print-statement)
+W:  7,22: Calling a dict.iter*() method (dict-iter-method)
+W:  9, 8: division w/o __future__ statement (old-division)
 ```
 
-After addressing the incompatibilities, the same command returns:
+After addressing the incompatibilities, the same command returns nothing:
 
 ```bash
-$ ddev validate py3 ~/dev/my-check.py
-Validating python3 compatibility of ~/dev/my-check.py…
-~/dev/foo.py is compatible with python3
+$ python2 -m pylint -sn --py3k ~/dev/my-check.py
+$
 ```
 
-While `ddev` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
-
-For more details about ddev, refer to the [ddev documentation][3].
+While `pylint` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
 
 ### 2to3
 
@@ -273,8 +270,8 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/compatibility_check
-[2]: /developers/integrations/new_check_howto/#building
-[3]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
+[2]: https://portingguide.readthedocs.io/en/latest/tools.html#automated-checker-pylint-py3k
+[3]: https://pip.pypa.io/en/stable/installing
 [4]: https://docs.python.org/3.1/library/2to3.html
 [5]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
 [6]: https://code.visualstudio.com/docs/setup/setup-overview
