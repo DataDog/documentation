@@ -7,7 +7,7 @@ external_redirect: /api/#usage-metering
 
 ## Usage metering
 
-This API is available to all customers. Python and Ruby clients are not yet supported.
+This API is available to all Pro and Enterprise customers. Python and Ruby clients are not yet supported. Usage is only accessible for parent-level organizations.
 
 The usage metering end-point allows you to:
 
