@@ -39,7 +39,7 @@ export function handleLanguageBasedRedirects() {
 	let acceptLanguage = 'en';
 	let logMsg = '';
 
-	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1 );
+	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
 
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
@@ -55,12 +55,15 @@ export function handleLanguageBasedRedirects() {
 		// order of precedence: url > cookie > header
 		if ( params['lang_pref'] && allowedLanguages.indexOf(params['lang_pref']) !== -1 ) {
 			acceptLanguage = params['lang_pref'];
+
 			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
 			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }; curLang: ${ curLang }; origin: ${ window.location.origin }; URI: ${ uri }`);
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
-			window.location.replace( window.location.origin + `/${ uri.replace(curLang, '') }`.replace(/\/+/g,'/') );
+			if ( curLang !== acceptLanguage ) {
+				window.location.replace( window.location.origin + uri.replace(/\/+/g,'/') );
+			}
 		}
 		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 			acceptLanguage = Cookies.get('lang_pref');
@@ -76,7 +79,7 @@ export function handleLanguageBasedRedirects() {
 			if (acceptLanguage === 'en') {
 				logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
 			}
-			else if (acceptLanguage !== curLang) {
+			else {
 				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace(/\/+/g,'/');
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
