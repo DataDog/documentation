@@ -2,6 +2,8 @@
 title: RUM Analytics
 kind: documentation
 description: ""
+aliases:
+- /real_user_monitoring/rum_analytics
 further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"

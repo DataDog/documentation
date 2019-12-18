@@ -7,55 +7,29 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"
   text: "Real User Monitoring"
-- link: "/real_user_monitoring/rum_explorer"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_analytics"
-  tag: "Documentation"
-  text: "Build analytics upon your events"
 - link: "/logs/processing/attributes_naming_convention/"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
 ---
 
+{{< img src="real_user_monitoring/rum_dashboard.png" alt="RUM Dashboard" responsive="true" >}}
+
 ## What is Real User Monitoring?
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the performance of your front end applications as seen by your users. It follows the latency from the frontend to the backend using advanced visualizations. The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time activity and experience of individual users to prioritize engineering work on the features with the highest business impact. The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
 
-{{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/setup">}}<u>Setup</u>: Setup Real User Monitoring over your application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/rum_explorer/">}}<u>RUM Explorer</u>: Discover the RUM Explorer page, how to add Facets and Measures.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/rum_analytics">}}<u>RUM Analytics</u>: Perform RUM Analytics over all your events.{{< /nextlink >}}
+
+{{< whatsnext desc="Get started with RUM:">}}
+  {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u>: Create your first application and configure the browser SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/data_collected">}}<u>Data Collected</u>: Discover all data collected out of the box.{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Data collected
-
-By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends 5 main types of events to Datadog:
-
-| Event Category | Description                                                                                                                                                                                                                                                                                |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| View           | Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .                                                                                         |
-| Resource       | A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.                                                                                                                  |
-| Long task      | Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation. This causes input latency, event handling latency, etc. Only available in Chrome and Opera. See the [Long Task MDN documentation][1] for more information. |
-| Error          | Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.                                                                                                                                                                               |
-| User Action    | A User Action event is a custom event that can be generated for a given user action.                                                                                                                                                                                                       |
-
-The following contexts—following the [Datadog Standard Attributes][2] logic—are attached automatically to all events sent to Datadog:
-
-* [HTTP Requests][3]
-* [URL details][4]
-* [Geolocation][5]
-* [User-Agent][6]
-* `sessionId`	The ID corresponding to the session of your user.
+{{< whatsnext desc="Explore your RUM events:">}}
+  {{< nextlink href="/real_user_monitoring/explorer/">}}<u>RUM Explorer</u>: Search through your page views.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/explorer/analytics">}}<u>RUM Analytics</u>: Get insights from all your events.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
-[2]: /logs/processing/attributes_naming_convention
-[3]: /logs/processing/attributes_naming_convention/#http-requests
-[4]: /logs/processing/attributes_naming_convention/#url-details-attributes
-[5]: /logs/processing/attributes_naming_convention/#geolocation
-[6]: /logs/processing/attributes_naming_convention/#user-agent-attributes
