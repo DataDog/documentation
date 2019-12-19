@@ -63,7 +63,7 @@ stop                      stop the gulp/hugo server.
 
 ### A note about markdown
 
-This site uses Goldmark for markdown which is compliant with [CommonMark 0.29](https://spec.commonmark.org/0.29/)
+This site uses Goldmark for markdown which is compliant with [CommonMark 0.29][9]
 
 If you include ANY Markdown in a file, give it an .md extension.
 
@@ -71,13 +71,13 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 ## Releasing
 
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][10].
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][6].
 
 Within 5 minutes of merging to master, it deploys automatically.
 
 ## How to add a new integration
 
-[See the dedicated doc page][11]
+[See the dedicated doc page][10]
 
 [1]: https://gohugo.io
 [2]: https://nodejs.org/en/download/package-manager
@@ -87,6 +87,5 @@ Within 5 minutes of merging to master, it deploys automatically.
 [6]: https://github.com/DataDog/documentation/wiki/Github-personal-token
 [7]: https://github.com/DataDog/documentation/wiki/Documentation-Build
 [8]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
-[9]: https://github.com/russross/blackfriday
-[10]: https://github.com/DataDog/documentation/wiki/Github-personal-token
-[11]: https://docs.datadoghq.com/developers/integrations
+[9]: https://spec.commonmark.org/0.29/
+[10]: https://docs.datadoghq.com/developers/integrations
