@@ -379,6 +379,10 @@ main:
     url: "agent/troubleshooting/integrations/"
     parent: "agent_troubleshooting"
     weight: 906
+  - name: "Site Issues"
+    url: "agent/troubleshooting/site/"
+    parent: "agent_troubleshooting"
+    weight: 907
 
   ## AGENT - Guides
   - name: "Guides"
