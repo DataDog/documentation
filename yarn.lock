@@ -1566,10 +1566,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap@>=4.1.2:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.4.1.tgz#8582960eea0c5cd2bede84d8b0baf3789c3e8b01"
-  integrity sha512-tbx5cHubwE6e2ZG7nqM3g/FZ5PQEDMWmMGNrCUBVRPHXTJaH7CBDdsLeu3eCh3B1tzAxTnAbtmrzvWEvT2NNEA==
+bootstrap@4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.3.1.tgz#280ca8f610504d99d7b6b4bfc4b68cec601704ac"
+  integrity sha512-rXqOmH1VilAt2DyPzluTi2blhk17bO7ef+zLLPlWvG494pDxcM234pJ8wTc/6R40UWizAIIMgxjvxZg5kmsbag==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -4467,10 +4467,10 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-hugo-bin@0.49.0:
-  version "0.49.0"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.49.0.tgz#53012c40709e56543798525685768b8eded17d8b"
-  integrity sha512-ZNZsChCFOHLsgjcC3snPvXnkt+wPeOSdvcFFhqZvwtXu/j7/siqk7xhPwnBaXz9ch8whwo76n1/aKRRb13gnBA==
+hugo-bin@0.47.1:
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.47.1.tgz#a8c85cb9ef791a689f59a8877fb81d5f53281a63"
+  integrity sha512-WJ3xMDTe3Qi9vcDguzSOWUVUEIVnPahlvex/Em1k7ig39IZuGAbDqIjkVzCCbtSZMUCjNHDzO35P7xyH7WX7rg==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
