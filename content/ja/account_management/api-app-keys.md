@@ -1,5 +1,5 @@
 ---
-title: API とアプリケーションキー
+title: API キーとアプリケーションキー
 kind: faq
 aliases:
   - /ja/account_management/faq/how-do-i-reset-my-application-keys/
