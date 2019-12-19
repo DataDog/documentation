@@ -3,7 +3,7 @@ title: APM Traces and Flamegraph
 kind: video
 language: en
 wistiaid: ojveojb8gg
-videos:
+"video-categories":
     - apm
     - flamegraph
     - traces

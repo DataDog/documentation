@@ -9,8 +9,8 @@ pygmentsCodeFences: true
 # taxonomies
 taxonomies:
   tag: "tags"
-  video: "videos"
-preserveTaxonomyNames: true
+  category: "categories"
+  "video-category": "video-categories"
 
 # language
 defaultContentLanguage: "en"
