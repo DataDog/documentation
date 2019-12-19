@@ -16,15 +16,11 @@ further_reading:
   text: "Collect your traces"
 ---
 
-<div class="alert alert-warning">
-Watchdog infrastructure stories are in private beta. <a href="/help">Contact Datadog support</a> to have them enabled for your organization.
-</div>
-
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performances and infrastructure integration metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performances and infrastructure metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
 
 * APM metrics:
   * Hits (request rate)
