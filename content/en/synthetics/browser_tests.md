@@ -69,7 +69,7 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
+3. Your actions are recorded and used to create steps within your browser test scenario. 
 4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
 
@@ -167,6 +167,12 @@ Advanced options also allow you to choose where you want your subtest to be play
 Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
+
+### Upload
+
+You can record the uploading of files as an action. This is limited to 10 files, with a limit of 5MB each.
+
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" responsive="true" style="width:50%;">}}
 
 ## Test failure and errors
 
