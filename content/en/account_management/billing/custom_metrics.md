@@ -132,11 +132,11 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 ##### Customized Tagging
 
-You can control over [which tag combination][2] aggregations are performed for any DISTRIBUTION metric. Let's say that you want to keep only the `host` and `endpoint` tags associated with your distribution, this leaves the following 3 unique tag combinations:
+You can control over [which tag combination][2] aggregations are performed for any DISTRIBUTION metric. Let's say that you want to keep only the `endpoint` and `status` tags associated with your distribution, this leaves the following 3 unique tag combinations:
 
-* `host:A`, `endpoint:X`
-* `host:B`, `endpoint:X`
-* `host:B`, `endpoint:Y`
+* `endpoint:X`, `status:200`
+* `endpoint:X`, `status:400`
+* `endpoint:Y`, `status:200`
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name, host, and tag values. This results in `request.Latency` reporting a total of **5*3 = 15 custom metrics** with the tagging customisation .
 
