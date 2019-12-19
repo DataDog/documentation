@@ -22,7 +22,7 @@ For Linux based systems where the <code>service</code> wrapper command is not av
 List of commands to start the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform   | Command                                                        |
 | ---------- | --------------------------                                     |
@@ -58,7 +58,7 @@ List of commands to start the Datadog Agent:
 List of commands to stop the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform   | Command                                                       |
 | ---------- | ---------------------------------------------                 |
@@ -94,7 +94,7 @@ List of commands to stop the Datadog Agent:
 List of commands to restart the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform | Command                                           |
 |----------|---------------------------------------------------|
@@ -131,7 +131,7 @@ List of commands to restart the Datadog Agent:
 List of commands to display the status of the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform          | Command                                                                       |
 | ----------------- | ---------------------------------------------------------                     |
@@ -172,7 +172,7 @@ List of commands to display the status of the Datadog Agent:
 List of commands to display the status of your Datadog Agent and enabled integrations.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform     | Command                                                |
 | ------------ | ------------------------------------------------------ |
@@ -241,7 +241,7 @@ A properly configured integration is displayed under **Checks** with no warnings
 ## Other commands
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell

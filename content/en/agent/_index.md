@@ -26,7 +26,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Agent v6 is available. <a href="/agent/faq/upgrade-to-agent-v6">Upgrade to the newest version</a> to benefit from all new functionality.
+Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## Overview
@@ -49,7 +49,6 @@ Packages are available for 64-bit x86 and Arm v8 architectures. For other archit
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 ## Further Reading
 

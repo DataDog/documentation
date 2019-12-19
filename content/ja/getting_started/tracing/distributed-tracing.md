@@ -6,7 +6,7 @@ further_reading:
     text: アプリケーションで APM トレーシングをセットアップする方法
   - link: tracing/visualization/
     tag: ドキュメント
-    text: Datadog に報告しているサービスのリストアップ
+    text: Datadog に報告するサービスの一覧
   - link: tracing/visualization/service
     tag: ドキュメント
     text: Datadog のサービスについて

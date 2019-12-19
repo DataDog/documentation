@@ -8,7 +8,6 @@ external_redirect: /api/#integration-gcp
 ## Integration GCP
 
 Configure your Datadog-Google Cloud Platform (GCP) integration directly through the Datadog API.
-[Read more about Datadog-Google Cloud Platform integration][2].
+[Read more about Datadog-Google Cloud Platform integration][1].
 
-[1]: /help
-[2]: /integrations/google_cloud_platform
+[1]: /integrations/google_cloud_platform

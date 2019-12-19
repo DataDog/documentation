@@ -333,10 +333,21 @@ main:
     identifier: "agent_proxy"
     weight: 7
 
-  - name: "Upgrade to Agent v6"
-    url: "agent/guide/upgrade-to-agent-v6/"
+  ## AGENT - Versions
+
+  - name: "Versions"
+    url: "agent/versions"
     parent: "agent"
+    identifier: "agent_versions"
     weight: 8
+  - name: "Upgrade to Agent v7"
+    url: "agent/versions/upgrade_to_agent_v7/"
+    parent: "agent_versions"
+    weight: 801
+  - name: "Upgrade to Agent v6"
+    url: "agent/versions/upgrade_to_agent_v6/"
+    parent: "agent_versions"
+    weight: 802
 
   ## AGENT - Troubleshooting
   - name: "Troubleshooting"

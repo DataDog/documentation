@@ -3,7 +3,7 @@ title: Matt's Quick Tips - Unsharing Screenboards
 kind: video
 language: en
 wistiaid: l4gfxnyjad
-videos:
+"video-categories":
     - Introduction
     - Dashboards
     - Screenboards

@@ -5,6 +5,7 @@ private: true
 aliases:
   - /videos/tipsandtricks-k8s-autodiscovery/
   - /videos/hipchat/
+  - /video-categories/
 ---
 At Datadog, we want to make sure you have all the tools you need to use and understand Datadog's products. Some people learn better with text, some with pictures, some with video, and some prefer a mix of everything. Here are our videos. If there is a video you think we need to produce to help solve a common problem, suggest it via a [support ticket][1] or reach out to Datadog on Twitter via [@datadoghq][2].
 

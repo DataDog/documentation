@@ -41,22 +41,28 @@ Définir la configuration de votre test Browser.
 5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][2]. Vous pouvez également configurer un [emplacement privé][3] pour lancer un test Browser de Synthetics sur une URL privée qui n'est pas accessible à partir de l'Internet public.
 6. **How often should Datadog run the test?** : utilisez cette option pour définir la fréquence d'exécution du test. Cette fréquence peut aller d'une fois toutes les 15 minutes à une fois par semaine. [Contactez l'assistance][4] pour accéder à d'autres options de fréquence pour votre test.
 
+### Utiliser des variables globales
+
+Les [variables globales définies sur la page `Settings`][5] peuvent être utilisées dans l'URL et dans les options avancées de vos tests Browser. Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité.
+
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Utiliser des variables dans les tests Browser" video="true" responsive="true" width="80%" >}}
+
 ### Conditions d'alerte
 
-Une alerte est déclenchée si une assertion échoue pendant `<INSÉRER_NOMBRE>` minutes depuis `<INSÉRER_NOMBRE>` emplacements sur `<NOMBRE_EMPLACEMENTS_CHOISIS>`.
+Une alerte se déclenche si une assertion échoue pendant `<INSÉRER_NOMBRE>` minutes depuis `<INSÉRER_NOMBRE>` localisations sur `<NOMBRE_LOCALISATIONS_CHOISIES>`.
 
 ### Notifications
 
 Pour configurer vos notifications :
 
-1. Saisissez un **message** pour le test Browser. Ce champ accepte l'utilisation du [format de mise en forme Markdown][5] standard. Les messages de notification comprennent le **message** défini dans cette section ainsi que des informations sur les assertions qui ont échoué et les raisons de cet échec.
-2. Choisissez vos [services][6] et/ou les membres de votre équipe qui doivent être notifiés.
+1. Saisissez un **message** pour le test Browser. Ce champ accepte l'utilisation du [format de mise en forme Markdown][6] standard. Les messages de notification comprennent le **message** défini dans cette section ainsi que des informations sur les assertions qui ont échoué et les raisons de cet échec.
+2. Choisissez vos [services][7] et/ou les membres de votre équipe qui doivent être notifiés.
 3. Cliquez sur **Save Details and Record Test** pour enregistrer votre test Browser.
 4. Démarrez l'enregistrement de votre test.
 
 ## Enregistrer un test
 
-Les tests peuvent uniquement être enregistrés à partir de **[Google Chrome][7]**. Pour enregistrer votre test, téléchargez l'[extension d'enregistrement de test Datadog pour Google Chrome][8].
+Les tests peuvent uniquement être enregistrés à partir de **[Google Chrome][8]**. Pour enregistrer votre test, téléchargez l'[extension d'enregistrement de test Datadog pour Google Chrome][9].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Enregistrer le test Browser" responsive="true" >}}
 
@@ -84,7 +90,7 @@ Le délai d'expiration par défaut pour chaque étape est d'environ 60 secondes
 | `Test that some text is present on the active page`       | Vérifie qu'un texte spécifique est présent sur la page actuelle.                                                                                                                        |
 | `Assert that some text is not present on the active page` | Vérifie qu'une chaîne de texte spécifique est **ABSENTE** de la page actuelle.                                                                                                                |
 | `Test the content of the URL of the active page`          | Récupère l'URL de la dernière page utilisée, puis vérifie si une valeur spécifique (`string`, `number`, `regex`) est présente dans l'URL.                                     |
-| `Test that an email was received`                         | Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`string`, `number`, `regex`) sont présentes dans l'objet ou le corps de cet e-mail. Cette assertion a recours aux [variables d'e-mail][9]. |
+| `Test that an email was received`                         | Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`string`, `number`, `regex`) sont présentes dans l'objet ou le corps. Cette assertion a recours aux [variables d'e-mail][10]. |
 
 La section *Advanced options* des assertions vous permet de spécifier un localisateur personnalisé, à savoir une expression Xpath ou une classe/un ID CSS à utiliser pour la sélection d'un élément HTML quelconque. Il peut par exemple s'agir d'un `div`, `h1` ou `.hero-body`. Une fois l'élément défini, sélectionnez **Test** pour mettre en évidence l'élément dans l'enregistrement sur la droite. Si le localisateur défini échoue, le résultat du test est par défaut un échec. Vous pouvez choisir de repasser sur l'algorithme habituel des tests Browser en décochant la case `If user specified locator fails, fail test`.
 
@@ -94,7 +100,7 @@ Utilisez l'action Navigation pour :
 
 * Actualiser la page actuelle du scénario.
 * Suivre un lien spécifique. Dans la zone « Enter link URL », vous devez ajouter le préfixe `http` or `https` devant vos URL.
-* Accéder à un e-mail et cliquer sur un lien. Cette étape vous permet d'accéder à votre boîte de réception Synthetics une fois la [variable d'e-mail][9] créée. Choisissez l'e-mail de votre choix et cliquez sur le lien sur lequel le test Browser doit cliquer.
+* Accéder à un e-mail et cliquer sur un lien. Cette étape vous permet d'accéder à votre boîte de réception Synthetics une fois la [variable d'e-mail][10] créée. Choisissez l'e-mail de votre choix et cliquez sur le lien sur lequel le test Browser doit cliquer.
 
 ### Hover
 
@@ -111,7 +117,7 @@ Après avoir sélectionné l'action Hover, cliquez sur l'élément que vous souh
 Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur parmi les propositions suivantes :
 
 * **Element** : créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
-* **Global Variable** : stockez et utilisez des global variables à l'aide des [paramètres Synthetics][10].
+* **Global Variable** : stockez et utilisez des variables globales à l'aide des [paramètres Synthetics][11]).
 * **Email** : générez une adresse e-mail Synthetics aléatoire pouvant être utilisée durant les différentes étapes de votre test pour vérifier si un e-mail a bien été envoyé ou pour effectuer des actions à partir de son contenu (p. ex., cliquer sur un lien de confirmation).
 * **Pattern** :
 
@@ -183,9 +189,10 @@ Les erreurs les plus courantes comprennent :
 [2]: /fr/api/?lang=bash#get-available-locations
 [3]: /fr/synthetics/private_locations
 [4]: /fr/help
-[5]: http://daringfireball.net/projects/markdown/syntax
-[6]: /fr/integrations/#cat-notification
-[7]: https://www.google.com/chrome
-[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[9]: /fr/synthetics/browser_tests/#create-a-variable
-[10]: /fr/synthetics/settings/#secure-credential
+[5]: /fr/synthetics/settings#global-variables
+[6]: http://daringfireball.net/projects/markdown/syntax
+[7]: /fr/integrations/#cat-notification
+[8]: https://www.google.com/chrome
+[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[10]: /fr/synthetics/browser_tests/#create-a-variable
+[11]: /fr/synthetics/settings/#secure-credential

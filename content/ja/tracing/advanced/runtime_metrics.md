@@ -1,5 +1,5 @@
 ---
-title: ランタイム・メトリクス
+title: ランタイムメトリクス
 kind: documentation
 further_reading:
   - link: tracing/advanced/connect_logs_and_traces
@@ -12,7 +12,7 @@ further_reading:
     tags: トレースの加工
     text: アプリケーション全体に Opentracing を実装します。
   - link: tracing/visualization/
-    tag: APMのUIを利用する
+    tag: APM の UI を利用する
     text: サービス、リソース、トレースの詳細
 ---
 トレースクライアントでランタイムメトリクス収集を有効にすると、アプリケーションのパフォーマンスに関する詳細情報を得られます。ランタイムメトリクスは、[サービス][1]のコンテクストで表示することが可能で、要求された時点でのトレースビューに関連付けられ、プラットフォームのあらゆる場所で使用できます。

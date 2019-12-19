@@ -18,7 +18,7 @@ further_reading:
     tag: Documentation
     text: 高度な使用方法
 ---
-## インストールと概要
+## インストールと利用開始
 
 <div class="alert alert-info">Datadog アカウントをお持ちの場合、アプリ内ガイドで<a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=php" target=_blank>ホストベース</a>の設定や<a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=php" target=_blank>コンテナベース</a>の設定に関する詳細な手順をご確認いただけます。</div>
 
@@ -61,7 +61,7 @@ PHP (PHP-FPM または Apache SAPI) を再起動し、アプリケーション�
 
 トレースは自動的にインストルメントされます。拡張機能がインストールされると、**ddtrace**はアプリケーションをトレースし、Agent へトレースを送ります。
 
-Datadog が公式にはサポートしていない Web フレームワークでも、手動でインストルメントしなくていい場合もあります。Datadog は一般的な Web リクエストを記録し、その一般的なトレースを作成します。ただし、サポートされるフレームワークの場合、Datadog はより適切なメタデータを設定できるため、サービスを円滑に進めることができます。
+Datadog が公式にはサポートしていない Web フレームワークでも、手動でインスツルメントしなくていい場合もあります。Datadog は一般的な Web リクエストを記録し、その一般的なトレースを作成します。ただし、サポートされるフレームワークの場合、Datadog はより適切なメタデータを設定できるため、サービスを円滑に進めることができます。
 
 自動インストルメンテーションは、特定の関数やメソッドをトレースするためにラップするよう PHP のランタイムを変更しことで実行されます。PHP トレーサーは、[複数のライブラリ](#ライブラリの互換性)の自動インストルメンテーションをサポートします。
 
@@ -74,7 +74,7 @@ Datadog が公式にはサポートしていない Web フレームワークで�
 
 **注**: アプリケーションが Composer や `spl_autoload_register()` で登録されたオートローダーを使用しない場合、環境変数を `DD_TRACE_NO_AUTOLOADER=true` と設定し、自動インストルメンテーションを有効にします。
 
-## エージェントホスト名の変更
+## Agent ホスト名の変更
 
 アプリケーションレベルのトレーサーを設定し、以下のカスタム Agent ホスト名にトレースを送信します。
 
@@ -100,14 +100,14 @@ PHP APM は以下の SAPI に対応しています。
 | SAPI           | サポートの種類    |
 |:---------------|:----------------|
 | apache2handler | 完全対応 |
-| cli            | Fully Supported |
+| cli            | 完全対応 |
 | fpm            | 完全対応 |
 
 ### インテグレーション
 
 #### Web フレームワークの互換性
 
-以下のリストにない Web フレームワークでも、UI で Web リクエストのトレースを確認できます。ただし、特定の Web フレームワークに固有のメタデータや Span が表示されない場合もあります。
+以下のリストにない Web フレームワークでも、UI で Web リクエストのトレースを確認できます。ただし、特定の Web フレームワークに固有のメタデータやスパンが表示されない場合もあります。
 
 | モジュール         | バージョン      | サポートの種類    |
 |:---------------|:--------------|:----------------|
@@ -210,7 +210,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | 環境変数                              | デフォルト     | 注                                                                                                              |
 |-------------------------------------------|-------------|-------------------------------------------------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                           | `localhost` | Agent のホスト名                                                                                               |
-| `DD_AUTOFINISH_SPANS`                     | `false`     | トレーサーがフラッシュされた時点でSpanを自動終了させるかどうか                                               |
+| `DD_AUTOFINISH_SPANS`                     | `false`     | トレーサーがフラッシュされた時点でスパンを自動終了させるかどうか                                               |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | 分散型トレーシングの有効にするかどうか                                                                             |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | 無効な拡張機能一覧（CSV 形式）。例、`curl,mysqli`                                                              |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | 優先度付きサンプリングを有効にするかどうか                                                                               |
@@ -222,16 +222,16 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | IPC ベースの構成可能なサーキットブレーカーの連続エラー最大数                                                   |
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | Agent ポート番号                                                                                             |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | Agent リクエストの転送タイムアウト（ミリ秒）                                                              |
-| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Web インテグレーションで関連する Span に対するApp Analytics を有効にするためのフラグ                                               |
+| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Web インテグレーションで関連するスパンに対するApp Analytics を有効にするためのフラグ                                               |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | CLI から PHP スクリプトのトレースを有効にする                                                                        |
 | `DD_TRACE_DEBUG`                          | `false`     | トレーサーの[デバッグモード](#カスタム URL からリソースへのマッピング)を有効にする                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | トレーサーをグローバルに有効にする                                                                                        |
-| `DD_TRACE_GLOBAL_TAGS`                    | ``          | すべての Span に設定されるタグ。例、`key1:value1,key2:value2`                                                      |
+| `DD_TRACE_GLOBAL_TAGS`                    | ``          | すべてのスパンに設定されるタグ。例、`key1:value1,key2:value2`                                                      |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | オートローダーを使用しないアプリケーションには、`true` に設定して自動インストルメンテーションを有効にします。                       |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | ルートスパンでホスト名レポートを有効にする                                                                        |
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | URLからリソース名のマッピング規則の CSV：例、`/foo/*,/bar/$*/baz`。[「カスタム URL からリソースへのマッピング」を参照してください](#カスタム URL からリソースへのマッピング) |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | リソース名として URL を有効にします。[「リソース名を正規化された URI にマッピング」を参照してください](#リソース名を正規化された URI にマッピング)                                  |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | 特定のインテグレーションで関連する Span のApp Analytics を有効にするためのフラグ                                         |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | 特定のインテグレーションで関連するスパンの App Analytics を有効にするためのフラグ                                         |
 
 #### リソース名を正規化された URI にマッピング
 
