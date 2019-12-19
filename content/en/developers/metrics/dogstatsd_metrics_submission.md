@@ -815,8 +815,6 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 ### DISTRIBUTION
 
-Distribution metrics are in BETA. [Contact Datadog support][9] to enable the feature for your account.
-
 | Method                                                | Datadog Storage type                                                                                          |
 |-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
