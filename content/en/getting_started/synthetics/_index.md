@@ -28,7 +28,7 @@ In this example, a browser test is configured to map a user's journey from addin
 2. In the top right corner, click the **New Test** button. 
 3. Select **Browser Test**.
 4. Define the configuration of your browser test:
-    - Add a URL. In this example the URL is https://www.shopist.io/.
+    - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use https://www.shopist.io/ as a test web application.”
     - Name the test.
     - Set tags to help organize tests.
     - Choose devices and locations for testing. In this example, the test is only run on **Large Laptop** & on **English speaking countries**.
