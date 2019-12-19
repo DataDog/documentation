@@ -489,7 +489,7 @@ main:
     parent: "graphing"
     weight: 5
 
-  - name: "Event Stream"
+  - name: "Events"
     url: "graphing/event_stream/"
     parent: "graphing"
     weight: 6
