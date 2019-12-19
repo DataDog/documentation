@@ -54,7 +54,7 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
-    * For the Datadog US site: `api.datadoghq.com/api/` for images version 0.1.5 and below. `intake.synthetics.datadoghq.com` for images version 0.1.6 and above. 
+    * For the Datadog US site: for version 0.1.6+ use `intake.synthetics.datadoghq.com` ( `api.datadoghq.com/api/` for versions <0.1.5).
     * For the Datadog EU site: `api.datadoghq.eu/api/`.
 
     Check if the endpoint corresponding to your Datadog `site` is available from the host runing the worker:
