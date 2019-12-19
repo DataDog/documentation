@@ -25,4 +25,4 @@ datadog:
 algolia:
   appId: EOIG7V0A2O
   apiKey: c7ec32b3838892b10610af30d06a4e42
-  indexName: docsearch_docs_prod
+  indexName: docsearch_docs_preview
