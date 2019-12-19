@@ -30,7 +30,7 @@ In this example, a browser test is configured to map a user's journey from addin
 4. Define the configuration of your browser test:
     - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use https://www.shopist.io/ as a test web application.”
     - Name the test.
-    - Set tags to help organize tests.
+    - You can set tags such as `prod` and `shopist` to your test. It will help to keep things organized and allow you to quickly find the tests you're interested in when on the homepage.
     - Choose devices and locations for testing. In this example, the test is only run on **Large Laptop** & on **English speaking countries**.
     - Specify a test frequency.
     - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
