@@ -59,7 +59,7 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
     Check if the endpoint corresponding to your Datadog `site` is available from the host runing the worker:
 
-    * For the Datadog US site: `curl https://api.datadoghq.com` or `curl intake.synthetics.datadoghq.com` depending on the version of the image you are using.
+    * For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5) .
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
     
 **Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
