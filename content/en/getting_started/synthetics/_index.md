@@ -35,8 +35,12 @@ In this example, a browser test is configured to map a user's journey from addin
     - Specify a test frequency.
     - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
         `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
+    - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. 
+      - If you want to avoid being alerted on network blips that might happen on isolated locations, you can for instance set:
+        `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
+      - If you want to be sure that a test execution is only considered a failure after 2 failed test runs, specify how many times you want your test to be re-run before being actually considered a failure:
         `Retry 1 time before location is marked as failed`
-    - Write an alert message and specify who to notify when the alert is triggered.
+    - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][10], such as Slack, Pagerduty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test" responsive="true" style="width:90%;">}}
@@ -57,13 +61,13 @@ For example, to record test steps that map a user's journey from adding an item 
 
 {{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps" responsive="true" style="width:90%;">}}
 
-**Note**: the website used in this example regularly throws an error causing it to intentionally fail. A notification email will be triggered when the test failure occurs.
+**Note**: the website used in this example regularly throws an error causing it to intentionally fail. If you set your email address in the message box, you should consequently receive a notification email when the test failure occurs.
 
 #### Test results
 
 A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces.
 
-In this example, the browser test homepage shows that a recent test failed and an alert was received via email. Click on the failed test under **Test Results** or in the email. The failed test step is highlighted with a red `x`. Click the failed test to begin troubleshooting. 
+Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. The failed test step in Test Results is highlighted with a red `x`. Click the failed test to begin troubleshooting. 
 
 The **Errors & Warnings** tab provides a list of javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
 
@@ -85,7 +89,7 @@ In this example, an API test is created to ensure your website is constantly up 
 2. In the top right corner, click the **New Test** button. 
 3. Select **API test**.
 4. Define the configuration of your API test:
-    - Add a start URL.
+    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use https://www.shopist.io/ which is a test web application.”
     - Select **Advance Options** to use custom request headers, authentication credentials, body content, or cookies.
     - Add one or two tags, like `prod`, to help organize and filter tests.
     - Select locations for testing.
@@ -116,13 +120,13 @@ Once alert conditions are set, create a message for the alert and specify what s
 
 ### Test results
 
-An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces. 
+An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results.
 
 To troubleshoot a failed test, scroll to the Test Results section and click on the **Test Results** tab. Click on the failed test, labeled as `Alert`, to view detailed test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to resolve the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure" responsive="true" style="width:90%;">}}
 
-Datadog also has an [APM integration with Synthetics][6] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run. To link browser test results with APM, whitelist the URLs you want the APM integration headers added to. Use * for wildcards: `https://*.datadoghq.com/*`
+Datadog also has an [APM integration with Synthetics][6] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
 
 Alerts triggered with the APM integration populate under **Test Results**. Click the result link given to review test details and traces.
 
@@ -168,8 +172,8 @@ To configure a private location:
     2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
     2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
     ```
-
-6. You are now able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][7]. Create an API test.
+You are now able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][7]. This is specifically useful to monitor any internal endpoints you might have.
+6. Create an API test on any endpoint (including internal) you're interested in monitoring. If you don't know where to start you can use `https://www.shopist.io/`, which is a test web application.
 7. Select the new private location under **Private Locations**.
 8. Click the **Save Test** button.
 
