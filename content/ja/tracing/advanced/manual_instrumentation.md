@@ -13,8 +13,8 @@ further_reading:
     tags: トレースの加工
     text: アプリケーション全体に Opentracing を実装します。
   - link: tracing/visualization/
-    tag: APMのUIを利用する
-    text: サービス、リソース、トレースを調査する。
+    tag: APM の UI を利用する
+    text: サービス、リソース、トレースの詳細
 ---
 手動インスツルメンテーションにより、Datadogへ送信するためのトレースをプログラムで作成できます。これは、自動インスツルメンテーションでキャプチャできない社内コードのトレースに役立ちます。アプリケーションをインスツルメントする前に、Datadog の [APM 用語][1] を確認し、Datadog APM の基本理念に慣れ親しんでください。
 
