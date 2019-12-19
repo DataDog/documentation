@@ -7674,6 +7674,12 @@
 						"method": "POST",
 						"header": [
 							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
@@ -7685,7 +7691,7 @@
 							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/{{datadog_api_key}}?ddsource=postman&service=postman&hostname=<HOSTNAME>",
+							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/?ddsource=postman&service=postman&hostname=<HOSTNAME>",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -7696,7 +7702,7 @@
 							"path": [
 								"v1",
 								"input",
-								"{{datadog_api_key}}"
+								""
 							],
 							"query": [
 								{
@@ -10985,7 +10991,7 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nGet hourly usage for Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
+						"description": "### Overview\n\nGet hourly usage For Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
 					},
 					"response": []
 				},
