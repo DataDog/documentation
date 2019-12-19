@@ -63,7 +63,7 @@ stop                      stop the gulp/hugo server.
 
 ### A note about markdown
 
-This site uses Blackfriday for markdown. To learn about the syntax, [see this site][9].
+This site uses Goldmark for markdown which is compliant with [CommonMark 0.29](https://spec.commonmark.org/0.29/)
 
 If you include ANY Markdown in a file, give it an .md extension.
 
