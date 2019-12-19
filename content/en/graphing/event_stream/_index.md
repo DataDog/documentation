@@ -65,7 +65,7 @@ To combine multiple terms into a complex query, use the following Boolean operat
 | `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
 
 
-**Note**: Some of the advanced query language features like boolean logic work only in the event stream page, and are not available in graph tiles or dashboard widgets.
+**Note**: Some of the advanced query language features like Boolean logic work only in the event stream page, and are not available in graph tiles or dashboard widgets.
 
 Combine prefixes to construct more complex searches. For example, to find all open `chef` or `nagios` errors that mention `cassandra`, use:
 
@@ -92,7 +92,7 @@ Datadog supports `@notifications` in the event stream, for example:
 | `@john`                                 | Notifies the user named `john`.                                                                  |
 | `@test@example.com`                     | Sends an email to `test@example.com`.                                                            |
 | `@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` | Posts the event or graph to the specified Slack channel.                                         |
-| `@webhook`                              | Alerts or triggers the Webhook. Check out our [blogpost on Webhooks][3].                         |
+| `@webhook`                              | Alerts or triggers the webhook. See the [blog post on webhooks][3].                         |
 | `@pagerduty`                            | Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`. |
 
 ## Further Reading
