@@ -51,6 +51,7 @@ Then add this configuration block to your `journald.d/conf.yaml` file to start c
 ```
 logs:
   - type: journald
+    container_mode: true
 ```
 
 Finally, [restart the agent][2].
@@ -93,6 +94,14 @@ This works automatically when the Agent is running from the host. If you are usi
 - `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
 
 Finally, [restart the agent][2].
+
+It's recommended to always activate the `container_mode` option, it will allow the agent to automatically set source/origin of your logs to the short image name instead of simply `docker` when logs are coming from a container.
+
+```
+logs:
+  - type: journald
+    container_mode: true
+```
 
 ## Troubleshooting
 
