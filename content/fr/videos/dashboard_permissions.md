@@ -3,7 +3,7 @@ title: Matt's Quick Tips - Dashboard Permissions
 kind: video
 language: en
 wistiaid: e3xlxsjkwy
-videos:
+video-categories:
   - Introduction
   - Dashboards
   - Permissions

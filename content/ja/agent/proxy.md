@@ -27,7 +27,7 @@ further_reading:
 Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent 構成ファイルを編集します。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Agent `datadog.yaml` 構成ファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。
 Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたリクエストでも、プロキシサーバーで SSL をアクティブにできます。`datadog.yaml` ファイルの構成例を以下にいくつか挙げます。
@@ -123,7 +123,7 @@ proxy_password: my_password
 `agent ---> haproxy ---> Datadog`
 
 ### HAProxy によるメトリクスのプロキシ転送
-#### HAProxy 構成
+#### HAProxy コンフィギュレーション
 
 Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
 
@@ -131,7 +131,7 @@ Datadog への接続があるホストに HAProxy をインストールする必
 {{% tab "Datadog US site" %}}
 
 ```
-# 基本的な構成
+# 基本的なコンフィギュレーション
 global
     log 127.0.0.1 local0
     maxconn 4096
@@ -219,13 +219,13 @@ backend datadog-logs
         * `yum install ca-certificates` (CentOS、Redhat)
 CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
-HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
 ```
-# 基本的な構成
+# 基本的なコンフィギュレーション
 global
     log 127.0.0.1 local0
     maxconn 4096
@@ -315,7 +315,7 @@ backend datadog-logs
 
 CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
-HAProxy 構成が完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -323,7 +323,7 @@ HAProxy 構成が完成したら、リロードするか、HAProxy を再起動�
 #### Datadog Agent 構成
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 `dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
@@ -368,7 +368,7 @@ endpoint = https://haproxy.example.com:3835
 endpoint = https://haproxy.example.com:3836
 ```
 
-Supervisor 構成を編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor 構成は次の場所にあります:
+Supervisor コンフィギュレーションを編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor コンフィギュレーションは次の場所にあります:
 
 * Debian ベースのシステムの場合、`/etc/dd-agent/supervisor_ddagent.conf`
 * Red Hat ベースのシステムの場合、`/etc/dd-agent/supervisor.conf`
@@ -405,7 +405,7 @@ skip_ssl_validation: yes
 `agent ---> nginx ---> Datadog`
 
 ### NGINX によるプロキシ転送
-#### NGINX 構成
+#### NGINX コンフィギュレーション
 
 この例 `nginx.conf` を使用して、Datadog インテークにログをプロキシ転送できます。これは、TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントの間で内部的なプレーンテキストログを暗号化します。
 
