@@ -4,16 +4,19 @@
     {
       'name': 'i-deadbeef',
       'up': true,
-      'is_muted': true,
-      'mute_timeout': 1560010000,
+      'is_muted': false,
       'last_reported_time': 1560000000,
       'apps': [
         'agent'
       ],
-      'tags_by_source': {
-        'Datadog': [
-          'host:i-deadbeef'
+      'tags': {
+        'role:database': [
+          'test.example.com.host'
         ],
+        'env:test': [
+            'test.metric.host'
+        ]
+      },
         'Amazon Web Services': [
           'account:staging'
         ]
