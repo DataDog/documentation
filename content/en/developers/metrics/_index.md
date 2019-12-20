@@ -24,9 +24,9 @@ If a metric is not submitted from one of the [350+ Datadog integrations][1] it's
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][2] or through a [custom Agent Check][3] is a custom metric.
 
-**Note**: User with the Datadog Admin roles can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][4]. Learn more about [how custom metrics are counted][5].
+**Note**: Users with the Datadog Admin roles can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][4]. Learn more about [how custom metrics are counted][5].
 
-## Custom Metric properties
+## Custom metrics properties
 
 A Datadog custom metric has the properties below. Refer to the [Metrics Introduction documentation][6] to learn how to graph metrics within Datadog.
 
@@ -34,7 +34,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                               |
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                 |
-| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
 | `<TAGS>`         | The set of tags associated with your metric.                                                                                                              |
 | `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][7].                                                                                          |
 | `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][8] or [COUNT][9], it defines the corresponding [interval][10].                                                    |
@@ -43,7 +43,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 
 The following custom metric naming convention must be followed:
 
-* Metric names must start with a letter
+* Metric names must start with a letter.
 * Metric names must only contain ASCII alphanumerics, underscores, and periods.
   * Other characters, including spaces, are converted to underscores.
   * Unicode is _not_ supported.
@@ -60,7 +60,7 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][11] to submit your custom metrics
+You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][11] to submit your custom metrics
 
 **Note**: There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][5].
 
