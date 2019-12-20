@@ -65,16 +65,42 @@ main:
     parent: "getting_started_collect_traces"
     weight: 501
 
+  ## GETTING STARTED - API
+
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
     weight: 6
 
+  ## GETTING STARTED - Traces
+
+  - name: "Synthetics"
+    identifier: "getting_started_synthetics"
+    url: "getting_started/synthetics/"
+    parent: "getting_started"
+    weight: 7opl
+  - name: "Private Location"
+    identifier: "getting_started_private_location"
+    url: "getting_started/synthetics/private_location"
+    parent: "getting_started_synthetics"
+    weight: 701
+  - name: "Browser Test"
+    identifier: "getting_started_browser_test"
+    url: "getting_started/synthetics/browser_test"
+    parent: "getting_started_synthetics"
+    weight: 702
+  - name: "API Test"
+    identifier: "getting_started_api_test"
+    url: "getting_started/synthetics/api_test"
+    parent: "getting_started_synthetics"
+    weight: 703
+
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 7
+    weight: 8
+
 
 #############
 ## TAGGING ##
