@@ -18,7 +18,7 @@ Find below the different initialization options available with the [Datadog Brow
 
 By default no sampling is applied upon the amount of collected sessions. To apply a relative sampling (in percent) to the amount of session collected use the `sampleRate` parameter when initializing RUM. The following example would collect only 90% of all sessions on a given RUM application:
 
-```js
+```javascript
 window.DD_RUM && window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
@@ -34,7 +34,7 @@ window.DD_RUM && window.DD_RUM.init({
 
 Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM events collected from your application with the `addRumGlobalContext` API:
 
-```js
+```javascript
 // add global metadata attribute--one attribute can be added at a time
 window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 ```
@@ -45,7 +45,7 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 Once Real User Monitoring (RUM) initialized you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
 
-```js
+```javascript
 // Entirely replace the default context for all your views
 window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
 ```
@@ -56,14 +56,14 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 
 Once Real User Monitoring (RUM) initialized, generate User Actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction` API:
 
-```js
+```javascript
 // Give it a name and an object containing all the data
 window.DD_RUM && DD_RUM.addUserAction("<NAME>","<JSON_OBJECT>");
 ```
 
 For instance, to collect the amount of items within a cart, what they are and how much the cart is worth overall you would do something like this:
 
-```js
+```javascript
 window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
             "cart": {
                 "amount": 42,

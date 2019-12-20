@@ -2,7 +2,7 @@
 title: RUM Resources
 kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
+- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Real User Monitoring"
 - link: "/real_user_monitoring/dashboards/"

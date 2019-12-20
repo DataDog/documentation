@@ -29,11 +29,11 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="real_user_monitoring/rum_explorer/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
 
 ## Facets search
 
-To search on a specific attribute, first [add it as a facet](#facets-measures) and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
@@ -70,3 +70,4 @@ You can search for numerical attribute within a specific range. For instance, re
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /real_user_monitoring/explorer/#setup---facets--measures
