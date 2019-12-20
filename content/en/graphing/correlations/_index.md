@@ -17,10 +17,6 @@ further_reading:
   text: "Watchdog"
 ---
 
-<div class="alert alert-warning">
-Correlations is in public beta. Request access by contacting <a href="/help">Datadog Support</a>.
-</div>
-
 ## Overview
 
 Metric Correlations can help you find potential root causes for an observed issue by searching for other metrics that exhibited irregular behavior around the same time. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
