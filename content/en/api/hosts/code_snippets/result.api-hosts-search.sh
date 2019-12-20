@@ -24,6 +24,13 @@
         "iowait": 3.2,
         "cpu": 99.0
       },
+      "maintenance": [
+        {
+          "code": "instance-stop",
+          "description": "The instance is running on degraded hardware",
+          "not_before": "2020-01-03 00:00:00" 
+        }
+      ],
       "sources": [
         "aws",
         "agent"
