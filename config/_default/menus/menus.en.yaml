@@ -505,22 +505,26 @@ main:
     parent: "graphing"
     identifier: "graphing_infrastructure"
     weight: 7
-  - name: "Container Map"
-    url: "graphing/infrastructure/containermap/"
+  - name: "Infrastructure List"
+    url: "graphing/infrastructure/list/"
     parent: "graphing_infrastructure"
     weight: 701
   - name: "Host Map"
     url: "graphing/infrastructure/hostmap/"
     parent: "graphing_infrastructure"
     weight: 702
-  - name: "Live Containers"
-    url: "graphing/infrastructure/livecontainers/"
+  - name: "Container Map"
+    url: "graphing/infrastructure/containermap/"
     parent: "graphing_infrastructure"
     weight: 703
   - name: "Live Processes"
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
     weight: 704
+  - name: "Live Containers"
+    url: "graphing/infrastructure/livecontainers/"
+    parent: "graphing_infrastructure"
+    weight: 705
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
