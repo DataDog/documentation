@@ -20,15 +20,15 @@ further_reading:
 
 ## Overview
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric<sup>(1)</sup>.
+If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric<sup>(1)</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
 
-A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][2] or through a [custom Agent Check][3] is a custom metric. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
+A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][2] or through a [custom Agent Check][3] is a custom metric.
 
 **Note**: User with the Datadog Admin roles can see the total custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][4]. Learn more about [how custom metrics are counted][5].
 
 ## Custom Metric properties
 
-A Datadog custom metric is defined by the properties below. Refer to the [Metrics Introduction documentation][6] to learn how to graph metrics within Datadog.
+A Datadog custom metric has the properties below. Refer to the [Metrics Introduction documentation][6] to learn how to graph metrics within Datadog.
 
 | Property         | Description                                                                                                                                               |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|

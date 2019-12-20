@@ -5,43 +5,15 @@ aliases:
   - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
 
-## Overview
-
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
-
-## Allocation
-
-You are allocated a certain number of custom metrics based on your Datadog pricing plan:
-
-* Pro: 100 custom metrics per host.
-* Enterprise: 200 custom metrics per host.
-
-These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
-
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics" responsive="true" >}}
-
-The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][3] or your [Customer Success][4] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
-
-## Tracking Custom metrics
-
-Administrative users (those with [Datadog Admin roles][5]) can see the total custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
-
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][8]; it’s listed as “Currently reporting # distinct metrics…” as shown below:
-
-{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
-
-## Counting Custom Metrics
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**:
 
-* Reporting the same metric name on multiple hosts results in multiple custom metrics.
-* Adding tags on a metric can change the number of custom metrics (number of unique tag value combinations) associated with that particular metric. See the [Effect of Adding Tags](#effect-of-adding-tags) section.
-* Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
+## Counting Custom Metrics
 
-  *  `metric_name{env:dev, service:foo}`
-  *  `metric_name{service:foo, env:dev}`
+Below are examples of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submission type][3].
 
-Below are examples of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submission type][9]. Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measure the latency of your endpoint requests. You’re submitting this metric with two tag keys:
+Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measure the latency of your endpoint requests. You’re submitting this metric with two tag keys:
 
 * `endpoint`  that has the value `endpoint:X` or `endpoint:Y`.
 * `status` that has the value `status:200` or `status:400`.
@@ -61,7 +33,6 @@ The number of unique tag value combinations submitted for a GAUGE metric with th
 * `host:B`, `endpoint:X`, `status:200`
 * `host:B`, `endpoint:X`, `status:400`
 * `host:B`, `endpoint:Y`, `status:200`
-
 
 This results in `request.Latency` reporting **4 distinct custom metrics**.
 
@@ -90,6 +61,11 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 
 * `temperature:{country:USA, state:Florida, city:Orlando}`
 * `temperature{country:USA, state:Florida, city:Miami}`
+
+**Note**: Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
+
+*  `temperature{country:USA, state:Florida, city:Miami}`
+*  `temperature{state:Florida, city:Miami, country:USA}`
 
 [1]: /developers/metrics/types/?tab=count#metric-submission-types
 [2]: /developers/metrics/types/?tab=rate#metric-submission-types
@@ -163,6 +139,27 @@ This results in `request.Latency` with percentile aggregation enabled reporting 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Tracking Custom metrics
+
+Administrative users (those with [Datadog Admin roles][4]) can see the total custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]; it’s listed as “Currently reporting # distinct metrics…” as shown below:
+
+{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
+
+## Allocation
+
+You are allocated a certain number of custom metrics based on your Datadog pricing plan:
+
+* Pro: 100 custom metrics per host.
+* Enterprise: 200 custom metrics per host.
+
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
+
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics" responsive="true" >}}
+
+The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][8] or your [Customer Success Manager][9] to discuss custom metrics for your account or to purchase an additional custom metrics package.
+
 ## Standard integrations
 
 The following standard integrations can potentially emit custom metrics.
@@ -177,17 +174,17 @@ The following standard integrations can potentially emit custom metrics.
 
 For technical questions, contact [Datadog support][25].
 
-For billing questions, contact your [Customer Success][4] Manager.
+For billing questions, contact your [Customer Success][9] Manager.
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
-[3]: mailto:sales@datadoghq.com
-[4]: mailto:success@datadoghq.com
-[5]: /account_management/team
-[6]: https://app.datadoghq.com/account/usage/hourly
-[7]: /account_management/billing/usage_details
-[8]: https://app.datadoghq.com/metric/summary
-[9]: /developers/metrics/types/#metric-submission-types
+[3]: /developers/metrics/types/#metric-submission-types
+[4]: /account_management/team
+[5]: https://app.datadoghq.com/account/usage/hourly
+[6]: /account_management/billing/usage_details
+[7]: https://app.datadoghq.com/metric/summary
+[8]: mailto:sales@datadoghq.com
+[9]: mailto:success@datadoghq.com
 [10]: /integrations/activemq/#activemq-xml-integration
 [11]: /integrations/go_expvar
 [12]: /integrations/agent_metrics
