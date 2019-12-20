@@ -1,7 +1,7 @@
 ---
 title: Edit a Service Level Objective
 type: apicode
-order: 30.03
+order: 30.04
 external_redirect: /api/#edit-a-service-level-objective
 ---
 
