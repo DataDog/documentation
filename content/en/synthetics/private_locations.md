@@ -84,10 +84,13 @@ The `synthetics-private-location-worker` comes with a number of options that can
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dnsServer`              | Array of Strings | `["8.8.8.8","1.1.1.1"]`                              | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                  |
 | `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                       |
-| `blacklistedRange`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)                                                                 |
-| `whitelistedRange`       | Array of Strings | `none`                                               | Grant access to IP ranges (has precedence over `--blacklistedRange`)                                                                                                |
+| `whitelistedRange.4`       | Array of Strings | `none`                                               | Grant access to IPv4 IP ranges (e.g. `--whitelistedRange.4="10.0.0.0/8"` or `--whitelistedRange.4={"10.0.0.0/8","0.0.0.0/8"}`, has precedence over `--blacklistedRange`)                                                                                                |
+| `whitelistedRange.6`       | Array of Strings | `none`                                               | Grant access to IPv6 IP ranges (e.g. `--whitelistedRange.6="::/128"` or `--whitelistedRange.6={"::/128","64:ff9b::/96"}`, has precedence over `--blacklistedRange`)                                                                                                |
+| `blacklistedRange.4`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IPv4 IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                 |
+| `blacklistedRange.6`       | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IPv6 IP ranges (e.g. `--blacklistedRange.6="::1/128"`)                                                                 |
 | `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                    |
 | `proxy`                  | String           | `none`                                               | Proxy URL                                                                                                                                                           |
+| `proxyIgnoreSSLErrors`                  | Boolean           | `none`                                               | Disregard SSL errors when using a proxy.                                                                                                                                                           |
 | `logFormat`              | String           | `pretty`                                             | Format log output  [choices: `"pretty"`, `"json"`]. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog. |
 | `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                       |
 | `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                   |
@@ -122,6 +125,7 @@ The test configurations are encrypted asymmetrically. The private key is used to
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /synthetics/api_tests
 [2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
