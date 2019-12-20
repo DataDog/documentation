@@ -1148,38 +1148,13 @@ main:
     identifier: "rum_advanced"
     weight: 101
 
-  ## RUM - Data Collected
+  ## RUM - Dashboards
 
-  - name: "Data Collected"
-    url: "real_user_monitoring/data_collected/"
+  - name: "Dashboards"
+    url: "real_user_monitoring/dashboards/"
     parent: "rum"
-    identifier: "rum_data_collected"
+    identifier: "rum_dashboards"
     weight: 2
-  - name: "View"
-    url: "real_user_monitoring/data_collected/view"
-    parent: "rum_data_collected"
-    identifier: "rum_data_collected_views"
-    weight: 201
-  - name: "Resource"
-    url: "real_user_monitoring/data_collected/resource"
-    parent: "rum_data_collected"
-    identifier: "rum_data_collected_resource"
-    weight: 202
-  - name: "Long Task"
-    url: "real_user_monitoring/data_collected/long_task"
-    parent: "rum_data_collected"
-    identifier: "rum_data_collected_long_task"
-    weight: 203
-  - name: "Error"
-    url: "real_user_monitoring/data_collected/error"
-    parent: "rum_data_collected"
-    identifier: "rum_data_collected_error"
-    weight: 204
-  - name: "User Action"
-    url: "real_user_monitoring/data_collected/user_action"
-    parent: "rum_data_collected"
-    identifier: "rum_data_collected_user_action"
-    weight: 205
 
   ## RUM - Explorer
 
@@ -1199,6 +1174,38 @@ main:
     identifier: "rum_explorer_analytics"
     weight: 302
 
+  ## RUM - Data Collected
+
+  - name: "Data Collected"
+    url: "real_user_monitoring/data_collected/"
+    parent: "rum"
+    identifier: "rum_data_collected"
+    weight: 4
+  - name: "View"
+    url: "real_user_monitoring/data_collected/view"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_views"
+    weight: 401
+  - name: "Resource"
+    url: "real_user_monitoring/data_collected/resource"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_resource"
+    weight: 402
+  - name: "Long Task"
+    url: "real_user_monitoring/data_collected/long_task"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_long_task"
+    weight: 403
+  - name: "Error"
+    url: "real_user_monitoring/data_collected/error"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_error"
+    weight: 404
+  - name: "User Action"
+    url: "real_user_monitoring/data_collected/user_action"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_user_action"
+    weight: 405
 
 ####################################
 ## Network Performance Monitoring ##

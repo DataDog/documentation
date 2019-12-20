@@ -3,6 +3,13 @@ title: RUM Explorer
 kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
+further_reading:
+- link: "/real_user_monitoring/explorer/search"
+  tag: "Documentation"
+  text: "Explore your views within Datadog"
+- link: "/real_user_monitoring/rum_explorer"
+  tag: "Documentation"
+  text: "Explore your views within Datadog"
 ---
 
 The Real User Monitoring (RUM) Explorer allow you to explore all your views collected from your different applications.
@@ -71,3 +78,7 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 [1]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

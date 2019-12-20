@@ -5,12 +5,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"
   text: "Real User Monitoring"
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/dashboards/"
+  tag: "Documentation"
+  text: "Visualize your RUM data in out of the box Dashboards"
+- link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_analytics"
-  tag: "Documentation"
-  text: "Build analytics upon your events"
 - link: "/logs/processing/attributes_naming_convention/"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
@@ -23,7 +23,6 @@ Detailed network timing data regarding the loading of an application’s resourc
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics" responsive="true" >}}
 
 ## Measure Collected
-
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|

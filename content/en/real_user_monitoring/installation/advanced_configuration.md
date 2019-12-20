@@ -12,6 +12,8 @@ further_reading:
 
 ## Initialization
 
+Find below the different initialization options available with the [Datadog Browser SDK][1].
+
 ### Sampling
 
 By default no sampling is applied upon the amount of collected sessions. To apply a relative sampling (in percent) to the amount of session collected use the `sampleRate` parameter when initializing RUM. The following example would collect only 90% of all sessions on a given RUM application:
@@ -37,7 +39,7 @@ Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM ev
 window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 ```
 
-**Note**: Follow the [Datadog naming convention][1] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
 ### Replace default context
 
@@ -48,7 +50,7 @@ Once Real User Monitoring (RUM) initialized you can replace the default context 
 window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
 ```
 
-**Note**: Follow the [Datadog naming convention][1] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
 ### Custom User action
 
@@ -74,4 +76,5 @@ window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#user-related-attributes]
+[1]: https://github.com/DataDog/browser-sdk
+[2]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#user-related-attributes]

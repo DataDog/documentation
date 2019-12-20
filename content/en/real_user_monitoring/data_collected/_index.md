@@ -5,10 +5,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"
   text: "Real User Monitoring"
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/explorer"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_analytics"
+- link: "/real_user_monitoring/analytics"
   tag: "Documentation"
   text: "Build analytics upon your events"
 - link: "/logs/processing/attributes_naming_convention/"
@@ -23,7 +23,6 @@ further_reading:
   {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>Error</u>: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>User Action</u>:A User Action event is a custom event that can be generated for a given user action.{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 ## Default attributes
 
@@ -73,7 +72,6 @@ The following attributes are related to the geolocation of IP addresses used in 
 | `network.client.geoip.subdivision.name`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
 | `network.client.geoip.subdivision.iso_code` | string | [ISO Code][2] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
-
 
 ## Extra Attribute
 

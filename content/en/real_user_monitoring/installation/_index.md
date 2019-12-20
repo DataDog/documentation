@@ -4,12 +4,12 @@ kind: documentation
 aliases:
 - /real_user_monitoring/setup
 further_reading:
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/installation/advanced_configuration"
   tag: "Documentation"
-  text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_analytics"
+  text: "Advanced configuration for RUM data collection"
+- link: "/real_user_monitoring/dashboards"
   tag: "Documentation"
-  text: "Build analytics upon your events"
+  text: "Visualize your RUM data in out of the box Dashboards"
 ---
 
 
@@ -20,6 +20,7 @@ To setup Datadog Real User Monitoring solution:
 3. Paste the [generated code snippet](#generated-code-snippet) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application.
     **Note**: Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors.
 4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
+5. Visualize the [data collected][2] in Datadog [out of the box Dashboards][3].
 
 **Note**: Your application shows up on the application list page as "pending" until Datadog starts receiving data.
 
@@ -69,3 +70,5 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum
+[2]: /real_user_monitoring/data_collected
+[3]: /real_user_monitoring/dashboards
