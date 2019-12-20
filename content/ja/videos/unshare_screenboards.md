@@ -3,7 +3,7 @@ title: Matt のクイックヒント - スクリーンボードの共有解除
 kind: ビデオ
 language: en
 wistiaid: l4gfxnyjad
-videos:
+"video-categories":
     - Introduction
     - Dashboards
     - Screenboards

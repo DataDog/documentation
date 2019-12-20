@@ -27,7 +27,7 @@ service_check(<NOM_CHECK_SERVICE>, <STATUT>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 Paramètres de la fonction check de service :
 
 | Paramètre              | Type            | Obligatoire | Valeur par défaut | Description                                                                                                |
-|------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
+| ---------------------- | --------------- | -------- | ------------- | ---------------------------------------------------------------------------------------------------------- |
 | `<NOM_CHECK_SERVICE>` | Chaîne          | Oui      | -             | Le nom du check de service.                                                                             |
 | `<STATUT>`             | Nombre entier             | Oui      | -             | Une constante décrivant le statut du service : `0` pour OK, `1` pour WARN, `2` pour CRITICAL et `3` pour UNKNOWN. |
 | `<TAGS>`               | Liste de chaînes | Non       | -             | La liste des tags à associer au check de service.                                                        |
@@ -41,7 +41,7 @@ Choisissez votre langage pour obtenir un exemple de code de check de service :
 {{< tabs >}}
 {{% tab "Python" %}}
 
-```python
+{{< code-block lang="python" filename="service_check.py" >}}
 from datadog import initialize, statsd
 
 options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
@@ -53,52 +53,51 @@ statsd.service_check(
     status=O,
     message="Application is OK",
 )
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-```ruby
+{{< code-block lang="ruby" filename="service_check.rb" >}}
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-```go
+{{< code-block lang="go" filename="service_check.go" >}}
 package main
 
 import (
     "log"
-    "github.com/DataDog/datadog-go/statsd"
     "time"
+
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 
-    dogstatsd_client, err: = statsd.New("127.0.0.1:8125")
+    dogstatsdClient, err := statsd.New("127.0.0.1:8125")
 
     if err != nil {
         log.Fatal(err)
     }
 
-    dogstatsd_client.ServiceCheck("application.service_check", 0,
-        time.Time, []string{}, []string{
-            "Application is OK"
-        }, []string{
-            "env:dev"
-        })
+    for {
+        dogstatsdClient.SimpleServiceCheck("application.service_check", 0)
+        time.Sleep(10 * time.Second)
+    }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
-```java
+{{< code-block lang="java" filename="service_check.java" >}}
 import com.timgroup.statsd.ServiceCheck;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
@@ -117,12 +116,12 @@ public class DogStatsdClient {
         Statsd.serviceCheck(sc);
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-```csharp
+{{< code-block lang="csharp" filename="service_check.cs" >}}
 using StatsdClient;
 
 public class DogStatsdClient
@@ -140,12 +139,12 @@ public class DogStatsdClient
         DogStatsd.ServiceCheck("Service.check.name", 0, message: "Application is OK." , tags: new[] { "env:dev" });
     }
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-```php
+{{< code-block lang="php" filename="service_check.php" >}}
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -159,7 +158,7 @@ $statsd = new DogStatsd(
   );
 
 $statsd->service_check('Service.check.name', 0);
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

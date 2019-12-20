@@ -1,7 +1,7 @@
 ---
 title: モニターの検証
 type: apicontent
-order: 26.11
+order: 27.11
 external_redirect: '/api/#validate-a-monitor'
 ---
 ## モニターの検証

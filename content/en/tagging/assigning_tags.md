@@ -38,7 +38,7 @@ hostname: mymachine.mydomain
 ### Add tags
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 The Agent configuration file (`datadog.yaml`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent (see YAML formats below).
 
@@ -58,22 +58,22 @@ Tags for the [integrations][5] installed with the Agent are configured with YAML
 
 #### YAML formats
 
-In YAML files, use a tag dictionary to assign a list of tags. Tag dictionaries have two different yet functionally equivalent forms:
+In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
 ```
-tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
+tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 or
 
 ```
 tags:
-    - <KEY_1>:<VALUE_1>
-    - <KEY_2>:<VALUE_2>
-    - <KEY_3>:<VALUE_3>
+    - "<KEY_1>:<VALUE_1>"
+    - "<KEY_2>:<VALUE_2>"
+    - "<KEY_3>:<VALUE_3>"
 ```
 
-It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but simple tags are also accepted. See [defining tags][1] for more details.
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][1] for more details.
 
 ## Environment Variables
 

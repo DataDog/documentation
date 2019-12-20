@@ -1,7 +1,7 @@
 ---
 title: モニターの作成
 type: apicontent
-order: 26.01
+order: 27.01
 external_redirect: '/api/#create-a-monitor'
 ---
 ## モニターの作成

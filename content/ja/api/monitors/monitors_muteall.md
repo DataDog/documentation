@@ -1,7 +1,7 @@
 ---
 title: すべてのモニターのミュート
 type: apicontent
-order: 26.07
+order: 27.07
 external_redirect: '/api/#mute-all-monitors'
 ---
 ## すべてのモニターのミュート

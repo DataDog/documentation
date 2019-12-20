@@ -10,12 +10,12 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez un ensemble de métriques relatives à Amazon\_RDS."
+description: "Surveiller un ensemble de métriques relatives à Amazon\_RDS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rds/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/'
     tag: Blog
-    text: Surveiller les métriques de performance MySQL sur RDS
+    text: Surveiller des métriques de performance MySQL sur RDS
   - link: 'https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/'
     tag: Blog
     text: "Métriques clés pour la surveillance PostgreSQL sur AWS\_RDS"
@@ -24,13 +24,13 @@ further_reading:
     text: "Surveiller les métriques de performance d'Amazon\_Aurora"
 git_integration_title: amazon_rds
 has_logo: true
-integration_title: "Amazon\_RDS"
+integration_title: Amazon RDS
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_rds
 public_title: "Intégration Datadog/Amazon\_RDS"
-short_description: "Surveillez un ensemble de métriques relatives à Amazon\_RDS."
+short_description: "Surveiller un ensemble de métriques relatives à Amazon\_RDS."
 version: '1.0'
 ---
 {{< img src="integrations/awsrds/rdsdashboard.png" alt="Dashboard RDS" responsive="true" popup="true">}}

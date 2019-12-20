@@ -47,6 +47,7 @@ In full screen mode, you can:
 * Pause the graph at the current time or view the live graph
 * Reset the time frame
 * Export the graph to a dashboard, notebook, or copy the query
+* Download the data producing the graph in a CSV format
 
 Additional options are available for [timeseries widgets][1].
 
@@ -60,6 +61,15 @@ The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` f
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
 A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog datacenter as your Datadog site (US or EU).
+
+## Export Graphs
+
+### PNG
+To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select “Download as PNG”. 
+
+### CSV
+To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”. 
+
 
 [1]: /graphing/widgets/timeseries#full-screen
 [2]: /graphing/dashboards

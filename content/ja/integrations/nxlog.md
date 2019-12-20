@@ -126,7 +126,8 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
 
 [1]: /resources/crt/ca-certificates.crt
-`app.datadoghq.com` の場合: `agent-intake.logs.datadoghq.com` のポート `10516`。SSL 暗号化をアクティブにします。
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
 
 1. NXLog がログを Datadog プラットフォームへ送信するように構成します。
     `C:\Program Files\nxlog\conf` のファイル全体を以下の内容に置き換えます。

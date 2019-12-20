@@ -1,7 +1,7 @@
 ---
 title: ホストタグの取得
 type: apicontent
-order: 30.2
+order: 31.2
 external_redirect: /api/#get-host-tags
 ---
 

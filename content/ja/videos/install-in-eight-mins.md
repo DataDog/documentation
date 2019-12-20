@@ -4,7 +4,7 @@ kind: ビデオ
 wistiaid: ira7wzi1d4
 language: en
 summary: 約 8 分で Datadog をセットアップし、PagerDuty、AWS、RDS、Elasticsearch とのインテグレーションをインストール
-videos:
+"video-categories":
     - Installation
     - PagerDuty
     - AWS

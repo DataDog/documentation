@@ -3,7 +3,7 @@ title: Datadog 101 - Aggregation
 kind: video
 language: en
 wistiaid: x9ljpqfu3m
-videos:
+"video-categories":
     - Datadog 101
 summary: Comprendre le fonctionnement et les avantages de l'agrégation des données
 private: true

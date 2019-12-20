@@ -1,2 +1,1 @@
-# This is not yet supported by the Python Client for Datadog API
-# Consult the curl example
+{u'external_id': u'<NEW_EXTERNAL_ID>'}

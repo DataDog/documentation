@@ -68,6 +68,31 @@ export default tracer;
 
 Consultez les [paramètres du traceur][7] pour obtenir la liste des options d'initialisation.
 
+## Configuration
+
+Les réglages du traceur peuvent être configurés en tant que paramètre de la méthode `init()` ou en tant que variables d'environnement.
+
+| Configuration         | Variable d'environnement         | Valeur par défaut     | Description                                                                                                                                                                              |
+|----------------|------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| enabled        | `DD_TRACE_ENABLED`           | `true`      | Indique si le traceur doit être activé.                                                                                                                                                            |
+| debug          | `DD_TRACE_DEBUG`             | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                      |
+| service        | `DD_SERVICE_NAME`            | `null`      | Le nom du service à utiliser pour ce programme.                                                                                                                                            |
+| url            | `DD_TRACE_AGENT_URL`         | `null`      | L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port.                                                                                    |
+| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | L'adresse de l'Agent auquel le traceur transmet des données.                                                                                                                                     |
+| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | Le port de l'Agent de trace auquel le traceur transmet des données.                                                                                                                                  |
+| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | Le port de l'Agent DogStatsD auquel les métriques sont transmises.                                                                                                                           |
+| env            | `DD_ENV`                     | `null`      | Définit l'environnement de l'application, p. ex. `prod`, `pre-prod` ou encore `stage`.                                                                                                                  |
+| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.                                                                                                         |
+| tags           | `DD_TAGS`                    | `{}`        | Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques. Lorsque ce paramètre est transmis en tant que variable d'environnement, son format correspond à `key:value, key:value`.                                           |
+| sampleRate     | -                            | `1`         | Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.                                                                                                                            |
+| flushInterval  | -                            | `2000`      | Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.                                                                                                              |
+| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Indique si l'enregistrement des métriques de runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.                                                      |
+| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Indique si le hostname du système doit être transmis pour chaque trace. Lorsque cette option est désactivée, le hostname de l'Agent est transmis à la place.                                                                        |
+| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][8] pour en savoir plus sur les fonctionnalités expérimentales disponibles. |
+| plugins        | -                            | `true`      | Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.                                                                                     |
+| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Token client pour le tracing sur navigateur. Peut être généré dans Datadog en accédant à **Integrations** -> **APIs**.                                                                                           |
+| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque la journalisation de debugging est activée. Exemple : `error` ou `debug`.                                                                           |
+
 ## Modifier le hostname de l'Agent
 
 Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
@@ -105,7 +130,7 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 | [connect][10]    | `>=2`    | Prise en charge complète |                                            |
 | [express][11]    | `>=4`    | Prise en charge complète | Prend en charge Sails, Loopback et [plus encore][12]   |
 | [fastify][13]    | `>=1`    | Prise en charge complète |                                            |
-| [graphql][14]    | `>=0.10` | Prise en charge complète | Prend en charge Apollo Server et express-graphql |
+| [graphql][14]    | `>=0.10` | Prise en charge complète | Prend en charge Apollo Server et express-graphql |
 | [hapi][15]       | `>=2`    | Prise en charge complète |                                            |
 | [koa][16]        | `>=2`    | Prise en charge complète |                                            |
 | [paperplane][17] | `>=2.3`  | Prise en charge complète | Non pris en charge en [mode sans serveur][18]     |
@@ -133,7 +158,7 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 | [mongodb-core][30]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
 | [mysql][31]            | `>=2`    | Prise en charge complète |                                                  |
 | [mysql2][32]           | `>=1`    | Prise en charge complète |                                                  |
-| [pg][33]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` si utilisé avec `pg`         |
+| [pg][33]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` en cas d'utilisation conjointe avec `pg`         |
 | [redis][34]            | `>=0.12` | Prise en charge complète |                                                  |
 | [tedious][35]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
 

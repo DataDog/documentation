@@ -15,7 +15,7 @@ git_integration_title: clickhouse
 guid: 781edd66-9c4c-4210-898c-182a6b8ba4ab
 integration_id: clickhouse
 integration_title: ClickHouse
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -76,8 +76,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://docs.datadoghq.com/fr/agent/
 [4]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/datadog_checks/clickhouse/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 

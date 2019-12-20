@@ -1,7 +1,7 @@
 ---
 title: モニターの検索
 type: apicontent
-order: 26.12
+order: 27.12
 external_redirect: '/api/#monitors-search'
 ---
 ## モニターの検索

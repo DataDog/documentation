@@ -42,9 +42,9 @@ Define the configuration of your browser test.
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every 15 minutes to once per week. [Contact support][4] to enable additional frequencies for your test.
 
-### Use variables
+### Use global variables
 
-You can use the [variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
 
@@ -69,7 +69,7 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create steps within your browser test scenario. You can record the uploading of files as an action, though this is limited to 10 files, with a limit of 5MB each.
+3. Your actions are recorded and used to create steps within your browser test scenario. 
 4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
 
@@ -118,7 +118,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Variable**: Store and use global variables through [Synthetics Settings][11]).
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][11]).
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
@@ -168,6 +168,12 @@ Opening your subtest in the main tab means that your subtest is the continuation
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
+### Upload
+
+You can record the uploading of files as an action. This is limited to 10 files, with a limit of 5MB each.
+
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" responsive="true" style="width:50%;">}}
+
 ## Test failure and errors
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
@@ -190,7 +196,7 @@ Common failure reasons include:
 [2]: /api/?lang=bash#get-available-locations
 [3]: /synthetics/private_locations
 [4]: /help
-[5]: /synthetics/settings#variables
+[5]: /synthetics/settings#global-variables
 [6]: http://daringfireball.net/projects/markdown/syntax
 [7]: /integrations/#cat-notification
 [8]: https://www.google.com/chrome

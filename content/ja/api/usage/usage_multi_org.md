@@ -1,7 +1,7 @@
 ---
 title: マルチオーガニゼーションのアカウント全体の使用量の取得
 type: apicontent
-order: 33.8
+order: 34.8
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 

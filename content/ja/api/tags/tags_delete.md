@@ -1,7 +1,7 @@
 ---
 title: ホストタグの削除
 type: apicontent
-order: 30.5
+order: 31.5
 external_redirect: /api/#remove-host-tags
 ---
 

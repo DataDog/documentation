@@ -3,7 +3,7 @@ title: Datadog 101 - Functions
 kind: video
 language: en
 wistiaid: gl60wag74v
-videos:
+"video-categories":
     - Datadog 101
     - Dashboards
 summary: "Améliorer l'efficacité de vos graphiques en utilisant des fonctions pertinentes"

@@ -1,7 +1,7 @@
 ---
 title: パイプラインの作成
 type: apicontent
-order: 24.5
+order: 25.5
 external_redirect: '/api/#create-a-pipeline'
 ---
 ## パイプラインの作成

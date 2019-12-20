@@ -7,7 +7,7 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez des métriques clés de Google Cloud PubSub.
+description: "Surveillez des métriques clés de Google\_Cloud\_Pub/Sub."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
 git_integration_title: google_cloud_pubsub
 has_logo: true
@@ -17,7 +17,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_pubsub
 public_title: Intégration Datadog/Google Pub/Sub
-short_description: Surveillez des métriques clés de Google Cloud PubSub.
+short_description: "Surveillez des métriques clés de Google\_Cloud\_Pub/Sub."
 version: '1.0'
 ---
 ## Présentation
@@ -36,15 +36,15 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cl
 
 ### Collecte de logs
 
-Les logs de Google Cloud Pub/Sub sont recueillis via Stackdriver et envoyés à un Cloud Pub/Sub grâce à un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un redirecteur Push HTTP][4].
+Les logs Google Cloud Pub/Sub sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs de Google Cloud Pub/Sub depuis Stackdriver vers le Pub/sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Pub/Sub depuis Stackdriver vers le Pub/Sub :
 
-1. Accédez à [la page Stackdriver][5] et filtrez les logs de Google Cloud Pub/Sub.
+1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud Pub/Sub.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-{{< img src="integrations/google_cloud_pubsub/export_pubsub_subscription.png" alt="Exportation des logs Google Cloud Pub/Sub vers Pub Sub" responsive="true">}}
+    {{< img src="integrations/google_cloud_pubsub/export_pubsub_subscription.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" responsive="true">}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
@@ -60,13 +60,13 @@ L'intégration Google Cloud Pub/Sub n'inclut aucun événement.
 L'intégration Google Cloud Pub/Sub n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_pubsub/google_cloud_pubsub_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
-[4]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
-[5]: https://console.cloud.google.com/logs/viewer
+[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_pubsub/google_cloud_pubsub_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

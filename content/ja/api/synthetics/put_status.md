@@ -1,7 +1,7 @@
 ---
 title: テストの開始/一時停止
 type: apicontent
-order: 29.2
+order: 30.2
 external_redirect: "/api/#status-test"
 ---
 

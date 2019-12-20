@@ -40,7 +40,13 @@
                 </ul>
             </div>
             <div class="col-1 text-center">
-                <a href="https://www.datadoghq.com/" id="logo">
+                {{ $allowedLangs := (slice "ja") }}
+                {{ .Scratch.Set "logoURL" "https://www.datadoghq.com/" }}
+                {{ if in $allowedLangs .Site.Language.Lang }}
+                  {{ .Scratch.Set "logoURL" (print "https://www.datadoghq.com/" .Site.Language.Lang "/") }}
+                {{ end }}
+                {{ $logoURL := .Scratch.Get "logoURL" }}
+                <a href="{{ $logoURL }}" id="logo">
                     {{ partial "img.html" (dict "root" . "src" "dd_logo_n_70x75.png" "class" "logo-img" "alt" "DataDog" "height" "75" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=70&h=75" "disable_lazy" "true") }}
                     {{ partial "img.html" (dict "root" . "src" "dd-logo-n-200.png" "class" "logo-text" "alt" "DataDog" "height" "14" "img_param" "?ch=Width,DPR&fit=max&auto=format&h=14" "disable_lazy" "true") }}
                 </a>

@@ -3,7 +3,7 @@ title: Datadog Dashboards and Trace Metrics
 kind: video
 language: en
 wistiaid: hc545nswvk
-videos:
+"video-categories":
     - apm
     - dashboards
     - traces

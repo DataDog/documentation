@@ -414,11 +414,12 @@ Use categories to create groups for an analytical view (for example, URL groups,
 * The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
+* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][6].
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this Processor:
+Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
 
 {{< img src="logs/processing/processors/category_processor.png" alt="Category Processor" responsive="true" style="width:80%;" >}}
 
@@ -466,8 +467,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
-
-Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][6].
 
 ## Arithmetic processor
 

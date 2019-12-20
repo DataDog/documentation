@@ -99,7 +99,7 @@ This allows the process check to use `sudo` to execute the `ls` command but only
 If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should `visudo` and comment out the line `Default requiretty`.
 
 {{% /tab %}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 If you are running Agent v6 less than v6.3, try updating the Agent and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 

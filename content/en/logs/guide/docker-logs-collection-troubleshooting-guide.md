@@ -9,31 +9,31 @@ There are a number of common issues that can get in the way when sending new con
 
 1. To see if the logging Agent is experiencing any issues, run the following command:
 
-```
-docker exec -it <CONTAINER_NAME> agent status
-```
+    ```
+    docker exec -it <CONTAINER_NAME> agent status
+    ```
 
 2. If everything is running smoothly, you should see something like the following status:
 
-```
-==========
-Logs Agent
-==========
-    LogsProcessed: 42
-    LogsSent: 42
+    ```
+    ==========
+    Logs Agent
+    ==========
+        LogsProcessed: 42
+        LogsSent: 42
 
-  container_collect_all
-  ---------------------
-    Type: docker
-    Status: OK
-    Inputs: 497f0cc8b673397ed31222c0f94128c27a480cb3b2022e71d42a8299039006fb
-```
+      container_collect_all
+      ---------------------
+        Type: docker
+        Status: OK
+        Inputs: 497f0cc8b673397ed31222c0f94128c27a480cb3b2022e71d42a8299039006fb
+    ```
 
 3. If the Logs Agent Status doesn't look like the above, refer to the troubleshooting tips in the following sections.
 
 4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#if-the-logs-agent-status-shows-no-errors)
 
-## The Logs Agent shows "not running" in its status 
+## The Logs Agent shows "not running" in its status
 If you see the following message when you run the Agent Status command:
 
 ```
@@ -44,7 +44,7 @@ Logs Agent
   Logs Agent is not running
 ```
 
-This means that you did not enable logging in the Agent. 
+This means that you did not enable logging in the Agent.
 
 To enable logging for the Container Agent, set the following environment variable: `DD_LOGS_ENABLED=true`.
 
@@ -59,17 +59,17 @@ Logs Agent
     LogsSent: 0
 ```
 
-This status means that logs are enabled but you haven't specified which containers the Agent should collect from. 
+This status means that logs are enabled but you haven't specified which containers the Agent should collect from.
 
 1. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
 
-2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`. 
+2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`.
 
 ## The Logs Agent shows "Status: Pending"
 
 If the Logs Agent Status shows `Status: Pending`:
 
-``` 
+```
 ==========
 Logs Agent
 ==========
@@ -105,6 +105,7 @@ If you're using the Host Agent, the user `dd-agent` needs to be added to the Doc
 
 ```
 2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
+
 2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
 ```
 
@@ -113,8 +114,8 @@ If you're using the Host Agent, the user `dd-agent` needs to be added to the Doc
 ## If the Logs Agent Status shows no errors
 If the Logs Agent Status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
-* the required port (10516) for sending logs to Datadog is being blocked 
-* your container is using a different logging driver than the Agent expects
+* The required port (10516) for sending logs to Datadog is being blocked.
+* Your container is using a different logging driver than the Agent expects.
 
 ### Outbound traffic on port 10516 is blocked
 
@@ -138,27 +139,27 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 1. If you're unsure of which logging driver your containers are using, use `docker inspect <container-name>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:
 
-```
-"LogConfig": {
-    "Type": "json-file",
-    "Config": {}
-},
-```
+    ```
+    "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+    },
+    ```
 
 2. If the container is set to the journald logging driver the following block appears in the Docker Inspect:
 
-```
-"LogConfig": {
-    "Type": "journald",
-    "Config": {}
-},
-```
+    ```
+    "LogConfig": {
+        "Type": "journald",
+        "Config": {}
+    },
+    ```
 
-3. To collect logs from the journald logging driver, set up the journald integration [following this documentation][2].
+3. To collect logs from the journald logging driver, set up the journald integration [following the Datadog-Journald documentation][2].
 
-4. Mount the YAML file into your container following the instructions [here][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
+4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
 
 [1]: https://docs.datadoghq.com/help
 [2]: /integrations/journald/#setup
 [3]: /agent/docker/?tab=standard#mounting-conf-d
-[4]: /config/containers/logging/journald/
+[4]: https://docs.docker.com/config/containers/logging/journald/
