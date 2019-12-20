@@ -12,19 +12,19 @@ In this example, a browser test is configured to map a user's journey from addin
 2. In the top right corner, click the **New Test** button. 
 3. Select **Browser Test**.
 4. Define the configuration of your browser test:
-    - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use https://www.shopist.io/ as a test web application.”
+    - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
     - Name the test.
-    - You can set tags such as `prod` and `shopist` to your test. It will help to keep things organized and allow you to quickly find the tests you're interested in when on the homepage.
-    - Choose devices and locations for testing. In this example, the test is only run on **Large Laptop** & on **English speaking countries**.
+    - You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - Choose devices and locations for testing. In this example, the test is only run on **Large Laptops** and on **English speaking countries**.
     - Specify a test frequency.
     - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
         `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
     - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. 
       - If you want to avoid being alerted on network blips that might happen on isolated locations, you can for instance set:
         `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
-      - If you want to be sure that a test execution is only considered a failure after 2 failed test runs, specify how many times you want your test to be re-run before being actually considered a failure:
+      - If you want to be sure that a test execution is only considered a failure after two failed test runs, specify how many times you want your test to be re-run before being actually considered a failure:
         `Retry 1 time before location is marked as failed`
-    - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][3], such as Slack, Pagerduty, webhooks, etc., to receive alert notifications.
+    - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][3], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test" responsive="true" style="width:90%;">}}
@@ -53,7 +53,7 @@ A **browser test** homepage will automatically populate after save. This page in
 
 Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. The failed test step in Test Results is highlighted with a red `x`. Click the failed test to begin troubleshooting. 
 
-The **Errors & Warnings** tab provides a list of javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
+The **Errors & Warnings** tab provides a list of Javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status ,and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
 
 {{< img src="getting_started/synthetics/browser-test-failure.png" alt="Browser test failure" responsive="true" style="width:100%;">}}
 

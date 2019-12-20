@@ -10,9 +10,9 @@ In this example, an API test is created to ensure your website is constantly up 
 2. In the top right corner, click the **New Test** button. 
 3. Select **API test**.
 4. Define the configuration of your API test:
-    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use https://www.shopist.io/ which is a test web application.”
-    - Select **Advance Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - Add one or two tags, like `prod`, to help organize and filter tests.
+    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
+    - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
+    - Add some tags to help organize and filter tests.
     - Select locations for testing.
     - Click the **Test URL** button.
 
@@ -24,7 +24,7 @@ In this example, three default assertions are populated when testing the URL:
 
 {{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure" responsive="true" style="width:90%;">}}
 
-These assertions define the alert condition and can be customized. To add a custom assertion, click on any response header in the response preview. You can also click the **New Assertion** button to add an assertion manually, (e.g., `body` contains `Shop.ist`.)
+These assertions define the alert condition and can be customized. To add a custom assertion, click on any response header in the response preview. You can also click the **New Assertion** button to add an assertion manually (e.g., `body` contains `Shop.ist`.)
 
 {{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure" responsive="true" style="width:90%;">}}
 
@@ -34,7 +34,7 @@ An alert is triggered if your test fails for x minutes from any x of x locations
 Retry x time before location is marked as failed
 ```
 
-Once alert conditions are set, create a message for the alert and specify what services and team members to receive the alert notification email and click **Save Test**. You can also use [integrations][5], such as Slack, Pagerduty, webhooks, etc., to receive alert notifications.
+Once alert conditions are set, create a message for the alert and specify what services and team members receive the alert notification email and click **Save Test**. You can also use [integrations][5], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
 
 ### Test results
 

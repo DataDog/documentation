@@ -6,7 +6,7 @@ The private location worker is shipped as a Docker container, so it can run on a
 
 By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
-Once you created a private location, configuring a [Synthetics API test][1] from a private location is completely identical to the one of Datadog managed locations.
+Once you create a private location, the process of configuring a [Synthetics API test][1] from that private location is completely identical to that for Datadog managed locations.
 
 To configure a private location:
 
@@ -26,7 +26,7 @@ To configure a private location:
 
     `docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker`
 
-7. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+7. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than five seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
