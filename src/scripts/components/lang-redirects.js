@@ -2,8 +2,9 @@
 import Cookies from 'js-cookie';
 
 const allowedLanguages = ['en', 'ja', 'fr'];
-const redirectLanguages = ['ja']
+const redirectLanguages = ['ja'];
 const enabledSubdomains = [
+	'www',
 	'docs',
 	'docs-staging',
 	'corpsite-preview',
@@ -21,20 +22,14 @@ const getUrlVars = () => {
     return vars;
 }
 
-const getUrlParts = (data) => {
-    const a = document.createElement('a');
-    a.href = data;
-    return {hostname: a.hostname, pathname: a.pathname};
-}
-
-
 export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
+	const thisUrl = new URL(window.location.href);
 	const supportedLanguage = navigator.language.split('-')[0] || navigator.browserLanguage.split('-')[0];
-	const baseURL = getUrlParts(window.location.href).hostname;
+	const baseURL = thisUrl.hostname;
 	const subdomain = baseURL.split('.')[0];
 	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
-	let uri = getUrlParts(window.location.href).pathname;
+	let uri = thisUrl.pathname;
 	let previewPath = '';
 	let acceptLanguage = 'en';
 	let logMsg = '';
@@ -58,16 +53,14 @@ export function handleLanguageBasedRedirects() {
 
 			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
-			console.log(`Log Msg 60: ${ logMsg }; Accept-Language: ${ acceptLanguage }; curLang: ${ curLang }; origin: ${ window.location.origin }; URI: ${ uri }`);
-
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 			window.location.replace( window.location.origin + `${ previewPath }/${ uri }`.replace(/\/+/g,'/') );
 		}
-		else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
+		else if ( Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 			acceptLanguage = Cookies.get('lang_pref');
 			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
 		}
-		else if ( subMatch.length && redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
+		else if ( redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
 			logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
 
 			acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
@@ -81,8 +74,6 @@ export function handleLanguageBasedRedirects() {
 				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }`.replace(/\/+/g,'/');
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
-
-				console.log(`Log Msg 84: ${ logMsg }; Accept-Language: ${ acceptLanguage }`);
 
 				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 				window.location.replace( dest );
