@@ -16,7 +16,7 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 ## クライアントトークン
 
-クライアントトークンを管理するには、`Client Tokens` セクションの [Datadog API 設定ページ][1] に移動します（下記参照）。
+クライアントトークンを管理するには、`Client Tokens` セクションの [Datadog API コンフィギュレーションページ][1] に移動します（下記参照）。
 
 {{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="クライアントトークン" responsive="true" >}}
 

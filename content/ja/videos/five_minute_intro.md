@@ -3,7 +3,7 @@ title: 5 分で Datadog 入門
 kind: ビデオ
 language: en
 wistiaid: nrw4x798k3
-videos:
+"video-categories":
     - Introduction
 summary: 5 分いただけませんか。それだけあれば、Datadog の機能を十分ご理解いただけます。
 private: true

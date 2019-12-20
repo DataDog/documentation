@@ -80,7 +80,7 @@ Linux : configurez la règle sudoers suivante pour garantir le bon fonctionneme
 dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
 ```
 
-Kubernetes : pour les versions antérieures à 1.11, les métriques conntrack sont disponibles par défaut. Pour la version 1.11 et les versions ultérieures, elles sont disponibles lorsque vous utilisez le mode `host` networking.
+Kubernetes : pour les versions antérieures à 1.11, les métriques conntrack sont disponibles par défaut. Pour la version 1.11 et les versions ultérieures, elles sont disponibles lorsque vous utilisez le mode de mise en réseau `host`.
 
 ### Validation
 

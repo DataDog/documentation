@@ -9,7 +9,7 @@ aliases:
 Agent v6 の構成ファイルは、**YAML** を使用することで、複雑な構成に対するサポートを強化しています。また、チェックも YAML 構成ファイルを使用するため、一貫性のある構成エクスペリエンスが提供されます。このため、`datadog.conf` (v5) に代わって `datadog.yaml` (v6) が使用されるようになりました。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | プラットフォーム                             | コマンド                              |
 | :--------                            | :--------                            |
@@ -54,7 +54,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/conf.d/` に保存されました。6.0 リリース以降は、構成ファイルは `/etc/datadog-agent/conf.d/<名前_チェック>.d/` に保存されます。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | プラットフォーム                             | コマンド                        |
 | :--------                            | :--------                      |
@@ -73,7 +73,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 
 ### Agent 6 のチェック構成ファイル
 
-各 Agent チェックの構成ファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれるすべての有効な YAML ファイルを読み込むため、フック雑な構成は複数ファイルに分割することができます。たとえば、`http_check` の構成は次のようになります。
+各 Agent チェックの構成ファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれるすべての有効な YAML ファイルを読み込むため、複雑なコンフィギュレーションは複数ファイルに分割することができます。たとえば、`http_check` のコンフィギュレーションは次のようになります。
 
 ```
 /etc/datadog-agent/conf.d/http_check.d/
@@ -81,7 +81,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 └── frontend.yaml
 ```
 
-オートディスカバリーテンプレートファイルは、`auto_conf.yaml` ファイルのある構成フォルダーに保存されています。たとえば Redis チェックの場合、`redisdb.d/` の構成は次のとおりです。
+オートディスカバリーテンプレートファイルは、`auto_conf.yaml` ファイルのある構成フォルダーに保存されています。たとえば Redis チェックの場合、`redisdb.d/` のコンフィギュレーションは次のとおりです。
 
 ```
 /etc/datadog-agent/conf.d/redisdb.d/

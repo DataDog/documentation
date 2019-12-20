@@ -21,7 +21,7 @@ further_reading:
 
 ## Agent の再起動が必要
 
-`datadog-agent` の構成に加えられた変更は、[Agent を再起動][3]した後に反映されます。
+`datadog-agent` のコンフィギュレーションに加えられた変更は、[Agent を再起動][3]した後に反映されます。
 
 ## ポート 10516 のアウトバウンドトラフィックがブロックされる
 
@@ -121,19 +121,19 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## Docker 環境
 
-[Docker ログ収集のトラブルシューティングガイド][16]をご参照ください
+[Docker ログ収集のトラブルシューティングガイド][9]をご参照ください
 
 ## サーバーレス環境
 
 ### lambda 関数からのログがログエクスプローラーページに表示されない
 
-環境の構成については、[Datadog-AWS ログインテグレーション][12]を参照してください。それでもログが表示されない場合は、さらに以下の点を確認してください。
+環境の構成については、[Datadog-AWS ログインテグレーション][10]を参照してください。それでもログが表示されない場合は、さらに以下の点を確認してください。
 
 #### Lambda 関数の構成
 
 Datadog の lambda 構成パラメーターをチェックします。
 
-* `<API_KEY>`: [Datadog API キー][13]を Python コードで直接設定するか、環境変数として設定する必要があります。複数のプラットフォームを管理している場合は、正しいプラットフォームに正しい `<API_KEY>` を使用しているかを再度確認してください。
+* `<API_KEY>`: [Datadog API キー][11]を Python コードで直接設定するか、環境変数として設定する必要があります。複数のプラットフォームを管理している場合は、正しいプラットフォームに正しい `<API_KEY>` を使用しているかを再度確認してください。
 
 
 #### lambda 関数がトリガーされているか
@@ -142,7 +142,7 @@ Datadog lambda 関数が実際にトリガーされているかどうかを確�
 
 ## 設定間違いによるログの欠落
 
-ログが [Datadog Live Tail][14] に表示されているかどうかチェックします。Live Tail に表示される場合は、インデックス構成ページで、ログと一致する[除外フィルター][15]がないか確認します。
+ログが [Datadog Live Tail][12] に表示されているかどうかチェックします。Live Tail に表示される場合は、インデックス構成ページで、ログと一致する[除外フィルター][13]がないか確認します。
 
 ## その他の参考資料
 
@@ -157,11 +157,8 @@ Datadog lambda 関数が実際にトリガーされているかどうかを確�
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: https://docs.datadoghq.com/ja/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /ja/agent/docker/log/?tab=containerinstallation#filter-containers
-[10]: /ja/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[11]: /ja/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[12]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[13]: https://app.datadoghq.com/account/settings#api
-[14]: https://app.datadoghq.com/logs/livetail
-[15]: /ja/logs/indexes/#exclusion-filters
-[16]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide
+[9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide
+[10]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[11]: https://app.datadoghq.com/account/settings#api
+[12]: https://app.datadoghq.com/logs/livetail
+[13]: /ja/logs/indexes/#exclusion-filters
