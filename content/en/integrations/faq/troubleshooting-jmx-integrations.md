@@ -151,6 +151,8 @@ The Agent does not come with a bundled JVM, but uses the one installed on your s
 
 Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
 
+**Note**: Only one valid Java path needs to be specified for JMXFetch.
+
 ### JVM metrics
 
 Datadog's Java APM library is capable of collecting JVM metrics without the JMX integration. See [Runtime Metrics][3], for more details.
