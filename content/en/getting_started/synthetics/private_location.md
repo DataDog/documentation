@@ -28,7 +28,7 @@ To configure a private location:
 
 7. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than five seconds before loading the settings or create test pages:
 
-  * In your private locations list, in the Settings section:
+  * In your private locations list, in the *Settings* section:
 
     {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:100%;">}}
 
