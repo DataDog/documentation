@@ -66,7 +66,7 @@ For example, to record test steps that map a user's journey from adding an item 
 
 ## Test results
 
-A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Sample results include errors, resources, and traces.
+A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Test results include screenshots, errors, resources, and traces for each step.
 
 Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. The failed test step in is highlighted with a red `x`. Click the failed step to begin troubleshooting. 
 
