@@ -1,5 +1,5 @@
 ---
-title: Getting Started Guide - Synthetics
+title: Getting Started with Synthetics
 kind: documentation
 further_reading:
 - link: "/synthetics/browser_tests"

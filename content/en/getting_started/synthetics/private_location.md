@@ -1,4 +1,20 @@
-## Set up your first private location
+---
+title: Getting Started with Private Locations
+kind: documentation
+further_reading:
+- link: "/getting_started/synthetics/api_test"
+  tag: "Documentation"
+  text: "Create your first API test"
+- link: "/synthetics/private_locations"
+  tag: "Documentation"
+  text: "Learn more about Private Locations"
+---
+
+<div class="alert alert-warning">
+This feature is in public beta and available for API Tests only. 
+</div>
+
+## Overview
 
 Private locations allow you to monitor internal-facing applications or any private URLs that aren’t accessible from the public internet. They can also be used to create a new custom Synthetics location.
 
@@ -8,11 +24,11 @@ By default, every second, your private location worker pulls your test configura
 
 Once you create a private location, the process of configuring a [Synthetics API test][1] from that private location is completely identical to that for Datadog managed locations.
 
-To configure a private location:
+## Configure your Private Location
 
 1. Set up a [Vagrant Ubuntu 16.04 virtual machine][2].
 2. Install [Docker][3] on that machine.
-3. In the Datadog app, hover over **[UX Monitoring][4]** and select *Settings* -> *Private Locations*. Create a new private location:
+3. In the Datadog app, hover over **[UX Monitoring][4]** and select **Settings** -> **Private Locations**. Add a new private location:
 
     {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:100%;">}}
 
@@ -24,15 +40,17 @@ To configure a private location:
 
 6. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
-    `docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker`
+    ```
+    docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
+    ```
 
 7. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than five seconds before loading the settings or create test pages:
 
-  * In your private locations list, in the *Settings* section:
+    In your private locations list, in the **Settings** section:
 
     {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:100%;">}}
 
-  * In the form when creating a test, below the private locations section:
+    In the form when creating a test, below the private locations section:
 
     {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list" responsive="true" style="width:75%;">}}
 
@@ -42,19 +60,28 @@ To configure a private location:
     2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
     2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
     ```
+
 You are now able to use your new private location as any other Datadog managed locations for your Synthetics API tests. This is specifically useful to monitor any internal endpoints you might have.
+
+## Run tests with your Private Location
+
 8. Create an API test on any endpoint (including internal) you're interested in monitoring. If you don't know where to start you can use `https://www.shopist.io/`, which is a test web application.
 9. Select the new private location under **Private Locations**.
 10. Click the **Save Test** button.
 
-For a more advanced setup, use the command `docker run --rm datadog/synthetics-private-location-worker --help and check`.
+For a more advanced setup, use the command and see `Learn more about Private Locations` below:
+
+```
+docker run --rm datadog/synthetics-private-location-worker --help and check
+```
 
 
 {{< whatsnext desc="After you set up your private location:">}}
     {{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}
     {{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< /whatsnext >}}[1]: /getting_started/synthetics/api_test
+[1]: /getting_started/synthetics/api_test
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [3]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [4]: https://app.datadoghq.com/synthetics/list

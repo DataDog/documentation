@@ -1,3 +1,18 @@
+---
+title: Getting Started with Browser Tests
+kind: documentation
+further_reading:
+- link: "/synthetics/browser_tests"
+  tag: "Documentation"
+  text: "Learn more about browser tests"
+- link: "/synthetics/browser_tests/#subtests"
+  tag: "Documentation"
+  text: "Create a browser subtest"
+- link: "/synthetics/settings/"
+  tag: "Documentation"
+  text: "Configure advance Synthetics settings"
+---
+
 ## Create a browser test
 
 [Browser tests][1] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
@@ -17,13 +32,15 @@ In this example, a browser test is configured to map a user's journey from addin
     - You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
     - Choose devices and locations for testing. In this example, the test is only run on **Large Laptops** and on **English speaking countries**.
     - Specify a test frequency.
-    - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
-        `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
     - Set alert conditions to determine the circumstances under which you want a test to send a notification alert. 
-      - If you want to avoid being alerted on network blips that might happen on isolated locations, you can for instance set:
-        `An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations`
+        - To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
+        ```
+        An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
+        ```
       - If you want to be sure that a test execution is only considered a failure after two failed test runs, specify how many times you want your test to be re-run before being actually considered a failure:
-        `Retry 1 time before location is marked as failed`
+        ```
+        Retry 1 time before location is marked as failed
+        ```
     - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][3], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
@@ -33,7 +50,7 @@ In this example, a browser test is configured to map a user's journey from addin
 
 Once the test configuration is saved, Datadog will prompt you to download the [Datadog test recorder][4] extension. Browser tests can be only recorded on **[Google Chrome][5]**. Download and install the extension.
 
-Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the actions are recorded and used to create steps within the browser test. You can record the uploading of files as an action, as outlined in the [browser test actions doc][6].
+Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the actions are recorded and used to create steps within the browser test. Learn more about each action in the [browser test actions doc][6].
 
 For example, to record test steps that map a user's journey from adding an item to cart to successful checkout:
 
@@ -67,7 +84,9 @@ Alerts triggered with the APM integration populate under **Test Results**.
     {{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
     {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 
-{{< /whatsnext >}}[1]: /synthetics/browser_tests
+{{< /whatsnext >}}
+
+[1]: /synthetics/browser_tests
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: /integrations
 [4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
