@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_preparepackage
   tags:
     - "runner:main"
     - "size:large"
@@ -48,6 +48,7 @@ build_preview:
     - collect_static_assets
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
+    - prepare_package
     - push_site_to_s3
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     #- remove_static_from_repo
@@ -57,6 +58,15 @@ build_preview:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - checksums.txt
+      - last_stable_paths.txt
+      - current_hashes.txt
+      - current_paths.txt
+      - to_upload_hashes.txt
+      - to_upload_paths.txt
+      - to_delete_paths.txt
+      - to_delete_files_with_spaces.txt
+      - to_delete_files_without_spaces.txt
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -118,6 +128,7 @@ build_live:
     - placehold_translations
     - build_hugo_site_new
     - collect_static_assets
+    - prepare_package
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
@@ -126,6 +137,15 @@ build_live:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - checksums.txt
+      - last_stable_paths.txt
+      - current_hashes.txt
+      - current_paths.txt
+      - to_upload_hashes.txt
+      - to_upload_paths.txt
+      - to_delete_paths.txt
+      - to_delete_files_with_spaces.txt
+      - to_delete_files_without_spaces.txt
     expire_in: 1 week
   only:
     - master
