@@ -30,6 +30,8 @@ In this example, an API test is created to ensure your website is constantly up 
     - Add some tags to help organize and filter tests.
     - Select locations for testing.
     - Click the **Test URL** button.
+    
+{{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration" responsive="true" style="width:60%;">}}
 
 #### Define your alert conditions
 
