@@ -1,7 +1,7 @@
 ---
 title: Désactiver un utilisateur
 type: apicontent
-order: 35.5
+order: 36.5
 external_redirect: /api/#desactiver-un-utilisateur
 ---
 
