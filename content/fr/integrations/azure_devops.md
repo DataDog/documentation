@@ -1,5 +1,5 @@
 ---
-beta: true
+beta: false
 categories:
   - azure
   - source control
@@ -29,28 +29,25 @@ Intégrez Datadog à Azure DevOps pour :
 * Suivre le temps passé à terminer un build ou un élément de travail
 * Gérer les éléments de travail et les mises à jour
 
-<div class="alert alert-warning">
-L'intégration Azure DevOps est en version bêta publique.
-</div>
-
-## Implémentation
+## Configuration
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1].
+Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'intégration Azure DevOps][7].
 
 ### Configuration
 
 Utilisez un hook de service pour créer des événements et des métriques Datadog en réponse aux événements Azure DevOps Services :
 
-1. Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'intégration Azure DevOps][7].
-2. Dans Azure, accédez à la page des hooks de service pour votre projet.
-3. Cliquez sur **Créer un abonnement**.
-4. Sélectionnez le service Datadog.
-5. Configurez l'événement déclencheur Visual Studio.
-6. Saisissez votre [clé d'API Datadog][4] dans le champ adéquat.
-7. Indiquez si vous utilisez un compte Datadog américain ou européen.
-8. Testez l'abonnement de votre hook de service, puis terminez la configuration.
-9. Répétez les étapes 4 à 7 pour chaque type d'événement que vous souhaitez envoyer à Datadog. Tous les types d'événement sont acceptés.
+{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Configurer des hooks de service" responsive="true">}}
+
+1. Dans Azure, accédez à la page des hooks de service pour votre projet.
+2. Cliquez sur **Créer un abonnement**.
+3. Sélectionnez le service Datadog.
+4. Configurez l'événement déclencheur Visual Studio.
+5. Saisissez votre [clé d'API Datadog][4] dans le champ adéquat.
+6. Indiquez si votre organisation utilise le site américain (`US`) ou européen (`EU`) de Datadog.
+7. Testez l'abonnement de votre hook de service, puis terminez la configuration.
+8. Répétez les étapes 4 à 7 pour chaque type d'événement que vous souhaitez envoyer à Datadog. Tous les types d'événement sont acceptés.
 
 Une fois vos hooks de service configurés, accédez à Datadog pour visualiser les événements et les métriques d'Azure DevOps.
 
@@ -76,6 +73,28 @@ https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
+Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][8] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
+
+1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][9] à votre organisation Azure DevOps.
+
+    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Association de services d'extension" responsive="true">}}
+
+2. Dans Azure DevOps, accédez à **Connexions de services** dans les paramètres de votre projet, et sélectionnez **Nouvelle connexion de service**.
+3. Dans la liste, sélectionnez Datadog et cliquez sur **Suivant**.
+4. Dans les champs proposés, ajoutez votre clé d'API Datadog et la clé d'application du compte que vous souhaitez utiliser, puis saisissez un nom et une description pour identifier ce compte Datadog dans Azure DevOps. Cliquez sur **Enregistrer**. Vous pouvez ajouter d'autres connexions de service si vous souhaitez interroger les monitors de plusieurs comptes Datadog différents.
+5. Accédez à **Azure Pipelines** pour commencer à configurer votre déploiement. Vous aurez alors la possibilité d'ajouter des conditions de pré-déploiement ou de post-déploiement entre les différentes phases. Sélectionnez où vous souhaitez ajouter un monitor Datadog, puis activez le bouton **Portes**.
+6. Cliquez sur **Ajouter** et sélectionnez l'option **Query Datadog monitors**.
+7. Sélectionnez la connexion de service Datadog, puis saisissez l'ID de votre monitor et le seuil de gravité de votre choix. Le seuil de gravité correspond au statut du monitor (`Alert` ou `Warning`) auquel la tâche échoue.
+
+    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Porte de monitor Datadog" responsive="true">}}
+
+8. Répétez les étapes 5 à 7 pour ajouter d'autres portes dans votre pipeline de déploiement.
+
+**Remarque** : utilisez les [monitors composites][10] pour surveiller plusieurs conditions pour les portes de votre pipeline via un seul état d'intégrité pour chaque phase.
+
+Pour afficher le code source, consultez le [référentiel de l'extension Monitor Gate d'Azure Devops][11].
 
 ## Données collectées
 ### Métriques
@@ -115,7 +134,6 @@ La durée d'un élément de travail est calculée à partir des événements *wo
 
 **Remarque** : en cas de réouverture d'un élément de travail `Done`, un autre point de données est généré lors de son prochain passage au statut `Done`. Le point de données initial n'est pas modifié, et le nouveau point de données est comparé à la création initiale de l'élément de travail.
 
-
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help/
@@ -123,6 +141,10 @@ La durée d'un élément de travail est calculée à partir des événements *wo
 [5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
 [6]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
 [7]: https://app.datadoghq.com/account/settings#integrations/azuredevops
+[8]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
+[9]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
+[10]: /fr/monitors/monitor_types/composite/
+[11]: https://github.com/DataDog/azure-devops-monitor-gate-extension
 
 
 {{< get-dependencies >}}
