@@ -73,7 +73,7 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-**A HISTOGRAM metric generates by default five custom metrics** for each unique combination of metric name, host, and tag values to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
+**A HISTOGRAM metric generates by default five custom metrics** for each unique combination of metric name and tag values to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
 
 The number of unique tag value combinations submitted for a HISTOGRAM metric with this tagging scheme is **four**:
 
@@ -82,7 +82,7 @@ The number of unique tag value combinations submitted for a HISTOGRAM metric wit
 * `host:B`, `endpoint:X`, `status:400`
 * `host:B`, `endpoint:Y`, `status:200`
 
-By default, the Agent generates five custom metrics for each of the original four unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `max`, `median`, `avg`, `95pc`, and `count`. This results in `request.Latency` reporting a total of **4*5 = 20 custom metrics**.
+By default, the Agent generates five custom metrics for each of the original four unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `max`, `median`, `avg`, `95pc`, and `count`. Consequently, `request.Latency` reports a total of **4*5 = 20 custom metrics**.
 
 **Notes**: Adding aggregations to your HISTOGRAM metrics increases the number of distinct custom metrics reported. Removing aggregations decreases the number of custom metrics reported.
 
@@ -95,7 +95,7 @@ By default, the Agent generates five custom metrics for each of the original fou
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
-**A DISTRIBUTION metric generates by default five custom metrics** for each unique combination of metric name, host, and tag values to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
+**A DISTRIBUTION metric generates by default five custom metrics** for each unique combination of metric name and tag values to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
 
 The number of unique tag value combinations submitted for a DISTRIBUTION metric with this tagging scheme is **four**.
 
@@ -108,17 +108,17 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 ##### Customized tagging
 
-You can control over [which tag combination][2] aggregations are performed for any DISTRIBUTION metric. Say that you want to keep only the `endpoint` and `status` tags associated with your distribution. This leaves the following three unique tag combinations:
+You can customize [which tag combination][2] aggregations are created for any DISTRIBUTION metric. Say that you want to keep only the `endpoint` and `status` tags associated with your distribution. This leaves the following three unique tag combinations:
 
 * `endpoint:X`, `status:200`
 * `endpoint:X`, `status:400`
 * `endpoint:Y`, `status:200`
 
-The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name, host, and tag values. This results in `request.Latency` reporting a total of **5*3 = 15 custom metrics** with the tagging customisation .
+The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5*3 = 15 custom metrics**
 
 ##### Percentile aggregations
 
-**Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combination is **eight**:
+Percentile aggregations are unique in the way they're counted because **Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combination is **eight**:
 
 * `endpoint:X`, `status:200`
 * `endpoint:X`, `status:400`
@@ -129,7 +129,7 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 * `status:400`
 * `*`
 
-This results in `request.Latency` with percentile aggregation enabled reporting an extra of **5*8 = 40 custom metrics**.
+After enabling percentile aggregations for `request.Latency`, this metric name additionally reports **5*8 = 40 custom metrics**.
 
 **Note**:  Only tag value combinations that actually appear in your data are counted as queryable. Since the combination { `endpoint:Y`, `status:400` } was never submitted in your data, this combination won’t be queryable and won’t count towards your custom metric count.
 
@@ -166,7 +166,7 @@ The following standard integrations can potentially emit custom metrics.
 
 | Type of integrations                             | Integrations                                                                                                                                                  |
 |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10]                                                                                                                          |
+| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10]                                                                                                                           |
 | No default limit upon custom metrics collection. | [Agent Metrics][11] /[Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
 | Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                                                   |
 
