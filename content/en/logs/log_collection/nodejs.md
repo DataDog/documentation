@@ -31,7 +31,7 @@ Winston is available through [NPM][2], to get started, you want to add the depen
 npm install --save winston
 ```
 
-`package.js` is updated with the corresponding dependencies:
+`package.json` is updated with the corresponding dependencies:
 
 ```js
 {
