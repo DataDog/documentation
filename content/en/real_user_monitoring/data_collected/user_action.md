@@ -27,4 +27,5 @@ It is a custom event generated for a given user action. [Add one by instrumentin
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /real_user_monitoring/installation/advanced_configuration

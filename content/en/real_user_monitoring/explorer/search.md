@@ -70,4 +70,5 @@ You can search for numerical attribute within a specific range. For instance, re
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /real_user_monitoring/explorer/#setup---facets--measures

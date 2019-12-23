@@ -12,8 +12,7 @@ further_reading:
   text: "Visualize your RUM data in out of the box Dashboards"
 ---
 
-
-To setup Datadog Real User Monitoring solution:
+To set up Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Fill out  Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.

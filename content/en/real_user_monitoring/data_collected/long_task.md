@@ -27,4 +27,5 @@ further_reading:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API

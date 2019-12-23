@@ -35,7 +35,6 @@ These 5 event categories have attributes attached by default:
 | `application_id` | string | The Datadog application ID. |
 | `session_id`     | string | The session ID.             |
 
-
 ### View Attribute
 
 | Attribute name                 | Type   | Description                                                                                                    |
@@ -80,7 +79,6 @@ In addition to default attributes, you can add your [specific global context][3]
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/processing/attributes_naming_convention
 [2]: /logs/processing/attributes_naming_convention/#user-agent-attributes

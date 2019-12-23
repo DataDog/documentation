@@ -18,7 +18,7 @@ The Real User Monitoring (RUM) Explorer allow you to explore all your views coll
 
 ## Context
 
-Build up a context to explore your views in your RUM Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar](#search-syntax) to filter your views and analytics.
+Build up a context to explore your views in your RUM Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar][1] to filter your views and analytics.
 
 ### Time Range
 
@@ -38,9 +38,9 @@ Click on any view to open the views panel and see more details (Resources, Trace
 
 ## Setup - Facets & Measures
 
-After [being collected][1], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][2].
+After [being collected][2], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 
-Note: To leverage the most out of your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][3].
+Note: To leverage the most out of your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][4].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -55,9 +55,10 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar][1], the facets panel, and in the [RUM Analytics query][2].
 
-[1]: /real_user_monitoring/rum_analytics
+[1]: /real_user_monitoring/explorer/search/#search
+[2]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{% tab "Measures" %}}
 
@@ -69,7 +70,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="real_user_monitoring/explorer/create_measure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar](#search), the facets panel, and in the [RUM Analytics query][1].
+Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar][1], the facets panel, and in the [RUM Analytics query][2].
 
 **Select the Measure Unit**:
 
@@ -77,13 +78,16 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
-[1]: /real_user_monitoring/rum_analytics
+[1]: /real_user_monitoring/explorer/search/#search
+[2]: /real_user_monitoring/rum_analytics
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /real_user_monitoring/installation
-[2]: /real_user_monitoring/explorer/analytics
-[3]: /logs/processing/attributes_naming_convention/
+
+[1]: /real_user_monitoring/explorer/search/#search-syntax
+[2]: /real_user_monitoring/installation
+[3]: /real_user_monitoring/explorer/analytics
+[4]: /logs/processing/attributes_naming_convention/

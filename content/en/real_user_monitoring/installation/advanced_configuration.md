@@ -16,7 +16,7 @@ Find below the different initialization options available with the [Datadog Brow
 
 ### Sampling
 
-By default no sampling is applied upon the amount of collected sessions. To apply a relative sampling (in percent) to the amount of session collected use the `sampleRate` parameter when initializing RUM. The following example would collect only 90% of all sessions on a given RUM application:
+By default no sampling is applied upon the number of collected sessions. To apply a relative sampling (in percent) to the amount of session collected use the `sampleRate` parameter when initializing RUM. The following example would collect only 90% of all sessions on a given RUM application:
 
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
@@ -26,9 +26,9 @@ window.DD_RUM && window.DD_RUM.init({
     });
 ```
 
-**Note**: For a sampled out session, all pages views and associated telemetry for that session aren't collected.
+**Note**: For a sampled out session, all page views and associated telemetry for that session aren't collected.
 
-## API availables
+## API available
 
 ### Add global metadata
 

@@ -35,7 +35,6 @@ Detailed network timing data regarding the loading of an application’s resourc
 | `http.performance.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `http.performance.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-
 ## Facet Collected
 
 | Attribute                      | Type   | Description                                                                             |
@@ -51,5 +50,6 @@ Detailed network timing data regarding the loading of an application’s resourc
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [2]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
