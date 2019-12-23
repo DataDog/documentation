@@ -13,11 +13,13 @@ further_reading:
 
 ## Overview
 
-The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2], [screenboard][3], or [timeboard][4].
+The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2] or dashboard ([screenboard][3], or [timeboard][4]).
 
 ## Graphing
 
-Click on the **Graph** text box to see a list of metrics you have sent to Datadog. Search the list by typing in the text box. Select a metric to populate a real-time graph visualization on the right side. Each metric you select creates a separate graph. Above the graphs, you can specify the time frame and graph size.
+Click on the **Graph** text box to see a list of metrics you have submitted to Datadog. Begin by typing in the text box to filter the metrics, then click a metric to select it. Each metric you select creates a real-time graph visualization on the right side of the page.
+
+Above your graphs, you can specify the timeframe and graph size.
 
 {{< img src="graphing/metrics/explorer/graphs.png" alt="Metrics Explorer" responsive="true" style="width:80%;" >}}
 
@@ -25,20 +27,22 @@ Click on the **Graph** text box to see a list of metrics you have sent to Datado
 
 ### Scope
 
-Define scope with the **Over** text box by selecting or searching for tags. For example, see only the metrics for a specific host, cluster, environment, region, etc.
+Define a filtering scope with the **Over** text box by selecting or searching for tag values. For example, you can use the **Over** text box to filter metric values from a specific host, cluster, environment, region, etc.
 
 ### Grouping
 
-Define grouping with the **One graph per** text box by selecting or searching for tag keys. For example, split a metric into multiple graphs by host, container, region, environment, etc. Metrics tagged with the `<KEY>:<VALUE>` format can be grouped. 
+Define the grouping with the **One graph per** text box by selecting or searching for tag keys. For example, you can split a single metric into multiple graphs by host, container, region, environment, etc. Metrics tagged with the `<KEY>:<VALUE>` format can be grouped.
 
 ### Space aggregation
 
-Define [space aggregation][5] with the **On each graph, aggregate with the** text box. The options are:
+Define the [space aggregation][5] used to combine a metric's values with the **On each graph, aggregate with the** text box. The possible options are:
 
 * Average of reported values (default)
 * Max of reported values
 * Min of reported values
 * Sum of reported values
+
+**Note**: The options may differ based on the metric type selected.
 
 ### Options
 
