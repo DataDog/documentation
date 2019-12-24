@@ -1,20 +1,24 @@
 ---
-title: Downgrade the Agent v6 to a prior minor version
+title: Downgrade the Agent to a prior minor version
 kind: faq
 aliases:
 - /agent/faq/downgrade-datadog-agent
 ---
 
-For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to version `6.X.Y`.
+For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to a prior minor version.
+
+To downgrade the Datadog Agent to a prior major version, follow the instructions on the [dedicated page][1].
 
 **Note**: These instructions only work for Datadog Agent version 6.x and above.
+
+**Note**: These instructions for configuration management tools only work with the latest major version of these tools. If using a prior version, refer to the documentation for this version on the tools' repositories: [Chef cookbook][2], [Puppet module][3], [Ansible role][4].
 
 ## Debian/Ubuntu
 
 ### CLI
 
 ```
-sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:6.X.Y-1
+sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:X.Y.Z-1
 ```
 
 **Note**: If the option `--allow-downgrades` doesn't exist for your apt version, you can use `--force-yes` instead.
@@ -24,32 +28,30 @@ sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:6
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
 
-Set the following attributes on your nodes:
-
 ```rb
-node["datadog"]["agent6_version"] = "1:6.X.Y-1"
-node["datadog"]["agent6_package_action"] = "install"
+node["datadog"]["agent_version"] = "1:X.Y.Z-1"
+node["datadog"]["agent_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
 
 {{% /tab %}}
-{{% tab "Puppet" %}}
+{{% tab "Puppet Module" %}}
 
 ```
 class { 'datadog_agent':
       ...
-      agent_version => “1:6.X.Y-1”,
+      agent_version => “1:X.Y.Z-1”,
 }
 ```
 
 {{% /tab %}}
-{{% tab "Ansible" %}}
+{{% tab "Ansible Role" %}}
 
 Add the following attributes in your playbook:
 
 ```yaml
-datadog_agent_version: "1:6.X.Y-1"
-datadog_agent_allow_downgrade: true
+datadog_agent_version: "1:X.Y.Z-1"
+datadog_agent_allow_downgrade: yes
 ```
 
 {{% /tab %}}
@@ -60,7 +62,7 @@ datadog_agent_allow_downgrade: true
 ### CLI
 
 ```
-sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-6.X.Y-1
+sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-X.Y.Z-1
 ```
 
 ### Configuration management tools
@@ -71,29 +73,29 @@ sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-6.X.Y-1
 Set the following attributes on your nodes:
 
 ```rb
-node["datadog"]["agent6_version"] = "6.X.Y-1"
-node["datadog"]["agent6_package_action"] = "install"
+node["datadog"]["agent_version"] = "X.Y.Z-1"
+node["datadog"]["agent_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
 
 {{% /tab %}}
-{{% tab "Puppet" %}}
+{{% tab "Puppet Module" %}}
 
 ```
 class { 'datadog_agent':
       ...
-      agent_version => “6.X.Y-1”,
+      agent_version => “X.Y.Z-1”,
 }
 ```
 
 {{% /tab %}}
-{{% tab "Ansible" %}}
+{{% tab "Ansible Role" %}}
 
 Add the following attributes in your playbook (on CentOS, this only works with Ansible 2.4+):
 
 ```yaml
-datadog_agent_version: "6.X.Y-1"
-datadog_agent_allow_downgrade: true
+datadog_agent_version: "X.Y.Z-1"
+datadog_agent_allow_downgrade: yes
 ```
 
 {{% /tab %}}
@@ -104,7 +106,7 @@ datadog_agent_allow_downgrade: true
 ### CLI
 
 ```
-sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage datadog-agent-1:6.X.Y-1
+sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage datadog-agent-1:X.Y.Z-1
 ```
 
 ### Configuration management tools
@@ -112,22 +114,33 @@ sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage d
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
 
-Datadog's cookbook doesn’t support SUSE.
+Set the following attributes on your nodes:
+
+```rb
+node["datadog"]["agent_version"] = "1:X.Y.Z-1"
+node["datadog"]["agent_package_action"] = "install"
+node["datadog"]["agent_allow_downgrade"] = true
+```
 
 {{% /tab %}}
-{{% tab "Puppet" %}}
+{{% tab "Puppet Module" %}}
 
 Datadog's module doesn’t support SUSE.
 
 {{% /tab %}}
-{{% tab "Ansible" %}}
+{{% tab "Ansible Role" %}}
 
 Add the following attributes in your playbook:
 
 ```yaml
-datadog_agent_version: "1:6.X.Y-1"
-datadog_agent_allow_downgrade: true
+datadog_agent_version: "1:X.Y.Z-1"
+datadog_agent_allow_downgrade: yes
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /agent/faq/agent-downgrade-major
+[2]: https://github.com/DataDog/chef-datadog/tree/3.x
+[3]: https://github.com/DataDog/puppet-datadog-agent/tree/2.x
+[4]: https://github.com/DataDog/ansible-datadog/tree/3.x
