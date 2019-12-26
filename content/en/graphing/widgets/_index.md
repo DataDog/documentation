@@ -62,7 +62,7 @@ The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` f
 
 When pasting into your favorite chat program that displays link previews (like Slack or Microsoft Teams) a snapshot image of your graph will be displayed along with a direct link to your widget.
 
-### Groups of Widgets
+### Groups of widgets
 
 Timeboard Group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy". 
 
