@@ -1,17 +1,19 @@
 ---
-title: Downgrade the Agent to a prior minor version
+title: Downgrade the Agent to a Prior Minor Version
 kind: faq
 aliases:
 - /agent/faq/downgrade-datadog-agent
 ---
 
-For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to a prior minor version.
+For DEB or RPM packages of the Datadog Agent, find the instructions below to downgrade the Datadog Agent to a prior minor version.
 
 To downgrade the Datadog Agent to a prior major version, follow the instructions on the [dedicated page][1].
 
-**Note**: These instructions only work for Datadog Agent version 6.x and above.
+**Notes**:
 
-**Note**: These instructions for configuration management tools only work with the latest major version of these tools: v4.x for the Chef cookbook, v3.x for the Puppet module and v4.x for the Ansible role. If using a prior version, refer to the documentation for this version on the tools' repositories: [Chef cookbook v3.x][2], [Puppet module v2.x][3], [Ansible role v3.x][4].
+* These instructions only work for Datadog Agent version 6.x and above.
+* The instructions below for configuration management tools only work with the latest major version of these tools: v4.x for the Chef cookbook, v3.x for the Puppet module, and v4.x for the Ansible role. If you are using a prior version, refer to the documentation for that version on the tools' repositories: [Chef cookbook v3.x][2], [Puppet module v2.x][3], or [Ansible role v3.x][4].
+
 
 ## Debian/Ubuntu
 
