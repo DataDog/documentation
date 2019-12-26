@@ -60,7 +60,7 @@ LOG_STREAM_SCHEMA = {
         "title_align": {"enum": ["center", "left", "right"]},
         "time": TIME_SCHEMA
     },
-    "required": ["type", "logset"],
+    "required": ["type"],
     "additionalProperties": false
 }
 ```
@@ -68,7 +68,7 @@ LOG_STREAM_SCHEMA = {
 | Parameter     | Type   | Required | Description                                                                                                                |
 |---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
 | `type`        | string | yes      | Type of the widget, for the log stream widget use `log_stream`                                                             |
-| `logset`      | string | yes      | Which logset to use for the stream                                                                                         |
+| `logset`      | string | no       | Which logset to use for the stream                                                                                         |
 | `query`       | string | no       | Query to filter the log stream with                                                                                        |
 | `columns`     | array  | no       | Which columns to display on the widget                                                                                     |
 | `title`       | string | no       | Title of the widget                                                                                                        |
