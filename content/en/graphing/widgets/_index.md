@@ -66,7 +66,7 @@ You can also paste the widget into your favorite chat program that displays link
 
 Timeboard group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy". 
 
-*Note*: When pasting to Screenboards or Notebooks, individual widgets within the group will be pasted
+**Note**: When pasting graphs to screenboards or notebooks, individual widgets within the group are pasted.
 
 To copy multiple screenboard widgets (edit mode only), `shift + click` on the widgets and use `Ctrl + C` (`Cmd + C` for Mac). 
 
