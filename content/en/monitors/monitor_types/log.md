@@ -1,5 +1,5 @@
 ---
-title: Log monitor
+title: Logs Monitor
 kind: documentation
 further_reading:
 - link: "monitors/notifications"
@@ -10,88 +10,83 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
-
-{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" >}}
 
 ## Overview
 
-Log monitors alert when a specified type of log exceeds a user-defined threshold over a given period of time.
+A logs monitor alerts when a specified type of log exceeds a user-defined threshold over a given period of time.
 
-## Setup
+## Monitor creation
 
-Construct a query to control what is monitored:
+To create a [logs monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-1. Define the search query:
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
-    The search query has the same behavior as [the log explorer search][1]
-    
-2. Choose a [Measure][1] or [Facet][2] to monitor. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays a count.
-    
-    {{< img src="monitors/monitor_types/log/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
-    
-3. Select the aggregation function for the [Measure][1] you want to monitor:
-    
-    {{< img src="monitors/monitor_types/log/agg_function.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+### Define the search query
 
-4. (Optional) Define the alert grouping:
-  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
-    With or without alert grouping defined, you get **one** alert when the aggregated value meets the conditions set below. Even if you split the query by host, a single notification is sent if several hosts meet the conditions set below. This is done to reduce notification noise.
+As you define the search query, the graph above the search fields updates.
 
-5. Set alert conditions. The following options can be used:
+1. If you have [multiple log indexes][2], select the index to search.
+2. Construct a search query using the same logic as a [log explorer search][3].
+3. Choose to monitor over a log count, [facet][4], or [measure][5]:
+    * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+4. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
-  {{< img src="monitors/monitor_types/log/above_below.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
 
-6. Configure your **notification options**:  
+### Set alert conditions
 
-  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* Alert threshold `<NUMBER>`
+* Warning threshold `<NUMBER>`
 
-  Refer to the [notifications][2] dedicated documentation page for detailed options.
-    
+#### No data and below alerts
 
-## Notifications and log samples
+To receive a notification when all groups in a service have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
-It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
-This is available for Slack, Jira, Webhook, Microsoft Teams, and email notifications.
+When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
-* Samples are not displayed for recovery notifications.
+**Examples**:
 
- **Enabling log samples in notifications**:
-    
-  {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
-    
-  **Example for a Slack notification** 
+* This monitor triggers if and only if there are no logs for all services:
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:60%;" >}}
+* This monitor triggers if there are no logs for the service `backend`:
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
 
-  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
- 
-### Notifications for groups
+### Notifications
 
-Notifications from monitors split by group may include the list of the top 10 of breaching values instead of 10 log samples.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
- **Enabling top 10 breaching values in notifications**
+#### Log samples
 
-{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
+By default, when a logs monitor is triggered, samples or values are added to the notification message.
 
-**Example for a Slack notification** 
+| Monitor over     | Added to notification message                                                                            |
+|------------------|----------------------------------------------------------------------------------------------------------|
+| Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
+| Facet or measure | The top 10 facet or measure values.                                                                      |
 
- {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, and email. **Note**: Samples are not displayed for recovery notifications.
 
-## No Data alerts and Below Conditions  
+To disable log samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
 
-To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe. 
+#### Examples
 
-However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.  
+Include a table of the top 10 breaching values:
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
 
-Examples:  
+Include a sample of 10 logs in the alert notification:
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
 
-1. The following monitor triggers if and only if there are no logs for all of the services:  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:50%;" >}}
-2. The following monitor triggers if there are no logs for the service `backend`:  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:50%;" >}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search
-[2]: /monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/log
+[2]: /logs/indexes
+[3]: /logs/explorer/search
+[4]: /logs/explorer/?tab=facets#setup
+[5]: /logs/explorer/?tab=measures#setup
+[6]: /monitors/notifications

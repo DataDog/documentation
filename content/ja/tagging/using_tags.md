@@ -164,15 +164,15 @@ further_reading:
 ## APM
 
 {{< tabs >}}
-{{% tab "Trace Search & Analytics" %}}
+{{% tab "App Analytics" %}}
 
 [トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
 
-[1]: /ja/tracing/trace_search_and_analytics/search
-[2]: /ja/tracing/trace_search_and_analytics/search/#search-bar
+[1]: /ja/tracing/advanced/search/
+[2]: /ja/tracing/advanced/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -182,7 +182,7 @@ further_reading:
 
 
 [1]: /ja/tagging/assigning_tags
-[2]: /ja/tracing/trace_search_and_analytics/search
+[2]: /ja/tracing/advanced/search/
 [3]: /ja/monitors/manage_monitor
 [4]: /ja/logs/explorer/search
 [5]: /ja/graphing/infrastructure/hostmap

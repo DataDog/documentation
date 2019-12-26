@@ -1,13 +1,18 @@
 ---
 title: Créer une organisation enfant
 type: apicode
-order: 27.1
+order: 28.1
 external_redirect: /api/#creer-une-organisation-enfant
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/org`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-org-create" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-org-create" >}}

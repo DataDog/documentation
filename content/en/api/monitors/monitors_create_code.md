@@ -1,13 +1,18 @@
 ---
 title: Create a monitor
 type: apicode
-order: 26.01
+order: 27.01
 external_redirect: /api/#create-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-create" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-create" >}}

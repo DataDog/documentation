@@ -1,14 +1,14 @@
 ---
 title: Get all tests
 type: apicontent
-order: 29.7
-external_redirect: /api/#get-tests
+order: 31.7
+external_redirect: /api/#get-all-tests
 ---
 
 ## Get all tests
 
 Use this method to get a list of all existing tests.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

@@ -1,7 +1,7 @@
 ---
 title: Add channels to Slack integration
 type: apicontent
-order: 19.3
+order: 20.3
 external_redirect: /api/#add-channels-to-slack-integration
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#add-channels-to-slack-integration
 
 Add channels to your Datadog-Slack integration.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`channels`** [*required*]:
     The array of slack channel objects to post to. A slack channel object is composed by:

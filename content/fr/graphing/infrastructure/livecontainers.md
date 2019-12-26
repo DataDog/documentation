@@ -28,7 +28,7 @@ Après avoir déployé l'[Agent Docker][5], vous pouvez accéder aux métriques 
 {{< tabs >}}
 
 {{% tab "Linux/Windows" %}}
-Une fois l'[Agent Datadog][1] installé, activez la collecte de logs en modifiant le [principal fichier de configuration de l'Agent][2]. Changez les paramètres suivants :
+Une fois l'[Agent Datadog][1] installé, activez la collecte de logs en modifiant le [fichier de configuration principal de l'Agent][2]. Changez les paramètres suivants :
 
 ```
 logs_enabled: true
@@ -45,7 +45,7 @@ config_providers:
 
 
 [1]: /fr/agent/docker/log/?tab=hostinstallation
-[2]: /fr/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -60,7 +60,7 @@ Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de to
 **Remarque** : par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur l'indexation et recevoir uniquement des données Live Tail.
 
 [1]: /fr/agent/docker/log/?tab=containerinstallation
-[2]: /fr/logs/logging_without_limits/#exclusion-filters
+[2]: /fr/logs/indexes/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -89,7 +89,7 @@ volumes:
 * Par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur les index et les données Live Tail uniquement.
 
 [1]: /fr/agent/kubernetes/daemonset_setup
-[2]: /fr/logs/logging_without_limits/#exclusion-filters
+[2]: /fr/logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -106,7 +106,7 @@ Vous pouvez effectuer des recherches sur le contenu des logs de diffusion à l'a
 
 **Remarque** : les logs de diffusion ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, cela efface le contenu de la diffusion.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Aperçu logs volet latéral" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" responsive="true" >}}
 
 ### Logs indexés
 
@@ -199,8 +199,8 @@ Lorsque vous utilisez activement la page des conteneurs, les métriques sont rec
 
 Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
-- Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le principal fichier de configuration `datadog.yaml`.
-- Pour inclure des conteneurs, transmettez la variable d'environnement `DD_AC_INCLUDE` ou ajoutez `ac_include:` dans le principal fichier de configuration `datadog.yaml`.
+- Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
+- Pour inclure des conteneurs, transmettez la variable d'environnement `DD_AC_INCLUDE` ou ajoutez `ac_include:` dans le fichier de configuration principal `datadog.yaml`.
 
 Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
 
@@ -211,7 +211,7 @@ ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
 
-**Remarque** : pour la version 5 de l'Agent, au lieu d'inclure les lignes ci-dessus dans votre principal fichier de configuration `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouve à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
+**Remarque** : pour la version 5 de l'Agent, au lieu d'ajouter les lignes ci-dessus dans le fichier de configuration principal `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouvent à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
 
 ## Remarques et problèmes connus
 

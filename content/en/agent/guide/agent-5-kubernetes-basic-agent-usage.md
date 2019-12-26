@@ -8,6 +8,10 @@ aliases:
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
+<div class="alert alert-warning">
+The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
+</div>
+
 ## Overview
 
 Get metrics from Kubernetes in real time to:
@@ -209,7 +213,7 @@ If the Agent is deployed you a similar output to the text below, where **desired
 
 #### Agent check validation
 
-[Run the Agent's info subcommand][17] and look for `kubernetes_state` under the Checks section:
+[Run the Agent's info subcommand][11] and look for `kubernetes_state` under the Checks section:
 
     Checks
     ======
@@ -226,7 +230,7 @@ Install the `dd-check-kube_dns` package manually or with your favorite configura
 
 ### Configuration
 
-Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][18] for all available configuration options.
+Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][17] for all available configuration options.
 
 #### Using with service discovery
 
@@ -250,7 +254,7 @@ metadata:
 
 ### Validation
 
-[Run the Agent's info subcommand][17] and look for `kube_dns` under the Checks section:
+[Run the Agent's info subcommand][11] and look for `kube_dns` under the Checks section:
 
     Checks
     ======
@@ -276,5 +280,4 @@ metadata:
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [15]: https://yum.datadoghq.com/stable/6/x86_64
 [16]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
-[17]: /agent/guide/agent-commands/#agent-status-and-information
-[18]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example

@@ -1,7 +1,7 @@
 ---
 title: Get a PagerDuty integration
 type: apicontent
-order: 18.1
+order: 19.1
 external_redirect: /api/#get-a-pagerduty-integration
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-a-pagerduty-integration
 
 Get all information about your Datadog-PagerDuty integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

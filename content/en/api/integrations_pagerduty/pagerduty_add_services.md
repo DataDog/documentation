@@ -1,7 +1,7 @@
 ---
 title: Add new services and schedules
 type: apicontent
-order: 18.3
+order: 19.3
 external_redirect: /api/#add-new-services-and-schedules
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#add-new-services-and-schedules
 
 Add new services and schedules to your Datadog-PagerDuty integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`services`** :
     The array of PagerDuty service objects. Learn how to configure your Datadog service with the [PagerDuty documentation][1]. A PagerDuty service object is composed by:

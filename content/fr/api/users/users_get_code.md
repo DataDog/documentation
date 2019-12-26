@@ -1,13 +1,18 @@
 ---
 title: Récupérer un utilisateur
 type: apicode
-order: 34.2
+order: 36.2
 external_redirect: /api/#recuperer-un-utilisateur
 ---
 
-##### Signature
-`GET /v1/users/<ID_UTILISATEUR>`
-##### Exemple de requête
+**SIGNATURE** :
+
+`GET /v1/user/<ID_UTILISATEUR>`
+
+**EXEMPLE DE REQUÊTE** :
+
 {{< code-snippets basename="api-user-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE** :
+
 {{< code-snippets basename="result.api-user-get" >}}

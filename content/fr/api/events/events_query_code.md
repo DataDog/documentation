@@ -5,9 +5,14 @@ order: 12.4
 external_redirect: /api/#interroger-le-flux-d-evenements
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/events`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-events-stream" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-events-stream" >}}

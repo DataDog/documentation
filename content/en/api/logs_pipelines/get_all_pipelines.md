@@ -1,7 +1,7 @@
 ---
 title: Get all Pipelines
 type: apicontent
-order: 24.3
+order: 25.3
 external_redirect: /api/#get-all-pipelines
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-all-pipelines
 
 Get all pipelines from your organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

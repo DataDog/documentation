@@ -1,17 +1,18 @@
 ---
 title: Envoyer des traces
 type: apicode
-order: 32.1
+order: 34.1
 external_redirect: /api/#envoyer-des-traces
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT  http://localhost:8126/v0.3/traces`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="send_trace" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.send_trace" >}}

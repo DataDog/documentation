@@ -154,36 +154,90 @@ Use tags in the [Metrics Explorer][8] to filter metrics over tags or display mul
 
 ## Integrations
 
-Some integrations such as [AWS][9], [Google Cloud][10], and [Azure][11] allow you to optionally limit metrics using tags. In the specific integration tile, use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+Some integrations allow you to optionally limit metrics using tags.
 
-{{< img src="tagging/using_tags/integrationtags.png" alt="Optionally limit metrics collection" responsive="true" style="width:80%;">}}
 
-This defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined tags are imported into Datadog. The rest are ignored. Hosts matching a given tag can also be excluded by adding `!` before the tag.
+{{< tabs >}}
+{{% tab "AWS" %}}
 
-Example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+The [AWS integration tile][1] has the tag filters `to hosts with tag` and `to Lambdas with tag`.
+
+These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting your EC2 or Lambda resources. You can use these `<KEY>:<VALUE>` to both whitelist and blacklist tags. To add a blacklisted tag, include a `!` before the tag key. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters).
+
+The filters include resources where any whitelisted tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
+
+```
+datadog:monitored,env:production
+```
+
+If you add a blacklisted tag, it takes precedence and forms an `AND` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored`, OR `env:production`, OR an `instance-type` tag with a `c1.*` value AND NOT a `region:us-east-1` tag:
+
+```
+datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
+```
+
+Read more about AWS tagging in the [EC2][2] and [Lambda][3] documentation.
+
+[1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
+{{% /tab %}}
+{{% tab "Azure" %}}
+
+The [Azure integration tile][1] has the tag filter `Optionally filter to VMs with tag`.
+
+This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from Azure VMs. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored.
+
+VMs matching a given tag can also be excluded by adding `!` before the tag, for example:
+
+```
+datadog:monitored,env:production,!env:staging,instance-type:c1.*
+```
+
+[1]: https://app.datadoghq.com/account/settings#integrations/azure
+{{% /tab %}}
+{{% tab "Google Cloud" %}}
+
+The [Google Cloud integration tile][1] has the tag filter `to hosts with tag`.
+
+This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from GCP. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only hosts that match one of the defined labels are imported into Datadog. The rest are ignored.
+
+You can exclude hosts matching a given label by adding `!` before the tag, for example:
+
+```
+datadog:monitored,env:production,!env:staging,instance-type:c1.*
+```
+
+Read more about GCP labeling in the [GCP documentation][2].
+
+
+[1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
+[2]: https://cloud.google.com/compute/docs/labeling-resources
+{{% /tab %}}
+{{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{% tab "Trace Search & Analytics" %}}
+{{% tab "App Analytics" %}}
 
 For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
 
-[1]: /tracing/trace_search_and_analytics/search
-[2]: /tracing/trace_search_and_analytics/search/#search-bar
+[1]: /tracing/app_analytics/search
+[2]: /tracing/app_analytics/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [Trace Search & Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
+After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [App Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" responsive="true" style="width:80%;">}}
 
 
 [1]: /tagging/assigning_tags
-[2]: /tracing/trace_search_and_analytics/search
+[2]: /tracing/app_analytics/search
 [3]: /monitors/manage_monitor
 [4]: /logs/explorer/search
 [5]: /graphing/infrastructure/hostmap
@@ -193,7 +247,7 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 
 ## Notebooks
 
-When creating a [Notebook][12] graph, limit metrics by using tags in the **from** textbox. Additionally, group metrics by using tags in the **avg by** textbox. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
+When creating a [Notebook][9] graph, limit metrics by using tags in the **from** textbox. Additionally, group metrics by using tags in the **avg by** textbox. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
 
 {{< img src="tagging/using_tags/notebooktags.png" alt="Notebook Tags" responsive="true" style="width:80%;">}}
 
@@ -203,7 +257,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 ## Logs
 
-For Logs [Search][13], [Analytics][14], [Patterns][15], and [Live Tail][16] filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [log search][13] page.
+For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13] filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [log search][10] page.
 
 {{< tabs >}}
 {{% tab "Search" %}}
@@ -228,25 +282,25 @@ For Logs [Search][13], [Analytics][14], [Patterns][15], and [Live Tail][16] filt
 {{% /tab %}}
 {{< /tabs >}}
 
-Additionally, tags are used to filter a logs [Pipeline][17]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
+Additionally, tags are used to filter a logs [Pipeline][14]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" responsive="true" style="width:80%;">}}
 
 ## Developers
 
-Tags can be used in various ways with the [API][18]. See the list below for links to those sections:
+Tags can be used in various ways with the [API][15]. See the list below for links to those sections:
 
-- [Schedule monitor downtime][19]
-- [Query the event stream][20]
-- [Search hosts][21]
-- [Integrations][22] for [AWS][23] and [Google Cloud][24]
-- [Querying timeseries points][25]
-- [Get all monitor details][26]
-- [Mute a monitor][27]
-- [Monitors search][28]
-- [Monitors group search][29]
-- [Create a Screenboard][30]
-- [Create a Timeboard][31]
+- [Schedule monitor downtime][16]
+- [Query the event stream][17]
+- [Search hosts][18]
+- [Integrations][19] for [AWS][20] and [Google Cloud][21]
+- [Querying timeseries points][22]
+- [Get all monitor details][23]
+- [Mute a monitor][24]
+- [Monitors search][25]
+- [Monitors group search][26]
+- [Create a Screenboard][27]
+- [Create a Timeboard][28]
 
 ## Further Reading
 
@@ -260,26 +314,23 @@ Tags can be used in various ways with the [API][18]. See the list below for link
 [6]: /graphing/infrastructure/livecontainers
 [7]: /graphing/infrastructure/process
 [8]: /graphing/metrics/explorer
-[9]: /integrations/amazon_web_services
-[10]: /integrations/google_cloud_platform
-[11]: /integrations/azure
-[12]: /graphing/notebooks
-[13]: /logs/explorer/search
-[14]: /logs/explorer/analytics
-[15]: /logs/explorer/patterns
-[16]: /logs/live_tail
-[17]: /logs/processing/pipelines
-[18]: /api
-[19]: /api/?lang=python#schedule-monitor-downtime
-[20]: /api/?lang=python#query-the-event-stream
-[21]: /api/?lang=python#search-hosts
-[22]: /api/?lang=python#integrations
-[23]: /api/?lang=python#aws
-[24]: /api/?lang=python#google-cloud-platform
-[25]: /api/?lang=python#query-timeseries-points
-[26]: /api/?lang=python#get-all-monitor-details
-[27]: /api/?lang=python#mute-a-monitor
-[28]: /api/?lang=python#monitors-search
-[29]: /api/?lang=python#monitors-group-search
-[30]: /api/?lang=python#create-a-screenboard
-[31]: /api/?lang=python#create-a-dashboard
+[9]: /graphing/notebooks
+[10]: /logs/explorer/search
+[11]: /logs/explorer/analytics
+[12]: /logs/explorer/patterns
+[13]: /logs/live_tail
+[14]: /logs/processing/pipelines
+[15]: /api
+[16]: /api/?lang=python#schedule-monitor-downtime
+[17]: /api/?lang=python#query-the-event-stream
+[18]: /api/?lang=python#search-hosts
+[19]: /api/?lang=python#integrations
+[20]: /api/?lang=python#aws
+[21]: /api/?lang=python#google-cloud-platform
+[22]: /api/?lang=python#query-timeseries-points
+[23]: /api/?lang=python#get-all-monitor-details
+[24]: /api/?lang=python#mute-a-monitor
+[25]: /api/?lang=python#monitors-search
+[26]: /api/?lang=python#monitors-group-search
+[27]: /api/?lang=python#create-a-screenboard
+[28]: /api/?lang=python#create-a-dashboard

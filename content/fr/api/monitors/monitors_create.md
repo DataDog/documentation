@@ -1,34 +1,35 @@
 ---
 title: Créer un monitor
 type: apicontent
-order: 26.01
+order: 27.01
 external_redirect: '/api/#creer-un-monitor'
 ---
 ## Créer un monitor
 
 Si vous programmez la gestion et le déploiement des monitors, vous pouvez définir plus facilement le monitor dans l'IU Datadog et [exporter son JSON valide][1].
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 *   **`type`** [*obligatoire*] :
     le [type de monitor][2]. Vous trouverez sous-dessous les différentes valeurs autorisées :
 
-| Type de monitor | Valeur de l'attribut du type            |
-| :--------    | :-------                        |
-| anomaly      | `query alert`                   |
-| apm          | `query alert`                   |
-| composite    | `composite`                     |
-| custom       | `service check`                 |
-| event        | `event alert`                   |
-| forecast     | `query alert`                   |
-| host         | `service check`                 |
-| integration  | `query alert` ou `service check`  |
-| live process | `process alert`                 |
-| logs         | `log alert`                     |
-| metric       | `metric alert`                  |
-| network      | `service check`                 |
-| outlier      | `query alert`                   |
-| process      | `service check`                 |
-| watchdog     | `event alert`                   |
+| Type de monitor | Valeur de l'attribut du type             |
+|:-------------|:---------------------------------|
+| anomaly      | `query alert`                    |
+| apm          | `query alert`                    |
+| composite    | `composite`                      |
+| custom       | `service check`                  |
+| event        | `event alert`                    |
+| forecast     | `query alert`                    |
+| host         | `service check`                  |
+| integration  | `query alert` ou `service check` |
+| live process | `process alert`                  |
+| logs         | `log alert`                      |
+| metric       | `metric alert`                   |
+| network      | `service check`                  |
+| outlier      | `query alert`                    |
+| process      | `service check`                  |
+| watchdog     | `event alert`                    |
 
 *   **`query`** [*obligatoire*] :
     le paramètre query définit à quel moment le monitor se déclenche. La syntaxe de la requête dépend du type de monitor que vous créez :
@@ -48,7 +49,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 
     *   `change_aggr` : change, pct_change.
     *   `time_aggr` : avg, sum, max, min. [En savoir plus][3].
-    *   `time_window` : last_#m (1, 5, 10, 15 ou 30), last_#h (1, 2 ou 4) ou last_#d (1 ou 2).
+    *   `time_window` last\_#m (1, 5, 10, 15 ou 30), last\_#h (1, 2 ou 4) ou last_#d (1 ou 2)
     *   `timeshift` : #m_ago (5, 10, 15 ou 30), #h_ago (1, 2 ou 4) ou 1d_ago.
 
     Utilisez ce paramètre pour créer un monitor outlier à l'aide de la requête suivante : `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`.
@@ -58,7 +59,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 
     *   **`check`** : nom du check, par exemple datadog.agent.up.
     *   **`tags`** : un ou plusieurs tags entre guillemets (séparés par des virgules) ou « * ». Exemple : `.over("env:prod", "role:db")`.
-    *   **`count`** doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez envoyer une notification pour les statuts 1 Critical, 3 Ok et 2 Warning, « count » doit prendre pour valeur 3.
+    *   **`count`** doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez recevoir une notification à partir de 1 statut Critical, 3 statuts Ok et 2  statuts Warning, « count » doit prendre pour valeur 3. La valeur maximale est de 10.
 
     ##### Requête d'alerte d'événement
 
@@ -128,39 +129,42 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
         *   False: `[Triggered] Titre du monitor`
 
     ##### Options d'anomalie
+
     _Ces options s'appliquent uniquement aux monitors d'anomalie et sont ignorées pour les autres types de monitors._
 
-    -   **`threshold_windows`** : un dictionnaire contenant `recovery_window` et `trigger_window`.
-        * `recovery_window` désigne la durée pendant laquelle une métrique anormale doit afficher un comportement normal pour que l'alerte soit annulée.
-        * `trigger_window` désigne la durée pendant laquelle une métrique doit afficher un comportement anormal pour que l'alerte soit déclenchée.
+    - **`threshold_windows`** : un dictionnaire contenant `recovery_window` et `trigger_window`.
 
-            Exemple : `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
+        - `recovery_window` désigne la durée pendant laquelle une métrique anormale doit afficher un comportement normal pour que l'alerte soit annulée.
+        - `trigger_window` désigne la durée pendant laquelle une métrique doit afficher un comportement anormal pour que l'alerte soit déclenchée.
+
+          Exemple : `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
 
     ##### Options d'alerte de métrique
+
     _Ces options s'appliquent uniquement aux alertes de métrique._
 
-    -   **`thresholds`** : un dictionnaire de seuils par type de seuil. Il existe deux types de seuils pour les alertes de métrique : *critical* et *warning*. *Critical* est défini dans la requête, mais peut également être précisé dans cette option. Le seuil *warning* peut uniquement être spécifié à l'aide de l'option thresholds.
-    Si vous souhaitez utiliser des [seuils d'annulation][6] pour votre monitor, utilisez les attributs `critical_recovery` et `warning_recovery`.
+   - **`thresholds`** : un dictionnaire de seuils par type de seuil. Il existe deux types de seuils pour les alertes de métrique : *critical* et *warning*. *Critical* est défini dans la requête, mais peut également être précisé dans cette option. Le seuil *warning* peut uniquement être spécifié à l'aide de l'option thresholds. Si vous souhaitez appliquer des [seuils de rétablissement][6] à votre monitor, utilisez les attributs `critical_recovery` et `warning_recovery`.
 
-            Exemple : `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`.
+    Exemple : `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`.
 
-    -   **`evaluation_delay`** : durée (en secondes) correspondant au délai avant l'évaluation (nombre entier non négatif). Par exemple, pour une valeur définie sur 300 (5 min), si l'intervalle est défini sur last_5m et s'il est 7 h, le monitor évalue les données de 6 h 50 à 6 h 55. Cette option s'avère très utile pour AWS CloudWatch et pour d'autres métriques renvoyées pour s'assurer que le monitor dispose toujours de données lors de l'évaluation.
+   - **`evaluation_delay`** : durée (en secondes) correspondant au délai avant l'évaluation (nombre entier non négatif). Par exemple, pour une valeur définie sur 300 (5 min), si l'intervalle est défini sur last_5m et s'il est 7 h, le monitor évalue les données de 6 h 50 à 6 h 55. Cette option s'avère très utile pour AWS CloudWatch et pour d'autres métriques renvoyées pour s'assurer que le monitor dispose toujours de données lors de l'évaluation.
 
     ##### Options de check de service
+
     _Ces options s'appliquent uniquement aux checks de service et sont ignorées pour les autres types de monitors._
 
-    -   **`thresholds`** : un dictionnaire de seuils par statut. Comme les checks de service peuvent avoir plusieurs seuils, nous ne les définissons pas directement dans la requête.
+   - **`thresholds`** : un dictionnaire de seuils par statut. Comme les checks de service peuvent avoir plusieurs seuils, nous ne les définissons pas directement dans la requête.
 
-            Exemple : `{'ok': 1, 'critical': 1, 'warning': 1}`
+    Exemple : `{'ok': 1, 'critical': 1, 'warning': 1}`
 
     ##### Erreurs et validation
-    Si une option de monitor non valide fait partie de la requête, la réponse sera :
 
-            Error: 400 - ["Invalid monitor option:<option non valide>"]
+    - Si une option de monitor non valide fait partie de la requête, la réponse sera :
+
+    `Error: 400 - ["Invalid monitor option:<option non valide>"]`
 
 
-
-[1]: /fr/monitors/#export-your-monitor
+[1]: /fr/monitors/monitor_types/#import
 [2]: /fr/monitors/monitor_types
 [3]: /fr/monitors/monitor_types/#define-the-conditions
 [4]: /fr/integrations/faq/list-of-api-source-attribute-value

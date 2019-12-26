@@ -10,7 +10,7 @@ further_reading:
     text: Effectuer des analyses de logs
   - link: logs/explorer/patterns
     tag: Documentation
-    text: Détecter les modèles dans vos logs
+    text: Détecter les patterns dans vos logs
   - link: logs/processing
     tag: Documentation
     text: Apprendre à traiter vos logs
@@ -20,7 +20,7 @@ further_reading:
 ---
 Tous les paramètres de recherche sont contenus dans l'adresse URL. Vous pouvez partager votre vue en partageant l'URL.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Effectuer une recherche dans vos logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" responsive="true" >}}
 
 ## Syntaxe de recherche
 
@@ -59,13 +59,13 @@ Pour rechercher les logs qui contiennent `user=AliceMartin` dans l'attribut mess
 `user\=AliceMartin`
 
 #### Recherche à facettes
-Pour effectuer une recherche sur une facette spécifique, [ajoutez-la comme facette][1] puis utilisez `@` pour spécifier que vous faites une recherche sur une facette.
+Pour effectuer une recherche en fonction d'un attribut spécifique, [ajoutez-le comme facette][1] puis utilisez `@` pour indiquer que vous faites une recherche à partir d'une facette.
 
 Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer la valeur **url** sur *www.datadoghq.com*, saisissez :
 
 `@url:www.datadoghq.com`
 
-**Remarque** : effectuer une recherche sur une valeur de facette qui contient des caractères spéciaux requiert l'utilisation du caractère d'échappement ou de guillemets. La même logique s'applique aux espaces dans les attributs de log. Les attributs de log ne doivent pas contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées du caractère d'échappement. Si un attribut est appelé `user.first name`, effectuez une recherche sur cet attribut en ajoutant un caractère d'échappement devant l'espace : `@user.first\ name:mavaleur`
+**Remarque** : lorsque vous recherchez une valeur de facette qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets. La même logique s'applique aux espaces dans les attributs de log. Les attributs de log ne sont pas supposés contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées d'un caractère d'échappement. Si un attribut est appelé `user.first name`, effectuez une recherche en fonction de cet attribut en ajoutant un caractère d'échappement devant l'espace : `@user.first\ name:mavaleur`
 
 Exemples :
 
@@ -89,9 +89,9 @@ Les wildcards peuvent être utilisés au sein d'une facette avec cette syntaxe. 
 
 Les wildcards peuvent également être utilisés pour effectuer une recherche de texte brut dans un log qui ne fait pas partie d'une facette. La requête suivante renvoie tous les logs contenant le texte `NETWORK` :
 
-`"*NETWORK*"`
+`*NETWORK*`
 
-En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette ne seront pas renvoyés.
+En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette mais pas du message de log ne seront pas renvoyés.
 
 ### Valeurs numériques
 Utilisez les caractères `<`, `>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer tous les logs avec un délai de réponse supérieur à 100 ms :

@@ -1,18 +1,18 @@
 ---
 title: Edit an application key
 type: apicode
-order: 21.09
+order: 22.09
 external_redirect: /api/#edit-an-application-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/application_key/<APP_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="edit_app_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.edit_app_key" >}}

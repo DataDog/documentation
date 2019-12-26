@@ -1,7 +1,7 @@
 ---
 title: Create a PagerDuty integration
 type: apicontent
-order: 18.2
+order: 19.2
 external_redirect: /api/#create-a-pagerduty-integration
 ---
 
@@ -11,7 +11,7 @@ Create a new Datadog-PagerDuty integration.
 
 **Note**: All arguments are required when creating (`PUT`) a new PagerDuty configuration.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`services`** :
     The array of PagerDuty service objects. Learn how to configure your Datadog service with the [PagerDuty documentation][1]. A PagerDuty service object is composed by:

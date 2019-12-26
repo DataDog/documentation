@@ -39,7 +39,7 @@ Recueillez les métriques IIS agrégées par site ou sur l'ensemble vos sites. L
 
 Le check IIS est fourni avec l'Agent. Pour commencer à recueillir vos logs et métriques IIS, suivez les étapes suivantes :
 
-1. [Installez l'Agent][2] sur vos serveurs IIS.
+1. [Installez l'Agent][3] sur vos serveurs IIS.
 
 2. La classe WMI `Win32_PerfFormattedData_W3SVC_WebService` doit être installée sur vos serveurs IIS.
   Pour vous en assurer, utilisez la commande suivante :
@@ -67,7 +67,7 @@ Le check IIS est fourni avec l'Agent. Pour commencer à recueillir vos logs et m
 
 ### Configuration
 
-Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d/` de l'Agent][3] à la racine du [répertoire de configuration de votre Agent][4].
+Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d/` de l'Agent][4] à la racine du [répertoire de configuration de votre Agent][5].
 
 #### Préparer IIS
 
@@ -94,7 +94,7 @@ C:/> winmgmt /resyncperf
 init_config:
 
 instances:
-  - host : . # "." représente le host actuel
+  - host : . # « . » correspond au host actuel
   # sites :  # pour surveiller des sites précis ou pour recueillir des métriques par site
   #   - exemple.com
   #   - dev.exemple.com
@@ -102,16 +102,16 @@ instances:
 
 Utilisez l'option `sites` pour recueillir des métriques par site. Lors de la configuration, l'Agent recueille des métriques pour chaque site de votre liste et indique le nom du site correspondant dans un tag. Si vous ne configurez pas `sites`, l'Agent recueille les mêmes métriques, mais leurs valeurs correspondent aux totaux de l'ensemble des sites.
 
-Vous pouvez également surveiller les sites sur des serveurs IIS à distance. Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir des options de configuration pertinentes. Par défaut, ce check est utilisé sur une seule instance : la machine actuelle sur laquelle l'Agent s'exécute. Il vérifiera les compteurs de performance WMI pour IIS sur cette machine.
+Vous pouvez également surveiller des sites sur des serveurs IIS distants. Consultez le [fichier d'exemple iis.d/conf.yaml][6] pour découvrir les options de configuration pertinentes. Par défaut, ce check est exécuté sur une seule instance : la machine actuelle sur laquelle l'Agent s'exécute. Il vérifie les compteurs de performance WMI pour IIS sur cette machine.
 
 Si vous souhaitez vérifier également d'autres machines à distance, vous pouvez ajouter une instance par host.
 Remarque : si vous tenez également à vérifier les compteurs sur la machine actuelle, vous devrez créer une instance avec des paramètres vides.
 
-Le paramètre facultatif `provider` permet d'ajouter un fournisseur WMI (défini sur `32` par défaut pour l'Agent Datadog 32 bits ou `64` pour la version 64 bits). Il est utilisé pour demander des données WMI auprès du fournisseur choisi. Valeurs autorisées : `32` ou `64`. Pour en savoir plus, [consultez cet article de MSDN][6] (en anglais).
+Le paramètre facultatif `provider` permet d'ajouter un fournisseur WMI (défini sur `32` par défaut pour l'Agent Datadog 32 bits ou `64` pour la version 64 bits). Il est utilisé pour demander des données WMI auprès du fournisseur choisi. Options disponibles : `32` ou `64`. Pour en savoir plus, [consultez cet article MSDN][7].
 
 Le paramètre `sites` vous permet de préciser la liste des sites pour lesquels vous souhaitez lire les métriques. Si vous précisez des sites, un tag correspondant au nom du site sera ajouté aux métriques. Si vous ne définissez aucun site, le check extraira les valeurs agrégées sur tous les sites.
 
-Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une machine à distance du nom de MONSERVEURADISTANCE. Pour le host à distance, nous extrayons uniquement les métriques du site par défaut.
+Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une machine à distance du nom de MONSERVEURDISTANT. Pour le host à distance, nous extrayons uniquement les métriques du site par défaut.
 
 ```
 - host: .
@@ -119,48 +119,47 @@ Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une 
     - myapp1
   sites:
     - Site Web par défaut
-- host: MONSERVEURADISTANCE
-  username: MONSERVEURADISTANCE\fred
+- host: MONSERVEURDISTANT
+  username: MONSERVEURDISTANT\fred
   password: monmotdepassesecret
   is_2008: false
 ```
 
 * `is_2008` (facultatif) - REMARQUE : en raison d'une faute de frappe dans IIS6/7 (généralement dans W2K8) où TotalBytesTransferred est écrit TotalBytesTransfered par perfmon, vous devrez peut-être activer cette option pour récupérer les métriques IIS dans cet environnement.
 
-* Consultez le [fichier d'exemple iis.yaml][5] pour découvrir toutes les options de configuration disponibles.
+* Consultez le [fichier d'exemple iis.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-* [Redémarrez l'Agent][7] pour commencer à envoyer vos métriques IIS à Datadog.
+* [Redémarrez l'Agent][8] pour commencer à envoyer vos métriques IIS à Datadog.
 
 #### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-  ```
-  logs_enabled: true
-  ```
+    ```yaml
+      logs_enabled: true
+    ```
 
-* Ajoutez ce bloc de configuration à votre fichier `iis.d/conf.yaml` pour commencer à recueillir vos logs IIS :
+2. Ajoutez ce bloc de configuration à votre fichier `iis.d/conf.yaml` pour commencer à recueillir vos logs IIS :
 
-  ```
-  logs:
-       - type: file
-         path: C:\inetpub\logs\LogFiles\W3SVC1\u_ex*
-         service: myservice
-         source: iis
-         sourcecategory: http_web_access
-  ```
+    ```yaml
+      logs:
+          - type: file
+            path: C:\inetpub\logs\LogFiles\W3SVC1\u_ex*
+            service: myservice
+            source: iis
+            sourcecategory: http_web_access
+    ```
 
-  Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-  Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+   Consultez le [fichier d'exemple iis.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-  * [Redémarrez l'Agent][8].
-
+3. [Redémarrez l'Agent][8].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][9] et cherchez `iis` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `iis` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -172,24 +171,22 @@ Le check IIS n'inclut aucun événement.
 
 ### Checks de service
 
-`iis.site_up` :
-
-L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si la durée de fonctionnement du site est égale à zéro. Si ce n'est pas le cas, il renvoie `OK`.
+**iis.site_up** :<br>
+L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si l'uptime du site est à zéro, et `OK` dans les autres cas.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/#agent-check-directory-structure
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
-[6]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/#agent-check-directory-structure
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
+[7]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

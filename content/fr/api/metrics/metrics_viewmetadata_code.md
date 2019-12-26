@@ -1,13 +1,18 @@
 ---
 title: Afficher les métadonnées d'une métrique
 type: apicode
-order: 25.4
+order: 26.4
 external_redirect: /api/#afficher-les-metadonnees-d-une-metrique
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/metrics/<NOM_MÉTRIQUE>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-metric-metadata-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-metric-metadata-get" >}}

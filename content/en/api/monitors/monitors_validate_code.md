@@ -1,13 +1,18 @@
 ---
 title: Validate a monitor
 type: apicode
-order: 26.11
+order: 27.12
 external_redirect: /api/#validate-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/validate`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-validate" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-validate" >}}

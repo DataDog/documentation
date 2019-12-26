@@ -9,8 +9,8 @@ pygmentsCodeFences: true
 # taxonomies
 taxonomies:
   tag: "tags"
-  video: "videos"
-preserveTaxonomyNames: true
+  category: "categories"
+  "video-category": "video-categories"
 
 # language
 defaultContentLanguage: "en"
@@ -18,3 +18,8 @@ defaultContentLanguageInSubdir: false
 
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 contentDir: "content/en"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

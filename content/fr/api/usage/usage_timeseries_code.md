@@ -1,13 +1,18 @@
 ---
 title: Obtenir l'utilisation horaire pour des métriques custom
 type: apicode
-order: 33.3
+order: 35.3
 external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-metriques-custom
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/timeseries`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-billing-usage-timeseries" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-timeseries" >}}

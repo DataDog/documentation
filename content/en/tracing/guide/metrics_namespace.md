@@ -23,8 +23,9 @@ aliases:
 ---
 
 ## Overview
+The [trace metrics][1] namespace is `trace.<name>.<metrics>{<tags>}`.
 
-Tracing application metrics are collected after [enabling trace collection][1] and [instrumenting your application][2]. These metrics are available for dashboards and monitors.
+Tracing application metrics are collected after [enabling trace collection][2] and [instrumenting your application][3]. These metrics are available for dashboards and monitors.
 
 ### Metric names
 
@@ -60,5 +61,6 @@ Trace metrics come with a variety of tags. The possible tags are:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup
+[1]: /tracing/visualization/#trace-metrics
+[2]: /tracing/send_traces
+[3]: /tracing/setup

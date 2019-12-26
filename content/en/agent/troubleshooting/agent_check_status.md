@@ -22,7 +22,7 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 To test an Agent check, run:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 ```
 sudo -u dd-agent datadog-agent check <CHECK_NAME>
@@ -50,25 +50,25 @@ sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 {{% /tab %}}
 {{< /tabs >}}
 
-If your issue continues, [reach out to the Datadog support team][1] with a [flare](#flare).
+If your issue continues, [reach out to the Datadog support team][1] with a [flare][2].
 
 ## Windows
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
 For Agent versions >= 6.12:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
+%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
 ```
 
 For Agent versions <= 6.11:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
+%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
 {{% /tab %}}
@@ -101,10 +101,10 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 
 ## Systemd
 
-For [systems using systemd][2], use `journalctl` to assist with debugging.
+For [systems using systemd][3], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 The following command shows the status of the Datadog Agent.
 
 ```
@@ -139,4 +139,5 @@ sudo journalctl -u dd-agent.service
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /agent/troubleshooting/send_a_flare
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

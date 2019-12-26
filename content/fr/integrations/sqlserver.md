@@ -38,7 +38,7 @@ Vous pouvez également créer vos propres métriques en demandant au check d'ex�
 
 ## Implémentation
 
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
@@ -111,11 +111,11 @@ Le check SQL Server n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à SQL Server pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Développement
 
-Consultez la [documentation principale sur les outils de développement][11] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
+Consultez la [documentation principale sur les outils de développement][12] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
 ### Procédures de test
 
@@ -125,7 +125,7 @@ Pour exécuter les tests sous Windows, une instance de MSSQL doit être ouverte 
 
 #### Linux
 
-Sous Linux, un conteneur Docker exécutant une instance MSSQL démarre automatiquement avant d'exécuter les tests. Nous utilisons unixODBC et [FreeTDS][12] pour communiquer avec la base de donnée. C'est pourquoi selon la distribution Linux utilisée, vous devez installer des dépendances supplémentaires sur votre environnement de développement local avant d'exécuter les tests. Par exemple, voici les étapes d'installation pour Ubuntu 14.04 :
+Sous Linux, un conteneur Docker exécutant une instance MSSQL démarre automatiquement avant d'exécuter les tests. Nous utilisons unixODBC et [FreeTDS][13] pour communiquer avec la base de donnée. C'est pourquoi selon la distribution Linux utilisée, vous devez installer des dépendances supplémentaires sur votre environnement de développement local avant d'exécuter les tests. Par exemple, voici les étapes d'installation pour Ubuntu 14.04 :
 
 ```
 sudo apt-get install unixodbc unixodbc-dev tdsodbc
@@ -133,7 +133,7 @@ sudo apt-get install unixodbc unixodbc-dev tdsodbc
 
 #### OSX
 
-Tout comme Linux, MSSQL s'exécute dans un conteneur Docker et nous communiquons avec la base de données via unixODBC et [FreeTDS][12]. Vous pouvez utiliser [Homebrew][13] pour installer les paquets requis :
+Tout comme Linux, MSSQL s'exécute dans un conteneur Docker et nous communiquons avec la base de données via unixODBC et [FreeTDS][13]. Vous pouvez utiliser [Homebrew][14] pour installer les paquets requis :
 
 ```
 brew install unixodbc
@@ -142,15 +142,12 @@ brew install freetds --with-unixodbc
 
 ## Pour aller plus loin
 
-* [Surveiller vos bases de données Azure SQL Server Database avec Datadog][14]
-* [Métriques clés pour la surveillance de SQL Server][15]
-* [Outils de surveillance de SQL Server][16]
-* [Surveiller les performances de SQL Server avec Datadog][17]
-* [Métriques custom SQL Server pour une surveillance approfondie][18]
+* [Surveiller vos bases de données Azure SQL Server Database avec Datadog][15]
+* [Métriques clés pour la surveillance de SQL Server][16]
+* [Outils de surveillance de SQL Server][17]
+* [Surveiller les performances de SQL Server avec Datadog][18]
+* [Métriques custom SQL Server pour une surveillance approfondie][19]
 
-
-
-{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
@@ -160,12 +157,16 @@ brew install freetds --with-unixodbc
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[10]: https://docs.datadoghq.com/fr/help
-[11]: https://docs.datadoghq.com/fr/developers/integrations
-[12]: http://www.freetds.org
-[13]: https://brew.sh
-[14]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
-[15]: https://www.datadoghq.com/blog/sql-server-monitoring
-[16]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
-[17]: https://www.datadoghq.com/blog/sql-server-performance
-[18]: https://www.datadoghq.com/blog/sql-server-metrics
+[10]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/metadata.csv
+[11]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/developers/integrations
+[13]: http://www.freetds.org
+[14]: https://brew.sh
+[15]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
+[16]: https://www.datadoghq.com/blog/sql-server-monitoring
+[17]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
+[18]: https://www.datadoghq.com/blog/sql-server-performance
+[19]: https://www.datadoghq.com/blog/sql-server-metrics
+
+
+{{< get-dependencies >}}

@@ -18,11 +18,11 @@ $ tar -xf datadog-php-tracer.tar.gz -C /
   /opt/datadog-php/bin/post-install.sh
 ```
 
-Next, [modify the `php.ini` file][3] to add the extension to the PHP runtime.
+Next, [modify the `php.ini` file](#modify-the-ini-file) to add the extension to the PHP runtime.
 
 ### Install from source
 
-[Download the source code `tar.gz` or `.zip` file][4] from the releases page and unzip the file. Then compile and install the extension with the commands below.
+[Download the source code `tar.gz` or `.zip` file][3] from the releases page and unzip the file. Then compile and install the extension with the commands below.
 
 ```bash
 $ cd /path/to/dd-trace-php
@@ -71,12 +71,12 @@ Datadog PHP tracer extension
 ...
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to see the traces.
+Visit a tracing-enabled endpoint of your application and view the [APM UI][4] to see the [traces][5].
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
 [1]: /tracing/setup/php/#install-the-extension
 [2]: https://github.com/DataDog/dd-trace-php/releases
-[3]: #modify-the-ini-file
-[4]: https://github.com/DataDog/dd-trace-php/releases/latest
-[5]: https://app.datadoghq.com/apm/services
+[3]: https://github.com/DataDog/dd-trace-php/releases/latest
+[4]: https://app.datadoghq.com/apm/services
+[5]: /tracing/visualization/#trace

@@ -1,16 +1,18 @@
 ---
 title: Get Pipeline Order
 type: apicode
-order: 24.1
+order: 25.1
 external_redirect: /api/#get-pipelines-order
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/logs/config/pipeline-order`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="get_pipelines_order" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.get_pipeline_order" >}}

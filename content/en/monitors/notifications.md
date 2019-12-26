@@ -5,6 +5,7 @@ description: Setting up monitor notifications
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
+  - /developers/faq/what-do-notifications-do-in-datadog
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
@@ -36,20 +37,19 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
 
-***Note:*** *To avoid notification storms, Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
-
 ## Variables
 
 Use variables to customize your monitor notifications, the available variables are:
 
 | Variable                | Description                                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
 | `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
 | `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
 | `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
 | `{{comparator}}`        | Display the relational value selected in the monitor's *Set alert conditions* section.         |
 | `{{last_triggered_at}}` | Display the UTC date/time when the monitor last triggered.                                     |
+| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.  |
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
@@ -68,7 +68,6 @@ Note:
 * See a complete list of contextual template variables available to your monitor by clicking the **Use message template variables** link or in the list of suggestions that appears when you type `{{` to begin a template variable name. The variables available are different depending on the combination of metric, tags, and other features of the monitor you are working on.
 
 * The tag template variables can also be used in the monitor titles (names), but the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).
-
 
 * Some tags identifying your triggering scope are automatically inserted into the title of your multi alert.
 
@@ -94,6 +93,18 @@ If your tag group's key has a period in it, you have to hardwire your template v
 For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
+
+### Template variable arithmetic
+
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so: 
+
+`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
+
+Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
+
+For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
+
+`{{eval "last_triggered_at_epoch-15*60*1000"}}`
 
 ## Conditional variables
 
@@ -328,7 +339,7 @@ After setting up the [Webhooks integration][1], type `@webhook` in your notifica
 
 ## Test monitor notifications
 
-**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
@@ -426,6 +437,13 @@ https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Comments
+
+To include a comment in the monitor message that only shows in the monitor edit screen, use the syntax:
+```text
+{{!-- this is a comment --}}
+```
 
 ## Further Reading
 

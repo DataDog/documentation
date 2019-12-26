@@ -5,19 +5,22 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -X POST -H "Content-type: application/json" \
+curl -X POST \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
     "channels": [
-      {
-        "channel_name": "<CHANNEL_NAME_3>",
-        "transfer_all_user_comments": "false",
-        "account": "<SLACK_ACCOUNT_1>"
-      },
-      {
-        "channel_name": "<CHANNEL_NAME_4>",
-        "transfer_all_user_comments": "false",
-        "account": "<SLACK_ACCOUNT_2>"
-      }
+        {
+          "channel_name": "#channel_name_main_account",
+          "transfer_all_user_comments": "false",
+          "account": "Main_Account"
+        },
+        {
+          "channel_name": "#channel_name_doghouse",
+          "transfer_all_user_comments": "false",
+          "account": "doghouse"
+        }
     ]
-  }' \
-"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
+}' \
+"https://api.datadoghq.com/api/v1/integration/slack"

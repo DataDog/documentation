@@ -15,9 +15,9 @@ further_reading:
     tag: Blog
     text: Corréler automatiquement des logs de requête avec des traces
 ---
-L'ajout automatique de `trace_id` et `span_id` à vos logs avec les bibliothèques de tracing permet une meilleure mise en corrélation des données de l'APM avec les données Log Management. Cette fonctionnalité peut être utilisée dans la plateforme pour afficher les logs spécifiques qui sont corrélés à la trace observée.
+L'ajout automatique de `trace_id` et `span_id` à vos logs avec les bibliothèques de tracing permet une meilleure mise en corrélation des données de l'APM avec les données Log Management. Cette fonctionnalité peut être utilisée dans la plateforme pour afficher les logs spécifiques qui sont corrélés à la [trace][1] observée.
 
-Avant de corréler des traces à des logs, assurez-vous que vos logs sont envoyés au format JSON ou [analysés par le bon processeur de log pour le langage utilisé][1].
+Avant de corréler des traces à des logs, assurez-vous que vos logs sont envoyés au format JSON ou [analysés par le bon processeur de log pour le langage utilisé][2].
 
 Vos logs *doivent* être convertis en attributs Datadog afin que la corrélation entre les traces et les logs fonctionne.
 
@@ -29,15 +29,15 @@ Vos logs *doivent* être convertis en attributs Datadog afin que la corrélation
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Activez l'injection dans la [configuration][1] du traceur Java en définissant le paramètre `Ddd.logs.injection=true` ou via la variable d'environnement `DD_LOGS_INJECTION=true`.
+Activez l'injection dans la [configuration][1] du traceur Java en ajoutant le paramètre `-Ddd.logs.injection=true` comme argument de démarrage jvm ou via la variable d'environnement `DD_LOGS_INJECTION=true`.
 
-**Remarque** : actuellement, seul **slf4j** est pris en charge pour l'auto-injection MDC.
-
-Si les logs sont déjà au format JSON, vous n'avez plus rien à faire. S'ils sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre enregistreur :
+Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre logger :
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
+
+Si vos logs sont au format JSON et que vous utilisez Logback, vous n'avez plus rien à faire. Si vous utilisez une autre bibliothèque de logging, vous devez activer l'auto-injection des attributs MDC dans vos logs.
 
 [1]: /fr/tracing/setup/java/#configuration
 {{% /tab %}}
@@ -45,7 +45,7 @@ Si les logs sont déjà au format JSON, vous n'avez plus rien à faire. S'ils so
 
 Activez l'injection avec la variable d'environnement `DD_LOGS_INJECTION=true` lorsque vous utilisez `ddtrace-run`.
 
-**Remarque** : l'auto-injection prend en charge la bibliothèque standard `logging`, ainsi que toutes les bibliothèques qui complètent le module de bibliothèque standard, comme la bibliothèque `json_log_formatter`. `ddtrace-run` appelle `logging.basicConfig` avant l'exécution de votre application. Si l'enregistreur racine possède un gestionnaire configuré, votre application doit modifier directement l'enregistreur racine et le gestionnaire.
+**Remarque** : l'auto-injection prend en charge la bibliothèque standard `logging`, ainsi que toutes les bibliothèques qui complètent le module de bibliothèque standard, comme la bibliothèque `json_log_formatter`. `ddtrace-run` appelle `logging.basicConfig` avant l'exécution de votre application. Si le logger racine possède un gestionnaire configuré, votre application doit modifier directement le logger racine et le gestionnaire.
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -75,7 +75,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace.
+Les applications Rails qui sont configurées avec un logger `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'logger Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -114,14 +114,14 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-Cela active l'injection automatique d'ID de trace pour `bunyan`, `paperplane`, `pino`, et `winston`.
+Cela active l'injection automatique de l'ID de trace pour `bunyan`, `paperplane`, `pino` et `winston`.
 
 **Remarque** : l'injection automatique fonctionne uniquement pour les logs au format JSON.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Le traceur .NET utilise la bibliothèque [LibLog][1] pour injecter automatiquement des identifiants de trace dans les logs de votre application. Il prend en charge l'injection dans les logs [NLog][2], [Log4Net][3] et [Serilog][4] par défaut.
+Le traceur .NET utilise la bibliothèque [LibLog][1] pour injecter automatiquement les identifiants de trace dans les logs de votre application. Il prend en charge l'injection dans les logs [NLog][2], [Log4Net][3] et [Serilog][4] par défaut.
 
 Activez l'injection dans la [configuration][5] du traceur .NET en définissant le paramètre `DD_LOGS_INJECTION=true` via les variables d'environnement ou dans les fichiers de configuration.
 
@@ -148,30 +148,34 @@ var tracer = new Tracer(settings);
 
 
 ```php
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-$append = sprintf(
-    ' [dd.trace_id=%d dd.span_id=%d]',
-    $span->getTraceId(),
-    $span->getSpanId()
-);
-my_error_logger('Message d'erreur.' . $append);
+  <?php
+  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+  $append = sprintf(
+      ' [dd.trace_id=%d dd.span_id=%d]',
+      $span->getTraceId(),
+      $span->getSpanId()
+  );
+  my_error_logger('Error message.' . $append);
+?>
 ```
 
-Si l'enregistreur implémente la [bibliothèque **monolog/monolog**][1], utilisez `Logger::pushProcessor()` pour ajouter automatiquement les identifiants aux messages de log :
+Si le logger implémente la [bibliothèque **monolog/monolog**][1], utilisez `Logger::pushProcessor()` pour ajouter automatiquement les identifiants aux messages de log :
 
 ```php
-$logger->pushProcessor(function ($record) {
-    $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-    if (null === $span) {
-        return $record;
-    }
-    $record['message'] .= sprintf(
-        ' [dd.trace_id=%d dd.span_id=%d]',
-        $span->getTraceId(),
-        $span->getSpanId()
-    );
-    return $record;
-});
+<?php
+  $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
+      $record['message'] .= sprintf(
+          ' [dd.trace_id=%d dd.span_id=%d]',
+          $span->getTraceId(),
+          $span->getSpanId()
+      );
+      return $record;
+  });
+?>
 ```
 
 **Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][2] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][3].
@@ -193,9 +197,9 @@ Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plu
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Si vous préférez corréler manuellement vos traces avec vos logs, utilisez l'API Datadog pour récupérer les identifiants de corrélation :
+Si vous préférez corréler manuellement vos [traces][1] avec vos logs, utilisez l'API Datadog pour récupérer les identifiants de corrélation :
 
-* Utilisez les méthodes d'API `CorrelationIdentifier#getTraceId()` et `CorrelationIdentifier#getSpanId()` pour injecter les identifiants au début et à la fin de chaque span dans vos logs (voir les exemples ci-dessous).
+* Utilisez les méthodes d'API `CorrelationIdentifier#getTraceId()` et `CorrelationIdentifier#getSpanId()` pour injecter les identifiants au début et à la fin de chaque [span][2] dans vos logs (voir les exemples ci-dessous).
 * Configurez MDC pour utiliser les clés injectées :
   * `dd.trace_id` : l'ID de la trace active lors de l'écriture du message de log (ou `0` en l'absence de trace).
   * `dd.span_id` : l'ID de la span active lors de l'écriture du message de log (ou `0` en l'absence de trace).
@@ -240,25 +244,27 @@ finally {
 }
 ```
 
-Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id` et `dd.span_id` à votre modèle de log :
+Modifiez ensuite la configuration de votre logger en ajoutant `dd.trace_id` et `dd.span_id` à votre pattern de log :
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
+**Remarque** : si vous n'utilisez pas une [intégration de log Datadog][3] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][4].
 
-[Consultez la documentation relative à la journalisation Java][1] pour en savoir plus sur l'implémentation d'un enregistreur spécifique ou découvrir comment créer des logs au format JSON.
+[Consultez la documentation relative à la journalisation Java][3] pour en savoir plus sur l'implémentation d'un logger spécifique ou découvrir comment créer des logs au format JSON.
 
 
-[1]: /fr/logs/log_collection/java/#raw-format
-[2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/tracing/visualization/#spans
+[3]: /fr/logs/log_collection/java/#raw-format
+[4]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
 
 **Injection manuelle d'ID de trace avec le module de journalisation de la bibliothèque standard**
 
-Si vous préférez corréler manuellement vos traces avec vos logs, ajustez votre module `logging` en modifiant votre formateur de log de façon à inclure les attributs ``dd.trace_id`` et ``dd.span_id`` à partir de l'entrée de log.
+Si vous préférez corréler manuellement vos [traces][1] avec vos logs, ajustez votre module `logging` en modifiant votre formateur de log de façon à inclure les attributs ``dd.trace_id`` et ``dd.span_id`` à partir de l'entrée de log.
 
 La configuration ci-dessous est utilisée par la méthode d'injection automatique et prise en charge par défaut par l'intégration de log Python :
 
@@ -312,23 +318,24 @@ structlog.configure(
 log = structlog.get_logger()
 ```
 
-Une fois l'enregistreur configuré, si vous exécutez une fonction tracée qui logue un événement, vous obtenez les informations du traceur injecté :
+Une fois le logger configuré, si vous exécutez une fonction tracée qui logue un événement, vous obtenez les informations du traceur injecté :
 
 ```
 >>> traced_func()
 {"event": "Contexte du traceur", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
+**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][2] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][3].
 
-[Consultez la documentation relative à la journalisation Python][1] pour vous assurer que l'intégration de log Python est bien configurée et que vos logs Python sont automatiquement analysés.
+[Consultez la documentation relative à la journalisation Python][2] pour vous assurer que l'intégration de log Python est bien configurée de façon à ce que vos logs Python soient automatiquement analysés.
 
 
-[1]: /fr/logs/log_collection/python/#configure-the-datadog-agent
-[2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/logs/log_collection/python/#configure-the-datadog-agent
+[3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Pour ajouter des ID de trace à votre propre enregistreur, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
+Pour ajouter des ID de trace à votre propre logger, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
 
 Pour s'assurer du bon fonctionnement de la corrélation des logs, vérifiez que les éléments suivants sont inclus dans chaque message :
 
@@ -368,7 +375,7 @@ Consultez la [documentation relative à la journalisation Ruby][1] pour vérifie
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Le traceur Go expose deux appels d'API afin d'ajouter les identifiants de span et de trace aux messages de log via les méthodes exportées à partir du type `SpanContext` :
+Le traceur Go expose deux appels d'API afin d'ajouter les identifiants de [span][2] et de [trace][1] aux messages de log via les méthodes exportées à partir du type `SpanContext` :
 
 ```go
 package main
@@ -395,11 +402,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 L'exemple ci-dessus explique comment utiliser le contexte de la span dans le paquet `log` de la bibliothèque standard. Cette même logique peut être appliquée aux paquets tiers.
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
+**Remarque** : si vous n'utilisez pas une [intégration de log Datadog][3] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][4].
 
 
-[1]: /fr/logs/log_collection/go/#configure-your-logger
-[2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/tracing/visualization/#spans
+[3]: /fr/logs/log_collection/go/#configure-your-logger
+[4]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -407,7 +416,7 @@ L'exemple ci-dessus explique comment utiliser le contexte de la span dans le paq
 
 Si votre bibliothèque de journalisation n'est pas compatible avec l'injection automatique, mais que vous utilisez des logs au format JSON, vous pouvez effectuer une injection manuelle directement dans votre code.
 
-Exemple d'utilisation de `console` comme enregistreur sous-jacent :
+Exemple d'utilisation de `console` comme logger sous-jacent :
 
 ```javascript
 const tracer = require('dd-trace')
@@ -423,7 +432,7 @@ class Logger {
       tracer.inject(span.context(), formats.LOG, record)
     }
 
-    console.log(record)
+    console.log(JSON.stringify(record))
   }
 }
 
@@ -475,4 +484,5 @@ Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/logs/#enabling-log-collection-from-integrations
+[1]: /fr/tracing/visualization/#trace
+[2]: /fr/agent/logs/#enabling-log-collection-from-integrations

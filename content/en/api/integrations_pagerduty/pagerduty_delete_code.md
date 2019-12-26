@@ -1,16 +1,18 @@
 ---
 title: Delete a PagerDuty integration
 type: apicode
-order: 18.4
+order: 19.4
 external_redirect: /api/#delete-a-pagerduty-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/integration/pagerduty`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="pagerduty_delete" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.pagerduty_delete" >}}

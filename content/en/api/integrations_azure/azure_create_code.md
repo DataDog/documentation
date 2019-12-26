@@ -1,16 +1,18 @@
 ---
 title: Create an Azure integration
 type: apicode
-order: 16.2
+order: 17.2
 external_redirect: /api/#create-an-azure-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/azure`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="azure_create" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.azure_create" >}}

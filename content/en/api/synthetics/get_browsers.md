@@ -1,14 +1,14 @@
 ---
 title: Get devices for browser checks
 type: apicontent
-order: 29.9
-external_redirect: /api/#get-browsers
+order: 31.9
+external_redirect: /api/#get-devices-for-browser-checks
 ---
 
 ## Get devices for browser checks
 
 Get a list of devices for browser checks.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

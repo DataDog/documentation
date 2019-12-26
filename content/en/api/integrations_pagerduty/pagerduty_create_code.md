@@ -1,16 +1,18 @@
 ---
 title: Create a PagerDuty integration
 type: apicode
-order: 18.2
+order: 19.2
 external_redirect: /api/#create-a-pagerduty-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/integration/pagerduty`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="pagerduty_create" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.pagerduty_create" >}}

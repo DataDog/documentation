@@ -12,7 +12,7 @@ further_reading:
   - link: /tracing/advanced/runtime_metrics
     tag: Documentation
     text: Métriques de runtime
-  - link: 'https://learn.datadoghq.com/course/view.php?id=4'
+  - link: 'https://learn.datadoghq.com/enrol/index.php?id=17'
     tag: Centre d'apprentissage
     text: Présentation de la surveillance des performances des applications
 aliases:
@@ -25,7 +25,7 @@ disable_toc: true
 </br>
 ## En quoi consiste l'APM Datadog ?
 
- La surveillance des performances d'application (APM ou tracing) de Datadog vous fournit des informations précises sur les performances de votre application, grâce aux dashboards générés automatiquement qui surveillent des métriques clés, comme le volume et la latence des requêtes, ou encore aux traces détaillées portant sur des requêtes individuelles. Lorsqu'une requête est envoyée à une application, Datadog peut surveiller les traces associées au sein d'un système distribué et vous montrer des données systématiques sur ce qu'il advient de cette requête.
+ La surveillance des performances d'application (APM ou tracing) vous fournit des informations précises sur les performances de votre application, grâce aux dashboards générés automatiquement qui surveillent des métriques clés, comme le volume et la latence des requêtes, ou encore aux traces détaillées portant sur des requêtes individuelles. Ces données viennent compléter vos logs et la surveillance de votre infrastructure. Lorsqu'une requête est envoyée à une application, Datadog peut surveiller les [traces][1] au sein d'un système distribué, et vous montrer des données systématiques sur ce qu'il advient de cette requête.
 
 ## Présentation
 
@@ -34,7 +34,7 @@ disable_toc: true
     {{< nextlink href="/tracing/setup/" >}}<u>Instrumenter votre application</u> : Ajoutez une bibliothèque de tracing à votre application.{{< /nextlink >}}
     {{< nextlink href="/tracing/advanced/" >}}<u>Enrichir vos traces</u> : Enrichissez vos traces en injectant automatiquement un ID de trace dans vos logs, en ajoutant des métadonnées à vos spans, et en recueillant des métriques d'exécution associées à vos traces.{{< /nextlink >}}
     {{< nextlink href="/tracing/visualization/" >}}<u>Utiliser l'UI de l'APM</u> : Visualisez les données de votre APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés. {{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_search_and_analytics/" >}}<u>Analyse et recherche de traces</u> : Visualisez les données de votre APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés.{{< /nextlink >}}
+    {{< nextlink href="/tracing/app_analytics/" >}}<u>App Analytics</u> : Visualisez vos données d'APM avec des dashboards prêts à l'emploi, et surveillez les métriques clés.{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/" >}}<u>Guides</u> : Accédez à des articles d'aide supplémentaires à propos de l'APM et du tracing distribué.{{< /nextlink >}}
     {{< nextlink href="/tracing/troubleshooting/?tab=java" >}}<u>Dépannage</u> : Résolvez les problèmes de tracing courants.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -42,3 +42,8 @@ disable_toc: true
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+
+
+[1]: /fr/tracing/visualization/#trace

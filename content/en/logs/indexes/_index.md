@@ -26,22 +26,16 @@ Indexes are located on the [Configuration page][1] in the Indexes section. Doubl
 
 You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
-It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
-Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
-
-For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
-
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
 ## Exclusion Filters
 
-Index filters give dynamic control over what goes into your indexes.
+Index filters give dynamic control over what goes into your indexes. When set up, logs sampling is uniformly random, meaning the sampling has no impact on relative importance of each log. For example, if some logs were captured only for troubleshooting purposes, you may only want to index a given percentage of those logs with errors and warnings.
 
-For example, if some logs were captured only for troubleshooting purposes, you may only want to index those logs with errors and warnings. This can easily be achieved with exclusion filters.
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 To define a new index filter, click on the "add" button:
 
-{{< img src="logs/indexes/index_filters.png" alt="index fileters" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_filters.png" alt="index filters" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -52,8 +46,6 @@ To configure an exclusion filter:
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
-
-**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
 ### Reorder filters
 
@@ -76,6 +68,28 @@ Enable or disable them in one click on the Pipeline page:
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
 
+### Set daily quota
+
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). 
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][6], [sent to your archives][7], and used to [generate metrics from logs][8].
+
+Update or remove this quota at any time when editing the Index: 
+
+{{< img src="logs/indexes/index_quota.png" alt="index details" responsive="true" style="width:70%;">}}
+
+**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
+
+## Multi indexes
+
+It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
+Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
+
+For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
+
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes" responsive="true" style="width:70%;">}}
+
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -87,4 +101,7 @@ Enable or disable them in one click on the Pipeline page:
 [3]: /logs/explorer/analytics
 [4]: /logs/explorer/analytics/#dashboard
 [5]: /monitors/monitor_types/log
-[6]: /account_management/rbac
+[6]: https://docs.datadoghq.com/logs/live_tail/#overview
+[7]: https://docs.datadoghq.com/logs/archives/
+[8]: https://docs.datadoghq.com/logs/logs_to_metrics/
+[9]: /account_management/rbac

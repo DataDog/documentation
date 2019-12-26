@@ -11,10 +11,10 @@ further_reading:
     text: RBAC pour Log Management
   - link: account_management/rbac/role_api
     tag: Documentation
-    text: Gérer des rôles et des autorisations avec l'API Role
+    text: Gérer des rôles et des autorisations avec l’API Rôle
 ---
 <div class="alert alert-warning">
-La fonctionnalité RBAC est uniquement disponible pour Log Management. Elle est actuellement en version bêta privée. Demandez à votre représentant commercial ou responsable du succès client d'activer cette fonctionnalité.
+La fonctionnalité RBAC est uniquement disponible pour Log Management. Demandez à votre représentant commercial ou responsable du succès client d'activer cette fonctionnalité.
 </div>
 
 ## Rôles

@@ -35,13 +35,15 @@ Ce check surveille [IBM MQ][1].
 
 ## Implémentation
 
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][10] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
 Le check IBM MQ est inclus avec le paquet de l'[Agent Datadog][2].
 
 Afin d'utiliser le check IBM MQ, vous devez :
 
-1. Vous assurer que le [client IBM MQ][3] est installé (sauf si le serveur IBM MQ est déjà installé)
+1. Vous assurer que le [client IBM MQ][3] est installé (sauf si un serveur IBM MQ est déjà installé)
 2. Mettre à jour votre LD_LIBRARY_PATH afin d'inclure l'emplacement des bibliothèques
 
 Par exemple :
@@ -52,7 +54,7 @@ export LD_LIBRARY_PATH=/opt/mqm/lib64:/opt/mqm/lib:$LD_LIBRARY_PATH
 
 *Remarque* : l'Agent 6 utilise Upstart ou systemd pour orchestrer le service datadog-agent. Il est possible que des variables d'environnement doivent être ajoutées aux fichiers de configuration du service aux emplacements par défaut de /etc/init/datadog-agent.conf (Upstart) ou /lib/systemd/system/datadog-agent.service (systemd). Consultez la documentation sur Upstart ou systemd pour en savoir plus sur la configuration de ces paramètres.
 
-Voici un exemple de la configuration utilisée pour systemd :
+Voici un exemple de configuration utilisée pour systemd :
 
 ```yaml
 [Unit]
@@ -74,7 +76,7 @@ ExecStart=/opt/datadog-agent/bin/agent/agent run -p /opt/datadog-agent/run/agent
 WantedBy=multi-user.target
 ```
 
-Voici un exemple de la configuration Upstart :
+Voici un exemple de configuration upstart :
 
 ```
 description "Datadog Agent"
@@ -103,7 +105,7 @@ end script
 
 À chaque mise à jour de l'Agent, ces fichiers sont effacés et doivent à nouveau être modifiés.
 
-Si vous utilisez Linux, lorsque le client MQ est installé, vérifiez que l'éditeur de liens du runtime peut trouver les bibliothèques. Par exemple, avec ldconfig :
+Si vous utilisez Linux, une fois le client MQ installé, vérifiez que l'éditeur de liens à l'exécution parvient à trouver les bibliothèques. Par exemple, avec ldconfig :
 
 Précisez l'emplacement de la bibliothèque dans un fichier de configuration ld.
 
@@ -172,28 +174,33 @@ queues:
 
 #### Collecte de logs
 
-La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
-```
-    logs_enabled: true
-```
+**Disponible à partir des versions > 6.0 de l'Agent**
 
-Redirigez ensuite le fichier de configuration vers les bons fichiers de log MQ. Vous pouvez supprimer la mise en commentaire des lignes en bas du fichier de configuration de l'intégration MQ et les modifier comme bon vous semble :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-```yaml
-logs:
-  - type: file
-    path: /var/mqm/log/<NOMAPP>/active/AMQERR01.LOG
-    service: <NOMAPP>
-    source: ibm_mq
-    log_processing_rules:
-      - type: multi_line
-        name: new_log_start_with_date
-        pattern: "\d{2}/\d{2}/\d{4}"
-```
+    ```yaml
+      logs_enabled: true
+    ```
+
+2. Redirigez ensuite le fichier de configuration vers les bons fichiers de log MQ. Vous pouvez supprimer la mise en commentaire des lignes en bas du fichier de configuration de l'intégration MQ et les modifier comme bon vous semble :
+
+    ```
+      logs:
+        - type: file
+          path: /var/mqm/log/<APPNAME>/active/AMQERR01.LOG
+          service: <APPNAME>
+          source: ibm_mq
+          log_processing_rules:
+            - type: multi_line
+              name: new_log_start_with_date
+              pattern: "\d{2}/\d{2}/\d{4}"
+    ```
+
+3. [Redémarrez l'Agent][5].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `ibm_mq` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `ibm_mq` dans la section Checks.
 
 ## Données collectées
 
@@ -203,11 +210,20 @@ logs:
 
 ### Checks de service
 
-Il existe trois checks de service :
+**mysql.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au serveur MQ pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
 
-`ibm_mq.can_connect` : vérifie si la connexion à IBM MQ est possible.
-`ibm_mq.queue_manager` : vérifie si le gestionnaire de files d'attente fonctionne.
-`ibm_mq.queue` : vérifie si la file d'attente existe.
+**ibm_mq.queue_manager** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques provenant du gestionnaire de files d'attente. Si ce n'est pas le cas, renvoie `OK`.
+
+**ibm_mq.queue** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques sur les files d'attente. Si ce n'est pas le cas, renvoie `OK`.
+
+**ibm_mq.channel** :br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques sur les canaux. Si ce n'est pas le cas, renvoie `OK`.
+
+**ibm_mq.channel.status** :<br/>
+Renvoie `CRITICAL` si le statut est INACTIVE, STOPPED ou STOPPING. Renvoie `OK` si le statut est RUNNING et renvoie `WARNING` si le statut peut passer à running.
 
 ### Événements
 
@@ -231,6 +247,7 @@ Documentation, liens et articles supplémentaires utiles :
 [7]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[10]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}

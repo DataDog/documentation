@@ -9,18 +9,24 @@ left:
           - name: product_integrations
             link: "https://www.datadoghq.com/product/integrations/"
             title: "Integrations"
-          - name: product_apm
-            link: "https://www.datadoghq.com/apm/"
-            title: "APM"
-          - name: product_logs
-            link: "https://www.datadoghq.com/log-management/"
-            title: "Log Management"
           - name: product_dashboards
             link: "https://www.datadoghq.com/dashboarding/"
             title: "Dashboards"
+          - name: product_logs
+            link: "https://www.datadoghq.com/log-management/"
+            title: "Log Management"
+          - name: product_apm
+            link: "https://www.datadoghq.com/apm/"
+            title: "APM"
+          - name: product_network
+            link: "https://www.datadoghq.com/network/"
+            title: "Network"
           - name: product_synthetics
             link: "https://www.datadoghq.com/synthetics/"
             title: "Synthetics"
+          - name: product_rum
+            link: "https://www.datadoghq.com/rum/"
+            title: "RUM"
           - name: product_alerts
             link: "https://www.datadoghq.com/alerts/"
             title: "Alerts"
@@ -37,6 +43,15 @@ left:
     link: "#"
     title: "Solutions"
     children:
+      - name: solutions_financial
+        link: "https://www.datadoghq.com/solutions/financial-services/"
+        title: "Financial Services"
+      - name: solutions_manufacturing
+        link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
+        title: "Manufacturing & Logistics"
+      - name: solutions_healthcare
+        link: "https://www.datadoghq.com/solutions/healthcare/"
+        title: "Healthcare/Life Sciences"
       - name: solutions_retail
         link: "https://www.datadoghq.com/solutions/retail-ecommerce/"
         title: "Retail/E-Commerce"
@@ -46,15 +61,25 @@ left:
       - name: solutions_gaming
         link: "https://www.datadoghq.com/solutions/gaming/"
         title: "Gaming"
-      - name: solutions_manufacturing
-        link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
-        title: "Manufacturing & Logistics"
-      - name: solutions_financial
-        link: "https://www.datadoghq.com/solutions/financial-services/"
-        title: "Financial Services"
-      - name: solutions_healthcare
-        link: "https://www.datadoghq.com/solutions/healthcare/"
-        title: "Healthcare/Life Sciences"
+      - name: solutions_cloudmigration
+        link: "https://www.datadoghq.com/solutions/cloud-migration/"
+        title: "Cloud Migration"
+      - name: solutions_monitoringconsolidation
+        link: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
+        title: "Monitoring Consolidation"
+      - name: solutions_devops
+        link: "https://www.datadoghq.com/solutions/devops/"
+        title: "DevOps"
+      - name: solutions_hybridcloudmonitoring
+        link: "https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/"
+        title: "Hybrid Cloud Monitoring"
+      - name: solutions_iotmonitoring
+        link: "https://www.datadoghq.com/solutions/iot-monitoring/"
+        title: "IoT Monitoring"
+      - name: solutions_machinelearning
+        link: "https://www.datadoghq.com/solutions/machine-learning/"
+        title: "Machine Learning"
+
 right:
   - name: about
     link: "https://www.datadoghq.com/about/"
@@ -71,13 +96,22 @@ right:
             title: "Press"
           - name: about_team
             link: "https://www.datadoghq.com/about/team/"
-            title: "Team"
+            title: "Leadership"
           - name: about_careers
             link: "https://www.datadoghq.com/careers/"
             title: "Careers"
           - name: about_analyst
             link: "https://www.datadoghq.com/about/analyst/"
             title: "Analyst Reports"
+          - name: about_investors
+            link: "https://investors.datadoghq.com/"
+            title: "Investor Relations"
+          - name: about_awards
+            link: "https://www.datadoghq.com/about/awards/"
+            title: "Awards"
+          - name: about_timeline
+            link: "https://www.datadoghq.com/about/timeline/"
+            title: "Timeline"
   - name: blog
     link: "https://www.datadoghq.com/blog/"
     title: "Blog"
@@ -88,12 +122,12 @@ right:
           - name: blog_engineering
             link: "https://www.datadoghq.com/blog/engineering/"
             title: "Engineering"
-          - name: blog_community
-            link: "https://www.datadoghq.com/blog/community/"
-            title: "Community"
           - name: blog_pupculture
             link: "https://www.datadoghq.com/blog/pup-culture/"
             title: "Pup Culture"
+          - name: blog_community
+            link: "https://www.datadoghq.com/blog/community/"
+            title: "Community"
   - name: docs
     link: ""
     title: "Docs"

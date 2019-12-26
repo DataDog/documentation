@@ -5,6 +5,7 @@ aliases:
   - /fr/guides/multiaccountorg
   - /fr/account_management/mult_account
   - /fr/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
+  - /fr/account_management/multi_organisations
 further_reading:
   - link: account_management/saml
     tag: Documentation
@@ -12,7 +13,9 @@ further_reading:
 ---
 Il est possible de gérer plusieurs organisations enfant à partir d'un compte d'organisation parent. Cette fonctionnalité sert généralement aux prestataires de services gérés qui possèdent des clients qui ne doivent pas accéder aux données des autres clients. Les utilisateurs peuvent être ajoutés à l'organisation parent ou à plusieurs organisations enfant et passer d'une organisation à une autre depuis le [menu des paramètres du compte utilisateur][1].
 
-La fonctionnalité de compte multi-organisations n'est pas activée par défaut. Contactez l’[assistance Datadog][2] pour l'activer.
+Les paramètres du compte, telles que les adresses IP autorisées, ne sont pas transmis de l'organisation parent à l'organisation enfant.
+
+La fonctionnalité de compte multi-organisations n'est pas activée par défaut. Contactez l'[assistance Datadog][2] pour l'activer.
 
 Voici une présentation vidéo de deux minutes à ce sujet :
 
@@ -33,7 +36,7 @@ Vous pouvez programmer l'intégration d'une nouvelle sous-organisation à un ens
 
 ### Sous-domaines personnalisés
 
-La fonctionnalité de sous-domaine personnalisé n'est pas activée par défaut. Contactez l’[assistance Datadog][2] pour l'activer.
+La fonctionnalité de sous-domaine personnalisé n'est pas activée par défaut. Contactez l'[assistance Datadog][2] pour l'activer.
 
 Si vous faites partie de plusieurs organisations, les sous-domaines personnalisés vous aident à identifier la source d'une alerte ou d'une notification. Ils peuvent également vous rediriger immédiatement vers l'organisation associée au sous-domaine.
 
@@ -59,5 +62,5 @@ Pour configurer SAML pour plusieurs organisations, suivez la procédure suivante
 [6]: /fr/api
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /fr/graphing/dashboards/screenboard/#backup-my-screenboard
-[9]: /fr/monitors/#managing-monitors
+[9]: /fr/monitors/manage_monitor
 [10]: /fr/account_management/#managing-your-organizations

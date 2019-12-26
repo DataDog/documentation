@@ -1,13 +1,18 @@
 ---
 title: Edit metric metadata
 type: apicode
-order: 25.5
+order: 26.5
 external_redirect: /api/#edit-metric-metadata
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/metrics/<METRIC_NAME>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-metric-metadata-update" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-metric-metadata-update" >}}

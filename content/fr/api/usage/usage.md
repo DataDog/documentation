@@ -1,7 +1,7 @@
 ---
 title: Mesure d'utilisation
 type: apicontent
-order: 33
+order: 35
 external_redirect: /api/#mesure-d-utilisation
 ---
 
@@ -18,6 +18,5 @@ Grâce au endpoint de mesure d'utilisation, vous pouvez :
 * Obtenir l'utilisation horaire pour la recherche de traces
 * Obtenir l'utilisation horaire pour des checks Synthetics
 * Obtenir l'utilisation horaire pour des tâches Fargate
-
 
 Les données d'utilisation peuvent être transmises jusqu'à 72 heures après leur collecte. Elles sont conservées pendant 15 mois.

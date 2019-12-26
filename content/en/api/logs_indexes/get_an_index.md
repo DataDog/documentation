@@ -1,7 +1,7 @@
 ---
 title: Get an Index
 type: apicontent
-order: 23.2
+order: 24.2
 external_redirect: /api/#get-an-index
 ---
 
@@ -13,6 +13,6 @@ This endpoint is in public beta. If you have any feedback, <a href="/help">conta
 
 This endpoint returns an `Index` identified by its name.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

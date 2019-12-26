@@ -1,14 +1,19 @@
 ---
 title: Update user
 type: apicode
-order: 34.4
+order: 36.4
 external_redirect: /api/#update-user
 ---
 
 
-##### Signature
-`PUT /v1/users/<USER_ID>`
-##### Example Request
+**SIGNATURE**:
+
+`PUT /v1/user/<USER_ID>`
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-user-update" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-user-update" >}}

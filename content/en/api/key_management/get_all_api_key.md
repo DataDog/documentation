@@ -1,7 +1,7 @@
 ---
 title: Get all API keys
 type: apicontent
-order: 21.01
+order: 22.01
 external_redirect: /api/#get-all-api-keys
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-all-api-keys
 
 Get all API keys available for your account.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

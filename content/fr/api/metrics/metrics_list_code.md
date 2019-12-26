@@ -1,13 +1,18 @@
 ---
 title: Récupérer la liste des métriques actives
 type: apicode
-order: 25.1
+order: 26.1
 external_redirect: /api/#recuperer-la-liste-des-metriques-actives
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/metrics`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-metrics-list" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-metrics-list" >}}

@@ -1,7 +1,7 @@
 ---
 title: Get all application keys
 type: apicontent
-order: 21.06
+order: 22.06
 external_redirect: /api/#get-all-application-keys
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-all-application-keys
 
 Get all application keys available for your account.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

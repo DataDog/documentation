@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/docker
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - containers
   - log collection
@@ -55,7 +59,7 @@ Pour recueillir des métriques Docker sur tous vos conteneurs, exécutez **un** 
 
 Dans les deux cas, pour que le check Docker n'échoue pas, vos hosts requièrent l'activation de la gestion de mémoire cgroup. Consultez le [référentiel docker-dd-agent][3] pour savoir comment l'activer.
 
-#### Installation du host
+#### Installation sur un host
 
 1. Vérifiez si Docker est en cours d'exécution sur le host.
 2. Installez l'Agent comme décrit dans [les instructions d'installation de l'Agent][4] pour le système d'exploitation de votre host.
@@ -67,7 +71,7 @@ Dans les deux cas, pour que le check Docker n'échoue pas, vos hosts requièrent
 
 #### Installation de conteneur
 
-1. Vérifiez si Docker est en cours d'exécution sur le host.
+1. Vérifiez que Docker est en cours d'exécution sur le host.
 2. Conformément aux [instructions d'installation du conteneur Docker][8], exécutez ce qui suit :
 
         docker run -d --name dd-agent \
@@ -88,7 +92,7 @@ Dans la commande ci-dessus, vous pouvez transmettre votre clé d'API à l'Agent 
 | TAGS                                                                                              | Définit des tags de host en tant que chaîne délimitée par des virgules. Vous pouvez ajouter des tags simples et des tags clé/valeur sont disponibles. Par exemple : `-e TAGS="tag-simple, clé-tag:valeur-tag"`.                                                                           |
 | EC2_TAGS                                                                                          | Cette fonctionnalité permet à l'Agent d'envoyer des requêtes et d'enregistrer des tags personnalisés à l'aide de l'API EC2 lors du démarrage. Pour l'activer, utilisez la commande `-e EC2_TAGS=yes`. Remarque : cette fonctionnalité nécessite d'avoir associé un rôle IAM à l'instance.        |
 | NON_LOCAL_TRAFFIC                                                                                 | Cette fonctionnalité permet de transmettre des données StatsD à partir de n'importe quelle adresse IP externe. Pour l'activer, utilisez la commande `-e NON_LOCAL_TRAFFIC=yes`. Elle est utilisée pour transmettre les métriques depuis d'autres conteneurs ou systèmes. Consultez la [configuration réseau][10] pour en savoir plus. |
-| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD                                                | Définit les informations de configuration du proxy. Pour en savoir plus, consultez la [documentation relative au proxy de l'Agent][11].                                                                                                                                  |
+| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD                                                | Définit les informations de configuration du proxy. **Remarque** : `PROXY_PASSWORD` est obligatoire pour la transmission d'un mot de passe d'authentification. Il ne peut pas être renommé. Pour en savoir plus, consultez la [documentation relative au proxy de l'Agent][11].                                                                                                                                  |
 | SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Active et configure Autodiscovery. Pour en savoir plus, consultez le [guide sur Autodiscovery][12].                                                                                                                                   |
 
 **Remarque** : ajoutez `--restart=unless-stopped` si vous souhaitez limiter les redémarrages de votre Agent.
@@ -180,7 +184,7 @@ L'intégration Docker génère les événements suivants :
 ### Checks de service
 
 **docker.service_up** :
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`.
 
 **docker.container_health** :
 Ce check de service est seulement disponible pour l'Agent v5. Renvoie `CRITICAL` si un conteneur n'est pas sain, renvoie `UNKNOWN` si l'état de santé est inconnu ou renvoie `OK` pour les autres cas.
@@ -201,7 +205,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][21].
 
 ### Blog Datadog
 
-Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][24]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance du Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur l'utilisation de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
+Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][24]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance de Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur la surveillance de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
 
 Nous avons également rédigé plusieurs autres articles de blog détaillés pour vous aider à tirer le meilleur parti de Datadog et de Docker :
 
@@ -209,7 +213,7 @@ Nous avons également rédigé plusieurs autres articles de blog détaillés pou
 * [Comment recueillir des métriques Docker][26]
 * [8 faits surprenants sur l'adoption concrète de Docker][27]
 * [Surveiller Docker sur AWS ECS][28]
-* [Dockeriser Datadog][29]
+* [Optimiser Datadog pour Docker][29]
 * [Surveiller Docker avec Datadog][30]
 
 

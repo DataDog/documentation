@@ -8,7 +8,7 @@ further_reading:
     text: Présentation de DogStatsD
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques client de Datadog et sa communauté pour DogstatsD et les API
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
     tag: GitHub
     text: Code source de DogStatsD
@@ -244,7 +244,7 @@ Apprenez-en plus sur le [type Sets dans la documentation relative aux métriques
 
 ## Option de métrique : taux d'échantillonnage
 
-Étant donné que le traitement de l'envoi des paquets UDP peut s'avérer trop volumineux pour certains chemins de codes fortement utilisés, les clients DogStatsD prennent en charge l'échantillonnage. Cela signifie qu'ils n'envoient pas systématiquement les métriques, mais seulement un certain pourcentage du temps. Le code suivant envoie une métrique histogram seulement une fois sur deux environ :
+Étant donné l'envoi de paquets UDP peut s'avérer trop intensif pour certains chemins de codes nécessitant des performances optimales, les clients DogStatsD prennent en charge l'échantillonnage. Cela signifie qu'ils n'envoient pas systématiquement les métriques, mais seulement un certain pourcentage du temps. Le code suivant envoie une métrique histogram seulement une fois sur deux environ :
 
 ```python
 

@@ -5,14 +5,14 @@ order: 9.4
 external_redirect: /api/#mettre-a-jour-une-liste-de-dashboard
 ---
 
-##### Signature
+**SIGNATURE** :
 
-`PUT https://api.datadoghq.com/api/v1/dashboard/lists/manual/<ID_LISTE>`
+`PUT /v1/dashboard/lists/manual/<ID_LISTE>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="api-dashboard-list-update" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.api-dashboard-list-update" >}}

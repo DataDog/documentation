@@ -1,13 +1,18 @@
 ---
 title: Supprimer un monitor
 type: apicode
-order: 26.04
+order: 27.05
 external_redirect: /api/#supprimer-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/monitor/<ID_MONITOR>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-delete" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-delete" >}}

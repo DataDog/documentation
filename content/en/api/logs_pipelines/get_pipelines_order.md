@@ -1,7 +1,7 @@
 ---
 title: Get Pipeline Order
 type: apicontent
-order: 24.1
+order: 25.1
 external_redirect: /api/#get-pipelines-order
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-pipelines-order
 
 Get the current order of your pipelines.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

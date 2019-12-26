@@ -54,7 +54,7 @@ Si le parser ne se trouve **pas** dans le `PYTHONPATH` de l'Agent, vous pouvez u
 
 Dans ce format, l'Agent tente d'importer une fonction appelée `custom_parser` à partir de `/chemin/vers/mon/parsers_module.py`.
 
-Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du collecteur de l'Agent :
+Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du Collector de l'Agent :
 
 * Si l'Agent n'est pas en mesure d'importer votre fonction, recherchez `Could not load Dogstream line parser`.
 
@@ -68,7 +68,7 @@ Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez p
 
 Les fonctions de parsing personnalisées doivent :
 
-- accepter deux paramètres : un objet enregistreur Python (pour le debugging) et un paramètre de chaîne spécifiant la ligne à parser.
+- accepter deux paramètres : un objet logger Python (pour le debugging) et un paramètre de chaîne spécifiant la ligne à parser.
 - renvoyer un tuple ou une liste de tuples sous la forme :
 
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
@@ -250,4 +250,4 @@ Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de lo
 [8]: /fr/agent/guide/agent-commands
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /fr/help
-[11]: /fr/agent/#send-a-flare
+[11]: /fr/agent/troubleshooting/send_a_flare

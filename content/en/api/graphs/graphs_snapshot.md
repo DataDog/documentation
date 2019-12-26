@@ -9,7 +9,7 @@ external_redirect: /api/#graph-snapshot
 
 **Note**: When a snapshot is created, [there is some delay][1] before it is available.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`metric_query`** [*required*]:
     The metric query.

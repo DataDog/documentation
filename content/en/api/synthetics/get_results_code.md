@@ -1,17 +1,18 @@
 ---
 title: Get the most recent results
 type: apicode
-order: 29.5
-external_redirect: /api/#get-results
+order: 31.5
+external_redirect: /api/#get-the-most-recent-results
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/results`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_results" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_results" >}}

@@ -1,17 +1,18 @@
 ---
 title: Get devices for browser checks
 type: apicode
-order: 29.9
-external_redirect: /api/#get-browsers
+order: 31.9
+external_redirect: /api/#get-devices-for-browser-checks
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/synthetics/browser/devices`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_browsers" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_browsers" >}}

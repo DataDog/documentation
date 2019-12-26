@@ -4,7 +4,7 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは英語では対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: '7月16日〜17日にニューヨークで開催されるDashカンファレンスにご参加ください。'
-  mobile_message: '7月16日〜17日にニューヨークで開催されるDashカンファレンスにご参加ください。'
-  link: 'https://www.dashcon.io/?utm_source=Trade+Show&utm_medium=DatadogOrganized&utm_campaign=Tradeshow-201907DashBanner'
+  desktop_message: ネットワーク パフォーマンス モニタリングの正式提供を開始しました！
+  mobile_message: ネットワーク パフォーマンス モニタリング提供開始!
+  link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
   exclude: []

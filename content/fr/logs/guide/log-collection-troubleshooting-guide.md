@@ -17,11 +17,11 @@ further_reading:
     tag: FAQ
     text: "Pourquoi mes logs s'affichent avec un statut Info même lorsqu'il s'agit d'un avertissement ou d'une erreur\_?"
 ---
-Plusieurs problèmes courants peuvent survenir lors de [l'envoi de nouveaux logs à Datadog][1] via le collecteur de logs dans `dd-agent`. Si vous rencontrez des problèmes lors de l'envoi de nouveaux logs à Datadog, cette liste vous permettra de les dépanner. Si vous ne parvenez pas à résoudre votre problème, [contactez-nous][2] pour obtenir de l'aide.
+Plusieurs problèmes courants peuvent survenir lors de [l'envoi de nouveaux logs à Datadog][1] via le collecteur de logs dans `dd-agent`. Si vous rencontrez des problèmes lors de l'envoi de nouveaux logs à Datadog, la liste suivante peut vous aider à les corriger. Si vous ne parvenez pas à résoudre votre problème, [contactez l'assistance Datadog][2] pour obtenir de l'aide.
 
 ## L'Agent doit être redémarré
 
-Les modifications de la configuration de l'Agent `datadog-agent` prennent uniquement effet une fois l'Agent Datadog redémarré.
+Les modifications de la configuration de `datadog-agent` prennent uniquement effet une fois [l'Agent Datadog redémarré][3].
 
 ## Le trafic sortant du port 10516 est bloqué
 
@@ -38,14 +38,20 @@ Envoyez ensuite un log comme suit :
 <CLÉ_API> Ceci est un message test
 ```
 
-- Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez demander à l'Agent Datadog d'utiliser le port `443` pour transférer les logs (disponible uniquement avec l'Agent Datadog) en ajoutant ce qui suit à `datadog.yaml`:
+- Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez configurer l'Agent Datadog de façon à envoyer des logs via HTTPS en ajoutant ce qui suit à `datadog.yaml` :
 
 ```
 logs_config:
-  use_port_443: true
+  use_http: true
 ```
 
-## Aucun nouveau log écrit
+Consultez la [section Envoyer des logs via HTTPS][15] pour en savoir plus.
+
+## Vérifier le statut de l'Agent
+
+Il est souvent utile d'exécuter la [commande status de l'Agent][4] pour mieux comprendre votre problème.
+
+## Aucun nouveau log créé
 
 L'Agent Datadog recueille uniquement les logs qui ont été écrits une fois qu'il a commencé à les recueillir (en les suivant ou en les écoutant). Afin de vous assurer que la collecte de logs est bien configurée, vérifiez que de nouveaux logs ont été écrits.
 
@@ -53,9 +59,19 @@ L'Agent Datadog recueille uniquement les logs qui ont été écrits une fois qu'
 
 `datadog-agent` n'est pas exécuté en mode root (et nous vous déconseillons de le faire, de façon générale). C'est pourquoi lorsque vous configurez votre `datadog-agent` afin de suivre des fichiers de log (pour les logs personnalisés ou pour les intégrations), vous devez vous assurer que l'utilisateur `datadog-agent` bénéficie d'un accès en lecture aux fichiers de log dont vous souhaitez recueillir les données.
 
-Sans accès en lecture, vous verrez un message de ce type dans le `status` de l'Agent :
+Le message d'erreur suivant devrait alors s'afficher lorsque vous consultez le [statut de l'Agent][4] :
 
-{{< img src="logs/agent-log-executable-permission-issue.png" alt="Problème d'autorisation" responsive="true" style="width:70%;">}}
+```
+==========
+Logs Agent
+==========
+
+  test
+  ----
+    Type: file
+    Path: /var/log/application/error.log
+    Status: Error: file /var/log/application/error.log does not exist
+```
 
 Lancez la commande `namei` pour obtenir plus d'informations sur les autorisations du fichier :
 
@@ -70,7 +86,7 @@ Lancez la commande `namei` pour obtenir plus d'informations sur les autorisation
 ```
 
 Dans cet exemple, le dossier `application` n'est pas exécutable, l'Agent ne peut donc pas récupérer la liste de ses fichiers. De plus, l'Agent ne dispose pas des autorisations de lecture pour le fichier `error.log`.
-Ajoutez les autorisations manquantes via la [commande chmod][3].
+Ajoutez les autorisations manquantes via la [commande chmod][5].
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Autorisation OK" responsive="true" style="width:70%;">}}
 
@@ -79,7 +95,7 @@ Définissez les autorisations sur `644` dans la configuration de la rotation de 
 
 ## Problème d'autorisation et Journald
 
-Lorsque vous recueillez des logs à partir de journald, assurez-vous que l'utilisateur de l'Agent Datadog est ajouté au groupe systemd en suivant les instructions de l'[intégration journald][4].
+Lorsque vous recueillez des logs à partir de journald, assurez-vous que l'utilisateur de l'Agent Datadog est ajouté au groupe systemd en suivant les instructions de l'[intégration journald][6].
 
 Notez que journald envoie une charge utile vide si les autorisations du fichier sont incorrectes. Il n'est donc pas possible de générer ou d'envoyer un message d'erreur explicite dans ce cas.
 
@@ -87,19 +103,17 @@ Notez que journald envoie une charge utile vide si les autorisations du fichier 
 
 Nous vous conseillons de vérifier plusieurs fois les problèmes de configuration les plus courants dans l'implémentation de votre `datadog-agent` :
 
-1. Lancez la commande de statut de l'Agent pour détecter les problèmes de configuration majeurs : `datadog-agent status`.
+1. Vérifiez si la clé d'API `api_key` est définie dans `datadog.yaml`.
 
-2. Vérifiez si la clé d'API `api_key` est définie dans `datadog.yaml`.
+2. Vérifiez que votre `datadog.yaml` contient la ligne `logs_enabled: true`
 
 3. Par défaut, l'Agent ne recueille aucun log. Vérifiez qu'au moins un fichier .yaml du répertoire `conf.d/` de l'Agent inclut une section logs et les valeurs adéquates.
 
-4. Des erreurs se produisent peut-être durant le parsing de vos fichiers de configuration .yaml. Le format YAML étant relativement rigide, utilisez un bon [validateur YAML][5] en cas de doute.
-
-5. Vérifiez que votre `datadog.yaml` contient la ligne `logs_enabled: true`
+4. Des erreurs peuvent se produire durant le parsing de vos fichiers de configuration .yaml. Le format YAML étant relativement rigide, utilisez un [validateur YAML][7] en cas de doute.
 
 ### Rechercher des erreurs dans les logs de l'Agent
 
-Les logs peuvent contenir une erreur, ce qui expliquerait le problème. Pour rechercher des erreurs, exécutez simplement la commande suivante :
+Les logs peuvent contenir une erreur capable d'expliquer le problème. Pour rechercher des erreurs, exécutez la commande suivante :
 
 ```
 sudo cat /var/log/datadog/agent.log | grep ERROR
@@ -107,19 +121,19 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## Environnement Docker
 
-### La collecte de logs n'est pas activée
+### Collecte de logs désactivée
 
-1. Assurez-vous que l'Agent Datadog a accès au socket Docker
+1. Assurez-vous que l'Agent Datadog a accès au socket Docker.
 2. Vérifiez que l'utilisateur de l'Agent est dans le groupe Docker : `usermod -a -G docker dd-agent`.
-3. Vérifiez que la collecte de logs a été activée `DD_LOGS_ENABLED=true`
+3. Vérifiez que la collecte de logs a été activée avec `DD_LOGS_ENABLED=true` dans la configuration.
 
 ### Problèmes de configuration
 
-Au moins une configuration de log valide doit être définie pour commencer la collecte de logs. Il existe plusieurs façon de configurer la collecte de logs. Assurez-vous qu'au moins l'une d'entre elles est activée :
+Au moins une configuration de log valide doit être définie pour commencer la collecte de logs. Il existe plusieurs façons de configurer la collecte de logs. Assurez-vous qu'au moins l'une d'entre elles est activée :
 
-1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, qui recueille les logs à partir de tous les conteneurs (découvrez [comment exclure un sous-ensemble ici][6])
+1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, qui recueille les logs à partir de tous les conteneurs (découvrez [comment exclure un sous-ensemble ici][8]).
 
-2. Autodiscovery via les [étiquettes de conteneur][7]. Dans ce cas, assurez-vous que `datadog.yaml` dispose d'un écouteur Docker et d'un fournisseur de configuration :
+2. Autodiscovery grâce aux [étiquettes de conteneur][9] ; dans ce cas, assurez-vous que `datadog.yaml` dispose d'un écouteur Docker et d'un fournisseur de configuration :
 
 ```
 listeners:
@@ -129,7 +143,7 @@ config_providers:
     polling: true
 ```
 
-3. Autodiscovery dans Kubernetes via les [annotations de pods][8]. Dans ce cas, assurez-vous que `datadog.yaml` dispose d'un écouteur kubelet et d'un fournisseur de configuration :
+3. Autodiscovery dans Kubernetes grâce aux [annotations de pods][10] ; dans ce cas, assurez-vous que `datadog.yaml` dispose d'un écouteur kubelet et d'un fournisseur de configuration :
 
 ```
 listeners:
@@ -141,28 +155,28 @@ config_providers:
 
 ### Journald
 
-Lorsque vous utilisez Journald dans un environnement conteneurisé, suivez les instructions de l'[intégration journald][4] : un fichier spécifique est utilisé pour le montage sur l'Agent.
+Lorsque vous utilisez Journald dans un environnement conteneurisé, suivez les instructions de l'[intégration journald][6] : un fichier spécifique est utilisé pour le montage sur l'Agent.
 
 ## Environnement sans serveur
 
 ### Les logs des fonctions lambda ne sont pas visibles sur la page Log Explorer
 
-Consultez l'[intégration Datadog/AWS][9] pour configurer votre environnement. Si vous ne voyez toujours pas vos logs, vérifiez à nouveau les points suivants :
+Consultez l'[intégration Datadog/AWS][11] pour configurer votre environnement. Si vous ne voyez toujours pas vos logs, vérifiez à nouveau les points suivants :
 
 #### Configuration de la fonction lambda
 
-Vérifiez le paramètre de configuration lambda de Datadog :
+Vérifiez le paramètre de configuration du lambda de Datadog :
 
-* `<CLÉ_API>` : doit être remplacé par votre [clé d'API Datadog][10], soit directement dans le code Python, soit via une variable d'environnement. Si vous gérez plusieurs plateformes, vérifiez à nouveau que vous utilisez la bonne clé d'API `<API_KEY>` pour chaque plateforme.
+* `<API_KEY>` : doit être remplacé par votre [clé d'API Datadog][12], soit directement dans le code Python, soit via une variable d'environnement. Si vous gérez plusieurs plateformes, vérifiez à nouveau que vous utilisez la bonne clé d'API `<API_KEY>` pour chaque plateforme.
 
 
-#### La fonction lambda est déclenchée
+#### Fonction lambda déclenchée
 
 Vérifiez que la fonction lambda de Datadog est bien déclenchée en utilisant les métriques `aws.lambda.invocations` et `aws.lambda.errors` avec le tag `functionname` de votre fonction lambda dans Datadog. Vous pouvez également vérifier la présence d'erreurs dans les logs lambda de Datadog dans Cloudwatch.
 
 ## Filtrage attendu des logs
 
-Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][11]. Si c'est le cas, recherchez sur la page de configuration des index tout [filtre d'exclusion][12] qui pourrait entraîner le filtrage de vos logs.
+Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][13]. Si c'est le cas, recherchez sur la page de configuration des index tout [filtre d'exclusion][14] qui pourrait entraîner le filtrage de vos logs.
 
 ## Pour aller plus loin
 
@@ -171,13 +185,16 @@ Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][11].
 
 [1]: /fr/logs
 [2]: /fr/help
-[3]: https://en.wikipedia.org/wiki/Chmod
-[4]: https://docs.datadoghq.com/fr/integrations/journald/#pagetitle
-[5]: https://codebeautify.org/yaml-validator
-[6]: /fr/agent/docker/log/?tab=containerinstallation#filter-containers
-[7]: /fr/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[8]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[9]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[10]: https://app.datadoghq.com/account/settings#api
-[11]: https://app.datadoghq.com/logs/livetail
-[12]: /fr/logs/indexes/#exclusion-filters
+[3]: /fr/agent/guide/agent-commands/#restart-the-agent
+[4]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://en.wikipedia.org/wiki/Chmod
+[6]: https://docs.datadoghq.com/fr/integrations/journald/
+[7]: https://codebeautify.org/yaml-validator
+[8]: /fr/agent/docker/log/?tab=containerinstallation#filter-containers
+[9]: /fr/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
+[10]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[11]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[12]: https://app.datadoghq.com/account/settings#api
+[13]: https://app.datadoghq.com/logs/livetail
+[14]: /fr/logs/indexes/#exclusion-filters
+[15]: https://docs.datadoghq.com/fr/agent/logs/?tab=tailexistingfiles#send-logs-over-https

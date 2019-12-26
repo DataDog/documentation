@@ -5,14 +5,13 @@ kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 6
-description: >-
-  Surveillez la santé de votre cluster Kubernetes et des applications qui y sont exécutées. Enregistrez des événements de planification de Pod, suivez
-  le statut de vos Kubelets, et plus encore.
+description: 'Surveillez la santé de votre cluster Kubernetes et des applications qui y sont exécutées. Enregistrez des événements de planification de Pod, suivez le statut de vos Kubelets, et plus encore.'
 is_public: true
 aliases:
   - /fr/tracing/api/
   - /fr/integrations/kubernetes_state/
   - /fr/integrations/kube_proxy/
+  - /fr/integrations/Kubernetes
 public_title: Intégration Datadog/Kubernetes
 short_description: 'Enregistrez des événements de planification de Pod, suivez le statut de vos Kubelets, et plus encore.'
 categories:
@@ -30,8 +29,8 @@ ddtype: check
 
 Recueillez des métriques et des logs du service kubernetes en temps réel pour :
 
-* Visualiser et surveiller les états Kubernetes
-* Être informé des failovers et des événements kubernetes
+* Visualiser et surveiller les états de Kubernetes
+* Être informé des failovers et des événements de kubernetes
 
 Pour Kubernetes, il est recommandé d'exécuter l'Agent dans un DaemonSet. Nous avons créé une [image Docker][1] comprenant les intégrations Docker et Kubernetes activées.
 
@@ -52,6 +51,8 @@ Pour recueillir vos métriques kube-state :
   ```
   kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
   ```
+
+Une fois l'opération terminée, l’intégration Kubernetes State collecte automatiquement les métriques kube-state.
 
 ## Configurer Kubernetes DNS
 ### Configuration
@@ -100,7 +101,7 @@ Depuis la version 5.17.0, l'Agent Datadog prend en charge [l'option d'élection
 * Delete
 * DeletingAllPods
 * Didn't have enough resource
-* 
+* Error
 * Failed
 * FailedCreate
 * FailedDelete
@@ -126,33 +127,36 @@ Depuis la version 5.17.0, l'Agent Datadog prend en charge [l'option d'élection
 
 Le check Kubernetes contient les checks de service suivants :
 
-* `kubernetes.kubelet.check` :
+* `kubernetes.kubelet.check`: <br>
   s'il renvoie `CRITICAL`, `kubernetes.kubelet.check.ping` ou `kubernetes.kubelet.check.syncloop` est dans un état `CRITICAL` ou `NO DATA`.
 
-* `kubernetes.kubelet.check.ping` :
+* `kubernetes.kubelet.check.ping`:<br>
   s'il renvoie `CRITICAL` ou `NO DATA`, l'API Kubelet n'est pas disponible.
 
-* `kubernetes.kubelet.check.syncloop` :
+* `kubernetes.kubelet.check.syncloop`:<br>
   s'il renvoie `CRITICAL` ou `NO DATA`, la boucle de synchronisation de Kubelet qui met à jour les conteneurs ne fonctionne pas.
 
-* `kubernetes_state.node.ready` :
+* `kubernetes_state.node.ready`:<br>
   renvoie `CRITICAL` si le nœud du cluster n'est pas prêt. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.out_of_disk` :
+* `kubernetes_state.node.out_of_disk`:<br>
   renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.disk_pressure` :
+* `kubernetes_state.node.disk_pressure`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de disque. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.memory_pressure` :
+* `kubernetes_state.node.memory_pressure`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de la mémoire. Si ce n'est pas le cas, renvoie `OK`.
 
-* `kubernetes_state.node.network_unavailable` :
+* `kubernetes_state.node.network_unavailable`:<br>
   renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Si ce n'est pas le cas, renvoie `OK`.
+
+* `kubernetes_state.cronjob.on_schedule_check`:<br>
+  Renvoie `CRITICAL` si la date de planification d'une tâche cron est située dans le passé. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-* [Puis-je installer l'Agent sur mon ou mes nœuds principaux sur mon Kubernetes ?][9]
+* [Est-il possible d'installer l'Agent sur mon ou mes nœuds Kubernetes maîtres ?][9]
 * [Pourquoi mon check Kubernetes échoue-t-il et affiche-t-il une erreur ConnectTimeout sur le port 10250 ?][10]
 * [Comment transmettre les métriques sur le disque host lorsque dd-agent s'exécute sur un conteneur docker ?][11]
 * [Authentification client auprès de l'apiserver et de kubelet][12]
@@ -164,7 +168,7 @@ Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, 
 
 [1]: https://hub.docker.com/r/datadog/agent
 [2]: /fr/agent/basic_agent_usage/kubernetes
-[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [4]: /fr/agent
 [5]: /fr/agent/autodiscovery
 [6]: https://app.datadoghq.com/account/settings#agent/kubernetes

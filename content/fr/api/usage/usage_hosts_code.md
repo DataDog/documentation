@@ -1,13 +1,18 @@
 ---
 title: Obtenir l'utilisation horaire pour les hosts et conteneurs
 type: apicode
-order: 33.1
+order: 35.1
 external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-hosts-et-conteneurs
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/hosts`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-billing-usage-hosts" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-hosts" >}}

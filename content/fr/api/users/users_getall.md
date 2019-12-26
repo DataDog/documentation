@@ -1,7 +1,7 @@
 ---
 title: Récupérer tous les utilisateurs
 type: apicontent
-order: 34.3
+order: 36.3
 external_redirect: /api/#recuperer-tous-les-utilisateurs
 ---
 
@@ -9,11 +9,11 @@ external_redirect: /api/#recuperer-tous-les-utilisateurs
 
 Récupère la liste de tous les utilisateurs de l'organisation. Cette liste comprend tous les utilisateurs, même s'ils sont désactivés ou si leur compte n'a pas été vérifié.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 
-##### RÉPONSE
+**RÉPONSE** :
 
 - `users` : un tableau d'objets utilisateur.
 

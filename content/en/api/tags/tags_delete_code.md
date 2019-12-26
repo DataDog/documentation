@@ -1,13 +1,18 @@
 ---
 title: Remove host tags
 type: apicode
-order: 30.5
+order: 32.5
 external_redirect: /api/#remove-host-tags
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/tags/hosts/<HOSTNAME>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-tags-remove" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 *This endpoint does not return JSON on successful requests.*

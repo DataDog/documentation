@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Synthetics
 type: apicontent
-order: 33.6
+order: 35.6
 external_redirect: /api/#get-hourly-usage-for-synthetics
 ---
 
@@ -9,7 +9,8 @@ external_redirect: /api/#get-hourly-usage-for-synthetics
 
 Get Hourly Usage For [Synthetics][1].
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_hr`** [*required*]:
     Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:

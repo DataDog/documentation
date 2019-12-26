@@ -1,7 +1,7 @@
 ---
 title: Interroger les points de séries temporelles
 type: apicontent
-order: 25.3
+order: 26.3
 external_redirect: '/api/#interroger-les-points-de-series-temporelles'
 ---
 ## Interroger les points de séries temporelles
@@ -9,7 +9,8 @@ Cet endpoint vous permet d'interroger des métriques sur la période de votre ch
 
 *Remarque :* en Python, `from` est un mot réservé. À la place, l'API Python utilise les paramètres `start` et `end` dans l'appel de la fonction.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`from`** [*obligatoire, sauf en Python*] :
   secondes depuis l'epoch unix.
 * **`to`** [*obligatoire, sauf en Python*] :

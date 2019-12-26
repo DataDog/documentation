@@ -1,7 +1,7 @@
 ---
 title: Create a Pipeline
 type: apicontent
-order: 24.5
+order: 25.5
 external_redirect: /api/#create-a-pipeline
 ---
 
@@ -10,7 +10,7 @@ external_redirect: /api/#create-a-pipeline
 Create a Pipeline in your organization.
 
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`name`** [*required*]:

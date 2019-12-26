@@ -1,33 +1,32 @@
 ---
 title: Estimated Usage Metrics
-kind: faq
+kind: documentation
 ---
 
 ## Overview
 
-Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
+Datadog calculates your current estimated usage in near real-time. Estimate usage metrics enable you to:
 
-* Graph your estimated usage 
+* Graph your estimated usage
 * Create monitors around your estimated usage based on thresholds of your choosing
 * Get instant alerts of spikes or drops in your usage
 * Assess the potential impact of code changes on your usage in near real-time
 
-**Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average.  
+**Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average.
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" responsive="true">}}
 
 ### Types of usage
 
-Estimated usage metrics are generally available for the following usage types: 
+Estimated usage metrics are generally available for the following usage types:
 
-| Usage Type         | Metric                                                                                              |
-|--------------------|-----------------------------------------------------------------------------------------------------|
-| Infrastructure Hosts       | `datadog.estimated_usage.hosts`                                                                     |
-| Containers         | `datadog.estimated_usage.containers`                                                                |
-| Custom Metrics     | `datadog.estimated_usage.metrics.custom`                                                            |
+| Usage Type           | Metric                                   |
+|----------------------|------------------------------------------|
+| Infrastructure Hosts | `datadog.estimated_usage.hosts`          |
+| Containers           | `datadog.estimated_usage.containers`     |
+| Custom Metrics       | `datadog.estimated_usage.metrics.custom` |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" responsive="true">}}
-
 
 ### Multi-Org usage
 

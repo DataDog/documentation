@@ -1,7 +1,7 @@
 ---
 title: Get Slack integration
 type: apicontent
-order: 19.1
+order: 20.1
 external_redirect: /api/#get-slack-integration
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#get-slack-integration
 
 Get all information about your Datadog-Slack integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

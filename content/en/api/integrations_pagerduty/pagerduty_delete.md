@@ -1,7 +1,7 @@
 ---
 title: Delete a PagerDuty integration
 type: apicontent
-order: 18.4
+order: 19.4
 external_redirect: /api/#delete-a-pagerduty-integration
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-pagerduty-integration
 
 Delete the Datadog-PagerDuty integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

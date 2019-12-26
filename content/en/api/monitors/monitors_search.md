@@ -1,7 +1,7 @@
 ---
 title: Monitors search
 type: apicontent
-order: 26.12
+order: 27.13
 external_redirect: /api/#monitors-search
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#monitors-search
 
 Search and filter your monitors details.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*optional*]:
 

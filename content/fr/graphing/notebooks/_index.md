@@ -1,88 +1,112 @@
 ---
 title: Notebooks
 kind: documentation
+further_reading:
+  - link: graphing/dashboards/screenboard
+    tag: Documentation
+    text: Créer un screenboard
+  - link: graphing/dashboards/timeboard
+    tag: Documentation
+    text: Créer un timeboard
 ---
+## Présentation
 
-Les notebooks combinent des graphiques et du texte dans un format linéaire basé sur des cellules. Ils sont conçus pour vous permettre d'explorer vos données et de partager des histoires.
+Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils sont conçus pour explorer vos données et partager des histoires : enquêtes à la suite d'incidents, analyses de fin de projet, runbooks ou encore documentation d'infrastructure.
 
-## Cas d'utilisation
+{{< img src="graphing/notebooks/demo_notebook.png" alt="notebook de démonstration" responsive="true" style="width:100%;">}}
 
-### Création d'histoires reposant sur des données
+## Notebook List
 
-Vous pouvez utiliser un notebook pour créer et partager des histoires reposant sur des données avec vos collègues. Ainsi, ces derniers peuvent facilement explorer des enquêtes liées à des incidents, des analyses de fin de projet, des runbooks et de la documentation d'infrastructure.
+La [Notebook List][1] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, le créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en deux catégories :
 
-### Première exploration des données
+* **My Notebooks** : les notebooks que vous avez créés.
+* **Other Notebooks** : les notebooks créés par d'autres membres de votre équipe.
 
-Bien que les notebooks soient avant tout conçus pour être partagés, tout comme le Metrics Explorer ou les dashboards personnels, vous pouvez les utiliser pour représenter des métriques pour votre utilisation personnelle.
-
-## Partage et autorisations
+### Partage et autorisations
 
 Tous les membres de votre équipe peuvent ouvrir ou modifier un notebook. Cependant, seul le créateur d'un notebook peut le supprimer.
 
 Les modifications apportées au notebook d'un autre utilisateur ne sont pas enregistrées automatiquement. Si vous essayez d'enregistrer des modifications effectuées sur le notebook de quelqu'un d'autre, cela crée une copie, sauf si vous indiquez clairement que vous souhaitez remplacer l'original.
 
-Par défaut, les nouveaux notebooks ne sont pas enregistrés. Ils constituent l'outil idéal pour les travaux éphémères. Vous n'avez donc pas à vous soucier d'enregistrer des notebooks uniques que vous n'avez pas l'intention de consulter à nouveau.
+## Nouveau notebook
 
-## Caractéristiques importantes
+Créez un [notebook][2] depuis la navigation principale, en accédant à *Notebooks > New Notebook*.
 
-### Plusieurs intervalles de temps
-
-La puissance des notebooks repose notamment sur leur capacité à définir plusieurs intervalles de temps.
-
-Par défaut, toutes les cellules de graphique respectent le même intervalle de temps global que celui défini dans l'en-tête du notebook. Cependant, certaines cellules peuvent se dissocier de l'intervalle global et être définies sur un autre intervalle indépendant.
-
-Cela permet de comparer des métriques sur plusieurs intervalles de temps distincts au sein d'un notebook. Ainsi, vous pouvez facilement créer une chronologie cohérente pour un événement. Les notebooks sont donc particulièrement utiles pour les enquêtes liées à des incidents.
-
-En ce sens, les notebooks rassemblent les caractéristiques de deux types de dashboards Datadog : les timeboards, dans lesquels un seul intervalle de temps est appliqué à tous les graphiques, et les screenboards, dans lesquels l'intervalle de temps de chaque graphique est défini indépendamment.
+Par défaut, les nouveaux notebooks ne s'enregistrent pas automatiquement. Vous devez cliquer sur le bouton **Save**.
 
 ### Types de contenu
 
-Les métriques d'un notebook sont représentées graphiquement à l'aide de l'éditeur de requête standard qui s'affiche dans Datadog. Les notebooks prennent en charge trois types de visualisations : les séries temporelles, les cartes thermiques et les distributions.
+Les notebooks prennent en charge les visualisations et les cellules de texte.
 
-Comme dans le Metrics Explorer, vous pouvez comparer une métrique entre différents groupes de votre infrastructure. Par exemple, si les données d'une métrique sont transmises pour plusieurs hosts, un notebook vous permet de générer des graphiques séparés qui affichent le comportement de la métrique sur chaque host.
+#### Visualisation
 
-Le texte d'un notebook bénéficie du format Markdown. Cela signifie que les notebooks peuvent inclure des titres, des sous-titres, des liens, des images, des listes à puces et numérotées et des blocs de code.
+Les métriques des notebooks sont représentées graphiquement à l'aide de l'éditeur de requête de Datadog. Les notebooks prennent en charge les éléments suivants :
 
-## Instructions d'utilisation spécifiques
+* [Série temporelle][3]
+* [Carte thermique][4]
+* [Distribution][5]
+* [Flux de log][6]
+
+#### Texte
+
+Le texte d'un notebook bénéficie du format Markdown, qui permet l'utilisation de titres, de sous-titres, de liens, d'images, de listes et de blocs de code.
 
 ### Manipulation de cellules
 
-Lorsque vous ouvrez un notebook existant, ses cellules sont « fermées ». Pour ouvrir une cellule afin de la modifier, cliquez dessus ou naviguez jusqu'à celle-ci avec les touches fléchées, puis appuyez sur la touche Entrée. Pour fermer une cellule, cliquez en dehors de celle-ci ou appuyez sur `⌘ + Entrée`. Une seule cellule peut être ouverte à la fois.
+Lorsque vous ouvrez un notebook existant, les cellules sont « fermées ». Pour ouvrir une cellule afin de la modifier, cliquez dessus ou naviguez jusqu'à celle-ci avec les touches fléchées, puis appuyez sur la touche `Entrée`. Pour fermer une cellule, cliquez en dehors de celle-ci ou appuyez sur `CMD + Entrée`. Une seule cellule peut être ouverte à la fois.
 
-{{< img src="graphing/notebooks/states.png" alt="états" responsive="true" >}}
+Pour insérer, dupliquer ou supprimer des cellules, cliquez sur l'icône en forme d'engrenage qui apparaît à gauche du numéro de cellule, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton en forme de clavier dans l'en-tête du notebook.
 
-Pour insérer, dupliquer ou supprimer des cellules, cliquez sur l'icône en forme d'engrenage qui apparaît à gauche du numéro de cellule, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton du clavier dans l'en-tête du notebook.
-Les cellules peuvent également être réorganisées en utilisant des raccourcis clavier.
+### Intervalles de temps
 
-### Modification des intervalles de temps
+Par défaut, toutes les cellules de graphique respectent le même intervalle de temps global que celui défini dans l'en-tête du notebook. Cependant, certaines cellules peuvent se dissocier de l'intervalle global et être définies sur un autre intervalle indépendant. Cela permet de comparer des métriques sur plusieurs intervalles de temps distincts au sein d'un notebook, une fonctionnalité particulièrement utile pour les enquêtes à la suite d'incidents.
 
-Un indicateur de durée apparaît dans le coin supérieur droit de chaque cellule de graphique. Si la cellule est associée à l'intervalle de temps global, elle indique « Global Time ». Dans le cas contraire, elle précise l'intervalle de temps indépendant de la cellule.
+Pour définir un intervalle de temps spécifique, cliquez sur l'icône en forme d'horloge dans le coin supérieur droit d'une cellule de graphique. Décochez ensuite la case *Lock this cell to global time frame* et définissez l'intervalle de temps souhaité :
 
-Pour dissocier une cellule de l'intervalle de temps global, cliquez sur cet indicateur de durée.
+{{< img src="graphing/notebooks/time_selector.png" alt="Sélecteur d'intervalle de temps" responsive="true" style="width:60%;">}}
 
-{{< img src="graphing/notebooks/timerange.png" alt="intervalle de temps" responsive="true" style="width:40%;">}}
+**Remarque** : si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas la cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
 
-Veuillez noter que si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas cette cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
+### Agrandir un notebook
 
-### Fractionnement par tag et autres options pour les graphiques
+Développez le graphique en cliquant sur l'icône d'agrandissement située à droite de la cellule. Consultez la page [Widgets][7] pour en savoir plus sur le mode plein écran.
 
-Pour diviser un graphique par tag, modifier la taille d'un graphique ou activer/désactiver l'affichage de la légende d'un graphique, cliquez sur l'icône dans le coin droit de la cellule.
-Les légendes sont automatiquement désactivées lorsque la taille du graphique a été définie sur XS ou S. La modification de ces paramètres n'affecte que la cellule cible : la disposition des autres cellules du graphique n'est pas modifiée.
+### Options de disposition
 
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" style="width:40%;">}}
+Pour afficher les options de disposition suivantes, cliquez sur l'icône en forme de grille à droite de la cellule :
 
-### Création de liens vers des cellules précises
+* **Graph size** : sélectionnez la taille du graphique parmi `XS`, `S`, `M` (par défaut), `L` et `XL`.
+* **Graph legend** : décochez cette case pour masquer la légende. Les légendes sont automatiquement désactivées pour les graphiques `XS` et `S`.
+* **Grouping** : permet d'afficher un graphique par regroupement de sources.
 
-Pour copier l'URL d'une cellule spécifique, cliquez sur l'icône de lien située sur le côté droit de la cellule. Un lien direct est disponible pour les cellules graphiques et Markdown.
-Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, son notebook s'ouvre afin de présenter la cellule en question en haut de la fenêtre d'affichage. Les liens sont absolus, ce qui signifie que l'URL d'une cellule reste inchangée si elle est déplacée vers un nouvel emplacement dans son notebook.
+{{< img src="graphing/notebooks/layout_options.png" alt="options de disposition" responsive="true" style="width:50%;">}}
 
-{{< img src="graphing/notebooks/directlink.png" alt="lien direct" responsive="true" style="width:40%;">}}
+**Remarque** : si vous modifiez l'un de ces paramètres, le changement s'applique uniquement à la cellule sélectionnée.
 
-### Enregistrement, renommage et suppression d'un notebook
+### Liens vers des cellules précises
 
-Pour enregistrer un notebook, appuyez sur `⌘+` ou cliquez sur le bouton Enregistrer dans l'en-tête du notebook. Dès qu'un nouveau notebook a été enregistré une fois, il continue de s'enregistrer automatiquement à intervalles réguliers. Un notebook peut également être enregistré manuellement à tout moment entre deux enregistrements automatiques. Pour ne pas perdre votre travail, vous recevrez une invite de confirmation à chaque fois que vous tentez de quitter un notebook avec des modifications non enregistrées.
+Copiez l'URL d'une cellule spécifique en cliquant sur l'icône de lien située à droite de la cellule. Vous pouvez créer des liens directs pour les visualisations ainsi que pour les cellules Markdown.
+
+Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, le notebook s'ouvre afin de présenter la cellule en haut de la fenêtre d'affichage. Les liens sont absolus, ce qui signifie que l'URL d'une cellule reste inchangée même si elle est déplacée vers un nouvel emplacement dans le notebook.
+
+### Enregistrer, renommer, dupliquer et supprimer des notebooks
+
+Pour enregistrer un notebook, appuyez sur `CMD + S` ou cliquez sur le bouton **Save** dans l'en-tête du notebook. Une fois le premier enregistrement effectué, le notebook continue de s'enregistrer automatiquement à intervalles réguliers. Un notebook peut également être enregistré manuellement à tout moment entre deux enregistrements automatiques. Pour ne pas perdre votre travail, vous recevez une invite de confirmation chaque fois que vous tentez de quitter un notebook avec des modifications non enregistrées.
 
 Pour renommer un notebook, cliquez sur le champ de nom dans l'en-tête du notebook.
 
-Pour supprimer un notebook que vous avez créé, cliquez sur l'icône dans l'en-tête du notebook et sélectionnez Delete Notebook. Vous pouvez également supprimer vos propres notebooks à partir de la page Notebook List.
+Pour dupliquer un notebook spécifique, utilisez l'icône en forme d'engrenage dans le coin supérieur droit.
 
+Pour supprimer un notebook depuis son éditeur ou à partir de la page Notebook List, utilisez l'icône en forme d'engrenage dans le coin supérieur droit. Vous pouvez uniquement supprimer les notebooks que vous avez créés.
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook
+[3]: /fr/graphing/widgets/timeseries
+[4]: /fr/graphing/widgets/heat_map
+[5]: /fr/graphing/widgets/distribution
+[6]: /fr/graphing/widgets/log_stream
+[7]: /fr/graphing/widgets/#full-screen

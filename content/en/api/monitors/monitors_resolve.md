@@ -1,13 +1,14 @@
 ---
 title: Resolve monitor
 type: apicontent
-order: 26.06
+order: 27.07
 external_redirect: /api/#resolve-monitor
 ---
 
 ## Resolve monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`resolve`** [*required*]:
     Array of group(s) to resolve for a given monitor_id, e.g.:
     `{"monitor_id": "group_to_resolve"}`

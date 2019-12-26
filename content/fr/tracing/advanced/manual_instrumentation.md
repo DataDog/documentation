@@ -16,33 +16,35 @@ further_reading:
     tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
 ---
-Grâce à l'instrumentation manuelle, vous pouvez écrire des programmes afin de créer des traces à envoyer à Datadog. Cela vous permet d'effectuer un tracing du code interne qui n'est pas enregistré par l'instrumentation automatique. Avant d'instrumenter votre application, consultez la terminologie de l'APM de Datadog et passez en revue les concepts de base de l'APM.
+L'instrumentation manuelle consiste à écrire du code afin de créer des traces à envoyer à Datadog. Cela vous permet d'effectuer un tracing du code interne qui n'est pas pris en compte par l'instrumentation automatique. Avant d'instrumenter votre application, consultez la [terminologie de l'APM][1] de Datadog et passez en revue les concepts de base de l'APM.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-SI vous n'utilisez pas une [instrumentation de framework compatible][1], ou si vous souhaitez apporter de la profondeur aux traces de votre application, vous pouvez choisir d'instrumenter manuellement votre code.
+Si vous utilisez un [framework dont l'instrumentation automatique n'est pas prise en charge][1] ou que vous souhaitez apporter de la profondeur aux [traces][2] de votre application, vous pouvez choisir d'instrumenter manuellement votre code.
 
 Pour ce faire, utilisez l'annotation de traces pour effectuer un tracing simple des appels de méthode, ou l'API OpenTracing pour un tracing plus complexe.
 
-La fonction d'annotation de traces de Datadog est fournie par la [dépendance dd-trace-api][2].
+La fonction d'annotation de traces de Datadog est fournie par la [dépendance dd-trace-api][3].
 
 **Exemple d'utilisation**
 
 ```java
 import datadog.trace.api.Trace;
 
-public class MyClass {
-  @Trace
-  public static void myMethod() {
+public class MyJob {
+  @Trace(operationName = "job.exec", resourceName = "MyJob.process")
+  public static void process() {
     // implémenter votre méthode ici
   }
 }
 ```
 
 
+
 [1]: /fr/tracing/setup/java/#compatibility
-[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: /fr/tracing/visualization/#trace
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -86,7 +88,7 @@ Consultez [`ddtrace.Tracer()`][4] pour obtenir davantage de détails sur l'API.
 
 **Utiliser l'API**
 
-Si les méthodes susmentionnées ne vous permettent pas de répondre à vos besoins en tracing, vous pouvez utiliser l'API manuelle fournie afin de lancer des spans et d'y mettre fin comme bon vous semble :
+Si les méthodes présentées ci-dessus ne vous permettent pas de répondre à vos besoins en tracing, vous pouvez utiliser l'API manuelle fournie afin d'initialiser des [spans][5] et d'y mettre fin comme bon vous semble :
 
 ```python
   span = tracer.trace('operations.pertinentes')
@@ -100,8 +102,9 @@ Si les méthodes susmentionnées ne vous permettent pas de répondre à vos beso
 
 Consultez les ressources ci-dessous pour obtenir des détails sur l'API :
 
-- [`ddtrace.Tracer.trace`][5]
-- [`ddtrace.Span.finish`][6]
+- [`ddtrace.Tracer.trace`][6]
+- [`ddtrace.Span.finish`][7]
+
 
 
 
@@ -109,8 +112,9 @@ Consultez les ressources ci-dessous pour obtenir des détails sur l'API :
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
-[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+[5]: /fr/tracing/visualization/#spans
+[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
+[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -173,7 +177,7 @@ func main() {
     span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
 }
 ```
-**Créez une trace distribuée en propageant manuellement le contexte de tracing :**
+**Créez une [trace][3] distribuée en propageant manuellement le contexte de tracing :**
 
 ```go
 package main
@@ -197,7 +201,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-**Pour continuer la trace du côté serveur, commencez une nouvelle span à partir du `Context` extrait :**
+**Pour continuer la trace, initialisez une nouvelle [span][4] côté serveur à partir du `Context` extrait :**
 
 ```go
 package main
@@ -221,14 +225,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 
+
 [1]: /fr/tracing/setup/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[3]: /fr/tracing/visualization/#trace
+[4]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 Si vous n'utilisez pas une instrumentation de bibliothèque compatible (voir la [compatibilité des bibliothèques][1]), vous pouvez choisir d'instrumenter manuellement votre code.
 
-L'exemple suivant initialise un traceur Datadog et crée une span intitulée `web.request` :
+L'exemple suivant initialise un traceur Datadog et crée une [span][2] intitulée `web.request` :
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -238,17 +245,17 @@ span.setTag('http.url', '/login')
 span.finish()
 ```
 
-Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
-
+Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][3].
 
 [1]: /fr/tracing/setup/nodejs/#compatibility
-[2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
+[2]: /fr/tracing/visualization/#spans
+[3]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Si vous n'utilisez pas de bibliothèques compatibles avec l'instrumentation automatique (voir les [intégrations][1]), vous pouvez instrumenter manuellement votre code.
 
-L'exemple suivant utilise le `Tracer` global et crée une span personnalisée pour tracer une requête Web :
+L'exemple suivant utilise le `Tracer` global et crée une [span][2] personnalisée pour [tracer][3] une requête Web :
 
 ```csharp
 using Datadog.Trace;
@@ -264,15 +271,16 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 }
 ```
 
-
 [1]: /fr/tracing/setup/dotnet/#integrations
+[2]: /fr/tracing/visualization/#spans
+[3]: /fr/tracing/visualization/#trace
 {{% /tab %}}
 
 {{% tab "PHP" %}}
 
-Même si Datadog ne prend pas en charge officiellement votre framework Web, vous n'avez pas forcément besoin d'effectuer une instrumentation manuelle. Consultez la section [Instrumentation automatique][1] pour en savoir plus.
+Même si Datadog ne prend pas officiellement en charge votre framework Web, une instrumentation manuelle n'est pas forcément nécessaire. Consultez la section [Instrumentation automatique][1] pour en savoir plus.
 
-Si vous devez effectuer une instrumentation manuelle, par exemple pour tracer des méthodes personnalisées spécifiques dans votre application, commencez par installer la dépendance du traceur PHP avec Composer :
+Si vous devez effectuer une instrumentation manuelle, par exemple pour [tracer][2] des méthodes personnalisées spécifiques dans votre application, commencez par installer la dépendance du traceur PHP avec Composer :
 
 ```bash
 $ composer require datadog/dd-trace
@@ -282,54 +290,58 @@ $ composer require datadog/dd-trace
 
 La fonction `dd_trace()` se fixe aux fonctions et méthodes existantes pour :
 
-* Ouvrir une span avant l'exécution du code
-* Définir des tags ou des erreurs supplémentaires sur la span
+* Ouvrir une [span][3] avant l'exécution du code
+* Définir des [tags][4] ou des erreurs supplémentaires sur la span
 * Fermer la span une fois le processus terminé
 * Modifier les arguments ou la valeur renvoyée
 
 Par exemple, le snippet suivant trace la méthode `CustomDriver::doWork()`, ajoute des tags personnalisés, signale les éventuelles exceptions sous la forme d'erreurs sur la span et renvoie à nouveau les exceptions.
 
 ```php
-dd_trace("CustomDriver", "doWork", function (...$args) {
-    // Initialiser une nouvelle span
-    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
-    $span = $scope->getSpan();
+<?php
+  dd_trace("CustomDriver", "doWork", function (...$args) {
+      // Initialiser une nouvelle span
+      $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+      $span = $scope->getSpan();
 
-    // Accéder aux membres d'objet via $this
-    $span->setTag(Tags\NOM_RESSOURCE, $this->workToDo);
+      // Accéder aux membres d'objet via $this
+      $span->setTag(Tags\NOM_RESSOURCE, $this->workToDo);
 
-    try {
-        // Exécuter la méthode d'origine
-        $result = $this->doWork(...$args);
-        // Définir un tag en fonction de la valeur renvoyée
-        $span->setTag('doWork.size', count($result));
-        return $result;
-    } catch (Exception $e) {
-        // Informer le traceur qu'une exception a été renvoyée
-        $span->setError($e);
-        // Remonter l'exception
-        throw $e
-    } finally {
-        // Fermer la span
-        $span->finish();
-    }
-});
+      try {
+          // Exécuter la méthode d'origine. Remarque : dd_trace_forward_call() gère automatiquement tous les paramètres
+          $result = dd_trace_forward_call();
+          // Définir un tag en fonction de la valeur renvoyée
+          $span->setTag('doWork.size', count($result));
+          return $result;
+      } catch (Exception $e) {
+          // Informer le traceur qu'une exception a été renvoyée
+          $span->setError($e);
+          // Remonter l'exception
+          throw $e;
+      } finally {
+          // Fermer la span
+          $span->finish();
+      }
+  });
+?>
 ```
 
 Vous pourrez accéder plus tard à la span racine depuis le traceur global, via `Tracer::getRootScope()`. Cela s'avère utile lorsque les métadonnées à ajouter à la span racine n'existent pas au début de l'exécution d'un script.
 
 ```php
-$rootSpan = \DDTrace\GlobalTracer::get()
-    ->getRootScope()
-    ->getSpan();
-$rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
+<?php
+  $rootSpan = \DDTrace\GlobalTracer::get()
+      ->getRootScope()
+      ->getSpan();
+  $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
+?>
 ```
 
 **Instrumentation manuelle de Zend Framework 1**
 
 Par défaut, Zend Framework 1 est automatiquement instrumenté. Vous n'avez donc pas besoin de modifier votre projet ZF1. Cependant, si l'instrumentation automatique est désactivée, activez manuellement le traceur.
 
-Commencez par [télécharger le dernier code source depuis la page des nouvelles versions][2]. Dézippez le fichier et copiez le dossier `src/DDTrace` dans le dossier `/library` de votre application. Ajoutez ensuite le code suivant au fichier `application/configs/application.ini` :
+Commencez par [télécharger la dernière version du code source depuis la page des nouvelles versions][5]. Dézippez le fichier et copiez le dossier `src/DDTrace` dans le dossier `/library` de votre application. Ajoutez ensuite le bloc de configuration suivant au fichier `application/configs/application.ini` :
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -341,19 +353,20 @@ resources.ddtrace = true
 
 Avant PHP 7, certains frameworks intégraient des solutions pour compiler les classes PHP, par exemple via la commande `php artisan optimize` de Laravel.
 
-Bien que cette version [soit désormais obsolète][3], si vous utilisez PHP 7.x, vous pouvez utiliser ce mécanisme de mise en cache au sein de votre app avant la version 7.x. Pour ce cas précis, nous vous recommandons d'utiliser l'API [OpenTracing][4] au lieu d'ajouter `datadog/dd-trace` à votre fichier Composer.
-
-
+Bien que cette version [soit désormais obsolète][6], si vous utilisez PHP 7.x, vous pouvez utiliser ce mécanisme de mise en cache au sein de votre app avant la version 7.x. Pour ce cas précis, nous vous conseillons d'utiliser l'API [OpenTracing][7] au lieu d'ajouter `datadog/dd-trace` à votre fichier Composer.
 
 
 [1]: /fr/tracing/setup/php/#automatic-instrumentation
-[2]: https://github.com/DataDog/dd-trace-php/releases/latest
-[3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[4]: /fr/tracing/advanced/opentracing/?tab=php
+[2]: /fr/tracing/visualization/#trace
+[3]: /fr/tracing/visualization/#spans
+[4]: /fr/tracing/visualization/#span-tags
+[5]: https://github.com/DataDog/dd-trace-php/releases/latest
+[6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[7]: /fr/tracing/advanced/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Pour instrumenter manuellement votre code, installez le traceur tel qu'indiqué dans les exemples de configurations, puis utilisez l'objet tracer pour créer des spans.
+Pour instrumenter manuellement votre code, installez le traceur tel qu'indiqué dans les exemples de configurations, puis utilisez l'objet tracer pour créer des [spans][1].
 
 ```cpp
 {
@@ -368,7 +381,7 @@ Pour instrumenter manuellement votre code, installez le traceur tel qu'indiqué 
 } // ... ou lors de leur destruction (root_span prend fin ici).
 ```
 
-Vous pouvez effectuer un tracing distribué en [utilisant les méthodes `Inject` et `Extract` sur le traceur][1], qui accepte les [types `Reader` et `Writer` de base][2]. Vous devez utiliser l'échantillonnage prioritaire (activé par défaut) pour garantir l'envoi uniforme des spans.
+Vous pouvez effectuer un tracing distribué en [utilisant les méthodes `Inject` et `Extract` sur le traceur][2], qui accepte les [types `Reader` et `Writer` de base][1]. Vous devez utiliser l'échantillonnage prioritaire (activé par défaut) pour garantir l'envoi uniforme des spans.
 
 ```cpp
 // Autorise l'écriture d'en-têtes de propagation sur une carte simple <string, string>.
@@ -406,12 +419,14 @@ void example() {
 }
 ```
 
-
-[1]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[2]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
+[1]: /fr/tracing/visualization/#spans
+[2]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[3]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /fr/tracing/visualization

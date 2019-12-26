@@ -1,7 +1,7 @@
 ---
 title: Delete a Slack integration
 type: apicontent
-order: 19.4
+order: 20.4
 external_redirect: /api/#delete-a-slack-integration
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-slack-integration
 
 Delete a Datadog-Slack integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

@@ -1,13 +1,18 @@
 ---
 title: Unmute a monitor
 type: apicode
-order: 26.10
+order: 27.11
 external_redirect: /api/#unmute-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/<MONITOR_ID>/unmute`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-unmute" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-unmute" >}}

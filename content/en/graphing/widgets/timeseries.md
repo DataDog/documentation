@@ -1,7 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
-description: "Display the evolution of one or more metrics, log events, APM events, or process metrics over time."
+description: "Display the evolution of one or more metrics, log events, Analyzed Spans, or process metrics over time."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -17,7 +17,7 @@ further_reading:
   text: "Explore your data in full-screen graph mode"
 ---
 
-The timeseries visualization allows you to display the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
+The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Analyzed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
 {{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
 
@@ -29,8 +29,8 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][3] to configure a metric query.
-    * APM Events: See [the trace search documentation][4] to configure an APM event query.
-    * Log Events: See [the log search documentation][5] to configure an APM event query.
+    * Analyzed Spans: See [the trace search documentation][4] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][5] to configure an Analyzed Span query.
 
 2. Customize your graph with the available [options](#options).
 
@@ -118,21 +118,23 @@ TIMESERIES_SCHEMA = {
         "yaxis":   AXIS_SCHEMA,
         "events":  EVENTS_SCHEMA,
         "markers": MARKERS_SCHEMA,
-        "title":   {"type": "string"}
+        "title":   {"type": "string"},
+        "show_legend": {"type": "boolean"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false
 }
 ```
 
-| Parameter  | Type             | Required | Description                                                                                                                                              |
-|------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | string           | yes      | Type of widget, for the timeseries widget use `timeseries`.                                                                                              |
-| `requests` | array of objects | yes      | Array of `request` object to display in the widget. See the dedicated [Request JSON schema documentation][11] to learn how to build the `REQUEST_SCHEMA`. |
-| `yaxis`    | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][12] to learn how to build the `AXIS_SCHEMA`.                                |
-| `events`   | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][13] to learn how to build the `EVENTS_SCHEMA`                        |
-| `markers`  | object           | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation][14] to learn how to build the `MARKERS_SCHEMA`                    |
-| `title`    | string           | no       | Title of your widget.                                                                                                                                    |
+| Parameter     | Type             | Required | Description                                                                                                                                               |
+|---------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string           | yes      | Type of widget, for the timeseries widget use `timeseries`.                                                                                               |
+| `requests`    | array of objects | yes      | Array of `request` object to display in the widget. See the dedicated [Request JSON schema documentation][11] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`       | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][12] to learn how to build the `AXIS_SCHEMA`.                                 |
+| `events`      | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][13] to learn how to build the `EVENTS_SCHEMA`                         |
+| `markers`     | object           | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation][14] to learn how to build the `MARKERS_SCHEMA`                     |
+| `title`       | string           | no       | Title of your widget.                                                                                                                                     |
+| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                        |
 
 Additional properties allowed in each `request` object:
 
@@ -179,7 +181,7 @@ Additional properties allowed in each `request` object:
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
 [3]: /graphing
-[4]: /tracing/trace_search_and_analytics/search/#search-bar
+[4]: /tracing/app_analytics/search/#search-bar
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [6]: /graphing/event_stream
 [7]: /graphing/dashboards/template_variables

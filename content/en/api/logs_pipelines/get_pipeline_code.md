@@ -1,16 +1,18 @@
 ---
 title: Get a Pipeline
 type: apicode
-order: 24.4
+order: 25.4
 external_redirect: /api/#get-a-pipelines
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/logs/config/pipelines/<PIPELINE_ID>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="get_pipeline" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.get_pipeline" >}}

@@ -1,14 +1,14 @@
 ---
 title: Créer une organisation enfant
 type: apicontent
-order: 27.1
+order: 28.1
 external_redirect: '/api/#creer-une-organisation-enfant'
 ---
 ## Créer une organisation enfant
 
 Cet endpoint requiert la fonctionnalité de [compte multi-org][1] et doit être activé en [contactant l'assistance][2].
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*obligatoire*] :
     Le nom de la nouvelle organisation enfant, limité à 32 caractères.

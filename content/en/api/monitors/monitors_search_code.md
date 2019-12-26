@@ -1,13 +1,18 @@
 ---
 title: Monitors Search
 type: apicode
-order: 26.12
+order: 27.13
 external_redirect: /api/#monitors-search
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/monitor/search`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-search" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-search" >}}

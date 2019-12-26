@@ -14,60 +14,109 @@ further_reading:
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
+## Présentation
+
+Un dashboard est un outil vous permettant de surveiller visuellement, d'analyser et d'afficher des métriques de performance clés dans Datadog. Ces dernières facilitent la surveillance de l'état de votre infrastructure.
+
 ## Liste de dashboards
 
-La page [Dashboard List][1] vous permet de trier vos dashboards au sein de différentes listes.
+Recherchez, consultez ou créez des dashboards et des listes depuis la page [Dashboard List][1]. Par défaut, il s'agit de la page vers laquelle vous êtes redirigé après votre connexion. Pour modifier la page d'accueil par défaut de votre organisation, contactez l'[assistance Datadog][2].
 
-{{< img src="graphing/dashboards/dashboard_list.png" alt="Dashboard list" responsive="true" >}}
+{{< img src="graphing/dashboards/dashboard_list2.png" alt="Page Dashboard List" responsive="true" >}}
 
-Effectuez des recherches dans votre dashboard grâce à la barre de recherche en haut de la page. Les dashboards de la page Dashboard list peuvent être triés à l'aide des en-têtes de colonnes :
+### Nouvelle liste
 
-* `Favorite` : permet de trier la liste de dashboards en disposant vos dashboards préférés en premier.
-* `Name` : permet de trier la liste de dashboards par ordre alphabétique.
-* `Modified` : permet de trier la liste de dashboards en fonction de la date de dernière modification.
-* `Popularity` : permet de trier la liste de dashboards en fonction de la [popularité des dashboards](#popularité).
+Pour créer une liste de dashboards, cliquez sur le bouton **New List +** dans le coin supérieur droit.
 
-### Popularité
+Le titre de la liste est automatiquement défini sur le prénom de l'utilisateur. Ainsi, si Marie Dupont crée un dashboard, le titre par défaut sera `Marie's list`. Pour modifier le titre d'une liste, cliquez dessus afin de pouvoir modifier le texte.
 
-La popularité d'un dashboard est relative. Le dashboard le plus populaire d'une entreprise est représenté par cinq barres, et la popularité de tous les autres dashboards dépend de ce dernier. La popularité est basée sur le trafic d'un dashboard et est mise à jour quotidiennement. Par conséquent, les nouveaux dashboards n'ont aucune barre de popularité pendant les 24 premières heures.
-
-**Remarque** : le trafic vers des URL publiques de dashboards publics n'est pas pris en compte.
-
-## Créer une liste de dashboards
-
-Cliquez sur l'icône *New List +* dans le coin supérieur droit de la page pour créer une liste de dashboards.
-
-Sélectionnez son titre pour le modifier :
-
-{{< img src="graphing/dashboards/new_list_title.png" alt="Nouvelle liste" responsive="true" style="width:70%;">}}
-
-Pour ajouter des dashboards à votre liste de dashboards, cochez les cases correspondantes dans la liste de dashboards principale. Cliquez ensuite sur le bouton *Add to List* dans le coin supérieur droit de la liste de dashboards :
+Pour ajouter des dashboards à une liste, cochez les cases correspondantes dans la liste de dashboards principale. Cliquez ensuite sur le bouton *Add to List* dans le coin supérieur droit de la liste de dashboards :
 
 {{< img src="graphing/dashboards/dash_to_list.png" alt="Ajouter un dashboard à une liste" responsive="true" style="width:70%;">}}
 
-## Créer un dashboard
+### Listes
 
-Pour créer un dashboard, cliquez sur le bouton *New Dashboard* dans le coin supérieur droit de la page. Datadog vous demande alors de choisir entre la création d'un [timeboard][2] ou d'un [screenboard][3]. Sélectionnez l'une de ces options après avoir cliqué sur « New Dashboard » dans le menu déroulant « Dashboards ».
+La barre latérale sur la gauche présente vos listes préférées, ainsi que les listes favorites, les listes prédéfinies et les listes partagées et modifiables. Cliquez sur le lien **Hide Controls** pour masquer cette barre latérale.
 
-{{< img src="graphing/dashboards/board_selection.jpg" alt="Sélection du dashboard" responsive="true" style="width:70%;">}}
+#### Listes favorites
 
-### Quelle est la différence entre un screenboard et un timeboard ?
+Les listes favorites sont des listes de dashboards pour lesquelles l'utilisateur actuellement connecté a ajouté une étoile. **Remarque** : si vous n'avez ajouté d'étoile à aucune liste, cette catégorie est masquée.
 
-Vous pouvez créer et personnaliser deux types de dashboards : les [screenboards][3] et les [timeboards][4]. Consultez le tableau ci-dessous pour mieux comprendre ce qui les différencie :
+#### Listes prédéfinies
 
-|                                | Timeboards                       | Screenboards                                      |
-| ---                            | ------------                     | -------------                                     |
-| Intervalle                     | Tous les graphiques possèdent le même intervalle. | Chaque graphique peut avoir son propre intervalle.         |
-| Disposition                         | Les graphiques s'affichent sur une grille fixe.    | Les graphiques peuvent être placés où bon vous semble sur le canevas. |
-| Partage de graphiques individuels  | Oui                              | Non                                                |
-| Partage de l'ensemble du dashboard | Non                               | Oui                                               |
-| Partage en lecture seule       | Oui                              | Oui                                               |
+Les listes prédéfinies correspondent à des listes de dashboards par défaut dans Datadog :
+
+| Liste                     | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| All Custom               | Rassemble les dashboards personnalisés créés par un membre d'équipe dans le compte de votre organisation.   |
+| All Hosts                | Rassemble les dashboards créés automatiquement par Datadog lors de l'ajout d'un host.                |
+| All Integrations         | Rassemble les dashboards créés automatiquement par Datadog lors de l'installation d'une intégration.    |
+| Created By You           | Rassemble les dashboards créés par l'utilisateur actuellement connecté.       |
+| Frequently Viewed By You | Rassemble tous les dashboards consultés régulièrement par l'utilisateur actuellement connecté. |
+
+#### Listes de tableaux de bord partagés et modifiables
+
+Cette section affiche les listes de dashboards partagés et modifiables, ainsi que le nombre de dashboards dans chaque liste.
+
+### Tous les tableaux de bord
+
+Tous les tableaux de bord répertoriés peuvent être triés à l'aide des en-têtes de colonne *Star*, *Name*, *Modified* et *Popularity*. Toutes les colonnes et leur description sont répertoriées ci-dessous :
+
+| Colonne     | Description                                                                              |
+|------------|------------------------------------------------------------------------------------------|
+| Star       | Tous les dashboards pour lesquels l'utilisateur actuellement connecté a ajouté une étoile.                        |
+| Icon       | Une icône indiquant le type de dashboard (timeboard ou screenboard).                     |
+| Nom       | Le nom du dashboard personnalisé ou prédéfini.                                              |
+| Modified   | La date de dernière modification d'un dashboard personnalisé.                                            |
+| Popularity | La [popularité](#popularité) relative du tableau de bord au sein de votre organisation.           |
+| Creator    | L'icône de profil du créateur du dashboard. Les dashboards prédéfinis possèdent le logo de l'intégration. |
+
+#### Popularité
+
+Le dashboard le plus populaire d'une entreprise est caractérisé par cinq barres de popularité. La popularité des autres dashboards dépend de ce dashboard. Elle est basée sur le trafic des dashboards et mise à jour quotidiennement. Les nouveaux dashboards n'ont aucune barre de popularité pendant les 24 premières heures.
+
+**Remarque** : le trafic vers les URL de dashboards publics n'est pas pris en compte dans le calcul de la popularité.
+
+## Nouveau dashboard
+
+Pour créer un dashboard, cliquez sur le bouton **New Dashboard +** dans le coin supérieur droit de la page. Saisissez un nom et choisissez de créer un [timeboard][3] ou un [screenboard][4].
+
+### Screenboard ou timeboard
+
+Il est possible de créer deux types de dashboards dans Datadog : des [screenboards][4] et des [timeboards][5]. Consultez le tableau ci-dessous pour mieux comprendre ce qui les différencie :
+
+|                            | Timeboards                            | Screenboards                              |
+|----------------------------|---------------------------------------|-------------------------------------------|
+| Intervalle                 | Tous les graphiques possèdent le même intervalle. | Les graphiques peuvent avoir leur propre intervalle.   |
+| Disposition                     | Les graphiques s'affichent sur une grille fixe. | Les graphiques peuvent être placés à n'importe quel endroit du canevas. |
+| Partage de graphiques individuels  | Oui                                   | Non                                        |
+| Partage de l'ensemble du dashboard | Non                                    | Oui                                       |
+| Partage en lecture seule   | Oui                                   | Oui                                       |
+
+### Copier, importer et exporter
+
+Depuis un tableau de bord, vous pouvez copier, importer ou exporter son fichier JSON à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes :
+
+| Option                          | Description                                                                                                                                                                |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Copy&nbsp;dashboard&nbsp;JSON   | Copiez le fichier JSON du dashboard dans votre presse-papiers.                                                                                                                               |
+| Import&nbsp;dashboard&nbsp;JSON | Collez ou importez votre fichier JSON vers le dashboard. Cette option remplace tout le contenu du dashboard. Si le fichier JSON se trouve déjà dans votre presse-papiers, utilisez `Ctrl + V` (ou `Cmd + V` sur un Mac). |
+| Export&nbsp;dashboard&nbsp;JSON | Téléchargez un fichier JSON contenant le JSON de votre dashboard.                                                                                                                |
+
+{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copier un dashboard" responsive="true" style="width:30%;">}}
+
+### Suggestions de dashboards et utilisateurs actifs
+
+Depuis un dashboard, Datadog vous propose des suggestions de dashboards pertinents. Pour afficher les dashboards conseillés et les utilisateurs actifs, cliquez sur l'icône en forme d'accent circonflexe en regard du titre du dashboard. Ces dashboards sont conseillés en fonction de l'activité des utilisateurs de votre organisation et de la fréquence à laquelle ils passent de ce dashboard à d'autres dashboards existant. Vous pouvez également ajouter ou mettre à jour des descriptions de dashboard au format Markdown en cliquant sur `edit` depuis cette vue.
+
+{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Dashboards conseillés" responsive="true">}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/graphing
-[2]: /fr/graphing/dashboards/timeboard
-[3]: /fr/graphing/dashboards/screenboard
-[4]: /fr/graphing/dashboards/timeboard
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: /fr/help
+[3]: /fr/graphing/dashboards/timeboard
+[4]: /fr/graphing/dashboards/screenboard
+[5]: /fr/graphing/dashboards/timeboard

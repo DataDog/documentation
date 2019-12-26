@@ -1,17 +1,18 @@
 ---
 title: Get a test
 type: apicode
-order: 29.8
-external_redirect: /api/#get-test
+order: 31.8
+external_redirect: /api/#get-a-test
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_test" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_test" >}}

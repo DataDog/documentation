@@ -1,18 +1,18 @@
 ---
 title: Obtenir un index
 type: apicode
-order: 23.2
+order: 24.2
 external_redirect: "/api/#obtenir-un-index"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `GET /v1/logs/config/indexes/<NOM_INDEX>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_an_index" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_an_index" >}}

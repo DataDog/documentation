@@ -1,7 +1,7 @@
 ---
 title: Envoyer des traces
 type: apicontent
-order: 32.1
+order: 33.1
 external_redirect: '/api/#envoyer-des-traces'
 ---
 ## Envoyer des traces
@@ -25,7 +25,7 @@ et chaque span est un dictionnaire avec un `trace_id`, `span_id`, `resource`, et
 
 **Remarque** : chaque span dans une trace doit utiliser le même trace_id.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`trace_id`** (_obligatoire_) : l'ID entier unique (64 bits non signé) de la trace contenant ce span.
 *   **`span_id`** (_obligatoire_) : l'ID entier (64 bits non signé) du span.

@@ -5,26 +5,40 @@ description: 'Configurez votre Agent Datadog pour rassembler les logs de votre h
 disable_toc: true
 aliases:
   - /fr/guides/logs/
+  - /fr/logs/logging_without_limits
 further_reading:
-  - link: tracing/advanced/connect_logs_and_traces/?tab=java
-    tag: Documentation
-    text: Associer vos logs à vos traces
+  - link: /logs/guide
+    tag: Guide
+    text: Articles supplémentaires utiles sur le processing et la collecte de logs.
   - link: 'https://learn.datadoghq.com'
     tag: Centre d'apprentissage
     text: Présentation des logs dans Datadog
 ---
-## Présentation
+{{< vimeo 293195142 >}}
 
-Log Management est une solution complète tout-en-un qui permet la [collecte][1], le [traitement][2], le [Live tailing][3], l'[exploration][4], la [création de graphiques][5], la [création de dashboards][6], la [configuration d'alertes][7] et la création d'archives pour tous les logs générés par [votre application][8] et votre infrastructure.
+Votre infrastructure peut parfois générer un volume d'événements de log trop important, ou avec des fluctuations importantes. Dans ce cas, vous devrez peut-être déterminer les types de logs à envoyer à une solution de gestion de logs, et les types de logs à archiver. En revanche, en filtrant vos logs, il se peut que vous effectuiez un traitement non exhaustif ou ignoriez certaines données importantes.
 
-{{< whatsnext desc="Cette section aborde les sujets suivants :">}}
-  {{< nextlink href="/logs/log_collection">}}<u>Collecte de logs et intégrations</u> : recueillez tous les logs de vos hosts, conteneurs et fournisseurs cloud.{{< /nextlink >}}
-  {{< nextlink href="/logs/processing">}}<u>Processing</u> : traitez et enrichissez l'ensemble des logs issus de vos pipelines et de vos processeurs. {{< /nextlink >}}
-  {{< nextlink href="/logs/live_tail">}}<u>Live Tail</u> : visualisez les logs recueillis en temps réel pour tous vos environnements.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer">}}<u>Explorer</u> : explorez vos logs avec la recherche, les outils d'analyse et les modèles de log.{{< /nextlink >}}
-  {{< nextlink href="/logs/logging_without_limits">}}<u>Logging without Limits*</u> : déterminez de façon dynamique les éléments à inclure et à exclure de vos index afin de réduire vos coûts.{{< /nextlink >}}
-  {{< nextlink href="/logs/archives">}}<u>Archives</u> : archivez tous vos logs enrichis dans des compartiments S3.{{< /nextlink >}}
-  {{< nextlink href="/logs/guide">}}<u>Guides</u> : accédez à des articles d'aide supplémentaires à propos de la collecte et du traitement de logs.{{< /nextlink >}}
+La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation, vous permettant ainsi de recueillir, de traiter et d'archiver tous vos logs de façon rentable. Cette fonctionnalité s'intitule Logging without Limits*.
+
+{{< whatsnext desc="Grâce à Logging without Limits*, vous bénéficiez des fonctionnalités suivantes :">}}
+  {{< nextlink href="/logs/log_collection">}}<u>Collecte de logs et d'intégrations</u> : ingérez tous vos logs depuis vos hosts, conteneurs et fournisseurs de cloud.{{< /nextlink >}}
+  {{< nextlink href="/logs/processing">}}<u>Traitement</u> : traitez et enrichissez tous vos logs avec des pipelines et des processeurs. {{< /nextlink >}}
+  {{< nextlink href="/logs/live_tail">}}<u>Live Tail</u> : visualisez vos logs ingérés en temps réel sur l'ensemble de vos environnements.{{< /nextlink >}}
+  {{< nextlink href="/logs/logs_to_metrics">}}<u>Création de métriques</u> : générez des métriques à partir des logs ingérés.{{< /nextlink >}}
+  {{< nextlink href="/logs/archives">}}<u>Archives</u> : archivez tous les logs enrichis dans des compartiments S3.{{< /nextlink >}}
+  {{< nextlink href="/logs/indexes">}}<u>Index</u> : déterminez de façon dynamique les éléments à inclure et à exclure de vos index afin de maîtriser vos coûts.{{< /nextlink >}}
+{{< /whatsnext >}}
+{{< whatsnext desc="Une fois vos logs ingérés, plongez au cœur de leurs données grâce à la vue Log Explorer :">}}
+  {{< nextlink href="/logs/explorer/">}}<u>Log Explorer</u> : découvrez la vue Log Explorer et apprenez à ajouter des facettes et des mesures.{{< /nextlink >}}
+  {{< nextlink href="/logs/explorer">}}<u>Recherche</u> : effectuez des recherches sur l'ensemble de vos logs indexés.{{< /nextlink >}}
+  {{< nextlink href="/logs/explorer/analytics">}}<u>Analyse</u> : effectuez des analyses de logs sur vos logs indexés.{{< /nextlink >}}
+  {{< nextlink href="/logs/explorer/patterns">}}<u>Patterns</u> : identifiez des patterns de logs en regroupant vos logs dans un cluster.{{< /nextlink >}}
+
+  {{< nextlink href="/logs/explorer/saved_views/">}}<u>Vues enregistrées</u> : utilisez des vues enregistrées pour configurer automatiquement votre Log Explorer.{{< /nextlink >}}
+{{< /whatsnext >}}
+{{< whatsnext desc="Enfin, exploitez les concepts clés de la surveillance à l'aide de métriques et de traces :">}}
+  {{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}<u>Association de logs à des traces</u> : affichez la trace associée au log observé.{{< /nextlink >}}
+  {{< nextlink href="/graphing/dashboards/timeboard/#correlation-between-logs-and-metrics">}}<u>Association de logs à des métriques</u> : affichez la métrique associée au log observé.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin
@@ -32,12 +46,3 @@ Log Management est une solution complète tout-en-un qui permet la [collecte][1]
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
-
-[1]: /fr/agent/logs
-[2]: /fr/logs/processing
-[3]: /fr/logs/live_tail
-[4]: /fr/logs/explore
-[5]: /fr/logs/explorer/analytics
-[6]: /fr/graphing/dashboards/widgets/#timeseries
-[7]: /fr/monitors/monitor_types/log
-[8]: /fr/logs/log_collection/#how-to-get-the-most-of-your-application-logs

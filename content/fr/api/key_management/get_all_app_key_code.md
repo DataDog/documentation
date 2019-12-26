@@ -1,18 +1,18 @@
 ---
 title: Obtenir toutes les clés d'application
 type: apicode
-order: 21.06
+order: 22.06
 external_redirect: "/api/#obtenir-toutes-les-cles-d-application"
 ---
 
-##### Signature
+**SIGNATURE** :
 
 `GET /v1/application_key/`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_all_app_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_all_app_key" >}}

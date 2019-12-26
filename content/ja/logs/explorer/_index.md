@@ -103,7 +103,7 @@ further_reading:
 
 **View in context** ボタンをクリックすると、検索リクエストが更新され、選択したログの直前と直後の日付のログ行が、フィルターに一致しないログ行も含めて表示されます。Datadog は、ログの適切なコンテキストを探すために、タグと共に `Hostname`、`Service`、`filename`、`container_id` の各属性を使用するため、このコンテキストは状況によって異なります。
 
-** Export **ボタンまたはキーボード操作（Ctrl + C / Cmd + C）を介してJSONログの内容をクリップボードへコピーします。
+**Export** ボタンまたはキーボード操作（Ctrl + C / Cmd + C）を介してJSONログの内容をクリップボードへコピーします。
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 

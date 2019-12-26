@@ -38,7 +38,7 @@ Aucune installation n'est requise.
 Pour afficher des alertes Catchpoint dans votre flux, connectez-vous au portail Catchpoint et accédez à Settings > API :
 
 1. Sous Alerts API, sélectionnez Enable.
-2. Saisissez l'URL de l'endpoint Datadog :
+2. Saisissez l'URL de l'endpoint Datadog.
 ```
 https://app.datadoghq.com/api/v1/events?api_key=<VOTRE_CLÉ_API_DATADOG>
 ```.
@@ -79,7 +79,7 @@ L'intégration Catchpoint n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
-[1]: https://docs.datadoghq.com/fr/help/
+[1]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

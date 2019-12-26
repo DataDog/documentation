@@ -1,18 +1,18 @@
 ---
 title: Get all API keys
 type: apicode
-order: 21.01
+order: 22.01
 external_redirect: /api/#get-all-api-keys
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/api_key/`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_all_api_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_all_api_key" >}}

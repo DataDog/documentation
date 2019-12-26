@@ -1,17 +1,18 @@
 ---
-title: Delete a test
+title: Delete tests
 type: apicode
-order: 29.4
-external_redirect: /api/#post-delete
+order: 31.4
+external_redirect: /api/#delete-tests
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/synthetics/tests/delete`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="post_delete" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.post_delete" >}}

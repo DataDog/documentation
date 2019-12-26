@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - aws
   - containers
@@ -63,6 +67,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 ## Pour aller plus loin
 
 * [Surveiller Amazon EKS avec Datadog][10]
+* [Métriques clés pour la surveillance d'Amazon EKS][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
@@ -75,6 +80,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [8]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-container-installation
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/announcing-eks
+[11]: https://www.datadoghq.com/blog/eks-cluster-metrics
 
 
 {{< get-dependencies >}}

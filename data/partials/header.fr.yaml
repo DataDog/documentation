@@ -5,22 +5,28 @@ left:
     children:
       - name: product_features
         link: 'https://www.datadoghq.com/product/'
-        title: Caractéristiques
+        title: Fonctionnalités
       - name: product_integrations
         link: 'https://www.datadoghq.com/product/integrations/'
         title: Intégrations
-      - name: product_apm
-        link: 'https://www.datadoghq.com/apm/'
-        title: APM
-      - name: product_logs
-        link: 'https://www.datadoghq.com/log-management/'
-        title: Log Management
       - name: product_dashboards
         link: 'https://www.datadoghq.com/dashboarding/'
         title: Dashboards
+      - name: product_logs
+        link: 'https://www.datadoghq.com/log-management/'
+        title: Log Management
+      - name: product_apm
+        link: 'https://www.datadoghq.com/apm/'
+        title: APM
+      - name: product_network
+        link: 'https://www.datadoghq.com/network/'
+        title: Réseau
       - name: product_synthetics
         link: 'https://www.datadoghq.com/synthetics/'
         title: Synthetics
+      - name: product_rum
+        link: 'https://www.datadoghq.com/rum/'
+        title: RUM
       - name: product_alerts
         link: 'https://www.datadoghq.com/alerts/'
         title: Alertes
@@ -32,11 +38,20 @@ left:
     title: Clients
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
-    title: Tarif
+    title: Tarifs
   - name: solutions
     link: '#'
     title: Solutions
     children:
+      - name: solutions_financial
+        link: 'https://www.datadoghq.com/solutions/financial-services/'
+        title: Services financiers
+      - name: solutions_manufacturing
+        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+        title: Production et logistique
+      - name: solutions_healthcare
+        link: 'https://www.datadoghq.com/solutions/healthcare/'
+        title: Santé et sciences de la vie
       - name: solutions_retail
         link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
         title: Commerce de détail et électronique
@@ -46,15 +61,24 @@ left:
       - name: solutions_gaming
         link: 'https://www.datadoghq.com/solutions/gaming/'
         title: Jeux vidéo
-      - name: solutions_manufacturing
-        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
-        title: Production et logistique
-      - name: solutions_financial
-        link: 'https://www.datadoghq.com/solutions/financial-services/'
-        title: Services financiers
-      - name: solutions_healthcare
-        link: 'https://www.datadoghq.com/solutions/healthcare/'
-        title: Santé et sciences de la vie
+      - name: solutions_cloudmigration
+        link: 'https://www.datadoghq.com/solutions/cloud-migration/'
+        title: Migration vers le cloud
+      - name: solutions_monitoringconsolidation
+        link: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
+        title: Unification de la surveillance
+      - name: solutions_devops
+        link: 'https://www.datadoghq.com/solutions/devops/'
+        title: DevOps
+      - name: solutions_hybridcloudmonitoring
+        link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
+        title: Surveillance Cloud hybride
+      - name: solutions_iotmonitoring
+        link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
+        title: Surveillance IoT
+      - name: solutions_machinelearning
+        link: 'https://www.datadoghq.com/solutions/machine-learning/'
+        title: Apprentissage automatique
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'
@@ -71,13 +95,22 @@ right:
         title: Presse
       - name: about_team
         link: 'https://www.datadoghq.com/about/team/'
-        title: Équipe
+        title: Direction
       - name: about_careers
         link: 'https://www.datadoghq.com/careers/'
         title: Offres d'emploi
       - name: about_analyst
         link: 'https://www.datadoghq.com/about/analyst/'
-        title: Rapports d'analyse
+        title: Rapports d'analystes
+      - name: about_investors
+        link: 'https://investors.datadoghq.com/'
+        title: Relations avec les investisseurs
+      - name: about_awards
+        link: 'https://www.datadoghq.com/about/awards/'
+        title: Récompenses
+      - name: about_timeline
+        link: 'https://www.datadoghq.com/about/timeline/'
+        title: Chronologie
   - name: blog
     link: 'https://www.datadoghq.com/blog/'
     title: Blog
@@ -88,12 +121,12 @@ right:
       - name: blog_engineering
         link: 'https://www.datadoghq.com/blog/engineering/'
         title: Ingénierie
-      - name: blog_community
-        link: 'https://www.datadoghq.com/blog/community/'
-        title: Communauté
       - name: blog_pupculture
         link: 'https://www.datadoghq.com/blog/pup-culture/'
         title: Actualité
+      - name: blog_community
+        link: 'https://www.datadoghq.com/blog/community/'
+        title: Communauté
   - name: docs
     link: ''
     title: Docs

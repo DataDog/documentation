@@ -1,18 +1,18 @@
 ---
 title: Create an API key
 type: apicode
-order: 21.03
+order: 22.03
 external_redirect: /api/#create-an-api-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/api_key/<API_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="create_api_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.create_api_key" >}}

@@ -1,13 +1,18 @@
 ---
 title: Mute all monitors
 type: apicode
-order: 26.07
+order: 27.08
 external_redirect: /api/#mute-all-monitors
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/mute_all`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-mute-all" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-mute-all" >}}

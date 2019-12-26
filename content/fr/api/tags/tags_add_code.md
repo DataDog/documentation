@@ -1,13 +1,18 @@
 ---
 title: Ajouter des tags à un host
 type: apicode
-order: 30.3
+order: 32.3
 external_redirect: /api/#ajouter-des-tags-a-un-host
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/tags/hosts/<HOSTNAME>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-tags-add" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-tags-add" >}}

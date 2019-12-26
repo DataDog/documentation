@@ -1,7 +1,7 @@
 ---
 title: List all Azure integrations
 type: apicontent
-order: 16.1
+order: 17.1
 external_redirect: /api/#list-all-azure-integrations
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#list-all-azure-integrations
 
 List all Datadog-Azure integrations configured for your organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

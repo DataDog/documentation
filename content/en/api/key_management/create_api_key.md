@@ -1,7 +1,7 @@
 ---
 title: Create an API key
 type: apicontent
-order: 21.03
+order: 22.03
 external_redirect: /api/#create-an-api-key
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#create-an-api-key
 
 Create an API key with a given name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

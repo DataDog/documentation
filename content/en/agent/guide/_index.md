@@ -9,13 +9,17 @@ disable_toc: true
     {{< nextlink href="agent/guide/agent-commands" >}}Agent Commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
+    {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/community-integrations-installation-with-docker-agent" >}}Community integration installation{{< /nextlink >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
+    {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}

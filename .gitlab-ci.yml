@@ -12,9 +12,9 @@ variables:
 
 # ================== copy scripts =============== #
 before_script:
-  - find local/bin/ -type f -exec cp {} /usr/local/bin \;  # load scripts
-  - find local/etc/ -type f -exec cp {} /etc \;  # load configs
-  - source /usr/local/bin/helpers.sh  # source helpers so they are available in the container
+  - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
+  - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
+  - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -55,10 +55,11 @@ build_preview:
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_preview_link_checks:
+link_checks_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
@@ -70,10 +71,12 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_missing_tms_preview:
+missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
+  variables:
+    GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
@@ -102,7 +105,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations"
+    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
     CONFIGURATION_FILE: "./local/etc/pull_config.yaml"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
@@ -114,15 +117,13 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - create_artifact
     - create_artifact_untracked
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   artifacts:
     when: on_success
     paths:
-      - local/etc/docsdatadoghq.json
       - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
     expire_in: 1 week
   only:
     - master
@@ -143,12 +144,24 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
+    - cat /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
     - build_live
   only:
     - schedules
+
+evaluate_missing_metrics:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  only:
+    - master
+
 
 manage_translations:on-schedule:
   <<: *base_template
@@ -162,6 +175,8 @@ manage_translations:on-schedule:
     - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
+
+
 
 #push_translations:
 #  <<: *base_template
@@ -179,12 +194,26 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   dependencies:
     - build_live
   script:
     - check_missing_tms
   only:
     - master
+
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  dependencies:
+    - build_live
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template
@@ -210,6 +239,8 @@ post_success_event_to_dd_live:
   <<: *base_template
   stage: cleanup
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   when: on_success
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
@@ -221,6 +252,8 @@ post_failure_event_to_dd_live:
   <<: *base_template
   stage: cleanup
   environment: "live"
+  variables:
+    GIT_STRATEGY: none
   when: on_failure
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"

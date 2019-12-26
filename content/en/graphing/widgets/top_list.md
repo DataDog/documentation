@@ -25,10 +25,10 @@ The top list visualization enables you to display a list of Tag value like `host
 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][1] to configure a metric query.
-    * APM Events: See [the trace search documentation][2] to configure an APM event query.
-    * Log Events: See [the log search documentation][3] to configure an APM event query.
+    * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][3] to configure an Analyzed Span query.
 
-2. Optional: configure conditional formatting depending of your entries' values.
+2. Optional: configure conditional formatting depending on your entries' values.
 
 ### Options
 #### Global time
@@ -65,11 +65,11 @@ TOPLIST_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                      |
+| Parameter  | Type             | Required | Description                                                                                                                                                  |
+|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`     | string           | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                       |
 | `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+| `title`    | string           | no       | Title of your widget.                                                                                                                                        |
 
 
 Additional properties allowed in the `request` object:
@@ -81,7 +81,7 @@ Additional properties allowed in the `request` object:
 ```
 
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
-| ------                | -----  | ----     | -------                                                                                                                                                         |
+|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
 
@@ -90,7 +90,7 @@ Additional properties allowed in the `request` object:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing
-[2]: /tracing/trace_search_and_analytics/search/#search-bar
+[2]: /tracing/app_analytics/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [4]: /graphing/graphing_json/widget_json
 [5]: /graphing/graphing_json/request_json

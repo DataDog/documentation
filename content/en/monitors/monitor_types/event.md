@@ -1,5 +1,5 @@
 ---
-title: Event monitor
+title: Event Monitor
 kind: documentation
 description: "Monitor events gathered by Datadog"
 further_reading:
@@ -11,56 +11,70 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: "Consult your monitor status"
+  text: "Check your monitor status"
 ---
 
 ## Overview
 
-Event monitors allows you to alert when an event matching your query occurs.
+Event monitors allow you to alert on events matching a search query.
 
-1. Select the query and parameters (status, priority, sources and tags) you want to monitor:
-    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection" responsive="true" style="width:80%;">}}
-2. Select the alert grouping:
-    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping" responsive="true" style="width:80%;">}}
+## Monitor creation
 
-3. Select the **alerting conditions**. The **threshold value** and **timeframe** options allows you to set the number of occurrence of an event required during a timeframe before triggering the monitor.  
-    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" style="width:80%;">}}
+To create a [event monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Event*.
 
-    **Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event actually happened. In this case, Datadog back-dates the event to the time of occurrence, which can lead to odd monitor evaluation behavior. If you observe such behavior, reach out to [Datadog Support][1].
-4. Configure your **notification options**:  
-    Refer to the [Notifications](#monitor-notifications) dedicated documentation page for informations.
+### Select events to count
 
-## Using event tags in Event Monitors
+As you fill in the parameters below, the list of events above the search fields is filtered.
 
-In Event Monitors, you can use the tags sent with events to identify events and customize the actions and messages of the Monitor. First, define the search parameters for the full text event search. If you are looking for a specific tag, you can include this in the search as well. For example:
+* Match events containing `<TEXT>`
+* with status `error`, `warning`, `info`, or `success`
+* and priority `all`, `normal`, or `low`
+* from `<SOURCE>`
+* over `<TAGS>`
+* exclude `<TAGS>`
 
-`My Example Event #example-tag`
+Choose your alert grouping:
 
-{{< img src="monitors/monitor_types/event/define_event.png" alt="define_event" responsive="true" style="width:80%;">}}
+* **Simple alert** aggregates all reporting sources. You receive one alert when the aggregated value meets the set conditions.
+* **Multi alert** applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
 
-## Using event template variables in notifications
+### Set alert conditions
 
-Include event-specific information in your event monitor notifications. Available template variables: 
+* The count was `above`, `above or equal to`, `below`, or `below or equal to`
+* `<THRESHOLD_NUMBER>`
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-| Template variable        | Definition                                                               |
-| ------                   | ------                                                                   |
-| `{{event.id}}`           | ID of the event                                                         |
-| `{{event.title}}`        | Title of the event                                                       |
-| `{{event.text}}`         | Text of the event                                                        |
-| `{{event.host.name}}`    | Hostname that generated the event                                        |
-| `{{event.tags.tagname}}` | Tags attached to the event, replace `tagname` with the name of your tag. |
+**Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event is initiated. In this case, Datadog back-dates the event to the time of occurrence, which could place an incoming event outside the current monitor evaluation window. Widening your evaluation window can help account for the time difference.  If you need help adjusting your monitor settings appropriately, reach out to [Datadog Support][2].
 
-{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:60%;">}}
+### Notifications
 
-Use `event.tags` and `event.tags.tagname` to retrieve the values of your tags in Markdown. For example:
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
-{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
+#### Event template variables
 
-When your alert triggers, any matching events that are found in Datadog with the tags appear in the message:
+Event monitors have specific template variables you can include in the notification message:
 
-{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:60%;">}}
+| Template variable          | Definition                                                                     |
+|----------------------------|--------------------------------------------------------------------------------|
+| `{{event.id}}`             | The ID of the event.                                                           |
+| `{{event.title}}`          | The title of the event.                                                        |
+| `{{event.text}}`           | The text of the event.                                                         |
+| `{{event.host.name}}`      | The name of the host that generated the event.                                 |
+| `{{event.tags}}`           | A list of tags attached to the event.                                          |
+| `{{event.tags.<TAG_KEY>}}` | The value for a specific tag key attached to the event. See the example below. |
 
-## Further Reading 
+##### {{event.tags.&lt;TAG_KEY&gt;}}
+
+For the tags `env:test`, `env:staging`, and `env:prod`:
+
+* `env` is the tag key.
+* `test`, `staging`, and `prod` are the tag values.
+
+The template variable is `{{event.tags.env}}`. The result of using this template variable is `test`, `staging`, or `prod`.
+
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: https://app.datadoghq.com/monitors#create/event
+[2]: /help
+[3]: /monitors/notifications

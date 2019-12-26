@@ -1,13 +1,18 @@
 ---
 title: Récupérer tous les utilisateurs
 type: apicode
-order: 34.3
+order: 36.3
 external_redirect: /api/#recuperer-tous-les-utilisateurs
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/user`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-user-get-all" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-user-get-all" >}}

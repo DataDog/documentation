@@ -17,12 +17,12 @@ further_reading:
     text: Découvrir comment explorer vos logs
   - link: logs/explorer/patterns
     tag: Documentation
-    text: Détecter les modèles dans vos logs
+    text: Détecter les patterns dans vos logs
 ---
 ## Présentation
 
-Les analyses de logs complètent la page de recherche de logs en proposant des fonctions d'agrégation et de fractionnement de logs pour le dépannage et la surveillance. 
-Vous pouvez accéder à la page d'analyse depuis n'importe quelle vue Log Explorer, en cliquant sur l'icône « Analytics » en regard de la barre de requête.
+Les fonctions d'analyse de logs permettent d'agréger ou de fractionner des logs depuis la page de recherche de logs, ce qui est particulièrement utile pour le dépannage et la surveillance.
+Vous pouvez accéder à la page d'analyse depuis n'importe quelle vue Log Explorer, en cliquant sur l'icône « Analyse » à proximité de la barre de requête.
 
 {{< img src="logs/explorer/analytics/explorer-button.png" alt="Log Explorer" style="width:50%;" responsive="true">}}
 
@@ -61,7 +61,7 @@ Créez une requête pour contrôler le contenu affiché dans votre analyse de lo
     {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="bouton top et bottom" responsive="true" style="width:20%;">}}
 
 5. Sélectionnez les laps de temps du graphique.
-  Si vous changez l'intervalle global, cela modifie la liste des valeurs de laps de temps disponibles.
+  Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
 
     {{< img src="logs/explorer/analytics/timesteps.png" alt="Laps de temps" responsive="true" style="width:30%;">}}
 
@@ -116,13 +116,32 @@ l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP c
 [1]: /fr/logs/explorer/?tab=facets#setup
 [2]: /fr/logs/explorer/?tab=measures#setup
 {{% /tab %}}
+
+{{% tab "Table" %}}
+
+Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][2] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
+
+* Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la seconde dans la fourchette des valeurs les plus élevées de la première dimension, puis de la troisième dans la fourchette des valeurs les plus élevées de la seconde dimension.
+* Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
+* Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
+
+ **Remarque** : la visualisation d'une seule mesure et d'une seule dimension sous forme de tableau est identique à celle d'une top list. Seul l'affichage diffère.
+
+ L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
+
+{{< img src="logs/explorer/analytics/logs_table_example.png" alt="exemple de tableau" responsive="true" style="width:90%;">}}
+
+[1]: /fr/logs/explorer/?tab=facets#setup
+[2]: /fr/logs/explorer/?tab=measures#setup
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Logs associés
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des logs correspondant à votre sélection :
 
-{{< img src="logs/explorer/analytics/view_logs.gif" alt="affichage des logs" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/analytics/view_logs.mp4" alt="affichage des logs" video="true" responsive="true" width="80%" >}}
 
 ## Comment fonctionnent les agrégations
 
@@ -132,8 +151,7 @@ Illustrons ceci sur une chronologie à barres fictive, où chaque barre représe
 
 Dans l'exemple suivant, chaque point représente un événement de log. L'axe des abscisses correspond au timestamp du log, tandis que l'axe des ordonnées correspond à la valeur d'un attribut de durée transmis par les logs. La série temporelle affiche une agrégation selon les valeurs maximales. Datadog affiche une chronologie avec les paramètres de déploiement. Par exemple, il y a 4 barres pour l'intervalle de temps complet.
 
-{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="exemple de top list" responsive="true" style="width:90%;">}}
-
+{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="exemple de top list" video="true" responsive="true" >}}
 
 ## Pour aller plus loin
 

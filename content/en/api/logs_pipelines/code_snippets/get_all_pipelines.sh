@@ -4,3 +4,8 @@
 
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
+
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+"https://api.datadoghq.com/api/v1/logs/config/pipelines"

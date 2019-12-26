@@ -7,7 +7,8 @@ app_key=<YOUR_APP_KEY>
 monitor_id=<YOUR_MONITOR_ID>
 
 # Show a monitor
-curl -G "https://api.datadoghq.com/api/v1/monitor/${monitor_id}" \
-     -d "api_key=${api_key}" \
-     -d "application_key=${app_key}" \
-     -d "group_states=all"
+curl -X GET \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d "group_states=all" \
+"https://api.datadoghq.com/api/v1/monitor/${monitor_id}"

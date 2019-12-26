@@ -1,13 +1,18 @@
 ---
 title: Mute a monitor
 type: apicode
-order: 26.09
+order: 27.10
 external_redirect: /api/#mute-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/<MONITOR_ID>/mute`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-mute" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-mute" >}}

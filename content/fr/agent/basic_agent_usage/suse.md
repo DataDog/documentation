@@ -23,7 +23,7 @@ Cette page présente les fonctionnalités de base de l'Agent Datadog pour SUSE. 
 
 ## Commandes
 
-Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Dans l'Agent v5, presque tout se fait par le biais du gestionnaire de service.
+Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Dans l'Agent v5, presque tout se fait par l'intermédiaire du gestionnaire de service.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -109,6 +109,6 @@ Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /fr/agent/troubleshooting
 [4]: /fr/developers/guide/custom-python-package

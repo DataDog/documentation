@@ -28,14 +28,14 @@ Datadog can show you the latency of your application over time and how it compar
 
 1. **Open the [Service List page][1]**.
 
-    This page contains a list of all instrumented services available in Datadog APM. You can search over your services by keywords, filter them by `env` tag, and set the timeline.
+    This page contains a list of all instrumented [services][2] available in Datadog APM. You can search over your services by keywords, filter them by `env` tag, and set the timeline.
 2. **Search and open a relevant and active service**.
 
     The web-store service is used in this example because it’s a stable service that we want to double check that there hasn’t been any issues over the last month.
 
     {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-    The Service page comes out of the box for every service in your stack that’s available in Datadog APM. See in-depth analyses of throughput, latency (including percentile distribution) and errors as well as a summary of the active Datadog monitors for the service and breakdown of the resources made available by the service.
+    The Service page comes out of the box for every service in your stack that’s available in Datadog APM. See in-depth analyses of throughput, latency (including percentile distribution) and errors as well as a summary of the active Datadog monitors for the [service][2] and breakdown of the [resources][3] made available by the service.
 
 3. **Find the Latency graph** on the top of the Service Dashboard and deselect all the percentiles from the legend leaving only the p50 option, then **Expand the Latency graph** to view the full screen mode where you can conduct a more comprehensive analysis.
 
@@ -53,4 +53,7 @@ Datadog can show you the latency of your application over time and how it compar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/apm/services
+[2]: /tracing/visualization/#services
+[3]: /tracing/visualization/#resources

@@ -1,7 +1,7 @@
 ---
 title: Delete a Webhooks Integration
 type: apicontent
-order: 20.4
+order: 21.4
 external_redirect: /api/#delete-a-webhooks-integration
 ---
 
@@ -9,6 +9,6 @@ external_redirect: /api/#delete-a-webhooks-integration
 
 Delete a given Datadog-Webhooks integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

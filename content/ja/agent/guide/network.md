@@ -23,7 +23,7 @@ further_reading:
 * 送信先は以下のとおりです。
     * [APM][1] データ: `trace.agent.datadoghq.com`
     * [ライブコンテナ][2]データ: `process.datadoghq.com`
-    * [ログ][3]データ: `agent-intake.logs.datadoghq.com `
+    * TCP のトラフィックの場合、[ログ][3]データは `agent-intake.logs.datadoghq.com `
     * その他の Agent データ:
         * **Agents < 5.2.0**: `app.datadoghq.com`
         *  **Agents >= 5.2.0**: `<version>-app.agent.datadoghq.com`
@@ -60,8 +60,8 @@ further_reading:
 
 各セクションは、`https://ip-ranges.datadoghq.com/<section>.json` または `https://ip-ranges.datadoghq.eu/<section>.json` に専用のエンドポイントがあります。次に例を示します。
 
-* [https://ip-ranges.datadoghq.com/logs.json][6]: ログデータの受信に使用される IP
-* [https://ip-ranges.datadoghq.eu/logs.json][7]: Datadog EU のログデータの受信に使用される IP
+* [https://ip-ranges.datadoghq.com/logs.json][6]: TCP を通じてログデータの受信に使用される IP
+* [https://ip-ranges.datadoghq.eu/logs.json][7]: Datadog EU のログデータの受信に TCP を通じて使用される IP
 * [https://ip-ranges.datadoghq.com/apm.json][8]: APM データの受信に使用される IP
 * [https://ip-ranges.datadoghq.eu/apm.json][9]: Datadog EU の APM データの受信に使用される IP
 
@@ -76,13 +76,13 @@ further_reading:
 Agent のすべての機能を利用するには、以下のポートを開きます。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * **アウトバウンド**:
 
   * <mrk mid="62" mtype="seg">`443/tcp`: 大半の Agent データ</mrk><mrk mid="63" mtype="seg">(メトリクス、APM、ライブプロセス/コンテナなど) 用のポート</mrk>
   * <mrk mid="64" mtype="seg">`123/Udp`: </mrk> <mrk mid="65" mtype="seg">NTP。詳細は、[NTP の重要性に関するドキュメント][1]を参照してください。</mrk>
-  * `10516/tcp`: [ログ収集][2]用のポート
+  * `10516/tcp`: TCP を通じた[ログ収集][2]用ポート
   * `10255/tcp`: [Kubernetes http kubelet][3] 用のポート
   * `10250/tcp`: [Kubernetes https kubelet][3] 用のポート
 
@@ -104,7 +104,7 @@ Agent のすべての機能を利用するには、以下のポートを開き�
 [2]: /ja/logs
 [3]: /ja/agent/basic_agent_usage/kubernetes
 [4]: /ja/integrations/go_expvar
-[5]: /ja/agent/#using-the-gui
+[5]: /ja/agent/basic_agent_usage/#gui
 [6]: /ja/tracing
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}

@@ -1,18 +1,18 @@
 ---
 title: Get Indexes order
 type: apicode
-order: 23.4
+order: 24.4
 external_redirect: /api/#get-indexes-order
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/logs/config/index-order`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_indexes_order" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_indexes_order" >}}

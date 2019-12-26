@@ -19,10 +19,15 @@ further_reading:
 ## Overview
 After [creating your monitor][1], use the monitor status page to view the status over time. This page contains the following sections:
 
-* [Header](#header)
-* [Properties](#properties)
-* [Status and History](#status-and-history)
-* [Events](#events)
+- [Overview](#overview)
+- [Header](#header)
+  - [Mute](#mute)
+  - [Resolve](#resolve)
+  - [Settings](#settings)
+- [Properties](#properties)
+- [Status and History](#status-and-history)
+- [Events](#events)
+- [Further Reading](#further-reading)
 
 These sections are open by default. The last three sections can be closed by using the toggle (&or;) icon to the left of the section name.
 
@@ -50,12 +55,12 @@ Manually `resolve`-ing a monitor is appropriate for cases where data is reported
 ### Settings
 Click the settings cog to display the options available:
 
-| Option    | Description                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Edit][1] | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
-| Clone     | Make a copy of the current monitor.                                                                                                                                                                                                        |
-| Export    | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
-| Delete    | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                      |
+| Option | Description                                                                                                                                                                                                                                |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Edit   | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
+| Clone  | Make a copy of the current monitor.                                                                                                                                                                                                        |
+| Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
+| Delete | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                  |
 
 ## Properties
 
@@ -84,7 +89,7 @@ For further investigation into your metrics evolution, use the [Metric Explorer]
 
 * The monitor is newly created and has not evaluated yet.
 * The monitor's query was recently changed.
-* A host's name previously included in the query has changed. Hostname changes age out of the UI within 24 hours.
+* A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 
 ## Events
 

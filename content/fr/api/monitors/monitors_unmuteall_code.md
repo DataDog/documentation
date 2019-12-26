@@ -1,13 +1,18 @@
 ---
 title: Réactiver tous les monitors
 type: apicode
-order: 26.08
+order: 27.09
 external_redirect: /api/#reactiver-tous-les-monitors
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/unmute_all`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-unmute-all" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 *Cet endpoint ne renvoie aucun objet JSON pour les requêtes réussies.*

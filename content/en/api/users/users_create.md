@@ -1,12 +1,13 @@
 ---
 title: Create user
 type: apicontent
-order: 34.1
+order: 36.1
 external_redirect: /api/#create-user
 ---
 
 ## Create user
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`handle`** [*required*]:
     The user handle, must be a valid email.

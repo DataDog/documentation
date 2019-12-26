@@ -1,15 +1,15 @@
 ---
-title: Add a Webhook to a Webhooks Integration
+title: Update a Webhooks Integration
 type: apicontent
-order: 20.3
-external_redirect: /api/#add-a-webhook-to-a-webhooks-integration
+order: 21.3
+external_redirect: /api/#update-a-webhooks-integration
 ---
 
-## Add a Webhook to a Webhooks Integration
+## Update a Webhooks Integration
 
 Add a specific Webhook to a Datadog Webhooks integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`hooks`** [*required*]:

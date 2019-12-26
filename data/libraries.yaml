@@ -198,6 +198,16 @@ Classic:
       link: https://github.com/gphat/datadog-scala
       api: true
       authors: Cory Watson
+    - name: datadog4s
+      link: https://github.com/avast/datadog4s
+      dogstatsd: true
+      authors: Avast
+      notes: Toolkit for monitoring applications written in functional Scala using Datadog.
+    - name: scaladog
+      link: https://github.com/NomadBlacky/scaladog
+      api: true
+      authors: NomadBlacky
+      notes: Datadog API client for Scala.
   - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog

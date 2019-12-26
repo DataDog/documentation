@@ -1,13 +1,18 @@
 ---
 title: Update organization
 type: apicode
-order: 27.3
+order: 28.3
 external_redirect: /api/#update-organization
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/org/<PUBLIC_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-org-update" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-org-update" >}}

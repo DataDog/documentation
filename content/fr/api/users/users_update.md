@@ -1,14 +1,15 @@
 ---
 title: Mettre à jour un utilisateur
 type: apicontent
-order: 34.4
+order: 36.4
 external_redirect: /api/#mettre-a-jour-un-utilisateur
 ---
 
 ## Mettre à jour un utilisateur
 Ne peut être utilisé qu'avec des clés d'application confiées aux administrateurs.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`id`** [*obligatoire*] :
     le handle de l'utilisateur.
 * **`name`** [*facultatif*, *défaut*=**None**] :

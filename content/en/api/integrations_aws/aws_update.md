@@ -9,23 +9,95 @@ external_redirect: /api/#update-an-aws-integration
 
 Update a Datadog-Amazon Web Services integration.
 
-**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
-
-##### ARGUMENTS
+**QUERY PARAMS** [*curl only*]:
 
 * **`account_id`** [*required*]:
 
-    Your AWS Account ID without dashes. It needs to be passed as query parameter.
+    Your **Existing** AWS Account ID without dashes. It needs to be passed as query parameter.
+    Only required for Role based account configuration.
     [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
 
 * **`role_name`** [*required*]:
 
-    Your Datadog role delegation name. It needs to be passed as query parameter.
+    Your **Existing** Datadog role delegation name. It needs to be passed as query parameter.
+    Only required for Role based account configuration.
     For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
-* **`access_key_id`** [*optional*, *default*=**None**]:
+* **`access_key_id`** [*required*]:
 
-    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
+    Your **Existing** AWS access key ID. 
+    Only required if your AWS account is a GovCloud or China account, enter the existing corresponding Access Key ID to be changed.
+    It needs to be passed as query parameter.
+
+* **`secret_access_key`** [*required*]:
+
+    Your **Existing** AWS secret access key. 
+    Only required if your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
+    It needs to be passed as query parameter.
+
+**CURL SPECIFIC ARGUMENTS**:
+
+* **`account_id`** [*optional*, *curl only*]:
+
+    Your **New** AWS Account ID without dashes. It needs to be passed as an argument.
+    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
+
+* **`role_name`** [*optional*, *curl only*]:
+
+    Your **New** Datadog role delegation name. It needs to be passed as an argument.
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
+
+* **`access_key_id`** [*optional*, *curl only*]:
+
+    Your **New** AWS access key ID. 
+    Only applicable if your AWS account is a GovCloud or China account.
+
+* **`secret_access_key`** [*optional*, *curl only*]:
+
+    Your **New** AWS secret access key. 
+    Only required if your AWS account is a GovCloud or China account.
+
+**ARGUMENTS**:
+
+* **`account_id`** [*required*, *Python and Ruby*]:
+
+    Your **Existing** AWS Account ID without dashes. It needs to be passed as an argument.
+    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
+
+* **`role_name`** [*required*, *Python and Ruby*]:
+
+    Your **Existing** Datadog role delegation name. It needs to be passed as an argument.
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
+
+* **`access_key_id`** [*required*, *Python and Ruby*]:
+
+    Your **Existing** AWS access key ID. 
+    Only required if your AWS account is a GovCloud or China account.
+
+* **`secret_access_key`** [*required*, *Python and Ruby*]:
+
+    Your **Existing** AWS secret access key. 
+    Only required if your AWS account is a GovCloud or China account.
+
+* **`new_account_id`** [*optional*, *Python and Ruby*]:
+
+    Your **New** AWS Account ID without dashes. It needs to be passed as an argument.
+    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
+
+* **`new_role_name`** [*optional*, *Python and Ruby*]:
+
+    Your **New** Datadog role delegation name. It needs to be passed as an argument.
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
+
+* **`new_access_key_id`** [*optional*, *Python and Ruby*]:
+
+    Your **New** AWS access key ID. 
+    Only applicable if your AWS account is a GovCloud or China account.
+
+* **`new_secret_access_key`** [*optional*, *Python and Ruby*]:
+
+    Your **New** AWS secret access key. 
+    Only applicable if your AWS account is a GovCloud or China account.
 
 * **`filter_tags`** [*optional*, *default*=**None**]:
 

@@ -16,35 +16,50 @@ further_reading:
 {{< img src="monitors/monitor_status/monitor_status_page.png" alt="Page Monitor Status" responsive="true" >}}
 
 ## Présentation
+Une fois [votre monitor créé][1], utilisez la page Monitor Status pour consulter une vue d'ensemble de l'évolution de son statut. Cette page comprend les sections suivantes :
 
-Une fois [votre monitor créé][1], la page Monitor Status vous offre une vue d'ensemble de l'évolution du statut de votre monitor au fil du temps.
-Cette page se divise en 3 sections principales :
+- [Overview](#overview)
+- [Header](#header)
+  - [Mute](#mute)
+  - [Resolve](#resolve)
+  - [Settings](#settings)
+- [Properties](#properties)
+- [Status and History](#status-and-history)
+- [Events](#events)
+- [Pour aller plus loin](#further-reading)
 
-* **[Properties](#properties)**
-* **[Status and History](#status-and-history)**
-* **[Events](#events)**
+Ces sections sont ouvertes par défaut. Les trois dernières sections peuvent être refermées à l'aide de la petite icône de réduction (&or;) située à gauche du nom de chaque section.
 
-Ces sections sont ouvertes par défaut et peuvent être refermées à l'aide de la petite icône `>` située à gauche du nom de chaque section.
+## Header
+À gauche, l'en-tête contient le statut du monitor, sa date et son heure et son titre.
 
-### Options de la page Monitor Status
+À droite figurent les options **Mute**, **Resolve** et **Settings**.
 
-Plusieurs options sont disponibles en haut à droite de la page :
+### Mute
+Vous pouvez désactiver un monitor directement depuis sa page de statut. Utilisez le champ **Scope** pour préciser votre downtime. Consultez la [documentation relative aux downtimes][2] pour découvrir comment désactiver plusieurs contextes ou monitors à la fois.
 
-* **Mute** : cette option vous permet de désactiver un monitor directement depuis sa page de statut. Utilisez le champ *Scope* pour définir la durée du downtime.
-    Consultez la [documentation relative aux downtimes][2] pour découvrir comment désactiver plusieurs contextes ou monitors à la fois.
+**Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor seront supprimés.
 
-    REMARQUE : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor seront supprimés.
+### Resolve
+Si votre monitor est dans un état d'alerte, le bouton **Resolve** apparaît. Il vous permet de résoudre manuellement votre monitor.
 
-    {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="Désactiver un monitor depuis la page Monitor Status" responsive="true" style="width:30%;">}}
+La fonction `resolve` du monitor remplace artificiellement le statut du monitor par `OK` pour sa prochaine évaluation. L'évaluation d'après est effectuée normalement, à partir des données sur lesquelles le monitor est basé.
 
-* **Resolve** : utilisez cette option pour résoudre manuellement votre monitor.
+Si un monitor émet une alerte car ses données actuelles déclenchent l'état `ALERT`, la fonction `resolve` modifie son statut dans l'ordre suivant : `ALERT -> OK -> ALERT`. Par conséquent, cette fonction ne vous permet pas d'indiquer que vous avez pris connaissance de l'alerte ni de demander à Datadog d'ignorer l'alerte.
 
-* **Configuration options** : utilisez l'icône en forme d'*engrenage* pour afficher les options disponibles :
+Lorsque les données sont transmises ponctuellement, il convient de `resolve` manuellement un monitor. Après avoir déclenché une alerte, le monitor ne reçoit plus de données et ne peut donc plus évaluer les conditions d'alerte. Dans ce cas, la fonction `resolve` ou `Automatically resolve monitor after X hours` rétablit l'état `OK` de l'alerte.
 
-    * [Edit][1]
-    * Clone
-    * [Export][3]
-    * Delete
+Cette fonction vous permet par exemple de gérer un monitor reposant sur des métriques d'erreur qui ne sont pas générées en l'absence d'erreur (`aws.elb.httpcode_elb_5xx` ou encore des counters DogStatsD dans votre code qui renvoient des informations _uniquement en cas d'erreur_).
+
+### Settings
+Cliquez sur l'icône des paramètres en forme d'engrenage pour afficher les options disponibles :
+
+| Option | Description                                                                                                                                                                                                                                |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Edit   | Modifiez le monitor actuel. Cliquez [ici][1] pour en savoir plus sur les différents types de monitors.                                                                                                                                                             |
+| Clone  | Effectuez une copie de votre monitor actuel.                                                                                                                                                                                                        |
+| Export | Exportez la configuration JSON du monitor actuel. Cette option est également disponible au moment de la [création de votre monitor][1]. Si vous gérez et déployez des monitors à l'aide de programmes, il est plus simple de définir le monitor dans l'interface utilisateur et d'exporter le JSON. |
+| Delete | Supprimez le monitor actuel. Une fenêtre de confirmation s'affiche avant que le monitor ne soit supprimé.                                                                                                                                                                  |
 
 ## Properties
 
@@ -52,32 +67,32 @@ Plusieurs options sont disponibles en haut à droite de la page :
 
 La section *Properties* présente des informations générales sur votre monitor :
 
-* Le statut de votre monitor
-* Le créateur du monitor
-* L'ID du monitor ([pour l'API monitor][4])
+* Le statut de votre monitor.
+* Le créateur du monitor.
+* L'ID du monitor ([pour l'API monitor][3]).
 * Les tags associés à votre monitor. *Pour modifier la liste des tags, cliquez sur l'icône en forme de crayon*.
-* La [requête][5] du monitor
-* Le message du monitor
+* La [requête][4] du monitor.
+* Le message du monitor.
 
 Utilisez l'icône en forme d'*engrenage* en haut à droite de la page pour [modifier][1] les propriétés de votre monitor.
 
 ## Status and History
 
-La section *Status and History* présente les changements d'état et de requête au fil du temps, tandis que le graphique **Evaluation Graph** illustre le comportement précis de la requête pour l'intervalle sélectionné sur le graphique *History*. L'Evaluation Graph affiche une échelle fixe qui correspond au laps de temps de l'évaluation de votre monitor : de cette façon, les points représentés restent toujours [correctement agrégés][6]. Faites glisser le cadre sur la chronologie pour visualiser l'évolution de votre monitor sur une période antérieure :
+La section *Status and History* présente les changements d'état et de requête au fil du temps, tandis que le graphique **Evaluation Graph** illustre le comportement précis de la requête correspondant au cadre de l'intervalle *sur le graphique History*. Le graphique Evaluation Graph affiche une échelle fixe qui correspond au laps de temps de l'évaluation de votre monitor : de cette façon, les points représentés restent toujours [correctement agrégés][5]. Faites glisser le cadre sur la chronologie pour visualiser les précédents résultats de l'évaluation du monitor :
 
-{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="Section History de la page Monitor Status" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="Section History de la page Monitor Status" video="true" responsive="true" width="80%" >}}
 
-Pour étudier plus en détail l'évolution de vos métriques, utilisez l'outil [Metric Explorer][7] ou un [notebook][8] dédié.
+Pour étudier plus en détail l'évolution de vos métriques, utilisez l'outil [Metric Explorer][6] ou un [notebook][7] dédié.
 
-**Remarque** : si vous voyez `None` ou `no groups found` à la place d'un nom de groupe sur le graphique *Status*, les causes les plus probables sont les suivantes :
+**Remarque** : si le message `None` ou `no groups found` s'affiche à la place des noms de groupe sur le graphique *Status*, l'erreur provient probablement de l'une des situations suivantes :
 
 * Le monitor vient d'être créé et n'a pas encore été évalué.
 * La requête du monitor a récemment été modifiée.
-* Un hostname précédemment inclus dans la requête a changé. Les anciens hostnames ne sont plus visibles sur la page après 24 heures.
+* Le nom d'un host précédemment inclus dans la requête a été modifié. Les modifications de hostnames ne sont plus affichées dans l'interface d'utilisateur après 24 heures.
 
 ## Events
 
-Tous les événements générés par votre monitor sont rassemblés dans cette section. Ils apparaissent également dans votre [flux d'événements][9].
+Tous les événements générés par votre monitor sont agrégés dans cette section. Ils apparaissent également dans votre [flux d'événements][8].
 
 {{< img src="monitors/monitor_status/status_monitor_event.png" alt="Section Events de la page Monitor Status" responsive="true" style="width:80%;" >}}
 
@@ -87,10 +102,9 @@ Tous les événements générés par votre monitor sont rassemblés dans cette s
 
 [1]: /fr/monitors/monitor_types
 [2]: /fr/monitors/downtimes
-[3]: /fr/monitors/#export-your-monitor
-[4]: /fr/api/?lang=python#monitors
-[5]: /fr/graphing/functions
-[6]: /fr/videos/datadog101-5-aggregation/?wtime=49s
-[7]: https://app.datadoghq.com/metric/explorer
-[8]: /fr/graphing/notebooks
-[9]: /fr/graphing/event_stream
+[3]: /fr/api/?lang=python#monitors
+[4]: /fr/graphing/functions
+[5]: /fr/videos/datadog101-5-aggregation/?wtime=49s
+[6]: https://app.datadoghq.com/metric/explorer
+[7]: /fr/graphing/notebooks
+[8]: /fr/graphing/event_stream

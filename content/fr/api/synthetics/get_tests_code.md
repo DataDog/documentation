@@ -1,17 +1,18 @@
 ---
-title: Passer tous les tests
+title: Obtenir tous les tests
 type: apicode
-order: 29.7
-external_redirect: "/api/#passer-tests"
+order: 30.7
+external_redirect: "/api/#obtenir-tous-les-tests"
 ---
 
-##### Signature
+**SIGNATURE** :
+
 `GET /v1/synthetics/tests`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="get_tests" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.get_tests" >}}

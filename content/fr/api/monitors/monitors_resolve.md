@@ -1,13 +1,14 @@
 ---
 title: Résoudre un monitor
 type: apicontent
-order: 26.06
+order: 27.07
 external_redirect: /api/#resoudre-un-monitor
 ---
 
 ## Résoudre un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`resolve`** [*obligatoire*] :
     tableau de groupes à résoudre pour un monitor_id donné, p. ex. :
     `{"monitor_id": "group_to_resolve"}`

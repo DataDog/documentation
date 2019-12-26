@@ -29,9 +29,9 @@ Datadog allows you to set monitors to keep track of the health of your services 
 1. **Open the [New Monitor Page][2] and choose [APM][3]**.
 2. **Choose your environment** under Primary Tags and **Choose the database to monitor** under Service.
 
-    Under Resource, you can choose to monitor specific queries run in the database, but in this example, we’ll look at overall performance so leave it as `*`.
+    Under [Resource][4], you can choose to monitor specific queries run in the database, but in this example, we’ll look at overall performance so leave it as `*`.
 
-    Once you choose a service, the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
+    Once you choose a [service][5], the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
@@ -41,7 +41,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 4. **Set the *Alert when* field value to 100%**.
 
-    This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you’ll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][4].
+    This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you’ll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][6].
 
 5. **Change the alert notification**.
 
@@ -49,7 +49,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
-    You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][5].
+    You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][7].
 
 6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly.
     **Note**: To add another user be sure to type `@` at the start. **Click on *Save***.
@@ -62,13 +62,13 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
-8. **Navigate back to the [Services Page][6]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
+8. **Navigate back to the [Services Page][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
 
     Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
-    As you create monitors you’ll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][7].
+    As you create monitors you’ll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][9].
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" responsive="true" style="width:90%;">}}
 
@@ -78,10 +78,13 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/#pagetitle
+
+[1]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
-[4]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/#faq
-[5]: https://docs.datadoghq.com/monitors/notifications/?tab=is_alertis_warning
-[6]: https://app.datadoghq.com/apm/services
-[7]: https://app.datadoghq.com/service/map
+[4]: /tracing/visualization/#resources
+[5]: /tracing/visualization/#services
+[6]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/#faq
+[7]: https://docs.datadoghq.com/monitors/notifications/?tab=is_alertis_warning
+[8]: https://app.datadoghq.com/apm/services
+[9]: https://app.datadoghq.com/service/map

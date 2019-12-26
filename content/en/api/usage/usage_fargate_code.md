@@ -1,13 +1,18 @@
 ---
 title: Get hourly usage for Fargate
 type: apicode
-order: 33.7
+order: 35.7
 external_redirect: /api/#get-hourly-usage-for-fargate
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/fargate`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-billing-usage-fargate" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-fargate" >}}

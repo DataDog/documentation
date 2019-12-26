@@ -37,8 +37,7 @@ To remove a given Docker container with the name `<NAME>` from Autodiscovery, ad
 ac_exclude: [name:<NAME>]
 ```
 
-
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -66,11 +65,12 @@ Another example, the following configuration instructs the Agent to ignore some 
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-**Note**: You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
-
+You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 
 ## Include Containers
 
@@ -93,8 +93,7 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 ac_include: [name:<NAME>]
 ```
 
-
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -120,6 +119,7 @@ DD_AC_INCLUDE = "image:ubuntu image:debian"
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 
 ### Pause containers
 
@@ -130,4 +130,4 @@ To disable this behavior and include pause containers in the Autodiscovery perim
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

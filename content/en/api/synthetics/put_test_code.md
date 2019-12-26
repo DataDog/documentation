@@ -1,17 +1,18 @@
 ---
 title: Edit a test
 type: apicode
-order: 29.3
-external_redirect: /api/#edit-test
+order: 31.3
+external_redirect: /api/#edit-a-test
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="put_test" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.put_test" >}}

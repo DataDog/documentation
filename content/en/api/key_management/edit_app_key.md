@@ -1,7 +1,7 @@
 ---
 title: Edit an application key
 type: apicontent
-order: 21.09
+order: 22.09
 external_redirect: /api/#edit-an-application-key
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#edit-an-application-key
 
 Edit an application key name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

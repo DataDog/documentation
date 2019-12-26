@@ -1,18 +1,18 @@
 ---
 title: Delete Pipeline
 type: apicode
-order: 24.7
+order: 25.7
 external_redirect: /api/#delete-a-pipeline
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `DELETE /v1/logs/config/pipelines`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="delete_pipeline" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.delete_pipeline" >}}

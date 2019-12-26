@@ -1,15 +1,18 @@
 ---
 title: Envoyer des logs via HTTP
 type: apicode
-order: 22.1
-external_redirect: "/api/#send-logs-over-http"
+order: 23.1
+external_redirect: "/api/#envoyer-des-logs-via-http"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="send_logs_datadog" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.send_logs_datadog" >}}

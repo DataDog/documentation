@@ -1,7 +1,7 @@
 ---
 title: Monitors group search
 type: apicontent
-order: 26.13
+order: 27.14
 external_redirect: /api/#monitors-group-search
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#monitors-group-search
 
 Search and filter your monitor groups details.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*optional*]:
 

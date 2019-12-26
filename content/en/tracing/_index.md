@@ -14,7 +14,7 @@ further_reading:
 - link: "/tracing/advanced/runtime_metrics"
   tag: "Documentation"
   text: "Runtime metrics"
-- link: "https://learn.datadoghq.com/course/view.php?id=4"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=17"
   tag: "Learning Center"
   text: "Introduction to Application Performance Monitoring"
 aliases:
@@ -28,7 +28,7 @@ disable_toc: true
 </br>
 ## What is Datadog APM?
 
- Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and we can show you systematic data about precisely what is happening to this request.
+ Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the [traces][1] across a distributed system, and we can show you systematic data about precisely what is happening to this request.
 
 ## Overview
 
@@ -37,7 +37,7 @@ disable_toc: true
     {{< nextlink href="/tracing/setup/" >}}<u>Instrument your application</u>: Add a tracing library to your application.{{< /nextlink >}}
     {{< nextlink href="/tracing/advanced/" >}}<u>Enrich Tracing</u>: Enrich tracing by automatically injecting a trace-id into your logs, adding metadata to your spans, and collecting Runtime metrics associated with your traces.{{< /nextlink >}}
     {{< nextlink href="/tracing/visualization/" >}}<u>Use the APM UI</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics. {{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_search_and_analytics/" >}}<u>Trace Search & Analytics</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics.{{< /nextlink >}}
+    {{< nextlink href="/tracing/app_analytics/" >}}<u>App Analytics</u>: Filter application performance metrics and Analyzed Spans by user-defined tags.{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/" >}}<u>Guides</u>: Additional helpful articles about APM & Distributed Tracing.{{< /nextlink >}}
     {{< nextlink href="/tracing/troubleshooting/?tab=java" >}}<u>Troubleshooting</u>: Solve common tracing issues.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -46,3 +46,7 @@ disable_toc: true
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
+
+[1]: /tracing/visualization/#trace

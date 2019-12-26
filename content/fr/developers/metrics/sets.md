@@ -7,7 +7,7 @@ further_reading:
     text: En savoir plus sur les métriques
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques client de Datadog et sa communauté pour DogstatsD et les API
 ---
 ## Présentation
 

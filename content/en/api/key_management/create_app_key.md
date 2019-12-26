@@ -1,7 +1,7 @@
 ---
 title: Create an application key
 type: apicontent
-order: 21.08
+order: 22.08
 external_redirect: /api/#create-an-application-key
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#create-an-application-key
 
 Create an application key with a given name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

@@ -60,13 +60,13 @@ To search for logs that contain `user=JaneDoe` in the message attribute use the 
 `user\=JaneDoe`
 
 #### Facets search
-To search on a specific facet, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
-**Note**: Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is be applied to spaces within log attributes. Log attributes should not contain spaces, but if they do, spaces must be escaped. If an attribute is called `user.first name`, perform a search on this attribute by escaping the space: `@user.first\ name:myvalue`
+**Note**: Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is applied to spaces within log facet names. Log facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`
 
 Examples:
 
@@ -90,9 +90,9 @@ Wildcard searches work within facets with this syntax. This query returns all th
 
 Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
 
-`"*NETWORK*"`
+`*NETWORK*`
 
-However, this search term does not return logs that contain the string `NETWORK` if it is in a facet.
+However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
 ### Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:

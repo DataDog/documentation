@@ -17,11 +17,11 @@ further_reading:
     tag: FAQ
     text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
 ---
-`dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでもトラブルが解消しない場合は、[サポートチーム][2]まで電子メールでお問い合わせください。
+`dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでも問題が解決しない場合は、[ Datadog サポート][2]までお問い合わせください。
 
 ## Agent の再起動が必要
 
-`datadog-agent` の構成に何らかの変更を加えた場合、その変更は、Datadog Agent を再起動するまで有効になりません。
+`datadog-agent` のコンフィギュレーションに加えられた変更は、[Agent を再起動][3]した後に反映されます。
 
 ## ポート 10516 のアウトバウンドトラフィックがブロックされる
 
@@ -38,12 +38,18 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 <API_KEY> this is a test message
 ```
 
-- ポート 10514 または 10516 のオープンを利用できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がポート `443` を使用してログを転送するように指示することができます (Datadog Agent でのみ使用可能)。
+- ポート 10514 または 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
 
 ```
 logs_config:
-  use_port_443: true
+  use_http: true
 ```
+
+詳細については、[HTTPS ログ転送セクション][4]をご参照ください。
+
+## Agent のステータスをチェックします
+
+[Agent のステータスコマンド][5]をチェックすることが、問題の解決に役立つことがあります。
 
 ## 新しいログが書き込まれていない
 
@@ -53,9 +59,19 @@ Datadog Agent は、ログの収集 (ログの追跡またはリスニング) �
 
 `datadog-agent` はルートとして実行されません (一般的なベストプラクティスとしても、ルートとして実行することはお勧めしていません)。このため、(カスタムログまたはインテグレーションの) ログファイルを追跡するように `datadog-agent` を構成する場合は、追跡して収集するログファイルへの読み取りアクセス権を `datadog-agent` ユーザーが持つことを特に注意して確認する必要があります。
 
-アクセス権がない場合は、Agent の `status` に次のようなメッセージが表示されます。
+そのような場合、[Agent のステータス][5] に次のようなエラーメッセージが表示されます。
 
-{{< img src="logs/agent-log-executable-permission-issue.png" alt="Permission issue" responsive="true" style="width:70%;">}}
+```
+==========
+Logs Agent
+==========
+
+  test
+  ----
+    Type: file
+    Path: /var/log/application/error.log
+    Status: Error: file /var/log/application/error.log does not exist
+```
 
 ファイルアクセス許可の詳細情報を取得するには、`namei` コマンドを実行します。
 
@@ -69,8 +85,8 @@ Datadog Agent は、ログの収集 (ログの追跡またはリスニング) �
  -rw-r----- error.log
 ```
 
-この例の場合は、`application` ディレクトリが実行可能ディレクトリではないため、Agent はファイルをリストできません。さらに、Agent には `error.log` ファイルに対する読み取りアクセス許可がありません。
-[chmod コマンド][3]を使用して、不足しているアクセス許可を追加してください。
+この例の場合、`application` ディレクトリが実行可能ディレクトリではないため、Agent はファイルをリストできません。さらに、Agent には `error.log` ファイルに対する読み取りアクセス許可がありません。
+[chmod コマンド][6]を使用して、不足しているアクセス許可を追加してください。
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
 
@@ -79,7 +95,7 @@ Agent がファイルへの読み取りアクセス許可を持つようにす�
 
 ## アクセス許可の問題と Journald
 
-journald からログを収集する場合は、[journald インテグレーション][4]で説明されているように、Datadog Agent ユーザーが systemd グループに追加されている必要があります。
+journald からログを収集する場合は、[journald インテグレーション][7]で説明されているように、Datadog Agent ユーザーが systemd グループに追加されている必要があります。
 
 ファイルアクセス許可が正しくなければ、journald は空のペイロードを送信します。そのため、この場合は、明示的なエラーメッセージを表示および送信することはできません。
 
@@ -87,19 +103,17 @@ journald からログを収集する場合は、[journald インテグレーシ�
 
 以下に挙げる一般的な構成上の問題は、`datadog-agent` セットアップで何重にもチェックすることをお勧めします。
 
-1. 主要な構成上の問題を見つけるには、Agent のステータス構成 `datadog-agent status` を実行します。
+1. `datadog.yaml` で `api_key` が定義されているかをチェックします。
 
-2. `datadog.yaml` で `api_key` が定義されているかをチェックします。
+2. `datadog.yaml` で `logs_enabled: true` が設定されているかをチェックします。
 
 3. デフォルトでは、Agent はログを収集しません。Agent の `conf.d/` ディレクトリに、logs セクションと適切な値が含まれた .yaml ファイルが少なくとも 1 つあることを確認します。
 
-4. 構成ファイルで何らかの .yaml パースエラーが発生することがあります。YAML には細かな注意が必要なため、疑わしい場合は、適切な [YAML 検証ツール][5]を使用して調べてみることをお勧めします。
-
-5. `datadog.yaml` で `logs_enabled: true` が設定されているかをチェックします。
+4. 構成ファイルで何らかの .yaml パースエラーが発生することがあります。YAML には細かな注意が必要なため、疑わしい場合は、[YAML 検証ツール][8]を使用してください。
 
 ### Agent ログ内のエラーのチェック
 
-問題について記述されたエラーがログに含まれている場合があります。次のコマンドを実行するだけで、このようなエラーをチェックできます。
+問題について記述されたエラーがログに含まれている場合があります。次のコマンドを実行して、このようなエラーをチェックします。
 
 ```
 sudo cat /var/log/datadog/agent.log | grep ERROR
@@ -107,53 +121,19 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## Docker 環境
 
-### ログ収集が有効にならない
-
-1. Datadog Agent が Docker ソケットにアクセスできることを確認します。
-2. `usermod -a -G docker dd-agent` で、Agent ユーザーが Docker グループに含まれていることをチェックします。
-3. ログ収集が有効 `DD_LOGS_ENABLED=true` になっていることをチェックします。
-
-### 構成上の問題
-
-少なくとも 1 つの有効なログ構成が、ログ収集を開始するように設定されている必要があります。ログ収集を構成するためのオプションはいくつかあります。少なくとも 1 つを有効にしてください。
-
-1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`。これは、すべてのコンテナからログを収集します ([一部のコンテナを除外する方法はこちら][6]を参照してください)。
-
-2. [コンテナラベル][7]によるオートディスカバリー。この場合は、`datadog.yaml` に Docker リスナーと構成プロバイダーを追加します。
-
-```
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
-
-3. [ポッドアノテーション][8]による Kubernetes でのオートディスカバリー。この場合は、`datadog.yaml` に kubelet リスナーと構成プロバイダーを追加します。
-
-```
-listeners:
-  - name: kubelet
-config_providers:
-  - name: kubelet
-    polling: true
-```
-
-### Journald
-
-コンテナ環境で Journald を使用している場合は、特定のファイルで Agent をマウントする必要があるため、[journald インテグレーション][4]の説明に従ってください。
+[Docker ログ収集のトラブルシューティングガイド][9]をご参照ください
 
 ## サーバーレス環境
 
 ### lambda 関数からのログがログエクスプローラーページに表示されない
 
-環境の構成については、[Datadog-AWS ログインテグレーション][9]を参照してください。それでもログが表示されない場合は、さらに以下の点を確認してください。
+環境の構成については、[Datadog-AWS ログインテグレーション][10]を参照してください。それでもログが表示されない場合は、さらに以下の点を確認してください。
 
 #### Lambda 関数の構成
 
 Datadog の lambda 構成パラメーターをチェックします。
 
-* `<API_KEY>`: [Datadog API キー][10]を Python コードで直接設定するか、環境変数として設定する必要があります。複数のプラットフォームを管理している場合は、本当に正しいプラットフォームに正しい `<API_KEY>` を使用しているかを再度確認してください。
+* `<API_KEY>`: [Datadog API キー][11]を Python コードで直接設定するか、環境変数として設定する必要があります。複数のプラットフォームを管理している場合は、正しいプラットフォームに正しい `<API_KEY>` を使用しているかを再度確認してください。
 
 
 #### lambda 関数がトリガーされているか
@@ -162,7 +142,7 @@ Datadog lambda 関数が実際にトリガーされているかどうかを確�
 
 ## 設定間違いによるログの欠落
 
-ログが [Datadog Live Tail][11] に表示されることをチェックします。Live Tail に表示される場合は、インデックス構成ページで、いずれかの[除外フィルター][12]がログと一致していないかどうかをチェックしてください。
+ログが [Datadog Live Tail][12] に表示されているかどうかチェックします。Live Tail に表示される場合は、インデックス構成ページで、ログと一致する[除外フィルター][13]がないか確認します。
 
 ## その他の参考資料
 
@@ -171,13 +151,14 @@ Datadog lambda 関数が実際にトリガーされているかどうかを確�
 
 [1]: /ja/logs
 [2]: /ja/help
-[3]: https://en.wikipedia.org/wiki/Chmod
-[4]: https://docs.datadoghq.com/ja/integrations/journald/#pagetitle
-[5]: https://codebeautify.org/yaml-validator
-[6]: /ja/agent/docker/log/?tab=containerinstallation#filter-containers
-[7]: /ja/agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[8]: /ja/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[9]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[10]: https://app.datadoghq.com/account/settings#api
-[11]: https://app.datadoghq.com/logs/livetail
-[12]: /ja/logs/indexes/#exclusion-filters
+[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://en.wikipedia.org/wiki/Chmod
+[7]: https://docs.datadoghq.com/ja/integrations/journald/
+[8]: https://codebeautify.org/yaml-validator
+[9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide
+[10]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[11]: https://app.datadoghq.com/account/settings#api
+[12]: https://app.datadoghq.com/logs/livetail
+[13]: /ja/logs/indexes/#exclusion-filters

@@ -1,7 +1,7 @@
 ---
 title: Edit metric metadata
 type: apicontent
-order: 25.5
+order: 26.5
 external_redirect: /api/#edit-metric-metadata
 ---
 ## Edit metric metadata
@@ -9,7 +9,7 @@ external_redirect: /api/#edit-metric-metadata
 The metrics metadata endpoint allows you to edit fields of a metric's metadata.
 [Find more about supported types][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`type`** [*required*]:
     [Metric type][1] such as **gauge** or **rate**

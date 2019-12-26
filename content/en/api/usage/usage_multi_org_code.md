@@ -1,13 +1,18 @@
 ---
 title: Get usage across your multi-org account
 type: apicode
-order: 33.8
+order: 35.8
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/summary`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-billing-usage-summary" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-summary" >}}

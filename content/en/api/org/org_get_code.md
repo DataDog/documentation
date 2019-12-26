@@ -1,13 +1,18 @@
 ---
 title: Get organization
 type: apicode
-order: 27.2
+order: 28.2
 external_redirect: /api/#get-organization
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/org`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-org-get" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-org-get" >}}

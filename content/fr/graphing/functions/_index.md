@@ -59,13 +59,13 @@ Comme vous l'avez sûrement deviné, le backend trouve cinq sources correspondan
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="graphique_métrique_2" responsive="true" style="width:70%;">}}
 
-Il faut alors agréger les données de ces sources afin de fournir une métrique représentant `system.disk.total` pour votre host. Cette opération est effectuée à l’[étape 3][4].
+Il faut alors agréger les données de ces sources afin de fournir une métrique représentant `system.disk.total` pour votre host. Cette opération est effectuée à l'[étape 3][4].
 
 **Remarque** : le système d'ajout de tags adopté par Datadog est à la fois simple et puissant. Vous n'avez pas besoin de connaître ou de spécifier les sources à combiner : il vous suffit de fournir un tag (par exemple, un identifiant). Datadog combine alors uniquement toutes les données possédant cet identifiant. Vous n'avez donc pas besoin de connaître le nombre de hosts ou d'appareils dont vous disposez lorsque vous interrogez `system.disk.total{*}`. Datadog agrège les données de toutes les sources pour vous.
 
 [Cliquez ici pour obtenir plus d'informations sur les séries temporelles et la cardinalité des tags][5].
 
-**Paramètre impliqué : contexte**  
+**Paramètre impliqué : scope**  
 Vous pouvez utiliser plusieurs tags, p. ex. `{host:moby, device:udev}`, si vous souhaitez récupérer les données correspondant aux deux tags.
 
 ## Effectuer l'agrégation temporelle
@@ -95,7 +95,7 @@ Notre backend calcule une série d'agrégats locaux pour chaque source correspon
 
 Toutefois, vous pouvez contrôler les paramètres de cette agrégation.
 
-**Paramètre impliqué : cumul (facultatif)**
+**Paramètre impliqué : rollup (facultatif)**
 Comment utiliser la [fonction de cumul][8] ?
 
 Dans cet exemple, `rollup(avg,60)` définit une période d'agrégation de 60 secondes. Ainsi, l'intervalle de X minutes est découpé en Y intervalles de 1 minute chacune. Les données d'une minute donnée sont agrégées en un point unique qui s'affiche sur votre graphique (après l'étape 3, l'agrégation spatiale).
@@ -126,11 +126,11 @@ Datadog propose 4 agrégateurs spatiaux :
 
 ## Appliquer des fonctions (facultatif)
 
-La plupart des fonctions sont appliquées lors de la dernière étape. À partir des ~300 points obtenus après les agrégations temporelles (étape 2) et spatiales (étape 3), la fonction calcule de nouvelles valeurs qui peuvent être représentées sur votre graphique.
+Des fonctions peuvent être appliquées à l'arithmétique dans la case `Formula` lors de la représentation graphique des données. La plupart des fonctions sont appliquées lors de la dernière étape. À partir des ~300 points obtenus après les agrégations temporelles (étape 2) et spatiales (étape 3), la fonction calcule de nouvelles valeurs qui peuvent être représentées sur votre graphique.
 
 Dans cet exemple, la fonction `abs` veille à ce que vos résultats correspondent à des nombres positifs.
 
-**Paramètre impliqué : fonction**
+**Paramètre impliqué : function**
 
 {{< whatsnext desc="Choisissez votre type de fonctions" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
@@ -188,4 +188,4 @@ Documentation relative à [StatsD/DogStatsD][11].
 [8]: /fr/graphing/functions/rollup
 [9]: /fr/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [10]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[11]: /fr/developers/dogstatsd
+[11]: /fr/developers/metrics/dogstatsd_metrics_submission

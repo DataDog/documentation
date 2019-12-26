@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour les hosts et conteneurs
 type: apicontent
-order: 33.1
+order: 35.1
 external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-hosts-et-conteneurs
 ---
 
@@ -9,13 +9,14 @@ external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-hosts-et-contene
 
 Obtenez l'utilisation horaire pour les hosts et conteneurs.
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_hr`** [*obligatoire*] :
     datetime au format ISO-8601, UTC, à l'heure près : [AAAA-MM-JJThh] pour une utilisation commençant à cette heure
 * **`end_hr`** [*facultatif*, *défaut*=**1d+start_hr**] :
     datetime au format ISO-8601, UTC, à l'heure près : [AAAA-MM-JJThh] pour une utilisation se terminant AVANT cette heure
 
-##### Réponse
+**RÉPONSE** :
 
 * **`container_count`** :
     indique le nombre total de conteneurs qui ont transmis des données via l'intégration Docker durant cette heure.

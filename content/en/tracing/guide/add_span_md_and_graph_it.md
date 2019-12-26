@@ -23,17 +23,17 @@ _7 minutes to complete_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors.
+Datadog APM allows you to customize your [traces][1] to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors.
 
-In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans.
+In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to [spans][2].
 
 ## Instrument your code with custom span tags
 
 1) **Follow the example to get your code instrumented**.
 
-Depending on the programming language you are you using, you’ll need to set the tags to add to your spans differently.
+Depending on the programming language you are you using, you’ll need to set the [tags][3] to add to your spans differently.
 
-**Note**: take note of the service and [resource names][1] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
+**Note**: take note of the service and [resource names][4] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -197,23 +197,25 @@ public class ShoppingCartController : Controller
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
 ```php
-namespace App\Http\Controllers;
+<?php
+  namespace App\Http\Controllers;
 
-use DDTrace\GlobalTracer;
+  use DDTrace\GlobalTracer;
 
-class ShoppingCartController extends Controller
-{
-    public shoppingCartAction (Request $request) {
-        // Get the currently active span
-        $span = GlobalTracer::get()->getActiveSpan();
-        if (null !== $span) {
-            // customer_id -> 254889
-            $span->setTag('customer_id', $request->get('customer_id'));
-        }
+  class ShoppingCartController extends Controller
+  {
+      public shoppingCartAction (Request $request) {
+          // Get the currently active span
+          $span = GlobalTracer::get()->getActiveSpan();
+          if (null !== $span) {
+              // customer_id -> 254889
+              $span->setTag('customer_id', $request->get('customer_id'));
+          }
 
-        // [...]
-    }
-}
+          // [...]
+      }
+  }
+?>
 ```
 
 {{% /tab %}}
@@ -223,7 +225,7 @@ class ShoppingCartController extends Controller
 
 ## Leverage the Datadog UI to search for your custom span tags
 
-2) **Go to the Services page** and click on the service that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the Resource table. **Scroll down to the Traces table**
+2) **Go to the Services page** and click on the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][6] table. **Scroll down to the Traces table**
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page" responsive="true" style="width:90%;">}}
 
@@ -240,12 +242,12 @@ The bottom part of the view includes additional information about the trace or a
 <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
 
-## Leverage your custom span tags with Trace Search & Analytics
-<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>enabled Trace Search and Analytics</a></div>
+## Leverage your custom span tags with App Analytics
+<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>enabled App Analytics</a></div>
 
-4) **Navigate to the [Trace Search page][2]**.
+4) **Navigate to the [Trace Search page][7]**.
 
-The Trace Search page allows you to identify specific [Traces][3] and APM Events you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][4]).
+The Trace Search page allows you to identify specific [Traces][8] and Analyzed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][9]).
 
 5) **Find a trace that has the new tag**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
 
@@ -259,9 +261,9 @@ You can now determine the displayed name of your facet and where to place it in 
 
 You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
 
-6) **Navigate to the [Trace Analytics][5] page**
+6) **Navigate to the [App Analytics][10] page**
 
-The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][6].
+The App Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [App Analytics overview][11].
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
@@ -269,7 +271,7 @@ The Trace Analytics page is a visual query building tool that allows you to cond
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
-You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][7], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
+You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][12], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true" responsive="true" style="width:90%;">}}
 
@@ -277,15 +279,19 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" responsive="true" style="width:90%;">}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/visualization/#resources
-[2]: https://app.datadoghq.com/apm/search
-[3]: https://docs.datadoghq.com/tracing/visualization/#trace
-[4]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/search
-[5]: https://app.datadoghq.com/apm/search/analytics
-[6]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/analytics
-[7]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /tracing/visualization/#span-tags
+[4]: https://docs.datadoghq.com/tracing/visualization/#resources
+[5]: /tracing/visualization/#services
+[6]: /tracing/visualization/#resources
+[7]: https://app.datadoghq.com/apm/search
+[8]: https://docs.datadoghq.com/tracing/visualization/#trace
+[9]: https://docs.datadoghq.com/tracing/app_analytics/search
+[10]: https://app.datadoghq.com/apm/search/analytics
+[11]: https://docs.datadoghq.com/tracing/app_analytics/analytics
+[12]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database

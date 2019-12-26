@@ -1,17 +1,18 @@
 ---
 title: Create a Slack integration
 type: apicode
-order: 19.2
+order: 20.2
 external_redirect: /api/#create-a-slack-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/integration/slack`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="slack_create" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.slack_create" >}}

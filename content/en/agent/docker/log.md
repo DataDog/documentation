@@ -64,7 +64,7 @@ The commands related to log collection are:
 | `-e DD_LOGS_ENABLED=true`                             | Enables log collection when set to `true`. The Agent looks for log instructions in configuration files.                                                      |
 | `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Adds a log configuration that enables log collection for all containers.                                                                                     |
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host. |
-| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.                    |
+| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics.                    |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                    |
 
 
@@ -93,7 +93,7 @@ logs_config:
 
 [1]: /agent/basic_agent_usage
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -197,11 +197,14 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 If you are running Kubernetes, pod annotations can be used.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: webapp
   template:
     metadata:
       annotations:
@@ -279,6 +282,14 @@ ac_exclude = ["name:datadog-agent"]
 {{% /tab %}}
 {{< /tabs >}}
 
+## Short Lived containers
+
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
+
+ Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
+
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][5]
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -287,3 +298,4 @@ ac_exclude = ["name:datadog-agent"]
 [2]: /agent/autodiscovery
 [3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
+[5]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#short-lived-containers

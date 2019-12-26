@@ -1,14 +1,14 @@
 ---
 title: Get a test
 type: apicontent
-order: 29.8
-external_redirect: /api/#get-test
+order: 31.8
+external_redirect: /api/#get-a-test
 ---
 
 ## Get a test
 
 Use this method to get information on a specific test.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

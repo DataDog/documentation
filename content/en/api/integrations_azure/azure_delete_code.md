@@ -1,15 +1,18 @@
 ---
 title: Delete an Azure integration
 type: apicode
-order: 16.3
+order: 17.3
 external_redirect: /api/#delete-an-azure-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/integration/azure`
 
-##### Example Request
-{{< code-snippets basename="azure_create" >}}
+**EXAMPLE REQUEST**:
 
-##### Example Response
-{{< code-snippets basename="result.azure_create" >}}
+{{< code-snippets basename="azure_delete" >}}
+
+**EXAMPLE RESPONSE**:
+
+{{< code-snippets basename="result.azure_delete" >}}

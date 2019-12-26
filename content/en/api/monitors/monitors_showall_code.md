@@ -1,13 +1,18 @@
 ---
 title: Get all monitor details
 type: apicode
-order: 26.05
+order: 27.06
 external_redirect: /api/#get-all-monitor-details
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/monitor`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-show-all" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-show-all" >}}

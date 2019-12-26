@@ -22,13 +22,13 @@ _8 minutes to complete_
 
 To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
-Datadog instruments many frameworks out-of-the-box such as web services, databases, and caches and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
+Datadog instruments many frameworks out-of-the-box, such as web services, databases, and caches, and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
 
 ## Instrumenting your code
 
 **Follow the example to get your code instrumented**.
 
-These examples walk through tracing the entire `BackupLedger.write` method to measure it's execution time and status. `BackupLedger.write` is an action that saves the current state of a transaction ledger in memory before making a call to a payments database to post a new customer charge. This happens when the `charge` endpoint of the payments service is hit:
+These examples walk through tracing the entire `BackupLedger.write` method to measure its execution time and status. `BackupLedger.write` is an action that saves the current state of a transaction ledger in memory before making a call to a payments database to post a new customer charge. This happens when the `charge` endpoint of the payments service is hit:
 
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
@@ -37,9 +37,10 @@ The `http.request POST /charge/` span is taking a lot of time without having any
 
 {{< tabs >}}
 {{% tab "Java" %}}
-  In Java, Datadog APM allows you to instrument your code to generate custom spans either by using method decorators or by instrumenting specific code blocks.
+In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
-### Instument a method with a decorator
+**Instument a method with a decorator**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
 ```java
@@ -59,7 +60,8 @@ public class BackupLedger {
 }
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```java
@@ -90,9 +92,11 @@ public class BackupLedger {
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
-  In Python, Datadog APM allows you to instrument your code to generate custom spans either by using method decorators or by instrumenting specific code blocks.
 
-### Instument a method with a decorator
+In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+
+**Instument a method with a decorator**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
 
 ```python
@@ -109,7 +113,8 @@ class BackupLedger:
         # [...]
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```python
@@ -258,9 +263,11 @@ public void Write(List<Transaction> transactions)
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
-  In PHP, Datadog APM allows you to instrument your code to generate custom spans either by using method wrappers or by instrumenting specific code blocks.
 
-### Instument a method with a wrapper
+In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
+
+**Instument a method with a wrapper**:
+
 This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `dd_trace()` function.
 
 ```php
@@ -287,7 +294,8 @@ This example adds a span to the `BackupLedger.write` method, which adds new rows
 ?>
 ```
 
-### Instrument a specific code block
+**Instrument a specific code block**:
+
 This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```php
@@ -329,7 +337,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
 Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
 
-1. Go to the **[Service List][1]**, identify the service you added custom spans to, then go to the **Service Page**. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
+1. Go to the **[Service List][1]**, identify the service you added custom spans to, and then go to the **Service Page**. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" responsive="true" style="width:90%;">}}
 
@@ -337,11 +345,11 @@ Now that you have instrumented your business logic, it's time to see the results
 
 The span summary table provides aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
 
-2. Scroll down to the **Traces list** and click into one of the your traces.
+2. Scroll down to the **Traces list** and click into one of your traces.
 
     {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-You've now successfully added custom spans to your codebase making them available on the flame graph and in [Trace Search & Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
+You've now successfully added custom spans to your codebase, making them available on the flame graph and in [App Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
 
 ## Further Reading
 

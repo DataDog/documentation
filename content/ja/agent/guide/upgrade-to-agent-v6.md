@@ -58,9 +58,9 @@ Agent v5 が既にインストールされている場合は、新しい Agent �
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -109,9 +109,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -160,9 +160,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -207,9 +207,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -256,9 +256,9 @@ DMG パッケージをダウンロードして手動でインストールする�
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -276,9 +276,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -328,9 +328,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
 #### 手動アップグレード
@@ -375,9 +375,9 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 #### ワンステップアップグレード
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
-≪```shell
+```shell
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```≫
+```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、そのままの状態での完全な下位互換性は保証できないためです。
 
@@ -441,11 +441,11 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **注**: アップグレード時に、`datadog.conf` は自動的に `datadog.yaml` にアップグレードされます。
 
-[1]: /ja/agent/?tab=agentv6#agent-architecture
+[1]: /ja/agent/#agent-architecture
 [2]: /ja/agent/guide/agent-commands
 [3]: /ja/developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /ja/developers/metrics/distributions
+[5]: /ja/developers/metrics/types
 [6]: /ja/graphing/infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /ja/logs

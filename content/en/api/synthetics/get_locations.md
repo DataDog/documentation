@@ -1,14 +1,14 @@
 ---
 title: Get available locations
 type: apicontent
-order: 29.91
-external_redirect: /api/#get-locations
+order: 31.91
+external_redirect: /api/#get-available-locations
 ---
 
 ## Get available locations
 
 Get a list of available locations
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

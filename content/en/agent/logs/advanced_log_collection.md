@@ -152,11 +152,14 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: postgres
 spec:
+  selector:
+    matchLabels:
+      app: database
   template:
     metadata:
       annotations:
@@ -169,6 +172,8 @@ spec:
         - name: postgres
           image: postgres:latest
 ```
+
+**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -236,6 +241,17 @@ Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure glob
 
 ```
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules, for example:
+
+```
+env:
+  - name: DD_LOGS_CONFIG_PROCESSING_RULES
+    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}

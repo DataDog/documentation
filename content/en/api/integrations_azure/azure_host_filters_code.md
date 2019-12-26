@@ -1,15 +1,18 @@
 ---
 title: Update Azure integration host filters
 type: apicode
-order: 16.4
+order: 17.4
 external_redirect: /api/#update-an-azure-integration-host-filters
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/integration/azure/host_filters`
 
-##### Example Request
-{{< code-snippets basename="azure_create" >}}
+**EXAMPLE REQUEST**:
 
-##### Example Response
-{{< code-snippets basename="result.azure_create" >}}
+{{< code-snippets basename="azure_host_filters" >}}
+
+**EXAMPLE RESPONSE**:
+
+{{< code-snippets basename="result.azure_host_filters" >}}

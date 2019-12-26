@@ -1,13 +1,18 @@
 ---
 title: Get hourly usage for hosts and containers
 type: apicode
-order: 33.1
+order: 35.1
 external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/hosts`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-billing-usage-hosts" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-hosts" >}}

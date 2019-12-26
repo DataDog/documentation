@@ -1,7 +1,7 @@
 ---
 title: Update an Azure integration host filters
 type: apicontent
-order: 16.4
+order: 17.4
 external_redirect: /api/#update-an azure-integration-host-filters
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#update-an azure-integration-host-filters
 
 Update the defined list of host filters for a given Datadog-Azure integration.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Refer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.
 

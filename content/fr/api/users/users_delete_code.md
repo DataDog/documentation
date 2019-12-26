@@ -1,13 +1,18 @@
 ---
 title: Désactiver un utilisateur
 type: apicode
-order: 34.5
+order: 36.5
 external_redirect: /api/#desactiver-un-utilisateur
 ---
 
-##### Signature
-`DELETE /v1/users/<ID_UTILISATEUR>`
-##### Exemple de requête
+**SIGNATURE**:
+
+`DELETE /v1/user/<ID_UTILISATEUR>`
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-user-disable" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-user-disable" >}}

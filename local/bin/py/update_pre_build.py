@@ -9,6 +9,8 @@ import platform
 import re
 import tempfile
 import shutil
+from json import JSONDecodeError
+
 import requests
 import yaml
 import pickle
@@ -178,9 +180,7 @@ class PreBuild:
         self.options = opts
         self.list_of_contents = []
         self.tempdir = (
-            "/tmp"
-            if platform.system() == "Darwin"
-            else tempfile.gettempdir()
+            "./integrations_data"
         )
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),
@@ -538,21 +538,43 @@ class PreBuild:
         for content in self.list_of_contents:
             # print("Processing content: {}".format(content))
             if content["action"] == "integrations":
-                self.process_integrations(content)
+                try:
+                    self.process_integrations(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif content["action"] == "source":
-
-                self.process_source_attribute(content)
+                try:
+                    self.process_source_attribute(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif (
                 content["action"] == "pull-and-push-folder"
             ):
-
-                self.pull_and_push_folder(content)
+                try:
+                    self.pull_and_push_folder(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             elif content["action"] == "pull-and-push-file":
 
-                self.pull_and_push_file(content)
+                try:
+                    self.pull_and_push_file(content)
+                except:
+                    print("\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(
+                            content
+                        )
+                    )
 
             else:
                 print(
@@ -601,7 +623,7 @@ class PreBuild:
             ## and the options front params are inlined
 
             if "front_matters" in content["options"]:
-                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"]) + "---\n"
+                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"],default_flow_style=False) + "---\n"
                 file_content = re.sub(r'^(#{1}).*', front_matters, file_content, count=1)
 
         with open(
@@ -839,25 +861,32 @@ class PreBuild:
             if "name" in d
         ]
         with open(file_name) as f:
-            data = json.load(f)
-            data_name = data.get("name", "").lower()
-            if data_name in [
-                k
-                for k, v in self.integration_mutations.items()
-                if v.get("action") == "merge"
-            ]:
-                data["is_public"] = False
-            if data_name in names:
-                item = [
-                    d
-                    for d in self.datafile_json
-                    if d.get("name", "").lower()
-                    == data_name
-                ]
-                if len(item) > 0:
-                    item[0].update(data)
-            else:
-                self.datafile_json.append(data)
+            try:
+                data = json.load(f)
+                data_name = data.get("name", "").lower()
+                if data_name in [
+                    k
+                    for k, v in self.integration_mutations.items()
+                    if v.get("action") == "merge"
+                ]:
+                    data["is_public"] = False
+                if data_name in names:
+                    item = [
+                        d
+                        for d in self.datafile_json
+                        if d.get("name", "").lower()
+                        == data_name
+                    ]
+                    if len(item) > 0:
+                        item[0].update(data)
+                else:
+                    self.datafile_json.append(data)
+            except JSONDecodeError:
+                print(
+                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
+                    file_name
+                  )
+                )
 
     def process_service_checks(self, file_name):
         """
@@ -915,7 +944,16 @@ class PreBuild:
         )
 
         if exists(manifest):
-            manifest_json = json.load(open(manifest))
+            try:
+                manifest_json = json.load(open(manifest))
+            except JSONDecodeError:
+                no_integration_issue = False
+                manifest_json = {}
+                print(
+                  "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(
+                    manifest
+                  )
+                )
         else:
             no_integration_issue = False
             manifest_json = {}
@@ -1007,7 +1045,7 @@ class PreBuild:
                     del item[0]["type"]
                 item[0]["dependencies"] = dependencies
                 fm = yaml.dump(
-                    item[0], default_flow_style=False
+                    item[0], width=150, default_style='"', default_flow_style=False
                 ).rstrip()
             else:
                 fm = {"kind": "integration"}

@@ -1,7 +1,7 @@
 ---
 title: Importer les métadonnées IdP
 type: apicontent
-order: 27.4
+order: 28.4
 external_redirect: /api/#importer-les-metadonnees-IdP
 ---
 
@@ -17,7 +17,8 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ##### EN-TÊTES
 * **`Content-Type: multipart/form-data`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`idp_file`** [*obligatoire*] :
      le chemin vers le fichier de métadonnées XML que vous souhaitez importer.
 
@@ -26,5 +27,6 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ##### EN-TÊTES
 * **`Content-Type: application/xml`**
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 Le corps doit comprendre le contenu de votre fichier XML de métadonnées IdP.

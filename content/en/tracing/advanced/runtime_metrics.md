@@ -1,7 +1,6 @@
 ---
 title: Runtime Metrics
 kind: documentation
-beta: true
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
@@ -17,7 +16,7 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a [service][1], correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
 {{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
 
@@ -32,19 +31,24 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 
 {{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
 
-**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
+By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 
-By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent. Additionally, for:
 
+* **Kubernetes**: You *must* [bind the DogstatsD port to a host port][4].
+* **ECS**: [Set the appropriate flags in your task definition][5].
+
+**Notes**:
+
+* For the runtime UI, `dd-trace-java` >= [`0.24.0`][6] is supported.
+* To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
-[3]: /developers/dogstatsd/#setup
-[4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[2]: /developers/dogstatsd/#setup
+[3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -65,7 +69,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
-[3]: /developers/dogstatsd/#setup
+[3]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [4]: /agent/docker/#dogstatsd-custom-metrics
 [5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
@@ -99,18 +103,17 @@ end
 
 Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][3] in Datadog.
 
-By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][4].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][5], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][6]; in ECS, [set the appropriate flags in your task definition][7].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
+In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /developers/dogstatsd/#setup
+[2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
-[4]: /developers/dogstatsd/#setup
-[5]: /agent/docker/#dogstatsd-custom-metrics
-[6]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[7]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[4]: /agent/docker/#dogstatsd-custom-metrics
+[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -135,7 +138,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the app
 
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /developers/dogstatsd/#setup
+[2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
@@ -167,7 +170,7 @@ The following metrics are collected by default after enabling JVM metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][2]. See the [JMX Integration][3] for further details on configuration.
+Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][2]. See the [JMX Integration][3] for further details on configuration.
 
 [1]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
@@ -228,3 +231,5 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization/#services

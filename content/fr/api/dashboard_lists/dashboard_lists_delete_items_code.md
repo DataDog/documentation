@@ -5,14 +5,14 @@ order: 9.9
 external_redirect: /api/#supprimer-des-elements-d-une-liste-de-dashboards
 ---
 
-##### Signature
+**SIGNATURE** :
 
-`DELETE https://api.datadoghq.com/api/v1/dashboard/lists/manual/<ID_LISTE>/dashboards`
+`DELETE /v2/dashboard/lists/manual/<ID_LISTE>/dashboards`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE** :
 
 {{< code-snippets basename="api-dashboard-list-delete-items" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE** :
 
 {{< code-snippets basename="result.api-dashboard-list-delete-items" >}}

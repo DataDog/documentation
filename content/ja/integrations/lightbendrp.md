@@ -1,0 +1,93 @@
+---
+categories:
+  - cloud
+ddtype: agent
+dependencies: []
+description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
+doc_link: 'https://docs.datadoghq.com/integrations/lightbendrp/'
+git_integration_title: lightbendrp
+has_logo: true
+integration_title: Lightbend
+is_public: true
+kind: インテグレーション
+manifest_version: '1.0'
+name: lightbendrp
+public_title: Datadog-Lightbend インテグレーション
+short_description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
+version: '1.0'
+---
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" responsive="true" popup="true">}}
+
+## 概要
+
+[Lightbend Reactive Platform アプリケーション][1]からリアルタイムにメトリクスを取得して、以下のことができます。
+
+* アクターのパフォーマンスメトリクスを可視化できます。
+
+* 予期しないイベント (例外、未処理のメッセージ、デッドレターなど) を追跡できます。
+
+* アプリケーションのリモート特性を把握できます。
+
+* ディスパッチャーメトリクスにドリルダウンしてアプリケーションパフォーマンスを調整できます。
+
+## セットアップ
+### インストール
+
+このインテグレーションは Lightbend Monitoring を使用しますが、これには[サブスクリプション][2]が必要です。
+
+Lightbend Monitoring と Datadog を統合する最も簡単な方法は、[Datadog プラグイン][3]を使用することです。
+
+デフォルトでは、Lightbend Monitoring はネットワーク経由ですべてのメトリクスを送信しますが、構成を設定することで、報告されるフィールドを制限することができます (下の例を参照)。
+
+Datadog プラグインはデフォルト構成を使用しますが、これは上書きできます。
+
+```
+cinnamon.datadog {
+  statsd {
+    host = "192.168.0.1"
+    port = 8888
+    frequency = 60s
+  }
+
+  report {
+    histogram = ["min", "max", "p98", "p99", "p999"]
+  }
+}
+```
+
+構成値について説明します。
+
+* `cinnamon.datadog.statsd.host`: DogStatsD インスタンスの IP アドレス。
+
+* `cinnamon.datadog.statsd.port`: DogStatsD インスタンスのポート番号。
+
+* `cinnamon.datadog.statsd.frequency`: Cinnamon から DogStatsD インスタンスにデータをプッシュする頻度。
+
+* `cinnamon.datadog.report.histogram`: DogStatsD に送信するヒストグラムデータを絞り込む方法。上の例では、`max` と `p99` だけが送信されます。
+
+
+構成の詳細については、[Lightbend Monitoring のドキュメント][4]を参照してください。
+
+## 収集データ
+### メトリクス
+{{< get-metrics-from-git "lightbendrp" >}}
+
+
+### イベント
+Lightbend Reactive Platform インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+Lightbend Reactive Platform インテグレーションには、サービスのチェック機能は含まれません。
+
+## トラブルシューティング
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
+[1]: https://www.lightbend.com/platform
+[2]: https://www.lightbend.com/platform/subscription
+[3]: https://developer.lightbend.com/docs/monitoring/2.3.x/plugins/datadog/datadog.html
+[4]: https://developer.lightbend.com/docs/monitoring/2.3.x/home.html
+[5]: https://github.com/DataDog/dogweb/blob/prod/integration/lightbendrp/lightbendrp_metadata.csv
+[6]: https://docs.datadoghq.com/ja/help
+
+
+{{< get-dependencies >}}

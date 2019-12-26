@@ -1,13 +1,18 @@
 ---
 title: Resolve monitor
 type: apicode
-order: 26.06
+order: 27.07
 external_redirect: /api/#resolve-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST https://api.datadoghq.com/monitor/bulk_resolve`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}

@@ -1,13 +1,18 @@
 ---
 title: Réactiver un monitor
 type: apicode
-order: 26.10
+order: 27.11
 external_redirect: /api/#reactiver-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/<ID_MONITOR>/unmute`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-unmute" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-unmute" >}}

@@ -1,15 +1,18 @@
 ---
 title: List all Azure integrations
 type: apicode
-order: 16.1
+order: 17.1
 external_redirect: /api/#list-all-azure-integrations
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/integration/azure`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="azure_list" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.azure_list" >}}

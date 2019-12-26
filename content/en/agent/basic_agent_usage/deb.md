@@ -22,6 +22,8 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for Debian. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
+Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+
 **Note**: Debian 7 (wheezy) and above (we support SysVinit in Agent 6.6.0 above) are supported.
 
 ## Commands
@@ -29,7 +31,7 @@ This page outlines the basic features of the Datadog Agent for Debian. If you ha
 In Agent v6, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Description                        | Command                                                |
 | --------------------               | --------------------                                   |
@@ -69,7 +71,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -111,6 +113,6 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/debian
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /agent/troubleshooting
 [4]: /developers/guide/custom-python-package

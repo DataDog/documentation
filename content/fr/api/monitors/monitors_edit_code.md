@@ -1,13 +1,18 @@
 ---
 title: Modifier un monitor
 type: apicode
-order: 26.03
+order: 27.03
 external_redirect: /api/#modifier-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/monitor/<ID_MONITOR>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-edit" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-edit" >}}

@@ -1,13 +1,18 @@
 ---
 title: Obtenir l'utilisation horaire pour la recherche de traces
 type: apicode
-order: 33.5
+order: 35.5
 external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/traces`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-billing-usage-trace-search" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-trace-search" >}}

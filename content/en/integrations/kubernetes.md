@@ -11,6 +11,7 @@ aliases:
     - /tracing/api/
     - /integrations/kubernetes_state/
     - /integrations/kube_proxy/
+    - /integrations/Kubernetes
 public_title: Datadog-Kubernetes Integration
 short_description: "Capture Pod scheduling events, track the status of your Kublets, and more"
 categories:
@@ -127,29 +128,32 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 
 The Kubernetes check includes the following service checks:
 
-* `kubernetes.kubelet.check`:
+* `kubernetes.kubelet.check`: <br>
   If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` or `NO DATA` state.
 
-* `kubernetes.kubelet.check.ping`:
+* `kubernetes.kubelet.check.ping`:<br>
   If `CRITICAL` or `NO DATA`, Kubelet's API isn't available
 
-* `kubernetes.kubelet.check.syncloop`:
+* `kubernetes.kubelet.check.syncloop`:<br>
   If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
 
-* `kubernetes_state.node.ready`:
+* `kubernetes_state.node.ready`:<br>
   Returns `CRITICAL` if a cluster node is not ready. Returns `OK` otherwise.
 
-* `kubernetes_state.node.out_of_disk`:
+* `kubernetes_state.node.out_of_disk`:<br>
   Returns `CRITICAL` if a cluster node is out of disk space. Returns `OK` otherwise.
 
-* `kubernetes_state.node.disk_pressure`:
+* `kubernetes_state.node.disk_pressure`:<br>
   Returns `CRITICAL` if a cluster node is in a disk pressure state. Returns `OK` otherwise.
 
-* `kubernetes_state.node.memory_pressure`:
+* `kubernetes_state.node.memory_pressure`:<br>
   Returns `CRITICAL` if a cluster node is in a memory pressure state. Returns `OK` otherwise.
 
-* `kubernetes_state.node.network_unavailable`:
+* `kubernetes_state.node.network_unavailable`:<br>
   Returns `CRITICAL` if a cluster node is in a network unavailable state. Returns `OK` otherwise.
+
+* `kubernetes_state.cronjob.on_schedule_check`:<br>
+  Returns `CRITICAL` if a cron job scheduled time is in the past. Returns `OK` otherwise.
 
 ## Troubleshooting
 
@@ -165,7 +169,7 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 
 [1]: https://hub.docker.com/r/datadog/agent
 [2]: /agent/basic_agent_usage/kubernetes
-[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
+[3]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [4]: /agent
 [5]: /agent/autodiscovery
 [6]: https://app.datadoghq.com/account/settings#agent/kubernetes

@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
 import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
+import codeTabs from './components/codetabs';
 
 import { moveToAnchor } from './helpers/moveToAnchor';
 
@@ -15,7 +16,7 @@ const siteEnv = document.querySelector('html').dataset.env;
 
 let gaTag = '';
 let indexName = '';
-if (siteEnv === 'preview') {
+if (siteEnv === 'preview' || siteEnv === 'development' ) {
     gaTag = 'UA-21102638-9';
     indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
@@ -67,7 +68,7 @@ $(document).ready(function () {
     // algolia
     $('.ds-hint').css('background', 'transparent');
 
-    if (document.documentElement.dataset.relpermalink === '/search/') {
+    if (window.location.href.indexOf('/search/')) {
 
         const client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         const results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
@@ -266,11 +267,17 @@ $(document).ready(function () {
                         // remove any existing handlers
                         btn_next = document.getElementById("btn_next");
                         btn_prev = document.getElementById("btn_prev");
-                        btn_prev.addEventListener('click', btnHandler);
-                        btn_next.addEventListener('click', btnHandler);
+                        if(btn_prev) {
+                          btn_prev.addEventListener('click', btnHandler);
+                        }
+                        if(btn_next) {
+                          btn_next.addEventListener('click', btnHandler);
+                        }
                         const pagebtns = document.getElementsByClassName('page-num');
-                        for(let i = 0; i < pagebtns.length; i++) {
+                        if(pagebtns) {
+                          for (let i = 0; i < pagebtns.length; i++) {
                             pagebtns[i].addEventListener('click', btnHandlerPage);
+                          }
                         }
                         btn_more = document.getElementsByClassName('more')[0];
                         btn_less = document.getElementsByClassName('less')[0];
@@ -298,7 +305,9 @@ $(document).ready(function () {
                             html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary more" href="#">...</a>';
                         }
                         html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
-                        page_navigation.innerHTML = html;
+                        if(page_navigation) {
+                          page_navigation.innerHTML = html;
+                        }
                         setHandlers();
                     }
 
@@ -323,7 +332,9 @@ $(document).ready(function () {
                         if (page < 1) page = 1;
                         if (page > numPages()) page = numPages();
 
-                        listing_table.innerHTML = "";
+                        if(listing_table) {
+                          listing_table.innerHTML = "";
+                        }
 
                         // output our slice of formatted results
                         for (let i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
@@ -339,7 +350,9 @@ $(document).ready(function () {
 
                             formatted_results += '</div>';
                             formatted_results += '</div>';
-                            listing_table.innerHTML += formatted_results;
+                            if(listing_table) {
+                              listing_table.innerHTML += formatted_results;
+                            }
                         }
                         if(page_span) {
                             page_span.innerHTML = `${page  }/${  numPages()}`;
@@ -348,8 +361,12 @@ $(document).ready(function () {
                         setNavigation();
 
                         // set previous and next buttons class
-                        btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
-                        btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        if(btn_prev) {
+                          btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
+                        }
+                        if(btn_next) {
+                          btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        }
 
                         // set active button class
                         const pagebtns = document.getElementsByClassName('page-num');
@@ -359,7 +376,9 @@ $(document).ready(function () {
                         }
 
                         // scroll to top
-                        $("html, body").scrollTop(0);
+                        if (!$('.api').length) {
+                            $("html, body").scrollTop(0);
+                        }
                     }
 
                     // init page nums
@@ -374,7 +393,9 @@ $(document).ready(function () {
 
             } else {
                 const content = document.getElementsByClassName('content')[0];
-                content.innerHTML = "0 results";
+                if(content) {
+                  content.innerHTML = "0 results";
+                }
             }
         });
     }
@@ -437,26 +458,6 @@ $(document).ready(function () {
         const padding = 105;
         $('.sidenav-nav').css('maxHeight', document.documentElement.clientHeight - header_h - padding);
     });
-
-    /* if($('.api-nav').length) {
-        var ref = document.querySelector('.api-popper-button');
-        var pop = document.getElementById('api-popper');
-        if(ref && pop) {
-            ref.addEventListener('click', function(e) {
-                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
-                var p = new Popper(ref, pop, {
-                    placement: "start-bottom",
-                    modifiers: {
-                        preventOverflow: { enabled: false },
-                        hide: {
-                            enabled: false
-                        }
-                    }
-                });
-                return false;
-            });
-        }
-    } */
 
     updateMainContentAnchors();
 
@@ -611,7 +612,9 @@ function updateMainContentAnchors(){
         if(!e.target.parentElement.id) {
             e.preventDefault();
             const id = e.target.hash.split('#').join('');
-            moveToAnchor(id);
+            if (id) {
+                moveToAnchor(id);
+            }
         }
     });
 }
@@ -624,98 +627,6 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-function codeTabs(){
-    if($('.code-tabs').length > 0) {
-        // page load set code tab titles
-        $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
-          const navTabsMobile = $(this).closest('.code-tabs').find('.nav-tabs-mobile .dropdown-menu');
-          const navTabs = $(this).closest('.code-tabs').find('.nav-tabs');
-              const title = $(this).attr('title');
-          const lang = title.toLowerCase().replace(/\W/g, '');
-          navTabs.append(`<li><a href="#" data-lang="${lang}">${title}</a></li>`);
-          navTabsMobile.append(`<a class="dropdown-item" href="#" data-lang="${lang}">${title}</a>`);
-        });
-
-        // page load if we have a lang in url activate those tabs, otherwise activate first
-        const sPageURL = decodeURIComponent(window.location.search.substring(1));
-        const sURLVariables = sPageURL.split('&');
-        const tab = sURLVariables.filter(function(item) {
-           return item.split('=')[0] === 'tab';
-        }).map(function(item) {
-            return item.split('=')[1];
-        }).toString();
-
-        function activateTab(el) {
-            const tab = el.parent();
-                 const tabIndex = tab.index();
-                 const tabPanel = el.closest('.code-tabs');
-                 const tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
-             tabPanel.find('.active').removeClass('active');
-             tab.addClass('active');
-             tabPane.addClass('active');
-             tabPane.addClass('show');
-             el.closest('.code-tabs').find('.nav-tabs-mobile .title-dropdown').text(tab.text());
-        }
-
-        // clicking a tab open them all
-        $('.code-tabs .nav-tabs a').click(function(e){
-          e.preventDefault();
-
-          // prepare
-          const currentOffset = $(this).offset().top - $(document).scrollTop();
-
-          // find all
-          const lang = $(this).data('lang');
-          $('.code-tabs .nav-tabs').each(function() {
-             const navtabs = $(this);
-             const links = $(this).find('a:first');
-             const langLinks = $(this).find(`a[data-lang="${lang}"]`);
-             if(langLinks.length) {
-                 langLinks.each(function() {
-                     activateTab($(this));
-                 });
-             } else {
-                 // set first lang selected if nothing selected
-                 if(navtabs.find('.active').length === 0) {
-                     links.each(function() {
-                         activateTab($(this));
-                     });
-                 }
-             }
-          });
-
-          const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-          history.replaceState(null, null, `${url  }?tab=${  lang  }${window.location.hash}`)
-
-          // restore
-          $(document).scrollTop($(this).offset().top - currentOffset);
-        });
-
-        // mobile tabs trigger desktop ones
-        $('.code-tabs .nav-tabs-mobile .dropdown-menu a').click(function(e){
-            e.preventDefault();
-            const ctabs = $(this).parents('.code-tabs');
-            const lang = $(this).data('lang');
-            const desktopTab = ctabs.find(`.nav-tabs a[data-lang="${lang}"]`);
-            if(desktopTab) {
-              desktopTab.click();
-            }
-        });
-
-        // activate language from url or first
-        if(tab === '') {
-            $('.code-tabs .nav-tabs li:first a').click();
-        } else {
-            const match = $(`.code-tabs .nav-tabs a[data-lang="${tab}"]:first`);
-            if(match.length) {
-                match.click();
-            } else {
-                $('.code-tabs .nav-tabs li:first a').click();
-            }
-        }
-    }
 }
 
 // Get sidebar
@@ -787,6 +698,11 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="graphing/guide"]');
     }
 
+    if (path.includes('logs/guide')) {
+        aPath = document.querySelector('.side [data-path*="logs/guide"]');
+        maPath = document.querySelector('header [data-path*="logs/guide"]');
+    }
+
     if (path.includes('security/logs')) {
         aPath = document.querySelectorAll('.side [data-path*="security/logs"]')[1];
         maPath = document.querySelectorAll('header [data-path*="security/logs"]')[1];
@@ -807,9 +723,9 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="account_management/billing"]');
     }
 
-    if (path.includes('monitors/monitor_types/trace_analytics')) {
-        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/trace_analytics"]');
-        maPath = document.querySelector('header [data-path*="monitors/monitor_types/trace_analytics"]');
+    if (path.includes('monitors/monitor_types/app_analytics')) {
+        aPath = document.querySelector('.side [data-path*="monitors/monitor_types/app_analytics"]');
+        maPath = document.querySelector('header [data-path*="monitors/monitor_types/app_analytics"]');
     }
 
     if (path.includes('developers/guide')) {
@@ -1058,8 +974,13 @@ function reloadWistiaVidScripts(vidId){
 const sideNav = document.querySelector('.side .sidenav-nav');
 const mobileNav = document.querySelector('header .sidenav-nav');
 
-sideNav.addEventListener('click', navClickEventHandler);
-mobileNav.addEventListener('click', navClickEventHandler);
+if (sideNav) {
+    sideNav.addEventListener('click', navClickEventHandler);
+}
+
+if (mobileNav) {
+    mobileNav.addEventListener('click', navClickEventHandler);
+}
 
 function navClickEventHandler(event){
     event.stopPropagation();

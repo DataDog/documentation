@@ -1,13 +1,18 @@
 ---
 title: Rechercher des métriques
 type: apicode
-order: 25.6
+order: 26.6
 external_redirect: /api/#rechercher-des-metriques
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/search`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-metrics-search" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-metrics-search" >}}

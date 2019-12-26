@@ -1,13 +1,18 @@
 ---
 title: Résoudre un monitor
 type: apicode
-order: 26.06
+order: 27.07
 external_redirect: /api/#resoudre-un-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST https://api.datadoghq.com/monitor/bulk_resolve`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}

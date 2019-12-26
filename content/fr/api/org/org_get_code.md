@@ -1,13 +1,18 @@
 ---
 title: Récupérer une organisation
 type: apicode
-order: 27.2
+order: 28.2
 external_redirect: /api/#recuperer-une-organisation
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/org`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-org-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-org-get" >}}
