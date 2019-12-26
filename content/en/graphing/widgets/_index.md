@@ -60,7 +60,7 @@ The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` f
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
-When pasting into your favorite chat program that displays link previews (like Slack or Microsoft Teams) a snapshot image of your graph will be displayed along with a direct link to your widget.
+You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget.
 
 ### Groups of widgets
 
