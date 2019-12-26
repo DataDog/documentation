@@ -450,7 +450,7 @@ main:
   - name: "Events"
     url: "events/"
     identifier: "events_top_level"
-    pre: ""
+    pre: "nav_events"
     weight: 60000
 
 ################
