@@ -368,34 +368,7 @@ Note that trace priority should be manually controlled only before any context p
 
 ## Trace Storage
 
-Individual traces are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
-
-| Retention bucket       |  % of stream kept |
-| :--------------------- | :---------------- |
-| 6 hours                |              100% |
-| Current day (UTC time) |               25% |
-| 6 days                 |               10% |
-| 6 months               |                1% |
-
-**Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the above stated percent of traces over time.
-
-That is to say, on a given day you would see in the UI:
-
-* **100%** of sampled traces from the last six hours
-* **25%** of those from the previous hours of the current calendar day (starting at `00:00 UTC`)
-* **10%** from the previous six calendar days
-* **1%** of those from the previous six months (starting from the first day of the month six months ago)
-* **0%** of traces older than six months
-
-For example, at `9:00am UTC Wed, 12/20` you would see:
-
-* **100%** of traces sampled on `Wed 12/20 03:00 - 09:00`
-* **25%** of traces sampled on `Wed 12/20 00:00` - `Wed 12/20 02:59`
-* **10%** of traces sampled on `Thurs 12/14 00:00` - `Tue 12/19 23:59`
-* **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
-* **0%** of traces before `7/1 00:00`
-
-Once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
+Individual traces are stored for 15 days. This means that all**sampled** traces will be retained for a period of 15 days and at the end of the 30th day, the entire set of expired traces will be deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" responsive="true" >}}
 
