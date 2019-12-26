@@ -70,7 +70,7 @@ Timeboard group widgets can be copied by hovering over the group widget area and
 
 To copy multiple screenboard widgets (edit mode only), `shift + click` on the widgets and use `Ctrl + C` (`Cmd + C` for Mac). 
 
-**Note**: This only works when sharing within Datadog. It does not generate a preview image outside of Datadog.
+**Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
 ## Export Graphs
 
