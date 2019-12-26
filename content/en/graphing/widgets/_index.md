@@ -51,7 +51,7 @@ In full screen mode, you can:
 
 Additional options are available for [timeseries widgets][1].
 
-## Copy / Paste Widgets
+## Copy / paste widgets
 
 Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy". 
 
