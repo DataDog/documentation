@@ -51,16 +51,24 @@ In full screen mode, you can:
 
 Additional options are available for [timeseries widgets][1].
 
-## Copy / paste widgets
+## Copy / Paste Widgets
 
-Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac). Similarly, groups of widgets can be copied on timeboards by selecting the group widget OR on screenboards by `shift + click` on multiple graphs.
+Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy". 
 
 The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
 
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
-A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog datacenter as your Datadog site (US or EU).
+When pasting into your favorite chat program that displays link previews (like Slack or Microsoft Teams) a snapshot image of your graph will be displayed along with a direct link to your widget.
+
+### Groups of Widgets
+
+Timeboard Group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy". 
+*Note: When pasting to Screenboards or Notebooks, individual widgets within the group will be pasted*
+
+To copy multiple screenboard widgets (edit mode only), `shift + click` on multiple widgets and using `Ctrl + C` (`Cmd + C` for Mac). 
+*Note: This only works when sharing within Datadog, this will not generate a preview image outside of Datadog*
 
 ## Export Graphs
 
