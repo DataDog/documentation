@@ -2,6 +2,8 @@
 title: Service Map Widget
 kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
+aliases:
+    - /graphing/widgets/service_map/
 further_reading:
 - link: "graphing/graphing_json/"
   tag: "Documentation"

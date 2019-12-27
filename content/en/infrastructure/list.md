@@ -3,6 +3,7 @@ title: Infrastructure List
 kind: documentation
 aliases:
   - /hostnames
+  - /graphing/infrastructure/list/
 further_reading:
 - link: "graphing/infrastructure/hostmap"
   tag: "Documentation"

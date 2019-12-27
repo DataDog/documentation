@@ -2,6 +2,8 @@
 title: Alert Value Widget
 kind: documentation
 description: "Graph the current value of a metric in any monitor defined on your system."
+aliases:
+    - /graphing/widgets/alert_value/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

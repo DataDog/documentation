@@ -2,6 +2,8 @@
 title: Scatter Plot Widget
 kind: documentation
 description: "Graph a chosen scope over two different metrics with their respective aggregation"
+aliases:
+    - /graphing/widgets/scatter_plot/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

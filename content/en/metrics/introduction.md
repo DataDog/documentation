@@ -2,6 +2,8 @@
 title: Metrics Introduction
 kind: documentation
 description: "Learn about data, aggregation, and graphing metrics"
+aliases:
+  - /graphing/metrics/introduction/
 further_reading:
   - link: "graphing/metrics/explorer"
     tag: "Documentation"

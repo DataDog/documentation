@@ -2,6 +2,8 @@
 title: Distribution Widget
 kind: documentation
 description: "Graph a metric distribution aggregated across one or several tags."
+aliases:
+    - /graphing/widgets/distribution/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

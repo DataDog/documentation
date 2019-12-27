@@ -1,6 +1,8 @@
 ---
 title: Top List Widget
 kind: documentation
+aliases:
+    - /graphing/widgets/top_list/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

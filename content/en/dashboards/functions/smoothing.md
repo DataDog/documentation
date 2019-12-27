@@ -1,6 +1,8 @@
 ---
 title: Smoothing
 kind: documentation
+aliases:
+    - /graphing/functions/smoothing/
 ---
 
 ## Autosmooth

@@ -2,6 +2,8 @@
 title: Query Value Widget
 kind: documentation
 description: "Display an aggregated value for a given metric query"
+aliases:
+    - /graphing/widgets/query_value/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

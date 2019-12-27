@@ -1,6 +1,8 @@
 ---
 title: Count
 kind: documentation
+aliases:
+    - /graphing/functions/count/
 ---
 
 ## Count non zero

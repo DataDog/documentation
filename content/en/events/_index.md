@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /guides/eventcorrelation/
     - /guides/markdown/
+    - /graphing/event_stream/
 further_reading:
 - link: "/api/#events"
   tag: "Documentation"

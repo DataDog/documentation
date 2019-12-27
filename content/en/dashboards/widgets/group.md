@@ -2,6 +2,8 @@
 title: Group Widget
 kind: documentation
 description: "Group your widgets together in a Timeboard."
+aliases:
+    - /graphing/widgets/group/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

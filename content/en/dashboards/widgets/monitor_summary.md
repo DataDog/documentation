@@ -2,6 +2,8 @@
 title: Monitor Summary Widget
 kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
+aliases:
+    - /graphing/widgets/monitor_summary/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

@@ -2,6 +2,8 @@
 title: Table Widget
 kind: documentation
 beta: true
+aliases:
+    - /graphing/widgets/table/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

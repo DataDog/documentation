@@ -2,6 +2,8 @@
 title: Log Stream Widget
 kind: documentation
 description: "Display a filtered log stream in your Datadog dashboards."
+aliases:
+    - /graphing/widgets/log_stream/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

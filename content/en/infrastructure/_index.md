@@ -2,7 +2,7 @@
 title: Infrastructure
 kind: documentation
 aliases:
-  - /infrastructure/
+  - /graphing/infrastructure/
 ---
 
 ## Overview

@@ -18,6 +18,7 @@ aliases:
   - /graphing/miscellaneous/
   - /getting_started/from_the_query_to_the_graph
   - /graphing/miscellaneous/from_the_query_to_the_graph
+  - /graphing/functions/
 ---
 
 While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from the Datadog graphing system.

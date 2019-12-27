@@ -2,6 +2,8 @@
 title: Event Stream Widget
 kind: documentation
 description: "Display filtered events from the Even Stream."
+aliases:
+    - /graphing/widgets/event_stream/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

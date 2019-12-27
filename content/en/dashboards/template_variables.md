@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
+    - /graphing/dashboards/template_variables/
 further_reading:
 - link: "graphing/dashboards/"
   tag: "Documentation"

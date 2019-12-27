@@ -3,7 +3,7 @@ title: Live Containers
 kind: documentation
 aliases:
   - /guides/livecontainers
-  - /infrastructure/livecontainers/
+  - /graphing/infrastructure/livecontainers/
 further_reading:
 - link: "graphing/infrastructure/hostmap"
   tag: "Graphing"

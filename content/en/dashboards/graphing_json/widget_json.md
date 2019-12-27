@@ -1,6 +1,8 @@
 ---
 title: Widget JSON schema
 kind: documentation
+aliases:
+  - /graphing/graphing_json/widget_json/
 further_reading:
 - link: "graphing/graphing_json/"
   tag: "Documentation"

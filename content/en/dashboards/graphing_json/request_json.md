@@ -1,6 +1,8 @@
 ---
 title: Request JSON schema
 kind: documentation
+aliases:
+  - /graphing/graphing_json/request_json/
 further_reading:
 - link: "graphing/graphing_json/"
   tag: "Documentation"

@@ -464,12 +464,12 @@ main:
     weight: 70000
 
   - name: "Screenboards"
-    url: "dashboards/screenboard/"
+    url: "dashboards/screenboards/"
     parent: "dashboards"
     weight: 1
 
   - name: "Timeboards"
-    url: "dashboards/timeboard/"
+    url: "dashboards/timeboards/"
     parent: "dashboards"
     weight: 2
 
@@ -575,7 +575,7 @@ main:
   - name: "Infrastructure"
     url: "infrastructure/"
     identifier: "infrastructure"
-    pre: ""
+    pre: "nav_infrastructure"
     weight: 80000
 
   - name: "Infrastructure List"
@@ -615,7 +615,7 @@ main:
   - name: "Metrics"
     url: "metrics/"
     identifier: "metrics_top_level"
-    pre: ""
+    pre: "nav_metrics"
     weight: 90000
 
   - name: "Introduction"
@@ -643,7 +643,7 @@ main:
   - name: "Notebooks"
     url: "notebooks/"
     identifier: "notebooks"
-    pre: ""
+    pre: "nav_notebooks"
     weight: 100000
 
 ##############

@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets
+    - /graphing/widgets
 ---
 
 ## Overview

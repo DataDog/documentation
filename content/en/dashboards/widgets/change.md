@@ -2,6 +2,8 @@
 title: Change Widget
 kind: documentation
 description: "Graph the change in a value over a chosen time period."
+aliases:
+    - /graphing/widgets/change/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

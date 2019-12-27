@@ -1,6 +1,8 @@
 ---
 title: Notebooks
 kind: documentation
+aliases:
+  - /graphing/notebooks/
 further_reading:
 - link: "graphing/dashboards/screenboard"
   tag: "Documentation"

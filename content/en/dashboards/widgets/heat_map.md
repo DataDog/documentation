@@ -2,6 +2,8 @@
 title: Heat Map Widget
 kind: documentation
 description: "Build temporal heat map over a given metric."
+aliases:
+    - /graphing/widgets/heat_map/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Timeshift
 kind: documentation
+aliases:
+    - /graphing/functions/timeshift/
 further_reading:
 - link: "/graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/"
   tag: "FAQ"

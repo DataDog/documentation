@@ -1,6 +1,8 @@
 ---
 title: Metric Correlations
 kind: documentation
+aliases:
+    - /graphing/correlations/
 beta: true
 further_reading:
 - link: "graphing/dashboards"

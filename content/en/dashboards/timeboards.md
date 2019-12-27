@@ -1,6 +1,8 @@
 ---
-title: Timeboard
+title: Timeboards
 kind: documentation
+aliases:
+    - /graphing/dashboards/timeboard/
 further_reading:
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"

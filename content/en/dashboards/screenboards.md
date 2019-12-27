@@ -1,6 +1,8 @@
 ---
-title: Screenboard
+title: Screenboards
 kind: documentation
+aliases:
+    - /graphing/dashboards/screenboard/
 further_reading:
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"

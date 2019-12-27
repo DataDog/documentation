@@ -1,6 +1,8 @@
 ---
 title: Metrics
 kind: documentation
+aliases:
+  - /graphing/metrics/
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

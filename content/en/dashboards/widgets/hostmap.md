@@ -2,6 +2,8 @@
 title: Host Map Widget
 kind: documentation
 description: "Display the Datadog host map in your dashboards."
+aliases:
+    - /graphing/widgets/hostmap/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

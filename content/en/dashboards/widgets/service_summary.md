@@ -2,6 +2,8 @@
 title: Service Summary Widget
 kind: documentation
 description: "Displays the graphs of a chosen service in your screenboard."
+aliases:
+    - /graphing/widgets/service_summary/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

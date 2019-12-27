@@ -5,6 +5,7 @@ disable_toc: true
 aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson
+  - /graphing/graphing_json/
 further_reading:
 - link: "graphing/widgets"
   tag: "Documentation"

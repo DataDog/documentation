@@ -1,6 +1,8 @@
 ---
 title: Interpolation
 kind: documentation
+aliases:
+    - /graphing/functions/interpolation/
 ---
 
 ## Fill

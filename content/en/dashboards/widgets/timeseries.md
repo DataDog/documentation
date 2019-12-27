@@ -2,6 +2,8 @@
 title: Timeseries Widget
 kind: documentation
 description: "Display the evolution of one or more metrics, log events, Analyzed Spans, or process metrics over time."
+aliases:
+    - /graphing/widgets/timeseries/
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"

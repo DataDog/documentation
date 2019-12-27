@@ -2,7 +2,7 @@
 title: Container Map Overview
 kind: documentation
 aliases:
-  - /infrastructure/hostmap/
+  - /graphing/infrastructure/containermap/
   - /guides/hostmap
 further_reading:
 - link: "graphing/infrastructure/livecontainers"

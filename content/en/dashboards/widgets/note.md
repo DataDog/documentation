@@ -2,6 +2,8 @@
 title: Notes and Links Widget
 kind: documentation
 description: "Display text in your Screenboards."
+aliases:
+    - /graphing/widgets/note/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

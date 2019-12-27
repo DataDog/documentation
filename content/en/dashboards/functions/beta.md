@@ -1,6 +1,8 @@
 ---
 title: Beta Functions
 kind: documentation
+aliases:
+    - /graphing/functions/beta/
 ---
 
 Beta functions are available by editing the query JSON directly.

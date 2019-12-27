@@ -2,6 +2,8 @@
 title: Event Timeline Widget
 kind: documentation
 description: "Display your Event Stream Timeline in a widget."
+aliases:
+    - /graphing/widgets/event_timeline/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Algorithms
 kind: documentation
+aliases:
+    - /graphing/functions/algorithms/
 disable_toc: true
 ---
 

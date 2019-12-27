@@ -3,7 +3,7 @@ title: Datadog Live Process Monitoring
 kind: documentation
 aliases:
   - /guides/process
-  - /infrastructure/process/
+  - /graphing/infrastructure/process/
 further_reading:
 - link: "graphing/infrastructure/hostmap"
   tag: "Graphing"

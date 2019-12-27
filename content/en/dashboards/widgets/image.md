@@ -2,6 +2,8 @@
 title: Image Widget
 kind: documentation
 description: "Inlude an image or a gif in your Datadog dashboards."
+aliases:
+    - /graphing/widgets/image/
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

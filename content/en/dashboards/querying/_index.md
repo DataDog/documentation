@@ -1,7 +1,9 @@
 ---
-title: Using Graphs
+title: Querying
 kind: documentation
-description: Visualize your data to gain insight
+aliases:
+  - /graphing/using_graphs/
+description: Query your data to gain insight
 further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=8"
   tag: "Learning Center"
