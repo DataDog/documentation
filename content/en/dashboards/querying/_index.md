@@ -12,11 +12,9 @@ further_reading:
 
 ## Overview
 
-Whether you are using metrics, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality.
+Whether you are using metrics, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
 
 ## Graphing editor
-
-This page describes interacting with the graphic editor with the user interface. For advanced users, you can also create and edit graphs with JSON. To learn more about using JSON, see [Graphing with JSON][1].
 
 On widgets, open the graphing editor by clicking on the pencil icon in the upper right corner. The graphing editor has the following tabs:
 
@@ -24,7 +22,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 * **JSON**: A more flexible editor, which requires knowledge of the graph definition language.
 * **Edit**: The default UI tab for graphing options.
 
-When you first open the graph editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
+When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
 {{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
 
