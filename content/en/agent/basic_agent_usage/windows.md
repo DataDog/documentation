@@ -20,6 +20,8 @@ further_reading:
 ## Setup
 If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
 
+For installation and configuration to the Datadog EU location, please use the `SITE=` parameter.  See below in the configuration variables table.
+
 ### Installation
 Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
@@ -54,6 +56,7 @@ Each configuration item is added as a property to the command line. The followin
 | Variable                   | Type   | Description                                                                                                                                                                                                                        |
 |----------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                |
+| `SITE`                     | String | Set the Datadog intake site. Example `SITE=datadoghq.eu`                                                                                                                                                                           |
 | `TAGS`                     | String | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                        |
 | `HOSTNAME`                 | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                           |
 | `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                       |
