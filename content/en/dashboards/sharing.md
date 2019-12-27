@@ -1,5 +1,5 @@
 ---
-title: Shared Graphs
+title: Sharing
 kind: documentation
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs

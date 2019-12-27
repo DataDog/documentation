@@ -1,5 +1,5 @@
 ---
-title: Host Map Overview
+title: Host Map
 kind: documentation
 aliases:
   - /graphing/infrastructure/hostmap/

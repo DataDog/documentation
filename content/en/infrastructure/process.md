@@ -1,5 +1,5 @@
 ---
-title: Datadog Live Process Monitoring
+title: Live Processes
 kind: documentation
 aliases:
   - /guides/process

@@ -1,5 +1,5 @@
 ---
-title: Container Map Overview
+title: Container Map
 kind: documentation
 aliases:
   - /graphing/infrastructure/containermap/

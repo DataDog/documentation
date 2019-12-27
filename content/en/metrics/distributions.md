@@ -1,5 +1,5 @@
 ---
-title: Distribution metrics
+title: Distributions
 kind: documentation
 description: Compute global percentiles across your entire dataset.
 aliases:
