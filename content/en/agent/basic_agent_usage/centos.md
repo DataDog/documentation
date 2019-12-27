@@ -24,7 +24,7 @@ This page outlines the basic features of the Datadog Agent for CentOS. To instal
 
 ## Commands
 
-In Agent v6, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
+In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}

@@ -27,7 +27,7 @@ By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`.
 
 ## Commands
 
-In Agent v6, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. Alternatively, lifecycle commands can also be managed via the systray app, and other commands can be executed via the web GUI.
+In Agent v6 and v7, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. Alternatively, lifecycle commands can also be managed via the systray app, and other commands can be executed via the web GUI.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
