@@ -20,7 +20,7 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for SUSE. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-**Note**: SUSE 11 SP4 and above (we do not support SysVinit) are supported.
+**Note**: SUSE 11 SP4 and above are supported.
 
 ## Commands
 
