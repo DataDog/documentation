@@ -87,9 +87,11 @@
                     {{ range $i, $tile := $nav_section }}
                         
                         {{ range $i, $section := $tile }}
-                            <div class="col-12">
-                                <h3 class="text-center mb-2">{{ $section.name }}</h3>
-                            </div>
+                            {{ if $section.name}}
+                                <div class="col-12">
+                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                                </div>
+                            {{ end }}
                             
                             {{ range $i, $navtile := $section.navtiles }} 
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">

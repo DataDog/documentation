@@ -14,7 +14,7 @@
       <p>{{ .Params.summary }}</p>
       {{ if isset .Params "wistiaid"}}{{ partial "video" .Params.wistiaid }}{{ end }}
       <br>
-      {{ partial "related-groups" (dict "taxonomy" $data.Plural "terms" .Params.videos) }}
+      {{ partial "related-groups" (dict "taxonomy" $data.Plural "terms" (index .Params "video-categories")) }}
       <br><br>
   {{ end }}
 </div>
