@@ -18,9 +18,9 @@ To access it, go in your [RUM application page][3] and select click on the **Das
 
 {{< img src="real_user_monitoring/dashboards/application_page.png" alt="Application page" responsive="true" >}}
 
-## Customize your Dashboard
+## Customize your dashboard
 
-Customize this Dashboard like [any other one][4], or directly explore the underlying data in [your RUM explorer][2].
+Customize this dashboard as you would [any other one][4], or directly explore the underlying data in [your RUM explorer][2].
 
 ## Further Reading
 

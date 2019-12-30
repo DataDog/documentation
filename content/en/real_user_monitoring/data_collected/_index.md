@@ -19,14 +19,14 @@ further_reading:
 {{< whatsnext desc="By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends 5 main types of events to Datadog:">}}
   {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>View</u>: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>Resource</u>: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>Long task</u>:  Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>Long task</u>: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>Error</u>: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>User Action</u>:A User Action event is a custom event that can be generated for a given user action.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/data_collected/">}}<u>User Action</u>: A User Action event is a custom event that can be generated for a given user action.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Default attributes
 
-These 5 event categories have attributes attached by default:
+These five event categories have attributes attached by default:
 
 ### Core
 
@@ -54,9 +54,9 @@ The following contexts—following the [Datadog Standard Attributes][1] logic—
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
 | `http.useragent_details.os.family`       | string | The OS family reported by the User-Agent.       |
-| `http.useragent_details.browser.family`  | string | The Browser Family reported by the User-Agent.  |
-| `http.useragent_details.device.family`   | string | The Device family reported by the User-Agent.   |
-| `http.useragent_details.device.category` | string | The Device category reported by the User-Agent. |
+| `http.useragent_details.browser.family`  | string | The browser Family reported by the User-Agent.  |
+| `http.useragent_details.device.family`   | string | The device family reported by the User-Agent.   |
+| `http.useragent_details.device.category` | string | The device category reported by the User-Agent. |
 
 ### Geolocation
 
@@ -74,7 +74,7 @@ The following attributes are related to the geolocation of IP addresses used in 
 
 ## Extra Attribute
 
-In addition to default attributes, you can add your [specific global context][3] to all events collected. This provides you the ability to analyze the data for a subset of users: group errors by user email, understand which customers have the worst performance...
+In addition to default attributes, you can add your [specific global context][3] to all events collected. This provides you the ability to analyze the data for a subset of users: group errors by user email, understand which customers have the worst performance, etc.
 
 ## Further Reading
 

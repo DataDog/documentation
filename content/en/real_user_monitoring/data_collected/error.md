@@ -25,11 +25,11 @@ All errors that appear in the user console are collected.
 | `error.kind`    | string | The error type or kind (or code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
-| `error.origin`  | string | Where the error originates from (i.e. console, network…)          |
+| `error.origin`  | string | Where the error originates from (i.e. console, network, etc.)          |
 
 ### Network Error
 
-For network error the following extra-facets are collected:
+For network errors, the following facets are also collected:
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
