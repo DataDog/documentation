@@ -54,7 +54,7 @@ logs:
     container_mode: true
 ```
 
-**Note**: `container_mode` is set to `true`, to automatically set the `source` attribute of your logs to the corresponding short image name of the container instead of simply `docker`.
+**Note**: With Agent 7.17+ if `container_mode` is set to `true`, the `source` attribute of your logs is automatically set to the corresponding short image name of the container instead of simply `docker`.
 
 Finally, [restart the agent][2].
 
