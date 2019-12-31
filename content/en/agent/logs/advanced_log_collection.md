@@ -104,7 +104,7 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-**Note**: As of Agent version 6.17, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. See the following example:
+**Note**: With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. See the following example:
 
 ```
 pattern: (data:) values
@@ -113,7 +113,7 @@ replace_placeholder: "$1 [masked_values]"
 Resulting string: "data: [masked_values]"
 ```
 
-If you want a string to follow the capture group with no space in between, use the format `${<group_number>}`:
+If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`:
 
 ```
 pattern: (Data)Dog
