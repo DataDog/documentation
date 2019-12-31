@@ -76,7 +76,7 @@ Refer to the [Running Cluster Checks with Autodiscovery][2] documentation for mo
 Run:
 
 ```shell
-kubectl exec -it <datadog-cluster-agent-leader> agent clusterchecks
+kubectl exec -it <DATADOG_CLUSTER_AGENT_LEADER> agent clusterchecks
 ```
 
 This command displays something like:

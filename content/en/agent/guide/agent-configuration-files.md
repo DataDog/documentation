@@ -91,7 +91,7 @@ Autodiscovery template files are stored in the configuration folder with the `au
 
 **Note**: For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
-To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

@@ -340,7 +340,7 @@ The following template variables are handled by the Agent:
   - If your target port is constant, we recommend you directly specify it, without using the `port` variable
 
 - Container PID: `pid` (Added in 5.15.x)
-  - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
+  - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER>`
 
 - Container name: `container_name` (Added in 5.15.x)
   - `%%container_name%%`: retrieves the container name.
@@ -366,7 +366,7 @@ So if you configure a `redisdb` template both in Consul and as a file (`conf.d/a
 When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 
 ```text
-# docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck
+# docker exec -it <AGENT_CONTAINER_NAME> /etc/init.d/datadog-agent configcheck
 .
 ..
 ...
@@ -378,7 +378,7 @@ Check "redisdb":
 To check whether Autodiscovery is loading JMX-based checks:
 
 ```text
-# docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
+# docker exec -it <AGENT_CONTAINER_NAME> cat /opt/datadog-agent/run/jmx_status.yaml
 timestamp: 1499296559130
 checks:
   failed_checks: {}

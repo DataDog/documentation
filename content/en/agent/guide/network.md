@@ -27,7 +27,7 @@ further_reading:
     * [Logs][3] data is `agent-intake.logs.datadoghq.com ` for TCP traffic
     * All other Agent data:
         * **Agents < 5.2.0** `app.datadoghq.com`
-        *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
+        *  **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
 
 This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
@@ -59,7 +59,7 @@ The information is structured as JSON following this schema:
 }
 ```
 
-Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json` or `https://ip-ranges.datadoghq.eu/<section>.json`, for example:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<SECTION>.json` or `https://ip-ranges.datadoghq.eu/<SECTION>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data over TCP
 * [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data over TCP for Datadog EU

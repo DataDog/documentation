@@ -37,7 +37,7 @@ Alternatively, download links for the latest releases can be found on [this page
 The installer may be executed as follows (as root):
 
 {{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<version>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+installp -aXYgd ./datadog-unix-agent-<VEERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 This installs the Agent in `/opt/datadog-agent`.
@@ -46,14 +46,14 @@ Note: Agent installation logs can be found in the `dd-aix-install.log` file. To 
 
 ## Commands
 
-| Description                        | Command (as root)                   |
-| --------------------               | --------------------                |
-| Start Agent as a service           | `startsrc -s datadog-agent`         |
-| Stop Agent running as a service    | `stopsrc -s datadog-agent`          |
-| Status of Agent service            | `lssrc -s datadog-agent`            |
-| Status page of running Agent       | `datadog-agent status`              |
-| Send flare                         | `datadog-agent flare`               |
-| Display command usage              | `datadog-agent --help`              |
+| Description                     | Command (as root)           |
+|---------------------------------|-----------------------------|
+| Start Agent as a service        | `startsrc -s datadog-agent` |
+| Stop Agent running as a service | `stopsrc -s datadog-agent`  |
+| Status of Agent service         | `lssrc -s datadog-agent`    |
+| Status page of running Agent    | `datadog-agent status`      |
+| Send flare                      | `datadog-agent flare`       |
+| Display command usage           | `datadog-agent --help`      |
 
 ## Configuration
 

@@ -65,8 +65,8 @@ instances:
     connector: odbc
     # enable the ODBC driver
     driver: ODBC Driver 13 for SQL Server
-    username: <my_username>
-    password: <my_password>
+    username: <USERNAME>
+    password: <PASSWORD>
 ```
 
 If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.

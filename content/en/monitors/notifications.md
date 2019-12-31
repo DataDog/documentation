@@ -390,7 +390,7 @@ The above link has more customizable options than your standard System Dashboard
 
 * `fillby` is defined by adding `fillby:avg:<MetricName>`.
 * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
-* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`.
+* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<INTEGRATION_NAME>`.
 
 In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
 
@@ -413,7 +413,7 @@ For example, to see all monitors in an Alert State, add `status:Alert` (other st
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
 ```
 
-If you would like all monitors for a specific application or integration, add the following query to the URL `q=<integration_name> `:
+If you would like all monitors for a specific application or integration, add the following query to the URL `q=<INTEGRATION_NAME> `:
 
 ```text
 https://app.datadoghq.com/monitors/manage?q=cassandra
@@ -426,10 +426,10 @@ https://app.datadoghq.com/monitors/manage?q=cassandra
 
 If you are building application- or integration-specific monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
 
-In the example below, all that is necessary to populate is the `<integration_name>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
+In the example below, all that is necessary to populate is the `<INTEGRATION_NAME>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
 
 ```text
-https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
+https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
 {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}

@@ -66,7 +66,7 @@ Most integrations are enabled by default. The following setting can change the d
 
 Integrations can be enabled or disabled individually (overriding the default above).
 
-* System Property: `-Ddd.integration.<integration-name>.enabled=true`
+* System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 * Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
 (See below for each integration's name.)
@@ -97,7 +97,8 @@ Beta integrations are disabled by default but can be enabled individually.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
 Beta Instrumentation is disabled by default. Add one of the following configurations to enable it:
-* System Property: `-Ddd.integration.<integration-name>.enabled=true`
+
+* System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 * Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.

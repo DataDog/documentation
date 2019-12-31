@@ -38,7 +38,7 @@ An integration is compatible and installable if:
 2. It is compatible with the version of the [datadog_checks_base][3] in the installed Agent.
 3. It is not the `datadog_checks_base`. The base check can only be upgraded by upgrading the Agent.
 
-The syntax for this command is `datadog-agent integration install <integration_package_name>==<version>` where `<integration_package_name>` is the name of the integration prefixed with `datadog-`.
+The syntax for this command is `datadog-agent integration install <INTEGRATION_PACKAGE_NAME>==<VERSION>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
 For example, to install version 3.6.0 of the vSphere integration, run:
 
@@ -68,7 +68,7 @@ Configuration management tools can leverage this command to deploy the version o
 
 ### Remove
 
-To remove an integration, use the `datadog-agent integration remove` command. The syntax for this command is `datadog-agent integration remove <integration_package_name>` where `<integration_package_name>` is the name of the integration prefixed with `datadog-`.
+To remove an integration, use the `datadog-agent integration remove` command. The syntax for this command is `datadog-agent integration remove <INTEGRATION_PACKAGE_NAME>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
 For example, to remove the vSphere integration, run:
 
@@ -88,7 +88,7 @@ Removing an integration does not remove the corresponding configuration folder i
 
 ### Show
 
-To get information, such as the version, about an installed integration, use the `datadog-agent integration show` command. The syntax for this command is `datadog-agent integration show <integration_package_name>` where `<integration_package_name>` is the name of the integration prefixed with `datadog-`.
+To get information, such as the version, about an installed integration, use the `datadog-agent integration show` command. The syntax for this command is `datadog-agent integration show <INTEGRATION_PACKAGE_NAME>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
 For example, to show information on the vSphere integration, run:
 

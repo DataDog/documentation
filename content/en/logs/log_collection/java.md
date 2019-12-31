@@ -476,9 +476,9 @@ Enrich your log events with contextual attributes.
 
 ### Using the Key/Value parser
 
-The [Key/Value parser][6] extracts any `<key>=<value>` pattern recognized in any log event.
+The [Key/Value parser][6] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
-To enrich your log events in Java, you can re-write messages in your code and introduce `<key>=<value>` sequences.
+To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
 For instance if you have:
 

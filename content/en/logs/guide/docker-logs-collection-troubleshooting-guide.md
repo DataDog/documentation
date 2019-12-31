@@ -63,7 +63,7 @@ Logs Agent
 
 This status means that logs are enabled but you haven't specified which containers the Agent should collect from.
 
-1. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
+1. To check what environment variables you've set, run the command `docker inspect <AGENT_CONTAINER>`.
 
 2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`.
 
