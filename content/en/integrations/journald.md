@@ -54,6 +54,8 @@ logs:
     container_mode: true
 ```
 
+**Note**: `container_mode` is set to `true`, to automatically set the `source` attribute of your logs to the corresponding short image name of the container instead of simply `docker`.
+
 Finally, [restart the agent][2].
 
 #### Advanced features
@@ -92,16 +94,6 @@ Tags are critical for finding information in highly dynamic containerized enviro
 This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journal path and the following file:
 
 - `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
-
-Finally, [restart the agent][2].
-
-It's recommended to always activate the `container_mode` option, it will allow the agent to automatically set source/origin of your logs to the short image name instead of simply `docker` when logs are coming from a container.
-
-```
-logs:
-  - type: journald
-    container_mode: true
-```
 
 ## Troubleshooting
 
