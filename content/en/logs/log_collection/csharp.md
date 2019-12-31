@@ -29,6 +29,7 @@ To send your C# logs to Datadog, we recommend logging to a file and then tailing
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
+
 {{< tabs >}}
 {{% tab "SeriLog" %}}
 

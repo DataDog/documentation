@@ -21,7 +21,7 @@ VMs with a running Agent still display and are included in billing. Using the li
 
 ## Troubleshooting
 
-or technical questions, contact [Datadog support][4].
+For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][5] Manager.
 
