@@ -141,28 +141,28 @@ Additional properties allowed in each `request` object:
 
 ```json
 {
-    "style": {
-        "type": "object",
-        "properties": {
-            "palette":    {"type": "string"},
-            "line_type":  {"enum": ["dashed", "dotted", "solid"]},
-            "line_width": {"enum": ["normal", "thick", "thin"]}
-        },
-        "additionalProperties": false
+  "style": {
+    "type": "object",
+    "properties": {
+      "palette": {"type": "string"},
+      "line_type": {"enum": ["dashed", "dotted", "solid"]},
+      "line_width": {"enum": ["normal", "thick", "thin"]}
     },
-    "metadata": {
-        "type": "array",
-        "items": {
-            "type": "object",
-            "properties": {
-                "expression": {"type": "string"},
-                "alias_name": {"type": "string"}
-            },
-            "required": ["expression"],
-            "additionalProperties": false
-        }
-    },
-    "display_type": {"enum": ["area", "bars", "line"]}
+    "additionalProperties": false
+  },
+  "metadata": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "expression": {"type": "string"},
+        "alias_name": {"type": "string"}
+      },
+      "required": ["expression"],
+      "additionalProperties": false
+    }
+  },
+  "display_type": {"enum": ["area", "bars", "line"]}
 }
 ```
 

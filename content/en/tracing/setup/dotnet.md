@@ -450,6 +450,7 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
 {{% tab "JSON file" %}}
 
 To configure the Tracer using an JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+
 ```json
 {
   "DD_TRACE_AGENT_URL": "http://localhost:8126",

@@ -29,11 +29,11 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 5. Enter the **Container name**, **Image**, and any additional preference settings.
 6. Under **Docker labels** add the following:
 
-  | Key                           | Value                                           |
-  |-------------------------------|-------------------------------------------------|
-  | com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
-  | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
-  | com.datadoghq.ad.init_configs | `[{}]`                                          |
+| Key                           | Value                                           |
+|-------------------------------|-------------------------------------------------|
+| com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
+| com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
+| com.datadoghq.ad.init_configs | `[{}]`                                          |
 
 7. Click the **Add** button, then click the **Create** button.
 
@@ -70,14 +70,14 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 
 ```json
 {
-    "name": "redis",
-    "image": "redis:latest",
-    "essential": true,
-    "dockerLabels": {
-        "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\", \"port\": 6379}]",
-        "com.datadoghq.ad.check_names": "[\"redisdb\"]",
-        "com.datadoghq.ad.init_configs": "[{}]"
-    }
+  "name": "redis",
+  "image": "redis:latest",
+  "essential": true,
+  "dockerLabels": {
+    "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\", \"port\": 6379}]",
+    "com.datadoghq.ad.check_names": "[\"redisdb\"]",
+    "com.datadoghq.ad.init_configs": "[{}]"
+  }
 }
 ```
 

@@ -104,9 +104,7 @@ Additional properties allowed in the `requests` object:
 {
   "style": {
     "type": "object",
-    "properties": {
-      "palette": {"type": "string"},
-    },
+    "properties": {"palette": {"type": "string"}},
     "additionalProperties": false
   }
 }

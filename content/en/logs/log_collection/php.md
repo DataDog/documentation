@@ -505,11 +505,7 @@ First, add this dependency to the `composer.json` file and
 run `composer update`.
 
 ```json
-{
-    "require": {
-        "cakephp/monolog": "*"
-    }
-}
+{"require": {"cakephp/monolog": "*"}}
 ```
 
 Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:

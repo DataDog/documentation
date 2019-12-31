@@ -496,12 +496,10 @@ With the [Key/Value parser][6] enabled, **Datadog** automatically extracts each 
 
 ```json
 {
-    //...
-    "message" : "Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30",
-    "scope" : "prod30",
-    "durationInMs" : 93180,
-    "quantity" : 1001
-    //...
+  "message": "Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30",
+  "scope": "prod30",
+  "durationInMs": 93180,
+  "quantity": 1001
 }
 ```
 
@@ -524,8 +522,8 @@ To generate this final JSON document:
 
 ```json
 {
-    "message" : "Emitted 1001 messages during the last 93 seconds",
-    "scope" : "prod30",
+  "message": "Emitted 1001 messages during the last 93 seconds",
+  "scope": "prod30"
 }
 ```
 

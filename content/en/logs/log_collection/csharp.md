@@ -62,22 +62,11 @@ Then check the `log.json` file to see the following event:
 
 ```json
 {
-    "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
-    "Level": "Information",
-    "Timestamp": "2016-09-02T15:02:29.648Z",
-    "Renderings": {
-        "Elapsed": [{
-            "Format": "000",
-            "Rendering": "034"
-        }]
-    },
-    "Properties": {
-        "Position": {
-            "Latitude": 25,
-            "Longitude": 134
-        },
-        "Elapsed": 34
-    }
+  "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
+  "Level": "Information",
+  "Timestamp": "2016-09-02T15:02:29.648Z",
+  "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
 }
 ```
 

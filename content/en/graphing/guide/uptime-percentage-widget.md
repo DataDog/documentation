@@ -81,18 +81,10 @@ This is the JSON for the example query value widget:
     {
       "q": "avg:network.http.can_connect{url:https://www.amazon.com/}*100",
       "type": null,
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
+      "style": {"palette": "dog_classic", "type": "solid", "width": "normal"},
       "aggregator": "avg",
       "conditional_formats": [
-        {
-          "comparator": "<",
-          "value": "99.99",
-          "palette": "white_on_red"
-        }
+        {"comparator": "<", "value": "99.99", "palette": "white_on_red"}
       ]
     }
   ],

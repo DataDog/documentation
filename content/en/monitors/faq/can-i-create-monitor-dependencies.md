@@ -36,9 +36,7 @@ Unmute: `https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&a
 And the webhook content for both:
 
 ```json
-{
-"scope": "$ALERT_SCOPE"
-}
+{"scope": "$ALERT_SCOPE"}
 ```
 
 Then, create "Alert A" - for example- a no-data alert for a grouped percentage of hosts for each Availability zone.

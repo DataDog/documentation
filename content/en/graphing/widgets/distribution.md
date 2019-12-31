@@ -84,20 +84,17 @@ Additional properties allowed the `request` object:
 
 ```json
 {
-    "style": {
-        "type": "object",
-        "properties": {
-            "palette": {"type": "string"},
-        },
-        "additionalProperties": false
-    }
+  "style": {
+    "type": "object",
+    "properties": {"palette": {"type": "string"}},
+    "additionalProperties": false
+  }
 }
 ```
 
 | Parameter       | Type   | Required | Description                           |
 |-----------------|--------|----------|---------------------------------------|
 | `style.palette` | string | no       | Color palette to apply to the widget. |
-
 
 ## Further Reading
 

@@ -101,12 +101,14 @@ Additional properties allowed in the `request` object:
 
 ```json
 {
-    "change_type":   {"enum": ["absolute", "relative"]},
-    "compare_to":    {"enum": ["hour_before", "day_before", "week_before", "month_before"]},
-    "increase_good": {"type": "boolean"},
-    "order_by":      {"enum": ["change", "name", "present", "past"]},
-    "order_dir":     {"enum": ["asc", "desc"]},
-    "show_present":  {"type": "boolean"}
+  "change_type": {"enum": ["absolute", "relative"]},
+  "compare_to": {
+    "enum": ["hour_before", "day_before", "week_before", "month_before"]
+  },
+  "increase_good": {"type": "boolean"},
+  "order_by": {"enum": ["change", "name", "present", "past"]},
+  "order_dir": {"enum": ["asc", "desc"]},
+  "show_present": {"type": "boolean"}
 }
 ```
 

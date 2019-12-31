@@ -129,14 +129,14 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 
 ```json
 {
-    "timestamp":"2016-01-12T19:15:18.683575+01:00",
-    "level":"INFO",
-    "logger":"WelcomeController",
-    "message": {
-        "user":"1234",
-        "button_name":"save",
-        "message":"User 1234 clicked on button saved"
-            }
+  "timestamp": "2016-01-12T19:15:18.683575+01:00",
+  "level": "INFO",
+  "logger": "WelcomeController",
+  "message": {
+    "user": "1234",
+    "button_name": "save",
+    "message": "User 1234 clicked on button saved"
+  }
 }
 ```
 

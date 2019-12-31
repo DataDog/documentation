@@ -106,25 +106,25 @@ Once the [handler is configured][2], the log file contains the following log rec
 
 ```json
 {
-    "threadName": "MainThread",
-    "name": "root",
-    "thread": 140735202359648,
-    "created": 1336281068.506248,
-    "process": 41937,
-    "processName": "MainProcess",
-    "relativeCreated": 9.100914001464844,
-    "module": "tests",
-    "funcName": "testFormatKeys",
-    "levelno": 20,
-    "msecs": 506.24799728393555,
-    "pathname": "tests/tests.py",
-    "lineno": 60,
-    "asctime": ["12-05-05 22:11:08,506248"],
-    "message": "testing logging format",
-    "filename": "tests.py",
-    "levelname": "INFO",
-    "special": "value",
-    "run": 12
+  "threadName": "MainThread",
+  "name": "root",
+  "thread": 140735202359648,
+  "created": 1336281068.506248,
+  "process": 41937,
+  "processName": "MainProcess",
+  "relativeCreated": 9.100914001464844,
+  "module": "tests",
+  "funcName": "testFormatKeys",
+  "levelno": 20,
+  "msecs": 506.24799728393555,
+  "pathname": "tests/tests.py",
+  "lineno": 60,
+  "asctime": ["12-05-05 22:11:08,506248"],
+  "message": "testing logging format",
+  "filename": "tests.py",
+  "levelname": "INFO",
+  "special": "value",
+  "run": 12
 }
 ```
 

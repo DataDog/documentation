@@ -34,11 +34,11 @@ Next, enter a new ticket JSON payload. The following example uses only the requi
 
 ```json
 {
-  "email":"[email address to associate with ticket]",
-  "subject":"$EVENT_TITLE",
-  "description":"<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
-  "status":2,
-  "priority":2
+  "email": "[email address to associate with ticket]",
+  "subject": "$EVENT_TITLE",
+  "description": "<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
+  "status": 2,
+  "priority": 2
 }
 ```
 
@@ -56,7 +56,7 @@ Freshservice’s API uses [Basic Access Authentication][4]. Your Base64 encoded 
 To set this up in your webhook, add the following to your **Headers** section:
 
 ```json
-{"Authorization":"Basic <BASE64_ENCODED_CREDENTIALS>"}
+{"Authorization": "Basic <BASE64_ENCODED_CREDENTIALS>"}
 ```
 
 ### Finishing Up
@@ -109,12 +109,12 @@ Tagging is supported in Freshservice’s API, but note the following:
 
 ```json
 {
-"email":"<EMAIL_ADDRESS_TO_ASSOCIATE_WITH_TICKET>",
-"subject":"$EVENT_TITLE",
-"description":"<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
-"status":2,
-"priority":2,
-"tags":["$HOSTNAME", "$ORG_ID"]
+  "email": "<EMAIL_ADDRESS_TO_ASSOCIATE_WITH_TICKET>",
+  "subject": "$EVENT_TITLE",
+  "description": "<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
+  "status": 2,
+  "priority": 2,
+  "tags": ["$HOSTNAME", "$ORG_ID"]
 }
 ```
 

@@ -39,18 +39,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 
 ```json
 {
-"type": "grok-parser",
-"name": "Parsing Log message",
-"is_enabled": true,
-"source": "message",
-"samples": [
-    "sample log 1",
-    "sample log 2"
-    ],
-"grok": {
-    "support_rules": "<SUPPORT_RULES>",
-    "match_rules": "<MATCH_RULES>"
-    }
+  "type": "grok-parser",
+  "name": "Parsing Log message",
+  "is_enabled": true,
+  "source": "message",
+  "samples": ["sample log 1", "sample log 2"],
+  "grok": {"support_rules": "<SUPPORT_RULES>", "match_rules": "<MATCH_RULES>"}
 }
 ```
 
@@ -109,10 +103,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 
 ```json
 {
-    "type": "date-remapper",
-    "name": "Define <SOURCE_ATTRIBUTE> as the official Date of the log",
-    "is_enabled": false,
-    "sources": ["<SOURCE_ATTRIBUTE_1>"]
+  "type": "date-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official Date of the log",
+  "is_enabled": false,
+  "sources": ["<SOURCE_ATTRIBUTE_1>"]
 }
 ```
 
@@ -168,10 +162,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Rem
 
 ```json
 {
-   "type": "status-remapper",
-   "name": "Define <SOURCE_ATTRIBUTE> as the official status of the log",
-   "is_enabled": true,
-   "sources": ["<SOURCE_ATTRIBUTE>"]
+  "type": "status-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official status of the log",
+  "is_enabled": true,
+  "sources": ["<SOURCE_ATTRIBUTE>"]
 }
 ```
 
@@ -207,10 +201,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 
 ```json
 {
-   "type": "service-remapper",
-   "name": "Define <SOURCE_ATTRIBUTE> as the official log service",
-   "is_enabled": true,
-   "sources": ["<SOURCE_ATTRIBUTE>"]
+  "type": "service-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official log service",
+  "is_enabled": true,
+  "sources": ["<SOURCE_ATTRIBUTE>"]
 }
 ```
 
@@ -246,10 +240,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Re
 
 ```json
 {
-   "type": "message-remapper",
-   "name": "Define <SOURCE_ATTRIBUTE> as the official message of the log",
-   "is_enabled": true,
-   "sources": ["msg"]
+  "type": "message-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official message of the log",
+  "is_enabled": true,
+  "sources": ["msg"]
 }
 ```
 
@@ -291,15 +285,15 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 
 ```json
 {
-    "type": "attribute-remapper",
-    "name": "Remap <SOURCE_ATTRIBUTE> to <TARGET_ATTRIBUTE>",
-    "is_enabled": true,
-    "source_type": "attribute",
-    "sources": ["<SOURCE_ATTRIBUTE>"],
-    "target": "<TARGET_ATTRIBUTE>",
-    "target_type": "tag",
-    "preserve_source": false,
-    "override_on_conflict": false
+  "type": "attribute-remapper",
+  "name": "Remap <SOURCE_ATTRIBUTE> to <TARGET_ATTRIBUTE>",
+  "is_enabled": true,
+  "source_type": "attribute",
+  "sources": ["<SOURCE_ATTRIBUTE>"],
+  "target": "<TARGET_ATTRIBUTE>",
+  "target_type": "tag",
+  "preserve_source": false,
+  "override_on_conflict": false
 }
 ```
 
@@ -338,11 +332,11 @@ Define the URL parser processor in the [Datadog Log configuration page][1]:
 
 ```json
 {
-    "type": "url-parser",
-    "name": "Parse the URL from http.url attribute.",
-    "is_enabled": true,
-    "sources": ["http.url"],
-    "target": "http.url_details"
+  "type": "url-parser",
+  "name": "Parse the URL from http.url attribute.",
+  "is_enabled": true,
+  "sources": ["http.url"],
+  "target": "http.url_details"
 }
 ```
 
@@ -380,12 +374,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 
 ```json
 {
-    "type": "user-agent-parser",
-    "name": "Parses <SOURCE_ATTRIBUTE> to extract all its User-Agent information",
-    "is_enabled": true,
-    "sources": ["http.useragent"],
-    "target": "http.useragent_details",
-    "is_encoded": false
+  "type": "user-agent-parser",
+  "name": "Parses <SOURCE_ATTRIBUTE> to extract all its User-Agent information",
+  "is_enabled": true,
+  "sources": ["http.useragent"],
+  "target": "http.useragent_details",
+  "is_encoded": false
 }
 ```
 
@@ -433,24 +427,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 
 ```json
 {
-   "type": "category-processor",
-   "name": "Assign a custom value to the <TARGET_ATTRIBUTE> attribute",
-   "is_enabled": true,
-   "categories": [
-      {
-         "filter": {
-            "query": "<QUERY_1>"
-         },
-         "name": "<VALUE_TO_ASSIGN_1>"
-      },
-      {
-         "filter": {
-            "query": "<QUERY_2>"
-         },
-         "name": "<VALUE_TO_ASSIGN_2>"
-      }
-   ],
-   "target": "<TARGET_ATTRIBUTE>"
+  "type": "category-processor",
+  "name": "Assign a custom value to the <TARGET_ATTRIBUTE> attribute",
+  "is_enabled": true,
+  "categories": [
+    {"filter": {"query": "<QUERY_1>"}, "name": "<VALUE_TO_ASSIGN_1>"},
+    {"filter": {"query": "<QUERY_2>"}, "name": "<VALUE_TO_ASSIGN_2>"}
+  ],
+  "target": "<TARGET_ATTRIBUTE>"
 }
 ```
 
@@ -498,12 +482,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic pro
 
 ```json
 {
-    "type": "arithmetic-processor",
-    "name": "<PROCESSOR_NAME>",
-    "is_enabled": true,
-    "expression": "<ARITHMETIC_OPERATION>",
-    "target": "<TARGET_ATTRIBUTE>",
-    "is_replace_missing": false
+  "type": "arithmetic-processor",
+  "name": "<PROCESSOR_NAME>",
+  "is_enabled": true,
+  "expression": "<ARITHMETIC_OPERATION>",
+  "target": "<TARGET_ATTRIBUTE>",
+  "is_replace_missing": false
 }
 ```
 
@@ -689,13 +673,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 ```json
 {
-  "type" : "lookup-processor",
-  "name" : "<PROCESSOR_NAME>",
-  "is_enabled" : true,
-  "source" : "<SOURCE_ATTRIBUTE>",
-  "target" : "<TARGET_ATTRIBUTE>",
-  "lookup_table" : [ "key1,value1", "key2,value2" ],
-  "default_lookup" : "<DEFAULT_TARGET_VALUE>",
+  "type": "lookup-processor",
+  "name": "<PROCESSOR_NAME>",
+  "is_enabled": true,
+  "source": "<SOURCE_ATTRIBUTE>",
+  "target": "<TARGET_ATTRIBUTE>",
+  "lookup_table": ["key1,value1", "key2,value2"],
+  "default_lookup": "<DEFAULT_TARGET_VALUE>"
 }
 ```
 
@@ -736,10 +720,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 ```json
 {
-   "type": "trace-id-remapper",
-   "name": "Define dd.trace_id as the official trace id associate to this log",
-   "is_enabled": true,
-   "sources": ["dd.trace_id"]
+  "type": "trace-id-remapper",
+  "name": "Define dd.trace_id as the official trace id associate to this log",
+  "is_enabled": true,
+  "sources": ["dd.trace_id"]
 }
 ```
 

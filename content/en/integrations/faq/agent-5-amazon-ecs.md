@@ -78,26 +78,24 @@ Amazon Elastic Container Service register-task-definition --cli-input-json file:
 8. For **Policy Name** enter `dd-agent-policy`. Copy the following text into the **Policy Document**:
 
   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-         {
-             "Effect": "Allow",
-             "Action": [
-                 "ecs:RegisterContainerInstance",
-                 "ecs:DeregisterContainerInstance",
-                 "ecs:DiscoverPollEndpoint",
-                 "ecs:Submit*",
-                 "ecs:Poll",
-                 "ecs:StartTask",
-                 "ecs:StartTelemetrySession"
-             ],
-             "Resource": [
-                 "*"
-             ]
-         }
-     ]
-   }
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecs:RegisterContainerInstance",
+          "ecs:DeregisterContainerInstance",
+          "ecs:DiscoverPollEndpoint",
+          "ecs:Submit*",
+          "ecs:Poll",
+          "ecs:StartTask",
+          "ecs:StartTelemetrySession"
+        ],
+        "Resource": ["*"]
+      }
+    ]
+  }
   ```
 
 9. Click **Create Policy**

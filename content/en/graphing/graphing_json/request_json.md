@@ -81,12 +81,8 @@ The following example graphs 5-minute load and its double:
 {
   "viz": "timeseries",
   "requests": [
-    {
-      "q": "system.load.5{intake} * 2"
-    },
-    {
-      "q": "system.load.5{intake}"
-    }
+    {"q": "system.load.5{intake} * 2"},
+    {"q": "system.load.5{intake}"}
   ]
 }
 ```
@@ -94,14 +90,7 @@ The following example graphs 5-minute load and its double:
 You can also add, subtract, multiply, and divide a series. Note that Datadog does not enforce consistency at this point, so you *can* divide apples by oranges.
 
 ```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "metric{apples} / metric{oranges}"
-    }
-  ]
-}
+{"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
 ```
 
 ## Stacked Series

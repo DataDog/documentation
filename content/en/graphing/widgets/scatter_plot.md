@@ -80,9 +80,7 @@ SCATTERPLOT_SCHEMA = {
 Additional properties allowed in the `request` object:
 
 ```json
-{
-  "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
-}
+{"aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}}
 ```
 
 | Parameter    | Type   | Required | Description                                                                                   |

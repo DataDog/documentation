@@ -134,10 +134,7 @@ If the exit code of the executable is anything other than `0`, the integration c
 The executable receives a JSON payload from the standard input, containing the list of secrets to fetch:
 
 ```json
-{
-  "version": "1.0",
-  "secrets": ["secret1", "secret2"]
-}
+{"version": "1.0", "secrets": ["secret1", "secret2"]}
 ```
 
 * `version`: is a string containing the format version (currently 1.0).
@@ -149,14 +146,8 @@ The executable is expected to output to the standard output a JSON payload conta
 
 ```json
 {
-  "secret1": {
-    "value": "secret_value",
-    "error": null
-  },
-  "secret2": {
-    "value": null,
-    "error": "could not fetch the secret"
-  }
+  "secret1": {"value": "secret_value", "error": null},
+  "secret2": {"value": null, "error": "could not fetch the secret"}
 }
 ```
 

@@ -36,10 +36,10 @@ The custom payload is where the name and tags of the check_run are applied. For 
 
 ```json
 {
-"check": "mymonitorgroup.status",
-"status": 2,
-"host_name": "$HOSTNAME",
-"tags": "[monitor:$ALERT_TITLE]"
+  "check": "mymonitorgroup.status",
+  "status": 2,
+  "host_name": "$HOSTNAME",
+  "tags": "[monitor:$ALERT_TITLE]"
 }
 ```
 
