@@ -28,6 +28,7 @@ For a description of the terminology used in APM, see the [Getting started with 
 Consult the [migration document][4] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
 
 ### Installation
+
 <div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=go" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=go" target=_blank>container-based</a> set ups.</div>
 
 First [install and configure the Datadog Agent][5]. See the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
@@ -45,11 +46,11 @@ You are now ready to import the tracer and start instrumenting your code.
 Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find the list of supported [integrations](#integrations) below.
 
 ## Compatibility
+
 To begin tracing your Go applications, your environment must first meet the following requirements:
 
 * Runing the Datadog Agent `>= 5.21.1`.
 * Using Go `1.9+`
-
 
 ### Integrations
 
@@ -90,7 +91,6 @@ The Go tracer includes support for the following data stores and libraries.
 | [go-restful][49]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][50]               |
 | [Twirp][51]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][52]                    |
 | [Vault][53]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][54]                   |
-
 
 **Note**: The [integrations documentation][55] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 

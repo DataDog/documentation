@@ -25,7 +25,6 @@ All the API endpoints below can have two different host endpoints:
 
 ### Get all roles
 
-
 Returns all roles, including their names and UUIDs.
 
 | Method | Endpoint path | Required payload |
@@ -43,7 +42,6 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
   * Options: **name**, **modified_at**, **user_count**
 * **`filter`**[*optional*, *default*=**None**]:
 Filter all roles by the given string.
-
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -156,7 +154,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{< /tabs >}}
 
 ### Create role
-
 
 Creates a new role. Returns role name and UUID.
 
@@ -308,7 +305,6 @@ HTTP/2 204
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### Get permissions
 

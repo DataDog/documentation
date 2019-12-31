@@ -42,7 +42,6 @@ public class MyJob {
 ```
 
 
-
 [1]: /tracing/setup/java/#compatibility
 [2]: /tracing/visualization/#trace
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
@@ -108,7 +107,6 @@ API details of the decorator can be found here:
 
 
 
-
 [1]: /tracing/setup/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
@@ -147,7 +145,6 @@ end
 ```
 
 For more details about manual instrumentation, check out the [API documentation][2].
-
 
 [1]: /tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
@@ -224,7 +221,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer span.Finish()
 }
 ```
-
 
 
 [1]: /tracing/setup/go/#compatibility
@@ -355,7 +351,6 @@ resources.ddtrace = true
 Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
 
 While this [has been deprecated][6] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][7] API instead of adding `datadog/dd-trace` to your Composer file.
-
 
 [1]: /tracing/setup/php/#automatic-instrumentation
 [2]: /tracing/visualization/#trace

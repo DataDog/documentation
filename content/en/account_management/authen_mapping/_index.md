@@ -333,7 +333,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a JSON body. Returns the updated AuthN Mapping.
 
-
 | Method  | Endpoint path               | Required payload    |
 |---------|-----------------------------|---------------------|
 | `PATCH` | `/v2/authn_mappings/{UUID}` | URL parameter, JSON |

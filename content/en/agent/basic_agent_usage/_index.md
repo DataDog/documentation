@@ -371,7 +371,6 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 
 [See the dedicated documentation for Agent log files][12]
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -16,7 +16,6 @@ Currently this options only works with the following services:
 * `http`
 * `remove_stack_traces`
 
-
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 

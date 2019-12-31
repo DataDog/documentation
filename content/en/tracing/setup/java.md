@@ -273,7 +273,6 @@ If multiple extraction styles are enabled extraction attempt is done
 on the order those styles are configured and first successful
 extracted value is used.
 
-
 ## Trace Reporting
 
 To report a trace to Datadog the following happens:

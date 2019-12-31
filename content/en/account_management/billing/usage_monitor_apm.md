@@ -40,7 +40,6 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 
 Learn more about Analyzed Span filtering and usage control [here][7].
 
-
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing
 [3]: https://app.datadoghq.com/account/usage

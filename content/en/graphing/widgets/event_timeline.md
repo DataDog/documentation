@@ -25,6 +25,7 @@ The event timeline is a widget version of the timeline that appears at the top o
 2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ### Options
+
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
@@ -32,7 +33,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 Optionally define its size and alignment.
-
 
 ## API
 
@@ -54,15 +54,14 @@ EVENT_TIMELINE_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the event timeline widget use `event_timeline`|
-|`query`|string|yes|Query to filter the event timeline with|
-|`title`|string|no|Title of the widget|
-|`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
-|`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA`
-
+| Parameter     | Type   | Required | Description                                                                                                                |
+|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string | yes      | Type of the widget, for the event timeline widget use `event_timeline`                                                     |
+| `query`       | string | yes      | Query to filter the event timeline with                                                                                    |
+| `title`       | string | no       | Title of the widget                                                                                                        |
+| `title_size`  | string | no       | Size of the title                                                                                                          |
+| `title_align` | string | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
+| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA` |
 
 
 ## Further Reading

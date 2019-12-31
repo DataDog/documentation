@@ -20,6 +20,7 @@ The groups widget allows you to keep similar graphs together on your [timeboard]
 Choose a name for your group by using the cog icon in the upper right corner of your group.
 
 ## API
+
 The dedicated [widget JSON schema definition][2] for the change widget is:
 
 ```
@@ -50,12 +51,11 @@ GROUP_SCHEMA = {
 ```
 
 | Parameter     | Type             | Required | Description                                                                                                                                             |
-| ------        | -----            | -------- | -----                                                                                                                                                   |
-| `type`        | string           | yes      | Type of widget, for the group widget use `group`.                                                                                                   |
+|---------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string           | yes      | Type of widget, for the group widget use `group`.                                                                                                       |
 | `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][2] to learn how to build the `WIDGET_DEFINITION`. |
 | `layout_type` | string           | yes      | Layout type of the group, value available is `ordered`                                                                                                  |
 | `title`       | string           | no       | Title of your widget.                                                                                                                                   |
-
 
 ## Further Reading
 

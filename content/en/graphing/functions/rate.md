@@ -9,7 +9,6 @@ kind: documentation
 |:---------------|:-----------------------------------------------------------|:-------------------------------|
 | `per_second()` | Graph the rate at which the metric is changing per second. | `per_second(<METRIC_NAME>{*})` |
 
-
 ## Per minute
 
 | Function       | Description                                                | Example                        |

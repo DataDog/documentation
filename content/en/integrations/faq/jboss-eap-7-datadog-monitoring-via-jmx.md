@@ -8,6 +8,7 @@ kind: faq
 These are the instructions created to install and configure Datadog on the KP JBoss EAP 7 cloud image and monitor a JVM via JMX.
 
 ## Setup
+
 ### Prerequisites
 
 To install Datadog and integrate it with the JBoss EAP 7, ensure the following conditions have been met:
@@ -43,7 +44,6 @@ For `<socket-binding-group name="full-ha-sockets" default-interface="public">`, 
 ```
 <socket-binding name="remoting" port="4447"/>
 ```
-
 
 Add an application user for the Application Realm:
 

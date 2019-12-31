@@ -41,15 +41,15 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 Use variables to customize your monitor notifications, the available variables are:
 
-| Variable                | Description                                                                                    |
-|-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
-| `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
-| `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
-| `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
-| `{{comparator}}`        | Display the relational value selected in the monitor's *Set alert conditions* section.         |
-| `{{last_triggered_at}}` | Display the UTC date/time when the monitor last triggered.                                     |
-| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.  |
+| Variable                      | Description                                                                                    |
+|-------------------------------|------------------------------------------------------------------------------------------------|
+| `{{value}}`                   | Display the value that breached the alert for metrics based query monitors.                    |
+| `{{threshold}}`               | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
+| `{{warn_threshold}}`          | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
+| `{{ok_threshold}}`            | Display the value that recovered the monitor.                                                  |
+| `{{comparator}}`              | Display the relational value selected in the monitor's *Set alert conditions* section.         |
+| `{{last_triggered_at}}`       | Display the UTC date/time when the monitor last triggered.                                     |
+| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.        |
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
@@ -96,7 +96,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 ### Template variable arithmetic
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so: 
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
 
 `{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
 
@@ -318,7 +318,6 @@ Or create an **@-mention** that goes directly to a specific email:
 
 * `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
-
 [1]: http://slack.com/account/settings
 [2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
@@ -331,7 +330,6 @@ After setting up the [PagerDuty integration][1], type `@pagerduty` in your notif
 {{% tab "Webhooks" %}}
 
 After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
-
 
 [1]: /integrations/webhooks
 {{% /tab %}}
@@ -358,6 +356,7 @@ After you define your monitor, test what your monitor's notification would look 
   {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
 
 ## Advanced notification configuration
+
 ### Include links to appropriate dashboards
 
 Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.

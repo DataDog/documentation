@@ -34,7 +34,6 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 **Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][3]. If you're using Docker, [enable log collection for the containerized Agent][4].
 
-
 ## Enabling log collection from integrations
 
 To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment.
@@ -71,7 +70,6 @@ logs:
 ```
 
 **Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
-
 
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
@@ -147,7 +145,6 @@ Set the corresponding `source` parameter to the same channel name to benefit fro
 
 Finally, [restart the Agent][2].
 
-
 [1]: /logs/processing/pipelines/#integration-pipelines
 [2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
@@ -219,7 +216,7 @@ logs_config:
   batch_wait: 2
 ```
 
-Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable. 
+Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable.
 The value is in seconds and must be an integer between 1 and 10.
 
 **HTTPS Proxy configuration**
@@ -229,7 +226,6 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/guide/agent-configuration-files
@@ -241,4 +237,3 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
 [10]: /agent/proxy
-[11]: /agent/basic_agent_usage/#agent-overhead

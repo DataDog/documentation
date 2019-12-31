@@ -33,7 +33,6 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 4. Choose your display preference by selecting a timeframe and the number of column to display your graphs across.
 5. Enter a title for your graph.
 
-
 ## API
 
 The dedicated [widget JSON schema definition][2] for the service summary widget is:

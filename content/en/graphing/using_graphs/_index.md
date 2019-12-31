@@ -27,6 +27,7 @@ When you first open the graph editor, you are on the **Edit** tab. Here, you can
 {{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
 
 ## Configuring a graph
+
 To configure your graph on dashboards, follow this process:
 
 1. [Select the visualization](#select-your-visualization)
@@ -49,6 +50,7 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. To learn more about tags, refer to the [Tagging][6] documentation.
 
 ### Aggregate and rollup
+
 #### Aggregation method
 
 Aggregation method is next to the filter dropdown. This defaults to `avg by` but you can change the method to `max by`, `min by`, or `sum by`. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line.
@@ -92,6 +94,7 @@ Modify the displayed value of a metric on a graph by performing an arithmetic op
 #### Arithmetic between two metrics
 
 Visualize the percentage of a metric by dividing one metric over another, for example:
+
 ```
 jvm.heap_memory / jvm.heap_memory_max
 ```
@@ -108,13 +111,14 @@ To display only the formula on your graph, click on the check marks next to the 
 
 ### Create a title
 
-If you do not enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph. 
+If you do not enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph.
 
 ### Save
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
 
 ## Additional options
+
 ### Event overlays
 
 View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][10].

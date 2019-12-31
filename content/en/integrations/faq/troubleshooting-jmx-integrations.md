@@ -22,7 +22,6 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
 
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][2] a copy of the results from above along with the following information:
 
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -30,7 +29,6 @@ If you're able to connect using the command above, run: `beans` and send to the 
 * Output of the [info command][1]
 * Output of: `ps aux | grep jmxfetch`
 * A copy of the YAML integration (send the file)
-
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
@@ -44,7 +42,6 @@ If you're able to connect using the command above, run: `beans` and send to the 
 * A copy of the YAML integration.
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
-
 
 [1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 [2]: /agent/guide/agent-commands/#agent-status-and-information
@@ -250,7 +247,6 @@ instances:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help

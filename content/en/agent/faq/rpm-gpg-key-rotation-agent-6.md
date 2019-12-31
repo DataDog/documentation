@@ -25,7 +25,6 @@ If you're using the latest version for one of the following officially supported
 
 * [SaltStack formula][6]
 
-
 ## How to check if a host trusts the new GPG key
 
 To check that a particular host does trust the new key, run this command on the host:

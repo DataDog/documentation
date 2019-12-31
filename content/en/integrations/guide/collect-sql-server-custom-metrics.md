@@ -182,7 +182,6 @@ You can also specify:
 | `proc_only_if`            | Run this SQL before each call to `stored_procedure`. If it returns 1, call the procedure. |                    |
 | `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                                | database attribute |
 
-
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
 ### Troubleshooting

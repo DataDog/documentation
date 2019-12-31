@@ -9,8 +9,7 @@ kind: documentation
 | :----             | :-------                              | :---------                        |
 | `count_nonzero()` | Compute count of all non-zero values. | `count_nonzero(<METRIC_NAME>{*})` |
 
-
-For a query grouped by one or more [tag keys][1], count the number of tag values with non-zero metric values at each point. 
+For a query grouped by one or more [tag keys][1], count the number of tag values with non-zero metric values at each point.
 
 Example: `count_nonzero(system.cpu.user{*} by {host})` returns a timeseries representing the number of hosts with non-zero system load at each point.
 

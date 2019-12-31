@@ -45,7 +45,6 @@ Additionally, some configuration options may be set as environment variables.
 
 After configuration is complete, [restart the Agent][2].
 
-
 [1]: /agent/guide/agent-configuration-files/
 [2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -62,7 +61,6 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 * To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
 * Running the Agent as a container still allows you to collect host processes.
-
 
 [1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -87,7 +85,6 @@ In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the followi
 Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
-
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
@@ -148,7 +145,6 @@ To combine multiple string searches into a complex query, use any of the followi
 | `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
-
 
 ### Tagging
 

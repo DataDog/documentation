@@ -21,13 +21,12 @@ The table visualization is available on timeboards and screenboards. It displays
 {{< img src="graphing/widgets/table/table_widget.png" alt="Table widget" responsive="true" style="width:80%;">}}
 
 ## Setup
+
 ### Configuration
 
 * Choose the data to graph (add additional columns as needed):
-
-    * Metric: See the [main graphing documentation][1] to configure a metric query.
-    * Log Events: See the [log search documentation][2] to configure a log event query.
-
+  * Metric: See the [main graphing documentation][1] to configure a metric query.
+  * Log Events: See the [log search documentation][2] to configure a log event query.
 * You can rename column headers by setting metric aliases.
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose a limit for the number results (defaults to 10).

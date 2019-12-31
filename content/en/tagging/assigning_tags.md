@@ -14,12 +14,15 @@ further_reading:
 ---
 
 ## Overview
+
 Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][1] in Datadog before going further.
 
 There are several places tags can be assigned: [configuration files](#configuration-files), [environment variables][2], your [traces](#traces), the Datadog [UI](#ui), [API][3], [DogStatsD][4], and inheriting from the [integrations][5]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
 
 ## Configuration Files
+
 ### Hostname
+
 The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
@@ -95,6 +98,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the format:
+
 ```text
 {"foo", "bar_%%label%%"}
 ```
@@ -102,6 +106,7 @@ When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the form
 For example, `{"app*", "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*", "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
 
 When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
+
 ```shell
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
@@ -115,7 +120,8 @@ After the Agent extracts the labels from the container the tags are:
 `versiontag:1`
 
 **Sample docker-compose.yaml:**
-```shell
+
+```yaml
 services:
   datadog:
     volumes:
@@ -226,7 +232,6 @@ Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (hos
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
 
-
 [1]: /graphing/infrastructure/hostmap
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
@@ -234,7 +239,6 @@ Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (hos
 Assign host tags in the UI via the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
-
 
 [1]: /graphing/infrastructure
 {{% /tab %}}
@@ -248,14 +252,13 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
-
 [1]: /monitors/manage_monitor
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
 Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric -  this creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
-** Apply up to ten tags. Exclusionary tags will not be accepted **:
+**Apply up to ten tags. Exclusionary tags will not be accepted**:
 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
@@ -268,7 +271,6 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
 
-
 [1]: /integrations/amazon_web_services
 {{% /tab %}}
 {{< /tabs >}}
@@ -280,14 +282,13 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 Tags can be assigned in various ways with the [Datadog API][1]. See the list below for links to those sections:
 
-- [Post a check run][2]
-- [Post an event][3]
-- [AWS Integration][4]
-- [Post timeseries point][5]
-- [Create][6] or [Edit][7] a monitor
-- [Add][8] or [Update][9] host tags
-- [Send traces][10]
-
+* [Post a check run][2]
+* [Post an event][3]
+* [AWS Integration][4]
+* [Post timeseries point][5]
+* [Create][6] or [Edit][7] a monitor
+* [Add][8] or [Update][9] host tags
+* [Send traces][10]
 
 [1]: /api
 [2]: /api/?lang=python#post-a-check-run

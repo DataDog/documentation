@@ -11,10 +11,10 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang
 
 The Timeboard endpoint allows you to programmatically create, update delete and query Timeboards. [Find more about Timeboard][1].
 
-
 ## Create a Timeboard
 
 ### Signature
+
 `POST https://api.datadoghq.com/api/v1/dash`
 
 ### Arguments
@@ -156,7 +156,9 @@ curl  -X POST -H "Content-type: application/json" \
 {{< /tabs >}}
 
 ## Update a Timeboard
+
 ### Signature
+
 `PUT https://api.datadoghq.com/api/v1/dash/<TIMEBOARD_ID>`
 
 ### Arguments
@@ -183,7 +185,6 @@ curl  -X POST -H "Content-type: application/json" \
 
     * **`default`** [*optional*, *default*=**None**]:
     The default value for the template variable on dashboard load.
-
 
 ### Examples
 
@@ -311,14 +312,16 @@ curl  -X PUT -H "Content-type: application/json" \
 {{< /tabs >}}
 
 ## Delete a Timeboard
+
 Delete an existing [timeboard][1].
 *This end point takes no JSON arguments.*
 
-
 ### Signature
+
 `DELETE https://api.datadoghq.com/api/v1/dash/<TIMEBOARD_ID>`
 
 ### Arguments
+
 *This end point takes no JSON arguments.*
 
 ### Examples
@@ -417,12 +420,15 @@ curl -X DELETE "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_k
 {{< /tabs >}}
 
 ## Get a Timeboard
+
 Fetch an existing dashboard's definition.
 
 ### Signature
+
 `GET https://api.datadoghq.com/api/v1/dash/<TIMEBOARD_ID>`
 
 ### Arguments
+
 *This end point takes no JSON arguments.*
 
 ### Examples
@@ -497,12 +503,15 @@ curl "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&applic
 {{< /tabs >}}
 
 ## Get all Timeboards
+
 Fetch all of your [timeboard][1]' definitions.
 
 ### Signature
+
 `GET https://api.datadoghq.com/api/v1/dash`
 
 ### Arguments
+
 *This end point takes no JSON arguments.*
 
 ### Examples

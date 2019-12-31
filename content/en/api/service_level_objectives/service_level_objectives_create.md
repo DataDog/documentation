@@ -63,6 +63,5 @@ There is one type of event based SLO, a metric query. For more information, see 
     * **`denominator`** [*required*]:
         Defines the sum of the `total` events. **Note: this should always be >= `good` events**
 
-
 [1]: /monitors/service_level_objectives/monitor
 [2]: /monitors/service_level_objectives/event

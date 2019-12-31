@@ -136,7 +136,6 @@ Check Datadog lambda configuration parameter:
 
 * `<API_KEY>` : Should be set with your [Datadog API key][11] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
-
 #### The lambda function is triggered
 
 Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
@@ -148,7 +147,6 @@ Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs
 [2]: /help

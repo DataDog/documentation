@@ -24,6 +24,7 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 {{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
 ## Installation
+
 After deploying the [Docker Agent][5], container metrics are available without additional configuration. To enable log collection follow these steps:
 
 {{< tabs >}}
@@ -31,7 +32,7 @@ After deploying the [Docker Agent][5], container metrics are available without a
 {{% tab "Linux/Windows" %}}
 Once the [Datadog Agent][1] is installed, enable log collection by editing the [Agent main configuration file][2] and updating the following parameters:
 
-```
+```yaml
 logs_enabled: true
 listeners:
   - name: docker
@@ -39,11 +40,11 @@ config_providers:
   - name: docker
     polling: true
 ```
+
 **Notes**:
 
 * To collect container information in the standard install rather than with the [Docker Agent][1], the `dd-agent` user must have permissions to access **docker.sock**.
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
-
 
 [1]: /agent/docker/log/?tab=hostinstallation
 [2]: /agent/guide/agent-configuration-files/
@@ -53,7 +54,7 @@ config_providers:
 
 Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
 
-```
+```shell
 -e DD_LOGS_ENABLED=true
 -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
 ```
@@ -67,7 +68,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 {{% tab "Kubernetes" %}}
 In the `dd-agent.yaml` manifest used to create the [DaemonSet][1], add the following environment variables, volume mount, and volume:
 
-```
+```yaml
   env:
     - name: DD_LOGS_ENABLED
         value: "true"
@@ -101,6 +102,7 @@ For more information about activating log integrations, see the [ Log collection
 View streaming logs for any container like `docker logs -f` or `kubectl logs -f`—in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][7] or indexed logs for any time in the past.
 
 ### Live Tail
+
 With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; un-pause to continue streaming.
 
 Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][7].
@@ -124,14 +126,13 @@ Containers are, by their nature, extremely high cardinality objects. Datadog's f
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
 |              |                                                                                                                                  |                                                                 |
-| :----        | :----                                                                                                                            | :----                                                           |
+|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
 | **Operator** | **Description**                                                                                                                  | **Example**                                                     |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
 | `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
 | `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python`.
-
 
 ### Tagging
 
@@ -141,9 +142,9 @@ All containers are tagged by `image_name`, including integrations with popular o
 
 ECS containers are tagged by:
 
-*  `task_name`
-*  `task_version`
-*  `ecs_cluster`
+* `task_name`
+* `task_version`
+* `ecs_cluster`
 
 Kubernetes containers are tagged by:
 
@@ -189,7 +190,6 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 {{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
 
-
 ## Real-time monitoring
 
 While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
@@ -200,14 +200,14 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 It is possible to include and/or exclude containers from real-time collection:
 
-- Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
-- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
+* Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
+* Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value; regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
-```
+```shell
 ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
@@ -216,19 +216,14 @@ ac_include: ["name:frontend.*"]
 
 ## Notes/known issues
 
-- This feature does not support Windows containers at this time.
-
-- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-
-- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][9].
-
-- In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
-
+* This feature does not support Windows containers at this time.
+* Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
+* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][9].
+* In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/containers
 [2]: /integrations/docker_daemon

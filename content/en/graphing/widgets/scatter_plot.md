@@ -89,7 +89,6 @@ Additional properties allowed in the `request` object:
 | ------       | ----- | -------- | ----                                                                                         |
 | `aggregator` | string  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

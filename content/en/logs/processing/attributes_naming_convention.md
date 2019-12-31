@@ -205,7 +205,6 @@ Performance metrics attributes.
 |:-------------|:---------|:--------------------------------------------------------------------------------------------------|
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
-
 Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][13] for [trace search][14].
 
 ### User related attributes
@@ -248,7 +247,6 @@ All attributes and measures are prefixed by `dns`.
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
-
 
 ## Further Reading
 

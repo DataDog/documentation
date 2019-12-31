@@ -50,7 +50,6 @@ IMAGE_SCHEMA = {
 |`sizing`|string|no|How to size the image on the widget. Available values are: `zoom`, `fit` or `center`
 |`margin`|string|no|Size of the margins around the image. Available values are: `small` or `large`
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

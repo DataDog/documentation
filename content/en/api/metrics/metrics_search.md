@@ -6,8 +6,8 @@ external_redirect: /api/#search-metrics
 ---
 
 ## Search metrics
-This endpoint allows you to search for metrics from the last 24 hours in Datadog.
 
+This endpoint allows you to search for metrics from the last 24 hours in Datadog.
 
 **ARGUMENTS**:
 

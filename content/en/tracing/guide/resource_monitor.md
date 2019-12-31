@@ -35,7 +35,6 @@ Then the Monitor configuration would resemble the following:
 
 {{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor" responsive="true" >}}
 
-
 [1]: /tracing/visualization/service
 [2]: /tracing/visualization/resource
 [3]: /tracing/visualization/#services

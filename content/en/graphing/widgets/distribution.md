@@ -29,6 +29,7 @@ Configure your metric query as usual. Note that this visualization type is usefu
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
+
 #### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
@@ -72,13 +73,12 @@ DISTIBUTION_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                                 |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
-| `show_legend` | boolean | no | (screenboard only) Show the legend for this widget |
-
+| Parameter     | Type             | Required | Description                                                                                                                                                  |
+|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string           | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                              |
+| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`       | string           | no       | Title of your widget.                                                                                                                                        |
+| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                           |
 
 Additional properties allowed the `request` object:
 
@@ -95,9 +95,8 @@ Additional properties allowed the `request` object:
 ```
 
 | Parameter       | Type   | Required | Description                           |
-| ------          | -----  | -------- | ----                                  |
+|-----------------|--------|----------|---------------------------------------|
 | `style.palette` | string | no       | Color palette to apply to the widget. |
-
 
 
 ## Further Reading

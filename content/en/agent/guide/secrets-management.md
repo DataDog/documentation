@@ -98,7 +98,6 @@ secret_backend_command: <EXECUTABLE_PATH>
 
 The Agent runs the `secret_backend_command` executable as a sub-process. The execution patterns differ on Linux and Windows.
 
-
 {{< tabs >}}
 {{% tab "Linux" %}}
 
@@ -268,7 +267,6 @@ Check Rights: OK, the executable has the correct rights
 Rights Detail:
 Acl list:
 stdout:
-
 
 Path   : Microsoft.PowerShell.Core\FileSystem::C:\path\to\you\executable.exe
 Owner  : BUILTIN\Administrators

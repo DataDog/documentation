@@ -68,7 +68,7 @@ This section describe the minimum setup required in order to forward your Rails 
     # This specifies to log in JSON format
     config.lograge.formatter = Lograge::Formatters::Json.new
 
-    ## Disables log collocration
+    ## Disables log coloration
     config.colorize_logging = false
 
     # Log to a dedicated file

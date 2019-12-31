@@ -44,7 +44,6 @@ This installs the Agent in `/opt/datadog-agent`.
 
 Note: Agent installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
 
-
 ## Commands
 
 | Description                        | Command (as root)                   |

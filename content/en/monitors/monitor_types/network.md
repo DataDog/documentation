@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation. 
+Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation.
 
 ## Monitor creation
 
@@ -83,7 +83,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
-## Further Reading 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check

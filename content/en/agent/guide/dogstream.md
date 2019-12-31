@@ -243,7 +243,6 @@ Note that whenever you make a change to your custom log-parser, [restart the Age
 
 If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support][10], but do first set the Agent's log-level at "DEBUG", run the Agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command][11] from your Agent. That gives to the support team the information needed to effectively troubleshoot the issue.
 
-
 [1]: https://app.datadoghq.com/infrastructure#tags
 [2]: /api/#tags
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py

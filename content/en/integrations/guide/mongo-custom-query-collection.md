@@ -58,7 +58,6 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 **Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 
-
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /developers/metrics/types
 {{% /tab %}}

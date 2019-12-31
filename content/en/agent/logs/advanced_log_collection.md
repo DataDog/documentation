@@ -118,7 +118,6 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
 ```
 
-
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 

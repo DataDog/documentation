@@ -116,7 +116,6 @@ With `.fill(last,900)`, the new result is:
 | :------------------ | :-------------------------------------------- | :----- |
 | `classic_eval_path` | **(1)/1 + 1/1 + 0/1 + 0/1 + 1/1 + 1/1 + 1/1** | 5      |
 
-
 [Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
 [1]: /help

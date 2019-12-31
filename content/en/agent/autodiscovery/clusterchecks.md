@@ -26,7 +26,6 @@ Metrics, Events and Service Checks collected by Cluster Checks will be submitted
 
 This feature is currently supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
-
 ## How to set it up
 
 ### Cluster Agent setup
@@ -50,7 +49,6 @@ The following two configuration sources are currently supported. [They are descr
 Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
 Refer to [the dedicated Cluster Checks Autodiscovery guide][5] for more configuration and troubleshooting details on this feature.
-
 
 ### Agent setup
 

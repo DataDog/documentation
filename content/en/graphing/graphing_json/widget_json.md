@@ -110,7 +110,6 @@ MARKERS_SCHEMA = {
 | `display_type` | string | Combination of: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |
 | `label`        | string | Label to display over the marker.                                                                                          |
 
-
 ### Example:
 
 The following markers:
@@ -224,7 +223,6 @@ For instance, to indicate that you want a 10-minute timeframe, use the following
   "live_span": "10m"
 }
 ```
-
 
 ## Further Reading
 

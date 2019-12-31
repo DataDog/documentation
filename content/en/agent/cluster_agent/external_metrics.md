@@ -34,6 +34,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 2. Having the aggregation layer enabled. Refer to the [Kubernetes aggregation layer configuration documentation][3].
 
 ## Set up the Cluster Agent external metric server
+
 ### Custom metrics server
 
 To enable the Custom Metrics Server, follow the instructions to [set up the Datadog Cluster Agent][4], but when editing the deployment manifest of the Datadog Cluster Agent in [Step 3 - Create the Cluster Agent and its service][5], follow those extra steps:

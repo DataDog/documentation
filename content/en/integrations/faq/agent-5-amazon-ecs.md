@@ -10,7 +10,9 @@ This documentation is to setup AWS EC2 container Service with <strong>Datadog Ag
 </div>
 
 ## Setup
+
 ### Installation
+
 To monitor your ECS containers and tasks with Datadog, run the Agent as a container on every EC2 instance in your ECS cluster. As detailed below, there are a few setup steps:
 
 1. **Add an ECS Task**
@@ -31,7 +33,7 @@ You may either configure the task using the [AWS CLI tools][2] or using the Amaz
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][5] for your account.
 3. Execute the following command:
 
-```
+```shell
 Amazon Elastic Container Service register-task-definition --cli-input-json file:<PATH_TO_JSON_DD_AGENT_ECS>.json
 ```
 

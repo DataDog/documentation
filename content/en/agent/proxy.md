@@ -110,7 +110,6 @@ proxy_password: my_password
 
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
-
 [1]: /agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
@@ -124,6 +123,7 @@ This is the best option if you do not have a web proxy readily available in your
 `agent ---> haproxy ---> Datadog`
 
 ### Proxy metric forwarding with HAProxy
+
 #### HAProxy configuration
 
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
@@ -131,7 +131,7 @@ HAProxy should be installed on a host that has connectivity to Datadog. Use the 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 
-```
+```conf
 # Basic configuration
 global
     log 127.0.0.1 local0
@@ -225,7 +225,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-```
+```conf
 # Basic configuration
 global
     log 127.0.0.1 local0
@@ -333,7 +333,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 To send traces or processes through the proxy, setup the following in the `datadog.yaml` file:
 
-```
+```yaml
 apm_config:
     apm_dd_url: https://haproxy.example.com:3835
 
@@ -343,7 +343,7 @@ process_config:
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
 
-```
+```yaml
 skip_ssl_validation: true
 ```
 
@@ -363,7 +363,7 @@ This `dd_url` setting can be found in the `datadog.conf` file.
 
 To send traces or processes through the proxy, setup the following in the `datadog.conf` file:
 
-```
+```conf
 [trace.api]
 endpoint = https://haproxy.example.com:3835
 
@@ -387,14 +387,13 @@ sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
 
 For the Windows Agent, edit your configuration file `datadog.conf` and add this option:
 
-```
+```conf
 skip_ssl_validation: yes
 ```
 
 Finally [restart the Agent][1].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
-
 
 [1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
@@ -408,6 +407,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 `agent ---> nginx ---> Datadog`
 
 ### Proxy forwarding with NGINX
+
 #### NGINX configuration
 
 This example `nginx.conf` can be used to proxy logs to the Datadog intake. It does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
@@ -415,7 +415,7 @@ This example `nginx.conf` can be used to proxy logs to the Datadog intake. It do
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 
-```
+```conf
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
@@ -438,7 +438,7 @@ stream {
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-```
+```conf
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;

@@ -28,6 +28,7 @@ further_reading:
 Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages.
 
 ## Setup
+
 ### Installation
 
 [Install the agent][1] on the instance that runs Adobe Experience Manager.

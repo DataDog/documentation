@@ -54,7 +54,6 @@ SERVICEMAP_SCHEMA = {
 | filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).    |
 | title     | string | no       | The title of your widget.                                         |
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

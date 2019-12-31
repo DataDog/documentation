@@ -34,6 +34,7 @@ There are a number of common issues that can get in the way when sending new con
 4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#if-the-logs-agent-status-shows-no-errors)
 
 ## The Logs Agent shows "not running" in its status
+
 If you see the following message when you run the Agent Status command:
 
 ```
@@ -49,6 +50,7 @@ This means that you did not enable logging in the Agent.
 To enable logging for the Container Agent, set the following environment variable: `DD_LOGS_ENABLED=true`.
 
 ## The Logs Agent shows no logs processed or sent
+
 If the Logs Agent Status shows no integrations and you see `LogsProcessed: 0 and LogsSent: 0`:
 
 ```
@@ -101,6 +103,7 @@ In order for the Container Agent to collect logs from Docker containers, it need
 Relaunch the Agent container with the following option: `-v /var/run/docker.sock:/var/run/docker.sock:ro` to allow access to the Docker socket.
 
 ### (Host Agent only) the "dd-agent" user is not part of the Docker group
+
 If you're using the Host Agent, the user `dd-agent` needs to be added to the Docker group in order to have permission to read from the Docker socket. If you see the following error logs in the `agent.log` file:
 
 ```
@@ -112,6 +115,7 @@ If you're using the Host Agent, the user `dd-agent` needs to be added to the Doc
  To add the host Agent to the Docker user group, perform the following command: `usermod -a -G docker dd-agent`.
 
 ## If the Logs Agent Status shows no errors
+
 If the Logs Agent Status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
 * The required port (10516) for sending logs to Datadog is being blocked.
@@ -135,6 +139,7 @@ And then by sending a log like the following:
 If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
 
 ### Your containers are not using the JSON logging driver
+
 Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.
 
 1. If you're unsure of which logging driver your containers are using, use `docker inspect <container-name>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:

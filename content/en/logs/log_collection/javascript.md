@@ -21,7 +21,6 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-
 Send logs to Datadog from web browsers or other Javascript clients thanks to Datadog's `datadog-logs` client-side JavaScript logging library.
 
 With the `datadog-logs` library, you can send logs directly to Datadog from JS clients and leverage the following features:
@@ -211,7 +210,6 @@ if (window.DD_LOGS) {
 ```
 
 **Example:**
-
 
 Assume that there is a signup logger, defined with all the other loggers:
 

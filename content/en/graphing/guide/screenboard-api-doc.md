@@ -11,10 +11,10 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang
 
 The Screenboard endpoint allows you to programmatically create, update, delete, and query Screenboards. [Read more about Screenboards][1].
 
-
 ## Create a Screenboard
 
 ### Signature
+
 `POST https://api.datadoghq.com/api/v1/screen`
 
 ### Arguments
@@ -131,7 +131,9 @@ curl -X POST -H "Content-type: application/json" \
 {{< /tabs >}}
 
 ## Update a Screenboard
+
 ### Signature
+
 `PUT https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 ### Arguments
@@ -247,21 +249,22 @@ curl -X PUT -H "Content-type: application/json" \
 }' \
 "https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 
-
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Delete a Screenboard
+
 Delete an existing [Screenboard][1].
 *This endpoint takes no JSON arguments.*
 
-
 ### Signature
+
 `DELETE https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 ### Arguments
+
 *This endpoint takes no JSON arguments.*
 
 ### Examples
@@ -334,12 +337,15 @@ curl -X DELETE \
 {{< /tabs >}}
 
 ## Get a Screenboard
+
 Fetch an existing Screenboard's definition.
 
 ### Signature
+
 `GET https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 ### Arguments
+
 *This endpoint takes no JSON arguments.*
 
 ### Examples
@@ -411,12 +417,15 @@ curl -X GET \
 {{< /tabs >}}
 
 ## Get all Screenboards
+
 Fetch all of your [Screenboards][1]' definitions.
 
 ### Signature
+
 `GET https://api.datadoghq.com/api/v1/screen`
 
 ### Arguments
+
 *This endpoint takes no JSON arguments.*
 
 ### Examples

@@ -33,6 +33,7 @@ Datadog recommends using the OpenMetrics check since it is more efficient and fu
 For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section.
 
 ## Setup
+
 ### Installation
 
 [Install the Datadog Agent for your corresponding operating system][6]. OpenMetrics and Prometheus checks are included in the [Datadog Agent][7] package, so you don't need to install anything else on your containers or hosts.

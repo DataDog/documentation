@@ -31,6 +31,7 @@ For configuration purposes, a composite monitor is independent of its constituen
 To create a [composite monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Composite*.
 
 ### Select monitors and set triggering conditions
+
 #### Select monitors
 
 Choose up to 10 individual monitors to use in a composite monitor. Monitors can be of different alert types (simple alerts, multi-alerts, or a combination of the two). No individual monitor may itself be a composite monitor. After you choose your first monitor, the UI shows its alert type and current status.
@@ -177,6 +178,7 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 Use your best judgment to choose multi-alert monitors that makes sense together.
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite

@@ -188,7 +188,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-There is a default log4j2 JSON Layout that can be used. Add the following Appender to your `log4j2.xml` file: 
+There is a default log4j2 JSON Layout that can be used. Add the following Appender to your `log4j2.xml` file:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -219,7 +219,6 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
     <artifactId>support</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
@@ -227,7 +226,6 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
             <artifactId>log4j-core</artifactId>
             <version>2.7</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -248,7 +246,6 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
         </dependency>
 
     </dependencies>
-
 
 </project>
 ```
@@ -352,7 +349,7 @@ Logging to a remote server in JSON may be difficult with Log4j. It is recommende
 To use `log4j-over-slf4j` in your own application, the first step is to find-and-replace `log4j.jar` with `log4j-over-slf4j.jar`.
 In most situations, replacing a JAR file is all it takes in order to migrate from Log4j to SLF4J.
 
-Then, edit the `pom.xml` file with the following content: 
+Then, edit the `pom.xml` file with the following content:
 
 ```xml
 <dependency>
@@ -385,7 +382,7 @@ Log4j2 allows logging to a remote host, but it does not offer the ability to pre
 
 To use `log4j-over-slf4j` in your own application, the first step is to find-and-replace `log4j.jar` with `log4j-to-slf4j-2.11.jar`.
 
-Then, edit the `pom.xml` file with the following content: 
+Then, edit the `pom.xml` file with the following content:
 
 ```xml
 <dependency>
@@ -407,7 +404,7 @@ Then, edit the `pom.xml` file with the following content:
 </dependency>
 ```
 
-**notes:** 
+**notes:**
 
 - Make sure that `log4j-slf4j-impl-2.0.jar` is **not** used as explained here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
 - As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
@@ -455,10 +452,10 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
         <layout class="ch.qos.logback.classic.PatternLayout">
           <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
         </layout>
-      </prefix>    
+      </prefix>
 	</encoder>
 </appender>
- 
+
 <root level="debug">
 	<appender-ref ref="JSON_TCP" />
 	<appender-ref ref="JSON" />
@@ -472,7 +469,6 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 - See the list of [available endpoints for the EU site][5]
 
 More information available on the prefix parameter in the [Logback documentation][4].
-
 
 ## Getting further
 

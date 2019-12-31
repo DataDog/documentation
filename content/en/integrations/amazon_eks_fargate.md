@@ -75,7 +75,6 @@ To collect data from your applications running in AWS EKS Fargate over a Fargate
 
 Use the following Agent RBAC when deploying the Agent as a sidecar in AWS EKS Fargate:
 
-
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -226,7 +225,6 @@ spec:
 ​
 **Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][3].
 
-
 [1]: /agent/autodiscovery/integrations
 [2]: /integrations/#cat-autodiscovery
 [3]: https://app.datadoghq.com/account/settings#api
@@ -288,7 +286,6 @@ spec:
 ```
 ​
 **Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][2].
-
 
 [1]: /developers/dogstatsd
 [2]: https://app.datadoghq.com/account/settings#api

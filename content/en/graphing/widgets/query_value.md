@@ -32,6 +32,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 3. Optional: configure a conditional format depending on the value displayed.
 
 ### Options
+
 #### Global time
 
 On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
@@ -72,14 +73,13 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type             | Required | Description                                                                                                                                                  |
 |---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                 |
+| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                |
 | `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `autoscale`   | Boolean          | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string           | no       | Display a unit of your choice on the widget.                                                                                                                 |
 | `precision`   | integer          | no       | Number of decimals to show. If not defined, the widget uses the raw value.                                                                                   |
 | `text_align`  | string           | no       | How to align the value in the widget; values available are `center`, `left`, or `right`.                                                                     |
 | `title`       | string           | no       | Title of your widget.                                                                                                                                        |
-
 
 Additional properties allowed in the `request` object:
 

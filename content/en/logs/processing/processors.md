@@ -31,7 +31,6 @@ Define the Grok processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
 
-
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
@@ -61,7 +60,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
 | `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
-| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               | 
+| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               |
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
@@ -260,7 +259,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Re
 | `name`       | String           | no       | Name of the processor.                                |
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources`    | Array of Strings | yes      | Array of source attributes, default: `msg`            |
-
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -492,7 +490,6 @@ Define the Arithmetic Processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor" responsive="true" style="width:80%;">}}
 
-
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
@@ -519,7 +516,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic pro
 | `target`             | String  | yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                 |
 | `is_replace_missing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
 
-
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
@@ -537,7 +533,6 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If the target attribute already exists, it is overwritten by the result of the template.
 * Results of the template cannot exceed 256 characters.
-
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -577,7 +572,7 @@ You can use the template: `Request %{http.method} %{http.url} was answered with 
 Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**Objects** 
+**Objects**
 
 In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
 
@@ -621,7 +616,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 | `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                           |
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                             |
 | `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
-
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -675,7 +669,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 ## Lookup Processor
 
 Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
-For example, you can use the Lookup Processor to map an internal service ID into a human readable service name. 
+For example, you can use the Lookup Processor to map an internal service ID into a human readable service name.
 Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
@@ -724,7 +718,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Trace Remapper
 

@@ -21,6 +21,7 @@ further_reading:
 Shared graphs and screenboards allow you to display metric, trace, and log visualizations outside of Datadog.
 
 ## Graphs
+
 ### Share
 
 To share a graph from a [Timeboard][1] or [Screenboard][2]:
@@ -43,6 +44,7 @@ To revoke the keys used to share individual (embedded) graphs:
 3. The graph is moved to the **Revoked** list.
 
 ## Screenboards
+
 ### Share
 
 Share an entire screenboard by generating a public URL:
@@ -84,12 +86,11 @@ Datadog has a [dedicated API][9] allowing you to interact with your shared graph
 
 | Endpoint                 | Description                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [Get all embeds][10]      | Get a list of previously created embeddable graphs.                     |
+| [Get all embeds][10]     | Get a list of previously created embeddable graphs.                     |
 | [Create embed][11]       | Creates a new embeddable graph.                                         |
 | [Get specific embed][12] | Get the HTML fragment for a previously generated embed with `embed_id`. |
 | [Enable embed][13]       | Enable the specified embed.                                             |
 | [Revoke embed][14]       | Revoke the specified embed.                                             |
-
 
 ## Further Reading
 

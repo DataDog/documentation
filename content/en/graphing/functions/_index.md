@@ -178,7 +178,6 @@ Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 More information in [this blog post][9].
 Documentation about [StatsD/DogStatsD][10].
 
-
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
 [3]: /agent

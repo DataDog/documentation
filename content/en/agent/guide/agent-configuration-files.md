@@ -27,7 +27,6 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
 | Windows Server 2003, XP or older     | *unsupported platform*               |
 
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

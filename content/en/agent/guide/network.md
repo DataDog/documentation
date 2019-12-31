@@ -100,7 +100,6 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
   * `8126/tcp`: port for the [APM Receiver][6]
 
-
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /logs
 [3]: /agent/basic_agent_usage/kubernetes
@@ -127,12 +126,10 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
   * `17124/tcp`: optional graphite adapter
 
-
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /tracing
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Using Proxies
 

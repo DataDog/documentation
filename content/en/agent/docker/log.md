@@ -67,7 +67,6 @@ The commands related to log collection are:
 | `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics.                    |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                    |
 
-
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
 {{% /tab %}}
@@ -89,7 +88,6 @@ logs_config:
 ```
 
 [Restart the Agent][3] to see all your container logs in Datadog.
-
 
 [1]: /agent/basic_agent_usage
 [2]: /agent/logs/#custom-log-collection
@@ -189,7 +187,6 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
   ```
 See the [multi-line processing rule documentation][1] to get more pattern examples.
 
-
 [1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -220,7 +217,6 @@ spec:
 ```
 
 Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
-
 
 [1]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 {{% /tab %}}

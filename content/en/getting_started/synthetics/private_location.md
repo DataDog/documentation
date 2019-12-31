@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only. 
+This feature is in public beta and available for API Tests only.
 </div>
 
 ## Overview
@@ -56,8 +56,8 @@ Once you create a private location, the process of configuring a [Synthetics API
 
     You will also see private location logs populating similar to this example:
     ```
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
     2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
     ```
 
@@ -74,7 +74,6 @@ For a more advanced setup, use the command and see `Learn more about Private Loc
 ```
 docker run --rm datadog/synthetics-private-location-worker --help and check
 ```
-
 
 {{< whatsnext desc="After you set up your private location:">}}
     {{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}

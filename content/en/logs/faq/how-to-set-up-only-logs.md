@@ -37,7 +37,6 @@ DD_ENABLE_PAYLOADS_SKETCHES
 ```
 
 
-
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection
 [3]: /agent/guide/agent-commands/#restart-the-agent

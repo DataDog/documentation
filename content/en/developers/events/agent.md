@@ -44,7 +44,6 @@ The following keys and data types are available in the event dictionary:
 | `tags`             | List of strings | No       | A list of tags associated with this event.                    |
 | `priority`         | String          | No       | Specifies the priority of the event (`normal` or `low`).      |
 
-
 ### Example
 
 This is an example of using a custom Agent check to send one event periodically. See [Writing a Custom Agent Check][2] for more details.

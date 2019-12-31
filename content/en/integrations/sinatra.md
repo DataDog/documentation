@@ -22,12 +22,13 @@ supported_os:
 
 This integration enables you to get web access logging from your [Sinatra][1] applications in order to monitor:
 
-- Errors logs (4xx codes, 5xx codes)
-- Web pages response time
-- Number of requests
-- Number of bytes exchanged
+* Errors logs (4xx codes, 5xx codes)
+* Web pages response time
+* Number of requests
+* Number of bytes exchanged
 
 ## Setup
+
 ### Installation
 
 [Install the Agent][2] on the instance that runs your Sinatra application.

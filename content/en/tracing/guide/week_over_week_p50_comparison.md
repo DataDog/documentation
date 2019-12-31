@@ -21,7 +21,6 @@ further_reading:
 ---
 _2 minutes to complete_
 
-
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparaison video" video="true" responsive="true" style="width:90%;">}}
 
 Datadog can show you the latency of your application over time and how it compares to similar moments in previous time frames such as week, month, etc. This example shows a web server for an e-commerce platform and monitors the latency performance for the server has  seen over the past month.
@@ -52,7 +51,6 @@ Datadog can show you the latency of your application over time and how it compar
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: /tracing/visualization/#services

@@ -20,7 +20,6 @@ To install from source:
 1. Clone the [DataDog/datadogpy][1] repository.
 2. Inside the root folder, run `python setup.py install`.
 
-
 The minimum valid `dogwrap` command has the following layout:
 
 ```bash

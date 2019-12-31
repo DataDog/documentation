@@ -51,7 +51,6 @@ If you also want to remove these elements, use this command instead:
 sudo apt-get --purge remove datadog-agent -y
 ```
 
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -141,7 +140,6 @@ This method removes the Agent, as well as all Agent configuration files.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
-
 
 1. Stop and close the Datadog Agent via the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.

@@ -33,7 +33,6 @@ List of commands to start the Datadog Agent:
 | Source     | `sudo service datadog-agent start`                             |
 | Windows    | [See the dedicated Windows documentation][2]                   |
 
-
 [1]: /agent/docker
 [2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
@@ -46,7 +45,6 @@ List of commands to start the Datadog Agent:
 | macOS    | `/usr/local/bin/datadog-agent start`         |
 | Source   | `sudo ~/.datadog-agent/bin/agent start`      |
 | Windows  | [See the dedicated Windows documentation][2] |
-
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows
@@ -69,7 +67,6 @@ List of commands to stop the Datadog Agent:
 | Source     | `sudo service datadog-agent stop`                             |
 | Windows    | [See the dedicated Windows documentation][2]                  |
 
-
 [1]: /agent/docker
 [2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
@@ -82,7 +79,6 @@ List of commands to stop the Datadog Agent:
 | macOS    | `/usr/local/bin/datadog-agent stop`          |
 | Source   | `sudo ~/.datadog-agent/bin/agent stop`       |
 | Windows  | [See the dedicated Windows documentation][2] |
-
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows
@@ -104,7 +100,6 @@ List of commands to restart the Datadog Agent:
 | Source   | *unsupported Platform*                            |
 | Windows  | [See the dedicated Windows documentation][2]      |
 
-
 [1]: /agent/docker
 [2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
@@ -117,7 +112,6 @@ List of commands to restart the Datadog Agent:
 | macOS    | `/usr/local/bin/datadog-agent restart`       |
 | Source   | `sudo ~/.datadog-agent/bin/agent restart`    |
 | Windows  | [See the dedicated Windows documentation][2] |
-
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows
@@ -142,7 +136,6 @@ List of commands to display the status of the Datadog Agent:
 | macOS             | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
 | Source            | `sudo service datadog-agent status`                                           |
 
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -154,7 +147,6 @@ List of commands to display the status of the Datadog Agent:
 | macOS           | `datadog-agent status`                                                   |
 | Source          | `sudo ~/.datadog-agent/bin/agent status`                                 |
 | Windows         | [See the dedicated Windows documentation][1]                             |
-
 
 [1]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
@@ -199,7 +191,6 @@ A properly configured integration is displayed under **Running Checks** with no 
       Average Execution Time : 0ms
 ```
 
-
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
@@ -225,7 +216,6 @@ A properly configured integration is displayed under **Checks** with no warnings
      - instance #0 [OK]
      - Collected 15 metrics, 0 events & 1 service check
 ```
-
 
 [1]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}

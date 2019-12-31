@@ -22,7 +22,6 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID if 
 If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
 
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -40,7 +39,6 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Source       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Windows      | Consult the dedicated [Windows documentation][2]        |
 | Heroku       | Consult the dedicated [Heroku documentation][3]         |
-
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
@@ -61,9 +59,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Source       | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                         |
 | Windows      | Consult the dedicated [Windows documentation][1]                          |
 
-
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][2].
-
 
 [1]: /agent/basic_agent_usage/windows/#agent-v5
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
@@ -76,7 +72,6 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Further Reading
 

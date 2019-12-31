@@ -35,6 +35,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 2. Customize your graph with the available [options](#options).
 
 ### Options
+
 #### Line graphs
 
 Line graphs include two additional parameters:
@@ -176,7 +177,6 @@ Additional properties allowed in each `request` object:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard

@@ -65,22 +65,22 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{% tab "Matcher" %}}
 
 |                                                 |                                                                                                                                    |
-| :---                                            | :---                                                                                                                               |
+|:------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|
 | **Pattern**                                     | **Usage**                                                                                                                          |
 | `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates). |
 | `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
 | `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
 | `notSpace`                                      | Matches any string until the next space.                                                                                           |
-| `boolean("truePattern", "falsePattern")`        | Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).       |
+| `boolean("truePattern", "falsePattern")`        | Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).     |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
 | `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
-| `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                                                |
+| `numberExtStr`                                  | Matches a floating point number (with scientific notation support) and parses it as a string.                                      |
 | `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
-| `integerStr`                                    | Matches an integer number and parses it as a string.                                                                        |
-| `integer`                                       | Matches an integer number and parses it as an integer number.                                                               |
-| `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                                                      |
+| `integerStr`                                    | Matches an integer number and parses it as a string.                                                                               |
+| `integer`                                       | Matches an integer number and parses it as an integer number.                                                                      |
+| `integerExtStr`                                 | Matches an integer number (with scientific notation support) and parses it as a string.                                            |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
-| `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
+| `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                     |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
 | `singleQuotedString`                            | Matches a single-quoted string.                                                                                                    |
 | `quotedString`                                  | Matches a double-quoted or single-quoted string.                                                                                   |
@@ -93,29 +93,27 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `ipOrHost`                                      | Matches a hostname or IP.                                                                                                          |
 | `port`                                          | Matches a port number.                                                                                                             |
 
-
 {{% /tab %}}
 {{% tab "Filter" %}}
 
-|                                                                |                                                                                                                                                           |
-| :---                                                           | :---                                                                                                                                                      |
-| **Pattern**                                                    | **Usage**                                                                                                                                                 |
-| `number`                                                       | Parses a match as double precision number.                                                                                                                |
-| `integer`                                                      | Parses a match as an integer number.                                                                                                                      |
-| `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                              |
-| `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
-| `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
+|                                                                |                                                                                                                                                            |
+|:---------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Pattern**                                                    | **Usage**                                                                                                                                                  |
+| `number`                                                       | Parses a match as double precision number.                                                                                                                 |
+| `integer`                                                      | Parses a match as an integer number.                                                                                                                       |
+| `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                               |
+| `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                  |
+| `json`                                                         | Parses properly formatted JSON.                                                                                                                            |
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
 | `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1]. |
-| `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
-| `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                                                                                  |
-| `lowercase`                                                    | Returns the lower-cased string.                                                                                                                           |
-| `uppercase`                                                    | Returns the upper-cased string.                                                                                                                           |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
-| `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
-| `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
-| `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
-
+| `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                 |
+| `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                              |
+| `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
+| `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
+| `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
+| `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
+| `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
 
 
 
@@ -154,7 +152,6 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" responsive="true" style="width:80%;">}}
 
 ## Examples
@@ -174,9 +171,9 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 
 * `separatorStr`: defines the separator. Defaults to `=`.
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
+* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 
-**Note**: 
+**Note**:
 
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
 * If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
@@ -236,13 +233,13 @@ rule %{data::keyvalue("=","/:")}
 
 Other examples:
 
-| **Raw string**          | **Parsing rule**                    | **Result**                     |
-| :---                    | :----                               | :----                          |
-| key=valueStr            | `%{data::keyvalue}`                 | {"key": "valueStr}             |
-| key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
-| key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
-| key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
-| key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
+| **Raw string**  | **Parsing rule**                    | **Result**           |
+|:----------------|:------------------------------------|:---------------------|
+| key=valueStr    | `%{data::keyvalue}`                 | {"key": "valueStr}   |
+| key=\<valueStr> | `%{data::keyvalue}`                 | {"key": "valueStr"}  |
+| key:valueStr    | `%{data::keyvalue(":")}`            | {"key": "valueStr"}  |
+| key:"/valueStr" | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"} |
+| key:={valueStr} | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
 The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
@@ -260,7 +257,7 @@ Rule:
   ```
 
 Result:
-    
+
   ```
   {
     "key1": "valueStr",
@@ -272,19 +269,19 @@ Result:
 
 The date matcher transforms your timestamp in the EPOCH format (unit of measure **millisecond**).
 
-| **Raw string**                           | **Parsing rule**                                          | **Result**              |
-| :---                                     | :----                                                     | :----                   |
-| 14:20:15                                 | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
-| 02:20:15 PM                              | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
-| 11/10/2014                               | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
-| Thu Jun 16 08:29:03 2016                 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
-| Tue Nov 1 08:29:03 2016                  | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
-| 06/Mar/2013:01:36:30 +0900               | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
-| 2016-11-29T16:21:36.431+0000             | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
-| 2016-11-29T16:21:36.431+00:00            | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
-| 06/Feb/2009:12:14:14.655                 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
+| **Raw string**                       | **Parsing rule**                                          | **Result**              |
+|:-------------------------------------|:----------------------------------------------------------|:------------------------|
+| 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
+| 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
+| 11/10/2014                           | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
+| Thu Jun 16 08:29:03 2016             | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
+| Tue Nov 1 08:29:03 2016              | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
+| 06/Mar/2013:01:36:30 +0900           | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
+| 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
+| 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
+| 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
+| 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
 
 <sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see [TZ database names][1].
 
@@ -337,7 +334,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 Use the `json` filter to parse a JSON object nested after a raw text prefix:
 
-**Log**: 
+**Log**:
 
 ```
 Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
@@ -351,8 +348,8 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 {{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" responsive="true" style="width:80%;" >}}
 
-
 ### Regex
+
 Use the regex matcher to match any substring of your log message.
 
 **Log**:

@@ -9,7 +9,6 @@ wistiaid: hc545nswvk
     - traces
     - trace metrics
 
-
 summary: Combine trace metrics with infrastructure and logs to create your custom single pane of glass with all the information relevant to your business.
 ---
 

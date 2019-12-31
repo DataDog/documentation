@@ -55,7 +55,6 @@ sudo chown -R dd-agent:dd-agent /var/log/datadog/
 
 [More information on the Agent logs locations][2].
 
-
 ## Agent Socket permission issues
 
 When starting the Agent, the following socket permission issue might appear:
@@ -111,7 +110,6 @@ If you are running Agent v6 less than v6.3, try updating the Agent and using the
 
 3. [Start the Agent][3]
 
-
 [1]: https://github.com/DataDog/datadog-agent
 [2]: /agent/guide/agent-commands/#stop-the-agent
 [3]: /agent/guide/agent-commands/#start-the-agent
@@ -129,7 +127,6 @@ If you are running Agent v5, try updating to the [latest version of Agent 6][1] 
 3. [Start the Agent][6]
 
 
-
 [1]: /agent/guide/upgrade-to-agent-v6
 [2]: https://github.com/DataDog/dd-agent
 [3]: /agent/guide/agent-commands/?tab=agentv5#stop-the-agent
@@ -143,7 +140,6 @@ See the following GitHub issues for more information and other potential methods
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
-
 
 ## Further Reading
 

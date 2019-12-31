@@ -40,6 +40,7 @@ Check status shows the current status or number of results for any check perform
 5. Optional: group your checks result according to a custom tag key.
 
 ### Options
+
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
@@ -47,7 +48,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 Optionally define its size and alignment.
-
 
 ## API
 
@@ -70,15 +70,15 @@ CHECK_STATUS_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the check status widget use `check_status`|
-| `check`     | string          | yes      | Name of the check to use in the widget|
-| `grouping`| string| yes| The kind of grouping to use (single check vs. cluster of checks). Available values are: `check` or `cluster`|
-| `group`| string| no| Group reporting a single check|
-| `tags`| Array of strings| no| List of tags used to filter the groups reporting a cluster check|
-| `group_by`| Array of strings| no| List of tag prefixes to group by in the case of a cluster check|
-|`title`|string|no|Title of the widget|
+| Parameter  | Type             | Required | Description                                                                                                  |
+|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------|
+| `type`     | string           | yes      | Type of the widget, for the check status widget use `check_status`                                           |
+| `check`    | string           | yes      | Name of the check to use in the widget                                                                       |
+| `grouping` | string           | yes      | The kind of grouping to use (single check vs. cluster of checks). Available values are: `check` or `cluster` |
+| `group`    | string           | no       | Group reporting a single check                                                                               |
+| `tags`     | Array of strings | no       | List of tags used to filter the groups reporting a cluster check                                             |
+| `group_by` | Array of strings | no       | List of tag prefixes to group by in the case of a cluster check                                              |
+| `title`    | string           | no       | Title of the widget                                                                                          |
 
 ## Further Reading
 

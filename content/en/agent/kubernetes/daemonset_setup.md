@@ -20,11 +20,12 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
 ## Configure RBAC permissions
+
 If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account.
 
 Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 
-```
+```shell
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
@@ -33,11 +34,12 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Create manifest
+
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
 Remember to encode your API key using `base64` if you are using secrets:
 
-```
+```shell
 echo -n <YOUR_API_KEY> | base64
 ```
 
@@ -161,7 +163,8 @@ spec:
 Replace `<YOUR_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
 
 Deploy the DaemonSet with the command:
-```
+
+```shell
 kubectl create -f datadog-agent.yaml
 ```
 
@@ -171,13 +174,13 @@ kubectl create -f datadog-agent.yaml
 
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
-```
+```shell
 kubectl get daemonset
 ```
 
 If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
 
-```
+```shell
 NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
 datadog-agent   2         2         2         2            2           <none>          16h
 ```
@@ -229,7 +232,6 @@ To enable [Log collection][12] with your DaemonSet:
     ```
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
-
 
 The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
 

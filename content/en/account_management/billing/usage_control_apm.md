@@ -22,6 +22,7 @@ App Analytics Pricing depends on the retention policy of Analyzed Spans. You can
 Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.
 
 ### Analyzed Span Estimator
+
 [Analyzed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
 To estimate the total number of analyzed spans expected to be sent per service per day or per month, follow these steps:
@@ -44,9 +45,7 @@ For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (def
 
 For cost control, you can reduce the number of billable Analyzed Spans by [filtering Analyzed Spans][9]. This has no effect on [Trace Sampling][10]. If a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-
 You can also choose to enable App Analytics per service, or per integration in code using [these language specific instructions][11].
-
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing

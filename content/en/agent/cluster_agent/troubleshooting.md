@@ -160,24 +160,26 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 Or look for error logs, such as:
 
-```
+```shell
 2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## Custom Metric Server
+
 ### Cluster Agent status and flare
 
 If you are having issues with the Custom Metrics Server:
 
 * Make sure you have the aggregation layer and the certificates set up.
 * Make sure the metrics you want to autoscale on are available. As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric. If there is a typographic issue with your metric name, or if the metric does not exist within your Datadog application, the following error is raised:
-    ```
+
+    ```shell
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 Run the `datadog-cluster-agent status` command to see the status of the External Metrics Provider process:
 
-```
+```shell
   Custom Metrics Provider
   =======================
   External Metrics

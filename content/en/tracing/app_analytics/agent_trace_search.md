@@ -58,7 +58,6 @@ Replace both the `<SERVICE_NAME>` and `<OPERATION_NAME>` in your configuration w
 
 For example, if you have a Python service named `python-api`, and it's running Flask (operation name `flask.request`), your `<SERVICE_NAME>` would be `python-api`, and your `<OPERATION_NAME>` would be `flask.request`.
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: /tracing/app_analytics/#automatic-configuration
 [3]: /tracing/app_analytics/#custom-instrumentation

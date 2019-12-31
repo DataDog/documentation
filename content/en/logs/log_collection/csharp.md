@@ -82,7 +82,6 @@ Then check the `log.json` file to see the following event:
 
 [Monitor now your log file with your Agent][1] to send your logs to your Datadog application
 
-
 [1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "NLog" %}}
@@ -154,7 +153,6 @@ namespace Datadog
 
 [Monitor now your log file with your Agent][1] to send your logs to your Datadog application.
 
-
 [1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "Log4Net" %}}
@@ -214,7 +212,6 @@ namespace Datadog
         // Get the current class logger
         private static ILog logger = LogManager.GetLogger(typeof(Program));
 
-
         static void Main(string[] args)
         {
 
@@ -223,7 +220,6 @@ namespace Datadog
 
              // Log a simple debug message
            logger.Debug("This is my first debug message");
-
 
             // your code continues here ...
         }
@@ -328,7 +324,6 @@ var log = new LoggerConfiguration()
 ```
 
 New logs are now directly sent to Datadog.
-
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api

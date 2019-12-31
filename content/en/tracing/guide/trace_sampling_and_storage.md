@@ -129,7 +129,6 @@ public class MyClass {
 }
 ```
 
-
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -365,7 +364,6 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 
 Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
 
-
 ## Trace Storage
 
 Individual traces are stored for 15 days. This means that all **sampled** traces are retained for a period of 15 days and at the end of the 15th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
@@ -375,7 +373,6 @@ Individual traces are stored for 15 days. This means that all **sampled** traces
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

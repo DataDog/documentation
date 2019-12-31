@@ -63,7 +63,6 @@ then [restart your Agent][1].
 
 {{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
 
-
 [1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}

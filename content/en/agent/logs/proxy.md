@@ -69,7 +69,6 @@ When the Agent is [configured to send logs through HTTPS][1], use the same [set 
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

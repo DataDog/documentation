@@ -18,9 +18,11 @@ further_reading:
 ---
 
 ## Setup
+
 If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
 
 ### Installation
+
 Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 **Note**: There are special considerations for [domain controllers][4].
@@ -33,6 +35,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Command line
+
 Optionally, install the Agent with the command line to add custom settings.
 
 1. Download the [Datadog Agent installer][5].
@@ -40,38 +43,41 @@ Optionally, install the Agent with the command line to add custom settings.
    **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
 Command prompt:
+
 ```cmd
 start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
 Powershell:
+
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
 Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
 
-| Variable                   | Type   | Description                                                                                                                                                                                                                        |
-|----------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                |
-| `TAGS`                     | String | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                        |
-| `HOSTNAME`                 | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                           |
-| `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                       |
-| `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                       |
-| `PROCESS_ENABLED`          | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                    |
-| `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                              |
-| `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                |
-| `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                |
-| `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                |
-| `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                            |
-| `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                     |
-| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3]. |
-| `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                          |
-| `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                 |
+| Variable                   | Type   | Description                                                                                                                                                                                                                         |
+|----------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                 |
+| `TAGS`                     | String | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
+| `HOSTNAME`                 | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                            |
+| `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                        |
+| `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
+| `PROCESS_ENABLED`          | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
+| `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
+| `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
+| `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
+| `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
+| `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][7]. |
+| `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
+| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
+| `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
+| `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 ### Validation
+
 To verify your installation, follow the instructions in the [Agent Status and Information](#agent-status-and-information) section.
 
 ## Agent Commands
@@ -155,6 +161,7 @@ Configuration files for [integrations][1] are in:
 {{< /tabs >}}
 
 ## Troubleshooting
+
 ### Agent Status and Information
 
 {{< tabs >}}
@@ -171,11 +178,13 @@ Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
 
 The status command is available for Powershell:
+
 ```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
 
 or cmd.exe:
+
 ```cmd
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
@@ -194,18 +203,17 @@ For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/stat
 
 The info command is available for Powershell:
 
-```
+```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
 
-```
+```shell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 **Note**: For Agent versions <= 6.11 the path should be `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` instead.
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -236,6 +244,7 @@ Need help? Contact [Datadog support][1].
 {{< /tabs >}}
 
 ### Send a flare
+
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -271,11 +280,13 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 The flare command is available for Powershell:
 
-```
+```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
+
 or cmd.exe:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
@@ -295,7 +306,7 @@ For Windows, you can find the location of this file by running the following fro
 
 **Step 2**:
 
-```
+```python
 import tempfile
 print tempfile.gettempdir()
 ```
@@ -308,6 +319,7 @@ Example:
 {{< /tabs >}}
 
 ## Use Cases
+
 ###  Monitoring a Windows Service
 
 On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example; however, this example uses DHCP.
@@ -348,6 +360,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 You can monitor Windows processes with [Live Process Monitoring][12]. To enable this on Windows, edit the [Agent main configuration file][13] by setting the following parameter to true:
 
 `datadog.yaml`:
+
 ```yaml
 process_config:
   enabled: "true"

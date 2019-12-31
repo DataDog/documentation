@@ -14,7 +14,6 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-
 The notes and links widget is similar to [free text widget][1], but allows for more formatting options:
 
 ## Setup
@@ -57,7 +56,6 @@ NOTE_SCHEMA = {
 |`show_tick`|Boolean|no|Whether to show a tick or not
 |`tick_pos`|string|no|Where to position the tick on an edge
 |`tick_edge`|string|no|Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right`, or `top`
-
 
 ## Further Reading
 

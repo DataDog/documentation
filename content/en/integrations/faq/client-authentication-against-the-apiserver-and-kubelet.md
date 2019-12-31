@@ -36,7 +36,6 @@ Alternately, you can use [kubeconfig][3] for API server authentication. Use the 
 kubernetes_kubeconfig_path: /path/to/file
 ```
 
-
 [1]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod
 [2]: https://kubernetes.io/docs/concepts/configuration/secret
 [3]: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig

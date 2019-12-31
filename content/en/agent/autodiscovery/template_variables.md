@@ -16,7 +16,6 @@ further_reading:
 
 Use the following template variables when configuring Autodiscovery in order to dynamically assign your container's values:
 
-
 | Template Variable           | Description                                                                                                                                                                                                 |
 | --------------------------  | ---                                                                                                                                                                                                         |
 | `"%%host%%"`                | Auto-detects the network. For single-network containers, it returns its corresponding IP.                                                                                                                   |
@@ -40,7 +39,6 @@ Depending on your platform, not all template variables are be supported:
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      |
 | ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
 | Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      |
-
 
 ## Further Reading
 

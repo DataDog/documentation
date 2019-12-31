@@ -110,7 +110,6 @@ Find below the manual upgrade instructions for:
 
 ### CentOS
 
-
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
     [datadog]
@@ -189,7 +188,6 @@ Find below the manual upgrade instructions for:
 
 ### Fedora
 
-
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
     [datadog]
@@ -224,7 +222,6 @@ Find below the manual upgrade instructions for:
     ```
 
 ### Red Hat
-
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -267,7 +264,6 @@ Find below the manual upgrade instructions for:
     ```
 
 ### Ubuntu
-
 
 1. Enable HTTPS support for APT:
     ```

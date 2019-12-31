@@ -140,7 +140,6 @@ The following configuration enables the JSON formatting and writes the logs and 
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
 
-
   // create a logger
   $logger = new Logger();
 
@@ -275,7 +274,6 @@ Take a peek to this code if you want to use it:
 If you want to develop yours, [refer the Zend documentation][1].
 
 
-
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
@@ -368,7 +366,6 @@ Add a session Processor to add variable context within your logs:
 3. [Stream generated JSON file to Datadog][1]
 
 
-
 [1]: /logs/log_collection
 {{% /tab %}}
 {{< /tabs >}}
@@ -383,7 +380,6 @@ Monolog is a part of the following frameworks:
 * [Silex][5]
 * [Lumen][6]
 * [CakePHP][7]
-
 
 Integrate Monolog with your framework then configure your logger:
 
@@ -423,7 +419,6 @@ monolog:
 #            arguments:  [ @session ]
 #            tags:
 #               - { name: monolog.processor, method: processRecord }
-
 
     json_formatter:
         class: Monolog\Formatter\JsonFormatter
@@ -547,7 +542,6 @@ CakeLog::config('debug', array(
   )
 ));
 ```
-
 
 ## Further Reading
 

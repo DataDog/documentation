@@ -109,7 +109,6 @@ data:
         polling: true
 ```
 
-
 ## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.

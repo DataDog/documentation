@@ -68,7 +68,6 @@ By using Datadog's official Python library [datadogpy][1], the example below cre
 ```python
 from datadog import DogStatsd
 
-
 with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     batch.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])

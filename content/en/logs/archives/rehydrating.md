@@ -104,7 +104,6 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" responsive="true" style="width:75%;">}}
 
-
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
@@ -112,10 +111,9 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer. 
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" responsive="true" style="width:75%;">}}
-
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

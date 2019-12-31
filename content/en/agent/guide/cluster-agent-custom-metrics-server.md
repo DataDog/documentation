@@ -133,7 +133,6 @@ SVC:
 NAMESPACE     NAME                  TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)         AGE
 default       nginx                 ClusterIP   192.168.251.36    none          8090/TCP        3m
 
-
 HPAS:
 
 NAMESPACE   NAME       REFERENCE          TARGETS       MINPODS   MAXPODS   REPLICAS   AGE

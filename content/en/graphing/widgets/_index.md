@@ -53,7 +53,7 @@ Additional options are available for [timeseries widgets][1].
 
 ## Copy / paste widgets
 
-Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy". 
+Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
 
 The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
 
@@ -64,22 +64,23 @@ You can also paste the widget into your favorite chat program that displays link
 
 ### Groups of widgets
 
-Timeboard group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy". 
+Timeboard group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy".
 
 **Note**: When pasting graphs to screenboards or notebooks, individual widgets within the group are pasted.
 
-To copy multiple screenboard widgets (edit mode only), `shift + click` on the widgets and use `Ctrl + C` (`Cmd + C` for Mac). 
+To copy multiple screenboard widgets (edit mode only), `shift + click` on the widgets and use `Ctrl + C` (`Cmd + C` for Mac).
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
 ## Export Graphs
 
 ### PNG
-To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select “Download as PNG”. 
+
+To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select “Download as PNG”.
 
 ### CSV
-To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”. 
 
+To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
 
 [1]: /graphing/widgets/timeseries#full-screen
 [2]: /graphing/dashboards

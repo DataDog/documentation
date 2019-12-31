@@ -76,7 +76,6 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-
 [1]: /integrations
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -88,7 +87,6 @@ The configuration files and folders for the Agent are located in:
 Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
-
 
 [1]: /integrations
 {{% /tab %}}

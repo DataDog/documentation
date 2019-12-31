@@ -27,7 +27,6 @@ timeshift(avg:system.load.1{*}, -1209600)
 | :----           | :-------                                                               | :---------                      |
 | `hour_before()` | Graph values from an hour before the current timestamp for the metric. | `hour_before(<METRIC_NAME>{*})` |
 
-
 Here is an example of `system.load.1` with the `hour_before()` value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the `hour_before()` values show up at the 7:30 mark. Of course, this example was created specifically so that you can see the `hour_before()` values match up with the actual values.
 
 {{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example" responsive="true" style="width:80%;">}}

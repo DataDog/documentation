@@ -160,7 +160,6 @@ In Python 3, print is explicitly treated as a function; to turn print into a fun
 |---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
-
 ### Integer Division
 
 In Python 2, the `/` operator performs floor division on integers.
@@ -218,7 +217,6 @@ Python 3 features different syntax for except and raise.
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
 | `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
-
 ### Relative Imports
 
 In Python 3, relative imports must be made explicit, using the dot (`.`) syntax.
@@ -247,7 +245,6 @@ Or, for extra readability:
 | Python 2               | Python 2 and 3                   |
 |------------------------|----------------------------------|
 | `from math import gcd` | `from mypackage.math import gcd` |
-
 
 ### Iterators
 

@@ -62,7 +62,7 @@ _Note that both evaluations above are mathematically correct. Choose a method th
 
 It may be helpful visualize the **`classic_eval_path`** as:
 
-```       
+```
 sum(last_5m):error/total
 ```
 
@@ -79,6 +79,5 @@ In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but 
 **Note**: Aggregation methods other than sum (shown as in total in-app) cannot be used with `.as_count()`.
 
 [Reach out to the Datadog support team][1] if you have any questions.
-
 
 [1]: /help

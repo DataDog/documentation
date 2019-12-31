@@ -64,7 +64,6 @@ To combine multiple terms into a complex query, use the following Boolean operat
 | `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
 | `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
 
-
 **Note**: Some of the advanced query language features like Boolean logic work only in the event stream page, and are not available in graph tiles or dashboard widgets.
 
 Combine prefixes to construct more complex searches. For example, to find all open `chef` or `nagios` errors that mention `cassandra`, use:
@@ -98,7 +97,6 @@ Datadog supports `@notifications` in the event stream, for example:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /developers/events/
 [2]: https://app.datadoghq.com/event/stream

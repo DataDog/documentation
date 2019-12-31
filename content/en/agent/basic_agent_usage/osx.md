@@ -43,7 +43,6 @@ In Agent v6 and v7, the `launchctl` service manager provided by the operating sy
 | Display command usage              | `datadog-agent --help`                               |
 | Run a check                        | `datadog-agent check <check_name>`                   |
 
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -73,7 +72,6 @@ Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
 
-
 [1]: /integrations
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -85,7 +83,6 @@ The configuration files and folders for the Agent are located in:
 Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
-
 
 [1]: /integrations
 {{% /tab %}}
