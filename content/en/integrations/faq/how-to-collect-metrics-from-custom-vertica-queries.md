@@ -9,7 +9,7 @@ You can configure your Vertica integration to collect metrics from custom querie
 
 Define custom queries in the following format:
 
-```
+```text
 custom_queries:
   - query: <QUERY>
     columns: <COLUMNS>
@@ -26,7 +26,7 @@ The `tags` field is optional and represents a list of tags to apply to each metr
 
 ### Example
 
-```
+```yaml
 custom_queries:
   - query: |
       SELECT force_outer,
@@ -47,10 +47,10 @@ You can define custom queries at the instance level, but if you wish to apply ce
 
 In each instance, you can define the behavior of global custom queries using the `use_global_custom_queries` parameter. This value defaults to `true`.
 
-| `global_custom_queries` value | Behavior |
-| ----- | -----|
-| `true` | `global_custom_queries` overrides `custom_queries`. |
-| `false` | `custom_queries` overrides `global_custom_queries`. |
-| `extend` | `global_custom_queries` is used in addition to `custom_queries`. |
+| `global_custom_queries` value | Behavior                                                         |
+|-------------------------------|------------------------------------------------------------------|
+| `true`                        | `global_custom_queries` overrides `custom_queries`.              |
+| `false`                       | `custom_queries` overrides `global_custom_queries`.              |
+| `extend`                      | `global_custom_queries` is used in addition to `custom_queries`. |
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/vertica/datadog_checks/vertica/data/conf.yaml.example#L54-L71

@@ -161,13 +161,13 @@ These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`)
 
 The filters include resources where any whitelisted tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
 
-```
+```text
 datadog:monitored,env:production
 ```
 
 If you add a blacklisted tag, it takes precedence and forms an `AND` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored`, OR `env:production`, OR an `instance-type` tag with a `c1.*` value AND NOT a `region:us-east-1` tag:
 
-```
+```text
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
 
@@ -185,7 +185,7 @@ This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) 
 
 VMs matching a given tag can also be excluded by adding `!` before the tag, for example:
 
-```
+```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
@@ -199,7 +199,7 @@ This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VAL
 
 You can exclude hosts matching a given label by adding `!` before the tag, for example:
 
-```
+```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 

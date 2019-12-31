@@ -71,7 +71,7 @@ You are now able to use your new private location as any other Datadog managed l
 
 For a more advanced setup, use the command and see `Learn more about Private Locations` below:
 
-```
+```shell
 docker run --rm datadog/synthetics-private-location-worker --help and check
 ```
 

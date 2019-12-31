@@ -33,7 +33,7 @@ Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.in
 
 If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
-```
+```text
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
@@ -87,7 +87,7 @@ end
 
 This appends trace tags to web requests:
 
-```
+```text
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
@@ -242,7 +242,7 @@ finally {
 
 Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
 
-```
+```text
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
@@ -313,7 +313,7 @@ log = structlog.get_logger()
 
 Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
 
-```
+```text
 >>> traced_func()
 {"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```

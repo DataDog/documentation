@@ -54,7 +54,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the distribution widget is:
 
-```
+```text
 DISTIBUTION_SCHEMA = {
     "type": "object",
     "properties": {

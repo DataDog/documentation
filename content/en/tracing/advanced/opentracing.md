@@ -49,7 +49,7 @@ For Maven, add this to `pom.xml`:
 
 For Gradle, add:
 
-```
+```text
 compile group: 'io.opentracing', name: 'opentracing-api', version: "0.31.0"
 compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"

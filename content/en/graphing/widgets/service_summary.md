@@ -37,7 +37,7 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 The dedicated [widget JSON schema definition][2] for the service summary widget is:
 
-```
+```text
 TRACE_SERVICE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -63,24 +63,24 @@ TRACE_SERVICE_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the service summary widget use `trace_service`|
-|`env`|string|yes|APM environment|
-|`service`|string|yes|APM service|
-|`span_name`|string|yes|APM span name|
-|`show_hits`|Boolean|no|Whether to show the hits metrics or not|
-|`show_errors`|Boolean|no|Whether to show the error metrics or not|
-|`show_latency`|Boolean|no|Whether to show the latency metrics or not|
-|`show_breakdown`|Boolean|no|Whether to show the latency breakdown or not|
-|`show_distribution`|Boolean|no|Whether to show the latency distribution or not|
-|`show_resource_list`|Boolean|no|Whether to show the resource list or not|
-|`size_format`|string|no|Size of the widget. Available values are: `small`, `medium`, or `large`
-|`display_format`|string|no|Number of columns to display. Available values are: `one_column`, `two_column`, or `three_column`
-|`title`|string|no|Title of the widget|
-|`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
-|`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA`
+| Parameter            | Type    | Required | Description                                                                                                                |
+|----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| `type`               | string  | yes      | Type of the widget, for the service summary widget use `trace_service`                                                     |
+| `env`                | string  | yes      | APM environment                                                                                                            |
+| `service`            | string  | yes      | APM service                                                                                                                |
+| `span_name`          | string  | yes      | APM span name                                                                                                              |
+| `show_hits`          | Boolean | no       | Whether to show the hits metrics or not                                                                                    |
+| `show_errors`        | Boolean | no       | Whether to show the error metrics or not                                                                                   |
+| `show_latency`       | Boolean | no       | Whether to show the latency metrics or not                                                                                 |
+| `show_breakdown`     | Boolean | no       | Whether to show the latency breakdown or not                                                                               |
+| `show_distribution`  | Boolean | no       | Whether to show the latency distribution or not                                                                            |
+| `show_resource_list` | Boolean | no       | Whether to show the resource list or not                                                                                   |
+| `size_format`        | string  | no       | Size of the widget. Available values are: `small`, `medium`, or `large`                                                    |
+| `display_format`     | string  | no       | Number of columns to display. Available values are: `one_column`, `two_column`, or `three_column`                          |
+| `title`              | string  | no       | Title of the widget                                                                                                        |
+| `title_size`         | string  | no       | Size of the title                                                                                                          |
+| `title_align`        | string  | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
+| `time`               | object  | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA` |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

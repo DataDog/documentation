@@ -28,7 +28,7 @@ The following installation processes are for [Agent 6 only][1]. If you are using
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
 
-```
+```yaml
 process_config:
   enabled: "true"
 ```
@@ -52,7 +52,7 @@ After configuration is complete, [restart the Agent][2].
 
 Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
 
-```
+```text
 -v /etc/passwd:/etc/passwd:ro
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
@@ -68,7 +68,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
 
-```
+```yaml
  env:
     - name: DD_PROCESS_AGENT_ENABLED
       value: "true"
@@ -96,7 +96,7 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 
 In order to hide sensitive data on the Live Processes page, the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
 
-```
+```text
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
@@ -104,10 +104,10 @@ In order to hide sensitive data on the Live Processes page, the Agent scrubs sen
 
 Define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
 
-```
+```yaml
 process_config:
   scrub_args: true
-  custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
+  custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
 ```
 
 **Note**: Words in `custom_sensitive_words` must contain only alphanumeric characters, underscores, or wildcards (`'*'`). A wildcard-only sensitive word is not supported.
@@ -120,7 +120,7 @@ Set `scrub_args` to `false` to completely disable the process arguments scrubbin
 
 You can also scrub **all** arguments from processes by enabling the `strip_proc_arguments` flag in your `datadog.yaml` configuration file:
 
-```
+```yaml
 process_config:
   strip_proc_arguments: true
 ```
@@ -137,12 +137,12 @@ Processes and containers are, by their nature, extremely high cardinality object
 
 To combine multiple string searches into a complex query, use any of the following Boolean operators:
 
-|              |                                                                                                        |                              |
-| :----        | :----                                                                                                  | :----                        |
-| **Operator** | **Description**                                                                                       | **Example**                 |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | java AND elasticsearch   |
-| `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
-| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+|              |                                                                                                                                  |                                                                 |
+|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+| **Operator** | **Description**                                                                                                                  | **Example**                                                     |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
+| `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
+| `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
@@ -214,12 +214,9 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 ## Notes and frequently asked questions
 
-- Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
-
-- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file.
-  - **Note**:  Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+* Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
+* Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
+* In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**:  Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 

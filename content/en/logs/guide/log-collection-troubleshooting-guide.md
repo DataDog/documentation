@@ -35,13 +35,13 @@ Test manually your connection by running a telnet or openssl command like so (po
 
 And then by sending a log like the following:
 
-```
+```text
 <API_KEY> this is a test message
 ```
 
 - If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
-```
+```yaml
 logs_config:
   use_http: true
 ```
@@ -62,7 +62,7 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 
 In that case, you should see an error message when checking the [Agent status][5]:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -76,7 +76,7 @@ Logs Agent
 
 Run the `namei` command to obtain more information about the file permissions:
 
-```
+```text
 > namei -m /var/log/application/error.log
 > f: /var/log/application/error.log
  drwxr-xr-x /
@@ -116,7 +116,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
-```
+```shell
 sudo cat /var/log/datadog/agent.log | grep ERROR
 ```
 

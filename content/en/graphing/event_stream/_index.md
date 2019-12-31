@@ -68,7 +68,7 @@ To combine multiple terms into a complex query, use the following Boolean operat
 
 Combine prefixes to construct more complex searches. For example, to find all open `chef` or `nagios` errors that mention `cassandra`, use:
 
-```
+```text
 sources:nagios,chef status:error cassandra
 ```
 
@@ -91,7 +91,7 @@ Datadog supports `@notifications` in the event stream, for example:
 | `@john`                                 | Notifies the user named `john`.                                                                  |
 | `@test@example.com`                     | Sends an email to `test@example.com`.                                                            |
 | `@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` | Posts the event or graph to the specified Slack channel.                                         |
-| `@webhook`                              | Alerts or triggers the webhook. See the [blog post on webhooks][3].                         |
+| `@webhook`                              | Alerts or triggers the webhook. See the [blog post on webhooks][3].                              |
 | `@pagerduty`                            | Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`. |
 
 ## Further Reading

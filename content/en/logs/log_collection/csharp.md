@@ -39,7 +39,7 @@ Unlike other logging libraries, Serilog is built with powerful structured event 
 
 Install Serilog via NuGet. Run the following command in the Package Manager Consol:
 
-```
+```text
 PM> Install-Package Serilog.Sinks.File
 ```
 
@@ -91,7 +91,7 @@ NLog is a logging platform for .NET with rich log routing and management capabil
 
 Install NLog via NuGet. Run the following command in the Package Manager Console:
 
-```
+```text
 PM> Install-Package NLog
 ```
 
@@ -161,7 +161,7 @@ Log4Net is a logging platform for .NET inspired from Log4j with rich log routing
 
 To install it, run the following command in the Package Manager Console
 
-```
+```text
 PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
@@ -243,7 +243,7 @@ If you have followed the instructions you should see in your file (for example `
 
 If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net convertion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
-```
+```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
@@ -292,13 +292,13 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
 
-```
+```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
 Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
 
-```
+```csharp
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>")
     .CreateLogger();
@@ -310,7 +310,7 @@ You can also override the default behaviour and forward logs in TCP by manually 
 
 For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
 
-```
+```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(

@@ -30,7 +30,7 @@ This is commonly used to state the overall purpose of the dashboard.
 
 The dedicated [widget JSON schema definition][2] for the free text widget is:
 
-```
+```text
 FREE_TEXT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -45,13 +45,13 @@ FREE_TEXT_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the free text widget use `free_text`|
-|`text`|string|yes|Text to display|
-|`color`|string|no|Color of the text|
-|`font_size`|string|no|Size of the text|
-|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left`, or `right`
+| Parameter    | Type   | Required | Description                                                                             |
+|--------------|--------|----------|-----------------------------------------------------------------------------------------|
+| `type`       | string | yes      | Type of the widget, for the free text widget use `free_text`                            |
+| `text`       | string | yes      | Text to display                                                                         |
+| `color`      | string | no       | Color of the text                                                                       |
+| `font_size`  | string | no       | Size of the text                                                                        |
+| `text_align` | string | no       | How to align the text on the widget. Available values are: `center`, `left`, or `right` |
 
 ## Further Reading
 

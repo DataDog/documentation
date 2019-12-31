@@ -48,7 +48,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the top list widget is:
 
-```
+```text
 TOPLIST_SCHEMA = {
     "type": "object",
     "properties": {
@@ -74,7 +74,7 @@ TOPLIST_SCHEMA = {
 
 Additional properties allowed in the `request` object:
 
-```
+```text
 {
    "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
 }

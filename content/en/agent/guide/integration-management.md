@@ -14,7 +14,7 @@ For Agent v6.8+, the `datadog-agent integration` command allows users to manage 
  * [show](#show)
  * [freeze](#freeze)
 
-Print the usage and documentation of these commands with `datadog-agent integration --help`.  
+Print the usage and documentation of these commands with `datadog-agent integration --help`.
 For Linux, execute the command as the `dd-agent` user. For Windows, execute the command as an `administrator`.
 
 ## Integration commands
@@ -43,11 +43,14 @@ The syntax for this command is `datadog-agent integration install <integration_p
 For example, to install version 3.6.0 of the vSphere integration, run:
 
 Linux:
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
+
 Windows:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration install datadog-vsphere==3.6.0
 ```
 
@@ -70,11 +73,14 @@ To remove an integration, use the `datadog-agent integration remove` command. Th
 For example, to remove the vSphere integration, run:
 
 Linux:
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
+
 Windows:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration remove datadog-vsphere
 ```
 
@@ -87,11 +93,14 @@ To get information, such as the version, about an installed integration, use the
 For example, to show information on the vSphere integration, run:
 
 Linux:
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
+
 Windows:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration show datadog-vsphere
 ```
 
@@ -100,11 +109,14 @@ Windows:
 To list all the Python packages installed in the Agent's Python environment, use the `datadog-agent integration freeze` command. This lists all the Datadog integrations (packages starting with `datadog-`) and the Python dependencies required to run the integrations.
 
 Linux:
-```
+
+```text
 sudo -u dd-agent -- datadog-agent integration freeze
 ```
+
 Windows:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
 ```
 

@@ -40,34 +40,32 @@ Next, grant Datadog permissions to write log archives to your S3 bucket. US site
 
 2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 
-    ```
+    ```json
     {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "DatadogUploadAndRehydrateLogArchives",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:PutObject",
-                    "s3:GetObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-                    "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-                ]
-            },
-            {
-                "Sid": "DatadogRehydrateLogArchivesListBucket",
-                "Effect": "Allow",
-                "Action": "s3:ListBucket",
-                "Resource": [
-                    "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-                    "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-                ]
-            }
-        ]
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DatadogUploadAndRehydrateLogArchives",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:GetObject"],
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+          ]
+        },
+        {
+          "Sid": "DatadogRehydrateLogArchivesListBucket",
+          "Effect": "Allow",
+          "Action": "s3:ListBucket",
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+          ]
+        }
+      ]
     }
     ```
+
 3. Go to your [Archives page][6] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 
 4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
@@ -128,7 +126,7 @@ This directory structure simplifies the process of querying your historical log 
 
 Within the zipped JSON file, each event’s content is formatted as follows:
 
-```
+```text
 {
     "_id": "123456789abcdefg",
     "date": "2018-05-15T14:31:16.003Z",
@@ -160,6 +158,7 @@ Logs enter the first archive whose filter they match on.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 

@@ -140,7 +140,7 @@ $ find /opt/datadog-agent/ -type f -name build-pysnmp-mib.py -o -name mibdump.py
 
 Windows example:
 
-```
+```text
 C:\>dir mibdump.py /s
 
 # Directory of C:\Program Files\Datadog\Datadog Agent\embedded\Scripts

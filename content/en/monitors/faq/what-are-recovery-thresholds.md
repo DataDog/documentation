@@ -43,7 +43,7 @@ Set the alert or warning recovery threshold when creating a monitor under **Set 
 
 When you [create/edit a monitor via the API][1], use the attributes `critical_recovery` and `warning_recovery` in the `options.thresholds` attribute of your JSON monitor:
 
-```
+```text
 "thresholds": {
                 "critical": 80,
                 "warning": 60,

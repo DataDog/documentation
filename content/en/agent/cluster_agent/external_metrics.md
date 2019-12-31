@@ -75,15 +75,15 @@ Once the Datadog Cluster Agent is up and running:
 
 Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][8] manifest and specify `type: External` for your metrics in order to notify the Datadog Cluster Agent to pull the metrics from Datadog:
 
-```
+```yaml
 spec:
   metric:
     - type: External
       external:
-      metricName: <METRIC_NAME>
+      metricName: "<METRIC_NAME>"
       metricSelector:
         matchLabels:
-          <TAG_KEY>:<TAG_VALUE>
+          "<TAG_KEY>:<TAG_VALUE>"
 ```
 
 **Example**: An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:

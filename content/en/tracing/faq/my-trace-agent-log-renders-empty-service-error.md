@@ -7,8 +7,8 @@ If your Agent is not rendering your [traces][1] on the UI, the first place to lo
 
 You may see the following errors :
 
-```
-2017-03-31 08:36:44 ERROR (receiver_logger.go:21) - dropping trace reason: 
+```text
+2017-03-31 08:36:44 ERROR (receiver_logger.go:21) - dropping trace reason:
 invalid span Span[t_id:631844*********,s_id:631844********,p_id:631844*****,ser:,name:<your.span.name>,
 res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 ```

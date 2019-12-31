@@ -18,13 +18,13 @@ further_reading:
 
 In Datadog, metric data is ingested and stored as data points with a value and timestamp:
 
-```
+```text
 [ 17.82,  22:11:01 ]
 ```
 
 A sequence of data points is stored as a time series:
 
-```
+```text
 [ 17.82,  22:11:01 ]
 [  6.38,  22:11:12 ]
 [  2.87,  22:11:38 ]

@@ -27,7 +27,7 @@ If you haven't already, create a [Datadog account][2].
 
 Before installing the Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page.
 
-```
+```text
 vagrant init ubuntu/xenial64
 vagrant up
 vagrant ssh
@@ -43,7 +43,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.co
 
 Verify the Agent is running with the [status command][7]:
 
-```
+```shell
 sudo datadog-agent status
 ```
 
@@ -55,7 +55,7 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 On the latest version of Agent v6, APM is enabled by default. You can see this in the Agent [configuration file][9]:
 
-```
+```text
 # /etc/datadog-agent/datadog.yaml:
 # apm_config:
 #   Whether or not the APM Agent should run
@@ -136,14 +136,14 @@ You should see a similar output to:
 
 Test your application and send your traces to Datadog using `curl`. Your application should be running (as shown above). In a separate command prompt run:
 
-```
+```text
 vagrant ssh
 curl http://0.0.0.0:5050/
 ```
 
 This outputs:
 
-```
+```text
 hello world
 ```
 

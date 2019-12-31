@@ -67,13 +67,15 @@ instances:
 The Agent detects if it's running on Docker and automatically searches all containers labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
 
 **Dockerfile**
-```
+
+```text
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
 **docker-compose.yaml**
+
 ```yaml
 labels:
   com.datadoghq.ad.check_names: '["openmetrics"]'
@@ -82,7 +84,8 @@ labels:
 ```
 
 **docker run command**
-```
+
+```text
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 

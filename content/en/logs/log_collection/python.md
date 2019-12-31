@@ -75,13 +75,15 @@ logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
 The log file contains the following log record (inline):
+
 ```json
 {
-    "message": "Sign up",
-    "time": "2015-09-01T06:06:26.524448",
-    "referral_code": "52d6ce"
+  "message": "Sign up",
+  "time": "2015-09-01T06:06:26.524448",
+  "referral_code": "52d6ce"
 }
 ```
+
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 {{% /tab %}}
 {{% tab "Python-json-logger" %}}
@@ -135,7 +137,7 @@ Once the [handler is configured][2], the log file contains the following log rec
 
 Create a file `conf.yaml` in the Agent's `conf.d/python.d/` directory with the following content:
 
-```
+```yaml
 init_config:
 
 instances:

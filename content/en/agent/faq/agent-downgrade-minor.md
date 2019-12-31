@@ -18,7 +18,7 @@ To downgrade the Datadog Agent to a prior major version, follow the instructions
 
 ### CLI
 
-```
+```shell
 sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:X.Y.Z-1
 ```
 
@@ -38,7 +38,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-```
+```conf
 class { 'datadog_agent':
       ...
       agent_version => “1:X.Y.Z-1”,
@@ -62,7 +62,7 @@ datadog_agent_allow_downgrade: yes
 
 ### CLI
 
-```
+```shell
 sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-X.Y.Z-1
 ```
 
@@ -82,7 +82,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-```
+```conf
 class { 'datadog_agent':
       ...
       agent_version => “X.Y.Z-1”,
@@ -106,7 +106,7 @@ datadog_agent_allow_downgrade: yes
 
 ### CLI
 
-```
+```shell
 sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage datadog-agent-1:X.Y.Z-1
 ```
 

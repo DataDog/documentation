@@ -236,7 +236,6 @@ Add [tags][1] directly to a `DDTrace\Span` object by calling `Span::setTag()`. F
 
 **Note**: `Tracer::getActiveSpan()` returns `null` if there is no active [span][2].
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
@@ -254,6 +253,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -Ddd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
+
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}

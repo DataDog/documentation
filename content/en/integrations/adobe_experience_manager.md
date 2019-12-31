@@ -39,17 +39,17 @@ Collect Adobe Experience Manager logs to track errors, request response time, an
 
 * Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
-```
+```yaml
 logs_enabled: true
 ```
 
 * Create `adobe.experience.manager.d/conf.yaml` in your [conf.d directory][2] and add the configuration below to start collecting your logs:
 
-```
+```yaml
 logs:
   - type: file
     path: cq-installation-dir/crx-quickstart/logs/*.log
-    service: <MY_APPLICATION>
+    service: "<MY_APPLICATION>"
     source: adobe.experience.manager
 ```
 

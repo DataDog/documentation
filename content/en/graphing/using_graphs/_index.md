@@ -73,7 +73,7 @@ This query creates a single line that represents the total available disk space,
 
 When switching to the JSON view, the query looks like this:
 
-```
+```text
 "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 ```
 
@@ -95,7 +95,7 @@ Modify the displayed value of a metric on a graph by performing an arithmetic op
 
 Visualize the percentage of a metric by dividing one metric over another, for example:
 
-```
+```text
 jvm.heap_memory / jvm.heap_memory_max
 ```
 

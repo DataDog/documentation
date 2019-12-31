@@ -61,7 +61,7 @@ Here are some example datagrams:
 
 Here are some example datagrams:
 
-```
+```text
 ## Send an exception
 _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
 
@@ -86,7 +86,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 Here's an example datagram:
 
-```
+```text
 # Send a CRITICAL status for a remote connection
 _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
@@ -105,7 +105,7 @@ DogStatsD creates a message that contains information about your metric, event, 
 
 The format for sending metrics is:
 
-```
+```text
 <METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>
 ```
 
@@ -127,7 +127,7 @@ $ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 
 On Windows:
 
-```
+```powershell
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
@@ -146,7 +146,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 
 The format for sending events is:
 
-```
+```text
 _e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<DATE_EVENT>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>.
 ```
 
@@ -154,7 +154,7 @@ The examples below calculate the size of the event's title and body.
 
 On Linux:
 
-```
+```shell
 $ title="Event from the shell"
 $ text="This was sent from Bash!"
 $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
@@ -162,7 +162,7 @@ $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/81
 
 On Windows:
 
-```
+```powershell
 PS C:> $title = "Event from the shell"
 PS C:> $text = "This was sent from PowerShell!"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
@@ -173,7 +173,7 @@ PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#she
 
 The format for sending service checks is:
 
-```
+```text
 _sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>|m:<SERVICE_CHECK_MESSAGE>
 ```
 
@@ -185,7 +185,7 @@ $ echo -n "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10
 
 On Windows:
 
-```
+```powershell
 PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s"
 ```
 

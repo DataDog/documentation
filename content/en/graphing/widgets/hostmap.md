@@ -47,7 +47,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the host map widget is:
 
-```
+```text
 HOSTMAP_SCHEMA = {
     "type": "object",
     "properties": {

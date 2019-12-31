@@ -18,7 +18,7 @@ By default the [Datadog-SQL server Check][1] only captures *some* of the metrics
 
 Find below an example for a basic custom metric collection. There is no instance associated with this counter. **Note**: You can specify optional `tags` to be sent with your metrics:
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.clr.execution
     counter_name: CLR Execution
@@ -29,13 +29,13 @@ custom_metrics:
 Parameter descriptions:
 
 | Parameter      | Description                                           |
-| ------         | ------                                                |
+|----------------|-------------------------------------------------------|
 | `name`         | Name of your metric inside Datadog.                   |
 | `counter_name` | The counter name of [SQL server database objects][2]. |
 
 If a counter has multiple instances associated with it, you can choose to fetch a single instance with the `instance_name` parameter name:
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.exec.in_progress
     counter_name: OLEDB calls
@@ -44,7 +44,7 @@ custom_metrics:
 
 For finer granularity, query by the `object_name` :
 
-```
+```yaml
 custom_metrics:
 - name: sqlserver.cache.hit_ratio
   counter_name: Cache Hit Ratio
@@ -54,7 +54,7 @@ custom_metrics:
 
 To collect all instances of a counter with multiple instances use the special value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
 
-```
+```yaml
 - name: sqlserver.db.commit_table_entries
   counter_name: Commit table entries
   instance_name: ALL
@@ -65,7 +65,7 @@ The default table from which counters are drawn is the `sys.dm_os_performance_co
 
 To report a metric drawn from one of the additional tables, specify the table in the counter definition with the `table` parameter, as well as the counter columns to be reported with the `columns` parameter:
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.LCK_M_S
     table: sys.dm_os_wait_stats
@@ -80,7 +80,7 @@ The above example reports two metrics, `sqlserver.LCK_M_S.max_wait_time.ms` and 
 
 **Note**: If metrics like `sys.dm_io_virtual_file_stats` and `sys.dm_os_memory_clerks` are not associated with a `counter_name` only the columns need to be specified:
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.io_file_stats
     table: sys.dm_io_virtual_file_stats
@@ -102,7 +102,7 @@ Collecting metrics from a custom procedure produces a large amount of custom met
 A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs the following columns:
 
 | Column   | Description                                               |
-| -----    | ----                                                      |
+|----------|-----------------------------------------------------------|
 | `metric` | The name of the metric as it appears in Datadog.          |
 | `type`   | The [metric type][3] (gauge, rate, or [histogram][4]).    |
 | `value`  | The value of the metric (must be convertible to a float). |
@@ -110,7 +110,7 @@ A temporary table must be setup to collect the custom metrics for reporting to D
 
 The following stored procedure is created within the master database:
 
-```
+```text
 -- Create a stored procedure with the name <PROCEDURE_NAME>
 CREATE PROCEDURE [dbo].[<PROCEDURE_NAME>]
 AS
@@ -149,38 +149,38 @@ GO
 
 The stored procedure outputs the following custom metrics:
 
-- `sql.test.test`
-- `sql.test.gauge`
-- `sql.test.rate`
-- `sql.test.histogram.95percentile`
-- `sql.test.histogram.avg`
-- `sql.test.histogram.count`
-- `sql.test.histogram.max`
-- `sql.test.histogram.median`
+* `sql.test.test`
+* `sql.test.gauge`
+* `sql.test.rate`
+* `sql.test.histogram.95percentile`
+* `sql.test.histogram.avg`
+* `sql.test.histogram.count`
+* `sql.test.histogram.max`
+* `sql.test.histogram.median`
 
 ### Update the SQL Server integration configuration
 
 To collect metrics from a custom procedure, create a new instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute. A separate instance is required for any existing configuration. Instances with a stored procedure do not process anything but the stored procedure, for example:
 
-```
+```yaml
   - host: 127.0.0.1,1433
     username: datadog
-    password: <PASSWORD>
+    password: "<PASSWORD>"
     database: master
   - host: 127.0.0.1,1433
     username: datadog
-    password: <PASSWORD>
-    stored_procedure: <PROCEDURE_NAME>
+    password: "<PASSWORD>"
+    stored_procedure: "<PROCEDURE_NAME>"
     database: master
 ```
 
 You can also specify:
 
-| Parameter                 | Description                                                                                   | Default            |
-| ---------                 | -------                                                                                       | --------           |
-| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check.                      | `False`            |
+| Parameter                 | Description                                                                               | Default            |
+|---------------------------|-------------------------------------------------------------------------------------------|--------------------|
+| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check.                  | `False`            |
 | `proc_only_if`            | Run this SQL before each call to `stored_procedure`. If it returns 1, call the procedure. |                    |
-| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                                | database attribute |
+| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                            | database attribute |
 
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
@@ -188,8 +188,8 @@ You can also specify:
 
 If your custom metrics are not appearing in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
 
-- The `<PROCEDURE_NAME>` is typed incorrectly.
-- The database username specified in the configuration may not have permission to run the stored procedure.
+* The `<PROCEDURE_NAME>` is typed incorrectly.
+* The database username specified in the configuration may not have permission to run the stored procedure.
 
 ## Further Reading
 

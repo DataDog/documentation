@@ -38,7 +38,8 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 For all monitor types, monitor changes create an event in the [event stream][20]. This event explains the change and displays the user that made the change.
 
 If you made changes to a monitor, you can see examples with the following event search:
-```
+
+```text
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 

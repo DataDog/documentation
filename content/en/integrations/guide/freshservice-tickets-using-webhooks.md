@@ -69,7 +69,7 @@ You can now add the `@webhook-<NAME>` to your monitor message. The webhook is tr
 
 We recommend adding your at-mention inside of `{{#is_alert}}` or `{{#is_warning}}` conditionals, for example:
 
-```
+```text
 {{#is_alert}}
     {{host.name}} is down!
     @webhook-freshservice
@@ -88,7 +88,7 @@ The Webhooks integration can only create tickets. Updating an existing ticket re
 
 The `$ALERT_STATUS` and `$PRIORITY` variables return strings (such as `ALERT` and `NORMAL`) instead of a numerical value expected by Freshservice’s API. To setup different levels of status and priorities, create duplicate webhooks with hard-coded status and priority fields. Then, `@-mention` those webhooks inside of related conditional statements, for example:
 
-```
+```text
 {{#is_warning}}
     Disk space usage is above 80%
     @webhook-freshservice-warning
@@ -122,7 +122,7 @@ Tagging is supported in Freshservice’s API, but note the following:
 
 If your webhooks fail to send after your monitor triggers, go to your Event Stream and search for `sources:webhooks` `status:error`. This searches for events with failed webhooks that contain troubleshooting information, for example:
 
-```
+```text
 - Reply status code was: HTTP 401
 - Reply content was:
   {"code":"invalid_credentials","message":"You have to be logged in to perform this action."}

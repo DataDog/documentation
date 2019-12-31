@@ -68,7 +68,7 @@ The following configuration options are available:
 
 The dedicated [widget JSON schema definition][3] for the heat map widget is:
 
-```
+```text
 HEATMAP_SCHEMA = {
     "type": "object",
     "properties": {

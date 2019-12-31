@@ -50,7 +50,7 @@ The Agent configuration file (`datadog.yaml`) is also used to set host tags whic
 
 The Agent configuration file (`datadog.conf`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent. Tags within `datadog.conf` must be in the format:
 
-```
+```text
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
@@ -63,13 +63,13 @@ Tags for the [integrations][5] installed with the Agent are configured with YAML
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
-```
+```text
 tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 or
 
-```
+```text
 tags:
     - "<KEY_1>:<VALUE_1>"
     - "<KEY_2>:<VALUE_2>"
@@ -177,13 +177,13 @@ For OpenTracing use the `tracer.WithGlobalTag` start option to set the environme
 {{% tab "Java" %}}
 Via sysprop:
 
-```
+```text
 -Ddd.trace.span.tags=env:<ENVIRONMENT>
 ```
 
 Via environment variables:
 
-```
+```text
 DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
 ```
 
@@ -201,6 +201,7 @@ Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
 from ddtrace import tracer
 tracer.set_tags({'env': '<ENVIRONMENT>'})
 ```
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -305,27 +306,27 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 
 Tagging within Datadog is a powerful way to gather your metrics. For a quick example, perhaps you're looking for a sum of the following metrics coming from your website (example.com):
 
-```
+```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_prod_1")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example_prod_2")
 ```
 
 Datadog recommends adding the tag `domain:example.com` and leaving off the hostname (the Datadog API determines the hostname automatically):
 
-```
+```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
 With the `domain:example.com` tag, the page views can be summed across hosts:
 
-```
+```text
 sum:page.views{domain:example.com}
 ```
 
 To get a breakdown by host, use:
 
-```
+```text
 sum:page.views{domain:example.com} by {host}
 ```
 

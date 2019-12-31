@@ -12,7 +12,7 @@ further_reading:
 
 To submit an event from a custom Agent Check use the `event(<EVENT_DICT>)` function:
 
-```
+```text
 self.event(
             {
               "timestamp": <TIMESTAMP_EPOCH>,
@@ -32,7 +32,7 @@ self.event(
 The following keys and data types are available in the event dictionary:
 
 | Key                | Type            | Required | Description                                                   |
-| ------------------ | --------------- | -------- | ------------------------------------------------------------- |
+|--------------------|-----------------|----------|---------------------------------------------------------------|
 | `timestamp`        | Integer         | Yes      | The epoch timestamp for the event                             |
 | `event_type`       | String          | Yes      | The event name                                                |
 | `msg_title`        | String          | Yes      | The title of the event                                        |
@@ -102,6 +102,7 @@ This is an example of using a custom Agent check to send one event periodically.
 
         (...)
     ```
+
 5. Finally, go to your [Datadog Event stream][6] to see your events:
 
 {{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" responsive="true" style="width:80%;">}}

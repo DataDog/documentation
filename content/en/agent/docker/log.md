@@ -42,7 +42,7 @@ The first step is to install the Agent (whether the containerized version or dir
 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
 
-```
+```shell
 docker run -d --name datadog-agent \
            -e DD_API_KEY=<YOUR_API_KEY> \
            -e DD_LOGS_ENABLED=true \
@@ -59,13 +59,13 @@ It is recommended that you pick the latest version of the Datadog Agent. Consult
 
 The commands related to log collection are:
 
-| Command                                               | Description                                                                                                                                                  |
-|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-e DD_LOGS_ENABLED=true`                             | Enables log collection when set to `true`. The Agent looks for log instructions in configuration files.                                                      |
-| `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Adds a log configuration that enables log collection for all containers.                                                                                     |
-| `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host. |
-| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics.                    |
-| `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                    |
+| Command                                               | Description                                                                                                                                                      |
+|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-e DD_LOGS_ENABLED=true`                             | Enables log collection when set to `true`. The Agent looks for log instructions in configuration files.                                                          |
+| `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Adds a log configuration that enables log collection for all containers.                                                                                         |
+| `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.     |
+| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. |
+| `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
@@ -76,7 +76,7 @@ Install the [latest version of Agent 6][1] on your host. The Agent can collect l
 
 Collecting logs is *disabled* by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
 
-```
+```yaml
 logs_enabled: true
 listeners:
   - name: docker
@@ -117,7 +117,7 @@ Autodiscovery expects labels to follow this format, depending on the file type:
 
 Add the following `LABEL` to your Dockerfile:
 
-```
+```text
 LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
@@ -126,9 +126,9 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 
 Add the following label in your `docker-compose.yaml` file:
 
-```
+```yaml
 labels:
-  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+  com.datadoghq.ad.logs: '["<LOGS_CONFIG>"]'
 ```
 
 {{% /tab %}}
@@ -136,7 +136,7 @@ labels:
 
 Add the following label as a run command:
 
-```
+```text
 -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
@@ -152,13 +152,13 @@ Where `<LOG_CONFIG>` is the log collection configuration you would find inside a
 
 The following Dockerfile enables the NGINX log integration on the corresponding container (`service` value can be changed):
 
-```
+```text
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
 To enable both the metric and logs NGINX integrations:
 
-```
+```text
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
@@ -172,7 +172,7 @@ For multi-line logs like stack traces, the Agent has [multi-line processing rule
 
 Example log (Java stack traces):
 
-```
+```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Book.getTitle(Book.java:16)
         at com.example.myproject.Author.getBookTitles(Author.java:25)
@@ -181,10 +181,11 @@ Example log (Java stack traces):
 
 Use the `com.datadoghq.ad.logs` label as below on your containers to make sure that the above log is properly collected:
 
-  ```
-  labels:
-    com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
-  ```
+```yaml
+labels:
+  com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+```
+
 See the [multi-line processing rule documentation][1] to get more pattern examples.
 
 [1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
@@ -193,7 +194,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 If you are running Kubernetes, pod annotations can be used.
 
-```
+```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -213,7 +214,6 @@ spec:
       containers:
         - name: nginx
           image: nginx:latest
-
 ```
 
 Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
@@ -242,14 +242,14 @@ Two environment variables are available to include or exclude a list of containe
 
 The format for these options is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
 
-```
+```text
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
 ```
 
 Or to exclude a specific container name:
 
-```
+```text
 DD_AC_EXCLUDE = "name:datadog-agent"
 ```
 
@@ -264,14 +264,14 @@ Two parameters are available in `datadog.yaml` to include or exclude a list of c
 
 For example, if you only want to monitor two images, and exclude the rest, specify:
 
-```
+```text
 ac_exclude: ["image:.*"]
 ac_include: ["image:cp-kafka", "image:k8szk"]
 ```
 
 Or to exclude the Datadog Agent:
 
-```
+```text
 ac_exclude = ["name:datadog-agent"]
 ```
 

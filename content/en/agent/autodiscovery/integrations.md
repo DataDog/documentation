@@ -157,7 +157,7 @@ These integration templates are meant for basic cases. If you need a custom Data
 
 **Example auto-configuration file**:
 
-```
+```text
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -178,11 +178,11 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
-```
+```text
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: <NAME>-config-map
+  name: "<NAME>-config-map"
   namespace: default
 data:
   <INTEGRATION_NAME>-config: |-

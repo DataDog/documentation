@@ -106,7 +106,7 @@ See [Explore your data in full-screen graph mode][9], to learn more.
 
 The dedicated [widget JSON schema definition][10] for the timeseries widget is:
 
-```
+```text
 TIMESERIES_SCHEMA = {
     "type": "object",
     "properties": {

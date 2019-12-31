@@ -69,32 +69,29 @@ Datadog requires the permission to read from your archives in order to rehydrate
 
 In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
-```
+```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "DatadogUploadAndRehydrateLogArchives",
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-                "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-            ]
-        },
-        {
-            "Sid": "DatadogRehydrateLogArchivesListBucket",
-            "Effect": "Allow",
-            "Action": "s3:ListBucket",
-            "Resource": [
-                "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-                "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-            ]
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DatadogUploadAndRehydrateLogArchives",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": [
+        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+      ]
+    },
+    {
+      "Sid": "DatadogRehydrateLogArchivesListBucket",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": [
+        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+      ]
+    }
+  ]
 }
 ```
 

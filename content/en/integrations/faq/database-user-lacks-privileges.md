@@ -3,7 +3,7 @@ title: Database user lacks privileges
 kind: faq
 ---
 
-```
+```text
     mysql
     -----
       - instance #0 [WARNING]
@@ -13,7 +13,7 @@ kind: faq
 
 The Agent can authenticate, but it lacks privileges for one or more metrics it wants to collect. In this case, it lacks the PROCESS privilege:
 
-```
+```text
 mysql> select user,host,process_priv from mysql.user where user='datadog';
 +---------+-----------+--------------+
 | user    | host      | process_priv |
@@ -24,4 +24,3 @@ mysql> select user,host,process_priv from mysql.user where user='datadog';
 ```
 
 Review the Configuration section and grant the Datadog user all necessary privileges. Do NOT grant all privileges on all databases to this user.
-

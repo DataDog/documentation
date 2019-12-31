@@ -88,6 +88,7 @@ public class BackupLedger {
   }
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -162,6 +163,7 @@ class BackupLedger
   end
 end
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -230,6 +232,7 @@ function write (transactions) {
   // [...]
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -259,6 +262,7 @@ public void Write(List<Transaction> transactions)
     // [...]
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -328,6 +332,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
   });
 ?>
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{< /tabs >}}

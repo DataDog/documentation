@@ -39,7 +39,7 @@ In our example code above, the DogStatsD host must match the Datadog Agent conta
 
 After building the web application container, run it and use the `--link` argument to setup a network connection to the Datadog Agent container:
 
-```
+```text
 docker run -d --name my-web-app \
     --link dd-agent:dd-agent
     my-web-app

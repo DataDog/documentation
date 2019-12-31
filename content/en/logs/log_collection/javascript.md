@@ -49,7 +49,7 @@ In order to not miss any logs or errors, you should load and configure the libra
 {{< tabs >}}
 {{% tab "US" %}}
 
-```
+```html
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
@@ -74,26 +74,21 @@ In order to not miss any logs or errors, you should load and configure the libra
 {{% /tab %}}
 {{% tab "EU" %}}
 
-```
-<html>
-  <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
-    <script>
-      // Set your client token
-      window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<CLIENT_TOKEN>',
-        forwardErrorsToLogs: true,
-      });
-
-      // OPTIONAL
-      // add global metadata attribute--one attribute can be added at a time
-      window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
-    </script>
-    ...
-  </head>
-...
-</html>
+```html
+<head>
+  <title>Example to send logs to Datadog</title>
+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+  <script>
+    // Set your client token
+    window.DD_LOGS && DD_LOGS.init({
+      clientToken: '<CLIENT_TOKEN>',
+      forwardErrorsToLogs: true,
+    });
+    // OPTIONAL
+    // add global metadata attribute--one attribute can be added at a time
+    window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
+  </script>
+</head>
 ```
 
 {{% /tab %}}
@@ -105,12 +100,12 @@ In order to not miss any logs or errors, you should load and configure the libra
 
 Send a custom log entry directly to Datadog with the `log` function:
 
-```
+```text
 window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
 ```
 
 | Placeholder         | Description                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------|
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
 | `<STATUS>`          | Status of your log; the accepted status values are `debug`, `info`, `warn`, or `error`. |
@@ -119,7 +114,7 @@ Status can also be used as a placeholder for the `log` function `DD_LOGS.logger.
 
 **Example:**
 
-```
+```js
 ...
 <script>
 ...
@@ -131,22 +126,18 @@ window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id
 
 This gives the following result:
 
-```
+```json
 {
   "status": "info",
   "session_id": "1234",
   "name": "buttonName",
   "id": 123,
   "message": "Button clicked",
-  "http":{
+  "http": {
     "url": "...",
     "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36"
-    },
-  "network":{
-    "client": {
-      "ip" : "109.30.xx.xxx"
-    }
-  }
+  },
+  "network": {"client": {"ip": "109.30.xx.xxx"}}
 }
 ```
 
@@ -165,7 +156,7 @@ The logger adds the following information by default:
 
 In some cases, you might want to disable the debug mode or to only collect warnings and errors. This can be achieved by changing the logging level: set the `level` parameter to `debug` (default), `info`, `warn`, or `error` :
 
-```
+```js
 window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
@@ -178,7 +169,8 @@ Only logs with a status equal to or higher than the specified level are sent.
 By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console, or to not send logs at all. This can be used in the development environment to keep the logs locally.
 
 Use the `setHandler` function with the values `http` (default), `console`, or `silent`:
-```
+
+```js
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
@@ -192,7 +184,7 @@ Each logger can optionally be configured with its own log level, handler, and co
 
 Use the following to define a custom logger:
 
-```
+```js
 window.DD_LOGS && DD_LOGS.createLogger (<LOGGER_NAME>, {
     level?: 'debug' | 'info' | 'warn' | 'error'
     handler?: 'http' | 'console' | 'silent'
@@ -203,7 +195,7 @@ window.DD_LOGS && DD_LOGS.createLogger (<LOGGER_NAME>, {
 Those parameters can also be set with the `setContext`, `setLevel`, and `setHandler` functions.
 After the creation of this logger, you can then access it in any part of your JavaScript code with the `getLogger` function:
 
-```
+```js
 if (window.DD_LOGS) {
     const my_logger = DD_LOGS.getLogger('<LOGGER_NAME>')
 }
@@ -213,7 +205,7 @@ if (window.DD_LOGS) {
 
 Assume that there is a signup logger, defined with all the other loggers:
 
-```
+```js
 # create a new logger
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.createLogger('signupLogger')
@@ -223,17 +215,17 @@ if (window.DD_LOGS) {
 
 It can now be used in a different part of the code with:
 
-```
-...
+```html
+// ...
 <script>
-...
+// ...
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.getLogger('signupLogger')
     signupLogger.info('Test sign up completed')
 }
-...
+//...
 </script>
-...
+//...
 ```
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
@@ -242,7 +234,7 @@ if (window.DD_LOGS) {
 
 It is possible to set the entire context in one call. This also overrides previously set attributes, if any:
 
-```
+```js
 # For one logger
 if (window.DD_LOGS) {
     my_logger.setContext(<JSON_ATTRIBUTES>)
@@ -254,7 +246,7 @@ window.DD_LOGS && DD_LOGS.setLoggerGlobalContext(<JSON_ATTRIBUTES>)
 
 **Example:**
 
-```
+```js
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.getLogger('signupLogger')
     signupLogger.setContext({

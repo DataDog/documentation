@@ -69,14 +69,17 @@ For Java based producers and consumers, add the following to the `conf.yaml` and
 ### Partition doesn't exist
 
 This issue is specifically for the Kafka Consumer Agent check. If you specify a partition in `kafka_consumer.d/conf.yaml` that doesn't exist in your environment, you see the following error:
+
 ```text
 instance - #0 [Error]: ''
 ```
 
 To remedy, specify the correct partition for your topic. This correlates to this line:
+
 ```yaml
 #     <TOPIC_NAME_1>: [0, 1, 4, 12]
 ```
+
 ### Partition context limitation
 
 The number of partition contexts collection is limited to 200. If you require more contexts, contact [Datadog support][11].

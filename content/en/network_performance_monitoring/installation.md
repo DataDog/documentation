@@ -180,7 +180,7 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 To enable network performance monitoring in Docker, use the following configuration when starting the container Agent:
 
-```
+```shell
 $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 	-e DD_SYSTEM_PROBE_ENABLED=true \
 	-e DD_PROCESS_AGENT_ENABLED=true \

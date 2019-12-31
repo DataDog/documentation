@@ -17,7 +17,7 @@ Datadog Log Management is used to collect logs from your application. This page 
 1. If you haven't already, create a [Datadog account][1] and [enable Datadog Log Management][2].
 2. Set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page:
 
-    ```
+    ```text
     vagrant init ubuntu/xenial64
     vagrant up
     vagrant ssh
@@ -39,7 +39,7 @@ Logs can be a full-text message:
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_KEY> Plain text log sent through TCP
@@ -50,7 +50,7 @@ telnet intake.logs.datadoghq.com 10514
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> Plain text log sent through TCP
@@ -68,7 +68,7 @@ or a JSON object that is automatically parsed by Datadog:
 {{< tabs >}}
 {{% tab "US Site" %}}
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
@@ -77,7 +77,7 @@ telnet intake.logs.datadoghq.com 10514
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
@@ -99,14 +99,14 @@ To install the Datadog Agent within your Vagrant host, use the [one line install
 {{< tabs >}}
 {{% tab "US Site" %}}
 
-```
+```text
 DD_API_KEY=<YOUR_DD_API_KEY>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
-```
+```text
 DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
@@ -117,7 +117,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://r
 
 Verify the Agent is running with the [status command][7] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -143,7 +143,7 @@ logs_enabled: true
 
 In order to collect logs from a custom file, first create the file and add one line of logs to it:
 
-```
+```shell
 $ touch log_file_to_monitor.log
 
 $ echo "First line of log" >> log_file_to_monitor.log
@@ -155,19 +155,19 @@ To specify to the Agent to monitor this log file:
 
 1. Create a new configuration folder in the [configuration directory of the Agent][10]:
 
-    ```
+    ```shell
     sudo mkdir /etc/datadog-agent/conf.d/custom_log_collection.d/
     ```
 
 2. Create your configuration file within this new configuration folder:
 
-    ```
+    ```shell
     sudo touch /etc/datadog-agent/conf.d/custom_log_collection.d/conf.yaml
     ```
 
 3. Copy and paste the following content within this `conf.yaml` file:
 
-      ```
+      ```yaml
       logs:
         - type: file
           path: /home/ubuntu/log_file_to_monitor.log
@@ -181,7 +181,7 @@ To specify to the Agent to monitor this log file:
 
 If the log configuration is correct, the [status command][7] `sudo datadog-agent status` outputs:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -200,7 +200,7 @@ Logs Agent
 
 Now that everything is configured correctly, add new entries to your log file to see them within Datadog:
 
-```
+```shell
 $ echo "New line of log in the log file" >> log_file_to_monitor.log
 ```
 

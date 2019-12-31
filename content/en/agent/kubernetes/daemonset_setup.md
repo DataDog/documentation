@@ -323,7 +323,7 @@ Since Agent v6.14+, the Agent collects logs for all containers (running or stopp
 
 To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-```
+```text
 (...)
       env:
         (...)
@@ -334,7 +334,7 @@ To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCA
 
 Then, forward the port of the Agent to the host.
 
-```
+```text
 (...)
       ports:
         (...)
@@ -347,7 +347,7 @@ Then, forward the port of the Agent to the host.
 
 Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
 
-```
+```text
 apiVersion: apps/v1
 kind: Deployment
 ...
@@ -364,7 +364,7 @@ kind: Deployment
 
 Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -384,7 +384,7 @@ See [Process collection for Kubernetes][15].
 
 To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-```
+```text
 (...)
       env:
         (...)

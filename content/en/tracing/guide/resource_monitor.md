@@ -22,7 +22,7 @@ While the current APM monitor has the ability to set up Alerts on a per [service
 Since these are regular Datadog Metrics and Tags, copy that query into a New Monitor.
 The downside here is that see the resource hash in the field, as opposed to the more readable name. However, to work around this, construct your Monitor message to send a link to the resource Page of the resource that caused the monitor to trigger. Each resource APM Page has the following format:
 
-```
+```text
 /apm/resource/<Service>/<top_level_name>/<Resource_Name>?env=<env>
 ```
 

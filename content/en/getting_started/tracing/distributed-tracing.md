@@ -163,7 +163,7 @@ From the above image, we can see how the request is first received by the **thin
 
 In our code we added:
 
-```
+```python
 tracer.current_span().set_tag('subject', subject)
 ```
 

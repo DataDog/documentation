@@ -123,7 +123,7 @@ kubectl get daemonset
 
 If the Agent is deployed, a similar output to the text below is displayed, where **desired** and **current** are equal to the number of nodes running in your cluster.
 
-```
+```text
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
@@ -132,7 +132,7 @@ dd-agent   3         3         <none>          11h
 
 [Run the Agent's `info` subcommand][11] and look for `kubernetes` under the Checks section:
 
-```
+```text
 Checks
 ======
     kubernetes

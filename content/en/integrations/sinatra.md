@@ -59,7 +59,7 @@ More details are available in the [Rack recipes documentation][6].
 
 This logger uses the common Apache Access format and generates logs in the following format:
 
-```
+```text
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```

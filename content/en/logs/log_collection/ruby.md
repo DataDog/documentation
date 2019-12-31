@@ -19,7 +19,7 @@ To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1
 
 Instead of having a Rail logging output like this:
 
-```
+```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
 Processing by HomeController#index as HTML
   Rendered text template within layouts/application (0.0ms)
@@ -32,20 +32,20 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 
 After lograge formating you get a single log line with all the important information in a JSON format like this:
 
-```
+```json
 {
-  "timestamp":"2016-01-12T19:15:19.118829+01:00",
-  "level":"INFO",
-  "logger":"Rails",
-  "method":"GET",
-  "path":"/jobs/833552.json",
-  "format":"json",
-  "controller":"jobs",
-  "action":"show",
-  "status":200,
-  "duration":58.33,
-  "view":40.43,
-  "db":15.26
+  "timestamp": "2016-01-12T19:15:19.118829+01:00",
+  "level": "INFO",
+  "logger": "Rails",
+  "method": "GET",
+  "path": "/jobs/833552.json",
+  "format": "json",
+  "controller": "jobs",
+  "action": "show",
+  "status": 200,
+  "duration": 58.33,
+  "view": 40.43,
+  "db": 15.26
 }
 ```
 

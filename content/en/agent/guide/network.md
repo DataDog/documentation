@@ -38,7 +38,7 @@ These domains are **CNAME** records pointing to a set of static IP addresses. Th
 
 The information is structured as JSON following this schema:
 
-```
+```text
 {
     "version": 1,                       // <-- incremented every time this information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification

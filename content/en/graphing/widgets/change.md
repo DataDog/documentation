@@ -73,7 +73,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the change widget is:
 
-```
+```text
 CHANGE_SCHEMA = {
     "type": "object",
     "properties": {

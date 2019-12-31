@@ -39,35 +39,35 @@ Unless the Datadog Agent is configured to <a href="/agent/logs/?tab=tailexisting
 
 Setting an HTTP proxy for all `https` requests:
 
-```
+```yaml
 proxy:
-    https: http://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>
+    https: "http://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>"
 ```
 
 Note: When setting up an HTTP proxy for `https` requests, the actual communication between the Agent and Datadog is encrypted end-to-end with TLS and cannot be decrypted by the proxy. The only unencrypted communication is the `HTTP CONNECT` request that's made between the Agent and the proxy to establish the initial TCP connection between the Agent and Datadog. As such, when using a proxy for `https` requests, there is no need to use an HTTPS proxy in order to have encrypted communication between the Agent and Datadog.
 
 Setting an HTTPS proxy for both `https` and `http` requests:
 
-```
+```yaml
 proxy:
-    https: https://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>
-    http: https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>
+    https: "https://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>"
+    http: "https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>"
 ```
 
 Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` requests:
 
-```
+```yaml
 proxy:
-    https: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
-    http: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+    https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
+    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
 ```
 
 Using the `no_proxy` list to specify hosts that must bypass the proxy:
 
-```
+```yaml
 proxy:
-    https: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
-    http: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+    https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
+    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
     no_proxy:
       - host1
       - host2
@@ -100,7 +100,7 @@ The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used t
 
 Edit the `datadog.conf` file with your proxy information:
 
-```
+```text
 # If you need a proxy to connect to the Internet, provide the settings here
 proxy_host: my-proxy.example.com
 proxy_port: 3128

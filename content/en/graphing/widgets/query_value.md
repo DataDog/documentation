@@ -49,7 +49,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the query value widget is:
 
-```
+```text
 QUERY_VALUE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -83,7 +83,7 @@ QUERY_VALUE_SCHEMA = {
 
 Additional properties allowed in the `request` object:
 
-```
+```text
 {
     "conditional_formats": CONDITIONAL_FORMATS_SCHEMA,
     "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}

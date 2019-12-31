@@ -31,7 +31,7 @@ apm_config:
 {{% tab "Agent 5.25.0+" %}}
 In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
-```
+```text
 [trace.analyzed_spans]
 <SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
 <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
@@ -41,11 +41,11 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 {{% tab "Docker" %}}
 Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). Format should be a comma-separated regular expressions without spaces. For example:
 
-```
+```text
 DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
 ```
 
-```
+```text
 `my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 

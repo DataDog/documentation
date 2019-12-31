@@ -57,12 +57,12 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
 1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones.
 
-    | Value           | Type                        | Action                                                                                                                                                                                                                         |
-    |:----------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | **MANUAL_DROP** | User input                  | The Agent drops the trace.                                                                                                                                                                                                     |
-    | **AUTO_DROP**   | Automatic sampling decision | The Agent drops the trace.                                                                                                                                                                                                     |
-    | **AUTO_KEEP**   | Automatic sampling decision | The Agent keeps the trace.                                                                                                                                                                                                     |
-    | **MANUAL_KEEP** | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all spans marked for `MANUAL_KEEP` are counted as billable spans. |
+| Value           | Type                        | Action                                                                                                                                                                                                                         |
+|:----------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **MANUAL_DROP** | User input                  | The Agent drops the trace.                                                                                                                                                                                                     |
+| **AUTO_DROP**   | Automatic sampling decision | The Agent drops the trace.                                                                                                                                                                                                     |
+| **AUTO_KEEP**   | Automatic sampling decision | The Agent keeps the trace.                                                                                                                                                                                                     |
+| **MANUAL_KEEP** | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all spans marked for `MANUAL_KEEP` are counted as billable spans. |
 
     Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
@@ -109,6 +109,7 @@ public class MyClass {
     }
 }
 ```
+
 Manually drop a trace:
 
 ```java
@@ -173,6 +174,7 @@ Datadog.tracer.trace(name, options) do |span|
   # method impl follows
 end
 ```
+
 Manually drop a trace:
 
 ```ruby
@@ -182,6 +184,7 @@ Datadog.tracer.trace(name, options) do |span|
   # method impl follows
 end
 ```
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -249,6 +252,7 @@ span.setTag(tags.MANUAL_KEEP)
 //method impl follows
 
 ```
+
 Manually drop a trace:
 
 ```js
@@ -280,6 +284,7 @@ using(var scope = Tracer.Instance.StartActive(operationName))
     //method impl follows
 }
 ```
+
 Manually drop a trace:
 
 ```cs
@@ -344,6 +349,7 @@ auto span = tracer->StartSpan("operation_name");
 span->SetTag(datadog::tags::manual_keep, {});
 //method impl follows
 ```
+
 Manually drop a trace:
 
 ```cpp

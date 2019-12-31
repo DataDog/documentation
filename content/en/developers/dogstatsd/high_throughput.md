@@ -58,6 +58,7 @@ func main() {
   statsd.Gauge("example_metric.gauge", 1, []string{"env:dev"}, 1)
 }
 ```
+
 [1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
 
@@ -200,12 +201,14 @@ $ sysctl -w net.core.rmem_max=26214400
 ```
 
 Add the following configuration to `/etc/sysctl.conf` to make this change permanent:
-```
+
+```conf
 net.core.rmem_max = 26214400
 ```
 
 Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number in `datadog.yaml`:
-```
+
+```yaml
 dogstatsd_so_rcvbuf: 26214400
 ```
 

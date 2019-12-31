@@ -24,21 +24,21 @@ The check uses timestamps provided by the PCAP library to compute the time betwe
 
 Debian-based systems should use one of the following:
 
-```
+```text
 $ sudo apt-get install libcap
 $ sudo apt-get install libcap2-bin
 ```
 
 Redhat-based systems should use one of these:
 
-```
+```text
 $ sudo yum install libcap
 $ sudo yum install compat-libcap1
 ```
 
 Finally, configure PCAP:
 
-```
+```text
 $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 

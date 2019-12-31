@@ -40,7 +40,7 @@ If you choose a multi-alert monitor, the UI shows the monitor's group-by clause 
 
 You should choose monitors that have the same groups. Otherwise, the UI warns you that such a composite monitor may never trigger:
 
-```
+```text
 Group Matching Error
 The selected monitors in the expression may not lead to a
 composite result because they have not evaluated any
@@ -57,7 +57,7 @@ In the **Trigger when** field, write your desired trigger condition using Boolea
 
 The following are all valid trigger conditions:
 
-```
+```text
 !(a && b)
 a || b && !c
 (a || b) && (c || d)

@@ -9,7 +9,7 @@ Interpolation is not about filling arbitrary large gaps in a metric series, but 
 
 Most of the time graphing in Datadog is about mixing together data from separate sources into a single line for your graph. However, separate sources might not submit data at the same time and with the same frequency.
 
-```
+```text
 net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
 1: host:A,env:prod|    15                         25
@@ -20,7 +20,7 @@ net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 
 The above example shows that merging sources directly produces absurd results just because sources are not naturally aligned. Interpolation solves this problem by providing relevant values just for calculations.
 
-```
+```text
 net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
 1: host:A,env:prod|    15       18.3              25        X

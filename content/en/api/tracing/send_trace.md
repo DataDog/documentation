@@ -13,13 +13,13 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 
 Traces can be sent as an array of [traces][2]:
 
-```
+```text
 [ trace1, trace2, trace3 ]
 ```
 
 and each trace is an array of [spans][3]:
 
-```
+```text
 trace1 = [ span, span2, span3 ]
 ```
 

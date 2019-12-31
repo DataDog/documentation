@@ -45,7 +45,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the log stream widget is:
 
-```
+```text
 LOG_STREAM_SCHEMA = {
     "type": "object",
     "properties": {

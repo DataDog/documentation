@@ -84,7 +84,7 @@ Custom parsing functions must:
 
 Let's imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
 
-```
+```text
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
@@ -110,7 +110,8 @@ def my_log_parser(logger, test):
 ```
 
 And then you would configure your `datadog.conf` to include the dogstream option as follows:
-```
+
+```text
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
@@ -150,7 +151,7 @@ For an example of an event parser, see our [Cassandra compaction event parser][3
 
 Imagine that you want to collect events from logging where you have enough control to add all sorts of relevant information, intelligently delimited by a unique character, logged as the following:
 
-```
+```text
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
@@ -185,7 +186,8 @@ def my_log_parser(logger, line):
 ```
 
 And then you would configure your `datadog.conf` to include the Dogstream option as follows:
-```
+
+```text
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
@@ -198,13 +200,13 @@ This specific log-line parsed with this parser created the following event in Da
 
 Once you have setup your custom parser to send metric or events to your platform, you should have something like this in your `datadog.conf`:
 
-```
- dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
+```text
+dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 ```
 
 And in your parsers_module.py a function defined as:
-```python
 
+```python
 def custom_parser(logger, line)
 ```
 
@@ -212,14 +214,13 @@ You can now change the parity of your function to take extra parameter as shown 
 
 So if you change your configuration file to:
 
-```
+```text
 dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1:customvar2
 ```
 
 And your parsing function as:
 
 ```python
-
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
@@ -231,7 +232,7 @@ As an example, if you have the same parser as in the documentation, but this tim
 
 In my configuration file you would have:
 
-```
+```text
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
 

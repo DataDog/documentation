@@ -175,6 +175,7 @@ func main() {
     span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
 }
 ```
+
 **Create a distributed [trace][3] by manually propagating the tracing context:**
 
 ```go

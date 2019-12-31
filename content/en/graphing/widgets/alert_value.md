@@ -49,7 +49,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the alert value widget is:
 
-```
+```text
 ALERT_VALUE_SCHEMA = {
     "type": "object",
     "properties": {

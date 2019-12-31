@@ -11,7 +11,7 @@ The Dogwrap command line tool allows you to call commands and generate events fr
 
 To install from pip:
 
-```
+```text
 pip install datadog
 ```
 

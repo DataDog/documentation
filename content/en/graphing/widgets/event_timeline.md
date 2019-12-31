@@ -38,7 +38,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the event timeline widget is:
 
-```
+```text
 EVENT_TIMELINE_SCHEMA = {
     "type": "object",
     "properties": {

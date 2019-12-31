@@ -147,7 +147,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pod
 
 Update your [datadog-values.yaml][7] file with the following log collection configuration, then upgrade your Datadog Helm chart:
 
-```
+```text
 datadog:
   (...)
  logsEnabled: true
@@ -158,7 +158,7 @@ datadog:
 
 To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][7] file to enable non-local traffic.
 
-```
+```text
 datadog:
   (...)
   nonLocalTraffic: true
@@ -170,7 +170,7 @@ datadog:
 
 Update your [datadog-values.yaml][7] file with the following APM configuration:
 
-```
+```text
 datadog:
   (...)
   apmEnabled: true
@@ -185,7 +185,7 @@ daemonset:
 
 Update the `env` section of your application's manifest with the following:
 
-```
+```yaml
 env:
   - name: DD_AGENT_HOST
     valueFrom:
@@ -197,7 +197,7 @@ Then upgrade your Datadog Helm chart.
 
 Finally, point your application-level tracers to the host IP using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -213,7 +213,7 @@ Refer to the [language-specific APM instrumentation docs][9] for more examples.
 
 Update your [datadog-values.yaml][7] file with the following process collection configuration, then upgrade your Datadog Helm chart:
 
-```
+```text
 datadog:
   (...)
   processAgentEnabled: true

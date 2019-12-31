@@ -36,7 +36,7 @@ Write your PHP logs into a file, then [use the Agent][1] to forward them to Data
 
 Use Composer to add Monolog as a dependency:
 
-```
+```text
 composer require "monolog/monolog"
 ```
 
@@ -61,7 +61,7 @@ Alternatively, install it manually:
 
 Zend-log is a part of the Zend framework. Use [Composer][1] to add Zend-Log:
 
-```
+```text
 composer require "zendframework/zend-log"
 ```
 
@@ -522,13 +522,13 @@ Then, start by creating a logging configuration file (i.e., `app/Config/log.php`
 
 A basic configuration, to replicate what Cake does but using Monolog would look something like this:
 
-```
+```text
 CakePlugin::load('Monolog');
 ```
 
 Finally log into a file:
 
-```
+```text
 CakeLog::config('debug', array(
   'engine' => 'Monolog.Monolog',
   'channel' => 'app',

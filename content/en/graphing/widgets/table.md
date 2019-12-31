@@ -39,7 +39,7 @@ The table visualization is available on timeboards and screenboards. It displays
 
 The dedicated [widget JSON schema definition][3] for the table widget is:
 
-```
+```text
 TOPLIST_SCHEMA = {
     "type": "object",
     "properties": {
@@ -67,7 +67,7 @@ TOPLIST_SCHEMA = {
 
 Additional properties allowed in a `request` object:
 
-```
+```text
 {
    "alias": {"type": "string"},
    "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]},

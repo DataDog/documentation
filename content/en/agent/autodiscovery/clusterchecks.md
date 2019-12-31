@@ -56,7 +56,7 @@ Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent.
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
-```
+```text
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
 ```
 
@@ -151,7 +151,7 @@ Due to the distributed nature of Cluster Checks, troubleshooting them is a bit m
 
 When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
 
-```
+```yaml
 # kubectl get cm datadog-leader-election -o yaml
 apiVersion: v1
 kind: ConfigMap
@@ -166,7 +166,7 @@ In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unres
 
 To ensure a configuration (static or Autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
 ...
 === http_check cluster check ===
@@ -190,10 +190,10 @@ Auto-discovery IDs:
 
 The `clusterchecks` command allows you to inspect the state of the dispatching logic, including:
 
-- which node-based Agents are actively reporting to the Cluster Agent
-- which checks are dispatched on each node
+* which node-based Agents are actively reporting to the Cluster Agent
+* which checks are dispatched on each node
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
 
 === 3 node-agents reporting ===
@@ -230,7 +230,7 @@ In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw
 
 The Agent `configcheck` command should show the instance, with the `cluster-checks` source:
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
 === http_check check ===
@@ -256,7 +256,7 @@ The Instance ID matches the one you had earlier.
 
 The Agent `status` command should show the check instance running and reporting successfully.
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
     http_check (3.1.1)

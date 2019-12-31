@@ -29,14 +29,15 @@ would have its variables obfuscated, to become the following Resource name:
 **Numbers in Resource names (e.g. in request urls) are obfuscated by default**
 
 For example, the following `elasticsearch` attribute:
-```
+
+```text
 Elasticsearch : {
     method : GET,
     url : /user.0123456789/friends/_count
 }
 ```
-would have its number in the url obfuscated, to become the following Resource name:
-`GET /user.?/friends/_count`
+
+would have its number in the url obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
 
 In addition to this baseline, customers need to review and configure their APM deployment, including all integrations and frameworks provided by [supported tracers][2], to appropriately control what data they submit to Datadog.
 

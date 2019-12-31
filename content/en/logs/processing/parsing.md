@@ -35,12 +35,14 @@ You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 * **Filter** (optional): a post-processor of the match to transform it.
 
 Example for a classic unstructured log:
-```
+
+```text
 john connected on 11/08/2017
 ```
 
 With the following parsing rule:
-```
+
+```text
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
@@ -115,8 +117,6 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
 
-
-
 [1]: /logs/processing/processors/#user-agent-parser
 [2]: /logs/processing/processors/#url-parser
 {{% /tab %}}
@@ -134,19 +134,19 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 Example for a classic unstructured log:
 
-```
+```text
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
 Use the following parsing rule:
 
-```
+```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
 With the following helpers:
 
-```
+```text
 user %{word:user.name} id:%{integer:user.id}
 connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
@@ -182,13 +182,13 @@ Use filters such as **keyvalue** to more-easily map strings to attributes:
 
 Log:
 
-```
+```text
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
 Rule
 
-```
+```text
 rule %{data::keyvalue}
 ```
 
@@ -203,13 +203,13 @@ If `=` is not the default separator between your key and values, add a parameter
 
 Log:
 
-```
+```text
 user: john connect_date: 11/08/2017 id: 123 action: click
 ```
 
 Rule
 
-```
+```text
 rule %{data::keyvalue(": ")}
 ```
 
@@ -219,13 +219,13 @@ If logs contain special characters in an attribute value, such as `/` in a url f
 
 Log:
 
-```
+```text
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
 Rule:
 
-```
+```text
 rule %{data::keyvalue("=","/:")}
 ```
 
@@ -292,7 +292,8 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 If you have logs with two possible formats which differ in only one attribute, set a single rule using conditionals with `(<REGEX_1>|<REGEX_2>)`.
 
 **Log**:
-```
+
+```text
 john connected on 11/08/2017
 12345 connected on 11/08/2017
 ```
@@ -300,7 +301,7 @@ john connected on 11/08/2017
 **Rule**:
 Note that "id" is an integer and not a string.
 
-```
+```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
@@ -315,12 +316,14 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 Some logs contain values that only appear part of the time. In this case, make attribute extraction optional with `()?`.
 
 **Log**:
-```
+
+```text
 john 1234 connected on 11/08/2017
 ```
 
 **Rule**:
-```
+
+```text
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
@@ -336,13 +339,13 @@ Use the `json` filter to parse a JSON object nested after a raw text prefix:
 
 **Log**:
 
-```
+```text
 Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
 ```
 
 **Rule**:
 
-```
+```text
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
@@ -354,12 +357,13 @@ Use the regex matcher to match any substring of your log message.
 
 **Log**:
 
-```
+```text
 john_1a2b3c4 connected on 11/08/2017
 ```
 
 **Rule**:
-```
+
+```text
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 

@@ -28,7 +28,7 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 The dedicated [widget JSON schema definition][2] for the note widget is:
 
-```
+```text
 NOTE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -46,16 +46,16 @@ NOTE_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the note widget use `note`|
-|`content`|string|yes|Content of the note|
-|`background_color`|string|no|Background color of the note|
-|`font_size`|string|no|Size of the text|
-|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left`, or `right`
-|`show_tick`|Boolean|no|Whether to show a tick or not
-|`tick_pos`|string|no|Where to position the tick on an edge
-|`tick_edge`|string|no|Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right`, or `top`
+| Parameter          | Type    | Required | Description                                                                                         |
+|--------------------|---------|----------|-----------------------------------------------------------------------------------------------------|
+| `type`             | string  | yes      | Type of the widget, for the note widget use `note`                                                  |
+| `content`          | string  | yes      | Content of the note                                                                                 |
+| `background_color` | string  | no       | Background color of the note                                                                        |
+| `font_size`        | string  | no       | Size of the text                                                                                    |
+| `text_align`       | string  | no       | How to align the text on the widget. Available values are: `center`, `left`, or `right`             |
+| `show_tick`        | Boolean | no       | Whether to show a tick or not                                                                       |
+| `tick_pos`         | string  | no       | Where to position the tick on an edge                                                               |
+| `tick_edge`        | string  | no       | Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right`, or `top` |
 
 ## Further Reading
 

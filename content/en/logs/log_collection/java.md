@@ -190,7 +190,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 
 There is a default log4j2 JSON Layout that can be used. Add the following Appender to your `log4j2.xml` file:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
@@ -208,7 +208,7 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
 
 * Then the following dependencies into your `pom.xml`:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -438,7 +438,7 @@ To add Logback [logstash-logback-encoder][1] into your classpath, add the follow
 
 Configure the Logback logger to stream logs directly to Datadog by adding the following in your `logback.xml` file:
 
-```
+```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
 	<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>

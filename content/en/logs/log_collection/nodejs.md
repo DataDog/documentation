@@ -23,11 +23,11 @@ further_reading:
 
 ## Overview
 
-Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy. 
+Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy.
 
 Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
 
-```
+```text
 npm install --save winston
 ```
 

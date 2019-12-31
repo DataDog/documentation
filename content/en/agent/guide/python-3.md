@@ -166,7 +166,7 @@ In Python 2, the `/` operator performs floor division on integers.
 
 #### Python 2:
 
-```
+```python
 >> 5/2
 2
 ```
@@ -175,7 +175,7 @@ In Python 3, the `/` operator performs float division. The `//` operator perform
 
 #### Python 3:
 
-```
+```python
 >> 5/2
 2.5
 >> 5//2
@@ -190,7 +190,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 
 #### Python 2:
 
-```
+```python
 >> round(2.5)
 3
 >> round(3.5)
@@ -199,7 +199,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 
 #### Python 3:
 
-```
+```python
 >> round(2.5)
 2
 >> round(3.5)
@@ -223,7 +223,7 @@ In Python 3, relative imports must be made explicit, using the dot (`.`) syntax.
 
 Suppose your package is structured like this:
 
-```
+```text
 mypackage/
 	__init__.py
 	math.py

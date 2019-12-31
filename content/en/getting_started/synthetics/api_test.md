@@ -21,8 +21,8 @@ In this example, an API test is created to ensure your website is constantly up 
 
 ### Configure the request
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **Synthetics Test**. 
-2. In the top right corner, click the **New Test** button. 
+1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **Synthetics Test**.
+2. In the top right corner, click the **New Test** button.
 3. Select **API test**.
 4. Define the configuration of your API test:
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
@@ -30,7 +30,7 @@ In this example, an API test is created to ensure your website is constantly up 
     - Add some tags to help organize and filter tests.
     - Select locations for testing.
     - Click the **Test URL** button.
-    
+
 {{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration" responsive="true" style="width:60%;">}}
 
 #### Define your alert conditions
@@ -47,13 +47,13 @@ These assertions define the alert condition and can be customized. To add a cust
 
 You can set up an alerting condition in order to only be alerted if your endpoint goes down for three minutes, on two different locations:
 
-```
+```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
 You can also decide after how many failures you want a location to be considered as fail using the below option:
 
-```
+```text
 Retry x time before location is marked as failed
 ```
 

@@ -22,7 +22,7 @@ The Datadog y-axis controls allow you to:
 
 The schema is:
 
-```
+```text
 AXIS_SCHEMA = {
     "type": "object",
     "properties": {
@@ -35,18 +35,18 @@ AXIS_SCHEMA = {
 }
 ```
 
-| Parameter      | Type    | Description                                                                                          | Default  |
-| ------         | -----   | --------                                                                                             | ----     |
-| `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |
-| `min`          | string  | Specifies minimum value to show on the y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
-| `max`          | string  | Specifies the maximum value to show on the y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
-| `include_zero` | Boolean |                                                                                                      |          |
+| Parameter      | Type    | Description                                                                                           | Default  |
+|----------------|---------|-------------------------------------------------------------------------------------------------------|----------|
+| `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..)  | `linear` |
+| `min`          | string  | Specifies minimum value to show on the y-axis. It takes a number, or `auto` for default behavior.     | `auto`   |
+| `max`          | string  | Specifies the maximum value to show on the y-axis. It takes a number, or `auto` for default behavior. | `auto`   |
+| `include_zero` | Boolean |                                                                                                       |          |
 
 ## Events schema
 
 You can overlay any event from Datadog. The general `events` format is:
 
-```
+```text
 EVENTS_SCHEMA = {
     "type": "array",
     "items": {
@@ -66,7 +66,7 @@ See the [Event stream documentation][2] to learn more about the `<EVENT_QUERY>` 
 
 For instance, to indicate that you want events for host X and tag Y:
 
-```
+```text
 "events": [
   {
     "q": "host:X tags:Y"
@@ -76,7 +76,7 @@ For instance, to indicate that you want events for host X and tag Y:
 
 or, if you're looking to display all errors:
 
-```
+```text
 "events": [
   {
     "q": "status:error"
@@ -88,7 +88,7 @@ or, if you're looking to display all errors:
 
 Markers allow you to add visual conditional formatting for your graphs. The `markers` format is:
 
-```
+```text
 MARKERS_SCHEMA = {
     "type": "array",
     "items": {
@@ -104,11 +104,11 @@ MARKERS_SCHEMA = {
 }
 ```
 
-| Parameter      | Type   | Description                                                                                                                |
-| ------         | -----  | --------                                                                                                                   |
-| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of values `0 < y < 10`                                            |
+| Parameter      | Type   | Description                                                                                                           |
+|----------------|--------|-----------------------------------------------------------------------------------------------------------------------|
+| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of values `0 < y < 10`                                      |
 | `display_type` | string | Combination of: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |
-| `label`        | string | Label to display over the marker.                                                                                          |
+| `label`        | string | Label to display over the marker.                                                                                     |
 
 ### Example:
 
@@ -118,7 +118,7 @@ The following markers:
 
 Are applied with the following configuration:
 
-```
+```text
 { (...)
   "widgets": [
     {
@@ -152,7 +152,7 @@ Are applied with the following configuration:
 
 Conditional formats allow you to set the color of your widget content or background, depending on a rule applied to your data.
 
-```
+```text
 CONDITIONAL_FORMATS_SCHEMA = {
     "type": "array",
     "items": {
@@ -172,19 +172,19 @@ CONDITIONAL_FORMATS_SCHEMA = {
 }
 ```
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
-| ------            | -----  | --------                                                                                                                                                                                                                                                                         |
-| `comparator`      | enum   | Comparator to apply from: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |
-| `value`           | double | Value for the comparator.                                                                                                                                                                                                                                                        |
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                             |
+|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comparator`      | enum   | Comparator to apply from: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                       |
+| `value`           | double | Value for the comparator.                                                                                                                                                                                                                                               |
 | `palette`         | string | Color palette to apply; choose from `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
-| `custom_bg_color` | string | Color palette to apply to the background, same values available as palette.                                                                                                                                                                                                  |
-| `custom_fg_color` | string | Color palette to apply to the foreground, same values available as palette.                                                                                                                                                                                                  |
-| `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |
+| `custom_bg_color` | string | Color palette to apply to the background, same values available as palette.                                                                                                                                                                                             |
+| `custom_fg_color` | string | Color palette to apply to the foreground, same values available as palette.                                                                                                                                                                                             |
+| `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                    |
 ## Time schema
 
 The available timeframes depend on the widget you are using, but the general format for `time` is:
 
-```
+```text
 TIME_SCHEMA = {
     "type": "object",
     "properties": {
@@ -210,15 +210,15 @@ TIME_SCHEMA = {
 }
 ```
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
-| ------            | -----  | --------                                                                                                                                                                                                                                                                         |
-| `live_span`      | string   | A short name to represent a timeframe value. Available values are:<br> -`1m`: 1 minute<br> -`5m`: 5 minutes<br> -`10m`: 10 minutes<br> -`15m`: 15 minutes<br> -`30m`: 30 minutes<br> -`1h`: 1 hour<br> -`4h`: 4 hours<br> -`1d`: 1 day<br> -`2d`: 2 days<br> -`1w`: 1 week<br> -`1mo`: 1 month<br> -`3mo`: 3 months<br> -`6mo`: 6 months<br> -`1y`: 1 year<br> -`alert`: used in the `alert_graph` widget only|
+| Parameter   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                    |
+|-------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `live_span` | string | A short name to represent a timeframe value. Available values are:<br> -`1m`: 1 minute<br> -`5m`: 5 minutes<br> -`10m`: 10 minutes<br> -`15m`: 15 minutes<br> -`30m`: 30 minutes<br> -`1h`: 1 hour<br> -`4h`: 4 hours<br> -`1d`: 1 day<br> -`2d`: 2 days<br> -`1w`: 1 week<br> -`1mo`: 1 month<br> -`3mo`: 3 months<br> -`6mo`: 6 months<br> -`1y`: 1 year<br> -`alert`: used in the `alert_graph` widget only |
 
 ### Example
 
 For instance, to indicate that you want a 10-minute timeframe, use the following:
 
-```
+```text
 "time": {
   "live_span": "10m"
 }

@@ -24,7 +24,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 Collecting logs is **disabled** by default in the Datadog Agent. Enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
 
-```
+```yaml
 logs_enabled: true
 ```
 
@@ -61,12 +61,12 @@ Below are examples of custom log collection setup:
 
 To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
-```
+```yaml
 logs:
   - type: file
-    path: <PATH_LOG_FILE>/<LOG_FILE_NAME>.log
-    service: <APP_NAME>
-    source: <SOURCE>
+    path: "<PATH_LOG_FILE>/<LOG_FILE_NAME>.log"
+    service: "<APP_NAME>"
+    source: "<SOURCE>"
 ```
 
 **Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
@@ -78,12 +78,12 @@ logs:
 
 To gather logs from your `<APP_NAME>` application that forwards its logs with TCP over port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
-```
+```yaml
 logs:
   - type: tcp
     port: 10518
-    service: <APP_NAME>
-    source: <CUSTOM_SOURCE>
+    service: "<APP_NAME>"
+    source: "<CUSTOM_SOURCE>"
 ```
 
 If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting with UDP.
@@ -113,30 +113,30 @@ To send Windows events as logs to Datadog, add the channels to `conf.d/win32_eve
 
 To see your channel list, run the following command in a PowerShell:
 
-```
+```text
 Get-WinEvent -ListLog *
 ```
 
 To see the most active channels, run the following command in a PowerShell:
 
-```
+```text
 Get-WinEvent -ListLog * | sort RecordCount -Descending
 ```
 
 Then add the channels to your `win32_event_log.d/conf.yaml` configuration file:
 
-```
+```yaml
 logs:
   - type: windows_event
-    channel_path: <CHANNEL_1>
-    source: <CHANNEL_1>
-    service: <SERVICE>
+    channel_path: "<CHANNEL_1>"
+    source: "<CHANNEL_1>"
+    service: "<SERVICE>"
     sourcecategory: windowsevent
 
   - type: windows_event
-    channel_path: <CHANNEL_2>
-    source: <CHANNEL_2>
-    service: <SERVICE>
+    channel_path: "<CHANNEL_2>"
+    source: "<CHANNEL_2>"
+    service: "<SERVICE>"
     sourcecategory: windowsevent
 ```
 
@@ -152,18 +152,18 @@ Finally, [restart the Agent][2].
 
 List of all available parameters for log collection:
 
-| Parameter        | Required | Description                                                                                                                                                                                                                                                                                                                                         |
-|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`           | Yes      | The type of log input source. Valid values are: `tcp`, `udp`, `file`, `windows_event`, `docker`, or `journald`.                                                                                                                                                                                                                             |
-| `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                           |
-| `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                        |
-| `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                 |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                    |
+| Parameter        | Required | Description                                                                                                                                                                                                                                                                                                                                             |
+|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`           | Yes      | The type of log input source. Valid values are: `tcp`, `udp`, `file`, `windows_event`, `docker`, or `journald`.                                                                                                                                                                                                                                         |
+| `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                    |
+| `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                            |
+| `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                    |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                     |
 | `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][8] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
-| `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                         |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                                    |
+| `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                             |
 
 ## Send logs over HTTPS
 
@@ -172,7 +172,7 @@ To send logs over HTTPS with the Datadog Agent 6.14+, add the following in the A
 {{< tabs >}}
 {{% tab "Compression enabled" %}}
 
-```
+```yaml
 logs_config:
   use_http: true
   use_compression: true
@@ -188,7 +188,7 @@ Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.da
 {{% /tab %}}
 {{% tab "Compression Disabled" %}}
 
-```
+```yaml
 logs_config:
   use_http: true
 ```
@@ -211,7 +211,7 @@ The Agent waits up to 5 seconds to fill each batch (either in content size or nu
 
 To change the maximum time the Datadog Agent waits to fill each batch, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
 
-```
+```yaml
 logs_config:
   batch_wait: 2
 ```
