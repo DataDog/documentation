@@ -18,11 +18,11 @@ The Real User Monitoring (RUM) Explorer allow you to explore all your views coll
 
 ## Context
 
-Build up a context to explore your views in your RUM Explorer page first by selecting the proper [time range](#time-range) then by using the [search bar][1] to filter your views and analytics.
+Build up a context to explore your views in your RUM Explorer page first by selecting the proper [time range](#time-range), and then by using the [search bar][1] to filter your views and analytics.
 
 ### Time Range
 
-It appears directly under the search bar as a timeline. The time range feature allows you to display view in the view steam or analytics within a given time period.
+The time range appears directly under the search bar as a timeline. This feature allows you to display views in the view steam or analytics within a given time period.
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -30,9 +30,9 @@ Quickly change the time range by selecting a preset range from the dropdown:
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-## Vizualisation
+## Visualization
 
-Click on any view to open the views panel and see more details (Resources, Traces, Errors, User Action, Long task, Logs, or Attributes) about it:
+Click on any view to open the views panel and see more details (resources, traces, errors, user actions, long tasks, logs, or attributes) about it:
 
 {{< img src="real_user_monitoring/explorer/rum_views.png" alt="Rum View" responsive="true" style="width:80%;">}}
 
@@ -40,7 +40,7 @@ Click on any view to open the views panel and see more details (Resources, Trace
 
 After [being collected][2], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 
-Note: To leverage the most out of your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][4].
+Note: to leverage the most out from your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][4].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -51,7 +51,7 @@ A facet displays all the distinct members of an attribute or a tag and provides 
 
 **Create a Facet**:
 
-To start using an attribute as a facet or in the search, click on it and add it as a facet in the:
+To start using an attribute as a facet or in the search, click on it and add it as a facet:
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 

@@ -16,7 +16,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-It is a custom event generated for a given user action. [Add one by instrumenting your code][1].
+A custom user actions is a custom event generated for a given user action. [Add one by instrumenting your code][1].
 
 ## Facet Collected
 

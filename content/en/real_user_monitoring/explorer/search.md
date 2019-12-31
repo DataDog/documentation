@@ -47,7 +47,7 @@ The same logic is applied to spaces within views facet names. Views facets shoul
 
 ### Wildcards
 
-To perform a multi-character wildcard search, use the `*` symbol. For instance, `@http.url:https:\/\/*` matches every views that has an url starting with `https://`.
+To perform a multi-character wildcard search, use the `*` symbol. For instance, `@http.url:https:\/\/*` matches every view that has a URL starting with `https://`.
 
 ### Numerical values
 

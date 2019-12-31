@@ -16,7 +16,7 @@ Find below the different initialization options available with the [Datadog Brow
 
 ### Sampling
 
-By default no sampling is applied upon the number of collected sessions. To apply a relative sampling (in percent) to the amount of session collected use the `sampleRate` parameter when initializing RUM. The following example would collect only 90% of all sessions on a given RUM application:
+By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sampleRate` parameter when initializing RUM. The following example collects only 90% of all sessions on a given RUM application:
 
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
@@ -43,7 +43,7 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 ### Replace default context
 
-Once Real User Monitoring (RUM) initialized you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
+Once Real User Monitoring (RUM) is initialized, you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
 
 ```javascript
 // Entirely replace the default context for all your views
@@ -52,16 +52,16 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 
 **Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
-### Custom User action
+### Custom user actions
 
-Once Real User Monitoring (RUM) initialized, generate User Actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction` API:
+Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction` API:
 
 ```javascript
 // Give it a name and an object containing all the data
 window.DD_RUM && DD_RUM.addUserAction("<NAME>","<JSON_OBJECT>");
 ```
 
-For instance, to collect the amount of items within a cart, what they are and how much the cart is worth overall you would do something like this:
+For instance, to collect the amount of items within a cart, what they are, and how much the cart is worth overall, you would do something like this:
 
 ```javascript
 window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {

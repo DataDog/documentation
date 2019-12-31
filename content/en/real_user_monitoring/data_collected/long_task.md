@@ -16,7 +16,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-[Long tasks][1] are tasks that block the main thread for 50 milliseconds or more. They cause high input latency and delayed time to interactive for instance. Understand what causes these long tasks in your browser performance profiler.
+[Long tasks][1] are tasks that block the main thread for 50 milliseconds or more. They may cause high input latency, delayed time to interaction, etc. Understand what causes these long tasks in your browser performance profiler.
 
 ## Measure Collected
 
