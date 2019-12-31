@@ -30,7 +30,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive" responsive="true" style="width:75%;">}}
 
-<p name="limits">A historical view can contain a maximum of 300 million log events. There is no limit to how large its time range can be, but if you expect a historical view may exceed that limit, make your query filter more specific.</p>
+<p id="limits">A historical view can contain a maximum of 300 million log events. There is no limit to how large its time range can be, but if you expect a historical view may exceed that limit, make your query filter more specific.</p>
 
 ### View historical view content
 
