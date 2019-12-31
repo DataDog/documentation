@@ -106,7 +106,7 @@ The `cluster_check` field informs the Cluster Agent to delegate this check to on
 You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][9]:
 
 ```yaml
-  ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
+  ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
   ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
