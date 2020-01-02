@@ -98,7 +98,7 @@
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
-      branch: gus/doc-update
+      branch: master
       globs:
       - 'docs/log_collection.md'
       options:
