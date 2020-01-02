@@ -11,7 +11,7 @@ The Dogwrap command line tool allows you to call commands and generate events fr
 
 To install from pip:
 
-```
+```text
 pip install datadog
 ```
 
@@ -19,7 +19,6 @@ To install from source:
 
 1. Clone the [DataDog/datadogpy][1] repository.
 2. Inside the root folder, run `python setup.py install`.
-
 
 The minimum valid `dogwrap` command has the following layout:
 

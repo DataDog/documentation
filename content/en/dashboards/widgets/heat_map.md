@@ -35,6 +35,7 @@ Configure your metric query as usual. Note that this visualization type is usefu
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
+
 #### Event Overlay
 
 Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][1], for example:
@@ -69,7 +70,7 @@ The following configuration options are available:
 
 The dedicated [widget JSON schema definition][3] for the heat map widget is:
 
-```
+```text
 HEATMAP_SCHEMA = {
     "type": "object",
     "properties": {
@@ -90,15 +91,14 @@ HEATMAP_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the heat map widget use `heatmap`                                                                                                       |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
-| `yaxis`    | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
-| `events`   | object          | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
-| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
-| `show_legend` | boolean | no | (screenboard only) Show the legend for this widget |
-
+| Parameter     | Type             | Required | Description                                                                                                                                                  |
+|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string           | yes      | Type of widget, for the heat map widget use `heatmap`                                                                                                        |
+| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`       | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
+| `events`      | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
+| `title`       | string           | no       | Title of your widget.                                                                                                                                        |
+| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                           |
 
 Additional properties allowed in the `requests` object:
 
@@ -106,18 +106,15 @@ Additional properties allowed in the `requests` object:
 {
   "style": {
     "type": "object",
-    "properties": {
-      "palette": {"type": "string"},
-    },
+    "properties": {"palette": {"type": "string"}},
     "additionalProperties": false
   }
 }
 ```
 
 | Parameter       | Type   | Required | Description                           |
-| ------          | -----  | -------- | ----                                  |
+|-----------------|--------|----------|---------------------------------------|
 | `style.palette` | string | no       | Color palette to apply to the widget. |
-
 
 ## Further Reading
 

@@ -28,19 +28,22 @@ This feature is currently supported on Kubernetes for versions 6.12.0+ of the Ag
 Starting with version 1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][1] feature alongside Endpoints Checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
-```
+
+```shell
 # kubectl get svc nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ```
-```
+
+```shell
 # kubectl get pods --selector app=nginx
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-758655469f-59q9z   1/1     Running   0          20h
 nginx-758655469f-k8zrc   1/1     Running   0          20h
 nginx-758655469f-lk9p6   1/1     Running   0          20h
 ```
-```
+
+```shell
 # kubectl get ep nginx -o yaml
 ...
 - addresses:
@@ -63,6 +66,7 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       name: nginx-758655469f-k8zrc
       ...
 ```
+
 By design, Endpoints Checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
 
 This works like that to leverage [autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
@@ -73,14 +77,14 @@ This works like that to leverage [autodiscovery][3], and attach pod and containe
 
 Enable the `kube_endpoints` configuration provider and listener on the Datadog **Cluster** Agent. This can be done by setting the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables:
 
-```
+```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
 **Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
 
-```
+```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
 DD_EXTRA_LISTENERS="kube_endpoints kube_services"
 ```
@@ -93,7 +97,7 @@ Enable the `endpointschecks` configuration providers on the Datadog **Node** Age
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
-```
+```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
 ```
 
@@ -107,7 +111,7 @@ config_providers:
 
 **Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `clusterchecks` configuration provider:
 
-```
+```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 ```
 
@@ -174,7 +178,7 @@ Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][
 
 The Agent `configcheck` command should show the instance, with the `endpoints-checks` source:
 
-```
+```shell
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
 === nginx check ===
@@ -204,7 +208,7 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 
 The Agent `status` command should show the check instance running and reporting successfully.
 
-```
+```shell
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
     nginx (3.4.0)
@@ -222,7 +226,7 @@ The Agent `status` command should show the check instance running and reporting 
 
 The Agent `clusterchecks` command should show the instance, with the `kubernetes-endpoints` source:
 
-```
+```shell
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
 ...
 ===== 3 Pod-backed Endpoints-Checks scheduled =====

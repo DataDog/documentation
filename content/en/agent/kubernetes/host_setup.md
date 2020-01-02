@@ -20,11 +20,13 @@ To gather your kube-state metrics:
 1. Download the [Kube-State manifests folder][1].
 
 2. Apply them to your Kubernetes cluster:
-  ```
-  kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
-  ```
+
+    ```shell
+    kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
+    ```
 
 ## Setup the kube-dns integration
+
 ### Configuration
 
 Since [Agent v6][2], Kubernetes DNS integration works automatically with the [Autodiscovery][3].
@@ -45,7 +47,7 @@ Datadog recommends using the Kubernetes log files approach when you are either n
 Datadog also recommends that you take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][4].
 Otherwise, to manually enable log collection from one specific node, add the following parameters in the `datadog.yaml`:
 
-```
+```yaml
 logs_enabled: true
 listeners:
   - name: kubelet
@@ -61,6 +63,7 @@ logs_config:
 Use [Autodiscovery with Pod Annotations][6] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ## Further Reading
+
 To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][7].
 
 [1]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard

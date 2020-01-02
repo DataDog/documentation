@@ -75,7 +75,6 @@ To collect data from your applications running in AWS EKS Fargate over a Fargate
 
 Use the following Agent RBAC when deploying the Agent as a sidecar in AWS EKS Fargate:
 
-
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -163,7 +162,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
 ```
-​
+
 **Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][13].
 
 ## Metrics Collection
@@ -172,7 +171,6 @@ spec:
 {{% tab "Integration metrics" %}}
 ​
 Use [Autodiscovery labels with your application container][1] to start collecting its metrics for the [supported Agent integrations][2].
-
 ​
 ```yaml
 apiVersion: apps/v1
@@ -223,9 +221,8 @@ spec:
             memory: "256Mi"
             cpu: "200m"
 ```
-​
-**Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][3].
 
+**Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][3].
 
 [1]: /agent/autodiscovery/integrations
 [2]: /integrations/#cat-autodiscovery
@@ -286,9 +283,8 @@ spec:
             memory: "256Mi"
             cpu: "200m"
 ```
-​
-**Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][2].
 
+**Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][2].
 
 [1]: /developers/dogstatsd
 [2]: https://app.datadoghq.com/account/settings#api
@@ -299,7 +295,6 @@ spec:
 
 Set up the container port `8126` over your Agent container to collect traces from your application container. [Read more about how to set up tracing][14].
 
-​
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -352,7 +347,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
 ```
-​
+
 **Note**: Don't forget to replace `<YOUR_DATADOG_API_KEY>` with the [Datadog API key from your organization][13].
 
 ## Events Collection

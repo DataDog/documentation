@@ -8,7 +8,6 @@ wistiaid: ojveojb8gg
     - flamegraph
     - traces
 
-
 summary: See the power of the flame graph, correlate infrastructure and log data to the trace and learn how to search for your traces.
 ---
 

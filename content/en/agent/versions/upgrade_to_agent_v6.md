@@ -110,7 +110,6 @@ Find below the manual upgrade instructions for:
 
 ### CentOS
 
-
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
     [datadog]
@@ -133,6 +132,7 @@ Find below the manual upgrade instructions for:
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
+
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
@@ -189,7 +189,6 @@ Find below the manual upgrade instructions for:
 
 ### Fedora
 
-
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
     [datadog]
@@ -224,7 +223,6 @@ Find below the manual upgrade instructions for:
     ```
 
 ### Red Hat
-
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -267,7 +265,6 @@ Find below the manual upgrade instructions for:
     ```
 
 ### Ubuntu
-
 
 1. Enable HTTPS support for APT:
     ```

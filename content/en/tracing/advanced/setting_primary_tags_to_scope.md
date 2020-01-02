@@ -23,6 +23,7 @@ There are several dimensions available to scope an entire Datadog APM applicatio
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][2].
 
 ## Setup
+
 ### Environment
 
 The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`.
@@ -34,9 +35,9 @@ There are several ways to specify an environment when reporting data:
 2. Agent configuration:
   Override the default tag used by the Agent in [the Agent configuration file][3]. This tags all traces coming through the Agent, overriding the host tag value.
 
-    ```
+    ```yaml
     apm_config:
-      env: <ENVIRONMENT>
+      env: "<ENVIRONMENT>"
     ```
 
 3. Per trace:
@@ -67,7 +68,6 @@ If you change a previously set primary tag, be aware of the following:
 Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown (as in the image below).
 
 {{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
-
 
 ## Further Reading
 

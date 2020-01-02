@@ -6,6 +6,7 @@ external_redirect: /api/#get-specific-embed
 ---
 
 ## Get specific embed
+
 Get the HTML fragment for a previously generated embed with embed_id.
 
 Returns: A JSON object with 8 elements:

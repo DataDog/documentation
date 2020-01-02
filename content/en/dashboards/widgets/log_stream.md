@@ -18,6 +18,7 @@ The Log Stream displays a log flow matching the defined query:
 {{< img src="graphing/widgets/log_stream/log_stream.png" alt="Log stream" responsive="true">}}
 
 ## Setup
+
 ### Configuration
 
 {{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Log stream setup" responsive="true" style="width:80%;">}}
@@ -25,6 +26,7 @@ The Log Stream displays a log flow matching the defined query:
 Enter a [log query][1] to filter the log stream.
 
 ### Options
+
 #### Columns
 
 Display values of your [facets][2] and [measures][3] with columns.
@@ -45,7 +47,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the log stream widget is:
 
-```
+```text
 LOG_STREAM_SCHEMA = {
     "type": "object",
     "properties": {
@@ -63,17 +65,16 @@ LOG_STREAM_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the log stream widget use `log_stream`|
-|`logset`|string|yes|Which logset to use for the stream|
-|`query`|string|no|Query to filter the log stream with|
-|`columns`|array|no|Which columns to display on the widget|
-|`title`|string|no|Title of the widget|
-|`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
-|`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][5] to learn how to build the `TIME_SCHEMA`
-
+| Parameter     | Type   | Required | Description                                                                                                                |
+|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string | yes      | Type of the widget, for the log stream widget use `log_stream`                                                             |
+| `logset`      | string | yes      | Which logset to use for the stream                                                                                         |
+| `query`       | string | no       | Query to filter the log stream with                                                                                        |
+| `columns`     | array  | no       | Which columns to display on the widget                                                                                     |
+| `title`       | string | no       | Title of the widget                                                                                                        |
+| `title_size`  | string | no       | Size of the title                                                                                                          |
+| `title_align` | string | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
+| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][5] to learn how to build the `TIME_SCHEMA` |
 
 ## Further Reading
 

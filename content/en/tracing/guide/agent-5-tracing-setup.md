@@ -12,7 +12,8 @@ aliases:
 APM is available with Datadog Agent versions 5.11+ as part of the one line install for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
 
 The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
-```
+
+```conf
 apm_enabled: true
 ```
 
@@ -56,7 +57,7 @@ Additionally, some configuration options may be set as environment variables. No
 {{% table responsive="true" %}}
 
 | File setting            | Environment variable       | Description                                                                                                                                                      |
-| ---                     | ---                        | ---                                                                                                                                                              |
+|-------------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `apm_enabled`           | `DD_APM_ENABLED`           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
 | `extra_sample_rate`     | `DD_EXTRA_SAMPLE_RATE`     | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
 | `max_traces_per_second` | `DD_MAX_TRACES_PER_SECOND` | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
@@ -69,11 +70,12 @@ Additionally, some configuration options may be set as environment variables. No
 For more information about the Datadog Agent, see the [dedicated doc page][9] or refer to the [`datadog.conf.example` file][10].
 
 ### Trace search
+
 Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][11].
 
 ## Troubleshooting
-Need help? Contact [Datadog support][12].
 
+Need help? Contact [Datadog support][12].
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows

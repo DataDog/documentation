@@ -14,7 +14,6 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 4. Optional: Add the security-groups tag by enabling this option.
 5. [Restart the Agent][2].
 
-
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 [2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -25,7 +24,6 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 3. In `datadog.conf`, set **collect_ec2_tags: true**.
 4. Optional: Add the security-groups tag by enabling this option.
 5. [Restart the Agent][2].
-
 
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 [2]: /agent/guide/agent-commands/?tab=agentv5#restart-the-agent

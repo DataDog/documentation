@@ -7,7 +7,7 @@ kind: documentation
 
 ## Plan settings
 
-Upgrade or downgrade your account from the Plan tab on the Organization Account Settings page. 
+Upgrade or downgrade your account from the Plan tab on the Organization Account Settings page.
 
 **Note**: Contact your account representative or [success@datadoghq.com][3] to add or remove paid features that are not part of standard plans.
 
@@ -25,7 +25,7 @@ Your account billing history is available from the Billing History tab on the [O
 
 ## Change your organization name
 
-To rename your organization, enter the new name, then click save. 
+To rename your organization, enter the new name, then click save.
 **Note**: **Your organization name may not exceed 32 characters**.
 
 ## SAML settings

@@ -64,7 +64,7 @@ To activate a given integration:
 
 For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the [apache integration][24]:
 
-```
+```yaml
 init_config:
 
 instances:
@@ -85,7 +85,7 @@ logs:
 
 To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:
 
-```
+```yaml
 init_config:
 
 instances:

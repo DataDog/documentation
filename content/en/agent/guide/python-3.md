@@ -160,14 +160,13 @@ In Python 3, print is explicitly treated as a function; to turn print into a fun
 |---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
-
 ### Integer Division
 
 In Python 2, the `/` operator performs floor division on integers.
 
 #### Python 2:
 
-```
+```python
 >> 5/2
 2
 ```
@@ -176,7 +175,7 @@ In Python 3, the `/` operator performs float division. The `//` operator perform
 
 #### Python 3:
 
-```
+```python
 >> 5/2
 2.5
 >> 5//2
@@ -191,7 +190,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 
 #### Python 2:
 
-```
+```python
 >> round(2.5)
 3
 >> round(3.5)
@@ -200,7 +199,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 
 #### Python 3:
 
-```
+```python
 >> round(2.5)
 2
 >> round(3.5)
@@ -218,14 +217,13 @@ Python 3 features different syntax for except and raise.
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
 | `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
-
 ### Relative Imports
 
 In Python 3, relative imports must be made explicit, using the dot (`.`) syntax.
 
 Suppose your package is structured like this:
 
-```
+```text
 mypackage/
 	__init__.py
 	math.py
@@ -247,7 +245,6 @@ Or, for extra readability:
 | Python 2               | Python 2 and 3                   |
 |------------------------|----------------------------------|
 | `from math import gcd` | `from mypackage.math import gcd` |
-
 
 ### Iterators
 

@@ -30,6 +30,5 @@ Search and filter your service level objectives.
     Number of SLOs to return per query.
 
 
-
 [1]: https://app.datadoghq.com/slo
 [2]: /monitors/service_level_objectives/#searching-slos

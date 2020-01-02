@@ -34,7 +34,6 @@ These examples walk through tracing the entire `BackupLedger.write` method to me
 
 The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
 
-
 {{< tabs >}}
 {{% tab "Java" %}}
 In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
@@ -89,6 +88,7 @@ public class BackupLedger {
   }
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -163,6 +163,7 @@ class BackupLedger
   end
 end
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -231,6 +232,7 @@ function write (transactions) {
   // [...]
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -260,6 +262,7 @@ public void Write(List<Transaction> transactions)
     // [...]
 }
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -329,6 +332,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
   });
 ?>
 ```
+
 [1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{< /tabs >}}

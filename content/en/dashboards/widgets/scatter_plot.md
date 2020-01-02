@@ -46,7 +46,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the scatter plot widget is:
 
-```
+```text
 SCATTERPLOT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -70,27 +70,24 @@ SCATTERPLOT_SCHEMA = {
 }
 ```
 
-| Parameter         | Type            | Required | Description                                                                                                                                        |
-| ------            | -----           | -----    | --------                                                                                                                                           |
-| `type`            | string          | yes      | Type of widget, for the scatter plot widget use `scatterplot`.                                                                                        |
-| `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
-| `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
-| `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| Parameter         | Type             | Required | Description                                                                                                                                        |
+|-------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`            | string           | yes      | Type of widget, for the scatter plot widget use `scatterplot`.                                                                                     |
+| `requests`        | object           | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`           | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| `xaxis`           | object           | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
 | `color_by_groups` | array of strings | no       | List of groups used for colors.                                                                                                                    |
-| `title`           | string          | no       | Title of your widget.                                                                                                                              |
+| `title`           | string           | no       | Title of your widget.                                                                                                                              |
 
 Additional properties allowed in the `request` object:
 
 ```json
-{
-  "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
-}
+{"aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}}
 ```
 
-| Parameter    | Type  | Required | Description                                                                                  |
-| ------       | ----- | -------- | ----                                                                                         |
-| `aggregator` | string  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
-
+| Parameter    | Type   | Required | Description                                                                                   |
+|--------------|--------|----------|-----------------------------------------------------------------------------------------------|
+| `aggregator` | string | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
 
 ## Further Reading
 

@@ -8,7 +8,8 @@ kind: documentation
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
 `Plan & Usage`--> `Usage`.
 
-The Usage page provides the following information.
+The Usage page provides the following information:
+
 * Month-to-Date Summary
 * Overall Usage (current and historical)
 * Top 500 Custom Metrics
@@ -43,7 +44,6 @@ This tab shows hourly, daily, monthly, and annual usage for:
 | Synthetics Browser Tests | Shows the sum of all Synthetic browser tests over all hours in the current month                    |
 | Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month .                            |
 
-
 {{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" responsive="true">}}
 
 #### Infrastructure Host Types
@@ -56,7 +56,6 @@ This table shows the break-down of the **Infra Hosts** graph above by host type:
 * GCP Hosts
 
 {{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" responsive="true">}}
-
 
 ### Top 500 Custom Metrics
 
@@ -71,8 +70,8 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" responsive="true">}}
 
-
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][3].
 
 For billing questions, contact your [Customer Success][4] Manager.

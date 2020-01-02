@@ -46,7 +46,7 @@ There are two types of *terms*:
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
-| **Operator** | **Description **                                                                                       | **Example **                 |
+| **Operator** | **Description**                                                                                        | **Example**                  |
 |:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
@@ -78,8 +78,8 @@ If your tags don't follow [tags best practices][2] and don't use the `key:value`
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-*  `service:web*`  matches every trace that has a services starting with `web`
-*  `@url:data*`  matches every trace that has a `url` starting by `data`.
+* `service:web*`  matches every trace that has a services starting with `web`
+* `@url:data*`  matches every trace that has a `url` starting by `data`.
 
 ### Numerical values
 

@@ -48,12 +48,12 @@ Enable Custom Payload and fill in a JSON object that looks like:
 
 ```json
 {
-"name": "$USER : $EVENT_TITLE",
-"desc": "$EVENT_MSG",
-"key": "{APP_KEY}",
-"token": "{TOKEN_KEY}",
-"pos":"bottom",
-"idList": "{ID_LIST_VALUE}"
+  "name": "$USER : $EVENT_TITLE",
+  "desc": "$EVENT_MSG",
+  "key": "{APP_KEY}",
+  "token": "{TOKEN_KEY}",
+  "pos": "bottom",
+  "idList": "{ID_LIST_VALUE}"
 }
 ```
 

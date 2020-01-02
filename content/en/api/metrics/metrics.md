@@ -4,7 +4,9 @@ type: apicontent
 order: 26
 external_redirect: /api/#metrics
 ---
+
 ## Metrics
+
 The metrics end-point allows you to:
 
 * Post metrics data so it can be graphed on Datadog's dashboards
