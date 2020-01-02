@@ -1,2 +1,13 @@
-# This is not yet supported by the Python Client for Datadog API
-# Consult the curl example
+from datadog import initialize, api
+
+options = {
+    'api_key': '<DD_API_KEY>',
+    'app_key': '<DD_APP_KEY>'
+}
+
+initialize(**options)
+
+api.GcpIntegration.delete(
+    project_id="<GCP_PROJECT_ID>",
+    client_email="<GCP_CLIENT_EMAIL>"
+)

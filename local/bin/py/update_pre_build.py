@@ -620,10 +620,8 @@ class PreBuild:
             # and the options front params are inlined
 
             if "front_matters" in content["options"]:
-                front_matters = "---\n" + \
-                    yaml.dump(content["options"]["front_matters"]) + "---\n"
-                file_content = re.sub(
-                    r'^(#{1}).*', front_matters, file_content, count=1)
+                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"],default_flow_style=False) + "---\n"
+                file_content = re.sub(r'^(#{1}).*', front_matters, file_content, count=1)
 
         with open(
             "{}{}{}".format(
@@ -1036,7 +1034,7 @@ class PreBuild:
                     del item[0]["type"]
                 item[0]["dependencies"] = dependencies
                 fm = yaml.dump(
-                    item[0], default_flow_style=False
+                    item[0], width=150, default_style='"', default_flow_style=False
                 ).rstrip()
             else:
                 fm = {"kind": "integration"}

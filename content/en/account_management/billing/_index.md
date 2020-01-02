@@ -42,12 +42,14 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}Usage details{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}Real User Moniotring FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}

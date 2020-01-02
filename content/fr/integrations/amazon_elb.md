@@ -42,13 +42,14 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ELB` est cochée dans la section concernant la collecte des métriques. Cochez également la case `ApplicationELB` pour les métriques ELB de l'application et la case `NetworkELB` pour les métriques ELB réseau.
 
-2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon ELB :
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon ELB. Pour en savoir plus sur les stratégies ELB, consultez [la documentation du site Web d'AWS][4].
 
-    - `elasticloadbalancing:DescribeLoadBalancers` : énumère les ELB et ajoute des tags et des métriques supplémentaires.
-    - `elasticloadbalancing:DescribeTags` : ajoute des tags ELB personnalisés aux métriques ELB.
-    - `elasticloadbalancing:DescribeInstanceHealth` : ajoute l'état de vos instances.
-
-    Pour en savoir plus sur les stratégies ELB, consultez [la documentation disponible sur le site d'AWS][4].
+    | Autorisation AWS                                | Description                                                         |
+    |-----------------------------------------------|---------------------------------------------------------------------|
+    | `elasticloadbalancing:DescribeLoadBalancers`  | Énumère les ELB et ajoute des tags et des métriques supplémentaires.                         |
+    | `elasticloadbalancing:DescribeTags`           | Ajoute des tags ELB personnalisés aux métriques ELB.                                 |
+    | `elasticloadbalancing:DescribeInstanceHealth` | Ajoute le statut de vos instances.                                        |
+    | `elasticloadbalancing:DescribeTargetGroups`   | Décrit les groupes cibles spécifiés ou l'ensemble de vos groupes cibles. |
 
 3. Installez l'[intégration Datadog/AWS ELB][5].
 
@@ -75,7 +76,7 @@ Choisissez un intervalle de 5 minutes et saisissez vos compartiments S3 :
 Accédez ensuite à la [section Log de Datadog][9] pour commencer à explorer vos logs !
 
 ## Données collectées
-Des métriques sont recueillies sous les espaces de nommage suivants :
+Les métriques sont recueillies sous les espaces de nommage suivants :
 
 | Espace de nommage Datadog    | Service AWS                    |
 |----------------------|--------------------------------|

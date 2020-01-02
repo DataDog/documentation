@@ -115,5 +115,5 @@ This is an example of using a custom Agent check to send one event periodically.
 [2]: /developers/write_agent_check
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/event/stream

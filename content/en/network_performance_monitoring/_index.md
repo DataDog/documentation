@@ -15,10 +15,6 @@ further_reading:
   text: "SNMP integration"
 ---
 
-<div class="alert alert-warning">
-Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Request form</a>.
-</div>
-
 ## Overview
 
 Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Connection data is aggregated into flows, each showing traffic between one _source_ and one _destination_, through a customizable [network page][1] and [network map][2].

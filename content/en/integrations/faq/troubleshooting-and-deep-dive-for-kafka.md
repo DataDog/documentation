@@ -33,7 +33,7 @@ The [Kafka_Consumer Integration][6] collects metrics like our standard Python ba
 ## Troubleshooting:
 ### Older Agent versions
 
-This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version](/agent/guide/upgrade-to-agent-v6/#upgrade-to-agent-6) to see these metrics.
+This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version][8] to see these metrics.
 
 ### Cannot connect to instance
 
@@ -49,7 +49,7 @@ This error means the Datadog Agent is unable to connect to the Kafka instance to
 
 ### Missing producer and consumer metrics
 
-By default Datadog only collects broker based metrics. 
+By default Datadog only collects broker based metrics.
 
 For Java based producers and consumers, add the following to the `conf.yaml` and update the settings as necessary.  See the [sample kafka.d/conf.yaml][9] for all available configuration options.
 ```yaml
@@ -76,7 +76,7 @@ To remedy, specify the correct partition for your topic. This correlates to this
 ```
 ### Partition context limitation
 
-The number of partition contexts collection is limited to 200. If you require more contexts, contact [Datadog support][8].
+The number of partition contexts collection is limited to 200. If you require more contexts, contact [Datadog support][11].
 
 [1]: https://kafka.apache.org
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell
@@ -85,6 +85,7 @@ The number of partition contexts collection is limited to 200. If you require mo
 [5]: https://github.com/DataDog/jmxfetch
 [6]: /integrations/kafka/#agent-check-kafka-consumer
 [7]: /agent
-[8]: /help
+[8]: /agent/versions/upgrade_to_agent_v6/
 [9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [10]: /developers/dogstatsd
+[11]: /help

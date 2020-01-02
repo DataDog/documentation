@@ -1,7 +1,7 @@
 ---
 title: Supprimer une intégration PagerDuty
 type: apicontent
-order: 18.4
+order: 19.4
 external_redirect: "/api/#supprimer-une-integration-pagerduty"
 ---
 

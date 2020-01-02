@@ -1,7 +1,7 @@
 ---
 title: メトリクスの検索
 type: apicontent
-order: 25.6
+order: 26.6
 external_redirect: /api/#search-metrics
 ---
 

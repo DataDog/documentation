@@ -1,7 +1,7 @@
 ---
 title: IdP メタデータのアップロード
 type: apicontent
-order: 27.4
+order: 28.4
 external_redirect: /api/#upload-idp-metadata
 ---
 

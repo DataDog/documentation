@@ -1,7 +1,7 @@
 ---
 title: ユーザーの取得
 type: apicontent
-order: 34.2
+order: 35.2
 external_redirect: /api/#get-user
 ---
 

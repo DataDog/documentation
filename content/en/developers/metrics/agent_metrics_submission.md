@@ -3,7 +3,7 @@ title: "Metric Submission: Custom Agent Check"
 kind: documentation
 disable_toc: true
 further_reading:
-- link: "developers/write_agent_check/?tab=agentv6"
+- link: "developers/write_agent_check/"
   tag: "Documentation"
   text: "Write an Agent Custom Check"
 ---
@@ -137,7 +137,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
 
-    {{< code-block lang="python" filename="metric_example.py" >}}
+    {{< code-block lang="python" filename="metrics_example.py" >}}
     import random
 
     from datadog_checks.base import AgentCheck
@@ -149,32 +149,32 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             self.count(
                 "example_metric.count",
                 2,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.count(
                 "example_metric.decrement",
                 -1,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.count(
                 "example_metric.increment",
                 1,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.rate(
                 "example_metric.rate",
                 1,
-                tags="metric_submission_type:rate",
+                tags=["env:dev","metric_submission_type:rate"],
             )
             self.gauge(
                 "example_metric.gauge",
                 random.randint(0, 10),
-                tags="metric_submission_type:gauge",
+                tags=["env:dev","metric_submission_type:gauge"],
             )
             self.monotonic_count(
                 "example_metric.monotonic_count",
                 2,
-                tags="metric_submission_type:monotonic_count",
+                tags=["env:dev","metric_submission_type:monotonic_count"],
             )
 
             # Calling the functions below twice simulates
@@ -182,12 +182,12 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             self.histogram(
                 "example_metric.histogram",
                 random.randint(0, 10),
-                tags="metric_submission_type:histogram",
+                tags=["env:dev","metric_submission_type:histogram"],
             )
             self.histogram(
                 "example_metric.histogram",
                 random.randint(0, 10),
-                tags="metric_submission_type:histogram",
+                tags=["env:dev","metric_submission_type:histogram"],
             )
     {{< /code-block >}}
 
@@ -227,5 +227,5 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 [2]: /developers/metrics/types
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/metric/summary

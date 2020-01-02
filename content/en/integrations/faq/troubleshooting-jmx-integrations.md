@@ -24,7 +24,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * Content of `/var/log/datadog/agent.log`
 * Output of the [info command][1]
@@ -150,6 +150,8 @@ A best practice is to limit your metrics to less than 350 by creating filters to
 The Agent does not come with a bundled JVM, but uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
 Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
+
+**Note**: Only one valid Java path needs to be specified for JMXFetch.
 
 ### JVM metrics
 

@@ -414,11 +414,12 @@ Use categories to create groups for an analytical view (for example, URL groups,
 * The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
+* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][6].
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this Processor:
+Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
 
 {{< img src="logs/processing/processors/category_processor.png" alt="Category Processor" responsive="true" style="width:80%;" >}}
 
@@ -466,8 +467,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
-
-Once defined the Category Processor, you could map the categories to Log Status using the [Log Status Remapper][6].
 
 ## Arithmetic processor
 
@@ -672,6 +671,60 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
+
+## Lookup Processor
+
+Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
+For example, you can use the Lookup Processor to map an internal service ID into a human readable service name. 
+Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor" responsive="true" style="width:80%;">}}
+
+The processor performs the following actions:
+
+* Looks if the current log contains the source attribute.
+* Checks if the source attribute value exists in the mapping table.
+  * If it does, creates the target attribute with the corresponding value in the table.
+  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
+
+You can fill the mapping table by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
+
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Processor JSON payload:
+
+```json
+{
+  "type" : "lookup-processor",
+  "name" : "<PROCESSOR_NAME>",
+  "is_enabled" : true,
+  "source" : "<SOURCE_ATTRIBUTE>",
+  "target" : "<TARGET_ATTRIBUTE>",
+  "lookup_table" : [ "key1,value1", "key2,value2" ],
+  "default_lookup" : "<DEFAULT_TARGET_VALUE>",
+}
+```
+
+| Parameter       | Type             | Required | Description|
+| ------          | -----            | -------- | -----      |
+| `type`          | String           | yes      | Type of the processor.|
+| `name`          | String           | no       | Name of the processor.|
+| `is_enabled`    | Boolean          | yes      | If the processor is enabled or not. Default: `false`|
+| `source`        | String           | yes      | Source attribute used to perform the lookup. |
+| `target`        | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.|
+| `lookup_table`  | Array of strings | yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
+| `default_lookup`| String           | no       | Value to set the target attribute if the source value is not found in the list.|
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Trace Remapper
 

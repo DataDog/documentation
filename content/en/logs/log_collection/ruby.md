@@ -4,24 +4,18 @@ kind: documentation
 aliases:
   - /logs/languages/ruby
 further_reading:
+- link: "https://github.com/roidrage/lograge"
+  tag: "Github"
+  text: "Lograge Documentation"
 - link: "logs/processing"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
-  tag: "Documentation"
-  text: "Learn more about parsing"
-- link: "logs/explorer"
-  tag: "Documentation"
-  text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
-  tag: "Documentation"
-  text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
 
-It's recommended to use `lograge` here as it helps to bring some sanity to logs that are noisy and hardly parseable. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][1].
+To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2]).
 
 Instead of having a Rail logging output like this:
 
@@ -36,13 +30,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-After lograge formating you get a single log line with all the important information, like this:
-
-```
-method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
-```
-
-And the final result in JSON:
+After lograge formating you get a single log line with all the important information in a JSON format like this:
 
 ```
 {
@@ -61,138 +49,67 @@ And the final result in JSON:
 }
 ```
 
-**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
+## Setup
 
-## Adding the GEMs
-Add the 2 following GEMs in your project:
+This section describe the minimum setup required in order to forward your Rails application logs to Datadog, if you want a more in depth example of this setup refer to the blog article: [How to collect, customize, and manage Rails application logs][3].
 
-```ruby
-gem 'logging-rails', :require => 'logging/rails'
-gem 'lograge'
-```
+1. **Add the lograge GEM in your project**:
 
-## Configure Lograge
-In your configuration file, set the following:
+    ```ruby
+    gem 'lograge'
+    ```
 
-```ruby
-# Lograge config
-config.lograge.enabled = true
+2. **Configure Lograge**. In your configuration file, set the following:
 
-# We are asking here to log in RAW (which are actually ruby hashes). The Ruby logging is going to take care of the JSON formatting.
-config.lograge.formatter = Lograge::Formatters::Raw.new
+    ```ruby
+    # Lograge config
+    config.lograge.enabled = true
 
-# This is useful if you want to log query parameters
-config.lograge.custom_options = lambda do |event|
-    { :ddsource => ["ruby"],
-      :params => event.payload[:params].reject { |k| %w(controller action).include? k }
-    }
-end
-```
+    # This specifies to log in JSON format
+    config.lograge.formatter = Lograge::Formatters::Json.new
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][2]
+    ## Disables log collocration
+    config.colorize_logging = false
 
-## Disable log coloration
-As it would be weirdly displayed in your Datadog application, disable your log coloration:
+    # Log to a dedicated file
+    config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
 
-```ruby
-config.colorize_logging = false
-```
+    # This is useful if you want to log query parameters
+    config.lograge.custom_options = lambda do |event|
+        { :ddsource => ["ruby"],
+          :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+        }
+    end
+    ```
 
-Now let's configure `logging-rails` that is going to convert everything in JSON format.
+    **Note**: You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][4]
 
-## Configuring the logging-rail gem
-If this is not already done, type the following command:
+3. **Configure your Datadog Agent**. Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```shell
-rails generate logging:install
-```
+    ```yaml
+      logs:
+        - type: file
+          path: <RUBY_LOG_FILE_PATH>.log
+          service: ruby
+          source: ruby
+          sourcecategory: sourcecode
+          ## Uncomment the following processing rule for multiline logs if they
+          ## start by the date with the format yyyy-mm-dd
+          #log_processing_rules:
+          #  - type: multi_line
+          #    name: new_log_start_with_date
+          #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
 
-That generates the `logging.rb` with default configuration inside that we are going to adapt.
+    Learn more about the [Agent log collection][5].
 
-First of all, we are going to log everything in JSON format. So change `:inspect` into `:json` this in the first lines of the file `logging.rb`:
+4. [Restart the Agent][6]
 
-```ruby
-# Objects are converted to strings using the :inspect method.
-  Logging.format_as :json
-```
-
-Then finally, defines the JSON layout and associate it to the appender you'll going to use to transfer the data to Datadog:
-
-```ruby
-# The JSON layout
-json_layout = Logging.layouts.json
-
-# For instance, a file appender that'll going to be forwarder by a syslog Agent to Datadog
-Logging.appenders.file(
-    'datadog',
-    :filename => config.paths['log'].first,
-    :layout => json_layout
-)
-```
-
-If you want to tweak the log layout, all items available can be found directly from the [source repository][3]
-
-## Configure your Datadog Agent.
-
-Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
-
-```yaml
-##Log section
-logs:
-
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
-  - type: file
-    path: /path/to/your/ruby/log.log
-    service: ruby
-    source: ruby
-    sourcecategory: sourcecode
-    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
-
-That's it! Now, all the rails calls are going to be in proper JSON automatically understood by your Datadog application.
-
-## Further Reading
+## Getting further
 
 ### Inject trace IDs in your logs
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][4] to automatically add trace and span ids in your logs.
-
-Once this is done, the log should have the following (for JSON format):
-
-```json
-{
-  "timestamp":"2016-01-12T19:15:19.118829+01:00",
-  "level":"INFO",
-  "logger":"Rails",
-  "message": {
-    "method":"GET",
-    "path":"/jobs/833552.json",
-    "format":"json",
-    "controller":"jobs",
-    "action":"show",
-    "status":200,
-    "duration":58.33,
-    "view":40.43,
-    "db":15.26,
-    "dd":{
-      "trace_id":7290723543738956761,
-      "span_id":8140992452225855633
-    },
-    "ddsource": ["ruby"],
-    "params":{}
-  }
-}
-```
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][7] to automatically add trace and span ids in your logs.
 
 Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
 
@@ -272,9 +189,14 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
 end
 ```
 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes)
-[2]: https://github.com/roidrage/lograge#installation
-[3]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
-[4]: /tracing/advanced/connect_logs_and_traces/?tab=ruby
+[1]: (https://github.com/roidrage/lograge
+[2]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes
+[3]: https://www.datadoghq.com/blog/managing-rails-application-logs
+[4]: https://github.com/roidrage/lograge#installation
+[5]: /agent/logs
+[6]: /agent/guide/agent-commands/#restart-the-agent
+[7]: /tracing/advanced/connect_logs_and_traces/?tab=ruby

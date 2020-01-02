@@ -1,6 +1,6 @@
 ---
 title: Credit card billing
-kind: faq
+kind: documentation
 disable_toc: true
 ---
 

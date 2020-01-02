@@ -38,7 +38,7 @@ Next, grant Datadog permissions to write log archives to your S3 bucket. US site
 
 1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS Cloudwatch.
 
-2. Add the following two permission statements to [the IAM policies of your Datadog role][5]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][6]. The `PutObject` permission is sufficient for uploading archives.
+2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 
 
     ```
@@ -69,7 +69,7 @@ Next, grant Datadog permissions to write log archives to your S3 bucket. US site
         ]
     }
     ```
-3. Go to your [Archives page][7] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+3. Go to your [Archives page][6] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 
 4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
 
@@ -81,21 +81,16 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save." responsive="true" style="width:75%;">}}
 
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /integrations/amazon_web_services/?tab=allpermissions#installation
-[6]: /logs/archives/rehydrating
-[7]: https://app.datadoghq.eu/logs/pipelines/archives
-
+[5]: /logs/archives/rehydrating
+[6]: https://app.datadoghq.eu/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
-
-<div class="alert alert-warning">
-    GCS Archives are in private beta. Request early access by contacting <a href="/help">Datadog Support</a>. GCS Archives do not yet support rehydration.
-</div>
 
 1. Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 
@@ -111,6 +106,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
   {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
 
+
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
 [3]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
@@ -118,7 +114,6 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [5]: https://console.cloud.google.com/apis/credentials
 [6]: https://console.cloud.google.com/iam-admin/iam
 [7]: https://app.datadoghq.com/logs/pipelines/archives
-
 {{% /tab %}}
 {{< /tabs >}}
 

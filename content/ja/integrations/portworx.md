@@ -133,9 +133,9 @@ Portworx チェックには、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://docs.datadoghq.com/ja/getting_started/integrations
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
 [11]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
 [12]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information

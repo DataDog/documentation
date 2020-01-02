@@ -1,7 +1,7 @@
 ---
 title: Update organization
 type: apicode
-order: 27.3
+order: 28.3
 external_redirect: /api/#update-organization
 ---
 

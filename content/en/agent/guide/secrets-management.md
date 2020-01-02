@@ -114,7 +114,7 @@ On Linux, the executable set as `secret_backend_command` must:
 On Windows, the executable set as `secret_backend_command` must:
 
 * Have read/exec for `ddagentuser` (the user used to run the Agent).
-* Have no rights for any user or group except `Administrator` or `LocalSystem`.
+* Have no rights for any user or group except for the `Administrators` group, the built-in Local System account, or the Agent user context (`ddagentuser` by default)
 * Be a valid Win32 application so the Agent can execute it.
 
 {{% /tab %}}
@@ -393,7 +393,7 @@ exit code:
 
 The first thing the Agent does on startup is to load `datadog.yaml` and decrypt any secrets in it. This is done before setting up the logging. This means that on platforms like Windows, errors occurring when loading `datadog.yaml` aren't written in the logs, but on `stderr`. This can occur when the executable given to the Agent for secrets returns an error.
 
-If you have secrets in `datadog.yaml` and the Agent refuses to start: 
+If you have secrets in `datadog.yaml` and the Agent refuses to start:
 
 * Try to start the Agent manually to be able to see `stderr`.
 * Remove the secrets from `datadog.yaml` and test with secrets in a check configuration file first.
@@ -403,5 +403,5 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

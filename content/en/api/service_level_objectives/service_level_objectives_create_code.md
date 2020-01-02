@@ -1,7 +1,7 @@
 ---
 title: Create a service level objective
 type: apicode
-order: 29.01
+order: 30.01
 external_redirect: /api/#create-a-service-level-objective
 ---
 

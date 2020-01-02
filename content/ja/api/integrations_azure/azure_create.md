@@ -1,7 +1,7 @@
 ---
 title: Azure インテグレーションの作成
 type: apicontent
-order: 16.2
+order: 17.2
 external_redirect: '/api/#create-an-azure-integration'
 ---
 ## Azure インテグレーションの作成

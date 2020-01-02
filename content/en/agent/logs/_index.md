@@ -172,6 +172,25 @@ List of all available parameters for log collection:
 
 To send logs over HTTPS with the Datadog Agent 6.14+, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
 
+{{< tabs >}}
+{{% tab "Compression enabled" %}}
+
+```
+logs_config:
+  use_http: true
+  use_compression: true
+  compression_level: 6
+```
+
+Or set the `DD_LOGS_CONFIG_USE_HTTP` and `DD_LOGS_CONFIG_USE_COMPRESSION` environment variables to `true`.
+The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL` environment variable) accepts values from 0 (no compression) to 9 (maximum compression but higher resource usage). The default value is 6.
+See the [Datadog Agent overhead section][11] for more information about Agent resource usage when compression is enabled.
+
+Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.datadoghq.com` (US site) or `agent-http-intake.logs.datadoghq.eu` (EU site) on port `443`.
+
+{{% /tab %}}
+{{% tab "Compression Disabled" %}}
+
 ```
 logs_config:
   use_http: true
@@ -179,6 +198,9 @@ logs_config:
 
 Or set the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`.
 Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.datadoghq.com` (US site) or `agent-http-intake.logs.datadoghq.eu` (EU site) on port 443.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The Agent sends batches that have the following limits:
 
@@ -219,3 +241,4 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
 [10]: /agent/proxy
+[11]: /agent/basic_agent_usage/#agent-overhead

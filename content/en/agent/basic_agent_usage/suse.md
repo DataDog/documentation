@@ -20,14 +20,14 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for SUSE. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-**Note**: SUSE 11 SP4 and above (we do not support SysVinit) are supported.
+**Note**: SUSE 11 SP4 and above are supported.
 
 ## Commands
 
-In Agent v6, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
+In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Description                        | Command                                                |
 | --------------------               | --------------------                                   |
@@ -67,7 +67,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
