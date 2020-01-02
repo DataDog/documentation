@@ -66,14 +66,14 @@ Data submitted directly to the Datadog API is not aggregated by Datadog before s
 
 Discover how to submit count metrics:
 
-| Submission Source                                                                      | Submission Method (python)           | Submission Type | Datadog In-App Type |
-|----------------------------------------------------------------------------------------|--------------------------------------|-----------------|---------------------|
-| [API][1]                                        | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
-| [DogStatsD][2]                   | `dog.count(...)`                     | COUNT           | RATE                |
-| [DogStatsD][2]                   | `dog.increment(...)`                 | COUNT           | RATE                |
-| [DogStatsD][2]                   | `dog.decrement(...)`                 | COUNT           | RATE                |
-| [Agent check][3]           | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][4] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
+|-------------------|--------------------------------------|-----------------|---------------------|
+| [API][1]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
+| [DogStatsD][2]    | `dog.count(...)`                     | COUNT           | RATE                |
+| [DogStatsD][2]    | `dog.increment(...)`                 | COUNT           | RATE                |
+| [DogStatsD][2]    | `dog.decrement(...)`                 | COUNT           | RATE                |
+| [Agent check][3]  | `self.count(...)`                    | COUNT           | COUNT               |
+| [Agent check][4]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
 
 **Note**: When a `COUNT` metric is submited through DogStatsD, it's stored as a `RATE` within Datadog. This is to ensure relevant comparasion accross different Agent. As a consequence, StatsD counts might show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
 
@@ -91,10 +91,10 @@ Discover how to submit count metrics:
 
 Discover how to submit rate metrics:
 
-| Submission Source                                                     | Submission Method (python)          | Submission Type | Datadog In-App Type |
-|-----------------------------------------------------------------------|-------------------------------------|-----------------|---------------------|
-| [API][1]                       | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
-| [Agent check][2] | `self.rate(...)`                    | RATE            | GAUGE               |
+| Submission Source | Submission Method (python)          | Submission Type | Datadog In-App Type |
+|-------------------|-------------------------------------|-----------------|---------------------|
+| [API][1]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
+| [Agent check][2]  | `self.rate(...)`                    | RATE            | GAUGE               |
 
 **Note**: When a `RATE` metric type is submited through an Agent Check, it's stored as a `GAUGE` within Datadog. This is to ensure relevant comparasion accross different Agent.
 
@@ -107,11 +107,11 @@ Discover how to submit rate metrics:
 
 Discover how to submit gauge metrics:
 
-| Submission Source                                                      | Submission Method (python)           | Submission Type | Datadog In-App Type |
-|------------------------------------------------------------------------|--------------------------------------|-----------------|---------------------|
-| [API][1]                        | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
-| [DogStatsD][2]   | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
-| [Agent check][3] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
+|-------------------|--------------------------------------|-----------------|---------------------|
+| [API][1]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
+| [DogStatsD][2]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
+| [Agent check][3]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 
 [1]: /api/?lang=python#post-timeseries-points
 [2]: /developers/metrics/dogstatsd_metrics_submission/#gauge
@@ -148,10 +148,10 @@ For instance, say that the `request.response_time.histogram` metric is reported 
 
 Discover how to submit HISTOGRAM metrics:
 
-| Submission Source                                                          | Submission Method (python) | Submission Type | Datadog In-App Type |
-|----------------------------------------------------------------------------|----------------------------|-----------------|---------------------|
-| [DogStatsD][3]   | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE         |
-| [Agent check][4] | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE         |
+| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
+|-------------------|----------------------------|-----------------|---------------------|
+| [DogStatsD][3]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][4]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE         |
 s
 **Note**: To submit an histogram you can also use a TIMER metric that is an implementation of the `HISTOGRAM` metric type within DogStatsD (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. See the [TIMER DogStatsD documentation][5] to learn how to instrument your code to submit `TIMER`s.
 
@@ -192,9 +192,9 @@ For instance, say that the `request.response_time.distribution` metric is report
 
 Discover how to submit DISTRIBUTION metrics:
 
-| Submission Source                                                           | Submission Method (python) | Submission Type | Datadog In-App Type |
-|-----------------------------------------------------------------------------|----------------------------|-----------------|---------------------|
-| [DogStatsD][1] | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT        |
+| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
+|-------------------|----------------------------|-----------------|---------------------|
+| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT        |
 
 ### Calculation of percentile aggregations
 
@@ -227,10 +227,10 @@ This functionality allows you to control tagging for metrics where host-level gr
 
 Discover how to submit set metrics:
 
-| Submission Source                                                    | Submission Method (python) | Submission Type | Datadog In-App Type |
-|----------------------------------------------------------------------|----------------------------|-----------------|---------------------|
-| [DogStatsD][1]   | `dog.set(...)`             | SET             | GAUGE               |
-| [Agent check][2] | `self.set(...)`            | SET             | GAUGE               |
+| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
+|-------------------|----------------------------|-----------------|---------------------|
+| [DogStatsD][1]    | `dog.set(...)`             | SET             | GAUGE               |
+| [Agent check][2]  | `self.set(...)`            | SET             | GAUGE               |
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#set
 [2]: /developers/metrics/agent_metrics_submission/?tab=set
