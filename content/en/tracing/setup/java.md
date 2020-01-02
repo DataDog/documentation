@@ -241,6 +241,102 @@ The tracer is configured using System Properties and Environment Variables as fo
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][11], and that port `8125` is open on the Agent container.
 In Kubernetes, [bind the DogStatsD port to a host port][12]; in ECS, [set the appropriate flags in your task definition][13].
 
+### Configuration Examples
+
+#### `dd.trace.enabled`
+
+**Example with system property and debug app mode**
+
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar path/to/application.jar
+```
+
+Debug app logs show that `Tracing is disabled, not installing instrumentations.`
+
+#### `dd.service.name`
+
+**Example with system property**
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/dd_service_name.png" alt="service name" responsive="true" >}}
+
+#### `dd.service.mapping`
+
+**Example with system property**
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" responsive="true" >}}
+
+#### `dd.trace.global.tags`
+
+**Setting a global env for spans and jmx metrics**
+
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags" responsive="true" >}}
+
+#### `dd.trace.span.tags`
+
+**Example with adding project:test to every span**
+
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags" responsive="true" >}}
+
+#### `dd.trace.jmx.tags`
+
+**Setting custom.type:2 on a jmx metric**
+
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags" responsive="true" >}}
+
+#### `dd.trace.methods`
+
+**Example with system property**
+
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods" responsive="true" >}}
+
+#### `dd.trace.db.client.split-by-instance`
+
+Example with system property:
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
+```
+
+DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
+
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1" responsive="true" >}}
+
+DB Instance 2, `secondwebappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
+
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" responsive="true" >}}
+
+Similarly on the service map, you would now see one web app making calls to two different postgres databases.
+
+#### `dd.http.server.tag.query-string`
+
+Example with system property:
+```
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
+```
+
+{{< img src="tracing/setup/java/query_string.png" alt="query string" responsive="true" >}}
+
 ### B3 Headers Extraction and Injection
 
 Datadog APM tracer supports [B3 headers extraction][14] and injection for distributed tracing.
