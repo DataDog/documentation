@@ -12,11 +12,11 @@ further_reading:
 ---
 モニターサマリーウィジェットは、Datadog のすべてのモニターまたはクエリに基づく一部のモニターの概要を表示します。
 
-{{< img src="graphing/widgets/monitor_summary/monitor_summary.png" alt="monitor summary " responsive="true">}}
+{{< img src="graphing/widgets/monitor_summary/monitor_summary.png" alt="monitor summary " >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/monitor_summary/monitor_summary_setup.png" alt="monitor summary setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/monitor_summary/monitor_summary_setup.png" alt="monitor summary setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -28,7 +28,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

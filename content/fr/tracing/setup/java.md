@@ -188,7 +188,7 @@ Pour profiter d'une meilleure visibilité sur vos applications utilisant des fra
 Le traceur est configuré à l'aide des propriétés système et des variables d'environnement comme suit :
 (Voir la configuration spécifique de l'intégration dans la section [Intégrations](#integrations) ci-dessus.)
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | Propriété système                        | Variable d'environnement                   | Default              | Description                                                                                                                                                                                                             |
 |----------------------------------------|----------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

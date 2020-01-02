@@ -43,9 +43,9 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 ディストリビューションでログを有効にする際は、CloudFront がログファイルを格納するために使用する Amazon S3 バケットを指定します。Amazon S3 を発信元として使用する場合は、ログファイルに同じバケットを使用しないことをお勧めします。別のバケットを使用することで、メンテナンスを簡略化できます。
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Cloudfront logging 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Cloudfront logging 1"   style="width:70%;">}}
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Cloudfront logging 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Cloudfront logging 1"   style="width:70%;">}}
 
 **重要**: 複数のディストリビューションのログファイルは同じバケットに格納してください。ログを有効にする場合は、[どのログファイルがどのディストリビューションに関連付けられているかを追跡できるように][4]、`cloudfront` をファイル名のプレフィックスとして指定します。
 
@@ -53,9 +53,9 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで Cloudfront ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     Cloudfront ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][6]に移動し、ログを確認します。
 

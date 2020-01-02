@@ -32,13 +32,13 @@ When there are multiple primary operations defined for a service, the highest re
 5. Select the operation that you want reflected as the entry-point to the service.
 6. Click **Save**.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" responsive="true" >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save"  >}}
 
 ## Viewing Stats for Additional Span Names
 
 To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a drop-down menu. However, these are not used to calculate service-level statistics.
 
-{{< img src="tracing/guide/primary_operation/dropdown.gif" alt="APM save" responsive="true" >}}
+{{< img src="tracing/guide/primary_operation/dropdown.gif" alt="APM save"  >}}
 
 ## Configuring the Primary Operation in Manual Instrumentation
 

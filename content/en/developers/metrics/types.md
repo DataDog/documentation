@@ -71,7 +71,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 
 When graphed, this `COUNT` metric looks like the following:
 
-{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" >}}
 
 Note: StatsD counts show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
 
@@ -102,7 +102,7 @@ Then this pattern of `0.33`, `0.66`, `0`, repeats. **Note**: for a `RATE` metric
 
 Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following:
 
-{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" >}}
 
 Discover how to submit rate metrics:
 
@@ -126,7 +126,7 @@ Each value/data point represents the total number of requests received at a poin
 
 When graphed, this `GAUGE` metric looks like the following:
 
-{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
+{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" >}}
 
 Discover how to submit gauge metrics:
 

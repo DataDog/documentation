@@ -21,18 +21,18 @@ To get the Trello app key and token, [navigate to Trello's application key page]
 
 **NOTE**: Trello mentions API key in the URL. For this article, API and app keys are one and the same.
 
-{{< img src="developers/faq/developer_api_key.png" alt="developer_api_key" responsive="true" >}}
+{{< img src="developers/faq/developer_api_key.png" alt="developer_api_key"  >}}
 
 To get the token, click the token link (green arrow) above, authorize a token with the Trello account you are currently logged into, and grab the token in the subsequent link:
-{{< img src="developers/faq/trello_api_key.png" alt="trello_api_key" responsive="true" >}}
+{{< img src="developers/faq/trello_api_key.png" alt="trello_api_key"  >}}
 
 ## Designate the Trello List
 
 Click on a card in the list you'd like to add cards to. Append `.json` to the URL, and then navigate to that URL.
-{{< img src="developers/faq/card_url.png" alt="card_url" responsive="true" >}}
+{{< img src="developers/faq/card_url.png" alt="card_url"  >}}
 
 From there, find the value of `idList`:
-{{< img src="developers/faq/id_list.png" alt="id_list" responsive="true" >}}
+{{< img src="developers/faq/id_list.png" alt="id_list"  >}}
 
 ## Configure the Webhook
 
@@ -65,12 +65,12 @@ Enable Custom Payload and fill in a JSON object that looks like:
 * **idList**: list ID
 
 The resulting config looks like this:
-{{< img src="developers/faq/integration_config.png" alt="integration_config" responsive="true" >}}
+{{< img src="developers/faq/integration_config.png" alt="integration_config"  >}}
 
 ## Some points to consider
 
 This flow involves Trello generating a server token for the application. As you can see in the the token disclaimer:
-{{< img src="developers/faq/trello_disclaimer.png" alt="trello_disclaimer" responsive="true" >}}
+{{< img src="developers/faq/trello_disclaimer.png" alt="trello_disclaimer"  >}}
 
 The token provides read/write access to all your boards and teams, so this is a potential concern if you do not want to give away access in this way.
 

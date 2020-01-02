@@ -16,7 +16,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" >}}
+{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource"  >}}
 
 A resource is a particular action for a given [service][1] (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][2]. For each resource, APM automatically generates a dashboard page covering:
 
@@ -43,23 +43,23 @@ Datadog provides out of the box graphs for any given resource:
 
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
 ### Export to Timeboard
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][4]:
 
-{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard"  style="width:40%;">}}
 
 ### Latency distribution
 
 In addition to all those graph there is a resource latency distribution graph:
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution"  style="width:90%;">}}
 
 Use the top right selector of this graph to zoom on a given percentile of latency distribution:
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector" responsive="true" style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector"  style="width:20%;">}}
 
 Zoom on this graph to filter corresponding traces.
 
@@ -67,7 +67,7 @@ Zoom on this graph to filter corresponding traces.
 
 For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics" responsive="true" style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics"  style="width:80%;">}}
 
 The displayed metrics represent, per span:
 
@@ -85,7 +85,7 @@ The displayed metrics represent, per span:
 
 Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
 
 ## Further Reading
 

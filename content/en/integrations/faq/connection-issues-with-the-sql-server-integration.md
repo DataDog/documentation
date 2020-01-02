@@ -26,9 +26,9 @@ If you are unsure how to set your SQL Server's authentication mode, you may find
 Do note that any of the above changes that you make to your SQL Server will require that you restart your SQL Server before the changes take effect.
 
 Here's an example of some SQL Server IP/TCP settings that have worked just fine on one of our testing environments (Windows 2012 R2, SQL Server 2014 Express):
-{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" >}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1"  >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2" responsive="true" >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2"  >}}
 
 ## Empty Connection String?
 

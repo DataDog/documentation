@@ -28,7 +28,7 @@ This can be a problem because some websites ban requests that don't have a `user
 The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to any valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
 
 
-{{< img src="synthetics/user-agent.gif" alt="Synthetics home page" responsive="true">}}
+{{< img src="synthetics/user-agent.gif" alt="Synthetics home page" >}}
 
 ## API & Browser Tests
 

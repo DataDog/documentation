@@ -58,7 +58,7 @@ If you were to add a custom query to your mysql.yaml with the following configur
 
 Then your Agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
 
-{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" >}}
+{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query"  >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example#L54-L71
 [2]: /developers/metrics/dogstatsd_metrics_submission

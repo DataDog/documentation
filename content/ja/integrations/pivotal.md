@@ -17,7 +17,7 @@ public_title: Datadog-Pivotal Tracker インテグレーション
 short_description: Datadog イベントストリームでストーリーを参照してコメントを記入
 version: '1.0'
 ---
-{{< img src="integrations/pivotal/pivotal_event.png" alt="pivotal event" responsive="true" popup="true">}}
+{{< img src="integrations/pivotal/pivotal_event.png" alt="pivotal event"  >}}
 
 ## 概要
 
@@ -31,7 +31,7 @@ Pivotal Tracker を Datadog に接続して、以下のことができます。
 
 ストリームで Pivotal イベントを取得するには、Pivotal [プロファイルページ][1]で生成される API トークンを入力します。
 
-{{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token" responsive="true" popup="true">}}
+{{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token"  >}}
 
 ## 収集データ
 ### メトリクス

@@ -16,7 +16,7 @@ La page Usage contient les sections suivantes :
 
 Cette section résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom, des hosts APM, des spans analysées, des logs, des synthetics et de toute autre partie de la plateforme que vous avez utilisée au cours du mois.
 
-{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" responsive="true">}}
+{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" >}}
 
 ### Overall Usage
 
@@ -43,7 +43,7 @@ Cet onglet présente l'utilisation horaire, quotidienne, mensuelle et annuelle d
 | Fargate Tasks      | Affiche la somme de toutes les tâches Fargate pour toutes les heures du mois actuel.                            |
 
 
-{{< img src="account_management/billing/usage-details-02.png" alt="Utilisation horaire" responsive="true">}}
+{{< img src="account_management/billing/usage-details-02.png" alt="Utilisation horaire" >}}
 
 #### Infrastructure Host Types
 
@@ -54,7 +54,7 @@ Ce tableau présente graphiquement la répartition des **hosts d'infrastructure*
 * Hosts Azure
 * Hosts GCP
 
-{{< img src="account_management/billing/usage-details-03.png" alt="Types de hosts d'infrastructure" responsive="true">}}
+{{< img src="account_management/billing/usage-details-03.png" alt="Types de hosts d'infrastructure" >}}
 
 
 ### Top 500 Custom Metrics
@@ -68,7 +68,7 @@ Ce tableau énumère les informations suivantes sur l'utilisation de vos 500 pr
 
 Ces données peuvent être téléchargées sous forme de fichier CSV.
 
-{{< img src="account_management/billing/usage-details-04.png" alt="Métriques custom" responsive="true">}}
+{{< img src="account_management/billing/usage-details-04.png" alt="Métriques custom" >}}
 
 
 ## Dépannage

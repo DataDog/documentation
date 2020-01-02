@@ -25,7 +25,7 @@ DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/Dat
 **Note**: The installation process may take up to 30 minutes on some models of Raspberry PI.
 
 If installed correctly, you will see output that looks like:
-{{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"  responsive="true" >}}
+{{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"   >}}
 
 The Agent runs in the foreground. Some users find benefit in creating an RC script for it or putting it into the `/etc/rc.local` like this:
 ```
@@ -33,7 +33,7 @@ nohup sh /root/.datadog-agent/bin/agent &
 ```
 
 You now see metrics being ingested from your Raspberry PI device:
-{{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard"  responsive="true" >}}
+{{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard"   >}}
 
 Thank you to Karim Vaes for the [excellent blog post][2]!
 

@@ -21,7 +21,7 @@ public_title: Datadog-Amazon CodeDeploy インテグレーション
 short_description: 行われているデプロイを表示し、その所要時間を追跡
 version: '1.0'
 ---
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy default dashboard"  >}}
 
 ## 概要
 
@@ -59,7 +59,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS Codedeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS Codedeploy Events" responsive="true">}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS Codedeploy Events" >}}
 
 ### サービスのチェック
 AWS Codedeploy インテグレーションには、サービスのチェック機能は含まれません。

@@ -89,7 +89,7 @@ Run the `namei` command to obtain more information about the file permissions:
 In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
 Add the missing permissions via the [chmod command][6].
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
+{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}
 
 **Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
 Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.

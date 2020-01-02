@@ -43,7 +43,7 @@ Une fois cette opération effectuée, exportez vos logs Google Container Engin
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_container_engine/export_container.png" alt="Exporter les logs Google Container Engine vers le Pub Sub" responsive="true">}}
+    {{< img src="integrations/google_container_engine/export_container.png" alt="Exporter les logs Google Container Engine vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

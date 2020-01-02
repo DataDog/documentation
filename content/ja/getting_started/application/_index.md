@@ -10,7 +10,7 @@ further_reading:
 
 ## インテグレーション
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 * Datadog では、350 個以上のインテグレーションが[公式にリストされています][3]。
 * [Datadog API の使用による][4]カスタムインテグレーションも使用可能です。
@@ -19,7 +19,7 @@ further_reading:
 
 ## インフラストラクチャー
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure"  >}}
 
 * すべてのマシンは[インフラストラクチャー リスト][6]に表示されます。
 * 各マシンに適用されたタグを確認できます。タグ付けによって各マシンの目的を示すことができます。
@@ -27,7 +27,7 @@ further_reading:
 
 ## Host Map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
 
 [ホストマップ][8]は、インフラストラクチャーメニューにある機能です。この機能を使用すると、以下のことができます。
 
@@ -40,7 +40,7 @@ further_reading:
 
 ## イベント
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
 
 [イベントストリーム][9]には、ブログと同じルールが適用されます。つまり、
 
@@ -56,11 +56,11 @@ further_reading:
 * メールを受信する[チームメンバーに @ で通知][12]
 * `@support-datadog` で[サポート依頼][13]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" style="width:70%;">}} 
+{{< img src="getting_started/event_stream_event.png" alt="event stream event"  style="width:70%;">}} 
 
 ## ダッシュボード  
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}} 
+{{< img src="getting_started/dashboard.png" alt="dashboard"  >}} 
 
 ダッシュボードには、リアルタイムパフォーマンスメトリクスが[グラフ][14]で表示されます。
 
@@ -82,7 +82,7 @@ further_reading:
 * アラートメッセージで `@` を使用することで適切な相手に通知を届けることができます。
 * ダウンタイムをスケジューリングすると、システムシャットダウン時やオフラインメンテナンス時などに通知を停止できます。
 
-{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="alert setup"  >}}
 
 ## その他の参考資料
 

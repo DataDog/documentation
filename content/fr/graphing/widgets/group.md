@@ -12,7 +12,7 @@ further_reading:
 ---
 Le widget Groupe vous permet de regrouper des graphiques semblables sur votre [timeboard][1]. Chaque groupe a un en-tête personnalisé, peut contenir entre un et de nombreux graphiques, et peut être réduit :
 
-{{< img src="graphing/widgets/group/group.mp4" alt="Widget Groupe" video="true" responsive="true" >}}
+{{< img src="graphing/widgets/group/group.mp4" alt="Widget Groupe" video="true"  >}}
 
 ## Implémentation
 

@@ -23,11 +23,11 @@ further_reading:
 ---
 The Change graph shows you the change in a value over the time period chosen:
 
-{{< img src="graphing/widgets/change/change.png" alt="Change graph" responsive="true">}}
+{{< img src="graphing/widgets/change/change.png" alt="Change graph" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -52,7 +52,7 @@ The Change graph shows you the change in a value over the time period chosen:
 ### Options
 #### Display preference
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### Global time
 
@@ -66,7 +66,7 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

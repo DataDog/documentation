@@ -17,7 +17,7 @@ public_title: Datadog-Dyn インテグレーション
 short_description: ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡
 version: '1.0'
 ---
-{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview"  >}}
 
 ## 概要
 
@@ -32,21 +32,21 @@ version: '1.0'
 Dyn で `datadog` 読み取り専用ユーザーをまだ作成していない場合は、[Dyn にログイン][1]し、以下の手順を実行します。
 
 1. ユーザー名とパスワードを選択します。 
-{{< img src="integrations/dyn/create_dyn_user.png" alt="Create dyn user" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/create_dyn_user.png" alt="Create dyn user" style="width:75%;"  >}}
 
 2. **READONLY** ユーザーグループを選択します。
-{{< img src="integrations/dyn/choose_dyn_group.png" alt="Choose dyn group" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/choose_dyn_group.png" alt="Choose dyn group" style="width:75%;"  >}}
 
 3. **Add New User** をクリックします。
 
 Datadog 読み取り専用ユーザーを作成し、次の手順を行います。
 
 1. Datadog アプリケーションで [Dyn インテグレーション][2]を構成します。
-{{< img src="integrations/dyn/dyn_integration.png" alt="Dyn Integration" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_integration.png" alt="Dyn Integration" style="width:75%;"  >}}
 
 2. イベントと `dyn.changes` メトリクスを収集するゾーン (Zone Note) を選択します。<br>
 
-{{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_zone.png" alt="Dyn zone" style="width:75%;"  >}}
 
 デフォルトでは、すべてのゾーンの Dyn 「QPS」メトリクスが収集されます。
 

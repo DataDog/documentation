@@ -16,7 +16,7 @@ further_reading:
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
-{{< img src="logs/processing/processing.png" alt="Traitement" responsive="true">}}
+{{< img src="logs/processing/processing.png" alt="Traitement" >}}
 
 ## Présentation
 
@@ -42,7 +42,7 @@ La mise en place d'une stratégie de traitement de logs vous permet également d
 
 Un [pipeline d'intégration][7] est automatiquement installé pour les logs d'intégration, afin de prendre en charge leur parsing et d'ajouter la facette correspondante dans Log Explorer. Consultez l'exemple de logs ELB ci-dessous :
 
-{{< img src="logs/processing/elb_log_post_processing.png" alt="Post traitement de logs ELB" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/elb_log_post_processing.png" alt="Post traitement de logs ELB"  style="width:70%;">}}
 
 <div class="alert alert-info">
 Consultez la liste <a href="/integrations/#collecte-de-logs-cat">actuelle des intégrations prises en charge disponibles</a>.
@@ -54,11 +54,11 @@ Les formats de logs peuvent être totalement personnalisés. Vous pouvez ainsi d
 
 Par exemple, avec des règles de traitement personnalisées, vous pouvez transformer ce log :
 
-{{< img src="logs/processing/log_pre_processing.png" alt="Prétraitement de logs" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_pre_processing.png" alt="Prétraitement de logs"  style="width:50%;">}}
 
 En celui ci :
 
-{{< img src="logs/processing/log_post_processing.png" alt="Post traitement de logs" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_post_processing.png" alt="Post traitement de logs"  style="width:50%;">}}
 
 Consultez la [page Pipelines][1] pour découvrir comment effectuer des actions uniquement sur certains sous-ensembles de logs avec les [filtres de pipelines][8].
 
@@ -135,11 +135,11 @@ Par défaut, [les traceurs de Datadog peuvent automatiquement injecter les ID de
 
 Vous pouvez désormais contrôler le hostname global, le service, le timestamp et le mappage principal du statut qui sont appliqués avant les pipelines de traitement. Cela s'avère utile lorsque des logs sont envoyés au format JSON ou à partir d'un Agent externe.
 
-{{< img src="logs/processing/reserved_attribute.png" alt="Attributs réservés" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute.png" alt="Attributs réservés"  style="width:80%;">}}
 
 Pour modifier les valeurs par défaut de chaque attribut réservé, accédez à la [page Configuration][5] et modifiez le champ `Reserved Attribute mapping` :
 
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Carré d'attributs réservés" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute_tile.png" alt="Carré d'attributs réservés"  style="width:80%;">}}
 
 ## Pour aller plus loin
 

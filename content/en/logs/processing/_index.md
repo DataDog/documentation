@@ -17,7 +17,7 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-{{< img src="logs/processing/processing.png" alt="Processing" responsive="true">}}
+{{< img src="logs/processing/processing.png" alt="Processing" >}}
 
 ## Overview
 
@@ -43,7 +43,7 @@ The other benefit to implement a log processing strategy is to implement an [att
 
 For integration logs, an [Integration Pipeline][7] is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer. See the ELB logs example below:
 
-{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing"  style="width:70%;">}}
 
 <div class="alert alert-info">
 Consult the current <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
@@ -55,11 +55,11 @@ However, log formats can be totally custom which is why you can define custom pr
 
 So for instance with custom processing rules you can transform this log:
 
-{{< img src="logs/processing/log_pre_processing.png" alt="Log pre processing" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_pre_processing.png" alt="Log pre processing"  style="width:50%;">}}
 
 Into this one:
 
-{{< img src="logs/processing/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_post_processing.png" alt="Log post processing"  style="width:50%;">}}
 
 Consult the [Pipelines documentation page][1] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][8].
 
@@ -138,11 +138,11 @@ By default, [Datadog tracers can automatically inject trace and span IDs in the 
 
 You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing Pipelines. This is useful if logs are sent in JSON or from an external Agent.
 
-{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute"  style="width:80%;">}}
 
 To change the default values for each of the reserved attributes, go to the [Configuration page][5] and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile"  style="width:80%;">}}
 
 ## Further Reading
 

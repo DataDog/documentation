@@ -45,7 +45,7 @@ Définir la configuration de votre test Browser.
 
 Les [variables globales définies sur la page `Settings`][5] peuvent être utilisées dans l'URL et dans les options avancées de vos tests Browser. Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité.
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Utiliser des variables dans les tests Browser" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Utiliser des variables dans les tests Browser" video="true"  width="80%" >}}
 
 ### Conditions d'alerte
 
@@ -64,13 +64,13 @@ Pour configurer vos notifications :
 
 Les tests peuvent uniquement être enregistrés à partir de **[Google Chrome][8]**. Pour enregistrer votre test, téléchargez l'[extension d'enregistrement de test Datadog pour Google Chrome][9].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Enregistrer le test Browser" responsive="true" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Enregistrer le test Browser"  >}}
 
 1. Facultatif : sélectionnez **Open in a pop-up** dans le coin supérieur droit de la page pour ouvrir l'enregistrement du test dans une fenêtre contextuelle séparée. Vous éviterez ainsi tout problème de dimensionnement dans la fenêtre affichée dans l'interface Datadog.
 2. Cliquez sur **Start recording** pour commencer l'enregistrement de votre test Browser.
 3. Vos actions sont enregistrées et utilisées pour créer des étapes dans le scénario de votre test Browser. Vous pouvez enregistrer l'importation de fichiers en tant qu'action, mais il existe une limite de 10 fichiers (et de 5 Mo par fichier).
 4. Utilisez les actions disponibles en haut à gauche pour enrichir votre scénario :
-    {{< img src="synthetics/browser_tests/browser_check_assertions.png" alt="Étapes du test Browser" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_check_assertions.png" alt="Étapes du test Browser"  style="width:80%;">}}
 
     **Remarque** : **la dernière étape de votre test Browser doit être une assertion**. Autrement, il n'y a rien à vérifier.
 5. Une fois votre scénario terminé, cliquez sur **Save and Launch Test**.
@@ -78,7 +78,7 @@ Les tests peuvent uniquement être enregistrés à partir de **[Google Chrome][8
 ## Actions
 ### Assertion
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion du test Browser" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion du test Browser"  style="width:40%;">}}
 
 Les assertions vous permettent de vérifier si un élément, du contenu ou du texte est disponible sur la page en cours. Vous pouvez également vérifier si un e-mail spécifique a été envoyé.
 Le délai d'expiration par défaut pour chaque étape est d'environ 60 secondes. Vous pouvez remplacer le délai d'expiration pour `Assert that an element is present on the page` en affichant les détails de l'étape et en modifiant la valeur de l'option `Timeout` (en secondes).
@@ -112,7 +112,7 @@ Après avoir sélectionné l'action Hover, cliquez sur l'élément que vous souh
 
 #### Créer une variable
 
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Définir une variable" video="true" responsive="true" width="60%">}}
+{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Définir une variable" video="true"  width="60%">}}
 
 Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur parmi les propositions suivantes :
 
@@ -131,7 +131,7 @@ Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur 
 
 Une fois votre variable créée, utilisez-la pour définir un texte de saisie dans un formulaire ou une barre de recherche. Utilisez l'icône en forme de main dans la case de votre variable pour créer une étape de saisie :
 
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Saisie via une variable" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Saisie via une variable" video="true"  width="80%" >}}
 
 Vous pouvez également utiliser vos variables dans certaines assertions, notamment les suivantes :
 
@@ -143,7 +143,7 @@ Vous pouvez également utiliser vos variables dans certaines assertions, notamme
 
 Pour utiliser vos variables dans l'une de vos assertions, cliquez sur *Use Variable* et sélectionnez la variable que vous souhaitez utiliser :
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Utiliser une variable dans une assertion" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Utiliser une variable dans une assertion"  style="width:40%;">}}
 
 ### Wait
 
@@ -155,7 +155,7 @@ Par défaut, Datadog attend que la page soit complètement chargée avant d'effe
 
 Vous pouvez exécuter des tests Browser au sein d'autres tests Browser :
 
-{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Sous-test de test Browser" video="true" responsive="true" width="40%" >}}
+{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Sous-test de test Browser" video="true"  width="40%" >}}
 
 Grâce aux options avancées, vous pouvez également choisir le lieu d'exécution du sous-test :
 

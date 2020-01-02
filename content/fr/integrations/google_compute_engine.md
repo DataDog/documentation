@@ -43,7 +43,7 @@ Une fois cette opération effectuée, exportez vos logs Google Compute Engine 
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Exportation des logs Google Compute Engine vers Pub Sub" responsive="true">}}
+    {{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Exportation des logs Google Compute Engine vers Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
@@ -58,7 +58,7 @@ Datadog peut désactiver de façon proactive des monitors dans le cadre d'un arr
 
 Pour désactiver les monitors en cas d'arrêt planifié d'une instance GCE, cochez la case **GCE automuting** dans le [carré d'intégration Google Cloud Platform][1].
 
-{{< img src="integrations/google_compute_engine/gce_automuting.png" alt="Désactivation automatique GCE" responsive="true">}}
+{{< img src="integrations/google_compute_engine/gce_automuting.png" alt="Désactivation automatique GCE" >}}
 
 ## Données collectées
 ### Métriques

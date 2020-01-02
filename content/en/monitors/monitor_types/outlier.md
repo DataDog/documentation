@@ -20,7 +20,7 @@ further_reading:
 
 Outlier detection is an algorithmic feature that allows you to detect when a specific group is behaving different compared to its peers. For example, you could detect that one web server in a pool is processing an unusual number of requests, or significantly more 500 errors are happening in one AWS availability zone than the others.
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert"  style="width:80%;">}}
 
 ## Monitor creation
 
@@ -44,7 +44,7 @@ When setting up an outlier monitor, the time window is an important consideratio
 
 To ensure your alert is properly calibrated, set the time window in the preview graph and use the reverse (<<) button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate"  style="width:80%;">}}
 
 #### Algorithms
 
@@ -91,7 +91,7 @@ So which algorithm should you use? For most outliers, any algorithm performs wel
 
 In the following image, a group of hosts is flushing their buffers together, while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where you might prefer to use MAD since the synchronization of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics represented a scheduled job that should be synchronized across hosts, DBSCAN would be the correct choice.
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing"  style="width:80%;">}}
 
 ### Notifications
 
@@ -105,7 +105,7 @@ To create outlier monitors programmatically, see the [Datadog API reference][4].
 
 The outlier algorithms are set up to identify groups that are behaving differently from their peers. If your groups exhibit "banding" behavior as shown below (maybe each band represents a different shard), Datadog recommends tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
-{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding"  style="width:80%;">}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

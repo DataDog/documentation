@@ -218,22 +218,22 @@ azure role assignment create --objectId <OBJECT_ID> --roleName Reader --subscrip
   * サポート対象のアカウントの種類: `この組織ディレクトリのアカウントのみ (Datadog)`
   * リダイレクト URI - オプション - `https://app.datadoghq.com`
 
-{{< img src="integrations/azure/Azure_create_ad.png" alt="Azure create app" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="integrations/azure/Azure_create_ad.png" alt="Azure create app"   style="width:80%;" >}}
 
 ##### 読み取りアクセス許可をアプリケーションに付与する
 
 1. 検索ボックスまたは左のサイドバーから、**サブスクリプション**に移動します。
 
-    {{< img src="integrations/azure/subscriptions_icon.png" alt="subscriptions icon" responsive="true" popup="true" style="width:25%">}}
+    {{< img src="integrations/azure/subscriptions_icon.png" alt="subscriptions icon"   style="width:25%">}}
 
 2. 監視するサブスクリプションをクリックします。
 3. サブスクリプションのメニューで**アクセス制御 (IAM)**を選択し、次に**追加** -> **ロールの割り当ての追加**を選択します。
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="Add Role Assignment" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/azure-add-role.png" alt="Add Role Assignment"   style="width:80%">}}
 
 4. **役割**では、閲覧者を選択します。**選択**では、前の手順で作成したアプリケーションの名前を選択します。
 
-    {{< img src="integrations/azure/azure-select-role-app.png" alt="Select Role and App" responsive="true" popup="true" style="width:60%">}}
+    {{< img src="integrations/azure/azure-select-role-app.png" alt="Select Role and App"   style="width:60%">}}
 
 5. **保存**をクリックします。
 6. Datadog を使用して監視する他のサブスクリプションについても、この手順を繰り返します。**注**: Azure Lighthouse のユーザーは、顧客テナントからサブスクリプションを追加できます。
@@ -247,7 +247,7 @@ azure role assignment create --objectId <OBJECT_ID> --roleName Reader --subscrip
 2. 同じアプリで、**管理** -> **証明書とシークレット**に移動します。
 3. `datadogClientSecret` という新しいクライアントシークレットを追加し、有効期限の期間を選択し、**追加**をクリックします。
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="azure client secret" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/Azure_client_secret.png" alt="azure client secret"   style="width:80%">}}
 
 3. キー値が表示されたら、コピーして [Datadog Azure インテグレーションタイル][1]の **Client Secret** に貼り付け、**Install Integration** または **Update Configuration** をクリックします。
 
@@ -278,7 +278,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [Azure VM のデフォルトのダッシュボード][5]に移動し、このダッシュボードにインフラストラクチャーのデータが表示されていることを確認します。
 
-{{< img src="integrations/azure/azure_vm_screenboard.png" alt="azure vm screenboard" responsive="true" popup="true" style="width:70%">}}
+{{< img src="integrations/azure/azure_vm_screenboard.png" alt="azure vm screenboard"   style="width:70%">}}
 
 ### ログの収集
 

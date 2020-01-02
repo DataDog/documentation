@@ -34,7 +34,7 @@ Une fois votre emplacement privé créé, pour configurer un test API Synthetics
 
 1. Accédez à *Synthetics* -> *Settings* -> *Emplacements privés* et créez un emplacement privé :
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="créer un emplacement privé" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/create_private_location.png" alt="créer un emplacement privé"  style="width:70%;">}}
 
 2. Renseignez les détails de l'emplacement, puis cliquez sur **Save and Generate** pour générer le fichier de configuration associé à votre emplacement privé sur votre worker.
 
@@ -67,11 +67,11 @@ Une fois votre emplacement privé créé, pour configurer un test API Synthetics
 
   * Dans votre liste d'emplacements privés, dans la section Settings :
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="états de santé des emplacements privés" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="états de santé des emplacements privés"  style="width:70%;">}}
 
   * Dans le formulaire de création d'un test, sous la section Private Locations :
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="emplacements privés dans la liste" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="emplacements privés dans la liste"  style="width:70%;">}}
 
 6. Vous pouvez désormais utiliser votre nouvel emplacement privé comme n'importe quel autre emplacement géré par Datadog pour vos [tests API Synthetics][1].
 

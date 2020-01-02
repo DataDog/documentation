@@ -29,7 +29,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
 
-{{< img src="graphing/dashboards/dashboard_list2.png" alt="Dashboard List page" responsive="true" >}}
+{{< img src="graphing/dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
 
 ### New list
 
@@ -39,7 +39,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
+{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list"  style="width:70%;">}}
 
 ### Lists
 
@@ -110,13 +110,13 @@ From an individual dashboard, you can copy, import, or export a dashboard's JSON
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copy dashboard" responsive="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copy dashboard"  style="width:30%;">}}
 
 ### Suggested dashboards and active users
 
 From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
 
-{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" responsive="true">}}
+{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
 ## Further Reading
 

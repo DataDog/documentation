@@ -49,7 +49,7 @@ Datadog ではさまざまなメトリクスタイプがさまざまなメトリ
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | 方法 | 概要 |
 | :----- | :------- |

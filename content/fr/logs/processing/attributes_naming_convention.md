@@ -31,7 +31,7 @@ Les attributs standards sont conçus pour permettre à votre organisation de dé
 Les intégrations de logs reposent de façon native sur les [attributs fournis par défaut](#liste-des-attributs-standards-par-defaut), mais votre organisation peut choisir de compléter ou de modifier cette liste.
 Le tableau des attributs standards ainsi que les pipelines et les autres fonctions d'admission des logs (génération de métriques, archives, filtres d'exclusion, etc.) sont disponibles dans les pages de configuration des logs.
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Attributs standards" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Attributs standards"  style="width:60%;">}}
 
 Pour appliquer ces attributs standards, les administrateurs ont la possibilité de copier un ensemble d'attributs non standards existant dans un ensemble d'attributs standards. De cette façon, il est possible de rendre conformes les sources de logs qui ne le sont pas, sans qu'aucune des informations existantes ne soit perdue.
 
@@ -39,7 +39,7 @@ Pour appliquer ces attributs standards, les administrateurs ont la possibilité 
 
 Généralement, durant une période de transition, les attributs standards peuvent coexister avec leur version non standard dans votre organisation. Pour aider vos utilisateurs à sélectionner les attributs standards dans ce contexte, ces derniers sont identifiés comme tels dans le Log Explorer (par exemple dans la liste des facettes ainsi que dans les sélecteurs de mesure ou de groupe dans la section Analytics).
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Attributs standards" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Attributs standards"  style="width:60%;">}}
 
 Si vous êtes un administrateur ou le responsable de la convention de nommage dans votre organisation, profitez de cette période de transition pour en discuter avec les autres utilisateurs et les inviter à utiliser les attributs standards.
 
@@ -47,7 +47,7 @@ Si vous êtes un administrateur ou le responsable de la convention de nommage da
 
 La tableau des attributs standards propose un ensemble d'[attributs standards prédéfinis](#liste-des-attributs-standards-par-défaut). Vous pouvez ajouter vos propres attributs à cette liste et modifier ou supprimer des attributs standards existants :
 
-{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Modifier les attributs standards" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Modifier les attributs standards"  style="width:80%;">}}
 
 ### Ajouter ou modifier des attributs standards
 
@@ -60,7 +60,7 @@ Un attribut standard est défini par les éléments suivants :
 
 Le volet de l'attribut standard s'affiche lorsque vous ajoutez un nouvel attribut standard ou que vous modifiez un attribut existant :
 
-{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Définir un attribut standard" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Définir un attribut standard"  style="width:80%;">}}
 
 Tous les éléments des attributs standards peuvent être renseignés ou mis à jour.
 

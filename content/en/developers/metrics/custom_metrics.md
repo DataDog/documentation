@@ -29,7 +29,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300"  style="width:80%;">}}
 
 There are no enforced [fixed rate limits][5] on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
 
@@ -48,7 +48,7 @@ This example assumes you are submitting a `COUNT` metric (`auth.exceptionCount`)
 * Your code instrumentation submits the following possible tags associated with the metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
 * The logic behind your metric tagging is:
 
-    {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" >}}
+    {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1"  >}}
 
 * In this situation, you have 6 different metrics. The unique metrics for a **single host** are:
 
@@ -81,7 +81,7 @@ For example, you create the metric `service.request.count` to gain insight from 
     * `service:webserver`
 * The logic behind your metric is:
 
-    {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" style="width:80%;">}}
+    {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric"  style="width:80%;">}}
 
 For this example, only a subset of services and statuses are reporting. You have three hosts:
 
@@ -91,7 +91,7 @@ For this example, only a subset of services and statuses are reporting. You have
 
 Across your three hosts, there are 13 distinct metrics (timeseries):
 
-{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count"  style="width:75%;">}}
 
 **Note**: If all services report both statuses, you have 1 x 2 x 3 = 6 custom metrics **per host**.
 
@@ -99,23 +99,23 @@ Across your three hosts, there are 13 distinct metrics (timeseries):
 
 The [Metric Summary page][9] displays the number of distinct metrics which is equivalent to number of distinct timeseries associated with a given metric name, host, tag values. For example, `service.request.count` with 1 host, 2 statuses, and 3 services = **6 distinct metrics**:
 
-{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary"  style="width:80%;">}}
 
 Adding a second host with 3 services and 1 status = **9 distinct metrics**:
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2"  style="width:80%;">}}
 
 Adding a third host with 2 services and 2 status = **13 distinct metrics**:
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3"  style="width:80%;">}}
 
 #### Query editor
 
 You can count your custom metrics by using the `count:` aggregator in the query editor. For counting the previous example, the query `count:service.request.count{*}` is used:
 
-{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator"  style="width:80%;">}}
 
-{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics"  style="width:80%;">}}
 
 ### Gauges, counts, histograms, and rates
 

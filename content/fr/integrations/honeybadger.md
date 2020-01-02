@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Honeybadger
 short_description: 'Affichez, recherchez et échangez sur des exceptions Honeybadger dans votre flux d''événements. event stream.'
 version: '1.0'
 ---
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Événement Honeybadger" responsive="true" popup="true">}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Événement Honeybadger"  >}}
 
 ## Présentation
 

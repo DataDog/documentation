@@ -7,11 +7,11 @@ aliases:
 
 Counter metrics submitted are normalized by default at a per second rate. Rates make sense for certain types of metrics, like number of queries, that suggest a value that is constantly changing over time:
 
-{{< img src="graphing/faq/CountsBlogImage1.png" alt="CountsBlogImage1" responsive="true" >}}
+{{< img src="graphing/faq/CountsBlogImage1.png" alt="CountsBlogImage1"  >}}
 
 If you prefer to view the metric as a total count per time frame, you can append the .as_count() function to the query. Counts allow you to quickly see how many of a particular event happened in a short amount of time. Counts can also be a preferable visualization when there are gaps between occurrences of events:
 
-{{< img src="graphing/faq/CountsBlogImage3.png" alt="CountsBlogImage3" responsive="true" >}}
+{{< img src="graphing/faq/CountsBlogImage3.png" alt="CountsBlogImage3"  >}}
 
 To read more about counts and rates, check out [this blog post][1] on the topic.
 

@@ -50,7 +50,7 @@ https://app.datadoghq.com/account/saml/assertion
 
 The `user_metadata` section of the user profile is used to specify additional user information, for example:
 
-{{< img src="account_management/saml/auth0_metadata.png" alt="Update this" responsive="true">}}
+{{< img src="account_management/saml/auth0_metadata.png" alt="Update this" >}}
 
 ## Further Reading
 

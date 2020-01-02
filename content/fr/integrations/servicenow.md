@@ -57,23 +57,23 @@ Dans ServiceNow :
 
 Importez l'[ensemble de mise à jour XML Datadog][1] fourni.
 
-{{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="intégration servicenow" >}}
 
 Une fois le fichier XML téléchargé, l'état *Loaded* s'affiche. Cliquez sur le nom de l'ensemble de mise à jour pour afficher un aperçu et réaliser un commit du code dans le système.
 
-{{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="intégration servicenow" >}}
 
 Affichez un aperçu de l'ensemble de mise à jour pour vérifier l'absence d'erreurs :
 
-{{< img src="integrations/servicenow/servicenow-preview-update-set.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-preview-update-set.png" alt="intégration servicenow" >}}
 
 Sélectionnez *Commit Update Set* pour fusionner l'application avec votre système :
 
-{{< img src="integrations/servicenow/servicenow-commit-update-set.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-commit-update-set.png" alt="intégration servicenow" >}}
 
 Vous devriez maintenant être en mesure de rechercher *Datadog* dans le menu de navigation et de voir les tables s'afficher :
 
-{{< img src="integrations/servicenow/servicenow-datadog-tables.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-datadog-tables.png" alt="intégration servicenow" >}}
 
 ### Autorisations
 
@@ -100,7 +100,7 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
     * **Label** : Datadog
     * **Value** : Datadog
 
-  {{< img src="integrations/servicenow/servicenow-cmdb-add-discovery-source.png" alt="Ajouter une source de découverte" responsive="true">}}
+  {{< img src="integrations/servicenow/servicenow-cmdb-add-discovery-source.png" alt="Ajouter une source de découverte" >}}
 
 2. Recherchez l'intégration Datadog, puis cliquez sur *Datadog Integration Settings* dans le menu.
 
@@ -115,7 +115,7 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
 
   * Dans l'exemple de configuration ci-dessous, les étiquettes et les services métiers sont ajoutés en tant que tags, ainsi que les attributs `sys_id` and `sys_class_name`
 
-  {{< img src="integrations/servicenow/servicenow-cmdb-dd-configuration-settings-2.png" alt="Paramètres de configuration de l'intégration" responsive="true">}}
+  {{< img src="integrations/servicenow/servicenow-cmdb-dd-configuration-settings-2.png" alt="Paramètres de configuration de l'intégration" >}}
 
 4. Vous pouvez personnaliser la fréquence d'écriture des données sur votre CMDB en [modifiant votre règle Autoflush](#regle-autoflush-de-la-table-import-host-datadog).
 
@@ -133,7 +133,7 @@ Les notifications Datadog mentionnant @servicenow remplissent les tables interm�
 3. [Configurer le carré d'intégration ServiceNow dans Datadog](#configure-the-servicenow-tile-in-datadog)
 
 
-{{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow" >}}
 
 
 ### Configurer le carré d'intégration ServiceNow dans Datadog
@@ -144,7 +144,7 @@ Les notifications Datadog mentionnant @servicenow remplissent les tables interm�
 
   * **Remarque** : vous pouvez créer un utilisateur limité dédié à Datadog dans ServiceNow.
 
-    {{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow" responsive="true">}}
+    {{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow" >}}
 
 ### Personnaliser les données avec des transform maps
 
@@ -158,11 +158,11 @@ Pour accéder aux transform maps :
 2. Choisissez une table dans la barre latérale.
 3. Cliquez sur *Transform Maps* sous *Related Links*.
 
-{{< img src="integrations/servicenow/servicenow-cmdb-navigate-to-transform-maps.png" alt="Accéder aux transform maps" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-cmdb-navigate-to-transform-maps.png" alt="Accéder aux transform maps" >}}
 
 La table « Import hosts » possède deux transform maps, une pour chaque profil pouvant être créé. Si vous utilisez Linux, le profil `cmdb_ci_linux_server` est créé (ou mis en correspondance avec un CI existant). Sinon, le profil `cmdb_ci_server` est utilisé comme solution alternative. Des transform maps supplémentaires peuvent être créées pour veiller à ce que le bon profil de configuration soit utilisé.
 
-{{< img src="integrations/servicenow/servicenow-cmdb-transform-maps.png" alt="Transform maps" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-cmdb-transform-maps.png" alt="Transform maps" >}}
 
 Pour en savoir plus sur la modification ou la création de mappings et de transformations supplémentaires, consultez la section [Définir des mappings personnalisés](#definir-des-mappings-personnalises).
 
@@ -193,47 +193,47 @@ Besoin d'aide supplémentaire ? Contactez [l'assistance Datadog][3].
 
 Pour empêcher la table Import Set *x_datad_datadog_import_host* d'accumuler un nombre trop important de lignes, une règle AutoFlush a été ajoutée dans le nettoyeur de table afin de conserver uniquement les données des dernières 24 heures. Ce paramètre de configuration peut être modifié en fonction de vos besoins. Pour ce faire, accédez à *sys_auto_flush_list.do*, dans le navigateur de filtres, puis à la règle de la table *x_datad_datadog_import_host*. Vous pouvez alors modifier la valeur du champ *Age in seconds*.
 
-{{< img src="integrations/servicenow/servicenow-cmdb-autoflush-rule.png" alt="Paramètres de configuration de l'intégration" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-cmdb-autoflush-rule.png" alt="Paramètres de configuration de l'intégration" >}}
 
 ### Générer des tickets d'assistance automatiquement à partir des alertes Datadog
 
 Une fois que ServiceNow est connecté à votre compte Datadog, les alertes reçues peuvent automatiquement créer des tickets d'assistance et les envoyer dans la file d'attente de tickets ServiceNow. Votre équipe d'assistance est alors informée des problèmes à l'aide des workflows de communication que vous avez déjà établis dans ServiceNow. Mentionnez `@servicenow` dans le message d'alerte ou ajoutez `@servicenow` à la liste de notifications pour ce monitor.
 
-{{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" >}}
 
 ### Utiliser des variables dans la charge utile de ticket et les mappings de champ
 
 Des variables peuvent être utilisées dans le corps de vos alertes ou dans les mappings de champ pour s'assurer que les détails de l'événement sont inclus dans ServiceNow. Par exemple, il est possible d'inclure le titre et la sévérité dans le champ ServiceNow approprié, ou encore d'ajouter un lien permettant de revenir vers l'incident spécifique dans Datadog directement depuis le ticket ServiceNow.
 
-{{< img src="integrations/servicenow/servicenow-variables.png" alt="Variables ServiceNow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-variables.png" alt="Variables ServiceNow" >}}
 
 ### Automatiser le workflow de résolution des tickets d'assistance
 
 Une fois que l'état normal du monitor est rétabli, le ticket d'assistance associé est automatiquement considéré comme résolu.
 
-{{< img src="integrations/servicenow/servicenow-03-servicenow-resolved.png" alt="Ticket ServiceNow résolu" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-03-servicenow-resolved.png" alt="Ticket ServiceNow résolu" >}}
 
 ### Envoyer des graphiques Datadog à ServiceNow
 
 Outre l'automatisation de la création et de la résolution de tickets, vous pouvez utiliser Datadog pour créer des tickets ServiceNow ponctuels lorsque vous identifiez un problème dans Datadog nécessitant l'attention de l'équipe. Cliquez sur l'icône en forme d'appareil photo pour partager un snapshot de n'importe quel graphique de timeboard, ajoutez du contexte dans la zone de commentaires et mentionnez @servicenow pour envoyer le graphique et vos commentaires à ServiceNow.
 
-{{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" >}}
 
 ### Définir des mappings personnalisés
 
 Cliquez sur *Datadog Incident Tables* (par exemple) et localisez le lien vers la transform map associée en bas de la page :
 
-{{< img src="integrations/servicenow/servicenow-datadog-incident-table.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-datadog-incident-table.png" alt="intégration servicenow" >}}
 
 ### Comprendre le mapping
 
 Cliquez sur le nom de la transform map pour en afficher les détails :
 
-{{< img src="integrations/servicenow/servicenow-click-transform-map.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-click-transform-map.png" alt="intégration servicenow" >}}
 
 Deux champs importants se trouvent en haut de la page : *Source table* et *Target table*.
 
-{{< img src="integrations/servicenow/servicenow-source-target-fields.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-source-target-fields.png" alt="intégration servicenow" >}}
 
 **Remarques :**
 
@@ -244,21 +244,21 @@ Deux champs importants se trouvent en haut de la page : *Source table* et *Targ
 
 Cliquez sur *New* :
 
-{{< img src="integrations/servicenow/servicenow-click-new.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-click-new.png" alt="intégration servicenow" >}}
 
 Sélectionnez les champs source et cible pour les mappings un à un :
 
-{{< img src="integrations/servicenow/servicenow-select-source-target.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-select-source-target.png" alt="intégration servicenow" >}}
 
 Sinon, cochez la case *Use source script* et définissez les transformations :
 
-{{< img src="integrations/servicenow/servicenow-script-example.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-script-example.png" alt="intégration servicenow" >}}
 
 ### Définir plusieurs mappings
 
 Utilisez *Mapping Assist* (sous Related Links) pour mapper plusieurs champs source et cible :
 
-{{< img src="integrations/servicenow/servicenow-mapping-assist.png" alt="intégration servicenow" responsive="true">}}
+{{< img src="integrations/servicenow/servicenow-mapping-assist.png" alt="intégration servicenow" >}}
 
 
 ### Validation

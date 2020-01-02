@@ -14,7 +14,7 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
 
 ## Overview
 
@@ -31,7 +31,7 @@ This feature allows you, for instance, to check if a process has correctly start
 
 Choose the `Live Tail` option in the time range selector to switch to the Live Tail view:
 
-{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live Tail time selector" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live Tail time selector"  >}}
 
 The number of received events per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of logs per second is not human readable, high throughput log streams are sampled.
 
@@ -44,13 +44,13 @@ Use the [Live Tail search bar filtering features](#filtering-the-log-stream) to 
 Customize the Live Tail view to better highlight the relevant information in your logs.
 Click on the gear at the top right of the page to activate one of the options below:
 
-{{< img src="logs/live_tail/live_tail_column.png" alt="Live tail column" responsive="true" style="width:30%;">}}
+{{< img src="logs/live_tail/live_tail_column.png" alt="Live tail column"  style="width:30%;">}}
 
 1. Choose to display one, three, or ten lines from your logs attributes in your logstream.
 2. Enable/Disable the Date and Message column.
 3. Add any log attribute as a column either in this panel or by clicking on it directly:
 
-{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Live tail add as column" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Live tail add as column"  style="width:50%;">}}
 
 ## Filtering the log Stream
 
@@ -63,15 +63,15 @@ Any query that works in other views works in the Live Tail view, but you can eve
 
 For example, to filter on the following `filename` attribute there are two options:
 
-{{< img src="logs/live_tail/live_tail_save.png" alt="Live tail save" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_save.png" alt="Live tail save"  style="width:50%;">}}
 
 1. Click on the attribute and add it to the search:
 
-    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
 
 2. Use the following query  `@filename:runner.go`:
 
-    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered"  style="width:50%;">}}
 
 To filter on all logs with a line number above 150 use the following query: `@linenumber:>150`
 

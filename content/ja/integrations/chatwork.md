@@ -16,7 +16,7 @@ public_title: Datadog-Chatwork インテグレーション
 short_description: Datadog のアラートとグラフをチームの Chatwork ルームに送信
 version: '1.0'
 ---
-{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" responsive="true" popup="true">}}
+{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event"  >}}
 
 ## 概要 
 
@@ -41,7 +41,7 @@ ChatWork と統合すると、以下のことが可能です。
 6. アクセスするチャット名と ID を入力します。(ID はチャットルームの URL に示されています)
 
 7. すべてのコメントについての通知を受ける場合は、チェックボックスをオンにします。それ以外の場合は、@chatwork-chat_namesyntax を使用する必要があります。
-{{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile" responsive="true" popup="true">}}
+{{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile"  >}}
 
 8. [構成を保存します][4]。
 

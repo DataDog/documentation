@@ -17,7 +17,7 @@ further_reading:
 ---
 トレースクライアントでランタイムメトリクス収集を有効にすると、アプリケーションのパフォーマンスに関する詳細情報を得られます。ランタイムメトリクスは、[サービス][1]のコンテクストで表示することが可能で、要求された時点でのトレースビューに関連付けられ、プラットフォームのあらゆる場所で使用できます。
 
-{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
+{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
 ## 自動コンフィギュレーション
 
@@ -28,7 +28,7 @@ JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に
 
 JVM メトリクスは、Java サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
 
-{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
+{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
 
 初期設定では、アプリケーションからのランタイムメトリクスは、ポート `8125` を介して DogStatsD と共に Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 

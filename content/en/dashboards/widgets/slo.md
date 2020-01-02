@@ -20,7 +20,7 @@ Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and 
 
 You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of the time latency is less than 200ms`:
 
-{{< img src="graphing/widgets/slo/summary_editor.png" alt="monitor uptime widget" responsive="true" >}}
+{{< img src="graphing/widgets/slo/summary_editor.png" alt="monitor uptime widget"  >}}
 
 ### Configuration
 
@@ -33,7 +33,7 @@ You can also track success rate and event-based SLIs (Service Level Indicators).
 
 Once you have monitors set up, you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="View Mode" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="View Mode"  >}}
 
 ### Options
 
@@ -41,7 +41,7 @@ Once you have monitors set up, you can view the overall uptime percentage only�
 
 You can select up to 20 monitors at once. You can query multiple monitors and use the monitor search query to select specific monitors. Datadog recommends searching by [monitor tags][2] to select multiple monitors. For example, you can choose by service: `service:<SERVICE_NAME>`.
 
-{{< img src="graphing/widgets/slo/slo_uptime-choose_a_monitor.png" alt="Choose a monitor" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-choose_a_monitor.png" alt="Choose a monitor"  >}}
 
 #### Uptime by group
 
@@ -57,7 +57,7 @@ You can view the uptime percentage for the overall monitor, by the selected grou
 
 **Note**: The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state.
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="View Mode" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="View Mode"  >}}
 
 #### Conditional formatting
 

@@ -16,7 +16,7 @@ public_title: Datadog-xMatters インテグレーション
 short_description: xMatters を Datadog のアラートとイベントで通知チャンネルとして使用
 version: '1.0'
 ---
-{{< img src="integrations/xmatters/xmatters.png" alt="Xmatters overview" responsive="true" popup="true">}}
+{{< img src="integrations/xmatters/xmatters.png" alt="Xmatters overview"  >}}
 
 ## 概要
 

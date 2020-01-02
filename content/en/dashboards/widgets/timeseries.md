@@ -21,11 +21,11 @@ further_reading:
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Analyzed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
-{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
+{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" responsive="true" style="width:80%;" >}}
+{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup"  style="width:80%;" >}}
 
 ### Configuration
 
@@ -65,7 +65,7 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names. At the end of the query/formula click on **as...**, then enter your metric alias:
 
-{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/index/metric_alias.png" alt="metric alias"  style="width:75%;" >}}
 
 ##### Event Overlay
 

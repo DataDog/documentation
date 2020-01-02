@@ -35,7 +35,7 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
 1. Go in *Synthetics* -> *Settings* -> *Private Locations* and create a new private location:
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:70%;">}}
 
 2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
@@ -68,11 +68,11 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
   * In your private locations list, in the Settings section:
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:70%;">}}
 
   * In the form when creating a test, below the Private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:70%;">}}
 
 6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
 

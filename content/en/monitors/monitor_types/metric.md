@@ -81,7 +81,7 @@ For more detailed information, see the [Forecast Monitor][1] page.
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
+{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
 
 | Step                | Required | Default    | Example           |
 |---------------------|----------|------------|-------------------|

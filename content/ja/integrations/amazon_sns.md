@@ -21,7 +21,7 @@ public_title: Datadog-Amazon SNS インテグレーション
 short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信 SNS.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS Dashboard"  >}}
 
 ## 概要
 
@@ -74,9 +74,9 @@ SNS のログは収集されません。SNS サービスに送信されるログ
 
 新しい SNS サブスクリプションを構成し、メッセージの発信元のトピックを選択します。プロトコルとして「Lambda」を選択し、使用する Lambda の ARN を選択します。
 
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="AWS sns log collection" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="AWS sns log collection"    style="width:70%;">}}
 
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_2.png" alt="AWS sns log collection 2" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_sns/aws_sns_log_collection_2.png" alt="AWS sns log collection 2"    style="width:70%;">}}
 
 
 ## 収集データ
@@ -89,7 +89,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 ### イベント
 AWS SNS インテグレーションには、トピックサブスクリプションのイベントが含まれます。下のイベント例を参照してください。
 
-{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="AWS SNS Events" responsive="true">}}
+{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="AWS SNS Events" >}}
 
 ### サービスのチェック
 AWS SNS インテグレーションには、サービスのチェック機能は含まれません。

@@ -32,13 +32,13 @@ This means that your `Hadoop:service=HBase,name=Master,sub=Server - tag.isActive
 
 Check your `jmx.yaml` file, the following excerpt should show something similar:
 
-{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf" responsive="true" >}}
+{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf"  >}}
 
 The `java.lang.String` metric_type confirms the issue you were seeing in the logs.
 
 To resolve this issue, change the associated metric_type, and ensure that your `jmx.yaml` file has the following configuration:
 
-{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" >}}
+{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type"  >}}
 
 Jmxfetch then knows it's a string and uses this rule to transform that into a numeric metric.
 

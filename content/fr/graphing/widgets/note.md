@@ -17,7 +17,7 @@ Le widget Notes et liens fonctionne comme le [widget Texte libre][1], mais offre
 
 ## Implémentation
 
-{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Configuration du widget Notes et liens" responsive="true"  style="width:80%;">}}
+{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Configuration du widget Notes et liens"   style="width:80%;">}}
 
 1. Saisissez le texte que vous souhaitez afficher. Notez que le format Markdown est pris en charge.
 2. Choisissez la taille du texte et la couleur de l'arrière-plan de la note.

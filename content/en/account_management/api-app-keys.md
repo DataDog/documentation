@@ -19,7 +19,7 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 To manage your client tokens, go to your [Datadog API configuration page][1] in the `Client Tokens` section as shown here:
 
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Client tokens" responsive="true" >}}
+{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Client tokens"  >}}
 
 Client tokens are unique to your organization. A client token is required by the [web browser log collector][2] to submit logs to Datadog, and is required by the [Real User Monitoring][3] to submit events and logs to Datadog.
 
@@ -39,7 +39,7 @@ To add a Datadog API key, application key, or client token, navigate to [Integra
 
 To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][4] and select the **Revoke** button next to the key or token you want to remove:
 
-{{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys" responsive="true" >}}
+{{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys"  >}}
 
 ## Disabling a User Account
 If a user's account is disabled, any application keys that the user created are deleted. Any API keys that were created by the disabled account are not deleted, and are still valid.

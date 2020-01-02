@@ -18,7 +18,7 @@ further_reading:
 ---
 _8 minutes to complete_
 
-{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View"  style="width:90%;">}}
 
 To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
@@ -30,7 +30,7 @@ Datadog instruments many frameworks out-of-the-box, such as web services, databa
 
 These examples walk through tracing the entire `BackupLedger.write` method to measure its execution time and status. `BackupLedger.write` is an action that saves the current state of a transaction ledger in memory before making a call to a payments database to post a new customer charge. This happens when the `charge` endpoint of the payments service is hit:
 
-{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View"  style="width:90%;">}}
 
 The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
 
@@ -339,7 +339,7 @@ Now that you have instrumented your business logic, it's time to see the results
 
 1. Go to the **[Service List][1]**, identify the service you added custom spans to, and then go to the **Service Page**. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
-    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table"  style="width:90%;">}}
 
     *You should now be able to find the new spans you've added*
 
@@ -347,7 +347,7 @@ The span summary table provides aggregate information about the spans that make 
 
 2. Scroll down to the **Traces list** and click into one of your traces.
 
-    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View"  style="width:90%;">}}
 
 You've now successfully added custom spans to your codebase, making them available on the flame graph and in [App Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
 

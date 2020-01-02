@@ -95,7 +95,7 @@ It is also possible to search for numerical attributes within a specific range. 
 
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:60%;">}}
 
 ### Escaping of special characters
 
@@ -113,7 +113,7 @@ If an attribute is called `user.first name`, perform a search on this attribute 
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search"  style="width:80%;">}}
 
 To delete a saved search, click on the bin icon under the Trace search drop-down.
 
@@ -121,7 +121,7 @@ To delete a saved search, click on the bin icon under the Trace search drop-down
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
+{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Timerange"  >}}
 
 ## Trace Stream
 
@@ -131,7 +131,7 @@ The Trace Stream is the list of traces that match the selected context. A contex
 
 Chose to display a sampled trace associated with your Analyzed Spans in the trace steam with the toggle in the upper right corner of the trace stream:
 
-{{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span" responsive="true" >}}
+{{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
 If **Traces** is selected, Analyzed Spans listed in the trace stream have a sampled trace associated with them. If **Analyzed Spans** is selected, only the Analyzed Spans are listed in the trace stream.
 
@@ -141,28 +141,28 @@ When a request hits a [service][3] (e.g. webserver, database), the Datadog Agent
 
 Click on any trace to see more details about it:
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream"  style="width:80%;">}}
 
 ### Columns
 
 To add more Trace details to the list, click the **Columns** button and select any Facets you want to see:
 
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
 
 ### Multi-line display
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display"  style="width:30%;">}}
 
 Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
 
 * With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display"  style="width:80%;">}}
 
 * With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display"  style="width:80%;">}}
 
 * With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display"  style="width:80%;">}}
 
 ## Facets
 
@@ -170,13 +170,13 @@ A Facet displays all the distinct values of an attribute or a tag as well as pro
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
 
 Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
 
@@ -184,7 +184,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
 
 ## Further Reading
 

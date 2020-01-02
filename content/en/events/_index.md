@@ -80,7 +80,7 @@ sources:nagios,chef status:error cassandra
 
 By default, related events are aggregated when displayed in the events stream. To show unaggregated events, un-check the **Aggregate related events** box at the top right of your event stream:
 
-{{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream" responsive="true" style="width:50%;" >}}
+{{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream"  style="width:50%;" >}}
 
 ### Notifications
 

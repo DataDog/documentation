@@ -32,7 +32,7 @@ Définissez la requête `HTTP` ou `SSL` que vous souhaitez que Datadog exécute�
 
 {{% tab "Test HTTP" %}}
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="Créer une requête HTTP" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-http-request.png" alt="Créer une requête HTTP"  style="width:80%;" >}}
 
 Définissez la requête que vous souhaitez que Datadog exécute :
 
@@ -59,7 +59,7 @@ Définissez la requête que vous souhaitez que Datadog exécute :
 
 {{% tab "Test SSL" %}}
 
-{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Créer une requête SSL" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Créer une requête SSL"  style="width:80%;" >}}
 
 1. **Choose request type** : choisissez `SSL` comme type de requête.
 2. Précisez le `Host` et le `Port` SSL. Le port est défini sur _443_ par défaut.
@@ -141,7 +141,7 @@ Si vous cliquez sur **Test URL**, l'assertion de base est automatiquement rensei
 
 Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **Add new assertion** ou en cliquant directement sur l'aperçu de la réponse :
 
-{{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Configurer les assertions" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Configurer les assertions" video="true"  width="80%" >}}
 
 #### Échec d'un test
 
@@ -161,7 +161,7 @@ Si un test échoue, l'uptime considère directement que l'endpoint est `down`. I
 
 Les [variables définies sur la page `Settings`][3] peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests API. Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité.
 
-{{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Utiliser des variables dans les tests API" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Utiliser des variables dans les tests API" video="true"  width="80%" >}}
 
 ### Notify your team
 
@@ -173,7 +173,7 @@ Une notification est envoyée selon les conditions d'alerte définies. Pour conf
 
 Exemples de notifications :
 
-{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test API" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test API"  style="width:80%;" >}}
 
 ## Calculs de temps des opérations réseau
 

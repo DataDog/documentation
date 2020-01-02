@@ -12,7 +12,7 @@ Datadog では、Agent を実行しているホスト、および Google Cloud �
 
 メトリクスの収集を制御するには、[Google Cloud インテグレーションタイル][1]を使用します。**Configuration** タブに移動し、プロジェクトを選択するか、新しいプロジェクトを追加します。各プロジェクトは、**Optionally Limit Metrics Collection to hosts with tag** の設定に基づいて制御されます。次は、[ホストタグ][2]でメトリクスを制限する例です。
 
-{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" responsive="true">}}
+{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" >}}
 
 インテグレーションタイルで既存の Google Cloud プロジェクトに制限を追加した場合は、それまでに検出されたインスタンスが[インフラストラクチャーリスト][3]に最長 24 時間残る可能性があります。移行時間中、GCE インスタンスのステータスは `???` と表示されます。これは、課金対象に含まれません。
 

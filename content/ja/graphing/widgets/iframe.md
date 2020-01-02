@@ -14,7 +14,7 @@ Iframe ウィジェットを使用すると、他の Web ページの一部を�
 
 ## セットアップ
 
-{{< img src="graphing/widgets/iframe/iframe_setup.png" alt="Iframe setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/iframe/iframe_setup.png" alt="Iframe setup"  style="width:80%;">}}
 
 iframe 内に表示するページの URL を入力します。HTTPS URL を使用しない場合は、セキュリティで保護されていないコンテンツを許可するようにブラウザを設定する必要があります。
 

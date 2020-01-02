@@ -25,7 +25,7 @@ further_reading:
 
 Notifications are a key component of any [monitor][1]. You want to make sure the right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" >}}
+{{< img src="monitors/notifications/notification.png" alt="notification"  >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -77,22 +77,22 @@ Here's an example of where a user had a number of hosts tagged by different `cre
 
 Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
 
-{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification"  style="width:80%;">}}
 
 This is an example of using template variables for a multi-alert:
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor"  style="width:80%;">}}
 
 and the corresponding event notification:
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var"  style="width:80%;">}}
 
 #### Tag key with period
 
 If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key.
 For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
 
-{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
+{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot"  style="width:80%;">}}
 
 ### Template variable arithmetic
 
@@ -147,19 +147,19 @@ Here are some examples of their usage:
 
 These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars"  style="width:80%;">}}
 
 This is an example in the editor:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor"  style="width:80%;">}}
 
 The corresponding trigger event notification looks like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger"  style="width:80%;">}}
 
 and the recovery notification:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover"  style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "is_recovery / is_alert_recovery " %}}
@@ -286,10 +286,10 @@ After setting up the Slack integration, type `@slack` in your notification messa
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
 
 For example this configuration:
-{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template"  style="width:50%;" >}}
 
 Would produce this slack message:
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview"  style="width:50%;" >}}
 
 **Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
 
@@ -345,7 +345,7 @@ After you define your monitor, test what your monitor's notification would look 
 
 1. Choose which monitor case you want to test in the following pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:50%;" >}}
 
 2. Click **Run test** to send the notification to any notification handle available in the message box.
 
@@ -355,7 +355,7 @@ After you define your monitor, test what your monitor's notification would look 
 
 * Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
 
-  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
+  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening"  style="width:50%;" >}}
 
 ## Advanced notification configuration
 ### Include links to appropriate dashboards
@@ -374,7 +374,7 @@ https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{
 
 `{{host.name}}` is replaced with the offending host of the monitor in question.
 
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url"  style="width:70%;" >}}
 
 Find below additional examples of links that could be added to Monitors to provide Datadog users quick access to common pages leveraged during the break, fix, and triage process:
 
@@ -395,7 +395,7 @@ The above link has more customizable options than your standard System Dashboard
 
 In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
 
-{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
+{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url"  style="width:70%;">}}
 
 {{% /tab %}}
 {{% tab "Manage Monitors Page" %}}
@@ -420,7 +420,7 @@ If you would like all monitors for a specific application or integration, add th
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
 
-{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
+{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url"  style="width:70%;">}}
 
 {{% /tab %}}
 {{% tab "Integration Dashboards" %}}
@@ -433,7 +433,7 @@ In the example below, all that is necessary to populate is the `<integration_nam
 https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
 ```
 
-{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
+{{< img src="monitors/notifications/integration_url.png" alt="integration_url"  style="width:70%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}

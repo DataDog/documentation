@@ -22,7 +22,7 @@ further_reading:
 _3 minutes to complete_
 
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
 Datadog allows you to set monitors to keep track of the health of your services with APM instead of constantly monitoring it yourself. In this example, we’ll use an anomaly detection monitor. [Anomaly detection][1] is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
@@ -33,7 +33,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Once you choose a [service][5], the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
 3. **Choose an *Anomaly Alert*** and under the *For* option select p99 latency.
 
@@ -47,7 +47,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     In this example, you can either leave the notification content with the default text or choose team members to tag in the alert.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
     You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][7].
 
@@ -58,7 +58,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 7. **Switch from the *Edit* tab to the *Status* tab**.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
@@ -66,11 +66,11 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
     As you create monitors you’ll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][9].
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map"  style="width:90%;">}}
 
     For each service on the map, a green circle means all monitors are quiet, yellow means one or more monitors are sending warnings but none are alerting, red means one or more monitor is alerting and gray means no monitor is set for the service.
 

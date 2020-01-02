@@ -18,7 +18,7 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 クライアントトークンを管理するには、`Client Tokens` セクションの [Datadog API コンフィギュレーションページ][1] に移動します（下記参照）。
 
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="クライアントトークン" responsive="true" >}}
+{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="クライアントトークン"  >}}
 
 クライアントトークンは組織に固有です。クライアントトークンは、[ウェブブラウザーのログコレクター][2]がログを、また [Real User Monitoring][3] がイベントとログを Datadog に送信するために必要です。
 
@@ -38,7 +38,7 @@ Datadog API キー、アプリケーションキー、またはクライアン�
 
 Datadog API キー、アプリケーションキー、またはクライアントトークンを削除するには、[Integration-> APIs][4] に移動し、削除するキーまたはトークンの横にある **Revoke ** ボタンを選択します。
 
-{{< img src="account_management/api_app_keys/application_keys.png" alt="アプリケーションキー" responsive="true" >}}
+{{< img src="account_management/api_app_keys/application_keys.png" alt="アプリケーションキー"  >}}
 
 ## ユーザーアカウントの無効化
 ユーザーのアカウントが無効になった場合、ユーザーが作成したアプリケーションキーはすべて削除されます。無効なアカウントによって作成された API キーは削除されず、引き続き有効です。

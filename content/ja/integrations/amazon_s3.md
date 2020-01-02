@@ -22,7 +22,7 @@ public_title: Datadog-Amazon S3 インテグレーション
 short_description: リクエストレイテンシー、種類ごとのリクエスト数、バケットサイズなどを追跡 and more.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="S3 Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="S3 Dashboard"  >}}
 
 ## 概要
 
@@ -54,11 +54,11 @@ Amazon Simple Storage Service (S3) は、可用性の高いスケーラブルな
 
 S3 バケットを選択し、Properties タブをクリックします。
 
-{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="S3 selecting bucket" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="S3 selecting bucket"   style="width:70%;">}}
 
 次に、Server access logging をクリックし、Enable を選択します。
 
-{{< img src="integrations/amazon_s3/server_access_logging.png" alt="S3 server access logging" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/server_access_logging.png" alt="S3 server access logging"   style="width:70%;">}}
 
 
 ログの書き込み先になる S3 バケットを選択します。詳細については、[S3 AWS のドキュメント][7]を参照してください。
@@ -75,9 +75,9 @@ S3 バケットを選択し、Properties タブをクリックします。
 
 1. [Datadog ログコレクション AWS Lambda 関数][10]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで S3 ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     S3 ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][11]に移動し、ログを確認します。
 

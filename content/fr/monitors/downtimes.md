@@ -23,7 +23,7 @@ Les monitors déclenchent des événements lorsque leur statut, à savoir `ALERT
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor ne sont pas supprimés. Pour les supprimer, utilisez la fonctionnalité de gestion des downtimes ou passez par l'API.
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime sur une alerte" responsive="true" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime sur une alerte"  style="width:80%;">}}
 
 Si le statut d'un monitor change durant un downtime (en passant par exemple de `OK` à `ALERT`, `WARNING` ou `NO DATA`) et reste identique après la fin du downtime planifié, **aucune** notification n'est envoyée. Toutefois, un événement de rétablissement se déclenche dès que des données sont renvoyées pour ce contexte ou dès que le statut du monitor repasse à `OK`.
 
@@ -39,18 +39,18 @@ Tous les statuts ayant déclenché une alerte sont inclus dans le [rapport hebdo
 
 Accédez à la page de [gestion des downtimes][4] en passant le curseur sur **Monitors** dans le menu principal, puis en sélectionnant **Manage Downtime**.
 
-{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" >}}
+{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav"  >}}
 
 La page Manage Downtime affiche la liste des downtimes actifs et planifiés. Sélectionnez un downtime pour afficher plus de détails sur le host et les monitors concernés.
 
-{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-gestion" responsive="true" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-gestion"  style="width:80%;">}}
 
 ## Planifier un downtime
 
 Pour planifier un downtime, cliquez sur le bouton Schedule Downtime dans le coin supérieur droit.
 
 1. Choisissez les éléments à désactiver.
-   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-désactivation" responsive="true" style="width:80%;">}}
+   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-désactivation"  style="width:80%;">}}
    **Désactiver des monitors en fonction de leur nom**
    Vous devez sélectionner au moins un monitor. Si vous choisissez de laisser le champ de sélection vide, tous les monitors seront désactivés par défaut. Vous pouvez également sélectionner un contexte afin de limiter votre downtime à un host, appareil ou tag de votre choix. Consultez la [section Contexte][5] de la rubrique Présentation des graphiques JSON pour en savoir plus sur les contextes.
    **Désactiver les monitors en fonction de leur tag**
@@ -58,11 +58,11 @@ Pour planifier un downtime, cliquez sur le bouton Schedule Downtime dans le coin
    Pour chacune de ces méthodes, si vous choisissez de désactiver tous les monitors caractérisés par un contexte, cliquez sur *Preview affected monitors* pour afficher la liste des monitors concernés. Si vous créez ou modifiez un monitor affecté par un contexte après avoir planifié le downtime, celui-ci sera également désactivé. Attention : les alertes multiples sont uniquement désactivées si le groupe est couvert par le contexte. Par exemple, si un downtime est couvert par le contexte `host:X` et qu'une alerte multiple est déclenchée pour `host:X` et `host:Y`, Datadog envoie une notification de monitor pour `host:Y`, mais pas pour `host:X`.
 
 2. Programmez votre downtime.
-  {{< img src="monitors/downtimes/downtime-schedule.png" alt="programmer-downtime" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/downtimes/downtime-schedule.png" alt="programmer-downtime"  style="width:80%;">}}
   Choisissez une date et une heure de début ou laissez le champ vide pour démarrer immédiatement le downtime. Vous avez également la possibilité de [choisir une fréquence de répétition pour configurer un downtime récurrent](#downtimes-récurrents).
 
 3. Vous pouvez ajouter un message pour prévenir votre équipe.
-  {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notification" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notification"  style="width:80%;">}}
   Saisissez un message pour informer votre équipe à propos de ce downtime. Le champ de message prend en charge la [mise en forme Markdown][7] standard ainsi que la fonction de notification « @ » de Datadog. Utilisez le champ *Notify your team* pour choisir les membres de l'équipe à prévenir ou envoyer votre message à une [intégration][8] de service.
 
 **Remarque** : créez le downtime avant de créer le monitor ou avant de désactiver le groupe.

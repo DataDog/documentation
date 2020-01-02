@@ -7,7 +7,7 @@ This page focuses on describing the steps performed by Datadog's graphing system
 
 When creating a graph in a [timeboard][1] or [screenboard][2], you can use the editor or the JSON tab to set up advanced queries. The example below uses the metric `system.disk.total` coming from a specific server (`host:bubs`).
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graph_metric"  style="width:80%;">}}
 
 Now, follow each step executed by the Datadog backend to perform the query and render a graph line on your dashboard.
 
@@ -37,7 +37,7 @@ In this query, you only asked for data associated to `host:moby`. So the first s
 
 As you may have guessed, the backend finds five matching sources (see previous paragraph).
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" style="width:70%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2"  style="width:70%;">}}
 
 The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at [step 3](#proceed-to-space-aggregation).
 
@@ -69,7 +69,7 @@ For instance, on a one-day view with the 'lines' display, you'll have one datapo
 By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][6].
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. What you generally see on graph is not the real values submitted but local aggregates.
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3"  style="width:75%;">}}
 
 Our backend computes a series of local aggregates for each source corresponding to the query.
 
@@ -89,7 +89,7 @@ Now you can mix data from different source into a single line.
 You have ~300 points for each source. Each of them represents a minute.
 In this example, for each minute, Datadog computes the average across all sources, resulting in the following graph:
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4"  style="width:75%;">}}
 
 The value obtained (25.74GB) is the average of the values reported by all sources (see previous image).
 
@@ -129,7 +129,7 @@ In this example the function `abs` makes sure that your results are positive num
 
 #### Grouped queries
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6"  style="width:75%;">}}
 
 The logic is the same:
 
@@ -137,7 +137,7 @@ The logic is the same:
 2. For each device, the backend performs the query `system.disk.total{host:example, device:<device>}` as explained in this article.
 3. All final results are graphed on the same graph.
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2"  style="width:75%;">}}
 
 **Note**: `rollup` or `as_count` modifiers have to be placed after the by {`device`} mention.
 
@@ -147,7 +147,7 @@ The logic is the same:
 
 Arithmetic is applied after time and space aggregation as well—([step 4: Apply function](#apply-functions-optional)).
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8"  style="width:75%;">}}
 
 #### as_count and as_rate
 

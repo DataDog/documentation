@@ -46,7 +46,7 @@ There are several ways to specify an environment when reporting data:
 
 Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
 
-{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Envs tracing"  style="width:80%;">}}
 
 ## Add a second primary tag in Datadog
 
@@ -66,7 +66,7 @@ If you change a previously set primary tag, be aware of the following:
 
 Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown (as in the image below).
 
-{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
+{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI"  style="width:80%;">}}
 
 
 ## Further Reading

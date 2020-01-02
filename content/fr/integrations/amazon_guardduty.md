@@ -27,13 +27,13 @@ Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui transmet les r�
 
 1. Créez une nouvelle règle dans Cloudwatch avec le type d'événement **GuardDuty Finding** :
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1"  style="width:75%;" >}}
 
 2. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][1].
 
 3. Une fois la fonction Lambda créée, définissez la fonction Lambda de Datadog comme cible :
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2"  style="width:75%;" >}}
 
 4. Enregistrez votre règle.
 
@@ -43,7 +43,7 @@ Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui transmet les r�
 
 2. Après avoir configuré la fonction Lambda, ajoutez GuardDuty en tant que déclencheur en choisissant **CloudWatch Events** comme déclencheur et en créant une `GuardDutyRule` :
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" responsive="true" style="width:75%;">}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3"  style="width:75%;">}}
 
 3. Consultez ensuite la [section Log de Datadog][2] pour commencer à explorer vos logs !
 

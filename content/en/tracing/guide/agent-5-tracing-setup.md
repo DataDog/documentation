@@ -53,7 +53,7 @@ The Datadog Agent uses the configuration file for both infrastructure monitoring
 
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | File setting            | Environment variable       | Description                                                                                                                                                      |
 | ---                     | ---                        | ---                                                                                                                                                              |

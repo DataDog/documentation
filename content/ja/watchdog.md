@@ -26,30 +26,30 @@ Watchdog は、適合率の急激な上昇などといったメトリクスの�
 「ストーリー」は、環境、アベイラビリティーゾーン、サービスやリソースのタイプで絞り込むことができます。また、"Filter stories" 検索ボックスに入力することで、ストーリーをサービスまたはリソース名で絞り込むことができます。
 
 
-{{< img src="watchdog/watchdog_overview.png" alt="Watchdog overview" responsive="true" >}}
+{{< img src="watchdog/watchdog_overview.png" alt="Watchdog overview"  >}}
 
 Storyをクリックすると、異常が検出された時点のリクエスト、エラー、およびレイテンシーの詳細が表示されます。
 
-{{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
+{{< img src="watchdog/watchdog_story.png" alt="Watchdog story"  >}}
 
 隅の *Show expected bounds* を選択すると、予測された動作の上限/下限しきい値がグラフに表示されます。
 
-{{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
+{{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value"  >}}
 
 画面左のパネルにはファセットが一覧で表示されます。これを利用して Watchdog ストーリーをカテゴリ (`Service`、`Availability Zone`など) でフィルタリングし、それぞれのストーリー数を確認しましょう。
 
-{{< img src="watchdog/watchdog-facets2.png" alt="Watchdog facets" responsive="true" style="width:60%;">}}
+{{< img src="watchdog/watchdog-facets2.png" alt="Watchdog facets"  style="width:60%;">}}
 
 
 ## サービス一覧画面内の Watchdog
 
 メトリクスに異常が検出された場合、[APM サービス一覧][2]では、その異常が発生しているサービスの横に Watchdog の黄色い双眼鏡アイコンが表示されます。双眼鏡の横の数字は、Watchdog がそのサービス内で認識した問題の数を示しています。
 
-{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" >}}
+{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis"  >}}
 
 特定のサービスで通常と異なる動作が検出された場合、対応する[サービスページ][2]を開くと、ページの中央、アプリケーションパフォーマンスのグラフとレイテンシー分散セクションの間に、その異常に関する Watchdog セクションが表示されます。このセクションには、関連する「Watchdog ストーリー」が表示されます。
 
-{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" >}}
+{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis"  >}}
 
 ## その他の参考資料
 

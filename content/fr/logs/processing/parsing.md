@@ -45,7 +45,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 Une fois le traitement terminé, le log structuré suivant est généré :
 
-{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Exemple de parsing 1" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Exemple de parsing 1"  style="width:80%;">}}
 
 **Remarque** :
 
@@ -126,7 +126,7 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 
 En bas de vos carrés de processeur Grok, vous trouverez une section Advanced Settings :
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Paramètres avancés" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Paramètres avancés"  style="width:80%;">}}
 
 * Utilisez le champ **Extract from** pour appliquer votre processeur Grok sur un attribut donné plutôt que sur l'attribut `message` par défaut.
 
@@ -153,7 +153,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="règles d'auxiliaires" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="règles d'auxiliaires"  style="width:80%;">}}
 
 ## Exemples
 
@@ -190,12 +190,12 @@ Règle :
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Exemple de parsing 2" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Exemple de parsing 2"  style="width:80%;">}}
 
 Vous n'avez pas besoin de spécifier le nom de vos paramètres, car ils sont déjà contenus dans le log.
 Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre modèle de règles, vous obtenez :
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Exemple de parsing 2 bis" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Exemple de parsing 2 bis"  style="width:80%;">}}
 
 Si le caractère `=` n'est pas le séparateur par défaut entre votre clé et vos valeurs, ajoutez à votre règle de parsing un paramètre avec un séparateur.
 
@@ -211,7 +211,7 @@ Règle :
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Parser key/value" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="Parser key/value"  style="width:80%;" >}}
 
 Si les logs contiennent des caractères spéciaux dans une valeur d'attribut, tels que `/` dans une URL, ajoutez-les à la liste blanche de la règle de parsing :
 
@@ -227,7 +227,7 @@ Règle :
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Liste blanche du parser key/value" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Liste blanche du parser key/value"  style="width:80%;" >}}
 
 Autres exemples :
 
@@ -304,9 +304,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Résultats** :
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Exemple de parsing 4" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Exemple de parsing 4"  style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Exemple de parsing 4 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Exemple de parsing 4 bis"  style="width:80%;" >}}
 
 ### Attribut facultatif
 
@@ -324,9 +324,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Remarque** : la règle ne fonctionnera pas si vous ajoutez une espace après le premier mot dans la section facultative.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Exemple de parsing 5" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Exemple de parsing 5"  style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Exemple de parsing 5 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Exemple de parsing 5 bis"  style="width:80%;" >}}
 
 ### JSON imbriqué
 
@@ -344,7 +344,7 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Exemple de parsing d'objet JSON imbriqué" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/nested_json.png" alt="Exemple de parsing d'objet JSON imbriqué"  style="width:80%;" >}}
 
 
 ### Regex
@@ -361,7 +361,7 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Exemple de parsing 6" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Exemple de parsing 6"  style="width:80%;" >}}
 
 ## Pour aller plus loin
 

@@ -18,11 +18,11 @@ further_reading:
 ---
 La visualisation de séries temporelles vous permet de consulter l'évolution de plusieurs métriques, événements de log ou événements APM. La période affichée dépend des éléments sélectionnés sur le [timeboard][1] ou le [screenboard][2] :
 
-{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Série temporelle" responsive="true">}}
+{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Série temporelle" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Configuration de séries temporelles" responsive="true" style="width:80%;" >}}
+{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Configuration de séries temporelles"  style="width:80%;" >}}
 
 ### Configuration
 
@@ -62,7 +62,7 @@ Pour les graphiques linéaires, vous pouvez attribuer des palettes à différent
 
 Chaque requête ou formule peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique. À la fin de la requête/formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
 
-{{< img src="graphing/index/metric_alias.png" alt="Alias de métrique" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/index/metric_alias.png" alt="Alias de métrique"  style="width:75%;" >}}
 
 ##### Superposer des événements
 

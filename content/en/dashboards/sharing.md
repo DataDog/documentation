@@ -33,7 +33,7 @@ To share a graph from a [Timeboard][1] or [Screenboard][2]:
 6. Choose to include the legend or not.
 7. Get the embed code with the *Generate embed code* button.
 
-{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph"  style="width:75%;">}}
 
 ### Revoke
 

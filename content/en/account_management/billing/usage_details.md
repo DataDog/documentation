@@ -17,7 +17,7 @@ The Usage page provides the following information.
 
 This section summarizes your month-to-date usage of hosts, containers, custom metrics, APM hosts, Analyzed Spans, logs, synthetics and any other part of the platform you've used during the month.
 
-{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" responsive="true">}}
+{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" >}}
 
 ### Overall Usage
 
@@ -44,7 +44,7 @@ This tab shows hourly, daily, monthly, and annual usage for:
 | Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month .                            |
 
 
-{{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" responsive="true">}}
+{{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" >}}
 
 #### Infrastructure Host Types
 
@@ -55,7 +55,7 @@ This table shows the break-down of the **Infra Hosts** graph above by host type:
 * Azure Hosts
 * GCP Hosts
 
-{{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" responsive="true">}}
+{{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" >}}
 
 
 ### Top 500 Custom Metrics
@@ -69,7 +69,7 @@ This table lists the following information about your Top 500 custom metrics mon
 
 This data can be downloaded as a CSV file.
 
-{{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" responsive="true">}}
+{{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" >}}
 
 
 ## Troubleshooting

@@ -14,7 +14,7 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. To create a historical view, go the [Configuration page][2] of your Datadog account and select the [“Rehydrate From Archives” tab][3], then the “New Historical View” button.
 
-{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views"  style="width:75%;">}}
 
 ### Add new historical views
 
@@ -28,7 +28,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
 
-{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
 
 A historical view can contain a maximum of 300 million log events. There is no limit to how large its time range can be, but if you expect a historical view may exceed that limit, make your query filter more specific.
 
@@ -44,7 +44,7 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true" responsive="true" width="75%">}}
+{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true"  width="75%">}}
 
 ### Deleting historical views
 
@@ -52,7 +52,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 24 hours later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" responsive="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true"  width="75%" >}}
 
 ## Setting up archive rehydrating
 
@@ -102,7 +102,7 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
 
 Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives"  style="width:75%;">}}
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
@@ -114,7 +114,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer. 
 
-{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role"  style="width:75%;">}}
 
 
 [1]: https://console.cloud.google.com/iam-admin/iam

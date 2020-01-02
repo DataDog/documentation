@@ -16,7 +16,7 @@ further_reading:
 
 Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
 
-{{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url" responsive="true" popup="true" style="width:70%">}}
+{{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url"   style="width:70%">}}
 
 ### Unable to login
 If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][3]. When possible, attach a screenshot.
@@ -38,7 +38,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 4. By default, basic metrics and logs are enabled. Adjust based on your preferences.
 5. Click **Save** to save any changes.
 
-    {{< img src="integrations/faq/azure_enable_diagnostics.png" alt="azure enable diagnostics" responsive="true" popup="true" style="width:70%">}}
+    {{< img src="integrations/faq/azure_enable_diagnostics.png" alt="azure enable diagnostics"   style="width:70%">}}
 
 ## Further Reading
 

@@ -158,7 +158,7 @@ Avec la version 6.12+ de l'Agent, lorsque vous utilisez une [configuration de pr
 
 Si la connexion ne peut pas être établie et que la collecte de logs ne démarre pas, un événement semblable à celui illustré ci-dessous est envoyé à votre flux d'événements Datadog. Configurez un monitor pour suivre ces événements et recevoir des notifications lorsqu'un buildpack mal configuré est déployé :
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="proxy mal configuré log cloud foundry" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="proxy mal configuré log cloud foundry"  >}}
 
 ### Générer le buildpack
 
@@ -289,11 +289,11 @@ Comme la configuration de runtime est appliquée de manière globale, BOSH redé
 
 Afin de vérifier que l'Agent a bien été installé, accédez à la page [Hostmap][20] de Datadog et appliquez le filtre `cloudfoundry`. La version BOSH de l'Agent applique un tag `cloudfoundry` générique à chaque host. Il est possible de regrouper les hosts par tag, par exemple `bosh_job`, comme sur la capture d'écran suivante :
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="hostmap-cloud-foundry" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="hostmap-cloud-foundry"  >}}
 
 Cliquez sur n'importe quel host pour afficher les détails, puis sur **system** dans l'hexagone pour vérifier que Datadog reçoit bien les métriques :
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="details-hostmap-cloud-foundry" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="details-hostmap-cloud-foundry"  >}}
 
 ### Déployer le Firehose Nozzle de Datadog
 
@@ -395,7 +395,7 @@ bosh -n -d cf-manifest -e <ENV_BOSH> deploy --recreate cf-manifest.yml
 
 Depuis la page [Metrics Explorer][23] de Datadog, recherchez des métriques qui commencent par `cloudfoundry.nozzle` :
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="métriques.nozzle.cloudfoundry" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="métriques.nozzle.cloudfoundry"  >}}
 
 ## Données collectées
 

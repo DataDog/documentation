@@ -34,7 +34,7 @@ La fonction `outliers()` comprend trois paramètres :
 * `TOLÉRANCE` : la tolérance de l'algorithme de singularité.
 * `POURCENTAGE` : le pourcentage de points extrêmes nécessaires pour considérer qu'une série constitue une singularité (disponible uniquement pour les algorithmes MAD et scaledMAD).
 
-{{< img src="graphing/functions/algorithms/outlier.mp4" alt="détection de singularités" video="true" responsive="true" width="70%" >}}
+{{< img src="graphing/functions/algorithms/outlier.mp4" alt="détection de singularités" video="true"  width="70%" >}}
 
 Consultez la page [Monitor outlier][2] pour en savoir plus.
 
@@ -51,7 +51,7 @@ La fonction `forecast()` comprend deux paramètres :
 
 La visualisation des prévisions étant unique, certaines options de création de graphique ne sont pas disponibles.  Une fois votre **prévision** ajoutée, votre éditeur devrait ressembler à ceci :
 
-{{< img src="graphing/functions/algorithms/forecast_query.png" alt="éditeur de requête" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/algorithms/forecast_query.png" alt="éditeur de requête"  style="width:80%;">}}
 
 ## Autres fonctions
 
