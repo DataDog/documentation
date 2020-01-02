@@ -972,44 +972,49 @@ main:
     url: "logs/log_collection/javascript/"
     parent: "log_collection"
     weight: 101
+  - name: "Android"
+    identifier: "log_android"
+    url: "logs/log_collection/android/"
+    parent: "log_collection"
+    weight: 102
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 102
+    weight: 103
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 103
+    weight: 104
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
     identifier: "log_collection_java"
-    weight: 104
+    weight: 105
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
     parent: "log_collection"
-    weight: 105
+    weight: 106
   - name: "PHP"
     identifier: "log_php"
     url: "logs/log_collection/php/"
     parent: "log_collection"
-    weight: 106
+    weight: 107
   - name: "Python"
     identifier: "log_python"
     url: "logs/log_collection/python/"
     parent: "log_collection"
-    weight: 107
+    weight: 108
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
     identifier: "log_collection_ruby"
-    weight: 108
+    weight: 109
   - name: "Other Integrations"
     url: "integrations/#cat-log-collection"
     identifier: "other_integrations"
     parent: "log_collection"
-    weight: 109
+    weight: 110
 
   ## LOGS - Processing
 
