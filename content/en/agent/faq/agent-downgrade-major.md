@@ -100,7 +100,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note that you only need to copy back    checks you changed.
 
     ```shell
-    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
+    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
 6. Restart the agent
@@ -147,7 +147,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note that you only need to copy back    checks you changed.
 
     ```shell
-    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
+    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
 5. Restart the agent

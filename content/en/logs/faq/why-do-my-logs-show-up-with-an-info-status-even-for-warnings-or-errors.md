@@ -23,6 +23,7 @@ However, this default `status` does not always reflect the actual value that mig
 {{< img src="logs/faq/original_log.png" alt="Original log" responsive="true" style="width:50%;">}}
 
 ## Raw logs
+
 ### Extract the status value with a parser
 
 While writing a parsing rule for your logs, extract the `status` in a specific attribute.
@@ -56,7 +57,6 @@ To make sure this attribute value is taken to override the log status, add it in
 The status remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `logger_severity` attribute is used to derive the status, place it first in the list.
 
 {{< img src="logs/faq/reserved_attribute.png" alt="reserved attribute" responsive="true" style="width:50%;">}}
-
 
 **Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
 

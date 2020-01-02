@@ -24,7 +24,7 @@ Datadog Synthetics offers two different ways to monitor your applications: API t
 
 By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetics][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
 
-The following guides show you how to set up your first Synthetics tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs. 
+The following guides show you how to set up your first Synthetics tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs.
 
 ## Prerequisites
 
@@ -45,7 +45,6 @@ If you haven't already, create a [Datadog account][2].
     {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 
 {{< /whatsnext >}}
-
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/

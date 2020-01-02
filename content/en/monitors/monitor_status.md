@@ -17,31 +17,35 @@ further_reading:
 {{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" >}}
 
 ## Overview
+
 After [creating your monitor][1], use the monitor status page to view the status over time. This page contains the following sections:
 
-- [Overview](#overview)
-- [Header](#header)
-  - [Mute](#mute)
-  - [Resolve](#resolve)
-  - [Settings](#settings)
-- [Properties](#properties)
-- [Status and History](#status-and-history)
-- [Events](#events)
-- [Further Reading](#further-reading)
+* [Overview](#overview)
+* [Header](#header)
+  * [Mute](#mute)
+  * [Resolve](#resolve)
+  * [Settings](#settings)
+* [Properties](#properties)
+* [Status and History](#status-and-history)
+* [Events](#events)
+* [Further Reading](#further-reading)
 
 These sections are open by default. The last three sections can be closed by using the toggle (&or;) icon to the left of the section name.
 
 ## Header
+
 On the left, the header contains the monitor's status, time of status, and monitor title.
 
 On the right, the header contains **Mute**, **Resolve**, and the **Settings** cog.
 
 ### Mute
+
 Choose to mute a monitor directly on its status page. Use the **Scope** field to narrow your downtime. Refer to [Downtimes][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
 **Note**: Muting or unmuting a monitor with the UI deletes all scheduled downtimes associated with that monitor.
 
 ### Resolve
+
 If your monitor is in an alert state, the **Resolve** button is visible. Use this button to resolve your monitor manually.
 
 The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
@@ -53,10 +57,11 @@ Manually `resolve`-ing a monitor is appropriate for cases where data is reported
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Settings
+
 Click the settings cog to display the options available:
 
 | Option | Description                                                                                                                                                                                                                                |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Edit   | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
 | Clone  | Make a copy of the current monitor.                                                                                                                                                                                                        |
 | Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |

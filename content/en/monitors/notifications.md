@@ -41,15 +41,15 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 Use variables to customize your monitor notifications, the available variables are:
 
-| Variable                | Description                                                                                    |
-|-------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`             | Display the value that breached the alert for metrics based query monitors.                                      |
-| `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
-| `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
-| `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
-| `{{comparator}}`        | Display the relational value selected in the monitor's *Set alert conditions* section.         |
-| `{{last_triggered_at}}` | Display the UTC date/time when the monitor last triggered.                                     |
-| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.  |
+| Variable                      | Description                                                                                    |
+|-------------------------------|------------------------------------------------------------------------------------------------|
+| `{{value}}`                   | Display the value that breached the alert for metrics based query monitors.                    |
+| `{{threshold}}`               | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
+| `{{warn_threshold}}`          | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
+| `{{ok_threshold}}`            | Display the value that recovered the monitor.                                                  |
+| `{{comparator}}`              | Display the relational value selected in the monitor's *Set alert conditions* section.         |
+| `{{last_triggered_at}}`       | Display the UTC date/time when the monitor last triggered.                                     |
+| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.        |
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
@@ -96,7 +96,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 ### Template variable arithmetic
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so: 
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
 
 `{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
 
@@ -182,7 +182,7 @@ Use any of the available tag variables in your conditional statement. **A match 
 
 Tag variables use the following format:
 
-```
+```text
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
   This shows if <COMPARISON_STRING> is included in <TAG_VARIABLE>
 {{/is_match}}
@@ -190,7 +190,7 @@ Tag variables use the following format:
 
 For example, if you want to notify your DB team if a triggering host has the `role:db_cassandra` tag or the `role:db_postgres` tag, use the following:
 
-```
+```text
 {{#is_match "role.name" "db"}}
   This shows only if the host that triggered the alert has `role` tag variable with `db` in it.
   It would trigger for role:db_cassandra and role:db_postgres
@@ -199,7 +199,7 @@ For example, if you want to notify your DB team if a triggering host has the `ro
 
 **Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use the `{{is_match}}` conditional with an empty string.
 
-```
+```text
 {{#is_match "<TAG_VARIABLE>.name" ""}}
   This shows if <TAG_VARIABLE> is not empty.
 {{/is_match}}
@@ -209,7 +209,7 @@ For example, if you want to notify your DB team if a triggering host has the `ro
 
 The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. The variable uses the following format:
 
-```
+```text
 {{#is_exact_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
   This shows if <COMPARISON_STRING> is exactly <TAG_VARIABLE>.
 {{/is_exact_match}}
@@ -217,7 +217,7 @@ The `{{is_exact_match}}` conditional looks for the exact string in the tag varia
 
 For instance, if an alert that can be triggered by two hosts tagged with `role:production` and `role:production-1`:
 
-  ```
+  ```text
   {{#is_match "role.name" "production"}}
     This shows only if the host that triggered the alert has the tags role:production or the role:production attached.
   {{/is_match}}
@@ -236,7 +236,7 @@ If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`,
 
 The following template:
 
-```
+```text
 {{{{raw}}}}
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 {{{{/raw}}}}
@@ -244,13 +244,13 @@ The following template:
 
 outputs:
 
-```
+```text
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
 The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
 
-```
+```text
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
 {{ .matched }} the host name
 {{{{/is_match}}}}
@@ -258,7 +258,7 @@ The `^|#` helpers shown in the [Conditional variables](#conditional-variables) s
 
 If `host.name` matches `<HOST_NAME>`, the template outputs:
 
-```
+```text
 {{ .matched }} the host name
 ```
 
@@ -297,7 +297,7 @@ Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respective
 
 For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
 
-```
+```text
 <!subteam^12345|testers>
 ```
 
@@ -318,7 +318,6 @@ Or create an **@-mention** that goes directly to a specific email:
 
 * `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
-
 [1]: http://slack.com/account/settings
 [2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
@@ -331,7 +330,6 @@ After setting up the [PagerDuty integration][1], type `@pagerduty` in your notif
 {{% tab "Webhooks" %}}
 
 After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
-
 
 [1]: /integrations/webhooks
 {{% /tab %}}
@@ -358,6 +356,7 @@ After you define your monitor, test what your monitor's notification would look 
   {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
 
 ## Advanced notification configuration
+
 ### Include links to appropriate dashboards
 
 Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
@@ -368,7 +367,7 @@ Here are a few examples of providing links to items like System Dashboards, Inte
 
 Example: provide a link to a System Dashboard when a monitor for a specific system metric has exceeded a defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
-```
+```text
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
@@ -383,7 +382,7 @@ Find below additional examples of links that could be added to Monitors to provi
 
 To include a link to the HostMap to compare metrics with other similar hosts, use a link like below to be included in your Monitor:
 
-```
+```text
 https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
 ```
 
@@ -391,7 +390,7 @@ The above link has more customizable options than your standard System Dashboard
 
 * `fillby` is defined by adding `fillby:avg:<MetricName>`.
 * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
-* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`.
+* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<INTEGRATION_NAME>`.
 
 In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
 
@@ -402,7 +401,7 @@ In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. T
 
 To link to a "Manage Monitors" page that displays all of the monitors for the host in question, define a link like below:
 
-```
+```text
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 ```
 
@@ -410,13 +409,13 @@ The above URL links to all monitors for this host. You have other options availa
 
 For example, to see all monitors in an Alert State, add `status:Alert` (other statuses are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
 
-```
+```text
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
 ```
 
-If you would like all monitors for a specific application or integration, add the following query to the URL `q=<integration_name> `:
+If you would like all monitors for a specific application or integration, add the following query to the URL `q=<INTEGRATION_NAME> `:
 
-```
+```text
 https://app.datadoghq.com/monitors/manage?q=cassandra
 ```
 
@@ -427,10 +426,10 @@ https://app.datadoghq.com/monitors/manage?q=cassandra
 
 If you are building application- or integration-specific monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
 
-In the example below, all that is necessary to populate is the `<integration_name>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
+In the example below, all that is necessary to populate is the `<INTEGRATION_NAME>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
 
-```
-https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
+```text
+https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
 {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
@@ -441,6 +440,7 @@ https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host
 ### Comments
 
 To include a comment in the monitor message that only shows in the monitor edit screen, use the syntax:
+
 ```text
 {{!-- this is a comment --}}
 ```

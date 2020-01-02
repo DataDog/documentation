@@ -20,7 +20,6 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-
 If you haven't yet, review the [setup instructions to install the Datadog Cluster Agent][1] and enable event collection.
 
 1. Disable leader election in your Datadog Node Agent Daemonset by setting the `leader_election` variable or `DD_LEADER_ELECTION` environment variable to `false`.

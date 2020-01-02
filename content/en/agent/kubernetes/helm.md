@@ -47,8 +47,7 @@ For other platforms and methods of installing Helm, refer to the [Helm documenta
 
 ### Installing the Helm server (Tiller)
 
-**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you. 
-
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you.
 
 If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
 
@@ -111,7 +110,7 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 {{< tabs >}}
-{{% tab "Helm v1/v2" %}} 
+{{% tab "Helm v1/v2" %}}
 
 ```bash
 helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
@@ -148,7 +147,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pod
 
 Update your [datadog-values.yaml][7] file with the following log collection configuration, then upgrade your Datadog Helm chart:
 
-```
+```text
 datadog:
   (...)
  logsEnabled: true
@@ -159,7 +158,7 @@ datadog:
 
 To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][7] file to enable non-local traffic.
 
-```
+```text
 datadog:
   (...)
   nonLocalTraffic: true
@@ -171,7 +170,7 @@ datadog:
 
 Update your [datadog-values.yaml][7] file with the following APM configuration:
 
-```
+```text
 datadog:
   (...)
   apmEnabled: true
@@ -186,7 +185,7 @@ daemonset:
 
 Update the `env` section of your application's manifest with the following:
 
-```
+```yaml
 env:
   - name: DD_AGENT_HOST
     valueFrom:
@@ -198,7 +197,7 @@ Then upgrade your Datadog Helm chart.
 
 Finally, point your application-level tracers to the host IP using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -214,7 +213,7 @@ Refer to the [language-specific APM instrumentation docs][9] for more examples.
 
 Update your [datadog-values.yaml][7] file with the following process collection configuration, then upgrade your Datadog Helm chart:
 
-```
+```text
 datadog:
   (...)
   processAgentEnabled: true

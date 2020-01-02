@@ -30,7 +30,6 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 | Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP or older     | *unsupported Platform*        |
 
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

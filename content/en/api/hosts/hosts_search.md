@@ -6,6 +6,7 @@ external_redirect: /api/#search-hosts
 ---
 
 ## Search hosts
+
 This endpoint allows searching for hosts by name, alias, or tag. Hosts live within the past 3 hours are included. Results are paginated with a max of 1000 results at a time.
 
 **Note**: `maintenance` will not always be set

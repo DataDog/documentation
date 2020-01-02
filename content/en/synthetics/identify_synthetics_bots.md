@@ -36,7 +36,6 @@ The following header is attached to all Datadog API tests robots:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
-
 The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
 
 {{% /tab %}}
