@@ -948,13 +948,7 @@ class PreBuild:
         else:
             no_integration_issue = False
             manifest_json = {}
-            if getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(file_name))
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: No manifest found for {}".format(file_name))
-                raise ValueError
+            print("\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(file_name))
 
         dependencies = self.add_dependencies(file_name)
         new_file_name = "{}.md".format(
