@@ -27,7 +27,7 @@ To make it available from *any host*, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
-```
+```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -36,6 +36,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
+
 ## Docker APM Agent Environment Variables
 
 List of all environment variables available for tracing within the Docker Agent:
@@ -55,10 +56,10 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                                                             |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                                                                                                                                                                                                                                                                 |
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>.                                                                                                                                                                                          |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][3] with the configuration parameter in the Tracing Client. |
-| `DD_APM_ENV`               | Sets the default [environment][4] for your traces.                                                                                                                                                                                                                                                                                                            |
-| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                                                   |
-| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                                                           |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of `\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1`. i.e. `my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1`. You can also [enable it automatically][2] with the configuration parameter in the Tracing Client. |
+| `DD_APM_ENV`               | Sets the default [environment][3] for your traces.                                                                                                                                                                                                                                                                                      |
+| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                             |
+| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                                     |
 
 ## Tracing from other containers
 
@@ -117,8 +118,10 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
+
 {{% /tab %}}
 {{% tab "Python" %}}
+
 ```python
 from ddtrace import tracer
 
@@ -127,16 +130,20 @@ tracer.configure(
     port=8126,
 )
 ```
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
+
 ```ruby
 Datadog.configure do |c|
   c.tracer hostname: 'datadog-agent',
            port: 8126
 end
 ```
+
 {{% /tab %}}
 {{% tab "Go" %}}
+
 ```go
 package main
 
@@ -147,14 +154,17 @@ func main() {
     defer tracer.Stop()
 }
 ```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
+
 ```javascript
 const tracer = require('dd-trace').init({
   hostname: 'datadog-agent',
   port: 8126
 })
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 

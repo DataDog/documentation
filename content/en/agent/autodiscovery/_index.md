@@ -101,7 +101,7 @@ config_providers:
 
 To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
-```
+```shell
 KUBERNETES=true
 ```
 
@@ -122,7 +122,7 @@ ECS Fargate can't be monitored with the Datadog Agent running as a binary on a h
 
 To enable Autodiscovery over containers within ECS Fargate, add the following environment variable when starting the containerized Agent:
 
-```
+```shell
 ECS_FARGATE=true
 ```
 

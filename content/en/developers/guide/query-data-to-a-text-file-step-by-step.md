@@ -14,7 +14,7 @@ Prerequisite: Python and `pip` installed on your localhost. If you are on Window
 3. Create a new folder: `mkdir <NAME_OF_THE_FOLDER>`.
 4. Enter the folder: `cd <NAME_OF_THE_FOLDER>`.
 5. Download the script [api_query_data.py][3] to the folder created in step 3 and edit it:
-    
+
     a. Replace `<YOUR_DD_API_KEY>` and `<YOUR_DD_APP_KEY>` with your [Datadog API and app keys][4].
 
     b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary page][5].
@@ -36,7 +36,6 @@ Once the above is complete:
 If successful, you will see data in the terminal and a file created in your folder named `out.txt`.
 
 To see additional examples, see our [API documentation][1].
-
 
 [1]: /api
 [2]: http://docs.python-guide.org/en/latest/starting/install/win

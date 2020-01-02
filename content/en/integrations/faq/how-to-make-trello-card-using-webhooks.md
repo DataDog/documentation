@@ -39,28 +39,24 @@ In the configuration:
 * URL is `https://api.trello.com/1/cards`
 
 Enable Custom Payload and fill in a json object that looks like:
-```
+
+```json
 {
-"name": "$USER : $EVENT_TITLE",
-"desc": "$EVENT_MSG",
-"key": "{APP_KEY}",
-"token": "{TOKEN_KEY}",
-"pos":"bottom",
-"idList": "{ID_LIST_VALUE}"
+  "name": "$USER : $EVENT_TITLE",
+  "desc": "$EVENT_MSG",
+  "key": "{APP_KEY}",
+  "token": "{TOKEN_KEY}",
+  "pos": "bottom",
+  "idList": "{ID_LIST_VALUE}"
 }
 ```
 
-*__name__ corresponds to the title of the card
-
-*__desc__ corresponds to the description of the card
-
-*__key__ corresponds to the application key
-
-*__token__ corresponds to the token key
-
-*__pos__ corresponds to the relative position of the card on the list
-
-*__idList__ corresponds to the list id
+* `name`: corresponds to the title of the card
+* `desc`: corresponds to the description of the card
+* `key`: corresponds to the application key
+* `token`: corresponds to the token key
+* `pos`: corresponds to the relative position of the card on the list
+* `idList`: corresponds to the list id
 
 The resulting config should look like [this][7] and you are all set! @-notify away!
 

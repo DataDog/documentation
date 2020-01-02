@@ -29,6 +29,7 @@ aliases:
 * [Apache SSL certificate issues][10]
 
 ## Azure
+
 * [My Azure VM is powered down. Why is it still listed in my infrastructure list?][11]
 * [Azure VMs are showing up in the App but not reporting metrics][12]
 * [Azure Status Metric][13]
@@ -50,6 +51,7 @@ aliases:
 * [Why events don't appear to be showing up in the event stream with my github integration ?][20]
 
 ## Hadoop
+
 * [Hadoop Distributed File System (HDFS) Integration Error][21]
 
 ## HAProxy
@@ -57,6 +59,7 @@ aliases:
 * [HAProxy in multi-process mode][22]
 
 ## Jira
+
 * [I've set up the JIRA integration, now how do I get events and tickets created?][23]
 
 ## JMX
@@ -94,9 +97,11 @@ aliases:
 * [Database user lacks privileges][45]
 
 ## Network
+
 * [How to send TCP/UDP host metrics via the Datadog API ?][46]
 
 ## Postgres
+
 * [Postgres custom metric collection explained][47]
 
 ## RabbitMQ

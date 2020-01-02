@@ -30,7 +30,6 @@ In this view you can:
 * [Setup your log explorer view by creating facets and measure from your logs](#setup).
 * [Share the content of your explorer view to another page within or outside of Datadog.](#share-views)
 
-
 ## Context
 
 Build up a context to explore your logs in your log explorer view first by selecting the proper time range then by using the search bar to filter your Logstream and Log Analytics.
@@ -73,7 +72,6 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 | Export to CSV     | Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once. |
 | Share View     | Share a link to the current view with your teammates through Email, Slack, and more. See all [Datadog notification integrations][2] available. |
 
-
 [1]: /monitors/monitor_types/log
 [2]: /integrations/#cat-notification
 {{% /tab %}}
@@ -86,13 +84,11 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 | Generate new Metric | [Generate a new metric][3] out of the current analytic query.  |
 
 
-
 [1]: /monitors/monitor_types/log
 [2]: /graphing/dashboards/
 [3]: /logs/logs_to_metrics/
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Visualization
 
@@ -102,7 +98,6 @@ Switch between the Log Search and the Log Analytics modes by clicking on the *Lo
 {{% tab "Log Search" %}}
 
 The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
-
 
 ### Logs Table
 
@@ -135,11 +130,11 @@ Interact with the upper reserved attributes section:
 * with **Source**, to append the search request with the `source` of the log.
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
- 
-Use the **Share** button to share the log opened in side panel to other contexts. 
+
+Use the **Share** button to share the log opened in side panel to other contexts.
 
 * **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-* **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available. 
+* **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
@@ -155,7 +150,6 @@ Follow the [log graphing guide][2] to learn more about all the graphing options.
 
 {{< img src="logs/explorer/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
-
 [1]: /logs/processing
 [2]: /logs/explorer/analytics
 {{% /tab %}}
@@ -168,7 +162,6 @@ In the Log Explorer, patterns can be surfaced automatically to bring structure t
 Find out more in the [Log Patterns section][1]
 
 {{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
-
 
 [1]: /logs/explorer/patterns
 {{% /tab %}}
@@ -195,11 +188,9 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
-
 [1]: /logs/explorer/search
 [2]: /logs/explorer/analytics
 {{% /tab %}}
-
 
 {{% tab "Measures" %}}
 
@@ -219,12 +210,10 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 
 {{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
-
 [1]: /logs/explorer/search
 [2]: /logs/explorer/analytics
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Further Reading
 

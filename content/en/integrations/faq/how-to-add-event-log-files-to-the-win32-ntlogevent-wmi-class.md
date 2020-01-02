@@ -6,7 +6,8 @@ kind: faq
 Not all event logs are are in the Win32_NTLogEvent WMI class. Since the Event Viewer integration can only pick up events in this class, modify the Windows Registry to add event logs outside of the scope of this class.
 
 The first step is to confirm whether or not the logfile can be accessed through the Win32_NTLogEvent using the following WMI query in Powershell. (This is the same query the Agent runs to collect these events)
-```
+
+```text
 $ Get-WmiObject -Query "Select EventCode,SourceName,TimeGenerated,Type,InsertionStrings,Message,Logfile from Win32_NTLogEvent WHERE ( LogFile = '<LogFileName>' )" | select -First 1
 ```
 
@@ -16,7 +17,8 @@ Locate the event logs you want to monitor in the Event Viewer. Locate the log fi
 {{< img src="integrations/faq/image1.png" alt="image1" responsive="true" >}}
 
 Open the Windows Registry. (search for regedit.exe, the default name of the registry editor). Inside the registry editor, locate the EventLog folder in the following path:
-```
+
+```text
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\
 ```
 

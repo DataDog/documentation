@@ -85,6 +85,7 @@ See the list of [resources][6] associated with your service. Resources are parti
 [Refer to the dedicated resource documentation to learn more][2].
 
 ### Filtering the resources list
+
 Filter your resources list with a query for basic text filtering:
 
 {{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Resource filtering" video="true" responsive="true" width="90%" >}}

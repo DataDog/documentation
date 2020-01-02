@@ -16,12 +16,11 @@ For all versions of <strong>Agent v6</strong>, the <code>jmxterm</code> JAR is n
 
 If you're able to connect using JConsole, run the following:
 
-```
+```text
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:<PORT> -u <USER> -p <PASSWORD>
 ```
 
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][2] a copy of the results from above along with the following information:
-
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -30,7 +29,6 @@ If you're able to connect using the command above, run: `beans` and send to the 
 * Output of the [info command][1]
 * Output of: `ps aux | grep jmxfetch`
 * A copy of the YAML integration (send the file)
-
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
@@ -45,7 +43,6 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-
 [1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 [2]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
@@ -59,7 +56,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 These commands are available since v6.2.0:
 
 | Command                                                | Description                                                                                                                                                             |
-| :----------------------------------------              | :---                                                                                                                                                                    |
+|:-------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instances configuration.                                                                                                |
 | `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
 | `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are actually collected by your current instances configuration.                                                                                    |
@@ -84,23 +81,22 @@ The Agent doesn't have a full featured interface to JMXFetch, so you may have to
 
 where `<COMMAND>` is any of:
 
-- `list_everything`
-- `list_collected_attributes`
-- `list_matching_attributes`
-- `list_not_matching_attributes`
-- `list_limited_attributes`
-- `list_jvms`
+* `list_everything`
+* `list_collected_attributes`
+* `list_matching_attributes`
+* `list_not_matching_attributes`
+* `list_limited_attributes`
+* `list_jvms`
 
-and `<CHECK_LIST>` corresponds to a list of valid `yaml` configurations in
-`/etc/datadog-agent/conf.d/`. For instance:
+and `<CHECK_LIST>` corresponds to a list of valid `yaml` configurations in `/etc/datadog-agent/conf.d/`. For instance:
 
-- `cassandra.d/conf.yaml`
-- `kafka.d/conf.yaml`
-- `jmx.d/conf.yaml`
+* `cassandra.d/conf.yaml`
+* `kafka.d/conf.yaml`
+* `jmx.d/conf.yaml`
 
 Example:
 
-```
+```text
 /usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check cassandra.d/conf.yaml jmx.d/conf.yaml --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console list_everything
 ```
 
@@ -112,7 +108,7 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 {{% tab "Agent v5" %}}
 
 | Command                                                           | Description                                                                                                                                                             |
-| :----------------------------------------                         | :---                                                                                                                                                                    |
+|:------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`     | List attributes that match at least one of your instance configurations.                                                                                                |
 | `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`      | List attributes that do match one of your instance configurations but that are not being collected because it would exceed the number of metrics that can be collected. |
 | `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`    | List attributes that are actually collected by your current instance configurations.                                                                                    |
@@ -125,13 +121,13 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 To check whether Autodiscovery is loading JMX-based checks:
 
-```
+```text
 docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck
 ```
 
 To see JMX-based checks status from the Agent:
 
-```
+```text
 $ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
 ```
 
@@ -250,7 +246,6 @@ instances:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help

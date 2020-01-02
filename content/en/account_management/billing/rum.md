@@ -1,6 +1,7 @@
 ---
 title: Real User Monitoring billing FAQ
 kind: faq
+disable_toc: true
 ---
 
 #### How is a session defined?

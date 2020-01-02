@@ -23,24 +23,25 @@ SAML is set up [Using Auth0 with a SAML2 Web App][1].
 This is the official Auth0 [Datadog SAML Configuration][2].
 
 **Application Callback URL**:
+
 ```text
 https://app.datadoghq.com/account/saml/assertion
 ```
 
 **Settings**:
+
 ```json
 {
   "audience": "https://app.datadoghq.com/account/saml/metadata.xml",
-  "mappings": {
-  },
+  "mappings": {},
   "createUpnClaim": false,
   "passthroughClaimsWithNoMapping": false,
   "mapUnknownClaimsAsIs": false,
   "mapIdentities": false,
   "nameIdentifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
   "nameIdentifierProbes": [
-    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
-  ],
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+  ]
 }
 ```
 

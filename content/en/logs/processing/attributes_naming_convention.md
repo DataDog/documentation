@@ -177,6 +177,7 @@ These attributes are related to the data used when a log or an error is generate
 | `logger.name`        | `string` | The name of the logger.                                          |
 | `logger.thread_name` | `string` | The name of the current thread when the log is fired.            |
 | `logger.method_name` | `string` | The class method name.                                           |
+| `logger.version`     | `string` | The version of the logger.                                       |
 | `error.kind`         | `string` | The error type or kind (or code is some cases).                  |
 | `error.message`      | `string` | A concise, human-readable, one-line message explaining the event |
 | `error.stack`        | `string` | The stack trace or the complementary information about the error |
@@ -203,7 +204,6 @@ Performance metrics attributes.
 | **Fullname** | **Type** | **Description**                                                                                   |
 |:-------------|:---------|:--------------------------------------------------------------------------------------------------|
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
-
 
 Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][13] for [trace search][14].
 
@@ -247,7 +247,6 @@ All attributes and measures are prefixed by `dns`.
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
-
 
 ## Further Reading
 
