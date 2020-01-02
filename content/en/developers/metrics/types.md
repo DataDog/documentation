@@ -246,7 +246,7 @@ You have one web server: `server:web_1` that continuously receives:
 * 20 HTTP requests for the next 30 seconds, then
 * 0 HTTP requests for the next 30 seconds.
 
-And so on and so forth. Let's say you now want to monitor the amount of request received by `server:web_1`. Choose the metric type below between COUNT, RATE, and GAUGE to see how the stored metric type changes what is actually measured and how the metric is stored and graphed.
+And so on and so forth. Let's say you now want to monitor the number of requests received by `server:web_1`. Choose the metric type below between COUNT, RATE, and GAUGE to see how the stored metric type changes what is actually measured and how the metric is stored and graphed.
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
