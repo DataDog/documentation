@@ -22,7 +22,7 @@ If you experience issues setting up or configuring Datadog Synthetics, use this 
 
 Sometimes you know you have a working endpoint because when you visit your website in a browser (or cURL it), you get `2xx` status code. But when setting an API test on this endpoints or when hitting `Test URL` to perform a fast test you get `5xx` or `4xx` status code.
 
-This happens because cURL automatically sets a `user-agent` as a request header (as your browser), but Datadog API tests don't automatically set one. 
+This happens because cURL automatically sets a `user-agent` as a request header (as your browser), but Datadog API tests don't automatically set one.
 This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx` status code.
 
 The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to any valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
@@ -34,7 +34,7 @@ The solution to this problem is to manually set a `user-agent` in your API tests
 
 ### Forbidden errors
 
-When creating Synthetics tests, you might get `403 Forbidden` errors at first. It's coming from the `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>` header that is automatically being sent by Datadog.    
+When creating Synthetics tests, you might get `403 Forbidden` errors at first. It's coming from the `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>` header that is automatically being sent by Datadog.
 Make sure this header is not blacklisted by your servers in order to remove this error.
 Additionally, you might also have to whitelist [Datadog Synthetics IP ranges][2] to make sure Datadog servers are allowed to send requests to your infrastructure.
 

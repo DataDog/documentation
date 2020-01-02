@@ -9,9 +9,11 @@ further_reading:
 ---
 
 ## Definition
+
 Recovery thresholds are optional thresholds added to a monitor to indicate an additional condition to a monitor’s recovery from alert or warning states.
 
 ## Behavior
+
 When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold.
 
 The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has **passed** the recovery threshold. If no recovery threshold is set, the monitor recovers whenever the alert conditions are no longer met.
@@ -29,17 +31,19 @@ The recovery threshold is satisfied with the recovery condition is met. The reco
 
 Recovery thresholds reduce noise of a flapping monitor. This can increase confidence that upon recovery, the alerting metric has recovered and the issue is resolved.
 
-# How to set up recovery thresholds?
+## How to set up recovery thresholds?
 
-## Website UI
+### Website UI
+
 Set the alert or warning recovery threshold when creating a monitor under **Set alert conditions**:
 
 {{< img src="monitors/faq/recovery_threshold.mp4" alt=" recovery threshold" video="true"  >}}
 
-## API
+### API
+
 When you [create/edit a monitor via the API][1], use the attributes `critical_recovery` and `warning_recovery` in the `options.thresholds` attribute of your JSON monitor:
 
-```
+```text
 "thresholds": {
                 "critical": 80,
                 "warning": 60,

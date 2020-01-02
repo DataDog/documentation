@@ -16,12 +16,14 @@ ddtype: crawler
 {{< img src="integrations/rss/rss.png" alt="RSS event"  >}}
 
 ## Overview
+
 Capture RSS feed activity in Datadog to:
 
-  * Add events from custom sources to your stream.
-  * Discuss feed events with your team.
+* Add events from custom sources to your stream.
+* Discuss feed events with your team.
 
 ## Setup
+
 ### Installation
 
 Configuration requires:

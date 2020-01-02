@@ -11,7 +11,6 @@ Add a specific Webhook to a Datadog Webhooks integration.
 
 **ARGUMENTS**:
 
-
 * **`hooks`** [*required*]:
     Array of Webhook objects. A Webhook object is composed by:
 

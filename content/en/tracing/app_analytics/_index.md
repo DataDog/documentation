@@ -26,7 +26,6 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 
  After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
-
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -38,24 +37,22 @@ App Analytics is available starting in version 0.19.0 of the Python tracing clie
 
  After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
-
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 App Analytics is available starting in version 0.19.0 of the Ruby tracing client, and can be enabled for all **web** integrations with a global flag.
 
- To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
+To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
- ```ruby
+```ruby
 Datadog.configure { |c| c.analytics_enabled = true }
 ```
 
- - `true` enables analytics for all web frameworks.
-- `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
+* `true` enables analytics for all web frameworks.
+* `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
 
  After enabling, the [App Analytics][1] page populates.
-
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
@@ -67,8 +64,7 @@ App Analytics is available starting in version 1.11.0 of the Go tracing client, 
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][2] to get started.
-
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][2] to get started.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 [2]: https://app.datadoghq.com/apm/search/analytics
@@ -87,8 +83,7 @@ You can also use the following configuration parameter:
 
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
@@ -96,16 +91,15 @@ You can also use the following configuration parameter:
 
 App Analytics is available starting in version 1.1.0 of the .NET tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
- * Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- This setting can also be set in code:
+This setting can also be set in code:
 
 ```csharp
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
@@ -113,10 +107,9 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 
 App Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
- * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
@@ -171,10 +164,9 @@ Datadog.configure { |c| c.use :integration, analytics_enabled: true }
 
 Where `integration` is the name of the integration. See the [list of available integrations][1] for options.
 
-- `true` enables analytics for this integration, regardless of the global setting.
-- `false` disables analytics for this integration, regardless of the global setting.
-- `nil` defers to global setting for analytics.
-
+* `true` enables analytics for this integration, regardless of the global setting.
+* `false` disables analytics for this integration, regardless of the global setting.
+* `nil` defers to global setting for analytics.
 
 [1]: /tracing/setup/ruby/#library-compatibility
 {{% /tab %}}
@@ -202,7 +194,6 @@ func main() {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-
 In addition to setting globally, you can enable or disable App Analytics for individual integrations.
 
 For example, to enable App Analytics for `express`:
@@ -215,11 +206,9 @@ tracer.use('express', {
 
 Integration names can be found on the [integrations table][1].
 
-
 [1]: /tracing/setup/nodejs/#integrations
 {{% /tab %}}
 {{% tab ".NET" %}}
-
 
 In addition to setting globally, you can enable or disable App Analytics for individual integrations.
 
@@ -243,7 +232,6 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1].
 
-
 [1]: /tracing/setup/dotnet#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -257,7 +245,6 @@ Use this in addition to the global configuration for any integrations that submi
 * Environment Variable: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][1].
-
 
 [1]: /tracing/setup/php/#integrations
 {{% /tab %}}
@@ -314,7 +301,6 @@ tracer.use('mysql', {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example, to enable App Analytics for ADO.NET:
 
 * Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
@@ -327,11 +313,9 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1].
 
-
 [1]: /tracing/setup/dotnet#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
-
 
 Database tracing is not captured by App Analytics by default. You can enable or disable App Analytics for individual integrations using the following setting:
 
@@ -342,8 +326,6 @@ Use this in addition to the global configuration for any integrations that submi
 * Environment Variable: `DD_MYSQLI_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][1].
-
-
 
 [1]: /tracing/setup/php/#integrations
 {{% /tab %}}
@@ -378,7 +360,6 @@ class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-
 Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
 
 ```python
@@ -390,7 +371,6 @@ def my_method():
     span = tracer.current_span()
     span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
 ```
-
 
 {{% /tab %}}
 {{% tab "Ruby" %}}

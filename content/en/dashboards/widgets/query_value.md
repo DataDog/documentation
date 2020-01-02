@@ -34,6 +34,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 3. Optional: configure a conditional format depending on the value displayed.
 
 ### Options
+
 #### Global time
 
 On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
@@ -50,7 +51,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the query value widget is:
 
-```
+```text
 QUERY_VALUE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -74,7 +75,7 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type             | Required | Description                                                                                                                                                  |
 |---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                 |
+| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                |
 | `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `autoscale`   | Boolean          | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string           | no       | Display a unit of your choice on the widget.                                                                                                                 |
@@ -82,10 +83,9 @@ QUERY_VALUE_SCHEMA = {
 | `text_align`  | string           | no       | How to align the value in the widget; values available are `center`, `left`, or `right`.                                                                     |
 | `title`       | string           | no       | Title of your widget.                                                                                                                                        |
 
-
 Additional properties allowed in the `request` object:
 
-```
+```text
 {
     "conditional_formats": CONDITIONAL_FORMATS_SCHEMA,
     "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}

@@ -35,7 +35,7 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 The dedicated [widget JSON schema definition][4] for the service map widget is:
 
-```
+```text
 SERVICEMAP_SCHEMA = {
         "type": "object",
         "properties": {
@@ -55,7 +55,6 @@ SERVICEMAP_SCHEMA = {
 | service   | string | yes      | The ID of the service you want to map.                            |
 | filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).    |
 | title     | string | no       | The title of your widget.                                         |
-
 
 ## Further Reading
 

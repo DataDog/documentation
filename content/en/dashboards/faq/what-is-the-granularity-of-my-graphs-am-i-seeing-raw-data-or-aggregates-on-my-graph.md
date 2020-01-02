@@ -19,7 +19,7 @@ By default our backend computes the rollup aggregate by averaging all real value
 
 ## What can you do?
 
-Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. 
+Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window.
 
 However what you can do is control how this aggregation is performed by using the [rollup function][3]:
 

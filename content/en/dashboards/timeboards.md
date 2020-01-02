@@ -39,6 +39,7 @@ Timeboard settings are the same as screenboards with the exception of generating
 After [creating your timeboard][8], add graphs using the **Edit widgets** button or **Add graph** link, then drag the appropriate [widget][9] onto the timeboard.
 
 ## Search
+
 ### Events
 
 Set up an overlay of events by clicking the **Search...** link in the upper left, select **Events**, and enter a [query][10] in the search box. This replaces event overlays added at design time, and applies to all graphs on the timeboard. The overlay shows the occurrence of events on your timeseries graphs with a list of events on the right.

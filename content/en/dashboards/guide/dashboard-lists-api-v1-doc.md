@@ -72,10 +72,8 @@ curl -X GET \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 ```
 
-
 {{% /tab %}}
 {{< /tabs >}}
-
 
 #### Example Response
 
@@ -374,7 +372,6 @@ curl -X GET \
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Add Items to a Dashboard List
 
@@ -880,7 +877,6 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Delete Items from a Dashboard List
 
 <div class="alert alert-danger">
@@ -909,6 +905,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delet
         The id of the dashboard.
 
 ### Examples
+
 #### Example Request
 
 {{< tabs >}}

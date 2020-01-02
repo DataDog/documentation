@@ -26,7 +26,6 @@ Indexes are located on the [Configuration page][1] in the Indexes section. Doubl
 
 You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
-
 ## Exclusion Filters
 
 Index filters give dynamic control over what goes into your indexes. When set up, logs sampling is uniformly random, meaning the sampling has no impact on relative importance of each log. For example, if some logs were captured only for troubleshooting purposes, you may only want to index a given percentage of those logs with errors and warnings.
@@ -70,10 +69,10 @@ Enable or disable them in one click on the Pipeline page:
 
 ### Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied). 
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied).
 Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][6], [sent to your archives][7], and used to [generate metrics from logs][8].
 
-Update or remove this quota at any time when editing the Index: 
+Update or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 

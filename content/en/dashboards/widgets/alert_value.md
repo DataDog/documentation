@@ -37,6 +37,7 @@ Alert values are query values showing the current value of the metric in any mon
     * `Custom`
 
 ### Options
+
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
@@ -49,7 +50,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the alert value widget is:
 
-```
+```text
 ALERT_VALUE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -66,15 +67,15 @@ ALERT_VALUE_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the alert value widget use `alert_value`|
-| `alert_id`     | string          | yes      | ID of the alert to use in the widget|
-| `precision`| integer| no| Number of decimal places to show. If not defined, uses the raw value|
-| `unit`| string| no| Unit to display with the value|
-| `text_size`| string| no| Size of value in the widget|
-| `text_align`| string| no| How to align the value in the widget. Available values are: `left`, `center` or `right`|
-|`title`|string|no|Title of the widget|
+| Parameter    | Type    | Required | Description                                                                             |
+|--------------|---------|----------|-----------------------------------------------------------------------------------------|
+| `type`       | string  | yes      | Type of the widget, for the alert value widget use `alert_value`                        |
+| `alert_id`   | string  | yes      | ID of the alert to use in the widget                                                    |
+| `precision`  | integer | no       | Number of decimal places to show. If not defined, uses the raw value                    |
+| `unit`       | string  | no       | Unit to display with the value                                                          |
+| `text_size`  | string  | no       | Size of value in the widget                                                             |
+| `text_align` | string  | no       | How to align the value in the widget. Available values are: `left`, `center` or `right` |
+| `title`      | string  | no       | Title of the widget                                                                     |
 
 ## Further Reading
 

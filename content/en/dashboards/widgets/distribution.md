@@ -31,6 +31,7 @@ Configure your metric query as usual. Note that this visualization type is usefu
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
+
 #### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
@@ -55,7 +56,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the distribution widget is:
 
-```
+```text
 DISTIBUTION_SCHEMA = {
     "type": "object",
     "properties": {
@@ -74,33 +75,28 @@ DISTIBUTION_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                                 |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
-| `show_legend` | boolean | no | (screenboard only) Show the legend for this widget |
-
+| Parameter     | Type             | Required | Description                                                                                                                                                  |
+|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string           | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                              |
+| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`       | string           | no       | Title of your widget.                                                                                                                                        |
+| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                           |
 
 Additional properties allowed the `request` object:
 
 ```json
 {
-    "style": {
-        "type": "object",
-        "properties": {
-            "palette": {"type": "string"},
-        },
-        "additionalProperties": false
-    }
+  "style": {
+    "type": "object",
+    "properties": {"palette": {"type": "string"}},
+    "additionalProperties": false
+  }
 }
 ```
 
 | Parameter       | Type   | Required | Description                           |
-| ------          | -----  | -------- | ----                                  |
+|-----------------|--------|----------|---------------------------------------|
 | `style.palette` | string | no       | Color palette to apply to the widget. |
-
-
 
 ## Further Reading
 

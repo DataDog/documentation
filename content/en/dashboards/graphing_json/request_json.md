@@ -14,7 +14,7 @@ further_reading:
 
 The general format for the `REQUEST_SCHEMA` is an array of one or more `requests`:
 
-```
+```text
 "requests": [
   {
     "q": "function(aggregation method:metric{scope} [by {group}])"
@@ -24,7 +24,7 @@ The general format for the `REQUEST_SCHEMA` is an array of one or more `requests
 
 If your `requests` parameter has multiple `requests`, the widget displays all of them:
 
-```
+```text
 "requests": [
   {
     "q": "<METRIC_1>{<SCOPE_1>}"
@@ -60,14 +60,14 @@ A scope lets you filter a series. It can be a host, a device on a host, or any a
 
 Examples of scopes and their meanings:
 
-| Scope | Meaning |
-| --- | --- |
-| `host:my_host` | Related to a given host. |
+| Scope                            | Meaning                                    |
+|----------------------------------|--------------------------------------------|
+| `host:my_host`                   | Related to a given host.                   |
 | `host:my_host, device:my_device` | Related to a given device on a given host. |
-| `source:my_source` | Related to a given source. |
-| `my_tag` | Related to a tagged group of hosts. |
-| `my:tag` | Same as above. |
-| `*` | Wildcard for everything. |
+| `source:my_source`               | Related to a given source.                 |
+| `my_tag`                         | Related to a tagged group of hosts.        |
+| `my:tag`                         | Same as above.                             |
+| `*`                              | Wildcard for everything.                   |
 
 #### Groups
 
@@ -75,7 +75,7 @@ For any given metric, data may come from several hosts. The data is normally agg
 
 #### Arithmetic
 
-You can apply simple arithmetic to a series (+, -, * and /). 
+You can apply simple arithmetic to a series (+, -, * and /).
 
 The following example graphs 5-minute load and its double:
 
@@ -83,12 +83,8 @@ The following example graphs 5-minute load and its double:
 {
   "viz": "timeseries",
   "requests": [
-    {
-      "q": "system.load.5{intake} * 2"
-    },
-    {
-      "q": "system.load.5{intake}"
-    }
+    {"q": "system.load.5{intake} * 2"},
+    {"q": "system.load.5{intake}"}
   ]
 }
 ```
@@ -96,14 +92,7 @@ The following example graphs 5-minute load and its double:
 You can also add, subtract, multiply, and divide a series. Note that Datadog does not enforce consistency at this point, so you *can* divide apples by oranges.
 
 ```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "metric{apples} / metric{oranges}"
-    }
-  ]
-}
+{"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
 ```
 
 ## Stacked Series
@@ -112,7 +101,7 @@ You can also add, subtract, multiply, and divide a series. Note that Datadog doe
 
 In the case of related timeseries, you can draw them as stacked areas by using the following syntax:
 
-```
+```text
 "requests": [
   {
     "q": "metric1{scope}, metric2{scope}, metric3{scope}"
@@ -128,7 +117,7 @@ You can represent a metric shared across hosts and stack the results. For instan
 
 Here's how to do it for any metric:
 
-```
+```text
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
@@ -138,7 +127,7 @@ Here's how to do it for any metric:
 
 Note that in this case, you can only have 1 query. But you can also split by device or a combination of both:
 
-```
+```text
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag} by {host,device}"

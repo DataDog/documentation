@@ -36,6 +36,7 @@ Configuration of the host map widget works as the main [host map page][1]:
 6. Optional: define a color palette with a `min` and `max` color palette value.
 
 ### Options
+
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
@@ -46,10 +47,9 @@ Optionally define its size and alignment.
 
 ## API
 
-
 The dedicated [widget JSON schema definition][2] for the host map widget is:
 
-```
+```text
 HOSTMAP_SCHEMA = {
     "type": "object",
     "properties": {
@@ -89,11 +89,11 @@ HOSTMAP_SCHEMA = {
 ```
 
 | Parameter            | Type             | Required | Description                                                                                                                      |
-| ------               | -----            | -----    | --------                                                                                                                         |
-| `type`               | string           | yes      | Type of widget; for the host map widget use `hostmap`.                                                                       |
+|----------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
+| `type`               | string           | yes      | Type of widget; for the host map widget use `hostmap`.                                                                           |
 | `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `node_type`          | string             | no       | Which type of node to use in the map; available values are: `host` or `container`                                                 |
+| `node_type`          | string           | no       | Which type of node to use in the map; available values are: `host` or `container`                                                |
 | `no_metric_hosts`    | Boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
 | `no_group_hosts`     | Boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
 | `group`              | array of strings | no       | List of tag prefixes to group by.                                                                                                |
@@ -102,7 +102,6 @@ HOSTMAP_SCHEMA = {
 | `style.palette_flip` | Boolean          | no       | Whether to flip the palette tones.                                                                                               |
 | `style.fill_min`     | string           | no       | Min value to use to color the map.                                                                                               |
 | `style.fill_max`     | string           | no       | Max value to use to color the map.                                                                                               |
-
 
 
 ## Further Reading

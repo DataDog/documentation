@@ -133,21 +133,21 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| OS                                              | Supported versions                                     |
-|-------------------------------------------------|--------------------------------------------------------|
-| [Amazon][1]                                     | Amazon Linux 2                                         |
-| [Debian x86_64][2] with systemd                 | Debian 7 (wheezy)+                                     |
-| [Debian x86_64][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                     |
-| [Ubuntu x86_64][3]                              | Ubuntu 14.04+                                          |
-| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6+                                       |
-| [Docker][5]                                     | Version 1.12+                                          |
-| [Kubernetes][6]                                 | Version 1.3+                                           |
-| [SUSE Enterprise Linux x86_64][7] with systemd  | SUSE 11 SP4+                                           |
-| [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                           |
-| [Fedora x86_64][8]                              | Fedora 26+                                             |
-| [macOS][9]                                      | macOS 10.12+                                           |
-| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano)      |
-| [Windows 64-bit][10]                            | Windows 7+                                             |
+| OS                                              | Supported versions                                |
+|-------------------------------------------------|---------------------------------------------------|
+| [Amazon][1]                                     | Amazon Linux 2                                    |
+| [Debian x86_64][2] with systemd                 | Debian 7 (wheezy)+                                |
+| [Debian x86_64][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                |
+| [Ubuntu x86_64][3]                              | Ubuntu 14.04+                                     |
+| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6+                                  |
+| [Docker][5]                                     | Version 1.12+                                     |
+| [Kubernetes][6]                                 | Version 1.3+                                      |
+| [SUSE Enterprise Linux x86_64][7] with systemd  | SUSE 11 SP4+                                      |
+| [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
+| [Fedora x86_64][8]                              | Fedora 26+                                        |
+| [macOS][9]                                      | macOS 10.12+                                      |
+| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
+| [Windows 64-bit][10]                            | Windows 7+                                        |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
@@ -207,7 +207,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 With Agent v6+, the command line interface is based on subcommands. To run a subcommand, first invoke the Agent binary:
 
-```
+```text
 <AGENT_BIN_PATH> <SUB_COMMAND> <OPTIONS>
 ```
 
@@ -236,7 +236,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 
 **Note**: Some options have their own set of flags and options detailed in a help message. For example, to see how to use the `check` subcommand, run:
 
-```
+```text
 <AGENT_BIN_PATH> check --help
 ```
 
@@ -370,7 +370,6 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 ### Log location
 
 [See the dedicated documentation for Agent log files][12]
-
 
 ## Further Reading
 

@@ -27,7 +27,7 @@ If you are a [Datadog Administrator][3], there is a [Configure SAML][4] option i
 
 This brings you to the **SAML Single Sign On Configuration** page:
 
-1.  Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
+1. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
 
     {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
 
@@ -54,7 +54,7 @@ The Single Sign-on URL is also displayed on the [Team page][6]. Loading this URL
 * Assertions can be encrypted, but unencrypted assertions are accepted.
 * Reference [Datadog's SP Metadata][5].
 
-##  Setting Attributes
+## Setting Attributes
 
 Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 

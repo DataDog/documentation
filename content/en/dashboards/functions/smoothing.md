@@ -21,7 +21,6 @@ The algorithm is inspired by the [ASAP algorithm][1]-you can read more about it 
 
 The `autosmooth()` function cannot be used in monitors. Being that the span is chosen dynamically, the result of applying the function could change from minute to minute, making threshold setting difficult and leading to alert flapping.
 
-
 ## Exponentially weighted moving average
 
 ### Ewma 3
@@ -32,9 +31,9 @@ The `autosmooth()` function cannot be used in monitors. Being that the span is c
 
 Note: The span value is the number of data points. So `ewma_3()` uses the last 3 data points to calculate the average.
 
-Example: 
+Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma3(10 + x%10 {*})` has the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma3(10 + x%10 {*})` has the following shape:
 
 {{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
 
@@ -46,9 +45,9 @@ If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting fr
 
 Note: The span value is the number of data points. So `ewma_5()` uses the last 5 data points to calculate the average.
 
-Example: 
+Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma5(10 + x%10 {*})` has the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma5(10 + x%10 {*})` has the following shape:
 
 {{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
 
@@ -60,9 +59,9 @@ If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting fr
 
 Note: The span value is the number of data points. So `ewma_10()` uses the last 10 data points to calculate the average.
 
-Example: 
+Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma10(10 + x%10 {*})` has the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma10(10 + x%10 {*})` has the following shape:
 
 {{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
 
@@ -74,13 +73,13 @@ If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting fr
 
 Note: The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
 
-Example: 
+Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma20(10 + x%10 {*})` has the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma20(10 + x%10 {*})` has the following shape:
 
 {{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
 
-## Median 
+## Median
 
 ### Median 3
 

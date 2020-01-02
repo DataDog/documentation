@@ -53,7 +53,6 @@ Datadog can show you the latency of your application over time and how it compar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: /tracing/visualization/#services
 [3]: /tracing/visualization/#resources

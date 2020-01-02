@@ -4,7 +4,8 @@ kind: faq
 ---
 
 You may encounter the following error message when configuring your `jmx.yaml` file:
-```
+
+```text
 initialize check class [ERROR]: "Each configuration must have an 'include' section. See https://docs.datadoghq.com/integrations/java/ for more information"
 ```
 

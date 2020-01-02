@@ -25,6 +25,7 @@ Quickly change the time range by selecting a preset range from the dropdown:
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
 ### Search
+
 #### Search syntax
 
 A query is composed of terms and operators.

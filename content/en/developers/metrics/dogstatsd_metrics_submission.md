@@ -1037,6 +1037,7 @@ DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 

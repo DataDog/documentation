@@ -36,10 +36,10 @@ The custom payload is where the name and tags of the check_run are applied. For 
 
 ```json
 {
-"check": "mymonitorgroup.status",
-"status": 2,
-"host_name": "$HOSTNAME",
-"tags": "[monitor:$ALERT_TITLE]"
+  "check": "mymonitorgroup.status",
+  "status": 2,
+  "host_name": "$HOSTNAME",
+  "tags": "[monitor:$ALERT_TITLE]"
 }
 ```
 
@@ -49,7 +49,7 @@ You can then apply the same custom payload values for the "mymonitorgroup-ok-che
 
 With both of those webhooks set, you can go to your monitors (the ones your teammate wants a quick status view of) and add the webhook notification references, nested in their appropriate conditional logic tag, like so:
 
-```
+```text
 {{#is_alert}} @webhook-mymonitorgroup-alert-check {{/is_alert}}
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```

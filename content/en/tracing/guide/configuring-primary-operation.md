@@ -16,7 +16,7 @@ The primary operation name of a service determines how that service is represent
 As an example, a `web-store` service can have multiple endpoints which are instrumented as resources. These resources then share the same primary operation because the entry-point into these resources is consistent. For example, the resources `/user/home` and `/user/new` should both have the same primary operation `web.request`. In different languages a primary operation for a service may look like:
 
 | Service Type           | Primary Operation                                 |
-| ---------------------- | ------------------------------------------------- |
+|------------------------|---------------------------------------------------|
 | web                    | `servlet.request`, `flask.request`, `web.request` |
 | db                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
@@ -46,7 +46,7 @@ When manually instrumenting your code, statically set the span name to ensure th
 
 Modify the primary operation for Python:
 
-```
+```text
   @tracer.wrap('tornado.notify',
                 service='tornado-notification',
                 resource='MainHandler.do_something')
@@ -65,7 +65,7 @@ By default, the resource name would be set to this as it’s the name of the fun
 
 When using Datadog, the Opentracing operation name is a resource and the Opentracing "component" tag is Datadog's span name. To define (in Opentracing terms) a span that has the resource "/user/profile", and the span name "http.request", use this Go example:
 
-```
+```text
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
 

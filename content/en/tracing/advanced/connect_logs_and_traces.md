@@ -24,7 +24,6 @@ Your language level logs *must* be turned into Datadog attributes in order for t
 
 {{< img src="tracing/advanced/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces"  style="width:100%;">}}
 
-
 ## Automatic Trace ID injection
 
 {{< tabs >}}
@@ -34,7 +33,7 @@ Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.in
 
 If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
-```
+```text
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
@@ -88,20 +87,18 @@ end
 
 This appends trace tags to web requests:
 
-```
+```text
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-
 [1]: /logs/log_collection/python/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
-
 
 [1]: /help
 {{% /tab %}}
@@ -138,7 +135,6 @@ var tracer = new Tracer(settings);
 
 **Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
 
-
 [1]: https://github.com/damianh/LibLog
 [2]: http://nlog-project.org
 [3]: https://logging.apache.org/log4net
@@ -146,7 +142,6 @@ var tracer = new Tracer(settings);
 [5]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
-
 
 ```php
   <?php
@@ -247,14 +242,13 @@ finally {
 
 Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
 
-```
+```text
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][4].
 
 [See the Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
-
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
@@ -297,7 +291,6 @@ from ddtrace.helpers import get_correlation_ids
 
 import structlog
 
-
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
     trace_id, span_id = get_correlation_ids()
@@ -308,7 +301,6 @@ def tracer_injection(logger, log_method, event_dict):
     event_dict['dd.span_id'] = span_id or 0
 
     return event_dict
-
 
 structlog.configure(
     processors=[
@@ -321,7 +313,7 @@ log = structlog.get_logger()
 
 Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
 
-```
+```text
 >>> traced_func()
 {"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
@@ -329,7 +321,6 @@ Once the logger is configured, executing a traced function that logs an event yi
 **Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
 [See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
-
 
 [1]: /tracing/visualization/#trace
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
@@ -370,7 +361,6 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 
 See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
-
 [1]: /logs/log_collection/ruby/#configure-the-datadog-agent
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
@@ -404,7 +394,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][4].
-
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
@@ -462,7 +451,6 @@ var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
-
 
 [1]: /logs/log_collection/csharp/#configure-your-logger
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel

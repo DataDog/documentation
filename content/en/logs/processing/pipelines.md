@@ -80,11 +80,11 @@ For example: A service that generates the below logs:
 
 ```json
 {
-    "myhost": "host123",
-    "myapp": "test-web-2",
-    "logger_severity": "Error",
-    "log": "cannot establish connection with /api/v1/test",
-    "status_code": 500
+  "myhost": "host123",
+  "myapp": "test-web-2",
+  "logger_severity": "Error",
+  "log": "cannot establish connection with /api/v1/test",
+  "status_code": 500
 }
 ```
 

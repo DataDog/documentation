@@ -14,7 +14,8 @@ Trouble setting up your JMX integration ? Here are a few great articles to get y
 If everything is set up properly as described in the above articles, *and* your metric appears in the [Agent log file][6] (but *not* in the [status command][1]), then there is probably an issue with the `metric_type` that you're using.
 
 Here is the output of the  `list_matching_attributes.log` file :
-```
+
+```text
 Matching: 0/350. Bean name: Hadoop:service=HBase,name=Master,sub=Server - Attribute name: tag.isActiveMaster  - Attribute type: java.lang.String
 ```
 
@@ -22,7 +23,7 @@ Matching: 0/350. Bean name: Hadoop:service=HBase,name=Master,sub=Server - Attrib
 
 Go to your [Agent Log file][6] and search for errors similar to the following:
 
-```
+```text
 2016-12-05 03:08:33,261 | WARN | JMXAttribute | Unable to get metrics from Hadoop:service=HBase,name=Master,sub=Server - tag.isActiveMaster
 java.lang.NumberFormatException: For input string: "false"
  [...]

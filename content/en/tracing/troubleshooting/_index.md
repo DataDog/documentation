@@ -80,7 +80,6 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 
 See [the API documentation][1] for more details.
 
-
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -144,7 +143,6 @@ If neither of these log entries is present, then no request was sent to the Agen
 
 For more tracer settings, check out the [API documentation][5].
 
-
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 [2]: /agent/troubleshooting
 [3]: /help
@@ -172,7 +170,6 @@ Logs files are saved in the following directories:
 |----------|---------------------------------------------------------------|
 | Linux    | `/var/log/datadog/`                        |
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -204,7 +201,6 @@ make install
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /help
 [2]: /tracing/setup/#agent-configuration

@@ -33,6 +33,7 @@ There are several places where you can see the number of log events you have sen
 You can also use facets to see log count by any attribute or tag defined by your log events. This helps to identify which host, service, endpoint, etc., generate the most data.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][5] Manager.

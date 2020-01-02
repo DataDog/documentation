@@ -24,26 +24,26 @@ To test an Agent check, run:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-```
+```shell
 sudo -u dd-agent datadog-agent check <CHECK_NAME>
 ```
 
 If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
 
-```
+```shell
 sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 ```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-```
+```shell
 sudo -u dd-agent dd-agent check <CHECK_NAME>
 ```
 
 If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
 
-```
+```shell
 sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 ```
 
@@ -61,13 +61,13 @@ Run the following script, with the proper `<CHECK_NAME>`:
 
 For Agent versions >= 6.12:
 
-```
+```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
 ```
 
 For Agent versions <= 6.11:
 
-```
+```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
@@ -76,7 +76,7 @@ For Agent versions <= 6.11:
 
 The Agent install includes a file called `shell.exe` in your `Program Files` directory for the Datadog Agent. This file can be used to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, run the following in shell.exe:
 
-```
+```python
 from checks import run_check
 run_check('<CHECK_NAME>')
 ```
@@ -92,7 +92,7 @@ Run the following script, with the proper `<CHECK_NAME>`:
 
 For example, to run the disk check:
 
-```
+```powershell
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
 ```
 
@@ -107,13 +107,13 @@ For [systems using systemd][3], use `journalctl` to assist with debugging.
 {{% tab "Agent v6 & v7" %}}
 The following command shows the status of the Datadog Agent.
 
-```
+```shell
 sudo systemctl status datadog-agent
 ```
 
 If the Agent failed to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
 
-```
+```shell
 sudo journalctl -u datadog-agent.service
 ```
 
@@ -121,13 +121,13 @@ sudo journalctl -u datadog-agent.service
 {{% tab "Agent v5" %}}
 The following command shows the status of the Datadog Agent.
 
-```
+```shell
 sudo systemctl status dd-agent
 ```
 
 If the Agent failed to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
 
-```
+```shell
 sudo journalctl -u dd-agent.service
 ```
 

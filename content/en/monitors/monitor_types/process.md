@@ -50,8 +50,8 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 ## Further Reading
-{{< partial name="whats-next/whats-next.html" >}}
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process

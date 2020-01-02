@@ -45,7 +45,6 @@ Use [template variables][3] to save time switching the **from** tag on graphs in
 
 {{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Dashboard Template Variables"  style="width:80%;">}}
 
-
 [1]: /graphing/dashboards
 [2]: /graphing/event_stream
 [3]: /graphing/dashboards/template_variables
@@ -116,7 +115,6 @@ To filter monitors by [assigned tags][1], use the search bar or facet checkboxes
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
-
 [1]: /tagging/assigning_tags
 {{% /tab %}}
 
@@ -132,7 +130,6 @@ When creating a [monitor][1], use metric tags in the:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags"  style="width:80%;">}}
 
-
 [1]: /monitors/monitor_types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
@@ -140,7 +137,6 @@ When creating a [monitor][1], use metric tags in the:
 To filter [downtimes][1] by monitor tag, type the tag name in the search bar, for example `service:coffee-house`.
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
-
 
 [1]: /monitors/downtimes
 {{% /tab %}}
@@ -156,7 +152,6 @@ Use tags in the [Metrics Explorer][8] to filter metrics over tags or display mul
 
 Some integrations allow you to optionally limit metrics using tags.
 
-
 {{< tabs >}}
 {{% tab "AWS" %}}
 
@@ -166,13 +161,13 @@ These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`)
 
 The filters include resources where any whitelisted tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
 
-```
+```text
 datadog:monitored,env:production
 ```
 
 If you add a blacklisted tag, it takes precedence and forms an `AND` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored`, OR `env:production`, OR an `instance-type` tag with a `c1.*` value AND NOT a `region:us-east-1` tag:
 
-```
+```text
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
 
@@ -190,7 +185,7 @@ This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) 
 
 VMs matching a given tag can also be excluded by adding `!` before the tag, for example:
 
-```
+```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
@@ -204,12 +199,11 @@ This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VAL
 
 You can exclude hosts matching a given label by adding `!` before the tag, for example:
 
-```
+```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 Read more about GCP labeling in the [GCP documentation][2].
-
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
@@ -225,7 +219,6 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags"  style="width:80%;">}}
 
-
 [1]: /tracing/app_analytics/search
 [2]: /tracing/app_analytics/search/#search-bar
 {{% /tab %}}
@@ -234,7 +227,6 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [App Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags"  style="width:80%;">}}
-
 
 [1]: /tagging/assigning_tags
 [2]: /tracing/app_analytics/search

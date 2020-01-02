@@ -31,7 +31,7 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 The dedicated [widget JSON schema definition][1] for the image widget is:
 
-```
+```text
 IMAGE_SCHEMA = {
     "type": "object",
     "properties": {
@@ -45,13 +45,12 @@ IMAGE_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|yes|Type of the widget, for the image widget use `image`|
-|`url`|string|yes|URL of the image|
-|`sizing`|string|no|How to size the image on the widget. Available values are: `zoom`, `fit` or `center`
-|`margin`|string|no|Size of the margins around the image. Available values are: `small` or `large`
-
+| Parameter | Type   | Required | Description                                                                          |
+|-----------|--------|----------|--------------------------------------------------------------------------------------|
+| `type`    | string | yes      | Type of the widget, for the image widget use `image`                                 |
+| `url`     | string | yes      | URL of the image                                                                     |
+| `sizing`  | string | no       | How to size the image on the widget. Available values are: `zoom`, `fit` or `center` |
+| `margin`  | string | no       | Size of the margins around the image. Available values are: `small` or `large`       |
 
 ## Further Reading
 

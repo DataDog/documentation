@@ -11,7 +11,6 @@ Clicking on a [trace][1] opens a contextual panel that contains information abou
 
 {{< img src="tracing/faq/tracing_no_logs_in_trace.png" alt="Tracing missing logs"  style="width:90%;">}}
 
-
 ## What logs are displayed in the trace panel?
 
 When looking at a [trace][1], there are two types of logs that can be seen:
@@ -49,7 +48,6 @@ The idea is then on the log side to:
 For JSON logs, step 1 and 2 are done automatically. The tracer inject the [trace][1] and [span][2] id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][3].
 
 If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][4].
-
 
 
 [1]: /tracing/visualization/#trace

@@ -20,6 +20,7 @@ When adding limits to existing Azure tenants within the integration tile, the pr
 VMs with a running Agent still display and are included in billing. Using the limit option is only applicable to VMs without a running Agent.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][5] Manager.

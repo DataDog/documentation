@@ -33,6 +33,7 @@ Alert graphs are timeseries graphs showing the current status of any monitor def
     * Top list
 
 ### Options
+
 #### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
@@ -57,7 +58,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the alert graph widget is:
 
-```
+```text
 ALERT_GRAPH_SCHEMA = {
     "type": "object",
     "properties": {
@@ -71,12 +72,12 @@ ALERT_GRAPH_SCHEMA = {
 }
 ```
 
-| Parameter  | Type            | Required | Description                                                                                                                                                  |
-| ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the alert graph widget use `alert_graph`|
-| `alert_id`     | string          | yes      | ID of the alert to use in the widget|
-|`viz_type`|string|yes|Whether to display the Alert Graph as a timeseries or a top list. Available values are: `timeseries` or `toplist`
-|`title`|string|no|Title of the widget|
+| Parameter  | Type   | Required | Description                                                                                                       |
+|------------|--------|----------|-------------------------------------------------------------------------------------------------------------------|
+| `type`     | string | yes      | Type of the widget, for the alert graph widget use `alert_graph`                                                  |
+| `alert_id` | string | yes      | ID of the alert to use in the widget                                                                              |
+| `viz_type` | string | yes      | Whether to display the Alert Graph as a timeseries or a top list. Available values are: `timeseries` or `toplist` |
+| `title`    | string | no       | Title of the widget                                                                                               |
 
 ## Further Reading
 

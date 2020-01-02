@@ -19,9 +19,11 @@ Your tenant name is also available from the URL when using the [classic portal][
 {{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url"   style="width:70%">}}
 
 ### Unable to login
+
 If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][3]. When possible, attach a screenshot.
 
 ### Missing metrics
+
 Ensure you completed the installation process, which includes giving read permissions to the Azure application for the subscriptions you want to monitor.
 
 For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See **Enable Diagnostics** below for instructions.

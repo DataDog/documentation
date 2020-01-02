@@ -47,7 +47,7 @@ Additionally, individual users who activate the notification receive an email al
 
 Change events for dashboards with notifications enabled can be seen in the event stream by searching:
 
-```
+```text
 tags:audit,dash
 ```
 

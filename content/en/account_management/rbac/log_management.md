@@ -39,7 +39,7 @@ The following permissions can be granted to manage read access on subsets of log
 
 The following permissions can be granted to manage write access on various log-related account assets:
 
-* **logs_modify_indexes**: Grants a role the ability to modify log indexes. This includes setting inclusion filters for which logs should be routed into an index, limiting which roles have read access on that index (logs_read_index_data), and which roles can modify exclusion filters for that index (logs_write_exclusion_filters). This permission can be granted or revoked from a role via [the Roles API][3]. **Note:** This permission also grants read access on all log indexes and write permissions on all index exclusion filters, since any role that can modify indexes also can grant itself these additional permissions. 
+* **logs_modify_indexes**: Grants a role the ability to modify log indexes. This includes setting inclusion filters for which logs should be routed into an index, limiting which roles have read access on that index (logs_read_index_data), and which roles can modify exclusion filters for that index (logs_write_exclusion_filters). This permission can be granted or revoked from a role via [the Roles API][3]. **Note:** This permission also grants read access on all log indexes and write permissions on all index exclusion filters, since any role that can modify indexes also can grant itself these additional permissions.
 
 * **logs_write_exclusion_filters**: Grants a role the ability to create or modify exclusion filters within an index. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][2] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
@@ -68,7 +68,6 @@ To start limiting these permissions for existing users, create custom roles and 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /account_management/rbac/#out-of-the-box-roles
 [2]: https://app.datadoghq.com/logs/pipelines

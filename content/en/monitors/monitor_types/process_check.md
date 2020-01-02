@@ -71,8 +71,8 @@ See the [metric monitor][3] documentation for information on [No data][4], [Auto
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
-{{< partial name="whats-next/whats-next.html" >}}
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/process
 [2]: https://app.datadoghq.com/monitors#create/process

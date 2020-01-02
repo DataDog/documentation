@@ -241,8 +241,8 @@ The bottom part of the view includes additional information about the trace or a
 
 <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
-
 ## Leverage your custom span tags with App Analytics
+
 <div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>enabled App Analytics</a></div>
 
 4) **Navigate to the [Trace Search page][7]**.

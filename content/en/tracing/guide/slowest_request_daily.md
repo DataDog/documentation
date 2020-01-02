@@ -59,11 +59,9 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the Flamegraph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/visualization/#trace
 [2]: https://app.datadoghq.com/apm/services

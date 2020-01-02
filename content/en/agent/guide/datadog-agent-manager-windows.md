@@ -8,6 +8,7 @@ further_reading:
 ---
 
 ## Overview
+
 The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can be configured in your `datadog.yaml` file. Setting the port to `-1` disables the GUI. By default it is enabled on port 5002 for Windows and Mac and is disabled on Linux.
 
 ### Requirements
@@ -19,6 +20,7 @@ The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can 
 3. For security reasons, the GUI can only be accessed from the local network interface (localhost/127.0.0.1), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or container and access it from the host machine.
 
 ### Start the Datadog Agent Manager
+
 After the Agent is [installed][1] on your Windows host, start the Datadog Agent Manager to manage the Agent graphically.
 
 From the Windows start menu:
@@ -28,6 +30,7 @@ From the Windows start menu:
 * Choose `Run as Administrator`.
 
 From an elevated Powershell prompt:
+
 ```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
 ```
@@ -35,10 +38,13 @@ From an elevated Powershell prompt:
 The Datadog Agent Manager launches in your default web browser. The web address is `http://127.0.0.1:5002`.
 
 ## Options
+
 The following sections provide information on the options in the left navigation bar.
 
 ### Status
+
 #### General
+
 The general status page displays by default when launching the Datadog Agent Manager. It contains the following sections:
 
 | Section     | Description                                                                     |
@@ -55,7 +61,9 @@ The general status page displays by default when launching the Datadog Agent Man
 | DogStatsD   | Statistics on data sent with DogStatsD.                                         |
 
 #### Collector
+
 The collector status page displays details on the Agent's running checks, for example:
+
 ```text
 cpu
    Instance ID: cpu [OK]
@@ -67,7 +75,9 @@ cpu
 ```
 
 ### Log
+
 The log page displays the Agent logs being output to `agent.log`. Logs can be sorted by most recent or oldest first.
+
 ```text
 2019-07-10 17:46:04 EDT | INFO | (runner.go:246 in work) | Running check cpu
 2019-07-10 17:46:04 EDT | INFO | (runner.go:302 in work) | Done running check cpu
@@ -91,23 +101,29 @@ The log page displays the Agent logs being output to `agent.log`. Logs can be so
 ```
 
 ### Settings
+
 The settings page displays the contents of the Agent's main configuration file `datadog.yaml`. You can edit this file directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
 See the [sample config_template.yaml][2] for all available configuration options.
 
 ### Checks
+
 #### Manage checks
+
 The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
 To add a check, select **Add a Check** in the drop-down. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
 
 #### Checks summary
+
 The checks summary page displays a list of the checks running, number of instances for each check, and the check's status.
 
 ### Flare
+
 If you are having issues with the Agent, the flare page assists you with troubleshooting with the [Datadog support][4] team. Enter your ticket number (optional) and email address then click **Submit**. This transmits a copy of your Agent logs and config files to Datadog support. More information on flares is available in the [Agent Flare][5] documentation.
 
 ### Restart Agent
+
 Clicking **Restart Agent** from the left navigation bar restarts the Agent immediately. There is no page or confirmation prompt. After restarting the Agent, you are forwarded to the [general status](#general) page.
 
 ## Further Reading

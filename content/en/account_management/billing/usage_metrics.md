@@ -35,6 +35,7 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 {{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" >}}
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][1].
 
 For billing questions, contact your [Customer Success][2] Manager.

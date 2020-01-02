@@ -66,7 +66,6 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 [3]: /developers/metrics/dogstatsd_metrics_submission/#setup
@@ -107,7 +106,6 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
-
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
@@ -118,7 +116,6 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -136,7 +133,6 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the appropriate flags in your task definition][5].
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
@@ -147,13 +143,11 @@ In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the app
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -192,13 +186,11 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-
 [1]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -216,13 +208,11 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}

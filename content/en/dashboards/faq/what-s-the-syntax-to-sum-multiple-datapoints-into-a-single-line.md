@@ -7,15 +7,14 @@ aliases:
 
 Switch commas separating the queries into plus signs, from:
 
-```
+```text
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}
 *1024, sum:system.io.rkb_s{device: sdc}*1024"
 ```
 
 to:
 
-```
+```text
 "q": "sum:system.io.rkb_s{device:sda}*1024 + sum:system.io.rkb_s{device:sdb}
 *1024 + sum:system.io.rkb_s{device: sdc}*1024"
 ```
-

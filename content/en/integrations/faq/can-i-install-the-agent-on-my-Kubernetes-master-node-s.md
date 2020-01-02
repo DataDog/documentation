@@ -8,7 +8,8 @@ Yes!
 Since Kubernetes 1.6, the concept of [Taints and Tolerances][1] was introduced. Now rather than the master being off limits, it's tainted. If you add the required tolerance to the pod, it runs.
 
 Add the following to your Deployment (or Daemonset if you are running a multi-master setup):
-```
+
+```yaml
 spec:
  tolerations:
  - key: node-role.kubernetes.io/master

@@ -11,7 +11,7 @@ To allow Datadog to iFrame that URL, run a curl on that URL to check the value o
 
 Using `https://ozcruising.fogbugz.com/login` as an example:
 
-```
+```text
 curl -I -X GET https://ozcruising.fogbugz.com/login
 HTTP/1.1 200 OK
 Cache-Control: private
@@ -30,4 +30,3 @@ Set-Cookie: SERVERID=webny7; path=/
 This header is set on the OzCruising side, and is a security measure that is intended to tell browsers not to allow the page to be loaded in an iframe on another site.
 
 Reference: https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#Defending_with_X-Frame-Options_Response_Headers
-

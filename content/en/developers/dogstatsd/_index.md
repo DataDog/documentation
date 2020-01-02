@@ -95,7 +95,7 @@ $ go get github.com/DataDog/datadog-go/statsd
 
 The Java DataDog StatsD Client is distributed with maven central, and can be [downloaded from Maven][1]. Start by adding the following configuration to your `pom.xml`:
 
-```
+```xml
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
@@ -109,7 +109,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 
 Add the following to your `composer.json`:
 
-```
+```text
 "datadog/php-datadogstatsd": "1.4.*"
 ```
 

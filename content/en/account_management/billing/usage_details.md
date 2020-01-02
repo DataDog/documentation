@@ -8,7 +8,8 @@ kind: documentation
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
 `Plan & Usage`--> `Usage`.
 
-The Usage page provides the following information.
+The Usage page provides the following information:
+
 * Month-to-Date Summary
 * Overall Usage (current and historical)
 * Top 500 Custom Metrics
@@ -57,7 +58,6 @@ This table shows the break-down of the **Infra Hosts** graph above by host type:
 
 {{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" >}}
 
-
 ### Top 500 Custom Metrics
 
 This table lists the following information about your Top 500 custom metrics month-to-date usage:
@@ -71,8 +71,8 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" >}}
 
-
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][3].
 
 For billing questions, contact your [Customer Success][4] Manager.

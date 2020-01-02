@@ -84,7 +84,6 @@ Service check monitors for out-of-the-box Datadog integrations can be set in the
 
 Learn how to write an integration with the [integration developer documentation][5].
 
-
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom

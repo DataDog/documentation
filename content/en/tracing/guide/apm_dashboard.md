@@ -123,7 +123,6 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

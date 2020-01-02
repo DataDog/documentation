@@ -33,6 +33,7 @@ The top list visualization enables you to display a list of Tag value like `host
 2. Optional: configure conditional formatting depending on your entries' values.
 
 ### Options
+
 #### Global time
 
 On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
@@ -49,7 +50,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the top list widget is:
 
-```
+```text
 TOPLIST_SCHEMA = {
     "type": "object",
     "properties": {
@@ -73,10 +74,9 @@ TOPLIST_SCHEMA = {
 | `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string           | no       | Title of your widget.                                                                                                                                        |
 
-
 Additional properties allowed in the `request` object:
 
-```
+```text
 {
    "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
 }
@@ -85,7 +85,6 @@ Additional properties allowed in the `request` object:
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 |-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-
 
 ## Further Reading
 

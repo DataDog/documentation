@@ -52,6 +52,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
     {{< nextlink href="account_management/billing/rum/" >}}Real User Moniotring FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
 {{< /whatsnext >}}

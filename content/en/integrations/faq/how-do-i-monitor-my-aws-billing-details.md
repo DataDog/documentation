@@ -16,7 +16,6 @@ To begin collecting billing metrics:
 
 The following metrics are available using the Datadog-AWS Billing integration:
 
-
 | Name                            | Units   | Description                                                                                                                                        |
 | -----                           | ------  | ------                                                                                                                                             |
 | `aws.billing.actual_spend`      | dollars | The actual spending costs for your budget period                                                                                                   |

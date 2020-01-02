@@ -13,7 +13,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 {{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                              |
-| :--------                            | :--------                            |
+|:-------------------------------------|:-------------------------------------|
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
@@ -27,12 +27,11 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
 | Windows Server 2003, XP or older     | *unsupported platform*               |
 
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform                             | Command                                                                    |
-| :--------                            | :-----                                                                     |
+|:-------------------------------------|:---------------------------------------------------------------------------|
 | Linux                                | `/etc/dd-agent/datadog.conf`                                               |
 | CentOS                               | `/etc/dd-agent/datadog.conf`                                               |
 | Debian                               | `/etc/dd-agent/datadog.conf`                                               |
@@ -58,7 +57,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 {{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                        |
-| :--------                            | :--------                      |
+|:-------------------------------------|:-------------------------------|
 | AIX                                  | `/etc/datadog-agent/conf.d/`   |
 | Linux                                | `/etc/datadog-agent/conf.d/`   |
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
@@ -76,7 +75,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 An example for each Agent check configuration files can be found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` in order to enable the associated check. Note that the Agent loads any valid YAML file contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
-```
+```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
@@ -84,7 +83,7 @@ An example for each Agent check configuration files can be found in the `conf.ya
 
 Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 
-```
+```text
 /etc/datadog-agent/conf.d/redisdb.d/
 ├── auto_conf.yaml
 └── conf.yaml.example
@@ -92,13 +91,13 @@ Autodiscovery template files are stored in the configuration folder with the `au
 
 **Note**: For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
-To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform                             | Command                                                              |
-| :--------                            | :-----                                                               |
+|:-------------------------------------|:---------------------------------------------------------------------|
 | Linux                                | `/etc/dd-agent/conf.d/`                                              |
 | CentOS                               | `/etc/dd-agent/conf.d/`                                              |
 | Debian                               | `/etc/dd-agent/conf.d/`                                              |
