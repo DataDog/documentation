@@ -18,7 +18,7 @@ further_reading:
 
 After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
-```
+```text
 event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <SOURCE_TYPE_NAME>, <ALERT_TYPE>, <TAGS>)
 ```
 

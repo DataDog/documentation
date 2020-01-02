@@ -51,7 +51,6 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-
 [1]: /monitors/monitor_types/anomaly
 {{% /tab %}}
 {{% tab "Outliers" %}}
@@ -62,7 +61,6 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-
 [1]: /monitors/monitor_types/outlier
 {{% /tab %}}
 {{% tab "Forecast" %}}
@@ -72,7 +70,6 @@ A forecast alert predicts the future behavior of a metric and compares it to a s
 On each alert evaluation, a forecast alert predicts the future values of the metric along with the expected deviation bounds. An alert is triggered when any part of the bounds crosses the configured threshold.
 
 For more detailed information, see the [Forecast Monitor][1] page.
-
 
 [1]: /monitors/monitor_types/forecasts
 {{% /tab %}}

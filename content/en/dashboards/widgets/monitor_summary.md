@@ -42,6 +42,7 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
     **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors page][2].
 
 ## Options
+
 #### Display preferences
 
 Choose to show only the `Count` of monitors per monitor status type, a `List` of monitors, or `Both`. The `Text` and `Background` options specify whether the status colors should be applied to the text or background of the Status Counts. The `Hide empty Status Counts` option, when enabled, only shows the Status Counts for statuses that have more than zero monitors in the result list.
@@ -64,7 +65,7 @@ You can optionally define the title’s size and alignment.
 
 The dedicated [widget JSON schema definition][3] for the monitor summary widget is:
 
-```
+```text
 MANAGE_STATUS_SCHEMA = {
     "type": "object",
     "properties": {

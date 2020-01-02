@@ -92,6 +92,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 **Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the [Services page][4]).
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/metric

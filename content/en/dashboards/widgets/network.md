@@ -16,8 +16,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The network widget supplements the [Network Performance Monitoring][1] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between services, hosts, containers, and any other Datadog tag. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data. 
-
+The network widget supplements the [Network Performance Monitoring][1] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between services, hosts, containers, and any other Datadog tag. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data.
 
 {{< img src="graphing/widgets/network/network_1.png" alt="Image" responsive="true" width="80%" >}}
 
@@ -49,7 +48,7 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 The dedicated [widget JSON schema definition][2] for the network widget is:
 
-```
+```text
 {
   "viz": "timeseries",
   "requests": [
@@ -85,7 +84,6 @@ The dedicated [widget JSON schema definition][2] for the network widget is:
   "autoscale": true
 }
 ```
-
 
 ## Further Reading
 

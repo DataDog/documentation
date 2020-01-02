@@ -37,6 +37,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 2. Customize your graph with the available [options](#options).
 
 ### Options
+
 #### Line graphs
 
 Line graphs include two additional parameters:
@@ -107,7 +108,7 @@ See [Explore your data in full-screen graph mode][9], to learn more.
 
 The dedicated [widget JSON schema definition][10] for the timeseries widget is:
 
-```
+```text
 TIMESERIES_SCHEMA = {
     "type": "object",
     "properties": {
@@ -142,28 +143,28 @@ Additional properties allowed in each `request` object:
 
 ```json
 {
-    "style": {
-        "type": "object",
-        "properties": {
-            "palette":    {"type": "string"},
-            "line_type":  {"enum": ["dashed", "dotted", "solid"]},
-            "line_width": {"enum": ["normal", "thick", "thin"]}
-        },
-        "additionalProperties": false
+  "style": {
+    "type": "object",
+    "properties": {
+      "palette": {"type": "string"},
+      "line_type": {"enum": ["dashed", "dotted", "solid"]},
+      "line_width": {"enum": ["normal", "thick", "thin"]}
     },
-    "metadata": {
-        "type": "array",
-        "items": {
-            "type": "object",
-            "properties": {
-                "expression": {"type": "string"},
-                "alias_name": {"type": "string"}
-            },
-            "required": ["expression"],
-            "additionalProperties": false
-        }
-    },
-    "display_type": {"enum": ["area", "bars", "line"]}
+    "additionalProperties": false
+  },
+  "metadata": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "expression": {"type": "string"},
+        "alias_name": {"type": "string"}
+      },
+      "required": ["expression"],
+      "additionalProperties": false
+    }
+  },
+  "display_type": {"enum": ["area", "bars", "line"]}
 }
 ```
 
@@ -178,7 +179,6 @@ Additional properties allowed in each `request` object:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard

@@ -8,7 +8,8 @@ aliases:
 If you want to visualize how a metric's values have changed in comparison to an earlier time period, do so by leveraging the Timeshift functions [detailed in the Timeshift function documentation][1]. You can capture a metric's value from an hour, day, week, or month before.
 
 To calculate this, you can create a query such as this:
-```
+
+```text
 ((current_value - old_value) / old_value) * 100
 ```
 

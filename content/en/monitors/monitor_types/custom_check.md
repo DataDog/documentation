@@ -78,7 +78,8 @@ See the [metric monitor][6] documentation for information on [No data][7], [Auto
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
 
-## Further Reading 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations

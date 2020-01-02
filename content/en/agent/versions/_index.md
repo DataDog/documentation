@@ -13,7 +13,6 @@ further_reading:
   text: "Agent v6 Changes"
 ---
 
-
 ## Changes between major Agent versions
 
 {{< tabs >}}
@@ -62,7 +61,6 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 * [Prometheus OpenMetrics is supported natively][7].
 
 * [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
-
 
 
 [1]: /agent/#agent-architecture

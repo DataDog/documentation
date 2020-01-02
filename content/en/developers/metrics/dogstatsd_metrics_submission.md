@@ -817,11 +817,11 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 | Method                                                | Datadog Storage type                                                                                          |
 |-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
 
 #### Code examples
 
-The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][11] documentation.
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][10] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1037,6 +1037,7 @@ DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1118,6 +1119,5 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [6]: /developers/metrics/types/?tab=set#metric-type-definition
 [7]: /developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /help
-[10]: /graphing/metrics/distributions
-[11]: /developers/metrics/types/?tab=distribution#metric-type-definition
+[9]: /graphing/metrics/distributions
+[10]: /developers/metrics/types/?tab=distribution#metric-type-definition

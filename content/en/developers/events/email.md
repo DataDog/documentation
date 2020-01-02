@@ -82,17 +82,19 @@ The subject of the Email becomes the title of the event and the body of the Emai
 ### Markdown
 
 Datadog event text supports [Markdown][4] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`:
+
 ```json
 {
-      "title": "Did you hear the news today?",
-      "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
-      "priority": "normal",
-      "tags": ["environment:test"],
-      "alert_type": "info"
+  "title": "Did you hear the news today?",
+  "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
+  "priority": "normal",
+  "tags": ["environment:test"],
+  "alert_type": "info"
 }
 ```
 
 If you are embedding a link in a Markdown block, make sure the URL is encoded properly:
+
 ```text
 # Not encoded
 http://catchpoint.com/session_id:123456

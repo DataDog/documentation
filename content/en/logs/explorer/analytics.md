@@ -41,7 +41,6 @@ From an analytics visualization, you can, additionally:
 
 Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
 
-
 ## Build an analytics query
 
 Use the query to control what's displayed in your Log Analytics:
@@ -65,7 +64,6 @@ Use the query to control what's displayed in your Log Analytics:
   Changing the global timeframe changes the list of available Timesteps values.
 
     {{< img src="logs/explorer/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
-
 
 ## Visualizations
 
@@ -99,7 +97,6 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
-
 [1]: /logs/explorer/?tab=measures#setup
 [2]: /logs/explorer/?tab=facets#setup
 {{% /tab %}}
@@ -112,7 +109,6 @@ The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
-
 
 [1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/?tab=measures#setup

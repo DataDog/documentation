@@ -51,8 +51,8 @@ Additionally, you can define log or APM template variables based on [log][2] or 
 
 {{< img src="graphing/dashboards/template_variables/default_view.png" alt="Default Saved View" responsive="true" style="width:85%;">}}
 
-To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view. 
-To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables. 
+To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view.
+To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
 
 #### Delete
 
@@ -62,7 +62,7 @@ To delete a view, click on the saved views dropdown and choose *Manage views...*
 
 #### Modify
 
-To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view. 
+To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
 
 ## Use
 
@@ -95,7 +95,7 @@ Values from dashboard template variables can be directly captured by using the `
 
 From your dashboard, search the event stream with template variables using the format:
 
-```
+```text
 tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 ```
 
@@ -111,7 +111,7 @@ Use commas to search using multiple template variables, for example: `tags:role:
 
 From your widgets, overlay the timing of the events using template variables with the format:
 
-```
+```text
 tags:$<TEMPLATE_VARIABLE_NAME>
 ```
 

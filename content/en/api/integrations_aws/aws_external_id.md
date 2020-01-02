@@ -11,7 +11,6 @@ Generate a new AWS external id for a given AWS account id and role name pair.
 
 **ARGUMENTS**:
 
-
 * **`account_id`** [*required*]:
 
     Your AWS Account ID without dashes.

@@ -28,13 +28,13 @@ The `default_zero` function is intended to address the following use cases (thou
 
 To demonstrate how the `default_zero` function works, consider this single point created for a custom metric [using DogStatsD][3]:
 
-```
+```text
 $ echo -n "custom_metric:1|g" | nc -4u -w0 127.0.0.1 8125
 ```
 
 When this metric is queried over the past 30 minutes, there is a single timestamp, because only one of the query's rollup intervals has a point:
 
-```
+```text
 avg:custom_metric{*}
 
 +---------------------+---------------+
@@ -47,7 +47,7 @@ avg:custom_metric{*}
 
 The `default_zero` function interpolates this point five minutes forward in time (the default interpolation limit for gauges), then fills the remaining empty intervals with zeros:
 
-```
+```text
 default_zero(avg:custom_metric{*})
 
 +---------------------+-----------------------------+

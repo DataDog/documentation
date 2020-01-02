@@ -28,7 +28,6 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 
 Discover the full list of [Datadog open-source projects at GitHub][5].
 
-
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
 [3]: https://datadog.zoom.us/j/312430886
