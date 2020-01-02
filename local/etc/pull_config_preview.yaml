@@ -94,3 +94,24 @@
         front_matters:
           title: Datadog-Amazon CloudFormation
           kind: documentation
+
+  - repo_name: dd-sdk-android
+    contents:
+    - action: pull-and-push-file
+      branch: gus/doc-update
+      globs:
+      - 'docs/log_collection.md'
+      options:
+        dest_path: '/logs/log_collection/'
+        file_name: 'android.md'
+        front_matters:
+          title: Android Log Collection
+          kind: documentation
+          description: "Collect logs from your Android applications."
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "logs/explorer"
+              tag: "Documentation"
+              text: "Learn how to explore your logs"
