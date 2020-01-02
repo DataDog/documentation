@@ -14,7 +14,7 @@ This endpoint allows searching for hosts by name, alias, or tag. Hosts live with
 **ARGUMENTS**:
 
 * **`filter`** [*optional*, *default*=**None**]:
-    Query string to filter search results.
+    Query string to filter search results, for instance: `host:<HOSTNAME>`.
 * **`sort_field`** [*optional*, *default*=**cpu**]:
     Sort hosts by the given field.
     Options: **status**, **apps**, **cpu**, **iowait**, **load**
