@@ -37,9 +37,9 @@ Datadog accepts a wide range of **metric submission types**:
 
 When data is received, the submitted metric type is mapped to one of three in-app **Stored Metric Types**. Datadog stores metric data under the following canonical types:
 
-* [COUNT](?tab=count#metric-storage-type)
-* [RATE](?tab=rate#metric-storage-type)
-* [GAUGE](?tab=gauge#metric-storage-type)
+* [COUNT](?tab=count#metric-storage-types)
+* [RATE](?tab=rate#metric-storage-types)
+* [GAUGE](?tab=gauge#metric-storage-types)
 
 A metric's type is displayed on the details sidepanel for the given metric on the [Metrics Summary page][2].
 
@@ -76,7 +76,6 @@ Discover how to submit count metrics:
 | [Agent check][4]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
 
 **Note**: When a `COUNT` metric is submited through DogStatsD, it's stored as a `RATE` within Datadog. This is to ensure relevant comparasion accross different Agent. As a consequence, StatsD counts might show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
-
 
 [1]: /api/?lang=python#post-timeseries-points
 [2]: /developers/metrics/dogstatsd_metrics_submission/#count
@@ -237,7 +236,7 @@ Discover how to submit set metrics:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metric storage type
+## Metric storage types
 
 To better understand the impact of the different stored metrics types, what they represent, and how to modify them within Datadog, consider the following example:
 
