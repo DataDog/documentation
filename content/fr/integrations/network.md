@@ -64,6 +64,8 @@ sudo modprobe nf_conntrack_ipv6
 
         ## @param collect_connection_state - boolean - required
         ## Set to true to collect connection states for your interfaces
+        ## Note: this will require either the command `ss` from system package `iproute2` or
+        ## the command `netstat` from the system package `net-tools` to be installed
         #
         - collect_connection_state: false
     ```
@@ -80,7 +82,7 @@ Linux : configurez la règle sudoers suivante pour garantir le bon fonctionneme
 dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
 ```
 
-Kubernetes : pour les versions antérieures à 1.11, les métriques conntrack sont disponibles par défaut. Pour la version 1.11 et les versions ultérieures, elles sont disponibles lorsque vous utilisez le mode `host` networking.
+Kubernetes : pour les versions antérieures à 1.11, les métriques conntrack sont disponibles par défaut. Pour la version 1.11 et les versions ultérieures, elles sont disponibles lorsque vous utilisez le mode de mise en réseau `host`.
 
 ### Validation
 

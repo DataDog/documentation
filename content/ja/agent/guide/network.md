@@ -76,7 +76,7 @@ further_reading:
 Agent のすべての機能を利用するには、以下のポートを開きます。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * **アウトバウンド**:
 

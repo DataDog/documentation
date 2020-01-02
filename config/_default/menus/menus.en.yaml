@@ -65,16 +65,42 @@ main:
     parent: "getting_started_collect_traces"
     weight: 501
 
+  ## GETTING STARTED - API
+
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
     weight: 6
 
+  ## GETTING STARTED - Traces
+
+  - name: "Synthetics"
+    identifier: "getting_started_synthetics"
+    url: "getting_started/synthetics/"
+    parent: "getting_started"
+    weight: 7opl
+  - name: "Private Location"
+    identifier: "getting_started_private_location"
+    url: "getting_started/synthetics/private_location"
+    parent: "getting_started_synthetics"
+    weight: 701
+  - name: "Browser Test"
+    identifier: "getting_started_browser_test"
+    url: "getting_started/synthetics/browser_test"
+    parent: "getting_started_synthetics"
+    weight: 702
+  - name: "API Test"
+    identifier: "getting_started_api_test"
+    url: "getting_started/synthetics/api_test"
+    parent: "getting_started_synthetics"
+    weight: 703
+
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 7
+    weight: 8
+
 
 #############
 ## TAGGING ##
@@ -417,193 +443,208 @@ main:
     pre: "nav_watchdog"
     weight: 50000
 
-##############
-## GRAPHING ##
-##############
-
-  - name: "Graphing"
-    url: "graphing/"
-    pre: "nav_graphing"
-    identifier: "graphing"
-    weight: 60000
-
-  - name: "Using Graphs"
-    url: "graphing/using_graphs/"
-    parent: "graphing"
-    identifier: "graphing_using_graphs"
-    weight: 1
-
-  ## GRAPHING - Dashboards
-
-  - name: "Dashboards"
-    url: "graphing/dashboards/"
-    parent: "graphing"
-    identifier: "graphing_dashboards"
-    weight: 2
-  - name: "Screenboard"
-    url: "graphing/dashboards/screenboard/"
-    parent: "graphing_dashboards"
-    weight: 201
-  - name: "Timeboard"
-    url: "graphing/dashboards/timeboard/"
-    parent: "graphing_dashboards"
-    weight: 202
-  - name: "Template Variables"
-    url: "graphing/dashboards/template_variables/"
-    parent: "graphing_dashboards"
-    weight: 203
-    identifier: "graphing_dashboards_temp_variables"
-  - name: "Shared Graphs"
-    url: "graphing/dashboards/shared_graph/"
-    parent: "graphing_dashboards"
-    weight: 204
-
-  ## GRAPHING - Metrics
-
-  - name: "Metrics"
-    url: "graphing/metrics/"
-    parent: "graphing"
-    identifier: "graphing_metrics"
-    weight: 3
-  - name: "Introduction"
-    url: "graphing/metrics/introduction/"
-    parent: "graphing_metrics"
-    weight: 301
-  - name: "Explorer"
-    url: "graphing/metrics/explorer/"
-    parent: "graphing_metrics"
-    weight: 302
-  - name: "Summary"
-    url: "graphing/metrics/summary/"
-    parent: "graphing_metrics"
-    weight: 303
-  - name: "Distributions"
-    url: "graphing/metrics/distributions/"
-    parent: "graphing_metrics"
-    identifier: "graphing_metrics_distributions"
-    weight: 304
-
-  - name: "Metric Correlations"
-    url: "graphing/correlations/"
-    parent: "graphing"
-    weight: 4
-
-  - name: "Notebooks"
-    url: "graphing/notebooks/"
-    parent: "graphing"
-    weight: 5
+############
+## EVENTS ##
+############
 
   - name: "Events"
-    url: "graphing/event_stream/"
-    parent: "graphing"
+    url: "events/"
+    identifier: "events_top_level"
+    pre: "nav_events"
+    weight: 60000
+
+################
+## DASHBOARDS ##
+################
+
+  - name: "Dashboards"
+    url: "dashboards/"
+    pre: "nav_dashboards"
+    identifier: "dashboards"
+    weight: 70000
+
+  - name: "Screenboards"
+    url: "dashboards/screenboards/"
+    parent: "dashboards"
+    weight: 1
+
+  - name: "Timeboards"
+    url: "dashboards/timeboards/"
+    parent: "dashboards"
+    weight: 2
+
+  - name: "Widgets"
+    url: "dashboards/widgets/"
+    parent: "dashboards"
+    weight: 3
+
+  - name: "Querying"
+    url: "dashboards/querying/"
+    parent: "dashboards"
+    weight: 4
+
+  ## DASHBOARDS - Functions
+
+  - name: "Functions"
+    url: "dashboards/functions/"
+    parent: "dashboards"
+    identifier: "dashboards_functions"
+    weight: 5
+  - name: "Algorithms"
+    url: "dashboards/functions/algorithms/"
+    parent: "dashboards_functions"
+    weight: 501
+  - name: "Arithmetic"
+    url: "dashboards/functions/arithmetic/"
+    parent: "dashboards_functions"
+    weight: 502
+  - name: "Count"
+    url: "dashboards/functions/count/"
+    parent: "dashboards_functions"
+    weight: 503
+  - name: "Interpolation"
+    url: "dashboards/functions/interpolation/"
+    parent: "dashboards_functions"
+    weight: 504
+  - name: "Rank"
+    url: "dashboards/functions/rank/"
+    parent: "dashboards_functions"
+    weight: 505
+  - name: "Rate"
+    url: "dashboards/functions/rate/"
+    parent: "dashboards_functions"
+    weight: 506
+  - name: "Regression"
+    url: "dashboards/functions/regression/"
+    parent: "dashboards_functions"
+    weight: 507
+  - name: "Rollup"
+    url: "dashboards/functions/rollup/"
+    parent: "dashboards_functions"
+    weight: 508
+  - name: "Smoothing"
+    url: "dashboards/functions/smoothing/"
+    parent: "dashboards_functions"
+    weight: 509
+  - name: "Timeshift"
+    url: "dashboards/functions/timeshift/"
+    parent: "dashboards_functions"
+    weight: 510
+  - name: "Beta"
+    url: "dashboards/functions/beta/"
+    parent: "dashboards_functions"
+    weight: 511
+
+  - name: "Correlations"
+    url: "dashboards/correlations/"
+    parent: "dashboards"
     weight: 6
 
-  ## GRAPHING - Infrastructure
-
-  - name: "Infrastructure"
-    url: "graphing/infrastructure/"
-    parent: "graphing"
-    identifier: "graphing_infrastructure"
+  - name: "Template Variables"
+    url: "dashboards/template_variables/"
+    parent: "dashboards"
     weight: 7
-  - name: "Container Map"
-    url: "graphing/infrastructure/containermap/"
-    parent: "graphing_infrastructure"
-    weight: 701
-  - name: "Host Map"
-    url: "graphing/infrastructure/hostmap/"
-    parent: "graphing_infrastructure"
-    weight: 702
-  - name: "Live Containers"
-    url: "graphing/infrastructure/livecontainers/"
-    parent: "graphing_infrastructure"
-    weight: 703
-  - name: "Live Processes"
-    url: "graphing/infrastructure/process/"
-    parent: "graphing_infrastructure"
-    weight: 704
-  - name: "Serverless"
-    url: "graphing/infrastructure/serverless/"
-    parent: "graphing_infrastructure"
-    weight: 706
+    identifier: "dashboards_temp_variables"
 
-  ## GRAPHING - Functions
-
-  - name: "From the query to the graph "
-    url: "graphing/functions/"
-    parent: "graphing"
-    identifier: "graphing_functions"
+  - name: "Sharing"
+    url: "dashboards/sharing/"
+    parent: "dashboards"
     weight: 8
-  - name: "Algorithms"
-    url: "graphing/functions/algorithms/"
-    parent: "graphing_functions"
-    weight: 801
-  - name: "Arithmetic"
-    url: "graphing/functions/arithmetic/"
-    parent: "graphing_functions"
-    weight: 802
-  - name: "Count"
-    url: "graphing/functions/count/"
-    parent: "graphing_functions"
-    weight: 803
-  - name: "Interpolation"
-    url: "graphing/functions/interpolation/"
-    parent: "graphing_functions"
-    weight: 804
-  - name: "Rank"
-    url: "graphing/functions/rank/"
-    parent: "graphing_functions"
-    weight: 805
-  - name: "Rate"
-    url: "graphing/functions/rate/"
-    parent: "graphing_functions"
-    weight: 806
-  - name: "Regression"
-    url: "graphing/functions/regression/"
-    parent: "graphing_functions"
-    weight: 807
-  - name: "Rollup"
-    url: "graphing/functions/rollup/"
-    parent: "graphing_functions"
-    weight: 808
-  - name: "Smoothing"
-    url: "graphing/functions/smoothing/"
-    parent: "graphing_functions"
-    weight: 809
-  - name: "Timeshift"
-    url: "graphing/functions/timeshift/"
-    parent: "graphing_functions"
-    weight: 810
-  - name: "Beta"
-    url: "graphing/functions/beta/"
-    parent: "graphing_functions"
-    weight: 811
 
   ## GRAPHING - Graphing JSON
 
   - name: "Graphing with JSON"
-    url: "graphing/graphing_json/"
-    parent: "graphing"
+    url: "dashboards/graphing_json/"
+    parent: "dashboards"
     identifier: "graphing_json"
     weight: 9
 
   - name: "Widget JSON schema"
-    url: "graphing/graphing_json/widget_json/"
+    url: "dashboards/graphing_json/widget_json/"
     parent: "graphing_json"
     weight: 901
   - name: "Request JSON schema"
-    url: "graphing/graphing_json/request_json/"
+    url: "dashboards/graphing_json/request_json/"
     parent: "graphing_json"
     weight: 902
 
-  - name: "Widgets"
-    url: "graphing/widgets/"
-    parent: "graphing"
-    weight: 10
+####################
+## INFRASTRUCTURE ##
+####################
 
-  - name: "Guides"
-    url: "graphing/guide/"
-    parent: "graphing"
-    weight: 11
+  - name: "Infrastructure"
+    url: "infrastructure/"
+    identifier: "infrastructure"
+    pre: "nav_infrastructure"
+    weight: 80000
+
+  - name: "Infrastructure List"
+    url: "infrastructure/list/"
+    parent: "infrastructure"
+    weight: 2
+
+  - name: "Host Map"
+    url: "infrastructure/hostmap/"
+    parent: "infrastructure"
+    weight: 3
+
+  - name: "Container Map"
+    url: "infrastructure/containermap/"
+    parent: "infrastructure"
+    weight: 4
+
+  - name: "Live Processes"
+    url: "infrastructure/process/"
+    parent: "infrastructure"
+    weight: 5
+
+  - name: "Live Containers"
+    url: "infrastructure/livecontainers/"
+    parent: "infrastructure"
+    weight: 6
+
+  - name: "Serverless"
+    url: "infrastructure/serverless/"
+    parent: "infrastructure"
+    weight: 7
+
+#############
+## METRICS ##
+#############
+
+  - name: "Metrics"
+    url: "metrics/"
+    identifier: "metrics_top_level"
+    pre: "nav_metrics"
+    weight: 90000
+
+  - name: "Introduction"
+    url: "metrics/introduction/"
+    parent: "metrics_top_level"
+    weight: 901
+  - name: "Explorer"
+    url: "metrics/explorer/"
+    parent: "metrics_top_level"
+    weight: 902
+  - name: "Summary"
+    url: "metrics/summary/"
+    parent: "metrics_top_level"
+    weight: 903
+  - name: "Distributions"
+    url: "metrics/distributions/"
+    parent: "metrics_top_level"
+    identifier: "metrics_distributions"
+    weight: 904
+
+#############
+## NOTEBOOKS ##
+#############
+
+  - name: "Notebooks"
+    url: "notebooks/"
+    identifier: "notebooks"
+    pre: "nav_notebooks"
+    weight: 100000
 
 ##############
 ## ALERTING ##
@@ -613,7 +654,7 @@ main:
     url: "monitors/"
     pre: "nav_alerting"
     identifier: "alerting"
-    weight: 70000
+    weight: 110000
 
   ## ALERTING - Monitor Types
 
@@ -746,7 +787,7 @@ main:
     url: "tracing/"
     pre: "nav_tracing"
     identifier: "tracing"
-    weight: 80000
+    weight: 120000
 
   ## TRACING - Enable tracing
 
@@ -917,7 +958,7 @@ main:
     url: "logs/"
     pre: "nav_logs"
     identifier: "log_management"
-    weight: 90000
+    weight: 130000
 
   ## LOGS -  Log Collection
 
@@ -1080,7 +1121,7 @@ main:
     url: "synthetics/"
     pre: "nav_synthetics"
     identifier: "synthetics"
-    weight: 100000
+    weight: 140000
 
   - name: "API Tests"
     url: "synthetics/api_tests/"
@@ -1137,7 +1178,7 @@ main:
     url: "real_user_monitoring/"
     pre: "nav_rum"
     identifier: "rum"
-    weight: 110000
+    weight: 150000
 
   ## RUM - Installation
 
@@ -1219,7 +1260,7 @@ main:
     url: "network_performance_monitoring/"
     pre: "nav_network"
     identifier: "npm"
-    weight: 120000
+    weight: 160000
 
   - name: "Installation"
     url: "network_performance_monitoring/installation"
@@ -1245,7 +1286,7 @@ main:
     url: "developers/"
     pre: "nav_developers"
     identifier: "dev_tools"
-    weight: 130000
+    weight: 170000
 
   - name: "DogStatsD"
     url: "developers/dogstatsd/"
@@ -1435,7 +1476,7 @@ main:
     url: "api/"
     pre: "nav_api"
     identifier: "api"
-    weight: 140000
+    weight: 180000
 
 ########################
 ## ACCOUNT MANAGEMENT ##
@@ -1445,7 +1486,7 @@ main:
     url: "account_management/"
     pre: "nav_account"
     identifier: "account_management"
-    weight: 150000
+    weight: 190000
 
   - name: "Team management"
     url: "account_management/team/"
@@ -1521,7 +1562,7 @@ main:
     url: "security/"
     pre: "nav_security"
     identifier: "security"
-    weight: 160000
+    weight: 200000
 
   - name: "Agent"
     url: "security/agent/"
@@ -1543,16 +1584,6 @@ main:
     parent: "security"
     weight: 4
 
-##############
-## GLOSSARY ##
-##############
-
-  - name: "Glossary"
-    url: "glossary/"
-    pre: "nav_glossary"
-    identifier: "glossary_top_level"
-    weight: 170000
-
 ##########
 ## HELP ##
 ##########
@@ -1561,4 +1592,4 @@ main:
     url: "help/"
     pre: "nav_help"
     identifier: "help_top_level"
-    weight: 180000
+    weight: 210000

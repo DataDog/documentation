@@ -3,16 +3,20 @@
   'host_list': [
     {
       'name': 'i-deadbeef',
-      'up': True,
-      'is_muted': False,
-      "last_reported_time": 1560000000,
+      'up': true,
+      'is_muted': false,
+      'last_reported_time': 1560000000,
       'apps': [
         'agent'
       ],
-      'tags_by_source': {
-        'Datadog': [
-          'host:i-deadbeef'
+      'tags': {
+        'role:database': [
+          'test.example.com.host'
         ],
+        'env:test': [
+            'test.metric.host'
+        ]
+      },
         'Amazon Web Services': [
           'account:staging'
         ]
@@ -23,6 +27,13 @@
         'iowait': 3.2,
         'cpu': 99.0
       },
+      'maintenance': [
+        {
+          'code': 'instance-stop',
+          'description': 'The instance is running on degraded hardware',
+          'not_before': '2020-01-03 00:00:00' 
+        }
+      ],
       'sources': [
         'aws',
         'agent'

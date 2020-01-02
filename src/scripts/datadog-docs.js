@@ -376,7 +376,9 @@ $(document).ready(function () {
                         }
 
                         // scroll to top
-                        $("html, body").scrollTop(0);
+                        if (!$('.api').length) {
+                            $("html, body").scrollTop(0);
+                        }
                     }
 
                     // init page nums

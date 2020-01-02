@@ -18,7 +18,7 @@ further_reading:
 Agent のフルデバッグモードを有効にするには
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. ローカル `datadog.yaml` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][8]をご参照ください。
 
@@ -51,7 +51,7 @@ Agent のフルデバッグモードを有効にするには
 ## コンテナ化された Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 **Agent が起動したら `DD_LOG_LEVEL=debug` 環境変数を設定します。**
 
