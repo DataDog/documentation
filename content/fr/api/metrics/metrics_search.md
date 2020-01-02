@@ -1,7 +1,7 @@
 ---
 title: Rechercher des métriques
 type: apicontent
-order: 25.6
+order: 26.6
 external_redirect: '/api/#rechercher-des-metriques'
 ---
 ## Rechercher des métriques

@@ -33,15 +33,12 @@ If you have read the [first example of tracing][1] and want understand how traci
 * Response:
     ```json
     {
-        "technology": {
-            "error": false,
-            "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
-            "author": "Richard Feynman"
-        },
-        "foo_bar": {
-            "error": true,
-            "reason": "Subject unknown"
-        }
+      "technology": {
+        "error": false,
+        "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
+        "author": "Richard Feynman"
+      },
+      "foo_bar": {"error": true, "reason": "Subject unknown"}
     }
     ```
 
@@ -163,7 +160,7 @@ From the above image, we can see how the request is first received by the **thin
 
 In our code we added:
 
-```
+```python
 tracer.current_span().set_tag('subject', subject)
 ```
 

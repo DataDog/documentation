@@ -15,7 +15,7 @@ git_integration_title: clickhouse
 guid: 781edd66-9c4c-4210-898c-182a6b8ba4ab
 integration_id: clickhouse
 integration_title: ClickHouse
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

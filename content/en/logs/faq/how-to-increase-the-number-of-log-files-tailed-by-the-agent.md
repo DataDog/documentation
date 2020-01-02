@@ -18,10 +18,9 @@ By default the Agent can tail up to 100 log files. This limit is set to avoid pe
 
 To increase this limit, set the value of `open_files_limit` in the Agent's configuration file (`/etc/datadog-agent/datadog.yaml`) in the `logs_config` section:
 
-```
+```yaml
 logs_config:
   open_files_limit: 100
 ```
 
 **Note**: Increasing the tailed logs files limit might increase the resource consumption of the Agent.
-

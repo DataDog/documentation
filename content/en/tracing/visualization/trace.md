@@ -72,7 +72,6 @@ See logs related to your service at the time of the trace. When you hover over a
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Trace Logs" responsive="true" style="width:90%;">}}
 
-
 [1]: /logs/explorer/search
 {{% /tab %}}
 {{< /tabs >}}

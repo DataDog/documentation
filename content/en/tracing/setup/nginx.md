@@ -95,9 +95,8 @@ The `agent_host` value may need to be changed if NGINX is running in a container
 
 Complete examples:
 
-- [nginx.conf][4]
-- [dd-config.json][5]
-
+* [nginx.conf][4]
+* [dd-config.json][5]
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
@@ -129,7 +128,7 @@ data:
   # datadog-operation-name-override: "nginx.handle"
 ```
 
-Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`. 
+Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
 
 ```yaml
 - name: HOST_IP
@@ -137,12 +136,10 @@ Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST
     fieldRef:
       fieldPath: status.hostIP
 ```
-  
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest

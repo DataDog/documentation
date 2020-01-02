@@ -159,9 +159,9 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 
-### Use variables
+### Use global variables
 
-You can use the [variables defined in the `Settings`][3] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the `Settings`][3] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Using Variables in API tests" video="true" responsive="true" width="80%" >}}
 
@@ -197,7 +197,7 @@ Response time is the sum of these network timings.
 
 [1]: /api/?lang=bash#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
-[3]: /synthetics/settings#variables
+[3]: /synthetics/settings#global-variables
 [4]: /integrations/#cat-notification
 [5]: /monitors/notifications/#notification
 [6]: http://daringfireball.net/projects/markdown/syntax

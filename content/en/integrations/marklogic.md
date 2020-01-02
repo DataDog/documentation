@@ -11,12 +11,12 @@ public_title: Datadog-Marklogic Integration
 short_description: Gather your logs from Marklogic and send them to Datadog.
 ---
 
-
 ## Overview
 
 Gather your logs from Marklogic and send them to Datadog.
 
 ## Setup
+
 ### Installation
 
 The Marklogic integration is included in the [Datadog Agent][1] package, so you don't need to install anything else on your host.

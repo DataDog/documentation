@@ -28,7 +28,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{< tabs >}}
 {{% tab "US" %}}
 
-```
+```html
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
   type="text/javascript">
@@ -44,7 +44,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{% /tab %}}
 {{% tab "EU" %}}
 
-```
+```html
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
   type="text/javascript">

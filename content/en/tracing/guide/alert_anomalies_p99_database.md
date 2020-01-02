@@ -21,7 +21,6 @@ further_reading:
 ---
 _3 minutes to complete_
 
-
 {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
 Datadog allows you to set monitors to keep track of the health of your services with APM instead of constantly monitoring it yourself. In this example, we’ll use an anomaly detection monitor. [Anomaly detection][1] is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
@@ -77,7 +76,6 @@ Datadog allows you to set monitors to keep track of the health of your services 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create

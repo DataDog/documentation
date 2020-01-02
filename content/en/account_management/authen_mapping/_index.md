@@ -172,10 +172,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       "id": "123e4567-e89b-12d3-a456-426655440000",
       "relationships": {
         "saml_assertion_attributes": {
-          "data": {
-            "id": 0,
-            "type": "saml_assertion_attributes"
-          }
+          "data": {"id": 0, "type": "saml_assertion_attributes"}
         },
         "roles": {
           "data": {
@@ -223,13 +220,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       }
     }
   ],
-  "meta": {
-    "page": {
-      "total": 0,
-      "page_number": 0,
-      "page_size": 0
-    }
-  }
+  "meta": {"page": {"total": 0, "page_number": 0, "page_size": 0}}
 }
 ```
 
@@ -277,16 +268,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
       "saml_assertion_attributes": {
-        "data": {
-          "id": 0,
-          "type": "saml_assertion_attributes"
-        }
+        "data": {"id": 0, "type": "saml_assertion_attributes"}
       },
       "roles": {
-        "data": {
-          "id": "123e4567-e89b-12d3-a456-426655440000",
-          "type": "roles"
-        }
+        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
       }
     }
   },
@@ -332,7 +317,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 ### Update mapping
 
 Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a JSON body. Returns the updated AuthN Mapping.
-
 
 | Method  | Endpoint path               | Required payload    |
 |---------|-----------------------------|---------------------|
@@ -391,16 +375,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
       "saml_assertion_attributes": {
-        "data": {
-          "id": 0,
-          "type": "saml_assertion_attributes"
-        }
+        "data": {"id": 0, "type": "saml_assertion_attributes"}
       },
       "roles": {
-        "data": {
-          "id": "123e4567-e89b-12d3-a456-426655440000",
-          "type": "roles"
-        }
+        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
       }
     }
   },
@@ -438,7 +416,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     }
   ]
 }
-
 ```
 
 {{% /tab %}}

@@ -53,10 +53,10 @@ Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN
 {{< tabs >}}
 {{% tab "DBSCAN" %}}
 
-[DBSCAN][1] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 
+[DBSCAN][1] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes:
 
 1. A parameter `𝜀` that specifies a distance threshold under which two points are considered to be close.
-2. The minimum number of points that have to be within a point's `𝜀-radius` before that point can start agglomerating. 
+2. The minimum number of points that have to be within a point's `𝜀-radius` before that point can start agglomerating.
 
 Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each group is considered to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each group and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
 
@@ -70,7 +70,7 @@ This implementation of DBSCAN takes one parameter, `tolerance`, the constant by 
 [MAD][1] (median absolute deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in a way that is not influenced by outliers.
 
 **Parameters**<br>
-To use MAD for your outlier monitor, configure the parameters `tolerance` and `%`. 
+To use MAD for your outlier monitor, configure the parameters `tolerance` and `%`.
 
 Tolerance specifies the number of deviations a point needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
 
@@ -107,7 +107,8 @@ The outlier algorithms are set up to identify groups that are behaving different
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" style="width:80%;">}}
 
-## Further Reading 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/outlier

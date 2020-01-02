@@ -1,7 +1,7 @@
 ---
 title: Tags
 type: apicontent
-order: 31
+order: 32
 external_redirect: '/api/#tags'
 ---
 ## Tags

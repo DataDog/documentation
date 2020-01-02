@@ -120,14 +120,14 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 Percentile aggregations are unique in the way they're counted because **Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combination is **eight**:
 
-* `endpoint:X`, `status:200`
-* `endpoint:X`, `status:400`
-* `endpoint:Y`, `status:200`
-* `endpoint:X`
-* `endpoint:Y`
-* `status:200`
-* `status:400`
-* `*`
+* `endpoint:X`, `status:200`
+* `endpoint:X`, `status:400`
+* `endpoint:Y`, `status:200`
+* `endpoint:X`
+* `endpoint:Y`
+* `status:200`
+* `status:400`
+* `*`
 
 After enabling percentile aggregations for `request.Latency`, this metric name additionally reports **5*8 = 40 custom metrics**.
 

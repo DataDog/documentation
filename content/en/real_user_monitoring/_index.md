@@ -52,7 +52,6 @@ The following contexts—following the [Datadog Standard Attributes][2] logic—
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
 [2]: /logs/processing/attributes_naming_convention
 [3]: /logs/processing/attributes_naming_convention/#http-requests

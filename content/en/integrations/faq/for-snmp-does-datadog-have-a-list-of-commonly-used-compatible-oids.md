@@ -1,14 +1,15 @@
 ---
-title: For SNMP, does Datadog have a list of commonly used/compatible OIDs?  
+title: For SNMP, does Datadog have a list of commonly used/compatible OIDs?
 kind: faq
 ---
 
 For Cisco devices, you can use the command:
-```
+
+```text
 show snmp-server oidlist
 ```
-to see the available OIDs for your system:
-http://www.cisco.com/c/en/us/td/docs/security/asa/asa82/configuration/guide/config/monitor_snmp.html
+
+to see the available OIDs for your system: http://www.cisco.com/c/en/us/td/docs/security/asa/asa82/configuration/guide/config/monitor_snmp.html
 
 Linux OIDs (these tend to work for network devices like F5 too)
 
@@ -49,4 +50,3 @@ Linux OIDs (these tend to work for network devices like F5 too)
 ### Uptime
 
 * System Uptime: .1.3.6.1.2.1.1.3.0
-

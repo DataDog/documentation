@@ -37,13 +37,13 @@ As the Agent pulls log information from a WMI class, use a Powershell commandlet
 
 First, retrieve the last 100 entries from the security log*:
 
-```
+```text
 $logs = Get-WmiObject -class Win32_NTLogEvent -filter "(logfile='Security')" | select -First 100
 ```
 
 Now, display the first event with an ID of 4776:
 
-```
+```text
 $logs | where  { $_.EventCode -eq 4776} | select -First 1 | format-list
 
 Category         : 14336

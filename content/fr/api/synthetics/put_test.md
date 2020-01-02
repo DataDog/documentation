@@ -1,7 +1,7 @@
 ---
 title: Modifier un test
 type: apicontent
-order: 30.3
+order: 31.3
 external_redirect: '/api/#modifier-un-test'
 ---
 ## Modifier un test

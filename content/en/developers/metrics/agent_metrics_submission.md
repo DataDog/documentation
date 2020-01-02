@@ -149,32 +149,32 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             self.count(
                 "example_metric.count",
                 2,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.count(
                 "example_metric.decrement",
                 -1,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.count(
                 "example_metric.increment",
                 1,
-                tags="metric_submission_type:count",
+                tags=["env:dev","metric_submission_type:count"],
             )
             self.rate(
                 "example_metric.rate",
                 1,
-                tags="metric_submission_type:rate",
+                tags=["env:dev","metric_submission_type:rate"],
             )
             self.gauge(
                 "example_metric.gauge",
                 random.randint(0, 10),
-                tags="metric_submission_type:gauge",
+                tags=["env:dev","metric_submission_type:gauge"],
             )
             self.monotonic_count(
                 "example_metric.monotonic_count",
                 2,
-                tags="metric_submission_type:monotonic_count",
+                tags=["env:dev","metric_submission_type:monotonic_count"],
             )
 
             # Calling the functions below twice simulates
@@ -182,12 +182,12 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             self.histogram(
                 "example_metric.histogram",
                 random.randint(0, 10),
-                tags="metric_submission_type:histogram",
+                tags=["env:dev","metric_submission_type:histogram"],
             )
             self.histogram(
                 "example_metric.histogram",
                 random.randint(0, 10),
-                tags="metric_submission_type:histogram",
+                tags=["env:dev","metric_submission_type:histogram"],
             )
     {{< /code-block >}}
 
@@ -215,6 +215,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
         (...)
     ```
+
 6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6]:
 
 {{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary" responsive="true" style="width:80%;">}}

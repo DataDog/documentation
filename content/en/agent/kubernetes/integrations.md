@@ -38,7 +38,9 @@ data:
         - service:critical
 ---
 ```
+
 And in the manifest of your Agent (DaemonSet/deployment) add the following:
+
 ```yaml
 [...]
         volumeMounts:
@@ -108,7 +110,6 @@ data:
       - name: kubelet
         polling: true
 ```
-
 
 ## Annotations
 

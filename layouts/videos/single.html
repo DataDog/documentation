@@ -1,6 +1,6 @@
 {{ define "main" }}
 <h1 id="pagetitle">{{ .Title }}</h1>
-<small>{{ i18n "tags" }}: {{ partial "related-groups" (dict "taxonomy" .Section "terms" (sort .Params.videos)) }}</small>
+<small>{{ i18n "tags" }}: {{ partial "related-groups" (dict "taxonomy" "video-categories" "terms" (index .Params "video-categories") ) }}</small>
 <br><br>
 {{ partial "video" .Params.wistiaid }}
 {{ .Content }}

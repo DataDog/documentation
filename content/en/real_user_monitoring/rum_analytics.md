@@ -81,7 +81,6 @@ The evolution of the **Browser Family** according to the **90th percentile** of 
 
 {{< img src="real_user_monitoring/rum_analytics/rum_timeserie_example.png" alt="timeserie rum example" responsive="true" style="width:90%;">}}
 
-
 [1]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 {{% /tab %}}
@@ -95,7 +94,6 @@ The following RUM Analytics Top List shows:
 The evolution of the **top 10 URL Paths** according to the number of **unique Sessions ID** over the last day.
 
 {{< img src="real_user_monitoring/rum_analytics/top_list_rum.png" alt="top list rum example" responsive="true" style="width:90%;">}}
-
 
 [1]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures

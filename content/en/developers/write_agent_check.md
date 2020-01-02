@@ -11,9 +11,11 @@ further_reading:
 ---
 
 ## Overview
+
 This page looks at a simple custom Agent check and the `min_collection_interval`. Same as regular Agent based integrations, custom checks are scheduled to run at a fixed interval, which defaults to every 15 seconds.
 
 ### Should you write an Agent check or an Integration?
+
 Custom checks are well suited to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service, or open source project, it is recommended that you [create a full fledged Agent Integration][1].
 
 Datadog Agent v6.4+ allows integrations to be released and updated independently from Datadog Agent updates. It also provides an easier way for you to share integrations—and makes it easier for the wider Datadog community to use your integrations.
@@ -21,7 +23,10 @@ Datadog Agent v6.4+ allows integrations to be released and updated independently
 For more information about how to write an integration, see [Creating New Integrations][1]. Refer to the [integrations-extras GitHub repository][2] to see other contributed integrations.
 
 ## Setup
+
 First, ensure the [Agent][3] is properly installed. If you run into any issues during the setup, [contact Datadog support][4].
+
+**Note**: If you are running Agent v7+ your custom Agent check should be Python 3 compatible. Otherwise it should be Python 2.7+ compatible.
 
 ## Custom Agent check
 
@@ -49,7 +54,6 @@ except ImportError:
 # content of the special variable __version__ will be shown in the Agent status page
 __version__ = "1.0.0"
 
-
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
@@ -60,10 +64,11 @@ For more details about the interface provided by the base class, browse the [API
 **Note**: When choosing a name for your custom check, you should prefix it with `custom_` in order to avoid conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
 
 ### Collection interval
+
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
 
 ```yaml
@@ -72,7 +77,8 @@ init_config:
 instances:
   - min_collection_interval: 30
 ```
- {{% /tab %}}
+
+{{% /tab %}}
 {{% tab "Agent v5" %}}
 For Agent 5, `min_collection_interval` is added to the `init_config` section to define how often the check is run globally.
 
@@ -82,6 +88,7 @@ init_config:
 
 instances: [{}]
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -92,15 +99,19 @@ instances: [{}]
 To verify your check is running, use the following command:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
- ```
-sudo -u dd-agent -- datadog-agent check <check_name>
+{{% tab "Agent v6 & v7" %}}
+
+```shell
+sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 ```
- {{% /tab %}}
+
+{{% /tab %}}
 {{% tab "Agent v5" %}}
- ```
-sudo -u dd-agent -- dd-agent check <check_name>
+
+```shell
+sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -110,9 +121,8 @@ It's possible to create a custom check that runs a command line program and capt
 
 To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
 
-```
+```text
 $ vgs -o vg_free
-
 ```
 
 must be passed to `get_subprocess_output()` like this:
@@ -142,8 +152,8 @@ class LSCheck(AgentCheck):
         self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 
-
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/integrations/new_check_howto

@@ -18,6 +18,7 @@ further_reading:
 When a file is rotated, the Agent keeps tailing the old file until its end before starting to look at the newly created file.
 
 ### Network issues
+
 #### File Tailing
 
 The Agent stores a pointer for each tailed file. If there is a network connection issue, the Agent stops sending logs until the connection is restored and automatically picks up where it stopped to ensure no logs are lost.

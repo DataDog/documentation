@@ -31,14 +31,15 @@ Avant de commencer, vous devez avoir un [compte Datadog][2] et une [clé d'API D
 
 #### Paramètres de configuration
 
-| Clé | Description | Valeur par défaut |
-|-------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| Host | _Obligatoire_ - Le serveur Datadog vers lequel vous envoyez vos logs. | Site américain : `http-intake.logs.datadoghq.com` - Site européen : `http-intake.logs.datadoghq.eu` |
-| TLS | _Obligatoire_ - Protocole de communication sécurisée de bout en bout. Datadog vous conseille de laisser ce paramètre sur `on`. | `on` |
-| apikey | _Obligatoire_ - Votre [clé d'API Datadog][3]. |  |
-| dd\_service | _Recommandé_ - Le nom lisible du service qui génère vos logs (nom de votre application ou base de données). |  |
-| dd\_source | _Recommandé_ - Le nom lisible de la technologie sous-jacente de votre service. Par exemple, `postgres` ou `nginx`. |  |
-| dd\_tags | _Facultatif_ - Les [tags][9] que vous souhaitez attribuer à vos logs dans Datadog. |  |
+| Clé        | Description                                                                                                              | Valeur par défaut                                                                     |
+|------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Host       | _Obligatoire_ - Le serveur Datadog vers lequel vous envoyez vos logs.                                                         | Site américain : `http-intake.logs.datadoghq.com` - Site européen : `http-intake.logs.datadoghq.eu` |
+| TLS        | _Obligatoire_ - Protocole de communication sécurisée de bout en bout. Datadog vous conseille de définir ce paramètre sur `on`.              | `off`                                                                       |
+| apikey     | _Obligatoire_ - Votre [clé d'API Datadog][3].                                                                                  |                                                                             |
+| dd_service | _Recommandé_ - Le nom lisible du service qui génère vos logs (nom de votre application ou base de données). |                                                                             |
+| dd_source  | _Recommandé_ - Le nom lisible de la technologie sous-jacente de votre service. Par exemple, `postgres` ou `nginx`. |                                                                             |
+| dd_tags    | _Facultatif_ - Les [tags][9] que vous souhaitez attribuer à vos logs dans Datadog.                                                   |                                                                             |
+| provider   | _Facultatif_ - Le fournisseur à utiliser. Définissez ce paramètre sur `ecs` pour envoyer les logs de vos tâches Fargate à Datadog.         |                                                                             |
 
 #### Exemple de fichier de configuration
 
@@ -48,9 +49,9 @@ Avant de commencer, vous devez avoir un [compte Datadog][2] et une [clé d'API D
     Match       *
     Host        http-intake.logs.datadoghq.com
     TLS         on
-    apikey      <ma-clé-api-datadog>
-    dd_service  <mon-service-app>
-    dd_source   <ma-source-app>
+    apikey      <CLÉ_API_DATADOG>
+    dd_service  <SERVICE_APPLICATION>
+    dd_source   <SOURCE>
     dd_tags     team:logs,foo:bar
 ```
 
