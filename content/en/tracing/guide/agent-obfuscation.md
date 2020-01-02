@@ -16,13 +16,12 @@ Currently this options only works with the following services:
 * `http`
 * `remove_stack_traces`
 
-
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
 Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span tags.
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -43,7 +42,7 @@ apm_config:
 
 Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -64,7 +63,7 @@ apm_config:
 
 Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -74,13 +73,14 @@ apm_config:
     redis:
       enabled: true
 ```
+
 [1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
 Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -90,13 +90,14 @@ apm_config:
     memcached:
       enabled: true
 ```
+
 [1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Http" %}}
 
 HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -115,7 +116,8 @@ apm_config:
 {{% tab "Stack Traces" %}}
 
 Set the `remove_stack_traces` parameter to true, to remove stack traces and replace them with `?`.
-```
+
+```yaml
 apm_config:
   enabled: true
 

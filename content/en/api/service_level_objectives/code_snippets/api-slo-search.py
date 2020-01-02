@@ -7,7 +7,6 @@ options = {
 
 initialize(**options)
 
-
 # search with a list of IDs
 slo_ids = ["<YOUR_SLO_ID>", "<YOUR_SLO_ID>"]
 

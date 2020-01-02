@@ -26,7 +26,7 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 
 For the examples below, the following mongo collection `user_collection` is used:
 
-```
+```text
 { name: "foo", id: 12345, active: true, age:45, is_admin: true}
 { name: "bar", id: 67890, active: false, age:25, is_admin: true}
 { name: "foobar", id: 16273, active: true, age:35, is_admin: false}
@@ -39,13 +39,13 @@ Choose the type of query you would like to see an example for:
 
 To monitor how many users are active at a given time, your [Mongo count command][1] would be:
 
-```
+```text
 db.runCommand( {count: user_collection, query: {active:true}})
 ```
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.users
     query: {"count": "user_collection", "query": {"active":"true"}}
@@ -58,7 +58,6 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 **Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 
-
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /developers/metrics/types
 {{% /tab %}}
@@ -66,13 +65,13 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 To monitor the age per user, your [Mongo find command][1] would be:
 
-```
+```text
 db.runCommand( {find: user_colleciton, filter: {active:true} )
 ```
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.example2
     query: {"find": "user_colleciton", "filter": {"active":"true"}}
@@ -96,7 +95,8 @@ This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `nam
 {{% tab "Aggregate" %}}
 
 To monitor the average age for an admin and a non-admin user, your [Mongo aggregate command][1] would be:
-```
+
+```text
 db.runCommand(
               {
                 'aggregate': "user_collection",
@@ -111,7 +111,7 @@ db.runCommand(
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.example3
     query: {"aggregate": "user_collection","pipeline": [{"$match": {"active": "true"}},{"$group": {"_id": "$is_admin", "age_avg": {"$avg": "$age"}}}],"cursor": {}}

@@ -14,6 +14,7 @@ Use the `vsphere.yaml` file to filter your VMs monitored by Datadog by using reg
 When adding limits to existing VMs, the previously discovered VMs could stay in the [Infrastructure List][2] up to 24 hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][3].
 
 For billing questions, contact your [Customer Success][4] Manager.

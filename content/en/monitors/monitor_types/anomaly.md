@@ -116,6 +116,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog recommends [exporting a monitor's JSON][10] to build the query for the API.
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
+
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
@@ -128,6 +129,7 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 * [Contact Datadog support][13]
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly

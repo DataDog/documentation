@@ -62,6 +62,7 @@ instances:
 ```
 
 ### Writing the check
+
 All OpenMetrics checks inherit from the `OpenMetricsBaseCheck` class found in `checks/openmetrics_check.py`:
 
 ```python
@@ -212,7 +213,6 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 `exclude_labels` is an array of labels to exclude. Those labels will not be added as tags when submitting the metric.
 
 ### `self.type_overrides`
-
 
 `type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.

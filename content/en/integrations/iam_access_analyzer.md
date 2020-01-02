@@ -5,8 +5,8 @@ categories:
 - log collection
 - security
 ddtype: crawler
-description: 
-short_description: 
+description:
+short_description:
 doc_link: https://docs.datadoghq.com/integrations/iam_access_analyser/
 git_integration_title: amazon_iam_access_analyser
 has_logo: true
@@ -24,6 +24,7 @@ version: 1.0
 Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon account to continuously analyze IAM permissions granted with any of your account policies. Datadog integrates with Amazon IAM Access Analyzer using a Lambda function that ships its logs to Datadog.
 
 ## Setup
+
 ### Log Collection
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].

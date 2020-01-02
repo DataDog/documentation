@@ -25,7 +25,6 @@ All edits on the facet list (see below) or in the page layout are automatically 
 
 {{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection" responsive="true" style="width:90%;" >}}
 
-
 ## Saved Views
 
 Saved Views allow you to save search customizations in the Log Explorer, including:
@@ -33,7 +32,6 @@ Saved Views allow you to save search customizations in the Log Explorer, includi
 * A [search query][1]
 * A [selected subset of facets][2]
 * A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
-
 
 ### Load a Saved View
 

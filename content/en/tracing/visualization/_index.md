@@ -97,7 +97,6 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" responsive="true">}}
 
-
 ## App Analytics
 
 App Analytics is used to filter [Analyzed Spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][17].
@@ -123,7 +122,6 @@ To get started tagging spans in your application, check out this [walkthrough][1
 After a tag has been added to a span, search and query on the tag in App Analytics by clicking on the tag to add it as a [facet][19]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
-
 
 ## Further Reading
 

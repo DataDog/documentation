@@ -42,7 +42,6 @@ To transition between Agent configuration paths and formats, use the Agent comma
 sudo -u dd-agent -- datadog-agent import
 {{< /code-block >}}
 
-
 This command parses an existing `datadog.conf` and converts supported parameters to the new format in `datadog.yaml`. The command also copies configuration files for checks that are currently enabled. For more details, see [Upgrade to Datadog Agent v6][2].
 
 #### Options
@@ -560,7 +559,6 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters

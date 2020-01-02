@@ -20,6 +20,7 @@ version: '1.0'
 Use the Datadog-Carbon Black integration in order to forward your Carbon Black Defense logs to Datadog.
 
 ## Setup
+
 ### Installation
 
 First, install and setup the [Carbon Black Defense log shipper][1]. The shipper is available for:
@@ -34,7 +35,7 @@ The configuration file below enables your Carbon Black Defense shipper to forwar
 {{< tabs >}}
 {{% tab "Datadog US Site" %}}
 
-```
+```conf
 [general]
 
 template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
@@ -54,7 +55,7 @@ siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 {{% /tab %}}
 {{% tab "Datadog EU Site" %}}
 
-```
+```conf
 [general]
 
 template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}

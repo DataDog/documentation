@@ -22,8 +22,8 @@ While the current APM monitor has the ability to set up Alerts on a per [service
 Since these are regular Datadog Metrics and Tags, copy that query into a New Monitor.
 The downside here is that see the resource hash in the field, as opposed to the more readable name. However, to work around this, construct your Monitor message to send a link to the resource Page of the resource that caused the monitor to trigger. Each resource APM Page has the following format:
 
-```
-/apm/resource/<Service>/<top_level_name>/<Resource_Name>?env=<env>
+```text
+/apm/resource/<Service>/<TOP_LEVEL_NAME>/<Resource_Name>?env=<env>
 ```
 
 Since each service contains a single Top Level Name and we can setup a multi alert by [environment][7] and resource and service, we only need to obtain the top level name to create the URL.
@@ -34,7 +34,6 @@ This Top Level Name can be found by clicking on the service you are interested i
 Then the Monitor configuration would resemble the following:
 
 {{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor" responsive="true" >}}
-
 
 [1]: /tracing/visualization/service
 [2]: /tracing/visualization/resource

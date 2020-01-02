@@ -25,7 +25,7 @@ These are `integer`, `float`, `double`, `long`, `boolean` etc ...
 
 You can use the `list` commands in order to get an idea of what your current JMX integration is collecting. Here is a snippet of that output showing a Simple attribute:
 
-```
+```text
 Matching: x/350. Bean name: java.lang - Attribute name: attribute_1 - Attribute type: java.lang.Integer
 ```
 
@@ -46,7 +46,7 @@ JMXFetch extracts the attribute value directly and use it as the metric value. S
 
 These can be seen as an array, a hashmap, or an object composed of 'simple' attributes.
 
-```
+```text
 Matching: x/350. Bean name: java.lang - Attribute name: HeapMemoryUsage - Attribute type: javax.management.openmbean.CompositeData
 ```
 
@@ -71,7 +71,7 @@ In this case, you need to add more details to JMXFetch on how to use this 'compo
 
 The best way to achieve this would be using JMXterm (see below).
 
-```
+```text
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:<PORT> -u <USER> -p <PASSWORD>
 ```
 

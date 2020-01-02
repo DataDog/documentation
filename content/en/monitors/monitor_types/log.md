@@ -80,8 +80,8 @@ Include a table of the top 10 breaching values:
 Include a sample of 10 logs in the alert notification:
 {{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
 
+## Further Reading
 
-## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/log

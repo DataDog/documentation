@@ -16,29 +16,27 @@ The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E
 If you're using the latest version for one of the following officially supported install methods, then your hosts will automatically trust the new key and no further action is needed.
 
 * [Agent installation page][2]
-
 * [Chef cookbook][3]
-
 * [Ansible role][4]
-
 * [Puppet module][5]
-
 * [SaltStack formula][6]
-
 
 ## How to check if a host trusts the new GPG key
 
 To check that a particular host does trust the new key, run this command on the host:
+
 ```bash
 rpm -q gpg-pubkey-e09422b3
 ```
 
 If the new key is trusted, the command has a 0 exit code and outputs:
+
 ```bash
 gpg-pubkey-e09422b3-57744e9e
 ```
 
 Otherwise, the command returns a non-0 exit code and the following output:
+
 ```bash
 package gpg-pubkey-e09422b3 is not installed
 ```
@@ -63,7 +61,7 @@ Then check if the new key is trusted by following the steps in [How to check if 
 
 Alternatively, on CentOS, RHEL, and Amazon Linux, if your Yum repository file used to define the Datadog repository (usually called `datadog.repo`) looks like this:
 
-```
+```conf
 [datadog]
 name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/6/x86_64/
@@ -74,7 +72,7 @@ gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
 
 update it to add the new key `https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public` as one of the trusted keys:
 
-```
+```conf
 [datadog]
 name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/6/x86_64/

@@ -31,6 +31,7 @@ For configuration purposes, a composite monitor is independent of its constituen
 To create a [composite monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Composite*.
 
 ### Select monitors and set triggering conditions
+
 #### Select monitors
 
 Choose up to 10 individual monitors to use in a composite monitor. Monitors can be of different alert types (simple alerts, multi-alerts, or a combination of the two). No individual monitor may itself be a composite monitor. After you choose your first monitor, the UI shows its alert type and current status.
@@ -39,7 +40,7 @@ If you choose a multi-alert monitor, the UI shows the monitor's group-by clause 
 
 You should choose monitors that have the same groups. Otherwise, the UI warns you that such a composite monitor may never trigger:
 
-```
+```text
 Group Matching Error
 The selected monitors in the expression may not lead to a
 composite result because they have not evaluated any
@@ -56,7 +57,7 @@ In the **Trigger when** field, write your desired trigger condition using Boolea
 
 The following are all valid trigger conditions:
 
-```
+```text
 !(a && b)
 a || b && !c
 (a || b) && (c || d)
@@ -177,6 +178,7 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 Use your best judgment to choose multi-alert monitors that makes sense together.
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite

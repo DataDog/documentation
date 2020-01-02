@@ -49,7 +49,7 @@ func main() {
 }
 ```
 
-It's very easy to add metas to any log if you provide a JSON object that you want to see in the log event. 
+It's very easy to add metas to any log if you provide a JSON object that you want to see in the log event.
 
 These metas can be `hostname`, `username`, `customers`, `metric` or any information that help you troubleshoot and understand what happens in your Go application.
 
@@ -75,7 +75,6 @@ func main() {
   })
 
   contextualizedLog.Info("Simple event with global metadata")
-  
 }
 ```
 
@@ -83,7 +82,7 @@ func main() {
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml    
+```yaml
 ##Log section
 logs:
 
