@@ -35,8 +35,8 @@ To address this use case it is strongly recommended to use a JSON formatter when
 
 Here are setup examples for the following logging libraries:
 
-- [JSON-log-formatter][1]
-- [Python-json-logger][2]
+* [JSON-log-formatter][1]
+* [Python-json-logger][2]
 
 ### Inject trace IDs in your logs
 

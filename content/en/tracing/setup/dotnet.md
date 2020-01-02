@@ -364,10 +364,10 @@ For more details on supported platforms, see the [.NET Standard documentation][7
 
 There are multiple ways to configure the .NET Tracer:
 
-- in .NET code
-- setting environment variables
-- editing the application's `app.config`/`web.config` file (.NET Framework only)
-- creating a `datadog.json` file
+* in .NET code
+* setting environment variables
+* editing the application's `app.config`/`web.config` file (.NET Framework only)
+* creating a `datadog.json` file
 
 {{< tabs >}}
 {{% tab "Code" %}}
@@ -417,6 +417,7 @@ MyApplication.exe
 **Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 On Linux:
+
 ```bash
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8126

@@ -142,7 +142,7 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 
 ### RocketPant's suggested logging configuration
 
-In the file `config/initializers/lograge_rocketpants.rb ` (it can change depending on your project):
+In the file `config/initializers/lograge_rocketpants.rb` (it can change depending on your project):
 
 ```ruby
 # Configure Lograge to work with rocket_pants' controllers
@@ -193,7 +193,7 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: (https://github.com/roidrage/lograge
+[1]: https://github.com/roidrage/lograge
 [2]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation

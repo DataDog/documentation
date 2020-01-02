@@ -175,7 +175,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

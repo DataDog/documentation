@@ -29,6 +29,7 @@ further_reading:
 Write your PHP logs into a file, then [use the Agent][1] to forward them to Datadog, choose between the Monolog, Zend-Log, or Symfony logging libraries.
 
 ## Setup
+
 ### Installation
 
 {{< tabs >}}
@@ -273,7 +274,6 @@ Take a peek to this code if you want to use it:
 
 If you want to develop yours, [refer the Zend documentation][1].
 
-
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
@@ -354,6 +354,7 @@ Add a session Processor to add variable context within your logs:
     ```
 
 2. Wire the Processor with Symfony:
+
   ```yaml
    services:
       monolog.processor.session_request:
@@ -363,8 +364,7 @@ Add a session Processor to add variable context within your logs:
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. [Stream generated JSON file to Datadog][1]
-
+3. [Stream generated JSON file to Datadog][1].
 
 [1]: /logs/log_collection
 {{% /tab %}}

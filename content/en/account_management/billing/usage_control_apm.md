@@ -32,7 +32,6 @@ To estimate the total number of analyzed spans expected to be sent per service p
 3. **Total Estimated APM Volume** denotes the estimated total volume of Analyzed Spans for all services, per day and per month. Each row corresponding to the service represents the estimated volume of analyzed spans for that service, per day.
 
   {{< img src="tracing/faq/apm_span_estimator.png" alt="Analyzed Span Estimator">}}
-
 4. To estimate total cost, multiply the total volume * [analyzed span retention pricing][8].
 
 For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (default retention), you can calculate:

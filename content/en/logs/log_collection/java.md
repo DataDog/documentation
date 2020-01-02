@@ -57,11 +57,11 @@ Add a new file appender to `log4j.xml`:
 
 ```xml
 <appender name="fileAppender" class="org.apache.log4j.FileAppender">
-  <param name="File" value="/logs/log4j.log" />
-  <param name="Append" value="true" />
-  <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
-  </layout>
+    <param name="File" value="/logs/log4j.log" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+    </layout>
 </appender>
 ```
 
@@ -83,13 +83,13 @@ Once this is done, the `ConversionPattern` to use becomes:
 Edit your `log4j2.xml` file:
 
 ```xml
- <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
-        <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
- </File>
- <Loggers>
-        <Root level="debug">
+<File name="MyFile" fileName="logs/app.log" immediateFlush="true">
+    <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+</File>
+<Loggers>
+    <Root level="debug">
         <AppenderRef ref="MyFile" />
-        </Root>
+    </Root>
 </Loggers>
 ```
 
@@ -112,17 +112,16 @@ Edit your `logback.xml` file:
 
 ```xml
 <configuration>
-(....)
-   <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
-
-   <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file> ~/logs/log-${byDay}.log </file>
-      <append>true</append>
-      <encoder>
-          <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    <!-- (....) -->
+    <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file> ~/logs/log-${byDay}.log </file>
+        <append>true</append>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </encoder>
-   </appender>
-(....)
+    </appender>
+    <!-- (....) -->
     <root level="debug">
         <appender-ref ref="FILE" />
     </root>
@@ -210,15 +209,14 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>datadog</groupId>
     <artifactId>support</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
@@ -226,27 +224,22 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
             <artifactId>log4j-core</artifactId>
             <version>2.7</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.8.3</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.3</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.8.3</version>
         </dependency>
-
     </dependencies>
-
 </project>
 ```
 
@@ -353,21 +346,19 @@ Then, edit the `pom.xml` file with the following content:
 
 ```xml
 <dependency>
-	<groupId>org.slf4j</groupId>
-	<artifactId>log4j-over-slf4j</artifactId>
-	<version>1.7.13</version>
+    <groupId>org.slf4j</groupId>
+    <artifactId>log4j-over-slf4j</artifactId>
+    <version>1.7.13</version>
 </dependency>
-
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>1.1.3</version>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.3</version>
 </dependency>
 ```
 
@@ -390,17 +381,15 @@ Then, edit the `pom.xml` file with the following content:
     <artifactId>log4j-to-slf4j</artifactId>
     <version>2.11.0</version>
 </dependency>
-
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>1.1.3</version>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.3</version>
 </dependency>
 ```
 
@@ -418,15 +407,14 @@ To add Logback [logstash-logback-encoder][1] into your classpath, add the follow
 
 ```xml
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>1.1.3</version>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.3</version>
 </dependency>
 ```
 
@@ -440,33 +428,31 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 
 ```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
-	<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>
-
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-	<remoteHost>intake.logs.datadoghq.com</remoteHost>
-  <port>10514</port>
-  <keepAliveDuration>1 minute</keepAliveDuration>
-	<encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-          <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
-        </layout>
-      </prefix>
-	</encoder>
+    <remoteHost>intake.logs.datadoghq.com</remoteHost>
+    <port>10514</port>
+    <keepAliveDuration>1 minute</keepAliveDuration>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
+            </layout>
+          </prefix>
+    </encoder>
 </appender>
-
 <root level="debug">
-	<appender-ref ref="JSON_TCP" />
-	<appender-ref ref="JSON" />
+    <appender-ref ref="JSON_TCP" />
+    <appender-ref ref="JSON" />
 </root>
 ```
 
 **Notes:**
 
-- Replace `<API_KEY>` with your Datadog API key value
-- `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4]
-- See the list of [available endpoints for the EU site][5]
+* Replace `<API_KEY>` with your Datadog API key value.
+* `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4].
+* See the list of [available endpoints for the EU site][5].
 
 More information available on the prefix parameter in the [Logback documentation][4].
 
@@ -527,7 +513,7 @@ To generate this final JSON document:
 }
 ```
 
-**MDC are great but for some reason only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
+**MDC are great but only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
 
 ## Further Reading
 

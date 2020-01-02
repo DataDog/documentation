@@ -8,7 +8,8 @@ kind: documentation
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
 `Plan & Usage`--> `Usage`.
 
-The Usage page provides the following information.
+The Usage page provides the following information:
+
 * Month-to-Date Summary
 * Overall Usage (current and historical)
 * Top 500 Custom Metrics

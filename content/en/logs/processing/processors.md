@@ -550,11 +550,11 @@ You can use the template: `Request %{http.method} %{http.url} was answered with 
 Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**Objects**
+**Objects**:
 
 In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
 
-**Arrays**
+**Arrays**:
 
 Blocks can be used on arrays of values or on a specific attribute within an array. For the example log, adding the block `%{array_ids}` returns:
 

@@ -108,31 +108,31 @@ The tracer is configured with options parameters when the `Start` function is ca
 package main
 
 import (
-	"log"
-	"net/http"
-	"strings"
+    "log"
+    "net/http"
+    "strings"
 
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-func sayHello(w http.ResponseWriter, r *http.Request) {
-	msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
-	w.Write([]byte(msg))
+func sayHello(w http.ResponseWriter, r * http.Request) {
+    msg: = "Hello " + strings.TrimPrefix(r.URL.Path, "/")
+    w.Write([] byte(msg))
 }
 
 func main() {
-	// start the tracer with zero or more options
-	tracer.Start(tracer.WithServiceName("test-go"))
-	defer tracer.Stop()
+    // start the tracer with zero or more options
+    tracer.Start(tracer.WithServiceName("test-go"))
+    defer tracer.Stop()
 
-	mux := httptrace.NewServeMux() // init the http tracer
-	mux.HandleFunc("/", sayHello)  // use the tracer to handle the urls
+    mux: = httptrace.NewServeMux() // init the http tracer
+    mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
 
-	err := http.ListenAndServe(":9090", mux) // set listen port
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+    err: = http.ListenAndServe(":9090", mux) // set listen port
+    if err != nil {
+        log.Fatal("ListenAndServe: ", err)
+    }
 }
 ```
 

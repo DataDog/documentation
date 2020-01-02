@@ -88,4 +88,5 @@ Then paste the Single Sign-on URL that is displayed in the [Datadog SAML page][1
 #### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/saml/saml_setup

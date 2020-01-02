@@ -35,7 +35,7 @@ This filter excludes anything that is tagged with `env:staging` or `env:test1`.
 
 The AWS API is only supported for the US site's endpoint.
 
-**Listing the current tag filter rules**
+**Listing the current tag filter rules**:
 
 ```shell
 curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>"}'
@@ -49,7 +49,7 @@ curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=
 curl -X POST 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>", "namespace": "application_elb", "tag_filter_str": "!copper:educated"}'  -H "Content-Type: text/plain"
 ```
 
-**Deleting the tag filter rule for a namespace**
+**Deleting the tag filter rule for a namespace**:
 
 ```shell
 curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>'  --data '{"account_id": "<AWS_ACCOUNT_ID>","namespace":"<NAMESPACE>"}'

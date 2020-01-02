@@ -95,8 +95,8 @@ The `agent_host` value may need to be changed if NGINX is running in a container
 
 Complete examples:
 
-- [nginx.conf][4]
-- [dd-config.json][5]
+* [nginx.conf][4]
+* [dd-config.json][5]
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
@@ -136,7 +136,6 @@ Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST
     fieldRef:
       fieldPath: status.hostIP
 ```
-
 
 ## Further Reading
 

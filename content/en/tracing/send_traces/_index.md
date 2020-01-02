@@ -67,6 +67,7 @@ There are several ways to specify [an environment][10] when reporting data:
 
 1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
+
   ```
   apm_config:
   env: <ENVIRONMENT>

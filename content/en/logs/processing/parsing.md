@@ -246,19 +246,19 @@ The key-value always matches inputs without any quoting characters, regardless o
 
 Log:
 
-  ```
+  ```text
   key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
   ```
 
 Rule:
 
-  ```
+  ```text
   rule %{data::keyvalue(":=","","<>")}
   ```
 
 Result:
 
-  ```
+  ```json
   {
     "key1": "valueStr",
     "key2": "/valueStr2"
