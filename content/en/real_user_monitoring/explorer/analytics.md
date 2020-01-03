@@ -2,11 +2,10 @@
 title: RUM Analytics
 kind: documentation
 description: ""
+aliases:
+- /real_user_monitoring/rum_analytics
 further_reading:
-- link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
-  tag: "Blog"
-  text: "Real User Monitoring"
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/explorer/search"
   tag: "Documentation"
   text: "Explore your views within Datadog"
 ---
@@ -30,29 +29,29 @@ Use the query to control what's displayed in your RUM Analytics:
 
 1. Choose a [measure][1] or [facet][2] to graph. [measure][1] lets you choose the aggregation function whereas [facet][2] displays the unique count.
 
-    {{< img src="real_user_monitoring/rum_analytics/measure_selection.png" alt="measure selection"  style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection" responsive="true" style="width:50%;">}}
 2. Select the aggregation function for the [measure][1] you want to graph:
 
-    {{< img src="real_user_monitoring/rum_analytics/aggregation.png" alt="aggregation function for RUM Analytics"  style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="aggregation function for RUM Analytics" style="width:50%;">}}
 
 3. Use a [facet][2] to split your graph.
 
-    {{< img src="real_user_monitoring/rum_analytics/break_down.png" alt="split by facet RUM Analytics"  style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/break_down.png" alt="split by facet RUM Analytics" style="width:50%;">}}
 
 4. Choose the time interval for your graph.
   Changing the global timeframe changes the list of available timestep values.
 
-    {{< img src="real_user_monitoring/rum_analytics/roll_up.png" alt="rollup"  style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/roll_up.png" alt="rollup" style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
+5. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
 
-    {{< img src="real_user_monitoring/rum_analytics/top_bottom.png" alt="top bottom button"  style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/top_bottom.png" alt="top bottom button" style="width:50%;">}}
 
 ## Visualizations
 
 Select a RUM Analytics visualization type using the graph selector:
 
-{{< img src="real_user_monitoring/rum_analytics/graph_selector.png" alt="RUM Analytics graph selector"  style="width:50%;">}}
+{{< img src="real_user_monitoring/explorer/analytics/graph_selector.png" alt="RUM Analytics graph selector" style="width:50%;">}}
 
 Available visualizations:
 
@@ -79,7 +78,7 @@ The following RUM Analytics timeseries shows:
 
 The evolution of the **Browser Family** according to the **90th percentile** of **DOM interactive time** over the last 7 days.
 
-{{< img src="real_user_monitoring/rum_analytics/rum_timeserie_example.png" alt="timeserie rum example"  style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_timeserie_example.png" alt="timeserie rum example" style="width:90%;">}}
 
 [1]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
@@ -93,7 +92,7 @@ The following RUM Analytics Top List shows:
 
 The evolution of the **top 10 URL Paths** according to the number of **unique Sessions ID** over the last day.
 
-{{< img src="real_user_monitoring/rum_analytics/top_list_rum.png" alt="top list rum example"  style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/analytics/top_list_rum.png" alt="top list rum example" style="width:90%;">}}
 
 [1]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
@@ -110,7 +109,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
  The following RUM Analytics table shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
 
-{{< img src="real_user_monitoring/rum_analytics/rum_table_example.png" alt="RUM table example"  style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_table_example.png" alt="RUM table example" style="width:90%;">}}
 
 [1]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
@@ -122,7 +121,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 Select or click on a section of the graph to either zoom in the graph or see the list of events corresponding to your selection:
 
-{{< img src="real_user_monitoring/rum_analytics/view_events.png" alt="view events"  style="width:30%;" >}}
+{{< img src="real_user_monitoring/explorer/analytics/view_events.png" alt="view events" style="width:30%;" >}}
 
 ## Further Reading
 

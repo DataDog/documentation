@@ -24,8 +24,6 @@
           "agent",
           "integrations",
           "dashboards",
-          "infrastructure",
-          "metrics",
           "monitors",
           "tracing",
           "logs",
@@ -47,8 +45,6 @@
         "section": [
           "agent",
           "dashboards",
-          "infrastructure",
-          "metrics",
           "integrations",
           "monitors",
           "tracing",

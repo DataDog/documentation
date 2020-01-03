@@ -122,7 +122,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 Similar to [annotating Kubernetes Pods][6], Services can be annotated with the following syntax:
 
 ```yaml
-  ad.datadoghq.com/endpoints.check_names: '[<CHECK_NAME>]'
+  ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
   ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
 ```
