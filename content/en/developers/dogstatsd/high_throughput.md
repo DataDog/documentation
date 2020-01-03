@@ -212,6 +212,98 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+## Client side telemetry
+
+Dogstatsd clients send telemetry metrics by default to the agent. This allows
+you to better troubleshoot where the bottleneck might be. Each metric will be
+tagged with the client language and the client version. Those metrics will not be
+counted as custom and will not be billed.
+
+Each client share a set of common tags.
+
+| Tag                | Description                                     | Example                |
+|--------------------|-------------------------------------------------|------------------------|
+| `client`           | The language of the client                      | `client:py`            |
+| `client_version`   | The version of the client                       | `client_version:1.2.3` |
+| `client_transport` | The transport byte the client (`udp` or `uds`)  | `client_transport:uds` |
+
+Keep in mind that when using UDP, network errors can't be detected by the client
+and the corresponding metrics will not reflect bytes/packets drop.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Starting with version `0.34.0` of the Python client.
+
+| Metrics Name                               | Metric Type | Description                                                                               |
+|--------------------------------------------|-------------|-------------------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`         | count       | Number of `metrics` sent to the client by your application (before sampling).             |
+| `datadog.dogstatsd.client.events`          | count       | Number of `events` sent to the client by your application.                                |
+| `datadog.dogstatsd.client.service_checks`  | count       | Number of `service_checks` sent to the client by your application.                        |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | Number of bytes successfully sent to the Agent.                                           |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | Number of bytes dropped by the client.                                                    |
+| `datadog.dogstatsd.client.packets_sent`    | count       | Number of datagrams successfully sent to the agent.                                       |
+| `datadog.dogstatsd.client.packets_dropped` | count       | Number of datagrams dropped by the client.                                                |
+
+If you want to disable telemetry, simply do:
+
+```python
+statsd.disable_telemetry()
+```
+
+See [DataDog/datadogpy](https://github.com/DataDog/datadogpy) for more information about the client configuration.
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Telemetry will soon be added to the Ruby client.
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Starting with version `3.4.0` of the Go client.
+
+| Metric name                                       | Metric Type  | Description                                                                     |
+|---------------------------------------------------|--------------|---------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`                | count        | Number of `metrics` sent to the client by your application (before sampling).   |
+| `datadog.dogstatsd.client.events`                 | count        | Number of `events` sent to the client by your application.                      |
+| `datadog.dogstatsd.client.service_checks`         | count        | Number of `service_checks` sent to the client by your application.              |
+| `datadog.dogstatsd.client.bytes_sent`             | count        | Number of bytes successfully sent to the Agent.                                 |
+| `datadog.dogstatsd.client.bytes_dropped`          | count        | Number of bytes dropped by the client.                                          |
+| `datadog.dogstatsd.client.bytes_dropped_queue`    | count        | Number of bytes dropped because the client queue was full.                      |
+| `datadog.dogstatsd.client.bytes_dropped_writer`   | count        | Number of bytes dropped because of an error while writing to the transport.     |
+| `datadog.dogstatsd.client.packets_sent`           | count        | Number of datagrams successfully sent to the agent.                             |
+| `datadog.dogstatsd.client.packets_dropped`        | count        | Number of datagrams dropped by the client.                                      |
+| `datadog.dogstatsd.client.packets_dropped_queue`  | count        | Number of datagrams dropped because the client queue was full.                  |
+| `datadog.dogstatsd.client.packets_dropped_writer` | count        | Number of datagrams dropped because of an error while writing to the transport. |
+
+
+If you want to disable telemetry, simply do:
+
+```go
+statsd, err: = statsd.New("127.0.0.1:8125", statsd.WithoutTelemetry())
+```
+
+See [DataDog/datadog-go](https://github.com/DataDog/datadog-go) for more information about the client configuration.
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Telemetry will soon be added to the Java client.
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Telemetry will soon be added to the PHP client.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Telemetry will soon be added to the .NET client.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
