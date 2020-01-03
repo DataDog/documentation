@@ -16,11 +16,11 @@ Cette visualisation affiche une seule requête de métrique. Les requêtes suppl
 
 **Remarque** : la détection des singularités n'est pas possible avec cette visualisation.
 
-{{< img src="graphing/widgets/distribution/distribution.png" alt="Distribution" responsive="true" >}}
+{{< img src="graphing/widgets/distribution/distribution.png" alt="Distribution"  >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/distribution/distribution_setup.png" alt="Distribution" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
 
 ### Configuration
 
@@ -30,7 +30,7 @@ Utilisez les réglages `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos donn�
 ### Options
 #### Préférence d'affichage
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage"  style="width:80%;">}}
 
 ##### Intervalle global
 
@@ -44,7 +44,7 @@ Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la lége
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

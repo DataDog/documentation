@@ -1,7 +1,7 @@
 ---
 title: ホストへのタグの追加
 type: apicontent
-order: 30.3
+order: 31.3
 external_redirect: '/api/#add-tags-to-a-host'
 ---
 ## ホストへのタグの追加

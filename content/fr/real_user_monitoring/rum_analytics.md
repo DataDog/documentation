@@ -29,29 +29,29 @@ Créez une requête pour contrôler les données affichées dans votre analyse R
 
 1. Choisissez une [mesure][1] ou une [facette][2] à représenter graphiquement. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][2] affichent le nombre de valeurs uniques.
 
-    {{< img src="real_user_monitoring/rum_analytics/measure_selection.png" alt="Sélectionner une mesure" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/rum_analytics/measure_selection.png" alt="Sélectionner une mesure"  style="width:50%;">}}
 2. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous souhaitez représenter :
 
-    {{< img src="real_user_monitoring/rum_analytics/aggregation.png" alt="fonction d'agrégation pour l'analyse RUM Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/rum_analytics/aggregation.png" alt="fonction d'agrégation pour l'analyse RUM Analytics"  style="width:50%;">}}
 
 3. Utilisez une [facette][2] pour fractionner votre graphique.
 
-    {{< img src="real_user_monitoring/rum_analytics/break_down.png" alt="fractionner en fonction d'une facette RUM Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/rum_analytics/break_down.png" alt="fractionner en fonction d'une facette RUM Analytics"  style="width:50%;">}}
 
 4. Choisissez l'intervalle de temps à représenter.
   Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
 
-    {{< img src="real_user_monitoring/rum_analytics/roll_up.png" alt="rollup" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/rum_analytics/roll_up.png" alt="rollup"  style="width:50%;">}}
 
 4. Choisissez d'afficher les *X* valeurs les plus **élevées** ou **faibles** en fonction de la [mesure][1] sélectionnée.
 
-    {{< img src="real_user_monitoring/rum_analytics/top_bottom.png" alt="bouton top/bottom" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/rum_analytics/top_bottom.png" alt="bouton top/bottom"  style="width:50%;">}}
 
 ## Visualisations
 
 Sélectionnez un type de visualisation RUM Analytics à l'aide du sélecteur de graphique :
 
-{{< img src="real_user_monitoring/rum_analytics/graph_selector.png" alt="Sélecteur de graphique RUM Analytics" responsive="true" style="width:50%;">}}
+{{< img src="real_user_monitoring/rum_analytics/graph_selector.png" alt="Sélecteur de graphique RUM Analytics"  style="width:50%;">}}
 
 Visualisations disponibles :
 
@@ -78,7 +78,7 @@ La série temporelle RUM Analytics suivante montre :
 
 L'évolution de la **famille de navigateurs** selon le **90e centile** de **temps domInteractive** au cours des 7 derniers jours.
 
-{{< img src="real_user_monitoring/rum_analytics/rum_timeserie_example.png" alt="exemple de série temporelle RUM" responsive="true" style="width:90%;">}}
+{{< img src="real_user_monitoring/rum_analytics/rum_timeserie_example.png" alt="exemple de série temporelle RUM"  style="width:90%;">}}
 
 
 [1]: /fr/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
@@ -93,7 +93,7 @@ La Top List RUM Analytics suivante montre :
 
 L'évolution des **10 principaux chemins URL** selon le nombre d'**ID de session uniques** au cours du dernier jour.
 
-{{< img src="real_user_monitoring/rum_analytics/top_list_rum.png" alt="exemple de top list RUM" responsive="true" style="width:90%;">}}
+{{< img src="real_user_monitoring/rum_analytics/top_list_rum.png" alt="exemple de top list RUM"  style="width:90%;">}}
 
 
 [1]: /fr/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
@@ -111,7 +111,7 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 
  Le tableau RUM Analytics suivant affiche les **5 principaux chemins URL** consultés pour **deux pays**, les États-Unis et le Japon, selon le nombre d'**ID de session uniques** ainsi que le 90e centile de **durée** au cours du dernier jour :
 
-{{< img src="real_user_monitoring/rum_analytics/rum_table_example.png" alt="exemple de tableau RUM" responsive="true" style="width:90%;">}}
+{{< img src="real_user_monitoring/rum_analytics/rum_table_example.png" alt="exemple de tableau RUM"  style="width:90%;">}}
 
 [1]: /fr/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /fr/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
@@ -123,7 +123,7 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des événements correspondant à votre sélection :
 
-{{< img src="real_user_monitoring/rum_analytics/view_events.png" alt="afficher les événements" responsive="true" style="width:30%;" >}}
+{{< img src="real_user_monitoring/rum_analytics/view_events.png" alt="afficher les événements"  style="width:30%;" >}}
 
 ## Pour aller plus loin
 

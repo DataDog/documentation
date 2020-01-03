@@ -23,7 +23,7 @@ categories:
 doc_link: /integrations/kubernetes/
 ddtype: check
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 ## 概要
 

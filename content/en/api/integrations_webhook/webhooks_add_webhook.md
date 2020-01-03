@@ -1,7 +1,7 @@
 ---
 title: Update a Webhooks Integration
 type: apicontent
-order: 20.3
+order: 21.3
 external_redirect: /api/#update-a-webhooks-integration
 ---
 
@@ -10,7 +10,6 @@ external_redirect: /api/#update-a-webhooks-integration
 Add a specific Webhook to a Datadog Webhooks integration.
 
 **ARGUMENTS**:
-
 
 * **`hooks`** [*required*]:
     Array of Webhook objects. A Webhook object is composed by:

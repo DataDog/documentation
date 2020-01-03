@@ -14,34 +14,38 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 ---
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
 
 ## Overview
+
 After [creating your monitor][1], use the monitor status page to view the status over time. This page contains the following sections:
 
-- [Overview](#overview)
-- [Header](#header)
-  - [Mute](#mute)
-  - [Resolve](#resolve)
-  - [Settings](#settings)
-- [Properties](#properties)
-- [Status and History](#status-and-history)
-- [Events](#events)
-- [Further Reading](#further-reading)
+* [Overview](#overview)
+* [Header](#header)
+  * [Mute](#mute)
+  * [Resolve](#resolve)
+  * [Settings](#settings)
+* [Properties](#properties)
+* [Status and History](#status-and-history)
+* [Events](#events)
+* [Further Reading](#further-reading)
 
 These sections are open by default. The last three sections can be closed by using the toggle (&or;) icon to the left of the section name.
 
 ## Header
+
 On the left, the header contains the monitor's status, time of status, and monitor title.
 
 On the right, the header contains **Mute**, **Resolve**, and the **Settings** cog.
 
 ### Mute
+
 Choose to mute a monitor directly on its status page. Use the **Scope** field to narrow your downtime. Refer to [Downtimes][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
 **Note**: Muting or unmuting a monitor with the UI deletes all scheduled downtimes associated with that monitor.
 
 ### Resolve
+
 If your monitor is in an alert state, the **Resolve** button is visible. Use this button to resolve your monitor manually.
 
 The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
@@ -53,10 +57,11 @@ Manually `resolve`-ing a monitor is appropriate for cases where data is reported
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Settings
+
 Click the settings cog to display the options available:
 
 | Option | Description                                                                                                                                                                                                                                |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Edit   | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
 | Clone  | Make a copy of the current monitor.                                                                                                                                                                                                        |
 | Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
@@ -64,7 +69,7 @@ Click the settings cog to display the options available:
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties"  style="width:80%;" >}}
 
 The *Properties* section is the overview of your monitor:
 
@@ -81,7 +86,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are [aggregated correctly][5]. Slide this bracket over the timeline to view previous monitor evaluation results:
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" responsive="true" width="80%" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
 
 For further investigation into your metrics evolution, use the [Metric Explorer][6] or a dedicated [Notebook][7].
 
@@ -95,7 +100,7 @@ For further investigation into your metrics evolution, use the [Metric Explorer]
 
 All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][8].
 
-{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event"  style="width:80%;" >}}
 
 ## Further Reading
 

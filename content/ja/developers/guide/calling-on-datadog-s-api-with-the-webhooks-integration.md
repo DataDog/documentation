@@ -57,7 +57,7 @@ Webhook をセットアップするには、名前 (モニターで参照され�
 
 以下に、そのようなウィジェットの例を挙げます。ただし、このチェックの名前は「composite.status」で、グループ内の 1 つのモニターが「alert」をトリガーし、その後再び「ok」になりました。
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" >}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
 [1]: /ja/integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

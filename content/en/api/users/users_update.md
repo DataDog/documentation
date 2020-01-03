@@ -1,11 +1,12 @@
 ---
 title: Update user
 type: apicontent
-order: 35.4
+order: 36.4
 external_redirect: /api/#update-user
 ---
 
 ## Update user
+
 Can only be used with application keys belonging to administrators.
 
 **ARGUMENTS**:

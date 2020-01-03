@@ -11,7 +11,7 @@ kind: documentation
 
 `autosmooth()` 関数は、自動的に選択されたスパンで移動平均を適用し、トレンドを維持しつつ時系列を滑らかにします。この例では、関数が最適なスパンを選択して時系列を滑らかにしています。
 
-{{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration"  style="width:80%;">}}
 
 `group by` クエリ (例: `avg by`) で使用すると、すべての時系列で同じスパンが適用されます。同じグラフ内の複数のメトリクスで使用された場合、メトリクスの時系列それぞれが最適に滑らかになるように、異なるスパンを選択できます。
 
@@ -34,7 +34,7 @@ kind: documentation
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma3(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
 
 ### EWMA 5
 
@@ -48,7 +48,7 @@ kind: documentation
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma5(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
 
 ### EWMA 10
 
@@ -62,7 +62,7 @@ kind: documentation
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma10(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
 
 ### EWMA 20
 
@@ -76,7 +76,7 @@ kind: documentation
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma20(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
 
 ## 中央値 
 

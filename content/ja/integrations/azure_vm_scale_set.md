@@ -18,7 +18,7 @@ public_title: Datadog-Microsoft Azure Virtual Machine Scale Set インテグレ�
 short_description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡 and more.
 version: '1.0'
 ---
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard"  >}}
 
 ## 概要
 仮想マシンスケールセットは、同一の VM をセットでデプロイ、管理、オートスケーリングするために使用される Azure のコンピューティングリソースです。

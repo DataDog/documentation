@@ -22,7 +22,7 @@ version: '1.0'
 
 AWS Health fournit une visibilité continue sur l'état de vos ressources, services et comptes AWS. Activez cette intégration pour visualiser les événements du service AWS Health dans Datadog :
 
-{{< img src="integrations/amazon_health/awshealthevent.png" alt="Événement AWS Health" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_health/awshealthevent.png" alt="Événement AWS Health"  >}}
 
 **Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'un programme support Business ou Enterprise.
 

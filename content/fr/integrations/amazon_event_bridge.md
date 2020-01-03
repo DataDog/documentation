@@ -25,7 +25,7 @@ Grâce à l'intégration de Datadog à Amazon EventBridge, vous pouvez :
 * Configurer dans AWS des déclencheurs au niveau de vos bus d'événements avec des services tels que Kinesis, Lambda, etc.
 * Utiliser les informations d'un événement d'alerte afin d'exécuter des pipelines de correction automatique, des runbooks, des requêtes d'analyse, etc.
 
-{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" responsive="true">}}
+{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" >}}
 
 ## Implémentation
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].

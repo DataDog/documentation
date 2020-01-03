@@ -12,7 +12,8 @@ Custom metrics queried via custom_proc must have type <code>FLOAT</code> and not
 ## Qualifying your databases
 
 When you add your custom query, you have to be careful to make sure each table you reference has its database qualified. This can be done by prepending the table with its database name in the following format:
-```
+
+```text
 SELECT * FROM database_name.table_name WHERE...
 ```
 
@@ -37,7 +38,8 @@ The Agent caps off the number of custom queries it collects metrics from at 20, 
 ## Example
 
 Let's say you have a table called "test_table" in a database called "tester". test_table has the following content:
-```
+
+```text
 col_1 | col_2 | col_3
 ---------------------
 1     | a     | a
@@ -46,7 +48,8 @@ col_1 | col_2 | col_3
 ```
 
 If you were to add a custom query to your mysql.yaml with the following configuration setup:
-```
+
+```yaml
     queries:
       - query: SELECT col_1 FROM tester.test_table WHERE col_2 = 'b'
         metric: mysql.custom_query.test.b
@@ -58,7 +61,7 @@ If you were to add a custom query to your mysql.yaml with the following configur
 
 Then your Agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
 
-{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" >}}
+{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query"  >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example#L54-L71
 [2]: /developers/metrics/dogstatsd_metrics_submission

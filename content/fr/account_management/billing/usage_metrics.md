@@ -13,7 +13,7 @@ Datadog calcule quasiment en temps réel une estimation de votre utilisation act
 
 **Remarque** : ces métriques d'utilisation sont des estimations qui ne correspondront pas toujours à l'utilisation facturable, en raison de leur publication en quasi temps réel. En moyenne, une différence de 10 à 20 % peut être notée entre l'utilisation estimée et l'utilisation facturable.
 
-{{< img src="account_management/billing/usage-metrics-01.png" alt="Exemple de dashboard" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-01.png" alt="Exemple de dashboard" >}}
 
 ### Types d'utilisation
 
@@ -25,14 +25,14 @@ Les métriques d'estimation de l'utilisation sont généralement disponibles pou
 | Conteneurs         | `datadog.estimated_usage.containers`                                                                |
 | Métriques custom     | `datadog.estimated_usage.metrics.custom`                                                            |
 
-{{< img src="account_management/billing/usage-metrics-02.png" alt="Noms des métriques" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-02.png" alt="Noms des métriques" >}}
 
 
 ### Utilisation multi-organisations
 
 Pour les comptes disposant de plusieurs organisations, vous pouvez combiner l'estimation de l'utilisation des organisations enfant à l'aide du champ `from`. Cela vous permet de surveiller l'ensemble de l'utilisation de votre compte.
 
-{{< img src="account_management/billing/usage-metrics-03.png" alt="Utilisation multi-organisations" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-03.png" alt="Utilisation multi-organisations" >}}
 
 ## Dépannage
 Pour toute question technique, contactez [l'assistance Datadog][1].

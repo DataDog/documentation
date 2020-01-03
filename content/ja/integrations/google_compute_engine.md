@@ -43,7 +43,7 @@ Google Compute Engine のログは、Stackdriver を使用して収集され、H
 2. **エクスポートを作成**をクリックし、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクトに置くこともできます。
 
-{{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Export Google Compute Engine Logs to Pub Sub" responsive="true">}}
+{{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Export Google Compute Engine Logs to Pub Sub" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
@@ -58,7 +58,7 @@ Datadog は、GCE API からのホストステータスに基づいて、Google 
 
 GCE インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[Google Cloud Platform インテグレーションタイル][1]で **GCE automuting** チェックボックスをオンにします。
 
-{{< img src="integrations/google_compute_engine/gce_automuting.png" alt="GCE Automuting" responsive="true">}}
+{{< img src="integrations/google_compute_engine/gce_automuting.png" alt="GCE Automuting" >}}
 
 ## 収集データ
 ### メトリクス

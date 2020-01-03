@@ -34,7 +34,7 @@ disable_toc: true
 * `TOLERANCE`: 外れ値アルゴリズムの許容範囲
 * `PERCENTAGE`: 系列を外れ値とするために必要な外れポイントの割合 (MAD および scaledMAD アルゴリズムのみ)
 
-{{< img src="graphing/functions/algorithms/outlier.mp4" alt="outlier detection" video="true" responsive="true" width="70%" >}}
+{{< img src="graphing/functions/algorithms/outlier.mp4" alt="outlier detection" video="true"  width="70%" >}}
 
 詳細については、[外れ値モニター][2]のページを参照してください。
 
@@ -51,7 +51,7 @@ disable_toc: true
 
 予測値は独自に視覚化されるため、多数のグラフ作成オプションは非表示になります。**予測値**が正常に追加されると、エディターは以下のように表示されます。
 
-{{< img src="graphing/functions/algorithms/forecast_query.png" alt="query editor" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/algorithms/forecast_query.png" alt="query editor"  style="width:80%;">}}
 
 ## その他の関数
 

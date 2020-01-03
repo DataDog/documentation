@@ -12,12 +12,12 @@ further_reading:
 ---
 Affichez un flux de logs correspondant à la requête de votre choix :
 
-{{< img src="graphing/widgets/log_stream/log_stream.png" alt="Flux de logs" responsive="true">}}
+{{< img src="graphing/widgets/log_stream/log_stream.png" alt="Flux de logs" >}}
 
 ## Implémentation
 ### Configuration
 
-{{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Configuration du flux de logs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Configuration du flux de logs"  style="width:80%;">}}
 
 Saisissez une [requête de log][1] pour filtrer le flux de logs.
 
@@ -34,7 +34,7 @@ Choisissez si votre widget doit afficher un intervalle personnalisé ou l'interv
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

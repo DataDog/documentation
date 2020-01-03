@@ -1,7 +1,7 @@
 ---
 title: Créer une clé d'API
 type: apicode
-order: 21.03
+order: 22.03
 external_redirect: "/api/#creer-une-cle-d-api"
 ---
 

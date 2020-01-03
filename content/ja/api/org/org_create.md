@@ -1,7 +1,7 @@
 ---
 title: 子オーガニゼーションの作成
 type: apicontent
-order: 27.1
+order: 28.1
 external_redirect: '/api/#create-child-organization'
 ---
 ## 子オーガニゼーションの作成

@@ -62,7 +62,7 @@ Intégrez le traceur go avec la liste de frameworks Web ci-dessous via l'un des 
 | [Gin][8]          | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin][9]               |
 | [Gorilla Mux][10] | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][11]                |
 | [gRPC][12]        | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][13]     |
-| [gRPC v1.2][14]   | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][15] |
+| [gRPC v1.2][12]   | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][14] |
 
 #### Compatibilité des bibliothèques
 
@@ -70,29 +70,29 @@ Le traceur Go prend en charge les datastores et les bibliothèques suivants.
 
 | Bibliothèque                 | Type de prise en charge    | Exemples et documentation                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
-| [AWS SDK][16]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][17]                |
-| [Elasticsearch][18]     | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][19]                   |
-| [Cassandra][20]         | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][21]                       |
-| [GraphQL][22]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][23]          |
-| [HTTP][24]              | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][25]                          |
-| [HTTP router][26]       | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][27]          |
-| [Redis (go-redis)][28]  | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][29]                    |
-| [Redis (redigo)][30]    | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][31]                   |
-| [SQL][32]               | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][33]                      |
-| [SQLx][34]              | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][35]                      |
-| [MongoDB][36]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][37] |
-| [BuntDB][38]            | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][39]                    |
-| [LevelDB][40]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][41]          |
-| [miekg/dns][42]         | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][43]                         |
-| [Kafka (confluent)][44] | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][45]   |
-| [Kafka (sarama)][46]    | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][47]                    |
-| [Google API][48]        | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][49]             |
-| [go-restful][50]        | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][51]               |
-| [Twirp][52]             | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][53]                    |
-| [Vault][54]             | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][55]                   |
+| [AWS SDK][15]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][16]                |
+| [Elasticsearch][17]     | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][18]                   |
+| [Cassandra][19]         | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][20]                       |
+| [GraphQL][21]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][22]          |
+| [HTTP][23]              | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][24]                          |
+| [HTTP router][25]       | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][26]          |
+| [Redis (go-redis)][27]  | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][28]                    |
+| [Redis (redigo)][29]    | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][30]                   |
+| [SQL][31]               | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][32]                      |
+| [SQLx][33]              | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][34]                      |
+| [MongoDB][35]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][36] |
+| [BuntDB][37]            | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][38]                    |
+| [LevelDB][39]           | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][40]          |
+| [miekg/dns][41]         | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][42]                         |
+| [Kafka (confluent)][43] | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][44]   |
+| [Kafka (sarama)][45]    | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][46]                    |
+| [Google API][47]        | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][48]             |
+| [go-restful][49]        | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][50]               |
+| [Twirp][51]             | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][52]                    |
+| [Vault][53]             | Prise en charge complète | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][54]                   |
 
 
-**Remarque** : la [documentation sur les intégrations][56] contient une description détaillée des paquets pris en charge et de leurs API, ainsi que des exemples d'utilisation.
+**Remarque** : la [documentation sur les intégrations][55] contient une description détaillée des paquets pris en charge et de leurs API, ainsi que des exemples d'utilisation.
 
 Les paquets doivent être importés de la façon suivante :
 
@@ -108,18 +108,17 @@ Le traceur est configuré avec des paramètres d'option lorsque la fonction `Sta
 package main
 
 import (
+    "log"
     "net/http"
     "strings"
-    "log"
+
     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
-  message := r.URL.Path
-  message = strings.TrimPrefix(message, "/")
-  message = "Hello " + message
-  w.Write([]byte(message))
+    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
+    w.Write([]byte(msg))
 }
 
 func main() {
@@ -128,7 +127,7 @@ func main() {
     defer tracer.Stop()
 
     mux := httptrace.NewServeMux() // initialiser le traceur http
-    mux.HandleFunc("/", sayHello) // utiliser le traceur pour gérer les URL
+    mux.HandleFunc("/", sayHello)  // utiliser le traceur pour gérer les URL
 
     err := http.ListenAndServe(":9090", mux) // définir le port d'écoute
     if err != nil {
@@ -137,11 +136,11 @@ func main() {
 }
 ```
 
-Pour découvrir toutes les options disponibles pour le traceur, consultez la [documentation de configuration][57].
+Pour découvrir davantage de paramètres pour le traceur, consultez les options disponibles dans la [documentation de configuration][56].
 
 ### Extraction et injection d'en-têtes B3
 
-Le traceur de l'APM Datadog prend en charge [l'extraction et l'injection d'en-têtes B3][58] pour le tracing distribué.
+Le traceur de l'APM Datadog prend en charge l'injection et l'[extraction d'en-têtes B3][57] pour le tracing distribué.
 
 L'injection et l'extraction distribuées d'en-têtes sont contrôlées en configurant des styles d'injection/extraction. Deux styles sont actuellement pris en charge : `Datadog` et `B3`.
 
@@ -197,48 +196,47 @@ func main() {
 [11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
 [12]: https://github.com/grpc/grpc-go
 [13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
-[14]: https://github.com/grpc/grpc-go
-[15]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12
-[16]: https://aws.amazon.com/sdk-for-go
-[17]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws
-[18]: https://github.com/olivere/elastic
-[19]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic
-[20]: https://github.com/gocql/gocql
-[21]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql
-[22]: https://github.com/graph-gophers/graphql-go
-[23]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go
-[24]: https://golang.org/pkg/net/http
-[25]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
-[26]: https://github.com/julienschmidt/httprouter
-[27]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter
-[28]: https://github.com/go-redis/redis
-[29]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis
-[30]: https://github.com/garyburd/redigo
-[31]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo
-[32]: https://golang.org/pkg/database/sql
-[33]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
-[34]: https://github.com/jmoiron/sqlx
-[35]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx
-[36]: https://github.com/mongodb/mongo-go-driver
-[37]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo
-[38]: https://github.com/tidwall/buntdb
-[39]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb
-[40]: https://github.com/syndtr/goleveldb
-[41]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb
-[42]: https://github.com/miekg/dns
-[43]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns
-[44]: https://github.com/confluentinc/confluent-kafka-go
-[45]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go
-[46]: https://github.com/Shopify/sarama
-[47]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama
-[48]: https://github.com/googleapis/google-api-go-client
-[49]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api
-[50]: https://github.com/emicklei/go-restful
-[51]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful
-[52]: https://github.com/twitchtv/twirp
-[53]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp
-[54]: https://github.com/hashicorp/vault
-[55]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault
-[56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[57]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[58]: https://github.com/openzipkin/b3-propagation
+[14]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12
+[15]: https://aws.amazon.com/sdk-for-go
+[16]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws
+[17]: https://github.com/olivere/elastic
+[18]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic
+[19]: https://github.com/gocql/gocql
+[20]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql
+[21]: https://github.com/graph-gophers/graphql-go
+[22]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go
+[23]: https://golang.org/pkg/net/http
+[24]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
+[25]: https://github.com/julienschmidt/httprouter
+[26]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter
+[27]: https://github.com/go-redis/redis
+[28]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis
+[29]: https://github.com/garyburd/redigo
+[30]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo
+[31]: https://golang.org/pkg/database/sql
+[32]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
+[33]: https://github.com/jmoiron/sqlx
+[34]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx
+[35]: https://github.com/mongodb/mongo-go-driver
+[36]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo
+[37]: https://github.com/tidwall/buntdb
+[38]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb
+[39]: https://github.com/syndtr/goleveldb
+[40]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb
+[41]: https://github.com/miekg/dns
+[42]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns
+[43]: https://github.com/confluentinc/confluent-kafka-go
+[44]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go
+[45]: https://github.com/Shopify/sarama
+[46]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama
+[47]: https://github.com/googleapis/google-api-go-client
+[48]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api
+[49]: https://github.com/emicklei/go-restful
+[50]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful
+[51]: https://github.com/twitchtv/twirp
+[52]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp
+[53]: https://github.com/hashicorp/vault
+[54]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault
+[55]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[57]: https://github.com/openzipkin/b3-propagation

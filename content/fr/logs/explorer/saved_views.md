@@ -22,7 +22,7 @@ La vue par défaut comprend :
 
 Toutes les modifications apportées à la liste des facettes (voir ci-dessous) ou dans la disposition de la page sont automatiquement enregistrées dans cette vue par défaut.
 
-{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
+{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Sélection d'une vue enregistrée" >}}
 
 
 ## Vues enregistrées
@@ -38,11 +38,11 @@ Les vues enregistrées vous permettent d'enregistrer des recherches personnalis�
 
 Sélectionnez les vues enregistrées directement dans le volet de gauche ou dans la barre de recherche, à l'aide de la saisie automatique, qui correspondent au nom de la recherche ou à la requête.
 
-{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Sélection d'une vue enregistrée" responsive="true">}}
+{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Sélection d'une vue enregistrée" >}}
 
 Ajoutez une étoile aux vues enregistrées pour les ajouter à vos favoris. Vous pouvez accéder aux vues enregistrées marquées d'une étoile directement à partir du menu de navigation principal.
 
-{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Chargement des vues enregistrées" video="true" responsive="true" >}}
+{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Chargement des vues enregistrées" video="true"  >}}
 
 ### Gérer les vues enregistrées
 
@@ -50,7 +50,7 @@ Pour créer une vue enregistrée, cliquez sur le bouton *Save as* en haut de l'�
 
 Vous pouvez filtrer vos données à partir d'une vue enregistrée. Si besoin, mettez à jour la vue afin d'effectuer un suivi de la requête ou de la configuration de la disposition de page. Pour ce faire, cliquez sur le bouton "Save As".
 
-{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Création d'une vue enregistrée" responsive="true" >}}
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Création d'une vue enregistrée"  >}}
 
 Les vues enregistrées peuvent être supprimées directement depuis la liste Saved View dans le Log Explorer. Passez le curseur sur le nom de la vue enregistrée pour afficher le bouton **Delete**. Cliquez ensuite sur ce dernier et confirmez.
 

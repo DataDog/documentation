@@ -3,7 +3,7 @@ title: Introduction to Datadog in 2 Minutes
 kind: video
 language: en
 wistiaid: ywu4jabmlf
-videos:
+"video-categories":
     - Introduction
 summary: Don't have 5 minutes? How about 2? That's enough to get a good overview of what Datadog has to offer.
 private: true

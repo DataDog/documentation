@@ -6,7 +6,6 @@ disable_toc: true
 ---
 
 
-
 {{< whatsnext desc="Getting started with APM" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. Alert on anomalies in database services p99 latency [3 mins]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Compare p50 latency week over week for a service [2 mins]{{< /nextlink >}}

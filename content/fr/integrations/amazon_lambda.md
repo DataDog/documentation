@@ -18,7 +18,7 @@ further_reading:
     text: "Couche Lambda Datadog\_: surveiller des métriques custom sans serveur"
 git_integration_title: amazon_lambda
 has_logo: true
-integration_title: "Amazon\_Lambda"
+integration_title: Amazon Lambda
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -77,13 +77,13 @@ L'ARN de la couche Lambda Datadog comprend une région, le runtime du langage et
 Par exemple :
 
   ~~~
-  arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:8
+  arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
   ~~~
 
 | Langage | Runtime                                                    | Versions             |
 |----------|------------------------------------------------------------|----------------------|
-| Python   | `Python27`, `Python36`, `Python37`                         | [Dernière version][16] |
-| Node.js  | `Node8-10`, `Node10-x`                                     | [Dernière version][17] |
+| Python   | `Python27`, `Python36`, `Python37`, `Python38`             | [Dernière version][16] |
+| Node.js  | `Node8-10`, `Node10-x`, `Node12-x`                         | [Dernière version][17] |
 | Ruby     | `Ruby`                                                     | [Dernière version][18] |
 
 **Golang :** les liens vers les binaires Go étant statiques, Datadog propose un [paquet][14] qu'il vous suffit d'importer dans votre projet. Aucune couche Lambda n'est requise.
@@ -213,7 +213,7 @@ Lorsque cela est approprié, Datadog associe les traces AWS X-Ray aux traces de 
 
 **Remarque** : pour que les traces X-Ray apparaissent sur le même flamegraph que celles de l'APM de Datadog, tous les services doivent posséder le [même tag `env`](#tag-env).
 
-{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" responsive="true">}}
+{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" >}}
 
 #### Organiser votre infrastructure avec les tags
 
@@ -233,7 +233,7 @@ Ajoutez le [tag][28] `service` [tag][28] afin de regrouper les fonctions Lambda 
 
 Par défaut, chaque fonction Lambda est considérée comme un `service` distinct. Ajoutez votre propre tag pour modifier ce comportement.
 
-{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" responsive="true">}}
+{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" >}}
 
 ### Métriques custom
 
@@ -378,7 +378,7 @@ end
 {{% /tab %}}
 {{% tab "Java, .NET et runtimes personnalisés" %}}
 
-L'envoi de [métriques custom asynchrones](#metriques-custom-synchrones-et-asynchrones) est possible pour n'importe quel langage ou runtime personnalisé. Une chaîne au format JSON spéciale est ajoutée à votre fonction Lambda, et celle-ci est ensuite identifiée par la [fonction Lambda du Forwarder Datadog][8] puis envoyée à Datadog. Pour utiliser cette fonctionnalité :
+L'envoi de [métriques custom asynchrones](#metriques-custom-synchrones-et-asynchrones) est possible pour n'importe quel langage ou runtime personnalisé. Une chaîne au format JSON spéciale est ajoutée à votre fonction Lambda, et celle-ci est ensuite identifiée par la [fonction Lambda du Forwarder Datadog][1] puis envoyée à Datadog. Pour utiliser cette fonctionnalité :
 
 1. [Activez les métriques custom asynchrones](#enabling-asynchronous-custom-metrics)
 2. Écrivez une fonction réutilisable qui enregistre vos métriques custom au format suivant :
@@ -405,6 +405,7 @@ Exemple :
 
 **Remarque :** ces métriques custom sont envoyées en tant que [distributions](#metriques-custom). Si vous avez déjà envoyé des métriques custom d'une autre façon, [consultez la documentation concernant le passage aux métriques de distribution](#passer-aux-metriques-de-distribution).
 
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 {{% /tab %}}
 {{< /tabs >}}
 

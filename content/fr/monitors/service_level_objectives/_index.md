@@ -23,7 +23,7 @@ L'*uptime* ou la disponibilité correspond à la durée pendant laquelle un moni
 
 Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des événements. Par exemple : `99 % des requêtes sont effectuées avec succès`
 
-{{< img src="monitors/service_level_objectives/create-slo.png" alt="créer un slo" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/create-slo.png" alt="créer un slo"  >}}
 
 ### Configuration
 
@@ -34,7 +34,7 @@ Vous pouvez également surveiller le taux de réussite et les SLI (Service Level
 
 Une fois les monitors configurés, la [page principale des Service Level Objectives][1] vous permet de consulter le pourcentage global de disponibilité uniquement ou le pourcentage global ainsi que la disponibilité pour chaque monitor.
 
-{{< img src="monitors/service_level_objectives/slo-overview.png" alt="page slo principale" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/slo-overview.png" alt="page slo principale"  >}}
 
 ## Modifier un SLO
 
@@ -65,7 +65,7 @@ Lorsque vous créez ou modifiez un SLO, vous pouvez ajouter des tags afin de fil
 
 ### Calcul de la disponibilité globale
 
-{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="calcul de la disponibilité globale" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="calcul de la disponibilité globale"  >}}
 
 Le résultat de disponibilité globale calculé pour un temps `T_x` s'exprime en logique booléenne et correspond à la conjonction logique (la conjonction `AND`) de tous les statuts de monitor au temps `T_x`.
 

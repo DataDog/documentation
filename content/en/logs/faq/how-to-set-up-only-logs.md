@@ -14,9 +14,9 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 1. Open the [datadog.yaml configuration file][1].
 2. Add the enable_payloads attribute with the following settings:
 
-    ```
+    ```yaml
     enable_payloads:
- 		series: false
+    series: false
         events: false
         service_checks: false
         sketches: false
@@ -29,14 +29,12 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 
 If you are using the container Agent, set the following environment variables to false:
 
-```
+```text
 DD_ENABLE_PAYLOADS_EVENTS
 DD_ENABLE_PAYLOADS_SERIES
 DD_ENABLE_PAYLOADS_SERVICE_CHECKS
 DD_ENABLE_PAYLOADS_SKETCHES
 ```
-
-
 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection

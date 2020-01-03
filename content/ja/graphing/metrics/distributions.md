@@ -29,11 +29,11 @@ further_reading:
 
 `gauges` や `histograms` などのメトリクスタイプと同様に、ディストリビューションでは集計 `count`、`min`、`max`、`sum`、`avg` を使用できます。ディストリビューションは、まず他のメトリクスと同様にタグ付けられ (コードで設定されたカスタムタグを使用)、メトリクスを報告したホストに基づいてホストタグに解決されます。[ディストリビューションメトリクス][2]のページで指定された一連のタグ (最大 10 個) のパーセンタイル集計も計算できます。提供される集計は `p50`、`p75`、`p90`、`p95`、`p99` です。
 
-{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
 
 ディストリビューションメトリクスにパーセンタイル集計を適用することを選択すると、これらの集計を自動的にグラフ化 UI で使用できるようになります。
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis"  style="width:80%;">}}
 
 ## タグ付けのカスタマイズ
 
@@ -43,7 +43,7 @@ further_reading:
 
 **注**: ホワイトリストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。
 
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric"  style="width:80%;">}}
 
 ## ディストリビューションメトリクスのカウント
 

@@ -65,7 +65,6 @@ The following official DogStatsD client libraries natively support UDS traffic. 
 | PHP      | [DataDog/php-datadogstatsd][8]       |
 | C#       | [DataDog/dogstatsd-csharp-client][9] |
 
-
 #### Using netcat
 
 To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:

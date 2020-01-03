@@ -16,7 +16,7 @@ further_reading:
     tag: Centre d'apprentissage
     text: Aller plus loin avec les logs grâce au parsing
 ---
-{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="log d'origine" responsive="true">}}
+{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="log d'origine" >}}
 
 ## Objectif des pipelines
 
@@ -30,15 +30,15 @@ Chaque log qui passe par les pipelines est testé avec chaque filtre de pipeline
 
 Ainsi, un pipeline de traitement peut transformer ce log :
 
-{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="log d'origine" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="log d'origine"  style="width:50%;">}}
 
 En ce log :
 
-{{< img src="logs/processing/pipelines/log_post_processing.png" alt="log après traitement" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt="log après traitement"  style="width:50%;">}}
 
 Avec un seul pipeline :
 
-{{< img src="logs/processing/pipelines/pipeline_example.png" alt="exemple de pipelines" responsive="true" style="width:75%;">}}
+{{< img src="logs/processing/pipelines/pipeline_example.png" alt="exemple de pipelines"  style="width:75%;">}}
 
 Les pipelines traitent tous les formats de logs et les convertissent en un format commun dans Datadog.
 
@@ -54,7 +54,7 @@ La syntaxe d'un filtre est identique à celle de la [barre de recherche][2].
 
 Le flux de logs affiche les logs auxquels votre pipeline s'applique :
 
-{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="filtres de pipeline" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="filtres de pipeline"  style="width:80%;">}}
 
 ## Pipelines imbriqués
 
@@ -62,11 +62,11 @@ Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les 
 
  Un pipeline peut contenir des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
 
-{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="pipelines imbriqués" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="pipelines imbriqués"  style="width:80%;">}}
 
  Il est possible de faire glisser un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
 
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Créer des pipelines imbriqués avec un glisser-déposer" video="true" responsive="true" width="80%" >}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Créer des pipelines imbriqués avec un glisser-déposer" video="true"  width="80%" >}}
 
 ## Pipelines spéciaux
 
@@ -89,11 +89,11 @@ Par exemple, imaginons un service qui génère les logs ci-dessous :
 
 Accédez au pipeline d'attribut réservé et remplacez le mappage par défaut par ce qui suit :
 
-{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="remappage de l'attribut réservé" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="remappage de l'attribut réservé"  style="width:70%;">}}
 
 On obtient alors le log suivant :
 
-{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="log après remappage" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="log après remappage"  style="width:70%;">}}
 
 Si vous souhaitez remapper un attribut vers un des attributs réservés dans un pipeline personnalisé, utilisez le [remappeur de statut de log][4] ou le [remappeur de dates de log][5].
 
@@ -101,7 +101,7 @@ Si vous souhaitez remapper un attribut vers un des attributs réservés dans un 
 
 Les pipelines de processing d'intégration de Datadog sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Ces pipelines sont en mode **lecture seule** et analysent vos logs en s'adaptant à chaque source. Pour modifier le pipeline d'intégration, clonez-le, puis modifiez le clone :
 
-{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline"  style="width:80%;">}}
 
 Pour afficher la liste complète des pipelines d'intégration, consultez la page des [références relatives aux pipelines d'intégration][6].
 

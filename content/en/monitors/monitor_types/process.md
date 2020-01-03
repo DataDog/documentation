@@ -28,7 +28,7 @@ Search for a process to monitor using a space separated list of strings. The sea
 
 Matching processes and counts are displayed below the search:
 
-{{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes"  style="width:90%;">}}
 
 After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found.  For more granular data, visit your [Live Process Page][4].
 
@@ -50,8 +50,8 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 ## Further Reading
-{{< partial name="whats-next/whats-next.html" >}}
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process

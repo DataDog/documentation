@@ -94,7 +94,7 @@ Vous pouvez également effectuer une recherche d'attribut numérique dans une pl
 
 La saisie de requête complexe peut être fastidieuse. Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche" responsive="true" style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche"  style="width:60%;">}}
 
 ### Échappement de caractères spéciaux
 
@@ -112,7 +112,7 @@ Si un attribut est appelé `user.first name`, effectuez une recherche sur cet at
 
 Ne perdez pas de temps à créer les mêmes vues tous les jours. Les recherches enregistrées contiennent votre requête de recherche, les colonnes et l'horizon temporel. Pour retrouver une recherche enregistrée, saisissez son nom ou sa requête dans la barre de recherche et utilisez la saisie automatique.
 
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="Recherche enregistrée" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="Recherche enregistrée"  style="width:80%;">}}
 
 Pour supprimer une recherche enregistrée, cliquez sur l'icone en forme de corbeille sous le menu déroulant de recherche de traces. 
 
@@ -120,41 +120,41 @@ Pour supprimer une recherche enregistrée, cliquez sur l'icone en forme de corbe
 
 L'intervalle vous permet d'afficher les traces correspondant à une période donnée. Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante :
 
-{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Intervalle" responsive="true" >}}
+{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Intervalle"  >}}
 
 ## Flux de traces
 Le flux de traces regroupe la liste des traces qui correspondent au contexte sélectionné. Un contexte est défini par un filtre de [barre de recherche](#barre-de-recherche) et un [intervalle](#intervalle).
 
 Cliquez sur l'en-tête de colonne **date** pour trier la liste.
 
-{{< img src="tracing/app_analytics/search/trace_list.png" alt="Liste de traces" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list.png" alt="Liste de traces"  style="width:80%;">}}
 
 ### Afficher une trace complète
 
 Cliquez sur une trace pour l'examiner plus en détail :
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace dans le flux de traces" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace dans le flux de traces"  style="width:80%;">}}
 
 ### Colonnes
 
 Pour ajouter plus d'informations de tracing à la liste, cliquez sur le bouton **Columns** et sélectionnez les facettes que vous souhaitez voir :
 
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Liste de traces avec colonnes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Liste de traces avec colonnes"  style="width:80%;">}}
 
 ### Affichage multiligne
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Affichage multiligne" responsive="true" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Affichage multiligne"  style="width:30%;">}}
 
 Choisissez d'afficher une, trois ou dix lignes à partir de vos traces. L'affichage de trois et dix lignes vous offre davantage d'informations sur l'attribut `error.stack`.
 
 * Avec une ligne affichée :
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="Affichage multiligne avec 1 ligne" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="Affichage multiligne avec 1 ligne"  style="width:80%;">}}
 
 * Avec trois lignes affichées :
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="Affichage multiligne avec 2 lignes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="Affichage multiligne avec 2 lignes"  style="width:80%;">}}
 
 * Avec dix lignes affichées :
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="Affichage multiligne avec 10 lignes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="Affichage multiligne avec 10 lignes"  style="width:80%;">}}
 
 ## Facettes
 
@@ -162,13 +162,13 @@ Une facette présente toutes les valeurs distinctes d'un attribut ou d'un tag en
 
 Les facettes vous permettent de faire pivoter ou de filtrer vos ensembles de données en fonction d'un attribut donné. Les facettes peuvent correspondre à des utilisateurs, des services, etc.
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Démonstration facettes" responsive="true" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Démonstration facettes"  style="width:80%;">}}
 
 ### Créer une facette
 
 Pour commencer à utiliser un attribut en tant que facette ou dans une recherche, cliquez dessus et ajoutez-le en tant que facette :
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette"  style="width:50%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et la requête de graphique de trace.
 
@@ -176,7 +176,7 @@ Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes
 
 Utilisez les facettes pour filtrer facilement vos traces. La barre de recherche et l'URL reflètent automatiquement vos sélections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Volet facettes" responsive="true" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Volet facettes"  style="width:30%;">}}
 
 ## Pour aller plus loin
 

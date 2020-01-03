@@ -1,7 +1,7 @@
 ---
 title: トレース検索の 1 時間あたり使用量の取得
 type: apicontent
-order: 33.5
+order: 34.5
 external_redirect: "/api/#get-hourly-usage-for-trace-search"
 ---
 

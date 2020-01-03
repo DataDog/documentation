@@ -19,7 +19,7 @@ short_description: Visualisez des exceptions Sentry dans votre flux d'événemen
 version: '1.0'
 ---
 
-{{< img src="integrations/sentry/sentry.png" alt="événement sentry" responsive="true" popup="true">}}
+{{< img src="integrations/sentry/sentry.png" alt="événement sentry"  >}}
 
 ## Présentation
 

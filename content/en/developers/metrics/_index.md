@@ -26,9 +26,9 @@ A Datadog metric is defined by the properties below. Refer to the [Metrics Intro
 | `<TIMESTAMP>`     | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
 | `<CONTEXT>`      | The set of tags associated with your metric.                                                                                                              |
 | `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][2].                                                                                          |
-| `<INTERVAL>`     | If the `<TYPE>` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
+| `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][3] or [COUNT][4], it defines the corresponding [interval][5].                                                                    |
 
-If a metric is not submitted from one of the [350+ Datadog integrations][3], it's considered a [Custom Metric][4]. **Note**: Some standard integrations [emit custom metrics][5].
+If a metric is not submitted from one of the [350+ Datadog integrations][6], it's considered a [Custom Metric][7]. **Note**: Some standard integrations [emit custom metrics][8].
 
 ### Naming metrics
 
@@ -53,7 +53,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][6] to submit your metrics
+You can also use one of the [Datadog-official and community contributed API and DogStatsD client libraries][9] to submit your metrics
 
 ## Further reading
 
@@ -61,7 +61,10 @@ You can also use one of the [Datadog-official and community contributed API and 
 
 [1]: /graphing/metrics/introduction
 [2]: /developers/metrics/types
-[3]: /integrations
-[4]: /developers/metrics/custom_metrics
-[5]: /account_management/billing/custom_metrics/#standard-integrations
-[6]: /developers/libraries
+[3]: /developers/metrics/types/?tab=rate#metric-submission-types
+[4]: /developers/metrics/types/?tab=count#metric-submission-types
+[5]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
+[6]: /integrations
+[7]: /developers/metrics/custom_metrics
+[8]: /account_management/billing/custom_metrics/#standard-integrations
+[9]: /developers/libraries

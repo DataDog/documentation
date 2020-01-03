@@ -11,6 +11,7 @@ further_reading:
   tag: "Integrations"
   text: "Datadog's full list of integrations"
 ---
+
 * [Setting up an integration](#setting-up-an-integration)
   * [API and Application keys](#api-and-application-keys)
   * [Installation](#installation)
@@ -19,7 +20,7 @@ further_reading:
   * [Validation](#validation)
 * [Installing multiple integrations](#installing-multiple-integrations)
 * [Security practices](#security-practices)
-* [What's next?](#whats-next)
+* [What's next?](#what-s-next)
 * [Troubleshooting](#troubleshooting)
 * [Key terms](#key-terms)
 * [Further Reading](#further-reading)
@@ -64,7 +65,7 @@ To activate a given integration:
 
 For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the [apache integration][24]:
 
-```
+```yaml
 init_config:
 
 instances:
@@ -85,7 +86,7 @@ logs:
 
 To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:
 
-```
+```yaml
 init_config:
 
 instances:

@@ -1,7 +1,7 @@
 ---
 title: Récupérer une organisation
 type: apicontent
-order: 27.2
+order: 28.2
 external_redirect: /api/#recuperer-une-organisation
 ---
 

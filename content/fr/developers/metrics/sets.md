@@ -17,7 +17,7 @@ Les sets servent à compter le nombre d'éléments uniques dans un groupe.
 
 ### Check de l'Agent
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |Méthode | Présentation |
 |:---|:---|
@@ -26,7 +26,7 @@ Les sets servent à compter le nombre d'éléments uniques dans un groupe.
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |Méthode | Présentation |
 |:---|:---|

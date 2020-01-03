@@ -1,7 +1,7 @@
 ---
 title: Edit an API key
 type: apicode
-order: 21.04
+order: 22.04
 external_redirect: /api/#edit-an-api-key
 ---
 

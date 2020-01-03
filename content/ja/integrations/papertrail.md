@@ -16,7 +16,7 @@ public_title: Datadog-PaperTrail インテグレーション
 short_description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論 stream.
 version: '1.0'
 ---
-{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail example" responsive="true" popup="true">}}
+{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail example"  >}}
 
 ## 概要
 
@@ -34,12 +34,12 @@ Papertrail からのメトリクスをキャプチャするには、以下のよ
 1.  検索の名前を入力し、**Save & Setup an Alert** ボタンをクリックします。
 1.  Graphing & Metrics で Datadog を選択します。
 
-    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications" responsive="true" popup="true">}}
+    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Papertrail notifications"  >}}
 
 1.  アラート頻度などの詳細を選択します。
 1.  Datadog API キーを指定して、メトリクスに付ける名前を入力し、オプションで、メトリクスと関連付けるタグを入力します。
 
-    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications" responsive="true" popup="true">}}
+    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Papertrail notifications"  >}}
 
 1.  **Create Alert** ボタンをクリックします。
 

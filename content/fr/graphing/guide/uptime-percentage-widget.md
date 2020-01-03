@@ -45,13 +45,13 @@ L'exemple utilise des paramètres facultatifs, à savoir un délai de 3 seconde
 
 Utilisez le [Metrics Explorer][7] pour vérifier que la métrique transmet des données à Datadog. Ici, `amazon.com` renvoie des réponses HTTP de 200 s ou 300 s, alors que le délai imposé est de 3 secondes :
 
-{{< img src="graphing/guide/upw_metrics_explorer.png" alt="Metrics Explorer" responsive="true">}}
+{{< img src="graphing/guide/upw_metrics_explorer.png" alt="Metrics Explorer" >}}
 
 ## Graphiques
 
 Affichez ensuite `network.http.can_connect` pour votre URL dans un [widget Valeur de requête][2]. Exemple :
 
-{{< img src="graphing/guide/upw_qvw01.png" alt="Widget Valeur de requête" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw01.png" alt="Widget Valeur de requête" >}}
 
 Pour afficher le pourcentage de disponibilité, modifiez les paramètres dans le widget Valeur de requête.
 
@@ -61,13 +61,13 @@ Pour afficher le pourcentage de disponibilité, modifiez les paramètres dans le
 4. Désélectionnez l'option de mise à l'échelle automatique qui force le widget à afficher une valeur flottante avec deux décimales.
 5. Sélectionnez **Use Custom units**. Ajoutez `%` à la zone de texte qui apparaît.
 
-{{< img src="graphing/guide/upw_qvw02.png" alt="Widget Valeur de requête" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw02.png" alt="Widget Valeur de requête" >}}
 
 ### Mise en forme conditionnelle
 
 Si vous le souhaitez, vous pouvez ajouter une mise en forme conditionnelle grâce à la section **Conditional Format**. L'exemple ci-dessous affiche en rouge les valeurs inférieures à 99,99 % :
 
-{{< img src="graphing/guide/upw_qvw03.png" alt="Widget Valeur de requête" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw03.png" alt="Widget Valeur de requête" >}}
 
 ### Exemple de JSON
 

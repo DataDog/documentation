@@ -27,7 +27,7 @@ Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and 
 
 You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
 
-{{< img src="monitors/service_level_objectives/create-slo.png" alt="create a slo" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/create-slo.png" alt="create a slo"  >}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ You can also track success rate and event-based SLIs (Service Level Indicators).
 
 Once you have monitors set up, on the [main Service Level Objectives page][1], you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="monitors/service_level_objectives/slo-overview.png" alt="slo main page" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/slo-overview.png" alt="slo main page"  >}}
 
 ## Edit an SLO
 
@@ -69,7 +69,7 @@ When you create or edit an SLO, you can add tags for filtering on the [list SLOs
 
 ### Overall Uptime Calculation
 
-{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation" responsive="true" >}}
+{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
 The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
 

@@ -5,22 +5,28 @@ left:
     children:
       - name: product_features
         link: 'https://www.datadoghq.com/product/'
-        title: Caractéristiques
+        title: Fonctionnalités
       - name: product_integrations
         link: 'https://www.datadoghq.com/product/integrations/'
         title: Intégrations
-      - name: product_apm
-        link: 'https://www.datadoghq.com/apm/'
-        title: APM
-      - name: product_logs
-        link: 'https://www.datadoghq.com/log-management/'
-        title: Log Management
       - name: product_dashboards
         link: 'https://www.datadoghq.com/dashboarding/'
         title: Dashboards
+      - name: product_logs
+        link: 'https://www.datadoghq.com/log-management/'
+        title: Log Management
+      - name: product_apm
+        link: 'https://www.datadoghq.com/apm/'
+        title: APM
+      - name: product_network
+        link: 'https://www.datadoghq.com/network/'
+        title: Réseau
       - name: product_synthetics
         link: 'https://www.datadoghq.com/synthetics/'
         title: Synthetics
+      - name: product_rum
+        link: 'https://www.datadoghq.com/rum/'
+        title: RUM
       - name: product_alerts
         link: 'https://www.datadoghq.com/alerts/'
         title: Alertes
@@ -57,13 +63,22 @@ left:
         title: Jeux vidéo
       - name: solutions_cloudmigration
         link: 'https://www.datadoghq.com/solutions/cloud-migration/'
-        title: Migration sur le cloud
+        title: Migration vers le cloud
       - name: solutions_monitoringconsolidation
         link: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
         title: Unification de la surveillance
       - name: solutions_devops
         link: 'https://www.datadoghq.com/solutions/devops/'
         title: DevOps
+      - name: solutions_hybridcloudmonitoring
+        link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
+        title: Surveillance Cloud hybride
+      - name: solutions_iotmonitoring
+        link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
+        title: Surveillance IoT
+      - name: solutions_machinelearning
+        link: 'https://www.datadoghq.com/solutions/machine-learning/'
+        title: Apprentissage automatique
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'
@@ -90,6 +105,9 @@ right:
       - name: about_investors
         link: 'https://investors.datadoghq.com/'
         title: Relations avec les investisseurs
+      - name: about_awards
+        link: 'https://www.datadoghq.com/about/awards/'
+        title: Récompenses
       - name: about_timeline
         link: 'https://www.datadoghq.com/about/timeline/'
         title: Chronologie
@@ -103,12 +121,12 @@ right:
       - name: blog_engineering
         link: 'https://www.datadoghq.com/blog/engineering/'
         title: Ingénierie
-      - name: blog_community
-        link: 'https://www.datadoghq.com/blog/community/'
-        title: Communauté
       - name: blog_pupculture
         link: 'https://www.datadoghq.com/blog/pup-culture/'
         title: Actualité
+      - name: blog_community
+        link: 'https://www.datadoghq.com/blog/community/'
+        title: Communauté
   - name: docs
     link: ''
     title: Docs

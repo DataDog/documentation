@@ -1,7 +1,7 @@
 ---
 title: Create a SLO
 type: apicontent
-order: 29.01
+order: 30.01
 external_redirect: /api/#create-a-slo
 ---
 
@@ -62,7 +62,6 @@ There is one type of event based SLO, a metric query. For more information, see 
         Defines the sum of the `good` events
     * **`denominator`** [*required*]:
         Defines the sum of the `total` events. **Note: this should always be >= `good` events**
-
 
 [1]: /monitors/service_level_objectives/monitor
 [2]: /monitors/service_level_objectives/event

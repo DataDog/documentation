@@ -22,6 +22,7 @@ Here's a two-minute video walkthrough:
 
 {{< wistia tg9ufqbin9>}}
 <br>
+
 ## Child organizations
 
 ### Create

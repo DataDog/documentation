@@ -1,7 +1,7 @@
 ---
 title: タグの取得
 type: apicontent
-order: 30.1
+order: 31.1
 external_redirect: /api/#get-tags
 ---
 

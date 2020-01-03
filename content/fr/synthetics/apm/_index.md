@@ -12,7 +12,7 @@ further_reading:
     tag: Documentation
     text: APM et tracing distribué
 ---
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true" responsive="true" >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true"  >}}
 
 ## Présentation
 
@@ -51,10 +51,13 @@ Les bibliothèques de tracing Datadog suivantes sont prises en charge :
 
 Datadog utilise le protocole de tracing distribué et configure les en-têtes HTTP suivants :
 
-* `x-datadog-trace-id`, généré à partir du backend Synthetics. Permet à Datadog d'associer la trace avec le résultat du test.
-* `x-datadog-parent-id: 0`
-* `x-datadog-origin: synthetics`, pour s'assurer que les traces générées n'aient pas d'incidence sur les quotas de l'APM. Voir ci-dessous.
-* `x-datadog-sampling-priority: 1`, [pour s'assurer que l'Agent conserve la trace][10].
+| Header                                 | Description                                                                                                             |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `x-datadog-trace-id`                   | Généré à partir du backend Synthetics. Permet à Datadog d'associer la trace au résultat du test.                           |
+| `x-datadog-parent-id: 0`               | Permet à Synthetics d'être la span racine de la trace générée.                                                                                                                        |
+| `x-datadog-origin: synthetics`         | S'assure que les traces générées à partir des tests API [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas).     |
+| `x-datadog-origin: synthetics-browser` | S'assure que les traces générées à partir des tests Browser [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas). |
+| `x-datadog-sampling-priority: 1`       | [S'assure que l'Agent conserve la trace][10].                                                                      |
 
 ### Cela a-t-il une incidence sur les quotas de l'APM ?
 

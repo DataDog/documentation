@@ -36,10 +36,10 @@ The custom payload is where the name and tags of the check_run are applied. For 
 
 ```json
 {
-"check": "mymonitorgroup.status",
-"status": 2,
-"host_name": "$HOSTNAME",
-"tags": "[monitor:$ALERT_TITLE]"
+  "check": "mymonitorgroup.status",
+  "status": 2,
+  "host_name": "$HOSTNAME",
+  "tags": "[monitor:$ALERT_TITLE]"
 }
 ```
 
@@ -49,7 +49,7 @@ You can then apply the same custom payload values for the "mymonitorgroup-ok-che
 
 With both of those webhooks set, you can go to your monitors (the ones your teammate wants a quick status view of) and add the webhook notification references, nested in their appropriate conditional logic tag, like so:
 
-```
+```text
 {{#is_alert}} @webhook-mymonitorgroup-alert-check {{/is_alert}}
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```
@@ -58,7 +58,7 @@ Once your monitors are set and alerting (they'll all need to alert at least once
 
 Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in our group has yet triggered as "alert" and then "ok" again):
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" >}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
 [1]: /integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

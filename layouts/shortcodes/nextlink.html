@@ -12,6 +12,17 @@
         {{ $.Scratch.Set "link" ($href | absLangURL) }}
     {{ end }}
 {{ end }}
+
+{{/*
+  If the url ends with a anchor link e.g #graphing then make sure this doesn't get stripped during the abslang
+*/}}
+{{ $fragment := (urls.Parse $href).Fragment }}
+{{ if $fragment }}
+  {{ if not (strings.HasSuffix ($.Scratch.Get "link") (print "#" $fragment)) }}
+    {{ $.Scratch.Set "link" (print ($.Scratch.Get "link") "#" $fragment) }}
+  {{ end }}
+{{ end }}
+
 {{ $link := $.Scratch.Get "link" }}
 
 {{- with .Parent -}}

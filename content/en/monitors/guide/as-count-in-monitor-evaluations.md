@@ -15,46 +15,46 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 
 **Numerator**: `sum:requests.error{*}`
 
-```
-| Timestamp             | Value       |
-| :-------------------- | :---------- |
-| 2018-03-13 11:00:30   | 1           |
-| 2018-03-13 11:01:30   | 2           |
-| 2018-03-13 11:02:40   | 3           |
-| 2018-03-13 11:03:30   | 4           |
-| 2018-03-13 11:04:40   | 5           |
+```text
+| Timestamp           | Value |
+|:--------------------|:------|
+| 2018-03-13 11:00:30 | 1     |
+| 2018-03-13 11:01:30 | 2     |
+| 2018-03-13 11:02:40 | 3     |
+| 2018-03-13 11:03:30 | 4     |
+| 2018-03-13 11:04:40 | 5     |
 ```
 
 **Denominator**: `sum:requests.total{*}`
 
-```
-| Timestamp             | Value    |
-| :-------------------- | :------- |
-| 2018-03-13 11:00:30   | 5        |
-| 2018-03-13 11:01:30   | 5        |
-| 2018-03-13 11:02:40   | 5        |
-| 2018-03-13 11:03:30   | 5        |
-| 2018-03-13 11:04:40   | 5        |
+```text
+| Timestamp           | Value |
+|:--------------------|:------|
+| 2018-03-13 11:00:30 | 5     |
+| 2018-03-13 11:01:30 | 5     |
+| 2018-03-13 11:02:40 | 5     |
+| 2018-03-13 11:03:30 | 5     |
+| 2018-03-13 11:04:40 | 5     |
 ```
 
 ### 2 ways to calculate
 
 Refer to this query as **`classic_eval_path`**:
 
-```
+```text
 sum(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
 ```
 
 and this query as **`as_count_eval_path`**:
 
-```
+```text
 sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()
 ```
 
 Compare the result of the evaluation depending on the path:
 
 | Path                     | Behavior                                       | Expanded expression         | Result  |
-| :----------------------- | :--------------------------------------------- | :-------------------------- | :------ |
+|:-------------------------|:-----------------------------------------------|:----------------------------|:--------|
 | **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
 | **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
 
@@ -62,13 +62,13 @@ _Note that both evaluations above are mathematically correct. Choose a method th
 
 It may be helpful visualize the **`classic_eval_path`** as:
 
-```       
+```text
 sum(last_5m):error/total
 ```
 
 and the **`as_count_eval_path`** as:
 
-```
+```text
 sum(last_5m):error
 -----------------
 sum(last_5m):total
@@ -79,6 +79,5 @@ In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but 
 **Note**: Aggregation methods other than sum (shown as in total in-app) cannot be used with `.as_count()`.
 
 [Reach out to the Datadog support team][1] if you have any questions.
-
 
 [1]: /help
