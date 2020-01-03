@@ -128,7 +128,7 @@ View event correlations by using the **Event Overlays** section in the graphing 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/graphing_json
-[2]: /widgets
+[2]: /dashboards/widgets
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary

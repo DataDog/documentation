@@ -187,7 +187,7 @@ Additional properties allowed in each `request` object:
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [6]: /events
 [7]: /dashboards/template_variables
-[8]: /widgets/#full-screen
+[8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
 [10]: /dashboards/graphing_json/widget_json
 [11]: /dashboards/graphing_json/request_json

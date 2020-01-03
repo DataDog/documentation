@@ -85,10 +85,10 @@ The search query for **View related logs** is defined using the following parame
 [6]: /dashboards/screenboard/#copy-import-or-export-dashboard-json
 [7]: /dashboards/screenboard/#delete-dashboard
 [8]: /dashboards/#new-dashboard
-[9]: /widgets
+[9]: /dashboards/widgets
 [10]: /events/#event-query-language
 [11]: /logs/explorer/search/#search-syntax
-[12]: /widgets/#full-screen
+[12]: /dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map
 [15]: https://app.datadoghq.com/logs

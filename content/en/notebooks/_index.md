@@ -108,8 +108,8 @@ Delete a notebook from the notebook list page, or inside the individual notebook
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook
-[3]: /widgets/timeseries
-[4]: /widgets/heat_map
-[5]: /widgets/distribution
-[6]: /widgets/log_stream
-[7]: /widgets/#full-screen
+[3]: /dashboards/widgets/timeseries
+[4]: /dashboards/widgets/heat_map
+[5]: /dashboards/widgets/distribution
+[6]: /dashboards/widgets/log_stream
+[7]: /dashboards/widgets/#full-screen

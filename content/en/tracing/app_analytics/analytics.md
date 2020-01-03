@@ -141,4 +141,4 @@ Export [App Analytics][1] from the Trace search or build them directly in your [
 [9]: /dashboards/timeboard
 [10]: /help
 [11]: /dashboards
-[12]: /widgets/timeseries
+[12]: /dashboards/widgets/timeseries

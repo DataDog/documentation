@@ -98,5 +98,5 @@ After creating your SLO, you can use the SLO dashboard widget to visualize the s
 
 [1]: https://app.datadoghq.com/slo/new
 [2]: /monitors/service_level_objectives/monitor/
-[3]: /widgets/slo
+[3]: /dashboards/widgets/slo
 [4]: https://app.datadoghq.com/slo
