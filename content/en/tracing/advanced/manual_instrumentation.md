@@ -6,14 +6,13 @@ aliases:
   - /agent/apm/php/manual-installation
   - /tracing/guide/distributed_tracing/
 further_reading:
+- link: "tracing/guide/instrument_custom_method"
+  text: "Instrument a custom method to get deep visibility into your business logic"
 - link: "tracing/advanced/connect_logs_and_traces"
-  tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
 - link: "tracing/advanced/opentracing"
-  tags: "Enrich Tracing"
-  text: "Implement Opentracing across your applications."
+  text: "Implement Opentracing across your applications"
 - link: "tracing/visualization/"
-  tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
 ---
 
