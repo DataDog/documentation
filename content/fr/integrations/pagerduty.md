@@ -17,7 +17,7 @@ public_title: Intégration Datadog/PagerDuty
 short_description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
 version: '1.0'
 ---
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="tendances des incidents PagerDuty" responsive="true" popup="true">}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="tendances des incidents PagerDuty"  >}}
 
 ## Présentation
 
@@ -62,7 +62,7 @@ Vous devez inclure la notification PagerDuty dans le contexte `{{#is_recovery}}`
 
 Ajoutez `@pagerduty-[NomDuService]` dans le message de votre monitor. Si vous commencez la saisie dans la section **Say what's happening** de votre monitor, le nom du service sera automatiquement complété.
 
-{{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="faq 1 PagerDuty" responsive="true" popup="true">}}
+{{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="faq 1 PagerDuty"  >}}
 
 ### Pourquoi la description de mon alerte est-elle tronquée dans PagerDuty ?
 

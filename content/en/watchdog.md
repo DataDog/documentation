@@ -44,7 +44,7 @@ Watchdog looks for irregularities in metrics, like a sudden spike in the hit rat
 
 Clicking on the story shows further details about the detected irregularity:
 
-{{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
+{{< img src="watchdog/watchdog_story.png" alt="Watchdog story"  >}}
 
 The graph in this story shows the latency values of the ELB in three different availability zones. Watchdog detected similar anomalies in this metric from a single load balancer enabled in three availability zones, and automatically grouped these findings together in a single story. After a period of consistently low latency, the metric in all three AZs rises sharply—in the highlighted area of the graph, which indicates the timeframe of the anomaly.
 
@@ -96,11 +96,11 @@ Facets are associated with your Watchdog stories, allowing you to filter them by
 
 When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][15]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
-{{< img src="watchdog/service_list.png" alt="Watchdog service list" responsive="true" style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Watchdog service list" style="width:75%;" >}}
 
 If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][15] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
 
-{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" style="width:75%;">}}
+{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" style="width:75%;">}}
 
 ## Further Reading
 

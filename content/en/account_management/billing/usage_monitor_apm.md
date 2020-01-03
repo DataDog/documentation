@@ -20,11 +20,11 @@ If you are an admin of your account, you can view your account usage using the [
 
 To get alerts in case a code deployment scales the number of hosts sending traces, set up monitor on APM host count. Get notified if the host volumes in any scope (`prod`, `availablity-zone`, etc…) of your infrastructure is growing unexpectedly:
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Analytics View" video="true"  style="width:90%;">}}
 
 1. Go to Monitors -> New Monitor
 2. Set up a [new metric monitor][4] with `datadog.apm.host_instance`
-3.  Define the rate you would like to set as a warning or error.
+3. Define the rate you would like to set as a warning or error.
 4. Define an explicit notification: The volume of hosts on this env just got too high has exceeded the allocated threshold value. Scale down the number of APM enabled hosts.
 
 ### Set Alert on Analyzed Spans
@@ -39,7 +39,6 @@ To get alerts in case a code deployment causes a spike in Analyzed Spans generat
 6. Define an explicit notification: The volume of Analyzed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
 Learn more about Analyzed Span filtering and usage control [here][7].
-
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing

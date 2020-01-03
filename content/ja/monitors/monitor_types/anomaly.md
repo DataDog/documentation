@@ -25,13 +25,13 @@ Datadog クエリ言語に `anomalies` 関数があります。この関数を�
 
 異常検知モニターには、「Historical Context」(メトリクスが過去にどのような挙動をしていたかを示す履歴的コンテキスト) と、即時的コンテキストを示すアラートウィンドウより長時間の「Evaluation Window」(評価ウィンドウ) の 2 つが示されます。これにより、異常値アルゴリズムが範囲を計算する際に何を考慮しているかがわかります。
 
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context"  style="width:80%;">}}
 
 `anomalies` は過去のデータを使用して将来の予想を行うため、データ収集を始めたばかりの新しいメトリクスに `anomalies` を使用しても良質の結果が得られないことに注意してください。
 
 異常検知モニターを作成するには、[New Monitor][1] ページに移動し、**Anomaly Detection** をクリックします。次に、他のモニターの場合と同様に**Define the metric** セクションに入力します。
 
-{{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options"  style="width:80%;">}}
 
 これで、上のようなフォームが表示されます。ここには、異常な挙動をいつアラートするかを決定するためのパラメーターが用意されています。異常に高い値または異常に低い値だけに注意を払う場合は、範囲より上または下の値にのみアラートを生成するように選択します。次に、アラートウィンドウの長さを決定します。これは、メトリクスの異常がどのくらい続いたときにアラートをトリガーするかを指定します。アラートウィンドウが短すぎると、無意味なノイズが原因で誤ってアラートが発生する可能性があることに注意してください。最後に、メトリクスの正常がどのくらい続けばアラートから回復するかを指定して、リカバリ期間を決定します。
 
@@ -41,7 +41,7 @@ New Monitor フォームの残りのステップを完了し (**Say what's happe
 
 Datadog は、選択されたメトリクスを分析し、自動的にいくつかのパラメーターを設定します。ただし、高度なオプションのタブで、以下のオプションを編集することもできます。
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
 
 オプション
 
@@ -74,23 +74,23 @@ Robust は[季節的傾向分解][6]アルゴリズムの 1 つです。極め�
 
 以下の図は、この 3 つのアルゴリズムがそれぞれ異なる動作を行う様子を示しています。最初の図で、**Basic** は正常な値の範囲を超えてスパイクする異常値を正しく特定していますが、反復的な季節性パターンが予測値の範囲に組み込まれていません。対照的に、**Robust** と **Agile** は、どちらも季節性パターンを認識し、より繊細な異常値を検知できます (メトリクスが最小値付近で平坦になる場合など)。
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1"  style="width:90%;">}}
 
 次の図のメトリクスは、突然のレベルシフトを示しています。**Agile** は **Robust** よりすばやくレベルシフトに対応します。また、**Robust** の範囲はレベルシフト以降の不確実性を反映して幅が広くなっていますが、**Agile** の境界の幅は変わりません。メトリクスが週単位の強い季節性パターンを示すシナリオに **Basic** が適していないことは明らかです。
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2"  style="width:90%;">}}
 
 次の図は、1 時間続く異常値にこれらのアルゴリズムがどのように対応するかを示すものです。**Robust** はこの異常値を完全に無視します。他のアルゴリズムは、この異常値が新しい標準であるかのように振る舞い始めます。**Agile** は、メトリクスが元のレベルに戻ったことも異常値として特定しています。
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
 これらのアルゴリズムはスケールの扱いも異なります。**Basic** と **Robust** はスケールの影響を受けませんが、**Agile** は影響を受けます。左側のグラフは、**Agile** も **Robust** もレベルシフトを異常とマークしています。右側では、同じメトリクスに 1000 を加算しました。これで、**Agile** はレベルシフトを異常と見なさなくなりますが、Robust は引き続き異常と見なしています。
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale"  style="width:90%;">}}
 
 最後に、各アルゴリズムが新しいメトリクスをどのように処理するかを見てみます。**Robust** と **Agile** では、最初の数シーズンに範囲が表示されません (ここでは季節性を「週単位」に設定)。**Basic** では、メトリクスが最初に表示された直後に範囲が表示され始めます。
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric"  style="width:90%;">}}
 
 ## API による異常値モニター
 
@@ -123,21 +123,21 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 1 つのグラフに独立した多数の時系列を表示すると[スパゲッティ化][9]することがあり、これに異常検知の視覚化を追加しても事態を悪化させるだけです。
 
-{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti"  style="width:80%;">}}
 
 ただし、1 つのグラフに複数の系列を一度に 1 つ追加することは可能です。マウスを重ねたときにのみ、灰色のエンベロープが表示されます。
 
-{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines"  style="width:80%;" >}}
 
 ### 過去の異常値は現在の予測に影響しますか。
 
 Basic 以外のアルゴリズムは、膨大な履歴データを使用するため、ほとんどの異常値に対して安定です。最初のグラフでは、メトリクスが 0 に減少した後もエンベロープは 400K 付近で安定し、それが 1 日中継続しています。
 
-{{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history"  style="width:80%;">}}
 
 2 つ目のグラフは、1 日後の同じメトリクスを示しています。エンベロープの計算には前日のデータも使用されていますが、そのときに発生した異常値には影響されていません。
 
-{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect"  style="width:80%;">}}
 
 ### ズームインすると異常値が「消える」のはなぜですか。
 
@@ -147,11 +147,11 @@ Datadog の異常検知アルゴリズムによって描画される灰色の帯
 
 以下に具体的な例を示します。`app.requests` メトリクスにはノイズがありますが、平均値は 8 で一定しています。ある日、10 分間の異常期間が発生しました。9:00 に始まり、その間のメトリクスの平均値は 10 です。次のチャートはこの系列をグラフに表示したもので、タイムウィンドウは 1 日、グラフの各ポイントは 5 分間の集計値です。
 
-{{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="disappearing day" responsive="true" style="width:70%;" >}}
+{{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="disappearing day"  style="width:70%;" >}}
 
 この灰色の帯は適切なものだと言えます。時系列内のノイズが収まるだけの十分な幅があり、しかも、幅が広すぎることがないので 9:00 の異常値が目立つようになっています。次のチャートは、30 分のタイムウィンドウにズームインしたビューで、上の 10 分間の異常値が含まれています。グラフの各ポイントは 10 秒間の集計値です。
 
-{{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="disappearing half hour" responsive="true" style="width:70%;" >}}
+{{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="disappearing half hour"  style="width:70%;" >}}
 
 ここでも、帯は合理的にサイズ変更されています。8:50 ～ 9:00 と 9:10 ～ 9:20 の正常なデータが帯の中にあるからです。これよりも帯が狭くなると、通常のデータが異常と見なされるようになってしまいます。
 このグラフの帯が、前のグラフより 8 倍近く広くなっていることに注目してください。9:00 ～ 9:10 の異常期間は系列の他の部分とは多少違って見えますが、帯の外側に出るほど極端ではありません。

@@ -17,7 +17,7 @@ further_reading:
 ---
 外れ値検知は、グループの他のメンバーと比較して挙動が異なるメンバーを検出するためのアルゴリズム機能です。たとえば、プール内の 1 台の Web サーバーが異常な数のリクエストを処理している場合、その置き換えの必要があることを検出できます。また、1 つの AWS アベイラビリティーゾーン (AZ) で、他の AZ に比べて大幅に多い 500 エラーが発生しているという警告を早期に受け取ることで、その AZ で問題が起こりつつある可能性を察知できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert"  style="width:80%;">}}
 
 ## データの外れ値検知の使用方法
 
@@ -29,7 +29,7 @@ further_reading:
 
 次のグラフは、ホストごとの Gunicorn リクエスト数で、外れ値検知が有効になっています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-graph-dbscan-gunicorn.png" alt="outliers graph dbscan Gunicorn" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-graph-dbscan-gunicorn.png" alt="outliers graph dbscan Gunicorn"  style="width:80%;">}}
 
 系列の 1 つが外れ値であることを確認できます。この系列は、このタイムウィンドウで、他の系列と比べてかなり低いトラフィック処理を示しています。
 
@@ -37,15 +37,15 @@ further_reading:
 
 最初に、選択したメトリクスを使用して、ダッシュボード上に新しい時系列グラフを作成します。
 
-{{< img src="monitors/monitor_types/outliers/outliers-dash-choose-metrics-updated.png" alt="outliers dash choose metrics updated" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-dash-choose-metrics-updated.png" alt="outliers dash choose metrics updated"  style="width:80%;">}}
 
 外れ値検知を有効にするには、メトリクスの行の右側にある `+` アイコンをクリックします。関数カテゴリから **Algorithms** を選択し、4 種類の外れ値アルゴリズムのいずれかを選択します。
 
-{{< img src="monitors/monitor_types/outliers/outliers-algorithm-selector.png" alt="outliers algorithm selector" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-algorithm-selector.png" alt="outliers algorithm selector"  style="width:80%;">}}
 
 これにより、outliers 関数がグラフに適用され、グループ内の外れ値が暖色の太線でハイライトされます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-algorithm-annotated-newer.png" alt="outliers algorithm annotated newer" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-algorithm-annotated-newer.png" alt="outliers algorithm annotated newer"  style="width:80%;">}}
 
 外れ値検知アルゴリズムは、複数の選択肢から選択できます。多くのシナリオでは、デフォルトのアルゴリズム (DBSCAN) とパラメーター値が機能します。ただし、特定される外れ値が多すぎたり少なすぎる場合は、アルゴリズムを調整するか、別のアルゴリズムを試すことができます。詳細については、後述の「外れ値のアルゴリズムとパラメーター」セクションを参照してください。
 
@@ -53,21 +53,21 @@ further_reading:
 
 重要なグループで外れ値が検出されたときにアラートするモニターを定義することもできます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-alert-snapshot.png" alt="outliers alert snapshot" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-alert-snapshot.png" alt="outliers alert snapshot"  style="width:80%;">}}
 
 たとえば、グループ内の 1 つの Cassandra ホストに他のホストと比べて異常に負荷がかかっている場合にアラートするには、このメトリクスの[新しい外れ値モニターを追加][1]します。
 
 [New Monitor][2] ページに移動し、**Outlier** をクリックします。次に、他のモニターの場合と同様に、**Define the metric** セクションに入力します。
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-define-metric.png" alt="outliers new monitor define metric" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-define-metric.png" alt="outliers new monitor define metric"  style="width:80%;">}}
 
 [アラート条件][3]として、グループ化とタイムフレームを選択します。次に、外れ値検知に使用するアルゴリズムとパラメーター値を選択します。
 
-{{< img src="monitors/monitor_types/outliers/outliers-newer-monitor-set-conditions.png" alt="outliers newer monitor set condition" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-newer-monitor-set-conditions.png" alt="outliers newer monitor set condition"  style="width:80%;">}}
 
 アラートが適切に調整されているかを確認するには、画面上部にあるタイムウィンドウを設定し、巻き戻し (&lt;&lt;) ボタンを使用して、外れ値が見つかってアラートが生成されると思われる時間まで遡ります。これは、使用している外れ値アルゴリズムのパラメーターを調整する方法としても適しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate"  style="width:80%;">}}
 
 ## 参考: 外れ値のアルゴリズムとパラメーター
 
@@ -81,11 +81,11 @@ Datadog では、時系列上の外れ値を検出するために、簡略化し
 
 この DBSCAN の実装では、`tolerance` というパラメーターを使用します。この定数で初期しきい値を乗じて、DBSCAN の距離パラメーター 𝜀 が算出されます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-dbscan-config.png" alt="outliers dbscan configuration" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-dbscan-config.png" alt="outliers dbscan configuration"  style="width:80%;">}}
 
 次の例では、Cassandra ワーカーのプールに対して tolerance 値 3.0 の DBSCAN を使用しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-dbscan-cassandra.png" alt="outliers dbscan cassandra" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-dbscan-cassandra.png" alt="outliers dbscan cassandra"  style="width:80%;">}}
 
 tolerance パラメーターは、ホストにどの程度類似の挙動を期待するかに応じて設定します。大きな値を設定すると、ホストが他のホストから外れて挙動し得る許容度が大きくなります。
 
@@ -98,11 +98,11 @@ tolerance パラメーターは、ホストにどの程度類似の挙動を期�
 - `tolerance`: あのポイントが中央値からどの程度の「偏差」分離れていたら外れ値と見なすかを指定します。
 - `pct`: 特定の系列のポイントのうち、この割合を超えるポイントが外れ値と判断されると、その系列全体が外れ値としてマークされます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-mad-config.png" alt="outliers mad configuration" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-mad-config.png" alt="outliers mad configuration"  style="width:80%;">}}
 
 次の例では、アベイラビリティーゾーンごとの平均システム負荷を比較する際に、tolerance 値 3、pct 値 20 の MAD を使用しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-mad-az.png" alt="outliers mad az" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-mad-az.png" alt="outliers mad az"  style="width:80%;">}}
 
 tolerance パラメーターは、予想されるデータのばらつきに応じて調整する必要があります。たとえば、通常のデータ値が狭い範囲に収まる場合は、この値を小さくする必要があります。一方、ポイントのばらつきが大きい場合は、この値を大きくして、ばらつきによる誤検出を引き起こさないようにする必要があります。
 
@@ -114,7 +114,7 @@ tolerance パラメーターは、予想されるデータのばらつきに応�
 
 このグループの同時性は、単にそれらのホストが同時に再起動されたという人為的な理由に過ぎません。一方、もし下のメトリクスがバッファのフラッシュではなくスケジューリングされたジョブを表し、グループ内のホスト全体で実際に同時に発生する必要がある場合は、DBSCAN の使用が適しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing"  style="width:80%;">}}
 
 #### スケール調整アルゴリズムか標準アルゴリズムか
 
@@ -122,11 +122,11 @@ DBSCAN と MAD には、それぞれ ScaledDBSCAN、ScaledMAD と呼ばれるス
 
 次のグラフは、Elasticsearch ノードグループのフィールドデータサイズに対して、tolerance 値 3 の DBSCAN と ScaledDBSCAN の結果を比較した例です。
 
-{{< img src="monitors/monitor_types/outliers/outliers-scaled-dbscan-es.png" alt="outliers scaled dbscan es" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-scaled-dbscan-es.png" alt="outliers scaled dbscan es"  style="width:80%;">}}
 
 次のグラフは、複数の Cassandra ホストの使用可能メモリ量を比較するために、MAD アルゴリズムと ScaledMAD アルゴリズムを使用した例です。どちらも、tolerances 値 3 と pct 値 20 を使用しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad Cassandra" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad Cassandra"  style="width:80%;">}}
 
 ### アラートのセットアップ
 
@@ -134,7 +134,7 @@ DBSCAN と MAD には、それぞれ ScaledDBSCAN、ScaledMAD と呼ばれるス
 
 どちらのアルゴリズムも、同じような挙動を示す大多数のメトリクスとは異なる外れ値を特定するために設定されます。ホストが以下に示すような「帯状」の挙動 (それぞれの帯が 1 つのシャードを表すような) を示す場合は、各帯を識別するタグを付け、帯ごとに外れ値検知アラートを設定することをお勧めします。
 
-{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding"  style="width:80%;">}}
 
 ## その他の参考資料 
 {{< partial name="whats-next/whats-next.html" >}}

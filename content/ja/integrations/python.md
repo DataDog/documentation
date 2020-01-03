@@ -4,7 +4,7 @@ categories:
   - log collection
 ddtype: ライブラリ
 dependencies: []
-description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装。
+description: Datadogpy で Python アプリケーションからのカスタムメトリクスをインスツルメントします。
 doc_link: 'https://docs.datadoghq.com/integrations/python/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
@@ -18,7 +18,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション
-short_description: Datadogpy で Python アプリケーションからのカスタムメトリクスを実装。
+short_description: Datadogpy で Python アプリケーションからのカスタムメトリクスをインスツルメントします。
 version: '1.0'
 ---
 ## 概要
@@ -44,7 +44,7 @@ Python インテグレーションでは、すべてのメトリクスが[カス
 * [datadogpy][1] リポジトリ内のドキュメント
 * [API ドキュメント][4]
 
-以下に、Datadog API を使用してコードを実装する例を示します。
+以下に、Datadog API を使用してコードをインスツルメントする例を示します。
 
 ```python
 
@@ -77,7 +77,7 @@ statsd.increment('whatever')
 statsd.gauge('foo', 42)
 ```
 
-以下に、ThreadStats を使用してコードを実装する例を示します。
+以下に、ThreadStats を使用してコードをインスツルメントする例を示します。
 
 ```python
 # ThreadStats は、Datadog REST API を使用してメトリクスを収集およびフラッシュする別のツールです

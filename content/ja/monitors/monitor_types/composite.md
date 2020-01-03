@@ -27,7 +27,7 @@ further_reading:
 
 Datadog アプリケーションで、[**New Monitor**][1] ページに移動し、モニターの種類のリストで **Composite** をクリックします。
 
-{{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" >}}
+{{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type"  >}}
 
 ### 個別モニターを選択する
 
@@ -35,21 +35,21 @@ Datadog アプリケーションで、[**New Monitor**][1] ページに移動し
 
 1 つ目のモニターを選択すると、そのアラートタイプと現在のステータスが UI に表示されます。
 
-{{< img src="monitors/monitor_types/composite/create-composite-2.png" alt="create composite 2" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-2.png" alt="create composite 2"  style="width:80%;">}}
 
 マルチアラートモニターを選択した場合は、その group-by 節 (例: `host`) と、現在報告している一意のソースの数 (この場合はホストの数) が UI に表示されます。複数のマルチアラートモニターを組み合わせる場合は、この情報があると自然にペアになるモニターの選択に役立ちます。たいていの場合、group-by 節が同じモニターどうしを選択することになるためです。そうでなければ、この複合条件モニターはトリガーすることがないという警告が UI に表示されます。
 
-{{< img src="monitors/monitor_types/composite/create-composite-4.png" alt="create composite 4" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-4.png" alt="create composite 4"  style="width:80%;">}}
 
 group-by 節が同じマルチアラートモニターを選択した場合でも、その選択について警告が表示される場合があります。次のスクリーンショットでは、両方のモニターが `host` でグループ化されています。
 
-{{< img src="monitors/monitor_types/composite/create-composite-5.png" alt="create composite 5" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-5.png" alt="create composite 5"  style="width:80%;">}}
 
 group-by 節は合っているのに 'Group Matching Error' が表示されているため、現時点で、これらのモニターは共通の報告元ソース (共通のグルーピングとも呼ばれます) を持っていないと考えられます。共通の報告元ソースがない限り、Datadog は複合条件モニターのステータスを計算できないため、トリガーすることはありません。ただし、警告を無視してとりあえずモニターを作成することは可能です。その理由については、[この記事の後半を参照してください](#how-composite-monitors-select-common-reporting-sources)。
 
 警告が表示されないように 2 つ目のモニターを選択すると、**Trigger when** フィールドにデフォルトのトリガー条件 `a && b` が挿入され、提案された複合条件モニターのステータスが表示されます。
 
-{{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"  responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"   style="width:80%;">}}
 
 ### トリガー条件を設定する
 
@@ -65,7 +65,7 @@ a || b && !c
 
 複合条件モニターの New Monitor フォームと Edit フォームの外では、個別モニターはそれぞれの数値 ID によって示されます。
 
-{{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status"  style="width:80%;">}}
 
 API では、複合条件モニターのトリガー条件はクエリと呼ばれます。非複合条件モニターのクエリはさまざまな要素 (メトリクス、タグ、`avg` などの集計関数、group-by 節など) をカプセル化できますが、複合条件モニターのクエリは、それを構成するモニターによって定義されるトリガー条件です。
 
@@ -86,7 +86,7 @@ API では、複合条件モニターのトリガー条件はクエリと呼ば�
 
 他のモニターの場合と同様に、`@ 構文` (例: `@you@example.com`) を使用して、個人またはチームに送る通知メッセージを記述します。
 
-{{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification"  style="width:80%;">}}
 
 モニターメッセージに `{{a.value}}`、`{{b.value}}` などのテンプレート変数を追加すると、個別モニターの値を表示できます。
 
@@ -155,7 +155,7 @@ T1 において `A` は正確には `OK` 状態ですが、この複合条件モ
 
 前の表では 4 つの時点での複合条件モニターステータスを示していましたが、次の例の表ではマルチアラートの各ケースのステータスを示しています。
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |source | モニター A    | モニター B| モニター C | 複合条件ステータス (A && B && C) | アラートがトリガーされるか? |
 |-------|--------------|----------|-----------|--------------------------------|-------------------------|
@@ -193,10 +193,10 @@ T1 において `A` は正確には `OK` 状態ですが、この複合条件モ
 2 つ以上のタグで分割されたマルチアラートの場合は (例: `host, instance, url` に基づくアラート)、タグの組み合わせ全体が 1 つのモニターグループになります。
 
 たとえば、Monitor 1 が `device,host` に基づくマルチアラート、Monitor 2 が `host` に基づくマルチアラートだとすると、複合条件モニターによって Monitor 1 と Monitor 2 を組み合わせることができます。
-{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification"  style="width:80%;">}}
 
 ただし、`host,url` に基づくマルチアラート Monitor 3 を考えると、Monitor 1 と Monitor 3 の組み合わせは、グルーピングが大きく異なるために、複合条件の結果にならない可能性があります。
-{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification"  style="width:80%;">}}
 
 最善の判断で意味のあるマルチアラートモニターを選択してください。
 

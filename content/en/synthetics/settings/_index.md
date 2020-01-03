@@ -39,7 +39,7 @@ Choose the type of variable you want to create:
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 
-{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value"  style="width:80%;">}}
 
 {{% /tab %}}
 
@@ -58,7 +58,7 @@ This feature is in private beta, <a href="/help">contact Datadog support</a> to 
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
     * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}

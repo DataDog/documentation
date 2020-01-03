@@ -18,7 +18,7 @@ public_title: Intégration Datadog/ExpressJS
 short_description: Surveillez les délais de réponse globaux et les taux de requête par code de réponse.
 version: '1.0'
 ---
-{{< img src="integrations/expressjs/expressjs_graph.png" alt="graphique ExpressJS" responsive="true" popup="true">}}
+{{< img src="integrations/expressjs/expressjs_graph.png" alt="graphique ExpressJS"  >}}
 
 ## Présentation
 

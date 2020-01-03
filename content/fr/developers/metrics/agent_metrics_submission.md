@@ -240,7 +240,7 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
     ```
 6. Vérifiez que vos métriques sont transmises à Datadog sur votre [page Metric Summary][6] :
 
-{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Métriques dans le Metric Summary" responsive="true" style="width:80%;">}}
+{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Métriques dans le Metric Summary"  style="width:80%;">}}
 
 ## Pour aller plus loin
 

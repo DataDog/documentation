@@ -15,7 +15,7 @@ Les checks de service peuvent être visualisés et utilisés dans 3 sections de
 
 Pour accéder au [Sommaire des checks][1], cliquez sur l'onglet *Monitors* puis sur *Check Summary*.
 
-{{< img src="monitors/faq/check_summary.png" alt="Sommaire des checks" responsive="true" >}}
+{{< img src="monitors/faq/check_summary.png" alt="Sommaire des checks"  >}}
 
 Cette section affiche la liste de tous les checks de votre infrastructure ainsi que de leur statut au cours des dernières 24 heures. Sélectionnez un check pour connaître le nombre de checks distincts relatifs à chaque tag qui lui est associé.
 
@@ -23,11 +23,11 @@ Cette section affiche la liste de tous les checks de votre infrastructure ainsi 
 
 Vous pouvez visualiser les checks de service dans un widget *Statut de check* sur les screenboards :
 
-{{< img src="monitors/faq/check_status_widget.png" alt="Widget Statut de check" responsive="true" >}}
+{{< img src="monitors/faq/check_status_widget.png" alt="Widget Statut de check"  >}}
 ​
 Après avoir cliqué sur l'icône du widget *Check status*, la fenêtre contextuelle suivante apparaît :
 
-{{< img src="monitors/faq/check_widget_config.png" alt="Configuration du widget Check" responsive="true" >}}
+{{< img src="monitors/faq/check_widget_config.png" alt="Configuration du widget Check"  >}}
 
 Dans ce formulaire, vous pouvez sélectionner les options suivantes :
 
@@ -41,11 +41,11 @@ Dans ce formulaire, vous pouvez sélectionner les options suivantes :
 Même si vous ne pouvez pas représenter graphiquement un check custom (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller.
 Accédez à l'onglet *Monitor* > *new monitor*, puis sélectionnez la section **custom check** :
 
-{{< img src="monitors/faq/check_monitor.png" alt="Monitor de check" responsive="true" >}}
+{{< img src="monitors/faq/check_monitor.png" alt="Monitor de check"  >}}
 
 Configurez votre monitor de checks custom : 
 ​
-{{< img src="monitors/faq/check_monitor_config.png" alt="Configuration du monitor de check" responsive="true" >}}
+{{< img src="monitors/faq/check_monitor_config.png" alt="Configuration du monitor de check"  >}}
 
 Dans ce formulaire, vous pouvez sélectionner les options suivantes :
 
@@ -57,7 +57,7 @@ Dans ce formulaire, vous pouvez sélectionner les options suivantes :
 
 Les monitors de checks de service associés aux intégrations Datadog par défaut peuvent être définis dans l'onglet *Monitor* > *Integration* > onglet *Integration status* sur la gauche. Par exemple, avec l'intégration HAProxy : 
 
-{{< img src="monitors/faq/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true" responsive="true" >}}
+{{< img src="monitors/faq/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true"  >}}
 
 Pour apprendre à écrire une intégration, consultez la [documentation dédiée au développement d'intégrations][5].
 

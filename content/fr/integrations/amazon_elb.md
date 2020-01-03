@@ -24,7 +24,7 @@ public_title: Intégration Datadog/Amazon Load Balancer
 short_description: Surveillez des métriques clés d'Amazon Load Balancer.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_elb/elb.png" alt="dashboard par défaut d'ELB" responsive="true" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_elb/elb.png" alt="dashboard par défaut d'ELB"   >}}
 
 ## Présentation
 
@@ -59,19 +59,19 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Commencez par activer la journalisation sur votre ELB ou ALB pour recueillir vos logs. Les logs ELB et ALB peuvent être écrits dans un compartiment AWS S3 et [lus par une fonction Lambda][6]. [Pour en savoir plus, consultez la documentation AWS][7].
 
-{{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="activer les logs d'aws elb" responsive="true" responsive="true" popup="true" style="width:70%;" >}}
+{{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="activer les logs d'aws elb"    style="width:70%;" >}}
 
 Choisissez un intervalle de 5 minutes et saisissez vos compartiments S3 :
 
-{{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="configuration des logs d'aws elb" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="configuration des logs d'aws elb"    style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs ELB dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3"   style="width:70%;">}}
    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs ELB et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3"   style="width:70%;">}}
 
 Accédez ensuite à la [section Log de Datadog][9] pour commencer à explorer vos logs !
 

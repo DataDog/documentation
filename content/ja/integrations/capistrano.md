@@ -49,7 +49,7 @@ Datadog に送信したいタスクを持つ `Capfile` の先頭に以下を追�
 2. 検索バーに `sources:capistrano` を入力するか、左側のインテグレーションの FROM リストで 'Capistrano' をクリックします。
 3. 検索バーに `priority:all` を入力するか、左側の PRIORITY リストで 'All' をクリックします。Capistrano タスクは、デフォルトでは Low 優先度で送信されます。そのため、Normal 優先度のイベントのみを表示している場合 (デフォルトの設定)、Capistrano タスクはイベントストリームに表示されません。
 
-{{< img src="integrations/capistrano/capistranoevents.gif" responsive="true">}}
+{{< img src="integrations/capistrano/capistranoevents.gif" >}}
 
 ## 収集データ
 ### メトリクス

@@ -29,7 +29,7 @@ nav_sections:
         icon: integration.svg
         desc: Gather data from your systems, apps, & services
       - title: Dashboards
-        link: graphing/dashboards/
+        link: dashboards/
         icon: dashboard.svg
         desc: Visualize your data to gain insight
       - title: Alerting

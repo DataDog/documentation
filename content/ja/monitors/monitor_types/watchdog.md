@@ -23,25 +23,25 @@ Watchdog モニターをセットアップして、Watchdog がシステムで�
 
 * [Create Monitor][3] ページの上部にあるグラフには、Watchdog イベントの数が経時的に表示され、イベントのリストも表示されます。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-create-top.png" alt="Watchdog" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-create-top.png" alt="Watchdog"  style="width:80%;">}}
 
 * Service と Infrastructure のどちらのストーリータイプに基づいて監視するかを選択します。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-1.png" alt="Select story type" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-1.png" alt="Select story type"  style="width:80%;">}}
 
 * Service ストーリーを選択した場合は、アラートの対象とするソースを選択します。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-2.png" alt="Select sources" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-2.png" alt="Select sources"  style="width:80%;">}}
 
 * 通知メッセージを構成します。[テンプレート変数][4]を使用してメッセージをカスタマイズできます。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-3.png" alt="Say what's happening" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-3.png" alt="Say what's happening"  style="width:80%;">}}
 
 「Include triggering tags in notification title」オプションを選択すると、サービス名、リソース名、およびプライマリタグ (例: availability-zone) がタイトルに付加されます。
 
 * 通知の受信者を構成します。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-4.png" alt="Notify your team" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-4.png" alt="Notify your team"  style="width:80%;">}}
 
 ## 通知のテンプレート変数
 
@@ -54,7 +54,7 @@ Watchdog モニターをセットアップして、Watchdog がシステムで�
 
 アラートを受け取ったら、[Triggered Monitors][6] ページをイベントセクションまで下へスクロールし、詳細リンクをクリックすることで、アラート発生の原因となった Watchdog ストーリーに関する詳細な情報を確認できます。
 
-{{< img src="monitors/monitor_types/watchdog/wmonitor-triggered.png" alt="Events" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/watchdog/wmonitor-triggered.png" alt="Events"  style="width:80%;">}}
 
 ## その他の参考資料
 

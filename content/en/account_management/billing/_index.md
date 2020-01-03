@@ -33,7 +33,7 @@ If you pay by check or wire, invoices are emailed to the billing email addresses
 
 You can set specific email addresses to receive invoices on the [Plan][9] page under **Manage Billing Emails**:
 
-{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" responsive="true">}}
+{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
@@ -52,6 +52,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
     {{< nextlink href="account_management/billing/rum/" >}}Real User Moniotring FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
 {{< /whatsnext >}}

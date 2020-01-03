@@ -20,7 +20,7 @@ further_reading:
     text: リソースのパフォーマンスとトレースの詳細
   - link: tracing/visualization/trace
     tag: Documentation
-    text: Datadog トレースの読み取り方を理解する
+    text: Datadog トレースの読み方を理解する
 ---
 ## トレースのサンプリング
 
@@ -30,7 +30,7 @@ further_reading:
 
 ### 統計 (リクエスト、エラー、レイテンシーなど)
 
-Datadog APM はサンプリングに関わりなく、搭載されているすべてのトレースから以下の集約統計データを算出します。
+Datadog APM はサンプリングに関わりなく、インスツルメントされているすべてのトレースから以下の集約統計データを算出します。
 
 * 総リクエスト数および 1 秒あたりのリクエスト数
 * 総エラー数および 1 秒あたりのエラー数
@@ -38,7 +38,7 @@ Datadog APM はサンプリングに関わりなく、搭載されているす�
 * サービス/タイプ別所要時間の詳細
 * [Apdex スコア][2] (web サービスのみ)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data."  style="width:90%;">}}
 
 ### サンプリングの目的
 
@@ -48,11 +48,11 @@ Datadog APM はサンプリングに関わりなく、搭載されているす�
 * 低 QPS サービス
 * さまざまなトレースを表示
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level."  style="width:90%;">}}
 
 ### サンプリングの法則
 
-トレーシングでは、以下の順序に従いクライアント、Agent、バックエンドのレベルで決定が下されます。
+トレースのライフサイクルでは、以下の順序に従いクライアント、Agent、バックエンドのレベルで決定が下されます。
 
 1. クライアントのトレース - クライアントのトレースはコンテキストに `sampling.priority` という属性を追加し、分散型のアーキテクチャで言語に依存しないリクエストヘッダーへの伝達を1 回のトレースで実行します。`Sampling-priority` 属性は、Datadog Agent が最適な優先度をつけたり、不要なトレースを削除したりするためのヒントとなります。
 
@@ -396,7 +396,7 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 
 トレースが全ページに表示されたら、URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>` でトレース ID を使って確認できます。これは UI での表示が「期限切れ」になったあとも可能です。この動作は UI での保存期間バケットとは関連していません。
 
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="トレース ID" responsive="true" >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="トレース ID"  >}}
 
 ## その他の参考資料
 

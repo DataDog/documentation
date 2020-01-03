@@ -21,7 +21,7 @@ public_title: "Intégration Datadog/Amazon\_SNS"
 short_description: "Envoyez des messages Amazon\_SNS à Datadog ou envoyez des alertes Datadog à SNS. SNS."
 version: '1.0'
 ---
-{{< img src="integrations/amazon_sns/snsdashboard.png" alt="Dashboard SNS" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_sns/snsdashboard.png" alt="Dashboard SNS"  >}}
 
 ## Présentation
 
@@ -74,9 +74,9 @@ Il n'y a pas de logs SNS. Traitez les logs et les événements transmis via le s
 
 Configurez un nouvel abonnement SNS. Sélectionnez la rubrique d'où proviennent les messages, puis choisissez « Lambda » comme protocole et l'ARN d'une fonction Lambda à utiliser :
 
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="Collecte de logs AWS sns" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="Collecte de logs AWS sns"    style="width:70%;">}}
 
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_2.png" alt="Collecte de logs AWS sns 2" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_sns/aws_sns_log_collection_2.png" alt="Collecte de logs AWS sns 2"    style="width:70%;">}}
 
 
 ## Données collectées
@@ -89,7 +89,7 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 ### Événements
 L'intégration AWS SNS comprend des événements pour les abonnements aux rubriques. Vous trouverez ci-dessous un exemple d'événement :
 
-{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="Événements AWS SNS" responsive="true">}}
+{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="Événements AWS SNS" >}}
 
 ### Checks de service
 L'intégration AWS SNS n'inclut aucun check de service.

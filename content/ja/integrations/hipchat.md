@@ -16,7 +16,7 @@ public_title: Datadog-HipChat インテグレーション
 short_description: Datadog のアラートとグラフをチームの Hipchat ルームに送信
 version: '1.0'
 ---
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph"  >}}
 
 ## 概要
 
@@ -49,7 +49,7 @@ HipChat API V1 トークンを使用している場合、チャットハンド�
 
 HipChat サーバーの証明書が自己署名の場合にのみ、**Ignore SSL** チェックボックスをオンにします。
 
-{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname"  >}}
 
 ## 収集データ
 ### メトリクス

@@ -14,7 +14,7 @@ Les autres ressources AWS (ELB, EBS, RDS, Dynamo, etc.) ne font pas partie de la
 
 Utilisez le [carré d'intégration Datadog/AWS][1] pour contrôler la collecte de métriques. Allez à l'onglet **Configuration** et sélectionnez un compte ou ajoutez un nouveau compte. Chaque compte est contrôlé dans **Optionally limit metrics collection**. Limitez les métriques par [tag de host][2] ou par espace de nommage :
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
+{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
 
 **Remarque** : Datadog ne facture pas les métriques ELB, car elles ne peuvent pas être exclues par filtrage.
 

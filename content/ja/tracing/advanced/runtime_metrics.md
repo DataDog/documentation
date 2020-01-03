@@ -1,5 +1,5 @@
 ---
-title: ランタイム・メトリクス
+title: ランタイムメトリクス
 kind: documentation
 further_reading:
   - link: tracing/advanced/connect_logs_and_traces
@@ -7,19 +7,19 @@ further_reading:
     text: ログとトレースの接続
   - link: tracing/advanced/manual_instrumentation
     tags: トレースの加工
-    text: アプリケーションを手動で測定してトレースを作成します。
+    text: アプリケーションを手動でインストルメントしてトレースを作成します。
   - link: tracing/advanced/opentracing
     tags: トレースの加工
     text: アプリケーション全体に Opentracing を実装します。
   - link: tracing/visualization/
-    tag: APMのUIを利用する
+    tag: APM の UI を利用する
     text: サービス、リソース、トレースの詳細
 ---
 トレースクライアントでランタイムメトリクス収集を有効にすると、アプリケーションのパフォーマンスに関する詳細情報を得られます。ランタイムメトリクスは、[サービス][1]のコンテクストで表示することが可能で、要求された時点でのトレースビューに関連付けられ、プラットフォームのあらゆる場所で使用できます。
 
-{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
+{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
-## 自動構成
+## 自動コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -28,7 +28,7 @@ JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に
 
 JVM メトリクスは、Java サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
 
-{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
+{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
 
 初期設定では、アプリケーションからのランタイムメトリクスは、ポート `8125` を介して DogStatsD と共に Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 
@@ -81,7 +81,7 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]
 
 ランタイムメトリクスの収集は [`dogstatsd-ruby`][1] gemを使用し、DogStatsD を介して Agent にメトリクスを送信します。ランタイムメトリクスを収集するには、この gem を Ruby アプリケーションに追加し、[DogStatsD が Agent に対して有効になっていること][2]を確認する必要があります。
 
-メトリクス収集は初期設定では無効になっています。`DD_RUNTIME_METRICS_ENABLED` 環境変数を `true` に設定するか、Ruby アプリケーションで次の設定を行うと有効にできます。
+メトリクス収集は初期設定では無効になっています。`DD_RUNTIME_METRICS_ENABLED` 環境変数を `true` に設定するか、Ruby アプリケーションで次のコンフィギュレーションを行うと有効にできます。
 
 ```ruby
 # config/initializers/datadog.rb
@@ -169,7 +169,7 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][4]
 
 Datadog では、APM サービス詳細画面にこれらのメトリクスを表示し、これらのメトリクスに適用された `service` および `runtime-id` タグ付きの[デフォルトの JVM ランタイムダッシュボード][1]を提供します。
 
-`dd.jmxfetch.config.dir` と `dd.jmxfetch.config` を使用して引き継がれる設定ファイルを使用すると、さらに JMX メトリクスを追加できます。`dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` パラメータを使用して、既存の Datadog JMX インテグレーションを個別に有効にすることもできます。これにより、Datadog の[既存の JMX 設定ファイル] [2]から設定が自動的に埋め込まれます。設定の詳細については、[JMX インテグレーション][3]を参照してください。
+`dd.jmxfetch.config.dir` と `dd.jmxfetch.config` を使用して引き継がれる設定ファイルを使用すると、さらに JMX メトリクスを追加できます。`dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` パラメータを使用して、既存の Datadog JMX インテグレーションを個別に有効にすることもできます。これにより、Datadog の[既存の JMX 設定ファイル] [2]からコンフィギュレーションが自動的に埋め込まれます。設定の詳細については、[JMX インテグレーション][3]を参照してください。
 
 [1]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics

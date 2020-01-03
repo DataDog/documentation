@@ -234,5 +234,8 @@
 
   "type": {
     "other": "Type"
+  },
+  "groups_return_to_": {
+    "other": "Back to"
   }
 }

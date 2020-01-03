@@ -220,22 +220,22 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
   * Types de compte pris en charge : `Accounts in this organizational directory only (Datadog)`
   * URI de redirection (facultatif) : `https://app.datadoghq.com`
 
-{{< img src="integrations/azure/Azure_create_ad.png" alt="création d'app Azure" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="integrations/azure/Azure_create_ad.png" alt="création d'app Azure"   style="width:80%;" >}}
 
 ##### Accorder un accès en lecture à l'application
 
 1. Accédez à la section **Abonnements** en utilisant la barre de recherche ou depuis la barre latérale de gauche :
 
-    {{< img src="integrations/azure/subscriptions_icon.png" alt="icône abonnements" responsive="true" popup="true" style="width:25%">}}
+    {{< img src="integrations/azure/subscriptions_icon.png" alt="icône abonnements"   style="width:25%">}}
 
 2. Cliquez sur l'abonnement que vous souhaitez surveiller.
 3. Sélectionnez **Contrôle d'accès (IAM)** dans le menu d'abonnement, puis **Ajouter** -> **Ajouter une attribution de rôle** :
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="Ajouter une attribution de rôle" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/azure-add-role.png" alt="Ajouter une attribution de rôle"   style="width:80%">}}
 
 4. Pour **Rôle**, sélectionnez *Lecteur*. Sous **Sélectionner**, choisissez le nom de l'application que vous avez créée :
 
-    {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app" responsive="true" popup="true" style="width:60%">}}
+    {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app"   style="width:60%">}}
 
 5. Cliquez sur **Enregistrer**.
 6. Répétez ce processus pour tout autre abonnement que vous souhaitez surveiller à l'aide de Datadog. **Remarque** : les utilisateurs d'Azure Lighthouse peuvent ajouter les abonnements des locataires clients.
@@ -249,7 +249,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 2. Pour cette même application, accédez à **Gérer** -> **Certificats et secrets**.
 3. Ajoutez un nouveau *Clé secrète client* intitulée `datadogClientSecret`, sélectionnez un intervalle pour *Date d'expiration* et cliquez sur **Ajouter** :
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure"   style="width:80%">}}
 
 3. Une fois la valeur de la clé indiquée, collez-la dans le [carré d'intégration Azure de Datadog][1], sous **Client Secret**, puis cliquez sur **Install Integration** ou **Update Configuration**.
 
@@ -280,7 +280,7 @@ Vous devrez peut-être patienter quelques minutes avant que les métriques des a
 
 Accédez au [dashboard par défaut des machines virtuelles Azure][5] pour visualiser les données de votre infrastructure, qui s'ajoutent automatiquement au dashboard.
 
-{{< img src="integrations/azure/azure_vm_screenboard.png" alt="Screenboard machines virtuelles azure" responsive="true" popup="true" style="width:70%">}}
+{{< img src="integrations/azure/azure_vm_screenboard.png" alt="Screenboard machines virtuelles azure"   style="width:70%">}}
 
 ### Collecte de logs
 

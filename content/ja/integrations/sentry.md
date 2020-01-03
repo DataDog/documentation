@@ -19,7 +19,7 @@ short_description: Sentry 例外を Datadog イベントストリームに表示
 version: '1.0'
 ---
 
-{{< img src="integrations/sentry/sentry.png" alt="sentry event" responsive="true" popup="true">}}
+{{< img src="integrations/sentry/sentry.png" alt="sentry event"  >}}
 
 ## 概要
 

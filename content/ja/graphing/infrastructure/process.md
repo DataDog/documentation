@@ -16,7 +16,7 @@ further_reading:
 
 Datadog のプロセスモニタリングを使用すると、デプロイに含まれる最も粒度の細かい要素をリアルタイムに可視化できます。
 
-{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview"  >}}
 
 ## インストール
 
@@ -116,7 +116,7 @@ process_config:
 
 次の図に、ライブプロセスページに表示されたプロセスの一例を示します。上の構成を使用して、プロセス引数が非表示にされています。
 
-{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing"  style="width:100%;">}}
 
 `scrub_args` を `false` に設定すると、プロセス引数のスクラビングを完全に無効化できます。
 
@@ -135,7 +135,7 @@ process_config:
 
 **注**: `/9.` はコマンドパスの一部と一致し、`postgres` はコマンド自体と一致しています。
 
-{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres"  style="width:80%;">}}
 
 複合クエリで複数の文字列検索を組み合わせるには、以下のブール演算子を使用します。
 
@@ -175,15 +175,15 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 
 最初に、検索範囲を絞り込むために、Datadog のフロントエンドのクエリサービス `role:McNulty-Query` にフィルターダウンできます。次に、NGINX マスタープロセスを検索し、テーブルをアベイラビリティーゾーンでピボットして、サービスが高い可用性を維持していることを確認できます。
 
-{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx"  style="width:80%;">}}
 
 次の図では、特定の機能チームの Elasticsearch プロセスをチェックしています。自発的および非自発的コンテキストスイッチに対するメトリクスも追加されています。これは、テーブルの右上にある歯車アイコンのメニューにあります。
 
-{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch"  style="width:80%;">}}
 
 以下では、だれがどのホストにログインしているかを把握するために、SSH プロセスを検索し、`user` でピボットしています。
 
-{{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users"  style="width:80%;">}}
 
 改訂後は面白い例でなくなるかもしれません。
 
@@ -193,7 +193,7 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 
 [Processes ページ][4]で散布図分析にアクセスするには、Show Summary graph ボタンをクリックし、"Scatter Plot" タブを選択します。
 
-{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
 
 デフォルトでは、グラフは `command` タグキーでグループ化されます。ドットのサイズは、各グループ内のプロセスの数を表します。ドットをクリックすると、グループに参加しているすべてのポッドとコンテナが表示されます。
 
@@ -203,13 +203,13 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 * 2 つのメトリクスの集計方法の選択。
 * X 軸と Y 軸の目盛の選択 (Linear/Log)。
 
-{{< img src="graphing/infrastructure/process/scatterplot.png" alt="container inspect" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/scatterplot.png" alt="container inspect"  style="width:80%;">}}
 
 ## 強化されたライブコンテナビュー
 
 ライブプロセスは、コンテナデプロイの可視化をさらに強化しています。[ライブコンテナ][5]機能は、コンテナとオーケストレーターの環境を同様に総合的に表示します。ライブプロセスが有効になっている場合は、各コンテナのプロセスツリーがページのコンテナ調査パネルに表示されます。
 
-{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect"  style="width:80%;">}}
 
 ## リアルタイムの監視
 

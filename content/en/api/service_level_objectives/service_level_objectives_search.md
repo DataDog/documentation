@@ -1,7 +1,7 @@
 ---
 title: Search SLOs
 type: apicontent
-order: 30.07
+order: 30.09
 external_redirect: /api/#search-slo-s
 ---
 
@@ -28,7 +28,6 @@ Search and filter your service level objectives.
 * **`limit`** [*optional*, *default*=**30**]:
 
     Number of SLOs to return per query.
-
 
 
 [1]: https://app.datadoghq.com/slo

@@ -32,7 +32,7 @@ In this section, choose between an **APM** or **Infrastructure** story:
 
 An APM story is created when Watchdog detects anomalous behavior on your system’s services or their child resources.
 
-### Select sources
+### Select sources {#select-sources-1}
 
 Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
 
@@ -54,7 +54,7 @@ Infrastructure-wide stories can include issues over the following integrations:
 
 After selecting Infrastructure, the graph at the top of the monitor creation page displays Watchdog events over time, along with a list of events.
 
-### Select sources
+### Select sources {#select-sources-2}
 
 No selection is necessary. You are notified when Watchdog detects issues across your infrastructure.
 

@@ -12,7 +12,7 @@ Les autres ressources Google Cloud (CloudSQL, Google App Engine, Pub/Sub, etc
 
 Utilisez le [carré d'intégration Google Cloud][1] pour contrôler la collecte de métriques. Accédez à l'onglet **Configuration** et sélectionnez un projet ou ajoutez-en un autre. Chaque projet est contrôlé via l'option **Optionally Limit Metrics Collection to hosts with tag**. Limitez les métriques par [tag de host][2] :
 
-{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" responsive="true">}}
+{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" >}}
 
 Lorsque vous appliquez des limites à des projets Google Cloud depuis le carré d'intégration, les instances précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les instances GCE affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 

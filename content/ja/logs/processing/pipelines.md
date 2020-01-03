@@ -16,7 +16,7 @@ further_reading:
     tag: ラーニングセンター
     text: ログを極める パース
 ---
-{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" responsive="true">}}
+{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" >}}
 
 ## パイプラインの目的
 
@@ -30,15 +30,15 @@ Datadog は、JSON 形式のログを自動的にパースします。ログが 
 
 ある処理パイプラインの以下のようなログを例にします。
 
-{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="original log" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="original log"  style="width:50%;">}}
 
 これは、次のログに変換できます。
 
-{{< img src="logs/processing/pipelines/log_post_processing.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt=" Log post severity "  style="width:50%;">}}
 
 このパイプラインの例
 
-{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Pipelines example" responsive="true" style="width:75%;">}}
+{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Pipelines example"  style="width:75%;">}}
 
 パイプラインはさまざまな形式のログを受け取り、それらを Datadog の共通形式に翻訳します。
 
@@ -54,7 +54,7 @@ Datadog は、JSON 形式のログを自動的にパースします。ログが 
 
 次のログストリームは、どのログにパイプラインが適用されるかを示します。
 
-{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters"  style="width:80%;">}}
 
 ## ネストされたパイプライン
 
@@ -62,11 +62,11 @@ Datadog は、JSON 形式のログを自動的にパースします。ログが 
 
 パイプラインは、ネストされたパイプラインとプロセッサーを持つことができます。一方、ネストされたパイプラインは、プロセッサーしか持つことができません。
 
-{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines"  style="width:80%;">}}
 
 あるパイプラインを別のパイプラインにドラッグアンドドロップして、ネストされたパイプラインに変換することができます。
 
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true" responsive="true" width="80%" >}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true"  width="80%" >}}
 
 ## 特殊なパイプライン
 
@@ -89,11 +89,11 @@ Datadog には、`timestamp`、`status`、`host`、`service`、さらにはロ�
 
 予約済み属性パイプラインに移動し、デフォルトのマッピングを次のように変更します。
 
-{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper"  style="width:70%;">}}
 
 これで、次のログが生成されます。
 
-{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
 カスタムパイプラインで属性を予約済み属性の 1 つに再マップする場合は、[ログステータスリマッパー][3]または[ログ日付リマッパー][4]を使用します。
 
@@ -101,7 +101,7 @@ Datadog には、`timestamp`、`status`、`host`、`service`、さらにはロ�
 
 ログを収集するようにセットアップされているいくつかのソースには、Datadog のインテグレーション処理パイプラインを使用できます。これらのパイプラインは**読み取り専用**であり、各ソースに適した方法でログをパースします。インテグレーションパイプラインを編集するには、それを複製した上で編集します。
 
-{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
 
 すべてのインテグレーションパイプラインについては、[インテグレーションパイプラインリファレンス][5]のページを参照してください。
 

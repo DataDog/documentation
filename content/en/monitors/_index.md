@@ -32,4 +32,5 @@ Monitoring all of your infrastructure in one place wouldn't be complete without 
 {{< /whatsnext >}}
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}

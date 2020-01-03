@@ -20,7 +20,7 @@ La [page Metrics Summary][1] affiche la liste de vos métriques transmises à Da
 
 Le volet de métrique affiche des informations essentielles concernant une métrique donnée.
 
-{{< img src="graphing/metrics/summary/metric_panel.png" alt="Volet de métrique" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/summary/metric_panel.png" alt="Volet de métrique"  style="width:80%;">}}
 
 ### Le nom de la métrique
 

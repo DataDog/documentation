@@ -17,7 +17,7 @@ further_reading:
 
 1. To add members to a team, start by visiting the [Team Page][1].
 2. Enter the email address of the user you wish to invite to your Datadog account. Click **Invite**
-  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" style="width:50%;">}}
+  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team"  style="width:50%;">}}
 
 The new user will receive an email with a link to log in.
 
@@ -38,7 +38,7 @@ Datadog provides 3 user roles:
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
 
-    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" style="width:50%;" >}}
+    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member"  style="width:50%;" >}}
 
 ## Promote existing members to administrator
 

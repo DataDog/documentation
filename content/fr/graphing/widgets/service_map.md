@@ -11,11 +11,11 @@ Ce widget affiche une carte de service avec tous les services qui l'appellent, e
 
 Il n'est pas possible de configurer un intervalle pour le widget Service Map. Ce dernier affiche toujours les services à l'origine d'un appel lors des deux dernières semaines. Les métriques sont calculées en temps réel pour chaque service en temps réel à partir des données de l'heure précédente.
 
-{{< img src="graphing/widgets/service_map/test_service_map.png" alt="configuration de Service Map" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_map/test_service_map.png" alt="configuration de Service Map"  style="width:80%;">}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/service_map/service_map.png" alt="Configuration Service Map" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_map/service_map.png" alt="Configuration Service Map"  style="width:80%;">}}
 
 ### Configuration
 

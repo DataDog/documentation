@@ -88,7 +88,7 @@ v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/agent5architecture.jpg" alt="Agent v5 Architecture" responsive="true">}}
+{{< img src="agent/agent5architecture.jpg" alt="Agent v5 Architecture" >}}
 
 Agent v5 は、以下に示す主な 4 つのコンポーネントで構成され、それぞれ別のプロセスとして実行される Python で記述されます。
 

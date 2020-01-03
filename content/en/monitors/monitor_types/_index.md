@@ -38,14 +38,14 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 For all monitor types, monitor changes create an event in the [event stream][20]. This event explains the change and displays the user that made the change.
 
 If you made changes to a monitor, you can see examples with the following event search:
-```
+
+```text
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients when this alert is modified*.
 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][20].
-
 
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /api/#monitors

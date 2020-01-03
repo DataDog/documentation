@@ -60,7 +60,7 @@ telnet intake.logs.datadoghq.eu 1883
 
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
-{{< img src="getting_started/logs/plain_text_log.png" alt="Telnet personnalisé" responsive="true">}}
+{{< img src="getting_started/logs/plain_text_log.png" alt="Telnet personnalisé" >}}
 
 ou un objet JSON qui est automatiquement parsé par Datadog :
 
@@ -87,7 +87,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
-{{< img src="getting_started/logs/json_log.png" alt="Logs JSON" responsive="true">}}
+{{< img src="getting_started/logs/json_log.png" alt="Logs JSON" >}}
 
 ## Envoyer des logs à partir d'un fichier
 
@@ -205,7 +205,7 @@ $ echo "Nouvelle ligne de log dans le fichier de log" >> fichier_log_à_surveill
 
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
-{{< img src="getting_started/logs/file_log_example.png" alt="Exemple de fichier de log" responsive="true">}}
+{{< img src="getting_started/logs/file_log_example.png" alt="Exemple de fichier de log" >}}
 
 ## Pour aller plus loin
 

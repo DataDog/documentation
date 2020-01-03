@@ -11,11 +11,11 @@ further_reading:
 
 サービスマップウィジェットは、タイムスコープに対応しません。常に、過去 2 週間に呼び出しを行ったサービスを表示します。また、直近の 1 時間について、サービスごとにリアルタイムにメトリクスが計算されます。
 
-{{< img src="graphing/widgets/service_map/test_service_map.png" alt="service map setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_map/test_service_map.png" alt="service map setup"  style="width:80%;">}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/service_map/service_map.png" alt="service map setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_map/service_map.png" alt="service map setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 

@@ -21,20 +21,20 @@ further_reading:
 ## コンフィグレーション
 
 1. **ホストを名前またはタグ**で選択します。タグを指定すると、そのタグまたはタグの組み合わせを持つすべてのホストが監視されます。
-    {{< img src="monitors/monitor_types/host/host_monitor_pick_hosts.png" alt="host monitor pick hosts" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/host/host_monitor_pick_hosts.png" alt="host monitor pick hosts"  style="width:80%;">}}
 
 2. **Check Alert** と **Cluster Alert** のどちらかを選択します。
 
 3. **Check Alert**: ホストが報告を停止すると、アラートがトリガーされます。
     **データなしのタイムフレーム**を選択します。選択した時間 (分数) より長くハートビートが報告を停止すると、通知が行われます。
-    {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="host monitor no data timeframe" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="host monitor no data timeframe"  style="width:80%;">}}
 
 4. **Cluster Alert**: 一定の割合のホストが報告を停止すると、アラートがトリガーされます。
     * タグに基づいてホストをクラスター化するかどうかを決めます。
-        {{< img src="monitors/monitor_types/host/cluster_alert.png" alt="Cluster alert" responsive="true" style="width:80%;">}}
+        {{< img src="monitors/monitor_types/host/cluster_alert.png" alt="Cluster alert"  style="width:80%;">}}
 
     * ホストモニターのアラート/警告しきい値 (パーセント値) を選択します。
-        {{< img src="monitors/monitor_types/host/cluster_alert_setup.png" alt="cluster alert setup" responsive="true" style="width:75%;">}} 
+        {{< img src="monitors/monitor_types/host/cluster_alert_setup.png" alt="cluster alert setup"  style="width:75%;">}} 
 
     * **データなしのタイムフレーム**を選択します。選択したクラスター内の選択した割合のホストで、選択した時間 (分数) より長くハートビートが報告を停止すると、通知が行われます。
 

@@ -41,7 +41,7 @@ Slack インテグレーションは、Datadog アプリケーション内の[�
 6. **Slack Account Hook** フィールドに Webhook URL を貼り付けます。
 7. Save をクリックします。
 8. Slack の**ポスト先のチャンネル**を追加します。
-    {{< img src="integrations/slack/slack_configuration.png" alt="Slack configuration" responsive="true">}}
+    {{< img src="integrations/slack/slack_configuration.png" alt="Slack configuration" >}}
 9. グラフへのコメントごとに通知を受けるには、各チャンネルの **Transfer all user comments** チェックボックスをオンにします。このチェックボックスをオフのままにする場合、コメントが Slack にポストされるようにするには、`@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>` 構文を使用する必要があります。アカウントを 1 つだけ使用する場合、または最初のアカウントのみを参照する場合は、`@slack-<CHANNEL_NAME>` も使用できます。
 
 [モニター][4]と[イベントストリーム][5]から Slack にアラートを送信するように構成することもできます。

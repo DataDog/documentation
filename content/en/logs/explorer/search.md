@@ -21,7 +21,7 @@ further_reading:
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
 
 ## Search syntax
 
@@ -35,7 +35,6 @@ There are two types of terms:
 
 To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
-
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operator** | **Description**                                                                                        | **Example**                  |
@@ -47,19 +46,22 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:80%;">}}
 
 ### Escaping of special characters
 
 The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
 ### Attributes search
+
 #### Message attribute search
+
 To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
 
 `user\=JaneDoe`
 
 #### Facets search
+
 To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
@@ -71,7 +73,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 Examples:
 
 | Search query                                                         | Description                                                                                                                                                         |
-| -----                                                                | -----                                                                                                                                                               |
+|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `@http.url_details.path:"/api/v1/test"`                              | Searches all logs containing `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
@@ -95,6 +97,7 @@ Wildcard searches can also be used to search in the plain text of a log that is 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
 ### Numerical values
+
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
@@ -122,7 +125,7 @@ You can add facets on arrays of strings or numbers. All values included in the a
 
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
 ## Saved Searches
 

@@ -71,7 +71,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 
 When graphed, this `COUNT` metric looks like the following:
 
-{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" >}}
 
 Note: StatsD counts show a decimal value within Datadog, since they are normalized over the flush interval to report units per second.
 
@@ -102,7 +102,7 @@ Then this pattern of `0.33`, `0.66`, `0`, repeats. **Note**: for a `RATE` metric
 
 Since the `RATE` is the normalized per-second variation of the number of requests. When graphed, this `RATE` metric looks like the following:
 
-{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" >}}
 
 Discover how to submit rate metrics:
 
@@ -126,7 +126,7 @@ Each value/data point represents the total number of requests received at a poin
 
 When graphed, this `GAUGE` metric looks like the following:
 
-{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
+{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" >}}
 
 Discover how to submit gauge metrics:
 
@@ -152,7 +152,6 @@ For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` dur
 | `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.                                                                                  | GAUGE               |
 | `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval.                                                                           | GAUGE               |
 
-
 For instance, say that the `request.response_time.histogram` metric is reported to Datadog through an Agent with the `HISTOGRAM` type for `server:web_1` with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
 
 | Metric Name                                    | Value  | Datadog Metric Type |
@@ -162,7 +161,6 @@ For instance, say that the `request.response_time.histogram` metric is reported 
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
-
 
 **Note**:
 
@@ -227,7 +225,6 @@ If you were to add percentile aggregations to your distribution metric (as shown
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
 **Note**: In the example above, the p50 (median) for `server:web_1` is `2` and the p50 for `server:web_2` is `1`. Agent-side aggregation would result in taking the median of these two median values, resulting in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric's server-side aggregation.
-
 
 ### Customization of tagging
 

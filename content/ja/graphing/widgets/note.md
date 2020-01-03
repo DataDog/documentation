@@ -17,7 +17,7 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup" responsive="true"  style="width:80%;">}}
+{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup"   style="width:80%;">}}
 
 1. 表示したいテキストを入力します。マークダウンがサポートされています。
 2. テキストサイズとノートの背景色を選択します。

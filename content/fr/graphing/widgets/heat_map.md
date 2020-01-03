@@ -19,11 +19,11 @@ Cette visualisation affiche une seule requête de métrique. Les requêtes suppl
 
 **Remarque** : la détection des singularités n'est pas possible avec cette visualisation.
 
-{{< img src="graphing/widgets/heat_map/heat_map.png" alt="Carte thermique" responsive="true">}}
+{{< img src="graphing/widgets/heat_map/heat_map.png" alt="Carte thermique" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/heat_map/heat_map_setup.png" alt="Configuration carte thermique" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/heat_map/heat_map_setup.png" alt="Configuration carte thermique"  style="width:80%;">}}
 
 ### Configuration
 

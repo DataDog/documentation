@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: ログの調査方法
 ---
-{{< img src="logs/processing/processors/processors_overview.png" alt="original log" responsive="true">}}
+{{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
 
 プロセッサーは、[パイプライン][1]の内部で、ログに対してデータ構造化アクション ([属性の再マップ](#remapper)、[Grok パース](#grok-parser)など) を実行します。
 
@@ -28,7 +28,7 @@ further_reading:
 
 [Datadog ログ構成ページ][1]で、Grok プロセッサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/parser.png" alt="Parser"  style="width:80%;" >}}
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
@@ -99,7 +99,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログ日付リマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -131,11 +131,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 いくつかの属性を公式ステータスとして割り当てる場合は、このプロセッサーを使用します。次のログを例にします。
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt=" Log pre severity " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/log_pre_severity.png" alt=" Log pre severity "  style="width:40%;">}}
 
 変換すると次のようになります。
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis"  style="width:40%;" >}}
 
 受信したステータス値は、次のようにマップされます。
 
@@ -158,7 +158,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログステータスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -197,7 +197,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログサービスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -236,7 +236,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログメッセージリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -269,11 +269,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 リマッパープロセッサーは、ソース属性またはタグを別のターゲット属性またはタグに再マップします。次のログを例にします。
 
-{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
 
 変換すると次のようになります。
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
 タグ/属性名の制約については、[タグのベストプラクティスのドキュメント][4]に説明があります。ターゲットタグ/属性名では `:` および `,` を使用できないため、さらにいくつかの制約が適用されます。
 
@@ -282,7 +282,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、リマッパープロセッサーを定義します。たとえば、ここでは `user` を `user.firstname` に再マップします。
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -324,14 +324,14 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 このプロセッサーは URL からクエリパラメーターなどの重要なパラメーターを抽出します。これをセットアップすると、次の属性が生成されます。
 
-{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor"  style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、URL パーサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="Url Processor Tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor_tile.png" alt="Url Processor Tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -362,7 +362,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ユーザーエージェントパーサーは、User-Agent 属性から OS、ブラウザ、デバイスなどのユーザーデータを抽出します。このパーサーは、Google Bot、Yahoo Slurp、Bing などの主要なボットを認識します。これをセットアップすると、次の属性が生成されます。
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor"  style="width:80%;">}}
 
 **注**: エンコードされた User-Agent がログに含まれている場合 (IIS ログなど) は、パースの前に **URL をデコードする**ようにプロセッサーを構成してください。
 
@@ -371,7 +371,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ユーザーエージェントプロセッサーを定義します。
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -419,11 +419,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は 2xx、応答コード 300 ～ 399 の場合は 3xx など) するには、次のプロセッサーを追加します。
 
-{{< img src="logs/processing/processors/category_processor.png" alt="Category Processor" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor.png" alt="Category Processor"  style="width:80%;" >}}
 
 このプロセッサーは、以下の結果を生成します。
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -490,7 +490,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、算術演算プロセッサーを定義します。
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor"  style="width:80%;">}}
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
@@ -544,7 +544,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ストリングビルダープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="ストリングビルダープロセッサー" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="ストリングビルダープロセッサー"  style="width:80%;">}}
 
 **例**
 
@@ -634,13 +634,13 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor"  style="width:80%;">}}
 
 <mrk mid="459" mtype="seg"/><mrk mid="460" mtype="seg"/>
 
 以下にて、GeoIP パーサーが抽出する位置情報の例をご覧いただけます。この例では `network.client.ip` 属性から情報を抽出し、`network.client.geoip` 属性に保存しています。
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
 
 **注**: 
 
@@ -681,7 +681,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー"  style="width:80%;">}}
 
 このプロセッサーでは以下のアクションを実行可能です。
 
@@ -739,7 +739,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 [Datadog ログ構成ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}

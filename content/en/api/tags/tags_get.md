@@ -6,6 +6,7 @@ external_redirect: /api/#get-tags
 ---
 
 ## Get tags
+
 Return a mapping of tags to hosts for your whole infrastructure.
 
 **ARGUMENTS**:

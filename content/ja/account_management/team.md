@@ -16,7 +16,7 @@ further_reading:
 
 1. チームにメンバーを追加するには、最初に [Team Page][1] にアクセスします。
 2. Datadog アカウントに招待するユーザーのメールアドレスを入力します。**Invite** をクリックします。
-  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" style="width:50%;">}}
+  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team"  style="width:50%;">}}
 
 新しいユーザーは、ログイン用のリンクが記載されたメールを受け取ります。
 
@@ -37,7 +37,7 @@ Datadog には、以下の 3 つのユーザーロールがあります。
 1. [Team Page][1]に移動します。
 2. 無効にするユーザーのアバターにマウスを置きます。メニューから **Disable** を選択します。
 
-    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" style="width:50%;" >}}
+    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member"  style="width:50%;" >}}
 
 ## 既存のメンバーの管理者への昇進
 

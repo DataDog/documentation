@@ -16,7 +16,7 @@ public_title: Datadog-Honeybadger インテグレーション
 short_description: イベントストリームで Honeybadger からの例外を表示、検索、議論 event stream.
 version: '1.0'
 ---
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" responsive="true" popup="true">}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event"  >}}
 
 ## 概要
 

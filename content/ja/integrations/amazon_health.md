@@ -22,7 +22,7 @@ version: '1.0'
 
 AWS Health は、AWS のリソース、サービス、アカウントの状態をリアルタイムに可視化します。このインテグレーションを有効にすると、AWS Health サービスイベントが Datadog に表示されます。
 
-{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event"  >}}
 
 **注**: このインテグレーションは、AWS のビジネスサポートプランまたはエンタープライズサポートプランのお客様に対してのみ機能します。
 

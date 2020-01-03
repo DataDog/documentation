@@ -38,7 +38,7 @@ Service checks can be visualized and used in 3 Datadog sections:
 
 Click on the *Monitors* tab, and then on *Check Summary* to see the [Check Summary][1] page.
 
-{{< img src="developers/service_checks/check_summary.png" alt="Check summary" responsive="true" >}}
+{{< img src="developers/service_checks/check_summary.png" alt="Check summary"  >}}
 
 This is a list of all your checks and their statuses, reporting across your infrastructure in the past day. Select a check to get insights on the number of distinct checks for each of its associated tags.
 
@@ -46,11 +46,11 @@ This is a list of all your checks and their statuses, reporting across your inf
 
 You can visualize service checks with a *Check status* widget in a screenboard:
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget" responsive="true" >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget"  >}}
 
 After clicking on the *Check status* widget icon, the following pop-up appears:
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config" responsive="true" >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config"  >}}
 
 In this form, you can:
 
@@ -64,11 +64,11 @@ In this form, you can:
 Even if you can't graph a custom check over time as you would for metrics, you can still monitor it.
 Go to *monitor tab* > *new monitor*, then select the **custom check** section:
 
-{{< img src="developers/service_checks/check_monitor.png" alt="Check monitor" responsive="true" >}}
+{{< img src="developers/service_checks/check_monitor.png" alt="Check monitor"  >}}
 
 Configure your custom check monitor: 
 
-{{< img src="developers/service_checks/check_monitor_config.png" alt="Check monitor configuration" responsive="true" >}}
+{{< img src="developers/service_checks/check_monitor_config.png" alt="Check monitor configuration"  >}}
 
 In this form, you can:
 
@@ -80,10 +80,9 @@ In this form, you can:
 
 Service check monitors for out-of-the-box Datadog integrations can be set in the *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
 
-{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy Service Check" video="true" responsive="true" >}}
+{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy Service Check" video="true"  >}}
 
 Learn how to write an integration with the [integration developer documentation][5].
-
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard

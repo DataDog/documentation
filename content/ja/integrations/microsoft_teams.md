@@ -28,23 +28,23 @@ Datadog を Microsoft Teams チャンネルと統合するには、以下のよ�
 
 1. チャンネルのリストで、チャンネル名の横にある `...` ボタンを選択し、`コネクター` を選択します。
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_1.png" alt="Microsoft Teams step 1" responsive="true">}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_1.png" alt="Microsoft Teams step 1" >}}
 
 2. Datadog を検索し、`構成` をクリックします。
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams step 2" responsive="true">}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams step 2" >}}
 
 3. サブドメインがある場合は、アカウントのサブドメインを入力します。ない場合は、`app` と入力します。**サイトにアクセスしてインストール** をクリックします。これで、Datadog にリダイレクトして戻ります。
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_3.png" alt="Microsoft Teams step 3" responsive="true">}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_3.png" alt="Microsoft Teams step 3" >}}
 
 4. Microsoft Teams インテグレーションタイルの Configuration タブで、`Connect to Office 365` ボタンをクリックすると、インストールが完了します。
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_4.png" alt="Microsoft Teams step 4" responsive="true">}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_4.png" alt="Microsoft Teams step 4" >}}
 
 5. 自動生成されたチーム名を任意の名前に置き換えます。
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_5.png" alt="Microsoft Teams step 5" responsive="true">}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_5.png" alt="Microsoft Teams step 5" >}}
 
 これで、Microsoft チーム名で [`@-notification` 機能][1]を使用できるようになりました。
 

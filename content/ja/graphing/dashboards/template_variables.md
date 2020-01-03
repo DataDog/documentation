@@ -32,9 +32,9 @@ further_reading:
 
 テンプレート変数を作成後、その変数を使用しているソースの数がDatadog に表示されます。下の例では、2 つのグラフの内の 1 つでテンプレート変数が使用されています。
 
-{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="統計的 TV" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="統計的 TV"  style="width:85%;">}}
 
-個々のウィジェットで[テンプレート変数を使用](#use) するか、**Add to All** オプションをクリックします。すべてのウィジェットからテンプレート変数を削除するには、**Remove From All**オプションをクリックします。
+個々のウィジェットで[テンプレート変数を使用](#use) するか、**Add to All** オプションをクリックします。すべてのウィジェットからテンプレート変数を削除するには、**Remove From All** オプションをクリックします。
 
 ### ログと APM クエリ
 
@@ -47,7 +47,7 @@ further_reading:
 
 #### 作成
 
-{{< img src="graphing/dashboards/template_variables/default_view.png" alt="デフォルトの保存済みビュー" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/default_view.png" alt="デフォルトの保存済みビュー"  style="width:85%;">}}
 
 ダッシュボードのテンプレート変数の左側に *(Default Value)* と付いたドロップダウンリストがあります。テンプレート変数値を変更する場合、その値は自動的にビューに保存されません。
 ビューでテンプレート変数の現在値を保存するには、ドロップダウンメニューをクリックし、*Save selections as view* をクリックします。次に、そのビュー固有の名前を入力するよう指示されます。保存すると、このビューはドロップダウンメニューに表示されます。テンプレート変数の過去に保存された値を取り出すには、このビューをクリックして下さい、
@@ -56,7 +56,7 @@ further_reading:
 
 ビューを削除するには、保存済みビューのドロップダウンをクリックし、*Manage views...* を選択します。それぞれのビューの横に、保存されているビューのポップアップがごみ箱アイコンとともに表示されます。ビューを削除するには、該当するごみ箱アイコンをクリックして下さい。
 
-{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="ポップアップビューの管理" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="ポップアップビューの管理"  style="width:75%;">}}
 
 #### 変更
 
@@ -72,11 +72,11 @@ further_reading:
 
 ウィジェットが保存されると、テンプレート変数の値はダッシュボードの上から選択されたものとなります。
 
-{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables"  style="width:75%;">}}
 
 #### テキスト
 
-テキストベースのウィジェットには、テンプレート変数の名前と値を `$1` と共に、または値だけを `$2.value` と共に表示できます。例として、名前が `env`、選択された値が `dev` のテンプレート変数の場合、
+テキストベースのウィジェットには、テンプレート変数の名前と値を `$<テンプレート変数名>` と共に、または値だけを `$<テンプレート変数名>` と共に表示できます。例として、名前が `env`、選択された値が `dev` のテンプレート変数の場合、
 
 * `$env` には `env:dev` と表示されます
 * `$env.value` には `dev` が表示されます
@@ -94,12 +94,12 @@ further_reading:
 ダッシュボードから、以下のフォーマットを用いたテンプレート変数のイベントストリームを検索します。
 
 ```
-tags:<タグ_キー>:$<テンプレートの_変数名>.value
+tags:<タグキー>:$<テンプレートの変数名>.value
 ```
 
 例えば、`tags:region:$region.value` を、`region` テンプレート変数についての `us-east1` の値で検索すると、`region:us-east1` でタグ付けされたイベントが表示されます。さらに、イベントのタイミングがグラフ上にピンクのバーで示されます。
 
-{{< img src="graphing/dashboards/template_variables/search_dashboard.png" alt="検索ダッシュボード" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_dashboard.png" alt="検索ダッシュボード"  style="width:85%;">}}
 
 複数のテンプレート変数で検索するには、コンマを入れます（例: `tags:role:$role.value,env:$env.value`）
 
@@ -115,7 +115,7 @@ tags:$<テンプレートの_変数名>
 
 例えば、イベントオーバーレイ検索ボックスに `tags:$region` と入力して、`region` テンプレート変数ドロップダウンにある値のイベントを検索します。
 
-{{< img src="graphing/dashboards/template_variables/search_widget.png" alt="検索ウィジェット" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_widget.png" alt="検索ウィジェット"  style="width:85%;">}}
 
 ## その他の参考資料
 

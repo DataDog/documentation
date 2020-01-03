@@ -29,7 +29,7 @@ Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des
 
 1. Connectez-vous à Sumo Logic en tant qu'utilisateur disposant de droits d'administrateur.
 2. Dans le menu principal, choisissez **Manage** -> **Collection**.
-3. Cliquez sur le lien **Add Collector** en haut à gauche.{{< img src="integrations/summologic/integrations-sumo-hostedcollector.png" alt="Collection hébergée" responsive="true" popup="true">}}
+3. Cliquez sur le lien **Add Collector** en haut à gauche.{{< img src="integrations/summologic/integrations-sumo-hostedcollector.png" alt="Collection hébergée"  >}}
 4. Choisissez **Hosted Collector**.
 5. Saisissez un nom et éventuellement une description, une catégorie et un fuseau horaire. Cliquez sur **Save**.
 6. Cliquez sur **HTTP** dans la section correspondant aux API Cloud. Remplissez le formulaire en fonction des informations du collecteur. Cliquez sur **Save**.
@@ -43,16 +43,16 @@ Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des
 1. Connectez-vous à Sumo Logic en tant qu'utilisateur disposant de droits d'administrateur.
 2. Dans le menu principal, choisissez **Manage** -> **Connections**.
 3. Cliquez sur le bouton **Add**.
-4. Cliquez sur le bouton **Datadog**. {{< img src="integrations/summologic/integrations-sumo-connectiontype.png" alt="Cliquez sur le bouton Datadog" responsive="true" popup="true">}}
+4. Cliquez sur le bouton **Datadog**. {{< img src="integrations/summologic/integrations-sumo-connectiontype.png" alt="Cliquez sur le bouton Datadog"  >}}
 5. Donnez un nom à la connexion et éventuellement une description. Pour l'URL, saisissez :
 
         https://app.datadoghq.com/api/v1/events?api_key=VOTRE_CLÉ_API
 
 6. Personnalisez la charge utile en fonction de vos besoins. Cliquez sur le lien **Help** pour découvrir les variables disponibles.
-7. Cliquez sur l'option **Test Connection**. Vous devriez voir un nouvel élément dans votre flux d'événements qui ressemble à ceci : {{< img src="integrations/summologic/integrations-sumo-event.png" alt="Événement test" responsive="true" popup="true">}}
+7. Cliquez sur l'option **Test Connection**. Vous devriez voir un nouvel élément dans votre flux d'événements qui ressemble à ceci : {{< img src="integrations/summologic/integrations-sumo-event.png" alt="Événement test"  >}}
 8. Si tout semble correct, cliquez sur **Save**.
 9. Dans Sumo Logic, enregistrez la recherche de votre choix et choisissez de planifier la recherche.
-10. Choisissez Webhook comme valeur pour **Alert Type**. Choisissez votre nouvelle connexion Datadog dans la liste des Webhooks. Vous pouvez personnaliser la charge utile si vous le souhaitez. Il est conseillé de modifier l'option sélectionnée dans **Alert condition** de façon à envoyer une notification uniquement si le nombre de résultats est supérieur à 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Collection hébergée" responsive="true" popup="true">}}
+10. Choisissez Webhook comme valeur pour **Alert Type**. Choisissez votre nouvelle connexion Datadog dans la liste des Webhooks. Vous pouvez personnaliser la charge utile si vous le souhaitez. Il est conseillé de modifier l'option sélectionnée dans **Alert condition** de façon à envoyer une notification uniquement si le nombre de résultats est supérieur à 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Collection hébergée"  >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic
 

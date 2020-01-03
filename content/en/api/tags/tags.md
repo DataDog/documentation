@@ -6,6 +6,7 @@ external_redirect: /api/#tags
 ---
 
 ## Tags
+
 The tag endpoint allows you to tag hosts with keywords meaningful to you - like `role:database`.
 All metrics sent from a host have its tags applied. When fetching and applying tags to a particular host, refer to hosts by name (yourhost.example.com).
 

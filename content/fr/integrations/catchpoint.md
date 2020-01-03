@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Catchpoint
 short_description: Envoyez vos alertes Catchpoint à votre flux d'événements Datadog.
 version: '1.0'
 ---
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="événement catchpoint" responsive="true" popup="true">}}
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="événement catchpoint"  >}}
 
 ## Présentation
 
@@ -61,7 +61,7 @@ Vous devez également indiquer la clé d'API Datadog. Vous pouvez la créer depu
 ```
 
 Catcpoint enverra désormais toutes les alertes au flux d'événements dans Datadog.
-{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Configuration Catchpoint" responsive="true" popup="true">}}
+{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Configuration Catchpoint"  >}}
 
 ## Données collectées
 ### Métriques

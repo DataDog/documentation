@@ -16,7 +16,7 @@ further_reading:
     tag: Documentation
     text: ログの調査方法
 ---
-{{< img src="logs/processing/processing.png" alt="Processing" responsive="true">}}
+{{< img src="logs/processing/processing.png" alt="Processing" >}}
 
 ## 概要
 
@@ -42,7 +42,7 @@ further_reading:
 
 インテグレーションログに対しては、[インテグレーションパイプライン][7]が自動的にインストールされます。ログをパースし、対応するファセットをログエクスプローラーに追加します。以下の ELB ログの例を参照してください。
 
-{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing"  style="width:70%;">}}
 
 <div class="alert alert-info">
 現在サポートされているインテグレーションのリストは、<a href="/integrations/#cat-log-collection">こちら</a>から確認できます。
@@ -54,11 +54,11 @@ further_reading:
 
 例として、以下のようなログにカスタム処理ルールを使用します。
 
-{{< img src="logs/processing/log_pre_processing.png" alt="Log pre processing" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_pre_processing.png" alt="Log pre processing"  style="width:50%;">}}
 
 以下のように変換できます。
 
-{{< img src="logs/processing/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/log_post_processing.png" alt="Log post processing"  style="width:50%;">}}
 
 [パイプラインフィルター][8]を使用して、ログの一部にのみアクションを実行する方法については、[パイプラインに関するドキュメント][1]を参照してください。
 
@@ -135,11 +135,11 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 パイプラインを処理する前に適用されるグローバルなホスト名、サービス、タイムスタンプ、およびステータスのメインマッピングを制御できるようになりました。この機能は、ログを JSON 形式で、または外部 Agent から送信する場合に便利です。
 
-{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute"  style="width:80%;">}}
 
 各予約済み属性のデフォルト値を変更するには、[Configuration ページ][5]に移動し、`予約済み属性のマッピング`を以下のように編集します。
 
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile"  style="width:80%;">}}
 
 ## その他の参考資料
 

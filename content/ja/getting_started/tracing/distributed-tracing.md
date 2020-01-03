@@ -6,7 +6,7 @@ further_reading:
     text: アプリケーションで APM トレーシングをセットアップする方法
   - link: tracing/visualization/
     tag: ドキュメント
-    text: Datadog に報告しているサービスのリストアップ
+    text: Datadog に報告するサービスの一覧
   - link: tracing/visualization/service
     tag: ドキュメント
     text: Datadog のサービスについて
@@ -22,7 +22,7 @@ aliases:
 ---
 [トレーシングの最初の例][1]を読み終わり、トレーシングの機能についてさらに理解を深めたい方のために、単純な API **thinker-api** とその背後のマイクロサービス **thinker-microservice** を扱っている例を挙げます。この API は、適切な subject パラメーターを含むリクエストを受信すると thought で応答し、それ以外の場合はエラーで応答します。
 
-{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview" responsive="true" style="width:70%;" >}}
+{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview"  style="width:70%;" >}}
 
 * リクエスト:
     ```bash
@@ -130,14 +130,14 @@ aliases:
 
 コードを実行すると、[APM][3] でデータの表示が開始されます。[サービスリスト][4]に 2 つのサービス (**thinker-api** と **thinker-microservice**) が表示され、パフォーマンスに関する複数のメトリクスも一緒に示されます。
 
-{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started" responsive="true" >}}
+{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started"  >}}
 
 **thinker-api** をクリックすると、自動的に生成される[サービスダッシュボード][5]に移動します。ここでは、詳細なパフォーマンスデータと、この特定のサービスに関連付けられているすべてのリソースの一覧が表示されます。
 
 * [サービスのパフォーマンスを示すグラフ][6]
 * この特定のサービスにアタッチされている[リソースの一覧][7]:
 
-{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started" responsive="true" style="width:80%;" >}}
+{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started"  style="width:80%;" >}}
 
 この例で最初に実行される関数は `think_handler()` です。これは、リクエストを処理して **thinker-microservice** サービスに転送します。
 
@@ -146,7 +146,7 @@ aliases:
 * [リソースのパフォーマンスを示すグラフ][8]
 * この特定のリソースにアタッチされている[サンプリングされたトレースの一覧][9]:
 
-{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" style="width:50%;" >}}
+{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started"  style="width:50%;" >}}
 
 トレースを選択すると、以下のような情報を含むトレースパネルが開きます。
 
@@ -156,7 +156,7 @@ aliases:
 * トレースされた関数の処理のためにアプリケーションが費やした時間
 * http.method や http.url などの追加のタグ
 
-{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" style="width:80%;" >}}
+{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started"  style="width:80%;" >}}
 
 上記の画像から、リクエストがまず **thinker-api** サービスによって `flask.request` [スパン][10]で受信され、このサービスが処理済みリクエストを **thinker-microservice** サービスに送信し、そこで関数 `think()` が 2 回実行されていることがわかります。
 
@@ -169,10 +169,10 @@ tracer.current_span().set_tag('subject', subject)
 これにより、`think()` が呼び出されてトレースされるたびに、詳細なコンテキストを取得できます。
 
 * 1 回目の `think` が実行されるときの subject は **technology** で、すべて順調に処理されます。
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" style="width:80%;" >}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1"  style="width:80%;" >}}
 
 * 2 回目の `think` が実行されるときの subject は **foo_bar** ですが、これは適切な値ではないのでエラーになります。
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2" responsive="true" style="width:80%;" >}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2"  style="width:80%;" >}}
 
     このエラーの実際の表示は Datadog インスツルメンテーションによって自動的に行われますが、[特別な意味のタグルール][11]を使用して上書きできます。
 

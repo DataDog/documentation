@@ -31,7 +31,7 @@ Pour partager un graphique à partir d'un [timeboard][1] ou d'un [screenboard][2
 6. Choisissez d'inclure ou non la légende.
 7. Cliquez sur le bouton *Generate embed code* pour obtenir le code de l'embed.
 
-{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Graphique partagé" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Graphique partagé"  style="width:75%;">}}
 
 ### Révoquer
 

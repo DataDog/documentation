@@ -18,7 +18,7 @@ further_reading:
 Agent のフルデバッグモードを有効にするには
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. ローカル `datadog.yaml` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][8]をご参照ください。
 
@@ -51,7 +51,7 @@ Agent のフルデバッグモードを有効にするには
 ## コンテナ化された Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 **Agent が起動したら `DD_LOG_LEVEL=debug` 環境変数を設定します。**
 
@@ -105,7 +105,7 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 
 ## Agent のログレベル
 
-`log_level` or `DD_LOG_LEVEL` には、以下の Agent ログレベルを使用可能です。
+`log_level` または `DD_LOG_LEVEL` には、以下の Agent ログレベルを使用可能です。
 
 | オプション  | クリティカルログ | エラーログ | 警告ログ | 情報ログ | デバッグログ | トレースログ |
 |---------|---------------|------------|-----------|-----------|------------|------------|

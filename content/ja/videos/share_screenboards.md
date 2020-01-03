@@ -3,7 +3,7 @@ title: Matt のクイックヒント - スクリーンボードの共有
 kind: ビデオ
 language: en
 wistiaid: old1t5trj4
-videos:
+video-categories:
   - Introduction
   - Dashboards
   - Screenboards

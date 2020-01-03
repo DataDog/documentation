@@ -30,7 +30,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 例として、`system.load.1` の `hour_before()` 値を破線で示します。この例では、マシンが午前 6:30 に起動し、`hour_before()` 値が 7:30 のマークから表示されています。もちろんこの例は、`hour_before()` の値が実際の値と合致するように特別に作成されています。
 
-{{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example"  style="width:80%;">}}
 
 ## 1 日前
 
@@ -40,7 +40,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 例として、`nginx.net.connections` の `day_before()` 値を明るい細線で示します。この例では、1 週間分のデータを表示できるため、`day_before()` のデータが簡単にわかります。
 
-{{< img src="graphing/functions/timeshift/simple_day_before_example.png" alt="simple day before example" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_day_before_example.png" alt="simple day before example"  style="width:80%;">}}
 
 ## 1 週前
 
@@ -50,7 +50,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 例として、`cassandra.db.read_count` の `week_before()` 値を破線で示します。この例では約 3 週間分のデータを表示できるため、`week_before()` のデータが簡単にわかります。
 
-{{< img src="graphing/functions/timeshift/simple_week_before_example.png" alt="simple week before example" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_week_before_example.png" alt="simple week before example"  style="width:80%;">}}
 
 ### 1 か月前
 
@@ -60,7 +60,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 例として、`aws.ec2.cpuutilization` の `month_before()` 値を細実線で示します。
 
-{{< img src="graphing/functions/timeshift/simple_month_before_example.png" alt="simple month before example" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_month_before_example.png" alt="simple month before example"  style="width:80%;">}}
 
 ## その他の関数
 

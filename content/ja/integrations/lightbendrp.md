@@ -16,7 +16,7 @@ public_title: Datadog-Lightbend インテグレーション
 short_description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
 version: '1.0'
 ---
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard"  >}}
 
 ## 概要
 

@@ -13,7 +13,7 @@ Pour une requête regroupée selon une ou plusieurs [clés de tag][1], cette fon
 
 Exemple : `count_nonzero(system.cpu.user{*} by {host})` renvoie une série temporelle représentant le nombre de hosts avec une charge système différente de zéro pour chaque point.
 
-{{< img src="graphing/functions/count/count_nonzero.png" alt="total sans les zéros" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/count/count_nonzero.png" alt="total sans les zéros"  style="width:80%;">}}
 
 ## Total sans les null
 
@@ -25,7 +25,7 @@ Pour une requête regroupée selon une ou plusieurs [clés de tag][1], cette fon
 
 Exemple : `count_not_null(system.cpu.user{*} by {host})` renvoie une série temporelle représentant le nombre de hosts avec une charge système différente de null pour chaque point.
 
-{{< img src="graphing/functions/count/count_not_null.png" alt="total sans les null" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/count/count_not_null.png" alt="total sans les null"  style="width:80%;">}}
 
 ## Autres fonctions
 

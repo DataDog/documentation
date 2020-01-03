@@ -19,7 +19,7 @@ public_title: Datadog-Ansible インテグレーション
 short_description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示
 version: '1.0'
 ---
-{{< img src="integrations/ansible/ansibledashboard.png" alt="ansible dashbaord" responsive="true" popup="true">}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="ansible dashbaord"  >}}
 
 ## 概要
 
@@ -54,7 +54,7 @@ Ansible を使用して Datadog Agent をインストールする方法につい
 Ansible を使用して、ログ収集を有効にして Datadog Agent をインストールする方法については、[こちらのプレイブックの例を参照][4]してください。
 
 ## 収集データ
-### {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
+### {{< img src="synthetics/create_a_check.png" alt="Create a check"  style="width:80%;">}}
 {{< get-metrics-from-git "ansible" >}}
 
 

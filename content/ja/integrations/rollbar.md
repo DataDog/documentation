@@ -18,7 +18,7 @@ public_title: Datadog-Rollbar インテグレーション
 short_description: Datadog イベントストリームに例外、エラー、およびコードデプロイを送信 stream.
 version: '1.0'
 ---
-{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" responsive="true" popup="true">}}
+{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event"  >}}
 
 ## 概要
 

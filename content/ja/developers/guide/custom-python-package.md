@@ -60,7 +60,7 @@ C:\Program Files (x86)\Datadog\Datadog Agent\files
 
 その後、[Agent を再起動][1]します。
 
-{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
+{{< img src="agent/windows_python_package.png" alt="windows python package"  >}}
 
 
 [1]: /ja/agent/basic_agent_usage/windows

@@ -19,7 +19,7 @@ further_reading:
 
 インフラストラクチャーリストのページには、Datadog アプリケーションによって監視されているすべてのホストが表示されます。
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list"  >}}
 
 注: 24 時間データを送信しなかったホストは、インフラストラクチャーリストから削除されます。そのホストに対するクエリは引き続き実行できますが、ドロップダウンには表示されません。
 
@@ -27,7 +27,7 @@ further_reading:
 
 いずれかのホストをクリックすると、そのホストに適用されているタグが表示されます。
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details"  style="width:80%;">}}
 
 ### Agent のホスト名
 
@@ -81,13 +81,13 @@ Datadog は、1 つのホストに一意に識別可能な名前が複数ある�
 アカウント内のすべてのホストのリストは、Datadog の Infrastructure タブで
 確認できます。Inspect パネルから、(他の情報と共に) 各ホストに関連付けられているエイリアスのリストを表示できます。
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases"  style="width:80%;">}}
 
 ### インフラストラクチャーリストと Agent バージョンのエクスポート
 
 ホストリストレポートを出力または Datadog にエクスポートする必要がある場合は、インフラストラクチャーリストの下部にある "JSON API permalink"を使用します。
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list"  style="width:80%;">}}
 
 このリンクをクリックすると、全ホストのリストが JSON 形式で表示されます。
 
@@ -110,7 +110,7 @@ Datadog の[インフラストラクチャーリストページ][7]に表示さ�
 * そのホストについて、Datadog が Datadog-AWS インテグレーションを通じて Cloudwatch から AWS EC2 の情報を受け取っている。
 * ただし、そのホストに Agent はインストールされていない。
 
-{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" style="width:90%;">}}
+{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent"  style="width:90%;">}}
 
 ホストリストを出力するスクリプトについては、[こちら][8]をご参照ください。
 

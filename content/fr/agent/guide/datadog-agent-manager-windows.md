@@ -90,7 +90,7 @@ La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les lo
 ```
 
 ### Settings
-La page Settings affiche le contenu du principal fichier de configuration de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
+La page Settings affiche le contenu du fichier de configuration principal de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
 
 Consultez le [fichier d'exemple config_template.yaml][2] pour découvrir toutes les options de configuration disponibles.
 

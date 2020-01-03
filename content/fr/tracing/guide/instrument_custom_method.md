@@ -18,7 +18,7 @@ further_reading:
 ---
 _Temps de lecture : 8 minutes_
 
-{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Vue d'analyse" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Vue d'analyse"  style="width:90%;">}}
 
 Afin de vous offrir une visibilité optimale sur votre logique opérationnelle, l'APM Datadog vous permet de personnaliser les spans qui composent vos traces en fonction de vos besoins et de votre implémentation. Vous êtes ainsi libre de tracer n'importe quelle méthode utilisée dans votre code, ou même des composants spécifiques au sein d'une méthode. Utilisez cette fonctionnalité pour optimiser et surveiller les zones critiques de votre application avec le niveau de granularité qui vous convient.
 
@@ -30,7 +30,7 @@ En plus d'instrumenter un vaste nombre de frameworks par défaut, tels que des s
 
 Ces exemples vous montreront comment tracer l'intégralité de la méthode `BackupLedger.write` afin de mesurer son temps d'exécution et son statut. `BackupLedger.write` est une action qui enregistre le statut actuel d'un registre de transactions en mémoire avant d'effectuer un appel vers une base de données de paiements pour publier une nouvelle facturation client. Cette action se produit lorsque l'endpoint `charge` du service de paiements est atteint :
 
-{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Vue d'analyse" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Vue d'analyse"  style="width:90%;">}}
 
 La span `http.request POST /charge/` prend beaucoup de temps et ne présente aucune span enfant directe : une instrumentation plus poussée est donc probablement nécessaire pour mieux comprendre son comportement. Selon le langage de programmation que vous utilisez, vous devez décorer vos fonctions différemment :
 
@@ -339,7 +339,7 @@ Maintenant que vous avez instrumenté votre logique opérationnelle, il est temp
 
 1. Accédez à la **[liste des services][1]**, identifiez le service auquel vous avez ajouté des spans personnalisées, puis accédez à la **page Service**. Sur la page Service, cliquez sur la **ressource spécifique** que vous avez ajoutée, modifiez le filtre d'intervalle sur `The past 15 minutes` et faites défiler la page jusqu'au tableau Span Summary :
 
-    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Tableau Span Summary" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Tableau Span Summary"  style="width:90%;">}}
 
     *Vous devriez maintenant apercevoir les nouvelles spans que vous avez ajoutées*
 
@@ -347,7 +347,7 @@ Le tableau Span Summary affiche des informations agrégées concernant les spans
 
 2. Faites défiler la page jusqu'à la **liste des traces** et cliquez sur l'une de vos traces.
 
-    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Vue d'analyse" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Vue d'analyse"  style="width:90%;">}}
 
 Vous avez maintenant réussi à ajouté des spans personnalisées à votre code, et celles-ci sont désormais visibles sur le flamegraph ainsi que sur la page d'[Analyse et de recherche de traces][3]. Pour les rendre encore plus performantes et continuer à tirer pleinement parti des outils Datadog, vous pouvez maintenant [ajouter des tags personnalisés à vos spans][4].
 

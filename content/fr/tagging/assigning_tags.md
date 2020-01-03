@@ -223,7 +223,7 @@ Cet exemple de tags de span n'est donc pas valide :
 
 Vous pouvez assigner des tags de host dans l'interface depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : l'application des modifications de tags de métrique effectuées via l'interface peut prendre jusqu'à 30 minutes.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap"  style="width:80%;">}}
 
 
 [1]: /fr/graphing/infrastructure/hostmap
@@ -232,7 +232,7 @@ Vous pouvez assigner des tags de host dans l'interface depuis la page relative �
 
 Vous pouvez assigner des tags de host dans l'interface depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : l'application des modifications de tags de métrique effectuées via l'interface peut prendre jusqu'à 30 minutes.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures"  style="width:80%;">}}
 
 
 [1]: /fr/graphing/infrastructure
@@ -241,11 +241,11 @@ Vous pouvez assigner des tags de host dans l'interface depuis la page relative �
 
 Depuis la page de [gestion des monitors][1], cochez la case en regard de chaque monitor pour ajouter des tags (sélectionnez un ou plusieurs monitors). Cliquez sur le bouton **Edit Tags**. Saisissez un tag ou sélectionnez un tag précédemment utilisé. Cliquez ensuite sur **Add Tag `nom:tag`** ou **Apply Changes**. Si vous aviez déjà ajouté des tags, vous pouvez assigner plusieurs tags à la fois en cochant leurs cases.
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Tags gestion de monitors" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Tags gestion de monitors"  style="width:80%;">}}
 
 Lorsque vous créez un monitor, assignez des tags de monitor durant l'étape 4 *Say what's happening* :
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor"  style="width:80%;">}}
 
 
 [1]: /fr/monitors/manage_monitor
@@ -256,7 +256,7 @@ Créez des agrégations par centiles dans les [métriques de distribution][1] en
 
 **Jusqu'à dix tags peuvent être appliqués. Les tags d'exclusion ne sont pas acceptés** :
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor"  style="width:80%;">}}
 
 [1]: /fr/graphing/metrics/distributions
 [2]: /fr/developers/metrics/custom_metrics
@@ -265,7 +265,7 @@ Créez des agrégations par centiles dans les [métriques de distribution][1] en
 
 Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques pour un compte spécifique. Utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS"  style="width:80%;">}}
 
 
 [1]: /fr/integrations/amazon_web_services

@@ -111,7 +111,7 @@ DD_AC_INCLUDE = "name:<NAME>"
 
 For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
 
-```
+```shell
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:ubuntu image:debian"
 ```

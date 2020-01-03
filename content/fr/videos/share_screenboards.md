@@ -3,7 +3,7 @@ title: Matt's Quick Tips - Sharing Screenboards
 kind: video
 language: en
 wistiaid: old1t5trj4
-videos:
+video-categories:
   - Introduction
   - Dashboards
   - Screenboards
