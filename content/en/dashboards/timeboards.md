@@ -4,13 +4,13 @@ kind: documentation
 aliases:
     - /graphing/dashboards/timeboard/
 further_reading:
-- link: "graphing/dashboards/template_variables"
+- link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "graphing/dashboards/shared_graph"
+- link: "/dashboards/shared_graph"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/widgets"
+- link: "/dashboards/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -77,18 +77,18 @@ The search query for **View related logs** is defined using the following parame
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/screenboard
-[2]: /graphing/dashboards/screenboard/#display-utc-time
-[3]: /graphing/dashboards/screenboard/#notifications
-[4]: /graphing/dashboards/screenboard/#permissions
-[5]: /graphing/dashboards/screenboard/#clone-dashboard
-[6]: /graphing/dashboards/screenboard/#copy-import-or-export-dashboard-json
-[7]: /graphing/dashboards/screenboard/#delete-dashboard
-[8]: /graphing/dashboards/#new-dashboard
-[9]: /graphing/widgets
-[10]: /graphing/event_stream/#event-query-language
+[1]: /dashboards/screenboard
+[2]: /dashboards/screenboard/#display-utc-time
+[3]: /dashboards/screenboard/#notifications
+[4]: /dashboards/screenboard/#permissions
+[5]: /dashboards/screenboard/#clone-dashboard
+[6]: /dashboards/screenboard/#copy-import-or-export-dashboard-json
+[7]: /dashboards/screenboard/#delete-dashboard
+[8]: /dashboards/#new-dashboard
+[9]: /widgets
+[10]: /events/#event-query-language
 [11]: /logs/explorer/search/#search-syntax
-[12]: /graphing/widgets/#full-screen
+[12]: /widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map
 [15]: https://app.datadoghq.com/logs

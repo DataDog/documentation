@@ -6,13 +6,13 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
-- link: "graphing/dashboards/"
+- link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
-- link: "graphing/dashboards/shared_graph"
+- link: "/dashboards/shared_graph"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/widgets"
+- link: "/dashboards/widgets"
   tag: "Documentation"
   text: "Discover Widgets for your Dashboard"
 ---
@@ -125,4 +125,4 @@ For example, enter `tags:$region` in the event overlays search box. This searche
 
 [1]: /tagging/#defining-tags
 [2]: /logs/explorer/?tab=facets#setup
-[3]: /graphing/dashboards/timeboard/#events
+[3]: /dashboards/timeboard/#events

@@ -39,4 +39,4 @@ external_redirect: /api/#update-a-dashboard
     * **`prefix`** [*optional*, *default*=**None**]:
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
 
-[1]: /graphing/widgets
+[1]: /widgets

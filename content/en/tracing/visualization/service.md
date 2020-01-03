@@ -110,5 +110,5 @@ Choose what to display in your resources list:
 [2]: /tracing/visualization/resource
 [3]: /monitors/monitor_types/apm
 [4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[5]: /graphing/dashboards/timeboard
+[5]: /dashboards/timeboard
 [6]: /tracing/visualization/#resources

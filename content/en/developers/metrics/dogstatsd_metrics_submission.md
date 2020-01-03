@@ -1113,11 +1113,11 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
 [2]: /developers/metrics/types/?tab=count#metric-type-definition
-[3]: /graphing/functions/arithmetic/#cumulative-sum
-[4]: /graphing/functions/arithmetic/#integral
+[3]: /dashboards/functions/arithmetic/#cumulative-sum
+[4]: /dashboards/functions/arithmetic/#integral
 [5]: /developers/metrics/types/?tab=gauge#metric-type-definition
 [6]: /developers/metrics/types/?tab=set#metric-type-definition
 [7]: /developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /graphing/metrics/distributions
+[9]: /metrics/distributions
 [10]: /developers/metrics/types/?tab=distribution#metric-type-definition

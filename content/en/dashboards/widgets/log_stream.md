@@ -5,10 +5,10 @@ description: "Display a filtered log stream in your Datadog dashboards."
 aliases:
     - /graphing/widgets/log_stream/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -83,5 +83,5 @@ LOG_STREAM_SCHEMA = {
 [1]: /logs/explorer/search
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/?tab=measures#setup
-[4]: /graphing/graphing_json/widget_json
-[5]: /graphing/graphing_json/widget_json/#time-schema
+[4]: /dashboards/graphing_json/widget_json
+[5]: /dashboards/graphing_json/widget_json/#time-schema

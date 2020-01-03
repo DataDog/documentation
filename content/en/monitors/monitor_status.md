@@ -109,8 +109,8 @@ All events generated from your monitor are aggregated in this section. Those eve
 [1]: /monitors/monitor_types
 [2]: /monitors/downtimes
 [3]: /api/?lang=python#monitors
-[4]: /graphing/functions
+[4]: /dashboards/functions
 [5]: /videos/datadog101-5-aggregation/?wtime=49s
 [6]: https://app.datadoghq.com/metric/explorer
-[7]: /graphing/notebooks
-[8]: /graphing/event_stream
+[7]: /notebooks
+[8]: /events

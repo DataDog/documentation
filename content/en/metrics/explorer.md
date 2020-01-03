@@ -5,10 +5,10 @@ description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/
 further_reading:
-  - link: "graphing/metrics/summary"
+  - link: "/metrics/summary"
     tag: "Documentation"
     text: "Metrics Summary"
-  - link: "graphing/metrics/distributions"
+  - link: "/metrics/distributions"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---
@@ -66,7 +66,7 @@ Create a snapshot of an individual graph by clicking the camera icon on the top 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
-[2]: /graphing/notebooks
-[3]: /graphing/dashboards/screenboard
-[4]: /graphing/dashboards/timeboard
-[5]: /graphing/metrics/introduction/#space-aggregation
+[2]: /notebooks
+[3]: /dashboards/screenboard
+[4]: /dashboards/timeboard
+[5]: /metrics/introduction/#space-aggregation

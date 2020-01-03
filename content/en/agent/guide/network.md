@@ -10,7 +10,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -140,7 +140,7 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
-[2]: /graphing/infrastructure/livecontainers
+[2]: /infrastructure/livecontainers
 [3]: /logs
 [4]: https://ip-ranges.datadoghq.com
 [5]: https://ip-ranges.datadoghq.eu

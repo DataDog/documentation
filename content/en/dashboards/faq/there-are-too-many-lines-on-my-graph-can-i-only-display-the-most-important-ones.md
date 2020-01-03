@@ -21,4 +21,4 @@ The top function is a good fit to display only the few relevant lines on the gra
 
 [Find more documentation about the top function, its parameters and its aliases][1]
 
-[1]: /graphing/miscellaneous/functions
+[1]: /dashboards/functions/rank

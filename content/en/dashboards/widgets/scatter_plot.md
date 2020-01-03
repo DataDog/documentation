@@ -5,10 +5,10 @@ description: "Graph a chosen scope over two different metrics with their respect
 aliases:
     - /graphing/widgets/scatter_plot/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -93,6 +93,6 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
-[2]: /graphing/graphing_json/request_json
-[3]: /graphing/graphing_json/widget_json/#y-axis-schema
+[1]: /dashboards/graphing_json/widget_json
+[2]: /dashboards/graphing_json/request_json
+[3]: /dashboards/graphing_json/widget_json/#y-axis-schema

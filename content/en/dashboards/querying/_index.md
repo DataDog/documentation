@@ -127,13 +127,13 @@ View event correlations by using the **Event Overlays** section in the graphing 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json
-[2]: /graphing/widgets
+[1]: /dashboards/graphing_json
+[2]: /widgets
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary
 [6]: /tagging
-[7]: /graphing/metrics/introduction
-[8]: /graphing/functions/rollup
-[9]: /graphing/functions/#apply-functions-optional
-[10]: /graphing/event_stream/#event-query-language
+[7]: /metrics/introduction
+[8]: /dashboards/functions/rollup
+[9]: /dashboards/functions/#apply-functions-optional
+[10]: /events/#event-query-language

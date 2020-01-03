@@ -20,6 +20,6 @@ For technical questions, contact [Datadog support][3].
 For billing questions, contact your [Customer Success][4] Manager.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
-[2]: /graphing/infrastructure
+[2]: /infrastructure
 [3]: /help
 [4]: mailto:success@datadoghq.com

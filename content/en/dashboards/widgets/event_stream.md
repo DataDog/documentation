@@ -5,10 +5,10 @@ description: "Display filtered events from the Even Stream."
 aliases:
     - /graphing/widgets/event_stream/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -74,6 +74,6 @@ EVENT_STREAM_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[1]: /events
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json/#time-schema

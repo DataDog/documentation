@@ -90,7 +90,7 @@ Downtime history can be seen both on the Monitor Status Page as overlaid on the 
 [2]: /help
 [3]: /account_management/#preferences
 [4]: https://app.datadoghq.com/monitors#/downtime
-[5]: /graphing/graphing_json/#scope
+[5]: /dashboards/graphing_json/#scope
 [6]: /monitors/manage_monitor/#monitor-tags
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: https://app.datadoghq.com/account/settings#integrations

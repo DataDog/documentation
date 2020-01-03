@@ -4,13 +4,13 @@ kind: documentation
 aliases:
     - /graphing/widgets/top_list/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -26,9 +26,9 @@ The top list visualization enables you to display a list of Tag value like `host
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See [the main graphing documentation][1] to configure a metric query.
+    * Metric: See the documentation [querying][1] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][3] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][1] to configure an Analyzed Span query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 
@@ -48,7 +48,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][4] for the top list widget is:
+The dedicated [widget JSON schema definition][3] for the top list widget is:
 
 ```text
 TOPLIST_SCHEMA = {
@@ -71,7 +71,7 @@ TOPLIST_SCHEMA = {
 | Parameter  | Type             | Required | Description                                                                                                                                                  |
 |------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`     | string           | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                       |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
+| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string           | no       | Title of your widget.                                                                                                                                        |
 
 Additional properties allowed in the `request` object:
@@ -84,15 +84,14 @@ Additional properties allowed in the `request` object:
 
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 |-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][5] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing
+[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [2]: /tracing/app_analytics/search/#search-bar
-[3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
-[4]: /graphing/graphing_json/widget_json
-[5]: /graphing/graphing_json/request_json
-[6]: /graphing/graphing_json/widget_json/#conditional-format-schema
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/request_json
+[5]: /dashboards/graphing_json/widget_json/#conditional-format-schema

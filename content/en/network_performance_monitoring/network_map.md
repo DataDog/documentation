@@ -12,7 +12,7 @@ further_reading:
 - link: "/network_performance_monitoring/installation"
   tag: "Documentation"
   text: "Collect your Network Data with the Datadog Agent."
-- link: "/graphing/widgets/network"
+- link: "/dashboards/widgets/network"
   tag: "Documentation"
   text: "Network Widget"
 ---

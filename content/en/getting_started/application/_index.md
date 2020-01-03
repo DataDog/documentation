@@ -65,7 +65,7 @@ For each incident, users can:
 
 {{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
 
-Dashboards contain [graphs][14] with real-time performance metrics.
+[Dashboards][14] contain graphs with real-time performance metrics.
 
 * Synchronous mousing across all graphs in a [screenboard][15].
 * Vertical bars are events. They put a metric into context.
@@ -96,16 +96,16 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 [3]: http://www.datadoghq.com/integrations
 [4]: /api
 [5]: https://github.com/DataDog/dd-agent
-[6]: /graphing/infrastructure
+[6]: /infrastructure
 [7]: /tagging
-[8]: /graphing/infrastructure/hostmap
-[9]: /graphing/event_stream
+[8]: /infrastructure/hostmap
+[9]: /events
 [10]: /account_management/team
 [11]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
-[12]: /graphing/event_stream/#@-notifications
+[12]: /events/#@-notifications
 [13]: /help
-[14]: /graphing
-[15]: /graphing/dashboards/screenboard
-[16]: /graphing/functions
+[14]: /dashboards
+[15]: /dashboards/screenboard
+[16]: /dashboards/functions
 [17]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [18]: /monitors

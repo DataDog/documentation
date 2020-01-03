@@ -10,8 +10,8 @@ external_redirect: /api/#dashboards
 <div class="alert alert-info">
 This new endpoint unifies screenboard and timeboard APIs to allow you to manage all of your dashboards using a single format. Documentation for old endpoints is available here:
     <ul>
-        <li><a href="https://docs.datadoghq.com/graphing/faq/timeboard-api-doc"> Timeboard API doc</a></li>
-        <li><a href="https://docs.datadoghq.com/graphing/faq/screenboard-api-doc"> Screenboard API doc</a></li>
+        <li><a href="https://docs.datadoghq.com/dashboards/faq/timeboard-api-doc"> Timeboard API doc</a></li>
+        <li><a href="https://docs.datadoghq.com/dashboards/faq/screenboard-api-doc"> Screenboard API doc</a></li>
     </ul>
 </div>
 

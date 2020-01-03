@@ -4,15 +4,15 @@ kind: documentation
 aliases:
   - /graphing/graphing_json/widget_json/
 further_reading:
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "graphing/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
 
-To learn more about the GUI editor, visit the main [Graphing documentation Page][1].
+To learn more about the GUI editor, see the documentation [graphing editor][1].
 
 ## Y-Axis schema
 
@@ -230,5 +230,5 @@ For instance, to indicate that you want a 10-minute timeframe, use the following
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing
-[2]: /graphing/event_stream
+[1]: /dashboards/querying/#graphing-editor
+[2]: /events

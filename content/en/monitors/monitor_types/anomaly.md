@@ -134,9 +134,9 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /graphing/functions/algorithms/#anomalies
+[3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /graphing/functions/rollup
+[5]: /dashboards/functions/rollup
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [8]: /monitors/notifications
