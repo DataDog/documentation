@@ -67,7 +67,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 ### イベント
 AWS Auto-Scaling インテグレーションには、EC2 インスタンスを起動および終了するためのイベントが含まれています。以下はイベントの例です。
 
-{{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling Events" responsive="true">}}
+{{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling Events" >}}
 
 ### サービスのチェック
 AWS Auto-Scaling インテグレーションには、サービスのチェック機能は含まれません。

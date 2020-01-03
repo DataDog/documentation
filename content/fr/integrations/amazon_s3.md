@@ -22,7 +22,7 @@ public_title: "Intégration Datadog/Amazon\_S3"
 short_description: 'Surveillez la latence des requêtes, le nombre de demandes par type, la taille des compartiments, and more.'
 version: '1.0'
 ---
-{{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="Dashboard S3" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="Dashboard S3"  >}}
 
 ## Présentation
 
@@ -54,11 +54,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Sélectionnez le compartiment S3 et cliquez sur l'onglet *properties* :
 
-{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="Sélection compartiment S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="Sélection compartiment S3"   style="width:70%;">}}
 
 Cliquez ensuite sur *Server access logging* et choisissez *enable* :
 
-{{< img src="integrations/amazon_s3/server_access_logging.png" alt="Server access logging S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/server_access_logging.png" alt="Server access logging S3"   style="width:70%;">}}
 
 
 Sélectionnez ensuite le compartiment s3 dans lequel les logs doivent être rédigés. Pour obtenir plus d'informations, consultez la [documentation dédiée à AWS S3][7].
@@ -75,9 +75,9 @@ Sélectionnez ensuite le compartiment s3 dans lequel les logs doivent être réd
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][10].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs S3 dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3"   style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs S3 et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3"   style="width:70%;">}}
 
 Accédez ensuite à la [section Log de Datadog][11] pour commencer à explorer vos logs !
 

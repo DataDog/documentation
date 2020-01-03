@@ -38,7 +38,7 @@ Choisissez le type de variable que vous souhaitez créer :
 4. Facultatif : sélectionnez les **tags** à associer à votre variable.
 5. Facultatif : saisissez une **description** pour votre variable.
 
-{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Variable globale avec valeur spécifiée" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Variable globale avec valeur spécifiée"  style="width:80%;">}}
 
 {{% /tab %}} 
 
@@ -53,7 +53,7 @@ Choisissez le type de variable que vous souhaitez créer :
     * Extraire la valeur à partir d'un **en-tête de réponse** : utiliser l'en-tête complet comme variable, ou parser l'en-tête à l'aide d'une [expression régulière][1].
     * Extraire la valeur à partir du **corps de la réponse** : parser le corps de la réponse de la requête avec un chemin JSON ou une [expression régulière][1], ou utiliser le corps entier.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Identifiant" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Identifiant"  style="width:80%;">}}
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

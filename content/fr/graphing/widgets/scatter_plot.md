@@ -12,11 +12,11 @@ further_reading:
 ---
 La visualisation de nuage de points vous permet de représenter deux métriques dans un certain contexte avec leur agrégation respective :
 
-{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Nuage de points" responsive="true">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Nuage de points" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Configuration d'un nuage de points" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Configuration d'un nuage de points"  style="width:80%;">}}
 
 ### Configuration
 
@@ -35,7 +35,7 @@ Choisissez si votre widget affiche un intervalle personnalisé ou l'intervalle g
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

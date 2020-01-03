@@ -16,7 +16,7 @@ further_reading:
 
 Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data such as incident investigations, postmortems, runbooks, and infrastructure documentation.
 
-{{< img src="graphing/notebooks/demo_notebook.png" alt="demo notebook" responsive="true" style="width:100%;">}}
+{{< img src="graphing/notebooks/demo_notebook.png" alt="demo notebook"  style="width:100%;">}}
 
 ## Notebook List
 
@@ -66,7 +66,7 @@ By default, all graph cells adhere to the global time frame set in the notebook 
 
 To set an individual time frame, click the clock icon in the top-right corner of a graph cell. Then, uncheck *Lock this cell to global time frame* and set your preferred time frame:
 
-{{< img src="graphing/notebooks/time_selector.png" alt="Time Selector" responsive="true" style="width:60%;">}}
+{{< img src="graphing/notebooks/time_selector.png" alt="Time Selector"  style="width:60%;">}}
 
 **Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
 
@@ -82,7 +82,7 @@ The following layout options are available by clicking the grid icon on the righ
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
 * **Grouping**: Display one graph per source grouping.
 
-{{< img src="graphing/notebooks/layout_options.png" alt="layout options" responsive="true" style="width:50%;">}}
+{{< img src="graphing/notebooks/layout_options.png" alt="layout options"  style="width:50%;">}}
 
 **Note**: Changing any of these settings only affects the targeted cell.
 

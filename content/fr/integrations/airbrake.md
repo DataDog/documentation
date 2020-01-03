@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Airbrake
 short_description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements. stream.'
 version: '1.0'
 ---
-{{< img src="integrations/airbrake/airbrakeevent.png" alt="événement airbrake" responsive="true" popup="true">}}
+{{< img src="integrations/airbrake/airbrakeevent.png" alt="événement airbrake"  >}}
 
 ## Présentation
 

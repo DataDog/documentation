@@ -49,7 +49,7 @@ Datadog の 2 種類のダッシュボードのうち、Timeboardはすべての
 
 既存のノートブックを開くと、セルが閉じた状態で表示されます。セルを開いて編集するには、セルをクリックするか、矢印キーを使用してセルに移動し、Enter キーを押します。セルを閉じるには、セルの外側をクリックするか、`⌘+ Enter` キーを押します。一度に開くことができるセルは 1 つだけです。
 
-{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" >}}
+{{< img src="graphing/notebooks/states.png" alt="states"  >}}
 
 セルを挿入、複製、または削除するには、セル番号の左側に表示される歯車アイコンをクリックするか、キーボードショートカットを使用します。すべてのキーボードショートカットは、ノートブックのヘッダーにあるキーボードボタンをクリックすると表示されます。
 キーボードショートカットを使用してセルを並べ替えることもできます。
@@ -60,7 +60,7 @@ Datadog の 2 種類のダッシュボードのうち、Timeboardはすべての
 
 セルのグローバルな時間を解除するには、このタイムインジケーターをクリックします。
 
-{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/timerange.png" alt="timerange"  style="width:40%;">}}
 
 クリックアンドドラッグしてグラフを拡大しても、セルのグローバルな時間を解除することはできません。この操作を行うと、ノートブックのグローバルなタイムフレームが変更されます。
 
@@ -69,14 +69,14 @@ Datadog の 2 種類のダッシュボードのうち、Timeboardはすべての
 タグによるグラフの分割、グラフサイズの変更、グラフの凡例の表示/非表示の切り替えなどを行うには、セルの右端にあるアイコンをクリックします。
 グラフサイズが XS または S に設定されている場合は、凡例が自動的に無効になります。この設定の変更は、対象のセルにのみ影響します。他のグラフセルのレイアウトは影響を受けません。
 
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/options.png" alt="options"  style="width:40%;">}}
 
 ### 個々のセルへのリンク設定
 
 特定のセルの URL をコピーするには、セルの右端にあるリンクアイコンをクリックします。グラフセルとマークダウンセルのどちらにも直接リンク設定が可能です。
 特定のセルの URL にアクセスすると、ノートブックが開き、そのセルがビューポートの一番上に表示されます。リンクは絶対リンクです。つまり、セルをノートブック内の新しい位置に移動しても、セルの URL は変更されません。
 
-{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/directlink.png" alt="directlink"  style="width:40%;">}}
 
 ### ノートブックの保存、名前変更、削除
 

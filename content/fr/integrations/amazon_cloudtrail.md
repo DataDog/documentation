@@ -26,7 +26,7 @@ version: '1.0'
 
 AWS CloudTrail fournit une piste d'audit pour votre compte AWS. Datadog consulte cette piste d'audit et crée des événements. Effectuez des recherches sur ces événements au sein de votre flux d'événements Datadog ou utilisez-les pour corréler des éléments dans vos dashboards. Voici un exemple d'événement CloudTrail :
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="événement cloudtrail" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="événement cloudtrail"  >}}
 
 Pour plus d'informations sur les autres services AWS, consultez [la page relative à l'intégration Amazon Web Services][1].
 
@@ -78,15 +78,15 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Lorsque vous définissez vos pistes, sélectionnez un compartiment S3 dans lequel rédiger les logs :
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation Cloudtrail" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation Cloudtrail"    style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Cloudtrail dana la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3"   style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs Cloudtrail et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3"   style="width:70%;">}}
 
 Une fois ces étapes terminées, les logs s'affichent dans votre [Datadog Log Explorer][9].
 

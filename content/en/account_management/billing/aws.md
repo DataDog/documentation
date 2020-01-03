@@ -15,7 +15,7 @@ Other AWS resources (ELB, EBS, RDS, Dynamo, etc.) are not part of monthly billin
 
 Use the [Datadog-AWS integration tile][1] to control your metric collection. Go to the **Configuration** tab and select an account or add a new one. Each account is controlled under **Optionally limit metrics collection**. Limit metrics by [host tag][2] or per namespace:
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
+{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
 
 **Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
 

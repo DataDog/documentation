@@ -10,7 +10,7 @@ Cette page propose un aperçu détaillé des fonctionnalités du [site américai
 
 ## Intégrations
 
-{{< img src="getting_started/integrations.png" alt="intégrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="intégrations"  >}}
 
 * Datadog dispose de plus de 350 intégrations officielles [répertoriées][3].
 * Des intégrations personnalisées sont disponibles [via l'API Datadog][4].
@@ -19,7 +19,7 @@ Cette page propose un aperçu détaillé des fonctionnalités du [site américai
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure"  >}}
 
 * Toutes les machines apparaissent dans la [liste d'infrastructures][6].
 * Vous pouvez consulter les tags appliqués à toutes les machines. L'ajout de tags vous permet d'identifier les machines destinées à un but précis.
@@ -27,7 +27,7 @@ Cette page propose un aperçu détaillé des fonctionnalités du [site américai
 
 ## Hostmap
 
-{{< img src="getting_started/hostmap-overview.png" alt="aperçu hostmap" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="aperçu hostmap"  >}}
 
 [La hostmap][8] se trouve dans le menu Infrastructure. Grâce à cette carte, vous pouvez :
 
@@ -40,7 +40,7 @@ Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédi
 
 ## Événements
 
-{{< img src="getting_started/event_stream.png" alt="Flux d'événements" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Flux d'événements"  >}}
 
 [Le flux d'événements][9] fonctionne comme un blog :
 
@@ -56,11 +56,11 @@ Pour chaque incident, les utilisateurs peuvent :
 * [Informer des membres de l'équipe avec la fonctionnalité « @ »][12], afin qu'ils reçoivent un e-mail
 * Ajouter `@support-datadog` pour demander de [l'aide][13]
 
-{{< img src="getting_started/event_stream_event.png" alt="événement flux d'événements" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="événement flux d'événements"  style="width:70%;">}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
 
 Les dashboards contiennent [des graphiques][14] avec des métriques enregistrant des performances en temps réel.
 
@@ -82,7 +82,7 @@ Les [monitors][18] fournissent des alertes et notifications basées sur des seui
 * Utilisez `@` dans les messages d'alerte pour acheminer les notifications vers les bonnes personnes
 * Planifiez des downtimes pour interrompre l'envoi de notifications relatives aux arrêts système, à la maintenance hors ligne, etc.
 
-{{< img src="getting_started/application/metric_monitor.png" alt="Configuration d'alerte" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="Configuration d'alerte"  >}}
 
 ## Pour aller plus loin
 

@@ -18,7 +18,7 @@ public_title: Intégration Datadog/Rollbar
 short_description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog. stream.'
 version: '1.0'
 ---
-{{< img src="integrations/rollbar/rollbar_error.png" alt="événement d'erreur Rollbar" responsive="true" popup="true">}}
+{{< img src="integrations/rollbar/rollbar_error.png" alt="événement d'erreur Rollbar"  >}}
 
 ## Présentation
 

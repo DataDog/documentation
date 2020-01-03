@@ -17,7 +17,7 @@ Les gauges mesurent la valeur d'un élément précis au fil du temps :
 
 ### Check de l'Agent
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |Méthode | Présentation |
 |:---|:---|
@@ -26,7 +26,7 @@ Les gauges mesurent la valeur d'un élément précis au fil du temps :
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |Méthode | Présentation |
 |:---|:---|

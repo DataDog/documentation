@@ -17,7 +17,7 @@ La fonction Log Rehydration* vous permet d'enregistrer des événements de log d
 
 Grâce aux vues historiques, les équipes réintègrent des événements de log archivés en définissant une période et un filtre de requête afin de répondre efficacement à des cas d'utilisation spécifiques et inattendus. Pour créer une vue historique, accédez à la [page Configuration][2] de votre compte Datadog et sélectionnez l' [onglet « Rehydrate From Archives »][3], puis cliquez sur le bouton « New Historical View ».
 
-{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Vues historiques" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Vues historiques"  style="width:75%;">}}
 
 ### Ajouter des vues historiques
 
@@ -31,7 +31,7 @@ Grâce aux vues historiques, les équipes réintègrent des événements de log 
 
 5. (Facultatif) **Ajoutez une description** pour informer votre équipe de l'objectif de la vue historique.
 
-{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Réintégration depuis une archive" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Réintégration depuis une archive"  style="width:75%;">}}
 
 Une vue historique peut contenir jusqu'à 300 millions d'événements de log. Aucune limite ne s'applique à la taille de l'intervalle. Toutefois, si vous pensez que la vue historique peut dépasser la limite d'événements, renforcez les critères de votre filtre de requête.
 
@@ -47,7 +47,7 @@ Une fois le contenu réintégré, la vue historique est considérée comme activ
 
 Les équipes peuvent aussi accéder à la vue historique directement dans le Log Explorer, à partir du sélecteur d'index. Lorsque vous sélectionnez une vue historique, une fenêtre contextuelle s'ouvre pour définir l'intervalle pertinent pour la vue historique sélectionnée.
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true" responsive="true" width="75%">}}
+{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true"  width="75%">}}
 
 ### Supprimer des vues historiques
 
@@ -55,7 +55,7 @@ Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que 
 
 Après 24 heures, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 24 heures pour annuler la suppression.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true" responsive="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true"  width="75%" >}}
 
 ## Configurer la réintégration d'archive
 
@@ -104,7 +104,7 @@ Afin de réintégrer des événements de log depuis vos archives, Datadog utilis
 
 Datadog prend uniquement en charge la réintégration des archives qui ont été configurées pour utiliser la délégation de rôle afin d'autoriser l'accès. Après avoir modifié votre rôle IAM Datadog afin d'inclure la stratégie IAM ci-dessus, vérifiez que chaque archive dans votre [page de configuration des archives][10] possède la bonne combinaison de compte AWS et de rôle.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôle aux archives S3" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôle aux archives S3"  style="width:75%;">}}
 
 ### Commentaires
 

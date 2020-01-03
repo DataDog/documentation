@@ -15,11 +15,11 @@ further_reading:
 ---
 アラートグラフは、システムで定義されているモニターの現在のステータスを表示する時系列グラフです。
 
-{{< img src="graphing/widgets/alert_graph/alert_graph.png" alt="Alert Graph" responsive="true">}}
+{{< img src="graphing/widgets/alert_graph/alert_graph.png" alt="Alert Graph" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -32,7 +32,7 @@ further_reading:
 ### オプション
 #### 表示設定
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### グローバルタイム
 
@@ -46,7 +46,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

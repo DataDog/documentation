@@ -13,7 +13,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 ## Integrations
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 * Datadog has over 350 integrations [officially listed][3].
 * Custom integrations are available [via the Datadog API][4].
@@ -22,7 +22,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure"  >}}
 
 * All machines show up in the [infrastructure list][6].
 * You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
@@ -30,7 +30,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 ## Host Map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
 
 [The Host Map][8] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -43,7 +43,7 @@ To learn more about the Host Map, visit the [Host Map dedicated documentation pa
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
 
 [The Event Stream][9] is based on the same conventions as a blog:
 
@@ -59,11 +59,11 @@ For each incident, users can:
 * [@ notify team members][12], who receive an email
 * `@support-datadog` to ask for [assistance][13]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event"  style="width:70%;">}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
 
 Dashboards contain [graphs][14] with real-time performance metrics.
 
@@ -85,7 +85,7 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 * Use `@` in alert messages to direct notifications to the right people
 * Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
 
-{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="alert setup"  >}}
 
 ## Further Reading
 

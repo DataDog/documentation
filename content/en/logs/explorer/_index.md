@@ -21,7 +21,7 @@ further_reading:
 
 The Logs Explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
+{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments"  >}}
 
 In this view you can:
 
@@ -41,7 +41,7 @@ It appears directly under the search bar as a timeline. The timeline can be disp
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
+{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
 
 ### Search
 
@@ -49,7 +49,7 @@ Use facets, measures, tags, or even [free text search][1] to filter your Logstre
 
 Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
 
 ### Saved views
 
@@ -59,7 +59,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 
 Export your current log visualization with the *share* functionality:
 
-{{< img src="logs/explorer/send_view_to.png" alt="Send view to" responsive="true" style="width:60%;">}}
+{{< img src="logs/explorer/send_view_to.png" alt="Send view to"  style="width:60%;">}}
 
 Use the *share* button to send your current log explorer view to a CSV file, team member, or create a monitor:
 
@@ -107,7 +107,7 @@ Configure the logs table content according to your needs and preferences with th
 
 Log results are sorted by date—the most recent on top by default. You can also inverse-sort by date, with the least recent (within the limits of the time range) on top.
 
-{{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/logtable_config.png" alt="configure display table"  style="width:50%;">}}
 
 ### Log Panel
 
@@ -121,7 +121,7 @@ Interact with the attributes names and values in the lower JSON section to:
 * Add or remove a column from the logs table.
 * Append the search request with specific values (include or exclude)
 
-{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
+{{< img src="logs/explorer/attribute_actions.png" alt="configure display table"  style="width:20%;">}}
 
 Interact with the upper reserved attributes section:
 
@@ -136,7 +136,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 * **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
 * **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available.
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table"  style="width:50%;">}}
 
 [1]: /logs/explorer/search
 [2]: /logs/processing/attributes_naming_convention
@@ -148,7 +148,7 @@ After having gone through [Datadog processing][1], log parsing, and having [face
 
 Follow the [log graphing guide][2] to learn more about all the graphing options.
 
-{{< img src="logs/explorer/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
+{{< img src="logs/explorer/log_analytics.png" alt="Log Analytics"  style="width:70%;">}}
 
 [1]: /logs/processing
 [2]: /logs/explorer/analytics
@@ -161,7 +161,7 @@ In the Log Explorer, patterns can be surfaced automatically to bring structure t
 
 Find out more in the [Log Patterns section][1]
 
-{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
+{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns"  style="width:70%;">}}
 
 [1]: /logs/explorer/patterns
 {{% /tab %}}
@@ -178,13 +178,13 @@ Note: To leverage the most out of your Log explorer view, make sure your logs at
 
 A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
-{{< img src="logs/explorer/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
 **Create a Facet**:
 
 To start using an attribute as a facet or in the search, click on it and add it as a facet:
 
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
@@ -200,7 +200,7 @@ A measure is a attribute with a numerical value contained in your logs.
 
 To start using an attribute as a measure, click on a numerical attribute of your log:
 
-{{< img src="logs/explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/create_a_mesure.png" alt="Create a measure"  style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
@@ -208,7 +208,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 Each measure has its own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and Log Analytics.
 
-{{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure"  style="width:50%;">}}
 
 [1]: /logs/explorer/search
 [2]: /logs/explorer/analytics

@@ -19,7 +19,7 @@ Si vous êtes un administrateur de votre compte, vous pouvez consulter les infor
 
 Pour être notifié lorsqu'un déploiement de code accroît le nombre de hosts qui envoient des traces, configurez un monitor sur le nombre de hosts d'APM. Vous recevrez alors une notification dès que le nombre de hosts au sein de votre infrastructure augmente de manière imprévue, peu importe le contexte défini (`prod`, `availability-zone`, etc.) :
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue d'analyse" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue d'analyse" video="true"  style="width:90%;">}}
 
 1. Accédez à Monitors -> New Monitor.
 2. Configurez un [nouveau monitor de métrique[4] avec `datadog.apm.host_instance`.

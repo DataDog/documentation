@@ -30,7 +30,7 @@ Les autorisations suivantes peuvent être accordées afin de gérer l'accès en 
 
 * **logs_read_index_data** : accorde un accès en lecture sur certains index de log. Cette autorisation peut être accordée à un rôle depuis [la page Processing Pipelines de l'application Datadog][2] en modifiant un index et en ajoutant un rôle au champ « Grant access of this index's content to » (voir la capture d'écran ci-dessous).
 
-{{< img src="account_management/rbac/logs_read_index_data.png" alt="Accorder l'accès en lecture pour les index à des rôles spécifiques" responsive="true" style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_read_index_data.png" alt="Accorder l'accès en lecture pour les index à des rôles spécifiques"  style="width:75%;" >}}
 
 * **logs_live_tail** : permet à un rôle d'utiliser la fonctionnalité Live Tail. Cette autorisation peut être accordée ou révoquée avec [l'API Roles][3].
 
@@ -42,13 +42,13 @@ Les autorisations suivantes peuvent être accordées pour gérer l'accès en éc
 
 * **logs_write_exclusion_filters** : permet à un rôle de créer ou de modifier des fichiers d'exclusion dans un index. Cette autorisation peut être accordée à un rôle depuis [la page Processing Pipelines Datadog][2] en modifiant un index et en ajoutant un rôle au champ « Grant editing Exclusion Filters of this index to » (voir la capture d'écran ci-dessous).
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Accorder l'accès en écriture pour les filtres d'exclusion d'index à des rôles spécifiques" responsive="true" style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Accorder l'accès en écriture pour les filtres d'exclusion d'index à des rôles spécifiques"  style="width:75%;" >}}
 
 * **logs_write_pipelines** : permet à un rôle de créer et de modifier des pipelines de traitement de logs. Le rôle pourra alors notamment définir des filtres de correspondance pour sélectionner les logs devant passer par le pipeline de traitement, mais aussi définir le nom du pipeline et limiter les rôles ayant un accès en écriture aux processeurs au sein de ce pipeline (`logs_write_processors`). Cette autorisation peut être accordée ou révoquée avec [l'API Roles][3].
 
 * **logs_write_processors** : permet à un rôle de créer ou de modifier des processeurs dans un pipeline de traitement. Cette autorisation peut être accordée à un rôle depuis [la page Processing Pipelines de l'application Datadog][2] en modifiant un pipeline de traitement et en ajoutant un rôle au champ « Grant editing Processors of this index to » (voir la capture d'écran ci-dessous).
 
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Accorder l'accès en écriture pour les processeurs à des rôles spécifiques" responsive="true" style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_processors.png" alt="Accorder l'accès en écriture pour les processeurs à des rôles spécifiques"  style="width:75%;" >}}
 
 * **logs_write_archives** : permet de créer ou de modifier des archives de log. Cette autorisation peut être accordée ou révoquée avec [l'API Roles][3].
 

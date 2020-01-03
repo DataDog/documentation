@@ -109,11 +109,11 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
 
 Utilisez Datadog Agent Manager (disponible depuis le menu Démarrer).
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Menu Démarrer Windows" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Menu Démarrer Windows"  style="width:75%;">}}
 
 Utilisez les commandes `start`, `stop` et `restart` dans Datadog Agent Manager :
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Capture d'écran de Datadog Agent Manager" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Capture d'écran de Datadog Agent Manager"  style="width:75%;">}}
 
 Vous pouvez également utiliser le Powershell Windows, si celui-ci est disponible :
 `[start|stop|restart]-service datadogagent`
@@ -187,7 +187,7 @@ Pour vous assurer que l'Agent est bien lancé, vérifiez si l'état du service i
 Des informations sur l'état de l'Agent pour l'Agent version 5.2+ sont disponibles dans
 *Datadog Agent Manager -> Settings -> Agent Status* :
 
-{{< img src="agent/faq/windows_status.png" alt="État Windows" responsive="true" style="width:50%;" >}}
+{{< img src="agent/faq/windows_status.png" alt="État Windows"  style="width:50%;" >}}
 
 Pour connaître le status de l'Agent version 3.9.1 à 5.1, accédez à `http://localhost:17125/status`.
 
@@ -248,7 +248,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
 * Cliquez sur Submit.
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Flare Windows avec l'Agent v6" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Flare Windows avec l'Agent v6"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
 {{% /tab %}}
@@ -266,7 +266,7 @@ Pour envoyer une copie de vos configurations et logs Windows à l'assistance Dat
 
 * Saisissez l'adresse e-mail que vous utilisez pour vous connecter à Datadog. 
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Flare Windows" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Flare Windows"  style="width:70%;">}}
 
 La commande flare est disponible pour Powershell :
 
@@ -301,7 +301,7 @@ print tempfile.gettempdir()
 
 Exemple :
 
-{{< img src="agent/faq/flare_fail.png" alt="Échec de l'envoi du flare" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/flare_fail.png" alt="Échec de l'envoi du flare"  style="width:70%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -313,11 +313,11 @@ Sur votre host cible, lancez Datadog Agent Manager et sélectionnez l'intégrati
 
 Pour obtenir le nom du service, ouvrez `services.msc` et repérez votre service cible. En utilisant DHCP comme cible, vous pouvez voir le nom du service en haut de la fenêtre des propriétés du service :
 
-{{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
 
 Lorsque vous ajoutez vos propres services, assurez-vous de suivre précisément le formatage affiché. L'intégration échouera si le formatage est incorrect.
 
-{{< img src="agent/faq/windows_DHCP_service.png" alt="Service DHCP Windows" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/windows_DHCP_service.png" alt="Service DHCP Windows"  style="width:75%;">}}
 
 De plus, lorsque vous modifiez une intégration, le service Datadog doit être redémarré. Vous pouvez le faire depuis services.msc ou depuis la barre latérale de l'interface.
 

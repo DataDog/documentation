@@ -41,7 +41,7 @@ With a JSON-formatted Email, the following fields are controllable:
 
 In a JSON-formatted Email, the subject of the Email doesn't appear in the event. The value of the title attribute is used for the event title. All data that appears in the event should be defined in JSON in the body of the Email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored. Example event sent with JSON:
 
-{{< img src="developers/events/json-event.png" alt="json event" responsive="true" >}}
+{{< img src="developers/events/json-event.png" alt="json event"  >}}
 
 **Note**: If you are testing the Email with a standard Email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored Email.
 
@@ -72,7 +72,7 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 The subject of the Email becomes the title of the event and the body of the Email becomes the event message. The sender of the Email appears at the bottom of the event. Example event sent with plain text:
 
-{{< img src="developers/events/plain-event.png" alt="plain event" responsive="true" >}}
+{{< img src="developers/events/plain-event.png" alt="plain event"  >}}
 
 **Note**: Although it looks like a tag appears at the end of the title and body of the event, neither instance are actually tags.
 

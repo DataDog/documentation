@@ -31,7 +31,7 @@ further_reading:
 6. 凡例を入れるかどうかを選択します。
 7. Generate embed code ボタンを使用して、埋め込みコードを取得します。
 
-{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph"  style="width:75%;">}}
 
 **注**: APM クエリとログクエリには共有機能を使用できません。
 
@@ -62,7 +62,7 @@ Embed へのアクセスを IP アドレスごとに制限できます。[Datado
 2. 共有を停止するグラフの **Revoke** ボタンをクリックします。
 3. グラフは **Revoked** リストに移動します。
 
-{{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph"  style="width:75%;">}}
 
 ### スクリーンボードの無効化
 

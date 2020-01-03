@@ -75,7 +75,7 @@ Voici un exemple de check d'Agent test qui envoie un seul check de service régu
     ```
 7. Enfin, accédez à votre page [Sommaire des checks de service][5] pour vérifier que votre check de service envoie bien des informations :
 
-{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Checks de service" responsive="true" style="width:80%;">}}
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Checks de service"  style="width:80%;">}}
 
 ## Pour aller plus loin
 

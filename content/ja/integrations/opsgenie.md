@@ -31,14 +31,14 @@ version: '1.0'
 
   1. OpsGenie アカウントにログインし、[OpsGenie のインテグレーション][1]ページに移動します。
   2. 下に示すように、Datadog を検索して見つけ、タイルをクリックします。
-  {{< img src="integrations/opsgenie/opsgenie-int-index.png" alt="opsgenie int index" responsive="true" popup="true">}}
+  {{< img src="integrations/opsgenie/opsgenie-int-index.png" alt="opsgenie int index"  >}}
 
   3. [Integrations > APIs ページ][2]にある Datadog API キーを専用のフィールドに入力します。
   4. OpsGenie で受信者を選択し、フィルターをセットアップします。
   5. 必要に応じて、インテグレーションの名前を変更します。
   6. 構成を保存します。
   7. 後で Datadog で使用するため、キーと名前をコピーします。
-  {{< img src="integrations/opsgenie/opsgenie-add-api-key.png" alt="opsgenie add api key" responsive="true" popup="true">}}
+  {{< img src="integrations/opsgenie/opsgenie-add-api-key.png" alt="opsgenie add api key"  >}}
   8. OpsGenie でさらに DataDog インテグレーションを追加するには、[OpsGenie のインテグレーション][3]ページに移動し、上の手順を繰り返します。
 
 #### OpsGenie で作成したインテグレーションを Datadog でリストする
@@ -46,7 +46,7 @@ version: '1.0'
   1. Datadog の [Account Integrations][4] で OpsGenie タイルを選択します。
   2. 表示されるダイアログボックスで、Configuration タブをクリックします。
   3. Datadog インテグレーションごとに提供されたキー (OpsGenie で作成される) を「**Datadog Integration Key**」フィールドに貼り付け、**Datadog Integration Name** にインテグレーション名を入力します。
-  {{< img src="integrations/opsgenie/datadog-add-opsgenie-key.png" alt="datadog add opsgenie key" responsive="true" popup="true">}}
+  {{< img src="integrations/opsgenie/datadog-add-opsgenie-key.png" alt="datadog add opsgenie key"  >}}
 
 ## 収集データ
 ### メトリクス
@@ -70,17 +70,17 @@ Opsgenie インテグレーションには、サービスのチェック機能�
 Edit Metric Alert で、セクション 5 の Say What’s Happening フィールドに @opsgenie-service_name または @opsgenie を入力して、OpsGenie アラートを作成します。Datadog でこのアラートがトリガーされると、OpsGenie サービスの受信者にアラートが送信されます。
 
 OpsGenie アラートを Datadog から確認または閉じるには、Datadog で、OpsGenie イベントのコメントフィールドで @opsgenie-acknowledge または @opsgenie-close メンションを使用します。
-{{< img src="integrations/opsgenie/dd_ack_og_alert.png" alt="dd ack og alert" responsive="true" popup="true">}}
+{{< img src="integrations/opsgenie/dd_ack_og_alert.png" alt="dd ack og alert"  >}}
 
 ##### OpsGenie によって作成された Datadog アラートを受信/確認/閉じる
 
 OpsGenie でアラートをセットアップします。そのアラートがトリガーされると、Datadog でイベントが作成されます。OpsGenie アラートのタグと説明フィールドが Datadog に渡されます。
 
-{{< img src="integrations/opsgenie/og_create_alert_dd_updated.png" alt="og create alert dd updated" responsive="true" popup="true">}}
+{{< img src="integrations/opsgenie/og_create_alert_dd_updated.png" alt="og create alert dd updated"  >}}
 
 OpsGenie から OpsGenie アラートを確認して閉じます。これにより、Datadog で、関連付けられたイベントがアラートを閉じたユーザーの名前で更新されます。
 
-{{< img src="integrations/opsgenie/og_closed_dd_updated.png" alt="og closed dd updated" responsive="true">}}
+{{< img src="integrations/opsgenie/og_closed_dd_updated.png" alt="og closed dd updated" >}}
 
 [1]: https://www.opsgenie.com/integrations
 [2]: https://app.datadoghq.com/account/settings#api

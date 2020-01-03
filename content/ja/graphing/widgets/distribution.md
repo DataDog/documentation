@@ -16,11 +16,11 @@ further_reading:
 
 **注**: この可視化で外れ値の検出を行うことはできません。
 
-{{< img src="graphing/widgets/distribution/distribution.png" alt="Distribution" responsive="true" >}}
+{{< img src="graphing/widgets/distribution/distribution.png" alt="Distribution"  >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/distribution/distribution_setup.png" alt="Distribution" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -30,7 +30,7 @@ further_reading:
 ### オプション
 #### 表示設定
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### グローバルタイム
 
@@ -44,7 +44,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

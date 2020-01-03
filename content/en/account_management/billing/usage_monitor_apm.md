@@ -20,7 +20,7 @@ If you are an admin of your account, you can view your account usage using the [
 
 To get alerts in case a code deployment scales the number of hosts sending traces, set up monitor on APM host count. Get notified if the host volumes in any scope (`prod`, `availablity-zone`, etc…) of your infrastructure is growing unexpectedly:
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Analytics View" video="true"  style="width:90%;">}}
 
 1. Go to Monitors -> New Monitor
 2. Set up a [new metric monitor][4] with `datadog.apm.host_instance`

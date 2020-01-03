@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" >}}
+{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource"  >}}
 
 Une ressource est une action particulière pour un [service][1] donné (généralement, un endpoint ou une requête). Découvrez davantage d'informations sur les ressources sur la page [Débuter avec l'APM][2]. Pour chaque ressource, l'APM génère automatiquement une page de dashboard avec les éléments suivants :
 
@@ -42,23 +42,23 @@ Datadog fournit des graphiques par défaut pour chaque ressource :
 
     **Remarque** : pour les services comme *Postgres* ou *Redis*, qui sont des opérations « finales » qui n'appellent pas d'autres services, aucun graphique de sous-services n'est disponible.
 
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Graphiques par défaut des ressources" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Graphiques par défaut des ressources"  style="width:90%;">}}
 
 ### Export to Timeboard
 
 En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [timeboard][4] existant :
 
-{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Enregistrer en tant que timeboard" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Enregistrer en tant que timeboard"  style="width:40%;">}}
 
 ### Distribution de la latence
 
 Outre ces graphiques, vous disposez également d'un graphique de distribution de la latence sur les ressources :
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Distribution de la latence" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Distribution de la latence"  style="width:90%;">}}
 
 Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un centile donné de la distribution de latence :
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence" responsive="true" style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence"  style="width:20%;">}}
 
 Zoomez sur ce graphique pour filtrer les traces correspondantes.
 
@@ -66,7 +66,7 @@ Zoomez sur ce graphique pour filtrer les traces correspondantes.
 
 Pour une ressource donnée, Datadog vous offre une analyse détaillée des [spans][5] pour toutes les traces correspondantes :
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="Statistiques des spans" responsive="true" style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="Statistiques des spans"  style="width:80%;">}}
 
 Les métriques affichées représentent, par span :
 
@@ -86,7 +86,7 @@ Consultez la liste des traces associées à cette ressource. Filtrez ou triez ce
 
 [Consultez la documentation relative aux traces pour en savoir plus][6].
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Liste des traces" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Liste des traces"  style="width:90%;">}}
 
 ## Pour aller plus loin
 

@@ -30,7 +30,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 Voici un exemple de `system.load.1` avec la valeur `hour_before()` représentée par une ligne pointillée. Dans cet exemple-ci, on peut voir que le système a été démarré à 6 h 30 et que les valeurs de l'heure précédente `hour_before()` sont affichées à la marque 7 h 30. Bien sûr, cet exemple a été spécialement pensé pour que les valeurs de `hour_before()` correspondent aux valeurs réelles.
 
-{{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="Exemple simple d'heure précédente" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="Exemple simple d'heure précédente"  style="width:80%;">}}
 
 ## Jour précédent
 
@@ -40,7 +40,7 @@ Voici un exemple de `system.load.1` avec la valeur `hour_before()` représentée
 
 Voici un exemple de `nginx.net.connections` avec la valeur `day_before()` représentée par une ligne plus fine. Dans cet exemple, on peut voir une semaine de données, ce qui permet d'identifier facilement les données de `day_before()`.
 
-{{< img src="graphing/functions/timeshift/simple_day_before_example.png" alt="exemple simple du jour précédent" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_day_before_example.png" alt="exemple simple du jour précédent"  style="width:80%;">}}
 
 ## Semaine précédente
 
@@ -50,7 +50,7 @@ Voici un exemple de `nginx.net.connections` avec la valeur `day_before()` repré
 
 Voici un exemple de `cassandra.db.read_count` avec la valeur `week_before()` représentée par une ligne pointillée. Dans cet exemple, vous pouvez voir environ trois semaines de données, ce qui permet d'identifier facilement les données de `week_before()`.
 
-{{< img src="graphing/functions/timeshift/simple_week_before_example.png" alt="exemple simple de semaine précédente" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_week_before_example.png" alt="exemple simple de semaine précédente"  style="width:80%;">}}
 
 ### Mois précédent
 
@@ -60,7 +60,7 @@ Voici un exemple de `cassandra.db.read_count` avec la valeur `week_before()` rep
 
 Voici un exemple de `aws.ec2.cpuutilization` avec la valeur `month_before()` représentée par une ligne fine continue.
 
-{{< img src="graphing/functions/timeshift/simple_month_before_example.png" alt="exemple simple de mois précédent" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/timeshift/simple_month_before_example.png" alt="exemple simple de mois précédent"  style="width:80%;">}}
 
 ## Autres fonctions
 

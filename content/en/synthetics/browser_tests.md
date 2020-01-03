@@ -46,7 +46,7 @@ Define the configuration of your browser test.
 
 You can use the [global variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
 ### Alert conditions
 
@@ -65,13 +65,13 @@ To configure your notifications:
 
 Tests can be only recorded from **[Google Chrome][8]**. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
@@ -80,7 +80,7 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 
 ### Assertion
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test"  style="width:40%;">}}
 
 Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
 The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
@@ -114,7 +114,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 #### Create a variable
 
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true" responsive="true" width="60%">}}
+{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true"  width="60%">}}
 
 To create a variable, first give it a name then define its value from:
 
@@ -133,7 +133,7 @@ To create a variable, first give it a name then define its value from:
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
 
 You can also use your variables in some assertions, including:
 
@@ -145,7 +145,7 @@ You can also use your variables in some assertions, including:
 
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:40%;">}}
 
 ### Wait
 
@@ -157,7 +157,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 You can run browser tests within other browser tests:
 
-{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true" width="40%" >}}
+{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true"  width="40%" >}}
 
 Advanced options also allow you to choose where you want your subtest to be played:
 
@@ -173,7 +173,7 @@ Opening your subtest in the main tab means that your subtest is the continuation
 
 You can record the uploading of files as an action. This is limited to 10 files, with a limit of 5MB each.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" responsive="true" style="width:50%;">}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:50%;">}}
 
 ## Test failure and errors
 

@@ -17,7 +17,7 @@ further_reading:
 ---
 Activez la collecte des métriques de runtime dans le client de tracing pour obtenir davantage de détails sur les performances d'une application. Les métriques de runtime peuvent être consultées au sein du contexte d'un service, corrélées dans la vue Trace lors de l'exécution d'une requête donnée et exploitées sur l'ensemble de la plateforme.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="Trace runtime JVM" responsive="true">}}
+{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="Trace runtime JVM" >}}
 
 ## Configuration automatique
 
@@ -28,7 +28,7 @@ La collecte de métriques JVM est activée par défaut pour le traceur Java v0.
 
 Les métriques JVM peuvent être visualisées conjointement à vos services Java. Consultez la [page Service][1] dans Datadog.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="Runtime JVM" responsive="true" >}}
+{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="Runtime JVM"  >}}
 
 Par défaut, les métriques de runtime de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][2].
 

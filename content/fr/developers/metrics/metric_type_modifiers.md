@@ -74,7 +74,7 @@ Le type de métrique `GAUGE` représente la valeur finale et absolue d'une métr
 
 Bien que cette opération ne soit généralement pas requise, vous pouvez modifier le type d'une métrique dans la [page de résumé des métriques][4] :
 
-{{< img src="developers/metrics/metric_type_modifiers/metric_type.png" alt="Type de métrique" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metric_type_modifiers/metric_type.png" alt="Type de métrique"  style="width:70%;">}}
 
 Exemple de scénario :
 

@@ -35,7 +35,7 @@ StatsD 準拠の任意のクライアントが機能しますが、その場合�
 DogStatsD は、UDP で[カスタムメトリクス][4]、イベント、サービスチェックを受け付け、それらを定期的に集計して Datadog に転送します。
 UDP を使用するため、アプリケーションはメトリクスを DogStatsD に送信した後、応答を待たずに自身の作業を再開できます。DogStatsD を利用できなくなった場合でも、アプリケーションは停止しません。
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"   >}}
 
 DogStatsD は、データを受け取ると共に、フラッシュ間隔と呼ばれる時間間隔でメトリクスごとに複数のデータポイントを 1 つのデータポイントに集計します。次の例では、特定のデータベースクエリが呼び出されるたびに DogStatsD がカウンターをインクリメントするように設定されています。
 

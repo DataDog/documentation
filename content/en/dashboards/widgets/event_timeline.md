@@ -15,11 +15,11 @@ further_reading:
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][1]:
 
-{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Event timeline example" responsive="true" >}}
+{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Event timeline example"  >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example"  style="width:80%;">}}
 
 ### Configuration
 
@@ -32,7 +32,7 @@ The event timeline is a widget version of the timeline that appears at the top o
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

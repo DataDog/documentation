@@ -15,11 +15,11 @@ further_reading:
 
 The service summary displays the graphs of a chosen [service][1] in your screenboard.
 
-{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" responsive="true">}}
+{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup"  style="width:80%;">}}
 
 ### Configuration
 

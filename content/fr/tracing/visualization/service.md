@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Page détaillée des services" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Page détaillée des services"  style="width:90%;">}}
 
 ## Présentation
 
@@ -31,7 +31,7 @@ Cette page vous permet de consulter :
 
 Datadog offre une liste de monitors en fonction de votre type de service :
 
-{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors"  style="width:90%;">}}
 
 Activez-les directement ou créez vos propres [monitors d'APM][3].
 
@@ -57,36 +57,36 @@ Datadog fournit des graphiques par défaut pour chaque service :
 
     **Remarque** : pour les services comme *Postgres* ou *Redis*, qui sont des opérations « finales » qui n'appellent pas d'autres services, aucun graphique de sous-services n'est disponible.
 
-{{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Graphiques par défaut pour les services" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Graphiques par défaut pour les services"  style="width:90%;">}}
 
 ### Export to Timeboard
 
 En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [timeboard][5] existant :
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Enregister en tant que timeboard" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Enregister en tant que timeboard"  style="width:40%;">}}
 
 ### Distribution de la latence
 
 Outre ces graphiques, vous disposez également d'un graphique de distribution de la latence sur les services :
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="Distribution de la latence" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/latency_distribution.png" alt="Distribution de la latence"  style="width:90%;">}}
 
 Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un centile donné de la distribution de latence :
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence" responsive="true" style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence"  style="width:20%;">}}
 
 ## Ressources
 
 Consultez la liste des [ressources][6] associées à votre service. Les ressources sont des actions particulières pour vos services (généralement des endpoints ou des requêtes spécifiques). Pour en savoir plus sur les ressources, consultez [Débuter avec l'APM][1]. Triez les ressources de ce service par requêtes, latence, erreurs et durée pour identifier les zones à trafic élevé ou les problèmes potentiels. Notez que ces colonnes de métrique peuvent être personnalisées (voir l'image ci-dessous).
 
-{{< img src="tracing/visualization/service/resources.png" alt="Ressources" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources.png" alt="Ressources"  style="width:90%;">}}
 
 [Consultez la documentation relative aux ressources pour en savoir plus][2].
 
 ### Filtrer la liste des ressources
 Filtrez votre liste de ressources avec une requête pour un filtrage textuel de base :
 
-{{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Filtrage de ressources" video="true" responsive="true" width="90%" >}}
+{{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Filtrage de ressources" video="true"  width="90%" >}}
 
 ### Colonnes
 
@@ -98,7 +98,7 @@ Choisissez ce que vous souhaitez afficher dans votre liste de ressources :
 * **Error**: le nombre absolu d'erreurs pour une ressource donnée
 * **Error Rate**: le pourcentage d'erreur pour une ressource donnée
 
-{{< img src="tracing/visualization/service/resource_columns.png" alt="Colonnes des ressources" responsive="true" style="width:50%;">}}
+{{< img src="tracing/visualization/service/resource_columns.png" alt="Colonnes des ressources"  style="width:50%;">}}
 
 ## Pour aller plus loin
 

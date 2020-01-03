@@ -17,7 +17,7 @@ Les counters servent à compter des éléments.
 
 ### Check de l'Agent
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | Méthode | Présentation |
 | :----- | :------- |
@@ -30,7 +30,7 @@ Les counters servent à compter des éléments.
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | Méthode | Présentation |
 | :----- | :------- |

@@ -11,11 +11,11 @@ kind: documentation
 
 変換するのは、この正弦波時系列 `sin{*}` です。 
 
-{{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function"  style="width:80%;">}}
 
 次の `abs(sin{*})` に変換します。
 
-{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs"  style="width:80%;">}}
 
 ## 対数
 
@@ -29,7 +29,7 @@ kind: documentation
 
 データポイントごとに 1 ずつ増えるメトリクス `x{*}` があるとすると、`log2(x{*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/arithmetic/log2.png" alt=" log2 function" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/log2.png" alt=" log2 function"  style="width:80%;">}}
 
 ### log10
 
@@ -41,7 +41,7 @@ kind: documentation
 
 データポイントごとに 1 ずつ増えるメトリクス `x{*}` があるとすると、`log10(x{*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/arithmetic/log10.png" alt="log10 function" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/log10.png" alt="log10 function"  style="width:80%;">}}
 
 ## 累積合計
 
@@ -53,7 +53,7 @@ kind: documentation
 
 値 `1` の定数であるメトリクス `const_1{*}` があるとすると、`cumsum(const_1{*})` は次のようなグラフになります。
 
-{{< img src="graphing/functions/arithmetic/cumsum.png" alt="cum sum function with abs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/cumsum.png" alt="cum sum function with abs"  style="width:80%;">}}
 
 ## Integral
 
@@ -63,7 +63,7 @@ kind: documentation
 
 **注**: Datadog の `integral()` は、特定のメトリクスの可視のタイムウィンドウにおける、すべての隣接ポイントペアの `[時間増分] x [値増分]` の累積合計です。
 
-{{< img src="graphing/functions/arithmetic/integral.png" alt="integral function with abs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/integral.png" alt="integral function with abs"  style="width:80%;">}}
 
 ## その他の関数
 

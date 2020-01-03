@@ -39,7 +39,7 @@ L'interface de l'APM fournit de nombreux outils permettant de dépanner les perf
 
 [Une fois votre application instrumentée][3], la [Liste des services][4] est votre point de départ pour accéder à vos données d'APM.
 
-{{< img src="tracing/visualization/service_list.png" alt="liste des services" responsive="true">}}
+{{< img src="tracing/visualization/service_list.png" alt="liste des services" >}}
 
 Les services sont les composants d'une architecture de microservices moderne. Un service regroupe généralement des endpoints, des requêtes ou des tâches qui procèdent au scaling de vos instances. Par exemple :
 
@@ -49,11 +49,11 @@ Les services sont les composants d'une architecture de microservices moderne. Un
 
 La capture d'écran ci-dessous montre un système distribué à base de microservices pour un développeur de sites de e-commerce. On observe un `web-store`, un `ad-server`, un `payment-db` et un `auth-service`, tous représentés en tant que services dans l'APM.
 
-{{< img src="tracing/visualization/service_map.png" alt="service map" responsive="true">}}
+{{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
 La page [Service List][4] affiche la liste de tous vos services, tandis que la [Service Map][5] les représente visuellement. Chaque service dispose d'une [page Service][6] distincte qui vous permet de consulter et d'inspecter des [métriques de trace](#trace-metrics) relatives au débit, à la latence et aux taux d'erreurs. Utilisez ces métriques pour créer des widgets de dashboard, définir des monitors et visualiser les performances de chaque ressource associée au service, telle qu'un endpoint web ou une requête de base de données.
 
-{{< img src="tracing/visualization/service_page.mp4" video="true" alt="page service" responsive="true">}}
+{{< img src="tracing/visualization/service_page.mp4" video="true" alt="page service" >}}
 
 <div class="alert alert-info">
 Vous ne voyez pas les endpoints HTTP attendus sur la page Service ? Dans l'APM, le nom du service n'est pas le seul paramètre pris en compte pour connecter des endpoints à un service : le `span.name` de la span de point d'entrée de la trace est également utilisé. Par exemple, dans le service web-store ci-dessus, la span de point d'entrée est `web.request`.
@@ -64,13 +64,13 @@ Vous ne voyez pas les endpoints HTTP attendus sur la page Service ? Dans l'APM,
 
 Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Pour un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, les mises à jour de panier, les ajouts d'article, etc. Chaque ressource possède sa propre [page Ressource][6] qui affiche les [métriques de trace](#metriques-de-trace) associées à chaque endpoint spécifique. Les métriques de trace peuvent être utilisées comme n'importe quelle autre métrique Datadog : elles peuvent être exportées vers un dashboard ou utilisées pour créer des monitors. La page Ressource affiche également le widget Résumé des spans avec une vue agrégée des [spans](#spans) pour toutes les [traces](#trace), les distributions de latences des requêtes et les traces indiquant les requêtes adressées à cet endpoint.
 
-{{< img src="tracing/visualization/resource_page.mp4" video="true" alt="page ressource" responsive="true">}}
+{{< img src="tracing/visualization/resource_page.mp4" video="true" alt="page ressource" >}}
 
 ## Trace
 
 Les traces servent à suivre le temps passé par une application à traiter une requête, ainsi que le statut de la requête. Chaque trace est composée d'une ou de plusieurs spans. Durant le cycle de vie de la requête, il est possible de visualiser les appels distribués au sein de vos services (grâce à [l'injection/l'extraction d'un ID de trace via les en-têtes HTTP][8]), de vos [bibliothèques instrumentées automatiquement][3] et de vos [instrumentations manuelles][9] à l'aide d'outils open source tels que [OpenTracing][10] sous forme de Flamegraph. La page Vue Trace présente des informations sur la trace issues d'autres sections de la plateforme, telles que [Connecter vos logs à vos traces][11], [Ajouter des tags à des spans][12] et [Recueillir des métriques de runtime][13].
 
-{{< img src="tracing/visualization/trace_view.png" alt="vue trace" responsive="true">}}
+{{< img src="tracing/visualization/trace_view.png" alt="vue trace" >}}
 
 ## Spans
 
@@ -78,25 +78,25 @@ Une span représente une unité de travail logique dans un système pour une pé
 
 Dans l'exemple ci-dessous, la span `rack.request` correspond au point d'entrée de la trace. Cela signifie que la page du service web-store affiche les ressources composées de traces ayant une span de point d'entrée nommée `rack.request.` L'exemple montre également les tags ajoutés côté application (`merchant.name`, `merchant.tier`, etc.). Ces tags définis par l'utilisateur peuvent être utilisés pour rechercher et analyser des données d'APM dans [App Analytics][14].
 
-{{< img src="tracing/visualization/span_with_metadata.png" alt="span" responsive="true">}}
+{{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
 ## Métriques de trace
 
 Tout comme les autres types de [métriques Datadog][2], les métriques de trace sont automatiquement collectées et conservées pendant une durée de 15 mois. Elles peuvent être utilisées pour identifier et recevoir des alertes relatives aux hits, aux erreurs ou à la latence. Les métriques de trace sont taguées par le host qui reçoit les traces ainsi que par le service ou la ressource. Par exemple, après avoir instrumenté un service Web, des métriques de trace sont recueillies pour la span de point d'entrée `web.request` dans le [Résumé des métriques][15].
 
-{{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="métriques de trace" responsive="true">}}
+{{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="métriques de trace" >}}
 
 ### Dashboard
 
 Les métriques de trace peuvent être exportées vers un dashboard à partir de la page *Service* ou *Ressource*. Elles peuvent également être interrogées à partir d'un dashboard existant.
 
-{{< img src="tracing/visualization/trace_metric_dashboard.mp4" video="true" alt="dashboard de métriques de trace" responsive="true">}}
+{{< img src="tracing/visualization/trace_metric_dashboard.mp4" video="true" alt="dashboard de métriques de trace" >}}
 
 ### Monitoring
 
 Les métriques de trace sont idéales pour la surveillance. Il est possible de définir des monitors d'APM depuis les pages [Nouveau monitor][16], [Service][6] ou [Ressource][7]. Des suggestions de monitors sont affichées sur la page [Service][6] ou [Ressource][7].
 
-{{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="monitor de métriques de trace" responsive="true">}}
+{{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="monitor de métriques de trace" >}}
 
 
 ## App Analytics
@@ -117,13 +117,13 @@ Vous pouvez calculer une estimation du nombre de spans analysées qui seraient g
 
 Utilisez des tags de spans sous la forme de paires clé-valeur pour corréler une requête dans la *Vue Trace* ou pour filtrer dans *App Analytics*. Les tags peuvent être ajoutés à une seule span ou à l'ensemble d'entre elles. Dans l'exemple ci-dessous, les requêtes (`merchant.store_name`, `merchant.tier`, etc.) ont été ajoutées en tant que tags à la span.
 
-{{< img src="tracing/visualization/span_tag.png" alt="tag de span" responsive="true">}}
+{{< img src="tracing/visualization/span_tag.png" alt="tag de span" >}}
 
 Pour commencer à taguer des spans dans votre application, consultez ce [guide][12].
 
 Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag dans App Analytics en cliquant sur le tag pour l'ajouter en tant que [facette][19]. Cela fait, la valeur de ce tag est stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le volet Facettes et la requête de graphique de traces.
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette"  style="width:50%;">}}
 
 
 ## Pour aller plus loin

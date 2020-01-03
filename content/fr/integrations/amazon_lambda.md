@@ -213,7 +213,7 @@ Lorsque cela est approprié, Datadog associe les traces AWS X-Ray aux traces de 
 
 **Remarque** : pour que les traces X-Ray apparaissent sur le même flamegraph que celles de l'APM de Datadog, tous les services doivent posséder le [même tag `env`](#tag-env).
 
-{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" responsive="true">}}
+{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" >}}
 
 #### Organiser votre infrastructure avec les tags
 
@@ -233,7 +233,7 @@ Ajoutez le [tag][28] `service` [tag][28] afin de regrouper les fonctions Lambda 
 
 Par défaut, chaque fonction Lambda est considérée comme un `service` distinct. Ajoutez votre propre tag pour modifier ce comportement.
 
-{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" responsive="true">}}
+{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" >}}
 
 ### Métriques custom
 

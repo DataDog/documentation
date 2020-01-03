@@ -42,24 +42,24 @@ Use the query to control what's displayed in your App Analytics:
 
 1. Choose the `Duration` metric or a [Facet][4] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas [Facet][4] displays the unique count.
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 
 2. Select the aggregation function for the `Duration` metric:
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
 
 3. Use [Tag][5] or [Facet][4] to split your Analytic.
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected [Facet][4] or `Duration`.
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
 
 5. Choose the Analytic Timesteps.
   Changing the global timeframe changes the list of available Timesteps values.
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
 
 ## Visualizations
 
@@ -78,7 +78,7 @@ Visualize the evolution of the `Duration` metric (or a [Facet][4] unique count o
 The following timeseries App Analytics shows:
 The evolution of the **pc99** **duration** by steps of **5min** for each **Service**
 
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
 ### Top List
 
@@ -87,7 +87,7 @@ Visualize the top values from a [Facet][4] according to their `Duration` (or a [
 The following Top List App Analytics shows:
 The top **pc99** **duration** of **Service**
 
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
 ### Table
 
@@ -101,17 +101,17 @@ Visualize the top values from a [facet][4] according to a chosen [measure][6] (t
 
  The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example"  style="width:90%;">}}
 
 ## Related Traces
 
 Select or click on a section of the graph to either zoom in the graph or see the list of [traces][7] corresponding to your selection:
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces"  style="width:40%;">}}
 
 ## Export
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button"  style="width:40%;">}}
 
 Export your App Analytics:
 

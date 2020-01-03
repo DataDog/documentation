@@ -17,7 +17,7 @@ public_title: Intégration Datadog/Fastly
 short_description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore. more.'
 version: '1.0'
 ---
-{{< img src="integrations/fastly/fastlygraph.png" alt="Graphique Fastly" responsive="true" popup="true">}}
+{{< img src="integrations/fastly/fastlygraph.png" alt="Graphique Fastly"  >}}
 
 ## Présentation
 

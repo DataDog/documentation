@@ -17,11 +17,11 @@ further_reading:
 
 The top list visualization enables you to display a list of Tag value like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
 
-{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
+{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List"  style="width:80%;">}}
 
 ### Configuration
 
@@ -42,7 +42,7 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

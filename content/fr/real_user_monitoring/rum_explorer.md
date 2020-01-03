@@ -19,7 +19,7 @@ L'intervalle est visible juste en dessous de la barre de recherche. Cette foncti
 
 Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante :
 
-{{< img src="real_user_monitoring/rum_explorer/rum_time_selector.png" alt="Sélecteur d'intervalle RUM" responsive="true" style="width:40%;">}}
+{{< img src="real_user_monitoring/rum_explorer/rum_time_selector.png" alt="Sélecteur d'intervalle RUM"  style="width:40%;">}}
 
 Tous les paramètres de recherche sont contenus dans l'URL. Vous pouvez partager votre vue en partageant l'URL.
 
@@ -74,7 +74,7 @@ Vous pouvez effectuer une recherche d'attribut numérique dans un intervalle sp�
 
 Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="real_user_monitoring/rum_explorer/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche" responsive="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/rum_explorer/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche"  style="width:60%;">}}
 
 #### Exemples
 
@@ -88,7 +88,7 @@ Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour 
 
 Cliquez sur une vue pour ouvrir le volet des vues et l'examiner plus en détail (Ressources, Traces, Erreurs, Action utilisateur, Tâche longue, Logs ou Attributs) :
 
-{{< img src="real_user_monitoring/rum_explorer/rum_views.png" alt="Vue RUM" responsive="true" style="width:80%;">}}
+{{< img src="real_user_monitoring/rum_explorer/rum_views.png" alt="Vue RUM"  style="width:80%;">}}
 
 ## Facettes et mesures
 
@@ -101,13 +101,13 @@ Remarque : pour tirer le meilleur parti de votre page RUM Explorer, assurez-vou
 
 Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre de vues représentées. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher.
 
-{{< img src="real_user_monitoring/rum_explorer/rum_facet.png" alt="Démonstration facettes" responsive="true" style="width:80%;">}}
+{{< img src="real_user_monitoring/rum_explorer/rum_facet.png" alt="Démonstration facettes"  style="width:80%;">}}
 
 **Créer une facette** :
 
 Pour commencer à utiliser un attribut en tant que facette ou dans une recherche, cliquez dessus et ajoutez-le en tant que facette :
 
-{{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:30%;">}}
+{{< img src="real_user_monitoring/rum_explorer/create_facet.png" style="width:50%;" alt="Créer une facette"  style="width:30%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles vues** et peut être utilisée dans [la barre de recherche](#recherche), le volet Facettes et dans la [requête RUM Analytics][1].
 
@@ -121,7 +121,7 @@ Une mesure est un attribut doté d'une valeur numérique contenue dans vos vues.
 
 Pour commencer à utiliser un attribut en tant que mesure, cliquez sur un attribut numérique de vos vues :
 
-{{< img src="real_user_monitoring/rum_explorer/create_measure.png" alt="Créer une mesure" responsive="true" style="width:30%;">}}
+{{< img src="real_user_monitoring/rum_explorer/create_measure.png" alt="Créer une mesure"  style="width:30%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles vues** et peut être utilisée dans [la barre de recherche](#recherche), le volet Facettes et dans la [requête RUM Analytics][1].
 
@@ -129,7 +129,7 @@ Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes
 
 Chaque mesure dispose de sa propre unité. Celle-ci est affichée dans les colonnes du RUM Explorer et dans les analyses RUM.
 
-{{< img src="real_user_monitoring/rum_explorer/edit_measure.png" alt="Modifier une mesure" responsive="true" style="width:50%;">}}
+{{< img src="real_user_monitoring/rum_explorer/edit_measure.png" alt="Modifier une mesure"  style="width:50%;">}}
 
 [1]: /fr/real_user_monitoring/rum_analytics
 {{% /tab %}}

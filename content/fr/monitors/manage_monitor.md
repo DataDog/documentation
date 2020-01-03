@@ -14,7 +14,7 @@ further_reading:
 ---
 La page [Manage Monitors][1] vous permet de rechercher, de supprimer, de désactiver ou de résoudre des monitors, mais aussi de modifier plusieurs tags de monitor à la fois. Vous pouvez également dupliquer ou modifier des monitors spécifiques à partir des résultats de recherche.
 
-{{< img src="monitors/manage_monitor/page.png" alt="page Manage Monitor" responsive="true" >}}
+{{< img src="monitors/manage_monitor/page.png" alt="page Manage Monitor"  >}}
 
 ## Rechercher des monitors
 

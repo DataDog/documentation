@@ -24,7 +24,7 @@ further_reading:
 
 ログエクスプローラーでは、パターンを自動的に表面化し、問題を浮き彫りにすることができます。これは、重要な事項をすばやく明らかにすると共に、無関係な事項を除外します。
 
-{{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Navigate to Log Patterns" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Navigate to Log Patterns"  style="width:50%;">}}
 
 パターンビューは、他の問題を見逃すことがないように、ノイズが多いエラーパターンを検出してフィルタリングするために役立ちます。パターンと一致するログの数が、サービスやステータスに基づいて分割されて表示されます。
 
@@ -39,7 +39,7 @@ further_reading:
 
 パターンをクリックすると、そこに含まれるログのサンプルが表示され、最終的には 1 つのログ単位で表示できます。
 
-{{< img src="logs/explorer/patterns/patterns_overview.gif" alt="Log Patterns" responsive="true" style="width:90%;">}}
+{{< img src="logs/explorer/patterns/patterns_overview.gif" alt="Log Patterns"  style="width:90%;">}}
 
 **注**: パターンは、10,000 個のログサンプルに基づいて検出されます。ログを一部分に制限してパターンを表示するには、検索を絞り込みます。
 

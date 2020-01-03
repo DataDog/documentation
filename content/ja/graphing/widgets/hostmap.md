@@ -15,11 +15,11 @@ further_reading:
 ---
 ホストマップは、[メインインフラストラクチャーの Host Map][1] メニューから使用できるホストマップと同じ可視化機能を使用して、一部のホストのメトリクスをグラフ化します。
 
-{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Host Map" responsive="true" >}}
+{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup" responsive="true" >}}
+{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup"  >}}
 
 ### コンフィグレーション
 
@@ -37,7 +37,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

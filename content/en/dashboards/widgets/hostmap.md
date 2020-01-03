@@ -18,11 +18,11 @@ further_reading:
 
 The host map graphs any metric for any subset of hosts on the same host map visualization available from the main [Infrastructure Host Map][1] menu:
 
-{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Host Map" responsive="true" >}}
+{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup" responsive="true" >}}
+{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup"  >}}
 
 ### Configuration
 
@@ -41,7 +41,7 @@ Configuration of the host map widget works as the main [host map page][1]:
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

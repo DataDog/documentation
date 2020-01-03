@@ -15,7 +15,7 @@ further_reading:
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
 
-{{< img src="monitors/manage_monitor/page.png" alt="manage monitor page" responsive="true" >}}
+{{< img src="monitors/manage_monitor/page.png" alt="manage monitor page"  >}}
 
 ## Search
 

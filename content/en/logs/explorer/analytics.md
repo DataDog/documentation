@@ -25,7 +25,7 @@ further_reading:
 Log analytics extend the log search page with log aggregation and split capabilities for troubleshooting and monitoring.
 You can access the analytics page from any log explorer view by clicking on the "Analytics" icon next to the search query bar.
 
-{{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
+{{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" >}}
 
 You can control:
 
@@ -47,29 +47,29 @@ Use the query to control what's displayed in your Log Analytics:
 
 1. Choose a [Measure][1] or [Facet][2] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
 
-    {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
+    {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 2. Select the aggregation function for the [Measure][1] you want to graph:
 
-    {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics"  style="width:50%;">}}
 
 3. Use [Tag][1] or [Facet][2] to split your graph.
 
-    {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics"  style="width:50%;">}}
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
 
-    {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
+    {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
 
 5. Choose the Timesteps graph.
   Changing the global timeframe changes the list of available Timesteps values.
 
-    {{< img src="logs/explorer/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
+    {{< img src="logs/explorer/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
 
 ## Visualizations
 
 Select a Log Analytics visualization type using the graph selector:
 
-{{< img src="logs/explorer/analytics/graph_selector.png" alt="Log Analytics selector" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/analytics/graph_selector.png" alt="Log Analytics selector"  style="width:30%;">}}
 
 Available visualizations:
 
@@ -95,7 +95,7 @@ Noteworthy facts about stacking:
 The following timeseries Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
-{{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
+{{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
 [1]: /logs/explorer/?tab=measures#setup
 [2]: /logs/explorer/?tab=facets#setup
@@ -108,7 +108,7 @@ Visualize the top values from a [facet][1] according to the chosen [measure][2]:
 The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
-{{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+{{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
 [1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/?tab=measures#setup
@@ -126,7 +126,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
  The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example" responsive="true" style="width:90%;">}}
+{{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example"  style="width:90%;">}}
 
 [1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/?tab=measures#setup
@@ -138,7 +138,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
-{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true" responsive="true" width="80%" >}}
+{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true"  width="80%" >}}
 
 ## How aggregations work behind the scenes
 
@@ -148,7 +148,7 @@ Let's illustrate this on a fictive bar timeline where each bar represents a time
 
 In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
 
-{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="top list example" video="true" responsive="true" >}}
+{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="top list example" video="true"  >}}
 
 ## Further Reading
 

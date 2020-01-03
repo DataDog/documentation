@@ -41,7 +41,7 @@ Pour installer l'intégration Slack, accédez à son [carré d'intégration][1] 
 6. Collez l'URL du Webhook dans le champ **Slack Account Hook**.
 7. Cliquez sur *Save*.
 8. Ajoutez les **canaux Slack à utiliser pour transmettre les informations** :
-    {{< img src="integrations/slack/slack_configuration.png" alt="Configuration de Slack" responsive="true">}}
+    {{< img src="integrations/slack/slack_configuration.png" alt="Configuration de Slack" >}}
 9. Si vous souhaitez être informé pour chaque nouveau commentaire sur un graphique, cochez la case **Transfer all user comments** pour chaque chaîne. Si vous ne cochez pas cette case, vous devrez utiliser la syntaxe `@slack-<NOM_COMPTE>-<NOM_CHAÎNE>` pour que les commentaires soient publiés sur Slack. Vous devez utiliser `@slack-<NOM_CHAÎNE>` si vous n'utilisez qu'un seul compte ou si vous souhaitez publier les commentaires sur le premier compte uniquement.
 
 Vous pouvez également configurer l'envoi d'alertes vers Slack à partir de [monitors][4] et du [flux d'événements][5].

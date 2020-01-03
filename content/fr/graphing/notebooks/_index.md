@@ -13,7 +13,7 @@ further_reading:
 
 Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils sont conçus pour explorer vos données et partager des histoires : enquêtes à la suite d'incidents, analyses de fin de projet, runbooks ou encore documentation d'infrastructure.
 
-{{< img src="graphing/notebooks/demo_notebook.png" alt="notebook de démonstration" responsive="true" style="width:100%;">}}
+{{< img src="graphing/notebooks/demo_notebook.png" alt="notebook de démonstration"  style="width:100%;">}}
 
 ## Notebook List
 
@@ -63,7 +63,7 @@ Par défaut, toutes les cellules de graphique respectent le même intervalle de 
 
 Pour définir un intervalle de temps spécifique, cliquez sur l'icône en forme d'horloge dans le coin supérieur droit d'une cellule de graphique. Décochez ensuite la case *Lock this cell to global time frame* et définissez l'intervalle de temps souhaité :
 
-{{< img src="graphing/notebooks/time_selector.png" alt="Sélecteur d'intervalle de temps" responsive="true" style="width:60%;">}}
+{{< img src="graphing/notebooks/time_selector.png" alt="Sélecteur d'intervalle de temps"  style="width:60%;">}}
 
 **Remarque** : si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas la cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
 
@@ -79,7 +79,7 @@ Pour afficher les options de disposition suivantes, cliquez sur l'icône en form
 * **Graph legend** : décochez cette case pour masquer la légende. Les légendes sont automatiquement désactivées pour les graphiques `XS` et `S`.
 * **Grouping** : permet d'afficher un graphique par regroupement de sources.
 
-{{< img src="graphing/notebooks/layout_options.png" alt="options de disposition" responsive="true" style="width:50%;">}}
+{{< img src="graphing/notebooks/layout_options.png" alt="options de disposition"  style="width:50%;">}}
 
 **Remarque** : si vous modifiez l'un de ces paramètres, le changement s'applique uniquement à la cellule sélectionnée.
 

@@ -15,11 +15,11 @@ further_reading:
 
 The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation:
 
-{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" responsive="true">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

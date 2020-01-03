@@ -14,7 +14,7 @@ Datadog では、Datadog Agent を実行している AWS ホスト、および D
 
 メトリクスの収集を制御するには、[Datadog-AWS インテグレーションタイル][1]を使用します。**Configuration** タブに移動し、アカウントを選択するか、新しいアカウントを追加します。各アカウントは、**Optionally limit metrics collection** の設定に基づいて制御されます。[ホストタグ][2]またはネームスペースに基づいてメトリクスを制限します。
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
+{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
 
 **注**: ELB メトリクスはフィルターで除外できないため、ELB メトリクスは課金されません。
 

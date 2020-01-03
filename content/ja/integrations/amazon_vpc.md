@@ -42,11 +42,11 @@ Datadog で [Amazon Web Services インテグレーション][1]がセットア�
 
 VPC フローログは、S3 バケットまたは Cloudwatch ロググループに送信できます。リストで監視する VPC をクリックし、画面下部の Flow Logs タブにある `Create Flow logs` を選択します。
 
-{{< img src="integrations/amazon_vpc/flow_logs.png" alt="flow logs" responsive="true" style="width:75%;" >}}
+{{< img src="integrations/amazon_vpc/flow_logs.png" alt="flow logs"  style="width:75%;" >}}
 
 `All` フィルターを選択して、許可された接続と拒否された接続の両方を取得します。次に、適切な S3 バケットまたはロググループを選択します。
 
-{{< img src="integrations/amazon_vpc/flow_log_creation.png" alt="flow logs creation" responsive="true" style="width:75%;" >}}
+{{< img src="integrations/amazon_vpc/flow_log_creation.png" alt="flow logs creation"  style="width:75%;" >}}
 
 **注**: Lambda がログに `vpc` ソースを自動的に設定するようにするには、S3 ファイル名または CloudWatch ロググループ名のプレフィックスとして `vpc` を指定します。
 
@@ -56,11 +56,11 @@ VPC フローログは、S3 バケットまたは Cloudwatch ロググループ�
 
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で、VPC フローログを含む S3 バケットまたは Cloudwatch ロググループにトリガーを追加します。次に、Lambda のトリガーリストで、S3 または CloudWatch をクリックします。
 
-    {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="S3 trigger configuration"  style="width:75%;" >}}
 
     AWS VPC ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更します。最後に、Add ボタンをクリックします。
 
-    {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="S3 lambda trigger" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="S3 lambda trigger"  style="width:75%;" >}}
 
 終了したら、[Datadog ログエクスプローラー][3]を使用してログを確認します。
 

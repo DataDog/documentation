@@ -18,7 +18,7 @@ public_title: Datadog-Zendesk インテグレーション
 short_description: 新しいチケットと解決されたチケットを追跡。Datadog モニターからチケットを自動的に生成 monitors.
 version: '1.0'
 ---
-{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk Dashboard"  >}}
 
 ## 概要
 

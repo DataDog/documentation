@@ -12,7 +12,7 @@ further_reading:
 ---
 グループウィジェットを使用すると、類似のグラフを[タイムボード][1]にまとめることができます。各グループにはカスタムヘッダーと 1 つ以上のグラフを含めることができ、折りたたみ可能です。
 
-{{< img src="graphing/widgets/group/group.mp4" alt="Group Widget" video="true" responsive="true" >}}
+{{< img src="graphing/widgets/group/group.mp4" alt="Group Widget" video="true"  >}}
 
 ## セットアップ
 

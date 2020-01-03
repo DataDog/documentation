@@ -23,23 +23,23 @@ Here's a two-minute video walkthrough:
 
 If you are a [Datadog Administrator][3], there is a [Configure SAML][4] option in the drop down menu that is accessed by hovering over your username in the left-side navigation menu.
 
-{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" responsive="true" style="width:50%;" >}}
+{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure"  style="width:50%;" >}}
 
 This brings you to the **SAML Single Sign On Configuration** page:
 
 1. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
 
-    {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file" responsive="true" >}}
+    {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
 
     After choosing the file, click **Upload File**.
 
 2. Download Datadog's [Service Provider metadata][5] to configure your IdP to recognize Datadog as a Service Provider.
 
 3. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
-{{< img src="account_management/saml/saml_enable.png" alt="saml enable" responsive="true" >}}
+{{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
 
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][4].
-{{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" responsive="true" >}}
+{{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
 The Single Sign-on URL is also displayed on the [Team page][6]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed until SAML is enabled for your account.
 
@@ -104,7 +104,7 @@ Some organizations might not want to invite all of their users to Datadog. If yo
 
 Administrators can set the default role for new Just-in-Time users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
 
-{{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" responsive="true" style="width:50%;" >}}
+{{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default"  style="width:50%;" >}}
 
 ### IdP Initiated Login
 

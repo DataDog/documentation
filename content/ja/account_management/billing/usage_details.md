@@ -16,7 +16,7 @@ kind: faq
 
 このセクションには、月内に使用したホスト、コンテナ、カスタムメトリクス、APM ホスト、APM イベント、ログ、Synthetics などのプラットフォーム各部について、当月内使用量の概要が表示されます。
 
-{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" responsive="true">}}
+{{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" >}}
 
 ### 全体使用量
 
@@ -43,7 +43,7 @@ kind: faq
 | Fargate タスク      | 当月全時間のすべての Fargate タスク数の合計を表示します。                            |
 
 
-{{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" responsive="true">}}
+{{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" >}}
 
 #### Infrastructure Host Types
 
@@ -54,7 +54,7 @@ kind: faq
 * Azure ホスト
 * GCP ホスト
 
-{{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" responsive="true">}}
+{{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" >}}
 
 
 ### カスタムメトリクス上位 500
@@ -68,7 +68,7 @@ kind: faq
 
 このデータは CSV ファイルとしてダウンロードできます。
 
-{{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" responsive="true">}}
+{{< img src="account_management/billing/usage-details-04.png" alt="Custom Metrics" >}}
 
 
 ## トラブルシューティング

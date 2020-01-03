@@ -57,7 +57,7 @@ Combinez des préfixes afin d'effectuer des recherches plus complexes. Par exemp
 
  Pour afficher les événements non agrégés de votre flux d'événements, décochez **Aggregate related events** dans le coin supérieur droit de votre flux d'événements :
 
-{{< img src="graphing/events/event_stream_aggregated.png" alt="Flux d'événements agrégés" responsive="true" style="width:50%;" >}}
+{{< img src="graphing/events/event_stream_aggregated.png" alt="Flux d'événements agrégés"  style="width:50%;" >}}
 
 ## E-mail pour les événements
 
@@ -85,7 +85,7 @@ Body: il s'agit d'un message texte indiquant que env:test est à 50 % du proces
 
 #### Événement Datadog
 
-{{< img src="graphing/events/plain-event.png" alt="événement en texte brut" responsive="true" >}}
+{{< img src="graphing/events/plain-event.png" alt="événement en texte brut"  >}}
 
 Le titre de l'événement correspond à l'objet de l'e-mail et le corps de l'événement correspond au corps de l'e-mail. Bien qu'un tag semble apparaître à la fin du titre et du corps de l'événement, il ne s'agit pas d'un réel tag. L'expéditeur de l'e-mail apparaît également en bas de l'événement.
 
@@ -101,7 +101,7 @@ Dans l'e-mail au format JSON source, les champs suivants peuvent être contrôl�
 
 #### Événement Datadog
 
-{{< img src="graphing/events/json-event.png" alt="événement json" responsive="true" >}}
+{{< img src="graphing/events/json-event.png" alt="événement json"  >}}
 
 Dans un e-mail au format JSON, l'objet de l'e-mail n'est pas pertinent, car il est remplacé par le titre du JSON dans le corps de l'e-mail. Toutes les données qui apparaissent dans l'événement sont définies dans le JSON du corps de l'e-mail. Ce JSON doit être bien mis en forme, sans quoi le message est ignoré. Cela signifie qu'il doit inclure des paires key/value séparées par des virgules, mais également être uniquement composé de JSON.
 **Remarque** : si vous testez un e-mail avec un client de messagerie standard, le corps peut être converti en HTML pour améliorer la lecture du destinataire. Cela engendre une altération du format JSON. L'e-mail est donc ignoré par Datadog.

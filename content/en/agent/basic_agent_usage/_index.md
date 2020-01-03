@@ -72,7 +72,7 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggrega
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/agent5architecture.jpg" alt="Agent v5 Architecture" responsive="true">}}
+{{< img src="agent/agent5architecture.jpg" alt="Agent v5 Architecture" >}}
 
 Agent v5 is composed of four major components, each written in Python running as a separate process:
 

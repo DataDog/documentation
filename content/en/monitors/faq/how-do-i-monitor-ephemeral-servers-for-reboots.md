@@ -16,7 +16,7 @@ A metric monitor on the `system.uptime` metric can be used to address this. The 
 
 The example shown below captures how this can be setup:
 
-{{< img src="monitors/faq/ephemeral_set_up.png" alt="ephemeral_set_up" responsive="true" >}}
+{{< img src="monitors/faq/ephemeral_set_up.png" alt="ephemeral_set_up"  >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

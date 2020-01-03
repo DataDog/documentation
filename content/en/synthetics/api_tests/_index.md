@@ -33,7 +33,7 @@ Define the `HTTP` or `SSL` request you want to be executed by Datadog:
 
 {{% tab "HTTP Test" %}}
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request"  style="width:80%;" >}}
 
 Define the request you want to be executed by Datadog:
 
@@ -61,7 +61,7 @@ Define the request you want to be executed by Datadog:
 
 {{% tab "SSL Test" %}}
 
-{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request"  style="width:80%;" >}}
 
 1. **Choose request type**: `SSL`
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
@@ -143,7 +143,7 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 
 You can create up to 10 assertions per API test by clicking on **Add new assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Assertions Setup" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Assertions Setup" video="true"  width="80%" >}}
 
 #### Test Failure
 
@@ -163,7 +163,7 @@ If a test fails, the uptime directly considers the endpoint as `down`. It is not
 
 You can use the [global variables defined in the `Settings`][3] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
 
-{{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Using Variables in API tests" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Using Variables in API tests" video="true"  width="80%" >}}
 
 ### Notify your team
 
@@ -175,7 +175,7 @@ A notification is sent according to the set of alerting conditions. To configure
 
 Notifications example:
 
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications" responsive="true" style="width:80%;" >}}
+{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:80%;" >}}
 
 ## Network timings
 
