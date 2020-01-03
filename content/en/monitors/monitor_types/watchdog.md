@@ -11,10 +11,6 @@ further_reading:
   text: "Watchdog, algorithmically detect application and infrastructure issues"
 ---
 
-<div class="alert alert-note">
-Watchdog infrastructure stories are in beta.
-</div>
-
 ## Overview
 
 [Watchdog][1] is an algorithmic feature for APM and infrastructure metrics. It that automatically detects potential application and infrastructure issues by continuously observing trends and patterns in metrics and looking for atypical behavior.

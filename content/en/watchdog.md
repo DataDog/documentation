@@ -16,10 +16,6 @@ further_reading:
   text: "Collect your traces"
 ---
 
-<div class="alert alert-note">
-Watchdog monitors and infrastructure stories are in beta.
-</div>
-
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Overview
