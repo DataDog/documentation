@@ -101,7 +101,7 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[1]: /logs/explorer/search/#search-syntax
 [2]: /tracing/app_analytics/search/#search-bar
 [3]: /dashboards/graphing_json/widget_json
 [4]: /dashboards/graphing_json/request_json
