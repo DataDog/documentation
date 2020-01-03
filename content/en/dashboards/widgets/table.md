@@ -20,7 +20,7 @@ further_reading:
 
 The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key. For example, see `system.cpu.system` and `system.cpu.user` grouped by `service`:
 
-{{< img src="graphing/widgets/table/table_widget.png" alt="Table widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/table/table_widget.png" alt="Table widget"  style="width:80%;">}}
 
 ## Setup
 
@@ -35,7 +35,7 @@ The table visualization is available on timeboards and screenboards. It displays
 * Choose a metric for sorting the table (defaults to the first column).
 * Optional: Configure conditional formatting depending on the cell values for each column.
 
-{{< img src="graphing/widgets/table/table_setup.png" alt="Table setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/table/table_setup.png" alt="Table setup"  style="width:80%;">}}
 
 ## API
 

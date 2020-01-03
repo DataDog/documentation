@@ -460,7 +460,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering" responsive="true" style="width:100%;">}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering"  style="width:100%;">}}
 
 **Note**: If you have [manually configured the sampling priority][7] to `MANUAL_KEEP` for a given service. Analyzed Spans filtering is then overridden for that service which means that its spans are billable spans.
 

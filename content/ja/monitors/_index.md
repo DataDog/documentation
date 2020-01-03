@@ -42,14 +42,14 @@ description: 通知の作成と管理
 
 メインメニューの **Monitors** にカーソルを合わせ、サブメニューの **New Monitor** をクリックして[モニター作成][25]ページに移動します。選択したテーマまたは画面の解像度に応じて、メインメニューは上部または左側に表示されます。左側にモニターの種類のリストが表示されます。[モニターに関するリファレンス][6]で、すべてのモニターの種類を確認できます。
 
-{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" >}}
+{{< img src="monitors/index/nav.png" alt="navigation"  >}}
 
 ## モニターのエクスポート
 
 モニターの JSON 設定は、作成画面から直接、または右上隅の [Monitor Status ページ][26]からエクスポートできます。
 モニターをプログラムで管理およびデプロイしている場合は、UI でモニターを定義して、JSON をエクスポートする方が簡単です。
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor"  >}}
 
 ## モニターの監査
 
@@ -62,7 +62,7 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 
 Datadog には、自身が作成したモニターが変更されたことを通知する機能もあります。モニターエディターの下部に、モニターへのすべての変更をアラート受信者に通知するオプションがあります。
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor Change Notifications" responsive="true" >}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor Change Notifications"  >}}
 
 このオプションを **Notify** に設定すると、モニター監査イベントに関する電子メールが、特定のモニターの全アラート受信者に送信されます。
 

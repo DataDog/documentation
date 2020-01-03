@@ -6,7 +6,7 @@ aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 <div class="alert alert-warning">
 The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.

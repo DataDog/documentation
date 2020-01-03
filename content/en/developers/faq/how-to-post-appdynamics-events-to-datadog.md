@@ -27,7 +27,7 @@ First, create a Datadog Policy Single Violation Only HTTP Template:
 }
 ```
 
-{{< img src="developers/faq/step_1_appdynamics.png" alt="step_1_appdynamics" responsive="true" >}}
+{{< img src="developers/faq/step_1_appdynamics.png" alt="step_1_appdynamics"  >}}
 
 Latest Event:
 
@@ -48,7 +48,7 @@ Latest Event:
 }
 ```
 
-{{< img src="developers/faq/latest_event.png" alt="latest_event" responsive="true" >}}
+{{< img src="developers/faq/latest_event.png" alt="latest_event"  >}}
 
 You can use also use Email Templates:
 
@@ -62,6 +62,6 @@ You can use also use Email Templates:
 }
 ```
 
-{{< img src="developers/faq/email_template.png" alt="email_template" responsive="true" >}}
+{{< img src="developers/faq/email_template.png" alt="email_template"  >}}
 
 [1]: https://www.appdynamics.com/support

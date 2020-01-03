@@ -17,7 +17,7 @@ public_title: Intégration Datadog/Jira
 short_description: Faites en sorte que vos alertes Datadog génèrent automatiquement des tickets JIRA et les mettent à jour par la suite.
 version: '1.0'
 ---
-{{< img src="integrations/jira/JiraInstallation9.png" alt="Événements Jira" responsive="true">}}
+{{< img src="integrations/jira/JiraInstallation9.png" alt="Événements Jira" >}}
 
 ## Présentation
 
@@ -30,15 +30,15 @@ JIRA est un système de suivi de tickets et de projets pour les équipes logicie
 
 2. Accédez aux paramètres (icône en forme d'engrenage) –> **Produits** :
 
-    {{< img src="integrations/jira/JiraInstallation2.png" alt="Accès à Jira" responsive="true" style="width:25%">}}
+    {{< img src="integrations/jira/JiraInstallation2.png" alt="Accès à Jira"  style="width:25%">}}
 
 3. Sous **INTEGRATIONS** dans le menu de gauche, sélectionnez **Application links** :
 
-    {{< img src="integrations/jira/JiraInstallation3.png" alt="Accès à Jira" responsive="true" style="width:25%">}}
+    {{< img src="integrations/jira/JiraInstallation3.png" alt="Accès à Jira"  style="width:25%">}}
 
 4. Saisissez `https://app.datadoghq.com/` comme URL et cliquez sur **Create new link**. **Remarque** : il est possible que le message d'avertissement suivant s'affiche : « *No response was received from the URL you entered* ». Vous pouvez l'ignorer et appuyer sur Continuer.
 
-    {{< img src="integrations/jira/JiraInstallation4.png" alt="Configurer des liens d'application" responsive="true" style="width:75%">}}
+    {{< img src="integrations/jira/JiraInstallation4.png" alt="Configurer des liens d'application"  style="width:75%">}}
 
 5. Dans le champ **Application Name**, ajoutez le nom de votre choix (utilisé pour l'identification).
 
@@ -48,13 +48,13 @@ JIRA est un système de suivi de tickets et de projets pour les équipes logicie
 
 8. Cliquez sur **Continue**.
 
-    {{< img src="integrations/jira/JiraInstallation5.png" alt="Associer des applications" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation5.png" alt="Associer des applications"  style="width:50%">}}
 
 9. Pour la fenêtre suivante, vous trouverez la clé de consommateur, le nom du consommateur et la clé publique dans le [carré d'intégration Jira de Datadog][1].
 
 10. Cliquez sur **Continue**.
 
-    {{< img src="integrations/jira/JiraInstallation6.png" alt="Associer les applications" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation6.png" alt="Associer les applications"  style="width:50%">}}
 
 ### Configuration
 
@@ -62,7 +62,7 @@ JIRA est un système de suivi de tickets et de projets pour les équipes logicie
 
 2. Cliquez sur le bouton **Setup OAuth1** :
 
-    {{< img src="integrations/jira/JiraInstallation7.png" alt="Configurer le compte Jira" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation7.png" alt="Configurer le compte Jira"  style="width:50%">}}
 
 #### Ajouter des tickets
 
@@ -75,7 +75,7 @@ Après avoir installé l'intégration JIRA, créez un ticket personnalisé dans 
 6. Les autres champs proposés sont facultatifs.
 7. Cliquez sur le bouton **Save**.
 
-{{< img src="integrations/jira/jira-issue.png" alt="Ticket Jira" responsive="true">}}
+{{< img src="integrations/jira/jira-issue.png" alt="Ticket Jira" >}}
 
 **Remarque** : si le champ obligatoire **Severity** est affiché (comme ci-dessus), Jira limite les valeurs autorisées à :
 ```
@@ -123,7 +123,7 @@ La commande `@jira-update` peut être utilisée pour mettre à jour les tickets 
 
 Conseil : vous pouvez aussi utiliser la commande `@jira` dans une variable #is_alert ou #is_warning.
 
-{{< img src="integrations/jira/JiraInstallation8.png" alt="Paramètres monitor" responsive="true">}}
+{{< img src="integrations/jira/JiraInstallation8.png" alt="Paramètres monitor" >}}
 
 ## Données collectées
 ### Métriques

@@ -19,7 +19,7 @@ public_title: Intégration Datadog/Ansible
 short_description: Surveillez les tâches ayant échoué et consultez les exécutions de playbook dans votre flux d'événements.
 version: '1.0'
 ---
-{{< img src="integrations/ansible/ansibledashboard.png" alt="dashboard ansible" responsive="true" popup="true">}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="dashboard ansible"  >}}
 
 ## Présentation
 

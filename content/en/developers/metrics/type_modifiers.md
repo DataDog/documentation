@@ -3,6 +3,7 @@ title: Metric Type Modifiers
 kind: documentation
 aliases:
  - /developers/metrics/metric_type_modifiers
+ - /graphing/faq/as_count_validation
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -77,7 +78,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 While it is not normally required, it is possible to change a metric's type in the [metric summary page][4]:
 
-{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Metric Type" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Metric Type"  style="width:70%;">}}
 
 Example use case:
 

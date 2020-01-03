@@ -21,7 +21,7 @@ public_title: "Intégration Datadog/Amazon\_CodeDeploy"
 short_description: Surveillez vos déploiements en temps réel et mesurez leur durée.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="Dashboard par défaut CodeDeploy" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="Dashboard par défaut CodeDeploy"  >}}
 
 ## Présentation
 
@@ -59,7 +59,7 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 
 L'intégration AWS Codedeploy comprend des événements pour les déploiements réussis, échoués et arrêtés. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="Événements AWS Codedeploy" responsive="true">}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="Événements AWS Codedeploy" >}}
 
 ### Checks de service
 L'intégration AWS Codedeploy n'inclut aucun check de service.

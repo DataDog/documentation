@@ -24,7 +24,7 @@ public_title: Datadog-Amazon Load Balancer インテグレーション
 short_description: Amazon Load Balancer のキーメトリクスを追跡
 version: '1.0'
 ---
-{{< img src="integrations/amazon_elb/elb.png" alt="ELB default dashboard" responsive="true" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_elb/elb.png" alt="ELB default dashboard"   >}}
 
 ## 概要
 
@@ -58,19 +58,19 @@ Datadog は、AWS が提供する 3 つのバリエーションの Elastic Load 
 
 ログを収集するには、まず ELB または ALB でログを有効にします。ELB または ALB ログを AWS S3 バケットに書き込み、[Lambda 関数で使用][6]することができます。詳細については、[AWS のドキュメント][7]を参照してください。
 
-{{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="aws elb log enable" responsive="true" responsive="true" popup="true" style="width:70%;" >}}
+{{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="aws elb log enable"    style="width:70%;" >}}
 
 間隔を 5 分に設定し、S3 バケットを定義します。
 
-{{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="aws elb log configuration" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="aws elb log configuration"    style="width:70%;">}}
 
 #### Datadog へのログの送信
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで ELB ログを含む S3 バケットに手動でトリガーを追加します。トリガーリストから S3 をクリックします。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
    ELB ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][9]に移動し、ログを確認します。
 

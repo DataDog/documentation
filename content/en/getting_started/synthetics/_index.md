@@ -20,7 +20,7 @@ further_reading:
 
 Datadog Synthetics offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetics helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
+{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" >}}
 
 By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetics][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
 

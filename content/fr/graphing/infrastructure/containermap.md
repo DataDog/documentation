@@ -18,7 +18,7 @@ Tout comme les [Hostmaps][1], les [Container Maps][2] vous permettent d'obtenir 
 
 Grâce aux Container Maps, vous pouvez détecter les singularités, identifier les modèles d'utilisation, éviter les problèmes de ressources et prendre des décisions avisées pour gérer au mieux vos conteneurs, le tout depuis une vue unique. Que vous ayez 10, 100 ou 10 000 conteneurs, [Autodiscovery][3] détecte automatiquement les nouveaux conteneurs et les inclut dans les analyses.
 
-{{< img src="graphing/infrastructure/containermap/containermap.png" alt="container map partie 1" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/containermap/containermap.png" alt="container map partie 1"  style="width:80%;">}}
 
 ## Installation
 Une fois l'[Agent][4] déployé, aucune autre configuration n'est requise. Pour recueillir des informations sur les conteneurs Docker avec l'installation standard plutôt qu'avec l'[Agent Docker][5], l'Agent `dd-agentuser` doit être autorisé à accéder à `docker.sock`.

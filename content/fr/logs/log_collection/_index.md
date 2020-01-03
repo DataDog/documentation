@@ -95,7 +95,7 @@ telnet intake.logs.datadoghq.com 10514
 
 Vous obtenez alors le résultat suivant sur votre [page Live Tail][2] :
 
-{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé"  style="width:70%;">}}
 
 Si votre `<CHARGEUTILE>` est au format JSON, Datadog se charge de parser automatiquement ses attributs :
 
@@ -104,7 +104,7 @@ telnet intake.logs.datadoghq.com 10514
 <CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" responsive="true" style="width:100%;">}}
+{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé"  style="width:100%;">}}
 
 
 [1]: https://app.datadoghq.com/account/settings#api
@@ -131,7 +131,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 Vous obtenez alors le résultat suivant sur votre [page Live Tail][2] :
 
-{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé"  style="width:70%;">}}
 
 Si votre `<CHARGEUTILE>` est au format JSON, Datadog se charge de parser automatiquement ses attributs :
 
@@ -140,7 +140,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 <CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" responsive="true" style="width:100%;">}}
+{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé"  style="width:100%;">}}
 
 
 [1]: https://app.datadoghq.com/account/settings#api
@@ -222,13 +222,13 @@ Voici quelques attributs clés auxquels vous devez prêter attention lors de la 
 
 Vos logs sont recueillis et rassemblés dans la vue [Log Explorer][25]. Vous pouvez également rechercher et enrichir vos logs, et recevoir des alertes les concernant.
 
-{{< img src="logs/log_explorer_view.png" alt="Vue Log Explorer" responsive="true" >}}
+{{< img src="logs/log_explorer_view.png" alt="Vue Log Explorer"  >}}
 
 ### Comment tirer le meilleur parti de vos logs d'application
 
 Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom du logger, le thread actuel, le type d'erreur et la trace de pile.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Trace de pile" responsive="true" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Trace de pile"  >}}
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 

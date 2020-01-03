@@ -88,7 +88,7 @@ Lancez la commande `namei` pour obtenir plus d'informations sur les autorisation
 Dans cet exemple, le dossier `application` n'est pas exécutable, l'Agent ne peut donc pas récupérer la liste de ses fichiers. De plus, l'Agent ne dispose pas des autorisations de lecture pour le fichier `error.log`.
 Ajoutez les autorisations manquantes via la [commande chmod][5].
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Autorisation OK" responsive="true" style="width:70%;">}}
+{{< img src="logs/agent-log-permission-ok.png" alt="Autorisation OK"  style="width:70%;">}}
 
 **Remarque** : lorsque vous ajoutez les autorisations de lecture appropriées, assurez-vous que ces autorisations sont correctement configurées dans votre configuration de rotation de log. Dans le cas contraire, à la prochaine rotation de log, l'Agent Datadog peut perdre ses autorisations de lecture.
 Définissez les autorisations sur `644` dans la configuration de la rotation de log pour vous assurer que l'Agent dispose d'un accès en lecture aux fichiers.

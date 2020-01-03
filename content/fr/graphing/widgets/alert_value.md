@@ -15,10 +15,10 @@ further_reading:
 ---
 Les valeurs d'alerte sont des valeurs de requête qui représentent la valeur actuelle d'une métrique dans n'importe quel monitor défini sur votre système :
 
-{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Valeur d'alerte" responsive="true">}}
+{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Valeur d'alerte" >}}
 
 ## Implémentation
-{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Configuration de la valeur d'alerte" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Configuration de la valeur d'alerte"  style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ Les valeurs d'alerte sont des valeurs de requête qui représentent la valeur ac
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

@@ -39,7 +39,7 @@ Datadog では、インフラストラクチャーで発生していることを
 * メトリクス名 `auth.exceptionCount` を送信します。
 * コードインスツルメンテーションは、そのメトリクスに関連付けられるタグ `method:X`、`method:Y`、`exception:A`、`exception:B` を計画します。
 * このメトリクスの基本ロジックは次のようになります。
-{{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" >}}
+{{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1"  >}}
 
 したがって、**特定のホスト**において以下のメトリクスは一意になります。
 
@@ -63,9 +63,9 @@ Datadog は、Pro と Enterprise という 2 つのプランを用意してい�
 
 上の例の場合に、デフォルトのメトリクスカウントを超えることなく 3 つのホストでメトリクスを使用するシナリオを以下に 3 つ示します。
 
-{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300" responsive="true" style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="Custom_Metrics_300"  style="width:75%;">}}
 
-{{< img src="developers/metrics/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1"  style="width:75%;">}}
 
 カスタムメトリクスの送信に適用される[固定のレート制限][5]はありません。デフォルトの割り当てを超えた場合は、Datadog サポート担当者からお客様にご連絡いたします。
 
@@ -86,7 +86,7 @@ Datadog は、Pro と Enterprise という 2 つのプランを用意してい�
 
 このメトリクスの基本ロジックは次のとおりです。
 
-{{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logic_metric"  style="width:75%;">}}
 
 ここから、すべてのサービスが成功と失敗の両方を報告すると仮定すると、**このメトリクスを報告するホストごとに**、最大 1x2x3 = **6 つのカスタムメトリクス**を持ち得ることがわかります。
 
@@ -98,29 +98,29 @@ Datadog は、Pro と Enterprise という 2 つのプランを用意してい�
 
 次のように、この 3 つのホスト全体では異なるメトリクスが 13 個あります。
 
-{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count"  style="width:75%;">}}
 
 管理者であれば、[使用状況ページ][6]の自分のアカウントで、1 時間あたりの合計カスタムメトリクスと、カーディナリティに基づく上位 500 のカスタムメトリクスを確認できます。このメトリクスカウントは[メトリクスサマリーページ][7]にも表示され、service.request.count メトリクスをクリックすると、一意のタグ組み合わせの正確な数を確認できます。
 
 したがって、上の例の最初のホストだけが報告している場合は、以下のようになります。
 
-{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary"  style="width:70%;">}}
 
 2 つ目のホストを追加します。
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="metric_summary_2"  style="width:70%;">}}
 
 上の表のような 3 つ目のホストを追加すると、異なる 13 個のメトリクスが得られます。
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="metric_summary_3"  style="width:70%;">}}
 
 クエリエディターで count: 集計関数を使用して、これを調べることもできます。
 
-{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator"  style="width:70%;">}}
 
 最終的に、`count:service.request.count{*}` というクエリを使用して 13 個のメトリクスが得られます
 
-{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics"  style="width:70%;">}}
 
 ### ゲージ、カウント、ヒストグラム、レートのカスタムメトリクスをカウントする
 [ゲージ][8]は、1 秒ごとの値を表します (例: 気温、Kafka キューオフセット)。
@@ -203,7 +203,7 @@ Datadog は、Pro と Enterprise という 2 つのプランを用意してい�
 
 パーセンタイル集計付き `age` ディストリビューションメトリクスから送信されるカスタムメトリクスは、次のとおりです。
 
-{{< img src="/developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
+{{< img src="/developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries."  style="width:70%;">}}
 
 ## オーバーヘッド
 

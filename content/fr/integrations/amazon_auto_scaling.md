@@ -81,7 +81,7 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 ### Événements
 L'intégration AWS Auto Scaling comprend des événements pour les lancements et les fermetures d'instances EC2. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="Événements AWS Auto Scaling" responsive="true">}}
+{{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="Événements AWS Auto Scaling" >}}
 
 ### Checks de service
 L'intégration AWS Auto Scaling n'inclut aucun check de service.

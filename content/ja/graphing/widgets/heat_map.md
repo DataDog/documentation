@@ -19,11 +19,11 @@ further_reading:
 
 **注**: この可視化で外れ値の検出を行うことはできません。
 
-{{< img src="graphing/widgets/heat_map/heat_map.png" alt="Heat Map" responsive="true">}}
+{{< img src="graphing/widgets/heat_map/heat_map.png" alt="Heat Map" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 

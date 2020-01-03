@@ -18,7 +18,7 @@ public_title: Datadog-GitHub インテグレーション
 short_description: サービスのパフォーマンスに影響するコミットとプルリクエストを特定
 version: '1.0'
 ---
-{{< img src="integrations/github/git_integration_screen.png" alt="Git event" responsive="true" popup="true">}}
+{{< img src="integrations/github/git_integration_screen.png" alt="Git event"  >}}
 
 ## 概要
 
@@ -38,7 +38,7 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
 2. 左側のナビゲーションメニューで Webhooks エントリを選択します。
 3. Add Webhook ボタンをクリックします。
 
-    {{< img src="integrations/github/github_first_steps.png" alt="github first steps" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="integrations/github/github_first_steps.png" alt="github first steps"   style="width:80%;">}}
 
 4. 以下の URL を Payload URL フィールドに追加します。`<DATADOG_API_KEY>` は、[ご使用の Datadog API キー][1]に置き換えてください。
 
@@ -48,7 +48,7 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
 
 5. Content Type を `application/json` に設定します。
 
-    {{< img src="integrations/github/webhook_configuration_2.png" alt="Webhook configuration" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="integrations/github/webhook_configuration_2.png" alt="Webhook configuration"   style="width:80%;">}}
 
 6. Which events would you like to trigger this webhook? では、Let me select individual events. オプションを使用して、Datadog に何を送信するかを選択できます。Datadog-GitHub インテグレーションでは以下がサポートされています。
     * プッシュ (新しいコミット)
@@ -63,11 +63,11 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
 2. リポジトリごとに、監視するブランチを追加します。ユーザーまたはオーガニゼーションのすべてのリポジトリを追加する場合は、ワイルドカードを使用します。
     たとえば、DataDog/Documentation リポジトリの `master` ブランチに関連するすべてのイベントを収集する場合は、以下のように設定します。
 
-    {{< img src="integrations/github/github_classic_configuration.png" alt="github classic configuration" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="integrations/github/github_classic_configuration.png" alt="github classic configuration"   style="width:50%;">}}
 
     DataDog オーガニゼーションの**すべての** `master` ブランチに関連するすべてのイベントを収集する場合は、次のように設定します。
 
-    {{< img src="integrations/github/get_all_branches.png" alt="github all branches" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="integrations/github/get_all_branches.png" alt="github all branches"   style="width:50%;">}}
 
 ## 収集データ
 

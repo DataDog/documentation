@@ -12,7 +12,7 @@ Datadog で監視されているすべての Azure 仮想マシンに対して�
 
 [Datadog-Azure インテグレーションタイル][1]を使用して、Datadog が監視する VM を絞り込むことができます。**Configuration** タブに移動し、既存のテナントを編集するか、新しいテナントを追加します。各テナントは、**Optionally filter to VMs with tag** の設定に基づいて制御されます。次は、[ホストタグ][2]で VM を制限する例です。
 
-{{< img src="account_management/billing/azure_vm_filter.png" alt="Azure VM Filter" responsive="true">}}
+{{< img src="account_management/billing/azure_vm_filter.png" alt="Azure VM Filter" >}}
 
 インテグレーションタイルで既存の Azure テナントに制限を追加した場合は、それまでに検出された VM が[インフラストラクチャーリスト][3]に最長 24 時間残る可能性があります。移行時間中、VM のステータスは `???` と表示されます。これは、課金対象に含まれません。
 

@@ -14,11 +14,11 @@ Le widget Texte libre vous permet d'ajouter des titres à votre [screenboard][1]
 
 Cela sert généralement à indiquer la fonction générale du dashboard.
 
-{{< img src="graphing/widgets/free_text/free_text.png" alt="Texte libre" responsive="true">}}
+{{< img src="graphing/widgets/free_text/free_text.png" alt="Texte libre" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Implémentation texte libre" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Implémentation texte libre"  style="width:80%;">}}
 
 ### Configuration
 

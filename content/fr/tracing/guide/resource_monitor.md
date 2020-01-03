@@ -10,7 +10,7 @@ Le système de surveillance des performances des applications de Datadog fait ap
 Chaque graphique au sein des dashboards de [service][3] et de [ressource][4] de l'APM est constitué d'un certain nombre de métriques `trace.*`.
 Utilisez [le bouton de téléchargement en haut du graphique][5] pour enregistrer ces métriques dans un timeboard existant. Cette action peut être effectuée aussi bien pour les métriques de service que pour les métriques de ressource :
 
-{{< img src="tracing/faq/apm_save_1.png" alt="Enregistrement depuis l’APM" responsive="true" >}}
+{{< img src="tracing/faq/apm_save_1.png" alt="Enregistrement depuis l’APM"  >}}
 
 **Remarque** : pour créer un monitor sur une ressource, utilisez le tag de ressource qui contient un hash du nom de la ressource. Pour ce faire, enregistrez la métrique dans un Timeboard et utilisez la même requête dans un monitor de métrique :
 
@@ -28,11 +28,11 @@ L'inconvénient de cette option est que le champ affiche le hash de la ressource
 Puisque chaque service contient un seul nom de premier niveau et qu'il est possible de configurer une alerte multiple par [environnement][7], ressource et service, il suffit d'obtenir le nom de premier niveau pour créer l'URL.
 Pour récupérer ce nom, cliquez sur le service qui vous intéresse. Par exemple, pour le service Mcnulty-Web de Datadog, le nom de premier niveau est `pylons.request` :
 
-{{< img src="tracing/faq/top_level_name.png" alt="Nom de premier niveau" responsive="true" >}}
+{{< img src="tracing/faq/top_level_name.png" alt="Nom de premier niveau"  >}}
 
 La configuration du monitor ressemble alors à ce qui suit :
 
-{{< img src="tracing/faq/top_level_monitor.png" alt="Monitor de premier niveau" responsive="true" >}}
+{{< img src="tracing/faq/top_level_monitor.png" alt="Monitor de premier niveau"  >}}
 
 
 [1]: /fr/tracing/visualization/service

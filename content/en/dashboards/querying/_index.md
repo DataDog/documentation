@@ -24,7 +24,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab"  style="width:75%;" >}}
 
 ## Configuring a graph
 
@@ -69,7 +69,7 @@ To manually rollup the data, use the [rollup function][8]. Click the plus sign t
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 60-second buckets:
 
-{{< img src="graphing/using_graphs/references-graphing-rollup-example.png" alt="rollup example" responsive="true" style="width:90%;">}}
+{{< img src="graphing/using_graphs/references-graphing-rollup-example.png" alt="rollup example"  style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -89,7 +89,7 @@ Datadog also supports the ability to graph your metrics with various arithmetic 
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
-{{< img src="graphing/using_graphs/arithmetic_2.png" alt="Arithmetic 2" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/arithmetic_2.png" alt="Arithmetic 2"  style="width:75%;" >}}
 
 #### Arithmetic between two metrics
 
@@ -103,7 +103,7 @@ Use the **Advanced...** option in the graph editor and select **Add Query**. Eac
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example):
 
-{{< img src="graphing/using_graphs/arithmetic_3.png" alt="Arithmetic 3" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/arithmetic_3.png" alt="Arithmetic 3"  style="width:75%;" >}}
 
 To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 

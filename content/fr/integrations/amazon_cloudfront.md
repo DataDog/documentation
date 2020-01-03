@@ -43,9 +43,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Lorsque vous activez la journalisation pour une distribution, indiquez le compartiment Amazon S3 dans lequel vous souhaitez que CloudFront stocke vos logs. Si vous utilisez Amazon S3 comme source, nous vous recommandons de ne pas utiliser le même compartiment pour vos fichiers de log. L'utilisation d'un compartiment distinct simplifie la maintenance.
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Journalisation Cloudfront 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Journalisation Cloudfront 1"   style="width:70%;">}}
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Journalisation Cloudfront 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Journalisation Cloudfront 1"   style="width:70%;">}}
 
 **Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe pour les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][4].
 
@@ -53,9 +53,9 @@ Lorsque vous activez la journalisation pour une distribution, indiquez le compar
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Cloudfront dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3"   style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudFront et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3"   style="width:70%;">}}
 
 Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vos logs !
 

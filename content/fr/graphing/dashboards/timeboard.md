@@ -40,7 +40,7 @@ Après avoir [créé votre timeboard][8], ajoutez des graphiques à l'aide du bo
 
 Pour configurer une superposition d'événements, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Événements**, puis saisissez une [requête][10] dans la zone de recherche. Cela remplace les superpositions d'événements ajoutées lors de la conception du timeboard et applique les réglages à l'ensemble des graphiques. La superposition affiche le nombre d'occurrences des événements sur vos graphiques de séries temporelles et présente la liste des événements à droite de la fenêtre.
 
-{{< img src="graphing/dashboards/timeboard/events_overlay.png" alt="Superposition d'événements" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/timeboard/events_overlay.png" alt="Superposition d'événements"  style="width:75%;">}}
 
 ### Logs
 
@@ -50,7 +50,7 @@ Pour configurer une superposition de logs, cliquez sur le lien **Search...** dan
 
 Cliquez sur un graphique de série temporelle d'un dashboard pour ouvrir le menu des options :
 
-{{< img src="graphing/dashboards/timeboard/metric_to_logs.png" alt="Logs associés" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/timeboard/metric_to_logs.png" alt="Logs associés"  style="width:80%;">}}
 
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|

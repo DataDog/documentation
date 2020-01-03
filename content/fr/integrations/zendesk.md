@@ -18,7 +18,7 @@ public_title: Intégration Datadog/Zendesk
 short_description: Surveillez le nombre de nouveaux tickets par rapport aux tickets résolus et générez automatiquement des tickets à partir de Datadog monitors.
 version: '1.0'
 ---
-{{< img src="integrations/zendesk/zendesk_dash.png" alt="Dashboard Zendesk" responsive="true" popup="true">}}
+{{< img src="integrations/zendesk/zendesk_dash.png" alt="Dashboard Zendesk"  >}}
 
 ## Présentation
 

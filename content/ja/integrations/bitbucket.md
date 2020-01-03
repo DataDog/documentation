@@ -22,7 +22,7 @@ public_title: Datadog-Bitbucket インテグレーション
 short_description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認 services.
 version: '1.0'
 ---
-{{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="integrations bitbucket" responsive="true" popup="true">}}
+{{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="integrations bitbucket"  >}}
 
 ## 概要
 

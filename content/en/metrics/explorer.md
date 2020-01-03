@@ -23,7 +23,7 @@ Click on the **Graph** text box to see a list of metrics you have submitted to D
 
 Above your graphs, you can specify the timeframe and graph size.
 
-{{< img src="graphing/metrics/explorer/graphs.png" alt="Metrics Explorer" responsive="true" style="width:80%;" >}}
+{{< img src="graphing/metrics/explorer/graphs.png" alt="Metrics Explorer"  style="width:80%;" >}}
 
 **Note**: The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
 

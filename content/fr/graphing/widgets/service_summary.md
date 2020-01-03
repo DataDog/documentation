@@ -12,11 +12,11 @@ further_reading:
 ---
 Le résumé de service affiche le graphique d'un [service][1] précis dans votre screenboard.
 
-{{< img src="graphing/widgets/service_summary/service_summary.png" alt="résumé de service" responsive="true">}}
+{{< img src="graphing/widgets/service_summary/service_summary.png" alt="résumé de service" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="configuration du résumé de service" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="configuration du résumé de service"  style="width:80%;">}}
 
 ### Configuration
 

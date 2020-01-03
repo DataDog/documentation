@@ -70,7 +70,7 @@ Chaque valeur ou point de données de cette métrique envoyée en tant que `COUN
 
 La représentation graphique de cette métrique `COUNT` donne ce qui suit :
 
-{{< img src="developers/metrics/types/count_metric.png" alt="Métrique count" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric.png" alt="Métrique count" >}}
 
 **Remarque** : les valeurs des métriques count StatsD s'affichent avec une valeur décimale dans Datadog, car elles sont normalisées sur l'intervalle de transmission et renvoyées en unités par seconde.
 
@@ -101,7 +101,7 @@ Cette séquence de `0.33`, `0.66`, `0` se répète. **Remarque** : lorsque la v
 
 Le type de métrique `RATE` étant la variation normalisée par seconde du nombre de requêtes, sa représentation graphique donne ce qui suit :
 
-{{< img src="developers/metrics/types/rate_metric.png" alt="Métrique rate" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric.png" alt="Métrique rate" >}}
 
 Découvrez comment envoyer des métriques rate :
 
@@ -125,7 +125,7 @@ Chaque valeur ou point de données représente le nombre total de requêtes reç
 
 La représentation graphique de cette métrique `GAUGE` donne ce qui suit :
 
-{{< img src="developers/metrics/types/gauge_metric.png" alt="Métrique gauge" responsive="true">}}
+{{< img src="developers/metrics/types/gauge_metric.png" alt="Métrique gauge" >}}
 
 Découvrez comment envoyer des métriques gauge :
 

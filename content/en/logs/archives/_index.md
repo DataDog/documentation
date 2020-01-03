@@ -25,7 +25,7 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 
 **Note:** only Datadog users with admin status can create, modify, or delete log archive configurations.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
 
 ## Create and configure a storage bucket
 
@@ -70,13 +70,13 @@ Next, grant Datadog permissions to write log archives to your S3 bucket. US site
 
 4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
 
-    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog" responsive="true" style="width:75%;">}}
+    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
 ### Server side encryption (SSE)
 
 To add server side encryption to your S3 log archives, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
-{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save." responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
@@ -91,11 +91,11 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 1. Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 2. Set up the [GCP integration][3] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCS Service Account that Datadog can use][4] to integrate with.
 3. Next, grant your Datadog GCP Service Account sufficient permissions to write your archives to your bucket. If you’re creating a new Service Account, this can be done from the [GCP Credentials page][5]. If you’re updating an existing Service Account, this can be done from the [GCP IAM Admin page][6]). Add the roles under **Storage** called **Storage Object Creator** (for generating archives) and **Storage Object Viewer** (for rehydrating from archives).
-  {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
+  {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." style="width:75%;">}}
 4. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optional: input a prefix directory for all the content of your log archives. Then save your archive.
 
-  {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." responsive="true" style="width:75%;">}}
+  {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account."  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -144,7 +144,7 @@ For example, if you create a first archive filtered to the `env:prod` tag and a 
 
 Logs enter the first archive whose filter they match on.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on." responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
 
 {{< whatsnext desc="Next, learn how to access your archived log content from Datadog:" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}

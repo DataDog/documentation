@@ -16,7 +16,7 @@ public_title: Intégration Datadog/xMatters
 short_description: Utilisez xMatters comme canal de notification pour les alertes et les événements Datadog.
 version: '1.0'
 ---
-{{< img src="integrations/xmatters/xmatters.png" alt="Présentation de Xmatters" responsive="true" popup="true">}}
+{{< img src="integrations/xmatters/xmatters.png" alt="Présentation de Xmatters"  >}}
 
 ## Présentation
 

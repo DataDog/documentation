@@ -46,7 +46,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 最終的に次のような構造化ログになります。
 
-{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1"  style="width:80%;">}}
 
 **注**: 1 つの Grok パーサーに複数のパース規則がある場合、特定のログに一致する規則は 1 つだけです。上から下の順で最初に一致する規則が、パースを行う規則になります。
 
@@ -122,7 +122,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 Grok プロセッサータイルの下部に、Advanced Settings セクションがあります。
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
 * Grok プロセッサーをデフォルトの `message` 属性以外の属性に適用するには、**Extract from** フィールドを使用します。
 
@@ -149,7 +149,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
 
 ## 例
 以下に、パーサーの具体的な使用例をいくつか挙げます。
@@ -176,12 +176,12 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2"  style="width:80%;">}}
 
 パラメーターの名前はログに既に含まれているため、指定する必要はありません。
 **抽出**属性 `my_attribute` を規則パターンに追加すると、次のようになります。
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis"  style="width:80%;">}}
 
 key と value を区切るデフォルトのセパレーターが `=` でない場合は、パース規則にパラメーターを追加してセパレーターを指定します。
 
@@ -197,7 +197,7 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser"  style="width:80%;" >}}
 
 ログの属性値に、URL の `/` などの特殊文字が含まれる場合は、それをパース規則のホワイトリストに追加します。
 
@@ -213,7 +213,7 @@ url=https://app.datadoghq.com/event/stream user=john
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Key value whitelist" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Key value whitelist"  style="width:80%;" >}}
 
 その他の例
 
@@ -266,9 +266,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **結果**
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4"  style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis"  style="width:80%;" >}}
 
 ### オプションの属性
 
@@ -286,9 +286,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **注**: 通常は、オプション部分にスペースを入れる必要があります。そうしないと、常にスペースが 2 つ入ることになり、規則は何にも一致しなくなります。
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5"  style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis"  style="width:80%;" >}}
 
 ### 正規表現
 リテラル正規表現規則に基づいてログメッセージの部分文字列を見つけるには、正規表現マッチャーを使用します。
@@ -305,7 +305,7 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
 
 ## その他の参考資料
 

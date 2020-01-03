@@ -11,11 +11,11 @@ kind: documentation
 
 Transforme cette série temporelle sinus `sin{*}` :
 
-{{< img src="graphing/functions/arithmetic/sinus.png" alt="Fonction sinus" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus.png" alt="Fonction sinus"  style="width:80%;">}}
 
 en la fonction `abs(sin{*})` :
 
-{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Fonction sinus avec valeur abs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Fonction sinus avec valeur abs"  style="width:80%;">}}
 
 ## Opérations logarithmiques
 
@@ -29,7 +29,7 @@ Exemple :
 
 Si vous avez une métrique `x{*}` qui s'incrémente de 1 pour chaque point de données, alors `log2(x{*})` donne le graphique suivant :
 
-{{< img src="graphing/functions/arithmetic/log2.png" alt="fonction log2" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/log2.png" alt="fonction log2"  style="width:80%;">}}
 
 ### log10
 
@@ -41,7 +41,7 @@ Exemple :
 
 Si vous avez une métrique `x{*}` qui s'incrémente de 1 pour chaque point de données, alors `log10(x{*})` donne le graphique suivant :
 
-{{< img src="graphing/functions/arithmetic/log10.png" alt="function log10" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/log10.png" alt="function log10"  style="width:80%;">}}
 
 ## Somme cumulée
 
@@ -53,7 +53,7 @@ Exemple :
 
 Si vous avez une métrique `const_1{*}` qui est une constante de valeur `1`, alors `cumsum(const_1{*})` donne le graphique suivant :
 
-{{< img src="graphing/functions/arithmetic/cumsum.png" alt="fonction somme cumulée avec valeur absolue" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/cumsum.png" alt="fonction somme cumulée avec valeur absolue"  style="width:80%;">}}
 
 ## Intégrale
 
@@ -63,7 +63,7 @@ Si vous avez une métrique `const_1{*}` qui est une constante de valeur `1`, alo
 
 **Remarque** : la fonction `integral()` de Datadog représente la somme cumulée de `[delta durée] x [delta valeur]` sur toutes les paires de points consécutives dans l'intervalle visible d'une métrique donnée.
 
-{{< img src="graphing/functions/arithmetic/integral.png" alt="fonction intégrale avec valeur absolue" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/integral.png" alt="fonction intégrale avec valeur absolue"  style="width:80%;">}}
 
 ## Autres fonctions
 

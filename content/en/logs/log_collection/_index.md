@@ -96,7 +96,7 @@ telnet intake.logs.datadoghq.com 10514
 
 This produces the following result in your [live tail page][2]:
 
-{{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Custom telnet"  style="width:70%;">}}
 
 In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
@@ -105,7 +105,7 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
@@ -131,7 +131,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 This produces the following result in your [live tail page][2]:
 
-{{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Custom telnet"  style="width:70%;">}}
 
 In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
@@ -140,7 +140,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
@@ -215,13 +215,13 @@ Here are some key attributes you should pay attention to when setting up your pr
 
 Your logs are collected and centralized into the [Log Explorer][25] view. You can also search, enrich, and alert on your logs.
 
-{{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
+{{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
 
 ### How to get the most of your application logs
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace"  >}}
 
 To enable these functionalities use the following attribute names:
 

@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Lightbend
 short_description: Surveillez les événements relatifs aux acteurs et au répartiteur pour les applications basées sur Akka.
 version: '1.0'
 ---
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Dashboard Lightbendrp" responsive="true" popup="true">}}
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Dashboard Lightbendrp"  >}}
 
 ## Présentation
 

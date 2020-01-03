@@ -65,7 +65,7 @@ Display the embed graph on a website by using the HTML in the response object. N
 
 **Example embed**:
 
-{{< img src="graphing/faq/embeddable_graph01.png" alt="Embed Graph with No Filter" responsive="true">}}
+{{< img src="graphing/faq/embeddable_graph01.png" alt="Embed Graph with No Filter" >}}
 
 Use the template variable to change the graph by updating the iframe URL to define a filter. In the HTML below, `*` is replaced with `host:embed-graph-test`.
 
@@ -75,7 +75,7 @@ Use the template variable to change the graph by updating the iframe URL to defi
 
 **Example embed**:
 
-{{< img src="graphing/faq/embeddable_graph02.png" alt="Embed Graph with Filter" responsive="true">}}
+{{< img src="graphing/faq/embeddable_graph02.png" alt="Embed Graph with Filter" >}}
 
 ## Further Reading
 

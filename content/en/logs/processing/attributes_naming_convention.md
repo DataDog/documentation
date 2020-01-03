@@ -32,7 +32,7 @@ Standard Attributes have been designed to help your organization to define its o
 Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list), but your organization can decide to extend or modify this list.
 The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
 To enforce standard attributes, administrators have the right to re-copy an existing set of non-standard attributes into a set of standard ones. This enables noncompliant logs sources to become compliant without losing any previous information.
 
@@ -40,7 +40,7 @@ To enforce standard attributes, administrators have the right to re-copy an exis
 
 Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics).
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes"  style="width:60%;">}}
 
 If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align.
 
@@ -48,7 +48,7 @@ If you are an administrator or prescriptor of the naming convention in your orga
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
-{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes"  style="width:80%;">}}
 
 ### Add or update standard attributes
 
@@ -61,7 +61,7 @@ A standard attribute is defined by its:
 
 The standard attribute panel pops when you add a new standard attribute or edit an existing one:
 
-{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
 
 Any element of the standard attributes can then be filled or updated.
 

@@ -8,6 +8,7 @@ aliases:
     - /graphing/miscellaneous/metrics_arithmetic
     - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
     - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+    - /graphing/
 description: Visualize your data to gain insight
 further_reading:
 - link: "graphing/dashboards/template_variables"
@@ -29,7 +30,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
 
-{{< img src="graphing/dashboards/dashboard_list2.png" alt="Dashboard List page" responsive="true" >}}
+{{< img src="graphing/dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
 
 ### New list
 
@@ -39,7 +40,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
+{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list"  style="width:70%;">}}
 
 ### Lists
 
@@ -53,13 +54,13 @@ Favorite lists are dashboard lists starred by the current logged in user. **Note
 
 Preset lists are default dashboard lists in Datadog:
 
-| List                     | Description                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| All Custom               | Custom dashboards made by any team member in your organization's account.   |
-| All Hosts                | Automatic dashboards created by Datadog when you add a host.                |
-| All Integrations         | Automatic dashboards created by Datadog when you install an integration.    |
-| Created By You           | Custom dashboards created by the currently logged in user.       |
-| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user. |
+| List                     | Description                                                               |
+|--------------------------|---------------------------------------------------------------------------|
+| All Custom               | Custom dashboards made by any team member in your organization's account. |
+| All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
+| All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
+| Created By You           | Custom dashboards created by the currently logged in user.                |
+| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user.         |
 
 #### Shared, Editable Lists
 
@@ -71,7 +72,7 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| Star       | All dashboards starred by the currently logged in user.                        |
+| Star       | All dashboards starred by the currently logged in user.                                  |
 | Icon       | An icon indicating the type of dashboard (timeboard or screenboard).                     |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Modified   | The last modified date of a custom dashboard.                                            |
@@ -110,13 +111,13 @@ From an individual dashboard, you can copy, import, or export a dashboard's JSON
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copy dashboard" responsive="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/copy_dashboard.png" alt="Copy dashboard"  style="width:30%;">}}
 
 ### Suggested dashboards and active users
 
 From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
 
-{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" responsive="true">}}
+{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
 ## Further Reading
 

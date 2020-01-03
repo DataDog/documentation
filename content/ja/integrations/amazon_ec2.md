@@ -57,7 +57,7 @@ Datadog は、Cloudwatch API からのホストステータスに基づいて、
 
 EC2 インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[AWS インテグレーションタイル][2]で **EC2 automuting** チェックボックスをオンにします。
 
-{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="AWS EC2 Automuting" responsive="true">}}
+{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="AWS EC2 Automuting" >}}
 
 ### AWS Systems Manager を使用した Agent のインストール
 
@@ -122,7 +122,7 @@ AWS EC2 インテグレーションには、サービスのチェック機能は
 ### イベント
 AWS EC2 インテグレーションには、インスタンスの警告と共に、スケジュール設定されたメンテナンスと次回のメンテナンスのイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="AWS EC2 Events" responsive="true">}}
+{{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="AWS EC2 Events" >}}
 
 ## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。

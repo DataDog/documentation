@@ -18,7 +18,7 @@ further_reading:
   text: "Network Widget"
 ---
 
-{{< img src="network_performance_monitoring/network_table/main_page.png" alt="Main page" responsive="true">}}
+{{< img src="network_performance_monitoring/network_table/main_page.png" alt="Main page" >}}
 
 ## Queries
 
@@ -26,21 +26,21 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-service flows when aggregated over a five-minute time period.
 
-{{< img src="network_performance_monitoring/network_table/context.png" alt="context" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/context.png" alt="context"  style="width:80%;">}}
 
 The next example shows all flows from IP addresses representing a service (`service:web-store`) to an availability zone (`availability-zone:us-east1-b`):
 
-{{< img src="network_performance_monitoring/network_table/flow_table_filtered.png" alt="Flow table filtered" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/flow_table_filtered.png" alt="Flow table filtered"  style="width:80%;">}}
 
 ### Facet Panels
 
 The facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
-{{< img src="network_performance_monitoring/network_table/facet_panels.png" alt="Facet panels" responsive="true" style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_table/facet_panels.png" alt="Facet panels"  style="width:30%;">}}
 
 ## Network Data
 
-{{< img src="network_performance_monitoring/network_table/network_data.png" alt="network data" responsive="true" style="width:90%;" >}}
+{{< img src="network_performance_monitoring/network_table/network_data.png" alt="network data"  style="width:90%;" >}}
 
 Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
 
@@ -53,7 +53,7 @@ Values displayed might be different for `sent_metric(source to destination)` and
 
 ### Graphs
 
-{{< img src="network_performance_monitoring/network_table/graphs_npm.png" alt="Graph npm" responsive="true" style="width:80%;" >}}
+{{< img src="network_performance_monitoring/network_table/graphs_npm.png" alt="Graph npm"  style="width:80%;" >}}
 
 The following graphs are available:
 
@@ -65,19 +65,19 @@ The following graphs are available:
 
 On each graph, select the settings cog in the upper right corner to change the Y-axis scale or the graph type displayed:
 
-{{< img src="network_performance_monitoring/network_table/graph_settings.png" alt="Graph settings" responsive="true" style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_table/graph_settings.png" alt="Graph settings"  style="width:30%;">}}
 
 ### Table
 
 The network table breaks down the _Volume_, _Throughput_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your query.
 
-{{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table"  style="width:80%;">}}
 
 **Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
 Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
 
-{{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Flow Details" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Flow Details"  style="width:80%;">}}
 
 ## Further Reading
 

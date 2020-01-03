@@ -24,7 +24,7 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 
 **Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with that monitor. For that, use the Manage Downtimes feature or the [API][1].
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert"  style="width:80%;">}}
 
 If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.
 
@@ -40,18 +40,18 @@ All alerted states are included on the [weekly monitor report][3] even if the mo
 
 Navigate to the [Manage Downtime][4] page by hovering over **Monitors** in the main menu, then select **Manage Downtime**.
 
-{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" >}}
+{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav"  >}}
 
 The Manage Downtime page displays a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
 
-{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage" responsive="true" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage"  style="width:80%;">}}
 
 ## Schedule Downtime
 
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
-   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-silence" responsive="true" style="width:80%;">}}
+   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-silence"  style="width:80%;">}}
    **Silencing by monitor name**
    You must select at least one monitor. If you choose to leave the selection field empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Refer to the [scope section][5] of the Graphing Primer using JSON for further information about scope.
    **Silencing by monitor tags**
@@ -59,11 +59,11 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
    For either method, if you choose to silence all monitors constrained by a scope, clicking *Preview affected monitors* shows which monitors are affected. Any monitors within your scope that are created or edited after the downtime is scheduled are also silenced. Note that if a multi-alert is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
 2. Set a schedule.
-  {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule"  style="width:80%;">}}
   You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a [repeating schedule to accommodate regularly scheduled downtimes](#recurring-downtimes).
 
 3. Add an optional message to notify your team
-  {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify"  style="width:80%;">}}
   Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][7] as well as Datadog's @-notification syntax. The *Notify your team* field allows you to specify team members or send the message to a service [integration][8].
 
 **Note**: Create the downtime before you create the monitor or before you mute the group.

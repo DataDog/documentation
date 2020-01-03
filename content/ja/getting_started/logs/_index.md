@@ -60,7 +60,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
-{{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet" responsive="true" >}}
+{{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet"  >}}
 
 あるいは、Datadog によって自動的に解析される以下の JSON オブジェクトが生成されます。
 
@@ -87,7 +87,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
-{{< img src="getting_started/logs/json_log.png" alt="JSON logs" responsive="true" >}}
+{{< img src="getting_started/logs/json_log.png" alt="JSON logs"  >}}
 
 ## ファイルからのログの送信
 
@@ -205,7 +205,7 @@ $ echo "New line of log in the log file" >> log_file_to_monitor.log
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
-{{< img src="getting_started/logs/file_log_example.png" alt="File log example" responsive="true" >}}
+{{< img src="getting_started/logs/file_log_example.png" alt="File log example"  >}}
 
 ## その他の参考資料
 

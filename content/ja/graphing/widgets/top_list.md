@@ -14,11 +14,11 @@ further_reading:
 ---
 トップリスト可視化機能を使用すると、`hostname`、`service` などのタグ値のリストを任意のメトリクス値の最大値または最小値と共に表示できます。たとえば、CPU を多く使用しているサービス、ディスクの空き容量が少ないホストなどをリストできます。
 
-{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
+{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -38,7 +38,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

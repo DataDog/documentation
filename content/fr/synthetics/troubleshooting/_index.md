@@ -27,7 +27,7 @@ Ce problème survient parce que cURL définit automatiquement un `user-agent` en
 Pour résoudre ce problème, vous devez définir un `user-agent` manuellement dans vos tests API. Définissez le `user-agent` dans votre test API en accédant à **Make a request** > **Advanced Options** > **Header** > **Request Header**. Définissez le champ **Name** sur `user-agent` et le champ **Value** sur n'importe quel `user-agent` valide, tel que `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` pour un ordinateur tournant sous Mac OS X avec le navigateur Safari.
 
 
-{{< img src="synthetics/user-agent.gif" alt="Page d'accueil de Synthetics" responsive="true">}}
+{{< img src="synthetics/user-agent.gif" alt="Page d'accueil de Synthetics" >}}
 
 ## Tests API et tests Browser
 

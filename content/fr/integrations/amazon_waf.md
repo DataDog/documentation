@@ -40,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 3. Vous devez cocher `Collect custom metrics` dans le carré d'intégration AWS pour recueillir les métriques AWS WAF. Cliquez ensuite sur le bouton `Update Configuration` :
 
-  {{< img src="integrations/amazon_waf/waf.png" alt="réglages waf" responsive="true">}}
+  {{< img src="integrations/amazon_waf/waf.png" alt="réglages waf" >}}
 
 ### Collecte de logs
 
@@ -58,9 +58,9 @@ Les logs WAF sont alors recueillis et envoyés à un compartiment S3.
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs WAF dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3"   style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs WAF et remplacez le type d'événement par `Object Created (All)`, puis cliquez sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3"   style="width:70%;">}}
 
 ## Données collectées
 ### Métriques

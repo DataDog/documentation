@@ -22,7 +22,7 @@ further_reading:
 
 Datadog Synthetics により、Datadog プラットフォームに新たな可視性を実現するレイヤーが追加されました。Synthetics では、ユーザーリクエストのシミュレーションとブラウザーのレンダリングを通してアプリケーションと API エンドポイントを監視することで、稼働時間を確保し、局所的な問題を特定して、アプリケーションのパフォーマンスを追跡できます。Synthetics をメトリクス、トレース、ログと統合することにより、Datadog はユーザーが経験しているとおりにすべてのシステムの動作状況を観察することができます。
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
+{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" >}}
 
 ## 検索
 
@@ -56,7 +56,7 @@ Datadog Synthetics により、Datadog プラットフォームに新たな可�
 
 [API tests][2] または[browser test][3]を作成するために、Syntheticsページの右上にある**Create a New check +** iを選択肢します。テストが失敗した場合、エンドポイントは再テストされません。稼働時間はエンドポイントを直接`down`と見なします。
 
-{{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/create_a_check.png" alt="Create a check"  style="width:80%;">}}
 
 ## メトリクス
 

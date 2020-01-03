@@ -14,11 +14,11 @@ Consultez la [page Metrics Explorer][1] pour commencer à examiner les [métriq
 
 Cliquez sur la zone de texte *Graph* pour afficher la liste de l'ensemble des métriques rassemblées par Datadog depuis votre application. Vous pouvez également effectuer des recherches au sein de la liste en saisissant un terme dans la zone. Sélectionnez des métriques pour remplir en temps réel des visualisations graphiques dans le volet de droite. Par défaut, vous pouvez afficher jusqu'à 20 graphiques. Cette limite peut être modifiée en cliquant sur l'icône en forme d'engrenage pour accéder aux options.
 
-{{< img src="graphing/metrics/explorer/explorer.png" alt="Metrics Explorer" responsive="true" style="width:60%;" >}}
+{{< img src="graphing/metrics/explorer/explorer.png" alt="Metrics Explorer"  style="width:60%;" >}}
 
 L'option « Over » vous permet d'affiner vos résultats en fonction d'un tag. Sous « One graph per », vous pouvez choisir de séparer une métrique en plusieurs graphiques par host, conteneur, région, équipe, etc.
 
-{{< img src="graphing/metrics/explorer/split-by-team.png" alt="Séparation par équipe" responsive="true" style="width:60%;">}}
+{{< img src="graphing/metrics/explorer/split-by-team.png" alt="Séparation par équipe"  style="width:60%;">}}
 
 Vous pouvez également exporter ces graphiques au sein de timeboards existants ou créer un timeboard à partir de ces graphiques.
 

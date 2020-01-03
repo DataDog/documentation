@@ -40,7 +40,7 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 3. AWS WAF メトリクスを収集するには、AWS インテグレーションタイルで `Collect custom metrics` を選択する必要があります。選択したら、`Update Configuration` ボタンをクリックします。
 
-  {{< img src="integrations/amazon_waf/waf.png" alt="waf settings" responsive="true">}}
+  {{< img src="integrations/amazon_waf/waf.png" alt="waf settings" >}}
 
 ###         - containerPort: 8126
           hostPort: 8126
@@ -61,9 +61,9 @@ Web ACL で分析されたトラフィックに関する詳細な情報を取得
 
 1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで WAF ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 ## 収集データ
 ### メトリクス

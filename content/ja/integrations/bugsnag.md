@@ -41,10 +41,10 @@ Bugsnag を Datadog と統合するには、以下の手順に従います。
 2. **Team Notifications** を選択し、次に **Datadog** を選択します。
 
 3. エラー通知トリガーを選択して、Datadog に表示する通知をカスタマイズします。
-{{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_setting" responsive="true" popup="true">}}
+{{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_setting"  >}}
 
 4. 特定のリリース段階や重大度のエラーを表示するには、通知トリガーにカスタムフィルターを適用します。
-{{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filters_setting" responsive="true" popup="true">}}
+{{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filters_setting"  >}}
 
 5. Datadog API キーを入力します。
 

@@ -88,7 +88,7 @@ L'icône en forme d'engrenage des paramètres vous permet de cocher ou de décoc
 
 Cliquez sur une fonction spécifique dans le tableau de synthèse des fonctions pour accéder à la page détaillée des fonctions. Cette page fournit des informations détaillées sur les logs et traces de cette fonction.
 
-{{< img src="graphing/infrastructure/serverless/functiondetailview.png" alt="Informatique sans serveur - Vue détaillée des fonctions" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/functiondetailview.png" alt="Informatique sans serveur - Vue détaillée des fonctions" >}}
 
 ### Graphiques de synthèse et sélecteur d'intervalle
 
@@ -98,19 +98,19 @@ Utilisez les graphiques de synthèse en haut de l'écran et le sélecteur de dur
 
 Grâce à l'intégration AWS X-Ray, les traces de la fonction visualisée apparaissent dans la section `Traces`. Vous pouvez les trier selon leurs attributs, comme leur date, durée ou statut.
 
-{{< img src="graphing/infrastructure/serverless/traces.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/traces.png" alt="Traces" >}}
 
 ### Logs
 
 La section `Logs` agrège les logs de tous les appels récents de la fonction actuelle. Elle se met à jour en temps réel afin d'afficher les nouveaux logs envoyés à Datadog par vos fonctions.
 
-{{< img src="graphing/infrastructure/serverless/logs2.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/logs2.png" alt="Traces" >}}
 
 ## Vue détaillée des traces
 
 Cliquez sur une trace spécifique pour ouvrir la vue détaillée de cette trace. Les sous-segments X-Ray sont convertis en spans Datadog, tout en conservant les modèles de nommage, les tags de span et la structure de l'ensemble de la trace.
 
-{{< img src="graphing/infrastructure/serverless/traces2.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/traces2.png" alt="Traces" >}}
 
 Datadog fournit des traces sans serveur spécialement formatées pour améliorer leur lisibilité et facilité d'utilisation. Cliquez sur la span à partir d'une autre fonction Lambda pour créer un lien vers la page détaillée de la fonction. Vous pouvez ainsi passer d'une fonction de la trace à une autre en toute simplicité.
 
@@ -118,13 +118,13 @@ Datadog fournit des traces sans serveur spécialement formatées pour améliorer
 
 Tous les logs émis par une fonction et toutes les fonctions que celle-ci appelle s'affichent également sur la page détaillée. Affinez l'intervalle de la page en sélectionnant un moment précis pour afficher les logs d'un instant donné. Cliquez sur les logs du tableau pour afficher tous leurs détails.
 
-{{< img src="graphing/infrastructure/serverless/logs.png" alt="logs" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/logs.png" alt="logs" >}}
 
 ### Errors
 
 L'onglet des erreurs remonte les exceptions qui se sont produites pendant la durée de la trace. Cette fonctionnalité permet de comprendre rapidement les problèmes survenus pendant l'exécution.
 
-{{< img src="graphing/infrastructure/serverless/errors.png" alt="logs" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless/errors.png" alt="logs" >}}
 
 ## Pour aller plus loin
 

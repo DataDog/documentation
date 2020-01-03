@@ -80,7 +80,7 @@ Pour en savoir plus, consultez la page [Monitor de prévision][1].
 ### Définir la métrique
 
 Toute métrique envoyant des informations à Datadog peut être évaluée par un monitor. Utilisez l'éditeur et les étapes ci-dessous pour définir la métrique :
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="contexte de la métrique" responsive="true" >}}
+{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="contexte de la métrique"  >}}
 
 | Étape                | Obligatoire | Paramètre par défaut    | Exemple           |
 |---------------------|----------|------------|-------------------|

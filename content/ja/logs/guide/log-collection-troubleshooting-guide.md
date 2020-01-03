@@ -88,7 +88,7 @@ Logs Agent
 この例の場合、`application` ディレクトリが実行可能ディレクトリではないため、Agent はファイルをリストできません。さらに、Agent には `error.log` ファイルに対する読み取りアクセス許可がありません。
 [chmod コマンド][6]を使用して、不足しているアクセス許可を追加してください。
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
+{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}
 
 **注**: 読み取りアクセス許可を追加する際は、ログローテーション構成でそれらのアクセス許可が正しく設定されていることを確認してください。そうでない場合、次のログローテーションで、Datadog Agent が読み取りアクセス許可を失う可能性があります。
 Agent がファイルへの読み取りアクセス許可を持つようにするには、ログローテーション構成でそれらのファイルのアクセス許可を `644` に設定します。

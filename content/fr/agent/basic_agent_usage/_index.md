@@ -71,7 +71,7 @@ Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agréga
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/agent5architecture.jpg" alt="Architecture de l'Agent v5" responsive="true">}}
+{{< img src="agent/agent5architecture.jpg" alt="Architecture de l'Agent v5" >}}
 
 L'Agent v5 est composé de quatre éléments majeurs, chacun écrit en Python et exécuté en tant que processus distinct :
 
