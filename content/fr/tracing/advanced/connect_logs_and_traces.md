@@ -21,7 +21,7 @@ Avant de corréler des traces à des logs, assurez-vous que vos logs sont envoy�
 
 Vos logs *doivent* être convertis en attributs Datadog afin que la corrélation entre les traces et les logs fonctionne.
 
-{{< img src="tracing/advanced/connect_logs_and_traces/trace_id_injection.png" alt="Logs dans des traces"  style="width:100%;">}}
+{{< img src="tracing/advanced/connect_logs_and_traces/trace_id_injection.png" alt="Logs dans des traces" responsive="true" style="width:100%;">}}
 
 
 ## Injection automatique d'ID de trace

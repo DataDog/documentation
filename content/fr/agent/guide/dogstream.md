@@ -188,7 +188,7 @@ dogstreams: /chemin/vers/monfichier.log:/chemin/vers/mylogparser.py:my_log_parse
 
 Cette ligne de log spécifique parsée avec ce parser génère l'événement suivant dans Datadog :
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Événement de log dans Datadog"  style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Événement de log dans Datadog" responsive="true" style="width:70%;">}}
 
 ## Envoyer des paramètres supplémentaires à votre fonction de parsing personnalisée
 

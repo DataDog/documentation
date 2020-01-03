@@ -17,7 +17,7 @@ further_reading:
 
 La visualisation Tableau est disponible sur les timeboards et les screenboards. Elle permet d'afficher des métriques regroupées par clé de tag sous forme de colonnes. L'exemple suivant affiche les métriques `system.cpu.system` et `system.cpu.user` regroupées par `service` :
 
-{{< img src="graphing/widgets/table/table_widget.png" alt="Widget Tableau"  style="width:80%;">}}
+{{< img src="graphing/widgets/table/table_widget.png" alt="Widget Tableau" responsive="true" style="width:80%;">}}
 
 ## Implémentation
 ### Configuration
@@ -33,7 +33,7 @@ La visualisation Tableau est disponible sur les timeboards et les screenboards. 
 * Choisissez la métrique à utiliser pour trier le tableau (par défaut, il s'agit de la première colonne).
 * Facultatif : configurez une mise en forme conditionnelle en fonction des valeurs des cellules pour chaque colonne.
 
-{{< img src="graphing/widgets/table/table_setup.png" alt="Configuration du tableau"  style="width:80%;">}}
+{{< img src="graphing/widgets/table/table_setup.png" alt="Configuration du tableau" responsive="true" style="width:80%;">}}
 
 ## API
 

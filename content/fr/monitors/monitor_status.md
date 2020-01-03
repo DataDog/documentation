@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
 ---
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="Page Monitor Status"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="Page Monitor Status" responsive="true" >}}
 
 ## Présentation
 Une fois [votre monitor créé][1], utilisez la page Monitor Status pour consulter une vue d'ensemble de l'évolution de son statut. Cette page comprend les sections suivantes :
@@ -63,7 +63,7 @@ Cliquez sur l'icône des paramètres en forme d'engrenage pour afficher les opti
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="Section Properties de la page Monitor Status"  style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="Section Properties de la page Monitor Status" responsive="true" style="width:80%;" >}}
 
 La section *Properties* présente des informations générales sur votre monitor :
 
@@ -80,7 +80,7 @@ Utilisez l'icône en forme d'*engrenage* en haut à droite de la page pour [modi
 
 La section *Status and History* présente les changements d'état et de requête au fil du temps, tandis que le graphique **Evaluation Graph** illustre le comportement précis de la requête correspondant au cadre de l'intervalle *sur le graphique History*. Le graphique Evaluation Graph affiche une échelle fixe qui correspond au laps de temps de l'évaluation de votre monitor : de cette façon, les points représentés restent toujours [correctement agrégés][5]. Faites glisser le cadre sur la chronologie pour visualiser les précédents résultats de l'évaluation du monitor :
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="Section History de la page Monitor Status" video="true"  width="80%" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="Section History de la page Monitor Status" video="true" responsive="true" width="80%" >}}
 
 Pour étudier plus en détail l'évolution de vos métriques, utilisez l'outil [Metric Explorer][6] ou un [notebook][7] dédié.
 
@@ -94,7 +94,7 @@ Pour étudier plus en détail l'évolution de vos métriques, utilisez l'outil [
 
 Tous les événements générés par votre monitor sont agrégés dans cette section. Ils apparaissent également dans votre [flux d'événements][8].
 
-{{< img src="monitors/monitor_status/status_monitor_event.png" alt="Section Events de la page Monitor Status"  style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="Section Events de la page Monitor Status" responsive="true" style="width:80%;" >}}
 
 ## Pour aller plus loin
 

@@ -49,7 +49,7 @@ https://app.datadoghq.com/account/saml/assertion
 
 追加のユーザー情報を指定するには、ユーザープロファイルの `user_metadata` セクションを使用します。次に例を示します。
 
-{{< img src="account_management/saml/auth0_metadata.png" alt="Update this" >}}
+{{< img src="account_management/saml/auth0_metadata.png" alt="Update this" responsive="true">}}
 
 ## その他の参考資料
 

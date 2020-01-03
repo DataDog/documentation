@@ -28,7 +28,7 @@ Ces attributions sont calculées sur l'ensemble de votre infrastructure. Par exe
 
 Pour cet exemple, le graphique ci-dessous indique des scénarios respectant le nombre de métriques custom attribuées :
 
-{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="300_métriques_custom"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/Custom_Metrics_300.jpg" alt="300_métriques_custom" responsive="true" style="width:80%;">}}
 
 Aucune [limite de débit fixe][5] n'est appliquée lors de l'envoi des métriques custom. Si vous dépassez votre nombre de métriques par défaut, vous serez facturé conformément à la [politique de facturation de Datadog pour les métriques custom][6].
 
@@ -47,7 +47,7 @@ Dans cet exemple, nous supposons que vous envoyez une métrique `COUNT`(`auth.ex
 * Votre instrumentation de code envoie les différents tags suivants associés à cette métrique : `method:X`, `method:Y`, `exception:A`, `exception:B`.
 * Le tagging de votre métrique suit alors la logique suivante :
 
-    {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="métrique_custom_1"  >}}
+    {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="métrique_custom_1" responsive="true" >}}
 
 * Ici, vous disposez de 6 métriques distinctes. Les métriques uniques pour un **host unique** sont :
 
@@ -80,7 +80,7 @@ Par exemple, vous créez la métrique `service.request.count` pour surveiller di
     * `service:webserver`
 * Votre métrique suit alors la logique suivante :
 
-    {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logique_métrique"  style="width:80%;">}}
+    {{< img src="developers/metrics/custom_metrics/logic_metric.png" alt="logique_métrique" responsive="true" style="width:80%;">}}
 
 Dans cet exemple, seul un sous-ensemble des services et des statuts est envoyé. Vous possédez trois hosts :
 
@@ -90,7 +90,7 @@ Dans cet exemple, seul un sous-ensemble des services et des statuts est envoyé.
 
 Vos trois hosts envoient alors 13 métriques (séries temporelles) distinctes :
 
-{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="compte_métriques"  style="width:75%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_count.png" alt="compte_métriques" responsive="true" style="width:75%;">}}
 
 **Remarque** : si tous les services transmettent les deux statuts, vous disposez de 1 x 2 x 3 = 6 métriques custom **par host**.
 
@@ -98,23 +98,23 @@ Vos trois hosts envoient alors 13 métriques (séries temporelles) distinctes 
 
 La [page Metric Summary][9] affiche le nombre de métriques distinctes, équivalent au nombre de séries temporelles distinctes associées au nom de la métrique, au host et aux valeurs de tag. Par exemple, `service.request.count` avec 1 host, 2 statuts et 3 services donne lieu à **6 métriques distinctes** :
 
-{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="résumé_métriques"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="résumé_métriques" responsive="true" style="width:80%;">}}
 
 Si vous ajoutez un deuxième host avec 3 services et 1 statut, vous obtenez **9 métriques distinctes** :
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="résumé_métriques_2"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_2.png" alt="résumé_métriques_2" responsive="true" style="width:80%;">}}
 
 Si vous ajoutez un troisième host avec 2 services et 2 statuts ; vous obtenez **13 métriques distinctes** :
 
-{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="résumé_métriques_3"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_summary_3.png" alt="résumé_métriques_3" responsive="true" style="width:80%;">}}
 
 #### Éditeur de requête
 
 Vous pouvez compter vos métriques custom en utilisant l'agrégateur `count:` dans l'éditeur de requête. Pour compter le nombre de métriques pour l'exemple précédent, la requête `count:service.request.count{*}` est utilisée :
 
-{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="agrégateur_métriques"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="agrégateur_métriques" responsive="true" style="width:80%;">}}
 
-{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="compte_des_métriques"  style="width:80%;">}}
+{{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="compte_des_métriques" responsive="true" style="width:80%;">}}
 
 ### Métriques gauges, counts, histograms et rates
 

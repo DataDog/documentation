@@ -24,16 +24,16 @@ Cet article décrit comment procéder au parsing d'un log à partir du log du Co
 ```
 
 1. **Ajoutez toujours en commentaire à votre règle l'exemple de log sur lequel vous travaillez** :  
-    {{< img src="logs/faq/parsing_best_practice_1.png" alt="bonne_pratique_parsing_1"  >}}
+    {{< img src="logs/faq/parsing_best_practice_1.png" alt="bonne_pratique_parsing_1" responsive="true" >}}
     Il est possible de tester votre règle de parsing dans un exemple de log. Cet exemple simplifie la rédaction initiale de la règle et peut s'avérer utile si jamais vous cherchez à résoudre un problème ou à prendre en charge un nouveau format de log.
 
 2. **Pour que le parsing ne cible qu'un seul attribut, utilisez l'astérisque (*) ** :  
     vous n'avez pas besoin de rédiger une règle de parsing du premier coup. Vérifiez un par un les attributs de votre règle en ajoutant un astérisque `.*` à la fin de la règle. Cela vous permet d'obtenir un résultat pour tout contenu suivant la fin de votre règle.
     Ici, vous voulez par exemple parser la date du log, peu importe ce qui suit. Créez la règle ci-dessous :
-    {{< img src="logs/faq/parsing_best_practice_2.png" alt="bonne_pratique_parsing_2"  >}}
+    {{< img src="logs/faq/parsing_best_practice_2.png" alt="bonne_pratique_parsing_2" responsive="true" >}}
     Vous savez alors que la date est parsée correctement. Vous pouvez maintenant passer à l'attribut suivant : la sévérité.
     Vous devez commencer par échapper la barre verticale (il est obligatoire d'échapper les caractères spéciaux), puis faire correspondre le mot :
-    {{< img src="logs/faq/parsing_best_practice_3.png" alt="bonne_pratique_parsing_3"  >}}
+    {{< img src="logs/faq/parsing_best_practice_3.png" alt="bonne_pratique_parsing_3" responsive="true" >}}
     Vous pouvez ensuite continuer jusqu'à l'extraction de tous les attributs souhaités de ce log.
 
 3. **Utilisez les bons matchers** :
@@ -58,7 +58,7 @@ Cet article décrit comment procéder au parsing d'un log à partir du log du Co
     ```
     Supposez que l'information dd.collector ne vous intéresse pas. Vous ne souhaitez donc pas l'extraire en tant qu'attribut.
     Vous devez alors supprimer la section d'extraction de la règle :
-    {{< img src="logs/faq/parsing_best_practice_4.png" alt="bonne_pratique_parsing_4"  >}}
+    {{< img src="logs/faq/parsing_best_practice_4.png" alt="bonne_pratique_parsing_4" responsive="true" >}}
 
 ## Pour aller plus loin
 

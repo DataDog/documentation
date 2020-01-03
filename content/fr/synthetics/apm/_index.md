@@ -12,7 +12,7 @@ further_reading:
     tag: Documentation
     text: APM et tracing distribué
 ---
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true"  >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true" responsive="true" >}}
 
 ## Présentation
 

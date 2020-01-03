@@ -84,7 +84,7 @@ Pour en savoir plus sur l'envoi de métriques à partir de Dogshell, exécutez c
 dog metric post -h
 ```
 
-{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
+{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" responsive="true" >}}
 
 [1]: https://github.com/DataDog/datadogpy
 [2]: /fr/developers/metrics/dogstatsd_metrics_submission

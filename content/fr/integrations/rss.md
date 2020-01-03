@@ -13,7 +13,7 @@ categories:
 ddtype: crawler
 ---
 
-{{< img src="integrations/rss/rss.png" alt="Événement RSS"  >}}
+{{< img src="integrations/rss/rss.png" alt="Événement RSS" responsive="true" >}}
 
 ## Présentation
 Enregistrez des activités de flux RSS dans Datadog pour :
@@ -31,5 +31,5 @@ La configuration nécessite :
 
 **Facultatif** : saisissez un nom d'utilisateur et un mot de passe pour accéder au flux RSS.
 
-{{< img src="integrations/rss/rss_setup.png" alt="Configuration RSS"  >}}
+{{< img src="integrations/rss/rss_setup.png" alt="Configuration RSS" responsive="true" >}}
 

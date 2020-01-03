@@ -33,7 +33,7 @@ getfacl /var/log/test-dir/
 
 ACL が有効になっている場合は、`datadog-agent` に設定されたアクセス許可が getfacl の出力に表示されます。
 
-{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission"  >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" responsive="true" >}}
 
 ### ログディレクトリに対する読み取りおよび実行アクセス許可を dd-agent に付与する
 

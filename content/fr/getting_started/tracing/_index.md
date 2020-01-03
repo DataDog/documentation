@@ -136,7 +136,7 @@ hello world
 
 Après quelques minutes, votre trace s'affiche dans Datadog sous le service `flask`. Vérifiez la [page de services][11] ou la [liste de traces][12].
 
-{{< img src="getting_started/tracing-services-list.png" alt="Liste des services de traçage" >}}
+{{< img src="getting_started/tracing-services-list.png" alt="Liste des services de traçage" responsive="true">}}
 
 ## Pour aller plus loin
 

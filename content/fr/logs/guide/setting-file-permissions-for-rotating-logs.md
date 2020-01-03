@@ -33,7 +33,7 @@ getfacl /var/log/rep-test/
 
 Les autorisations définies pour `datadog-agent` apparaissent dans le résultat de la commande getfacl si les ACL sont activées.
 
-{{< img src="logs/faq/setting_file_permission.png" alt="Définition des autorisations de fichier"  >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Définition des autorisations de fichier" responsive="true" >}}
 
 ### Accorder des autorisations de lecture et d'exécution à dd-agent sur les répertoires de log
 

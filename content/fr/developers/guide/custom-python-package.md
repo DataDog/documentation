@@ -60,7 +60,7 @@ Le paquet peut également être ajouté dans le dossier compressé de la bibliot
 
 Ensuite, [redémarrez votre Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="paquet python pour windows"  >}}
+{{< img src="agent/windows_python_package.png" alt="paquet python pour windows" responsive="true" >}}
 
 
 [1]: /fr/agent/basic_agent_usage/windows

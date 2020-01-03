@@ -32,7 +32,7 @@ Datadog で[メトリクスモニター][5]を作成するには、メインナ�
 
 ディスク容量不足のアラートを取得するには、[Disk インテグレーション][6]から `system.disk.in_use` メトリクスを使用して、`host` と `device` のメトリクスの平均を計算します。
 
-{{< img src="getting_started/application/metric_query.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/metric_query.png" alt="alert setup" responsive="true" >}}
 
 これを設定すると、メトリクスを報告している `host` と `device` ごとに個別のアラートをトリガーする `Multi Alert` がモニターによって自動的に更新されます。
 
@@ -42,7 +42,7 @@ Datadog で[メトリクスモニター][5]を作成するには、メインナ�
 
 ディスク容量不足のアラートを発生させるには、メトリクスがしきい値を`超えた`ときにモニターをトリガーする必要があります。しきい値はオプションで設定します。このメトリクスの場合、適切な値の範囲は `0` から `1` です。
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup" responsive="true" >}}
 
 この例では、このセクションの他の設定はデフォルトのままになっています。詳細については、[メトリクスモニター][7]のドキュメントを参照してください。
 
@@ -74,7 +74,7 @@ Steps to free up disk space:
 
 電子メール、Slack、PagerDuty などを使用してチームに通知を送信するには、このセクションを使用してください。ドロップダウンボックスから、チームメンバーおよび接続済みアカウントを検索できます。このボックスに `@notification` が追加されている場合、通知は自動的にメッセージボックスに追加されます。
 
-{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" responsive="true" style="width:70%;" >}}
 
 片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
 

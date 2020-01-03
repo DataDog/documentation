@@ -12,11 +12,11 @@ further_reading:
 ---
 イベントタイムラインは、[イベントストリームビュー][1]の上部に表示されるタイムラインのウィジェット版です。
 
-{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Event timeline example"  >}}
+{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Event timeline example" responsive="true" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example"  style="width:80%;">}}
+{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example" responsive="true" style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -28,7 +28,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

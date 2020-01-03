@@ -23,7 +23,7 @@ categories:
 doc_link: /integrations/kubernetes/
 ddtype: check
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes"  >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" responsive="true" >}}
 
 ## Présentation
 

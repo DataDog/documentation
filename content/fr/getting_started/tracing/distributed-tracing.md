@@ -22,7 +22,7 @@ aliases:
 ---
 Si vous avez consulté le [premier exemple de tracing][1] et souhaitez en savoir plus sur le fonctionnement du tracing, voici un autre exemple impliquant une API simple **thinker-api** et un micro-service en arrière-plan **thinker-microservice**. Lorsque l'API reçoit une requête avec le paramètre *subject* adéquat, elle répond avec un *thought*. Sinon, elle répond avec une erreur :
 
-{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Fonctionnement du tracing"  style="width:70%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Fonctionnement du tracing" responsive="true" style="width:70%;">}}
 
 * Requête :
     ```bash
@@ -130,14 +130,14 @@ Le code ci-dessus est déjà instrumenté. {Consultez la documentation sur la co
 
 Une fois le code exécuté, des données commencent à s'afficher dans [l'APM][3]. Dans la [liste des services][4], nos deux services **thinker-api** et **thinker-microservice** s'affichent avec des métriques sur leurs performances :
 
-{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Liste des services"  >}}
+{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Liste des services" responsive="true" >}}
 
 Un clic sur **thinker-api** permet d'accéder à son [dashboard de service][5] généré automatiquement. De là, vous pouvez consulter des données de performances plus détaillées ainsi qu'une liste de toutes les ressources associées à ce service particulier :
 
 * [Graphiques illustrant les performances du service][6]
 * [Liste des ressources][7] associées à ce service particulier :
 
-{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Ressources API thinker"  style="width:80%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Ressources API thinker" responsive="true" style="width:80%;">}}
 
 La première fonction exécutée dans cet exemple est `think_handler()` qui traite la requête et la renvoie au service **thinker-microservice**.
 
@@ -146,7 +146,7 @@ Un clic sur la ressource **thinker_handler** permet d'accéder à son [dashboard
 * [Graphiques illustrant les performances de la ressource][8]
 * [Liste des traces échantillonnées][9] associées à cette ressource particulière :
 
-{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="Traces API thinker"  style="width:50%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="Traces API thinker" responsive="true" style="width:50%;">}}
 
 Sélectionnez une trace pour ouvrir le _volet de traces_ contenant des informations comme :
 
@@ -156,7 +156,7 @@ Sélectionnez une trace pour ouvrir le _volet de traces_ contenant des informati
 * Le temps passé par votre application à traiter les fonctions tracées
 * Des tags supplémentaires comme *http.method* et *http.url*
 
-{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="Trace API thinker"  style="width:80%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="Trace API thinker" responsive="true" style="width:80%;">}}
 
 Dans l'image ci-dessus, on peut voir que la requête est d'abord reçue par le service **thinker-api** avec la [span][10] `flask.request`, qui transmet la requête traitée au service **thinker-microservice**, qui exécute deux fois la fonction `think()`.
 
@@ -169,10 +169,10 @@ tracer.current_span().set_tag('subject', subject)
 Ce qui vous permet d'obtenir davantage de contexte à chaque appel et traçage de `think()` :
 
 * La première fois que `think` est exécuté, le *subject* est **technology** et tout fonctionne correctement :
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Microservice thinker 1"  style="width:80%;">}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Microservice thinker 1" responsive="true" style="width:80%;">}}
 
 * La deuxième fois que `think` est exécuté, le *subject* est **foo_bar**, qui n'est pas la valeur attendue et entraîne une erreur :
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Microservice thinker 2"  style="width:80%;">}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Microservice thinker 2" responsive="true" style="width:80%;">}}
 
     Le format de présentation de cette erreur est automatiquement généré par l'instrumentation Datadog, mais vous pouvez le modifier en utilisant des [règles de tag à signification spéciale][11].
 

@@ -22,20 +22,20 @@ Voici une présentation vidéo de deux minutes à ce sujet :
 
 Si vous êtes [administrateur Datadog][3], passez votre curseur sur votre nom d'utilisateur dans le menu de navigation sur la gauche pour afficher l'option [Configure SAML][4] dans le menu déroulant.
 
-{{< img src="account_management/saml/saml_configure.png" alt="SAML configuration"  style="width:50%;" >}}
+{{< img src="account_management/saml/saml_configure.png" alt="SAML configuration" responsive="true" style="width:50%;" >}}
 
 Celle-ci vous redirige vers la page **SAML Signle Sign On Configuration** :
 
 1.  Importez les métadonnées de fournisseur d'identité depuis votre fournisseur d'identité SAML en cliquant sur le bouton **Choose File**.
 
-    {{< img src="account_management/saml/saml_choose_file.png" alt="SAML sélection fichier"  >}}
+    {{< img src="account_management/saml/saml_choose_file.png" alt="SAML sélection fichier" responsive="true" >}}
 
     Après avoir choisi le fichier, cliquez sur **Upload File**.
 
 2. Téléchargez les [métadonnées de prestataire de services][5] de Datadog pour configurer votre fournisseur d'identité de façon à ce qu'il identifie Datadog comme prestataire de services.
 
 3. Après avoir importé les métadonnées de fournisseur d'identité et configuré votre fournisseur d'identité, cliquez sur le bouton **Enable** pour activer SAML dans Datadog.
-{{< img src="account_management/saml/saml_enable.png" alt="SAML activation"  >}}
+{{< img src="account_management/saml/saml_enable.png" alt="SAML activation" responsive="true" >}}
 
 Une fois SAML configuré dans Datadog et votre fournisseur d'identité prêt à accepter des requêtes de la part de Datadog, les utilisateurs peuvent se connecter grâce à la **Single Sign-on URL** figurant dans la section Status en haut de la [page SAML Configuration][4].
 {{< img src="account_management/saml/saml_enables.png" alt="SAML activé" response="true">}}
@@ -103,7 +103,7 @@ Certaines organisations ne souhaitent pas inviter l'ensemble de leurs utilisateu
 
 Les administrateurs peuvent définir le rôle par défaut des nouveaux utilisateurs « juste à temps ». Le rôle par défaut attribué est **Standard**, mais vous pouvez choisir d'ajouter de nouveaux utilisateurs « juste à temps » avec le rôle **Read-Only** ou même **Administrator**.
 
-{{< img src="account_management/saml/saml_jit_default.png" alt="SAML défaut juste à temps"  style="width:50%;" >}}
+{{< img src="account_management/saml/saml_jit_default.png" alt="SAML défaut juste à temps" responsive="true" style="width:50%;" >}}
 
 ### Initiation de la connexion par le fournisseur d'identité
 

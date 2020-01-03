@@ -32,7 +32,7 @@ Lorsque vous créez un monitor de métrique, la méthode de détection **Thresho
 
 Pour recevoir une alerte en cas d'espace disque faible, utilisez la métrique `system.disk.in_use` de l'[intégration Disk][6] et calculez la moyenne par `host` et par `device` :
 
-{{< img src="getting_started/application/metric_query.png" alt="Configuration d'alerte"  >}}
+{{< img src="getting_started/application/metric_query.png" alt="Configuration d'alerte" responsive="true" >}}
 
 Une fois cette configuration effectuée, le monitor passe automatiquement en mode `Multi Alert` afin de déclencher une alerte distincte pour chaque `host`, `device` qui envoie votre métrique.
 
@@ -42,7 +42,7 @@ Selon la [documentation relative à l'intégration Disk][6], `system.disk.in_use
 
 Pour recevoir une alerte en cas d'espace disque faible, le monitor doit se déclencher lorsque la valeur de la métrique est `above` (supérieure à) la valeur seuil. Vous êtes libre de définir la valeur seuil que vous souhaitez. Pour cette métrique, les valeurs comprises entre `0` et `1` sont appropriées :
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="Configuration d'alerte"  >}}
+{{< img src="getting_started/application/alert_thresholds.png" alt="Configuration d'alerte" responsive="true" >}}
 
 Pour cet exemple, les autres paramètres par défaut ont été laissés tels quels. Pour en savoir plus, consultez la documentation relative aux [monitors de métrique][7].
 
@@ -74,7 +74,7 @@ Pour définir des messages différents en fonction des seuils d'alerte et d'aver
 
 Utilisez cette section pour envoyer des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. La liste déroulante vous permet de rechercher des membres d'équipe et des comptes connectés. Lorsqu'une `@notification` est ajoutée dans cette zone, celle-ci est automatiquement ajoutée au message :
 
-{{< img src="getting_started/application/message_notify.png" alt="Message et notifications"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="Message et notifications" responsive="true" style="width:70%;" >}}
 
 Si la `@notification` est supprimée de l'une de ces deux sections, elle est également supprimée de l'autre section.
 

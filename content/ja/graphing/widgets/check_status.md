@@ -15,11 +15,11 @@ further_reading:
 ---
 チェックステータスは、実行されたチェックの現在のステータスまたは結果の数を表示します。
 
-{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" >}}
+{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" responsive="true">}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
+{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup" responsive="true" style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -43,7 +43,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

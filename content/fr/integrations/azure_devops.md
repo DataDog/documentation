@@ -38,7 +38,7 @@ Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'int�
 
 Utilisez un hook de service pour créer des événements et des métriques Datadog en réponse aux événements Azure DevOps Services :
 
-{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Configurer des hooks de service" >}}
+{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Configurer des hooks de service" responsive="true">}}
 
 1. Dans Azure, accédez à la page des hooks de service pour votre projet.
 2. Cliquez sur **Créer un abonnement**.
@@ -79,7 +79,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 
 1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][9] à votre organisation Azure DevOps.
 
-    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Association de services d'extension" >}}
+    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Association de services d'extension" responsive="true">}}
 
 2. Dans Azure DevOps, accédez à **Connexions de services** dans les paramètres de votre projet, et sélectionnez **Nouvelle connexion de service**.
 3. Dans la liste, sélectionnez Datadog et cliquez sur **Suivant**.
@@ -88,7 +88,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 6. Cliquez sur **Ajouter** et sélectionnez l'option **Query Datadog monitors**.
 7. Sélectionnez la connexion de service Datadog, puis saisissez l'ID de votre monitor et le seuil de gravité de votre choix. Le seuil de gravité correspond au statut du monitor (`Alert` ou `Warning`) auquel la tâche échoue.
 
-    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Porte de monitor Datadog" >}}
+    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Porte de monitor Datadog" responsive="true">}}
 
 8. Répétez les étapes 5 à 7 pour ajouter d'autres portes dans votre pipeline de déploiement.
 

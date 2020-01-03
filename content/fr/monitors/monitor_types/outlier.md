@@ -19,7 +19,7 @@ further_reading:
 
 La détection de singularités est une fonction algorithmique qui vous permet de détecter lorsqu'un groupe spécifique se comporte différemment par rapport aux autres. Par exemple, il est possible de recevoir une alerte lorsqu'un serveur Web d'un pool traite un nombre de requêtes inhabituel. Vous pouvez également être alerté dès qu'une zone de disponibilité AWS produit plus d'erreurs 500 que les autres.
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="alerte métrique singularités"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="alerte métrique singularités" responsive="true" style="width:80%;">}}
 
 ## Création d'un monitor
 
@@ -43,7 +43,7 @@ Lors de la configuration d'un monitor outlier, l'intervalle de temps est un para
 
 Pour vous assurer que votre alerte est correctement calibrée, vous pouvez définir l'intervalle dans l'aperçu du graphique et utiliser le bouton de retour en arrière (<<) pour regarder à quels moments des singularités auraient déclenché une alerte. De plus, vous pouvez utiliser cette fonctionnalité pour ajuster les paramètres en fonction d'un algorithme de détection spécifique.
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="Calibrage graphique nouveau monitor singularités"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="Calibrage graphique nouveau monitor singularités" responsive="true" style="width:80%;">}}
 
 #### Algorithmes
 
@@ -90,7 +90,7 @@ Quel algorithme faut-il donc utiliser ? Pour la plupart des singularités, chac
 
 Dans l'image ci-dessous, plusieurs hosts vident leurs buffers en même temps, tandis qu'un host vide son buffer un peu plus tard. Avec DBSCAN, ce comportement est détecté comme une singularité, ce qui n'est pas le cas avec MAD. La synchronisation des groupes étant ici simplement le résultat d'un redémarrage simultané des hosts, il est probablement préférable d'opter pour MAD. En revanche, si au lieu des buffers vidés les métriques représentaient une tâche planifiée qui doit être effectuée de façon synchronisée par tous les hosts, DBSCAN serait le choix idéal.
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="transmission singularités"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="transmission singularités" responsive="true" style="width:80%;">}}
 
 ### Notifications
 
@@ -104,7 +104,7 @@ Pour automatiser la création de monitors outlier, consultez la [documentation d
 
 Les algorithmes de détection des singularités sont conçus pour identifier les groupes qui affichent un comportement différent par rapport aux autres. Si le comportement de votre groupe prend la forme de « lignes » (peut-être que chaque ligne représente une partition différente), Datadog vous conseille de taguer chaque ligne avec un identificateur et de configurer des alertes de détection des singularités spécifiques pour chaque ligne.
 
-{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="ligne singularités"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="ligne singularités" responsive="true" style="width:80%;">}}
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}

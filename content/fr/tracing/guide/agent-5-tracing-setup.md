@@ -52,7 +52,7 @@ Les options de configuration pour l'APM et la surveillance d'infrastructures son
 
 De plus, certaines options de configuration peuvent être définies comme variables d'environnement. Remarque : les options définies en tant que variables d'environnement remplacent les paramètres définis dans le fichier de configuration.
 
-{{% table  %}}
+{{% table responsive="true" %}}
 
 | Paramètre du fichier            | Variable d'environnement       | Description                                                                                                                                                      |
 | ---                     | ---                        | ---                                                                                                                                                              |

@@ -28,23 +28,23 @@ Pour intégrer Datadog à un canal Microsoft Teams :
 
 1. Cliquez sur le bouton `...` en regard du nom du canal dans la liste des canaux, puis choisissez `Connectors`.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_1.png" alt="Microsoft Teams (étape 1)" >}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_1.png" alt="Microsoft Teams (étape 1)" responsive="true">}}
 
 2. Recherchez Datadog et cliquez sur `Configure`.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams (étape 2)" >}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams (étape 2)" responsive="true">}}
 
 3. Si vous disposez d'un sous-domaine, saisissez le sous-domaine de votre compte. Dans le cas contraire, saisissez `app`. Cliquez sur **Visit site to install** pour être redirigé vers Datadog.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_3.png" alt="Microsoft Teams (étape 3)" >}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_3.png" alt="Microsoft Teams (étape 3)" responsive="true">}}
 
 4. Dans l'onglet de configuration du carré d'intégration de Microsoft Teams, cliquez sur le bouton `Connect to Office 365` pour effectuer l'installation.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_4.png" alt="Microsoft Teams (étape 4)" >}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_4.png" alt="Microsoft Teams (étape 4)" responsive="true">}}
 
 5. Remplacez le nom de l'équipe `auto-generated` par le nom de votre choix.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_5.png" alt="Microsoft Teams (étape 5)" >}}
+    {{< img src="integrations/microsoft_teams/microsoft_team_step_5.png" alt="Microsoft Teams (étape 5)" responsive="true">}}
 
 Vous pouvez maintenant utiliser la [syntaxe `@-notification`][1] avec le nom de votre équipe Microsoft.
 

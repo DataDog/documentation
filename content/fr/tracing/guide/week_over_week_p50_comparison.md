@@ -22,7 +22,7 @@ further_reading:
 _Temps de lecture : 2 minutes_
 
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="vidéo de comparaison" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="vidéo de comparaison" video="true" responsive="true" style="width:90%;">}}
 
 Datadog peut vous montrer l'évolution de la latence de votre application dans le temps et comparer la latence actuelle à celle mesurée à des instants similaires dans un intervalle donné, tel qu'une semaine ou un mois. Cet exemple s'intéresse à un serveur web pour une plate-forme e-commerce et surveille la latence mesurée sur le serveur au cours du dernier mois.
 
@@ -33,19 +33,19 @@ Datadog peut vous montrer l'évolution de la latence de votre application dans l
 
     Cet exemple s'intéresse au service web-store, car il s'agit d'un service stable et que nous souhaitons vérifier l'absence de problèmes durant le mois passé.
 
-    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2"  style="width:90%;">}}
+    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
     La page Service s'affiche lorsque vous cliquez sur un service de votre stack qui est disponible dans l'APM Datadog. Elle vous permet de visualiser des analyses approfondies du débit, de la latence (y compris la distribution par centiles) et des erreurs, ainsi qu'un résumé des monitors Datadog actifs pour le [service][2] et une liste détaillée des [ressources][3] associées au service.
 
 3. **Recherchez le graphique de latence** dans la partie supérieure du dashboard du service et décochez tous les centiles de la légende, sauf l'option p50. Ensuite, **développez le graphique de latence** pour l'afficher en mode plein écran et visualiser une analyse plus complète.
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_s3.png" alt="Vue complète du graphique de latence avec comparaison par rapport à la semaine précédente"  style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_s3.png" alt="Vue complète du graphique de latence avec comparaison par rapport à la semaine précédente" responsive="true" style="width:90%;">}}
 
     L'APM Datadog vous permet de comparer les différents centiles de latence pour le service dans le temps, mais aussi de visualiser la distribution complète des mesures de latence dans le graphique de distribution ci-dessous.
 
 4. **Ajoutez les mesures au 50e centile de la semaine précédente** en cochant l'option `Week` dans la section *Compare to Last* sur la droite.
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="Vue complète du graphique de latence comparaison par rapport à la semaine précédente"  style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="Vue complète du graphique de latence comparaison par rapport à la semaine précédente" responsive="true" style="width:90%;">}}
 
 **Remarque** : pour une analyse encore plus poussée, vous pouvez exporter ce graphique vers n'importe quel dashboard depuis la vue du service afin de visualiser ces données en même temps que n'importe quel autre graphique généré dans Datadog, tel qu'un graphique de vos métriques custom, des informations sur le host ou de vos logs.
 

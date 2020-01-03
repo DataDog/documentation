@@ -44,7 +44,7 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーで構造化されて示されます。
 フォルダー内の API 呼び出しには、`datadog_site`、`datadog_api_key`、`datadog_application_key` に対する変数が次のように入力されています。
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="postman_api_template_variables"  style="width:70%;" >}}
+{{< img src="getting_started/postman/SetAPIKeys.png" alt="postman_api_template_variables" responsive="true" style="width:70%;" >}}
 
 これにより、[Postman 環境][4]をセットアップして、認証用の Datadog サイト、API、およびアプリケーションキーを保存できます。Datadog オーガニゼーションが複数ある場合は、複数の [Postman 環境][4]をセットアップすることにより、Datadog Postman コレクション内の API 呼び出しは変更しないまま各オーガニゼーションに対して API 呼び出しを実行できます。
 
@@ -60,7 +60,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 5. オプション: Datadog オーガニゼーションが複数ある場合は、オーガニゼーションごとに手順 1 から 4 を繰り返します。
 
-{{< img src="getting_started/postman/setAPIKeys2.png" alt="postman_api_template_variables"  style="width:70%;" >}}
+{{< img src="getting_started/postman/setAPIKeys2.png" alt="postman_api_template_variables" responsive="true" style="width:70%;" >}}
 
 ## コレクションの使用
 
@@ -68,25 +68,25 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 **注**: 必ず Postman インターフェイスの右上隅で定義済み環境を設定してください。
 
-{{< img src="getting_started/postman/env_setup.png" alt="Environment Setup"  style="width:40%;" >}}
+{{< img src="getting_started/postman/env_setup.png" alt="Environment Setup" responsive="true" style="width:40%;" >}}
 
 ### ビルダー
 
 コレクション内の API 呼び出しをクリックすると、右側の `Builder` ペインにロードされます。このペインで API 呼び出しを送信し、返されたステータス、応答時間、および API 応答コードを確認できます。
 
-{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response"  style="width:70%;" >}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response" responsive="true" style="width:70%;" >}}
 
 ### 説明
 
 エンドポイント名をクリックすると、エンドポイントの説明と、すべての必須/オプションパラメーターが表示されるため、容易にリクエストを構築できます。
 
-{{< img src="getting_started/postman/description.mp4" alt="Postman description" video="true"  >}}
+{{< img src="getting_started/postman/description.mp4" alt="Postman description" video="true" responsive="true" >}}
 
 ### Params
 
 **Params** タブには、現在 API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここでは、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][6] の対応するセクションで確認してください。
 
-{{< img src="getting_started/postman/parameters.png" alt="postman_param"  style="width:70%;" >}}
+{{< img src="getting_started/postman/parameters.png" alt="postman_param" responsive="true" style="width:70%;" >}}
 
 このタブは、API 呼び出しの `param1:value1&param2:value2` 構造を表示する代わりに使用できます。
 

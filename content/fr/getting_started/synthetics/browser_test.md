@@ -18,7 +18,7 @@ Les [tests Browser][1] sont des scénarios exécutés par Datadog sur vos applic
 
 Dans cet exemple, un test Browser est créé pour simuler le parcours utilisateur entre l'ajout d'un article au panier et la validation de la commande. Si une étape du test Browser échoue, une erreur est générée et enregistrée dans Datadog en tant que **Test Result**.
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Test Browser"  style="width:90%;" >}}
+{{< img src="getting_started/synthetics/browser-test.png" alt="Test Browser" responsive="true" style="width:90%;" >}}
 
 ## Configurer votre test
 
@@ -43,7 +43,7 @@ Dans cet exemple, un test Browser est créé pour simuler le parcours utilisateu
     - Saisissez un message d'alerte et indiquez les adresses e-mails auxquelles cette alerte doit être envoyée en cas de déclenchement. Aucune autre configuration n'est requise pour commencer à recevoir des e-mails de Datadog. Vous pouvez recevoir les notifications sur d'autres services en configurant des [intégrations][3] telles que Slack, PagerDuty, Webhooks, etc.
     - Cliquez sur **Save & Edit Recording**.
 
-{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Test Browser configuré"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Test Browser configuré" responsive="true" style="width:90%;">}}
 
 ## Enregistrer les étapes de votre test
 
@@ -59,7 +59,7 @@ Par exemple, pour enregistrer en tant qu'étapes les actions effectuées entre l
     **Remarque** : la dernière étape de votre test Browser doit être une **assertion**. Cela permet de s'assurer que votre test est arrivé à la page souhaitée et qu'il a trouvé le bon élément.
 4. Enregistrez le test.
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="Enregistrer les étapes du test"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/record-test.gif" alt="Enregistrer les étapes du test" responsive="true" style="width:90%;">}}
 
 **Remarque** : le site utilisé dans cet exemple renvoie régulièrement une erreur afin de faire échouer le test. Ainsi, si vous ajoutez votre adresse e-mail dans la zone du message, vous devriez recevoir un e-mail de notification lorsque le test échoue.
 
@@ -71,7 +71,7 @@ Attendez que votre test génère plusieurs résultats de test ou cliquez sur `Ru
 
 L'onglet **Errors & Warnings** affiche la liste des erreurs réseau et Javascript, l'onglet **Resources** identifie la ressource à l'origine du statut, et l'onglet **Traces** affiche les traces générées pour l'intégralité de la requête. Ici, le test a échoué en raison d'un timeout du serveur. La ressource à l'origine du statut est `https://api.shopist.io/checkout.json`, et la source du problème est un contrôleur lié au processus de validation de la commande. Vous savez désormais ce qui a entraîné l'erreur.
 
-{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Échec du test Browser"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Échec du test Browser" responsive="true" style="width:100%;">}}
 
 L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthetics][7] configurée. Il vous permet ensuite d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutées. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`
 

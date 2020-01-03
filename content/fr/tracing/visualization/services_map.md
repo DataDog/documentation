@@ -17,7 +17,7 @@ further_reading:
 ---
 La Service Map affiche l'ensemble des [services][1] qui composent votre application et fait apparaître en temps réel les dépendances observées entre ces services, vous permettant ainsi d'identifier les goulots d'étranglement et de visualiser les flux de données au sein de votre architecture.
 
-{{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Présentation de Service Map" >}}
+{{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Présentation de Service Map" responsive="true">}}
 
 ## Implémentation
 
@@ -37,33 +37,33 @@ Les services sont également filtrés en fonction de leur `env` et d'une [dimens
 
 Lorsque vous survolez un service avec la souris, cela le met en évidence et affiche le trafic de requêtes correspondant s'affiche sous forme de lignes animées afin de mieux identifier le sens de transfert des données.
 
-{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true"  width="90%" >}}
+{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true" responsive="true" width="90%" >}}
 
 Lorsque vous cliquez sur un service, une option vous permettant de l'inspecter apparaît. Il est ainsi possible d'isoler le service, d'afficher la source des requêtes provenant d'autres services, et de visualiser les requêtes pour les données envoyées par ce service vers d'autres services. Généralement, les services sur la gauche sont plus proches de vos clients, tandis que ceux sur la droite sont plus susceptibles de correspondre à l'origine d'un problème.
 
 La page d'inspection vous permet d'inspecter chaque nœud séparément et d'effectuer des pivotements dans la Service Map en fonction d'une dépendance à la fois.
 
-{{< img src="tracing/visualization/services_map/servicemap.png" alt="Service Map"  style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemap.png" alt="Service Map" responsive="true" style="width:90%;">}}
 
 ## Le tag « service »
 
 Lorsque vous cliquez sur un service, des options vous permettant de l'examiner plus en détail s'affichent :
 
-{{< img src="tracing/visualization/services_map/servicetag.png" alt="Tag Service Map"  style="width:40%;">}}
+{{< img src="tracing/visualization/services_map/servicetag.png" alt="Tag Service Map" responsive="true" style="width:40%;">}}
 
 Le tag service a une signification bien particulière dans Datadog : il est utilisé à la fois pour identifier les services APM et pour les associer à d'autres éléments du produit.
 
 La capture d'écran suivante illustre une requête de dashboard pour `service:fse-auto-process`. Cet élément est automatiquement tagué par l'APM.
 
-{{< img src="tracing/visualization/services_map/servicedash.png" alt="Dashboard Service Map"  style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicedash.png" alt="Dashboard Service Map" responsive="true" style="width:90%;">}}
 
 Lorsque vous utilisez ce tag sur votre Hostmap ou des logs avec la même clé, Datadog est alors en mesure d'associer des applications à des logs, à une infrastructure ou à des métriques custom. Dans le menu contextuel ci-dessus, chaque option pivote vers la vue appropriée des données recueillies dans le contexte de votre `service`.
 
-{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Tags Service Map"  style="width:80%;">}}
+{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Tags Service Map" responsive="true" style="width:80%;">}}
 
 En outre, les monitors peuvent être tagués par service dans la section « Say what's happening ». Vous pouvez ainsi associer les monitors de n'importe quelle métrique, y compris d'une métrique custom, à vos services. L'état des monitors s'affiche directement sur la Service Map.
 
-{{< img src="tracing/visualization/services_map/servicemon.png" alt="Monitor Service Map"  style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemon.png" alt="Monitor Service Map" responsive="true" style="width:90%;">}}
 
 ## Pertinence et signification des données
 
@@ -73,7 +73,7 @@ Les nœuds représentent les services tels qu'ils sont instrumentés dans l'APM 
 
 Les nouveaux services ou les nouvelles connexions s'affichent peu de temps après leur instrumentation et deviennent obsolètes si aucune trace correspondante n'est détectée pendant deux semaines. Ce système prend en compte les services qui ne fonctionnent que rarement, mais qui jouent un rôle essentiel dans un système opérationnel.
 
-{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true"  width="90%">}}
+{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true" responsive="true" width="90%">}}
 
 ### Couleur
 

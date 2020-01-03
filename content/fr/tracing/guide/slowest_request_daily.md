@@ -21,7 +21,7 @@ further_reading:
 ---
 _Temps de lecture : 3 minutes_
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifier la trace la plus lente et trouver ses métriques de host"  style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifier la trace la plus lente et trouver ses métriques de host" responsive="true" style="width:90%;">}}
 
 Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endpoints, identifier les requêtes lentes et trouver l'origine des problèmes de latence. Cet exemple permet d'identifier la [trace][1] la plus lente de la journée pour un endpoint de paiement d'une plateforme e-commerce et d'attribuer l'origine de ce ralentissement à une charge processeur élevée.
 
@@ -33,7 +33,7 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 
     Cet exemple s'intéresse au service web-store, car il s'agit du serveur principal parmi l'ensemble des ressources et qu'il contrôle la plupart des appels aux services tiers.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine"  style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine" responsive="true" style="width:90%;">}}
 
     En plus d'afficher le débit, la latence et le taux d'erreur, la page Service contient une liste des ressources (opérations principales comme les endpoints d'API, les requêtes SQL et les requêtes web) identifiées pour le service.
 
@@ -42,7 +42,7 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 
     La page [Ressource][4] affiche les métriques de haut niveau sur cette ressource, telles que le débit, la latence et le taux d'erreur, ainsi que la répartition de la latence en fonction des différents services en aval de la ressource. De plus, elle affiche les [traces][1] spécifiques qui traversent la ressource et une vue agrégée des [spans][5] qui composent ces traces.
 
-     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine"  style="width:90%;">}}
+     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine" responsive="true" style="width:90%;">}}
 
 4. Définissez le filtre d'intervalle sur `1d One Day`. Faites défiler la page vers le bas jusqu'au tableau des traces et **filtrez-le par durée**. Ensuite, passez votre curseur sur la première trace dans le tableau et cliquez sur **View Trace**
 
@@ -52,7 +52,7 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 
     Sous le Flamegraph, la liste de tous les tags (y compris des [tags custom][7]) s'affiche. De là, vous pouvez également voir les logs associés (si vous avez [connecté les logs à vos traces][8]) et les informations sur le host, comme l'utilisation de la mémoire et du processeur.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine"  style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifier la trace la plus lente et trouver le blocage à l'origine" responsive="true" style="width:90%;">}}
 
 5. **Cliquez sur l'onglet Host** pour consulter les performances du processeur et de la mémoire du host sous-jacent au moment de la requête.
 6. **Cliquez sur Open Host Dashboard** pour consulter toutes les données pertinentes sur le host.

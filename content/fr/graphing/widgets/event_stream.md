@@ -14,11 +14,11 @@ Le flux d'événements affiche les événements de la [vue Flux d'événements][
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
-{{< img src="graphing/widgets/event_stream/event_stream.png" alt="flux d'événements" >}}
+{{< img src="graphing/widgets/event_stream/event_stream.png" alt="flux d'événements" responsive="true">}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements"  style="width:80%;">}}
+{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" responsive="true" style="width:80%;">}}
 
 ### Configuration
 
@@ -31,7 +31,7 @@ Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

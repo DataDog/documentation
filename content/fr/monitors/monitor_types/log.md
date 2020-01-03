@@ -32,7 +32,7 @@ Pour créer un [log monitor][1] dans Datadog, utilisez la navigation principale�
     * **Monitor over a measure** : si vous sélectionnez une [mesure][5], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
 4. Définissez les groupes d'alertes (facultatif). **Remarque** : que vous définissiez ou non des groupes d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions définies. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies définies. Ce système permet de réduire le nombre de notifications reçues.
 
-{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Monitor Below pour le service backend"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Monitor Below pour le service backend" responsive="true" style="width:60%;" >}}
 
 ### Définir vos conditions d'alerte
 
@@ -50,9 +50,9 @@ Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en util
 **Exemples** :
 
 * Le monitor suivant se déclenche uniquement s'il n'y a aucun log pour tous les services :
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service" responsive="true" style="width:60%;" >}}
 * Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :  
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend" responsive="true" style="width:60%;" >}}
 
 ### Notifications
 
@@ -74,10 +74,10 @@ Pour désactiver les exemples de logs, décochez la case correspondante en bas d
 #### Exemples
 
 Inclure un tableau des 10 principales valeurs dépassant le seuil :
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 principales valeurs dépassant le seuil"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 principales valeurs dépassant le seuil" responsive="true" style="width:60%;" >}}
 
 Inclure 10 exemples de log dans la notification d'alerte :
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="10 exemples de log"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="10 exemples de log" responsive="true" style="width:60%;" >}}
 
 
 ## Pour aller plus loin

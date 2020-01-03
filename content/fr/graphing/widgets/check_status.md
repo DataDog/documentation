@@ -15,11 +15,11 @@ further_reading:
 ---
 Le widget Statut de check affiche le statut actuel ou le nombre de résultats associés à n'importe quel check réalisé :
 
-{{< img src="graphing/widgets/check_status/check_status.png" alt="Widget Statut de check" >}}
+{{< img src="graphing/widgets/check_status/check_status.png" alt="Widget Statut de check" responsive="true">}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Configuration d'un widget Statut de check"  style="width:80%;">}}
+{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Configuration d'un widget Statut de check" responsive="true" style="width:80%;">}}
 
 ### Configuration
 
@@ -43,7 +43,7 @@ Le widget Statut de check affiche le statut actuel ou le nombre de résultats as
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

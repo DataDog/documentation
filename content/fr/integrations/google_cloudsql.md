@@ -41,7 +41,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depui
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloudsql/export_cloudsql_database.png" alt="Export Google Cloud Sql Logs to Pub Sub" >}}
+    {{< img src="integrations/google_cloudsql/export_cloudsql_database.png" alt="Export Google Cloud Sql Logs to Pub Sub" responsive="true">}}
 
 4. Cliquez sur `Create` et attendez que le message de confirmation s'affiche.
 

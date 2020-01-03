@@ -20,7 +20,7 @@ further_reading:
 ---
 Le Log Explorer vous permet d'effectuer un premier dépannage et de commencer à plonger au cœur de vos logs :
 
-{{< img src="logs/explorer/explore_view_with_comments.png" alt="Vue exploration avec commentaires"  >}}
+{{< img src="logs/explorer/explore_view_with_comments.png" alt="Vue exploration avec commentaires" responsive="true" >}}
 
 Depuis cette vue, vous pouvez :
 
@@ -41,7 +41,7 @@ Cette fonction apparaît directement dans la barre de recherche sous la forme d'
 
 Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante :
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Intervalle de temps"  >}}
+{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Intervalle de temps" responsive="true" >}}
 
 ### Recherche
 
@@ -49,7 +49,7 @@ Utilisez les facettes, les mesures, les tags ou même la [recherche en texte lib
 
 Suivez le [guide de recherche au sein de vos logs][1] pour obtenir une explication détaillée de l'ensemble des fonctions de recherche du Log Explorer, y compris l'utilisation de wildcards et de requêtes de valeurs numériques.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true"  >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" responsive="true" >}}
 
 ### Vues enregistrées
 
@@ -59,7 +59,7 @@ Utilisez les vues enregistrées pour configurer automatiquement votre Log Explor
 
 Exportez votre visualisation de log actuelle grâce la fonction de *partage* :
 
-{{< img src="logs/explorer/send_view_to.png" alt="Envoyer une vue"  style="width:60%;">}}
+{{< img src="logs/explorer/send_view_to.png" alt="Envoyer une vue" responsive="true" style="width:60%;">}}
 
 Utilisez le bouton de *partage* pour envoyer votre vue Log Explorer actuelle à un membre d'équipe ou sous la forme d'un fichier CSV ou d'un nouveau monitor :
 
@@ -111,7 +111,7 @@ Configurez le contenu du tableau des logs selon vos besoins et vos préférences
 
 Les résultats de logs sont triés par date (par défaut, les plus récents sont affichés en haut du tableau). Vous pouvez également les trier dans l'ordre inverse, du plus ancien (dans la limite de l'intervalle) au plus récent.
 
-{{< img src="logs/explorer/logtable_config.png" alt="configurer le tableau d'affichage"  style="width:50%;">}}
+{{< img src="logs/explorer/logtable_config.png" alt="configurer le tableau d'affichage" responsive="true" style="width:50%;">}}
 
 ### Volet des logs
 
@@ -125,7 +125,7 @@ Interagissez avec les noms et les valeurs des attributs, à l'aide de la section
 * Ajouter ou supprimer une colonne du tableau des logs
 * Ajouter des valeurs particulières à la requête de recherche (inclusion ou exclusion)
 
-{{< img src="logs/explorer/attribute_actions.png" alt="configurer le tableau d'affichage"  style="width:20%;">}}
+{{< img src="logs/explorer/attribute_actions.png" alt="configurer le tableau d'affichage" responsive="true" style="width:20%;">}}
 
 Interagissez avec la section supérieure relative aux attributs réservés :
 
@@ -140,7 +140,7 @@ Utilisez le bouton de **partage** pour partager le log ouvert dans le volet lat�
 * Sélectionnez **Copy to clipboard** ou appuyez sur les touches `Ctrl + C` ou `Cmd + C` pour copier le JSON du log dans votre presse-papiers.
 * L'option **Share Event** partage le log (ainsi que la vue sous-jacente) avec vos collègues par e-mail, via Slack, etc. Découvrez toutes les [intégrations de notification Datadog][4] disponibles.
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="configurer le tableau d'affichage"  style="width:50%;">}}
+{{< img src="logs/explorer/upper_log_panel.png" alt="configurer le tableau d'affichage" responsive="true" style="width:50%;">}}
 
 [1]: /fr/logs/explorer/search
 [2]: /fr/logs/processing/attributes_naming_convention
@@ -152,7 +152,7 @@ Une fois les étapes de [traitement de Datadog][1], de parsing de logs et d'appl
 
 Suivez le [guide sur la représentation graphique de logs][2] pour découvrir les différentes options des graphiques.
 
-{{< img src="logs/explorer/log_analytics.png" alt="Analyse de logs"  style="width:70%;">}}
+{{< img src="logs/explorer/log_analytics.png" alt="Analyse de logs" responsive="true" style="width:70%;">}}
 
 
 [1]: /fr/logs/processing
@@ -166,7 +166,7 @@ Dans le Log Explorer, les patterns peuvent être identifiés automatiquement afi
 
 Consultez la [section Log Patterns][1] pour en savoir plus
 
-{{< img src="logs/explorer/log_patterns.png" alt="Patterns de logs"  style="width:70%;">}}
+{{< img src="logs/explorer/log_patterns.png" alt="Patterns de logs" responsive="true" style="width:70%;">}}
 
 
 [1]: /fr/logs/explorer/patterns
@@ -184,13 +184,13 @@ Remarque : pour tirer le meilleur parti de votre vue Log Explorer, assurez-vous
 
 Une facette présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre de logs représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher.
 
-{{< img src="logs/explorer/facets_demo.png" alt="Démonstration de facettes"  style="width:80%;">}}
+{{< img src="logs/explorer/facets_demo.png" alt="Démonstration de facettes" responsive="true" style="width:80%;">}}
 
 **Créer une facette** :
 
 Pour commencer à utiliser un attribut en tant que facette ou dans une recherche, cliquez dessus et ajoutez-le en tant que facette :
 
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Créer une facette"  style="width:30%;">}}
+{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:30%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche][1], le volet Facettes et dans la [requête d'analyse de logs][2].
 
@@ -208,7 +208,7 @@ Une mesure est un attribut doté d'une valeur numérique contenue dans vos logs.
 
 Pour commencer à utiliser un attribut en tant que mesure, cliquez sur un attribut numérique de votre log :
 
-{{< img src="logs/explorer/create_a_mesure.png" alt="Créer une mesure"  style="width:30%;">}}
+{{< img src="logs/explorer/create_a_mesure.png" alt="Créer une mesure" responsive="true" style="width:30%;">}}
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche][1], le volet Facettes et dans la [requête d'analyse de logs][2].
 
@@ -216,7 +216,7 @@ Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour tous l
 
 Chaque mesure dispose de sa propre unité. Celle-ci est affichée dans les colonnes du Log Explorer, les widgets du flux de logs dans les dashboards et les analyses de logs.
 
-{{< img src="logs/explorer/edit_a_measure.png" alt="Modifier une mesure"  style="width:50%;">}}
+{{< img src="logs/explorer/edit_a_measure.png" alt="Modifier une mesure" responsive="true" style="width:50%;">}}
 
 
 [1]: /fr/logs/explorer/search

@@ -20,7 +20,7 @@ further_reading:
 ---
 Tous les paramètres de recherche sont contenus dans l'adresse URL. Vous pouvez partager votre vue en partageant l'URL.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true"  >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" responsive="true" >}}
 
 ## Syntaxe de recherche
 
@@ -46,7 +46,7 @@ Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser 
 
 Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche"  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche" responsive="true" style="width:80%;">}}
 
 ### Échappement de caractères spéciaux
 
@@ -121,7 +121,7 @@ Vous pouvez ajouter des facettes à des tableaux de chaînes ou de nombres. Tout
 
 Dans l'exemple ci-dessous, cliquer sur la valeur `Peter` dans la facette renvoie tous les logs contenant un attribut `users.names` dont la valeur est soit `Peter`, soit un tableau qui contient `Peter` :
 
-{{< img src="logs/explorer/search/array_search.png" alt="Tableaux et facettes"  style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Tableaux et facettes" responsive="true" style="width:80%;">}}
 
 ## Recherches enregistrées
 

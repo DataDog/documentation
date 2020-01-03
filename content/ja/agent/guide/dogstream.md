@@ -191,7 +191,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 このパーサーを使用して上のログ行をパースすると、Datadog に次のイベントが作成されます。
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog"  style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" style="width:70%;">}}
 
 ## カスタムパース関数への追加パラメーターの送信
 

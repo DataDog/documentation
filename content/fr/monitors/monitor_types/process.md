@@ -27,7 +27,7 @@ Recherchez un processus à surveiller en indiquant une liste de chaînes sépar�
 
 Les processus et les totaux correspondants s'affichent sous la recherche :
 
-{{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus" responsive="true" style="width:90%;">}}
 
 Une fois votre recherche définie, un graphique s'affiche au-dessus des critères de recherche. Celui-ci représente le nombre total approximatif de processus trouvés. Pour obtenir des données plus granulaires, consultez votre [page Live Process][4].
 

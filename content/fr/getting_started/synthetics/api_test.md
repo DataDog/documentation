@@ -30,7 +30,7 @@ Dans cet exemple, un test API est créé pour vérifier que votre site reste tou
     - Sélectionnez les localisations à tester.
     - Cliquez sur le bouton **Test URL**.
 
-{{< img src="getting_started/synthetics/api-test-config.png" alt="Configuration d'un test API"  style="width:60%;">}}
+{{< img src="getting_started/synthetics/api-test-config.png" alt="Configuration d'un test API" responsive="true" style="width:60%;">}}
 
 #### Définir vos conditions d'alerte
 
@@ -38,11 +38,11 @@ Si vous n'avez pas encore créé d'[assertions][4], des assertions sont automati
 
 Dans cet exemple, trois assertions par défaut sont ajoutées une fois l'URL testée :
 
-{{< img src="getting_started/synthetics/assertions-example.png" alt="Échec du test Browser"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/assertions-example.png" alt="Échec du test Browser" responsive="true" style="width:90%;">}}
 
 Ces assertions correspondent à vos conditions d'alerte et peuvent être personnalisées. Pour ajouter une assertion personnalisée, cliquez sur l'en-tête de votre choix dans l'aperçu de la réponse. Vous pouvez également cliquer sur le bouton **New Assertion** pour ajouter une assertion manuellement (exemple : `body` contient `Shop.ist`.)
 
-{{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Échec du test Browser"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Échec du test Browser" responsive="true" style="width:90%;">}}
 
 Vous pouvez configurer vos conditions d'alerte de façon à n'être alerté que si votre endpoint est indisponible pendant plus de trois minutes et pour deux localisations différentes :
 
@@ -64,7 +64,7 @@ La page d'accueil d'un **test API** affiche automatiquement des données le conc
 
 Pour dépanner un test qui n'a pas réussi, faites défiler la page jusqu'à la section Test Results et cliquez sur l'onglet **Test Results**. Cliquez sur le test concerné (celui-ci affiche un statut `Alert`) pour visualiser les résultats détaillés. Passez en revue les assertions qui ont échoué et les détails de la réponse, tels que le code de statut, le temps de réponse ainsi que les en-têtes et le corps associés pour résoudre le problème.
 
-{{< img src="getting_started/synthetics/api-test-failure.png" alt="Échec du test API"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/api-test-failure.png" alt="Échec du test API" responsive="true" style="width:90%;">}}
 
 Datadog offre également la possibilité d'[intégrer l'APM avec Synthetics][6] pour vous permettre d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution.
 

@@ -166,10 +166,10 @@ Les valeurs des monitors regroupés selon différents tags, comme `web04` et `we
 
 En cas de monitor à alertes multiples divisé par plusieurs tags, un groupe de monitors correspond à la combinaison entière de tags. Par exemple, si le monitor `1` est un monitor à alertes multiples regroupé selon `device,host` et le monitor `2` un monitor à alertes multiples regroupé selon `host`, un monitor composite peut combiner les monitors `1` et `2` :
 
-{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="rédaction de notification"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="rédaction de notification" responsive="true" style="width:80%;">}}
 
 Cependant, s'il existe un monitor `3` à alertes multiples regroupé selon `host,url`, les monitors `1` et `3` ne peuvent pas générer de résultat pour un monitor composite, car leur regroupement diverge trop.
-{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="rédaction de notification"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="rédaction de notification" responsive="true" style="width:80%;">}}
 
 Faites preuve de bon sens lors de la sélection des monitors à alertes multiples afin de choisir un ensemble de monitors qui est pertinent.
 

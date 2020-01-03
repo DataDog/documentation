@@ -11,7 +11,7 @@ kind: documentation
 
 La fonction `autosmooth()` applique une moyenne mobile avec un intervalle sélectionné automatiquement. Elle lisse une série temporelle tout en préservant sa tendance. Dans cet exemple, la fonction choisit l'intervalle optimal pour lisser la série temporelle :
 
-{{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="illustration d'autosmooth"  style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="illustration d'autosmooth" responsive="true" style="width:80%;">}}
 
 Lorsque la fonction est utilisée sur une requête `group by` (comme `avg by`), le même intervalle est appliqué à toutes les séries temporelles. Lorsque la fonction est utilisée sur plusieurs métriques d'un même graphique, différents intervalles peuvent être sélectionnés pour lisser de façon optimale chaque série temporelle de métrique.
 
@@ -34,7 +34,7 @@ Exemple :
 
 Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma3(10 + x%10 {*})` donne le graphique suivant : 
 
-{{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3" responsive="true" style="width:80%;">}}
 
 ### Ewma 5
 
@@ -48,7 +48,7 @@ Exemple :
 
 Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma5(10 + x%10 {*})` donne le graphique suivant : 
 
-{{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5" responsive="true" style="width:80%;">}}
 
 ### Ewma 10
 
@@ -62,7 +62,7 @@ Exemple :
 
 Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma10(10 + x%10 {*})` donne le graphique suivant : 
 
-{{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10" responsive="true" style="width:80%;">}}
 
 ### Ewma 20
 
@@ -76,7 +76,7 @@ Exemple :
 
 Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma20(10 + x%10 {*})` donne le graphique suivant : 
 
-{{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
+{{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20" responsive="true" style="width:80%;">}}
 
 ## Médiane
 
