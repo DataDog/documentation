@@ -8,6 +8,7 @@ aliases:
     - /graphing/miscellaneous/metrics_arithmetic
     - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
     - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+    - /graphing/
 description: Visualize your data to gain insight
 further_reading:
 - link: "graphing/dashboards/template_variables"
@@ -53,13 +54,13 @@ Favorite lists are dashboard lists starred by the current logged in user. **Note
 
 Preset lists are default dashboard lists in Datadog:
 
-| List                     | Description                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| All Custom               | Custom dashboards made by any team member in your organization's account.   |
-| All Hosts                | Automatic dashboards created by Datadog when you add a host.                |
-| All Integrations         | Automatic dashboards created by Datadog when you install an integration.    |
-| Created By You           | Custom dashboards created by the currently logged in user.       |
-| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user. |
+| List                     | Description                                                               |
+|--------------------------|---------------------------------------------------------------------------|
+| All Custom               | Custom dashboards made by any team member in your organization's account. |
+| All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
+| All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
+| Created By You           | Custom dashboards created by the currently logged in user.                |
+| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user.         |
 
 #### Shared, Editable Lists
 
@@ -71,7 +72,7 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| Star       | All dashboards starred by the currently logged in user.                        |
+| Star       | All dashboards starred by the currently logged in user.                                  |
 | Icon       | An icon indicating the type of dashboard (timeboard or screenboard).                     |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Modified   | The last modified date of a custom dashboard.                                            |
