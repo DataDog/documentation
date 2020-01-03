@@ -9,7 +9,7 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
-- link: "/dashboards/shared_graph"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
 - link: "/dashboards/widgets"

@@ -7,7 +7,7 @@ further_reading:
 - link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/shared_graph"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
 - link: "/dashboards/widgets"
@@ -75,7 +75,7 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/shared_graph/#screenboards
+[1]: /dashboards/sharing/#screenboards
 [2]: /events
 [3]: /account_management/team/#datadog-user-roles
 [4]: /dashboards/#copy-import-export

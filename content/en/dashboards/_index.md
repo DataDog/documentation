@@ -14,7 +14,7 @@ further_reading:
 - link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/shared_graph"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
 - link: "/dashboards/widgets"
