@@ -1,5 +1,5 @@
 ---
-title: Standard Attributes
+title: Standard Attributes and Aliasing
 kind: documentation
 description: "Datadog standard attributes for pipelines."
 further_reading:
@@ -25,66 +25,86 @@ This can generate confusion. For instance, a client IP might have the following 
 
 In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and—for instance—correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 
-Standard Attributes have been designed to help your organization to define its own naming convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
+Standard Attributes have been designed to help your organization to define its own naming convention and onboard users across multiple teams on it. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
 
-### Setup standard attributes
 
-Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list), but your organization can decide to extend or modify this list.
+## Aliasing, Faceting and Promoting Attributes
+
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list). But Admin users in the organisation are entitled to curate the list, either from the [Log Explorer](#standard-attributes-in-explorer) or from the Standard Attribute [Configuration Page](#standard-attributes-in-explorer).
+
+* **Aliasing** a (source) attribute towards a (destination) Standard Attribute. Logs carrying the source attribute, will end up carrying source and destination attribute, both with same value. Users can interact with either aliased (source) or standard (destination) attribute.
+
+* **Faceting** a Standard Attribute for filtering, grouping or aggregating. [Creating][21] and using a facet works equally for a standard attribute, resulting on a **Standard Facet**. Standard Facets provide with more comprehensive insights though, because they eventually gather data from multiple sources: all logs natively carrying the standard attribute, and logs carrying any attribute aliased to the standard attribute.
+
+* **Promote** an attribute as a Standard Attribute. Enable aliasing other attributes to this one.
+
+
+### Additional details regarding Aliasing
+
+
+1. Aliasing happens after the logs are processed by the pipelines. Meaning, any extracted or processed attribute can be used a source for aliasing.
+2. Datadog enforces the type of an aliased attribute. If this is not possible, the aliasing is skipped.
+3. In case a log already carries the destination attribute, aliasing overrides the value.  
+4. For a standard attribute to which multiple attributes are aliased, and if a log carries several of these source attributes, only one of these source attributes is aliased.
+5. Any updates or additions to standard attributes are only applied to newly ingested logs.
+
+
+1. Standard attributes cannot be aliased.
+2. Attributes can only be aliased to Standard Attributes.
+3. To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
+
+
+## Standard Attributes in Log Configuration
+
 The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
 To enforce standard attributes, administrators have the right to re-copy an existing set of non-standard attributes into a set of standard ones. This enables noncompliant logs sources to become compliant without losing any previous information.
 
-### Standard attributes in Log Explorer
-
-Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics).
-
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes"  style="width:60%;">}}
-
-If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align.
-
-## Standard attribute list
+### Standard attribute list
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes"  style="width:80%;">}}
 
-### Add or update standard attributes
+
+### Promote or Alias attribute
 
 A standard attribute is defined by its:
 
-* `Path`: The path of the standard attributes as you would find it in your JSON (e.g `network.client.ip`)
+* `Path`: The path of attribute **promoted** as Standard Attribute, as you would find it in your JSON (e.g `network.client.ip`)
 * `Type` (`string`, `integer`, `double`, `boolean`): The type of the attribute which is used to cast element of the remapping list
+* `Aliasing list`: Comma separated list of attributes that should be **aliased** to it
 * `Description`: Human readable description of the attribute
-* `Remapping list`: Comma separated list of non-compliant attributes that should be remapped to standard ones
 
 The standard attribute panel pops when you add a new standard attribute or edit an existing one:
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
 
-Any element of the standard attributes can then be filled or updated.
 
-**Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+## Standard attributes in Log Explorer
 
-### Standard attribute remapping behavior
 
-After being processed in the pipelines, each log goes through the full list of standard attributes.
-For each entry of the standard attribute table, if the current log has an attribute matching the remapping list, the following is done:
+### Aliased and Standard Facets display
 
-* The first attribute that matches the provided list is remapped, and the value is overridden by the new one if already existing.
-* Datadog enforces the type of the remapped attribute. If this is not possible, the attribute is skipped and the next matching one of the list is used.
-* The original attribute is kept in the log.
+Typically, during a transitional period, standard facets may coexist in your organization alongside their aliased version(s). 
 
-**Important Note**: By default, the type of an existing standard attribute is unchanged if the remapping list is empty. Add the standard attribute to its own remapping list to enforce its type.
+The facet list provides users with visual hints to find their way through to the Standard Facets. And eventually update their preferred [saved views][22] to actually display Standard Facets rather than Aliased.
 
-#### Validation
+{{< img src="logs/processing/attribute_naming_convention/aliased-to.gif" alt="Facet list highlight Naming Convention"  style="width:80%;">}}
 
-To add or update a standard attribute, follow these rules:
 
-* A standard attribute cannot be added in the remapping list of another standard attribute.
-* A custom attribute can be remapped to only one standard attribute.
-* To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
+### Aliasing and Promoting
+
+The facet list provides *admin* users with call-to-actions and hints for promoting facets, and aliasing facets towards standard facets. Promoting a facet as standard from the facet list creates a standard attribute whose type is the type of the facet.  
+
+{{< img src="logs/processing/attribute_naming_convention/alias-to_admin.png" alt="Curate Standard Attribute from Facet list"  style="width:80%;">}}
+
+From the log side panel, *admin* users take alias any attribute (faceted, or non-faceted) towards a Standard Facet. 
+
+{{< img src="logs/processing/attribute_naming_convention/alias-to_admin_panel.png" alt="Alias attribute from side panel"  style="width:80%;">}}
+
 
 ## Default standard attribute list
 
@@ -272,3 +292,5 @@ All attributes and measures are prefixed by `dns`.
 [18]: /integrations/fluentd
 [19]: /integrations/logstash
 [20]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[21]: /logs/explorer/?tab=facets#setup
+[22]: /logs/explorer/saved_views/
