@@ -169,5 +169,5 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
 [2]: /fr/monitors/monitor_types
 [3]: /fr/monitors/monitor_types/#define-the-conditions
 [4]: /fr/integrations/faq/list-of-api-source-attribute-value
-[5]: /fr/graphing/infrastructure/process
+[5]: /fr/infrastructure/process
 [6]: /fr/monitors/faq/what-are-recovery-thresholds
