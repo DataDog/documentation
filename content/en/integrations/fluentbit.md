@@ -35,28 +35,30 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 
 #### Configuration parameters
 
-| Key        | Description                                                                                                              | Default                                                                     |
-|------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| Host       | _Required_ - The Datadog server where you are sending your logs.                                                         | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
-| TLS        | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
-| apikey     | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
-| dd_service | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
-| dd_source  | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
-| dd_tags    | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                   |                                                                             |
-| provider   | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.         |                                                                             |
+| Key            | Description                                                                                                              | Default                                                                     |
+|----------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
+| TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
+| apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
+| dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
+| dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
+| dd_message_key | dd_message_key - Set the attribute to use to store your log message.                                                         |                                                                             |
+| dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                  |                                                                             |
+| provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.         |                                                                             |
 
 #### Configuration file example
 
 ```text
 [OUTPUT]
-    Name        datadog
-    Match       *
-    Host        http-intake.logs.datadoghq.com
-    TLS         on
-    apikey      <DATADOG_API_KEY>
-    dd_service  <APPLICATION_SERVICE>
-    dd_source   <SOURCE>
-    dd_tags     team:logs,foo:bar
+    Name              datadog
+    Match             *
+    Host              http-intake.logs.datadoghq.com
+    TLS               on
+    apikey            <DATADOG_API_KEY>
+    dd_service        <APPLICATION_SERVICE>
+    dd_source         <SOURCE>
+    dd_message_key    log
+    dd_tags           env:dev,<TAG_KEY>:<TAG_VALUE>
 ```
 
 ## Troubleshooting
