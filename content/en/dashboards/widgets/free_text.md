@@ -5,7 +5,7 @@ description: "Display text in your Screenboards."
 aliases:
     - /graphing/widgets/free_text/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

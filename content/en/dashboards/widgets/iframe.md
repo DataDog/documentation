@@ -5,7 +5,7 @@ description: "Inlude an Iframe in your Datadog dashboards."
 aliases:
     - /graphing/widgets/iframe/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

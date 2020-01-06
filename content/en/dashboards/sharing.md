@@ -100,7 +100,7 @@ Datadog has a [dedicated API][9] allowing you to interact with your shared graph
 [1]: /dashboards/timeboard
 [2]: /dashboards/screenboard
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /dashboards/screenboard/#global-time-selector
+[4]: /dashboards/screenboards/#global-time-selector
 [5]: /dashboards/template_variables
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: /help

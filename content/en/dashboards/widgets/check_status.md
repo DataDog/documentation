@@ -5,7 +5,7 @@ description: "Graph the current status or number of results for any check perfor
 aliases:
     - /graphing/widgets/check_status/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/timeboard/"

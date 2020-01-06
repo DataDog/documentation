@@ -78,12 +78,12 @@ The search query for **View related logs** is defined using the following parame
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/screenboard
-[2]: /dashboards/screenboard/#display-utc-time
-[3]: /dashboards/screenboard/#notifications
-[4]: /dashboards/screenboard/#permissions
-[5]: /dashboards/screenboard/#clone-dashboard
-[6]: /dashboards/screenboard/#copy-import-or-export-dashboard-json
-[7]: /dashboards/screenboard/#delete-dashboard
+[2]: /dashboards/screenboards/#display-utc-time
+[3]: /dashboards/screenboards/#notifications
+[4]: /dashboards/screenboards/#permissions
+[5]: /dashboards/screenboards/#clone-dashboard
+[6]: /dashboards/screenboards/#copy-import-or-export-dashboard-json
+[7]: /dashboards/screenboards/#delete-dashboard
 [8]: /dashboards/#new-dashboard
 [9]: /dashboards/widgets
 [10]: /events/#event-query-language

@@ -5,7 +5,7 @@ description: "Inlude an image or a gif in your Datadog dashboards."
 aliases:
     - /graphing/widgets/image/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

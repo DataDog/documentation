@@ -5,7 +5,7 @@ description: "Display an aggregated value for a given metric query"
 aliases:
     - /graphing/widgets/query_value/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"
