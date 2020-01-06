@@ -7,10 +7,5 @@ options = {
 
 initialize(**options)
 
-# Add tags to a host
-hostname='<YOUR_HOSTNAME>'
-hosts = api.Hosts.search(q='hosts:')
-
-for host in hosts['host_list']:
-    if host['name'] == hostname:
-        api.Tag.create(host['name'], tags=['<KEY>:<VALUE>'])
+api.Tag.create("<YOUR_HOSTNAME>", tags=[
+               "role:database", "environment:production"])
