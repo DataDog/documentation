@@ -29,11 +29,13 @@ SafeNet の手順については、[SafeNet Trusted Access for Datadog][1] を�
 ### 認証の検証
 
 #### STA コンソールの使用
+
 Datadog のログイン URL にアクセスすると、SafeNet Trusted Access のサインインページにリダイレクトされます。プライマリディレクトリのログイン情報を入力し、二要素認証を承認すると、認証後に Datadog にリダイレクトされます。
 
 **注**: IdP 始動モードの場合は、SafeNet Trusted Access コンソールで、Datadog に表示される **Assertion Consumer Service URL** を入力します。
 
 #### STA ユーザーポータルの使用
+
 ユーザーポータル URL にアクセスし、STA ユーザーポータルダッシュボードにログインします。ダッシュボードには、アクセス可能なアプリケーションの一覧が表示されます。Datadog アプリケーションアイコンをクリックすると、認証後に Datadog にリダイレクトされます。
 
 ## その他の参考資料

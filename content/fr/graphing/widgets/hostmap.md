@@ -15,11 +15,11 @@ further_reading:
 ---
 La hostmap représente n'importe quelle métrique d'un sous-ensemble de hosts sur une unique visualisation, disponible depuis le menu [Infrastructure Host Map][1] :
 
-{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Hostmap"  >}}
+{{< img src="graphing/widgets/hostmap/hostmap.png" alt="Hostmap" responsive="true" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Configuration hostmap"  >}}
+{{< img src="graphing/widgets/hostmap/hostmap_setup.png" alt="Configuration hostmap" responsive="true" >}}
 
 ### Configuration
 
@@ -37,7 +37,7 @@ La configuration du widget Hostmap est similaire à celle de la [page principale
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

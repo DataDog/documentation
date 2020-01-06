@@ -13,7 +13,7 @@ kind: documentation
 
 例: `count_nonzero(system.cpu.user{*} by {host})` は、各ポイントでシステム負荷が 0 以外のホストの数を表す時系列を返します。
 
-{{< img src="graphing/functions/count/count_nonzero.png" alt="count non zero"  style="width:80%;">}}
+{{< img src="graphing/functions/count/count_nonzero.png" alt="count non zero" responsive="true" style="width:80%;">}}
 
 ## null 以外のカウント
 
@@ -25,7 +25,7 @@ kind: documentation
 
 例: `count_not_null(system.cpu.user{*} by {host})` は、各ポイントでシステム負荷が null 以外のホストの数を表す時系列を返します。
 
-{{< img src="graphing/functions/count/count_not_null.png" alt="count not null"  style="width:80%;">}}
+{{< img src="graphing/functions/count/count_not_null.png" alt="count not null" responsive="true" style="width:80%;">}}
 
 ## その他の関数
 

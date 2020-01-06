@@ -5,6 +5,7 @@ order: 26.2
 external_redirect: '/api/#envoyer-des-points-de-series-temporelles'
 ---
 ## Envoyer des points de séries temporelles
+
 L'endpoint de métrique vous permet d'envoyer des données de séries temporelles pouvant être représentées graphiquement sur les dashboards de Datadog. La limite des charges utiles compressées est de 3,2 mégaoctets (3 200 000), tandis que celle des charges utiles décompressées est de 62 mégaoctets (62 914 560).
 
 **Poids des données** :

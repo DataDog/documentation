@@ -6,6 +6,7 @@ external_redirect: "/api/#supprimer-un-dashboard"
 ---
 
 ## Supprimer un dashboard
+
 Supprimer un dashboard existant.
 
 **ARGUMENTS** :

@@ -17,6 +17,7 @@ Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif
 Fargate est facturé en fonction du nombre de tâches simultanées. Pour découvrir les tarifs, consultez la section [Serverless][4] de la page des tarifs.
 
 ## Dépannage
+
 Pour toute question technique, contactez [l'assistance Datadog][5].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][3].
