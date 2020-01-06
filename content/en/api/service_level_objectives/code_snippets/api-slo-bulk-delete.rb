@@ -1,7 +1,7 @@
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 slo_id_one = '<YOUR_FIRST_SLO_ID>'.freeze
 slo_id_two = '<YOUR_SECOND_SLO_ID>'.freeze
