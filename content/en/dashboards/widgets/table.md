@@ -5,7 +5,7 @@ beta: true
 aliases:
     - /graphing/widgets/table/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/screenboards/"

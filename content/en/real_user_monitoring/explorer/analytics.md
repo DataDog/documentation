@@ -3,7 +3,8 @@ title: RUM Analytics
 kind: documentation
 description: ""
 aliases:
-- /real_user_monitoring/rum_analytics
+  - /real_user_monitoring/rum_analytics
+  - /real_user_monitoring/analytics
 further_reading:
 - link: "/real_user_monitoring/explorer/search"
   tag: "Documentation"

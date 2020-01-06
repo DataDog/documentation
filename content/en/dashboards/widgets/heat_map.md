@@ -5,7 +5,7 @@ description: "Build temporal heat map over a given metric."
 aliases:
     - /graphing/widgets/heat_map/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/screenboards/"
