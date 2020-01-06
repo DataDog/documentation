@@ -16,14 +16,48 @@ To set up Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Fill out  Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
-3. Paste the [generated code snippet](#generated-code-snippet) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application.
-    **Note**: Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors.
+3. Setup Datadog Browser Log Collector [through NPM](#npm-setup) or  Paste the [generated code snippet](#bundle-setup) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors.
 4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
 5. Visualize the [data collected][2] in Datadog [out of the box Dashboards][3].
 
 **Note**: Your application shows up on the application list page as "pending" until Datadog starts receiving data.
 
-### Generated code snippet
+## NPM Setup
+
+After adding [`datadog/browser-logs`][4] to your `package.json` file, initialize it with:
+
+{{< tabs >}}
+{{% tab "US" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  datacenter: 'us',
+  resourceSampleRate: 100,
+  sampleRate: 100
+})
+```
+
+{{% /tab %}}
+{{% tab "EU" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  datacenter: 'eu',
+  resourceSampleRate: 100,
+  sampleRate: 100
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Bundle Setup
 
 Paste the generated code snippet into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application.
 
@@ -71,3 +105,4 @@ Paste the generated code snippet into the head tag (in front of any other script
 [1]: https://app.datadoghq.com/rum
 [2]: /real_user_monitoring/data_collected
 [3]: /real_user_monitoring/dashboards
+[4]: https://www.npmjs.com/package/@datadog/browser-logs
