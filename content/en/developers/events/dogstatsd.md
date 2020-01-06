@@ -202,5 +202,5 @@ $statsd->event('An error occurred.',
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /graphing/event_stream
+[2]: /events
 [3]: /integrations/faq/list-of-api-source-attribute-value

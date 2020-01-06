@@ -5,13 +5,13 @@ description: "Graph the current value of a metric in any monitor defined on your
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -81,4 +81,4 @@ ALERT_VALUE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

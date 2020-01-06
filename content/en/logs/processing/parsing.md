@@ -128,7 +128,7 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
-* Use the **Extract from** field to apply your Grok processor on a given attribute instead of the default `message` attribute.
+* Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
 * Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 

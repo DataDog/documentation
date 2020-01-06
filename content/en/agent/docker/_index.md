@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/docker/log"
   tag: "Documentation"
   text: Collect your Docker logs
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: Collect your Docker processes
 - link: "agent/docker/apm"
@@ -263,8 +263,8 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [8]: /agent/proxy/#agent-v6
 [9]: /tracing
 [10]: /logs
-[11]: /graphing/infrastructure/process
-[12]: /graphing/infrastructure/livecontainers
+[11]: /infrastructure/process
+[12]: /infrastructure/livecontainers
 [13]: https://docs.datadoghq.com/developers/dogstatsd
 [14]: /developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go

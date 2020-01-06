@@ -138,7 +138,7 @@ Export [App Analytics][1] from the Trace search or build them directly in your [
 [6]: /tracing/app_analytics/search/#measures
 [7]: /tracing/visualization/#trace
 [8]: /monitors/monitor_types/apm
-[9]: /graphing/dashboards/timeboard
+[9]: /dashboards/timeboard
 [10]: /help
-[11]: /graphing/dashboards
-[12]: /graphing/widgets/timeseries
+[11]: /dashboards
+[12]: /dashboards/widgets/timeseries

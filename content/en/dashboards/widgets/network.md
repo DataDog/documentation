@@ -8,10 +8,10 @@ further_reading:
 - link: "network_performance_monitoring/"
   tag: "Documentation"
   text: "Network Performance Monitoring"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -90,4 +90,4 @@ The dedicated [widget JSON schema definition][2] for the network widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_performance_monitoring
-[2]: /graphing/graphing_json/widget_json
+[2]: /dashboards/graphing_json/widget_json

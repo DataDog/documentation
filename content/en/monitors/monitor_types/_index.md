@@ -66,4 +66,4 @@ The notify setting sends an email with the monitor audit event to all people who
 [17]: /monitors/monitor_types/watchdog
 [18]: /monitors/monitor_types/composite
 [19]: https://app.datadoghq.com/monitors#create/import
-[20]: /graphing/event_stream
+[20]: /events

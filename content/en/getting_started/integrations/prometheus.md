@@ -7,7 +7,7 @@ further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -175,6 +175,6 @@ Official integrations have their own dedicated directories. There's a default in
 [5]: /developers/prometheus
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: https://docs.datadoghq.com/tagging
-[8]: /graphing/metrics/distributions
+[8]: /metrics/distributions
 [9]: https://github.com/DataDog/integrations-core/issues/1303
 [10]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

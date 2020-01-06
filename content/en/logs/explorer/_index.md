@@ -85,7 +85,7 @@ Use the *share* button to send your current log explorer view to a CSV file, tea
 
 
 [1]: /monitors/monitor_types/log
-[2]: /graphing/dashboards/
+[2]: /dashboards/
 [3]: /logs/logs_to_metrics/
 {{% /tab %}}
 {{< /tabs >}}

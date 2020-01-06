@@ -2,15 +2,16 @@
 title: Screenboards
 kind: documentation
 aliases:
-    - /graphing/dashboards/screenboard/
+    - /graphing/dashboards/screenboards/
+    - /dashboards/screenboard/
 further_reading:
-- link: "graphing/dashboards/template_variables"
+- link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "graphing/dashboards/shared_graph"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/widgets"
+- link: "/dashboards/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -75,7 +76,7 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/shared_graph/#screenboards
-[2]: /graphing/event_stream
+[1]: /dashboards/sharing/#screenboards
+[2]: /events
 [3]: /account_management/team/#datadog-user-roles
-[4]: /graphing/dashboards/#copy-import-export
+[4]: /dashboards/#copy-import-export

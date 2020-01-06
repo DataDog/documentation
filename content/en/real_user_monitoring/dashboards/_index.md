@@ -28,4 +28,4 @@ Customize this dashboard as you would [any other one][4], or directly explore th
 [1]: /real_user_monitoring/installation
 [2]: /real_user_monitoring/data_collected
 [3]: https://app.datadoghq.com/rum/list
-[4]: /graphing/dashboards
+[4]: /dashboards

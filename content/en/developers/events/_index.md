@@ -3,7 +3,7 @@ title: Events
 kind: documentation
 disable_toc: true
 further_reading:
-- link: "/graphing/event_stream"
+- link: "/events"
   tag: "Documentation"
   text: "Datadog events stream"
 - link: "/monitors/monitor_types/event"

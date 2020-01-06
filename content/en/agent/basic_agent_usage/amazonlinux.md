@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"

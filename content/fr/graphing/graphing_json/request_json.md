@@ -35,7 +35,7 @@ Si votre paramètre `requests` a plusieurs `requests`, le widget les affiche tou
 ]
 ```
 
-{{< img src="graphing/graphing_json/multi-lines.png" alt="plusieurs lignes"  >}}
+{{< img src="graphing/graphing_json/multi-lines.png" alt="plusieurs lignes" responsive="true" >}}
 
 ## Fonctions
 
@@ -105,7 +105,7 @@ Vous pouvez également additionner, soustraire, multiplier et diviser une série
 
 ## Séries empilées
 
-{{< img src="graphing/graphing_json/slice-n-stack.png" alt="filtrer et empiler"  >}}
+{{< img src="graphing/graphing_json/slice-n-stack.png" alt="filtrer et empiler" responsive="true" >}}
 
 Dans le cas de séries temporelles liées, vous pouvez les représenter en zones empilées en utilisant la syntaxe suivante :
 

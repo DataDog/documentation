@@ -5,13 +5,13 @@ description: "Build temporal heat map over a given metric."
 aliases:
     - /graphing/widgets/heat_map/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -120,9 +120,9 @@ Additional properties allowed in the `requests` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/dashboards/template_variables
-[3]: /graphing/graphing_json/widget_json
-[4]: /graphing/graphing_json/request_json
-[5]: /graphing/graphing_json/widget_json/#y-axis-schema
-[6]: /graphing/graphing_json/widget_json/#events-schema
+[1]: /events
+[2]: /dashboards/template_variables
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/request_json
+[5]: /dashboards/graphing_json/widget_json/#y-axis-schema
+[6]: /dashboards/graphing_json/widget_json/#events-schema

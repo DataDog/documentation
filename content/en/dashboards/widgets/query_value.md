@@ -5,10 +5,10 @@ description: "Display an aggregated value for a given metric query"
 aliases:
     - /graphing/widgets/query_value/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -27,9 +27,9 @@ The widget can display the latest value reported, or an aggregate computed from 
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See [the main graphing documentation][1] to configure a metric query.
+    * Metric: See the documentation [querying][1] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][3] to configure a log event query.
+    * Log Events: See [the log search documentation][1] to configure a log event query.
 2. Choose the units and the formatting.
 3. Optional: configure a conditional format depending on the value displayed.
 
@@ -49,7 +49,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][4] for the query value widget is:
+The dedicated [widget JSON schema definition][3] for the query value widget is:
 
 ```text
 QUERY_VALUE_SCHEMA = {
@@ -76,7 +76,7 @@ QUERY_VALUE_SCHEMA = {
 | Parameter     | Type             | Required | Description                                                                                                                                                  |
 |---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                |
-| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
+| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
 | `autoscale`   | Boolean          | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string           | no       | Display a unit of your choice on the widget.                                                                                                                 |
 | `precision`   | integer          | no       | Number of decimals to show. If not defined, the widget uses the raw value.                                                                                   |
@@ -94,16 +94,15 @@ Additional properties allowed in the `request` object:
 
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 |-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][5] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 | `aggregator`          | enum   | no       | Aggregator used for the request; available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing
+[1]: /logs/explorer/search/#search-syntax
 [2]: /tracing/app_analytics/search/#search-bar
-[3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
-[4]: /graphing/graphing_json/widget_json
-[5]: /graphing/graphing_json/request_json
-[6]: /graphing/graphing_json/widget_json/#conditional-format-schema
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/request_json
+[5]: /dashboards/graphing_json/widget_json/#conditional-format-schema

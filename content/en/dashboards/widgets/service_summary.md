@@ -5,10 +5,10 @@ description: "Displays the graphs of a chosen service in your screenboard."
 aliases:
     - /graphing/widgets/service_summary/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -89,4 +89,4 @@ TRACE_SERVICE_SCHEMA = {
 
 [1]: /tracing/visualization/service
 [2]: /tracing/send_traces
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[3]: /dashboards/graphing_json/widget_json/#time-schema

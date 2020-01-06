@@ -52,7 +52,7 @@ Datadog provides 3 user roles:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/team
-[2]: /graphing/dashboards
+[2]: /dashboards
 [3]: /monitors
-[4]: /graphing/event_stream
-[5]: /graphing/notebooks
+[4]: /events
+[5]: /notebooks

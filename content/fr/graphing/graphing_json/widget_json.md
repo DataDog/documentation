@@ -114,7 +114,7 @@ MARKERS_SCHEMA = {
 
 Les marqueurs suivants :
 
-{{< img src="graphing/graphing_json/markers.png" alt="Marqueurs"  style="width:80%;">}}
+{{< img src="graphing/graphing_json/markers.png" alt="Marqueurs" responsive="true" style="width:80%;">}}
 
 sont appliqués avec la configuration suivante :
 

@@ -5,10 +5,10 @@ aliases:
   - /graphing/infrastructure/containermap/
   - /guides/hostmap
 further_reading:
-- link: "graphing/infrastructure/livecontainers"
+- link: "/infrastructure/livecontainers"
   tag: "Graphing"
   text: "Get real-time visibility of all of the containers across your environment"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Graphing"
   text: "Understand what is going on at any level of your system"
 ---
@@ -29,7 +29,7 @@ After deploying the [Agent][4], no other configuration is necessary. For collect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/infrastructure/hostmap
+[1]: /infrastructure/hostmap
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
 [3]: /agent/autodiscovery
 [4]: /agent

@@ -5,13 +5,13 @@ beta: true
 aliases:
     - /graphing/widgets/table/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
 ---
@@ -95,8 +95,8 @@ To get multiple columns for metrics queries, you need multiple request objects, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/using_graphs/#configuring-a-graph
+[1]: /dashboards/querying/#configuring-a-graph
 [2]: /logs/explorer/search/#search-syntax
-[3]: /graphing/graphing_json/widget_json
-[4]: /graphing/graphing_json/request_json
-[5]: /graphing/graphing_json/widget_json/#conditional-format-schema
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/request_json
+[5]: /dashboards/graphing_json/widget_json/#conditional-format-schema

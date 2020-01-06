@@ -5,13 +5,13 @@ description: "Display text in your Screenboards."
 aliases:
     - /graphing/widgets/note/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -63,5 +63,5 @@ NOTE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widgets/free_text
-[2]: /graphing/graphing_json/widget_json
+[1]: /dashboards/widgets/free_text
+[2]: /dashboards/graphing_json/widget_json

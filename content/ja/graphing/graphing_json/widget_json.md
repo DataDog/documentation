@@ -114,7 +114,7 @@ MARKERS_SCHEMA = {
 
 マーカーの例を示します。
 
-{{< img src="graphing/graphing_json/markers.png" alt="Markers"  style="width:80%;">}}
+{{< img src="graphing/graphing_json/markers.png" alt="Markers" responsive="true" style="width:80%;">}}
 
 上のマーカーには、以下の構成が適用されています。
 

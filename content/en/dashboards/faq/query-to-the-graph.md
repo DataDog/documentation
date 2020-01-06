@@ -113,16 +113,16 @@ In this example the function `abs` makes sure that your results are positive num
 **Parameter involved: function**
 
 {{< whatsnext desc="Choose your type of functions" >}}
-    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/count" >}}Count: Count non-zero or non-null values of your metric. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/regression" >}}Regression: Apply a machine learning function to your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non-zero or non-null values of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply a machine learning function to your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Grouped queries, arithmetic, as_count/rate
@@ -157,13 +157,13 @@ Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 More information in [this blog post][9].
 Documentation about [StatsD/DogStatsD][10].
 
-[1]: /graphing/dashboards/timeboard
-[2]: /graphing/dashboards/screenboard
+[1]: /dashboards/timeboard
+[2]: /dashboards/screenboard
 [3]: /agent
 [4]: /developers/metrics/custom_metrics
-[5]: /graphing/faq/how-is-data-aggregated-in-graphs
-[6]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
-[7]: /graphing/functions/rollup
-[8]: /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
+[5]: /dashboards/faq/how-is-data-aggregated-in-graphs
+[6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[7]: /dashboards/functions/rollup
+[8]: /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [10]: /developers/metrics/dogstatsd_metrics_submission

@@ -6,13 +6,13 @@ aliases:
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
     - /graphing/dashboards/shared_graph/
 further_reading:
-- link: "graphing/dashboards/"
+- link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
-- link: "graphing/dashboards/template_variables"
+- link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "graphing/widgets"
+- link: "/dashboards/widgets"
   tag: "Documentation"
   text: "Discover Widgets for your Dashboard"
 ---
@@ -97,11 +97,11 @@ Datadog has a [dedicated API][9] allowing you to interact with your shared graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/timeboard
-[2]: /graphing/dashboards/screenboard
+[1]: /dashboards/timeboard
+[2]: /dashboards/screenboard
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /graphing/dashboards/screenboard/#global-time-selector
-[5]: /graphing/dashboards/template_variables
+[4]: /dashboards/screenboards/#global-time-selector
+[5]: /dashboards/template_variables
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: /help
 [8]: https://app.datadoghq.com/account/org_security

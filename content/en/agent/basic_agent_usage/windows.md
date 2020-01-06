@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -383,6 +383,6 @@ After configuration is complete, [restart the Agent][14].
 [9]: /#monitoring-windows-processes
 [10]: /integrations/wmi
 [11]: https://app.datadoghq.com/monitors#create/integration
-[12]: /graphing/infrastructure/process/?tab=linuxwindows#installation
+[12]: /infrastructure/process/?tab=linuxwindows#installation
 [13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/guide/agent-commands/#restart-the-agent

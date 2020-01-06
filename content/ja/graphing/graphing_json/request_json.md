@@ -35,7 +35,7 @@ further_reading:
 ]
 ```
 
-{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines"  >}}
+{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
 
 ## 関数
 
@@ -105,7 +105,7 @@ further_reading:
 
 ## 積み上げ系列
 
-{{< img src="graphing/graphing_json/slice-n-stack.png" alt="slice and stack"  >}}
+{{< img src="graphing/graphing_json/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
 
 関連する時系列どうしの場合は、次の構文を使用して積み上げ面グラフとして描画できます。
 

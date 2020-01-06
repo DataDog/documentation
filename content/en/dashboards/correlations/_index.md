@@ -5,10 +5,10 @@ aliases:
     - /graphing/correlations/
 beta: true
 further_reading:
-- link: "graphing/dashboards"
+- link: "/dashboards"
   tag: "Documentation"
   text: "Datadog Dashboards"
-- link: "graphing/notebooks"
+- link: "/notebooks"
   tag: "Documentation"
   text: "Datadog Notebooks"
 - link: "/tracing/visualization/service"

@@ -21,11 +21,11 @@ further_reading:
 ---
 Le graphique Évolution illustre l'évolution d'une valeur sur une période choisie :
 
-{{< img src="graphing/widgets/change/change.png" alt="Graphique Évolution" >}}
+{{< img src="graphing/widgets/change/change.png" alt="Graphique Évolution" responsive="true">}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/change/change_setup.png" alt="Configuration d'un graphique Évolution"  style="width:80%;">}}
+{{< img src="graphing/widgets/change/change_setup.png" alt="Configuration d'un graphique Évolution" responsive="true" style="width:80%;">}}
 
 ### Configuration
 
@@ -50,7 +50,7 @@ Le graphique Évolution illustre l'évolution d'une valeur sur une période choi
 ### Options
 #### Préférences d'affichage
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage" responsive="true" style="width:80%;">}}
 
 ##### Intervalle global
 
@@ -64,7 +64,7 @@ Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la lége
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

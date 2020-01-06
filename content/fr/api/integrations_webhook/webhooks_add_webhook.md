@@ -10,7 +10,6 @@ Ajoutez un Webhook spécifique à une intégration Datadog/Webhooks.
 
 **ARGUMENTS** :
 
-
 * **`hooks`** [*obligatoire*] :
    tableau d'objets Webhook. Un objet Webhook est composé de :
 

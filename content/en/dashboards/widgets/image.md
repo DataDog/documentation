@@ -5,10 +5,10 @@ description: "Inlude an image or a gif in your Datadog dashboards."
 aliases:
     - /graphing/widgets/image/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -56,4 +56,4 @@ IMAGE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

@@ -46,7 +46,7 @@ Renseignez les paramètres suivants pour intégrer Datadog à l'API Alibaba Clo
 
 Vous le trouverez en passant le curseur sur votre avatar dans le coin supérieur droit de la console Alibaba Cloud et en sélectionnant *Security Settings*. L'identifiant de compte est affiché en haut de cette page.
 
-{{< img src="integrations/alibaba_cloud/account_id_ac.png" alt="Identifiant de compte AC"  style="width:30%;">}}
+{{< img src="integrations/alibaba_cloud/account_id_ac.png" alt="Identifiant de compte AC" responsive="true" style="width:30%;">}}
 
 * **`Access Key Id`** et **`Access Key Secret`**
 
@@ -59,11 +59,11 @@ Dans votre compte Alibaba Cloud :
 
 2. Sélectionnez *Programmatic Access* :
 
-    {{< img src="integrations/alibaba_cloud/ac_programmatic_access.png" alt="Programmatic Access"  style="width:40%;">}}
+    {{< img src="integrations/alibaba_cloud/ac_programmatic_access.png" alt="Programmatic Access" responsive="true" style="width:40%;">}}
 
 3. Après avoir cliqué sur *OK*, copiez et collez les valeurs indiquées dans `AccessKeyID` et `AccessKeySecret` dans le [carré d'intégration Datadog/Alibaba Cloud][1] et cliquez sur *install integration*.
 
-    {{< img src="integrations/alibaba_cloud/ac_access_keys.png" alt="clés d'accès AC"  style="width:40%;">}}
+    {{< img src="integrations/alibaba_cloud/ac_access_keys.png" alt="clés d'accès AC" responsive="true" style="width:40%;">}}
 
 4. Dans votre compte Alibaba Cloud Account, sélectionnez `Add Permissions` pour l'utilisateur que vous venez de créer, puis ajoutez toutes les autorisations suivantes :
 

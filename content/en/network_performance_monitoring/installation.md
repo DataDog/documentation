@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/snmp"
   tag: "Documentation"
   text: "SNMP integration"
-- link: "/graphing/widgets/network"
+- link: "/dashboards/widgets/network"
   tag: "Documentation"
   text: "Network Widget"
 ---
@@ -77,8 +77,8 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 7. [Restart the Agent][2]: `sudo service datadog-agent restart`
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 
-[1]: https://docs.datadoghq.com/graphing/infrastructure/process/?tab=linuxwindows#installation
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

@@ -58,7 +58,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /graphing/infrastructure
+[2]: /infrastructure
 [3]: /agent
 [4]: https://docs.datadoghq.com/account_management/billing/serverless
 [5]: https://www.datadoghq.com/pricing/#included_serverless_functions-d

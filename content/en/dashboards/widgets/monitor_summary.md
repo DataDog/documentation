@@ -5,10 +5,10 @@ description: "Display a summary view of all your Datadog monitors, or a subset b
 aliases:
     - /graphing/widgets/monitor_summary/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -104,4 +104,4 @@ MANAGE_STATUS_SCHEMA = {
 
 [1]: /monitors/manage_monitor
 [2]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /graphing/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json

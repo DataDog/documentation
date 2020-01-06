@@ -31,4 +31,5 @@ Pour surveiller l'ensemble de votre infrastructure depuis un seul endroit, vous 
 {{< /whatsnext >}}
 
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}

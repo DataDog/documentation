@@ -53,8 +53,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/infrastructure/process
+[1]: /infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process
-[3]: /graphing/infrastructure/process/#search-syntax
+[3]: /infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /monitors/notifications

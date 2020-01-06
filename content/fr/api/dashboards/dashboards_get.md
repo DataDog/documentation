@@ -6,6 +6,7 @@ external_redirect: "/api/#obtenir-un-dashboard"
 ---
 
 ## Obtenir un dashboard
+
 Récupérez la définition d'un dashboard existant.
 
 **ARGUMENTS**:

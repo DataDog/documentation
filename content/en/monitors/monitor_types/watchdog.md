@@ -13,9 +13,7 @@ further_reading:
 
 ## Overview
 
-[Watchdog][1] is an algorithmic feature for APM that automatically detects application and infrastructure issues, by continuously observing trends and patterns in application metrics looking for atypical behavior. 
-
-**Note**: Watchdog is an APM feature, and Watchdog monitors are only available to APM customers.
+[Watchdog][1] is an algorithmic feature for APM and infrastructure metrics. It that automatically detects potential application and infrastructure issues by continuously observing trends and patterns in metrics and looking for atypical behavior.
 
 ## Monitor creation
 
@@ -42,7 +40,13 @@ After your selections are made, the graph at the top of the monitor creation pag
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Infrastructure-wide stories include network degradations detected in your cloud provider’s regions.
+Infrastructure-wide stories can include issues over the following integrations:
+
+* [System][1]: Host-level memory usage (memory leak), TCP retransmit rate, etc.
+* [Redis][2]
+* [PostgreSQL][3]
+* [NGINX][4]
+* [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
 
 After selecting Infrastructure, the graph at the top of the monitor creation page displays Watchdog events over time, along with a list of events.
 
@@ -50,6 +54,16 @@ After selecting Infrastructure, the graph at the top of the monitor creation pag
 
 No selection is necessary. You are notified when Watchdog detects issues across your infrastructure.
 
+
+[1]: /integrations/system
+[2]: /integrations/redis
+[3]: /integrations/postgres
+[4]: /integrations/nginx
+[5]: /integrations/amazon_web_services
+[6]: /integrations/amazon_s3
+[7]: /integrations/amazon_elb
+[8]: /integrations/amazon_cloudfront
+[9]: /integrations/amazon_dynamodb
 {{% /tab %}}
 {{< /tabs >}}
 
