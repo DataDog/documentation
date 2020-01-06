@@ -101,10 +101,14 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For Alpine Linux you also need to install `libc6-compat`
+For Alpine Linux, you also need to install the following packages:
 
 ```bash
+# All Alpine versions
 apk add libc6-compat
+
+# Alpine versions 3.9 and higher
+apk add gcompat
 ```
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
