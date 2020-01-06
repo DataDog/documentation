@@ -10,4 +10,4 @@ external_redirect: '/api/#events'
 
 イベントは 4000 文字に制限されています。4000 文字を超えるメッセージを含むイベントが送信された場合は、最初の 4000 文字だけが表示されます。
 
-[1]: /ja/graphing/event_stream
+[1]: /ja/events

@@ -23,4 +23,4 @@ Cet endpoint vous permet d'interroger des métriques sur la période de votre ch
 * **`query`** [*obligatoire*] :
   la chaîne de requête.
 
-[1]: /fr/graphing/functions
+[1]: /fr/dashboards/functions

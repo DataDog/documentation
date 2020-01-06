@@ -135,7 +135,7 @@ Agent のトラブルシューティングに関するヘルプ
 [1]: /ja/integrations
 [2]: /ja/developers/metrics/dogstatsd_metrics_submission
 [3]: /ja/api
-[4]: /ja/graphing/infrastructure/process
+[4]: /ja/infrastructure/process
 [5]: /ja/logs
 [6]: /ja/tracing
 [7]: https://www.datadoghq.com

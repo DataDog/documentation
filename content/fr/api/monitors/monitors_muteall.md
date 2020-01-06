@@ -12,4 +12,4 @@ En désactivant tous les monitors, ceux-ci n'enverront plus de notifications par
 
 Cet endpoint ne prend aucun argument JSON.
 
-[1]: /fr/graphing/event_stream
+[1]: /fr/events

@@ -134,7 +134,7 @@ Pour obtenir de l'aide pour le dépannage de l'Agent :
 [1]: /fr/integrations
 [2]: /fr/developers/metrics/dogstatsd_metrics_submission
 [3]: /fr/api
-[4]: /fr/graphing/infrastructure/process
+[4]: /fr/infrastructure/process
 [5]: /fr/logs
 [6]: /fr/tracing
 [7]: https://www.datadoghq.com

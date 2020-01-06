@@ -10,4 +10,4 @@ Le service d'événements vous permet de programmer l'envoi d'événements dans 
 
 Les événements ne peuvent pas dépasser 4 000 caractères. Si un événement est envoyé avec un message contenant plus de 4 000 caractères, seuls les 4000 premiers caractères seront affichés.
 
-[1]: /fr/graphing/event_stream
+[1]: /fr/events
