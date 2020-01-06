@@ -16,7 +16,7 @@ Sauf mention contraire dans votre commande, Datadog calcule le prix facturé en 
 ### Surveillance d'infrastructure
 
 * Un **host** est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts que vous surveillez en même temps dans le service Infrastructure de Datadog est mesuré toutes les heures.
-   * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
 * Un **conteneur** est un environnement d'exploitation autonome qui comprend une application ainsi que des paramètres et des bibliothèques de système d'exploitation limités. Le nombre de conteneurs que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les cinq minutes. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement.
 * Une [**métrique custom**][2] est une combinaison unique composée d'un nom de métrique, d'un ID de host et de tags. Le prix facturé par Datadog est calculé en fonction du nombre mensuel moyen de métriques custom uniques envoyées au service Infrastructure Datadog par heure.
@@ -27,7 +27,7 @@ Sauf mention contraire dans votre commande, Datadog calcule le prix facturé en 
 ### APM
 
 * Le nombre de **hosts d'APM** que vous surveillez en même temps dans le service APM de Datadog est mesuré toutes les heures.
-   * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
 * Une **span analysée** est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de spans analysées envoyées au service APM de Datadog.
 

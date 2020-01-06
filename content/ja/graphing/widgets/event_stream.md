@@ -14,11 +14,11 @@ further_reading:
 
 注: **このウィジェットには、直近の 100 イベントだけが表示されます**。
 
-{{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" >}}
+{{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" responsive="true">}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
+{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="event stream setup" responsive="true" style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -31,7 +31,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

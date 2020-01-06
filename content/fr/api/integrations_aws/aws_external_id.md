@@ -10,7 +10,6 @@ Générer un nouvel ID externe AWS pour une paire compte AWS/nom de rôle donné
 
 **ARGUMENTS** :
 
-
 * **`account_id`** [*obligatoire*] :
 
     Votre identifiant de compte AWS sans les tirets.

@@ -35,6 +35,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
     le paramètre query définit à quel moment le monitor se déclenche. La syntaxe de la requête dépend du type de monitor que vous créez :
 
     ##### Requête d'alerte de métrique
+
     `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
 
     -   `time_aggr` : avg, sum, max, min, change ou pct_change.
@@ -55,6 +56,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
     Utilisez ce paramètre pour créer un monitor outlier à l'aide de la requête suivante : `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`.
 
     ##### Requête de check de service
+
     `"check".over(tags).last(count).count_by_status()`
 
     *   **`check`** : nom du check, par exemple datadog.agent.up.
@@ -162,7 +164,6 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
     - Si une option de monitor non valide fait partie de la requête, la réponse sera :
 
     `Error: 400 - ["Invalid monitor option:<option non valide>"]`
-
 
 [1]: /fr/monitors/monitor_types/#import
 [2]: /fr/monitors/monitor_types
