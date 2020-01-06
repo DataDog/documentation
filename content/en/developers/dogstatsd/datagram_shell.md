@@ -31,11 +31,11 @@ This section specifies the raw datagram format for metrics, events, and service 
 
 Here are some example datagrams:
 
-* `page.views:1|c` : Increment the `page.views` counter.
+* `page.views:1|c` : Increment the `page.views` COUNT metric.
 * `fuel.level:0.5|g`: Record the fuel tank is half-empty.
 * `song.length:240|h|@0.5`: Sample the `song.length` histogram half of the time.
 * `users.uniques:1234|s`: Track unique visitors to the site.
-* `users.online:1|c|#country:china`: Increment the active users counter and tag by country of origin.
+* `users.online:1|c|#country:china`: Increment the active users COUNT metric and tag by country of origin.
 * `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
 [1]: /developers/metrics/#naming-metrics
