@@ -5,7 +5,7 @@ description: "Display a filtered log stream in your Datadog dashboards."
 aliases:
     - /graphing/widgets/log_stream/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

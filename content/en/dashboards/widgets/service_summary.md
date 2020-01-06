@@ -5,7 +5,7 @@ description: "Displays the graphs of a chosen service in your screenboard."
 aliases:
     - /graphing/widgets/service_summary/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

@@ -5,7 +5,7 @@ description: "Graph the current value of a metric in any monitor defined on your
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/timeboard/"

@@ -2,7 +2,8 @@
 title: Screenboards
 kind: documentation
 aliases:
-    - /graphing/dashboards/screenboard/
+    - /graphing/dashboards/screenboards/
+    - /dashboards/screenboard/
 further_reading:
 - link: "/dashboards/template_variables"
   tag: "Documentation"

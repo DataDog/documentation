@@ -5,7 +5,7 @@ description: "Display a summary view of all your Datadog monitors, or a subset b
 aliases:
     - /graphing/widgets/monitor_summary/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"

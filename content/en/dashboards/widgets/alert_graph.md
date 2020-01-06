@@ -5,7 +5,7 @@ description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
 further_reading:
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/timeboard/"

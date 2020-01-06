@@ -8,7 +8,7 @@ further_reading:
 - link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"
