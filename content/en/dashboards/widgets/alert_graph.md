@@ -5,13 +5,13 @@ description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -83,4 +83,4 @@ ALERT_GRAPH_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

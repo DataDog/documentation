@@ -114,7 +114,7 @@ For information on how Datadog handles your data, and other security considerati
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][28] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][29] and [alerts][30] to monitor your data.
+Now that you have your first integrations set up, you can start [exploring all of the metrics][28] being sent by Datadog to your application, and use these metrics to begin setting up [dashboards][29] and [alerts][30] to monitor your data.
 
 Also check out our [Logs management][31], [APM][32], and [Synthetics][33] solutions.
 
@@ -172,8 +172,8 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [25]: /tagging
 [26]: /agent/guide/agent-commands/#agent-status-and-information
 [27]: /security
-[28]: /graphing/metrics/explorer
-[29]: /graphing
+[28]: /metrics/explorer
+[29]: /dashboards
 [30]: /monitors
 [31]: /logs
 [32]: /tracing

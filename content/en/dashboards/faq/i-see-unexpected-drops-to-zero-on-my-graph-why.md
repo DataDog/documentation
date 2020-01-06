@@ -22,4 +22,4 @@ This feature might be changed in the future. For now, if you find it confusing y
 * "grouped by" queries only: increase the [fill interpolation][1] timeframe
 * all multi-line graphs: increase the [rollup][1] interval.
 
-[1]: /graphing/miscellaneous/functions
+[1]: /dashboards/functions/interpolation

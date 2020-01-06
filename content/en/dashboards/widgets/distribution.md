@@ -5,10 +5,10 @@ description: "Graph a metric distribution aggregated across one or several tags.
 aliases:
     - /graphing/widgets/distribution/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -102,6 +102,6 @@ Additional properties allowed the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widgets/heat_map
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/request_json
+[1]: /dashboards/widgets/heat_map
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/request_json

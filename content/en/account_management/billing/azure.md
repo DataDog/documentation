@@ -27,6 +27,6 @@ For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /tagging/using_tags/#integrations
-[3]: /graphing/infrastructure
+[3]: /infrastructure
 [4]: /help
 [5]: mailto:success@datadoghq.com

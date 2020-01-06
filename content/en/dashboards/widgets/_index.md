@@ -10,31 +10,31 @@ aliases:
 ## Overview
 
 {{< whatsnext desc="Choose a widget to learn how to use it in Datadog and through the API:">}}
-    {{< nextlink href="/graphing/widgets/alert_graph" >}}Alert Graph{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/change" >}}Change{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/check_status" >}}Check Status{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/distribution" >}}Distribution{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/event_stream" >}}Event Stream{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/free_text" >}}Free Text{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/group" >}}Group{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/iframe" >}}Iframe{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/image" >}}Image{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/network" >}}Network{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/note" >}}Notes and Links{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/query_value" >}}Query Value{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/slo" >}}Service Level Objective (SLO){{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/service_map" >}}Service Map{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/table" >}}Table{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/top_list" >}}Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_graph" >}}Alert Graph{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/change" >}}Change{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/check_status" >}}Check Status{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/distribution" >}}Distribution{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/event_stream" >}}Event Stream{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/free_text" >}}Free Text{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/group" >}}Group{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/iframe" >}}Iframe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/network" >}}Network{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/note" >}}Notes and Links{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO){{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_map" >}}Service Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/table" >}}Table{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list" >}}Top List{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Full screen
@@ -83,8 +83,8 @@ To download a widget in PNG format, click the export button in the upper right h
 
 To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
 
-[1]: /graphing/widgets/timeseries#full-screen
-[2]: /graphing/dashboards
-[3]: /graphing/notebooks
+[1]: /dashboards/widgets/timeseries#full-screen
+[2]: /dashboards
+[3]: /notebooks
 [4]: /tracing/visualization/service
 [5]: /tracing/visualization/resource

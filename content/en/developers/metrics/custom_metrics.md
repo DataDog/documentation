@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /getting_started/custom_metrics
 further_reading:
-- link: "/graphing/metrics/introduction"
+- link: "/metrics/introduction"
   tag: "Documentation"
   text: "Introduction to Metrics"
-- link: "/graphing/metrics/distributions"
+- link: "/metrics/distributions"
   tag: "Documentation"
   text: "Distribution Metrics"
 ---

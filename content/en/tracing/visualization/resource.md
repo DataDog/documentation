@@ -93,7 +93,7 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [1]: /tracing/visualization/#services
 [2]: /tracing/visualization
 [3]: /tracing/visualization/#trace
-[4]: /graphing/dashboards/timeboard
+[4]: /dashboards/timeboard
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace
 [7]: /tracing/advanced/search

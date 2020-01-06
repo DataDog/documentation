@@ -135,7 +135,7 @@ For help troubleshooting the Agent:
 [1]: /integrations
 [2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /api
-[4]: /graphing/infrastructure/process
+[4]: /infrastructure/process
 [5]: /logs
 [6]: /tracing
 [7]: https://www.datadoghq.com

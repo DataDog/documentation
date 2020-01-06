@@ -233,7 +233,7 @@ Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (hos
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags"  style="width:80%;">}}
 
-[1]: /graphing/infrastructure/hostmap
+[1]: /infrastructure/hostmap
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
@@ -241,7 +241,7 @@ Assign host tags in the UI via the [Infrastructure List page][1]. Click on any h
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags"  style="width:80%;">}}
 
-[1]: /graphing/infrastructure
+[1]: /infrastructure
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
@@ -263,7 +263,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags"  style="width:80%;">}}
 
-[1]: /graphing/metrics/distributions
+[1]: /metrics/distributions
 [2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
@@ -438,7 +438,7 @@ Web integrations are authentication based. Metrics are collected with API calls.
 [4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
-[7]: /graphing/#arithmetic-between-two-metrics
+[7]: /dashboards/querying/#arithmetic-between-two-metrics
 [8]: /agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go

@@ -35,4 +35,4 @@ Click on a check name to see the tags associated with the check:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widgets/check_status
+[1]: /dashboards/widgets/check_status

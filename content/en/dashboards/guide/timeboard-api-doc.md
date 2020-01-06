@@ -561,4 +561,4 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /graphing/dashboards/timeboard
+[1]: /dashboards/timeboard

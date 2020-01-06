@@ -24,6 +24,6 @@ Then, to [graph][4] the number of web page visitors, there are a variety of poss
 * `"q": "web_page_visitors{*} by {page}"` -> graph the number of visitors, with a separate line for each page.
 
 [1]: /monitors/monitor_types/event
-[2]: /graphing/#overlay-events-for-additional-context
+[2]: /dashboards/timeboards/#events
 [3]: /tagging
-[4]: /graphing/#the-graphing-editor
+[4]: /dashboards/querying/#graphing-editor

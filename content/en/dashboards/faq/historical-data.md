@@ -40,8 +40,8 @@ For dashboards, the metric or tag appears in the visualization following the age
 
 If you're running the Agent, and you've intentionally [stopped][4] or [removed][5] your host, all hosts that have not seen new data in 2 hours disappear from the UI. You can still query against them. However, they do not appear in drop-downs, the infrastructure list, or host map.
 
-[1]: /graphing/graphing_json
+[1]: /dashboards/graphing_json
 [2]: /agent
-[3]: /graphing/infrastructure
+[3]: /infrastructure
 [4]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [5]: /agent/faq/how-do-i-uninstall-the-agent

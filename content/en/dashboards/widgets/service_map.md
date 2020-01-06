@@ -5,7 +5,7 @@ description: "Displays a map of a service to all of the services that call it, a
 aliases:
     - /graphing/widgets/service_map/
 further_reading:
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -63,4 +63,4 @@ SERVICEMAP_SCHEMA = {
 [1]: /tracing/send_traces
 [2]: /tracing/advanced/setting_primary_tags_to_scope
 [3]: /tracing/visualization/service
-[4]: /graphing/graphing_json/widget_json
+[4]: /dashboards/graphing_json/widget_json

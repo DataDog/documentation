@@ -4,7 +4,7 @@ kind: documentation
 aliases:
 - /developers/metrics/metrics_units
 further_reading:
-- link: "graphing/"
+- link: "/dashboards/"
   tag: "Documentation"
   text: "Visualize your data to gain insight"
 ---

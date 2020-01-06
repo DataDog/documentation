@@ -45,9 +45,9 @@ Use [template variables][3] to save time switching the **from** tag on graphs in
 
 {{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Dashboard Template Variables"  style="width:80%;">}}
 
-[1]: /graphing/dashboards
-[2]: /graphing/event_stream
-[3]: /graphing/dashboards/template_variables
+[1]: /dashboards
+[2]: /events
+[3]: /dashboards/template_variables
 {{% /tab %}}
 {{% tab "Examples" %}}
 
@@ -232,7 +232,7 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 [2]: /tracing/app_analytics/search
 [3]: /monitors/manage_monitor
 [4]: /logs/explorer/search
-[5]: /graphing/infrastructure/hostmap
+[5]: /infrastructure/hostmap
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -299,14 +299,14 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/assigning_tags
-[2]: /graphing/event_stream
+[2]: /events
 [3]: /integrations
-[4]: /graphing/infrastructure/hostmap
-[5]: /graphing/infrastructure
-[6]: /graphing/infrastructure/livecontainers
-[7]: /graphing/infrastructure/process
-[8]: /graphing/metrics/explorer
-[9]: /graphing/notebooks
+[4]: /infrastructure/hostmap
+[5]: /infrastructure
+[6]: /infrastructure/livecontainers
+[7]: /infrastructure/process
+[8]: /metrics/explorer
+[9]: /notebooks
 [10]: /logs/explorer/search
 [11]: /logs/explorer/analytics
 [12]: /logs/explorer/patterns

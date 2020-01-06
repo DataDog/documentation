@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /graphing/graphing_json/request_json/
 further_reading:
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "graphing/graphing_json/widget_json/"
+- link: "/dashboards/graphing_json/widget_json/"
   tag: "Documentation"
   text: "Widget JSON schema"
 ---
@@ -200,5 +200,5 @@ Here is an example using the `week_before()` function:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/functions
+[1]: /dashboards/functions
 [2]: https://app.datadoghq.com/metric/summary

@@ -6,7 +6,7 @@ further_reading:
 - link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Discover Datadog metrics types"
-- link: "/graphing/functions/rollup/"
+- link: "/functions/rollup/"
   tag: "Documentation"
   text: "Learn more about the rollup function"
 aliases:

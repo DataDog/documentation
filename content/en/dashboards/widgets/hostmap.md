@@ -5,13 +5,13 @@ description: "Display the Datadog host map in your dashboards."
 aliases:
     - /graphing/widgets/hostmap/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -108,6 +108,6 @@ HOSTMAP_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/infrastructure/hostmap
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/request_json
+[1]: /infrastructure/hostmap
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/request_json

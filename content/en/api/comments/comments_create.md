@@ -20,4 +20,4 @@ Comments are essentially special forms of events that appear in the [event strea
 * **`related_event_id`** [*optional*, *default* = **None**]:
     The id of another comment or event to reply to.
 
-[1]: /graphing/event_stream
+[1]: /events

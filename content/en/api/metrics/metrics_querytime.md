@@ -24,4 +24,4 @@ This endpoint allows you to query for metrics from any time period. Use the quer
 * **`query`** [*required*]:
     The query string
 
-[1]: /graphing/functions
+[1]: /dashboards/functions

@@ -5,7 +5,7 @@ disable_toc: true
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
 further_reading:
-- link: "graphing/dashboards/shared_graph/"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Shared Graphs"
 ---

@@ -5,13 +5,13 @@ description: "Learn about data, aggregation, and graphing metrics"
 aliases:
   - /graphing/metrics/introduction/
 further_reading:
-  - link: "graphing/metrics/explorer"
+  - link: "/metrics/explorer"
     tag: "Documentation"
     text: "Metrics Explorer"
-  - link: "graphing/metrics/summary"
+  - link: "/metrics/summary"
     tag: "Documentation"
     text: "Metrics Summary"
-  - link: "graphing/metrics/distributions"
+  - link: "/metrics/distributions"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---

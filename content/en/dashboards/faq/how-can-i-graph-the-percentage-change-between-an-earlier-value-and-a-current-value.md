@@ -17,4 +17,4 @@ Here's an example where we can see the percentage change of a system metric from
 
 {{< img src="graphing/faq/percentage_timeshift.png" alt="percentage timeshift"  >}}
 
-[1]: /graphing/functions/timeshift
+[1]: /dashboards/functions/timeshift

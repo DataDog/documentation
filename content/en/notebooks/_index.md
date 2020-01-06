@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
-- link: "graphing/dashboards/screenboard"
+- link: "/dashboards/screenboard"
   tag: "Documentation"
   text: "Create a Screenboard"
-- link: "graphing/dashboards/timeboard"
+- link: "/dashboards/timeboard"
   tag: "Documentation"
   text: "Create a Timeboard"
 ---
@@ -108,8 +108,8 @@ Delete a notebook from the notebook list page, or inside the individual notebook
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook
-[3]: /graphing/widgets/timeseries
-[4]: /graphing/widgets/heat_map
-[5]: /graphing/widgets/distribution
-[6]: /graphing/widgets/log_stream
-[7]: /graphing/widgets/#full-screen
+[3]: /dashboards/widgets/timeseries
+[4]: /dashboards/widgets/heat_map
+[5]: /dashboards/widgets/distribution
+[6]: /dashboards/widgets/log_stream
+[7]: /dashboards/widgets/#full-screen

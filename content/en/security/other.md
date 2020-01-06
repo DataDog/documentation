@@ -37,8 +37,8 @@ Due to their sensitive nature, additional security guarantees are implemented wh
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security
-[2]: /graphing/infrastructure/process
-[3]: /graphing/infrastructure/process/#process-arguments-scrubbing
+[2]: /infrastructure/process
+[3]: /infrastructure/process/#process-arguments-scrubbing
 [4]: /integrations
 [5]: /integrations/amazon_web_services
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles

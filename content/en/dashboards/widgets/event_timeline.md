@@ -5,10 +5,10 @@ description: "Display your Event Stream Timeline in a widget."
 aliases:
     - /graphing/widgets/event_timeline/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -70,6 +70,6 @@ EVENT_TIMELINE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[1]: /events
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json/#time-schema
