@@ -1,5 +1,5 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 
 start=$(date +%s)
 end=$(date -v+3H +%s)

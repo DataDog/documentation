@@ -1,5 +1,5 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 downtime_id=1656
 
 # Create a downtime to delete

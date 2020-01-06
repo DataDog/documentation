@@ -1,5 +1,5 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 
 downtime_id=2473
 

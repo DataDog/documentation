@@ -1,5 +1,5 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 to_time=$(date +%s)
 from_time=$(date --date='1 day ago' +%s)
 

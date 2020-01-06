@@ -2,8 +2,8 @@
 # Replace the API and APP keys below
 # with the ones for your account
 
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 monitor_id=<YOUR_MONITOR_ID>
 
 # Mute a monitor

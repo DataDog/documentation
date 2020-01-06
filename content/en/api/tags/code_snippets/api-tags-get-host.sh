@@ -1,5 +1,5 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<YOUR_API_KEY>"
+app_key="<YOUR_APP_KEY>"
 
 # pass a single hostname as an argument to search for the specified host
 host=$1
