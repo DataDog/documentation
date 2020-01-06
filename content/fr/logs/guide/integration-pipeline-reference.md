@@ -65,7 +65,6 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 | [Varnish][66]                    | [Fichier YAML Datadog personnalisé][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Fichier YAML d'intégration Datadog][69]              | `zookeeper`                |
 
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -36,7 +36,6 @@ Si tout fonctionne, des données apparaissent dans le terminal et le `out.txt` e
 
 Pour voir d'autres exemples, consultez notre [documentation relative à l'API][1].
 
-
 [1]: /fr/api
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py

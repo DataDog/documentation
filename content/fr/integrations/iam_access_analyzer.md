@@ -23,6 +23,7 @@ version: 1
 Utilisez AWS Identity and Access Management (IAM) Access Analyzer sur votre compte Amazon pour analyser en permanence les autorisations IAM accordées en utilisant les stratégies de votre compte. Datadog s'intègre à Amazon IAM Access Analyzer via une fonction Lambda qui transmet tous les logs à Datadog.
 
 ## Configuration
+
 ### Collecte de logs
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][1].

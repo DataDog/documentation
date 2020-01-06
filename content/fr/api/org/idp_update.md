@@ -15,6 +15,7 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ### Multipart Form-Data
 
 ##### EN-TÊTES
+
 * **`Content-Type: multipart/form-data`**
 
 **ARGUMENTS**:
@@ -25,6 +26,7 @@ Il existe plusieurs options permettant de mettre à jour les métadonnées de fo
 ### XML Body
 
 ##### EN-TÊTES
+
 * **`Content-Type: application/xml`**
 
 **ARGUMENTS**:

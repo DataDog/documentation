@@ -21,11 +21,11 @@ further_reading:
 ---
 変化グラフは、選択された期間中の値の変化を表示します。
 
-{{< img src="graphing/widgets/change/change.png" alt="Change graph" >}}
+{{< img src="graphing/widgets/change/change.png" alt="Change graph" responsive="true">}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup"  style="width:80%;">}}
+{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup" responsive="true" style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -50,7 +50,7 @@ further_reading:
 ### オプション
 #### 表示設定
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
 
 ##### グローバルタイム
 
@@ -64,7 +64,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

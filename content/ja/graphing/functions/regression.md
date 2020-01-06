@@ -12,7 +12,7 @@ kind: documentation
 
 最も一般的な線形回帰である最小二乗法 (OLS) は、極値ポイントが少数あるだけでも大きな影響を受けがちです。ロバスト回帰も回帰直線を求める方法の 1 つですが、少数の極値からはそれほど強い影響を受けません。例として、次のプロットを見てみます。
 
-{{< img src="graphing/functions/regression/robust_trend.png" alt="robust trend"  style="width:80%;">}}
+{{< img src="graphing/functions/regression/robust_trend.png" alt="robust trend" responsive="true" style="width:80%;">}}
 
 元のメトリクスは青い実線で示されています。紫の破線は OLS 回帰線で、黄色の破線がロバスト回帰線です。メトリクスにある短時間のスパイクによって OLS 回帰線はやや上向きになりますが、ロバスト回帰線はこのスパイクを無視し、メトリクスの全体的傾向により的確に沿っています。
 
@@ -26,7 +26,7 @@ kind: documentation
 
 関数 `sin(x) * x/2 + x` に対して `trend_line(sin(x) * x/2 + x)` は次のようなグラフになります。
 
-{{< img src="graphing/functions/regression/trend_line_function.png" alt="Trend line function"  style="width:80%;">}}
+{{< img src="graphing/functions/regression/trend_line_function.png" alt="Trend line function" responsive="true" style="width:80%;">}}
 
 ## 区分的定数
 
@@ -38,7 +38,7 @@ kind: documentation
 
 関数 `x` に対して `piecewise_constant(x)` は次のようなグラフになります。
 
-{{< img src="graphing/functions/regression/piecewise_constant.png" alt="piecewise constant"  style="width:80%;">}}
+{{< img src="graphing/functions/regression/piecewise_constant.png" alt="piecewise constant" responsive="true" style="width:80%;">}}
 
 ## その他の関数
 

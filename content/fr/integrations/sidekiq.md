@@ -17,12 +17,13 @@ Connectez les logs Sidekiq à Datadog afin de suivre le nombre de requêtes par 
 Cette intégration prend en charge aussi bien les logs d'accès que les logs d'erreur.
 
 ## Implémentation
-### Installation
 
+### Installation
 
 L'intégration Sidekiq est incluse avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos hosts.
 
 ### Configuration
+
 #### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**

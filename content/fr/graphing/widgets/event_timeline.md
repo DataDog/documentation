@@ -12,11 +12,11 @@ further_reading:
 ---
 La chronologie des événements est une version widget de la chronologie qui apparaît en haut de la [vue Chronologie des événements[1] :
 
-{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Exemple de chronologie des événements"  >}}
+{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Exemple de chronologie des événements" responsive="true" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Exemple de chronologie des événements"  style="width:80%;">}}
+{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Exemple de chronologie des événements" responsive="true" style="width:80%;">}}
 
 ### Configuration
 
@@ -28,7 +28,7 @@ La chronologie des événements est une version widget de la chronologie qui app
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

@@ -174,8 +174,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
 
-
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

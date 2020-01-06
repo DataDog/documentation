@@ -12,12 +12,15 @@ further_reading:
     text: "Pourquoi installer l'Agent Datadog sur mes instances dans le cloud\_?"
 ---
 ## Présentation
+
 L'Agent est un logiciel léger installé sur vos hosts. Il transmet les métriques et les événements à partir de votre host à Datadog via les [intégrations][1], [DogStatsD][2] ou l'[API][3]. Avec une configuration supplémentaire, l'Agent peut transmettre des [live processes][4], [logs][5] et [traces][6].
 
 ## Implémentation
+
 Si vous ne l'avez pas encore fait, créez un [compte Datadog][7].
 
 ### Installation
+
 L'Agent peut être installé sur de nombreuses plateformes différentes, directement sur le host ou en tant que [version conteneurisée][8]. La plupart des systèmes possèdent une options d'installation en ligne.
 
 {{< partial name="platforms/platforms.html" desc="Choisissez votre plateforme pour voir les instructions d'installation :" links="gs" >}}
@@ -55,9 +58,11 @@ Pour l'[Agent conteneur][4], les options de configuration de `datadog.yaml` sont
 {{< /tabs >}}
 
 ### Validation
+
 Exécutez la [commande status][9] de l'Agent pour vérifier l'installation.
 
 ### Commandes
+
 Consultez la page relative aux [commandes de l'Agent][10] pour [démarrer][11], [arrêter][12] ou [redémarrer][13] votre Agent.
 
 ## Données collectées
@@ -68,8 +73,8 @@ Consultez la page relative aux [commandes de l'Agent][10] pour [démarrer][11], 
 
 Les métriques ci-dessous sont disponibles pour la version 6 de l'Agent. Si vous disposez de la version 5, consultez l'intégration [Métriques de l'Agent][14].
 
-| Métrique                           | Description                                                                                                        |
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Métrique                           | Description                                                                                                          |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **datadog.agent.python.version** | Affiche une valeur de `1` si l'Agent transmet actuellement des données à Datadog. Le tag `python_version` est ajouté à la métrique. |
 | **datadog.agent.running**        | Affiche une valeur de `1` si l'Agent transmet actuellement des données à Datadog.                                                 |
 | **datadog.agent.started**        | Un nombre d'une valeur de `1` envoyé lorsque l'Agent se lance (disponible pour les versions 6.12 et ultérieures).                                        |
@@ -95,9 +100,11 @@ En fonction de votre plateforme, l'Agent présente plusieurs checks de base acti
 Pour recueillir des métriques provenant d'autres technologies, consultez la page relative aux [intégrations][20].
 
 ### Événements
+
 L'Agent envoie des événements à Datadog lorsqu'un Agent est démarré ou redémarré.
 
 ### Checks de service
+
 **datadog.agent.up** : 
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
@@ -105,6 +112,7 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si c
 Renvoie `CRITICAL` si un check de l'Agent n'est pas capable d'envoyer des métriques à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Pour obtenir de l'aide pour le dépannage de l'Agent :
 
 * Consultez la page [Dépannage de l'Agent][21].
@@ -112,10 +120,12 @@ Pour obtenir de l'aide pour le dépannage de l'Agent :
 * Contactez [l'assistance Datadog][23].
 
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 <p>
 
 ## Étapes suivantes
+
 {{< whatsnext desc="Une fois que l'Agent est installé :">}}
     {{< nextlink href="/getting_started/integrations" tag="Documentation" >}}En savoir plus sur les intégrations{{< /nextlink >}}
     {{< nextlink href="/getting_started/application" tag="Documentation" >}}En savoir plus sur l'interface utilisateur de Datadog{{< /nextlink >}}

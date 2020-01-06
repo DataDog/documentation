@@ -41,7 +41,6 @@ public class MyJob {
 ```
 
 
-
 [1]: /ja/tracing/setup/java/#compatibility
 [2]: /ja/tracing/visualization/#trace
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
@@ -107,7 +106,6 @@ span.finish()
 
 
 
-
 [1]: /ja/tracing/setup/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
@@ -147,7 +145,6 @@ end
 
 手動インスツルメンテーションに関する詳細は、[API ドキュメント][2]を参照してください。
 
-
 [1]: /ja/tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
@@ -177,6 +174,7 @@ func main() {
     span.SetTag("<タグキー>", "<タグの値>")
 }
 ```
+
 **トレースコンテキストを手動で伝播して、分散[トレース][3]を作成します。**
 
 ```go
@@ -223,7 +221,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer span.Finish()
 }
 ```
-
 
 
 [1]: /ja/tracing/setup/go/#compatibility
@@ -354,7 +351,6 @@ resources.ddtrace = true
  PHP 7 より前のフレームワークでは、Laravel の `php artisan optimize` コマンドなど、PHP クラスをコンパイルする方法がありました。
 
 これは[推奨されませんが][6]、PHP 7.x を使用している場合、バージョン 7 より前のアプリでは、このキャッシュメカニズムを使うことができます。この場合、Datadog は Composer ファイルに `datadog/dd-trace` を追加する方法ではなく、[OpenTracing][7] API の使用を推奨します。
-
 
 [1]: /ja/tracing/setup/php/#automatic-instrumentation
 [2]: /ja/tracing/visualization/#trace
