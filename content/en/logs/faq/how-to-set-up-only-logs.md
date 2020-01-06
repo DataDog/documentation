@@ -35,7 +35,7 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-If you are using the container Agent, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES` `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
+If you are using the container Agent, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -57,7 +57,7 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES` `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
+If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
 
 ```yaml
 ---
