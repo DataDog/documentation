@@ -5,7 +5,7 @@ description: "Display the evolution of one or more metrics, log events, Analyzed
 aliases:
     - /graphing/widgets/timeseries/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/screenboards/"

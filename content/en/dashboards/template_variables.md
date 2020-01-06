@@ -125,4 +125,4 @@ For example, enter `tags:$region` in the event overlays search box. This searche
 
 [1]: /tagging/#defining-tags
 [2]: /logs/explorer/?tab=facets#setup
-[3]: /dashboards/timeboard/#events
+[3]: /dashboards/timeboards/#events

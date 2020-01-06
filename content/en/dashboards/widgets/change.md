@@ -5,7 +5,7 @@ description: "Graph the change in a value over a chosen time period."
 aliases:
     - /graphing/widgets/change/
 further_reading:
-- link: "/dashboards/dashboards/timeboard/"
+- link: "/dashboards/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/dashboards/screenboards/"
