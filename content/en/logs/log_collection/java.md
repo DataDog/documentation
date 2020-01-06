@@ -194,7 +194,7 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
 <Configuration>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <JSONLayout compact="true" eventEol="true" properties="true"/>
+            <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true"/>
         </Console>
     </Appenders>
     <Loggers>
