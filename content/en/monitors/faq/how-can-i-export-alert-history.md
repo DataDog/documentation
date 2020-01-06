@@ -1,5 +1,5 @@
 ---
-title: How do I export Monitors Alerts?
+title: How do I export Monitor Alerts?
 kind: faq
 disable_toc: true
 ---
