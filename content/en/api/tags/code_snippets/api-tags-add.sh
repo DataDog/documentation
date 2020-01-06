@@ -1,7 +1,7 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
-host_name= "<HOSTNAME>"
+host_name="<HOSTNAME>"
 
 curl  -X POST \
 -H "Content-type: application/json" \
