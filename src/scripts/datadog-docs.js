@@ -12,6 +12,10 @@ import { moveToAnchor } from './helpers/moveToAnchor';
 // gTag
 window.dataLayer = window.dataLayer || [];
 
+let jvc;
+
+jvc.add();
+
 const siteEnv = document.querySelector('html').dataset.env;
 
 let gaTag = '';

@@ -4,7 +4,6 @@ static_url: "https://docs.datadoghq.com/"
 ga: UA-21102638-5
 
 header_scripts:
-  - datadog_monitoring: true
   - hotjar: true
   - google-site-tag: true
   - google-tag-manager: true

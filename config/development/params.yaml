@@ -5,7 +5,6 @@ static_url: "http://localhost:1313/"
 
 
 header_scripts:
-  - datadog_monitoring: true
   - hotjar: false
   - google-tag-manager: false
   - google-site-tag: false

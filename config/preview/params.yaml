@@ -4,7 +4,6 @@ static_url: "https://docs-staging.datadoghq.com/"
 ga: UA-21102638-9
 
 header_scripts:
-  - datadog_monitoring: true
   - hotjar: true
   - google-site-tag: false
   - google-tag-manager: false
