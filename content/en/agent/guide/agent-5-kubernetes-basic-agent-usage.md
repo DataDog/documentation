@@ -288,7 +288,7 @@ Checks
 [2]: https://hub.docker.com/r/datadog/docker-dd-agent
 [3]: /#host-setup
 [4]: /integrations/docker_daemon
-[5]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[5]: /agent/kubernetes/daemonset_setup/#configure-rbac-permissions
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
