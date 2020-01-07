@@ -31,6 +31,7 @@ After adding [`datadog/browser-logs`][4] to your `package.json` file, initialize
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
+
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -98,6 +99,16 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 **Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the library.
 
+## Initialization parameters
+
+| Parameter            | Type   | Required | Default | Description                                                                                       |
+|----------------------|--------|----------|---------|---------------------------------------------------------------------------------------------------|
+| `applicationId`      | String | Yes      | ``      | The RUM application ID.                                                                           |
+| `clientToken`        | String | Yes      | ``      | A [Datadog Client Token][5].                        |
+| `datacenter`         | String | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.        |
+| `resourceSampleRate` | Number | No       | `100`   | Sampling to apply for ressource collection. `100` to keep all resources, `0` to drop all of them. |
+| `sampleRate`         | Number | No       | `100`   | Sampling to apply for sessions collection. `100` to keep all sessions, `0` to drop all of them.   |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -106,3 +117,4 @@ Paste the generated code snippet into the head tag (in front of any other script
 [2]: /real_user_monitoring/data_collected
 [3]: /real_user_monitoring/dashboards
 [4]: https://www.npmjs.com/package/@datadog/browser-logs
+[5]: /account_management/api-app-keys/#client-tokens
