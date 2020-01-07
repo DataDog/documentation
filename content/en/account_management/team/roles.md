@@ -41,7 +41,7 @@ Once a role is created you can [add this role to existing users][6].
 
 ## List of available permissions
 
-All permissions have up to three options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact of each available permission.
+Select first the General permission for your role to cover all posibilities, then fine tune it with the [Advanced Permissions](#advanced-permissions).
 
 ### General Permissions
 
@@ -52,6 +52,8 @@ All permissions have up to three options that can be selected: Read, Write, and 
 | Read-Only Access   | This permission gives to the role read access to parts of the application not explicitly defined with permissions or restricted through the combination of the user's roles and the permissions granted them.                                                                                         |
 
 ### Advanced Permissions
+
+All permissions have up to three options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact of each available permission.
 
 #### Logs
 
