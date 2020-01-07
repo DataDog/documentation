@@ -16,7 +16,7 @@ To set up Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Fill out  Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
-3. Setup Datadog Browser Log Collector [through NPM](#npm-setup) or  Paste the [generated code snippet](#bundle-setup) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors.
+3. Setup Datadog Browser Log Collector [through NPM](#npm-setup) or paste the [generated code snippet](#bundle-setup) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors.
 4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
 5. Visualize the [data collected][2] in Datadog [out of the box Dashboards][3].
 
