@@ -29,11 +29,11 @@ Consultez la [section Outils de développement][1] pour découvrir les détails 
 
 Comme d'autres types de métriques, `gauges` ou `histograms` par exemple, les distributions disposent des agrégations suivantes : `count`, `min`, `max`, `sum` et `avg`. Les distributions sont initialement taguées de la même manière que d'autres métriques (avec des tags personnalisés définis dans le code) et sont résolues avec le tag de host qui a signalé la métrique. Vous pouvez également calculer des agrégations par centiles pour un ensemble de tags (jusqu'à 10) spécifiés sur la page [Métriques de distribution][2]. Cela fournit des agrégations pour `p50`, `p75`, `p90`, `p95` et `p99`.
 
-{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="UI des métriques de distribution" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="UI des métriques de distribution"  style="width:80%;">}}
 
 Après avoir choisi d'appliquer des agrégations par centile sur une métrique de distribution, ces agrégations sont automatiquement disponibles dans l'interface graphique :
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Métrique de distribution bis" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Métrique de distribution bis"  style="width:80%;">}}
 
 ## Personnaliser le tagging
 
@@ -43,7 +43,7 @@ Pour personnaliser le tagging, passez le curseur sur votre métrique dans le tab
 
 **Remarque** : la personnalisation de tags via liste blanche ne permet pas d'exclure de tags. L'ajout de tags débutant par `!` n'est pas accepté.
 
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Métrique de distribution" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Métrique de distribution"  style="width:80%;">}}
 
 ## Nombre de métriques de distribution
 

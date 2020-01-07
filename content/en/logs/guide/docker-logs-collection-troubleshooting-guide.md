@@ -34,9 +34,10 @@ There are a number of common issues that can get in the way when sending new con
 4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#if-the-logs-agent-status-shows-no-errors)
 
 ## The Logs Agent shows "not running" in its status
+
 If you see the following message when you run the Agent Status command:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -49,9 +50,10 @@ This means that you did not enable logging in the Agent.
 To enable logging for the Container Agent, set the following environment variable: `DD_LOGS_ENABLED=true`.
 
 ## The Logs Agent shows no logs processed or sent
+
 If the Logs Agent Status shows no integrations and you see `LogsProcessed: 0 and LogsSent: 0`:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -61,7 +63,7 @@ Logs Agent
 
 This status means that logs are enabled but you haven't specified which containers the Agent should collect from.
 
-1. To check what environment variables you've set, run the command `docker inspect <agent-container>`.
+1. To check what environment variables you've set, run the command `docker inspect <AGENT_CONTAINER>`.
 
 2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`.
 
@@ -69,7 +71,7 @@ This status means that logs are enabled but you haven't specified which containe
 
 If the Logs Agent Status shows `Status: Pending`:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -92,7 +94,7 @@ If the Docker Daemon starts while the host Agent is already running, restart the
 
 In order for the Container Agent to collect logs from Docker containers, it needs to have access to the Docker socket. If it doesn't have access, the following logs appear in `agent.log`:
 
-```
+```text
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:51 in NewLauncher) | Could not setup the docker launcher: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:58 in NewLauncher) | Could not setup the kubernetes launcher: /var/log/pods not found
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:61 in NewLauncher) | Container logs won't be collected
@@ -101,9 +103,10 @@ In order for the Container Agent to collect logs from Docker containers, it need
 Relaunch the Agent container with the following option: `-v /var/run/docker.sock:/var/run/docker.sock:ro` to allow access to the Docker socket.
 
 ### (Host Agent only) the "dd-agent" user is not part of the Docker group
+
 If you're using the Host Agent, the user `dd-agent` needs to be added to the Docker group in order to have permission to read from the Docker socket. If you see the following error logs in the `agent.log` file:
 
-```
+```text
 2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
 
 2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
@@ -112,6 +115,7 @@ If you're using the Host Agent, the user `dd-agent` needs to be added to the Doc
  To add the host Agent to the Docker user group, perform the following command: `usermod -a -G docker dd-agent`.
 
 ## If the Logs Agent Status shows no errors
+
 If the Logs Agent Status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
 * The required port (10516) for sending logs to Datadog is being blocked.
@@ -128,18 +132,19 @@ Test manually your connection by running a telnet or openssl command like so (po
 
 And then by sending a log like the following:
 
-```
+```text
 <API_KEY> this is a test message
 ```
 
 If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
 
 ### Your containers are not using the JSON logging driver
+
 Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.
 
-1. If you're unsure of which logging driver your containers are using, use `docker inspect <container-name>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:
+1. If you're unsure of which logging driver your containers are using, use `docker inspect <CONTAINER_NAME>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:
 
-    ```
+    ```text
     "LogConfig": {
         "Type": "json-file",
         "Config": {}
@@ -148,7 +153,7 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 2. If the container is set to the journald logging driver the following block appears in the Docker Inspect:
 
-    ```
+    ```text
     "LogConfig": {
         "Type": "journald",
         "Config": {}

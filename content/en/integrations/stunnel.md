@@ -11,7 +11,6 @@ public_title: Datadog-Stunnel Integration
 short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
 ---
 
-
 ## Overview
 
 Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs' code.

@@ -66,7 +66,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
 1. Datadog インテグレーションをセットアップする Google Cloud プロジェクトの [Google Cloud 認証情報ページ][16]に移動します。
 2. 認証情報を作成を押し、次にサービスアカウントキーを選択します。
 
-    {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="settings" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="settings"   style="width:80%;">}}
 
 3. サービスアカウントのドロップダウンで、新しいサービスアカウントを選択します。
 4. サービスアカウントに一意の名前を付けます。
@@ -79,7 +79,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
 8. **Configuration** タブで、Upload Key File を選択して、このプロジェクトを Datadog と統合します。
 9. オプションで、タグを使用して、このインテグレーションから特定のホストを除外することもできます。この手順の詳細については、[下記](#configuration)を参照してください。
 
-    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="settings" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="settings"   style="width:80%;">}}
 
 10. Install/Update を押します。
 11. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
@@ -111,7 +111,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 1. [Cloud Pub/Sub コンソール][21]に移動し、新しいトピックを作成します。
 
-    {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Create a topic" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Create a topic"  style="width:80%;">}}
 
 2. トピックに `export-logs-to-datadog` のような明示的な名前を付け、保存します。
 
@@ -122,11 +122,11 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 1. 前の手順で作成した Pub/Sub に戻り、新しい`サブスクリプション`を追加します。
 
-    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Create a new subscription" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Create a new subscription"  style="width:80%;">}}
 
 2. 配信タイプとして `Push` を選択し、`https://gcp-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>/` と入力します。
 
-    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Push method" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Push method"  style="width:80%;">}}
 
 3. 最下部にある `作成` を押します。
 
@@ -137,11 +137,11 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 1. 前の手順で作成した Pub/Sub に戻り、新しい`サブスクリプション`を追加します。
 
-    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Create a new subscription" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Create a new subscription"  style="width:80%;">}}
 
 2. 配信タイプとして `Push` を選択し、`https://gcp-intake.logs.datadoghq.eu/v1/input/<DATADOG_API_KEY>/` と入力します。
 
-    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Push method" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Push method"  style="width:80%;">}}
 
 3. 最下部にある `作成` を押します。
 
@@ -156,7 +156,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 2. `エクスポートを作成`を押し、シンクに適宜名前を付けます。
 3. エクスポート先として `Cloud Pub/Sub` を選択し、エクスポート用に作成した Pub/Sub を選択します。この Pub/Sub は、別のプロジェクトに置くこともできます。
 
-    {{< img src="integrations/google_cloud_platform/export_log_from_stackdriver.png" alt="Export log from Stackdriver" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/export_log_from_stackdriver.png" alt="Export log from Stackdriver"  style="width:80%;">}}
 
 4. `作成`を押し、確認メッセージが表示されるまで待ちます。
 
@@ -170,7 +170,7 @@ Pub/Sub は、[Google Cloud の割り当てと制限][45]の対象となりま�
 
 この割り当てに達したときに自動的に通知されるようにするには、[Pub/Sub メトリクスインテグレーション][46]を有効にし、Datadog へログをエクスポートするサブスクリプションで絞り込んだメトリクス `gcp.pubsub.subscription.backlog_bytes` に対してモニターをセットアップして、このメトリクスが 1 MB を超えないようにします。以下に例を示します。
 
-    {{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Pub Sub monitoring" responsive="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Pub Sub monitoring"  style="width:80%;">}}
 
 ## 収集データ
 ### メトリクス

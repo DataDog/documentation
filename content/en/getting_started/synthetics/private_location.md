@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only. 
+This feature is in public beta and available for API Tests only.
 </div>
 
 ## Overview
@@ -30,7 +30,7 @@ Once you create a private location, the process of configuring a [Synthetics API
 2. Install [Docker][3] on that machine.
 3. In the Datadog app, hover over **[UX Monitoring][4]** and select **Settings** -> **Private Locations**. Add a new private location:
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:100%;">}}
+    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:100%;">}}
 
 4. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
@@ -48,16 +48,16 @@ Once you create a private location, the process of configuring a [Synthetics API
 
     In your private locations list, in the **Settings** section:
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:100%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:100%;">}}
 
     In the form when creating a test, below the private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list" responsive="true" style="width:75%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list"  style="width:75%;">}}
 
     You will also see private location logs populating similar to this example:
     ```
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available 
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
+    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
     2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
     ```
 
@@ -71,10 +71,9 @@ You are now able to use your new private location as any other Datadog managed l
 
 For a more advanced setup, use the command and see `Learn more about Private Locations` below:
 
-```
+```shell
 docker run --rm datadog/synthetics-private-location-worker --help and check
 ```
-
 
 {{< whatsnext desc="After you set up your private location:">}}
     {{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}

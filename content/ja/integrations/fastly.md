@@ -17,7 +17,7 @@ public_title: Datadog-Fastly インテグレーション
 short_description: キャッシュ関連メトリクス、オリジンリクエスト、応答コードなどを追跡 more.
 version: '1.0'
 ---
-{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" responsive="true" popup="true">}}
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph"  >}}
 
 ## 概要
 

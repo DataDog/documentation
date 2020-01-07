@@ -17,24 +17,24 @@ If you are using the agile or robust anomaly detection algorithms with weekly or
 
 Here is an example of a monitor before it is set to account for a local timezone:
 
-{{< img src="monitors/faq/dst-off.png" alt="DST tracking turned off" responsive="true">}}
+{{< img src="monitors/faq/dst-off.png" alt="DST tracking turned off" >}}
 
 Here is an example of a monitor when daylight savings time is being taken into account:
 
-{{< img src="monitors/faq/dst-on.png" alt="DST tracking turned on" responsive="true">}}
+{{< img src="monitors/faq/dst-on.png" alt="DST tracking turned on" >}}
 
 ## UI
 
 To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomaly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked.
 
-{{< img src="monitors/faq/anomaly_monitor_timezone_ui.png" alt="DST tracking in the UI" responsive="true">}}
+{{< img src="monitors/faq/anomaly_monitor_timezone_ui.png" alt="DST tracking in the UI" >}}
 
 ## API
 
 1.  You need the following information to make the update request through the monitor API:
   - Your [Datadog API key and application key][3] for authentication
   - The monitor ID and query from your anomaly detection monitor:
-    {{< img src="monitors/faq/anomaly_monitor_timezone.png" alt="Monitor ID and Query" responsive="true">}}
+    {{< img src="monitors/faq/anomaly_monitor_timezone.png" alt="Monitor ID and Query" >}}
   - The TZ identification string for the time zone related to your metric, for example `America/New_York` or `Europe/Paris`. Locate your preferred time zone in the TZ column on the [List of tz database time zones][4] (canonical format recommended).<br><br>
 2. Create an updated version of the monitor query by adding a `timezone` argument to the anomalies() function call.
   - For example, if you wanted to change the query shown above to use New York's local time, the query would be updated to:

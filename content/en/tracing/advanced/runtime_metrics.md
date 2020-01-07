@@ -18,7 +18,7 @@ further_reading:
 
 Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a [service][1], correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
+{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
 ## Automatic Configuration
 
@@ -29,7 +29,7 @@ JVM metrics collection is enabled by default for Java tracer v0.29.0+. It can be
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
+{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 
@@ -65,7 +65,6 @@ Runtime metrics can be viewed in correlation with your Python services. See the 
 By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
-
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
@@ -107,7 +106,6 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
-
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
@@ -118,7 +116,6 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -136,7 +133,6 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the appropriate flags in your task definition][5].
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
@@ -147,13 +143,11 @@ In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the app
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -192,13 +186,11 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-
 [1]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}
@@ -216,13 +208,11 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 
 [1]: /help
 {{% /tab %}}

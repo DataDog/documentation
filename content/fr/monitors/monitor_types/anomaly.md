@@ -31,7 +31,7 @@ Toutes les métriques actuellement transmises à Datadog peuvent être surveill�
 **Remarque** : la fonction `anomalies` utilise des données historiques pour prédire un comportement futur. Ainsi, si vous utilisez ce type de monitor sur une nouvelle métrique, les résultats risquent de ne pas être pertinents.
 
 Une fois la métrique définie, le monitor de détection des anomalies génère deux graphiques d'aperçu dans l'éditeur :
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="contexte historique" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="contexte historique"  style="width:80%;">}}
 
 * Le graphique **Historical View** vous permet de visualiser la requête surveillée sur différentes périodes pour mieux comprendre pourquoi les données peuvent être considérées comme anormales ou normales.
 * Le graphique **Evaluation Preview** couvre une plus longue période que la période d'alerte et permet de visualiser les données prises en compte par l'algorithme d'anomalies pour le calcul des valeurs limites.
@@ -52,7 +52,7 @@ Une fois la métrique définie, le monitor de détection des anomalies génère 
 
 Datadog analyse automatiquement la métrique choisie et définit plusieurs paramètres pour vous. Cependant, les options peuvent être modifiées dans **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="options avancées" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="options avancées"  style="width:80%;">}}
 
 | Option                      | Description                                                                                                                |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -88,23 +88,23 @@ Les graphiques ci-dessous illustrent les différents comportements de ces trois 
 
 Dans cet exemple, `basic` identifie avec succès les anomalies qui quittent la plage normale de valeurs, sans tenir compte des tendances saisonnières et récurrentes pour déterminer la plage de valeurs prévues. À l'inverse, les algorithmes `robust`  et `agile` reconnaissent la tendance saisonnière et peuvent détecter des anomalies plus nuancées (p. ex., si la métrique se stabilise au niveau de sa valeur minimale).
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="comparaison d'algorithmes 1" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="comparaison d'algorithmes 1"  style="width:90%;">}}
 
 Dans cet exemple, la métrique affiche un changement de niveau soudain. L'algorithme `Agile` s'ajuste plus rapidement au changement de niveau que l'algorithme `robust`. En outre, la largeur des limites de l'algorithme `robust` augmente et reflète une plus grande incertitude après le changement de niveau, tandis que la largeur des limites de l'algorithme `agile` reste inchangée. L'algorithme `Basic` n'est clairement pas adapté à ce scénario, où la métrique affiche une tendance saisonnière marquée.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="comparaison d'algorithmes 2" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="comparaison d'algorithmes 2"  style="width:90%;">}}
 
 Cet exemple montre la réaction des algorithmes face à une anomalie d'une heure. L'algorithme `Robust` l'ignore complètement. Les autres se mettent à agir comme si l'anomalie représentait le nouveau critère de normalité. L'algorithme `Agile` considère même que le retour à la normale de la métrique est une anomalie.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="comparaison d'algorithmes 3" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="comparaison d'algorithmes 3"  style="width:90%;">}}
 
 Les algorithmes gèrent différemment les changements d'échelle. Les algorithmes `Basic` et `robust` n'y sont pas sensibles, contrairement à l'algorithme `agile`. Dans les graphiques de gauche, on remarque que les algorithmes `agile` et `robust` considèrent le changement de niveau comme une anomalie. Sur la droite, lorsque l'on fait augmenter la même métrique de 1 000, l'algorithme `agile` ne signale plus le changement de niveau comme une anomalie tandis que l'algorithme `robust` continue à le faire.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="comparaison d'algorithmes échelle" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="comparaison d'algorithmes échelle"  style="width:90%;">}}
 
 Cet exemple montre comment chaque algorithme gère une nouvelle métrique. Les algorithmes `Robust` et `agile` ne présentent aucune limite pendant les premières saisons (hebdomadaire). L'algorithme `Basic`  commence à afficher des limites peu après l'apparition de la première métrique.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="Comparaison d'algorithmes nouvelle métrique" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="Comparaison d'algorithmes nouvelle métrique"  style="width:90%;">}}
 
 ### Notifications
 

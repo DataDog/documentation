@@ -49,7 +49,7 @@ Après avoir configuré votre `Capfile` et exécuté au moins une tâche Capistr
 2. Saisissez `sources:capistrano` dans la barre de recherche ou cliquez sur 'Capistrano' dans la liste FROM des intégrations sur la gauche.
 3. Saisissez `priority:all` dans la barre de recherche ou cliquez sur 'All' dans la liste PRIORITY à gauche. Les tâches Capistrano sont par défaut envoyées avec la priorité Low. Ainsi, si vous consultez uniquement les événements avec une priorité Normal (le réglage par défaut), vous ne verrez pas vos tâches Capistrano dans le flux d'événements.
 
-{{< img src="integrations/capistrano/capistranoevents.gif" responsive="true">}}
+{{< img src="integrations/capistrano/capistranoevents.gif" >}}
 
 ## Données collectées
 ### Métriques

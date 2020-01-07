@@ -21,15 +21,15 @@ Le nombre d'événements de log que vous avez envoyés à Datadog est visible à
 
 1. La page [Usage][1] comporte une colonne qui affiche le nombre d'événements de log indexés par heure :
 
-    {{< img src="account_management/billing/log-events01.png" alt="Événements de log" responsive="true">}}
+    {{< img src="account_management/billing/log-events01.png" alt="Événements de log" >}}
 
 2. Sur la page [Configuration][2], cliquez deux fois sur un index pour afficher le nombre d'événements de log indexés au cours des derniers jours.
 
-    {{< img src="account_management/billing/log-events02.png" alt="Événements de log" responsive="true">}}
+    {{< img src="account_management/billing/log-events02.png" alt="Événements de log" >}}
 
 3. Dans [Log Explorer][3], modifiez l'intervalle de temps et vérifiez le nombre total en haut de la liste :
 
-    {{< img src="account_management/billing/log-events03.png" alt="Événements de log" responsive="true">}}
+    {{< img src="account_management/billing/log-events03.png" alt="Événements de log" >}}
 
 Vous pouvez également utiliser les facettes pour filtrer le nombre de logs par attribut ou tag défini par vos événements de log. Cela vous permet d'identifier le host, le service, l'endpoint, etc. qui a généré le plus de données.
 

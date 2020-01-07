@@ -109,7 +109,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
 ### CentOS
 
-
 1. Configurez le référentiel Yum de Datadog sur votre système en créant un fichier `/etc/yum.repos.d/datadog.repo` avec le contenu suivant :
     ```ini
     [datadog]
@@ -132,6 +131,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
+
 4. Procédez à la conversion des formats et des chemins de configuration de votre Agent au format v6 avec la commande `import`. La commande analyse le fichier `datadog.conf` v5 existant et convertit les options de configuration vers le nouveau format `datadog.yaml` v6. Celle-ci copie également les fichiers de configuration des checks actuellement activés :
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
@@ -188,7 +188,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
 ### Fedora
 
-
 1. Configurez le référentiel Yum de Datadog sur votre système en créant un fichier `/etc/yum.repos.d/datadog.repo` avec le contenu suivant :
     ```ini
     [datadog]
@@ -223,7 +222,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     ```
 
 ### Red Hat
-
 
 1. Configurez le référentiel Yum de Datadog sur votre système en créant un fichier `/etc/yum.repos.d/datadog.repo` avec le contenu suivant :
     ```ini
@@ -266,7 +264,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     ```
 
 ### Ubuntu
-
 
 1. Activez la prise en charge du HTTPS pour APT :
     ```

@@ -28,7 +28,7 @@ Datadog は、ホスト、コンテナ、カスタムメトリクスの数を毎
 
 [Plan][7] ページの **Manage Billing Emails** で、請求書を受け取るためのメールアドレスを設定できます。
 
-{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" responsive="true">}}
+{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
 **注**: このメールアドレスは、Datadog 内のチームメンバーでなくてもかまいません。たとえば、`invoices@yourcompany.com` を使用できます。
 

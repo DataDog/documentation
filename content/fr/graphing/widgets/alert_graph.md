@@ -15,11 +15,11 @@ further_reading:
 ---
 Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'état actuel de tous les monitors définis sur votre système :
 
-{{< img src="graphing/widgets/alert_graph/alert_graph.png" alt="Graphique d'alerte" responsive="true">}}
+{{< img src="graphing/widgets/alert_graph/alert_graph.png" alt="Graphique d'alerte" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/alert_graph/alert_graph_setup.png" alt="Configuration du graphique d'alerte" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/alert_graph/alert_graph_setup.png" alt="Configuration du graphique d'alerte"  style="width:80%;">}}
 
 ### Configuration
 
@@ -32,7 +32,7 @@ Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'
 ### Options
 #### Préférence d'affichage
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Préférences d'affichage"  style="width:80%;">}}
 
 ##### Durée globale
 
@@ -46,7 +46,7 @@ Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la lége
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

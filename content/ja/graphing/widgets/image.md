@@ -12,11 +12,11 @@ further_reading:
 ---
 イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、PNG、JPG、またはアニメーション GIF を使用できます。
 
-{{< img src="graphing/widgets/image/image.mp4" alt="Image" video="true" responsive="true" width="80%" >}}
+{{< img src="graphing/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/image/image_setup.png" alt="Image setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/image/image_setup.png" alt="Image setup"  style="width:80%;">}}
 
 1. イメージの URL を入力します。
 2. 外観を選択します。

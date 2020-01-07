@@ -13,7 +13,6 @@ further_reading:
   text: "Agent v6 Changes"
 ---
 
-
 ## Changes between major Agent versions
 
 {{< tabs >}}
@@ -64,13 +63,12 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 * [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
 
 
-
 [1]: /agent/#agent-architecture
 [2]: /agent/guide/agent-commands
 [3]: /developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [5]: /developers/metrics/types
-[6]: /graphing/infrastructure/process
+[6]: /infrastructure/process
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /logs
 {{% /tab %}}

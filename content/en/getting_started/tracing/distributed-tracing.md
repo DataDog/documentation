@@ -23,7 +23,7 @@ aliases:
 
 If you have read the [first example of tracing][1] and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
 
-{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview" responsive="true" style="width:70%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview"  style="width:70%;">}}
 
 * Request:
     ```bash
@@ -33,15 +33,12 @@ If you have read the [first example of tracing][1] and want understand how traci
 * Response:
     ```json
     {
-        "technology": {
-            "error": false,
-            "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
-            "author": "Richard Feynman"
-        },
-        "foo_bar": {
-            "error": true,
-            "reason": "Subject unknown"
-        }
+      "technology": {
+        "error": false,
+        "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
+        "author": "Richard Feynman"
+      },
+      "foo_bar": {"error": true, "reason": "Subject unknown"}
     }
     ```
 
@@ -131,14 +128,14 @@ The code above is already instrumented. [See the dedicated setup documentation][
 
 Once the code is executed, we start to see data in [APM][3]. On the [service List][4], our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
 
-{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started" responsive="true" >}}
+{{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started"  >}}
 
 Clicking on **thinker-api** directs you to it's automatically generated [service dashboard][5]. Here we can see more detailed performance data, as well as a list of all of the resources associated with this particular service:
 
 * [Graphs illustrating service performance][6]
 * [A list of resources][7] attached to this particular service:
 
-{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started" responsive="true" style="width:80%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started"  style="width:80%;">}}
 
 The first function executed in this example is `think_handler()`, which handles the request and forwards it to the **thinker-microservice** service.
 
@@ -147,7 +144,7 @@ Selecting the **thinker_handler** resource directs you to it's automatically gen
 * [Graphs illustrating resource performances][8]
 * [A list of sampled traces][9] attached to this particular resource:
 
-{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" style="width:50%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started"  style="width:50%;">}}
 
 Selecting a trace opens the _trace panel_ containing information such as:
 
@@ -157,23 +154,23 @@ Selecting a trace opens the _trace panel_ containing information such as:
 * The time spent by your application processing the traced functions
 * Extra tags such as *http.method* and *http.url* ...
 
-{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" style="width:80%;">}}
+{{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started"  style="width:80%;">}}
 
 From the above image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span][10], which transmits the processed request to the **thinker-microservice** service, which executes the function `think()` twice.
 
 In our code we added:
 
-```
+```python
 tracer.current_span().set_tag('subject', subject)
 ```
 
 Which allows you to get more context every time `think()` is called and traced:
 
 * The first time `think` is executed, the *subject* is **technology** and everything goes well:
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" style="width:80%;">}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1"  style="width:80%;">}}
 
 * The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error:
-    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2" responsive="true" style="width:80%;">}}
+    {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2"  style="width:80%;">}}
 
     The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules][11].
 

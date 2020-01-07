@@ -22,7 +22,7 @@ public_title: Datadog-Amazon ElastiCache インテグレーション
 short_description: Amazon ElasicCache のキーメトリクスを追跡
 version: '1.0'
 ---
-{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard"  >}}
 
 ## 概要
 
@@ -51,7 +51,7 @@ ElastiCache のパフォーマンスメトリクスを監視する方法につ�
 
 次の図は、Datadog がネイティブ ElastiCache インテグレーションを経由して CloudWatch からメトリクスを直接収集する方法と、バックエンド技術である Redis または Memcached から追加のネイティブメトリクスを直接収集する方法を示しています。バックエンドから直接収集することで、より多くの重要なメトリクスに、より高い精度でアクセスできます。
 
-{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache, Redis and Memcached integrations" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache, Redis and Memcached integrations" >}}
 
 #### 仕組み
 
@@ -65,11 +65,11 @@ Agent は実際の ElastiCache インスタンスではなくリモートマシ�
 
 まず、AWS コンソールに移動し、ElastiCache セクションを開き、Cache Clusters のタブに移動して、監視対象のクラスターを探します。次のように表示されます。
 
-{{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" >}}
 
 「ノード」リンクをクリックして、エンドポイント URL にアクセスします。
 
-{{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" >}}
 
 エンドポイント URL (例: **replica-001.xxxx.use1.cache.amazonaws.com**) と `cacheclusterid` (例: **replica-001**) をメモします。Agent を構成したり、グラフやダッシュボードを作成したりする際に、これらの値が必要になります。
 
@@ -98,7 +98,7 @@ instances:
 
 以下に、同じ「cacheclusterid」タグ **replicaa-001** を使用して、ElastiCache からのキャッシュヒットメトリクスと Redis からのネイティブレイテンシーメトリクスを組み合わせたグラフをセットアップする例を挙げます。
 
-{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" >}}
 
 ## 収集データ
 ### メトリクス
@@ -110,7 +110,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 ### イベント
 AWS ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="AWS Elasticache Events" responsive="true">}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="AWS Elasticache Events" >}}
 
 
 ### サービスのチェック

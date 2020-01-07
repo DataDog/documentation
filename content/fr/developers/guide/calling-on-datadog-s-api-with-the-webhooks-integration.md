@@ -57,7 +57,7 @@ Une fois vos monitors configurés et prêts à envoyer des alertes (ils doivent 
 
 Voici un exemple de tel widget (même si dans cet exemple, le nom du check est « composite.status » et un seul monitor dans notre groupe s'est déclenché avec le statut « alert » puis « OK ») :
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" >}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
 [1]: /fr/integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

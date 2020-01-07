@@ -46,7 +46,7 @@ Define the configuration of your browser test.
 
 You can use the [global variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
 ### Alert conditions
 
@@ -65,32 +65,33 @@ To configure your notifications:
 
 Tests can be only recorded from **[Google Chrome][8]**. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create steps within your browser test scenario. 
+3. Your actions are recorded and used to create steps within your browser test scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
 
 ## Actions
+
 ### Assertion
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion browser test"  style="width:40%;">}}
 
 Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
 The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
 
-| Assertion                                                 | Description                                                                                                                                                                            |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                             |
-| `Test an element's content`                               | Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                  |
-| `Test that some text is present on the active page`       | Asserts that some specific text is present on the current page.                                                                                                                        |
-| `Assert that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                |
-| `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                     |
+| Assertion                                                 | Description                                                                                                                                                                             |
+|-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
+| `Test an element's content`                               | Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                   |
+| `Test that some text is present on the active page`       | Asserts that some specific text is present on the current page.                                                                                                                         |
+| `Assert that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                 |
+| `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][10]. |
 
 *Advanced options* section for assertions allows you to specify a custom locator: an X-path or a CSS class/ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you have defined an element, hit **Test** to highlight the element in the recording on the right. If the defined locator fails, by default the test is considered as failed. You can decide to fallback on the regular Browser tests algorithm by unticking the `If user specified locator fails, fail test` box.
@@ -113,7 +114,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 #### Create a variable
 
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true" responsive="true" width="60%">}}
+{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true"  width="60%">}}
 
 To create a variable, first give it a name then define its value from:
 
@@ -123,7 +124,7 @@ To create a variable, first give it a name then define its value from:
 * **A Pattern**:
 
 | Pattern                 | Description                                         |
-| ----------------------- | --------------------------------------------------- |
+|-------------------------|-----------------------------------------------------|
 | `{{ numeric(n) }}`      | Generates a numeric string with n digits.           |
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
@@ -132,7 +133,7 @@ To create a variable, first give it a name then define its value from:
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" responsive="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
 
 You can also use your variables in some assertions, including:
 
@@ -144,7 +145,7 @@ You can also use your variables in some assertions, including:
 
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:40%;">}}
 
 ### Wait
 
@@ -156,7 +157,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 You can run browser tests within other browser tests:
 
-{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true" responsive="true" width="40%" >}}
+{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true"  width="40%" >}}
 
 Advanced options also allow you to choose where you want your subtest to be played:
 
@@ -172,7 +173,7 @@ Opening your subtest in the main tab means that your subtest is the continuation
 
 You can record the uploading of files as an action. This is limited to 10 files, with a limit of 5MB each.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" responsive="true" style="width:50%;">}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:50%;">}}
 
 ## Test failure and errors
 
@@ -181,7 +182,7 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 Common failure reasons include:
 
 | Error                                | Description                                                                                                          |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | `Element located but it's invisible` | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.       |
 | `Cannot locate element`              | The element cannot be found in the HTML.                                                                             |
 | `Select did not have option`         | The specified option is missing from the dropdown menu.                                                              |

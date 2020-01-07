@@ -85,7 +85,6 @@ def handle_customer(customer_id):
     current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
 ```
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
@@ -112,7 +111,6 @@ Access the current active [span][2] from any method within your code. **Note**: 
 current_span = Datadog.tracer.active_span
 current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>') unless current_span.nil?
 ```
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
@@ -170,12 +168,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
 
 Add [tags][1] directly to span objects by calling `setTag` or `addTags`:
 
@@ -201,7 +197,6 @@ const span = tracer.scope().active()
 span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 ```
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
@@ -221,12 +216,10 @@ scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active [span][2].
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "PHP" %}}
-
 
 Add [tags][1] directly to a `DDTrace\Span` object by calling `Span::setTag()`. For example:
 
@@ -242,8 +235,6 @@ Add [tags][1] directly to a `DDTrace\Span` object by calling `Span::setTag()`. F
 ```
 
 **Note**: `Tracer::getActiveSpan()` returns `null` if there is no active [span][2].
-
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
@@ -262,6 +253,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -Ddd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
+
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 {{% /tab %}}
@@ -274,7 +266,6 @@ from ddtrace import tracer
 
 tracer.set_tags({ 'env': 'dev' })
 ```
-
 
 [1]: /tracing/visualization/#span-tags
 {{% /tab %}}
@@ -289,7 +280,6 @@ end
 ```
 
 See the [API documentation][3] for more details.
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
@@ -312,7 +302,6 @@ func main() {
     defer tracer.Stop()
 }
 ```
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
@@ -344,7 +333,6 @@ This example sets the environment variable:
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
-
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 [3]: /tracing/setup/dotnet/#configuration
@@ -357,7 +345,6 @@ section for details on how environment variables are set.
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
@@ -375,7 +362,6 @@ span->SetTag("key must be string", 1234);
 ```
 
 Values are of [variable type][3] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
-
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans

@@ -39,7 +39,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud HTTP Loa
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-{{< img src="integrations/google_cloud_loadbalancing/export_http_lb.png" alt="Exporter les logs Google Cloud HTTP Loadbalancer vers le Pub Sub" responsive="true">}}
+{{< img src="integrations/google_cloud_loadbalancing/export_http_lb.png" alt="Exporter les logs Google Cloud HTTP Loadbalancer vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
 

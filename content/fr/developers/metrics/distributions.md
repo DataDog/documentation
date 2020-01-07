@@ -49,7 +49,7 @@ Les différents types de métriques Datadog doivent être envoyés sous différe
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | Méthode | Présentation |
 | :----- | :------- |

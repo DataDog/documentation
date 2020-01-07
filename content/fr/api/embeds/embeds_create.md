@@ -37,4 +37,4 @@ Si vous souhaitez utiliser des template variables, consultez la section [Graphiq
     Détermine le titre du graphique.
     *Doit inclure au moins 1 caractère.*
 
-[1]: /fr/graphing/faq/embeddable-graphs-with-template-variables
+[1]: /fr/dashboards/faq/embeddable-graphs-with-template-variables

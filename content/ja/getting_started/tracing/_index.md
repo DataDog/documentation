@@ -136,7 +136,7 @@ hello world
 
 数分経過すると、Datadog の `flask` サービスの下にトレースが表示されます。[Services ページ][11]または[トレースの一覧][12]をご確認ください。
 
-{{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" responsive="true">}}
+{{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
 ## その他の参考資料
 

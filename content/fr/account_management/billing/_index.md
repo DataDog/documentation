@@ -32,7 +32,7 @@ Si vous payez par chèque ou virement, les factures sont envoyées aux adresses 
 
 Vous pouvez définir des adresses e-mail spécifiques afin de recevoir des factures dans la section **Manage Billing Emails** de la page [Plan][9] :
 
-{{< img src="account_management/billing/billing01.png" alt="Gérer les e-mails de facturation" responsive="true">}}
+{{< img src="account_management/billing/billing01.png" alt="Gérer les e-mails de facturation" >}}
 
 **Remarque** : l'adresse e-mail ne doit pas nécessairement correspondre à un membre de l'équipe dans Datadog. Par exemple, vous pouvez utiliser `factures@votresociete.com`.
 

@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -18,11 +18,13 @@ further_reading:
 ---
 
 ## Setup
+
 If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
 
 For installation and configuration to the Datadog EU site, use the `SITE=` parameter.  See the configuration variables table below.
 
 ### Installation
+
 Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 **Note**: There are special considerations for [domain controllers][4].
@@ -35,6 +37,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 #### Command line
+
 Optionally, install the Agent with the command line to add custom settings.
 
 1. Download the [Datadog Agent installer][5].
@@ -42,11 +45,13 @@ Optionally, install the Agent with the command line to add custom settings.
    **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
 Command prompt:
+
 ```cmd
 start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
 Powershell:
+
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
@@ -75,6 +80,7 @@ Each configuration item is added as a property to the command line. The followin
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 ### Validation
+
 To verify your installation, follow the instructions in the [Agent Status and Information](#agent-status-and-information) section.
 
 ## Agent Commands
@@ -86,7 +92,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 
 * The main executable name is `agent.exe`.
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the command line `"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" <command>` for Agent versions >= 6.12 or `"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" <command>` for Agent versions <= 6.11. Command-line options are below:
+* Commands can be run from the command line `"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" <COMMAND>` for Agent versions >= 6.12 or `"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" <COMMAND>` for Agent versions <= 6.11. Command-line options are below:
 
 | Command         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -113,11 +119,11 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 
 Use the Datadog Agent Manager (available from the start menu).
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu"  style="width:75%;">}}
 
 Use the `start`, `stop`, and `restart` commands in the Datadog Agent Manager:
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot"  style="width:75%;">}}
 
 You can also use Windows Powershell, where available:
 `[start|stop|restart]-service datadogagent`
@@ -158,6 +164,7 @@ Configuration files for [integrations][1] are in:
 {{< /tabs >}}
 
 ## Troubleshooting
+
 ### Agent Status and Information
 
 {{< tabs >}}
@@ -174,11 +181,13 @@ Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
 
 The status command is available for Powershell:
+
 ```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
 
 or cmd.exe:
+
 ```cmd
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
@@ -191,24 +200,23 @@ To verify the Agent is running, check if the service status in the Services pane
 Information about the Agent's state for Agent v5.2+ is available in the
 *Datadog Agent Manager -> Settings -> Agent Status*:
 
-{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
+{{< img src="agent/faq/windows_status.png" alt="Windows Status"  style="width:50%;" >}}
 
 For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/status`.
 
 The info command is available for Powershell:
 
-```
+```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
 
-```
+```shell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 **Note**: For Agent versions <= 6.11 the path should be `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` instead.
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -239,6 +247,7 @@ Need help? Contact [Datadog support][1].
 {{< /tabs >}}
 
 ### Send a flare
+
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -252,7 +261,7 @@ Need help? Contact [Datadog support][1].
 
 * Press Submit.
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
 {{% /tab %}}
@@ -270,15 +279,17 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 * Enter the email address you use to log in to Datadog.
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare"  style="width:70%;">}}
 
 The flare command is available for Powershell:
 
-```
+```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
+
 or cmd.exe:
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
@@ -298,30 +309,31 @@ For Windows, you can find the location of this file by running the following fro
 
 **Step 2**:
 
-```
+```python
 import tempfile
 print tempfile.gettempdir()
 ```
 
 Example:
 
-{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail"  style="width:70%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Use Cases
+
 ###  Monitoring a Windows Service
 
 On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example; however, this example uses DHCP.
 
 To get the name of the service, open `services.msc` and locate your target service. Using DHCP as the target, you can see the service name at the top of the service properties window:
 
-{{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
 
 When adding your own services, be sure to follow the formatting exactly as shown. If formatting is not correct the integration fails.
 
-{{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service"  style="width:75%;">}}
 
 Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
@@ -351,6 +363,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 You can monitor Windows processes with [Live Process Monitoring][12]. To enable this on Windows, edit the [Agent main configuration file][13] by setting the following parameter to true:
 
 `datadog.yaml`:
+
 ```yaml
 process_config:
   enabled: "true"
@@ -373,6 +386,6 @@ After configuration is complete, [restart the Agent][14].
 [9]: /#monitoring-windows-processes
 [10]: /integrations/wmi
 [11]: https://app.datadoghq.com/monitors#create/integration
-[12]: /graphing/infrastructure/process/?tab=linuxwindows#installation
+[12]: /infrastructure/process/?tab=linuxwindows#installation
 [13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/guide/agent-commands/#restart-the-agent

@@ -50,7 +50,7 @@ Google Cloud Run のログは、Stackdriver を使用して収集され、HTTP �
 2. **エクスポートを作成**をクリックし、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクトに置くこともできます。
 
-{{< img src="integrations/google_cloud_run/export_cloud_run_revision.png" alt="Export Google Cloud Run Logs to Pub Sub" responsive="true">}}
+{{< img src="integrations/google_cloud_run/export_cloud_run_revision.png" alt="Export Google Cloud Run Logs to Pub Sub" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

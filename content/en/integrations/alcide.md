@@ -21,7 +21,6 @@ Alcide provides Kubernetes audit and anomaly monitoring services. This integrati
 
 ## Setup
 
-
 ### Installation
 
 Datadog automatically enables a logs processing pipeline when Alcide logs are detected. No installation steps are required.

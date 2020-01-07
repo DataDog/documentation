@@ -22,14 +22,14 @@ further_reading:
 ---
 Envoyez des logs à Datadog à partir de navigateurs Web ou d'autres clients Javascript grâce à la bibliothèque de journalisation JavaScript côté client `datadog-logs` de Datadog.
 
-Grâce à la bibliothèque `datadog-logs`, vous pouvez envoyer des logs directement à Datadog depuis les clients JS et bénéficier des fonctionnalités suivantes :
+Grâce à la bibliothèque `datadog-logs`, vous pouvez envoyer des logs directement à Datadog depuis les clients JS et ainsi :
 
-* Utilisez la bibliothèque en tant que logger. Tous les logs sont transmis à Datadog sous forme de documents JSON.
-* Ajoutez du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé.
-* Incorporez et transmettez automatiquement chaque erreur JavaScript.
-* Transmettez les erreurs JavaScript.
-* Enregistrez des user agents et des adresses IP de clients réels.
-* Optimisez l'utilisation du réseau grâce aux publications automatiques en bloc.
+* Utiliser la bibliothèque en tant que logger. Tous les logs sont transmis à Datadog sous forme de documents JSON.
+* Ajouter du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé.
+* Incorporer et transmettre automatiquement chaque erreur frontend.
+* Transmettre les erreurs frontend.
+* Enregistrer l'adresse IP et le user agent réels du client.
+* Optimiser l'utilisation du réseau grâce aux envois automatiques en masse.
 
 ## Obtenir un token client
 
@@ -39,7 +39,7 @@ Pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilis
 
 Les paramètres suivants peuvent être utilisés pour configurer la bibliothèque afin d'envoyer des logs à Datadog :
 
-* Définissez `forwardErrorsToLogs` sur `false` pour désactiver la collecte d'erreurs de console et d'erreurs JS automatique.
+* Définissez `forwardErrorsToLogs` sur `false` pour désactiver la collecte automatique des erreurs frontend.
 * Utilisez `addLoggerGlobalContext` pour ajouter des attributs JSON à tous les logs générés.
 * Définissez `clientToken` sur la valeur du token client (**vous ne pouvez utiliser que des tokens client dans cette bibliothèque**).
 
@@ -48,7 +48,7 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```html
 <html>
   <head>
     <title>Exemple pour envoyer des logs à Datadog.</title>
@@ -73,26 +73,21 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-```
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog.</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
-    <script>
-      // Définir votre token client.
-      window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<TOKEN_CLIENT>',
-        forwardErrorsToLogs: true,
-      });
-
-      // FACULTATIF
-      // Ajouter un attribut de métadonnées global. Un seul attribut peut être ajouté à la fois.
-      window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('<CLÉ_MÉTA>', <VALEUR_MÉTA>);
-    </script>
-    ...
-  </head>
-...
-</html>
+```html
+<head>
+  <title>Exemple pour envoyer des logs à Datadog.</title>
+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+  <script>
+    // Définir votre token client
+    window.DD_LOGS && DD_LOGS.init({
+      clientToken: '<TOKEN_CLIENT>',
+      forwardErrorsToLogs: true,
+    });
+    // FACULTATIF
+    // Ajouter un attribut de métadonnées global. Un seul attribut peut être ajouté à la fois.
+    window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('<CLÉ_MÉTA>', <VALEUR_MÉTA>);
+  </script>
+</head>
 ```
 
 {{% /tab %}}
@@ -104,12 +99,12 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 
 Envoyez une entrée de log personnalisé directement à Datadog avec la fonction `log` :
 
-```
+```text
 window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<ATTRIBUTS_JSON>,<STATUT>)
 ```
 
 | Paramètre fictif         | Description                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------|
 | `<MESSAGE>`         | Le message de votre log entièrement indexé par Datadog.                                |
 | `<ATTRIBUTS_JSON>` | Un objet JSON valide qui comprend tous les attributs joints au `<MESSAGE>`.            |
 | `<STATUT>`          | Statut de votre log. Les valeurs de statut acceptées sont `debug`, `info`, `warn` ou `error`. |
@@ -118,11 +113,11 @@ Vous pouvez également utiliser le statut comme paramètre fictif pour la foncti
 
 **Exemple :**
 
-```
+```js
 ...
 <script>
 ...
-window.DD_LOGS && DD_LOGS.logger.info('Clic sur le bouton', { name: 'buttonName', id: 123 });
+window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 });
 ...
 </script>
 ...
@@ -130,22 +125,18 @@ window.DD_LOGS && DD_LOGS.logger.info('Clic sur le bouton', { name: 'buttonName'
 
 On obtient le résultat suivant :
 
-```
+```json
 {
   "status": "info",
   "session_id": "1234",
   "name": "buttonName",
   "id": 123,
-  "message": "Clic sur le bouton",
-  "http":{
+  "message": "Button clicked",
+  "http": {
     "url": "...",
     "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36"
-    },
-  "network":{
-    "client": {
-      "ip" : "109.30.xx.xxx"
-    }
-  }
+  },
+  "network": {"client": {"ip": "109.30.xx.xxx"}}
 }
 ```
 
@@ -164,7 +155,7 @@ Le logger ajoute les informations suivantes par défaut :
 
 Pour certaines situations, il est possible que vous souhaitiez désactiver le mode debugging ou simplement recueillir les erreurs et avertissements. Pour ce faire, modifiez le niveau de journalisation : définissez le paramètre `level` sur `debug` (valeur par défaut), `info`, `warn` ou `error` :
 
-```
+```js
 window.DD_LOGS && DD_LOGS.logger.setLevel('<NIVEAU>')
 ```
 
@@ -177,7 +168,8 @@ Seuls les logs avec un statut égal ou supérieur au niveau indiqué sont envoy�
 Par défaut, les loggers envoient des logs à Datadog. Il est également possible de configurer le logger de façon à ce qu'il envoie des logs à la console ou qu'il n'envoie aucun log. Cette fonction, appliquée à un environnement de développement, vous permet de conserver une copie locale des logs.
 
 Utilisez la fonction `setHandler` avec les valeurs `http` (par défaut), `console` ou `silent` :
-```
+
+```js
 window.DD_LOGS && DD_LOGS.logger.setHandler('<GESTIONNAIRE>')
 ```
 
@@ -191,7 +183,7 @@ Chaque logger peut être configuré avec son propre contexte, gestionnaire et ni
 
 Utilisez le bloc de configuration suivant pour définir un logger personnalisé :
 
-```
+```js
 window.DD_LOGS && DD_LOGS.createLogger (<NOM_LOGGER>, {
     level?: 'debug' | 'info' | 'warn' | 'error'
     handler?: 'http' | 'console' | 'silent'
@@ -202,7 +194,7 @@ window.DD_LOGS && DD_LOGS.createLogger (<NOM_LOGGER>, {
 Ces paramètres peuvent également être définis avec les fonctions `setContext`, `setLevel` et `setHandler`.
 Une fois le logger créé, vous pouvez y accéder depuis n'importe quelle partie de votre code JavaScript avec la fonction `getLogger` :
 
-```
+```js
 if (window.DD_LOGS) {
     const my_logger = DD_LOGS.getLogger('<NOM_LOGGER>')
 }
@@ -210,11 +202,10 @@ if (window.DD_LOGS) {
 
 **Exemple :**
 
-
 Imaginons que vous disposez d'un logger d'inscription, défini avec tous les autres loggers :
 
-```
-# créer un logger
+```js
+# Créer un logger
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.createLogger('signupLogger')
     signupLogger.addContext('env', 'staging')
@@ -223,17 +214,17 @@ if (window.DD_LOGS) {
 
 Vous pouvez à présent l'utiliser dans une autre partie du code avec :
 
-```
-...
+```html
+// ...
 <script>
-...
+// ...
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.getLogger('signupLogger')
-    signupLogger.info('Test d'inscription terminé')
+    signupLogger.info('Test sign up completed')
 }
-...
+//...
 </script>
-...
+//...
 ```
 
 **Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
@@ -242,19 +233,19 @@ if (window.DD_LOGS) {
 
 Il est possible de définir le contexte entier en un appel. Cela permet également de remplacer les attributs précédemment définis (le cas échéant) :
 
-```
-# Pour un logger
+```js
+# For one logger
 if (window.DD_LOGS) {
     my_logger.setContext(<ATTRIBUTS_JSON>)
 }
 
-# Pour le contexte global
+# For the global context
 window.DD_LOGS && DD_LOGS.setLoggerGlobalContext(<ATTRIBUTS_JSON>)
 ```
 
 **Exemple :**
 
-```
+```js
 if (window.DD_LOGS) {
     const signupLogger = DD_LOGS.getLogger('signupLogger')
     signupLogger.setContext({

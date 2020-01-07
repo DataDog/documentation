@@ -50,4 +50,4 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 [2]: /integrations/amazon_billing
 [3]: /integrations/faq/cloud-metric-delay
 [4]: /help
-[5]: /graphing/metrics/introduction/#space-aggregation
+[5]: /metrics/introduction/#space-aggregation

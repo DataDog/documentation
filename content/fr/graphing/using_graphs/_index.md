@@ -23,7 +23,7 @@ Depuis les widgets, ouvrez l'éditeur de graphiques en cliquant sur l'icône en 
 
 Lorsque vous ouvrez l'éditeur de graphiques pour la première fois, vous accédez à l'onglet **Edit**. De là, vous pouvez utiliser l'interface pour définir la plupart des paramètres. Voici un exemple d'interface :
 
-{{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Onglet Edit des graphiques" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/references-graphing-edit-window-with-y.png" alt="Onglet Edit des graphiques"  style="width:75%;" >}}
 
 ## Configuration d'un graphique
 Pour configurer votre graphique sur un dashboard, suivez ce processus :
@@ -66,7 +66,7 @@ Pour cumuler manuellement les données, utilisez la [fonction rollup][8]. Clique
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 60 secondes :
 
-{{< img src="graphing/using_graphs/references-graphing-rollup-example.png" alt="exemple de cumul" responsive="true" style="width:90%;">}}
+{{< img src="graphing/using_graphs/references-graphing-rollup-example.png" alt="exemple de cumul"  style="width:90%;">}}
 
 Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 
@@ -86,7 +86,7 @@ Datadog vous permet également de représenter graphiquement vos métriques avec
 
 Modifiez la valeur affichée pour une métrique sur un graphique en effectuant une opération arithmétique. Par exemple, vous pouvez visualiser le double d'une métrique spécifique en cliquant sur le lien **Advanced...** de l'éditeur de graphiques. Saisissez ensuite votre opération arithmétique dans la case `Formula`, à savoir ici : `a * 2`.
 
-{{< img src="graphing/using_graphs/arithmetic_2.png" alt="Opération arithmétique 2" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/arithmetic_2.png" alt="Opération arithmétique 2"  style="width:75%;" >}}
 
 #### Opération arithmétique entre deux métriques
 
@@ -99,7 +99,7 @@ Utilisez l'option **Advanced...** sur l'éditeur de graphiques et sélectionnez 
 
 Dans la case `Formula`, saisissez ensuite l'opération arithmétique (`a / b` dans cet exemple) :
 
-{{< img src="graphing/using_graphs/arithmetic_3.png" alt="Opération arithmétique 3" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/using_graphs/arithmetic_3.png" alt="Opération arithmétique 3"  style="width:75%;" >}}
 
 Pour afficher uniquement la formule sur votre graphique, cliquez sur les coches correspondant aux métriques `a` et `b`.
 

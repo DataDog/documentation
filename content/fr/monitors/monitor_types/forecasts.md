@@ -27,7 +27,7 @@ Pour créer un [monitor de prévisions][1] dans Datadog, utilisez la navigation 
 Toutes les métriques actuellement transmises à Datadog peuvent être surveillées. Pour obtenir des informations supplémentaires, consultez la page [Monitor de métrique][2].
 
 Une fois la métrique définie, le monitor de prévisions génère deux graphiques d'aperçu dans l'éditeur :
-{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Graphiques de l'éditeur" responsive="true" style="width:95%;">}}
+{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Graphiques de l'éditeur"  style="width:95%;">}}
 
 * Le graphique **Historical View** vous permet d'explorer les données de métriques antérieures sur différentes périodes.
 * Le graphique **Evaluation Preview** affiche une combinaison de données de métriques historiques et prévisionnelles.
@@ -43,7 +43,7 @@ Une fois la métrique définie, le monitor de prévisions génère deux graphiqu
 
 Datadog analyse automatiquement la métrique choisie et définit plusieurs paramètres pour vous. Cependant, les options peuvent être modifiées dans **Advanced Options** :
 
-{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Options avancées" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Options avancées"  style="width:80%;">}}
 
 | Option                     | Description                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -69,11 +69,11 @@ Utilisez l'algorithme linear pour les métriques qui évoluent de façon stable 
 | Simple   | Effectue une régression linéaire robuste sur l'ensemble des données historiques.                                |
 | Reactive | Extrapole plus facilement le comportement récent, mais est davantage susceptible de trop s'ajuster aux valeurs parasites, aux pics et aux creux.  |
 
-{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default"  style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple"  style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive"  style="width:80%;" >}}
 
 {{% /tab %}}
 {{% tab "Seasonal" %}}
@@ -88,7 +88,7 @@ Utilisez l'algorithme seasonal pour les métriques qui affichent des tendances r
 
 **Remarque** : cet algorithme exige au moins deux saisons de données historiques et utilise jusqu'à six saisons pour les prévisions.
 
-{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal"  style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,7 +108,7 @@ Les fonctions suivantes ne peuvent pas être imbriquées dans des appels de la f
 
 ## Pour aller plus loin
 
-{{< partial name="whats-next/whats-next.html" responsive="true" >}}
+{{< partial name="whats-next/whats-next.html"  >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /fr/monitors/monitor_types/metric/#define-the-metric

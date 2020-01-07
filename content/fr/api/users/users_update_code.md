@@ -5,7 +5,6 @@ order: 36.4
 external_redirect: /api/#mettre-a-jour-un-utilisateur
 ---
 
-
 **SIGNATURE** :
 
 `PUT /v1/user/<ID_UTILISATEUR>`

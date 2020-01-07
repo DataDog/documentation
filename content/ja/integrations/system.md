@@ -30,22 +30,27 @@ supported_os:
 * [Process チェック][3] - システムで実行されている特定のプロセスからメトリクスをキャプチャします。
 
 ## セットアップ
+
 ### インストール
 
 System チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ## 収集データ
+
 ### メトリクス
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
 ### イベント
+
 System チェックには、イベントは含まれません。
 
 ### サービスのチェック
+
 System チェックには、サービスのチェック機能は含まれません。
 
 ### タグ
+
 すべてのシステムメトリクスは、自動的に `host:<HOST_NAME>` でタグ付けされます。また、以下のネームスペースは `device:<DEVICE_NAME>` でタグ付けされます。
 
 * `system.disk.*`
@@ -58,6 +63,7 @@ System チェックには、サービスのチェック機能は含まれませ�
 このチェックは、ホスト上の CPU コアの数と CPU 時間 (システム、ユーザー、アイドル時間など) を収集します。
 
 ## セットアップ
+
 ### インストール
 
 システムコアチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
@@ -66,10 +72,9 @@ System チェックには、サービスのチェック機能は含まれませ�
 
 1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_core.d/conf.yaml` ファイルを編集します。使用可能な全構成オプションの詳細については、[サンプル system_core.d/conf.yaml][6] を参照してください。**注**: チェックを有効にするには、`instances` に少なくとも 1 つのエントリが必要です。例:
 
-    ```
-        init_config:
-
-        instances:
+    ```yaml
+      init_config:
+      instances:
         - foo: bar
     ```
 
@@ -80,6 +85,7 @@ System チェックには、サービスのチェック機能は含まれませ�
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_core` を探します。
 
 ## 収集データ
+
 ### メトリクス
 
 {{< get-metrics-from-git "system_core" >}}
@@ -87,9 +93,11 @@ System チェックには、サービスのチェック機能は含まれませ�
 プラットフォームによっては、このチェックは他の CPU 時間メトリクスも収集します。たとえば、Windows では `system.core.interrupt` が、Linux では `system.core.iowait` が収集されます。
 
 ### イベント
+
 System コアチェックには、イベントは含まれません。
 
 ### サービスのチェック
+
 System コアチェックには、サービスのチェック機能は含まれません。
 
 <h1 id="system-swap"><a href="#system-swap">System スワップ</a></h1>
@@ -97,6 +105,7 @@ System コアチェックには、サービスのチェック機能は含まれ�
 このチェックは、ホストがスワップイン/スワップアウトしたバイト数を監視します。
 
 ## セットアップ
+
 ### インストール
 
 システムのスワップチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
@@ -112,14 +121,17 @@ System コアチェックには、サービスのチェック機能は含まれ�
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_swap` を探します。
 
 ## 収集データ
+
 ### メトリクス
 
 {{< get-metrics-from-git "system_swap" >}}
 
 ### イベント
+
 System スワップチェックには、イベントは含まれません。
 
 ### サービスのチェック
+
 System スワップチェックには、サービスのチェック機能は含まれません。
 
 [1]: /ja/integrations/directory

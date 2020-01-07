@@ -5,7 +5,7 @@ private: true
 aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 ## 概要
 

@@ -24,4 +24,4 @@ external_redirect: '/api/#snapshot-de-graphique'
     le titre du graphique. Si aucun titre n'est spécifié, le graphique n'a pas de titre.
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html
-[2]: /fr/graphing/graphing_json/#grammar
+[2]: /fr/dashboards/graphing_json/#grammar

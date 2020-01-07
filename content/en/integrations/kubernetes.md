@@ -24,7 +24,7 @@ doc_link: /integrations/kubernetes/
 ddtype: check
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 ## Overview
 
@@ -42,6 +42,7 @@ You can also just run the Datadog Agent on your host and configure it to gather 
 [Refer to the dedicated documentation to choose the perfect setup for your Kubernetes integration][2]
 
 ## Setup Kubernetes State
+
 ### Installation
 
 To gather your kube-state metrics:
@@ -56,6 +57,7 @@ To gather your kube-state metrics:
 Once done, the Kubernetes State integration automatically collects kube-state metrics.
 
 ## Setup Kubernetes DNS
+
 ### Configuration
 
 Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
@@ -68,17 +70,21 @@ Note: these metrics are unavailable for Azure Kubernetes Service (AKS) at this p
 
 Two installations are possible:
 
-- On the node where the Agent is external to the Docker environment
-- Deployed with its containerized version in the Docker environment
+* On the node where the Agent is external to the Docker environment
+* Deployed with its containerized version in the Docker environment
 
 Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][6]. Otherwise follow the [container log collection steps][7] to start collecting logs from all your containers.
 
 ## Data Collected
+
 ### Metrics
+
 #### Kubernetes
+
 {{< get-metrics-from-git "kubernetes" >}}
 
 #### Kubelet
+
 {{< get-metrics-from-git "kubelet" >}}
 
 #### Kubernetes State
@@ -88,9 +94,11 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 {{< get-metrics-from-git "kubernetes_state" >}}
 
 #### Kubernetes DNS
+
 {{< get-metrics-from-git "kube_dns" >}}
 
 #### Kubernetes Proxy
+
 {{< get-metrics-from-git "kube_proxy" >}}
 
 ### Events

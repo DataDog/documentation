@@ -49,10 +49,30 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 6
+  - name: Synthetics
+    identifier: getting_started_synthetics
+    url: getting_started/synthetics/
+    parent: getting_started
+    weight: 7opl
+  - name: Emplacements privés
+    identifier: getting_started_private_location
+    url: getting_started/synthetics/private_location
+    parent: getting_started_synthetics
+    weight: 701
+  - name: Test Browser
+    identifier: getting_started_browser_test
+    url: getting_started/synthetics/browser_test
+    parent: getting_started_synthetics
+    weight: 702
+  - name: Test API
+    identifier: getting_started_api_test
+    url: getting_started/synthetics/api_test
+    parent: getting_started_synthetics
+    weight: 703
   - name: Centre d'apprentissage
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Tagging
     url: tagging/
     pre: nav_tagging
@@ -193,7 +213,7 @@ main:
     parent: agent
     identifier: agent_cluster
     weight: 4
-  - name: Implémentation
+  - name: Configuration
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
@@ -286,7 +306,7 @@ main:
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
     weight: 801
-  - name: Mise à niveau vers Agent v6
+  - name: "Upgrade vers l'Agent\_v6"
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
     weight: 802
@@ -343,172 +363,168 @@ main:
     identifier: watchdog_top_level
     pre: nav_watchdog
     weight: 50000
-  - name: Graphiques
-    url: graphing/
-    pre: nav_graphing
-    identifier: graphing
-    weight: 60000
-  - name: Utiliser les graphiques
-    url: graphing/using_graphs/
-    parent: graphing
-    identifier: graphing_using_graphs
-    weight: 1
-  - name: Dashboards
-    url: graphing/dashboards/
-    parent: graphing
-    identifier: graphing_dashboards
-    weight: 2
-  - name: Screenboard
-    url: graphing/dashboards/screenboard/
-    parent: graphing_dashboards
-    weight: 201
-  - name: Timeboard
-    url: graphing/dashboards/timeboard/
-    parent: graphing_dashboards
-    weight: 202
-  - name: Template variables
-    url: graphing/dashboards/template_variables/
-    parent: graphing_dashboards
-    weight: 203
-    identifier: graphing_dashboards_temp_variables
-  - name: Graphiques partagés
-    url: graphing/dashboards/shared_graph/
-    parent: graphing_dashboards
-    weight: 204
-  - name: Métriques
-    url: graphing/metrics/
-    parent: graphing
-    identifier: graphing_metrics
-    weight: 3
-  - name: Introduction
-    url: graphing/metrics/introduction/
-    parent: graphing_metrics
-    weight: 301
-  - name: Explorer
-    url: graphing/metrics/explorer/
-    parent: graphing_metrics
-    weight: 302
-  - name: Résumé
-    url: graphing/metrics/summary/
-    parent: graphing_metrics
-    weight: 303
-  - name: Distributions
-    url: graphing/metrics/distributions/
-    parent: graphing_metrics
-    identifier: graphing_metrics_distributions
-    weight: 304
-  - name: Corrélation de métriques
-    url: graphing/correlations/
-    parent: graphing
-    weight: 4
-  - name: Notebooks
-    url: graphing/notebooks/
-    parent: graphing
-    weight: 5
   - name: Événements
-    url: graphing/event_stream/
-    parent: graphing
-    weight: 6
-  - name: Infrastructure
-    url: graphing/infrastructure/
-    parent: graphing
-    identifier: graphing_infrastructure
-    weight: 7
-  - name: Container map
-    url: graphing/infrastructure/containermap/
-    parent: graphing_infrastructure
-    weight: 701
-  - name: Hostmap
-    url: graphing/infrastructure/hostmap/
-    parent: graphing_infrastructure
-    weight: 702
-  - name: Live containers
-    url: graphing/infrastructure/livecontainers/
-    parent: graphing_infrastructure
-    weight: 703
-  - name: Live processes
-    url: graphing/infrastructure/process/
-    parent: graphing_infrastructure
-    weight: 704
-  - name: Environnement sans serveur
-    url: graphing/infrastructure/serverless/
-    parent: graphing_infrastructure
-    weight: 706
-  - name: De la requête au graphique
-    url: graphing/functions/
-    parent: graphing
-    identifier: graphing_functions
-    weight: 8
+    url: events/
+    identifier: events_top_level
+    pre: nav_events
+    weight: 60000
+  - name: Dashboards
+    url: dashboards/
+    pre: nav_dashboards
+    identifier: dashboards
+    weight: 70000
+  - name: Screenboards
+    url: dashboards/screenboards/
+    parent: dashboards
+    weight: 1
+  - name: Timeboards
+    url: dashboards/timeboards/
+    parent: dashboards
+    weight: 2
+  - name: Widgets
+    url: dashboards/widgets/
+    parent: dashboards
+    weight: 3
+  - name: Requête
+    url: dashboards/querying/
+    parent: dashboards
+    weight: 4
+  - name: Fonctions
+    url: dashboards/functions/
+    parent: dashboards
+    identifier: dashboards_functions
+    weight: 5
   - name: Algorithmes
-    url: graphing/functions/algorithms/
-    parent: graphing_functions
-    weight: 801
+    url: dashboards/functions/algorithms/
+    parent: dashboards_functions
+    weight: 501
   - name: Opérations arithmétiques
-    url: graphing/functions/arithmetic/
-    parent: graphing_functions
-    weight: 802
+    url: dashboards/functions/arithmetic/
+    parent: dashboards_functions
+    weight: 502
   - name: Total
-    url: graphing/functions/count/
-    parent: graphing_functions
-    weight: 803
+    url: dashboards/functions/count/
+    parent: dashboards_functions
+    weight: 503
   - name: Interpolation
-    url: graphing/functions/interpolation/
-    parent: graphing_functions
-    weight: 804
+    url: dashboards/functions/interpolation/
+    parent: dashboards_functions
+    weight: 504
   - name: Rang
-    url: graphing/functions/rank/
-    parent: graphing_functions
-    weight: 805
+    url: dashboards/functions/rank/
+    parent: dashboards_functions
+    weight: 505
   - name: Taux
-    url: graphing/functions/rate/
-    parent: graphing_functions
-    weight: 806
+    url: dashboards/functions/rate/
+    parent: dashboards_functions
+    weight: 506
   - name: Régression
-    url: graphing/functions/regression/
-    parent: graphing_functions
-    weight: 807
+    url: dashboards/functions/regression/
+    parent: dashboards_functions
+    weight: 507
   - name: Rollup
-    url: graphing/functions/rollup/
-    parent: graphing_functions
-    weight: 808
+    url: dashboards/functions/rollup/
+    parent: dashboards_functions
+    weight: 508
   - name: Lissage
-    url: graphing/functions/smoothing/
-    parent: graphing_functions
-    weight: 809
+    url: dashboards/functions/smoothing/
+    parent: dashboards_functions
+    weight: 509
   - name: Décalage temporel
-    url: graphing/functions/timeshift/
-    parent: graphing_functions
-    weight: 810
+    url: dashboards/functions/timeshift/
+    parent: dashboards_functions
+    weight: 510
   - name: Bêta
-    url: graphing/functions/beta/
-    parent: graphing_functions
-    weight: 811
+    url: dashboards/functions/beta/
+    parent: dashboards_functions
+    weight: 511
+  - name: Corrélations
+    url: dashboards/correlations/
+    parent: dashboards
+    weight: 6
+  - name: Template variables
+    url: dashboards/template_variables/
+    parent: dashboards
+    weight: 7
+    identifier: dashboards_temp_variables
+  - name: Partage
+    url: dashboards/sharing/
+    parent: dashboards
+    weight: 8
   - name: Graphiques JSON
-    url: graphing/graphing_json/
-    parent: graphing
+    url: dashboards/graphing_json/
+    parent: dashboards
     identifier: graphing_json
     weight: 9
   - name: Schéma JSON des widgets
-    url: graphing/graphing_json/widget_json/
+    url: dashboards/graphing_json/widget_json/
     parent: graphing_json
     weight: 901
   - name: Schéma JSON des requêtes
-    url: graphing/graphing_json/request_json/
+    url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: Widgets
-    url: graphing/widgets/
-    parent: graphing
-    weight: 10
-  - name: Guides
-    url: graphing/guide/
-    parent: graphing
-    weight: 11
+  - name: Infrastructure
+    url: infrastructure/
+    identifier: infrastructure
+    pre: nav_infrastructure
+    weight: 80000
+  - name: La liste d'insfrastructures
+    url: infrastructure/list/
+    parent: infrastructure
+    weight: 2
+  - name: Hostmap
+    url: infrastructure/hostmap/
+    parent: infrastructure
+    weight: 3
+  - name: Container map
+    url: infrastructure/containermap/
+    parent: infrastructure
+    weight: 4
+  - name: Live processes
+    url: infrastructure/process/
+    parent: infrastructure
+    weight: 5
+  - name: Live containers
+    url: infrastructure/livecontainers/
+    parent: infrastructure
+    weight: 6
+  - name: Environnement sans serveur
+    url: infrastructure/serverless/
+    parent: infrastructure
+    weight: 7
+  - name: Métriques
+    url: metrics/
+    identifier: metrics_top_level
+    pre: nav_metrics
+    weight: 90000
+  - name: Introduction
+    url: metrics/introduction/
+    parent: metrics_top_level
+    weight: 901
+  - name: Explorer
+    url: metrics/explorer/
+    parent: metrics_top_level
+    weight: 902
+  - name: Résumé
+    url: metrics/summary/
+    parent: metrics_top_level
+    weight: 903
+  - name: Distributions
+    url: metrics/distributions/
+    parent: metrics_top_level
+    identifier: metrics_distributions
+    weight: 904
+  - name: Notebooks
+    url: notebooks/
+    identifier: notebooks
+    pre: nav_notebooks
+    weight: 100000
   - name: Alertes
     url: monitors/
     pre: nav_alerting
     identifier: alerting
-    weight: 70000
+    weight: 110000
   - name: Monitors
     url: monitors/monitor_types/
     parent: alerting
@@ -617,7 +633,7 @@ main:
     url: tracing/
     pre: nav_tracing
     identifier: tracing
-    weight: 80000
+    weight: 120000
   - name: Activer la collecte de traces
     url: tracing/send_traces/
     identifier: tracing_send_traces
@@ -766,7 +782,7 @@ main:
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 90000
+    weight: 130000
   - name: Collecte de logs et intégrations
     url: logs/log_collection/
     parent: log_management
@@ -777,44 +793,49 @@ main:
     url: logs/log_collection/javascript/
     parent: log_collection
     weight: 101
+  - name: Android
+    identifier: log_android
+    url: logs/log_collection/android/
+    parent: log_collection
+    weight: 102
   - name: Csharp
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 102
+    weight: 103
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 103
+    weight: 104
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 104
+    weight: 105
   - name: Nodejs
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 108
+    weight: 109
   - name: Autres intégrations
     url: 'integrations/#collecte-de-logs-cat'
     identifier: other_integrations
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: Traitement
     url: logs/processing/
     parent: log_management
@@ -905,7 +926,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 100000
+    weight: 140000
   - name: Tests API
     url: synthetics/api_tests/
     parent: synthetics
@@ -947,27 +968,72 @@ main:
     url: real_user_monitoring/
     pre: nav_rum
     identifier: rum
-    weight: 110000
-  - name: Configuration
-    url: real_user_monitoring/setup
+    weight: 150000
+  - name: En savoir plus
+    url: real_user_monitoring/installation/
     parent: rum
-    identifier: rum_setup
+    identifier: rum_install
     weight: 1
-  - name: RUM Explorer
-    url: real_user_monitoring/rum_explorer
+  - name: Configuration avancée
+    url: real_user_monitoring/installation/advanced_configuration/
+    parent: rum_install
+    identifier: rum_advanced
+    weight: 101
+  - name: Dashboards
+    url: real_user_monitoring/dashboards/
     parent: rum
-    identifier: rum_views_explorer
+    identifier: rum_dashboards
     weight: 2
-  - name: RUM Analytics
-    url: real_user_monitoring/rum_analytics
+  - name: Explorer
+    url: real_user_monitoring/explorer/
     parent: rum
-    identifier: rum_analytics
+    identifier: rum_explorer
     weight: 3
+  - name: Rechercher des monitors
+    url: real_user_monitoring/explorer/search/
+    parent: rum_explorer
+    identifier: rum_explorer_search
+    weight: 301
+  - name: Analyses
+    url: real_user_monitoring/explorer/analytics/
+    parent: rum_explorer
+    identifier: rum_explorer_analytics
+    weight: 302
+  - name: Données collectées
+    url: real_user_monitoring/data_collected/
+    parent: rum
+    identifier: rum_data_collected
+    weight: 4
+  - name: Vue
+    url: real_user_monitoring/data_collected/view
+    parent: rum_data_collected
+    identifier: rum_data_collected_views
+    weight: 401
+  - name: Ressource
+    url: real_user_monitoring/data_collected/resource
+    parent: rum_data_collected
+    identifier: rum_data_collected_resource
+    weight: 402
+  - name: Tâche longue
+    url: real_user_monitoring/data_collected/long_task
+    parent: rum_data_collected
+    identifier: rum_data_collected_long_task
+    weight: 403
+  - name: Erreur
+    url: real_user_monitoring/data_collected/error
+    parent: rum_data_collected
+    identifier: rum_data_collected_error
+    weight: 404
+  - name: Action utilisateur
+    url: real_user_monitoring/data_collected/user_action
+    parent: rum_data_collected
+    identifier: rum_data_collected_user_action
+    weight: 405
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
     identifier: npm
-    weight: 120000
+    weight: 160000
   - name: Installation
     url: network_performance_monitoring/installation
     parent: npm
@@ -987,7 +1053,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 130000
+    weight: 170000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -1146,12 +1212,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 140000
+    weight: 180000
   - name: Gestion de compte
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 150000
+    weight: 190000
   - name: Gestion d'équipe
     url: account_management/team/
     parent: account_management
@@ -1213,7 +1279,7 @@ main:
     url: /security/
     pre: nav_security
     identifier: security
-    weight: 160000
+    weight: 200000
   - name: Agent
     url: security/agent/
     parent: security
@@ -1230,13 +1296,8 @@ main:
     url: security/other/
     parent: security
     weight: 4
-  - name: Glossaire
-    url: glossary/
-    pre: nav_glossary
-    identifier: glossary_top_level
-    weight: 170000
   - name: Aide
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 180000
+    weight: 210000

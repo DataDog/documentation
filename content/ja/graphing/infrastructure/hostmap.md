@@ -34,7 +34,7 @@ further_reading:
 
 簡単な例として、ホストを AWS アベイラビリティーゾーンでグループ化するとします。2 つ目のグループ化タグ (たとえば、インスタンスタイプ) を追加すると、ホストはさらにいくつかのグループに再分割されます。つまり、以下に示すように、まずアベイラビリティーゾーンで分割され、次にインスタンスタイプで分割されます。
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" responsive="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups"  >}}
 
 **注**: Datadog のホストマップは `availability-zone` で自動的にグループ化されます。デフォルトのグループ化を変更したい場合は、Datadog のサポートチームまでお問合せください。
 
@@ -57,7 +57,7 @@ further_reading:
 
 インテグレーションの名前をクリックすると、そのインテグレーションのメトリクスがコンパクトなダッシュボードに表示されます。下のスクリーンショットでは「system」がクリックされ、CPU 使用率、メモリ使用量、ディスクのレイテンシーなどのシステムメトリクスが取得されています。
 
-{{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true" style="width:75%;" >}}
+{{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In"  style="width:75%;" >}}
 
 ### 図形と色
 
@@ -67,7 +67,7 @@ further_reading:
 
 下のスクリーンショットでは、六角形のサイズが 15 分間の平均負荷を示します。この値は、コア数が違ってもマシンの作業負荷を比較できるように正規化されています。
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size"  style="width:80%;">}}
 
 **注**: 「% CPU utilized」メトリクスは、Datadog Agent からレポートされているか、AWS または vSphere から直接レポートされているかにかかわらず、最も信頼性が高い最新の CPU 使用率の計測値を使用します。
 
@@ -77,7 +77,7 @@ further_reading:
 
 選択されたメトリクスをレポートしていないホストをホストマップに表示することもできます。それには、マップの右上にある歯車アイコンを選択し、Host Map 設定の「Show hosts with no metrics」を有効にします。
 
-{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" responsive="true" style="width:50%;">}}
+{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No Agent"  style="width:50%;">}}
 
 ### データの鮮度と意味
 
@@ -92,11 +92,11 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下は、Datadog のインフラストラクチャーの一部です。**c3.2xlarge** インスタンスに大きな負荷がかかっていることがわかります。
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1"  style="width:80%;">}}
 
 以下に示すように、この c3.2xlarge グループをクリックして役割でサブグループ化すると、一部の役割にのみ負荷がかかり、他の役割はほぼアイドル状態であることがわかります。この 7 つの緑色のノードを c3.xlarge にダウングレードすれば、年間 $13,000 ドル近くの節約になります。(ホスト 1 台につき 1 時間で $0.21 の節約 x 24 時間/日 * 365 日/年 * 7 ホスト = $12,877.20 / 年)
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups"  style="width:80%;">}}
 
 ### アベイラビリティーゾーンの配置
 
@@ -104,7 +104,7 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下の例では、`role:daniels` を持つホストがいくつかのアベイラビリティーゾーンに不均等に分布しています。(Daniels は内部アプリケーションの名前です。)
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" responsive="true" style="width:80%;" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance"  style="width:80%;" >}}
 
 ### 問題の調査
 
@@ -113,9 +113,9 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下は、最近 Datadog で発生した問題のスクリーンショットです。一部のホストでは、同じクラスターに属しているにもかかわらず、他のホストより使用可能なメモリが少なくなっています。マシンイメージごとにグループ化することで、使用されているイメージが 2 種類あり、その 1 つが過負荷であることがわかりました。
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" responsive="true" style="width:80%;" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands"  style="width:80%;" >}}
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups"  style="width:80%;">}}
 
 ## その他の参考資料
 

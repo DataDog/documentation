@@ -121,9 +121,8 @@ It's possible to create a custom check that runs a command line program and capt
 
 To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
 
-```
+```text
 $ vgs -o vg_free
-
 ```
 
 must be passed to `get_subprocess_output()` like this:

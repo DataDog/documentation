@@ -33,7 +33,7 @@ public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS 関連の豊富なメトリクスを追跡
 version: '1.0'
 ---
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard"  >}}
 
 ## 概要
 
@@ -58,7 +58,7 @@ RDS インスタンスの監視には 3 つのオプションがあります。�
 
 RDS インスタンスの拡張モニタリングを有効にするには、インスタンスの作成中または作成後に、**Instance Actions** の下にある **Modify** を選択します。監視の詳細度には 15 を選択することをお勧めします。
 
-{{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" responsive="true">}}
+{{< img src="integrations/awsrds/rds-enhanced-install.png" alt="RDS enhanced install" >}}
 
 ##### KMS キーの作成
 
@@ -77,9 +77,9 @@ RDS インスタンスの拡張モニタリングを有効にするには、イ�
 9. アプリケーションに一意の名前を付けます。
 10. 前のセクションで作成したキーの ID を `KMSKeyId` パラメーターに貼り付け、デプロイします。
 11. アプリケーションがデプロイされたら、新しく作成された Lambda 関数を開きます (「Resource」の下にある関数をクリック)。
- {{< img src="integrations/awsrds/click-function.png" alt="Open Lambda Function" responsive="true">}}
+ {{< img src="integrations/awsrds/click-function.png" alt="Open Lambda Function" >}}
 12. 下にスクロールして `Environment variables` セクションを見つけます。`<YOUR_API_KEY>` は、`{"api_key":"<YOUR_API_KEY>"}` の形式を使用して [Datadog API キー][17]に置き換えます。
-{{< img src="integrations/awsrds/env-variables.png" alt="Environment Variables" responsive="true">}}
+{{< img src="integrations/awsrds/env-variables.png" alt="Environment Variables" >}}
 13. `Encryption configuration` セクションを開き、`Enable helpers for encryption in transit` を選択します。
 14. `KMS key to encrypt in transit` で、下の `KMS key to encrypt at rest` にあるキーと同じキーを選択します。
 15. 入力した JSON Blob の横にある Encrypt ボタンを押します。
@@ -109,7 +109,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 #### ネイティブデータベースインテグレーション
 
 1. AWS コンソールに移動し、RDS セクションを開いて、監視するインスタンスを見つけます。
-  {{< img src="integrations/awsrds/rds-console.png" alt="RDS console" responsive="true">}}
+  {{< img src="integrations/awsrds/rds-console.png" alt="RDS console" >}}
 2. エンドポイント URL をメモします (例: **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**)。これは Agent の構成に使用されます。`DB Instance identifier` もメモします (例 **mysqlrds**)。これはグラフやダッシュボードの作成に使用されます。
 
 ### コンフィグレーション
@@ -195,10 +195,10 @@ Checks
 
 数分後、RDS メトリクスおよび [MySQL、Aurora、MariaDB、SQL Server、または PostgreSQL からのメトリクス][6]が Datadog で Metrics Explorer、[Graphs][7] および [Alerts][8] からアクセス可能になります。
 以下に、RDS と MySQL インテグレーションからの多数のメトリクスを表示する Aurora ダッシュボードの例を挙げます。インスタンス `quicktestrds` 上の両方のインテグレーションから取得されたメトリクスは、`dbinstanceidentifier` タグを使用してまとめられます。
-{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash" responsive="true" popup="true">}}
+{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash"  >}}
 
 以下は、Amazon RDS 上の MySQL のデフォルトのダッシュボードです。
-{{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL default dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL default dashboard"  >}}
 
 Amazon RDS のパフォーマンスメトリクスで MySQL を監視する方法については、[一連の記事][9]を参照してください。キーパフォーマンスメトリクス、その収集方法、Datadog を使用して MySQL on Amazon RDS を監視する方法について詳述されています。
 
@@ -211,9 +211,9 @@ MySQL、MariaDB、および Postgres のログを Amazon CloudWatch に転送す
 
 1. [Datadog ログコレクション AWS Lambda 関数][11]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む CloudWatch ロググループにトリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group"   style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][12]に移動し、ログを確認します。
 
@@ -229,7 +229,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 ### イベント
 AWS RDS インテグレーションには、DB インスタンス、セキュリティグループ、スナップショット、およびパラメーターグループに関連するイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS Events" responsive="true">}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS Events" >}}
 
 ### サービスのチェック
 **aws.rds.read_replica_status**  

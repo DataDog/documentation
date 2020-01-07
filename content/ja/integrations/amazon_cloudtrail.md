@@ -26,7 +26,7 @@ version: '1.0'
 
 AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Datadog は、この監査証跡を読み取ってイベントを作成します。Datadog のイベントストリームでイベントを検索し、ダッシュボードでの関連付けに使用します。次に CloudTrail イベントの例を示します。
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="cloudtrail event" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="cloudtrail event"  >}}
 
 他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
 
@@ -78,15 +78,15 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 
 証跡を定義する場合は、ログの書き込み先になる S3 バケットを選択します。
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail logging" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail logging"    style="width:70%;">}}
 
 #### Datadog へのログの送信
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで Cloudtrail ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     Cloudtrail ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 終了すると、[Datadog のログエクスプローラー][9]にログが表示されます。
 

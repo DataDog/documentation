@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Chatwork
 short_description: Envoyez des alertes et des graphiques Datadog à la room Chatworks de votre équipe.
 version: '1.0'
 ---
-{{< img src="integrations/chatwork/chatwork_event.png" alt="Événement Chatwork" responsive="true" popup="true">}}
+{{< img src="integrations/chatwork/chatwork_event.png" alt="Événement Chatwork"  >}}
 
 ## Présentation
 
@@ -41,7 +41,7 @@ Intégrez ChatWork à Datadog pour :
 6. Saisissez les noms et ID des conversations auxquelles vous souhaitez accéder. Les ID se trouvent dans l'URL des conversations.
 
 7. Cochez la case si vous souhaitez recevoir une notification pour chaque commentaire. Le cas contraire, vous devez utiliser la syntaxe @chatwork-noms_conversation.
-{{< img src="integrations/chatwork/chatwork_tile.png" alt="Titre Chatwork" responsive="true" popup="true">}}
+{{< img src="integrations/chatwork/chatwork_tile.png" alt="Titre Chatwork"  >}}
 
 8. [Enregistrez votre configuration][4].
 

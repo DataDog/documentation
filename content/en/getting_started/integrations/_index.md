@@ -11,6 +11,7 @@ further_reading:
   tag: "Integrations"
   text: "Datadog's full list of integrations"
 ---
+
 * [Setting up an integration](#setting-up-an-integration)
   * [API and Application keys](#api-and-application-keys)
   * [Installation](#installation)
@@ -19,7 +20,7 @@ further_reading:
   * [Validation](#validation)
 * [Installing multiple integrations](#installing-multiple-integrations)
 * [Security practices](#security-practices)
-* [What's next?](#whats-next)
+* [What's next?](#what-s-next)
 * [Troubleshooting](#troubleshooting)
 * [Key terms](#key-terms)
 * [Further Reading](#further-reading)
@@ -64,7 +65,7 @@ To activate a given integration:
 
 For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the [apache integration][24]:
 
-```
+```yaml
 init_config:
 
 instances:
@@ -85,7 +86,7 @@ logs:
 
 To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:
 
-```
+```yaml
 init_config:
 
 instances:
@@ -113,7 +114,7 @@ For information on how Datadog handles your data, and other security considerati
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][28] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][29] and [alerts][30] to monitor your data.
+Now that you have your first integrations set up, you can start [exploring all of the metrics][28] being sent by Datadog to your application, and use these metrics to begin setting up [dashboards][29] and [alerts][30] to monitor your data.
 
 Also check out our [Logs management][31], [APM][32], and [Synthetics][33] solutions.
 
@@ -171,8 +172,8 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [25]: /tagging
 [26]: /agent/guide/agent-commands/#agent-status-and-information
 [27]: /security
-[28]: /graphing/metrics/explorer
-[29]: /graphing
+[28]: /metrics/explorer
+[29]: /dashboards
 [30]: /monitors
 [31]: /logs
 [32]: /tracing

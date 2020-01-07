@@ -10,7 +10,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -27,7 +27,7 @@ further_reading:
     * [Logs][3] data is `agent-intake.logs.datadoghq.com ` for TCP traffic
     * All other Agent data:
         * **Agents < 5.2.0** `app.datadoghq.com`
-        *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
+        *  **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
 
 This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
@@ -38,7 +38,7 @@ These domains are **CNAME** records pointing to a set of static IP addresses. Th
 
 The information is structured as JSON following this schema:
 
-```
+```text
 {
     "version": 1,                       // <-- incremented every time this information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
@@ -59,7 +59,7 @@ The information is structured as JSON following this schema:
 }
 ```
 
-Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json` or `https://ip-ranges.datadoghq.eu/<section>.json`, for example:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<SECTION>.json` or `https://ip-ranges.datadoghq.eu/<SECTION>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data over TCP
 * [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data over TCP for Datadog EU
@@ -100,7 +100,6 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
   * `8126/tcp`: port for the [APM Receiver][6]
 
-
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /logs
 [3]: /agent/basic_agent_usage/kubernetes
@@ -127,12 +126,10 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
   * `17124/tcp`: optional graphite adapter
 
-
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /tracing
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Using Proxies
 
@@ -143,7 +140,7 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
-[2]: /graphing/infrastructure/livecontainers
+[2]: /infrastructure/livecontainers
 [3]: /logs
 [4]: https://ip-ranges.datadoghq.com
 [5]: https://ip-ranges.datadoghq.eu

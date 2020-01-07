@@ -59,7 +59,7 @@ You can also use one of the [Datadog-official and community contributed API and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/metrics/introduction
+[1]: /metrics/introduction
 [2]: /developers/metrics/types
 [3]: /developers/metrics/types/?tab=rate#metric-submission-types
 [4]: /developers/metrics/types/?tab=count#metric-submission-types

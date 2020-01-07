@@ -12,11 +12,11 @@ further_reading:
 ---
 サービスサマリーは、選択された[サービス][1]のグラフをスクリーンボードに表示します。
 
-{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" responsive="true">}}
+{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 

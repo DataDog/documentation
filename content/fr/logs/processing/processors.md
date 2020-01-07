@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
-{{< img src="logs/processing/processors/processors_overview.png" alt="log d'origine" responsive="true">}}
+{{< img src="logs/processing/processors/processors_overview.png" alt="log d'origine" >}}
 
 Un processeur exécute dans un [pipeline][1] une action de structuration de données sur un log ([remappage d'un attribut](#remapper), [parsing Grok](#parser-grok), etc.).
 
@@ -28,7 +28,7 @@ Créez des règles grok personnalisées pour parser l'intégralité du message o
 
 Définissez le processeur Grok depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/parser.png" alt="Parser"  style="width:80%;" >}}
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
@@ -99,7 +99,7 @@ Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-
 
 Définissez le processeur de remappage de dates de log depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="Remappeur de dates de log" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/log_date_remapper.png" alt="Remappeur de dates de log"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -131,11 +131,11 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Utilisez ce processeur si vous souhaitez définir des attributs en tant que statut officiel. Par exemple, il est possible de transformer ce log :
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt="Log avant remappage de la sévérité " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/log_pre_severity.png" alt="Log avant remappage de la sévérité "  style="width:40%;">}}
 
 En ce log :
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log après remappage de la sévérité bis" responsive="true" style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log après remappage de la sévérité bis"  style="width:40%;" >}}
 
 Chaque valeur de statut entrant est mappée comme suit :
 
@@ -158,7 +158,7 @@ Chaque valeur de statut entrant est mappée comme suit :
 
 Définissez le processeur de remappage de statut de log depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Carré du processeur de remappage de la sévérité" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Carré du processeur de remappage de la sévérité"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -197,7 +197,7 @@ Utilisez ce processeur si vous souhaitez définir au moins un attribut en tant q
 
 Définissez le processeur de remappage de services de log depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Carré du processeur de remappage de services" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Carré du processeur de remappage de services"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -236,7 +236,7 @@ Le message est un attribut clé dans Datadog. Il est affiché dans la colonne de
 
 Définissez le processeur de remappage de messages de log depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/message_processor.png" alt="Processeur de remappage de messages" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/message_processor.png" alt="Processeur de remappage de messages"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -269,11 +269,11 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Le processeur effectue un remappage de n'importe quel attribut ou tag source vers un autre attribut ou tag cible. Il peut transformer ce log :
 
-{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribut avant remappage " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribut avant remappage "  style="width:40%;">}}
 
 En ce log :
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribut après remappage " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribut après remappage "  style="width:40%;">}}
 
 Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recommandations relatives aux tags][4]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
 
@@ -282,7 +282,7 @@ Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recomm
 
 Définissez le processeur de remappage depuis la [page de configuration des logs Datadog][1]. Dans l'exemple ci-dessous, il effectue un remappage de `user` vers `user.firstname`.
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Carré du processeur de remappage d'attribut" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Carré du processeur de remappage d'attribut"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -324,14 +324,14 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Ce processeur extrait les paramètres de requête et d'autres paramètres importants à partir d'une URL. Une fois configuré, les attributs suivants sont obtenus :
 
-{{< img src="logs/processing/processors/url_processor.png" alt="Processeur d'URL" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Processeur d'URL"  style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "IU" %}}
 
 Définissez le processeur de parsing d'URL depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="Carré du processeur d'URL" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor_tile.png" alt="Carré du processeur d'URL"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -362,7 +362,7 @@ Définissez le processeur de parsing d'URL depuis la [page de configuration des 
 
 Le parser de user-agent reçoit un attribut user-agent et extrait le système d'exploitation, le navigateur, l'appareil et d'autres données utilisateur. Il reconnaît les principaux bots comme Google Bot, Yahoo Slurp et Bing. Une fois configuré, les attributs suivants sont obtenus :
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="Processeur de user-agent" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="Processeur de user-agent"  style="width:80%;">}}
 
 **Remarque** : si vos logs comprennent des user-agents encodés (c'est par exemple le cas des logs IIS), configurez ce processeur de façon à ce qu'il **décode l'URL** avant son parsing.
 
@@ -371,7 +371,7 @@ Le parser de user-agent reçoit un attribut user-agent et extrait le système d'
 
 Définissez le processeur de user-agent depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Carré du processeur de user-agent" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Carré du processeur de user-agent"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -419,11 +419,11 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 
 Définissez le processeur de catégories depuis la [page de configuration des logs Datadog][1]. Par exemple, pour catégoriser vos logs d'accès Web en fonction de la plage de valeurs du code de statut (2xx pour un code de réponse entre 200 et 299, 3xx pour un code de réponse entre 300 et 399, etc.), ajoutez ce processeur :
 
-{{< img src="logs/processing/processors/category_processor.png" alt="Processeur de catégories" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor.png" alt="Processeur de catégories"  style="width:80%;" >}}
 
 Cela génère le résultat suivant :
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="Résultat du processeur de catégories" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor_result.png" alt="Résultat du processeur de catégories"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -490,7 +490,7 @@ Un attribut est considéré comme manquant s'il est introuvable dans les attribu
 
 Définissez le processeur arithmétique depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Processeur arithmétique" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Processeur arithmétique"  style="width:80%;">}}
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
@@ -544,7 +544,7 @@ Le modèle est défini par du texte brut et des blocs, avec la syntaxe `%{chemin
 
 Définissez le processeur de générateur de chaînes sur la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="Processeur de générateur de chaînes" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="Processeur de générateur de chaînes"  style="width:80%;">}}
 
 **Exemple**
 
@@ -634,13 +634,13 @@ Le parser GeoIP reçoit un attribut adresse IP et extrait le continent, le pays,
 {{< tabs >}}
 {{% tab "IU" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="Processeur GeoIP" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/geoip_processor.png" alt="Processeur GeoIP"  style="width:80%;">}}
 
 La plupart des éléments contiennent un attribut `name` et `iso_code` (ou `code` pour le continent). L'attribut `subdivision` est le premier niveau de sous-division que le pays utilise, comme les « States » pour les États-Unis ou les « Départements » pour la France.
 
 Un exemple de parser GeoIP se trouve ci-dessous. Il extrait la géolocalisation de l'attribut `network.client.ip` et la stocke dans l'attribut `network.client.geoip` :
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP"  style="width:60%;">}}
 
 **Remarque** : ce processeur utilise les données GeoLite2 créées par [MaxMind][1].
 
@@ -681,7 +681,7 @@ Vous pouvez également vous en servir pour vérifier si l'adresse MAC qui vient 
 {{< tabs >}}
 {{% tab "IU" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances"  style="width:80%;">}}
 
 Le processeur effectue les actions suivantes :
 
@@ -739,7 +739,7 @@ Il existe deux façons d'améliorer la corrélation entre les traces et les logs
 
 Définissez le processeur de remappage de traces depuis la [page de configuration des logs Datadog][1]. Entrez le chemin de l'attribut ID de trace dans le carré du processeur, comme suit :
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="Processeur d'ID de trace" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/trace_processor.png" alt="Processeur d'ID de trace"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}

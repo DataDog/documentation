@@ -10,7 +10,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -34,7 +34,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 {{% tab "Agent v6 & v7" %}}
 
 | Description                        | Command                                                |
-| --------------------               | --------------------                                   |
+|------------------------------------|--------------------------------------------------------|
 | Start Agent as a service           | `sudo service datadog-agent start`                     |
 | Stop Agent running as a service    | `sudo service datadog-agent stop`                      |
 | Restart Agent running as a service | `sudo service datadog-agent restart`                   |
@@ -42,13 +42,13 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Status page of running Agent       | `sudo datadog-agent status`                            |
 | Send flare                         | `sudo datadog-agent flare`                             |
 | Display command usage              | `sudo datadog-agent --help`                            |
-| Run a check                        | `sudo -u dd-agent -- datadog-agent check <check_name>` |
+| Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Description                        | Command                                           |
-| --------------------               | --------------------                              |
+|------------------------------------|---------------------------------------------------|
 | Start Agent as a service           | `sudo service datadog-agent start`                |
 | Stop Agent running as a service    | `sudo service datadog-agent stop`                 |
 | Restart Agent running as a service | `sudo service datadog-agent restart`              |
@@ -56,7 +56,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Status page of running Agent       | `sudo service datadog-agent info`                 |
 | Send flare                         | `sudo service datadog-agent flare`                |
 | Display command usage              | `sudo service datadog-agent`                      |
-| Run a check                        | `sudo -u dd-agent -- dd-agent check <check_name>` |
+| Run a check                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -80,7 +80,6 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-
 [1]: /integrations
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -92,7 +91,6 @@ The configuration files and folders for the Agent are located in:
 Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
-
 
 [1]: /integrations
 {{% /tab %}}

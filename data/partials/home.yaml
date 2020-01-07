@@ -29,9 +29,17 @@ nav_sections:
         icon: integration.svg
         desc: Gather data from your systems, apps, & services
       - title: Dashboards
-        link: graphing/dashboards/
+        link: dashboards/
         icon: dashboard.svg
         desc: Visualize your data to gain insight
+      - title: Infrastructure
+        link: infrastructure/
+        icon: host-map.svg
+        desc: Track of your hosts, containers, processes, and serverless functions
+      - title: Metrics
+        link: metrics/
+        icon: metric.svg
+        desc: Explore your metrics and create distributions
       - title: Alerting
         link: monitors/
         icon: attention-circled.svg
@@ -52,14 +60,14 @@ nav_sections:
         link: real_user_monitoring/
         icon: rum.svg
         desc: Visualize and analyze the performance of your front end applications.
-      - title: Network Performance
+      - title: Network Monitoring
         link: network_performance_monitoring/
         icon: network.svg
         desc: Gain visibiliy into your network traffic using tagged objects
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg
-        desc: Automatically see trends in your applications metrics
+        desc: Automatically see trends in your applications & infrastructure metrics
   - nav_section:
     - name: 'Configuration'
     - navtiles:

@@ -32,7 +32,7 @@ Une template variable est définie par les éléments suivants :
 
 Une fois votre template variable créée, Datadog affiche le nombre de sources qui utilisent cette variable. Dans l'exemple ci-dessous, la template variable est utilisée dans l'un des deux graphiques :
 
-{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="Utilisation de la TV" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="Utilisation de la TV"  style="width:85%;">}}
 
 [Utilisez les template variables](#utilisation) dans des widgets individuels ou cliquez sur l'option **Add to All**. Pour supprimer une template variable de tous les widgets, cliquez sur l'option **Remove From All**.
 
@@ -47,7 +47,7 @@ De plus, il est possible de définir des template variables de log ou d'APM bas�
 
 #### Création
 
-{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Vue enregistrée par défaut" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/default_view.png" alt="Vue enregistrée par défaut"  style="width:85%;">}}
 
 Chaque dashboard affiche un menu déroulant *(Default Value)* à gauche des template variables. Lorsque vous modifiez la valeur d'une template variable, celle-ci n'est pas automatiquement enregistrée en tant que nouvelle vue. 
 Pour enregistrer les valeurs actuelles des template variables dans une nouvelle vue, cliquez sur le menu déroulant et sélectionnez *Save selections as view*. Vous serez alors invité à donner un nom unique à votre vue. Une fois enregistrée, la vue est ajoutée au menu déroulant. Cliquez dessus pour rétablir les valeurs de template variables précédemment enregistrées.
@@ -56,7 +56,7 @@ Pour enregistrer les valeurs actuelles des template variables dans une nouvelle 
 
 Pour supprimer une vue, cliquez sur le menu déroulant des vues enregistrées et sélectionnez *Manage views...*. Une fenêtre contenant chacune de vos vues enregistrées avec une icône en forme de corbeille s'affiche alors. Cliquez sur la corbeille appropriée pour supprimer la vue correspondante.
 
-{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Fenêtre Manage Views" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/manage_views.png" alt="Fenêtre Manage Views"  style="width:75%;">}}
 
 #### Modification
 
@@ -72,7 +72,7 @@ Lorsque vous créez ou modifiez un widget, les template variables existantes s'a
 
 Une fois le widget enregistré, la valeur de la template variable est sélectionnée en haut de votre dashboard :
 
-{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Sélection d'une template variable" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Sélection d'une template variable"  style="width:75%;">}}
 
 #### Texte
 
@@ -99,7 +99,7 @@ tags:<CLÉ_TAG>:$<NOM_TEMPLATE_VARIABLE>.value
 
 Par exemple, si vous recherchez `tags:region:$region.value` et que la valeur sélectionnée pour la template variable `region` est `us-east1`, vous obtenez les événements associés au tag `region:us-east1`. Les barres roses sur les graphiques indiquent à quel moment les événements se sont produits.
 
-{{< img src="graphing/dashboards/template_variables/search_dashboard.png" alt="Rechercher depuis un dashboard" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_dashboard.png" alt="Rechercher depuis un dashboard"  style="width:85%;">}}
 
 Utilisez des virgules pour effectuer une recherche à partir de plusieurs template variables. Exemple : `tags:role:$role.value,env:$env.value`
 
@@ -115,7 +115,7 @@ tags:$<NOM_TEMPLATE_VARIABLE>
 
 Par exemple, essayez d'entrer `tags:$region` dans la barre de recherche d'événements à superposer. Vous obtenez les événements correspondant à la valeur sélectionnée dans le menu déroulant de la template variable `region` :
 
-{{< img src="graphing/dashboards/template_variables/search_widget.png" alt="Rechercher depuis un widget" responsive="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/search_widget.png" alt="Rechercher depuis un widget"  style="width:85%;">}}
 
 ## Pour aller plus loin
 

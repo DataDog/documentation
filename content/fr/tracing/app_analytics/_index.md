@@ -473,7 +473,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 Une [span analysée][2] représente la [span][3] supérieure d'un service, métadonnées incluses. Une fois activées, les spans analysées sont envoyées à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 spans analysées depuis ses spans `servlet.request`, car chaque span `servlet.request` génère une span analysée. Le [filtrage de spans analysées][4] offre l'avantage de réduire le nombre de spans analysées facturables sans pour autant affecter l'échantillonnage des [traces][5]. Lorsqu'un service est filtré et que moins de 100 % des spans sont envoyées, l'analyse des spans analysées est mise à l'échelle pour afficher une estimation par défaut, et vous avez la possibilité d'afficher la valeur filtrée.
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Filtrage des spans analysées" responsive="true" style="width:100%;">}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Filtrage des spans analysées"  style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /fr/tracing/visualization/#apm-event

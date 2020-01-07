@@ -161,7 +161,7 @@ Agent v6.12+ では、ビルドパックで[プロキシ構成][12]を使用す�
 
 接続の確立に失敗してログ収集が開始されなかった場合は、Datadog イベントストリームに以下のようなイベントが送信されます。これらのイベントを追跡して、構成を誤ったビルドパックがデプロイされたときに通知されるようにモニターをセットアップしてください。
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
 
 ### ビルド
 
@@ -292,11 +292,11 @@ bosh -n -d <YOUR_DEPLOYMENT> -e <BOSH_ENV> deploy --recreate <YOUR_DEPLOYMENT_MA
 
 Agent のインストールが正常に行われたかをチェックするには、Datadog の[ホストマップページ][20]で `cloudfoundry` による絞り込みを行います。Agent BOSH リリースは、各ホストに汎用の `cloudfoundry` タグを付けます。次のスクリーンショットに示すように、オプションで `bosh_job` などのタグを使用してホストをグループ化してください。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map"  >}}
 
 いずれかのホストをクリックしてズームインし、六角形の中の **system** をクリックして、Datadog がメトリクスを受信していることを確認します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail"  >}}
 
 ### Datadog Firehose Nozzle のデプロイ
 
@@ -398,7 +398,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 Datadog の[メトリクスエクスプローラー][23]ページで、`cloudfoundry.nozzle` で始まるメトリクスを検索します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
 
 ## 収集データ
 

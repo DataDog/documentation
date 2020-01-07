@@ -35,7 +35,7 @@ DogStatsD accepts [custom metrics][3], [events][4], and [service checks][5] over
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't experience an interruption.
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called *the flush interval* (ten seconds, by default).
 
@@ -95,7 +95,7 @@ $ go get github.com/DataDog/datadog-go/statsd
 
 The Java DataDog StatsD Client is distributed with maven central, and can be [downloaded from Maven][1]. Start by adding the following configuration to your `pom.xml`:
 
-```
+```xml
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
@@ -109,7 +109,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 
 Add the following to your `composer.json`:
 
-```
+```text
 "datadog/php-datadogstatsd": "1.4.*"
 ```
 

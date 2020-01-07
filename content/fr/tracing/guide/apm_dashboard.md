@@ -21,7 +21,7 @@ further_reading:
 ---
 _Temps de lecture : 4 minutes_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
 L'APM Datadog vous permet de créer des dashboards en fonction des priorités de votre entreprise et des métriques qui importent pour vous :
 Vous pouvez créer des widgets sur ces dashboards afin de suivre vos métriques d'infrastructure traditionnelles, vos métriques de log et vos métriques custom, telles que la charge mémoire du host, conjointement à vos métriques APM critiques mesurant le débit, la latence et le taux d'erreur afin de mettre toutes ces données en corrélation.
@@ -37,13 +37,13 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
 2. **Recherchez le graphique Total Requests** et cliquez sur le bouton `export` en haut à droite afin de sélectionner `Export to Dashboard`. **Cliquez sur `New Timeboard`**.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2"  style="width:90%;">}}
 
 3. **Cliquez sur `View Dashboard`** dans le message de réussite.
 
     Dans le nouveau dashboard, le graphique `Hit/error count on service` correspondant au service `web-store` est maintenant disponible. Il affiche le débit global du service ainsi que le nombre total d'erreurs détectées.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3"  style="width:90%;">}}
 
     **Remarque** : vous pouvez cliquer sur l'icône en forme de crayon pour modifier ce graphique et voir les métriques exactes utilisées.
 
@@ -59,7 +59,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
     | `from`    | `service:web-store`           | Dans cet exemple de pile, le service principal est un service Ruby à partir duquel proviennent toutes les informations présentées sur le graphique. |
     | `sum by`  | `http.status_code`            | Permet de présenter les données en fonction des codes de statut http.                                                                        |
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4"  style="width:90%;">}}
 
     Cette présentation n'est qu'un exemple parmi bien d'autres options possibles. Il convient de noter que toutes les métriques qui commencent par `trace.` contiennent des informations sur l'APM. Consultez la [documentation sur les métriques de l'APM pour en savoir plus][3].
 
@@ -81,7 +81,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
         | `metric`  | `runtime.ruby.thread_count` | Nombre de threads mesuré par les métriques de runtime Ruby.                                                                    |
         | `from`    | `service:web-store`           | Dans cet exemple de pile, le service principal est un service Ruby à partir duquel proviennent toutes les informations présentées sur le graphique. |
 
-        {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true" responsive="true" style="width:90%;">}}
+        {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true"  style="width:90%;">}}
 
     Avec ces paramètres, il est possible de déterminer si un pic de latence est lié à une hausse du nombre de threads Ruby, ce qui expliquerait immédiatement la cause de la latence et permettrait ainsi de résoudre rapidement le problème.
 
@@ -89,7 +89,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
     Cet exemple illustre la marche à suivre pour mesurer la latence au sein d'une application, en classant les résultats par marchands afin d'identifier les 10 marchands qui présentent la latence la plus élevée. Depuis l'écran App Analytics, exportez le graphique vers le dashboard et affichez-le dans celui-ci :
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6"  style="width:90%;">}}
 
 8. **Revenez à votre dashboard**.
 
@@ -99,7 +99,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
 9. **Cliquez sur le bouton `Search Events or Logs`** et recherchez un flux d'événements pertinent. **Remarque** : Ansible est utilisé dans cet exemple. Il se peut que votre [flux d'événements][5] soit différent.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1"  style="width:90%;">}}
 
     Les événements qui se sont produits récemment (dans Datadog ou dans des services externes comme Ansible, Chef, etc.) s'affichent alors au sein du dashboard : ceux-ci comprennent notamment les déploiements, les tâches terminées ou les alertes de monitors. Ces événements peuvent être corrélés avec les métriques représentées dans le dashboard.
 
@@ -109,19 +109,19 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
     Dans cet exemple, une template variable associée au tag `Region` est ajoutée pour surveiller le comportement des données du dashboard au sein de `us-east1` et de `europe-west-4`, nos deux principales zones d'activité.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true"  style="width:90%;">}}
 
     Vous pouvez maintenant ajouter cette template variable à chaque graphique :
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="dashboard 9" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="dashboard 9"  style="width:90%;">}}
 
     Lorsque vous modifiez la valeur dans la zone de configuration, toutes les valeurs sont mises à jour dans le dashboard :
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true"  style="width:90%;">}}
 
     Tirez parti de ces fonctionnalités pour mettre en œuvre les trois piliers de la visibilité de Datadog et profiter d'une visibilité optimale sur toutes vos métriques. Un dashboard simple peut être facilement transformé en outil tout-en-un puissant qui vous permettra de surveiller efficacement votre organisation :
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
 
 ## Pour aller plus loin

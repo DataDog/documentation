@@ -20,7 +20,7 @@ You can use [DogStatsD over a Unix Domain Socket][3].
 
 Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
 
-```
+```yaml
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
@@ -126,9 +126,9 @@ env:
 Origin detection is supported in Agent 6.10.0+ and in the following client libraries:
 
 | Library      | Version |
-| ------------ | ------- |
+|--------------|---------|
 | [Go][9]      | 2.2     |
-| [PHP][10]     | 1.4.0   |
+| [PHP][10]    | 1.4.0   |
 | [Python][11] | 0.28.0  |
 | [Ruby][12]   | 4.2.0   |
 | [C#][13]     | 3.3.0   |
@@ -146,7 +146,7 @@ Once your application can send metrics via DogStatsD on each node, you can instr
 
 For instance, if your application is written in Go, import Datadog's [Go library][9], which provides a DogStatsD client library:
 
-```
+```go
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
@@ -192,7 +192,6 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd

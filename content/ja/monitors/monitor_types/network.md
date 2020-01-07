@@ -18,11 +18,11 @@ further_reading:
 ## ネットワークステータス
 
 1. **ネットワークチェック**を選択します。使用可能なオプションには、Agent によって送信されている、監視対象の `HTTP` または `TCP` チェックがすべて含まれます。
-    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick"  style="width:80%;">}}
 2. **モニター範囲**を選択します。選択したチェックに含まれるホストまたはタグのみを選択できます。
-    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope"  style="width:80%;">}}
 3. **アラートオプション**を選択します。
-    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions"  style="width:80%;">}}
 
     **注**: [メトリクスモニター][2]と異なり、エンドポイントが `X` 分間使用できない状態だった場合にアラートを受け取ることはできません。代わりに、最大 5 回連続して無効ステータスが発生した場合にアラートを受け取ることができます。Agent 構成で大きなタイムアウト値を使用していない限り、サイトがダウンした場合、これは、約 15 ～ 20 秒 (Agent の収集時間) が 5 回、すなわち約 90 秒間のデータなし状態になることを意味します。
 

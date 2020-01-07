@@ -59,24 +59,24 @@ Créez une requête pour contrôler les données affichées dans votre analyse A
 
 1. Choisissez la métrique `Duration` ou une [facette][1] à analyser. La métrique `Duration` vous permet de choisir la fonction d'agrégation, tandis que la [facette][1] affiche le nombre de valeurs uniques.
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choisir une mesure ou une facette" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choisir une mesure ou une facette"  style="width:50%;">}}
 
 2. Sélectionnez la fonction d'agrégation pour la métrique `Duration` :
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="fonction d'agrégation" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="fonction d'agrégation"  style="width:50%;">}}
 
 3. Utilisez un [tag][2] ou une [facette][1] pour fractionner votre analyse.
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="fractionnement" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="fractionnement"  style="width:50%;">}}
 
 4. Choisissez d'afficher les *X* valeurs les plus **élevées** ou **faibles** en fonction de la [facette][1] ou de la `Duration` sélectionnée.
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="bouton top/bottom" responsive="true" style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="bouton top/bottom"  style="width:20%;">}}
 
 5. Sélectionnez les laps de temps de l'analyse.
   Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Intervalle" responsive="true" style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Intervalle"  style="width:30%;">}}
 
 ## Visualisations
 
@@ -94,7 +94,7 @@ Visualisez l'évolution de la métrique `Duration` (ou d'une [facette][1] corres
 
 L'analyse App Analytics avec une série temporelle suivante illustre : l'évolution de la **durée** au **pc99** (99e centile) toutes les **5 minutes** pour chaque **service**.
 
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle"  style="width:90%;">}}
 
 ### Top List (Valeurs les plus élevées)
 
@@ -103,7 +103,7 @@ Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de leur
 L'analyse App Analytics suivante avec une Top List illustre :
 la **durée** au **pc99** (99e centile) la plus élevée d'un **service**
 
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="exemple de top list"  style="width:90%;">}}
 
 ### Table (Tableau)
 
@@ -117,17 +117,17 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 
  L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="exemple de top list" responsive="true" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="exemple de top list"  style="width:90%;">}}
 
 ## Traces associées
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des [traces][3] correspondant à votre sélection :
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="visualiser les traces" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="visualiser les traces"  style="width:40%;">}}
 
 ## Export
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="bouton d'exportation de votre analyse" responsive="true" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="bouton d'exportation de votre analyse"  style="width:40%;">}}
 
 Exportez votre analyse App Analytics :
 

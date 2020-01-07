@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only. 
+This feature is in public beta and available for API Tests only.
 </div>
 
 ## Overview
@@ -35,7 +35,7 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
 1. Go in *Synthetics* -> *Settings* -> *Private Locations* and create a new private location:
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:70%;">}}
 
 2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
@@ -61,18 +61,18 @@ Once you created a private location, configuring a Synthetics API test from a pr
 
     * For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5) .
     * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
-    
+
 **Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
 
 5. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
   * In your private locations list, in the Settings section:
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:70%;">}}
 
   * In the form when creating a test, below the Private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list" responsive="true" style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:70%;">}}
 
 6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
 
@@ -98,7 +98,6 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                                |
 | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                              |
 
-
 **Note**: These options and more can be found by running the help command for the Datadog worker `docker run --rm datadog/synthetics-private-location-worker --help`.
 
 ### Proxy configuration
@@ -111,7 +110,7 @@ By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it f
 
 If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
-### Special-purpose IPv4 whitelisting 
+### Special-purpose IPv4 whitelisting
 
 If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][2]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
 

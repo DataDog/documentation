@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: パースの詳細
 ---
-{{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail"  >}}
 
 ## 概要
 
@@ -30,7 +30,7 @@ Live Tail 機能は、インフラストラクチャー内の任意の場所か�
 
 タイムレンジセレクターで `Live Tail` オプションを選択して、Live Tail ビューに切り替えます。
 
-{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live Tail time selector" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live Tail time selector"  >}}
 
 1 秒間に受け取ったイベントの数とサンプリングレートが左上に表示されます。1 秒間に数千のログのストリームは読み取り不可能なので、スループットが大きなログストリームはサンプリングされます。
 
@@ -43,13 +43,13 @@ Live Tail 機能は、インフラストラクチャー内の任意の場所か�
 Live Tail ビューをカスタマイズして、重要な情報を含むログをハイライトすることができます。
 ページ右上の歯車アイコンをクリックして、以下のいずれかのオプションを有効にします。
 
-{{< img src="logs/live_tail/live_tail_column.png" alt="Live tail column" responsive="true" style="width:30%;">}}
+{{< img src="logs/live_tail/live_tail_column.png" alt="Live tail column"  style="width:30%;">}}
 
 1. ログストリームにログ属性を表示する際の行数 (1 行、3 行、10 行) を選択します。
 2. Date 列および Message 列を有効/無効にします。
 3. このパネル上、または列を直接クリックして、ログ属性を列として追加します。
 
-{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Live tail add as column" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Live tail add as column"  style="width:50%;">}}
 
 ## ログストリームの絞り込み
 
@@ -62,15 +62,15 @@ Live Tail ビューの検索構文は、他のログビューの構文と同じ�
 
 たとえば、以下の `filename` 属性で絞り込むには、2 つの方法があります。
 
-{{< img src="logs/live_tail/live_tail_save.png" alt="Live tail save" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_save.png" alt="Live tail save"  style="width:50%;">}}
 
 1. 属性をクリックして、検索に追加します。
 
-    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
 
 2. クエリ `@filename:runner.go` を使用します。
 
-    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered"  style="width:50%;">}}
 
 行番号が 150 を超えるすべてのログで絞り込むには、クエリ `@linenumber:>150` を使用します。
 
