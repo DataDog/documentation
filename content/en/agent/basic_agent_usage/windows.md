@@ -20,7 +20,7 @@ further_reading:
 ## Setup
 If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
 
-For installation and configuration to the Datadog EU location, please use the `SITE=` parameter.  See below in the configuration variables table.
+For installation and configuration to the Datadog EU site, use the `SITE=` parameter.  See the configuration variables table below.
 
 ### Installation
 Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
