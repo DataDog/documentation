@@ -22,7 +22,7 @@ To add members to a team:
 1. Go to the [Team Page][1].
 2. Select **Invite Users** in the upper right corner of the page.
 3. Enter the email address of the user you wish to invite to your Datadog account.
-4. Assign a [user role][2] to this user.
+4. Assign a [user role][2] to this user. Note that you can only assign your roles to new user.
 5. Click **Send Invites**
 
 {{< img src="account_management/team/invite_user.png" alt="Add Member To Team" responsive="true" style="width:80%;">}}
