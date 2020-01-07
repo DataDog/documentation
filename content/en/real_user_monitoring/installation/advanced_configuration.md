@@ -2,6 +2,9 @@
 title: RUM Advanced Configuration
 kind: documentation
 further_reading:
+- link: "https://www.npmjs.com/package/@datadog/browser-rum"
+  tag: "NPM"
+  text: "datadog/browser-rum NPM package"
 - link: "/real_user_monitoring/rum_explorer"
   tag: "Documentation"
   text: "Explore your views within Datadog"
@@ -53,7 +56,7 @@ window.DD_RUM && window.DD_RUM.init({
 
 ### Add global metadata
 
-Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM events collected from your application with the `addRumGlobalContext` API:
+Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -79,7 +82,7 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 ### Replace default context
 
-Once Real User Monitoring (RUM) is initialized, you can replace the default context for all your RUM events with the `setRumGlobalContext` API:
+Once Real User Monitoring (RUM) is initialized, you can replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -105,7 +108,7 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 
 ### Custom user actions
 
-Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction` API:
+Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}

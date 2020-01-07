@@ -4,6 +4,9 @@ kind: documentation
 aliases:
 - /real_user_monitoring/setup
 further_reading:
+- link: "https://www.npmjs.com/package/@datadog/browser-rum"
+  tag: "NPM"
+  text: "datadog/browser-rum NPM package"
 - link: "/real_user_monitoring/installation/advanced_configuration"
   tag: "Documentation"
   text: "Advanced configuration for RUM data collection"
@@ -101,13 +104,13 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ## Initialization parameters
 
-| Parameter            | Type   | Required | Default | Description                                                                                       |
-|----------------------|--------|----------|---------|---------------------------------------------------------------------------------------------------|
-| `applicationId`      | String | Yes      | ``      | The RUM application ID.                                                                           |
-| `clientToken`        | String | Yes      | ``      | A [Datadog Client Token][5].                        |
-| `datacenter`         | String | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.        |
-| `resourceSampleRate` | Number | No       | `100`   | Sampling to apply for ressource collection. `100` to keep all resources, `0` to drop all of them. |
-| `sampleRate`         | Number | No       | `100`   | Sampling to apply for sessions collection. `100` to keep all sessions, `0` to drop all of them.   |
+| Parameter            | Type   | Required | Default | Description                                                                                                  |
+|----------------------|--------|----------|---------|--------------------------------------------------------------------------------------------------------------|
+| `applicationId`      | String | Yes      | ``      | The RUM application ID.                                                                                      |
+| `clientToken`        | String | Yes      | ``      | A [Datadog Client Token][5].                                                                                 |
+| `datacenter`         | String | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.                   |
+| `resourceSampleRate` | Number | No       | `100`   | Percentage of tracked sessions with resources collection. `100` for all, `0` for none of them.               |
+| `sampleRate`         | Number | No       | `100`   | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them. |
 
 ## Further Reading
 
