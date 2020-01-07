@@ -119,7 +119,7 @@ The following parameters can be used to configure the Datadog browser log librar
 
 | Parameter             | Type    | Required | Default | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][4].                               |
+| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][4].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
