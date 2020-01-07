@@ -82,7 +82,11 @@ Update or remove this quota at any time when editing the Index:
 
 You can sample on a specific attribute holding an ID, such as User, Session, Request Identifiers, in addition to the default log-based sampling (applied when the exclusion percentage is set on `all logs`).
 
-For example, exclude the logs holding the 99% of distinct `http.request_id` for source `nginx`:
+This feature operates on groups rather than the log itself: for example, given an attribute holding 3 distinct values (circles, triangles, squares), defining a 66% exclusion filter on it, keeps all logs holding 1 specific value (circles).
+
+{{< img src="logs/indexes/index_exclusion_attribute_groups.png" alt="index attribute-based exclusion filter groups"  style="width:70%;">}}
+
+For example, exclude `nginx` logs for 99% of `http.request_id`:
 
 {{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="index attribute-based exclusion filter"  style="width:70%;">}}
 
@@ -95,7 +99,11 @@ For example, exclude the logs holding the 99% of distinct `http.request_id` for 
 #### Sample all logs of a trace
 
 In order to guarantee the sampling of all logs related to a given trace, define the log sampling on `Trace Id` attribute.
-Refer to [Trace Remapper][10] to get more information on how to connect logs and traces. 
+Refer to [Trace Remapper][10] to get more information on how to connect logs and traces.
+
+For example, setting exclude 99% of `Trace Id`, you end up with:
+- 1% of traces for which we keep all logs
+- 99% of traces for which we keep no logs 
 
 ## Multi indexes
 
