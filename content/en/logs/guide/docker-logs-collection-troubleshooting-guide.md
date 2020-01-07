@@ -88,7 +88,7 @@ This status means that the Logs Agent is running but it hasn't started collectin
 
 ### Docker Daemon started after the Host Agent
 
-If the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection. This troubleshooting tip only applies to Agent versions prior to 7.17.
+For Agent version prior to 7.17, if the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection. 
 
 ### You didn't mount the docker socket when you started the Container Agent
 
