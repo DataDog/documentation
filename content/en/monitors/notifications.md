@@ -279,7 +279,7 @@ Send the monitor notification to the appropriate endpoint:
 {{< tabs >}}
 {{% tab "Slack" %}}
 
-After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
+After setting up the [Slack integration][1], type `@slack` in your notification message to see the available list of channels to send your notification to.
 
 #### @-mentions in Slack from monitor alert
 
@@ -291,11 +291,11 @@ For example this configuration:
 Would produce this slack message:
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview"  style="width:50%;" >}}
 
-**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][2] under **Username**.
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][3]. For example, for a user group named `testers` you would use the following syntax:
 
 ```text
 <!subteam^12345|testers>
@@ -318,8 +318,9 @@ Or create an **@-mention** that goes directly to a specific email:
 
 * `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
-[1]: http://slack.com/account/settings
-[2]: https://api.slack.com/methods/usergroups.list
+[1]: /integrations/slack
+[2]: http://slack.com/account/settings
+[3]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
 {{% tab "Jira" %}}
 
