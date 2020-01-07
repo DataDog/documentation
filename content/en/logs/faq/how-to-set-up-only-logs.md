@@ -60,6 +60,19 @@ docker run -d --name datadog-agent \
 If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
 
 ```yaml
+# datadog-agent.yaml
+
+# Uncomment this section to use Kubernetes secrets to configure your Datadog API key
+
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: datadog-secret
+#   labels:
+#     app: "datadog"
+# type: Opaque
+# data:
+#   api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -79,7 +92,23 @@ spec:
       serviceAccountName: datadog-agent
       containers:
       - image: datadog/agent:latest
-        ## (...)
+        imagePullPolicy: Always
+        name: datadog-agent
+        ports:
+          - containerPort: 8125
+            ## Custom metrics via DogStatsD - uncomment this section to enable
+            ## custom metrics collection.
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
+            ## from other containers.
+            #
+            # hostPort: 8125
+            name: dogstatsdport
+            protocol: UDP
+          - containerPort: 8126
+            ## Trace Collection (APM) - uncomment this section to enable APM
+            # hostPort: 8126
+            name: traceport
+            protocol: TCP
         env:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
@@ -89,14 +118,73 @@ spec:
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
 
+          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
+          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
+          - {name: KUBERNETES, value: "true"}
+          - {name: DD_HEALTH_PORT, value: "5555"}
+          - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
+          - {name: DD_LEADER_ELECTION, value: "true" }
+          - {name: DD_APM_ENABLED, value: "true" }
+
+          ## Enable Log collection
+          - {name: DD_LOGS_ENABLED, value: "true"}
+          - {name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL, value: "true"}
+          - {name: DD_AC_EXCLUDE, value: "name:datadog-agent"}
+
           ## Send logs only
           - {name: DD_ENABLE_PAYLOADS_EVENTS, value: "false"}
           - {name: DD_ENABLE_PAYLOADS_SERIES, value: "false"}
           - {name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS, value: "false"}
           - {name: DD_ENABLE_PAYLOADS_SKETCHES, value: "false"}
 
-          ## (...)
+          - name: DD_KUBERNETES_KUBELET_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
 
+        ## Note these are the minimum suggested values for requests and limits.
+        ## The amount of resources required by the Agent varies depending on:
+        ## * The number of checks
+        ## * The number of integrations enabled
+        ## * The number of features enabled
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: procdir, mountPath: /host/proc, readOnly: true}
+          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
+          - {name: s6-run, mountPath: /var/run/s6}
+          - {name: logpodpath, mountPath: /var/log/pods}
+          - {name: pointdir, mountPath: /opt/datadog-agent/run}
+          ## Docker runtime directory, replace this path with your container runtime
+          ## logs directory, or remove this configuration if `/var/log/pods`
+          ## is not a symlink to any other directory.
+          - {name: logcontainerpath, mountPath: /var/lib/docker/containers}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5555
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+      volumes:
+        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: procdir, hostPath: {path: /proc}}
+        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
+        - {name: s6-run, emptyDir: {}}
+        - {name: logpodpath, hostPath: {path: /var/log/pods}}
+        - {name: pointdir, hostPath: {path: /opt/datadog-agent/run}}
+        ## Docker runtime directory, replace this path with your container runtime
+        ## logs directory, or remove this configuration if `/var/log/pods`
+        ## is not a symlink to any other directory.
+        - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
 {{% /tab %}}
