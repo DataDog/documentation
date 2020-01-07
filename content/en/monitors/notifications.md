@@ -321,6 +321,13 @@ Or create an **@-mention** that goes directly to a specific email:
 [1]: http://slack.com/account/settings
 [2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
+{{% tab "Jira" %}}
+
+After setting up the [Jira integration][1], type `@jira` in your notification message to see the list of available options. See the example [use cases][2] in the integration documentation.
+
+[1]: /integrations/jira
+[2]: /integrations/jira/#use-cases
+{{% /tab %}}
 {{% tab "PagerDuty" %}}
 
 After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
