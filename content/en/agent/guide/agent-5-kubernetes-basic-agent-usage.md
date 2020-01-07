@@ -6,7 +6,7 @@ aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 <div class="alert alert-warning">
 The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
@@ -24,7 +24,9 @@ For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. We have c
 You can also just [run the Datadog Agent on your host][3] and configure it to gather your Kubernetes metrics.
 
 ## Setup Kubernetes
+
 ### Installation
+
 #### Container Installation
 
 Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
@@ -85,7 +87,7 @@ spec:
 Replace `YOUR_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
 
 * Deploy the DaemonSet with the command:
-  ```
+  ```shell
   kubectl create -f dd-agent.yaml
   ```
 
@@ -110,31 +112,39 @@ instances:
 See the [example kubernetes.yaml][10] for all available configuration options.
 
 ### Validation
+
 #### Container Running
 
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
-    kubectl get daemonset
+```shell
+kubectl get daemonset
+```
 
 If the Agent is deployed, a similar output to the text below is displayed, where **desired** and **current** are equal to the number of nodes running in your cluster.
 
-    NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
-    dd-agent   3         3         <none>          11h
+```text
+NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
+dd-agent   3         3         <none>          11h
+```
 
 #### Agent check running
 
 [Run the Agent's `info` subcommand][11] and look for `kubernetes` under the Checks section:
 
-    Checks
-    ======
-
-        kubernetes
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+```text
+Checks
+======
+    kubernetes
+    -----------
+      - instance #0 [OK]
+      - Collected 39 metrics, 0 events & 7 service checks
+```
 
 ## Setup Kubernetes State
+
 ### Installation
+
 #### Container Installation
 
 If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics][12] project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
@@ -186,7 +196,8 @@ spec:
 ```
 
 Then deploy it by running:
-```
+
+```shell
 kubectl create -f kube-state-metrics.yaml
 ```
 
@@ -201,36 +212,44 @@ Install the `dd-check-kubernetes_state` package manually or with your favorite c
 Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.
 
 ### Validation
+
 #### Container validation
+
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
-    kubectl get daemonset
+```shell
+kubectl get daemonset
+```
 
 If the Agent is deployed you a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
 
-    NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
-    dd-agent   3         3         <none>          11h
+```shell
+NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
+dd-agent   3         3         <none>          11h
+```
 
 #### Agent check validation
 
-[Run the Agent's info subcommand][17] and look for `kubernetes_state` under the Checks section:
+[Run the Agent's info subcommand][11] and look for `kubernetes_state` under the Checks section:
 
-    Checks
-    ======
-
-        kubernetes_state
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+```shell
+Checks
+======
+    kubernetes_state
+    -----------
+      - instance #0 [OK]
+      - Collected 39 metrics, 0 events & 7 service checks
+```
 
 ## Setup Kubernetes DNS
+
 ### Installation
 
 Install the `dd-check-kube_dns` package manually or with your favorite configuration manager.
 
 ### Configuration
 
-Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][18] for all available configuration options.
+Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][17] for all available configuration options.
 
 #### Using with service discovery
 
@@ -247,22 +266,23 @@ metadata:
     service-discovery.datadoghq.com/kubedns.instances: '[[{"prometheus_endpoint":"http://%%host%%:10055/metrics", "tags":["dns-pod:%%host%%"]}]]'
 ```
 
-**Remarks:**
+**Notes:**
 
- - Notice the "dns-pod" tag keeps track of the target DNS pod IP. The other tags are related to the `dd-agent` that is polling the information using service discovery.
- - The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
+* Notice the "dns-pod" tag keeps track of the target DNS pod IP. The other tags are related to the `dd-agent` that is polling the information using service discovery.
+* The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
 
 ### Validation
 
-[Run the Agent's info subcommand][17] and look for `kube_dns` under the Checks section:
+[Run the Agent's info subcommand][11] and look for `kube_dns` under the Checks section:
 
-    Checks
-    ======
-
-        kube_dns
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+```shell
+Checks
+======
+    kube_dns
+    -----------
+      - instance #0 [OK]
+      - Collected 39 metrics, 0 events & 7 service checks
+```
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://hub.docker.com/r/datadog/docker-dd-agent
@@ -280,5 +300,4 @@ metadata:
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [15]: https://yum.datadoghq.com/stable/6/x86_64
 [16]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
-[17]: /agent/guide/agent-commands/#agent-status-and-information
-[18]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example

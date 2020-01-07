@@ -3,7 +3,7 @@ title: Datadog 101 - Dashboards
 kind: video
 language: en
 wistiaid: t7d17bw844
-videos:
+"video-categories":
     - Datadog 101
     - Dashboards
     - Screenboards

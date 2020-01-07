@@ -43,7 +43,7 @@ const excludeUrls = [
 
 // some results will contain errors from third parties, or should be excluded from pa11y output.
 // If you find an error from a 3rd party, exclude it by adding the string in this array from the issue.context result
-const filterBadResults = ['bid.g.doubleclick.net', '_hj'];
+const filterBadResults = ['bid.g.doubleclick.net', '_hj', 'https://fast.wistia.com/embed/iframe_shim?domain=com'];
 
 const options = {
   pa11yConfig,

@@ -21,7 +21,7 @@ further_reading:
 ---
 _Temps de lecture : 7 minutes_
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue d'analyses" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue d'analyses" video="true"  style="width:90%;">}}
 
 L'APM Datadog vous permet de personnaliser vos [traces][1] pour inclure toute information supplémentaire dont vous pourriez avoir besoin pour optimiser votre visibilité sur votre entreprise. Vous pouvez l'utiliser pour détecter un pic de débit chez un certain client, pour identifier l'utilisateur affichant la latence la plus élevée ou pour localiser le fragment de base de données générant le plus d'erreurs.
 
@@ -227,13 +227,13 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 
 2) **Accédez à la page Services** et cliquez sur le [service][5] auquel vous avez ajouté des tags. **Faites défiler la page et cliquez sur la ressource spécifique** à laquelle le tag a été ajouté dans le tableau des [ressources][6]. **Faites défiler la page jusqu'au tableau des traces.**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource"  style="width:90%;">}}
 
 Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier facilement les opérations ayant généré une erreur ou les possibilités d'optimisation.
 
 3) **Cliquez sur l'une de vos traces.**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flamegraph" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flamegraph"  style="width:90%;">}}
 
 L'écran qui apparaît affiche un **flamegraph** en haut et des fenêtres d’informations supplémentaires en dessous. Le flamegraph Datadog vous permet de visualiser instantanément la durée et le statut de chaque unité logique (span) ayant une incidence sur une requête. Le flamegraph est entièrement interactif : vous pouvez vous déplacer sur celui-ci (en le faisant glisser) ou zoomer et dézoomer (avec la molette de défilement). Cliquez sur une span pour afficher davantage d'informations sur cette dernière en bas de l'écran.
 
@@ -253,11 +253,11 @@ La page Recherche de traces vous permet d’identifier les [traces]8] et les év
 
 6) **Trouvez le nouveau tag que vous avez ajouté à la trace**. Cliquez dessus et sélectionnez **Create facet** pour `@[nom de votre facette]` (dans notre exemple, il s'agit de customer_id)
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Créer un menu Facette" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Créer un menu Facette"  style="width:90%;">}}
 
 Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans l'explorateur de facettes.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette" responsive="true" style="width:60%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette"  style="width:60%;">}}
 
 La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
 
@@ -267,17 +267,17 @@ La page Analyse de traces est un outil de création de requêtes visuel qui vous
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6" responsive="true" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6"  video="true" style="width:90%;">}}
 
 8) **Désélectionnez l'option Error** de la requête, **faites passer la mesure de `count *` à `Duration`**, puis **définissez le type de graphique sur `Top List`**.
 
 La liste des clients associés aux requêtes moyennes les plus lentes s'affiche alors. **Remarque** : si vous souhaitez vous assurer que vos clients ne dépassent jamais un certain seuil de performance, vous pouvez [exporter cette requête vers un monitor][12]. Vous pouvez également enregistrer cette visualisation dans un dashboard afin de la surveiller.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
 
 Enfin, vous pouvez également afficher l'ensemble des traces associées à votre requête en cliquant sur la visualisation et en sélectionnant `View traces`.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true"  style="width:90%;">}}
 
 ## Pour aller plus loin
 

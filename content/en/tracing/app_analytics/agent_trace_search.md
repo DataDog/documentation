@@ -31,7 +31,7 @@ apm_config:
 {{% tab "Agent 5.25.0+" %}}
 In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
-```
+```text
 [trace.analyzed_spans]
 <SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
 <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
@@ -41,11 +41,11 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 {{% tab "Docker" %}}
 Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). Format should be a comma-separated regular expressions without spaces. For example:
 
-```
+```text
 DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
 ```
 
-```
+```text
 `my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
@@ -58,7 +58,6 @@ Replace both the `<SERVICE_NAME>` and `<OPERATION_NAME>` in your configuration w
 
 For example, if you have a Python service named `python-api`, and it's running Flask (operation name `flask.request`), your `<SERVICE_NAME>` would be `python-api`, and your `<OPERATION_NAME>` would be `flask.request`.
 
-
 [1]: https://app.datadoghq.com/apm/services
 [2]: /tracing/app_analytics/#automatic-configuration
 [3]: /tracing/app_analytics/#custom-instrumentation
@@ -66,5 +65,5 @@ For example, if you have a Python service named `python-api`, and it's running F
 [5]: https://app.datadoghq.com/apm/docs/trace-search
 [6]: /tracing/visualization/#services
 [7]: /tracing/visualization/#resources
-[8]: /tracing/advanced/search/#apm-events
+[8]: /tracing/app_analytics/search/#analysed-span
 [9]: /tracing/visualization/#trace

@@ -20,7 +20,7 @@ You can use [DogStatsD over a Unix Domain Socket][3].
 
 Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
 
-```
+```yaml
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
@@ -99,13 +99,13 @@ Your application needs a reliable way to determine the IP address of its host. T
 
 ```yaml
 env:
-  - name: DOGSTATSD_HOST_IP
+  - name: DD_AGENT_HOST
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
 ```
 
-With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DOGSTATSD_HOST_IP`.
+With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
 
 ## Origin detection over UDP
 
@@ -126,9 +126,9 @@ env:
 Origin detection is supported in Agent 6.10.0+ and in the following client libraries:
 
 | Library      | Version |
-| ------------ | ------- |
+|--------------|---------|
 | [Go][9]      | 2.2     |
-| [PHP][10]     | 1.4.0   |
+| [PHP][10]    | 1.4.0   |
 | [Python][11] | 0.28.0  |
 | [Ruby][12]   | 4.2.0   |
 | [C#][13]     | 3.3.0   |
@@ -144,16 +144,16 @@ Once your application can send metrics via DogStatsD on each node, you can instr
 
 **[See the full list of Datadog DogStatsD Client Libraries][16]**
 
-For instance, if your application is written in Go, import Datadog's [Go library][17], which provides a DogStatsD client library:
+For instance, if your application is written in Go, import Datadog's [Go library][9], which provides a DogStatsD client library:
 
-```
+```go
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
-Before you can add custom counters, gauges, etc., [initialize the StatsD client][18] with the location of the DogStatsD service, depending on the method you have chosen:
+Before you can add custom counters, gauges, etc., [initialize the StatsD client][17] with the location of the DogStatsD service, depending on the method you have chosen:
 
 - Unix Domain Socket: `$DD_DOGSTATSD_SOCKET`
-- hostPort: `$DOGSTATSD_HOST_IP`
+- hostPort: `$DD_AGENT_HOST`
 
 ```go
 func main(){
@@ -193,7 +193,6 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd
 [3]: /developers/dogstatsd/unix_socket
@@ -210,5 +209,4 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [14]: https://github.com/DataDog/java-dogstatsd-client
 [15]: /tagging/assigning_tags/#environment-variables
 [16]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[17]: https://github.com/DataDog/datadog-go
-[18]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[17]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91

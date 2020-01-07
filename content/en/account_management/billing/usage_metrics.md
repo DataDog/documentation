@@ -1,6 +1,6 @@
 ---
 title: Estimated Usage Metrics
-kind: faq
+kind: documentation
 ---
 
 ## Overview
@@ -14,28 +14,28 @@ Datadog calculates your current estimated usage in near real-time. Estimate usag
 
 **Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average.
 
-{{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
 ### Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
 
-| Usage Type         | Metric                                                                                              |
-|--------------------|-----------------------------------------------------------------------------------------------------|
-| Infrastructure Hosts       | `datadog.estimated_usage.hosts`                                                                     |
-| Containers         | `datadog.estimated_usage.containers`                                                                |
-| Custom Metrics     | `datadog.estimated_usage.metrics.custom`                                                            |
+| Usage Type           | Metric                                   |
+|----------------------|------------------------------------------|
+| Infrastructure Hosts | `datadog.estimated_usage.hosts`          |
+| Containers           | `datadog.estimated_usage.containers`     |
+| Custom Metrics       | `datadog.estimated_usage.metrics.custom` |
 
-{{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" responsive="true">}}
-
+{{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
 ### Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
-{{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" >}}
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][1].
 
 For billing questions, contact your [Customer Success][2] Manager.

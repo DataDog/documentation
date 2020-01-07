@@ -1,7 +1,7 @@
 ---
 title: 使用可能な場所の取得
 type: apicontent
-order: 29.91
+order: 30.91
 external_redirect: "/api/#get-locations"
 ---
 

@@ -36,7 +36,6 @@ aliases:
 
 他の例については、Datadog の [API ドキュメント][1]を参照してください。
 
-
 [1]: /ja/api
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py

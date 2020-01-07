@@ -3,7 +3,7 @@ title: Matt のクイックヒント - 週間モニターレポート
 kind: ビデオ
 language: en
 wistiaid: kzcivp7n6k
-videos:
+"video-categories":
     - Introduction
     - Datadog Emails
     - Monitors

@@ -1,6 +1,6 @@
 ---
 title: Facturation de l'intégration Azure
-kind: faq
+kind: documentation
 ---
 ## Présentation
 
@@ -12,7 +12,7 @@ Les autres ressources Azure (Azure SQL, Azure App Services, Azure Redis Cache, e
 
 Utilisez le [carré d'intégration Datadog/Azure][1] pour filtrer vos machines virtuelles surveillées par Datadog. Accédez à l'onglet **Configuration** et modifiez un locataire existant ou ajoutez-en un autre. Chaque locataire est contrôlé via l'option **Optionally filter to VMs with tag**. Utilisez les [tags de host][2] pour exclure des machines virtuelles :
 
-{{< img src="account_management/billing/azure_vm_filter.png" alt="Filtre de machine virtuelle Azure" responsive="true">}}
+{{< img src="account_management/billing/azure_vm_filter.png" alt="Filtre de machine virtuelle Azure" >}}
 
 Lorsque vous appliquez des limites à des locataires Azure existants depuis le carré d'intégration, les machines virtuelles précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 

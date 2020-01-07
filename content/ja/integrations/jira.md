@@ -17,7 +17,7 @@ public_title: Datadog-Jira インテグレーション
 short_description: Datadog でアラートを自動生成し、その後 JIRA チケットを更新
 version: '1.0'
 ---
-{{< img src="integrations/jira/JiraInstallation9.png" alt="Jira Events" responsive="true">}}
+{{< img src="integrations/jira/JiraInstallation9.png" alt="Jira Events" >}}
 
 ## 概要
 
@@ -30,15 +30,15 @@ JIRA は、ソフトウェアチームのための課題およびプロジェク
 
 2. 設定 (歯車アイコン) –> **Products** に移動します。
 
-    {{< img src="integrations/jira/JiraInstallation2.png" alt="Jira Navigation" responsive="true" style="width:25%">}}
+    {{< img src="integrations/jira/JiraInstallation2.png" alt="Jira Navigation"  style="width:25%">}}
 
 3. 左メニューの **INTEGRATIONS** の下にある、**Application links** を選択します。
 
-    {{< img src="integrations/jira/JiraInstallation3.png" alt="Jira Navigation" responsive="true" style="width:25%">}}
+    {{< img src="integrations/jira/JiraInstallation3.png" alt="Jira Navigation"  style="width:25%">}}
 
 4. URL として `https://app.datadoghq.com/` を入力し、**Create new link** をクリックします。**注**: "No response was received from the URL you entered." という警告が表示される場合があります。無視して Continue を押してください。
 
-    {{< img src="integrations/jira/JiraInstallation4.png" alt="Configure App Links" responsive="true" style="width:75%">}}
+    {{< img src="integrations/jira/JiraInstallation4.png" alt="Configure App Links"  style="width:75%">}}
 
 5. **Application Name** に任意の名前を入力します (識別に使用)。
 
@@ -48,13 +48,13 @@ JIRA は、ソフトウェアチームのための課題およびプロジェク
 
 8. **Continue** をクリックします。
 
-    {{< img src="integrations/jira/JiraInstallation5.png" alt="Link Applications" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation5.png" alt="Link Applications"  style="width:50%">}}
 
 9. 次に表示されるボックスで、Consumer Key、Consumer Name、および Public Key を [Datadog Jira インテグレーションタイル][1]から取得します。
 
 10. **Continue** をクリックします。
 
-    {{< img src="integrations/jira/JiraInstallation6.png" alt="Link Applications" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation6.png" alt="Link Applications"  style="width:50%">}}
 
 ### コンフィグレーション
 
@@ -62,7 +62,7 @@ JIRA は、ソフトウェアチームのための課題およびプロジェク
 
 2. **Setup OAuth1** ボタンをクリックします。
 
-    {{< img src="integrations/jira/JiraInstallation7.png" alt="Setup Jira Account" responsive="true" style="width:50%">}}
+    {{< img src="integrations/jira/JiraInstallation7.png" alt="Setup Jira Account"  style="width:50%">}}
 
 #### 課題の追加
 
@@ -75,7 +75,7 @@ JIRA インテグレーションをインストールしたら、Datadog でカ�
 6. Other fields はオプションです。
 7. **Save** ボタンをクリックします。
 
-{{< img src="integrations/jira/jira-issue.png" alt="Jira Issue" responsive="true">}}
+{{< img src="integrations/jira/jira-issue.png" alt="Jira Issue" >}}
 
 **注**: 上のように、必須のフィールド **Severity** がある場合、使用できる値は以下に制限されます。
 ```
@@ -123,7 +123,7 @@ Datadog アラート内で自動的に JIRA の課題を作成するには、新
 
 ヒント – `@jira` コマンドを #is_alert または #is_warning 変数内で使用すると便利です。
 
-{{< img src="integrations/jira/JiraInstallation8.png" alt="Monitor Settings" responsive="true">}}
+{{< img src="integrations/jira/JiraInstallation8.png" alt="Monitor Settings" >}}
 
 ## 収集データ
 ### メトリクス

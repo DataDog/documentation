@@ -1,10 +1,12 @@
 ---
 title: メトリクス
 type: apicontent
-order: 25
+order: 26
 external_redirect: /api/#metrics
 ---
+
 ## メトリクス
+
 メトリクスエンドポイントを使用して、以下を行うことができます。
 
 * Datadog のダッシュボードでグラフ化できるメトリクスデータをポストする

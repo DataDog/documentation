@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: モニターステータスの参照
 ---
-{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" >}}
+{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status"  >}}
 
 ## 概要
 

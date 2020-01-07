@@ -11,7 +11,6 @@ public_title: Datadog-Stunnel Integration
 short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
 ---
 
-
 ## Overview
 
 Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs' code.
@@ -59,5 +58,5 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/?tab=agentv6#start-stop-restart-the-agent
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: /agent/guide/agent-commands/#agent-status-and-information

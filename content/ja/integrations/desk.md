@@ -31,7 +31,7 @@ Desk を Datadog に接続すると、以下のことが可能です。
 Desk アカウントから、Settings -> API -> My Applications ページで、API アプリケーションを追加します (管理者権限が必要な場合があります)。
 以下のようにフォームに入力します。最後の 2 つの URL フィールドは空白にしておきます。Desk がアプリケーションキー、アプリケーションシークレット、API アクセストークン、API アクセストークンシークレットを生成します。
 
-{{< img src="integrations/desk/desk_config.png" alt="desk config" responsive="true" popup="true">}}
+{{< img src="integrations/desk/desk_config.png" alt="desk config"  >}}
 
 Datadog アカウントから、対応する情報を [Desk タイル][1]に入力します。会社固有の Desk ドメイン名も入力する必要があります。
 インストールボタンを押すと、設定は完了です。間もなく、desk.* メトリクスをカスタムダッシュボードで選択したり、提供されている [Desk ダッシュボード][2]で表示できるようになります。(このインテグレーションについては、[Datadog のブログ記事][3]も参照してください。)

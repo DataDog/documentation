@@ -1,7 +1,7 @@
 ---
 title: パイプラインの更新
 type: apicontent
-order: 24.6
+order: 25.6
 external_redirect: '/api/#update-a-pipelines'
 ---
 ## パイプラインの更新

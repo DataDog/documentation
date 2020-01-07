@@ -1,10 +1,12 @@
 ---
 title: Métriques
 type: apicontent
-order: 25
+order: 26
 external_redirect: /api/#metriques
 ---
+
 ## Métriques
+
 L'endpoint métrique vous permet de :
 
 * Envoyez vos données de métriques afin de les afficher sur les dashboards de Datadog.

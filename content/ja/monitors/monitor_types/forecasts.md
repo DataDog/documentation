@@ -28,7 +28,7 @@ Datadog クエリ言語に `forecast` 関数があります。この関数を系
 
 **予測値アラート**の[モニターページ][1]に移動します。次に、他のメトリクスモニターの場合と同様に、**Define the metric** セクションに入力します。
 
-{{< img src="monitors/monitor_types/forecasts/alert_conditions.png" alt="alert conditions" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/alert_conditions.png" alt="alert conditions"  style="width:80%;">}}
 
 予測値アラートを設定するには、以下の 3 つの必須オプションを設定する必要があります。
 
@@ -36,7 +36,7 @@ Datadog クエリ言語に `forecast` 関数があります。この関数を系
 * アラートがトリガーされる条件。`system.disk.in_use` のようなメトリクスは「above or equal to」に、`system.mem.pct_usable` のようなメトリクスは「below or equal to」に設定します。
 * メトリクスがしきい値に達するどのくらい前にアラートを受け取るかを制御します。
 
-{{< img src="monitors/monitor_types/forecasts/alert_advanced.png" alt="alert advanced" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/alert_advanced.png" alt="alert advanced"  style="width:80%;" >}}
 
 Datadog は、メトリクスを分析して、自動的に **Advanced** オプションを設定します。**Define the metric** セクションで何らかの変更を行うと、Advanced オプションが変更されることがあります。
 
@@ -56,21 +56,21 @@ Monitor Edit ページと Monitor Status ページにはどちらも「履歴的
 
 **線形**: 繰り返しの季節性パターンがなく一定の傾向を持つメトリクスには、このアルゴリズムを使用します。ダッシュボードでは、線形アルゴリズムがビュー内のデータを使用して同じ長さの予測値を作成します。たとえば、タイムセレクターを「The Past Week」に設定すると、予測機能は、過去 1 週間のデータを使用して、次の 1 週間を予測します。モニターで使用する履歴の量を明示的に設定でき、デフォルトでは1 週間に設定されます。
 
-{{< img src="monitors/monitor_types/forecasts/linear.png" alt="linear" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/linear.png" alt="linear"  style="width:80%;" >}}
 
 線形アルゴリズムには、アルゴリズムのレベル変化に対する感度を制御する 3 種類のモデルがあります。
 
 "simple" モデルは、履歴全体でロバスト線形回帰を行います。
 
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple"  style="width:80%;">}}
 
 "reactive" モデルは、より簡易に最近の挙動を外挿しますが、ノイズ、上下のスパイクなどに過剰に適合する恐れがあります。
 
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive"  style="width:80%;" >}}
 
 "default" モデルは、直近の傾向に合わせた穏便な選択を行います。直線を外挿しますが、直近のノイズに対して安定的です。
 
-{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default"  style="width:80%;">}}
 
 **季節性:** 季節性変動があるメトリクスには、このアルゴリズムを使用します。モニターでは、Datadog がメトリクスの季節性を自動検出して、weekly、daily、hourly の季節性を選択します。このアルゴリズムでは、予測を開始するために少なくとも 2 シーズンの履歴が必要で、最大 6 つのシーズンを使用します。
 
@@ -80,7 +80,7 @@ Monitor Edit ページと Monitor Status ページにはどちらも「履歴的
 * **daily**: このアルゴリズムは、今日の午後 7 時が過去数日の午後 7 時と同じであると想定します。
 * **hourly**: このアルゴリズムは、7:15 の動作が 6:15、5:15、4:15 などと同じであると予測します。
 
-{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal"  style="width:80%;">}}
 
 ### 高度なオプションへのアクセス
 
@@ -98,7 +98,7 @@ API を使用する場合は、予測値自体の開始時間と終了時間を�
 
 ## その他の参考資料
 
-{{< partial name="whats-next/whats-next.html" responsive="true" >}}
+{{< partial name="whats-next/whats-next.html"  >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /ja/monitors/faq/what-are-recovery-thresholds

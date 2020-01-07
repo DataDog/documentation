@@ -11,12 +11,13 @@ Refer to the instructions for standard [Agent installation][1] for platform-spec
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][2] at:
 
-```
+```text
 /etc/dd-agent/datadog.conf
 ```
 
 and adding the following line to the `[Main]` section:
-```
+
+```yaml
     process_agent_enabled: true
 ```
 
@@ -31,7 +32,7 @@ Update to Datadog Agent image version 5.16.0 or above:
 
 Follow the instructions for [docker-dd-agent][4], passing in the following attributes, in addition to any other custom settings as appropriate:
 
-```
+```text
 -v /etc/passwd:/etc/passwd:ro
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
@@ -40,7 +41,7 @@ Follow the instructions for [docker-dd-agent][4], passing in the following attri
 
 In the [dd-agent.yaml][5] manifest used to create the DaemonSet, add the following environment variables, volume mount, and volume:
 
-```
+```yaml
  env:
     - name: DD_PROCESS_AGENT_ENABLED
       value: "true"

@@ -47,7 +47,7 @@ The overall process of Datadog Agent Autodiscovery is:
   * [Using Kubernetes Annotations][8]
   * [Using Docker Labels][9]
 
-2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Kubernetes/Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][10] with the matching container's specific values. Then it enables the check using the static configuration.
+2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Kubernetes/Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][4] with the matching container's specific values. Then it enables the check using the static configuration.
 
 ## How to set it up
 
@@ -68,7 +68,7 @@ config_providers:
     polling: true
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -95,20 +95,20 @@ config_providers:
     polling: true
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
 To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
-```
+```shell
 KUBERNETES=true
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: For Kubernetes users, both a [CRI integration][11] and a [CRI-O integration][12] are available.
+**Note**: For Kubernetes users, both a [CRI integration][10] and a [CRI-O integration][11] are available.
 
 ### ECS Fargate Autodiscovery
 
@@ -122,7 +122,7 @@ ECS Fargate can't be monitored with the Datadog Agent running as a binary on a h
 
 To enable Autodiscovery over containers within ECS Fargate, add the following environment variable when starting the containerized Agent:
 
-```
+```shell
 ECS_FARGATE=true
 ```
 
@@ -142,6 +142,5 @@ ECS_FARGATE=true
 [7]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
 [8]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [9]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[10]: /agent/autodiscovery/template_variables
-[11]: /integrations/cri
-[12]: /integrations/crio
+[10]: /integrations/cri
+[11]: /integrations/crio

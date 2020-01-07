@@ -1,6 +1,6 @@
 ---
 title: Custom Metrics Billing
-kind: faq
+kind: documentation
 aliases:
   - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
@@ -18,6 +18,7 @@ In general, [custom metrics][1] refers to any metrics that are not part of the r
 Contact [Sales][2] or your [Customer Success][3] Manager to discuss custom metrics for your account.
 
 ### Standard integrations
+
 The following standard integrations can potentially emit custom metrics.
 
 Integrations limited to 350 custom metrics by default:
@@ -25,7 +26,7 @@ Integrations limited to 350 custom metrics by default:
 * [ActiveMQ XML][4]
 * [Go-Expvar][5]
 
-Integrations with no default limit: 
+Integrations with no default limit:
 
 * [Agent Metrics][6]
 * [Directory][7]
@@ -45,6 +46,7 @@ Many other integrations can be configured to collect custom metrics, for example
 * [SQL Server][18]
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][19].
 
 For billing questions, contact your [Customer Success][3] Manager.

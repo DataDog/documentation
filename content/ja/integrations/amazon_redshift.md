@@ -62,9 +62,9 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで Redshift ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     Redshift ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][10]に移動し、ログを確認します。
 

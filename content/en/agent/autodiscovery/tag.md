@@ -65,7 +65,7 @@ kubernetes_node_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -114,7 +114,7 @@ kubernetes_pod_labels_as_tags:
 
 **Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
@@ -164,7 +164,7 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -206,7 +206,7 @@ docker_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -246,7 +246,7 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 

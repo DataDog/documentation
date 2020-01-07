@@ -29,7 +29,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
     After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][6] and provide the relevant log entries with [a flare][7].
+If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
 
 ## Tracer debug mode
 
@@ -79,7 +79,6 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 ```
 
 See [the API documentation][1] for more details.
-
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{% /tab %}}
@@ -144,7 +143,6 @@ If neither of these log entries is present, then no request was sent to the Agen
 
 For more tracer settings, check out the [API documentation][5].
 
-
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 [2]: /agent/troubleshooting
 [3]: /help
@@ -172,7 +170,6 @@ Logs files are saved in the following directories:
 |----------|---------------------------------------------------------------|
 | Linux    | `/var/log/datadog/`                        |
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -205,11 +202,9 @@ make install
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /help
 [2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
+[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
 [5]: /tracing/visualization/#trace
-[6]: /help
-[7]: /agent/troubleshooting/#send-a-flare
+[6]: /agent/troubleshooting/#send-a-flare

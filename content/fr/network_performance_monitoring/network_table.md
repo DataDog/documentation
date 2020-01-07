@@ -19,7 +19,7 @@ further_reading:
 Cette fonctionnalité est actuellement en version bêta : pour y accéder, remplissez le <a href="https://app.datadoghq.com/network/2019signup">formulaire de demande d'accès à l'outil de surveillance des performances réseau de Datadog</a>.
 </div>
 
-{{< img src="network_performance_monitoring/network_table/main_page.png" alt="Page principale" responsive="true">}}
+{{< img src="network_performance_monitoring/network_table/main_page.png" alt="Page principale" >}}
 
 ## Requêtes
 
@@ -27,21 +27,21 @@ Pour affiner votre recherche et visualiser le trafic entre des endpoints précis
 
 La capture d'écran suivante montre la vue par défaut, qui agrège la _source_ et la _destination_ en fonction du tag `service`. Ainsi, chaque ligne du tableau représente les flux service-service agrégés sur une période de cinq minutes.
 
-{{< img src="network_performance_monitoring/network_table/context.png" alt="contexte" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/context.png" alt="contexte"  style="width:80%;">}}
 
 L'exemple suivant montre tous les flux entre les adresses IP d'un service (`service:web-store`) et une zone de disponibilité (`availability-zone:us-east1-b`) :
 
-{{< img src="network_performance_monitoring/network_table/flow_table_filtered.png" alt="Tableau de flux filtré" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/flow_table_filtered.png" alt="Tableau de flux filtré"  style="width:80%;">}}
 
 ### Volets Facettes
 
 Les volets des facettes reflètent les tags définis dans la requête de la barre de recherche. Basculez entre ces volets à l'aide des onglets _Source_ et _Destination_ en haut :
 
-{{< img src="network_performance_monitoring/network_table/facet_panels.png" alt="Volets des facettes" responsive="true" style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_table/facet_panels.png" alt="Volets des facettes"  style="width:30%;">}}
 
 ## Données réseau
 
-{{< img src="network_performance_monitoring/network_table/network_data.png" alt="données réseau" responsive="true" style="width:90%;" >}}
+{{< img src="network_performance_monitoring/network_table/network_data.png" alt="données réseau"  style="width:90%;" >}}
 
 Les métriques de votre réseau sont affichées dans les graphiques et le tableau associé. Toutes les métriques envoyées et reçues sont affichées du point de vue de la source :
 
@@ -54,7 +54,7 @@ Lorsqu'une perte de paquets importante se produit, les valeurs affichées peuven
 
 ### Graphiques
 
-{{< img src="network_performance_monitoring/network_table/graphs_npm.png" alt="graphiques de performances réseau" responsive="true" style="width:80%;" >}}
+{{< img src="network_performance_monitoring/network_table/graphs_npm.png" alt="graphiques de performances réseau"  style="width:80%;" >}}
 
 Les graphiques suivants sont disponibles :
 
@@ -66,19 +66,19 @@ Les graphiques suivants sont disponibles :
 
 Sur chaque graphique, sélectionnez l'icône des paramètres en forme d'engrenage en haut à droite pour modifier l'échelle de l'axe des ordonnées ou le type de graphique affiché :
 
-{{< img src="network_performance_monitoring/network_table/graph_settings.png" alt="Paramètres de graphique" responsive="true" style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_table/graph_settings.png" alt="Paramètres de graphique"  style="width:30%;">}}
 
 ### Table (Tableau)
 
 Le tableau Réseau présente les métriques _Throughput_, _Bandwidth_ et _Retransmits_ entre chaque _source_ et chaque _destination_ définie dans votre requête.
 
-{{< img src="network_performance_monitoring/network_table/data_table.png" alt="Tableau de données" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/data_table.png" alt="Tableau de données"  style="width:80%;">}}
 
 **Remarque** : utilisez le bouton *Show Unresolved Flows* en haut à droite du tableau pour filtrer les flux dont la source ou la destination n'a pas été résolue (`N/A`), ce qui signifie qu'il s'agit de trafic externe en dehors de votre réseau privé.
 
 Sélectionnez une ligne du tableau de données pour voir les traces et logs associés à un flux _source_ <=> _destination_ donné :
 
-{{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Détails d'un flux" responsive="true" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Détails d'un flux"  style="width:80%;">}}
 
 ## Pour aller plus loin
 

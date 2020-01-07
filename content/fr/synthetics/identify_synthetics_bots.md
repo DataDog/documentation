@@ -35,7 +35,6 @@ L'en-tête suivant est joint à tous les robots de test API de Datadog :
 
 `Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <ID_TEST_SYNTHETICS_PUBLIC>`
 
-
 L'en-tête `x-datadog-origin: synthetics` est également ajouté à toutes les requêtes lancées pour un test API Datadog.
 
 {{% /tab %}}

@@ -1,7 +1,7 @@
 ---
 title: アクティブなメトリクスのリストの取得
 type: apicontent
-order: 25.1
+order: 26.1
 external_redirect: '/api/#get-list-of-active-metrics'
 ---
 ## アクティブなメトリクスのリストの取得

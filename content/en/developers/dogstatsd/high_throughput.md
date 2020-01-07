@@ -58,6 +58,7 @@ func main() {
   statsd.Gauge("example_metric.gauge", 1, []string{"env:dev"}, 1)
 }
 ```
+
 [1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
 
@@ -67,7 +68,6 @@ By using Datadog's official Python library [datadogpy][1], the example below cre
 
 ```python
 from datadog import DogStatsd
-
 
 with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
@@ -177,7 +177,7 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used to [transport DogStatsD payloads][5]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ## Operating System kernel buffers
 
@@ -201,12 +201,14 @@ $ sysctl -w net.core.rmem_max=26214400
 ```
 
 Add the following configuration to `/etc/sysctl.conf` to make this change permanent:
-```
+
+```conf
 net.core.rmem_max = 26214400
 ```
 
 Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number in `datadog.yaml`:
-```
+
+```yaml
 dogstatsd_so_rcvbuf: 26214400
 ```
 
@@ -218,4 +220,3 @@ dogstatsd_so_rcvbuf: 26214400
 [2]: /developers/dogstatsd/unix_socket
 [3]: /developers/dogstatsd/#code
 [4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates
-[5]: /developers/dogstatsd/unix_socket

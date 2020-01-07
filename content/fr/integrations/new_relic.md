@@ -18,7 +18,7 @@ short_description: Consultez les métriques et événements de New Relic dans D
 version: '1.0'
 ---
 
-{{< img src="integrations/new_relic/newrelicdashboard.png" alt="Dashboard New Relic" responsive="true" popup="true">}}
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="Dashboard New Relic"  >}}
 
 ## Présentation
 

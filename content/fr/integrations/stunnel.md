@@ -57,5 +57,5 @@ Créez un fichier `stunnel.d/conf.yaml` dans le dossier `conf.d/` à la racine d
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#start-stop-restart-the-agent
+[3]: /fr/agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: /fr/agent/guide/agent-commands/#agent-status-and-information

@@ -15,11 +15,11 @@ Les valeurs affichées par une valeur de requête ne représentent pas nécessai
 
 Le widget peut afficher la dernière valeur transmise, ou une agrégation calculée à partir de toutes les valeurs de requête de l'intervalle. Ces visualisations offrent un aperçu limité mais explicite de votre requête d'infrastructure. 
 
-{{< img src="graphing/widgets/query_value/query_value.png" alt="Widget Valeur de requête" responsive="true" >}}
+{{< img src="graphing/widgets/query_value/query_value.png" alt="Widget Valeur de requête"  >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/query_value/query_value_setup.png" alt="Configuration du widget Valeur de requête" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/query_value/query_value_setup.png" alt="Configuration du widget Valeur de requête"  style="width:80%;">}}
 
 ### Configuration
 
@@ -39,7 +39,7 @@ Choisissez si votre widget affiche un intervalle personnalisé ou l'intervalle g
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

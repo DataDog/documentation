@@ -18,7 +18,7 @@ Les taux représentent la dérivée d'une métrique. Il s'agit de la variation d
 
 ### Check de l'Agent
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 |Méthode | Présentation |
 |:---|:---|

@@ -45,7 +45,7 @@ end
 
 Grâce à cette unique ligne de code, les données peuvent être représentées graphiquement dans Datadog. Voici un exemple :
 
-{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graphique guides métriques vues de page" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graphique guides métriques vues de page"  >}}
 
 Vous remarquerez que les counters StatsD sont normalisés selon l'intervalle de transmission pour signaler des unités par seconde. Dans le graphique ci-dessus, le marqueur signale 35,33 vues de page Web par seconde à ~15:24. En revanche, si une personne avait consulté la page Web chaque seconde, le graphique serait une ligne droite à y = 1. Pour incrémenter ou mesurer les valeurs au fil du temps, consultez les [gauges](#gauges).
 
@@ -91,7 +91,7 @@ statsd.distribution('dist.dd.website.latency', duration)
 
 L'instrumentation ci-dessus calcule les données suivantes : `somme`, `total`, `moyenne`, `minimum`, `maximum`, `50e centile` (médiane), `75e centile`, `90e centile`, `95e centile` et `99e centile`. Ces métriques apportent des statistiques concernant la différence entre chaque durée de requête. Représentez graphiquement la médiane pour voir la durée médiane d'une requête. Ajoutez le 95e centile afin de voir le temps que prennent la plupart des requêtes.
 
-{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="latence Dogweb" responsive="true" >}}
+{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="latence Dogweb"  >}}
 
 Pour cet exemple, nous partons du principe qu'une durée de requête de *500 ms* est acceptable. La durée de requête médiane (ligne bleue) est généralement inférieure à *100 millisecondes*, ce qui nous va. Le 95e centile (ligne rouge) a parfois dépassé une seconde, ce qui est loin de notre objectif.
 Cela signifie que la plupart des requêtes fonctionnent bien, mais que les pires requêtes sont trop longues. Si le 95e centile se rapproche de la médiane, alors la plupart des requêtes fonctionnent correctement.
@@ -176,7 +176,7 @@ L'instrumentation ci-dessus génère les métriques suivantes :
 | `database.query.time.max`          | La valeur échantillonnée maximale                   |
 | `database.query.time.95percentile` | Le 95e centile de la valeur échantillonnée           |
 
-{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graphique guides métriques durées requêtes de métriques" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graphique guides métriques durées requêtes de métriques"  >}}
 
 Pour cet exemple, imaginons qu'une durée de requête d'une seconde est acceptable. La durée de requête médiane (ligne violette) est généralement inférieure à 100 millisecondes, ce qui nous va. Malheureusement, le 95e centile (ligne bleue) présente des pics importants qui s'approchent parfois des trois secondes, ce qui est loin de notre objectif. Cela signifie que la plupart des requêtes fonctionnent bien, mais que les pires requêtes sont bien trop longues. Si le 95e centile se rapproche de la médiane, alors la plupart des requêtes fonctionnent correctement.
 

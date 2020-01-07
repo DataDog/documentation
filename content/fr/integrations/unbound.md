@@ -85,9 +85,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [2]: https://docs.datadoghq.com/fr/agent
 [3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-core/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
 

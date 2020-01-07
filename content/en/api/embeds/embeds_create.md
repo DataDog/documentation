@@ -38,4 +38,4 @@ If you are interested in using template variables, see [Embeddable Graphs with T
     Determines graph title.
     *Must be at least 1 character.*
 
-[1]: /graphing/faq/embeddable-graphs-with-template-variables
+[1]: /dashboards/faq/embeddable-graphs-with-template-variables

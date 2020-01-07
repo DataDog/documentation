@@ -6,6 +6,7 @@ external_redirect: /api/#post-an-event
 ---
 
 ## Post an event
+
 This endpoint allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
 **ARGUMENTS**:
@@ -40,5 +41,5 @@ This endpoint allows you to post events to the stream. Tag them, set priority an
     A list of device names to post the event with.
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /graphing/event_stream/#markdown-events
+[2]: /developers/events/email#markdown
 [3]: /integrations/faq/list-of-api-source-attribute-value

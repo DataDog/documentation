@@ -1,7 +1,7 @@
 ---
 title: Update an Index
 type: apicontent
-order: 23.3
+order: 24.3
 external_redirect: /api/#update-an-index
 ---
 
@@ -16,7 +16,6 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
 **ARGUMENTS**:
 
 **Note**: Using the `PUT` method updates your index's configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
-
 
 * **`filter.query`**  [*required*]:
     Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax][1]

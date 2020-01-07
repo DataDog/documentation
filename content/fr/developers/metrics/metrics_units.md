@@ -29,15 +29,15 @@ Pour éliminer toute ambiguïté et vous aider à mieux comprendre vos systèmes
 
 Les unités sont affichées automatiquement sur des graphiques de série temporelle, des widgets de valeur de requête et des Top Lists, comme indiqué sur la capture d'écran suivante d'un dashboard Redis :
 
-{{< img src="developers/metrics/metrics_units/redis_dash_metrics_units.png" alt="Unités de métriques dash. Redis" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/redis_dash_metrics_units.png" alt="Unités de métriques dash. Redis"  style="width:70%;">}}
 
 Sur des graphiques de série temporelle, déplacez votre curseur sur un graphique pour afficher les unités pertinentes. Les données brutes sont automatiquement converties en unités d'affichage lisibles (fractions de seconde en ms, millions d'octets par seconde en MiB/s, etc.) :
 
-{{< img src="developers/metrics/metrics_units/postgres_commits.png" alt="commits postgres" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/postgres_commits.png" alt="commits postgres"  style="width:70%;">}}
 
 Les unités sont également affichées en bas des graphiques de timeboard. Vous pouvez accéder aux descriptions des métriques en sélectionnant **Metrics Info** dans la liste déroulante :
 
-{{< img src="developers/metrics/metrics_units/annotated_ops.png" alt="Ops annotées" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/annotated_ops.png" alt="Ops annotées"  style="width:70%;">}}
 
 ## Pour aller plus loin
 

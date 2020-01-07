@@ -13,7 +13,7 @@ categories:
 ddtype: クローラー
 ---
 
-{{< img src="integrations/rss/rss.png" alt="RSS event" responsive="true" >}}
+{{< img src="integrations/rss/rss.png" alt="RSS event"  >}}
 
 ## 概要
 Datadog で RSS フィードのアクティビティをキャプチャして、以下のことができます。
@@ -31,5 +31,5 @@ Datadog で RSS フィードのアクティビティをキャプチャして、�
 
 **オプション**: RSS フィードにアクセスするためのユーザー名とパスワードを入力します。
 
-{{< img src="integrations/rss/rss_setup.png" alt="RSS setup" responsive="true" >}}
+{{< img src="integrations/rss/rss_setup.png" alt="RSS setup"  >}}
 

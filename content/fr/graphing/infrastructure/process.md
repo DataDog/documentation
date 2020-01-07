@@ -16,7 +16,7 @@ further_reading:
 
 La surveillance de processus de Datadog permet une visibilité en temps réel des éléments les plus granulaires dans un déploiement.
 
-{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="aperçu de live process" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="aperçu de live process"  >}}
 
 ## Installation
 
@@ -45,8 +45,8 @@ En outre, certaines options de configuration peuvent être définies en tant que
 Une fois la configuration effectuée, [redémarrez l'Agent][2].
 
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[1]: /fr/agent/guide/agent-configuration-files/
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -116,7 +116,7 @@ process_config:
 
 L'image suivante montre un processus sur la page Live Processes dont les arguments ont été masqués à l'aide de la configuration ci-dessus.
 
-{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="nettoyage des arguments de processus" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="nettoyage des arguments de processus"  style="width:100%;">}}
 
 Définissez `scrub_args` sur `false` pour désactiver entièrement le nettoyage des arguments de processus.
 
@@ -135,7 +135,7 @@ Les processus et les conteneurs sont, de par leur nature, des objets avec une ca
 
 **Remarque** : `/9.` correspond au chemin de commande, et `postgres` correspond à la commande elle-même.
 
-{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres"  style="width:80%;">}}
 
 Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, utilisez l'un des opérateurs booléens suivants :
 
@@ -175,15 +175,15 @@ Les processus dans les conteneurs Kubernetes présentent les tags suivants :
 
 Vous pouvez commencer par appliquer le filtre `role:McNulty-Query`, le service de requête frontal de Datadog, afin d'affiner la recherche. Ensuite, recherchez les processus NGINX maître et faites pivoter le tableau par zone de disponibilité pour vous assurer de la haute disponibilité du service.
 
-{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="nginx mcnulty" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="nginx mcnulty"  style="width:80%;">}}
 
 Dans le cas suivant, on vérifie les processus Elasticsearch pour un groupe de fonctionnalités individuel. On a également ajouté des métriques pour les changements de contexte volontaires ou involontaires, ces métriques étant disponibles dans le menu en forme d'engrenage en haut à droite du tableau.
 
-{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="elasticsearch burrito" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="elasticsearch burrito"  style="width:80%;">}}
 
 Dans l'exemple ci-dessous, on a recherché des processus SSH et effectué un pivotement avec le paramètre `user` afin de déterminer les personnes connectées aux différents hosts.
 
-{{< img src="graphing/infrastructure/process/sshusers.png" alt="utilisateurs ssh" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="utilisateurs ssh"  style="width:80%;">}}
 
 Cet exemple est peut-être moins passionnant qu'on aurait pu l'espérer.
 
@@ -193,7 +193,7 @@ Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles 
 
 Pour accéder à l'analyse de nuage de points [dans la page relative aux processus][4], cliquez sur le bouton *Show Summary graph* permettant d'afficher un graphique de synthèse, puis sélectionnez l'onglet « Scatter Plot » :
 
-{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="sélection de nuage de points" responsive="true" style="width:60%;">}}
+{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="sélection de nuage de points"  style="width:60%;">}}
 
 Par défaut, le graphique regroupe la clé de tag `command`. La taille de chaque point représente le nombre de processus dans ce groupe. Lorsque vous cliquez sur un point, les PID et les conteneurs qui contribuent au groupe s'affichent.
 
@@ -203,13 +203,13 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 * Sélection de la méthode d'agrégation pour les deux métriques.
 * Sélection de l'échelle pour l'axe des X et l'axe des Y (*Linear*/*Log*).
 
-{{< img src="graphing/infrastructure/process/scatterplot.png" alt="inspection de conteneur" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/scatterplot.png" alt="inspection de conteneur"  style="width:80%;">}}
 
 ## Vue Live Containers enrichie
 
 Tout comme la fonctionnalité Live Processes vous offre une visibilité accrue sur vos déploiements de conteneur, [Live Containers][5] vous permet de visualiser en détail votre conteneur et l'environnement d'orchestration. Lorsque la fonctionnalité Live Processes est activée, l'arborescence des processus pour chaque conteneur est incluse dans le panneau d'inspection de conteneur sur cette page.
 
-{{< img src="graphing/infrastructure/process/containerinspect.png" alt="inspection de conteneur" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="inspection de conteneur"  style="width:80%;">}}
 
 ## Surveillance en temps réel
 

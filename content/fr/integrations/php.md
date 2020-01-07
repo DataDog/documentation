@@ -17,7 +17,7 @@ public_title: Intégration Datadog/PHP
 short_description: Envoyer des métriques custom à partir de vos applications PHP à l'aide de DogStatsD PHP client.
 version: '1.0'
 ---
-{{< img src="integrations/php/phpgraph.png" alt="graphique PHP" responsive="true" popup="true">}}
+{{< img src="integrations/php/phpgraph.png" alt="graphique PHP"  >}}
 
 ## Présentation
 

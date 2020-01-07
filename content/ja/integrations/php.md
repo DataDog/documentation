@@ -17,7 +17,7 @@ public_title: Datadog-PHP インテグレーション
 short_description: DogStatsD PHP を使用して、PHP アプリケーションからカスタムメトリクスを送信 PHP client.
 version: '1.0'
 ---
-{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" responsive="true" popup="true">}}
+{{< img src="integrations/php/phpgraph.png" alt="PHP Graph"  >}}
 
 ## 概要
 

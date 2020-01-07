@@ -16,7 +16,7 @@ public_title: Datadog-Immunio インテグレーション
 short_description: Immunio からデータを収集して攻撃パターンを可視化および監視
 version: '1.0'
 ---
-{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard"  >}}
 
 ## 概要
 
@@ -34,9 +34,9 @@ IMMUNIO はアプリケーションを監視して、次のすべての攻撃を
 
 1.  [IMMUNIO アカウント][1]にログインします。
 1.  [インテグレーションのセットアップページ][2]に移動します。
-    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page"  >}}
 1.  "Add an API Key" をクリックします。
-    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key"  >}}
 1.  API キーを追加します。
 
 ### コンフィグレーション

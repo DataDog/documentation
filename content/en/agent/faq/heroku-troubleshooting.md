@@ -11,7 +11,7 @@ For example, to display the status of your Datadog Agent and enabled integration
 agent-wrapper status
 ```
 
-Next, verify the Datadog Agent is listening by sending a custom metric: 
+Next, verify the Datadog Agent is listening by sending a custom metric:
 
 ```shell
 # From your project directory:
@@ -45,4 +45,4 @@ Generate a flare by running the [`agent-wrapper` command][1]:
 agent-wrapper flare
 ```
 
-[1]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[1]: /agent/guide/agent-commands/#agent-status-and-information

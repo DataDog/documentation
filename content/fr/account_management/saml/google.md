@@ -37,7 +37,7 @@ Ajoutez également :
 * « urn:oid:2.5.4.4 » « informations de base » « principale adresse e-mail »
 * « urn:oid:2.5.4.42 » « informations de base » « principale adresse e-mail »
 
-{{< img src="account_management/saml/zAttributeMapping.png" alt="Mappage d'attributs" responsive="true" style="width:75%;">}}
+{{< img src="account_management/saml/zAttributeMapping.png" alt="Mappage d'attributs"  style="width:75%;">}}
 
 ### Pour aller plus loin
 

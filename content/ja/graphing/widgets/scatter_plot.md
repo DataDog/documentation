@@ -12,11 +12,11 @@ further_reading:
 ---
 散布図可視化機能では、2 つのメトリクスに対し、それぞれの集計を使用して、選択したスコープをグラフ化できます。
 
-{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" responsive="true">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -35,7 +35,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

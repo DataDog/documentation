@@ -27,10 +27,9 @@ body {
         }
     }
     footer {
-        position:relative;
+        position: absolute;
         z-index: 3;
         width: 100%;
-        height: 100%;
         /* Set the fixed height of the footer here */
         background-color: $footer_bg_color;
         color: $footer-font-color;

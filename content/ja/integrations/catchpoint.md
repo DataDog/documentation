@@ -16,7 +16,7 @@ public_title: Datadog-Catchpoint インテグレーション
 short_description: Catchpoint のアラートを Datadog イベントストリームへ送信
 version: '1.0'
 ---
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" responsive="true" popup="true">}}
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event"  >}}
 
 ## 概要
 
@@ -61,7 +61,7 @@ DataDog の API キーも必要です。これは、DataDog ポータルで作�
 ```
 
 これで、Catchpoint は、すべてのアラートを DataDog のイベントストリームに直接送信するようになります。
-{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration" responsive="true" popup="true">}}
+{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint configuration"  >}}
 
 ## 収集データ
 ### メトリクス

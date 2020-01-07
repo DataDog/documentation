@@ -15,10 +15,10 @@ further_reading:
 ---
 アラート値は、システムで定義されているモニター内のメトリクスの現在値を表示するクエリ値です。
 
-{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Alert Value" responsive="true">}}
+{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
 ## セットアップ
-{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -38,7 +38,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

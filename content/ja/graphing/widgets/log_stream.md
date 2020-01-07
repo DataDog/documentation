@@ -12,12 +12,12 @@ further_reading:
 ---
 ログストリームは、定義したクエリと一致するログフローを表示します。
 
-{{< img src="graphing/widgets/log_stream/log_stream.png" alt="Log stream" responsive="true">}}
+{{< img src="graphing/widgets/log_stream/log_stream.png" alt="Log stream" >}}
 
 ## セットアップ
 ### コンフィグレーション
 
-{{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Log stream setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Log stream setup"  style="width:80%;">}}
 
 ログストリームを絞り込むための[ログクエリ][1]を入力します。
 
@@ -34,7 +34,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

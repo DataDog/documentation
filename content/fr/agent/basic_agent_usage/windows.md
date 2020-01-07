@@ -27,7 +27,7 @@ Si vous n'avez pas encore installé l'Agent Datadog, consultez les informations 
 #### Interface graphique
 
 1. Téléchargez [le fichier d'installation de l'Agent Datadog][5].
-2. Exécutez le fichier d'installation (en tant qu'**administrateur**) en ouvrant `ddagent-cli-6.14.2.msi`.
+2. Exécutez le fichier d'installation (en tant qu'**administrateur**) en ouvrant `datadog-agent-6-latest.amd64.msi`.
 3. Suivez les instructions à l'écran, acceptez l'accord de licence et entrez votre [clé d'API Datadog][6].
 4. Une fois l'installation terminée, vous avez la possibilité de lancer Datadog Agent Manager.
 
@@ -40,12 +40,12 @@ Vous pouvez également installer l'Agent avec une ligne de commande pour ajouter
 
 Invite de commande :
 ```cmd
-start /wait msiexec /qn /i ddagent-cli-6.14.2.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"
+start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"
 ```
 
 Powershell :
 ```powershell
-Start-Process -Wait msiexec -ArgumentList '/qn /i ddagent-cli-6.14.2.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"'
+Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<VOTRE_CLÉ_API_DATADOG>"'
 ```
 
 Chaque élément de configuration est ajouté en tant que propriété dans la ligne de commande. Les options de configuration en ligne de commande suivantes sont disponibles à l'installation de l'Agent sur Windows :
@@ -109,11 +109,11 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
 
 Utilisez Datadog Agent Manager (disponible depuis le menu Démarrer).
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Menu Démarrer Windows" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Menu Démarrer Windows"  style="width:75%;">}}
 
 Utilisez les commandes `start`, `stop` et `restart` dans Datadog Agent Manager :
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Capture d'écran de Datadog Agent Manager" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Capture d'écran de Datadog Agent Manager"  style="width:75%;">}}
 
 Vous pouvez également utiliser le Powershell Windows, si celui-ci est disponible :
 `[start|stop|restart]-service datadogagent`
@@ -187,7 +187,7 @@ Pour vous assurer que l'Agent est bien lancé, vérifiez si l'état du service i
 Des informations sur l'état de l'Agent pour l'Agent version 5.2+ sont disponibles dans
 *Datadog Agent Manager -> Settings -> Agent Status* :
 
-{{< img src="agent/faq/windows_status.png" alt="État Windows" responsive="true" style="width:50%;" >}}
+{{< img src="agent/faq/windows_status.png" alt="État Windows"  style="width:50%;" >}}
 
 Pour connaître le status de l'Agent version 3.9.1 à 5.1, accédez à `http://localhost:17125/status`.
 
@@ -248,7 +248,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
 * Cliquez sur Submit.
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Flare Windows avec l'Agent v6" responsive="true" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Flare Windows avec l'Agent v6"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
 {{% /tab %}}
@@ -266,7 +266,7 @@ Pour envoyer une copie de vos configurations et logs Windows à l'assistance Dat
 
 * Saisissez l'adresse e-mail que vous utilisez pour vous connecter à Datadog. 
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Flare Windows" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Flare Windows"  style="width:70%;">}}
 
 La commande flare est disponible pour Powershell :
 
@@ -301,7 +301,7 @@ print tempfile.gettempdir()
 
 Exemple :
 
-{{< img src="agent/faq/flare_fail.png" alt="Échec de l'envoi du flare" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/flare_fail.png" alt="Échec de l'envoi du flare"  style="width:70%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -313,11 +313,11 @@ Sur votre host cible, lancez Datadog Agent Manager et sélectionnez l'intégrati
 
 Pour obtenir le nom du service, ouvrez `services.msc` et repérez votre service cible. En utilisant DHCP comme cible, vous pouvez voir le nom du service en haut de la fenêtre des propriétés du service :
 
-{{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
 
 Lorsque vous ajoutez vos propres services, assurez-vous de suivre précisément le formatage affiché. L'intégration échouera si le formatage est incorrect.
 
-{{< img src="agent/faq/windows_DHCP_service.png" alt="Service DHCP Windows" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/windows_DHCP_service.png" alt="Service DHCP Windows"  style="width:75%;">}}
 
 De plus, lorsque vous modifiez une intégration, le service Datadog doit être redémarré. Vous pouvez le faire depuis services.msc ou depuis la barre latérale de l'interface.
 
@@ -362,7 +362,7 @@ Une fois la configuration effectuée, [redémarrez l'Agent][14].
 [2]: /fr/agent/basic_agent_usage/#supported-os-versions
 [3]: /fr/agent/faq/windows-agent-ddagent-user
 [4]: /fr/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-6.14.2.msi
+[5]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /fr/agent/proxy
 [8]: /fr/agent/guide/datadog-agent-manager-windows

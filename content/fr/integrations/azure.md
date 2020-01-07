@@ -64,13 +64,14 @@ Les intégrations connexes comprennent :
 | [Event Hubs][9]                  | Un service géré de flux de données à grande échelle                                                                   |
 | [ExpressRoute][57]              | Un service pour étendre vos réseaux locaux dans le cloud.                                             |
 | [Pare-feu][71]                  | Un service de sécurité réseau basé sur le cloud pour protéger les ressources de votre réseau virtuel Azure.                            |
+| [Functions][72]                 | Un service conçu pour exécuter du code sans serveur en réponse à un événement.                                      |
 | [HDInsights][55]                | Un service cloud conçu pour traiter d'importants volumes de données.                                                   |
 | [IOT Hub][10]                   | Connexion, surveillance et gestion de milliards de ressources IoT                                                       |
 | [Key Vault][53]                 | Un service conçu pour protéger et gérer les clés de chiffrement et les secrets utilisés par les services et applications cloud. |
 | [Load Balancer][58]             | Permet de mettre à l'échelle vos applications et d'assurer la haute disponibilité de vos services.                                    |
 | [Logic App][11]                 | Conception de solutions d'intégration puissantes                                                                      |
 | [Network Interfaces][59]        | Permet la mise en communication d'une machine virtuelle avec Internet, Azure et des ressources locales.                                 |
-| [Notification Hubs][61]         | Un moteur de notifications Push qui vous permet d'envoyer des notifications vers toutes les plateformes depuis n'importe quel backend.                     |
+| [Notification Hubs][61]         | Un moteur de notifications Push qui vous permet d'envoyer des notifications vers n'importe quelle plateforme depuis n'importe quel backend.                     |
 | [Adresse IP publique][60]         | Une ressource qui permet d'assurer une connectivité entrante et une connectivité sortante à partir d'Internet.                |
 | [Redis Cache][12]               | Cache de données géré                                                                                        |
 | [Relay][62]                     | Permet l'exposition sécurisée des services exécutés dans votre réseau d'entreprise sur le cloud public.                          |
@@ -79,7 +80,7 @@ Les intégrations connexes comprennent :
 | [Stream Analytics][64]          | Un moteur de traitement d'événements pour analyser d'importants volumes de données diffusées à partir d'appareils.                        |
 | [SQL Database][14]              | Base de données relationnelle fortement évolutive dans le cloud                                                          |
 | [SQL Database Elastic Pool][15] | Gestion des performances de plusieurs bases de données                                                              |
-| [Virtual Machine][16]           | Service de gestion de machines virtuelles                                                                        |
+| [Machine virtuelle][16]           | Service de gestion de machines virtuelles                                                                        |
 | [Virtual Machine Scale Set][17] | Déploiement, gestion et mise à l'échelle automatique d'un ensemble de machines virtuelles identiques                                                      |
 
 ## Implémentation
@@ -219,25 +220,25 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
   * Types de compte pris en charge : `Accounts in this organizational directory only (Datadog)`
   * URI de redirection (facultatif) : `https://app.datadoghq.com`
 
-{{< img src="integrations/azure/Azure_create_ad.png" alt="création d'app Azure" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="integrations/azure/Azure_create_ad.png" alt="création d'app Azure"   style="width:80%;" >}}
 
 ##### Accorder un accès en lecture à l'application
 
 1. Accédez à la section **Abonnements** en utilisant la barre de recherche ou depuis la barre latérale de gauche :
 
-    {{< img src="integrations/azure/subscriptions_icon.png" alt="icône abonnements" responsive="true" popup="true" style="width:25%">}}
+    {{< img src="integrations/azure/subscriptions_icon.png" alt="icône abonnements"   style="width:25%">}}
 
 2. Cliquez sur l'abonnement que vous souhaitez surveiller.
 3. Sélectionnez **Contrôle d'accès (IAM)** dans le menu d'abonnement, puis **Ajouter** -> **Ajouter une attribution de rôle** :
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="Ajouter une attribution de rôle" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/azure-add-role.png" alt="Ajouter une attribution de rôle"   style="width:80%">}}
 
 4. Pour **Rôle**, sélectionnez *Lecteur*. Sous **Sélectionner**, choisissez le nom de l'application que vous avez créée :
 
-    {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app" responsive="true" popup="true" style="width:60%">}}
+    {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app"   style="width:60%">}}
 
 5. Cliquez sur **Enregistrer**.
-6. Répétez ce processus pour tout autre abonnement que vous souhaitez surveiller à l'aide de Datadog. **Remarque** : les utilisateurs d'Azure Lighthouse peuvent ajouter les abonnements des locataires des clients.
+6. Répétez ce processus pour tout autre abonnement que vous souhaitez surveiller à l'aide de Datadog. **Remarque** : les utilisateurs d'Azure Lighthouse peuvent ajouter les abonnements des locataires clients.
 
 **Remarque** : les diagnostics doivent être activés pour que les machines virtuelles déployées avec ARM puissent recueillir des métriques. Consultez la section [Activer les diagnostics][3].
 
@@ -248,7 +249,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 2. Pour cette même application, accédez à **Gérer** -> **Certificats et secrets**.
 3. Ajoutez un nouveau *Clé secrète client* intitulée `datadogClientSecret`, sélectionnez un intervalle pour *Date d'expiration* et cliquez sur **Ajouter** :
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure"   style="width:80%">}}
 
 3. Une fois la valeur de la clé indiquée, collez-la dans le [carré d'intégration Azure de Datadog][1], sous **Client Secret**, puis cliquez sur **Install Integration** ou **Update Configuration**.
 
@@ -279,7 +280,7 @@ Vous devrez peut-être patienter quelques minutes avant que les métriques des a
 
 Accédez au [dashboard par défaut des machines virtuelles Azure][5] pour visualiser les données de votre infrastructure, qui s'ajoutent automatiquement au dashboard.
 
-{{< img src="integrations/azure/azure_vm_screenboard.png" alt="Screenboard machines virtuelles azure" responsive="true" popup="true" style="width:70%">}}
+{{< img src="integrations/azure/azure_vm_screenboard.png" alt="Screenboard machines virtuelles azure"   style="width:70%">}}
 
 ### Collecte de logs
 
@@ -288,9 +289,9 @@ Accédez au [dashboard par défaut des machines virtuelles Azure][5] pour visual
 
 Pour recueillir des logs à partir de l'ensemble de vos services Azure sauf App Services, suivez cette méthode globale :
 
-1. Créez un [Azure Event Hub][1] depuis le [portail Azure][2], [Azure CLI][3] ou [Powershell][4]
+1. Créez un [Azure Event Hub][1] depuis le [portail Azure][2], l’[interface de ligne de commande Azure][3] ou [Powershell][4].
 2. [Configurez la fonction Datadog/Azure](#creer-une-fonction-azure) qui transmet les logs depuis votre Event Hub vers Datadog.
-3. [Configurez vos services Azure pour transférer leurs logs au Event Hub][5].
+3. [Configurez vos services Azure de façon à ce que leurs logs soient transférés au Event Hub][5].
 
 #### Créer une fonction Azure Event Hub
 
@@ -325,7 +326,7 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 Pour recueillir des logs à partir de l'ensemble de vos Azure App Services, suivez cette méthode globale :
 
 1. Configurez [Stockage Blob Azure][1] depuis le [portail Azure][2], [Azure Storage Explorer][6], [Azure CLI][3] ou [Powershell][4].
-2. [Configurez la fonction Datadog/Azure](#creer-une-fonction-stockage-blob-azure) qui transmet les logs depuis votre stockage blob vers Datadog.
+2. [Configurez la fonction Datadog/Azure](#creer-une-fonction-stockage-blob-azure) chargée de transmettre les logs depuis votre stockage blob vers Datadog.
 3. [Configurez vos Azure App Services de façon à transférer leurs logs au Stockage Blob][5].
 
 #### Créer une fonction Stockage Blob Azure
@@ -432,6 +433,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][40].
 [69]: https://docs.datadoghq.com/fr/integrations/azure_app_service_plan
 [70]: https://docs.datadoghq.com/fr/integrations/azure_app_service_environment
 [71]: https://docs.datadoghq.com/fr/integrations/azure_firewall/
+[72]: https://docs.datadoghq.com/fr/integrations/azure_functions/
 
 
 {{< get-dependencies >}}

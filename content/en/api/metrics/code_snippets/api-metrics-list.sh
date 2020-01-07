@@ -1,7 +1,7 @@
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
 
-from_time=$(date -v -1d +%s)
+from_time=$((date +%s - 86400))
 
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \

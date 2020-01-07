@@ -11,7 +11,7 @@ further_reading:
 L'API de mappage d'attributs d'authentification fédérée à un rôle est actuellement en version bêta fermée. La fonctionnalité et ses performances risquent de ne pas être optimisées, et Datadog se réserve le droit de procéder à des modifications à tout moment et sans préavis. Pour demander l'activation de cette fonctionnalité, contactez votre chargé de compte ou l'<a href="/help">assistance Datadog</a>.
 </div>
 
-Si vous utilisez un système d'authentification fédérée, cette API vous permet de mapper automatiquement des groupes d'utilisateurs à des rôles dans Datadog.
+Si vous utilisez un système d'authentification fédérée, cette API vous permet de mapper automatiquement des groupes d'utilisateurs à des rôles dans Datadog à l'aide d'attributs envoyés par votre fournisseur d'identité.
 
 **Remarque** : si vous êtes un utilisateur SAML et que vous faites partie de la bêta du système de mappage fédéré existant (`roles_v2_saml`), Datadog vous conseille fortement de migrer vers cette API.
 
@@ -24,39 +24,37 @@ Tous les endpoints d'API ci-dessous peuvent avoir deux endpoints de host différ
 
 ### Créer un mappage d'authentification
 
-
 Crée un mappage d'authentification à partir d'un corps JSON. Renvoie le mappage d'authentification qui vient d'être créé.
 
-| Méthode | Chemin de l'endpoint | Charge utile requise |
-|--------|--------------|------------------|
-| `POST`  | `/v2/authn_mappings`  | JSON       |
+| Méthode | Chemin de l'endpoint        | Charge utile requise |
+|--------|----------------------|------------------|
+| `POST` | `/v2/authn_mappings` | JSON             |
 
 ##### ARGUMENTS
 
 * **`role_uuid`** [*obligatoire*, *défaut*=none] :
-  l'API Roles peut être utilisée pour créer et gérer des rôles Datadog, ainsi que pour définir les autorisations globales et les utilisateurs associés à chaque rôle. Lorsque vous créez un rôle, un UUID lui est attribué. Pour découvrir comment récupérer le `role_uuid` d'un rôle afin de le modifier, consultez la [documentation sur l'API Roles][1].
+  l'`UUID` du rôle à utiliser pour le mappage. L'API Roles peut être utilisée pour créer et gérer des rôles Datadog, ainsi que pour définir les autorisations globales et les utilisateurs associés à chaque rôle. Lorsque vous créez un rôle, un UUID lui est attribué. Pour découvrir comment récupérer le `role_uuid` du rôle auquel vous souhaitez mapper les attributs, consultez la [documentation sur l'API Roles][1].
 * **`attribute_key`** [*obligatoire*, *défaut*=none] :
- `attribute_key` et `attribute_value` correspondent à des paires clé/valeur définies dans les assertions SAML issues de leurs fournisseurs d'identité. Vous pouvez les définir en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
+ `attribute_key` correspond à la clé dans une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 * **`attribute_value`** [*obligatoire*, *défaut*=none] :
-  `attribute_key` et `attribute_value` correspondent à des paires clé/valeur définies dans les assertions SAML issues de leurs fournisseurs d'identité. Vous pouvez les définir en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
+ `attribute_value` correspond à la valeur dans une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
 
 ```sh
 curl -X POST \
-         "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+         "https://api.datadoghq.com/api/v2/authn_mappings" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
          -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>" \
          -d '{
              "data": {
                  "type": "authn_mappings",
-                 "id": "123e4567-e89b-12d3-a456-426655440000",
                  "attributes": {
                       "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-                      "attribute_key": "string",
-                      "attribute_value": "string"
+                      "attribute_key": "member-of",
+                      "attribute_value": "Development"
                 }
              }
          }'
@@ -64,7 +62,7 @@ curl -X POST \
 
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Réponse" %}}
 
@@ -73,12 +71,11 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
-      "created_by": "string",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
-    "id": "string",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
       "saml_assertion_attributes": {
         "data": {
@@ -97,12 +94,12 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
   "included": [
     {
       "data": {
-        "id": "string",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "type": "roles",
         "attributes": {
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "string"
+          "name": "Developer Role"
         },
         "relationships": {
           "data": [
@@ -120,8 +117,8 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
-          "attribute_key": "string",
-          "attribute_value": "string"
+          "attribute_key": "member-of",
+          "attribute_value": "Development"
         }
       }
     }
@@ -136,9 +133,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Renvoie la liste des mappages d'authentification
 
-| Méthode | Chemin de l'endpoint            | Charge utile requise |
-|--------|-------------------------|------------------|
-| `GET`  | `/v2/authn_mappings` | requêtes facultatives       |
+| Méthode | Chemin de l'endpoint        | Charge utile requise          |
+|--------|----------------------|---------------------------|
+| `GET`  | `/v2/authn_mappings` | Paramètres de requête facultatifs |
 
 ##### ARGUMENTS
 
@@ -155,14 +152,14 @@ Renvoie la liste des mappages d'authentification
 {{% tab "Exemple" %}}
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v2/authn_mappings" \
+curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
      -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
      -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>"
 ```
 
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Réponse" %}}
 
@@ -188,7 +185,6 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
       },
       "attributes": {
         "created_at": "2019-11-04 17:41:29.015504",
-        "created_by": "string",
         "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
         "saml_assertion_attribute_id": 0
       }
@@ -202,7 +198,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         "attributes": {
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "string"
+          "name": "Developer Role"
         },
         "relationships": {
           "data": [
@@ -220,8 +216,8 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
-          "attribute_key": "string",
-          "attribute_value": "string"
+          "attribute_key": "member-of",
+          "attribute_value": "Developer"
         }
       }
     }
@@ -243,9 +239,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Renvoie un mappage d'authentification spécifique via son UUID.
 
-| Méthode | Chemin de l'endpoint | Charge utile requise                           |
-|--------|--------------|--------------------------------------------|
-| `GET` | `/authn_mappings/{UUID}`  | Paramètre d'URL |
+| Méthode | Chemin de l'endpoint            | Charge utile requise |
+|--------|--------------------------|------------------|
+| `GET`  | `/authn_mappings/{UUID}` | Paramètre d'URL    |
 
 ##### ARGUMENTS
 
@@ -256,14 +252,14 @@ Renvoie un mappage d'authentification spécifique via son UUID.
 {{% tab "Exemple" %}}
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
      -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
      -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>"
 ```
 
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Réponse" %}}
 
@@ -272,7 +268,6 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
-      "created_by": "string",
       "uuid": "123e4567-e89b-12d3-a456-426655440000",
       "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
@@ -303,7 +298,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
           "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "string"
+          "name": "Developer Role"
         },
         "relationships": {
           "data": [
@@ -321,8 +316,8 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
-          "attribute_key": "string",
-          "attribute_value": "string"
+          "attribute_key": "member-of",
+          "attribute_value": "Developer"
         }
       }
     }
@@ -338,38 +333,40 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 Modifie le `role` ou le `saml_assertion_attribute_id` d'un mappage d'authentification (ou les deux) à partir d'un corps JSON. Renvoie le mappage d'authentification mis à jour.
 
 
-| Méthode | Chemin de l'endpoint | Charge utile requise |
-|--------|--------------|------------------|
-| `PATCH`  | `/v2/authn_mappings/{ID}`  | JSON       |
+| Méthode  | Chemin de l'endpoint               | Charge utile requise    |
+|---------|-----------------------------|---------------------|
+| `PATCH` | `/v2/authn_mappings/{UUID}` | Paramètre d'URL, JSON |
 
 ##### ARGUMENTS
 
+* **`{UUID}`** [*obligatoire*, aucune valeur par défaut] :
+  remplacer `{UUID}` par l'UUID du mappage d'authentification à modifier.
 * **`id`** [*obligatoire*, *défaut*=none] :
-  l'UUID du `authinmap` à modifier. Pour découvrir comment récupérer votre UUID, consultez la [documentation sur l'API Roles][1].
+  l'UUID du mappage d'authentification à modifier. Cette propriété doit correspondre au paramètre `{UUID}` du chemin dans la requête.
 * **`role_uuid`** [*obligatoire*, *défaut*=none] :
   l'API Roles peut être utilisée pour créer et gérer des rôles Datadog, ainsi que pour définir les autorisations globales et les utilisateurs associés à chaque rôle. Lorsque vous créez un rôle, un UUID lui est attribué. Pour découvrir comment récupérer le `role_uuid` d'un rôle afin de le modifier, consultez la [documentation sur l'API Roles][1].
 * **`attribute_key`** [*obligatoire*, *défaut*=none] :
- `attribute_key` et `attribute_value` correspondent à des paires clé/valeur définies dans les assertions SAML issues de leurs fournisseurs d'identité. Vous pouvez les définir en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
+ `attribute_key` correspond à la clé d'une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 * **`attribute_value`** [*obligatoire*, *défaut*=none] :
-  `attribute_key` et `attribute_value` correspondent à des paires clé/valeur définies dans les assertions SAML issues de leurs fournisseurs d'identité. Vous pouvez les définir en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
+ `attribute_value` correspond à la valeur dans une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
 
 ```sh
 curl -X PATCH \
-         "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+         "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
          -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>" \
          -d '{
              "data": {
                  "type": "authn_mappings",
-                 "id": "123e4567-e89b-12d3-a456-426655440000",
+                 "id": "{UUID}",
                  "attributes": {
                       "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-                      "attribute_key": "string",
-                      "attribute_value": "string"
+                      "attribute_key": "member-of",
+                      "attribute_value": "Developer"
                 }
              }
          }'
@@ -377,7 +374,7 @@ curl -X PATCH \
 
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Réponse" %}}
 
@@ -386,7 +383,6 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
-      "created_by": "string",
       "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
     },
@@ -416,7 +412,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
           "created_at": "2019-11-04 17:41:29.015504",
           "modified_at": "2019-11-06 17:41:29.015504",
           "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "string"
+          "name": "Developer Role"
         },
         "relationships": {
           "data": [
@@ -434,8 +430,8 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         "type": "saml_assertion_attributes",
         "attributes": {
           "id": 6,
-          "attribute_key": "string",
-          "attribute_value": "string"
+          "attribute_key": "member-of",
+          "attribute_value": "Developer"
         }
       }
     }
@@ -451,9 +447,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Supprime un mappage d'authentification spécifique.
 
-| Méthode   | Chemin de l'endpoint            | Charge utile requise |
-|----------|-------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{UUID}` | Paramètre d'URL |
+| Méthode   | Chemin de l'endpoint               | Charge utile requise |
+|----------|-----------------------------|------------------|
+| `DELETE` | `/v2/authn_mappings/{UUID}` | Paramètre d'URL    |
 
 ##### ARGUMENTS
 
@@ -464,7 +460,7 @@ Supprime un mappage d'authentification spécifique.
 {{% tab "Exemple" %}}
 
 ```sh
-curl -X DELETE "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+curl -X DELETE "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
          -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>"
@@ -472,7 +468,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/authn_mappings/{UUID}" \
 
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Réponse" %}}
 

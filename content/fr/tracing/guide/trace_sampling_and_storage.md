@@ -38,7 +38,7 @@ L'APM Datadog calcule les statistiques agrégées suivantes parmi toutes les tra
 * Données détaillées du temps passé par service/type
 * [Score Apdex][2] (services Web uniquement)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Les statistiques agrégées sont générées à partir de données non échantillonnées." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Les statistiques agrégées sont générées à partir de données non échantillonnées."  style="width:90%;">}}
 
 ### Objectif de l'échantillonnage
 
@@ -48,7 +48,7 @@ L'objectif de l'échantillonnage est de *conserver* les traces qui ont le plus d
 * Services présentant un QPS (nombre de requêtes par seconde) faible
 * Ensemble représentatif de traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Les traces individuelles sont échantillonnées au niveau du client, de l'Agent et du serveur." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Les traces individuelles sont échantillonnées au niveau du client, de l'Agent et du serveur."  style="width:90%;">}}
 
 ### Règles d'échantillonnage
 
@@ -396,7 +396,7 @@ Par exemple, pour `9:00am UTC Wed, 12/20`, vous verrez :
 
 Une fois qu'une trace a été consultée en ouvrant une page entière, elle reste disponible en utilisant son ID de trace dans l'URL : `https://app.datadoghq.com/apm/trace/<ID_TRACE>`. Ceci est valable même après son « expiration » dans l'interface. Ce comportement n'est pas affecté par les compartiments de temps de rétention.
 
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="ID de trace" responsive="true" >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="ID de trace"  >}}
 
 ## Pour aller plus loin
 

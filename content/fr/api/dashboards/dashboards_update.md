@@ -38,4 +38,4 @@ external_redirect: '/api/#mettre-a-jour-un-dashboard'
     * **`prefix`** [*facultatif*, *défaut*=**None**] :
         Préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
 
-[1]: /fr/graphing/widgets
+[1]: /fr/dashboards/widgets

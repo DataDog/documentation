@@ -16,7 +16,7 @@ public_title: Intégration Datadog/HipChat
 short_description: Envoyez des alertes et des graphiques Datadog à la room HipChat de votre équipe.
 version: '1.0'
 ---
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Graphique HipChat" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Graphique HipChat"  >}}
 
 ## Présentation
 
@@ -49,7 +49,7 @@ Si vous hébergez votre propre serveur HipChat, saisissez le hostname du serveur
 
 Cochez la case **Ignore SSL** UNIQUEMENT si le certificat de votre serveur HipChat est auto-signé.
 
-{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hostname Hipchat" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hostname Hipchat"  >}}
 
 ## Données collectées
 ### Métriques
