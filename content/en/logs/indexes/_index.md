@@ -95,7 +95,7 @@ For example, exclude 99% of `http.request_id` logs for `source:nginx`:
 #### Sample all logs of a trace
 
 In order to guarantee the sampling of all logs related to a given trace, define the log sampling on `Trace Id` attribute.
-Refer to [Trace Remapper][10] to get more information on how to connect logs and traces. 
+Refer to [Trace Remapper][11] to get more information on how to connect logs and traces. 
 
 ## Multi indexes
 
