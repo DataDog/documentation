@@ -47,18 +47,18 @@ Une fois votre emplacement privé créé, pour configurer un test API Synthetics
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    Par défaut, un worker peut traiter jusqu'à 10 tests à la fois. Pour agrandir un emplacement privé :
+   Pour redimensionner un emplacement privé :
       * Modifiez la valeur du paramètre `concurrency` afin de pouvoir effectuer plus de tests simultanés depuis un seul worker.
-      * Ajoutez ou supprimez des workers sur votre host. Il est possible d'ajouter plusieurs workers à un emplacement privé avec un seul fichier de configuration. Chaque worker exige alors `N` requêtes en fonction de son nombre d'emplacements disponibles. Lorsque le worker 1 traite des tests, le worker 2 exige les tests suivants, etc.
+      * Ajoutez ou supprimez des workers sur votre host. Il est possible d'ajouter plusieurs workers à un emplacement privé avec un seul fichier de configuration. Chaque worker demande alors à exécuter `N` tests en fonction du nombre de tests autorisés. Lorsque le worker 1 traite des tests, le worker 2 demande les tests suivants, etc.
 
 4. Pour extraire les configurations de test et renvoyer les résultats de test, le worker de l'emplacement privé doit avoir accès à l'un des endpoints de l'API Datadog :
 
-    * Si vous utilisez le site américain de Datadog : `api.datadoghq.com/api/`.
+    * Si vous utilisez le site américain de Datadog : pour les versions 0.1.6+, utilisez `intake.synthetics.datadoghq.com` ( `api.datadoghq.com/api/` pour les versions <0.1.5).
     * Si vous utilisez le site européen de Datadog : `api.datadoghq.eu/api/`.
 
-    Vérifiez si l'endpoint correspondant à votre site Datadog est disponible à partir du host exécutant le worker :
+    Vérifiez si l'endpoint correspondant à votre `site` Datadog est disponible à partir du host exécutant le worker :
 
-    * Si vous utilisez le site américain de Datadog : `curl https://api.datadoghq.com`.
+    * Si vous utilisez le site américain de Datadog : pour les versions 0.1.6+, utilisez `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` pour les versions <0.1.5) .
     * Si vous utilisez le site européen de Datadog :  `curl https://api.datadoghq.eu`.
 
 **Remarque** : vous devez autoriser le trafic sortant sur le port `443`, car la récupération des configurations de test et la transmission des résultats s'effectuent via HTTPS.
@@ -67,11 +67,11 @@ Une fois votre emplacement privé créé, pour configurer un test API Synthetics
 
   * Dans votre liste d'emplacements privés, dans la section Settings :
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="états de santé des emplacements privés"  style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_location_pill.png" alt="statuts de santé des emplacements privés"  style="width:70%;">}}
 
   * Dans le formulaire de création d'un test, sous la section Private Locations :
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="emplacements privés dans la liste"  style="width:70%;">}}
+    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="liste des emplacements privés"  style="width:70%;">}}
 
 6. Vous pouvez désormais utiliser votre nouvel emplacement privé comme n'importe quel autre emplacement géré par Datadog pour vos [tests API Synthetics][1].
 
@@ -82,18 +82,20 @@ Le `synthetics-private-location-worker` dispose d'un grand nombre d'options. Dé
 | Option                   | Type             | Default                                              | Description                                                                                                                                                         |
 |--------------------------|------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dnsServer`              | Tableau de chaînes | `["8.8.8.8","1.1.1.1"]`                              | Adresses IP du serveur DNS utilisées dans l'ordre donné (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                  |
-| `dnsUseHost`             | Booléen          | `false`                                              | Utilise la configuration de DNS locale en plus de --dnsServer (valeur actuelle : `["<DEFAULT_DNS_IN_HOST_CONFIG>"]`).                                                                       |
-| `blacklistedRange`       | Tableau de chaînes | [Registre d'adresses à usage spécifique IANA IPv4/IPv6][2] | Bloque l'accès à des plages d'IP (p. ex. `--blacklistedRange.4="127.0.0.0/8" --blacklistedRange.6="::1/128"`)                                                                 |
-| `whitelistedRange`       | Tableau de chaînes | `none`                                               | Donne l'accès à des plages d'IP (prioritaire sur `--blacklistedRange`)                                                                                                |
-| `site`                   | Chaîne           | `datadoghq.com`                                      | Site de Datadog (`datadoghq.com` ou `datadoghq.eu`)                                                                                                                    |
-| `proxy`                  | Chaîne           | `none`                                               | URL proxy                                                                                                                                                           |
+| `dnsUseHost`             | Booléen          | `false`                                              | Utiliser la configuration DNS locale en plus de --dnsServer (valeur actuelle : `["<DEFAULT_DNS_IN_HOST_CONFIG>"]`).                                                                       |
+| `whitelistedRange.4`       | Tableau de chaînes | `none`                                               | Autoriser l'accès à des plages d'IP IPv4 (ex. : `--whitelistedRange.4="10.0.0.0/8"` ou `--whitelistedRange.4={"10.0.0.0/8","0.0.0.0/8"}`, prioritaire sur `--blacklistedRange`)                                                                                                |
+| `whitelistedRange.6`       | Tableau de chaînes | `none`                                               | Autoriser l'accès à des plages d'IP IPv6 (ex. : `--whitelistedRange.6="::/128"` ou `--whitelistedRange.6={"::/128","64:ff9b::/96"}`, prioritaire sur `--blacklistedRange`)                                                                                                |
+| `blacklistedRange.4`       | Tableau de chaînes | [Registre d'adresses à usage spécifique IANA IPv4/IPv6][2] | Bloquer l'accès à des plages d'IP IPv4 (ex. : `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                 |
+| `blacklistedRange.6`       | Tableau de chaînes | [Registre d'adresses à usage spécifique IANA IPv4/IPv6][2] | Bloquer l'accès à des plages d'IP IPv6 (ex. : `--blacklistedRange.6="::1/128"`)                                                                 |
+| `site`                   | Chaîne           | `datadoghq.com`                                      | Site Datadog (`datadoghq.com` ou `datadoghq.eu`)                                                                                                                    |
+| `proxy`                  | Chaîne           | `none`                                               | URL de proxy                                                                                                                                                           |
+| `proxyIgnoreSSLErrors`                  | Booléen           | `none`                                               | Ignorer les erreurs SSL lors de l'utilisation d'un proxy.                                                                                                                                                           |
 | `logFormat`              | Chaîne           | `pretty`                                             | Formate la sortie de log [valeurs possibles : `"pretty"` ou `"json"`]. Le format de log `json` vous permet d'analyser automatiquement ces logs lors de leur collecte par Datadog. |
 | `concurrency`            | Nombre entier          | `10`                                                 | Nombre maximum de tests exécutés simultanément.                                                                                                                       |
 | `maxTimeout`             | Nombre entier          | `60000`                                              | Durée maximum d'exécution d'un test, en millisecondes.                                                                                                                   |
 | `maxBodySize`            | Nombre entier          | `5e+6`                                               | Taille maximale du corps HTTP pour le téléchargement, en octets.                                                                                                                      |
 | `maxBodySizeIfProcessed` | Nombre entier          | `5e+6`                                               | Taille maximale du corps HTTP maximum pour les assertions, en octets.                                                                                                                |
 | `regexTimeout`           | Nombre entier          | `500`                                                | Durée maximale d'exécution de l'expression régulière, en millisecondes.                                                                                                              |
-
 
 **Remarque** : pour afficher ces options ainsi que d'autres paramètres supplémentaires, exécutez la commande help pour le worker Datadog `docker run --rm datadog/synthetics-private-location-worker --help`.
 
@@ -105,7 +107,11 @@ Si le trafic doit passer par un proxy, vous devez définir l'option `proxy` sur 
 
 Par défaut, les workers Datadog utilisent `8.8.8.8` pour la résolution de DNS. En cas d'échec, ils effectuent une deuxième tentative de communication avec `1.1.1.1`.
 
-Si vous testez une URL interne et devez utiliser un serveur DNS interne, vous pouvez définir l'option `dnsServer` sur une adresse IP DNS spécifique. Vous pouvez également tirer parti du paramètre `dnsUseHost` afin que votre worker utilise votre configuration DNS locale à partir du fichier `etc/resolv.conf`.
+Si vous testez une URL interne et que vous souhaitez utiliser un serveur DNS interne, vous pouvez définir l'option `dnsServer` sur une adresse IP DNS spécifique. Vous pouvez également utiliser le paramètre `dnsUseHost` afin que votre worker récupère votre configuration DNS locale à partir du fichier `etc/resolv.conf`.
+
+### Autoriser des adresses IPv4 à usage spécifique
+
+Si vous utilisez des emplacements privés pour surveiller des endpoints internes, il se peut que certains de vos serveurs utilisent des plages [IPv4 à usage spécifique][2]. Ces IP sont bloquées par défaut : si votre emplacement privé doit exécuter un test via l'une d'entre elles, vous devez donc d'abord l'autoriser à l'aide du paramètre `whitelistedRange`.
 
 ## Sécurité
 
@@ -117,6 +123,7 @@ Les configurations de test sont chiffrées asymétriquement. La clé privée est
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/synthetics/api_tests
 [2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
