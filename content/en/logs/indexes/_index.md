@@ -41,7 +41,7 @@ To configure an exclusion filter:
 1. Define the name of your filter.
 2. Define the query for logs to exclude from your index.
     **Note**: It is possible to use any attribute or tag in the index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar.
-3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-exclusion-filter).
+3. Define the sampling rate. Optionally, define the [attribute or tag to sample on](#attribute-based-exclusion-filter).
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
@@ -80,7 +80,7 @@ Update or remove this quota at any time when editing the Index:
 
 ### Attribute based exclusion filter
 
-In addition to the default sampling on the raw log (exclusion percentage set on `all logs`), you can choose to sample on a specific attribute holding an ID, like `UserID`, `SessionID`, `RequestID`.
+You can sample on a specific attribute or tag holding an ID, such as User, Session, Request or Container Identifiers, in addition to the default log-based sampling (applied when the exclusion percentage is set on `all logs`).
 
 For example, exclude 99% of `http.request_id` logs for `source:nginx`:
 
@@ -88,11 +88,9 @@ For example, exclude 99% of `http.request_id` logs for `source:nginx`:
 
 **Note**: 
 
-* for a non faceted attribute, you need to prefix it with the `@` character.
+* for user-defined and [standard attributes][10], you need to prefix the attribute name with the `@` character.
 
-* for low cardinality attributes, we suggest to define an exclusion query and sample on all matching logs.
-
-  For example to exclude 99% of successful Nginx HTTP requests, define the exclusion query `source:nginx @http.status_code:200` on 99% of `all logs`.
+* for low cardinality attributes, we suggest to define a set of distinct Index Exclusion Filters on `all logs`.
 
 #### Sample all logs of a trace
 
@@ -125,4 +123,5 @@ Multiple indexes also provide the ability to define access rules on the data con
 [7]: https://docs.datadoghq.com/logs/archives/
 [8]: https://docs.datadoghq.com/logs/logs_to_metrics/
 [9]: /account_management/rbac
-[10]: /logs/processing/processors/?tab=ui#trace-remapper
+[10]: /logs/processing/attributes_naming_convention/#default-standard-attribute-list
+[11]: /logs/processing/processors/?tab=ui#trace-remapper
