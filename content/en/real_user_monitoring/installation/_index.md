@@ -77,6 +77,8 @@ Paste the generated code snippet into the head tag (in front of any other script
   window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
+    resourceSampleRate: 100,
+    sampleRate: 100
   });
 </script>
 ```
@@ -93,6 +95,8 @@ Paste the generated code snippet into the head tag (in front of any other script
   window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
+    resourceSampleRate: 100,
+    sampleRate: 100
   });
 </script>
 ```
