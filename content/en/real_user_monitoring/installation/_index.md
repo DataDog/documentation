@@ -27,7 +27,7 @@ To set up Datadog Real User Monitoring solution:
 
 ## NPM Setup
 
-After adding [`@datadog/browser-logs`][4] to your `package.json` file, initialize it with:
+After adding [`@datadog/browser-rum`][4] to your `package.json` file, initialize it with:
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -119,5 +119,5 @@ Paste the generated code snippet into the head tag (in front of any other script
 [1]: https://app.datadoghq.com/rum
 [2]: /real_user_monitoring/data_collected
 [3]: /real_user_monitoring/dashboards
-[4]: https://www.npmjs.com/package/@datadog/browser-logs
+[4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /account_management/api-app-keys/#client-tokens
