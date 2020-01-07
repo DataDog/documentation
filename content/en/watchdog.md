@@ -28,11 +28,11 @@ Watchdog is an algorithmic feature for APM performances and infrastructure metri
   * Latency
 
 * Infrastructure metrics from integrations:
-  * [System][1]: Host-level memory usage (memory leaks), TCP retransmit rate, etc.
+  * [System][1], for the Host-level memory usage (memory leaks), TCP retransmit rate, etc.
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
-  * [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
+  * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
 
 Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
