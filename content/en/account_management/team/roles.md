@@ -14,34 +14,34 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-Datadog provides 3 user roles by default:
+Datadog provides three user roles by default:
 
 | Role          | Description                                                                                                                                                                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Admin**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][1]. They can also promote standard users to administrators.                                           |
 | **Standard**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][1], [monitors][2], [events][3], and [notebooks][4]. Standard users can also invite other users to organizations.                       |
-| **Read Only** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or where a member of one business unit needs to share a [dashboard][5] with someone outside their unit. |
+| **Read Only** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][5] with someone outside their unit. |
 
-## Create a custom Role
+## Create a custom role
 
 <div class="alert alert-warning">
 This feature is in private beta. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
 </div>
 
-To create a custom Role:
+To create a custom role:
 
-1. Go in your [Datadog Roles page][6].
+1. Go to your [Datadog Roles page][6].
 2. Select **New Role** in the upper right corner of the page.
-3. Give a name to your Role.
-4. Select the permission associated with this.
+3. Give a name to your role.
+4. Select the permissions associated with this role.
 
 {{< img src="account_management/team/create_role.png" alt="Create a custom Role" responsive="true" style="width:90%;">}}
 
 Once a role is created you can [add this role to existing users][7].
 
-### List of availables permissions
+### List of available permissions
 
-All permissions have up to 3 options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact over each available permission.
+All permissions have up to three options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact of each available permission.
 
 #### General
 
@@ -68,14 +68,14 @@ All permissions have up to 3 options that can be selected: Read, Write, and Othe
 
 | Permission Name | Read                         | Write             | Other                     |
 |-----------------|------------------------------|-------------------|---------------------------|
-| Dashboards      | Access Dashboards (required) | Update Dashboards | Share Dashboards publicly |
+| Dashboards      | Access dashboards (required) | Update dashboards | Share dashboards publicly |
 
 #### Monitors
 
 | Permission Name   | Read                       | Write                   | Other       |
 |-------------------|----------------------------|-------------------------|-------------|
-| Monitors          | Access Monitors (required) | Update monitor          | *undefined* |
-| Monitors Downtime | *undefined*                | Manage Monitor Downtime | *undefined* |
+| Monitors          | Access monitors (required) | Update monitor          | *undefined* |
+| Monitors Downtime | *undefined*                | Manage monitor downtime | *undefined* |
 
 ## Further Reading
 
