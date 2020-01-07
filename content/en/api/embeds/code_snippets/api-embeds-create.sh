@@ -1,5 +1,5 @@
-api_key="<YOUR_API_KEY>"
-app_key="<YOUR_APP_KEY>"
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -X POST \
 -H "DD-API-KEY: ${api_key}" \
@@ -9,4 +9,3 @@ curl -X POST \
 -d "size=medium" \
 -d "legend=yes" \
 "https://api.datadoghq.com/api/v1/graph/embed"
-
