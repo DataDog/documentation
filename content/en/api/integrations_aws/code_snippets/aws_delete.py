@@ -1,2 +1,13 @@
-# This is not yet supported by the Python Client for Datadog API
-# Consult the curl example
+from datadog import initialize, api
+
+options = {
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
+}
+
+initialize(**options)
+
+account_id = "<AWS_ACCOUNT_ID>"
+role_name = "<AWS_ROLE_NAME>"
+
+api.AwsIntegration.delete(account_id=account_id, role_name=role_name)

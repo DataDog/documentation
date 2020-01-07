@@ -18,12 +18,12 @@ further_reading:
 イベントモニターを使用すると、クエリと一致するイベントが発生したときにアラートを生成できます。
 
 1. 監視するクエリとパラメーター (ステータス、優先度、ソース、タグ) を選択します。
-    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection"  style="width:80%;">}}
 2. アラートグループを選択します。
-    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping"  style="width:80%;">}}
 
 3. **アラート生成条件**を選択します。**しきい値**および**タイムフレーム**オプションを使用すると、タイムフレーム内にイベントが何回発生したらモニターをトリガーするかを設定できます。
-    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions"  style="width:80%;">}}
 
     **注**: 一部のプロバイダーでは、イベントが**ポスト**されてから実際に発生するまでにかなりの遅延が生じます。このような場合、Datadog はイベントを発生時刻にさかのぼって記録しますが、それがモニターに異常な評価動作を引き起こす可能性があります。このような動作が見られた場合は、[Datadog のサポートチーム][1]までお問い合わせください。
 4. **通知オプション**を構成します。
@@ -35,7 +35,7 @@ further_reading:
 
 `My Example Event #example-tag`
 
-{{< img src="monitors/monitor_types/event/define_event.png" alt="define_event" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/define_event.png" alt="define_event"  style="width:80%;">}}
 
 ## 通知でのイベントテンプレート変数の使用
 
@@ -49,15 +49,15 @@ further_reading:
 | `{{event.host.name}}`    | イベントを生成したホスト名                                        |
 | `{{event.tags.tagname}}` | イベントにアタッチされるタグ。`tagname` をタグの名前に置き換えてください。 |
 
-{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:60%;">}}
+{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template"  style="width:60%;">}}
 
 `event.tags` と `event.tags.tagname` を使用すると、タグの値をマークダウン形式で取得できます。たとえば、以下のとおりです。
 
-{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
+{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening"  style="width:60%;">}}
 
 アラートがトリガーされたときに、タグと一致するイベントが Datadog 内で見つかると、それがすべてメッセージに表示されます。
 
-{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:60%;">}}
+{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event"  style="width:60%;">}}
 
 ## その他の参考資料 
 {{< partial name="whats-next/whats-next.html" >}}

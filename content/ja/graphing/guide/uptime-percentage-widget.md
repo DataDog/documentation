@@ -45,13 +45,13 @@ instances:
 
 [メトリクスエクスプローラー][7]を使用して、このメトリクスが Datadog に報告されていることを確認します。次の例では、`amazon.com` が、設定されている 3 秒のタイムアウト内に 200s または 300s の HTTP 応答を返しています。
 
-{{< img src="graphing/guide/upw_metrics_explorer.png" alt="Metrics Explorer" responsive="true">}}
+{{< img src="graphing/guide/upw_metrics_explorer.png" alt="Metrics Explorer" >}}
 
 ## グラフ
 
 次に、[クエリ値ウィジェット][2]内に、この URL の `network.http.can_connect` を表示します。以下に例を示します。
 
-{{< img src="graphing/guide/upw_qvw01.png" alt="Query Value Widget" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw01.png" alt="Query Value Widget" >}}
 
 アップタイム率を表示するには、クエリ値ウィジェットの設定を次のように変更します。
 
@@ -61,13 +61,13 @@ instances:
 4. Autoscale オプションの選択を解除します。これで、浮動小数点数が常に小数点以下 2 桁でウィジェットに表示されます。
 5. **Use Custom units** を選択します。表示されるテキストボックスに `%` を追加します。
 
-{{< img src="graphing/guide/upw_qvw02.png" alt="Query Value Widget" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw02.png" alt="Query Value Widget" >}}
 
 ### 条件付き書式
 
 オプションで、**Conditional Format** セクションを使用して条件付き書式を追加できます。下の例では、99.99% 未満の値が赤で表示されます。
 
-{{< img src="graphing/guide/upw_qvw03.png" alt="Query Value Widget" responsive="true">}}
+{{< img src="graphing/guide/upw_qvw03.png" alt="Query Value Widget" >}}
 
 ### JSON 例
 
@@ -118,7 +118,7 @@ instances:
 [2]: /ja/graphing/widgets/query_value
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: /ja/agent/guide/agent-configuration-files
-[5]: /ja/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[5]: /ja/agent/guide/agent-commands/#restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: /ja/monitors/monitor_types/metric

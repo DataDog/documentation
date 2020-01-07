@@ -18,7 +18,7 @@ public_title: Datadog-ExpressJS インテグレーション
 short_description: 全体的な応答時間と応答コード別のリクエスト率を監視
 version: '1.0'
 ---
-{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph" responsive="true" popup="true">}}
+{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph"  >}}
 
 ## 概要
 

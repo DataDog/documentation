@@ -20,7 +20,7 @@ htop、ctop、kubectl などの基盤ツールを手本として、ライブコ�
 
 ライブコンテナビューは、[Docker][2]、[Kubernetes][3]、[ECS][4] などのコンテナ技術のインテグレーションと連動し、動的コンポーネントのタグ付けも組み込まれて、コンテナの健全性、リソース消費、ログ、デプロイなどの詳細な全体像をリアルタイムに提供します。
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries"  >}}
 
 ## インストール
 [Docker Agent][5] をデプロイしたら、追加設定なしでコンテナメトリクスを利用できます。ログ収集を有効にするには、以下の手順に従います。
@@ -45,7 +45,7 @@ config_providers:
 
 
 [1]: /ja/agent/docker/log/?tab=hostinstallation
-[2]: /ja/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -106,13 +106,13 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 
 **注**: ストリーミングログは永続化されません。新しい検索を入力するか、ページをリフレッシュすると、ストリームはクリアされます。
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true"  >}}
 
 ### インデックス化されたログ
 
 対応するタイムフレームを選択することで、インデックス化して永続化するように選択したログを表示できます。インデックス化を使用すると、タグやファセットを使用してログをフィルタリングできます。たとえば、`Error` 状態のログを検索するには、検索ボックスに `status:error` と入力します。オートコンプリートによって目的のタグが見つけやすくなります。ログの重要な属性が既にタグに保存されているため、必要に応じて検索、フィルタリング、集計を行うことができます。
 
-{{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel"  style="width:100%;">}}
 
 ## 検索、フィルタリング、ピボット
 
@@ -160,15 +160,15 @@ Kubernetes コンテナは以下でタグ付けされます。
 
 下のスクリーンショットは、あるシステムがフィルタリングによって 9 つのノードからなる 1 つの Kubernetes クラスターに絞り込まれたところを示しています。コンテナの RSS および CPU 使用率をレポートする際に、コンテナに制限がプロビジョニングされている場合は、制限との比較が示されます。ここでは、このクラスターのコンテナがオーバープロビジョニングになっていることは明らかです。制限とビンパッキングを厳しくすれば、リソースの使用率を改善できます。
 
-{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned"  style="width:80%;">}}
 
 コンテナ環境は動的であり、追跡が困難な場合があります。下のスクリーンショットは、`kube_service` と `host` によってピボットされたビューです。システムノイズを減らすために、`kube_namespace:default` に絞り込まれています。どのサービスがどこで実行されているか、キーメトリクスの飽和状態などがわかります。
 
-{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services"  style="width:80%;">}}
 
 ECS の `ecs_task_name` や `ecs_task_version` でピボットすると、更新時のリソース使用率の変化を把握できます。
 
-{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version"  style="width:80%;">}}
 
 ## 散布図
 
@@ -176,7 +176,7 @@ ECS の `ecs_task_name` や `ecs_task_version` でピボットすると、更新
 
 [Containers ページ][1]で散布図分析にアクセスするには、Show Summary graph ボタンをクリックし、"Scatter Plot" タブを選択します。
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
 
 デフォルトでは、グラフは `short_image` タグキーでグループ化されます。ドットのサイズは、各グループ内のコンテナの数を表します。ドットをクリックすると、グループに参加しているすべてのコンテナとホストが表示されます。
 
@@ -186,7 +186,7 @@ ECS の `ecs_task_name` や `ecs_task_version` でピボットすると、更新
 * 2 つのメトリクスの集計方法の選択。
 * X 軸と Y 軸の目盛の選択 (Linear/Log)。
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot"  style="width:80%;">}}
 
 
 ## リアルタイムの監視

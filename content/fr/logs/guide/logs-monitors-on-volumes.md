@@ -10,7 +10,7 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
-Recevez une notification dès que les volumes de votre infrastructure grandissent de manière imprévue, peu importe leur contexte (`service`, `availibility-zone`, etc.) :
+Recevez une notification dès que les volumes de votre infrastructure grandissent de manière imprévue, peu importe leur contexte (`service`, `availability-zone`, etc.) :
 
 1. Accédez à la vue [Log Explorer de Datadog][1]
 2. Créez une [requête de recherche][2] qui correspond au volume à surveiller.
@@ -18,7 +18,7 @@ Recevez une notification dès que les volumes de votre infrastructure grandissen
 4. Déterminez le taux de votre choix pour un *warning* ou une *error*.
 5. Indiquez une notification explicite : `Le volume de ce service vient d'atteindre un niveau trop élevé. Définissez un filtre d'exclusion supplémentaire ou augmentez le taux d'échantillonnage pour revenir à des valeurs normales.`
 
-{{< img src="logs/guide/example_notification.png" alt=" exemple de notification" responsive="true" style="width:70%;">}}
+{{< img src="logs/guide/example_notification.png" alt=" exemple de notification"  style="width:70%;">}}
 
 ## Pour aller plus loin
 

@@ -21,7 +21,7 @@ further_reading:
 ---
 Les index se trouvent sur la [page Configuration][1], dans la section Indexes. Cliquez deux fois sur les index ou sur le bouton *edit* pour obtenir plus d'informations concernant le nombre de logs indexés au cours des trois derniers jours, ainsi que la période de rétention de ces logs :
 
-{{< img src="logs/indexes/index_details.png" alt="détails des index" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_details.png" alt="détails des index"  style="width:70%;">}}
 
 Vous pouvez utiliser des logs indexés pour la [recherche à facettes][2], l'[analyse de logs][3], la [création de dashboards][4] et la [surveillance][5].
 
@@ -34,7 +34,7 @@ Les filtres d'index vous permettent de contrôler de façon dynamique le contenu
 
 Pour définir un nouveau filtre d'index, cliquez sur le bouton d'ajout :**
 
-{{< img src="logs/indexes/index_filters.png" alt="filtres d'index" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_filters.png" alt="filtres d'index"  style="width:70%;">}}
 
 Pour configurer un filtre d'exclusion :
 
@@ -44,7 +44,7 @@ Pour configurer un filtre d'exclusion :
 3. Définissez le taux d'échantillonnage.
 4. Enregistrez le filtre.
 
-    {{< img src="logs/indexes/index_filter_details.png" alt="détails du filtre d'index" responsive="true" style="width:80%;">}}
+    {{< img src="logs/indexes/index_filter_details.png" alt="détails du filtre d'index"  style="width:80%;">}}
 
 ### Réorganiser les filtres
 
@@ -54,7 +54,7 @@ Réorganisez votre pipeline pour vous assurer que les filtres d'exclusion approp
 
 Pour réorganiser votre filtre d'exclusion, faites-le glisser et déposez-le dans l'ordre de votre choix.
 
-{{< img src="logs/indexes/reorder_index_filters.png" alt="réorganiser les filtres d'index" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/reorder_index_filters.png" alt="réorganiser les filtres d'index"  style="width:80%;">}}
 
 ### Activer/désactiver des filtres
 
@@ -65,7 +65,7 @@ Au lieu de modifier le niveau de journalisation de votre application ou d'utilis
 
 Vous pouvez les activer ou les désactiver en un seul clic depuis la page Pipelines :
 
-{{< img src="logs/indexes/enable_index_filters.png" alt="activer les filtres d'index" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/enable_index_filters.png" alt="activer les filtres d'index"  style="width:80%;">}}
 
 ### Définir un quota journalier
 
@@ -74,7 +74,7 @@ Une fois ce quota atteint, les logs ne sont plus indexés. Ils restent toutefois
 
 Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
 
-{{< img src="logs/indexes/index_quota.png" alt="détails de l'index" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_quota.png" alt="détails de l'index"  style="width:70%;">}}
 
 **Remarque** : le quota journalier d'un index est automatiquement réinitialisé à 14 h 00 UTC (16 h 00 CET, 10 h 00 EDT, 7 h 00 PDT).
 
@@ -85,7 +85,7 @@ Les logs entrent dans le premier index qui correspond à leur filtre. Il est don
 
 Par exemple, si vous créez un premier index filtré sur l'attribut `status:notice`, un deuxième index filtré sur l'attribut `status:error` et un dernier index sans filtre (l'équivalent de `*`), tous vos logs de notifications seront envoyés vers le premier index, tous vos logs d'erreur iront dans le deuxième index et tout le reste ira dans le dernier.
 
-{{< img src="logs/indexes/multi_index.png" alt="Index multiples" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/multi_index.png" alt="Index multiples"  style="width:70%;">}}
 
 L'utilisation d'index multiples vous permet également de définir des règles d'accès pour les données contenues dans chaque index. [Vous trouverez plus d'informations dans la documentation relative au contrôle d'accès à base de rôles][6].
 

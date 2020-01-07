@@ -16,7 +16,7 @@ public_title: Datadog-Flowdock インテグレーション
 short_description: Datadog のアラートとグラフをチームのフローに送信
 version: '1.0'
 ---
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" responsive="true" popup="true">}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview"  >}}
 
 ## 概要 
 

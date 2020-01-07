@@ -18,7 +18,7 @@ short_description: Envoyez des commits et pull requests depuis votre serveur Git
 version: '1.0'
 ---
 
-{{< img src="integrations/git/git_event.png" alt="Événement Git" responsive="true" popup="true">}}
+{{< img src="integrations/git/git_event.png" alt="Événement Git"  >}}
 
 ## Présentation
 

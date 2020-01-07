@@ -22,7 +22,7 @@ further_reading:
 
 Datadog Synthetics vous offre encore plus de visibilité sur la plateforme Datadog. En surveillant vos applications et les endpoints de l'API grâce à des simulations de requêtes utilisateur et au rendu de votre navigateur, Synthetics vous aide à garantir la disponibilité, à identifier les problèmes par région et à suivre les performances de l'application. En associant Synthetics à vos métriques, vos traces et vos logs, Datadog vous permet d'observer le fonctionnement de tous vos systèmes du point de vue de vos utilisateurs.
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Page d'accueil de Synthetics" responsive="true">}}
+{{< img src="synthetics/synthetics_home_page.png" alt="Page d'accueil de Synthetics" >}}
 
 ## Recherche
 
@@ -56,7 +56,7 @@ Enfin, les caractères suivants sont réservés : `-`, `(`, `)`, `"`, `~`, `*`,
 
 Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [test API][2] ou un [test Browser][3]. Si un test échoue, l'endpoint n'est pas testé une seconde fois : l'uptime considère directement que l'endpoint est `down`.
 
-{{< img src="synthetics/create_a_check.png" alt="Créer un check" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/create_a_check.png" alt="Créer un check"  style="width:80%;">}}
 
 ## Métriques
 

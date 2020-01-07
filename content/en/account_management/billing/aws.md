@@ -1,6 +1,6 @@
 ---
 title: AWS integration billing
-kind: faq
+kind: documentation
 aliases:
 - /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
 ---
@@ -15,7 +15,7 @@ Other AWS resources (ELB, EBS, RDS, Dynamo, etc.) are not part of monthly billin
 
 Use the [Datadog-AWS integration tile][1] to control your metric collection. Go to the **Configuration** tab and select an account or add a new one. Each account is controlled under **Optionally limit metrics collection**. Limit metrics by [host tag][2] or per namespace:
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
+{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
 
 **Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
 
@@ -24,12 +24,13 @@ When adding limits to existing AWS accounts within the integration tile, the pre
 Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to EC2 instances without a running Agent.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /tagging/using_tags/#integrations
-[3]: /graphing/infrastructure
+[3]: /infrastructure
 [4]: /help
 [5]: mailto:success@datadoghq.com

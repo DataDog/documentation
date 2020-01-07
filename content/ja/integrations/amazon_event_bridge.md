@@ -25,7 +25,7 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 * AWS 内で、Kinesis、Lambda などのサービスを使用してイベントバスにトリガーをセットアップします。
 * アラートイベント内の情報を使用して、自動修復パイプラインやランブックの実行、分析クエリの実行などを行います。
 
-{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" responsive="true">}}
+{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" >}}
 
 ## セットアップ
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。

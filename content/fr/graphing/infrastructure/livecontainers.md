@@ -20,7 +20,7 @@ Inspirés d'outils Bedrock comme *htop*, *ctop* et *kubectl*, les live container
 
 Associée à des intégrations pour [Docker][2], [Kubernetes][3], [ECS][4] ou d'autres technologies de conteneur, ainsi qu'à la fonction intégrée d'ajout de tags à des composants dynamiques, la vue des live containers fournit une présentation détaillée de la santé de vos conteneurs, de leur consommation en ressources, de leurs logs et de leur déploiement en temps réel :
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers avec résumés" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers avec résumés"  >}}
 
 ## Installation
 Après avoir déployé l'[Agent Docker][5], vous pouvez accéder aux métriques de conteneur sans avoir à effectuer la moindre configuration supplémentaire. Pour activer la collecte de logs, suivez les étapes ci-dessous :
@@ -28,7 +28,7 @@ Après avoir déployé l'[Agent Docker][5], vous pouvez accéder aux métriques 
 {{< tabs >}}
 
 {{% tab "Linux/Windows" %}}
-Une fois l'[Agent Datadog][1] installé, activez la collecte de logs en modifiant le [principal fichier de configuration de l'Agent][2]. Changez les paramètres suivants :
+Une fois l'[Agent Datadog][1] installé, activez la collecte de logs en modifiant le [fichier de configuration principal de l'Agent][2]. Changez les paramètres suivants :
 
 ```
 logs_enabled: true
@@ -45,7 +45,7 @@ config_providers:
 
 
 [1]: /fr/agent/docker/log/?tab=hostinstallation
-[2]: /fr/agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -106,13 +106,13 @@ Vous pouvez effectuer des recherches sur le contenu des logs de diffusion à l'a
 
 **Remarque** : les logs de diffusion ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, cela efface le contenu de la diffusion.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true"  >}}
 
 ### Logs indexés
 
 Choisissez un intervalle pour afficher les logs correspondants que vous avez choisis d'indexer et de rendre persistants. L'indexation vous permet de filtrer vos logs à l'aide de tags et de facettes. Par exemple, pour rechercher des logs affichant le statut `Error`, saisissez `status:error` dans la zone de recherche. La fonction de saisie automatique peut vous aider à trouver le tag que vous souhaitez utiliser. Les attributs clés de vos logs sont déjà stockés dans des tags, ce qui vous permet de les rechercher, filtrer et agréger en cas de besoin.
 
-{{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Aperçu logs volet latéral" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Aperçu logs volet latéral"  style="width:100%;">}}
 
 ## Recherche, filtrage et pivotement
 
@@ -160,15 +160,15 @@ Les conteneurs Kubernetes possèdent les tags suivants :
 
 La capture d'écran ci-dessous illustre un système filtré de façon à obtenir un cluster Kubernetes composé de neuf nœuds. L'utilisation RSS et du processeur des conteneurs est transmise et comparée aux limites définies pour les conteneurs (le cas échéant). Dans cet exemple, il semblerait que les conteneurs de ce cluster soient en sur-approvisionnement. Vous pouvez définir des limites plus strictes et rassembler les ressources pour optimiser leur utilisation.
 
-{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Sur-approvisionnement" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Sur-approvisionnement"  style="width:80%;">}}
 
 Les environnements de conteneur sont dynamiques et peuvent être difficiles à surveiller. La capture d'écran ci-dessous comporte une vue qui a été pivotée par `kube_service` et `host`, et filtrée par `kube_namespace:default` dans le but de réduire les parasites système. Vous pouvez voir où les services s'exécutent, ainsi que le degré de saturation des métriques clés : 
 
-{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="host x services" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="host x services"  style="width:80%;">}}
 
 Pour bien comprendre les changements d'utilisation des ressources entre chaque mise à jour, vous pouvez effectuer un pivotement avec les paramètres `ecs_task_name` et `ecs_task_version` d'ECS.
 
-{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version"  style="width:80%;">}}
 
 ## Nuages de points
 
@@ -176,7 +176,7 @@ Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles,
 
 Pour accéder à l'analyse de nuage de points [dans la page Containers][1], cliquez sur le bouton *Show Summary graph*, puis sélectionnez l'onglet « Scatter Plot » :
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="sélection nuage de points" responsive="true" style="width:60%;">}}
+{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="sélection nuage de points"  style="width:60%;">}}
 
 Par défaut, le graphique effectue un regroupement à partir de la clé de tag `short_image`. La taille de chaque point dépend du nombre de conteneurs du groupe. Lorsque vous cliquez sur un point, cela affiche chaque conteneur et host qui contribue au groupe.
 
@@ -186,7 +186,7 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 * Choisissez la méthode d'agrégation des deux métriques.
 * Choisissez l'échelle pour l'axe des X et des Y (*Linear* ou *Log*).
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="nuage de points" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="nuage de points"  style="width:80%;">}}
 
 
 ## Surveillance en temps réel
@@ -199,8 +199,8 @@ Lorsque vous utilisez activement la page des conteneurs, les métriques sont rec
 
 Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
-- Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le principal fichier de configuration `datadog.yaml`.
-- Pour inclure des conteneurs, transmettez la variable d'environnement `DD_AC_INCLUDE` ou ajoutez `ac_include:` dans le principal fichier de configuration `datadog.yaml`.
+- Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
+- Pour inclure des conteneurs, transmettez la variable d'environnement `DD_AC_INCLUDE` ou ajoutez `ac_include:` dans le fichier de configuration principal `datadog.yaml`.
 
 Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
 
@@ -211,7 +211,7 @@ ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
 
-**Remarque** : pour la version 5 de l'Agent, au lieu d'inclure les lignes ci-dessus dans votre principal fichier de configuration `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouve à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
+**Remarque** : pour la version 5 de l'Agent, au lieu d'ajouter les lignes ci-dessus dans le fichier de configuration principal `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouvent à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
 
 ## Remarques et problèmes connus
 

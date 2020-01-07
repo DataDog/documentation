@@ -56,7 +56,7 @@ aliases:
 
  イベントを集計しないでイベントストリームに表示するには、イベントストリームの右上にある **Aggregate related events** トグルをオフにします。
 
-{{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream" responsive="true" style="width:50%;" >}}
+{{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream"  style="width:50%;" >}}
 
 ## イベント電子メール
 
@@ -77,11 +77,11 @@ aliases:
 
 ソースとなるプレーンテキスト電子メールでは、送信者の電子メールアドレス (必須)、件名 (必須)、本文 (任意) の 3 つのフィールドのみを制御します。
 
-{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
+{{< img src="graphing/events/plain-email.png" alt="plain email"  >}}
 
 #### Datadog イベント
 
-{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" >}}
+{{< img src="graphing/events/plain-event.png" alt="plain event"  >}}
 
 電子メールの件名はイベントのタイトルになり、電子メールの本文はイベントの本文になります。イベントのタイトルと本文の末尾にタグが表示されているように見えますが、実際にはどちらもタグではありません。イベントの下部には電子メールの送信者が表示されるため、これを利用して送信側のアプリケーションを特定することができます。
 
@@ -91,11 +91,11 @@ aliases:
 ソースとなる JSON 形式の電子メールでは、送信者の電子メールアドレスと最大 9 個の JSON キーの合計 10 個のフィールドを制御できます。9 個のキーとは、タイトル、テキスト、優先度、タグ、警告タイプ、発生日、ホスト、集計キー、およびソースタイプ名です。
 **メモ: JSON が正しい形式でなかったり、電子メールに件名を付けて送信したりすると、イベントはイベントストリームに表示されません。**
 
-{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" >}}
+{{< img src="graphing/events/json-email.png" alt="json email"  >}}
 
 #### Datadog イベント
 
-{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" >}}
+{{< img src="graphing/events/json-event.png" alt="json event"  >}}
 
 JSON 形式の電子メールでは、電子メール本文内の JSON に含まれるタイトルが使用されるため、電子メールメッセージの件名は意味を持ちません。イベントに表示されるデータはすべて、電子メール本文内の JSON で定義されます。この JSON が正しい形式でなければ、メッセージは無視されます。つまり、カンマ区切りのキー/値ペアとして正しいだけでなく、純粋に JSON として正しくなければなりません。
 標準的な電子メールクライアントで電子メールをテストすると、一般ユーザー向けとして本文が HTML に変換されることがあります。この場合は、JSON が JSON でなくなってしまい、電子メールは Datadog に無視されます。
@@ -106,7 +106,7 @@ JSON 形式の電子メールでは、電子メール本文内の JSON に含ま
 
 電子メールを設定するには、まず [https://app.datadoghq.com][4] で Datadog アカウントにログインします。**Integrations** メニューから **APIs** を選択し、**Events API Emails** まで下へスクロールします。このセクションには、アプリケーションで使用できるすべての電子メールとその作成者が表示されます。Format: ドロップダウンからメッセージの形式を選択し、**Create API Email** をクリックします。
 
-{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API"  >}}
 
 
 ## マークダウンイベント

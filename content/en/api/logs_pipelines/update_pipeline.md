@@ -1,14 +1,13 @@
 ---
 title: Update a Pipeline
 type: apicontent
-order: 24.6
+order: 25.6
 external_redirect: /api/#update-a-pipelines
 ---
 
 ## Update a Pipeline
 
 Update a given pipeline configuration to change it's processors or their order.
-
 
 **ARGUMENTS**:
 

@@ -19,24 +19,51 @@ further_reading:
 
 On the [Synthetics settings page][1], you can adjust the following settings:
 
-- [Secure Credentials](#secure-credentials)
+- [Global Variables](#global-variables)
 - [Private Locations][2]
-- [Variables][3]
 - [Default settings](#default-settings)
     - [Default Locations](#default-locations)
     - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
-## Secure Credentials
+## Global Variables
 
-Secure credentials are a secure username / password pair that can be used as [variables][3] for browser tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new secure credential:
+Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+Choose the type of variable you want to create:
 
-1. Click *New Secure Credential* in the upper right corner of the settings page.
-2. Enter a **Credential Name**.
-3. Enter the given  `Username`/`Password`.
-4. Select **tags** to associate to your Credential.
-5. Optional - Enter a Description for your Credential.
+{{< tabs >}}
+{{% tab "Specify Value" %}}
 
-{{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+2. Enter the given **Value**.
+3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional: select **Tags** to associate to your variable.
+5. Optional: enter a **Description** for your variable.
+
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value"  style="width:80%;">}}
+
+{{% /tab %}}
+
+{{% tab "Create From HTTP Test" %}}
+
+<div class="alert alert-warning">
+This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
+</div>
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+2. Pick the test you want to extract your variable from.
+3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+4. Optional: select **Tags** to associate to your variable.
+5. Optional: enter a **Description** for your variable.
+6. Decide whether to extract your variable from the response headers, or from the response body.
+    * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
+    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
+
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Default Settings
 
@@ -46,7 +73,7 @@ Choose the default locations for your browser and API tests details. Options inc
 
 ### APM integration for Browser Tests
 
-Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section. 
+Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
 
 Use `*` to whitelist wider domain names. For example, adding `https://*.datadoghq.com/*` whitelists everything on `https://datadoghq.com/`.
 
@@ -57,4 +84,5 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
-[3]: /synthetics/browser_tests/#variable
+[3]: /synthetics/api_tests#use-global-variables
+[4]: /synthetics/browser_tests#use-global-variables

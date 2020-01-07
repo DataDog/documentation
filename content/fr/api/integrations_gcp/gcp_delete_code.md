@@ -1,7 +1,7 @@
 ---
 title: Supprimer une intégration GCP
 type: apicode
-order: 17.3
+order: 18.3
 external_redirect: "/api/#supprimer-une-integration-gcp"
 ---
 

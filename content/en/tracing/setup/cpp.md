@@ -17,7 +17,6 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-
 **Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2].
 
 ## Getting Started
@@ -175,8 +174,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 ### Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
-
-
 
 ## Further Reading
 

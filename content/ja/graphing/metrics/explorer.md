@@ -14,11 +14,11 @@ Datadog がアプリケーションから収集した[メトリクス][2]を調�
 
 "Graph" テキストボックス内をクリックすると、Datadog がアプリケーションから収集したすべてのメトリクスがリストされます。テキストボックスに入力して、リスト内を検索することもできます。メトリクスを選択すると、メトリクスが右側にリアルタイムのグラフとして表示されます。デフォルトでは、最大 20 個のグラフを表示できます。この個数は、"Options" の歯車アイコンをクリックして変更できます。
 
-{{< img src="graphing/metrics/explorer/explorer.png" alt="Metrics Explorer" responsive="true" style="width:60%;" >}}
+{{< img src="graphing/metrics/explorer/explorer.png" alt="Metrics Explorer"  style="width:60%;" >}}
 
 "Over" では、結果をタグで絞り込むことができます。"One graph per" では、メトリクスをホスト、コンテナ、リージョン、チームなどで複数のグラフに分割するかどうかを選択できます。
 
-{{< img src="graphing/metrics/explorer/split-by-team.png" alt="Split By Team" responsive="true" style="width:60%;">}}
+{{< img src="graphing/metrics/explorer/split-by-team.png" alt="Split By Team"  style="width:60%;">}}
 
 グラフを新規および既存のタイムボードにエクスポートすることもできます。
 

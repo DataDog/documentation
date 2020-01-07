@@ -5,6 +5,7 @@ order: 12.1
 external_redirect: '/api/#envoyer-un-evenement'
 ---
 ## Envoyer un événement
+
 Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, définissez leur priorité et regroupez-les avec d'autres événements.
 
 **ARGUMENTS**:
@@ -39,5 +40,5 @@ Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, d�
   La liste des noms d'appareils avec lesquels publier l'événement.
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /fr/graphing/event_stream/#markdown-events
+[2]: /fr/developers/events/email#markdown
 [3]: /fr/integrations/faq/list-of-api-source-attribute-value

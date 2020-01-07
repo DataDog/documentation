@@ -19,7 +19,7 @@ further_reading:
 To enable the Agent full debug mode:
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 1. Modify your local `datadog.yaml` file. See [Agent main configuration file][1] for OS specific details.
 
@@ -29,9 +29,9 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /agent/guide/agent-log-files/?tab=agentv6
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/guide/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -52,7 +52,7 @@ To enable the Agent full debug mode:
 ## Containerized Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 **Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 
@@ -64,13 +64,13 @@ If your container is already running:
 
 2. Then stop the Agent:
 
-    ```
+    ```shell
     s6-svc -d /var/run/s6/services/agent/
     ```
 
 3. Restart then the Agent with debug log level by running:
 
-    ```
+    ```text
     DD_LOG_LEVEL=debug agent start
     ```
 
@@ -79,13 +79,13 @@ If your container is already running:
 
 When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
 
-```
+```text
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
 The following commands enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
 
-```
+```shell
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 sleep 60
@@ -94,7 +94,7 @@ sleep 60
 
 Debug logs can be disabled with:
 
-```
+```shell
 sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```

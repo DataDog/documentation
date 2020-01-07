@@ -35,9 +35,9 @@ Vous pouvez commencer à explorer vos corrélations de métriques depuis n'impor
 * Si la zone d'intérêt n'est pas sélectionnée automatiquement, ou si elle doit être ajustée, dessinez manuellement la zone d'intérêt via l'option [Edit Search](#modifier).
 * Datadog recherche d'autres métriques affichant un comportement anormal dans la même période que la zone d'intérêt.
 
-{{< img src="graphing/correlations/dashboard_search1.png" alt="Recherche depuis un dashboard" responsive="true" style="width:80%;">}}
+{{< img src="graphing/correlations/dashboard_search1.png" alt="Recherche depuis un dashboard"  style="width:80%;">}}
 
-{{< img src="graphing/correlations/dashboard_search2.png" alt="Recherche depuis un dashboard" responsive="true" style="width:80%;">}}
+{{< img src="graphing/correlations/dashboard_search2.png" alt="Recherche depuis un dashboard"  style="width:80%;">}}
 
 **Remarque** : les recherches de corrélations sont disponibles pour une seule métrique. Pour les graphiques représentant plusieurs métriques, sélectionnez la série qui vous intéresse. Depuis un graphique affiché en plein écran, sélectionnez une série dans la légende du graphique, puis cliquez sur l'onglet **Correlations**.
 
@@ -50,7 +50,7 @@ Vous pouvez personnaliser les paramètres de recherche par défaut en cliquant s
 * Utilisez l'option `Auto-select` ou sélectionnez les catégories de votre choix via l'option `Custom select`. Pour les métriques custom, au moins une catégorie doit être sélectionnée.
 * La seule catégorie qui n'est pas sélectionné par défaut est celle des métriques custom. Choisissez les espaces de nommage de métriques ou les métriques uniques à utiliser pour votre recherche de corrélations.
 
-{{< img src="graphing/correlations/edit_search.png" alt="Edit search" responsive="true" style="width:80%;">}}
+{{< img src="graphing/correlations/edit_search.png" alt="Edit search"  style="width:80%;">}}
 
 ### Résultats
 
@@ -61,7 +61,7 @@ Une liste de résultats s'affiche sous le graphique de recherche, avec les élé
 * **Correlations** : le nombre de métriques corrélées trouvées.
 * **Preview** : un graphique de prévisualisation des métriques corrélées.
 
-{{< img src="graphing/correlations/search_results.png" alt="Résultats de la recherche" responsive="true" style="width:80%;">}}
+{{< img src="graphing/correlations/search_results.png" alt="Résultats de la recherche"  style="width:80%;">}}
 
 Vous pouvez explorer les détails dès le début du chargement des résultats, sans avoir à attendre que celui-ci se termine. Lorsque la recherche est terminée, le message « Search completed! » s'affiche.
 
@@ -74,7 +74,7 @@ Sélectionnez une rangée dans la liste de résultats pour en examiner les déta
 * Cliquez sur le nom d'une source de métrique pour y accéder. Par exemple, le nom d'un dashboard renvoie au dashboard concerné.
 * Utilisez l'icône d'exportation pour exporter le graphique vers un dashboard ou un notebook, ou pour copier la requête.
 
-{{< img src="graphing/correlations/detail_view.png" alt="Vue détaillée" responsive="true" style="width:90%;">}}
+{{< img src="graphing/correlations/detail_view.png" alt="Vue détaillée"  style="width:90%;">}}
 
 ## Pour aller plus loin
 

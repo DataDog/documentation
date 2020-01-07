@@ -37,7 +37,7 @@ Datadog のクライアント側 JavaScript ロギングライブラリ `datadog
 
 クライアントトークンを管理するには、次に示すように、[Datadog API 構成ページ][3]の `Client Tokens` セクションに移動します。
 
-{{< img src="logs/log_collection/client_tokens.png" style="width:80%;" alt="Client tokens" responsive="true" >}}
+{{< img src="logs/log_collection/client_tokens.png" style="width:80%;" alt="Client tokens"  >}}
 
 適用される制限については、[クライアントトークンに関するドキュメント][2]を参照してください。
 

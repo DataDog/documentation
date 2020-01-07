@@ -1,6 +1,6 @@
 ---
 title: Credit card billing
-kind: faq
+kind: documentation
 disable_toc: true
 ---
 
@@ -19,6 +19,7 @@ Update your credit card through the [Plan][1] page by clicking the **Edit** butt
 To remove your credit card from Datadog, first downgrade to the **Free** plan. Then use the **Remove Card** button on the [Plan][1] page.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][3].
 
 For billing questions, contact your [Customer Success][2] Manager.

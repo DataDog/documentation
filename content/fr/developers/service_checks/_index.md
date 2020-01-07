@@ -37,7 +37,7 @@ Les checks de service peuvent être visualisés et utilisés dans 3 sections de
 
 Cliquez sur l'onglet *Monitors* puis sur *Check Summary* pour afficher le [Sommaire des checks][1].
 
-{{< img src="developers/service_checks/check_summary.png" alt="Sommaire des checks" responsive="true" >}}
+{{< img src="developers/service_checks/check_summary.png" alt="Sommaire des checks"  >}}
 
 Cette section affiche la liste de tous les checks de votre infrastructure ainsi que de leurs statuts au cours des dernières 24 heures. Sélectionnez un check pour connaître le nombre de checks distincts relatifs à chaque tag qui lui est associé.
 
@@ -45,11 +45,11 @@ Cette section affiche la liste de tous les checks de votre infrastructure ainsi 
 
 Vous pouvez visualiser vos checks de service en ajoutant un widget *Statut de check* à un screenboard :
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="Widget Statut de check" responsive="true" >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="Widget Statut de check"  >}}
 
 Après avoir cliqué sur l'icône du widget *Check Status*, la fenêtre contextuelle suivante apparaît :
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="Configuration du widget Statut de check" responsive="true" >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="Configuration du widget Statut de check"  >}}
 
 Utilisez ce formulaire pour définir les options suivantes :
 
@@ -63,11 +63,11 @@ Utilisez ce formulaire pour définir les options suivantes :
 Même si vous ne pouvez pas représenter graphiquement un check custom (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller.
 Accédez à l'onglet *Monitor* > *new monitor*, puis sélectionnez la section **custom check** :
 
-{{< img src="developers/service_checks/check_monitor.png" alt="Monitor de checks" responsive="true" >}}
+{{< img src="developers/service_checks/check_monitor.png" alt="Monitor de checks"  >}}
 
 Configurez votre monitor de checks custom : 
 
-{{< img src="developers/service_checks/check_monitor_config.png" alt="Configuration de monitor de checks" responsive="true" >}}
+{{< img src="developers/service_checks/check_monitor_config.png" alt="Configuration de monitor de checks"  >}}
 
 Utilisez ce formulaire pour définir les options suivantes :
 
@@ -79,7 +79,7 @@ Utilisez ce formulaire pour définir les options suivantes :
 
 Les monitors de checks de service associés aux intégrations Datadog par défaut peuvent être définis dans l'onglet *Monitor* > *Integration* > onglet *Integration status* sur la gauche. Par exemple, avec l'intégration HAProxy : 
 
-{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true" responsive="true" >}}
+{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true"  >}}
 
 Pour apprendre à écrire une intégration, consultez la [documentation dédiée au développement d'intégrations][5].
 

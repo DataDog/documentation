@@ -1,7 +1,7 @@
 ---
 title: パイプラインの取得
 type: apicontent
-order: 24.4
+order: 25.4
 external_redirect: "/api/#get-a-pipelines"
 ---
 

@@ -15,11 +15,11 @@ further_reading:
 
 このウィジェットは、最新の報告値を表示することも、タイムウィンドウ全体のすべてのクエリ値から計算された集計値を表示することもできます。この可視化機能は、小さくてもはっきりとしたインフラストラクチャークエリへのウィンドウを提供します。
 
-{{< img src="graphing/widgets/query_value/query_value.png" alt="Query value widget" responsive="true" >}}
+{{< img src="graphing/widgets/query_value/query_value.png" alt="Query value widget"  >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/query_value/query_value_setup.png" alt="Query value widget setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/query_value/query_value_setup.png" alt="Query value widget setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -39,7 +39,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

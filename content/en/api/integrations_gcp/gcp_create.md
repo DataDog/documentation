@@ -1,7 +1,7 @@
 ---
 title: Create a GCP integration
 type: apicontent
-order: 17.2
+order: 18.2
 external_redirect: /api/#create-a-gcp-integration
 ---
 

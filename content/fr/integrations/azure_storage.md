@@ -18,7 +18,7 @@ public_title: Intégration Datadog/Stockage Microsoft Azure
 short_description: Surveillez des métriques clés de Stockage Azure.
 version: '1.0'
 ---
-{{< img src="integrations/azure/storage_dash.png" alt="dashboard stockage" responsive="true" popup="true">}}
+{{< img src="integrations/azure/storage_dash.png" alt="dashboard stockage"  >}}
 
 ## Présentation
 
@@ -33,7 +33,7 @@ Activez cette intégration pour afficher les métriques de capacité et de trans
 2.  Pour chaque compte de stockage que vous souhaitez surveiller, créez les tables de surveillance requises et générez le jeton SAS avec l'interface de ligne de commande de configuration de l'intégration Stockage Azure. **Cliquez [ici][2] pour obtenir des instructions ainsi qu'un script afin d'y parvenir.**
 3.  Collez le nom du compte de stockage ainsi que le jeton SAS généré depuis l'interface de ligne de commande dans le formulaire du [carré Stockage Azure][3].
 
-    {{< img src="integrations/azure/storage_tile.png" alt="carré stockage" responsive="true">}}
+    {{< img src="integrations/azure/storage_tile.png" alt="carré stockage" >}}
 
 4.  Une fois que vous avez effectué cette opération pour chaque compte de stockage à surveiller, cliquez sur Update Configuration.
 

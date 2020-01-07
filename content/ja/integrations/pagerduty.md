@@ -17,7 +17,7 @@ public_title: Datadog-PagerDuty インテグレーション
 short_description: Datadog のメトリクスとイベントから PagerDuty アラートを生成
 version: '1.0'
 ---
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="pagerduty incident trends" responsive="true" popup="true">}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="pagerduty incident trends"  >}}
 
 ## 概要
 
@@ -62,7 +62,7 @@ PagerDuty インテグレーションには、サービスのチェック機能�
 
 モニターメッセージで `@pagerduty-[serviceName]` を使用します。モニターの **Say what's happening** セクションで入力を開始すると、オートコンプリートされます。
 
-{{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="pagerduty faq 1" responsive="true" popup="true">}}
+{{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="pagerduty faq 1"  >}}
 
 ### PagerDuty でアラートの説明が途切れているのはなぜですか
 

@@ -25,4 +25,4 @@ external_redirect: /api/#graph-snapshot
     A title for the graph. If no title is specified, the graph doesn't have a title.
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html
-[2]: /graphing/graphing_json/#grammar
+[2]: /dashboards/graphing_json/#grammar

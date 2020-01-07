@@ -17,7 +17,7 @@ public_title: "Intégration Datadog/Pivotal\_Tracker"
 short_description: Consultez et commentez des articles dans votre flux d'événements Datadog.
 version: '1.0'
 ---
-{{< img src="integrations/pivotal/pivotal_event.png" alt="événement Pivotal" responsive="true" popup="true">}}
+{{< img src="integrations/pivotal/pivotal_event.png" alt="événement Pivotal"  >}}
 
 ## Présentation
 
@@ -31,7 +31,7 @@ Connectez Pivotal Tracker à Datadog pour :
 
 Pour afficher les événements Pivotal dans votre flux, entrez le token d'API généré à partir de votre [page de profil][1] Pivotal.
 
-{{< img src="integrations/pivotal/pivotal_token.png" alt="token Pivotal" responsive="true" popup="true">}}
+{{< img src="integrations/pivotal/pivotal_token.png" alt="token Pivotal"  >}}
 
 ## Données collectées
 ### Métriques

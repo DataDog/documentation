@@ -14,11 +14,11 @@ further_reading:
 ---
 La visualisation Top List vous permet d'afficher une liste de valeurs de tags comme `hostname` ou `service` avec la valeur maximale ou minimale d'une métrique quelconque (par exemple, les plus grands consommateurs de processeur, les hosts disposant de l'espace minimal, etc.) :
 
-{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
+{{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/toplist/toplist_setup.png" alt="Top List"  style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ Choisissez si votre widget doit afficher un intervalle personnalisé ou l'interv
 
 Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
 
-{{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Titre du widget"  style="width:80%;">}}
 
 Définissez sa taille et son alignement si vous le souhaitez.
 

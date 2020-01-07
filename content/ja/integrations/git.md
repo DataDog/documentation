@@ -18,7 +18,7 @@ short_description: セルフホステッド Git サーバーからコミット�
 version: '1.0'
 ---
 
-{{< img src="integrations/git/git_event.png" alt="Git event" responsive="true" popup="true">}}
+{{< img src="integrations/git/git_event.png" alt="Git event"  >}}
 
 ## 概要
 

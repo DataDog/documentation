@@ -27,7 +27,7 @@ Datadog ではグラフを簡単に設定できますが、ここでは、Datado
 
 [Timeboard][1]/[Screenboard][2]で新しいグラフを設定する際はエディターを使用できますが、JSON タブに切り替えて高度なクエリを設定することもできます。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graph_metric"  style="width:75%;">}}
 
 ここでは、Datadog のバックエンドがクエリを実行してダッシュボード上にグラフ線を描画するために実行する手順を、1 つずつ見ていきます。
 
@@ -57,7 +57,7 @@ Datadog ではグラフを簡単に設定できますが、ここでは、Datado
 
 おわかりのように、バックエンドは一致するソースを 5 つ見つけます (前項を参照)。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" style="width:70%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2"  style="width:70%;">}}
 
 目標は、これらのソースから取得したデータを集計して、ホストの `system.disk.total` を表すメトリクスを得ることです。これは、[手順 3][4] で行われます。
 
@@ -89,7 +89,7 @@ Datadog はデータを 1 秒の粒度で保存するため、グラフに実際
 デフォルトでは、Datadog のバックエンドはすべての実際の値の平均を求めることで rollup 集計を計算します。これでズームアウトしたときにもグラフが滑らかになります。タイムフレームをズームアウトしてもグラフが滑らかになる理由については、[こちらをご参照ください][7]。
 大きなタイムウィンドウでデータを表示する限り、ソースの数が 1 個でも 1,000 個でも、データ集計を行う必要があります。通常、グラフに表示されるのは送信された実際の値ではなく、ローカルな集計値です。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3"  style="width:75%;">}}
 
 バックエンドは、クエリに対応するソースごとにローカルな集計値からなる系列を計算します。
 
@@ -109,7 +109,7 @@ Datadog のバックエンドは、時間間隔の数を最大 300 個に抑え�
 ソースごとに最大 300 個のポイントがあり、それぞれのポイントが 1 分を表します。
 この例では、Datadog は 1 分ごとにすべてのソースの平均を計算し、その結果、以下のようなグラフが作成されます。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4"  style="width:75%;">}}
 
 取得された値 (25.74GB) は、すべてのソースによって報告された値の平均です (前の画像を参照)。
 
@@ -149,7 +149,7 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 
 #### クエリのグループ化 
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6"  style="width:75%;">}}
 
 ロジックは同じです。
 
@@ -157,7 +157,7 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 2. バックエンドは、この記事で説明されているようにデバイスごとにクエリ `system.disk.total{host:example, device:<device>}` を実行します。
 3. 最終的な結果が、すべて同じグラフ内でグラフ化されます。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2"  style="width:75%;">}}
 
 **注**: `rollup` または `as_count` モディファイアーは、「by {`device`}」の記述の後に置く必要があります。
 
@@ -167,7 +167,7 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 
 時間集計と空間集計の後に算術演算も適用されます ([手順 4: 関数の適用](#apply-functions-optional)を参照)。
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8"  style="width:75%;">}}
 
 #### as_count と as_rate
 

@@ -40,7 +40,7 @@ Les e-mails au format JSON vous offrent la possibilité de définir les champs s
 
 Avec un e-mail au format JSON, l'objet de l'e-mail n'apparaît pas dans l'événement. La valeur de l'attribut title est utilisée pour le titre de l'événement. Toutes les données qui apparaissent dans l'événement doivent être définies dans le JSON du corps de l'e-mail. En outre, le corps doit être entièrement composé de JSON valide : si ce n'est pas le cas, le message est ignoré. Exemple d'événement envoyé au format JSON :
 
-{{< img src="developers/events/json-event.png" alt="événement json" responsive="true" >}}
+{{< img src="developers/events/json-event.png" alt="événement json"  >}}
 
 **Remarque** : si vous testez l'e-mail avec un client de messagerie standard, le corps risque d'être converti en HTML. Le corps ne sera alors plus entièrement composé de JSON et l'e-mail sera ignoré.
 
@@ -71,7 +71,7 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 L'objet de l'e-mail devient le titre de l'événement, et le corps de l'e-mail devient le message de l'événement. L'expéditeur de l'e-mail apparaît à la fin de l'événement. Exemple d'événement envoyé au format texte brut :
 
-{{< img src="developers/events/plain-event.png" alt="événement en texte brut" responsive="true" >}}
+{{< img src="developers/events/plain-event.png" alt="événement en texte brut"  >}}
 
 **Remarque** : bien qu'un tag semble apparaître à la fin du titre et du corps de l'événement, aucun de ces éléments ne contient de tag.
 

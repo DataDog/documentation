@@ -1,22 +1,25 @@
 ---
 title: Send traces
 type: apicontent
-order: 33.1
+order: 34.1
 external_redirect: /api/#send-traces
 ---
 
 ## Send traces
+
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries][1] that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
 Traces can be sent as an array of [traces][2]:
-```
+
+```text
 [ trace1, trace2, trace3 ]
 ```
 
 and each trace is an array of [spans][3]:
-```
+
+```text
 trace1 = [ span, span2, span3 ]
 ```
 
@@ -24,7 +27,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
 [Learn more about the APM & Distributed Tracing terminology][4]
 
-**Note**: Each span within a trace should use the same trace_id.
+**Note**: Each span within a trace should use the same `trace_id`. However, `trace_id` and `span_id` must have different values.
 
 **ARGUMENTS**:
 

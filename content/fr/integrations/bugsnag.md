@@ -41,10 +41,10 @@ Pour intégrer Bugsnag à Datadog :
 2. Sélectionnez **Team Notifications**, puis **Datadog**.
 
 3. Choisissez les notifications qui s'afficheront dans Datadog en sélectionnant les déclencheurs de notification d'erreur.
-{{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_réglage" responsive="true" popup="true">}}
+{{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_réglage"  >}}
 
 4. Appliquez des filtres personnalisés à vos déclencheurs de notification pour afficher les erreurs dotées d'un certain statut de lancement ou d'une certaine sévérité.
-{{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filtres_réglage" responsive="true" popup="true">}}
+{{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filtres_réglage"  >}}
 
 5. Saisissez votre clé d'API Datadog.
 

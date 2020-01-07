@@ -6,6 +6,7 @@ external_redirect: "/api/#obtenir-tous-les-dashboards"
 ---
 
 ## Obtenir tous les dashboards
+
 Récupérer tous les dashboards.
 
 **ARGUMENTS** :

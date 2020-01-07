@@ -18,7 +18,7 @@ Les clés d'application sont utilisées conjointement avec la clé d'API de votr
 
 Pour gérer vos tokens client, accédez à la section `Client Tokens` de la [page de configuration des API Datadog][1], comme illustré ici :
 
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Tokens client" responsive="true" >}}
+{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Tokens client"  >}}
 
 Les tokens client sont uniques à votre organisation. Un token client est requis par le [collecteur de log du navigateur Web][2] pour envoyer des logs à Datadog, et par la fonctionnalité [Real User Monitoring][3] pour envoyer des événements et des logs à Datadog.
 
@@ -38,7 +38,7 @@ Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, 
 
 Pour supprimer une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][4] et cliquez sur le bouton **Revoke** correspondant à la clé ou au token que vous souhaitez supprimer :
 
-{{< img src="account_management/api_app_keys/application_keys.png" alt="Clés d'application" responsive="true" >}}
+{{< img src="account_management/api_app_keys/application_keys.png" alt="Clés d'application"  >}}
 
 ## Désactiver un compte utilisateur
 Si le compte d'un utilisateur est désactivé, les clés d'application créées par l'utilisateur sont supprimées. Les clés d'API créées par le compte désactivé ne sont pas supprimées et restent valides.

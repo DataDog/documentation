@@ -261,7 +261,7 @@ L'API Resource Group Tagging vise notamment à réduire le nombre d'appels API r
 {{< tabs >}}
 {{% tab "Délégation de rôles" %}}
 
-{{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" responsive="true">}}
+{{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" >}}
 
 1. Ouvrez le [carré d'intégration AWS][1].
 2. Sélectionnez l'onglet **Role Delegation**.
@@ -311,32 +311,32 @@ Utilisez le [référentiel sans serveur AWS][73] pour déployer la fonction Lamb
 ##### Créer une fonction Lambda
 
 1. Accédez à la [console Lambda][74] et créez une nouvelle fonction :
-    {{< img src="logs/aws/create_lambda_function.png" alt="Créer une fonction Lambda" responsive="true" popup="true" style="width:80%;" >}}
+    {{< img src="logs/aws/create_lambda_function.png" alt="Créer une fonction Lambda"   style="width:80%;" >}}
 
 2. Sélectionnez **Author from scratch** et saisissez un nom unique pour la fonction.
 3. Définissez Runtime sur **Python 2.7**, **Python 3.6** ou **Python 3.7**.
 4. Pour `Role`, sélectionnez **Create new role from template(s)** et saisissez un nom unique pour le rôle.
 5. Si vous récupérez des logs à partir d'un compartiment S3, sous « Policy templates », sélectionnez **s3 object read-only permissions**.
 6. Sélectionnez **Create Function**.
-    {{< img src="logs/aws/author_from_scratch.png" alt="Création de A à Z" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/author_from_scratch.png" alt="Création de A à Z"  style="width:80%;" >}}
 
 ##### Fournir le code et configurer le Lambda
 
 1. Copiez le code depuis [ce référentiel][75] et collez-le dans le champ de code de la fonction.
 2. Assurez-vous que le gestionnaire indique **lambda_function.lambda_handler**.
-    {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/select_python.png" alt="Sélectionner Python"  style="width:80%;" >}}
 3. En haut du script se trouve une section intitulée `#DD_API_KEY: Datadog API Key`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
     * En configurant une variable d'environnement (conseillé)
     * Modifiez directement le code avec votre [clé d'API Datadog][76].
-    {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD" responsive="true" popup="true" style="width:80%;" >}}
+    {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD"   style="width:80%;" >}}
 4. Si vous utilisez le site européen de Datadog, définissez `DD_SITE` sur `datadoghq.eu` en tant que variable d'environnement ou directement dans le code.
 5. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code intégrée.
 6. Définissez la mémoire sur une valeur **proche de 1 Go**.
 7. Définissez le délai d'expiration sur **120 secondes**.
-    {{< img src="logs/aws/basic_settings.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/basic_settings.png" alt="Réglages de base"  style="width:80%;" >}}
 8. Définissez l'option Execution Role sur le [rôle créé précédemment][77].
-    {{< img src="logs/aws/execution_role.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/execution_role.png" alt="Réglages de base"  style="width:80%;" >}}
 10. Faites défiler vers le bas vers la section Concurrency et définissez l'option [Reserve concurrency][78] sur **100**.
 11. Ajoutez la [couche Lambda de Datadog][79] à l'aide de l'ARN suivante. Remplacez `us-east-1` par la région où votre fonction est déployée et remplacez `Python27` par le runtime Python que votre fonction utilise (`Python27`, `Python36` ou `Python37`).
    ```
@@ -348,7 +348,7 @@ Utilisez le [référentiel sans serveur AWS][73] pour déployer la fonction Lamb
 
 1. Cliquez sur **Test**.
 2. Sélectionnez **CloudWatch Logs** comme événement de test.
-    {{< img src="logs/aws/test_event.png" alt="Événement test" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/test_event.png" alt="Événement test"  style="width:80%;" >}}
 2. Saisissez un nom unique pour l'événement, puis cliquez sur **Create**.
 3. Cliquez sur Test et vérifiez qu'aucune erreur ne survient (les logs de test n'apparaîtront pas dans votre plateforme Datadog).
 
@@ -481,9 +481,9 @@ Si vous stockez des logs dans de nombreux compartiments S3 ou groupes de logs Cl
 
 3. Accédez à l'onglet *Collect logs* dans le [carré d'intégration AWS][120].
 4. Sélectionnez le compte AWS à partir duquel vous souhaitez recueillir des logs, puis saisissez l'ARN du Lambda créé dans la section précédente.
-{{< img src="logs/aws/AWSLogStep1.png" alt="Saisie de Lambda" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="logs/aws/AWSLogStep1.png" alt="Saisie de Lambda"   style="width:80%;" >}}
 5. Cochez les services à partir desquels vous souhaitez recueillir des logs et cliquez sur « Save ». Pour arrêter la collecte de logs d'un service spécifique, décochez la case associée.
-{{< img src="logs/aws/AWSLogStep2.png" alt="Sélection de services" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="logs/aws/AWSLogStep2.png" alt="Sélection de services"   style="width:80%;" >}}
 6. Si vous possédez des logs dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et les indiquer dans ce carré.
 7. Pour arrêter la collecte de l'ensemble des logs AWS, appuyez sur la *croix* en regard de chaque ARN de Lambda. Tous les déclencheurs de cette fonction seront supprimés.
 8. Quelques minutes après cette première configuration, vos logs AWS apparaîtront dans votre [page Log Explorer][121] Datadog, quasiment en temps réel.
@@ -497,10 +497,10 @@ Si vous stockez des logs dans un groupe de logs CloudWatch, suivez les étapes c
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][118].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs :
 
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch"   style="width:70%;">}}
 
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="déclencheur cloudwatch" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="déclencheur cloudwatch"   style="width:70%;">}}
 
 Accédez ensuite à la [section Log de Datadog][121] pour commencer à explorer vos logs !
 
@@ -510,13 +510,13 @@ Si vous stockez des logs dans un compartiment S3, suivez les étapes ci-dessous 
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][118].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le compartiment S3 qui contient vos logs :
-    {{< img src="logs/aws/adding_trigger.png" alt="Ajout d'un déclencheur" responsive="true" popup="true"style="width:80%;">}}
+    {{< img src="logs/aws/adding_trigger.png" alt="Ajout d'un déclencheur"  style="width:80%;">}}
 
 3. Sélectionnez le compartiment, puis suivez les instructions d'AWS :
-    {{< img src="logs/aws/integration_lambda.png" alt="Intégration Lambda" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="logs/aws/integration_lambda.png" alt="Intégration Lambda"   style="width:80%;">}}
 
 4. Définissez le bon type d'événement sur les compartiments S3 :
-    {{< img src="logs/aws/object_created.png" alt="Objet créé" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="logs/aws/object_created.png" alt="Objet créé"   style="width:80%;">}}
 
 Accédez ensuite à la [section Log de Datadog][121] pour commencer à explorer vos logs !
 

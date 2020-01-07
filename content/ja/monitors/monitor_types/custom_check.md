@@ -22,13 +22,13 @@ further_reading:
 ## コンフィグレーション
 
 1. **カスタムチェック**を選択します。
-  {{< img src="monitors/monitor_types/custom_check/Selecting_custom_check.png" alt="selecting custom monitor" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/monitor_types/custom_check/Selecting_custom_check.png" alt="selecting custom monitor"  style="width:80%;">}}
 2. 監視する**ホストまたはタグ**を選択します。
-  {{< img src="monitors/monitor_types/custom_check/monitor_scope.png" alt="monitor scope" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/monitor_types/custom_check/monitor_scope.png" alt="monitor scope"  style="width:80%;">}}
   チェックは、すべての監視対象のホストに含まれるすべての一意のタグセットに対して実行されます。たとえば、`Nginx` サービスチェックは、`{host,port}` ごとに 1 つのステータスを報告します。そのため、1 つのホストで複数のサーバーが実行されている場合は、障害発生時に各サーバーが個別にアラートを生成します。
 
 3. **アラートオプション**を選択します。
-  {{< img src="monitors/monitor_types/custom_check/monitor_options.png" alt="monitor options" responsive="true" style="width:80%;">}}
+  {{< img src="monitors/monitor_types/custom_check/monitor_options.png" alt="monitor options"  style="width:80%;">}}
   チェックが実行されるたびに、CRITICAL、WARNING、OK のいずれかのステータスが送信されますが、どのような条件が継続したときに状態変化と通知を発生させるかを選択することもできます。たとえば、チェックが失敗したことは直ちに通知し、リカバリ状態が続いた場合にのみリカバリさせることができます。その場合は、1 回の CRITICAL ステータス、1 回の WARNING ステータス、4 回の OK ステータスで通知されるように選択します。
   オプションで、設定したタイムフレーム後に**データなしの通知**を行うことができます。タイムフレームには 2 分以上を選択する必要があります。
 

@@ -22,7 +22,7 @@ Pour définir votre score Apdex, vous devez être l'administrateur de votre comp
 
 Une fois le seuil défini et vos requêtes classées, le standard Apdex est défini comme suit :
 
-{{< img src="tracing/faq/apdex_formula.png" alt="Formule Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apdex_formula.png" alt="Formule Apdex"  >}}
 
 Il est essentiel de choisir la limite adéquate, car les requêtes dont l'expérience utilisateur est jugée frustrante sont quatre fois plus lentes que les requêtes « normales ». Pour T = 3, l'utilisateur patiente pendant 3 secondes lors du chargement d'une page, mais ne souhaite probablement pas attendre jusqu'à 12 secondes.
 
@@ -32,25 +32,25 @@ Pour cette raison, la limite Apdex vaut par défaut 0,5 seconde pour votre appl
 
 Pour afficher le score Apdex de votre service/application, vous devez accéder à votre tableau de service et sélectionner Apdex au lieu de Latency :
 
-{{< img src="tracing/faq/apdex_selection.png" alt="Sélection Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apdex_selection.png" alt="Sélection Apdex"  >}}
 
 Cliquez sur l'icône en forme de crayon en haut à gauche de votre widget pour configurer votre Apdex :
 
-{{< img src="tracing/faq/apdex_edit.png" alt="Modification Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apdex_edit.png" alt="Modification Apdex"  >}}
 
 Saisissez directement votre seuil pour afficher la distribution de vos requêtes :
 
-{{< img src="tracing/faq/apdex_update.png" alt="Mise à jour Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apdex_update.png" alt="Mise à jour Apdex"  >}}
 
 Vous pouvez ensuite enregistrer votre widget pour suivre l'évolution de votre score Apdex :
 
-{{< img src="tracing/faq/apm_save.png" alt="Enregistrement Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apm_save.png" alt="Enregistrement Apdex"  >}}
 
 ## Afficher votre Apdex sur votre page Service
 
 Pour afficher l'Apdex sur votre [page Service][2], sélectionnez-le dans le menu de configuration, dans le coin supérieur droit de la page :
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Liste des services Apdex" responsive="true" >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Liste des services Apdex"  >}}
 
 [1]: http://apdex.org/overview.html
 [2]: https://app.datadoghq.com/apm/services

@@ -45,7 +45,7 @@ end
 
 この 1 行のコードで、このデータを Datadog でグラフ化できるようになります。以下に例を示します。
 
-{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views"  >}}
 
 StatsD のカウンターはフラッシュ間隔で正規化され、1 秒あたりの単位数を報告します。上のグラフで、マーカーは、15 時 24 分ごろに 1 秒あたり 35.33 Web ページビューを報告しています。これに対して、毎秒 1 人がこの Web ページにアクセスした場合、グラフは y = 1 の平らな線になります。値のインクリメントと経時測定については、[ゲージ](#gauges)を参照してください。
 
@@ -91,7 +91,7 @@ statsd.distribution('dist.dd.website.latency', duration)
 
 上のインスツルメンテーションは、`合計`、`カウント`、`平均`、`最小`、`最大`、`50 パーセンタイル` (中央値)、`75 パーセンタイル`、`90 パーセンタイル`、`95 パーセンタイル`、`99 パーセンタイル`の各データを計算します。これらのメトリクスにより、各リクエスト時間の違いを把握できます。リクエストが平均的にどのくらいの時間を要するかを確認するには、中央値をグラフ化します。大半のリクエストに要する時間を確認するには、95 パーセンタイルをグラフ化します。
 
-{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
+{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency"  >}}
 
 この簡単な例では、500ms を許容可能なリクエスト時間とします。クエリ時間の中央値 (青のグラフ) は、おおむね 100 ミリ秒未満で、適切な値です。95 パーセンタイル (赤のグラフ) は、ときどき 1 秒を超えて急上昇しており、これは容認できない値です。
 つまり、大部分のクエリはまったく問題なく実行されているものの、値の最も悪いケースには問題があります。95 パーセンタイルが中央値に近い場合は、ほとんどすべてのリクエストがまったく問題なく動作していると考えることができます。
@@ -177,7 +177,7 @@ end
 | `database.query.time.max`          | サンプリングされた値の最大値                   |
 | `database.query.time.95percentile` | サンプリングされた値の 95 パーセンタイル           |
 
-{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
+{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times"  >}}
 
 この簡単な例では、1 秒を許容可能なクエリ時間とします。クエリ時間の中央値 (紫のグラフ) は、おおむね 100 ミリ秒未満で、適切な値です。しかし、残念ながら、95 パーセンタイル (青のグラフ) はときどき、3 秒近くまで大きく急上昇しており、これは容認できない値です。つまり、大部分のクエリはまったく問題なく実行されているものの、値の最も悪いケースには問題があります。95 パーセンタイルが中央値に近い場合は、ほとんどすべてのクエリがまったく問題なく動作していると考えることができます。
 

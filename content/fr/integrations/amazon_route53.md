@@ -22,7 +22,7 @@ public_title: "Intégration Datadog/Amazon Route\_53"
 short_description: "Surveillez des métriques de Route\_53 et vérifiez des checks de santé."
 version: '1.0'
 ---
-{{< img src="integrations/amazon_route53/route53_graph.png" alt="graph route53" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_route53/route53_graph.png" alt="graph route53"  >}}
 
 ## Présentation
 
@@ -63,7 +63,7 @@ Configurez Amazon Route 53 pour enregistrer des informations sur les requêtes 
 #### Activer la journalisation Route 53
 
 Accédez à votre console AWS Route 53 et sélectionnez la zone hébergée pour laquelle vous souhaitez configurer la journalisation. Cliquez sur la case d'option et sélectionnez « configure query logging ».
-{{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="activer la journalisation route 53" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="activer la journalisation route 53"   style="width:70%;">}}
 
 Sélectionnez ensuite le groupe de logs Cloudwatch ou créez-en un pour y envoyer les logs. Vérifiez que « route 53 » fait partie du nom du groupe de logs.
 
@@ -71,9 +71,9 @@ Sélectionnez ensuite le groupe de logs Cloudwatch ou créez-en un pour y envoye
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs Route 53 :
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch"   style="width:70%;">}}
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Déclencheur cloudwatch" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Déclencheur cloudwatch"   style="width:70%;">}}
 
 Accédez ensuite à la [section Log de Datadog][9] pour commencer à explorer vos logs !
 

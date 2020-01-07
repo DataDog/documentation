@@ -51,6 +51,7 @@ rules:
   - nodes/metrics
   - nodes/spec
   - nodes/proxy
+  - nodes/stats
   verbs:
   - get
 ---

@@ -3,7 +3,7 @@ categories:
   - web
 ddtype: crawler
 dependencies: []
-description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances de runtime.
+description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances d'exécution.
 doc_link: 'https://docs.datadoghq.com/integrations/mparticle/'
 git_integration_title: mparticle
 has_logo: true
@@ -13,16 +13,18 @@ kind: integration
 manifest_version: '1.0'
 name: mparticle
 public_title: Intégration Datadog/mParticle
-short_description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances de runtime.
+short_description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances d'exécution.
 version: '1.0'
 ---
 ## Présentation
-Connectez mParticle à Datadog et consultez les informations suivantes en temps réel dans votre dashboard Datadog :
+mParticle vous permet d'obtenir des données détaillées sur les performances d'exécution de vos applications mobiles. Le SDK mParticle recueille automatiquement des données de performances d'exécution détaillées telles que la charge CPU, l'empreinte mémoire et le niveau de batterie. Connectez mParticle à Datadog pour visualiser les informations suivantes en temps réel sur votre dashboard Datadog :
 
 * Rapports d'incidents
 * Données de performance réseau tiers
 * Informations sur la session active
 * Utilisation de la batterie, de la mémoire et du processeur de l'appareil
+
+Pour en savoir plus sur mParticle, consultez [cet article de blog][5] et [la documentation][6] associée (en anglais).
 
 ## Implémentation
 ### Installation
@@ -34,12 +36,12 @@ Connectez mParticle à Datadog et consultez les informations suivantes en temps 
 
 4. Entrez votre [clé d'API Datadog][2] dans le volet des paramètres et cliquez sur Save.
 
-5. Activez Status de façon à transmettre les données à Datadog.
+5. Activez le paramètre Status de façon à transmettre les données à Datadog.
 
 ## Données collectées
 ### Métriques
 
-L'intégration mParticle n'inclut aucune métrique.
+Consultez la [documentation mParticle][6] pour découvrir les métriques disponibles avec cette intégration.
 
 ### Événements
 L'intégration mParticle n'inclut aucun événement.
@@ -53,6 +55,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://app.mparticle.com/login?return=
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.datadoghq.com/fr/help
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/mparticle/mparticle_metadata.csv
+[5]: https://www.datadoghq.com/blog/track-detailed-run-time-performance-data-with-mparticle-and-datadog/
+[6]: https://docs.mparticle.com/integrations/datadog/event/
 
 
 {{< get-dependencies >}}

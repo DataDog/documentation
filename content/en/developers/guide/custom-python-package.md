@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -45,24 +45,26 @@ sudo /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 Custom Python packages can be installed using the Agent's embedded Python using the following command in PowerShell:
 
 For Agent versions <= 6.11:
-```
+
+```powershell
 %PROGRAMFILES%\Datadog\"Datadog Agent"\embedded\python -m pip install <PACKAGE_NAME>
 ```
 
 For Agent versions >= 6.12:
-```
+
+```powershell
 %PROGRAMFILES%\Datadog\"Datadog Agent"\embedded<PYTHON_MAJOR_VERSION>\python -m pip install <PACKAGE_NAME>
 ```
 
 Or the package can be added in the library zipped folder that can be found at
-```
+
+```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\files
 ```
 
 then [restart your Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
-
+{{< img src="agent/windows_python_package.png" alt="windows python package"  >}}
 
 [1]: /agent/basic_agent_usage/windows
 {{% /tab %}}

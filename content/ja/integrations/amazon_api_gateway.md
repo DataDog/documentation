@@ -51,7 +51,7 @@ API Gateway ログを有効化します。
 3. 「ログ」タブで、CloudWatch ログとアクセスログを有効にします。
 4. 「情報」ログレベルを選択して、すべてのリクエストが取得されるようにします。
 5. Cloudwatch ロググループの名前に「apigateway」が含まれていることを確認します。
-    {{< img src="integrations/amazon_api_gateway/aws_api_gateway_log_collection_1.png" alt="AWS api gateway log collection" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+    {{< img src="integrations/amazon_api_gateway/aws_api_gateway_log_collection_1.png" alt="AWS api gateway log collection"    style="width:70%;">}}
 6. JSON 形式を選択し (CLF と CSV もサポートされています)、ログ形式のボックスに以下を追加することをお勧めします。
 
     ```
@@ -73,9 +73,9 @@ API Gateway ログを有効化します。
 
 1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で API Gateway ログを含む Cloudwatch ロググループにトリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group"   style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger"   style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][6]に移動し、ログを確認します。
 

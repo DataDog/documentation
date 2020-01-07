@@ -27,7 +27,7 @@ Prenons comme exemple la métrique **system.disk.total**. Supposons que vous vou
 
 Lorsque vous configurez un nouveau graphique dans un [timeboard][1] ou un [screenboard][2], vous pouvez utiliser l'éditeur, mais également accéder à l'onglet JSON pour configurer des requêtes avancées :
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graphique_métrique" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graphique_métrique"  style="width:75%;">}}
 
 Suivez chaque étape exécutée par le backend de Datadog afin d'effectuer la requête et de représenter une ligne de graphique sur votre dashboard.
 
@@ -57,7 +57,7 @@ Dans cette requête, vous demandiez seulement les données associées au tag `ho
 
 Comme vous l'avez sûrement deviné, le backend trouve cinq sources correspondantes (voir le paragraphe précédent).
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="graphique_métrique_2" responsive="true" style="width:70%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="graphique_métrique_2"  style="width:70%;">}}
 
 Il faut alors agréger les données de ces sources afin de fournir une métrique représentant `system.disk.total` pour votre host. Cette opération est effectuée à l'[étape 3][4].
 
@@ -89,7 +89,7 @@ Par exemple, pour une vue du jour avec affichage des lignes, chaque point de don
 Par défaut, le backend de Datadog calcule les données agrégées et cumulées en faisant la moyenne de toutes les valeurs réelles, ce qui permet de lisser les graphiques lorsque vous effectuez un zoom arrière. [Découvrez pourquoi un zoom arrière sur un intervalle permet également de lisser vos graphiques][7].
 L'agrégation de données est nécessaire, que vous ayez 1 ou 1 000 sources, tant que vous consultez les données d'un intervalle de temps conséquent. Les valeurs que vous voyez sur le graphique ne correspondent généralement pas aux valeurs réelles envoyées, mais plutôt à des agrégats locaux.
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="graphique_métrique_3" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="graphique_métrique_3"  style="width:75%;">}}
 
 Notre backend calcule une série d'agrégats locaux pour chaque source correspondant à la requête.
 
@@ -109,7 +109,7 @@ Vous pouvez désormais combiner les données de différentes sources en une seul
 Vous disposez de ~300 points pour chaque source. Chacun d'eux représente une minute.
 Dans cet exemple, Datadog calcule la moyenne de toutes les sources pour chaque minute, ce qui donne le graphique suivant :
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="graphique_métrique_4" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="graphique_métrique_4"  style="width:75%;">}}
 
 La valeur obtenue (25,74 Go) représente la moyenne des valeurs renvoyées par toutes les sources (voir l'image ci-dessus).
 
@@ -149,7 +149,7 @@ Dans cet exemple, la fonction `abs` veille à ce que vos résultats corresponden
 
 #### Requêtes groupées
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="graphique_métrique_6" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_6.png" alt="graphique_métrique_6"  style="width:75%;">}}
 
 La logique reste la même :
 
@@ -157,7 +157,7 @@ La logique reste la même :
 2. Pour chaque appareil, le backend effectue la requête `system.disk.total{host:example, device:<appareil>}`, comme expliqué dans cet article.
 3. Tous les résultats finaux sont représentés sur le même graphique.
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="graphique_métrique_2" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="graphique_métrique_2"  style="width:75%;">}}
 
 **Remarque** : les modificateurs `rollup` ou `as_count` doivent être placés après la mention « by {`device`} ».
 
@@ -167,7 +167,7 @@ La logique reste la même :
 
 Les opérations arithmétiques sont également appliquées après l'agrégation temporelle et spatiale ([étape 4 : Appliquer une fonction](#appliquer-des-fonctions-facultatif)).
 
-{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="graphique_métrique_8" responsive="true" style="width:75%;">}}
+{{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="graphique_métrique_8"  style="width:75%;">}}
 
 #### as_count et as_rate
 

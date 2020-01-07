@@ -1,7 +1,7 @@
 ---
 title: 時間平均に基づくカスタムメトリクス上位 500 の取得
 type: apicontent
-order: 33.4
+order: 34.4
 external_redirect: '/api/#get-top-500-custom-metrics-by-hourly-average'
 ---
 ## 時間平均に基づくカスタムメトリクス上位 500 の取得

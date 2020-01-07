@@ -18,7 +18,7 @@ L'*uptime* ou la disponibilité correspond à la durée pendant laquelle un moni
 
 Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des événements. Par exemple: `99 % du temps, la latence est inférieure à 200 ms` :
 
-{{< img src="graphing/widgets/slo/summary_editor.png" alt="widget disponibilité des monitors" responsive="true" >}}
+{{< img src="graphing/widgets/slo/summary_editor.png" alt="widget disponibilité des monitors"  >}}
 
 ### Configuration
 
@@ -31,7 +31,7 @@ Vous pouvez également surveiller le taux de réussite et les SLI (Service Level
 
 Une fois les monitors configurés, vous avez la possibilité de consulter le pourcentage global de disponibilité uniquement ou le pourcentage global ainsi que la disponibilité pour chaque monitor.
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="Mode de visualisation" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="Mode de visualisation"  >}}
 
 ### Options
 
@@ -39,7 +39,7 @@ Une fois les monitors configurés, vous avez la possibilité de consulter le pou
 
 Vous pouvez sélectionner jusqu'à 20 monitors à la fois. Il est possible de rechercher un groupe de monitors et d'utiliser la requête de recherche pour sélectionner les monitors qui vous intéressent. Datadog vous conseille d'utiliser les [tags de monitor][2] pour votre recherche. Par exemple, pour rechercher les monitors d'un service, utilisez : `service:<NOM_SERVICE>`.
 
-{{< img src="graphing/widgets/slo/slo_uptime-choose_a_monitor.png" alt="Choisir un monitor" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-choose_a_monitor.png" alt="Choisir un monitor"  >}}
 
 #### Disponibilité par groupe
 
@@ -55,7 +55,7 @@ Il est possible d'afficher le pourcentage de disponibilité pour l'ensemble du m
 
 **Remarque** : la disponibilité globale correspond à la part de temps pendant laquelle aucun des groupes inclus dans le widget n'affichait un statut ALERT.
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="Mode de visualisation" responsive="true" >}}
+{{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="Mode de visualisation"  >}}
 
 #### Mise en forme conditionnelle
 

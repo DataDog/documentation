@@ -14,11 +14,11 @@ further_reading:
 
 ダッシュボード全体の目的を示すためによく使用されます。
 
-{{< img src="graphing/widgets/free_text/free_text.png" alt="Free Text" responsive="true">}}
+{{< img src="graphing/widgets/free_text/free_text.png" alt="Free Text" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Free Text Setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Free Text Setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 

@@ -16,7 +16,7 @@ public_title: Datadog-Airbrake インテグレーション
 short_description: イベントで Airbrake 例外を表示、検索、議論 stream.
 version: '1.0'
 ---
-{{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake event" responsive="true" popup="true">}}
+{{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake event"  >}}
 
 ## 概要
 

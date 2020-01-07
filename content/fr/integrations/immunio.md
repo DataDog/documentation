@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Immunio
 short_description: Recueillez des données d'Immunio pour visualiser et surveiller les schémas d'attaque.
 version: '1.0'
 ---
-{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard"  >}}
 
 ## Présentation
 
@@ -34,9 +34,9 @@ IMMUNIO surveille vos applications afin de détecter les attaques suivantes et d
 
 1.  Connectez-vous à votre [compte IMMUNIO][1].
 1.  Accédez à la [page de configuration des intégrations][2].
-    {{< img src="integrations/immunio/immuniosetup1.png" alt="Page de configuration des intégrations" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup1.png" alt="Page de configuration des intégrations"  >}}
 1.  Cliquez sur « Add an API Key ».
-    {{< img src="integrations/immunio/immuniosetup2.png" alt="Ajouter une clé d'API" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup2.png" alt="Ajouter une clé d'API"  >}}
 1.  Ajoutez votre clé d'API.
 
 ### Configuration

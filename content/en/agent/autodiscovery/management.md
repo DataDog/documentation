@@ -37,7 +37,7 @@ To remove a given Docker container with the name `<NAME>` from Autodiscovery, ad
 ac_exclude: [name:<NAME>]
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -93,7 +93,7 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 ac_include: [name:<NAME>]
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -111,7 +111,7 @@ DD_AC_INCLUDE = "name:<NAME>"
 
 For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
 
-```
+```shell
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:ubuntu image:debian"
 ```
@@ -130,4 +130,4 @@ To disable this behavior and include pause containers in the Autodiscovery perim
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

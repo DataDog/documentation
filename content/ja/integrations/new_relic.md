@@ -18,7 +18,7 @@ short_description: New Relic のメトリクスとイベントを Datadog で表
 version: '1.0'
 ---
 
-{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="New Relic Dashboard"  >}}
 
 ## 概要
 

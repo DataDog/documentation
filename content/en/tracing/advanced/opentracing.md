@@ -49,7 +49,7 @@ For Maven, add this to `pom.xml`:
 
 For Gradle, add:
 
-```
+```text
 compile group: 'io.opentracing', name: 'opentracing-api', version: "0.31.0"
 compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
@@ -310,7 +310,6 @@ my_operation()
 
 For more advanced usage and configuration information see [Datadog Python Opentracing API docs][1] and the [Python OpenTracing repo][2].
 
-
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
 [2]: https://github.com/opentracing/opentracing-python
 {{% /tab %}}
@@ -342,7 +341,6 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 | `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                                                                                                                                                                                                                                                                                                               |
 | `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
 | `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
-
 
 [1]: /tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /tracing/setup/ruby/#tracer-settings
@@ -392,7 +390,6 @@ func main() {
 {{% tab "Node.js" %}}
 This library is OpenTracing compliant. Use the ([OpenTracing API][1] and the Datadog Tracer ([dd-trace][2]) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
 
-
 ```javascript
 // server.js
 
@@ -437,7 +434,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-
 [1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -459,7 +455,6 @@ When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer
   // ...Use OpenTracing as expected
 ?>
 ```
-
 
 [1]: https://github.com/opentracing/opentracing-php
 [2]: /tracing/setup/php/#automatic-instrumentation

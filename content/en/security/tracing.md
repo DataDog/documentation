@@ -17,26 +17,18 @@ The APM product supports multiple libraries and includes extensible tooling that
 
 Several filtering mechanisms are enforced as a baseline in an effort to provide sound defaults. In particular:
 
-**Environment variables are not collected by the Agent**
+* **Environment variables are not collected by the Agent**
+* **SQL variables are obfuscated by default, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` would have its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
+* **Numbers in Resource names (e.g. in request urls) are obfuscated by default** For example, the following `elasticsearch` attribute:
 
-**SQL variables are obfuscated by default, even when not using prepared statements**
+    ```text
+    Elasticsearch : {
+        method : GET,
+        url : /user.0123456789/friends/_count
+    }
+    ```
 
-For example, the following `sql.query` attribute:
-`SELECT data FROM table WHERE key=123 LIMIT 10`
-would have its variables obfuscated, to become the following Resource name:
-`SELECT data FROM table WHERE key = ? LIMIT ?`
-
-**Numbers in Resource names (e.g. in request urls) are obfuscated by default**
-
-For example, the following `elasticsearch` attribute:
-```
-Elasticsearch : {
-    method : GET,
-    url : /user.0123456789/friends/_count
-}
-```
-would have its number in the url obfuscated, to become the following Resource name:
-`GET /user.?/friends/_count`
+    would have its number in the url obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
 
 In addition to this baseline, customers need to review and configure their APM deployment, including all integrations and frameworks provided by [supported tracers][2], to appropriately control what data they submit to Datadog.
 
@@ -52,9 +44,9 @@ For customers using release 6, the Agent can be configured to exclude a specific
 
 The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor to intercept Spans then adjust or discard them accordingly (e.g. based on a regular expressions). For example, this could be achieved with the following constructs:
 
-* Java | [TraceInterceptor interface][4]
-* Ruby | [Processing Pipeline][5]
-* Python | [Trace Filtering][6]
+* Java: [TraceInterceptor interface][4]
+* Ruby: [Processing Pipeline][5]
+* Python: [Trace Filtering][6]
 
 ## Tailored Instrumentation
 
@@ -66,7 +58,7 @@ If a customer requires tailored instrumentation for a specific application, they
 
 [1]: /security
 [2]: /tracing/setup
-[3]: /tracing/setup/#agent-configuration
+[3]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L472-L490
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
 [5]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
 [6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering

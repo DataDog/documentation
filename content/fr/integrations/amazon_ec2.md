@@ -57,7 +57,7 @@ Sachez que l'intégration EC2 doit être installée pour activer la désactivati
 
 Pour désactiver les monitors lors des arrêts planifiés de l'instance EC2, cochez la case **EC2 automuting** dans le [carré d'intégration AWS][2] :
 
-{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="Désactivation automatique AWS EC2" responsive="true">}}
+{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="Désactivation automatique AWS EC2" >}}
 
 ### Installer l'Agent avec AWS Systems Manager
 
@@ -123,7 +123,7 @@ L'intégration AWS EC2 n'inclut aucun check de service.
 ### Événements
 L'intégration AWS EC2 comprend des événements pour les maintenances planifiées et à venir ainsi que des avertissements d'instance. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="Événements AWS EC2" responsive="true">}}
+{{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="Événements AWS EC2" >}}
 
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][20].

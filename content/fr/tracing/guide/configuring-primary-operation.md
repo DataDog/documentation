@@ -31,13 +31,13 @@ Lorsque plusieurs opérations primaires sont définies pour un service, c'est l'
 5. Sélectionnez l'opération à définir comme point d'entrée vers le service.
 6. Cliquez sur **Enregistrer**.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM" responsive="true" >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM"  >}}
 
 ## Affichage de statistiques sur des noms de span supplémentaires
 
 Pour vérifier que toutes les traces sont correctement envoyées à Datadog en dehors des instrumentations, vous pouvez consulter vos ressources en appliquant un filtre supplémentaire. Pour ce faire, sélectionnez dans un menu déroulant des noms de span supplémentaires considérés comme des opérations secondaires. Veuillez toutefois noter que ces noms de span ne sont pas utilisés pour calculer les statistiques au niveau des services.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM" responsive="true" >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM"  >}}
 
 ## Configuration de l'opération primaire dans une instrumentation manuelle
 

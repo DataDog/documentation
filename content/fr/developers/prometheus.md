@@ -61,6 +61,7 @@ instances:
 ```
 
 ### Écrire le check
+
 Tous les checks OpenMetrics héritent de la classe `OpenMetricsBaseCheck` qui se trouve dans `checks/openmetrics_check.py` :
 
 ```python
@@ -211,7 +212,6 @@ Si le dictionnaire `labels_mapper` est fourni, les étiquettes de métriques dan
 `exclude_labels` est un tableau d'étiquettes à exclure. Ces étiquettes ne seront pas ajoutées en tant que tags lors de l'envoi de la métrique.
 
 ### `self.type_overrides`
-
 
 `type_overrides` est un dictionnaire où les clés correspondent aux noms des métriques Prometheus ou OpenMetrics et où les valeurs correspondent au type de métrique (nom sous forme de chaîne) à utiliser au lieu de celui indiqué dans la charge utile. Il peut être utilisé pour forcer l'application d'un type sur des métriques non associées à un type. 
 Voici les types disponibles : `counter`, `gauge`, `summary`, `untyped` et `histogram`.

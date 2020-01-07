@@ -1,7 +1,7 @@
 ---
 title: すべてのユーザーの取得
 type: apicontent
-order: 34.3
+order: 35.3
 external_redirect: /api/#get-all-users
 ---
 

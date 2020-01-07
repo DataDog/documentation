@@ -3,7 +3,7 @@ title: Datadog 101 - Collection
 kind: video
 language: en
 wistiaid: mug2bisg96
-videos:
+"video-categories":
     - Datadog 101
 
 summary: How to get metrics and events from your hosts up to Datadog

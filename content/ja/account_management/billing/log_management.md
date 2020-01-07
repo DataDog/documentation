@@ -21,15 +21,15 @@ Datadog に送信されたログイベントの数は、複数箇所で確認で
 
 1. [使用量ページ][1]には、1 時間にインデックス化されたログイベントの数が表示される列があります。
 
-    {{< img src="account_management/billing/log-events01.png" alt="Log Events" responsive="true">}}
+    {{< img src="account_management/billing/log-events01.png" alt="Log Events" >}}
 
 2. [構成ページ][2]では、インデックスをダブルクリックすると、この 2 日間にインデックス化されたログイベントの数が表示されます。
 
-    {{< img src="account_management/billing/log-events02.png" alt="Log Events" responsive="true">}}
+    {{< img src="account_management/billing/log-events02.png" alt="Log Events" >}}
 
 3. [ログエクスプローラー][3]では、タイムフレームを変更すると、リストの先頭でログイベントの数をチェックできます。
 
-    {{< img src="account_management/billing/log-events03.png" alt="Log Events" responsive="true">}}
+    {{< img src="account_management/billing/log-events03.png" alt="Log Events" >}}
 
 ファセットを使用して、ログイベントによって定義された属性別またはタグ別にログ数を確認することもできます。これは、多数のデータを生成しているホスト、サービス、エンドポイントなどを特定するのに役立ちます。
 

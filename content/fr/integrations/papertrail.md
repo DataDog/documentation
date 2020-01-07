@@ -16,7 +16,7 @@ public_title: Intégration Datadog/PaperTrail
 short_description: 'Affichez, recherchez et échangez sur des logs Papertrail dans votre flux d''événements Datadog stream.'
 version: '1.0'
 ---
-{{< img src="integrations/papertrail/papertrailexample.png" alt="exemple Papertrail" responsive="true" popup="true">}}
+{{< img src="integrations/papertrail/papertrailexample.png" alt="exemple Papertrail"  >}}
 
 ## Présentation
 
@@ -34,12 +34,12 @@ Pour enregistrer des métriques depuis Papertrail :
 1.  Donnez un nom à votre recherche et cliquez sur le bouton **Save & Setup an Alert**.
 1.  Choisissez Datadog dans Graphing & Metrics.
 
-    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="notifications Papertrail" responsive="true" popup="true">}}
+    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="notifications Papertrail"  >}}
 
 1.  Choisissez la fréquence de déclenchement de vos alertes ainsi que les autres paramètres.
 1.  Indiquez votre clé d'API Datadog et donnez un nom à votre métrique. Vous pouvez également saisir des tags à associer avec la métrique.
 
-    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="notifications Papertrail" responsive="true" popup="true">}}
+    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="notifications Papertrail"  >}}
 
 1.  Cliquez sur le bouton **Create Alert**.
 

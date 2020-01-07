@@ -20,7 +20,7 @@ further_reading:
 ---
 ログエクスプローラーを起点として、トラブルシューティングと調査を行うことができます。
 
-{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
+{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments"  >}}
 
 このビューで、以下の処理を行うことができます。
 
@@ -40,7 +40,7 @@ further_reading:
 
 タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します。
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
+{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
 
 ### 検索
 
@@ -48,7 +48,7 @@ further_reading:
 
 ログエクスプローラーのすべての検索機能 (ワイルドカードの使用、数値のクエリなど) の詳細は、[ログ検索ガイド][1]を参照してください。
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs"  >}}
 
 ### 保存済みビュー
 
@@ -74,7 +74,7 @@ further_reading:
 
 ログの結果は日付順で並べ替えられ、デフォルトでは最新の結果が先頭に表示されます。日付のソート順を逆にして、タイムレンジ内で最も古い結果を先頭に表示することもできます。
 
-{{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/logtable_config.png" alt="configure display table"  style="width:50%;">}}
 
 
 
@@ -91,7 +91,7 @@ further_reading:
 * ログテーブルに列を追加または削除します。
 * 検索リクエストに特定の値 (include または exclude) を付加します。
 
-{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
+{{< img src="logs/explorer/attribute_actions.png" alt="configure display table"  style="width:20%;">}}
 
 
 上部の予約済み属性セクションで、以下の操作を行います。
@@ -105,7 +105,7 @@ further_reading:
 
 **Export** ボタンまたはキーボード操作（Ctrl + C / Cmd + C）を介してJSONログの内容をクリップボードへコピーします。
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table"  style="width:50%;">}}
 
 
 [1]: /ja/logs/explorer/search
@@ -118,7 +118,7 @@ further_reading:
 
 すべてのグラフ作成オプションについては、[ログのグラフ作成ガイド][2]を参照してください。
 
-{{< img src="logs/explorer/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
+{{< img src="logs/explorer/log_analytics.png" alt="Log Analytics"  style="width:70%;">}}
 
 
 [1]: /ja/logs/processing
@@ -132,7 +132,7 @@ further_reading:
 
 詳細については、[ログパターンのセクション][1]を参照してください。
 
-{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
+{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns"  style="width:70%;">}}
 
 
 [1]: /ja/logs/explorer/patterns
@@ -152,13 +152,13 @@ further_reading:
 
 ファセットを使用すると、特定の属性に基づいてデータセットを絞り込んだり、データセットの切り口を変えることができます。ファセットには、ユーザーやサービスなどがあります。
 
-{{< img src="logs/explorer/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
 **ファセットの作成**:
 
 属性をファセットとして使用したり、検索で使用したりするには、属性をクリックしてファセットとして追加します。
 
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
 
 これで、この属性の値が**すべての新しいログに**格納され、[検索バー][1]、[ファセットパネル](#facet-panel)、および[ログ分析クエリ][2]で使用できるようになります。
 
@@ -176,7 +176,7 @@ further_reading:
 
 属性をメジャーとして使用するには、ログの数値属性をクリックします。
 
-{{< img src="logs/explorer/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/create_a_mesure.png" alt="Create a measure"  style="width:30%;">}}
 
 これで、この属性の値が**すべての新しいログに**格納され、[検索バー][1]、ファセットパネル、および[ログ分析クエリ][2]で使用できるようになります。
 
@@ -184,7 +184,7 @@ further_reading:
 
 各メジャーは独自の単位を持ち、ログエクスプローラーの列、ダッシュボードのログストリームウィジェット、およびログ分析への表示に使用されます。
 
-{{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure"  style="width:50%;">}}
 
 
 [1]: /ja/logs/explorer/search
@@ -199,7 +199,7 @@ further_reading:
 {{< tabs >}}
 {{% tab "Logstream" %}}
 
-{{< img src="logs/explorer/export.png" alt="view logs button" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/export.png" alt="view logs button"  style="width:30%;">}}
 
 | ボタン                | 説明                                                                                                          |
 | ----                  | -----                                                                                                                |
@@ -211,7 +211,7 @@ further_reading:
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-{{< img src="logs/explorer/export_log_analytics.png" alt="view logs button" responsive="true" style="width:30%;">}}
+{{< img src="logs/explorer/export_log_analytics.png" alt="view logs button"  style="width:30%;">}}
 
 | ボタン              | 説明                                                                                                                                                                  |
 | ----                | -----                                                                                                                                                                        |

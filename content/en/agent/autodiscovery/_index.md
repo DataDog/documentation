@@ -45,5 +45,3 @@ To solve this issue, you can use Datadog’s Autodiscovery feature to automatica
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-

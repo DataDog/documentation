@@ -3,7 +3,7 @@ title: Autodiscovery avec l'Agent v5
 kind: guide
 private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+  - /fr/agent/faq/agent-5-autodiscovery
 ---
 <div class="alert alert-info">
 Autodiscovery était autrefois appelé Service Discovery. Il est toujours appelé Service Discovery dans l'ensemble du code de l'Agent et dans certaines options de configuration.

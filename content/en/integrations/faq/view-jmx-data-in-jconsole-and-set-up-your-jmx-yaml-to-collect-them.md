@@ -15,18 +15,18 @@ This article provides two examples of converting metric data from your jConsole 
 
 The first example shows conversion for `domain -> type -> bean -> attribute`:
 
-{{< img src="integrations/faq/jConsolejmx.png" alt="jConsolejmx" responsive="true" >}}
+{{< img src="integrations/faq/jConsolejmx.png" alt="jConsolejmx"  >}}
 
 The second example shows conversion for `domain -> bean -> attribute`:
 
-{{< img src="integrations/faq/jConsolejmx2.png" alt="jConsolejmx" responsive="true" >}}
+{{< img src="integrations/faq/jConsolejmx2.png" alt="jConsolejmx"  >}}
 
 After the Datadog Agent is set up to submit JMX metrics, use the [Metrics Explorer][1] to verify the metrics are being submitted to Datadog. The example below demonstrates how you can filter the metrics by tags:
 
-{{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric" responsive="true" >}}
+{{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric"  >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/metrics/explorer
+[1]: /metrics/explorer

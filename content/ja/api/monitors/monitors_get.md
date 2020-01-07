@@ -1,7 +1,7 @@
 ---
 title: モニターの詳細の取得
 type: apicontent
-order: 26.02
+order: 27.02
 external_redirect: /api/#get-a-monitor-s-details
 ---
 

@@ -21,7 +21,7 @@ public_title: Datadog-Amazon SQS インテグレーション
 short_description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡 more.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS Dashboard"  >}}
 
 ## 概要
 
@@ -53,15 +53,15 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 証跡の構成方法については、[AWS CloudTrail を使用した Amazon SQS API コールのログ記録][8]を参照してください。証跡を定義する場合は、ログの書き込み先になる S3 バケットを選択します。
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail logging" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail logging"    style="width:70%;">}}
 
 #### Datadog へのログの送信
 
 1. [Datadog ログコレクション AWS Lambda 関数][9]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で、Amazon SQS ログを含む S3 バケットにトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration"   style="width:70%;">}}
     Amazon SQS ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration"   style="width:70%;">}}
 
 完了したら、[Datadog ログエクスプローラー][10]を使用してログを確認します。
 

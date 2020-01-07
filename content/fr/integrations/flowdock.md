@@ -16,7 +16,7 @@ public_title: Intégration Datadog/Flowdock
 short_description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
 version: '1.0'
 ---
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Présentation Flowdock" responsive="true" popup="true">}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Présentation Flowdock"  >}}
 
 ## Présentation
 

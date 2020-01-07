@@ -15,11 +15,11 @@ further_reading:
 ---
 チェックステータスは、実行されたチェックの現在のステータスまたは結果の数を表示します。
 
-{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" responsive="true">}}
+{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" >}}
 
 ## セットアップ
 
-{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
 
 ### コンフィグレーション
 
@@ -43,7 +43,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 
@@ -52,7 +52,7 @@ further_reading:
 
 チェックステータスウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
 
-≪```
+```
 CHECK_STATUS_SCHEMA = {
     "type": "object",
     "properties": {
@@ -67,7 +67,7 @@ CHECK_STATUS_SCHEMA = {
     "required": ["type", "check", "grouping"],
     "additionalProperties": false
 }
-```≫
+```
 
 | パラメーター  | タイプ            | 必須 | 説明                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |

@@ -52,13 +52,16 @@ apm_config:
 
 ## Replace rules
 
-To scrub sensitive data from your [span][3]'s tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
+To scrub sensitive data from your [span][3]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][4] or the `DD_APM_REPLACE_TAGS` environment variable. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 
 * `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
 * `pattern`: The regexp pattern to match against.
 * `repl`: The replacement string.
 
 For example:
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
 
 ```yaml
 apm_config:
@@ -76,6 +79,32 @@ apm_config:
       pattern: "(?s).*"
 ```
 
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```shell
+DD_APM_REPLACE_TAGS=[
+      {
+        "name": "http.url",
+        "pattern": "token/(.*)",
+        "repl": "?"
+      },
+      {
+        "name": "*",
+        "pattern": "foo",
+        "repl": "bar"
+      },
+      {
+        "name": "error.stack",
+        "pattern": "(?s).*"
+      }
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#services
 [3]: /tracing/visualization/#spans
+[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

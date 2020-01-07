@@ -25,13 +25,13 @@ Avec des métriques basées sur des logs, vous pouvez enregistrer le nombre de l
 
 ## Générer une métrique basée sur des logs
 
-{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Générer une métrique basée sur des logs" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Générer une métrique basée sur des logs"  style="width:80%;">}}
 
 Pour générer une nouvelle métrique basée sur des logs, accédez à la [page Configuration][3] de votre compte Datadog et sélectionnez l'onglet *[Generate Metrics][4]*, puis le bouton **New Metric+**.
 
 ### Ajouter une nouvelle métrique basée sur des logs
 
-{{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Créer une métrique basée sur des logs" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Créer une métrique basée sur des logs"  style="width:80%;">}}
 
 1. **Saisissez une requête pour filtrer le flux de logs** : la syntaxe de la requête est la même que pour la [recherche du Log Explorer][5]. Seuls les logs ingérés avec un timestamp ne dépassant pas les 20 dernières minutes sont pris en compte lors de l'agrégation.
 2. **Sélectionnez le champ que vous souhaitez surveiller** : sélectionnez `*` pour obtenir le nombre total de logs qui correspondent à votre requête, ou saisissez un attribut de log (p. ex., `@network.bytes_written`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (`count`, `min`, `max`, `sum` et `avg`).

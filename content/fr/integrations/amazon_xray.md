@@ -159,7 +159,7 @@ Pour tout autre runtime, consultez la documentation sur X-Ray SDK :
 L'intégration AWS X-Ray récupère les données de trace d'AWS et ne recueille aucune métrique ni aucun log.
 
 [1]: http://app.datadoghq.com/functions
-[2]: https://docs.datadoghq.com/fr/graphing/infrastructure/serverless_functions
+[2]: https://docs.datadoghq.com/fr/infrastructure/serverless_functions
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html

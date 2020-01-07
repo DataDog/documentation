@@ -33,7 +33,7 @@ When you create a metric monitor, **Threshold Alert** is automatically selected 
 
 To get an alert on low disk space, use the `system.disk.in_use` metric from the [Disk integration][6] and average the metric over `host` and `device`:
 
-{{< img src="getting_started/application/metric_query.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/metric_query.png" alt="alert setup"  >}}
 
 After this is set, the monitor automatically updates to a `Multi Alert` that triggers a separate alert for each `host`, `device` reporting your metric.
 
@@ -43,7 +43,7 @@ According to the [Disk integration documentation][6], `system.disk.in_use` is *t
 
 To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup"  >}}
 
 For this example, the other settings in this section are left on the defaults. For more details, see the [Metric Monitors][7] documentation.
 
@@ -75,7 +75,7 @@ For different messages based on alert vs. warning thresholds, see the [Notificat
 
 Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
-{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" responsive="true" style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications"  style="width:70%;" >}}
 
 Removing the `@notification` from either section removes it from both sections.
 

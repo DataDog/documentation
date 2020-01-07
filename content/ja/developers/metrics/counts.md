@@ -17,7 +17,7 @@ further_reading:
 
 ### Agent チェック
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | メソッド | 概要 |
 | :----- | :------- |
@@ -30,7 +30,7 @@ further_reading:
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
+{{% table  %}}
 
 | 方法 | 概要 |
 | :----- | :------- |

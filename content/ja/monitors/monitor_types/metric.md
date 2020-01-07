@@ -16,7 +16,7 @@ further_reading:
 ## コンフィグレーション
 
 1. 検出方法を選択します。
-    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" >}}
+    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type"  >}}
 
     **[しきい値アラート][1]**は、選択されたタイムフレーム内の値を所定のしきい値と比較します。アラート生成条件セクションで追加のオプションを設定できます。どのような値が異常値であるかがわかっている場合に使用される、標準的なアラートです。
 
@@ -32,11 +32,11 @@ further_reading:
     **[予測検知][4]**は、メトリクスが今後どこに向かうかを予測するためのアルゴリズム機能です。強い傾向や繰り返しパターンがあるメトリクスに適しています。
 
 2. 監視するメトリクスとスコープを選択します。
-  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
+  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
   現在 Datadog に送信しているすべてのメトリクスについてモニターを作成できます。
 
 3. アラートグループを選択します。
-    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" >}}
+    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping"  >}}
 
     **Simple alert** は、すべての報告元ソースをまとめて集計します。集計値が以下で設定する条件を満たしたときに、アラートを 1 つ受け取ります。これは、単一のホストから受け取るメトリクス (例: `host:bits` の `system.cpu.iowait` の `avg`) を監視する場合や、多くのホストにまたがる集計メトリクス (例: `region:us-east` の `nginx.bytes.net` の `sum`) を監視する場合に最適です。
 
@@ -49,7 +49,7 @@ further_reading:
 4.  アラート条件を選択します。
 
   * **しきい値**のオプションは、選択したアラートタイプによって若干異なります。どちらのタイプの場合も、メトリクスに基づいてしきい値と比較方法を入力します。しきい値を変更すると、グラフのカットオフポイントを示すマーカーが更新されます。
-  {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
+  {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold"  >}}
   しきい値を入力する際は、メトリクスに基づいて、書式設定した値を使用できます。たとえば、`system.disk.used` のしきい値は、`20GB` と入力できます。
   **しきい値アラート**の場合は、データの時間集計方法を選択できます。アラートエンジンは、単一の系列を生成し、選択された集計を実行します。
   各オプションについて、以下で詳しく説明します。
