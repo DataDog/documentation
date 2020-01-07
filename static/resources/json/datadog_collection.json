@@ -4817,7 +4817,7 @@
 									"response": []
 								},
 								{
-									"name": "Delete AWS log collection",
+									"name": "Delete an AWS Logs integration",
 									"request": {
 										"method": "DELETE",
 										"header": [],
