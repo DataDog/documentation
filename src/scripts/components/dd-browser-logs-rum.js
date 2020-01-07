@@ -1,7 +1,7 @@
 import { datadogLogs } from '@datadog/browser-logs';
 import { datadogRum } from '@datadog/browser-rum';
 
-const configDocs = require('../config/config-docs');
+import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
 
@@ -25,10 +25,12 @@ datadogLogs.init({
 });
 
 // init RUM
-datadogRum.init({
-    applicationId: ddApplicationId,
-    clientToken: ddClientToken
-});
+if (env === 'preview' || env === 'live') {
+    datadogRum.init({
+        applicationId: ddApplicationId,
+        clientToken: ddClientToken
+    });
+}
 
 // global context
 datadogLogs.addLoggerGlobalContext('env', env);
@@ -48,3 +50,5 @@ datadogLogs.createLogger('datadog_logger', {
 });
 
 datadogLogs.logger.setHandler(loggingHandler);
+
+export default datadogLogs;
