@@ -11,11 +11,11 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md'
-display_name: "Amazon\_Fargate"
+display_name: Amazon Fargate
 git_integration_title: ecs_fargate
 guid: 7484e55c-99ec-45ad-92f8-28e798796411
 integration_id: aws-fargate
-integration_title: "ECS\_Fargate"
+integration_title: ECS Fargate
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -228,12 +228,31 @@ Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent 
             "dd_service": "firelens-test",
             "dd_source": "redis",
             "dd_tags": "project:fluentbit",
+            "TLS": "on",
+            "Host": "http-intake.logs.datadoghq.com",
             "provider": "ecs"
         }
     }
 
     ```
+
+La liste complète des paramètres acceptés est disponible dans la [documentation Datadog sur Fluentbit][35].
+
 3. À chaque exécution d'une tâche Fargate, Fluent Bit envoie désormais les logs de conteneur à Datadog, accompagnés d'informations sur l'ensemble des conteneurs gérés par vos tâches Fargate. Vous avez la possibilité de visualiser les logs bruts sur la [page Log Explorer][30], de [créer des monitors][31] pour des logs et d'utiliser la [vue Live Container][29].
+
+**Remarque** : pour parser des logs JSON sérialisés depuis le `stdout` d'un conteneur, ajoutez l'argument obligatoire suivant directement dans votre configuration FireLens :
+
+```
+firelensConfiguration": {
+    "type": "fluentbit",
+    "options": {
+        "config-file-type": "file",
+        "config-file-value": "/fluent-bit/configs/parse-json.conf"
+    }
+},
+```
+
+Cet argument convertit le JSON sérialisé du champ `log:` en champs de premier niveau. Consultez l'exemple pour AWS [Parser des logs sous forme de JSON sérialisé à partir du stdout d'un conteneur][34] pour en savoir plus.
 
 #### Pilote de logs AWS
 
@@ -306,7 +325,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [11]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_replica
 [12]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/datadog_checks/ecs_fargate/data/conf.yaml.example
 [13]: https://docs.datadoghq.com/fr/developers/dogstatsd
-[14]: https://docs.datadoghq.com/fr/graphing/infrastructure/process/?tab=docker#installation
+[14]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=docker#installation
 [15]: https://docs.datadoghq.com/fr/agent/docker/#environment-variables
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/task_definition_parameters.html#container_definition_labels
 [17]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html
@@ -321,11 +340,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [26]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
 [27]: https://docs.datadoghq.com/fr/integrations/fluentbit/
 [28]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
-[29]: https://docs.datadoghq.com/fr/graphing/infrastructure/livecontainers/?tab=linuxwindows
+[29]: https://docs.datadoghq.com/fr/infrastructure/livecontainers/?tab=linuxwindows
 [30]: https://app.datadoghq.com/logs
 [31]: https://docs.datadoghq.com/fr/monitors/monitor_types/
 [32]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
-[33]: https://www.datadoghq.com/blog/collect-fargate-logs-with-fluentbit/ 
+[33]: https://www.datadoghq.com/blog/collect-fargate-logs-with-fluentbit/
+[34]: https://github.com/aws-samples/amazon-ecs-firelens-examples/tree/master/examples/fluent-bit/parse-json
+[35]: https://docs.datadoghq.com/fr/integrations/fluentbit/#configuration-parameters
 
 
 {{< get-dependencies >}}
