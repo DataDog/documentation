@@ -5,7 +5,7 @@ description: "Display the Datadog host map in your dashboards."
 aliases:
     - /graphing/widgets/hostmap/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/screenboards/"

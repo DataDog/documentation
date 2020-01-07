@@ -5,7 +5,7 @@ description: "Group your widgets together in a Timeboard."
 aliases:
     - /graphing/widgets/group/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/graphing_json/"

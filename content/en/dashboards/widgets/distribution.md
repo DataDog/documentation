@@ -5,7 +5,7 @@ description: "Graph a metric distribution aggregated across one or several tags.
 aliases:
     - /graphing/widgets/distribution/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/graphing_json/"

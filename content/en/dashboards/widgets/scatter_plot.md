@@ -5,7 +5,7 @@ description: "Graph a chosen scope over two different metrics with their respect
 aliases:
     - /graphing/widgets/scatter_plot/
 further_reading:
-- link: "/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
 - link: "/dashboards/graphing_json/"

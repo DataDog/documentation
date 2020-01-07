@@ -1,3 +1,5 @@
+api_key="<DATADOG_API_KEY>"
+
 currenttime=$(date +%s)
 
 curl  -X POST -H "Content-type: application/json" \
@@ -8,4 +10,4 @@ curl  -X POST -H "Content-type: application/json" \
       \"status\": 0,
       \"tags\": [\"env:test\"]
 }" \
-"https://api.datadoghq.com/api/v1/check_run?api_key=<YOUR_API_KEY>"
+"https://api.datadoghq.com/api/v1/check_run?api_key=${api_key}"

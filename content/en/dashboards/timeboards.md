@@ -3,6 +3,7 @@ title: Timeboards
 kind: documentation
 aliases:
     - /graphing/dashboards/timeboard/
+    - /dashboards/timeboard/
 further_reading:
 - link: "/dashboards/template_variables"
   tag: "Documentation"
