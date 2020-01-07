@@ -6,5 +6,4 @@ app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-host_name = 'test.host'
-dog.host_tags(host_name)
+dog.host_tags('<HOSTNAME>')

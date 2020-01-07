@@ -7,4 +7,4 @@ options = {
 
 initialize(**options)
 
-api.Tag.delete('hostname')
+api.Tag.delete("<YOUR_HOSTNAME>")
