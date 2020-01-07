@@ -41,7 +41,7 @@ To configure an exclusion filter:
 1. Define the name of your filter.
 2. Define the query for logs to exclude from your index.
     **Note**: It is possible to use any attribute or tag in the index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar.
-3. Define the sampling rate.
+3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-exclusion-filter).
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
@@ -78,6 +78,27 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
+### Attribute based exclusion filter
+
+In addition to the default sampling on the raw log (exclusion percentage set on `all logs`), you can choose to sample on a specific attribute holding an ID, like `UserID`, `SessionID`, `RequestID`.
+
+For example, exclude 99% of `http.request_id` logs for `source:nginx`:
+
+{{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="index attribute-based exclusion filter"  style="width:70%;">}}
+
+**Note**: 
+
+* for a non faceted attribute, you need to prefix it with the `@` character.
+
+* for low cardinality attributes, we suggest to define an exclusion query and sample on all matching logs.
+
+  For example to exclude 99% of successful Nginx HTTP requests, define the exclusion query `source:nginx @http.status_code:200` on 99% of `all logs`.
+
+#### Sample all logs of a trace
+
+In order to guarantee the sampling of all logs related to a given trace, define the log sampling on `Trace Id` attribute.
+Refer to [Trace Remapper][10] to get more information on how to connect logs and traces. 
+
 ## Multi indexes
 
 It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
@@ -104,3 +125,4 @@ Multiple indexes also provide the ability to define access rules on the data con
 [7]: https://docs.datadoghq.com/logs/archives/
 [8]: https://docs.datadoghq.com/logs/logs_to_metrics/
 [9]: /account_management/rbac
+[10]: /logs/processing/processors/?tab=ui#trace-remapper
