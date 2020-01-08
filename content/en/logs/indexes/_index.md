@@ -41,7 +41,7 @@ To configure an exclusion filter:
 1. Define the name of your filter.
 2. Define the query for logs to exclude from your index.
     **Note**: It is possible to use any attribute or tag in the index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar.
-3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-exclusion-filter).
+3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-sampling).
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
@@ -78,11 +78,11 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
-### Attribute based exclusion filter
+### Attribute based sampling
 
 You can sample on a specific attribute holding an ID, such as User, Session, Request Identifiers, in addition to the default log-based sampling (applied when the exclusion percentage is set on `all logs`).
 
-This feature operates on groups rather than the log itself: for example, given an attribute holding 3 distinct values (circles, triangles, squares), defining a 66% exclusion filter on it, keeps all logs holding 1 specific value (circles).
+This feature operates on attribute's values rather than the log itself: for example, given an attribute `id` holding 3 distinct values (`1`, `2`, `3`), defining a 66% exclusion filter on it, results in indexing all logs holding 1 specific attribute's value (`id: 3`).
 
 {{< img src="logs/indexes/index_exclusion_attribute_groups.png" alt="index attribute-based exclusion filter groups"  style="width:70%;">}}
 
@@ -92,18 +92,18 @@ For example, exclude `nginx` logs for 99% of `http.request_id`:
 
 **Note**: 
 
-* you need to prefix the attribute name with the `@` character.
+* You must prefix the attribute name with the `@` character.
 
-* for low cardinality attributes, we suggest to define a set of distinct Index Exclusion Filters on `all logs`.
+* For low cardinality attributes, you should define a set of distinct Index Exclusion Filters on `all logs`.
 
 #### Sample all logs of a trace
 
 In order to guarantee the sampling of all logs related to a given trace, define the log sampling on `Trace Id` attribute.
 Refer to [Trace Remapper][10] to get more information on how to connect logs and traces.
 
-For example, setting exclude 99% of `Trace Id`, you end up with:
-- 1% of traces for which we keep all logs
-- 99% of traces for which we keep no logs 
+For example, setting exclude 99% of `Trace Id`, results in:
+* 1% of traces get all their related logs kept.
+* 99% of traces get their related logs dropped.
 
 ## Multi indexes
 
