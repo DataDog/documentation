@@ -278,7 +278,7 @@ Starting with version `3.4.0` of the Go client.
 | `datadog.dogstatsd.client.packets_dropped_writer` | count        | Number of datagrams dropped because of an error while writing to the transport. |
 
 
-If you want to disable telemetry, simply do:
+If you want to disable telemetry:
 
 ```go
 statsd, err: = statsd.New("127.0.0.1:8125", statsd.WithoutTelemetry())
