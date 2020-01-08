@@ -39,7 +39,7 @@ After adding [`@datadog/browser-logs`][3] to your `package.json` file, initializ
 {{% tab "US" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -53,7 +53,7 @@ datadogLogs.init({
 {{% tab "EU" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -134,7 +134,7 @@ Once Datadog Browser log library is initialized, send a custom log entry directl
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 });
 ```
@@ -185,7 +185,7 @@ Once Datadog Browser log library is initialized, send a custom log entry directl
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 ```
@@ -240,7 +240,7 @@ Assume that there is a `signupLogger` logger, defined with all the other loggers
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
 ```
@@ -248,7 +248,7 @@ datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
 It can now be used in a different part of the code with:
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 const signupLogger = datadogLogs.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
@@ -290,7 +290,7 @@ Once Datadog Browser log library is initialized, it is possible to:
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.setLoggerGlobalContext("{'env', 'staging'}");
 
@@ -322,7 +322,7 @@ Once a logger is created, it is possible to:
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.setContext("{'env', 'staging'}");
 
@@ -355,7 +355,7 @@ Only logs with a status equal to or higher than the specified level are sent.
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.setLevel('<LEVEL>');
 ```
@@ -383,7 +383,7 @@ Once Datadog Browser log library is initialized, it is possible to configure the
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.setHandler('<HANDLER>');
 ```
