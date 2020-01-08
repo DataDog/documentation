@@ -227,7 +227,7 @@ Each client share a set of common tags.
 | `client_version`   | The version of the client                       | `client_version:1.2.3` |
 | `client_transport` | The transport byte the client (`udp` or `uds`)  | `client_transport:uds` |
 
-Keep in mind that when using UDP, network errors can't be detected by the client
+**Note**: When using UDP, network errors can't be detected by the client
 and the corresponding metrics will not reflect bytes/packets drop.
 
 {{< tabs >}}
