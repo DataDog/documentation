@@ -28,7 +28,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Setup
 
-1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [Client tokens documentation][2].
+1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [client token documentation][2].
 2. **Configure the Datadog browser log library** [through NPM](#npm-setup) or paste the [bundle](#bundle-setup) into the head tag directly.
 
 ### NPM setup
@@ -85,9 +85,7 @@ In order to not miss any logs or errors, you should load and configure the libra
         sampleRate: 100
       });
     </script>
-    ...
   </head>
-...
 </html>
 ```
 
@@ -95,17 +93,19 @@ In order to not miss any logs or errors, you should load and configure the libra
 {{% tab "EU" %}}
 
 ```html
-<head>
-  <title>Example to send logs to Datadog</title>
-  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
-  <script>
-    window.DD_LOGS && DD_LOGS.init({
-      clientToken: '<CLIENT_TOKEN>',
-      isCollectingError: true,
-      sampleRate: 100
-    });
-  </script>
-</head>
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script>
+      window.DD_LOGS && DD_LOGS.init({
+        clientToken: '<CLIENT_TOKEN>',
+        isCollectingError: true,
+        sampleRate: 100
+      });
+    </script>
+  </head>
+</html>
 ```
 
 {{% /tab %}}
