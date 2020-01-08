@@ -11,9 +11,9 @@ If a metric is not submitted from one of the [350+ Datadog integrations][1] it's
 
 ## Counting Custom Metrics
 
-Below are examples of how to count your custom metrics. The number of custom metrics associated with a particular metric name depends on its metric [submission type][3].
+The number of custom metrics associated with a particular metric name depends on its metric [submission type][3]. Below are examples of how to count your custom metrics based on the following scenario below:
 
-Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measure the latency of your endpoint requests. You’re submitting this metric with two tag keys:
+Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You’re submitting this metric with two tag keys:
 
 * `endpoint`, which has the value `endpoint:X` or `endpoint:Y`.
 * `status`, which has the value `status:200` or `status:400`.
@@ -38,14 +38,14 @@ This results in `request.Latency` reporting **four distinct custom metrics**.
 
 ### Effect of adding tags
 
-Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your temperature metric by country and region. You submit the following to Datadog:
+Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your `temperature` metric by country and region. You submit the following to Datadog:
 
 | Metric Name   | Tag Values                         |
 |---------------|------------------------------------|
 | `temperature` | `country:USA`, `region: Northeast` |
 | `temperature` | `country:USA`, `region: Southeast` |
 
-Suppose you wanted to add the tag `City` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
+Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
 
 | Metric Name   | Tag Values                                          |
 |---------------|-----------------------------------------------------|
@@ -59,13 +59,13 @@ Now suppose you also wanted to tag your temperature metric by `state` (which has
 
 To obtain the temperature in Florida, you can simply recombine the custom metrics of:
 
-* `temperature:{country:USA, state:Florida, city:Orlando}`
+* `temperature{country:USA, state:Florida, city:Orlando}`
 * `temperature{country:USA, state:Florida, city:Miami}`
 
 **Note**: Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
 
-*  `temperature{country:USA, state:Florida, city:Miami}`
-*  `temperature{state:Florida, city:Miami, country:USA}`
+* `temperature{country:USA, state:Florida, city:Miami}`
+* `temperature{state:Florida, city:Miami, country:USA}`
 
 [1]: /developers/metrics/types/?tab=count#metric-submission-types
 [2]: /developers/metrics/types/?tab=rate#metric-submission-types
@@ -73,7 +73,7 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-**A HISTOGRAM metric generates by default five custom metrics** for each unique combination of metric name and tag values to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
+**A HISTOGRAM metric generates by default five custom metrics for each unique combination of metric name and tag values** to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
 
 The number of unique tag value combinations submitted for a HISTOGRAM metric with this tagging scheme is **four**:
 
@@ -82,12 +82,12 @@ The number of unique tag value combinations submitted for a HISTOGRAM metric wit
 * `host:B`, `endpoint:X`, `status:400`
 * `host:B`, `endpoint:Y`, `status:200`
 
-By default, the Agent generates five custom metrics for each of the original four unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `max`, `median`, `avg`, `95pc`, and `count`. Consequently, `request.Latency` reports a total of **4*5 = 20 custom metrics**.
+By default, the Agent generates five custom metrics for each of the original four unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `avg`, `count`, `median`, `95percentile`, and `max`. Consequently, `request.Latency` reports a total of **4*5 = 20 custom metrics**.
 
-**Notes**: Adding aggregations to your HISTOGRAM metrics increases the number of distinct custom metrics reported. Removing aggregations decreases the number of custom metrics reported.
+**Note**: Adding aggregations to your HISTOGRAM metrics increases the number of distinct custom metrics reported. Removing aggregations decreases the number of custom metrics reported.
 
 * Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][3]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog. `sum` and `min` are also available if desired.
-* Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95pc` percentile is sent out to Datadog.
+* Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95percentile`, 95th percentile, is sent out to Datadog.
 
 [1]: /developers/metrics/types/?tab=histogram
 [2]: /developers/metrics/types/?tab=histogram#metric-submission-types
@@ -95,7 +95,7 @@ By default, the Agent generates five custom metrics for each of the original fou
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
-**A DISTRIBUTION metric generates by default five custom metrics** for each unique combination of metric name and tag values to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
+**A DISTRIBUTION metric generates by default five custom metrics for each unique combination of metric name and tag values** to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
 
 The number of unique tag value combinations submitted for a DISTRIBUTION metric with this tagging scheme is **four**.
 
@@ -104,11 +104,11 @@ The number of unique tag value combinations submitted for a DISTRIBUTION metric 
 * `host:B`, `endpoint:X`, `status:400`
 * `host:B`, `endpoint:Y`, `status:200`
 
-The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name, host, and tag values. This results in `request.Latency` reporting a total of **5*4 = 20 custom metrics**:
+The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. This results in `request.Latency` reporting a total of **5*4 = 20 custom metrics**.
 
-##### Customized tagging
+##### Customization of tagging
 
-You can customize [which tag combination][2] aggregations are created for any DISTRIBUTION metric. Say that you want to keep only the `endpoint` and `status` tags associated with your distribution. This leaves the following three unique tag combinations:
+You can customize [which tag combination][2] aggregations are created for any DISTRIBUTION metric. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency`  metric. This results in the following three unique tag combinations:
 
 * `endpoint:X`, `status:200`
 * `endpoint:X`, `status:400`
@@ -116,9 +116,9 @@ You can customize [which tag combination][2] aggregations are created for any DI
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5*3 = 15 custom metrics**
 
-##### Percentile aggregations
+##### Adding percentile aggregations
 
-Percentile aggregations are unique in the way they're counted because **Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combination is **eight**:
+Percentile aggregations are unique in the way they're counted because **Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combinations is **eight**:
 
 * `endpoint:X`, `status:200`
 * `endpoint:X`, `status:400`
@@ -141,7 +141,7 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][4]) can see the total custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
 
