@@ -39,7 +39,6 @@ datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
-  resourceSampleRate: 100,
   sampleRate: 100
 })
 ```
@@ -53,7 +52,6 @@ datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'eu',
-  resourceSampleRate: 100,
   sampleRate: 100
 })
 ```
@@ -77,7 +75,6 @@ Paste the generated code snippet into the head tag (in front of any other script
   window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
-    resourceSampleRate: 100,
     sampleRate: 100
   });
 </script>
@@ -95,7 +92,6 @@ Paste the generated code snippet into the head tag (in front of any other script
   window.DD_RUM && window.DD_RUM.init({
     clientToken: '<CLIENT_TOKEN>',
     applicationId: '<APPLICATION_ID>',
-    resourceSampleRate: 100,
     sampleRate: 100
   });
 </script>
