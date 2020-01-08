@@ -128,69 +128,70 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions | Support Type    | Notes                                      |
 |------------------|----------|-----------------|--------------------------------------------|
-| [connect][10]    | `>=2`    | Fully Supported |                                            |
-| [express][11]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][12]   |
-| [fastify][13]    | `>=1`    | Fully Supported |                                            |
-| [graphql][14]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][15]       | `>=2`    | Fully Supported |                                            |
-| [koa][16]        | `>=2`    | Fully Supported |                                            |
-| [paperplane][17] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][18]     |
-| [restify][19]    | `>=3`    | Fully Supported |                                            |
+| [connect][10]    | `>=2`    | Fully supported |                                            |
+| [express][11]    | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][12]   |
+| [fastify][13]    | `>=1`    | Fully supported |                                            |
+| [graphql][14]    | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [gRPC][15]       | `>=1.13` | Fully supported |                                            |
+| [hapi][16]       | `>=2`    | Fully supported |                                            |
+| [koa][17]        | `>=2`    | Fully supported |                                            |
+| [paperplane][18] | `>=2.3`  | Fully supported | Not supported in [serverless-mode][19]     |
+| [restify][20]    | `>=3`    | Fully supported |                                            |
 
 #### Native Module Compatibility
 
 | Module      | Support Type    |
 |-------------|-----------------|
-| [dns][20]   | Fully Supported |
-| [http][21]  | Fully Supported |
-| [https][22] | Fully Supported |
-| [net][23]   | Fully Supported |
+| [dns][21]   | Fully supported |
+| [http][22]  | Fully supported |
+| [https][23] | Fully supported |
+| [net][24]   | Fully supported |
 
 #### Data Store Compatibility
 
 | Module                 | Versions | Support Type    | Notes                                            |
 |------------------------|----------|-----------------|--------------------------------------------------|
-| [cassandra-driver][24] | `>=3`    | Fully Supported |                                                  |
-| [couchbase][25]        | `^2.4.2` | Fully Supported |                                                  |
-| [elasticsearch][26]    | `>=10`   | Fully Supported | Supports `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][27]          | `>=2`    | Fully Supported |                                                  |
-| [knex][28]             | `>=0.8`  | Fully Supported | This integration is only for context propagation |
-| [memcached][29]        | `>=2.2`  | Fully Supported |                                                  |
-| [mongodb-core][30]     | `>=2`    | Fully Supported | Supports Mongoose                                |
-| [mysql][31]            | `>=2`    | Fully Supported |                                                  |
-| [mysql2][32]           | `>=1`    | Fully Supported |                                                  |
-| [pg][33]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
-| [redis][34]            | `>=0.12` | Fully Supported |                                                  |
-| [tedious][35]          | `>=1`    | Fully Supported | SQL Server driver for `mssql` and `sequelize`    |
+| [cassandra-driver][25] | `>=3`    | Fully supported |                                                  |
+| [couchbase][26]        | `^2.4.2` | Fully supported |                                                  |
+| [elasticsearch][27]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][28]          | `>=2`    | Fully supported |                                                  |
+| [knex][29]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [memcached][30]        | `>=2.2`  | Fully supported |                                                  |
+| [mongodb-core][31]     | `>=2`    | Fully supported | Supports Mongoose                                |
+| [mysql][32]            | `>=2`    | Fully supported |                                                  |
+| [mysql2][33]           | `>=1`    | Fully supported |                                                  |
+| [pg][34]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
+| [redis][35]            | `>=0.12` | Fully supported |                                                  |
+| [tedious][36]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
 #### Worker Compatibility
 
 | Module             | Versions | Support Type    | Notes                                                  |
 |--------------------|----------|-----------------|--------------------------------------------------------|
-| [amqp10][36]       | `>=3`    | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][37]      | `>=0.5`  | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][38] | `>=2`    | Fully Supported |                                                        |
-| [kafka-node][39]   |          | Coming Soon     |                                                        |
-| [rhea][40]         |          | Coming Soon     |                                                        |
+| [amqp10][37]       | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][38]      | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][39] | `>=2`    | Fully supported |                                                        |
+| [kafka-node][40]   |          | Coming Soon     |                                                        |
+| [rhea][41]         |          | Coming Soon     |                                                        |
 
 #### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
-| [bluebird][41]   | `>=2`     | Fully Supported |
-| [promise][42]    | `>=7`     | Fully Supported |
-| [promise-js][43] | `>=0.0.3` | Fully Supported |
-| [q][44]          | `>=1`     | Fully Supported |
-| [when][45]       | `>=3`     | Fully Supported |
+| [bluebird][42]   | `>=2`     | Fully supported |
+| [promise][43]    | `>=7`     | Fully supported |
+| [promise-js][44] | `>=0.0.3` | Fully supported |
+| [q][45]          | `>=1`     | Fully supported |
+| [when][46]       | `>=3`     | Fully supported |
 
 #### Logger Compatibility
 
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
-| [bunyan][46]     | `>=1`     | Fully Supported |
-| [paperplane][47] | `>=2.3.2` | Fully Supported |
-| [pino][48]       | `>=2`     | Fully Supported |
-| [winston][49]    | `>=1`     | Fully Supported |
+| [bunyan][47]     | `>=1`     | Fully supported |
+| [paperplane][48] | `>=2.3.2` | Fully supported |
+| [pino][49]       | `>=2`     | Fully supported |
+| [winston][50]    | `>=1`     | Fully supported |
 
 ## Further Reading
 
@@ -210,38 +211,39 @@ For details about how to how to toggle and configure plugins, check out the [API
 [12]: https://expressjs.com/en/resources/frameworks.html
 [13]: https://www.fastify.io
 [14]: https://github.com/graphql/graphql-js
-[15]: https://hapijs.com
-[16]: https://koajs.com
-[17]: https://github.com/articulate/paperplane
-[18]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
-[19]: http://restify.com
-[20]: https://nodejs.org/api/dns.html
-[21]: https://nodejs.org/api/http.html
-[22]: https://nodejs.org/api/https.html
-[23]: https://nodejs.org/api/net.html
-[24]: https://github.com/datastax/nodejs-driver
-[25]: https://github.com/couchbase/couchnode
-[26]: https://github.com/elastic/elasticsearch-js
-[27]: https://github.com/luin/ioredis
-[28]: https://knexjs.org
-[29]: https://github.com/3rd-Eden/memcached
-[30]: http://mongodb.github.io/node-mongodb-native/core
-[31]: https://github.com/mysqljs/mysql
-[32]: https://github.com/sidorares/node-mysql2
-[33]: https://node-postgres.com
-[34]: https://github.com/NodeRedis/node_redis
-[35]: http://tediousjs.github.io/tedious
-[36]: https://github.com/noodlefrenzy/node-amqp10
-[37]: https://github.com/squaremo/amqp.node
-[38]: https://github.com/coopernurse/node-pool
-[39]: https://github.com/SOHU-Co/kafka-node
-[40]: https://github.com/amqp/rhea
-[41]: https://github.com/petkaantonov/bluebird
-[42]: https://github.com/then/promise
-[43]: https://github.com/kevincennis/promise
-[44]: https://github.com/kriskowal/q
-[45]: https://github.com/cujojs/when
-[46]: https://github.com/trentm/node-bunyan
-[47]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[48]: http://getpino.io
-[49]: https://github.com/winstonjs/winston
+[15]: https://grpc.io/
+[16]: https://hapijs.com
+[17]: https://koajs.com
+[18]: https://github.com/articulate/paperplane
+[19]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[20]: http://restify.com
+[21]: https://nodejs.org/api/dns.html
+[22]: https://nodejs.org/api/http.html
+[23]: https://nodejs.org/api/https.html
+[24]: https://nodejs.org/api/net.html
+[25]: https://github.com/datastax/nodejs-driver
+[26]: https://github.com/couchbase/couchnode
+[27]: https://github.com/elastic/elasticsearch-js
+[28]: https://github.com/luin/ioredis
+[29]: https://knexjs.org
+[30]: https://github.com/3rd-Eden/memcached
+[31]: http://mongodb.github.io/node-mongodb-native/core
+[32]: https://github.com/mysqljs/mysql
+[33]: https://github.com/sidorares/node-mysql2
+[34]: https://node-postgres.com
+[35]: https://github.com/NodeRedis/node_redis
+[36]: http://tediousjs.github.io/tedious
+[37]: https://github.com/noodlefrenzy/node-amqp10
+[38]: https://github.com/squaremo/amqp.node
+[39]: https://github.com/coopernurse/node-pool
+[40]: https://github.com/SOHU-Co/kafka-node
+[41]: https://github.com/amqp/rhea
+[42]: https://github.com/petkaantonov/bluebird
+[43]: https://github.com/then/promise
+[44]: https://github.com/kevincennis/promise
+[45]: https://github.com/kriskowal/q
+[46]: https://github.com/cujojs/when
+[47]: https://github.com/trentm/node-bunyan
+[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[49]: http://getpino.io
+[50]: https://github.com/winstonjs/winston
