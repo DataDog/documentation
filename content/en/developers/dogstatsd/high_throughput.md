@@ -215,7 +215,7 @@ dogstatsd_so_rcvbuf: 26214400
 ## Client side telemetry
 
 Dogstatsd clients send telemetry metrics by default to the agent. This allows
-you to better troubleshoot where the bottleneck might be. Each metric will be
+you to better troubleshoot where bottleneck exists. Each metric will be
 tagged with the client language and the client version. Those metrics will not be
 counted as custom and will not be billed.
 
