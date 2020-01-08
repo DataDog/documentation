@@ -245,7 +245,7 @@ Starting with version `0.34.0` of the Python client.
 | `datadog.dogstatsd.client.packets_sent`    | count       | Number of datagrams successfully sent to the agent.                                       |
 | `datadog.dogstatsd.client.packets_dropped` | count       | Number of datagrams dropped by the client.                                                |
 
-If you want to disable telemetry, simply do:
+If you want to disable telemetry:
 
 ```python
 statsd.disable_telemetry()
