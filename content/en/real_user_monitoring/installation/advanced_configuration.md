@@ -25,14 +25,14 @@ By default, no sampling is applied on the number of collected sessions. To apply
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
   sampleRate: 90
-})
+});
 ```
 
 {{% /tab %}}
@@ -40,10 +40,10 @@ datadogRum.init({
 
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
-        clientToken: '<CLIENT_TOKEN>',
-        applicationId: '<APPLICATION_ID>',
-        sampleRate: 90
-    });
+  clientToken: '<CLIENT_TOKEN>',
+  applicationId: '<APPLICATION_ID>',
+  sampleRate: 90
+});
 ```
 
 {{% /tab %}}
@@ -61,7 +61,7 @@ Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM ev
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 ```
@@ -87,7 +87,7 @@ Once Real User Monitoring (RUM) is initialized, you can replace the default cont
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
 ```
@@ -113,7 +113,7 @@ Once Real User Monitoring (RUM) is initialized, generate user actions when you w
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.addUserAction("<NAME>","<JSON_OBJECT>");
 ```
@@ -135,15 +135,16 @@ For instance, to collect the amount of items within a cart, what they are, and h
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.addUserAction("Cart Payed", {
-            "cart": {
-                "amount": 42,
-                "currency": "$",
-                "nb_items": 2,
-                "items": ["socks", "t-shirt"]
-            });
+  "cart": {
+    "amount": 42,
+    "currency": "$",
+    "nb_items": 2,
+    "items": ["socks", "t-shirt"]
+  }
+});
 ```
 
 {{% /tab %}}
@@ -151,12 +152,13 @@ datadogRum.addUserAction("Cart Payed", {
 
 ```javascript
 window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
-            "cart": {
-                "amount": 42,
-                "currency": "$",
-                "nb_items": 2,
-                "items": ["socks", "t-shirt"]
-            });
+  "cart": {
+    "amount": 42,
+    "currency": "$",
+    "nb_items": 2,
+    "items": ["socks", "t-shirt"]
+  }
+});
 ```
 
 {{% /tab %}}

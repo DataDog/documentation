@@ -33,28 +33,28 @@ After adding [`@datadog/browser-rum`][4] to your `package.json` file, initialize
 {{% tab "US" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
   sampleRate: 100
-})
+});
 ```
 
 {{% /tab %}}
 {{% tab "EU" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum'
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'eu',
   sampleRate: 100
-})
+});
 ```
 
 {{% /tab %}}
