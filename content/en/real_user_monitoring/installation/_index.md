@@ -48,6 +48,7 @@ datadogRum.init({
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
+
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
