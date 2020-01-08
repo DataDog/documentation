@@ -4,13 +4,14 @@ import algoliasearch from 'algoliasearch';
 import { initializeIntegrations } from './components/integrations';
 import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
-
+import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
 
 // Setup for large screen ToC
 
 // gTag
 window.dataLayer = window.dataLayer || [];
+
 
 const siteEnv = document.querySelector('html').dataset.env;
 
@@ -930,7 +931,7 @@ function loadPage(newUrl) {
             if (typeof window.Munchkin !== "undefined") {
                 Munchkin.munchkinFunction('clickLink', { href: newUrl});
             } else {
-                window.datadog_logger.info("Munchkin called before ready..")
+                datadogLogs.logger.info("Munchkin called before ready..")
             }
     
     
