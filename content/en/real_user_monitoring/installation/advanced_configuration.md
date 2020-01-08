@@ -31,7 +31,6 @@ datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
-  resourceSampleRate: 100,
   sampleRate: 90
 })
 ```
