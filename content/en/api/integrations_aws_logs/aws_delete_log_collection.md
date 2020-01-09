@@ -1,13 +1,13 @@
 ---
-title: Delete AWS log collection
+title: Delete an AWS Logs integration
 type: apicontent
 order: 16.10
-external_redirect: /api/#delete-aws-log-collection
+external_redirect: /api/#delete-an-aws-logs-integration
 ---
 
-## Delete AWS log collection
+## Delete an AWS Logs integration
 
-Delete a Datadog-AWS log collection configuration by removing the specific Lambda ARN associated with a given AWS account.
+Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.
 
 **ARGUMENTS**:
 

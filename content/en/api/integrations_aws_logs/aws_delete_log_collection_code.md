@@ -1,8 +1,8 @@
 ---
-title: Delete AWS log collection
+title: Delete an AWS Logs integration
 type: apicode
 order: 16.10
-external_redirect: /api/#delete-aws-log-collection
+external_redirect: /api/#delete-an-aws-logs-integration
 ---
 
 **SIGNATURE**:
