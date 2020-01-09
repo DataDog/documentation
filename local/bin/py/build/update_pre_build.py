@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import csv
-import fnmatch
 import glob
 import json
 import sys
@@ -9,16 +8,15 @@ import linecache
 import re
 import shutil
 from json import JSONDecodeError
+from pull_and_push_file import pull_and_push_file
+from pull_and_push_folder import pull_and_push_folder
+from content_manager import prepare_content
 
-import requests
 import yaml
-import pickle
 import markdown2
 
 from collections import OrderedDict
-from functools import partial, wraps
 from itertools import chain
-from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
 from os.path import (
@@ -31,143 +29,6 @@ from os.path import (
     abspath,
     normpath,
 )
-
-
-def cache_by_sha(func):
-    """ only downloads fresh file, if we don't have one or we do and the sha has changed """
-
-    @wraps(func)
-    def cached_func(*args, **kwargs):
-        cache = {}
-        list_item = args[1]
-        dest_dir = kwargs.get("dest_dir")
-        path_to_file = list_item.get("path", "")
-        file_out = "{}{}".format(dest_dir, path_to_file)
-        p_file_out = "{}{}.pickle".format(
-            dest_dir, path_to_file
-        )
-        makedirs(dirname(file_out), exist_ok=True)
-        if exists(p_file_out) and exists(file_out):
-            with open(p_file_out, "rb") as pf:
-                cache = pickle.load(pf)
-        cache_sha = cache.get("sha", False)
-        input_sha = list_item.get("sha", False)
-        if (cache_sha and input_sha and cache_sha == input_sha):
-            # do nothing as we have the up to date file already
-            return None
-        else:
-            with open(p_file_out, mode="wb+") as pf:
-                pickle.dump(
-                    list_item, pf, pickle.HIGHEST_PROTOCOL
-                )
-            return func(*args, **kwargs)
-
-    return cached_func
-
-
-class GitHub:
-    def __init__(self, token=None):
-        self.token = token
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *exc):
-        return False
-
-    def headers(self):
-        return (
-            {"Authorization": "token {}".format(self.token)}
-            if self.token
-            else {}
-        )
-
-    def extract(self, data):
-        out = []
-        for item in data.get("tree", []):
-            out.append(
-                {
-                    "path": item.get("path", ""),
-                    "url": item.get("url", ""),
-                    "type": item.get("type", ""),
-                    "sha": item.get("sha", ""),
-                }
-            )
-            if item.get("tree", None):
-                out.append(self.extract(item.get("tree")))
-        return out
-
-    def list(self, org, repo, branch, globs=None):
-        globs = [] if globs is None else globs
-        listing = []
-        # get the latest sha
-        url = "https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}".format(
-            org, repo, branch
-        )
-        headers = self.headers()
-        print(
-            "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
-                repo, branch
-            )
-        )
-        sha_response = requests.get(url, headers=headers)
-        if sha_response.status_code == requests.codes.ok:
-            sha = (
-                sha_response.json()
-                .get("object", {})
-                .get("sha", None)
-            )
-            if sha:
-                print(
-                    "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
-                        repo, branch, sha
-                    )
-                )
-                tree_response = requests.get(
-                    "https://api.github.com/repos/{0}/{1}/git/trees/{2}?recursive=1".format(
-                        org, repo, sha
-                    ),
-                    headers=headers,
-                )
-                if tree_response.status_code == 200:
-                    listing = self.extract(
-                        tree_response.json()
-                    )
-
-        if globs:
-            filtered_listing = []
-            for item in listing:
-                path = item.get("path", "")
-                for glob_string in globs:
-                    if fnmatch.fnmatch(path, glob_string):
-                        filtered_listing.append(item)
-            return filtered_listing
-        else:
-            return listing
-
-    @cache_by_sha
-    def raw(
-        self,
-        list_item,
-        request_session,
-        org,
-        repo,
-        branch,
-        dest_dir,
-    ):
-        headers = self.headers()
-        path_to_file = list_item.get("path", "")
-        file_out = "{}{}".format(dest_dir, path_to_file)
-        raw_response = request_session.get(
-            "https://raw.githubusercontent.com/{0}/{1}/{2}/{3}".format(
-                org, repo, branch, path_to_file
-            ),
-            headers=headers,
-        )
-        if raw_response.status_code == requests.codes.ok:
-            makedirs(dirname(file_out), exist_ok=True)
-            with open(file_out, mode="wb+") as f:
-                f.write(raw_response.content)
 
 
 class PreBuild:
@@ -227,7 +88,6 @@ class PreBuild:
             re.DOTALL,
         )
         self.datafile_json = []
-        self.pool_size = 5
         self.integration_mutations = OrderedDict(
             {
                 "hdfs": {
@@ -372,55 +232,16 @@ class PreBuild:
                     )
                 )
 
-    def download_from_repo(self, org, repo, branch, globs):
-        """
-        Takes github info and file globs and downloads files from github using multiple processes
-        :param org: github organization or person
-        :param repo: github repo name
-        :param branch: the branch name
-        :param globs: list of strings in glob format of what to extract
-        :return:
-        """
-        with GitHub(self.options.token) as gh:
-            listing = gh.list(org, repo, branch, globs)
-            dest = "{0}{1}{2}".format(
-                self.extract_dir, repo, sep
-            )
-            with Pool(processes=self.pool_size) as pool:
-                with requests.Session() as s:
-                    r = [
-                        x
-                        for x in pool.imap_unordered(
-                            partial(
-                                gh.raw,
-                                request_session=s,
-                                org=org,
-                                repo=repo,
-                                branch=branch,
-                                dest_dir=dest,
-                            ),
-                            listing,
-                        )
-                    ]
-
     def process(self):
         """
         This represents the overall workflow of the build of the documentation
         """
         print("\x1b[34mStarting Processing...\x1b[0m")
 
-        self.extract_config()
+        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
 
-        try:
-            self.local_or_upstream()
-        except:
-            if getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode.")
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build.")
-                sys.exit(1)
+        self.list_of_contents = prepare_content(
+            configuration, self.options.token, self.extract_dir)
 
         try:
             self.process_filenames()
@@ -444,126 +265,21 @@ class PreBuild:
                     "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
                 sys.exit(1)
 
-    def extract_config(self):
-        """
-        This pulls the content from the configuration file at CONFIGURATION_FILE location
-        then parses it to populate the list_of_content variable that contains all contents
-        that needs to be pulled and processed.
-        """
-        print(
-            "\x1b[32mINFO\x1b[0m: Loading {} configuration file".format(
-                getenv("CONFIGURATION_FILE")
-            )
-        )
-        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
-        for org in configuration:
-            for repo in org["repos"]:
-                for content in repo["contents"]:
-                    content_temp = {}
-                    content_temp["org_name"] = org[
-                        "org_name"
-                    ]
-                    content_temp["repo_name"] = repo[
-                        "repo_name"
-                    ]
-                    content_temp["branch"] = content[
-                        "branch"
-                    ]
-                    content_temp["action"] = content[
-                        "action"
-                    ]
-                    content_temp["globs"] = content["globs"]
-
-                    if (content["action"] == "pull-and-push-folder" or content["action"] == "pull-and-push-file"):
-                        content_temp["options"] = content["options"]
-
-                    self.list_of_contents.append(
-                        content_temp
-                    )
-                    # print(
-                    #    "Adding content {} ".format(
-                    #        content_temp
-                    #    )
-                    # )
-
-    def local_or_upstream(self):
-        """
-        This goes through the list_of_contents and check for each repo specified
-        If a local version exists otherwise we download it from the upstream repo on Github
-        Local version of the repo should be in the same folder as the documentation/ folder.
-        """
-        for content in self.list_of_contents:
-            repo_name = "../" + content["repo_name"] + sep
-            if isdir(repo_name):
-                print("\x1b[32mINFO\x1b[0m: Local version of {} found".format(
-                    content["repo_name"]))
-                content["globs"] = self.update_globs(
-                    repo_name,
-                    content["globs"],
-                )
-            elif self.options.token != "False":
-                print(
-                    "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
-                        content["repo_name"]
-                    )
-                )
-                self.download_from_repo(
-                    content["org_name"],
-                    content["repo_name"],
-                    content["branch"],
-                    content["globs"],
-                )
-                content[
-                    "globs"
-                ] = self.update_globs(
-                    "{0}{1}{2}".format(
-                        self.extract_dir,
-                        content["repo_name"],
-                        sep,
-                    ),
-                    content["globs"],
-                )
-            elif getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
-                content["action"] = "Not Available"
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: No local version of {} found, no GITHUB_TOKEN available.".format(
-                        content["repo_name"]
-                    )
-                )
-                raise ValueError
-
-    def update_globs(self, new_path, globs):
-        """
-        Depending if the repo is local or we downloaded it we need to update the globs to match
-        the final version of the repo to use
-        :param new_path: new_path to update the globs with
-        :param globs: list of globs to update
-        """
-        new_globs = []
-        for item in globs:
-            new_globs.append("{}{}".format(new_path, item))
-
-        return new_globs
-
     def process_filenames(self):
         """
         Goes through the list_of_contents and for each content
         triggers the right action to apply.
         """
         for content in self.list_of_contents:
-            # print("Processing content: {}".format(content))
             try:
                 if content["action"] == "integrations":
                     self.process_integrations(content)
 
                 elif (content["action"] == "pull-and-push-folder"):
-                    self.pull_and_push_folder(content)
+                    pull_and_push_folder(content, self.content_dir)
 
                 elif content["action"] == "pull-and-push-file":
-                    self.pull_and_push_file(content)
+                    pull_and_push_file(content, self.content_dir)
                 elif content["action"] == "Not Available":
                     if getenv("LOCAL") == 'True':
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(
@@ -603,85 +319,6 @@ class PreBuild:
 
             elif file_name.endswith(".md"):
                 self.process_integration_readme(file_name)
-
-    def pull_and_push_file(self, content):
-        """
-        Takes the content from a file from a github repo and
-        pushed it to the doc
-        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-files to learn more
-        :param content: object with a file_name, a file_path, and options to apply
-        """
-        with open("".join(content["globs"]), mode="r+") as f:
-            file_content = f.read()
-
-            # If options include front params, then the H1 title of the source file is striped
-            # and the options front params are inlined
-
-            if "front_matters" in content["options"]:
-                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"],default_flow_style=False) + "---\n"
-                file_content = re.sub(r'^(#{1}).*', front_matters, file_content, count=1)
-
-        with open(
-            "{}{}{}".format(
-                self.content_dir,
-                content["options"]["dest_path"][1:],
-                basename(content["options"]["file_name"]),
-            ),
-            mode="w+",
-            encoding="utf-8",
-        ) as f:
-            f.write(file_content)
-
-    def pull_and_push_folder(self, content):
-        """
-        Take the content from a folder following github logic
-        and transform it to be displayed in the doc in dest_dir folder
-        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-folder to learn more
-        :param content: content to process
-        """
-
-        for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
-
-            with open(file_name, mode="r+") as f:
-                file_content = f.read()
-
-                # Replacing the master README.md by _index.md to follow Hugo logic
-                if file_name.endswith("README.md"):
-                    file_name = "_index.md"
-
-                # Replacing links that point to the Github folder by link that point to the doc.
-                new_link = (
-                    content["options"]["dest_dir"] + "\\2"
-                )
-                regex_github_link = re.compile(
-                    r"(https:\/\/github\.com\/{}\/{}\/blob\/{}\/{})(\S+)\.md".format(
-                        content["org_name"],
-                        content["repo_name"],
-                        content["branch"],
-                        content["options"][
-                            "path_to_remove"
-                        ],
-                    )
-                )
-                file_content = re.sub(
-                    regex_github_link,
-                    new_link,
-                    file_content,
-                    count=0,
-                )
-
-            # Writing the new content to the documentation file
-            dirp = "{}{}".format(
-                self.content_dir,
-                content["options"]["dest_dir"][1:],
-            )
-            makedirs(dirp, exist_ok=True)
-            with open(
-                "{}{}".format(dirp, basename(file_name)),
-                mode="w+",
-                encoding="utf-8",
-            ) as f:
-                f.write(file_content)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -894,7 +531,8 @@ class PreBuild:
         else:
             no_integration_issue = False
             manifest_json = {}
-            print("\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(file_name))
+            print(
+                "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(file_name))
 
         dependencies = self.add_dependencies(file_name)
         new_file_name = "{}.md".format(
