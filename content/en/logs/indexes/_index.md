@@ -83,10 +83,10 @@ Update or remove this quota at any time when editing the Index:
 In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
 By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
 
-This feature operates on attribute's values rather than the log itself: for example, 
-* given an attribute `id` holding 3 distinct values (`1`, `2`, `3`)
-* defining a 66% exclusion filter on it
-* results in indexing all logs holding 1 specific attribute's value (`3`), all the others won't be indexed.
+This feature operates on attribute's values rather than the log itself, for example:
+* given an attribute `id` holding 3 distinct values (`1`, `2`, `3`),
+* defining a 66% exclusion filter on it,
+* results in indexing all logs holding 1 specific attribute's value (`3`), all the other logs won't be indexed.
 
 {{< img src="logs/indexes/index_exclusion_attribute_groups.png" alt="index attribute-based exclusion filter groups"  style="width:70%;">}}
 
