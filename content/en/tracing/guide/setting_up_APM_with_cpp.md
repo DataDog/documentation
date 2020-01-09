@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ## Overview
-This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting. You can also directly spin up a ready-to-go box with all of this set up from our sandbox repo [here][2].
+This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting. You can also directly spin up a ready-to-go box with all of this set up from Datadog's sandbox repo [here][2].
 
 ## Setting up your box
 
@@ -116,9 +116,9 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 ```
 
 ## Sending traces
-Now that an app exists, you can start sending traces and see the trace agent in action.
+Now that an app exists, you can start sending traces and see the Trace Agent in action.
 
-First, tail the trace agent log via:
+First, tail the Trace Agent log with:
 ```
 tail -f /var/log/datadog/trace-agent.log
 ```
@@ -127,11 +127,11 @@ Next, open a new tab and run the example a couple times:
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 ```
 
-On the trace agent tab, you will see something similar to:
+On the Trace Agent tab, you will see something similar to:
 ```
 2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:v1.0.1] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
-Then, in the Datadog UI, you will see the service show up in your APM services page.
+The service then shows up in your APM services page in Datadog.
 {{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" responsive="true" >}}
 
 Click on the service to view your traces.
