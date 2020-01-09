@@ -46,6 +46,35 @@ To configure an exclusion filter:
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
 
+#### Attribute based sampling
+
+In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
+This feature operates on attribute's values rather than the log itself.
+
+For example,`nginx` Web Access logs are very verbose, therefore sampling is needed.
+In order to keep track of the 1% of users’ sessions, define a sampling on the `session_id` attribute for `nginx` logs:
+  * All the logs related to the 1% of sessions are indexed: the information of these sessions is "complete",
+  * The logs related to the remaining 99% of sessions are not indexed but are still available in livetail and archives.
+
+{{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="attribute-based sampling"  style="width:70%;">}}
+
+**Note**: 
+
+* By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
+
+* The attribute name must be prefixed by `@` (i.e. if the attribute is called `session_id`, in the exclusion filter it must be `@session_id`).
+
+* The attribute-based sampling is recommended for high cardinality attributes (e.g. `session_id`, `trace_id`, etc.).
+
+##### Sample all logs of a trace
+
+Once [logs and traces are connected][10], a `Trace Id` attribute is automatically added in the logs.
+In order to be able to sample those logs but make sure that for the chosen traces the full set of logs is indexed, an attribute-based exclusion filter should be set on the `Trace Id` attribute.
+
+For example, setting exclude 60% of `Trace Id`, results in:
+* 40% of all traces get all their related logs indexed.
+* 60% of all traces have their logs not indexed but are still available in livetail and archives.
+
 ### Reorder filters
 
 Order matters for exclusion filters. Contrary to how several pipelines can process a log, if a log matches several exclusion filters, only the first exclusion filter rule is applied.
@@ -78,35 +107,6 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
-### Attribute based sampling
-
-In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
-This feature operates on attribute's values rather than the log itself.
-
-For example,`nginx` Web Access logs are very verbose, therefore sampling is needed.
-In order to keep track of the 1% of users’ sessions, define a sampling on the `session_id` attribute for `nginx` logs:
-  * All the logs related to the 1% of sessions are indexed: the information of these sessions is "complete",
-  * The logs related to the remaining 99% of sessions are not indexed.
-
-{{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="attribute-based sampling"  style="width:70%;">}}
-
-**Note**: 
-
-* By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
-
-* You must prefix the attribute name with the `@` character.
-
-* For low cardinality attributes, you should define a set of distinct Index Exclusion Filters on `all logs`.
-
-#### Sample all logs of a trace
-
-In order to guarantee the sampling of all logs related to a given trace, define the log sampling on `Trace Id` attribute.
-Refer to [Trace Remapper][10] to get more information on how to connect logs and traces.
-
-For example, setting exclude 99% of `Trace Id`, results in:
-* 1% of traces get all their related logs indexed: these traces are "complete".
-* 99% of traces don't get related logs indexed.
-
 ## Multi indexes
 
 It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
@@ -133,4 +133,4 @@ Multiple indexes also provide the ability to define access rules on the data con
 [7]: https://docs.datadoghq.com/logs/archives/
 [8]: https://docs.datadoghq.com/logs/logs_to_metrics/
 [9]: /account_management/rbac
-[10]: /logs/processing/processors/?tab=ui#trace-remapper
+[10]: /tracing/advanced/connect_logs_and_traces/?tab=java
