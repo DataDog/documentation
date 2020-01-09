@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ## Overview
-This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting. You can also directly spin up a ready-to-go box with all of this set up from Datadog's sandbox repo [here][2].
+This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting. You can also directly spin up a ready-to-go box with all of this set up from Datadog's [sandbox repo][2].
 
 ## Setting up your box
 
