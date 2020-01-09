@@ -273,7 +273,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.servic
 
 #### `dd.trace.global.tags`
 
-**Setting a global env for spans and jmx metrics**
+**Setting a global env for spans and JMX metrics**
 
 ```
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -jar path/to/application.jar
@@ -293,7 +293,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 
 #### `dd.trace.jmx.tags`
 
-**Setting custom.type:2 on a jmx metric**
+**Setting custom.type:2 on a JMX metric**
 
 ```
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
@@ -326,7 +326,7 @@ DB Instance 2, `secondwebappdb`, now gets its own service name that is the same 
 
 {{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" responsive="true" >}}
 
-Similarly on the service map, you would now see one web app making calls to two different postgres databases.
+Similarly on the service map, you would now see one web app making calls to two different Postgres databases.
 
 #### `dd.http.server.tag.query-string`
 
