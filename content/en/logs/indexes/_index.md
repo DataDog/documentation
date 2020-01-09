@@ -46,7 +46,7 @@ To configure an exclusion filter:
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
 
-#### Attribute based sampling
+### Attribute based sampling
 
 In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
 This feature operates on attribute's values rather than the log itself.
@@ -66,7 +66,7 @@ In order to keep track of the 1% of users’ sessions, define a sampling on the 
 
 * The attribute-based sampling is recommended for high cardinality attributes (e.g. `session_id`, `trace_id`, etc.).
 
-##### Sample all logs of a trace
+#### Sample all logs of a trace
 
 Once [logs and traces are connected][10], a `Trace Id` attribute is automatically added in the logs.
 In order to be able to sample those logs but make sure that for the chosen traces the full set of logs is indexed, an attribute-based exclusion filter should be set on the `Trace Id` attribute.
