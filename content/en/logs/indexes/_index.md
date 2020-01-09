@@ -41,7 +41,7 @@ To configure an exclusion filter:
 1. Define the name of your filter.
 2. Define the query for logs to exclude from your index.
     **Note**: It is possible to use any attribute or tag in the index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar.
-3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-sampling).
+3. Define the sampling rate. Optionally, define the [attribute to sample on](#attribute-based-sampling) to ensure complete log information related to a given subset of transactions or traces.
 4. Save the filter.
 
     {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
@@ -80,9 +80,13 @@ Update or remove this quota at any time when editing the Index:
 
 ### Attribute based sampling
 
-You can sample on a specific attribute holding an ID, such as User, Session, Request Identifiers, in addition to the default log-based sampling (applied when the exclusion percentage is set on `all logs`).
+In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
+By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
 
-This feature operates on attribute's values rather than the log itself: for example, given an attribute `id` holding 3 distinct values (`1`, `2`, `3`), defining a 66% exclusion filter on it, results in indexing all logs holding 1 specific attribute's value (`3`).
+This feature operates on attribute's values rather than the log itself: for example, 
+* given an attribute `id` holding 3 distinct values (`1`, `2`, `3`)
+* defining a 66% exclusion filter on it
+* results in indexing all logs holding 1 specific attribute's value (`3`), all the others won't be indexed.
 
 {{< img src="logs/indexes/index_exclusion_attribute_groups.png" alt="index attribute-based exclusion filter groups"  style="width:70%;">}}
 
@@ -102,8 +106,8 @@ In order to guarantee the sampling of all logs related to a given trace, define 
 Refer to [Trace Remapper][10] to get more information on how to connect logs and traces.
 
 For example, setting exclude 99% of `Trace Id`, results in:
-* 1% of traces get all their related logs kept.
-* 99% of traces get their related logs dropped.
+* 1% of traces get all their related logs indexed.
+* 99% of traces don't get related logs indexed.
 
 ## Multi indexes
 
