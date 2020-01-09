@@ -25,33 +25,6 @@ L'APM Datadog est disponible pour Istio 1.1.3 et ultérieur sur les clusters Kub
 2. [Veillez à ce que l'APM soit activé pour votre Agent][2].
 3. Supprimez la mise en commentaire du paramètre `hostPort` pour que les sidecars Istio puissent se connecter à l'Agent et envoyer des traces.
 
-**Remarque** : les pods de l'Agent ne sont pas en mesure de démarrer si l'injection automatique de sidecar d'Istio est activée sur l'espace de nommage sur lequel l'Agent Datadog est exécuté. Pour éviter cela :
-
-- [Désactivez l'injection de sidecar pour l'Agent Datadog.](#disable-sidecar-injection-for-the-datadog-agent)
-- [Créez un service headless pour l'Agent Datadog.](#create-a-headless-service-for-the-datadog-agent)
-
-#### Désactiver l'injection de sidecar pour l'Agent Datadog
-
-Ajoutez l'annotation `sidecar.istio.io/inject: "false"` au daemonset `datadog-agent` :
-
-```yaml
-...
-spec:
-  ...
-  template:
-    metadata:
-      annotations:
-        sidecar.istio.io/inject: "false"
-    ...
-
-```
-
-Vous pouvez également utiliser la commande `kubectl patch`.
-
-```shell
-kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
-```
-
 #### Créer un service headless pour l'Agent Datadog
 
 Créez un service headless pour l'Agent Datadog avec la configuration YAML spécifiée ci-dessous.
