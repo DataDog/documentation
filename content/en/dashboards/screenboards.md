@@ -22,7 +22,7 @@ Screenboards are dashboards with free-form layouts which can include a variety o
 
 To use the screenboard global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in a widget's editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same timeframe for all widgets using the `Global Time` option on the same screenboard. You can select a moving window in the past (`The Past Hour`, `The Past Day`, etc.) or a fixed period with the `Select Range` option. If a moving window is chosen, the widgets are updated every few milliseconds to move along with the time window.
+The global time selector sets the same timeframe for all widgets using the `Global Time` option on the same screenboard. You can select a moving window in the past (`The Past Hour`, `The Past Day`, etc.) or a fixed period with the `Select Range` option. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local timeframe as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local timeframe for `The Past Minute` shows the last minute of January 2, 2019 from 11:59pm.
 
