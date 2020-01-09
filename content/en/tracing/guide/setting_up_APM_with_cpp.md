@@ -25,14 +25,14 @@ Next, install the agent with the [instructions in the UI][3].
 
 ### Prepping for C++
 
-Install `g++` and `cmake` via:
+Install `g++` and `cmake` with:
 
 ```
 sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Run these two lines together to get the latest cpp version:
+Run these two lines together to get the latest C++ version:
 ```
 get_latest_release() {  
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |  
@@ -41,12 +41,12 @@ get_latest_release() {
 }  
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 ```
-If you get a rate limited message from Github, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your cpp version with:
+If you get a rate limited message from Github, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:
 ```
 echo $DD_OPENTRACING_CPP_VERSION
 ```
 
-Then, download and install the `dd-opentracing-cpp` library via:
+Then, download and install the `dd-opentracing-cpp` library with:
 ```
 wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
 ```
@@ -55,7 +55,7 @@ After downloading the `tar` file, create a new directory and a `.build` file for
 ```
 mkdir -p dd-opentracing-cpp/.build
 ```
-Then unzip it via:
+Then unzip it:
 ```bash
 tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
 ```
