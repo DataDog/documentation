@@ -81,20 +81,18 @@ Update or remove this quota at any time when editing the Index:
 ### Attribute based sampling
 
 In order to ensure complete log information related to a given subset of transactions, sample on a specific attribute holding an ID, such as User, Session, Request Identifiers.
-By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
+This feature operates on attribute's values rather than the log itself.
 
-This feature operates on attribute's values rather than the log itself, for example:
-* given an attribute `id` holding 3 distinct values (`1`, `2`, `3`),
-* defining a 66% exclusion filter on it,
-* results in indexing all logs holding 1 specific attribute's value (`3`), all the other logs won't be indexed.
+For example,`nginx` Web Access logs are very verbose, therefore sampling is needed.
+In order to keep track of the 1% of users’ sessions, define a sampling on the `session_id` attribute for `nginx` logs:
+  * All the logs related to the 1% of sessions are indexed: the information of these sessions is "complete",
+  * The logs related to the remaining 99% of sessions are not indexed.
 
-{{< img src="logs/indexes/index_exclusion_attribute_groups.png" alt="index attribute-based exclusion filter groups"  style="width:70%;">}}
-
-For example, exclude `nginx` logs for 99% of `http.request_id`:
-
-{{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="index attribute-based exclusion filter"  style="width:70%;">}}
+{{< img src="logs/indexes/index_exclusion_on_attribute.png" alt="attribute-based sampling"  style="width:70%;">}}
 
 **Note**: 
+
+* By default, the log-based sampling is applied (exclusion percentage set on `all logs`).
 
 * You must prefix the attribute name with the `@` character.
 
@@ -106,7 +104,7 @@ In order to guarantee the sampling of all logs related to a given trace, define 
 Refer to [Trace Remapper][10] to get more information on how to connect logs and traces.
 
 For example, setting exclude 99% of `Trace Id`, results in:
-* 1% of traces get all their related logs indexed.
+* 1% of traces get all their related logs indexed: these traces are "complete".
 * 99% of traces don't get related logs indexed.
 
 ## Multi indexes
