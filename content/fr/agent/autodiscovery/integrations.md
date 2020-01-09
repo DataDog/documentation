@@ -5,7 +5,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: Recueillir vos processus
   - link: tracing
@@ -55,7 +55,7 @@ kind: Pod
 metadata:
   name: '<NOM_POD>'
   annotations:
-    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.check_names: '[<NOM_CHECK>]'
+    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.check_names: '[<NOM_INTÉGRATION>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.init_configs: '[<CONFIG_INIT>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.instances: '[<CONFIG_INSTANCE>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: '[<CONFIG_LOG>]'
@@ -75,12 +75,12 @@ kind: Pod
 metadata:
   name: '<NOM_POD>'
   annotations:
-    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_1>.check_names: '[<NOM_CHECK_1>]'
+    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_1>.check_names: '[<NOM_INTÉGRATION_1>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_1>.init_configs: '[<CONFIG_INIT_1>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_1>.instances: '[<CONFIG_INSTANCE_1>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_1>.logs: '[<CONFIG_LOG_1>]'
     # (...)
-    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_2>.check_names: '[<NOM_CHECK_2>]'
+    ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_2>.check_names: '[<NOM_INTÉGRATION_2>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_2>.init_configs: '[<CONFIG_INIT_2>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_2>.instances: '[<CONFIG_INSTANCE_2>]'
     ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR_2>.logs: '[<CONFIG_LOG_2>]'
@@ -102,7 +102,7 @@ Il est possible de stocker vos modèles d'intégration en tant qu'étiquettes Do
 **Dockerfile** :
 
 ```yaml
-LABEL "com.datadoghq.ad.check_names"='[<NOM_CHECK>]'
+LABEL "com.datadoghq.ad.check_names"='[<NOM_INTÉGRATION>]'
 LABEL "com.datadoghq.ad.init_configs"='[<CONFIG_INIT>]'
 LABEL "com.datadoghq.ad.instances"='[<CONFIG_INSTANCE>]'
 LABEL "com.datadoghq.ad.logs"='[<CONFIG_LOGS>]'
@@ -112,7 +112,7 @@ LABEL "com.datadoghq.ad.logs"='[<CONFIG_LOGS>]'
 
 ```yaml
 labels:
-  com.datadoghq.ad.check_names: '[<NOM_CHECK>]'
+  com.datadoghq.ad.check_names: '[<NOM_INTÉGRATION>]'
   com.datadoghq.ad.init_configs: '[<CONFIG_INIT>]'
   com.datadoghq.ad.instances: '[<CONFIG_INSTANCE>]'
   com.datadoghq.ad.logs: '[<CONFIG_LOGS>]'
@@ -121,7 +121,7 @@ labels:
 **Commande d'exécution Docker** :
 
 ```shell
--l com.datadoghq.ad.check_names='[<NOM_CHECK>]' -l com.datadoghq.ad.init_configs='[<CONFIG_INIT>]' -l com.datadoghq.ad.instances='[<CONFIG_INSTANCE>]' -l com.datadoghq.ad.logs='[<CONFIG_LOGS>]'
+-l com.datadoghq.ad.check_names='[<NOM_INTÉGRATION>]' -l com.datadoghq.ad.init_configs='[<CONFIG_INIT>]' -l com.datadoghq.ad.instances='[<CONFIG_INSTANCE>]' -l com.datadoghq.ad.logs='[<CONFIG_LOGS>]'
 ```
 
 **Docker Swarm** :
@@ -135,7 +135,7 @@ services:
   project:
     image: '<NOM_IMAGE>'
     labels:
-      com.datadoghq.ad.check_names: '[<NOM_CHECK>]'
+      com.datadoghq.ad.check_names: '[<NOM_INTÉGRATION>]'
       com.datadoghq.ad.init_configs: '[<CONFIG_INIT>]'
       com.datadoghq.ad.instances: '[<CONFIG_INSTANCE>]'
       com.datadoghq.ad.logs: '[<CONFIG_LOGS>]'
@@ -156,7 +156,7 @@ Ces modèles d'intégration peuvent convenir dans les cas simples. Toutefois, si
 
 **Exemple de fichier de configuration automatique**:
 
-```
+```text
 ad_identifiers:
   <IDENTIFICATEUR_INTÉGRATION_AUTODISCOVERY>
 
@@ -177,14 +177,14 @@ Consultez la documentation sur [les identificateurs de conteneur Autodiscovery][
 
 Kubernetes vous permet d'utiliser des [ConfigMaps][1]. Pour en savoir plus, consultez le modèle ci-dessous et la documentation relative aux [intégrations personnalisées Kubernetes][2].
 
-```
+```text
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: <NOM>-config-map
+  name: "<NOM>-config-map"
   namespace: default
 data:
-  <NOM_INTEGRATION>-config: |-
+  <NOM_INTÉGRATION>-config: |-
     ad_identifiers:
       <IDENTIFICATEUR_INTÉGRATION_AUTODISCOVERY>
     init_config:
@@ -263,6 +263,7 @@ Lorsque le stockage clé-valeur est activé en tant que source de modèle, l'Age
 {{< /tabs >}}
 
 ## Exemples
+
 ### Intégration Datadog/Redis
 
 {{< tabs >}}
@@ -270,7 +271,7 @@ Lorsque le stockage clé-valeur est activé en tant que source de modèle, l'Age
 
 L'annotation de pod suivante définit le modèle d'intégration pour les conteneurs `redis` avec un paramètre `password` personnalisé, puis tague tous ses logs avec les attributs `source` et `service` adéquats :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -299,13 +300,11 @@ spec:
 
 **Remarque** : la logique de template variable `"%%env_<ENV_VAR>%%"` est utilisée afin d'éviter de stocker le mot de passe en clair. La variable d'environnement `REDIS_PASSWORD` doit donc être transmise à l'Agent. Consultez la [documentation relative aux template variables Autodiscovery][1].
 
-
 [1]: /fr/agent/autodiscovery/template_variables
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 Le fichier `docker-compose.yml` suivant applique le modèle d'intégration Redis adéquat avec un paramètre `password` personnalisé :
-
 
 ```yaml
 labels:
@@ -359,7 +358,6 @@ logs:
 
 **Remarque** : la logique de template variable `"%%env_<ENV_VAR>%%"` est utilisée afin d'éviter de stocker le mot de passe en clair. La variable d'environnement `REDIS_PASSWORD` doit donc être transmise à l'Agent. Consultez la [documentation relative aux template variables Autodiscovery][3].
 
-
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
 [2]: /fr/agent/autodiscovery/ad_identifiers
 [3]: /fr/agent/autodiscovery/template_variables
@@ -368,7 +366,7 @@ logs:
 
 La ConfigMap suivante définit le modèle d'intégration pour les conteneurs `redis` avec les attributs `source` et `service` pour la collecte des logs :
 
-```
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -390,22 +388,22 @@ data:
 
 Dans le manifeste, définissez les paramètres `volumeMounts` et `volumes` :
 
-```
-[...]
+```yaml
+# [...]
         volumeMounts:
-        [...]
+        # [...]
           - name: redisdb-config-map
             mountPath: /conf.d/redisdb.d
-        [...]
+        # [...]
       volumes:
-      [...]
+      # [...]
         - name: redisdb-config-map
           configMap:
             name: redisdb-config-map
             items:
               - key: redisdb-config
                 path: conf.yaml
-[...]
+# [...]
 ```
 
 {{% /tab %}}
@@ -413,7 +411,7 @@ Dans le manifeste, définissez les paramètres `volumeMounts` et `volumes` :
 
 Les commandes etcd suivantes créent un modèle d'intégration Redis avec un paramètre `password` personnalisé et taguent tous ses logs avec les attributs `source` et `service` adéquats :
 
-```
+```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
@@ -435,12 +433,12 @@ Contrairement aux fichiers de configuration automatique, **les stockages clé-va
 
 Les configurations ci-dessous s'appliquent à une image de conteneur Apache avec `<IDENTIFICATEUR_CONTENEUR>`: `httpd`. Les modèles Autodiscovery sont configurés pour recueillir des métriques et des logs provenant du conteneur Apache, et pour configurer un check HTTP/Datadog avec des instances afin de tester deux endpoints.
 
-Les noms de check sont `apache`, `http_check` et leur `<CONFIG_INIT>`, `<CONFIG_INSTANCE>` et `<CONFIG_LOG>`. Les configurations complètes se trouvent sur les pages de documentation dédiées : [intégration Datadog/Apache][8], [intégration Datadog/check HTTP][9].
+Les noms de check sont `apache`, `http_check` et leur `<CONFIG_INIT>`, `<CONFIG_INSTANCE>` et `<CONFIG_LOG>`. Les configurations complètes se trouvent sur les pages de documentation dédiées : [intégration Datadog/Apache][7], [intégration Datadog/check HTTP][8].
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -458,12 +456,12 @@ metadata:
         [
           {
             "name": "<SITEWEB_1>",
-            "url": "http://%%host%%/siteweb_1",
+            "url": "http://%%host%%/website_1",
             "timeout": 1
           },
           {
             "name": "<SITEWEB_2>",
-            "url": "http://%%host%%/siteweb_2",
+            "url": "http://%%host%%/website_2",
             "timeout": 1
           }
         ]
@@ -515,19 +513,19 @@ Remarque : cette [configuration de check Apache][1] peut sembler succincte, mai
 * Créez ensuite le dossier `conf.d/http_check.d` sur votre host.
 * Ajoutez le fichier de configuration automatique personnalisé ci-dessous à `conf.d/http_check.d/conf.yaml` sur votre host.
 
-```
-ad_identifier:
+```yaml
+ad_identifiers:
   - httpd
 
 init_config:
 
 instances:
   - name: "<SITEWEB_1>"
-    url: "http://%%host%%/siteweb_1"
+    url: "http://%%host%%/website_1"
     timeout: 1
 
   - name: "<SITEWEB_2>"
-    url: "http://%%host%%/siteweb_2"
+    url: "http://%%host%%/website_2"
     timeout: 1
 ```
 
@@ -540,7 +538,7 @@ instances:
 
 La ConfigMap suivante définit le modèle d'intégration pour les conteneurs `apache` et `http_check` avec les attributs` source` et `service` pour la collecte des logs `apache` :
 
-```
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -562,24 +560,24 @@ data:
     init_config:
     instances:
       - name: "<SITEWEB_1>"
-        url: "http://%%host%%/siteweb_1"
+        url: "http://%%host%%/website_1"
         timeout: 1
       - name: "<SITEWEB_2>"
-        url: "http://%%host%%/siteweb_2"
+        url: "http://%%host%%/website_2"
         timeout: 1
 ```
 
 Dans le manifeste, définissez les paramètres `volumeMounts` et `volumes` :
 
-```
-[...]
+```yaml
+# [...]
         volumeMounts:
-        [...]
+        # [...]
           - name: httpd-config-map
             mountPath: /conf.d
-        [...]
+        # [...]
       volumes:
-      [...]
+      # [...]
         - name: httpd-config-map
           configMap:
             name: httpd-config-map
@@ -588,21 +586,20 @@ Dans le manifeste, définissez les paramètres `volumeMounts` et `volumes` :
                 path: /apache.d/conf.yaml
               - key: http-check-config
                 path: /http_check.d/conf.yaml
-[...]
+# [...]
 ```
 
 {{% /tab %}}
 {{% tab "Stockage clé-valeur" %}}
 
-```
+```conf
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<SITEWEB_1>", "url": "http://%%host%%/siteweb_1", timeout: 1},{"name": "<SITEWEB_2>", "url": "http://%%host%%/siteweb_2", timeout: 1}]]'
+etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<SITEWEB_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<SITEWEB_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
 etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": "webapp"}]'
 ```
 
 **Remarque** : l'ordre de chaque liste est important. Pour que l'Agent soit en mesure de générer la configuration du check HTTP, toutes les parties de sa configuration doivent utiliser le même index sur l'ensemble des trois listes.
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -617,6 +614,5 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 [4]: /fr/integrations/postfix
 [5]: /fr/integrations/cassandra/#agent-check-cassandra-nodetool
 [6]: /fr/integrations/gunicorn
-[7]: /fr/help
-[8]: /fr/integrations/apache/#setup
-[9]: /fr/integrations/http_check/#setup
+[7]: /fr/integrations/apache/#setup
+[8]: /fr/integrations/http_check/#setup
