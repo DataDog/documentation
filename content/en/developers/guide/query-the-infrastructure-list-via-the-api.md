@@ -38,7 +38,7 @@ s.params = {
   'application_key': 'YOUR_APPLICATION_KEY',
   'tags': 'env:prod,role:elasticsearch'
 }
-infra_link = 'https://api.datad0g.com/api/v1/hosts'
+infra_link = 'https://app.datadoghq.com/api/v1/hosts'
 infra_content = s.request(
   method='GET', url=infra_link, params=s.params
 ).json()
