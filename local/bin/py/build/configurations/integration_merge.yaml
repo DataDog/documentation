@@ -1,0 +1,80 @@
+---
+hdfs:
+  action: create
+  target: hdfs
+  remove_header: false
+  fm:
+    is_public: true
+    kind: integration
+    integration_title: Hdfs
+    short_description: Track cluster disk usage, volume failures, dead DataNodes,
+      and more.
+mesos:
+  action: create
+  target: mesos
+  remove_header: false
+  fm:
+    aliases:
+    - "/integrations/mesos_master/"
+    - "/integrations/mesos_slave/"
+    is_public: true
+    kind: integration
+    integration_title: Mesos
+    short_description: Track cluster resource usage, master and slave counts, tasks
+      statuses, and more.
+activemq_xml:
+  action: merge
+  target: activemq
+  remove_header: false
+cassandra_nodetool:
+  action: merge
+  target: cassandra
+  remove_header: false
+gitlab_runner:
+  action: merge
+  target: gitlab
+  remove_header: false
+hdfs_datanode:
+  action: merge
+  target: hdfs
+  remove_header: false
+hdfs_namenode:
+  action: merge
+  target: hdfs
+  remove_header: false
+mesos_master:
+  action: merge
+  target: mesos
+  remove_header: true
+mesos_slave:
+  action: merge
+  target: mesos
+  remove_header: false
+kafka_consumer:
+  action: merge
+  target: kafka
+  remove_header: false
+kube_dns:
+  action: discard
+  target: none
+  remove_header: false
+kube_proxy:
+  action: discard
+  target: none
+  remove_header: false
+kubernetes_state:
+  action: discard
+  target: none
+  remove_header: false
+system_core:
+  action: discard
+  target: system
+  remove_header: false
+system_swap:
+  action: discard
+  target: system
+  remove_header: false
+hbase_regionserver:
+  action: merge
+  target: hbase_master
+  remove_header: false
