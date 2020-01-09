@@ -6,11 +6,6 @@
 
     contents:
 
-    # - action: source
-    #   branch: prod
-    #   globs:
-    #   - dd/utils/context/source.py
-
     - action: integrations
       branch: prod
       globs:

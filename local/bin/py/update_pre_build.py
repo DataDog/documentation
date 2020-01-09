@@ -558,8 +558,6 @@ class PreBuild:
             try:
                 if content["action"] == "integrations":
                     self.process_integrations(content)
-                elif content["action"] == "source":
-                    self.process_source_attribute(content)
 
                 elif (content["action"] == "pull-and-push-folder"):
                     self.pull_and_push_folder(content)
@@ -772,58 +770,6 @@ class PreBuild:
                         ).rstrip()
                         data = "---\n{0}\n---\n".format(fm)
                         f.write(data)
-
-    def process_source_attribute(self, content):
-        """
-        Take a single source.py file extracts the FROM_DISPLAY_NAME dict values
-        and inserts them into the file something.md
-        :param file_name: path to a source.py file
-        """
-        pass
-        for file_name in chain.from_iterable(
-            glob.iglob(pattern, recursive=True)
-            for pattern in content["globs"]
-        ):
-            if file_name.endswith(
-                "dd/utils/context/source.py"
-            ):
-                out = "|Integration name | API source attribute|\n"
-                out += "|:---|:---|\n"
-                with open(file_name, "r") as f:
-                    result = f.read()
-                    m = re.search(self.regex_source, result)
-                    result = m.group(2) if m else result
-                    result = re.sub(
-                        r"[^0-9A-Za-z:, ]", "", result
-                    )
-                    for line in result.split(","):
-                        pair = line.split(":")
-                        if len(pair) > 1:
-                            out += "|{0}|{1}|\n".format(
-                                pair[0].strip().title(),
-                                pair[1].strip(),
-                            )
-                with open(
-                    "{}{}".format(
-                        self.options.source,
-                        "/content/en/integrations/faq/list-of-api-source-attribute-value.md",
-                    ),
-                    mode="r+",
-                    encoding="utf-8",
-                ) as f:
-                    boundary = re.compile(
-                        r"^-{3,}$", re.MULTILINE
-                    )
-                    _, fm, content = boundary.split(
-                        f.read(), 2
-                    )
-                    template = "---\n{front_matter}\n---\n\n{content}\n"
-                    new_content = template.format(
-                        front_matter=fm.strip(), content=out
-                    )
-                    f.truncate(0)
-                    f.seek(0)
-                    f.write(new_content)
 
     def process_integration_metric(self, file_name):
         """
