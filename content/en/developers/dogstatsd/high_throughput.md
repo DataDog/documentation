@@ -219,7 +219,7 @@ you to better troubleshoot where bottleneck exists. Each metric will be
 tagged with the client language and the client version. These metrics will not be
 counted as custom metrics and will not be billed.
 
-Each client share a set of common tags.
+Each client shares a set of common tags.
 
 | Tag                | Description                                     | Example                |
 |--------------------|-------------------------------------------------|------------------------|
