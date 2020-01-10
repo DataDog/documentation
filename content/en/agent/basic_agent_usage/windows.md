@@ -27,18 +27,22 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 
 **Note**: There are special considerations for [domain controllers][4].
 
-#### GUI
+{{< tabs >}}
+{{% tab "GUI" %}}
 
-1. Download the [Datadog Agent installer][5].
+1. Download the [Datadog Agent installer][1].
 2. Run the installer (as **Administrator**) by opening `datadog-agent-6-latest.amd64.msi`.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][6].
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-#### Command line
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[2]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Command line" %}}
 
 Optionally, install the Agent with the command line to add custom settings.
 
-1. Download the [Datadog Agent installer][5].
+1. Download the [Datadog Agent installer][1].
 2. Run one of the following commands inside the directory where you downloaded the installer.
    **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
@@ -65,16 +69,31 @@ Each configuration item is added as a property to the command line. The followin
 | `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
 | `PROCESS_ENABLED`          | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
 | `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
-| `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
-| `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
-| `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                 |
-| `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][7]. |
+| `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
+| `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
+| `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
+| `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][2]. |
 | `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
 | `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
 | `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
+
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[2]: /agent/proxy
+[3]: /agent/faq/windows-agent-ddagent-user
+{{% /tab %}}
+{{% tab "Upgrading" %}}
+
+Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you’re not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
+
+If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
+
+[1]: /agent/guide/python-3
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
@@ -130,7 +149,7 @@ You can also use Windows Powershell, where available:
 
 ## Configuration
 
-Use the [Datadog Agent Manager][8] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
+Use the [Datadog Agent Manager][5] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -334,7 +353,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process][9] or [WMI][10] integration). To set up a Monitor, select the [Integration monitor type][11] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process][6] or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -357,7 +376,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes with [Live Process Monitoring][12]. To enable this on Windows, edit the [Agent main configuration file][13] by setting the following parameter to true:
+You can monitor Windows processes with [Live Process Monitoring][9]. To enable this on Windows, edit the [Agent main configuration file][10] by setting the following parameter to true:
 
 `datadog.yaml`:
 
@@ -366,7 +385,7 @@ process_config:
   enabled: "true"
 ```
 
-After configuration is complete, [restart the Agent][14].
+After configuration is complete, [restart the Agent][11].
 
 ## Further Reading
 
@@ -376,13 +395,10 @@ After configuration is complete, [restart the Agent][14].
 [2]: /agent/basic_agent_usage/#supported-os-versions
 [3]: /agent/faq/windows-agent-ddagent-user
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-[6]: https://app.datadoghq.com/account/settings#api
-[7]: /agent/proxy
-[8]: /agent/guide/datadog-agent-manager-windows
-[9]: /#monitoring-windows-processes
-[10]: /integrations/wmi
-[11]: https://app.datadoghq.com/monitors#create/integration
-[12]: /infrastructure/process/?tab=linuxwindows#installation
-[13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[14]: /agent/guide/agent-commands/#restart-the-agent
+[5]: /agent/guide/datadog-agent-manager-windows
+[6]: /#monitoring-windows-processes
+[7]: /integrations/wmi
+[8]: https://app.datadoghq.com/monitors#create/integration
+[9]: /infrastructure/process/?tab=linuxwindows#installation
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-commands/#restart-the-agent
