@@ -33,6 +33,8 @@ A sequence of data points is stored as a time series:
 [  7.06,  22:12:00 ]
 ```
 
+Datadog stores metric points at a 1 second resolution. However, it is recommended that you only submit points every 15 seconds. Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
+
 ### Query
 
 A query extracts a stored time series and reports the data points over a defined span of time. This is a graphed time series over 15 minutes:
@@ -46,6 +48,8 @@ When the selected time span is small, all data points are displayed. However, as
 Datadog uses time aggregation to solve the display problem. Data points are placed into buckets of time with preset start and end points. For example, when examining four hours, data points are combined into five-minute buckets. Combining data points in this way is referred to as a **rollup**:
 
 {{< img src="graphing/metrics/introduction/time-aggregation.png" alt="Time Aggregation" >}}
+
+Datadog tries to return about 150 points for any given time window. Granularity becomes coarser as the amount of time requested increases. Time aggregation is done through averages.
 
 ### Combining time series
 
