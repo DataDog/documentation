@@ -315,7 +315,7 @@ main:
           - name: Connect Logs and Traces
             url: tracing/connect_logs_and_traces
           - name: Ajouter des Metadata aux Spans
-            url: tracing/adding_metadata_to_spans
+            url: tracing/guide/adding_metadata_to_spans
           - name: Métriques de runtime
             url: tracing/runtime_metrics
           - name: OpenTracing
@@ -323,7 +323,7 @@ main:
           - name: Instrumentation manuelle
             url: tracing/manual_instrumentation
           - name: Configurer les Primary Tags
-            url: tracing/setting_primary_tags_to_scope
+            url: tracing/guide/setting_primary_tags_to_scope
       - name: Utiliser l'UI de l'APM
         url: tracing/visualization/
         children:

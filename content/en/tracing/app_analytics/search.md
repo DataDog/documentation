@@ -193,5 +193,5 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 [1]: /integrations
 [2]: /tagging/#tags-best-practices
 [3]: /tracing/visualization/#services
-[4]: /tracing/adding_metadata_to_spans/
+[4]: /tracing/guide/adding_metadata_to_spans/
 [5]: /tracing/app_analytics/#configure-additional-services-optional

@@ -138,7 +138,7 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 [9]: /tracing/manual_instrumentation
 [10]: /tracing/opentracing
 [11]: /tracing/connect_logs_and_traces
-[12]: /tracing/adding_metadata_to_spans
+[12]: /tracing/guide/adding_metadata_to_spans
 [13]: /tracing/runtime_metrics
 [14]: /tracing/app_analytics
 [15]: https://app.datadoghq.com/metric/summary

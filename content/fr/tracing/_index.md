@@ -6,7 +6,7 @@ further_reading:
   - link: /tracing/connect_logs_and_traces/
     tag: Documentation
     text: Associer vos logs à vos traces
-  - link: /tracing/adding_metadata_to_spans
+  - link: /tracing/guide/adding_metadata_to_spans
     tag: Documentation
     text: Ajouter des Metadata aux Spans
   - link: /tracing/runtime_metrics

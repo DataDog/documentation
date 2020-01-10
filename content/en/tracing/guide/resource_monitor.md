@@ -41,4 +41,4 @@ Then the Monitor configuration would resemble the following:
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/service/#export-to-timeboard
 [6]: /monitors/monitor_types/apm
-[7]: /tracing/setting_primary_tags_to_scope/#environment
+[7]: /tracing/guide/setting_primary_tags_to_scope/#environment

@@ -154,7 +154,7 @@ The `ddtrace` library includes support for the following libraries:
 [3]: /agent/kubernetes/daemonset_setup/#trace-collection
 [4]: http://pypi.datadoghq.com/trace/docs
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
-[6]: /tracing/setting_primary_tags_to_scope/
+[6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [8]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [9]: /tracing/connect_logs_and_traces/?tab=python

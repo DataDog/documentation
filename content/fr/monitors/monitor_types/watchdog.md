@@ -35,7 +35,7 @@ Choisissez vos [tags primaires][1], votre [service][2] et votre [ressource][3] d
 
 Une fois les options de votre choix sélectionnées, le graphique en haut de la page de création d'un monitor affiche le nombre d'événements Watchdog correspondants dans le temps, ainsi qu'une liste d'événements.
 
-[1]: /fr/tracing/setting_primary_tags_to_scope/#environment
+[1]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /fr/tracing/visualization/service
 [3]: /fr/tracing/visualization/resource
 {{% /tab %}}

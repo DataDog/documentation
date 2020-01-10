@@ -793,124 +793,98 @@ main:
     identifier: "tracing"
     weight: 120000
 
-  ## TRACING - Enable tracing
-
-  - name: "Enable trace collection"
-    url: "tracing/send_traces/"
-    identifier: "tracing_send_traces"
-    parent: "tracing"
-    weight: 1
-  - name: "Agent APM metrics"
-    url: "tracing/send_traces/agent-apm-metrics/"
-    parent: "tracing_send_traces"
-    weight: 101
-
-  ## TRACING - Setup
-
-  - name: "Instrument your application"
-    url: "tracing/setup/"
-    parent: "tracing"
-    identifier: "tracing_setup"
-    weight: 2
-  - name: "Java"
-    url: "tracing/setup/java/"
-    parent: "tracing_setup"
-    weight: 201
-  - name: "Python"
-    url: "tracing/setup/python/"
-    parent: "tracing_setup"
-    identifier: "python"
-    weight: 202
-  - name: "Ruby"
-    url: "tracing/setup/ruby/"
-    parent: "tracing_setup"
-    weight: 203
-  - name: "Go"
-    url: "tracing/setup/go/"
-    parent: "tracing_setup"
-    weight: 204
-  - name: "Node.js"
-    url: "tracing/setup/nodejs/"
-    parent: "tracing_setup"
-    weight: 205
-  - name: ".NET"
-    url: "tracing/setup/dotnet/"
-    parent: "tracing_setup"
-    weight: 206
-  - name: "PHP"
-    url: "tracing/setup/php/"
-    parent: "tracing_setup"
-    weight: 207
-  - name: "C++"
-    url: "tracing/setup/cpp/"
-    parent: "tracing_setup"
-    weight: 208
-  - name: "Envoy"
-    url: "tracing/setup/envoy/"
-    parent: "tracing_setup"
-    weight: 209
-  - name: "NGINX"
-    url: "tracing/setup/nginx/"
-    parent: "tracing_setup"
-    weight: 210
-  - name: "Istio"
-    url: "tracing/setup/istio/"
-    parent: "tracing_setup"
-    weight: 211
-
-  ## TRACING - Enrich Tracing
-  - name: "Connect Logs and Traces"
-    url: "tracing/connect_logs_and_traces/"
-    parent: "tracing"
-    weight: 30
-  - name: "Adding Span Tags"
-    url: "tracing/adding_metadata_to_spans/"
-    parent: "tracing"
-    weight: 31
-  - name: "Runtime Metrics"
-    url: "tracing/runtime_metrics/"
-    parent: "tracing"
-    weight: 32
-  - name: "OpenTracing"
-    url: "tracing/opentracing/"
-    parent: "tracing"
-    weight: 33
-  - name: "Manual Instrumentation"
-    url: "tracing/manual_instrumentation/"
-    parent: "tracing"
-    weight: 34
-  - name: "Setting Primary Tags to scope "
-    url: "tracing/setting_primary_tags_to_scope/"
-    parent: "tracing"
-    weight: 35
-
   ## TRACING - Using the APM UI
 
   - name: "APM Glossary"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 4
+    weight: 1
   - name: "Services List"
     url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 401
+    weight: 101
   - name: "Service Page"
     url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 402
+    weight: 102
   - name: "Resource Page"
     url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 403
+    weight: 103
   - name: "Trace View"
     url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 404
+    weight: 104
   - name: "Service Map"
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 405
+    weight: 105
+  
+  ## TRACING - Enable tracing
+
+  - name: "Setup the APM Agent"
+    url: "tracing/send_traces/"
+    identifier: "tracing_send_traces"
+    parent: "tracing"
+    weight: 2
+  - name: "Agent APM metrics"
+    url: "tracing/send_traces/agent-apm-metrics/"
+    parent: "tracing_send_traces"
+    weight: 201
+
+  ## TRACING - Setup
+
+  - name: "Instrument Your Application"
+    url: "tracing/setup/"
+    parent: "tracing"
+    identifier: "tracing_setup"
+    weight: 3
+  - name: "Java"
+    url: "tracing/setup/java/"
+    parent: "tracing_setup"
+    weight: 301
+  - name: "Python"
+    url: "tracing/setup/python/"
+    parent: "tracing_setup"
+    identifier: "python"
+    weight: 302
+  - name: "Ruby"
+    url: "tracing/setup/ruby/"
+    parent: "tracing_setup"
+    weight: 303
+  - name: "Go"
+    url: "tracing/setup/go/"
+    parent: "tracing_setup"
+    weight: 304
+  - name: "Node.js"
+    url: "tracing/setup/nodejs/"
+    parent: "tracing_setup"
+    weight: 305
+  - name: ".NET"
+    url: "tracing/setup/dotnet/"
+    parent: "tracing_setup"
+    weight: 306
+  - name: "PHP"
+    url: "tracing/setup/php/"
+    parent: "tracing_setup"
+    weight: 307
+  - name: "C++"
+    url: "tracing/setup/cpp/"
+    parent: "tracing_setup"
+    weight: 308
+  - name: "Envoy"
+    url: "tracing/setup/envoy/"
+    parent: "tracing_setup"
+    weight: 309
+  - name: "NGINX"
+    url: "tracing/setup/nginx/"
+    parent: "tracing_setup"
+    weight: 310
+  - name: "Istio"
+    url: "tracing/setup/istio/"
+    parent: "tracing_setup"
+    weight: 311
 
   ## TRACING - App analytics
 
@@ -918,35 +892,53 @@ main:
     url: "tracing/app_analytics/"
     parent: "tracing"
     identifier: "app_analytics"
-    weight: 5
+    weight: 4
   - name: "Agent Configuration"
     url: "tracing/app_analytics/agent_trace_search/"
     parent: "app_analytics"
-    weight: 501
+    weight: 401
   - name: "Viewing Analytics"
     url: "tracing/app_analytics/analytics/"
     parent: "app_analytics"
-    weight: 503
+    weight: 403
   - name: "Trace search"
     url: "tracing/app_analytics/search/"
     parent: "app_analytics"
-    weight: 504
+    weight: 404
   - name: "Monitors"
     url: "monitors/monitor_types/apm/"
     parent: "app_analytics"
-    weight: 505
+    weight: 405
 
+  ## TRACING - Enrich Tracing
+
+  - name: "Connect Logs and Traces"
+    url: "tracing/connect_logs_and_traces/"
+    parent: "tracing"
+    weight: 5
+  - name: "Runtime Metrics"
+    url: "tracing/runtime_metrics/"
+    parent: "tracing"
+    weight: 6
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
+    weight: 7
+  - name: "Manual Instrumentation"
+    url: "tracing/manual_instrumentation/"
+    parent: "tracing"
     weight: 8
-
+  - name: "OpenTracing"
+    url: "tracing/opentracing/"
+    parent: "tracing"
+    weight: 9
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 9
+    weight: 10
+
 
 ##########
 ## LOGS ##

@@ -59,7 +59,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
 * the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-[1]: /tracing/setting_primary_tags_to_scope/#environment
+[1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/visualization/service
 [3]: /tracing/visualization/resource
 {{% /tab %}}

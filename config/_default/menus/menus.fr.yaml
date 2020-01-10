@@ -707,7 +707,7 @@ main:
     parent: tracing_advanced
     weight: 301
   - name: Ajouter des tags de span
-    url: tracing/adding_metadata_to_spans/
+    url: tracing/guide/adding_metadata_to_spans/
     parent: tracing_advanced
     weight: 302
   - name: Métriques runtime
@@ -723,7 +723,7 @@ main:
     parent: tracing_advanced
     weight: 305
   - name: Configurer les tags primaires
-    url: tracing/setting_primary_tags_to_scope/
+    url: tracing/guide/setting_primary_tags_to_scope/
     parent: tracing_advanced
     weight: 306
   - name: Glossaire de l'APM

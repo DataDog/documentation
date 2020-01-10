@@ -508,5 +508,5 @@ Le tableau suivant énumère les variables de configuration qui sont uniquement 
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /fr/tracing/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /fr/tracing/setting_primary_tags_to_scope/#environment
+[8]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 [9]: #integrations

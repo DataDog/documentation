@@ -75,8 +75,8 @@ Choose what to display in your services list:
 [2]: /tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
 [4]: /tracing/visualization/service
-[5]: /tracing/setting_primary_tags_to_scope/#environment
-[6]: /tracing/setting_primary_tags_to_scope
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[6]: /tracing/guide/setting_primary_tags_to_scope
 [7]: /tracing/visualization/trace/#spans
 [8]: /tracing/visualization/trace
 [9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

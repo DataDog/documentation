@@ -58,7 +58,7 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 * des valeurs dévient de `<NOMBRE>` et sont `above or below`, `above` ou `below` (supérieur ou inférieur, supérieure, inférieure)
 * à la prévision durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
 
-[1]: /fr/tracing/setting_primary_tags_to_scope/#environment
+[1]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /fr/tracing/visualization/service
 [3]: /fr/tracing/visualization/resource
 {{% /tab %}}

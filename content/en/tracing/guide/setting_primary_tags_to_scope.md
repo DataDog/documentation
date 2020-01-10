@@ -1,5 +1,5 @@
 ---
-title: Set primary tags to scope
+title: Set Primary Tags to Scope
 kind: documentation
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/

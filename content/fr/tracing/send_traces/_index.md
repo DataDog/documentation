@@ -91,7 +91,7 @@ Ensuite, [instrumentez votre application][13]. Pour consulter l'ensemble des ét
 [7]: /fr/integrations/amazon_xray/#overview
 [8]: /fr/agent/basic_agent_usage/heroku/#installation
 [9]: /fr/integrations/cloud_foundry/#trace-collection
-[10]: /fr/tracing/setting_primary_tags_to_scope/#definition
+[10]: /fr/tracing/guide/setting_primary_tags_to_scope/#definition
 [11]: /fr/tracing/visualization/#spans
-[12]: /fr/tracing/adding_metadata_to_spans/?tab=java
+[12]: /fr/tracing/guide/adding_metadata_to_spans/?tab=java
 [13]: /fr/tracing/setup

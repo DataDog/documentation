@@ -509,4 +509,4 @@ The following table lists configuration variables that are available only when u
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /tracing/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /tracing/setting_primary_tags_to_scope/#environment
+[8]: /tracing/guide/setting_primary_tags_to_scope/#environment

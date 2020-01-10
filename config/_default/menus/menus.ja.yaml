@@ -641,7 +641,7 @@ main:
     parent: "tracing_advanced"
     weight: 301
   - name: "スパンへのメタデータの追加"
-    url: "tracing/adding_metadata_to_spans/"
+    url: "tracing/guide/adding_metadata_to_spans/"
     parent: "tracing_advanced"
     weight: 302
   - name: "ランタイムメトリクス"
@@ -657,7 +657,7 @@ main:
     parent: "tracing_advanced"
     weight: 305
   - name: "スコープへのプライマリタグの設定"
-    url: "tracing/setting_primary_tags_to_scope/"
+    url: "tracing/guide/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
     weight: 306
 

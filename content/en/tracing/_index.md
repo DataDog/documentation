@@ -8,7 +8,7 @@ further_reading:
 - link: "/tracing/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Connect logs and traces"
-- link: "/tracing/adding_metadata_to_spans"
+- link: "/tracing/guide/adding_metadata_to_spans"
   tag: "Documentation"
   text: "Adding metadata to spans"
 - link: "/tracing/runtime_metrics"

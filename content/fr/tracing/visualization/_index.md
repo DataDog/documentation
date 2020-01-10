@@ -139,7 +139,7 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag 
 [9]: /fr/tracing/manual_instrumentation
 [10]: /fr/tracing/opentracing
 [11]: /fr/tracing/connect_logs_and_traces
-[12]: /fr/tracing/adding_metadata_to_spans
+[12]: /fr/tracing/guide/adding_metadata_to_spans
 [13]: /fr/tracing/runtime_metrics
 [14]: /fr/tracing/app_analytics
 [15]: https://app.datadoghq.com/metric/summary

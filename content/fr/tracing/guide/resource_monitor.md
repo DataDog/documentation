@@ -41,4 +41,4 @@ La configuration du monitor ressemble alors à ce qui suit :
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/service/#export-to-timeboard
 [6]: /fr/monitors/monitor_types/apm
-[7]: /fr/tracing/setting_primary_tags_to_scope/#environment
+[7]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment

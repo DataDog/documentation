@@ -188,4 +188,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /tracing/guide/security/#replace-rules
 [3]: /tracing/app_analytics/#automatic-configuration
-[4]: /tracing/setting_primary_tags_to_scope/#environment
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
