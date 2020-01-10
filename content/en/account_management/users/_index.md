@@ -40,7 +40,7 @@ To re-send an invite, select the *Edit* button on the right of the user line, th
 
 ## Edit a user's roles
 
-Only user's with Privileged Access, such as users with the Datadog Admin Role, can change another user's role:
+Only users with Privileged Access, such as users with the Datadog Admin Role, can change another user's role:
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line.
@@ -51,7 +51,7 @@ Only user's with Privileged Access, such as users with the Datadog Admin Role, c
 
 ## Disable existing members
 
-Only user's with Privileged Access, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might own events, dashboards, etc. that are not supposed to be removed. When a user is disabled, any Application Keys they had generated are automatically revoked.
+Only user with Privileged Access, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might own events, dashboards, etc. that are not supposed to be removed. When a user is disabled, any Application Keys they had generated are automatically revoked.
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line
