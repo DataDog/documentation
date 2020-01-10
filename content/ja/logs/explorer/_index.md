@@ -110,7 +110,7 @@ further_reading:
 
 [1]: /ja/logs/explorer/search
 [2]: /ja/logs/processing/attributes_naming_convention
-[3]: /ja/tracing/advanced/connect_logs_and_traces
+[3]: /ja/tracing/connect_logs_and_traces
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 

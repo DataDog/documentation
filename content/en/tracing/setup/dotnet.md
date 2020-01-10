@@ -15,7 +15,7 @@ further_reading:
   - link: "tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/advanced/"
+  - link: "tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---
@@ -507,6 +507,6 @@ The following table lists configuration variables that are available only when u
 [3]: /help
 [4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/advanced/manual_instrumentation/?tab=net
+[6]: /tracing/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[8]: /tracing/setting_primary_tags_to_scope/#environment

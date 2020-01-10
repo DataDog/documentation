@@ -12,7 +12,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
-  - link: tracing/advanced/
+  - link: tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
@@ -227,7 +227,7 @@ Le traceur est configuré à l'aide des propriétés système et des variables d
 
 [1]: /fr/agent/docker/apm
 [2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[3]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[3]: /fr/tracing/connect_logs_and_traces/?tab=java
 {{% /table %}}
 
 **Remarques** :

@@ -211,7 +211,7 @@ Utilisez les facettes pour filtrer facilement vos traces. La barre de recherche 
 
 [1]: /fr/tracing/visualization/#trace-search-analytics
 [2]: /fr/tracing/visualization/#services
-[3]: /fr/tracing/advanced/adding_metadata_to_spans/?tab=java
+[3]: /fr/tracing/adding_metadata_to_spans/?tab=java
 [4]: /fr/tracing/app_analytics/?tab=java#configure-by-integration
 [5]: /fr/tracing/app_analytics/?tab=php#automatic-configuration
 [6]: /fr/tracing/visualization/#trace

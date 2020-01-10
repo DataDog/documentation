@@ -310,20 +310,20 @@ main:
           - name: Istio
             url: tracing/setup/istio/
       - name: Enrichir vos Traces
-        url: tracing/advanced/
+        url: tracing/
         children:
           - name: Connect Logs and Traces
-            url: tracing/advanced/connect_logs_and_traces
+            url: tracing/connect_logs_and_traces
           - name: Ajouter des Metadata aux Spans
-            url: tracing/advanced/adding_metadata_to_spans
+            url: tracing/adding_metadata_to_spans
           - name: Métriques de runtime
-            url: tracing/advanced/runtime_metrics
+            url: tracing/runtime_metrics
           - name: OpenTracing
-            url: tracing/advanced/opentracing
+            url: tracing/opentracing
           - name: Instrumentation manuelle
-            url: tracing/advanced/manual_instrumentation
+            url: tracing/manual_instrumentation
           - name: Configurer les Primary Tags
-            url: tracing/advanced/setting_primary_tags_to_scope
+            url: tracing/setting_primary_tags_to_scope
       - name: Utiliser l'UI de l'APM
         url: tracing/visualization/
         children:

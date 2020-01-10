@@ -6,10 +6,10 @@ aliases:
   - /fr/agent/apm/php/manual-installation
   - /fr/tracing/guide/distributed_tracing/
 further_reading:
-  - link: tracing/advanced/connect_logs_and_traces
+  - link: tracing/connect_logs_and_traces
     tags: Enrichir vos traces
     text: Associer vos logs à vos traces
-  - link: tracing/advanced/opentracing
+  - link: tracing/opentracing
     tags: Enrichir vos traces
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
@@ -362,7 +362,7 @@ Bien que cette version [soit désormais obsolète][6], si vous utilisez PHP 7.x
 [4]: /fr/tracing/visualization/#span-tags
 [5]: https://github.com/DataDog/dd-trace-php/releases/latest
 [6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[7]: /fr/tracing/advanced/opentracing/?tab=php
+[7]: /fr/tracing/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 

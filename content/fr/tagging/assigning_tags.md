@@ -442,7 +442,7 @@ Les intégrations web sont basées sur un système d'authentification. Les métr
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[12]: /fr/tracing/advanced/setting_primary_tags_to_scope
+[12]: /fr/tracing/setting_primary_tags_to_scope
 [13]: /fr/libraries
 [14]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /fr/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances

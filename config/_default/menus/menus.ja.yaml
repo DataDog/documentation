@@ -632,32 +632,32 @@ main:
   ## TRACING - Enrich Tracing
 
   - name: "トレーシングの機能強化"
-    url: "tracing/advanced/"
+    url: "tracing/"
     parent: "tracing"
     identifier: "tracing_advanced"
     weight: 3
   - name: "ログとトレースの接続"
-    url: "tracing/advanced/connect_logs_and_traces/"
+    url: "tracing/connect_logs_and_traces/"
     parent: "tracing_advanced"
     weight: 301
   - name: "スパンへのメタデータの追加"
-    url: "tracing/advanced/adding_metadata_to_spans/"
+    url: "tracing/adding_metadata_to_spans/"
     parent: "tracing_advanced"
     weight: 302
   - name: "ランタイムメトリクス"
-    url: "tracing/advanced/runtime_metrics/"
+    url: "tracing/runtime_metrics/"
     parent: "tracing_advanced"
     weight: 303
   - name: "OpenTracing"
-    url: "tracing/advanced/opentracing/"
+    url: "tracing/opentracing/"
     parent: "tracing_advanced"
     weight: 304
   - name: "手動インスツルメンテーション"
-    url: "tracing/advanced/manual_instrumentation/"
+    url: "tracing/manual_instrumentation/"
     parent: "tracing_advanced"
     weight: 305
   - name: "スコープへのプライマリタグの設定"
-    url: "tracing/advanced/setting_primary_tags_to_scope/"
+    url: "tracing/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
     weight: 306
 
@@ -701,7 +701,7 @@ main:
     parent: "tracing_search_analytics"
     weight: 501
   - name: "トレース検索"
-    url: "tracing/advanced/search/"
+    url: "tracing/search/"
     parent: "tracing_search_analytics"
     weight: 502
   - name: "トレース分析"

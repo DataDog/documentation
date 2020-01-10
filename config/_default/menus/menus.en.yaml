@@ -859,36 +859,30 @@ main:
     weight: 211
 
   ## TRACING - Enrich Tracing
-
-  - name: "Enrich Tracing"
-    url: "tracing/advanced/"
-    parent: "tracing"
-    identifier: "tracing_advanced"
-    weight: 3
   - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces/"
-    parent: "tracing_advanced"
-    weight: 301
+    url: "tracing/connect_logs_and_traces/"
+    parent: "tracing"
+    weight: 30
   - name: "Adding Span Tags"
-    url: "tracing/advanced/adding_metadata_to_spans/"
-    parent: "tracing_advanced"
-    weight: 302
+    url: "tracing/adding_metadata_to_spans/"
+    parent: "tracing"
+    weight: 31
   - name: "Runtime Metrics"
-    url: "tracing/advanced/runtime_metrics/"
-    parent: "tracing_advanced"
-    weight: 303
+    url: "tracing/runtime_metrics/"
+    parent: "tracing"
+    weight: 32
   - name: "OpenTracing"
-    url: "tracing/advanced/opentracing/"
-    parent: "tracing_advanced"
-    weight: 304
+    url: "tracing/opentracing/"
+    parent: "tracing"
+    weight: 33
   - name: "Manual Instrumentation"
-    url: "tracing/advanced/manual_instrumentation/"
-    parent: "tracing_advanced"
-    weight: 305
+    url: "tracing/manual_instrumentation/"
+    parent: "tracing"
+    weight: 34
   - name: "Setting Primary Tags to scope "
-    url: "tracing/advanced/setting_primary_tags_to_scope/"
-    parent: "tracing_advanced"
-    weight: 306
+    url: "tracing/setting_primary_tags_to_scope/"
+    parent: "tracing"
+    weight: 35
 
   ## TRACING - Using the APM UI
 
@@ -1100,7 +1094,7 @@ main:
     weight: 704
 
   - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces/?tab=java"
+    url: "tracing/connect_logs_and_traces/?tab=java"
     parent: "log_management"
     identifier: "logs_traces_connection"
     weight: 8

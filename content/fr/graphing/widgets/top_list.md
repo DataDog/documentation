@@ -89,7 +89,7 @@ Propriétés supplémentaires autorisées dans l'objet `request` :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/graphing
-[2]: /fr/tracing/advanced/search/#search-bar
+[2]: /fr/tracing/search/#search-bar
 [3]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
 [4]: /fr/graphing/graphing_json/widget_json
 [5]: /fr/graphing/graphing_json/request_json

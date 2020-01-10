@@ -59,6 +59,6 @@ SERVICEMAP_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/send_traces
-[2]: /ja/tracing/advanced/setting_primary_tags_to_scope
+[2]: /ja/tracing/setting_primary_tags_to_scope
 [3]: /ja/tracing/visualization/service
 [4]: /ja/graphing/graphing_json/widget_json

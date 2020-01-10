@@ -171,8 +171,8 @@ further_reading:
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags"  style="width:80%;">}}
 
 
-[1]: /ja/tracing/advanced/search/
-[2]: /ja/tracing/advanced/search/#search-bar
+[1]: /ja/tracing/search/
+[2]: /ja/tracing/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -182,7 +182,7 @@ further_reading:
 
 
 [1]: /ja/tagging/assigning_tags
-[2]: /ja/tracing/advanced/search/
+[2]: /ja/tracing/search/
 [3]: /ja/monitors/manage_monitor
 [4]: /ja/logs/explorer/search
 [5]: /ja/graphing/infrastructure/hostmap

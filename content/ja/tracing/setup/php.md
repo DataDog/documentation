@@ -14,7 +14,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: サービス、リソース、トレースを調査する
-  - link: tracing/advanced/
+  - link: tracing/
     tag: Documentation
     text: 高度な使用方法
 ---

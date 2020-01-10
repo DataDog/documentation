@@ -140,7 +140,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 [1]: /logs/explorer/search
 [2]: /logs/processing/attributes_naming_convention
-[3]: /tracing/advanced/connect_logs_and_traces
+[3]: /tracing/connect_logs_and_traces
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 

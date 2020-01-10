@@ -46,5 +46,5 @@ L'analyse et la recherche de traces vous permettent de rechercher, filtrer et ag
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /fr/api/#monitors
 [3]: /fr/developers/libraries/#managing-monitors
-[4]: /fr/tracing/advanced/search
+[4]: /fr/tracing/search
 [5]: /fr/monitors/notifications

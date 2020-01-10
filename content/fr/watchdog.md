@@ -113,6 +113,6 @@ Si Watchdog a détecté une irrégularité dans un service spécifique, une sect
 [10]: https://app.datadoghq.com/apm/watchdog
 [11]: /fr/monitors/monitor_types/watchdog/
 [12]: /fr/tracing/send_traces/#configure-your-environment
-[13]: /fr/tracing/advanced/setting_primary_tags_to_scope/
+[13]: /fr/tracing/setting_primary_tags_to_scope/
 [14]: /fr/tracing/visualization/#services
 [15]: /fr/tracing/visualization/services_list

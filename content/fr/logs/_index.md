@@ -37,7 +37,7 @@ La solution Log Management de Datadog met fin à ces problèmes en séparant le 
   {{< nextlink href="/logs/explorer/saved_views/">}}<u>Vues enregistrées</u> : utilisez des vues enregistrées pour configurer automatiquement votre Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="Enfin, exploitez les concepts clés de la surveillance à l'aide de métriques et de traces :">}}
-  {{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}<u>Association de logs à des traces</u> : affichez la trace associée au log observé.{{< /nextlink >}}
+  {{< nextlink href="/tracing/connect_logs_and_traces/?tab=java">}}<u>Association de logs à des traces</u> : affichez la trace associée au log observé.{{< /nextlink >}}
   {{< nextlink href="/graphing/dashboards/timeboard/#correlation-between-logs-and-metrics">}}<u>Association de logs à des métriques</u> : affichez la métrique associée au log observé.{{< /nextlink >}}
 {{< /whatsnext >}}
 

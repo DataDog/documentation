@@ -2,13 +2,13 @@
 title: Ajouter des tags de span
 kind: documentation
 further_reading:
-  - link: tracing/advanced/connect_logs_and_traces
+  - link: tracing/connect_logs_and_traces
     tags: Enrichir vos traces
     text: Associer vos logs à vos traces
-  - link: tracing/advanced/manual_instrumentation
+  - link: tracing/manual_instrumentation
     tags: Enrichir vos traces
     text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/advanced/opentracing
+  - link: tracing/opentracing
     tags: Enrichir vos traces
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/

@@ -239,7 +239,7 @@ L'écran qui apparaît affiche un **flamegraph** en haut et des fenêtres d’in
 
 La partie inférieure de cette vue comprend des informations supplémentaires sur la trace ou toute span sélectionnée. De là, vous pouvez voir l'ensemble des tags par défaut ainsi que ceux qui ont été inclus manuellement. Vous avez également la possibilité de basculer entre les vues pour afficher les informations sur le host et les logs associés.
 
-<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>associer vos logs à vos traces</a></div>
+<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/?tab=java" target=_blank>associer vos logs à vos traces</a></div>
 
 
 ## Exploiter vos tags de span personnalisés avec l'analyse et la recherche de traces

@@ -698,32 +698,32 @@ main:
     parent: tracing_setup
     weight: 211
   - name: Enrichir vos traces
-    url: tracing/advanced/
+    url: tracing/
     parent: tracing
     identifier: tracing_advanced
     weight: 3
   - name: Associer vos logs à vos traces
-    url: tracing/advanced/connect_logs_and_traces/
+    url: tracing/connect_logs_and_traces/
     parent: tracing_advanced
     weight: 301
   - name: Ajouter des tags de span
-    url: tracing/advanced/adding_metadata_to_spans/
+    url: tracing/adding_metadata_to_spans/
     parent: tracing_advanced
     weight: 302
   - name: Métriques runtime
-    url: tracing/advanced/runtime_metrics/
+    url: tracing/runtime_metrics/
     parent: tracing_advanced
     weight: 303
   - name: OpenTracing
-    url: tracing/advanced/opentracing/
+    url: tracing/opentracing/
     parent: tracing_advanced
     weight: 304
   - name: Instrumentation manuelle
-    url: tracing/advanced/manual_instrumentation/
+    url: tracing/manual_instrumentation/
     parent: tracing_advanced
     weight: 305
   - name: Configurer les tags primaires
-    url: tracing/advanced/setting_primary_tags_to_scope/
+    url: tracing/setting_primary_tags_to_scope/
     parent: tracing_advanced
     weight: 306
   - name: Glossaire de l'APM
@@ -908,7 +908,7 @@ main:
     parent: log_explorer
     weight: 704
   - name: Associer vos logs à vos traces
-    url: tracing/advanced/connect_logs_and_traces/?tab=java
+    url: tracing/connect_logs_and_traces/?tab=java
     parent: log_management
     identifier: logs_traces_connection
     weight: 8

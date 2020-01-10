@@ -114,6 +114,6 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 [10]: https://app.datadoghq.com/apm/watchdog
 [11]: /monitors/monitor_types/watchdog/
 [12]: /tracing/send_traces/#configure-your-environment
-[13]: /tracing/advanced/setting_primary_tags_to_scope/
+[13]: /tracing/setting_primary_tags_to_scope/
 [14]: /tracing/visualization/#services
 [15]: /tracing/visualization/services_list

@@ -69,5 +69,5 @@ L'APM Datadog prend automatiquement en compte les autres informations et métriq
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#spans
 [6]: https://docs.datadoghq.com/fr/tracing/visualization/trace/?tab=spanmetadata
-[7]: https://docs.datadoghq.com/fr/tracing/advanced/adding_metadata_to_spans
-[8]: https://docs.datadoghq.com/fr/tracing/advanced/connect_logs_and_traces
+[7]: https://docs.datadoghq.com/fr/tracing/adding_metadata_to_spans
+[8]: https://docs.datadoghq.com/fr/tracing/connect_logs_and_traces

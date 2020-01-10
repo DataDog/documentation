@@ -157,4 +157,4 @@ Assurez-vous de ne pas définir le paramètre `max_connect_retries` sur `1` (val
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /fr/tracing/advanced/connect_logs_and_traces/?tab=nodejs
+[3]: /fr/tracing/connect_logs_and_traces/?tab=nodejs

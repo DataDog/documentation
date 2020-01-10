@@ -74,7 +74,7 @@ Une fois cette opération effectuée, le `ConversionPattern` à utiliser devient
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -102,7 +102,7 @@ Une fois cette opération terminée, le `PatternLayout` à utiliser devient :
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -138,7 +138,7 @@ Une fois cette opération terminée, le `Pattern` à utiliser devient :
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,7 +182,7 @@ Modifiez ensuite votre fichier `logback.xml` comme décrit dans la section `Slf4
 
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][1] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][2]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -295,7 +295,7 @@ Modifiez ensuite votre fichier `logback.xml` et mettez à jour l'encodeur :
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][2] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][3]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[2]: /fr/tracing/connect_logs_and_traces/?tab=java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}

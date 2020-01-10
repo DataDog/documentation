@@ -2,13 +2,13 @@
 title: Configurer les tags primaires
 kind: documentation
 further_reading:
-  - link: tracing/advanced/connect_logs_and_traces
+  - link: tracing/connect_logs_and_traces
     tags: Enrichir vos traces
     text: Associer vos logs à vos traces
-  - link: tracing/advanced/manual_instrumentation
+  - link: tracing/manual_instrumentation
     tags: Enrichir vos traces
     text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/advanced/opentracing
+  - link: tracing/opentracing
     tags: Enrichir vos Traces
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
@@ -46,7 +46,7 @@ Il existe différentes façons de spécifier un environnement lors de l'envoi de
 
 Les environnements apparaissent en haut des pages APM. Utilisez la liste déroulante pour filtrer les données affichées sur la page actuelle.
 
-{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Tracing d'environnements" style="width:80%;">}}
+{{< img src="tracing/setting_primary_tags/envs_tracing_screen.png" alt="Tracing d'environnements"  style="width:80%;">}}
 
 ## Ajouter un deuxième tag primaire dans Datadog
 
@@ -66,7 +66,8 @@ Si vous modifiez un tag primaire défini, prenez en compte ce qui suit :
 
 Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs pour filtrer les données affichées sur la page actuelle. Pour afficher les données sans tag primaire, choisissez `<NOM_TAG>:*` dans la liste déroulante (comme illustré ci-dessous).
 
-{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="IU tags primaires" style="width:80%;">}}
+{{< img src="tracing/setting_primary_tags/primary_tags_ui.png" alt="IU tags primaires"  style="width:80%;">}}
+
 
 ## Pour aller plus loin
 

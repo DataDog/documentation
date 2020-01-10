@@ -6,10 +6,10 @@ aliases:
   - /ja/agent/apm/php/manual-installation
   - /ja/tracing/guide/distributed_tracing/
 further_reading:
-  - link: tracing/advanced/connect_logs_and_traces
+  - link: tracing/connect_logs_and_traces
     tags: トレースの加工
     text: ログとトレースの接続
-  - link: tracing/advanced/opentracing
+  - link: tracing/opentracing
     tags: トレースの加工
     text: アプリケーション全体に Opentracing を実装します。
   - link: tracing/visualization/
@@ -358,7 +358,7 @@ resources.ddtrace = true
 [4]: /ja/tracing/visualization/#span-tags
 [5]: https://github.com/DataDog/dd-trace-php/releases/latest
 [6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[7]: /ja/tracing/advanced/opentracing/?tab=php
+[7]: /ja/tracing/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 

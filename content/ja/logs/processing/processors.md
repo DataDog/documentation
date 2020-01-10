@@ -777,4 +777,4 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 [5]: /ja/logs/explorer/search/#search-syntax
 [6]: /ja/logs/processing/processors/?tab=ui#log-status-remapper
 [7]: /ja/logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /ja/tracing/advanced/connect_logs_and_traces
+[8]: /ja/tracing/connect_logs_and_traces

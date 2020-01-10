@@ -1,14 +1,16 @@
 ---
 title: Set primary tags to scope
 kind: documentation
+aliases:
+  - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-- link: "tracing/advanced/connect_logs_and_traces"
+- link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/advanced/manual_instrumentation"
+- link: "tracing/manual_instrumentation"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
-- link: "tracing/advanced/opentracing"
+- link: "tracing/opentracing"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
@@ -47,7 +49,7 @@ There are several ways to specify an environment when reporting data:
 
 Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
 
-{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Envs tracing"  style="width:80%;">}}
+{{< img src="tracing/setting_primary_tags/envs_tracing_screen.png" alt="Envs tracing"  style="width:80%;">}}
 
 ## Add a second primary tag in Datadog
 
@@ -67,7 +69,7 @@ If you change a previously set primary tag, be aware of the following:
 
 Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown (as in the image below).
 
-{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI"  style="width:80%;">}}
+{{< img src="tracing/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI"  style="width:80%;">}}
 
 ## Further Reading
 

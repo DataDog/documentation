@@ -89,7 +89,7 @@ TOPLIST_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/graphing
-[2]: /ja/tracing/advanced/search/#search-bar
+[2]: /ja/tracing/search/#search-bar
 [3]: https://docs.datadoghq.com/ja/logs/explorer/search/#search-syntax
 [4]: /ja/graphing/graphing_json/widget_json
 [5]: /ja/graphing/graphing_json/request_json

@@ -32,7 +32,7 @@ Datadog のログ管理は、ログの取り込みをインデックスの作成
   {{< nextlink href="/logs/explorer/">}}<u>Log Explorer</u>: Log Explorer ビューで、ファセットおよびメジャーを追加する方法を確認。{{< /nextlink >}}
   {{< nextlink href="/logs/explorer">}}<u>検索</u>: インデックス化されたすべてのログを検索。{{< /nextlink >}}
   {{< nextlink href="/logs/explorer/analytics">}}<u>分析</u>: インデックス化されたログの分析を実行。{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer/patterns">}}<u>パターン</u>: インデックス化されたログを{{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}まとめることで、Log Patterns を発見。{{< /nextlink >}}
+  {{< nextlink href="/logs/explorer/patterns">}}<u>パターン</u>: インデックス化されたログを{{< nextlink href="/tracing/connect_logs_and_traces/?tab=java">}}まとめることで、Log Patterns を発見。{{< /nextlink >}}
   {{< nextlink href="/logs/explorer/saved_views/">}}<u>保存ビュー</u>: 保存ビューを使用して、Log Explorer を自動的に構成。{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="最後に、メトリクスやトレースを使用した可観測性を活用します:">}}

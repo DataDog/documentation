@@ -144,7 +144,7 @@ Utilisez le bouton de **partage** pour partager le log ouvert dans le volet lat√
 
 [1]: /fr/logs/explorer/search
 [2]: /fr/logs/processing/attributes_naming_convention
-[3]: /fr/tracing/advanced/connect_logs_and_traces
+[3]: /fr/tracing/connect_logs_and_traces
 {{% /tab %}}
 {{% tab "Analyse de logs" %}}
 

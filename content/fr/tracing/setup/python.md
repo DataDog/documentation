@@ -15,7 +15,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
-  - link: tracing/advanced/
+  - link: tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
@@ -154,10 +154,10 @@ La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 [3]: /fr/agent/kubernetes/daemonset_setup/#trace-collection
 [4]: http://pypi.datadoghq.com/trace/docs
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
-[6]: /fr/tracing/advanced/setting_primary_tags_to_scope/
+[6]: /fr/tracing/setting_primary_tags_to_scope/
 [7]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [8]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[9]: /fr/tracing/advanced/connect_logs_and_traces/?tab=python
+[9]: /fr/tracing/connect_logs_and_traces/?tab=python
 [10]: /fr/tracing/app_analytics/?tab=python#automatic-configuration
 [11]: https://aiohttp.readthedocs.io
 [12]: https://bottlepy.org

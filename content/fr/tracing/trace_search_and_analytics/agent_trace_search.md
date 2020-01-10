@@ -63,5 +63,5 @@ Par exemple, pour un service Python intitulé `python-api` qui exécute Flask (n
 [5]: https://app.datadoghq.com/apm/docs/trace-search
 [6]: /fr/tracing/visualization/#services
 [7]: /fr/tracing/visualization/#resources
-[8]: /fr/tracing/advanced/search/#apm-events
+[8]: /fr/tracing/search/#apm-events
 [9]: /fr/tracing/visualization/#trace

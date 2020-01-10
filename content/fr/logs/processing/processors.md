@@ -777,4 +777,4 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 [5]: /fr/logs/explorer/search/#search-syntax
 [6]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
 [7]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /fr/tracing/advanced/connect_logs_and_traces
+[8]: /fr/tracing/connect_logs_and_traces

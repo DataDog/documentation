@@ -161,4 +161,4 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [14]: /ja/logs/explorer/search
 [15]: /ja/logs/processing/processors/#log-status-remapper
 [16]: /ja/logs/faq/integration-pipeline-reference
-[17]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[17]: /ja/tracing/connect_logs_and_traces/?tab=java

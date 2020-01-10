@@ -239,7 +239,7 @@ In this view you can see the **flamegraph** on top and the additional informatio
 
 The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default tags as well as the ones you manually include. In addition to these, you can also switch to view associated Host and Log information.
 
-<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
+<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
 ## Leverage your custom span tags with App Analytics
 

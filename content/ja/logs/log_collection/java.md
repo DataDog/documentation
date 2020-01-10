@@ -74,7 +74,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /ja/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -102,7 +102,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /ja/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -138,7 +138,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /ja/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,7 +182,7 @@ log4j-over-slf4j が正しく機能するには、slf4j 連結とその依存関
 
 APM が有効になっているアプリケーションで、アプリケーションログとトレースの関連付けを改善したい場合は、[こちらの説明に従い][1]、[MDC (マップされた診断コンテキスト)][2] を使用して JSON ログに自動的にトレースおよびスパン ID が追加されるように設定します。
 
-[1]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /ja/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -295,7 +295,7 @@ Logback 用の JSON ライブラリとしては [logstash-logback-encoder][1] �
 APM が有効になっているアプリケーションで、アプリケーションログとトレースの関連付けを改善したい場合は、[こちらの説明に従い][2]、[MDC (マップされた診断コンテキスト)][3] を使用して JSON ログに自動的にトレースおよびスパン ID が追加されるように設定します。
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /ja/tracing/advanced/connect_logs_and_traces/?tab=java
+[2]: /ja/tracing/connect_logs_and_traces/?tab=java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{< tabs >}}
 {{% tab "Files" %}}

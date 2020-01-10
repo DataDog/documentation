@@ -156,4 +156,4 @@ logstash.on('error', function(err) {
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /ja/tracing/advanced/connect_logs_and_traces/?tab=nodejs
+[3]: /ja/tracing/connect_logs_and_traces/?tab=nodejs

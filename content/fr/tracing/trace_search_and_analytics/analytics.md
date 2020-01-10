@@ -123,8 +123,8 @@ Exportez les [analyses de traces][7] de la recherche de traces ou créez-les dir
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/advanced/search/#facets
-[2]: /fr/tracing/advanced/search/#measures
+[1]: /fr/tracing/search/#facets
+[2]: /fr/tracing/search/#measures
 [3]: /fr/tracing/visualization/#trace
 [4]: /fr/monitors/monitor_types/apm
 [5]: /fr/graphing/dashboards/timeboard

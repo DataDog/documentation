@@ -169,5 +169,5 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /ja/tracing/advanced/connect_logs_and_traces/?tab=python
+[3]: /ja/tracing/connect_logs_and_traces/?tab=python
 [4]: /ja/agent/guide/agent-commands
