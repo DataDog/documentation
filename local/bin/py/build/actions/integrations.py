@@ -3,36 +3,29 @@
 import csv
 import glob
 import json
-import sys
 import linecache
 import re
 import shutil
 import yaml
 import markdown2
-from json import JSONDecodeError
 
-from pull_and_push_file import pull_and_push_file
-from pull_and_push_folder import pull_and_push_folder
-from content_manager import prepare_content
+from json import JSONDecodeError
 from collections import OrderedDict
 from itertools import chain
-from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
 from os.path import (
-    isdir,
     exists,
     basename,
-    curdir,
     dirname,
     join,
     abspath,
-    normpath,
+    normpath
 )
+
 
 class Integrations:
     def __init__(self, source_file):
         super().__init__()
-        self.list_of_contents = []
         self.tempdir = (
             "./integrations_data"
         )
@@ -137,7 +130,8 @@ class Integrations:
         """
         Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
-        See https://github.com/DataDog/documentation/wiki/Documentation-Build#integrations to learn more.
+        #integrations to learn more.
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build
         :param content: integrations content to process
         """
         for file_name in chain.from_iterable(
@@ -491,8 +485,3 @@ class Integrations:
             )
 
         return dependencies
-
-
-if __name__ == "__main__":xz
-
-    Integrations(source_file)
