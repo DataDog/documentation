@@ -283,7 +283,7 @@ main:
         url: tracing/send_traces/
         children:
           - name: Métriques APM de l'Agent
-            url: tracing/send_traces/agent-apm-metrics/
+            url: tracing/troubleshooting/
       - name: Instrumenter votre application
         url: tracing/setup/
         children:

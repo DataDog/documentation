@@ -644,7 +644,7 @@ main:
     parent: tracing
     weight: 1
   - name: Métriques APM de l'Agent
-    url: tracing/send_traces/agent-apm-metrics/
+    url: tracing/troubleshooting/
     parent: tracing_send_traces
     weight: 101
   - name: Instrumenter votre application
@@ -757,7 +757,7 @@ main:
     identifier: app_analytics
     weight: 5
   - name: Configuration de l'Agent
-    url: tracing/app_analytics/agent_trace_search/
+    url: tracing/guide/app_analytics_agent_configuration
     parent: app_analytics
     weight: 501
   - name: Visualiser les analyses

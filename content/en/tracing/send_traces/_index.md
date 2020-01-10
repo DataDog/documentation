@@ -9,7 +9,7 @@ aliases:
   - /tracing/getting_further/first_class_dimensions/
   - /agent/apm/
 further_reading:
-- link: "tracing/send_traces/agent-apm-metrics/"
+- link: "tracing/troubleshooting/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 - link: "/agent/docker/apm"

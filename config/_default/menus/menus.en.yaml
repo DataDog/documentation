@@ -793,45 +793,13 @@ main:
     identifier: "tracing"
     weight: 120000
 
-  ## TRACING - Using the APM UI
-
-  - name: "APM Glossary"
-    url: "tracing/visualization/"
-    parent: "tracing"
-    identifier: "tracing_vis"
-    weight: 1
-  - name: "Services List"
-    url: "tracing/visualization/services_list/"
-    parent: "tracing_vis"
-    weight: 101
-  - name: "Service Page"
-    url: "tracing/visualization/service/"
-    parent: "tracing_vis"
-    weight: 102
-  - name: "Resource Page"
-    url: "tracing/visualization/resource/"
-    parent: "tracing_vis"
-    weight: 103
-  - name: "Trace View"
-    url: "tracing/visualization/trace/"
-    parent: "tracing_vis"
-    weight: 104
-  - name: "Service Map"
-    url: "tracing/visualization/services_map/"
-    parent: "tracing_vis"
-    weight: 105
-  
   ## TRACING - Enable tracing
 
-  - name: "Setup the APM Agent"
+  - name: "Enable Trace Collection"
     url: "tracing/send_traces/"
     identifier: "tracing_send_traces"
     parent: "tracing"
     weight: 2
-  - name: "Agent APM metrics"
-    url: "tracing/send_traces/agent-apm-metrics/"
-    parent: "tracing_send_traces"
-    weight: 201
 
   ## TRACING - Setup
 
@@ -893,20 +861,16 @@ main:
     parent: "tracing"
     identifier: "app_analytics"
     weight: 4
-  - name: "Agent Configuration"
-    url: "tracing/app_analytics/agent_trace_search/"
-    parent: "app_analytics"
-    weight: 401
   - name: "Viewing Analytics"
     url: "tracing/app_analytics/analytics/"
     parent: "app_analytics"
     weight: 403
-  - name: "Trace search"
+  - name: "Trace Search"
     url: "tracing/app_analytics/search/"
     parent: "app_analytics"
     weight: 404
-  - name: "Monitors"
-    url: "monitors/monitor_types/apm/"
+  - name: "Monitoring App Analytics"
+    url: "monitors/monitor_types/apm/?tab=appanalytics"
     parent: "app_analytics"
     weight: 405
 
@@ -940,6 +904,34 @@ main:
     weight: 10
 
 
+  ## TRACING - Using the APM UI
+
+  - name: "APM Glossary"
+    url: "tracing/visualization/"
+    parent: "tracing"
+    identifier: "tracing_vis"
+    weight: 11
+  - name: "Services List"
+    url: "tracing/visualization/services_list/"
+    parent: "tracing_vis"
+    weight: 1101
+  - name: "Service Page"
+    url: "tracing/visualization/service/"
+    parent: "tracing_vis"
+    weight: 1102
+  - name: "Resource Page"
+    url: "tracing/visualization/resource/"
+    parent: "tracing_vis"
+    weight: 1103
+  - name: "Trace View"
+    url: "tracing/visualization/trace/"
+    parent: "tracing_vis"
+    weight: 1104
+  - name: "Service Map"
+    url: "tracing/visualization/services_map/"
+    parent: "tracing_vis"
+    weight: 1105
+  
 ##########
 ## LOGS ##
 ##########

@@ -9,7 +9,7 @@ aliases:
   - /fr/tracing/getting_further/first_class_dimensions/
   - /fr/agent/apm/
 further_reading:
-  - link: tracing/send_traces/agent-apm-metrics/
+  - link: tracing/troubleshooting/
     tag: Documentation
     text: Métriques APM envoyées par l'Agent Datadog
   - link: /agent/docker/apm

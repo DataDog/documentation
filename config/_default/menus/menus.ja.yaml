@@ -697,7 +697,7 @@ main:
     identifier: "tracing_search_analytics"
     weight: 5
   - name: "Agent 構成"
-    url: "tracing/app_analytics/agent_trace_search/"
+    url: "tracing/guide/app_analytics_agent_configuration"
     parent: "tracing_search_analytics"
     weight: 501
   - name: "トレース検索"
