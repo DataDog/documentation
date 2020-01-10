@@ -130,7 +130,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 [2]: /fr/integrations/activemq
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[5]: /fr/integartions/cassandra
+[5]: /fr/integrations/cassandra
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
 [8]: /fr/integrations/hive

@@ -6,6 +6,7 @@ assets:
 categories:
   - processing
   - log collection
+  - autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
@@ -25,7 +26,7 @@ name: rabbitmq
 process_signatures:
   - rabbitmq
 public_title: Intégration Datadog/RabbitMQ
-short_description: 'Surveillez la taille de file d''attente, le nombre de clients, les messages sans accusé de réception, et plus encore. more.'
+short_description: 'Surveillez la taille de file d''attente, le nombre de clients, les messages sans accusé de réception et plus encore.'
 support: core
 supported_os:
   - linux
@@ -46,24 +47,18 @@ Et plus encore.
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check RabbitMQ est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check RabbitMQ est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-Modifiez le fichier `rabbitmq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) RabbitMQ. Consultez le [fichier d'exemple rabbitmq.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
-
 #### Préparer RabbitMQ
 
-Activez le plug-in de gestion RabbitMQ. Consultez la [documentation relative à RabbitMQ][7] pour l'activer.
-
-L'utilisateur Agent doit alors au moins disposer du tag `monitoring` et de ces autorisations :
+Activez le plug-in de gestion RabbitMQ. Consultez la [documentation relative à RabbitMQ][4] pour l'activer. L'utilisateur Agent doit alors au moins disposer du tag `monitoring` et de ces autorisations :
 
 | Autorisation | Commande            |
-|------------|--------------------|
+| ---------- | ------------------ |
 | **conf**   | `^aliveness-test$` |
 | **write**  | `^amq\.default$`   |
 | **read**   | `.*`               |
@@ -76,50 +71,33 @@ rabbitmqctl set_permissions  -p / datadog "^aliveness-test$" "^amq\.default$" ".
 rabbitmqctl set_user_tags datadog monitoring
 ```
 
-Ici, `/` correspond au host par défaut. Définissez ce paramètre sur le hostname virtuel que vous avez spécifié. Consultez la [documentation de RabbitMQ][8] (en anglais) pour en savoir plus.
+Ici, `/` correspond au host par défaut. Définissez ce paramètre sur le hostname virtuel que vous avez spécifié. Consultez la [documentation relative à RabbitMQ][5] pour en savoir plus.
 
-#### Collecte de métriques
+#### Host
 
-* Ajoutez ce bloc de configuration à votre fichier `rabbitmq.d/conf.yaml` pour commencer à recueillir vos [métriques RabbitMQ](#metriques) :
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-```
-init_config:
+##### Collecte de métriques
 
-instances:
-  - rabbitmq_api_url: http://localhost:15672/api/
-  #  username: <nomutilisateur> # si votre API RabbitMQ nécessite une authentification ; la valeur par défaut est guest
-  #  password: <motdepasse> # la valeur par défaut est guest
-  #  tag_families: true           # la valeur par défaut est false
-  #  vhosts:
-  #    - <VOTRE_VHOST>             # ne pas définir si vous souhaitez récupérer tous les vhosts
-```
+1. Modifiez le fichier `rabbitmq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos métriques RabbitMQ. Consultez le [fichier d'exemple rabbitmq.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
-Si vous ne définissez pas `vhosts`, l'Agent envoie à TOUS les vhosts :
+    ```yaml
+      init_config:
 
-1. Le check de service `rabbitmq.aliveness`
-2. La métrique `rabbitmq.connections`
+      instances:
 
-Si vous définissez `vhosts`, l'Agent envoie ce check et cette métrique uniquement aux vhosts que vous avez spécifiés.
+          ## @param rabbit_api_url - string - required
+          ## For every instance a 'rabbitmq_api_url' must be provided, pointing to the api
+          ## url of the RabbitMQ Managment Plugin (http://www.rabbitmq.com/management.html).
+          #
+        - rabbitmq_api_url: http://localhost:15672/api/
+    ```
 
-Des options similaires sont disponibles pour `queues` et `nodes`. Par défaut, l'Agent effectue des checks sur toutes les files d'attente et tous les nœuds, mais vous pouvez définir des listes ou des expressions régulières pour limiter ce comportement. Consultez le fichier [rabbitmq.d/conf.yaml][6] pour découvrir des exemples.
+    **Remarque** : par défaut, l'Agent effectue des checks sur toutes les files d'attente, tous les vhosts et tous les nœuds, mais vous pouvez définir des listes ou des expressions régulières pour limiter ce comportement. Consultez le fichier [rabbitmq.d/conf.yaml][7] pour découvrir des exemples.
 
-Options de configuration :
+2. [Redémarrez l'Agent][8].
 
-| Option                           | Obligatoire | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
-|----------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `rabbitmq_api_url`               | Oui      | Pointe vers l'URL d'API du [plug-in de gestion RabbitMQ][9].                                                                                                                                                                                                                                                                                                                                                |
-| `tls_verify`                     | Non      |  Définir sur `false` pour ignorer la vérification de la chaîne de certificat tls lorsque `rabbitmq_api_url` utilise le https. La valeur par défaut est `true`.                                                                                                                                                                                                                                                                                                                                              |
-| `username`                       | Non       | Nom d'utilisateur, prend la valeur 'guest' par défaut                                                                                                                                                                                                                                                                                                                                                                              |
-| `password`                       | Non       | Mot de passe, prend la valeur 'guest' par défaut                                                                                                                                                                                                                                                                                                                                                                               |
-| `tag_families`                   | Non       | Permet de taguer les « familles » de files d'attente en fonction des correspondances des expressions régulières, prend la valeur false par défaut                                                                                                                                                                                                                                                                                                                                         |
-| `nodes` ou `nodes_regexes`       | Non       | Utilisez ces paramètres pour spécifier les nœuds sur lesquels vous souhaitez recueillir des métriques (jusqu'à 100). Si vous avez moins de 100 nœuds, vous n'avez pas à définir ce paramètre. Par défaut, les métriques sont recueillies pour tous les nœuds.                                                                                                                                                                                            |
-| `queues` ou `queues_regexes`     | Non       | Utilisez ces paramètres pour spécifier les files d'attente sur lesquelles vous souhaitez recueillir des métriques (jusqu'à 100). Si vous avez moins de 200 files d'attente, vous n'avez pas à définir ce paramètre. Par défaut, les métriques sont recueillies pour toutes les files d'attente. Si vous avez configuré des vhosts, les noms de file d'attente définis doivent correspondre à `nom_vhost/nom_file`. Si vous avez activé le paramètre `tag_families`, le premier groupe capturé dans l'expression régulière est utilisé en tant que tag `famille_files`. |
-| `exchanges` ou `exchanges_regex` | Non       | Utilisez ces paramètres pour spécifier les exchanges sur lesquels vous souhaitez recueillir des métriques (jusqu'à 50). Si vous avez moins de 50 exchanges, vous n'avez pas à définir ce paramètre. Par défaut, les métriques sont recueillies pour tous les exchanges.                                                                                                                                                                                  |
-| `vhosts`                         | Non       | Par défaut, une liste de tous les vhosts est récupérée et chaque vhost est vérifié avec l'API Aliveness. Si vous préférez surveiller uniquement certains vhosts, spécifiez les vhosts qui vous intéressent.                                                                                                                                                                                                                              |
-
-[Redémarrez l'Agent][10] pour commencer à envoyer vos métriques, événements et checks de service RabbitMQ à Datadog.
-
-#### Collecte de logs
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -150,7 +128,29 @@ Options de configuration :
                 pattern: "="
     ```
 
-4. [Redémarrez l'Agent][10].
+4. [Redémarrez l'Agent][8].
+
+#### Environnement conteneurisé
+
+Pour les environnements conteneurisés, consultez la documentation relative aux [modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer les paramètres ci-dessous.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                            |
+| -------------------- | -------------------------------- |
+| `<NOM_INTÉGRATION>` | `rabbitmq`                       |
+| `<CONFIG_INIT>`      | vide ou `{}`                    |
+| `<CONFIG_INSTANCE>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/"}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+
+| Paramètre      | Valeur                                                                                                                                               |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<CONFIG_LOG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": {"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}}` |
 
 ### Validation
 
@@ -195,15 +195,15 @@ Documentation, liens et articles supplémentaires utiles :
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/rabbitmq/images/rabbitmq_dashboard.png
 [2]: https://www.rabbitmq.com
-[3]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
-[7]: https://www.rabbitmq.com/management.html
-[8]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
-[9]: https://www.rabbitmq.com/management.html
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://www.rabbitmq.com/management.html
+[5]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[10]: https://docs.datadoghq.com/fr/agent/docker/log/
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
 [14]: https://www.datadoghq.com/blog/rabbitmq-monitoring
