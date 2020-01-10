@@ -24,7 +24,7 @@ Datadog provides three user roles by default:
 
 
 <div class="alert alert-warning">
-The list of permissions and roles is in active development. This page will be updated as new permissions are added and names and definitions are updated.
+The list of permissions and roles is in active development. This page is updated as new permissions are added and names and definitions are updated.
 </div>
 
 ## Description of available permissions
