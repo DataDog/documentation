@@ -13,17 +13,19 @@ further_reading:
     text: Intégrations personnalisées
 aliases:
   - /agent/kubernetes/apm
+  - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]). 
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][2] en tant que déploiement sur chaque nœud Kubernetes.*
 
 ## Configurer les autorisations RBAC
+
 Si le contrôle d'accès basé sur des rôles (RBAC) est activé sur votre Kubernetes, configurez les autorisations RBAC du compte de service de votre Agent Datadog.
 
 Créez les ServiceAccount, ClusterRole et ClusterRoleBinding appropriés :
 
-```
+```shell
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
@@ -32,11 +34,12 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Créer un manifeste
+
 Créez le manifeste `datadog-agent.yaml` suivant. (Ce manifeste part du principe que vous utilisez Docker. Si vous utilisez Containerd, consultez [cet exemple][3].)
 
 Pensez à encoder votre clé d'API en `base64` si vous utilisez les secrets :
 
-```
+```shell
 echo -n <VOTRE_CLÉ_API> | base64
 ```
 
@@ -160,7 +163,8 @@ spec:
 Remplacez `<VOTRE_CLÉ_API>` par [votre clé d'API Datadog][4] ou utilisez des [secrets Kubernetes][5] pour définir votre clé d'API en tant que [variable d'environnement][6]. Si vous choisissez d'utiliser des secrets Kubernetes, consultez les [instructions de configuration d'une clé d'API avec des secrets Kubernetes][7] de Datadog. Consultez la section relative à l'[intégration Docker][8] pour découvrir toutes les options de configuration.
 
 Déployez le DaemonSet avec cette commande :
-```
+
+```shell
 kubectl create -f datadog-agent.yaml
 ```
 
@@ -170,13 +174,13 @@ kubectl create -f datadog-agent.yaml
 
 Pour vérifier que l'Agent Datadog s'exécute dans votre environnement en tant que DaemonSet, exécutez :
 
-```
+```shell
 kubectl get daemonset
 ```
 
 Si l'Agent est déployé, une sortie similaire au texte ci-dessous s'affiche. Les valeurs `DESIRED` et `CURRENT` correspondent au nombre de nœuds exécutés dans votre cluster.
 
-```
+```shell
 NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
 datadog-agent   2         2         2         2            2           <none>          16h
 ```
@@ -228,7 +232,6 @@ Pour activer la [collecte de logs][12] avec votre DaemonSet :
     ```
 
    Le `pointdir` est utilisé pour stocker un fichier avec un pointeur vers tous les conteneurs à partir desquels l'Agent recueille des logs. Ce volume permet de s'assurer qu'aucun log n'est perdu lorsque l'Agent est redémarré ou lors d'un problème réseau.
-
 
 L'Agent peut collecter les logs de deux façons : depuis le socket Docker et depuis les fichiers de logs Kubernetes (automatiquement gérés par Kubernetes). Utilisez la collecte via les fichiers de logs lorsque :
 
@@ -289,14 +292,14 @@ Montez le socket Docker sur l'Agent Datadog :
 {{% /tab %}}
 {{< /tabs >}}
 
-L'Agent Datadog suit la logique suivante pour savoir où collecter les logs :
+L'Agent Datadog suit la logique suivante pour identifier l'emplacement de collecte des logs :
 
 1. L'Agent cherche le socket Docker. S'il est disponible, il recueille les logs à partir de ce socket.
 2. S'il n'est pas disponible, l'Agent cherche le chemin `/var/log/pods`. Si ce dernier est disponible, il recueille les logs à partir de ce chemin.
 
 Remarque : si vous souhaitez recueillir les logs à partir de `/var/log/pods` même lorsque le socket Docker est monté, vous pouvez définir la variable d'environnement `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (ou `logs_config.k8s_container_use_file` dans `datadog.yaml`) sur `true` pour forcer l'Agent à passer par les fichiers.
 
-Enfin, utilisez [Autodiscovery avec les annotations de pod][13] pour optimiser la collecte de logs pour vos conteneurs.
+Enfin, utilisez [Autodiscovery avec les annotations de pod][13] afin d'optimiser la collecte de logs pour vos conteneurs.
 
 #### Conteneurs de courte durée
 
@@ -310,8 +313,8 @@ Si vous utilisez l'Agent v6.12+, les logs de conteneurs de courte durée (en ra
 {{% /tab %}}
 {{% tab "Socket Docker" %}}
 
-Dans un environnement de Docker, l'Agent reçoit les mises à jour de conteneurs en temps réel via les événements Docker. L'Agent extrait et met à jour la configuration toutes les secondes depuis les étiquettes de conteneur (Autodiscovery).
-À partir de l'Agent v6.14+, l'Agent recueille les logs de tous les conteneurs (qu'ils soient exécutés ou arrêtés). Par conséquent, les logs des conteneurs de courte durée qui ont été lancés ou arrêtés il y a moins d'une seconde sont également recueillis tant qu'ils ne sont pas supprimés.
+Dans un environnement Docker, l'Agent reçoit les mises à jour des conteneurs en temps réel, via les événements Docker. Il extrait et met à jour la configuration toutes les secondes depuis les étiquettes de conteneur (Autodiscovery).
+Depuis la version 6.14, l'Agent recueille les logs de tous les conteneurs (qu'ils soient en cours d'exécution ou à l'arrêt). Par conséquent, les logs des conteneurs de courte durée qui ont été lancés ou arrêtés il y a moins d'une seconde sont tout de même recueillis, tant qu'ils ne sont pas supprimés.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -320,7 +323,7 @@ Dans un environnement de Docker, l'Agent reçoit les mises à jour de conteneurs
 
 Pour activer l'APM en autorisant l'envoi de données depuis le port 8126, définissez la variable `DD_APM_NON_LOCAL_TRAFFIC` sur true dans votre section *env* :
 
-```
+```text
 (...)
       env:
         (...)
@@ -331,7 +334,7 @@ Pour activer l'APM en autorisant l'envoi de données depuis le port 8126, défi
 
 Transmettez ensuite le port de l'Agent au host.
 
-```
+```text
 (...)
       ports:
         (...)
@@ -344,7 +347,7 @@ Transmettez ensuite le port de l'Agent au host.
 
 Utilisez l'API Downward pour récupérer l'IP du host. Le conteneur d'application requiert une variable d'environnement qui pointe vers `status.hostIP`. L'Agent de conteneur Datadog s'attend à ce que celle-ci soit intitulée `DD_AGENT_HOST` :
 
-```
+```text
 apiVersion: apps/v1
 kind: Deployment
 ...
@@ -361,7 +364,7 @@ kind: Deployment
 
 Enfin, indiquez aux traceurs d'application l'emplacement où le host de l'Agent Datadog utilise la variable d'environnement `DD_AGENT_HOST`. Par exemple, en Python :
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -381,7 +384,7 @@ Consultez la section relative à la [collecte de processus pour Kubernetes][15].
 
 Pour envoyer des métriques custom via DogStatsD, définissez la variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` sur true dans votre section *env* :
 
-```
+```text
 (...)
       env:
         (...)
@@ -416,5 +419,5 @@ Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votr
 [12]: /fr/logs
 [13]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /fr/tracing/setup
-[15]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
+[15]: /fr/infrastructure/process/?tab=kubernetes#installation
 [16]: /fr/agent/kubernetes/dogstatsd

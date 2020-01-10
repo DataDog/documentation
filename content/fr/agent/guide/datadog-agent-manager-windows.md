@@ -113,9 +113,9 @@ La page Manage checks affiche le contenu des fichiers de configuration de check 
 
 Pour ajouter un check, sélectionnez **Add a Check** dans le menu déroulant. La liste de tous les checks pouvant être installés s'affiche alors. Consultez la page d'[intégration][3] du check de votre choix pour obtenir des détails sur sa configuration.
 
-#### Checks summary
+#### Sommaire des checks
 
-La page Checks summary contient la liste des checks en cours d'exécution, le nombre d'instances pour chaque check, ainsi que le statut du check.
+Le sommaire des checks contient la liste des checks en cours d'exécution, le nombre d'instances pour chaque check, ainsi que le statut du check.
 
 ### Flare
 
