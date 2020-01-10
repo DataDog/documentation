@@ -1,9 +1,9 @@
 ---
 title: Default Datadog Roles and Permissions
 kind: documentation
-description: "A description of the default Datadog Roles and Permissions"
+description: "Description of the default Datadog Roles and Permissions."
 further_reading:
-- link: "account_management/team"
+- link: "account_management/users"
   tag: "Documentation"
   text: "Manage your Datadog Users"
 - link: "account_management/saml"
@@ -12,16 +12,18 @@ further_reading:
 - link: "account_management/multi_organization"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
+- link: "account_management/users/custom_roles"
+  tag: "Documentation"
+  text: "Creating Custom Datadog Roles"
 ---
 
 Datadog provides three user roles by default:
 
-| Role          | Description                                                                                                                                                                                                                                  |
-|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Role                       | Description                                                                                                                                                                                                                                  |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][1]. They can also promote standard users to administrators.                                          |
 | **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][1], [monitors][2], [events][3], and [notebooks][4]. Standard users can also invite other users to organizations.                      |
 | **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][1] with someone outside their unit. |
-
 
 <div class="alert alert-warning">
 The list of permissions and roles is in active development. This page is updated as new permissions are added and names and definitions are updated.
@@ -78,4 +80,3 @@ All permissions have up to three options that can be selected: Read, Write, and 
 [2]: /monitors
 [3]: /graphing/event_stream
 [4]: /graphing/notebooks
-[5]: https://app.datadoghq.com/rbac

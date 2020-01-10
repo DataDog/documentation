@@ -1,15 +1,19 @@
 ---
 title: User Management
 kind: documentation
-beta: true
 description: "Add or remove users to your organization. Modify user roles."
+aliases:
+ - /account_management/team/
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "account_management/multi_organization"
+- link: "account_management/users/default_roles"
   tag: "Documentation"
-  text: "Configuring Teams & Organizations with Multiple Accounts"
+  text: "Default Datadog Roles and Permissions"
+- link: "account_management/users/custom_roles"
+  tag: "Documentation"
+  text: "Creating Custom Datadog Roles"
 ---
 
 Datadog's **User Management** section allows you to manage your users and their associated roles:
@@ -23,7 +27,7 @@ To add members to your organization:
 1. Go to the User Management Page.
 2. Select **Invite Users** in the upper right corner of the page.
 3. Enter the email address of the user you wish to invite to your Datadog account.
-4. Assign one or more [user roles][1] to the users. 
+4. Assign one or more [user roles][1] to the users.
 **Note**: Users with Standard Access can invite a user to any role they have themselves. Users with Privileged Access can invite a user to any role.
 5. Click **Send Invites**
 
