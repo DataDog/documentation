@@ -39,7 +39,7 @@ external_redirect: /api/#create-a-dashboard
     * **`prefix`** [*optional*, *default*=**None**]:
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
 * **`template_variable_presets`** [*optional*, *default*=**None**]:
-    Array of Saved views for this Dashboards. Saved views definitions follow this form:
+    Array of template variables saved views. Saved views definitions follow this form:
     **Note**: Only the difference with the default template variables values is stored in a saved view.
     * **`name`** [*required*]:
         The name of the saved view.
