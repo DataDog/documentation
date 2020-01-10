@@ -1495,14 +1495,14 @@ main:
 
   ## ACCOUNT MANAGEMENT - TEAM
 
-  - name: "Team management"
-    url: "account_management/team/"
+  - name: "User management"
+    url: "account_management/users/"
     parent: "account_management"
-    identifier: "account_management_team"
+    identifier: "account_management_users"
     weight: 1
   - name: "User Roles"
-    url: "account_management/team/roles/"
-    parent: "account_management_team"
+    url: "account_management/users/roles/"
+    parent: "account_management_users"
     weight: 101
 
   - name: "Organization settings"

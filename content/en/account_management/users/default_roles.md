@@ -29,7 +29,7 @@ The list of permissions and roles is in active development. This page will be up
 
 ## Description of available permissions
 
-General permissions provide the base level of access for your role. First select a General permission for your role and then add or remove [Advanced Permissions](#advanced-permissions) as necessary.
+General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
 
 ### General Permissions
 

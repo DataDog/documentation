@@ -56,7 +56,7 @@ To delete a custom role:
 {{< img src="account_management/users/delete_role.png" alt="Deleting a Role" responsive="true" style="width:90%;">}}
 {{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" responsive="true" style="width:90%;">}}
 
-Once a role is deleted all users who have the role will have their permissions updated. Users without any roles will not be able to use Datadog effectively, but will still maintain limited access. For that reason you should always make sure users either have a Role or are disabled if they do not need access to your organization.
+Once a role is deleted all users who have the role will have their permissions updated. Users without any roles will not be able to use Datadog effectively, but will still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.
 
 ## Further Reading
 
