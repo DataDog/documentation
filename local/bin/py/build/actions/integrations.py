@@ -10,7 +10,6 @@ import yaml
 import markdown2
 
 from json import JSONDecodeError
-from collections import OrderedDict
 from itertools import chain
 from os import sep, makedirs, getenv, remove
 from os.path import (
@@ -24,11 +23,9 @@ from os.path import (
 
 
 class Integrations:
-    def __init__(self, source_file):
+    def __init__(self, source_file, temp_directory, integration_mutations):
         super().__init__()
-        self.tempdir = (
-            "./integrations_data"
-        )
+        self.tempdir = temp_directory
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(source_file)),
             sep,
@@ -78,10 +75,7 @@ class Integrations:
             re.DOTALL,
         )
         self.datafile_json = []
-        self.pool_size = 5
-        self.integration_mutations = OrderedDict(yaml.load(
-            open("./local/bin/py/build/configurations/integration_merge.yaml"))
-        )
+        self.integration_mutations = integration_mutations
         self.initial_integration_files = glob.glob(
             "{}*.md".format(self.content_integrations_dir)
         )

@@ -8,6 +8,7 @@ from pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content
 from integrations import Integrations
 
+from collections import OrderedDict
 from optparse import OptionParser
 from os import sep, getenv
 from os.path import (
@@ -18,14 +19,12 @@ from os.path import (
 )
 
 
-class PreBuild:
-    def __init__(self, opts):
+class Build:
+    def __init__(self, opts, tempdir):
         super().__init__()
         self.options = opts
         self.list_of_contents = []
-        self.tempdir = (
-            "./integrations_data"
-        )
+        self.tempdir = tempdir
         self.content_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),
             sep,
@@ -34,51 +33,26 @@ class PreBuild:
         self.extract_dir = "{0}".format(
             join(self.tempdir, "extracted") + sep
         )
+        self.build_configuration = []
 
-    def process(self):
-        """
-        This represents the overall workflow of the build of the documentation
-        """
-        print("\x1b[34mStarting Processing...\x1b[0m")
+    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
+        self.build_configuration = yaml.load(
+            open(build_configuration_file_path))
 
-        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
+        self.integration_mutations = OrderedDict(yaml.load(
+            open(integration_merge_configuration_file_path))
+        )
 
+    def get_list_of_content(self, configuration):
         self.list_of_contents = prepare_content(
             configuration, self.options.token, self.extract_dir)
 
-        try:
-            self.process_filenames()
-        except:
-            if getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Processing files failed, documentation is now in degraded mode.")
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Processing files failed, stoping build.")
-                sys.exit(1)
+    def build_documentation(self, list_of_contents):
 
-        Int = Integrations(self.options.source)
+        Int = Integrations(self.options.source, self.tempdir,
+                           self.integration_mutations)
 
-        try:
-            Int.merge_integrations()
-        except:
-            if getenv("LOCAL") == 'True':
-                print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Integration merge failed, documentation is now in degraded mode.")
-            else:
-                print(
-                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
-                sys.exit(1)
-
-    def process_filenames(self):
-        """
-        Goes through the list_of_contents and for each content
-        triggers the right action to apply.
-        """
-
-        Int = Integrations(self.options.source)
-
-        for content in self.list_of_contents:
+        for content in list_of_contents:
             try:
                 if content["action"] == "integrations":
                     Int.process_integrations(content)
@@ -104,6 +78,16 @@ class PreBuild:
                     print(
                         "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
                     raise ValueError
+        try:
+            Int.merge_integrations()
+        except:
+            if getenv("LOCAL") == 'True':
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Integration merge failed, documentation is now in degraded mode.")
+            else:
+                print(
+                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
+                sys.exit(1)
 
 
 if __name__ == "__main__":
@@ -130,5 +114,15 @@ if __name__ == "__main__":
         else options.token
     )
 
-    pre = PreBuild(options)
-    pre.process()
+    build_configuration_file_path = getenv("CONFIGURATION_FILE")
+    integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
+    temp_directory = "./integrations_data"
+
+    build = Build(options, temp_directory)
+
+    build.load_config(build_configuration_file_path,
+                      integration_merge_configuration_file_path)
+
+    build.get_list_of_content(build.build_configuration)
+
+    build.build_documentation(build.list_of_contents)
