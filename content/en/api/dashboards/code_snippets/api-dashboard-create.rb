@@ -22,14 +22,20 @@ description = 'A dashboard with memory info.'
 is_read_only = true
 notify_list = ['user@domain.com']
 template_variables = [{
-    'name' => 'host1',
+    'name' => 'host',
     'prefix' => 'host',
-    'default' => 'my-host'
+    'default' => '<HOSTNAME_1>'
 }]
+
+saved_view = [{
+  'name': 'Saved views for hostname 2',
+  'template_variables': [{'name': 'host', 'value': '<HOSTNAME_2>'}]}
+  ]
 
 dog.create_board(title, widgets, layout_type, {
     'description' => description,
     'is_read_only' => is_read_only,
     'notify_list' => notify_list,
-    'template_variables' => template_variables
+    'template_variables' => template_variables,
+    'template_variable_presets' => saved_view
     })
