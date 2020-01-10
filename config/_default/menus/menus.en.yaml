@@ -1500,8 +1500,8 @@ main:
     parent: "account_management"
     identifier: "account_management_users"
     weight: 1
-  - name: "User Roles"
-    url: "account_management/users/roles/"
+  - name: "Default Datadog Roles"
+    url: "account_management/users/default_roles/"
     parent: "account_management_users"
     weight: 101
 
