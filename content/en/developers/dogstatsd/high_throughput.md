@@ -256,6 +256,26 @@ See [DataDog/datadogpy](https://github.com/DataDog/datadogpy) for more informati
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+Starting with version `4.6.0` of the Ruby client.
+
+| Metrics Name                               | Metric Type | Description                                                                               |
+|--------------------------------------------|-------------|-------------------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`         | count       | Number of `metrics` sent to the client by your application (before sampling).             |
+| `datadog.dogstatsd.client.events`          | count       | Number of `events` sent to the client by your application.                                |
+| `datadog.dogstatsd.client.service_checks`  | count       | Number of `service_checks` sent to the client by your application.                        |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | Number of bytes successfully sent to the Agent.                                           |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | Number of bytes dropped by the client.                                                    |
+| `datadog.dogstatsd.client.packets_sent`    | count       | Number of datagrams successfully sent to the agent.                                       |
+| `datadog.dogstatsd.client.packets_dropped` | count       | Number of datagrams dropped by the client.                                                |
+
+If you want to disable telemetry, simply do:
+
+```ruby
+Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
+```
+
+See [DataDog/dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) for more information about the client configuration.
+
 Telemetry will soon be added to the Ruby client.
 
 {{% /tab %}}
