@@ -40,7 +40,6 @@ external_redirect: /api/#update-a-dashboard
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
 * **`template_variable_presets`** [*optional*, *default*=**None**]:
     Array of template variables saved views. Saved views definitions follow this form:
-    **Note**: Only the difference with the default template variables values is stored in a saved view.
     * **`name`** [*required*]:
         The name of the saved view.
     * **`template_variables`** [*optional*, *default*=**None**]:
