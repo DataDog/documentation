@@ -1,7 +1,7 @@
 ---
 title: Generate Metrics from Ingested Logs
 kind: documentation
-beta: true
+beta: false
 aliases:
  - /logs/processing/logs_to_metrics/
 description: "Generate Metrics from Ingested Logs."
