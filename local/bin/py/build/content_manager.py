@@ -12,10 +12,12 @@ from os.path import isdir, sys
 def download_from_repo(github_token, org, repo, branch, globs, extract_dir):
     """
     Takes github info and file globs and downloads files from github using multiple processes
+    :param github_token: A valide Github token to download content with the Github Class
     :param org: github organization or person
     :param repo: github repo name
     :param branch: the branch name
     :param globs: list of strings in glob format of what to extract
+    :param extract_dir: Directory into which to put all content downloaded.
     :return:
     """
     pool_size = 5
@@ -61,6 +63,9 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     This goes through the list_of_contents and check for each repo specified
     If a local version exists otherwise we download it from the upstream repo on Github
     Local version of the repo should be in the same folder as the documentation/ folder.
+    :param github_token: A valide Github token to download content with the Github Class
+    :param extract_dir: Directory into which to put all content downloaded.
+    :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
     for content in list_of_contents:
         repo_name = "../" + content["repo_name"] + sep
@@ -110,9 +115,10 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
 
 def extract_config(configuration):
     """
-    This pulls the content from the configuration file at CONFIGURATION_FILE location
+    This pulls the content from the configuration file at `configuration` location
     then parses it to populate the list_of_content variable that contains all contents
     that needs to be pulled and processed.
+    :param configuration: Documentation build configuration file path.
     """
     list_of_contents = []
 
@@ -145,6 +151,13 @@ def extract_config(configuration):
 
 
 def prepare_content(configuration, github_token, extract_dir):
+    """
+    Prepares the content for the documentation build. It checks for all content whether or
+    not it's available locally or if it should be downloaded.
+    :param configuration: Documentation build configuration file path.
+    :param github_token: A valide Github token to download content with the Github Class
+    :param extract_dir: Directory into which to put all content downloaded.
+    """
     try:
         list_of_contents = local_or_upstream(
             github_token, extract_dir, extract_config(configuration))
