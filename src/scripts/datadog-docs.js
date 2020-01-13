@@ -376,8 +376,8 @@ $(document).ready(function () {
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
 
-                        // scroll to top
-                        if (!$('.api').length) {
+                        // scroll to top only if there is no hash
+                        if (!window.location.hash) {
                             $("html, body").scrollTop(0);
                         }
                     }
