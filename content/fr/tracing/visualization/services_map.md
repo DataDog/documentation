@@ -55,15 +55,15 @@ Le tag service a une signification bien particulière dans Datadog : il est uti
 
 La capture d'écran suivante illustre une requête de dashboard pour `service:fse-auto-process`. Cet élément est automatiquement tagué par l'APM.
 
-{{< img src="tracing/visualization/services_map/servicedash.png" alt="Dashboard Service Map"  style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicedash.png" alt="Dashboard Service Map" style="width:90%;">}}
 
 Lorsque vous utilisez ce tag sur votre Hostmap ou des logs avec la même clé, Datadog est alors en mesure d'associer des applications à des logs, à une infrastructure ou à des métriques custom. Dans le menu contextuel ci-dessus, chaque option pivote vers la vue appropriée des données recueillies dans le contexte de votre `service`.
 
-{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Tags Service Map"  style="width:80%;">}}
+{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Tags Service Map" style="width:80%;">}}
 
 En outre, les monitors peuvent être tagués par service dans la section « Say what's happening ». Vous pouvez ainsi associer les monitors de n'importe quelle métrique, y compris d'une métrique custom, à vos services. L'état des monitors s'affiche directement sur la Service Map.
 
-{{< img src="tracing/visualization/services_map/servicemon.png" alt="Monitor Service Map"  style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemon.png" alt="Monitor Service Map" style="width:90%;">}}
 
 ## Pertinence et signification des données
 
@@ -73,7 +73,7 @@ Les nœuds représentent les services tels qu'ils sont instrumentés dans l'APM 
 
 Les nouveaux services ou les nouvelles connexions s'affichent peu de temps après leur instrumentation et deviennent obsolètes si aucune trace correspondante n'est détectée pendant deux semaines. Ce système prend en compte les services qui ne fonctionnent que rarement, mais qui jouent un rôle essentiel dans un système opérationnel.
 
-{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true"  width="90%">}}
+{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true" width="90%">}}
 
 ### Couleur
 
@@ -84,7 +84,6 @@ Les monitors ne se limitent pas aux monitors d'APM. Le tag service décrit ci-de
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /fr/tracing/visualization/#services
 [2]: /fr/tracing/setup/first_class_dimensions

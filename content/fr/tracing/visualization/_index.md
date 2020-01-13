@@ -98,7 +98,6 @@ Les métriques de trace sont idéales pour la surveillance. Il est possible de d
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="monitor de métriques de trace" >}}
 
-
 ## App Analytics
 
 La fonctionnalité App Analytics sert à filtrer les [spans analysées](#spans-analysees) en fonction de tags définis par l'utilisateur (customer_id, error_type, app_name, etc.) ou de tags d'infrastructure. Cela vous permet d'analyser en détail les requêtes Web transitant par votre service en effectuant des recherches, des représentations visuelles et une surveillance prenant en compte l'intégralité des hits, des erreurs et des mesures de latence. Cette fonctionnalité peut être activée avec la [configuration automatique][17].
@@ -123,8 +122,7 @@ Pour commencer à taguer des spans dans votre application, consultez ce [guide][
 
 Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag dans App Analytics en cliquant sur le tag pour l'ajouter en tant que [facette][19]. Cela fait, la valeur de ce tag est stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le volet Facettes et la requête de graphique de traces.
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette"  style="width:50%;">}}
-
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" style="width:50%;">}}
 
 ## Pour aller plus loin
 

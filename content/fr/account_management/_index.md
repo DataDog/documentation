@@ -55,7 +55,7 @@ Pour activer le mode sombre dans Datadog, passez votre curseur sur votre avatar 
 
 Pour faire en sorte que l'apparence du site s'adapte automatiquement à celle de votre système, sélectionnez l'option *System*. Ainsi, le thème défini sur Datadog correspondra toujours au thème défini sur votre système :
 
-{{< img src="account_management/dark-mode-toggle.png" alt="Mode sombre"  style="width:60%;">}}
+{{< img src="account_management/dark-mode-toggle.png" alt="Mode sombre" style="width:60%;">}}
 
 ## Connexion à GitHub
 

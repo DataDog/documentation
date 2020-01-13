@@ -13,34 +13,38 @@ further_reading:
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
 ---
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="Page Monitor Status"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="Page Monitor Status" >}}
 
 ## Présentation
+
 Une fois [votre monitor créé][1], utilisez la page Monitor Status pour consulter une vue d'ensemble de l'évolution de son statut. Cette page comprend les sections suivantes :
 
-- [Overview](#overview)
-- [Header](#header)
-  - [Mute](#mute)
-  - [Resolve](#resolve)
-  - [Settings](#settings)
-- [Properties](#properties)
-- [Status and History](#status-and-history)
-- [Events](#events)
-- [Pour aller plus loin](#further-reading)
+* [Overview](#overview)
+* [Header](#header)
+  * [Mute](#mute)
+  * [Resolve](#resolve)
+  * [Settings](#settings)
+* [Properties](#properties)
+* [Status and History](#status-and-history)
+* [Events](#events)
+* [Pour aller plus loin](#further-reading)
 
 Ces sections sont ouvertes par défaut. Les trois dernières sections peuvent être refermées à l'aide de la petite icône de réduction (&or;) située à gauche du nom de chaque section.
 
 ## Header
+
 À gauche, l'en-tête contient le statut du monitor, sa date et son heure et son titre.
 
 À droite figurent les options **Mute**, **Resolve** et **Settings**.
 
 ### Mute
+
 Vous pouvez désactiver un monitor directement depuis sa page de statut. Utilisez le champ **Scope** pour préciser votre downtime. Consultez la [documentation relative aux downtimes][2] pour découvrir comment désactiver plusieurs contextes ou monitors à la fois.
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor seront supprimés.
 
 ### Resolve
+
 Si votre monitor est dans un état d'alerte, le bouton **Resolve** apparaît. Il vous permet de résoudre manuellement votre monitor.
 
 La fonction `resolve` du monitor remplace artificiellement le statut du monitor par `OK` pour sa prochaine évaluation. L'évaluation d'après est effectuée normalement, à partir des données sur lesquelles le monitor est basé.
@@ -52,10 +56,11 @@ Lorsque les données sont transmises ponctuellement, il convient de `resolve` ma
 Cette fonction vous permet par exemple de gérer un monitor reposant sur des métriques d'erreur qui ne sont pas générées en l'absence d'erreur (`aws.elb.httpcode_elb_5xx` ou encore des counters DogStatsD dans votre code qui renvoient des informations _uniquement en cas d'erreur_).
 
 ### Settings
+
 Cliquez sur l'icône des paramètres en forme d'engrenage pour afficher les options disponibles :
 
 | Option | Description                                                                                                                                                                                                                                |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Edit   | Modifiez le monitor actuel. Cliquez [ici][1] pour en savoir plus sur les différents types de monitors.                                                                                                                                                             |
 | Clone  | Effectuez une copie de votre monitor actuel.                                                                                                                                                                                                        |
 | Export | Exportez la configuration JSON du monitor actuel. Cette option est également disponible au moment de la [création de votre monitor][1]. Si vous gérez et déployez des monitors à l'aide de programmes, il est plus simple de définir le monitor dans l'interface utilisateur et d'exporter le JSON. |
@@ -63,7 +68,7 @@ Cliquez sur l'icône des paramètres en forme d'engrenage pour afficher les opti
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="Section Properties de la page Monitor Status"  style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="Section Properties de la page Monitor Status" style="width:80%;" >}}
 
 La section *Properties* présente des informations générales sur votre monitor :
 
@@ -80,7 +85,7 @@ Utilisez l'icône en forme d'*engrenage* en haut à droite de la page pour [modi
 
 La section *Status and History* présente les changements d'état et de requête au fil du temps, tandis que le graphique **Evaluation Graph** illustre le comportement précis de la requête correspondant au cadre de l'intervalle *sur le graphique History*. Le graphique Evaluation Graph affiche une échelle fixe qui correspond au laps de temps de l'évaluation de votre monitor : de cette façon, les points représentés restent toujours [correctement agrégés][5]. Faites glisser le cadre sur la chronologie pour visualiser les précédents résultats de l'évaluation du monitor :
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="Section History de la page Monitor Status" video="true"  width="80%" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="Section History de la page Monitor Status" video="true" width="80%" >}}
 
 Pour étudier plus en détail l'évolution de vos métriques, utilisez l'outil [Metric Explorer][6] ou un [notebook][7] dédié.
 
@@ -103,8 +108,8 @@ Tous les événements générés par votre monitor sont agrégés dans cette sec
 [1]: /fr/monitors/monitor_types
 [2]: /fr/monitors/downtimes
 [3]: /fr/api/?lang=python#monitors
-[4]: /fr/graphing/functions
+[4]: /fr/dashboards/functions
 [5]: /fr/videos/datadog101-5-aggregation/?wtime=49s
 [6]: https://app.datadoghq.com/metric/explorer
-[7]: /fr/graphing/notebooks
-[8]: /fr/graphing/event_stream
+[7]: /fr/notebooks
+[8]: /fr/events

@@ -27,7 +27,7 @@ Recherchez un processus à surveiller en indiquant une liste de chaînes sépar�
 
 Les processus et les totaux correspondants s'affichent sous la recherche :
 
-{{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Sélectionner des processus" style="width:90%;">}}
 
 Une fois votre recherche définie, un graphique s'affiche au-dessus des critères de recherche. Celui-ci représente le nombre total approximatif de processus trouvés. Pour obtenir des données plus granulaires, consultez votre [page Live Process][4].
 
@@ -49,11 +49,11 @@ Les seuils vous permettent de déclencher une alerte lorsqu'une certaine valeur 
 Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
 
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /fr/graphing/infrastructure/process
+[1]: /fr/infrastructure/process
 [2]: https://app.datadoghq.com/monitors#create/live_process
-[3]: /fr/graphing/infrastructure/process/#search-syntax
+[3]: /fr/infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /fr/monitors/notifications

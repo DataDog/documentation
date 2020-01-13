@@ -22,6 +22,7 @@ Vous avez la possibilité de filtrer l'intégralité des données associées à 
 Les tags primaires respectent un autre ensemble de règles que celles des [tags Datadog][2] standards.
 
 ## Implémentation
+
 ### Environnement
 
 L'environnement à partir duquel vous recueillez vos traces constitue le tag primaire obligatoire par défaut. Sa clé de tag est `env`. Par défaut, sa valeur pour des données sans tag correspond à `env:none`.
@@ -33,9 +34,9 @@ Il existe différentes façons de spécifier un environnement lors de l'envoi de
 2. Configuration de l'Agent :
   Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][3]. Cela permet de taguer toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
 
-    ```
+    ```yaml
     apm_config:
-      env: <ENVIRONMENT>
+      env: "<ENVIRONMENT>"
     ```
 
 3. Par trace :
@@ -45,7 +46,7 @@ Il existe différentes façons de spécifier un environnement lors de l'envoi de
 
 Les environnements apparaissent en haut des pages APM. Utilisez la liste déroulante pour filtrer les données affichées sur la page actuelle.
 
-{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Tracing d'environnements"  style="width:80%;">}}
+{{< img src="tracing/advanced/setting_primary_tags/envs_tracing_screen.png" alt="Tracing d'environnements" style="width:80%;">}}
 
 ## Ajouter un deuxième tag primaire dans Datadog
 
@@ -65,8 +66,7 @@ Si vous modifiez un tag primaire défini, prenez en compte ce qui suit :
 
 Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs pour filtrer les données affichées sur la page actuelle. Pour afficher les données sans tag primaire, choisissez `<NOM_TAG>:*` dans la liste déroulante (comme illustré ci-dessous).
 
-{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="IU tags primaires"  style="width:80%;">}}
-
+{{< img src="tracing/advanced/setting_primary_tags/primary_tags_ui.png" alt="IU tags primaires" style="width:80%;">}}
 
 ## Pour aller plus loin
 
