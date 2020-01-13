@@ -1492,10 +1492,17 @@ main:
     identifier: "account_management"
     weight: 190000
 
-  - name: "Team management"
-    url: "account_management/team/"
+  ## ACCOUNT MANAGEMENT - TEAM
+
+  - name: "User management"
+    url: "account_management/users/"
     parent: "account_management"
+    identifier: "account_management_users"
     weight: 1
+  - name: "Default Datadog Roles"
+    url: "account_management/users/default_roles/"
+    parent: "account_management_users"
+    weight: 101
 
   - name: "Organization settings"
     url: "account_management/org_settings/"

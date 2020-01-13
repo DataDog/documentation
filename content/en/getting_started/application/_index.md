@@ -100,7 +100,7 @@ For each incident, users can:
 [7]: /tagging
 [8]: /infrastructure/hostmap
 [9]: /events
-[10]: /account_management/team
+[10]: /account_management/users
 [11]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
 [12]: /events/#@-notifications
 [13]: /help

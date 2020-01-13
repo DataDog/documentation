@@ -124,7 +124,7 @@ With SAML Strict mode enabled, all users must log in with SAML. An existing user
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
 [2]: /help
-[3]: /account_management/team/#datadog-user-roles
+[3]: /account_management/users/default_roles
 [4]: https://app.datadoghq.com/saml/saml_setup
 [5]: https://app.datadoghq.com/account/saml/metadata.xml
 [6]: https://app.datadoghq.com/account/team
