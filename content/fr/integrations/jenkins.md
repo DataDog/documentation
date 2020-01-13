@@ -4,7 +4,7 @@ name: jenkins
 kind: integration
 git_integration_title: jenkins
 newhlevel: true
-description: 
+description:
 is_public: true
 public_title: Intégration Datadog/Jenkins
 short_description: "Surveillez le statut des tâches et consultez les démarrages et interruptions de builds dans votre flux d'événements."
@@ -12,7 +12,7 @@ categories:
 - configuration & deployment
 ---
 
-{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Plugin Jenkins"  >}}
+{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Plugin Jenkins" >}}
 
 ## Présentation
 
@@ -59,11 +59,11 @@ Dès que le plug-in est fonctionnel, des événements Jenkins sont envoyés au f
 
 Les métriques suivantes sont disponibles dans Datadog :
 
-|Nom de la métrique| Description|
-|:----|:------|
-|`jenkins.queue.size`| (Gauge) Taille de votre file d'attente Jenkins|
-|`jenkins.job.waiting`| (Gauge) Temps d'attente d'une tâche en secondes|
-|`jenkins.job.duration`| (Gauge) Durée d'une tâche en secondes|
+| Nom de la métrique            | Description                                    |
+|:-----------------------|:-----------------------------------------------|
+| `jenkins.queue.size`   | (Gauge) Taille de votre file d'attente Jenkins             |
+| `jenkins.job.waiting`  | (Gauge) Temps d'attente d'une tâche en secondes |
+| `jenkins.job.duration` | (Gauge) Durée d'une tâche en secondes           |
 
 ## Événements
 
@@ -73,6 +73,7 @@ Les événements suivants sont générés par le plug-in :
 * Finished build
 
 ## Checks de service
+
 * `jenkins.job.status` :  statut du build
 
 [1]: http://updates.jenkins-ci.org/download/war/1.580.1/jenkins.war

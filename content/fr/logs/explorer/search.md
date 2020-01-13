@@ -20,7 +20,7 @@ further_reading:
 ---
 Tous les paramètres de recherche sont contenus dans l'adresse URL. Vous pouvez partager votre vue en partageant l'URL.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true"  >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" >}}
 
 ## Syntaxe de recherche
 
@@ -34,7 +34,6 @@ Il existe deux types de termes :
 
 Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants :
 
-
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Opérateur** | **Description**                                                                                        | **Exemple**                  |
@@ -46,19 +45,22 @@ Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser 
 
 Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche"  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche" style="width:80%;">}}
 
 ### Échappement de caractères spéciaux
 
 Les caractères suivants sont considérés comme spéciaux : `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, et `\` requièrent le caractère d'échappement `\`.
 
 ### Recherche d'attributs
+
 #### Recherche d'attribut message
+
 Pour rechercher les logs qui contiennent `user=AliceMartin` dans l'attribut message, utilisez la recherche suivante :
 
 `user\=AliceMartin`
 
 #### Recherche à facettes
+
 Pour effectuer une recherche en fonction d'un attribut spécifique, [ajoutez-le comme facette][1] puis utilisez `@` pour indiquer que vous faites une recherche à partir d'une facette.
 
 Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer la valeur **url** sur *www.datadoghq.com*, saisissez :
@@ -70,7 +72,7 @@ Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtre
 Exemples :
 
 | Requête de recherche                                                         | Description                                                                                                                                                         |
-| -----                                                                | -----                                                                                                                                                               |
+|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `@http.url_details.path:"/api/v1/test"`                              | Recherche tous les logs contenant `/api/v1/test` dans l'attribut `http.url_details.path`.                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | Recherche tous les logs dont la valeur de l'attribut `http.url` commence par `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Recherche tous les logs dont la valeur `http.status_code` est comprise entre 200 et 299 et dont la valeur de l'attribut `http.url_details.path` commence par `/api/v1/` |
@@ -94,6 +96,7 @@ Les wildcards peuvent également être utilisés pour effectuer une recherche de
 En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette mais pas du message de log ne seront pas renvoyés.
 
 ### Valeurs numériques
+
 Utilisez les caractères `<`, `>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer tous les logs avec un délai de réponse supérieur à 100 ms :
 
 `@http.response_time:>100`
@@ -121,7 +124,7 @@ Vous pouvez ajouter des facettes à des tableaux de chaînes ou de nombres. Tout
 
 Dans l'exemple ci-dessous, cliquer sur la valeur `Peter` dans la facette renvoie tous les logs contenant un attribut `users.names` dont la valeur est soit `Peter`, soit un tableau qui contient `Peter` :
 
-{{< img src="logs/explorer/search/array_search.png" alt="Tableaux et facettes"  style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Tableaux et facettes" style="width:80%;">}}
 
 ## Recherches enregistrées
 
@@ -132,7 +135,7 @@ Les [vues enregistrées][5] contiennent votre requête de recherche, les colonne
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/explorer/?tab=facets#setup
-[2]: /fr/graphing/infrastructure
+[2]: /fr/infrastructure
 [3]: /fr/integrations/#cat-log-collection
 [4]: /fr/tagging/#tags-best-practices
 [5]: /fr/logs/explorer/saved_views

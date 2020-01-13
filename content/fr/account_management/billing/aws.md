@@ -23,12 +23,13 @@ Lorsque vous appliquez des limites à des comptes AWS existants depuis le carré
 Les hosts avec un Agent en cours d'exécution s'affichent toujours et sont inclus dans la facturation. L'utilisation de l'option de limite s'applique uniquement aux instances EC2 sans Agent en cours d'exécution.
 
 ## Dépannage
+
 Pour des questions techniques, contactez [l'assistance Datadog][4].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /fr/tagging/using_tags/#integrations
-[3]: /fr/graphing/infrastructure
+[3]: /fr/infrastructure
 [4]: /fr/help
 [5]: mailto:success@datadoghq.com

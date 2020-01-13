@@ -24,7 +24,7 @@ Pour créer un [monitor d'intégration][2] dans Datadog :
 1. Utilisez la navigation principale : *Monitors --> New Monitor --> Integration*.
 2. Recherchez une intégration ou sélectionnez-la à partir de la liste ou des images.
 3. Choisissez un monitor de type **Integration metric** ou **Integration status** :
-    {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="Metric ou Status"  style="width:90%;">}}
+    {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="Métrique ou Statut"  style="width:90%;">}}
 
 ### Integration Metric
 
