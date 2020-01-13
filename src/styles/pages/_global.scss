@@ -5,6 +5,7 @@ html {
   font-size: 18px;
   opacity: 1 !important;
   transition: opacity .3s ease-in;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -171,7 +172,7 @@ code {
 .code-snippet-wrapper {
   padding-right: 0 !important;
   position: relative;
-  
+
   .code-snippet {
     position: relative;
     padding-right: 0 !important;
@@ -396,7 +397,7 @@ h5{
           color:$ddpurple;
         }
       }
-      
+
     }
   }
   .nav-tabs-mobile {

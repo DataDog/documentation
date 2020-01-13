@@ -1,6 +1,10 @@
 // API
 $ddpurple:    #632CA6;
 
+html {
+  scroll-behavior: auto;
+}
+
 .announcement_banner.open ~ header.scrolled ~ .container-fluid .api-nav {
   top:94px;
 }
