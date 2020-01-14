@@ -21,7 +21,7 @@ further_reading:
 
 Datadog [Logging without Limits][1]™ provides flexibility by decoupling [log ingestion and indexing][2]. Cloud-based applications can generate logs at a rate of millions per minute. This type of high volume log indexing is helpful when monitoring every aspect of a service, but it can be inhibiting when troubleshooting during high priority issues or tracking bugs.
 
-This guide identifies key components of Logging Without Limits™ such as [Patterns][3], [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-for-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitoring your KPIs over time.
+This guide identifies key components of Logging Without Limits™ such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-for-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitoring your KPIs over time.
 
 ## 1. Identify your most logging service status
 
