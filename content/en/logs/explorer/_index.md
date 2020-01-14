@@ -171,7 +171,11 @@ Find out more in the [Log Patterns section][1]
 
 After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][3].
 
-Note: To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][4].
+**Note**: 
+
+* To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][4].
+
+* Facets on [Reserved Attributes][5] are available by default.
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -223,3 +227,4 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 [2]: /logs/explorer/saved_views
 [3]: /logs/explorer/analytics
 [4]: /logs/processing/attributes_naming_convention
+[5]: /logs/processing/#reserved-attributes
