@@ -7,7 +7,7 @@ aliases:
 
 The same color may be used twice in a graph when the Classic palette is selected and this may be a little confusing.
 
-{{< img src="graphing/faq/double_colors.png" alt="double_colors"  >}}
+{{< img src="dashboards/faq/double_colors.png" alt="double_colors"  >}}
 
 In the 'Classic' palette, the color order is always the same: 'light blue', 'dark blue', 'light purple', 'purple', 'light yellow', 'yellow'. Then again 'light blue', 'dark blue' etc.
 

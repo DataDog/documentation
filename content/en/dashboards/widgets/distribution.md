@@ -19,11 +19,11 @@ This visualization displays only a single metric query; additional queries are d
 
 **Note**: Outlier detection cannot be performed for this visualization.
 
-{{< img src="graphing/widgets/distribution/distribution.png" alt="Distribution"  >}}
+{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution"  >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
 
 ### Configuration
 
@@ -34,7 +34,7 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your da
 
 #### Display preference
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### Global time
 
@@ -48,7 +48,7 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

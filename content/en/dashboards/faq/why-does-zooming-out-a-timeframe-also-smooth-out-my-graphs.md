@@ -15,11 +15,11 @@ aliases:
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points occurs so that the number of points remains under that set number. Thus, granularity is lost as the timeframe increases. For instance, for a four hour time window, data is aggregated to have one value per minute for a line graph, and one value per two minutes for a bar graph. As you "zoom out" (i.e. select a larger timeframe) the data shown on the graph represents a longer time period.
 
-{{< img src="graphing/faq/smooth_line.mp4" alt="Smoothing a line graph" video="true" width="90%" >}}
+{{< img src="dashboards/faq/smooth_line.mp4" alt="Smoothing a line graph" video="true" width="90%" >}}
 
 When bars are displayed the rollup interval is more obvious:
 
-{{< img src="graphing/faq/smoothing.mp4" alt="Smoothing a bar graph" video="true" width="90%" >}}
+{{< img src="dashboards/faq/smoothing.mp4" alt="Smoothing a bar graph" video="true" width="90%" >}}
 
 You can manually append the `.rollup()` function to your query to adjust the method and granularity of time aggregation. Datadog rolls up data points automatically by default, averaging values in the rollup interval for `GAUGE`, `RATE` and `COUNT` metric types.
 

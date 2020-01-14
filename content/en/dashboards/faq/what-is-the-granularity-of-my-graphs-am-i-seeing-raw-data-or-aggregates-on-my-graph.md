@@ -31,7 +31,7 @@ However what you can do is control how this aggregation is performed by using th
 Note that our backend tries to keep the number of intervals to a number below ~300. So if you do rollup(60) over a 2-month time window, you can't have the one-minute granularity requested.
 
 ## Example
-{{< img src="graphing/faq/graph_granularity.png" alt="graph_granularity"  >}}
+{{< img src="dashboards/faq/graph_granularity.png" alt="graph_granularity"  >}}
 
 The graph above is a bar graph over the past 2 hours. On this graph you have one datapoint per minute, i.e. what you see are not the real values submitted but local aggregates, each one representing one minute of your metric data.
 

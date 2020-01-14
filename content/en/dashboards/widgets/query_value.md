@@ -18,11 +18,11 @@ The values displayed by a query value need not represent an instantaneous measur
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
-{{< img src="graphing/widgets/query_value/query_value.png" alt="Query value widget"  >}}
+{{< img src="dashboards/widgets/query_value/query_value.png" alt="Query value widget"  >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/query_value/query_value_setup.png" alt="Query value widget setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query_value_setup.png" alt="Query value widget setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -43,7 +43,7 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
