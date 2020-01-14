@@ -24,15 +24,15 @@ Affichez une [trace][1] individuelle pour voir toutes ses [spans][2] et métadon
 
 Calculez les détails du temps d'exécution et ajustez le jeu de couleurs par **service** ou **host**.
 
-{{< img src="tracing/visualization/trace/service_host_display.png" alt="Affichage de host de service"  style="width:40%;">}}
+{{< img src="tracing/visualization/trace/service_host_display.png" alt="Affichage de host de service" style="width:40%;">}}
 
 Utilisez la molette de la souris pour zoomer sur le graphique :
 
-{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Erreur de trace" video="true"  width="90%" >}}
+{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Erreur de trace" video="true" width="90%" >}}
 
 L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et les trie en fonction du nombre de spans correspondant. Les services sont triés en fonction du pourcentage de temps d'exécution relatif associé à la trace dans chaque service :
 
-{{< img src="tracing/visualization/trace/trace_list.png" alt="Liste des traces"  style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_list.png" alt="liste de Trace"  style="width:90%;">}}
 
 ### Plus d'informations
 
@@ -41,7 +41,7 @@ L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et
 
 Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la trace de pile est fournie :
 
-{{< img src="tracing/visualization/trace/trace_error.png" alt="Erreur de trace"  style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_error.png" alt="Erreur de trace" style="width:90%;">}}
 
 Si vous analysez une [trace][1] qui signale une erreur et que les règles de tags à signification particulière sont appliquées, l'erreur s'affiche de façon distincte. Lors de l'envoi de vos traces, vous pouvez ajouter des attributs au paramètre `meta`. 
 
@@ -70,7 +70,6 @@ Affichez les informations sur le host qui sont associées à la trace, notamment
 Consultez les logs associés à votre service au moment où la trace s'est produite. Lorsque vous passez le curseur sur un log, une ligne montrant son timestamp est affichée sur le graphique de performances de la trace. Cliquez sur le log pour accéder à la [recherche du Log Explorer][1].
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Logs de trace"  style="width:90%;">}}
-
 
 [1]: /fr/logs/explorer/search
 {{% /tab %}}

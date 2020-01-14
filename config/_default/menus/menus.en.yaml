@@ -1325,7 +1325,7 @@ main:
 
   ## DEVELOPERS - Metrics
 
-  - name: "Metrics"
+  - name: "Custom Metrics"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
@@ -1366,11 +1366,6 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
     weight: 207
-  - name: "Custom Metrics"
-    url: "developers/metrics/custom_metrics/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_custom_metrics"
-    weight: 208
 
   ## DEVELOPERS - Events
 
@@ -1497,10 +1492,17 @@ main:
     identifier: "account_management"
     weight: 190000
 
-  - name: "Team management"
-    url: "account_management/team/"
+  ## ACCOUNT MANAGEMENT - TEAM
+
+  - name: "User management"
+    url: "account_management/users/"
     parent: "account_management"
+    identifier: "account_management_users"
     weight: 1
+  - name: "Default Datadog Roles"
+    url: "account_management/users/default_roles/"
+    parent: "account_management_users"
+    weight: 101
 
   - name: "Organization settings"
     url: "account_management/org_settings/"

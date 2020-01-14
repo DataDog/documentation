@@ -187,5 +187,5 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [10]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [11]: /agent/faq/getting-further-with-docker
 [12]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[13]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[13]: /agent/kubernetes/daemonset_setup/#configure-rbac-permissions
 [14]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

@@ -26,6 +26,12 @@ template_variables = [{
     'prefix': 'host',
     'default': 'my-host'
 }]
+
+saved_view = [{
+    'name': 'Saved views for hostname 2',
+    'template_variables': [{'name': 'host', 'value': '<HOSTNAME_2>'}]}
+]
+
 api.Dashboard.update(dashboard_id,
                      title=title,
                      widgets=widgets,
@@ -33,4 +39,5 @@ api.Dashboard.update(dashboard_id,
                      description=description,
                      is_read_only=is_read_only,
                      notify_list=notify_list,
-                     template_variables=template_variables)
+                     template_variables=template_variables,
+                     template_variable_presets=saved_view)

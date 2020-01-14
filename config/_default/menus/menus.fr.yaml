@@ -243,10 +243,14 @@ main:
     identifier: agent_autodiscovery
     parent: agent
     weight: 5
+  - name: Autodiscovery basique
+    url: agent/autodiscovery/basic_autodiscovery
+    parent: agent_autodiscovery
+    weight: 500
   - name: Configuration automatique
     url: agent/autodiscovery/auto_conf/
     parent: agent_autodiscovery
-    weight: 501
+    weight: 502
   - name: Modèles d'intégration
     url: agent/autodiscovery/integrations/
     parent: agent_autodiscovery
@@ -267,12 +271,12 @@ main:
     url: agent/autodiscovery/management/
     parent: agent_autodiscovery
     weight: 506
-  - name: Checks d'endpoints
-    url: agent/autodiscovery/endpointschecks/
-    parent: agent_autodiscovery
-    weight: 507
   - name: Checks de cluster
     url: agent/autodiscovery/clusterchecks/
+    parent: agent_autodiscovery
+    weight: 507
+  - name: Checks d'endpoints
+    url: agent/autodiscovery/endpointschecks/
     parent: agent_autodiscovery
     weight: 508
   - name: Dépannage
@@ -339,7 +343,7 @@ main:
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
     weight: 906
-  - name: Problèmes de Site
+  - name: Problèmes de site
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
     weight: 907
@@ -385,7 +389,7 @@ main:
     url: dashboards/widgets/
     parent: dashboards
     weight: 3
-  - name: Requête
+  - name: Création de requêtes
     url: dashboards/querying/
     parent: dashboards
     weight: 4
@@ -469,7 +473,7 @@ main:
     identifier: infrastructure
     pre: nav_infrastructure
     weight: 80000
-  - name: La liste d'insfrastructures
+  - name: Liste des infrastructures
     url: infrastructure/list/
     parent: infrastructure
     weight: 2
@@ -706,7 +710,7 @@ main:
     url: tracing/advanced/adding_metadata_to_spans/
     parent: tracing_advanced
     weight: 302
-  - name: Métriques d'exécution
+  - name: Métriques runtime
     url: tracing/advanced/runtime_metrics/
     parent: tracing_advanced
     weight: 303
@@ -887,7 +891,7 @@ main:
     parent: log_management
     identifier: log_explorer
     weight: 7
-  - name: Rechercher des monitors
+  - name: Recherche de logs
     url: logs/explorer/search/
     parent: log_explorer
     weight: 701
@@ -969,7 +973,7 @@ main:
     pre: nav_rum
     identifier: rum
     weight: 150000
-  - name: En savoir plus
+  - name: Prise en main
     url: real_user_monitoring/installation/
     parent: rum
     identifier: rum_install
@@ -989,7 +993,7 @@ main:
     parent: rum
     identifier: rum_explorer
     weight: 3
-  - name: Rechercher des monitors
+  - name: Recherche
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
@@ -1085,12 +1089,12 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 201
-  - name: Envoi de checks de service - Check de l'Agent
+  - name: Envoi de métriques - Check de l'Agent
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
     weight: 202
-  - name: Envoi de checks de service - DogStatsD
+  - name: Envoi de métriques - DogStatsD
     url: developers/metrics/dogstatsd_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_dogstatsd
@@ -1194,7 +1198,7 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 902
-  - name: Ancien Agent
+  - name: Anciennes intégrations
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
     weight: 903
@@ -1226,7 +1230,7 @@ main:
     url: account_management/org_settings/
     parent: account_management
     weight: 2
-  - name: Authentification unique avec SAML
+  - name: SSO avec SAML
     url: account_management/saml/
     identifier: account_management_saml
     parent: account_management

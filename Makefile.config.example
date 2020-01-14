@@ -6,7 +6,7 @@ FETCH_INTEGRATIONS := true
 GITHUB_TOKEN := ${github_personal_token}
 RUN_SERVER := true
 RUN_WEBPACK := true
-CONFIGURATION_FILE := "./local/etc/pull_config_preview.yaml"
+CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 LOCAL := True
 LOCALBIN := local/bin

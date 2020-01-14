@@ -13,12 +13,15 @@ further_reading:
     text: Apprendre à utiliser des tags dans Datadog
 ---
 ## Présentation
+
 Les tags vous permettent d'interroger les machines et métriques que vous surveillez avec Datadog. Pour identifier les problèmes au sein de votre environnement et affiner suffisamment les données afin d'en découvrir les causes profondes, vous devez être en mesure d'assigner des tags et d'appliquer des filtres à partir de ces derniers. Découvrez comment [définir des tags][1] dans Datadog avant de poursuivre la lecture de cette rubrique.
 
 Vous pouvez assigner des tags au sein de plusieurs éléments de Datadog : les [fichiers de configuration](#fichiers-de-configuration), les [variables d'environnement][2], vos [traces](#traces), l'[IU](#iu) de Datadog, l'[API][3], [DogStatsD][4] et les [intégrations][5] (grâce à leur fonction d'héritage). Nous vous recommandons d'utiliser les fichiers de configuration et l'héritage des intégrations pour l'assignation de la majorité de vos tags.
 
 ## Fichiers de configuration
+
 ### Hostname
+
 Le hostname (clé de tag `host`) est [assigné automatiquement][6] par l'Agent Datadog. Pour personnaliser le hostname, utilisez le fichier de configuration de l'Agent, `datadog.yaml` :
 
 ```yaml
@@ -37,7 +40,7 @@ hostname: mamachine.mondomaine
 ### Ajouter des tags
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 Le fichier de configuration de l'Agent (`datadog.yaml`) est également utilisé pour définir des tags de host qui s'appliquent à l'ensemble des métriques, des traces et des logs transmis par l'Agent Datadog (voir les formats YAML ci-dessous).
 
@@ -46,7 +49,7 @@ Le fichier de configuration de l'Agent (`datadog.yaml`) est également utilisé 
 
 Le fichier de configuration de l'Agent (`datadog.conf`) est également utilisé pour définir des tags de host qui s'appliquent à l'ensemble des métriques, des traces et des logs transmis par l'Agent Datadog. Les tags dans le fichier `datadog.conf` doivent respecter le format suivant :
 
-```
+```text
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
@@ -57,22 +60,22 @@ Les tags pour les [intégrations][5] installées avec l'Agent sont configurés �
 
 #### Formats YAML
 
-Dans les fichiers YAML, utilisez un dictionnaire de tags pour assigner une liste de tags. Les dictionnaires de tags peuvent respecter deux formats différents, aux caractéristiques similaires :
+Dans les fichiers YAML, utilisez une liste de chaînes sous la clé `tags` pour attribuer une liste de tags. En YAML, les listes peuvent respecter deux formats différents, aux caractéristiques similaires :
 
-```
-tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
+```text
+tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 ou
 
-```
+```text
 tags:
-    - <KEY_1>:<VALUE_1>
-    - <KEY_2>:<VALUE_2>
-    - <KEY_3>:<VALUE_3>
+    - "<KEY_1>:<VALUE_1>"
+    - "<KEY_2>:<VALUE_2>"
+    - "<KEY_3>:<VALUE_3>"
 ```
 
-Nous conseillons d'assigner des tags sous la forme de paires `<KEY>:<VALUE>`. L'autre format de tags plus simple est également accepté. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus. 
+Nous vous recommandons d'assigner des tags sous la forme de paires `<KEY>:<VALUE>`. Toutefois, les tags comprenant uniquement des keys (`<KEY>`) sont également acceptés. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus.
 
 ## Variables d'environnement
 
@@ -94,6 +97,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 Lorsque vous utilisez `DD_KUBERNETES_POD_LABELS_AS_TAGS`, vous pouvez utiliser des wildcards au format suivant :
+
 ```text
 {"foo", "bar_%%label%%"}
 ```
@@ -101,6 +105,7 @@ Lorsque vous utilisez `DD_KUBERNETES_POD_LABELS_AS_TAGS`, vous pouvez utiliser d
 Par exemple, `{"app*", "kube_%%label%%"}` correspond au nom de tag `kube_application` pour l'étiquette `application`. En outre, `{"*", "kube_%%label%%"}` ajoute toutes les étiquettes de pod en tant que tags avec le préfixe `kube_`.
 
 Lorsque vous utilisez la variable `DD_DOCKER_LABELS_AS_TAGS` dans un fichier `docker-compose.yaml` Docker Swarm, assurez-vous de supprimer les apostrophes. Exemple :
+
 ```shell
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
@@ -114,7 +119,8 @@ Une fois que l'Agent aura extrait les étiquettes du conteneur, les tags seront 
 `versiontag:1`
 
 **Exemple de fichier docker-compose.yaml :**
-```shell
+
+```yaml
 services:
   datadog:
     volumes:
@@ -170,13 +176,13 @@ Pour OpenTracing, utilisez l'option de démarrage `tracer.WithGlobalTag` pour d�
 {{% tab "Java" %}}
 Avec sysprop :
 
-```
+```text
 -Ddd.trace.span.tags=env:<ENVIRONNEMENT>
 ```
 
 Avec des variables d'environnement :
 
-```
+```text
 DD_TRACE_SPAN_TAGS="env:<ENVIRONNEMENT>"
 ```
 
@@ -194,6 +200,7 @@ Datadog.tracer.set_tags('env' => '<ENVIRONNEMENT>')
 from ddtrace import tracer
 tracer.set_tags({'env': '<ENVIRONNEMENT>'})
 ```
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -225,8 +232,7 @@ Vous pouvez assigner des tags de host dans l'interface depuis la page relative �
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap"  style="width:80%;">}}
 
-
-[1]: /fr/graphing/infrastructure/hostmap
+[1]: /fr/infrastructure/hostmap
 {{% /tab %}}
 {{% tab "Liste d'infrastructures" %}}
 
@@ -234,8 +240,7 @@ Vous pouvez assigner des tags de host dans l'interface depuis la page relative �
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures"  style="width:80%;">}}
 
-
-[1]: /fr/graphing/infrastructure
+[1]: /fr/infrastructure
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
@@ -247,7 +252,6 @@ Lorsque vous créez un monitor, assignez des tags de monitor durant l'étape 4 
 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor"  style="width:80%;">}}
 
-
 [1]: /fr/monitors/manage_monitor
 {{% /tab %}}
 {{% tab "Métriques de distribution" %}}
@@ -258,7 +262,7 @@ Créez des agrégations par centiles dans les [métriques de distribution][1] en
 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor"  style="width:80%;">}}
 
-[1]: /fr/graphing/metrics/distributions
+[1]: /fr/metrics/distributions
 [2]: /fr/developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Intégrations" %}}
@@ -266,7 +270,6 @@ Créez des agrégations par centiles dans les [métriques de distribution][1] en
 Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques pour un compte spécifique. Utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS"  style="width:80%;">}}
-
 
 [1]: /fr/integrations/amazon_web_services
 {{% /tab %}}
@@ -279,14 +282,13 @@ Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentair
 
 Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
 
-- [Envoyer le résultat d'un check][2]
-- [Envoyer un événement][3]
-- [Intégration AWS][4]
-- [Envoyer des points de séries temporelles][5]
-- [Créer][6] ou [modifier][7] un monitor
-- [Ajouter][8] ou [mettre à jour][9] les tags d'un host
-- [Envoyer des traces][10]
-
+* [Envoyer le résultat d'un check][2]
+* [Envoyer un événement][3]
+* [Intégration AWS][4]
+* [Envoyer des points de séries temporelles][5]
+* [Créer][6] ou [modifier][7] un monitor
+* [Ajouter][8] ou [mettre à jour][9] les tags d'un host
+* [Envoyer des traces][10]
 
 [1]: /fr/api
 [2]: /fr/api/?lang=python#post-a-check-run
@@ -303,27 +305,27 @@ Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cl
 
 Les tags de Datadog vous permettent de recueillir facilement vos métriques. Pour mieux comprendre, imaginons que vous cherchez à obtenir un total pour l'ensemble de métriques suivant fourni par votre site Web (example.com) :
 
-```
+```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_prod_1")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example_prod_2")
 ```
 
 Nous vous conseillons d'ajouter le tag `domain:example.com` et de ne pas toucher au hostname (l'API Datadog détermine automatiquement le hostname) :
 
-```
+```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
 Grâce au tag `domain:example.com`, vous pouvez calculer le total des vues de pages pour l'ensemble des hosts : 
 
-```
+```text
 sum:page.views{domain:example.com}
 ```
 
 Pour obtenir des données détaillées pour chaque host, utilisez l'expression suivante :
 
-```
+```text
 sum:page.views{domain:example.com} by {host}
 ```
 
@@ -405,13 +407,15 @@ Les tags suivants sont recueillis à partir des intégrations AWS. **Remarque**�
 
 Les métriques, événements et checks de service des intégrations Azure reçoivent les tags suivants :
 
-| Intégration                                           | Espace de nommage                                   | Clés de tag Datadog                                                                                                                                                                                  |
-|-------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Toutes les intégrations Azure                                | Toutes                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (le cas échéant)                                             |
-| Intégrations VM Azure                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                           |
-| Plans Azure App Service<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                  |
-| Azure App Services Web Apps et Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (applications web Linux uniquement), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version` |
-| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                            | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`                                                                                                                            |
+| Intégration                                           | Espace de nommage                                   | Clés de tag Datadog                                                                                                                                                                                                 |
+|-------------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Toutes les intégrations Azure                                | Toutes                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (le cas échéant)                                                            |
+| Intégrations VM Azure                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                                          |
+| Plans Azure App Service<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                                 |
+| Azure App Services Web Apps et Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (applications web Linux uniquement), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version`                |
+| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                  | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`. <br>Pour les liens de réplication uniquement :  `state` `primary_server_name` `primary_server_region` `secondary_server_name` `secondary_server_region` |
+| Azure Load Balancer<sup>(1)</sup>                     | `azure.network_loadbalancers.*`             | `sku_name`                                                                                                                                                                                                       |
+| Utilisation et quotas Azure<sup>(1)</sup>                   | `azure.usage.*`                             | `usage_category`, `usage_name`                                                                                                                                                                                   |
 
 <sup>(1)</sup>*Les tags spécifiques aux ressources sont en version bêta.*
 
@@ -433,7 +437,7 @@ Les intégrations web sont basées sur un système d'authentification. Les métr
 [4]: /fr/developers/metrics/dogstatsd_metrics_submission
 [5]: /fr/integrations
 [6]: /fr/agent/faq/how-datadog-agent-determines-the-hostname
-[7]: /fr/graphing/#arithmetic-between-two-metrics
+[7]: /fr/dashboards/querying/#arithmetic-between-two-metrics
 [8]: /fr/agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go

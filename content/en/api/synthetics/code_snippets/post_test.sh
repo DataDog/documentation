@@ -82,7 +82,14 @@ curl  -X POST \
       ],
       "tick_every":3600,
       "min_failure_duration":0,
-      "min_location_failed":1
+      "min_location_failed":1,
+      "monitor_options": {
+         "renotify_interval": 30
+      },
+      "retry": {
+        "count": 2,
+        "interval": 30
+      }
    },
    "name":"Test Doc",
    "config":{

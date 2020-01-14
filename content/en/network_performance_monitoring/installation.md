@@ -32,9 +32,9 @@ There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]
 
 The following provisioning systems are supported:
 
-* Daemonset / Helm: See the [Datadog Helm chart][3]
-* Chef: See the [Datadog Chef recipe][4]
-* Ansible: See the [Datadog Ansible role][5]
+* Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][3]
+* Chef 12.7+: See the [Datadog Chef recipe][4]
+* Ansible 4.0.1+: See the [Datadog Ansible role][5]
 
 ## Setup
 

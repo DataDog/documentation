@@ -16,12 +16,14 @@ ddtype: crawler
 {{< img src="integrations/rss/rss.png" alt="Événement RSS"  >}}
 
 ## Présentation
+
 Enregistrez des activités de flux RSS dans Datadog pour :
 
-  * Ajoutez des événements à votre flux d'événements depuis des sources personnalisées .
-  * Discuter des flux d'événements avec votre équipe.
+* Ajoutez des événements à votre flux d'événements depuis des sources personnalisées .
+* Discuter des flux d'événements avec votre équipe.
 
 ## Implémentation
+
 ### Installation
 
 La configuration nécessite :

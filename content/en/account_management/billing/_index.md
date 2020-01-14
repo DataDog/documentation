@@ -49,7 +49,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}Real User Moniotring FAQ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
@@ -62,7 +62,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 [3]: /agent
 [4]: https://docs.datadoghq.com/account_management/billing/serverless
 [5]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
-[6]: /account_management/team/#datadog-user-roles
+[6]: /account_management/users/default_roles
 [7]: https://app.datadoghq.com/account/billing_history
 [8]: mailto:billing@datadoghq.com
 [9]: https://app.datadoghq.com/account/billing

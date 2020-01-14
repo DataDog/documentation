@@ -19,12 +19,13 @@ Lorsque vous appliquez des limites à des locataires Azure existants depuis le c
 Les machines virtuelles sur lesquelles un Agent est exécuté s'affichent toujours et sont prises en compte dans votre facture. L'application de limites concerne uniquement les machines virtuelles sur lesquelles aucun Agent n'est exécuté.
 
 ## Dépannage
+
 Pour toute question technique, contactez [l'assistance Datadog][4].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /fr/tagging/using_tags/#integrations
-[3]: /fr/graphing/infrastructure
+[3]: /fr/infrastructure
 [4]: /fr/help
 [5]: mailto:success@datadoghq.com

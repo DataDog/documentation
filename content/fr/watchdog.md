@@ -27,11 +27,11 @@ Watchdog est une fonction à base d'algorithmes qui analyse les métriques d'inf
   * Latence
 
 * Métriques d'infrastructure issues des intégrations :
-  * [[Système][1]: Host-level memory usage (memory leaks), TCP retransmit rate, etc.
+  * [Système][1], pour l'utilisation de la mémoire (fuites de mémoire), le taux de retransmissions TCP, etc. au niveau du host
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
-  * [[Amazon Web Services][5]]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
+  * [Amazon Web Services][5], pour les services Amazon [S3][6], [ELB/ALB/NLB][7], [CloudFront][8] et [DynamoDB][9].
 
 Watchdog recherche des irrégularités dans les métriques, comme une élévation soudaine du taux de hits. Pour chaque irrégularité, une story est affichée sur la [page Watchdog][10]. Chaque story comprend un graphique illustrant l'irrégularité détectée et offre des informations supplémentaires sur l'intervalle et les endpoints pertinents. Pour éviter les fausses alertes, Watchdog signale les problèmes uniquement après avoir analysé vos données pendant une durée suffisante pour établir un degré de confiance élevé.
 

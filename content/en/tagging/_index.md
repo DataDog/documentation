@@ -23,12 +23,12 @@ Tags are a way of adding dimensions to metrics, so they can be filtered, aggrega
 
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
-| Tag Key     | Allows for                                                            |
-| ----------- | --------------------------------------------------------------------- |
-| `host`      | Correlation between metrics, traces, processes, and logs              |
-| `device`    | Segregation of metrics, traces, processes, and logs by device or disk   |
-| `source`    | Span filtering and automated pipeline creation for log management    |
-| `service`   | Correlation between metrics, traces, and logs                         |
+| Tag Key   | Allows for                                                            |
+|-----------|-----------------------------------------------------------------------|
+| `host`    | Correlation between metrics, traces, processes, and logs              |
+| `device`  | Segregation of metrics, traces, processes, and logs by device or disk |
+| `source`  | Span filtering and automated pipeline creation for log management     |
+| `service` | Correlation between metrics, traces, and logs                         |
 
 ## Why It Matters
 
@@ -57,10 +57,10 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
-    | Tag                | Key           | Value          |
-    |--------------------|---------------|----------------|
-    | `env:staging:east` | `env`         | `staging:east` |
-    | `env_staging:east` | `env_staging` | `east`         |
+| Tag                | Key           | Value          |
+|--------------------|---------------|----------------|
+| `env:staging:east` | `env`         | `staging:east` |
+| `env_staging:east` | `env_staging` | `east`         |
 
 5.  **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
 
@@ -69,8 +69,8 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 ## Assigning Tags
 Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
 
-| Method                        | Assign tags                                                                                  |
-|-------------------------------|----------------------------------------------------------------------------------------------|
+| Method                       | Assign tags                                                                                  |
+|------------------------------|----------------------------------------------------------------------------------------------|
 | [Configuration Files][4]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
 | [Environment Variables][5]   | Using environment variables for the containerized Agent                                      |
 | [UI][6]                      | In your Datadog platform                                                                     |
@@ -90,7 +90,7 @@ After you have [assigned tags][3] at the host and [integration][10] level, start
 | [Monitors][14]       | Manage monitors, create monitors, or manage downtime                                             |
 | [Metrics][15]        | Filter and group with the metric explorer                                                        |
 | [Integrations][16]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][17]            | Filter App Analytics or jump to other areas with the service map                    |
+| [APM][17]            | Filter App Analytics or jump to other areas with the service map                                 |
 | [Notebooks][18]      | Filter and group metrics on graphs                                                               |
 | [Logs][19]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
 | [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |
@@ -100,7 +100,7 @@ After you have [assigned tags][3] at the host and [integration][10] level, start
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/using_tags
-[2]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[2]: /developers/metrics/
 [3]: /tagging/assigning_tags
 [4]: /tagging/assigning_tags/#configuration-files
 [5]: /tagging/assigning_tags/#environment-variables

@@ -146,7 +146,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Remarque** : si l'Agent Datadog s'exécute déjà, vous devrez peut-être appliquer le [manifeste rbac-agent.yaml](#étape-1-configurer-les-autorisations-rbac) avant que l'Agent de cluster ne puisse s'exécuter.
+**Remarque** : si l'Agent Datadog s'exécute déjà, vous devrez peut-être appliquer le [manifeste rbac-agent.yaml](#etape-1-configurer-les-autorisations-rbac) avant que l'Agent de cluster ne puisse s'exécuter.
 
 ## Configurer l'Agent Datadog
 

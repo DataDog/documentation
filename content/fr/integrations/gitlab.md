@@ -8,6 +8,7 @@ categories:
   - source control
   - issue tracking
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -22,7 +23,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: gitlab.
-metric_to_check: go_gc_duration_seconds
+metric_to_check: gitlab.process_max_fds
 name: gitlab
 public_title: Intégration Datadog/Gitlab
 short_description: Surveillez toutes vos métriques Gitlab avec Datadog.
@@ -42,21 +43,24 @@ Consultez la [documentation de Gitlab][1] (en anglais) pour en savoir plus sur G
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check Gitlab est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs Gitlab.
+Le check Gitlab est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Gitlab.
 
 ### Configuration
+#### Host
 
-Modifiez le fichier `gitlab.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] afin de spécifier l'endpoint de métriques Prometheus de Gitlab.
-Consultez le [fichier d'exemple gitlab.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-**Remarque** : l'élément `allowed_metrics` de la section `init_config` vous permet d'indiquer les métriques à extraire.
+##### Collecte de métriques
 
+1. Modifiez le fichier `gitlab.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier l'endpoint de métriques Prometheus de Gitlab. Consultez le [fichier d'exemple gitlab.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-#### Collecte de logs
+  **Remarque** : l'élément `allowed_metrics` de la section `init_config` vous permet d'indiquer les métriques à extraire.
+
+2. [Redémarrez l'Agent][5].
+
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -84,11 +88,33 @@ Consultez le [fichier d'exemple gitlab.d/conf.yaml][5] pour découvrir toutes le
           source: gitlab
     ```
 
-3. [Redémarrez l'Agent][9].
+3. [Redémarrez l'Agent][5].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                                      |
+|----------------------|--------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `gitlab`                                                                                   |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                              |
+| `<CONFIG_INSTANCE>`  | `{"gitlab_url":"http://%%host%%/", "prometheus_endpoint":"http://%%host%%:10055/metrics"}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
+
+| Paramètre      | Valeur                                       |
+|----------------|---------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "gitlab", "service": "gitlab"}` |
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `gitlab` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `gitlab` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -103,17 +129,18 @@ Le check Gitlab comprend un check de service relatif à la disponibilité et à 
 En outre, il fournit un check de service pour s'assurer que l'endpoint Prometheus local est disponible.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://docs.gitlab.com/ee/administration/monitoring/prometheus
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/gitlab/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[7]: https://docs.datadoghq.com/fr/agent/docker/log/
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/gitlab/metadata.csv
+[10]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
@@ -128,10 +155,9 @@ Grâce à cette intégration, vous pouvez :
 * Visualiser et surveiller des métriques collectées via Gitlab Runners par l'intermédiaire de Prometheus
 * Confirmer que Gitlab Runner parvient à se connecter à Gitlab
 
-Consultez la [documentation de Gitlab Runner][1] (en anglais) pour
-en savoir plus sur Gitlab Runner et sur son intégration à Prometheus.
+Consultez la [documentation de Gitlab Runner][1] (en anglais) pour en savoir plus sur Gitlab Runner et sur son intégration à Prometheus.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
@@ -170,9 +196,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://docs.gitlab.com/runner/monitoring/README.html
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/datadog_checks/gitlab_runner/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 

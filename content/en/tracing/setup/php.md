@@ -52,6 +52,12 @@ dpkg -i datadog-php-tracer.deb
 apk add datadog-php-tracer.apk --allow-untrusted
 ```
 
+The extension will be installed for the default PHP version. To install the extension for a specific PHP version, use the `DD_TRACE_PHP_BIN` environment variable to set the location of the target PHP binary before installing.
+
+```shell
+export DD_TRACE_PHP_BIN=$(which php-fpm7)
+```
+
 Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][7] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][8] from the host machine to help identify any issues.
