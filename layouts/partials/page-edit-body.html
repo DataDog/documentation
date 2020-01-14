@@ -1,3 +1,12 @@
 {{ $link := .link }}
 {{ $ctx := .ctx }}
+{{ $type := .type }}
+{{ if eq $type "edit"}}
 <div class="pb-3"><a href="{{.link}}">{{ partial "img.html" (dict "root" $ctx "src" "icons/icon-pencil.svg" "class" "static" "alt" "edit" "width" "18") }} Edit</a></div>
+{{ else if eq $type "contribute" }}
+<hr class="mt-40">
+<div class="py-2">
+    <p>{{ i18n "mistake_in_docs"}}?
+    <a href="{{.link}}">{{ i18n "feel_free_contribute"}}!</a></p>
+</div>
+{{ end }}

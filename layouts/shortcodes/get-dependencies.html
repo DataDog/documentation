@@ -1,7 +1,7 @@
-{{ if isset $.Page.Params "dependencies" }}
+{{/* if isset $.Page.Params "dependencies" }}
     {{ $numDeps := (len $.Page.Params.dependencies) }}
     {{ if gt $numDeps 0 }}
     	<hr class="mt-40">
-        <p>Mistake in the docs? <a href="{{ index $.Page.Params.dependencies 0 }}">Feel free to contribute!</a></p>
+        <p>{{ i18n "mistake_in_docs"}}? <a href="{{ index $.Page.Params.dependencies 0 }}">{{ i18n "feel_free_contribute"}}!</a></p>
     {{ end }}
-{{ end }}
+{{ end */}}

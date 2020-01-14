@@ -234,5 +234,13 @@
 
   "type": {
     "other": "Type"
+  },
+
+  "feel_free_contribute": {
+    "other": "Feel free to Contribute"
+  },
+
+  "mistake_in_docs": {
+    "other": "Mistake in the Docs"
   }
 }

@@ -25,6 +25,7 @@
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
+{{ $ctx := . }}
 
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
@@ -48,7 +49,7 @@
         <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}"
           id="mainContent">
           {{ block "main" . }}{{ end }}
-          {{ partial "page-edit.html" . }}
+          {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
       </div>
 

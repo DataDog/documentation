@@ -1,6 +1,8 @@
+{{ $ctx := . }}
+
 <div class="col-4 d-none col-lg-2 col-xl-2 toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
     <div class="sticky toc">
-    {{ partial "page-edit.html" . }}
+    {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
         {{ .TableOfContents }}
     </div>
 </div>

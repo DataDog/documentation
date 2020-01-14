@@ -1,10 +1,11 @@
-{{ $ctx := . }}
+{{ $ctx := .ctx }}
+{{ $type := .type}}
 {{ $.Scratch.Set "editURL" "" }}
 
-{{ if .Params.dependencies }}
+{{ if $ctx.Params.dependencies }}
 {{/* Files with dependencies link to corresponding URL */}}
 
-    {{ $deps := .Params.dependencies }}
+    {{ $deps := $ctx.Params.dependencies }}
     {{ $depsIsArray := reflect.IsSlice $deps }}
 
     {{ if $depsIsArray }}
@@ -17,11 +18,11 @@
                 {{ $tmpURL := replace $dep "/blob/" "/edit/" }}
                 
                 {{/* Set Scratch */}}
-                {{ $.Scratch.Set "editURL" $tmpURL }}
-                {{ $editLink := $.Scratch.Get "editURL" }}
+                {{ $ctx.Scratch.Set "editURL" $tmpURL }}
+                {{ $editLink := $ctx.Scratch.Get "editURL" }}
 
-                {{ with $.File }}
-                    {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
+                {{ with $ctx.File }}
+                    {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
                 {{ end }}
 
             {{ end }}
@@ -30,20 +31,20 @@
 
     {{ end }}
 
-{{ else if (in .File.Path "/integrations/") }}
+{{ else if (eq $ctx.Section "integrations" )}}
 {{/* Files with integrations path and no dependencies link to new issue */}}
 
-    {{ $.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new/choose" }}
-    {{ $editLink := $.Scratch.Get "editURL" }}
+    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new/choose" }}
+    {{ $editLink := $ctx.Scratch.Get "editURL" }}
 
-    {{ with .File }}
-        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
+    {{ with $ctx.File }}
+        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
     {{ end }}
     
 {{ else }}
+    {{ $ctx.Section }}
 {{/* Not in integrations edit existing docs file */}}
-
-        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $.Page.Lang .File.Path ) }}
-        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink) }}
+        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
+        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
 
 {{ end }}
