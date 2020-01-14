@@ -29,19 +29,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 .toc-container {
   padding-top:80px;
   &.mobile-open {
-    top:60px;
-    position:absolute;
+    top: 60px;
+    position: sticky;
     max-width: 266px;
-    background: rgba(248, 248, 248, 0.8);
     height: 100%;
     right: 0px;
     z-index: 3;
-
-    // for left aligned ToC layout for large screens
-    @media (min-width: 1720px){
-      max-width: none !important;
-      min-width: 240px !important;
-    }
   }
 }
 
@@ -92,14 +85,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
     .toc_open + ul a {
       color: $studioViolet;
+      padding: 10px 0px 10px 15px;
     }
 
     // all scrolled link styles
     .toc_scrolled {
-      // color: #555;
-      // background:$highlightcolor;
-      border-left: 4px solid $studioViolet !important;
-      font-weight: 600;
+      border-left: 2px solid $studioViolet !important;
     }
 
     // level 1 list
@@ -116,7 +107,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
             &:last-child > a { 
               padding-bottom: 12px;
             }
-            // margin-top: 10px;
             &.toc_scrolled {
               background:none;              
               &> a {
@@ -133,11 +123,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
               }
             }
             a {
-              padding: 6px 0px 6px 15px;
-              border-left: 4px solid $ddgray;
+              padding: 20px 0px 20px 15px;
+              border-left: 2px solid $ddgray;
               font-size: 18px;
-              // line-height: 24px;
-              // font-weight:600;
             }
             // First level a tag
             & > a:first-child:not(.toc_open) {
@@ -150,8 +138,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
               & > li {
                 a {
                   font-weight: normal;
-                  font-size: 11px;
-                  line-height: 190%;
+                  font-size: 14px;
                   color: $darkGreyGrey;
                 }
 

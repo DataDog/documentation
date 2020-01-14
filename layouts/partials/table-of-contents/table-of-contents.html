@@ -1,11 +1,11 @@
 {{ $ctx := . }}
 
-<div class="col-4 d-none col-lg-2 col-xl-2 toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
+<div class="col-4 d-none d-lg-block col-lg-2 col-xl-2 toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
     <div class="sticky toc">
     {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
         {{ .TableOfContents }}
     </div>
 </div>
-<div class="mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }}  {{ end }}">
+<div class="d-sm-block d-lg-none mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }}  {{ end }}">
     <i class="icon-small-bookmark"></i>
 </div>

@@ -546,17 +546,17 @@ $(document).ready(function () {
 
     // when page ready collect mapping of link to headers so we aren't checking the dom all the time
 
-    $('.mobile-toc-toggle').on('click touch', function () {
-        const icon = $(this).find('i');
-        const open = icon.hasClass('icon-small-x');
-        if(open) {
-            $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-        } else {
-            $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-        }
-        $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-        $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
-    });
+    // $('.mobile-toc-toggle').on('click touch', function () {
+    //     const icon = $(this).find('i');
+    //     const open = icon.hasClass('icon-small-x');
+    //     if(open) {
+    //         $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+    //     } else {
+    //         $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+    //     }
+    //     $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+    //     $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
+    // });
 
     $(document).on( "moveToAnchor", function() {
         const open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
