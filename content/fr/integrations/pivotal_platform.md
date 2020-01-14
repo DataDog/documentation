@@ -15,7 +15,7 @@ categories:
   - log collection
 aliases:
   - /fr/integrations/cloud_foundry/
-doc_link: /integrations/pivotal_platform/
+doc_link: /fr/integrations/pivotal_platform/
 ddtype: check
 ---
 ## Présentation
@@ -113,7 +113,7 @@ cf restage <VOTRE_APP>
 
 #### Collecte de traces
 
-L'Agent de trace Datadog (APM) est activé par défaut. Consultez la [documentation relative à la configuration de l'APM][11] pour découvrir comment effectuer la configuration en fonction de votre langage.
+L'Agent de trace Datadog (APM) est activé par défaut. Consultez la [documentation relative à la configuration de l'APM][11] pour découvrir comment effectuer la configuration en fonction de votre langage. 
 
 #### Collecte de logs
 
@@ -138,10 +138,10 @@ cf restage <VOTRE_NOM_APP>
 
 Vous pouvez utiliser les paramètres suivants pour configurer la collecte de logs :
 
-| Paramètre                 | Description                                                                                                                                                     |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `STD_LOG_COLLECTION_PORT` | Doit être utilisé lors de la collecte de logs depuis `stdout`/`stderr`. Cela redirige le flux `stdout`/`stderr` vers la valeur du port local correspondant.     |
-| `LOGS_CONFIG`             | Utilisez cette option pour configurer l'Agent afin d'effectuer une écoute sur un port TCP local et pour définir la valeur des paramètres `service` et `source`. |
+| Paramètre                 | Description                                                                                                                                |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `STD_LOG_COLLECTION_PORT` | Doit être utilisé lors de la collecte de logs depuis `stdout`/`stderr`. Cela redirige le flux `stdout`/`stderr` vers la valeur du port local correspondant. |
+| `LOGS_CONFIG`             | Utilisez cette option pour configurer l'Agent afin d'effectuer une écoute sur un port TCP local et pour définir la valeur des paramètres `service` et `source`.          |
 
 **Exemple** :
 
@@ -222,7 +222,7 @@ releases:
       dogstatsd_port: 18125       # de nombreux déploiements CF comprennent déjà StatsD sur le port 8125
       api_key: <CLÉ_API_DD>
       tags: ["<KEY:VALUE>"]       # tags de votre choix
-      generate_processes: true    # pour activer le check de processus
+      generate_processes: true    # pour activer le check de processus 
 ```
 
 Pour vérifier quelle version de `datadog-agent` a été importée, exécutez `bosh releases`.
