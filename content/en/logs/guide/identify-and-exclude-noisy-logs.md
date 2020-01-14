@@ -1,5 +1,5 @@
 ---
-title: Identify and Exclude Noisy Logs
+title: Getting Started with Logging Without Limits™
 kind: guide
 disable_toc: true
 further_reading:
@@ -19,96 +19,109 @@ further_reading:
 
 ## Overview
 
-Datadog’s [Logging without Limits][1]&trade; removes logging limitations by decoupling log ingestion and indexing to give flexibility around log management. High volume log indexing is helpful when monitoring every aspect of a service, but it can be a distraction when serious problems occur.
+Datadog [Logging without Limits][1]™ provides flexibility by decoupling [log ingestion and indexing][2]. Cloud-based applications can generate logs at a rate of millions per minute. This type of high volume log indexing is helpful when monitoring every aspect of a service, but it can be inhibiting when troubleshooting during high priority issues or tracking bugs.
 
-For example, you may not find it beneficial to monitor every 200 response code log from a web server, as it's not always relevant for troubleshooting issues. While 4xx and 5xx response code are critical to investigate problems. 
-However, exhaustive KPIs (i.e. Number of requests, ratio of errors, number of visitors...) should be computed upon all logs (including the 200 response code logs).
+This guide identifies key components of Logging Without Limits™ such as [Patterns](#identify-high-volume-logging-patterns), [Exclusion Filters](#create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#generate-metrics-for-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitoring your KPIs over time.
 
-This guide uses Logging without Limits&trade; to identify a noisy logging service status, exclude irrelevant status logs, and set custom metrics from the excluded logs to continue to track KPI over time.
+## 1. Identify your most logging service status
 
-## 1. Identify a noisy logging service status
+Your most logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying this service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
-Your noisiest logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying your noisiest logging service, you can quickly find the information you need to filter irrelevant logs by status.
+For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event.
 
-{{< img src="logs/guide/logging-without-limits.gif" alt="Noisiest Logging Service" responsive="true" style="width:100%;">}}
+{{< img src="logs/guide/identify_and_exclude_log_patterns/identify_logging_service.gif" alt="Identify a most logging service status" responsive="true" style="width:100%;">}}
 
-**To identify your noisiest logging service status**:
+**To identify your most logging service status**:
 
-1. In Log Explorer, select graph view located next to the search bar. 
-2. Below the search bar, set `count` * group by `service` and `limit` to top 10.
-3. Select `Top List` from the dropdown menu next to `hide controls`.
-4. Click on the first listed service and select `search for` in the populated menu. This generates a search, which is visible in the search bar above, based on your `service` facet.
-5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
-6. Click on the first listed status and select `search for` in the populated menu. This adds your `status` facet to the search.
+1. In Log Explorer, select graph view located next to the search bar.
+2. Below the search bar, set count * group by service and limit to top 10.
+3. Select Top List from the dropdown menu next to hide controls.
+4. Click on the first listed service and select search for in the populated menu. This generates a search, which is visible in the search bar above, based on your service facet.
+5. Switch group by service to group by status. This generates a top statuses list for your service.
+6. Click on the first listed status and select search for in the populated menu. This adds your status facet to the search.
 
 **Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `client name` versus `service` or `status`.
 
-## 2. Identify noisy logs with log patterns
-Switch to the [patterns][2] view, located next to the graph view, to view the patterns associated with your service and status.
+## 2. Identify high volume logging patterns
+Now that you have identified your most logging service status, switch to the [patterns view][4], located next to the graph view in the top left of Log Explorer, to automatically see your log patterns for the selected context. 
 
-{{< img src="logs/guide/patterns.png" alt="Log Patterns View" responsive="true" style="width:100%;">}}
+A context is composed of a time range and a search query. Each pattern comes with highlights to get you straight to its characteristic features. A mini graph displays a rough timeline for the volume of its logs to help you identify how that pattern differs from other patterns. Sections of logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
+
+Click on the log pattern that you would like to exclude to see a sample of underlying logs.
+
+{{< img src="logs/guide/identify_and_exclude_log_patterns/patterns_context_panel.png" alt="Patterns Context" responsive="true" style="width:100%;">}}
 
 The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel will populate with information about your noisiest status pattern.
 
-## 3. Exclude noisy logs with an exclusion filter
+## 3. Create a log pattern exclusion filter
 
-The selected pattern contextual panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index. Note that excluded logs are still available in the [live tail view][3] and can be [sent to log archives][4], or used to [generate metrics][5].
+The pattern context panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index.
 
-**To create an exclusion filter for your top log pattern**:
+**To create an exclusion filter**:
 
-1. Click on your top pattern from the pattern view list.
-2. Click the *View All* button in the top right corner to automatically generate the search query associated with this pattern.
+1. Click on a pattern from the pattern view list.
+2. Click the **View All** button in the top right corner to automatically generate the search query associated with this pattern.
 3. Select the `</>` option to the right of the search query and copy the search query.
-4. Navigate to the Configuration page under Logs in the main left hand navigation. Select indexes and click on your associated index. This will populate the option to add an exclusion filter.
-5. Select “Add an Exclusion Filter”.
+4. Navigate to the **Configuration** page under Logs in the main menu. Select **indexes** and click on your associated index. This will populate the option to add an exclusion filter.
+5. Select **Add an Exclusion Filter**.
 6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
 
-{{< img src="logs/guide/exclusion-filter.png" alt="Exclusion Filter" responsive="true" style="width:100%;">}}
-
-Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
+{{< img src="logs/guide/identify_and_exclude_log_patterns/exclusion_filter.gif" alt="Exclusion Filter" responsive="true" style="width:100%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-## 4. Generate metrics to monitor excluded logs
+In this example, the service status `info` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer will help you drill down and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, indexed, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
 
-When a subset of logs is excluded from your index, those logs are still available to view in [Live Tail][6]. Moreover, you can generate KPIs from those excluded logs over time at ingest level by creating a new [log-based metric][5]. This metric can then be used for example to create an [anomaly detection][7] monitor to notify you of any unexpected changes.
+{{< img src="logs/guide/identify_and_exclude_log_patterns/live_tail.gif" alt="Live Tail" responsive="true" style="width:100%;">}}
+
+Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
+
+## 4. Generate metrics for excluded logs
+
+Once a log pattern is excluded from Log Explorer, you can still track KPIs over time at the ingest level by creating a new [custom log-based metric][8]. 
 
 ### Add a new log-based metric
-To generate a new log-based metric based on your log pattern, go to the Logs Configuration page of your Datadog account and select the [Generate Metrics tab][8], then the **New Metric+** button.
 
-1. Under Define Query, input the search query you got from the pattern in step 2.
-2. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (e.g., `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
-3. Add dimensions to group by: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [tags][9] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][10]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-4. Name your metric: Log-based metric names must follow the [naming metric convention][11].
+**To generate a new log-based metric based on your log pattern**:
 
-{{< img src="logs/guide/generate-metric.png" alt="Generate Metric" responsive="true" style="width:75%;">}}
+1. In your Datadog account, hover over **Logs** in the main menu, select **Generate Metrics**, and then click the **New Metric+** button in the top right corner.
+2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (e.g., as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
+3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (e.g., `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+4. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+5. Name your metric: Log-based metric names must follow the naming metric convention.
+
+{{< img src="logs/guide/identify_and_exclude_log_patterns/custom-metric.gif" alt="Generate Metric" responsive="true" style="width:75%;">}}
 
 ### Create an anomaly detection monitor
-Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs will alert you of any changes based on your set alert conditions.
 
-1. To set an anomaly detection monitor, go to [Monitors -> New Monitor -> Anomaly][12].
+[Anomaly detection][9] is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs will alert you of any changes based on your set alert conditions.
+
+1. To set an anomaly detection monitor, go to **Monitors -> New Monitor -> Anomaly**.
 2. Enter the log-based metric you defined in the previous section.
 3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
 4. Save the monitor.
 
-{{< img src="logs/guide/anomaly-alert.png" alt="Anomaly Alert" responsive="true" style="width:75%;">}}
+{{< img src="logs/guide/identify_and_exclude_log_patterns/anomaly_monitor.gif" alt="Anomaly Monitor" responsive="true" style="width:75%;">}}
 
-When an anomaly is detected, an alert will be sent to all who are tagged. This alert can also be found in [Monitors -> Trigger Monitors][13].
+When an anomaly is detected, an alert will be sent to all who are tagged. This alert can also be found in [Monitors -> Triggered Monitors][10].
+
+## Review
+
+In this guide, you learned how to use Logging without Limits™ to [identify a high volume logging service status](#identify-a-high-volume-logging-service-status), [exclude irrelevant status logs](#exclude-logs-with-an-exclusion-filter), and [set custom metrics from the excluded logs](#generate-metrics-to-monitor-excluded-logs) to continue to track KPI over time.
+
+To learn more about Logging Without Limits™ and how you can better utilize features like Log Explorer, Live Tail, and Log Patterns, view the links below.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs
-[2]: /logs/explorer/patterns
-[3]: /logs/live_tail
-[4]: /logs/archives
-[5]: /logs/logs_to_metrics
-[6]: /logs/live_tail/#overview
-[7]: /monitors/monitor_types/anomaly
-[8]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[9]: /tagging
-[10]: /developers/metrics/custom_metrics
-[11]: /developers/metrics/#naming-metrics
-[12]: https://app.datadoghq.com/monitors#create/anomaly
-[13]: https://app.datadoghq.com/monitors/triggered
+[1]: https://www.datadoghq.com/blog/logging-without-limits/
+[2]: /logs/
+[3]: https://app.datadoghq.com/logs
+[4]: https://app.datadoghq.com/logs/patterns
+[5]: /logs/live_tail/
+[6]: /logs/archives/
+[7]: /developers/metrics/
+[8]: /logs/logs_to_metrics
+[9]: /monitors/monitor_types/anomaly/
+[10]: https://app.datadoghq.com/monitors#/triggered
