@@ -24,7 +24,7 @@ For example, submitting samples 2, 3, 6, 7 sends a value of 5 (7-2) during the f
 Function template:
 
 ```python
-self.monotonic_count(name,value, tags=None, hostname=None, device_name=None)
+self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -67,7 +67,7 @@ This function submits the value of a metric at a given timestamp. If called mult
 Function template:
 
 ```python
-self.gauge(name=, value, tags=None, hostname=None, device_name=None)
+self.gauge(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
