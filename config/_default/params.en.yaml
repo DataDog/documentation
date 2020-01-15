@@ -8,3 +8,4 @@ announcement_banner:
   mobile_message: 'Network Monitoring is now available!'
   link: "https://www.datadoghq.com/blog/network-performance-monitoring/"
   exclude: []
+translate_status_banner: "This translation isn't up to date, for the latest english version click here"
