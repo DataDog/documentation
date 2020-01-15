@@ -7,7 +7,7 @@ external_redirect: /api/#start-or-pause-a-test
 
 **SIGNATURE**:
 
-`POST /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/status`
+`PUT /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/status`
 
 **EXAMPLE REQUEST**:
 
