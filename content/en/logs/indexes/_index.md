@@ -104,8 +104,8 @@ Update or remove this quota at any time when editing the Index:
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/explorer/?tab=facets#setup
+[1]: /pipelines/indexes
+[2]: /logs/explorer/?tab=facets#visualization
 [3]: /logs/explorer/analytics
 [4]: /logs/explorer/analytics/#dashboard
 [5]: /monitors/monitor_types/log
@@ -115,9 +115,9 @@ Update or remove this quota at any time when editing the Index:
 [9]: /account_management/rbac
 [10]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [11]: /logs/explorer/patterns
-[12]: /logs/livetail
-[13]: /logs/pipelines/archives
-[14]: /logs/pipelines/generate-metrics
+[12]: /logs/live_tail
+[13]: /logs/archives
+[14]: /logs/logs_to_metrics
 [15]: /api/?lang=bash#update-an-index
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /logs/processing/processors/?tab=ui#user-agent-parser
