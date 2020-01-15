@@ -33,7 +33,8 @@ You can use indexed logs for [faceted Searching][2], [patterns][11], [analytics]
 By default, Log Explorer comes with one unique Log Index.
 
 Datadog also offers multiple indexes (**currently in private beta**) if you require:
-* multiple retention periods [#daily_quotas] and/or daily quotas, for finer grained budget control 
+
+* multiple retention periods and/or [daily quotas](#daily-quotas), for finer grained budget control 
 * multiple permissions, for finer grained access controls. More information available in the [role base access control (RBAC) documentation][9].
 
 
@@ -50,14 +51,14 @@ Use drag and drop on the list of indexes to reorder them.
 
 ## Exclusion Filters
 
-By default, logs indexes come without exclusion filter: meaning all logs matching the [Index Filter][#indexes_filters] are eventually indexed.
+By default, logs indexes come without exclusion filter: meaning all logs matching the [Index Filter](#indexes-filters) are eventually indexed.
 
 But because your logs are not all and equally valuable, and because some logs are useful only under some circumstances, exclusion filters control which logs flowing in are eventually indexed. Excluded logs are discarded from indexes, but would still flow through the [Livetail][12], [Metrics Generation][13] and/or [Archives][14].
 
 Add as many exclusion filters as you need to control your flow. Exclusion filters come with a query, a sampling rule and a active/inactive toggle:
 
 * Default **query** is `*`, meaning all logs flowing in the index (that is to say logs that matched the index filter). Scope down exclusion filter to only a subset of the logs if you need finer control.  
-* Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs. 
+* Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute. 
 * Default **toggle** is active, meaning the logs flowing in are actually discarded according to the rule. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index. 
 
 As for Index Filters, logs will be processed by the only first **active** exclusion filter they match. Which means that order matters: use drag and drop to reorder exclusion filter accordingly.
@@ -75,9 +76,18 @@ You don't need your DEBUG logs... until you actually need them when your platfor
 
 You don't need to keep track of every single web access server log generated. Index all 3xx, 4xx and 5xx logs, but exclude 95% of the 2xx logs `source:nginx http.status_code:[200 TO 299]` to keep track of the trends. Pro tip, summarize these web access logs into a meaningful KPI with a [custom metric generated from logs][14], counting number of requests and tagged by status code, [browser][17] and [country][16].
 
-You have millions of users connecting to your marketplace everyday. And although you don't need obersability on every single user, you still want to keep the full picture for the one you'll observe. Set up an exclusion filter applying to all logs (`*`) and exclude logs for 90% of the `@user.id`. 
+{{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
+
+
+You have millions of users connecting to your marketplace everyday. And although you don't need obersability on every single user, you still want to keep the full picture for the one you'll observe. Set up an exclusion filter applying to all logs (`*`) and exclude logs for 90% of the `@http.user.id`. 
+
+
+{{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
+
 
 You use APM in conjunction with Logs, thanks to [Trace ID injection in logs][10]. As for users, you don't need to keep all your logs, but making sure logs always give the full picture of a Trace is critical for troubleshooting. Set up an exclusion filter applying to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure you use the [Trace ID remapper][18] upstream in your pipelines. 
+
+{{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
 
 ## Set daily quota
