@@ -1079,7 +1079,7 @@ main:
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
     weight: 104
-  - name: Métriques
+  - name: Métriques custom
     url: developers/metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
@@ -1119,11 +1119,6 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_units
     weight: 207
-  - name: Métriques custom
-    url: developers/metrics/custom_metrics/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_custom_metrics
-    weight: 208
   - name: Événements
     url: developers/events/
     parent: dev_tools
@@ -1154,12 +1149,12 @@ main:
     parent: dev_tools
     identifier: dev_tools_service_check
     weight: 4
-  - name: Envoi de checks de service - Check de l'Agent
+  - name: Envoi de métriques - Check de l'Agent
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
     weight: 401
-  - name: Envoi de checks de service - DogStatsD
+  - name: Envoi de métriques - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
@@ -1222,10 +1217,15 @@ main:
     pre: nav_account
     identifier: account_management
     weight: 190000
-  - name: Gestion d'équipe
-    url: account_management/team/
+  - name: Gestion des utilisateurs
+    url: account_management/users/
     parent: account_management
+    identifier: account_management_users
     weight: 1
+  - name: Rôle Datadog par défaut
+    url: account_management/users/default_roles/
+    parent: account_management_users
+    weight: 101
   - name: Paramètres d'organisation
     url: account_management/org_settings/
     parent: account_management
@@ -1275,7 +1275,7 @@ main:
     url: account_management/billing/
     parent: account_management
     weight: 6
-  - name: Clés d'API et clés d'application
+  - name: Clés d'API et d'application
     url: account_management/api-app-keys/
     parent: account_management
     weight: 7
