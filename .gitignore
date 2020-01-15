@@ -18,7 +18,6 @@ content/integrations/*.md
 !content/integrations/adobe_experience_manager.md
 !content/integrations/pivotal_platform.md
 !content/integrations/alcide.md
-!content/integrations/amazon_eks_fargate.md
 !content/integrations/iam_access_analyzer.md
 
 # Ignoring all automated content
