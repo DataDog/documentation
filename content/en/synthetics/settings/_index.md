@@ -49,6 +49,8 @@ Choose the type of variable you want to create:
 This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
 </div>
 
+You can create variables using parsed response headers and body from your existing HTTP tests. Variables are updated at the frequency of the test it is parsing from. 
+
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Pick the test you want to extract your variable from.
 3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
