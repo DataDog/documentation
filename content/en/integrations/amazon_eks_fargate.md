@@ -59,7 +59,7 @@ Also, set up integrations for any other AWS services you are running with EKS (f
 
 #### Manual Installation
 
-To install, download the custom Agent image: `datadog/agent:eks-fargate-beta`.
+To install, download the custom Agent image: `datadog/agent`.
 
 If the Agent is running as a sidecar, it can communicate only with containers on the same pod. Run an Agent for every pod you wish to monitor.
 
@@ -138,7 +138,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent:eks-fargate-beta
+     - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -197,7 +197,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent:eks-fargate-beta
+     - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -254,7 +254,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent:eks-fargate-beta
+     - image: datadog/agent
        name: datadog-agent
        ## Enabling port 8125 for DogStatsD metric collection
        ports:
@@ -316,7 +316,7 @@ spec:
        image: "<APPLICATION_IMAGE>"
 ​
      ## Running the Agent as a side-car
-     - image: datadog/agent:eks-fargate-beta
+     - image: datadog/agent
        name: datadog-agent
        ## Enabling port 8126 for Trace collection
        ports:
