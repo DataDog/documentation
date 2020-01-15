@@ -66,7 +66,6 @@ clean-integrations:  ## remove built integrations files.
 		  -a -not -name 'fluentbit.md' \
 			-a -not -name 'iam_access_analyzer.md' \
 	    -a -not -name 'integration_sdk.md' \
-	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
 			-a -not -name 'lacework.md' \
