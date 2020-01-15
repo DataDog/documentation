@@ -48,13 +48,13 @@ The example uses optional parameters: timeout of 3 seconds (returns 0 if it take
 
 Use the [Metrics Explorer][7] to verify the metric is reporting to Datadog. This shows `amazon.com` is returning 200s or 300s HTTP responses within the imposed 3 second timeout:
 
-{{< img src="graphing/guide/upw_metrics_explorer.png" alt="Metrics Explorer" >}}
+{{< img src="dashboards/guide/upw_metrics_explorer.png" alt="Metrics Explorer" >}}
 
 ## Graphing
 
 Next, display `network.http.can_connect` for your URL within a [Query Value widget][2], for example:
 
-{{< img src="graphing/guide/upw_qvw01.png" alt="Query Value Widget" >}}
+{{< img src="dashboards/guide/upw_qvw01.png" alt="Query Value Widget" >}}
 
 To show uptime percent, modify the settings within the query value widget.
 
@@ -64,13 +64,13 @@ To show uptime percent, modify the settings within the query value widget.
 4. Deselect the Autoscale option, which forces the widget to display a float with 2 decimals.
 5. Select **Use Custom units**. Add `%` to the text box that appears.
 
-{{< img src="graphing/guide/upw_qvw02.png" alt="Query Value Widget" >}}
+{{< img src="dashboards/guide/upw_qvw02.png" alt="Query Value Widget" >}}
 
 ### Conditional format
 
 Optionally, you can add conditional formatting using the **Conditional Format** section. The example below displays values in red that are less than 99.99%:
 
-{{< img src="graphing/guide/upw_qvw03.png" alt="Query Value Widget" >}}
+{{< img src="dashboards/guide/upw_qvw03.png" alt="Query Value Widget" >}}
 
 ### Example JSON
 

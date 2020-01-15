@@ -22,7 +22,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 The metric panel displays key information for a given metric.
 
-{{< img src="graphing/metrics/summary/metric_panel.png" alt="Metric panel"  style="width:80%;">}}
+{{< img src="metrics/summary/metric_panel.png" alt="Metric panel"  style="width:80%;">}}
 
 ### Metric name
 

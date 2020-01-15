@@ -17,7 +17,7 @@ The iframe widget allows you to embed a portion of any other web page on your da
 
 ## Setup
 
-{{< img src="graphing/widgets/iframe/iframe_setup.png" alt="Iframe setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/iframe/iframe_setup.png" alt="Iframe setup"  style="width:80%;">}}
 
 Enter the URL of the page you want to display inside the iframe. If you do not use an HTTPS URL, you may have to configure your browser to allow non-secure content.
 

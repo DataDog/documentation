@@ -17,11 +17,11 @@ The event stream is a widget version of the stream of events on the [Event Strea
 
 Note: **this widget displays only the 100 most recent events**.
 
-{{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" >}}
+{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="event stream" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -35,7 +35,7 @@ Note: **this widget displays only the 100 most recent events**.
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

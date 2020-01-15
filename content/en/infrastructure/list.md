@@ -20,7 +20,7 @@ further_reading:
 
 The Infrastructure list shows all your hosts monitored by Datadog with activity during the last 2 hours. Search your hosts, group them by tags, or sort the list by column headers.
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list"  >}}
+{{< img src="infrastructure/index/infrastructure_list.png" alt="Infrastructure list"  >}}
 
 ## Hosts
 
@@ -45,13 +45,13 @@ The Datadog Agent collects potential hostnames from a number of different source
 
 Click on any host to view more details including [aliases](#aliases), [tags][2], and [logs][3] (if enabled):
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details"  style="width:90%;">}}
+{{< img src="infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details"  style="width:90%;">}}
 
 #### Aliases
 
 Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases"  style="width:90%;">}}
+{{< img src="infrastructure/index/host_aliases.png" alt="host aliases"  style="width:90%;">}}
 
 ### Export
 

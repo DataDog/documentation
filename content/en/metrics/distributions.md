@@ -27,11 +27,11 @@ See the [Developer Tools section][1] for more implementation details. Please not
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
+{{< img src="metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis"  style="width:80%;">}}
+{{< img src="metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis"  style="width:80%;">}}
 
 ## Customize tagging
 
@@ -41,7 +41,7 @@ To customize tagging, hover over your metric in the table, and click on the penc
 
 **Note**: The exclusion of tags is not supported in the whitelist-based customization of tags. Adding tags starting with `!` is not accepted.
 
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric"  style="width:80%;">}}
+{{< img src="metrics/distributions/distribution_metric.png" alt="Distribution metric"  style="width:80%;">}}
 
 ## Counting distribution metrics
 

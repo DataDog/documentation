@@ -15,6 +15,6 @@ To calculate this, you can create a query such as this:
 
 Here's an example where we can see the percentage change of a system metric from one day ago to the present:
 
-{{< img src="graphing/faq/percentage_timeshift.png" alt="percentage timeshift"  >}}
+{{< img src="dashboards/faq/percentage_timeshift.png" alt="percentage timeshift"  >}}
 
 [1]: /dashboards/functions/timeshift

@@ -22,11 +22,11 @@ This visualization displays only a single metric query; additional queries are d
 
 **Note**: Outlier detection cannot be performed for this visualization.
 
-{{< img src="graphing/widgets/heat_map/heat_map.png" alt="Heat Map" >}}
+{{< img src="dashboards/widgets/heat_map/heat_map.png" alt="Heat Map" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup"  style="width:80%;">}}
 
 ### Configuration
 

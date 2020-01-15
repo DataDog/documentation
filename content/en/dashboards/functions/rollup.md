@@ -23,11 +23,11 @@ The function takes two parameters, `<METHOD>` and `<TIME>`: `.rollup(<METHOD>,<T
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
 
-{{< img src="graphing/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
+{{< img src="dashboards/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
 
 The following bar graph displays the same metric, graphed using a day-long rollup with `.rollup(avg,86400)`:
 
-{{< img src="graphing/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
+{{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
 
 ## Rollup Interval: Enforced vs Custom
 
@@ -37,7 +37,7 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
-  {{< img src="graphing/functions/rollup/as_count.png" alt="as_count" responsive="true" style="width:50%;">}}
+  {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" responsive="true" style="width:50%;">}}
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [blog post][2] or learn more about the effects of those functions with the [documentation on in-application modifiers][3].
 

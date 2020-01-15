@@ -76,7 +76,7 @@ All permissions have up to three options that can be selected: Read, Write, and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards
+[1]: /dashboards
 [2]: /monitors
-[3]: /graphing/event_stream
-[4]: /graphing/notebooks
+[3]: /events
+[4]: /notebooks

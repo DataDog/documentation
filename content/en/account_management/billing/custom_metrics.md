@@ -134,8 +134,8 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 **Note**:  Only tag value combinations that actually appear in your data are counted as queryable. Since the combination { `endpoint:Y`, `status:400` } was never submitted in your data, this combination won’t be queryable and won’t count towards your custom metric count.
 
 [1]: /developers/metrics/types/?tab=distribution
-[2]: /graphing/metrics/distributions/#customize-tagging
-[3]: /graphing/metrics/distributions/#aggregations
+[2]: /metrics/distributions/#customize-tagging
+[3]: /metrics/distributions/#aggregations
 {{% /tab %}}
 {{< /tabs >}}
 
