@@ -66,7 +66,6 @@ clean-integrations:  ## remove built integrations files.
 		  -a -not -name 'fluentbit.md' \
 			-a -not -name 'iam_access_analyzer.md' \
 	    -a -not -name 'integration_sdk.md' \
-	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
 			-a -not -name 'lacework.md' \
@@ -93,6 +92,8 @@ clean-auto-doc: ##remove all doc automatically created
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
+	@if [ content/en/logs/log_collection/android.md ]; then \
+	rm -f content/en/logs/log_collection/android.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
@@ -122,6 +123,7 @@ start: clean source-helpers ## start the webpack/hugo server.
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
+		LOCAL=${LOCAL}\
 		run-site.sh; \
 	else \
 		FETCH_INTEGRATIONS="false" \

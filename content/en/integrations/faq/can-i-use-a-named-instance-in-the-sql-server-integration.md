@@ -6,7 +6,8 @@ kind: faq
 When connecting to a default instances in SQL Server, users specify the host name with the port (1433 by default) as the host value in the sqlserver.yaml file. When [troubleshooting connection issues with SQL Server][1], make sure we are connecting to a default instance or a named instance. Named instances can be connected using the $SERVER\$INSTANCE_NAME syntax, but only if the SQL Server Browser service is enabled since this service provides the port the instance is on.
 
 Here are the docs from Microsoft with more about the SQL Server Browser service:
-```
+
+```text
 https://technet.microsoft.com/en-us/library/ms181087(v=sql.105).aspx#Anchor_2
 ```
 

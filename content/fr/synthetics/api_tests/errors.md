@@ -18,7 +18,7 @@ further_reading:
 
 Les erreurs SSL peuvent se produire durant l'exécution d'un test API. Elles diffèrent des échecs d'assertion associées aux tests SSL et peuvent survenir lors de n'importe quel type de test API.
 
-{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="Erreur SSL auto-signé" responsive="true" style="width:60%;" >}}
+{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="Erreur SSL auto-signé" style="width:60%;" >}}
 
 | Erreur                                | Description                                                                                                                                                              |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

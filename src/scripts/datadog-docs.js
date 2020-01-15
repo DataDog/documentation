@@ -4,13 +4,14 @@ import algoliasearch from 'algoliasearch';
 import { initializeIntegrations } from './components/integrations';
 import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
-
+import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
 
 // Setup for large screen ToC
 
 // gTag
 window.dataLayer = window.dataLayer || [];
+
 
 const siteEnv = document.querySelector('html').dataset.env;
 
@@ -267,11 +268,17 @@ $(document).ready(function () {
                         // remove any existing handlers
                         btn_next = document.getElementById("btn_next");
                         btn_prev = document.getElementById("btn_prev");
-                        btn_prev.addEventListener('click', btnHandler);
-                        btn_next.addEventListener('click', btnHandler);
+                        if(btn_prev) {
+                          btn_prev.addEventListener('click', btnHandler);
+                        }
+                        if(btn_next) {
+                          btn_next.addEventListener('click', btnHandler);
+                        }
                         const pagebtns = document.getElementsByClassName('page-num');
-                        for(let i = 0; i < pagebtns.length; i++) {
+                        if(pagebtns) {
+                          for (let i = 0; i < pagebtns.length; i++) {
                             pagebtns[i].addEventListener('click', btnHandlerPage);
+                          }
                         }
                         btn_more = document.getElementsByClassName('more')[0];
                         btn_less = document.getElementsByClassName('less')[0];
@@ -299,7 +306,9 @@ $(document).ready(function () {
                             html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary more" href="#">...</a>';
                         }
                         html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
-                        page_navigation.innerHTML = html;
+                        if(page_navigation) {
+                          page_navigation.innerHTML = html;
+                        }
                         setHandlers();
                     }
 
@@ -324,7 +333,9 @@ $(document).ready(function () {
                         if (page < 1) page = 1;
                         if (page > numPages()) page = numPages();
 
-                        listing_table.innerHTML = "";
+                        if(listing_table) {
+                          listing_table.innerHTML = "";
+                        }
 
                         // output our slice of formatted results
                         for (let i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
@@ -340,7 +351,9 @@ $(document).ready(function () {
 
                             formatted_results += '</div>';
                             formatted_results += '</div>';
-                            listing_table.innerHTML += formatted_results;
+                            if(listing_table) {
+                              listing_table.innerHTML += formatted_results;
+                            }
                         }
                         if(page_span) {
                             page_span.innerHTML = `${page  }/${  numPages()}`;
@@ -349,8 +362,12 @@ $(document).ready(function () {
                         setNavigation();
 
                         // set previous and next buttons class
-                        btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
-                        btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        if(btn_prev) {
+                          btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
+                        }
+                        if(btn_next) {
+                          btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        }
 
                         // set active button class
                         const pagebtns = document.getElementsByClassName('page-num');
@@ -359,8 +376,10 @@ $(document).ready(function () {
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
 
-                        // scroll to top
-                        $("html, body").scrollTop(0);
+                        // scroll to top only if there is no hash
+                        if (!window.location.hash) {
+                            $("html, body").scrollTop(0);
+                        }
                     }
 
                     // init page nums
@@ -375,7 +394,9 @@ $(document).ready(function () {
 
             } else {
                 const content = document.getElementsByClassName('content')[0];
-                content.innerHTML = "0 results";
+                if(content) {
+                  content.innerHTML = "0 results";
+                }
             }
         });
     }
@@ -910,7 +931,7 @@ function loadPage(newUrl) {
             if (typeof window.Munchkin !== "undefined") {
                 Munchkin.munchkinFunction('clickLink', { href: newUrl});
             } else {
-                window.datadog_logger.info("Munchkin called before ready..")
+                datadogLogs.logger.info("Munchkin called before ready..")
             }
     
     

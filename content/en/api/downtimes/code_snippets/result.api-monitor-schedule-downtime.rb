@@ -8,7 +8,7 @@
     'end' => 1_445_978_819,
     'parent_id' => nil,
     'monitor_id' => nil,
-    "monitor_tags": ['*'],
+    'monitor_tags' => ['*'],
     'recurrence' => {
       'until_date' => 1_448_387_219,
       'until_occurrences' => nil,

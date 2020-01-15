@@ -64,7 +64,6 @@ Les bibliothèques client DogStatsD officielles suivantes prennent en charge le 
 | PHP      | [DataDog/php-datadogstatsd][8]       |
 | C#       | [DataDog/dogstatsd-csharp-client][9] |
 
-
 #### Utiliser netcat
 
 Pour envoyer des métriques à partir de scripts shell, ou pour vérifier que DogStatsD effectue son écoute sur le socket, vous pouvez utiliser `netcat`. La plupart des implémentations de `netcat` (par ex. `netcat-openbsd` sur Debian ou `nmap-ncat` sur RHEL) prennent en charge le trafic de socket Unix via le flag `-U` :

@@ -1,7 +1,7 @@
 ---
 title: Create a test
 type: apicontent
-order: 30.1
+order: 31.1
 external_redirect: /api/#create-a-test
 ---
 
@@ -50,6 +50,8 @@ The **`options`** argument is required for the browser, API, and SSL tests. Use 
 *  **`min_location_failed`** - _optional_ - The minimum number of locations in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1). Default is 1.
 *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects (a max of ten redirects can be followed before triggering a "Too many redirects" error). Valid values are `true` or `false`. Default value is `false`.
 *  **`device_ids`** - _required browser test_ - The type of device used to test. To get a list of available devices, use the `id` from the response of the `GET devices for browser checks` method. At least one device is required.
+*  **`retry`:** retry - _optional_ - dict { count: number (0-3), interval: number (0-1000)} - retry interval * millisec after failed test run. Default value is {count: 0}.
+*  **`monitor_options`:** - _optional_ - dict { renotify_interval: number} - the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it’s not resolved.
 
 **ASSERTIONS**:
 

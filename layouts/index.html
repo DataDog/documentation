@@ -4,6 +4,8 @@
 <head>
 
         {{ partial "header-scripts.html" . }}
+
+        <script src="{{ (index $.Site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
         
         <meta charset="utf-8">
         {{ partial "prefetch.html" . }}
@@ -20,7 +22,7 @@
         {{- if ne $.Params.disable_opengraph_meta_tags true -}}
         {{- partial "meta.html" . -}}
         {{- end -}}
-        </head>
+</head>
 
 {{ $dot := . }}
 
@@ -87,9 +89,11 @@
                     {{ range $i, $tile := $nav_section }}
                         
                         {{ range $i, $section := $tile }}
-                            <div class="col-12">
-                                <h3 class="text-center mb-2">{{ $section.name }}</h3>
-                            </div>
+                            {{ if $section.name}}
+                                <div class="col-12">
+                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                                </div>
+                            {{ end }}
                             
                             {{ range $i, $navtile := $section.navtiles }} 
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
@@ -108,9 +112,6 @@
         {{ end }}
         
     </main>
-
-
-    {{ partial "algolia.html" . }}
 
     {{ partial "footer/footer.html" . }}
 

@@ -20,7 +20,6 @@ This is possible thanks to the [Category Processor][3] that defines a mapping be
 
 In this article, we show how to do this with 2 examples: Bunyan levels and web access logs.
 
-
 ## Web Access logs
 
 The status code of the request can be used to determine the log status. Our integrations use the following mapping:
@@ -33,11 +32,11 @@ The status code of the request can be used to determine the log status. Our inte
 Let's assume the status code of your log is stored in the `http.status_code` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor.png" alt="Category Processor " responsive="true" >}}
+{{< img src="logs/faq/category_processor.png" alt="Category Processor "  >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/faq/log_status_remapper.png" alt="log status remapper" responsive="true" >}}
+{{< img src="logs/faq/log_status_remapper.png" alt="log status remapper"  >}}
 
 ## Bunyan levels
 
@@ -53,11 +52,11 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 Let's assume the bunyan level is stored in the `bunyan_level` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor  bunyan" responsive="true" >}}
+{{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor  bunyan"  >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/faq/status_remapper_bunyan.png" alt="log status remapper bunyan" responsive="true" >}}
+{{< img src="logs/faq/status_remapper_bunyan.png" alt="log status remapper bunyan"  >}}
 
 ## Further Reading
 

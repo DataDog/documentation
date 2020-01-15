@@ -13,7 +13,7 @@ further_reading:
 
 Datadog provides options to access system metrics, monitor alerts, and multiple cloud accounts across multiple sub-organizations in the parent account as described below.
 
-**Cross-organization viewer**: Allows a parent account to be associated with any number of child organizations. These child organizations automatically forward all system metrics to their parent account. To enable the cross-organization viewer, email the [Datadog support team][1].  
+**Cross-organization viewer**: Allows a parent account to be associated with any number of child organizations. These child organizations automatically forward all system metrics to their parent account. To enable the cross-organization viewer, email the [Datadog support team][1].
 
 Monitor alerts can also be forwarded to the parent account through the configuration of the [webhooks integration][2] in the child organization, combined with the [Datadog Events API][3]. For example, one such webhooks configuration could reach out to `https://api.datadoghq.com/api/v1/events?api_key=<API_KEY>`, where `<API_KEY>` is the API key associated with the parent account to which the event is posted.
 

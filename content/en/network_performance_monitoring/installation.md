@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/snmp"
   tag: "Documentation"
   text: "SNMP integration"
-- link: "/graphing/widgets/network"
+- link: "/dashboards/widgets/network"
   tag: "Documentation"
   text: "Network Widget"
 ---
@@ -32,9 +32,9 @@ There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]
 
 The following provisioning systems are supported:
 
-* Daemonset / Helm: See the [Datadog Helm chart][3]
-* Chef: See the [Datadog Chef recipe][4]
-* Ansible: See the [Datadog Ansible role][5]
+* Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][3]
+* Chef 12.7+: See the [Datadog Chef recipe][4]
+* Ansible 4.0.1+: See the [Datadog Ansible role][5]
 
 ## Setup
 
@@ -72,11 +72,13 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
 6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
+**Note**: If the service wrapper is not available on your system, run the following command instead: `sudo initctl start datadog-agent-sysprobe`
+
 7. [Restart the Agent][2]: `sudo service datadog-agent restart`
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 
-[1]: https://docs.datadoghq.com/graphing/infrastructure/process/?tab=linuxwindows#installation
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -99,7 +101,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:6.12.0
+      - image: datadog/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:
@@ -140,7 +142,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       - name: system-probe
-        image: datadog/agent:6.12.0
+        image: datadog/agent:latest
         imagePullPolicy: Always
         securityContext:
           capabilities:
@@ -178,7 +180,7 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 To enable network performance monitoring in Docker, use the following configuration when starting the container Agent:
 
-```
+```shell
 $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 	-e DD_SYSTEM_PROBE_ENABLED=true \
 	-e DD_PROCESS_AGENT_ENABLED=true \

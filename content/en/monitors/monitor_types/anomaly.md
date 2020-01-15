@@ -32,7 +32,7 @@ Any metric currently reporting to Datadog is available for monitors. For more in
 **Note**: The `anomalies` function uses the past to predict what is expected in the future, so using it on a new metric may yield poor results.
 
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context"  style="width:80%;">}}
 
 * The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
 * The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
@@ -53,7 +53,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
 
 | Option                      | Description                                                                                                                |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -89,23 +89,23 @@ The graphs below illustrate how and when these three algorithms behave different
 
 In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1"  style="width:90%;">}}
 
 In this example, the metric exhibits a sudden level shift. `Agile` adjusts more quickly to the level shift than `robust`. Also, the width of `robust`'s bounds increases to reflect greater uncertainty after the level shift; the width of `agile`'s bounds remains unchanged. `Basic` is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2"  style="width:90%;">}}
 
 This example shows how the algorithms react to an hour-long anomaly. `Robust` completely ignores this anomaly. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
 The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, we add 1000 to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale"  style="width:90%;">}}
 
 This example shows how each algorithm handles a new metric. `Robust` and `agile` won't show any bounds during the first few seasons (weekly). `Basic` starts showing bounds shortly after the metric first appears.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric"  style="width:90%;">}}
 
 ### Notifications
 
@@ -116,6 +116,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog recommends [exporting a monitor's JSON][10] to build the query for the API.
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
+
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
@@ -128,13 +129,14 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 * [Contact Datadog support][13]
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /graphing/functions/algorithms/#anomalies
+[3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /graphing/functions/rollup
+[5]: /dashboards/functions/rollup
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [8]: /monitors/notifications

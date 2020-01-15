@@ -1,7 +1,7 @@
 ---
 title: Supprimer plusieurs intervalles de Service Level Objectives
 type: apicode
-order: 29.06
+order: 30.08
 external_redirect: "/api/#supprimer-plusieurs-intervalles-de-service-level-objectives"
 ---
 

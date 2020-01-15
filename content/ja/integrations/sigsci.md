@@ -150,7 +150,7 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://dashboard.signalsciences.net
-[4]: https://docs.datadoghq.com/ja/graphing/event_stream
+[4]: https://docs.datadoghq.com/ja/events
 [5]: https://docs.datadoghq.com/ja/help
 [6]: https://labs.signalsciences.com
 [7]: https://info.signalsciences.com/datadog-security

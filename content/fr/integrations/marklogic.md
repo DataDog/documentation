@@ -15,6 +15,7 @@ short_description: Recueillez vos logs en provenance de Marklogic et envoyez-les
 Recueillez vos logs en provenance de Marklogic et envoyez-les à Datadog.
 
 ## Implémentation
+
 ### Installation
 
 L'intégration Marklogic est incluse avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.

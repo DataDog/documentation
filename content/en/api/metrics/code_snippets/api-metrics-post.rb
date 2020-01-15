@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
+api_key = '<DATADOG_API_KEY>'
 
 dog = Dogapi::Client.new(api_key)
 

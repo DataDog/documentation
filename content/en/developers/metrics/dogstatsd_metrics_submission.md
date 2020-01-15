@@ -34,11 +34,11 @@ After [installing DogStatsD][1], the functions below are available for submittin
 
 ### COUNT
 
-| Method                                                        | Description                                               | Storage type                                                                                                                                            |
-|---------------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
-| `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
-| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over the StatsD flush period. |
+| Method                                                        | Description                                               | Storage type                                                                                                                                           |
+|---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
+| `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
+| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
 
@@ -205,11 +205,11 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
 Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To get raw counts within Datadog, apply a function to your series such as the [Cumulative Sum][3] or [Integral][4] function:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
@@ -379,7 +379,7 @@ while (TRUE) {
 
 After running the code above, your metric data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
@@ -527,7 +527,7 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
@@ -705,7 +705,7 @@ The above instrumentation produces the following metrics:
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### TIMER
 
@@ -811,19 +811,17 @@ As DogStatsD receives the timer metric data, it calculates the statistical distr
 
 DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or `HISTOGRAM` metric type, you are sending the same data to Datadog. After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
-Distribution metrics are in BETA. [Contact Datadog support][9] to enable the feature for your account.
-
-| Method                                                | Datadog Storage type                                                                                          |
-|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
+| Method                                                | Datadog Storage type                                                                                         |
+|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
 
 #### Code examples
 
-The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][11] documentation.
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][10] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -991,7 +989,7 @@ Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correc
 | `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 | `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
 | `SET`       | No correction. The value received is kept as is.                                                                                                                               |
-| `HISTOGRAM` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                    |
+| `HISTOGRAM` | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
 
 #### Code examples
 
@@ -1039,6 +1037,7 @@ DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1114,12 +1113,11 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
 [2]: /developers/metrics/types/?tab=count#metric-type-definition
-[3]: /graphing/functions/arithmetic/#cumulative-sum
-[4]: /graphing/functions/arithmetic/#integral
+[3]: /dashboards/functions/arithmetic/#cumulative-sum
+[4]: /dashboards/functions/arithmetic/#integral
 [5]: /developers/metrics/types/?tab=gauge#metric-type-definition
 [6]: /developers/metrics/types/?tab=set#metric-type-definition
 [7]: /developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /help
-[10]: /graphing/metrics/distributions
-[11]: /developers/metrics/types/?tab=distribution#metric-type-definition
+[9]: /metrics/distributions
+[10]: /developers/metrics/types/?tab=distribution#metric-type-definition

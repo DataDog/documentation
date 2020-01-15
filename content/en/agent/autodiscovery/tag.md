@@ -115,7 +115,7 @@ kubernetes_pod_labels_as_tags:
 **Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[2]: /developers/metrics/
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -139,7 +139,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 
 **Note**: Using this method may increase the number of [custom metrics][1] for your organization and impact your billing.
 
-[1]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[1]: /developers/metrics/
 {{% /tab %}}
 {{< /tabs >}}
 

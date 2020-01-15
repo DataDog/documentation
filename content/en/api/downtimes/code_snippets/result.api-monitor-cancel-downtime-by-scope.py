@@ -1,3 +1,1 @@
-#
-# This is not yet supported by the Python Client for Datadog API
-# Consult the curl example
+{"cancelled_ids": [123456789, 123456790]}

@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour une intégration Webhooks
 type: apicontent
-order: 20.3
+order: 21.3
 external_redirect: '/api/#mettre-a-jour-une-integration-webhooks'
 ---
 ## Mettre à jour une intégration Webhooks
@@ -9,7 +9,6 @@ external_redirect: '/api/#mettre-a-jour-une-integration-webhooks'
 Ajoutez un Webhook spécifique à une intégration Datadog/Webhooks.
 
 **ARGUMENTS** :
-
 
 * **`hooks`** [*obligatoire*] :
    tableau d'objets Webhook. Un objet Webhook est composé de :

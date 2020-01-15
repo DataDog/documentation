@@ -122,7 +122,7 @@ The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for 
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
-```
+```text
 cf set-env <YOUR_APP_NAME> RUN_AGENT true
 cf set-env <YOUR_APP_NAME> DD_LOGS_ENABLED true
 # Disable the Agent core checks to disable system metrics collection
@@ -148,7 +148,7 @@ The following parameters can be used to configure log collection:
 
 A Java application named `app01` is running in Pivotal Platform. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
-```
+```text
 # Redirect Stdout/Stderr to port 10514
 cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 # Configure the Agent to listen to port 10514
@@ -161,7 +161,7 @@ For Agent v6.12+, when using a [proxy configuration][12] with the Buildpack, a v
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
 
 ### Build
 
@@ -192,7 +192,7 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Uploa
 
 #### Upload Datadog's release to your BOSH Director
 
-```
+```text
 # BOSH CLI v1
 bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 
@@ -206,7 +206,7 @@ If you'd like to create your own release, see the [Datadog Agent BOSH Release re
 
 Add the following to your BOSH Director's runtime configuration file (e.g. `runtime.yml`):
 
-```
+```text
 ---
 releases:
   - name: datadog-agent
@@ -232,7 +232,7 @@ To see which `datadog-agent` release version you uploaded earlier, run `bosh rel
 
 Check if you have a previously configured `runtime-config` by running:
 
-```
+```text
 # BOSH CLI v1
 `bosh runtime-config`
 
@@ -246,7 +246,7 @@ In Bosh v2, if the `runtime.yml` file is empty, you should see the response: `No
 
 For each extra Agent check you want to enable across your deployment, add its configuration under the `properties.dd.integrations` key, for example:
 
-```
+```yaml
   properties:
     dd:
       integrations:
@@ -267,7 +267,7 @@ To customize configuration for the default checks-system, network, disk, and ntp
 
 #### Sync the runtime configuration to the Director
 
-```
+```text
 # BOSH CLI v1
 bosh update runtime-config runtime.yml
 
@@ -277,7 +277,7 @@ bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 
 #### Redeploy your Pivotal Platform deployment
 
-```
+```text
 # BOSH CLI v1
 bosh deployment <YOUR_DEPLOYMENT_MANIFEST>.yml
 bosh -n deploy --recreate
@@ -292,11 +292,11 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map"  >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail"  >}}
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -304,7 +304,7 @@ Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading 
 
 #### Upload Datadog's release to your BOSH Director
 
-```
+```text
 # BOSH CLI v1
 bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 
@@ -318,7 +318,7 @@ If you'd like to create your own release, see the [Datadog Firehose Nozzle relea
 
 In the manifest that contains your UAA configuration, add a new client for the Datadog Nozzle so the job(s) can access the Firehose:
 
-```
+```yaml
 uaa:
   clients:
     datadog-firehose-nozzle:
@@ -336,7 +336,7 @@ Redeploy the deployment to add the user.
 
 Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
 
-```
+```text
 jobs:
 #- instances: 4
 #  name: some_other_job
@@ -372,20 +372,20 @@ To see all available configuration options, check the [Datadog Firehose Nozzle r
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
-```
+```yaml
 releases:
-# - name: <SOME_OTHER_RELEASE>
+# - name: "<SOME_OTHER_RELEASE>"
 #   version: <x.y.z>
 # ...
   - name: datadog-firehose-nozzle
-    version: <VERSION_YOU_UPLOADED> # specify the real version (x.y.z not 'latest')
+    version: "<VERSION_YOU_UPLOADED>" # specify the real version (x.y.z not 'latest')
 ```
 
 To see which `datadog-firehose-nozzle` release version you uploaded earlier, run `bosh releases`.
 
 #### Redeploy the deployment
 
-```
+```text
 # BOSH CLI v1
 bosh deployment cf-manifest.yml
 bosh -n deploy --recreate
@@ -398,7 +398,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
 
 ## Data Collected
 

@@ -8,6 +8,7 @@ assets:
 categories:
   - languages
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -25,7 +26,7 @@ metric_prefix: go_expvar.
 metric_to_check: go_expvar.memstats.alloc
 name: go_expvar
 public_title: Intégration Datadog/Go-Expvar
-short_description: Recueillez les statistiques de mémoire et les métriques instrumentées par Expvar depuis vos services Go. Go service.
+short_description: Recueillez les statistiques de mémoire et les métriques instrumentés par Expvar depuis votre service Go.
 support: core
 supported_os:
   - linux
@@ -42,84 +43,79 @@ Si vous préférez instrumenter votre Go en utilisant seulement [dogstats-go][2]
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][4] sur les hosts qui exécutent des services Go pour recueillir des métriques.
+Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][3] sur les hosts qui exécutent des services Go pour recueillir des métriques.
 
 ### Configuration
+
 #### Préparer votre service Go
 
-Si votre service Go n'utilise pas déjà le [paquet Expvar][5], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (p. ex., si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le paquet en spécifiant un identifiant vide (`import _ "expvar"`).
+Si votre service Go n'utilise pas déjà le [paquet Expvar][4], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (p. ex., si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le paquet en spécifiant un identifiant vide (`import _ "expvar"`). Si votre service n'écoute pas déjà les requêtes HTTP (avec le paquet http), [configurez une écoute][5] locale uniquement pour l'Agent Datadog.
 
-Si votre service n'écoute pas déjà les requêtes HTTP (avec le paquet http), [configurez une écoute][6] locale uniquement pour l'Agent Datadog.
+#### Host
 
-#### Associer l'Agent
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-1. Modifiez le fichier `go_expvar.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7]. Consultez le [fichier d'exemple go_expvar.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+##### Associer l'Agent
 
-    ```yaml
-        init_config:
+1. Modifiez le fichier `go_expvar.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6]. Consultez le [fichier d'exemple go_expvar.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
-        instances:
-          - expvar_url: http://localhost:<your_apps_port>
-            # optionally change the top-level namespace for metrics, e.g. my_go_app.memstats.alloc
-            namespace: my_go_app # defaults to go_expvar, e.g. go_expvar.memstats.alloc
-            # optionally define the metrics to collect, e.g. a counter var your service exposes with expvar.NewInt("my_func_counter")
+    **Remarque** : si vous ne configurez pas de liste `metrics`, l'Agent continue de recueillir les métriques memstat. Utilisez `metrics` pour indiquer à l'Agent les variables expvar qui doivent être recueillies.
 
-            metrics:
-              - path: my_func_counter
-                # if you don't want it named my_go_app.my_func_counter
-                #alias: my_go_app.preferred_counter_name
-                type: counter # other valid options: rate, gauge
-                #tags:
-                #  - "tag_name1:tag_value1"
-    ```
+2. [Redémarrez l'Agent][8].
 
-    Si vous ne configurez pas de liste `metrics`, l'Agent continue de recueillir les métriques memstat. Utilisez `metrics` pour indiquer à l'Agent les variables expvar qui doivent être recueillies.
+**Remarque** : l'intégration Go Expvar peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facture][10]. Par défaut, une limite de 350 métriques est appliquée. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][11].
 
-2. [Redémarrez l'Agent][9] pour commencer à envoyer vos métriques Memstat et Expvar à Datadog.
+#### Environnement conteneurisé
 
-#### Collecte de métriques
-L'intégration Go Expar peut potentiellement générer des [métriques custom][10], ce qui peut avoir une incidence sur votre [facture][11]. Par défaut, une limite de 350 métriques est appliquée. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][12].
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][12] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                    |
+|----------------------|------------------------------------------|
+| `<NOM_INTÉGRATION>` | `go_expvar`                              |
+| `<CONFIG_INIT>`      | vide ou `{}`                            |
+| `<CONFIG_INSTANCE>`  | `{"expvar_url": "http://%%host%%:8080"}` |
 
 ### Validation
 
 [Lancez la sous-commande status de l'Agent][13] et cherchez `go_expvar` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "go_expvar" >}}
 
 
 ### Événements
+
 Le check Go-Expvar n'inclut aucun événement.
 
 ### Checks de service
+
 Le check Go-Expvar n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
 * [Instrumenter vos applications Go avec Expvar et Datadog][15]
 
-
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/go_expvar/images/go_graph.png
 [2]: https://github.com/DataDog/datadog-go
-[3]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://golang.org/pkg/expvar
-[6]: https://golang.org/pkg/net/http/#ListenAndServe
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[11]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
-[12]: https://docs.datadoghq.com/fr/help
-[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://golang.org/pkg/expvar
+[5]: https://golang.org/pkg/net/http/#ListenAndServe
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[10]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
+[11]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/metadata.csv
 [15]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
 

@@ -48,7 +48,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon EMR de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_emr` dans le préfixe.
+Configurez Amazon EMR de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_emr` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 

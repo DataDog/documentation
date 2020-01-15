@@ -9,8 +9,8 @@ pygmentsCodeFences: true
 # taxonomies
 taxonomies:
   tag: "tags"
-  video: "videos"
-preserveTaxonomyNames: true
+  category: "categories"
+  "video-category": "video-categories"
 
 # language
 defaultContentLanguage: "en"
@@ -21,3 +21,9 @@ contentDir: "content/en"
 
 # gitinfo vars
 enableGitInfo: true
+
+# Allow to render HTML in markdown files
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

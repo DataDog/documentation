@@ -46,7 +46,7 @@ Here, there are two secrets: `db_prod_user` and `db_prod_password`. These are th
 
 Between the brackets, any character is allowed as long as the YAML configuration is valid. This means that quotes must be escaped. For instance:
 
-```
+```text
 "ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
@@ -54,7 +54,7 @@ In the above example, the secret’s handle is the string `{"env": "prod", "chec
 
 There is no need to escape inner `[` and `]`. For instance:
 
-```
+```text
 “ENC[user_array[1234]]”
 ```
 
@@ -62,7 +62,7 @@ In the above example, the secret’s handle is the string `user_array[1234]`.
 
 Secrets are resolved after [Autodiscovery][1] template variables are resolved, i.e. you can use them in a secret handle. For instance:
 
-```
+```yaml
 instances:
   - server: %%host%%
     user: ENC[db_prod_user_%%host%%]
@@ -90,14 +90,13 @@ Relying on a user-provided executable has multiple benefits:
 
 Set the following variable in `datadog.yaml`:
 
-```
+```text
 secret_backend_command: <EXECUTABLE_PATH>
 ```
 
 #### Agent security requirements
 
 The Agent runs the `secret_backend_command` executable as a sub-process. The execution patterns differ on Linux and Windows.
-
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -134,11 +133,8 @@ If the exit code of the executable is anything other than `0`, the integration c
 
 The executable receives a JSON payload from the standard input, containing the list of secrets to fetch:
 
-```
-{
-  "version": "1.0",
-  "secrets": ["secret1", "secret2"]
-}
+```json
+{"version": "1.0", "secrets": ["secret1", "secret2"]}
 ```
 
 * `version`: is a string containing the format version (currently 1.0).
@@ -148,16 +144,10 @@ The executable receives a JSON payload from the standard input, containing the l
 
 The executable is expected to output to the standard output a JSON payload containing the fetched secrets:
 
-```
+```json
 {
-  "secret1": {
-    "value": "secret_value",
-    "error": null
-  },
-  "secret2": {
-    "value": null,
-    "error": "could not fetch the secret"
-  }
+  "secret1": {"value": "secret_value", "error": null},
+  "secret2": {"value": null, "error": "could not fetch the secret"}
 }
 ```
 
@@ -259,7 +249,8 @@ Secrets handle decrypted:
 ```
 
 Example on Windows (from an Administrator Powershell):
-```
+
+```powershell
 PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
@@ -268,7 +259,6 @@ Check Rights: OK, the executable has the correct rights
 Rights Detail:
 Acl list:
 stdout:
-
 
 Path   : Microsoft.PowerShell.Core\FileSystem::C:\path\to\you\executable.exe
 Owner  : BUILTIN\Administrators
@@ -376,7 +366,7 @@ executable as another user. It switches user contexts and mimics how the Agent r
 
 Example on how to use it:
 
-```
+```text
 .\secrets_tester.ps1 -user ddagentuser -password a_new_password -executable C:\path\to\your\executable.exe -payload '{"version": "1.0", "secrets": ["secret_ID_1", "secret_ID_2"]}'
 Creating new Process with C:\path\to\your\executable.exe
 Waiting a second for the process to be up and running

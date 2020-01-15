@@ -31,22 +31,27 @@ Get metrics from your base system about the CPU, IO, load, memory, swap, and upt
 * [Process check][3] - Capture metrics from specific running processes on a system.
 
 ## Setup
+
 ### Installation
 
 The System check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
 
 ## Data Collected
+
 ### Metrics
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
 ### Events
+
 The System check does not include any events.
 
 ### Service Checks
+
 The System check does not include any service checks.
 
 ### Tags
+
 All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionally, the following namespaces are tagged with `device:<DEVICE_NAME>`.
 
 * `system.disk.*`
@@ -59,6 +64,7 @@ All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionall
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).
 
 ## Setup
+
 ### Installation
 
 The system core check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
@@ -67,10 +73,9 @@ The system core check is included in the [Datadog Agent][4] package. No addition
 
 1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5]. See the [sample system_core.d/conf.yaml][6] for all available configuration options. **Note**: At least one entry is required under `instances` to enable the check, for example:
 
-    ```
-        init_config:
-
-        instances:
+    ```yaml
+      init_config:
+      instances:
         - foo: bar
     ```
 
@@ -81,6 +86,7 @@ The system core check is included in the [Datadog Agent][4] package. No addition
 [Run the Agent's status subcommand][4] and look for `system_core` under the Checks section.
 
 ## Data Collected
+
 ### Metrics
 
 {{< get-metrics-from-git "system_core" >}}
@@ -88,9 +94,11 @@ The system core check is included in the [Datadog Agent][4] package. No addition
 Depending on the platform, the check may collect other CPU time metrics, e.g. `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
 ### Events
+
 The System Core check does not include any events.
 
 ### Service Checks
+
 The System Core check does not include any service checks.
 
 <h1 id="system-swap"><a href="#system-swap">System Swap</a></h1>
@@ -98,6 +106,7 @@ The System Core check does not include any service checks.
 This check monitors the number of bytes a host has swapped in and out.
 
 ## Setup
+
 ### Installation
 
 The system swap check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
@@ -113,14 +122,17 @@ The system swap check is included in the [Datadog Agent][4] package. No addition
 [Run the Agent's status subcommand][4] and look for `system_swap` under the Checks section.
 
 ## Data Collected
+
 ### Metrics
 
 {{< get-metrics-from-git "system_swap" >}}
 
 ### Events
+
 The System Swap check does not include any events.
 
 ### Service Checks
+
 The System Swap check does not include any service checks.
 
 [1]: /integrations/directory

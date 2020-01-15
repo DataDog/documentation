@@ -66,7 +66,6 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [Varnish][66]                    | [Custom Datadog YAML file][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Datadog integration YAML file][69]              | `zookeeper`                |
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

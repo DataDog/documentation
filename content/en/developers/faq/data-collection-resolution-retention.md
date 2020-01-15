@@ -26,7 +26,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | AWS                          | API crawler                                                           | 10 min ([default][2]) | 1 min              | 15 months                                                                                                                                                    | Cloud            |
 | Azure                        | API crawler                                                           | 5 min ([default][2])  | 1 min              | 15 months                                                                                                                                                    | Cloud            |
 | Google Cloud                 | API crawler                                                           | 5 min ([default][2])  | 1 min              | 15 months                                                                                                                                                    | Cloud            |
-
+| Network Performance Monitoring                 | System Probe                                                           | 5 minutes ([default][2])  | 1 min              | 7 days                                                                                                                                                    | Infrastructure            |
 
 [1]: /tracing/guide/trace_sampling_and_storage
 [2]: /integrations/faq/cloud-metric-delay/#faster-metrics

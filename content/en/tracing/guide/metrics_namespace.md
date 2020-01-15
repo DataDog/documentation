@@ -23,7 +23,8 @@ aliases:
 ---
 
 ## Overview
-The [trace metrics][1] namespace is `trace.<name>.<metrics>{<tags>}`.
+
+The [trace metrics][1] namespace is `trace.<NAME>.<METRICS>{<TAGS>}`.
 
 Tracing application metrics are collected after [enabling trace collection][2] and [instrumenting your application][3]. These metrics are available for dashboards and monitors.
 
@@ -53,6 +54,7 @@ Trace metrics come with a variety of tags. The possible tags are:
 **Note**: Tags are attached based on the specific metric. See the metrics table below.
 
 ## Data collected
+
 ### Metrics
 
 {{< get-metrics-from-git "tracing" >}}

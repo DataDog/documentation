@@ -65,7 +65,6 @@ further_reading:
 | [Varnish][66]                    | [カスタム Datadog YAML ファイル][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Datadog インテグレーション YAML ファイル][69]              | `zookeeper`                |
 
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

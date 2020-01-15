@@ -6,10 +6,10 @@ kind: faq
 ## Configuration
 
 Once the Datadog integration has been set up with JIRA, our integration will determine which issues to pull and push from JIRA based upon the 'Ticket Type' defined within the JIRA tile.
-{{< img src="integrations/faq/create_ticket.png" alt="create_ticket" responsive="true" >}}
+{{< img src="integrations/faq/create_ticket.png" alt="create_ticket"  >}}
 
 In the image above, you can see that there is a 'jira-test2-task' ticket type that has been created. Expand this section and you will see this:
-{{< img src="integrations/faq/jira_ticket_type.png" alt="jira_ticket_type" responsive="true" >}}
+{{< img src="integrations/faq/jira_ticket_type.png" alt="jira_ticket_type"  >}}
 
 The fields set here define how our integration will interact with JIRA. The 'Project Key' field determines which JIRA project this tile references, while the 'Issue Type' field designates the JIRA issue type that will be posted and pulled from the given project board. The 'Tags' field is optional, but here is where you can assign Datadog tags if you would like them attached to events as they are pulled in from JIRA.
 

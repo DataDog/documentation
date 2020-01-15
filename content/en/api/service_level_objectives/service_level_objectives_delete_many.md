@@ -1,7 +1,7 @@
 ---
 title: Delete multiple SLOs
 type: apicontent
-order: 29.05
+order: 30.07
 external_redirect: /api/#delete-multiple-slos
 ---
 

@@ -19,7 +19,7 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to get it back under control.`
 
-{{< img src="logs/guide/example_notification.png" alt=" example notification" responsive="true" style="width:70%;">}}
+{{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
 
 ## Further Reading
 
