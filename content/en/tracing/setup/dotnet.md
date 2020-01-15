@@ -291,9 +291,9 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 4.0+             | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | `AspNetWebApi2`      |
 | ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms              | built-in                                 |                  | `AspNet`             |
+| ASP.NET Web Forms              | built-in                                 |                  | `AspNet`<sup>2</sup> |
 | WCF                            | built-in                                 |                  | `Wcf`                |
-| ADO.NET <sup>1</sup>           | built-in                                 |                  | `AdoNet`             |
+| ADO.NET                        | built-in                                 |                  | `AdoNet`             |
 | WebClient / WebRequest         | built-in                                 |                  | `WebRequest`         |
 | HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+             | `HttpMessageHandler` |
 | Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+         | `StackExchangeRedis` |
@@ -301,9 +301,12 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+           | `MongoDb`            |
 
-<sup>1</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
+#### ADO.NET
 
-**Note**: The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. **To enable the `AspNet` integration, you must add the [`Datadog.Trace.AspNet`][4] NuGet package to your application.** Be sure to keep this package in sync with your MSI version.
+The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
+
+#### AspNet
+The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, add the [Datadog.Trace.AspNet][4] NuGet package to your application. Be sure to keep this package in sync with your MSI version.
 
 To install this package, use one the following commands:
 
@@ -344,7 +347,17 @@ paket add Datadog.Trace.AspNet --version TRACER_VERSION
 
 {{< /tabs >}}
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
+##### Configuration
+
+For the `AspNet` integration, the web config must be configured by listing out the full assembly name, for example:
+
+```
+<system.webServer>
+  <modules>
+    <add name="DatadogModule" type="Datadog.Trace.AspNet.TracingHttpModule, Datadog.Trace.AspNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=def86d061d0d2eeb" />
+  </modules>
+</system.webServer>
+```
 
 ## Manual Instrumentation
 
