@@ -108,15 +108,15 @@ Or the container can be restarted.
 
 The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
-| Option  | Critical logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs |
-|---------|---------------|------------|-----------|-----------|------------|------------|
-| `OFF`   |               |            |           |           |            |            |
-| `CRIT`  | {{< X >}}     |            |           |           |            |            |
-| `ERROR` | {{< X >}}     | {{< X >}}  |           |           |            |            |
-| `WARN`  | {{< X >}}     | {{< X >}}  | {{< X >}} |           |            |            |
-| `INFO`  | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |
-| `DEBUG` | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
-| `TRACE` | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
+| Option     | Critical logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs |
+|------------|---------------|------------|-----------|-----------|------------|------------|
+| `OFF`      |               |            |           |           |            |            |
+| `CRITICAL` | {{< X >}}     |            |           |           |            |            |
+| `ERROR`    | {{< X >}}     | {{< X >}}  |           |           |            |            |
+| `WARN`     | {{< X >}}     | {{< X >}}  | {{< X >}} |           |            |            |
+| `INFO`     | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |
+| `DEBUG`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
+| `TRACE`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
 
 ## Further Reading
 
