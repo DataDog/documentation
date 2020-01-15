@@ -33,7 +33,7 @@ You can use indexed logs for [faceted Searching][2], [patterns][11], [analytics]
 By default, Log Explorer comes with one unique Log Index.
 
 Datadog also offers multiple indexes (**currently in private beta**) if you require:
-* multiple retention periods [#daily_quotas] and/or daily quotas, for finer grained budget control 
+* multiple retention periods and/or [daily quotas](#daily-quotas), for finer grained budget control 
 * multiple permissions, for finer grained access controls. More information available in the [role base access control (RBAC) documentation][9].
 
 
@@ -50,7 +50,7 @@ Use drag and drop on the list of indexes to reorder them.
 
 ## Exclusion Filters
 
-By default, logs indexes come without exclusion filter: meaning all logs matching the [Index Filter][#indexes_filters] are eventually indexed.
+By default, logs indexes come without exclusion filter: meaning all logs matching the [Index Filter](#indexes-filters) are eventually indexed.
 
 But because your logs are not all and equally valuable, and because some logs are useful only under some circumstances, exclusion filters control which logs flowing in are eventually indexed. Excluded logs are discarded from indexes, but would still flow through the [Livetail][12], [Metrics Generation][13] and/or [Archives][14].
 
