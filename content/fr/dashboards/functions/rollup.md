@@ -22,11 +22,11 @@ La fonction accepte deux paramètres, `<MÉTHODE>` et `<INTERVALLE>` : `.rollup
 
 Ces paramètres peuvent être utilisés séparément ou ensemble, par exemple `.rollup(sum,120)`. Le graphique à barres suivant affiche l'évolution de la charge CPU sur une semaine pour un host **sans** utiliser la fonction `.rollup()` :
 
-{{< img src="graphing/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
+{{< img src="dashboards/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
 
 Le graphique à barres suivant affiche la même métrique, mais un cumul d'une journée est cette fois-ci appliqué avec `.rollup(avg,86400)` :
 
-{{< img src="graphing/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
+{{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
 
 ## Intervalle de cumul : imposé ou personnalisé
 
@@ -36,7 +36,7 @@ Une fonction `.rollup()` personnalisée peut être utilisée pour obliger Datado
 
 **Remarque** : lorsqu'une requête concerne des métriques de type `COUNT` ou `RATE`, le modificateur `.as_count()` est automatiquement ajouté à l'interface. La méthode de cumul est alors définie sur `sum` et l'interpolation est désactivée. Le modificateur `.as_count()` est affiché explicitement à la fin de la requête :
 
-  {{< img src="graphing/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
+  {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
 
 Pour en savoir plus sur l'utilisation des modificateurs `.as_count()` et `.as_rate()`, consultez cet [article de blog][2] (en anglais) ou lisez la [documentation sur les modificateurs intégrés à l'application][3] pour mieux comprendre les effets de ces fonctions.
 
