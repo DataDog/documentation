@@ -113,6 +113,9 @@ spec:
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
+          # Setting DD_SYSTEM_PROBE_EXTERNAL to true runs the system probe agent
+          # in a dedicated container (the recommended configuration) instead of the 
+          # Datadog agent container
           - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST
