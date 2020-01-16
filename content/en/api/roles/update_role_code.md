@@ -9,12 +9,6 @@ external_redirect: /api/#update-role
 
 `PATCH /v2/roles/<ROLE_UUID>`
 
-**REQUIRED PAYLOAD**:
-
-`type="roles"`<br>
-`id="ROLE_UUID"`<br>
-`attributes["name"]`
-
 **EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-update-role" >}}

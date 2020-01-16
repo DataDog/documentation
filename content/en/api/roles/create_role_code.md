@@ -9,11 +9,6 @@ external_redirect: /api/#create-role
 
 `GET /v2/roles/`
 
-**REQUIRED PAYLOAD**:
-
-`type="roles"`<br>
-`attributes["name"]`
-
 **EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-create-role" >}}
