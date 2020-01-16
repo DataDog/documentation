@@ -40,7 +40,7 @@ Datadog also offers multiple indexes (**currently in private beta**) if you requ
 ## Indexes Filters
 
 
-For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
+Index filters allow dynamic control over which logs flow into which indexes.  For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
 
 {{< img src="logs/indexes/multi_index.png" alt="Multi indexes"  style="width:70%;">}}
 
