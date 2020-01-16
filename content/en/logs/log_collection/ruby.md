@@ -199,4 +199,4 @@ end
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /agent/logs
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/advanced/connect_logs_and_traces/?tab=ruby
+[7]: /tracing/connect_logs_and_traces/?tab=ruby

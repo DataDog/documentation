@@ -1,11 +1,13 @@
 ---
 title: OpenTracing
 kind: documentation
+aliases:
+  - /tracing/advanced/opentracing/
 further_reading:
-- link: "tracing/advanced/connect_logs_and_traces"
+- link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/advanced/manual_instrumentation"
+- link: "tracing/manual_instrumentation"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
 - link: "tracing/visualization/"

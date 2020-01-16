@@ -166,4 +166,4 @@ To change the default values for each of the reserved attributes, go to the [Con
 [15]: /logs/processing/processors/?tab=ui#remapper
 [16]: /logs/processing/processors/#log-status-remapper
 [17]: /logs/faq/integration-pipeline-reference
-[18]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[18]: /tracing/connect_logs_and_traces/?tab=java

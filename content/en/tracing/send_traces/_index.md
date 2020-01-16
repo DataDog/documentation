@@ -9,7 +9,7 @@ aliases:
   - /tracing/getting_further/first_class_dimensions/
   - /agent/apm/
 further_reading:
-- link: "tracing/send_traces/agent-apm-metrics/"
+- link: "tracing/troubleshooting/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 - link: "/agent/docker/apm"
@@ -92,7 +92,7 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [7]: /integrations/amazon_xray/#overview
 [8]: /agent/basic_agent_usage/heroku/#installation
 [9]: /integrations/cloud_foundry/#trace-collection
-[10]: /tracing/advanced/setting_primary_tags_to_scope/#definition
+[10]: /tracing/guide/setting_primary_tags_to_scope/#definition
 [11]: /tracing/visualization/#spans
-[12]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[12]: /tracing/guide/adding_metadata_to_spans/?tab=java
 [13]: /tracing/setup

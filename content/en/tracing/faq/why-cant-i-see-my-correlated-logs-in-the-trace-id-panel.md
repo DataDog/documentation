@@ -2,7 +2,7 @@
 title: Why can't I see my correlated logs in the Trace ID panel?
 kind: faq
 further_reading:
-- link: "/tracing/advanced/connect_logs_and_traces"
+- link: "/tracing/connect_logs_and_traces"
   tag: "Documentation"
   text: "Correlate Traces and Logs"
 ---
@@ -92,4 +92,4 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 [1]: /tracing/visualization/#trace
 [2]: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
 [3]: /tracing/visualization/#services
-[4]: /tracing/advanced/connect_logs_and_traces
+[4]: /tracing/connect_logs_and_traces

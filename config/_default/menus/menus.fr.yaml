@@ -643,10 +643,6 @@ main:
     identifier: tracing_send_traces
     parent: tracing
     weight: 1
-  - name: Métriques APM de l'Agent
-    url: tracing/send_traces/agent-apm-metrics/
-    parent: tracing_send_traces
-    weight: 101
   - name: Instrumenter votre application
     url: tracing/setup/
     parent: tracing
@@ -697,91 +693,74 @@ main:
     url: tracing/setup/istio/
     parent: tracing_setup
     weight: 211
-  - name: Enrichir vos traces
-    url: tracing/advanced/
-    parent: tracing
-    identifier: tracing_advanced
-    weight: 3
-  - name: Associer vos logs à vos traces
-    url: tracing/advanced/connect_logs_and_traces/
-    parent: tracing_advanced
-    weight: 301
-  - name: Ajouter des tags de span
-    url: tracing/advanced/adding_metadata_to_spans/
-    parent: tracing_advanced
-    weight: 302
-  - name: Métriques runtime
-    url: tracing/advanced/runtime_metrics/
-    parent: tracing_advanced
-    weight: 303
-  - name: OpenTracing
-    url: tracing/advanced/opentracing/
-    parent: tracing_advanced
-    weight: 304
-  - name: Instrumentation manuelle
-    url: tracing/advanced/manual_instrumentation/
-    parent: tracing_advanced
-    weight: 305
-  - name: Configurer les tags primaires
-    url: tracing/advanced/setting_primary_tags_to_scope/
-    parent: tracing_advanced
-    weight: 306
-  - name: Glossaire de l'APM
-    url: tracing/visualization/
-    parent: tracing
-    identifier: tracing_vis
-    weight: 4
-  - name: Liste des services
-    url: tracing/visualization/services_list/
-    parent: tracing_vis
-    weight: 401
-  - name: Page Service
-    url: tracing/visualization/service/
-    parent: tracing_vis
-    weight: 402
-  - name: Page Ressource
-    url: tracing/visualization/resource/
-    parent: tracing_vis
-    weight: 403
-  - name: Vue Trace
-    url: tracing/visualization/trace/
-    parent: tracing_vis
-    weight: 404
-  - name: Service Map
-    url: tracing/visualization/services_map/
-    parent: tracing_vis
-    weight: 405
   - name: App Analytics
     url: tracing/app_analytics/
     parent: tracing
     identifier: app_analytics
-    weight: 5
-  - name: Configuration de l'Agent
-    url: tracing/app_analytics/agent_trace_search/
-    parent: app_analytics
-    weight: 501
+    weight: 3
   - name: Visualiser les analyses
     url: tracing/app_analytics/analytics/
     parent: app_analytics
-    weight: 503
+    weight: 303
   - name: Recherche de traces
     url: tracing/app_analytics/search/
     parent: app_analytics
-    weight: 504
-  - name: Monitors
-    url: monitors/monitor_types/apm/
+    weight: 304
+  - name: Monitorez App Analytics
+    url: monitors/monitor_types/apm/?tab=appanalytics
     parent: app_analytics
-    weight: 505
+    weight: 305
+  - name: Associer vos logs à vos traces
+    url: tracing/connect_logs_and_traces/
+    parent: tracing
+    weight: 4
+  - name: Métriques runtime
+    url: tracing/runtime_metrics/
+    parent: tracing
+    weight: 5
+  - name: Instrumentation manuelle
+    url: tracing/manual_instrumentation/
+    parent: tracing
+    weight: 6
+  - name: OpenTracing
+    url: tracing/opentracing/
+    parent: tracing
+    weight: 7
+  - name: Glossaire de l'APM
+    url: tracing/visualization/
+    parent: tracing
+    identifier: tracing_vis
+    weight: 8
+  - name: Liste des services
+    url: tracing/visualization/services_list/
+    parent: tracing_vis
+    weight: 801
+  - name: Page Service
+    url: tracing/visualization/service/
+    parent: tracing_vis
+    weight: 802
+  - name: Page Ressource
+    url: tracing/visualization/resource/
+    parent: tracing_vis
+    weight: 803
+  - name: Vue Trace
+    url: tracing/visualization/trace/
+    parent: tracing_vis
+    weight: 804
+  - name: Service Map
+    url: tracing/visualization/services_map/
+    parent: tracing_vis
+    weight: 805
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 8
+    weight: 9
   - name: Dépannage
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 9
+    weight: 10
   - name: Log Management
     url: logs/
     pre: nav_logs
@@ -891,7 +870,7 @@ main:
     parent: log_management
     identifier: log_explorer
     weight: 7
-  - name: Recherche de logs
+  - name: Recherche
     url: logs/explorer/search/
     parent: log_explorer
     weight: 701
@@ -908,7 +887,7 @@ main:
     parent: log_explorer
     weight: 704
   - name: Associer vos logs à vos traces
-    url: tracing/advanced/connect_logs_and_traces/?tab=java
+    url: tracing/connect_logs_and_traces/?tab=java
     parent: log_management
     identifier: logs_traces_connection
     weight: 8
