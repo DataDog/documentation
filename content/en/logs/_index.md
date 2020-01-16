@@ -37,7 +37,7 @@ Datadog's log management removes these limitations by decoupling log ingestion f
   {{< nextlink href="/logs/explorer/saved_views/">}}<u>Saved Views</u>: Use Saved Views to automatically configure your Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="Finally, leverage the pillars of observability with metrics and traces:">}}
-  {{< nextlink href="/tracing/advanced/connect_logs_and_traces/?tab=java">}}<u>Connect Logs and Traces</u>: See the exact trace correlated with the observed log.{{< /nextlink >}}
+  {{< nextlink href="/tracing/connect_logs_and_traces/?tab=java">}}<u>Connect Logs and Traces</u>: See the exact trace correlated with the observed log.{{< /nextlink >}}
   {{< nextlink href="/dashboards/timeboards/#graph-menu">}}<u>Correlate Logs and Metrics</u>: See the exact metric correlated with the observed log.{{< /nextlink >}}
 {{< /whatsnext >}}
 

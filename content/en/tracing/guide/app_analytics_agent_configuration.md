@@ -1,8 +1,9 @@
 ---
-title: Agent trace Search Configuration
+title: Configuring App Analytics via the Agent
 kind: Documentation
 aliases:
   - /tracing/trace_search_and_analytics/agent_trace_search/
+  - /tracing/app_analytics/agent_trace_search/
 ---
 
 [App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:

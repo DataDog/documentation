@@ -1,14 +1,16 @@
 ---
 title: Adding Span Tags
 kind: documentation
+aliases:
+  - /tracing/advanced/adding_metadata_to_spans/
 further_reading:
-- link: "tracing/advanced/connect_logs_and_traces"
+- link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/advanced/manual_instrumentation"
+- link: "tracing/manual_instrumentation"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
-- link: "tracing/advanced/opentracing"
+- link: "tracing/opentracing"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
