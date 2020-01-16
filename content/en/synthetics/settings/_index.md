@@ -24,6 +24,8 @@ On the [Synthetics settings page][1], you can adjust the following settings:
 - [Default settings](#default-settings)
     - [Default Locations](#default-locations)
     - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
+    
+Only [Admin and Standard users][3] can access Synthetics `Settings` page.
 
 ## Global Variables
 
@@ -35,7 +37,7 @@ Choose the type of variable you want to create:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter the given **Value**.
-3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+3. Decide whether to make your variable secure. Securing your variable will obfuscate its value for all users on your test results.
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 
@@ -53,7 +55,7 @@ You can create variables from your existing HTTP tests by parsing its response h
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Pick the test you want to extract your variable from.
-3. Decide whether to make your variable secure. Securing your variable means that only a subset of chosen users in your organization will be able to access them.
+3. Decide whether to make your variable secure. Securing your variable will obfuscate its value for all users on your test results.
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
@@ -86,5 +88,6 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests#use-global-variables
-[4]: /synthetics/browser_tests#use-global-variables
+[3]: /account_management/users/default_roles/
+[4]: /synthetics/api_tests#use-global-variables
+[5]: /synthetics/browser_tests#use-global-variables
