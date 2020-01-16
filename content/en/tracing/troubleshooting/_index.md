@@ -169,9 +169,9 @@ The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
 
 Logs files are saved in the following directories:
 
-| Platform | Path                                                          |
-|----------|---------------------------------------------------------------|
-| Linux    | `/var/log/datadog/`                        |
+| Platform | Path                                      |
+|----------|-------------------------------------------|
+| Linux    | `/var/log/datadog/`                       |
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 
 {{% /tab %}}
@@ -202,6 +202,7 @@ make install
 {{< /tabs >}}
 
 ## APM metrics sent by the Datadog Agent
+
 Find below the list of out-of-the-box metrics sent by the Datadog Agent when [APM is enabled][7]:
 
 | Metric Name                                           | Type      | Description                                                                                              |
@@ -263,7 +264,6 @@ Find below the list of out-of-the-box metrics sent by the Datadog Agent when [AP
 | `datadog.trace_agent.events.max_eps.reached_max`      | Gauge     | Is set to `1` every time `max_events_per_second` is reached, otherwise it's `0`.                         |
 | `datadog.trace_agent.events.max_eps.current_rate`     | Gauge     | Count of APM Events per second received by the Agent                                                     |
 | `datadog.trace_agent.events.max_eps.sample_rate`      | Gauge     | Sample rate applied by the Agent to Events it received                                                   |
-
 
 ## Further Reading
 
