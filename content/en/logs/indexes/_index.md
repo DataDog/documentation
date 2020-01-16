@@ -53,7 +53,7 @@ By default, logs indexes have no exclusion filter: meaning all logs matching the
 
 But because your logs are not all and equally valuable; exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][12] and can be used to [generate metrics][13] and [archived][14].
 
-Add as many exclusion filters as you need to control your flow. Exclusion filters come with a query, a sampling rule and a active/inactive toggle:
+Exclusion filters come with a query, a sampling rule, and a active/inactive toggle:
 
 * Default **query** is `*`, meaning all logs flowing in the index (that is to say logs that matched the index filter). Scope down exclusion filter to only a subset of the logs if you need finer control.  
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute. . 
