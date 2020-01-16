@@ -874,29 +874,32 @@ main:
     parent: "app_analytics"
     weight: 405
 
-  ## TRACING - Enrich Tracing
-
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/"
     parent: "tracing"
     weight: 5
+
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
     weight: 6
+
+  - name: "Manual Instrumentation"
+    url: "tracing/manual_instrumentation/"
+    parent: "tracing"
+    weight: 7
+
+  - name: "OpenTracing"
+    url: "tracing/opentracing/"
+    parent: "tracing"
+    weight: 8
+
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 7
-  - name: "Manual Instrumentation"
-    url: "tracing/manual_instrumentation/"
-    parent: "tracing"
-    weight: 8
-  - name: "OpenTracing"
-    url: "tracing/opentracing/"
-    parent: "tracing"
     weight: 9
+
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
@@ -931,7 +934,7 @@ main:
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
     weight: 1105
-  
+
 ##########
 ## LOGS ##
 ##########
