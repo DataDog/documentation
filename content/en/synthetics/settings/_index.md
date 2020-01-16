@@ -55,7 +55,7 @@ You can create variables from your existing HTTP tests by parsing its response h
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Pick the test you want to extract your variable from.
-3. Decide whether to make your variable secure. Securing your variable will obfuscate its value for all users on your test results.
+3. Decide whether to make your variable secure. Securing your variable obfuscates its value for all users on your test results.
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
