@@ -32,13 +32,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         color: white;
         background-color: $ddpurple
     }
-    i.icon-small-x {
-        // border: 1px solid #632ca6;
+    i.icon-small-x-2 {
         border: none;
-        /* border-radius: 30px; */
-        /* padding: 8px; */
         font-size: 15px;
-        /* position: absolute; */
         color: #632ca6;
         background-color: white;
     }
@@ -253,11 +249,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 &.toc_open {
                                     padding: 30px 60px 30px 30px;
                                     &:after {
-                                        font-family: 'icomoon' !important;
-                                        content: '\006B'; // upward chevron
+                                        font-family: 'Glyphter' !important;
+                                        content: '\0064'; // upward chevron
                                         position: absolute;
-                                        right: 32px;
-                                        font-size: 10px;
+                                        right: 34px;
+                                        font-size: 16px;
                                     }
                                 }
                             }
@@ -265,11 +261,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                             & > a:first-child:not(.toc_open) {
                                 color: $dimGreyGrey;
                                 &:after {
-                                    font-family: 'icomoon' !important;
-                                    content: '\006F'; // downward chevron
+                                    font-family: 'Glyphter' !important;
+                                    content: '\0063'; // downward chevron
                                     position: absolute;
-                                    right: 32px;
-                                    font-size: 10px;
+                                    right: 34px;
+                                    font-size: 16px;
                                 }
                             }
 

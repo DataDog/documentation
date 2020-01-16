@@ -1,7 +1,10 @@
 const tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
 const tocMobileContainer = document.querySelector('.toc-container-mobile');
 
-tocMobileToggle.addEventListener('click', toggleMobileTOC);
+if (tocMobileToggle) {
+    tocMobileToggle.addEventListener('click', toggleMobileTOC);
+}
+
 
 window.addEventListener('resize', function() {
     if (window.innerWidth > 992) {
@@ -19,7 +22,7 @@ function closeMobileTOC() {
 function toggleMobileTOC() {
     if (tocMobileContainer) {
         document
-            .querySelector('.js-mobile-toc-toggle .icon-small-x')
+            .querySelector('.js-mobile-toc-toggle .icon-small-x-2')
             .classList.toggle('d-none');
 
         document
