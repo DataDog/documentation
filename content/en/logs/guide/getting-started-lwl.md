@@ -40,7 +40,7 @@ For example, you may want to investigate every 4xx and 5xx response code log, bu
 5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
 6. Click on the first listed status and select **search for** in the populated menu. This adds your status facet to the search.
 
-**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `client name` versus `service` or `status`.
+**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `network.client.ip` versus `service` or `status`.
 
 ## 2. Identify high volume logging patterns
 Now that you have identified your most logging service status, switch to the [patterns view][4], located next to the graph view in the top left of Log Explorer, to automatically see your log patterns for the selected context. 
