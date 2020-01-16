@@ -799,7 +799,7 @@ main:
     url: "tracing/send_traces/"
     identifier: "tracing_send_traces"
     parent: "tracing"
-    weight: 2
+    weight: 1
 
   ## TRACING - Setup
 
@@ -807,52 +807,52 @@ main:
     url: "tracing/setup/"
     parent: "tracing"
     identifier: "tracing_setup"
-    weight: 3
+    weight: 2
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
-    weight: 301
+    weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
     identifier: "python"
-    weight: 302
+    weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
-    weight: 303
+    weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
-    weight: 304
+    weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
-    weight: 305
+    weight: 205
   - name: ".NET"
     url: "tracing/setup/dotnet/"
     parent: "tracing_setup"
-    weight: 306
+    weight: 206
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 307
+    weight: 207
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 308
+    weight: 208
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 309
+    weight: 209
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 310
+    weight: 210
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
-    weight: 311
+    weight: 211
 
   ## TRACING - App analytics
 
@@ -860,39 +860,67 @@ main:
     url: "tracing/app_analytics/"
     parent: "tracing"
     identifier: "app_analytics"
-    weight: 4
+    weight: 3
   - name: "Viewing Analytics"
     url: "tracing/app_analytics/analytics/"
     parent: "app_analytics"
-    weight: 403
+    weight: 303
   - name: "Trace Search"
     url: "tracing/app_analytics/search/"
     parent: "app_analytics"
-    weight: 404
+    weight: 304
   - name: "Monitoring App Analytics"
     url: "monitors/monitor_types/apm/?tab=appanalytics"
     parent: "app_analytics"
-    weight: 405
+    weight: 305
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/"
     parent: "tracing"
-    weight: 5
+    weight: 4
 
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
-    weight: 6
+    weight: 5
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
-    weight: 7
+    weight: 6
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
+    weight: 7
+
+  ## TRACING - Using the APM UI
+
+  - name: "APM Glossary"
+    url: "tracing/visualization/"
+    parent: "tracing"
+    identifier: "tracing_vis"
     weight: 8
+  - name: "Services List"
+    url: "tracing/visualization/services_list/"
+    parent: "tracing_vis"
+    weight: 801
+  - name: "Service Page"
+    url: "tracing/visualization/service/"
+    parent: "tracing_vis"
+    weight: 802
+  - name: "Resource Page"
+    url: "tracing/visualization/resource/"
+    parent: "tracing_vis"
+    weight: 803
+  - name: "Trace View"
+    url: "tracing/visualization/trace/"
+    parent: "tracing_vis"
+    weight: 804
+  - name: "Service Map"
+    url: "tracing/visualization/services_map/"
+    parent: "tracing_vis"
+    weight: 805
 
   - name: "Guides"
     url: "tracing/guide/"
@@ -906,34 +934,6 @@ main:
     parent: "tracing"
     weight: 10
 
-
-  ## TRACING - Using the APM UI
-
-  - name: "APM Glossary"
-    url: "tracing/visualization/"
-    parent: "tracing"
-    identifier: "tracing_vis"
-    weight: 11
-  - name: "Services List"
-    url: "tracing/visualization/services_list/"
-    parent: "tracing_vis"
-    weight: 1101
-  - name: "Service Page"
-    url: "tracing/visualization/service/"
-    parent: "tracing_vis"
-    weight: 1102
-  - name: "Resource Page"
-    url: "tracing/visualization/resource/"
-    parent: "tracing_vis"
-    weight: 1103
-  - name: "Trace View"
-    url: "tracing/visualization/trace/"
-    parent: "tracing_vis"
-    weight: 1104
-  - name: "Service Map"
-    url: "tracing/visualization/services_map/"
-    parent: "tracing_vis"
-    weight: 1105
 
 ##########
 ## LOGS ##
