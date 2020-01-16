@@ -59,28 +59,30 @@ Exclusion filters come with a query, a sampling rule, and a active/inactive togg
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute. . 
 * Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index. 
 
-As for Index Filters, logs will be processed by the only first **active** exclusion filter they match. Which means that order matters: use drag and drop to reorder exclusion filter accordingly.
+**Note**: As for Index Filters, logs are excluded by the first **active** exclusion filter they match, use drag and drop on the list of exclusion filters to reorder them according to your use-case.
 
 {{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters"  style="width:80%;">}}
 
 
 ### Examples of Exclusion Filters
 
-You don't need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from UI or [API] when required.
+You don't need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API] when required.
 
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
 
-You don't need to keep track of every single web access server log generated. Index all 3xx, 4xx and 5xx logs, but exclude 95% of the 2xx logs `source:nginx http.status_code:[200 TO 299]` to keep track of the trends. Pro tip, summarize these web access logs into a meaningful KPI with a [custom metric generated from logs][14], counting number of requests and tagged by status code, [browser][17] and [country][16].
+Let's say now that you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends. 
+Pro tip, transform these web access logs into meaningful KPIs with a [metric generated from your logs][14], counting number of requests and tagged by status code, [browser][17] and [country][16].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
 
-You have millions of users connecting to your marketplace everyday. And although you don't need obersability on every single user, you still want to keep the full picture for the one you'll observe. Set up an exclusion filter applying to all logs (`*`) and exclude logs for 90% of the `@http.user_id`. 
+You have millions of users connecting to your marketplace everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all logs (`*`) and exclude logs for 90% of the `@http.user_id`:
 
 {{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
 
-You use APM in conjunction with Logs, thanks to [Trace ID injection in logs][10]. As for users, you don't need to keep all your logs, but making sure logs always give the full picture of a Trace is critical for troubleshooting. Set up an exclusion filter applying to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure you use the [Trace ID remapper][18] upstream in your pipelines. 
+You use APM in conjunction with Logs, thanks to [trace ID injection in logs][10]. As for users, you don't need to keep all your logs, but making sure logs always give the full picture to a trace is critical for troubleshooting. 
+Set up an exclusion filter applying to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][18] upstream in your pipelines. 
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
