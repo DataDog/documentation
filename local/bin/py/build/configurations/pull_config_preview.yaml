@@ -1,4 +1,22 @@
 ---
+- org_name: jenkinsci
+
+  repos:
+  - repo_name: datadog-plugin
+
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/integrations/'
+        file_name: 'jenkins.md'
+        front_matters:
+          title: Datadog-Jenkins Integration
+          kind: documentation
+
 - org_name: DataDog
 
   repos:

@@ -18,11 +18,11 @@ further_reading:
 
 Check status shows the current status or number of results for any check performed:
 
-{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" >}}
+{{< img src="dashboards/widgets/check_status/check_status.png" alt="Check status widget" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -47,7 +47,7 @@ Check status shows the current status or number of results for any check perform
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

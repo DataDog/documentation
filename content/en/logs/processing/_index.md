@@ -69,7 +69,7 @@ If you want to learn more about pure parsing possibilities of the Datadog applic
 
 ## Reserved attributes
 
-If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
+If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog and are faceted by default:
 
 ### *date* attribute
 
@@ -96,7 +96,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][13], where it is indexed for [full text search][14].
 
-**Note**: If you send a log formated as JSON with a `message` attribute which contain a JSON object, this JSON object is interpreted as a *string* and *NOT* expended. Use a [Log Grok processor][4] to parse this JSON object or a [Log remapper processor][15] to remap this JSON object to a non-reserved attribute.
+**Note**: If you send a log formatted as JSON with a `message` attribute which contains a JSON object, this JSON object is interpreted as a *string* and *NOT* expanded. Use a [Log Grok processor][4] to parse this JSON object or a [Log remapper processor][15] to remap this JSON object to a non-reserved attribute.
 
 ### *status* attribute
 

@@ -115,8 +115,7 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your App Analytics:
 
-* To create a new [APM monitor][8]:
-    This feature is not available yet.
+* To a new [APM monitor][8]
 * To an existing [Timeboard][9]:
     This functionality is in beta, [contact the Datadog support team][10] to activate it for your organization.
 

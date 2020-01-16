@@ -78,5 +78,5 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 [1]: /dashboards/sharing/#screenboards
 [2]: /events
-[3]: /account_management/team/#datadog-user-roles
+[3]: /account_management/users/default_roles
 [4]: /dashboards/#copy-import-export

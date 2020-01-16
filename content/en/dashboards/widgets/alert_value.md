@@ -18,10 +18,10 @@ further_reading:
 
 Alert values are query values showing the current value of the metric in any monitor defined on your system:
 
-{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
+{{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
 ## Setup
-{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -42,7 +42,7 @@ Alert values are query values showing the current value of the metric in any mon
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 

@@ -70,7 +70,7 @@ Nous recommandons d'en ajouter deux pour l'intermédiation des assertions SAML. 
 
 La première règle concerne les attributs LDAP. Elle permet de garantir que les informations nécessaires circulent entre les deux systèmes. Configurez la règle comme affiché ci-dessous et cliquez sur OK pour enregistrer. Assurez-vous d'utiliser trois champs distincts pour « E-Mail-Addresses », « Given-Name » et « Surname » pour éviter que des informations pertinentes aient le statut « None » plus tard.
 
-{{< img src="account_management/saml/cogaUQT.png" alt="cogaUQT"  style="width:60%;">}}
+{{< img src="account_management/saml/cogaUQT.png" alt="cogaUQT" style="width:60%;">}}
 
 La seconde règle applique une transformation. Datadog indique `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` pour le format de NameIDPolicy dans les requêtes d'assertion où ADFS les demande nativement au format Name ID. Il faut donc transformer le format de l'e-mail au format Name ID.
 

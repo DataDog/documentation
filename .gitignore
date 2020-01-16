@@ -10,7 +10,6 @@ content/integrations/*.md
 !content/integrations/cloudability.md
 !content/integrations/cloudcheckr.md
 !content/integrations/carbon_black.md
-!content/integrations/jenkins.md
 !content/integrations/kubernetes.md
 !content/integrations/rss.md
 !content/integrations/system.md

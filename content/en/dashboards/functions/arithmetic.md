@@ -13,11 +13,11 @@ aliases:
 
 Transforms this sine timeseries `sin{*}`:
 
-{{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/sinus.png" alt="Sinus function"  style="width:80%;">}}
 
 into this one `abs(sin{*})`:
 
-{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs"  style="width:80%;">}}
 
 ## Logarithm
 
@@ -31,7 +31,7 @@ Example:
 
 If we have a metric `x{*}` that just increments itself by 1 for each data point, then `log2(x{*})` has the following shape:
 
-{{< img src="graphing/functions/arithmetic/log2.png" alt=" log2 function"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 function"  style="width:80%;">}}
 
 ### log10
 
@@ -43,7 +43,7 @@ Example:
 
 If we have a metric `x{*}` that just increments itself by 1 for each data point, then `log10(x{*})` has the following shape:
 
-{{< img src="graphing/functions/arithmetic/log10.png" alt="log10 function"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/log10.png" alt="log10 function"  style="width:80%;">}}
 
 ## Cumulative Sum
 
@@ -55,7 +55,7 @@ Example:
 
 If we have a metric `const_1{*}` that is a constant with the value of `1`, then `cumsum(const_1{*})` has the following shape:
 
-{{< img src="graphing/functions/arithmetic/cumsum.png" alt="cum sum function with abs"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/cumsum.png" alt="cum sum function with abs"  style="width:80%;">}}
 
 ## Integral
 
@@ -65,7 +65,7 @@ If we have a metric `const_1{*}` that is a constant with the value of `1`, then 
 
 **Note**: Datadog's `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
 
-{{< img src="graphing/functions/arithmetic/integral.png" alt="integral function with abs"  style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/integral.png" alt="integral function with abs"  style="width:80%;">}}
 
 ## Other functions
 

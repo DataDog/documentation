@@ -1,7 +1,7 @@
 ---
 title: Generate Metrics from Ingested Logs
 kind: documentation
-beta: true
+beta: false
 aliases:
  - /logs/processing/logs_to_metrics/
 description: "Generate Metrics from Ingested Logs."
@@ -13,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
 ---
-
-<div class="alert alert-warning">
-This feature is in beta.
-</div>
 
 ## Overview
 

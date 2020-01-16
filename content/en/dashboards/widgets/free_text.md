@@ -17,11 +17,11 @@ Free text is a widget that allows you to add headings to your [screenboard][1].
 
 This is commonly used to state the overall purpose of the dashboard.
 
-{{< img src="graphing/widgets/free_text/free_text.png" alt="Free Text" >}}
+{{< img src="dashboards/widgets/free_text/free_text.png" alt="Free Text" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Free Text Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Free Text Setup"  style="width:80%;">}}
 
 ### Configuration
 
