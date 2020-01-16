@@ -29,7 +29,7 @@ You can use indexed logs for [faceted searching][2], [patterns][11], [analytics]
 
 ## Indexes
 
-By default, Log Explorer comes with one unique Log Index.
+By default, Log Explorer have one unique Log Index.
 
 Datadog also offers multiple indexes (**currently in private beta**) if you require:
 
@@ -53,7 +53,7 @@ By default, logs indexes have no exclusion filter: meaning all logs matching the
 
 But because your logs are not all and equally valuable; exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][12] and can be used to [generate metrics][13] and [archived][14].
 
-Exclusion filters come with a query, a sampling rule, and a active/inactive toggle:
+Exclusion filters are defined by a query, a sampling rule, and a active/inactive toggle:
 
 * Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query](/logs/explorer/search/).
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute. . 
@@ -66,16 +66,21 @@ Exclusion filters come with a query, a sampling rule, and a active/inactive togg
 
 ### Examples of Exclusion Filters
 
+#### Switch off, switch on
+
 You don't need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API] when required.
 
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
+#### Keep an eye on trends
 
 Let's say now that you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends. 
 Pro tip, transform these web access logs into meaningful KPIs with a [metric generated from your logs][14], counting number of requests and tagged by status code, [browser][17] and [country][16].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
+
+#### Sampling consistently with higher-level entities
 
 You have millions of users connecting to your marketplace everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all logs (`*`) and exclude logs for 90% of the `@http.user_id`:
 
