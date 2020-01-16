@@ -44,7 +44,7 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 {{< img src="logs/indexes/multi_index.png" alt="Multi indexes"  style="width:70%;">}}
 
-Use drag and drop on the list of indexes to reorder them.
+**Note**: **Logs enter the first index whose filter they match on**, use drag and drop on the list of indexes to reorder them according to your use-case.
 
 
 ## Exclusion Filters
