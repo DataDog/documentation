@@ -21,7 +21,7 @@ further_reading:
 
 Datadog [Logging without Limits][1]™ provides flexibility by decoupling [log ingestion and indexing][2]. Cloud-based applications can generate logs at a rate of millions per minute. This type of high volume log indexing is helpful when monitoring every aspect of a service, but it can be inhibiting when troubleshooting during high priority issues or tracking bugs.
 
-This guide identifies key components of Logging Without Limits™ such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-for-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitoring your KPIs over time.
+This guide identifies key components of Logging Without Limits™ such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-to-track-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitoring your KPIs over time.
 
 ## 1. Identify your most logging service status
 
@@ -111,7 +111,7 @@ In this guide, you learned how to use Logging without Limits™ to:
 - [Identify a high volume logging service status](#1-identify-your-most-logging-service-status)
 - [Identify high volume logging patterns from a service status](#2-identify-high-volume-logging-patterns)
 - [Exclude irrelevant status logs](#3-create-a-log-pattern-exclusion-filter)
-- [Generate custom metrics to continue to monitor excluded logs over time](#4-generate-metrics-for-excluded-logs)
+- [Generate custom metrics to continue to monitor excluded logs over time](#4-generate-metrics-to-track-excluded-logs)
 
 To learn more about Logging Without Limits™ and how to better utilize features like Log Explorer, Live Tail, and Log Patterns, view the links below.
 
