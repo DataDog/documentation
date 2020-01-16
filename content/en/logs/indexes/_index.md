@@ -20,7 +20,6 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-
 Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
