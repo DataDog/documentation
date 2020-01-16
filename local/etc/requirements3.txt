@@ -3,7 +3,7 @@ PyGithub==1.29
 markdown
 algoliasearch>=1.11.0
 beautifulsoup4==4.5.1
-cffi==1.5.2
+cffi==1.13.2
 cssutils>=1.0.0
 htmlmin>=0.1.10
 pycparser==2.14
