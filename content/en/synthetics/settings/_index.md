@@ -37,7 +37,7 @@ Choose the type of variable you want to create:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter the given **Value**.
-3. Decide whether to make your variable secure. Securing your variable will obfuscate its value for all users on your test results.
+3. Decide whether to make your variable secure. Securing your variable obfuscates its value for all users on your test results.
 4. Optional: select **Tags** to associate to your variable.
 5. Optional: enter a **Description** for your variable.
 
