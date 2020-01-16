@@ -40,7 +40,6 @@ Datadog also offers multiple indexes (**currently in private beta**) if you requ
 
 ## Indexes Filters
 
-Index filters give dynamic control over which logs flow into which indexes. Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
 
 For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
 
