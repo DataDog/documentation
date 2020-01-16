@@ -76,7 +76,7 @@ In this example, the service status `INFO` pattern `Updating recommendations wit
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
-## 4. Generate metrics for excluded logs
+## 4. Generate metrics to track excluded logs
 
 Once a log pattern is excluded from Log Explorer, you can still track KPIs over time at the ingest level by creating a new [custom log-based metric][8]. 
 
