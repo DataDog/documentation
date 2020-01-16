@@ -55,7 +55,7 @@ But because your logs are not all and equally valuable; exclusion filters contro
 
 Exclusion filters come with a query, a sampling rule, and a active/inactive toggle:
 
-* Default **query** is `*`, meaning all logs flowing in the index (that is to say logs that matched the index filter). Scope down exclusion filter to only a subset of the logs if you need finer control.  
+* Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query](/logs/explorer/search/).
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute. . 
 * Default **toggle** is active, meaning the logs flowing in are actually discarded according to the rule. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index. 
 
