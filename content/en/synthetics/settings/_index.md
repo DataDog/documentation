@@ -19,12 +19,12 @@ further_reading:
 
 On the [Synthetics settings page][1], you can adjust the following settings:
 
-- [Global Variables](#global-variables)
-- [Private Locations][2]
-- [Default settings](#default-settings)
-    - [Default Locations](#default-locations)
-    - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
-    
+* [Global Variables](#global-variables)
+* [Private Locations][2]
+* [Default settings](#default-settings)
+  * [Default Locations](#default-locations)
+  * [APM integration for Browser Tests](#apm-integration-for-browser-tests)
+
 Only [Admin and Standard users][3] can access Synthetics `Settings` page.
 
 ## Global Variables
@@ -86,8 +86,8 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
 [3]: /account_management/users/default_roles/
 [4]: /synthetics/api_tests#use-global-variables
-[5]: /synthetics/browser_tests#use-global-variables
