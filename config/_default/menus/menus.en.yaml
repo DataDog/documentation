@@ -877,12 +877,24 @@ main:
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/"
     parent: "tracing"
+    identifier: "connect_logs_traces"
     weight: 4
+  - name: "Ruby"
+    url: "tracing/connect_logs_and_traces/ruby/"
+    parent: "connect_logs_traces"
+    identifier: "connect_logs_traces_ruby"
+    weight: 401
 
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
+    identifier: "tracing_runtime_metrics"
     weight: 5
+  - name: "Ruby"
+    url: "tracing/runtime_metrics/ruby/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_ruby"
+    weight: 501
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
@@ -892,7 +904,13 @@ main:
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
+    identifier: "tracing_opentracing"
     weight: 7
+  - name: "Ruby"
+    url: "tracing/opentracing/ruby/"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_ruby"
+    weight: 701
 
   ## TRACING - Using the APM UI
 

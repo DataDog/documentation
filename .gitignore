@@ -21,6 +21,11 @@ content/integrations/*.md
 !content/integrations/iam_access_analyzer.md
 
 # Ignoring all automated content
+# Tracing
+content/en/tracing/connect_logs_and_traces/ruby.md
+content/en/tracing/opentracing/ruby.md
+content/en/tracing/runtime_metrics/ruby.md
+
 # Developers/integrations
 content/developers/integrations/*.md
 content/agent/basic_agent_usage/heroku.md

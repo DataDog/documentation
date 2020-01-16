@@ -81,7 +81,7 @@
   - repo_name: dd-trace-rb
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: docs/reorganize_docs-2
       globs:
       - 'docs/GettingStarted.md'
       options:
@@ -94,6 +94,37 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
+    - action: pull-and-push-file
+      branch: docs/reorganize_docs-2
+      globs:
+      - 'docs/OpenTracing.md'
+      options:
+        dest_path: '/tracing/opentracing/'
+        file_name: 'ruby.md'
+        front_matters:
+          title: Opentracing with Ruby Applications
+          kind: documentation
+    - action: pull-and-push-file
+      branch: docs/reorganize_docs-2
+      globs:
+      - 'docs/Correlation.md'
+      options:
+        dest_path: '/tracing/connect_logs_and_traces/'
+        file_name: 'ruby.md'
+        front_matters:
+          title: Connect logs and traces with Ruby Applications
+          kind: documentation
+    - action: pull-and-push-file
+      branch: docs/reorganize_docs-2
+      globs:
+      - 'docs/Metrics.md'
+      options:
+        dest_path: '/tracing/runtime_metrics/'
+        file_name: 'ruby.md'
+        front_matters:
+          title: Ruby Applications Runtime Metrics
+          kind: documentation
+
 
   - repo_name: datadog-cloudformation-resources
     contents:

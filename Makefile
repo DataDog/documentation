@@ -94,6 +94,12 @@ clean-auto-doc: ##remove all doc automatically created
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/tracing/opentracing/ruby.md ]; then \
+	rm -f content/en/tracing/opentracing/ruby.md ;fi
+	@if [ content/en/tracing/connect_logs_and_traces/ruby.md ]; then \
+	rm -f content/en/tracing/connect_logs_and_traces/ruby.md ;fi
+	@if [ content/en/tracing/runtime_metrics/ruby.md ]; then \
+	rm -f content/en/tracing/runtime_metrics/ruby.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
