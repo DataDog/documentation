@@ -14,10 +14,10 @@ widthCheck();
 tocWidthUpdate();
 
 if (window.innerWidth > largeScreenThreshold && window.scrollY < 60) {
-    $('.toc').css('top', 189);
+    $('.toc-container .toc').css('top', 189);
     $('.mobile-toc-toggle').css('top', 189);
 } else if (window.innerWidth > largeScreenThreshold && window.scrollY > 60) {
-    $('.toc').css('top', 124.5);
+    $('.toc-container .toc').css('top', 124.5);
     $('.mobile-toc-toggle').css('top', 124.5);
 }
 
@@ -27,7 +27,7 @@ $(window).on('resize scroll', function() {
         ? $('#TableOfContents').position().top
         : 0;
     const offset = headerHeight + top;
-    $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
+    $('.toc-container .toc').css('maxHeight', document.documentElement.clientHeight - offset);
 });
 
 $(window).on('resize', function() {
@@ -73,7 +73,7 @@ $(document).on('headerResize', function(event, height) {
         offset = 60;
     }
     $('.mobile-toc-toggle').css('top', `${height + offset}px`);
-    $('.toc').css('top', `${height + offset}px`);
+    $('.toc-container .toc').css('top', `${height + offset}px`);
 });
 
 export function hideToc() {
@@ -144,7 +144,7 @@ export function showTOCIcon() {
 }
 
 export function updateTOC() {
-    $('.toc').css('display', 'block');
+    $('.toc-container .toc').css('display', 'block');
     $('#TableOfContents a').on('click', function() {
         const href = $(this).attr('href');
         if (href.substr(0, 1) === '#') {

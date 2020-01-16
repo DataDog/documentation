@@ -3,6 +3,7 @@ import 'bootstrap';
 import './datadog-docs';
 
 import './components/announcement_banner';
+import './components/table-of-contents-mobile';
 import './components/copy-code';
 import './components/codenav';
 import './components/global-modals';

@@ -48,13 +48,6 @@ body > header {
       margin:0 auto;
       margin-top: 13px;
     }
-    .logo-text {
-      //height: 14px;
-
-    }
-    .navbar-left li:first-child a.nav-link {
-      //padding-left:0;
-    }
     .navbar-right li:last-child a.nav-link {
       padding-right:0;
     }
@@ -160,9 +153,7 @@ body > header {
 
   // mobile
   .navbar {
-    padding-left:0;
-    padding-right:0;
-    padding-bottom:0;
+    padding: 0.6rem 1rem;
     .container {
       padding-left:15px;
       padding-right:15px;

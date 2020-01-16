@@ -269,6 +269,9 @@ h5{
   padding-top: 14px;
 }
 
+#pagetitle {
+  margin-right: -30%;
+}
 
 .main {
   z-index: 1;
@@ -746,11 +749,11 @@ table, .table {
   .main {
     padding-left: 15px;
   }
-  .col-lg-7 {
-    #pagetitle {
-      margin-right: 0 !important;
-    }
+
+  #pagetitle {
+    margin-right: 0 !important;
   }
+  
   .wide-parent {
     width: 100%;
   }
