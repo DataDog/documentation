@@ -24,7 +24,7 @@ Indexes are located on the [Configuration page][1] in the Indexes section. Doubl
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
 
-You can use indexed logs for [faceted Searching][2], [patterns][11], [analytics][3], [dashboarding][4], and [monitoring][5]. 
+You can use indexed logs for [faceted searching][2], [patterns][11], [analytics][3], [dashboarding][4], and [monitoring][5]. 
 
 
 ## Indexes
