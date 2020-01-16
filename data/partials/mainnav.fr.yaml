@@ -283,7 +283,7 @@ main:
         url: tracing/send_traces/
         children:
           - name: Métriques APM de l'Agent
-            url: tracing/troubleshooting/
+            url: tracing/send_traces/agent-apm-metrics/
       - name: Instrumenter votre application
         url: tracing/setup/
         children:
@@ -310,20 +310,20 @@ main:
           - name: Istio
             url: tracing/setup/istio/
       - name: Enrichir vos Traces
-        url: tracing/
+        url: tracing/advanced/
         children:
           - name: Connect Logs and Traces
-            url: tracing/connect_logs_and_traces
+            url: tracing/advanced/connect_logs_and_traces
           - name: Ajouter des Metadata aux Spans
-            url: tracing/guide/adding_metadata_to_spans
+            url: tracing/advanced/adding_metadata_to_spans
           - name: Métriques de runtime
-            url: tracing/runtime_metrics
+            url: tracing/advanced/runtime_metrics
           - name: OpenTracing
-            url: tracing/opentracing
+            url: tracing/advanced/opentracing
           - name: Instrumentation manuelle
-            url: tracing/manual_instrumentation
+            url: tracing/advanced/manual_instrumentation
           - name: Configurer les Primary Tags
-            url: tracing/guide/setting_primary_tags_to_scope
+            url: tracing/advanced/setting_primary_tags_to_scope
       - name: Utiliser l'UI de l'APM
         url: tracing/visualization/
         children:
