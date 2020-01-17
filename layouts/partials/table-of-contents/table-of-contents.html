@@ -1,9 +1,18 @@
 {{ $ctx := . }}
 
-<div class="col-4 d-none d-lg-block col-lg-2 col-xl-2 toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
+
+<div class="col-4 col-lg-2 js-toc-container toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
     <div class="sticky toc">
     {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
-    <p class="text-uppercase text-gray-darkish font-semibold mb-2">On this page</p>
+
+    <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">On this page</p>
         {{ .TableOfContents }}
     </div>
 </div>
+
+<div class=" mobile-toc-toggle js-mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} d-lg-none  {{ end }}">
+    <i class="icon-small-bookmark"></i>
+    <i class="icon-small-x-2 d-none"></i>
+</div>
+
+<div class="js-mobile-toc-bg mobile-toc-bg"></div>

@@ -2,7 +2,7 @@ import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
-import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
+import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
@@ -550,8 +550,8 @@ $(document).ready(function () {
             return false;
         });
     } else if(window.location.hash) {
-            moveToAnchor(window.location.hash.substr(1), true);
-        }
+        moveToAnchor(window.location.hash.substr(1), true);
+    }
 
     // For sidenav links with anchor tag refs
     $(".sidenav-nav a[href^='#']").click(function(){
@@ -801,14 +801,10 @@ function loadPage(newUrl) {
     // scroll to top of page on new page load
     window.scroll(0, 0);
 
-    if (document.querySelector('.toc-container.mobile-open')) {
-        document.querySelector('.mobile-toc-toggle').click();
-    }
-
     let mainContent = document.getElementById("mainContent");
 
     if (mainContent) {
-        const currentTOC = document.querySelector('.toc-container');
+        const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
@@ -830,8 +826,8 @@ function loadPage(newUrl) {
             }
     
             const newContent = httpRequest.responseXML.getElementById("mainContent");
-            const newTOC = httpRequest.responseXML.querySelector(".toc-container");
-    
+            const newTOC = httpRequest.responseXML.querySelector(".js-toc-container");
+
             if (newContent === null){
                 return;
             }
@@ -889,8 +885,6 @@ function loadPage(newUrl) {
                 window.location.href = newUrl;
             }
     
-    
-    
             const wistiaVid = document.querySelector('.wistia [data-wistia-id]');
     
             let wistiaVidId;
@@ -898,23 +892,21 @@ function loadPage(newUrl) {
                 wistiaVidId = wistiaVid.dataset.wistiaId;
             }
     
+            // if newly requested TOC is NOT disabled
             if (newTOC.querySelector('#TableOfContents')) {
                 currentTOC.replaceWith(newTOC);
                     buildTOCMap();
                     updateTOC();
-                    showTOCIcon();
-                    widthCheck();
-                    tocWidthUpdate();
                     updateMainContentAnchors();
                     reloadWistiaVidScripts(wistiaVidId);
                     initializeIntegrations();
-            } else if (!newTOC.querySelector('#TableOfContents')) {
-                if (document.querySelector('.toc-container #TableOfContents')) {
-                    document.querySelector('.toc-container #TableOfContents').remove();
-                }
-                hideToc();
+
+                
+            } else if (document.querySelector('.js-toc-container #TableOfContents')) { // toc is disabled, but old TOC exists and needs to be removed.
+                document.querySelector('.js-toc-container #TableOfContents').remove();
+                updateTOC();
             }
-    
+                
             const end = window.performance.now();
             const time = end - start;
     
@@ -1005,6 +997,7 @@ function navClickEventHandler(event){
     // Hide mobile nav after clicking nav element
     if ($('.navbar-collapse').hasClass('show')) {
         $('.navbar-collapse').collapse('hide');
+        closeMobileTOC();
     }
 
     // TODO: How to fall back to normal behavior?

@@ -2,10 +2,10 @@ $ddpurple: #632ca6;
 $highlightcolor: rgba(120, 71, 166, 0.15);
 
 body > header.scrolled ~ .container .mobile-toc-toggle {
-    top: 90px;
+    top: 100px;
 }
 .announcement_banner.open ~ .container .mobile-toc-toggle {
-    top: 190px;
+    top: 130px;
 }
 
 .mobile-toc-toggle {
@@ -14,13 +14,16 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     justify-content: center;
     align-items: center;
     right: 20px;
-    // border: 1px solid #632ca6;
     border-radius: 30px;
-    top: 160px;
+    top: 100px;
     width: 43px;
     height: 43px;
-    z-index: 99999;
+    z-index: 3;
     box-shadow: 0px 3.28413px 8.21031px rgba(0, 0, 0, 0.2);
+
+    @media (min-width: 991px) {
+        display: none;
+    }
 
     cursor: pointer;
     cursor: pointer;
@@ -56,7 +59,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 // Desktop TOC
 .toc-container {
-    padding-top: 80px;
+    padding-top: 50px;
     &.mobile-open {
         top: 60px;
         position: sticky;
@@ -67,7 +70,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
     .toc {
         top: 100px;
-        padding-top: 2px;
+        padding-top: 5px;
         padding-bottom: 50px;
         overflow-x: hidden;
         overflow-y: auto;
@@ -169,7 +172,27 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
+.toc-title {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+    }
+}
+
+.toc-edit-btn {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+    }
+}
+
+
 // Mobile TOC
+
+.announcement_banner.open ~ .container .toc-container-mobile .toc {
+    padding-top: 90px;
+}
+
 .toc-container-mobile {
     display: none;
     padding: 105px 0 0 0;
@@ -187,7 +210,8 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 
     .toc {
-        padding-top: 100px;
+        padding-top: 60px;
+
         #TableOfContents {
             // open adjacent ul to open link
             .toc_open ~ ul {
@@ -277,6 +301,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                     a {
                                         font-weight: normal;
                                         color: $darkGreyGrey;
+                                        padding-right: 1rem !important;
                                     }
 
                                     // level 4 list
