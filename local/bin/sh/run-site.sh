@@ -11,27 +11,25 @@ if [ ${RUN_SERVER} = true ]; then
 	# integrations
 	if [ ${GITHUB_TOKEN} != false ]; then
 		args="${args} --token ${GITHUB_TOKEN}"
+    update_pre_build.py "${args}"
 	else
-		printf "No GITHUB TOKEN was found. skipping any data sync that relies on pulling from web.\n"
-		printf "Add all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\n"
+		printf "\033[31m\033[1mNo GITHUB TOKEN was found. Skipping any data sync that relies on pulling from web.\033[0m\n"
+		printf "\033[33m\033[1mAdd all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\nOr use the 'make start-no-pre-build' command to build the doc without any external content.\033[0m\n"
 		update_pre_build.py
-	fi
-	if [[ ${args} != "" ]]; then
-		update_pre_build.py "${args}"
 	fi
 
   # placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
-		echo "creating i18n placeholder pages."
+		echo "Creating i18n placeholder pages."
 		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
 	# webpack
 	if [ ${RUN_WEBPACK} = true ]; then
-		echo "checking that node modules are installed and up-to-date"
+		echo "Checking that node modules are installed and up-to-date."
     npm --global install yarn && \
     npm cache clean --force && yarn install --frozen-lockfile
-    echo "starting webpack and hugo build"
+    echo "Starting webpack and hugo build."
 	yarn run start
 
     sleep 5
