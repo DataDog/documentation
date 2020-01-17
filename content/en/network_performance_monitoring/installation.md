@@ -34,7 +34,7 @@ The following provisioning systems are supported:
 
 * Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][3]
 * Chef 12.7+: See the [Datadog Chef recipe][4]
-* Ansible 4.0.1+: See the [Datadog Ansible role][5]
+* Ansible 2.6+: See the [Datadog Ansible role][5]
 
 ## Setup
 
