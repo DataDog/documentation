@@ -129,7 +129,7 @@ if __name__ == "__main__":
     temp_directory = "./integrations_data"
 
     # Documentation build process:
-    # 1. instantiation of the Build class with the options (Github token) and the temp directory to work with
+    # 1. Instantiation of the Build class with the options (Github token) and the temp directory to work with
     # 2. Load all configuration needed to build the doc
     # 3. Retrieve the list of content to work with and updates it based of the configuration specification
     # 4. Actually build the documentation with the udpated list of content.
