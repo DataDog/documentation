@@ -96,7 +96,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
             )
         elif getenv("LOCAL") == 'True':
             print(
-                "\x1b[33mWARNING\x1b[0m:No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+                "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
             content["action"] = "Not Available"
         else:
             print(
