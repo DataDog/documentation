@@ -12,6 +12,7 @@ def pull_and_push_file(content, content_dir):
     pushed it to the doc
     See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-files to learn more
     :param content: object with a file_name, a file_path, and options to apply
+    :param content_dir: The directory where content should be put
     """
     with open("".join(content["globs"]), mode="r+") as f:
         file_content = f.read()
