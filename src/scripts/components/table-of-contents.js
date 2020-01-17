@@ -190,7 +190,7 @@ function onLoadTOCHandler() {
         document.querySelector('.js-toc-title').classList.add('d-none');
         tocMobileToggle.classList.add('d-none');
         document.querySelector('.js-toc-edit-btn').classList.add('d-none');
-    } else if (window.innerWidth < 991) {
+    } else if (window.innerWidth < 991 && tocContainer) {
         tocContainer.classList.remove('toc-container');
         tocContainer.classList.add('toc-container-mobile');
         tocMobileToggle.classList.remove('d-none');
@@ -205,11 +205,11 @@ window.addEventListener('resize', function() {
         document.querySelector('.js-toc-title').classList.add('d-none');
         tocMobileToggle.classList.add('d-none');
         document.querySelector('.js-toc-edit-btn').classList.add('d-none');
-    } else if (window.innerWidth < 991) {
+    } else if (window.innerWidth < 991 && tocContainer) {
         tocContainer.classList.remove('toc-container');
         tocContainer.classList.add('toc-container-mobile');
         tocMobileToggle.classList.remove('d-none');
-    } else {
+    } else if (tocContainer){
         closeMobileTOC();
         tocContainer.classList.add('toc-container');
         tocContainer.classList.remove('toc-container-mobile');
