@@ -17,9 +17,9 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Metrics without Limits provides the ability to customize tagging on all metric types in-app without having to redeploy or change any code. Metrics without Limits is now in public beta. Interested? <a href="/help">Contact Datadog support to join</a>.
+<strong>Metrics without Limits is now in public beta.</strong> Metrics without Limits provides the ability to customize tagging on all metric types in-app without having to redeploy or change any code. Interested? <a href="/help">Contact Datadog support for more information</a>.<br><br>
 
-**Note**: Review the [custom metrics billing page][1] to learn how custom tagging effects billing.
+<strong>Note:</strong> Review the <a href="/account_management/billing/custom_metrics">custom metrics billing page</a> to learn how custom tagging effects billing.
 </div>
 
 ### Metric data
@@ -105,4 +105,3 @@ Looking at the JSON, the query can be broken out by space aggregation, metric na
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/billing/custom_metrics
