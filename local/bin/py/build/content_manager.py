@@ -71,7 +71,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
                 repo_name,
                 content["globs"],
             )
-        elif github_token != "False":
+        elif github_token != "false":
             print(
                 "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
                     content["repo_name"]
@@ -96,7 +96,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
             )
         elif getenv("LOCAL") == 'True':
             print(
-                "\x1b[33mWARNING\x1b[0m: Local mode detected: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
+                "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
             content["action"] = "Not Available"
         else:
             print(
@@ -151,7 +151,7 @@ def prepare_content(configuration, github_token, extract_dir):
     except:
         if getenv("LOCAL") == 'True':
             print(
-                "\x1b[33mWARNING\x1b[0m: Local mode detected: Downloading files failed, documentation is now in degraded mode.")
+                "\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode.")
         else:
             print(
                 "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build.")

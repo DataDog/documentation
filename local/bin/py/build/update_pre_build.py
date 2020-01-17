@@ -83,7 +83,7 @@ class Build:
         except:
             if getenv("LOCAL") == 'True':
                 print(
-                    "\x1b[33mWARNING\x1b[0m: Local mode detected: Integration merge failed, documentation is now in degraded mode.")
+                    "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
             else:
                 print(
                     "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
