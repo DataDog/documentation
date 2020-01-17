@@ -27,7 +27,7 @@ To make it available from *any host*, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
-```
+```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -36,28 +36,30 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
+
 ## Docker APM Agent Environment Variables
 
 List of all environment variables available for tracing within the Docker Agent:
 
-| Environment variable       | Description                                                                                                               |
-| ------                     | ------                                                                                                                    |
-| `DD_API_KEY`               | [Datadog API Key][1]                                                                                                      |
-| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                      |
-| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                    |
-| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                   |
-| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                       |
-| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                           |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                              |
-| `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window.                                                            |
-| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu` |
-| `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                          |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                             |
-| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>. |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][2] with the configuration parameter in the Tracing Client.|
-| `DD_APM_ENV`               | Sets the default [environment][3] for your traces.                                                                        |
-| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                   |
-| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                       |
+| Environment variable       | Description                                                                                                                                                                                                                                                                                                                             |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_API_KEY`               | [Datadog API Key][1]                                                                                                                                                                                                                                                                                                                    |
+| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                                    |
+| `DD_REPLACE_TAGS`          | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                                        |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                           |
+| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                                 |
+| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                                     |
+| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                         |
+| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                                                                                                                                                                                                                                            |
+| `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window.                                                                                                                                                                                                                                                                          |
+| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu`                                                                                                                                                                                                               |
+| `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                                       |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                                                                                                                                                                                                                                           |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>.                                                                                                                                                                    |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of `\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1`. i.e. `my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1`. You can also [enable it automatically][3] with the configuration parameter in the Tracing Client. |
+| `DD_APM_ENV`               | Sets the default [environment][4] for your traces.                                                                                                                                                                                                                                                                                      |
+| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                             |
+| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                                     |
 
 ## Tracing from other containers
 
@@ -116,8 +118,10 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
+
 {{% /tab %}}
 {{% tab "Python" %}}
+
 ```python
 from ddtrace import tracer
 
@@ -126,16 +130,20 @@ tracer.configure(
     port=8126,
 )
 ```
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
+
 ```ruby
 Datadog.configure do |c|
   c.tracer hostname: 'datadog-agent',
            port: 8126
 end
 ```
+
 {{% /tab %}}
 {{% tab "Go" %}}
+
 ```go
 package main
 
@@ -146,14 +154,17 @@ func main() {
     defer tracer.Stop()
 }
 ```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
+
 ```javascript
 const tracer = require('dd-trace').init({
   hostname: 'datadog-agent',
   port: 8126
 })
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,5 +186,6 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /tracing/app_analytics/#automatic-configuration
-[3]: /tracing/send_traces
+[2]: /tracing/guide/security/#replace-rules
+[3]: /tracing/app_analytics/#automatic-configuration
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment

@@ -24,7 +24,7 @@ docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 
 For example, the following example is a valid Autodiscovery configuration for a Redis template being loaded from a Docker label annotation&mdash;not the default `redisdb.d/auto_conf.yaml` file:
 
-```
+```text
 # docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 .
 ..
@@ -47,7 +47,7 @@ Auto-discovery IDs:
 
 The following examples show issues that could appear when failing to load a valid Autodiscovery configuration for a Redis template:
 
-```
+```text
 # docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 .
 ..

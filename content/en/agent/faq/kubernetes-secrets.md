@@ -3,11 +3,11 @@ title: How do I use Kubernetes secrets to set my API key?
 kind: faq
 ---
 
-In Kubernetes, a `secret` object enables you to store sensitive information, such as an API key. 
+In Kubernetes, a `secret` object enables you to store sensitive information, such as an API key.
 
 To use Kubernetes `secret`s to set your API key, first encode your plaintext API key using `base_64`:
 
-```
+```shell
 echo -n <DD_API_KEY> | base64
 ```
 
@@ -17,7 +17,7 @@ Then, uncomment the "Secret" manifest section and the `valueFrom` section of the
 
 Secret manifest section:
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -31,7 +31,7 @@ data:
 
 `valueFrom` section of the `DD_API_KEY` environment variable:
 
-```
+```yaml
 valueFrom:
   secretKeyRef:
     name: datadog-secret

@@ -23,7 +23,7 @@ supported_os:
 ---
 ## 概要
 
-ベースシステムから CPU、IO、負荷、メモリ、スワップ、アップタイムなどに関するメトリクスを取得します。ほかにも、以下のシステム関連のチェックがあります。
+ベースシステムから CPU、IO、負荷、メモリ、スワップ、アップタイムなどに関するメトリクスを取得します。以下のチェックもシステムに関連しています。
 
 * [Directory チェック][1] - 指定したディレクトリのファイルからメトリクスをキャプチャします。
 * [Disk チェック][2] - ディスクに関するメトリクスをキャプチャします。
@@ -31,14 +31,26 @@ supported_os:
 
 ## セットアップ
 
+### インストール
+
 System チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-## 収集されたデータ
-### メトリック
+## 収集データ
+
+### メトリクス
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
+### イベント
+
+System チェックには、イベントは含まれません。
+
+### サービスのチェック
+
+System チェックには、サービスのチェック機能は含まれません。
+
 ### タグ
+
 すべてのシステムメトリクスは、自動的に `host:<HOST_NAME>` でタグ付けされます。また、以下のネームスペースは `device:<DEVICE_NAME>` でタグ付けされます。
 
 * `system.disk.*`
@@ -46,75 +58,87 @@ System チェックは [Datadog Agent][4] パッケージに含まれていま�
 * `system.io.*`
 * `system.net.*`
 
-## Agent チェック: システムコア
+<h1 id="system-core"><a href="#system-core">System コア</a></h1>
 
 このチェックは、ホスト上の CPU コアの数と CPU 時間 (システム、ユーザー、アイドル時間など) を収集します。
 
-### セットアップ
-#### インストール
+## セットアップ
 
-system_core チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+### インストール
 
-#### コンフィグレーション
+システムコアチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-1. Agent のディレクトリのルートにある `conf.d/` フォルダーの `system_core.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル system_core.d/conf.yaml][5] を参照してください。
+### コンフィギュレーション
 
+1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_core.d/conf.yaml` ファイルを編集します。使用可能な全構成オプションの詳細については、[サンプル system_core.d/conf.yaml][6] を参照してください。**注**: チェックを有効にするには、`instances` に少なくとも 1 つのエントリが必要です。例:
+
+    ```yaml
+      init_config:
+      instances:
+        - foo: bar
     ```
-    init_config:
 
-    instances:
-        - {}
-    ```
-
-    `instances` に項目を 1 つ指定するだけで、チェックが有効になります。項目の内容は関係ありません。
-
-2. [Agent を再起動][6]すると、チェックが有効になります。
+2. [Agent を再起動します][7]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `system_core` を探します。
+[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_core` を探します。
 
-### 収集データ
-#### メトリクス
+## 収集データ
+
+### メトリクス
 
 {{< get-metrics-from-git "system_core" >}}
 
 プラットフォームによっては、このチェックは他の CPU 時間メトリクスも収集します。たとえば、Windows では `system.core.interrupt` が、Linux では `system.core.iowait` が収集されます。
 
-## Agent チェック: Swap
+### イベント
+
+System コアチェックには、イベントは含まれません。
+
+### サービスのチェック
+
+System コアチェックには、サービスのチェック機能は含まれません。
+
+<h1 id="system-swap"><a href="#system-swap">System スワップ</a></h1>
 
 このチェックは、ホストがスワップイン/スワップアウトしたバイト数を監視します。
 
+## セットアップ
+
 ### インストール
 
-システムの Swap チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+システムのスワップチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
-1. Agent のディレクトリのルートにある `conf.d/` フォルダーの `system_swap.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル system_swap.d/conf.yaml][7] を参照してください。
+1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_swap.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル system_swap.d/conf.yaml][8] を参照してください。**注**: このチェックは初期コンフィギュレーションを受け取りません。
 
-    ```
-    # This check takes no initial configuration
-    init_config:
-
-    instances: [{}]
-    ```
-
-2. [Agent を再起動][6]すると、スワップメトリクスの収集が開始されます。
+2. [Agent を再起動します][7]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `system_swap` を探します。
+[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_swap` を探します。
 
-### 収集データ
-#### メトリクス
+## 収集データ
+
+### メトリクス
 
 {{< get-metrics-from-git "system_swap" >}}
+
+### イベント
+
+System スワップチェックには、イベントは含まれません。
+
+### サービスのチェック
+
+System スワップチェックには、サービスのチェック機能は含まれません。
 
 [1]: /ja/integrations/directory
 [2]: /ja/integrations/disk
 [3]: /ja/integrations/process
 [4]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
-[6]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example
+[5]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
+[7]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example

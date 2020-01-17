@@ -75,4 +75,4 @@ Pour obtenir plus d'informations sur l'utilisation de ConfigMaps dans Kubernetes
 [10]: /fr/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [11]: /fr/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [12]: /fr/integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[13]: /fr/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[13]: /fr/agent/kubernetes/daemonset_setup/#configure-rbac-permissions

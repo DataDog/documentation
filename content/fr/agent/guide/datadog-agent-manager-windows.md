@@ -7,6 +7,7 @@ further_reading:
     text: Utilisation de base de l'Agent pour l'Agent Windows
 ---
 ## Présentation
+
 L'interface graphique de Datadog Agent Manager v6 repose sur l'utilisation d'un navigateur. Vous pouvez configurer le port sur lequel elle s'exécute dans votre fichier `datadog.yaml`. L'interface graphique est désactivée lorsque le port est défini sur `-1`. Par défaut, elle est activée sur le port 5002, pour Windows et Mac, et désactivée sur Linux.
 
 ### Exigences
@@ -18,6 +19,7 @@ L'interface graphique de Datadog Agent Manager v6 repose sur l'utilisation d'un 
 3. Pour des raisons de sécurité, l'interface graphique est uniquement accessible à partir de l'interface réseau locale (localhost/127.0.0.1). Vous devez donc utiliser le même host que celui exécuté par l'Agent. Ainsi, vous ne pouvez pas exécuter l'Agent sur une machine virtuelle ou un conteneur et y accéder à partir de la machine du host.
 
 ### Démarrer Datadog Agent Manager
+
 Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Manager pour gérer graphiquement l'Agent.
 
 À partir du menu Démarrer de Windows :
@@ -27,6 +29,7 @@ Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Man
 * Choisissez `Exécuter en tant qu'administrateur`.
 
 Depuis une invite Powershell avec élévation de privilèges :
+
 ```powershell
 & "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
 ```
@@ -34,10 +37,13 @@ Depuis une invite Powershell avec élévation de privilèges :
 Datadog Agent Manager se lance dans votre navigateur Web par défaut. L'adresse Web est `http://127.0.0.1:5002`.
 
 ## Options
+
 Les sections suivantes contiennent des informations sur les options de la barre de navigation de gauche.
 
 ### Statut
+
 #### General
+
 La page de statut General s'affiche par défaut lors du lancement de Datadog Agent Manager. Elle contient les sections suivantes :
 
 | Section     | Description                                                                     |
@@ -54,7 +60,9 @@ La page de statut General s'affiche par défaut lors du lancement de Datadog Age
 | DogStatsD   | Statistiques sur les données envoyées via DogStatsD.                                         |
 
 #### Collector
+
 La page de statut Collector affiche des détails sur les checks de l'Agent en cours d'exécution, par exemple :
+
 ```text
 cpu
    Instance ID: cpu [OK]
@@ -66,7 +74,9 @@ cpu
 ```
 
 ### Log
+
 La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les logs peuvent être triés du plus récent au plus ancien et vice-versa.
+
 ```text
 2019-07-10 17:46:04 EDT | INFO | (runner.go:246 in work) | Running check cpu
 2019-07-10 17:46:04 EDT | INFO | (runner.go:302 in work) | Done running check cpu
@@ -90,23 +100,29 @@ La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les lo
 ```
 
 ### Settings
-La page Settings affiche le contenu du principal fichier de configuration de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
+
+La page Settings affiche le contenu du fichier de configuration principal de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
 
 Consultez le [fichier d'exemple config_template.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
 ### Checks
+
 #### Manage checks
+
 La page Manage checks affiche le contenu des fichiers de configuration de check activés. Vous pouvez modifier directement ces fichiers depuis Datadog Agent Manager. Après avoir effectué une modification, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
 
 Pour ajouter un check, sélectionnez **Add a Check** dans le menu déroulant. La liste de tous les checks pouvant être installés s'affiche alors. Consultez la page d'[intégration][3] du check de votre choix pour obtenir des détails sur sa configuration.
 
-#### Checks summary
-La page Checks summary contient la liste des checks en cours d'exécution, le nombre d'instances pour chaque check, ainsi que le statut du check.
+#### Sommaire des checks
+
+Le sommaire des checks contient la liste des checks en cours d'exécution, le nombre d'instances pour chaque check, ainsi que le statut du check.
 
 ### Flare
+
 Si vous rencontrez des difficultés avec l'Agent, la page Flare facilite le dépannage avec l'équipe d'[assistance Datadog][4]. Entrez votre numéro de ticket (facultatif) et votre adresse e-mail, puis cliquez sur **Submit**. Cela envoie une copie des logs et des fichiers de configuration de votre Agent à l'assistance Datadog. La documentation sur le [Flare de l'Agent][5] contient davantage d'informations sur les flares.
 
 ### Redémarrer l'Agent
+
 Cliquez sur **Restart Agent** dans la barre de navigation de gauche pour redémarrer immédiatement l'Agent. Aucune page ni aucun message de confirmation ne s'affiche. Après avoir redémarré l'Agent, la page de [statut General](#general) s'affiche.
 
 ## Pour aller plus loin

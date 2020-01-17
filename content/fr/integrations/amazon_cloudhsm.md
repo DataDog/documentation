@@ -20,7 +20,9 @@ Lorsqu'un HSM de votre compte reçoit une commande à partir des outils de ligne
 Datadog s'intègre à AWS CloudHSM via une fonction Lambda qui transmet les logs de CloudHSM à la solution Log Management de Datadog.
 
 ## Implémentation
+
 ### Collecte de logs
+
 #### Activer les logs CloudHSM
 
 Les logs d'audit sont activés par défaut pour CloudHSM.
@@ -36,6 +38,7 @@ Les logs d'audit sont activés par défaut pour CloudHSM.
 Accédez ensuite à la [section Log de Datadog][2] pour commencer à explorer vos logs !
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function

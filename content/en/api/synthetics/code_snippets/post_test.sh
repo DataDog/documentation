@@ -1,7 +1,7 @@
 ### To create an API test
 
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -X POST \
 -H 'Content-Type: application/json' \
@@ -64,8 +64,8 @@ curl -X POST \
 
 ### To create a browser test
 
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
 
 curl  -X POST \
 -H "Content-type: application/json" \
@@ -82,7 +82,14 @@ curl  -X POST \
       ],
       "tick_every":3600,
       "min_failure_duration":0,
-      "min_location_failed":1
+      "min_location_failed":1,
+      "monitor_options": {
+         "renotify_interval": 30
+      },
+      "retry": {
+        "count": 2,
+        "interval": 30
+      }
    },
    "name":"Test Doc",
    "config":{

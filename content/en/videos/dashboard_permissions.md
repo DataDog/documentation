@@ -3,7 +3,7 @@ title: Matt's Quick Tips - Dashboard Permissions
 kind: video
 language: en
 wistiaid: e3xlxsjkwy
-videos:
+"video-categories":
     - Introduction
     - Dashboards
     - Permissions
@@ -16,4 +16,4 @@ Our customers love the ability to [create dashboards][1] that make the most sens
 But sometimes you want to make sure your creation isn't changed by someone else.  
 Now lock down the dashboard to keep it in your favorite state. Of course, your colleagues can still clone it if they want to build on your greatness.
 
-[1]: /graphing/dashboards
+[1]: /dashboards

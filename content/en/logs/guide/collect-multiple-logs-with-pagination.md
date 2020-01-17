@@ -28,15 +28,16 @@ Start by creating a query to retrieve your logs for a given context, for example
 
 ```bash
 curl -X POST \
-  'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "limit":50,
-    "query": "*",
-    "sort": "desc",
-    "time": {
-        "from": "2019-08-07T00:00:00Z",
-        "to": "2019-08-06T00:00:00Z"
+'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
+-H 'content-type: application/json' \
+-d '{
+        "limit": 50,
+        "query": "*",
+        "sort": "desc",
+        "time": {
+            "from": "2019-08-07T00:00:00Z",
+            "to": "2019-08-06T00:00:00Z"
+        }
     }'
 ```
 
@@ -44,12 +45,10 @@ Example result:
 
 ```json
 {
-    "logs": [
-        "(...)"
-    ],
-    "nextLogId": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
-    "status": "done",
-    "requestId": "cDdWYB0tAm1TYHFsQVZ2R05QWm9nQXx5cFM4aExkLVFPNlhZS21RTGxTUGZ3"
+  "logs": ["(...)"],
+  "nextLogId": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
+  "status": "done",
+  "requestId": "cDdWYB0tAm1TYHFsQVZ2R05QWm9nQXx5cFM4aExkLVFPNlhZS21RTGxTUGZ3"
 }
 ```
 
@@ -61,16 +60,17 @@ To retrieve the next page of logs, re-send your query, but this time with the `s
 
 ```bash
 curl -X POST \
-  'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "limit": 1000,
-    "query": "*",
-    "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
-    "sort": "desc",
-    "time": {
-        "from": "2019-08-07T00:00:00Z",
-        "to": "2019-08-06T00:00:00Z"
+'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
+-H 'Content-Type: application/json' \
+-d '{
+        "limit": 1000,
+        "query": "*",
+        "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
+        "sort": "desc",
+        "time": {
+            "from": "2019-08-07T00:00:00Z",
+            "to": "2019-08-06T00:00:00Z"
+        }
     }'
 ```
 
@@ -78,12 +78,10 @@ Which returns these results:
 
 ```json
 {
-    "logs": [
-        "(...)"
-    ],
-    "nextLogId": "EEEEEEEEEEEEEEEEFFFFFFFFFFFFFFGGGGGGGGGGHHHHHHHHHH",
-    "status": "done",
-    "requestId": "YVhETk5jQy1TQkDFSFjqU3fhQMh5QXx6M2pSUlA1ODhXNk5PT2NOSUVndThR"
+  "logs": ["(...)"],
+  "nextLogId": "EEEEEEEEEEEEEEEEFFFFFFFFFFFFFFGGGGGGGGGGHHHHHHHHHH",
+  "status": "done",
+  "requestId": "YVhETk5jQy1TQkDFSFjqU3fhQMh5QXx6M2pSUlA1ODhXNk5PT2NOSUVndThR"
 }
 ```
 

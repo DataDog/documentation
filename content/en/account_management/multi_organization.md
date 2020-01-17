@@ -22,6 +22,7 @@ Here's a two-minute video walkthrough:
 
 {{< wistia tg9ufqbin9>}}
 <br>
+
 ## Child organizations
 
 ### Create
@@ -62,5 +63,5 @@ To configure SAML for multi-organizations, use the following procedure:
 [5]: mailto:success@datadoghq.com
 [6]: /api
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[8]: /graphing/dashboards/screenboard/#backup-my-screenboard
+[8]: /dashboards/screenboards/#backup-my-screenboard
 [9]: /monitors/manage_monitor

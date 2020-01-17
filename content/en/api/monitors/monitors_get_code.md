@@ -1,7 +1,7 @@
 ---
 title: Get a monitor's details
 type: apicode
-order: 26.02
+order: 27.02
 external_redirect: /api/#get-a-monitor-s-details
 ---
 

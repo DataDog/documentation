@@ -20,7 +20,6 @@ Alcide fournit des fonctionnalités d'audit de Kubernetes et de surveillance des
 
 ## Implémentation
 
-
 ### Installation
 
 Datadog active automatiquement un pipeline de traitement de logs lorsque des logs Alcide sont détectés. Vous n'avez donc rien à installer.

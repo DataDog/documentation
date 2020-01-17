@@ -6,11 +6,12 @@ assets:
 categories:
   - web
   - log collection
+  - autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md'
-description: L'intégration HAProxy vous permet de recueillir des métriques sur les performances et la disponibilité. metrics from HAProxy instances.
+description: L'intégration HAProxy vous permet de recueillir des métriques sur les performances et la disponibilité à partir de vos instances HAProxy.
 display_name: HAProxy
 git_integration_title: haproxy
 guid: cd935030-131f-4545-8b6a-a4ca21b8565b
@@ -27,8 +28,8 @@ process_signatures:
   - haproxy
   - haproxy-master
   - haproxy-controller
-public_title: Intégrations Datadog/HAProxy
-short_description: 'Surveillez des métriques clés concernant les requêtes, les réponses, les erreurs, les octets traités, etc. and more.'
+public_title: Intégration Datadog/HAProxy
+short_description: 'Surveillez des métriques clés concernant les requêtes, les réponses, les erreurs, les octets traités, et plus encore.'
 support: core
 supported_os:
   - linux
@@ -47,19 +48,9 @@ Enregistrez l'activité HAProxy dans Datadog pour :
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check HAProxy est fourni avec l'Agent. Pour commencer à recueillir vos logs et métriques HAProxy, suivez ces étapes :
-
-1. [Installez l'Agent][3] sur vos serveurs HAProxy.
-2. Assurez-vous d'activer les statistiques dans votre configuration HAProxy. [Lisez notre article de blog sur la collecte de métriques HAProxy pour en savoir plus][4].
-
-### Configuration
-
-Modifiez le fichier `haproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) HAProxy.
-Consultez le [fichier d'exemple haproxy.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+Le check HAProxy est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur HAProxy.
 
 #### Préparer HAProxy
 
@@ -67,37 +58,56 @@ L'Agent recueille des métriques via un endpoint stats :
 
 1. Configurez un endpoint dans votre fichier `haproxy.conf` :
 
-```
-    listen stats # Définir une section d'écoute intitulée « stats »
-    bind :9000 # Effectuer une écoute sur localhost:9000
-    mode http
-    stats enable  # Activer la page des statistiques
-    stats hide-version  # Masquer la version de HAProxy
-    stats realm Haproxy\ Statistics  # Texte du titre de la fenêtre contextuelle
-    stats uri /haproxy_stats  # URI des statistiques
-    stats auth NomUtilisateur:MotdePasse # Identifiants d'authentification
-```
+    ```conf
+      listen stats # Define a listen section called "stats"
+      bind :9000 # Listen on localhost:9000
+      mode http
+      stats enable  # Enable stats page
+      stats hide-version  # Hide HAProxy version
+      stats realm Haproxy\ Statistics  # Title text for popup window
+      stats uri /haproxy_stats  # Stats URI
+      stats auth Username:Password  # Authentication credentials
+    ```
 
-2. [Redémarrez HAProxy pour activer l'endpoint stats][7].
+2. [Redémarrez HAProxy pour activer l'endpoint stats][3].
 
-#### Collecte de métriques
+### Configuration
+#### Host
 
-Ajoutez ce bloc de configuration à votre fichier `haproxy.d/conf.yaml` pour commencer à recueillir vos [métriques HAProxy](#metriques) :
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-```
-  init_config:
+Modifiez le fichier `haproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) HAProxy. Consultez le [fichier d'exemple haproxy.d/conf.yam][5] pour découvrir toutes les options de configuration disponibles.
 
-  instances:
-      - url: https://localhost:9000/haproxy_stats
-        username: <votre_nomutilisateur>
-        password: <votre_motdepasse>
-```
+##### Collecte de métriques
 
-Consultez le [fichier d'exemple haproxy.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. Ajoutez ce bloc de configuration à votre fichier `haproxy.d/conf.yaml` pour commencer à recueillir vos [métriques HAProxy](#metriques) :
 
-*  [Redémarrez l'Agent][8].
+    ```yaml
+      init_config:
 
-#### Collecte de logs
+      instances:
+
+          ## @param url - string - required
+          ## Haproxy URL to connect to gather metrics.
+          ## Set the according <USERNAME> and <PASSWORD> or use directly a unix stats
+          ## or admin socket: unix:///var/run/haproxy.sock
+          #
+        - url: http://localhost/admin?stats
+
+          ## @param username - string - optional
+          ## The username to use if services are behind basic auth.
+          #
+          username: "<USERNAME>"
+
+          ## @param password - string - optional
+          ## The password to use if services are behind basic or NTLM auth.
+          #
+          password: "<PASSWORD>"
+    ```
+
+2. [Redémarrez l'Agent][6].
+
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -118,53 +128,80 @@ Consultez le [fichier d'exemple haproxy.yaml][6] pour découvrir toutes les opti
             sourcecategory: http_web_access
     ```
 
-    Modifiez la valeur du paramètre `service` et configurez-le pour votre environnement. Consultez le [fichier d'exemple haproxy.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+    Modifiez la valeur du paramètre `service` et configurez-le pour votre environnement. Consultez le [fichier d'exemple haproxy.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][8].
+3. [Redémarrez l'Agent][6].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                                     |
+|----------------------|-------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `haproxy`                                                                                 |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                             |
+| `<CONFIG_INSTANCE>`  | `{"url": "https://%%host%%/admin?stats","username":"<NOMUTILISATEUR>","password":"<MOTDEPASSE>"}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte de logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
+
+| Paramètre      | Valeur                                                |
+|----------------|------------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "haproxy", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 
-[Lancez la sous-commande du statut de l'Agent][10] et cherchez `haproxy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][9] et cherchez `haproxy` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "haproxy" >}}
 
 
 ### Événements
+
 Le check HAProxy n'inclut aucun événement.
 
 ### Checks de service
+
 **haproxy.backend_up** :<br>
 Convertit la page de statut HAProxy en checks de service.
 Renvoie `CRITICAL` pour un service donné si HAProxy le signale comme `down`.
 Renvoie `OK` pour les états `maint`, `ok` et tout autre état.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
-* [Surveillance des métriques de performance HAProxy][13]
-* [Comment recueillir des métriques HAProxy][14]
-* [Surveiller HAProxy avec Datadog][15]
-* [Configuration multi-processus de HAProxy][16]
+* [Surveillance des métriques de performance HAProxy][12]
+* [Comment recueillir des métriques HAProxy][13]
+* [Surveiller HAProxy avec Datadog][14]
+* [Configuration multi-processus de HAProxy][15]
+* [Comment recueillir des métriques HAProxy][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/39f2cb0977c0e0446a0e905d15d2e9a4349b3b5d/haproxy/images/haproxy-dash.png
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
-[7]: https://www.haproxy.org/download/1.7/doc/management.txt
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/haproxy/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help
-[13]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
-[14]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[15]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[16]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://www.haproxy.org/download/1.7/doc/management.txt
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[8]: https://docs.datadoghq.com/fr/agent/docker/log/
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/integrations-core/blob/master/haproxy/metadata.csv
+[11]: https://docs.datadoghq.com/fr/help
+[12]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+[13]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+[14]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+[15]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process
 
 
 {{< get-dependencies >}}

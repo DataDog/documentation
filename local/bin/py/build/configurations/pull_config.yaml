@@ -1,0 +1,131 @@
+---
+- org_name: jenkinsci
+
+  repos:
+  - repo_name: datadog-plugin
+
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/integrations/'
+        file_name: 'jenkins.md'
+        front_matters:
+          title: Datadog-Jenkins Integration
+          kind: documentation
+
+- org_name: DataDog
+
+  repos:
+  - repo_name: dogweb
+
+    contents:
+
+    - action: integrations
+      branch: prod
+      globs:
+      - integration/**/*_metadata.csv
+      - integration/**/manifest.json
+      - integration/**/service_checks.json
+      - integration/**/README.md
+
+  - repo_name: integrations-core
+    contents:
+
+    - action: integrations
+      branch: master
+      globs:
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/assets/service_checks.json"
+      - "*/README.md"
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+      - docs/dev/*.md
+      options:
+        dest_dir: '/developers/integrations/'
+        path_to_remove: 'docs/dev/'
+
+  - repo_name: integrations-extras
+    contents:
+
+    - action: integrations
+      branch: master
+      globs:
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/assets/service_checks.json"
+      - "*/README.md"
+
+  - repo_name: heroku-buildpack-datadog
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'heroku.md'
+        front_matters:
+          title: Datadog Heroku Buildpack
+          kind: documentation
+          aliases:
+          - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+
+  - repo_name: dd-trace-rb
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/GettingStarted.md'
+      options:
+        dest_path: '/tracing/setup/'
+        file_name: 'ruby.md'
+        front_matters:
+          title: Tracing Ruby Applications
+          kind: documentation
+          aliases:
+          - /tracing/ruby/
+          - /tracing/languages/ruby/
+          - /agent/apm/ruby/
+
+  - repo_name: datadog-cloudformation-resources
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - 'README.md'
+      options:
+        dest_path: '/developers/'
+        file_name: 'amazon_cloudformation.md'
+        front_matters:
+          title: Datadog-Amazon CloudFormation
+          kind: documentation
+
+  - repo_name: dd-sdk-android
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/log_collection.md'
+      options:
+        dest_path: '/logs/log_collection/'
+        file_name: 'android.md'
+        front_matters:
+          title: Android Log Collection
+          kind: documentation
+          description: "Collect logs from your Android applications."
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "logs/explorer"
+              tag: "Documentation"
+              text: "Learn how to explore your logs"

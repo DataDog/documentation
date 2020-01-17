@@ -17,7 +17,7 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 Find below the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
-| ---------- | --------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+|------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `name`     | string          | yes      | -             | The name of the service check.                                                                                |
 | `status`   | int             | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
 | `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
@@ -53,7 +53,7 @@ Here is an example of a dummy Agent check sending only one service check periodi
 
 6. Ensure that your custom check is correctly running with the [Agent status command][4]. You should see something like this:
 
-    ```
+    ```text
     =========
     Collector
     =========
@@ -74,9 +74,10 @@ Here is an example of a dummy Agent check sending only one service check periodi
 
         (...)
     ```
+
 7. Finally, go to your [Datadog Service Check summary page][5] to see your Service Check reporting:
 
-{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks" responsive="true" style="width:80%;">}}
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks"  style="width:80%;">}}
 
 ## Further reading
 

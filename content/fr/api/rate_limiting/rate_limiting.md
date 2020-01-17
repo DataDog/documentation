@@ -5,6 +5,7 @@ order: 4
 external_redirect: '/api/#limites-de-debit'
 ---
 ## Limites de débit
+
 Certains endpoints de l'API ont une limite de débit. Lorsque vous dépassez un certain nombre de requêtes dans une certaine période, nous renvoyons une erreur.
 
 Pour les endpoints API à débit limité, nous renvoyons les en-têtes afin que vous puissiez vérifier où vous vous situez par rapport à votre limite. Si vous dépassez votre limite, consultez ces en-têtes pour déterminer à quel moment vous pourrez renvoyer ces données.

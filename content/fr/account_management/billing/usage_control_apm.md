@@ -21,6 +21,7 @@ La fonctionnalité App Analytics est facturée en fonction de la durée de réte
 Les tarifs correspondent à une facturation annuelle. Contactez le [service commercial][5] ou votre [chargé de compte][6] pour discuter d'éventuels tarifs préférentiels pour votre compte.
 
 ### Estimateur de spans analysées
+
 L'outil [Analyzed Span Estimator][7] est conçu pour vous aider à choisir les services pour lesquels activer App Analytics afin de mieux maîtriser votre utilisation et vos coûts.
 
 Pour estimer le nombre total de spans analysées qui devraient être envoyées chaque jour ou chaque mois par un service, suivez ces étapes :
@@ -30,7 +31,6 @@ Pour estimer le nombre total de spans analysées qui devraient être envoyées c
 3. La valeur **Total Estimated APM Volume** représente le volume total estimé de spans analysées pour tous les services, par jour et par mois. Chaque ligne correspondant au service représente le volume estimé de spans analysées pour ce service, par jour.
 
   {{< img src="tracing/faq/apm_span_estimator.png" alt="Estimateur de spans analysées">}}
-
 4. Pour estimer le coût total, multipliez le volume total par le [prix de la durée de rétention des spans analysées][8].
 
 Par exemple, si vous avez 1 750 000 000 spans analysées par mois et que celles-ci sont conservées pendant 15 jours (rétention par défaut), vous pouvez effectuer le calcul suivant :
@@ -43,9 +43,7 @@ Par défaut, les [filtres de spans][9] sont configurés de façon à ce que 100�
 
 Pour réduire votre facture, vous pouvez réduire le nombre de spans analysées facturables en [appliquant des filtres][9]. L'[échantillonnage des traces][10] ne sera pas affecté. Lorsqu'un service est filtré et que moins de 100 % des spans analysées sont envoyées, l'analyse des spans analysées est mise à l'échelle pour afficher une estimation par défaut, et vous avez la possibilité d'afficher la valeur filtrée.
 
-
 Vous pouvez également choisir d'activer App Analytics pour des services ou des intégrations spécifiques dans le code en suivant [les instructions correspondant au langage utilisé][11].
-
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/account_management/billing/apm_distributed_tracing

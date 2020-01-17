@@ -6,7 +6,6 @@ disable_toc: true
 ---
 
 
-
 {{< whatsnext desc="Getting started with APM" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. Alert on anomalies in database services p99 latency [3 mins]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Compare p50 latency week over week for a service [2 mins]{{< /nextlink >}}
@@ -22,7 +21,7 @@ disable_toc: true
     {{< nextlink href="videos/apm_dashboards_trace_metrics/" >}}Datadog Dashboards and Trace Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="Further Reading" >}}
+{{< whatsnext desc="Advanced Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
@@ -32,4 +31,7 @@ disable_toc: true
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#tracing" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Adding Span Tags{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configuring App Analytics via the Agent{{< /nextlink >}}
 {{< /whatsnext >}}

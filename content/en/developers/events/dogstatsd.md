@@ -18,7 +18,7 @@ further_reading:
 
 After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
-```
+```text
 event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <SOURCE_TYPE_NAME>, <ALERT_TYPE>, <TAGS>)
 ```
 
@@ -202,5 +202,5 @@ $statsd->event('An error occurred.',
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /graphing/event_stream
+[2]: /events
 [3]: /integrations/faq/list-of-api-source-attribute-value

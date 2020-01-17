@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" >}}
 
 ## Présentation
 
@@ -30,7 +30,7 @@ Cette fonctionnalité vous permet par exemple de vérifier si un processus a dé
 
 Choisissez l'option `Live Tail` dans le sélecteur d'intervalle pour activer la vue Live Tail :
 
-{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Sélecteur d'intervalle Live Tail" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Sélecteur d'intervalle Live Tail" >}}
 
 Le nombre d'événements reçus par seconde apparaît en haut à gauche, ainsi que la fréquence d'échantillonnage. Étant donné qu'il est impossible pour un humain d'interpréter un flux de plusieurs milliers de logs par seconde, les flux de logs à haut débit sont échantillonnés.
 
@@ -43,13 +43,13 @@ Utilisez les [fonctions de filtres de la barre de recherche Live Tail](#filtrer
 Personnalisez la vue Live Tail pour mieux mettre en évidence les informations pertinentes de vos logs.
 Cliquez sur l'icône en forme d'engrenage en haut à droite de la page pour activer l'une des options ci-dessous :
 
-{{< img src="logs/live_tail/live_tail_column.png" alt="Colonne Live Tail" responsive="true" style="width:30%;">}}
+{{< img src="logs/live_tail/live_tail_column.png" alt="Colonne Live Tail" style="width:30%;">}}
 
 1. Choisissez d'afficher une, trois ou dix lignes à partir de vos attributs de logs dans votre flux de logs.
 2. Activez ou désactivez les colonnes Date et Message.
 3. Ajoutez n'importe quel attribut de log dans ce volet ou en cliquant directement sur l'attribut :
 
-{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Ajouter en tant que colonne Live Tail" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Ajouter en tant que colonne Live Tail" style="width:50%;">}}
 
 ## Filtrer le flux de logs
 
@@ -62,15 +62,15 @@ Toutes les requêtes valides dans les autres vues le sont également dans la vue
 
 Par exemple, pour rechercher l'attribut `filename` suivant, deux options s'offrent à vous :
 
-{{< img src="logs/live_tail/live_tail_save.png" alt="Enregistrement Live tail" responsive="true" style="width:50%;">}}
+{{< img src="logs/live_tail/live_tail_save.png" alt="Enregistrement Live tail" style="width:50%;">}}
 
 1. Cliquez sur l'attribut et ajoutez-le à votre recherche :
 
-    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Cliquer sur l'attribut Live Tail" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Cliquer sur l'attribut Live Tail" style="width:50%;">}}
 
 2. Utilisez la requête suivante : `@filename:runner.go`.
 
-    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtré" responsive="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtré" style="width:50%;">}}
 
 Pour rechercher tous les logs dont le nombre de lignes est supérieur à 150, utilisez la requête suivante : `@linenumber:>150`.
 
