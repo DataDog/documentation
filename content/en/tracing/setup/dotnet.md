@@ -349,7 +349,7 @@ paket add Datadog.Trace.AspNet --version TRACER_VERSION
 
 ##### Configuration
 
-For the `AspNet` integration, the web config must be configured by listing out the full assembly name, for example:
+For the `AspNet` integration, the web configuration must be configured by listing out the full assembly name, for example:
 
 ```
 <system.webServer>
