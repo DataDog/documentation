@@ -20,7 +20,7 @@ Inside `documentation/` folder, create a `Makefile.config` file from the [Makefi
 
 If you are a Datadog employee, add your [Github personal token][6]
 
-To run the site execute:
+To run the documentation site locally, execute:
 
 | Command                   | Description                                                                                                                                                                                                                             |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -38,18 +38,18 @@ To use the Makefile, create a Makefile.config. See the instructions at the top o
 After you have a config file you can run `make help` to see options:
 
 ```text
-clean-all                 clean everything.
-clean-build               remove build artifacts.
-clean-exe                 remove execs.
-clean-integrations        remove built integrations files.
-clean-node                remove node_modules.
-clean-virt                remove python virtual env.
-clean                     clean all make installs.
-hugpython                 build virtualenv used for tests.
-source-helpers            source the helper functions used in build, test, deploy.
+clean-all                 Clean everything.
+clean-build               Remove build artifacts.
+clean-exe                 Remove execs.
+clean-integrations        Remove built integrations files.
+clean-node                Remove node_modules.
+clean-virt                Remove python virtual env.
+clean                     Clean all make installs.
+hugpython                 Build virtualenv used for tests.
+source-helpers            Source the helper functions used in build, test, deploy.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
-stop                      stop wepack watch/hugo server.
+stop                      Stop wepack watch/hugo server.
 ```
 
 ## Working on Docs
