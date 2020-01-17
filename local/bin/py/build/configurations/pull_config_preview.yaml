@@ -22,6 +22,7 @@
           has_logo: true
           git_integration_title: jenkins
           description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+          short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
           categories:
             - "configuration & deployment"
           doc_link: https://docs.datadoghq.com/integrations/jenkins/
