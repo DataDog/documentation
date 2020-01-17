@@ -11,12 +11,13 @@ if [ ${RUN_SERVER} = true ]; then
 	# integrations
 	if [ ${GITHUB_TOKEN} != false ]; then
 		args="${args} --token ${GITHUB_TOKEN}"
-    update_pre_build.py "${args}"
 	else
 		printf "\033[31m\033[1mNo GITHUB TOKEN was found. Skipping any data sync that relies on pulling from web.\033[0m\n"
 		printf "\033[33m\033[1mAdd all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\nOr use the 'make start-no-pre-build' command to build the doc without any external content.\033[0m\n"
-		update_pre_build.py
+    args="${args} --token 'false'"
 	fi
+
+  update_pre_build.py "${args}"
 
   # placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
