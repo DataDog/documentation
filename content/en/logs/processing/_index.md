@@ -37,13 +37,11 @@ Therefore, you don't need to change how you log, and you don't need to deploy ch
 
 The other benefit to implement a log processing strategy is to implement an [attribute naming convention][6] for your organization.
 
-**Note**: Logs coming from a containerized environment require the use of an [environment variable][7] to override the default source and service values. 
-
 ## Log Processing
 
 ### Integration logs
 
-For integration logs, an [Integration Pipeline][8] is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer. See the ELB logs example below:
+For integration logs, an [Integration Pipeline][7] is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer. See the ELB logs example below:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing"  style="width:70%;">}}
 
@@ -63,11 +61,11 @@ Into this one:
 
 {{< img src="logs/processing/log_post_processing.png" alt="Log post processing"  style="width:50%;">}}
 
-Consult the [Pipelines documentation page][1] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][9].
+Consult the [Pipelines documentation page][1] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][8].
 
 To discover the full list of Processors available, refer to the dedicated [Processor documentation page][2].
 
-If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][10]. There is also a [parsing best practice][11] and [parsing troubleshooting][12] guide.
+If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][9]. There is also a [parsing best practice][10] and [parsing troubleshooting][11] guide.
 
 ## Reserved attributes
 
@@ -86,7 +84,7 @@ By default Datadog generates a timestamp and appends it in a date attribute when
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][13].
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][12].
 
 **Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
 
@@ -96,9 +94,9 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][14], where it is indexed for [full text search][15].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][13], where it is indexed for [full text search][14].
 
-**Note**: If you send a log formatted as JSON with a `message` attribute which contains a JSON object, this JSON object is interpreted as a *string* and *NOT* expanded. Use a [Log Grok processor][4] to parse this JSON object or a [Log remapper processor][16] to remap this JSON object to a non-reserved attribute.
+**Note**: If you send a log formatted as JSON with a `message` attribute which contains a JSON object, this JSON object is interpreted as a *string* and *NOT* expanded. Use a [Log Grok processor][4] to parse this JSON object or a [Log remapper processor][15] to remap this JSON object to a non-reserved attribute.
 
 ### *status* attribute
 
@@ -109,7 +107,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][17].
+If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][16].
 
 ### *host* attribute
 
@@ -121,7 +119,9 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 
 ### *source* attribute
 
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][18].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][17].
+
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][18] to override the default source and service values. 
 
 ### *service* attribute
 
@@ -157,16 +157,16 @@ To change the default values for each of the reserved attributes, go to the [Con
 [4]: /logs/processing/processors/#grok-parser
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: /logs/processing/attributes_naming_convention
-[7]: /agent/docker/log/?tab=nginxdockerfile#examples
-[8]: /logs/processing/pipelines/#integration-pipelines
-[9]: /logs/processing/pipelines/#pipeline-filters
-[10]: /logs/processing/parsing
-[11]: /logs/faq/log-parsing-best-practice
-[12]: /logs/faq/how-to-investigate-a-log-parsing-issue
-[13]: /logs/processing/processors/#log-date-remapper
-[14]: /logs/explorer/?tab=logstream#visualization
-[15]: /logs/explorer/search
-[16]: /logs/processing/processors/?tab=ui#remapper
-[17]: /logs/processing/processors/#log-status-remapper
-[18]: /logs/faq/integration-pipeline-reference
+[7]: /logs/processing/pipelines/#integration-pipelines
+[8]: /logs/processing/pipelines/#pipeline-filters
+[9]: /logs/processing/parsing
+[10]: /logs/faq/log-parsing-best-practice
+[11]: /logs/faq/how-to-investigate-a-log-parsing-issue
+[12]: /logs/processing/processors/#log-date-remapper
+[13]: /logs/explorer/?tab=logstream#visualization
+[14]: /logs/explorer/search
+[15]: /logs/processing/processors/?tab=ui#remapper
+[16]: /logs/processing/processors/#log-status-remapper
+[17]: /logs/faq/integration-pipeline-reference
+[18]: /agent/docker/log/?tab=nginxdockerfile#examples
 [19]: /tracing/connect_logs_and_traces/?tab=java
