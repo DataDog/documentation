@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RUN_SERVER=${RUN_SERVER:=false}
-GITHUB_TOKEN=${GITHUB_TOKEN:="False"}
+GITHUB_TOKEN=${GITHUB_TOKEN:=false}
 RUN_WEBPACK=${RUN_WEBPACK:=true}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
@@ -9,7 +9,7 @@ LOCAL=${LOCAL:=False}
 
 if [ ${RUN_SERVER} = true ]; then
 	# integrations
-	if [ ${GITHUB_TOKEN} != "False" ]; then
+	if [ ${GITHUB_TOKEN} != false ]; then
 		args="${args} --token ${GITHUB_TOKEN}"
 	else
 		printf "No GITHUB TOKEN was found. skipping any data sync that relies on pulling from web.\n"
