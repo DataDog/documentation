@@ -406,10 +406,6 @@ $(document).ready(function () {
         const href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1), false);
-            /* var pop = document.getElementById('api-popper')
-            if(pop) {
-                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
-            } */
             return false;
         }
     });
@@ -501,8 +497,6 @@ $(document).ready(function () {
 
     codeTabs();
 
-
-
     // API page
     if($('.api').length) {
         // When language buttons are clicked, show all the code snippets
@@ -525,10 +519,8 @@ $(document).ready(function () {
             // Show this language's code blocks and language-specific elements
             const lang = el.data('lang');
             code_blocks.hide();
-            // $('.code-block-' + lang).fadeIn();
             $(`.code-block-${  lang}`).show();
             lang_blocks.hide();
-            // $('.lang-specific-' + lang).fadeIn();
             $(`.lang-specific-${  lang}`).show();
 
             // Highlight the active button.
@@ -561,40 +553,12 @@ $(document).ready(function () {
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
-
-
     updateTOC();
-
-    // when page ready collect mapping of link to headers so we aren't checking the dom all the time
-
-    // $('.mobile-toc-toggle').on('click touch', function () {
-    //     const icon = $(this).find('i');
-    //     const open = icon.hasClass('icon-small-x');
-    //     if(open) {
-    //         $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-    //     } else {
-    //         $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-    //     }
-    //     $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-    //     $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
-    // });
-
-    $(document).on( "moveToAnchor", function() {
-        const open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
-        if(open) {
-            // $('.mobile-toc-toggle').click();
-        }
-    });
-
-
-
     buildTOCMap();
     onScroll();
 
-
     // TODO: move integrations code to own file after webpack update
     initializeIntegrations();
-
 
 });
 
@@ -767,13 +731,8 @@ function closeNav(){
 
 function updateSidebar(event){
 
-
     closeNav();
-
-
     getPathElement();
-
-
 
     const isLi = ( event.target.nodeName === "LI" ) ;
 
@@ -808,7 +767,6 @@ function loadPage(newUrl) {
 
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
-            // closeTOC();
     
             // cancel httprequest if hash is changed to prevent page replacing
             window.addEventListener('hashchange', function(e){
@@ -900,7 +858,6 @@ function loadPage(newUrl) {
                     updateMainContentAnchors();
                     reloadWistiaVidScripts(wistiaVidId);
                     initializeIntegrations();
-
                 
             } else if (document.querySelector('.js-toc-container #TableOfContents')) { // toc is disabled, but old TOC exists and needs to be removed.
                 document.querySelector('.js-toc-container #TableOfContents').remove();
@@ -977,8 +934,6 @@ if (mobileNav) {
 
 function navClickEventHandler(event){
     event.stopPropagation();
-    // console.log('clicked on ');
-    // console.log(event.target);
     // Remove any existing open and active classes
     let newUrl;
 
