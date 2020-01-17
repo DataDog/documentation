@@ -17,7 +17,7 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir):
     :param repo: github repo name
     :param branch: the branch name
     :param globs: list of strings in glob format of what to extract
-    :param extract_dir: Directory into which to put all content downloaded.
+    :param extract_dir: Directory in which to put all downloaded content.
     :return:
     """
     pool_size = 5
