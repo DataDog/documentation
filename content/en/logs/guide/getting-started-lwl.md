@@ -25,9 +25,8 @@ This guide identifies key components of Logging Without Limits™ such as [Patte
 
 ## 1. Identify your most logging service status
 
-Your most logging service contains several logs, some of which may be irrelevant for troubleshooting. By identifying this service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
+Your most logging service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
-For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event.
 
 {{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identify a most logging service status" style="width:100%;">}}
 
@@ -96,7 +95,9 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 
 [Anomaly detection][9] is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs will alert you of any changes based on your set alert conditions.
 
-1. To set an anomaly detection monitor, go to **Monitors -> New Monitor -> Anomaly**.
+**To set an anomaly detection monitor**:
+
+1. In the main navigation, navigate to **Monitors -> New Monitor -> Anomaly**.
 2. Enter the log-based metric you defined in the previous section.
 3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
 4. Save the monitor.
@@ -108,15 +109,12 @@ When an anomaly is detected, an alert will be sent to all who are tagged. This a
 ## Review
 
 In this guide, you learned how to use Logging without Limits™ to:
-* [Overview](#overview)
 * [1. Identify your most logging service status](#1-identify-your-most-logging-service-status)
 * [2. Identify high volume logging patterns](#2-identify-high-volume-logging-patterns)
 * [3. Create a log pattern exclusion filter](#3-create-a-log-pattern-exclusion-filter)
 * [4. Generate metrics to track excluded logs](#4-generate-metrics-to-track-excluded-logs)
   * [Add a new log-based metric](#add-a-new-log-based-metric)
   * [Create an anomaly detection monitor](#create-an-anomaly-detection-monitor)
-* [Review](#review)
-* [Further Reading](#further-reading)
 
 To learn more about Logging Without Limits™ and how to better utilize features like Log Explorer, Live Tail, and Log Patterns, view the links below.
 
