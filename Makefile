@@ -115,31 +115,23 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@cp -r local/githooks/* .git/hooks
 
 start: clean source-helpers ## Build the documentation with all external content.
-	@echo "Building the documentation without ALL external content."
+	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
-		FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
-		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
 		run-site.sh; \
-	else \
-		FETCH_INTEGRATIONS="false" \
-		CREATE_I18N_PLACEHOLDERS="false" \
-		RUN_SERVER=${RUN_SERVER} \
-		run-site.sh; fi
+	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
 start-no-pre-build: clean source-helpers ## Build the documentation without automatically pulled content.
-	@echo "Building the documentation without any pulled content."
+	@echo "\033[35m\033[1m\nBuilding the documentation with NO external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
 		RUN_SERVER=${RUN_SERVER} \
 		run-site-no-pre-build.sh; \
-	else \
-		RUN_SERVER=${RUN_SERVER} \
-		run-site.sh; fi
+	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
 stop:  ## stop wepack watch/hugo server.
 	@echo "stopping previous..."
