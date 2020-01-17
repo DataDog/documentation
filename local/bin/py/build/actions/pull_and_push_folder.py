@@ -14,6 +14,7 @@ def pull_and_push_folder(content, content_dir):
     and transform it to be displayed in the doc in dest_dir folder
     See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-folder to learn more
     :param content: content to process
+    :param content_dir: The directory where content should be put
     """
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+") as f:
