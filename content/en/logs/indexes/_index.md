@@ -65,7 +65,7 @@ Exclusion filters are defined by a query, a sampling rule, and a active/inactive
 
 #### Switch off, switch on
 
-You don't need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API] when required.
+You might not need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][19] when required.
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
@@ -122,3 +122,4 @@ Update or remove this quota at any time when editing the Index:
 [16]: https://docs.datadoghq.com/logs/live_tail/#overview
 [17]: https://docs.datadoghq.com/logs/archives/
 [18]: https://docs.datadoghq.com/logs/logs_to_metrics/
+[19]: /api/?lang=bash#update-an-index
