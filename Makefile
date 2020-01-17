@@ -114,8 +114,8 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
 
-start: clean source-helpers ## start the webpack/hugo server.
-	@echo "starting up..."
+start: clean source-helpers ## Build the documentation with all external content
+	@echo "Building the documentation without ALL external content"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
 		FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
@@ -128,6 +128,16 @@ start: clean source-helpers ## start the webpack/hugo server.
 	else \
 		FETCH_INTEGRATIONS="false" \
 		CREATE_I18N_PLACEHOLDERS="false" \
+		RUN_SERVER=${RUN_SERVER} \
+		run-site.sh; fi
+
+start-no-pre-build: clean source-helpers ## Build the documentation without automatically pulled content
+	@echo "Building the documentation without any pulled content"
+	@if [ ${PY3} != "false" ]; then \
+		source ${VIRENV}/bin/activate;  \
+		RUN_SERVER=${RUN_SERVER} \
+		run-site-no-pre-build.sh; \
+	else \
 		RUN_SERVER=${RUN_SERVER} \
 		run-site.sh; fi
 
