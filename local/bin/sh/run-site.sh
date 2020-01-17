@@ -4,6 +4,7 @@ RUN_SERVER=${RUN_SERVER:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:="False"}
 RUN_WEBPACK=${RUN_WEBPACK:=true}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
+CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 LOCAL=${LOCAL:=False}
 
 if [ ${RUN_SERVER} = true ]; then
@@ -19,9 +20,11 @@ if [ ${RUN_SERVER} = true ]; then
 		update_pre_build.py "${args}"
 	fi
 
-	# placeholders
-	echo "creating i18n placeholder pages."
-  placehold_translations.py -c "config/_default/languages.yaml"
+  # placeholders
+	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
+		echo "creating i18n placeholder pages."
+		placehold_translations.py -c "config/_default/languages.yaml"
+	fi
 
 	# webpack
 	if [ ${RUN_WEBPACK} = true ]; then

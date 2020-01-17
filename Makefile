@@ -120,6 +120,7 @@ start: clean source-helpers ## Build the documentation with all external content
 		source ${VIRENV}/bin/activate;  \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
+		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
 		run-site.sh; \

@@ -2,6 +2,7 @@
 # Create a new file called Makefile.config using this file as a template for your local config
 
 GITHUB_TOKEN := ${github_personal_token}
+CREATE_I18N_PLACEHOLDERS:= false
 RUN_SERVER := true
 RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
