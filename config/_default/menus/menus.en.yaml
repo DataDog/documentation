@@ -811,47 +811,57 @@ main:
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_java"
     weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
-    identifier: "python"
+    identifier: "tracing_setup_python"
     weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_ruby"
     weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_go"
     weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_nodejs"
     weight: 205
   - name: ".NET"
     url: "tracing/setup/dotnet/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_dotnet"
     weight: 206
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_php"
     weight: 207
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_cpp"
     weight: 208
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_envoy"
     weight: 209
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_nginx"
     weight: 210
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_istio"
     weight: 211
 
   ## TRACING - App analytics
@@ -882,7 +892,48 @@ main:
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
+    identifier: "tracing_runtime_metrics"
     weight: 5
+  - name: "Java"
+    url: "tracing/runtime_metrics/java/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_java"
+    weight: 501
+  - name: "Python"
+    url: "tracing/runtime_metrics/python/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_python"
+    weight: 502
+  - name: "Ruby"
+    url: "tracing/runtime_metrics/ruby/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_ruby"
+    weight: 503
+  - name: "Go"
+    url: "tracing/runtime_metrics/go/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_go"
+    weight: 504
+  - name: "Node.js"
+    url: "tracing/runtime_metrics/nodejs/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_nodejs"
+    weight: 505
+  - name: ".NET"
+    url: "tracing/runtime_metrics/dotnet/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_dotnet"
+    weight: 506
+  - name: "PHP"
+    url: "tracing/runtime_metrics/php/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_php"
+    weight: 507
+  - name: "C++"
+    url: "tracing/runtime_metrics/cpp/"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_cpp"
+    weight: 508
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
