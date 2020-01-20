@@ -1,4 +1,32 @@
 ---
+- org_name: jenkinsci
+
+  repos:
+  - repo_name: datadog-plugin
+
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/integrations/'
+        file_name: 'jenkins.md'
+        front_matters:
+          public_title: Datadog-Jenkins Integration
+          kind: integration
+          name: jenkins
+          is_public: true
+          integration_title: Jenkins
+          has_logo: true
+          git_integration_title: jenkins
+          description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+          short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+          categories:
+            - "configuration & deployment"
+          doc_link: https://docs.datadoghq.com/integrations/jenkins/
+
 - org_name: DataDog
 
   repos:

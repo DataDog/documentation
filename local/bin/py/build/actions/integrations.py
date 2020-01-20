@@ -445,6 +445,7 @@ class Integrations:
         )
 
     def add_dependencies(self, file_name):
+        """ Adds dependencies to the integration file in order to be able to find the source file in Github """
         dependencies = []
         if file_name.startswith(
             "{0}{1}{2}".format(
