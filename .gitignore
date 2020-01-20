@@ -31,7 +31,6 @@ content/en/integrations/*.md
 !content/en/integrations/adobe_experience_manager.md
 !content/en/integrations/pivotal_platform.md
 !content/en/integrations/alcide.md
-!content/en/integrations/amazon_eks_fargate.md
 !content/en/integrations/iam_access_analyzer.md
 
 # Logs
