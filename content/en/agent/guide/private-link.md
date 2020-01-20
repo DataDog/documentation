@@ -14,17 +14,19 @@ further_reading:
 Setting up PrivateLink to Datadog is only available to forward Logs to Datadog on <bold>AWS us-east-1 region</bold>. Reach out to <a href="/help">Datadog Support</a> to enable this feature for your organization.
 </div>
 
-The goal of this guide is to explain how to configure PrviateLink for a VPC. This allows to send traffic to Datadog without going over the Public Internet, thereby reducing transit costs and improving security.
+The goal of this guide is to explain how to configure a PrviateLink for a given VPC. This allows you to send your log traffic to Datadog without going over the public internet, thereby reducing transit costs and improving security.
 
 ## Overview
 
-Datadog provides a VPC endpoint service which lives in the us-east-1 region. The objective is to configure an internal VPC endpoint that local Datadog Agent would send data too which is then peered with the Datadog VPC endpoint service.
+Datadog provides a VPC endpoint service which lives in the AWS `us-east-1` region.
+
+The overall process consist in configuring an internal VPC endpoint that local Datadog Agents can send data to. This VPC endpoint is then peered with the Datadog VPC endpoint service.
 
 {{< img src="agent/guide/private_link/vpc_schema.png" alt="VPC Schema" >}}
 
 ## Create your VPC endpoint
 
-1. Connect to the AWS console and create a new endpoint:
+1. Connect to the AWS console and create a new VPC endpoint:
     {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 2. Select **Find service by name**
 3. Fill the *service name* text box with: `com.amazonaws.vpce.us-east-1.vpce-svc-<UNIQUE_ID>` where `<UNIQUE_ID>` is the ID communicated by the Datadog [Support team][1]:
@@ -44,7 +46,7 @@ Datadog provides a VPC endpoint service which lives in the us-east-1 region. The
 
 Once it shows *Available*, it means that the AWS PrivateLink is ready and you now needs to update your configurations to use `logs.vpce.datadoghq.com` as the target endpoint for your Datadog Agents, Lambda forwarder, and/or other clients shipping logs to Datadog.
 
-## Forwarding your Logs to Datadog.
+## Forwarding your Logs to Datadog
 
 ### Get the DNS name
 
@@ -54,7 +56,7 @@ From the created VPC endpoint details, select the DNS name:
 
 ### Configure the Datadog Agent
 
-1. Add the following to the [Agent `datadog.yaml` configuration file][2]:
+1. Add the following to the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
     logs_config:
@@ -62,21 +64,20 @@ From the created VPC endpoint details, select the DNS name:
       logs_dd_url: logs.vpce.datadoghq.com:443
     ```
 
-    * The `use_http` variable is used to force the Datadog Agent to send Logs in HTTPS which is the protocol supported by the VPC endpoint. More information about this available in the [Agent Log collection documentation][3].
+    * The `use_http` variable is used to force the Datadog Agent to send Logs in HTTPS which is the protocol supported by the VPC endpoint. More information about this available in the [Agent Log collection documentation][2].
     * The `logs_dd_url` variable is used to send Logs to the VPC endpoint.
 
-2. [Restart your Agent][4] to send Logs to Datadog through AWS PrivateLink.
+2. [Restart your Agent][3] to send Logs to Datadog through AWS PrivateLink.
 
 ### Configure the Lambda forwarder
 
-Add `DD_URL: logs.vpce.datadoghq.com` in your [Datadog Lambda function][5] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
+Add `DD_URL: logs.vpce.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
