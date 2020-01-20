@@ -73,7 +73,9 @@ Add `DD_URL: logs.vpce.datadoghq.com` in your [Datadog Lambda function][5] envir
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: /help
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /help
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: /agent/guide/agent-commands/#restart-the-agent
