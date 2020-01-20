@@ -1,11 +1,13 @@
 ---
 title: Connect Logs and Traces
 kind: documentation
+aliases:
+  - /tracing/advanced/connect_logs_and_traces/
 further_reading:
-- link: "tracing/advanced/manual_instrumentation"
+- link: "tracing/manual_instrumentation"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
-- link: "tracing/advanced/opentracing"
+- link: "tracing/opentracing"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
@@ -22,7 +24,7 @@ Before correlating traces with logs, ensure your logs are either sent as JSON, o
 
 Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
 
-{{< img src="tracing/advanced/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces"  style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces"  style="width:100%;">}}
 
 ## Automatic Trace ID injection
 

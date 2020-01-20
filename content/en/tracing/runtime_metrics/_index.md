@@ -1,14 +1,16 @@
 ---
 title: Runtime Metrics
 kind: documentation
+aliases:
+  - /tracing/advanced/runtime_metrics/
 further_reading:
-- link: "tracing/advanced/connect_logs_and_traces"
+- link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/advanced/manual_instrumentation"
+- link: "tracing/manual_instrumentation"
   tags: "Enrich Tracing"
   text: "Manually instrument your application to create traces."
-- link: "tracing/advanced/opentracing"
+- link: "tracing/opentracing"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
@@ -18,7 +20,7 @@ further_reading:
 
 Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a [service][1], correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
+{{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
 ## Automatic Configuration
 
@@ -29,7 +31,7 @@ JVM metrics collection is enabled by default for Java tracer v0.29.0+. It can be
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
-{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
+{{< img src="tracing/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 

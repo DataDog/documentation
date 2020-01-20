@@ -1,5 +1,5 @@
 ---
-title: Instrument your application
+title: Instrument Your Application
 kind: documentation
 aliases:
     - /tracing/languages

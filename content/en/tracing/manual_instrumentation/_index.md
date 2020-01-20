@@ -5,12 +5,13 @@ aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
   - /tracing/guide/distributed_tracing/
+  - /tracing/advanced/manual_instrumentation/
 further_reading:
 - link: "tracing/guide/instrument_custom_method"
   text: "Instrument a custom method to get deep visibility into your business logic"
-- link: "tracing/advanced/connect_logs_and_traces"
+- link: "tracing/connect_logs_and_traces"
   text: "Connect your Logs and Traces together"
-- link: "tracing/advanced/opentracing"
+- link: "tracing/opentracing"
   text: "Implement Opentracing across your applications"
 - link: "tracing/visualization/"
   text: "Explore your services, resources, and traces"
@@ -358,7 +359,7 @@ While this [has been deprecated][6] if you are using PHP 7.x, you still may use 
 [4]: /tracing/visualization/#span-tags
 [5]: https://github.com/DataDog/dd-trace-php/releases/latest
 [6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[7]: /tracing/advanced/opentracing/?tab=php
+[7]: /tracing/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 
