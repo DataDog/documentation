@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Setting up PrivateLink to Datadog is only available to forward Logs to Datadog on <bold>AWS us-east-1 region</bold>. Reach out to <a href="/help">Datadog Support</a> to enable this feature for your organization.
+The PrivateLink setup is only available to <b>forward Logs to Datadog in AWS us-east-1 region</b>. Reach out to <a href="/help">Datadog Support</a> to enable this feature for your organization.
 </div>
 
 The goal of this guide is to explain how to configure a PrviateLink for a given VPC. This allows you to send your log traffic to Datadog without going over the public internet, thereby reducing transit costs and improving security.
