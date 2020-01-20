@@ -3,15 +3,16 @@
 Built with [hugo][1], a static website generation tool.
 
 ## Setup
+
 ### Installation
 
 1. [Install npm][2]
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. Install yarn: ```npm install -g yarn```
+3. Install yarn: `npm install -g yarn`
 
-4. Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
+4. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
 
 ### Run the server
 
@@ -19,11 +20,14 @@ Inside `documentation/` folder, create a `Makefile.config` file from the [Makefi
 
 If you are a Datadog employee, add your [Github personal token][6]
 
-To run the site and perform administrative tasks (compile metrics, create i18n placeholders, etc), just execute:
+To run the documentation site locally, execute:
 
-`make start`
+| Command                   | Description                                                                                                                                                                                                                             |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
+| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localised content...). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available localy. |
 
-Documentation is available at `http://localhost:1313`
+**Documentation is then available at `http://localhost:1313`**
 
 To learn more about how the documentation is build refer to the [Documentation Build Wiki][7].
 
@@ -33,17 +37,19 @@ To use the Makefile, create a Makefile.config. See the instructions at the top o
 
 After you have a config file you can run `make help` to see options:
 
-```
-clean-build               remove build artifacts.
-clean-exe                 remove execs.
-clean-integrations        remove built integrations files.
-clean-node                remove node_modules.
-clean-virt                remove python virtual env.
-clean                     clean all make installs.
-hugpython                 build virtualenv used for tests.
-source-helpers            source the helper functions used in build, test, deploy.
-start                     start the gulp/hugo server.
-stop                      stop the gulp/hugo server.
+```text
+clean-all                 Clean everything.
+clean-build               Remove build artifacts.
+clean-exe                 Remove execs.
+clean-integrations        Remove built integrations files.
+clean-node                Remove node_modules.
+clean-virt                Remove python virtual env.
+clean                     Clean all make installs.
+hugpython                 Build virtualenv used for tests.
+source-helpers            Source the helper functions used in build, test, deploy.
+start-no-pre-build        Build the documentation without automatically pulled content.
+start                     Build the documentation with all external content.
+stop                      Stop wepack watch/hugo server.
 ```
 
 ## Working on Docs
@@ -65,13 +71,11 @@ stop                      stop the gulp/hugo server.
 
 This site uses [Goldmark][9] for markdown which is compliant with [CommonMark 0.29][10].
 
-If you include ANY Markdown in a file, give it an .md extension.
+If you include ANY Markdown in a file, give it an `.md` extension.
 
 Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but the server is not so tests may be fine locally but the site will fail in production.
 
 ## Releasing
-
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][6].
 
 Within 5 minutes of merging to master, it deploys automatically.
 

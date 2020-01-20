@@ -14,8 +14,18 @@
         dest_path: '/integrations/'
         file_name: 'jenkins.md'
         front_matters:
-          title: Datadog-Jenkins Integration
-          kind: documentation
+          public_title: Datadog-Jenkins Integration
+          kind: integration
+          name: jenkins
+          is_public: true
+          integration_title: Jenkins
+          has_logo: true
+          git_integration_title: jenkins
+          description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+          short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+          categories:
+            - "configuration & deployment"
+          doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
 - org_name: DataDog
 

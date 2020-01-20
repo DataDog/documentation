@@ -219,7 +219,7 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 
   ```text
   {{#is_match "role.name" "production"}}
-    This shows only if the host that triggered the alert has the tags role:production or the role:production attached.
+    This shows only if the host that triggered the alert has the tags role:production or the role:production-1 attached.
   {{/is_match}}
 
   {{#is_exact_match "host.name" "production"}}
@@ -271,6 +271,7 @@ Send the monitor notification to the appropriate endpoint:
 * Install the Slack integration to send your notifications directly in the appropriate channel.
 
 **Notes**:
+
 * An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
 * An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
 
@@ -421,7 +422,7 @@ For example, to see all monitors in an Alert State, add `status:Alert` (other st
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
 ```
 
-If you would like all monitors for a specific application or integration, add the following query to the URL `q=<INTEGRATION_NAME> `:
+If you would like all monitors for a specific application or integration, add the following query to the URL `q=<INTEGRATION_NAME>`:
 
 ```text
 https://app.datadoghq.com/monitors/manage?q=cassandra
