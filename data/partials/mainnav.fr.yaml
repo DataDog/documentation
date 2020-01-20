@@ -1,0 +1,545 @@
+main:
+  - name: Débuter
+    url: getting_started/
+    pre: nav_start
+    children:
+      - name: Agent
+        url: getting_started/agent/
+      - name: Datadog
+        url: getting_started/application/
+      - name: Intégrations
+        url: getting_started/integrations/
+        children:
+          - name: Prometheus/Openmetrics
+            url: getting_started/integrations/prometheus/
+      - name: Recueillir vos traces
+        url: getting_started/tracing/
+        children:
+          - name: Tracing distribué
+            url: getting_started/tracing/distributed-tracing/
+      - name: API
+        url: getting_started/api/
+      - name: Centre d'apprentissage
+        url: getting_started/learning_center/
+  - name: Tagging
+    url: tagging/
+    pre: nav_tagging
+    children:
+      - name: Assigner des tags
+        url: tagging/assigning_tags
+      - name: Utiliser les tags
+        url: tagging/using_tags
+  - name: Agent
+    url: agent/
+    pre: nav_agent
+    children:
+      - name: Utilisation de base de l'Agent
+        url: agent/basic_agent_usage/
+        children:
+          - name: AIX
+            url: agent/basic_agent_usage/aix/
+          - name: "Amazon\_Linux"
+            url: agent/basic_agent_usage/amazonlinux/
+          - name: CentOS
+            url: agent/basic_agent_usage/centos/
+          - name: Debian
+            url: agent/basic_agent_usage/deb/
+          - name: Docker
+            url: agent/docker/
+          - name: Fedora
+            url: agent/basic_agent_usage/fedora/
+          - name: Heroku
+            url: agent/basic_agent_usage/heroku/
+          - name: Mac OS X
+            url: agent/basic_agent_usage/osx/
+          - name: "Red\_Hat"
+            url: agent/basic_agent_usage/redhat/
+          - name: SUSE
+            url: agent/basic_agent_usage/suse/
+          - name: Ubuntu
+            url: agent/basic_agent_usage/ubuntu/
+          - name: Windows
+            url: agent/basic_agent_usage/windows/
+          - name: Depuis les sources
+            url: agent/basic_agent_usage/source/
+      - name: Docker
+        url: agent/docker/
+        children:
+          - name: APM
+            url: agent/docker/apm
+          - name: Collecte de logs
+            url: agent/docker/log
+      - name: Kubernetes
+        url: agent/kubernetes/
+        children:
+          - name: Configuration DaemonSet
+            url: agent/kubernetes/daemonset_setup
+          - name: Configuration avec l'host
+            url: agent/kubernetes/host_setup
+          - name: Cluster Agent
+            url: agent/kubernetes/cluster
+          - name: Helm
+            url: agent/kubernetes/helm
+          - name: Collecte d'événements
+            url: agent/kubernetes/event_collection
+          - name: Intégrations personnalisées
+            url: agent/kubernetes/integrations
+          - name: Métriques
+            url: agent/kubernetes/metrics
+          - name: Métriques Custom et DogStatsD
+            url: agent/kubernetes/dogstatsd
+          - name: Version Antérieures
+            url: agent/kubernetes/legacy
+      - name: Autodiscovery
+        url: agent/autodiscovery
+        children:
+          - name: Modèles d'intégration
+            url: agent/autodiscovery/integrations
+          - name: Identificateur de conteneur
+            url: agent/autodiscovery/ad_identifiers
+          - name: Template variables
+            url: agent/autodiscovery/template_variables
+          - name: Extraction de tag
+            url: agent/autodiscovery/tag
+          - name: Gestion de découverte
+            url: agent/autodiscovery/management
+          - name: Dépannage
+            url: agent/autodiscovery/troubleshooting
+          - name: Checks d'endpoints
+            url: agent/autodiscovery/endpointschecks
+          - name: Checks de Cluster
+            url: agent/autodiscovery/clusterchecks
+      - name: Collecte de logs
+        url: agent/logs
+        children:
+          - name: Collecte de logs avancée
+            url: agent/logs/advanced_log_collection
+          - name: Proxy
+            url: agent/logs/proxy
+      - name: Proxy
+        url: agent/proxy
+      - name: Upgrade vers Agent v6
+        url: agent/faq/upgrade-to-agent-v6
+      - name: Dépannage
+        url: agent/troubleshooting/
+        children:
+          - name: Mode Debug
+            url: agent/troubleshooting/debug_mode
+          - name: Flare de l'Agent
+            url: agent/troubleshooting/send_a_flare
+          - name: Status d'un Check
+            url: agent/troubleshooting/agent_check_status
+          - name: NTP
+            url: agent/troubleshooting/ntp
+          - name: Problèmes d'Autorisations
+            url: agent/troubleshooting/permissions
+          - name: Problèmes d'intégration
+            url: agent/troubleshooting/integrations
+      - name: Guides
+        url: agent/guide/
+      - name: Sécurité
+        url: agent/security
+  - name: Intégrations
+    url: integrations/
+    pre: nav_integrations
+  - name: Watchdog
+    url: watchdog/
+    pre: nav_watchdog
+  - name: Graphiques
+    url: graphing/
+    pre: nav_graphing
+    children:
+      - name: Utilisation des graphiques
+        url: graphing/using_graphs/
+      - name: Dashboards
+        url: graphing/dashboards/
+        children:
+          - name: Screenboard
+            url: graphing/dashboards/screenboard/
+          - name: Timeboard
+            url: graphing/dashboards/timeboard/
+          - name: Template variables
+            url: graphing/dashboards/template_variables/
+          - name: Graphiques partagés
+            url: graphing/dashboards/shared_graph/
+      - name: Métriques
+        url: graphing/metrics/
+        children:
+          - name: Explorer
+            url: graphing/metrics/explorer
+          - name: Summary
+            url: graphing/metrics/summary
+          - name: Distributions
+            url: graphing/metrics/distributions
+      - name: Notebooks
+        url: graphing/notebooks/
+      - name: Le flux d'événements
+        url: graphing/event_stream/
+      - name: Infrastructure
+        url: graphing/infrastructure/
+        children:
+          - name: Map des conteneurs
+            url: graphing/infrastructure/containermap/
+          - name: La Hostmap
+            url: graphing/infrastructure/hostmap/
+          - name: Live containers
+            url: graphing/infrastructure/livecontainers/
+          - name: Live Processes
+            url: graphing/infrastructure/process/
+          - name: Monitor de performance réseau
+            url: graphing/infrastructure/network_performance_monitor/
+          - name: Informatique sans serveur
+            url: graphing/infrastructure/serverless/
+      - name: De la requête au graphique
+        url: graphing/functions/
+        children:
+          - name: Algorithmes
+            url: graphing/functions/algorithms/
+          - name: Opérations arithmétiques
+            url: graphing/functions/arithmetic/
+          - name: Total
+            url: graphing/functions/count/
+          - name: Interpolation
+            url: graphing/functions/interpolation/
+          - name: Rang
+            url: graphing/functions/rank/
+          - name: Taux
+            url: graphing/functions/rate/
+          - name: Régression
+            url: graphing/functions/regression/
+          - name: Rollup
+            url: graphing/functions/rollup/
+          - name: Lissage
+            url: graphing/functions/smoothing/
+          - name: Timeshift
+            url: graphing/functions/timeshift/
+          - name: Beta
+            url: graphing/functions/beta/
+      - name: Graphiques JSON
+        url: graphing/graphing_json/
+        children:
+          - name: Schéma JSON des Widgets
+            url: graphing/graphing_json/widget_json/
+          - name: Schema JSON des requètes
+            url: graphing/graphing_json/request_json/
+      - name: Widgets
+        url: graphing/widgets/
+      - name: Guides
+        url: graphing/guide
+  - name: Alertes
+    url: monitors/
+    pre: nav_alerting
+    children:
+      - name: Les monitors
+        url: monitors/monitor_types/
+        children:
+          - name: Anomalies
+            url: monitors/monitor_types/anomaly/
+          - name: APM
+            url: monitors/monitor_types/apm/
+          - name: Composite
+            url: monitors/monitor_types/composite/
+          - name: Check custom
+            url: monitors/monitor_types/custom_check/
+          - name: Événements
+            url: monitors/monitor_types/event/
+          - name: Prévision
+            url: monitors/monitor_types/forecasts/
+          - name: Host
+            url: monitors/monitor_types/host/
+          - name: Intégration
+            url: monitors/monitor_types/integration/
+          - name: Log
+            url: monitors/monitor_types/log/
+          - name: Métriques
+            url: monitors/monitor_types/metric/
+          - name: Réseau
+            url: monitors/monitor_types/network/
+          - name: Singularité
+            url: monitors/monitor_types/outlier/
+          - name: Processus
+            url: monitors/monitor_types/process/
+          - name: Analyse de traces
+            url: monitors/monitor_types/trace_analytics/
+          - name: Watchdog
+            url: monitors/monitor_types/watchdog/
+      - name: Gérer des monitors
+        url: monitors/manage_monitor/
+      - name: Sommaire des checks
+        url: monitors/check_summary/
+      - name: Notifications
+        url: monitors/notifications/
+      - name: Downtimes
+        url: monitors/downtimes/
+      - name: 'Widget pour les SLO '
+        url: monitors/slo_widget/
+      - name: Guides
+        url: monitors/guide
+  - name: APM et tracing distribué
+    url: tracing/
+    pre: nav_tracing
+    children:
+      - name: Activer la collecte de trace
+        url: tracing/send_traces/
+        children:
+          - name: Métriques APM de l'Agent
+            url: tracing/send_traces/agent-apm-metrics/
+      - name: Instrumenter votre application
+        url: tracing/setup/
+        children:
+          - name: Java
+            url: tracing/setup/java/
+          - name: Python
+            url: tracing/setup/python/
+          - name: Ruby
+            url: tracing/setup/ruby/
+          - name: Go
+            url: tracing/setup/go/
+          - name: Node.js
+            url: tracing/setup/nodejs/
+          - name: .NET
+            url: tracing/setup/dotnet/
+          - name: PHP
+            url: tracing/setup/php/
+          - name: C++
+            url: tracing/setup/cpp/
+          - name: Envoy
+            url: tracing/setup/envoy/
+          - name: NGINX
+            url: tracing/setup/nginx/
+          - name: Istio
+            url: tracing/setup/istio/
+      - name: Enrichir vos Traces
+        url: tracing/advanced/
+        children:
+          - name: Connect Logs and Traces
+            url: tracing/advanced/connect_logs_and_traces
+          - name: Ajouter des Metadata aux Spans
+            url: tracing/advanced/adding_metadata_to_spans
+          - name: Métriques de runtime
+            url: tracing/advanced/runtime_metrics
+          - name: OpenTracing
+            url: tracing/advanced/opentracing
+          - name: Instrumentation manuelle
+            url: tracing/advanced/manual_instrumentation
+          - name: Configurer les Primary Tags
+            url: tracing/advanced/setting_primary_tags_to_scope
+      - name: Utiliser l'UI de l'APM
+        url: tracing/visualization/
+        children:
+          - name: Liste des services
+            url: tracing/visualization/services_list
+          - name: Page Service
+            url: tracing/visualization/service
+          - name: Page Ressource
+            url: tracing/visualization/resource
+          - name: Vue Trace
+            url: tracing/visualization/trace
+          - name: Service Map
+            url: tracing/visualization/services_map
+      - name: Analyse et recherche de traces
+        url: tracing/trace_search_and_analytics/
+        children:
+          - name: Configuration de l'Agent
+            url: tracing/trace_search_and_analytics/agent_trace_search
+          - name: Recherche de traces
+            url: tracing/trace_search_and_analytics/search
+          - name: Analyse de traces
+            url: tracing/trace_search_and_analytics/analytics
+          - name: Les monitors
+            url: monitors/monitor_types/trace_analytics
+      - name: API des traces
+        url: 'api/#tracing'
+      - name: Bibliothèques
+        url: 'developers/libraries/#bibliotheques-client-pour-l-apm-tracing-distribue'
+      - name: Guides
+        url: tracing/guide
+      - name: Dépannage
+        url: tracing/troubleshooting/
+  - name: Log Management
+    url: logs/
+    pre: nav_logs
+    children:
+      - name: Collecte de logs et intégrations
+        url: logs/log_collection/
+        children:
+          - name: Browser
+            url: logs/log_collection/javascript/
+          - name: Csharp
+            url: logs/log_collection/csharp/
+          - name: Go
+            url: logs/log_collection/go/
+          - name: Java
+            url: logs/log_collection/java/
+          - name: Nodejs
+            url: logs/log_collection/nodejs/
+          - name: PHP
+            url: logs/log_collection/php/
+          - name: Python
+            url: logs/log_collection/python/
+          - name: Ruby
+            url: logs/log_collection/ruby/
+          - name: Autres Intégrations
+            url: 'integrations/#collecte-de-logs-cat'
+      - name: Processing
+        url: logs/processing/
+        children:
+          - name: Pipelines
+            url: logs/processing/pipelines/
+          - name: Processeurs
+            url: logs/processing/processors/
+          - name: Parsing
+            url: logs/processing/parsing/
+          - name: Convention de nommage
+            url: logs/processing/attributes_naming_convention/
+      - name: Générer des métriques
+        url: logs/logs_to_metrics/
+      - name: "Live\_Tail"
+        url: logs/live_tail/
+      - name: Explorer
+        url: logs/explorer/
+        children:
+          - name: Recherche
+            url: logs/explorer/search
+          - name: Analyse de logs
+            url: logs/explorer/analytics
+          - name: Vues enregistrées
+            url: logs/explorer/saved_views
+          - name: Log Patterns
+            url: logs/explorer/patterns
+      - name: Logging without Limits
+        url: logs/logging_without_limits/
+      - name: Archives
+        url: logs/archives
+        children:
+          - name: "Archivage sur AWS\_S3"
+            url: logs/archives/s3
+          - name: Réintégration à partir des archives
+            url: logs/archives/rehydrating
+      - name: Guides
+        url: logs/guide/
+      - name: Sécurité
+        url: logs/security
+  - name: Synthetics
+    url: synthetics/
+    pre: nav_synthetics
+    children:
+      - name: Tests API
+        url: synthetics/api_tests
+      - name: Tests Browser
+        url: synthetics/browser_tests
+      - name: Intégration APM
+        url: synthetics/apm/
+        children:
+          - name: Test Browser
+            url: synthetics/apm/browser_tests
+      - name: Identifier les Bots Synthetics
+        url: synthetics/identify_synthetics_bots
+      - name: Paramètres
+        url: synthetics/settings
+  - name: Outils de développement
+    url: developers/
+    pre: nav_developers
+    children:
+      - name: DogStatsD
+        url: developers/dogstatsd/
+        children:
+          - name: Types de données et tags
+            url: developers/dogstatsd/data_types
+          - name: Datagramme et interface système
+            url: developers/dogstatsd/datagram_shell
+          - name: 'Usage Unix Domain Socket '
+            url: developers/dogstatsd/unix_socket
+      - name: Métriques
+        url: developers/metrics/
+        children:
+          - name: Métriques custom
+            url: developers/metrics/custom_metrics/
+          - name: Totaux
+            url: developers/metrics/counts
+          - name: Distributions
+            url: developers/metrics/distributions
+          - name: Gauges
+            url: developers/metrics/gauges
+          - name: Histogrammes
+            url: developers/metrics/histograms
+          - name: Taux
+            url: developers/metrics/rates
+          - name: Sets
+            url: developers/metrics/sets
+      - name: Bibliothèques
+        url: developers/libraries/
+      - name: Heures de permanence
+        url: developers/office_hours/
+      - name: Écrire un check custom
+        url: developers/write_agent_check
+      - name: Écrire un check Prometheus
+        url: developers/prometheus
+      - name: Intégrations
+        url: developers/integrations/
+        children:
+          - name: Créer une intégration
+            url: developers/integrations/new_check_howto
+          - name: Python
+            url: developers/integrations/python
+          - name: Legacy
+            url: developers/integrations/legacy
+      - name: Guides
+        url: developers/guide/
+  - name: API
+    url: api/
+    pre: nav_api
+  - name: Gestion de compte
+    url: account_management/
+    pre: nav_account
+    children:
+      - name: Gestion d'équipe
+        url: account_management/team/
+      - name: Paramètres d'organisation
+        url: account_management/org_settings/
+      - name: Authentification unique avec SAML
+        url: account_management/saml/
+        children:
+          - name: "Active\_Directory"
+            url: account_management/saml/activedirectory
+          - name: Auth0
+            url: account_management/saml/auth0
+          - name: Azure
+            url: account_management/saml/azure
+          - name: Google
+            url: account_management/saml/google
+          - name: NoPassword
+            url: account_management/saml/nopassword
+          - name: Okta
+            url: account_management/saml/okta
+          - name: SafeNet
+            url: account_management/saml/safenet
+      - name: Comptes multi-organisations
+        url: account_management/multi_organization/
+      - name: Changer d'organisation
+        url: account_management/org_switching/
+      - name: Facturation
+        url: account_management/billing/
+      - name: Les clés d'API et d'application
+        url: account_management/api-app-keys/
+  - name: Sécurité
+    url: security/
+    pre: nav_security
+    children:
+      - name: Agent
+        url: security/agent
+      - name: APM (tracing)
+        url: security/tracing
+      - name: Log Management
+        url: security/logs
+      - name: Considérations supplémentaires
+        url: security/other
+  - name: Glossaire
+    url: glossary/
+    pre: nav_glossary
+  - name: Vidéos
+    url: videos/
+    pre: nav_videos
+  - name: Aide
+    url: help/
+    pre: nav_help
