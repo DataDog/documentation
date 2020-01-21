@@ -10,7 +10,7 @@ further_reading:
 
 The Roles API is used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
 
-Permissions related to specific account assets can be granted to roles in the Datadog application without using this API. For example, granting read access on a specific log index to a role can be done in Datadog from [the Pipelines Page][1].
+Permissions related to specific account assets can be granted to roles on the Datadog site without using this API. For example, granting read access on a specific log index to a role can be done in Datadog from the [Pipelines page][1].
 
 ## Permission UUIDs
 
