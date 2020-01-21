@@ -16,7 +16,7 @@ Permissions related to specific account assets can be granted to roles in the Da
 All the API endpoints below can have two different host endpoints:
 
 * If you are on the Datadog US site: `https://api.datadoghq.com/api/`
-* If you are on the Datadog EU site: `https://api.datadoghq.eu/api/`
+* For the Datadog EU site: `https://api.datadoghq.eu/api/`
 
 [1]: /account_management/faq/how-do-i-grant-or-remove-a-global-permission-to-or-from-a-role
 [2]: https://app.datadoghq.com/logs/pipelines
