@@ -70,7 +70,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
     .toc {
         top: 100px;
-        padding-top: 5px;
         padding-bottom: 50px;
         overflow-x: hidden;
         overflow-y: auto;
@@ -101,7 +100,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
             .toc_open + ul a {
                 color: $studioViolet;
-                padding: 10px 0px 10px 15px;
+                padding: 2px 0px 2px 15px;
             }
 
             // all scrolled link styles
@@ -117,11 +116,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                         & > li {
                             // First top level item
                             &:nth-child(1) > a {
-                                padding-top: 12px;
+                                padding-top: 6px;
                             }
                             // First top level item
                             &:last-child > a {
-                                padding-bottom: 12px;
+                                padding-bottom: 6px;
                             }
                             &.toc_scrolled {
                                 background: none;
@@ -139,7 +138,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 }
                             }
                             a {
-                                padding: 20px 0px 20px 15px;
+                                padding: 2px 0px 2px 10px;
                                 border-left: 2px solid $ddgray;
                                 font-size: 18px;
                             }
@@ -154,7 +153,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 & > li {
                                     a {
                                         font-weight: normal;
-                                        font-size: 14px;
+                                        font-size: 18px;
                                         color: $darkGreyGrey;
                                     }
 
@@ -266,12 +265,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 }
                             }
                             a {
-                                padding: 30px 60px 30px 30px;
+                                padding: 10px 60px 10px 30px;
                                 display: flex;
                                 align-items: center;
 
                                 &.toc_open {
-                                    padding: 30px 60px 30px 30px;
+                                    padding: 10px 60px 10px 30px;
                                     &:after {
                                         font-family: 'Glyphter' !important;
                                         content: '\0064'; // upward chevron
