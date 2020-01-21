@@ -33,7 +33,11 @@ Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to 
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+**It is recommended to fully install the Agent.** However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE and Ubuntu. This package is for containerized environments where DogStatsD needs to be run as a sidecar or for those who need to install a DogStatsD server without full Agent functionality.
+
+The standalone DogStatsD package is installed exactly as the full agent version (see an example [here][2]) **except** that every occurrence of `Datadog-agent` should be replaced with `Datadog-dogstatsd`. A docker image is available in the [DogStatsD6 docker image repo][3].
+
+Packages are also available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
@@ -55,3 +59,5 @@ Packages are available for 64-bit x86 and Arm v8 architectures. For other archit
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
+[2]: https://app.datadoghq.com/account/settings#agent/aws
+[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/dogstatsd/alpine
