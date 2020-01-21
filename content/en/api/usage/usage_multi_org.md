@@ -7,7 +7,7 @@ external_redirect: /api/#get-usage-across-your-multi-org-account
 
 ## Get usage across your multi-org account
 
-Get usage across your multi-org account
+Get usage across your multi-org account. This action may **only** be processed on the parent organization. Using this call on a child organization will result in `{"errors": ["Access was denied to this resource."]}`.
 
 **ARGUMENTS**:
 
