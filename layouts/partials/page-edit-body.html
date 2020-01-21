@@ -2,7 +2,7 @@
 {{ $ctx := .ctx }}
 {{ $type := .type }}
 {{ if eq $type "edit"}}
-<div class="pb-2 js-toc-edit-btn toc-edit-btn"><a href="{{.link}}" class="text-primary">{{ partial "img.html" (dict "root" $ctx "src" "icons/icon-pencil.svg" "class" "static" "alt" "edit" "width" "25") }} Edit</a></div>
+<div class="pb-2 js-toc-edit-btn toc-edit-btn"><a href="{{.link}}" class="text-primary text-uppercase font-semibold font-18">{{ partial "img.html" (dict "root" $ctx "src" "icons/icon-pencil.svg" "class" "static" "alt" "edit" "width" "25") }} Edit</a></div>
 {{ else if eq $type "contribute" }}
 <hr class="mt-40">
 <div class="py-2">
