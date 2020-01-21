@@ -61,6 +61,9 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 1. Click on a pattern from the pattern view list.
 2. Click the **View All** button in the top right corner to automatically generate the search query associated with this pattern.
 3. Select the `</>` option to the right of the search query and copy the search query.
+
+{{< img src="logs/guide/getting-started-lwl/pattern_view.gif" alt="Pattern View" style="width:100%;">}}
+
 4. Navigate to the **Configuration** page under Logs in the main menu. Select **indexes** and click on your associated index. This will populate the option to add an exclusion filter.
 5. Select **Add an Exclusion Filter**.
 6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
