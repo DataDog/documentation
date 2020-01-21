@@ -29,7 +29,7 @@ Un dashboard est un outil vous permettant de surveiller visuellement, d'analyser
 
 Recherchez, consultez ou créez des dashboards et des listes depuis la page [Dashboard List][1]. Par défaut, il s'agit de la page vers laquelle vous êtes redirigé après votre connexion. Pour modifier la page d'accueil par défaut de votre organisation, contactez l'[assistance Datadog][2].
 
-{{< img src="dashboards/dashboards/dashboard_list2.png" alt="Page Dashboard List" >}}
+{{< img src="dashboards/dashboard_list2.png" alt="Page Dashboard List" >}}
 
 ### Nouvelle liste
 
@@ -39,7 +39,7 @@ Le titre de la liste est automatiquement défini sur le prénom de l'utilisateur
 
 Pour ajouter des dashboards à une liste, cochez les cases correspondantes dans la liste de dashboards principale. Cliquez ensuite sur le bouton *Add to List* dans le coin supérieur droit de la liste de dashboards :
 
-{{< img src="dashboards/dashboards/dash_to_list.png" alt="Ajouter un dashboard à une liste" style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="Ajouter un dashboard à une liste" style="width:70%;">}}
 
 ### Listes
 
@@ -116,7 +116,7 @@ Depuis un tableau de bord, vous pouvez copier, importer ou exporter son fichier 
 
 Depuis un dashboard, Datadog vous propose des suggestions de dashboards pertinents. Pour afficher les dashboards conseillés et les utilisateurs actifs, cliquez sur l'icône en forme d'accent circonflexe en regard du titre du dashboard. Ces dashboards sont conseillés en fonction de l'activité des utilisateurs de votre organisation et de la fréquence à laquelle ils passent de ce dashboard à d'autres dashboards existant. Vous pouvez également ajouter ou mettre à jour des descriptions de dashboard au format Markdown en cliquant sur `edit` depuis cette vue.
 
-{{< img src="dashboards/dashboards/suggested_dashboards.png" alt="Dashboards conseillés" >}}
+{{< img src="dashboards/suggested_dashboards.png" alt="Dashboards conseillés" >}}
 
 ## Pour aller plus loin
 
