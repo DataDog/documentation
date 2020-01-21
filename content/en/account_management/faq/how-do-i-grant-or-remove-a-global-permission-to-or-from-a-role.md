@@ -16,7 +16,7 @@ Permissions related to specific account assets can be granted to roles on the Da
 
 To grant or remove a global permission to/from a role, use the UUID for both the role and the permission.
 
-The UUID of the roles can be found from the `GET roles` API call.
+The UUID of the roles is available in the `GET roles` API call.
 
 The UUIDs for the permissions are as follows:
 
