@@ -35,7 +35,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 
 **It is recommended to fully install the Agent.** However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.
 
-The standalone DogStatsD package is installed exactly as the full agent version (see an example [here][2]) **except** that every occurrence of `Datadog-agent` should be replaced with `Datadog-dogstatsd`. A docker image is available in the [DogStatsD6 docker image repo][3].
+The standalone DogStatsD package is installed with the Agent [one-line install command][2] **except** every occurrence of `datadog-agent` should be replaced with `datadog-dogstatsd`. A Docker image is available in the [DogStatsD6 Docker image repo][3].
 
 Packages are also available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
