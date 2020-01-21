@@ -24,7 +24,7 @@ The UUIDs for the permissions are as follows:
 {{% tab "Datadog US site" %}}
 | name                         | UUID                                 | description                                   |
 |------------------------------|--------------------------------------|-----------------------------------------------|
-| admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Read and write permission to all of datadog   |
+| admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Read and write permission to all of Datadog   |
 | standard                     | 984d2f00-d3b4-11e8-a200-bb47109e9987 | Read and write permission to most of Datadog  |
 | logs_read_index_data         | 5e605652-dd12-11e8-9e53-375565b8970e | Read a subset of all log indexes              |
 | logs_modify_indexes          | 62cc036c-dd12-11e8-9e54-db9995643092 | Update the definition of log indexes          |
