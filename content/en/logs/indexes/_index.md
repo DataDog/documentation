@@ -47,9 +47,9 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 ## Exclusion Filters
 
-By default, logs indexes have no exclusion filter: meaning all logs matching the [Index Filter](#indexes-filters) are indexed.
+By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-But because your logs are not all and equally valuable; exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
 
 Exclusion filters are defined by a query, a sampling rule, and a active/inactive toggle:
 
@@ -65,14 +65,14 @@ Exclusion filters are defined by a query, a sampling rule, and a active/inactive
 
 #### Switch off, switch on
 
-You might not need your DEBUG logs... until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][19] when required.
+You might not need your DEBUG logs until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][19] when required.
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
 #### Keep an eye on trends
 
-Let's say now that you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
-Pro tip, transform these web access logs into meaningful KPIs with a [metric generated from your logs][10], counting number of requests and tagged by status code, [browser][12] and [country][13].
+Let's say now you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
+**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][10], counting number of requests and tagged by status code, [browser][12] and [country][13].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
 
@@ -82,14 +82,14 @@ You have millions of users connecting to your marketplace everyday. And although
 
 {{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
 
-You use APM in conjunction with Logs, thanks to [trace ID injection in logs][14]. As for users, you don't need to keep all your logs, but making sure logs always give the full picture to a trace is critical for troubleshooting.
-Set up an exclusion filter applying to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][15] upstream in your pipelines.
+You can use APM in conjunction with Logs, thanks to [trace ID injection in logs][14]. As for users, you don't need to keep all your logs but making sure logs always give the full picture to a trace is critical for troubleshooting.
+Set up an exclusion filter applied to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][15] upstream in your pipelines.
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
 ## Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied).
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
 Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][16], [sent to your archives][17], and used to [generate metrics from logs][18].
 
 Update or remove this quota at any time when editing the Index:
