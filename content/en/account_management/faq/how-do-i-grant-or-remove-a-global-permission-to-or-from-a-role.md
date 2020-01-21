@@ -22,7 +22,7 @@ The UUIDs for the permissions are as follows:
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
-| name                         | UUID                                 | description                                   |
+| Name                         | UUID                                 | Description                                   |
 |------------------------------|--------------------------------------|-----------------------------------------------|
 | admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Read and write permission to all of Datadog   |
 | standard                     | 984d2f00-d3b4-11e8-a200-bb47109e9987 | Read and write permission to most of Datadog  |
