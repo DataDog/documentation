@@ -5,24 +5,23 @@ description: "Graph the current value of a metric in any monitor defined on your
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 Alert values are query values showing the current value of the metric in any monitor defined on your system:
 
-{{< img src="graphing/widgets/alert_value/alert_value.png" alt="Alert Value" responsive="true">}}
+{{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
 ## Setup
-
-{{< img src="graphing/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -43,7 +42,7 @@ Alert values are query values showing the current value of the metric in any mon
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -82,4 +81,4 @@ ALERT_VALUE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

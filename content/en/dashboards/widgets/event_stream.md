@@ -5,10 +5,10 @@ description: "Display filtered events from the Even Stream."
 aliases:
     - /graphing/widgets/event_stream/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -17,11 +17,11 @@ The event stream is a widget version of the stream of events on the [Event Strea
 
 Note: **this widget displays only the 100 most recent events**.
 
-{{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" responsive="true">}}
+{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="event stream" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="event stream setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -35,7 +35,7 @@ Note: **this widget displays only the 100 most recent events**.
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -74,6 +74,6 @@ EVENT_STREAM_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[1]: /events
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json/#time-schema

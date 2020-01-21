@@ -170,5 +170,5 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /integrations/faq/list-of-api-source-attribute-value
-[5]: /graphing/infrastructure/process
+[5]: /infrastructure/process
 [6]: /monitors/faq/what-are-recovery-thresholds

@@ -5,7 +5,7 @@ aliases:
     - /graphing/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data
 ---
 
-{{< img src="graphing/faq/aws_service_dashboard.png" alt="aws service dashboard" responsive="true" >}}
+{{< img src="dashboards/faq/aws_service_dashboard.png" alt="aws service dashboard"  >}}
 
 For your AWS Trusted Advisor integration dashboard to populate with data:
 
@@ -20,6 +20,6 @@ In the IAM Console, add `support:describe*` and `support: refresh*` as an action
 
 The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trusted Advisor checks][1]. AWS makes these only available for upgraded AWS support plans. Make sure that your AWS plan includes full access:
 
-{{< img src="graphing/faq/aws_support_plan.png" alt="aws support plan" responsive="true" >}}
+{{< img src="dashboards/faq/aws_support_plan.png" alt="aws support plan"  >}}
 
 [1]: https://aws.amazon.com/premiumsupport/trustedadvisor

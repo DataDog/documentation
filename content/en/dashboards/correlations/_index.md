@@ -5,10 +5,10 @@ aliases:
     - /graphing/correlations/
 beta: true
 further_reading:
-- link: "graphing/dashboards"
+- link: "/dashboards"
   tag: "Documentation"
   text: "Datadog Dashboards"
-- link: "graphing/notebooks"
+- link: "/notebooks"
   tag: "Documentation"
   text: "Datadog Notebooks"
 - link: "/tracing/visualization/service"
@@ -33,9 +33,9 @@ You can start your metric correlations exploration from any of your dashboards, 
 * If the area of interest is not selected automatically or needs adjustment, you can manually draw the area of interest from the [edit search](#edit) option.
 * Datadog searches for other metrics that exhibited anomalous behavior in a time aligned with the area of interest.
 
-{{< img src="graphing/correlations/dashboard_search1.png" alt="Dashboard search" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/correlations/dashboard_search1.png" alt="Dashboard search"  style="width:80%;">}}
 
-{{< img src="graphing/correlations/dashboard_search2.png" alt="Dashboard search" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/correlations/dashboard_search2.png" alt="Dashboard search"  style="width:80%;">}}
 
 **Note**: Correlation searches are available for a single metric. For graphs with multiple metrics, select the series of interest. From a full-screen graph, select one series on the graph legend, then click the **Correlations** tab.
 
@@ -49,7 +49,7 @@ You can customize the default search parameters by clicking the **Edit Search** 
 * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
 * Use the tag filter box to scope the search by a tag.
 
-{{< img src="graphing/correlations/edit_search.png" alt="Edit search" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/correlations/edit_search.png" alt="Edit search"  style="width:80%;">}}
 
 ### Results
 
@@ -60,7 +60,7 @@ A list of search results is displayed below the search graph with the following:
 * **Correlations**: The number of correlated metrics found.
 * **Preview**: A preview graph of the correlated metrics.
 
-{{< img src="graphing/correlations/search_results.png" alt="Search results" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/correlations/search_results.png" alt="Search results"  style="width:80%;">}}
 
 As results load, you can explore the details without waiting for all results. When the search is finished, the message "Search completed!" appears.
 
@@ -73,7 +73,7 @@ Select a row from the results list to investigate the details.
 * Sources for each metric are linked by name. For example, dashboard names link to the dashboard.
 * Use the export icon to export the graph to a dashboard, notebook, or copy the query.
 
-{{< img src="graphing/correlations/detail_view.png" alt="Detail view" responsive="true" style="width:90%;">}}
+{{< img src="dashboards/correlations/detail_view.png" alt="Detail view"  style="width:90%;">}}
 
 ## Further Reading
 

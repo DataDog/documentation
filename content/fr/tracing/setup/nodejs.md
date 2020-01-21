@@ -131,65 +131,66 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 | [express][11]    | `>=4`    | Prise en charge complète | Prend en charge Sails, Loopback et [plus encore][12]   |
 | [fastify][13]    | `>=1`    | Prise en charge complète |                                            |
 | [graphql][14]    | `>=0.10` | Prise en charge complète | Prend en charge Apollo Server et express-graphql |
-| [hapi][15]       | `>=2`    | Prise en charge complète |                                            |
-| [koa][16]        | `>=2`    | Prise en charge complète |                                            |
-| [paperplane][17] | `>=2.3`  | Prise en charge complète | Non pris en charge en [mode sans serveur][18]     |
-| [restify][19]    | `>=3`    | Prise en charge complète |                                            |
+| [gRPC][15]       | `>=1.13` | Prise en charge complète |                                            |
+| [hapi][16]       | `>=2`    | Prise en charge complète |                                            |
+| [koa][17]        | `>=2`    | Prise en charge complète |                                            |
+| [paperplane][18] | `>=2.3`  | Prise en charge complète | Non pris en charge en [mode sans serveur][19]     |
+| [restify][20]    | `>=3`    | Prise en charge complète |                                            |
 
 #### Compatibilité des modules natifs
 
 | Module      | Type de prise en charge    |
 |-------------|-----------------|
-| [dns][20]   | Prise en charge complète |
-| [http][21]  | Prise en charge complète |
-| [https][22] | Prise en charge complète |
-| [net][23]   | Prise en charge complète |
+| [dns][21]   | Prise en charge complète |
+| [http][22]  | Prise en charge complète |
+| [https][23] | Prise en charge complète |
+| [net][24]   | Prise en charge complète |
 
 #### Compatibilité des datastores
 
 | Module                 | Versions | Type de prise en charge    | Remarques                                            |
 |------------------------|----------|-----------------|--------------------------------------------------|
-| [cassandra-driver][24] | `>=3`    | Prise en charge complète |                                                  |
-| [couchbase][25]        | `^2.4.2` | Prise en charge complète |                                                  |
-| [elasticsearch][26]    | `>=10`   | Prise en charge complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][27]          | `>=2`    | Prise en charge complète |                                                  |
-| [knex][28]             | `>=0.8`  | Prise en charge complète | Cette intégration est uniquement pour la propagation en contexte |
-| [memcached][29]        | `>=2.2`  | Prise en charge complète |                                                  |
-| [mongodb-core][30]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
-| [mysql][31]            | `>=2`    | Prise en charge complète |                                                  |
-| [mysql2][32]           | `>=1`    | Prise en charge complète |                                                  |
-| [pg][33]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` en cas d'utilisation conjointe avec `pg`         |
-| [redis][34]            | `>=0.12` | Prise en charge complète |                                                  |
-| [tedious][35]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
+| [cassandra-driver][25] | `>=3`    | Prise en charge complète |                                                  |
+| [couchbase][26]        | `^2.4.2` | Prise en charge complète |                                                  |
+| [elasticsearch][27]    | `>=10`   | Prise en charge complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][28]          | `>=2`    | Prise en charge complète |                                                  |
+| [knex][29]             | `>=0.8`  | Prise en charge complète | Cette intégration est uniquement pour la propagation en contexte |
+| [memcached][30]        | `>=2.2`  | Prise en charge complète |                                                  |
+| [mongodb-core][31]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
+| [mysql][32]            | `>=2`    | Prise en charge complète |                                                  |
+| [mysql2][33]           | `>=1`    | Prise en charge complète |                                                  |
+| [pg][34]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` en cas d'utilisation conjointe avec `pg`         |
+| [redis][35]            | `>=0.12` | Prise en charge complète |                                                  |
+| [tedious][36]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
 
 #### Compatibilité des workers
 
 | Module             | Versions | Type de prise en charge    | Remarques                                                  |
 |--------------------|----------|-----------------|--------------------------------------------------------|
-| [amqp10][36]       | `>=3`    | Prise en charge complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
-| [amqplib][37]      | `>=0.5`  | Prise en charge complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
-| [generic-pool][38] | `>=2`    | Prise en charge complète |                                                        |
-| [kafka-node][39]   |          | Disponible prochainement     |                                                        |
-| [rhea][40]         |          | Disponible prochainement     |                                                        |
+| [amqp10][37]       | `>=3`    | Prise en charge complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
+| [amqplib][38]      | `>=0.5`  | Prise en charge complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
+| [generic-pool][39] | `>=2`    | Prise en charge complète |                                                        |
+| [kafka-node][40]   |          | Disponible prochainement     |                                                        |
+| [rhea][41]         |          | Disponible prochainement     |                                                        |
 
 #### Compatibilité des bibliothèques Promise
 
 | Module           | Versions  | Type de prise en charge    |
 |------------------|-----------|-----------------|
-| [bluebird][41]   | `>=2`     | Prise en charge complète |
-| [promise][42]    | `>=7`     | Prise en charge complète |
-| [promise-js][43] | `>=0.0.3` | Prise en charge complète |
-| [q][44]          | `>=1`     | Prise en charge complète |
-| [when][45]       | `>=3`     | Prise en charge complète |
+| [bluebird][42]   | `>=2`     | Prise en charge complète |
+| [promise][43]    | `>=7`     | Prise en charge complète |
+| [promise-js][44] | `>=0.0.3` | Prise en charge complète |
+| [q][45]          | `>=1`     | Prise en charge complète |
+| [when][46]       | `>=3`     | Prise en charge complète |
 
 #### Compatibilité des loggers
 
 | Module           | Versions  | Type de prise en charge    |
 |------------------|-----------|-----------------|
-| [bunyan][46]     | `>=1`     | Prise en charge complète |
-| [paperplane][47] | `>=2.3.2` | Prise en charge complète |
-| [pino][48]       | `>=2`     | Prise en charge complète |
-| [winston][49]    | `>=1`     | Prise en charge complète |
+| [bunyan][47]     | `>=1`     | Prise en charge complète |
+| [paperplane][48] | `>=2.3.2` | Prise en charge complète |
+| [pino][49]       | `>=2`     | Prise en charge complète |
+| [winston][50]    | `>=1`     | Prise en charge complète |
 
 ## Pour aller plus loin
 
@@ -209,38 +210,39 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 [12]: https://expressjs.com/en/resources/frameworks.html
 [13]: https://www.fastify.io
 [14]: https://github.com/graphql/graphql-js
-[15]: https://hapijs.com
-[16]: https://koajs.com
-[17]: https://github.com/articulate/paperplane
-[18]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
-[19]: http://restify.com
-[20]: https://nodejs.org/api/dns.html
-[21]: https://nodejs.org/api/http.html
-[22]: https://nodejs.org/api/https.html
-[23]: https://nodejs.org/api/net.html
-[24]: https://github.com/datastax/nodejs-driver
-[25]: https://github.com/couchbase/couchnode
-[26]: https://github.com/elastic/elasticsearch-js
-[27]: https://github.com/luin/ioredis
-[28]: https://knexjs.org
-[29]: https://github.com/3rd-Eden/memcached
-[30]: http://mongodb.github.io/node-mongodb-native/core
-[31]: https://github.com/mysqljs/mysql
-[32]: https://github.com/sidorares/node-mysql2
-[33]: https://node-postgres.com
-[34]: https://github.com/NodeRedis/node_redis
-[35]: http://tediousjs.github.io/tedious
-[36]: https://github.com/noodlefrenzy/node-amqp10
-[37]: https://github.com/squaremo/amqp.node
-[38]: https://github.com/coopernurse/node-pool
-[39]: https://github.com/SOHU-Co/kafka-node
-[40]: https://github.com/amqp/rhea
-[41]: https://github.com/petkaantonov/bluebird
-[42]: https://github.com/then/promise
-[43]: https://github.com/kevincennis/promise
-[44]: https://github.com/kriskowal/q
-[45]: https://github.com/cujojs/when
-[46]: https://github.com/trentm/node-bunyan
-[47]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[48]: http://getpino.io
-[49]: https://github.com/winstonjs/winston
+[15]: https://grpc.io/
+[16]: https://hapijs.com
+[17]: https://koajs.com
+[18]: https://github.com/articulate/paperplane
+[19]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[20]: http://restify.com
+[21]: https://nodejs.org/api/dns.html
+[22]: https://nodejs.org/api/http.html
+[23]: https://nodejs.org/api/https.html
+[24]: https://nodejs.org/api/net.html
+[25]: https://github.com/datastax/nodejs-driver
+[26]: https://github.com/couchbase/couchnode
+[27]: https://github.com/elastic/elasticsearch-js
+[28]: https://github.com/luin/ioredis
+[29]: https://knexjs.org
+[30]: https://github.com/3rd-Eden/memcached
+[31]: http://mongodb.github.io/node-mongodb-native/core
+[32]: https://github.com/mysqljs/mysql
+[33]: https://github.com/sidorares/node-mysql2
+[34]: https://node-postgres.com
+[35]: https://github.com/NodeRedis/node_redis
+[36]: http://tediousjs.github.io/tedious
+[37]: https://github.com/noodlefrenzy/node-amqp10
+[38]: https://github.com/squaremo/amqp.node
+[39]: https://github.com/coopernurse/node-pool
+[40]: https://github.com/SOHU-Co/kafka-node
+[41]: https://github.com/amqp/rhea
+[42]: https://github.com/petkaantonov/bluebird
+[43]: https://github.com/then/promise
+[44]: https://github.com/kevincennis/promise
+[45]: https://github.com/kriskowal/q
+[46]: https://github.com/cujojs/when
+[47]: https://github.com/trentm/node-bunyan
+[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[49]: http://getpino.io
+[50]: https://github.com/winstonjs/winston

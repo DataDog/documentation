@@ -6,10 +6,10 @@ aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
   - /graphing/metrics/summary/
 further_reading:
-  - link: "graphing/metrics/explorer"
+  - link: "/metrics/explorer"
     tag: "Documentation"
     text: "Metrics Explorer"
-  - link: "graphing/metrics/distributions"
+  - link: "/metrics/distributions"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---
@@ -22,7 +22,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 The metric panel displays key information for a given metric.
 
-{{< img src="graphing/metrics/summary/metric_panel.png" alt="Metric panel" responsive="true" style="width:80%;">}}
+{{< img src="metrics/summary/metric_panel.png" alt="Metric panel"  style="width:80%;">}}
 
 ### Metric name
 
@@ -73,8 +73,8 @@ The collection interval for the metric in seconds.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /graphing/metrics/explorer
-[3]: /graphing/dashboards
+[2]: /metrics/explorer
+[3]: /dashboards
 [4]: /developers/metrics/custom_metrics
 [5]: /tagging
 [6]: /api/?lang=python#edit-metric-metadata

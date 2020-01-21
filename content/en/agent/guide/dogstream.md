@@ -194,7 +194,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 This specific log-line parsed with this parser created the following event in Datadog:
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog"  style="width:70%;">}}
 
 ## Send extra parameters to your custom parsing function
 
@@ -247,7 +247,7 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [1]: https://app.datadoghq.com/infrastructure#tags
 [2]: /api/#tags
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
-[4]: /graphing/event_stream
+[4]: /events
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
 [6]: /agent/guide/agent-log-files
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211

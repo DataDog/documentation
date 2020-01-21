@@ -161,7 +161,7 @@ For Agent v6.12+, when using a [proxy configuration][12] with the Buildpack, a v
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
 
 ### Build
 
@@ -292,11 +292,11 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map"  >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail"  >}}
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -398,7 +398,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
 
 ## Data Collected
 

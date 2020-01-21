@@ -5,7 +5,7 @@ description: "Displays a map of a service to all of the services that call it, a
 aliases:
     - /graphing/widgets/service_map/
 further_reading:
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -14,11 +14,11 @@ This widget displays a map of a service to all of the services that call it, and
 
 The service map widget does not respond to time scoping and always shows services that made calls in the preceding two weeks. Metrics are calculated for each services in real time for the previous hour.
 
-{{< img src="graphing/widgets/service_map/test_service_map.png" alt="service map setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="service map setup"  style="width:80%;">}}
 
 ## Setup
 
-{{< img src="graphing/widgets/service_map/service_map.png" alt="service map setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/service_map.png" alt="service map setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -61,6 +61,6 @@ SERVICEMAP_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces
-[2]: /tracing/advanced/setting_primary_tags_to_scope
+[2]: /tracing/guide/setting_primary_tags_to_scope
 [3]: /tracing/visualization/service
-[4]: /graphing/graphing_json/widget_json
+[4]: /dashboards/graphing_json/widget_json

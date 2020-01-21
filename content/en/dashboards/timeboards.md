@@ -3,14 +3,15 @@ title: Timeboards
 kind: documentation
 aliases:
     - /graphing/dashboards/timeboard/
+    - /dashboards/timeboard/
 further_reading:
-- link: "graphing/dashboards/template_variables"
+- link: "/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "graphing/dashboards/shared_graph"
+- link: "/dashboards/sharing"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/widgets"
+- link: "/dashboards/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -44,7 +45,7 @@ After [creating your timeboard][8], add graphs using the **Edit widgets** button
 
 Set up an overlay of events by clicking the **Search...** link in the upper left, select **Events**, and enter a [query][10] in the search box. This replaces event overlays added at design time, and applies to all graphs on the timeboard. The overlay shows the occurrence of events on your timeseries graphs with a list of events on the right.
 
-{{< img src="graphing/dashboards/timeboard/events_overlay.png" alt="Events overlay" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/timeboard/events_overlay.png" alt="Events overlay"  style="width:75%;">}}
 
 ### Logs
 
@@ -54,7 +55,7 @@ Set up an overlay of logs by clicking the **Search...** link in the upper left, 
 
 Left click on any dashboard timeseries graph to open an options menu:
 
-{{< img src="graphing/dashboards/timeboard/metric_to_logs.png" alt="Related logs" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/timeboard/metric_to_logs.png" alt="Related logs"  style="width:80%;">}}
 
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|
@@ -77,18 +78,18 @@ The search query for **View related logs** is defined using the following parame
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/screenboard
-[2]: /graphing/dashboards/screenboard/#display-utc-time
-[3]: /graphing/dashboards/screenboard/#notifications
-[4]: /graphing/dashboards/screenboard/#permissions
-[5]: /graphing/dashboards/screenboard/#clone-dashboard
-[6]: /graphing/dashboards/screenboard/#copy-import-or-export-dashboard-json
-[7]: /graphing/dashboards/screenboard/#delete-dashboard
-[8]: /graphing/dashboards/#new-dashboard
-[9]: /graphing/widgets
-[10]: /graphing/event_stream/#event-query-language
+[1]: /dashboards/screenboard
+[2]: /dashboards/screenboards/#display-utc-time
+[3]: /dashboards/screenboards/#notifications
+[4]: /dashboards/screenboards/#permissions
+[5]: /dashboards/screenboards/#clone-dashboard
+[6]: /dashboards/screenboards/#copy-import-or-export-dashboard-json
+[7]: /dashboards/screenboards/#delete-dashboard
+[8]: /dashboards/#new-dashboard
+[9]: /dashboards/widgets
+[10]: /events/#event-query-language
 [11]: /logs/explorer/search/#search-syntax
-[12]: /graphing/widgets/#full-screen
+[12]: /dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map
 [15]: https://app.datadoghq.com/logs

@@ -70,8 +70,8 @@ Consultez la documentation relative aux [monitors de métrique][3] pour en savoi
 Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][7].
 
 ## Pour aller plus loin
-{{< partial name="whats-next/whats-next.html" >}}
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/process
 [2]: https://app.datadoghq.com/monitors#create/process

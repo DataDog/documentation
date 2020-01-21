@@ -5,7 +5,6 @@ static_url: "http://localhost:1313/"
 
 
 header_scripts:
-  - datadog_monitoring: true
   - hotjar: false
   - google-tag-manager: false
   - google-site-tag: false
@@ -15,11 +14,3 @@ footer_scripts:
   - snowplow: false
   - adroll: false
 
-datadog:
-  clientToken: pub36877d3864fab670b5ae7e1d5d26cb0
-  logging_handler: console
-
-algolia:
-  appId: EOIG7V0A2O
-  apiKey: c7ec32b3838892b10610af30d06a4e42
-  indexName: docsearch_docs_preview

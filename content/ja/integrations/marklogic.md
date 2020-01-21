@@ -15,6 +15,7 @@ short_description: Marklogic からログを収集して Datadog に送信
 Marklogic からログを収集して Datadog に送信します。
 
 ## セットアップ
+
 ### インストール
 
 Marklogic インテグレーションは [Datadog Agent][1] パッケージに含まれています。ホストに追加でインストールする必要はありません。

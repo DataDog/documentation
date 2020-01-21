@@ -15,7 +15,7 @@ further_reading:
   - link: "tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/advanced/"
+  - link: "tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---
@@ -101,10 +101,14 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For Alpine Linux you also need to install `libc6-compat`
+For Alpine Linux, you also need to install the following packages:
 
 ```bash
+# All Alpine versions
 apk add libc6-compat
+
+# Alpine versions 3.9 and higher
+apk add gcompat
 ```
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
@@ -507,6 +511,6 @@ The following table lists configuration variables that are available only when u
 [3]: /help
 [4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/advanced/manual_instrumentation/?tab=net
+[6]: /tracing/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[8]: /tracing/guide/setting_primary_tags_to_scope/#environment

@@ -5,23 +5,23 @@ description: "Display a filtered log stream in your Datadog dashboards."
 aliases:
     - /graphing/widgets/log_stream/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 The Log Stream displays a log flow matching the defined query:
 
-{{< img src="graphing/widgets/log_stream/log_stream.png" alt="Log stream" responsive="true">}}
+{{< img src="dashboards/widgets/log_stream/log_stream.png" alt="Log stream" >}}
 
 ## Setup
 
 ### Configuration
 
-{{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Log stream setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/log_stream/log_stream_setup.png" alt="Log stream setup"  style="width:80%;">}}
 
 Enter a [log query][1] to filter the log stream.
 
@@ -39,7 +39,7 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -53,6 +53,7 @@ LOG_STREAM_SCHEMA = {
     "properties": {
         "type": {"enum": ["log_stream"]},
         "logset": {"type": "string"},
+        "indexes": {"type": "array", "items": {"type": "string"}},
         "query": {"type": "string"},
         "columns": {"type": "array", "items": {"type": "string"}},
         "title": {"type": "string"},
@@ -60,7 +61,7 @@ LOG_STREAM_SCHEMA = {
         "title_align": {"enum": ["center", "left", "right"]},
         "time": TIME_SCHEMA
     },
-    "required": ["type", "logset"],
+    "required": ["type"],
     "additionalProperties": false
 }
 ```
@@ -68,7 +69,8 @@ LOG_STREAM_SCHEMA = {
 | Parameter     | Type   | Required | Description                                                                                                                |
 |---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
 | `type`        | string | yes      | Type of the widget, for the log stream widget use `log_stream`                                                             |
-| `logset`      | string | yes      | Which logset to use for the stream                                                                                         |
+| `indexes`     | string | no       | An array of index names to query in the stream.                                                                            |
+| `logset`      | string | no       | Deprecated: Use 'indexes' instead. The ID of the index to query in the stream.                                             |
 | `query`       | string | no       | Query to filter the log stream with                                                                                        |
 | `columns`     | array  | no       | Which columns to display on the widget                                                                                     |
 | `title`       | string | no       | Title of the widget                                                                                                        |
@@ -83,5 +85,5 @@ LOG_STREAM_SCHEMA = {
 [1]: /logs/explorer/search
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/?tab=measures#setup
-[4]: /graphing/graphing_json/widget_json
-[5]: /graphing/graphing_json/widget_json/#time-schema
+[4]: /dashboards/graphing_json/widget_json
+[5]: /dashboards/graphing_json/widget_json/#time-schema

@@ -10,9 +10,11 @@ further_reading:
     text: Créer une intégration
 ---
 ## Présentation
+
 Cette section explique comment rédiger un check custom d'Agent simple et utiliser `min_collection_interval`. Comme pour les intégrations standard reposant sur l'Agent, les checks customs sont programmés afin de s'exécuter à intervalles réguliers (par défaut, toutes les 15 secondes).
 
 ### Faut-il que je rédige un check d'Agent ou une intégration ?
+
 Les checks customs sont particulièrement utiles pour recueillir des métriques à partir d'applications personnalisées ou de systèmes uniques. Cependant, si vous souhaitez recueillir des métriques à partir d'une application commercialisée, d'un service public ou encore d'un projet open source, nous vous recommandons de [créer une intégration d'Agent complète][1].
 
 La version 6.4 de l'Agent Datadog et les versions ultérieures prennent en charge la publication et les mises à jour d'intégrations indépendamment des mises à jour de l'Agent Datadog. Depuis cette version, vous pouvez facilement partager des intégrations, ce qui permet à l'ensemble de la communauté Datadog de les utiliser.
@@ -20,7 +22,10 @@ La version 6.4 de l'Agent Datadog et les versions ultérieures prennent en char
 Pour découvrir comment rédiger une intégration, consultez la section [Créer une intégration][1]. Pour découvrir d'autres intégrations de la communauté, accédez au [référentiel GitHub integrations-extras][2].
 
 ## Implémentation
+
 Commencez par vérifier que l'[Agent][3] est bien installé. Si vous avez le moindre problème pendant l'implémentation, [contactez l'assistance Datadog][4].
+
+**Remarque** : si vous exécutez l'Agent v7+, votre check custom d'Agent doit être compatible avec Python 3. Si ce n'est pas le cas, il doit être compatible avec Python 2.7+.
 
 ## Check custom d'Agent
 
@@ -39,15 +44,14 @@ Le check hérite des valeurs de `AgentCheck` et envoie un gauge de valeur `1` po
 {{< code-block lang="python" filename="hello.py" >}}
 # le bloc try/except suivant rend le check custom compatible avec toutes les versions de l'Agent
 try:
-    # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent…
-    from checks import AgentCheck
+    # essayer d'abord d'importer la classe de base à partir des nouvelles versions de l'Agent…
+    from datadog_checks.base import AgentCheck
 except ImportError:
-    # …si la commande ci-dessus a échoué, le check s'exécute dans l'Agent version 6 ou ultérieure
-    from datadog_checks.checks import AgentCheck
+    # …si la commande ci-dessous échoue, le check est alors exécuté avec l'Agent version < 6.6.0
+    from checks import AgentCheck
 
 # Le contenu de la variable spéciale __version__ sera indiqué dans la page de statut de l'Agent
 __version__ = "1.0.0"
-
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
@@ -59,10 +63,11 @@ Pour en savoir plus sur l'interface fournie par la classe de base, consultez la 
 **Remarque** : lors de la sélection d'un nom pour votre check custom, ajoutez `custom_` en préfixe afin d'éviter tout conflit avec un nom d'intégration de l'Agent Datadog existante. Par exemple, si vous rédigez un check custom Postfix, nommez votre fichiers de check `custom_postfix.py` et `custom_postfix.yaml`, et non `postfix.py` et `postfix.yaml`.
 
 ### Intervalle de collecte
+
 Pour modifier l'intervalle de collecte de votre check, utilisez le paramètre `min_collection_interval` du fichier de configuration. Par défaut, sa valeur est définie sur `15`, ce qui signifie que la méthode `check` de votre classe est invoquée à la même intervalle que le reste des intégrations sur l'Agent.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 Pour la version 6 de l'Agent, `min_collection_interval` doit être ajouté au niveau des instances et configuré individuellement pour chaque instance.
 
 ```yaml
@@ -71,9 +76,10 @@ init_config:
 instances:
   - min_collection_interval: 30
 ```
- {{% /tab %}}
-{{% tab "Agent v5" %}}
-Pour la version 5 de l'Agent, `min_collection_interval` est ajouté dans la section `init_config` afin de définir la fréquence globale d'exécution du check.
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+Pour la version 5 de l'Agent, `min_collection_interval` doit être ajouté dans la section `init_config` afin de définir la fréquence d'exécution globale du check.
 
 ```yaml
 init_config:
@@ -81,6 +87,7 @@ init_config:
 
 instances: [{}]
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -91,15 +98,19 @@ instances: [{}]
 Pour vérifier que votre check s'exécute, utilisez la commande suivante :
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
- ```
-sudo -u dd-agent -- datadog-agent check <nom_check>
+{{% tab "Agents v6 et v7" %}}
+
+```shell
+sudo -u dd-agent -- datadog-agent check <NOM_CHECK>
 ```
- {{% /tab %}}
+
+{{% /tab %}}
 {{% tab "Agent v5" %}}
- ```
-sudo -u dd-agent -- dd-agent check <nom_check>
+
+```shell
+sudo -u dd-agent -- dd-agent check <NOM_CHECK>
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -109,9 +120,8 @@ Vous pouvez créer un check custom qui exécute un programme en ligne de command
 
 Pour exécuter un sous-processus au sein d'un check, utilisez la [fonction `get_subprocess_output()`][6] du module `datadog_checks.utils.subprocess_output`. La commande et ses arguments sont transmis à `get_subprocess_output()` sous la forme d'une liste. La commande et chacun de ses arguments constituent des chaînes de caractères au sein de la liste. Par exemple, cette commande saisie dans l'invite de commande :
 
-```
+```text
 $ vgs -o vg_free
-
 ```
 
 doit être transmise à `get_subprocess_output()` comme suit :
@@ -141,8 +151,8 @@ class LSCheck(AgentCheck):
         self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 
-
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/integrations/new_check_howto

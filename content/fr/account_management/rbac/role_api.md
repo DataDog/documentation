@@ -25,12 +25,11 @@ Tous les endpoints d'API ci-dessous peuvent avoir deux endpoints de host différ
 
 ### Récupérer tous les rôles
 
-
 Renvoie tous les rôles, y compris leurs noms et UUID.
 
 | Méthode | Chemin de l'endpoint | Charge utile requise |
-|--------|--------------|-------------------|
-| `GET`  | `/v2/roles`  | Aucune charge utile        |
+|--------|---------------|------------------|
+| `GET`  | `/v2/roles`   | Aucune charge utile       |
 
 ##### ARGUMENTS
 
@@ -43,7 +42,6 @@ Trie les rôles selon un champ donné. L'ordre de tri est **croissant** par déf
   * Options : **name**, **modified_at**, **user_count**
 * **`filter`**[*facultatif*, *défaut*=**None**] :
 Filtre tous les rôles selon une chaîne donnée.
-
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -62,38 +60,27 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "meta": {
-        "page": {
-            "total_filtered_count": 7,
-            "total_count": 7
+  "meta": {"page": {"total_filtered_count": 7, "total_count": 7}},
+  "data": [
+    {
+      "type": "roles",
+      "id": "$ROLE_UUID",
+      "attributes": {
+        "name": "$ROLE_NAME",
+        "created_at": "2000-02-29T16:50:43.607749+00:00",
+        "modified_at": "2000-02-29T16:50:43.607749+00:00",
+        "user_count": 2122
+      },
+      "relationships": {
+        "permissions": {
+          "data": [
+            {"type": "permissions", "id": "$PERMISSION_UUID"},
+            {"type": "permissions", "id": "$PERMISSION_UUID"}
+          ]
         }
-    },
-    "data": [
-        {
-            "type": "roles",
-            "id": "$ROLE_UUID",
-            "attributes": {
-                "name": "$ROLE_NAME",
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122
-            },
-            "relationships": {
-                "permissions": {
-                    "data": [
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        },
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        }
-                    ]
-                }
-            }
-        }
-    ]
+      }
+    }
+  ]
 }
 ```
 
@@ -104,9 +91,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Renvoie un rôle spécifique, y compris son nom et son UUID.
 
-| Méthode | Chemin de l'endpoint            | Charge utile requise |
-|--------|-------------------------|-------------------|
-| `GET`  | `/v2/roles/<UUID_RÔLE>` | Aucune charge utile        |
+| Méthode | Chemin de l'endpoint           | Charge utile requise |
+|--------|-------------------------|------------------|
+| `GET`  | `/v2/roles/<UUID_RÔLE>` | Aucune charge utile       |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -125,30 +112,24 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": {
-        "type": "roles",
-        "id": "$ROLE_UUID",
-        "attributes": {
-            "name": "$ROLE_NAME",
-            "created_at": "2000-02-29T16:50:43.607749+00:00",
-            "modified_at": "2000-02-29T16:50:43.607749+00:00",
-            "user_count": 2122
-        },
-        "relationships": {
-            "permissions": {
-                "data": [
-                    {
-                        "type": "permissions",
-                        "id": "$PERMISSION_UUID"
-                    },
-                    {
-                        "type": "permissions",
-                        "id": "$PERMISSION_UUID"
-                    }
-                ]
-            }
-        }
+  "data": {
+    "type": "roles",
+    "id": "$ROLE_UUID",
+    "attributes": {
+      "name": "$ROLE_NAME",
+      "created_at": "2000-02-29T16:50:43.607749+00:00",
+      "modified_at": "2000-02-29T16:50:43.607749+00:00",
+      "user_count": 2122
+    },
+    "relationships": {
+      "permissions": {
+        "data": [
+          {"type": "permissions", "id": "$PERMISSION_UUID"},
+          {"type": "permissions", "id": "$PERMISSION_UUID"}
+        ]
+      }
     }
+  }
 }
 ```
 
@@ -156,7 +137,6 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 {{< /tabs >}}
 
 ### Créer un rôle
-
 
 Crée un rôle. Renvoie le nom et l'UUID du rôle.
 
@@ -182,6 +162,7 @@ curl -X POST \
             }
         }'
 ```
+
 Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APPLICATION_DATADOG>` par les [clés d'API et d'application de votre organisation][1]. Consultez la [section UUID des autorisations](#uuid-des-autorisations) pour obtenir la liste des valeurs disponibles pour le paramètre `<NOM_RÔLE>`.
 
 [1]: https://app.datadoghq.com/account/settings#api
@@ -190,27 +171,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": {
-        "type": "roles",
-        "id": "$ROLE_UUID",
-        "attributes": {
-            "name": "$ROLE_NAME",
-            "created_at": "2000-02-29T16:50:43.607749+00:00",
-            "modified_at": "2000-02-29T16:50:43.607749+00:00"
-        },
-        "relationships": {
-            "permissions": {
-                "data": [
-                    {
-                        "type": "permissions",
-                        "id": "$PERMISSION_UUID"
-                    },
-                ]
-            }
-        }
+  "data": {
+    "type": "roles",
+    "id": "$ROLE_UUID",
+    "attributes": {
+      "name": "$ROLE_NAME",
+      "created_at": "2000-02-29T16:50:43.607749+00:00",
+      "modified_at": "2000-02-29T16:50:43.607749+00:00"
+    },
+    "relationships": {
+      "permissions": {
+        "data": [{"type": "permissions", "id": "$PERMISSION_UUID"}]
+      }
     }
+  }
 }
-
 ```
 
 {{% /tab %}}
@@ -220,9 +195,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Met à jour le nom d'un rôle existant. Renvoie le nom et l'UUID du rôle.
 
-| Méthode  | Chemin de l'endpoint            | Charge utile requise                                                |
-|---------|--------------------------|-----------------------------------------------------------------|
-| `PATCH` | `/v2/roles/<UUID_RÔLE>`  | **type="roles"**<br>**id="UUID_RÔLE"**<br>**attributes["name"]**|
+| Méthode  | Chemin de l'endpoint           | Charge utile requise                                                 |
+|---------|-------------------------|------------------------------------------------------------------|
+| `PATCH` | `/v2/roles/<UUID_RÔLE>` | **type="roles"**<br>**id="UUID_RÔLE"**<br>**attributes["name"]** |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -252,27 +227,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": {
-        "type": "roles",
-        "id": "$ROLE_UUID",
-        "attributes": {
-            "name": "$ROLE_NAME",
-            "created_at": "2000-02-29T16:50:43.607749+00:00",
-            "modified_at": "2000-02-29T16:50:43.607749+00:00"
-        },
-        "relationships": {
-            "permissions": {
-                "data": [
-                    {
-                        "type": "permissions",
-                        "id": "$PERMISSION_UUID"
-                    },
-                ]
-            }
-        }
+  "data": {
+    "type": "roles",
+    "id": "$ROLE_UUID",
+    "attributes": {
+      "name": "$ROLE_NAME",
+      "created_at": "2000-02-29T16:50:43.607749+00:00",
+      "modified_at": "2000-02-29T16:50:43.607749+00:00"
+    },
+    "relationships": {
+      "permissions": {
+        "data": [{"type": "permissions", "id": "$PERMISSION_UUID"}]
+      }
     }
+  }
 }
-
 ```
 
 {{% /tab %}}
@@ -282,9 +251,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Supprime un rôle.
 
-| Méthode   | Chemin de l'endpoint            | Charge utile requise |
-|----------|-------------------------|-------------------|
-| `DELETE` | `/v2/roles/<UUID_RÔLE>` | Aucune charge utile        |
+| Méthode   | Chemin de l'endpoint           | Charge utile requise |
+|----------|-------------------------|------------------|
+| `DELETE` | `/v2/roles/<UUID_RÔLE>` | Aucune charge utile       |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -309,12 +278,11 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ### Récupérer les autorisations
 
 Renvoie une liste de toutes les autorisations, y compris le nom, la description et l'UUID.
 
-| Méthode | Chemin de l'endpoint      | Charge utile requise |
+| Méthode | Chemin de l'endpoint     | Charge utile requise |
 |--------|-------------------|------------------|
 | `GET`  | `/v2/permissions` | Aucune charge utile       |
 
@@ -336,21 +304,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": [
-        {
-            "type": "permissions",
-            "id": "$PERMISSION_UUID",
-            "attributes": {
-                "name": "logs_metrics_write",
-                "display_name": "Logs metrics write",
-                "description": "Update a custom metric",
-                "created": "2000-02-29T14:26:26.983187+00:00",
-                "group_name": "Logs",
-                "display_type": "other",
-                "restricted": false
-            }
-        }
-    ]
+  "data": [
+    {
+      "type": "permissions",
+      "id": "$PERMISSION_UUID",
+      "attributes": {
+        "name": "logs_metrics_write",
+        "display_name": "Logs metrics write",
+        "description": "Update a custom metric",
+        "created": "2000-02-29T14:26:26.983187+00:00",
+        "group_name": "Logs",
+        "display_type": "other",
+        "restricted": false
+      }
+    }
+  ]
 }
 ```
 
@@ -361,9 +329,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Renvoie une liste de toutes les autorisations d'un rôle unique.
 
-| Méthode | Chemin de l'endpoint                        | Charge utile requise |
-|--------|--------------------------------------|------------------|
-| `GET`  | `/v2/roles/<UUID_RÔLE>/permissions`  | Aucune charge utile       |
+| Méthode | Chemin de l'endpoint                       | Charge utile requise |
+|--------|-------------------------------------|------------------|
+| `GET`  | `/v2/roles/<UUID_RÔLE>/permissions` | Aucune charge utile       |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -383,21 +351,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": [
-        {
-            "type": "permissions",
-            "id": "$PERMISSION_UUID",
-            "attributes": {
-                "name": "logs_metrics_write",
-                "display_name": "Logs metrics write",
-                "description": "Update a custom metric",
-                "created": "2000-02-29T14:26:26.983187+00:00",
-                "group_name": "Logs",
-                "display_type": "other",
-                "restricted": false
-            }
-        }
-    ]
+  "data": [
+    {
+      "type": "permissions",
+      "id": "$PERMISSION_UUID",
+      "attributes": {
+        "name": "logs_metrics_write",
+        "display_name": "Logs metrics write",
+        "description": "Update a custom metric",
+        "created": "2000-02-29T14:26:26.983187+00:00",
+        "group_name": "Logs",
+        "display_type": "other",
+        "restricted": false
+      }
+    }
+  ]
 }
 ```
 
@@ -408,9 +376,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Ajoute une autorisation à un rôle.
 
-| Méthode | Chemin de l'endpoint                        | Charge utile requise                                                  |
-|--------|--------------------------------------|-------------------------------------------------------------------|
-| `POST` | `/v2/roles/<UUID_RÔLE>/permissions`  | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
+| Méthode | Chemin de l'endpoint                       | Charge utile requise                                                  |
+|--------|-------------------------------------|-------------------------------------------------------------------|
+| `POST` | `/v2/roles/<UUID_RÔLE>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -438,21 +406,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": [
-        {
-            "type": "permissions",
-            "id": "$PERMISSION_UUID",
-            "attributes": {
-                "name": "logs_metrics_write",
-                "display_name": "Logs metrics write",
-                "description": "Update a custom metric",
-                "created": "2000-02-29T14:26:26.983187+00:00",
-                "group_name": "Logs",
-                "display_type": "other",
-                "restricted": false
-            }
-        }
-    ]
+  "data": [
+    {
+      "type": "permissions",
+      "id": "$PERMISSION_UUID",
+      "attributes": {
+        "name": "logs_metrics_write",
+        "display_name": "Logs metrics write",
+        "description": "Update a custom metric",
+        "created": "2000-02-29T14:26:26.983187+00:00",
+        "group_name": "Logs",
+        "display_type": "other",
+        "restricted": false
+      }
+    }
+  ]
 }
 ```
 
@@ -463,9 +431,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Supprime une autorisation pour un rôle.
 
-| Méthode   | Chemin de l'endpoint                        | Charge utile requise                                                  |
-|----------|--------------------------------------|-------------------------------------------------------------------|
-| `DELETE` | `/v2/roles/<UUID_RÔLE>/permissions`  | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
+| Méthode   | Chemin de l'endpoint                       | Charge utile requise                                                  |
+|----------|-------------------------------------|-------------------------------------------------------------------|
+| `DELETE` | `/v2/roles/<UUID_RÔLE>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -493,21 +461,21 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "data": [
-        {
-            "type": "permissions",
-            "id": "$DIFFERENT_PERMISSION_UUID",
-            "attributes": {
-                "name": "logs_metrics_write",
-                "display_name": "Logs metrics write",
-                "description": "Update a custom metric",
-                "created": "2000-02-29T14:26:26.983187+00:00",
-                "group_name": "Logs",
-                "display_type": "other",
-                "restricted": false
-            }
-        }
-    ]
+  "data": [
+    {
+      "type": "permissions",
+      "id": "$DIFFERENT_PERMISSION_UUID",
+      "attributes": {
+        "name": "logs_metrics_write",
+        "display_name": "Logs metrics write",
+        "description": "Update a custom metric",
+        "created": "2000-02-29T14:26:26.983187+00:00",
+        "group_name": "Logs",
+        "display_type": "other",
+        "restricted": false
+      }
+    }
+  ]
 }
 ```
 
@@ -518,9 +486,9 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 Ajoute un utilisateur à un rôle.
 
-| Méthode | Chemin de l'endpoint                  | Charge utile requise                                        |
-|--------|--------------------------------|---------------------------------------------------------|
-| `POST` | `/v2/roles/<UUID_RÔLE>/users`  | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
+| Méthode | Chemin de l'endpoint                 | Charge utile requise                                      |
+|--------|-------------------------------|-------------------------------------------------------|
+| `POST` | `/v2/roles/<UUID_RÔLE>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -549,45 +517,29 @@ Consultez la [section UUID des autorisations](#uuid-des-autorisations) pour obte
 
 ```json
 {
-    "meta": {
-        "page": {
-            "total_count": 1
-        }
-    },
-    "data": [
-        {
-            "type": "users",
-            "id": "$USER_UUID",
-            "attributes": {
-                "name": "Example user",
-                "handle": "user@example.org",
-                "created_at": "2000-02-29T14:26:26.983187+00:00",
-                "email": "user@example.org",
-                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
-                "title": null,
-                "verified": true,
-                "disabled": false,
-                "allowed_login_methods": [],
-                "status": "Active"
-            },
-            "relationships": {
-                "roles": {
-                    "data": [
-                        {
-                            "type": "roles",
-                            "id": "$ROLE_UUID"
-                        }
-                    ]
-                },
-                "org": {
-                    "data": {
-                        "type": "orgs",
-                        "id": "$ORG_UUID"
-                    }
-                }
-            }
-        }
-    ]
+  "meta": {"page": {"total_count": 1}},
+  "data": [
+    {
+      "type": "users",
+      "id": "$USER_UUID",
+      "attributes": {
+        "name": "Example user",
+        "handle": "user@example.org",
+        "created_at": "2000-02-29T14:26:26.983187+00:00",
+        "email": "user@example.org",
+        "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+        "title": null,
+        "verified": true,
+        "disabled": false,
+        "allowed_login_methods": [],
+        "status": "Active"
+      },
+      "relationships": {
+        "roles": {"data": [{"type": "roles", "id": "$ROLE_UUID"}]},
+        "org": {"data": {"type": "orgs", "id": "$ORG_UUID"}}
+      }
+    }
+  ]
 }
 ```
 
@@ -598,9 +550,9 @@ Consultez la [section UUID des autorisations](#uuid-des-autorisations) pour obte
 
 Supprime le rôle d'un utilisateur.
 
-| Méthode   | Chemin de l'endpoint                  | Charge utile requise                                        |
-|----------|--------------------------------|---------------------------------------------------------|
-| `DELETE` | `/v2/roles/<UUID_RÔLE>/users`  | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
+| Méthode   | Chemin de l'endpoint                 | Charge utile requise                                      |
+|----------|-------------------------------|-------------------------------------------------------|
+| `DELETE` | `/v2/roles/<UUID_RÔLE>/users` | **data["type"]="users"**<br>**data["id"]=$USER_UUID** |
 
 {{< tabs >}}
 {{% tab "Exemple" %}}
@@ -629,45 +581,29 @@ Consultez la [section UUID des autorisations](#uuid-des-autorisations) pour obte
 
 ```json
 {
-    "meta": {
-        "page": {
-            "total_count": 1
-        }
-    },
-    "data": [
-        {
-            "type": "users",
-            "id": "$USER_UUID",
-            "attributes": {
-                "name": "Example user",
-                "handle": "user@example.org",
-                "created_at": "2000-02-29T14:26:26.983187+00:00",
-                "email": "user@example.org",
-                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
-                "title": null,
-                "verified": true,
-                "disabled": false,
-                "allowed_login_methods": [],
-                "status": "Active"
-            },
-            "relationships": {
-                "roles": {
-                    "data": [
-                        {
-                            "type": "roles",
-                            "id": "$ROLE_UUID"
-                        }
-                    ]
-                },
-                "org": {
-                    "data": {
-                        "type": "orgs",
-                        "id": "$ORG_UUID"
-                    }
-                }
-            }
-        }
-    ]
+  "meta": {"page": {"total_count": 1}},
+  "data": [
+    {
+      "type": "users",
+      "id": "$USER_UUID",
+      "attributes": {
+        "name": "Example user",
+        "handle": "user@example.org",
+        "created_at": "2000-02-29T14:26:26.983187+00:00",
+        "email": "user@example.org",
+        "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+        "title": null,
+        "verified": true,
+        "disabled": false,
+        "allowed_login_methods": [],
+        "status": "Active"
+      },
+      "relationships": {
+        "roles": {"data": [{"type": "roles", "id": "$ROLE_UUID"}]},
+        "org": {"data": {"type": "orgs", "id": "$ORG_UUID"}}
+      }
+    }
+  ]
 }
 ```
 
@@ -678,9 +614,9 @@ Consultez la [section UUID des autorisations](#uuid-des-autorisations) pour obte
 
 Récupérer tous les utilisateurs associés à un rôle
 
-| Méthode   | Chemin de l'endpoint                  | Charge utile requise |
-|----------|--------------------------------|------------------|
-| `GET`    | `/v2/roles/<UUID_RÔLE>/users`  | Aucune charge utile       |
+| Méthode | Chemin de l'endpoint                 | Charge utile requise |
+|--------|-------------------------------|------------------|
+| `GET`  | `/v2/roles/<UUID_RÔLE>/users` | Aucune charge utile       |
 
 ##### ARGUMENTS
 
@@ -711,71 +647,48 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 ```json
 {
-    "included": [
-        {
-            "type": "roles",
-            "id": "$ROLE_UUID",
-            "attributes": {
-                "name": "$ROLE_NAME",
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "modified_at": "2000-02-29T16:50:43.607749+00:00"
-            },
-            "relationships": {
-                "permissions": {
-                    "data": [
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        },
-                        {
-                            "type": "permissions",
-                            "id": "$PERMISSION_UUID"
-                        }
-                    ]
-                }
-            }
+  "included": [
+    {
+      "type": "roles",
+      "id": "$ROLE_UUID",
+      "attributes": {
+        "name": "$ROLE_NAME",
+        "created_at": "2000-02-29T16:50:43.607749+00:00",
+        "modified_at": "2000-02-29T16:50:43.607749+00:00"
+      },
+      "relationships": {
+        "permissions": {
+          "data": [
+            {"type": "permissions", "id": "$PERMISSION_UUID"},
+            {"type": "permissions", "id": "$PERMISSION_UUID"}
+          ]
         }
-    ],
-    "meta": {
-        "page": {
-            "total_filtered_count": 1,
-            "total_count": 1
-        }
-    },
-    "data": [
-        {
-            "type": "users",
-            "id": "$USER_UUID",
-            "attributes": {
-                "name": "Example user",
-                "handle": "user@example.org",
-                "created_at": "2000-02-29T14:26:26.983187+00:00",
-                "email": "user@example.org",
-                "icon": "https://secure.gravatar.com/avatar/abc123abc123",
-                "title": null,
-                "verified": true,
-                "disabled": false,
-                "allowed_login_methods": [],
-                "status": "Active"
-            },
-            "relationships": {
-                "roles": {
-                    "data": [
-                        {
-                            "type": "roles",
-                            "id": "$ROLE_UUID"
-                        }
-                    ]
-                },
-                "org": {
-                    "data": {
-                        "type": "orgs",
-                        "id": "$ORG_UUID"
-                    }
-                }
-            }
-        }
-    ]
+      }
+    }
+  ],
+  "meta": {"page": {"total_filtered_count": 1, "total_count": 1}},
+  "data": [
+    {
+      "type": "users",
+      "id": "$USER_UUID",
+      "attributes": {
+        "name": "Example user",
+        "handle": "user@example.org",
+        "created_at": "2000-02-29T14:26:26.983187+00:00",
+        "email": "user@example.org",
+        "icon": "https://secure.gravatar.com/avatar/abc123abc123",
+        "title": null,
+        "verified": true,
+        "disabled": false,
+        "allowed_login_methods": [],
+        "status": "Active"
+      },
+      "relationships": {
+        "roles": {"data": [{"type": "roles", "id": "$ROLE_UUID"}]},
+        "org": {"data": {"type": "orgs", "id": "$ORG_UUID"}}
+      }
+    }
+  ]
 }
 ```
 
@@ -792,8 +705,8 @@ Les UUID des autorisations sont les suivants :
 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
-| name                         | UUID                                 | description                                    |
-|------------------------------|--------------------------------------|------------------------------------------------|
+| nom                           | UUID                                 | description                                   |
+|------------------------------|--------------------------------------|-----------------------------------------------|
 | admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Accès en lecture et écriture à l'ensemble du contenu de Datadog    |
 | standard                     | 984d2f00-d3b4-11e8-a200-bb47109e9987 | Accès en lecture et écriture à la majorité du contenu de Datadog   |
 | logs_read_index_data         | 5e605652-dd12-11e8-9e53-375565b8970e | Accès en lecture à un sous-ensemble d'index de logs               |
@@ -814,8 +727,8 @@ Les UUID des autorisations sont les suivants :
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
-| name                         | UUID                                 | description                                    |
-|------------------------------|--------------------------------------|------------------------------------------------|
+| nom                           | UUID                                 | description                                   |
+|------------------------------|--------------------------------------|-----------------------------------------------|
 | admin                        | f1624684-d87d-11e8-acac-efb4dbffab1c | Accès en lecture et écriture à l'ensemble du contenu de Datadog    |
 | standard                     | f1666372-d87d-11e8-acac-6be484ba794a | Accès en lecture et écriture à la majorité du contenu de Datadog   |
 | logs_read_index_data         | 4fbb1652-dd15-11e8-9308-77be61fbb2c7 | Accès en lecture à un sous-ensemble d'index de logs               |
@@ -841,11 +754,11 @@ Les UUID des autorisations sont les suivants :
 
 Certaines autorisations peuvent être accordées dans un contexte limité. Vous pouvez le faire manuellement à partir de la [page Pipelines][1] de l'application Datadog ou par programmation via l'API Role, en ajoutant le bon « contexte » à la charge utile. Les autorisations suivantes peuvent être accordées dans un contexte limité :
 
-| Nom de l'autorisation                | Nom du contexte | Format                                   | Description                                                     |
-|--------------------------------|------------|------------------------------------------|-----------------------------------------------------------------|
-| `logs_read_index_data`         | indexes    | Liste de noms d'index (chaîne)             | Accorder un accès en lecture à certains index de logs uniquement                          |
-| `logs_write_exclusion_filters` | indexes    | Liste de noms d'index (chaîne)             | Autoriser la mise à jour des filtres d'exclusion pour certains index uniquement  |
-| `logs_write_processors`        | pipelines  | Liste d'ID de pipeline de processing (chaîne) | Autoriser la mise à jour de processeurs de certains pipelines uniquement        |
+| Nom de l'autorisation                | Nom du contexte | Format                                   | Description                                                    |
+|--------------------------------|------------|------------------------------------------|----------------------------------------------------------------|
+| `logs_read_index_data`         | indexes    | Liste de noms d'index (chaîne)             | Accorder un accès en lecture à certains index de logs uniquement                         |
+| `logs_write_exclusion_filters` | indexes    | Liste de noms d'index (chaîne)             | Autoriser la mise à jour des filtres d'exclusion pour certains index uniquement |
+| `logs_write_processors`        | pipelines  | Liste d'ID de pipeline de processing (chaîne) | Autoriser la mise à jour de processeurs de certains pipelines uniquement       |
 
 Par exemple, pour accorder à un rôle nommé `support` un accès en lecture à seulement deux index nommés `main` et` support`, votre appel d'API doit ressembler à ceci :
 

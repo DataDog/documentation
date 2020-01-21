@@ -38,34 +38,32 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Installez l'[intégration Datadog/AWS WAF][3].
 
-3. Vous devez cocher `Collect custom metrics` dans le carré d'intégration AWS pour recueillir les métriques AWS WAF. Cliquez ensuite sur le bouton `Update Configuration` :
-
-  {{< img src="integrations/amazon_waf/waf.png" alt="réglages waf" responsive="true">}}
-
 ### Collecte de logs
 
 #### Activer les logs d'audit Web Application Firewall
 
-Activez la journalisation pour obtenir des informations détaillées sur le trafic analysé de l'ACL Web :
+Activez la journalisation pour obtenir des informations détaillées sur le trafic lié à vos contrôles d'accès Web (ACL Web) :
 
 1. Créez un `Amazon Kinesis Data Firehose` dont le nom commence par `aws-waf-logs-`.
-2. Dans la destination `Amazon Kinesis Data Firehose`, choisissez `Amazon S3` et ajoutez le préfixe `waf`.
-3. Sélectionnez l'ACL Web en question et envoyez ses logs au nouveau Firehose ([étapes détaillées][4]).
+2. Dans la destination du `Amazon Kinesis Data Firehose`, choisissez `Amazon S3` et ajoutez le préfixe `waf`.
+3. Sélectionnez l'ACL Web souhaité et envoyez ses logs vers le Firehose que vous venez de créer ([étapes détaillées][4]).
 
-Les logs WAF sont alors recueillis et envoyés à un compartiment S3.
+Les logs WAF sont alors recueillis et envoyés vers un compartiment S3.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs WAF dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs WAF et remplacez le type d'événement par `Object Created (All)`, puis cliquez sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_waf" >}}
 
+
+**Remarque** : Datadog recueille les métriques `aws.waf.*` et `waf.*` pour permettre la compatibilité avec l'ancien format des API de métriques CloudWatch pour WAF.
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 

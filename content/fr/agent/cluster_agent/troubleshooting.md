@@ -24,7 +24,7 @@ further_reading:
 ---
 Afin d'exécuter les commandes de dépannage pour l'Agent de cluster, vous devez d'abord accéder au pod de l'Agent de cluster ou de l'Agent de nœud. Pour ce faire, utilisez la commande suivante :
 
-```
+```text
 kubectl exec -it <NOM_POD_AGENT_CLUSTER_DATADOG> bash
 ```
 
@@ -32,13 +32,13 @@ kubectl exec -it <NOM_POD_AGENT_CLUSTER_DATADOG> bash
 
 Pour afficher les métadonnées de cluster envoyées par l'Agent de cluster Datadog, accédez au pod via la commande `exec` puis exécutez :
 
-```
+```text
 datadog-cluster-agent metamap
 ```
 
 Le résultat suivant devrait s'afficher :
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent metamap
 
 ===============
@@ -74,7 +74,7 @@ Node detected: gke-test-default-pool-068cb9c0-wntj
 
 Pour vérifier que l'Agent de cluster Datadog est interrogé, recherchez :
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-agent.log
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
@@ -89,13 +89,13 @@ Ainsi que les verbes adéquats spécifiés dans les règles RBAC (en particulier
 
 Si vous les avez activés, vérifiez le statut d'élection du leader et le check `kube_apiserver` à l'aide de la commande suivante :
 
-```
+```text
 datadog-cluster-agent status
 ```
 
 On obtient alors le résultat suivant :
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent status
 [...]
   Leader Election
@@ -124,7 +124,7 @@ Vous pouvez vérifier le statut de l'Agent de cluster Datadog en exécutant la c
 
 Si l'Agent de cluster Datadog est activé et correctement configuré, vous devriez voir ce qui suit :
 
-```
+```text
 [...]
  =====================
  Datadog Cluster Agent
@@ -136,7 +136,7 @@ Si l'Agent de cluster Datadog est activé et correctement configuré, vous devri
 
 Veillez à ce que le service de l'Agent de cluster soit créé avant les pods de l'Agent de manière à ce que le DNS soit disponible dans les variables d'environnement :
 
-```
+```text
 root@datadog-agent-9d5bl:/# env | grep DATADOG_CLUSTER_AGENT | sort
 DATADOG_CLUSTER_AGENT_SERVICE_PORT=5005
 DATADOG_CLUSTER_AGENT_SERVICE_HOST=10.100.202.234
@@ -152,31 +152,33 @@ DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 
 Vérifiez que l'Agent de nœud utilise l'Agent de cluster Datadog comme fournisseur de tags :
 
-```
+```text
 root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-collector"
 2018-06-11 06:59:02 UTC | INFO | (tagger.go:151 in tryCollectors) | kube-metadata-collector tag collector successfully started
 ```
 
 Ou recherchez des logs d'erreur, par exemple :
 
-```
+```shell
 2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## Serveur de métriques custom
+
 ### Commandes status et flare de l'Agent de cluster
 
 Si vous rencontrez des difficultés avec votre serveur de métriques custom :
 
 * Vérifiez que la couche agrégation et les certificats sont bien configurés.
 * Assurez-vous que les métriques utilisées pour l'autoscaling sont disponibles. Lorsque vous créez l'Autoscaler de pods horizontaux, l'Agent de cluster Datadog analyse le manifeste et envoie une requête à Datadog pour tenter de récupérer la métrique. Si le nom de  la métrique n'est pas correct ou que la métrique n'existe pas dans votre application Datadog, l'erreur suivante est générée :
-    ```
+
+    ```shell
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 Exécutez la commande `datadog-cluster-agent status` pour afficher le statut du fournisseur de métriques externes :
 
-```
+```shell
   Custom Metrics Provider
   =======================
   External Metrics
@@ -224,7 +226,7 @@ Si le flag de la métrique `Valid` est défini sur `false`, la métrique n'est p
 
 Si le message suivant apparaît lorsque vous inspectez (commande describe) le manifeste de l'Autoscaler de pods horizontaux :
 
-```
+```text
 Conditions:
   Type           Status  Reason                   Message
   ----           ------  ------                   -------
@@ -235,7 +237,7 @@ Conditions:
 
 Alors la configuration RBAC pour l'Autoscaler de pods horizontaux n'est probablement pas correcte. Assurez-vous que `kubectl api-versions` renvoie ceci :
 
-```
+```text
 autoscaling/v2beta1
 [...]
 external.metrics.k8s.io/v1beta1
@@ -245,8 +247,8 @@ Cette dernière ligne s'affiche si l'Agent de cluster Datadog est bien identifi�
 
 Si l'erreur suivante s'affiche lorsque vous inspectez le manifeste de l'Autoscaler de pods horizontaux :
 
-```
-  Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
+```text
+Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
 Assurez-vous que l'Agent de cluster Datadog est en cours d'exécution et que le service qui expose le port `443` (dont le nom est enregistré dans APIService) est disponible.
@@ -258,7 +260,7 @@ La valeur renvoyée par l'Agent de cluster Datadog est récupérée auprès de D
 
 Exemple :
 
-```
+```text
     hpa:
     - name: nginxext
     - namespace: default
@@ -273,7 +275,7 @@ Exemple :
 
 L'Agent de cluster a récupéré la valeur `2472`, mais l'Autoscaler de pods horizontaux indique :
 
-```
+```text
 NAMESPACE   NAME       REFERENCE          TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
 default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3          41m
 ```

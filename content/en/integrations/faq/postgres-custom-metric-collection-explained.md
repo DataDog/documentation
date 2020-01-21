@@ -72,7 +72,7 @@ After updating the Postgres YAML file, [restart the Datadog Agent][3].
 
 To verify the result, search for the metrics using the [Metrics Explorer][4]:
 
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" >}}
+{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer"  >}}
 
 ### Debugging
 
@@ -94,6 +94,6 @@ Additionally, the [Agent's logs][6] may provide useful information.
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /graphing/metrics/explorer
+[4]: /metrics/explorer
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: /agent/guide/agent-log-files

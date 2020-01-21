@@ -7,32 +7,59 @@ aliases:
 
 `.rollup()`
 
-Recommended for expert users only. Datadog rolls up data points automatically, based on the in-app metric type: `gauge` metrics are averaged by default, whereas `count` and `rate` metrics are summed. Appending this function to the end of a query allows you to override the default behavior: to control the rollup method, or the number of raw points rolled up into a single point plotted on the graph.
+*Recommended for expert users only.*
 
-The function takes two parameters, method and time: `.rollup(method,time)`. The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+Appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1], i.e. this function enables you to define:
 
-Note that rollups should usually be avoided in [monitor][1] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, users should delay the evaluation of the monitor by (at least) the length of the rollup interval.
+* The time intervals for a given graph  ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
+* How data points are aggregated within a given time interval.
 
-## .as_count() or as_rate()
+The function takes two parameters, `<METHOD>` and `<TIME>`: `.rollup(<METHOD>,<TIME>)`.
 
-These functions are only intended for metrics submitted as rates or counters via StatsD. These functions have no effect for other metric types. For more details about how to use `.as_count()` and `.as_rate()` see [our Metric Type Modifiers documentation][2].
+| Parameter  | Description                                                                                                     |
+|------------|-----------------------------------------------------------------------------------------------------------------|
+| `<METHOD>` | Can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within a given time interval. |
+| `<TIME>`   | Time (in seconds) of the interval between two data points displayed.                                            |
 
-Note: [The only available query with `as_count()` is `sum()`][3] (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
+You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
+
+{{< img src="dashboards/functions/rollup/smooth_1.png" alt="smooth_1" responsive="true" style="width:60%;" >}}
+
+The following bar graph displays the same metric, graphed using a day-long rollup with `.rollup(avg,86400)`:
+
+{{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2" responsive="true" style="width:60%;" >}}
+
+## Rollup Interval: Enforced vs Custom
+
+When graphing, Datadog imposes a limit of 350 points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric.
+
+A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and the time interval to rollup. However, if a custom `.rollup()` function is applied and uses a smaller time interval than the Datadog limit, the Datadog limit is used instead while still using the specified rollup method. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than 350 points.
+
+**Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
+
+  {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" responsive="true" style="width:50%;">}}
+
+For more details about how to use `.as_count()` and `.as_rate()` see the [blog post][2] or learn more about the effects of those functions with the [documentation on in-application modifiers][3].
+
+## Rollups in monitors
+
+Rollups should usually be avoided in [monitor][4] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
-    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /monitors/monitor_types/metric
-[2]: /developers/metrics/type_modifiers/?tab=count
-[3]: /graphing/faq/as_count_validation
+[1]: /dashboards/functions/#proceed-to-time-aggregation
+[2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
+[3]: /developers/metrics/type_modifiers
+[4]: /monitors/monitor_types/metric

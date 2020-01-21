@@ -231,27 +231,27 @@ So this example of span tags is invalid:
 
 Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags"  style="width:80%;">}}
 
-[1]: /graphing/infrastructure/hostmap
+[1]: /infrastructure/hostmap
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
 Assign host tags in the UI via the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags"  style="width:80%;">}}
 
-[1]: /graphing/infrastructure
+[1]: /infrastructure
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
 From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
 When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags"  style="width:80%;">}}
 
 [1]: /monitors/manage_monitor
 {{% /tab %}}
@@ -261,16 +261,16 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 **Apply up to ten tags. Exclusionary tags will not be accepted**:
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags"  style="width:80%;">}}
 
-[1]: /graphing/metrics/distributions
+[1]: /metrics/distributions
 [2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
 The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags"  style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services
 {{% /tab %}}
@@ -438,12 +438,12 @@ Web integrations are authentication based. Metrics are collected with API calls.
 [4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
-[7]: /graphing/#arithmetic-between-two-metrics
+[7]: /dashboards/querying/#arithmetic-between-two-metrics
 [8]: /agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[12]: /tracing/advanced/setting_primary_tags_to_scope
+[12]: /tracing/guide/setting_primary_tags_to_scope
 [13]: /libraries
 [14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances

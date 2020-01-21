@@ -13,7 +13,7 @@ description: Surveillez des métriques clés d'Amazon Kinesis.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
 git_integration_title: amazon_kinesis
 has_logo: true
-integration_title: "Amazon\_Kinesis"
+integration_title: Amazon Kinesis
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -50,7 +50,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon Kinesis de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_kinesis` dans le préfixe.
+Configurez Amazon Kinesis de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_kinesis` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 

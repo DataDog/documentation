@@ -15,13 +15,13 @@ further_reading:
     text: "Surveiller les métriques d'Amazon\_MQ avec Datadog"
 git_integration_title: amazon_mq
 has_logo: true
-integration_title: "Amazon\_MQ"
+integration_title: Amazon MQ
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_mq
 public_title: "Intégration Datadog/Amazon\_MQ"
-short_description: Surveillez des métriques clés d'AWS Amazon MQ.
+short_description: "Surveillez des métriques clés d'AWS Amazon\_MQ."
 version: '1.0'
 ---
 ## Présentation

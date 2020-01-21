@@ -118,7 +118,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 5. [Une fois Autodiscovery activé sur votre Agent][28], montez ces fichiers de configuration (`conf.yaml` et `metrics.yaml`) dans le dossier `conf.d/kafka.d/` de votre Agent.
 6. (Facultatif) Si vous ne pouvez pas monter ces fichiers dans le conteneur de l'Agent (par exemple si vous utilisez AWS ECS), créez une nouvelle image Docker de l'Agent en y intégrant ces deux fichiers de configuration :
 
-    ```
+    ```conf
     FROM datadog/agent:latest
     COPY <PATH_JMX_CONF_FILE> conf.d/kafka.d/
     COPY <PATH_JMX_METRICS_FILE> conf.d/kafka.d/
@@ -130,7 +130,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 [2]: /fr/integrations/activemq
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[5]: /fr/integartions/cassandra
+[5]: /fr/integrations/cassandra
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
 [8]: /fr/integrations/hive

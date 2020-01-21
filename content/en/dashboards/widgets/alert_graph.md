@@ -5,24 +5,24 @@ description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 Alert graphs are timeseries graphs showing the current status of any monitor defined on your system:
 
-{{< img src="graphing/widgets/alert_graph/alert_graph.png" alt="Alert Graph" responsive="true">}}
+{{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Alert Graph" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -36,7 +36,7 @@ Alert graphs are timeseries graphs showing the current status of any monitor def
 
 #### Display preference
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### Global time
 
@@ -50,7 +50,7 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -83,4 +83,4 @@ ALERT_GRAPH_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

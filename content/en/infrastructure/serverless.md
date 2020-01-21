@@ -90,7 +90,7 @@ Using the settings gear, you can check and uncheck metric columns on the functio
 
 Clicking on a particular function in the function summary table brings you to a function detail page. This page provides detailed trace and log level information for that function.
 
-{{< img src="graphing/infrastructure/serverless/functiondetailview.png" alt="Serverless - Function Detail View" responsive="true">}}
+{{< img src="infrastructure/serverless/functiondetailview.png" alt="Serverless - Function Detail View" >}}
 
 ### Summary graphs and time selector
 
@@ -100,19 +100,19 @@ Use the summary graphs across the top of screen and the time selector to focus i
 
 Via the AWS X-Ray integration, traces from the function currently being viewed are shown in the `Traces` section. You can sort these traces by attributes such as date, duration, and status.
 
-{{< img src="graphing/infrastructure/serverless/traces.png" alt="Traces" responsive="true">}}
+{{< img src="infrastructure/serverless/traces.png" alt="Traces" >}}
 
 ### Logs
 
 The `Logs` section aggregates logs from all recent invocations of the current function. It updates live as your functions send new logs to Datadog.
 
-{{< img src="graphing/infrastructure/serverless/logs2.png" alt="Traces" responsive="true">}}
+{{< img src="infrastructure/serverless/logs2.png" alt="Traces" >}}
 
 ## Trace detail view
 
 Clicking on a particular trace opens the trace detail view for that trace. The X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span tags, and structure of the overall trace.
 
-{{< img src="graphing/infrastructure/serverless/traces2.png" alt="Traces" responsive="true">}}
+{{< img src="infrastructure/serverless/traces2.png" alt="Traces" >}}
 
 Datadog provides specially formatted serverless traces for readability and usability. Clicking on the span from another Lambda function creates a link to that function’s detail page, enabling you to jump to another function that is part of the trace.
 
@@ -120,13 +120,13 @@ Datadog provides specially formatted serverless traces for readability and usabi
 
 All logs emitted from a function, and all functions it calls, are pulled into the function detail page as well. Narrow down the timeframe of the page to a specific moment of interest to view the logs during a critical point in time. Click on the logs in the table to see the full log in more detail.
 
-{{< img src="graphing/infrastructure/serverless/logs.png" alt="logs" responsive="true">}}
+{{< img src="infrastructure/serverless/logs.png" alt="logs" >}}
 
 ### Errors
 
 The errors tab bubbles up exceptions that occured during the duration of the trace. This is useful for quickly understanding what went wrong during execution.
 
-{{< img src="graphing/infrastructure/serverless/errors.png" alt="logs" responsive="true">}}
+{{< img src="infrastructure/serverless/errors.png" alt="logs" >}}
 
 ## Further Reading
 

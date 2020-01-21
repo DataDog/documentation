@@ -5,21 +5,21 @@ description: "Graph a chosen scope over two different metrics with their respect
 aliases:
     - /graphing/widgets/scatter_plot/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation:
 
-{{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" responsive="true">}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -93,6 +93,6 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
-[2]: /graphing/graphing_json/request_json
-[3]: /graphing/graphing_json/widget_json/#y-axis-schema
+[1]: /dashboards/graphing_json/widget_json
+[2]: /dashboards/graphing_json/request_json
+[3]: /dashboards/graphing_json/widget_json/#y-axis-schema

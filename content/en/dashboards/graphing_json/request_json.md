@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /graphing/graphing_json/request_json/
 further_reading:
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "graphing/graphing_json/widget_json/"
+- link: "/dashboards/graphing_json/widget_json/"
   tag: "Documentation"
   text: "Widget JSON schema"
 ---
@@ -38,7 +38,7 @@ If your `requests` parameter has multiple `requests`, the widget displays all of
 ]
 ```
 
-{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
+{{< img src="dashboards/graphing_json/multi-lines.png" alt="multi lines"  >}}
 
 ## Functions
 
@@ -97,7 +97,7 @@ You can also add, subtract, multiply, and divide a series. Note that Datadog doe
 
 ## Stacked Series
 
-{{< img src="graphing/graphing_json/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
+{{< img src="dashboards/graphing_json/slice-n-stack.png" alt="slice and stack"  >}}
 
 In the case of related timeseries, you can draw them as stacked areas by using the following syntax:
 
@@ -200,5 +200,5 @@ Here is an example using the `week_before()` function:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/functions
+[1]: /dashboards/functions
 [2]: https://app.datadoghq.com/metric/summary

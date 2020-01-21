@@ -23,7 +23,7 @@ categories:
 doc_link: /integrations/kubernetes/
 ddtype: check
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" >}}
 
 ## Présentation
 
@@ -41,6 +41,7 @@ Vous pouvez également vous contenter d'exécuter l'Agent Datadog sur votre host
 [Consultez la documentation dédiée pour choisir la configuration idéale pour votre intégration Kubernetes][2]
 
 ## Configurer Kubernetes State
+
 ### Installation
 
 Pour recueillir vos métriques kube-state :
@@ -55,6 +56,7 @@ Pour recueillir vos métriques kube-state :
 Une fois l'opération terminée, l’intégration Kubernetes State collecte automatiquement les métriques kube-state.
 
 ## Configurer Kubernetes DNS
+
 ### Configuration
 
 Depuis [l'Agent v6][4], l'intégration Kubernetes DNS fonctionne automatiquement avec l'[Autodiscovery][5].
@@ -67,17 +69,21 @@ Remarque : ces métriques ne sont actuellement pas disponibles pour Azure Kuber
 
 Deux installations différentes sont possibles :
 
-- Sur le nœud où l'Agent est en dehors de l'environnement Docker
-- Déploiement avec une version conteneurisée dans l'environnement Docker
+* Sur le nœud où l'Agent est en dehors de l'environnement Docker
+* Déploiement avec une version conteneurisée dans l'environnement Docker
 
 Tirez profit des DaemonSets pour [déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds][6]. Vous pouvez également suivre les [étapes de collecte de logs de conteneur][7] pour commencer à recueillir des logs depuis tous vos conteneurs.
 
 ## Données collectées
+
 ### Métriques
+
 #### Kubernetes
+
 {{< get-metrics-from-git "kubernetes" >}}
 
 #### Kubelet
+
 {{< get-metrics-from-git "kubelet" >}}
 
 #### Kubernetes State
@@ -87,9 +93,11 @@ Notez que les métriques `kubernetes_state.*` sont rassemblées depuis l'API `k
 {{< get-metrics-from-git "kubernetes_state" >}}
 
 #### Kubernetes DNS
+
 {{< get-metrics-from-git "kube_dns" >}}
 
 #### Proxy Kubernetes
+
 {{< get-metrics-from-git "kube_proxy" >}}
 
 ### Événements
@@ -178,5 +186,5 @@ Pour mieux comprendre comment (et pourquoi) intégrer votre service Kubernetes, 
 [10]: /fr/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [11]: /fr/agent/faq/getting-further-with-docker
 [12]: /fr/integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[13]: /fr/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[13]: /fr/agent/kubernetes/daemonset_setup/#configure-rbac-permissions
 [14]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

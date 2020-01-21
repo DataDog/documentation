@@ -41,7 +41,7 @@ La première étape consiste à installer l'Agent (la version conteneurisée ou 
 
 Afin de lancer un [conteneur Docker][1] qui intègre l'Agent Datadog pour surveiller votre host, utilisez la commande suivante :
 
-```
+```shell
 docker run -d --name datadog-agent \
            -e DD_API_KEY=<VOTRE_CLÉ_API> \
            -e DD_LOGS_ENABLED=true \
@@ -58,14 +58,13 @@ Nous vous conseillons de choisir la dernière version de l'Agent Datadog. La lis
 
 Voici les commandes associées à la collecte de logs :
 
-| Commande                                               | Description                                                                                                                                                  |
-|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-e DD_LOGS_ENABLED=true`                             | L'envoi de cette commande avec la valeur `true` active la collecte de logs. L'Agent recherche les instructions relatives aux logs dans les fichiers de configuration.                                                      |
-| `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Ajoute une configuration de log qui active la collecte de log pour tous les conteneurs.                                                                                     |
-| `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host. |
-| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Empêche l'Agent Datadog de recueillir et d'envoyer ses propres logs. Supprimez ce paramètre si vous souhaitez recueillir les logs de l'Agent Datadog.                    |
-| `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Les logs sont recueillis à partir du conteneur `stdout/stderr` du socket Docker.                                                                                    |
-
+| Commande                                               | Description                                                                                                                                                      |
+|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-e DD_LOGS_ENABLED=true`                             | L'envoi de cette commande avec la valeur `true` active la collecte de logs. L'Agent recherche les instructions relatives aux logs dans les fichiers de configuration.                                                          |
+| `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Ajoute une configuration de log qui active la collecte de log pour tous les conteneurs.                                                                                         |
+| `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host.     |
+| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Empêche l'Agent Datadog de recueillir et d'envoyer ses propres logs et métriques. Supprimez ce paramètre si vous souhaitez recueillir les logs et les métriques de l'Agent Datadog. |
+| `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Les logs sont recueillis à partir du conteneur `stdout/stderr` du socket Docker.                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
@@ -76,7 +75,7 @@ Installez la [dernière version de l'Agent 6][1] sur votre host. L'Agent peut r
 
 La collecte de logs est *désactivée* par défaut dans l'Agent Datadog. Pour l'activer, ajoutez les lignes suivantes à votre fichier de configuration `datadog.yaml` :
 
-```
+```yaml
 logs_enabled: true
 listeners:
   - name: docker
@@ -89,10 +88,9 @@ logs_config:
 
 [Redémarrez l'Agent][3] pour afficher tous les logs de votre conteneur dans Datadog.
 
-
 [1]: /fr/agent/basic_agent_usage
 [2]: /fr/agent/logs/#custom-log-collection
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -118,7 +116,7 @@ Selon le type de fichier, Autodiscovery exige les formats d'étiquettes suivants
 
 Ajoutez l'étiquette `LABEL` suivante à votre Dockerfile :
 
-```
+```text
 LABEL "com.datadoghq.ad.logs"='[<CONFIG_LOGS>]'
 ```
 
@@ -127,9 +125,9 @@ LABEL "com.datadoghq.ad.logs"='[<CONFIG_LOGS>]'
 
 Ajoutez l'étiquette suivante à votre fichier `docker-compose.yaml` :
 
-```
+```yaml
 labels:
-  com.datadoghq.ad.logs: '[<CONFIG_LOGS>]'
+  com.datadoghq.ad.logs: '["<CONFIG_LOGS>"]'
 ```
 
 {{% /tab %}}
@@ -137,7 +135,7 @@ labels:
 
 Ajoutez l'étiquette suivante en tant que commande Exécuter :
 
-```
+```text
 -l com.datadoghq.ad.logs='[<CONFIG_LOGS>]'
 ```
 
@@ -153,13 +151,13 @@ Lorsque `<CONFIG_LOG>` est la configuration de collecte de logs, vous trouverez 
 
 Le Dockerfile suivant permet l'intégration de log NGINX dans le conteneur correspondant (la valeur `service` peut être modifiée) :
 
-```
+```text
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
 Pour activer les intégrations NGINX de métrique et de log :
 
-```
+```text
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
@@ -173,7 +171,7 @@ Pour les logs multiligne tels que les traces de pile, l'Agent dispose de [règle
 
 Exemple de log (traces de pile Java) :
 
-```
+```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Book.getTitle(Book.java:16)
         at com.example.myproject.Author.getBookTitles(Author.java:25)
@@ -182,12 +180,12 @@ Exemple de log (traces de pile Java) :
 
 Appliquez l'étiquette `com.datadoghq.ad.logs` à vos conteneurs comme indiqué ci-dessous pour que le log précédent soit correctement recueilli :
 
-  ```
-  labels:
-    com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
-  ```
-Consultez la [documentation relative aux règles de traitement multiligne][1] pour obtenir d'autres d'exemples d'expressions.
+```yaml
+labels:
+  com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+```
 
+Consultez la [documentation relative aux règles de traitement multiligne][1] pour obtenir d'autres d'exemples d'expressions.
 
 [1]: /fr/agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
@@ -195,7 +193,7 @@ Consultez la [documentation relative aux règles de traitement multiligne][1] po
 
 Si vous exécutez Kubernetes, vous pouvez utiliser les annotations de pod.
 
-```
+```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -215,11 +213,9 @@ spec:
       containers:
         - name: nginx
           image: nginx:latest
-
 ```
 
 Consultez le [guide Autodiscovery][1] pour découvrir des exemples et en savoir plus sur la configuration et le fonctionnement d'Autodiscovery.
-
 
 [1]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 {{% /tab %}}
@@ -245,14 +241,14 @@ Deux variables d'environnement sont disponibles pour inclure ou exclure une list
 
 Ces options fonctionnent à l'aide de chaînes de valeurs séparées par des espaces. Par exemple, si vous souhaitez uniquement surveiller deux images et exclure le reste, indiquez ce qui suit :
 
-```
+```text
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
 ```
 
 Pour exclure un conteneur précis :
 
-```
+```text
 DD_AC_EXCLUDE = "name:datadog-agent"
 ```
 
@@ -267,14 +263,14 @@ Deux paramètres sont disponibles dans `datadog.yaml` pour inclure ou exclure un
 
 Par exemple, si vous souhaitez uniquement surveiller deux images et exclure le reste, indiquez ce qui suit :
 
-```
+```text
 ac_exclude: ["image:.*"]
 ac_include: ["image:cp-kafka", "image:k8szk"]
 ```
 
 Pour exclure l'Agent Datadog :
 
-```
+```text
 ac_exclude = ["name:datadog-agent"]
 ```
 

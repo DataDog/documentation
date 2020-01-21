@@ -14,7 +14,7 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-{{< img src="logs/processing/processors/processors_overview.png" alt="original log" responsive="true">}}
+{{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
 
 A Processor executes within a [pipeline][1] a data-structuring action ([Remapping an attribute](#remapper), [Grok parsing](#grok-parser)...) on a log.
 
@@ -29,7 +29,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 Define the Grok processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/parser.png" alt="Parser"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -93,7 +93,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 Define the Log Date remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -125,11 +125,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 
 Use this Processor if you want to assign some attributes as the official status. For example, it can transform this log:
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt=" Log pre severity " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/log_pre_severity.png" alt=" Log pre severity "  style="width:40%;">}}
 
 Into this log:
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis"  style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -152,7 +152,7 @@ Each incoming status value is mapped as follows:
 
 Define the Log status remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -191,7 +191,7 @@ Use this processor if you want to assign one or more attributes as the official 
 
 Define the Log Service remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -230,7 +230,7 @@ The message is a key attribute in Datadog. It is displayed in the message column
 
 Define the Log Message remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -262,11 +262,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Re
 
 The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It can transforms this log:
 
-{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
 
 Into this log:
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
 Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
@@ -275,7 +275,7 @@ Constraints on the tag/attribute name are explained in the [Tag Best Practice do
 
 Define the remapper processor in the [Datadog Log configuration page][1]. For example, here, it remaps `user` to `user.firstname`
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -317,14 +317,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 
 This Processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
 
-{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor"  style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Define the URL parser processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="Url Processor Tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor_tile.png" alt="Url Processor Tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -355,7 +355,7 @@ Define the URL parser processor in the [Datadog Log configuration page][1]:
 
 The User-Agent parser takes a User-Agent attribute and extracts the OS, browser, device, and other user data. It recognizes major bots like the Google Bot, Yahoo Slurp, and Bing. When set up, the following attributes are produced:
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor"  style="width:80%;">}}
 
 **Note**: If your logs contain encoded User-Agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
@@ -364,7 +364,7 @@ The User-Agent parser takes a User-Agent attribute and extracts the OS, browser,
 
 Define the User-Agent processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -413,11 +413,11 @@ Use categories to create groups for an analytical view (for example, URL groups,
 
 Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
 
-{{< img src="logs/processing/processors/category_processor.png" alt="Category Processor" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor.png" alt="Category Processor"  style="width:80%;" >}}
 
 It produces the following result:
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -472,7 +472,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 
 Define the Arithmetic Processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -523,7 +523,7 @@ The template is defined by both raw text and blocks with the syntax: `%{attribut
 
 Define the string builder processor on the [Datadog log configuration page][1]:
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor"  style="width:80%;">}}
 
 **Example**
 
@@ -606,13 +606,13 @@ The GeoIP parser takes an IP address attribute and extracts if available the Con
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor"  style="width:80%;">}}
 
 Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
 
 Find below an example of the GeoIP Parser that extracts gelocation from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
 
 **Note**: This processor uses GeoLite2 data created by [MaxMind][1].
 
@@ -653,7 +653,7 @@ Alternatively, you could also use it to check if the MAC address that just attem
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor"  style="width:80%;">}}
 
 The processor performs the following actions:
 
@@ -710,7 +710,7 @@ There are two ways to improve correlation between application traces and logs:
 
 Define the Trace remapper processor in the [Datadog Log configuration page][1]. Enter the Trace ID attribute path in the Processor tile as follows:
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -748,4 +748,4 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [5]: /logs/explorer/search/#search-syntax
 [6]: /logs/processing/processors/?tab=ui#log-status-remapper
 [7]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /tracing/advanced/connect_logs_and_traces
+[8]: /tracing/connect_logs_and_traces

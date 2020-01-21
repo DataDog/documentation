@@ -1,11 +1,11 @@
 ---
-title: Enable an AWS service log collection
+title: Enable an AWS Logs integration
 type: apicontent
 order: 16.09
-external_redirect: /api/#enable-an-aws-service-log-collection
+external_redirect: /api/#enable-an-aws-logs-integration
 ---
 
-## Enable an AWS service log collection
+## Enable an AWS Logs integration
 
 Enable Automatic Log collection for your AWS services.
 

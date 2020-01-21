@@ -5,10 +5,10 @@ aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
 further_reading:
-- link: "graphing/infrastructure/hostmap"
+- link: "/infrastructure/hostmap"
   tag: "Graphing"
   text: "See all of your hosts together on one screen with the hostmap"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Graphing"
   text: "Understand what is going on at any level of your system"
 ---
@@ -21,7 +21,7 @@ Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live c
 
 Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
+{{< img src="infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries"  >}}
 
 ## Installation
 
@@ -109,13 +109,13 @@ Streaming logs can be searched with simple string matching. For more details abo
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true" responsive="true" >}}
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true"  >}}
 
 ### Indexed Logs
 
 You can see logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an `Error` status, type `status:error` into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
-{{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel"  style="width:100%;">}}
 
 ## Searching, Filtering, and Pivoting
 
@@ -162,15 +162,15 @@ Kubernetes containers are tagged by:
 
 The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 9 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned"  style="width:80%;">}}
 
 Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivotted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 
-{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/hostxservice.png" alt="Host x services"  style="width:80%;">}}
 
 You could pivot by ECS `ecs_task_name` and `ecs_task_version` to understand changes to resource utilization between updates.
 
-{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version"  style="width:80%;">}}
 
 ## Scatter Plots
 
@@ -178,7 +178,7 @@ Use the scatter plot analytic to compare two metrics with one another in order t
 
 To access the scatter plot analytic [in the Containers page][1] click on the *Show Summary graph* button and select the "Scatter Plot" tab:
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
 
 By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
@@ -188,7 +188,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 * Selection of the aggregation method for both metrics.
 * Selection of the scale of both X and Y axis (*Linear*/*Log*).
 
-{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot.png" alt="scatterplot"  style="width:80%;">}}
 
 ## Real-time monitoring
 

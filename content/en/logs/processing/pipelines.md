@@ -17,7 +17,7 @@ further_reading:
   text: "Going Deeper with Logs: Parsing"
 ---
 
-{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" responsive="true">}}
+{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" >}}
 
 ## Pipelines Goal
 
@@ -31,15 +31,15 @@ Each log that comes through the Pipelines is tested against every Pipeline filte
 
 So for instance a processing Pipeline can transform this log:
 
-{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="original log" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="original log"  style="width:50%;">}}
 
 into this log:
 
-{{< img src="logs/processing/pipelines/log_post_processing.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt=" Log post severity "  style="width:50%;">}}
 
 With one single pipeline:
 
-{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Pipelines example" responsive="true" style="width:75%;">}}
+{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Pipelines example"  style="width:75%;">}}
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
@@ -55,7 +55,7 @@ The filter syntax is the same as the [search bar][2].
 
 The logstream shows which logs your Pipeline applies to:
 
-{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters"  style="width:80%;">}}
 
 ## Nested Pipelines
 
@@ -63,11 +63,11 @@ Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split 
 
 A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
 
-{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines"  style="width:80%;">}}
 
 It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
 
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true" responsive="true" width="80%" >}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true"  width="80%" >}}
 
 ## Special Pipelines
 
@@ -90,11 +90,11 @@ For example: A service that generates the below logs:
 
 Going into the reserved attribute Pipeline and changing the default mapping to this one:
 
-{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper"  style="width:70%;">}}
 
 Would then produce the following log:
 
-{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
+{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
 If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4] or the [Log Date Remapper][5].
 
@@ -102,7 +102,7 @@ If you want to remap an attribute to one of the reserved attributes in a custom 
 
 Datadog’s integration processing Pipelines are available for the certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. To edit an integration Pipeline, clone it and then edit the clone:
 
-{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
 
 To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
 

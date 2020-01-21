@@ -29,11 +29,13 @@ Suivez les [instructions principales pour la configuration de SAML][2].
 ### Vérifier l'authentification
 
 #### Utilisation de la console STA
+
 Accédez à l'URL de connexion Datadog. Vous êtes redirigé vers la page de connexion à SafeNet Trusted Access. Saisissez vos identifiants et passez la double authentification. Vous accédez alors à Datadog.
 
 **Remarque** : pour utiliser le mode d'initiation par le fournisseur d'identité, récupérez l'**Assertion Consumer Service URL** depuis Datadog et saisissez-la sur la console SafeNet Trusted Access.
 
 #### Utilisation du portail utilisateur STA
+
 Accédez à l'URL du portail utilisateur pour vous connecter au dashboard du portail utilisateur STA. Le dashboard présente une liste d'applications auxquelles vous avez accès. Cliquez sur l'icône de l'application Datadog pour accéder à Datadog après l'authentification.
 
 ## Pour aller plus loin

@@ -70,7 +70,7 @@ Chaque valeur ou point de données de cette métrique envoyée en tant que `COUN
 
 La représentation graphique de cette métrique `COUNT` donne ce qui suit :
 
-{{< img src="developers/metrics/types/count_metric.png" alt="Métrique count" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric.png" alt="Métrique count" >}}
 
 **Remarque** : les valeurs des métriques count StatsD s'affichent avec une valeur décimale dans Datadog, car elles sont normalisées sur l'intervalle de transmission et renvoyées en unités par seconde.
 
@@ -101,7 +101,7 @@ Cette séquence de `0.33`, `0.66`, `0` se répète. **Remarque** : lorsque la v
 
 Le type de métrique `RATE` étant la variation normalisée par seconde du nombre de requêtes, sa représentation graphique donne ce qui suit :
 
-{{< img src="developers/metrics/types/rate_metric.png" alt="Métrique rate" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric.png" alt="Métrique rate" >}}
 
 Découvrez comment envoyer des métriques rate :
 
@@ -125,7 +125,7 @@ Chaque valeur ou point de données représente le nombre total de requêtes reç
 
 La représentation graphique de cette métrique `GAUGE` donne ce qui suit :
 
-{{< img src="developers/metrics/types/gauge_metric.png" alt="Métrique gauge" responsive="true">}}
+{{< img src="developers/metrics/types/gauge_metric.png" alt="Métrique gauge" >}}
 
 Découvrez comment envoyer des métriques gauge :
 
@@ -151,7 +151,6 @@ Par exemple : si vous envoyez `X` valeurs pour la métrique `HISTOGRAM` `<NOM_
 | `<NOM_MÉTRIQUE>.95percentile` | Renvoie la valeur correspondant au 95e centile des `X` valeurs envoyées durant l'intervalle de transmission.                                                                                  | GAUGE               |
 | `<NOM_MÉTRIQUE>.max`          | Renvoie la valeur maximale des `X` valeurs envoyées durant l'intervalle de transmission.                                                                           | GAUGE               |
 
-
 Par exemple, imaginons que la métrique `request.response_time.histogram` est envoyée à Datadog par un Agent avec le type `HISTOGRAM` pour `server:web_1`, les valeurs de l'intervalle de transmission étant [1,1,1,2,2,2,3,3]. Les métriques suivantes sont alors envoyées à Datadog pour cet intervalle de transmission :
 
 | Nom de la métrique                                    | Valeur  | Type de métrique Datadog |
@@ -161,7 +160,6 @@ Par exemple, imaginons que la métrique `request.response_time.histogram` est en
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
-
 
 **Remarques** :
 
@@ -227,13 +225,12 @@ Si vous ajoutez les agrégations en centiles à votre métrique Distribution (co
 
 **Remarque** : dans l'exemple ci-dessus, le p50 (médiane) pour `server:web_1` est `2` et le p50 pour `server:web_2` est `1`. Si l'agrégation était effectuée côté Agent, la valeur calculée serait la médiane des deux valeurs médianes, c'est-à-dire `1,5`. En réalité, le p50 (médiane) global est la médiane de l'ensemble complet [1,1,1,1,1,2,2,2,2,3,3], qui est égal à `2`. Il s'agit d'une valeur statistique exacte qui peut être renvoyée par une agrégation de métrique Distribution effectuée côté serveur.
 
-
 ### Personnalisation du tagging
 
 Cette fonctionnalité vous permet de contrôler le tagging pour les métriques pour lesquelles une granularité au niveau des hosts n'est pas nécessaire. Consultez la [page Métriques de distribution][2] pour en savoir plus sur le contrôle des tags à partir d'une liste blanche. **Remarque** : l'exclusion de tags comportant le caractère `!` n'est pas possible avec cette fonction.
 
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission/#distribution
-[2]: /fr/graphing/metrics/distributions
+[2]: /fr/metrics/distributions
 {{% /tab %}}
 {{% tab "SET" %}}
 
@@ -285,7 +282,7 @@ Chaque source a ses propres limitations et le type de métrique envoyé ne corre
 | [Check de l'Agent][16] | `self.set(...)`                      | SET             | GAUGE               |
 
 [1]: /fr/developers/metrics/type_modifiers
-[2]: /fr/graphing/metrics/summary
+[2]: /fr/metrics/summary
 [3]: /fr/api/?lang=python#post-timeseries-points
 [4]: /fr/developers/metrics/dogstatsd_metrics_submission
 [5]: /fr/developers/metrics/agent_metrics_submission

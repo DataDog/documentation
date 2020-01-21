@@ -33,7 +33,7 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
-{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
 ### Set alert conditions
 
@@ -51,9 +51,9 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no logs for all services:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service"  style="width:60%;" >}}
 * This monitor triggers if there are no logs for the service `backend`:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
 ### Notifications
 
@@ -75,10 +75,10 @@ To disable log samples, uncheck the box at the bottom of the **Say what's happen
 #### Examples
 
 Include a table of the top 10 breaching values:
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values"  style="width:60%;" >}}
 
 Include a sample of 10 logs in the alert notification:
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values"  style="width:60%;" >}}
 
 ## Further Reading
 

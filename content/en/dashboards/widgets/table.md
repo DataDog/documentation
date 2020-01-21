@@ -5,13 +5,13 @@ beta: true
 aliases:
     - /graphing/widgets/table/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
 ---
@@ -20,7 +20,7 @@ further_reading:
 
 The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key. For example, see `system.cpu.system` and `system.cpu.user` grouped by `service`:
 
-{{< img src="graphing/widgets/table/table_widget.png" alt="Table widget" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_widget.png" alt="Table widget"  style="width:80%;">}}
 
 ## Setup
 
@@ -35,7 +35,7 @@ The table visualization is available on timeboards and screenboards. It displays
 * Choose a metric for sorting the table (defaults to the first column).
 * Optional: Configure conditional formatting depending on the cell values for each column.
 
-{{< img src="graphing/widgets/table/table_setup.png" alt="Table setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_setup.png" alt="Table setup"  style="width:80%;">}}
 
 ## API
 
@@ -95,8 +95,8 @@ To get multiple columns for metrics queries, you need multiple request objects, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/using_graphs/#configuring-a-graph
+[1]: /dashboards/querying/#configuring-a-graph
 [2]: /logs/explorer/search/#search-syntax
-[3]: /graphing/graphing_json/widget_json
-[4]: /graphing/graphing_json/request_json
-[5]: /graphing/graphing_json/widget_json/#conditional-format-schema
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/request_json
+[5]: /dashboards/graphing_json/widget_json/#conditional-format-schema

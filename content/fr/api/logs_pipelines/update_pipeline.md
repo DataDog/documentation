@@ -8,7 +8,6 @@ external_redirect: '/api/#mettre-a-jour-un-pipeline'
 
 Mettez à jour une configuration de pipeline donnée pour modifier ses processeurs ou leur ordre.
 
-
 **ARGUMENTS**:
 
 **Remarque** : la méthode `PUT` permet de mettre à jour la configuration de votre pipeline en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.

@@ -13,6 +13,7 @@ further_reading:
   text: "Custom Integrations"
 aliases:
   - /agent/kubernetes/apm
+  - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -419,5 +420,5 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [12]: /logs
 [13]: /agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /tracing/setup
-[15]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[15]: /infrastructure/process/?tab=kubernetes#installation
 [16]: /agent/kubernetes/dogstatsd

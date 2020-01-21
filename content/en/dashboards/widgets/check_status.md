@@ -5,24 +5,24 @@ description: "Graph the current status or number of results for any check perfor
 aliases:
     - /graphing/widgets/check_status/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 Check status shows the current status or number of results for any check performed:
 
-{{< img src="graphing/widgets/check_status/check_status.png" alt="Check status widget" responsive="true">}}
+{{< img src="dashboards/widgets/check_status/check_status.png" alt="Check status widget" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/check_status/check_status_setup.png" alt="Check status widget setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -47,7 +47,7 @@ Check status shows the current status or number of results for any check perform
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -86,4 +86,4 @@ CHECK_STATUS_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

@@ -16,7 +16,7 @@ In some cases, you would like to know when one of your tag disappears from some 
 * Then, select some simple alert condition which should never be triggered, such as an alert over a very large value (e.g. `a > 1000000`) or under an impossible negative value (e.g. `a < -1` for a positive metric such as `system.cpu.user`)
 * Finally, activate the _Notify if data is missing_ option, as you can see on this example:
 
-{{< img src="monitors/faq/tag_stop_reporting.png" alt="Tag stop reporting" responsive="true" >}}
+{{< img src="monitors/faq/tag_stop_reporting.png" alt="Tag stop reporting"  >}}
 
 You should then be notified when the tag stops to be sent along with the chosen metric!
 

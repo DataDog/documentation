@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/snmp"
   tag: "Documentation"
   text: "SNMP integration"
-- link: "/graphing/widgets/network"
+- link: "/dashboards/widgets/network"
   tag: "Documentation"
   text: "Network Widget"
 ---
@@ -32,9 +32,9 @@ There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]
 
 The following provisioning systems are supported:
 
-* Daemonset / Helm: See the [Datadog Helm chart][3]
-* Chef: See the [Datadog Chef recipe][4]
-* Ansible: See the [Datadog Ansible role][5]
+* Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][3]
+* Chef 12.7+: See the [Datadog Chef recipe][4]
+* Ansible 2.6+: See the [Datadog Ansible role][5]
 
 ## Setup
 
@@ -77,8 +77,8 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 7. [Restart the Agent][2]: `sudo service datadog-agent restart`
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 
-[1]: https://docs.datadoghq.com/graphing/infrastructure/process/?tab=linuxwindows#installation
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -113,6 +113,9 @@ spec:
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
+          # DD_SYSTEM_PROBE_EXTERNAL is set to true to avoid starting the system probe
+          # in the main Datadog agent container when the system probe runs in a
+          # dedicated container, which is the recommended configuration. 
           - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST

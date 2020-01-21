@@ -1,8 +1,8 @@
 ---
-title: Enable an AWS service log collection
+title: Enable an AWS Logs integration
 type: apicode
 order: 16.09
-external_redirect: /api/#enable-an-aws-service-log-collection
+external_redirect: /api/#enable-an-aws-logs-integration
 ---
 
 **SIGNATURE**:

@@ -47,7 +47,7 @@ composite result because they have not evaluated any
 common groupings or have less than 2 selected monitors.
 ```
 
-Even if you choose multi-alert monitors with the same groups, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#how-composite-monitors-select-common-reporting-sources).
+Even if you choose multi-alert monitors with the same groups, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#select-monitors-and-set-triggering-conditions).
 
 When you select a second monitor that doesn't cause a warning, the UI populates the **Trigger when** field with the default trigger condition `a && b` and shows the status of the proposed composite monitor.
 
@@ -170,10 +170,10 @@ Two monitors grouped by different tags rarely have values that overlap, e.g. `we
 
 In the case of a multi-alert monitor split by two or more tags, a monitor group corresponds to the whole combination of tags. For example, if monitor `1` is a multi-alert per `device,host`, and monitor `2` is a multi-alert per `host`, a composite monitor can combine monitor `1` and monitor `2`:
 
-{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification"  style="width:80%;">}}
 
 However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and monitor `3` may not create a composite result because the groupings are too different:
-{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification"  style="width:80%;">}}
 
 Use your best judgment to choose multi-alert monitors that makes sense together.
 

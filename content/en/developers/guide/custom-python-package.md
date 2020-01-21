@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -64,7 +64,7 @@ Or the package can be added in the library zipped folder that can be found at
 
 then [restart your Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
+{{< img src="agent/windows_python_package.png" alt="windows python package"  >}}
 
 [1]: /agent/basic_agent_usage/windows
 {{% /tab %}}

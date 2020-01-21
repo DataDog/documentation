@@ -14,7 +14,7 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 ---
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
 
 ## Overview
 
@@ -69,7 +69,7 @@ Click the settings cog to display the options available:
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties"  style="width:80%;" >}}
 
 The *Properties* section is the overview of your monitor:
 
@@ -86,7 +86,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are [aggregated correctly][5]. Slide this bracket over the timeline to view previous monitor evaluation results:
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" responsive="true" width="80%" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
 
 For further investigation into your metrics evolution, use the [Metric Explorer][6] or a dedicated [Notebook][7].
 
@@ -100,7 +100,7 @@ For further investigation into your metrics evolution, use the [Metric Explorer]
 
 All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][8].
 
-{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event"  style="width:80%;" >}}
 
 ## Further Reading
 
@@ -109,8 +109,8 @@ All events generated from your monitor are aggregated in this section. Those eve
 [1]: /monitors/monitor_types
 [2]: /monitors/downtimes
 [3]: /api/?lang=python#monitors
-[4]: /graphing/functions
+[4]: /dashboards/functions
 [5]: /videos/datadog101-5-aggregation/?wtime=49s
 [6]: https://app.datadoghq.com/metric/explorer
-[7]: /graphing/notebooks
-[8]: /graphing/event_stream
+[7]: /notebooks
+[8]: /events

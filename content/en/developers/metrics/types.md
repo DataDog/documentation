@@ -218,7 +218,7 @@ If you were to add percentile aggregations to your distribution metric (as shown
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#distribution
-[2]: /graphing/metrics/distributions
+[2]: /metrics/distributions
 {{% /tab %}}
 {{% tab "SET" %}}
 
@@ -301,5 +301,5 @@ Then this pattern of `+10`, `+20`, `+0`, repeats. When graphed, this `GAUGE` met
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/type_modifiers
-[2]: /graphing/metrics/summary
+[2]: /metrics/summary
 [3]: /developers/dogstatsd/data_aggregation

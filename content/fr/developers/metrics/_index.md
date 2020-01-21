@@ -1,13 +1,14 @@
 ---
-title: Métriques
+title: Métriques custom
 kind: documentation
-disable_toc: true
 aliases:
   - /fr/metrics/
   - /fr/guides/metrics/
   - /fr/metrictypes/
   - /fr/units/
   - /fr/developers/metrics/datagram_shell
+  - /fr/developers/metrics/custom_metrics/
+  - /fr/getting_started/custom_metrics
 further_reading:
   - link: developers/dogstatsd
     tag: Documentation
@@ -16,34 +17,40 @@ further_reading:
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
 ---
-Une métrique Datadog est caractérisée par les propriétés ci-dessous. Consultez la [section Présentation des métriques][1] pour découvrir comment représenter graphiquement des métriques au sein de Datadog.
+## Présentation
 
-| Propriété         | Description                                                                                                                                               |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<NOM_MÉTRIQUE>`  | Le [nom de votre métrique](#nommer-les-métriques).                                                                                                               |
-| `<VALEUR_MÉTRIQUE>` | La valeur de votre métrique.                                                                                                                                 |
-| `<TIMESTAMP>`     | Le timestamp associé à la valeur de la métrique. **Remarque** : les timestamps des métriques ne peuvent pas correspondre à une date plus d'une heure avant l'événement et plus de 10 minutes après celui-ci. |
-| `<CONTEXTE>`      | L'ensemble des tags associés à votre métrique.                                                                                                              |
-| `<TYPE_MÉTRIQUE>`  | Le type de votre métrique. Consultez la [documentation relative aux types de métriques][2].                                                                                          |
-| `<INTERVALLE>`     | Si le `<TYPE>` de la métrique est RATE ou COUNT, cette propriété définit l'intervalle correspondant.                                                                    |
+Lorsqu'une métrique n'est pas envoyée depuis l'une des [plus de 350 intégrations Datadog][1], elle est considérée comme une métrique custom<sup>[(1)][2]</sup>. Les métriques custom vous permettent de surveiller plus facilement les KPI de vos applications, comme le nombre de visiteurs, la taille moyenne de leur panier, la latence des requêtes ou la distribution des performances pour un algorithme personnalisé.
 
-Si une métrique n'est pas envoyée depuis l'une des [plus de 350 intégrations Datadog][3], elle est considérée comme une [métrique custom][4]. **Remarque** : certaines intégrations standard [génèrent des métriques custom][2].
+Une métrique custom est définie par une **combinaison unique de nom de métrique et de valeurs de tag (y compris le tag du host)**. En général, les métriques envoyées par [DogStatsD][3] ou via un [check d'Agent custom][4] sont des métriques custom.
 
-### Nommer les métriques
+**Remarque** : les utilisateurs disposant du rôle Admin de Datadog peuvent consulter le nombre moyen de métriques custom par heure et les 500 principales métriques custom pour leur compte depuis la [page des détails d'utilisation][5]. Découvrez comment [les métriques custom sont comptabilisées][6].
 
-Suivez les règles suivantes lors de l'attribution d'un nom à vos métriques :
+## Propriétés des métriques custom
 
-* Les métriques doivent commencer par une lettre.
-* Elles doivent seulement contenir des caractères alphanumériques ASCII, des underscores et des points.
+Une métrique custom Datadog possèdent les propriétés ci-dessous. Consultez la [section Présentation des métriques][7] pour découvrir comment représenter graphiquement des métriques au sein de Datadog.
+
+| Propriété         | Description                                                                                                                                                  |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<NOM_MÉTRIQUE>`  | Le [nom de votre métrique](#nommer-les-métriques).                                                                                                                  |
+| `<VALEUR_MÉTRIQUE>` | La valeur de votre métrique.                                                                                                                                    |
+| `<TIMESTAMP>`    | Le timestamp associé à la valeur de la métrique. **Remarque** : les timestamps des métriques ne peuvent pas correspondre à une date plus d'une heure avant l'événement et plus de 10 minutes après celui-ci. |
+| `<TAGS>`         | L'ensemble des tags associés à votre métrique.                                                                                                                 |
+| `<TYPE_MÉTRIQUE>`  | Le type de votre métrique. Consultez la [documentation relative aux types de métriques][8].                                                                                             |
+| `<INTERVALLE>`     | Si le `<TYPE>` de la métrique est [RATE][9] ou [COUNT][10], cette propriété définit l'[intervalle][11] correspondant.                                                       |
+
+### Nom des métriques custom
+
+La convention de nommage suivante s'applique aux métriques custom :
+
+* Les noms des métriques doivent commencer par une lettre.
+* Les noms de métriques doivent contenir uniquement des caractères alphanumériques ASCII, des underscores et des points.
   * Les autres caractères, y compris les espaces, sont remplacés par des underscores.
   * Le format Unicode n'est _pas_ pris en charge.
-* Ils ne doivent pas dépasser 200 caractères. Nous vous recommandons d'utiliser moins de 100 caractères pour l'interface utilisateur.
-
-Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique séparé par des points (p. ex., `http.nginx.response_time`). La hiérarchie n'est ni appliquée ni interprétée, mais elle peut être utilisée pour déduire des éléments concernant les serveurs. Par exemple, si `hostA` et `hostB` renvoient tous les deux `http.nginx.*`, il doit s'agir de front-ends web.
+* Les noms de métriques ne doivent pas dépasser 200 caractères. Nous vous recommandons d'utiliser moins de 100 caractères pour une meilleure lisibilité sur l'interface.
 
 **Remarque** : les noms de métrique sont sensibles à la casse dans Datadog.
 
-### Envoyer des métriques
+## Envoi de métriques custom
 
 {{< whatsnext desc="Il existe plusieurs façons d'envoyer des métriques à Datadog :">}}
     {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Check custom d'Agent{{< /nextlink >}}
@@ -52,15 +59,25 @@ Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique 
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}API HTTP de DatadogI={{< /nextlink >}}
 {{< /whatsnext >}}
 
-Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et sa communauté pour DogStatsD et les API][6] afin d'envoyer vos métriques.
+Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et sa communauté pour DogStatsD et les API][12] afin d'envoyer vos métriques custom.
+
+**Remarque** : aucune limite de débit fixe n'est appliquée lors de l'envoi des métriques custom. Si vous dépassez votre nombre de métriques par défaut, vous serez facturé conformément à la [politique de facturation de Datadog pour les métriques custom][6].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/graphing/metrics/introduction
-[2]: /fr/developers/metrics/types
-[3]: /fr/integrations
-[4]: /fr/developers/metrics/custom_metrics
-[5]: /fr/account_management/billing/custom_metrics/#standard-integrations
-[6]: /fr/developers/libraries
+<br><sup>(1)</sup> *[Certaines intégrations génèrent des métriques custom][2]*
+
+[1]: /fr/integrations
+[2]: /fr/account_management/billing/custom_metrics/#standard-integrations
+[3]: /fr/developers/metrics/dogstatsd_metrics_submission
+[4]: /fr/developers/metrics/agent_metrics_submission
+[5]: https://app.datadoghq.com/account/usage/hourly
+[6]: /fr/account_management/billing/custom_metrics/#counting-custom-metrics
+[7]: /fr/graphing/metrics/introduction
+[8]: /fr/developers/metrics/types
+[9]: /fr/developers/metrics/types/?tab=rate#metric-submission-types
+[10]: /fr/developers/metrics/types/?tab=count#metric-submission-types
+[11]: /fr/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
+[12]: /fr/developers/libraries

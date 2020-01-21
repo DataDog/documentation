@@ -5,13 +5,13 @@ description: "Display text in your Screenboards."
 aliases:
     - /graphing/widgets/note/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -20,7 +20,7 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 ## Setup
 
-{{< img src="graphing/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup" responsive="true"  style="width:80%;">}}
+{{< img src="dashboards/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup"   style="width:80%;">}}
 
 1. Enter the text you want to display. Note that Markdown is supported.
 2. Choose the text size and the note background color.
@@ -63,5 +63,5 @@ NOTE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widgets/free_text
-[2]: /graphing/graphing_json/widget_json
+[1]: /dashboards/widgets/free_text
+[2]: /dashboards/graphing_json/widget_json

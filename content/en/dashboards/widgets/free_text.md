@@ -5,10 +5,10 @@ description: "Display text in your Screenboards."
 aliases:
     - /graphing/widgets/free_text/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -17,11 +17,11 @@ Free text is a widget that allows you to add headings to your [screenboard][1].
 
 This is commonly used to state the overall purpose of the dashboard.
 
-{{< img src="graphing/widgets/free_text/free_text.png" alt="Free Text" responsive="true">}}
+{{< img src="dashboards/widgets/free_text/free_text.png" alt="Free Text" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/free_text/free_text_setup.png" alt="Free Text Setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Free Text Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -59,5 +59,5 @@ FREE_TEXT_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/screenboard
-[2]: /graphing/graphing_json/widget_json
+[1]: /dashboards/screenboard
+[2]: /dashboards/graphing_json/widget_json

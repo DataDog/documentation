@@ -12,7 +12,7 @@ further_reading:
   - link: agent/docker/log
     tag: Documentation
     text: Recueillir vos logs Docker
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: Recueillir vos processus Docker
   - link: agent/docker/apm
@@ -20,11 +20,13 @@ further_reading:
     text: Recueillir vos traces Docker
 ---
 ## Présentation
+
 L'Agent Docker Datadog est la version conteneurisée de l'[Agent][1] pour host. L'[image Docker][2] officielle est disponible sur Docker Hub.
 
 L'image est disponible en versions pour architectures x86 64 bits et Arm v8.
 
 ## Implémentation
+
 Si vous n'avez pas encore installé l'Agent Docker, consultez les informations ci-dessous ou les [instructions d'installation intégrées à l'application][3]. Consultez la documentation de l'Agent pour connaître les [versions prises en charge][4].
 
 ### Installation
@@ -61,6 +63,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 **Remarque** : pour Docker Compose, consultez [Compose et l'Agent Datadog][6].
 
 ### Configuration
+
 Le [fichier de configuration principal][7] de l'Agent est `datadog.yaml`. Pour l'Agent Docker, les options de configuration `datadog.yaml` sont envoyées via des variables d'environnement.
 
 #### Variables d'environnement
@@ -95,7 +98,7 @@ Par défaut, les Agents de collecte facultatifs sont désactivés pour des raiso
 | Variable d'environnement               | Description                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Active la [collecte de traces][9] avec l'Agent de traces.                                                                                                                                                                                                               |
-| `DD_LOGS_ENABLED`          | Active la [collecte de logs][10] avec l'Agent de logs.                                                                                                                                                                                                                  |
+| `DD_LOGS_ENABLED`          | Active la [collecte de logs][10] avec l'Agent de logs.                                                                                                                                                                                                                 |
 | `DD_PROCESS_AGENT_ENABLED` | Active la [collecte de live processes][11] via l'Agent de processus. Par défaut, la [vue Live Container][12] est déjà activée si le socket Docker est disponible. Si définie sur `false`, la [collecte de live processes][11] et la [vue Live Container][12] sont désactivées. |
 
 ##### DogStatsD (métriques custom)
@@ -126,6 +129,7 @@ Datadog recueille automatiquement les tags courants à partir de [Docker][15], [
 | `DD_COLLECT_EC2_TAGS`                   | Extrait les tags EC2 personnalisés sans utiliser l'intégration AWS |
 
 La clé de carte correspond au nom de la source (`label/envvar`), tandis que sa valeur correspond au nom du tag Datadog. Par exemple :
+
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
@@ -160,10 +164,13 @@ Des exemples supplémentaires sont disponibles sur la page [Gestion de la décou
 **Remarque** : si vous utilisez le runtime containerd, définissez `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` pour faire apparaître vos conteneurs sur la page des conteneurs.
 
 Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'aide des variables d'environnement `DD_EXTRA_LISTENERS` et `DD_EXTRA_CONFIG_PROVIDERS`. Elles viennent s'ajouter aux variables définies dans les sections `listeners` et `config_providers` du fichier de configuration `datadog.yaml`.
+
 ### Validation
+
 Exécutez la [commande status](#commandes) de l'Agent Docker pour vérifier l'installation.
 
 ### Commandes
+
 Ces commandes sont exécutées sur le host.
 
 | Type    | Commande                                         |
@@ -176,6 +183,7 @@ Ces commandes sont exécutées sur le host.
 ## Données collectées
 
 ### Métriques
+
 Par défaut, l'Agent Docker recueille les métriques associées aux checks principaux suivants. Pour recueillir les métriques associées à d'autres technologies, consultez la section [Intégrations](#integrations).
 
 | Check       | Métriques       |
@@ -192,9 +200,11 @@ Par défaut, l'Agent Docker recueille les métriques associées aux checks princ
 | Uptime      | [Système][21]  |
 
 ### Événements
+
 L'Agent Docker envoie des événements à Datadog lorsqu'un Agent est démarré ou redémarré.
 
 ### Checks de service
+
 **datadog.agent.up** :<br>
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
@@ -202,9 +212,11 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si c
 Renvoie `CRITICAL` si un check de l'Agent n'est pas capable d'envoyer des métriques à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Intégrations
+
 L'intégration Docker envoie automatiquement des métriques avec l'Agent Docker. Pour configurer d'autres intégrations, utilisez Autodiscovery ou le montage de fichiers.
 
 ### Autodiscovery
+
 Pour activer Autodiscovery sur l'Agent Docker lorsque vous utilisez l'installation en une étape, montez `/var/run/docker.sock`.
 
 Pour ajouter des intégrations avec Autodiscovery, consultez la page [Modèles d'intégration Autodiscovery][26].
@@ -214,12 +226,14 @@ Pour ajouter des intégrations avec Autodiscovery, consultez la page [Modèles d
 Les fichiers de configuration de votre intégration peuvent être copiés dans `/etc/datadog-agent/conf.d/` lorsque l'Agent Docker démarre en montant un répertoire `/conf.d`.
 
 1. Créez un répertoire de configuration sur le host avec vos fichiers YAML :
+
     ```shell
     mkdir /opt/datadog-agent-conf.d
     touch /opt/datadog-agent-conf.d/http_check.yaml
     ```
 
 2. Lors de l'installation de l'Agent Docker, ajoutez `-v /opt/datadog-agent-conf.d:/conf.d:ro`. Par exemple :
+
     ```shell
     DOCKER_CONTENT_TRUST=1 \
     docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -233,7 +247,6 @@ Les fichiers de configuration de votre intégration peuvent être copiés dans `
 Lorsque le conteneur démarre, tous les fichiers sur le host dans `/opt/datadog-agent-conf.d` qui possèdent l'extension `.yaml` sont copiés vers `/etc/datadog-agent/conf.d/`. **Remarque** : si vous ajoutez de nouveaux fichiers YAML dans `/opt/datadog-agent-conf.d`, redémarrez l'Agent Docker.
 
 Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossier `/checks.d` sont automatiquement copiés vers `/etc/datadog-agent/checks.d/` lorsque l'Agent Docker démarre.
-
 
 ## Pour aller plus loin
 
@@ -249,8 +262,8 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [8]: /fr/agent/proxy/#agent-v6
 [9]: /fr/tracing
 [10]: /fr/logs
-[11]: /fr/graphing/infrastructure/process
-[12]: /fr/graphing/infrastructure/livecontainers
+[11]: /fr/infrastructure/process
+[12]: /fr/infrastructure/livecontainers
 [13]: https://docs.datadoghq.com/fr/developers/dogstatsd
 [14]: /fr/developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go

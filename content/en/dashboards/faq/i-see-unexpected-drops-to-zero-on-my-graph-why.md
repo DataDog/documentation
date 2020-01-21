@@ -7,7 +7,7 @@ aliases:
 
 With stacked series ("Graph theses queries as a; b") or grouped queries ("avg by host"), you'll have several metric lines on the same graph and you may occasionally see some graph lines dropping back to 0:
 
-{{< img src="graphing/faq/drop_to_zero.png" alt="drop to zero" responsive="true" >}}
+{{< img src="dashboards/faq/drop_to_zero.png" alt="drop to zero"  >}}
 
 You can see from the graph legend "N/A" (or by graphing the serie alone in a graph) that there is actually no data at these times.
 
@@ -22,4 +22,4 @@ This feature might be changed in the future. For now, if you find it confusing y
 * "grouped by" queries only: increase the [fill interpolation][1] timeframe
 * all multi-line graphs: increase the [rollup][1] interval.
 
-[1]: /graphing/miscellaneous/functions
+[1]: /dashboards/functions/interpolation

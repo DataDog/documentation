@@ -6,7 +6,7 @@ aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
 
 <div class="alert alert-warning">
 The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
@@ -288,7 +288,7 @@ Checks
 [2]: https://hub.docker.com/r/datadog/docker-dd-agent
 [3]: /#host-setup
 [4]: /integrations/docker_daemon
-[5]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[5]: /agent/kubernetes/daemonset_setup/#configure-rbac-permissions
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables

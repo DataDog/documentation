@@ -5,21 +5,21 @@ description: "Inlude an image or a gif in your Datadog dashboards."
 aliases:
     - /graphing/widgets/image/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF:
 
-{{< img src="graphing/widgets/image/image.mp4" alt="Image" video="true" responsive="true" width="80%" >}}
+{{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/image/image_setup.png" alt="Image setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup"  style="width:80%;">}}
 
 1. Enter your image URL
 2. Choose an appearance:
@@ -56,4 +56,4 @@ IMAGE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

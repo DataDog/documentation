@@ -13,4 +13,4 @@ Muting prevents all monitors from notifying through email and posts to the [even
 
 This endpoint takes no JSON arguments.
 
-[1]: /graphing/event_stream
+[1]: /events

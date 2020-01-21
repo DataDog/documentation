@@ -34,7 +34,7 @@ getfacl /var/log/test-dir/
 
 The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
 
-{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" responsive="true" >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission"  >}}
 
 ### Granting dd-agent read and execute permissions on log directories
 

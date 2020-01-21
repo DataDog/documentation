@@ -5,21 +5,21 @@ description: "Display your Event Stream Timeline in a widget."
 aliases:
     - /graphing/widgets/event_timeline/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][1]:
 
-{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Event timeline example" responsive="true" >}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="Event timeline example"  >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example"  style="width:80%;">}}
 
 ### Configuration
 
@@ -32,7 +32,7 @@ The event timeline is a widget version of the timeline that appears at the top o
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -70,6 +70,6 @@ EVENT_TIMELINE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/graphing_json/widget_json
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[1]: /events
+[2]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json/#time-schema

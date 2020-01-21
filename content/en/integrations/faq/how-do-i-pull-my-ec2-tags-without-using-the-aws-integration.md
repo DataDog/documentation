@@ -42,7 +42,7 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 
 This option only pulls in custom tags set on the EC2 host under the **Tags** tab in your AWS console:
 
-{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags" responsive="true" >}}
+{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags"  >}}
 
 Tags like `availability_zone`, `region`, or `instance_type` are only available by pulling in the EC2 host through the [AWS integration][1].
 

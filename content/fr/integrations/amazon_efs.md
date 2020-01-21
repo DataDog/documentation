@@ -12,7 +12,7 @@ description: Surveillez des métriques clés d'Amazon Elastic File System.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
 git_integration_title: amazon_efs
 has_logo: true
-integration_title: "Amazon\_Elastic\_File\_System"
+integration_title: Amazon Elastic File System
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -48,7 +48,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon EFS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_efs` dans le préfixe.
+Configurez Amazon EFS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_efs` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 

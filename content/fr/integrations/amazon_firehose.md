@@ -12,7 +12,7 @@ description: "Surveillez des métriques clés d'Amazon\_Firehose."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_firehose/'
 git_integration_title: amazon_firehose
 has_logo: true
-integration_title: "Amazon\_Firehose"
+integration_title: Amazon Firehose
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -41,7 +41,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon Firehose de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_firehose` dans le préfixe.
+Configurez Amazon Firehose de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_firehose` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 

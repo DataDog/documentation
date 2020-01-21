@@ -37,4 +37,4 @@ If the issue is alert routing, template variables and the separation of **warnin
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
-[2]: /graphing/dashboards/screenboard
+[2]: /dashboards/screenboard

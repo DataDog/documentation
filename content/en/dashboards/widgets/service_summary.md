@@ -5,21 +5,21 @@ description: "Displays the graphs of a chosen service in your screenboard."
 aliases:
     - /graphing/widgets/service_summary/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
 
 The service summary displays the graphs of a chosen [service][1] in your screenboard.
 
-{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" responsive="true">}}
+{{< img src="dashboards/widgets/service_summary/service_summary.png" alt="service summary" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="service summary setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -89,4 +89,4 @@ TRACE_SERVICE_SCHEMA = {
 
 [1]: /tracing/visualization/service
 [2]: /tracing/send_traces
-[3]: /graphing/graphing_json/widget_json/#time-schema
+[3]: /dashboards/graphing_json/widget_json/#time-schema

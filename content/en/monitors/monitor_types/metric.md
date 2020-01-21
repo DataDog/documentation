@@ -78,7 +78,7 @@ For more detailed information, see the [Forecast Monitor][1] page.
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
+{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
 
 | Step                | Required | Default    | Example           |
 |---------------------|----------|------------|-------------------|
@@ -199,6 +199,6 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /tagging/using_tags/?tab=assignment
-[3]: /graphing/using_graphs/#advanced-graphing
+[3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/faq/what-are-recovery-thresholds
 [5]: /monitors/notifications

@@ -15,7 +15,6 @@ code_languages:
     key: ruby
 
 header_scripts:
-  - datadog_monitoring: false
   - hotjar: false
   - google-tag-manager: false
   - google-site-tag: false

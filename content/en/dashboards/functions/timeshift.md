@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /graphing/functions/timeshift/
 further_reading:
-- link: "/graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/"
+- link: "/dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/"
   tag: "FAQ"
   text: "Graph the percentage change between an earlier value and a current value."
 ---
@@ -31,7 +31,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 Here is an example of `system.load.1` with the `hour_before()` value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the `hour_before()` values show up at the 7:30 mark. Of course, this example was created specifically so that you can see the `hour_before()` values match up with the actual values.
 
-{{< img src="graphing/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example"  style="width:80%;">}}
 
 ## Day before
 
@@ -41,7 +41,7 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 
 Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data, which makes the `day_before()` data easy to identify.
 
-{{< img src="graphing/functions/timeshift/simple_day_before_example.png" alt="simple day before example" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_day_before_example.png" alt="simple day before example"  style="width:80%;">}}
 
 ## Week before
 
@@ -51,7 +51,7 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 
 Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data, which makes the `week_before()` data easy to identify.
 
-{{< img src="graphing/functions/timeshift/simple_week_before_example.png" alt="simple week before example" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example"  style="width:80%;">}}
 
 ### Month before
 
@@ -61,20 +61,20 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
-{{< img src="graphing/functions/timeshift/simple_month_before_example.png" alt="simple month before example" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="simple month before example"  style="width:80%;">}}
 
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
-    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

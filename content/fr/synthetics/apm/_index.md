@@ -12,7 +12,7 @@ further_reading:
     tag: Documentation
     text: APM et tracing distribué
 ---
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true" responsive="true" >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true" >}}
 
 ## Présentation
 
@@ -21,6 +21,7 @@ L'intégration d'APM avec Synthetics vous permet de passer d'un test qui a éven
 En ayant à votre disposition les détails associés au réseau (grâce à votre test), ainsi qu'un backend, une infrastructure et des informations de journalisation (grâce à votre trace), vous pouvez accéder à un niveau de détails supérieur en ce qui concerne le comportement de votre application, tel que constaté par votre utilisateur.
 
 ## Utilisation
+
 Les déclarations sur cette page s'appliquent [aux tests API][1] et aux [tests Browser][2] pour l'APM, sauf indication contraire.
 
 ### Prérequis
@@ -32,6 +33,7 @@ Les déclarations sur cette page s'appliquent [aux tests API][1] et aux [tests B
 Créez un test qui s'applique à votre serveur HTTP soumis à un tracing, et Datadog associe automatiquement la trace générée par votre serveur au résultat de check correspondant.
 
 Pour associer des résultats de test Browser, ajoutez à la liste blanche les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Utilisez `*` pour les caractères génériques :
+
 ```text
 https://*.datadoghq.com/*
 ```
@@ -54,7 +56,7 @@ Datadog utilise le protocole de tracing distribué et configure les en-têtes HT
 | Header                                 | Description                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | `x-datadog-trace-id`                   | Généré à partir du backend Synthetics. Permet à Datadog d'associer la trace au résultat du test.                           |
-| `x-datadog-parent-id: 0`               | Permet à Synthetics d'être la span racine de la trace générée.                                                                                                                        |
+| `x-datadog-parent-id: 0`               | Permet à Synthetics d'être la span racine de la trace générée.                                                             |
 | `x-datadog-origin: synthetics`         | S'assure que les traces générées à partir des tests API [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas).     |
 | `x-datadog-origin: synthetics-browser` | S'assure que les traces générées à partir des tests Browser [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas). |
 | `x-datadog-sampling-priority: 1`       | [S'assure que l'Agent conserve la trace][10].                                                                      |

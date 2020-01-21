@@ -5,13 +5,13 @@ description: "Display the evolution of one or more metrics, log events, Analyzed
 aliases:
     - /graphing/widgets/timeseries/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 - link: "https://www.datadoghq.com/blog/full-screen-graphs"
@@ -21,16 +21,16 @@ further_reading:
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Analyzed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
-{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Timeseries" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" responsive="true" style="width:80%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup"  style="width:80%;" >}}
 
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See [the main graphing documentation][3] to configure a metric query.
+    * Metric: See the documentation [querying][3] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][4] to configure an Analyzed Span query.
     * Log Events: See [the log search documentation][5] to configure an Analyzed Span query.
 
@@ -66,7 +66,7 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names. At the end of the query/formula click on **as...**, then enter your metric alias:
 
-{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
+{{< img src="dashboards/querying/metric_alias.png" alt="metric alias"  style="width:75%;" >}}
 
 ##### Event Overlay
 
@@ -180,17 +180,17 @@ Additional properties allowed in each `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/timeboard
-[2]: /graphing/dashboards/screenboard
-[3]: /graphing
+[1]: /dashboards/timeboard
+[2]: /dashboards/screenboard
+[3]: /dashboards/querying
 [4]: /tracing/app_analytics/search/#search-bar
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
-[6]: /graphing/event_stream
-[7]: /graphing/dashboards/template_variables
-[8]: /graphing/widgets/#full-screen
+[6]: /events
+[7]: /dashboards/template_variables
+[8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /graphing/graphing_json/widget_json
-[11]: /graphing/graphing_json/request_json
-[12]: /graphing/graphing_json/widget_json/#y-axis-schema
-[13]: /graphing/graphing_json/widget_json/#events-schema
-[14]: /graphing/graphing_json/widget_json/#markers-schema
+[10]: /dashboards/graphing_json/widget_json
+[11]: /dashboards/graphing_json/request_json
+[12]: /dashboards/graphing_json/widget_json/#y-axis-schema
+[13]: /dashboards/graphing_json/widget_json/#events-schema
+[14]: /dashboards/graphing_json/widget_json/#markers-schema

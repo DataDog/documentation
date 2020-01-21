@@ -31,8 +31,7 @@ However what you can do is control how this aggregation is performed by using th
 Note that our backend tries to keep the number of intervals to a number below ~300. So if you do rollup(60) over a 2-month time window, you can't have the one-minute granularity requested.
 
 ## Example
-
-{{< img src="graphing/faq/graph_granularity.png" alt="graph_granularity" responsive="true" >}}
+{{< img src="dashboards/faq/graph_granularity.png" alt="graph_granularity"  >}}
 
 The graph above is a bar graph over the past 2 hours. On this graph you have one datapoint per minute, i.e. what you see are not the real values submitted but local aggregates, each one representing one minute of your metric data.
 
@@ -40,6 +39,6 @@ The graph above is a bar graph over the past 2 hours. On this graph you have one
 
 Yes, if you zoom in enough you'll get the original values. For instance with the datadog-agent (submitting data every ~15 seconds) if you look at a 45-minute (or less) timewindow you have unaggregated values.
 
-[1]: /graphing/faq/how-is-data-aggregated-in-graphs
-[2]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
-[3]: /graphing/miscellaneous/functions
+[1]: /dashboards/faq/how-is-data-aggregated-in-graphs
+[2]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[3]: /dashboards/functions/rollup

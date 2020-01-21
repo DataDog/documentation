@@ -5,29 +5,29 @@ description: "Graph the change in a value over a chosen time period."
 aliases:
     - /graphing/widgets/change/
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "/dashboards/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "graphing/graphing_json/widget_json"
+- link: "/dashboards/graphing_json/widget_json"
   tag: "Documentation"
   text: "Widget JSON schema"
-- link: "graphing/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
 The Change graph shows you the change in a value over the time period chosen:
 
-{{< img src="graphing/widgets/change/change.png" alt="Change graph" responsive="true">}}
+{{< img src="dashboards/widgets/change/change.png" alt="Change graph" >}}
 
 ## Setup
 
-{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/change/change_setup.png" alt="Change graph Setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -53,7 +53,7 @@ The Change graph shows you the change in a value over the time period chosen:
 
 #### Display preference
 
-{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
 
 ##### Global time
 
@@ -67,7 +67,7 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -126,5 +126,5 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
-[2]: /graphing/graphing_json/request_json
+[1]: /dashboards/graphing_json/widget_json
+[2]: /dashboards/graphing_json/request_json

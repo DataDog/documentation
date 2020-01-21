@@ -11,7 +11,7 @@ description: Surveillez des métriques clés d'Amazon Direct Connect.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
 git_integration_title: amazon_directconnect
 has_logo: true
-integration_title: "Amazon\_Direct\_Connect"
+integration_title: Amazon Direct Connect
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -45,7 +45,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon Direct Connect de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_directconnect` dans le préfixe.
+Configurez Amazon Direct Connect de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_directconnect` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 

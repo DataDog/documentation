@@ -22,7 +22,7 @@ metric_prefix: cacti.
 metric_to_check: cacti.rrd.count
 name: cacti
 public_title: Intégration Datadog/Cacti
-short_description: Transmettez vos données RRD Cacti à Datadog pour recevoir des alertes détaillées et créer de superbes graphiques. graphing.
+short_description: Transmettez vos données RRD Cacti à Datadog pour recevoir des alertes détaillées et créer de superbes graphiques.
 support: core
 supported_os:
   - linux
@@ -36,109 +36,143 @@ Recueillez des métriques du service Cacti en temps réel pour :
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check Cacti est inclus avec le paquet de l'[Agent Datadog][2]. Pour commencer à rassembler des métriques vous devez d'abord :
-- Installer les bibliothèques et en-têtes librrd
-- Installer les liaisons Python vers rrdtool
+Le check Cacti est inclus avec le paquet de l'[Agent Datadog][1]. Pour commencer à rassembler des métriques, vous devez d'abord :
+
+1. Installer les bibliothèques et en-têtes `librrd`
+2. Installer les liaisons python vers `rrdtool`
 
 #### Bibliothèques et en-têtes librrd
 
-Sur Debian/Ubuntu
+Sur Debian/Ubuntu :
+
 ```shell
 sudo apt-get install librrd-dev
 ```
 
-Sur RHEL/CentOS
+Sur RHEL/CentOS :
+
 ```shell
 sudo yum install rrdtool-devel
 ```
 
 #### Liaisons Python
 
-Ajoutez ensuite le paquet Python `rrdtool` dans l'Agent avec la commande suivante.
+Ajoutez maintenant le paquet Python `rrdtool` dans l'Agent avec la commande suivante :
+
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ```
 
 ### Configuration
 
-Créez un utilisateur Datadog avec un accès en lecture seule à la base de données Cacti.
+#### Créer un utilisateur Datadog
 
-```shell
-sudo mysql -e "create user 'datadog'@'localhost' identified by '<motdepasse>';"
-sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
-```
+1. Créez un utilisateur Datadog avec un accès en lecture seule à la base de données Cacti.
 
-Vérifiez l'utilisateur et ses droits.
+    ```shell
+    sudo mysql -e "create user 'datadog'@'localhost' identified by '<MYSQL_PASSWORD>';"
+    sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
+    ```
 
-```shell
-mysql -u datadog --password=<motdepasse> -e "show status" | \
-grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
-echo -e "\033[0;31mImpossible de se connecter à MySQL\033[0m"
+2. Vérifiez l'utilisateur et ses droits :
 
-mysql -u datadog --password=<motdepasse> -D cacti -e "select * from data_template_data limit 1" && \
-echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
-echo -e "\033[0;31mMissing SELECT grant\033[0m"
-```
+    ```shell
+    mysql -u datadog --password=<MYSQL_PASSWORD> -e "show status" | \
+    grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
+    echo -e "\033[0;31mCannot connect to MySQL\033[0m"
 
-Configurez l'Agent de façon à ce qu'il se connecte à MySQL et modifiez le fichier `cacti.d/conf.yaml`. Consultez le [fichier d'exemple cacti.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+    mysql -u datadog --password=<MYSQL_PASSWORD> -D cacti -e "select * from data_template_data limit 1" && \
+    echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
+    echo -e "\033[0;31mMissing SELECT grant\033[0m"
+    ```
 
-```yaml
-init_config:
+3. Accordez à l'utilisateur `datadog-agent` un accès aux fichiers RRD :
 
-instances:
-    -   mysql_host: localhost
-        mysql_user: datadog
-        mysql_password: hx3beOpMFcvxn9gXcs0MU3jX
-        rrd_path: /chemin/vers/rra/cacti
-        #field_names:
-        #    - ifName
-        #    - dskDevice
-        #    - ifIndex
-        #rrd_whitelist: /chemin/vers/whitelist_rrd.txt
-```
+    ```shell
+    sudo gpasswd -a dd-agent www-data
+    sudo chmod -R g+rx /var/lib/cacti/rra/
+    sudo su - datadog-agent -c 'if [ -r /var/lib/cacti/rra/ ];
+    then echo -e "\033[0;31mdatadog-agent can read the RRD files\033[0m";
+    else echo -e "\033[0;31mdatadog-agent can not read the RRD files\033[0m";
+    fi'
+    ```
 
-Accordez à l'utilisateur datadog-agent un accès aux fichiers RRD.
+#### Configurer l'Agent
 
-```shell
-sudo gpasswd -a dd-agent www-data
-sudo chmod -R g+rx /var/lib/cacti/rra/
-sudo su - datadog-agent -c 'if [ -r /var/lib/cacti/rra/ ];
-then echo -e "\033[0;31mdatadog-agent peut lire les fichiers RRD\033[0m";
-else echo -e "\033[0;31mdatadog-agent ne peut pas lire les fichiers RRD\033[0m";
-fi'
-```
+1. Configurez l'Agent de façon à ce qu'il se connecte à MySQL et modifiez le fichier `cacti.d/conf.yaml`. Consultez le [fichier d'exemple cacti.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
+
+    ```yaml
+        init_config:
+
+        instances:
+
+            ## @param mysql_host - string - required
+            ## url of your MySQL database
+            #
+          - mysql_host: "localhost"
+
+            ## @param mysql_port - integer - optional - default: 3306
+            ## port of your MySQL database
+            #
+            # mysql_port: 3306
+
+            ## @param mysql_user - string - required
+            ## User to use to connect to MySQL in order to gather metrics
+            #
+            mysql_user: "datadog"
+
+            ## @param mysql_password - string - required
+            ## Password to use to connect to MySQL in order to gather metrics
+            #
+            mysql_password: "<MYSQL_PASSWORD>"
+
+            ## @param rrd_path - string - required
+            ## The Cacti checks requires access to the Cacti DB in MySQL and to the RRD
+            ## files that contain the metrics tracked in Cacti.
+            ## In almost all cases, you'll only need one instance pointing to the Cacti
+            ## database.
+            ## The `rrd_path` will probably be `/var/lib/cacti/rra` on Ubuntu
+            ## or `/var/www/html/cacti/rra` on any other machines.
+            #
+            rrd_path: "<CACTI_RRA_PATH>"
+    ```
+
+2. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `cacti` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `cacti` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "cacti" >}}
 
 
 ### Événements
+
 Le check Cacti n'inclut aucun événement.
 
 ### Checks de service
+
 Le check Cacti n'inclut aucun check de service.
 
 ## Dépannage
+
 ### Problèmes connus
+
 La bibliothèque Python utilisée par cette intégration provoque des fuites de mémoire dans certaines circonstances. Si vous rencontrez ce problème, vous pouvez installer le paquet [python-rrdtool][6] au lieu de rrdtool. Cet ancien paquet n'est plus mis à jour et n'est pas officiellement pris en charge par cette intégration, mais il a permis à d'autres utilisateurs de résoudre ce problème de mémoire.
 
 Un [ticket Github][7] a été ouvert afin de suivre cette fuite de mémoire.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
 [6]: https://github.com/pbanaszkiewicz/python-rrdtool
 [7]: https://github.com/commx/python-rrdtool/issues/25

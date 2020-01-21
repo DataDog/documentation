@@ -5,10 +5,10 @@ description: "Inlude an Iframe in your Datadog dashboards."
 aliases:
     - /graphing/widgets/iframe/
 further_reading:
-- link: "graphing/dashboards/screenboard/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/graphing_json/"
+- link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
@@ -17,7 +17,7 @@ The iframe widget allows you to embed a portion of any other web page on your da
 
 ## Setup
 
-{{< img src="graphing/widgets/iframe/iframe_setup.png" alt="Iframe setup" responsive="true" style="width:80%;">}}
+{{< img src="dashboards/widgets/iframe/iframe_setup.png" alt="Iframe setup"  style="width:80%;">}}
 
 Enter the URL of the page you want to display inside the iframe. If you do not use an HTTPS URL, you may have to configure your browser to allow non-secure content.
 
@@ -46,4 +46,4 @@ IFRAME_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json

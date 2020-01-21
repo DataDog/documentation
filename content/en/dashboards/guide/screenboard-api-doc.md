@@ -476,4 +476,4 @@ curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&applicat
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /graphing/dashboards/screenboard
+[1]: /dashboards/screenboard

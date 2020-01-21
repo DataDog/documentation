@@ -21,7 +21,7 @@ further_reading:
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
 
 ## Search syntax
 
@@ -46,7 +46,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:80%;">}}
 
 ### Escaping of special characters
 
@@ -125,7 +125,7 @@ You can add facets on arrays of strings or numbers. All values included in the a
 
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
 ## Saved Searches
 
@@ -136,7 +136,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/?tab=facets#setup
-[2]: /graphing/infrastructure
+[2]: /infrastructure
 [3]: /integrations/#cat-log-collection
 [4]: /tagging/#tags-best-practices
 [5]: /logs/explorer/saved_views
