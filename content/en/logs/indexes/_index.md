@@ -78,7 +78,7 @@ Let's say now you don't want to keep all logs from your web access server reques
 
 #### Sampling consistently with higher-level entities
 
-You have millions of users connecting to your marketplace everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all production logs (`env:production`) and exclude logs for 90% of the `@user.email`:
+You have millions of users connecting to your website everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all production logs (`env:production`) and exclude logs for 90% of the `@user.email`:
 
 {{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
 
