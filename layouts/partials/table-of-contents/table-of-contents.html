@@ -1,16 +1,20 @@
 {{ $ctx := . }}
 
 
-<div class="col-4 col-lg-2 js-toc-container toc-container {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">
-    <div class="sticky toc">
-    {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
+<div class="col-4 col-lg-2 js-toc-container toc-container ">
 
-    <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} {{ end }}">On this page</p>
+    
+    <div class="sticky toc">
+        {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
+        <div class="{{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
+            <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">On this page</p>
         {{ .TableOfContents }}
+        </div>
+        
     </div>
 </div>
 
-<div class=" mobile-toc-toggle js-mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} d-lg-none  {{ end }}">
+<div class=" mobile-toc-toggle js-mobile-toc-toggle {{ if .Params.disable_toc }} d-none {{ else }} d-lg-none  {{ end }}">
     <i class="icon-small-bookmark"></i>
     <i class="icon-small-x-2 d-none"></i>
 </div>

@@ -34,7 +34,7 @@
 {{ else if (eq $ctx.Section "integrations" )}}
 {{/* Files with integrations path and no dependencies link to new issue */}}
 
-    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new/choose" }}
+    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new?template=issue.md" }}
     {{ $editLink := $ctx.Scratch.Get "editURL" }}
 
     {{ with $ctx.File }}
@@ -43,7 +43,7 @@
     
 {{ else }}
 {{/* Not in integrations edit existing docs file */}}
-        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
+        {{ $editLink := ( printf "https://github.com/DataDog/documentation/blob/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
         {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
 
 {{ end }}
