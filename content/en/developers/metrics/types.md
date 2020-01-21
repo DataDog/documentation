@@ -1,7 +1,6 @@
 ---
 title: Metrics Types
 kind: documentation
-disable_toc: true
 aliases:
  - /developers/metrics/counts/
  - /developers/metrics/distributions/
@@ -22,7 +21,7 @@ further_reading:
 
 Each metric submitted to Datadog has a **metric type**. Metric type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [metric type modifiers][1] and functions.
 
-## Metric Types: Submission vs. Storage
+## Submission vs. Storage
 
 Datadog accepts a wide range of **metric submission types**:
 
@@ -35,25 +34,25 @@ Datadog accepts a wide range of **metric submission types**:
 | [DISTRIBUTION](?tab=distribution#metric-submission-types) | The statistical distribution of a set of events calculated Server side. |
 | [SET](?tab=set#metric-submission-types)                   | The number of unique occurrences of events over a period of time.       |
 
-When data is received, the submitted metric type is mapped to one of three in-app **Stored Metric Types**. Datadog stores metric data under the following canonical types:
+When data is received, the submitted metric type is mapped to one of three **in-app Metric Types**:
 
-* [COUNT](?tab=count#metric-storage-types)
-* [RATE](?tab=rate#metric-storage-types)
-* [GAUGE](?tab=gauge#metric-storage-types)
+| In-app Types                                          | Definition                                                              |
+|-----------------------------------------------------------|-------------------------------------------------------------------------|
+| [COUNT](?tab=count#metric-in-app-types)               | The total number of events that occur in one time interval.             |
+| [RATE](?tab=rate#metric-in-app-types)                 | The total number of events occurences per second.                       |
+| [GAUGE](?tab=gauge#metric-in-app-types)               | A snapshot of events one time interval.                                 |
 
 A metric's type is displayed on the details sidepanel for the given metric on the [Metrics Summary page][2].
 
-## Submission Method
-
-{{< whatsnext desc="Metrics are submitted to Datadog in three main ways:">}}
-    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Datadog's HTTP API{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Metric submission types
 
-Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, [aggregation occurs when multiple points arrive in a short time interval][3]. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp. The way in which values are combined and aggregated varies, depending on metric type.
+Metrics are submitted to Datadog in three main ways:
+
+* [Custom Agent check][3]
+* [DogStatsD][4]
+* [Datadog's HTTP API][5]
+
+Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, [aggregation occurs when multiple points arrive in a short time interval][6]. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp. The way in which values are combined and aggregated varies, depending on metric type.
 
 Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of DISTRIBUTION metrics). The raw values sent to Datadog are stored as-is.
 
@@ -236,17 +235,19 @@ Discover how to submit set metrics:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metric storage types
+## Metric in-app types
 
-To better understand the impact of the different stored metrics types, what they represent, and how to modify them within Datadog, consider the following example:
+To better understand the impact of the different in-app metrics types, what they represent, and how to modify them within Datadog, consider the following example:
 
 You have one web server: `server:web_1` that continuously receives:
 
 * 10 HTTP requests for the first 30 seconds, then
 * 20 HTTP requests for the next 30 seconds, then
-* 0 HTTP requests for the next 30 seconds.
+* 30 HTTP requests for the next 30 seconds.
 
-And so on and so forth. Let's say you now want to monitor the number of requests received by `server:web_1`. Choose the metric type below between COUNT, RATE, and GAUGE to see how the stored metric type changes what is actually measured and how the metric is stored and graphed.
+And so on and so forth.
+
+Let's say you now want to monitor the number of requests received by `server:web_1`. Choose the metric type below between COUNT, RATE, and GAUGE to see how the in-app metric type changes what is actually measured and how the metric is graphed.
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
@@ -257,9 +258,9 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 
 * `10` for the first 30 seconds
 * `20` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds (for a `COUNT` metric, when a `0` value is submitted, `null` is stored within Datadog.)
+* `30` for the last interval of 30 seconds
 
-Then this pattern of `10`, `20`, `null`, repeats. When graphed, this `COUNT` metric looks like the following:
+Then this pattern of `10`, `20`, `30`, repeats. When graphed, this `COUNT` metric looks like the following:
 
 {{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" responsive="true">}}
 
@@ -272,9 +273,9 @@ Since the `RATE` is the normalized per-second variation of the number of request
 
 * `0.33` for the first 30 seconds
 * `0.66` for the second interval of 30 seconds
-* `null` for the last interval of 30 seconds (for a `RATE` metric, when a `0` value is submitted, `null` is stored within Datadog.)
+* `1` for the last interval of 30 seconds
 
-Then this pattern of `0.33`, `0.66`, `0`, repeats. When graphed, this `RATE` metric looks like the following:
+Then this pattern of `0.33`, `0.66`, `1`, repeats. When graphed, this `RATE` metric looks like the following:
 
 {{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" responsive="true">}}
 
@@ -283,18 +284,40 @@ Then this pattern of `0.33`, `0.66`, `0`, repeats. When graphed, this `RATE` met
 
 Monitoring is implemented so that the `number.of.requests.gauge` metric is reported every 30 seconds to Datadog with the `GAUGE` type in `server:web_1`.
 
-Each value/data point represents the total number of requests received at a point in time since the begining of the monitoring. The metric then reports the following values:
+Each value/data point represents **the total number of requests received at a point in time** since the begining of the monitoring. The metric then reports the following values:
 
 * `10` for the first 30 seconds
 * `30` for the second interval of 30 seconds (10 + 20 requests)
-* `30` for the last interval of 30 seconds (no new request are received so the value stays the same)
+* `60` for the last interval of 30 seconds (10 + 20 + 30 requests)
 
-Then this pattern of `+10`, `+20`, `+0`, repeats. When graphed, this `GAUGE` metric looks like the following:
+Then this pattern of `+10`, `+20`, `+30`, repeats. When graphed, this `GAUGE` metric looks like the following:
 
 {{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Global mapping between submission and in-app type
+
+Find below the global summary of how a metric type, when sumbmitted from a given source, is mapped to the Datadog in-app type.
+
+| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
+|-------------------|--------------------------------------|-----------------|---------------------|
+| [API][5]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
+| [API][5]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
+| [API][5]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                |
+| [DogStatsD][7]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
+| [DogStatsD][8]    | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT        |
+| [DogStatsD][9]    | `dog.count(...)`                     | COUNT           | RATE                |
+| [DogStatsD][9]    | `dog.increment(...)`                 | COUNT           | RATE                |
+| [DogStatsD][9]    | `dog.decrement(...)`                 | COUNT           | RATE                |
+| [DogStatsD][10]   | `dog.set(...)`                       | SET             | GAUGE               |
+| [DogStatsD][11]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][12] | `self.count(...)`                    | COUNT           | COUNT               |
+| [Agent check][13] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Agent check][14] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Agent check][15] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][16] | `self.rate(...)`                     | RATE            | GAUGE               |
 
 ## Further Reading
 
@@ -302,4 +325,17 @@ Then this pattern of `+10`, `+20`, `+0`, repeats. When graphed, this `GAUGE` met
 
 [1]: /developers/metrics/type_modifiers
 [2]: /metrics/summary
-[3]: /developers/dogstatsd/data_aggregation
+[3]: /developers/metrics/agent_metrics_submission
+[4]: /developers/metrics/dogstatsd_metrics_submission
+[5]: /api/?lang=python#post-timeseries-points
+[6]: /developers/dogstatsd/data_aggregation
+[7]: /developers/metrics/dogstatsd_metrics_submission/#gauge
+[8]: /developers/metrics/dogstatsd_metrics_submission/#distribution
+[9]: /developers/metrics/dogstatsd_metrics_submission/#count
+[10]: /developers/metrics/dogstatsd_metrics_submission/#set
+[11]: /developers/metrics/dogstatsd_metrics_submission/#histogram
+[12]: /developers/metrics/agent_metrics_submission/?tab=count#count
+[13]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[14]: /developers/metrics/agent_metrics_submission/?tab=gauge
+[15]: /developers/metrics/agent_metrics_submission/?tab=histogram
+[16]: /developers/metrics/agent_metrics_submission/?tab=rate
