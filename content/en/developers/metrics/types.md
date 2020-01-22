@@ -262,7 +262,7 @@ Each value/data point for this metric submitted as a `COUNT` represents the numb
 
 Then this pattern of `10`, `20`, `30`, repeats. When graphed, this `COUNT` metric looks like the following:
 
-{{< img src="developers/metrics/types/count_metric.png" alt="Count Metric" responsive="true">}}
+{{< img src="developers/metrics/types/count_metric_example.png" alt="Count Metric" >}}
 
 {{% /tab %}}
 {{% tab "RATE" %}}
@@ -277,7 +277,7 @@ Since the `RATE` is the normalized per-second variation of the number of request
 
 Then this pattern of `0.33`, `0.66`, `1`, repeats. When graphed, this `RATE` metric looks like the following:
 
-{{< img src="developers/metrics/types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+{{< img src="developers/metrics/types/rate_metric_example.png" alt="Rate Metric" >}}
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
@@ -292,7 +292,7 @@ Each value/data point represents **the total number of requests received at a po
 
 Then this pattern of `+10`, `+20`, `+30`, repeats. When graphed, this `GAUGE` metric looks like the following:
 
-{{< img src="developers/metrics/types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
+{{< img src="developers/metrics/types/gauge_metric_example.png" alt="Gauge Metric" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
