@@ -3,7 +3,15 @@ title: Custom Metrics Billing
 kind: documentation
 aliases:
   - /integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+  - link: "metrics/metrics_without_limits"
+    tag: "Documentation"
+    text: "Explore how Metrics without Limits™ can help you customize tags"
 ---
+
+<div class="alert alert-warning">
+<strong>Metrics without Limits is now in public beta.</strong> <a href="/help">Contact Datadog support</a> for more information.
+</div>
 
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
@@ -176,7 +184,10 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][25] Manager.
 
-[1]: /integrations
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}[1]: /integrations
 [2]: /developers/metrics/custom_metrics
 [3]: /developers/metrics/types/#metric-submission-types
 [4]: https://app.datadoghq.com/account/usage/hourly

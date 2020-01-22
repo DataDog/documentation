@@ -16,12 +16,6 @@ further_reading:
     text: "Metrics Distributions"
 ---
 
-<div class="alert alert-warning">
-<strong>Metrics without Limits is now in public beta.</strong> Metrics without Limits provides the ability to customize tagging on all metric types in-app without having to redeploy or change any code. Interested? <a href="/help">Contact Datadog support for more information</a>.<br><br>
-
-<strong>Note:</strong> Review the <a href="/account_management/billing/custom_metrics">custom metrics billing page</a> to learn how custom tagging effects billing.
-</div>
-
 ### Metric data
 
 In Datadog, metric data is ingested and stored as data points with a value and timestamp:
