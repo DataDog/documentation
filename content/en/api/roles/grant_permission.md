@@ -9,7 +9,7 @@ external_redirect: /api/#grant-permission
 
 Adds a permission to a role.
 
-#### REQUIRED PAYLOAD:
+#### Required payload
 
 `data["type"]="permissions"`<br>
 `data["id"]=$PERMISSION_UUID`

@@ -9,7 +9,7 @@ external_redirect: /api/#update-role
 
 Updates an existing role's name. Returns role name and UUID.
 
-#### REQUIRED PAYLOAD:
+#### Required payload
 
 `type="roles"`<br>
 `id="ROLE_UUID"`<br>

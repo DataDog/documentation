@@ -9,7 +9,7 @@ external_redirect: /api/#add-user-to-role
 
 Adds a user to a role.
 
-#### REQUIRED PAYLOAD:
+#### Required payload
 
 `data["type"]="users"`<br>
 `data["id"]=$USER_UUID`
