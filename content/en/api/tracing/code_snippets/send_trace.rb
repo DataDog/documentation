@@ -16,7 +16,6 @@ END_TIME = Time.now
 START = (START_TIME.to_f * 1e9).to_i
 DURATION = ((END_TIME - START_TIME) * 1e9).to_i
 
-
 # Send the traces.
 port = 8126
 host = "127.0.0.1"
