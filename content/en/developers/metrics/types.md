@@ -21,7 +21,7 @@ further_reading:
 
 Each metric submitted to Datadog has a **metric type**. Metric type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [metric type modifiers][1] and functions.
 
-## Submission vs. Storage
+## Submission vs. in-app type
 
 Datadog accepts a wide range of **metric submission types**:
 
