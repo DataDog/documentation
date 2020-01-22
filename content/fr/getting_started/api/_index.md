@@ -44,7 +44,7 @@ Vous disposez maintenant d'une collection Datadog contenant de nombreux exemples
 Après l'importation de la collection Postman, une liste complète des appels d'API Datadog disponibles est arrangée par répertoire dans le volet de gauche de Postman.
 Dans les répertoires, les appels d'API ont des variables entrées pour `datadog_site`, `datadog_api_key`, et `datadog_application_key` :
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="template variables de l'API Postman" style="width:70%;">}}
+{{< img src="getting_started/postman/SetAPIKeys.png" alt="template variables de l'API Postman"  style="width:70%;">}}
 
 Cela vous permet de configurer les [environnements Postman][4] et d'enregistrer votre site Datadog, ainsi que les clés d'application pour l'authentification. Si vous avez plusieurs organisations Datadog, définissez plusieurs [environnements Postman][4] pour effectuer des appels d'API vers différentes organisations sans modifier les appels d'API dans la collection Postman Datadog.
 
@@ -60,7 +60,7 @@ Suivez ces étapes pour configurer votre environnement :
 
 5. Facultatif : si vous avez plusieurs organisations Datadog, répétez les étapes 1 à 4 pour chaque organisation.
 
-{{< img src="getting_started/postman/SetAPIKeys2.png" alt="template variables de l'API Postman" style="width:70%;">}}
+{{< img src="getting_started/postman/setAPIKeys2.png" alt="template variables de l'API Postman 2"  style="width:70%;">}}
 
 ## Utilisation de la collection
 
