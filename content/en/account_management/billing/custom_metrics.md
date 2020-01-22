@@ -9,10 +9,6 @@ further_reading:
     text: "Explore how Metrics without Limits™ can help you customize tags"
 ---
 
-<div class="alert alert-warning">
-<strong>Metrics without Limits is now in public beta.</strong> <a href="/help">Contact Datadog support</a> for more information.
-</div>
-
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
@@ -154,6 +150,10 @@ Administrative users (those with [Datadog Admin roles][4]) can see the monthly a
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
 
 {{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
+
+<div class="alert alert-warning">
+<strong>Metrics without Limits is now in public beta.</strong> <a href="/help">Contact Datadog support</a> for more information.
+</div>
 
 ## Allocation
 
