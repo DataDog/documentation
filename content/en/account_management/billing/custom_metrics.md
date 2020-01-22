@@ -187,7 +187,9 @@ For billing questions, contact your [Customer Success][25] Manager.
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: /integrations
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
 [2]: /developers/metrics/custom_metrics
 [3]: /developers/metrics/types/#metric-submission-types
 [4]: https://app.datadoghq.com/account/usage/hourly
