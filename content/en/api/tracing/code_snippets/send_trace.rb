@@ -6,13 +6,16 @@ TRACE_ID = rand(1..1000000)
 SPAN_ID = rand(1..1000000)
 
 # Start a timer.
-START = Time.now.to_i
+START_TIME = Time.now
 
 # Do things...
 sleep 2
 
-# Stop the timer.
-DURATION = ((Time.now.to_f - START)* 1000000).to_i
+END_TIME = Time.now
+
+START = (START_TIME.to_f * 1e9).to_i
+DURATION = ((END_TIME - START_TIME) * 1e9).to_i
+
 
 # Send the traces.
 port = 8126
