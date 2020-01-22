@@ -5,8 +5,8 @@
 
     
     <div class="sticky toc">
-        {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
-        <div class="{{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
+        <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
+            {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">On this page</p>
         {{ .TableOfContents }}
         </div>

@@ -69,11 +69,15 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         z-index: 3;
     }
     .toc {
+        margin-right: auto;
         top: 100px;
         padding-bottom: 50px;
         overflow-x: hidden;
         overflow-y: auto;
         z-index: 1;
+        @media (min-width: 1440px) {
+            margin-right: -40%;
+        }
         h5 {
             font-size: 18px;
             font-weight: 600;

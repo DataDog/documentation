@@ -188,6 +188,7 @@ function onLoadTOCHandler() {
 
     if (isTOCDisabled() && tocContainer) {
         document.querySelector('.js-toc-title').classList.add('d-none');
+        document.querySelector('.js-toc').classList.add('d-none');
         tocMobileToggle.classList.add('d-none');
     } else if (window.innerWidth < 991 && tocContainer) {
         tocContainer.classList.remove('toc-container');
