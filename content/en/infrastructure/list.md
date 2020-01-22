@@ -55,15 +55,18 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 ### Export
 
-For a JSON formatted list of your hosts reporting to Datadog, use the **JSON API permalink** at the bottom of the infrastructure list.
+For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
+
+* The **JSON API permalink** at the bottom of the infrastructure list
+* The [search hosts API endpoint][4] - see the [developer guide][5] for an example.
 
 #### Agent version
 
-At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][4], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][6], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
 #### No Agent
 
-Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][5].
+Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][7].
 
 ## Further Reading
 
@@ -72,5 +75,7 @@ Another use case of the JSON export would be to get a list of AWS EC2 instances 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname
 [2]: /tagging
 [3]: /logs
-[4]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[5]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+[4]: /api/?lang=bash#search-hosts
+[5]: /developers/guide/query-the-infrastructure-list-via-the-api
+[6]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[7]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
