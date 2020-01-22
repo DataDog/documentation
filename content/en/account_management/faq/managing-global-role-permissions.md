@@ -1,5 +1,5 @@
 ---
-title: How do I grant or remove a global permission to/from a role?
+title: Managing Global Role Permissions
 kind: documentation
 beta: true
 further_reading:

@@ -46,4 +46,4 @@ private: true
 [14]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp
 [15]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
 [16]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe
-[17]: /account_management/faq/how-do-i-grant-or-remove-a-global-permission-to-or-from-a-role
+[17]: /account_management/faq/managing-global-role-permissions
