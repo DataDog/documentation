@@ -22,7 +22,7 @@ Each flow contains network metrics such as throughput, bandwidth, retransmit cou
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/installation" >}}<u>Installation</u>: Configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_table" >}}<u>Network Page</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/network_page" >}}<u>Network Page</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
     {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 
