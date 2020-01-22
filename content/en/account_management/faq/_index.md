@@ -28,7 +28,7 @@ private: true
 * [How do I setup Microsoft Active Directory Federation Services as a SAML IdP?][14]
 * [Can I use a proxy to connect my servers to Datadog?][15]
 * [How is Datadog retrieving my data? Are my data and credentials safe?][16]
-* [How do I grant or remove a global permission to/from a role?][17]
+* [Managing Global Role Permissions][17]
 
 [1]: /account_management/faq/are-my-data-and-credentials-safe
 [2]: /account_management/faq/help-my-password-email-never-came-through
