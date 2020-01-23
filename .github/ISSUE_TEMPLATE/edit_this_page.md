@@ -4,6 +4,6 @@ about: Thanks for your feedback, but the page you are trying to edit is not avai
 
 ---
 
-**Documentation page to update**:
+**Documentation page URL to update**:
 
 **Description of the update**:
