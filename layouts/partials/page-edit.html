@@ -23,7 +23,7 @@
 {{ else if (eq $ctx.Section "integrations" )}}
 {{/* Files with integrations path and no dependencies link to new issue */}}
 
-    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new?template=issue.md" }}
+    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new?template=edit_this_page.md" }}
     {{ $editLink := $ctx.Scratch.Get "editURL" }}
 
     {{ with $ctx.File }}
