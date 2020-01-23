@@ -19,7 +19,7 @@ After [assigning tags][1], start using them to filter and group your data in you
 
 ## Events
 
-The [Events Stream][2] shows all the events that have occurred in your environment over the time period specified. Use tags to filter down the event list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events that come from a host or an [integration][3] with that tag. The example below is used to search for the tag `service:coffee-house` using `tags:service:coffee-house`. To search multiple tags inclusively, separate each tag by OR `tags:service:coffee-house OR host:coffeehouseprod`. To search multiple tags exclusively, separate using commas `tags:service:coffee-house,host:coffeehouseprod.`
+The [Events stream][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. In the example below, `tags:service:coffee-house` is used to search for the tag `service:coffee-house`. To search multiple tags inclusively, separate each tag with OR: `tags:service:coffee-house OR host:coffeehouseprod`. To search multiple tags exclusively, separate each tag using commas: `tags:service:coffee-house,host:coffeehouseprod.`
 
 {{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags" style="width:80%;">}}
 
