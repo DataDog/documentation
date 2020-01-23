@@ -33,7 +33,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         padding: 8px;
         font-size: 25px;
         color: white;
-        background-color: $ddpurple
+        background-color: $ddpurple;
+        &:before {
+            position: relative;
+            top: 2px;
+        }
     }
     i.icon-small-x-2 {
         border: none;
@@ -74,7 +78,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         padding-bottom: 50px;
         overflow-x: hidden;
         overflow-y: auto;
-        z-index: 1;
         @media (min-width: 1440px) {
             margin-right: -40%;
         }
@@ -189,7 +192,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
-
 // Mobile TOC
 
 .announcement_banner.open ~ .container .toc-container-mobile .toc {
@@ -265,7 +267,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                         right: 0;
                                         left: 0;
                                     }
-                                    
                                 }
                             }
                             a {
@@ -277,7 +278,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                     padding: 10px 60px 10px 30px;
                                     &:after {
                                         font-family: 'Glyphter' !important;
-                                        content: '\0064'; // upward chevron
+                                        content: '\32'; // upward chevron
                                         position: absolute;
                                         right: 34px;
                                         font-size: 16px;
@@ -289,7 +290,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 color: $dimGreyGrey;
                                 &:after {
                                     font-family: 'Glyphter' !important;
-                                    content: '\0063'; // downward chevron
+                                    content: '\31'; // downward chevron
                                     position: absolute;
                                     right: 34px;
                                     font-size: 16px;
