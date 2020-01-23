@@ -44,7 +44,7 @@ The total number of tags attached to a metric along with a list of tags. Click o
 
 {{< img src="metrics/summary/tag_click.png" alt="Click on a tag"  style="width:75%;">}}
 
-Learn more about tagging in the [documentation][5].
+[Learn more about tagging][5].
 
 ### Metrics metadata
 
