@@ -7,7 +7,7 @@ further_reading:
   text: "Datadog Pricing"
 ---
 
-Datadog has many pricing plans to fit your needs. For more information,see the [Pricing][1] page. Unless otherwise stated in your Order, Datadog calculates fees based on product usage during each calendar month. Here are the most common pricing units:
+Datadog has many pricing plans to fit your needs. For more information, see the [Pricing][1] page. Unless otherwise stated in your order, Datadog calculates fees based on product usage during each calendar month. Here are the most common pricing units:
 
 ## Infrastructure monitoring
 
