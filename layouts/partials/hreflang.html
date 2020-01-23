@@ -1,3 +1,8 @@
+{{ $dot := . }}
+
+<!-- self reference the current page -->
+<link rel="alternate" hreflang="{{ $dot.Lang }}" href="{{ $dot.Permalink }}"/>
+
 {{ if .IsTranslated }}
   {{ range .Translations }}
     {{ if in (slice "fr") .Lang }}
