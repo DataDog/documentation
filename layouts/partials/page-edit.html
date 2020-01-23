@@ -15,21 +15,13 @@
                 {{ with $ctx.File }}
                     {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $dep "type" $type) }}
                 {{ end }}
-                
+
         {{ end }}
 
     {{ end }}
 
 {{ else if (eq $ctx.Section "integrations" )}}
-{{/* Files with integrations path and no dependencies link to new issue */}}
-
-    {{ $ctx.Scratch.Set "editURL" "https://github.com/DataDog/documentation/issues/new?template=edit_this_page.md" }}
-    {{ $editLink := $ctx.Scratch.Get "editURL" }}
-
-    {{ with $ctx.File }}
-        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
-    {{ end }}
-    
+{{/* Files with integrations path and no dependencies are not editable */}}
 {{ else }}
 {{/* Not in integrations edit existing docs file */}}
         {{ $editLink := ( printf "https://github.com/DataDog/documentation/blob/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
