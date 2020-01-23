@@ -57,7 +57,7 @@ Exclusion filters are defined by a query, a sampling rule, and a active/inactive
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute.
 * Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index.
 
-**Note**: As for Index Filters, logs are excluded by the first **active** exclusion filter they match, use drag and drop on the list of exclusion filters to reorder them according to your use-case.
+**Note**: As for Index Filters, logs are processed by the first **active** exclusion filter they match, and only this one. Use drag and drop on the list of exclusion filters to reorder them according to your use-case.
 
 {{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters"  style="width:80%;">}}
 
