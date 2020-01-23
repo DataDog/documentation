@@ -1,14 +1,13 @@
 ---
 title: Azure Troubleshooting
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/integrations/azure/"
   tag: "Documentation"
   text: "Azure integration"
 ---
 
-### Find your tenant name
+## Find your tenant name
 
 1. Navigate to [portal.azure.com][1].
 2. In the left sidebar, select **Azure Active Directory**.
@@ -18,11 +17,11 @@ Your tenant name is also available from the URL when using the [classic portal][
 
 {{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url"   style="width:70%">}}
 
-### Unable to login
+## Unable to login
 
 If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][3]. When possible, attach a screenshot.
 
-### Missing metrics
+## Missing metrics
 
 Ensure you completed the installation process, which includes giving read permissions to the Azure application for the subscriptions you want to monitor.
 
@@ -30,7 +29,7 @@ For ARM deployed virtual machines, you must also turn on Diagnostics and select 
 
 For other missing metrics, contact [Datadog support][3].
 
-#### Enable diagnostics
+### Enable diagnostics
 
 Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. Follow these instructions:
 

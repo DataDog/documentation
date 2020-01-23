@@ -1,7 +1,6 @@
 ---
 title: RUM Dashboards
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "/real_user_monitoring/installation/advanced_configuration"
   tag: "Documentation"

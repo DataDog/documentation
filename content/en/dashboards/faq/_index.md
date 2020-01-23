@@ -1,7 +1,6 @@
 ---
 title: Graphing FAQ
 kind: faq
-disable_toc: true
 private: true
 aliases:
     - /graphing/faq/how-to-merge-screenboards
