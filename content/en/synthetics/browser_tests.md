@@ -67,7 +67,8 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface. 
+Hitting **Open in a pop-up** and **Shift** will open the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
@@ -98,7 +99,7 @@ The default timeout for each step is approximately 60 seconds. You can override 
 
 ### Navigation
 
-The navigation action allow you to:
+The navigation action allows you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
@@ -109,6 +110,17 @@ The navigation action allow you to:
 This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
 
 After selecting the Hover action, click on the element you want to choose to create a new step.
+
+### Upload
+
+You can record the uploading of files as an action. To record an upload step you can:
+
+* Either open your desktop from the browser,
+* Or drag and drop your file in the recording iframe.
+
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:50%;">}}
+
+This is limited to 10 files, with a limit of 5MB each.
 
 ### Variable
 
@@ -168,12 +180,6 @@ Advanced options also allow you to choose where you want your subtest to be play
 Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
-
-### Upload
-
-You can record the uploading of files as an action. This is limited to 10 files, with a limit of 5MB each.
-
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:50%;">}}
 
 ## Test failure and errors
 
