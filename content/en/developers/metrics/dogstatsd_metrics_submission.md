@@ -132,9 +132,9 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
-            Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
-            Statsd.count("example_metric.count", 2, ["environment:dev"]);
+            Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
+            Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
+            Statsd.count("example_metric.count", 2, new String[]{"environment:dev"});
             Thread.sleep(100000);
         }
     }
@@ -309,7 +309,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordGaugeValue("example_metric.gauge", i, ["environment:dev"]);
+            Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
     }
@@ -627,7 +627,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), ["environment:dev"]);
+            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -906,7 +906,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), ["environment:dev"]);
+            Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -1074,7 +1074,7 @@ statsd.Incr("example_metric.increment", []string{"environment:dev","account:loca
 {{% tab "Java" %}}
 
 ```java
-Statsd.incrementCounter("example_metric.increment", ["environment:dev","account:local"]);
+Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
 ```
 
 {{% /tab %}}

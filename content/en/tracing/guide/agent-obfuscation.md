@@ -2,7 +2,6 @@
 title: Agent Trace Obfuscation
 kind: guide
 private: true
-disable_toc: true
 ---
 
 Agent [trace][1] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.

@@ -1,7 +1,6 @@
 ---
 title: Powershell command to install Azure Datadog Extension
 kind: faq
-disable_toc: true
 ---
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:

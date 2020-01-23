@@ -285,17 +285,17 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 Tags can be used in various ways with the [API][15]. See the list below for links to those sections:
 
-- [Schedule monitor downtime][16]
-- [Query the event stream][17]
-- [Search hosts][18]
-- [Integrations][19] for [AWS][20] and [Google Cloud][21]
-- [Querying timeseries points][22]
-- [Get all monitor details][23]
-- [Mute a monitor][24]
-- [Monitors search][25]
-- [Monitors group search][26]
-- [Create a Screenboard][27]
-- [Create a Timeboard][28]
+* [Schedule monitor downtime][16]
+* [Query the event stream][17]
+* [Search hosts][18]
+* [Integrations][19] for [AWS][20] and [Google Cloud][21]
+* [Querying timeseries points][22]
+* [Get all monitor details][23]
+* [Mute a monitor][24]
+* [Monitors search][25]
+* [Monitors group search][26]
+* [Create a Screenboard][27]
+* [Create a Timeboard][28]
 
 ## Further Reading
 

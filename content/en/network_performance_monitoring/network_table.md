@@ -1,7 +1,6 @@
 ---
 title: Network Page
 kind: documentation
-disable_toc: true
 description: Explore your Network data between each source and destination across your stack.
 further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
@@ -22,7 +21,7 @@ further_reading:
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network flows **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page. 
+To refine your search to traffic between particular endpoints, aggregate and filter your network flows **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page.
 
 The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-service flows when aggregated over a five-minute time period.
 

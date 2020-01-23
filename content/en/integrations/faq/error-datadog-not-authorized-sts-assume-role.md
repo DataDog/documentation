@@ -1,7 +1,6 @@
 ---
 title: "Error: Datadog is not authorized to perform sts:AssumeRole"
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/integrations/amazon_web_services/#installation"
   tag: "Documentation"
