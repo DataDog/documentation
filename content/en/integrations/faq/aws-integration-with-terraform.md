@@ -1,7 +1,6 @@
 ---
 title: The AWS Integration with Terraform
 kind: faq
-disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/managing-datadog-with-terraform/"
   tag: "Blog"

@@ -1,7 +1,6 @@
 ---
 title: How to set up only Logs
 kind: faq
-disable_toc: true
 beta: true
 ---
 
@@ -27,7 +26,6 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 
 3. [Configure the Agent to collect Logs][2].
 4. [Restart the Agent][3].
-
 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection

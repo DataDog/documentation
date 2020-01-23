@@ -1,7 +1,6 @@
 ---
 title: Setting Up APM with C++
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/setup/cpp"
   tag: "Documentation"
@@ -34,11 +33,11 @@ sudo apt-get -y install g++ cmake
 
 Run these two lines together to get the latest C++ version:
 ```
-get_latest_release() {  
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |  
-    grep '"tag_name":' |  
-    sed -E 's/.*"([^"]+)".*/\1/';  
-}  
+get_latest_release() {
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/';
+}
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 ```
 If you get a rate limited message from Github, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:

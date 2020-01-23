@@ -2,7 +2,6 @@
 title: Dogwrap
 description: "Call commands and generate events from their results with Dogwrap"
 kind: guide
-disable_toc: true
 aliases:
 - /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 ---
