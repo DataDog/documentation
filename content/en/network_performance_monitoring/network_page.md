@@ -46,7 +46,7 @@ The facet panels mirror the tags in your search bar query. Switch between the fa
 
 #### Custom Facets
 
-You can aggregate and filter traffic by any tag in Datadog. Traffic is indexed by a whitelist of tags by default, and these tags can be found in the search bars dropdown menus.
+Aggregate and filter your traffic data by any tags in Datadog network page. A default list of facet is populated from your tags that can be found in the search bars dropdown menus.
 
 {{< img src="network_performance_monitoring/network_page/drop_down_menu.png" alt="Drop down menu" >}}
 
@@ -73,7 +73,9 @@ Values displayed might be different for `sent_metric(source to destination)` and
 
 {{< img src="network_performance_monitoring/network_page/graphs_npm.png" alt="Graph npm"  style="width:80%;" >}}
 
-### Network load metrics
+### Metrics
+
+#### Network Load
 
 The following network load metrics are available:
 
@@ -83,7 +85,7 @@ The following network load metrics are available:
 | **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
 | **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
 
-### TCP Metrics
+#### TCP
 
 TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available:
 
@@ -93,21 +95,21 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Round-trip Time (RTT)** | Round-trip time is a proxy for latency.|
 | **RTT Variance** | RTT is a proxy for jitter. |
 
-### DNS metrics
+### DNS Resolution
 
-Using reverse-DNS lookup, Datadog resolves IP’s to human-readable domain names for external and internal UDP traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats.
+Starting with Agent 7.17+, using reverse-DNS lookup, the Agent resolves IP’s to human-readable domain names for external and internal UDP traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats.
 
 **Note**: DNS is encoded as a tag in Datadog, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation"  style="width:80%;" >}}
+{{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
 
-### Table
+## Table
 
 The network table breaks down the *Volume*, *Throughput*, *TCP Retransmits*, *Round-trip Time (RTT)*, and *RTT variance* metrics between each *source* and *destination* defined by your query.
 
-{{< img src="network_performance_monitoring/network_page/data_table.png" alt="Data table"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/data_table.png" alt="Data table" >}}
 
-#### Unresolved Traffic
+### Unresolved Traffic
 
 Unresolved source and destination tags are marked as `N/A`. A traffic source or destination endpoint may be unresolved because:
 
