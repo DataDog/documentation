@@ -249,11 +249,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                     & > ul {
                         & > li {
                             border-bottom: 1px solid $ddgray;
-
-                            // First top level item
-                            &:last-child > a {
-                                padding-bottom: 20px;
-                            }
                             &.toc_scrolled {
                                 background: none;
                                 & > a {
@@ -278,10 +273,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                     padding: 10px 60px 10px 30px;
                                     &:after {
                                         font-family: 'Glyphter' !important;
-                                        content: '\32'; // upward chevron
+                                        content: '\34'; // upward chevron
                                         position: absolute;
-                                        right: 34px;
-                                        font-size: 16px;
+                                        right: 35px;
+                                        font-size: 12px;
                                     }
                                 }
                             }
@@ -292,8 +287,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                     font-family: 'Glyphter' !important;
                                     content: '\31'; // downward chevron
                                     position: absolute;
-                                    right: 34px;
-                                    font-size: 16px;
+                                    right: 35px;
+                                    font-size: 12px;
+                                    transform: translateY(2px);
                                 }
                             }
 
