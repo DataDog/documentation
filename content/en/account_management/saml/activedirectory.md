@@ -3,7 +3,6 @@ title: Configuring up Microsoft Active Directory Federation Services as a SAML I
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
-disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"

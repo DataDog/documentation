@@ -2,7 +2,6 @@
 title: Logs Guides
 kind: guide
 private: true
-disable_toc: true
 ---
 
 {{< whatsnext desc="" >}}

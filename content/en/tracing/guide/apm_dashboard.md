@@ -1,7 +1,6 @@
 ---
 title: Create a Dashboard to track and correlate APM metrics
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,6 +18,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _4 minutes to complete_
 
 {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
