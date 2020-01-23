@@ -99,7 +99,7 @@ spec:
         env:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
-          ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
+          ## - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}
           - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
