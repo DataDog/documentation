@@ -67,7 +67,7 @@ The UUIDs for the permissions are as follows:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Granting Permissions Within Limited Scopes
+## Granting permissions within limited scopes
 
 Certain permissions can be granted within a limited scope. This can be done manually from the Datadog application in [the Pipelines Page][1], or programmatically via the Role API if the correct "scope" is added in the payload. The following permissions can be granted within a limited scope:
 
