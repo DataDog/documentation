@@ -79,7 +79,7 @@ Hitting **Open in a pop-up** and **Shift** will open the pop up in incognito mod
 
 ## Actions
 
-After saving a Browser Test you can record [Actions][10] as a series of steps, which you can then edit or build on. Actions can also be configured with [advance settings][11].
+After saving a Browser Test you can record [Actions][10] as a series of steps, which you can then edit or build on. Actions can also be configured with [advanced settings][11].
 
 ## Test failure and errors
 

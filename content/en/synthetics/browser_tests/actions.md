@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advance options][1].
+Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advanced options][1].
 
 ### Assertion
 
@@ -20,7 +20,7 @@ Actions are a series of steps that you can record for a Browser Test, which you 
 
 Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
 
-The default timeout for each step is approximately 60 seconds. You can override the [timeout][2] for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
+The default timeout for each step is approximately 60 seconds. You can override the timeout with [advance options][2].
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -31,7 +31,7 @@ The default timeout for each step is approximately 60 seconds. You can override 
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][10]. |
 
-[Advanced options][3] for assertions allows you to specify a custom locator: an X-path or a CSS class/ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you have defined an element, hit **Test** to highlight the element in the recording on the right. If the defined locator fails, by default the test is considered as failed. You can decide to fallback on the regular Browser tests algorithm by unticking the [`If user specified locator fails, fail test`][4] box.
+[Advanced options][3] are also available for assertions.
 
 ### Navigation
 
@@ -100,22 +100,6 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
-
-### Subtests
-
-You can run browser tests within other browser tests:
-
-{{< img src="synthetics/browser_tests/browser_test_subtest.mp4" alt="Browser test subtest" video="true"  width="40%" >}}
-
-[Advanced options][7] also allow you to choose where you want your subtest to be played:
-
-* **Main** (default): Subtest is played in your main tab, in sequence with other steps.
-* **New**: Subtest is played in a new tab, which is closed at the end of the subtest i.e. the tab cannot be reused.
-* **Specific tab**: Subtest is played in a numbered tab, which can be reused by other subtests.
-
-Opening your subtest in the main tab means that your subtest is the continuation of your main test: it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
-
-**Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
 ## Further Reading
 
