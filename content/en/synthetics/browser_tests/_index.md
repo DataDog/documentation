@@ -3,8 +3,8 @@ title: Browser Test
 kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
-  - /synthetics/browser_check
-  - /synthetics/browser_test
+  - /synthetics/browser_tests/actions
+  - /synthetics/browser_tests/advance_options
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
