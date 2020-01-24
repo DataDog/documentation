@@ -30,7 +30,7 @@ By default the box **If user specified locator fails, fail test** is selected. T
 
 You can decide to fallback on the regular Browser Test algorithm by deselecting the **If user specified locator fails, fail test** box.
 
-{{< img src="synthetics/browser_tests/advance_options/fail_test.png" alt="Fail test option">}}
+{{< img src="synthetics/browser_tests/advance_options/fail_test.png" alt="Fail test option" style="width:70%">}}
 
 ## Timeout
 
@@ -44,7 +44,7 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Allow this step to fail**. If the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test will move on and execute the next step.
 
-{{< img src="synthetics/browser_tests/advance_options/timeout.png" alt="Timeout" style="width:30%">}}
+{{< img src="synthetics/browser_tests/advance_options/timeout.png" alt="Timeout" style="width:25%">}}
 
 ## Subtests
 
@@ -53,6 +53,8 @@ In some cases, such as in the event of a pop-up, you may want to make some steps
 * **Main (default)**: Subtest is played in your main tab, in sequence with other steps.
 * **New**: Subtest is played in a new tab, which is closed at the end of the subtest i.e. the tab cannot be reused.
 * **Specific tab**: Subtest is played in a numbered tab, which can be reused by other subtests.
+
+{{< img src="synthetics/browser_tests/advance_options/subtest.png" alt="Subtests" style="width:60%">}}
 
 Opening your subtest in the main tab means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
 
