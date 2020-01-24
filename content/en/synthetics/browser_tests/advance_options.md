@@ -24,13 +24,13 @@ To specify your custom locator:
 * The HTML element can then be selected either with an X-path or with a CSS class/ID, for example: `div`, `h1`, or `.hero-body`.
 * Once you have defined an element, click **Test** to highlight the element in the recording on the right.
 
-{{< img src="synthetics/browser_tests/advance_options/custom_selector.png" alt="Custom Selector" style="width:75%">}}
+{{< img src="synthetics/browser_tests/advance_options/css.gif" alt="Test Highlighted Element">}}
 
 By default the box **If user specified locator fails, fail test** is selected. This means that, by default, if the defined locator fails, the test will be considered a failure.
 
 You can decide to fallback on the regular Browser Test algorithm by deselecting the **If user specified locator fails, fail test** box.
 
-{{< img src="synthetics/browser_tests/advance_options/css.gif" alt="Fail Test Option">}}
+{{< img src="synthetics/browser_tests/advance_options/fail_test.png" alt="Fail test option">}}
 
 ## Timeout
 
