@@ -4525,10 +4525,10 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-hugo-bin@0.47.1:
-  version "0.47.1"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.47.1.tgz#a8c85cb9ef791a689f59a8877fb81d5f53281a63"
-  integrity sha512-WJ3xMDTe3Qi9vcDguzSOWUVUEIVnPahlvex/Em1k7ig39IZuGAbDqIjkVzCCbtSZMUCjNHDzO35P7xyH7WX7rg==
+hugo-bin@0.51.1:
+  version "0.51.1"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.51.1.tgz#fb8c59af855da3165b9980e2a3df0c8a7eb7804a"
+  integrity sha512-6o//iOwQbhsFrN2b+9WXzR7eqgXkwtwt5kuzZffE/GFvTOAFcmrZc/sKSGPNvf4vwfYBWo/EDrJKVQSPg68Iaw==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
@@ -6002,7 +6002,7 @@ node-releases@^1.1.42:
   dependencies:
     semver "^6.3.0"
 
-node-sass@^4.13.0:
+node-sass@4.13.0:
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.13.0.tgz#b647288babdd6a1cb726de4545516b31f90da066"
   integrity sha512-W1XBrvoJ1dy7VsvTAS5q1V45lREbTlZQqFbiHb3R3OTTCma0XBtuG6xZ6Z4506nR4lmHPTqVRwxT6KgtWC97CA==
