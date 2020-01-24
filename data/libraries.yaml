@@ -56,7 +56,7 @@ Classic:
       link: https://github.com/lexmag/statix
       dogstatsd: true
       authors: Aleksei Magusev
-  - Erlang / Elixir
+  - Erlang / Elixir:
     - name: dogstatsde
       link: https://github.com/waisbrot/dogstatsde
       dogstatsd: true
