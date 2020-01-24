@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advance options][1].
+Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advanced options][1].
 
 ### Assertion
 
