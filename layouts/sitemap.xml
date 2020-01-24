@@ -1,4 +1,5 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{ $allowed := (slice "fr") }}
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
     {{ $page := . }}
     {{ if (and (not .Params.private) (not .Params.placeholder) (ne (.Language.Lang | default "en") "ja") ) }}
@@ -14,10 +15,20 @@
 
       {{ if .IsTranslated }}
         {{ range .Translations }}
-            {{ if in (slice "fr") .Lang }}
+          {{ if in $allowed .Lang }}
+            {{ with .Params.placeholder }}
+
+            {{ else }}
               <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
             {{ end }}
-        {{ end}}
+          {{ else if eq .Lang "en" }}
+            {{ with $page.Params.placeholder }}
+
+            {{ else }}
+              <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+            {{ end }}
+          {{ end }}
+        {{ end }}
       {{ end }}
 
 	  </url>
