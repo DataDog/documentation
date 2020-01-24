@@ -1,7 +1,6 @@
 ---
 name: Feature request
 about: "Suggest an idea for the Datadog documentation. To request a product feature, please file a ticket to Datadog's support team directly: https://docs.datadoghq.com/help/".
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
