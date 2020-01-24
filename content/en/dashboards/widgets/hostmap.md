@@ -31,8 +31,8 @@ Configuration of the host map widget is similar to the main [host map page][1]:
 1. **Type**: Choose to display `hosts` or `containers`.
 2. **Filter by**: Choose the hosts or containers to display.
 3. **Group by**: Aggregate your hosts or containers by one or several tags.
-4. **Fill by**: Choose a metric to fill your host map elements.
-5. **Size by** (optional): Choose a metric to size your host map elements.
+4. **Fill by**: Choose a metric to fill your host or container map elements.
+5. **Size by** (optional): Choose a metric to size your host or container map elements.
 6. **Palette** (optional): Choose a color palette.
 7. **Values** (optional): Define the min and max color palette fill values.
 
