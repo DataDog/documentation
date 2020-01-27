@@ -92,20 +92,9 @@ The evaluation graph represents the exact query behavior within the timeframe br
 
 For further investigation into your metrics evolution, use a [dashboard][6] or [notebook][7].
 
-## Events & Related Activity
-
-### Events
+## Events
 
 Events generated from your monitor are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][8].
-
-### Related Activity
-
-The following information on related monitors is shown on the **Related Activity** tab:
-
-* Current status
-* Monitor name
-* Groups
-* Tags
 
 ## Further Reading
 
