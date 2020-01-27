@@ -3,6 +3,7 @@ title: OpenTracing
 kind: documentation
 aliases:
   - /tracing/advanced/opentracing/
+description: "Implement the Opentracing standard with Datadog APM tracers."
 further_reading:
 - link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"
