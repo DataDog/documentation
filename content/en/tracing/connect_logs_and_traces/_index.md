@@ -123,7 +123,7 @@ This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, an
 
 Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [Log4Net][5]. Automatic injection will only display in your logs after configuring your logger to emit MDC attributes (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [Log4Net][5]. Automatic injection will only display in your logs after configuring your logger to emit MappedDiagnosticsContext attributes (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
 
 **Automatic Trace ID Injection for Serilog**
 ```csharp
