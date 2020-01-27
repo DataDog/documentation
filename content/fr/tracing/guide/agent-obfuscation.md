@@ -2,7 +2,6 @@
 title: Obfuscation des traces de l'Agent
 kind: guide
 private: true
-disable_toc: true
 ---
 L'obfuscation des [traces][1] de l'Agent est désactivée par défaut. Activez-la dans votre fichier de configuration `datadog.yaml` pour obfusquer toutes les informations associées à vos traces.
 
@@ -37,7 +36,7 @@ apm_config:
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
-{{% tab "ElasticSearch" %}}
+{{% tab "Elasticsearch" %}}
 
 S'applique aux [spans][1] de type `elasticsearch`, plus précisément aux tags de span `elasticsearch.body` :
 
