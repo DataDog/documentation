@@ -121,9 +121,9 @@ This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, an
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs if you are using [NLog][2], [Log4Net][3], or [Serilog][4]. Automatic injection will only display in your logs after configuring your logger to emit MDC attributes (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4], or [Log4Net][5]. Automatic injection will only display in your logs after configuring your logger to emit MDC attributes (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
 
 **Automatic Trace ID Injection for Serilog**
 ```csharp
@@ -172,12 +172,11 @@ var log = new LoggerConfiguration()
   </layout>
 ```
 
-
-[1]: https://github.com/damianh/LibLog
-[2]: http://nlog-project.org
-[3]: https://logging.apache.org/log4net
-[4]: http://serilog.net
-[5]: /tracing/setup/dotnet/#configuration
+[1]: /tracing/setup/dotnet/#configuration
+[2]: https://github.com/damianh/LibLog
+[3]: http://serilog.net
+[4]: http://nlog-project.org
+[5]: https://logging.apache.org/log4net
 {{% /tab %}}
 {{% tab "PHP" %}}
 
