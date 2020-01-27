@@ -392,9 +392,6 @@ class Integrations:
                     result,
                     0,
                 )
-            result = "{0}\n\n{1}".format(
-                result, "{{< get-dependencies >}}"
-            )
             result = self.add_integration_frontmatter(
                 new_file_name, result, dependencies
             )
