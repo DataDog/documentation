@@ -2,8 +2,6 @@
 title: Advanced Options for Browser Test Actions
 kind: documentation
 description: Configure advanced options for Browser Test Actions
-aliases:
-- /synthetics/browser_tests
 further_reading:
 - link: "synthetics/browser_tests/actions"
   tag: "Documentation"

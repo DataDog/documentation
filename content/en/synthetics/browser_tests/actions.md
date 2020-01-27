@@ -2,8 +2,6 @@
 title: Browser Test Actions
 kind: documentation
 description: Record Actions for a Synthetics Browser Test
-aliases:
-- /synthetics/browser_tests
 further_reading:
 - link: "synthetics/browser_tests/advance_options"
   tag: "Documentation"
@@ -39,7 +37,7 @@ The navigation action allows you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][5]. Choose the email you are interested in and click the link you want your browser test to click on.
+* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on.
 
 ### Hover
 
@@ -67,7 +65,7 @@ This is limited to 10 files, with a limit of 5MB each.
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Global Variable**: Store and use global variables through [Synthetics Settings][6]).
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][5]).
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
@@ -108,7 +106,5 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 [1]: /synthetics/browser_tests/advance_options
 [2]: /synthetics/browser_tests/advance_options/#timeout
 [3]: /synthetics/browser_tests/advance_options/#custom-selector
-[4]: /synthetics/browser_tests/advance_options/#optional-step
-[5]: /synthetics/browser_tests/#create-a-variable
-[6]: /synthetics/settings/#secure-credential
-[7]: /synthetics/browser_tests/advance_options/#subtests
+[4]: /synthetics/browser_tests/#create-a-variable
+[5]: /synthetics/settings/#secure-credential
