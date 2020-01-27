@@ -24,20 +24,20 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
+To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `log4net`, `Serilog` and `NLog` logging libraries
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
 
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
 
-Install Serilog via NuGet. Run the following command in the Package Manager Consol:
+Install Serilog via NuGet. Run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.File
@@ -269,7 +269,7 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
