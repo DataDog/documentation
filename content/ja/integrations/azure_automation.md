@@ -47,4 +47,3 @@ Azure Automation インテグレーションには、サービスのチェック
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

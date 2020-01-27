@@ -47,4 +47,3 @@ Azure Diagnostic Extension インテグレーションには、サービスの�
 [5]: https://www.datadoghq.com/blog/dont-fear-the-agent/
 
 
-{{< get-dependencies >}}

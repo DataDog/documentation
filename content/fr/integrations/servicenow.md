@@ -274,4 +274,3 @@ Pour vérifier que l'intégration est correctement configurée, ajoutez `@servic
 [3]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

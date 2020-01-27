@@ -190,4 +190,4 @@ dont nous pouvons contribuer à optimiser les performances de votre site web.
 [12]: https://rigor.com
 
 
-{{< get-dependencies >}}
+

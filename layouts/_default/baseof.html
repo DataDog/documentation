@@ -27,6 +27,7 @@
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
+{{ $ctx := . }}
 
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
@@ -46,14 +47,16 @@
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
         {{ partial "sidenav/sidenav.html" . }}
       </div>
-      <div class="mainContent-wrapper col-12 col-lg-9 main">
+      <div class="mainContent-wrapper col-12 col-lg-7 main">
         <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}"
           id="mainContent">
           {{ block "main" . }}{{ end }}
+          {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
       </div>
 
       {{ partial "table-of-contents/table-of-contents.html" . }}
+      
 
     </div>
   </div>

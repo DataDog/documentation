@@ -144,4 +144,3 @@ Lighthouse インテグレーションには、サービスのチェック機能
 [17]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

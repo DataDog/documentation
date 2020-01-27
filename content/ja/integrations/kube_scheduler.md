@@ -105,4 +105,3 @@ Kube Scheduler には、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

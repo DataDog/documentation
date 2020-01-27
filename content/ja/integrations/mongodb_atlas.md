@@ -57,4 +57,3 @@ MongoDB Atlas インテグレーションには、サービスのチェック機
 [4]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

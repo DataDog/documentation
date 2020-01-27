@@ -78,4 +78,3 @@ CRI には、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

@@ -122,4 +122,3 @@ Le check réseau n'inclut aucun check de service.
 [10]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
 
 
-{{< get-dependencies >}}

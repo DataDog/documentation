@@ -109,4 +109,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [9]: https://docs.datadoghq.com/fr/agent/cluster_agent
 
 
-{{< get-dependencies >}}

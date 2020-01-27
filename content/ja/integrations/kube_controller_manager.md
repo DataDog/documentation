@@ -85,4 +85,3 @@ Kube_controller_manager には、イベントは含まれません。
 [6]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

@@ -120,4 +120,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [15]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
 
 
-{{< get-dependencies >}}

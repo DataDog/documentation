@@ -179,4 +179,3 @@ Consultez la [documentation principale sur les outils de développement][15] pou
 [15]: https://docs.datadoghq.com/fr/developers
 
 
-{{< get-dependencies >}}

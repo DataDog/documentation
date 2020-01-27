@@ -55,4 +55,3 @@ CircleCI インテグレーションには、サービスのチェック機能�
 [3]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

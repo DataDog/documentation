@@ -60,4 +60,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [6]: https://docs.mparticle.com/integrations/datadog/event/
 
 
-{{< get-dependencies >}}

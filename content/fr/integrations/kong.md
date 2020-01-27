@@ -156,4 +156,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [10]: https://www.datadoghq.com/blog/monitor-kong-datadog
 
 
-{{< get-dependencies >}}

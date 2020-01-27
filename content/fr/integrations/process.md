@@ -134,4 +134,3 @@ Pour mieux comprendre comment (ou pourquoi) surveiller l'utilisation des ressour
 [12]: https://www.datadoghq.com/blog/process-check-monitoring
 
 
-{{< get-dependencies >}}

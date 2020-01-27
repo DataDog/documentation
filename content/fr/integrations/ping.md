@@ -125,4 +125,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [13]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

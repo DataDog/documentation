@@ -49,4 +49,3 @@ Azure Notification Hubs インテグレーションには、サービスのチ�
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

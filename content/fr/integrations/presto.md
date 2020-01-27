@@ -124,4 +124,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [9]: https://github.com/DataDog/integrations-core/blob/master/presto/metadata.csv
 
 
-{{< get-dependencies >}}

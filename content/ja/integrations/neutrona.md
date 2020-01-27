@@ -114,4 +114,3 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 [13]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

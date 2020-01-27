@@ -1,152 +1,31 @@
 import { moveToAnchor } from '../helpers/moveToAnchor';
 
-const largeScreenThreshold = 1710;
 let sidenavMapping = [];
 let apiNavMapping = [];
 
-if (!$('#TableOfContents ul').length) {
-    $('.mobile-toc-toggle').addClass('d-none');
-    $('.toc-container').addClass('d-none');
-}
-
-// when the page loads, checking the window width
-widthCheck();
-tocWidthUpdate();
-
-if (window.innerWidth > largeScreenThreshold && window.scrollY < 60) {
-    $('.toc').css('top', 189);
-    $('.mobile-toc-toggle').css('top', 189);
-} else if (window.innerWidth > largeScreenThreshold && window.scrollY > 60) {
-    $('.toc').css('top', 124.5);
-    $('.mobile-toc-toggle').css('top', 124.5);
-}
-
-$(window).on('resize scroll', function() {
-    const headerHeight = $('body > header').height();
-    const top = $('#TableOfContents').position()
-        ? $('#TableOfContents').position().top
-        : 0;
-    const offset = headerHeight + top;
-    $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
-});
-
-$(window).on('resize', function() {
-    widthCheck();
-    tocWidthUpdate();
-});
+let tocContainer = document.querySelector('.js-toc-container');
+let tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
+const tocMobileBackdrop = document.querySelector('.js-mobile-toc-bg');
+const tocCloseIcon = document.querySelector(
+    '.js-mobile-toc-toggle .icon-small-x-2'
+);
+const tocBookIcon = document.querySelector(
+    '.js-mobile-toc-toggle .icon-small-bookmark'
+);
 
 $(window)
     .on('resize scroll', function() {
         onScroll();
-        if (
-            $(window).width() > 530 &&
-            $(window).width() < largeScreenThreshold
-        ) {
-            const bottomOfBrowser =
-                parseInt($(document).scrollTop()) +
-                parseInt($(window).height());
-            const footerTop = $('body > footer').offset().top;
-            if (!$('.mobile-toc-toggle').hasClass('js-disable-toc')) {
-                if ($('#TableOfContents ul').length) {
-                    if (bottomOfBrowser >= footerTop) {
-                        if (!$('.mobile-toc-toggle').hasClass('d-none')) {
-                            $('.mobile-toc-toggle').toggleClass('d-none');
-                        }
-                        if (!$('.toc-container').hasClass('d-none')) {
-                            $('.mobile-toc-toggle').click();
-                        }
-                    } else if ($('.mobile-toc-toggle').hasClass('d-none')) {
-                        $('.mobile-toc-toggle').toggleClass('d-none');
-                    }
-                }
-            } else {
-                $('.mobile-toc-toggle').addClass('d-none');
-                $('.toc-container').addClass('d-none');
-            }
-        }
     })
     .trigger('scroll');
 
-$(document).on('headerResize', function(event, height) {
-    let offset = 30;
-    if ($('.announcement_banner.open').length) {
-        offset = 60;
-    }
-    $('.mobile-toc-toggle').css('top', `${height + offset}px`);
-    $('.toc').css('top', `${height + offset}px`);
-});
-
-export function hideToc() {
-    // hide toc
-    $('.toc-container > div').hide();
-
-    // hide mobile toc button
-    $('.mobile-toc-toggle')
-        .removeClass('d-block')
-        .addClass('d-none');
-}
-
-// hiding + displaying the ToC depending on the window width
-export function widthCheck() {
-    if (!$('.toc-container').hasClass('js-disable-toc')) {
-        if ($('#TableOfContents ul').length) {
-            if (window.innerWidth > largeScreenThreshold) {
-                if (
-                    $('.toc-container').hasClass('d-none') &&
-                    $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')
-                ) {
-                    $('.toc-container')
-                        .toggleClass('mobile-open')
-                        .toggleClass('d-none');
-                    $('.mobile-toc-toggle i')
-                        .toggleClass('icon-small-x')
-                        .toggleClass('icon-small-bookmark');
-                }
-            } else if (
-                $('.toc-container').hasClass('mobile-open') &&
-                $('.mobile-toc-toggle i').hasClass('icon-small-x')
-            ) {
-                $('.toc-container')
-                    .toggleClass('mobile-open')
-                    .toggleClass('d-none');
-                $('.mobile-toc-toggle i')
-                    .toggleClass('icon-small-x')
-                    .toggleClass('icon-small-bookmark');
-            }
-        }
-    } else {
-        $('.mobile-toc-toggle').addClass('d-none');
-    }
-}
-
-// updating ToC width on large screens
-export function tocWidthUpdate() {
-    if (window.innerWidth > largeScreenThreshold) {
-        $('.toc-container.mobile-open').css(
-            'width',
-            `${window.innerWidth / 2 - 600}px`
-        );
-    }
-}
-
-// -------------- end TOC ---------------
-
-export function showTOCIcon() {
-    // $('.toc-container').addClass('mobile-open').removeClass('d-none');
-    $('.mobile-toc-toggle').removeClass('d-none');
-    $(this)
-        .find('i')
-        .addClass('icon-small-x')
-        .removeClass('icon-small-bookmark');
-    $(document).trigger('headerResize', [
-        parseInt($('body > header').height())
-    ]);
-}
-
 export function updateTOC() {
-    $('.toc').css('display', 'block');
+    onLoadTOCHandler();
     $('#TableOfContents a').on('click', function() {
         const href = $(this).attr('href');
+        if (!isTOCDisabled()) {
+            closeMobileTOC();
+        }
         if (href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1), true);
             return false;
@@ -281,5 +160,84 @@ export function onScroll() {
                 });
             }
         }
+    }
+}
+
+if (tocMobileToggle) {
+    tocMobileToggle.addEventListener('click', toggleMobileTOC);
+}
+
+window.addEventListener('load', function() {
+    if (!document.body.classList.contains('api')) {
+        onLoadTOCHandler();
+    }
+});
+
+function isTOCDisabled() {
+    const toc = document.querySelector('#TableOfContents');
+    if (!toc) {
+        return true;
+    }
+
+    return false;
+}
+
+function onLoadTOCHandler() {
+    tocContainer = document.querySelector('.js-toc-container');
+    tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
+
+    if (isTOCDisabled() && tocContainer) {
+        document.querySelector('.js-toc-title').classList.add('d-none');
+        document.querySelector('.js-toc').classList.add('d-none');
+        tocMobileToggle.classList.add('d-none');
+    } else if (window.innerWidth < 991 && tocContainer) {
+        tocContainer.classList.remove('toc-container');
+        tocContainer.classList.add('toc-container-mobile');
+        tocMobileToggle.classList.remove('d-none');
+    }
+}
+
+window.addEventListener('resize', function() {
+    tocContainer = document.querySelector('.js-toc-container');
+    tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
+
+    if (isTOCDisabled() && tocContainer) {
+        document.querySelector('.js-toc-title').classList.add('d-none');
+        tocMobileToggle.classList.add('d-none');
+    } else if (window.innerWidth < 991 && tocContainer) {
+        tocContainer.classList.remove('toc-container');
+        tocContainer.classList.add('toc-container-mobile');
+        tocMobileToggle.classList.remove('d-none');
+    } else if (tocContainer){
+        closeMobileTOC();
+        tocContainer.classList.add('toc-container');
+        tocContainer.classList.remove('toc-container-mobile');
+    }
+});
+
+export function closeMobileTOC() {
+    if (!isTOCDisabled()) {
+        tocContainer = document.querySelector('.js-toc-container');
+        tocContainer.classList.remove('mobile-open');
+        tocMobileBackdrop.classList.remove('mobile-toc-bg-open');
+        tocCloseIcon.classList.add('d-none');
+        tocBookIcon.classList.remove('d-none');
+    }
+}
+
+function toggleMobileTOC() {
+    if (tocContainer) {
+        document
+            .querySelector('.js-mobile-toc-toggle .icon-small-x-2')
+            .classList.toggle('d-none');
+
+        document
+            .querySelector('.js-mobile-toc-toggle .icon-small-bookmark')
+            .classList.toggle('d-none');
+
+        tocContainer.classList.toggle('mobile-open');
+        document
+            .querySelector('.js-mobile-toc-bg')
+            .classList.toggle('mobile-toc-bg-open');
     }
 }
