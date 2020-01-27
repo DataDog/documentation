@@ -128,14 +128,14 @@ The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs i
 **Automatic Trace ID Injection for Serilog**
 ```csharp
 var log = new LoggerConfiguration()
-    .Enrich.FromLogContext() // Add Enrich.FromLogContext to emit the MDC properties in the log output
+    .Enrich.FromLogContext() // Add Enrich.FromLogContext to emit MDC properties
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
 ```
 
 **Automatic Trace ID Injection for NLog 4.5**
 ```xml
-  <!-- Add includeMdc="true" to emit the MDC properties in the log output -->
+  <!-- Add includeMdc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -146,7 +146,7 @@ var log = new LoggerConfiguration()
 
 **Automatic Trace ID Injection for NLog 4.6+**
 ```xml
-  <!-- Add includeMdlc="true" to emit the MDC properties in the log output -->
+  <!-- Add includeMdlc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -167,7 +167,7 @@ var log = new LoggerConfiguration()
     <member value="message:messageobject" />
     <!--add raw message-->
 
-    <!-- Add value='properties' to emit the MDC properties in the log output -->
+    <!-- Add value='properties' to emit MDC properties -->
     <member value='properties'/>
   </layout>
 ```
