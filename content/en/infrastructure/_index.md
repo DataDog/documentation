@@ -1,6 +1,7 @@
 ---
 title: Infrastructure
 kind: documentation
+disable_toc: true
 aliases:
   - /graphing/infrastructure/
 ---
