@@ -12,7 +12,7 @@ further_reading:
 Embeddable graphs created via the API accept template variables. Below is an example utilizing Python to query `avg:system.cpu.user{$var}`. In this example, `$var` is the template variable.
 
 ```python
-from datadog import initialize, api
+import datadog
 import json
 
 # Initialize request parameters with Datadog API/APP key
@@ -21,7 +21,7 @@ options = {
     'app_key': '<DD_APP_KEY>'
 }
 
-initialize(**options)
+datadog.initialize(**options)
 
 # Create an embed graph definition as a dict and format as JSON
 graph_json = {
@@ -33,7 +33,7 @@ graph_json = {
 }
 graph_json = json.dumps(graph_json)
 
-api.Embed.create(
+datadog.api.Embed.create(
     graph_json=graph_json,
     timeframe="1_hour",
     size="medium",

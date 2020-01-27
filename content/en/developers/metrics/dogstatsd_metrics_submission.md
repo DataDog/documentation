@@ -52,19 +52,16 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 
 {{< code-block lang="python" filename="count_metric.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 
-options = {
-    'statsd_host':'127.0.0.1',
-    'statsd_port':8125
-}
+options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
 
-initialize(**options)
+datadog.initialize(**options)
 
 while(1):
-  statsd.increment('example_metric.increment', tags=["environment:dev"])
-  statsd.decrement('example_metric.decrement', tags=["environment:dev"])
+  datadog.statsd.increment('example_metric.increment', tags=["environment:dev"])
+  datadog.statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -227,7 +224,7 @@ Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about th
 Run the following Python code to submit a DogStatsD `GAUGE` metric to Datadog:
 
 {{< code-block lang="python" filename="gauge_metric.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 
 options = {
@@ -235,13 +232,13 @@ options = {
     'statsd_port':8125
 }
 
-initialize(**options)
+datadog.initialize(**options)
 
 i = 0
 
 while(1):
   i += 1
-  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
+  datadog.statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -397,7 +394,7 @@ Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the 
 Run the following Python code to submit a DogStatsD `SET` metric to Datadog:
 
 {{< code-block lang="python" filename="set_metric.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 import random
 
@@ -406,11 +403,12 @@ options = {
     'statsd_port':8125
 }
 
-initialize(**options)
+datadog.initialize(**options)
+
 i = 0
 while(1):
   i += 1
-  statsd.set('example_metric.set', i, tags=["environment:dev"])
+  datadog.statsd.set('example_metric.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
 {{< /code-block >}}
 
@@ -550,7 +548,7 @@ The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-
 Run the following Python code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
 {{< code-block lang="python" filename="histogram_metric.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 import random
 
@@ -559,10 +557,10 @@ options = {
     'statsd_port':8125
 }
 
-initialize(**options)
+datadog.initialize(**options)
 
 while(1):
-  statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
+  datadog.statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -729,7 +727,7 @@ Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn mo
 In Python, timers are created with a decorator:
 
 {{< code-block lang="python" filename="timers.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 import random
 
@@ -738,9 +736,9 @@ options = {
     'statsd_port':8125
 }
 
-initialize(**options)
+datadog.initialize(**options)
 
-@statsd.timed('example_metric.timer', tags=["environment:dev,function:my_function"])
+@datadog.statsd.timed('example_metric.timer', tags=["environment:dev,function:my_function"])
 def my_function():
   time.sleep(random.randint(0, 10))
 
@@ -751,9 +749,16 @@ while(1):
 or with a context manager:
 
 {{< code-block lang="python" filename="context_manager.py" >}}
-from datadog import statsd
+import datadog
 import time
 import random
+
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+datadog.initialize(**options)
 
 def my_function():
 
@@ -761,7 +766,7 @@ def my_function():
   sleep(1)
 
   # Now start the timer
-  with statsd.timed('example_metric.timer', tags=["environment:dev"]):
+  with datadog.statsd.timed('example_metric.timer', tags=["environment:dev"]):
     # do something to be measured
     sleep(random.randint(0, 10))
 
@@ -829,7 +834,7 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 Run the following Python code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
 {{< code-block lang="python" filename="distribution_metric.py" >}}
-from datadog import initialize, statsd
+import datadog
 import time
 import random
 
@@ -838,10 +843,10 @@ options = {
     'statsd_port':8125
 }
 
-initialize(**options)
+datadog.initialize(**options)
 
 while(1):
-  statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
+  datadog.statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -999,7 +1004,7 @@ The following code only sends points half of the time:
 {{% tab "Python" %}}
 
 ```python
-statsd.increment('loop.count', sample_rate=0.5)
+datadog.statsd.increment('loop.count', sample_rate=0.5)
 ```
 
 {{% /tab %}}
@@ -1053,7 +1058,7 @@ The following code only adds the `environment:dev` and `account:local` tags to t
 {{% tab "Python" %}}
 
 ```python
-statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
+datadog.statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
 ```
 
 {{% /tab %}}

@@ -17,17 +17,17 @@ Next, instrument your code. Here's a basic Flask-based web application:
 
 ```python
 from flask import Flask
-from datadog import initialize, statsd
+import datadog
 
 # Initialize DogStatsD and set the host.
-initialize(statsd_host = 'dd-agent')
+datadog.initialize(statsd_host = 'dd-agent')
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
     # Increment a Datadog counter.
-    statsd.increment('my_webapp.page.views')
+    datadog.statsd.increment('my_webapp.page.views')
 
     return "Hello World!"
 

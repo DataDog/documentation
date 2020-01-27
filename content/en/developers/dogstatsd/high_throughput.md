@@ -67,9 +67,9 @@ func main() {
 By using Datadog's official Python library [datadogpy][1], the example below creates a buffered DogStatsD client instance that sends up to 25 metrics in one packet when the block completes:
 
 ```python
-from datadog import DogStatsd
+import datadog
 
-with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
+with datadog.DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     batch.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
@@ -275,8 +275,9 @@ To disable telemetry, set the `disable_telemetry` parameter to `true`:
 Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
 ```
 
-See [DataDog/dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) for more information about the client configuration.
+See [DataDog/dogstatsd-ruby][1] for more information about the client configuration.
 
+[1]: https://github.com/DataDog/dogstatsd-ruby
 {{% /tab %}}
 {{% tab "Go" %}}
 

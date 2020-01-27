@@ -44,16 +44,13 @@ View errors and exceptions in Datadog with a DogStatsD event:
 {{% tab "Python" %}}
 
 {{< code-block lang="python" filename="event.py" >}}
-from datadog import initialize, statsd
+import datadog
 
-options = {
-    'statsd_host':'127.0.0.1',
-    'statsd_port':8125
-}
+options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
 
-initialize(**options)
+datadog.initialize(**options)
 
-statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+datadog.statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 {{< /code-block >}}
 
 {{% /tab %}}
