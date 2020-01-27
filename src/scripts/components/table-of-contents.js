@@ -1,4 +1,5 @@
 import { moveToAnchor } from '../helpers/moveToAnchor';
+import datadogLogs from './dd-browser-logs-rum';
 
 let sidenavMapping = [];
 let apiNavMapping = [];
@@ -28,6 +29,15 @@ export function updateTOC() {
         }
         if (href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1), true);
+            datadogLogs.logger.log(
+                'Toc used',
+                {
+                    toc: {
+                        entry: href.substr(1)
+                    }
+                },
+                'info'
+            );
             return false;
         }
         return true;
