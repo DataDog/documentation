@@ -214,6 +214,8 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 ### Environment Variable Configuration
 
+{{% table responsive=true  %}}
+
 | Env variable                              | Default     | Note                                                                                                                                           |
 |-------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                                                            |
@@ -239,6 +241,8 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"](#map-resource-names-to-normalized-uri)                            |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable app analytics for relevant spans in a specific integration                                                                      |
+
+{{% /table %}}
 
 #### Map Resource Names To Normalized URI
 

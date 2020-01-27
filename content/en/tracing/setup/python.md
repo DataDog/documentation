@@ -50,6 +50,8 @@ For more advanced usage, configuration, and fine-grain control, see Datadog's [A
 
 When using **ddtrace-run**, the following [environment variable options][5] can be used:
 
+{{% table responsive=true  %}}
+
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 |------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, your application code doesn't generate any traces.                                                                                                                                                          |
@@ -63,6 +65,8 @@ When using **ddtrace-run**, the following [environment variable options][5] can 
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][9].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][10].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
+
+{{% /table %}}
 
 ## Change Agent Hostname
 
@@ -88,6 +92,8 @@ Python versions `2.7` and `3.4` and onwards are supported.
 
 The `ddtrace` library includes support for a number of web frameworks, including:
 
+{{% table responsive=true  %}}
+
 | Framework                 | Supported Version | PyPi Datadog Documentation                                         |
 |---------------------------|-------------------|--------------------------------------------------------------------|
 | [aiohttp][11]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
@@ -101,9 +107,13 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Pyramid][18]             | >= 1.7            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
 | [Tornado][19]             | >= 4.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
 
+{{% /table %}}
+
 #### Datastore Compatibility
 
 The `ddtrace` library includes support for the following data stores:
+
+{{% table responsive=true  %}}
 
 | Datastore                          | Supported Version | PyPi Datadog Documentation                                                                    |
 |------------------------------------|-------------------|-----------------------------------------------------------------------------------------------|
@@ -125,9 +135,13 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLite3][38]                      | Fully Supported   | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlite                              |
 | [Vertica][39]                      | >= 0.6            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#vertica                             |
 
+{{% /table %}}
+
 #### Library Compatibility
 
 The `ddtrace` library includes support for the following libraries:
+
+{{% table responsive=true  %}}
 
 | Library           | Supported Version | PyPi Datadog Documentation                                               |
 |-------------------|-------------------|--------------------------------------------------------------------------|
@@ -144,6 +158,9 @@ The `ddtrace` library includes support for the following libraries:
 | [Kombu][48]       | >= 4.0            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu       |
 | [Mako][49]        | >= 0.1.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#mako        |
 | [Requests][50]    | >= 2.08           | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests    |
+
+{{% /table %}}
+
 
 ## Further Reading
 
