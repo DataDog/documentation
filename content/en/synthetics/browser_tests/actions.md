@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advanced options][1].
+Actions are a series of steps that you can record for a browser test, which you can then edit or build on. You can also configure certain actions with [advanced options][1].
 
 **Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with [advanced options][2].
 

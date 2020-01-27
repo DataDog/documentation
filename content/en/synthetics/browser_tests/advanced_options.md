@@ -24,15 +24,15 @@ To specify your custom locator:
 
 {{< img src="synthetics/browser_tests/advanced_options/css.gif" alt="Test Highlighted Element">}}
 
-By default the box **If user specified locator fails, fail test** is selected. This means that, by default, if the defined locator fails, the test will be considered a failure.
+By default the box **If user specified locator fails, fail test** is selected. This means that, by default, if the defined locator fails, the test is considered a failure.
 
-You can decide to fallback on the regular Browser Test algorithm by deselecting the **If user specified locator fails, fail test** box.
+You can decide to fall back on the regular browser test algorithm by deselecting the **If user specified locator fails, fail test** box.
 
 {{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Fail test option" style="width:70%">}}
 
 ## Timeout
 
-If a browser test is not able to locate an element, by default it will retry the action for 60 seconds.
+If a browser test is not able to locate an element, by default it retries the action for 60 seconds.
 
 You can decide to decrease or increase this time out up to 300 seconds if you want your test to wait for less or more time to be able to find the step targeted element.
 

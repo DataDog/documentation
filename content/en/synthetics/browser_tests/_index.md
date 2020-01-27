@@ -68,18 +68,18 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
-Hitting **Open in a pop-up** and **Shift** will open the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
+Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
-5. Once you have finished your Scenario, click on **Save and Launch Test**.
+5. Once you have finished your scenario, click on **Save and Launch Test**.
 
 ## Actions
 
-After saving a Browser Test you can record [Actions][10] as a series of steps, which you can then edit or build on. Actions can also be configured with [advanced options][11].
+After saving a browser test, you can record [Actions][10] as a series of steps, which you can then edit or build on. You can also configure actions with [advanced options][11].
 
 ## Test failure and errors
 
