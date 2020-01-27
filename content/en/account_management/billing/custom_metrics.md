@@ -152,7 +152,7 @@ For more real-time tracking of the count of custom metrics for a particular metr
 {{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
 
 <div class="alert alert-warning">
-<strong>Metrics without Limits is now in public beta.</strong> <a href="/help">Contact Datadog support</a> for more information.
+<strong>Metrics without Limits is now in public beta.</strong> Contact your CSM for more information.
 </div>
 
 ## Allocation
