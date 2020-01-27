@@ -121,21 +121,57 @@ This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, an
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][2], [Log4Net][3], and [Serilog][4].
-
 Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-Additionally, injection can be enabled in the code:
+The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs if you are using [NLog][2], [Log4Net][3], or [Serilog][4]. Follow the steps below for your logging library to emit the MDC attributes injected by the .NET Tracer. **Note**: Automatic injection only works for logs formatted as JSON.
 
+**Automatic Trace ID Injection for Serilog**
 ```csharp
-using Datadog.Trace;
-using Datadog.Trace.Configuration;
-
-var settings = new TracerSettings { LogsInjectionEnabled = true };
-var tracer = new Tracer(settings);
+var log = new LoggerConfiguration()
+    .Enrich.FromLogContext() // Add Enrich.FromLogContext to emit the MDC properties in the log output
+    .WriteTo.File(new JsonFormatter(), "log.json")
+    .CreateLogger();
 ```
 
-**Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
+**Automatic Trace ID Injection for NLog 4.5**
+```xml
+  <!-- Add includeMdc="true" to emit the MDC properties in the log output -->
+  <layout xsi:type="JsonLayout" includeMdc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+**Automatic Trace ID Injection for NLog 4.6+**
+```xml
+  <!-- Add includeMdlc="true" to emit the MDC properties in the log output -->
+  <layout xsi:type="JsonLayout" includeMdlc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+**Automatic Trace ID Injection for log4net**
+```xml
+  <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
+    <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
+    <default />
+    <!--explicit default members-->
+    <remove value="ndc" />
+    <remove value="message" />
+    <!--remove the default preformatted message member-->
+    <member value="message:messageobject" />
+    <!--add raw message-->
+
+    <!-- Add value='properties' to emit the MDC properties in the log output -->
+    <member value='properties'/>
+  </layout>
+```
+
 
 [1]: https://github.com/damianh/LibLog
 [2]: http://nlog-project.org
