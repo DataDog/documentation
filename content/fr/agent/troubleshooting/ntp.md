@@ -1,7 +1,6 @@
 ---
 title: Problèmes liés au protocole NTP
 kind: documentation
-disable_toc: true
 aliases:
   - /fr/agent/faq/network-time-protocol-ntp-offset-issues
 ---

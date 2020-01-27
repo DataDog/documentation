@@ -178,7 +178,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez la documentation relative aux [modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------------|

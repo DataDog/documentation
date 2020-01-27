@@ -16,7 +16,7 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_es
-public_title: "Intégration Datadog/Amazon\_ElasticSearch"
+public_title: "Intégration Datadog/Amazon\_Elasticsearch"
 short_description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 version: '1.0'
 ---
