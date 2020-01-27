@@ -272,4 +272,3 @@ Documentation, liens et articles supplémentaires utiles :
 [11]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
 
 
-{{< get-dependencies >}}

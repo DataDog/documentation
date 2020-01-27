@@ -176,4 +176,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [12]: https://docs.datadoghq.com/fr/agent/docker/log/
 
 
-{{< get-dependencies >}}

@@ -47,4 +47,3 @@ Azure Relay インテグレーションには、サービスのチェック機�
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

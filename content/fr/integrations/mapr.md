@@ -132,4 +132,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [15]: https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines
 
 
-{{< get-dependencies >}}

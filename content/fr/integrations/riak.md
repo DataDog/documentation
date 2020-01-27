@@ -158,4 +158,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [10]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

@@ -49,4 +49,3 @@ Azure Queue Storage インテグレーションには、サービスのチェッ
 [3]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

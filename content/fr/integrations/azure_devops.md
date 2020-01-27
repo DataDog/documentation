@@ -147,4 +147,3 @@ La durée d'un élément de travail est calculée à partir des événements *wo
 [11]: https://github.com/DataDog/azure-devops-monitor-gate-extension
 
 
-{{< get-dependencies >}}

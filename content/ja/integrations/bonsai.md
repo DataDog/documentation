@@ -106,4 +106,3 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 [9]: https://www.datadoghq.com/blog
 
 
-{{< get-dependencies >}}

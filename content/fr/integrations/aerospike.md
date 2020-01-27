@@ -97,4 +97,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
-{{< get-dependencies >}}

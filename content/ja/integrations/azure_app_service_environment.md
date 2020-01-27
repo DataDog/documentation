@@ -49,4 +49,3 @@ Azure App Service Environment インテグレーションには、サービス�
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

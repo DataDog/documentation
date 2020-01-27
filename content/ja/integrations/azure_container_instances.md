@@ -50,4 +50,3 @@ Azure Container Instances インテグレーションには、サービスのチ
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

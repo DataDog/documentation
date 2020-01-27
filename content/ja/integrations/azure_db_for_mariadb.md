@@ -49,4 +49,3 @@ Azure Database for MariaDB インテグレーションには、サービスの�
 [3]: https://docs.datadoghq.com/ja/help/
 
 
-{{< get-dependencies >}}

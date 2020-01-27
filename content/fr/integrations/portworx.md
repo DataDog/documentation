@@ -143,4 +143,3 @@ Consultez [notre blog][14] pour en savoir plus sur la surveillance d'infrastruct
 [14]: https://www.datadoghq.com/blog
 
 
-{{< get-dependencies >}}

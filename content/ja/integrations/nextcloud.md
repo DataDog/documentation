@@ -117,4 +117,3 @@ Nextcloud には、イベントは含まれません。
 [13]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

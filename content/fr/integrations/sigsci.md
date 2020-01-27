@@ -159,4 +159,3 @@ Pour vous inscrire au service de surveillance Datadog/Signal Sciences, un outil
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
 
 
-{{< get-dependencies >}}

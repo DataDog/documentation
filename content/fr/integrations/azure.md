@@ -435,4 +435,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][53].
 [53]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

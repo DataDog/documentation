@@ -117,4 +117,3 @@ Besoin d'aide ? Contactez le [responsable de la maintenance][12] de cette inté
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
 
 
-{{< get-dependencies >}}

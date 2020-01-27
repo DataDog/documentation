@@ -63,4 +63,3 @@ DaemonSets を利用して、すべてのノードで [Datadog Agent を自動�
 [6]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

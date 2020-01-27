@@ -67,4 +67,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 [2]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

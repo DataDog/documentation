@@ -282,4 +282,3 @@ Documentation, liens et articles supplémentaires utiles :
 [14]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
 
 
-{{< get-dependencies >}}

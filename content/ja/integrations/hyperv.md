@@ -83,4 +83,3 @@ Hyper-V には、イベントは含まれません。
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
 
 
-{{< get-dependencies >}}

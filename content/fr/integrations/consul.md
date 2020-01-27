@@ -226,4 +226,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [15]: https://engineering.datadoghq.com/consul-at-datadog
 
 
-{{< get-dependencies >}}
