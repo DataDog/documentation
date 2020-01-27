@@ -1,4 +1,5 @@
 import { moveToAnchor } from '../helpers/moveToAnchor';
+import datadogLogs from './dd-browser-logs-rum';
 
 let sidenavMapping = [];
 let apiNavMapping = [];
@@ -12,6 +13,7 @@ const tocCloseIcon = document.querySelector(
 const tocBookIcon = document.querySelector(
     '.js-mobile-toc-toggle .icon-small-bookmark'
 );
+const tocEditBtn = document.querySelector('.js-toc-edit-btn');
 
 $(window)
     .on('resize scroll', function() {
@@ -28,6 +30,15 @@ export function updateTOC() {
         }
         if (href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1), true);
+            datadogLogs.logger.log(
+                'Toc used',
+                {
+                    toc: {
+                        entry: href.substr(1)
+                    }
+                },
+                'info'
+            );
             return false;
         }
         return true;
@@ -167,11 +178,32 @@ if (tocMobileToggle) {
     tocMobileToggle.addEventListener('click', toggleMobileTOC);
 }
 
+if (tocEditBtn) {
+    tocEditBtn.addEventListener('click', tocEditBtnHandler);
+}
+
 window.addEventListener('load', function() {
     if (!document.body.classList.contains('api')) {
         onLoadTOCHandler();
     }
 });
+
+function tocEditBtnHandler(event) {
+    if (event.target.tagName === 'A') {
+        // if element is anchor tag
+        datadogLogs.logger.log(
+            'Edit btn clicked',
+            {
+                edit_btn: {
+                    target: event.target.href
+                }
+            },
+            'info'
+        );
+    }
+
+    event.stopPropagation();
+}
 
 function isTOCDisabled() {
     const toc = document.querySelector('#TableOfContents');
@@ -208,7 +240,7 @@ window.addEventListener('resize', function() {
         tocContainer.classList.remove('toc-container');
         tocContainer.classList.add('toc-container-mobile');
         tocMobileToggle.classList.remove('d-none');
-    } else if (tocContainer){
+    } else if (tocContainer) {
         closeMobileTOC();
         tocContainer.classList.add('toc-container');
         tocContainer.classList.remove('toc-container-mobile');
