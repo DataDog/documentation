@@ -1,5 +1,5 @@
 ---
-title: Browser Test
+title: Browser Tests
 kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
@@ -79,7 +79,7 @@ Hitting **Open in a pop-up** and **Shift** will open the pop up in incognito mod
 
 ## Actions
 
-After saving a Browser Test you can record [Actions][10] as a series of steps, which you can then edit or build on. Actions can also be configured with [advanced settings][11].
+After saving a Browser Test you can record [Actions][10] as a series of steps, which you can then edit or build on. Actions can also be configured with [advanced options][11].
 
 ## Test failure and errors
 
@@ -109,4 +109,4 @@ Common failure reasons include:
 [8]: https://www.google.com/chrome
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [10]: /synthetics/browser_tests/actions
-[11]: /synthetics/browser_tests/advance_settings
+[11]: /synthetics/browser_tests/advanced_options

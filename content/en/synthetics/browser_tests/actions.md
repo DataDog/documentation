@@ -3,9 +3,9 @@ title: Browser Test Actions
 kind: documentation
 description: Record Actions for a Synthetics Browser Test
 further_reading:
-- link: "synthetics/browser_tests/advance_options"
+- link: "synthetics/browser_tests/advanced_options"
   tag: "Documentation"
-  text: "Learn how to configure advance options for Actions"
+  text: "Learn how to configure advanced options for Actions"
 ---
 
 ## Overview
@@ -101,12 +101,18 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
+### Subtests
+You can run browser tests within other browser tests. [Advanced options][6] also allow you to choose where you want your subtest to be played.
+
+**Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/advance_options
-[2]: /synthetics/browser_tests/advance_options/#timeout
+[1]: /synthetics/browser_tests/advanced_options
+[2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: /synthetics/browser_tests/#create-a-variable
-[4]: /synthetics/browser_tests/advance_options/#custom-selector
+[4]: /synthetics/browser_tests/advanced_options/#custom-selector
 [5]: /synthetics/settings/#secure-credential
+[6]: /synthetics/browser_tests/advanced_options/#subtests

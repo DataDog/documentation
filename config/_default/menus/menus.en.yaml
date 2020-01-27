@@ -1128,8 +1128,8 @@ main:
     url: "synthetics/browser_tests/actions"
     parent: "synthetics_browser_tests"
     weight: 201
-  - name: "Advance Options"
-    url: "synthetics/browser_tests/advance_options"
+  - name: "Advanced Options"
+    url: "synthetics/browser_tests/advanced_options"
     parent: "synthetics_browser_tests"
     weight: 202
 
