@@ -12,13 +12,14 @@ further_reading:
 
 Actions are a series of steps that you can record for a Browser Test, which you can then edit or build on. Certain actions can also be configured with [advanced options][1].
 
+**Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with [advanced options][2].
+
+
 ### Assertion
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
 
 Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
-
-The default timeout for each step is approximately 60 seconds. You can override the timeout with [advance options][2].
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -27,17 +28,18 @@ The default timeout for each step is approximately 60 seconds. You can override 
 | `Test that some text is present on the active page`       | Asserts that some specific text is present on the current page.                                                                                                                         |
 | `Assert that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                 |
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
-| `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages  [email variables][10]. |
+| `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][3]. |
 
-[Advanced options][3] are also available for assertions.
+[Advanced options][4] are also available for assertions.
 
 ### Navigation
 
 The navigation action allows you to:
 
 * Refresh the current page of the scenario.
-* Follow a specific link. In the "Enter link URL" box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on.
+* Follow a specific link. In the **Enter link URL** box, you must prepend your URLs with `http` or `https`.
+* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][3].
+* Choose the email you are interested in and click the link you want your browser test to click on.
 
 ### Hover
 
@@ -105,6 +107,6 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 [1]: /synthetics/browser_tests/advance_options
 [2]: /synthetics/browser_tests/advance_options/#timeout
-[3]: /synthetics/browser_tests/advance_options/#custom-selector
-[4]: /synthetics/browser_tests/#create-a-variable
+[3]: /synthetics/browser_tests/#create-a-variable
+[4]: /synthetics/browser_tests/advance_options/#custom-selector
 [5]: /synthetics/settings/#secure-credential
