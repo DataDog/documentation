@@ -4,6 +4,7 @@ name: adobe_experience_manager
 kind: integration
 description: "Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages."
 short_description: "Collect logs to track errors, request response time, etc."
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md"]
 categories:
 - log collection
 doc_link: /integrations/adobe_experience_manager/

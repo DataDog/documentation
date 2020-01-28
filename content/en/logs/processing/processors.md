@@ -632,13 +632,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 }
 ```
 
-| Parameter    | Type             | Required | Description                                                                                                              |
-|--------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                                                                                   |
-| `name`       | String           | no       | Name of the processor.                                                                                                   |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                    |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `network.cient.ip`                                                                  |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip` |
+| Parameter    | Type             | Required | Description                                                                                                               |
+|--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| `type`       | String           | yes      | Type of the processor.                                                                                                    |
+| `name`       | String           | no       | Name of the processor.                                                                                                    |
+| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                     |
+| `sources`    | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                  |
+| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`  |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -732,7 +732,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `type`       | String           | yes      | Type of the processor.                                 |
 | `name`       | String           | no       | Name of the processor.                                 |
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`. |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.useragent`. |
+| `sources`    | Array of Strings | no       | Array of source attributes, default: `dd.trace_id`.    |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}

@@ -1,7 +1,6 @@
 ---
 title: Compare a Service’s latency to the previous week
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,8 +18,8 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
-_2 minutes to complete_
 
+_2 minutes to complete_
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparaison video" video="true"  style="width:90%;">}}
 

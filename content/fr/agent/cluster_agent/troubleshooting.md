@@ -1,7 +1,6 @@
 ---
 title: Dépannage de l'Agent de cluster
 kind: documentation
-disable_toc: true
 further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
     tag: Blog

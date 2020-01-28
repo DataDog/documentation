@@ -12,19 +12,6 @@ further_reading:
   text: "Datadog's full list of integrations"
 ---
 
-* [Setting up an integration](#setting-up-an-integration)
-  * [API and Application keys](#api-and-application-keys)
-  * [Installation](#installation)
-  * [Configuring Agent integrations](#configuring-agent-integrations)
-  * [Tagging](#tagging)
-  * [Validation](#validation)
-* [Installing multiple integrations](#installing-multiple-integrations)
-* [Security practices](#security-practices)
-* [What's next?](#what-s-next)
-* [Troubleshooting](#troubleshooting)
-* [Key terms](#key-terms)
-* [Further Reading](#further-reading)
-
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole — you can see pieces individually and also how individual pieces are impacting the whole.

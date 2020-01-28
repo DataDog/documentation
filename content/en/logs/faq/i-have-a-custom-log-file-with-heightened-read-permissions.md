@@ -1,7 +1,6 @@
 ---
 title: I have a custom log file with heightened read-permissions; how do I send it to Datadog?
 kind: faq
-disable_toc: true
 further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"
@@ -14,9 +13,9 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking Datadog Agent log collection as it does not have *sudo* or *admin* access.  
+Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking Datadog Agent log collection as it does not have *sudo* or *admin* access.
 
-There are three potential solutions to get around this:  
+There are three potential solutions to get around this:
 
 * (Not Recommended) Give the Agent root access so it can tail those files. Datadog strongly recommends against going this route.
 * Change the file permission to let the Agent access it.

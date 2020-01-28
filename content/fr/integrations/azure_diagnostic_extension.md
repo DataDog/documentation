@@ -45,6 +45,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/integrations/azure/#agent-installation
 [5]: https://www.datadoghq.com/blog/dont-fear-the-agent/
-
-
-{{< get-dependencies >}}

@@ -132,7 +132,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez la documentation relative aux [modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -210,6 +210,3 @@ Documentation, liens et articles supplémentaires utiles :
 [15]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
 [16]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
 [17]: https://docs.datadoghq.com/fr/integrations/faq/tagging-rabbitmq-queues-by-tag-family
-
-
-{{< get-dependencies >}}

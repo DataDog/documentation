@@ -112,6 +112,3 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-core/blob/master/neutrona/metadata.csv
 [13]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

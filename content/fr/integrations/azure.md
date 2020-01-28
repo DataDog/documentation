@@ -433,6 +433,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][53].
 [51]: https://github.com/DataDog/dogweb/blob/prod/integration/azure/azure_metadata.csv
 [52]: https://docs.datadoghq.com/fr/events/
 [53]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

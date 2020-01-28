@@ -6,6 +6,7 @@ newhlevel: true
 is_public: true
 public_title: Datadog-Cloudability Integration
 short_description: "Rule cloud spending with Cloudability and Datadog"
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudability.md"]
 categories:
 - cloud
 - Cost Management

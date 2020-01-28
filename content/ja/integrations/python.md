@@ -111,6 +111,3 @@ stats.increment('home.page.hits')
 [5]: https://docs.datadoghq.com/ja/tracing/setup/python
 [6]: https://docs.datadoghq.com/ja/logs/log_collection/python
 [7]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

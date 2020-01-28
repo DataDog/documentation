@@ -1,7 +1,6 @@
 ---
 title: Agent Site issues
 kind: documentation
-disable_toc: true
 ---
 
 By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuraiton file][1] accordingly or set the `DD_SITE` environment variable:

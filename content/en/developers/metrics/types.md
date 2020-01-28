@@ -1,7 +1,6 @@
 ---
 title: Metrics Types
 kind: documentation
-disable_toc: true
 aliases:
  - /developers/metrics/counts/
  - /developers/metrics/distributions/

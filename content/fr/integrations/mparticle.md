@@ -58,6 +58,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/mparticle/mparticle_metadata.csv
 [5]: https://www.datadoghq.com/blog/track-detailed-run-time-performance-data-with-mparticle-and-datadog/
 [6]: https://docs.mparticle.com/integrations/datadog/event/
-
-
-{{< get-dependencies >}}
