@@ -19,11 +19,30 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
+## Overview
+
 Each metric submitted to Datadog has a **metric type**. Metric type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [metric type modifiers][1] and functions.
 
-## Submission vs. in-app type
+Datadog allows you to submit, store, and display the following metric types:
 
-Metrics are submitted to Datadog in three main ways:
+| Types                                    | Definition                                                              |
+|------------------------------------------|-------------------------------------------------------------------------|
+| [COUNT](?tab=count#count-rate-and-gauge) | The total number of events that occur in one time interval.             |
+| [RATE](?tab=rate#count-rate-and-gauge)   | The total number of events occurences per second.                       |
+| [GAUGE](?tab=gauge#count-rate-and-gauge) | A snapshot of events one time interval.                                 |
+
+In addition to those three metric types, Datadog DogStatsD and Agent Check librairies allow you to submit statistical distribution of a set of events:
+
+| Types                                                        | Definition                                                                  |
+|--------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [HISTOGRAM](?tab=histogram#histogram-and-distribution)       | The statistical distribution of a set of events **calculated Client side**. |
+| [DISTRIBUTION](?tab=distribution#histogram-and-distribution) | The statistical distribution of a set of events **calculated Server side**. |
+
+**Note**: Those statistical distributions are represented with multiple COUNT and GAUGE type metrics within Datadog in order to accuretly represent the client or server side associated distribution of a set of events. See the [HISTOGRAM](?tab=histogram#histogram-and-distribution) and [DISTRIBUTION](?tab=distribution#histogram-and-distribution) dedicated section to learn more.
+
+### Submission vs. in-app type
+
+Metrics and statistical distributions are submitted to Datadog in three main ways:
 
 * [Custom Agent check][2]
 * [DogStatsD][3]
@@ -31,27 +50,7 @@ Metrics are submitted to Datadog in three main ways:
 
 Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, [aggregation occurs when multiple points arrive in a short time interval][5]. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp. The way in which values are combined and aggregated varies, depending on metric type. Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of DISTRIBUTION metrics). The raw values sent to Datadog are stored as-is.
 
-Datadog accepts a wide range of **metric submission types**:
-
-| Submission Types                                          | Definition                                                              |
-|-----------------------------------------------------------|-------------------------------------------------------------------------|
-| [COUNT](?tab=count#metric-submission-types)               | The total number of events that occur in one time interval.             |
-| [RATE](?tab=rate#metric-submission-types)                 | The total number of events occurences per second.                       |
-| [GAUGE](?tab=gauge#metric-submission-types)               | A snapshot of events one time interval.                                 |
-| [HISTOGRAM](?tab=histogram#metric-submission-types)       | The statistical distribution of a set of events calculated Client side. |
-| [DISTRIBUTION](?tab=distribution#metric-submission-types) | The statistical distribution of a set of events calculated Server side. |
-
-When data is received, the submitted metric type is mapped to one of three **in-app Metric Types**:
-
-| In-app Types                                          | Definition                                                              |
-|-------------------------------------------------------|-------------------------------------------------------------------------|
-| [COUNT](?tab=count#metric-in-app-types)               | The total number of events that occur in one time interval.             |
-| [RATE](?tab=rate#metric-in-app-types)                 | The total number of events occurences per second.                       |
-| [GAUGE](?tab=gauge#metric-in-app-types)               | A snapshot of events one time interval.                                 |
-
-A metric's type is displayed on the details sidepanel for the given metric on the [Metrics Summary page][6].
-
-**Note**: See the [Mapping between submission and in-app type][7] FAQ to see the full mapping between Submission vs. in-app type
+**Note**: See the [Mapping between submission and in-app type][6] FAQ to see the full mapping between Submission vs. in-app type.
 
 ## Count, rate, and gauge
 
@@ -140,9 +139,23 @@ To better understand the differences between the in-app metrics types and what t
 
 You have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then 7 requests or `[1;3;5;7]` requests. Depending of the metric type used to monitor the amount of request received you would send the following data points to Datadog:
 
-* A COUNT metric type would give your **the total** of requests received over the flush interval: 1 + 3 + 5 + 7 = 16 requests
-* A RATE metric type would give you **the rate** of requests received over the flush interval, if the flush interval is 10 seconds (default value): 1.5 requests / second
-* A GAUGE metric type would give your **the last** amount of requests received over the flush interval: 7 requests
+{{< tabs >}}
+{{% tab "COUNT" %}}
+
+A COUNT metric type would give your **the total** of requests received over the flush interval: 1 + 3 + 5 + 7 = 16 requests
+
+{{% /tab %}}
+{{% tab "RATE" %}}
+
+A RATE metric type would give you **the rate** of requests received over the flush interval, if the flush interval is 10 seconds (default value): 1.5 requests / second
+
+{{% /tab %}}
+{{% tab "GAUGE" %}}
+
+A GAUGE metric type would give your **the last** amount of requests received over the flush interval: 7 requests
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Histogram and Distribution
 
@@ -264,7 +277,7 @@ For instance, say that the `request.response_time.distribution` metric is report
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | GAUGE               |
 
-### Calculation of percentile aggregations
+**Calculation of percentile aggregations**:
 
 If you were to add percentile aggregations to your distribution metric (as shown in-app [Datadog Distribution Metric page][1]), the following timeseries would be additionally created:
 
@@ -291,5 +304,4 @@ If you were to add percentile aggregations to your distribution metric (as shown
 [3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: /api/?lang=python#post-timeseries-points
 [5]: /developers/dogstatsd/data_aggregation
-[6]: /metrics/summary
-[7]: /developers/faq/mapping_submission_in_app_type
+[6]: /developers/faq/mapping_submission_in_app_type
