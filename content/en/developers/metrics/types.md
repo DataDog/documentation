@@ -21,24 +21,24 @@ further_reading:
 
 ## Overview
 
-Each metric submitted to Datadog has a **metric type**. Metric type affects how the metric is stored, queried, and graphed, as well as how the metric interacts with additional [metric type modifiers][1] and functions.
+Each metric submitted to Datadog has a **metric type**. Metric type affects what the metrics represents-what it monitors-, and the associated [graphing possibilities within Datadog][1] with additional [metric type modifiers][2] and [functions][3].
 
 Datadog allows you to submit, store, and display the following metric types:
 
-| Types                                    | Definition                                                              |
-|------------------------------------------|-------------------------------------------------------------------------|
-| [COUNT](?tab=count#count-rate-and-gauge) | The total number of events that occur in one time interval.             |
-| [RATE](?tab=rate#count-rate-and-gauge)   | The total number of events occurrences per second.                       |
-| [GAUGE](?tab=gauge#count-rate-and-gauge) | A snapshot of events one time interval.                                 |
+| Types                                    | Definition                                                  |
+|------------------------------------------|-------------------------------------------------------------|
+| [COUNT](?tab=count#count-rate-and-gauge) | The total number of events that occur in one time interval. |
+| [RATE](?tab=rate#count-rate-and-gauge)   | The total number of events occurrences per second.          |
+| [GAUGE](?tab=gauge#count-rate-and-gauge) | A snapshot of events over one time interval.                |
 
-In addition to those three metric types, Datadog DogStatsD and Agent Check libraries allow you to submit statistical distribution of a set of events:
+In addition to those three metric types, Datadog DogStatsD and Agent Check libraries allow you to submit statistical distributions for a given set of events:
 
 | Types                                                        | Definition                                                                  |
 |--------------------------------------------------------------|-----------------------------------------------------------------------------|
 | [HISTOGRAM](?tab=histogram#histogram-and-distribution)       | The statistical distribution of a set of events **calculated Client side**. |
 | [DISTRIBUTION](?tab=distribution#histogram-and-distribution) | The statistical distribution of a set of events **calculated Server side**. |
 
-Those statistical distributions are represented with multiple COUNT and GAUGE type metrics within Datadog in order to accurately represent the client or server side associated distribution of a set of events. See the [HISTOGRAM](?tab=histogram#histogram-and-distribution) and [DISTRIBUTION](?tab=distribution#histogram-and-distribution) dedicated section to learn more.
+Those statistical distributions are represented with multiple COUNT and GAUGE type metrics within Datadog in order to accurately represent the client or server side associated distribution. See the [HISTOGRAM](?tab=histogram#histogram-and-distribution) and [DISTRIBUTION](?tab=distribution#histogram-and-distribution) dedicated section to learn more.
 
 **Note**: Datadog vernacular language calls the HISTOGRAM and DISTRIBUTION statistical distributions, the HISTOGRAM and DISTRIBUTION metric types.
 
@@ -46,13 +46,13 @@ Those statistical distributions are represented with multiple COUNT and GAUGE ty
 
 Metrics are submitted to Datadog in three main ways:
 
-* [Custom Agent check][2]
-* [DogStatsD][3]
-* [Datadog's HTTP API][4]
+* [Custom Agent check][4]
+* [DogStatsD][5]
+* [Datadog's HTTP API][6]
 
-Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, [aggregation occurs when multiple points arrive in a short time interval][5]. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp.
+For data submitted through an [Agent Check][7] or [DogStatsD][8], the data received by Datadog is submitted via the [Agent][9]. Note that when multiple points arrive during the [Agent flush time interval][10] an [aggregation occurs within the Agent depending of the metric's type][11]. During that time interval, the Agent combines values that [belong to the same metric][12] to send a single representative value for that interval. This combined value is stored with a single timestamp in Datadog.
 
-The way in which values are combined and aggregated varies, depending on metric type. Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of DISTRIBUTION metrics). The raw values sent to Datadog are stored as-is. See the [Mapping between submission and in-app type][6] FAQ to see the full mapping between Submission vs. in-app type.
+Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of DISTRIBUTION metrics). The raw values sent to Datadog are stored as-is. See the [Mapping between submission and in-app type][13] FAQ to see the full mapping between Submission vs. in-app type.
 
 ## Count, Rate, and Gauge
 
@@ -63,37 +63,36 @@ Find below the definition of the COUNT, RATE, and GAUGE metric types:
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-**The `COUNT` metric submission type represents the total number of events that occur in one time interval.** A `COUNT` is used to add up the values of something in that time—total connections made to a database, or the total number of requests to an endpoint, for example. This number can accumulate or decrease over time. It is not monotonically increasing.
+**The `COUNT` metric submission type represents the total number of events occurrences in one time interval.** A `COUNT` is used to add up the values of something in that time—total connections made to a database, or the total number of requests to an endpoint, for example. This number can accumulate or decrease over time. It is not monotonically increasing.
 
 **Note**: A `COUNT` is different from the `RATE` metric type, which represents this count of events normalized _per second_ given the defined time interval.
 
-For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then 7 requests or `[1;3;5;7]` requests.
+For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then seven requests or `[1;3;5;7]` requests.
 
-If you were monitoring this data with a COUNT metric, you would be able to represent the overall number of request received over a flush interval. All values submitted to the Agent are "counted" over the flush interval. This means that the value sent to Datadog is the sum of all values received during the flush interval: `16 requests`
+If you were monitoring this data with a COUNT metric, you would be able to represent the overall number of request received over a flush interval. All values submitted to the Agent are "counted" over the flush interval, meaning that the value sent to Datadog is the sum of all values received: `16 requests`
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
 **The `RATE` metric submission type represents the total number of events occurrences per second.** A `RATE` is used to track how often something is happening—like the frequency of connections made to a database, or the flow of requests made to an endpoint.
 
-**Note**: A `RATE` is different from the `COUNT` metric submission type, which represents the number of events in the flush interval.
+**Note**: A `RATE` is different from the `COUNT` metric submission type, which represents the total number of events in the flush interval.
 
-For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then 7 requests or `[1;3;5;7]` requests.
+For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then seven requests or `[1;3;5;7]` requests.
 
-If you were monitoring this data with a RATE metric, you would be able to represent the rate of request received per second. All values submitted to the Agent are "counted" over the flush interval then the sum of all of those value is divided by the length of the flush interval (10s by default). This means that the value sent to Datadog is the rate of all values received during the flush interval: `1.6 requests/second`
+If you were monitoring this data with a RATE metric, you would be able to represent the rate of requests received per second. All values submitted to the Agent are "counted" over the flush interval, meaning that all values are summed, then their sum is divided by the length of the flush interval (10s by default). This means that the value sent to Datadog in this usecase is: `1.6 requests/second`
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-**The `GAUGE` metric submission type represents a snapshot of an event in one time interval.**  This representative snapshot value is the last value submitted to the Agent during the time interval. `GAUGE` metrics are ideal for taking a measure of something reporting continuously.
+**The `GAUGE` metric submission type represents a snapshot of an event values in one time interval.**  This representative snapshot value is the last value submitted to the Agent during the time interval. `GAUGE` metrics are ideal for taking a measure of something reporting continuously:latency, system state, cpu, disk space, memory used...
 
-For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then 7 requests or `[1;3;5;7]` requests.
+For instance, let's say you have one web server with an Agent running on the same host. This web servers receives over a [flush interval][5] one, then three, then five, then seven requests or `[1;3;5;7]` requests.
 
 If you were monitoring this data with a GAUGE metric, you would be able to represent the number of requests received at a moment in time. Only the latest value submitted to the Agent over the flush interval is kept and sent to Datadog: `7 requests`
 
 {{% /tab %}}
 {{< /tabs >}}
-
 ### Submission
 
 {{< tabs >}}
@@ -149,14 +148,14 @@ Submit your GAUGE type metrics from one of the following sources:
 
 ## Histogram and Distribution
 
-The HISTOGRAM AND DISTRIBUTION metric types allows you to measure the statistical distribution of a set of values with the main difference that HISTOGRAM are calculated client side-from a single Agent perspective-, while DISTRIBUTION are calculated server side-from Datadog perspective-.
+The HISTOGRAM AND DISTRIBUTION metric types allow you to measure the statistical distribution of a set of values with the main difference that HISTOGRAM are calculated client side-from a single Agent perspective-, while DISTRIBUTION are calculated server side-from Datadog perspective-.
 
 ### Definition {#definition-histo-distri}
 
 {{< tabs >}}
 {{% tab "HISTOGRAM" %}}
 
-**The `HISTOGRAM` metric submission type allows you to measure the statistical distribution of a set of values**. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates (on the Agent-side) the values that are sent during a defined time interval (the default flush interval is 10s) and produces different timeseries representing the different aggregations possible for the set of values. Depending on the aggregation, the metric type stored by Datadog is different.
+**The `HISTOGRAM` metric submission type allows you to measure the statistical distribution of a set of values from a Datadog Agent perspective**. Datadog's `HISTOGRAM` metric type is an extension of the [StatsD timing metric type][1]: it aggregates (on the Agent-side) the values that are sent during a defined time interval (the default flush interval is 10s) and produces different timeseries representing the different aggregations possible for the set of values. Depending on the aggregation, the metric type stored by Datadog is different.
 
 For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` during an Agent flush interval, the following timeseries are produced by the Agent by default:
 
@@ -282,9 +281,16 @@ To submit DISTRIBUTION metrics:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/type_modifiers
-[2]: /developers/metrics/agent_metrics_submission
-[3]: /developers/metrics/dogstatsd_metrics_submission
-[4]: /api/?lang=python#post-timeseries-points
-[5]: /developers/dogstatsd/data_aggregation
-[6]: /developers/faq/mapping_submission_in_app_type
+[1]: /metrics/introduction/
+[2]: /developers/metrics/type_modifiers
+[3]: /dashboards/functions/
+[4]: /developers/metrics/agent_metrics_submission
+[5]: /developers/metrics/dogstatsd_metrics_submission
+[6]: /api/?lang=python#post-timeseries-points
+[7]: /developers/write_agent_check/
+[8]: /developers/dogstatsd/
+[9]: /agent
+[10]: /developers/dogstatsd/#how-it-works
+[11]: /developers/dogstatsd/data_aggregation
+[12]: /developers/metrics/#overview
+[13]: /developers/faq/mapping_submission_in_app_type
