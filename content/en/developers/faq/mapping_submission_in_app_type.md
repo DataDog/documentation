@@ -19,11 +19,11 @@ Find below the global summary of how a metric type, when sumbmitted from a given
 | [DogStatsD][4]    | `dog.count(...)`                     | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.increment(...)`                 | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.decrement(...)`                 | COUNT           | RATE                |
-| [DogStatsD][5]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
-| [Agent check][6] | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][7] | `self.monotonic_count(...)`          | COUNT           | COUNT               |
-| [Agent check][8] | `self.gauge(...)`                    | GAUGE           | GAUGE               |
-| [Agent check][9] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
+| [DogStatsD][5]    | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE         |
+| [Agent check][6]  | `self.count(...)`                    | COUNT           | COUNT               |
+| [Agent check][7]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Agent check][8]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Agent check][9]  | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE         |
 | [Agent check][10] | `self.rate(...)`                     | RATE            | GAUGE               |
 
 [1]: /api/?lang=python#post-timeseries-points
