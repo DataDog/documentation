@@ -52,7 +52,6 @@ Metrics are submitted to Datadog in three main ways:
 
 Most of the data received by Datadog is submitted via the Agent. For data submitted through an Agent Check or DogStatsD, [aggregation occurs when multiple points arrive in a short time interval][5]. During that time interval, the Agent combines values that belong in the same time series (i.e. values with identical tags) and sends a single representative value for that interval. This combined value is stored with a single timestamp.
 
-
 The way in which values are combined and aggregated varies, depending on metric type. Data submitted directly to the Datadog API is not aggregated by Datadog before storage (except in the case of DISTRIBUTION metrics). The raw values sent to Datadog are stored as-is. See the [Mapping between submission and in-app type][6] FAQ to see the full mapping between Submission vs. in-app type.
 
 ## Count, Rate, and Gauge
@@ -150,7 +149,7 @@ Submit your GAUGE type metrics from one of the following sources:
 
 ## Histogram and Distribution
 
-// Insert overview here \\
+The HISTOGRAM AND DISTRIBUTION metric types allows you to measure the statistical distribution of a set of values with the main difference that HISTOGRAM are calculated client side-from a single Agent perspective-, while DISTRIBUTION are calculated server side-from Datadog perspective-.
 
 ### Definition {#definition-histo-distri}
 
