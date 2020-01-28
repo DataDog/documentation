@@ -54,7 +54,7 @@ instances:
   - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
     metrics:
-      - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
+      - "<PROMETHEUS_METRIC_TO_FETCH>": "<DATADOG_NEW_METRIC_NAME>"
 ```
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -6,6 +6,7 @@ categories:
 ddtype: crawler
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md"]
 integration_title: AWS Cloudhsm
 is_public: true
 kind: integration

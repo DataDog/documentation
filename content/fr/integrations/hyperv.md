@@ -81,6 +81,3 @@ Documentation, liens et articles supplémentaires utiles :
 [7]: https://github.com/DataDog/integrations-core/blob/master/hyperv/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
-
-
-{{< get-dependencies >}}

@@ -84,7 +84,7 @@
         {{/* if  $src */}}
         {{ if and $indx (fileExists (print "static/" $src)) }}
             {{ if $formatname }}
-            <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
+            <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
                 <div id="{{ $v.Params.name | default ($urlname | lower) }}" class="card">
                     <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
                         {{ $.Scratch.Set "url" ""}}

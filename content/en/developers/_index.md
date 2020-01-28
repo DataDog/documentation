@@ -1,7 +1,6 @@
 ---
 title: Developer Tools
 kind: documentation
-disable_toc: true
 description: Everything you need to know about developing for the Datadog platform, including config and code examples, and a ton of reference material.
 aliases:
 - /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog

@@ -121,15 +121,8 @@ instances:
 ##Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: <FILE_NAME_PATH>.log
+    path: "<FILE_NAME_PATH>.log"
     service: nodejs
     source: nodejs
     sourcecategory: sourcecode

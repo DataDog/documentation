@@ -193,7 +193,7 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Ka
 [19]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
 
 
-{{< get-dependencies >}}
+
 
 
 ## Check de l'Agent : Kafka consumer
@@ -272,4 +272,3 @@ Le check Kafka-consumer n'inclut aucun check de service.
 [1114]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
 
 
-{{< get-dependencies >}}

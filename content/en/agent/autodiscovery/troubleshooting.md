@@ -1,7 +1,6 @@
 ---
 title: Autodiscovery Troubleshooting
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "agent/troubleshooting"
   tag: "Documentation"

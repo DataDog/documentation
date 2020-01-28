@@ -1,7 +1,6 @@
 ---
 title: How to update an anomaly detection monitor to account for local time zone
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/monitors/monitor_types/anomaly/"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 title: Network Performance Monitoring Installation
 kind: documentation
-disable_toc: true
 description: Collect your Network Data with the Agent.
 further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
@@ -115,7 +114,7 @@ spec:
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
           # DD_SYSTEM_PROBE_EXTERNAL is set to true to avoid starting the system probe
           # in the main Datadog agent container when the system probe runs in a
-          # dedicated container, which is the recommended configuration. 
+          # dedicated container, which is the recommended configuration.
           - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST

@@ -178,7 +178,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez la documentation relative aux [modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
@@ -260,6 +260,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [12]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

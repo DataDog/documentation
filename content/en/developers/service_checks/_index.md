@@ -1,7 +1,6 @@
 ---
 title: Service Check
 kind: documentation
-disable_toc: true
 aliases:
 - /developers/faq/how-can-i-submit-a-custom-status-check
 - /developers/service_checks/visualize-your-service-check-in-the-datadog-ui

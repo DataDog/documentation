@@ -83,6 +83,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

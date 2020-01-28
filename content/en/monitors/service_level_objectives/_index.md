@@ -2,7 +2,6 @@
 title: Service Level Objectives
 kind: documentation
 description: "Track the status of your SLOs"
-disable_toc: true
 aliases:
   - /monitors/monitor_uptime_widget/
   - /monitors/slos/
@@ -14,10 +13,8 @@ further_reading:
 
 ## Overview
 
-Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a 
-framework for defining clear targets around application performance, which ultimately help teams provide a consistent 
-customer experience, balance feature development with platform stability, and improve communication with internal and 
-external users.
+Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a
+framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 ## Setup
 

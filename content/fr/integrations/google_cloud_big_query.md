@@ -62,6 +62,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_big_query/google_cloud_big_query_metadata.csv
 [5]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

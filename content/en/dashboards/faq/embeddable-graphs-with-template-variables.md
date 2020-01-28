@@ -1,7 +1,6 @@
 ---
 title: Embeddable Graphs with Template Variables
 kind: faq
-disable_toc: true
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
 further_reading:
