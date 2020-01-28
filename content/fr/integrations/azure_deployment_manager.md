@@ -218,5 +218,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [4]: https://docs.datadoghq.com/fr/help/
 [5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
 [6]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-
-

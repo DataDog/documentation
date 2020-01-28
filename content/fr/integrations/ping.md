@@ -123,5 +123,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
-
-

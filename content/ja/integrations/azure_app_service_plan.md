@@ -47,5 +47,3 @@ Azure App Service Plan インテグレーションには、サービスのチェ
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_service_plan/azure_app_service_plan_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
-
-

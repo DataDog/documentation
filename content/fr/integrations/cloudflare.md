@@ -52,5 +52,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://app.datadoghq.com/account/settings#integrations/cloudflare
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help
-
-

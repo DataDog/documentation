@@ -81,5 +81,3 @@ Hyper-V には、イベントは含まれません。
 [7]: https://github.com/DataDog/integrations-core/blob/master/hyperv/metadata.csv
 [8]: https://docs.datadoghq.com/ja/help
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
-
-

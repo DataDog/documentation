@@ -76,5 +76,3 @@ CRI には、イベントは含まれません。
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
 [5]: https://docs.datadoghq.com/ja/help
-
-

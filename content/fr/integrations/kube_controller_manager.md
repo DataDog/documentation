@@ -83,5 +83,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
 [6]: https://docs.datadoghq.com/fr/help
-
-

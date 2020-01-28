@@ -145,5 +145,3 @@ La durée d'un élément de travail est calculée à partir des événements *wo
 [9]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
 [10]: /fr/monitors/monitor_types/composite/
 [11]: https://github.com/DataDog/azure-devops-monitor-gate-extension
-
-

@@ -53,5 +53,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://app.datadoghq.com/account/settings#integrations/circleci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/circleci/circleci_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help
-
-

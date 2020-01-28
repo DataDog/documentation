@@ -53,5 +53,3 @@ CircleCI インテグレーションには、サービスのチェック機能�
 [1]: https://app.datadoghq.com/account/settings#integrations/circleci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/circleci/circleci_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help
-
-

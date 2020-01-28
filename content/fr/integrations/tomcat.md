@@ -280,5 +280,3 @@ Documentation, liens et articles supplémentaires utiles :
 [12]: https://github.com/DataDog/integrations-core/blob/master/tomcat/metadata.csv
 [13]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
 [14]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
-
-

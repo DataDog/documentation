@@ -65,5 +65,3 @@ Le check Exchange Server n'inclut aucun check de service.
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/exchange_server/metadata.csv
-
-

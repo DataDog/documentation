@@ -71,5 +71,3 @@ L'intégration Blue Matador n'inclut aucun check de service.
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://www.bluematador.com/docs/datadog-integration
 
-
-

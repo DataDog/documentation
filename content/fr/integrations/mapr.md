@@ -130,5 +130,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [13]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
 [14]: http://upstart.ubuntu.com/cookbook/#environment-variables
 [15]: https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines
-
-

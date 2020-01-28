@@ -47,5 +47,3 @@ Azure File Storage インテグレーションには、サービスのチェッ�
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_file_storage/azure_file_storage_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
-
-

@@ -56,5 +56,3 @@ Travis CI インテグレーションには、サービスのチェック機能�
 [1]: https://app.datadoghq.com/account/settings#integrations/travis_ci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/travis_ci/travis_ci_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help
-
-

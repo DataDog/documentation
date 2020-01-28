@@ -156,5 +156,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/riak/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
-
-

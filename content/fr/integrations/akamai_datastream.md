@@ -67,5 +67,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help
-
-

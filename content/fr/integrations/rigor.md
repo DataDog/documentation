@@ -189,5 +189,3 @@ dont nous pouvons contribuer à optimiser les performances de votre site web.
 [11]: mailto:support@rigor.com
 [12]: https://rigor.com
 
-
-

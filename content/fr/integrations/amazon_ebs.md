@@ -87,5 +87,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [9]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
 [10]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
 [11]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog
-
-

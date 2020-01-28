@@ -84,5 +84,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [2]: https://www.lacework.com/datadog/
 [3]: https://app.datadoghq.com/account/settings#api
 [7]: https://docs.datadoghq.com/fr/help
-
-

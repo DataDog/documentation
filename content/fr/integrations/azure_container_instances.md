@@ -48,5 +48,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_container_instances/azure_container_instances_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help/
-
-

@@ -104,5 +104,3 @@ Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructu
 [7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog
-
-

@@ -61,5 +61,3 @@ DingTalk インテグレーションには、サービスのチェック機能�
 [1]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [2]: https://docs.datadoghq.com/ja/help
 [3]: https://app.datadoghq.com/account/settings#integrations/dingtalk
-
-

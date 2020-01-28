@@ -130,5 +130,3 @@ Consultez la [documentation principale sur les outils de développement][14] pou
 [12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [13]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
 [14]: https://docs.datadoghq.com/fr/developers
-
-

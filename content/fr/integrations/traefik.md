@@ -177,5 +177,3 @@ Consultez la [documentation principale sur les outils de développement][15] pou
 [13]: https://docs.traefik.io/configuration/logs/#clf-common-log-format
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [15]: https://docs.datadoghq.com/fr/developers
-
-

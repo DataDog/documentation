@@ -133,5 +133,3 @@ Si vous avez des questions, contactez-nous à l'adresse support@rookout.com.
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/datadog_rule_template.png
 [9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_save.png
 [10]: https://docs.datadoghq.com/fr/developers/dogstatsd
-
-
