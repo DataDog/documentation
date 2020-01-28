@@ -15,7 +15,7 @@ further_reading:
   text: "Manage your monitors"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
+  text: "Schedule a downtime for your monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
   text: "Consult your monitor status"
@@ -23,23 +23,166 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of any [monitor][1]. You want to make sure the right people get notified so the problem can be resolved as soon as possible.
+Notifications are a key component of monitors that keep your team informed of issues and help support troubleshooting.
 
-{{< img src="monitors/notifications/notification.png" alt="notification"  >}}
+## Say what's happening
 
-1. Give your monitor a **title**. It is often useful to use a succinct
-   explanation of the monitor so a notified team member can quickly understand
-   what is going on.
+When creating or editing a monitor, use this section to set the notification sent to your team.
 
-2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
-  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's **@-notification** syntax](#notification).
-  A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
+### Title
 
-3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
+Add a unique title to your monitor (required). Multi-alert monitors can make use of [tag variables](#).
+
+It is helpful to use a succinct explanation of the monitor so a notified team member can quickly understand the issue.
+
+### Message
+
+The message field allows standard [Markdown formatting][1] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text to send to different contacts using [@-notifications](#notification).
+
+A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
+
+### Tags
+
+Monitor tags are different than metric tags. They are used in the UI to group and search for monitors.
+
+### Renotify
+
+Optionally enable monitor renotification. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][2]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
+
+## Notify your team
+
+Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the [message](#message) field.
+
+### @-notification
+
+Send the monitor notification to the appropriate endpoint:
+
+* Notify a Datadog user via email by adding `@<DD_USER_EMAIL>` in your notification message.
+* Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
+* Install the Slack integration to send your notifications directly in the appropriate channel.
+
+**Notes**:
+
+* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
+* Removing the `@notification` from either section removes it from both sections.
+
+#### Integrations
+
+{{< tabs >}}
+{{% tab "Jira" %}}
+
+After setting up the [Jira integration][1], type `@jira` in your notification message to see the list of available options. See the example [use cases][2] in the integration documentation.
+
+[1]: /integrations/jira
+[2]: /integrations/jira/#use-cases
+{{% /tab %}}
+{{% tab "PagerDuty" %}}
+
+After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
+
+[1]: /integrations/pagerduty
+{{% /tab %}}
+{{% tab "Slack" %}}
+
+After setting up the [Slack integration][1], type `@slack` in your notification message to see the available list of channels to send your notification to.
+
+#### @-mentions in Slack from monitor alert
+
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
+
+For example this configuration:
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template"  style="width:50%;" >}}
+
+Would produce this slack message:
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview"  style="width:50%;" >}}
+
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][2] under **Username**.
+
+Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
+
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][3]. For example, for a user group named `testers` you would use the following syntax:
+
+```text
+<!subteam^12345|testers>
+```
+
+Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
+e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
+
+### Using message template variables to dynamically create @-mentions
+
+Use message template variables within a monitor message to dynamically build **@-mentions**.
+
+For example, if the rendered variable is setup as a channel in the Slack integration:
+
+* `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
+
+* `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
+
+Or create an **@-mention** that goes directly to a specific email:
+
+* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
+
+[1]: /integrations/slack
+[2]: http://slack.com/account/settings
+[3]: https://api.slack.com/methods/usergroups.list
+{{% /tab %}}
+{{% tab "Webhooks" %}}
+
+After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
+
+[1]: /integrations/webhooks
+{{% /tab %}}
+{{< /tabs >}}
+
+### Modifications
+
+When a monitor is created, modified, silenced, or deleted an [event][3] is created. Set the `Notify` option to notify team members and chat services of these events.
+
+### Edit restrictions
+
+If changes are restricted, only the monitor's creator or an administrator can change the monitor. Changes include any updates to the monitor definition and muting for any amount of time.
+
+**Note**: The limitations are applied both in the UI and API.
+
+## Test notifications
+
+After you define your monitor, test your monitor's notifications with the **Test Notifications** button at the bottom right of your monitor page. Test notifications are supported for the following monitor types:
+
+* Host
+* Metric
+* Anomaly
+* Outlier
+* Forecast
+* Integration (check only)
+* Process (check only)
+* Network (check only)
+* Custom check
+* Event
+* Composite
+
+1. Choose the monitor case to test in the test notifications pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:50%;" >}}
+
+2. Click **Run Test** to send a notification to the notification handles provided in the message box.
+
+**Notes**:
+
+* Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+* Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
+  ```
+  {{#is_alert}}
+  {{host.name}} <-- will populate
+  {{/is_alert}}
+  ```
 
 ## Variables
 
-Use variables to customize your monitor notifications, the available variables are:
+### Template variables
+
+Use template variables to customize your monitor notifications. The built-in variables are:
 
 | Variable                      | Description                                                                                    |
 |-------------------------------|------------------------------------------------------------------------------------------------|
@@ -51,7 +194,17 @@ Use variables to customize your monitor notifications, the available variables a
 | `{{last_triggered_at}}`       | Display the UTC date/time when the monitor last triggered.                                     |
 | `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.        |
 
-**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+#### Arithmetic
+
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
+
+`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
+
+Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
+
+For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
+
+`{{eval "last_triggered_at_epoch-15*60*1000"}}`
 
 ### Tag variables
 
@@ -94,19 +247,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot"  style="width:80%;">}}
 
-### Template variable arithmetic
-
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
-
-`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
-
-Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
-
-For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
-
-`{{eval "last_triggered_at_epoch-15*60*1000"}}`
-
-## Conditional variables
+### Conditional variables
 
 Conditional variables allow for different text to be [sent to different contacts](#notification) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
@@ -230,143 +371,9 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced variable usage
+## Advanced
 
-If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`, use the `{{{{raw}}}}` formatting:
-
-The following template:
-
-```text
-{{{{raw}}}}
-{{ <TEXT_1> }} {{ <TEXT_2> }}
-{{{{/raw}}}}
-```
-
-outputs:
-
-```text
-{{ <TEXT_1> }} {{ <TEXT_2> }}
-```
-
-The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
-
-```text
-{{{{is_match "host.name" "<HOST_NAME>"}}}}
-{{ .matched }} the host name
-{{{{/is_match}}}}
-```
-
-If `host.name` matches `<HOST_NAME>`, the template outputs:
-
-```text
-{{ .matched }} the host name
-```
-
-## @-notification
-
-Send the monitor notification to the appropriate endpoint:
-
-* Notify a Datadog user via email by adding `@<DD_USER_EMAIL>` in your notification message.
-* Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
-* Install the Slack integration to send your notifications directly in the appropriate channel.
-
-**Notes**:
-
-* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
-* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
-
-### Integrations
-
-{{< tabs >}}
-{{% tab "Slack" %}}
-
-After setting up the [Slack integration][1], type `@slack` in your notification message to see the available list of channels to send your notification to.
-
-#### @-mentions in Slack from monitor alert
-
-Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
-
-For example this configuration:
-{{< img src="monitors/notifications/notification_template.png" alt="notification_template"  style="width:50%;" >}}
-
-Would produce this slack message:
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview"  style="width:50%;" >}}
-
-**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][2] under **Username**.
-
-Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
-
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][3]. For example, for a user group named `testers` you would use the following syntax:
-
-```text
-<!subteam^12345|testers>
-```
-
-Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
-e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
-
-### Using message template variables to dynamically create @-mentions
-
-Use message template variables within a monitor message to dynamically build **@-mentions**.
-
-For example, if the rendered variable is setup as a channel in the Slack integration:
-
-* `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
-
-* `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
-
-Or create an **@-mention** that goes directly to a specific email:
-
-* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
-
-[1]: /integrations/slack
-[2]: http://slack.com/account/settings
-[3]: https://api.slack.com/methods/usergroups.list
-{{% /tab %}}
-{{% tab "Jira" %}}
-
-After setting up the [Jira integration][1], type `@jira` in your notification message to see the list of available options. See the example [use cases][2] in the integration documentation.
-
-[1]: /integrations/jira
-[2]: /integrations/jira/#use-cases
-{{% /tab %}}
-{{% tab "PagerDuty" %}}
-
-After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
-
-[1]: /integrations/pagerduty
-{{% /tab %}}
-{{% tab "Webhooks" %}}
-
-After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
-
-[1]: /integrations/webhooks
-{{% /tab %}}
-{{< /tabs >}}
-
-## Test monitor notifications
-
-**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
-
-After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
-
-1. Choose which monitor case you want to test in the following pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
-
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:50%;" >}}
-
-2. Click **Run test** to send the notification to any notification handle available in the message box.
-
-**Notes**:
-
-* Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and `[TEST]` is added into the test notification title.
-
-* Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
-
-  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening"  style="width:50%;" >}}
-
-## Advanced notification configuration
-
-### Include links to appropriate dashboards
+### Dashboard links
 
 Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
 
@@ -406,7 +413,7 @@ In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. T
 {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url"  style="width:70%;">}}
 
 {{% /tab %}}
-{{% tab "Manage Monitors Page" %}}
+{{% tab "Manage Monitors" %}}
 
 To link to a "Manage Monitors" page that displays all of the monitors for the host in question, define a link like below:
 
@@ -446,6 +453,38 @@ https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host
 {{% /tab %}}
 {{< /tabs >}}
 
+### Raw format
+
+If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`, use the `{{{{raw}}}}` formatting:
+
+The following template:
+
+```text
+{{{{raw}}}}
+{{ <TEXT_1> }} {{ <TEXT_2> }}
+{{{{/raw}}}}
+```
+
+outputs:
+
+```text
+{{ <TEXT_1> }} {{ <TEXT_2> }}
+```
+
+The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
+
+```text
+{{{{is_match "host.name" "<HOST_NAME>"}}}}
+{{ .matched }} the host name
+{{{{/is_match}}}}
+```
+
+If `host.name` matches `<HOST_NAME>`, the template outputs:
+
+```text
+{{ .matched }} the host name
+```
+
 ### Comments
 
 To include a comment in the monitor message that only shows in the monitor edit screen, use the syntax:
@@ -458,7 +497,7 @@ To include a comment in the monitor message that only shows in the monitor edit 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors
-[2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /monitors/monitor_types/integration
+[1]: http://daringfireball.net/projects/markdown/syntax
+[2]: /monitors/monitor_types/integration
+[3]: /events
 [4]: /monitors/faq/what-are-recovery-thresholds

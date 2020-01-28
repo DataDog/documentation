@@ -155,6 +155,8 @@ Datadog has two types of notifications (alert and warning). Monitors recover aut
 
 As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
 
+**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+
 #### Data window
 
 `Require` or `Do not require` a full window of data for evaluation.
