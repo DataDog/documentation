@@ -141,5 +141,3 @@ Portworx チェックには、イベントは含まれません。
 [12]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information
 [13]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
 [14]: https://www.datadoghq.com/blog
-
-

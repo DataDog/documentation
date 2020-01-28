@@ -63,5 +63,3 @@ L'intégration G Suite n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).
 
-
-

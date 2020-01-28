@@ -172,5 +172,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][17].
 [15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [16]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
 [17]: https://docs.datadoghq.com/fr/help
-
-

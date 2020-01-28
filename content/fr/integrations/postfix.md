@@ -219,5 +219,3 @@ Documentation, liens et articles supplémentaires utiles :
 [8]: https://github.com/DataDog/integrations-core/blob/master/postfix/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/monitor-postfix-queues
-
-

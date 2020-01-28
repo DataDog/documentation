@@ -270,5 +270,3 @@ Documentation, liens et articles supplémentaires utiles :
 [9]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
 [11]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
-
-

@@ -224,5 +224,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [13]: https://docs.datadoghq.com/fr/help
 [14]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
 [15]: https://engineering.datadoghq.com/consul-at-datadog
-
-

@@ -115,5 +115,3 @@ Nextcloud には、イベントは含まれません。
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
 [13]: https://docs.datadoghq.com/ja/help
-
-

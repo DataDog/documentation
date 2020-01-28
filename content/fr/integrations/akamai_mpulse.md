@@ -56,4 +56,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [2]: https://community.akamai.com/customers/s/article/mPulse-API-Login-Changes?language=en_US
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_mpulse/akamai_mpulse_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help
-

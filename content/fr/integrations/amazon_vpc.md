@@ -83,5 +83,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [4]: https://docs.datadoghq.com/fr/logs/explorer
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
 [6]: https://docs.datadoghq.com/fr/help
-
-

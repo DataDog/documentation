@@ -156,5 +156,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [7]: https://docs.datadoghq.com/fr/agent/docker/log/
 [8]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
-
-

@@ -112,5 +112,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-core/blob/master/neutrona/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
-
-

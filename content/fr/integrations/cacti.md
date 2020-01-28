@@ -177,5 +177,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [6]: https://github.com/pbanaszkiewicz/python-rrdtool
 [7]: https://github.com/commx/python-rrdtool/issues/25
 [8]: https://docs.datadoghq.com/fr/help
-
-

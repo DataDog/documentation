@@ -272,5 +272,3 @@ Pour vérifier que l'intégration est correctement configurée, ajoutez `@servic
 [1]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.0.0.xml
 [2]: https://app.datadoghq.com/account/settings#integrations/servicenow
 [3]: https://docs.datadoghq.com/fr/help
-
-

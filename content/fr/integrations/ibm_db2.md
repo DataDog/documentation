@@ -200,5 +200,3 @@ Documentation, liens et articles supplémentaires utiles :
 [10]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
 [12]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
-
-

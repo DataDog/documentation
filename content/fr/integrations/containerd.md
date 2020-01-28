@@ -106,5 +106,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 [2]: https://docs.datadoghq.com/fr/help
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
-
-

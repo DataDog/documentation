@@ -158,5 +158,3 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [9]: https://player.vimeo.com/video/347360711
 [10]: https://docs.signalsciences.net/integrations/datadog/
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
-
-

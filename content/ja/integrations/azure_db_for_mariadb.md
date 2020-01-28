@@ -47,5 +47,3 @@ Azure Database for MariaDB インテグレーションには、サービスの�
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_mariadb/azure_db_for_mariadb_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
-
-

@@ -91,5 +91,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
 [2]: https://app.datadoghq.com/account/settings#integrations/bitbucket
 [3]: https://docs.datadoghq.com/fr/help
-
-

@@ -105,5 +105,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [9]: https://twitter.github.io/finagle/guide/Metrics.html
 [10]: https://gist.githubusercontent.com/arbll/2f63a5375a4d6d5acface6ca8a51e2ab/raw/bc35ed4f0f4bac7e2643a6009f45f9068f4c1d12/gistfile1.txt
 [11]: https://docs.datadoghq.com/fr/help
-
-

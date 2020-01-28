@@ -57,5 +57,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [5]: https://docs.datadoghq.com/fr/integrations/rsyslog
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
-
-

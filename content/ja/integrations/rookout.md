@@ -133,5 +133,3 @@ Rookout ルールに Datadog 出力を作成することで、カスタムメト
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/datadog_rule_template.png
 [9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_save.png
 [10]: https://docs.datadoghq.com/ja/developers/dogstatsd
-
-

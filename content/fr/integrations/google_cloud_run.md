@@ -79,5 +79,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
-
-

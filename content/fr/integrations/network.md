@@ -120,5 +120,3 @@ Le check réseau n'inclut aucun check de service.
 [8]: https://github.com/DataDog/integrations-core/blob/master/network/CHANGELOG.md#1110--2019-05-14
 [9]: https://docs.datadoghq.com/fr/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
 [10]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
-
-

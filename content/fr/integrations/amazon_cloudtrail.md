@@ -118,5 +118,3 @@ Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré A
 [9]: https://app.datadoghq.com/logs
 [10]: https://docs.datadoghq.com/fr/events
 [11]: https://docs.datadoghq.com/fr/integrations/aws
-
-
