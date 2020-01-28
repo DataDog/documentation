@@ -214,7 +214,7 @@ Documentation, liens et articles supplémentaires utiles :
 [14]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#setup
 
 
-
+{{< get-dependencies >}}
 
 
 ## Intégration ActiveMQ XML
@@ -283,3 +283,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][116].
 [1111]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 
 
+{{< get-dependencies >}}

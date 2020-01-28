@@ -107,7 +107,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
 
 
-
+{{< get-dependencies >}}
 
 
 ## Intégration Mesos_slave
@@ -261,3 +261,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][105].
 [105]: https://docs.datadoghq.com/fr/help
 
 
+{{< get-dependencies >}}

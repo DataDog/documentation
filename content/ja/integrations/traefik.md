@@ -179,3 +179,4 @@ Agent ベースのインテグレーションのテストおよび開発方法�
 [15]: https://docs.datadoghq.com/ja/developers
 
 
+{{< get-dependencies >}}

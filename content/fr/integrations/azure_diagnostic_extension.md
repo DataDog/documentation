@@ -47,3 +47,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [5]: https://www.datadoghq.com/blog/dont-fear-the-agent/
 
 
+{{< get-dependencies >}}

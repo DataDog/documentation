@@ -79,3 +79,4 @@ Consultez [notre blog][6] pour en savoir plus sur la surveillance d'infrastructu
 [6]: https://www.datadoghq.com/blog
 
 
+{{< get-dependencies >}}

@@ -221,3 +221,4 @@ Pour mieux comprendre comment (ou pourquoi) intégrer votre cluster Elasticsearc
 [14]: https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-slowlog.html
 
 
+{{< get-dependencies >}}

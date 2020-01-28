@@ -389,3 +389,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [20]: https://docs.datadoghq.com/fr/help
 
 
+{{< get-dependencies >}}

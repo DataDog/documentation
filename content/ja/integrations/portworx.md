@@ -143,3 +143,4 @@ Portworx チェックには、イベントは含まれません。
 [14]: https://www.datadoghq.com/blog
 
 
+{{< get-dependencies >}}

@@ -51,3 +51,4 @@ Azure Database for MySQL インテグレーションには、サービスのチ�
 [3]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

@@ -115,7 +115,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
 
 
-
+{{< get-dependencies >}}
 
 
 ## Intégration NameNode HDFS
@@ -229,3 +229,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][119].
 [1113]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
 
 
+{{< get-dependencies >}}

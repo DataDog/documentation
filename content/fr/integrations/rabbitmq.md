@@ -212,3 +212,4 @@ Documentation, liens et articles supplémentaires utiles :
 [17]: https://docs.datadoghq.com/fr/integrations/faq/tagging-rabbitmq-queues-by-tag-family
 
 
+{{< get-dependencies >}}

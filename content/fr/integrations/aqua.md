@@ -174,3 +174,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][17].
 [17]: https://docs.datadoghq.com/fr/help
 
 
+{{< get-dependencies >}}

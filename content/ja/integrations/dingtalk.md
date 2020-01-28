@@ -63,3 +63,4 @@ DingTalk インテグレーションには、サービスのチェック機能�
 [3]: https://app.datadoghq.com/account/settings#integrations/dingtalk
 
 
+{{< get-dependencies >}}

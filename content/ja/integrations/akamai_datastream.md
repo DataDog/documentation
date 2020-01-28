@@ -69,3 +69,4 @@ Akamai インテグレーションには、サービスのチェック機能は�
 [3]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

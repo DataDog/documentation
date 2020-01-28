@@ -160,3 +160,4 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
 
 
+{{< get-dependencies >}}

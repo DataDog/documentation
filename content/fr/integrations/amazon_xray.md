@@ -170,3 +170,4 @@ L'intégration AWS X-Ray récupère les données de trace d'AWS et ne recueille
 [16]: https://github.com/DataDog/serverless-plugin-datadog
 
 
+{{< get-dependencies >}}

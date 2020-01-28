@@ -220,3 +220,4 @@ Azure Deployment Manager には、サービスのチェック機能は含まれ�
 [6]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
 
 
+{{< get-dependencies >}}

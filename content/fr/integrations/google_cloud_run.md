@@ -81,3 +81,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [7]: https://docs.datadoghq.com/fr/help
 
 
+{{< get-dependencies >}}

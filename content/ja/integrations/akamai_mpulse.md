@@ -57,3 +57,4 @@ Akamai mPulse インテグレーションには、サービスのチェック機
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_mpulse/akamai_mpulse_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help
 
+{{< get-dependencies >}}

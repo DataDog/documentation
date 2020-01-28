@@ -82,3 +82,4 @@ Metric Emitter (Datadog):
 [6]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

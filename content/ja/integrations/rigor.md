@@ -191,4 +191,4 @@ Rigor の詳細および Datadog を活用して Web サイトを高速化する
 [12]: https://rigor.com
 
 
-
+{{< get-dependencies >}}

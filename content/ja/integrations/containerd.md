@@ -108,3 +108,4 @@ Containerd チェックは、イベントを収集できます。`filters` を�
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
 
 
+{{< get-dependencies >}}

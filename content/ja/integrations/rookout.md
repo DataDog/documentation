@@ -135,3 +135,4 @@ Rookout ルールに Datadog 出力を作成することで、カスタムメト
 [10]: https://docs.datadoghq.com/ja/developers/dogstatsd
 
 
+{{< get-dependencies >}}

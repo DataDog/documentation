@@ -136,3 +136,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [10]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#setup
 
 
+{{< get-dependencies >}}

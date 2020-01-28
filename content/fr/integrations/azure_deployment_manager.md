@@ -220,3 +220,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [6]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
 
 
+{{< get-dependencies >}}

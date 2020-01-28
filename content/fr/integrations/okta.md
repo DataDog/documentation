@@ -62,3 +62,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [4]: https://docs.datadoghq.com/fr/account_management/saml/okta
 
 
+{{< get-dependencies >}}

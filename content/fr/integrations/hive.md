@@ -164,3 +164,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [12]: https://github.com/DataDog/integrations-core/blob/master/hive/metadata.csv
 
 
+{{< get-dependencies >}}

@@ -158,7 +158,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [14]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
 [15]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
 
-
+{{< get-dependencies >}}
 
 
 ## Check de l'Agent : Cassandra Nodetool
@@ -238,3 +238,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][119].
 [1112]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
 
 
+{{< get-dependencies >}}

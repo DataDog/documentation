@@ -107,7 +107,7 @@ Agent が Mesos Master API に接続してメトリクスを収集できない�
 [7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
 
 
-
+{{< get-dependencies >}}
 
 
 ## Mesos スレーブインテグレーション
@@ -261,3 +261,4 @@ Mesos スレーブチェックは、エグゼキュータータスクごとに�
 [105]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

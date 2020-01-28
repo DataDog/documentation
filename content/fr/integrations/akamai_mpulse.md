@@ -57,3 +57,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_mpulse/akamai_mpulse_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help
 
+{{< get-dependencies >}}

@@ -72,4 +72,4 @@ L'intégration Blue Matador n'inclut aucun check de service.
 [5]: https://www.bluematador.com/docs/datadog-integration
 
 
-
+{{< get-dependencies >}}

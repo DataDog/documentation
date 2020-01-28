@@ -174,3 +174,4 @@ Aqua には、イベントは含まれません。
 [17]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

@@ -113,3 +113,4 @@ stats.increment('home.page.hits')
 [7]: https://docs.datadoghq.com/ja/help
 
 
+{{< get-dependencies >}}

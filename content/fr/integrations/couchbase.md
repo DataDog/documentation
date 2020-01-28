@@ -172,3 +172,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [11]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
 
 
+{{< get-dependencies >}}

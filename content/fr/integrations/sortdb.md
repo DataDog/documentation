@@ -111,3 +111,4 @@ Le check SortDB n'inclut aucun événement pour le moment.
 [12]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/metadata.csv
 
 
+{{< get-dependencies >}}

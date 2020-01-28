@@ -135,3 +135,4 @@ Si vous avez des questions, contactez-nous à l'adresse support@rookout.com.
 [10]: https://docs.datadoghq.com/fr/developers/dogstatsd
 
 
+{{< get-dependencies >}}

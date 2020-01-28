@@ -120,3 +120,4 @@ Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré A
 [11]: https://docs.datadoghq.com/fr/integrations/aws
 
 
+{{< get-dependencies >}}

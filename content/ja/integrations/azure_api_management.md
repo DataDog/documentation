@@ -49,3 +49,4 @@ Azure API Management インテグレーションには、サービスのチェ�
 [3]: https://docs.datadoghq.com/ja/help/
 
 
+{{< get-dependencies >}}

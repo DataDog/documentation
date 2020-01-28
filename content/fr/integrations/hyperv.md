@@ -83,3 +83,4 @@ Documentation, liens et articles supplémentaires utiles :
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
 
 
+{{< get-dependencies >}}

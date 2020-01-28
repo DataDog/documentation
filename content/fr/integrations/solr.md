@@ -213,3 +213,4 @@ Vous pouvez utiliser le filtre `attribute` comme suit :
 [9]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
 
 
+{{< get-dependencies >}}

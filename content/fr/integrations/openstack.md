@@ -201,3 +201,4 @@ Consultez également nos articles de blog suivants :
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
 
 
+{{< get-dependencies >}}

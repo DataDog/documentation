@@ -79,3 +79,4 @@ Gremlin インテグレーションには、サービスのチェック機能は
 [6]: https://www.datadoghq.com/blog
 
 
+{{< get-dependencies >}}

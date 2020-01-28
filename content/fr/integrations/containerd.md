@@ -108,3 +108,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
 
 
+{{< get-dependencies >}}

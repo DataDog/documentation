@@ -117,3 +117,4 @@ Si les métriques `aws.billing.actual_spend`, `aws.billing.forecasted_spend` ou 
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
 
 
+{{< get-dependencies >}}

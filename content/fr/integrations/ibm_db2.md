@@ -202,3 +202,4 @@ Documentation, liens et articles supplémentaires utiles :
 [12]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
 
 
+{{< get-dependencies >}}

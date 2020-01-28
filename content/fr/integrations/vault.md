@@ -153,3 +153,4 @@ Documentation, liens et articles supplémentaires utiles :
 [12]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
 [13]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
 
+{{< get-dependencies >}}

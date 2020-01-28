@@ -104,3 +104,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [11]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
 
 
+{{< get-dependencies >}}

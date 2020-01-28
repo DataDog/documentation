@@ -116,3 +116,4 @@ Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les 
 [10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
 
 
+{{< get-dependencies >}}

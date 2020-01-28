@@ -67,3 +67,4 @@ Le check Exchange Server n'inclut aucun check de service.
 [5]: https://github.com/DataDog/integrations-core/blob/master/exchange_server/metadata.csv
 
 
+{{< get-dependencies >}}

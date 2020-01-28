@@ -232,3 +232,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 [18]: https://docs.datadoghq.com/fr/agent/docker/log/
 
 
+{{< get-dependencies >}}

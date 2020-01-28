@@ -117,3 +117,4 @@ eventstore チェックには、サービスのチェック機能は含まれま
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
 
 
+{{< get-dependencies >}}
