@@ -3,7 +3,6 @@ title: Configurer Google en tant que fournisseur d'identité SAML
 kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-configure-google-as-a-saml-idp/
-disable_toc: true
 further_reading:
   - link: account_management/saml
     tag: Documentation
@@ -12,11 +11,11 @@ further_reading:
     tag: Documentation
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---
-### Configuration de Google en tant que fournisseur d'identité SAML
+## Configuration de Google en tant que fournisseur d'identité SAML
 
 [Consultez les instructions Google spécifiques][1].
 
-### Pour la catégorie « Service Provider Details »
+## Pour la catégorie « Service Provider Details »
 
 **Pré-requis** ; vous devez avoir coché « IDP initiated SSO » sur la page de configuration de SAML de Datadog.
 
@@ -28,7 +27,7 @@ further_reading:
 * **Signed Response** : ne cochez pas cette case.
 * **Name ID** : « informations de base » « principale adresse e-mail »
 
-### Pour la catégorie « Attribute Mapping »
+## Pour la catégorie « Attribute Mapping »
 
 * « urn:oid:1.3.6.1.4.1.5923.1.1.1.6 » « informations de base » « principale adresse e-mail »
 
@@ -39,7 +38,7 @@ Ajoutez également :
 
 {{< img src="account_management/saml/zAttributeMapping.png" alt="Mappage d'attributs" style="width:75%;">}}
 
-### Pour aller plus loin
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 

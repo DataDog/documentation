@@ -25,9 +25,17 @@ nav_sections:
             icon: integration.svg
             desc: 'Rassembler des données depuis vos systèmes, apps et services'
           - title: Dashboards
-            link: graphing/dashboards/
+            link: dashboards/
             icon: dashboard.svg
             desc: Visualiser vos données pour mieux les comprendre
+          - title: Infrastructure
+            link: infrastructure/
+            icon: host-map.svg
+            desc: 'Suivez vos hosts, conteneurs, processus et fonctions sans serveur'
+          - title: Métriques
+            link: metrics/
+            icon: metric.svg
+            desc: Explorez vos métriques et créez des distributions
           - title: Alertes
             link: monitors/
             icon: attention-circled.svg
@@ -41,13 +49,21 @@ nav_sections:
             icon: logs.svg
             desc: 'Recueillir, traiter, explorer, surveiller et archiver vos logs'
           - title: Synthetics
-            link: 'https://www.datadoghq.com/synthetics/'
+            link: synthetics/
             icon: synthetics.svg
             desc: 'Garantir la disponibilité de l''application, identifier les problèmes locaux et surveiller les performances'
+          - title: Real User Monitoring
+            link: real_user_monitoring/
+            icon: rum.svg
+            desc: Visualisez et analysez les performances de vos applications frontend
+          - title: Surveillance réseau
+            link: network_performance_monitoring/
+            icon: network.svg
+            desc: Visualisez en détail votre trafic réseau grâce aux objets tagués
           - title: Watchdog
             link: watchdog/
             icon: watchdog.svg
-            desc: Afficher automatiquement les tendances des métriques de votre application
+            desc: Identifiez automatiquement les tendances de vos métriques d'application et d'infrastructure
   - nav_section:
       - name: Configuration
       - navtiles:

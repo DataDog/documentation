@@ -4,7 +4,6 @@ kind: documentation
 aliases:
    - /libraries/
    - /developers/faq/monitoring-akka/
-disable_toc: true
 ---
 
 ## API and DogStatsD client libraries
@@ -43,11 +42,12 @@ There are multiple community projects available to maintain, manage, or backup m
 
 | Language  | Library          | Author               |
 |-----------|------------------|----------------------|
-| Python    | [DogPush][10]    | [TrueAccord][11]     |
-| Ruby      | [barkdog][12]    | [codenize-tools][13] |
-| Ruby      | [interferon][14] | [Airbnb][15]         |
-| Ruby      | [dogwatch][16]   | [Rapid7][17]         |
-| Terraform | [Terraform][18]  | [Terraform][19]      |
+| Python    | [DogPush][10]              | [TrueAccord][11]     |
+| Ruby      | [barkdog][12]              | [codenize-tools][13] |
+| Ruby      | [interferon][14]           | [Airbnb][15]         |
+| Ruby      | [dogwatch][16]             | [Rapid7][17]         |
+| Terraform | [Terraform][18]            | [Terraform][19]      |
+| Terraform | [datadog-to-terraform][62] | [Intercom][63]       |
 
 ## Community integrations
 
@@ -223,3 +223,5 @@ If you've written a Datadog library and would like to add it to this page, send 
 [59]: https://github.com/urosgruber/dd-agent-FreeBSD
 [60]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [61]: mailto:code@datadoghq.com
+[62]: https://github.com/intercom/datadog-to-terraform
+[63]: https://github.com/intercom

@@ -63,13 +63,13 @@ Tags for the [integrations][5] installed with the Agent are configured with YAML
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
-```text
+```yaml
 tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 or
 
-```text
+```yaml
 tags:
     - "<KEY_1>:<VALUE_1>"
     - "<KEY_2>:<VALUE_2>"

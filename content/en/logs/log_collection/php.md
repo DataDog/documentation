@@ -190,15 +190,8 @@ instances:
 ## Log section
 logs:
 
-    ## - type: file (mandatory) type of log input source (tcp / udp / file)
-    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service: (mandatory) name of the service owning the log
-    ##   source: (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: /path/to/your/php/application-json.log
+    path: "/path/to/your/php/application-json.log"
     service: php
     source: php
     sourcecategory: sourcecode

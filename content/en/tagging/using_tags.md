@@ -10,6 +10,9 @@ further_reading:
 - link: "tagging/assigning_tags"
   tag: "Documentation"
   text: "Learn how to assign tags"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices/"
+  tag: "Blog"
+  text: "Best practices for tagging your infrastructure and applications"
 ---
 
 After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. When including or excluding multiple tags:
@@ -19,9 +22,9 @@ After [assigning tags][1], start using them to filter and group your data in you
 
 ## Events
 
-The [Events Stream][2] shows all the events that have occurred in your environment over the time period specified. Use tags to filter down the event list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events that come from a host or an [integration][3] with that tag. The example below is used to search for the tag `service:coffee-house` using `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma: `tags:service:coffee-house,host:coffeehouseprod`.
+The [Events stream][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. In the example below, `tags:service:coffee-house` is used to search for the tag `service:coffee-house`. To search multiple tags inclusively, separate each tag with OR: `tags:service:coffee-house OR host:coffeehouseprod`. To search multiple tags exclusively, separate each tag using commas: `tags:service:coffee-house,host:coffeehouseprod.`
 
-{{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags"  style="width:80%;">}}
+{{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags" style="width:80%;">}}
 
 ## Dashboards
 
@@ -282,17 +285,17 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 Tags can be used in various ways with the [API][15]. See the list below for links to those sections:
 
-- [Schedule monitor downtime][16]
-- [Query the event stream][17]
-- [Search hosts][18]
-- [Integrations][19] for [AWS][20] and [Google Cloud][21]
-- [Querying timeseries points][22]
-- [Get all monitor details][23]
-- [Mute a monitor][24]
-- [Monitors search][25]
-- [Monitors group search][26]
-- [Create a Screenboard][27]
-- [Create a Timeboard][28]
+* [Schedule monitor downtime][16]
+* [Query the event stream][17]
+* [Search hosts][18]
+* [Integrations][19] for [AWS][20] and [Google Cloud][21]
+* [Querying timeseries points][22]
+* [Get all monitor details][23]
+* [Mute a monitor][24]
+* [Monitors search][25]
+* [Monitors group search][26]
+* [Create a Screenboard][27]
+* [Create a Timeboard][28]
 
 ## Further Reading
 

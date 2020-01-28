@@ -1,7 +1,6 @@
 ---
 title: Logging Without Limits™ Guide
 kind: guide
-disable_toc: true
 further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
@@ -27,8 +26,7 @@ This guide identifies key components of Logging Without Limits™ such as [Patte
 
 Your most logged service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
-
-{{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identify a most logged service status" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identify a most logging service status" style="width:100%;">}}
 
 **To identify your most logged service status**:
 
@@ -42,7 +40,8 @@ Your most logged service contains several logs, some of which may be irrelevant 
 **Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `network.client.ip` versus `service` or `status`.
 
 ## 2. Identify high volume logging patterns
-Now that you have identified your most logged service status, switch to the [patterns view][4], located next to the graph view in the top left of Log Explorer, to automatically see your log patterns for the selected context.
+
+Now that you have identified your most logging service status, switch to the [patterns view][4], located next to the graph view in the top left of Log Explorer, to automatically see your log patterns for the selected context.
 
 A context is composed of a time range and a search query. Each pattern comes with highlights to get you straight to its characteristic features. A mini graph displays a rough timeline for the volume of its logs to help you identify how that pattern differs from other patterns. Sections of logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
 
@@ -112,7 +111,7 @@ When an anomaly is detected, an alert will be sent to all who are tagged. This a
 ## Review
 
 In this guide, you learned how to use Logging without Limits™ to:
-* [1. Identify your most logged service status](#1-identify-your-most-logging-service-status)
+* [1. Identify your most logging service status](#1-identify-your-most-logging-service-status)
 * [2. Identify high volume logging patterns](#2-identify-high-volume-logging-patterns)
 * [3. Create a log pattern exclusion filter](#3-create-a-log-pattern-exclusion-filter)
 * [4. Generate metrics to track excluded logs](#4-generate-metrics-to-track-excluded-logs)

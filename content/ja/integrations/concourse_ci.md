@@ -80,6 +80,3 @@ Metric Emitter (Datadog):
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv
 [6]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

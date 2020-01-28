@@ -1,7 +1,6 @@
 ---
 title: Use Python 3 with Datadog Agent v6
 kind: guide
-disable_toc: true
 further_reading:
 - link: "agent/versions/upgrade_to_agent_v7"
   tag: "Documentation"

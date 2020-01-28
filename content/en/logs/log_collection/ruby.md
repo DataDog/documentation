@@ -89,7 +89,7 @@ This section describe the minimum setup required in order to forward your Rails 
     ```yaml
       logs:
         - type: file
-          path: <RUBY_LOG_FILE_PATH>.log
+          path: "<RUBY_LOG_FILE_PATH>.log"
           service: ruby
           source: ruby
           sourcecategory: sourcecode

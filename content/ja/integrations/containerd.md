@@ -106,6 +106,3 @@ Containerd チェックは、イベントを収集できます。`filters` を�
 [2]: https://docs.datadoghq.com/ja/help
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
-
-
-{{< get-dependencies >}}

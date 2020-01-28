@@ -114,6 +114,3 @@ Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les 
 [8]: https://github.com/basho/riak_cs/wiki/Riak-cs-and-stanchion-metrics
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
-
-
-{{< get-dependencies >}}

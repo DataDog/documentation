@@ -47,6 +47,3 @@ Azure Customer Insights インテグレーションには、サービスのチ�
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_customer_insights/azure_customer_insights_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
-
-
-{{< get-dependencies >}}
