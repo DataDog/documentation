@@ -21,61 +21,9 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
-## Usage
-
-Slack alerts are available for [monitors][4] and the [event stream][5]. The format for `@notifications` is:
-
-* Single Slack account: `@slack-<CHANNEL_NAME>`
-* Multiple Slack accounts: `@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>`
-
-**Note**: Trailing special characters in channel names are not supported, for example: `@slack--critical_alerts--` won't receive any notifications.
-
-### Notifications
-
-#### Global
-
-To use Slack's `@here` or `@channel` commands, use `<!here>` or `<!channel>`. The following example sends the message `@here Test alert!` to the test Slack channel:
-
-```text
-@slack-MAIN_ACCOUNT-test <!here> Test alert!
-```
-
-#### Groups
-
-To notify Slack user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, query [Slack's usergroups.list API endpoint][3]. For example, a user group named `testers` with the group ID `12345` uses the following:
-
-```text
-@slack-MAIN_ACCOUNT_test <!subteam^12345|testers> Test alert!
-```
-
-#### User
-
-To notify a user with Slack's `@mention` feature, wrap the `@username` in `< >`. The following example sends the message `@john.smith Test alert!` to the test Slack channel:
-
-```text
-@slack-test <@john.smith> Test alert!
-```
-
-**Note**: If you are having trouble, use the Slack `username` instead of the display name. Your `username` is located in [Slack account settings][2] under **Username**.
-
-### Template variables
-
-Use message template variables within a monitor message to dynamically build Slack mentions. For example, if the rendered variable is setup as a channel in the Slack integration:
-
-* `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
-
-* `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
-
-Or create an **@-mention** that goes directly to a specific email:
-
-* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
-
-[2]: http://slack.com/account/settings
-[3]: https://api.slack.com/methods/usergroups.list
-
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][5], add to the **Say what's happening** and **Notify your team** sections.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Say what's happening** and **Notify your team** sections.
 
 ## Say what's happening
 
@@ -89,7 +37,7 @@ It is helpful to use a succinct explanation of the monitor so a notified team me
 
 ### Message
 
-The message field allows standard [Markdown formatting][1] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts using [@notifications](#notification).
+The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts using [@notifications](#notification).
 
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
@@ -134,23 +82,15 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 
 | Integration    | Prefix       | Examples       |
 |----------------|--------------|----------------|
-| [Jira][6]      | `@jira`      | [Examples][7]  |
-| [PagerDuty][8] | `@pagerduty` | [Examples][9]  |
-| [Slack][10]    | `@slack`     | [Examples][11] |
-| [Webhooks][12] | `@webhook`   | [Examples][13] |
+| [Jira][3]      | `@jira`      | [Examples][4]  |
+| [PagerDuty][5] | `@pagerduty` | [Examples][6]  |
+| [Slack][7]    | `@slack`     | [Examples][7] |
+| [Webhooks][8] | `@webhook`   | [Examples][9] |
 
-[6]: /integrations/jira
-[7]: /integrations/jira/#use-cases
-[8]: /integrations/pagerduty
-[9]: /integrations/pagerduty/#troubleshooting
-[10]: /integrations/slack
-[11]: /integrations/slack
-[12]: /integrations/webhooks
-[13]: /integrations/webhooks/#usage
 
 ### Modifications
 
-When a monitor is created, modified, silenced, or deleted an [event][3] is created. Set the `Notify` option to notify team members and chat services of these events.
+When a monitor is created, modified, silenced, or deleted an [event][10] is created. Set the `Notify` option to notify team members and chat services of these events.
 
 ### Edit restrictions
 
@@ -174,7 +114,7 @@ After you define your monitor, test your monitor's notifications with the **Test
 * Event
 * Composite
 
-1. Choose the monitor case to test in the test notifications pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+1. Choose the monitor case to test in the test notifications pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][11] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:50%;" >}}
 
@@ -509,7 +449,14 @@ To include a comment in the monitor message that only shows in the monitor edit 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://daringfireball.net/projects/markdown/syntax
-[3]: /events
-[4]: /monitors/faq/what-are-recovery-thresholds
-[5]: /monitors/monitor_types
+[1]: /monitors/monitor_types
+[2]: http://daringfireball.net/projects/markdown/syntax
+[3]: /integrations/jira
+[4]: /integrations/jira/#use-cases
+[5]: /integrations/pagerduty
+[6]: /integrations/pagerduty/#troubleshooting
+[7]: /integrations/slack
+[8]: /integrations/webhooks
+[9]: /integrations/webhooks/#usage
+[10]: /events
+[11]: /monitors/faq/what-are-recovery-thresholds
