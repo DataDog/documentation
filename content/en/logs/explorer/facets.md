@@ -25,7 +25,7 @@ further_reading:
 Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
 
 
-*Note: Facets support fast search and analytics capabilities around all **indexed** logs. You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.
+*Note: Facets support fast search and analytics capabilities around all **indexed** logs. You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.*
 
 Facets are meant for either qualitative and quantitative data. For quantitative data, Datadog specifically uses the word "Measure" instead of "Facet". For qualitative data, facets can be seen as "Dimensions". 
 
@@ -174,8 +174,16 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 ### Alias Facets
 
+*Note: aliasing facet action is restricted to admin users*
 
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting - see [Naming Convention][26] for reference.
 
+Aliasing facets is an option you have to smoothly realign teams having natively different naming conventions into the standard one emerging for your organisation. When aliasing a (aliased) facet towards a (standard) facet:
+
+* Users can use whichever facet between aliased and standard for troubleshooting. But preferrably the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
+* Users are nudged to use the standard facet in place of the aliased one (see #aliased-facets above). 
+
+To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. And pick the destination facets among all the [standard][27] ones existing for your organisation.
 
 
 ## Further Reading
@@ -215,5 +223,6 @@ Autocomplete based on the content in logs of the current views helps you definin
 [24]: /logs/processing/attributes_naming_convention/
 
 [25]: /logs/processing/#reserved-attributes
-[26]: /logs/processing/attributes_naming_convention/#default-standard-attribute-list
+[26]: /logs/processing/attributes_naming_convention/
+[27]: /logs/processing/attributes_naming_convention/#standard-attribute-list
 
