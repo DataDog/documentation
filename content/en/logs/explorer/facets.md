@@ -35,10 +35,8 @@ Facets are meant for either qualitative and quantitative data. For quantitative 
 Use dimensions when you need:
 
 * to **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging or production environments.
-
-* to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog GeoIP Processor.
-
-* to **count unique values**. For instance create a facet on a `user.email` from your [Kong][16] logs, to know how many users per day connects to your website.
+* to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog [GeoIP Processor][21].
+* to **count unique values**. For instance create a facet on a `user.email` from your [Kong][16] logs, to know how many users connect every day to your website.
 
 Dimensions can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search query language][17] for reference.
 
@@ -48,12 +46,61 @@ Dimensions can be of string or numerical (integer) type. While assigning string 
 Use measures when you need:
 
 * to **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][18] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
-
 * to **range filter** your logs. For instance, create a measure on the execution time of [Ansible][19] taks, and see the list of servers having most runs taking more than 10s. 
-
 * to **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][20] microservice. And search all the logs, starting with the one with highest amount. 
 
+
 Measures come with either (long) integer or double value, for equivalent capabilities.
+
+**Units**
+
+Measures support units (Time or Size) for easier handling of orders of magnitude at query time and display time. 
+
+Unit is a property of the measure itself, not of the field. Meaning in the example of the a `duration` measure in nanoseconds: if you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
+
+1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][22]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`. 
+1. Use `duration:>20ms` to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
+
+
+
+## The Facet Panel
+
+
+### Slice and dice from the Facet Panel
+
+The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to throught to your data. 
+
+
+**navigate facets**
+
+Open a facet to see a summary of its content for the scope of the current query. 
+
+**Dimensions** come with a top list of unique values, and a count of logs matching each of them. Adapt the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
+
+**Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the query to different bounds.
+
+
+**search facets**
+
+Find the facets you need 
+
+
+
+
+
+*** See all
+
+
+A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
+
+{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
+
+
+### Hidden Facets
+
+
+
+
 
 
 ## Curate Facets
@@ -103,20 +150,6 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 
 
 
-## The Facet Panel
-
-
-### List of Facets
-
-A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
-
-{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
-
-
-
-### Hidden Facets
-
-
 
 
 ## Setup
@@ -153,7 +186,8 @@ After being processed with the help of pipelines and processors, your logs attri
 [19] /integrations/ansible/
 [20] /integrations/python/
 
-
+[21] /logs/processing/processors/?tab=ui#geoip-parser
+[22] /logs/processing/processors/?tab=ui#arithmetic-processor
 
 [5] /logs/processing/#reserved-attributes
 
