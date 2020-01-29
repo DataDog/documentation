@@ -121,6 +121,16 @@ In case multiple facets match your filter, Datadog helps you figure out which fa
 * Facets relying on aliased attributes are considered less relevant
 
 
+### Aliased facets
+
+Some facets may have been aliased (see #alias-facets hereafter). Such aliased facets are still valid for slice and dicing, but are considered deprecated by your organisation. 
+
+Indeed, when troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the "standard" facet rather than the aliased facet. Which makes correlation on content from diverse origin more straightforward. 
+
+If you see an aliased facet in your facet list, consider using the "standard" facet instead by clicking "swith to alias" menu item. This action hides the aliased facet and unhide the standard facet. If doing so you update a saved view, consider saving the saved view so that the "migration" apply to everyone using this saved view.
+
+Reason to use keep using the non-standard "aliased" version of the facet is when you're troubleshooting against old content (before the aliasing for this facet has been setup by your organisation).
+
 
 ## Curate Facets
 
@@ -166,6 +176,11 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 
 
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /logs/explorer/search/
