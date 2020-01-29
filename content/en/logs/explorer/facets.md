@@ -82,7 +82,26 @@ Open a facet to see a summary of its content for the scope of the current query.
 
 ### Hide facets
 
-Your organisation has a whole collection of facets, but most likely only a subset of them is valuable to you in a specific context. Hide 
+Your organisation has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. But most likely, only a subset of these facets is valuable to you in a specific troubleshooting context. 
+
+
+Hide facets you don't need, so that you can stay focused on the ones you need on a routine basis.  
+
+
+Hidden facets are still visible in the facet search (see #filter-facets hereafter) in case you punctually need it. Unhide hidden facet from there.
+
+
+**Hidden facets and teammates**
+
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][23] (hidden facets is part of the context saved in a saved view).
+
+
+**Hidden facets in other contexts**
+
+Hidden facets are also hidden from auto-complete in the search bar, and drop down in analytycs (measure, group-by) for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
+
+Hidden facets have no impact aside from the log explorer (livetail, monitors or widget definition in dashboards for instance). 
+
 
 
 ### Group facets
@@ -189,6 +208,8 @@ After being processed with the help of pipelines and processors, your logs attri
 
 [21] /logs/processing/processors/?tab=ui#geoip-parser
 [22] /logs/processing/processors/?tab=ui#arithmetic-processor
+[23] /logs/explorer/saved_views/
+
 
 [5] /logs/processing/#reserved-attributes
 
