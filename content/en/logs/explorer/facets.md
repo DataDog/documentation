@@ -87,8 +87,12 @@ Your organisation has a whole collection of facets to address its comprehensive 
 
 Hide facets you don't need, so that you can stay focused on the ones you need on a routine basis.  
 
+{{< img src="logs/explorer/facet/hide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 Hidden facets are still visible in the facet search (see #filter-facets hereafter) in case you punctually need it. Unhide hidden facet from there.
+
+{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 **Hidden facets and teammates**
@@ -120,6 +124,8 @@ In case multiple facets match your filter, Datadog helps you figure out which fa
 * Facets relying on [standard attributes][24] are considered more relevant
 * Facets relying on aliased attributes are considered less relevant
 
+{{< img src="logs/explorer/facet/relevant_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 ### Aliased facets
 
@@ -128,6 +134,9 @@ Some facets may have been aliased (see #alias-facets hereafter). Such aliased fa
 Indeed, when troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the "standard" facet rather than the aliased facet. Which makes correlation on content from diverse origin more straightforward. 
 
 If you see an aliased facet in your facet list, consider using the "standard" facet instead by clicking "swith to alias" menu item. This action hides the aliased facet and unhide the standard facet. If doing so you update a saved view, consider saving the saved view so that the "migration" apply to everyone using this saved view.
+
+{{< img src="logs/explorer/facet/switch_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 Reason to use keep using the non-standard "aliased" version of the facet is when you're troubleshooting against old content (before the aliasing for this facet has been setup by your organisation).
 
@@ -157,7 +166,7 @@ Navigate in the [Log Explorer][1] to whichever log of interest bearing the field
 * if the field has a string value, only facet (dimension) creation is available
 * if the field has a numerical value, both facet (dimension) and measure creation are available.
 
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_attribute.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 **Create facet from the facet list**
@@ -170,6 +179,8 @@ Define the underlying field (key) name for this facet:
 * Use the attribute path for attributes, with `@` prefix. 
 
 Autocomplete based on the content in logs of the current views helps you defining the proper field name. But you can use virtually any value here, specifically in case you don't have mathcing logs (yet) flowing in indexes.
+
+{{< img src="logs/explorer/facet/create_facet_from_scratch.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 ### Alias Facets
@@ -184,6 +195,9 @@ Aliasing facets is an option you have to smoothly realign teams having natively 
 * Users are nudged to use the standard facet in place of the aliased one (see #aliased-facets above). 
 
 To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. And pick the destination facets among all the [standard][27] ones existing for your organisation.
+
+{{< img src="logs/explorer/facet/alias_facet_cta.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_modal.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 ## Further Reading
