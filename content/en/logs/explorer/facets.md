@@ -38,6 +38,8 @@ Use dimensions when you need:
 * to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog [GeoIP Processor][21].
 * to **count unique values**. For instance create a facet on a `user.email` from your [Kong][16] logs, to know how many users connect every day to your website.
 
+**Types**
+
 Dimensions can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][17] for reference.
 
 
@@ -49,6 +51,7 @@ Use measures when you need:
 * to **range filter** your logs. For instance, create a measure on the execution time of [Ansible][19] taks, and see the list of servers having most runs taking more than 10s. 
 * to **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][20] microservice. And search all the logs, starting with the one with highest amount. 
 
+**Types**
 
 Measures come with either (long) integer or double value, for equivalent capabilities.
 
@@ -67,7 +70,7 @@ Meaning in the example of the a `duration` measure in nanoseconds: if you have l
 ## The Facet Panel
 
 
-The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to throught to your data. 
+The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. 
 
 
 Open a facet to see a summary of its content for the scope of the current query. 
@@ -77,7 +80,7 @@ Open a facet to see a summary of its content for the scope of the current query.
 {{< img src="logs/explorer/facet/dimension_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
-{{< img src="logs/explorer/facet/dimension_facet_wilcard.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 
