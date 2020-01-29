@@ -31,7 +31,7 @@ Facets are meant for either qualitative and quantitative data. For quantitative 
 
 Use dimensions when you need:
 
-* to **filter** your logs against specific value(s). For instance, create a facet on an `environment` tag to scope troubleshooting down to development, staging or production environments.
+* to **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][YYY] to scope troubleshooting down to development, staging or production environments.
 
 * to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][YYY] web acess logs enriched with our Datadog GeoIP Processor.
 
@@ -48,12 +48,9 @@ Use measures when you need:
 
 * to **range filter** your logs. For instance, create a measure on the execution time of [Ansible][YYY] taks, and see the list of servers having most runs taking more than 10s. 
 
-* to **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [python] microservice. And search all the logs, starting with the one with highest amount. 
+* to **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python] microservice. And search all the logs, starting with the one with highest amount. 
 
 Measures come with either (long) integer or double value, for equivalent capabilities.
-
-
-### Measures (quantitative facets)
 
 
 ## Curate Facets
@@ -137,5 +134,7 @@ After being processed with the help of pipelines and processors, your logs attri
 [YYY] /integrations/kong/
 [YYY] /tagging/assigning_tags
 
+[5] /logs/processing/#reserved-attributes
 
+[M] /monitors/monitor_types/log/
 
