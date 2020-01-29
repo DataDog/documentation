@@ -8,14 +8,12 @@ further_reading:
   text: "Learn how to configure advanced options for Actions"
 ---
 
-## Overview
-
 Actions are a series of steps that you can record for a browser test, which you can then edit or build on. You can also configure certain actions with [advanced options][1].
 
 **Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with [advanced options][2].
 
 
-### Assertion
+## Assertion
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
 
@@ -32,7 +30,7 @@ Assertions allow you to check whether an element, some content, or some text is 
 
 [Advanced options][4] are also available for assertions.
 
-### Navigation
+## Navigation
 
 The navigation action allows you to:
 
@@ -41,13 +39,13 @@ The navigation action allows you to:
 * Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][3].
 * Choose the email you are interested in and click the link you want your browser test to click on.
 
-### Hover
+## Hover
 
 This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
 
 After selecting the Hover action, click on the element you want to choose to create a new step.
 
-### Upload
+## Upload
 
 You can record the uploading of files as an action. To record an upload step you can:
 
@@ -58,9 +56,9 @@ You can record the uploading of files as an action. To record an upload step you
 
 This is limited to 10 files, with a limit of 5MB each.
 
-### Variable
+## Variable
 
-#### Create a variable
+### Create a variable
 
 {{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true"  width="60%">}}
 
@@ -77,7 +75,7 @@ To create a variable, first give it a name then define its value from:
 | `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
 | `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
 
-#### Use the variable
+### Use the variable
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
@@ -95,13 +93,14 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:40%;">}}
 
-### Wait
+## Wait
 
 By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
-### Subtests
+## Subtests
+
 You can run browser tests within other browser tests. [Advanced options][6] also allow you to choose where you want your subtest to be played.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
