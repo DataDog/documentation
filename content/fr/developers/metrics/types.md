@@ -1,7 +1,6 @@
 ---
 title: Types de métriques
 kind: documentation
-disable_toc: true
 aliases:
   - /fr/developers/metrics/counts/
   - /fr/developers/metrics/distributions/

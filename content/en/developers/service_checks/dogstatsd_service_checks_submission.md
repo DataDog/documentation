@@ -2,7 +2,6 @@
 title: "Service Checks Submission: DogStatsD"
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
-disable_toc: true
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"

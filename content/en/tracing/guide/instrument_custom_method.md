@@ -1,7 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -16,6 +15,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _8 minutes to complete_
 
 {{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View"  style="width:90%;">}}

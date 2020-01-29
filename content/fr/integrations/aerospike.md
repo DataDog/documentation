@@ -56,7 +56,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -95,6 +95,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [4]: https://github.com/DataDog/integrations-core/blob/master/aerospike/metadata.csv
 [5]: https://docs.datadoghq.com/fr/help
 [6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-
-
-{{< get-dependencies >}}

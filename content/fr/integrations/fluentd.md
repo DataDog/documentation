@@ -230,6 +230,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 [16]: https://docs.datadoghq.com/fr/help
 [17]: https://www.datadoghq.com/blog/monitor-fluentd-datadog
 [18]: https://docs.datadoghq.com/fr/agent/docker/log/
-
-
-{{< get-dependencies >}}

@@ -1,0 +1,41 @@
+{{ $ctx := .ctx }}
+{{ $type := .type}}
+{{ $.Scratch.Set "editURL" "" }}
+
+{{ if $ctx.Params.dependencies }}
+{{/* Files with dependencies link to corresponding URL */}}
+
+    {{ $deps := $ctx.Params.dependencies }}
+    {{ $depsIsArray := reflect.IsSlice $deps }}
+
+    {{ if $depsIsArray }}
+
+        {{ range $dep := $deps }}
+
+            {{ if in $dep "/blob/" }}
+
+                {{/* Find Replace /blob/ to /edit/ */}}
+                {{ $tmpURL := replace $dep "/blob/" "/edit/" }}
+
+                {{/* Set Scratch */}}
+                {{ $ctx.Scratch.Set "editURL" $tmpURL }}
+                {{ $editLink := $ctx.Scratch.Get "editURL" }}
+
+                {{ with $ctx.File }}
+                    {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
+                {{ end }}
+
+            {{ end }}
+
+        {{ end }}
+
+    {{ end }}
+
+{{ else if (eq $ctx.Section "integrations" )}}
+{{/* Files with integrations path and no dependencies are not editable */}}
+{{ else }}
+{{/* Not in integrations edit existing docs file */}}
+        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
+        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
+
+{{ end }}

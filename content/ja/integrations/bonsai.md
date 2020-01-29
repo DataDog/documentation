@@ -104,6 +104,3 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 [7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
 [8]: https://docs.datadoghq.com/ja/help
 [9]: https://www.datadoghq.com/blog
-
-
-{{< get-dependencies >}}

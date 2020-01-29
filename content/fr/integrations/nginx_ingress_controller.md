@@ -137,6 +137,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -142,6 +142,3 @@ Lighthouse インテグレーションには、サービスのチェック機能
 [15]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [16]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/metadata.csv
 [17]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

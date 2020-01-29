@@ -12,6 +12,7 @@ has_logo: true
 integration_title: Sinatra
 is_public: true
 public_title: Datadog-Sinatra Integration
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md"]
 supported_os:
 - linux
 - mac_os

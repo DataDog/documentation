@@ -1,7 +1,6 @@
 ---
 title: Debug Mode
 kind: documentation
-disable_toc: true
 aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log

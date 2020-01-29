@@ -289,7 +289,7 @@ Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lam
     }
     ```
 
-    Pour en savoir plus sur l'utilisation du pilote de log awslogs dans vos définitions de tâches afin d'envoyer des logs de conteneur à CloudWatch Logs, référez-vous à la section [Utilisation du pilote du journal awslogs][30].
+    Pour en savoir plus sur l'utilisation du pilote de log awslogs dans vos définitions de tâches afin d'envoyer des logs de conteneur à CloudWatch Logs, référez-vous à la section [Using the awslogs Log Driver][30].
 
     Ce pilote recueille les logs générés par le conteneur et les envoie directement à CloudWatch.
 
@@ -364,4 +364,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [34]: https://www.datadoghq.com/blog/monitor-aws-fargate
 
 
-{{< get-dependencies >}}

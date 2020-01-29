@@ -1,7 +1,6 @@
 ---
 title: Network Page
 kind: documentation
-disable_toc: true
 description: Explore your Network data between each source and destination across your stack.
 aliases:
 - network_performance_monitoring/network_table

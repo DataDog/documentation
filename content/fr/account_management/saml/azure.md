@@ -3,7 +3,6 @@ title: "Configurer Azure\_AD en tant que fournisseur d'identité SAML"
 kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
-disable_toc: true
 further_reading:
   - link: account_management/saml
     tag: Documentation
@@ -15,7 +14,7 @@ further_reading:
 Vous trouverez ci-dessous un guide détaillé pour configurer Azure AD en tant que fournisseur d'identité SAML dans Datadog :
 **Remarque** : un abonnement Azure AD Premium est requis pour configurer ce service.
 
-#### Configuration
+## Configuration
 
 1. Accédez au site `https://portal.azure.com/`.
 
@@ -76,7 +75,7 @@ Vous trouverez ci-dessous un guide détaillé pour configurer Azure AD en tant 
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12" style="width:70%;">}}
 
-#### Facultatif
+## Facultatif
 
 Si vous cliquez sur un bouton ou un lien Datadog pour bénéficier de l'authentification unique, vous devez ajouter une URL de connexion. Pour ce faire, revenez à la section Configuration SSO de l'application Azure (étape 8) et cochez la case **Afficher les paramètres d'URL avancés** :
 
@@ -84,7 +83,7 @@ Collez ensuite l'URL d'authentification unique affichée dans la [page SAML de D
 
 {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13" style="width:60%;">}}
 
-#### Pour aller plus loin
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
