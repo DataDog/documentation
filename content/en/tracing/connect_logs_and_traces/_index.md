@@ -123,7 +123,7 @@ This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, an
 
 Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection will only display in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
 
 **Automatic Trace ID Injection for Serilog**
 ```csharp
@@ -477,7 +477,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 If you prefer to manually correlate your [traces][1] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
 * Use `CorrelationIdentifier.TraceId` and `CorrelationIdentifier.SpanId` API methods to inject identifiers at the beginning and end of each [span][2] to log (see examples below).
-* Configure MDC to use the injected Keys:
+* Configure MDC to use the injected keys:
   * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
   * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
 * `Serilog` example:
@@ -530,7 +530,7 @@ finally
 }
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are parsed as strings. More information can be found in the [FAQ on this topic][4].
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
 [3]: /logs/log_collection/csharp/#configure-your-logger
