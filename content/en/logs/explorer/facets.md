@@ -22,7 +22,7 @@ further_reading:
 
 ## What are facets for?
 
-Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [Log Monitors][4], or Log Widgets in [Dashboards][5] and [Notebooks][6].
+Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
 
 
 *Note: Facets support fast search and analytics capabilities around all **indexed** logs. You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.
@@ -38,7 +38,7 @@ Use dimensions when you need:
 * to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog [GeoIP Processor][21].
 * to **count unique values**. For instance create a facet on a `user.email` from your [Kong][16] logs, to know how many users connect every day to your website.
 
-Dimensions can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search query language][17] for reference.
+Dimensions can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][17] for reference.
 
 
 ### Measures (quantitative facets)
@@ -54,49 +54,50 @@ Measures come with either (long) integer or double value, for equivalent capabil
 
 **Units**
 
-Measures support units (Time or Size) for easier handling of orders of magnitude at query time and display time. 
+Measures support units (Time or Size) for easier handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. 
 
-Unit is a property of the measure itself, not of the field. Meaning in the example of the a `duration` measure in nanoseconds: if you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
+
+Meaning in the example of the a `duration` measure in nanoseconds: if you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
 1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][22]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`. 
-1. Use `duration:>20ms` to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
+1. Use `duration:>20ms` (see [search syntax][17] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
 
 
 ## The Facet Panel
 
 
-### Slice and dice from the Facet Panel
-
 The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to throught to your data. 
 
 
-**navigate facets**
-
 Open a facet to see a summary of its content for the scope of the current query. 
 
-**Dimensions** come with a top list of unique values, and a count of logs matching each of them. Adapt the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
+**Dimensions** come with a top list of unique values, and a count of logs matching each of them. Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
 
-**Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the query to different bounds.
+**Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
-
-**search facets**
-
-Find the facets you need 
-
-
-
-
-
-*** See all
-
-
-A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
 {{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
 
-### Hidden Facets
+### Hide facets
+
+Your organisation has a whole collection of facets, but most likely only a subset of them is valuable to you in a specific context. Hide 
+
+
+### Group facets
+
+Facets are grouped into meaningful thematics, to ease navigation in the facet list.
+
+
+Assigning or reassigning a group for a facet (see #curate-facets hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities. 
+
+
+### Filter facets
+
+Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search use both facet display name and facet field name to scope down results.
+
+To help you 
 
 
 
