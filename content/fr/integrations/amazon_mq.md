@@ -7,7 +7,7 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques clés d'AWS\_MQ."
+description: "Surveillez des métriques clés d'AWS Amazon\_MQ."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mq/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog'
@@ -84,5 +84,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mq/amazon_mq_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
-
-
