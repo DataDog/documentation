@@ -163,7 +163,7 @@ Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are avail
 
 ### Create Facets
 
-As a matter of good practice, always consider using an existing facet rather than creating a new one (see #alias-facets hereafter). Using a unique facet for information of similar nature fosters cross-team collaboration. 
+As a matter of good practice, always consider using an existing facet rather than creating a new one (see [Alias Facets](#alias-facets) section hereafter). Using a unique facet for information of similar nature fosters cross-team collaboration. 
 
 Note: Once a facet is created, its content is populated **for all new logs** flowing in **either** index.
 
@@ -200,7 +200,13 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting - see [Naming Convention][26] for reference.
 
-Aliasing facets is an option you have to smoothly realign teams having natively different naming conventions into the standard one emerging for your organisation. When aliasing a (aliased) facet towards a (standard) facet:
+Aliasing is an option you have to smoothly realign teams who rely on inconsitent naming conventions to describe similar information. And subsequently, have them all using the standard facet emerging for your organisation. 
+
+**Aliasing facet to facet**
+
+This is the best option if multiple teams in your organisation already created multiple facets for similar content.
+
+When aliasing a (aliased) facet towards a (standard) facet:
 
 * Users can use whichever facet between aliased and standard for troubleshooting. But preferrably the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
 * Users are nudged to use the standard facet in place of the aliased one (see #aliased-facets above). 
@@ -209,6 +215,14 @@ To alias a facet towards a standard one, select the `Alias to...` action item in
 
 {{< img src="logs/explorer/facet/alias_facet_cta.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 {{< img src="logs/explorer/facet/alias_modal.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
+
+**Aliasing attribute to facet**
+
+This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias direcltly the field to an existing facet.
+
+{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 
 ## Further Reading
