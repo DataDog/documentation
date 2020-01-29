@@ -534,6 +534,7 @@ CakeLog::config('debug', array(
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/agent/logs
 [2]: /fr/logs/log_collection/php/#symfony-v2-v3
 [3]: /fr/logs/log_collection/php/#ppi
