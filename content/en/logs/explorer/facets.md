@@ -203,7 +203,8 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting - see [Naming Convention][26] for reference.
 
-Aliasing is an option you have to smoothly realign teams who rely on inconsitent naming conventions to describe similar information. And subsequently, have them all using the standard facet emerging for your organisation. 
+Aliasing is the option you have to smoothly realign teams who rely on inconsitent naming conventions. And subsequently, have them all using the standard facet emerging for your organisation. 
+
 
 **Aliasing facet to facet**
 
