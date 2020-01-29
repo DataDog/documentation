@@ -1,9 +1,9 @@
 ---
-title: Facet Panel
+title: Log Facets
 kind: documentation
-description: "Slice and dice"
+description: "Log Facets and Facet Panel"
 aliases:
-    - /logs/search
+    - /logs/facets
 further_reading:
 - link: "logs/explorer/analytics"
   tag: "Documentation"
