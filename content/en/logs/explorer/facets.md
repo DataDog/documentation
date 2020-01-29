@@ -103,7 +103,6 @@ Hidden facets are also hidden from auto-complete in the search bar, and drop dow
 Hidden facets have no impact aside from the log explorer (livetail, monitors or widget definition in dashboards for instance). 
 
 
-
 ### Group facets
 
 Facets are grouped into meaningful thematics, to ease navigation in the facet list.
@@ -116,10 +115,10 @@ Assigning or reassigning a group for a facet (see #curate-facets hereafter) is o
 
 Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search use both facet display name and facet field name to scope down results.
 
-To help you 
+In case multiple facets match your filter, Datadog helps you figure out which facet is most likely of interest for you with a facet relevance indicator:
 
-
-
+* Facets relying on [standard attributes][24] are considered more relevant
+* Facets relying on aliased attributes are considered less relevant
 
 
 
@@ -129,56 +128,44 @@ To help you
 
 Most common facets such as `Host`, `Service` or `URL Path` or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
-Facets on [Reserved Attributes][5] are available by default.
+Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
+
 
 ### Create Facets
 
+As a matter of good practice, always consider using an existing facet rather than creating a new one (see #alias-facets hereafter). Using a unique facet for information of similar nature fosters cross-team collaboration. 
 
-{{< tabs >}}
-{{% tab "Dimensions" %}}
+Note: Once a facet is created, its content is populated **for all new logs** flowing in **either** index.
 
 
-To start using an attribute as a facet or in the search, click on it and add it as a facet:
+**Create facet from log side panel**
+
+The easiest way to create a facet is to it from the side panel. Doing so, most of the facet details such as the field name or the underlying type of data are pre-filled and it's only a matter of double-checking.
+
+Navigate in the [Log Explorer][1] to whichever log of interest bearing the field to create a facet on. Open the side-panel for this log, click on the corresponding field (either in tags or in attributes), on create a facet from there:
+
+* if the field has a string value, only facet (dimension) creation is available
+* if the field has a numerical value, both facet (dimension) and measure creation are available.
 
 {{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
+**Create facet from the facet list**
 
-{{% /tab %}}
+In case finding a matching log is not an option, create a new facet directly from the facet panel using the *add facet* button.
 
-{{% tab "Measures" %}}
+Define the underlying field (key) name for this facet:
 
+* Use tag group name for tags.
+* Use the attribute path for attributes, with `@` prefix. 
 
-A measure is a attribute with a numerical value contained in your logs.
-
-**Create a Measure**:
-
-To start using an attribute as a measure, click on a numerical attribute of your log:
-
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
-
-**Select the Measure Unit**:
-
-Each measure has its own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and Log Analytics.
-
-{{% /tab %}}
-{{< /tabs >}}
+Autocomplete based on the content in logs of the current views helps you defining the proper field name. But you can use virtually any value here, specifically in case you don't have mathcing logs (yet) flowing in indexes.
 
 
 ### Alias Facets
 
 
 
-
-
-## Setup
-
-After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][3].
-
-**Note**: 
-
-* To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][4].
 
 
 [1] /logs/explorer/search/
@@ -210,7 +197,8 @@ After being processed with the help of pipelines and processors, your logs attri
 [22] /logs/processing/processors/?tab=ui#arithmetic-processor
 [23] /logs/explorer/saved_views/
 
+[24] /logs/processing/attributes_naming_convention/
 
-[5] /logs/processing/#reserved-attributes
-
+[25] /logs/processing/#reserved-attributes
+[26] /logs/processing/attributes_naming_convention/#default-standard-attribute-list
 
