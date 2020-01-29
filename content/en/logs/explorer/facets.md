@@ -85,17 +85,18 @@ Open a facet to see a summary of its content for the scope of the current query.
 
 {{< img src="logs/explorer/facet/measure_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
+
 ### Hide facets
 
 Your organisation has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. But most likely, only a subset of these facets is valuable to you in a specific troubleshooting context. 
 
 
-Hide facets you don't need, so that you can stay focused on the ones you need on a routine basis.  
+Hide facets you don't need on a routine basis, so that you can stay make facet-picking straightforward for most of your troubleshooting sessions.  
 
 {{< img src="logs/explorer/facet/hide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
-Hidden facets are still visible in the facet search (see #filter-facets hereafter) in case you punctually need it. Unhide hidden facet from there.
+Hidden facets are still visible in the facet search (see [Filter Facet](#filter-facets) section hereafter) in case you punctually need it. Unhide hidden facet from there.
 
 {{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
@@ -119,6 +120,8 @@ Facets are grouped into meaningful thematics, to ease navigation in the facet li
 
 Assigning or reassigning a group for a facet (see #curate-facets hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities. 
 
+{{< img src="logs/explorer/facet/group_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 ### Filter facets
 
@@ -135,6 +138,9 @@ In case multiple facets match your filter, Datadog helps you figure out which fa
 ### Aliased facets
 
 Some facets may have been aliased (see #alias-facets hereafter). Such aliased facets are still valid for slice and dicing, but are considered deprecated by your organisation. 
+
+{{< img src="logs/explorer/facet/aliased_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 
 Indeed, when troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the "standard" facet rather than the aliased facet. Which makes correlation on content from diverse origin more straightforward. 
 
