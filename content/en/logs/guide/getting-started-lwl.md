@@ -132,4 +132,4 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [8]: /logs/logs_to_metrics
 [9]: /monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered
-[11]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
+[11]: /logs/indexes/#exclusion-filters
