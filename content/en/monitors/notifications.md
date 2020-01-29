@@ -21,100 +21,46 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
-## Overview
+## Usage
 
-Notifications are a key component of monitors that keep your team informed of issues and help support troubleshooting.
+Slack alerts are available for [monitors][4] and the [event stream][5]. The format for `@notifications` is:
 
-## Say what's happening
+* Single Slack account: `@slack-<CHANNEL_NAME>`
+* Multiple Slack accounts: `@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>`
 
-When creating or editing a monitor, use this section to set the notification sent to your team.
+**Note**: Trailing special characters in channel names are not supported, for example: `@slack--critical_alerts--` won't receive any notifications.
 
-### Title
+### Notifications
 
-Add a unique title to your monitor (required). Multi-alert monitors can make use of [tag variables](#).
+#### Global
 
-It is helpful to use a succinct explanation of the monitor so a notified team member can quickly understand the issue.
-
-### Message
-
-The message field allows standard [Markdown formatting][1] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text to send to different contacts using [@-notifications](#notification).
-
-A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
-
-### Tags
-
-Monitor tags are different than metric tags. They are used in the UI to group and search for monitors.
-
-### Renotify
-
-Optionally enable monitor renotification. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][2]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
-
-## Notify your team
-
-Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the [message](#message) field.
-
-### @-notification
-
-Send the monitor notification to the appropriate endpoint:
-
-* Notify a Datadog user via email by adding `@<DD_USER_EMAIL>` in your notification message.
-* Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
-* Install the Slack integration to send your notifications directly in the appropriate channel.
-
-**Notes**:
-
-* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
-* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
-* Removing the `@notification` from either section removes it from both sections.
-
-#### Integrations
-
-{{< tabs >}}
-{{% tab "Jira" %}}
-
-After setting up the [Jira integration][1], type `@jira` in your notification message to see the list of available options. See the example [use cases][2] in the integration documentation.
-
-[1]: /integrations/jira
-[2]: /integrations/jira/#use-cases
-{{% /tab %}}
-{{% tab "PagerDuty" %}}
-
-After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
-
-[1]: /integrations/pagerduty
-{{% /tab %}}
-{{% tab "Slack" %}}
-
-After setting up the [Slack integration][1], type `@slack` in your notification message to see the available list of channels to send your notification to.
-
-#### @-mentions in Slack from monitor alert
-
-Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
-
-For example this configuration:
-{{< img src="monitors/notifications/notification_template.png" alt="notification_template"  style="width:50%;" >}}
-
-Would produce this slack message:
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview"  style="width:50%;" >}}
-
-**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][2] under **Username**.
-
-Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
-
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][3]. For example, for a user group named `testers` you would use the following syntax:
+To use Slack's `@here` or `@channel` commands, use `<!here>` or `<!channel>`. The following example sends the message `@here Test alert!` to the test Slack channel:
 
 ```text
-<!subteam^12345|testers>
+@slack-MAIN_ACCOUNT-test <!here> Test alert!
 ```
 
-Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
-e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
+#### Groups
 
-### Using message template variables to dynamically create @-mentions
+To notify Slack user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, query [Slack's usergroups.list API endpoint][3]. For example, a user group named `testers` with the group ID `12345` uses the following:
 
-Use message template variables within a monitor message to dynamically build **@-mentions**.
+```text
+@slack-MAIN_ACCOUNT_test <!subteam^12345|testers> Test alert!
+```
 
-For example, if the rendered variable is setup as a channel in the Slack integration:
+#### User
+
+To notify a user with Slack's `@mention` feature, wrap the `@username` in `< >`. The following example sends the message `@john.smith Test alert!` to the test Slack channel:
+
+```text
+@slack-test <@john.smith> Test alert!
+```
+
+**Note**: If you are having trouble, use the Slack `username` instead of the display name. Your `username` is located in [Slack account settings][2] under **Username**.
+
+### Template variables
+
+Use message template variables within a monitor message to dynamically build Slack mentions. For example, if the rendered variable is setup as a channel in the Slack integration:
 
 * `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
 
@@ -124,17 +70,83 @@ Or create an **@-mention** that goes directly to a specific email:
 
 * `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
-[1]: /integrations/slack
 [2]: http://slack.com/account/settings
 [3]: https://api.slack.com/methods/usergroups.list
-{{% /tab %}}
-{{% tab "Webhooks" %}}
 
-After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
+## Overview
 
-[1]: /integrations/webhooks
-{{% /tab %}}
-{{< /tabs >}}
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][5], add to the **Say what's happening** and **Notify your team** sections.
+
+## Say what's happening
+
+Use this section to set the notifications sent to your team.
+
+### Title
+
+Add a unique title to your monitor (required). Multi-alert monitors can use [tag variables](#tag-variables).
+
+It is helpful to use a succinct explanation of the monitor so a notified team member can quickly understand the issue.
+
+### Message
+
+The message field allows standard [Markdown formatting][1] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts using [@notifications](#notification).
+
+A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
+
+```
+Steps to free up disk space:
+1. Remove unused packages
+2. Clear APT cache
+3. Uninstall unnecessary applications
+4. Remove duplicate files
+```
+
+### Tags
+
+Add tags to your monitor (optional). Monitor tags are different than metric tags. They are used in the UI to group and search for monitors.
+
+### Renotify
+
+Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
+
+## Notify your team
+
+Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
+
+**Note**: An `@notification` must have a space between it and the last line character, for example:
+
+```
+Disk space is low @ops-team@company.com
+```
+
+### @notification
+
+`@notifications` are used in several places on the Datadog site. Below are examples.
+
+#### Email
+
+* Notify a Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
+* Notify any non-Datadog user by email with `@<EMAIL>`.
+
+#### Integrations
+
+Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
+
+| Integration    | Prefix       | Examples       |
+|----------------|--------------|----------------|
+| [Jira][6]      | `@jira`      | [Examples][7]  |
+| [PagerDuty][8] | `@pagerduty` | [Examples][9]  |
+| [Slack][10]    | `@slack`     | [Examples][11] |
+| [Webhooks][12] | `@webhook`   | [Examples][13] |
+
+[6]: /integrations/jira
+[7]: /integrations/jira/#use-cases
+[8]: /integrations/pagerduty
+[9]: /integrations/pagerduty/#troubleshooting
+[10]: /integrations/slack
+[11]: /integrations/slack
+[12]: /integrations/webhooks
+[13]: /integrations/webhooks/#usage
 
 ### Modifications
 
@@ -498,6 +510,6 @@ To include a comment in the monitor message that only shows in the monitor edit 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://daringfireball.net/projects/markdown/syntax
-[2]: /monitors/monitor_types/integration
 [3]: /events
 [4]: /monitors/faq/what-are-recovery-thresholds
+[5]: /monitors/monitor_types
