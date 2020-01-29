@@ -57,7 +57,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                         |
 |----------------------|-----------------------------------------------------------------------------------------------|
@@ -112,6 +112,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
 [13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
-
-
-{{< get-dependencies >}}

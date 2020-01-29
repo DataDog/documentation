@@ -364,4 +364,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [34]: https://www.datadoghq.com/blog/monitor-aws-fargate
 
 
-{{< get-dependencies >}}

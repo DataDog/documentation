@@ -141,6 +141,3 @@ Consultez [notre blog][14] pour en savoir plus sur la surveillance d'infrastruct
 [12]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information
 [13]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
 [14]: https://www.datadoghq.com/blog
-
-
-{{< get-dependencies >}}

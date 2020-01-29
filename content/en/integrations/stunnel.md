@@ -9,6 +9,7 @@ kind: integration
 name: Stunnel
 public_title: Datadog-Stunnel Integration
 short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md"]
 ---
 
 ## Overview

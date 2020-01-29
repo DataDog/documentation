@@ -77,6 +77,3 @@ Gremlin インテグレーションには、サービスのチェック機能は
 [4]: https://app.gremlin.com/settings/integrations
 [5]: https://docs.datadoghq.com/ja/help
 [6]: https://www.datadoghq.com/blog
-
-
-{{< get-dependencies >}}

@@ -255,6 +255,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
 [15]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -67,6 +67,3 @@ Akamai インテグレーションには、サービスのチェック機能は�
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

@@ -56,7 +56,6 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'adobe_experience_manager.md' \
 		-a -not -name 'alcide.md' \
 	    -a -not -name 'amazon_guardduty.md' \
-	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'pivotal_platform.md' \
 			-a -not -name 'carbon_black.md' \

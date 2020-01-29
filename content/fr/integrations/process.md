@@ -132,6 +132,3 @@ Pour mieux comprendre comment (ou pourquoi) surveiller l'utilisation des ressour
 [10]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
 [12]: https://www.datadoghq.com/blog/process-check-monitoring
-
-
-{{< get-dependencies >}}

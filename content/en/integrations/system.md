@@ -20,6 +20,7 @@ supported_os:
 - linux
 - mac_os
 - windows
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md"]
 ---
 
 ## Overview
