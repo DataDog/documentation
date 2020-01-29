@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Each metric submitted to Datadog has a **metric type**. Metric type affects what the metrics represents-what it monitors-, and the associated [graphing possibilities within Datadog][1] with additional [metric type modifiers][2] and [functions][3].
+Each metric submitted to Datadog has a **metric type**. A metric type affects what the metrics represents-what it monitors, and the associated [graphing possibilities within Datadog][1] with additional [metric type modifiers][2] and [functions][3].
 
 Datadog allows you to submit, store, and display the following metric types:
 
