@@ -83,28 +83,6 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
 
 
-## Standard attributes in Log Explorer
-
-
-### Aliased and Standard Facets display
-
-Typically, during a transitional period, standard facets may coexist in your organization alongside their aliased version(s). 
-
-The facet list provides users with visual hints to find their way through to the Standard Facets. And eventually update their preferred [saved views][22] to actually display Standard Facets rather than Aliased.
-
-{{< img src="logs/processing/attribute_naming_convention/aliased-to.gif" alt="Facet list highlight Naming Convention"  style="width:80%;">}}
-
-
-### Aliasing and Promoting
-
-The facet list provides *admin* users with call-to-actions and hints for promoting facets, and aliasing facets towards standard facets. Promoting a facet as standard from the facet list creates a standard attribute whose type is the type of the facet.  
-
-{{< img src="logs/processing/attribute_naming_convention/alias-to_admin.png" alt="Curate Standard Attribute from Facet list"  style="width:80%;">}}
-
-From the log side panel, *admin* users take alias any attribute (faceted, or non-faceted) towards a Standard Facet. 
-
-{{< img src="logs/processing/attribute_naming_convention/alias-to_admin_panel.png" alt="Alias attribute from side panel"  style="width:80%;">}}
-
 
 ## Default standard attribute list
 
