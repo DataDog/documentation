@@ -1,7 +1,6 @@
 ---
 title: How do I export Monitor Alerts?
 kind: faq
-disable_toc: true
 ---
 
 To gather an audit trail of all Monitor Alerts that have triggered during a specific period of time, reach out on the [Datadog monitor report page][1]. This generates a CSV for the past half year (182 days). This report is *not* live; it is updated once a week.

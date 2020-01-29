@@ -104,7 +104,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -156,6 +156,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [7]: https://docs.datadoghq.com/fr/agent/docker/log/
 [8]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

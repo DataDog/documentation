@@ -1,7 +1,6 @@
 ---
 title: Add span tags and slice and dice your application performance
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,6 +18,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _7 minutes to complete_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Analytics View" video="true"  style="width:90%;">}}

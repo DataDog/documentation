@@ -107,6 +107,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [7]: https://github.com/DataDog/integrations-core/blob/master/cilium/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://docs.datadoghq.com/fr/agent/cluster_agent
-
-
-{{< get-dependencies >}}

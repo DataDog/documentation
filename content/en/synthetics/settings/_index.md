@@ -1,7 +1,6 @@
 ---
 title: Synthetics Settings
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"

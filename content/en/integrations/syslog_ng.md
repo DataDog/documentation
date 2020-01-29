@@ -13,6 +13,7 @@ has_logo: true
 integration_title: syslog_ng
 is_public: true
 public_title: Datadog-Syslog-ng Integration
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md"]
 supported_os:
 - linux
 - windows

@@ -377,6 +377,8 @@ tracer.configure(
 
 Refer to the [language-specific APM instrumentation docs][14] for more examples.
 
+**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
+
 ### Process Collection
 
 See [Process collection for Kubernetes][15].

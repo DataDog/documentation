@@ -1,7 +1,6 @@
 ---
 title: Network Performance Monitoring
 kind: documentation
-disable_toc: true
 description: Explore metrics for point to point communication on your infrastructure.
 aliases:
   - /monitors/network_flow_monitors/

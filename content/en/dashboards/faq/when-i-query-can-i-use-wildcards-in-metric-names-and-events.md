@@ -1,7 +1,6 @@
 ---
 title: When I query can I use wildcards in metric names and events?
 kind: faq
-disable_toc: true
 aliases:
     - /graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events
 ---

@@ -16,7 +16,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The host map graphs any metric for any subset of hosts on the same host map visualization available from the main [Infrastructure Host Map][1] menu:
+The host map widget graphs any metric across your hosts using the same visualization available from the main [Host Map][1] page:
 
 {{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
 
@@ -26,14 +26,17 @@ The host map graphs any metric for any subset of hosts on the same host map visu
 
 ### Configuration
 
-Configuration of the host map widget works as the main [host map page][1]:
+Configuration of the host map widget is similar to the main [host map page][1]:
 
-1. Choose to display `hosts` or `containers`
-2. `Filter by` : Choose which hosts/containers to display
-3. `Group by`: Aggregate your hosts/containers by one or several tags.
-4. Choose a metric by which to fill your host map elements.
-5. Optional: choose a metric by which to size your host map elements.
-6. Optional: define a color palette with a `min` and `max` color palette value.
+1. **Type**: Choose to display `hosts` or `containers`.
+2. **Filter by**: Choose the hosts or containers to display.
+3. **Group by**: Aggregate your hosts or containers by one or several tags.
+4. **Fill by**: Choose a metric to fill your host or container map elements.
+5. **Size by** (optional): Choose a metric to size your host or container map elements.
+6. **Palette** (optional): Choose a color palette.
+7. **Values** (optional): Define the min and max color palette fill values.
+
+**Note**: Free text search is not available for the host map widget.
 
 ### Options
 

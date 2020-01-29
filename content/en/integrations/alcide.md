@@ -5,6 +5,7 @@ categories:
 dependencies: []
 description: Ingest and process your Alcide logs
 doc_link: https://docs.datadoghq.com/integrations/alcide/
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md"]
 has_logo: true
 integration_title: Alcide
 is_public: true

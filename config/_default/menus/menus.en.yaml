@@ -1124,6 +1124,14 @@ main:
     parent: "synthetics"
     identifier: "synthetics_browser_tests"
     weight: 2
+  - name: "Actions"
+    url: "synthetics/browser_tests/actions"
+    parent: "synthetics_browser_tests"
+    weight: 201
+  - name: "Advanced Options"
+    url: "synthetics/browser_tests/advanced_options"
+    parent: "synthetics_browser_tests"
+    weight: 202
 
   - name: "Private Locations"
     url: "synthetics/private_locations"

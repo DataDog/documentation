@@ -1,7 +1,6 @@
 ---
 title: Guide de la fonctionnalité Logging without Limits™
 kind: guide
-disable_toc: true
 further_reading:
   - link: logs/explorer
     tag: Documentation
@@ -26,7 +25,6 @@ Ce guide identifie les principaux composants de la fonctionnalité Logging witho
 
 Votre service avec la plus forte journalisation comporte de nombreux logs, qui ne sont pas tous pertinents en fonction du problème que vous cherchez à résoudre. Par exemple, si vous souhaitez étudier le log de chaque code de réponse 4xx ou 5xx, vous pouvez exclure le log de chaque réponse 200 de la vue Log Explorer afin d'accélérer le processus de résolution d'une panne ou d'un événement important. Après avoir détecté le service concerné, vous pouvez identifier le statut de service qui génère le plus de logs afin de l'exclure de la [vue Log Explorer][3].
 
-
 {{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identifier le statut de service générant le plus de logs" style="width:100%;">}}
 
 **Pour identifier le statut de service générant le plus de logs** :
@@ -41,6 +39,7 @@ Votre service avec la plus forte journalisation comporte de nombreux logs, qui n
 **Remarque** : vous pouvez appliquer cette méthode à n'importe quelle requête, peu importe son volume de journalisation, afin de générer une Top List. Vous êtes libre de modifier les facettes de regroupement, en remplaçant par exemple `service` ou `status` par `host` ou encore `network.client.ip`.
 
 ## 2. Identifier les patterns de journalisation volumineuse
+
 Maintenant que vous savez lequel de vos statut de service génère le plus de logs, passez à la [vue Patterns][4], située en regard du graphique, à haut à gauche du Log Explorer. Vous pourrez ainsi visualiser automatiquement vos patterns de log pour le contexte sélectionné.
 
 Un contexte est constitué d'un intervalle et d'une requête de recherche. Les principales caractéristiques de chaque pattern sont détaillées, afin de comprendre rapidement ses particularités. Un petit graphique représente le volume de ses logs au sein d'un calendrier approximatif. Cette visualisation vous permet d'identifier ce qui distingue votre pattern des autres patterns. Les éléments de logs qui varient au sein du pattern sont mis en évidence pour identifier facilement les différences entre chaque ligne de log. 
@@ -108,6 +107,7 @@ Lorsqu'une anomalie est détectée, toutes les personnes concernées reçoivent 
 ## Résumé
 
 Vous savez désormais comment utiliser la fonctionnalité Logging without Limits™ pour :
+
 * [1. Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
 * [2. Identifier les patterns de journalisation volumineuse](#2-identify-high-volume-logging-patterns)
 * [3. Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)

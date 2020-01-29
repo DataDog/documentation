@@ -1,7 +1,6 @@
 ---
 title: Events
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "/events"
   tag: "Documentation"

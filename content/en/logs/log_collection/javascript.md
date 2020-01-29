@@ -44,7 +44,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
@@ -58,7 +58,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'eu',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
@@ -81,7 +81,7 @@ In order to not miss any logs or errors, you should load and configure the libra
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>
@@ -100,7 +100,7 @@ In order to not miss any logs or errors, you should load and configure the libra
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>

@@ -8,6 +8,7 @@ description: "Forward your logs from the journal to Datadog"
 short_description: "Forward your logs from the journal to Datadog"
 has_logo: true
 is_public: true
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/journald.md"]
 name: journald
 ddtype: check
 supported_os:

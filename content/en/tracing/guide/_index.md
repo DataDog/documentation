@@ -2,7 +2,6 @@
 title: Tracing Guides
 kind: guide
 private: true
-disable_toc: true
 ---
 
 
@@ -34,4 +33,5 @@ disable_toc: true
     {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Adding Span Tags{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configuring App Analytics via the Agent{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
 {{< /whatsnext >}}

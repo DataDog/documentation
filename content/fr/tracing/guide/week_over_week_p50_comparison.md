@@ -1,7 +1,6 @@
 ---
 title: Comparer la latence d'un service avec celle de la semaine précédente
 kind: guide
-disable_toc: true
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
@@ -20,7 +19,6 @@ further_reading:
     text: Tous les guides
 ---
 _Temps de lecture : 2 minutes_
-
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="vidéo de comparaison" video="true" style="width:90%;">}}
 

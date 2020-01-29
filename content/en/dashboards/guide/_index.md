@@ -1,7 +1,6 @@
 ---
 title: Graphing Guides
 kind: guide
-disable_toc: true
 aliases:
     - /graphing/guide/
 ---

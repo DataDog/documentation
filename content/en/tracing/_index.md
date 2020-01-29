@@ -1,9 +1,9 @@
 ---
 
 title: APM & Distributed Tracing
-
 kind: documentation
 description: Instrument your code to improve performance
+disable_toc: true
 further_reading:
 - link: "/tracing/connect_logs_and_traces/"
   tag: "Documentation"
@@ -21,10 +21,10 @@ aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
   - /tracing/guide/distributed_tracing/
-disable_toc: true
 ---
 
 {{< wistia 2kgmb9wbsr >}}
+
 </br>
 
 ## What is Datadog APM?
