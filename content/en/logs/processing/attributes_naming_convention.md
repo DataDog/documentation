@@ -1,7 +1,7 @@
 ---
 title: Standard Attributes and Aliasing
 kind: documentation
-description: "Datadog standard attributes for pipelines."
+description: "How to support a Naming Convention"
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -17,29 +17,50 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-## Overview
+## The purpose of a naming convention.
+
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment—especially when many teams' users, each one with their own personal usage patterns, are working within the same environment.
 
-This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
+For instance, a client IP might be transcripted with various attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. And the execution time of a request be referred to as `exec_time`, `request_latency`, `request.time_elapsed`, etc.
 
-In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and—for instance—correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
+In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and —for instance—correlating web proxy with web application logs would be difficult. 
 
-Standard Attributes have been designed to help your organization to define its own naming convention and onboard users across multiple teams on it. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
-
-
-## Aliasing, Faceting and Promoting Attributes
-
-Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list). But Admin users in the organisation are entitled to curate the list, either from the [Log Explorer](#standard-attributes-in-explorer) or from the Standard Attribute [Configuration Page](#standard-attributes-in-explorer).
-
-* **Aliasing** a (source) attribute towards a (destination) Standard Attribute. Logs carrying the source attribute, will end up carrying source and destination attribute, both with same value. Users can interact with either aliased (source) or standard (destination) attribute.
-
-* **Faceting** a Standard Attribute for filtering, grouping or aggregating. [Creating][21] and using a facet works equally for a standard attribute, resulting on a **Standard Facet**. Standard Facets provide with more comprehensive insights though, because they eventually gather data from multiple sources: all logs natively carrying the standard attribute, and logs carrying any attribute aliased to the standard attribute.
-
-* **Promote** an attribute as a Standard Attribute. Enable aliasing other attributes to this one.
+And even if technologies and teams natively define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings. A **naming convention** defines standard names to use when referring to structuring technical or business concepts, resulting in a common language that everyone agrees to use by convention.
 
 
-### Additional details regarding Aliasing
+## Standard Attributes as a backbone for naming convention  
+
+
+### Standard Attributes, Standard Facets
+
+
+**Standard Attributes** have been designed to help your organization to define its own naming convention.
+
+Standard Attributes are most particularly useful when it comes to filtering or aggregating logs altogether - that is to say when [turned into facets][23]. Gathering content from multiple and heterogenous sources into a unique **Standard Facet** makes it much more straightforward to build insights or pivot information across your organisation.
+
+As a matter of example, follow the clients most impacted by latencies on a hybrid [Apache][24] and [Amazon Cloud Front][25] infrastructure, using the Standard `Network Client IP` facet alonside the Standard `duration` measure.
+
+
+### Curating Standard Attributes
+
+Log Integrations natively rely on a [default set](#default-standard-attribute-list) of standard attributes. 
+
+But Admin users in your organisation are entitled to curate the list:
+
+* either from the [Log Explorer][23], **promoting** existing attributes as Standard Attributes. 
+* or from the Standard Attribute [Configuration Page](#standard-attributes-in-explorer) **creating** new Standard Attributes from scratch.
+
+
+## Aliasing
+
+With aliasing, onboard users across multiple teams on your naming convention, without asking them for tedious changes in their technical stack (which would never be a priority, and likely to be a breaking change).
+
+**Alias** a (source) attribute towards a (destination) attribute so that logs carrying the source attribute, will end up carrying source and destination attribute, both with same value. 
+
+Users can interact with either aliased (source) or standard (destination) faceted attribute. But as far as facets are concerned, users are [nudged][26] to use the Standard Facet rather than the Aliased one. This provides guidance towards the naming convention, and smoothly discourages from building assets (such as saved views or dashboards) based on non-standard content.
+
+**additional details regarding aliasing**
 
 
 1. Aliasing happens after the logs are processed by the pipelines. Meaning, any extracted or processed attribute can be used a source for aliasing.
@@ -60,7 +81,6 @@ The standard attribute table is available in Log Configuration pages, along with
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
-To enforce standard attributes, administrators have the right to re-copy an existing set of non-standard attributes into a set of standard ones. This enables noncompliant logs sources to become compliant without losing any previous information.
 
 ### Standard attribute list
 
@@ -68,8 +88,6 @@ The standard attribute table comes with a set of [predefined standard attributes
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes"  style="width:80%;">}}
 
-
-### Promote or Alias attribute
 
 A standard attribute is defined by its:
 
@@ -82,6 +100,10 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
 
+
+## Standard Attributes in The Log Explorer
+
+Promote or alias attributes right directly from the log explorer, to make such decisions in context. See [documentation][27] for reference. 
 
 
 ## Default standard attribute list
@@ -270,5 +292,10 @@ All attributes and measures are prefixed by `dns`.
 [18]: /integrations/fluentd
 [19]: /integrations/logstash
 [20]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
-[21]: /logs/explorer/?tab=facets#setup
 [22]: /logs/explorer/saved_views/
+[23]: /logs/explorer/facets/
+
+[24]: /integrations/apache/
+[25]: /integrations/amazon_cloudfront/
+[26]: /logs/explorer/facets/#aliased-facets
+[27]: /logs/explorer/facets/#alias-facets
