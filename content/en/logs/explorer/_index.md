@@ -64,7 +64,7 @@ Export your current log visualization with the *share* functionality:
 Use the *share* button to send your current log explorer view to a CSV file, team member, or create a monitor:
 
 {{< tabs >}}
-{{% tab "Log Search" %}}
+{{% tab "Log Search" %}} 
 
 | Button            | Description                                                                                                          |
 |-------------------|----------------------------------------------------------------------------------------------------------------------|
