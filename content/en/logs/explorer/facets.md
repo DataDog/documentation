@@ -168,37 +168,37 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 
 
-[1] /logs/explorer/search/
-[2] /logs/explorer/patterns/
-[3] /logs/explorer/analytics/
-[4] /monitors/monitor_types/log/
-[5] /dashboards/widgets/
-[6] /notebooks/
+[1]: /logs/explorer/search/
+[2]: /logs/explorer/patterns/
+[3]: /logs/explorer/analytics/
+[4]: /monitors/monitor_types/log/
+[5]: /dashboards/widgets/
+[6]: /notebooks/
 
-[7] /logs/processing/processors
-[8] /logs/live_tail/
-[9] /logs/archives/
-[10] /logs/logs_to_metrics/
+[7]: /logs/processing/processors
+[8]: /logs/live_tail/
+[9]: /logs/archives/
+[10]: /logs/logs_to_metrics/
 
-[11] /logs/processing/pipelines/
-[12] /logs/indexes#indexes-filters
-[13] /logs/indexes#exclusion-filters
+[11]: /logs/processing/pipelines/
+[12]: /logs/indexes#indexes-filters
+[13]: /logs/indexes#exclusion-filters
 
-[14] /tagging/assigning_tags
-[15] /integrations/nginx/
-[16] /integrations/kong/
-[17] /logs/explorer/search/#search-syntax
+[14]: /tagging/assigning_tags
+[15]: /integrations/nginx/
+[16]: /integrations/kong/
+[17]: /logs/explorer/search/#search-syntax
 
-[18] /integrations/varnish/
-[19] /integrations/ansible/
-[20] /integrations/python/
+[18]: /integrations/varnish/
+[19]: /integrations/ansible/
+[20]: /integrations/python/
 
-[21] /logs/processing/processors/?tab=ui#geoip-parser
-[22] /logs/processing/processors/?tab=ui#arithmetic-processor
-[23] /logs/explorer/saved_views/
+[21]: /logs/processing/processors/?tab=ui#geoip-parser
+[22]: /logs/processing/processors/?tab=ui#arithmetic-processor
+[23]: /logs/explorer/saved_views/
 
-[24] /logs/processing/attributes_naming_convention/
+[24]: /logs/processing/attributes_naming_convention/
 
-[25] /logs/processing/#reserved-attributes
-[26] /logs/processing/attributes_naming_convention/#default-standard-attribute-list
+[25]: /logs/processing/#reserved-attributes
+[26]: /logs/processing/attributes_naming_convention/#default-standard-attribute-list
 
