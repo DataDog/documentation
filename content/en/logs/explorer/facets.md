@@ -19,41 +19,54 @@ further_reading:
   text: "Automatically configure your Log Explorer"
 ---
 
-## Search syntax
+## Setup
 
-A query is composed of terms and operators.
+After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][3].
 
-There are two types of terms:
+**Note**: 
 
-* A **single term** is a single word such as `test` or `hello`.
+* To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][4].
 
-* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
+* Facets on [Reserved Attributes][5] are available by default.
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+{{< tabs >}}
+{{% tab "Facets" %}}
 
-|              |                                                                                                        |                              |
-|--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
-| **Operator** | **Description**                                                                                        | **Example**                  |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
-| `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
+A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of logs represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
+{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
-### Arrays
+**Create a Facet**:
 
-You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
+To start using an attribute as a facet or in the search, click on it and add it as a facet:
 
-In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
+{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
 
-{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
+[1]: /logs/explorer/search
+[2]: /logs/explorer/analytics
+{{% /tab %}}
 
-## Further Reading
+{{% tab "Measures" %}}
 
-{{< partial name="whats-next/whats-next.html" >}}
+A measure is a attribute with a numerical value contained in your logs.
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /infrastructure
-[3]: /integrations/#cat-log-collection
-[4]: /tagging/#tags-best-practices
-[5]: /logs/explorer/saved_views
+**Create a Measure**:
+
+To start using an attribute as a measure, click on a numerical attribute of your log:
+
+{{< img src="logs/explorer/create_a_mesure.png" alt="Create a measure"  style="width:30%;">}}
+
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
+
+**Select the Measure Unit**:
+
+Each measure has its own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and Log Analytics.
+
+{{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure"  style="width:50%;">}}
+
+[1]: /logs/explorer/search
+[2]: /logs/explorer/analytics
+{{% /tab %}}
+{{< /tabs >}}
