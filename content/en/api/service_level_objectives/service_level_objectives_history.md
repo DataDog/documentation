@@ -7,6 +7,10 @@ external_redirect: /api/#get-a-slo-s-history
 
 ## Get a SLO's history
 
+<div class="alert alert-warning">
+This endpoint is in beta. If you have any feedback, <a href="/help">contact Datadog support</a>.
+</div>
+
 Get a specific SLO's history, regardless of it's SLO type.
 
 The detailed history data is structured according to the source data type. For example, metric data is included
