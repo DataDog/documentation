@@ -1071,14 +1071,18 @@ main:
     url: "logs/explorer/analytics/"
     parent: "log_explorer"
     weight: 702
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views/"
-    parent: "log_explorer"
-    weight: 703
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
+    weight: 703
+  - name: "Saved Views"
+    url: "logs/explorer/saved_views/"
+    parent: "log_explorer"
     weight: 704
+  - name: "Facets"
+    url: "logs/explorer/facets/"
+    parent: "log_explorer"
+    weight: 705
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
