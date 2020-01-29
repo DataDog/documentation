@@ -111,7 +111,7 @@ Hiding facets is specific to your own troubleshooting context and won't impact y
 
 **Hidden facets in other contexts**
 
-Hidden facets are also hidden from auto-complete in the search bar, and drop down in analytycs (measure, group-by) for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
+Hidden facets are also hidden from auto-complete in the search bar, and drop down (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
 Hidden facets have no impact aside from the log explorer (livetail, monitors or widget definition in dashboards for instance). 
 
