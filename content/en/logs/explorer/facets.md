@@ -74,11 +74,11 @@ Open a facet to see a summary of its content for the scope of the current query.
 
 **Dimensions** come with a top list of unique values, and a count of logs matching each of them. Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
 
+{{< img src="logs/explorer/facet/dimension_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+
 **Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
-
-{{< img src="logs/explorer/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
-
+{{< img src="logs/explorer/facet/measure_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 ### Hide facets
 
