@@ -8,7 +8,7 @@ external_redirect: /api/#get-a-slo-s-history
 ## Get a SLO's history
 
 <div class="alert alert-warning">
-This endpoint is in beta. If you have any feedback, <a href="/help">contact Datadog support</a>.
+This endpoint is in beta and might be subject to change. If you have any feedback, <a href="/help">contact Datadog support</a>.
 </div>
 
 Get a specific SLO's history, regardless of it's SLO type.
