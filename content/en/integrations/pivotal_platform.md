@@ -108,7 +108,7 @@ If you are a [meta-buildpack][10] user, Datadog's buildpack can be used as a dec
 
 ```shell
 # set the environment variable
-cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
+cf set-env <YOUR_APP> DD_API_KEY <DATADOG_API_KEY>
 # restage the application to make it pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP>
 ```
@@ -222,7 +222,7 @@ addons:
     dd:
       use_dogstatsd: true
       dogstatsd_port: 18125       # Many CF deployments have a StatsD already on port 8125
-      api_key: <DD_API_KEY>
+      api_key: <DATADOG_API_KEY>
       tags: ["<KEY:VALUE>"]       # any tags you wish
       generate_processes: true    # to enable the process check
 ```

@@ -34,8 +34,8 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-i
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -51,8 +51,8 @@ api.DashboardList.get_items(4741)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -63,8 +63,8 @@ result = dog.get_items_of_dashboard_list(4741)
 {{% tab "Curl" %}}
 
 ```sh
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 list_id=4741
 
@@ -411,8 +411,8 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-i
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -452,8 +452,8 @@ api.DashboardList.add_items(list_id, dashboards=dashboards)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -488,8 +488,8 @@ result = dog.add_items_of_dashboard_list(list_id, dashboards)
 {{% tab "Curl" %}}
 
 ```sh
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 list_id=4741
 
@@ -662,8 +662,8 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#updat
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -703,8 +703,8 @@ api.DashboardList.update_items(list_id, dashboards=dashboards)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -741,8 +741,8 @@ result = dog.update_items_of_dashboard_list(list_id, dashboards)
 
 ```sh
 
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 list_id=4741
 
@@ -915,8 +915,8 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delet
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -956,8 +956,8 @@ api.DashboardList.delete_items(list_id, dashboards=dashboards)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -994,8 +994,8 @@ result = dog.delete_items_from_dashboard_list(list_id, dashboards)
 
 ```sh
 
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 list_id=4741
 
