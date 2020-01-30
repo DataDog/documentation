@@ -3,11 +3,9 @@ import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
 import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
-import './components/lang-redirects';
 import codeTabs from './components/codetabs';
 
 import { moveToAnchor } from './helpers/moveToAnchor';
-import { handleLanguageBasedRedirects } from './components/lang-redirects';
 
 // Setup for large screen ToC
 
