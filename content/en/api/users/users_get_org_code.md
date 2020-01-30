@@ -1,0 +1,18 @@
+---
+title: Get a user organisation
+type: apicode
+order: 36.6
+external_redirect: /api/#get-a-user-organisation
+---
+
+**SIGNATURE**:
+
+`GET /v2/users/<USER_UUID>/orgs`
+
+**EXAMPLE REQUEST**:
+
+{{< code-snippets basename="api-user-get-org" >}}
+
+**EXAMPLE RESPONSE**:
+
+{{< code-snippets basename="result.api-user-get-org" >}}

@@ -1,13 +1,13 @@
 ---
 title: Disable user
 type: apicode
-order: 36.5
+order: 36.4
 external_redirect: /api/#disable-user
 ---
 
 **SIGNATURE**:
 
-`DELETE /v1/user/<USER_ID>`
+`DELETE /v2/users/<USER_UUID>`
 
 **EXAMPLE REQUEST**:
 
