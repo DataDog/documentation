@@ -117,7 +117,7 @@ import (
 )
 
 func sayHello(w http.ResponseWriter, r * http.Request) {
-    msg: = "Hello " + strings.TrimPrefix(r.URL.Path, "/")
+    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
     w.Write([] byte(msg))
 }
 
