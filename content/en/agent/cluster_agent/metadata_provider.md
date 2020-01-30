@@ -31,5 +31,7 @@ To enable the cluster metadata provider feature:
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: /agent/cluster_agent/troubleshooting
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/cluster_agent/troubleshooting
 [2]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
