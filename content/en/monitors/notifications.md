@@ -31,13 +31,11 @@ Use this section to set the notifications sent to your team.
 
 ### Title
 
-Add a unique title to your monitor (required). Multi-alert monitors can use [tag variables](#tag-variables).
-
-It is helpful to use a succinct explanation of the monitor so a notified team member can quickly understand the issue.
+Add a unique title to your monitor (required). For multi-alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables](#tag-variables).
 
 ### Message
 
-The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts using [@notifications](#notification).
+The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts with [@notifications](#notification).
 
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
@@ -69,7 +67,7 @@ Disk space is low @ops-team@company.com
 
 ### @notification
 
-`@notifications` are used in several places on the Datadog site. Below are examples.
+`@notifications` can be sent to:
 
 #### Email
 
@@ -80,17 +78,17 @@ Disk space is low @ops-team@company.com
 
 Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
 
-| Integration    | Prefix       | Examples       |
-|----------------|--------------|----------------|
-| [Jira][3]      | `@jira`      | [Examples][4]  |
-| [PagerDuty][5] | `@pagerduty` | [Examples][6]  |
-| [Slack][7]    | `@slack`     | [Examples][7] |
-| [Webhooks][8] | `@webhook`   | [Examples][9] |
+| Integration    | Prefix       | Examples      |
+|----------------|--------------|---------------|
+| [Jira][3]      | `@jira`      | [Examples][4] |
+| [PagerDuty][5] | `@pagerduty` | [Examples][6] |
+| [Slack][7]     | `@slack`     | [Examples][7] |
+| [Webhooks][8]  | `@webhook`   | [Examples][9] |
 
 
 ### Modifications
 
-When a monitor is created, modified, silenced, or deleted an [event][10] is created. Set the `Notify` option to notify team members and chat services of these events.
+An [event][10] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
 
 ### Edit restrictions
 
@@ -100,35 +98,29 @@ If changes are restricted, only the monitor's creator or an administrator can ch
 
 ## Test notifications
 
-After you define your monitor, test your monitor's notifications with the **Test Notifications** button at the bottom right of your monitor page. Test notifications are supported for the following monitor types:
+Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
-* Host
-* Metric
-* Anomaly
-* Outlier
-* Forecast
-* Integration (check only)
-* Process (check only)
-* Network (check only)
-* Custom check
-* Event
-* Composite
+### Run the test
 
-1. Choose the monitor case to test in the test notifications pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][11] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:50%;" >}}
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][11] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-2. Click **Run Test** to send a notification to the notification handles provided in the message box.
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
 
-**Notes**:
+3. Click **Run Test** to send notifications to the people and services listed in the monitor.
 
-* Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
-* Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
-  ```
-  {{#is_alert}}
-  {{host.name}} <-- will populate
-  {{/is_alert}}
-  ```
+### Events
+Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+
+### Variables
+
+Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
+```text
+{{#is_alert}}
+{{host.name}} <-- will populate
+{{/is_alert}}
+```
 
 ## Variables
 
@@ -136,72 +128,55 @@ After you define your monitor, test your monitor's notifications with the **Test
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                      | Description                                                                                    |
-|-------------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`                   | Display the value that breached the alert for metrics based query monitors.                    |
-| `{{threshold}}`               | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
-| `{{warn_threshold}}`          | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
-| `{{ok_threshold}}`            | Display the value that recovered the monitor.                                                  |
-| `{{comparator}}`              | Display the relational value selected in the monitor's *Set alert conditions* section.         |
-| `{{last_triggered_at}}`       | Display the UTC date/time when the monitor last triggered.                                     |
-| `{{last_triggered_at_epoch}}` | Display the UTC date/time when the monitor last triggered in epoch milliseconds format.        |
+| Variable                      | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| `{{value}}`                   | The value that breached the alert for metric based query monitors.           |
+| `{{threshold}}`               | The value of the alert threshold set in the monitor's alert conditions.      |
+| `{{warn_threshold}}`          | The value of the warning threshold set in the monitor's alert conditions.    |
+| `{{ok_threshold}}`            | The value that recovered the monitor.                                        |
+| `{{comparator}}`              | The relational value set in the monitor's alert conditions.                  |
+| `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
+| `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
 
 #### Arithmetic
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax, for example:
 
-`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
+```text
+{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}
+```
 
-Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
+Below is an example of subtracting 15 minutes from the `{{last_triggered_at_epoch}}`:
 
-For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
+```text
+{{eval "last_triggered_at_epoch-15*60*1000"}}
+```
 
-`{{eval "last_triggered_at_epoch-15*60*1000"}}`
+**Note**: The template variable and arithmetic expression must be wrapped in quotation marks (`"`).
 
 ### Tag variables
 
-For multi-alert monitors, add tag variables to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you used in the *trigger a separate alert for each* field in Section 1 of your monitor.
+Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
 
-For example, if you trigger by each **host** tag, then a number of tag variables related to **host** are available to you in Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc..
+For example, if your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
 
-This also works for custom tags. If a custom tag is added that follows the `key:value` syntax, then data can be grouped by those tag keys. This enables a multi-alert (separate trigger) for each **value**. Additionally, the tag's `.name` variable can be used in your monitor message.
+**Notes**:
 
-Note:
-
-* Template variable content is escaped by default. If your variable contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
-
-* See a complete list of contextual template variables available to your monitor by clicking the **Use message template variables** link or in the list of suggestions that appears when you type `{{` to begin a template variable name. The variables available are different depending on the combination of metric, tags, and other features of the monitor you are working on.
-
-* The tag template variables can also be used in the monitor titles (names), but the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).
-
-* Some tags identifying your triggering scope are automatically inserted into the title of your multi alert.
-
-#### Examples
-
-Here's an example of where a user had a number of hosts tagged by different `creator:` values, e.g, `creator:wes_anderson` and `creator:saint_exupéry`.
-
-Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
-
-{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification"  style="width:80%;">}}
-
-This is an example of using template variables for a multi-alert:
-
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor"  style="width:80%;">}}
-
-and the corresponding event notification:
-
-{{< img src="monitors/notifications/templatevar.png" alt="template var"  style="width:80%;">}}
+* Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+* Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 
 #### Tag key with period
 
-If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key.
-For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
+If your tag's key has a period in it, include brackets around the full key when using the tag variable.
+For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.ket.test`, use:
 
-{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot"  style="width:80%;">}}
+```text
+{{[dot.key.test].name}}
+```
 
 ### Conditional variables
 
-Conditional variables allow for different text to be [sent to different contacts](#notification) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+Conditional variables allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
 Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
 
