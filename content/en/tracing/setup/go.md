@@ -126,7 +126,7 @@ func main() {
     tracer.Start(tracer.WithServiceName("test-go"))
     defer tracer.Stop()
 
-    mux: = httptrace.NewServeMux() // init the http tracer
+    mux := httptrace.NewServeMux() // init the http tracer
     mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
 
     err: = http.ListenAndServe(":9090", mux) // set listen port
