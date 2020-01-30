@@ -39,7 +39,7 @@ Définir la configuration de votre test Browser.
 3. **Select your tags** : les tags à appliquer à votre test Browser. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée sur la page Synthetics.
 4. **Devices** : les appareils sur lesquels votre check doit être lancé. Les appareils disponibles sont `Laptop Large`, `Tablet` et `Mobile Small`.
 5. **Locations** : les emplacements gérés par Datadog à partir desquels le test doit être exécuté. De nombreux emplacements AWS dans le monde entier sont disponibles. Vous pouvez récupérer la liste complète via l'[API Datadog][2]. Vous pouvez également configurer un [emplacement privé][3] pour lancer un test Browser de Synthetics sur une URL privée qui n'est pas accessible à partir de l'Internet public.
-6. **How often should Datadog run the test?** : utilisez cette option pour définir la fréquence d'exécution du test. Cette fréquence peut aller d'une fois toutes les 15 minutes à une fois par semaine. [Contactez l'assistance][4] pour accéder à d'autres options de fréquence pour votre test.
+6. **How often should we run the test?** : utilisez cette option pour définir la fréquence d'exécution du test. Cette fréquence peut aller d'une fois toutes les 5 minutes à une fois par semaine.
 
 ### Utiliser des variables globales
 
@@ -66,7 +66,8 @@ Les tests peuvent uniquement être enregistrés à partir de **[Google Chrome][8
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Enregistrer le test Browser"  >}}
 
-1. Facultatif : sélectionnez **Open in a pop-up** dans le coin supérieur droit de la page pour ouvrir l'enregistrement du test dans une fenêtre contextuelle séparée. Vous éviterez ainsi tout problème de dimensionnement dans la fenêtre affichée dans l'interface Datadog.
+1. Facultatif : sélectionnez **Open in a pop-up** dans le coin supérieur droit de la page pour ouvrir l'enregistrement du test dans une fenêtre contextuelle distincte. Vous éviterez ainsi tout problème de dimensionnement dans la fenêtre affichée dans l'interface Datadog.
+Si vous sélectionnez **Open in a pop-up** tout en maintenant la touche **Maj** enfoncée, la fenêtre contextuelle s'ouvre en mode navigation privée. Cela vous permet d'enregistrer votre test dans un nouveau navigateur sur lequel aucun identifiant, aucun cookie ni aucune autre information ne sont enregistrés.
 2. Cliquez sur **Start recording** pour commencer l'enregistrement de votre test Browser.
 3. Vos actions sont enregistrées et utilisées pour créer des étapes dans le scénario de votre test Browser.
 4. Utilisez les actions disponibles en haut à gauche pour enrichir votre scénario :
@@ -97,7 +98,7 @@ La section *Advanced options* des assertions vous permet de spécifier un locali
 
 ### Navigation
 
-Utilisez l'action Navigation pour :
+L'action Navigation vous permet d'effectuer les actions suivantes :
 
 * Actualiser la page actuelle du scénario.
 * Suivre un lien spécifique. Dans la zone « Enter link URL », vous devez ajouter le préfixe `http` or `https` devant vos URL.
@@ -109,6 +110,17 @@ Cette étape du test Browser n'est pas ajoutée en faisant passer le curseur sur
 
 Après avoir sélectionné l'action Hover, cliquez sur l'élément que vous souhaitez sélectionner pour créer une étape.
 
+### Upload
+
+Vous pouvez enregistrer l'importation de fichiers en tant qu'action. Pour enregistrer une étape Upload, vous disposez de deux options :
+
+* ouvrez votre bureau depuis votre navigateur ; ou
+* faites glisser votre fichier dans l'iframe d'enregistrement.
+
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Créer une étape d'importation de fichiers"  style="width:50%;">}}
+
+Une limite de 10 fichiers (et de 5 Mo par fichier) s'applique.
+
 ### Variable
 
 #### Créer une variable
@@ -118,7 +130,7 @@ Après avoir sélectionné l'action Hover, cliquez sur l'élément que vous souh
 Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur parmi les propositions suivantes :
 
 * **Element** : créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
-* **Global Variable** : stockez et utilisez des variables globales à l'aide des [paramètres Synthetics][11]).
+* **Global Variable** : stockez et utilisez des variables globales à l'aide des [paramètres Synthetics][11].
 * **Email** : générez une adresse e-mail Synthetics aléatoire pouvant être utilisée durant les différentes étapes de votre test pour vérifier si un e-mail a bien été envoyé ou pour effectuer des actions à partir de son contenu (p. ex., cliquer sur un lien de confirmation).
 * **Pattern** :
 
@@ -167,12 +179,6 @@ Grâce aux options avancées, vous pouvez également choisir le lieu d'exécutio
 En ouvrant votre sous-test dans l'onglet principal, celui-ci s'exécute à la suite de votre test principal. Il utilise ainsi l'URL de l'étape précédente. À l'inverse, si vous ouvrez votre sous-test dans un nouvel onglet, on dans un onglet spécifique, le test s'exécute sur l'URL de départ du sous-test.
 
 **Remarque** : si vous souhaitez exécuter un sous-test de façon indépendante, vous avez la possibilité de le mettre en pause. Il recevra toujours des appels dans le cadre du test principal, mais ne sera pas exécuté de façon individuelle.
-
-### Importation
-
-Vous pouvez enregistrer l'importation de fichiers en tant qu'action, mais il existe une limite de 10 fichiers (et de 5 Mo par fichier).
-
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Créer une étape d'importation de fichiers"  style="width:50%;">}}
 
 ## Échec d'un test et erreurs
 
