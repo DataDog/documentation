@@ -2,8 +2,8 @@
 title: Kubernetes Audit Logs
 name: kubernetes_audit_logs
 kind: integration
-description: "Collect "
-short_description: ""
+description: "Track everything that happens inside your Kubernetes clusters"
+short_description: "Track inside Kubernetes clusters"
 dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md"]
 categories:
 - log collection
@@ -180,9 +180,8 @@ data:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1] /agent/kubernetes/#installation
-[1]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
-[2]: BLOGPOST
+[1]: /agent/kubernetes/#installation
+[2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
 [4]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#log-collection
 [5]: /agent/guide/agent-commands/#agent-status-and-information
