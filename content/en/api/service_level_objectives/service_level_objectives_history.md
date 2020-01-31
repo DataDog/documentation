@@ -2,10 +2,10 @@
 title: Get an SLO's history
 type: apicontent
 order: 30.03
-external_redirect: /api/#get-a-slo-s-history
+external_redirect: /api/#get-an-slo-s-history
 ---
 
-## Get a SLO's history
+## Get an SLO's history
 
 <div class="alert alert-warning">
 This endpoint is in beta and subject to change. If you have any feedback, <a href="/help">contact Datadog support</a>.
