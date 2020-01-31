@@ -51,10 +51,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `time window` - *, 7d, 30d, 90d
 * `type` - metric, monitor
 * `creator`
-* `id`
-* `service` - tags
-* `team` - tags
-* `env` - tags
+* `tags` - datacenter, env, service, team, etc. 
 
 To run a search, use the checkboxes on the left and the search bar. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
