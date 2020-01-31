@@ -12,4 +12,4 @@ Can only be used with application keys belonging to administrators.
 **ARGUMENTS**:
 
 * **`user_uuid`** [*required*]:
-    The handle of the user.
+    The user uuid of the user to disable.

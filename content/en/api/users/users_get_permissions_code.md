@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-user-permission-set
 
 **SIGNATURE**:
 
-`GET /v2/users/<USER_ID>/permissions`
+`GET /v2/users/<USER_UUID>/permissions`
 
 **EXAMPLE REQUEST**:
 

@@ -1,8 +1,8 @@
 ---
-title: Send invitation emails to users
+title: Send invitation email to a user
 type: apicode
 order: 36.8
-external_redirect: /api/#send-invitation-emails-to-users
+external_redirect: /api/#send-invitation-email-to-a-user
 ---
 
 **SIGNATURE**:

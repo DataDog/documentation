@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-user-invitation
 
 ## Get a user invitation
 
-Returns a single User Invitation by its uuid
+Returns a single User Invitation by its uuid.
 
 **ARGUMENTS**:
 
