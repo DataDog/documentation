@@ -285,11 +285,21 @@ main:
     identifier: "cluster_agent_commands"
     parent: "agent_cluster"
     weight: 404
+  - name: "Cluster metadata provider"
+    url: "agent/cluster_agent/metadata_provider/"
+    identifier: "cluster_agent_metadata_provider"
+    parent: "agent_cluster"
+    weight: 405
+  - name: "Build"
+    url: "agent/cluster_agent/build/"
+    identifier: "cluster_agent_build"
+    parent: "agent_cluster"
+    weight: 406
   - name: "Troubleshooting"
     url: "agent/cluster_agent/troubleshooting/"
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
-    weight: 405
+    weight: 407
 
   ## AGENT - Autodiscovery
 
