@@ -51,7 +51,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `time window` - *, 7d, 30d, 90d
 * `type` - metric, monitor
 * `creator`
-* `id`
+* `datacentewr` - tags
 * `service` - tags
 * `team` - tags
 * `env` - tags
