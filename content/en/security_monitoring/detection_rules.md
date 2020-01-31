@@ -85,7 +85,7 @@ The Detection Rule cases join these queries together based on their group by val
 
 {{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="Set rule cases" responsive="true" >}}
 
-In this example, when 5 failed logins and a successful login exist for the same `@usr.name`, the first case is matched and a Security Signal is generated. 
+In this example, when greater than 5 failed logins and a successful login exist for the same `@usr.name`, the first case is matched and a Security Signal is generated. 
 
 {{< img src="security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" responsive="true">}}
 
