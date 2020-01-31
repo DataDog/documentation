@@ -30,7 +30,7 @@ further_reading:
 
 Collect Kubernetes audit logs to track everything that happens inside your Kubernetes clusters, every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (e.g., the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
 
-With the Kubernetes audit logs integration, identify permission issues, RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster.
+With the Kubernetes audit logs integration, you can identify permission issues, RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster.
 
 Deep dive into these topics with the [Datadog talk at KubeCon 2019][1] and the blog post about [how Kubernetes audit logs might be used][2]
 
