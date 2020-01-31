@@ -68,7 +68,7 @@ When you create or edit an SLO, you can add tags for filtering on the [list SLOs
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
-The overall uptime can be considered as a percentage of the time where **all** of the monitors are in the `OK` state. It is not the average of the aggregated monitors. 
+The overall uptime can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors. 
 
 Consider the following example for 3 monitors:
 
