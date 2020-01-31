@@ -128,7 +128,8 @@
 					]
 				}
 			],
-			"description": "All requests to Datadog's API must be authenticated. Requests that write data require reporting access and require an API key. Requests that read data require full access and also require an application key."
+			"description": "All requests to Datadog's API must be authenticated. Requests that write data require reporting access and require an API key. Requests that read data require full access and also require an application key.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Checks",
@@ -247,7 +248,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Comments",
@@ -589,6 +591,7 @@
 								{
 									"key": "COMMENT_ID",
 									"value": "<EVENT_ID>",
+									"type": "string",
 									"description": "ID of the comment to edit."
 								}
 							]
@@ -882,7 +885,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Dashboards",
@@ -1087,6 +1091,7 @@
 								{
 									"key": "DASHBOARD_ID",
 									"value": "<DASHBOARD_ID>",
+									"type": "string",
 									"description": "ID of the Dashboard to update"
 								}
 							]
@@ -1259,6 +1264,7 @@
 								{
 									"key": "DASHBOARD_ID",
 									"value": "<DASHBOARD_ID>",
+									"type": "string",
 									"description": "Id of the Dashboar to delete"
 								}
 							]
@@ -1425,6 +1431,7 @@
 								{
 									"key": "DASHBOARD_ID",
 									"value": "<DASHBOARD_ID>",
+									"type": "string",
 									"description": "Id of the Dashboard to GET"
 								}
 							]
@@ -1610,7 +1617,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Dashboard Lists",
@@ -1657,6 +1665,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "Dashboard list ID to fetch"
 								}
 							]
@@ -2135,6 +2144,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "The ID of the Dashboard list to update"
 								}
 							]
@@ -2367,6 +2377,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "ID of the Dashboard list to delete"
 								}
 							]
@@ -2545,6 +2556,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "ID of the Dashbord list to get items from"
 								}
 							]
@@ -2656,6 +2668,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "ID of the Dashboard list to add item into"
 								}
 							]
@@ -2711,6 +2724,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "ID of the Dashboard list to update"
 								}
 							]
@@ -2766,6 +2780,7 @@
 								{
 									"key": "DASHBOARD_LIST_ID",
 									"value": "<DASHBOARD_LIST_ID>",
+									"type": "string",
 									"description": "ID of the Dashboard list to delete items from"
 								}
 							]
@@ -2797,7 +2812,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Downtimes",
@@ -2918,6 +2934,7 @@
 								{
 									"key": "DOWNTIME_ID",
 									"value": "<DOWNTIME_ID>",
+									"type": "string",
 									"description": "ID of the downtime to update"
 								}
 							]
@@ -2966,6 +2983,7 @@
 								{
 									"key": "DOWNTIME_ID",
 									"value": "<DOWNTIME_ID>",
+									"type": "string",
 									"description": "ID of the downtime to delete"
 								}
 							]
@@ -3105,6 +3123,7 @@
 								{
 									"key": "DOWNTIME_ID",
 									"value": "<DOWNTIME_ID>",
+									"type": "string",
 									"description": "ID of the downtime to fetch"
 								}
 							]
@@ -3258,7 +3277,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Embeddable Graphs",
@@ -3425,6 +3445,7 @@
 								{
 									"key": "EMBED_ID",
 									"value": "<EMBED_ID>",
+									"type": "string",
 									"description": "ID of the embed to fetch"
 								}
 							]
@@ -3471,6 +3492,7 @@
 								{
 									"key": "EMBED_ID",
 									"value": "<EMBED_ID>",
+									"type": "string",
 									"description": "ID of the Embed to enable"
 								}
 							]
@@ -3517,6 +3539,7 @@
 								{
 									"key": "EMBED_ID",
 									"value": "<EMBED_ID>",
+									"type": "string",
 									"description": "ID of the embed to revoke"
 								}
 							]
@@ -3548,7 +3571,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Events",
@@ -3715,6 +3739,7 @@
 								{
 									"key": "EVENT_ID",
 									"value": "<EVENT_ID>",
+									"type": "string",
 									"description": "ID of the event to fetch"
 								}
 							]
@@ -3974,7 +3999,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Graphs",
@@ -4123,7 +4149,8 @@
 					]
 				}
 			],
-			"description": "You can take graph snapshots using the API."
+			"description": "You can take graph snapshots using the API.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Hosts",
@@ -4442,6 +4469,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Name of the host to mute"
 								}
 							]
@@ -4553,6 +4581,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Name of the host to unmute"
 								}
 							]
@@ -4619,7 +4648,8 @@
 						}
 					]
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Integrations",
@@ -4737,12 +4767,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"lambda_arn\": \"arn:aws:lambda:us-east-1:123456789012:function:PushLogs\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"lambda_arn\": \"arn:aws:lambda:us-east-1:123456789012:function:PushLogs\"\n}"
 										},
 										"url": {
 											"raw": "https://api.datadoghq.{{datadog_site}}/v1/integration/aws/logs",
@@ -4789,12 +4814,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"services\": [\n        \"elb\",\n        \"s3\"\n    ]\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"services\": [\n        \"elb\",\n        \"s3\"\n    ]\n}"
 										},
 										"url": {
 											"raw": "https://api.datadoghq.{{datadog_site}}/v1/integration/aws/logs/services",
@@ -4866,12 +4886,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"lambda_arn\": \"arn:aws:lambda:<REGION>:<AWS_ACCOUNT_ID>:function:<FUNCTION_NAME>\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"lambda_arn\": \"arn:aws:lambda:<REGION>:<AWS_ACCOUNT_ID>:function:<FUNCTION_NAME>\"\n}"
 										},
 										"url": {
 											"raw": "https://api.datadoghq.{{datadog_site}}/v1/integration/aws/logs/check_async",
@@ -4919,12 +4934,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"account_id\": \"AWS_ACCOUNT_ID\",\n    \"services\": [\n        \"s3\",\n        \"elb\",\n        \"elbv2\",\n        \"cloudfront\",\n        \"redshift\",\n        \"lambda\"\n    ]\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"raw": "{\n    \"account_id\": \"AWS_ACCOUNT_ID\",\n    \"services\": [\n        \"s3\",\n        \"elb\",\n        \"elbv2\",\n        \"cloudfront\",\n        \"redshift\",\n        \"lambda\"\n    ]\n}"
 										},
 										"url": {
 											"raw": "https://api.datadoghq.{{datadog_site}}/v1/integration/aws/logs/services_async",
@@ -6131,6 +6141,7 @@
 						}
 					],
 					"description": "Configure your Datadog-AWS integration directly through Datadog API.\n\nMore Details Here: https://docs.datadoghq.com/integrations/amazon_web_services/",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -6418,6 +6429,7 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -6688,6 +6700,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -6977,6 +6990,7 @@
 						}
 					],
 					"description": "Configure your Datadog-PagerDuty integration directly through Datadog API.\nRead more about Datadog-PagerDuty integration\n\nARGUMENTS\nservices [required]:\nArray of PagerDuty service objects. Learn how to configure you Datadog service with PagerDuty documentation. A PagerDuty service object is composed by:\n\nservice_name [required]:\nYour Service name in PagerDuty.\n\nservice_key [required]:\nYour Service name associated service key in Pagerduty.\n\nsubdomain [required]:\nYour PagerDuty accounts personalized sub-domain name.\n\nschedules [required]: Array of your schedule URLs e.g:\n[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]\n\napi_token [required]:\nYour PagerDuty API token.\n\nrun_check [optional, default=false]:\nDetermines if the integration install check is run before returning a response.\n\nIf true:\n\nThe install check is run\nIf there’s an error in the configuration the error is returned\nIf there’s no error, 204 No Content response code is returned\nIf false:\n\nWe return a 202 accepted\nInstall check is run after returning a response",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -7266,6 +7280,7 @@
 						}
 					],
 					"description": "Configure your Datadog-Slack integration directly through Datadog API.\nRead more about Datadog-Slack integration\n\nARGUMENTS\nservice_hooks [required]:\nArray of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:\n\naccount [required]:\nYour Slack account name.\n\nurl [required]:\nYour Slack Service Hook URL.\n\nchannels [required]:\nArray of slack channel objects to post to. A slack channel object is composed by:\n\nchannel_name [required]:\nYour channel name e.g: #general, #private\n\ntransfer_all_user_comments [optional, default=False]:\nTo be notified for every comment on a graph, set it to true. If set to False use the @slack-channel_name syntax for comments to be posted to slack.\n\naccount [required]:\nAccount to which the channel belongs to.\n\nrun_check [optional, default=false]:\nDetermines if the integration install check is run before returning a response.\n\nIf true:\n\nThe install check is run\nIf there’s an error in the configuration the error is returned\nIf there’s no error, 204 No Content response code is returned\nIf false:\n\nWe return a 202 accepted\nInstall check is run after returning a response",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -7454,6 +7469,7 @@
 						}
 					],
 					"description": "Webhooks\nConfigure your Datadog-Webhooks integration directly through Datadog API.\nRead more about Datadog-Webhooks integration\n\nARGUMENTS\nhooks [required]:\nArray of Webhook objects. A Webhook object is composed by:\n\nname [required]:\nYour Webhook name.\nLearn more on how to use it in monitor notifications.\nurl [required]:\nYour Webhook URL.\nuse_custom_payload [optional, default=False]:\nIf true, allow you to specify a custom payload for your Webhook.\n\ncustom_payload [optional, default=None]:\nIf use_custom_payloag is true, specify your own payload to add your own custom fields to the request using those variables.\n\nencode_as_form [optional, default=False]:\nIf use_custom_payload is true, set this to true to have your payload to be URL-encoded.\n\nheaders [optional, default=None]:\nHeaders attached to your Webhook.\n\nrun_check [optional, default=false]:\nDetermines if the integration install check is run before returning a response.\n\nIf true:\n\nThe install check is run\nIf there’s an error in the configuration the error is returned\nIf there’s no error, 204 No Content response code is returned\nIf false:\n\nWe return a 202 accepted\nInstall check is run after returning a response",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				}
 			],
@@ -7479,7 +7495,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Key Management",
@@ -7624,7 +7641,8 @@
 									"variable": [
 										{
 											"key": "DD_API_KEY",
-											"value": "<API_KEY_TO_GET>"
+											"value": "<API_KEY_TO_GET>",
+											"type": "string"
 										}
 									]
 								},
@@ -7675,7 +7693,8 @@
 									"variable": [
 										{
 											"key": "DD_API_KEY",
-											"value": "<API_KEY_TO_EDIT>"
+											"value": "<API_KEY_TO_EDIT>",
+											"type": "string"
 										}
 									]
 								},
@@ -7726,7 +7745,8 @@
 									"variable": [
 										{
 											"key": "DD_API_KEY",
-											"value": "<API_KEY_TO_DELETE>"
+											"value": "<API_KEY_TO_DELETE>",
+											"type": "string"
 										}
 									]
 								},
@@ -7736,6 +7756,7 @@
 						}
 					],
 					"description": "Manage your Datadog API keys",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -7878,7 +7899,8 @@
 									"variable": [
 										{
 											"key": "DD_APPLICATION_KEY",
-											"value": "<APPLICATION_KEY_TO_GET>"
+											"value": "<APPLICATION_KEY_TO_GET>",
+											"type": "string"
 										}
 									]
 								},
@@ -7929,7 +7951,8 @@
 									"variable": [
 										{
 											"key": "DD_APPLICATION_KEY",
-											"value": "<APPLICATION_KEY_TO_EDIT>"
+											"value": "<APPLICATION_KEY_TO_EDIT>",
+											"type": "string"
 										}
 									]
 								},
@@ -7980,7 +8003,8 @@
 									"variable": [
 										{
 											"key": "DD_APPLICATION_KEY",
-											"value": "<APPLICATION_KEY_TO_DELETE>"
+											"value": "<APPLICATION_KEY_TO_DELETE>",
+											"type": "string"
 										}
 									]
 								},
@@ -7990,10 +8014,12 @@
 						}
 					],
 					"description": "Manage your Datadog API keys",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				}
 			],
-			"description": "Manage your Datdog API keys"
+			"description": "Manage your Datdog API keys",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Logs",
@@ -8179,7 +8205,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Logs indexes",
@@ -8260,6 +8287,7 @@
 								{
 									"key": "INDEX_NAME",
 									"value": "<INDEX_NAME>",
+									"type": "string",
 									"description": "Name of the index to get."
 								}
 							]
@@ -8316,6 +8344,7 @@
 								{
 									"key": "INDEX_NAME",
 									"value": "main",
+									"type": "string",
 									"description": "Name of the index"
 								}
 							]
@@ -8433,7 +8462,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Logs Pipelines",
@@ -8600,6 +8630,7 @@
 								{
 									"key": "PIPELINE_ID",
 									"value": "<PIPELINE_ID>",
+									"type": "string",
 									"description": "ID of the Pipeline to get."
 								}
 							]
@@ -8704,6 +8735,7 @@
 								{
 									"key": "PIPELINE_ID",
 									"value": "<PIPELINE_ID>",
+									"type": "string",
 									"description": "ID of the pipeline to update"
 								}
 							]
@@ -8750,6 +8782,7 @@
 								{
 									"key": "PIPELINE_ID",
 									"value": "<PIPELINE_ID>",
+									"type": "string",
 									"description": "ID of the pipeline to delete"
 								}
 							]
@@ -8781,7 +8814,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Metrics",
@@ -9048,6 +9082,7 @@
 								{
 									"key": "METRIC_NAME",
 									"value": "<METRIC_NAME>",
+									"type": "string",
 									"description": "Name of the metric to retrieve metadata from."
 								}
 							]
@@ -9106,6 +9141,7 @@
 								{
 									"key": "METRIC_NAME",
 									"value": "<METRIC_NAME>",
+									"type": "string",
 									"description": "Name of the metric to edit metadata from."
 								}
 							]
@@ -9191,7 +9227,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Monitors",
@@ -9288,6 +9325,7 @@
 								{
 									"key": "MONITOR_ID",
 									"value": "<MONITOR_ID_TO_GET>",
+									"type": "string",
 									"description": "Id of the monitor you want to get info from"
 								}
 							]
@@ -9340,6 +9378,7 @@
 								{
 									"key": "MONITOR_ID",
 									"value": "<MONITOR_ID_TO_EDIT>",
+									"type": "string",
 									"description": "Id of the monitor you want to edit info from"
 								}
 							]
@@ -9436,6 +9475,7 @@
 								{
 									"key": "MONITOR_ID",
 									"value": "<MONITOR_ID_TO_DELETE>",
+									"type": "string",
 									"description": "Id of the monitor to Delete"
 								}
 							]
@@ -9532,6 +9572,7 @@
 								{
 									"key": "MONITOR_ID",
 									"value": "<MONITOR_ID_TO_MUTE>",
+									"type": "string",
 									"description": "ID of the monitor to mute."
 								}
 							]
@@ -9585,6 +9626,7 @@
 								{
 									"key": "MONITOR_ID",
 									"value": "<MONITOR_ID_TO_UNMUTE>",
+									"type": "string",
 									"description": "ID of the monitor to un-mute."
 								}
 							]
@@ -9878,7 +9920,8 @@
 					"response": []
 				}
 			],
-			"description": "Monitors allow you to watch a metric or check that you care about, notifying your team when some defined threshold is exceeded. Please refer to the Guide to Monitors for more information on creating monitors."
+			"description": "Monitors allow you to watch a metric or check that you care about, notifying your team when some defined threshold is exceeded. Please refer to the Guide to Monitors for more information on creating monitors.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Organizations",
@@ -9967,6 +10010,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<DATADOG_ORG_PUBLIC_ID_TO_GET>",
+									"type": "string",
 									"description": "Datadog public organization ID."
 								}
 							]
@@ -10059,6 +10103,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<DATADOG_ORG_PUBLIC_ID_TO_UPDATE>",
+									"type": "string",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -10114,6 +10159,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<DATADOG_ORG_PUBLIC_ID>",
+									"type": "string",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -10145,7 +10191,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Synthetics",
@@ -10243,6 +10290,7 @@
 								{
 									"key": "TEST_ID",
 									"value": "<SYNTHETICS_TEST_ID>",
+									"type": "string",
 									"description": "ID of the synthetics test to start/pause"
 								}
 							]
@@ -10297,6 +10345,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"type": "string",
 									"description": "ID of the test to Edit"
 								}
 							]
@@ -10397,6 +10446,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"type": "string",
 									"description": "ID of the synthetics test to get results from"
 								}
 							]
@@ -10451,11 +10501,13 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"type": "string",
 									"description": "ID of the synthetics test to get results from"
 								},
 								{
 									"key": "RESULT_ID",
 									"value": "<SYNTHETICS_TEST_RESULT_ID>",
+									"type": "string",
 									"description": "ID of the synthetics test result."
 								}
 							]
@@ -10552,6 +10604,7 @@
 								{
 									"key": "PUBLIC_ID",
 									"value": "SYNTHETICS_TEST_PUBLIC_ID",
+									"type": "string",
 									"description": "ID of the synthetics test to get results from"
 								}
 							]
@@ -10649,7 +10702,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Tags",
@@ -10736,6 +10790,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Name of the host to retrieve tags from."
 								}
 							]
@@ -10789,6 +10844,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Host name to add tags to."
 								}
 							]
@@ -10842,6 +10898,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Hostname to update tags of."
 								}
 							]
@@ -10895,6 +10952,7 @@
 								{
 									"key": "HOSTNAME",
 									"value": "<HOSTNAME>",
+									"type": "string",
 									"description": "Hostname to delete tag from."
 								}
 							]
@@ -10904,7 +10962,8 @@
 					"response": []
 				}
 			],
-			"description": "The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).\n\nThe component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano."
+			"description": "The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).\n\nThe component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Tracing",
@@ -11004,7 +11063,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Usage Metering",
@@ -11414,7 +11474,7 @@
 								},
 								{
 									"key": "end_hr",
-									"value": null,
+									"value": "",
 									"description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n",
 									"disabled": true
 								}
@@ -11447,11 +11507,92 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Users",
 			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
+								"key": "DD-APPLICATION-KEY",
+								"value": "{{datadog_application_key}}",
+								"description": "Your Datadog application key",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users"
+							]
+						},
+						"description": "### Overview\n\nGet all user for your organization.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
+								"key": "DD-APPLICATION-KEY",
+								"value": "{{datadog_application_key}}",
+								"description": "Your Datadog application key",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:DATADOG_USER_UUID",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":DATADOG_USER_UUID"
+							],
+							"variable": [
+								{
+									"key": "DATADOG_USER_UUID",
+									"value": "",
+									"description": "The user_uuid of the user."
+								}
+							]
+						},
+						"description": "### Overview\n\nGet a user in the organization specified by the user's `user_uuid`.\n\n### Arguments\n\n* **`user_uuid`** [*required*]: The `user_uuid` of the user."
+					},
+					"response": []
+				},
 				{
 					"name": "Create user",
 					"request": {
@@ -11476,10 +11617,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"test user\",\n    \"access_role\": \"st\"\n}"
+							"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"relationships\": {\n      \"roles\": {\n        \"data\": [\n          {\n            \"type\": \"roles\",\n            \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n          }\n        ]\n      }\n    },\n    \"attributes\": {\n      \"handle\": \"test@example.com\",\n      \"name\": \"Test\",\n      \"title\": \"Test title\"\n    }\n  }\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11488,141 +11629,11 @@
 							],
 							"path": [
 								"api",
-								"v1",
-								"user"
+								"v2",
+								"users"
 							]
 						},
 						"description": "### Overview\n\nCreate a user for your organization.\n\n### ARGUMENTS\n\n* **`handle`** [*required*]: The user handle, must be a valid email.\n* **`name`** [*optional*, *default*=**None**]: The name of the user.\n* **`access_role`** [*optional*, *default*=**st**]: The access role of the user. Choose from:\n    *  **st** (standard user),\n    *  **adm** (admin user),\n    *  **ro** (read-only user).\n    *Note: users can be created with admin access role only with application keys belonging to administrators.*"
-					},
-					"response": []
-				},
-				{
-					"name": "Get user",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "DD-API-KEY",
-								"value": "{{datadog_api_key}}",
-								"description": "Your Datadog API key",
-								"type": "text"
-							},
-							{
-								"key": "DD-APPLICATION-KEY",
-								"value": "{{datadog_application_key}}",
-								"description": "Your Datadog application key",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								":DATADOG_USER_HANDLE"
-							],
-							"variable": [
-								{
-									"key": "DATADOG_USER_HANDLE",
-									"value": "<DATADOG_USER_HANDLE>"
-								}
-							]
-						},
-						"description": "### Overview\n\nGet a user details.\n\n### Arguments\n\n* **`user_handle`** [*required*]: The handle of the user."
-					},
-					"response": []
-				},
-				{
-					"name": "Get all users",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "DD-API-KEY",
-								"value": "{{datadog_api_key}}",
-								"description": "Your Datadog API key",
-								"type": "text"
-							},
-							{
-								"key": "DD-APPLICATION-KEY",
-								"value": "{{datadog_application_key}}",
-								"description": "Your Datadog application key",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user"
-							]
-						},
-						"description": "### Overview\n\nGet all user for your organization.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
-					},
-					"response": []
-				},
-				{
-					"name": "Update user",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "DD-API-KEY",
-								"value": "{{datadog_api_key}}",
-								"description": "Your Datadog API key",
-								"type": "text"
-							},
-							{
-								"key": "DD-APPLICATION-KEY",
-								"value": "{{datadog_application_key}}",
-								"description": "Your Datadog application key",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
-						},
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								":DATADOG_USER_HANDLE"
-							],
-							"variable": [
-								{
-									"key": "DATADOG_USER_HANDLE",
-									"value": "<DATADOG_USER_HANDLE>"
-								}
-							]
-						},
-						"description": "### Overview\n\nUpdate a user informations,\n\n**Note**: It can only be used with application keys belonging to administrators.\n\n##### ARGUMENTS\n* **`id`** [*required*]: The handle of the user.\n* **`name`** [*optional*, *default*=**None**]: The new name of the user.\n* **`email`** [*optional*, *default*=**None**]: The new email of the user.\n* **`disabled`** [*optional*, *default*=**None**]: The new disabled status of the user.\n* **`access_role`** [*optional*, *default*=**st**]: The access role of the user. Choose from:\n    *  **st** (standard user),\n    *  **adm** (admin user),\n    *  **ro** (read-only user)."
 					},
 					"response": []
 				},
@@ -11632,6 +11643,54 @@
 						"method": "DELETE",
 						"header": [
 							{
+								"description": "Your Datadog API key",
+								"key": "DD-API-KEY",
+								"type": "text",
+								"value": "{{datadog_api_key}}"
+							},
+							{
+								"description": "Your Datadog application key",
+								"key": "DD-APPLICATION-KEY",
+								"type": "text",
+								"value": "{{datadog_application_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:DATADOG_USER_UUID",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":DATADOG_USER_UUID"
+							],
+							"variable": [
+								{
+									"key": "DATADOG_USER_UUID",
+									"value": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+									"description": "The user uuid of the user to disable."
+								}
+							]
+						},
+						"description": "### Overview\n\nDelete a user from an organization.\n\n**Note**: This endpoint can only be used with application keys belonging to administrators.\n\n### Arguments\n\n* **`user_uuid`** [*required*]: The user uuid of the user to disable."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user application key",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
 								"key": "DD-API-KEY",
 								"value": "{{datadog_api_key}}",
 								"description": "Your Datadog API key",
@@ -11644,12 +11703,8 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:USER_HANDLE/application_keys",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11658,18 +11713,203 @@
 							],
 							"path": [
 								"api",
-								"v1",
-								"user",
-								":DATADOG_USER_HANDLE"
+								"v2",
+								"users",
+								":USER_HANDLE",
+								"application_keys"
 							],
 							"variable": [
 								{
-									"key": "DATADOG_USER_HANDLE",
-									"value": "<DATADOG_USER_HANDLE>"
+									"key": "USER_HANDLE",
+									"value": "test@example.com",
+									"description": "The handle (email address) of the user."
 								}
 							]
 						},
-						"description": "### Overview\n\nDelete a user from an organization.\n\n**Note**: This endpoint can only be used with application keys belonging to administrators.\n\n### Arguments\n\n* **`id`** [*required*]: The handle of the user."
+						"description": "### Overview\n\nReturns a list of application keys for a given user.\n\n### Arguments\n\n* **`user_handle`** [*required*]: The handle (email address) of the user.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user organisation",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
+								"key": "DD-APPLICATION-KEY",
+								"value": "{{datadog_application_key}}",
+								"description": "Your Datadog application key",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:USER_UUID/orgs",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":USER_UUID",
+								"orgs"
+							],
+							"variable": [
+								{
+									"key": "USER_UUID",
+									"value": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+									"description": "The user_uuid of the user."
+								}
+							]
+						},
+						"description": "### Overview\n\nReturns the user information and all of the organizations of that user.\n\n### Arguments\n\n* **`user_uuid`** [*required*]: The `user_uuid` of the user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user permission set",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DD-API-KEY",
+								"value": "{{datadog_api_key}}",
+								"description": "Your Datadog API key",
+								"type": "text"
+							},
+							{
+								"key": "DD-APPLICATION-KEY",
+								"value": "{{datadog_application_key}}",
+								"description": "Your Datadog application key",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:USER_UUID/permissions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":USER_UUID",
+								"permissions"
+							],
+							"variable": [
+								{
+									"key": "USER_UUID",
+									"value": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+									"description": "The user_uuid of the user."
+								}
+							]
+						},
+						"description": "### Overview\n\nReturns a list of the user's permissions granted by the roles the user is assigned to.\n\n### Arguments\n\n* **`user_uuid`** [*required*]: The `user_uuid` of the user."
+					},
+					"response": []
+				},
+				{
+					"name": "Send invitation email to users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Your Datadog API key",
+								"key": "DD-API-KEY",
+								"type": "text",
+								"value": "{{datadog_api_key}}"
+							},
+							{
+								"description": "Your Datadog application key",
+								"key": "DD-APPLICATION-KEY",
+								"type": "text",
+								"value": "{{datadog_application_key}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": [\n    {\n      \"type\": \"user_invitations\",\n      \"relationships\": {\n        \"user\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        }\n      },\n      \"attributes\": {\n        \"login_method\": \"string\"\n      }\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/v2/user_invitations",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"v2",
+								"user_invitations"
+							]
+						},
+						"description": "### Overview\n\nSends emails to one or more users inviting them to join the organization.\n\n### Arguments\n\n* **`type`** [*required*]: The type of the USER request, use `user_invitations`\n* **`attributes.login_method`**: The login method included in the user invitation."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user invitation",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Your Datadog API key",
+								"key": "DD-API-KEY",
+								"type": "text",
+								"value": "{{datadog_api_key}}"
+							},
+							{
+								"description": "Your Datadog application key",
+								"key": "DD-APPLICATION-KEY",
+								"type": "text",
+								"value": "{{datadog_application_key}}"
+							}
+						],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/user_invitations/:USER_INVITATION_UUID",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"user_invitations",
+								":USER_INVITATION_UUID"
+							],
+							"variable": [
+								{
+									"key": "USER_INVITATION_UUID",
+									"value": ""
+								}
+							]
+						},
+						"description": "### Overview\n\nReturns a single User Invitation by its uuid.\n\n### Arguments\n\n* **`user_invitation_uuid`** [*required*]: The UUID for the user invitation."
 					},
 					"response": []
 				}
@@ -11696,7 +11936,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -11740,5 +11981,6 @@
 			"value": "",
 			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
