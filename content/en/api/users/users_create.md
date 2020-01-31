@@ -7,11 +7,13 @@ external_redirect: /api/#create-user
 
 ## Create user
 
-Create a new user within Datadog.
+Create a user for your organization.
 
 **ARGUMENTS**:
 
-* **`handle`** [*required*]: The user handle, must be a valid email.
-* **`name`** [*optional*, *default*=**None**]: The name of the user.
-* **`title`** [*optional*, *default*=**st**]: The title the user
-* **`roles`** [*optional*, *default*=**None**]: Array of Datadog roles assigned to the user. **Note**: If no role is assigned to a user, this user won't be able to log in Datadog.
+A user is a JSON object with `"type":"users"` that takes the following elements:
+
+* **`roles`** [*optional*]: An array of roles to assign to the user. Each role is an object with `"type": "roles"` and an `id` that is the role ID to assign to the user.
+* **`attributes.email`** [*required*]: The email of the new user.
+* **`attributes.name`** [*optional*]: The name of the new user.
+* **`attributes.title`** [*optional*]: The title of the new user.

@@ -11617,7 +11617,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"relationships\": {\n      \"roles\": {\n        \"data\": [\n          {\n            \"type\": \"roles\",\n            \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n          }\n        ]\n      }\n    },\n    \"attributes\": {\n      \"handle\": \"test@example.com\",\n      \"name\": \"Test\",\n      \"title\": \"Test title\"\n    }\n  }\n}"
+							"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"relationships\": {\n      \"roles\": {\n        \"data\": [\n          {\n            \"type\": \"roles\",\n            \"id\": \"<ROLE_ID>\"\n          }\n        ]\n      }\n    },\n    \"attributes\": {\n      \"email\": \"<USER_EMAIL>\",\n      \"name\": \"<USER_NAME>\",\n      \"title\": \"<USER_TITLE>\"\n    }\n  }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users",
@@ -11633,7 +11633,7 @@
 								"users"
 							]
 						},
-						"description": "### Overview\n\nCreate a user for your organization.\n\n### ARGUMENTS\n\n* **`handle`** [*required*]: The user handle, must be a valid email.\n* **`name`** [*optional*, *default*=**None**]: The name of the user.\n* **`access_role`** [*optional*, *default*=**st**]: The access role of the user. Choose from:\n    *  **st** (standard user),\n    *  **adm** (admin user),\n    *  **ro** (read-only user).\n    *Note: users can be created with admin access role only with application keys belonging to administrators.*"
+						"description": "### Overview\n\nCreate a user for your organization.\n\n### ARGUMENTS\n\nA user is a JSON object with `\"type\":\"users\"` that takes the following elements: \n\n* **`roles`** [*optional*]: An array of roles to assign to the user. Each role is an object with `\"type\": \"roles\"` and an `id` that is the role ID to assign to the user.\n* **`attributes.email`** [*required*]: The email of the new user.\n* **`attributes.name`** [*optional*]: The name of the new user.\n* **`attributes.title`** [*optional*]: The title of the new user."
 					},
 					"response": []
 				},
