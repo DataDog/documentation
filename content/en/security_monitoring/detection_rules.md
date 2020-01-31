@@ -98,6 +98,9 @@ The [Security Configuration Detection Rules][3] page lets you search of all Dete
 The free text search filters Detection Rules by text in the rule name or query. Query results update in real time when the query is edited—there is no “Search” button to click.
 
 ### Detection Rules Table
+
+{{< img src="security_monitoring/detection_rules/rules_table.png" alt="Detection Rules Table" responsive="true" >}}
+
 The Detection Rules are displayed in the Detection Rules table.
 
 Configure the Detection Rules table content and preferences with the Options button. Only date created and rule ID are available for additional columns.
