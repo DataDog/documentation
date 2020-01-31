@@ -122,27 +122,62 @@ This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, an
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][2], [Log4Net][3], and [Serilog][4].
+Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below). **Note**: Automatic injection only works for logs formatted as JSON.
 
-Additionally, injection can be enabled in the code:
-
+**Automatic Trace ID Injection for Serilog**
 ```csharp
-using Datadog.Trace;
-using Datadog.Trace.Configuration;
-
-var settings = new TracerSettings { LogsInjectionEnabled = true };
-var tracer = new Tracer(settings);
+var log = new LoggerConfiguration()
+    .Enrich.FromLogContext() // Add Enrich.FromLogContext to emit MDC properties
+    .WriteTo.File(new JsonFormatter(), "log.json")
+    .CreateLogger();
 ```
 
-**Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
+**Automatic Trace ID Injection for NLog 4.5**
+```xml
+  <!-- Add includeMdc="true" to emit MDC properties -->
+  <layout xsi:type="JsonLayout" includeMdc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
 
-[1]: https://github.com/damianh/LibLog
-[2]: http://nlog-project.org
-[3]: https://logging.apache.org/log4net
-[4]: http://serilog.net
-[5]: /tracing/setup/dotnet/#configuration
+**Automatic Trace ID Injection for NLog 4.6+**
+```xml
+  <!-- Add includeMdlc="true" to emit MDC properties -->
+  <layout xsi:type="JsonLayout" includeMdlc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+**Automatic Trace ID Injection for log4net**
+```xml
+  <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
+    <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
+    <default />
+    <!--explicit default members-->
+    <remove value="ndc" />
+    <remove value="message" />
+    <!--remove the default preformatted message member-->
+    <member value="message:messageobject" />
+    <!--add raw message-->
+
+    <!-- Add value='properties' to emit MDC properties -->
+    <member value='properties'/>
+  </layout>
+```
+
+[1]: /tracing/setup/dotnet/#configuration
+[2]: https://github.com/damianh/LibLog
+[3]: http://serilog.net
+[4]: http://nlog-project.org
+[5]: https://logging.apache.org/log4net
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -440,23 +475,67 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To manually inject trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values.
+If you prefer to manually correlate your [traces][1] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
-Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message. For example:
+* Use `CorrelationIdentifier.TraceId` and `CorrelationIdentifier.SpanId` API methods to inject identifiers at the beginning and end of each [span][2] to log (see examples below).
+* Configure MDC to use the injected keys:
+  * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
+  * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
+* `Serilog` example:
 
 ```csharp
 using Datadog.Trace;
+using Serilog.Context;
 
-var traceId = CorrelationIdentifier.TraceId;
-var spanId = CorrelationIdentifier.SpanId;
-
-var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
+// there must be spans started and active before this block.
+using (LogContext.PushProperty("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
+using (LogContext.PushProperty("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
+{
+    // Log something
+}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+* `NLog` example:
 
-[1]: /logs/log_collection/csharp/#configure-your-logger
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+```csharp
+using Datadog.Trace;
+using NLog;
+
+// there must be spans started and active before this block.
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
+{
+    // Log something
+}
+```
+
+* `log4net` example:
+
+```csharp
+using Datadog.Trace;
+using log4net;
+
+// there must be spans started and active before this block.
+try
+{
+    LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
+    LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
+
+    // Log something
+
+}
+finally
+{
+    LogicalThreadContext.Properties.Remove("dd.trace_id");
+    LogicalThreadContext.Properties.Remove("dd.span_id");
+}
+```
+
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are parsed as strings. More information can be found in the [FAQ on this topic][4].
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /logs/log_collection/csharp/#configure-your-logger
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "PHP" %}}
 

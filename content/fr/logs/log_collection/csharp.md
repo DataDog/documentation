@@ -23,14 +23,14 @@ further_reading:
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `log4Net`, `serilog` et `Nlog`.
+Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `log4net`, `Serilog` et `NLog`.
 
 Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][1].
 
 ## Configurer votre logger
 
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, une console ou d'autres éléments. Ce processus de journalisation est facilement configurable, dispose d'une API épurée et peut être utilisé sur les plateformes .NET récentes.
 
@@ -275,7 +275,7 @@ Et voilà ! Désormais, tous vos logs seront automatiquement au format JSON com
 
 Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Installez le [récepteur Serilog][1] de Datadog, qui envoie les événements et les logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443.
 Exécutez la commande suivante dans la console de gestion de paquet :

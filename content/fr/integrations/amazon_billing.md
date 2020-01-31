@@ -115,6 +115,3 @@ Si les métriques `aws.billing.actual_spend`, `aws.billing.forecasted_spend` ou 
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [10]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
-
-
-{{< get-dependencies >}}

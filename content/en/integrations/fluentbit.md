@@ -7,6 +7,7 @@ short_description: "Collect, parse, and forward log data from several different 
 categories:
 - log collection
 doc_link: /integrations/fluentbit/
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md"]
 has_logo: true
 integration_title: Fluent Bit
 is_public: true

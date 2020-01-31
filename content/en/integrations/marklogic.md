@@ -8,6 +8,7 @@ is_public: true
 kind: integration
 name: marklogic
 public_title: Datadog-Marklogic Integration
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/marklogic.md"]
 short_description: Gather your logs from Marklogic and send them to Datadog.
 ---
 

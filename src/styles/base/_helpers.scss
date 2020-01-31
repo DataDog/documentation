@@ -71,7 +71,21 @@
 
 // Font
 
+.font-18 {
+    font-size: 18px;
+    line-height: 27px;
+}
+
 .font-22 {
     font-size: 22px;
     line-height: 30px;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    overflow-x: auto;
 }

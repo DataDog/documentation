@@ -115,6 +115,3 @@ eventstore チェックには、サービスのチェック機能は含まれま
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
-
-
-{{< get-dependencies >}}

@@ -12,6 +12,7 @@ aliases:
 has_logo: true
 integration_title: nxlog
 is_public: true
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md"]
 public_title: Datadog-NXlog Integration
 supported_os:
 - windows

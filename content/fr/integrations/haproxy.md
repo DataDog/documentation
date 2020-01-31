@@ -204,4 +204,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [15]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process
 
 
-{{< get-dependencies >}}

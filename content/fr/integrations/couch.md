@@ -161,6 +161,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [9]: https://github.com/DataDog/integrations-core/blob/master/couch/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
 [11]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
-
-
-{{< get-dependencies >}}

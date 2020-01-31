@@ -86,6 +86,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
