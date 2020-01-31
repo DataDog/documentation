@@ -46,16 +46,16 @@ To enable audit logs in Kubernetes:
 
 1. Audit logs are disabled by default in Kubernetes. To enable them in your API server configuration, specify an audit policy file path:
 
-```
-kube-apiserver
-  [...]
-  --audit-log-path=/var/log/kubernetes/apiserver/audit.log
-  --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
-```
+  ```conf
+  kube-apiserver
+    [...]
+    --audit-log-path=/var/log/kubernetes/apiserver/audit.log
+    --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
+  ```
 
 2. Create the policy file at `/etc/kubernetes/audit-policies/policy.yaml` to specify the types of API requests you want to capture in your audit logs.  Audit policy rules are evaluated in order. The API server follows the first matching rule it finds for each type of operation/resource. Example of an audit policy:
 
-```
+```yaml
 # /etc/kubernetes/audit-policies/policy.yaml
 
 apiVersion: audit.k8s.io/v1
@@ -109,72 +109,74 @@ You may want to reduce the level of verbosity to `Metadata` for endpoints that c
 
 In the last section, for everything that was not explicitly configured by the previous rules, the policy is configured to log at `Metadata` level. As audit logs might be verbose, you can choose to exclude less critical actions/verbs (e.g., operations that don't change the cluster state like list, watch, and get).
 
-### Configuration
-
-##### Log collection
+### Log collection
 
 1. [Install the Agent][1] on your Kubernetes environment.
 2. Log collection is disabled by default. Enable it in the `env` section of your [daemonset][4]:
 
-```
- env:
-    (...)
-    - name: DD_LOGS_ENABLED
-      value: "true"
-```
+  ```yaml
+   env:
+      # (...)
+      - name: DD_LOGS_ENABLED
+        value: "true"
+  ```
 
 3. Mount the audit log directory as well as a directory that the Agent uses to store a pointer to know which log was last sent from that file. To do this, add the following in the `volumeMounts` section of the daemonset:
 
-```
- (...)
-    volumeMounts:
-      (...)
-      - name: pointdir
-        mountPath: /opt/datadog-agent/run
-      - name: auditdir
-        mountPath: /var/log/kubernetes/apiserver
-      - name: dd-agent-config
-        mountPath: /conf.d/kubernetes_audit.d
-  (...)
-  volumes:
-    (...)
-    - hostPath:
-        path: /opt/datadog-agent/run
-      name: pointdir
-    - hostPath:
-        path: /var/log/kubernetes/apiserver
-      name: auditdir
-     - name: dd-agent-config
-        configMap:
-          name: dd-agent-config
-          items:
-          - key: kubernetes-audit-log
-            path: conf.yaml
-  (...)
-```
+  ```yaml
+   # (...)
+      volumeMounts:
+        # (...)
+        - name: pointdir
+          mountPath: /opt/datadog-agent/run
+        - name: auditdir
+          mountPath: /var/log/kubernetes/apiserver
+        - name: dd-agent-config
+          mountPath: /conf.d/kubernetes_audit.d
+    # (...)
+    volumes:
+      # (...)
+      - hostPath:
+          path: /opt/datadog-agent/run
+        name: pointdir
+      - hostPath:
+          path: /var/log/kubernetes/apiserver
+        name: auditdir
+       - name: dd-agent-config
+          configMap:
+            name: dd-agent-config
+            items:
+            - key: kubernetes-audit-log
+              path: conf.yaml
+    # (...)
+  ```
 
-This also mounts the `conf.d` folder which is used to configure the agent to collect logs from the audit log file.
+    This also mounts the `conf.d` folder which is used to configure the agent to collect logs from the audit log file.
 
 4. Configure the Agent to collect logs from that file thanks to the config Map:
 
-```
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: dd-agent-config
-  namespace: default
-data:
-  kubernetes-audit-log: |-
-    logs:
-    - type: file
-      path: /var/log/kubernetes/apiserver/audit.log
-      source: kubernetes.audit
-      service: audit
-```
+  ```yaml
+  kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    name: dd-agent-config
+    namespace: default
+  data:
+    kubernetes-audit-log: |-
+      logs:
+      - type: file
+        path: /var/log/kubernetes/apiserver/audit.log
+        source: kubernetes.audit
+        service: audit
+  ```
 
 ### Validation
 
 [Run the Agent's status subcommand][5] and look for `Logs` under the Checks section.
+
+## Troubleshooting
+
+Need help? Contact [Datadog support][6].
 
 ## Further Reading
 
@@ -185,3 +187,4 @@ data:
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
 [4]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#log-collection
 [5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /help
