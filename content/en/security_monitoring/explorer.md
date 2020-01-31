@@ -11,7 +11,7 @@ further_reading:
     text: "Detection Rules"
 ---
 
-{{< img src="security_monitoring/explorer/sse_diagram.png" alt="Security Signals Explorer" responsive="true" >}}
+{{< img src="security_monitoring/explorer/sse_diagram2.png" alt="Security Signals Explorer" responsive="true" >}}
 
 From the [Security Signals Explorer][1], correlate and triage security signals.
 
