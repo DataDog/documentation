@@ -3,7 +3,7 @@ title: Datadog Data Collection, Resolution, and Retention
 kind: faq
 ---
 
-
+Find below a summary of Datadog data collection, resolution, and retention:
 
 | Source                       | Collection Methods                                                    | Collection interval   | Minimum Resolution | Default Retention                                                                                                                                            | Product Category |
 |------------------------------|-----------------------------------------------------------------------|-----------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
