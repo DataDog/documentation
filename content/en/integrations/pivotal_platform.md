@@ -31,17 +31,17 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 * [Datadog Cluster Monitoring for Pivotal Platform][1]
 * [Datadog Application Monitoring for Pivotal Platform][2]
 
-## Monitor Your Applications on Pivotal Platform
-
-Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][3] for Pivotal Platform that installs a [Datadog DogStatsD binary][4] and Datadog Agent in the container your app is running on.
-
-### PKS
+## PKS
 
 PKS environments can utilize our [Cluster Monitoring Tile][1] and the the [pivotal_pks][27] integration together to montior your cluster.
 
 For kubelet cluster based workloads, utilize the [pivotal_pks integration][27] to install the Datadog Agent with your workers.
 
 Use the [Cluster Monitoring Tile][1] to install the Datadog Agent on each non worker VM in your PKS environment. In environments without PAS installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
+
+## Monitor Your Applications on Pivotal Platform
+
+Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][3] for Pivotal Platform that installs a [Datadog DogStatsD binary][4] and Datadog Agent in the container your app is running on.
 
 ### Setup
 
