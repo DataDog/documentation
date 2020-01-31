@@ -107,7 +107,7 @@ spec:
           - {containerPort: 8125, name: dogstatsdport, protocol: UDP}
           - {containerPort: 8126, name: traceport, protocol: TCP}
         env:
-          - {name: DD_API_KEY, value: <YOUR_API_KEY>}
+          - {name: DD_API_KEY, value: <DATADOG_API_KEY>}
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
