@@ -119,7 +119,7 @@ Update or remove this quota at any time when editing the Index:
 [12]: /api/?lang=bash#update-an-index
 [13]: /logs/processing/processors/?tab=ui#user-agent-parser
 [14]: /logs/processing/processors/?tab=ui#geoip-parser
-[15]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[15]: /tracing/connect_logs_and_traces/
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: https://docs.datadoghq.com/logs/live_tail/#overview
 [18]: https://docs.datadoghq.com/logs/archives/
