@@ -11,16 +11,16 @@ further_reading:
     text: "Detection Rules"
 ---
 
-From the Security Signals Explorer, you can triage security signals.
+From the [Security Signals Explorer][4], correlate and triage security signals.
 
 {{< img src="security_monitoring/explorer/security_signals_explorer_view.png" alt="Security Signals Explorer view" responsive="true" >}}
 
 
 In this view, you can:
 
-* [Build a context](#context) to explore your Security Signals.
-* [Visualize your Security Signals](#visualization) as a filtered Security Signals table or Security Signals Analytics.
-* Inspect a security signal in the [Security Signal Panel](#security-signal-panel).
+* Explore your Security Signals
+* Inspect a Security Signal
+* Visualize your Security Signal Analytics
 
 ## Context
 
@@ -113,3 +113,4 @@ Follow the [log graphing guide][3] to learn more about all the graphing options.
 [1]: /logs/explorer/search
 [2]: /security_monitoring/detection_rules/#time-windows
 [3]: /logs/explorer/analytics
+[4]: https://app.datadoghq.com/security
