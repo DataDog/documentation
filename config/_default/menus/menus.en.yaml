@@ -933,6 +933,11 @@ main:
     identifier: "tracing_troubleshooting"
     parent: "tracing"
     weight: 10
+  - name: Agent APM metrics
+    url: "tracing/troubleshooting/agent_apm_metrics"
+    identifier: "tracing_troubleshooting_apm_metrics"
+    parent: "tracing_troubleshooting"
+    weight: 10
 
 
 ##########
