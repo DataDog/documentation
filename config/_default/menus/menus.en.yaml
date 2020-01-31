@@ -1119,16 +1119,16 @@ main:
     identifier: "security_monitoring_getting_started"
     weight: 1
 
-  - name: "Detection Rules"
-    url: "security_monitoring/detection_rules"
-    parent: "security_monitoring"
-    identifier: "security_monitoring_detection_rules"
-    weight: 2
-
   - name: "Signals Explorer"
     url: "security_monitoring/explorer"
     parent: "security_monitoring"
     identifier: "security_monitoring_explorer"
+    weight: 2
+
+  - name: "Detection Rules"
+    url: "security_monitoring/detection_rules"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_detection_rules"
     weight: 3
 
 ################
