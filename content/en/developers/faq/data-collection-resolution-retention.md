@@ -3,7 +3,7 @@ title: Datadog Data Collection, Resolution, and Retention
 kind: faq
 ---
 
-Find below a summary of Datadog data collection, resolution, and retention:
+
 
 | Source                       | Collection Methods                                                    | Collection interval   | Minimum Resolution | Default Retention                                                                                                                                            | Product Category |
 |------------------------------|-----------------------------------------------------------------------|-----------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
@@ -16,7 +16,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | Custom Metrics (API)         | POST directly to Datadog's API                                        | Real time             | 1 s                | 15 months                                                                                                                                                    | Infrastructure   |
 | Events                       | Datadog Agent, integrations, or API                                   | Real time             | 1 s                | 15 months                                                                                                                                                    | Infrastructure   |
 | Traces (Sampled)             | Datadog Agent + tracing library                                       | Real time             | 1 micro sec        | [See traces retention documentation][1]                                                                                                                      | APM              |
-| Trace Metrics (Unsampled)    | Datadog Agent + tracing library                                       | Real time             | 1 micro sec        | 15 months                                                                                                                                                    | APM              |
+| Trace Metrics (Unsampled)    | Datadog Agent + tracing library                                       | Real time             | 1 micro sec        | 30 days                                                                                                                                                    | APM              |
 | Analyzed Spans (Unsampled)       | Datadog Agent + tracing library + enabled logs                        | Real time             | 1 micro sec        | 2 Weeks                                                                                                                                                      | APM + Logs       |
 | Logs                         | Datadog Agent + Logs, 3rd party log collectors, or API                | Real time             | 1 micro sec        | Plan                                                                                                                                                         | Logs             |
 | API Test metrics             | Datadog Synthetics application                                        | User-defined          | 1 min              | 15 months                                                                                                                                                    | Synthetics       |
