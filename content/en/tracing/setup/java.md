@@ -371,7 +371,7 @@ To report a trace to Datadog the following happens:
 * In a separate reporting thread, the trace queue is flushed and traces are encoded via msgpack then sent to the Datadog Agent via http
 * Queue flushing happens on a schedule of once per second
 
-To see the actual code, documentation, and usage examples for any of the libraries and frameworks that Datadog supports, check the full list of auto- instrumented components for Java applications in the [Integrations](#integrations) section.
+To see the actual code, documentation, and usage examples for any of the libraries and frameworks that Datadog supports, check the full list of auto-instrumented components for Java applications in the [Integrations](#integrations) section.
 
 ### Trace Annotation
 
