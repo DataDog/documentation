@@ -155,7 +155,7 @@ In the last section, for everything that was not explicitly configured by the pr
 
 4. Configure the Agent to collect logs from that file thanks to the config Map:
 
-  ```yaml
+  ```text
   kind: ConfigMap
   apiVersion: v1
   metadata:
@@ -164,10 +164,10 @@ In the last section, for everything that was not explicitly configured by the pr
   data:
     kubernetes-audit-log: |-
       logs:
-      - type: file
-        path: /var/log/kubernetes/apiserver/audit.log
-        source: kubernetes.audit
-        service: audit
+        - type: file
+          path: /var/log/kubernetes/apiserver/audit.log
+          source: kubernetes.audit
+          service: audit
   ```
 
 ### Validation
