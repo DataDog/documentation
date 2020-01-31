@@ -12,6 +12,7 @@ has_logo: true
 integration_title: Sinatra
 is_public: true
 public_title: Datadog-Sinatra Integration
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md"]
 supported_os:
 - linux
 - mac_os
@@ -22,12 +23,13 @@ supported_os:
 
 This integration enables you to get web access logging from your [Sinatra][1] applications in order to monitor:
 
-- Errors logs (4xx codes, 5xx codes)
-- Web pages response time
-- Number of requests
-- Number of bytes exchanged
+* Errors logs (4xx codes, 5xx codes)
+* Web pages response time
+* Number of requests
+* Number of bytes exchanged
 
 ## Setup
+
 ### Installation
 
 [Install the Agent][2] on the instance that runs your Sinatra application.
@@ -58,7 +60,7 @@ More details are available in the [Rack recipes documentation][6].
 
 This logger uses the common Apache Access format and generates logs in the following format:
 
-```
+```text
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```
@@ -93,5 +95,5 @@ This logger uses the common Apache Access format and generates logs in the follo
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
 [6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
-[7]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[8]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: /agent/guide/agent-commands/#restart-the-agent

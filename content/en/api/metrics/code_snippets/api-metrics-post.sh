@@ -12,5 +12,4 @@ curl  -X POST -H "Content-type: application/json" \
           \"tags\":[\"environment:test\"]}
         ]
 }" \
-"https://api.datadoghq.com/api/v1/series?api_key=<YOUR_API_KEY>"
-
+"https://api.datadoghq.com/api/v1/series?api_key="<DATADOG_API_KEY>""

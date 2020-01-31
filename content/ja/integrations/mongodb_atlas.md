@@ -55,6 +55,3 @@ MongoDB Atlas インテグレーションには、サービスのチェック機
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/mongodb_atlas/mongodb_atlas_metadata.csv
 [3]: https://www.mongodb.com/blog/post/push-your-mongodb-atlas-alerts-to-datadog
 [4]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

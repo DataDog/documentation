@@ -2,7 +2,6 @@
 title: "Service Checks Submission: DogStatsD"
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
-disable_toc: true
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -21,14 +20,14 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 After [installing DogStatsD][1], you can send service checks to Datadog with the following function:
 
-```
+```text
 service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 ```
 
 Service check function parameters:
 
 | Parameter              | Type            | Required | Default Value | Description                                                                                                |
-| ---------------------- | --------------- | -------- | ------------- | ---------------------------------------------------------------------------------------------------------- |
+|------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `<SERVICE_CHECK_NAME>` | String          | Yes      | -             | The name of the service check.                                                                             |
 | `<STATUS>`             | Int             | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
 | `<TAGS>`               | List of strings | No       | -             | A list of tags to associate with the service check.                                                        |

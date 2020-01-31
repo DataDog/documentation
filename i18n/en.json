@@ -234,5 +234,14 @@
 
   "type": {
     "other": "Type"
+  },
+  "feel_free_contribute": {
+    "other": "Feel free to Contribute"
+  },
+  "mistake_in_docs": {
+    "other": "Mistake in the Docs"
+  },
+  "groups_return_to_": {
+    "other": "Back to"
   }
 }

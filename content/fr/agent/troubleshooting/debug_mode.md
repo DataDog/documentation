@@ -1,7 +1,6 @@
 ---
 title: Mode debugging
 kind: documentation
-disable_toc: true
 aliases:
   - /fr/agent/faq/how-to-get-more-logging-from-the-agent
   - /fr/agent/faq/agent-5-container-more-log
@@ -18,7 +17,7 @@ further_reading:
 Pour activer le mode debugging complet de l'Agent :
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 1. Modifiez votre fichier `datadog.yaml` local. Consultez la section [Fichier de configuration principal de l'Agent][1] pour obtenir des détails propres à votre système d'exploitation.
 
@@ -28,9 +27,9 @@ Pour activer le mode debugging complet de l'Agent :
 
 4. Attendez quelques minutes pour générer quelques logs. Consultez la section [Fichiers de log de l'Agent][3] pour obtenir des détails propres à votre système d'exploitation.
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /fr/agent/guide/agent-log-files/?tab=agentv6
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
+[3]: /fr/agent/guide/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -51,7 +50,7 @@ Pour activer le mode debugging complet de l'Agent :
 ## Agent conteneurisé
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 **Définissez la variable d'environnement `DD_LOG_LEVEL=debug` lors du démarrage de votre Agent.**
 
@@ -63,13 +62,13 @@ Si votre conteneur s'exécute déjà :
 
 2. Puis arrêtez l'Agent :
 
-    ```
+    ```shell
     s6-svc -d /var/run/s6/services/agent/
     ```
 
 3. Redémarrez alors l'Agent en mode debugging en exécutant :
 
-    ```
+    ```text
     DD_LOG_LEVEL=debug agent start
     ```
 
@@ -78,13 +77,13 @@ Si votre conteneur s'exécute déjà :
 
 Lorsqu'il s'exécute dans un conteneur, l'Agent ne peut pas redémarrer via `service datadog-agent restart` (ou semblable), ce qui entraîne l'arrêt du conteneur par Docker. Utilisez supervisor pour redémarrer un Agent conteneurisé :
 
-```
+```text
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
 Les commandes suivantes permettent d'activer les logs de debugging, de redémarrer l'Agent, d'attendre 60 secondes puis d'envoyer un flare, dans cet ordre :
 
-```
+```shell
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 sleep 60
@@ -93,7 +92,7 @@ sleep 60
 
 Les logs de debugging peuvent être désactivés avec :
 
-```
+```shell
 sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
@@ -107,16 +106,17 @@ Le conteneur peut également être redémarré.
 
 Les niveaux de log de l'Agent suivants sont disponibles pour `log_level` ou `DD_LOG_LEVEL` :
 
-| Option  | Logs critiques | Logs d'erreur | Logs d'avertissement | Logs d'information | Logs de debugging | Logs de trace | Tous les logs  |
-|---------|------------|------------|-----------|-----------|------------|------------|-----------|
-| `OFF`   |            |            |           |           |            |            |           |
-| `FATAL` | {{< X >}}  |            |           |           |            |            |           |
-| `ERROR` | {{< X >}}  | {{< X >}}  |           |           |            |            |           |
-| `WARN`  | {{< X >}}  | {{< X >}}  | {{< X >}} |           |            |            |           |
-| `INFO`  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |           |
-| `DEBUG` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |           |
-| `TRACE` | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |           |
-| `ALL`   | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} |
+| Option     | Logs critiques | Logs d'erreur | Logs d'avertissement | Logs d'information | Logs de debugging | Logs de trace |
+|------------|---------------|------------|-----------|-----------|------------|------------|
+| `'OFF'`      |               |            |           |           |            |            |
+| `'CRITICAL'` | {{< X >}}     |            |           |           |            |            |
+| `'ERROR'`    | {{< X >}}     | {{< X >}}  |           |           |            |            |
+| `'WARN'`     | {{< X >}}     | {{< X >}}  | {{< X >}} |           |            |            |
+| `'INFO'`     | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} |            |            |
+| `'DEBUG'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
+| `'TRACE'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
+
+**Remarque** : lorsque vous paramétrez le niveau du log sur `'OFF'` dans le fichier de configuration, vous devez ajouter des guillemets pour éviter que la valeur ne soit analysée de façon incorrecte. Les guillemets sont facultatifs pour les autres niveaux de log.
 
 ## Pour aller plus loin
 

@@ -1,7 +1,6 @@
 ---
 title: Mise en place de la surveillance des performances réseau
 kind: documentation
-disable_toc: true
 description: Recueillez vos données réseau avec l'Agent.
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
@@ -10,7 +9,7 @@ further_reading:
   - link: /integrations/snmp
     tag: Documentation
     text: Intégration SNMP
-  - link: /graphing/widgets/network
+  - link: /dashboards/widgets/network
     tag: Documentation
     text: Widget Réseau
 ---
@@ -31,9 +30,9 @@ L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS
 
 Les systèmes de provisionnement suivants sont pris en charge :
 
-* Daemonset/Helm : voir le [chart Helm Datadog][3]
-* Chef : voir la [recette Chef pour Datadog][4]
-* Ansible : voir le [rôle Ansible pour Datadog][5]
+* Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][3]
+* Chef 12.7+ : voir la [recette Chef pour Datadog][4]
+* Ansible 2.6+ : voir le [rôle Ansible pour Datadog][5]
 
 ## Implémentation
 
@@ -44,14 +43,16 @@ Pour activer la surveillance des performances réseau, configurez-la dans le [fi
 
 Pour activer la surveillance des performances réseau avec l'Agent Datadog, utilisez les configurations suivantes :
 
-1. Copiez l'exemple de configuration system-probe :
+1. Si vous utilisez une version de l'Agent antérieure à la v6.14, activez d'abord la [collecte de live processes][1]. Si ce n'est pas le cas, passez à l'étape suivante.
+
+2. Copiez l'exemple de configuration system-probe :
     ```
     sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
-2. Modifiez le fichier de configuration system-probe pour définir le flag d'activation sur `true`.<br>
+3. Modifiez le fichier de configuration system-probe pour définir le flag d'activation sur `true`.<br>
 
-3. Si vous le souhaitez, supprimez la mise en commentaire du paramètre `system_probe_config` pour ajouter un objet custom :
+4. Si vous le souhaitez, supprimez la mise en commentaire du paramètre `system_probe_config` pour ajouter un objet custom :
     ```
     ## @param system_probe_config - custom object - optional
     ## (...)
@@ -59,7 +60,7 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
     system_probe_config:
     ```
 
-4. Entrez vos paramètres de configuration spécifiques pour la collecte de vos données System Probe :
+5. Entrez vos paramètres de configuration spécifiques pour la collecte de vos données System Probe :
     ```
     system_probe_config:
         ## @param enabled - boolean - optional - default: false
@@ -68,10 +69,14 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
         enabled: true
     ```
 
-5. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`
-6. [[Redémarrez l'Agent][1].]: `sudo service datadog-agent restart`
+6. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`.
+**Remarque** : si le wrapper de service n'est pas disponible sur votre système, exécutez plutôt la commande suivante : `sudo initctl start datadog-agent-sysprobe`.
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+7. [[Redémarrez l'Agent][2] :]: `sudo service datadog-agent restart`
+8. Configurez le system-probe afin qu'il se lance au démarrage : `sudo service enable datadog-agent-sysprobe`.
+
+[1]: /fr/infrastructure/process/?tab=linuxwindows#installation
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -94,18 +99,21 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:6.12.0
+      - image: datadog/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:
           - {containerPort: 8125, name: dogstatsdport, protocol: UDP}
           - {containerPort: 8126, name: traceport, protocol: TCP}
         env:
-          - {name: DD_API_KEY, value: <VOTRE_CLÉ_API>}
+          - {name: DD_API_KEY, value: <CLÉ_API_DATADOG>}
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
+          # DD_SYSTEM_PROBE_EXTERNAL est défini sur true pour éviter de démarrer le system probe
+          # dans le conteneur principal de l'Agent Datadog lorsque le system probe s'exécute dans un
+          # conteneur dédié (configuration recommandée).
           - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST
@@ -135,7 +143,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       - name: system-probe
-        image: datadog/agent:6.12.0
+        image: datadog/agent:latest
         imagePullPolicy: Always
         securityContext:
           capabilities:
@@ -173,7 +181,7 @@ Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 
 Pour activer la surveillance des performances réseau dans Docker, utilisez la configuration suivante au lancement de l'Agent de conteneur :
 
-```
+```shell
 $ docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
     -e DD_SYSTEM_PROBE_ENABLED=true \
     -e DD_PROCESS_AGENT_ENABLED=true \
@@ -204,4 +212,4 @@ Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 [3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
 [4]: https://github.com/DataDog/chef-datadog
 [5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[6]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[6]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file

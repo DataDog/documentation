@@ -20,13 +20,13 @@ further_reading:
 
 Les checks Datadog émettent un statut à chaque exécution. Les statuts possibles sont `OK`, `WARNING` et `CRITICAL`.
 
-La page Sommaire des checks énumère les checks qui envoient des informations à Datadog :
+Le sommaire des checks énumère les checks qui envoient des informations à Datadog :
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Résumé des checks" responsive="true" style="width:70%;">}}
+ {{< img src="monitors/check_summary/check_summary.png" alt="Sommaire des checks"  style="width:70%;">}}
 
 Cliquez sur le nom d'un check pour voir les tags associés à ce check :
 
-{{< img src="monitors/check_summary/check_details.png" alt="Détails du check" responsive="true" style="width:80%;">}}
+{{< img src="monitors/check_summary/check_details.png" alt="Détails du check" style="width:80%;">}}
 
 **Remarque** : pour mieux surveiller les statuts de check, utilisez le [Widget Statut de check][1].
 
@@ -34,4 +34,4 @@ Cliquez sur le nom d'un check pour voir les tags associés à ce check :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/graphing/widgets/check_status
+[1]: /fr/dashboards/widgets/check_status

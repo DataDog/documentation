@@ -8,12 +8,12 @@ aliases:
 If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
 
 * Get a password from Zendesk by clicking this link on the sign in page of this website: `https://help.datadoghq.com`
-    {{< img src="help/sign_in.png" alt="sing in" responsive="true" >}}
+    {{< img src="help/sign_in.png" alt="sing in"  >}}
 
 After you receive the password, log in. You are then directed to this location: `https://help.datadoghq.com/hc/en-us/requests`
 
 From here, you are able to see your requests:
-    {{< img src="help/my_activities.png" alt="my activities" responsive="true" >}}
+    {{< img src="help/my_activities.png" alt="my activities"  >}}
 
 If you don't see this after logging in, click on your name in the upper right hand corner, and then select "My Activities" from there.
 

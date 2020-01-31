@@ -150,7 +150,7 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://dashboard.signalsciences.net
-[4]: https://docs.datadoghq.com/ja/graphing/event_stream
+[4]: https://docs.datadoghq.com/ja/events
 [5]: https://docs.datadoghq.com/ja/help
 [6]: https://labs.signalsciences.com
 [7]: https://info.signalsciences.com/datadog-security
@@ -158,6 +158,3 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [9]: https://player.vimeo.com/video/347360711
 [10]: https://docs.signalsciences.net/integrations/datadog/
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
-
-
-{{< get-dependencies >}}

@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_fix-node-sass
   tags:
     - "runner:main"
     - "size:large"
@@ -35,7 +35,8 @@ build_preview:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-    CONFIGURATION_FILE: "./local/etc/pull_config_preview.yaml"
+    CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
+    LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -106,7 +107,8 @@ build_live:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
     UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
-    CONFIGURATION_FILE: "./local/etc/pull_config.yaml"
+    CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
+    LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"

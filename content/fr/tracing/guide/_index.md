@@ -6,7 +6,6 @@ disable_toc: true
 ---
 
 
-
 {{< whatsnext desc="Getting started with APM" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. Être alerté en cas de latence au 99e centile anormale pour un service de base de données [3 min]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Comparer la latence au 50e centile d'une semaine à l'autre pour un service [2 min]{{< /nextlink >}}

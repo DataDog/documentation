@@ -8,12 +8,12 @@ description: "Forward your logs from the journal to Datadog"
 short_description: "Forward your logs from the journal to Datadog"
 has_logo: true
 is_public: true
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/journald.md"]
 name: journald
 ddtype: check
 supported_os:
 - linux
 ---
-
 
 ## Overview
 
@@ -28,7 +28,7 @@ Journal files are, by default, owned and readable by the `systemd-journal` syste
 1. [Install the agent][1] on the instance running the journal
 2. Add the `dd-agent` user to the `systemd-journal` group by running:
 
-```
+```text
 usermod -a -G systemd-journal dd-agent
 ```
 
@@ -42,13 +42,13 @@ Create the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at
 
 Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml` with:
 
-```
+```yaml
 logs_enabled: true
 ```
 
 Then add this configuration block to your `journald.d/conf.yaml` file to start collecting your Logs:
 
-```
+```yaml
 logs:
   - type: journald
 ```
@@ -75,7 +75,7 @@ It is possible to filter in/out specific units thanks to the following parameter
 
 Example:
 
-```
+```yaml
 logs:
   - type: journald
     path: /var/log/journal/
@@ -90,7 +90,7 @@ Tags are critical for finding information in highly dynamic containerized enviro
 
 This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journal path and the following file:
 
-- `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
+* `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
 
 Finally, [restart the agent][2].
 

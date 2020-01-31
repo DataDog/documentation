@@ -18,14 +18,15 @@ version: '1.0'
 ---
 ## 概要
 
-
 Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリューションに送信する Lambda 関数を介して AWS GuardDuty と統合されます。
 
 ## セットアップ
+
 ###         - containerPort: 8126
           hostPort: 8126
           name: traceport
           protocol: TCP
+
 #### GuardDuty ログの有効化
 
 1. **GuardDuty Finding** イベントタイプを使用して Cloudwatch で新しい規則を作成します。

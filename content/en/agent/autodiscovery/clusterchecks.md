@@ -26,7 +26,6 @@ Metrics, Events and Service Checks collected by Cluster Checks will be submitted
 
 This feature is currently supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
-
 ## How to set it up
 
 ### Cluster Agent setup
@@ -51,14 +50,13 @@ Note that hostnames are not linked to cluster checks metrics, which limits the u
 
 Refer to [the dedicated Cluster Checks Autodiscovery guide][5] for more configuration and troubleshooting details on this feature.
 
-
 ### Agent setup
 
 Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent. This can be done in two ways:
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
-```
+```text
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
 ```
 
@@ -106,7 +104,7 @@ The `cluster_check` field informs the Cluster Agent to delegate this check to on
 You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][9]:
 
 ```yaml
-  ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
+  ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
   ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
@@ -153,7 +151,7 @@ Due to the distributed nature of Cluster Checks, troubleshooting them is a bit m
 
 When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
 
-```
+```yaml
 # kubectl get cm datadog-leader-election -o yaml
 apiVersion: v1
 kind: ConfigMap
@@ -168,7 +166,7 @@ In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unres
 
 To ensure a configuration (static or Autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
 ...
 === http_check cluster check ===
@@ -192,10 +190,10 @@ Auto-discovery IDs:
 
 The `clusterchecks` command allows you to inspect the state of the dispatching logic, including:
 
-- which node-based Agents are actively reporting to the Cluster Agent
-- which checks are dispatched on each node
+* which node-based Agents are actively reporting to the Cluster Agent
+* which checks are dispatched on each node
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
 
 === 3 node-agents reporting ===
@@ -232,7 +230,7 @@ In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw
 
 The Agent `configcheck` command should show the instance, with the `cluster-checks` source:
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
 === http_check check ===
@@ -258,7 +256,7 @@ The Instance ID matches the one you had earlier.
 
 The Agent `status` command should show the check instance running and reporting successfully.
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
     http_check (3.1.1)
@@ -276,16 +274,14 @@ The Agent `status` command should show the check instance running and reporting 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: /agent/kubernetes/cluster
-[3]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
+[2]: /agent/cluster_agent
+[3]: /agent/cluster_agent/setup
 [4]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
 [5]: /agent/autodiscovery/clusterchecks
 [6]: /agent/guide/agent-commands
 [7]: /developers/write_agent_check
 [8]: /integrations/mysql
-[9]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[10]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[9]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[10]: /agent/autodiscovery/template_variables
 [11]: /integrations/http_check
 [12]: /integrations/nginx
-[13]: https://github.com/helm/charts/tree/master/stable/datadog
-[14]: /agent/autodiscovery/clusterchecks/#cluster-agent-setup

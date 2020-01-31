@@ -8,6 +8,7 @@ kind: faq
 These are the instructions created to install and configure Datadog on the KP JBoss EAP 7 cloud image and monitor a JVM via JMX.
 
 ## Setup
+
 ### Prerequisites
 
 To install Datadog and integrate it with the JBoss EAP 7, ensure the following conditions have been met:
@@ -28,34 +29,33 @@ Be sure to add these lines within the profile being used:
 
 For `<subsystem xmlns="urn:jboss:domain:jmx:1.3">`, add:
 
-```
+```text
 <remoting-connector use-management-endpoint="false"/>
 ```
 
 For `<subsystem xmlns="urn:jboss:domain:remoting:4.0">`, add:
 
-```
+```text
 <connector name="remoting-connector" socket-binding="remoting" securityrealm="ApplicationRealm"/>
 ```
 
 For `<socket-binding-group name="full-ha-sockets" default-interface="public">`, add:
 
-```
+```text
 <socket-binding name="remoting" port="4447"/>
 ```
 
-
 Add an application user for the Application Realm:
- 
-```
-JBoss_EAP_INSTALL_DIR/bin/add_user.sh 
+
+```text
+JBoss_EAP_INSTALL_DIR/bin/add_user.sh
 ```
 
 **Note**: Be sure to add to the Application Realm.
 
 Start/Restart the jboss processes. Look for the following message in the `server.log` file:
 
-```
+```text
 2018-08-08 16:01:53,354 INFO [org.jboss.as.remoting] (MSC service thread 1-4) WFLYRMT0001: Listening on
 xx.xx.xx.xx:4447
 ```
@@ -67,16 +67,16 @@ Assuming a domain configuration, be sure the
 
 Edit the `/etc/datadog-agent/datadog.yaml` file to enable process collection:
 
-```
+```yaml
 process_config:
   enabled: "true"
 ```
 
 Edit `/etc/datadog-agent/conf.d/jmx.d/conf.yaml` file to activate the jmx integration:
 
-```
+```yaml
 init_config:
- 
+
   custom_jar_paths:
     - JBoss_EAP_INSTALL_LOCATION/bin/client/jboss-cli-client.jar
 
@@ -98,11 +98,11 @@ Then [`Start/restart` the Datadog Agent][2].
 
 Finally, run the [Datadog Agent status command][3] to ensure Datadog can connect to the JBoss JVM via JMX. You should get the following output:
 
-```
+```text
 ========
 JMXFetch
 ========
- Initialized checks 
+ Initialized checks
 08/10/2018 4
  ==================
  jmx
@@ -117,5 +117,5 @@ JMXFetch
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/centos
-[2]: /agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[3]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/guide/agent-commands/#agent-status-and-information

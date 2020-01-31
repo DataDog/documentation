@@ -109,12 +109,9 @@ Nextcloud には、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: https://docs.datadoghq.com/ja/getting_started/integrations
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/datadog_checks/nextcloud/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#service-status
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
 [13]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

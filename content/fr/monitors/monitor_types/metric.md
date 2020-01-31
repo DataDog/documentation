@@ -50,7 +50,6 @@ Les alertes d'anomalie calculent la plage de valeurs attendues pour une série e
 
 Pour en savoir plus, consultez la page [Monitor d'anomalies][1].
 
-
 [1]: /fr/monitors/monitor_types/anomaly
 {{% /tab %}}
 {{% tab "Singularités" %}}
@@ -60,7 +59,6 @@ Les monitors de singularité envoient une alerte lorsqu'un membre d'un groupe (h
 À chaque évaluation de l'alerte, Datadog vérifie si tous les groupes font partie d'un cluster et affichent le même comportement. Une alerte se déclenche lorsqu'un ou plusieurs groupes diffèrent des autres groupes.
 
 Pour en savoir plus, consultez la page [Monitor de singularité][1].
-
 
 [1]: /fr/monitors/monitor_types/outlier
 {{% /tab %}}
@@ -72,7 +70,6 @@ Une alerte de prévision prédit le comportement futur d'une métrique et le com
 
 Pour en savoir plus, consultez la page [Monitor de prévision][1].
 
-
 [1]: /fr/monitors/monitor_types/forecasts
 {{% /tab %}}
 {{< /tabs >}}
@@ -80,17 +77,17 @@ Pour en savoir plus, consultez la page [Monitor de prévision][1].
 ### Définir la métrique
 
 Toute métrique envoyant des informations à Datadog peut être évaluée par un monitor. Utilisez l'éditeur et les étapes ci-dessous pour définir la métrique :
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="contexte de la métrique" responsive="true" >}}
+{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="contexte de la métrique" >}}
 
 | Étape                | Obligatoire | Paramètre par défaut    | Exemple           |
 |---------------------|----------|------------|-------------------|
 | Sélectionner une métrique     | Oui      | Aucune       | `system.cpu.user` |
 | Définir l'origine     | Non       | Everywhere | `env:prod`        |
-| Exclure des tags        | Non       | Aucune       | `role:testing`    |
+| Exclure des [tags][2]        | Non       | Aucune       | `role:testing`    |
 | Spécifier l'agrégation | Oui      | `avg by`   | `sum by`          |
 | Regrouper par            | Non       | Everything | `host`            |
 
-**Remarque** : la définition de métriques pour les monitors se fait de la même façon que pour les graphiques. Pour en savoir plus sur l'utilisation de l'option `Advanced...`, consultez la section [Créer des graphiques avancés][2].
+**Remarque** : la définition de métriques pour les monitors se fait de la même façon que pour les graphiques. Pour en savoir plus sur l'utilisation de l'option `Advanced...`, consultez la section [Créer des graphiques avancés][3].
 
 #### Groupe d'alertes
 
@@ -113,13 +110,16 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 **Définitions** :
 
-| Option                  | Description                                                                                                                                                                                                      |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| on&nbsp;average         | La moyenne de la série est calculée afin de générer une valeur unique, qui est ensuite comparée au seuil. Cette option ajoute la fonction `avg()` à la requête de votre monitor.                                                                      |
-| at&nbsp;least&nbsp;once | Si une valeur dans la série générée dépasse le seuil, une alerte est alors déclenchée. Cette option ajoute une fonction à la requête de votre monitor en fonction de votre sélection : `min()` pour des valeurs inférieures ou `max()` pour des valeurs supérieures. |
-| at&nbsp;all&nbsp;times  | Si chaque point de la série générée dépasse le seuil, une alerte est alors déclenchée. Cette option ajoute une fonction à la requête de votre monitor en fonction de votre sélection : `min()` pour des valeurs supérieures ou `max()` pour des valeurs inférieures.   |
-| in&nbsp;total           | Si la somme de tous les points de la série dépasse le seuil, une alerte se déclenche alors. Cette option ajoute la fonctions `sum()` à la requête de votre monitor.                                                           |
+| Option                  | Description                                                                                                                                                                                                                   |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| on&nbsp;average         | La moyenne de la série est calculée afin de générer une valeur unique, qui est ensuite comparée au seuil. Cette option ajoute la fonction `avg()` à la requête de votre monitor.                                                                                   |
+| at&nbsp;least&nbsp;once | Si une valeur dans la série générée dépasse le seuil, une alerte se déclenche alors. Cette option ajoute une fonction à la requête de votre monitor en fonction de votre sélection : `min()` pour des valeurs inférieures ou `max()` pour des valeurs supérieures.              |
+| at&nbsp;all&nbsp;times  | Si chaque point compris dans l'intervalle d'évaluation de votre requête dépasse le seuil, une alerte se déclenche alors. Cette option ajoute une fonction à la requête de votre monitor en fonction de votre sélection : `min()` pour des valeurs supérieures ou `max()` pour des valeurs inférieures. |
+| in&nbsp;total           | Si la somme de tous les points de la série dépasse le seuil, une alerte se déclenche alors. Cette option ajoute la fonction `sum()` à la requête de votre monitor.                                                                        |
 
+**Remarque** : trois comportements différents peuvent être appliqués lorsque vous utilisez `as_count()`. Consultez [as_count() dans les évaluations de monitors][1] pour en savoir plus.
+
+[1]: /fr/monitors/guide/as-count-in-monitor-evaluations
 {{% /tab %}}
 {{% tab "Changement" %}}
 
@@ -143,7 +143,7 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 Utilisez les seuils pour définir la valeur numérique à partir de laquelle une alerte doit se déclencher. En fonction de la métrique choisie, l'éditeur affiche l'unité utilisée (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog peut envoyer des notifications d'alerte et des notifications d'avertissement. Les monitors sont rétablis automatiquement en fonction du seuil d'alerte ou d'avertissement, mais des conditions supplémentaires peuvent être spécifiées. Pour en savoir plus sur les seuils de rétablissement, consultez la section [Qu'est-ce qu'un seuil de rétablissement ?][3].
+Datadog peut envoyer des notifications d'alerte et des notifications d'avertissement. Les monitors sont rétablis automatiquement en fonction du seuil d'alerte ou d'avertissement, mais des conditions supplémentaires peuvent être spécifiées. Pour en savoir plus sur les seuils de rétablissement, consultez la section [Qu'est-ce qu'un seuil de rétablissement ?][4].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -190,13 +190,14 @@ La durée (en secondes) correspondant au délai avant l'évaluation. La valeur d
 
 ### Notifications
 
-Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][4].
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /fr/graphing/using_graphs/#advanced-graphing
-[3]: /fr/monitors/faq/what-are-recovery-thresholds
-[4]: /fr/monitors/notifications
+[2]: /fr/tagging/using_tags/?tab=assignment
+[3]: /fr/dashboards/querying/#advanced-graphing
+[4]: /fr/monitors/faq/what-are-recovery-thresholds
+[5]: /fr/monitors/notifications

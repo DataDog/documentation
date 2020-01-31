@@ -18,7 +18,7 @@ further_reading:
     text: "Couche Lambda Datadog\_: surveiller des métriques custom sans serveur"
 git_integration_title: amazon_lambda
 has_logo: true
-integration_title: "Amazon\_Lambda"
+integration_title: Amazon Lambda
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -44,10 +44,10 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon Lambda. Pour en savoir plus sur les stratégies Lambda, consultez [la documentation du site Web d'AWS][4].
 
-    | Autorisation AWS              | Description                                                     |
-    | ------------------------- | ----------------------------------------------------------- |
-    | `lambda:List*`            | Énumérer les tags, les métadonnées et les fonctions Lambda.                  |
-    | `tag:GetResources`        | Récupérer des tags personnalisés appliqués aux fonctions Lambda.                |
+    | Autorisation AWS     | Description                                  |
+    |--------------------|----------------------------------------------|
+    | `lambda:List*`     | Énumère les tags, les métadonnées et les fonctions Lambda.   |
+    | `tag:GetResources` | Récupère des tags personnalisés appliqués aux fonctions Lambda. |
 
 3. Installez l'[intégration Datadog/AWS Lambda][5].
 
@@ -77,14 +77,14 @@ L'ARN de la couche Lambda Datadog comprend une région, le runtime du langage et
 Par exemple :
 
   ~~~
-  arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:8
+  arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
   ~~~
 
-| Langage | Runtime                                                    | Versions             |
-|----------|------------------------------------------------------------|----------------------|
-| Python   | `Python27`, `Python36`, `Python37`                         | [Dernière version][16] |
-| Node.js  | `Node8-10`, `Node10-x`                                     | [Dernière version][17] |
-| Ruby     | `Ruby`                                                     | [Dernière version][18] |
+| Langage | Runtime                                        | Versions             |
+|----------|------------------------------------------------|----------------------|
+| Python   | `Python27`, `Python36`, `Python37`, `Python38` | [Dernière version][16] |
+| Node.js  | `Node8-10`, `Node10-x`, `Node12-x`             | [Dernière version][17] |
+| Ruby     | `Ruby`                                         | [Dernière version][18] |
 
 **Golang :** les liens vers les binaires Go étant statiques, Datadog propose un [paquet][14] qu'il vous suffit d'importer dans votre projet. Aucune couche Lambda n'est requise.
 
@@ -92,13 +92,13 @@ Par exemple :
 
 Vous pouvez configurer la couche Lambda Datadog en ajoutant des variables d'environnement à vos fonctions Lambda :
 
-| Variable d'environnement | Description                                                                               | Obligatoire | Valeur par défaut         | Valeurs acceptées                 |
-|----------------------|-------------------------------------------------------------------------------------------|----------|-----------------|---------------------------------|
-| `DD_API_KEY`         | Votre clé d'API Datadog                                                                      | Oui      |                 | Clé d'API Datadog                 |
-| `DD_KMS_API_KEY`     | À utiliser à la place de `DD_API_KEY` si vous avez recours à KMS                                                  | Non       |                 | Clé d'API Datadog avec chiffrement KMS   |
-| `DD_SITE`            | Définir si vous utilisez l'instance européenne de Datadog                                                   | Non       | `datadoghq.com` | `datadoghq.eu`, `datadoghq.com` |
-| `DD_FLUSH_TO_LOG`    | Activer le mode zéro latence [métriques custom asynchrones](#activer-les-metriques-custom-asynchrones)  | Non       | `False`         | `True`, `False`                 |
-| `DD_LOG_LEVEL`       | Activer les logs détaillés pour la couche Lambda Datadog                                         | Non       | `INFO`          | `INFO`, `DEBUG`                 |
+| Variable d'environnement | Description                                                                              | Obligatoire | Valeur par défaut         | Valeurs acceptées                 |
+|----------------------|------------------------------------------------------------------------------------------|----------|-----------------|---------------------------------|
+| `DD_API_KEY`         | Votre clé d'API Datadog                                                                     | Oui      |                 | Clé d'API Datadog                 |
+| `DD_KMS_API_KEY`     | À utiliser à la place de `DD_API_KEY` si vous avez recours à KMS                                                 | Non       |                 | Clé d'API Datadog avec chiffrement KMS   |
+| `DD_SITE`            | Définir si vous utilisez l'instance européenne de Datadog                                                  | Non       | `datadoghq.com` | `datadoghq.eu`, `datadoghq.com` |
+| `DD_FLUSH_TO_LOG`    | Activer le mode zéro latence [métriques custom asynchrones](#activer-les-metriques-custom-asynchrones) | Non       | `False`         | `True`, `False`                 |
+| `DD_LOG_LEVEL`       | Activer les logs détaillés pour la couche Lambda Datadog                                        | Non       | `INFO`          | `INFO`, `DEBUG`                 |
 
 
 {{< tabs >}}
@@ -141,8 +141,8 @@ custom:
     apiKMSKey: ""
 
     # (Facultatif) Définit si le plug-in doit ajouter les couches Lambda Datadog automatiquement
-    #  Valeur par défaut : true
-    #  Options : true, false
+    #  Default: true
+    #  Options: true, false
     addLayers: true
 
     # (Facultatif) L'instance Datadog vers laquelle les données doivent être envoyées
@@ -158,7 +158,7 @@ custom:
     # (Facultatif) Le niveau de log du plug-in Datadog et des couches Lambda
     #  Valeur par défaut : "INFO"
     #  Options : INFO, DEBUG
-    logLevel: "INFO"    
+    logLevel: "INFO"
 ```
 
 [Documentation de Serverless Framework][1]
@@ -213,7 +213,7 @@ Lorsque cela est approprié, Datadog associe les traces AWS X-Ray aux traces de 
 
 **Remarque** : pour que les traces X-Ray apparaissent sur le même flamegraph que celles de l'APM de Datadog, tous les services doivent posséder le [même tag `env`](#tag-env).
 
-{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" responsive="true">}}
+{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" >}}
 
 #### Organiser votre infrastructure avec les tags
 
@@ -233,7 +233,7 @@ Ajoutez le [tag][28] `service` [tag][28] afin de regrouper les fonctions Lambda 
 
 Par défaut, chaque fonction Lambda est considérée comme un `service` distinct. Ajoutez votre propre tag pour modifier ce comportement.
 
-{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" responsive="true">}}
+{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="représentation animée de fonctions Lambda sur la service map" >}}
 
 ### Métriques custom
 
@@ -378,7 +378,7 @@ end
 {{% /tab %}}
 {{% tab "Java, .NET et runtimes personnalisés" %}}
 
-L'envoi de [métriques custom asynchrones](#metriques-custom-synchrones-et-asynchrones) est possible pour n'importe quel langage ou runtime personnalisé. Une chaîne au format JSON spéciale est ajoutée à votre fonction Lambda, et celle-ci est ensuite identifiée par la [fonction Lambda du Forwarder Datadog][8] puis envoyée à Datadog. Pour utiliser cette fonctionnalité :
+L'envoi de [métriques custom asynchrones](#metriques-custom-synchrones-et-asynchrones) est possible pour n'importe quel langage ou runtime personnalisé. Une chaîne au format JSON spéciale est ajoutée à votre fonction Lambda, et celle-ci est ensuite identifiée par la [fonction Lambda du Forwarder Datadog][1] puis envoyée à Datadog. Pour utiliser cette fonctionnalité :
 
 1. [Activez les métriques custom asynchrones](#enabling-asynchronous-custom-metrics)
 2. Écrivez une fonction réutilisable qui enregistre vos métriques custom au format suivant :
@@ -392,7 +392,7 @@ L'envoi de [métriques custom asynchrones](#metriques-custom-synchrones-et-async
 }
 ```
 
-Exemple :
+Par exemple :
 
 ```json
 {
@@ -405,6 +405,7 @@ Exemple :
 
 **Remarque :** ces métriques custom sont envoyées en tant que [distributions](#metriques-custom). Si vous avez déjà envoyé des métriques custom d'une autre façon, [consultez la documentation concernant le passage aux métriques de distribution](#passer-aux-metriques-de-distribution).
 
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -425,10 +426,10 @@ Si vous envisagez d'utiliser une bibliothèque de métriques tierce pour AWS Lam
 Cette méthode nécessite d'ajouter les autorisations AWS suivantes dans votre [stratégie IAM Datadog][3].
 
 | Autorisation AWS            | Description                                                 |
-| ------------------------- | ----------------------------------------------------------- |
+|---------------------------|-------------------------------------------------------------|
 | `logs:DescribeLogGroups`  | Énumérer les groupes de logs disponibles.                                  |
-| `logs:DescribeLogStreams` | Énumérer les flux de logs disponibles pour un groupe.                     | 
-| `logs:FilterLogEvents`    | Récupérer des événements de log spécifiques depuis un flux pour générer des métriques. | 
+| `logs:DescribeLogStreams` | Énumérer les flux de logs disponibles pour un groupe.                     |
+| `logs:FilterLogEvents`    | Récupérer des événements de log spécifiques depuis un flux pour générer des métriques. |
 
 **[OBSOLÈTE]** Pour envoyer des métriques custom à Datadog à partir de vos logs Lambda, affichez une ligne de log en utilisant le format suivant :
 
@@ -481,13 +482,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_lambda.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
 [6]: https://app.datadoghq.com/functions
-[7]: https://docs.datadoghq.com/fr/graphing/infrastructure/serverless
+[7]: https://docs.datadoghq.com/fr/infrastructure/serverless
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#automatically-setup-triggers
 [10]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#manually-setup-triggers
 [11]: https://app.datadoghq.com/logs
 [12]: https://docs.datadoghq.com/fr/integrations/amazon_xray/
-[13]: /fr/graphing/metrics/distributions/
+[13]: /fr/metrics/distributions/
 [14]: https://github.com/DataDog/datadog-lambda-go/releases
 [15]: https://docs.datadoghq.com/fr/help
 [16]: https://github.com/DataDog/datadog-lambda-layer-python/releases
@@ -502,14 +503,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [26]: https://docs.datadoghq.com/fr/tagging/
 [27]: https://docs.datadoghq.com/fr/tracing/visualization/services_map/#filtering-vs-changing-scopes
 [28]: https://docs.datadoghq.com/fr/tracing/visualization/services_map/#the-service-tag
-[29]: https://docs.datadoghq.com/fr/tracing/visualization/#services 
+[29]: https://docs.datadoghq.com/fr/tracing/visualization/#services
 [30]: https://docs.datadoghq.com/fr/tracing/visualization/services_list/
 [31]: https://www.datadoghq.com/blog/serverless-framework-plugin/
 [32]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [33]: https://docs.datadoghq.com/fr/integrations/amazon_xray/#installing-the-x-ray-client-libraries
 [34]: https://docs.datadoghq.com/fr/agent/
 [38]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics
-[39]: /fr/graphing/metrics/distributions/#customize-tagging
-
-
-{{< get-dependencies >}}
+[39]: /fr/metrics/distributions/#customize-tagging

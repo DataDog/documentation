@@ -50,7 +50,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Run depui
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-{{< img src="integrations/google_cloud_run/export_cloud_run_revision.png" alt="Exporter les logs Google Cloud Run vers le Pub Sub" responsive="true">}}
+   {{< img src="integrations/google_cloud_run/export_cloud_run_revision.png" alt="Exporter les logs Google Cloud Run vers le Pub Sub">}}
 
 4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
 
@@ -79,6 +79,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

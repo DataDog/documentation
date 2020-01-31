@@ -21,6 +21,7 @@ supported_os:
 Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 
 ## Implémentation
+
 ### Collecte de logs
 
 {{< tabs >}}
@@ -29,7 +30,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 1. Configurez NXLog afin d'envoyer vos logs à votre plateforme Datadog.
     Remplacez l'ensemble du contenu fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
-    ```
+    ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
     ## otherwise it won't start.
     #To change for your own system if necessary
@@ -74,7 +75,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 2. Activez le module watchFile de NxLog.
     Pour chaque fichier à surveiller, ajoutez ce qui suit avant la section de sortie :
-    ```
+    ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
       Module im_file
@@ -88,7 +89,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     ```
 
 3. Vérifiez que ces fichiers sont connectés à la section de sortie.
-    ```
+    ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
@@ -101,7 +102,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 5. Définissez des tags ou paramètres supplémentaires (facultatif).
     Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
 
-    ```
+    ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
@@ -112,7 +113,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 2. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer les transferts sécurisés via le port 10516 :
 
-    ```
+    ```conf
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
@@ -124,7 +125,6 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     </Output>
     ```
 
-
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
@@ -132,7 +132,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 1. Configurez NXLog afin d'envoyer vos logs à votre plateforme Datadog.
     Remplacez l'ensemble du contenu fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
-    ```
+    ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
     ## otherwise it won't start.
     #To change for your own system if necessary
@@ -177,7 +177,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 2. Activez le module watchFile de NxLog.
     Pour chaque fichier à surveiller, ajoutez ce qui suit avant la section de sortie :
-    ```
+    ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
       Module im_file
@@ -191,7 +191,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     ```
 
 3. Vérifiez que ces fichiers sont ajoutés dans la section de sortie :
-    ```
+    ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
@@ -204,7 +204,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 5. Définissez des tags ou paramètres supplémentaires (facultatif).
     Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
 
-    ```
+    ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
@@ -215,7 +215,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 2. Ajoutez le module `om_ssl` dans votre configuration NxLog pour activer les transferts sécurisés via le port 443 :
 
-    ```
+    ```conf
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
@@ -226,7 +226,6 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
       AllowUntrusted FALSE
     </Output>
     ```
-
 
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}

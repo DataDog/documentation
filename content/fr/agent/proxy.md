@@ -5,7 +5,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: Recueillir vos processus
   - link: tracing
@@ -27,7 +27,7 @@ Il existe plusieurs options pour envoyer du trafic vers Datadog via SSL/TLS pour
 Les proxys Web traditionnels sont pris en charge de manière native par l'Agent. Si vous devez vous connecter à Internet via un proxy, modifiez le fichier de configuration de l'Agent.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 Définissez différents serveurs de proxy pour les requêtes `https` et `http` dans le fichier de configuration `datadog.yaml` de votre Agent.
 L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
@@ -38,35 +38,35 @@ Sauf si l'Agent Datadog est configuré pour <a href="/agent/logs/?tab=tailexisti
 
 Définir un proxy HTTP pour toutes les requêtes `https` :
 
-```
+```yaml
 proxy:
-    https: http://<SERVEUR_PROXY_SSL_POUR_HTTPS>:<PORT>
+    https: "http://<SERVEUR_PROXY_SSL_POUR_HTTPS>:<PORT>"
 ```
 
 Remarque : lorsque vous configurez un proxy HTTP pour des requêtes `https`, la communication entre l'Agent et Datadog est chiffrée de bout en bout avec TLS et ne peut pas être déchiffrée par le proxy. La seule communication non chiffrée est la requête `HTTP CONNECT` qui se fait entre l'Agent et le proxy pour établir la connexion TCP initiale entre l'Agent et Datadog. Ainsi, lorsque vous utilisez un proxy pour les requêtes `https`, il n'est pas nécessaire d'utiliser un proxy HTTPS pour chiffrer les communications entre l'Agent et Datadog.
 
 Définir un proxy HTTPS pour les requêtes `https` et `http` :
 
-```
+```yaml
 proxy:
-    https: https://<SERVEUR_PROXY_SSL_POUR_HTTPS>:<PORT>
-    http: https://<SERVEUR_PROXY_SSL_POUR_HTTP>:<PORT>
+    https: "https://<SERVEUR_PROXY_SSL_POUR_HTTPS>:<PORT>"
+    http: "https://<SERVEUR_PROXY_SSL_POUR_HTTP>:<PORT>"
 ```
 
 Définir un `<NOMUTILISATEUR>` et un `<MOTDEPASSE>` pour contacter le serveur proxy pour les requêtes `https` et `http` :
 
-```
+```yaml
 proxy:
-    https: http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>
-    http: http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>
+    https: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
+    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
 ```
 
 Utiliser la liste `no_proxy` pour spécifier les hosts qui doivent ignorer le proxy :
 
-```
+```yaml
 proxy:
-    https: http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>
-    http: http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>
+    https: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
+    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
     no_proxy:
       - host1
       - host2
@@ -99,7 +99,7 @@ Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne
 
 Modifiez le fichier `datadog.conf` en ajoutant les informations de votre proxy :
 
-```
+```text
 # Si vous avez besoin d'un proxy pour vous connecter à Internet, indiquez les paramètres ci-dessous
 proxy_host: mon-proxy.exemple.com
 proxy_port: 3128
@@ -108,7 +108,6 @@ proxy_password: mon_mdp
 ```
 
 N'oubliez pas de [redémarrer l'Agent][1] pour que les nouveaux paramètres soient appliqués.
-
 
 [1]: /fr/agent/guide/agent-commands
 {{% /tab %}}
@@ -123,6 +122,7 @@ Il s'agit de la meilleure option si vous ne disposez pas d'un proxy web facileme
 `agent ---> haproxy ---> Datadog`
 
 ### Redirection de métriques de proxy avec HAProxy
+
 #### Configuration de HAProxy
 
 HAProxy doit être installé sur un host connecté à Datadog. Utilisez le fichier de configuration suivant si vous ne l'avez pas déjà configuré.
@@ -130,7 +130,7 @@ HAProxy doit être installé sur un host connecté à Datadog. Utilisez le fichi
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```conf
 # Configuration de base
 global
     log 127.0.0.1 local0
@@ -149,7 +149,7 @@ defaults
 
 # Ceci déclare un accès aux statistiques HAProxy sur le port 3833
 # Vous n'avez pas besoin d'identifiants pour afficher cette page et vous pouvez
-# la désactiver une fois la configuration terminée.
+# désactiver l'accès une fois la configuration terminée.
 listen stats
     bind *:3833
     mode http
@@ -186,102 +186,8 @@ frontend logs_frontend
     mode tcp
     default_backend datadog-logs
 
-# Il s'agit du serveur Datadog. Toutes les requêtes TCP reçues par
-# les front-ends du Forwarder définis ci-dessus sont transmises par proxy
-# aux endpoints publics de Datadog.
-backend datadog-metrics
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
-
-backend datadog-traces
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server mothership trace.agent.datadoghq.eu:443 check port 443
-
-backend datadog-processes
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server mothership process.datadoghq.eu:443 check port 443
-
-backend datadog-logs
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
-```
-
-**Remarque** : téléchargez le certificat avec la commande suivante :
-        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
-Il est possible que le fichier se situe à l'emplacement `/etc/ssl/certs/ca-bundle.crt` sous CentOS et Redhat.
-
-Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
-
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
-
-```
-# Configuration de base
-global
-    log 127.0.0.1 local0
-    maxconn 4096
-    stats socket /tmp/haproxy
-
-# Quelques paramètres par défaut
-defaults
-    log     global
-    option  dontlognull
-    retries 3
-    option  redispatch
-    timeout client 5s
-    timeout server 5s
-    timeout connect 5s
-
-# Ceci déclare un accès aux statistiques HAProxy sur le port 3833
-# Vous n'avez pas besoin d'identifiants pour afficher cette page et vous pouvez
-# la désactiver une fois la configuration terminée.
-listen stats
-    bind *:3833
-    mode http
-    stats enable
-    stats uri /
-
-# Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les métriques (par exemple, la valeur de « dd_url »).
-frontend metrics-forwarder
-    bind *:3834
-    mode tcp
-    default_backend datadog-metrics
-
-# Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les traces (par exemple, la valeur pour « endpoint » dans la
-# section de configuration de l'APM).
-frontend traces-forwarder
-    bind *:3835
-    mode tcp
-    default_backend datadog-traces
-
-# Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les processus (par exemple, la valeur pour « url » dans
-# la section de configuration des processus).
-frontend processes-forwarder
-    bind *:3836
-    mode tcp
-    default_backend datadog-processes
-
-# Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les logs (par exemple, la valeur pour « logs.config.logs_dd_url »)
-frontend logs_frontend
-    bind *:10514
-    mode tcp
-    default_backend datadog-logs
-
-# Il s'agit du serveur Datadog. Toutes les requêtes TCP reçues par
-# les front-ends du Forwarder définis ci-dessus sont transmises par proxy
+# Le serveur Datadog. Toutes les requêtes TCP reçues par
+# les frontends du Forwarder définis ci-dessus sont transmises par proxy
 # aux endpoints publics de Datadog.
 backend datadog-metrics
     balance roundrobin
@@ -305,6 +211,100 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
+```
+
+**Remarque** : téléchargez le certificat avec la commande suivante :
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Redhat)
+Il est possible que le fichier se situe à l'emplacement `/etc/ssl/certs/ca-bundle.crt` sous CentOS et Redhat.
+
+Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
+
+{{% /tab %}}
+{{% tab "Site européen de Datadog" %}}
+
+```conf
+# Configuration de base
+global
+    log 127.0.0.1 local0
+    maxconn 4096
+    stats socket /tmp/haproxy
+
+# Quelques paramètres par défaut
+defaults
+    log     global
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout client 5s
+    timeout server 5s
+    timeout connect 5s
+
+# Ceci déclare un accès aux statistiques HAProxy sur le port 3833
+# Vous n'avez pas besoin d'identifiants pour afficher cette page et vous pouvez
+# désactiver l'accès une fois la configuration terminée.
+listen stats
+    bind *:3833
+    mode http
+    stats enable
+    stats uri /
+
+# Ceci déclare l'endpoint auquel vos Agents se connectent pour
+# envoyer les métriques (par exemple, la valeur de « dd_url »).
+frontend metrics-forwarder
+    bind *:3834
+    mode tcp
+    default_backend datadog-metrics
+
+# Ceci déclare l'endpoint auquel vos Agents se connectent pour
+# envoyer les traces (par exemple, la valeur pour « endpoint » dans la
+# section de configuration de l'APM).
+frontend traces-forwarder
+    bind *:3835
+    mode tcp
+    default_backend datadog-traces
+
+# Ceci déclare l'endpoint auquel vos Agents se connectent pour
+# envoyer les processus (par exemple, la valeur pour « url » dans
+# la section de configuration des processus).
+frontend processes-forwarder
+    bind *:3836
+    mode tcp
+    default_backend datadog-processes
+
+# Ceci déclare l'endpoint auquel vos Agents se connectent pour
+# envoyer les logs (par exemple, la valeur pour « logs.config.logs_dd_url »)
+frontend logs_frontend
+    bind *:10514
+    mode tcp
+    default_backend datadog-logs
+
+# Le serveur Datadog. Toutes les requêtes TCP reçues par
+# les frontends du Forwarder définis ci-dessus sont transmises par proxy
+# aux endpoints publics de Datadog.
+backend datadog-metrics
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
+
+backend datadog-traces
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership trace.agent.datadoghq.eu:443 check port 443
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership process.datadoghq.eu:443 check port 443
+
+backend datadog-logs
+    balance roundrobin
+    mode tcp
+    option tcplog
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
@@ -323,7 +323,7 @@ Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redém
 #### Configuration de l'Agent Datadog
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 Connectez chaque Agent à HAProxy en définissant son `dd_url` sur l'adresse de HAProxy (par exemple, `haproxy.exemple.com`).
 Le paramètre `dd_url` se trouve dans le fichier `datadog.yaml`.
@@ -332,7 +332,7 @@ Le paramètre `dd_url` se trouve dans le fichier `datadog.yaml`.
 
 Pour envoyer des traces ou des processus en passant par le proxy, définissez les paramètres suivants dans le fichier `datadog.yaml` :
 
-```
+```yaml
 apm_config:
     apm_dd_url: https://haproxy.exemple.com:3835
 
@@ -342,7 +342,7 @@ process_config:
 
 Ensuite, modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `skip_ssl_validation` sur `true`. Ceci est nécessaire pour faire en sorte que l'Agent ignore la différence entre le hostname du certificat SSL (`app.datadoghq.com` ou `app.datadoghq.eu`) et le hostname de votre HAProxy :
 
-```
+```yaml
 skip_ssl_validation: true
 ```
 
@@ -362,7 +362,7 @@ Le paramètre `dd_url` se trouve dans le fichier `datadog.conf`.
 
 Pour envoyer des traces ou des processus en passant par le proxy, définissez les paramètres suivants dans le fichier `datadog.conf` :
 
-```
+```conf
 [trace.api]
 endpoint = https://haproxy.exemple.com:3835
 
@@ -386,14 +386,13 @@ sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <FICHIER_SUP>
 
 Si vous utilisez l'Agent Windows, modifiez votre fichier de configuration `datadog.conf` et ajoutez cette option :
 
-```
+```conf
 skip_ssl_validation: yes
 ```
 
 Pour terminer, [redémarrez l'Agent][1].
 
 Pour vérifier que tout fonctionne correctement, consultez les statistiques HAProxy sur `http://haproxy.exemple.com:3833` ainsi que l'[aperçu de l'infrastructure][2].
-
 
 [1]: /fr/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
@@ -407,6 +406,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 `agent ---> nginx ---> Datadog`
 
 ### Redirection vers un proxy avec NGINX
+
 #### Configuration de NGINX
 
 Cet exemple de fichier `nginx.conf` peut être utilisé pour transmettre des logs à Datadog en passant par un proxy. Le protocole TLS est appliqué pour garantir le chiffrement de vos logs internes en texte brut entre votre proxy et l'endpoint de l'API Datadog vers lequel les logs sont envoyés :
@@ -414,7 +414,7 @@ Cet exemple de fichier `nginx.conf` peut être utilisé pour transmettre des log
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```conf
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
@@ -437,7 +437,7 @@ stream {
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-```
+```conf
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;

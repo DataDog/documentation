@@ -30,22 +30,27 @@ Recueillez des métriques concernent le processeur, les E/S, la charge, la mémo
 * [Check de processus][3] : enregistrez des métriques à partir d'un processus en cours d'exécution spécifique sur un système.
 
 ## Implémentation
+
 ### Installation
 
 Le check système est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien à installer sur votre serveur.
 
 ## Données collectées
+
 ### Métriques
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
 ### Événements
+
 Le check système n'inclut aucun événement.
 
 ### Checks de service
+
 Le check système n'inclut aucun check de service.
 
 ### Tags
+
 Le tag `host:<HOSTNAME>` est automatiquement appliqué à l'ensemble des métriques système. En outre, le tag `device:<NOM_APPAREIL>` est appliqué aux espaces de nommage suivants :
 
 * `system.disk.*`
@@ -58,6 +63,7 @@ Le tag `host:<HOSTNAME>` est automatiquement appliqué à l'ensemble des métriq
 Ce check recueille le nombre de cœurs du processeur sur un host ainsi que les temps processeur (système, utilisateur, inactivité, etc.).
 
 ## Implémentation
+
 ### Installation
 
 Le check System Core est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien à installer sur votre serveur.
@@ -66,10 +72,9 @@ Le check System Core est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 
 1. Modifiez le fichier `system_core.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5]. Consultez le [fichier d'exemple system_core.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles. **Remarque** : au moins une entrée est requise dans `instances` pour activer le check. Exemple :
 
-    ```
-        init_config:
-
-        instances:
+    ```yaml
+      init_config:
+      instances:
         - foo: bar
     ```
 
@@ -80,6 +85,7 @@ Le check System Core est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 [Lancez la sous-commande status de l'Agent][4] et cherchez `system_core` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 
 {{< get-metrics-from-git "system_core" >}}
@@ -87,9 +93,11 @@ Le check System Core est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 Selon la plateforme, le check peut recueillir d'autres métriques de temps processeur, p. ex. `system.core.interrupt` sous Windows, `system.core.iowait` sous Linux, etc.
 
 ### Événements
+
 Le check System Core n'inclut aucun événement.
 
 ### Checks de service
+
 Le check System Core n'inclut aucun check de service.
 
 <h1 id="system-swap"><a href="#system-swap">System Swap</a></h1>
@@ -97,6 +105,7 @@ Le check System Core n'inclut aucun check de service.
 Ce check surveille le nombre d'octets entrants et sortants du swap sur le système.
 
 ## Implémentation
+
 ### Installation
 
 Le check System Swap est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien à installer sur votre serveur.
@@ -112,21 +121,24 @@ Le check System Swap est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 [Lancez la sous-commande status de l'Agent][4] et cherchez `system_swap` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 
 {{< get-metrics-from-git "system_swap" >}}
 
 ### Événements
+
 Le check System Swap n'inclut aucun événement.
 
 ### Checks de service
+
 Le check System Swap n'inclut aucun check de service.
 
 [1]: /fr/integrations/directory
 [2]: /fr/integrations/disk
 [3]: /fr/integrations/process
 [4]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[5]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
 [7]: /fr/agent/guide/agent-commands/#start-stop-restart-the-agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example

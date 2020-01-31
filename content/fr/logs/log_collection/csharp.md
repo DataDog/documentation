@@ -23,13 +23,14 @@ further_reading:
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `log4Net`, `serilog` et `Nlog`.
+Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `log4net`, `Serilog` et `NLog`.
 
 Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][1].
 
 ## Configurer votre logger
+
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, une console ou d'autres éléments. Ce processus de journalisation est facilement configurable, dispose d'une API épurée et peut être utilisé sur les plateformes .NET récentes.
 
@@ -37,7 +38,7 @@ Contrairement aux autres bibliothèques de journalisation, Serilog est conçu po
 
 Installez Serilog via NuGet. Exécutez la commande suivante dans la console de gestion de paquet :
 
-```
+```text
 PM> Install-Package Serilog.Sinks.File
 ```
 
@@ -60,27 +61,15 @@ Consultez ensuite le fichier `log.json` pour voir l'événement suivant :
 
 ```json
 {
-    "MessageTemplate": "Traité {@Position} en {Elapsed:000} ms.",
-    "Level": "Information",
-    "Timestamp": "2016-09-02T15:02:29.648Z",
-    "Renderings": {
-        "Elapsed": [{
-            "Format": "000",
-            "Rendering": "034"
-        }]
-    },
-    "Properties": {
-        "Position": {
-            "Latitude": 25,
-            "Longitude": 134
-        },
-        "Elapsed": 34
-    }
+  "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
+  "Level": "Information",
+  "Timestamp": "2016-09-02T15:02:29.648Z",
+  "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
 }
 ```
 
 [Surveillez maintenant votre fichier de log avec l'Agent][1] pour envoyer vos logs à votre application Datadog.
-
 
 [1]: /fr/logs/#tail-existing-files
 {{% /tab %}}
@@ -90,7 +79,7 @@ NLog est une plateforme de journalisation pour .NET dotée d'un acheminement de 
 
 Installez NLog en passant par NuGet. Exécutez la commande suivante dans la console de gestion de paquet :
 
-```
+```text
 PM> Install-Package NLog
 ```
 
@@ -153,7 +142,6 @@ namespace Datadog
 
 [Surveillez maintenant votre fichier de log avec l'Agent][1] pour envoyer vos logs à votre application Datadog.
 
-
 [1]: /fr/logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "Log4Net" %}}
@@ -161,7 +149,7 @@ Log4Net est une plateforme de journalisation pour .NET inspirée de Log4j. Elle 
 
 Pour l'installer, exécutez la commande suivante dans la console de gestion de paquet :
 
-```
+```text
 PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
@@ -210,21 +198,19 @@ namespace Datadog
 {
     class Program
     {
-        // Obtenir le logger de classe actuelle
+        // Obtenir le logger de la classe actuelle
         private static ILog logger = LogManager.GetLogger(typeof(Program));
-
 
         static void Main(string[] args)
         {
 
-           // Charger la configuration d'App.config
+           // Charger la configuration depuis App.config
            XmlConfigurator.Configure();
 
-             // Enregistrer un message de debugging simple
-           logger.Debug("Ceci est mon premier message de debugging");
+             // Loguer un message de debugging simple
+           logger.Debug("Mon premier message de debugging");
 
-
-            // Indiquer le reste votre code ici...
+            // Indiquer le reste de votre code ici…
         }
     }
 }
@@ -245,7 +231,7 @@ Si vous avez suivi ces instructions, l'événement suivant doit apparaître dans
 
 Si, malgré les avantages de la journalisation en JSON, vous souhaitez activer la journalisation au format de chaîne brute, nous vous recommandons de mettre à jour le `log4net convertion pattern` pour extraire automatiquement vos logs avec le pipeline d'intégration C# comme suit :
 
-```
+```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
@@ -289,18 +275,18 @@ Et voilà ! Désormais, tous vos logs seront automatiquement au format JSON com
 
 Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Installez le [récepteur Serilog][1] de Datadog, qui envoie les événements et les logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443.
 Exécutez la commande suivante dans la console de gestion de paquet :
 
-```
+```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
 Initialisez ensuite directement le logger dans votre application. N'oubliez pas d'[ajouter votre `<CLÉ_API>`][2].
 
-```
+```csharp
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<CLÉ_API>")
     .CreateLogger();
@@ -312,7 +298,7 @@ Vous pouvez également remplacer le comportement par défaut et transférer des 
 
 Par exemple, pour transférer des logs vers le site américain de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
-```
+```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
@@ -320,14 +306,13 @@ var log = new LoggerConfiguration()
         source: "<NOM_SOURCE>",
         service: "<NOM_SERVICE>",
         host: "<NOM_HOST>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
+        tags: new string[] {"<TAG_1>:<VALEUR_1>", "<TAG_2>:<VALEUR_2>"},
         configuration: config
     )
     .CreateLogger();
 ```
 
 Désormais, les nouveaux logs sont directement envoyés à Datadog.
-
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api

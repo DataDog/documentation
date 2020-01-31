@@ -44,7 +44,7 @@ Vous disposez maintenant d'une collection Datadog contenant de nombreux exemples
 Après l'importation de la collection Postman, une liste complète des appels d'API Datadog disponibles est arrangée par répertoire dans le volet de gauche de Postman.
 Dans les répertoires, les appels d'API ont des variables entrées pour `datadog_site`, `datadog_api_key`, et `datadog_application_key` :
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="template variables de l'API Postman" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/SetAPIKeys.png" alt="template variables de l'API Postman"  style="width:70%;">}}
 
 Cela vous permet de configurer les [environnements Postman][4] et d'enregistrer votre site Datadog, ainsi que les clés d'application pour l'authentification. Si vous avez plusieurs organisations Datadog, définissez plusieurs [environnements Postman][4] pour effectuer des appels d'API vers différentes organisations sans modifier les appels d'API dans la collection Postman Datadog.
 
@@ -60,7 +60,7 @@ Suivez ces étapes pour configurer votre environnement :
 
 5. Facultatif : si vous avez plusieurs organisations Datadog, répétez les étapes 1 à 4 pour chaque organisation.
 
-{{< img src="getting_started/postman/setAPIKeys2.png" alt="Template variables de l'API Postman" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/setAPIKeys2.png" alt="template variables de l'API Postman 2"  style="width:70%;">}}
 
 ## Utilisation de la collection
 
@@ -68,25 +68,25 @@ Une fois la configuration terminée, vous êtes prêt(e) à effectuer des appels
 
 **Remarque** : n'oubliez pas de définir votre environnement défini dans le coin supérieur droit de l'interface Postman :
 
-{{< img src="getting_started/postman/env_setup.png" alt="Configuration de l'environnement" responsive="true" style="width:40%;">}}
+{{< img src="getting_started/postman/env_setup.png" alt="Configuration de l'environnement" style="width:40%;">}}
 
 ### Builder
 
 Lorsque vous cliquez sur un appel d'API dans la collection, il s'affiche dans le volet `Builder`, à droite. Depuis ce volet, vous pouvez envoyer l'appel d'API et voir le statut retourné, le temps de réponse et le code de réponse d'API.
 
-{{< img src="getting_started/postman/apiGetCalls.png" alt="Réponse API Postman" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="Réponse API Postman" style="width:70%;">}}
 
 ### Description
 
 Lorsque vous cliquez sur le nom d'un endpoint, une description du endpoint et de tous les paramètres obligatoires/facultatifs s'affiche pour vous aider à créer vos requêtes :
 
-{{< img src="getting_started/postman/description.mp4" alt="Description Postman" video="true" responsive="true" >}}
+{{< img src="getting_started/postman/description.mp4" alt="Description Postman" video="true" >}}
 
 ### Params
 
 L'onglet **Params** affiche tous les paramètres et toutes les valeurs actuellement sur l'appel d'API. Depuis cet onglet, vous pouvez ajouter des paramètres et des valeurs. Consultez les arguments disponibles dans la section correspondante de la [documentation de l'API Datadog][6].
 
-{{< img src="getting_started/postman/parameters.png" alt="Paramètres Postman" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/parameters.png" alt="Paramètres Postman" style="width:70%;">}}
 
 Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de l'appel d'API.
 

@@ -20,11 +20,11 @@ further_reading:
 
 Configurez votre compte Datadog de manière à transférer tous les logs ingérés vers votre système de stockage dans le cloud. Le stockage de vos logs dans une solution d'archivage à long terme vous permet de respecter vos exigences en matière de conformité et de garantir leur auditabilité de façon économique en cas d'incident. Une fois vos logs archivés pour le long terme, [vous pouvez y accéder][1] si vous devez enquêter sur une situation inattendue ou ayant pu se produire dans un passé lointain.
 
-Ce guide décrit la marche à suivre pour archiver les logs que vous avez recueillis vers votre compartiment de stockage dans le cloud.
+Ce guide décrit la marche à suivre pour configurer une archive afin de transférer les logs ingérés vers un compartiment de votre solution de stockage dans le cloud.
 
 **Remarque** : seuls les utilisateurs de Datadog bénéficiant des droits administrateur peuvent créer, modifier ou supprimer des configurations d'archivage de logs.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Affichage de la page Archive" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Affichage de la page Archive" style="width:75%;">}}
 
 ## Créer et configurer un compartiment de stockage
 
@@ -33,82 +33,68 @@ Ce guide décrit la marche à suivre pour archiver les logs que vous avez recuei
 
 Accédez à votre [console AWS][1] et [créez un compartiment S3][2] vers lequel vos archives seront envoyées. Assurez-vous que votre compartiment n'est pas accessible au public.
 
-Autorisez ensuite Datadog à écrire des archives de logs dans votre compartiment S3. Si vous utilisez le site américain, faites appel à la délégation de rôles ; si vous utilisez le site européen, configurez une stratégie de compartiment.
+Autorisez ensuite Datadog à écrire des archives de logs dans votre compartiment S3 grâce à la délégation des rôles :
 
 1. Configurez l'[intégration AWS][3] pour le compte AWS qui comporte votre compartiment S3. Vous devrez [créer un rôle][4] pouvant être utilisé par Datadog pour l'intégration à AWS Cloudwatch.
 
-2. Ajoutez les deux instructions d'autorisation suivantes aux [stratégies IAM de votre rôle Datadog][5]. Modifiez les noms de compartiment et, si vous le souhaitez, indiquez les chemins vers vos archives de logs. Les autorisations `GetObject` et `ListBucket` permettent la [réintégration des logs à partir des archives][6]. L'autorisation `PutObject` est suffisante pour l'importation d'archives.
+2. Ajoutez les deux instructions d'autorisation suivantes aux [stratégies IAM de votre rôle Datadog][4]. Modifiez les noms de compartiment et, si vous le souhaitez, indiquez les chemins vers vos archives de logs. Les autorisations `GetObject` et `ListBucket` permettent la [réintégration des logs à partir des archives][5]. L'autorisation `PutObject` est suffisante pour l'importation d'archives.
 
-
-    ```
+    ```json
     {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "DatadogUploadAndRehydrateLogArchives",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:PutObject",
-                    "s3:GetObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::<NOM_COMPARTIMENT_1/_CHEMIN_FACULTATIF_COMPARTIMENT_1>/*",
-                    "arn:aws:s3:::<NOM_COMPARTIMENT_2/_CHEMIN_FACULTATIF_COMPARTIMENT_2>/*"
-                ]
-            },
-            {
-                "Sid": "DatadogRehydrateLogArchivesListBucket",
-                "Effect": "Allow",
-                "Action": "s3:ListBucket",
-                "Resource": [
-                    "arn:aws:s3:::<NOM_COMPARTIMENT_1>",
-                    "arn:aws:s3:::<NOM_COMPARTIMENT_2>"
-                ]
-            }
-        ]
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DatadogUploadAndRehydrateLogArchives",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:GetObject"],
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+          ]
+        },
+        {
+          "Sid": "DatadogRehydrateLogArchivesListBucket",
+          "Effect": "Allow",
+          "Action": "s3:ListBucket",
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+          ]
+        }
+      ]
     }
     ```
-3. Accédez à la [page Archives][7] dans Datadog et sélectionnez l'option **Add a new archive** en bas de la page. Seuls les utilisateurs de Datadog bénéficiant des droits d'administrateur peuvent effectuer cette étape ainsi que la suivante.
+
+3. Accédez à la [page Archives][6] de Datadog et sélectionnez l'option **Add a new archive** en bas de la page. Seuls les utilisateurs de Datadog bénéficiant des droits d'administrateur peuvent effectuer cette étape ainsi que la suivante.
 
 4. Sélectionnez le compte AWS et le rôle appropriés pour votre compartiment S3, puis saisissez le nom de votre compartiment. Vous avez la possibilité d'ajouter un répertoire comme préfixe vers lequel l'ensemble de vos archives de logs seront envoyées. Il ne vous reste ensuite plus qu'à enregistrer votre archive.
 
-    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Définir les informations de votre compartiment S3 dans Datadog" responsive="true" style="width:75%;">}}
+    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Définir les informations de votre compartiment S3 dans Datadog" style="width:75%;">}}
 
 ### Chiffrement côté serveur (SSE)
 
 Pour ajouter le chiffrement côté serveur (SSE) à vos archives de logs S3, accédez à l'onglet **Properties** dans votre compartiment S3 et sélectionnez **Default Encryption**. Sélectionnez l'option `AES-256`, puis cliquez sur **Save**.
 
-{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Sélectionnez l'option AES-256 et cliquez sur Save." responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Sélectionnez l'option AES-256 et cliquez sur Save." style="width:75%;">}}
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: /fr/integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /fr/integrations/amazon_web_services/?tab=allpermissions#installation
-[6]: /fr/logs/archives/rehydrating
-[7]: https://app.datadoghq.eu/logs/pipelines/archives
-
+[5]: /fr/logs/archives/rehydrating
+[6]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
-<div class="alert alert-warning">
-    Les archives GCS sont en bêta privée. Demandez un accès anticipé à cette fonctionnalité en contactant l'<a href="/help">assistance Datadog</a>. Les archives GCS ne prennent pas encore en charge la réintégration.
-</div>
-
 1. Accédez à votre [compte GCP][1] et [créez un compartiment GCS][2] vers lequel vos archives seront envoyées. Sous « Choose how to control access to objects », sélectionnez « Set object-level and bucket-level permissions ».
-
 2. Si vous ne l'avez pas encore fait, configurez l'[intégration GCP][3] pour le projet qui comporte votre compartiment de stockage GCS. Vous devrez [créer un compte de service GCS utilisable par Datadog][4] afin d'intégrer ce dernier.
-
 3. Accordez ensuite à votre compte de service GCP Datadog les autorisations nécessaires pour écrire vos archives dans votre compartiment. Si vous créez un compte de service, gérez ces autorisations depuis la [page GCP Credentials][5]. Si vous modifiez un compte de service existant, accédez plutôt à la [page GCP IAM Admin][6]. Ajoutez les rôles **Storage Object Creator** (pour la création d'archives) **Storage Object Viewer** (pour la réintégration depuis les archives) sous **Storage**.
-
-  {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Ajouter le rôle Storage Object Creator à votre compte de service GCP Datadog" responsive="true" style="width:75%;">}}
-
+  {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Ajouter le rôle Storage Object Creator à votre compte de service GCP Datadog" style="width:75%;">}}
 4. Accédez à la [page Archives][7] dans Datadog et sélectionnez l'option **Add a new archive** en bas de la page. Seuls les utilisateurs de Datadog bénéficiant des droits d'administrateur peuvent effectuer cette étape ainsi que la suivante.
-
 5. Sélectionnez le type d'archive GCS, puis le compte de service GCS doté des autorisations d'écriture dans votre compartiment de stockage. Saisissez le nom de votre compartiment. Vous avez la possibilité d'ajouter un répertoire comme préfixe vers lequel l'ensemble de vos archives de logs seront envoyées. Enregistrez ensuite votre archive.
 
-  {{< img src="logs/archives/archive_select_gcs.png" alt="Ajouter le rôle Storage Object Creator à votre compte de service GCP Datadog" responsive="true" style="width:75%;">}}
+  {{< img src="logs/archives/archive_select_gcs.png" alt="Ajouter le rôle Storage Object Creator à votre compte de service GCP Datadog" style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -117,7 +103,6 @@ Pour ajouter le chiffrement côté serveur (SSE) à vos archives de logs S3, acc
 [5]: https://console.cloud.google.com/apis/credentials
 [6]: https://console.cloud.google.com/iam-admin/iam
 [7]: https://app.datadoghq.com/logs/pipelines/archives
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -135,7 +120,7 @@ Cette structure de répertoire vous permet d'interroger plus facilement vos arch
 
 À l'intérieur du fichier JSON compressé, le contenu de chaque événement est formaté comme suit :
 
-```
+```text
 {
     "_id": "123456789abcdefg",
     "date": "2018-05-15T14:31:16.003Z",
@@ -158,7 +143,7 @@ Par exemple, si vous créez une première archive filtrée sur le tag `env:prod`
 
 Les logs sont envoyés dans la première archive filtrée à laquelle ils correspondent.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Les logs sont envoyés dans la première archive filtrée à laquelle ils correspondent." responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Les logs sont envoyés dans la première archive filtrée à laquelle ils correspondent." style="width:75%;">}}
 
 {{< whatsnext desc="Découvrez ensuite comment accéder au contenu de vos logs archivés depuis Datadog :" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>Réintégration à partir des archives</u> : transférez des événements de logs depuis vos archives vers le Log Explorer de Datadog.{{< /nextlink >}}
@@ -167,6 +152,7 @@ Les logs sont envoyés dans la première archive filtrée à laquelle ils corres
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 

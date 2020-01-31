@@ -1,7 +1,7 @@
 ---
 title: Obtenir la séquence des index
 type: apicode
-order: 23.4
+order: 24.4
 external_redirect: "/api/#obtenir-la-sequence-des-index"
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Identify Synthetics Bots
 kind: documentation
-disable_toc: true
 description: Identify incoming Synthetics requests
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -35,7 +34,6 @@ Use the header attached to Datadog robots to detect them for your API and browse
 The following header is attached to all Datadog API tests robots:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
-
 
 The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
 

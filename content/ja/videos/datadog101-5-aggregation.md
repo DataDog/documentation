@@ -3,7 +3,7 @@ title: Datadog 101 - 集計
 kind: ビデオ
 language: en
 wistiaid: x9ljpqfu3m
-videos:
+"video-categories":
     - Datadog 101
 summary: データを集計する理由とその方法を理解する
 private: true

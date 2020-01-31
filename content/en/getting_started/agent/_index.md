@@ -13,12 +13,15 @@ further_reading:
 ---
 
 ## Overview
+
 The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadog via [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
 
 ## Setup
+
 If you haven't already, create a [Datadog account][7].
 
 ### Installation
+
 The Agent can be installed on many different platforms either directly on the host or as a [containerized version][8]. Most systems have a one-line install option.
 
 {{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
@@ -56,9 +59,11 @@ For the [container Agent][4], `datadog.yaml` configuration options are passed in
 {{< /tabs >}}
 
 ### Validation
+
 Run the Agent's [status command][9] to verify installation.
 
 ### Commands
+
 Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][13] your Agent.
 
 ## Data Collected
@@ -69,8 +74,8 @@ Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][1
 
 The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][14] integration.
 
-| Metric                           | Description                                                                                                        |
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Metric                           | Description                                                                                                          |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **datadog.agent.python.version** | Shows a value of `1` if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
 | **datadog.agent.running**        | Shows a value of `1` if the Agent is currently reporting to Datadog.                                                 |
 | **datadog.agent.started**        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
@@ -96,9 +101,11 @@ Depending on your platform, the Agent has several core checks enabled by default
 To collect metrics from other technologies, see the [Integrations][20] page.
 
 ### Events
+
 The Agent sends events to Datadog when an Agent is started or restarted.
 
 ### Service Checks
+
 **datadog.agent.up**:
 Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
 
@@ -106,6 +113,7 @@ Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise retur
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 ## Troubleshooting
+
 For help troubleshooting the Agent:
 
 * Visit the [Agent Troubleshooting][21] page.
@@ -113,10 +121,12 @@ For help troubleshooting the Agent:
 * Contact [Datadog support][23]
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 <p>
 
 ## Next Steps
+
 {{< whatsnext desc="After the Agent is installed:">}}
     {{< nextlink href="/getting_started/integrations" tag="Documentation" >}}Learn about Integrations{{< /nextlink >}}
     {{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
@@ -125,7 +135,7 @@ For help troubleshooting the Agent:
 [1]: /integrations
 [2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /api
-[4]: /graphing/infrastructure/process
+[4]: /infrastructure/process
 [5]: /logs
 [6]: /tracing
 [7]: https://www.datadoghq.com

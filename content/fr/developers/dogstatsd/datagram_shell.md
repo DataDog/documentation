@@ -2,6 +2,8 @@
 title: Datagramme et interface système
 kind: documentation
 description: 'Présentation du format des datagrammes utilisé par DogStatsD, ainsi que l''''interface système avancée.'
+aliases:
+  - /fr/developers/dogstatsd/data_types/
 further_reading:
   - link: developers/dogstatsd
     tag: Documentation
@@ -30,11 +32,11 @@ Cette section spécifie le format brut des datagrammes pour les métriques, év�
 
 Voici quelques exemples de datagrammes :
 
-* `page.views:1|c` : incrémente le compteur `page.views`.
+* `page.views:1|c` : incrémente la métrique COUNT `page.views`.
 * `fuel.level:0.5|g` : indique que le réservoir est à moitié vide.
 * `song.length:240|h|@0.5` : échantillonne l'histogramme `song.length` une fois sur deux.
 * `users.uniques:1234|s` : surveille les visiteurs uniques du site.
-* `users.online:1|c|#country:china` : incrémente le compteur d'utilisateurs actifs et ajoute un tag avec le pays d'origine.
+* `users.online:1|c|#country:china` : incrémente la métrique COUNT correspondant au nombre d'utilisateurs actifs et ajoute un tag avec le pays d'origine.
 * `users.online:1|c|@0.5|#country:china` : surveille les utilisateurs chinois actifs et utilisez un taux d'échantillonnage.
 
 [1]: /fr/developers/metrics/#naming-metrics
@@ -60,12 +62,12 @@ Voici quelques exemples de datagrammes :
 
 Voici quelques exemples de datagrammes :
 
-```
+```text
 ## Envoyer une exception
-_e{21,36}:Une exception s'est produite|Impossible d'analyser le fichier CSV depuis 10.0.0.17|t:warning|#err_type:bad_file
+_e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
 
-## Envoyer un événement avec une nouvelle ligne dans le texte
-_e{21,42}:Une exception s'est produite|Impossible d'analyser la requête JSON :\\n{"foo: "bar"}|p:low|#err_type:bad_request
+## Envoyer un événement avec un saut de ligne dans le texte
+_e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
 {{% /tab %}}
@@ -85,9 +87,9 @@ _e{21,42}:Une exception s'est produite|Impossible d'analyser la requête JSON :
 
 Voici un exemple de datagramme :
 
-```
+```text
 # Envoyer un statut CRITICAL pour une connexion à distance
-_sc|Connexion Redis|2|#env:dev|m:La connexion Redis a expiré après 10 s
+_sc|Redis connection|2|#env:dev|m:La connexion à Redis a expiré après 10 s
 ```
 
 {{% /tab %}}
@@ -104,7 +106,7 @@ DogStatsD crée un message qui contient des informations à propos de votre mét
 
 Voici le format d'envoi de métriques :
 
-```
+```text
 <NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>
 ```
 
@@ -126,7 +128,7 @@ $ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 
 Sur Windows :
 
-```
+```powershell
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
@@ -145,7 +147,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 
 Voici le format d'envoi d'événements :
 
-```
+```text
 _e{<TITRE>.length,<TEXTE>.length}:<TITRE>|<TEXTE>|d:<ÉVÉNEMENT_DATE>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>.
 ```
 
@@ -153,17 +155,17 @@ Les exemples ci-dessous calculent la taille du titre et du corps de l'événemen
 
 Sur Linux :
 
-```
-$ title="Événement de l'interface système"
-$ text="Ceci a été envoyé par Bash !"
+```shell
+$ title="Événement depuis le shell"
+$ text="Cet événement a été envoyé depuis Bash !"
 $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
 
 Sur Windows :
 
-```
-PS C:> $title = "Événement de l'interface système"
-PS C:> $text = "Ceci a été envoyé par PowerShell !"
+```powershell
+PS C:> $title = "Événement depuis le shell"
+PS C:> $text = "Cet événement a été envoyé depuis PowerShell !"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
@@ -172,7 +174,7 @@ PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#she
 
 Voici le format d'envoi des checks de service :
 
-```
+```text
 _sc|<NOM>|<STATUT>|d:<TIMESTAMP>|h:<HOSTNAME>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>|m:<MESSAGE_CHECK_SERVICE>
 ```
 
@@ -184,8 +186,8 @@ $ echo -n "_sc|Connexion Redis|2|#env:dev|m:La connexion Redis a expiré après 
 
 Sur Windows :
 
-```
-PS C:\> .\send-statsd.ps1 "_sc|Connexion Redis|2|#env:dev|m:La connexion Redis a expiré après 10 s"
+```powershell
+PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:La connexion à Redis a expiré après 10 s"
 ```
 
 {{% /tab %}}

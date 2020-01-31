@@ -3,7 +3,6 @@ title: Integration Pipeline Reference
 kind: guide
 aliases:
   - /logs/faq/integration-pipeline-reference
-disable_toc: true
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -65,7 +64,6 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [uwsgi][64]                      | [Custom Datadog YAML file][65]                   | `uwsgi`                    |
 | [Varnish][66]                    | [Custom Datadog YAML file][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Datadog integration YAML file][69]              | `zookeeper`                |
-
 
 ## Further Reading
 

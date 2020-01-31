@@ -24,21 +24,22 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
+To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `Serilog`, `NLog`, and `log4net` logging libraries
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
+
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
 
-Install Serilog via NuGet. Run the following command in the Package Manager Consol:
+Install Serilog via NuGet. Run the following command in the Package Manager Console:
 
-```
+```text
 PM> Install-Package Serilog.Sinks.File
 ```
 
@@ -61,27 +62,15 @@ Then check the `log.json` file to see the following event:
 
 ```json
 {
-    "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
-    "Level": "Information",
-    "Timestamp": "2016-09-02T15:02:29.648Z",
-    "Renderings": {
-        "Elapsed": [{
-            "Format": "000",
-            "Rendering": "034"
-        }]
-    },
-    "Properties": {
-        "Position": {
-            "Latitude": 25,
-            "Longitude": 134
-        },
-        "Elapsed": 34
-    }
+  "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
+  "Level": "Information",
+  "Timestamp": "2016-09-02T15:02:29.648Z",
+  "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
 }
 ```
 
 [Monitor now your log file with your Agent][1] to send your logs to your Datadog application
-
 
 [1]: /logs/#tail-existing-files
 {{% /tab %}}
@@ -91,7 +80,7 @@ NLog is a logging platform for .NET with rich log routing and management capabil
 
 Install NLog via NuGet. Run the following command in the Package Manager Console:
 
-```
+```text
 PM> Install-Package NLog
 ```
 
@@ -154,7 +143,6 @@ namespace Datadog
 
 [Monitor now your log file with your Agent][1] to send your logs to your Datadog application.
 
-
 [1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "Log4Net" %}}
@@ -162,7 +150,7 @@ Log4Net is a logging platform for .NET inspired from Log4j with rich log routing
 
 To install it, run the following command in the Package Manager Console
 
-```
+```text
 PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
@@ -214,7 +202,6 @@ namespace Datadog
         // Get the current class logger
         private static ILog logger = LogManager.GetLogger(typeof(Program));
 
-
         static void Main(string[] args)
         {
 
@@ -223,7 +210,6 @@ namespace Datadog
 
              // Log a simple debug message
            logger.Debug("This is my first debug message");
-
 
             // your code continues here ...
         }
@@ -246,7 +232,7 @@ If you have followed the instructions you should see in your file (for example `
 
 If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net convertion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
-```
+```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
@@ -265,15 +251,8 @@ instances:
 ##Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: /path/to/your/csharp/log.log
+    path: "/path/to/your/csharp/log.log"
     service: csharp
     source: csharp
     sourcecategory: sourcecode
@@ -290,18 +269,18 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
 
-```
+```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
 Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
 
-```
+```csharp
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>")
     .CreateLogger();
@@ -313,7 +292,7 @@ You can also override the default behaviour and forward logs in TCP by manually 
 
 For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
 
-```
+```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
@@ -328,7 +307,6 @@ var log = new LoggerConfiguration()
 ```
 
 New logs are now directly sent to Datadog.
-
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api

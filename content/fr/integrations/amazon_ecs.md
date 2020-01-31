@@ -13,13 +13,13 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
     tag: Blog
-    text: Métriques ECS clés à surveiller
+    text: Key ECS metrics to monitor
   - link: 'https://github.com/DataDog/datadog-trace-agent'
     tag: GitHub
     text: Code source de l'Agent de trace
 git_integration_title: amazon_ecs
 has_logo: true
-integration_title: "Amazon\_Elastic\_Container\_Service (ECS)"
+integration_title: Amazon Elastic Container Service (ECS)
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -40,9 +40,9 @@ Cette page aborde la configuration d'AWS ECS avec l'[Agent de conteneur Datadog
 
 Pour surveiller vos conteneurs et tâches ECS avec Datadog, exécutez l'Agent en tant que conteneur sur chaque instance EC2 de votre cluster ECS. Voici les différentes étapes de configuration à suivre :
 
-1. **Créer une tâche ECS**
-2. **Créer ou modifier votre stratégie IAM**
-3. **Planifier l'Agent Datadog en tant que service Daemon**
+1. Ajouter une tâche ECS
+2. Créer ou modifier votre stratégie IAM
+3. Planifier l'Agent Datadog en tant que service Daemon
 
 Si vous n'avez pas encore configuré un cluster EC2 Container Service, consultez la [section de mise en route de la documentation ECS][4].
 
@@ -65,13 +65,27 @@ Vous pouvez configurer la tâche à l'aide des [outils d'AWS CLI][6] ou de la c
 
 1. Téléchargez [datadog-agent-ecs.json][7] ([datadog-agent-ecs1.json][8] si vous utilisez une AMI Amazon Linux d'origine).
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<VOTRE_CLÉ_API_DATADOG>` par la [clé d'API Datadog][9] de votre compte.
-3. Si vous êtes sur le site européen de Datadog, vous pouvez également modifier `datadog-agent-ecs.json` et remplacer `DD_SITE` par `DD_SITE:datadoghq.eu`.
-4. Vous pouvez activer la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
-5. Enfin, vous pouvez activer la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+3. Facultatif : ajoutez un [check de santé de l'Agent](#check-de-sante-de-l-agent).
+4. Si vous êtes sur le site européen de Datadog, vous pouvez également modifier `datadog-agent-ecs.json` et remplacer `DD_SITE` par `DD_SITE:datadoghq.eu`.
+5. Vous pouvez activer la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
+6. Enfin, vous pouvez activer la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+7. Exécutez la commande suivante :
+  ```
+  aws ecs register-task-definition --cli-input-json file://path/to/datadog-agent-ecs.json
+  ```
 
-6. Exécutez la commande suivante :
+###### Check de santé de l'Agent
+
+Ajoutez le bloc suivant à la définition de votre tâche ECS pour créer un check de santé de l'Agent :
+
 ```
-aws ecs register-task-definition --cli-input-json file://chemin/vers/ecs-agent-datadog.json
+"healthCheck": {
+  "retries": 3,
+  "command": ["CMD-SHELL","agent health"],
+  "timeout": 5,
+  "interval": 30,
+  "startPeriod": 15
+}
 ```
 
 ##### Interface utilisateur Web
@@ -100,17 +114,18 @@ aws ecs register-task-definition --cli-input-json file://chemin/vers/ecs-agent-d
 
 #### Créer ou modifier votre stratégie IAM
 
-1. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][11] afin de recueillir des métriques Amazon ECS. Pour en savoir plus sur les stratégies, [consultez la documentation du site Web d'AWS][12].
+Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][11] afin de recueillir des métriques Amazon ECS. Pour en savoir plus sur les stratégies ECS, consultez [la documentation du site Web d'AWS][12].
 
-| Autorisation AWS                   | Description                                                                                          |
-|----------------------------------|------------------------------------------------------------------------------------------------------|
-| `ecs:ListClusters`               | Énumère tous les clusters disponibles.                                                                             |
-| `ecs:ListContainerInstances`     | Énumère les instances d'un cluster.                                                                         |
-| `ecs:DescribeContainerInstances` | Décrit les instances pour ajouter des métriques sur les ressources et les tâches en cours d'exécution, et ajoute un tag de cluster aux instances EC2. |
+| Autorisation AWS                   | Description                                                   |
+|----------------------------------|---------------------------------------------------------------|
+| `ecs:ListClusters`               | Renvoie la liste des clusters existants.                          |
+| `ecs:ListContainerInstances`     | Renvoie la liste des instances de conteneur dans un cluster précis. |
+| `ecs:ListServices`               | Énumère les services qui s'exécutent sur un cluster précis.   |
+| `ecs:DescribeContainerInstances` | Décrit les instances de conteneur Amazon ECS.                     |
 
 #### Exécuter l'Agent en tant que service Daemon
 
-Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour y parvenir, nous vous recommandons d'exécuter l'Agent Datadog en tant que [service Daemon][13].
+Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour y parvenir, nous vous conseillons d'exécuter l'Agent Datadog en tant que [service Daemon][13].
 
 ##### Planifier un service Daemon dans AWS à l'aide de la tâche ECS de Datadog
 
@@ -123,7 +138,7 @@ Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour
 
 #### Détection dynamique et surveillance des services en cours d'exécution
 
-La fonction [Autodiscovery][14] de Datadog peut être utilisée avec ECS et Docker afin de découvrir et de surveiller automatiquement des tâches s'exécutant dans votre environnement.
+La fonction [Autodiscovery][14] de Datadog peut être utilisée avec ECS et Docker afin de découvrir et de surveiller automatiquement les tâches s'exécutant dans votre environnement.
 
 #### Mode AWSVPC
 
@@ -131,7 +146,7 @@ Pour l'Agent v6.10+, le mode AWSVPC est pris en charge à la fois pour les conte
 
 1. Pour les applications et l'Agent en mode AWSVPC, les groupes de sécurité doivent être configurés pour permettre :
   * au groupe de sécurité de l'Agent de se connecter aux conteneurs d'application sur les ports concernés.
-  * au groupe de sécurité de l'Agent de se connecter aux instances du host sur le port TCP 51678. Le conteneur de l'Agent ECS doit s'exécuter en mode réseau host (par défaut) ou avoir un port relié au host.
+  * au groupe de sécurité de l'Agent de se connecter aux instances du host sur le port TCP 51678. Le conteneur de l'Agent ECS doit s'exécuter en mode réseau host (par défaut) ou avoir un port lié au host.
 
 2. Pour les applications en mode AWSVPC et l'Agent en mode pont, les groupes de sécurité doivent être configurés de façon à autoriser le groupe de sécurité des instances de host à se connecter aux conteneurs d'application sur les ports concernés.
 
@@ -139,7 +154,7 @@ Pour l'Agent v6.10+, le mode AWSVPC est pris en charge à la fois pour les conte
 
 Pour recueillir tous les logs écrits par des applications s'exécutant dans vos conteneurs ECS et les envoyer à votre application Datadog :
 
-1. Suivez les [instructions ci-dessus](#aws-cli) pour installer l'Agent Datadog.
+1. Suivez les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs.json][7] ([datadog-agent-ecs1.json][8] si vous utilisez une AMI Amazon Linux d'origine) avec la configuration suivante :
 
     ```
@@ -193,7 +208,7 @@ L'attribut `source` est utilisé pour identifier l'intégration à utiliser pour
 
 Pour recueillir des informations sur les processus pour l'ensemble de vos conteneurs et les envoyer à Datadog :
 
-1. Suivez les [instructions ci-dessus](#aws-cli) pour installer l'Agent Datadog.
+1. Suivez les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs.json][7] ([datadog-agent-ecs1.json][8] si vous utilisez une AMI Amazon Linux d'origine) avec la configuration suivante :
 
 ```
@@ -301,7 +316,7 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 
 Pour réduire les données parasites, l'intégration AWS ECS est automatiquement configurée de façon à inclure les événements qui contiennent les termes suivants : `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot` et `terminate`. Vous trouverez ci-dessous des exemples d'événement :
 
-{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" responsive="true">}}
+{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" >}}
 
 Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/AWS ECS, contactez [l'assistance Datadog][22].
 
@@ -326,8 +341,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][22].
 [8]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [9]: https://app.datadoghq.com/account/settings#api
 [10]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-[11]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
+[11]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#datadog-aws-iam-policy
+[12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonelasticcontainerservice.html
 [13]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
 [14]: https://docs.datadoghq.com/fr/agent/autodiscovery
 [15]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
@@ -338,6 +353,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][22].
 [20]: https://docs.datadoghq.com/fr/tracing/advanced_usage/?tab=java#change-agent-hostname
 [21]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
 [22]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

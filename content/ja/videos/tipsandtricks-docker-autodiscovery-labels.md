@@ -3,7 +3,7 @@ title: Datadog のヒントとコツ - Docker におけるラベルを使用し�
 kind: ビデオ
 language: en
 wistiaid: mlxx0j6txw
-videos:
+video-categories:
   - Datadog Tips & Tricks
   - Introduction
   - Docker

@@ -15,7 +15,7 @@ Pour les versions 6.8 et ultérieures de l'Agent, la commande `datadog-agent int
  * [freeze](#freeze)
 
 Affichez l'utilisation et la documentation de ces commandes avec `datadog-agent integration --help`.
-Pour Linux, exécutez la commande en tant qu'utilisateur `dd-agent`. Pour Windows, exécutez la commande en tant qu'`administrator`.
+Sous Linux, exécutez la commande en tant qu'utilisateur `dd-agent`. Sous Windows, exécutez la commande en tant qu'`administrator`.
 
 ## Commandes d'intégration
 
@@ -38,16 +38,19 @@ Une intégration est compatible et peut être installée si :
 2. Elle est compatible avec la version de [datadog_checks_base][3] de l'Agent installé.
 3. Il ne s'agit pas de `datadog_checks_base`. Le check de base peut uniquement être mis à niveau via la mise à niveau de l'Agent.
 
-La syntaxe de cette commande est `datadog-agent integration install <nom_paquet_intégration>==<version>`, où `<nom_paquet_intégration>` correspond au nom de l'intégration avec le préfixe `datadog-`.
+La syntaxe de cette commande est `datadog-agent integration install <NOM_PAQUET_INTÉGRATION>==<VERSION>`, où `<NOM_PAQUET_INTÉGRATION>` correspond au nom de l'intégration avec le préfixe `datadog-`.
 
 Par exemple, pour installer la version 3.6.0 de l'intégration vSphere, exécutez :
 
 Linux :
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
+
 Windows :
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration install datadog-vsphere==3.6.0
 ```
 
@@ -65,16 +68,19 @@ Les outils de gestion de configuration peuvent tirer parti de cette commande pou
 
 ### Remove
 
-Pour supprimer une intégration, utilisez la commande `datadog-agent integration remove`. La syntaxe de cette commande est `datadog-agent integration remove <nom_paquet_intégration>`, où `<nom_paquet_intégration>` correspond au nom de l'intégration avec le préfixe `datadog-`.
+Pour supprimer une intégration, utilisez la commande `datadog-agent integration remove`. La syntaxe de cette commande est `datadog-agent integration remove <NOM_PAQUET_INTÉGRATION>`, où `<NOM_PAQUET_INTÉGRATION>` correspond au nom de l'intégration avec le préfixe `datadog-`.
 
 Par exemple, pour supprimer l'intégration vSphere, exécutez :
 
 Linux :
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
+
 Windows :
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration remove datadog-vsphere
 ```
 
@@ -82,16 +88,19 @@ La suppression d'une intégration n'entraîne pas la suppression du dossier de c
 
 ### Show
 
-Pour obtenir des informations, comme le numéro de version, sur une intégration installée, utilisez la commande `datadog-agent integration show`. La syntaxe de cette commande est `datadog-agent integration show <nom_paquet_intégration>`, où `<nom_paquet_intégration>` correspond au nom de l'intégration avec le préfixe `datadog-`.
+Pour obtenir des informations, comme le numéro de version, sur une intégration installée, utilisez la commande `datadog-agent integration show`. La syntaxe de cette commande est `datadog-agent integration show <NOM_PAQUET_INTÉGRATION>`, où `<NOM_PAQUET_INTÉGRATION>` correspond au nom de l'intégration avec le préfixe `datadog-`.
 
 Par exemple, pour afficher des informations sur l'intégration vSphere, exécutez :
 
 Linux :
-```
+
+```shell
 sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
+
 Windows :
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration show datadog-vsphere
 ```
 
@@ -100,11 +109,14 @@ Windows :
 Pour énumérer tous les paquets Python installés dans l'environnement Python de l'Agent, utilisez la commande `datadog-agent integration freeze`. Cela affichera la liste de toutes les intégrations Datadog (paquets commençant par `datadog-`) et de toutes les dépendances Python requises pour exécuter les intégrations.
 
 Linux :
-```
+
+```text
 sudo -u dd-agent -- datadog-agent integration freeze
 ```
+
 Windows :
-```
+
+```powershell
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
 ```
 

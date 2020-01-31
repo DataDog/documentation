@@ -8,17 +8,17 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez l''âge des snapshots, l''IOPS, les durées de lecture/écriture, et plus encore.'
+description: 'Surveillez l''âge des snapshots, les IOPS, les temps de lecture/écriture, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ebs/'
 git_integration_title: amazon_ebs
 has_logo: true
-integration_title: "Amazon\_Elastic\_Block\_Store"
+integration_title: Amazon Elastic Block Store
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ebs
 public_title: "Intégration Datadog/Amazon\_Elastic\_Block\_Store"
-short_description: 'Surveillez l''âge des snapshots, l''IOPS, les durées de lecture/écriture, et plus encore.'
+short_description: 'Surveillez l''âge des snapshots, les IOPS, les temps de lecture/écriture, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
@@ -41,7 +41,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon EBS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_ebs` dans le préfixe.
+Configurez Amazon EBS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_ebs` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 
@@ -85,6 +87,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [9]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
 [10]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
 [11]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog
-
-
-{{< get-dependencies >}}

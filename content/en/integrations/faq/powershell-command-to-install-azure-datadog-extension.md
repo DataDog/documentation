@@ -1,7 +1,6 @@
 ---
 title: Powershell command to install Azure Datadog Extension
 kind: faq
-disable_toc: true
 ---
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
@@ -12,7 +11,7 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 An alternative to the GUI install is via Powershell.
 To run the Datadog Agent in your Azure instances as an extension, use the following syntax:
 
-```
+```powershell
 $Settings="{'api_key': '$(DatadogApiKey)'}"
 Set-AzureRmVMExtension -Publisher "Datadog.Agent" -ExtensionType "DatadogWindowsAgent" -Settings $Settings
 ```

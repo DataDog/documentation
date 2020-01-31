@@ -56,11 +56,11 @@ Ajoutez un nouvel appender de fichier à `log4j.xml` :
 
 ```xml
 <appender name="fileAppender" class="org.apache.log4j.FileAppender">
-  <param name="File" value="/logs/log4j.log" />
-  <param name="Append" value="true" />
-  <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
-  </layout>
+    <param name="File" value="/logs/log4j.log" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+    </layout>
 </appender>
 ```
 
@@ -74,7 +74,7 @@ Une fois cette opération effectuée, le `ConversionPattern` à utiliser devient
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -82,13 +82,13 @@ Une fois cette opération effectuée, le `ConversionPattern` à utiliser devient
 Modifiez votre fichier `log4j2.xml` :
 
 ```xml
- <File name="MonFichier" fileName="logs/app.log" immediateFlush="true">
-        <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
- </File>
- <Loggers>
-        <Root level="debug">
-        <AppenderRef ref="MonFichier" />
-        </Root>
+<File name="MyFile" fileName="logs/app.log" immediateFlush="true">
+    <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+</File>
+<Loggers>
+    <Root level="debug">
+        <AppenderRef ref="MyFile" />
+    </Root>
 </Loggers>
 ```
 
@@ -102,7 +102,7 @@ Une fois cette opération terminée, le `PatternLayout` à utiliser devient :
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -111,19 +111,18 @@ Modifiez votre fichier `logback.xml` :
 
 ```xml
 <configuration>
-(....)
-   <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
-
-   <appender name="Fichier" class="ch.qos.logback.core.FileAppender">
-      <file> ~/logs/log-${byDay}.log </file>
-      <append>true</append>
-      <encoder>
-          <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    <!-- (....) -->
+    <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file> ~/logs/log-${byDay}.log </file>
+        <append>true</append>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </encoder>
-   </appender>
-(....)
+    </appender>
+    <!-- (....) -->
     <root level="debug">
-        <appender-ref ref="Fichier" />
+        <appender-ref ref="FILE" />
     </root>
 </configuration>
 ```
@@ -138,7 +137,7 @@ Une fois cette opération terminée, le `Pattern` à utiliser devient :
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,19 +181,19 @@ Modifiez ensuite votre fichier `logback.xml` comme décrit dans la section `Slf4
 
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][1] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][2]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
-[1]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-Il existe une structure JSON log4j2 par défaut qui peut être utilisée. Ajoutez l'appender suivant à votre fichier `log4j2.xml` : 
+Il existe une structure JSON log4j2 par défaut qui peut être utilisée. Ajoutez l'appender suivant à votre fichier `log4j2.xml` :
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <JSONLayout compact="true" eventEol="true" properties="true"/>
+            <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true"/>
         </Console>
     </Appenders>
     <Loggers>
@@ -207,18 +206,16 @@ Il existe une structure JSON log4j2 par défaut qui peut être utilisée. Ajoute
 
 * Puis ajoutez les dépendances suivantes dans votre fichier `pom.xml` :
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>datadog</groupId>
-    <artifactId>assistance</artifactId>
+    <artifactId>support</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
@@ -226,29 +223,22 @@ Il existe une structure JSON log4j2 par défaut qui peut être utilisée. Ajoute
             <artifactId>log4j-core</artifactId>
             <version>2.7</version>
         </dependency>
-
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.8.3</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.3</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.8.3</version>
         </dependency>
-
     </dependencies>
-
-
 </project>
 ```
 
@@ -295,7 +285,7 @@ Modifiez ensuite votre fichier `logback.xml` et mettez à jour l'encodeur :
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][2] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][3]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
+[2]: /fr/tracing/connect_logs_and_traces/?tab=java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -351,7 +341,7 @@ La journalisation vers un serveur à distance au format JSON avec Log4j peut s'a
 Pour utiliser `log4j-over-slf4j` dans votre propre application, la première étape consiste à rechercher `log4j.jar`, puis à le remplacer par `log4j-over-slf4j.jar`.
 Dans la plupart des situations, il vous suffit de remplacer le fichier jar pour migrerde Log4j à SLF4J.
 
-Modifiez ensuite le fichier `pom.xml` avec le contenu suivant : 
+Modifiez ensuite le fichier `pom.xml` avec le contenu suivant :
 
 ```xml
 <dependency>
@@ -359,13 +349,11 @@ Modifiez ensuite le fichier `pom.xml` avec le contenu suivant :
     <artifactId>log4j-over-slf4j</artifactId>
     <version>1.7.13</version>
 </dependency>
-
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
@@ -384,7 +372,7 @@ Log4j2 permet la journalisation sur un host à distance, mais n'offre pas la pos
 
 Pour utiliser `log4j-over-slf4j` dans votre propre application, la première étape consiste à rechercher `log4j.jar`, puis à le remplacer par `log4j-to-slf4j-2.11.jar`.
 
-Modifiez ensuite le fichier `pom.xml` avec le contenu suivant : 
+Modifiez ensuite le fichier `pom.xml` avec le contenu suivant :
 
 ```xml
 <dependency>
@@ -392,13 +380,11 @@ Modifiez ensuite le fichier `pom.xml` avec le contenu suivant :
     <artifactId>log4j-to-slf4j</artifactId>
     <version>2.11.0</version>
 </dependency>
-
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
@@ -406,7 +392,7 @@ Modifiez ensuite le fichier `pom.xml` avec le contenu suivant :
 </dependency>
 ```
 
-**Remarques :** 
+**Remarques :**
 
 - Vérifiez que `log4j-slf4j-impl-2.0.jar` n'est **pas** utilisé, comme expliqué à l'adresse suivante : https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html.
 - Suite à cette migration, les fichiers de configuration Log4j ne seront plus recueillis. Migrez votre fichier `log4j.properties` vers `logback.xml` avec le [convertisseur Log4j][1].
@@ -420,11 +406,10 @@ Pour ajouter Logback [logstash-logback-encoder][1] à votre classpath, ajoutez l
 
 ```xml
 <dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>4.5.1</version>
 </dependency>
-
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
@@ -440,24 +425,22 @@ Pour ajouter Logback [logstash-logback-encoder][1] à votre classpath, ajoutez l
 
 Configurez le logger Logback de façon à diffuser les logs directement à Datadog en ajoutant le code suivant à votre fichier `logback.xml` :
 
-```
+```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>
-
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <remoteHost>intake.logs.datadoghq.com</remoteHost>
-  <port>10514</port>
-  <keepAliveDuration>1 minute</keepAliveDuration>
+    <port>10514</port>
+    <keepAliveDuration>1 minute</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-          <pattern><CLÉAPI> %mdc{cléNonExistante}</pattern>
-        </layout>
-      </prefix>    
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><CLÉAPI> %mdc{cléNonExistante}</pattern>
+            </layout>
+          </prefix>
     </encoder>
 </appender>
-
 <root level="debug">
     <appender-ref ref="JSON_TCP" />
     <appender-ref ref="JSON" />
@@ -466,12 +449,11 @@ Configurez le logger Logback de façon à diffuser les logs directement à Datad
 
 **Remarques :**
 
-- Remplacez `<CLÉAPI>` par la valeur clé de votre API Datadog
-- `%mdc{cléNonExistante}` est ajouté, car la configuration XML supprime les espaces, comme expliqué [ici][4].
-- Consultez la liste des [endpoints disponibles pour le site européen][5].
+* Remplacez `<CLÉAPI>` par la valeur de votre clé d'API Datadog.
+* `%mdc{cléNonExistante}` est ajouté, car la configuration XML supprime les espaces, comme expliqué [ici][4].
+* Consultez la liste des [endpoints disponibles pour le site européen][5].
 
 Découvrez plus de détails sur le paramètre de préfixe dans la [documentation Logback][4] (en anglais).
-
 
 ## Concepts avancés
 
@@ -479,9 +461,9 @@ Enrichissez vos événements de log avec des attributs contextuels.
 
 ### Utilisation du parser key/value
 
-Le [parser key/value][6] extrait n'importe quelle expression `<key>=<value>` identifiée dans un événement de log.
+Le [parser key/value][6] extrait n'importe quelle expression `<KEY>=<VALUE>` identifiée dans un événement de log.
 
-Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<key>=<value>`.
+Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<KEY>=<VALUE>`.
 
 Par exemple, si vous avez :
 
@@ -499,12 +481,10 @@ Lorsque le [parser key/value][6] est activé, **Datadog** extrait automatiquemen
 
 ```json
 {
-    //...
-    "message" : "A généré quantity=1001 messages lors des dernières durationInMs=93180 ms pour le client scope=prod30",
-    "scope" : "prod30",
-    "durationInMs" : 93180,
-    "quantity" : 1001
-    //...
+  "message": "A généré quantity=1001 messages lors des dernières durationInMs=93180 ms pour le client scope=prod30",
+  "scope": "prod30",
+  "durationInMs": 93180,
+  "quantity": 1001
 }
 ```
 
@@ -527,12 +507,12 @@ Pour générer ce document JSON final :
 
 ```json
 {
-    "message" : "A généré 1 001 messages lors des dernières 93 secondes",
-    "scope" : "prod30",
+  "message": "A généré 1 001 messages lors des dernières 93 secondes",
+  "scope": "prod30"
 }
 ```
 
-**Les MDC sont très utiles, mais pour une raison inconnue, seules les chaînes de caractères sont autorisées. Par conséquent, nous vous déconseillons de fournir des valeurs numériques aux métriques dotées d'un MDC.
+**Les MDC sont très utiles, mais seules les chaînes de caractères sont autorisées. Par conséquent, nous vous déconseillons de fournir des valeurs numériques aux métriques dotées d'un MDC.**
 
 ## Pour aller plus loin
 

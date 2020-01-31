@@ -3,7 +3,7 @@ title: Datadog 101 - Notifications
 kind: video
 language: en
 wistiaid: 4kjgeqdb5o
-videos:
+"video-categories":
     - Datadog 101
     - Notifications
 summary: Utiliser des notifications pour recevoir des alertes en cas de problème en évitant de consulter chaque faux positif

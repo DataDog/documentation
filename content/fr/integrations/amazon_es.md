@@ -11,12 +11,12 @@ description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_es/'
 git_integration_title: amazon_es
 has_logo: true
-integration_title: "Amazon\_Elasticsearch"
+integration_title: Amazon Elasticsearch
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_es
-public_title: "Intégration Datadog/Amazon\_ElasticSearch"
+public_title: "Intégration Datadog/Amazon\_Elasticsearch"
 short_description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 version: '1.0'
 ---
@@ -48,7 +48,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_elasticsearch` dans le préfixe.
+Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_elasticsearch` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 
@@ -84,6 +86,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

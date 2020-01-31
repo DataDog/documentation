@@ -3,7 +3,6 @@ title: インテグレーションパイプラインリファレンス
 kind: ガイド
 aliases:
   - /ja/logs/faq/integration-pipeline-reference
-disable_toc: true
 further_reading:
   - link: logs/processing/pipelines
     tag: Documentation
@@ -64,7 +63,6 @@ further_reading:
 | [uwsgi][64]                      | [カスタム Datadog YAML ファイル][65]                   | `uwsgi`                    |
 | [Varnish][66]                    | [カスタム Datadog YAML ファイル][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Datadog インテグレーション YAML ファイル][69]              | `zookeeper`                |
-
 
 ## その他の参考資料
 

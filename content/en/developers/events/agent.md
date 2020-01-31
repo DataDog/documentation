@@ -1,7 +1,6 @@
 ---
 title: Events with a Custom Agent Check
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/"
   tag: "Documentation"
@@ -12,7 +11,7 @@ further_reading:
 
 To submit an event from a custom Agent Check use the `event(<EVENT_DICT>)` function:
 
-```
+```text
 self.event(
             {
               "timestamp": <TIMESTAMP_EPOCH>,
@@ -32,7 +31,7 @@ self.event(
 The following keys and data types are available in the event dictionary:
 
 | Key                | Type            | Required | Description                                                   |
-| ------------------ | --------------- | -------- | ------------------------------------------------------------- |
+|--------------------|-----------------|----------|---------------------------------------------------------------|
 | `timestamp`        | Integer         | Yes      | The epoch timestamp for the event                             |
 | `event_type`       | String          | Yes      | The event name                                                |
 | `msg_title`        | String          | Yes      | The title of the event                                        |
@@ -43,7 +42,6 @@ The following keys and data types are available in the event dictionary:
 | `host`             | String          | No       | The host name                                                 |
 | `tags`             | List of strings | No       | A list of tags associated with this event.                    |
 | `priority`         | String          | No       | Specifies the priority of the event (`normal` or `low`).      |
-
 
 ### Example
 
@@ -58,7 +56,7 @@ This is an example of using a custom Agent check to send one event periodically.
     ```
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
-2. In this folder, create a custom check file named `event_example.py` with the following content:
+4. In this folder, create a custom check file named `event_example.py` with the following content:
 
     {{< code-block lang="python" filename="event_example.py" >}}
     from datadog_checks.base import AgentCheck
@@ -78,9 +76,8 @@ This is an example of using a custom Agent check to send one event periodically.
             )
     {{< /code-block >}}
 
-3. [Restart the Agent][4].
-
-4. For validation, run the [Agent's status command][5] and look for `event_example` under the Checks section:
+5. [Restart the Agent][4].
+6. For validation, run the [Agent's status command][5] and look for `event_example` under the Checks section:
 
     ```
     =========
@@ -103,9 +100,10 @@ This is an example of using a custom Agent check to send one event periodically.
 
         (...)
     ```
-5. Finally, go to your [Datadog Event stream][6] to see your events:
 
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" responsive="true" style="width:80%;">}}
+7. Finally, go to your [Datadog Event stream][6] to see your events:
+
+{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example"  style="width:80%;">}}
 
 ## Further reading
 
@@ -115,5 +113,5 @@ This is an example of using a custom Agent check to send one event periodically.
 [2]: /developers/write_agent_check
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/event/stream

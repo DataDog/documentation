@@ -1,7 +1,6 @@
 ---
 title: Agent Log Files
 kind: guide
-disable_toc: true
 aliases:
   - /agent/faq/agent-log-files
 further_reading:
@@ -21,7 +20,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 ## Agent log directory
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                       |
 |--------------------------------------|-------------------------------|
@@ -29,7 +28,6 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 | macOS                                | `/var/log/datadog/`           |
 | Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP or older     | *unsupported Platform*        |
-
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -54,7 +52,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 ## Agent log files
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * `agent.log`
 * `process-agent.log`
