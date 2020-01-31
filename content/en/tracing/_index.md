@@ -21,6 +21,7 @@ aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
   - /tracing/guide/distributed_tracing/
+  - /tracing/advanced/
 ---
 
 {{< wistia 2kgmb9wbsr >}}
