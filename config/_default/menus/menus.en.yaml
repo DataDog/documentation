@@ -1118,6 +1118,34 @@ main:
     parent: "log_management"
     weight: 11
 
+#########################
+## Security Monitoring ##
+#########################
+
+  - name: "Security Monitoring"
+    url: "security_monitoring/"
+    pre: "nav_security_monitoring"
+    identifier: "security_monitoring"
+    weight: 95000
+
+  - name: "Getting Started"
+    url: "security_monitoring/getting_started"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_getting_started"
+    weight: 1
+
+  - name: "Signals Explorer"
+    url: "security_monitoring/explorer"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_explorer"
+    weight: 2
+
+  - name: "Detection Rules"
+    url: "security_monitoring/detection_rules"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_detection_rules"
+    weight: 3
+
 ################
 ## SYNTHETICS ##
 ################
