@@ -99,7 +99,7 @@ The free text search filters Detection Rules by text in the rule name or query. 
 
 ### Detection Rules Table
 
-{{< img src="security_monitoring/detection_rules/rules_table.png" alt="Detection Rules Table" responsive="true" >}}
+{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Detection Rules Table" responsive="true" >}}
 
 The Detection Rules are displayed in the Detection Rules table.
 
