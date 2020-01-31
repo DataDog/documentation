@@ -68,15 +68,15 @@ When you create or edit an SLO, you can add tags for filtering on the [list SLOs
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
-The overall uptime can be considered as a percentage of the time where **all** of the monitor states are in the `OK` state. It is not the average of the aggregated monitors. 
+The overall uptime can be considered as a percentage of the time where **all** of the monitors are in the `OK` state. It is not the average of the aggregated monitors. 
 
 Consider the following example for 3 monitors:
 
 | Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Uptime |
 |--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
-| monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    | 
-| monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90%    |
-| monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80%    |
+| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    | 
+| Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90%    |
+| Monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80%    |
 | **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70%    |
 
 This can result in the overall uptime being lower than the average of the individual uptimes.
