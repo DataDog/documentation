@@ -11840,13 +11840,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"data\": [\n    {\n      \"type\": \"user_invitations\",\n      \"relationships\": {\n        \"user\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"00000000-0000-0000-0000-000000000000\"\n          }\n        }\n      },\n      \"attributes\": {\n        \"login_method\": \"string\"\n      }\n    }\n  ]\n}",
+							"raw": "{\n  \"data\": [\n    {\n      \"type\": \"user_invitations\",\n      \"relationships\": {\n        \"user\": {\n          \"data\": {\n            \"type\": \"users\",\n            \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n          }\n        }\n      }\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -11854,7 +11854,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/v2/user_invitations",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/user_invitations",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11862,11 +11862,12 @@
 								"{{datadog_site}}"
 							],
 							"path": [
+								"api",
 								"v2",
 								"user_invitations"
 							]
 						},
-						"description": "### Overview\n\nSends emails to one or more users inviting them to join the organization.\n\n### Arguments\n\n* **`type`** [*required*]: The type of the USER request, use `user_invitations`\n* **`attributes.login_method`**: The login method included in the user invitation."
+						"description": "### Overview\n\nSends emails to one or more users inviting them to join the organization.\n\n### Arguments\n\n* **`type`** [*required*]: The type of the USER request, use `user_invitations`\n* **`attributes.login_method`** [*optional*]: The login method included in the user invitation, to choose between `SAML`or `oauth2`"
 					},
 					"response": []
 				},
@@ -11905,7 +11906,8 @@
 							"variable": [
 								{
 									"key": "USER_INVITATION_UUID",
-									"value": ""
+									"value": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+									"description": "User invitation unique ID received as an anwser after sending one."
 								}
 							]
 						},

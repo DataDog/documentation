@@ -12,4 +12,4 @@ Sends emails to one or more users inviting them to join the organization.
 **ARGUMENTS**:
 
 * **`type`** [*required*]: The type of the USER request, use `user_invitations`
-* **`attributes.login_method`**: The login method included in the user invitation.
+* **`attributes.login_method`** [*optional*]: The login method included in the user invitation.

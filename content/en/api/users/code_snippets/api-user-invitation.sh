@@ -13,12 +13,9 @@ curl --request POST 'https://api.datadoghq.com/v2/user_invitations' \
         "user": {
           "data": {
             "type": "users",
-            "id": "00000000-0000-0000-0000-000000000000"
+            "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
           }
         }
-      },
-      "attributes": {
-        "login_method": "string"
       }
     }
   ]
