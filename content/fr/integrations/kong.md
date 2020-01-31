@@ -154,6 +154,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [8]: https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/monitor-kong-datadog
-
-
-{{< get-dependencies >}}

@@ -65,6 +65,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://docs.datadoghq.com/fr/monitors/notifications/#notification
 [2]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

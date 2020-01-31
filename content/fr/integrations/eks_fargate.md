@@ -387,6 +387,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [18]: http://docs.datadoghq.com/agent/cluster_agent/setup
 [19]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
 [20]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

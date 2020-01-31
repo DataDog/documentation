@@ -172,6 +172,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

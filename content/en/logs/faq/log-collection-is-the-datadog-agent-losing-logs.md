@@ -29,7 +29,7 @@ However, there are some limits for this buffer in order to avoid memory issues. 
 
 ### Container logs
 
-As for files, Datadog storse a pointer for each tailed container. Therefore, in the case of network issues, it is possible for the Agent to know which logs have not been sent yet.
+As for files, Datadog stores a pointer for each tailed container. Therefore, in the case of network issues, it is possible for the Agent to know which logs have not been sent yet.
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}

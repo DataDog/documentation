@@ -5,8 +5,6 @@ aliases:
   - /graphing/infrastructure/
 ---
 
-## Overview
-
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Infrastructure List</u> - See a list of all your hosts monitored by Datadog.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/hostmap" >}}<u>Host Map</u> - Visualize your hosts together on one screen with customized groupings, filters, and metrics made comprehensible by color and shape.{{< /nextlink >}}

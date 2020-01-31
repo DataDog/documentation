@@ -18,5 +18,5 @@ All the API endpoints below can have two different host endpoints:
 * For the Datadog US site: `https://api.datadoghq.com/api/`
 * For the Datadog EU site: `https://api.datadoghq.eu/api/`
 
-[1]: /account_management/faq/how-do-i-grant-or-remove-a-global-permission-to-or-from-a-role
+[1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/logs/pipelines

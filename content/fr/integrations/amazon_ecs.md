@@ -40,9 +40,9 @@ Cette page aborde la configuration d'AWS ECS avec l'[Agent de conteneur Datadog
 
 Pour surveiller vos conteneurs et tâches ECS avec Datadog, exécutez l'Agent en tant que conteneur sur chaque instance EC2 de votre cluster ECS. Voici les différentes étapes de configuration à suivre :
 
-1. **Créer une tâche ECS**
-2. **Créer ou modifier votre stratégie IAM**
-3. **Planifier l'Agent Datadog en tant que service Daemon**
+1. Ajouter une tâche ECS
+2. Créer ou modifier votre stratégie IAM
+3. Planifier l'Agent Datadog en tant que service Daemon
 
 Si vous n'avez pas encore configuré un cluster EC2 Container Service, consultez la [section de mise en route de la documentation ECS][4].
 
@@ -65,13 +65,27 @@ Vous pouvez configurer la tâche à l'aide des [outils d'AWS CLI][6] ou de la c
 
 1. Téléchargez [datadog-agent-ecs.json][7] ([datadog-agent-ecs1.json][8] si vous utilisez une AMI Amazon Linux d'origine).
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<VOTRE_CLÉ_API_DATADOG>` par la [clé d'API Datadog][9] de votre compte.
-3. Si vous êtes sur le site européen de Datadog, vous pouvez également modifier `datadog-agent-ecs.json` et remplacer `DD_SITE` par `DD_SITE:datadoghq.eu`.
-4. Vous pouvez activer la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
-5. Enfin, vous pouvez activer la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+3. Facultatif : ajoutez un [check de santé de l'Agent](#check-de-sante-de-l-agent).
+4. Si vous êtes sur le site européen de Datadog, vous pouvez également modifier `datadog-agent-ecs.json` et remplacer `DD_SITE` par `DD_SITE:datadoghq.eu`.
+5. Vous pouvez activer la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
+6. Enfin, vous pouvez activer la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+7. Exécutez la commande suivante :
+  ```
+  aws ecs register-task-definition --cli-input-json file://path/to/datadog-agent-ecs.json
+  ```
 
-6. Exécutez la commande suivante :
+###### Check de santé de l'Agent
+
+Ajoutez le bloc suivant à la définition de votre tâche ECS pour créer un check de santé de l'Agent :
+
 ```
-aws ecs register-task-definition --cli-input-json file://chemin/vers/ecs-agent-datadog.json
+"healthCheck": {
+  "retries": 3,
+  "command": ["CMD-SHELL","agent health"],
+  "timeout": 5,
+  "interval": 30,
+  "startPeriod": 15
+}
 ```
 
 ##### Interface utilisateur Web
@@ -111,7 +125,7 @@ Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][11] afin d
 
 #### Exécuter l'Agent en tant que service Daemon
 
-Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour y parvenir, nous vous recommandons d'exécuter l'Agent Datadog en tant que [service Daemon][13].
+Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour y parvenir, nous vous conseillons d'exécuter l'Agent Datadog en tant que [service Daemon][13].
 
 ##### Planifier un service Daemon dans AWS à l'aide de la tâche ECS de Datadog
 
@@ -124,7 +138,7 @@ Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour
 
 #### Détection dynamique et surveillance des services en cours d'exécution
 
-La fonction [Autodiscovery][14] de Datadog peut être utilisée avec ECS et Docker afin de découvrir et de surveiller automatiquement des tâches s'exécutant dans votre environnement.
+La fonction [Autodiscovery][14] de Datadog peut être utilisée avec ECS et Docker afin de découvrir et de surveiller automatiquement les tâches s'exécutant dans votre environnement.
 
 #### Mode AWSVPC
 
@@ -339,6 +353,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][22].
 [20]: https://docs.datadoghq.com/fr/tracing/advanced_usage/?tab=java#change-agent-hostname
 [21]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
 [22]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

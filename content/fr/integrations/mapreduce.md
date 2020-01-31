@@ -112,6 +112,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
 [13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
-
-
-{{< get-dependencies >}}

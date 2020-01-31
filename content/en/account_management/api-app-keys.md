@@ -27,7 +27,7 @@ For security reasons, API keys cannot be used to send data from a browser, as th
 
 ## Add a key
 
-To add a Datadog API key, application key, or client token, navigate to [Integration -> APIs][4], enter a name for your key or token, and click **Create API key** or **Create Application Key** or **Create Client Token**.
+To add a Datadog API key, application key, or client token, navigate to [Integration -> APIs][1], enter a name for your key or token, and click **Create API key** or **Create Application Key** or **Create Client Token**.
 
 **Note**:
 
@@ -37,7 +37,7 @@ To add a Datadog API key, application key, or client token, navigate to [Integra
 
 ## Remove
 
-To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][4] and select the **Revoke** button next to the key or token you want to remove:
+To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key or token you want to remove:
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys"  >}}
 
@@ -53,9 +53,9 @@ Alternatively, organizations have asked whether they can create a “service acc
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][1].
+Need help? Contact [Datadog support][4].
 
-[1]: /help
+[1]: https://app.datadoghq.com/account/settings#api
 [2]: https://docs.datadoghq.com/logs/log_collection/javascript
 [3]: /real_user_monitoring
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: /help

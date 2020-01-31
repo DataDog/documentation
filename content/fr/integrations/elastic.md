@@ -219,6 +219,3 @@ Pour mieux comprendre comment (ou pourquoi) intégrer votre cluster Elasticsearc
 [12]: https://docs.datadoghq.com/fr/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics
 [13]: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
 [14]: https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-slowlog.html
-
-
-{{< get-dependencies >}}

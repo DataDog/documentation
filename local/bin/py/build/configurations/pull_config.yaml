@@ -14,7 +14,7 @@
         dest_path: '/integrations/'
         file_name: 'jenkins.md'
         front_matters:
-          dependencies: https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
+          dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
           public_title: Datadog-Jenkins Integration
           kind: integration
           name: jenkins
@@ -86,7 +86,7 @@
         front_matters:
           title: Datadog Heroku Buildpack
           kind: documentation
-          dependencies: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
+          dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
           aliases:
           - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 
@@ -100,7 +100,7 @@
         dest_path: '/tracing/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           aliases:
@@ -118,7 +118,7 @@
         dest_path: '/developers/'
         file_name: 'amazon_cloudformation.md'
         front_matters:
-          dependencies: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
+          dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
           title: Datadog-Amazon CloudFormation
           kind: documentation
 
@@ -135,7 +135,7 @@
           title: Android Log Collection
           kind: documentation
           description: "Collect logs from your Android applications."
-          dependencies: https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"

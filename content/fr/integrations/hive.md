@@ -162,6 +162,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [10]: https://docs.datadoghq.com/fr/agent/docker/log/
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/hive/metadata.csv
-
-
-{{< get-dependencies >}}
