@@ -69,7 +69,7 @@ Setting the value without a secret results in the token being readable in the `P
     kubectl create secret generic datadog-auth-token --from-literal=token=<ThirtyX2XcharactersXlongXtoken>
     ```
 
-    Alternatively, modify the value of the secret in `the dca-secret.yaml` file located in the [manifest/cluster-agent directory][1] then create it with:
+    Alternatively, modify the value of the secret in the `dca-secret.yaml` file located in the [manifest/cluster-agent directory][1] or create it with:
 
     `kubectl create -f Dockerfiles/manifests/cluster-agent/dca-secret.yaml`
 
