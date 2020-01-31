@@ -20,7 +20,7 @@ short_description: Jenkins のメトリクス、イベント、サービスを�
 
 Jenkins プラグインを使用して、Datadog のアカウントにメトリクス、イベント、サービスチェックを自動転送することができます。
 
-**注**:  プラグインの詳細は [Jenkins CI プラグインについて][1] も併せてご参照ください。
+**注**: プラグインの詳細は [Jenkins CI プラグインについて][1] も併せてご参照ください。
 
 ## セットアップ
 
@@ -120,7 +120,7 @@ d.save()
 ##### DogStatsD 転送{#dogstatsd-forwarding-env}
 
 1. `DATADOG_JENKINS_PLUGIN_REPORT_WITH` 変数を `DSD` に設定します。
-2. DogStatsD のサーバーホストを指定する  `DATADOG_JENKINS_PLUGIN_TARGET_HOST` 変数を設定します (デフォルト値は `localhost`) 。
+2. DogStatsD のサーバーホストを指定する `DATADOG_JENKINS_PLUGIN_TARGET_HOST` 変数を設定します (デフォルト値は `localhost`) 。
 3. DogStatsD のサーバーポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_PORT` 変数を設定します (デフォルト値は `8125`)。
 
 #### ロギング
@@ -139,9 +139,9 @@ d.save()
 | ホワイトリスト済みのジョブ           | 監視対象に含めたいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                          | `DATADOG_JENKINS_PLUGIN_WHITELIST`            |
 | グローバルタグファイル            | タグのカンマ区切りリストを含むワークスペースファイルへのパスです (パイプラインのジョブとは互換不能) 。                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
 | グローバルタグ                | すべてのメトリクス、イベント、サービスチェックを適用するためのカンマ区切りリストです。                                                                                                                                                         | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
-| グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。**注**: タグで `$`  記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
-| セキュリティ監査イベントの送信 | イベントおよびメトリクスの `Security Events Type` を送信します  (デフォルトで有効) 。                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
-| システムイベントの送信         | イベントおよびメトリクスの `System Events Type` を送信します  (デフォルトで有効) 。                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
+| グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
+| セキュリティ監査イベントの送信 | イベントおよびメトリクスの `Security Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
+| システムイベントの送信         | イベントおよびメトリクスの `System Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
 
 ### ジョブのカスタマイズ
 
@@ -150,7 +150,7 @@ d.save()
 | カスタマイズ                         | 説明                                                                                                                                                                                           |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | カスタムタグ                           | ジョブワークスペースの `File` から設定 (パイプラインのジョブではサポートされていません) するか、コンフィギュレーションページのテキスト `Properties` から直接設定します。設定が完了すると、この内容で `Global Job Tags` が上書きされます。 |
-| ソース管理のイベントを送信 | イベントおよびメトリクスの `Source Control Management Events Type` を送信します  (デフォルトで有効) 。                                                                                                         |
+| ソース管理のイベントを送信 | イベントおよびメトリクスの `Source Control Management Events Type` を送信します (デフォルトで有効) 。                                                                                                         |
 
 ## 収集データ
 
@@ -241,7 +241,7 @@ d.save()
 
 ### サービスのチェック
 
-ビルドステータス `jenkins.job.status` にデフォルトタグを適用:  `job`, `node`, `branch`, `result` (Git ブランチ、SVN 修正、CVS ブランチ) 
+ビルドステータス `jenkins.job.status` にデフォルトタグを適用: `job`, `node`, `branch`, `result` (Git ブランチ、SVN 修正、CVS ブランチ) 
 
 **注**: Git の `branch` タグは [Git プラグイン][7]をお使いの場合に利用可能です。
 
