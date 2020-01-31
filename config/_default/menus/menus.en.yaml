@@ -1126,7 +1126,7 @@ main:
     url: "security_monitoring/"
     pre: "nav_security_monitoring"
     identifier: "security_monitoring"
-    weight: 95000
+    weight: 135000
 
   - name: "Getting Started"
     url: "security_monitoring/getting_started"
