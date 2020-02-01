@@ -6,7 +6,7 @@ api_key="<DATADOG_API_KEY>"
 app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -X POST \
-        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: ${api_key}" \
         -H "DD-APPLICATION-KEY: ${app_key}" \
@@ -14,6 +14,6 @@ curl -X POST \
                 "data":
                 {
                     "type": "permissions",
-                    "id": <PERMISSION_UUID>
+                    "id": <PERMISSION_ID>
                 }
             }'

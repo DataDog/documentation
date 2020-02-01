@@ -2,7 +2,7 @@
     "data": [
         {
             "type": "permissions",
-            "id": "$PERMISSION_UUID",
+            "id": "$PERMISSION_ID",
             "attributes": {
                 "name": "logs_metrics_write",
                 "display_name": "Logs metrics write",

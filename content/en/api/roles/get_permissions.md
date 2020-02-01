@@ -7,6 +7,4 @@ external_redirect: /api/#get-permissions
 
 ## Get permissions
 
-Returns a list of all permissions, including name, description, and UUID.
-
-
+Returns a list of all permissions, including name, description, and ID.

@@ -12,7 +12,4 @@ Removes a user from a role.
 **PAYLOAD**:
 
 * `data["type"]="users"`
-* `data["id"]`: The user UUID to remove from a Role.
-
-**Note:** See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
-
+* `data["id"]`: The user ID to remove from a Role.

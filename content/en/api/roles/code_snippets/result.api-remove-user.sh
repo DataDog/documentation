@@ -3,7 +3,7 @@
     "data": [
         {
             "type": "users",
-            "id": "$USER_UUID",
+            "id": "$USER_ID",
             "attributes": {
                 "name": "Example user",
                 "handle": "user@example.org",
@@ -16,7 +16,7 @@
                 "allowed_login_methods": [],
                 "status": "Active"
             },
-            "relationships": {"roles": {"data": [{"type": "roles", "id": "$ROLE_UUID"}]}, "org": {"data": {"type": "orgs", "id": "$ORG_UUID"}}}
+            "relationships": {"roles": {"data": [{"type": "roles", "id": "$ROLE_ID"}]}, "org": {"data": {"type": "orgs", "id": "$ORG_ID"}}}
         }
     ]
 }

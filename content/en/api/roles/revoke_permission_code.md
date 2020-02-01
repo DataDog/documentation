@@ -7,7 +7,7 @@ external_redirect: /api/#revoke-permissions
 
 **SIGNATURE**:
 
-`DELETE /v2/roles/<ROLE_UUID>/permissions`
+`DELETE /v2/roles/<ROLE_ID>/permissions`
 
 **EXAMPLE REQUEST**:
 

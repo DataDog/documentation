@@ -12,7 +12,5 @@ Adds a user to a role.
 **PAYLOAD**:
 
 * `data["type"]="users"`
-* `data["id"]`: the user UUID.
-
-**Note:**: See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+* `data["id"]`: the user ID.
 

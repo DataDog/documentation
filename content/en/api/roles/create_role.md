@@ -7,12 +7,10 @@ external_redirect: /api/#create-role
 
 ## Create role
 
-Creates a new role. Returns role name and UUID.
+Creates a new role. Returns role name and ID.
 
 **PAYLOAD**:
 
 * `type="roles"`
 * `attributes["name"]`: the role name.
-
-**Note:** See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
 

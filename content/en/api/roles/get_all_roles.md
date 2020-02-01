@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-roles
 
 ## Get all roles
 
-Returns all roles, including their names and UUIDs.
+Returns all roles, including their names and IDs.
 
 **ARGUMENTS**:
 
@@ -20,4 +20,3 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
   * Options: **name**, **modified_at**, **user_count**
 * **`filter`**[*optional*, *default*=**None**]:
 Filter all roles by the given string.
-

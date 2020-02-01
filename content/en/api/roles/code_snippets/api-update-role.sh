@@ -13,7 +13,7 @@ curl -X PATCH \
          -d '{
              "data": {
                  "type": "roles",
-                 "id": <ROLE_UUID>,
+                 "id": <ROLE_ID>,
                  "attributes": {
                      "name": <ROLE_NAME>
                 }

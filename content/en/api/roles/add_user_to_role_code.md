@@ -7,7 +7,7 @@ external_redirect: /api/#add-user-to-role
 
 **SIGNATURE**:
 
-`POST /v2/roles/<ROLE_UUID>/users`
+`POST /v2/roles/<ROLE_ID>/users`
 
 **EXAMPLE REQUEST**:
 

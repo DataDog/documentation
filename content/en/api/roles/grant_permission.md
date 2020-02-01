@@ -12,7 +12,4 @@ Adds a permission to a role.
 **PAYLOAD**:
 
 * `data["type"]="permissions"`
-* `data["id"]`: The permission id to add to the role.
-
-**Note:** See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
-
+* `data["id"]`: The permission ID to add to the role.

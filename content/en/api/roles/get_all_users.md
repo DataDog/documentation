@@ -20,6 +20,3 @@ Sort users depending on the given field. Sort order is **ascending** by default.
   * Options: **name**, **email**, **status**
 * **`filter`**[*optional*, *default*=**None**]:
 Filter all users by the given string.
-
-See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
-
