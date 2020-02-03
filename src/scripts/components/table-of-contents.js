@@ -207,8 +207,7 @@ function tocEditBtnHandler(event) {
 
 function isTOCDisabled() {
     const toc = document.querySelector('#TableOfContents');
-
-    if (toc.innerHTML === "") {
+    if (!toc) {
         return true;
     }
 
