@@ -89,5 +89,5 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
 [3]: /account_management/users/default_roles/
-[4]: /synthetics/api_tests#use-global-variables
+[4]: /synthetics/api_tests/#use-global-variables
 [5]: /synthetics/browser_tests/#use-global-variables
