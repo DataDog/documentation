@@ -6,24 +6,24 @@ aliases:
   - /tracing/setup/docker/
   - /agent/apm/docker
 further_reading:
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/trace'
-    tag: 'Github'
+  - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/trace"
+    tag: "Github"
     text: Source code
-  - link: 'https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection'
-    tag: 'Documentation'
-    text: 'Trace your ECS applications'
-  - link: 'tracing/visualization/'
-    tag: 'Documentation'
-    text: 'Explore your services, resources and traces'
+  - link: "https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection"
+    tag: "Documentation"
+    text: "Trace your ECS applications"
+  - link: "tracing/visualization/"
+    tag: "Documentation"
+    text: "Explore your services, resources and traces"
 ---
 
 Enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
-Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
+Tracing is available on port `8126/tcp` from *your host only* by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
 
-To make it available from _any host_, use `-p 8126:8126/tcp` instead.
+To make it available from *any host*, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
