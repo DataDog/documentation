@@ -243,5 +243,8 @@
   },
   "groups_return_to_": {
     "other": "Back to"
+  },
+  "table_of_contents_heading": {
+    "other": "On this Page"
   }
 }
