@@ -11,5 +11,5 @@ Returns the user information and all of the organizations of that user.
 
 **ARGUMENTS**:
 
-* **`user_uuid`** [*required*]:
-    The `user_uuid` of the user.
+* **`user_id`** [*required*]:
+    The `user_id` of the user.

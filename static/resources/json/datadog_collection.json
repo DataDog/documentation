@@ -11545,7 +11545,7 @@
 								"users"
 							]
 						},
-						"description": "### Overview\n\nGet all user for your organization.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
+						"description": "### Overview\n\nGet all user for your organization.\n\n### Arguments\n\n\n* **`page[size]`** [*optional*, *default*=**10**]: Number of roles to return for a given page.\n* **`page[number]`** [*optional*, *default*=**0**]: Specific page number to return.\n* **`sort`** [*optional*, *default*=**name**]: User attribute to order results by. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign, for example: *sort=-name*.\n  * Options: **name**, **modified_at**, **user_count**\n* **`sort_dir`** [*optional*, *default*=**desc**]: Direction of sort.\n    * Options: `asc`, `desc`.\n* **`filter`**[*optional*, *default*=**None**]: Filter all roles by the given string.\n* **`filter[status]`**[*optional*, *default*=**None**]: Filter on `status` attribute. Comma separated list: `Active`, `Pending`, and `Disabled`."
 					},
 					"response": []
 				},
@@ -11704,7 +11704,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v2/users/:USER_HANDLE/application_keys",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:USER_HANDLE/application_keys",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -11713,7 +11713,7 @@
 							],
 							"path": [
 								"api",
-								"v2",
+								"v1",
 								"users",
 								":USER_HANDLE",
 								"application_keys"

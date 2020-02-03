@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-user-organisation
 
 **SIGNATURE**:
 
-`GET /v2/users/<USER_UUID>/orgs`
+`GET /v2/users/<USER_ID>/orgs`
 
 **EXAMPLE REQUEST**:
 

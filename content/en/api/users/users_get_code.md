@@ -7,7 +7,7 @@ external_redirect: /api/#get-user
 
 **SIGNATURE**:
 
-`GET /v2/users/<USER_UUID>`
+`GET /v2/users/<USER_ID>`
 
 **EXAMPLE REQUEST**:
 

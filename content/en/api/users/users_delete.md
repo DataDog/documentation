@@ -11,5 +11,5 @@ Can only be used with application keys belonging to administrators.
 
 **ARGUMENTS**:
 
-* **`user_uuid`** [*required*]:
-    The user uuid of the user to disable.
+* **`user_id`** [*required*]:
+    The user ID of the user to disable.

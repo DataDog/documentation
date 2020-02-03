@@ -7,9 +7,9 @@ external_redirect: /api/#get-user
 
 ## Get user
 
-Get a user in the organization specified by the user's `user_uuid`.
+Get a user in the organization specified by the user's `user_id`.
 
 **ARGUMENTS**:
 
-* **`user_uuid`** [*required*]:
-    The `user_uuid` of the user.
+* **`user_id`** [*required*]:
+    The `user_id` of the user.

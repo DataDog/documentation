@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-user-application-key
 
 **SIGNATURE**:
 
-`GET /v2/users/<USER_HANDLE>/application_keys`
+`GET /v1/users/<USER_HANDLE>/application_keys`
 
 **EXAMPLE REQUEST**:
 

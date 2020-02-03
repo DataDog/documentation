@@ -11,5 +11,7 @@ Sends emails to one or more users inviting them to join the organization.
 
 **ARGUMENTS**:
 
-* **`type`** [*required*]: The type of the USER request, use `user_invitations`
+* **`type`** [*required*]: The type of the USER request, use `user_invitations`.
 * **`attributes.login_method`** [*optional*]: The login method included in the user invitation.
+
+**Note**: `data.relationships.user.data` can be an array of objects to invite multiple users in a single request.

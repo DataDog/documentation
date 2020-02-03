@@ -11,5 +11,5 @@ Returns a list of the user's permissions granted by the roles the user is assign
 
 **ARGUMENTS**:
 
-* **`user_uuid`** [*required*]:
-    The `user_uuid` of the user.
+* **`user_id`** [*required*]:
+    The `user_id` of the user.
