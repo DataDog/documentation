@@ -1,7 +1,6 @@
 ---
 title: Datadog Data Collection, Resolution, and Retention
 kind: faq
-
 ---
 
 Find below a summary of Datadog data collection, resolution, and retention:
@@ -20,7 +19,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | Trace Metrics (Unsampled)                       | Datadog Agent + tracing library                                       | 10 seconds               | 1 micro sec        | 15 months                                                                                                                                                    | APM              |
 | Services/Resources statistics & Span Summaries  | Datadog Agent + tracing library                                       | 10 seconds               | 10 seconds         | 30 days                                                                                                                                                      | APM              |
 | Analyzed Spans (Unsampled)                      | Datadog Agent + tracing library + enabled logs                        | 10 seconds               | 1 micro sec        | 2 Weeks                                                                                                                                                      | APM + Logs       |
-| Logs                                            | Datadog Agent + Logs, 3rd party log collectors, or API                | 10 seconds               | 1 micro sec        | Plan                                                                                                                                                         | Logs             |
+| Logs                                            | Datadog Agent + Logs, 3rd party log collectors, or API                | Real time                | 1 micro sec        | Plan                                                                                                                                                         | Logs             |
 | API Test metrics                                | Datadog Synthetics application                                        | User-defined             | 1 min              | 15 months                                                                                                                                                    | Synthetics       |
 | API Test results                                | Datadog Synthetics application                                        | User-defined             | 1 min              | Result seen in the UI by user: 15 months <br/> Failed result not seen in the UI by user: 1 month <br/> Successful result not seen in the UI by user: 15 days | Synthetics       |
 | Browser Test metrics                            | Datadog Synthetics application                                        | User-defined             | 5 min              | 15 months                                                                                                                                                    | Synthetics       |
