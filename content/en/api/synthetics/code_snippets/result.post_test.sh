@@ -1,10 +1,10 @@
-{  
+{
    "status":"live",
    "public_id":"sti-s2m-ciz",
-   "tags":[  
+   "tags":[
       "foo:bar"
    ],
-   "locations":[  
+   "locations":[
       "aws:us-east-2",
       "aws:eu-central-1",
       "aws:ca-central-1",
@@ -19,10 +19,10 @@
    "type":"api",
    "created_at":"2019-04-18T14:35:28.378610+00:00",
    "modified_at":"2019-04-18T14:35:28.378610+00:00",
-   "config":{  
-      "request":{  
+   "config":{
+      "request":{
          "url":"https://datadoghq.com",
-         "headers":{  
+         "headers":{
             "header2":"value2",
             "header1":"value1"
          },
@@ -30,26 +30,26 @@
          "method":"GET",
          "timeout":30
       },
-      "assertions":[  
-         {  
+      "assertions":[
+         {
             "operator":"is",
             "type":"statusCode",
             "target":403
          },
-         {  
+         {
             "operator":"is",
             "property":"content-type",
             "type":"header",
             "target":"text/html"
          },
-         {  
+         {
             "operator":"lessThan",
             "type":"responseTime",
             "target":2000
          }
       ]
    },
-   "options":{  
+   "options":{
       "follow_redirects":true,
       "min_failure_duration":0,
       "tick_every":60,

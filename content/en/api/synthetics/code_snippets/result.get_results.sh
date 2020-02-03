@@ -1,12 +1,12 @@
-{  
+{
    "last_timestamp_fetched":1555073253000,
-   "results":[  
-      {  
+   "results":[
+      {
          "status":0,
          "probe_dc":"aws:eu-central-1",
          "result_id":"13240452786084775503",
-         "result":{  
-            "timings":{  
+         "result":{
+            "timings":{
                "firstByte":563.9,
                "tcp":28.8,
                "ssl":60.4,

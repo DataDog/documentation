@@ -1,9 +1,9 @@
-{  
+{
    "status":0,
    "check_time":1555074753734,
    "check_version":4,
-   "result":{  
-      "timings":{  
+   "result":{
+      "timings":{
          "firstByte":717.5,
          "tcp":281.8,
          "ssl":565.2,
@@ -18,15 +18,15 @@
    },
    "probe_dc":"aws:ap-northeast-1",
    "result_id":"16334500735347249235",
-   "check":{  
-      "config":{  
-         "request":{  
+   "check":{
+      "config":{
+         "request":{
             "url":"https://datadoghq.com/",
             "method":"GET",
             "timeout":30
          },
-         "assertions":[  
-            {  
+         "assertions":[
+            {
                "operator":"is",
                "type":"statusCode",
                "target":200

@@ -1,10 +1,10 @@
-{  
-   "deleted_tests":[  
-      {  
+{
+   "deleted_tests":[
+      {
          "public_id":"262647",
          "deleted_at":"2019-04-16T21:20:57+0000"
       },
-      {  
+      {
          "public_id":"262648",
          "deleted_at":"2019-04-16T21:20:57+0000"
       }
