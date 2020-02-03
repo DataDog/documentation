@@ -18,6 +18,9 @@ further_reading:
 - link: "synthetics/api_tests"
   tag: "Documentation"
   text: "Configure an API Test"
+- link: "synthetics/browser_tests/test_results"
+  tag: "Documentation"
+  text: "Browser test results"
 ---
 
 ## Overview
@@ -80,20 +83,6 @@ Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. T
 ## Actions
 
 After saving a browser test, you can record [Actions][10] as a series of steps, which you can then edit or build on. You can also configure actions with [advanced options][11].
-
-## Test failure and errors
-
-A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
-
-Common failure reasons include:
-
-| Error                                | Description                                                                                                          |
-|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| `Element located but it's invisible` | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.       |
-| `Cannot locate element`              | The element cannot be found in the HTML.                                                                             |
-| `Select did not have option`         | The specified option is missing from the dropdown menu.                                                              |
-| `Forbidden URL`                      | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][4] for further details. |
-| `General test failure`               | A general error message. [Contact support][4] for further details.                                                   |
 
 ## Further Reading
 
