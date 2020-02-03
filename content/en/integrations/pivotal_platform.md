@@ -33,7 +33,7 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## PKS
 
-PKS environments can utilize our [Cluster Monitoring Tile][1] and the the [pivotal_pks][27] integration together to montior your cluster.
+PKS environments can utilize the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][27] integration together to monitor your cluster.
 
 For kubelet cluster based workloads, utilize the [pivotal_pks integration][27] to install the Datadog Agent with your workers.
 
