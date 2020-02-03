@@ -28,9 +28,9 @@ further_reading:
 
 ## Overview
 
-Collect [Kubernetes audit logs][1] to track everything that happens inside your Kubernetes clusters, every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (e.g., the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
+Collect [Kubernetes audit logs][1] to track everything that happens inside your Kubernetes clusters, including every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (e.g., the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
 
-With the Kubernetes audit logs integration, you can identify permission issues, RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster. Deep dive into these topics with the [Datadog talk at KubeCon 2019][2].
+With the Kubernetes audit logs integration, you can diagnose permission issues, identify RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster. Deep dive into these topics with the [Datadog talk at KubeCon 2019][2].
 
 ## Setup
 
@@ -51,7 +51,7 @@ To enable audit logs in Kubernetes:
     --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
   ```
 
-2. Create the policy file at `/etc/kubernetes/audit-policies/policy.yaml` to specify the types of API requests you want to capture in your audit logs.  Audit policy rules are evaluated in order. The API server follows the first matching rule it finds for each type of operation/resource. Example of an audit policy:
+2. Create the policy file at `/etc/kubernetes/audit-policies/policy.yaml` to specify the types of API requests you want to capture in your audit logs. Audit policy rules are evaluated in order. The API server follows the first matching rule it finds for each type of operation or resource. Example of an audit policy:
 
 ```yaml
 # /etc/kubernetes/audit-policies/policy.yaml
@@ -103,14 +103,14 @@ rules:
 
 This example policy file configures the API server to log at the highest level of detail for certain types of cluster-changing operations (update, patch, create, delete). It also tracks requests to the `subjectaccessreviews` resource at the highest level to help troubleshoot authentication delegation issues.
 
-You may want to reduce the level of verbosity to `Metadata` for endpoints that contain sensitive data (e.g., `tokenreviews` resource). Datadog also omitted the `RequestReceived` stage from our logs.
+You may want to reduce the level of verbosity to `Metadata` for endpoints that contain sensitive data (e.g., `tokenreviews` resource). Datadog also omits the `RequestReceived` stage from logs.
 
 In the last section, for everything that was not explicitly configured by the previous rules, the policy is configured to log at `Metadata` level. As audit logs might be verbose, you can choose to exclude less critical actions/verbs (e.g., operations that don't change the cluster state like list, watch, and get).
 
 ### Log collection
 
 1. [Install the Agent][1] on your Kubernetes environment.
-2. Log collection is disabled by default. Enable it in the `env` section of your [daemonset][4]:
+2. Log collection is disabled by default. Enable it in the `env` section of your [DaemonSet][4]:
 
   ```yaml
    env:
@@ -149,9 +149,9 @@ In the last section, for everything that was not explicitly configured by the pr
     # (...)
   ```
 
-    This also mounts the `conf.d` folder which is used to configure the agent to collect logs from the audit log file.
+    This also mounts the `conf.d` folder which is used to configure the Agent to collect logs from the audit log file.
 
-4. Configure the Agent to collect logs from that file thanks to the config Map:
+4. Configure the Agent to collect logs from that file with a ConfigMap:
 
   ```text
   kind: ConfigMap
