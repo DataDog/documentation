@@ -7,7 +7,7 @@ external_redirect: /api/#create-role
 
 **SIGNATURE**:
 
-`GET /v2/roles/`
+`POST /v2/roles/`
 
 **EXAMPLE REQUEST**:
 
