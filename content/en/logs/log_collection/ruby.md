@@ -15,7 +15,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2]).
+To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2].
 
 Instead of having a Rail logging output like this:
 

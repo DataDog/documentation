@@ -39,7 +39,7 @@ The dedicated [widget JSON schema definition][4] for the service map widget is:
 SERVICEMAP_SCHEMA = {
         "type": "object",
         "properties": {
-            "type": {"enum": [WIDGET_TYPE]},
+            "type": {"enum": ["servicemap"]},
             "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
             "service": {"type": "string"},
             "title": WidgetSchema.TITLE

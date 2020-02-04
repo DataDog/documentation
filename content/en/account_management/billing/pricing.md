@@ -11,7 +11,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## Infrastructure monitoring
 
-* A **host** is a physical or virtual operating system instance. Once an hour, Datadog records the number of hosts you are concurrently monitoring in the infrastructure service.
+* A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the infrastructure service.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Datadog records the number of containers you are concurrently monitoring in the Datadog Infrastructure service at five-minute intervals. Datadog charges monthly based on the fractional hours of monitored containers.
@@ -22,7 +22,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## APM
 
-* Datadog records the number of **APM hosts** you are concurrently monitoring in the Datadog APM service once an hour.
+* Datadog records the number of unique **APM hosts** you are monitoring in the Datadog APM service each hour.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Analyzed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service.

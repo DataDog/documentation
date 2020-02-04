@@ -56,7 +56,7 @@ When submitting custom metrics to Datadog, it is possible to change the [unit of
 
 #### Metric type
 
-The type for your metric (gauge, rate, or count). See the [metric type][8] page for more details.
+The type for your metric (gauge, rate, or count). See the [metric type][9] page for more details.
 
 **Warning**: Editing the metric type changes that metric's behavior for **ALL** your analytics and monitors.
 
@@ -80,3 +80,4 @@ The collection interval for the metric in seconds.
 [6]: /api/?lang=python#edit-metric-metadata
 [7]: /integrations
 [8]: /developers/metrics/units
+[9]: /developers/metrics/types

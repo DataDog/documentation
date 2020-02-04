@@ -13,8 +13,8 @@ You can also fetch this CSV using curl:
 {{% tab "US" %}}
 
 ```shell
-api_key=<API_KEY>
-app_key = <APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key = <DATADOG_APPLICATION_KEY>
 
 curl -G \
     "https://app.datadoghq.com/report/hourly_data/monitor" \
@@ -33,8 +33,8 @@ org_id,hour,source_type_name,alert_type,priority,event_object,host_name,device_n
 {{% tab "EU" %}}
 
 ```shell
-api_key=<API_KEY>
-app_key = <APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key = <DATADOG_APPLICATION_KEY>
 
 curl -G \
     "https://app.datadoghq.eu/report/hourly_data/monitor" \
