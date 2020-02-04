@@ -26,14 +26,6 @@ If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC 
 
 Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 
-Kubernetes >= 1.14
-
-```shell
-kubectl apply -k "github.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac?ref=master"
-```
-
-Kubernetes < 1.14
-
 ```shell
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
