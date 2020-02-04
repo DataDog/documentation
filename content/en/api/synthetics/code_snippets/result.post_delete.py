@@ -1,1 +1,12 @@
-# This is not yet supported by the Python Client for the Datadog API
+{
+   "deleted_tests":[
+      {
+         "public_id":"262647",
+         "deleted_at":"2019-04-16T21:20:57+0000"
+      },
+      {
+         "public_id":"262648",
+         "deleted_at":"2019-04-16T21:20:57+0000"
+      }
+   ]
+}
