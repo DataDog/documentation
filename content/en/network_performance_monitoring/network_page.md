@@ -94,7 +94,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### DNS Resolution
 
-Starting with Agent 7.17+, using reverse-DNS lookup, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+Starting with Agent 7.17+, using deep packet inspection, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
 
@@ -116,7 +116,7 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 
 Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
-Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
+Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ flow:
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Flow Details"  style="width:80%;">}}
 
