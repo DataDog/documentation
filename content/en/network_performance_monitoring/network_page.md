@@ -80,7 +80,7 @@ The following network load metrics are available:
 | -------- | ------ |
 | **Volume** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
 | **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
-| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
+| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmitted frames from the `source`. |
 
 #### TCP
 
@@ -89,7 +89,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | Metric | Description |
 | -------- | ------ |
 | **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency.|
+| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged. |
 | **RTT Variance** | RTT is a proxy for jitter. |
 
 ### DNS Resolution
