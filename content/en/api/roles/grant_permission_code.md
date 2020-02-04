@@ -7,7 +7,7 @@ external_redirect: /api/#grant-permissions
 
 **SIGNATURE**:
 
-`POST /v2/roles/<ROLE_UUID>/permissions`
+`POST /v2/roles/<ROLE_ID>/permissions`
 
 **EXAMPLE REQUEST**:
 

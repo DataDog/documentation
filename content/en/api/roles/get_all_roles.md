@@ -7,9 +7,7 @@ external_redirect: /api/#get-all-roles
 
 ## Get all roles
 
-Returns all roles, including their names and UUIDs.
-
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
+Returns all roles, including their names and IDs.
 
 **ARGUMENTS**:
 
@@ -22,5 +20,3 @@ Sort roles depending on the given field. Sort order is **ascending** by default.
   * Options: **name**, **modified_at**, **user_count**
 * **`filter`**[*optional*, *default*=**None**]:
 Filter all roles by the given string.
-
-[1]: https://app.datadoghq.com/account/settings#api

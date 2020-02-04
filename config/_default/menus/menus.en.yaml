@@ -285,11 +285,21 @@ main:
     identifier: "cluster_agent_commands"
     parent: "agent_cluster"
     weight: 404
+  - name: "Cluster metadata provider"
+    url: "agent/cluster_agent/metadata_provider/"
+    identifier: "cluster_agent_metadata_provider"
+    parent: "agent_cluster"
+    weight: 405
+  - name: "Build"
+    url: "agent/cluster_agent/build/"
+    identifier: "cluster_agent_build"
+    parent: "agent_cluster"
+    weight: 406
   - name: "Troubleshooting"
     url: "agent/cluster_agent/troubleshooting/"
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
-    weight: 405
+    weight: 407
 
   ## AGENT - Autodiscovery
 
@@ -933,6 +943,11 @@ main:
     identifier: "tracing_troubleshooting"
     parent: "tracing"
     weight: 10
+  - name: Agent APM metrics
+    url: "tracing/troubleshooting/agent_apm_metrics"
+    identifier: "tracing_troubleshooting_apm_metrics"
+    parent: "tracing_troubleshooting"
+    weight: 10
 
 
 ##########
@@ -1103,6 +1118,34 @@ main:
     parent: "log_management"
     weight: 11
 
+#########################
+## Security Monitoring ##
+#########################
+
+  - name: "Security Monitoring"
+    url: "security_monitoring/"
+    pre: "nav_security_monitoring"
+    identifier: "security_monitoring"
+    weight: 135000
+
+  - name: "Getting Started"
+    url: "security_monitoring/getting_started"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_getting_started"
+    weight: 1
+
+  - name: "Signals Explorer"
+    url: "security_monitoring/explorer"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_explorer"
+    weight: 2
+
+  - name: "Detection Rules"
+    url: "security_monitoring/detection_rules"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_detection_rules"
+    weight: 3
+
 ################
 ## SYNTHETICS ##
 ################
@@ -1124,6 +1167,18 @@ main:
     parent: "synthetics"
     identifier: "synthetics_browser_tests"
     weight: 2
+  - name: "Actions"
+    url: "synthetics/browser_tests/actions"
+    parent: "synthetics_browser_tests"
+    weight: 201
+  - name: "Test Results"
+    url: "synthetics/browser_tests/test_results"
+    parent: "synthetics_browser_tests"
+    weight: 202
+  - name: "Advanced Options"
+    url: "synthetics/browser_tests/advanced_options"
+    parent: "synthetics_browser_tests"
+    weight: 203
 
   - name: "Private Locations"
     url: "synthetics/private_locations"
@@ -1138,10 +1193,6 @@ main:
     parent: "synthetics"
     identifier: "synthetics_apm"
     weight: 4
-  - name: "Browser Tests"
-    url: "synthetics/apm/browser_tests"
-    parent: "synthetics_apm"
-    weight: 401
 
   - name: "Identify Synthetics Bots"
     url: "synthetics/identify_synthetics_bots/"

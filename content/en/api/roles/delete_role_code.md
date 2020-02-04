@@ -7,7 +7,7 @@ external_redirect: /api/#delete-role
 
 **SIGNATURE**:
 
-`DELETE /v2/roles/<ROLE_UUID>`
+`DELETE /v2/roles/<ROLE_ID>`
 
 **EXAMPLE REQUEST**:
 
