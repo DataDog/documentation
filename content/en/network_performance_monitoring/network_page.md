@@ -47,6 +47,8 @@ The facet panels mirror the tags in your search bar query. Switch between the fa
 
 Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
 
+{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
+
 A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
 
 Whitelisted tags include `service`, `availability zone`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
@@ -98,7 +100,7 @@ Starting with Agent 7.17+, using deep packet inspection, the Agent resolves IPâ€
 
 {{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
 
-**Note**: DNS resolution is supported only for agents running on a host.
+**Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
 ## Table
 
