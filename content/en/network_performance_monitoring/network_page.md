@@ -80,7 +80,7 @@ The following network load metrics are available:
 | -------- | ------ |
 | **Volume** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
 | **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
-| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
+| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmitted frames from the `source`. |
 
 #### TCP
 
@@ -89,12 +89,12 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | Metric | Description |
 | -------- | ------ |
 | **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency.|
+| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged. |
 | **RTT Variance** | RTT is a proxy for jitter. |
 
 ### DNS Resolution
 
-Starting with Agent 7.17+, using reverse-DNS lookup, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+Starting with Agent 7.17+, using deep packet inspection, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
 
@@ -116,7 +116,7 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 
 Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
-Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
+Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ flow:
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Flow Details"  style="width:80%;">}}
 
