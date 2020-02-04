@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Each metric submitted to Datadog has a **metric type**. A metric type affects what the metrics represents-what it monitors, and the associated [graphing possibilities within Datadog][1] with additional [metric type modifiers][2] and [functions][3].
+Each metric submitted to Datadog has a **metric type**. A metric type affects how a metric represents what it monitors and the associated [graphing possibilities within Datadog][1] with additional [metric type modifiers][2] and [functions][3].
 
 Datadog allows you to submit, store, and display the following metric types:
 
@@ -148,7 +148,7 @@ Submit your GAUGE type metrics from one of the following sources:
 
 ## Histogram and Distribution
 
-The HISTOGRAM AND DISTRIBUTION metric types allow you to measure the statistical distribution of a set of values with the main difference that HISTOGRAM are calculated client side-from a single Agent perspective-, while DISTRIBUTION are calculated server side-from Datadog perspective-.
+The HISTOGRAM AND DISTRIBUTION metric types allow you to measure the statistical distribution of a set of values with the main difference that HISTOGRAM are calculated client side-from a single Agent perspective-, while DISTRIBUTION are calculated server side-from Datadog's perspective-.
 
 ### Definition {#definition-histo-distri}
 
@@ -174,7 +174,7 @@ For example: if you send `X` values for a `HISTOGRAM` metric `<METRIC_NAME>` dur
 
 #### Example
 
-For instance, say that the `request.response_time.histogram` metric from a webserver is reported to Datadog through an Agent with the `HISTOGRAM` type with the values [1,1,1,2,2,2,3,3] during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
+For instance, say that the `request.response_time.histogram` metric from a webserver is reported to Datadog through an Agent with the `HISTOGRAM` type with the values `[1,1,1,2,2,2,3,3]` during a flush interval. The following metrics would have then be submitted to Datadog over this flush interval:
 
 | Metric Name                                    | Value  | Datadog Metric Type |
 |------------------------------------------------|--------|---------------------|
@@ -208,7 +208,7 @@ For example: if you send `X` values for a `DISTRIBUTION` metric `<METRIC_NAME>` 
 
 #### Example
 
-For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for two webservers: `webserver:web_1` and `webserver:web_2`. Say `webserver:web_1` reports the metric with the values [1,1,1,2,2,2,3,3], and `webserver:web_2` reports the same metric with the values [1,1,2] during a flush interval. Over a given flush interval, this would create the following metrics within Datadog:
+For instance, say that the `request.response_time.distribution` metric is reported to Datadog with the `DISTRIBUTION` type for two webservers: `webserver:web_1` and `webserver:web_2`. Say `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]` during a flush interval. Over a given flush interval, this would create the following metrics within Datadog:
 
 | Metric Name                                | Value  | Datadog Metric Type |
 |--------------------------------------------|--------|---------------------|
@@ -236,12 +236,11 @@ If you were to add percentile aggregations to your distribution metric (as shown
 | `p95:request.response_time.distribution` | `3`   | GAUGE               |
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
-**Note**: In the example above, the p50 (median) for `webserver:web_1` is `2` and the p50 for `webserver:web_2` is `1`. Agent-side aggregation would result in taking the median of these two median values, resulting in `1.5`. In reality, the global p50 (median) is the median of the combined set [1,1,1,1,1,2,2,2,2,3,3], which is `2`. This is the statistically accurate value that can be returned by a distribution metric's server-side aggregation.
+**Note**: In the example above, the p50 (median) for `webserver:web_1` is `2` and the p50 for `webserver:web_2` is `1`. Agent-side aggregation would result in taking the median of these two median values, resulting in `1.5`. In reality, the global p50 (median) is the median of the combined set `[1,1,1,1,1,2,2,2,2,3,3]`, which is `2`. This is the statistically accurate value that can be returned by a distribution metric's server-side aggregation.
 
 ### Customization of tagging
 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][1] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
-
 
 [1]: /metrics/distributions
 {{% /tab %}}
