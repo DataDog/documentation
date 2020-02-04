@@ -3,20 +3,20 @@ title: Network Page
 kind: documentation
 description: Explore your Network data between each source and destination across your stack.
 aliases:
-- network_performance_monitoring/network_table
+    - /network_performance_monitoring/network_table
 further_reading:
-- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-  tag: "Blog"
-  text: "Network Performance Monitoring"
-- link: "/integrations/snmp"
-  tag: "Documentation"
-  text: "SNMP integration"
-- link: "/network_performance_monitoring/installation"
-  tag: "Documentation"
-  text: "Collect your Network Data with the Datadog Agent."
-- link: "/dashboards/widgets/network"
-  tag: "Documentation"
-  text: "Network Widget"
+    - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+      tag: 'Blog'
+      text: 'Network Performance Monitoring'
+    - link: '/integrations/snmp'
+      tag: 'Documentation'
+      text: 'SNMP integration'
+    - link: '/network_performance_monitoring/installation'
+      tag: 'Documentation'
+      text: 'Collect your Network Data with the Datadog Agent.'
+    - link: '/dashboards/widgets/network'
+      tag: 'Documentation'
+      text: 'Network Widget'
 ---
 
 {{< img src="network_performance_monitoring/network_page/main_page_npm.png" alt="Main page" >}}
@@ -78,21 +78,21 @@ Values displayed might be different for `sent_metric(source to destination)` and
 
 The following network load metrics are available:
 
-| Metric | Description |
-| -------- | ------ |
-| **Volume** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
-| **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
+| Metric          |  Description                                                                                                                                    |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
+|  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
 | **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmitted frames from the `source`. |
 
 #### TCP
 
 TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available:
 
-| Metric | Description |
-| -------- | ------ |
-| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged. |
-| **RTT Variance** | RTT is a proxy for jitter. |
+| Metric                    |  Description                                                                                                                           |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Retransmits**           | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
+| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged.                          |
+|  **RTT Variance**         | RTT is a proxy for jitter.                                                                                                             |
 
 ### DNS Resolution
 
@@ -104,7 +104,7 @@ Starting with Agent 7.17+, using deep packet inspection, the Agent resolves IP�
 
 ## Table
 
-The network table breaks down the *Volume*, *Throughput*, *TCP Retransmits*, *Round-trip Time (RTT)*, and *RTT variance* metrics between each *source* and *destination* defined by your query.
+The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Round-trip Time (RTT)_, and _RTT variance_ metrics between each _source_ and _destination_ defined by your query.
 
 {{< img src="network_performance_monitoring/network_page/data_table.png" alt="Data table" >}}
 
@@ -116,7 +116,7 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
 
-Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
+Use the _Show Unresolved Flows_ toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
 
 Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ flow:
 
