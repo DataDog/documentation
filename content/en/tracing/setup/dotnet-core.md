@@ -150,7 +150,7 @@ Name                       | Value
 `CORECLR_PROFILER_PATH`    | `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`
 `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
 `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
-```
+
 
 **Note:** You may need to changed the paths above if you install the .NET Tracer into a non-default path.
 
