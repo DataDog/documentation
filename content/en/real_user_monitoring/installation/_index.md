@@ -5,8 +5,8 @@ aliases:
 - /real_user_monitoring/setup
 further_reading:
 - link: "https://www.npmjs.com/package/@datadog/browser-rum"
-  tag: "NPM"
-  text: "datadog/browser-rum NPM package"
+  tag: "npm"
+  text: "datadog/browser-rum npm package"
 - link: "/real_user_monitoring/installation/advanced_configuration"
   tag: "Documentation"
   text: "Advanced configuration for RUM data collection"
@@ -19,13 +19,13 @@ To set up Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Fill out  Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
-3. Setup the Datadog browser rum library [through NPM](#npm-setup) or paste the [generated code snippet](#bundle-setup) into the head tag.
+3. Setup the Datadog browser rum library [through npm](#npm-setup) or paste the [generated code snippet](#bundle-setup) into the head tag.
 4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
 5. Visualize the [data collected][2] in Datadog [out of the box Dashboards][3].
 
 **Note**: Your application shows up on the application list page as "pending" until Datadog starts receiving data.
 
-## NPM Setup
+## npm Setup
 
 After adding [`@datadog/browser-rum`][4] to your `package.json` file, initialize it with:
 
