@@ -7,7 +7,7 @@ external_redirect: /api/#get-one-roles
 
 **SIGNATURE**:
 
-`GET /v2/roles/<ROLE_UUID>`
+`GET /v2/roles/<ROLE_ID>`
 
 **EXAMPLE REQUEST**:
 

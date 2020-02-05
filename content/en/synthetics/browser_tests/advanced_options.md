@@ -36,7 +36,7 @@ If a browser test is not able to locate an element, by default it retries the ac
 
 You can decide to decrease or increase this time out up to 300 seconds if you want your test to wait for less or more time to be able to find the step targeted element.
 
-{{< img src="synthetics/browser_tests/advanced_options/step_to_fail.png" alt="Allow this step to fail" style="width:50%">}}
+{{< img src="synthetics/browser_tests/advanced_options/time_before_fail.png" alt="Time before fail" style="width:50%">}}
 
 ## Optional step
 

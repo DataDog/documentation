@@ -8,6 +8,6 @@ curl -X POST \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{
-	      "name": "<APP_KEY_NAME>"
+	      "name": "<DATADOG_APPLICATION_KEY_NAME>"
     }' \
 "https://app.datadoghq.com/api/v1/application_key"

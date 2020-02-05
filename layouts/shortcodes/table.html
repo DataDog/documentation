@@ -1,2 +1,2 @@
 {{ $_hugo_config := `{ "version": 1 }` }}
-<div class="{{- if .Get "responsive" -}}table-responsive-container{{- end -}} {{- if .Get "wide" -}}table-wide{{- end -}} {{- if .Get "vertical-mobile" -}}table-vertical-mobile{{- end -}}">{{- if .Get "responsive" -}}<div class="table-scroll">{{- .Inner -}}</div>{{- else -}}{{- .Inner -}}{{- end -}}</div>
+<div class="{{- if .Get "responsive" -}}table-responsive{{- end -}} {{- if .Get "wide" -}}table-wide{{- end -}} {{- if .Get "vertical-mobile" -}}table-vertical-mobile{{- end -}}">{{- if .Get "responsive" -}}<div class="table-scroll">{{- .Inner -}}</div>{{- else -}}{{- .Inner -}}{{- end -}}</div>

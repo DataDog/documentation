@@ -129,7 +129,7 @@ services:
       - '/proc:/host/proc:ro'
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
-      - DD_API_KEY=abcdefghijklmnop
+      - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'datadog/agent:latest'

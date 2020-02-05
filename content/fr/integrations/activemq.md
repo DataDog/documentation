@@ -215,8 +215,6 @@ Documentation, liens et articles supplémentaires utiles :
 
 
 
-
-
 ## Intégration ActiveMQ XML
 
 ## Présentation
@@ -234,7 +232,7 @@ Le check ActiveMQ XML est inclus avec le paquet de l'[Agent Datadog][111] : vou
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 
@@ -281,5 +279,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][116].
 [119]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [1110]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/metadata.csv
 [1111]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
-
-

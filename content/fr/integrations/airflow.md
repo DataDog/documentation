@@ -16,7 +16,7 @@ git_integration_title: airflow
 guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow
 integration_title: Airflow
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

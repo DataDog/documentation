@@ -7,7 +7,7 @@ external_redirect: /api/#get-permissions-role
 
 **SIGNATURE**:
 
-`GET /v2/roles/<ROLE_UUID>/permissions`
+`GET /v2/roles/<ROLE_ID>/permissions`
 
 **EXAMPLE REQUEST**:
 

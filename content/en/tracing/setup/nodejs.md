@@ -143,6 +143,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module      | Support Type    |
 |-------------|-----------------|
 | [dns][21]   | Fully supported |
+| [fs][51]    | Fully supported |
 | [http][22]  | Fully supported |
 | [https][23] | Fully supported |
 | [net][24]   | Fully supported |
@@ -172,7 +173,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [amqplib][38]      | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [generic-pool][39] | `>=2`    | Fully supported |                                                        |
 | [kafka-node][40]   |          | Coming Soon     |                                                        |
-| [rhea][41]         |          | Coming Soon     |                                                        |
+| [rhea][41]         | `>=1`    | Fully supported |                                                        |
 
 #### Promise Library Compatibility
 
@@ -247,3 +248,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [49]: http://getpino.io
 [50]: https://github.com/winstonjs/winston
+[51]: https://nodejs.org/api/fs.html

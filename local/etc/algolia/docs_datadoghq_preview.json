@@ -113,6 +113,7 @@
           "logs",
           "monitors",
           "security",
+          "security_monitoring",
           "synthetics",
           "real_user_monitoring",
           "network_performance_monitoring",
