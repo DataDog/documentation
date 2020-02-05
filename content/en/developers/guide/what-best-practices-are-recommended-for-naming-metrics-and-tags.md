@@ -30,7 +30,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 * Tags must start with a letter.
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
-* Any trailing underscore will get removed, whether if it originated from a convereted charachter or if it was in the original tag value.
+* Any trailing underscore will get removed, whether if it originated from a converted character or if it was in the original tag value.
 * Tags can be up to 200 characters long and support Unicode.
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
