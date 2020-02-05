@@ -47,6 +47,3 @@ Azure Data Lake Analytics インテグレーションには、サービスのチ
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_analytics/azure_data_lake_analytics_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
-
-
-{{< get-dependencies >}}

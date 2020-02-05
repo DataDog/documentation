@@ -1,7 +1,6 @@
 ---
 title: Setting up log monitors on volumes
 kind: guide
-disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

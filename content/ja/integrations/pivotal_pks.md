@@ -61,6 +61,3 @@ DaemonSets を利用して、すべてのノードで [Datadog Agent を自動�
 [4]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
 [5]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
 [6]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

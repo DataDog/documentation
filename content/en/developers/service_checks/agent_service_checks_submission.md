@@ -1,7 +1,6 @@
 ---
 title: "Service Check Submission: Agent Check"
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/"
   tag: "Documentation"

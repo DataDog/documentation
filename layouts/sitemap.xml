@@ -1,6 +1,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{ $allowed := (slice "fr") }}
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
-  	  {{ if (and (not .Params.private) (not .Params.placeholder) (ne (.Language.Lang | default "en") "ja") ) }}
+    {{ $page := . }}
+    {{ if (and (not .Params.private) (not .Params.placeholder) (ne (.Language.Lang | default "en") "ja") ) }}
 	  <url>
 	    <loc>{{ .Permalink }}</loc>
       {{ if not .Lastmod.IsZero }}
@@ -9,12 +11,24 @@
       {{ with .Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
       {{ if ge .Sitemap.Priority 0.0 }}<priority>{{ .Sitemap.Priority }}</priority>{{ end }}
 
+      <xhtml:link rel="alternate" hreflang="{{ $page.Lang }}" href="{{ $page.Permalink }}"/>
+
       {{ if .IsTranslated }}
         {{ range .Translations }}
-            {{ if in (slice "fr") .Lang }}
+          {{ if in $allowed .Lang }}
+            {{ with .Params.placeholder }}
+
+            {{ else }}
               <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
             {{ end }}
-        {{ end}}
+          {{ else if eq .Lang "en" }}
+            {{ with $page.Params.placeholder }}
+
+            {{ else }}
+              <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+            {{ end }}
+          {{ end }}
+        {{ end }}
       {{ end }}
 
 	  </url>

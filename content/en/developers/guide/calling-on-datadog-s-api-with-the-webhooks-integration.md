@@ -16,7 +16,7 @@ Each webhook must be set up with a name (to be referenced in monitors) and a URL
 * The **name field**: whatever you like, as long as it is unique among all the other webhook name fields.
 
 * The **url field**: the URL used when pinging the API. It looks like this:
-`https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<YOUR_API_KEY>`
+`https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<DATADOG_API_KEY>`
 
 * The **custom payload field**: contains the JSON with all the options you want to include in the API call. The type of API call determines the appropriate options. You can sometimes use the monitor's `$symbol` content to fill in parts of the option values.
 

@@ -7,7 +7,7 @@ external_redirect: /api/#get-an-application-key
 
 **SIGNATURE**:
 
-`GET /v1/application_key/<APP_KEY>`
+`GET /v1/application_key/<DATADOG_APPLICATION_KEY>`
 
 **EXAMPLE REQUEST**:
 

@@ -35,6 +35,7 @@ class Build:
         )
         self.build_configuration = []
 
+    # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
         self.build_configuration = yaml.load(
             open(build_configuration_file_path))
@@ -43,15 +44,20 @@ class Build:
             open(integration_merge_configuration_file_path))
         )
 
+    # Get the list of content to work with after it gets updated with the local globs or the
+    # downloaded globs from Github.
     def get_list_of_content(self, configuration):
         self.list_of_contents = prepare_content(
             configuration, self.options.token, self.extract_dir)
 
+    # Build the documentation by injecting content from other repository.
     def build_documentation(self, list_of_contents):
 
+        # Instanciation of the integrations class since it's needed for content management below.
         Int = Integrations(self.options.source, self.tempdir,
                            self.integration_mutations)
 
+        # Depending of the action attached to the content the proper function is called
         for content in list_of_contents:
             try:
                 if content["action"] == "integrations":
@@ -78,6 +84,9 @@ class Build:
                     print(
                         "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
                     raise ValueError
+
+        # Once all the content is processed integrations are merged according to the integration_merge.yaml
+        # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
         try:
             Int.merge_integrations()
         except:
@@ -114,10 +123,16 @@ if __name__ == "__main__":
         else options.token
     )
 
+    # Those hard-written variables should be set in the Makefile config later down the road.
     build_configuration_file_path = getenv("CONFIGURATION_FILE")
     integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
     temp_directory = "./integrations_data"
 
+    # Documentation build process:
+    # 1. Instantiation of the Build class with the options (Github token) and the temp directory to work with
+    # 2. Load all configuration needed to build the doc
+    # 3. Retrieve the list of content to work with and updates it based of the configuration specification
+    # 4. Actually build the documentation with the udpated list of content.
     build = Build(options, temp_directory)
 
     build.load_config(build_configuration_file_path,

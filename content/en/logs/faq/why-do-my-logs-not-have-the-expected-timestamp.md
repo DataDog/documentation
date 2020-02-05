@@ -1,7 +1,6 @@
 ---
 title: Why do my logs not have the expected timestamp?
 kind: faq
-disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

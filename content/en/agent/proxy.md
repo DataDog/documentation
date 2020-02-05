@@ -59,7 +59,7 @@ Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `ht
 ```yaml
 proxy:
     https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
+    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTP>:<PORT>"
 ```
 
 Using the `no_proxy` list to specify hosts that must bypass the proxy:
@@ -67,7 +67,7 @@ Using the `no_proxy` list to specify hosts that must bypass the proxy:
 ```yaml
 proxy:
     https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
+    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTP>:<PORT>"
     no_proxy:
       - host1
       - host2
@@ -311,8 +311,8 @@ backend datadog-logs
 
 **Note**: Download the certificate with the following command:
 
-        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
 
 The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
@@ -481,8 +481,9 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 1. Designate one node **running datadog-agent** as the proxy.
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
 
-2. Verify SSL connectivity on `proxy-node`
-    ```
+2. Verify SSL connectivity on `proxy-node`:
+
+    ```shell
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
@@ -496,7 +497,7 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
 
     `dd_url: https://app.datadoghq.com`
-to
+    to
     `dd_url: http://proxy-node:17123`
 
 6. Verify on the [Infrastructure page][4] that all nodes report data to Datadog.

@@ -57,16 +57,17 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
-| Tag                | Key           | Value          |
-|--------------------|---------------|----------------|
-| `env:staging:east` | `env`         | `staging:east` |
-| `env_staging:east` | `env_staging` | `east`         |
+    | Tag                | Key           | Value          |
+    |--------------------|---------------|----------------|
+    | `env:staging:east` | `env`         | `staging:east` |
+    | `env_staging:east` | `env_staging` | `east`         |
 
-5.  **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
+5. **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
 ## Assigning Tags
+
 Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
 
 | Method                       | Assign tags                                                                                  |

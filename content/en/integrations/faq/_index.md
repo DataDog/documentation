@@ -2,7 +2,6 @@
 title: FAQ Integrations
 kind: faq
 private: true
-disable_toc: true
 aliases:
     - /integrations/faq/how-can-i-gather-metrics-from-the-unix-shell
     - /integrations/faq/what-is-a-custom-metric-and-what-is-the-limit-on-the-number-of-custom-metrics-i-can-have

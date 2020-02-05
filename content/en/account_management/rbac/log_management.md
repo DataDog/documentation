@@ -71,4 +71,4 @@ To start limiting these permissions for existing users, create custom roles and 
 
 [1]: /account_management/rbac/#out-of-the-box-roles
 [2]: https://app.datadoghq.com/logs/pipelines
-[3]: /account_management/rbac/role_api
+[3]: /api/#roles

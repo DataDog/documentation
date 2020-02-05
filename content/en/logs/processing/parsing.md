@@ -159,14 +159,14 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 Some examples demonstrating how to use parsers:
 
-* [Key value](#key-value)
+* [Key value or logfmt](#key-value-or-logfmt)
 * [Parsing dates](#parsing-dates)
 * [Conditional patterns](#conditional-pattern)
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 
-### Key value
+### Key value or logfmt
 
 This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
 
@@ -179,7 +179,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
 * If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
-Use filters such as **keyvalue** to more-easily map strings to attributes:
+Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
 Log:
 

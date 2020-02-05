@@ -45,6 +45,8 @@ def cache_by_sha(func):
 
 
 class GitHub:
+    """ Class to handle Github connections and download content"""
+
     def __init__(self, token=None):
         self.token = token
 

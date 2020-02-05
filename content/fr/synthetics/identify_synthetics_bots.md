@@ -1,7 +1,6 @@
 ---
 title: Identifier les Bots Synthetics
 kind: documentation
-disable_toc: true
 description: Identifier les requêtes Synthetics entrantes
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'

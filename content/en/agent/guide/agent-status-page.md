@@ -228,17 +228,21 @@ This section displays information on the Agent's aggregator, for example:
   Series Flushed: 273
   Service Check: 20
   Service Checks Flushed: 20
+  Sketches Flushed: 8
+  Checks Histogram Bucket Metric Sample: 24
 ```
 
 Terms and descriptions:
 
-| Term                    | Description                                                                              |
-|-------------------------|------------------------------------------------------------------------------------------|
-| Checks Metric Sample    | The total number of metrics sent from the checks to the aggregator.                      |
-| Dogstatsd Metric Sample | The total number of metrics sent from the DogStatsD server to the aggregator.            |
-| Event                   | The total number of events sent to the aggregator.                                       |
-| Service Check           | The total number of service checks sent to the aggregator.                               |
-| Flush                   | The number of times aggregated metrics were flushed to the forwarder to send to Datadog. |
+| Term                                         | Description                                                                                           |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| Checks Metric Sample                         | The total number of metrics sent from the checks to the aggregator.                                   |
+| Dogstatsd Metric Sample                      | The total number of metrics sent from the DogStatsD server to the aggregator.                         |
+| Event                                        | The total number of events sent to the aggregator.                                                    |
+| Service Check                                | The total number of service checks sent to the aggregator.                                            |
+| Flush                                        | The number of times aggregated metrics were flushed to the forwarder to send to Datadog.              |
+| Sketches Flushed                             | The number of times aggregated distribution metrics were flushed to the forwarder to send to Datadog. |
+| Checks Histogram Bucket Metric Sample        | The number of histogram bucket metrics sent from the checks to the aggregator.                        |
 
 ## DogStatsD
 

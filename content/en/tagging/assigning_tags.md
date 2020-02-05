@@ -63,13 +63,13 @@ Tags for the [integrations][5] installed with the Agent are configured with YAML
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
-```text
+```yaml
 tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 or
 
-```text
+```yaml
 tags:
     - "<KEY_1>:<VALUE_1>"
     - "<KEY_2>:<VALUE_2>"
@@ -129,7 +129,7 @@ services:
       - '/proc:/host/proc:ro'
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
-      - DD_API_KEY=abcdefghijklmnop
+      - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'datadog/agent:latest'

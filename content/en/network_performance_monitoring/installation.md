@@ -1,7 +1,6 @@
 ---
 title: Network Performance Monitoring Installation
 kind: documentation
-disable_toc: true
 description: Collect your Network Data with the Agent.
 further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
@@ -74,7 +73,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 6. Start the system-probe: `sudo service datadog-agent-sysprobe start`
 **Note**: If the service wrapper is not available on your system, run the following command instead: `sudo initctl start datadog-agent-sysprobe`
 
-7. [Restart the Agent][2]: `sudo service datadog-agent restart`
+7. [Restart the Agent][2] with `sudo service datadog-agent restart`
 8. Enable the system-probe to start on boot: `sudo service enable datadog-agent-sysprobe`
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
@@ -108,14 +107,14 @@ spec:
           - {containerPort: 8125, name: dogstatsdport, protocol: UDP}
           - {containerPort: 8126, name: traceport, protocol: TCP}
         env:
-          - {name: DD_API_KEY, value: <YOUR_API_KEY>}
+          - {name: DD_API_KEY, value: <DATADOG_API_KEY>}
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
           - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
           # DD_SYSTEM_PROBE_EXTERNAL is set to true to avoid starting the system probe
           # in the main Datadog agent container when the system probe runs in a
-          # dedicated container, which is the recommended configuration. 
+          # dedicated container, which is the recommended configuration.
           - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
           - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
           - name: DD_KUBERNETES_KUBELET_HOST

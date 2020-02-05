@@ -16,7 +16,7 @@ sleep 2
 DURATION=$(($(date +%s%N) - $START))
 
 # Send the traces.
-curl -X PUT -H "Content-type: application/json" \
+curl -X PUT -H "Content-type: application/json" -H "X-Datadog-Trace-Count: 1" \
   -d "[[{
     \"trace_id\": $TRACE_ID,
     \"span_id\": $SPAN_ID,
@@ -27,4 +27,4 @@ curl -X PUT -H "Content-type: application/json" \
     \"start\": $START,
     \"duration\": $DURATION
 }]]" \
-  http://localhost:8126/v0.3/traces
+  http://localhost:8126/v0.4/traces

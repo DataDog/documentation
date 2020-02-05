@@ -1,13 +1,13 @@
 languages:
-  py:
+  'py':
     extension: py
     pygments_name: python
-  rb:
+  'rb':
     extension: rb
     pygments_name: ruby
-  sh:
+  'sh':
     extension: sh
     pygments_name: bash
-  json:
+  'json':
     extension: json
     pygments_name: json

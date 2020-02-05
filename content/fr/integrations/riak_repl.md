@@ -107,6 +107,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/riak_repl/metadata.csv
 [12]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
