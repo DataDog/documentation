@@ -187,8 +187,6 @@ The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.
 
 **Note:** In .NET Core 2.1, there is an issue in versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][2] for more details.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
-
 ### Integrations
 
 The .NET Tracer can instrument the following libraries automatically:

@@ -79,8 +79,6 @@ example.exe
 
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][10].
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
-
 ### Integrations
 
 The .NET Tracer can instrument the following libraries automatically:
