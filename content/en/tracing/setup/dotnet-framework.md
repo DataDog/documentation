@@ -25,9 +25,7 @@ further_reading:
 
 <div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target=_blank>container-based</a> set ups.</div>
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
-
-**Note**: The .NET Tracer supports all .NET-based languages (C#, VB.Net, etc).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
 ## Automatic Instrumentation
 
@@ -40,9 +38,11 @@ Automatic instrumentation captures:
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][3].
+
 ### Installation
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -75,10 +75,6 @@ example.exe
 
 **Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
-### Runtime Compatibility
-
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][4].
-
 ### Integrations
 
 The .NET Tracer can instrument the following libraries automatically:
@@ -109,15 +105,7 @@ To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to 
 
 For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
-### Runtime Compatibility
-
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
-
-| Runtime        | Versions      | OS                            |
-|----------------|---------------|-------------------------------|
-| .NET Framework | 4.5+          | **Windows**                   |
-| .NET Core      | 2.1, 3.0, 3.1 | **Windows**, **Linux**, macOS |
-| Mono           | 5.4+          | Windows, Linux, macOS         |
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
 
 For more details on platform support for .NET Standard 2.0, see the [.NET Standard documentation][8].
 
@@ -155,7 +143,7 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-**Note**: Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created may be ignored.
+**Note**: Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
 
 {{% /tab %}}
 
@@ -251,8 +239,8 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/send_traces
 [2]: #integrations
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: /tracing/dotnet-core
+[3]: /tracing/dotnet-core
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/manual_instrumentation/?tab=net
