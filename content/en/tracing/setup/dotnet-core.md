@@ -50,7 +50,7 @@ net stop /y was
 net start w3svc
 ```
 
-**Note:** The `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core since version `1.11.0` of the .NET Tracer. Instead, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2]] below for details.
+**Note:** Starting with .NET Tracer version `1.11.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. Also in version `1.11.0`, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2]] below for details.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: ?tab=netcoreonwindows#required-environment-variables

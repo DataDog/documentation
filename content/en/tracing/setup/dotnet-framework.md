@@ -99,7 +99,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core`                    | 2.1.0+           | `MongoDb`            |
 
-**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which includes applications developed with Web Forms, MVC, Web API, and other web frameworks. The integration for MVC, Web API, and WCF may add additional tags to the root web spand or add child spans to the trace.
+**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application, which includes Web Forms, MVC, Web API, and other 3rd party web frameworks. Specific integrations for MVC and Web API will add additional information to the generated traces. Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is now enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required and are deprecated. You can remove them from your application when you update the .NET Tracer.
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
