@@ -9,7 +9,7 @@ A session is a user journey on your web application. A session usually includes 
 
 ## When does a session expire?
 
-A session expires after 15 minutes of inactivity and its duration is limited to 4 hours. After 4 hours, a new session will be automatically created. 
+A session expires after 15 minutes of inactivity, and its duration is limited to 4 hours. After 4 hours, a new session is automatically created. 
 
 ## What data does Datadog Real User Monitoring (RUM) collect?
 
