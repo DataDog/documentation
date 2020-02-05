@@ -57,8 +57,8 @@ net start w3svc
 
 If your application runs in IIS, you may skip the rest of this section. For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
-Name                       | Value
----------------------------|------
+Name                   | Value
+-----------------------|------
 `COR_ENABLE_PROFILING` | `1`
 `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
@@ -111,13 +111,13 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 ### Runtime Compatibility
 
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these have not been tested by Datadog.
 
-| Runtime        | Versions   | OS                    |
-|----------------|------------|-----------------------|
-| .NET Framework | 4.5+       | Windows               |
-| .NET Core      | 2.0+, 3.0+ | Windows, Linux, macOS |
-| Mono           | 5.4+       | Windows, Linux, macOS |
+| Runtime        | Versions   | OS                            |
+|----------------|------------|-------------------------------|
+| .NET Framework | 4.5+       | **Windows**                   |
+| .NET Core      | 2.0+, 3.0+ | **Windows**, **Linux**, macOS |
+| Mono           | 5.4+       | Windows, Linux, macOS         |
 
 For more details on supported platforms, see the [.NET Standard documentation][7].
 
