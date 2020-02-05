@@ -28,6 +28,7 @@
           "tracing",
           "logs",
           "synthetics",
+          "real_user_monitoring",
           "developers",
           "account_management",
           "synthetics"
