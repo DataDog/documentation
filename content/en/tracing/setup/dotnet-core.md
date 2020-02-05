@@ -39,7 +39,7 @@ Automatic instrumentation captures:
 
 {{< tabs >}}
 
-{{% tab ".NET Core on Windows" %}}
+{{% tab "Windows" %}}
 
 Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
@@ -56,7 +56,7 @@ net start w3svc
 [2]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
-{{% tab ".NET Core on Linux" %}}
+{{% tab "Linux" %}}
 
 Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
@@ -106,7 +106,7 @@ In addition to installing the .NET Tracer package, several environment variables
 
 {{< tabs >}}
 
-{{% tab ".NET Core on Windows" %}}
+{{% tab "Windows" %}}
 
 If your application runs in IIS and you used the MSI installer, you don't need to configure environment variables manually. The .NET Tracer will be enabled after restarting IIS.
 
@@ -139,7 +139,7 @@ dotnet.exe example.dll
 
 {{% /tab %}}
 
-{{% tab ".NET Core on Linux" %}}
+{{% tab "Linux" %}}
 
 On Linux, the following environment variables are required to enable automatic instrumentation:
 
