@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class=" mobile-toc-toggle js-mobile-toc-toggle {{ if .Params.disable_toc }} d-none {{ else }} d-lg-none  {{ end }}">
+<div class="mobile-toc-toggle js-mobile-toc-toggle {{if eq .Params.disable_toc true }}d-none{{ else }}d-lg-none{{ end }}">
     <i class="icon-small-bookmark"></i>
     <i class="icon-small-x-2 d-none"></i>
 </div>

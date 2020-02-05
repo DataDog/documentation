@@ -24,6 +24,4 @@ enableGitInfo: true
 
 # Allow to render HTML in markdown files
 markup:
-  goldmark:
-    renderer:
-      unsafe: true
+  defaultMarkdownHandler: blackfriday
