@@ -142,7 +142,6 @@ Name                       | Value
 `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
 `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
 
-
 **Note:** You may need to changed the paths above if you install the .NET Tracer into a non-default path.
 
 For example, to set the environment variables them from a bash file before starting your application:
@@ -159,36 +158,21 @@ export DD_DOTNET_TRACER_HOME=/opt/datadog
 dotnet example.dll
 ```
 
-To set the environment variables for a `systemd` service, use `Environment=`:
+To set the environment variables on a Linux Docker container, use [`ENV`][1]:
 
-```ini
-[Unit]
-Description=example
-
-[Service]
-ExecStart=/usr/bin/dotnet /app/example.dll
-Restart=always
-Environment=CORECLR_ENABLE_PROFILING=1
-Environment=CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-Environment=CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
-Environment=DD_DOTNET_TRACER_HOME=/opt/datadog
-
-[Install]
-WantedBy=multi-user.target
-```
-
-To set the environment variables on a Linux Docker container, use `ENV`:
-
-```text
+```docker
+# Set environment variables
 ENV CORECLR_ENABLE_PROFILING=1
 ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
+# Start your application
 CMD ["dotnet", "example.dll"]
 ```
+
+[1]: https://docs.docker.com/engine/reference/builder/#env
 
 {{% /tab %}}
 
