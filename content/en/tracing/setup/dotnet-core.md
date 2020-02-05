@@ -119,10 +119,10 @@ net start w3svc
 
 If your application runs in IIS, you may skip the rest of this section. For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
-```text
-COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-```
+Name                       | Value
+---------------------------|------
+`CORECLR_ENABLE_PROFILING` | `1`
+`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
 For example, to set the environment variables from a batch file before starting your application:
 
