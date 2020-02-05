@@ -7,7 +7,7 @@ external_redirect: /api/#update-role
 
 **SIGNATURE**:
 
-`PATCH /v2/roles/<ROLE_UUID>`
+`PATCH /v2/roles/<ROLE_ID>`
 
 **EXAMPLE REQUEST**:
 

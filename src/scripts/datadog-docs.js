@@ -783,6 +783,9 @@ function loadPage(newUrl) {
                 return;
             }
     
+            const mainContentWrapper = document.querySelector('.mainContent-wrapper');
+            const newmainContentWrapper = httpRequest.responseXML.querySelector(".mainContent-wrapper");
+
             const newContent = httpRequest.responseXML.getElementById("mainContent");
             const newTOC = httpRequest.responseXML.querySelector(".js-toc-container");
 
@@ -839,6 +842,11 @@ function loadPage(newUrl) {
             if (mainContent.parentElement) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
                 mainContent = newContent;
+
+                // update mainContent-wrapper classes
+                mainContentWrapper.className = `${newmainContentWrapper.classList}`
+
+
             } else {
                 window.location.href = newUrl;
             }

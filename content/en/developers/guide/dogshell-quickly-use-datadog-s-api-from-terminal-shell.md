@@ -49,7 +49,7 @@ In the event that you would rather just write the `.dogrc` file yourself (perhap
 
 ```text
 [Connection]
-apikey = <YOUR_API_KEY>
+apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
 ```
 

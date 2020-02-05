@@ -1,22 +1,19 @@
 ---
-title: Browser Tests with APM
+title: Browser Test Results
 kind: documentation
-description: Synthetics browser tests with APM
+description: Synthetics browser test results
+aliases:
+ - "/synthetics/apm/browser_tests"
 further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Browser Tests"
 ---
 
+
 ## Overview
 
-Browser tests with APM connect synthetics tests with your backend traces.
-
-## Test results
-
 Test results are accessed from the **Step Results** section on your browser test's status page.
-
-<POSSIBLE_SCREENSHOT>
 
 ### Errors
 
@@ -50,8 +47,23 @@ The traces panel shows your traces associated with the browser synthetics test. 
 
 One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (dependent on tracing and whitelisting setup). Use the dropdown to choose the trace to view.
 
+## Test failure and errors
+
+A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
+
+Common failure reasons include:
+
+| Error                                | Description                                                                                                          |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `Element located but it's invisible` | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.       |
+| `Cannot locate element`              | The element cannot be found in the HTML.                                                                             |
+| `Select did not have option`         | The specified option is missing from the dropdown menu.                                                              |
+| `Forbidden URL`                      | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][2] for further details. |
+| `General test failure`               | A general error message. [Contact support][2] for further details.                                                   |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/trace
+[2]: /help

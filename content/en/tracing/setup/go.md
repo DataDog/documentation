@@ -117,7 +117,7 @@ import (
 )
 
 func sayHello(w http.ResponseWriter, r * http.Request) {
-    msg: = "Hello " + strings.TrimPrefix(r.URL.Path, "/")
+    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
     w.Write([] byte(msg))
 }
 
@@ -126,10 +126,10 @@ func main() {
     tracer.Start(tracer.WithServiceName("test-go"))
     defer tracer.Stop()
 
-    mux: = httptrace.NewServeMux() // init the http tracer
+    mux := httptrace.NewServeMux() // init the http tracer
     mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
 
-    err: = http.ListenAndServe(":9090", mux) // set listen port
+    err := http.ListenAndServe(":9090", mux) // set listen port
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }

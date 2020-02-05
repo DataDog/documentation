@@ -22,13 +22,13 @@ Cloud-based applications can generate logs at a rate of millions per minute. But
 
 This guide identifies key components of Logging Without Limits™ such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-to-track-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitor your KPIs over time.
 
-## 1. Identify your most logging service status
+## 1. Identify your most logged service status
 
-Your most logging service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
+Your most logged service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
 {{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identify a most logging service status" style="width:100%;">}}
 
-**To identify your most logging service status**:
+**To identify your most logged service status**:
 
 1. In Log Explorer, select **graph view** located next to the search bar.
 2. Below the search bar, set count `*` group by `service` and limit to `top 10`.
@@ -60,6 +60,9 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 1. Click on a pattern from the pattern view list.
 2. Click the **View All** button in the top right corner to automatically generate the search query associated with this pattern.
 3. Select the `</>` option to the right of the search query and copy the search query.
+
+{{< img src="logs/guide/getting-started-lwl/pattern_view.gif" alt="Pattern View" style="width:100%;">}}
+
 4. Navigate to the **Configuration** page under Logs in the main menu. Select **indexes** and click on your associated index. This will populate the option to add an exclusion filter.
 5. Select **Add an Exclusion Filter**.
 6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
@@ -108,7 +111,6 @@ When an anomaly is detected, an alert will be sent to all who are tagged. This a
 ## Review
 
 In this guide, you learned how to use Logging without Limits™ to:
-
 * [1. Identify your most logging service status](#1-identify-your-most-logging-service-status)
 * [2. Identify high volume logging patterns](#2-identify-high-volume-logging-patterns)
 * [3. Create a log pattern exclusion filter](#3-create-a-log-pattern-exclusion-filter)
