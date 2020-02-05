@@ -31,18 +31,18 @@ To begin tracing applications written in any language, first [install and config
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the Profiling API provided by .NET Framework to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
+Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][2] out of the box.
 
 Automatic instrumentation captures:
 
-- Execution time of instrumented libraries
+- Execution time of instrumented calls
 - Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
 ### Installation
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][9]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -77,7 +77,7 @@ example.exe
 
 ### Runtime Compatibility
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][10].
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][4].
 
 ### Integrations
 
@@ -101,25 +101,25 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][5] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][6].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
 ### Runtime Compatibility
 
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these have not been tested by Datadog.
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
 
-| Runtime        | Versions   | OS                            |
-|----------------|------------|-------------------------------|
-| .NET Framework | 4.5+       | **Windows**                   |
-| .NET Core      | 2.0+, 3.0+ | **Windows**, **Linux**, macOS |
-| Mono           | 5.4+       | Windows, Linux, macOS         |
+| Runtime        | Versions      | OS                            |
+|----------------|---------------|-------------------------------|
+| .NET Framework | 4.5+          | **Windows**                   |
+| .NET Core      | 2.1, 3.0, 3.1 | **Windows**, **Linux**, macOS |
+| Mono           | 5.4+          | Windows, Linux, macOS         |
 
-For more details on supported platforms, see the [.NET Standard documentation][7].
+For more details on platform support for .NET Standard 2.0, see the [.NET Standard documentation][8].
 
 ## Configuration
 
@@ -222,7 +222,7 @@ The first table below lists configuration variables that are available for both 
 | `DD_TRACE_AGENT_URL`    | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`         | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`   | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_ENV`                | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
+| `DD_ENV`                | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][9] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`       | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`     | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_GLOBAL_FLAGS` | `GlobalTags`           | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
@@ -250,10 +250,11 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces
-[3]: /help
-[5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/manual_instrumentation/?tab=net
-[7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[9]: https://github.com/DataDog/dd-trace-dotnet/releases
-[10]: /tracing/dotnet-core
+[2]: #integrations
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
+[4]: /tracing/dotnet-core
+[5]: /help
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/manual_instrumentation/?tab=net
+[8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[9]: /tracing/guide/setting_primary_tags_to_scope/#environment

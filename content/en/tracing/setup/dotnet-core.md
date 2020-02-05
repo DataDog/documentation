@@ -26,11 +26,11 @@ To begin tracing applications written in any language, first [install and config
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the Profiling API provided by .NET Core to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
+Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][2] out of the box.
 
 Automatic instrumentation captures:
 
-- Execution time of instrumented libraries
+- Execution time of instrumented calls
 - Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
@@ -41,7 +41,7 @@ Automatic instrumentation captures:
 
 {{% tab "Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -52,15 +52,13 @@ net start w3svc
 
 **Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer.
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
+Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][3].
 
-**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][2]] below for details.
+**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10]] below for details.
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -93,10 +91,8 @@ apk add gcompat
 
 **Note:** The .NET Tracer does not currently support newer version of Alpine Linux (3.10 or above).
 
-In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][2]] below for details.
+In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10]] below for details.
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: ?tab=netcoreonlinux#required-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -159,7 +155,7 @@ export DD_DOTNET_TRACER_HOME=/opt/datadog
 dotnet example.dll
 ```
 
-To set the environment variables on a Linux Docker container, use [`ENV`][1]:
+To set the environment variables on a Linux Docker container, use [`ENV`][11]:
 
 ```docker
 # Set environment variables
@@ -173,19 +169,17 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
-[1]: https://docs.docker.com/engine/reference/builder/#env
-
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Runtime Compatibility
 
-The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][9].
+The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][4].
 
 **Note:**: The .NET Tracer may work on .NET Core 2.0, but it is not longer supported by Microsoft since it reached the end of life in 2018-10-01. .NET Core 3.0 will also reach end of line in 2020-03-03.
 
-**Note:** In .NET Core 2.1, there is an issue in versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][2] for more details.
+**Note:** In .NET Core 2.1, there is an issue in versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3 and above. See [this GitHub issue][12] for more details.
 
 ### Integrations
 
@@ -205,25 +199,25 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][5] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][6].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
 ### Runtime Compatibility
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
 
-| Runtime        | Versions   | OS                    |
-|----------------|------------|-----------------------|
-| .NET Framework | 4.5+       | Windows               |
-| .NET Core      | 2.0+, 3.0+ | Windows, Linux, macOS |
-| Mono           | 5.4+       | Windows, Linux, macOS |
+| Runtime        | Versions      | OS                            |
+|----------------|---------------|-------------------------------|
+| .NET Framework | 4.5+          | **Windows**                   |
+| .NET Core      | 2.1, 3.0, 3.1 | **Windows**, **Linux**, macOS |
+| Mono           | 5.4+          | Windows, Linux, macOS         |
 
-For more details on supported platforms, see the [.NET Standard documentation][7].
+For more details on platform support for .NET Standard 2.0, see the [.NET Standard documentation][8].
 
 ## Configuration
 
@@ -321,7 +315,7 @@ The first table below lists configuration variables that are available for both 
 | `DD_TRACE_AGENT_URL`    | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`         | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`   | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_ENV`                | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
+| `DD_ENV`                | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][9] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`       | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`     | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_GLOBAL_FLAGS` | `GlobalTags`           | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
@@ -349,10 +343,15 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces
-[2]: https://github.com/dotnet/coreclr/issues/18448
-[3]: /help
-[5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/manual_instrumentation/?tab=net
-[7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[9]: /tracing/dotnet-framework
+[2]: #integrations
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
+[4]: /tracing/dotnet-framework
+[5]: /help
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/manual_instrumentation/?tab=net
+[8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[9]: /tracing/guide/setting_primary_tags_to_scope/#environment
+
+[10]: #required-environment-variables
+[11]: https://docs.docker.com/engine/reference/builder/#env
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases
