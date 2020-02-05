@@ -50,7 +50,7 @@ net stop /y was
 net start w3svc
 ```
 
-**Note:** Starting with .NET Tracer version `1.11.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. Also in version `1.11.0`, a new environment variable, `DD_DOTNET_TRACER_HOME`, was added. See [Required Environment Variables][2]] below for details.
+**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: ?tab=netcoreonwindows#required-environment-variables
@@ -60,6 +60,8 @@ net start w3svc
 
 Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
+**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][2]] below for details.
+
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
@@ -67,7 +69,7 @@ curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_V
 sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
 ```
 
-For CentOS or Fedora, download and install the RPM package
+For CentOS or Fedora, download and install the RPM package:
 
 ```bash
 curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
@@ -82,15 +84,14 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For Alpine Linux, you also need to install the following packages:
+For Alpine Linux distributions, you may need to install one of the following packages:
 
 ```bash
-# All Alpine versions
 apk add libc6-compat
-
-# Alpine versions 3.9 and higher
 apk add gcompat
 ```
+
+**Note:** The .NET Tracer does not currently support newer version of Alpine Linux (3.10 or above).
 
 In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][2]] below for details.
 
