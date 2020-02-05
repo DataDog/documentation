@@ -31,7 +31,7 @@ To begin tracing applications written in any language, first [install and config
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
+Automatic instrumentation uses the Profiling API provided by .NET Framework to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
@@ -42,9 +42,10 @@ Automatic instrumentation captures:
 
 ### Installation
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][9]. Choose the platform that matches the OS architecture.
+Install the .NET Tracer on the host using the [MSI installer for Windows][9]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
+
 ```cmd
 net stop /y was
 net start w3svc
@@ -52,21 +53,18 @@ net start w3svc
 
 ### Required Environment Variables
 
-**Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
-
 **Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
-After running the MSI installer, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer becomes enabled.
+If your application runs in IIS and you used the MSI installer, you don't need to configure environment variables manually. The .NET Tracer will be enabled after restarting IIS.
 
 To restart IIS, run the following commands as administrator:
+
 ```cmd
 net stop /y was
 net start w3svc
 ```
 
-If your application runs on IIS, you may skip the rest of this section.
-
-For applications not running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
+If your application runs in IIS, you may skip the rest of this section. For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```text
 COR_ENABLE_PROFILING=1
@@ -88,7 +86,9 @@ example.exe
 
 ### Runtime Compatibility
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above.
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][10].
+
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ### Integrations
 
@@ -98,15 +98,19 @@ The .NET Tracer can instrument the following libraries automatically:
 |--------------------------------|------------------------------------------|------------------|----------------------|
 | ASP.NET                        | built-in                                 |                  | `AspNet`             |
 | ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 4.0+             | `AspNetMvc`          |
-| ASP.NET Web API 2              | `Microsoft.AspNet.WebApi.Core`           | 5.1+             | `AspNetWebApi2`      |
+| ASP.NET Web API 2              | `Microsoft.AspNet.WebApi`                | 5.1+             | `AspNetWebApi2`      |
+| ASP.NET Core                   | `Microsoft.AspNetCore`                   | 2.0+             | `AspNetCore`         |
+| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc`               | 2.0+             | `AspNetCore`         |
 | WCF                            | built-in                                 |                  | `Wcf`                |
-| ADO.NET                        | built-in                                 |                  | `AdoNet`             |
+| ADO.NET                        | built-in or `System.Data.SqlClient`      |                  | `AdoNet`             |
 | WebClient / WebRequest         | built-in                                 |                  | `WebRequest`         |
 | HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+             | `HttpMessageHandler` |
 | Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+         | `StackExchangeRedis` |
 | Redis (ServiceStack client)    | `ServiceStack.Redis`                     | 4.0.48+          | `ServiceStackRedis`  |
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+           | `MongoDb`            |
+
+**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which includes applications developed with Web Forms, MVC, Web API, and other web frameworks. The integration for MVC, Web API, and WCF may add additional tags to the root web spand or add child spans to the trace.
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
@@ -266,3 +270,4 @@ The following table lists configuration variables that are available only when u
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [9]: https://github.com/DataDog/dd-trace-dotnet/releases
+[10]: /tracing/dotnet-core
