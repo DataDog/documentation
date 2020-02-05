@@ -8,3 +8,4 @@ announcement_banner:
   mobile_message: 'Report: The State of Serverless'
   link: "https://www.datadoghq.com/state-of-serverless/"
   exclude: []
+translate_status_banner: "This translation isn't up to date, for the latest english version click here"

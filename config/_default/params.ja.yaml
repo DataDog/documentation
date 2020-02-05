@@ -8,3 +8,4 @@ announcement_banner:
   mobile_message: ネットワーク パフォーマンス モニタリング提供開始!
   link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
   exclude: []
+translate_status_banner: "このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。"

@@ -1,0 +1,21 @@
+{{ $dot := . }}
+{{ if ne $dot.Page.Lang "en"}}
+
+  {{ $dot.Scratch.Set "outdated" false }}
+  {{ if .IsTranslated }}
+    {{ range where .Translations "Lang" "en" }}
+      <!-- if this ja/fr page is older than the english its out of date -->
+      {{ $dot.Scratch.Set "outdated" (gt .Lastmod $dot.Lastmod) }}
+    {{ end }}
+  {{ end }}
+  {{ $outdated := $dot.Scratch.Get "outdated" }}
+
+  {{ if (and $outdated (not .Params.placeholder)) }}
+    {{ $text := .Site.Params.translate_status_banner | default "" }}
+    <div class="translate_status_banner text-left">
+      <a href="{{ range where $dot.Page.Translations "Lang" "en"}}{{ .Permalink }}{{ end }}">
+        <div class='alert alert-info'>{{ $text }}</div>
+      </a>
+    </div>
+  {{ end }}
+{{ end }}
