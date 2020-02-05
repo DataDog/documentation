@@ -5,7 +5,11 @@ kind: faq
 
 ## How is a session defined?
 
-A session is a user journey on your web application. It expires after 15 minutes of inactivity.
+A session is a user journey on your web application. A session usually includes multiple page views with their associated telemetry.
+
+## When does a session expire?
+
+A session expires after 15 minutes of inactivity and its duration is limited to 4 hours. After 4 hours, a new session will be automatically created. 
 
 ## What data does Datadog Real User Monitoring (RUM) collect?
 
