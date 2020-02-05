@@ -53,16 +53,7 @@ net start w3svc
 
 ### Required Environment Variables
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
-
-If your application runs in IIS and you used the MSI installer, you don't need to configure environment variables manually. The .NET Tracer will be enabled after restarting IIS.
-
-To restart IIS, run the following commands as administrator:
-
-```cmd
-net stop /y was
-net start w3svc
-```
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
 If your application runs in IIS, you may skip the rest of this section. For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
