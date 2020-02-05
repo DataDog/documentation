@@ -275,8 +275,9 @@ To disable telemetry, set the `disable_telemetry` parameter to `true`:
 Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
 ```
 
-See [DataDog/dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) for more information about the client configuration.
+See [DataDog/dogstatsd-ruby][1] for more information about the client configuration.
 
+[1]: https://github.com/DataDog/dogstatsd-ruby
 {{% /tab %}}
 {{% tab "Go" %}}
 
