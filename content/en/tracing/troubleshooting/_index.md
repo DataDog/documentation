@@ -145,7 +145,7 @@ For more tracer settings, check out the [API documentation][5].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), in a `datadog.json` file. Debug more can also be enabled in code by setting `TracerSettings.DebugEnabled = true` before passing the settings into the `Tracer` constructor:
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), in a `datadog.json` file. Debug mode can also be enabled in code by setting `TracerSettings.DebugEnabled = true` before passing the settings into the `Tracer` constructor:
 
 ```csharp
 using Datadog.Trace;
