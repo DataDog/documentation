@@ -217,17 +217,17 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library           | NuGet package name                          | Package versions | Integration Name     |
-|--------------------------------|---------------------------------------------|------------------|----------------------|
-| ASP.NET Core                   | `Microsoft.AspNetCore`                      | 2.0+             | `AspNetCore`         |
-| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc`                  | 2.0+             | `AspNetCore`         |
-| ADO.NET                        | `System.Data.Common`/`System.Data.SqlClient`|                  | `AdoNet`             |
-| WebClient / WebRequest         |                                             | 4.0+             | `WebRequest`         |
-| HttpClient / HttpClientHandler | `System.Net.Http`                           | 4.0+             | `HttpMessageHandler` |
-| Redis (StackExchange client)   | `StackExchange.Redis`                       | 1.0.187+         | `StackExchangeRedis` |
-| Redis (ServiceStack client)    | `ServiceStack.Redis`                        | 4.0.48+          | `ServiceStackRedis`  |
-| Elasticsearch                  | `NEST` / `Elasticsearch.Net`                | 5.3.0+           | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver.Core`                       | 2.1.0+           | `MongoDb`            |
+| Framework or library           | NuGet package name                           | Package versions | Integration Name     |
+|--------------------------------|----------------------------------------------|------------------|----------------------|
+| ASP.NET Core                   | `Microsoft.AspNetCore`                       | 2.0+, 3.0+       | `AspNetCore`         |
+| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc`                   | 2.0+, 3.0+       | `AspNetCore`         |
+| ADO.NET                        | `System.Data.Common`/`System.Data.SqlClient` | 4.0+             | `AdoNet`             |
+| WebClient / WebRequest         |                                              | 4.0+             | `WebRequest`         |
+| HttpClient / HttpClientHandler | `System.Net.Http`                            | 4.0+             | `HttpMessageHandler` |
+| Redis (StackExchange client)   | `StackExchange.Redis`                        | 1.0.187+         | `StackExchangeRedis` |
+| Redis (ServiceStack client)    | `ServiceStack.Redis`                         | 4.0.48+          | `ServiceStackRedis`  |
+| Elasticsearch                  | `NEST` / `Elasticsearch.Net`                 | 5.3.0+           | `ElasticsearchNet`   |
+| MongoDB                        | `MongoDB.Driver.Core`                        | 2.1.0+           | `MongoDb`            |
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
@@ -241,13 +241,13 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 ### Runtime Compatibility
 
-Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
 
-| Runtime        | Versions | OS                    |
-|----------------|----------|-----------------------|
-| .NET Framework | 4.5+     | Windows               |
-| .NET Core      | 2.0+     | Windows, Linux, macOS |
-| Mono           | 5.4+     | Windows, Linux, macOS |
+| Runtime        | Versions   | OS                    |
+|----------------|------------|-----------------------|
+| .NET Framework | 4.5+       | Windows               |
+| .NET Core      | 2.0+, 3.0+ | Windows, Linux, macOS |
+| Mono           | 5.4+       | Windows, Linux, macOS |
 
 For more details on supported platforms, see the [.NET Standard documentation][7].
 
@@ -257,7 +257,6 @@ There are multiple ways to configure the .NET Tracer:
 
 * in .NET code
 * setting environment variables
-* editing the application's `app.config`/`web.config` file (.NET Framework only)
 * creating a `datadog.json` file
 
 {{< tabs >}}
@@ -302,7 +301,7 @@ SET DD_SERVICE_NAME=MyService
 SET DD_ADONET_ENABLED=false
 
 rem Launch application
-MyApplication.exe
+example.exe
 ```
 
 **Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
@@ -316,32 +315,14 @@ export DD_SERVICE_NAME=MyService
 export DD_ADONET_ENABLED=false
 
 # Launch application
-dotnet MyApplication.dll
-```
-
-{{% /tab %}}
-
-{{% tab "web.config" %}}
-
-_This section applies only applications running on .NET Framework._
-
-To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
-
-```xml
-<configuration>
-  <appSettings>
-    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
-    <add key="DD_SERVICE_NAME" value="MyService"/>
-    <add key="DD_ADONET_ENABLED" value="false"/>
-  </appSettings>
-</configuration>
+dotnet example.dll
 ```
 
 {{% /tab %}}
 
 {{% tab "JSON file" %}}
 
-To configure the Tracer using an JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
 
 ```json
 {
@@ -376,7 +357,7 @@ The following table lists configuration variables that are available only when u
 | Setting Name                 | Property Name              | Description                                                                                                                                                                                                                                                                              |
 |------------------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`           | `TraceEnabled`             | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
-| `DD_TRACE_DEBUG`             | N/A                        | Enables or disables the CLR profiler's debug mode. Valid values are: `true` or `false` (default).                                                                                                                                                                                        |
+| `DD_TRACE_DEBUG`             | N/A                        | Enables or disables debug logs in the Tracer. Valid values are: `true` or `false` (default). Setting this as an environment variable also enabled debug logs in the CLR Profiler.                                                                                                        |
 | `DD_TRACE_LOG_PATH`          | N/A                        | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                     |
 | `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |

@@ -99,16 +99,14 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET                        | built-in                                 |                  | `AspNet`             |
 | ASP.NET MVC                    | `Microsoft.AspNet.Mvc`                   | 4.0+             | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi`                | 5.1+             | `AspNetWebApi2`      |
-| ASP.NET Core                   | `Microsoft.AspNetCore`                   | 2.0+             | `AspNetCore`         |
-| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc`               | 2.0+             | `AspNetCore`         |
 | WCF                            | built-in                                 |                  | `Wcf`                |
 | ADO.NET                        | built-in or `System.Data.SqlClient`      |                  | `AdoNet`             |
-| WebClient / WebRequest         | built-in                                 |                  | `WebRequest`         |
 | HttpClient / HttpClientHandler | built-in or `System.Net.Http`            | 4.0+             | `HttpMessageHandler` |
+| WebClient / WebRequest         | built-in                                 |                  | `WebRequest`         |
 | Redis (StackExchange client)   | `StackExchange.Redis`                    | 1.0.187+         | `StackExchangeRedis` |
 | Redis (ServiceStack client)    | `ServiceStack.Redis`                     | 4.0.48+          | `ServiceStackRedis`  |
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.1.0+           | `MongoDb`            |
+| MongoDB                        | `MongoDB.Driver.Core`                    | 2.1.0+           | `MongoDb`            |
 
 **Note**: The ASP.NET integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which includes applications developed with Web Forms, MVC, Web API, and other web frameworks. The integration for MVC, Web API, and WCF may add additional tags to the root web spand or add child spans to the trace.
 
@@ -124,13 +122,13 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 ### Runtime Compatibility
 
-Manual instrumentation is supported on .NET Framework 4.5 and over on Windows and on many platforms that implements .NET Standard 2.0 or above:
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.0 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
 
-| Runtime        | Versions | OS                    |
-|----------------|----------|-----------------------|
-| .NET Framework | 4.5+     | Windows               |
-| .NET Core      | 2.0+     | Windows, Linux, macOS |
-| Mono           | 5.4+     | Windows, Linux, macOS |
+| Runtime        | Versions   | OS                    |
+|----------------|------------|-----------------------|
+| .NET Framework | 4.5+       | Windows               |
+| .NET Core      | 2.0+, 3.0+ | Windows, Linux, macOS |
+| Mono           | 5.4+       | Windows, Linux, macOS |
 
 For more details on supported platforms, see the [.NET Standard documentation][7].
 
@@ -176,7 +174,7 @@ Tracer.Instance = tracer;
 
 To configure the Tracer using environment variables, set the variables before launching the instrumented application.
 
-For example, on Windows:
+For example:
 
 ```cmd
 rem Set environment variables
@@ -185,7 +183,7 @@ SET DD_SERVICE_NAME=MyService
 SET DD_ADONET_ENABLED=false
 
 rem Launch application
-MyApplication.exe
+example.exe
 ```
 
 **Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
@@ -264,7 +262,6 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/send_traces
 [3]: /help
-[4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /tracing/manual_instrumentation/?tab=net
 [7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
