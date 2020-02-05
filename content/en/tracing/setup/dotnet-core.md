@@ -128,8 +128,8 @@ For example, to set the environment variables from a batch file before starting 
 
 ```bat
 rem Set environment variables
-SET COR_ENABLE_PROFILING=1
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+SET CORECLR_ENABLE_PROFILING=1
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll

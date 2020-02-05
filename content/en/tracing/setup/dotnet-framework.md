@@ -68,8 +68,8 @@ If your application runs in IIS, you may skip the rest of this section. For appl
 
 Name                       | Value
 ---------------------------|------
-`CORECLR_ENABLE_PROFILING` | `1`
-`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+`COR_ENABLE_PROFILING` | `1`
+`COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
 For example, to set the environment variables from a batch file before starting your application:
 
