@@ -89,8 +89,8 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 {{% tab "Azure Storage" %}}
 
 1. Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, select the **StorageV2** account kind, and the **hot** access tier.
-2. Set up the [Azure integration][3] within the subscription that holds your new storage account, if you haven’t already. This involves [creating an App Registration that Datadog can use][4] to integrate with.
-3. Next, grant your Datadog App sufficient permission to write to and rehydrate from your storage account. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add → Add Role Assignment**. Input the Role called **Storage Blob Data Contributor**, select the Datadog App that you created for integrating with Azure, and save.
+2. Set up the [Azure integration][3] within the subscription that holds your new storage account, if you haven't already. This involves [creating an App Registration that Datadog can use][4] to integrate with.
+3. Next, grant your Datadog App sufficient permission to write to and rehydrate from your storage account. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**. Input the Role called **Storage Blob Data Contributor**, select the Datadog App that you created for integrating with Azure, and save.
   {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
 4. Go to your [Archives page][5] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 5. Select the **Azure Storage** archive type, and the Azure Tenant and Client for the Datadog App that has the Storage Blob Data Contributor role on your storage account. Input your storage account name and a container name for your archive. Optional: input a prefix directory for all the content of your log archives. Then save your archive. 
