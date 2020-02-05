@@ -839,30 +839,34 @@ main:
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
     weight: 205
-  - name: ".NET"
-    url: "tracing/setup/dotnet/"
+  - name: ".NET Framework"
+    url: "tracing/setup/dotnet-framework/"
     parent: "tracing_setup"
     weight: 206
+  - name: ".NET Core"
+    url: "tracing/setup/dotnet-core/"
+    parent: "tracing_setup"
+    weight: 207
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 207
+    weight: 208
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 208
+    weight: 209
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 209
+    weight: 210
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 210
+    weight: 211
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
-    weight: 211
+    weight: 212
 
   ## TRACING - App analytics
 
