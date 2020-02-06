@@ -17,9 +17,7 @@ Search and filter your service level objectives.
 
 * **`query`** [*optional*]:
 
-    After entering a search query in your [List Service Level Objectives page][1], use the query parameter value in the URL of the page as value for this parameter. For more information on building a query, see [Searching SLOs][2].
-
-    The query can contain any number of space-separated monitor attributes, for instance `query="type:metric foo"`.
+    The query is a simple search of the SLO name, for instance `query="my team"`.
 
 * **`offset`** [*optional*, *default* = **0**]:
 
