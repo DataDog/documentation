@@ -39,7 +39,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 ### Facet Panels
 
-The facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
+Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
 {{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel"  style="width:20%;">}}
 
