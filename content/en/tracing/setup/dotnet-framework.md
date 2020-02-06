@@ -99,9 +99,9 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core`                    | 2.1.0+           | `MongoDb`            |
 
-**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application, which includes Web Forms, MVC, Web API, and other 3rd party web frameworks. Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is now enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required and are deprecated. You can remove them from your application when you update the .NET Tracer.
+**Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
 
-**Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
+**Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
@@ -147,7 +147,7 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-**Note**: Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+**Note:** Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
 
 {{% /tab %}}
 
@@ -167,7 +167,7 @@ rem Launch application
 example.exe
 ```
 
-**Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 

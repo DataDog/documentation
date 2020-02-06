@@ -59,7 +59,7 @@ net stop /y was
 net start w3svc
 ```
 
-**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer.
+**Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core. Remove it from your application when you update the .NET Tracer.
 
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 
@@ -71,7 +71,9 @@ To use automatic instrumentation on Linux, install the .NET Tracer in the enviro
 
 In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10] below for details.
 
-**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10] below for details.
+To generate Tracer log files for troubleshooting, you must create the logs directory. The default path is `/var/log/datadog/`.
+
+**Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables][10] below for details.
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -144,7 +146,7 @@ Name                       | Value
 `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
 `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
 
-**Note:** Change the paths above if you install the .NET Tracer into a non-default path.
+**Note:** You must change the paths above if you install the .NET Tracer into a non-default path.
 
 For example, to set the environment variables them from a bash file before starting your application:
 
@@ -197,7 +199,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`                 | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core`                        | 2.1.0+           | `MongoDb`            |
 
-**Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
+**Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
@@ -242,7 +244,7 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-**Note**: Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+**Note:** Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
 
 {{% /tab %}}
 
@@ -262,7 +264,7 @@ rem Launch application
 example.exe
 ```
 
-**Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 On Linux:
 
@@ -316,7 +318,7 @@ The following table lists configuration variables that are available only when u
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_DEBUG`                                               | Enables or disables debug logs in the Tracer. Valid values are: `true` or `false` (default). Setting this as an environment variable also enabled debug logs in the CLR Profiler.                                                                                                        |
-| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`                                                                                                                                                            |
+| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                                                         |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
