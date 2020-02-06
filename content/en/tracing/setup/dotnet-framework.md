@@ -59,7 +59,7 @@ net start w3svc
 
 If your application runs in IIS, skip the rest of this section.
 
-For Windows applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
+For Windows applications **not** running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
 Name                   | Value
 -----------------------|------
