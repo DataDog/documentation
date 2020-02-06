@@ -69,9 +69,9 @@ net start w3svc
 
 To use automatic instrumentation on Linux, install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][4].
 
-In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10]] below for details.
+In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10] below for details.
 
-**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10]] below for details.
+**Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10] below for details.
 
 For Debian or Ubuntu, download and install the Debian package:
 
