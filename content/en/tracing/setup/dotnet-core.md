@@ -40,7 +40,7 @@ Automatic instrumentation captures:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][3].
 
-**Note:** The .NET Tracer may work on .NET Core 2.0 and .NET Core 2.2, but these version reached ond of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of line in 2020-03-03.
+**Note:** The .NET Tracer may work on .NET Core 2.0 and .NET Core 2.2, but these versions reached end of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of life in 2020-03-03.
 
 **Note:** Due to several issues in the .NET Core 2.1 runtime (see GitHub issues [dotnet/runtime/issues/10506][12] and [DataDog/dd-trace-dotnet/issues/302][13]), we strongly recommend .NET Core versions 2.1.12 or higher, or .NET Core 3.1.
 
