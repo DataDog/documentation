@@ -740,7 +740,6 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /fr/logs/processing/pipelines
 [2]: /fr/logs/processing/parsing/#advanced-settings
 [3]: /fr/logs/processing/parsing
