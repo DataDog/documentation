@@ -7,7 +7,7 @@ further_reading:
     text: Faire des recherches sur l'ensemble de vos signaux de sécurité et effectuer une analyse de la sécurité
 ---
 <div class="alert alert-warning">
-Les règles de détection des menaces pour le contrôle de la sécurité sont en version bêta privée.
+Les règles de détection des menaces de Security Monitoring sont en version bêta privée.
 </div>
 
 ## Présentation
