@@ -145,25 +145,36 @@ For more tracer settings, check out the [API documentation][5].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), in a `datadog.json` file. Debug mode can also be enabled in code by setting `TracerSettings.DebugEnabled = true` before passing the settings into the `Tracer` constructor:
 
 ```csharp
 using Datadog.Trace;
 
-var tracer = Tracer.Create(isDebugEnabled: true);
+// read default configuration sources (env vars, web.config, datadog.json)
+var settings = TracerSettings.FromDefaultSources();
 
-// optional: set the new tracer as the new default/global tracer
+// enabled debug mode
+settings.DebugEnabled = true;
+
+// create a new Tracer using these settings
+var tracer = new Tracer(settings);
+
+// optional: set the global tracer
 Tracer.Instance = tracer;
 ```
 
-The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
-
-Logs files are saved in the following directories:
+Logs files are saved in the following directories by default. The `DD_TRACE_LOG_PATH` setting can be used to change these paths.
 
 | Platform | Path                                      |
 |----------|-------------------------------------------|
-| Linux    | `/var/log/datadog/`                       |
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
+| Linux    | `/var/log/datadog/`                       |
+
+**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
+
+For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
+
+[1]: /tracing/setup/dotnet#configuration
 
 {{% /tab %}}
 {{% tab "PHP" %}}
