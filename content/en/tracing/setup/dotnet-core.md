@@ -50,7 +50,7 @@ The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.
 
 {{% tab "Windows" %}}
 
-To use automatic instrumentation, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -61,11 +61,13 @@ net start w3svc
 
 **Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer.
 
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][3].
+Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][4].
 
 **Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10]] below for details.
 
@@ -101,6 +103,9 @@ apk add gcompat
 **Note:** The .NET Tracer does not currently support newer version of Alpine Linux (3.10 or above).
 
 In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10]] below for details.
+
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[10]: #required-environment-variables
 
 {{% /tab %}}
 
@@ -177,6 +182,7 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 # Start your application
 CMD ["dotnet", "example.dll"]
 ```
+[11]: https://docs.docker.com/engine/reference/builder/#env
 
 {{% /tab %}}
 
@@ -347,7 +353,6 @@ The following table lists configuration variables that are available only when u
 [8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [9]: /tracing/guide/setting_primary_tags_to_scope/#environment
 
-[10]: #required-environment-variables
 [11]: https://docs.docker.com/engine/reference/builder/#env
 [12]: https://github.com/dotnet/runtime/issues/10506
 [13]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-496654196

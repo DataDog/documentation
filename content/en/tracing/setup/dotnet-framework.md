@@ -46,7 +46,7 @@ The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and abo
 
 ### Installation
 
-To use automatic instrumentation, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -99,7 +99,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                  | `NEST` / `Elasticsearch.Net`             | 5.3.0+           | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core`                    | 2.1.0+           | `MongoDb`            |
 
-**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application, which includes Web Forms, MVC, Web API, and other 3rd party web frameworks. Specific integrations for MVC and Web API will add additional information to the generated traces. Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is now enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required and are deprecated. You can remove them from your application when you update the .NET Tracer.
+**Note**: The ASP.NET integration adds instrumentation to any ASP.NET application, which includes Web Forms, MVC, Web API, and other 3rd party web frameworks. Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is now enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required and are deprecated. You can remove them from your application when you update the .NET Tracer.
 
 **Note**: The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
