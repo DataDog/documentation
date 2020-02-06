@@ -8,3 +8,6 @@ monitor_id=<YOUR_MONITOR_ID>
 
 # Delete a monitor
 curl -X DELETE "https://api.datadoghq.com/api/v1/monitor/${monitor_id}?api_key=${api_key}&application_key=${app_key}"
+
+# Force delete a monitor
+curl -X DELETE "https://api.datadoghq.com/api/v1/monitor/${monitor_id}?force=true&api_key=${api_key}&application_key=${app_key}"
