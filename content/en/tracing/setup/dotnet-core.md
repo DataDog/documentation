@@ -40,9 +40,9 @@ Automatic instrumentation captures:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][3].
 
-**Note:**: The .NET Tracer may work on .NET Core 2.0, but it is not longer supported by Microsoft since it reached the end of life in 2018-10-01. .NET Core 3.0 will also reach end of line in 2020-03-03.
+**Note:** The .NET Tracer may work on .NET Core 2.0 and .NET Core 2.2, but these version reached ond of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of line in 2020-03-03.
 
-**Note:** In .NET Core 2.1, there is an issue in versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3 and above. See [this GitHub issue][12] for more details.
+**Note:** Due to several issues in the .NET Core 2.1 runtime (see GitHub issues [dotnet/runtime/issues/10506][13] and [DataDog/dd-trace-dotnet/issues/302][14]), we strongly recommend .NET Core versions 2.1.12 or higher, or .NET Core 3.1.
 
 ### Installation
 
@@ -350,3 +350,6 @@ The following table lists configuration variables that are available only when u
 [10]: #required-environment-variables
 [11]: https://docs.docker.com/engine/reference/builder/#env
 [12]: https://github.com/DataDog/dd-trace-dotnet/releases
+
+[13]: https://github.com/dotnet/runtime/issues/10506
+[14]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-496654196
