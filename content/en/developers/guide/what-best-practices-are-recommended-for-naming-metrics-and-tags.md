@@ -14,7 +14,7 @@ aliases:
 
 Datadog recommends certain best practices for naming metrics and tags.
 
-**Rules and best practices for naming metrics**:
+## Rules and best practices for naming metrics
 
 * Metric names must start with a letter.
 * Can only contain ASCII alphanumerics, underscores, and periods. Other characters are converted to underscores.
@@ -26,7 +26,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 **Note**: Metric names are case sensitive in Datadog.
 
-**Rules and best practices for naming tags**:
+## Rules and best practices for naming tags
 
 * Tags must start with a letter.
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
