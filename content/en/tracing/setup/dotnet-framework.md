@@ -57,7 +57,7 @@ net start w3svc
 
 ### Required Environment Variables
 
-If your application runs in IIS, you may skip the rest of this section.
+If your application runs in IIS, skip the rest of this section.
 
 For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
@@ -111,7 +111,7 @@ To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to 
 
 For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
 
 For more details on platform support for .NET Standard 2.0, see the [.NET Standard documentation][8].
 

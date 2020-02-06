@@ -40,9 +40,9 @@ Automatic instrumentation captures:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][3].
 
-**Note:** The .NET Tracer may work on .NET Core 2.0 and .NET Core 2.2, but these versions reached end of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of life in 2020-03-03.
+**Note:** The .NET Tracer works on .NET Core 2.0 and .NET Core 2.2, but these versions reached their end of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of life in 2020-03-03.
 
-**Note:** Due to several issues in the .NET Core 2.1 runtime, we strongly recommend .NET Core versions 2.1.12 or higher. For .NET Core 2.2, we recommend version 2.2.6 or higher. See [dotnet/runtime/issues/10506][12] and [DataDog/dd-trace-dotnet/issues/302][13] for more details.
+**Note:** Due to several issues in older versions of the .NET Core 2.1 runtime, we strongly recommend .NET Core versions 2.1.12 or higher. For .NET Core 2.2, we recommend version 2.2.6 or higher. See [dotnet/runtime/issues/10506][12] and [DataDog/dd-trace-dotnet/issues/302][13] for more details.
 
 ### Installation
 
@@ -67,7 +67,9 @@ net start w3svc
 
 {{% tab "Linux" %}}
 
-Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][4].
+To use automatic instrumentation on Linux, install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][4].
+
+In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10]] below for details.
 
 **Note:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. You can remove it from your application when you update the .NET Tracer. In place of the NuGet package, a new environment variable (`DD_DOTNET_TRACER_HOME`) was added. See [Required Environment Variables][10]] below for details.
 
@@ -93,17 +95,6 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For Alpine Linux distributions, you may need to install one of the following packages:
-
-```bash
-apk add libc6-compat
-apk add gcompat
-```
-
-**Note:** The .NET Tracer does not currently support newer version of Alpine Linux (3.10 or above).
-
-In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10]] below for details.
-
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [10]: #required-environment-variables
 
@@ -117,7 +108,7 @@ In addition to installing the .NET Tracer package, several environment variables
 
 {{% tab "Windows" %}}
 
-If your application runs in IIS, you may skip the rest of this section.
+If your application runs in IIS, skip the rest of this section.
 
 For applications _not_ running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
@@ -153,7 +144,7 @@ Name                       | Value
 `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
 `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
 
-**Note:** You may need to changed the paths above if you install the .NET Tracer into a non-default path.
+**Note:** Change the paths above if you install the .NET Tracer into a non-default path.
 
 For example, to set the environment variables them from a bash file before starting your application:
 
@@ -216,7 +207,7 @@ To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to 
 
 For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1 and above on Windows and Linux. Manual instrumentation may also work on other platforms that implements .NET Standard 2.0, but these are not tested by Datadog.
+Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
 
 For more details on platform support for .NET Standard 2.0, see the [.NET Standard documentation][8].
 
@@ -355,4 +346,4 @@ The following table lists configuration variables that are available only when u
 
 [11]: https://docs.docker.com/engine/reference/builder/#env
 [12]: https://github.com/dotnet/runtime/issues/10506
-[13]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-496654196
+[13]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-511011364
