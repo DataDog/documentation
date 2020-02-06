@@ -1110,6 +1110,7 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/developers/dogstatsd
 [2]: /ja/developers/metrics/types/?tab=count#metric-type-definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum

@@ -36,4 +36,5 @@ L'activation de l'élection de leader de cette façon garantit la collecte des �
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/agent/cluster_agent/setup
