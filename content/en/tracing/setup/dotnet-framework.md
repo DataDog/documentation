@@ -6,6 +6,10 @@ aliases:
   - /tracing/languages/dotnet
   - /tracing/setup/dotnet
   - /agent/apm/dotnet/
+  - /tracing/dotnet-framework
+  - /tracing/languages/dotnet-framework
+  - /tracing/setup/dotnet-framework
+  - /agent/apm/dotnet-framework/
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
@@ -239,7 +243,7 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/send_traces
 [2]: #integrations
-[3]: /tracing/dotnet-core
+[3]: /tracing/setup/dotnet-core
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace

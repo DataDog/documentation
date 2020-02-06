@@ -1,6 +1,11 @@
 ---
 title: Tracing .NET Core Applications
 kind: documentation
+aliases:
+  - /tracing/dotnet-core
+  - /tracing/languages/dotnet-core
+  - /tracing/setup/dotnet-core
+  - /agent/apm/dotnet-core/
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
@@ -332,7 +337,7 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/send_traces
 [2]: #integrations
-[3]: /tracing/dotnet-framework
+[3]: /tracing/setup/dotnet-framework
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace
