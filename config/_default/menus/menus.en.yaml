@@ -1313,7 +1313,7 @@ main:
     identifier: "npm_installation"
     weight: 1
   - name: "Network Page"
-    url: "network_performance_monitoring/network_table"
+    url: "network_performance_monitoring/network_page"
     parent: "npm"
     identifier: "npm_page"
     weight: 2
