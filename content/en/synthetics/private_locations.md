@@ -42,71 +42,70 @@ Once you created a private location, configuring a Synthetics API test from a pr
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen.
     **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
-3. Launch your worker:
+3. Launch your worker on:
 
-{{< tabs >}}
+    {{< tabs >}}
 
-{{% tab "Docker" %}}
+    {{% tab "Docker" %}}
 
-Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
+    Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
     
-{{% /tab %}}
+    {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+    {{% tab "Kubernetes" %}}
 
-Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
+    Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
 
-```
-kubectl create configmap private-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
-```
+    ```
+    kubectl create configmap private-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
+    ```
 
-Create a `private-worker-pod.yaml` file containing the below and modify `<MY_WORKER_CONFIG_FILE_NAME>.json` with the name of your Private Location JSON config file in the `subPath` section.
+    Create a `private-worker-pod.yaml` file containing the below and modify `<MY_WORKER_CONFIG_FILE_NAME>.json` with the name of your Private Location JSON config file in the `subPath` section.
 
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: private-location-worker
-  annotations:
-    ad.datadoghq.com/datadog-private-location-worker.logs: '[{"source":"private-location-worker","service":"synthetics"}]'
-spec:
-  containers:
-  - name: datadog-private-location-worker
-    image: datadog/synthetics-private-location-worker
-    args: ["-f=json"]
-    volumeMounts:
-    - mountPath: /etc/datadog/synthetics-check-runner.json
-      name: worker-config
-      subPath: <MY_WORKER_CONFIG_FILE_NAME>.json
-    livenessProbe:
-      initialDelaySeconds: 30
-      periodSeconds: 10
-      timeoutSeconds: 2
-      # make sure the date of the last we polled the queue is no more than 2 minutes in the past
-      exec:
-        command:
-          - /bin/sh
-          - -c
-          - "[ $(expr $(cat /tmp/liveness.date) + 120000) -gt $(date +%s%3N) ]"
-  volumes:
-  - name: worker-config
-    configMap:
-      name: private-worker-config
-``` 
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: private-location-worker
+      annotations:
+        ad.datadoghq.com/datadog-private-location-worker.logs: '[{"source":"private-location-worker","service":"synthetics"}]'
+    spec:
+      containers:
+      - name: datadog-private-location-worker
+        image: datadog/synthetics-private-location-worker
+        args: ["-f=json"]
+        volumeMounts:
+        - mountPath: /etc/datadog/synthetics-check-runner.json
+          name: worker-config
+          subPath: <MY_WORKER_CONFIG_FILE_NAME>.json
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 2
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - "[ $(expr $(cat /tmp/liveness.date) + 120000) -gt $(date +%s%3N) ]"
+      volumes:
+      - name: worker-config
+        configMap:
+          name: private-worker-config
+    ``` 
 
-Execute the below to apply the configuration to your pod:
+    Execute the below to apply the configuration to your pod:
 
-```
-kubectl apply -f private-worker-pod.yaml
-```
+    ```
+    kubectl apply -f private-worker-pod.yaml
+    ```
 
-{{% /tab %}}
+    {{% /tab %}}
 
-{{< /tabs >}}
+    {{< /tabs >}}
 
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
@@ -116,10 +115,10 @@ kubectl apply -f private-worker-pod.yaml
 | Datadog US site | `intake.synthetics.datadoghq.com` for version 0.1.6+ ( `api.datadoghq.com/api/` for versions <0.1.5)|
 | Datadog EU site | `api.datadoghq.eu/api/`                                                                             |
 
-    Check if the endpoint corresponding to your Datadog `site` is available from the host runing the worker:
+Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker:
 
-    * For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5) .
-    * For the Datadog EU site:   `curl https://api.datadoghq.eu`.
+* For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
+* For the Datadog EU site:   `curl https://api.datadoghq.eu`.
 
 **Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
 
