@@ -23,10 +23,11 @@ version: '1.0'
 
 Connectez Pivotal Tracker à Datadog pour :
 
-* Consulter et discuter de la progression de vos articles dans votre flux d'événements.
-* Corréler l'achèvement de votre story avec d'autres événements et métriques de votre système.
+- Consulter et discuter de la progression de vos articles dans votre flux d'événements.
+- Corréler l'achèvement de votre story avec d'autres événements et métriques de votre système.
 
 ## Implémentation
+
 ### Installation
 
 Pour afficher les événements Pivotal dans votre flux, entrez le token d'API généré à partir de votre [page de profil][1] Pivotal.
@@ -34,17 +35,21 @@ Pour afficher les événements Pivotal dans votre flux, entrez le token d'API g�
 {{< img src="integrations/pivotal/pivotal_token.png" alt="token Pivotal" popup="true">}}
 
 ## Données collectées
+
 ### Métriques
 
 L'intégration Pivotal Tracker n'inclut aucune métrique.
 
 ### Événements
+
 L'intégration Pivotal Tracker n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Pivotal Tracker n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://www.pivotaltracker.com/signin

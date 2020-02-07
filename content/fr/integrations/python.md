@@ -40,7 +40,7 @@ Consultez la documentation relative à l'[instrumentation de votre application P
 
 ### Collecte de logs
 
-*Disponible à partir des versions > 6.0 de l'Agent*
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 Consultez la documentation relative à la [configuration de la collecte de logs Python][3] pour transmettre vos logs à Datadog.
 

@@ -24,6 +24,7 @@ version: '1.0'
 Connectez-vous à Fastly pour consulter les principales métriques Fastly (telles que la taille de l'en-tête et la couverture de cache) en contexte avec le reste de vos métriques Datadog.
 
 ## Implémentation
+
 ### Installation
 
 Aucune étape d'installation requise.
@@ -56,7 +57,7 @@ Configurez l'endpoint Syslog de façon à transmettre des logs Fastly à votre a
 1. Attribuez un nom au endpoint, p. ex. `Datadog`.
 2. Configurez le format de log de façon à inclure **[le format de log Datadog/Fastly conseillé][2]** en précisant d'abord [votre clé d'API Datadog][3].
 
-    ```
+    ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
@@ -84,6 +85,7 @@ L'intégration Fastly n'inclut aucun événement.
 L'intégration Fastly n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly

@@ -30,7 +30,9 @@ Cloud Run est une plateforme de calcul gérée qui vous permet d'exécuter des 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques et traces ainsi que tous vos logs Cloud Run.
 
 ## Implémentation
+
 ### Collecte de métriques
+
 #### Installation
 
 Si vous utilisez la version entièrement gérée de Cloud Run, il suffit de configurer [l'intégration Google Cloud Platform][1].
@@ -55,17 +57,21 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Run depui
 4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "google_cloud_run" >}}
 
 
 ### Événements
+
 L'intégration Google Cloud Functions n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Google Cloud Functions n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
