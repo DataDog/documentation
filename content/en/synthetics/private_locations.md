@@ -42,20 +42,79 @@ Once you created a private location, configuring a Synthetics API test from a pr
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen.
     **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
-3. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
+3. Launch your worker:
+
+{{< tabs >}}
+
+{{% tab "Docker" %}}
+
+Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
+    
+{{% /tab %}}
 
-    To scale a private location:
-      * Change the `concurrency` parameter value to allow more parallel tests from one worker.
-      * Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
+{{% tab "Kubernetes" %}}
+
+Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
+
+```
+kubectl create configmap private-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
+```
+
+Create a `private-worker-pod.yaml` file containing the below and modify `<MY_WORKER_CONFIG_FILE_NAME>.json` with the name of your Private Location JSON config file in the `subPath` section.
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-location-worker
+  annotations:
+    ad.datadoghq.com/datadog-private-location-worker.logs: '[{"source":"private-location-worker","service":"synthetics"}]'
+spec:
+  containers:
+  - name: datadog-private-location-worker
+    image: datadog/synthetics-private-location-worker
+    args: ["-f=json"]
+    volumeMounts:
+    - mountPath: /etc/datadog/synthetics-check-runner.json
+      name: worker-config
+      subPath: <MY_WORKER_CONFIG_FILE_NAME>.json
+    livenessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 2
+      # make sure the date of the last we polled the queue is no more than 2 minutes in the past
+      exec:
+        command:
+          - /bin/sh
+          - -c
+          - "[ $(expr $(cat /tmp/liveness.date) + 120000) -gt $(date +%s%3N) ]"
+  volumes:
+  - name: worker-config
+    configMap:
+      name: private-worker-config
+``` 
+
+Execute the below to apply the configuration to your pod:
+
+```
+kubectl apply -f private-worker-pod.yaml
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
-    * For the Datadog US site: for version 0.1.6+ use `intake.synthetics.datadoghq.com` ( `api.datadoghq.com/api/` for versions <0.1.5).
-    * For the Datadog EU site: `api.datadoghq.eu/api/`.
+| Datadog site    | Endpoint                                                                                            |
+|-----------------|-----------------------------------------------------------------------------------------------------|
+| Datadog US site | `intake.synthetics.datadoghq.com` for version 0.1.6+ ( `api.datadoghq.com/api/` for versions <0.1.5)|
+| Datadog EU site | `api.datadoghq.eu/api/`                                                                             |
 
     Check if the endpoint corresponding to your Datadog `site` is available from the host runing the worker:
 
@@ -113,6 +172,13 @@ If you are testing an internal URL and need to use an internal DNS server you ca
 ### Special-purpose IPv4 whitelisting
 
 If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][2]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
+
+## Scale your Private Location
+
+To scale a private location:
+
+* Change the `concurrency` parameter value to allow more parallel tests from one worker.
+* Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 ## Security
 
