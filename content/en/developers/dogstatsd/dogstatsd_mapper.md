@@ -118,7 +118,7 @@ dogstatsd_mapper_profiles:
                 tag_key_2: '$2'
 ```
 
-It would send the metric `custom_metric.process.prod.value_1.live` to Datadog with the tags `tag_key_2:value_2`.
+It would send the metric `custom_metric.process.prod.value_1.live` to Datadog with the tag `tag_key_2:value_2`.
 
 ## Further Reading
 
