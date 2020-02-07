@@ -1,0 +1,116 @@
+---
+title: DogStatsD Mapper
+kind: documentation
+description: Convert parts of statsd metric names to tags using mapping rules in DogStatsD.
+further_reading:
+    - link: 'developers/dogstatsd'
+      tag: 'Documentation'
+      text: 'Introduction to DogStatsD'
+    - link: 'developers/libraries'
+      tag: 'Documentation'
+      text: 'Official and Community created API and DogStatsD client libraries'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+      tag: 'GitHub'
+      text: 'DogStatsD source code'
+---
+
+With Agent v7.17+, the DogStatsD Mapper feature allows you to convert parts of a metric name submitted to DogStatsD to tags using mapping rules with wildcard and regex patterns. For example it allows you to transform the metric `airflow.job.duration.<JOB_TYPE>.<JOB_NAME>` into `airflow.job.duration` with two associated tags: `job_type:<JOB_TYPE>` and `job_name:<JOB_NAME>`. To create a mapping rule:
+
+1. [Open your `datadog.yaml` file][1].
+2. Add a [mapping rule configuration block](#mapping-rule) under the `dogstatsd_mapper_profiles` parameter.
+
+## Mapping rule
+
+A mapping rule block have the following layout:
+
+```yaml
+dogstatsd_mapper_profiles:
+    - name: '<PROFILE_NAME>'
+      prefix: '<PROFILE_PREFIX>'
+      mappings:
+          - match: '<METRIC_TO_MATCH>'
+            match_type: '<MATCH_TYPE>'
+            name: '<MAPPED_METRIC_NAME>'
+            tags:
+                '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+```
+
+With the following placeholders:
+
+| Placeholder             |  Definition                                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|  `<PROFILE_NAME>`       | A name to give to your mapping rule profile.                                                                                              |
+| `<PROFILE_PREFIX>`      | The metric name prefix associated to this profile.                                                                                        |
+| `<METRIC_TO_MATCH>`     | The metric name to match. [Wildcard](#wildcard-match-pattern) or [Regex](#regex-match-pattern) are supported.                             |
+| `<MATCH_TYPE>`          | The type of match to apply to the `<METRIC_TO_MATCH>`. Either [`wildcard`](#wildcard-match-pattern) or [`regex`](#regex-match-pattern)    |
+| `<MAPPED_METRIC_NAME>`  | The new metric name to send to Datadog with the tags defined in the same group.                                                           |
+| `<TAG_KEY>`             | The Tag key to associate to the tags collected.                                                                                           |
+| `<TAG_VALUE_TO_EXPAND>` | The tags collected from the `<MATCH_TYPE>` to inline.                                                                                     |
+
+## Wildcard Match Pattern
+
+The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must follow the [metrics naming convention][2] for the pattern to work.
+
+For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
+
+```yaml
+dogstatsd_mapper_profiles:
+  - name: my_custom_metric_profile
+    prefix: custom_metric
+    mappings:
+      - match: 'custom_metric.*'
+        match_type: wildcard
+        name: custom_metric
+        tags:
+          tag_key_1: '$1'
+          tag_key_2: '$2'
+```
+
+It would send the metric `custom_metric` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value_2`.
+
+**Note**: If the incoming metric have already a tag key that matches one defined in the mapping group, no mapping is applied.
+
+## Regex Match Pattern
+
+The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`.
+
+For instance, if you have the metric `custom_metric.value_1.value.with.dots._2` with the following mapping group configuration:
+
+```yaml
+dogstatsd_mapper_profiles:
+    - name: my_custom_metric_profile
+      prefix: custom_metric
+      mappings:
+          - match: 'custom_metric.(\w+)\.(.+)'
+            match_type: regex
+            name: custom_metric
+            tags:
+                tag_key_1: '$1'
+                tag_key_2: '$2'
+```
+
+It would send the metric `custom_metric` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
+
+## Catched group in metric name
+
+For the `regex` and `wildcard` match_type, catched group can be passed as tags value with the associated tag key as see above, but can also be used in the `name` parameter. For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
+
+```yaml
+dogstatsd_mapper_profiles:
+    - name: my_custom_metric_profile
+      prefix: custom_metric
+      mappings:
+          - match: 'custom_metric.*'
+            match_type: wildcard
+            name: 'custom_metric.prod.$1.live'
+            tags:
+                tag_key_2: '$2'
+```
+
+It would send the metric `custom_metric.prod.value_1.live` to Datadog with the tags `tag_key_2:value_2`.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /developers/metrics/#naming-custom-metrics
