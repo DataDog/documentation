@@ -58,15 +58,14 @@ With the following placeholders:
 
 ## Wildcard Match Pattern
 
-The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work.
-Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
+The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
 
 For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
-      prefix: custom_metric
+      prefix: custom_metric.
       mappings:
           - match: 'custom_metric.process.*.*'
             match_type: wildcard
@@ -82,45 +81,44 @@ It would send the metric `custom_metric.process` to Datadog with the tags `tag_k
 
 ## Regex Match Pattern
 
-The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`.
-Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
+The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
 
-For instance, if you have the metric `custom_metric.value_1.value.with.dots._2` with the following mapping group configuration:
+For instance, if you have the metric `custom_metric.process.value_1.value.with.dots._2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
-      prefix: custom_metric
+      prefix: custom_metric.
       mappings:
-          - match: 'custom_metric\.([\w_]+)\.(.+)'
+          - match: 'custom_metric\.process\.([\w_]+)\.(.+)'
             match_type: regex
-            name: custom_metric
+            name: custom_metric.process
             tags:
                 tag_key_1: '$1'
                 tag_key_2: '$2'
 ```
 
-It would send the metric `custom_metric` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
+It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
 
 **Note**: If the incoming metric have already at least one tag, no mapping is applied.
 
 ## Expand group in metric name
 
-For the `regex` and `wildcard` match type, group collected can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
+For the `regex` and `wildcard` match type, group collected can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
-      prefix: custom_metric
+      prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.*'
+          - match: 'custom_metric.process.*.*'
             match_type: wildcard
-            name: 'custom_metric.prod.$1.live'
+            name: 'custom_metric.process.prod.$1.live'
             tags:
                 tag_key_2: '$2'
 ```
 
-It would send the metric `custom_metric.prod.value_1.live` to Datadog with the tags `tag_key_2:value_2`.
+It would send the metric `custom_metric.process.prod.value_1.live` to Datadog with the tags `tag_key_2:value_2`.
 
 ## Further Reading
 
