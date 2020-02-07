@@ -9,6 +9,8 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+
 This article is part of a [series on data security][1].
 
 The Log Management product supports multiple [environments and formats][2], allowing customers the flexibility to submit to Datadog nearly any data they choose. This article describes the main security guarantees and filtering controls available to users when submitting logs to Datadog.
@@ -38,7 +40,7 @@ Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Managem
 
 The following sample configuration can be used with the Datadog Agent to submit logs to a HIPAA-ready endpoint directly (i.e. without a proxy):
 
-```
+```yaml
 logs_enabled: true
 logs_config:
   logs_dd_url: tcp-encrypted-intake.logs.datadoghq.com:10516

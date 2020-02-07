@@ -12,13 +12,13 @@ description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, le
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
 git_integration_title: amazon_ses
 has_logo: true
-integration_title: "Amazon\_SES"
+integration_title: Amazon SES
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ses
 public_title: "Intégration Datadog/Amazon\_SES"
-short_description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, les messages rejetés, et more.'
+short_description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, les messages rejetés, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
@@ -48,7 +48,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon SES de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_ses` dans le préfixe.
+Configurez Amazon SES de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_ses` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 
@@ -79,11 +81,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_ses
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ses/amazon_ses_metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -2,25 +2,28 @@
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
-    {{ partial "header-scripts.html" . }}
+        {{ partial "header-scripts.html" . }}
 
-    <meta charset="utf-8">
-    {{ partial "prefetch.html" . }}
-    {{ partial "preload.html" . }}
-    <title>{{ if isset .Params "integration_title" }}{{ .Params.integration_title }}{{ else }}{{ .Title }}{{ end }}
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
-    {{- partial "noindex.html" . -}}
-    {{- partial "hreflang.html" . -}}
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-    <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css.css") | relURL }}">
-    {{- if ne $.Params.disable_opengraph_meta_tags true -}}
-    {{- partial "meta.html" . -}}
-    {{- end -}}
-
-    <script src="{{ (index $.Site.Data.manifest "lang-redirects.js") | relURL }}"></script>
+        <script src="{{ (index $.Site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
+        
+        <meta charset="utf-8">
+        {{ partial "prefetch.html" . }}
+        {{ partial "preload.html" . }}
+        <title>{{ if isset .Params "integration_title" }}{{ .Params.integration_title }}{{ else }}{{ .Title }}{{ end }}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
+        {{- partial "canonical.html" . -}}
+        {{- partial "noindex.html" . -}}
+        {{- partial "hreflang.html" . -}}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
+        <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css.css") | relURL }}">
+        {{- if ne $.Params.disable_opengraph_meta_tags true -}}
+        {{- partial "meta.html" . -}}
+        {{- end -}}
+  
+        <script src="{{ (index $.Site.Data.manifest "lang-redirects.js") | relURL }}"></script>
 </head>
 
 {{ $dot := . }}
@@ -88,11 +91,13 @@
                     {{ range $i, $tile := $nav_section }}
 
                         {{ range $i, $section := $tile }}
-                            <div class="col-12">
-                                <h3 class="text-center mb-2">{{ $section.name }}</h3>
-                            </div>
-
-                            {{ range $i, $navtile := $section.navtiles }}
+                            {{ if $section.name}}
+                                <div class="col-12">
+                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                                </div>
+                            {{ end }}
+                            
+                            {{ range $i, $navtile := $section.navtiles }} 
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
                                         <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="{{ $navtile.link | absLangURL }}">
                                                 {{ partial "svg" (dict "context" $dot "src" $navtile.icon "color" "#632CA6" )}}
@@ -109,9 +114,6 @@
         {{ end }}
 
     </main>
-
-
-    {{ partial "algolia.html" . }}
 
     {{ partial "footer/footer.html" . }}
 

@@ -1,7 +1,6 @@
 ---
 title: Create a Dashboard to track and correlate APM metrics
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,9 +18,10 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _4 minutes to complete_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
 Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
@@ -37,13 +37,13 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 2. **Find the Total Requests Graph** and click on the `export` button on the top right to choose `Export to Dashboard`. **Click `New Timeboard`**.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2"  style="width:90%;">}}
 
 3. **Click on `View Dashboard`** in the success message.
 
     In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows the entire throughput of this service as well as its total amount of errors.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3"  style="width:90%;">}}
 
     **Note**: You can click on the pencil icon to edit this graph and see what precise metrics are being used.
 
@@ -59,7 +59,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
     | `from`    | `service:web-store`           | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
     | `sum by`  | `http.status_code`            | Breaking down the chart by http status codes.                                                                        |
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4"  style="width:90%;">}}
 
     This specific breakdown is just one example of the many can choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
 
@@ -81,7 +81,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
         | `metric`  | `runtime.ruby.thread_count` | Thread count taken from the Ruby runtime metrics.                                                                    |
         | `from`    | `service:web-store`         | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
 
-        {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true" responsive="true" style="width:90%;">}}
+        {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true"  style="width:90%;">}}
 
     This setup can show whether a spike in latency is assocaited with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
 
@@ -89,7 +89,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the App Analytics screen, export the graph to the dashboard and view it there:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6"  style="width:90%;">}}
 
 8. **Return to your dashboard**.
 
@@ -99,7 +99,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 9. **Click on the `Search Events or Logs`** button and add search for a relevant event stream. **Note**: in this example Ansible is used, your [event stream][5] might be different.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1"  style="width:90%;">}}
 
     Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
@@ -109,27 +109,26 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of opeation.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true"  style="width:90%;">}}
 
     You can now add this template variable to each of the graphs:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="dashboard 9" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="dashboard 9"  style="width:90%;">}}
 
     When you change the value in the control panel, all values update in the dashboard:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true"  style="width:90%;">}}
 
     Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can easily turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
-
+    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /graphing/widgets/timeseries
+[2]: /dashboards/widgets/timeseries
 [3]: /tracing/guide/metrics_namespace
 [4]: https://app.datadoghq.com/apm/search/analytics
-[5]: https://docs.datadoghq.com/graphing/event_stream
+[5]: /events

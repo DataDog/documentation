@@ -13,6 +13,7 @@ further_reading:
   text: "Custom Integrations"
 aliases:
   - /agent/kubernetes/apm
+  - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -20,11 +21,12 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
 ## Configure RBAC permissions
+
 If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account.
 
 Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 
-```
+```shell
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
@@ -33,12 +35,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Create manifest
+
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
 Remember to encode your API key using `base64` if you are using secrets:
 
-```
-echo -n <YOUR_API_KEY> | base64
+```shell
+echo -n <DATADOG_API_KEY> | base64
 ```
 
 **Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
@@ -96,8 +99,8 @@ spec:
         env:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
-          ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
-          - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
+          ## - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}
+          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
@@ -158,10 +161,11 @@ spec:
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
-Replace `<YOUR_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
+Replace `<DATADOG_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
 
 Deploy the DaemonSet with the command:
-```
+
+```shell
 kubectl create -f datadog-agent.yaml
 ```
 
@@ -171,13 +175,13 @@ kubectl create -f datadog-agent.yaml
 
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
-```
+```shell
 kubectl get daemonset
 ```
 
 If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
 
-```
+```shell
 NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
 datadog-agent   2         2         2         2            2           <none>          16h
 ```
@@ -229,7 +233,6 @@ To enable [Log collection][12] with your DaemonSet:
     ```
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
-
 
 The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
 
@@ -321,7 +324,7 @@ Since Agent v6.14+, the Agent collects logs for all containers (running or stopp
 
 To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-```
+```text
 (...)
       env:
         (...)
@@ -332,7 +335,7 @@ To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCA
 
 Then, forward the port of the Agent to the host.
 
-```
+```text
 (...)
       ports:
         (...)
@@ -345,7 +348,7 @@ Then, forward the port of the Agent to the host.
 
 Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
 
-```
+```text
 apiVersion: apps/v1
 kind: Deployment
 ...
@@ -362,7 +365,7 @@ kind: Deployment
 
 Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -374,6 +377,8 @@ tracer.configure(
 
 Refer to the [language-specific APM instrumentation docs][14] for more examples.
 
+**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
+
 ### Process Collection
 
 See [Process collection for Kubernetes][15].
@@ -382,7 +387,7 @@ See [Process collection for Kubernetes][15].
 
 To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-```
+```text
 (...)
       env:
         (...)
@@ -417,5 +422,5 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [12]: /logs
 [13]: /agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /tracing/setup
-[15]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[15]: /infrastructure/process/?tab=kubernetes#installation
 [16]: /agent/kubernetes/dogstatsd

@@ -59,7 +59,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
 * the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-[1]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/visualization/service
 [3]: /tracing/visualization/resource
 {{% /tab %}}
@@ -79,9 +79,9 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
-[1]: /tracing/advanced/search/#search-bar
-[2]: /tracing/advanced/search/#facet-search
-[3]: /tracing/advanced/search/#numerical-values
+[1]: /tracing/app_analytics/search/#search-bar
+[2]: /tracing/app_analytics/search/#facet-search
+[3]: /tracing/app_analytics/search/#numerical-values
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -92,6 +92,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 **Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the [Services page][4]).
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/metric

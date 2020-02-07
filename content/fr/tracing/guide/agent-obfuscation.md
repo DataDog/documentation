@@ -2,7 +2,6 @@
 title: Obfuscation des traces de l'Agent
 kind: guide
 private: true
-disable_toc: true
 ---
 L'obfuscation des [traces][1] de l'Agent est désactivée par défaut. Activez-la dans votre fichier de configuration `datadog.yaml` pour obfusquer toutes les informations associées à vos traces.
 
@@ -15,13 +14,12 @@ Ces options ne fonctionnent actuellement qu'avec les services suivants :
 * `http`
 * `remove_stack_traces`
 
-
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
 S'applique aux [spans][1] de type `mongodb`, plus précisément aux spans de tag `mongodb.query` : 
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -38,11 +36,11 @@ apm_config:
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
-{{% tab "ElasticSearch" %}}
+{{% tab "Elasticsearch" %}}
 
 S'applique aux [spans][1] de type `elasticsearch`, plus précisément aux tags de span `elasticsearch.body` :
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -63,7 +61,7 @@ apm_config:
 
 S'applique aux [spans][1] de type `redis`, plus précisément aux tags de span `redis.raw_command` :
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -73,13 +71,14 @@ apm_config:
     redis:
       enabled: true
 ```
+
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
 S'applique aux [spans][1] de type `memcached`, plus précisément aux tags de span `memcached.command` :
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -89,13 +88,14 @@ apm_config:
     memcached:
       enabled: true
 ```
+
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "HTTP" %}}
 
 Règles d'obfuscation HTTP pour les métadonnées `http.url` dans les [spans][1] de type `http` :
 
-```
+```yaml
 apm_config:
   enabled: true
 
@@ -114,7 +114,8 @@ apm_config:
 {{% tab "Traces de pile" %}}
 
 Définissez le paramètre `remove_stack_traces` sur true afin de supprimer les traces de pile et de les remplacer par le caractère « ? ».
-```
+
+```yaml
 apm_config:
   enabled: true
 

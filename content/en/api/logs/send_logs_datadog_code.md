@@ -1,7 +1,7 @@
 ---
 title: Send Logs over HTTP
 type: apicode
-order: 22.1
+order: 23.1
 external_redirect: /api/#send-logs-over-http
 ---
 

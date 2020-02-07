@@ -9,6 +9,7 @@ kind: integration
 name: sidekiq
 public_title: Datadog-Sidekiq Integration
 short_description: Gather your logs from Sidekiq and send them to Datadog.
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sidekiq.md"]
 ---
 
 ## Overview
@@ -18,12 +19,13 @@ Connect Sidekiq logs to Datadog in order to track requests per second and bytes 
 This integration supports access logs as well as error logs.
 
 ## Setup
-### Installation
 
+### Installation
 
 The Sidekiq integration is included in the [Datadog Agent][1] package, so you don't need to install anything else on your host.
 
 ### Configuration
+
 #### Log Collection
 
 **Available for Agent >6.0**

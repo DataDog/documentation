@@ -1,7 +1,7 @@
 ---
 title: Get all application keys
 type: apicontent
-order: 21.06
+order: 22.06
 external_redirect: /api/#get-all-application-keys
 ---
 

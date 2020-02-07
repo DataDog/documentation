@@ -102,6 +102,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [9]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
 [10]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
 [11]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
-
-
-{{< get-dependencies >}}

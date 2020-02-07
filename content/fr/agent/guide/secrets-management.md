@@ -45,7 +45,7 @@ Cet exemple compte deux secrets : `db_prod_user` et `db_prod_password`. Il s'ag
 
 Tous les caractères peuvent être ajoutés entre les crochets, tant que la configuration YAML est valide. Cela signifie que les guillemets doivent être échappés. Par exemple :
 
-```
+```text
 "ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
@@ -53,7 +53,7 @@ Dans l'exemple ci-dessus, le handle de secret est la chaîne `{"env": "prod", "c
 
 Il n'est pas nécessaire d'échapper les caractères `[` et `]` situés à l'intérieur. Par exemple :
 
-```
+```text
 “ENC[user_array[1234]]”
 ```
 
@@ -61,7 +61,7 @@ Dans l'exemple ci-dessus, le handle de secret est la chaîne `user_array[1234]`.
 
 Les secrets sont résolus après la résolution des template variables [Autodiscovery][1], ce qui signifie que vous pouvez les utiliser dans un handle de secret. Par exemple :
 
-```
+```yaml
 instances:
   - server: %%host%%
     user: ENC[db_prod_user_%%host%%]
@@ -89,14 +89,13 @@ L'utilisation d'un exécutable fourni par l'utilisateur présent un certain nomb
 
 Définissez la variable suivante dans `datadog.yaml` :
 
-```
+```text
 secret_backend_command: <CHEMIN_EXÉCUTABLE>
 ```
 
 #### Exigences de sécurité de l'Agent
 
 L'Agent lance l'exécutable `secret_backend_command` en tant que sous-processus. Les modèles d'exécution Linux et Windows diffèrent.
-
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -113,7 +112,7 @@ Sur Linux, l'exécutable défini en tant que `secret_backend_command` doit respe
 Sur Windows, l'exécutable défini en tant que `secret_backend_command` doit respecter les règles suivantes :
 
 * Il doit prévoir des droits de lecture et d'exécution pour `ddagentuser` (l'utilisateur servant à exécuter l'Agent).
-* Il ne doit avoir aucun droit pour un utilisateur ou un groupe, sauf `Administrator` ou `LocalSystem`.
+* Il ne doit avoir aucun droit pour un utilisateur ou un groupe, à l'exception du groupe `Administrator`, du compte Local System intégré ou du contexte de l'utilisateur de l'Agent (par défaut, `ddagentuser`).
 * Il doit être une application Win32 valide exécutable par l'Agent.
 
 {{% /tab %}}
@@ -133,11 +132,8 @@ Si le code de sortie de l'exécutable est différent de `0`, la configuration d'
 
 L'exécutable reçoit une charge utile JSON depuis l'entrée standard, qui contient la liste des secrets à récupérer :
 
-```
-{
-  "version": "1.0",
-  "secrets": ["secret1", "secret2"]
-}
+```json
+{"version": "1.0", "secrets": ["secret1", "secret2"]}
 ```
 
 * `version` : chaîne contenant la version du format (actuellement 1.0).
@@ -147,16 +143,10 @@ L'exécutable reçoit une charge utile JSON depuis l'entrée standard, qui conti
 
 L'exécutable est censé générer une charge utile JSON dans la sortie standard, avec les secrets récupérés :
 
-```
+```json
 {
-  "secret1": {
-    "value": "valeur_secret",
-    "error": null
-  },
-  "secret2": {
-    "value": null,
-    "error": "impossible de récupérer le secret"
-  }
+  "secret1": {"value": "secret_value", "error": null},
+  "secret2": {"value": null, "error": "impossible de récupérer le secret"}
 }
 ```
 
@@ -258,7 +248,8 @@ Secrets handle decrypted:
 ```
 
 Exemple sous Windows (en tant qu'administrateur Powershell)  :
-```
+
+```powershell
 PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
@@ -267,7 +258,6 @@ Check Rights: OK, the executable has the correct rights
 Rights Detail:
 Acl list:
 stdout:
-
 
 Path   : Microsoft.PowerShell.Core\FileSystem::C:\path\to\you\executable.exe
 Owner  : BUILTIN\Administrators
@@ -365,7 +355,7 @@ Pour ce faire, suivez ces étapes :
   $user.SetPassword("a_new_password")
   ```
 
-3. Mettez à jour le mot de passe à utiliser par le service `DatadogAgent` dans le gestionnaire de contrôle de service. Dans Powershell, exécutez la commande suivante :
+3. Mettez à jour le mot de passe à utiliser par le service `DatadogAgent` dans le gestionnaire de contrôle des services. Dans Powershell, exécutez la commande suivante :
   ```powershell
   sc.exe config DatadogAgent password= "a_new_password"
   ```
@@ -374,9 +364,9 @@ Vous pouvez désormais vous connecter en tant que `ddagentuser` pour tester votr
 
 Exemple d'utilisation :
 
-```
-.\secrets_tester.ps1 -user ddagentuser -password a_new_password -executable C:\chemin\vers\votre\executable.exe -payload '{"version": "1.0", "secrets": ["secret_ID_1", "secret_ID_2"]}'
-Creating new Process with C:\chemin\vers\votre\executable.exe
+```text
+.\secrets_tester.ps1 -user ddagentuser -password a_new_password -executable C:\chemin\vers\votre\exécutable.exe -payload '{"version": "1.0", "secrets": ["secret_ID_1", "secret_ID_2"]}'
+Creating new Process with C:\chemin\vers\votre\exécutable.exe
 Waiting a second for the process to be up and running
 Writing the payload to Stdin
 Waiting a second so the process can fetch the secrets
@@ -401,5 +391,5 @@ Si votre fichier `datadog.yaml` contient des secrets et que l'Agent refuse de d�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/autodiscovery
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

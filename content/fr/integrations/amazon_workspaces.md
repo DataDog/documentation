@@ -7,17 +7,17 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et more.'
+description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
 git_integration_title: amazon_workspaces
 has_logo: true
-integration_title: "AWS\_Workspaces"
+integration_title: AWS Workspaces
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_workspaces
 public_title: "Intégration Datadog/AWS\_Workspaces"
-short_description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains, and more.'
+short_description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.'
 version: '1.0'
 ---
 ## Présentation
@@ -40,7 +40,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 #### Activer le logging
 
-Configurez Amazon WorkSpaces de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch. Assurez-vous d'inclure `amazon_workspace` dans le préfixe.
+Configurez Amazon WorkSpaces de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_workspace` est défini en tant que *Target prefix*.
 
 #### Envoyer des logs à Datadog
 
@@ -69,11 +71,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-workspaces
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_workspaces/amazon_workspaces_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

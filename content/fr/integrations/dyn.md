@@ -17,7 +17,7 @@ public_title: Intégration Datadog/Dyn
 short_description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
 version: '1.0'
 ---
-{{< img src="integrations/dyn/dyn_overview.png" alt="Présentation Dyn" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_overview.png" alt="Présentation Dyn" popup="true">}}
 
 ## Présentation
 
@@ -27,26 +27,26 @@ Surveillez vos zones grâce aux événements et graphiques avancés.
 * Analysez le nombre de requêtes par seconde par zone ou type d'enregistrement grâce aux outils graphiques avancés.
 
 ## Implémentation
-### Configuration 
+### Configuration
 
 Si vous n'avez pas encore créé un utilisateur `datadog` en lecture seule sur Dyn, [connectez-vous à Dyn][1] et suivez les instructions suivantes :
 
 1. Choisissez un nom d'utilisateur et un mot de passe :
-{{< img src="integrations/dyn/create_dyn_user.png" alt="Créer un utilisateur dyn" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/create_dyn_user.png" alt="Créer un utilisateur dyn" style="width:75%;" popup="true">}}
 
-2. Sélectionnez le groupe d'utilisateurs **READONLY** : 
-{{< img src="integrations/dyn/choose_dyn_group.png" alt="Choisir un groupe dyn" style="width:75%;" responsive="true" popup="true">}}
+2. Sélectionnez le groupe d'utilisateurs **READONLY** :
+{{< img src="integrations/dyn/choose_dyn_group.png" alt="Choisir un groupe dyn" style="width:75%;" popup="true">}}
 
 3. Cliquez sur **Add New User**.
 
 Une fois votre utilisateur Datadog en lecture seule créé :
 
 1. Configurez votre [intégration Dyn][2] dans l'app Datadog :
-{{< img src="integrations/dyn/dyn_integration.png" alt="Intégration Dyn" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_integration.png" alt="Intégration Dyn" style="width:75%;" popup="true">}}
 
 2. Sélectionnez les zones (*Zone notes*) à partir desquelles vous souhaitez recueillir des événements et des métriques `dyn.changes` :<br>
 
-{{< img src="integrations/dyn/dyn_zone.png" alt="Zone Dyn" style="width:75%;" responsive="true" popup="true">}}
+{{< img src="integrations/dyn/dyn_zone.png" alt="Zone Dyn" style="width:75%;" popup="true">}}
 
 Les métriques de requêtes par seconde de DYN sont recueillies par défaut pour toutes les zones.
 
@@ -74,6 +74,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [2]: https://app.datadoghq.com/account/settings#integrations/dyn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/dyn/dyn_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

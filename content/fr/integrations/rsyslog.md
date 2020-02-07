@@ -12,6 +12,8 @@ aliases:
 has_logo: true
 integration_title: rsyslog
 is_public: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md'
 public_title: Intégration Datadog/Rsyslog
 supported_os:
   - linux
@@ -20,7 +22,8 @@ supported_os:
 
 Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 
-## Implémentation
+## Configuration
+
 ### Collecte de logs
 
 #### Rsyslog version >= 8
@@ -30,14 +33,14 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez surveiller des fichiers de log spécifiques, vous devez activer le module imfile en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
-    ```
+    ```conf
     module(load="imfile" PollingInterval="10") #needs to be done just once
     ```
 
 2. Créez un fichier `/etc/rsyslog.d/datadog.conf`.
 3. Définissez les fichiers de log à surveiller et configurez l'endpoint de destination. Ajoutez ce qui suit au fichier `/etc/rsyslog.d/datadog.conf`.
 
-    ```
+    ```conf
     ## For each file to send
     input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
 
@@ -61,7 +64,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
-        ```
+        ```conf
         ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
@@ -87,26 +90,29 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     Pour définir la source, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
+
     Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+
     ```
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
+
     N'oubliez pas d'effectuer un redémarrage :
+
     ```
     sudo service rsyslog restart
     ```
-
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
@@ -120,7 +126,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 2. Créez un fichier `/etc/rsyslog.d/datadog.conf`.
 3. Définissez les fichiers de log à surveiller et configurez l'endpoint de destination. Ajoutez ce qui suit au fichier `/etc/rsyslog.d/datadog.conf`.
 
-    ```
+    ```conf
     ## For each file to send
     input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
 
@@ -144,7 +150,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
-        ```
+        ```conf
         ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
@@ -169,26 +175,29 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     Pour définir la source, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
+
     Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+
     ```
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
+
     N'oubliez pas d'effectuer un redémarrage :
+
     ```
     sudo service rsyslog restart
     ```
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -200,7 +209,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
-    ```
+    ```conf
     $ModLoad imfile
     $InputFilePollInterval 10
     $PrivDropToGroup adm
@@ -210,7 +219,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 2. Créez un fichier `/etc/rsyslog.d/datadog.conf`.
 3. Définissez les fichiers de log à surveiller et configurez l'endpoint de destination. Ajoutez ce qui suit au fichier `/etc/rsyslog.d/datadog.conf`.
 
-    ```
+    ```conf
     ## Input for FILE1
     $InputFileName /<PATH_TO_FILE1>
     $InputFileTag <APP_NAME_OF_FILE1>
@@ -236,7 +245,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
-        ```
+        ```conf
         #Define the destination for the logs
 
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
@@ -263,33 +272,35 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     Pour définir la source, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
     Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+
     ```
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
+
     N'oubliez pas d'effectuer un redémarrage :
+
     ```
     sudo service rsyslog restart
     ```
-
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
-    ```
+    ```conf
     $ModLoad imfile
     $InputFilePollInterval 10
     $PrivDropToGroup adm
@@ -299,7 +310,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 2. Créez un fichier `/etc/rsyslog.d/datadog.conf`.
 3. Définissez les fichiers de log à surveiller et configurez l'endpoint de destination. Ajoutez ce qui suit au fichier `/etc/rsyslog.d/datadog.conf`.
 
-    ```
+    ```conf
     ## Input for FILE1
     $InputFileName /<PATH_TO_FILE1>
     $InputFileTag <APP_NAME_OF_FILE1>
@@ -325,7 +336,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
-        ```
+        ```conf
         #Define the destination for the logs
 
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
@@ -352,26 +363,29 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
     Pour définir la source, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
+
     Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
 
-    ```
+    ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+
     ```
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
+
     N'oubliez pas d'effectuer un redémarrage :
+
     ```
     sudo service rsyslog restart
     ```
-
 
 {{% /tab %}}
 {{< /tabs >}}

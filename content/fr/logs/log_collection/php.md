@@ -28,6 +28,7 @@ further_reading:
 Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les transmettre à Datadog. Vous avez la possibilité de choisir parmi les bibliothèques de journalisation suivantes : Monolog, Zend-Log ou Symfonie.
 
 ## Implémentation
+
 ### Installation
 
 {{< tabs >}}
@@ -35,7 +36,7 @@ Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les trans
 
 Utilisez Composer pour ajouter Monolog en tant que dépendance :
 
-```
+```text
 composer require "monolog/monolog"
 ```
 
@@ -60,7 +61,7 @@ Vous pouvez également l'installer manuellement :
 
 Zend-log fait partie du framework Zend. Utilisez [Composer][1] pour ajouter Zend-Log :
 
-```
+```text
 composer require "zendframework/zend-log"
 ```
 
@@ -139,11 +140,10 @@ Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer 
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
 
-
   // Créer un logger
   $logger = new Logger();
 
-  // Créer un service d'écriture
+  // Créer un writer
   $writer = new Stream('file://' . __DIR__ . '/application-json.log');
 
   // Créer un formateur JSON
@@ -186,18 +186,11 @@ init_config:
 
 instances:
 
-## Section Log
+## Section logs
 logs:
 
-    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
-    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
-    ##   service (obligatoire) : nom du service propriétaire du log.
-    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
-    ##   sourcecategory (facultatif) : attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
-    ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
-
   - type: file
-    path: /chemin/vers/votre/php/application-json.log
+    path: "/chemin/vers/votre/php/application-json.log"
     service: php
     source: php
     sourcecategory: sourcecode
@@ -272,8 +265,6 @@ Vous pouvez utiliser le code suivant si vous le souhaitez :
 ```
 
 Si vous souhaitez rédiger votre propre code, [consultez la documentation relative à Zend][1] (en anglais).
-
-
 
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
@@ -355,6 +346,7 @@ Ajoutez un processeur de session pour inclure des données de contexte variables
     ```
 
 2. Connectez le processeur à Symfony :
+
   ```yaml
    services:
       monolog.processor.session_request:
@@ -364,9 +356,7 @@ Ajoutez un processeur de session pour inclure des données de contexte variables
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. [Transférez le fichier JSON généré à Datadog.][1]
-
-
+3. [Transférez le fichier JSON généré à Datadog][1].
 
 [1]: /fr/logs/log_collection
 {{% /tab %}}
@@ -382,7 +372,6 @@ Monolog est intégré aux frameworks suivants :
 * [Silex][5]
 * [Lumen][6]
 * [CakePHP][7]
-
 
 Intégrez Monolog à votre framework, puis configurez votre logger :
 
@@ -422,7 +411,6 @@ monolog:
 #            arguments:  [ @session ]
 #            tags:
 #               - { name: monolog.processor, method: processRecord }
-
 
     json_formatter:
         class: Monolog\Formatter\JsonFormatter
@@ -509,11 +497,7 @@ Commencez par ajouter la dépendance suivante au fichier `composer.json`,
 puis exécutez `composer update`.
 
 ```json
-{
-    "require": {
-        "cakephp/monolog": "*"
-    }
-}
+{"require": {"cakephp/monolog": "*"}}
 ```
 
 Créez ensuite un fichier de configuration de journalisation (p. ex., `app/Config/log.php`) et ajoutez-y votre `app/Config/bootstrap.php` :
@@ -526,13 +510,13 @@ Créez ensuite un fichier de configuration de journalisation (p. ex., `app/Conf
 
 Voici un exemple de configuration basique permettant de reproduire les fonctionnalités de Cake avec Monolog :
 
-```
+```text
 CakePlugin::load('Monolog');
 ```
 
 Enfin, enregistrez les logs dans un fichier :
 
-```
+```text
 CakeLog::config('debug', array(
   'engine' => 'Monolog.Monolog',
   'channel' => 'app',
@@ -546,7 +530,6 @@ CakeLog::config('debug', array(
   )
 ));
 ```
-
 
 ## Pour aller plus loin
 

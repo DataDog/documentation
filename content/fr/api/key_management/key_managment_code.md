@@ -1,6 +1,6 @@
 ---
 title: Key Management
 type: apicode
-order: 21
+order: 22
 external_redirect: "/api/#gestion-des-cles"
 ---

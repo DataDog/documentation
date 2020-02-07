@@ -39,7 +39,7 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 * Breakdown of time spent by service/type
 * [Apdex score][2] (web services only)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data."  style="width:90%;">}}
 
 ### Goal of Sampling
 
@@ -49,7 +49,7 @@ The goal of sampling is to *keep* the traces that matter the most:
 * Low QPS Services
 * Representative variety set of traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level."  style="width:90%;">}}
 
 ### Sampling Rules
 
@@ -109,6 +109,7 @@ public class MyClass {
     }
 }
 ```
+
 Manually drop a trace:
 
 ```java
@@ -128,7 +129,6 @@ public class MyClass {
     }
 }
 ```
-
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -174,6 +174,7 @@ Datadog.tracer.trace(name, options) do |span|
   # method impl follows
 end
 ```
+
 Manually drop a trace:
 
 ```ruby
@@ -183,6 +184,7 @@ Datadog.tracer.trace(name, options) do |span|
   # method impl follows
 end
 ```
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -250,6 +252,7 @@ span.setTag(tags.MANUAL_KEEP)
 //method impl follows
 
 ```
+
 Manually drop a trace:
 
 ```js
@@ -281,6 +284,7 @@ using(var scope = Tracer.Instance.StartActive(operationName))
     //method impl follows
 }
 ```
+
 Manually drop a trace:
 
 ```cs
@@ -345,6 +349,7 @@ auto span = tracer->StartSpan("operation_name");
 span->SetTag(datadog::tags::manual_keep, {});
 //method impl follows
 ```
+
 Manually drop a trace:
 
 ```cpp
@@ -365,44 +370,15 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 
 Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
 
-
 ## Trace Storage
 
-Individual [traces][1] are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Individual traces are stored for 15 days. This means that all **sampled** traces are retained for a period of 15 days and at the end of the 15th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>` (`https://app.datadoghq.eu/apm/trace/<TRACE_ID>` for Datadog EU site). This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
-| Retention bucket       | % of stream kept |
-|:-----------------------|:-----------------|
-| 6 hours                | 100%             |
-| Current day (UTC time) | 25%              |
-| 6 days                 | 10%              |
-| 6 months               | 1%               |
-
-**Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the above stated percent of traces over time.
-
-That is to say, on a given day you would see in the UI:
-
-* **100%** of sampled traces from the last six hours
-* **25%** of those from the previous hours of the current calendar day (starting at `00:00 UTC`)
-* **10%** from the previous six calendar days
-* **1%** of those from the previous six months (starting from the first day of the month six months ago)
-* **0%** of traces older than six months
-
-For example, at `9:00am UTC Wed, 12/20` you would see:
-
-* **100%** of traces sampled on `Wed 12/20 03:00 - 09:00`
-* **25%** of traces sampled on `Wed 12/20 00:00` - `Wed 12/20 02:59`
-* **10%** of traces sampled on `Thurs 12/14 00:00` - `Tue 12/19 23:59`
-* **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
-* **0%** of traces before `7/1 00:00`
-
-Once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
-
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" responsive="true" >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID"  >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

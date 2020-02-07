@@ -6,6 +6,7 @@ newhlevel: true
 is_public: true
 public_title: Datadog-CloudCheckr Integration
 short_description: "Help cloudcheckr help you: give it per-instance memory metrics from Datadog"
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md"]
 categories:
 - cloud
 - configuration & deployment

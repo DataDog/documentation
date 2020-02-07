@@ -25,7 +25,6 @@ Les métriques, les événements et les checks de service recueillis par les che
 
 Cette fonction est actuellement prise en charge sur Kubernetes pour les versions 6.9.0+ de l'Agent et les versions 1.2.0+ de l'Agent de cluster.
 
-
 ## Configuration
 
 ### Configuration de l'Agent de cluster
@@ -50,14 +49,13 @@ Notez que les hostnames ne sont pas liés aux métriques de checks de cluster, c
 
 Consultez le [guide relatif à l'exécution de checks de cluster avec Autodiscovery][5] pour obtenir plus d'informations sur la configuration et le dépannage de cette fonctionnalité.
 
-
 ### Configuration de l'Agent
 
 Activez le fournisseur de configuration `clusterchecks` dans l'Agent Datadog exécuté sur le **Host**. Pour ce faire, deux solutions s'offrent à vous :
 
 - Vous pouvez définir la variable d'environnement `DD_EXTRA_CONFIG_PROVIDERS`. Si plusieurs valeurs doivent être définies, séparez-les par des espaces dans la chaîne :
 
-```
+```text
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
 ```
 
@@ -105,7 +103,7 @@ Le champ `cluster_check` informe l'Agent de cluster qu'il doit déléguer ce che
 Vous pouvez annoter des services avec la syntaxe suivante, qui est similaire à la syntaxe pour l'[annotation de pods Kubernetes][9] :
 
 ```yaml
-  ad.datadoghq.com/service.check_names: '[<NOM_CHECK>]'
+  ad.datadoghq.com/service.check_names: '[<NOM_INTÉGRATION>]'
   ad.datadoghq.com/service.init_configs: '[<CONFIG_INIT>]'
   ad.datadoghq.com/service.instances: '[<CONFIG_INSTANCE>]'
 ```
@@ -152,7 +150,7 @@ Les checks de cluster étant distribués par nature, leur dépannage est un peu 
 
 Lorsque l'élection de leader est activée, seul le leader distribue les configurations de check de cluster aux Agents de nœud. Le nom du leader est disponible dans la ConfigMap `datadog-leader-election` :
 
-```
+```yaml
 # kubectl get cm datadog-leader-election -o yaml
 apiVersion: v1
 kind: ConfigMap
@@ -167,7 +165,7 @@ Ici, le pod leader est `cluster-agent-rhttz`. S'il est supprimé ou ne répond p
 
 Pour garantir la récupération d'une configuration (statique ou identifiée avec Autodiscovery) par l'Agent de cluster, utilisez la commande `configcheck` dans l'Agent de cluster leader :
 
-```
+```text
 # kubectl exec <NOM_POD_AGENT_CLUSTER> agent configcheck
 ...
 === http_check cluster check ===
@@ -191,10 +189,10 @@ Auto-discovery IDs:
 
 La commande `clusterchecks` vous permet d'inspecter l'état de la logique de distribution, notamment :
 
-- les Agents de nœud qui communiquent activement avec l'Agent de cluster
-- les checks distribués sur chaque nœud
+* les Agents de nœud qui communiquent activement avec l'Agent de cluster
+* les checks distribués sur chaque nœud
 
-```
+```text
 # kubectl exec <NOM_POD_AGENT_CLUSTER> agent clusterchecks
 
 === 3 node-agents reporting ===
@@ -231,7 +229,7 @@ Dans le cas présent, cette configuration est distribuée au nœud `default-pool
 
 La commande `configcheck` de l'Agent doit afficher l'instance, avec la source `cluster-checks` :
 
-```
+```text
 # kubectl exec <NOM_POD_AGENT_NOEUD> agent configcheck
 ...
 === http_check check ===
@@ -257,7 +255,7 @@ L'ID d'instance correspond à l'ID précédent.
 
 La commande `status` de l'Agent doit indiquer que l'instance de check est en cours d'exécution et envoie correctement des informations.
 
-```
+```text
 # kubectl exec <NOM_POD_AGENT_NOEUD> agent status
 ...
     http_check (3.1.1)

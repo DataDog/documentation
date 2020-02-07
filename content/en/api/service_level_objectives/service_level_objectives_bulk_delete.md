@@ -1,7 +1,7 @@
 ---
 title: Bulk Delete SLO Timeframes
 type: apicontent
-order: 29.06
+order: 30.08
 external_redirect: /api/#bulk-delete-slo-timeframes
 ---
 

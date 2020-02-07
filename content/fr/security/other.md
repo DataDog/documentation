@@ -36,8 +36,8 @@ En raison de leur nature sensible, des protocoles de sécurité supplémentaires
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/security
-[2]: /fr/graphing/infrastructure/process
-[3]: /fr/graphing/infrastructure/process/#process-arguments-scrubbing
+[2]: /fr/infrastructure/process
+[3]: /fr/infrastructure/process/#process-arguments-scrubbing
 [4]: /fr/integrations
 [5]: /fr/integrations/amazon_web_services
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles

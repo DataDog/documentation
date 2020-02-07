@@ -1,7 +1,7 @@
 ---
 title: Delete a SLO
 type: apicontent
-order: 29.04
+order: 30.06
 external_redirect: /api/#delete-a-slo
 ---
 

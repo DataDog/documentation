@@ -17,7 +17,7 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced/"
+- link: "tracing/"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
@@ -69,6 +69,31 @@ export default tracer;
 
 See the [tracer settings][7] for the list of initialization options.
 
+## Configuration
+
+Tracer settings can be configured as a parameter to the `init()` method or as environment variables.
+
+| Config         | Environment Variable         | Default     | Description                                                                                                                                                                              |
+|----------------|------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| enabled        | `DD_TRACE_ENABLED`           | `true`      | Whether to enable the tracer.                                                                                                                                                            |
+| debug          | `DD_TRACE_DEBUG`             | `false`     | Enable debug logging in the tracer.                                                                                                                                                      |
+| service        | `DD_SERVICE_NAME`            | `null`      | The service name to be used for this program.                                                                                                                                            |
+| url            | `DD_TRACE_AGENT_URL`         | `null`      | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set.                                                                                    |
+| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | The address of the Agent that the tracer submits to.                                                                                                                                     |
+| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | The port of the Trace Agent that the tracer submits to.                                                                                                                                  |
+| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | The port of the DogStatsD Agent that metrics are submitted to.                                                                                                                           |
+| env            | `DD_ENV`                     | `null`      | Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc.                                                                                                                  |
+| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Enable automatic injection of trace IDs in logs for supported logging libraries.                                                                                                         |
+| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`.                                           |
+| sampleRate     | -                            | `1`         | Percentage of spans to sample as a float between `0` and `1`.                                                                                                                            |
+| flushInterval  | -                            | `2000`      | Interval (in milliseconds) at which the tracer submits traces to the Agent.                                                                                                              |
+| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.                                                      |
+| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.                                                                        |
+| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][8] to learn more about the available experimental features. |
+| plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                     |
+| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                           |
+| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                           |
+
 ## Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
@@ -103,69 +128,71 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions | Support Type    | Notes                                      |
 |------------------|----------|-----------------|--------------------------------------------|
-| [connect][10]    | `>=2`    | Fully Supported |                                            |
-| [express][11]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][12]   |
-| [fastify][13]    | `>=1`    | Fully Supported |                                            |
-| [graphql][14]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][15]       | `>=2`    | Fully Supported |                                            |
-| [koa][16]        | `>=2`    | Fully Supported |                                            |
-| [paperplane][17] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][18]     |
-| [restify][19]    | `>=3`    | Fully Supported |                                            |
+| [connect][10]    | `>=2`    | Fully supported |                                            |
+| [express][11]    | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][12]   |
+| [fastify][13]    | `>=1`    | Fully supported |                                            |
+| [graphql][14]    | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [gRPC][15]       | `>=1.13` | Fully supported |                                            |
+| [hapi][16]       | `>=2`    | Fully supported |                                            |
+| [koa][17]        | `>=2`    | Fully supported |                                            |
+| [paperplane][18] | `>=2.3`  | Fully supported | Not supported in [serverless-mode][19]     |
+| [restify][20]    | `>=3`    | Fully supported |                                            |
 
 #### Native Module Compatibility
 
 | Module      | Support Type    |
 |-------------|-----------------|
-| [dns][20]   | Fully Supported |
-| [http][21]  | Fully Supported |
-| [https][22] | Fully Supported |
-| [net][23]   | Fully Supported |
+| [dns][21]   | Fully supported |
+| [fs][22]    | Fully supported |
+| [http][23]  | Fully supported |
+| [https][24] | Fully supported |
+| [net][25]   | Fully supported |
 
 #### Data Store Compatibility
 
 | Module                 | Versions | Support Type    | Notes                                            |
 |------------------------|----------|-----------------|--------------------------------------------------|
-| [cassandra-driver][24] | `>=3`    | Fully Supported |                                                  |
-| [couchbase][25]        | `^2.4.2` | Fully Supported |                                                  |
-| [elasticsearch][26]    | `>=10`   | Fully Supported | Supports `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][27]          | `>=2`    | Fully Supported |                                                  |
-| [knex][28]             | `>=0.8`  | Fully Supported | This integration is only for context propagation |
-| [memcached][29]        | `>=2.2`  | Fully Supported |                                                  |
-| [mongodb-core][30]     | `>=2`    | Fully Supported | Supports Mongoose                                |
-| [mysql][31]            | `>=2`    | Fully Supported |                                                  |
-| [mysql2][32]           | `>=1`    | Fully Supported |                                                  |
-| [pg][33]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
-| [redis][34]            | `>=0.12` | Fully Supported |                                                  |
-| [tedious][35]          | `>=1`    | Fully Supported | SQL Server driver for `mssql` and `sequelize`    |
+| [cassandra-driver][26] | `>=3`    | Fully supported |                                                  |
+| [couchbase][27]        | `^2.4.2` | Fully supported |                                                  |
+| [elasticsearch][28]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][29]          | `>=2`    | Fully supported |                                                  |
+| [knex][30]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [memcached][31]        | `>=2.2`  | Fully supported |                                                  |
+| [mongodb-core][32]     | `>=2`    | Fully supported | Supports Mongoose                                |
+| [mysql][33]            | `>=2`    | Fully supported |                                                  |
+| [mysql2][34]           | `>=1`    | Fully supported |                                                  |
+| [pg][35]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
+| [redis][36]            | `>=0.12` | Fully supported |                                                  |
+| [tedious][37]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
 #### Worker Compatibility
 
 | Module             | Versions | Support Type    | Notes                                                  |
 |--------------------|----------|-----------------|--------------------------------------------------------|
-| [amqp10][36]       | `>=3`    | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][37]      | `>=0.5`  | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][38] | `>=2`    | Fully Supported |                                                        |
-| [kafka-node][39]   |          | Coming Soon     |                                                        |
-| [rhea][40]         |          | Coming Soon     |                                                        |
+| [amqp10][38]       | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][39]      | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][40] | `>=2`    | Fully supported |                                                        |
+| [kafka-node][41]   |          | Coming Soon     |                                                        |
+| [rhea][42]         | `>=1`    | Fully supported |                                                        |
 
 #### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
-| [bluebird][41]   | `>=2`     | Fully Supported |
-| [promise][42]    | `>=7`     | Fully Supported |
-| [promise-js][43] | `>=0.0.3` | Fully Supported |
-| [q][44]          | `>=1`     | Fully Supported |
-| [when][45]       | `>=3`     | Fully Supported |
+| [bluebird][43]   | `>=2`     | Fully supported |
+| [promise][44]    | `>=7`     | Fully supported |
+| [promise-js][45] | `>=0.0.3` | Fully supported |
+| [q][46]          | `>=1`     | Fully supported |
+| [when][47]       | `>=3`     | Fully supported |
 
 #### Logger Compatibility
 
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
-| [bunyan][46]     | `>=1`     | Fully Supported |
-| [paperplane][47] | `>=2.3.2` | Fully Supported |
-| [pino][48]       | `>=2`     | Fully Supported |
-| [winston][49]    | `>=1`     | Fully Supported |
+| [bunyan][48]     | `>=1`     | Fully supported |
+| [paperplane][49] | `>=2.3.2` | Fully supported |
+| [pino][50]       | `>=2`     | Fully supported |
+| [winston][51]    | `>=1`     | Fully supported |
 
 ## Further Reading
 
@@ -185,38 +212,40 @@ For details about how to how to toggle and configure plugins, check out the [API
 [12]: https://expressjs.com/en/resources/frameworks.html
 [13]: https://www.fastify.io
 [14]: https://github.com/graphql/graphql-js
-[15]: https://hapijs.com
-[16]: https://koajs.com
-[17]: https://github.com/articulate/paperplane
-[18]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
-[19]: http://restify.com
-[20]: https://nodejs.org/api/dns.html
-[21]: https://nodejs.org/api/http.html
-[22]: https://nodejs.org/api/https.html
-[23]: https://nodejs.org/api/net.html
-[24]: https://github.com/datastax/nodejs-driver
-[25]: https://github.com/couchbase/couchnode
-[26]: https://github.com/elastic/elasticsearch-js
-[27]: https://github.com/luin/ioredis
-[28]: https://knexjs.org
-[29]: https://github.com/3rd-Eden/memcached
-[30]: http://mongodb.github.io/node-mongodb-native/core
-[31]: https://github.com/mysqljs/mysql
-[32]: https://github.com/sidorares/node-mysql2
-[33]: https://node-postgres.com
-[34]: https://github.com/NodeRedis/node_redis
-[35]: http://tediousjs.github.io/tedious
-[36]: https://github.com/noodlefrenzy/node-amqp10
-[37]: https://github.com/squaremo/amqp.node
-[38]: https://github.com/coopernurse/node-pool
-[39]: https://github.com/SOHU-Co/kafka-node
-[40]: https://github.com/amqp/rhea
-[41]: https://github.com/petkaantonov/bluebird
-[42]: https://github.com/then/promise
-[43]: https://github.com/kevincennis/promise
-[44]: https://github.com/kriskowal/q
-[45]: https://github.com/cujojs/when
-[46]: https://github.com/trentm/node-bunyan
-[47]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[48]: http://getpino.io
-[49]: https://github.com/winstonjs/winston
+[15]: https://grpc.io/
+[16]: https://hapijs.com
+[17]: https://koajs.com
+[18]: https://github.com/articulate/paperplane
+[19]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[20]: http://restify.com
+[21]: https://nodejs.org/api/dns.html
+[22]: https://nodejs.org/api/fs.html
+[23]: https://nodejs.org/api/http.html
+[24]: https://nodejs.org/api/https.html
+[25]: https://nodejs.org/api/net.html
+[26]: https://github.com/datastax/nodejs-driver
+[27]: https://github.com/couchbase/couchnode
+[28]: https://github.com/elastic/elasticsearch-js
+[29]: https://github.com/luin/ioredis
+[30]: https://knexjs.org
+[31]: https://github.com/3rd-Eden/memcached
+[32]: http://mongodb.github.io/node-mongodb-native/core
+[33]: https://github.com/mysqljs/mysql
+[34]: https://github.com/sidorares/node-mysql2
+[35]: https://node-postgres.com
+[36]: https://github.com/NodeRedis/node_redis
+[37]: http://tediousjs.github.io/tedious
+[38]: https://github.com/noodlefrenzy/node-amqp10
+[39]: https://github.com/squaremo/amqp.node
+[40]: https://github.com/coopernurse/node-pool
+[41]: https://github.com/SOHU-Co/kafka-node
+[42]: https://github.com/amqp/rhea
+[43]: https://github.com/petkaantonov/bluebird
+[44]: https://github.com/then/promise
+[45]: https://github.com/kevincennis/promise
+[46]: https://github.com/kriskowal/q
+[47]: https://github.com/cujojs/when
+[48]: https://github.com/trentm/node-bunyan
+[49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[50]: http://getpino.io
+[51]: https://github.com/winstonjs/winston

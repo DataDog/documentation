@@ -15,7 +15,7 @@ further_reading:
 
 The Agent v6 status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
 
-**Note**: The status page may have minor differences between Agent versions. 
+**Note**: The status page may have minor differences between Agent versions.
 
 ## Agent version
 
@@ -66,6 +66,7 @@ This section displays information on the host the Agent is running on, for examp
 ### Hostnames
 
 This section displays the hostnames found by the Agent (see the example below). The `hostname` is the final hostname reported to the backend. For more information, see [How does Datadog determine the Agent hostname][3].
+
 ```text
     hostname: ubuntu-xenial
     socket-fqdn: ubuntu-xenial
@@ -78,9 +79,11 @@ This section displays the hostnames found by the Agent (see the example below). 
 ```
 
 ## Collector
+
 ### Running Checks
 
 This section displays a list of running check instances, for example:
+
 ```text
     load
     ----
@@ -108,6 +111,7 @@ Terms and descriptions:
 ### Config Errors
 
 This section only displays if there are checks with config errors, for example:
+
 ```text
     test
     ----
@@ -117,15 +121,16 @@ This section only displays if there are checks with config errors, for example:
 ### Loading Errors
 
 This section only displays if there are checks with loading errors, for example:
+
 ```text
     test
     ----
       Core Check Loader:
         Check test not found in Catalog
-        
+
       JMX Check Loader:
         check is not a jmx check, or unable to determine if it's so
-        
+
       Python Check Loader:
         unable to import module 'test': No module named test
 ```
@@ -133,11 +138,12 @@ This section only displays if there are checks with loading errors, for example:
 ## JMXFetch
 
 This section displays a list of initialized and failed JMX checks even if there are no checks, for example:
+
 ```text
   Initialized checks
   ==================
     no checks
-    
+
   Failed checks
   =============
     no checks
@@ -152,6 +158,7 @@ If you see the warning `the forwarder dropped transactions, there is probably an
 ### Transactions
 
 This section displays the transactions made by the forwarder, for example:
+
 ```text
     CheckRunsV1: 2
     Dropped: 0
@@ -185,6 +192,7 @@ Terms and descriptions:
 ### API Keys status
 
 This sections shows the status of your configured API key, for example:
+
 ```text
     API key ending with ab123: API Key valid
 ```
@@ -192,6 +200,7 @@ This sections shows the status of your configured API key, for example:
 ## Endpoints
 
 This section displays the list of endpoints in use by the Datadog Agent, for example:
+
 ```text
   https://app.datadoghq.com - API Key ending with:
       - ab123
@@ -200,6 +209,7 @@ This section displays the list of endpoints in use by the Datadog Agent, for exa
 ## Logs Agent
 
 If the Logs Agent is enabled, this section displays information on the logs processed and sent, for example:
+
 ```text
     LogsProcessed: 10
     LogsSent: 10
@@ -208,6 +218,7 @@ If the Logs Agent is enabled, this section displays information on the logs proc
 ## Aggregator
 
 This section displays information on the Agent's aggregator, for example:
+
 ```text
   Checks Metric Sample: 399
   Dogstatsd Metric Sample: 123
@@ -217,22 +228,26 @@ This section displays information on the Agent's aggregator, for example:
   Series Flushed: 273
   Service Check: 20
   Service Checks Flushed: 20
+  Sketches Flushed: 8
+  Checks Histogram Bucket Metric Sample: 24
 ```
 
 Terms and descriptions:
 
-| Term                    | Description                                                                              |
-|-------------------------|------------------------------------------------------------------------------------------|
-| Checks Metric Sample    | The total number of metrics sent from the checks to the aggregator.                      |
-| Dogstatsd Metric Sample | The total number of metrics sent from the DogStatsD server to the aggregator.            |
-| Event                   | The total number of events sent to the aggregator.                                       |
-| Service Check           | The total number of service checks sent to the aggregator.                               |
-| Flush                   | The number of times aggregated metrics were flushed to the forwarder to send to Datadog. |
-
+| Term                                         | Description                                                                                           |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| Checks Metric Sample                         | The total number of metrics sent from the checks to the aggregator.                                   |
+| Dogstatsd Metric Sample                      | The total number of metrics sent from the DogStatsD server to the aggregator.                         |
+| Event                                        | The total number of events sent to the aggregator.                                                    |
+| Service Check                                | The total number of service checks sent to the aggregator.                                            |
+| Flush                                        | The number of times aggregated metrics were flushed to the forwarder to send to Datadog.              |
+| Sketches Flushed                             | The number of times aggregated distribution metrics were flushed to the forwarder to send to Datadog. |
+| Checks Histogram Bucket Metric Sample        | The number of histogram bucket metrics sent from the checks to the aggregator.                        |
 
 ## DogStatsD
 
 This section displays the number of packets received by the DogStatsD server for each type of data and associated errors, for example:
+
 ```text
   Event Packets: 0
   Event Parse Errors: 0

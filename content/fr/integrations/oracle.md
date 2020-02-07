@@ -178,7 +178,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez la documentation relative aux [modèles d'intégration Autodiscovery][9] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
@@ -254,12 +254,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [4]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 [5]: http://upstart.ubuntu.com/cookbook/#environment-variables
 [6]: https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [12]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

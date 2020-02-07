@@ -6,7 +6,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing/"
@@ -26,14 +26,18 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Agent v6 is available. <a href="/agent/faq/upgrade-to-agent-v6">Upgrade to the newest version</a> to benefit from all new functionality.
+Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## Overview
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+**It is recommended to fully install the Agent.** However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.
+
+The standalone DogStatsD package is installed with the Agent [one-line install command][2] **except** every occurrence of `datadog-agent` should be replaced with `datadog-dogstatsd`. A Docker image is available in the [DogStatsD6 Docker image repo][3].
+
+Packages are also available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
@@ -50,9 +54,10 @@ Packages are available for 64-bit x86 and Arm v8 architectures. For other archit
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
+[2]: https://app.datadoghq.com/account/settings#agent/aws
+[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/dogstatsd/alpine

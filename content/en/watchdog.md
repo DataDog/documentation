@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -16,62 +16,104 @@ further_reading:
   text: "Collect your traces"
 ---
 
-{{< vimeo 278057125 >}}
+{{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in application metrics—like error rate, request rate, and latency—and unexpected behavior. Watchdog evaluates all services and resources without the need to configure a monitor for each service.
+Watchdog is an algorithmic feature for APM performances and infrastructure metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
 
-Watchdog looks for irregularities in metrics, like a sudden spike in hit rate. For each irregularity, the [Watchdog page][1] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
+* APM metrics:
+  * Hits (request rate)
+  * Error rate
+  * Latency
 
-Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the "Filter stories" search box also allows user to filter stories by service or resource name. 
+* Infrastructure metrics from integrations:
+  * [System][1], for the Host-level memory usage (memory leaks), TCP retransmit rate, etc.
+  * [Redis][2]
+  * [PostgreSQL][3]
+  * [NGINX][4]
+  * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
 
-{{< img src="watchdog/watchdog_overview_archive.png" alt="Watchdog overview" responsive="true" >}}
+Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
-Clicking on the story shows further details about requests, errors, and latency at the time of the detected irregularity. 
+## Story details
 
-{{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
+Clicking on the story shows further details about the detected irregularity:
 
-Selecting *Show expected bounds* in the corner reveals upper and lower thresholds of expected behavior on the graph.
+{{< img src="watchdog/watchdog_story.png" alt="Watchdog story"  >}}
 
-{{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
+The graph in this story shows the latency values of the ELB in three different availability zones. Watchdog detected similar anomalies in this metric from a single load balancer enabled in three availability zones, and automatically grouped these findings together in a single story. After a period of consistently low latency, the metric in all three AZs rises sharply—in the highlighted area of the graph, which indicates the timeframe of the anomaly.
 
-## Viewing Past Stories
+##### Expected bounds
 
-{{< img src="watchdog/watchdog_datepicker.png" alt="Watchdog overview" responsive="true" >}}
+Selecting *Show expected bounds* in the upper-right corner reveals upper and lower thresholds of expected behavior on the graph.
 
-Use the date picker in the upper right to view stories detected in a specific time range. You can view any story that happened in the last 13 months, going back to March 2019.
+##### Archiving Stories
 
-## Archiving Stories
-
-{{< img src="watchdog/watchdog_archive.png" alt="Watchdog overview" responsive="true" >}}
-
-Use the eye icon in the upper-right of a story to archive it. Archiving hides the story from the feed, as well as other places in the app, like the home page. If a story is archived, the yellow Watchdog binoculars icon does not show up next to the relevant service or resource. 
+Use the folder icon in the upper-right corner of a story to archive it. Archiving hides the story from the feed, as well as other places in the Datadog application, like the home page. If a story is archived, the yellow Watchdog binoculars icon does not show up next to the relevant service or resource.
 
 To see archived stories, select the checkbox option to "Show N archived stories" in the top left. You can also see who archived each story and when, and restore archived stories to your feed.
 
-Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
+**Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
-## Using Facets
+##### Monitors
 
-Facets are listed in the left panel. Use these to filter Watchdog stories by different categories (e.g. `service`, `availability zone`, etc.) and see the number of stories in each facet category.
+Monitors associated with your stories are displayed at the bottom. Each monitor displayed has the metric of the current story and its associated tags included in its scope.
 
-{{< img src="watchdog/watchdog-facets2.png" alt="Watchdog facets" responsive="true" style="width:60%;">}}
+{{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors" responsive="true" style="width:75%;">}}
 
+Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
+
+## Filter Stories
+
+You can use the time range, search bar, or facets to filter your Watchdog stories:
+
+##### Time range
+
+Use the time range selector in the upper right to view stories detected in a specific time range. You can view any story that happened in the last 13 months, going back to March 2019.
+
+##### Search bar
+
+Typing in the **Filter stories** search box enables you to search over your story titles.
+
+##### Facets
+
+Facets are associated with your Watchdog stories, allowing you to filter them by:
+
+| Facet           | Description                                                                        |
+|-----------------|------------------------------------------------------------------------------------|
+| Story Category  | Display all `apm` or all `infrastructure` stories.                                 |
+| Story Type      | Which metrics from APM or infrastructure integrations stories should be displayed. |
+| APM Environment | The [APM Environment][12] to display stories from.                                 |
+| APM Primary Tag | The [defined APM primary tag][13] to display stories from.                         |
+| APM Service     | The [APM Service][14] to display stories from.                                     |
 
 ## Watchdog in the Services List
 
-When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][2]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
+When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][15]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
-{{< img src="watchdog/service_list.png" alt="Watchdog service list" responsive="true" >}}
+{{< img src="watchdog/service_list.png" alt="Watchdog service list" style="width:75%;" >}}
 
-If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][2] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
+If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][15] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
 
-{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" >}}
+{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" style="width:75%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/watchdog
-[2]: /tracing/visualization/services_list
+[1]: /integrations/system
+[2]: /integrations/redis
+[3]: /integrations/postgres
+[4]: /integrations/nginx
+[5]: /integrations/amazon_web_services
+[6]: /integrations/amazon_s3
+[7]: /integrations/amazon_elb
+[8]: /integrations/amazon_cloudfront
+[9]: /integrations/amazon_dynamodb
+[10]: https://app.datadoghq.com/apm/watchdog
+[11]: /monitors/monitor_types/watchdog/
+[12]: /tracing/send_traces/#configure-your-environment
+[13]: /tracing/guide/setting_primary_tags_to_scope/
+[14]: /tracing/visualization/#services
+[15]: /tracing/visualization/services_list

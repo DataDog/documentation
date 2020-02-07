@@ -38,7 +38,7 @@ L'APM Datadog calcule les statistiques agrégées suivantes parmi toutes les tra
 * Données détaillées du temps passé par service/type
 * [Score Apdex][2] (services Web uniquement)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Les statistiques agrégées sont générées à partir de données non échantillonnées." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Les statistiques agrégées sont générées à partir de données non échantillonnées."  style="width:90%;">}}
 
 ### Objectif de l'échantillonnage
 
@@ -48,7 +48,7 @@ L'objectif de l'échantillonnage est de *conserver* les traces qui ont le plus d
 * Services présentant un QPS (nombre de requêtes par seconde) faible
 * Ensemble représentatif de traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Les traces individuelles sont échantillonnées au niveau du client, de l'Agent et du serveur." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Les traces individuelles sont échantillonnées au niveau du client, de l'Agent et du serveur."  style="width:90%;">}}
 
 ### Règles d'échantillonnage
 
@@ -56,12 +56,12 @@ Concernant le cycle de vie d'une trace, les décisions sont prises au niveau du 
 
 1. Client de tracing : le client de tracing ajoute un attribut de contexte `sampling.priority` aux traces, ce qui permet à une seule trace de se propager sur les en-têtes de requête dans une architecture distribuée, et ce quel que soit le langage utilisé. L'attribut `sampling-priority` est un indicateur qui permet à l'Agent Datadog de prioriser la trace ou de filtrer les traces moins importantes.
 
-    | Valeur                  | Type                        | Action                                                                                               |
-    | :--------------------- | :----------------           | :----------                                                                                          |
-    | **MANUAL_DROP**                 | Entrée utilisateur                  | L'Agent filtre la trace.                                                                           |
-    | **AUTO_DROP**                  | Décision d'échantillonnage automatique | L'Agent filtre la trace.                                                                           |
-    | **AUTO_KEEP**                  | Décision d'échantillonnage automatique | L'Agent conserve la trace.                                                                           |
-    | **MANUAL_KEEP**                  | Entrée utilisateur                  | L'Agent conserve la trace, et le backend applique uniquement l'échantillonnage si le volume maximal ci-dessus est autorisé. |
+    | Valeur           | Type                        | Action                                                                                                                                                                                                                         |
+    |:----------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | **MANUAL_DROP** | Entrée utilisateur                  | L'Agent filtre la trace.                                                                                                                                                                                                     |
+    | **AUTO_DROP**   | Décision d'échantillonnage automatique | L'Agent filtre la trace.                                                                                                                                                                                                     |
+    | **AUTO_KEEP**   | Décision d'échantillonnage automatique | L'Agent conserve la trace.                                                                                                                                                                                                     |
+    | **MANUAL_KEEP** | Entrée utilisateur                  | L'Agent conserve la trace, et le backend applique uniquement l'échantillonnage s'il dépasse le volume maximal autorisé. Veuillez noter qu'en cas d'utilisation conjointe avec le [filtrage App Analytics][3], toutes les spans `MANUAL_KEEP` sont considérées comme des spans facturables. |
 
    Les traces se voient automatiquement attribuer une priorité AUTO_DROP ou AUTO_KEEP, et un quota est appliqué pour empêcher l'Agent de recueillir plus de traces qu'autorisé. Les utilisateurs peuvent [ajuster manuellement](#controler-manuellement-la-priorite-des-traces) cet attribut pour prioriser des types de traces précis ou supprimer filtrer qui ne sont pas intéressantes.
 
@@ -78,7 +78,7 @@ Concernant le cycle de vie d'une trace, les décisions sont prises au niveau du 
 
     De plus, le nombre de traces conservées par l'Agent depuis le client de tracing est déterminé en fonction du service afin de garantir la conservation des traces des services présentant un QPS (nombre de requêtes par seconde) faible.
 
-    Vous avez la possibilité d'ignorer manuellement les endpoints ressources qui ne sont pas intéressants au niveau de l'Agent en utilisant les [filtres de ressources][3].
+    Vous avez la possibilité d'ignorer manuellement les endpoints ressources qui ne sont pas intéressants au niveau de l'Agent en utilisant les [filtres de ressources][4].
 
 3. Serveur/backend DD : le serveur reçoit les traces des différents Agents exécutés sur vos hosts et applique des règles d'échantillonnage afin de garantir que chaque Agent soit représenté. Pour cela, il détermine les traces à conserver en fonction de la signature marquée par l'Agent.
 
@@ -108,6 +108,7 @@ public class MyClass {
     }
 }
 ```
+
 Pour supprimer manuellement une trace :
 
 ```java
@@ -127,7 +128,6 @@ public class MyClass {
     }
 }
 ```
-
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -173,6 +173,7 @@ Datadog.tracer.trace(name, options) do |span|
   # ajouter ensuite l'implémentation de la méthode
 end
 ```
+
 Pour supprimer manuellement une trace :
 
 ```ruby
@@ -182,6 +183,7 @@ Datadog.tracer.trace(name, options) do |span|
   # ajouter ensuite l'implémentation de la méthode
 end
 ```
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -249,6 +251,7 @@ span.setTag(tags.MANUAL_KEEP)
 // ajouter ensuite l'implémentation de la méthode
 
 ```
+
 Pour supprimer manuellement une trace :
 
 ```js
@@ -280,6 +283,7 @@ using(var scope = Tracer.Instance.StartActive(operationName))
     // ajouter ensuite l'implémentation de la méthode
 }
 ```
+
 Pour supprimer manuellement une trace :
 
 ```cs
@@ -344,6 +348,7 @@ auto span = tracer->StartSpan("operation_name");
 span->SetTag(datadog::tags::manual_keep, {});
 // ajouter ensuite l'implémentation de la méthode
 ```
+
 Pour supprimer manuellement une trace :
 
 ```cpp
@@ -364,45 +369,17 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 
 Notez que la priorité des traces doit être contrôlée manuellement  uniquement avant la propagation dans le contexte. Si elle a lieu après, le système ne peut pas garantir que la totalité de la trace est conservée d'un service à un autre. La priorité des traces contrôlées manuellement est définie au niveau du client de tracing. La trace peut toujours être supprimée par l'Agent ou au niveau du serveur en fonction des [règles d'échantillonnage](#regles-d-echantillonnage).
 
-
 ## Stockage de traces
 
-Les [traces][1] individuelles sont stockées pendant une durée maximale de 6 mois. Pour déterminer la durée pendant laquelle une trace sera stockée, l'Agent prend une décision d'échantillonnage tôt dans le cycle de vie de la trace. Dans le backend de Datadog, les traces échantillonnées sont conservées en fonction de compartiments temporels :
+Les traces individuelles sont stockées pendant 15 jours. Ainsi, toutes les traces **échantillonnées** sont conservées pendant une période de 15 jours. À la fin du 15e jour, l'ensemble des traces expirées est supprimé. De plus, une fois qu'une trace a été consultée en ouvrant une page entière, elle reste disponible en utilisant son ID de trace dans l'URL : `https://app.datadoghq.com/apm/trace/<ID_TRACE>` (`https://app.datadoghq.eu/apm/trace/<ID_TRACE>` pour le site européen de Datadog). Ceci est valable même après son « expiration » dans l'interface. Ce comportement n'est pas affecté par les compartiments de temps de rétention.
 
-| Compartiment de rétention       |  % du flux conservé |
-| :--------------------- | :---------------- |
-| 6 heures                |              100 % |
-| Jour actuel (heure UTC) |               25 % |
-| 6 jours                 |               10 % |
-| 6 mois               |                1 % |
-
-**Remarque** : Datadog n'échantillonne pas les traces d'APM Synthetics. Toutes les traces reçues sont conservées pendant 6 heures, et un certain pourcentage d'entre elles sont conservées pendant plus longtemps (voir les durées ci-dessus).
-
-Pour un jour donné, vous verrez donc dans l'interface :
-
-* **100 %** des traces échantillonnées sur les six dernières heures
-* **25 %** des traces échantillonnées sur les heures précédentes de la journée actuelle (à partir de `00:00 UTC`)
-* **10 %** des six derniers jours
-* **1 %** des traces échantillonnées sur les six derniers mois (à partir du premier jour du mois, six mois plus tôt)
-* **0 %** des traces datant de plus de six mois
-
-Par exemple, pour `9:00am UTC Wed, 12/20`, vous verrez :
-
-* **100 %** des traces échantillonnées le `Wed 12/20 03:00 - 09:00`
-* **25 %** des traces échantillonnées sur la période `Wed 12/20 00:00` - `Wed 12/20 02:59`
-* **10 %** des traces échantillonnées sur la période `Thurs 12/14 00:00` - `Tue 12/19 23:59`
-* **1 %** des traces échantillonnées sur la période `7/1 00:00` - `12/13 23:59`
-* **0 %** des traces échantillonnées le `7/1 00:00`
-
-Une fois qu'une trace a été consultée en ouvrant une page entière, elle reste disponible en utilisant son ID de trace dans l'URL : `https://app.datadoghq.com/apm/trace/<ID_TRACE>`. Ceci est valable même après son « expiration » dans l'interface. Ce comportement n'est pas affecté par les compartiments de temps de rétention.
-
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="ID de trace" responsive="true" >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="ID de trace"  >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /fr/tracing/visualization/#trace
 [2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[3]: https://docs.datadoghq.com/fr/security/tracing/#resource-filtering
+[3]: /fr/tracing/app_analytics/#span-filtering
+[4]: https://docs.datadoghq.com/fr/security/tracing/#resource-filtering

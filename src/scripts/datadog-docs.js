@@ -2,15 +2,16 @@ import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
-import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
+import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
-
+import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
 
 // Setup for large screen ToC
 
 // gTag
 window.dataLayer = window.dataLayer || [];
+
 
 const siteEnv = document.querySelector('html').dataset.env;
 
@@ -67,7 +68,7 @@ $(document).ready(function () {
     // algolia
     $('.ds-hint').css('background', 'transparent');
 
-    if (window.location.href.indexOf('/search/')) {
+    if (window.location.href.indexOf('/search/') > -1) {
 
         const client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         const results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
@@ -266,11 +267,17 @@ $(document).ready(function () {
                         // remove any existing handlers
                         btn_next = document.getElementById("btn_next");
                         btn_prev = document.getElementById("btn_prev");
-                        btn_prev.addEventListener('click', btnHandler);
-                        btn_next.addEventListener('click', btnHandler);
+                        if(btn_prev) {
+                          btn_prev.addEventListener('click', btnHandler);
+                        }
+                        if(btn_next) {
+                          btn_next.addEventListener('click', btnHandler);
+                        }
                         const pagebtns = document.getElementsByClassName('page-num');
-                        for(let i = 0; i < pagebtns.length; i++) {
+                        if(pagebtns) {
+                          for (let i = 0; i < pagebtns.length; i++) {
                             pagebtns[i].addEventListener('click', btnHandlerPage);
+                          }
                         }
                         btn_more = document.getElementsByClassName('more')[0];
                         btn_less = document.getElementsByClassName('less')[0];
@@ -298,7 +305,9 @@ $(document).ready(function () {
                             html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary more" href="#">...</a>';
                         }
                         html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
-                        page_navigation.innerHTML = html;
+                        if(page_navigation) {
+                          page_navigation.innerHTML = html;
+                        }
                         setHandlers();
                     }
 
@@ -323,7 +332,9 @@ $(document).ready(function () {
                         if (page < 1) page = 1;
                         if (page > numPages()) page = numPages();
 
-                        listing_table.innerHTML = "";
+                        if(listing_table) {
+                          listing_table.innerHTML = "";
+                        }
 
                         // output our slice of formatted results
                         for (let i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
@@ -339,7 +350,9 @@ $(document).ready(function () {
 
                             formatted_results += '</div>';
                             formatted_results += '</div>';
-                            listing_table.innerHTML += formatted_results;
+                            if(listing_table) {
+                              listing_table.innerHTML += formatted_results;
+                            }
                         }
                         if(page_span) {
                             page_span.innerHTML = `${page  }/${  numPages()}`;
@@ -348,8 +361,12 @@ $(document).ready(function () {
                         setNavigation();
 
                         // set previous and next buttons class
-                        btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
-                        btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        if(btn_prev) {
+                          btn_prev.classList[page === 1 ? 'add' : 'remove']('disabled');
+                        }
+                        if(btn_next) {
+                          btn_next.classList[page === numPages() ? 'add' : 'remove']('disabled');
+                        }
 
                         // set active button class
                         const pagebtns = document.getElementsByClassName('page-num');
@@ -358,8 +375,10 @@ $(document).ready(function () {
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
 
-                        // scroll to top
-                        $("html, body").scrollTop(0);
+                        // scroll to top only if there is no hash
+                        if (!window.location.hash) {
+                            $("html, body").scrollTop(0);
+                        }
                     }
 
                     // init page nums
@@ -374,7 +393,9 @@ $(document).ready(function () {
 
             } else {
                 const content = document.getElementsByClassName('content')[0];
-                content.innerHTML = "0 results";
+                if(content) {
+                  content.innerHTML = "0 results";
+                }
             }
         });
     }
@@ -384,10 +405,6 @@ $(document).ready(function () {
         const href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1), false);
-            /* var pop = document.getElementById('api-popper')
-            if(pop) {
-                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
-            } */
             return false;
         }
     });
@@ -501,10 +518,8 @@ $(document).ready(function () {
             // Show this language's code blocks and language-specific elements
             const lang = el.data('lang');
             code_blocks.hide();
-            // $('.code-block-' + lang).fadeIn();
             $(`.code-block-${  lang}`).show();
             lang_blocks.hide();
-            // $('.lang-specific-' + lang).fadeIn();
             $(`.lang-specific-${  lang}`).show();
 
             // Highlight the active button.
@@ -526,8 +541,8 @@ $(document).ready(function () {
             return false;
         });
     } else if(window.location.hash) {
-            moveToAnchor(window.location.hash.substr(1), true);
-        }
+        moveToAnchor(window.location.hash.substr(1), true);
+    }
 
     // For sidenav links with anchor tag refs
     $(".sidenav-nav a[href^='#']").click(function(){
@@ -537,40 +552,12 @@ $(document).ready(function () {
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
-
-
     updateTOC();
-
-    // when page ready collect mapping of link to headers so we aren't checking the dom all the time
-
-    $('.mobile-toc-toggle').on('click touch', function () {
-        const icon = $(this).find('i');
-        const open = icon.hasClass('icon-small-x');
-        if(open) {
-            $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-        } else {
-            $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-        }
-        $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-        $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
-    });
-
-    $(document).on( "moveToAnchor", function() {
-        const open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
-        if(open) {
-            // $('.mobile-toc-toggle').click();
-        }
-    });
-
-
-
     buildTOCMap();
     onScroll();
 
-
     // TODO: move integrations code to own file after webpack update
     initializeIntegrations();
-
 
 });
 
@@ -743,13 +730,8 @@ function closeNav(){
 
 function updateSidebar(event){
 
-
     closeNav();
-
-
     getPathElement();
-
-
 
     const isLi = ( event.target.nodeName === "LI" ) ;
 
@@ -777,19 +759,14 @@ function loadPage(newUrl) {
     // scroll to top of page on new page load
     window.scroll(0, 0);
 
-    if (document.querySelector('.toc-container.mobile-open')) {
-        document.querySelector('.mobile-toc-toggle').click();
-    }
-
     let mainContent = document.getElementById("mainContent");
 
     if (mainContent) {
-        const currentTOC = document.querySelector('.toc-container');
+        const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
-            // closeTOC();
-
+    
             // cancel httprequest if hash is changed to prevent page replacing
             window.addEventListener('hashchange', function(e){
                 httpRequest.abort();
@@ -804,9 +781,12 @@ function loadPage(newUrl) {
             if (newDocument === null){
                 return;
             }
+    
+            const mainContentWrapper = document.querySelector('.mainContent-wrapper');
+            const newmainContentWrapper = httpRequest.responseXML.querySelector(".mainContent-wrapper");
 
             const newContent = httpRequest.responseXML.getElementById("mainContent");
-            const newTOC = httpRequest.responseXML.querySelector(".toc-container");
+            const newTOC = httpRequest.responseXML.querySelector(".js-toc-container");
 
             if (newContent === null){
                 return;
@@ -861,34 +841,34 @@ function loadPage(newUrl) {
             if (mainContent.parentElement) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
                 mainContent = newContent;
+
+                // update mainContent-wrapper classes
+                mainContentWrapper.className = `${newmainContentWrapper.classList}`
+
+
             } else {
                 window.location.href = newUrl;
             }
-
-
-
+          
             const wistiaVid = document.querySelector('.wistia [data-wistia-id]');
 
             let wistiaVidId;
             if (wistiaVid) {
                 wistiaVidId = wistiaVid.dataset.wistiaId;
             }
-
+    
+            // if newly requested TOC is NOT disabled
             if (newTOC.querySelector('#TableOfContents')) {
                 currentTOC.replaceWith(newTOC);
                     buildTOCMap();
                     updateTOC();
-                    showTOCIcon();
-                    widthCheck();
-                    tocWidthUpdate();
                     updateMainContentAnchors();
                     reloadWistiaVidScripts(wistiaVidId);
                     initializeIntegrations();
-            } else if (!newTOC.querySelector('#TableOfContents')) {
-                if (document.querySelector('.toc-container #TableOfContents')) {
-                    document.querySelector('.toc-container #TableOfContents').remove();
-                }
-                hideToc();
+                
+            } else if (document.querySelector('.js-toc-container #TableOfContents')) { // toc is disabled, but old TOC exists and needs to be removed.
+                document.querySelector('.js-toc-container #TableOfContents').remove();
+                updateTOC();
             }
 
             const end = window.performance.now();
@@ -907,7 +887,7 @@ function loadPage(newUrl) {
             if (typeof window.Munchkin !== "undefined") {
                 Munchkin.munchkinFunction('clickLink', { href: newUrl});
             } else {
-                window.datadog_logger.info("Munchkin called before ready..")
+                datadogLogs.logger.info("Munchkin called before ready..")
             }
 
 
@@ -961,8 +941,6 @@ if (mobileNav) {
 
 function navClickEventHandler(event){
     event.stopPropagation();
-    // console.log('clicked on ');
-    // console.log(event.target);
     // Remove any existing open and active classes
     let newUrl;
 
@@ -981,6 +959,7 @@ function navClickEventHandler(event){
     // Hide mobile nav after clicking nav element
     if ($('.navbar-collapse').hasClass('show')) {
         $('.navbar-collapse').collapse('hide');
+        closeMobileTOC();
     }
 
     // TODO: How to fall back to normal behavior?

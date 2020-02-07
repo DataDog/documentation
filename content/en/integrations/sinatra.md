@@ -12,6 +12,7 @@ has_logo: true
 integration_title: Sinatra
 is_public: true
 public_title: Datadog-Sinatra Integration
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md"]
 supported_os:
 - linux
 - mac_os
@@ -22,12 +23,13 @@ supported_os:
 
 This integration enables you to get web access logging from your [Sinatra][1] applications in order to monitor:
 
-- Errors logs (4xx codes, 5xx codes)
-- Web pages response time
-- Number of requests
-- Number of bytes exchanged
+* Errors logs (4xx codes, 5xx codes)
+* Web pages response time
+* Number of requests
+* Number of bytes exchanged
 
 ## Setup
+
 ### Installation
 
 [Install the Agent][2] on the instance that runs your Sinatra application.
@@ -58,7 +60,7 @@ More details are available in the [Rack recipes documentation][6].
 
 This logger uses the common Apache Access format and generates logs in the following format:
 
-```
+```text
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```

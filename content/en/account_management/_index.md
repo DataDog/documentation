@@ -34,7 +34,7 @@ To join an existing organization, you must be invited by an administrator. To re
 
 If you are an organization administrator, reference the additional documentation to:
 
-* [Manage team members][5]
+* [Manage users in your organization][5]
 * [Configure single sign on with SAML][6]
 * [Rename your organization][7]
 * [Manage multi-organization accounts][8]
@@ -56,7 +56,7 @@ View Datadog in dark mode by hovering over your avatar in the sidebar, or by pre
 
 To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog’s appearance to the theme you’ve set at the OS level:
 
-{{< img src="account_management/dark-mode-toggle.png" alt="Dark mode" responsive="true" style="width:60%;">}}
+{{< img src="account_management/dark-mode-toggle.png" alt="Dark mode"  style="width:60%;">}}
 
 ## Connecting to GitHub
 
@@ -70,7 +70,7 @@ To delete your Datadog account completely, [contact our support team][12].
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
 [4]: https://app.datadoghq.com/signup
-[5]: /account_management/team
+[5]: /account_management/users
 [6]: /account_management/saml
 [7]: /account_management/org_settings#change-your-organization-name
 [8]: /account_management/multi_organization

@@ -1,7 +1,6 @@
 ---
 title: Configurer des log monitors sur des volumes
 kind: guide
-disable_toc: true
 further_reading:
   - link: logs/processing
     tag: Documentation
@@ -18,7 +17,7 @@ Recevez une notification dès que les volumes de votre infrastructure grandissen
 4. Déterminez le taux de votre choix pour un *warning* ou une *error*.
 5. Indiquez une notification explicite : `Le volume de ce service vient d'atteindre un niveau trop élevé. Définissez un filtre d'exclusion supplémentaire ou augmentez le taux d'échantillonnage pour revenir à des valeurs normales.`
 
-{{< img src="logs/guide/example_notification.png" alt=" exemple de notification" responsive="true" style="width:70%;">}}
+{{< img src="logs/guide/example_notification.png" alt=" exemple de notification" style="width:70%;">}}
 
 ## Pour aller plus loin
 

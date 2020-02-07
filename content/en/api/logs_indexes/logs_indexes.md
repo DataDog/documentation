@@ -1,7 +1,7 @@
 ---
 title: Logs Indexes
 type: apicontent
-order: 23
+order: 24
 external_redirect: /api/#logs-indexes
 ---
 
@@ -13,7 +13,7 @@ The `Index` object describes the configuration of a log index. It has the follow
     The name of the index.
 * **`filter.query`** :
     Only logs matching the filter criteria are considered for this index.
-    The search query followis the [Log search syntax][1]
+    The search query follows the [Log search syntax][1]
 * **`num_retention_days`** (Read Only) :
     The number of days before logs are deleted from this index
 * **`daily_limit`** (Read Only) :
