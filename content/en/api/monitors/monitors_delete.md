@@ -9,4 +9,8 @@ external_redirect: /api/#delete-a-monitor
 
 **ARGUMENTS**:
 
-This endpoint takes no JSON arguments.
+If a monitor is used elsewhere, this endpoint returns an error because the monitor is referenced.
+
+* **`force`** [*optional*, *default*=**False**]:
+
+    Boolean: Force delete the monitor. The monitor is deleted even if it's referenced by other resources (e.g. SLO, composite monitor).
