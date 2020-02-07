@@ -1,4 +1,4 @@
-import * as redirect from '../components/lang-redirects';
+import * as redirect from '../lang-redirects';
 
 describe(`Ensure EN site loads and redirects as expected `, () => {
 
