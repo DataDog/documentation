@@ -30,7 +30,7 @@ To create a mapping rule:
 
 ## Mapping rule configuration
 
-A mapping rule block have the following layout:
+A mapping rule block has the following layout:
 
 ```yaml
 dogstatsd_mapper_profiles:
