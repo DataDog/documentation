@@ -58,7 +58,7 @@ With the following placeholders:
 
 ## Wildcard Match Pattern
 
-The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must follow the [metrics naming convention][2] for the pattern to work.
+The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_`  characters for this pattern to work.
 Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
 
 For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
@@ -78,7 +78,7 @@ dogstatsd_mapper_profiles:
 
 It would send the metric `custom_metric` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value_2`.
 
-**Note**: If the incoming metric have already a tag key that matches one defined in the mapping group, no mapping is applied.
+**Note**: If the incoming metric have already at least one tag, no mapping is applied.
 
 ## Regex Match Pattern
 
@@ -102,9 +102,11 @@ dogstatsd_mapper_profiles:
 
 It would send the metric `custom_metric` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
 
-## Catched group in metric name
+**Note**: If the incoming metric have already at least one tag, no mapping is applied.
 
-For the `regex` and `wildcard` match type, catched group can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
+## Expand group in metric name
+
+For the `regex` and `wildcard` match type, group collected can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.value_1.value_2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -125,4 +127,3 @@ It would send the metric `custom_metric.prod.value_1.live` to Datadog with the t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /developers/metrics/#naming-custom-metrics
