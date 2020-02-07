@@ -21,8 +21,8 @@ version: 1
 
 MongoDB Atlas peut transmettre des métriques calculées à Datadog pour vous permettre de :
 
-* Visualiser les métriques clés de MongoDB Atlas.
-* Corréler les performances de MongoDB Atlas avec le reste de vos applications.
+- Visualiser les métriques clés de MongoDB Atlas.
+- Corréler les performances de MongoDB Atlas avec le reste de vos applications.
 
 ## Implémentation
 
@@ -42,9 +42,11 @@ Vous pouvez installer l'intégration MongoDB Atlas en vous connectant au portai
 
 
 ### Événements
+
 MongoDB Atlas peut transmettre des [alertes][3] à Datadog sous la forme d'événements.
 
 ### Checks de service
+
 L'intégration MongoDB Atlas n'inclut aucun check de service.
 
 ## Dépannage

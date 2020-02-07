@@ -26,22 +26,27 @@ Utilisez le service Azure ExpressRoute pour étendre vos réseaux locaux à Mic
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure ExpressRoute.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_express_route" >}}
 
 
 ### Événements
+
 L'intégration Azure ExpressRoute n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure ExpressRoute n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
