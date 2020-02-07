@@ -1358,6 +1358,10 @@ main:
     url: "developers/dogstatsd/data_aggregation/"
     parent: "dev_tools_dogstatsd"
     weight: 104
+  - name: "DogStatsD Mapper"
+    url: "developers/dogstatsd/dogstatsd_mapper/"
+    parent: "dev_tools_dogstatsd"
+    weight: 105
 
   ## DEVELOPERS - Metrics
 
