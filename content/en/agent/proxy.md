@@ -502,7 +502,7 @@ logs_config:
 
 Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
-When choosing to send logs over HTTPS instruct the Agent in the following way `datadog.yaml`:
+When choosing to send logs over HTTPS, use the following code block in `datadog.yaml` to configure Agent behavior:
 
 ```yaml
 logs_config:
