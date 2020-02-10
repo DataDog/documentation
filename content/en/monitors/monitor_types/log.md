@@ -68,7 +68,7 @@ By default, when a logs monitor is triggered, samples or values are added to the
 | Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
 | Facet or measure | The top 10 facet or measure values.                                                                      |
 
-These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, and email. **Note**: Samples are not displayed for recovery notifications.
+These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
 To disable log samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
 
