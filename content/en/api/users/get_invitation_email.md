@@ -1,7 +1,7 @@
 ---
 title: Get a user invitation
 type: apicontent
-order: 36.8
+order: 36.9
 external_redirect: /api/#get-a-user-invitation
 ---
 

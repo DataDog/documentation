@@ -1,7 +1,7 @@
 ---
 title: Send invitation email to a user
 type: apicontent
-order: 36.7
+order: 36.8
 external_redirect: /api/#send-invitation-email-to-a-user
 ---
 
