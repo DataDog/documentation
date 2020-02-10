@@ -1,7 +1,7 @@
 ---
 title: Get a user organisation
 type: apicontent
-order: 36.6
+order: 36.5
 external_redirect: /api/#get-a-user-organisation
 ---
 

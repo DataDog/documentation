@@ -11686,51 +11686,6 @@
 					"response": []
 				},
 				{
-					"name": "Get a user application key",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "DD-API-KEY",
-								"value": "{{datadog_api_key}}",
-								"description": "Your Datadog API key",
-								"type": "text"
-							},
-							{
-								"key": "DD-APPLICATION-KEY",
-								"value": "{{datadog_application_key}}",
-								"description": "Your Datadog application key",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/users/:USER_HANDLE/application_keys",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"users",
-								":USER_HANDLE",
-								"application_keys"
-							],
-							"variable": [
-								{
-									"key": "USER_HANDLE",
-									"value": "test@example.com",
-									"description": "The handle (email address) of the user."
-								}
-							]
-						},
-						"description": "### Overview\n\nReturns a list of application keys for a given user.\n\n### Arguments\n\n* **`user_handle`** [*required*]: The handle (email address) of the user.\n"
-					},
-					"response": []
-				},
-				{
 					"name": "Get a user organisation",
 					"request": {
 						"method": "GET",
