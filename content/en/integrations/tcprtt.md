@@ -5,12 +5,14 @@ kind: integration
 newhlevel: true
 is_public: true
 public_title: Datadog-TCP RTT Integration
-short_description: "Monitor TCP connectivity to remote hosts."
+short_description: 'Monitor TCP connectivity to remote hosts.'
 categories:
-- network
+    - network
 ddtype: check
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
 ---
+
 ## Overview
 
 The TCP RTT check reports on roundtrip times between the host the Agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
@@ -49,22 +51,22 @@ Edit the `go-metro.yaml` file in your Agent's `conf.d` directory. The following 
 
 ```yaml
 init_config:
-  snaplen: 512
-  idle_ttl: 300
-  exp_ttl: 60
-  statsd_ip: 127.0.0.1
-  statsd_port: 8125
-  log_to_file: true
-  log_level: info
+    snaplen: 512
+    idle_ttl: 300
+    exp_ttl: 60
+    statsd_ip: 127.0.0.1
+    statsd_port: 8125
+    log_to_file: true
+    log_level: info
 
 instances:
-  - interface: eth0
-    tags:
-      - env:prod
-    ips:
-      - 45.33.125.153
-    hosts:
-      - app.datadoghq.com
+    - interface: eth0
+      tags:
+          - env:prod
+      ips:
+          - 45.33.125.153
+      hosts:
+          - app.datadoghq.com
 ```
 
 {{< insert-example-links conf="go-metro" check="none" >}}

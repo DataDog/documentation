@@ -5,17 +5,18 @@ kind: integration
 git_integration_title: pivotal_platform
 newhlevel: true
 updated_for_agent: 6.0
-description: "Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run."
+description: 'Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run.'
 is_public: true
 public_title: Datadog-Pivotal Platform Integration
-short_description: "Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run."
+short_description: 'Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run.'
 categories:
-- provisioning
-- configuration & deployment
-- log collection
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md"]
+    - provisioning
+    - configuration & deployment
+    - log collection
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md']
 aliases:
-  - /integrations/cloud_foundry/
+    - /integrations/cloud_foundry/
 doc_link: /integrations/pivotal_platform/
 ddtype: check
 ---
@@ -28,8 +29,8 @@ There are three main components for the Pivotal Platform integration with Datado
 
 For Pivotal Platform, you have the option to install the Datadog integration tiles with Ops Manager:
 
-* [Datadog Cluster Monitoring for Pivotal Platform][1]
-* [Datadog Application Monitoring for Pivotal Platform][2]
+- [Datadog Cluster Monitoring for Pivotal Platform][1]
+- [Datadog Application Monitoring for Pivotal Platform][2]
 
 ## PKS
 
@@ -51,33 +52,30 @@ Our buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was in
 
 For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][7]. You must install and configure this backport in order to use Datadog's buildpack:
 
-1. **Upload the multi-buildpack back-port.**
-  Download the latest [multi-build pack release][7] and upload it to your Pivotal Platform environment.
+1. **Upload the multi-buildpack back-port.** Download the latest [multi-build pack release][7] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.**
-  As detailed [on the multi-buildpack back-port repo][8], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
+2. **Add a multi-buildpack manifest to your application.** As detailed [on the multi-buildpack back-port repo][8], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
 
-      ```yaml
-      buildpacks:
-        - "https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-3.1.0.zip"
-        - "https://github.com/cloudfoundry/ruby-buildpack#v1.7.18" # Replace this with your regular buildpack
-      ```
+    ```yaml
+    buildpacks:
+      - "https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-3.1.0.zip"
+      - "https://github.com/cloudfoundry/ruby-buildpack#v1.7.18" # Replace this with your regular buildpack
+    ```
 
-    The URLs for the Datadog Buildpack are:
+      The URLs for the Datadog Buildpack are:
 
-    - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
-    - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
+      - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
+      - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
-    Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
+      Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-    **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to  [Pivotal Platform documentation][9] about buildpacks.
 
-3. **Push your application with the multi-buildpack**
-  Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
+3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
@@ -85,22 +83,20 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
 
 #### Pivotal Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Platform Buildpack.**
-  Download the latest Datadog [build pack release][10] and upload it to your Pivotal Platform environment.
+1. **Upload the Datadog Pivotal Platform Buildpack.** Download the latest Datadog [build pack release][10] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. **Push your application with the Datadog buildpack and your buildpacks.**
-  The process to push your application with multiple buildpacks is described in the [Pivotal Platform documentation][9].
+2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in the [Pivotal Platform documentation][9].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-  **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Pivotal Platform documentation][9] about buildpacks.
 
 #### Meta-Buildpack **(deprecated)**
 
@@ -149,7 +145,7 @@ cf restage <YOUR_APP_NAME>
 The following parameters can be used to configure log collection:
 
 | Parameter                 | Description                                                                                                                                |
-|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout`/`stderr`. It redirects the `stdout`/`stderr` stream to the corresponding local port value. |
 | `LOGS_CONFIG`             | Use this option to configure the Agent to listen to a local TCP port and set the value for the `service` and `source` parameters.          |
 
@@ -184,8 +180,8 @@ See [the DogStatsD documentation][5] for more information. There is [a list of D
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
-* **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
-* **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
+- **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
+- **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
 These integrations are meant for Pivotal Platform deployment administrators, not end users.
@@ -256,16 +252,16 @@ In Bosh v2, if the `runtime.yml` file is empty, you should see the response: `No
 For each extra Agent check you want to enable across your deployment, add its configuration under the `properties.dd.integrations` key, for example:
 
 ```yaml
-  properties:
+properties:
     dd:
-      integrations:
-        directory:
-          init_config: {}
-          instances:
-            directory: "."
-        #process:
-        #  init_config: {}
-        #...
+        integrations:
+            directory:
+                init_config: {}
+                instances:
+                    directory: '.'
+            #process:
+            #  init_config: {}
+            #...
 ```
 
 The configuration under each check name should look the same as if you were configuring the check in its own file in the Agent's conf.d directory.
@@ -329,14 +325,14 @@ In the manifest that contains your UAA configuration, add a new client for the D
 
 ```yaml
 uaa:
-  clients:
-    datadog-firehose-nozzle:
-      access-token-validity: 1209600
-      authorities: doppler.firehose,cloud_controller.admin_read_only
-      authorized-grant-types: client_credentials
-      override: true
-      scope: doppler.firehose,cloud_controller.admin_read_only
-      secret: <YOUR_SECRET>
+    clients:
+        datadog-firehose-nozzle:
+            access-token-validity: 1209600
+            authorities: doppler.firehose,cloud_controller.admin_read_only
+            authorized-grant-types: client_credentials
+            override: true
+            scope: doppler.firehose,cloud_controller.admin_read_only
+            secret: <YOUR_SECRET>
 ```
 
 Redeploy the deployment to add the user.
@@ -345,35 +341,44 @@ Redeploy the deployment to add the user.
 
 Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
 
-```text
+```yaml
 jobs:
 #- instances: 4
 #  name: some_other_job
 #  ...
-- instances: 1            # add more instances if one job cannot keep up with the Firehose
+# add more instances if one job cannot keep up with the Firehose
+- instances: 1
   name: datadog_nozzle_z1
   networks:
-    - name: cf1           # some network you've configured elsewhere in the manifest
-  resource_pool: small_z1 # some resource_pool you've configured elsewhere in the manifest
+    # some network you've configured elsewhere in the manifest
+    - name: cf1
+  # some resource_pool you've configured elsewhere in the manifest
+  resource_pool: small_z1
   templates:
     - name: datadog-firehose-nozzle
       release: datadog-firehose-nozzle
   properties:
     datadog:
-      api_key: <YOUR_DATADOG_API_KEY>
+      api_key: "<YOUR_DATADOG_API_KEY>"
       api_url: https://api.datadoghq.com/api/v1/series
-      flush_duration_seconds: 15 # seconds between flushes to Datadog. Default is 15.
+      # seconds between flushes to Datadog. Default is 15.
+      flush_duration_seconds: 15
     loggregator:
       # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' works
-      traffic_controller_url: <LOGGREGATOR_URL> # e.g. ws://traffic-controller.your-cf-domain.com:8081
+      # e.g. ws://traffic-controller.your-cf-domain.com:8081
+      traffic_controller_url: "<LOGGREGATOR_URL>"
     nozzle:
-      deployment: <DEPLOYMENT_NAME>    # tags each firehose metric with 'deployment:<DEPLOYMENT_NAME>'
-      subscription_id: datadog-nozzle  # can be anything (firehose streams data evenly to all jobs using the same subscription_id)
-      # disable_access_control: true   # for development only
-      # insecure_ssl_skip_verify: true # for development only; enable if your UAA does not use a verifiable cert
+      # tags each firehose metric with 'deployment:<DEPLOYMENT_NAME>'
+      deployment: "<DEPLOYMENT_NAME>"
+      # can be anything (firehose streams data evenly to all jobs using the same subscription_id)
+      subscription_id: datadog-nozzle
+      # for development only
+      # disable_access_control: true
+      # for development only; enable if your UAA does not use a verifiable cert
+      # insecure_ssl_skip_verify: true
     uaa:
       client: datadog-firehose-nozzle # client name you just configured
-      client_secret: <SECRET_YOU_JUST_CONFIGURED>
+      client_secret: "<SECRET_YOU_JUST_CONFIGURED>"
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ```
 
@@ -383,11 +388,11 @@ In the same manifest, add the Datadog Nozzle release name and version:
 
 ```yaml
 releases:
-# - name: "<SOME_OTHER_RELEASE>"
-#   version: <x.y.z>
-# ...
-  - name: datadog-firehose-nozzle
-    version: "<VERSION_YOU_UPLOADED>" # specify the real version (x.y.z not 'latest')
+    # - name: "<SOME_OTHER_RELEASE>"
+    #   version: <x.y.z>
+    # ...
+    - name: datadog-firehose-nozzle
+      version: '<VERSION_YOU_UPLOADED>' # specify the real version (x.y.z not 'latest')
 ```
 
 To see which `datadog-firehose-nozzle` release version you uploaded earlier, run `bosh releases`.
