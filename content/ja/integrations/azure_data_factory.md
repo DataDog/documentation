@@ -26,22 +26,27 @@ Azure Data Factory は、データの保管・移動・処理サービスを自�
 Datadog Azure インテグレーションを使用して、Data Factory からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。	これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_data_factory" >}}
 
 
 ### イベント
+
 Azure Data Factory インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure Data Factory インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

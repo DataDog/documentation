@@ -44,15 +44,15 @@ Datadog s'intègre déjà à Kubernetes et à AWS, ce qui en fait la solution id
 
 La surveillance EKS nécessite la configuration des intégrations Datadog pour :
 
-* [Kubernetes][3]
-* [AWS][4]
-* [AWS EC2][5]
+- [Kubernetes][3]
+- [AWS][4]
+- [AWS EC2][5]
 
 Vous devez également configurer les intégrations de tous les autres services AWS exécutés avec EKS (p. ex., [ELB][6]).
 
 ### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La configuration est identique à celle de Kubernetes. 
 Pour lancer la collecte des logs depuis tous vos conteneurs, utilisez les [variables d'environnement][7] de votre Agent Datadog.
@@ -67,9 +67,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-* [Surveiller Amazon EKS avec Datadog][11]
-* [Métriques clés pour la surveillance d'Amazon EKS][12]
-* [Amazon EKS sur AWS Fargate][13]
+- [Surveiller Amazon EKS avec Datadog][11]
+- [Métriques clés pour la surveillance d'Amazon EKS][12]
+- [Amazon EKS sur AWS Fargate][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html

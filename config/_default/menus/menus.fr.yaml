@@ -233,11 +233,21 @@ main:
     identifier: cluster_agent_commands
     parent: agent_cluster
     weight: 404
+  - name: Fournisseur de métadonnées de cluster
+    url: agent/cluster_agent/metadata_provider/
+    identifier: cluster_agent_metadata_provider
+    parent: agent_cluster
+    weight: 405
+  - name: Générer le buildpack
+    url: agent/cluster_agent/build/
+    identifier: cluster_agent_build
+    parent: agent_cluster
+    weight: 406
   - name: Dépannage
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 405
+    weight: 407
   - name: Autodiscovery
     url: agent/autodiscovery/
     identifier: agent_autodiscovery
@@ -389,7 +399,7 @@ main:
     url: dashboards/widgets/
     parent: dashboards
     weight: 3
-  - name: Création de requêtes
+  - name: Requêtes
     url: dashboards/querying/
     parent: dashboards
     weight: 4
@@ -406,7 +416,7 @@ main:
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
     weight: 502
-  - name: Total
+  - name: Count
     url: dashboards/functions/count/
     parent: dashboards_functions
     weight: 503
@@ -761,6 +771,11 @@ main:
     identifier: tracing_troubleshooting
     parent: tracing
     weight: 10
+  - name: Métriques APM de l'Agent
+    url: tracing/troubleshooting/agent_apm_metrics
+    identifier: tracing_troubleshooting_apm_metrics
+    parent: tracing_troubleshooting
+    weight: 10
   - name: Log Management
     url: logs/
     pre: nav_logs
@@ -892,7 +907,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Corrélation entre les logs et les métriques
-    url: 'graphing/dashboards/timeboard/#graph-menu'
+    url: 'dashboards/timeboards/#graph-menu'
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -905,6 +920,26 @@ main:
     url: security/logs/
     parent: log_management
     weight: 11
+  - name: Security Monitoring
+    url: security_monitoring/
+    pre: nav_security_monitoring
+    identifier: security_monitoring
+    weight: 135000
+  - name: Débuter
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 1
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 2
+  - name: Règles de détection
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 3
   - name: Synthetics
     url: synthetics/
     pre: nav_synthetics
@@ -920,6 +955,18 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
+  - name: Actions
+    url: synthetics/browser_tests/actions
+    parent: synthetics_browser_tests
+    weight: 201
+  - name: Résultats du test
+    url: synthetics/browser_tests/test_results
+    parent: synthetics_browser_tests
+    weight: 202
+  - name: Options avancées
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 203
   - name: Emplacements privés
     url: synthetics/private_locations
     parent: synthetics
@@ -930,10 +977,6 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Tests Browser
-    url: synthetics/apm/browser_tests
-    parent: synthetics_apm
-    weight: 401
   - name: Identifier les bots Synthetics
     url: synthetics/identify_synthetics_bots/
     parent: synthetics

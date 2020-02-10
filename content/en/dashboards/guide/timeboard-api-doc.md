@@ -54,8 +54,8 @@ The Timeboard endpoint allows you to programmatically create, update delete and 
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -95,8 +95,8 @@ api.Timeboard.create(title=title,
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -126,8 +126,8 @@ dog.create_dashboard(title, description, graphs, template_variables)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl  -X POST -H "Content-type: application/json" \
 -d '{
@@ -195,8 +195,8 @@ curl  -X POST -H "Content-type: application/json" \
 ```python
 from datadog import initialize, api
 
-options = {'api_key': '<YOUR_API_KEY>',
-           'app_key': '<YOUR_APP_KEY>'}
+options = {'api_key': '<DATADOG_API_KEY>',
+           'app_key': '<DATADOG_APPLICATION_KEY>'}
 
 initialize(**options)
 
@@ -228,8 +228,8 @@ api.Timeboard.update(
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -259,8 +259,8 @@ dog.update_dashboard(dash_id, title, description, graphs, template_variables)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 dash_id=2532
 
 # Create a dashboard to get. Use jq (http://stedolan.github.io/jq/download/) to get the dash id.
@@ -334,8 +334,8 @@ Delete an existing [timeboard][1].
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -374,8 +374,8 @@ api.Timeboard.delete(newboard['dash']['id'])
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -387,8 +387,8 @@ dog.delete_dashboard(dash_id)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 dash_id=2471
 
 # Create a dashboard to delete. Use jq (http://stedolan.github.io/jq/download/) to get the dash id.
@@ -441,8 +441,8 @@ Fetch an existing dashboard's definition.
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -457,8 +457,8 @@ api.Timeboard.get(4953)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -470,8 +470,8 @@ dog.get_dashboard(dash_id)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 dash_id=2473
 
 # Create a dashboard to get. Use jq (http://stedolan.github.io/jq/download/) to get the dash id.
@@ -524,8 +524,8 @@ Fetch all of your [timeboard][1]' definitions.
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -540,8 +540,8 @@ print api.Timeboard.get_all()
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -552,8 +552,8 @@ dog.get_dashboards
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
 ```

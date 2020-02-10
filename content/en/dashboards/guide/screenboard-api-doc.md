@@ -40,8 +40,8 @@ The Screenboard endpoint allows you to programmatically create, update, delete, 
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -78,8 +78,8 @@ api.Screenboard.create(board_title=board_title,
 require 'rubygems'
 require 'dogapi'
 
-api_key='<YOUR_API_KEY>'
-app_key='<YOUR_APP_KEY>'
+api_key='<DATADOG_API_KEY>'
+app_key='<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -106,8 +106,8 @@ result = dog.create_screenboard(board)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl -X POST -H "Content-type: application/json" \
 -d '{
@@ -163,8 +163,8 @@ curl -X POST -H "Content-type: application/json" \
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -202,8 +202,8 @@ api.Screenboard.update(board_id,
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -229,8 +229,8 @@ result = dog.update_screenboard(board_id, board)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl -X PUT -H "Content-type: application/json" \
 -d '{
@@ -277,8 +277,8 @@ Delete an existing [Screenboard][1].
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -294,8 +294,8 @@ api.Screenboard.delete(811)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -307,8 +307,8 @@ result = dog.delete_screenboard(board_id)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 board_id=2471
 
 # Create a screenboard to delete
@@ -358,8 +358,8 @@ Fetch an existing Screenboard's definition.
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -374,8 +374,8 @@ api.Screenboard.get(811)
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -387,8 +387,8 @@ result = dog.get_screenboard(board_id)
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 board_id=6334
 
 # Create a screenboard to get
@@ -438,8 +438,8 @@ Fetch all of your [Screenboards][1]' definitions.
 from datadog import initialize, api
 
 options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)
@@ -455,8 +455,8 @@ api.Screenboard.get_all()
 require 'rubygems'
 require 'dogapi'
 
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
+api_key = '<DATADOG_API_KEY>'
+app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -467,8 +467,8 @@ result = dog.get_all_screenboards()
 {{% tab "Bash" %}}
 
 ```bash
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
+api_key=<DATADOG_API_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
 ```

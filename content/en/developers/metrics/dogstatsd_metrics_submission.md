@@ -1111,6 +1111,7 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/dogstatsd
 [2]: /developers/metrics/types/?tab=count#metric-type-definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum

@@ -16,13 +16,15 @@ further_reading:
 
 ## Overview
 
-The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Click on a metric name to display a panel with more detailed information.
+The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Search your metrics by name or tag using the **Metric** or **Tag** search fields:
+
+{{< img src="metrics/summary/tagexplorer.gif" alt="Filter by Tag"  style="width:75%;">}}
 
 ## Metric panel
 
-The metric panel displays key information for a given metric.
+Click on a metric name to display a panel with more detailed information. The metric panel displays key information for a given metric.
 
-{{< img src="metrics/summary/metric_panel.png" alt="Metric panel"  style="width:80%;">}}
+{{< img src="metrics/summary/metric_panel.png" alt="Metric panel"  style="width:75%;">}}
 
 ### Metric name
 
@@ -34,11 +36,15 @@ A metric can correspond to multiple distinct metrics depending on its associated
 
 ### Hosts
 
-The total number of hosts reporting a metric along with a list of hosts.
+The total number of hosts reporting a metric along with a list of hosts. Click on any host to filter the metrics summary or view the filtered metric in the [metrics explorer][2].
 
 ### Tags
 
-The total number of tags attached to a metric along with a list of tags. Learn more in the [tagging][5] documentation.
+The total number of tags attached to a metric along with a list of tags. Click on any tag to filter the metrics summary or view the filtered metric in the [metrics explorer][2]:
+
+{{< img src="metrics/summary/tag_click.png" alt="Click on a tag"  style="width:75%;">}}
+
+[Learn more about tagging][5].
 
 ### Metrics metadata
 
@@ -56,7 +62,7 @@ When submitting custom metrics to Datadog, it is possible to change the [unit of
 
 #### Metric type
 
-The type for your metric (gauge, rate, or count). See the [metric type][8] page for more details.
+The type for your metric (gauge, rate, or count). See the [metric type][9] page for more details.
 
 **Warning**: Editing the metric type changes that metric's behavior for **ALL** your analytics and monitors.
 
@@ -80,3 +86,4 @@ The collection interval for the metric in seconds.
 [6]: /api/?lang=python#edit-metric-metadata
 [7]: /integrations
 [8]: /developers/metrics/units
+[9]: /developers/metrics/types

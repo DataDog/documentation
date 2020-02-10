@@ -19,17 +19,20 @@ short_description: "Surveillez des métriques clés d'Amazon\_EC2\_Spot."
 version: 1
 ---
 ## Présentation
+
 Les instances Amazon EC2 Spot vous permettent de tirer parti des capacités de calcul EC2 non utilisées dans le cloud AWS.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'EC2 Spot.
 
 ## Implémentation
+
 ### Installation
+
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Collecte de métriques
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `EC2 Spot Fleet` est cochée dans la section concernant la collecte des métriques.
 
+1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `EC2 Spot Fleet` est cochée dans la section concernant la collecte des métriques.
 2. Installez l'[intégration Datadog/Amazon EC2 Spot][3].
 
 ### Collecte de logs
@@ -37,17 +40,21 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 Utilisez l'[Agent Datadog][4] ou un autre log shipper tel que [Rsyslog][5] pour envoyer vos logs vers Datadog.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "amazon_ec2_spot" >}}
 
 
 ### Événements
+
 L'intégration Amazon EC2 Spot n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Amazon EC2 Spot n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services

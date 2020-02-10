@@ -26,22 +26,27 @@ Azure App Service Environment は、App Service アプリを大規模かつ安�
 Datadog Azure インテグレーションを使用して、Azure App Service Environment からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_app_service_environment" >}}
 
 
 ### イベント
+
 Azure App Service Environment インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure App Service Environment インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

@@ -26,22 +26,27 @@ Azure Key Vault は、クラウドアプリケーションおよびサービス�
 Datadog Azure インテグレーションを使用して、Azure Key Vault からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_key_vault" >}}
 
 
 ### イベント
+
 Azure Key Vault インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure Key Vault インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

@@ -54,6 +54,7 @@ clean-integrations:  ## Remove built integrations files.
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'kubernetes_audit_logs.md' \
 		-a -not -name 'alcide.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \

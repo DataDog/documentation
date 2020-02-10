@@ -8,7 +8,7 @@ external_redirect: '/api/#presentation'
 
 Utilisez l'API HTTP Datadog pour accéder à la plateforme Datadog à l'aide de programmes.
 
-**Pour débuter sur l'API HTTP Datadog, utilisez notre [collection Postman de Datadog][1]**
+**Pour débuter avec l'API HTTP Datadog, utilisez la [collection Postman de Datadog][1]**
 
 L'API Datadog utilise des URL orientées ressources, applique des codes de statut afin d'indiquer la réussite ou l'échec des requêtes et renvoie un objet JSON à partir de toutes les requêtes. Rentrons dans le vif du sujet et découvrons son fonctionnement.
 

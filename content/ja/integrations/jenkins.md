@@ -75,15 +75,15 @@ import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 def j = Jenkins.getInstance()
 def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-// If you want to use Datadog API URL and Key to report to Datadog
+// Datadog へのレポートに Datadog API URL とキーを使用する場合
 d.setReportWith('HTTP')
 d.setTargetApiURL('https://api.datadoghq.com/api/')
 d.setTargetApiKey('<DATADOG_API_KEY>')
 
-// Customization, see dedicated section below
+// カスタムを行う場合は以下の詳細セクションを参照
 d.setBlacklist('job1,job2')
 
-// Save config
+// 設定を保存
 d.save()
 ```
 
@@ -100,10 +100,10 @@ d.setReportWith('DSD')
 d.setTargetHost('localhost')
 d.setTargetPort(8125)
 
-// Customization, see dedicated section below
+// カスタムを行う場合は以下の詳細セクションを参照
 d.setBlacklist('job1,job2')
 
-// Save config
+// 設定を保存
 d.save()
 ```
 

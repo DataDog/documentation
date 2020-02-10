@@ -1,6 +1,7 @@
 ---
 title: Videos
 kind: Documentation
+disable_toc: true
 private: true
 aliases:
   - /videos/tipsandtricks-k8s-autodiscovery/

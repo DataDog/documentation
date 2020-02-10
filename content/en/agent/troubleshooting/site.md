@@ -3,7 +3,7 @@ title: Agent Site issues
 kind: documentation
 ---
 
-By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuraiton file][1] accordingly or set the `DD_SITE` environment variable:
+By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuration file][1] accordingly or set the `DD_SITE` environment variable:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
@@ -33,4 +33,5 @@ site: datadoghq.eu
 
 {{% /tab %}}
 {{< /tabs >}}
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

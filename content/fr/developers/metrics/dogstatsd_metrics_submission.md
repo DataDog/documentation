@@ -1110,6 +1110,7 @@ Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agré
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/developers/dogstatsd
 [2]: /fr/developers/metrics/types/?tab=count#metric-type-definition
 [3]: /fr/dashboards/functions/arithmetic/#cumulative-sum
