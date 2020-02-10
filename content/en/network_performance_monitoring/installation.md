@@ -111,51 +111,55 @@ spec:
         spec:
             serviceAccountName: datadog-agent
             containers:
-                - image: datadog/agent:latest
+                - image: 'datadog/agent:latest'
                   imagePullPolicy: Always
                   name: datadog-agent
                   ports:
-                      - {
-                            containerPort: 8125,
-                            name: dogstatsdport,
-                            protocol: UDP,
-                        }
-                      - { containerPort: 8126, name: traceport, protocol: TCP }
+                      - containerPort: 8125
+                        name: dogstatsdport
+                        protocol: UDP
+                      - containerPort: 8126
+                        name: traceport
+                        protocol: TCP
                   env:
-                      - { name: DD_API_KEY, value: <DATADOG_API_KEY> }
-                      - { name: KUBERNETES, value: 'true' }
-                      - { name: DD_HEALTH_PORT, value: '5555' }
-                      - { name: DD_PROCESS_AGENT_ENABLED, value: 'true' }
-                      - { name: DD_SYSTEM_PROBE_ENABLED, value: 'true' }
-                      # DD_SYSTEM_PROBE_EXTERNAL is set to true to avoid starting the system probe
-                      # in the main Datadog agent container when the system probe runs in a
-                      # dedicated container, which is the recommended configuration.
-                      - { name: DD_SYSTEM_PROBE_EXTERNAL, value: 'true' }
-                      - {
-                            name: DD_SYSPROBE_SOCKET,
-                            value: '/var/run/s6/sysprobe.sock',
-                        }
+                      - name: DD_API_KEY
+                        value: '<DATADOG_API_KEY>'
+                      - name: KUBERNETES
+                        value: 'true'
+                      - name: DD_HEALTH_PORT
+                        value: '5555'
+                      - name: DD_PROCESS_AGENT_ENABLED
+                        value: 'true'
+                      - name: DD_SYSTEM_PROBE_ENABLED
+                        value: 'true'
+                      - name: DD_SYSTEM_PROBE_EXTERNAL
+                        value: 'true'
+                      - name: DD_SYSPROBE_SOCKET
+                        value: /var/run/s6/sysprobe.sock
                       - name: DD_KUBERNETES_KUBELET_HOST
                         valueFrom:
                             fieldRef:
                                 fieldPath: status.hostIP
                   resources:
                       requests:
-                          memory: '256Mi'
-                          cpu: '200m'
+                          memory: 256Mi
+                          cpu: 200m
                       limits:
-                          memory: '256Mi'
-                          cpu: '200m'
+                          memory: 256Mi
+                          cpu: 200m
                   volumeMounts:
-                      - { name: dockersocket, mountPath: /var/run/docker.sock }
-                      - { name: procdir, mountPath: /host/proc, readOnly: true }
-                      - {
-                            name: cgroups,
-                            mountPath: /host/sys/fs/cgroup,
-                            readOnly: true,
-                        }
-                      - { name: debugfs, mountPath: /sys/kernel/debug }
-                      - { name: s6-run, mountPath: /var/run/s6 }
+                      - name: dockersocket
+                        mountPath: /var/run/docker.sock
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: s6-run
+                        mountPath: /var/run/s6
                   livenessProbe:
                       httpGet:
                           path: /health
@@ -166,50 +170,55 @@ spec:
                       successThreshold: 1
                       failureThreshold: 3
                 - name: system-probe
-                  image: datadog/agent:latest
+                  image: 'datadog/agent:latest'
                   imagePullPolicy: Always
                   securityContext:
                       capabilities:
                           add:
-                              [
-                                  'SYS_ADMIN',
-                                  'SYS_RESOURCE',
-                                  'SYS_PTRACE',
-                                  'NET_ADMIN',
-                              ]
+                              - SYS_ADMIN
+                              - SYS_RESOURCE
+                              - SYS_PTRACE
+                              - NET_ADMIN
                   command:
                       - /opt/datadog-agent/embedded/bin/system-probe
                   env:
-                      - { name: DD_SYSTEM_PROBE_ENABLED, value: 'true' }
-                      - {
-                            name: DD_SYSPROBE_SOCKET,
-                            value: '/var/run/s6/sysprobe.sock',
-                        }
+                      - name: DD_SYSTEM_PROBE_ENABLED
+                        value: 'true'
+                      - name: DD_SYSPROBE_SOCKET
+                        value: /var/run/s6/sysprobe.sock
                   resources:
                       requests:
-                          memory: '150Mi'
-                          cpu: '200m'
+                          memory: 150Mi
+                          cpu: 200m
                       limits:
-                          memory: '150Mi'
-                          cpu: '200m'
+                          memory: 150Mi
+                          cpu: 200m
                   volumeMounts:
-                      - { name: procdir, mountPath: /host/proc, readOnly: true }
-                      - {
-                            name: cgroups,
-                            mountPath: /host/sys/fs/cgroup,
-                            readOnly: true,
-                        }
-                      - { name: debugfs, mountPath: /sys/kernel/debug }
-                      - { name: s6-run, mountPath: /var/run/s6 }
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: s6-run
+                        mountPath: /var/run/s6
             volumes:
-                - {
-                      name: dockersocket,
-                      hostPath: { path: /var/run/docker.sock },
-                  }
-                - { name: procdir, hostPath: { path: /proc } }
-                - { name: cgroups, hostPath: { path: /sys/fs/cgroup } }
-                - { name: s6-run, emptyDir: {} }
-                - { name: debugfs, hostPath: { path: /sys/kernel/debug } }
+                - name: dockersocket
+                  hostPath:
+                      path: /var/run/docker.sock
+                - name: procdir
+                  hostPath:
+                      path: /proc
+                - name: cgroups
+                  hostPath:
+                      path: /sys/fs/cgroup
+                - name: s6-run
+                  emptyDir: {}
+                - name: debugfs
+                  hostPath:
+                      path: /sys/kernel/debug
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
