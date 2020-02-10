@@ -410,7 +410,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 #### NGINX configuration
 
-This example `nginx.conf` can be used to proxy agent traffic to the Datadog intake. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
