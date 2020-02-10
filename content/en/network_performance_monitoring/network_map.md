@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problem areas.
+The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problematic areas.
 
 {{< img src="network_performance_monitoring/network_map/network_map_2.png" alt="network_map" >}}
 
