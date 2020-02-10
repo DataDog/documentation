@@ -1,6 +1,6 @@
 ---
 title: "Facturation de l'intégration Google\_Cloud"
-kind: faq
+kind: documentation
 ---
 ## Présentation
 
@@ -12,19 +12,20 @@ Les autres ressources Google Cloud (CloudSQL, Google App Engine, Pub/Sub, etc
 
 Utilisez le [carré d'intégration Google Cloud][1] pour contrôler la collecte de métriques. Accédez à l'onglet **Configuration** et sélectionnez un projet ou ajoutez-en un autre. Chaque projet est contrôlé via l'option **Optionally Limit Metrics Collection to hosts with tag**. Limitez les métriques par [tag de host][2] :
 
-{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" responsive="true">}}
+{{< img src="account_management/billing/google-cloud01.png" alt="Google Cloud" >}}
 
 Lorsque vous appliquez des limites à des projets Google Cloud depuis le carré d'intégration, les instances précédemment identifiées peuvent rester dans la [liste d'infrastructures][3] jusqu'à 2 heures. Durant cette période de transition, les instances GCE affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
 Les hosts sur lesquels un Agent est exécuté s'affichent toujours et sont pris en compte dans votre facture. L'application de limites concerne uniquement les instances GCE sur lesquelles aucun Agent n'est exécuté.
 
 ## Dépannage
+
 Pour toute question technique, contactez [l'assistance Datadog][4].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [2]: /fr/tagging/using_tags/#integrations
-[3]: /fr/graphing/infrastructure
+[3]: /fr/infrastructure
 [4]: /fr/help
 [5]: mailto:success@datadoghq.com

@@ -4,7 +4,7 @@ categories:
   - google cloud
 ddtype: crawler
 dependencies: []
-description: Recueillez des métriques pour votre projet et comparez-les entre les différentes versions de votre projet.
+description: Recueillez des métriques pour votre projet et comparez-les entre ses différentes versions.
 doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
 git_integration_title: google_app_engine
 has_logo: true
@@ -13,8 +13,8 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_app_engine
-public_title: Intégration Datadog/Google App Engine
-short_description: Recueillez des métriques pour votre projet et comparez-les entre les différentes versions de versions.
+public_title: "Intégration Datadog/Google\_App\_Engine"
+short_description: Recueillez des métriques pour votre projet et comparez-les entre ses différentes versions.
 version: '1.0'
 ---
 ## Présentation
@@ -58,7 +58,7 @@ Assurez-vous d'avoir activé Billing pour votre projet Google App Engine afin 
           - name: ssl
             version: "latest"
 
-4. Ajoutez ```dogapi``` dans le fichier requirements.txt.
+4. Ajoutez `dogapi` dans le fichier requirements.txt.
 
         echo dogapi >> requirements.txt
 
@@ -95,6 +95,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [2]: https://docs.datadoghq.com/fr/libraries
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/google_app_engine/google_app_engine_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

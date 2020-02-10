@@ -35,6 +35,7 @@ supported_os:
 このチェックは、Datadog Agent を通じて [Hyper-V][1] を監視します。
 
 ## セットアップ
+
 ### インストール
 
 Hyper-V チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
@@ -71,16 +72,13 @@ Hyper-V には、イベントは含まれません。
 
 お役に立つドキュメント、リンクや記事:
 
-* [Datadog を使用した Microsoft Hyper-V の監視][9]
+- [Datadog を使用した Microsoft Hyper-V の監視][9]
 
 [1]: https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server
 [3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows
 [4]: https://github.com/DataDog/integrations-core/blob/master/hyperv/datadog_checks/hyperv/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/hyperv/metadata.csv
 [8]: https://docs.datadoghq.com/ja/help
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
-
-
-{{< get-dependencies >}}

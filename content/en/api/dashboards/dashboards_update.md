@@ -38,5 +38,15 @@ external_redirect: /api/#update-a-dashboard
         The default value for the template variable on dashboard load.
     * **`prefix`** [*optional*, *default*=**None**]:
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
+* **`template_variable_presets`** [*optional*, *default*=**None**]:
+    Array of template variables saved views. Saved views definitions follow this form:
+    * **`name`** [*required*]:
+        The name of the saved view.
+    * **`template_variables`** [*optional*, *default*=**None**]:
+        Array of template variables that don't have their default value. Template variable definitions follow this form:
+      * **`name`** [*optional*, *default*=**None**]:
+        The name of the variable.
+      * **`value`** [*optional*, *default*=**None**]:
+        The value of the template variable within the saved view.
 
-[1]: /graphing/widgets
+[1]: /dashboards/widgets

@@ -3,7 +3,7 @@ title: Datadog 101 - Functions
 kind: video
 language: en
 wistiaid: gl60wag74v
-videos:
+"video-categories":
     - Datadog 101
     - Dashboards
 summary: "Make your graphs more effective by using functions in interesting ways"

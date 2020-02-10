@@ -65,16 +65,42 @@ main:
     parent: "getting_started_collect_traces"
     weight: 501
 
+  ## GETTING STARTED - API
+
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
     weight: 6
 
+  ## GETTING STARTED - Traces
+
+  - name: "Synthetics"
+    identifier: "getting_started_synthetics"
+    url: "getting_started/synthetics/"
+    parent: "getting_started"
+    weight: 7opl
+  - name: "Private Location"
+    identifier: "getting_started_private_location"
+    url: "getting_started/synthetics/private_location"
+    parent: "getting_started_synthetics"
+    weight: 701
+  - name: "Browser Test"
+    identifier: "getting_started_browser_test"
+    url: "getting_started/synthetics/browser_test"
+    parent: "getting_started_synthetics"
+    weight: 702
+  - name: "API Test"
+    identifier: "getting_started_api_test"
+    url: "getting_started/synthetics/api_test"
+    parent: "getting_started_synthetics"
+    weight: 703
+
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 7
+    weight: 8
+
 
 #############
 ## TAGGING ##
@@ -259,11 +285,21 @@ main:
     identifier: "cluster_agent_commands"
     parent: "agent_cluster"
     weight: 404
+  - name: "Cluster metadata provider"
+    url: "agent/cluster_agent/metadata_provider/"
+    identifier: "cluster_agent_metadata_provider"
+    parent: "agent_cluster"
+    weight: 405
+  - name: "Build"
+    url: "agent/cluster_agent/build/"
+    identifier: "cluster_agent_build"
+    parent: "agent_cluster"
+    weight: 406
   - name: "Troubleshooting"
     url: "agent/cluster_agent/troubleshooting/"
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
-    weight: 405
+    weight: 407
 
   ## AGENT - Autodiscovery
 
@@ -272,10 +308,14 @@ main:
     identifier: "agent_autodiscovery"
     parent: "agent"
     weight: 5
+  - name: "Basic Autodiscovery"
+    url: "agent/autodiscovery/basic_autodiscovery"
+    parent: "agent_autodiscovery"
+    weight: 500
   - name: "Auto-Configuration"
     url: "agent/autodiscovery/auto_conf/"
     parent: "agent_autodiscovery"
-    weight: 501
+    weight: 502
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
     parent: "agent_autodiscovery"
@@ -296,12 +336,12 @@ main:
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
     weight: 506
-  - name: "Endpoints Checks"
-    url: "agent/autodiscovery/endpointschecks/"
-    parent: "agent_autodiscovery"
-    weight: 507
   - name: "Cluster Checks"
     url: "agent/autodiscovery/clusterchecks/"
+    parent: "agent_autodiscovery"
+    weight: 507
+  - name: "Endpoints Checks"
+    url: "agent/autodiscovery/endpointschecks/"
     parent: "agent_autodiscovery"
     weight: 508
   - name: "Troubleshooting"
@@ -333,10 +373,21 @@ main:
     identifier: "agent_proxy"
     weight: 7
 
-  - name: "Upgrade to Agent v6"
-    url: "agent/guide/upgrade-to-agent-v6/"
+  ## AGENT - Versions
+
+  - name: "Versions"
+    url: "agent/versions"
     parent: "agent"
+    identifier: "agent_versions"
     weight: 8
+  - name: "Upgrade to Agent v7"
+    url: "agent/versions/upgrade_to_agent_v7/"
+    parent: "agent_versions"
+    weight: 801
+  - name: "Upgrade to Agent v6"
+    url: "agent/versions/upgrade_to_agent_v6/"
+    parent: "agent_versions"
+    weight: 802
 
   ## AGENT - Troubleshooting
   - name: "Troubleshooting"
@@ -368,6 +419,10 @@ main:
     url: "agent/troubleshooting/integrations/"
     parent: "agent_troubleshooting"
     weight: 906
+  - name: "Site Issues"
+    url: "agent/troubleshooting/site/"
+    parent: "agent_troubleshooting"
+    weight: 907
 
   ## AGENT - Guides
   - name: "Guides"
@@ -402,193 +457,208 @@ main:
     pre: "nav_watchdog"
     weight: 50000
 
-##############
-## GRAPHING ##
-##############
+############
+## EVENTS ##
+############
 
-  - name: "Graphing"
-    url: "graphing/"
-    pre: "nav_graphing"
-    identifier: "graphing"
+  - name: "Events"
+    url: "events/"
+    identifier: "events_top_level"
+    pre: "nav_events"
     weight: 60000
 
-  - name: "Using Graphs"
-    url: "graphing/using_graphs/"
-    parent: "graphing"
-    identifier: "graphing_using_graphs"
-    weight: 1
-
-  ## GRAPHING - Dashboards
+################
+## DASHBOARDS ##
+################
 
   - name: "Dashboards"
-    url: "graphing/dashboards/"
-    parent: "graphing"
-    identifier: "graphing_dashboards"
+    url: "dashboards/"
+    pre: "nav_dashboards"
+    identifier: "dashboards"
+    weight: 70000
+
+  - name: "Screenboards"
+    url: "dashboards/screenboards/"
+    parent: "dashboards"
+    weight: 1
+
+  - name: "Timeboards"
+    url: "dashboards/timeboards/"
+    parent: "dashboards"
     weight: 2
-  - name: "Screenboard"
-    url: "graphing/dashboards/screenboard/"
-    parent: "graphing_dashboards"
-    weight: 201
-  - name: "Timeboard"
-    url: "graphing/dashboards/timeboard/"
-    parent: "graphing_dashboards"
-    weight: 202
-  - name: "Template Variables"
-    url: "graphing/dashboards/template_variables/"
-    parent: "graphing_dashboards"
-    weight: 203
-    identifier: "graphing_dashboards_temp_variables"
-  - name: "Shared Graphs"
-    url: "graphing/dashboards/shared_graph/"
-    parent: "graphing_dashboards"
-    weight: 204
 
-  ## GRAPHING - Metrics
-
-  - name: "Metrics"
-    url: "graphing/metrics/"
-    parent: "graphing"
-    identifier: "graphing_metrics"
+  - name: "Widgets"
+    url: "dashboards/widgets/"
+    parent: "dashboards"
     weight: 3
-  - name: "Introduction"
-    url: "graphing/metrics/introduction/"
-    parent: "graphing_metrics"
-    weight: 301
-  - name: "Explorer"
-    url: "graphing/metrics/explorer/"
-    parent: "graphing_metrics"
-    weight: 302
-  - name: "Summary"
-    url: "graphing/metrics/summary/"
-    parent: "graphing_metrics"
-    weight: 303
-  - name: "Distributions"
-    url: "graphing/metrics/distributions/"
-    parent: "graphing_metrics"
-    identifier: "graphing_metrics_distributions"
-    weight: 304
 
-  - name: "Metric Correlations"
-    url: "graphing/correlations/"
-    parent: "graphing"
+  - name: "Querying"
+    url: "dashboards/querying/"
+    parent: "dashboards"
     weight: 4
 
-  - name: "Notebooks"
-    url: "graphing/notebooks/"
-    parent: "graphing"
-    weight: 5
+  ## DASHBOARDS - Functions
 
-  - name: "Event Stream"
-    url: "graphing/event_stream/"
-    parent: "graphing"
+  - name: "Functions"
+    url: "dashboards/functions/"
+    parent: "dashboards"
+    identifier: "dashboards_functions"
+    weight: 5
+  - name: "Algorithms"
+    url: "dashboards/functions/algorithms/"
+    parent: "dashboards_functions"
+    weight: 501
+  - name: "Arithmetic"
+    url: "dashboards/functions/arithmetic/"
+    parent: "dashboards_functions"
+    weight: 502
+  - name: "Count"
+    url: "dashboards/functions/count/"
+    parent: "dashboards_functions"
+    weight: 503
+  - name: "Interpolation"
+    url: "dashboards/functions/interpolation/"
+    parent: "dashboards_functions"
+    weight: 504
+  - name: "Rank"
+    url: "dashboards/functions/rank/"
+    parent: "dashboards_functions"
+    weight: 505
+  - name: "Rate"
+    url: "dashboards/functions/rate/"
+    parent: "dashboards_functions"
+    weight: 506
+  - name: "Regression"
+    url: "dashboards/functions/regression/"
+    parent: "dashboards_functions"
+    weight: 507
+  - name: "Rollup"
+    url: "dashboards/functions/rollup/"
+    parent: "dashboards_functions"
+    weight: 508
+  - name: "Smoothing"
+    url: "dashboards/functions/smoothing/"
+    parent: "dashboards_functions"
+    weight: 509
+  - name: "Timeshift"
+    url: "dashboards/functions/timeshift/"
+    parent: "dashboards_functions"
+    weight: 510
+  - name: "Beta"
+    url: "dashboards/functions/beta/"
+    parent: "dashboards_functions"
+    weight: 511
+
+  - name: "Correlations"
+    url: "dashboards/correlations/"
+    parent: "dashboards"
     weight: 6
 
-  ## GRAPHING - Infrastructure
-
-  - name: "Infrastructure"
-    url: "graphing/infrastructure/"
-    parent: "graphing"
-    identifier: "graphing_infrastructure"
+  - name: "Template Variables"
+    url: "dashboards/template_variables/"
+    parent: "dashboards"
     weight: 7
-  - name: "Container Map"
-    url: "graphing/infrastructure/containermap/"
-    parent: "graphing_infrastructure"
-    weight: 701
-  - name: "Host Map"
-    url: "graphing/infrastructure/hostmap/"
-    parent: "graphing_infrastructure"
-    weight: 702
-  - name: "Live Containers"
-    url: "graphing/infrastructure/livecontainers/"
-    parent: "graphing_infrastructure"
-    weight: 703
-  - name: "Live Processes"
-    url: "graphing/infrastructure/process/"
-    parent: "graphing_infrastructure"
-    weight: 704
-  - name: "Serverless"
-    url: "graphing/infrastructure/serverless/"
-    parent: "graphing_infrastructure"
-    weight: 706
+    identifier: "dashboards_temp_variables"
 
-  ## GRAPHING - Functions
-
-  - name: "From the query to the graph "
-    url: "graphing/functions/"
-    parent: "graphing"
-    identifier: "graphing_functions"
+  - name: "Sharing"
+    url: "dashboards/sharing/"
+    parent: "dashboards"
     weight: 8
-  - name: "Algorithms"
-    url: "graphing/functions/algorithms/"
-    parent: "graphing_functions"
-    weight: 801
-  - name: "Arithmetic"
-    url: "graphing/functions/arithmetic/"
-    parent: "graphing_functions"
-    weight: 802
-  - name: "Count"
-    url: "graphing/functions/count/"
-    parent: "graphing_functions"
-    weight: 803
-  - name: "Interpolation"
-    url: "graphing/functions/interpolation/"
-    parent: "graphing_functions"
-    weight: 804
-  - name: "Rank"
-    url: "graphing/functions/rank/"
-    parent: "graphing_functions"
-    weight: 805
-  - name: "Rate"
-    url: "graphing/functions/rate/"
-    parent: "graphing_functions"
-    weight: 806
-  - name: "Regression"
-    url: "graphing/functions/regression/"
-    parent: "graphing_functions"
-    weight: 807
-  - name: "Rollup"
-    url: "graphing/functions/rollup/"
-    parent: "graphing_functions"
-    weight: 808
-  - name: "Smoothing"
-    url: "graphing/functions/smoothing/"
-    parent: "graphing_functions"
-    weight: 809
-  - name: "Timeshift"
-    url: "graphing/functions/timeshift/"
-    parent: "graphing_functions"
-    weight: 810
-  - name: "Beta"
-    url: "graphing/functions/beta/"
-    parent: "graphing_functions"
-    weight: 811
 
   ## GRAPHING - Graphing JSON
 
   - name: "Graphing with JSON"
-    url: "graphing/graphing_json/"
-    parent: "graphing"
+    url: "dashboards/graphing_json/"
+    parent: "dashboards"
     identifier: "graphing_json"
     weight: 9
 
   - name: "Widget JSON schema"
-    url: "graphing/graphing_json/widget_json/"
+    url: "dashboards/graphing_json/widget_json/"
     parent: "graphing_json"
     weight: 901
   - name: "Request JSON schema"
-    url: "graphing/graphing_json/request_json/"
+    url: "dashboards/graphing_json/request_json/"
     parent: "graphing_json"
     weight: 902
 
-  - name: "Widgets"
-    url: "graphing/widgets/"
-    parent: "graphing"
-    weight: 10
+####################
+## INFRASTRUCTURE ##
+####################
 
-  - name: "Guides"
-    url: "graphing/guide/"
-    parent: "graphing"
-    weight: 11
+  - name: "Infrastructure"
+    url: "infrastructure/"
+    identifier: "infrastructure"
+    pre: "nav_infrastructure"
+    weight: 80000
+
+  - name: "Infrastructure List"
+    url: "infrastructure/list/"
+    parent: "infrastructure"
+    weight: 2
+
+  - name: "Host Map"
+    url: "infrastructure/hostmap/"
+    parent: "infrastructure"
+    weight: 3
+
+  - name: "Container Map"
+    url: "infrastructure/containermap/"
+    parent: "infrastructure"
+    weight: 4
+
+  - name: "Live Processes"
+    url: "infrastructure/process/"
+    parent: "infrastructure"
+    weight: 5
+
+  - name: "Live Containers"
+    url: "infrastructure/livecontainers/"
+    parent: "infrastructure"
+    weight: 6
+
+  - name: "Serverless"
+    url: "infrastructure/serverless/"
+    parent: "infrastructure"
+    weight: 7
+
+#############
+## METRICS ##
+#############
+
+  - name: "Metrics"
+    url: "metrics/"
+    identifier: "metrics_top_level"
+    pre: "nav_metrics"
+    weight: 90000
+
+  - name: "Introduction"
+    url: "metrics/introduction/"
+    parent: "metrics_top_level"
+    weight: 901
+  - name: "Explorer"
+    url: "metrics/explorer/"
+    parent: "metrics_top_level"
+    weight: 902
+  - name: "Summary"
+    url: "metrics/summary/"
+    parent: "metrics_top_level"
+    weight: 903
+  - name: "Distributions"
+    url: "metrics/distributions/"
+    parent: "metrics_top_level"
+    identifier: "metrics_distributions"
+    weight: 904
+
+#############
+## NOTEBOOKS ##
+#############
+
+  - name: "Notebooks"
+    url: "notebooks/"
+    identifier: "notebooks"
+    pre: "nav_notebooks"
+    weight: 100000
 
 ##############
 ## ALERTING ##
@@ -598,7 +668,7 @@ main:
     url: "monitors/"
     pre: "nav_alerting"
     identifier: "alerting"
-    weight: 70000
+    weight: 110000
 
   ## ALERTING - Monitor Types
 
@@ -731,23 +801,19 @@ main:
     url: "tracing/"
     pre: "nav_tracing"
     identifier: "tracing"
-    weight: 80000
+    weight: 120000
 
   ## TRACING - Enable tracing
 
-  - name: "Enable trace collection"
+  - name: "Enable Trace Collection"
     url: "tracing/send_traces/"
     identifier: "tracing_send_traces"
     parent: "tracing"
     weight: 1
-  - name: "Agent APM metrics"
-    url: "tracing/send_traces/agent-apm-metrics/"
-    parent: "tracing_send_traces"
-    weight: 101
 
   ## TRACING - Setup
 
-  - name: "Instrument your application"
+  - name: "Instrument Your Application"
     url: "tracing/setup/"
     parent: "tracing"
     identifier: "tracing_setup"
@@ -773,66 +839,74 @@ main:
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
     weight: 205
-  - name: ".NET"
-    url: "tracing/setup/dotnet/"
+  - name: ".NET Framework"
+    url: "tracing/setup/dotnet-framework/"
     parent: "tracing_setup"
     weight: 206
+  - name: ".NET Core"
+    url: "tracing/setup/dotnet-core/"
+    parent: "tracing_setup"
+    weight: 207
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 207
+    weight: 208
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 208
+    weight: 209
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 209
+    weight: 210
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 210
+    weight: 211
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
-    weight: 211
+    weight: 212
 
-  ## TRACING - Enrich Tracing
+  ## TRACING - App analytics
 
-  - name: "Enrich Tracing"
-    url: "tracing/advanced/"
+  - name: "App Analytics"
+    url: "tracing/app_analytics/"
     parent: "tracing"
-    identifier: "tracing_advanced"
+    identifier: "app_analytics"
     weight: 3
-  - name: "Trace Search"
-    url: "tracing/advanced/search/"
-    parent: "tracing_advanced"
-    weight: 301
-  - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces/"
-    parent: "tracing_advanced"
-    weight: 302
-  - name: "Adding Span Tags"
-    url: "tracing/advanced/adding_metadata_to_spans/"
-    parent: "tracing_advanced"
+  - name: "Viewing Analytics"
+    url: "tracing/app_analytics/analytics/"
+    parent: "app_analytics"
     weight: 303
-  - name: "Runtime Metrics"
-    url: "tracing/advanced/runtime_metrics/"
-    parent: "tracing_advanced"
+  - name: "Trace Search"
+    url: "tracing/app_analytics/search/"
+    parent: "app_analytics"
     weight: 304
-  - name: "OpenTracing"
-    url: "tracing/advanced/opentracing/"
-    parent: "tracing_advanced"
+  - name: "Monitoring App Analytics"
+    url: "monitors/monitor_types/apm/?tab=appanalytics"
+    parent: "app_analytics"
     weight: 305
+
+  - name: "Connect Logs and Traces"
+    url: "tracing/connect_logs_and_traces/"
+    parent: "tracing"
+    weight: 4
+
+  - name: "Runtime Metrics"
+    url: "tracing/runtime_metrics/"
+    parent: "tracing"
+    weight: 5
+
   - name: "Manual Instrumentation"
-    url: "tracing/advanced/manual_instrumentation/"
-    parent: "tracing_advanced"
-    weight: 306
-  - name: "Setting Primary Tags to scope "
-    url: "tracing/advanced/setting_primary_tags_to_scope/"
-    parent: "tracing_advanced"
-    weight: 307
+    url: "tracing/manual_instrumentation/"
+    parent: "tracing"
+    weight: 6
+
+  - name: "OpenTracing"
+    url: "tracing/opentracing/"
+    parent: "tracing"
+    weight: 7
 
   ## TRACING - Using the APM UI
 
@@ -840,59 +914,45 @@ main:
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 4
+    weight: 8
   - name: "Services List"
     url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 401
+    weight: 801
   - name: "Service Page"
     url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 402
+    weight: 802
   - name: "Resource Page"
     url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 403
+    weight: 803
   - name: "Trace View"
     url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 404
+    weight: 804
   - name: "Service Map"
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 405
-
-  ## TRACING - Trace Search
-
-  - name: "App Analytics"
-    url: "tracing/app_analytics/"
-    parent: "tracing"
-    identifier: "app_analytics"
-    weight: 5
-  - name: "Agent Configuration"
-    url: "tracing/app_analytics/agent_trace_search/"
-    parent: "app_analytics"
-    weight: 501
-  - name: "Viewing Analytics"
-    url: "tracing/app_analytics/analytics/"
-    parent: "app_analytics"
-    weight: 503
-  - name: "Monitors"
-    url: "monitors/monitor_types/apm/"
-    parent: "app_analytics"
-    weight: 504
+    weight: 805
 
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 8
+    weight: 9
 
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 9
+    weight: 10
+  - name: Agent APM metrics
+    url: "tracing/troubleshooting/agent_apm_metrics"
+    identifier: "tracing_troubleshooting_apm_metrics"
+    parent: "tracing_troubleshooting"
+    weight: 10
+
 
 ##########
 ## LOGS ##
@@ -902,7 +962,7 @@ main:
     url: "logs/"
     pre: "nav_logs"
     identifier: "log_management"
-    weight: 90000
+    weight: 130000
 
   ## LOGS -  Log Collection
 
@@ -916,44 +976,49 @@ main:
     url: "logs/log_collection/javascript/"
     parent: "log_collection"
     weight: 101
+  - name: "Android"
+    identifier: "log_android"
+    url: "logs/log_collection/android/"
+    parent: "log_collection"
+    weight: 102
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 102
+    weight: 103
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 103
+    weight: 104
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
     identifier: "log_collection_java"
-    weight: 104
+    weight: 105
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
     parent: "log_collection"
-    weight: 105
+    weight: 106
   - name: "PHP"
     identifier: "log_php"
     url: "logs/log_collection/php/"
     parent: "log_collection"
-    weight: 106
+    weight: 107
   - name: "Python"
     identifier: "log_python"
     url: "logs/log_collection/python/"
     parent: "log_collection"
-    weight: 107
+    weight: 108
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
     identifier: "log_collection_ruby"
-    weight: 108
+    weight: 109
   - name: "Other Integrations"
     url: "integrations/#cat-log-collection"
     identifier: "other_integrations"
     parent: "log_collection"
-    weight: 109
+    weight: 110
 
   ## LOGS - Processing
 
@@ -1035,13 +1100,13 @@ main:
     weight: 704
 
   - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces/?tab=java"
+    url: "tracing/connect_logs_and_traces/?tab=java"
     parent: "log_management"
     identifier: "logs_traces_connection"
     weight: 8
 
   - name: "Correlate Logs with Metrics"
-    url: "graphing/dashboards/timeboard/#correlation-between-logs-and-metrics"
+    url: "dashboards/timeboards/#graph-menu"
     parent: "log_management"
     identifier: "logs_metrics_correlation"
     weight: 9
@@ -1057,6 +1122,34 @@ main:
     parent: "log_management"
     weight: 11
 
+#########################
+## Security Monitoring ##
+#########################
+
+  - name: "Security Monitoring"
+    url: "security_monitoring/"
+    pre: "nav_security_monitoring"
+    identifier: "security_monitoring"
+    weight: 135000
+
+  - name: "Getting Started"
+    url: "security_monitoring/getting_started"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_getting_started"
+    weight: 1
+
+  - name: "Signals Explorer"
+    url: "security_monitoring/explorer"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_explorer"
+    weight: 2
+
+  - name: "Detection Rules"
+    url: "security_monitoring/detection_rules"
+    parent: "security_monitoring"
+    identifier: "security_monitoring_detection_rules"
+    weight: 3
+
 ################
 ## SYNTHETICS ##
 ################
@@ -1065,7 +1158,7 @@ main:
     url: "synthetics/"
     pre: "nav_synthetics"
     identifier: "synthetics"
-    weight: 100000
+    weight: 140000
 
   - name: "API Tests"
     url: "synthetics/api_tests/"
@@ -1078,6 +1171,18 @@ main:
     parent: "synthetics"
     identifier: "synthetics_browser_tests"
     weight: 2
+  - name: "Actions"
+    url: "synthetics/browser_tests/actions"
+    parent: "synthetics_browser_tests"
+    weight: 201
+  - name: "Test Results"
+    url: "synthetics/browser_tests/test_results"
+    parent: "synthetics_browser_tests"
+    weight: 202
+  - name: "Advanced Options"
+    url: "synthetics/browser_tests/advanced_options"
+    parent: "synthetics_browser_tests"
+    weight: 203
 
   - name: "Private Locations"
     url: "synthetics/private_locations"
@@ -1092,10 +1197,6 @@ main:
     parent: "synthetics"
     identifier: "synthetics_apm"
     weight: 4
-  - name: "Browser Tests"
-    url: "synthetics/apm/browser_tests"
-    parent: "synthetics_apm"
-    weight: 401
 
   - name: "Identify Synthetics Bots"
     url: "synthetics/identify_synthetics_bots/"
@@ -1122,23 +1223,79 @@ main:
     url: "real_user_monitoring/"
     pre: "nav_rum"
     identifier: "rum"
-    weight: 110000
+    weight: 150000
 
-  - name: "Setup"
-    url: "real_user_monitoring/setup"
+  ## RUM - Installation
+
+  - name: "Get Started"
+    url: "real_user_monitoring/installation/"
     parent: "rum"
-    identifier: "rum_setup"
+    identifier: "rum_install"
     weight: 1
-  - name: "Views Explorer"
-    url: "real_user_monitoring/rum_explorer"
+  - name: "Advanced Configuration"
+    url: "real_user_monitoring/installation/advanced_configuration/"
+    parent: "rum_install"
+    identifier: "rum_advanced"
+    weight: 101
+
+  ## RUM - Dashboards
+
+  - name: "Dashboards"
+    url: "real_user_monitoring/dashboards/"
     parent: "rum"
-    identifier: "rum_views_explorer"
+    identifier: "rum_dashboards"
     weight: 2
-  - name: "RUM Analytics"
-    url: "real_user_monitoring/rum_analytics"
+
+  ## RUM - Explorer
+
+  - name: "Explorer"
+    url: "real_user_monitoring/explorer/"
     parent: "rum"
-    identifier: "rum_analytics"
+    identifier: "rum_explorer"
     weight: 3
+  - name: "Search"
+    url: "real_user_monitoring/explorer/search/"
+    parent: "rum_explorer"
+    identifier: "rum_explorer_search"
+    weight: 301
+  - name: "Analytics"
+    url: "real_user_monitoring/explorer/analytics/"
+    parent: "rum_explorer"
+    identifier: "rum_explorer_analytics"
+    weight: 302
+
+  ## RUM - Data Collected
+
+  - name: "Data Collected"
+    url: "real_user_monitoring/data_collected/"
+    parent: "rum"
+    identifier: "rum_data_collected"
+    weight: 4
+  - name: "View"
+    url: "real_user_monitoring/data_collected/view"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_views"
+    weight: 401
+  - name: "Resource"
+    url: "real_user_monitoring/data_collected/resource"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_resource"
+    weight: 402
+  - name: "Long Task"
+    url: "real_user_monitoring/data_collected/long_task"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_long_task"
+    weight: 403
+  - name: "Error"
+    url: "real_user_monitoring/data_collected/error"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_error"
+    weight: 404
+  - name: "User Action"
+    url: "real_user_monitoring/data_collected/user_action"
+    parent: "rum_data_collected"
+    identifier: "rum_data_collected_user_action"
+    weight: 405
 
 ####################################
 ## Network Performance Monitoring ##
@@ -1148,7 +1305,7 @@ main:
     url: "network_performance_monitoring/"
     pre: "nav_network"
     identifier: "npm"
-    weight: 120000
+    weight: 160000
 
   - name: "Installation"
     url: "network_performance_monitoring/installation"
@@ -1156,7 +1313,7 @@ main:
     identifier: "npm_installation"
     weight: 1
   - name: "Network Page"
-    url: "network_performance_monitoring/network_table"
+    url: "network_performance_monitoring/network_page"
     parent: "npm"
     identifier: "npm_page"
     weight: 2
@@ -1174,7 +1331,7 @@ main:
     url: "developers/"
     pre: "nav_developers"
     identifier: "dev_tools"
-    weight: 130000
+    weight: 170000
 
   - name: "DogStatsD"
     url: "developers/dogstatsd/"
@@ -1191,14 +1348,24 @@ main:
     url: "/developers/dogstatsd/unix_socket"
     parent: "dev_tools_dogstatsd"
     weight: 102
+
   - name: "High Throughput Data"
     url: "developers/dogstatsd/high_throughput/"
     parent: "dev_tools_dogstatsd"
     weight: 103
 
+  - name: "Data Aggregation"
+    url: "developers/dogstatsd/data_aggregation/"
+    parent: "dev_tools_dogstatsd"
+    weight: 104
+  - name: "DogStatsD Mapper"
+    url: "developers/dogstatsd/dogstatsd_mapper/"
+    parent: "dev_tools_dogstatsd"
+    weight: 105
+
   ## DEVELOPERS - Metrics
 
-  - name: "Metrics"
+  - name: "Custom Metrics"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
@@ -1239,11 +1406,6 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
     weight: 207
-  - name: "Custom Metrics"
-    url: "developers/metrics/custom_metrics/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_custom_metrics"
-    weight: 208
 
   ## DEVELOPERS - Events
 
@@ -1358,7 +1520,7 @@ main:
     url: "api/"
     pre: "nav_api"
     identifier: "api"
-    weight: 140000
+    weight: 180000
 
 ########################
 ## ACCOUNT MANAGEMENT ##
@@ -1368,12 +1530,19 @@ main:
     url: "account_management/"
     pre: "nav_account"
     identifier: "account_management"
-    weight: 150000
+    weight: 190000
 
-  - name: "Team management"
-    url: "account_management/team/"
+  ## ACCOUNT MANAGEMENT - TEAM
+
+  - name: "User management"
+    url: "account_management/users/"
     parent: "account_management"
+    identifier: "account_management_users"
     weight: 1
+  - name: "Default Datadog Roles"
+    url: "account_management/users/default_roles/"
+    parent: "account_management_users"
+    weight: 101
 
   - name: "Organization settings"
     url: "account_management/org_settings/"
@@ -1444,7 +1613,7 @@ main:
     url: "security/"
     pre: "nav_security"
     identifier: "security"
-    weight: 160000
+    weight: 200000
 
   - name: "Agent"
     url: "security/agent/"
@@ -1466,16 +1635,6 @@ main:
     parent: "security"
     weight: 4
 
-##############
-## GLOSSARY ##
-##############
-
-  - name: "Glossary"
-    url: "glossary/"
-    pre: "nav_glossary"
-    identifier: "glossary_top_level"
-    weight: 170000
-
 ##########
 ## HELP ##
 ##########
@@ -1484,4 +1643,4 @@ main:
     url: "help/"
     pre: "nav_help"
     identifier: "help_top_level"
-    weight: 180000
+    weight: 210000

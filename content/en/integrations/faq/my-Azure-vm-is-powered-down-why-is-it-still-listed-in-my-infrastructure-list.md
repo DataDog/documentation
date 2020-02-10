@@ -1,7 +1,6 @@
 ---
 title: My Azure VM is powered down. Why is it still listed in my infrastructure list?
 kind: faq
-disable_toc: true
 further_reading:
 - link: "account_management/billing/azure/"
   tag: "FAQ"

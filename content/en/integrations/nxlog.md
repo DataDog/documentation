@@ -12,6 +12,7 @@ aliases:
 has_logo: true
 integration_title: nxlog
 is_public: true
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md"]
 public_title: Datadog-NXlog Integration
 supported_os:
 - windows
@@ -22,6 +23,7 @@ supported_os:
 Configure NXLog to gather logs from your host, containers, & services.
 
 ## Setup
+
 ### Log collection
 
 {{< tabs >}}
@@ -30,7 +32,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
-    ```
+    ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
     ## otherwise it won't start.
     #To change for your own system if necessary
@@ -75,7 +77,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 2. Activate NXLog watchfile module
     For each file you want to monitor, add the following before the output section:
-    ```
+    ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
       Module im_file
@@ -89,7 +91,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     ```
 
 3. Make sure those files are plugged in the output section
-    ```
+    ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
@@ -102,7 +104,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 5. (Optional) Set extra parameters or tags.
     Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
 
-    ```
+    ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
@@ -113,7 +115,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 10516:
 
-    ```
+    ```conf
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
@@ -125,7 +127,6 @@ Configure NXLog to gather logs from your host, containers, & services.
     </Output>
     ```
 
-
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
@@ -133,7 +134,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
-    ```
+    ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
     ## otherwise it won't start.
     #To change for your own system if necessary
@@ -178,7 +179,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 2. Activate NXLog watchfile module
     For each file you want to monitor, add the following before the output section:
-    ```
+    ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
       Module im_file
@@ -192,7 +193,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     ```
 
 3. Make sure those files are plugged in the output section:
-    ```
+    ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
@@ -205,7 +206,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 5. (Optional) Set extra parameters or tags.
     Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
 
-    ```
+    ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
@@ -216,7 +217,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 443:
 
-    ```
+    ```conf
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
@@ -227,7 +228,6 @@ Configure NXLog to gather logs from your host, containers, & services.
       AllowUntrusted FALSE
     </Output>
     ```
-
 
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}

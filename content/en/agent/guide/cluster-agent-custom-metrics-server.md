@@ -1,7 +1,6 @@
 ---
 title: Custom Metrics Server for the Cluster Agent
 kind: guide
-disable_toc: false
 further_reading:
 - link: "agent/kubernetes/cluster/"
   tag: "Documentation"
@@ -59,7 +58,7 @@ To spin up the [Datadog Cluster Agent][6], perform the following steps:
 
 At this point, you should see:
 
-```
+```text
 PODS:
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE
@@ -81,7 +80,7 @@ Once the Datadog Cluster Agent is up and running, register it as an External Met
 
 Which should produce the following results:
 
-```
+```text
 clusterrolebinding.rbac.authorization.k8s.io "system:auth-delegator" created
 rolebinding.rbac.authorization.k8s.io "dca" created
 apiservice.apiregistration.k8s.io "v1beta1.external.metrics.k8s.io" created
@@ -95,7 +94,7 @@ Once you have the Datadog Cluster Agent running and the service registered, crea
 
 At this point, you should see:
 
-```
+```text
 PODS
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE
@@ -123,7 +122,7 @@ For advanced use cases, it is possible to have several metrics in the same HPA, 
 
 You should be seeing your NGINX pod running with the corresponding service:
 
-```
+```text
 POD:
 
 default       nginx-6757dd8769-5xzp2                   1/1       Running   0          3m
@@ -132,7 +131,6 @@ SVC:
 
 NAMESPACE     NAME                  TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)         AGE
 default       nginx                 ClusterIP   192.168.251.36    none          8090/TCP        3m
-
 
 HPAS:
 
@@ -152,7 +150,7 @@ Curl the IP of the NGINX service as follows:
 
 You should receive output resembling:
 
-```
+```shell
 $ curl 192.168.254.216:8090/nginx_status
 
 Active connections: 1
@@ -168,7 +166,7 @@ To do this, run: `while true; do curl <nginx_svc>:8090/nginx_status; sleep 0.1; 
 You should soon see the number of requests per second spiking and going above 9, the threshold over which the NGINX pods autoscale.
 Then, you should see new NGINX pods being created:
 
-```
+```text
 PODS:
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE

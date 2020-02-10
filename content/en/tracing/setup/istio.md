@@ -26,59 +26,6 @@ Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 2. [Make sure APM is enabled for your Agent][2].
 3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
-**Note**: The Agent pods fails to start up if Istio's automatic sidecar injection is enabled on the namespace that Datadog Agent runs in. To avoid this:
-
-- [Disable Sidecar Injection for the Datadog Agent](#disable-sidecar-injection-for-the-datadog-agent)
-- [Create a Headless Service for the Datadog Agent](#create-a-headless-service-for-the-datadog-agent)
-
-#### Disable Sidecar Injection for the Datadog Agent
-
-Add the `sidecar.istio.io/inject: "false"` annotation to the `datadog-agent` daemonset:
-
-```yaml
-...
-spec:
-  ...
-  template:
-    metadata:
-      annotations:
-        sidecar.istio.io/inject: "false"
-    ...
-
-```
-
-This can also be done with the `kubectl patch` command.
-
-```shell
-kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
-```
-
-#### Create a Headless Service for the Datadog Agent
-
-Create a headless service for the Datadog Agent using the YAML configuration specified below.
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: datadog-agent
-  name: datadog-agent
-spec:
-  clusterIP: None
-  ports:
-  - name: dogstatsdport
-    port: 8125
-    protocol: UDP
-    targetPort: 8125
-  - name: traceport
-    port: 8126
-    protocol: TCP
-    targetPort: 8126
-  selector:
-    app: datadog-agent
-```
-
 ### Istio Configuration and Installation
 
 To enable Datadog APM, a [custom Istio installation][3] is required to add two extra options before Istio is installed. These options are passed at the final `helm template` or `helm install` step:

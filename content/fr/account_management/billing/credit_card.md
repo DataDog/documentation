@@ -1,7 +1,6 @@
 ---
 title: Paiements par carte bancaire
-kind: faq
-disable_toc: true
+kind: documentation
 ---
 ## Présentation
 
@@ -18,6 +17,7 @@ Pour mettre à jour votre carte bancaire, accédez à la page [Plan][1] et cliqu
 Pour supprimer votre carte bancaire de Datadog, vous devez d'abord passer à l'offre **Gratuite**. Ensuite, utilisez le bouton **Remove Card** sur la page [Plan][1].
 
 ## Dépannage
+
 Pour toute question technique, contactez [l'assistance Datadog][3].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][2].

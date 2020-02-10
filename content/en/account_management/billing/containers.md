@@ -18,6 +18,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 Fargate is charged based on the concurrent number of tasks. For pricing, see the [Serverless][4] section on the pricing page.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][5].
 
 For billing questions, contact your [Customer Success][3] Manager.

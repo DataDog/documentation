@@ -1,7 +1,7 @@
 ---
 title: Upload IdP metadata
 type: apicontent
-order: 27.4
+order: 28.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
@@ -15,6 +15,7 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 ### Multipart Form-Data
 
 ##### HEADERS
+
 * **`Content-Type: multipart/form-data`**
 
 **ARGUMENTS**:
@@ -25,6 +26,7 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 ### XML Body
 
 ##### HEADERS
+
 * **`Content-Type: application/xml`**
 
 **ARGUMENTS**:

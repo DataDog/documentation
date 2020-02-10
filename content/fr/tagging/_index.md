@@ -22,12 +22,12 @@ Les tags sont conçus pour ajouter des caractéristiques aux métriques, afin de
 
 Les tags relient différents types de données dans Datadog. Grâce à certaines clés de tag **réservées**, vous pouvez corréler différent(e)s métriques, traces et logs et déclencher des actions. Voici quelques exemples :
 
-| Clé de tag     | Fonctionnalité                                                            |
-| ----------- | --------------------------------------------------------------------- |
-| `host`      | Corrélation entre des métriques, des traces, des processus et des logs              |
-| `device`    | Séparation de métriques, traces, processus et logs selon un appareil ou un disque   |
-| `source`    | Filtrage d'événements et création automatisée de pipelines pour la gestion des logs    |
-| `service`   | Corrélation entre des métriques, des traces et des logs                         |
+| Clé de tag   | Fonctionnalité                                                            |
+|-----------|-----------------------------------------------------------------------|
+| `host`    | Corrélation entre des métriques, des traces, des processus et des logs              |
+| `device`  | Séparation de métriques, traces, processus et logs selon un appareil ou un disque |
+| `source`  | Filtrage de spans et création automatisée de pipelines pour la gestion des logs     |
+| `service` | Corrélation entre des métriques, des traces et des logs                         |
 
 ## Importance
 
@@ -56,10 +56,10 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 3. Les tags sont convertis en minuscules. Ainsi, les tags `CamelCase` ne sont pas recommandés. Les intégrations reposant sur une authentification (crawler) convertissent les tags au format camel case en ajoutant des underscores. Par exemple, `TestTag` --> `test_tag`.
 4. Un tag peut être au format `valeur` ou `<KEY>:<VALUE>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
 
-    | Tag                | Clé           | Valeur          |
-    |--------------------|---------------|----------------|
-    | `env:staging:east` | `env`         | `staging:east` |
-    | `env_staging:east` | `env_staging` | `east`         |
+| Tag                | Clé           | Valeur          |
+|--------------------|---------------|----------------|
+| `env:staging:east` | `env`         | `staging:east` |
+| `env_staging:east` | `env_staging` | `east`         |
 
 5.  **Clés de tag réservées** : `host`, `device`, `source`, et `service` ne peuvent pas être utilisés comme les autres clés.
 
@@ -68,8 +68,8 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 ## Assigner des tags
 Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags][3] pour en savoir plus :
 
-| Méthode                        | Assignation de tags                                                                                  |
-|-------------------------------|----------------------------------------------------------------------------------------------|
+| Méthode                       | Assignation de tags                                                                                  |
+|------------------------------|----------------------------------------------------------------------------------------------|
 | [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations. |
 | [Variables d'environnement][5]   | Utilisation de variables d'environnement pour l'Agent conteneurisé                                      |
 | [IU][6]                      | Dans votre plateforme Datadog                                                                     |
@@ -89,7 +89,7 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 | [Monitors][14]       | Créer et gérer des monitors ou gérer des downtimes                                             |
 | [Métriques][15]        | Filtrer et regrouper des données avec le Metrics Explorer                                                        |
 | [Intégrations][16]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
-| [APM][17]            | Filtrer la recherche de traces et les analyses ou accéder facilement à d'autres sections avec la Service map                    |
+| [APM][17]            | Filtrer les données App Analytics ou accéder facilement à d'autres sections avec la Service map                                 |
 | [Notebooks][18]      | Filtrer et regrouper des métriques sur des graphiques                                                               |
 | [Logs][19]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
 | [Outils de développement][20]     | Récupérer des informations ou configurer différentes sections dans l'IU avec l'API                                 |
@@ -99,7 +99,7 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tagging/using_tags
-[2]: /fr/developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[2]: /fr/developers/metrics/
 [3]: /fr/tagging/assigning_tags
 [4]: /fr/tagging/assigning_tags/#configuration-files
 [5]: /fr/tagging/assigning_tags/#environment-variables

@@ -3,7 +3,7 @@ title: Datadog 101 - 関数
 kind: ビデオ
 language: en
 wistiaid: gl60wag74v
-videos:
+"video-categories":
     - Datadog 101
     - Dashboards
 summary: "興味深い方法で関数を使用してグラフを効果的に表示"

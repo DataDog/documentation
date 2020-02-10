@@ -1,29 +1,29 @@
 ---
-assets:
-  dashboards: {}
-  monitors: {}
-  service_checks: /assets/service_checks.json
-categories:
+"assets":
+  "dashboards": {}
+  "monitors": {}
+  "service_checks": /assets/service_checks.json
+"categories":
 - モニター
-creates_events: true
-ddtype: check
-dependencies:
+"creates_events": !!bool "true"
+"ddtype": check
+"dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
-display_name: Rigor
-git_integration_title: rigor
-guid: f51704ed-a327-4132-9f04-a25a47791693
-integration_id: rigor
-integration_title: Rigor
-is_public: true
-kind: インテグレーション
-maintainer: support@rigor.com
-manifest_version: 1.0.0
-metric_prefix: rigor.
-name: rigor
-public_title: Datadog-Rigor インテグレーション
-short_description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
-support: contrib
-supported_os:
+"display_name": Rigor
+"git_integration_title": rigor
+"guid": f51704ed-a327-4132-9f04-a25a47791693
+"integration_id": rigor
+"integration_title": Rigor
+"is_public": !!bool "true"
+"kind": インテグレーション
+"maintainer": support@rigor.com
+"manifest_version": 1.0.0
+"metric_prefix": rigor.
+"name": rigor
+"public_title": Datadog-Rigor インテグレーション
+"short_description": Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
+"support": contrib
+"supported_os":
 - linux
 - mac_os
 - windows
@@ -190,5 +190,3 @@ Rigor の詳細および Datadog を活用して Web サイトを高速化する
 [11]: mailto:support@rigor.com
 [12]: https://rigor.com
 
-
-{{< get-dependencies >}}

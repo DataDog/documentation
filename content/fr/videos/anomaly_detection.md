@@ -4,7 +4,7 @@ kind: video
 language: en
 wistiaid: 4yts39yhxl
 summary: "Les métriques évoluent sans cesse. Comment savoir si un changement est anormal\_? Datadog propose désormais 4\_algorithmes de détection d'anomalies pour différentes métriques et tendances de votre infrastructure."
-videos:
+video-categories:
   - Introduction
   - Monitors
 private: true

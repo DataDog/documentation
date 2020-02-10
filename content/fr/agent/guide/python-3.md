@@ -1,99 +1,81 @@
 ---
-title: "Migration de check custom vers Python\_3"
+title: Migration de checks custom vers Python 3
 kind: guide
+further_reading:
+- link: agent/versions/upgrade_to_agent_v7
+  tag: Documentation
+  text: Upgrade vers l'Agent v7
+- link: agent/guide/agent-v6-python-3
+  tag: Documentation
+  text: Utiliser Python 3 avec l'Agent v6 de Datadog
 ---
+
+<div class="alert alert-info">
+Seul l'Agent v7+ prend en charge l'exécution de checks custom en Python 3 par défaut. <a href="/agent/versions/upgrade_to_agent_v7">Passez à la dernière version de l'Agent</a> pour exécuter vos checks custom en Python 3 nativement. Si vous utilisez l'Agent v6.14+ et que vous souhaitez vérifier si vos checks custom sont compatibles sans mettre à jour l'Agent, vous pouvez également <a href="/agent/guide/agent-v6-python-3">activer le runtime Python 3</a>.
+</div>
+
 ## Présentation
 
 Ce guide fournit des informations sur la migration des checks entre Python 2 et 3, ainsi que les meilleures pratiques à adopter. Utilisez l'outil [de compatibilité de check custom][1] de Datadog pour découvrir si vos checks custom sont compatibles avec Python 3, ou s'ils doivent être migrés.
 
-Ce guide s'efforce de conserver une rétrocompatibilité, afin de gagner en flexibilité et de permettre au code de s'exécuter sur plusieurs versions de l'Agent.
-
-## Configuration de l'Agent
-
-Depuis la version 6.14.0, l'Agent intègre les runtimes Python 2 et Python 3. En d'autres termes, les checks de l'Agent peuvent être exécutés aussi bien avec Python 2 que Python 3, en fonction de la configuration de l'Agent.
-
-La version 6 de l'Agent utilise par défaut le runtime Python 2. Pour passer au runtime Python 3 :
-
-1. Définissez l'option de configuration `python_version` [dans votre fichier de configuration `datadog.yaml` ][2] :
-
-    ```yaml
-    python_version: 3
-    ```
-
-2. [Redémarrez l'Agent][3].
-
-Vous pouvez également définir la variable d'environnement `DD_PYTHON_VERSION` sur `2` ou sur `3` pour choisir le runtime Python à utiliser. Lorsque celle-ci est définie, l'option `python_version` du fichier `datadog.yaml` est ignorée.
-
-Il s'agit d'une option de configuration au niveau de l'Agent : **tous les checks Python lancés par un Agent utilisent le même runtime Python**.
-
-### Agent conteneurisé
-
-Les images officielles de l'Agent conteneurisé n'incluent que l'un des deux runtimes Python. Pour passer à l'autre runtime, choisissez l'image de l'Agent appropriée :
-
-* **Runtime Python 2** : les images de la version 6 de l'Agent présentent le format suivant : `datadog/agent:<VERSION_AGENT>`, ou `datadog/agent:<VERSION_AGENT>-jmx` pour celles qui prennent en charge les checks JMX.
-* **Runtime Python 3** : les images de la version 6 de l'Agent présentent le format suivant : `datadog/agent:<VERSION_AGENT>-py3`, ou `datadog/agent:<VERSION_AGENT>-py3-jmx` pour celles qui prennent en charge les checks JMX.
-
-Par exemple, pour l'Agent conteneurisé 6.14.0, sélectionnez l'image `datadog/agent:6.14.0` ou `datadog/agent:6.14.0-jmx` afin d'utiliser le runtime Python par défaut (Python 2). Sélectionnez l'image `datadog/agent:6.14.0-py3` ou `datadog/agent:6.14.0-py3-jmx` pour utiliser le runtime Python 3.
+Ce guide tente de maintenir la rétrocompatibilité de vos checks custom en permettant au code de s'exécuter sur plusieurs versions de l'Agent pour plus de flexibilité.
 
 ## Éditeurs et outils
 
-### ddev
+### pylint
 
-Le package de développement de Datadog, `ddev`, est doté de fonctions vous permettant de [vérifier que vos checks custom sont compatibles avec Python 3][4].
+`pylint` est doté de fonctions qui vous permettront de [vérifier si vos checks custom sont compatibles avec Python 3][2].
 
 #### Installation
 
-Commencez par installer le kit de développement :
+Commencez par l'installer sur Python 2 via [pip][3] :
+
 ```bash
-$ pip install "datadog-checks-dev[cli]"
+$ python2 -m pip install pylint
 ```
+
+Remplacez `python2` dans la commande ci-dessus si le chemin vers votre interpréteur Python 2 est différent.
 
 #### Utilisation
 
-Exécutez la commande `validate` pour vérifier que votre check custom ou votre intégration personnalisée fonctionne sur Python 3. Remplacez `CHECK` par un chemin valide menant vers un module Python ou un dossier de paquet :
+Exécutez la commande `pylint` pour vérifier que votre check custom ou votre intégration personnalisée fonctionne sur Python 3. Remplacez `CHECK` par un chemin valide menant vers un module Python ou un dossier de paquet :
 
 ```bash
-$ ddev validate py3 [OPTIONS] CHECK
+$ python2 -m pylint -sn --py3k CHECK
 ```
 
 Par exemple :
 
 ```bash
-$ ddev validate py3 ~/dev/my-check.py
-Validating python3 compatibility of ~/dev/my-check.py...
-Incompatibilities were found for ~/dev/my-check.py:
-File ~/dev/my-check.py:
-  Line 2, column 0: print statement used
-  Line 834, column 21: division w/o __future__ statement
-  Line 850, column 25: division w/o __future__ statement
+$ python2 -m pylint -sn --py3k ~/dev/my-check.py
+************* Module my-check
+E:  4, 4: print statement used (print-statement)
+W:  7,22: Calling a dict.iter*() method (dict-iter-method)
+W:  9, 8: division w/o __future__ statement (old-division)
 ```
 
-Après avoir résolu les problèmes de compatibilité, la même commande renvoie :
+Après avoir résolu les problèmes de compatibilité, la même commande ne renvoie plus rien :
 
 ```bash
-$ ddev validate py3 ~/dev/my-check.py
-Validating python3 compatibility of ~/dev/my-check.py…
-~/dev/foo.py is compatible with python3
+$ python2 -m pylint -sn --py3k ~/dev/my-check.py
+$
 ```
 
-Bien que `ddev` détecte tout problème susceptible d'empêcher l'interpréteur Python 3 d'exécuter du code, il ne peut pas vérifier la validité logique. Une fois les modifications de code effectuées, veillez à exécuter le check et à valider la sortie.
-
-Pour en savoir plus sur ddev, reportez-vous à la [documentation ddev][5].
+Bien que `pylint` détecte tout problème susceptible d'empêcher l'interpréteur Python 3 d'exécuter du code, il ne peut pas vérifier la validité logique. Une fois les modifications de code effectuées, veillez à exécuter le check et à valider la sortie.
 
 ### 2to3
 
-[2to3][3] convertit le code Python 2 en code Python 3. Si vous possédez un check custom intitulé `foo.py`, exécutez 2to3 :
-
+[2to3][4] convertit le code Python 2 en code Python 3. Si vous possédez un check custom intitulé `foo.py`, exécutez 2to3 :
 
 ```bash
 $ 2to3 foo.py
 ```
 
-L'exécution de 2to3 affiche les différences par rapport au fichier source d'origine. Pour en savoir plus sur 2to3, reportez-vous à la [documentation 2to3 officielle][6].
+L'exécution de 2to3 permet de visualiser les différences par rapport au fichier source d'origine. Pour en savoir plus sur 2to3, reportez-vous à la [documentation 2to3 officielle][4].
 
 ### Éditeurs
 
-La plupart des EDI et des éditeurs modernes fournissent automatiquement des fonctionnalités avancées de linting. Assurez-vous qu'ils sont dirigés vers un exécutable Python 3 afin que, lorsque vous ouvrez un ancien fichier uniquement compatible avec Python 2, les erreurs ou avertissements de linting apparaissent sur le côté sous la forme d'une coche colorée dans [PyCharm][7] ou sous forme de case cliquable en bas de [Visual Studio Code][8].
+La plupart des EDI et des éditeurs modernes fournissent automatiquement des fonctionnalités avancées de linting. Assurez-vous qu'ils se basent un exécutable Python 3 afin que, lorsque vous ouvrez un ancien fichier uniquement compatible avec Python 2, les erreurs ou avertissements de linting apparaissent sur le côté sous la forme d'une coche colorée dans [PyCharm][5] ou sous forme de case cliquable en bas de [Visual Studio Code][7].
 
 ## Migration de Python
 
@@ -113,7 +95,7 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Six
 
-[Six][9] est une bibliothèque de compatibilité pour Python 2 et 3 permettant aux développeurs d'envoyer du code Python compatible avec Python 2 et 3. Certains des exemples ci-dessous utilisent Six pour rendre un ancien code Python 2 compatible avec Python 3.
+[Six][7] est une bibliothèque de compatibilité pour Python 2 et 3 qui permet aux développeurs de produire du code Python compatible avec Python 2 et 3. Certains des exemples ci-dessous utilisent Six pour rendre de l'ancien code Python 2 compatible avec Python 3.
 
 ### Méthodes de dictionnaire
 
@@ -147,7 +129,7 @@ Python 3 propose une bibliothèque standard réorganisée dans laquelle un cert
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consultez la [documentation Six][9] pour obtenir la liste des modules renommés. Notez que les modules `urllib`, `urllib2` et `urlparse` ont été fortement réorganisés.
+Consultez la [documentation Six][7] pour obtenir la liste des modules renommés. Notez que les modules `urllib`, `urllib2` et `urlparse` ont été fortement réorganisés.
 
 ### Unicode
 
@@ -168,7 +150,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # le contenu sera décodé en unicode en utilisant ‘utf-8’ ; ce ne sont pas des octets !
 ```
 
-Consultez l'article [Pragmatic Unicode][10] (en anglais) de Ned Batchelder pour en savoir plus.
+Consultez l'article [Pragmatic Unicode][8] de Ned Batchelder pour en savoir plus.
 
 ### Print
 
@@ -178,14 +160,13 @@ En Python 3, print est explicitement traité comme une fonction. Pour que print
 |---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
-
 ### Division de nombres entiers
 
 En Python 2, l'opérateur `/` effectue une division euclidienne de nombres entiers.
 
 #### Python 2 :
 
-```
+```python
 >> 5/2
 2
 ```
@@ -194,7 +175,7 @@ En Python 3, l'opérateur `/` effectue une division réelle (sans reste), tandi
 
 #### Python 3 :
 
-```
+```python
 >> 5/2
 2.5
 >> 5//2
@@ -209,7 +190,7 @@ En Python 2, la bibliothèque standard arrondit les nombres de façon arithmét
 
 #### Python 2 :
 
-```
+```python
 >> round(2.5)
 3
 >> round(3.5)
@@ -218,7 +199,7 @@ En Python 2, la bibliothèque standard arrondit les nombres de façon arithmét
 
 #### Python 3 :
 
-```
+```python
 >> round(2.5)
 2
 >> round(3.5)
@@ -236,15 +217,14 @@ Python 3 propose une syntaxe différente pour les except et les raise.
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
 | `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
-
 ### Importations relatives
 
 En Python 3, les importations relatives doivent être effectuées de façon explicite, en utilisant un point (`.`).
 
 Imaginons un paquet structuré comme suit :
 
-```
-monpaquet/
+```text
+mypackage/
     __init__.py
     math.py
     foo.py
@@ -266,7 +246,6 @@ Ou, pour plus de lisibilité :
 |------------------------|----------------------------------|
 | `from math import gcd` | `from mypackage.math import gcd` |
 
-
 ### Itérateurs
 
 Plusieurs fonctions renvoyant des listes en Python 2 renvoient des itérateurs en Python 3. Il s'agit notamment des fonctions `map`, `filter` et `zip`.
@@ -279,18 +258,19 @@ Pour conserver facilement le comportement de Python 2, la solution la plus simpl
 | `filter(myfunction, myiterable)` | `list(filter(myfunction, myiterable))` |
 | `zip(myiterable1, myiterable2)`  | `list(zip(myiterable1, myiterable2))`  |
 
-La fonction `xrange` a été supprimée en Python 3. À la place, la fonction `range` renvoie un objet `range` itératif. Importez `range` avec `from six.moves import range`.
+La fonction `xrange` a été supprimée dans Python 3. À la place, la fonction `range` renvoie un objet `range` itératif. Importez `range` avec `from six.moves import range`.
 
 Utilisez la fonction `next` intégrée au lieu d'appeler la méthode `next`. Par exemple, remplacez `iterator.next()` par `next(iterator)`.
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/compatibility_check
-[2]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[4]: /fr/developers/integrations/new_check_howto/#building
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks_dev.cli.html
-[6]: https://docs.python.org/3.1/library/2to3.html
-[7]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
-[8]: https://code.visualstudio.com/docs/setup/setup-overview
-[9]: https://six.readthedocs.io
-[10]: https://nedbatchelder.com/text/unipain.html
+[2]: https://portingguide.readthedocs.io/en/latest/tools.html#automated-checker-pylint-py3k
+[3]: https://pip.pypa.io/en/stable/installing
+[4]: https://docs.python.org/3.1/library/2to3.html
+[5]: https://www.jetbrains.com/help/pycharm/install-and-set-up-pycharm.html
+[6]: https://code.visualstudio.com/docs/setup/setup-overview
+[7]: https://six.readthedocs.io
+[8]: https://nedbatchelder.com/text/unipain.html

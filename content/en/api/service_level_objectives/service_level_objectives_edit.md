@@ -1,7 +1,7 @@
 ---
 title: Edit a SLO
 type: apicontent
-order: 29.03
+order: 30.04
 external_redirect: /api/#edit-a-slo
 ---
 
@@ -22,7 +22,7 @@ external_redirect: /api/#edit-a-slo
         The timeframe to apply to the target value. Valid options are `7d`, `30d`, `90d`.
     * **`target`** [*required*]:
         The target value to associate with the SLI that defines the SLO.
-    * **`target_displauy`** [*optional*, *default* = **dynamic, based on query**]:
+    * **`target_display`** [*optional*, *default* = **dynamic, based on query**]:
         The target display value that includes the requires level of precision.
     * **`warning`** [*optional*, *default* = **none**]:
         A warning target value to indicate when the SLI is close to breaching the `target`.

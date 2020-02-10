@@ -81,7 +81,7 @@ Les fonctions de parsing personnalisées doivent :
 
 Imaginons que vous recueillez des métriques à partir de logs qui ne sont pas formatés canoniquement, mais intelligemment délimités par un caractère unique. Les logs se présentent de la manière suivante :
 
-```
+```text
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
@@ -107,7 +107,8 @@ def my_log_parser(logger, test):
 ```
 
 Ensuite, modifiez votre fichier `datadog.conf` en ajoutant l'option dogstream comme suit :
-```
+
+```text
 dogstreams: /chemin/vers/monfichier.log:/chemin/vers/mylogparser.py:my_log_parser
 # (Remarque : si vous utilisez Windows, remplacez chaque / par la séquence d'échappement \\)
 ```
@@ -146,7 +147,7 @@ Pour obtenir un exemple de parser d'événements, découvrez notre [parser d'év
 
 Imaginons que vous souhaitez recueillir des événements à partir de logs auxquels vous pouvez ajouter toutes sortes d'informations pertinentes. Ces logs sont intelligemment délimités par un caractère unique et se présentent de la façon suivante :
 
-```
+```text
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
@@ -181,26 +182,27 @@ def my_log_parser(logger, line):
 ```
 
 Ensuite, modifiez votre fichier `datadog.conf` en ajoutant l'option dogstream comme suit :
-```
+
+```text
 dogstreams: /chemin/vers/monfichier.log:/chemin/vers/mylogparser.py:my_log_parser
 # (Remarque : si vous utilisez Windows, remplacez chaque / par la séquence d'échappement \\)
 ```
 
 Cette ligne de log spécifique parsée avec ce parser génère l'événement suivant dans Datadog :
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Événement de log dans Datadog" responsive="true" style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Événement de log dans Datadog" style="width:70%;">}}
 
 ## Envoyer des paramètres supplémentaires à votre fonction de parsing personnalisée
 
 Une fois votre parser personnalisé configuré pour envoyer une métrique ou des événements à votre plateforme, votre `datadog.conf` doit contenir une ligne comme celle-ci :
 
-```
+```text
  dogstreams: /chemin/vers/log1:/chemin/vers/mon/parsers_module.py:custom_parser
 ```
 
 Votre parser_module.py doit contenir une fonction définie comme :
-```python
 
+```python
 def custom_parser(logger, line)
 ```
 
@@ -208,14 +210,13 @@ Vous pouvez alors changer la parité de votre fonction de façon à ce qu'elle a
 
 Ainsi, si vous modifiez votre fichier de configuration comme suit :
 
-```
+```text
 dogstreams: /chemin/vers/log1:/chemin/vers/mon/parsers_module.py:custom_parser:customvar1:customvar2
 ```
 
 Et votre fonction de parsing comme suit :
 
 ```python
-
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
@@ -227,7 +228,7 @@ Par exemple, si vous utilisez le même parser que dans la documentation mais qu'
 
 Votre fichier de configuration contiendrait alors ceci :
 
-```
+```text
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
 
@@ -239,11 +240,10 @@ Notez que lorsque vous modifiez votre parser de log personnalisé, vous devez [r
 
 Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de log personnalisé, n'hésitez pas à [contacter l'assistance][10]. Toutefois, commencez par définir le niveau de log sur « DEBUG » avant de lancer l'Agent quelques minutes en vous assurant que de nouveaux logs sont ajoutés à vos fichiers. Ensuite, [exécutez la commande flare][11] à partir de votre Agent. L'équipe d'assistance aura ainsi accès aux informations nécessaires pour dépanner efficacement le problème.
 
-
 [1]: https://app.datadoghq.com/infrastructure#tags
 [2]: /fr/api/#tags
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
-[4]: /fr/graphing/event_stream
+[4]: /fr/events
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
 [6]: /fr/agent/guide/agent-log-files
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211

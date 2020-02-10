@@ -7,6 +7,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - web
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -47,48 +48,73 @@ supported_os:
 Le check PHP-FPM permet de surveiller l'état de votre pool FPM ainsi que les performances de vos requêtes.
 
 ## Implémentation
+### Installation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
-### Utilisez ensuite la méthode `lambda_metric` pour envoyer des métriques custom depuis votre fonction vers Datadog :
-
-Le check PHP-FPM est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs utilisant PHP-FPM.
+Le check PHP-FPM est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs utilisant PHP-FPM.
 
 ### Configuration
 
-Modifiez le fichier `php_fpm.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple php_fpm.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles :
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-```
-init_config:
+#### Host
 
-instances:
-  - status_url: http://localhost/status # ou l'URL définie pour pm.status_path dans votre .ini PHP
-    ping_url: http://localhost/ping     # ou l'URL définie pour ping.path dans votre .ini PHP
-    ping_reply: pong                    # la réponse attendue au ping ; par défaut, il s'agit de « pong »
- #  username: <VOTRE_NOMUTILISATEUR>     # si les URL définies pour status_url et ping_url nécessitent une authentification HTTP basique
- #  password: <VOTRE_MOTDEPASSE> # si les URL définies pour status_url et ping_url nécessitent une authentification HTTP basique
- #  http_host: <HOST>         # si votre pool FPM est uniquement accessible via un vhost HTTP spécifique
- #  tags:
- #    - instance:foo
-```
+1. Modifiez le fichier `php_fpm.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple php_fpm.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
-Options de configuration :
+    ```yaml
+      init_config:
 
-* `status_url` (obligatoire) : l'URL pour la page de statut de PHP-FPM, définie dans le fichier de configuration du pool FPM (pm.status_path).
-* `ping_url` (obligatoire) : l'URL pour la page de ping de PHP-FPM, définie dans le fichier de configuration du pool FPM (ping.path).
-* `use_fastcgi` (facultatif) : communiquez directement avec PHP-FPM en utilisant FastCGI.
-* `ping_reply` (obligatoire) : réponse envoyée par ping_url. Si aucune réponse n'est définie, il s'agit de `pong`.
-* `username` (facultatif) : utilisé si l'authentification basique a été définie sur les pages de statut et de ping.
-* `password` (facultatif) : utilisé si l'authentification basique a été définie sur les pages de statut et de ping.
-* `http_host` (facultatif) : si votre pool FPM est uniquement accessible via un vhost HTTP spécifique, indiquez-le ici.
+      instances:
 
-[Redémarrez l'Agent][6] pour commencer à envoyer des métriques PHP-FPM à Datadog.
+          ## @param status_url - string - required
+          ## Get metrics from your FPM pool with this URL
+          ## The status URLs should follow the options from your FPM pool
+          ## See http://php.net/manual/en/install.fpm.configuration.php
+          ##   * pm.status_path
+          ## You should configure your fastcgi passthru (nginx/apache) to catch these URLs and
+          ## redirect them through the FPM pool target you want to monitor (FPM `listen`
+          ## directive in the config, usually a UNIX socket or TCP socket.
+          #
+        - status_url: http://localhost/status
 
-#### Pools multiples
+          ## @param ping_url - string - required
+          ## Get a reliable service check of your FPM pool with `ping_url` parameter
+          ## The ping URLs should follow the options from your FPM pool
+          ## See http://php.net/manual/en/install.fpm.configuration.php
+          ##   * ping.path
+          ## You should configure your fastcgi passthru (nginx/apache) to
+          ## catch these URLs and redirect them through the FPM pool target
+          ## you want to monitor (FPM `listen` directive in the config, usually
+          ## a UNIX socket or TCP socket.
+          #
+          ping_url: http://localhost/ping
 
-Il est également possible de surveiller plusieurs pools PHP-FPM avec le même serveur proxy, ce qui est particulièrement utile si vous utilisez Kubernetes.
+          ## @param use_fastcgi - boolean - required - default: false
+          ## Communicate directly with PHP-FPM using FastCGI
+          #
+          use_fastcgi: false
 
-Pour ce faire, modifiez les itinéraires de votre serveur de façon à les rediriger vers chacune de vos instances PHP-FPM. Voici un exemple de configuration Nginx :
+          ## @param ping_reply - string - required
+          ## Set the expected reply to the ping.
+          #
+          ping_reply: pong
+    ```
+
+2. [Redémarrez l'Agent][5].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                                                                    |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `php-fpm`                                                                                                                |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                                            |
+| `<CONFIG_INSTANCE>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
+
+#### Options supplémentaires
+##### Pools multiples
+
+Il est possible de surveiller plusieurs pools PHP-FPM avec le même serveur proxy, ce qui est particulièrement utile si vous utilisez Kubernetes. Pour ce faire, modifiez les itinéraires de votre serveur de façon à les rediriger vers chacune de vos instances PHP-FPM. Voici un exemple de configuration Nginx :
 
 ```
 server {
@@ -112,19 +138,18 @@ server {
 
 Si cette méthode est trop fastidieuse à grande échelle, définissez `use_fastcgi` sur `true` pour obliger le check à ignorer les serveurs proxy et à communiquer directement avec PHP-FPM en utilisant FastCGI. Lorsqu'aucun port n'est précisé dans les paramètres `status_url` et `ping_url`, il est défini par défaut sur `9000`.
 
-### Sockets Unix
+##### Sockets Unix
 
 Si votre installation PHP-FPM utilise des sockets Unix, vous devez activer `use_fastcgi` et appliquer la syntaxe ci-dessous pour `status_url` et `ping_url` :
 
-```
-init_config:
+| Paramètre     | Valeur                             |
+|---------------|-----------------------------------|
+| `status_url`  | `unix:///<CHEMIN_FICHIER>.sock/status` |
+| `ping_url`    | `unix:///<CHEMIN_FICHIER>.sock/ping`   |
+| `ping_reply`  | `pong`                            |
+| `use_fastcgi` | `true`                            |
 
-instances:
-  - status_url: unix:///chemin/vers/fichier.sock/status
-    ping_url: unix:///chemin/vers/fichier.sock/ping
-    ping_reply: pong
-    use_fastcgi: true
-```
+**Remarque** : avec Autodiscovery, si l'Agent s'exécute dans un conteneur, une tâche ou un pod distinct, il ne peut pas accéder au fichier de sockets Unix de votre pool FPM. Pour y remédier, exécutez l'Agent en tant que sidecar.
 
 ### Validation
 
@@ -148,14 +173,11 @@ Renvoie CRITICAL si l'Agent n'est pas capable de ping PHP-FPM sur le `ping_url` 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

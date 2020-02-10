@@ -1,7 +1,7 @@
 ---
 title: Update an Index
 type: apicontent
-order: 23.3
+order: 24.3
 external_redirect: /api/#update-an-index
 ---
 
@@ -17,9 +17,8 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
 
 **Note**: Using the `PUT` method updates your index's configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
-
 * **`filter.query`**  [*required*]:
-    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax][1]
+    Only logs matching the filter criteria will be considered for this index. The search query follows the [Log search syntax][1]
 * **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter][2]. It has the following attributes:
 
   * **`name`** [*required*]:

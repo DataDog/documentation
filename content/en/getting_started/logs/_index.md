@@ -17,7 +17,7 @@ Datadog Log Management is used to collect logs from your application. This page 
 1. If you haven't already, create a [Datadog account][1] and [enable Datadog Log Management][2].
 2. Set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page:
 
-    ```
+    ```text
     vagrant init ubuntu/xenial64
     vagrant up
     vagrant ssh
@@ -39,7 +39,7 @@ Logs can be a full-text message:
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_KEY> Plain text log sent through TCP
@@ -50,7 +50,7 @@ telnet intake.logs.datadoghq.com 10514
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> Plain text log sent through TCP
@@ -61,14 +61,14 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 This produces the following result in the [Log Explorer Page][2]:
 
-{{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet" responsive="true">}}
+{{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet" >}}
 
 or a JSON object that is automatically parsed by Datadog:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
@@ -77,7 +77,7 @@ telnet intake.logs.datadoghq.com 10514
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
@@ -88,26 +88,26 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 This produces the following result in the [Log Explorer Page][2]:
 
-{{< img src="getting_started/logs/json_log.png" alt="JSON logs" responsive="true">}}
+{{< img src="getting_started/logs/json_log.png" alt="JSON logs" >}}
 
 ## Send logs from a file
 
 ### Install the Agent
 
-To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][7]:
+To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
 
-```
-DD_API_KEY=<YOUR_DD_API_KEY>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```text
+DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
-```
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```text
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
 {{% /tab %}}
@@ -115,9 +115,9 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://r
 
 #### Validation
 
-Verify the Agent is running with the [status command][8] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
+Verify the Agent is running with the [status command][7] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -125,11 +125,11 @@ Logs Agent
   Logs Agent is not running
 ```
 
-**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
+**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
 
 ### Enable log collection
 
-To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][10] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
+To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][9] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
 
 ```yaml
 ## @param logs_enabled - boolean - optional - default: false
@@ -143,7 +143,7 @@ logs_enabled: true
 
 In order to collect logs from a custom file, first create the file and add one line of logs to it:
 
-```
+```shell
 $ touch log_file_to_monitor.log
 
 $ echo "First line of log" >> log_file_to_monitor.log
@@ -153,21 +153,21 @@ $ echo "First line of log" >> log_file_to_monitor.log
 
 To specify to the Agent to monitor this log file:
 
-1. Create a new configuration folder in the [configuration directory of the Agent][11]:
+1. Create a new configuration folder in the [configuration directory of the Agent][10]:
 
-    ```
+    ```shell
     sudo mkdir /etc/datadog-agent/conf.d/custom_log_collection.d/
     ```
 
 2. Create your configuration file within this new configuration folder:
 
-    ```
+    ```shell
     sudo touch /etc/datadog-agent/conf.d/custom_log_collection.d/conf.yaml
     ```
 
 3. Copy and paste the following content within this `conf.yaml` file:
 
-      ```
+      ```yaml
       logs:
         - type: file
           path: /home/ubuntu/log_file_to_monitor.log
@@ -179,9 +179,9 @@ To specify to the Agent to monitor this log file:
 
 ##### Validation
 
-If the log configuration is correct, the [status command][8] `sudo datadog-agent status` outputs:
+If the log configuration is correct, the [status command][7] `sudo datadog-agent status` outputs:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -200,13 +200,13 @@ Logs Agent
 
 Now that everything is configured correctly, add new entries to your log file to see them within Datadog:
 
-```
+```shell
 $ echo "New line of log in the log file" >> log_file_to_monitor.log
 ```
 
 This produces the following result in the [Log Explorer Page][2]:
 
-{{< img src="getting_started/logs/file_log_example.png" alt="File log example" responsive="true">}}
+{{< img src="getting_started/logs/file_log_example.png" alt="File log example" >}}
 
 ## Further reading
 
@@ -218,8 +218,7 @@ This produces the following result in the [Log Explorer Page][2]:
 [4]: https://www.vagrantup.com/intro/getting-started/index.html
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: /agent/guide/agent-commands/?tab=agentv6#agent-information
-[9]: https://app.datadoghq.com/infrastructure
-[10]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[11]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[7]: /agent/guide/agent-commands/#agent-information
+[8]: https://app.datadoghq.com/infrastructure
+[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[10]: /agent/guide/agent-configuration-files/#agent-configuration-directory

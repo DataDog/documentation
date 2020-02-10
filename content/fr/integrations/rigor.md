@@ -1,29 +1,29 @@
 ---
-assets:
-  dashboards: {}
-  monitors: {}
-  service_checks: /assets/service_checks.json
-categories:
+"assets":
+  "dashboards": {}
+  "monitors": {}
+  "service_checks": /assets/service_checks.json
+"categories":
 - monitoring
-creates_events: true
-ddtype: check
-dependencies:
+"creates_events": !!bool "true"
+"ddtype": check
+"dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
-display_name: Rigor
-git_integration_title: rigor
-guid: f51704ed-a327-4132-9f04-a25a47791693
-integration_id: rigor
-integration_title: Rigor
-is_public: true
-kind: integration
-maintainer: support@rigor.com
-manifest_version: 1.0.0
-metric_prefix: rigor.
-name: rigor
-public_title: Intégration Datadog/Rigor
-short_description: Rigor est une solution d'optimisation et de surveillance synthétique conçue pour l'ensemble du cycle de développement.
-support: contrib
-supported_os:
+"display_name": Rigor
+"git_integration_title": rigor
+"guid": f51704ed-a327-4132-9f04-a25a47791693
+"integration_id": rigor
+"integration_title": Rigor
+"is_public": !!bool "true"
+"kind": integration
+"maintainer": support@rigor.com
+"manifest_version": 1.0.0
+"metric_prefix": rigor.
+"name": rigor
+"public_title": Intégration Datadog/Rigor
+"short_description": Rigor est une solution d'optimisation et de surveillance synthétique conçue pour l'ensemble du cycle de développement.
+"support": contrib
+"supported_os":
 - linux
 - mac_os
 - windows
@@ -189,5 +189,3 @@ dont nous pouvons contribuer à optimiser les performances de votre site web.
 [11]: mailto:support@rigor.com
 [12]: https://rigor.com
 
-
-{{< get-dependencies >}}

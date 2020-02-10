@@ -1,7 +1,6 @@
 ---
 title: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
 kind: guide
-disable_toc: true
 further_reading:
   - link: tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
@@ -21,8 +20,7 @@ further_reading:
 ---
 _Temps de lecture : 3 minutes_
 
-
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Vue de monitor avec alerte en cours" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
 Datadog vous permet de configurer des monitors pour surveiller la santé de vos services avec l'APM, vous évitant ainsi de devoir constamment la surveiller manuellement. La [détection d'anomalies][1] est une fonction algorithmique qui vous permet d'identifier un comportement anormal d'une métrique en fonction de ses données historiques, comme les tendances et les variations saisonnières en fonction du jour de la semaine ou de l'heure. Cette fonctionnalité est idéale pour les métriques qui affichent des tendances marquées et des patterns récurrents, qui seraient difficiles (voire impossibles) à surveiller avec des alertes de seuil.
 
@@ -33,7 +31,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
     Une fois le [service][5] choisi, l'étape suivante peut alors être définie. Un graphique s'affiche en haut de la page pour illustrer les performances de la métrique surveillée par le nouveau monitor.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Vue de monitor avec alerte en cours" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
 3. **Sélectionnez l'option *Anomaly Alert***, puis choisissez p99 latency (latence au 99e centile) pour l'option *For*.
 
@@ -47,7 +45,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
     Dans cet exemple, vous pouvez laisser le contenu de notification par défaut ou choisir les membres de l'équipe à taguer dans l'alerte.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Vue de monitor avec alerte en cours" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
     Consultez la [présentation des notifications][7] pour en savoir plus sur l'utilisation du markdown dans le texte de notification et sur les valeurs et les conditions pouvant y être définies.
 
@@ -58,7 +56,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
 7. **Passez de l'onglet *Edit* à l'onglet *Status***.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="Vue de monitor avec alerte en cours" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
     Depuis cette page, vous pouvez désactiver votre monitor, afficher son statut actuel ou visualiser plus en détail une alerte déclenchée.
 
@@ -66,11 +64,11 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
     **Votre nouveau monitor devrait alors s'afficher**, ainsi que les autres monitors définis pour le service et les monitors que Datadog vous conseille d'ajouter.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Vue de monitor avec alerte en cours" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
     Plus vos créerez de monitors, plus vous trouverez de services, métriques et événements à inclure et plus vous serez à même de définir des conditions complexes. Chaque monitor est connecté à un service et peut être consulté depuis la page Service ainsi que depuis la [Service Map][9].
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map"  style="width:90%;">}}
 
     Pour chaque service sur la carte, un cercle vert signifie que tous les monitors sont silencieux ; un cercle jaune signifie qu'au moins un monitor envoie des avertissements mais qu'aucun monitor n'émet d'alerte ; un cercle rouge signifie qu'au moins un monitor émet une alerte ; et un cercle gris signifie qu'aucun monitor n'est défini pour le service.
 
@@ -78,8 +76,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/#pagetitle
+[1]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /fr/tracing/visualization/#resources

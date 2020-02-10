@@ -17,7 +17,7 @@ Par défaut, le [check Datadog/SQL Server][1] capture uniquement *une partie* de
 
 Voici un exemple de configuration basique pour la collecte de métriques custom. Aucune instance n'est associée à ce counter. **Remarque** : vous pouvez spécifier des tags à envoyer avec vos métriques si vous le souhaitez.
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.clr.execution
     counter_name: CLR Execution
@@ -28,13 +28,13 @@ custom_metrics:
 Descriptions des paramètres :
 
 | Paramètre      | Description                                           |
-| ------         | ------                                                |
+|----------------|-------------------------------------------------------|
 | `name`         | Nom de votre métrique dans Datadog.                   |
 | `counter_name` | Le nom du counter des [objets de base de données SQL Server][2]. |
 
 Si un counter est associé à plusieurs instances, vous pouvez choisir de récupérer une seule instance avec le nom de paramètre `instance_name` :
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.exec.in_progress
     counter_name: OLEDB calls
@@ -43,7 +43,7 @@ custom_metrics:
 
 Pour une granularité supérieure, affinez la requête en spécifiant un `object_name` :
 
-```
+```yaml
 custom_metrics:
 - name: sqlserver.cache.hit_ratio
   counter_name: Cache Hit Ratio
@@ -53,7 +53,7 @@ custom_metrics:
 
 Pour recueillir toutes les instances d'un counter associé à plusieurs instances, utilisez la valeur spéciale `ALL` pour le paramètre `instance_name`, qui **requiert** une valeur pour le paramètre `tag_by`. Cet exemple récupère les métriques portant le tag `db:mydb1`, `db:mydb2` :
 
-```
+```yaml
 - name: sqlserver.db.commit_table_entries
   counter_name: Commit table entries
   instance_name: ALL
@@ -64,7 +64,7 @@ Les counters sont tirés de la table par défaut `sys.dm_os_performance_counters
 
 Pour envoyer une métrique tirée de l'une des tables supplémentaires, spécifiez la table dans la définition du counter avec le paramètre `table`, ainsi que les colonnes du counter à envoyer avec le paramètre `columns` :
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.LCK_M_S
     table: sys.dm_os_wait_stats
@@ -79,7 +79,7 @@ L'exemple ci-dessus envoie deux métriques, `sqlserver.LCK_M_S.max_wait_time.ms`
 
 **Remarque** : si les métriques comme `sys.dm_io_virtual_file_stats` et `sys.dm_os_memory_clerks` ne sont pas associées à un `counter_name`, seules les colonnes doivent être spécifiées.
 
-```
+```yaml
 custom_metrics:
   - name: sqlserver.io_file_stats
     table: sys.dm_io_virtual_file_stats
@@ -101,7 +101,7 @@ Recueillir des métriques avec une procédure personnalisée produit une grande 
 Une table temporaire doit être configurée pour recueillir les métriques custom afin de les envoyer à Datadog. La table doit contenir les colonnes suivantes :
 
 | Colonne   | Description                                               |
-| -----    | ----                                                      |
+|----------|-----------------------------------------------------------|
 | `metric` | Le nom de la métrique tel qu'il apparaît dans Datadog.          |
 | `type`   | Le [type de métrique][3] (gauge, rate ou [histogram][4]).    |
 | `value`  | La valeur de la métrique (doit pouvoir être convertie en valeur de type float). |
@@ -109,7 +109,7 @@ Une table temporaire doit être configurée pour recueillir les métriques custo
 
 La procédure stockée suivante est créée dans la base de données principale :
 
-```
+```text
 -- Créer une procédure stockée avec le nom <NOM_PROCÉDURE>
 CREATE PROCEDURE [dbo].[<NOM_PROCÉDURE>]
 AS
@@ -148,39 +148,38 @@ GO
 
 La procédure stockée renvoie les métriques custom suivantes :
 
-- `sql.test.test`
-- `sql.test.gauge`
-- `sql.test.rate`
-- `sql.test.histogram.95percentile`
-- `sql.test.histogram.avg`
-- `sql.test.histogram.count`
-- `sql.test.histogram.max`
-- `sql.test.histogram.median`
+* `sql.test.test`
+* `sql.test.gauge`
+* `sql.test.rate`
+* `sql.test.histogram.95percentile`
+* `sql.test.histogram.avg`
+* `sql.test.histogram.count`
+* `sql.test.histogram.max`
+* `sql.test.histogram.median`
 
 ### Mettre à jour la configuration de l'intégration SQL Server
 
 Pour recueillir des métriques avec une procédure personnalisée, créez une définition d'instance dans votre fichier `sqlserver.d/conf.yaml` avec la procédure à exécuter. Une instance distincte est nécessaire pour toute configuration existante. Les instances avec une procédure stockée ne traitent rien d'autre que cette dernière, par exemple :
 
-```
+```yaml
   - host: 127.0.0.1,1433
     username: datadog
-    password: <MOT_DE_PASSE>
+    password: "<MOTDEPASSE>"
     database: master
   - host: 127.0.0.1,1433
     username: datadog
-    password: <MOT_DE_PASSE>
-    stored_procedure: <NOM_PROCÉDURE>
+    password: "<MOTDEPASSE>"
+    stored_procedure: "<NOM_PROCÉDURE>"
     database: master
 ```
 
 Vous pouvez également spécifier :
 
-| Paramètre                 | Description                                                                                   | Valeur par défaut            |
-| ---------                 | -------                                                                                       | --------           |
-| `ignore_missing_database` | Ne pas effectuer le check si la base de données spécifiée n'existe pas sur le serveur.                      | `False`            |
+| Paramètre                 | Description                                                                               | Valeur par défaut            |
+|---------------------------|-------------------------------------------------------------------------------------------|--------------------|
+| `ignore_missing_database` | Ne pas effectuer le check si la base de données spécifiée n'existe pas sur le serveur.                  | `False`            |
 | `proc_only_if`            | Exécuter cette requête SQL avant chaque appel de `stored_procedure`. Si elle renvoie 1, appeler la procédure. |                    |
-| `proc_only_if_database`   | La base de données dans laquelle la requête SQL `proc_only_if` est exécutée.                                                | attribut de la base données |
-
+| `proc_only_if_database`   | La base de données dans laquelle la requête SQL `proc_only_if` est exécutée.                                            | attribut de la base données |
 
 **Remarque** : la condition de protection `proc_only_if` est utile pour les scénarios de haute disponibilité où la base de données peut être déplacée d'un serveur à l'autre.
 
@@ -188,8 +187,8 @@ Vous pouvez également spécifier :
 
 Si vos métriques custom n'apparaissent pas dans Datadog, vérifiez le fichier de log de l'Agent. Si vous voyez l'erreur `Could not call procedure <NOM_PROCÉDURE>: You must supply -1 parameters for this stored procedure`, la raison est peut-être l'une des suivantes :
 
-- Le `<NOM_PROCÉDURE>` est incorrect.
-- Il est possible que le nom d'utilisateur de la base de données spécifié dans la configuration ne soit pas autorisé à exécuter la procédure stockée.
+* Le `<NOM_PROCÉDURE>` est incorrect.
+* Il est possible que le nom d'utilisateur de la base de données spécifié dans la configuration ne soit pas autorisé à exécuter la procédure stockée.
 
 ## Pour aller plus loin
 

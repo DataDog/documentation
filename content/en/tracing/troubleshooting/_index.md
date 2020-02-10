@@ -2,15 +2,9 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/agent/docker/apm"
+- link: "/tracing/troubleshooting/agent_apm_metrics"
   tag: "Documentation"
-  text: "Docker APM setup"
-- link: "/integrations/amazon_ecs/#trace-collection"
-  tag: "Documentation"
-  text: "ECS EC2 APM setup"
-- link: "/integrations/ecs_fargate/#trace-collection"
-  tag: "Documentation"
-  text: "ECS Fargate APM setup"
+  text: "APM metrics sent by the Datadog Agent"
 ---
 
 When experiencing unexpected behavior with Datadog APM, there are a few common issues you can look for before reaching out to [Datadog support][1]:
@@ -29,7 +23,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
     After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][6] and provide the relevant log entries with [a flare][7].
+If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
 
 ## Tracer debug mode
 
@@ -79,7 +73,6 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 ```
 
 See [the API documentation][1] for more details.
-
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{% /tab %}}
@@ -144,7 +137,6 @@ If neither of these log entries is present, then no request was sent to the Agen
 
 For more tracer settings, check out the [API documentation][5].
 
-
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 [2]: /agent/troubleshooting
 [3]: /help
@@ -153,26 +145,36 @@ For more tracer settings, check out the [API documentation][5].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), in a `datadog.json` file. Debug mode can also be enabled in code by setting `TracerSettings.DebugEnabled = true` before passing the settings into the `Tracer` constructor:
 
 ```csharp
 using Datadog.Trace;
 
-var tracer = Tracer.Create(isDebugEnabled: true);
+// read default configuration sources (env vars, web.config, datadog.json)
+var settings = TracerSettings.FromDefaultSources();
 
-// optional: set the new tracer as the new default/global tracer
+// enabled debug mode
+settings.DebugEnabled = true;
+
+// create a new Tracer using these settings
+var tracer = new Tracer(settings);
+
+// optional: set the global tracer
 Tracer.Instance = tracer;
 ```
 
-The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
+Logs files are saved in the following directories by default. The `DD_TRACE_LOG_PATH` setting can be used to change these paths.
 
-Logs files are saved in the following directories:
-
-| Platform | Path                                                          |
-|----------|---------------------------------------------------------------|
-| Linux    | `/var/log/datadog/`                        |
+| Platform | Path                                      |
+|----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
+| Linux    | `/var/log/datadog/`                       |
 
+**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
+
+For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
+
+[1]: /tracing/setup/dotnet#configuration
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -205,11 +207,9 @@ make install
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /help
 [2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
+[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
 [4]: /agent/guide/agent-log-files
 [5]: /tracing/visualization/#trace
-[6]: /help
-[7]: /agent/troubleshooting/#send-a-flare
+[6]: /agent/troubleshooting/#send-a-flare

@@ -109,14 +109,13 @@ Si vos logs ne sont pas envoyés au format JSON et que vous souhaitez agréger p
 
 Par exemple, chaque ligne de log Java commence avec un timestamp au format `aaaa-jj-mm`. Ces lignes comprennent une trace de pile qui peut être envoyée sous forme de deux logs :
 
-```
+```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Book.getTitle(Book.java:16)
         at com.example.myproject.Author.getBookTitles(Author.java:25)
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
 ```
-
 
 {{< tabs >}}
 {{% tab "Fichier de configuration" %}}
@@ -140,9 +139,9 @@ logs:
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
-```
+```yaml
  labels:
-    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_commencant_par_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
 ```
 
 {{% /tab %}}
@@ -150,7 +149,7 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
 
-```
+```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -162,7 +161,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_commencant_par_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
       labels:
         app: database
       name: postgres
@@ -171,6 +170,8 @@ spec:
         - name: postgres
           image: postgres:latest
 ```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous effectuez une agrégation multiligne avec des annotations de pod. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -220,24 +221,25 @@ Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_a
 
 Dans le fichier `datadog.yaml` : 
 
-```
+```yaml
 logs_config:
   processing_rules:
      - type: exclude_at_match
-       name: exclure_healthcheck
+       name: exclude_healthcheck
        pattern: healtcheck
      - type: mask_sequences
-       name: masquer_email_utilisateur
+       name: mask_user_email
        pattern: \w+@datadoghq.com
-       replace_placeholder: "EMAIL_MASQUÉ"
+       replace_placeholder: "MASKED_EMAIL"
 ```
+
 {{% /tab %}}
 {{% tab "Variable d'environnement" %}}
 
 Utilisez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` pour configurer les règles globales de traitement, par exemple :
 
-```
-DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "masquer_email_utilisateur", "replace_placeholder": "EMAIL_MASQUÉ", "pattern" : "\\w+@datadoghq.com"}]'
+```shell
+DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
@@ -245,10 +247,10 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "masquer_em
 
 Utilisez le paramètre `env` dans le chart Helm pour définir la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` afin de configurer les règles globales de traitement. Par exemple :
 
-```
+```yaml
 env:
   - name: DD_LOGS_CONFIG_PROCESSING_RULES
-    value: '[{"type": "mask_sequences", "name": "masquer_email_utilisateur", "replace_placeholder": "EMAIL_MASQUÉ", "pattern" : "\\w+@datadoghq.com"}]'
+    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
@@ -260,6 +262,7 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 

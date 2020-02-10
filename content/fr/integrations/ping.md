@@ -54,7 +54,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 2. Clonez le dépôt integrations-extras :
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    git clone https://github.com/DataDog/integrations-extras.git
     ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
@@ -118,12 +118,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [6]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: https://docs.datadoghq.com/fr/getting_started/integrations
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[10]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
-[13]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
-[14]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[9]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[12]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
+[13]: https://docs.datadoghq.com/fr/help

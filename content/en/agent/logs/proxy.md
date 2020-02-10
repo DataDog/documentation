@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -23,9 +23,9 @@ Configure the Agent to send logs in HTTPS using the same set of proxy settings a
 
 If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP using the following parameters in the `datadog.yaml` configuration file:
 
-```
+```yaml
 logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
+  logs_dd_url: "<PROXY_ENDPOINT>:<PROXY_PORT>"
   logs_no_ssl: true
 ```
 
@@ -50,9 +50,9 @@ The parameters above can also be set with the following environment variables:
 
 To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
 
-```
+```yaml
 logs_config:
-  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
+  socks5_proxy_address: "<MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>"
 ```
 
 The parameter above can also be set with the following environment variable:
@@ -69,8 +69,8 @@ When the Agent is [configured to send logs through HTTPS][1], use the same [set 
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/proxy

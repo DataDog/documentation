@@ -5,11 +5,11 @@ kind: documentation
 
 [APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [App Analytics][2] feature with APM allows you to slice and dice your application data with Analyzed Spans using completely customizable tags.
 
-| Billing Parameter   | Price                                       | App Analytics                                                                 | Billing                                                                                                                                                                                                                                                                                                                            |
-|---------------------|---------------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Billing Parameter  | Price                                      | App Analytics                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
+|--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [APM Host][3]      | $31 per underlying [APM host][3] per month | 1 million additional Analyzed Spans included per month with every APM host.   | Datadog records the number of [APM hosts][4] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][4] |
-| [Fargate][3]       | $2 per concurrent task per month            | No Analyzed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]               |
-| [Analyzed Span][4] | $1.70 per million Analyzed Spans per month  | Billed when usage is in excess of Analyzed Spans included with every APM host | An Analyzed Span is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. [More information.][4]                                                                                           |
+| [Fargate][3]       | $2 per concurrent task per month           | No Analyzed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]              |
+| [Analyzed Span][4] | $1.70 per million Analyzed Spans per month | Billed when usage is in excess of Analyzed Spans included with every APM host | An Analyzed Span is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. [More information.][4]                                                                                          |
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent.
 
@@ -29,7 +29,6 @@ Using 5 hosts and sending 30 million Analyzed Spans.
 | Analyzed Spans | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million Analyzed Spans | 25 * $1.70    | $42.50                |
 | Total          |            |                                                                                                 | $155 + $42.50 | **$197.50 per month** |
 
-
 ### Case 2: Hosts, Fargate, and Analyzed Spans
 
 Using 5 hosts, sending 20 million Analyzed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
@@ -41,7 +40,6 @@ Using 5 hosts, sending 20 million Analyzed Spans, and have deployed APM on avera
 | Analyzed Spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Analyzed Spans | 25 * $1.70          | $25.50                |
 | Total          |            |                                                                                                 | $155 + $40 + $25.50 | **$220.50 per month** |
 
-
 ### Case 3: Services, Containers and Analyzed Spans
 
 Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and are sending 20 million Analyzed Spans on App Analytics.
@@ -51,7 +49,6 @@ Service 1 running on container 1, service 2 running on container 2. Both Contain
 | APM Hosts      | 1          | $31 per host                                                                                   | 1 * $31      | $31                  |
 | Analyzed Spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Analyzed Spans | 19 * $1.70   | $32.30               |
 | Total          |            |                                                                                                | $31 + $32.30 | **$63.30 per month** |
-
 
 ### Case 4: Dynamic Scaling Hosts, Containers, Fargate and no Analyzed Spans
 
@@ -78,6 +75,7 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million Analyzed Spans
 For Kubernetes, APM is priced by nodes not by pods.
 
 ### FAQs
+
 **1. What is classified as an APM host for billing?**
 
 A [host][3] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][4].
@@ -90,11 +88,9 @@ It is recommended to [setup running][8] one agent per underlying host for contai
 
 Your APM bill is calculated using the top 99 percentile of active agents sending traces every hour of each month. At the end of the month, we disregard the top 1% value, giving a shield against being billed for unexpected spikes.
 
-
 **4. Do I get charged for pause containers in Kubernetes?**
 
 Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by nodes not by pods.
-
 
 **5. How is the host billing related to my services?**
 
@@ -110,7 +106,6 @@ No. App Analytics is an additional functionality available along with APM which 
     {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usage{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /tracing
 [2]: /tracing/app_analytics/?tab=java

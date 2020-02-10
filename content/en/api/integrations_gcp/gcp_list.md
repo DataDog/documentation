@@ -1,7 +1,7 @@
 ---
 title: List all GCP integrations
 type: apicontent
-order: 17.1
+order: 18.1
 external_redirect: /api/#list-all-gcp-integrations
 ---
 

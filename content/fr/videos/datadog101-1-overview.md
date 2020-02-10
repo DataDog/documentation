@@ -3,7 +3,7 @@ title: Datadog 101 - Overview
 kind: video
 language: en
 wistiaid: u5cctsapzd
-videos:
+"video-categories":
     - Datadog 101
     - Introduction
     - Dashboards

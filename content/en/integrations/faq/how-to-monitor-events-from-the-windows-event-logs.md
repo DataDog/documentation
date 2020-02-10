@@ -37,13 +37,13 @@ As the Agent pulls log information from a WMI class, use a Powershell commandlet
 
 First, retrieve the last 100 entries from the security log*:
 
-```
+```text
 $logs = Get-WmiObject -class Win32_NTLogEvent -filter "(logfile='Security')" | select -First 100
 ```
 
 Now, display the first event with an ID of 4776:
 
-```
+```text
 $logs | where  { $_.EventCode -eq 4776} | select -First 1 | format-list
 
 Category         : 14336
@@ -98,7 +98,7 @@ You should see an event appear on your [Event Stream][1] on the Datadog website.
 
 ** For convenience, reference [the YAML example][4] file to use as a template.
 
-[1]: /graphing/event_stream
+[1]: /events
 [2]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [3]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
 [4]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example

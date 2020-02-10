@@ -3,12 +3,11 @@ title: Datadog Dashboards and Trace Metrics
 kind: video
 language: en
 wistiaid: hc545nswvk
-videos:
+"video-categories":
     - apm
     - dashboards
     - traces
     - trace metrics
-
 
 summary: Combine trace metrics with infrastructure and logs to create your custom single pane of glass with all the information relevant to your business.
 ---

@@ -1,7 +1,6 @@
 ---
 title: Network Time Protocol (NTP) issues
 kind: documentation
-disable_toc: true
 aliases:
     - /agent/faq/network-time-protocol-ntp-offset-issues
 ---

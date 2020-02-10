@@ -16,26 +16,53 @@ further_reading:
     tag: Documentation
     text: Identifier les Bots Synthetics
 ---
-Vous pouvez régler les paramètres suivants via la [page des paramètres Synthetics][1] :
+Vous pouvez définir les paramètres suivants via la [page des paramètres Synthetics][1] :
 
-- [Identifiants sécurisés](#secure-credentials)
+- [Variables globales](#global-variables)
 - [Localisations privées][2]
-- [Variables][3]
 - [Paramètres par défaut](#default-settings)
     - [Localisations par défaut](#default-locations)
     - [Intégration APM pour les tests Browser](#apm-integration-for-browser-tests)
 
-## Identifiants sécurisés
+## Variables globales
 
-Les identifiants sécurisés sont une association sécurisée de noms d'utilisateur et de mots de passe qui peuvent être utilisés en tant que [variables][1] pour les tests Browser. Ces identifiants sont sécurisés par Datadog pour qu'uniquement un sous-ensemble d'utilisateurs choisis au sein de votre organisation puissent y accéder. Pour créer un nouvel identifiant sécurisé :
+Les variables sont globales et peuvent être utilisées par plusieurs [tests API][3] et [tests Browser][4] à la fois. Pour créer une variable globale, accédez à l'onglet **Global Variables** de votre page **Settings**, puis cliquez sur **New Global Variable** en haut à droite.  
+Choisissez le type de variable que vous souhaitez créer :
 
-1. Cliquez sur *New Secure Credential* en haut à droite de la page des paramètres.
-2. Saisissez le **nom d'un identifiant**.
-3. Saisissez la paire `Username`/`Password` donnée.
-4. Sélectionnez les **tags** à associer à votre identifiant.
-5. Facultatif : saisissez une description pour votre identifiant.
+{{< tabs >}}
+{{% tab "Spécifier une valeur" %}}
 
-{{< img src="synthetics/settings/credential.png" alt="Identifiant" responsive="true" style="width:80%;">}}
+1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom peut uniquement contenir des lettres majuscules, des chiffres et des tirets bas.
+2. Indiquez la valeur souhaitée dans le champ **Value**.
+3. Indiquez si votre variable doit être sécurisée ou non. Les variables sécurisées ne sont accessibles que par les membres de votre organisation que vous choisissez.
+4. Facultatif : sélectionnez les **tags** à associer à votre variable.
+5. Facultatif : saisissez une **description** pour votre variable.
+
+{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Variable globale avec valeur spécifiée"  style="width:80%;">}}
+
+{{% /tab %}}
+
+{{% tab "Créer à partir d'un test HTTP" %}}
+
+<div class="alert alert-warning">
+Cette fonctionnalité est en version bêta privée. <a href="/help">Contactez l'assistance Datadog</a> afin d'activer cette fonctionnalité pour votre compte.
+</div>
+
+1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom peut uniquement contenir des lettres majuscules, des chiffres et des tirets bas.
+2. Sélectionnez le test à partir duquel vous souhaitez extraire votre variable.
+3. Indiquez si votre variable doit être sécurisée ou non. Les variables sécurisées ne sont accessibles que par les membres de votre organisation que vous choisissez.
+4. Facultatif : sélectionnez les **tags** à associer à votre variable.
+5. Facultatif : saisissez une **description** pour votre variable.
+6. Indiquez si la variable doit être extraite à partir des en-têtes ou du corps de la réponse.
+    * Extraire la valeur à partir d'un **en-tête de réponse** : utiliser l'en-tête complet comme variable, ou parser l'en-tête à l'aide d'une [expression régulière][1].
+    * Extraire la valeur à partir du **corps de la réponse** : parser le corps de la réponse de la requête avec un chemin JSON ou une [expression régulière][1], ou utiliser le corps entier.
+
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Identifiant"  style="width:80%;">}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Paramètres par défaut
 
@@ -45,15 +72,17 @@ Sélectionnez les localisations par défaut des informations de tests API et Bro
 
 ### Intégration APM pour les tests Browser
 
-Permet d'autoriser les URL pour ajouter des en-têtes d'intégration APM à cette URL. Les en-têtes d'intégration APM de Datadog permettent à Datadog de lier les tests Browser avec l’APM. Définissez les endpoints à envoyer aux en-têtes APM en ajoutant une URL dans cette section.
+Ajoutez une URL pour inclure des en-têtes d'intégration APM dans cette URL. Les en-têtes d'intégration APM de Datadog permettent à Datadog de lier les tests Browser aux données d’APM. Définissez les endpoints devant recevoir les en-têtes APM en ajoutant une URL dans cette section.
 
-Utilisez `*` pour autoriser des noms de domaine supplémentaires. Par exemple, ajoutez `https://*.datadoghq.com/*` pour autoriser toutes les adresses `https://datadoghq.com/`.
+Utilisez `*` pour inclure des noms de domaine entiers. Par exemple, ajoutez `https://*.datadoghq.com/*` pour inclure toutes les adresses `https://datadoghq.com/`.
 
-Si l'endpoint est tracé et autorisé, les résultats des tests Browser sont automatiquement liés à la trace correspondante.
+Si l'endpoint est tracé et inclus dans la liste, les résultats du test Browser sont automatiquement liés à la trace correspondante.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /fr/synthetics/private_locations
-[3]: /fr/synthetics/browser_tests/#variable
+[3]: /fr/synthetics/api_tests#use-global-variables
+[4]: /fr/synthetics/browser_tests#use-global-variables

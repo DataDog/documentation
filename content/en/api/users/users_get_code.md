@@ -1,7 +1,7 @@
 ---
 title: Get user
 type: apicode
-order: 35.2
+order: 36.2
 external_redirect: /api/#get-user
 ---
 

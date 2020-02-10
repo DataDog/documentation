@@ -15,25 +15,25 @@ further_reading:
 
 ## Overview
 
-A logs monitor alerts when a specified type of log exceeds a user-defined threshold over a given period of time.
+Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified type of log exceeds a user-defined threshold over a given period of time.
 
 ## Monitor creation
 
-To create a [logs monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
+To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
 ### Define the search query
 
 As you define the search query, the graph above the search fields updates.
 
-1. If you have [multiple log indexes][2], select the index to search.
-2. Construct a search query using the same logic as a [log explorer search][3].
-3. Choose to monitor over a log count, [facet][4], or [measure][5]:
+1. If you have [multiple log indexes][3], select the index to search.
+2. Construct a search query using the same logic as a [log explorer search][4].
+3. Choose to monitor over a log count, [facet][5], or [measure][6]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a facet**: If a [facet][5] is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
-{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
 ### Set alert conditions
 
@@ -51,13 +51,13 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no logs for all services:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service"  style="width:60%;" >}}
 * This monitor triggers if there are no logs for the service `backend`:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 #### Log samples
 
@@ -75,18 +75,19 @@ To disable log samples, uncheck the box at the bottom of the **Say what's happen
 #### Examples
 
 Include a table of the top 10 breaching values:
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values"  style="width:60%;" >}}
 
 Include a sample of 10 logs in the alert notification:
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" responsive="true" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values"  style="width:60%;" >}}
 
+## Further Reading
 
-## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/log
-[2]: /logs/indexes
-[3]: /logs/explorer/search
-[4]: /logs/explorer/?tab=facets#setup
-[5]: /logs/explorer/?tab=measures#setup
-[6]: /monitors/notifications
+[1]: /logs
+[2]: https://app.datadoghq.com/monitors#create/log
+[3]: /logs/indexes
+[4]: /logs/explorer/search
+[5]: /logs/explorer/?tab=facets#setup
+[6]: /logs/explorer/?tab=measures#setup
+[7]: /monitors/notifications

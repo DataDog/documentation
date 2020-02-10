@@ -44,6 +44,13 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][1].
+
+```yaml
+com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
+```
+
+
 ### Extract Node Labels as Tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted by all pods on this node:
@@ -65,7 +72,7 @@ kubernetes_node_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -114,8 +121,8 @@ kubernetes_pod_labels_as_tags:
 
 **Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[2]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /developers/metrics/
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -139,7 +146,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 
 **Note**: Using this method may increase the number of [custom metrics][1] for your organization and impact your billing.
 
-[1]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
+[1]: /developers/metrics/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -164,7 +171,7 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -206,7 +213,7 @@ docker_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -246,7 +253,7 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -268,3 +275,4 @@ DD_DOCKER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/autodiscovery/tag/?tab=agent#extract-labels-as-tags

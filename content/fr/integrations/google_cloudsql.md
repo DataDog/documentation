@@ -10,7 +10,7 @@ description: 'Surveillez des métriques de base de données relatives aux perfor
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
 git_integration_title: google_cloudsql
 has_logo: true
-integration_title: "Google\_Cloud\_SQL"
+integration_title: Google CloudSQL
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -33,15 +33,15 @@ Recueillez des métriques de Google Cloud SQL pour :
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
 
 #### Collecte de logs
-Les logs de Google Cloud SQL sont recueillis via Stackdriver et envoyés à un Cloud Pub/Sub grâce à un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un redirecteur Push HTTP][4].
+Les logs Google Cloud SQL sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs de Google Cloud SQL depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depuis Stackdriver vers le Pub/Sub :
 
-1. Accédez à [la page Stackdriver][5] et filtrez les logs de Google Cloud SQL.
+1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud SQL.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-{{< img src="integrations/google_cloudsql/export_cloudsql_database.png" alt="Exporter les logs Google Cloud Sql vers Pub Sub" responsive="true">}}
+    {{< img src="integrations/google_cloudsql/export_cloudsql_database.png" alt="Exporter les logs Google Cloud Sql vers le Pub Sub" >}}
 
 4. Cliquez sur `Create` et attendez que le message de confirmation s'affiche.
 
@@ -54,17 +54,14 @@ Une fois cette opération effectuée, exportez vos logs de Google Cloud SQL de
 L'intégration Google Cloud SQL n'inclut aucun événement.
 
 ### Checks de service
-**gcp.cloudsql.database.state**  
+**gcp.cloudsql.database.state**
 L'état de service actuel de l'instance Cloud SQL.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
-[4]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
-[5]: https://console.cloud.google.com/logs/viewer
-
-
-{{< get-dependencies >}}
+[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help

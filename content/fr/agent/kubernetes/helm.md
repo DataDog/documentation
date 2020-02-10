@@ -46,15 +46,17 @@ Pour installer Helm sur une autre plateforme ou avec une autre méthode, consult
 
 ### Installer le serveur Helm (Tiller)
 
-Si votre environnement Kubernetes n'utilise pas RBAC, la commande suivante installe Tiller dans votre cluster :
+**Remarque** : cette étape n'est pas nécessaire si vous utilisez Helm 3.0.0 ou une version ultérieure. Dans ce cas, vous n'avez pas besoin d'[Installer le chart Helm Datadog](#installer-le-chart-helm-datadog).
+
+Si votre environnement Kubernetes n'utilise pas la fonction RBAC, la commande suivante permet d'installer Tiller dans votre cluster :
 
 ```bash
 helm init
 ```
 
-Consultez la [documentation du Tiller de Helm][2] pour en savoir plus.
+Consultez la [documentation de Helm sur Tiller][2] pour en savoir plus.
 
-Si RBAC est activé sur votre cluster Kubernetes, utilisez la configuration RBAC suivante pour déployer Tiller.
+Si la fonction RBAC est activé sur votre cluster Kubernetes, utilisez la configuration RBAC suivante pour déployer Tiller.
 
 ```yaml
 apiVersion: v1
@@ -85,7 +87,7 @@ kubectl create -f tiller-rbac-config.yaml
 helm init --service-account tiller
 ```
 
-Consultez la [documentation Tiller/RBAC de Helm][3] pour en savoir plus.
+Consultez la [documentation de Helm sur Tiller/RBAC][3] pour en savoir plus.
 
 ### Vérifier l'installation
 
@@ -106,9 +108,23 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 
 Pour installer le chart avec le nom de version `<NOM_VERSION>`, récupérez votre clé d'API Datadog à partir des [instructions d'installation de l'Agent][4] et exécutez :
 
+{{< tabs >}}
+{{% tab "Helm v1/v2" %}}
+
 ```bash
 helm install --name <NOM_VERSION> --set datadog.apiKey=<CLÉ_API_DATADOG> stable/datadog
 ```
+
+{{% /tab %}}
+
+{{% tab "Helm v3+" %}}
+
+```bash
+helm install <NOM_VERSION> --set datadog.apiKey=<CLÉ_API_DATADOG> stable/datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Ce chart ajoute l'Agent Datadog à l'ensemble des nœuds dans votre cluster via un DaemonSet. Il peut également déployer le [chart kube-state-metrics][5] et l'utiliser comme source supplémentaire de métriques concernant le cluster. Quelques minutes après l'installation, Datadog commence à transmettre les hosts et les métriques.
 
@@ -130,7 +146,7 @@ helm upgrade -f datadog-values.yaml <NOM_VERSION> stable/datadog --recreate-pods
 
 Mettez à jour votre fichier [datadog-values.yaml][7] avec la configuration de collecte de logs suivante, puis mettez à niveau votre chart Helm Datadog :
 
-```
+```text
 datadog:
   (...)
  logsEnabled: true
@@ -141,7 +157,7 @@ datadog:
 
 Pour recueillir des métriques custom avec [DogStatsD][8], activez le trafic non local en modifiant votre fichier [datadog-values.yaml][7].
 
-```
+```text
 datadog:
   (...)
   nonLocalTraffic: true
@@ -153,7 +169,7 @@ datadog:
 
 Mettez à jour votre fichier [datadog-values.yaml][7] avec la configuration d'APM suivante :
 
-```
+```text
 datadog:
   (...)
   apmEnabled: true
@@ -168,7 +184,7 @@ daemonset:
 
 Mettez à jour la section `env` du manifeste de votre application avec le bloc suivant :
 
-```
+```yaml
 env:
   - name: DD_AGENT_HOST
     valueFrom:
@@ -180,7 +196,7 @@ Ensuite, mettez à niveau votre chart Helm Datadog.
 
 Enfin, indiquez aux traceurs d'application l'IP du host via la variable d'environnement `DD_AGENT_HOST`. Par exemple, en Python :
 
-```
+```python
 import os
 from ddtrace import tracer
 
@@ -196,7 +212,7 @@ Consultez la [documentation sur l'APM propre à votre langage][9] pour obtenir d
 
 Mettez à jour votre fichier [datadog-values.yaml][7] avec la configuration de collecte de processus suivante, puis mettez à niveau votre chart Helm Datadog :
 
-```
+```text
 datadog:
   (...)
   processAgentEnabled: true

@@ -10,6 +10,7 @@ $white-translucent:     rgba(255, 255, 255, 0.3);
 $gray-base:             #000000;
 $gray-darker:           #333333;
 $gray-dark:             #555555;
+$gray-darkish:          #666666;
 $gray:                  #888888;
 $gray-light:            #c7c7c7;
 $gray-lighter:          #eeeeee;
@@ -70,6 +71,7 @@ $color-var: (
   purple:               $brand-primary,
   yellow:               $brand-yellow,
   gray-darker:          $gray-darker,
+  gray-darkish:          $gray-darkish,
   gray-dark:            $gray-dark,
   gray:                 $gray,
   gray-light:           $gray-light,

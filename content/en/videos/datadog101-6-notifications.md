@@ -3,7 +3,7 @@ title: Datadog 101 - Notifications
 kind: video
 language: en
 wistiaid: 4kjgeqdb5o
-videos:
+"video-categories":
     - Datadog 101
     - Notifications
 summary: Using notifications to get alerted to problems without being woken up for false positives

@@ -1,7 +1,6 @@
 ---
 title: Community integration installation
 kind: guide
-disable_toc: true
 further_reading:
 - link: "agent/troubleshooting/"
   tag: "Documentation"
@@ -53,14 +52,14 @@ To install the `<INTEGRATION_NAME>` check on your host:
 [1]: https://docs.datadoghq.com/developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: /getting_started/integrations
-[4]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
 
-```
-FROM python:2.7 AS wheel_builder
+```text
+FROM python:3.8 AS wheel_builder
 WORKDIR /wheels
 RUN pip install "datadog-checks-dev[cli]"
 RUN git clone https://github.com/DataDog/integrations-extras.git
@@ -92,9 +91,9 @@ To install the `<INTEGRATION_NAME>` check on your host:
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /getting_started/integrations
-[5]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

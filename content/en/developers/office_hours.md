@@ -7,7 +7,7 @@ Datadog runs twice monthly code reviews and office hours to assist community mem
 
 ### Where
 
-Office hours will be held in #integrations in the [Datadog Community Slack][1] ([get an invitation][2]), in conjunction with a [Google Hangout][3].
+Office hours will be held in #integrations in the [Datadog Community Slack][1] ([get an invitation][2]), in conjunction with a [Zoom videoconference][3].
 
 ### When
 
@@ -27,7 +27,6 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 ### List of open source projects
 
 Discover the full list of [Datadog open-source projects at GitHub][5].
-
 
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com

@@ -12,7 +12,8 @@ Data in WMI is grouped into classes. There are several hundreds classes that com
 Microsoft Powershell is considered the standard way to interact with a Windows system programmatically, and it comes with the tools to manage WMI.
 
 To list all classes available on a computer, run:
-```
+
+```text
 PS C:\> Get-WmiObject -List
 
 NameSpace: ROOT\cimv2
@@ -30,14 +31,14 @@ __IndicationRelated {} {}
 
 To count how many classes are available, run:
 
-```
+```text
 PS C:\> (Get-WmiObject -List).count
 931
 ```
 
 We can find classes about a specific topic by using the where statement. To display classes that hold processes information, run:
 
-```
+```text
 PS C:\> Get-WmiObject -List | where {$_.name -match "process"} | select Name
 
 Name
@@ -58,7 +59,7 @@ To browse the data exposed by a class, we can use a syntax similar to SQL called
 
 Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example we want to look at processes information so we query the `Win32_PerfFormattedData_PerfProc_Process` class:
 
-```
+```text
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
 
 __GENUS                 : 2
@@ -129,18 +130,20 @@ init_config:
 
 instances:
 
-  # Fetch the number of processes 
+  # Fetch the number of processes
   - class: Win32_OperatingSystem
     metrics:
       - [NumberOfProcesses, system.proc.count, gauge]
 ```
 
 Save the configuration, enable the integration and restart then go to 'Logs and Status -> Agent Status'. Under the 'Checks' section you should see the following:
-```
-wmi_check Instance #0 OK Collected 1 metrics, 0 events and 1 service check 
+
+```text
+wmi_check Instance #0 OK Collected 1 metrics, 0 events and 1 service check
 ```
 
 Now let's monitor the Windows Powershell process we were looking at earlier:
+
 ```yaml
 init_config:
 
@@ -160,17 +163,19 @@ instances:
 ```
 
 In your Metrics Explorer you should find 2 metrics called powershell.threads.count and powershell.mem.virtual. But what happens if you have 2 Powershell consoles opened? You may find the following error in the 'Checks section':
-```
+
+```text
 wmi_check
   Instance #0
-    ERROR 
+    ERROR
   Error
     Exception("WMI query returned multiple rows but no `tag_by` value was given. metrics=[['ThreadCount',
-    'powershell.threads.count', 'gauge'], ['VirtualBytes', 'powershell.mem.virtual', 'gauge']]",) 
-  Collected 0 metrics, 0 events and 1 service check 
+    'powershell.threads.count', 'gauge'], ['VirtualBytes', 'powershell.mem.virtual', 'gauge']]",)
+  Collected 0 metrics, 0 events and 1 service check
 ```
 
-This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the tag_by: Instance_Property_Name statement to use the value of an instance's property as an additional tag:
+This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the `tag_by: Instance_Property_Name statement` to use the value of an instance's property as an additional tag:
+
 ```yaml
 init_config:
 
@@ -193,16 +198,18 @@ instances:
 ```
 
 Which gives you 2 metrics per Powershell console opened:
-```
+
+```text
 wmi_check
   Instance #0
-    OK 
-  Collected 4 metrics, 0 events and 1 service check 
+    OK
+  Collected 4 metrics, 0 events and 1 service check
 ```
 
 If the information that you would like to use as a tag is not part of the class you're getting the data from, you have the possibility to use the tag_queries list to link data from different tables.
 
 Let's say I want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and I want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former is thelink source property and the later the target property:
+
 ```yaml
 # `tag_queries` optionally lets you specify a list of queries, to tag metrics
 # with a target class property. Each item in the list is a set of
