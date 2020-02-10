@@ -402,7 +402,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 ## Using NGINX as a Proxy
 
-[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog agents:
+[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
