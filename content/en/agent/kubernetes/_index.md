@@ -35,7 +35,7 @@ To gather metrics, traces, and logs from your Kubernetes clusters, there are fou
 * [Host installation][5] - If the kubelet runs into an issue, and the Agent as a container dies, you will lose visibility into the node. However, if the Agent runs *on* the node, you can monitor the kubelet throughout its lifecycle. If this is a significant concern for you, install the Agent as a host.
 * [Cluster Agent][6] - For systems with very large Kubernetes clusters, the Datadog Cluster Agent can help to alleviate server load.
 
-**Note**: Only one Datadog Agent shound run on each node; a sidecar per pod is not generally recommended and may not function as expected.
+**Note**: Only one Datadog Agent should run on each node; a sidecar per pod is not generally recommended and may not function as expected.
 
 ## RBAC
 
