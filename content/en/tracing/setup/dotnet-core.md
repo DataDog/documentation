@@ -23,9 +23,11 @@ further_reading:
 
 ## Getting Started
 
-<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target="_blank">container-based</a> set ups.</div>
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target="_blank">host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target="_blank">container-based</a> set ups.</div>
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
+
+**Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
 
 ## Automatic Instrumentation
 
@@ -187,17 +189,16 @@ CMD ["dotnet", "example.dll"]
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library           | NuGet package name                           | Package versions | Integration Name     |
-|--------------------------------|----------------------------------------------|------------------|----------------------|
-| ASP.NET Core                   | `Microsoft.AspNetCore`                       | 2.0+, 3.0+       | `AspNetCore`         |
-| ASP.NET Core MVC               | `Microsoft.AspNetCore.Mvc`                   | 2.0+, 3.0+       | `AspNetCore`         |
-| ADO.NET                        | `System.Data.Common`/`System.Data.SqlClient` | 4.0+             | `AdoNet`             |
-| WebClient / WebRequest         |                                              | 4.0+             | `WebRequest`         |
-| HttpClient / HttpClientHandler | `System.Net.Http`                            | 4.0+             | `HttpMessageHandler` |
-| Redis (StackExchange client)   | `StackExchange.Redis`                        | 1.0.187+         | `StackExchangeRedis` |
-| Redis (ServiceStack client)    | `ServiceStack.Redis`                         | 4.0.48+          | `ServiceStackRedis`  |
-| Elasticsearch                  | `NEST` / `Elasticsearch.Net`                 | 5.3.0+           | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver.Core`                        | 2.1.0+           | `MongoDb`            |
+| Framework or library           | NuGet package                                                           | Integration Name     |
+|--------------------------------|-------------------------------------------------------------------------|----------------------|
+| ASP.NET Core                   | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
+| ADO.NET                        | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
+| HttpClient / HttpClientHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
+| WebClient / WebRequest         | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
+| Redis (StackExchange client)   | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
+| Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
+| Elasticsearch                  | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
+| MongoDB                        | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
