@@ -29,7 +29,7 @@ Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 Kubernetes >= 1.14
 
 ```shell
-kubectl apply -k "github.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac?ref=master"
+kubectl apply -k "github.com/DataDog/datadog-agent/Dockerfiles/manifests/rbac?ref=master"
 ```
 
 Kubernetes < 1.14
