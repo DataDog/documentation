@@ -1,6 +1,8 @@
 ---
 title: Running Cluster Checks with Autodiscovery
 kind: documentation
+aliases:
+  - "agent/autodiscovery/clusterchecks"
 further_reading:
 - link: "/agent/autodiscovery"
   tag: "Documentation"
