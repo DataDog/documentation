@@ -17,17 +17,19 @@ further_reading:
 
 ## How it Works
 
-The [Cluster Check][1] feature provides the ability to autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). The Endpoints Checks feature extends this mechanism to monitor any endpoint behind cluster services.
+The [Cluster Check][1] feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). 
+
+Endpoint checks extend this mechanism to monitor any endpoint behind cluster services.
 
 The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into Endpoints Checks.
 
-Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
+Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
 
-The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from Endpoints Checks will be submitted with service, pod, and host tags.
+The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service, pod, and host tags.
 
-This feature is currently supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
+This feature is supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
 
-Starting with version 1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][1] feature alongside Endpoints Checks to take advantage of this functionality.
+Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][1] feature alongside Endpoints Checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
 
@@ -69,9 +71,9 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       ...
 ```
 
-By design, Endpoints Checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
+By design, endpoints checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
 
-This works like that to leverage [autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
+This works like that to leverage [Autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
 
 ## How to set it up
 
