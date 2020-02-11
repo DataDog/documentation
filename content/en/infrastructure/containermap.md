@@ -23,7 +23,7 @@ In one place, you can detect outliers, identify usage patterns, avoid resource p
 
 ## Installation
 
-After deploying the [Agent][4], no other configuration is necessary. For collecting Docker container information in the standard install rather than with the [Docker Agent][5], the `dd-agentuser` needs to have permissions to access `docker.sock`.
+After deploying the [Agent][4], no other configuration is necessary. For collecting Docker container information in the standard install rather than with the [Docker Agent][5], the `dd-agent` user needs to have permissions to access `docker.sock` (i.e. by adding `dd-agent` to the `docker` group).
 
 ## Further Reading
 
