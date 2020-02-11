@@ -17,42 +17,44 @@ further_reading:
 
 ## How it Works
 
-The Datadog Agent is able to auto-discover containers and create Check configurations via [the Autodiscovery mechanism][1]. The Cluster Checks feature extends this mechanism to monitor non-containerized workloads, including:
+The Datadog Agent can Autodiscover containers and create check configurations with [the Autodiscovery mechanism][1]. 
 
-- out-of-cluster datastores and endpoints (eg. RDS or CloudSQL)
-- load-balanced cluster services (eg. Kubernetes services)
+Cluster checks extend this mechanism to monitor noncontainerized workloads, including:
 
-To ensure that only one instance of each Check runs, [the Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster.
+- Out-of-cluster datastores and endpoints (for example, RDS or CloudSQL).
+- Load-balanced cluster services (for example, Kubernetes services).
 
-Metrics, Events and Service Checks collected by Cluster Checks will be submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and slice your data.
+To ensure that only one instance of each check runs, [the Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster.
 
-This feature is currently supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
+Metrics, events, and service checks collected by cluster checks are submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and slice your data.
 
-## How to set it up
+This feature is supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
-### Cluster Agent setup
+## Set up cluster checks
+
+### Cluster Agent
 
 This feature requires a running [Cluster Agent][3].
 
 Then enable the cluster check feature:
 
-Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
+Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery mechanism for noncontainerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
 
 1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
 2. Pass your cluster name as `DD_CLUSTER_NAME`. To help you scope your metrics, Datadog injects your cluster name as a `cluster_name` instance tag to all configurations.
 3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
 4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
 
-The following two configuration sources are currently supported. [They are described in the Autodiscovery documentation][4]:
+The following two configuration sources are supported. [They are described in the Autodiscovery documentation][4]:
 
 * You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
-* Kubernetes Service annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+* Kubernetes Service Annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
 Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
 Refer to [the dedicated Cluster Checks Autodiscovery guide][5] for more configuration and troubleshooting details on this feature.
 
-### Agent setup
+### Agent
 
 Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent. This can be done in two ways:
 
@@ -83,7 +85,7 @@ Running [custom Agent checks][7] as cluster checks is supported, as long as all 
 
 ### Static configurations in files
 
-When the IP of a given resource is constant (eg. external service endpoint, public URL...), a static configuration can be passed to the Cluster Agent as yaml files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
+When the IP of a given resource is constant (eg. external service endpoint, public URL, etc.), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
 
 #### Example: MySQL check on a CloudSQL database
 
@@ -113,7 +115,7 @@ You can annotate services with the following syntax, similar to the syntax for [
 
 The `%%host%%` [template variable][10] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
-#### Example: HTTP check on an nginx-backed service
+#### Example: HTTP check on an NGINX-backed service
 
 The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][11] to measure the latency of the load balanced service:
 
@@ -147,7 +149,7 @@ In addition, each pod should be monitored with the [NGINX check][12], as it enab
 
 ## Troubleshooting
 
-Due to the distributed nature of Cluster Checks, troubleshooting them is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
+Due to the distributed nature of cluster checks, troubleshooting them is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
 
 ### Kubernetes: find the leader Cluster Agent
 
