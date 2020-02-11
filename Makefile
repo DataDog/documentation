@@ -52,34 +52,34 @@ clean-integrations:  ## Remove built integrations files.
 	    -a -not -name '*.fr.json' \
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
-	    -a -not -name '_index.md' \
+		-a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \
 		-a -not -name 'kubernetes_audit_logs.md' \
 		-a -not -name 'alcide.md' \
-	    -a -not -name 'amazon_guardduty.md' \
-	    -a -not -name 'amazon_cloudhsm.md' \
-	    -a -not -name 'pivotal_platform.md' \
-			-a -not -name 'carbon_black.md' \
-		  -a -not -name 'cloudability.md' \
-	    -a -not -name 'cloudcheckr.md' \
-		  -a -not -name 'fluentbit.md' \
-			-a -not -name 'iam_access_analyzer.md' \
-	    -a -not -name 'integration_sdk.md' \
-	    -a -not -name 'journald.md' \
-	    -a -not -name 'kubernetes.md' \
-	    -a -not -name 'marklogic.md' \
-	    -a -not -name 'nxlog.md' \
-	    -a -not -name 'rss.md' \
-	    -a -not -name 'rsyslog.md' \
-	    -a -not -name 'sidekiq.md' \
-	    -a -not -name 'sinatra.md' \
-	    -a -not -name 'stunnel.md' \
-	    -a -not -name 'syslog_ng.md' \
-	    -a -not -name 'system.md' \
-	    -a -not -name 'tcprtt.md' \
-	    -a -not -name 'uwsgi.md' \
-	    -a -not -name '*.fr.md' \
-	    -exec rm -rf {} \;
+		-a -not -name 'amazon_guardduty.md' \
+		-a -not -name 'amazon_cloudhsm.md' \
+		-a -not -name 'pivotal_platform.md' \
+		-a -not -name 'carbon_black.md' \
+		-a -not -name 'cloudability.md' \
+		-a -not -name 'cloudcheckr.md' \
+		-a -not -name 'fluentbit.md' \
+		-a -not -name 'iam_access_analyzer.md' \
+		-a -not -name 'integration_sdk.md' \
+		-a -not -name 'journald.md' \
+		-a -not -name 'kubernetes.md' \
+		-a -not -name 'marklogic.md' \
+		-a -not -name 'nxlog.md' \
+		-a -not -name 'rss.md' \
+		-a -not -name 'rsyslog.md' \
+		-a -not -name 'sidekiq.md' \
+		-a -not -name 'sinatra.md' \
+		-a -not -name 'stunnel.md' \
+		-a -not -name 'syslog_ng.md' \
+		-a -not -name 'system.md' \
+		-a -not -name 'tcprtt.md' \
+		-a -not -name 'uwsgi.md' \
+		-a -not -name '*.fr.md' \
+		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
