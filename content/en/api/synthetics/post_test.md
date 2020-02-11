@@ -59,7 +59,7 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
 
 * **`type`** - _required_ - The part of the response that you want to assess. Possible types are:
 
-  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter.
+  * `header`: When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. Note that header conditions must be written in lowercase.
   * `body`: Use the `target` attribute to specify the expected value for the `body`.
   * `responseTime`: Use the `target` attribute to specify the expected value for `responseTime`. For example: `"target":180000`.
   * `statusCode`: Use the `target` attribute to specify the expected value for `statusCode`. For example: `"target":403`.
