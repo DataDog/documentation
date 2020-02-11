@@ -402,7 +402,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 ## Using NGINX as a Proxy
 
-[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can use NGINX as a proxy to send logs to Datadog:
+[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -410,7 +410,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 #### NGINX configuration
 
-This example `nginx.conf` can be used to proxy logs to the Datadog intake. It does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
@@ -421,14 +421,29 @@ worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
 
-include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# TCP Proxy for Datadog logs
+# TCP Proxy for Datadog Agent
 stream {
     server {
-        listen 10514; #proxy listen port
+        listen 3834; #listen for metrics
+        proxy_pass haproxy-app.agent.datadoghq.com:443;
+    }
+    server {
+        listen 3835; #listen for traces
+        proxy_pass trace.agent.datadoghq.com:443;
+    }
+    server {
+        listen 3836; #listen for processes
+        proxy_pass process.datadoghq.com:443;
+    }
+    server {
+        listen 3837; #listen for logs with use_http: true
+        proxy_pass agent-http-intake.logs.datadoghq.com:443;
+    }
+    server {
+        listen 10514; #listen for logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -444,14 +459,29 @@ worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
 
-include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# TCP Proxy for Datadog logs
+# TCP Proxy for Datadog Agent
 stream {
     server {
-        listen 10514; #proxy listen port
+        listen 3834; #listen for metrics
+        proxy_pass haproxy-app.agent.datadoghq.eu:443;
+    }
+    server {
+        listen 3835; #listen for traces
+        proxy_pass trace.agent.datadoghq.eu:44;
+    }
+    server {
+        listen 3836; #listen for processes
+        proxy_pass process.datadoghq.eu:443;
+    }
+    server {
+        listen 3837; #listen for logs with use_http: true
+        proxy_pass agent-http-intake.logs.datadoghq.eu:443;
+    }
+    server {
+        listen 10514; #listen for logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
@@ -471,6 +501,16 @@ logs_config:
 ```
 
 Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
+
+When choosing to send logs over HTTPS, use the following code block in `datadog.yaml` to configure Agent behavior:
+
+```yaml
+logs_config:
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
+  use_http: true
+  use_compression: true
+  compression_level: 6
+```
 
 ## Using the Agent as a Proxy
 
