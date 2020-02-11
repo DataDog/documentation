@@ -2,7 +2,7 @@
 import Cookies from 'js-cookie';
 
 const allowedLanguages = ['en', 'ja', 'fr'];
-const redirectLanguages = ['ja'];
+const redirectLanguages = ['ja', 'fr'];
 const enabledSubdomains = [
 	'www',
 	'docs',
@@ -54,11 +54,12 @@ export function handleLanguageBasedRedirects() {
 			logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 
 			Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
+
 			window.location.replace( window.location.origin + `${ previewPath }/${ uri }`.replace(/\/+/g,'/') );
 		}
 		else if ( Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
 			acceptLanguage = Cookies.get('lang_pref');
-			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage}`;
+			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage }`;
 		}
 		else if ( redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
 			logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
@@ -86,4 +87,5 @@ export function handleLanguageBasedRedirects() {
 	}
 }
 
-window.addEventListener('load', handleLanguageBasedRedirects, false);
+// window.addEventListener('load', handleLanguageBasedRedirects, false);
+handleLanguageBasedRedirects();
