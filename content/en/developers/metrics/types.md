@@ -303,6 +303,10 @@ Submit your DISTRIBUTION type metrics from the following source:
 | [Agent check][18] | `self.rate(...)`                     | RATE            | GAUGE               |
 | [Agent check][19] | `self.set(...)`                      | SET             | GAUGE               |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/metrics/type_modifiers/
 [2]: /dashboards/functions/
 [3]: /metrics/summary/
