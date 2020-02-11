@@ -821,52 +821,68 @@ main:
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_java"
     weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
-    identifier: "python"
+    identifier: "tracing_setup_python"
     weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_ruby"
     weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_go"
     weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_nodejs"
     weight: 205
   - name: ".NET Framework"
     url: "tracing/setup/dotnet-framework/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_dotnet_framework"
     weight: 206
   - name: ".NET Core"
     url: "tracing/setup/dotnet-core/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_dotnet_core"
     weight: 207
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_php"
     weight: 208
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_cpp"
     weight: 209
+  - name: "Android"
+    url: "tracing/setup/android/"
+    parent: "tracing_setup"
+    identifier: "tracing_setup_android"
+    weight: 210
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 210
+    identifier: "tracing_setup_envoy"
+    weight: 211
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 211
+    identifier: "tracing_setup_nginx"
+    weight: 212
   - name: "Istio"
     url: "tracing/setup/istio/"
+    identifier: "tracing_setup_istio"
     parent: "tracing_setup"
-    weight: 212
+    weight: 213
 
   ## TRACING - App analytics
 
