@@ -15,6 +15,5 @@ This endpoint allows you to add new tags to a host, optionally specifying where 
     A list of tags to apply to the host
 * **`source`** [*optional*, *default*=**users**]:
     The source of the tags (e.g. chef, puppet).
-    [Complete list of source attribute values][1]
 
-[1]: /integrations/faq/list-of-api-source-attribute-value
+
