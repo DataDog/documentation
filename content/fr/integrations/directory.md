@@ -33,10 +33,10 @@ supported_os:
 
 Capturez des métriques à partir des répertoires et des fichiers de votre choix. L'Agent recueille les éléments suivants :
 
-  * Le nombre de fichiers
-  * La taille des fichiers
-  * La date de dernière modification
-  * La date de création
+- Le nombre de fichiers
+- La taille des fichiers
+- La date de dernière modification
+- La date de création
 
 ## Implémentation
 
@@ -48,17 +48,16 @@ Le check Directory est inclus avec le paquet de l'[Agent Datadog][1] : vous n'a
 
 1. Modifiez le fichier `directory.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de performance Directory. Consultez le [fichier d'exemple directory.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-        - directory: "/path/to/directory" # the only required option
-          name: "my_monitored_dir"        # What the Agent will tag this directory's metrics with. Defaults to "directory"
-          pattern: "*.log"                # defaults to "*" (all files)
-          recursive: True                 # default False
-          countonly: False                # set to True to only collect the number of files matching 'pattern'. Useful for very large directories.
-          ignore_missing: False           # set to True to not raise exceptions on missing or inaccessible directories
-    ```
+   instances:
+     ## @param directory - string - required
+     ## The directory to monitor. On windows, please make sure you escape back-slashes otherwise the YAML
+     ## parser fails (eg. - directory: "C:\\Users\\foo\\Downloads").
+     #
+     - directory: "<DIRECTORY_PATH>"
+   ```
 
     Vérifiez que l'utilisateur qui exécute le processus de l'Agent (généralement, `datadog-agent`) dispose d'un accès en lecture aux répertoires, sous-répertoires et fichiers que vous configurez.
 
@@ -67,6 +66,7 @@ Le check Directory est inclus avec le paquet de l'[Agent Datadog][1] : vous n'a
 2. [Redémarrez l'Agent][4].
 
 #### Collecte de métriques
+
 Le check Directory peut potentiellement générer des [métriques custom][5], ce qui peut avoir une incidence sur votre [facture][6].
 
 ### Validation
@@ -74,17 +74,21 @@ Le check Directory peut potentiellement générer des [métriques custom][5], ce
 [Lancez la sous-commande status de l'Agent][7] et cherchez `directory` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "directory" >}}
 
 
 ### Événements
+
 Le check Directory n'inclut aucun événement.
 
 ### Checks de service
+
 Le check Directory n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://app.datadoghq.com/account/settings#agent
