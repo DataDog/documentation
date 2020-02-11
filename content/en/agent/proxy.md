@@ -506,7 +506,7 @@ When choosing to send logs over HTTPS, use the following code block in `datadog.
 
 ```yaml
 logs_config:
-  logs_dd_url: myProxyServer.myDomain:3837
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
   use_http: true
   use_compression: true
   compression_level: 6
