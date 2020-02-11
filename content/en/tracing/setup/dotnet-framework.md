@@ -27,7 +27,7 @@ further_reading:
 
 ## Getting Started
 
-<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target="_blank"> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target="_blank">container-based</a> set ups.</div>
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target="_blank">host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target="_blank">container-based</a> set ups.</div>
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
