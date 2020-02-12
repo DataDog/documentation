@@ -53,7 +53,10 @@ The hook will inject said env variable to every pod running on the cluster. To l
 
 ### Verification
 To verify the Admission Controller Web Hook is set properly, run the following command:
-```kubectl get mutatingwebhookconfigurations```
+
+```shell
+kubectl get mutatingwebhookconfigurations
+```
 
 The Datadog webhook should show up.
 
@@ -66,8 +69,6 @@ Next, encode your [API key][4] using `base64` by running the following command:
 echo -n <DATADOG_API_KEY> | base64
 ```
 Replace the encoded key inside the Secrets object: `api-key: "<YOUR_BASE64_ENCODED_API_KEY>"`
-
-**Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
 
 ```yaml
 # datadog-agent.yaml
@@ -175,7 +176,7 @@ spec:
         ## is not a symlink to any other directory.
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
-
+**Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
 Consult the [Docker integration][8] to discover all of the configuration options.
 
 Finally, deploy the DaemonSet with the command:
@@ -208,6 +209,43 @@ For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name 
 **Note**: You can manually set this cluster name value with Agent v6.5+ thanks to the Agent configuration parameter [`clusterName`][11] or the `DD_CLUSTER_NAME` environment variable.
 
 ## Enable capabilities
+
+### APM and Distributed Tracing
+
+The APM trace agent is enabled by default. If using APM, the tracing libraries will automatically discover the agent.
+To disable the APM trace agent from listening to events, add the following flag to your Datadog agent YAML file:
+```yaml
+- {name: DD_APM_ENABLED, value: "false" }
+```
+
+and remove the `containerPort: 8126` mapping: 
+```yaml
+          # Remove if not using APM
+          - containerPort: 8126
+            hostPort: 8126
+            name: traceport
+            protocol: TCP
+```
+
+### DogStatsD
+
+DogStatsD is enabled by default. If using custom metrics, DogStatsD libraries will automatically discover the agent.
+To disable DogStatsD, remove the following flag from your Datadog agent YAML file:
+
+```yaml
+- {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "true" }
+```
+
+and remove the `containerPort: 8125` mapping:
+```yaml
+          # Remove if not using APM
+          - containerPort: 8126
+            hostPort: 8126
+            name: traceport
+            protocol: TCP
+```
+
+Learn more about this in the [Kubernetes DogStatsD documentation][16]
 
 ### Log Collection
 
@@ -335,85 +373,10 @@ Since Agent v6.14+, the Agent collects logs for all containers (running or stopp
 {{% /tab %}}
 {{< /tabs >}}
 
-### APM and Distributed Tracing
-
-To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
-
-```text
-(...)
-      env:
-        (...)
-        - name: DD_APM_NON_LOCAL_TRAFFIC
-          value: "true"
-(...)
-```
-
-Then, forward the port of the Agent to the host.
-
-```text
-(...)
-      ports:
-        (...)
-        - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
-(...)
-```
-
-Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
-
-```text
-apiVersion: apps/v1
-kind: Deployment
-...
-    spec:
-      containers:
-      - name: <CONTAINER_NAME>
-        image: <CONTAINER_IMAGE>/<TAG>
-        env:
-          - name: DD_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-```
-
-Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
-
-```python
-import os
-from ddtrace import tracer
-
-tracer.configure(
-    hostname=os.environ['DD_AGENT_HOST'],
-    port=os.environ['DD_TRACE_AGENT_PORT'],
-)
-```
-
-Refer to the [language-specific APM instrumentation docs][14] for more examples.
-
-**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
 ### Process Collection
 
 See [Process collection for Kubernetes][15].
-
-### DogStatsD
-
-To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
-
-```text
-(...)
-      env:
-        (...)
-        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-          value: "true"
-(...)
-```
-
-Learn more about this in the [Kubernetes DogStatsD documentation][16]
-
-To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
 **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.
 Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
