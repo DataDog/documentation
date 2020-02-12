@@ -220,11 +220,11 @@ To disable the APM trace agent from listening to events, add the following flag 
 
 and remove the `containerPort: 8126` mapping: 
 ```yaml
-          # Remove if not using APM
-          - containerPort: 8126
-            hostPort: 8126
-            name: traceport
-            protocol: TCP
+# Remove if not using APM
+- containerPort: 8126
+  hostPort: 8126
+  name: traceport
+  protocol: TCP
 ```
 
 ### DogStatsD
@@ -238,11 +238,11 @@ To disable DogStatsD, remove the following flag from your Datadog agent YAML fil
 
 and remove the `containerPort: 8125` mapping:
 ```yaml
-          # Remove if not using APM
-          - containerPort: 8126
-            hostPort: 8126
-            name: traceport
-            protocol: TCP
+# Remove if not using APM
+- containerPort: 8125
+  hostPort: 8125
+  name: dogstatsdport
+  protocol: UDP
 ```
 
 Learn more about this in the [Kubernetes DogStatsD documentation][16]
