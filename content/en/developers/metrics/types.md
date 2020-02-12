@@ -288,16 +288,16 @@ Submit your DISTRIBUTION type metrics from the following source:
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Types |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
-| [Agent check][8] | `self.count(...)`                    | COUNT           | COUNT                |
-| [Agent check][9] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
+| [Agent check][8]  | `self.count(...)`                    | COUNT           | COUNT                |
+| [Agent check][9]  | `self.monotonic_count(...)`          | COUNT           | COUNT                |
 | [Agent check][10] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
 | [Agent check][11] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
 | [Agent check][12] | `self.rate(...)`                     | RATE            | GAUGE                |
 | [Agent check][13] | `self.set(...)`                      | SET             | GAUGE                |
-| [API][14]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
-| [API][14]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
-| [API][14]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
-| [DogStatsD][15]    | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
+| [API][14]         | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
+| [API][14]         | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
+| [API][14]         | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
+| [DogStatsD][15]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
 | [DogStatsD][16]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT         |
 | [DogStatsD][17]   | `dog.count(...)`                     | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.increment(...)`                 | COUNT           | RATE                 |
