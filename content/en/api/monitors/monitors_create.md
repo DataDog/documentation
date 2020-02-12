@@ -30,6 +30,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | network      | `service check`                  |
 | outlier      | `query alert`                    |
 | process      | `service check`                  |
+| rum          | `rum alert`                      |
 | watchdog     | `event alert`                    |
 
 *   **`query`** [*required*]:
