@@ -16,15 +16,15 @@ aliases:
   - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 
-Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
+Take advantage of [DaemonSets](17) to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-## Configure RBAC permissions
+Setting up the agent as a DaemonSet requires 3 simple steps:
 
-If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default.
+## 1. Configure RBAC Permissions
 
-Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
+To configure [RBAC](18) permissions for your Datadog Agent service account, create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding by running the following commands on your kubernetes cluster:
 
 ```shell
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
@@ -34,7 +34,10 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
 ```
 
-## Create manifest
+## 2. Install Admission Controller Web Hook
+<PLACEHOLDER>
+
+## 3. Create The Datadog Agent Manifest
 
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
@@ -424,3 +427,6 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [14]: /tracing/setup
 [15]: /infrastructure/process/?tab=kubernetes#installation
 [16]: /agent/kubernetes/dogstatsd
+[17]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
+[18]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+[19]:
