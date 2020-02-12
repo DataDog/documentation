@@ -22,7 +22,7 @@ aliases:
   - /getting_started/prometheus
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host  by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
@@ -45,17 +45,18 @@ If you are running the Agent as a binary on a host, configure your OpenMetrics o
 {{< tabs >}}
 {{% tab "Host" %}}
 
-First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your Datadog-OpenMetrics or Datadog-Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics.  See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
+First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your Datadog-OpenMetrics or Datadog-Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics. See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
 
 ```yaml
 init_config:
 
 instances:
-  - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
-    namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
-    metrics:
-      - "<PROMETHEUS_METRIC_TO_FETCH>": "<DATADOG_NEW_METRIC_NAME>"
+    - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
+      namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
+      metrics:
+          - '<PROMETHEUS_METRIC_TO_FETCH>': '<DATADOG_NEW_METRIC_NAME>'
 ```
+
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
@@ -66,7 +67,7 @@ instances:
 
 The Agent detects if it's running on Docker and automatically searches all containers labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
 
-**Dockerfile**
+**Dockerfile**:
 
 ```text
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
@@ -74,16 +75,16 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
-**docker-compose.yaml**
+**docker-compose.yaml**:
 
 ```yaml
 labels:
-  com.datadoghq.ad.check_names: '["openmetrics"]'
-  com.datadoghq.ad.init_configs: '[{}]'
-  com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+    com.datadoghq.ad.check_names: '["openmetrics"]'
+    com.datadoghq.ad.init_configs: '[{}]'
+    com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
-**docker run command**
+**docker run command**:
 
 ```text
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
@@ -97,24 +98,25 @@ Like all [Datadog Agent integrations][1], the Datadog-OpenMetrics integration ca
 ```yaml
 # (...)
 metadata:
-#(...)
-  annotations:
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
-        ["openmetrics"]
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
-        [{}]
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
-        [
-          {
-            "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> ",
-            "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
-            "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-          }
-        ]
+    #(...)
+    annotations:
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
+            ["openmetrics"]
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
+            [{}]
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
+            [
+              {
+                "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> ",
+                "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+                "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
+              }
+            ]
 spec:
-  containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    containers:
+        - name: '<CONTAINER_IDENTIFIER>'
 ```
+
 
 [1]: /getting_started/integrations
 [2]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
@@ -123,16 +125,16 @@ spec:
 
 With the following configuration placeholder values:
 
-* `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
-* `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
-* `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
-* `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
-* `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+- `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
+- `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
+- `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
+- `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
+- `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
 
 Find below the full list of parameters that can be used for your `instances`:
 
 | Name                                    | Type                                    | Necessity | Default value | Description                                                                                                                                                                                                                                                          |
-|-----------------------------------------|-----------------------------------------|-----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `prometheus_url`                        | string                                  | required  | none          | The URL where your application metrics are exposed by Prometheus/OpenMetrics.                                                                                                                                                                                        |
 | `namespace`                             | string                                  | required  | none          | The namespace to be appended before all metrics namespaces. Your metrics are collected in the form `namespace.metric_name`.                                                                                                                                          |
 | `metrics`                               | list of strings or `key:value` elements | required  | none          | List of `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` pairs for metrics to be fetched from the Prometheus endpoint.<br> `<NEW_METRIC_NAME>` is optional. It transforms the name in Datadog if set. This list should contain at least one metric.                            |
