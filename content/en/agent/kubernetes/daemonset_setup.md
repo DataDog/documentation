@@ -16,7 +16,7 @@ aliases:
   - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 
-Take advantage of [DaemonSets](17) to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
+Take advantage of [DaemonSets][17] to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
