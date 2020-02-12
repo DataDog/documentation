@@ -2,7 +2,6 @@
 title: Service Level Objectives
 kind: documentation
 description: "Track the status of your SLOs"
-disable_toc: true
 aliases:
   - /monitors/monitor_uptime_widget/
   - /monitors/slos/
@@ -10,14 +9,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"
   text: "Track the status of your SLOs with the new monitor uptime widget"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=30"
+  tag: "Learning Center"
+  text: "Introduction to Service Level Objectives (SLOs)"
 ---
 
 ## Overview
 
-Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a 
-framework for defining clear targets around application performance, which ultimately help teams provide a consistent 
-customer experience, balance feature development with platform stability, and improve communication with internal and 
-external users.
+Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a
+framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 ## Setup
 
@@ -54,10 +54,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `time window` - *, 7d, 30d, 90d
 * `type` - metric, monitor
 * `creator`
-* `id`
-* `service` - tags
-* `team` - tags
-* `env` - tags
+* `tags` - datacenter, env, service, team, etc. 
 
 To run a search, use the checkboxes on the left and the search bar. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
@@ -71,18 +68,18 @@ When you create or edit an SLO, you can add tags for filtering on the [list SLOs
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
-The overall uptime result calculated for a time `T_x` can be expressed using boolean logic as the logical conjunction (the `AND` conjunction) of all of the monitor states at time `T_x`.
+The overall uptime can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors. 
 
-If at time `T_x` the state of all monitors `[m0, ..., m_n]` are all in `OK` state, then the overall uptime for time `T_x` will be the `OK` state. However, if any number of monitors at time `T_x` have state `ALERT`, then the overall uptime for time `T_x` will be the `ALERT` state.
+Consider the following example for 3 monitors:
 
-Consider the following example:
+| Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Uptime |
+|--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
+| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    | 
+| Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90%    |
+| Monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80%    |
+| **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70%    |
 
-| Monitor            | t0 | t1 | t2    | t3 | t4    | t5 | t6 | t7 | t8 | t9 | t10   |
-|--------------------|----|----|-------|----|-------|----|----|----|----|----|-------|
-| m0                 | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
-| m1                 | OK | OK | OK    | OK | OK    | OK | OK | OK | OK | OK | ALERT |
-| m2                 | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
-| **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK | OK | ALERT |
+This can result in the overall uptime being lower than the average of the individual uptimes.
 
 ## View your SLOs
 

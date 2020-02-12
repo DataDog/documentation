@@ -1,6 +1,7 @@
 ---
 title: Metrics
 kind: documentation
+disable_toc: true
 aliases:
   - /graphing/metrics/
 ---

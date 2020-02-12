@@ -80,4 +80,3 @@ kube_metrics_server には、イベントは含まれません。
 [6]: https://docs.datadoghq.com/ja/help
 
 
-{{< get-dependencies >}}

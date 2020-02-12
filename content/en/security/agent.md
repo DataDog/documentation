@@ -10,6 +10,8 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+
 This article is part of a [series on data security][1].
 
 Customers can send data to the Datadog service by using a locally installed [Agent][2] or through our [HTTP API][3]. While use of Datadog does not strictly require use of the Datadog Agent, the vast majority of customers leverage the Agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.

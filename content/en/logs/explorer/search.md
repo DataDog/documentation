@@ -50,7 +50,7 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 ### Escaping of special characters
 
-The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
 ### Attributes search
 
@@ -74,7 +74,7 @@ Examples:
 
 | Search query                                                         | Description                                                                                                                                                         |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                              | Searches all logs containing `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
+| `@http.url_details.path:"/api/v1/test"`                              | Searches all logs matching `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 

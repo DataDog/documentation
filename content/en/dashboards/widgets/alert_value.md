@@ -58,8 +58,8 @@ ALERT_VALUE_SCHEMA = {
         "alert_id": {"type": "string"},
         "precision": {"type": "integer"},
         "unit": {"type": "string"},
-        "text_size": {"type": "string"},
         "text_align": {"enum": ["left", "center", "right"]},
+        "title_size": {"type": "string"},
         "title": {"type": "string"}
     },
     "required": ["type", "alert_id"],
@@ -73,8 +73,8 @@ ALERT_VALUE_SCHEMA = {
 | `alert_id`   | string  | yes      | ID of the alert to use in the widget                                                    |
 | `precision`  | integer | no       | Number of decimal places to show. If not defined, uses the raw value                    |
 | `unit`       | string  | no       | Unit to display with the value                                                          |
-| `text_size`  | string  | no       | Size of value in the widget                                                             |
 | `text_align` | string  | no       | How to align the value in the widget. Available values are: `left`, `center` or `right` |
+| `title_size`  | string  | no       | Size of value in the widget                                                             |
 | `title`      | string  | no       | Title of the widget                                                                     |
 
 ## Further Reading

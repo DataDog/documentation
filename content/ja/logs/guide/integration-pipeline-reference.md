@@ -3,7 +3,6 @@ title: インテグレーションパイプラインリファレンス
 kind: ガイド
 aliases:
   - /ja/logs/faq/integration-pipeline-reference
-disable_toc: true
 further_reading:
   - link: logs/processing/pipelines
     tag: Documentation

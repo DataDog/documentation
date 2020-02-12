@@ -1,7 +1,6 @@
 ---
 title: Agent Log Files
 kind: guide
-disable_toc: true
 aliases:
   - /agent/faq/agent-log-files
 further_reading:

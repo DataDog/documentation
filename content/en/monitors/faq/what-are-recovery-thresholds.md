@@ -1,7 +1,6 @@
 ---
 title: What are recovery thresholds?
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/monitors/monitor_types/metric/"
   tag: "Documentation"

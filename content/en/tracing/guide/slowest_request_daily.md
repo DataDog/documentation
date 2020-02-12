@@ -1,7 +1,6 @@
 ---
 title: Debug the slowest trace on the slowest endpoint of a web service
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,6 +18,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _3 minutes to complete_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it"  style="width:90%;">}}

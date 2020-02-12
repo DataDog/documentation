@@ -70,7 +70,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *  **`event`**, the event query string:
     *   **`string_query`** free text query to match against event title and text.
-    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][4]
+    *   **`sources`** event sources (comma-separated). 
     *   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.
     *   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.
     *   **`host`** event reporting host (comma-separated).
@@ -83,7 +83,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     `processes(search).over(tags).rollup('count').last(timeframe) operator #`
 
-    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][5] page
+    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][4] page
     *   **`tags`** one or more tags (comma-separated)
     *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
@@ -146,7 +146,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     _These options only apply to metric alerts._
 
-   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][5] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
     Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -169,6 +169,5 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [1]: /monitors/monitor_types/#import
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
-[4]: /integrations/faq/list-of-api-source-attribute-value
-[5]: /infrastructure/process
-[6]: /monitors/faq/what-are-recovery-thresholds
+[4]: /infrastructure/process
+[5]: /monitors/faq/what-are-recovery-thresholds

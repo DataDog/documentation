@@ -1,7 +1,6 @@
 ---
 title: Custom Metrics Server for the Cluster Agent
 kind: guide
-disable_toc: false
 further_reading:
 - link: "agent/kubernetes/cluster/"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 title: Credit card billing
 kind: documentation
-disable_toc: true
 ---
 
 ## Overview

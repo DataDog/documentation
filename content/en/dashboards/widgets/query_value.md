@@ -29,7 +29,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][1] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][1] to configure a log event query.
+    * Log Events: See [the log search documentation][6] to configure a log event query.
 2. Choose the units and the formatting.
 3. Optional: configure a conditional format depending on the value displayed.
 
@@ -101,8 +101,9 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#search-syntax
+[1]: /dashboards/querying/#overview
 [2]: /tracing/app_analytics/search/#search-bar
 [3]: /dashboards/graphing_json/widget_json
 [4]: /dashboards/graphing_json/request_json
 [5]: /dashboards/graphing_json/widget_json/#conditional-format-schema
+[6]: /logs/explorer/search/#search-syntax

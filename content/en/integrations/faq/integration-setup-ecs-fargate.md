@@ -1,7 +1,6 @@
 ---
 title: Integration Setup for ECS Fargate
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/integrations/ecs_fargate/"
   tag: "Documentation"
@@ -29,11 +28,11 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 5. Enter the **Container name**, **Image**, and any additional preference settings.
 6. Under **Docker labels** add the following:
 
-| Key                           | Value                                           |
-|-------------------------------|-------------------------------------------------|
-| com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
-| com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
-| com.datadoghq.ad.init_configs | `[{}]`                                          |
+  | Key                           | Value                                           |
+  |-------------------------------|-------------------------------------------------|
+  | com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
+  | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
+  | com.datadoghq.ad.init_configs | `[{}]`                                          |
 
 7. Click the **Add** button, then click the **Create** button.
 

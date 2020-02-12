@@ -199,6 +199,3 @@ Consultez également nos articles de blog suivants :
 [9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
-
-
-{{< get-dependencies >}}

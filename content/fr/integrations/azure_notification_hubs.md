@@ -26,27 +26,29 @@ Azure Notification Hubs est un service de notifications Push facile à utiliser 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Notification Hubs.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_notification_hubs" >}}
 
 
 ### Événements
+
 L'intégration Azure Notification Hubs n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure Notification Hubs n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_notification_hubs/azure_notification_hubs_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}

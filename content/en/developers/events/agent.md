@@ -1,7 +1,6 @@
 ---
 title: Events with a Custom Agent Check
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/"
   tag: "Documentation"
@@ -39,16 +38,16 @@ The following keys and data types are available in the event dictionary:
 | `msg_text`         | String          | Yes      | The text body of the event                                    |
 | `aggregation_key`  | String          | No       | A key to use for aggregating events                           |
 | `alert_type`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`) |
-| `source_type_name` | String          | No       | The [source type][1] name                                     |
+| `source_type_name` | String          | No       | The source type name                                     |
 | `host`             | String          | No       | The host name                                                 |
 | `tags`             | List of strings | No       | A list of tags associated with this event.                    |
 | `priority`         | String          | No       | Specifies the priority of the event (`normal` or `low`).      |
 
 ### Example
 
-This is an example of using a custom Agent check to send one event periodically. See [Writing a Custom Agent Check][2] for more details.
+This is an example of using a custom Agent check to send one event periodically. See [Writing a Custom Agent Check][1] for more details.
 
-1. Create a new directory `event_example.d/` in the `conf.d/` folder at the root of your [Agent's configuration directory][3].
+1. Create a new directory `event_example.d/` in the `conf.d/` folder at the root of your [Agent's configuration directory][2].
 
 2. In the `event_example.d/` folder, create a configuration file named `event_example.yaml` with the following content:
 
@@ -57,7 +56,7 @@ This is an example of using a custom Agent check to send one event periodically.
     ```
 
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
-2. In this folder, create a custom check file named `event_example.py` with the following content:
+4. In this folder, create a custom check file named `event_example.py` with the following content:
 
     {{< code-block lang="python" filename="event_example.py" >}}
     from datadog_checks.base import AgentCheck
@@ -77,9 +76,8 @@ This is an example of using a custom Agent check to send one event periodically.
             )
     {{< /code-block >}}
 
-3. [Restart the Agent][4].
-
-4. For validation, run the [Agent's status command][5] and look for `event_example` under the Checks section:
+5. [Restart the Agent][3].
+6. For validation, run the [Agent's status command][4] and look for `event_example` under the Checks section:
 
     ```
     =========
@@ -103,7 +101,7 @@ This is an example of using a custom Agent check to send one event periodically.
         (...)
     ```
 
-5. Finally, go to your [Datadog Event stream][6] to see your events:
+7. Finally, go to your [Datadog Event stream][5] to see your events:
 
 {{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example"  style="width:80%;">}}
 
@@ -111,9 +109,9 @@ This is an example of using a custom Agent check to send one event periodically.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/faq/list-of-api-source-attribute-value
-[2]: /developers/write_agent_check
-[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
-[6]: https://app.datadoghq.com/event/stream
+
+[1]: /developers/write_agent_check
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
+[5]: https://app.datadoghq.com/event/stream

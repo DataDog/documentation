@@ -34,7 +34,7 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
-Next, grant Datadog permissions to write log archives to your S3 bucket. US site users do this with role delegation. EU site users do this with the bucket policy.
+Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation:
 
 1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS Cloudwatch.
 
@@ -83,7 +83,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [5]: /logs/archives/rehydrating
-[6]: https://app.datadoghq.eu/logs/pipelines/archives
+[6]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
@@ -109,7 +109,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted, so **you should check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. 
 
 ## Format of the Archives
 

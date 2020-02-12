@@ -1,7 +1,6 @@
 ---
 title: Synthetics Settings
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -29,7 +28,7 @@ Only [Admin and Standard users][3] can access Synthetics `Settings` page.
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
 {{< tabs >}}
@@ -90,4 +89,5 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
 [3]: /account_management/users/default_roles/
-[4]: /synthetics/api_tests#use-global-variables
+[4]: /synthetics/api_tests/#use-global-variables
+[5]: /synthetics/browser_tests/#use-global-variables

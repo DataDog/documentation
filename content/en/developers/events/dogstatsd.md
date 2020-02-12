@@ -32,7 +32,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 | `<HOSTNAME>`         | String          | No       | The name of the host                                                                       |
 | `<AGGREGATION_KEY>`  | String          | No       | A key to use for aggregating events                                                        |
 | `<PRIORITY>`         | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
-| `<SOURCE_TYPE_NAME>` | String          | No       | The [source type][3] name                                                                  |
+| `<SOURCE_TYPE_NAME>` | String          | No       | The source type name                                                                  |
 | `<ALERT_TYPE>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
 | `<TAGS>`             | List of strings | No       | A list of tags associated with this event.                                                 |
 
@@ -201,6 +201,6 @@ $statsd->event('An error occurred.',
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /developers/dogstatsd
 [2]: /events
-[3]: /integrations/faq/list-of-api-source-attribute-value

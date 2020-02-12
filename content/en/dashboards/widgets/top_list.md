@@ -28,7 +28,7 @@ The top list visualization enables you to display a list of Tag value like `host
 1. Choose the data to graph:
     * Metric: See the documentation [querying][1] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][2] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][1] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][1] to configure a log event query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 

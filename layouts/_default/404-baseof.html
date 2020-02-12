@@ -14,6 +14,7 @@
   <title>{{ .Title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
+  {{- partial "canonical.html" . -}}
   {{- partial "noindex.html" . -}}
   {{- partial "hreflang.html" . -}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />

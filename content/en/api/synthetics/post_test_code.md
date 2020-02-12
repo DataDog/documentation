@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-test
 
 **SIGNATURE**:
 
-`POST /v1/synthetics/tests/`
+`POST /v1/synthetics/tests`
 
 **EXAMPLE REQUEST**:
 

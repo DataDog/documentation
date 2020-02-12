@@ -41,7 +41,7 @@ et chaque span est un dictionnaire avec un `trace_id`, `span_id`, `resource`, et
 *   **`parent_id`** (_facultatif_) : l'ID entier du span parent.
 *   **`error`** (_facultatif_) : définissez cette valeur sur 1 pour indiquer si une erreur s'est produite. Si une erreur se produit, les informations supplémentaires telles que le message d'erreur, le type et les informations de pile doivent être spécifiées dans la propriété `meta`.
 *   **`meta`** (_facultatif_) : un ensemble de métadonnées key-value. Les clés et les valeurs doivent être des chaînes.
-*   **`metrics`** (_facultatif_) : un ensemble de métadonnées key-value. Les clés doivent être des chaînes et les valeurs doivent être des nombres à virgule flottante codés sur 64 bits.
+*   **`metrics`** (_facultatif_) : un ensemble de métadonnées key-value. Les clés doivent être des chaînes et les valeurs doivent être des nombres flottants codés sur 64 bits.
 
 [1]: /fr/tracing/#instrument-your-application
 [2]: /fr/tracing/visualization/trace

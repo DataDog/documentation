@@ -7,7 +7,7 @@ aliases:
 
 More advanced Datadog users may sometimes want to use [the API][1] to query general data about their infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the `reports/v2/overview` endpoint.
 
-## Overview 
+## Overview
 
 This endpoint takes the following required parameters:
 
@@ -34,7 +34,7 @@ If, for example, you want to query general data from all your hosts that include
 import requests
 s = requests.session()
 s.params = {
-  'api_key': 'YOUR_API_KEY',
+  'api_key': 'DATADOG_API_KEY',
   'application_key': 'YOUR_APPLICATION_KEY',
   'tags': 'env:prod,role:elasticsearch'
 }
@@ -51,7 +51,7 @@ import requests
 def iterate_all_hosts():
   s = requests.session()
   s.params = {
-    'api_key': '<YOUR_API_KEY>',
+    'api_key': '<DATADOG_API_KEY>',
     'application_key': '<YOUR_APPLICATION_KEY>',
     'start': 0
   }

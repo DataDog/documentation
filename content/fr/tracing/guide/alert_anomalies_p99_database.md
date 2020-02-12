@@ -1,7 +1,6 @@
 ---
 title: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
 kind: guide
-disable_toc: true
 further_reading:
   - link: tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
@@ -20,7 +19,6 @@ further_reading:
     text: Tous les guides
 ---
 _Temps de lecture : 3 minutes_
-
 
 {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 

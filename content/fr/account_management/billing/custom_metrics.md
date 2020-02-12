@@ -6,7 +6,7 @@ aliases:
 ---
 Si une métrique n'est pas envoyée depuis l'une des [plus de 350 intégrations Datadog][1], elle est considérée comme une [métrique custom][2]<sup>[(1)](#integrations-standard)</sup>.
 
-**Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag de host inclus)**.
+**Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag host inclus)**.
 
 ## Calcul du nombre de métriques custom
 

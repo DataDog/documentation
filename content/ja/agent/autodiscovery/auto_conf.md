@@ -1,7 +1,6 @@
 ---
 title: コンフィグレーション
 kind: documentation
-disable_toc: true
 further_reading:
   - link: /agent/autodiscovery/integrations
     tag: ドキュメント

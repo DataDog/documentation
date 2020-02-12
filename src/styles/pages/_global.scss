@@ -1,5 +1,9 @@
 $ddpurple: #632CA6;
 $ddgray: #D6D6D6;
+$studioViolet: #7847A6;
+$lightGreyGrey: #D6D6D6;
+$darkGreyGrey: #A1A1A1;
+$dimGreyGrey: #707070;
 
 html {
   font-size: 18px;
@@ -265,12 +269,6 @@ h5{
   padding-top: 14px;
 }
 
-.col-lg-7 {
-  #pagetitle {
-    margin-right: -30%;
-  }
-}
-
 .main {
   z-index: 1;
   padding-left: 29px;
@@ -301,7 +299,7 @@ h5{
 
   ul{
     list-style-type: none;
-    -webkit-padding-start: 12px;
+    -webkit-padding-start: 22px;
     ul {
       -webkit-padding-start: 20px;
     }
@@ -747,11 +745,7 @@ table, .table {
   .main {
     padding-left: 15px;
   }
-  .col-lg-7 {
-    #pagetitle {
-      margin-right: 0 !important;
-    }
-  }
+    
   .wide-parent {
     width: 100%;
   }

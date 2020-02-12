@@ -205,8 +205,8 @@ tracer.set_tags({'env': '<ENVIRONNEMENT>'})
 {{% tab ".NET" %}}
 
 ```csharp
-using Datadog.Tracing;
-Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONNEMENT>");
+using Datadog.Trace;
+Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONNEMENT>");
 ```
 
 {{% /tab %}}

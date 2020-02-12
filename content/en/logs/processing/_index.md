@@ -96,8 +96,6 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][13], where it is indexed for [full text search][14].
 
-**Note**: If you send a log formatted as JSON with a `message` attribute which contains a JSON object, this JSON object is interpreted as a *string* and *NOT* expanded. Use a [Log Grok processor][4] to parse this JSON object or a [Log remapper processor][15] to remap this JSON object to a non-reserved attribute.
-
 ### *status* attribute
 
 Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official status:
@@ -107,7 +105,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][16].
+If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][15].
 
 ### *host* attribute
 
@@ -119,7 +117,9 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 
 ### *source* attribute
 
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][17].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
+
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
 
 ### *service* attribute
 
@@ -163,7 +163,7 @@ To change the default values for each of the reserved attributes, go to the [Con
 [12]: /logs/processing/processors/#log-date-remapper
 [13]: /logs/explorer/?tab=logstream#visualization
 [14]: /logs/explorer/search
-[15]: /logs/processing/processors/?tab=ui#remapper
-[16]: /logs/processing/processors/#log-status-remapper
-[17]: /logs/faq/integration-pipeline-reference
-[18]: /tracing/connect_logs_and_traces/?tab=java
+[15]: /logs/processing/processors/#log-status-remapper
+[16]: /logs/faq/integration-pipeline-reference
+[17]: /agent/docker/log/#examples
+[18]: /tracing/connect_logs_and_traces/

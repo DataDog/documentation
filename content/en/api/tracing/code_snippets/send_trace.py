@@ -18,7 +18,7 @@ time.sleep(2)
 DURATION= int(time.time() * 1000000000) - START
 
 # Send the traces.
-headers = {"Content-Type": "application/json"}
+headers = {"Content-Type": "application/json", "X-Datadog-Trace-Count": "1"} 
 
 data = [[{
                 "trace_id": TRACE_ID,
@@ -31,4 +31,4 @@ data = [[{
                 "duration": DURATION
         }]]
 
-requests.put("http://localhost:8126/v0.3/traces", data=json.dumps(data), headers=headers)
+requests.put("http://localhost:8126/v0.4/traces", data=json.dumps(data), headers=headers)

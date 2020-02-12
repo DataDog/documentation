@@ -92,7 +92,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -143,7 +143,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [10]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}
+
 
 
 ## Intégration Gitlab Runner
@@ -203,4 +203,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [8]: https://docs.datadoghq.com/fr/help
 
 
-{{< get-dependencies >}}

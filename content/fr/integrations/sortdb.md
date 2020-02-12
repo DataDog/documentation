@@ -109,6 +109,3 @@ Le check SortDB n'inclut aucun événement pour le moment.
 [10]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/metadata.csv
-
-
-{{< get-dependencies >}}

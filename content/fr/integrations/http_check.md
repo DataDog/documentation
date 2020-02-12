@@ -147,6 +147,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [9]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
 [10]: https://app.datadoghq.com/monitors#/create
 [11]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -9,6 +9,7 @@ kind: integration
 name: sidekiq
 public_title: Datadog-Sidekiq Integration
 short_description: Gather your logs from Sidekiq and send them to Datadog.
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sidekiq.md"]
 ---
 
 ## Overview

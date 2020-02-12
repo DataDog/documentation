@@ -9,6 +9,7 @@ short_description: "Monitor TCP connectivity to remote hosts."
 categories:
 - network
 ddtype: check
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md"]
 ---
 ## Overview
 

@@ -31,7 +31,7 @@ supported_os:
 
 Recueillez des métriques de Microsoft Exchange Server pour :
 
-* Visualiser et surveiller les performances d'Exchange Server
+- Visualiser et surveiller les performances d'Exchange Server
 
 ## Implémentation
 
@@ -50,14 +50,17 @@ Le check Exchange est inclus avec le paquet de l'[Agent Datadog][1] : vous n'av
 [Lancez la sous-commande status de l'Agent][4] et cherchez `exchange_server` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "exchange_server" >}}
 
 
 ### Événements
+
 Le check Exchange Server n'inclut aucun événement.
 
 ### Checks de service
+
 Le check Exchange Server n'inclut aucun check de service.
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -65,6 +68,3 @@ Le check Exchange Server n'inclut aucun check de service.
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/exchange_server/metadata.csv
-
-
-{{< get-dependencies >}}

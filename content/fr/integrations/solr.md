@@ -211,6 +211,3 @@ Vous pouvez utiliser le filtre `attribute` comme suit :
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
-
-
-{{< get-dependencies >}}

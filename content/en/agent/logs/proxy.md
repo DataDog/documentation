@@ -72,4 +72,5 @@ When the Agent is [configured to send logs through HTTPS][1], use the same [set 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/proxy

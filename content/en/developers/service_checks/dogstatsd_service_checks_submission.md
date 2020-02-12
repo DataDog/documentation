@@ -2,7 +2,6 @@
 title: "Service Checks Submission: DogStatsD"
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
-disable_toc: true
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -50,8 +49,8 @@ options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
 initialize(**options)
 
 statsd.service_check(
-    name="application.service_check",
-    status=O,
+    check_name="application.service_check",
+    status="O",
     message="Application is OK",
 )
 {{< /code-block >}}

@@ -1,7 +1,6 @@
 ---
 title: Graphing with JSON
 kind: documentation
-disable_toc: true
 aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson

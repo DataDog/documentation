@@ -55,7 +55,7 @@ Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance
 ### Configuration
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `tomcat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour recueillir vos métriques et [logs](#collecte-de-logs) Tomcat. Consultez le [fichier d'exemple tomcat.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
@@ -280,6 +280,3 @@ Documentation, liens et articles supplémentaires utiles :
 [12]: https://github.com/DataDog/integrations-core/blob/master/tomcat/metadata.csv
 [13]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
 [14]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
-
-
-{{< get-dependencies >}}

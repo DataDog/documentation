@@ -14,6 +14,7 @@ aliases:
     - /integrations/Kubernetes
 public_title: Datadog-Kubernetes Integration
 short_description: "Capture Pod scheduling events, track the status of your Kublets, and more"
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md"]
 categories:
 - cloud
 - configuration & deployment

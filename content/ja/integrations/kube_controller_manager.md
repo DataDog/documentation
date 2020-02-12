@@ -83,6 +83,3 @@ Kube_controller_manager には、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
 [6]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

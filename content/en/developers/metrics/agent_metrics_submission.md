@@ -1,7 +1,6 @@
 ---
 title: "Metric Submission: Custom Agent Check"
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/"
   tag: "Documentation"
@@ -9,6 +8,8 @@ further_reading:
 ---
 
 Functions are used to submit metrics with a [custom Agent check][1]. Different functions are available depending on the [metric type][2]. Depending on the function used, the submission and actual metric type stored within Datadog might differ.
+
+## Functions
 
 {{< tabs >}}
 {{% tab "Count" %}}

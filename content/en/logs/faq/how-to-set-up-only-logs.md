@@ -1,7 +1,6 @@
 ---
 title: How to set up only Logs
 kind: faq
-disable_toc: true
 beta: true
 ---
 
@@ -28,7 +27,6 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 3. [Configure the Agent to collect Logs][2].
 4. [Restart the Agent][3].
 
-
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
@@ -39,7 +37,7 @@ If you are using the container Agent, set the environment variable `DD_ENABLE_PA
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<YOUR_API_KEY>" \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_AC_EXCLUDE="name:datadog-agent" \
@@ -113,7 +111,7 @@ spec:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
           ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
-          - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
+          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}

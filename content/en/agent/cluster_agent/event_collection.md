@@ -1,7 +1,6 @@
 ---
 title: Event collection
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -26,7 +25,7 @@ If you haven't yet, review the [setup instructions to install the Datadog Cluste
 
 2. In your Cluster Agent deployment file, set the `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` environment variable to `true`:
 
-      ```
+      ```yaml
         - name: DD_COLLECT_KUBERNETES_EVENTS
           value: "true"
         - name: DD_LEADER_ELECTION
@@ -38,4 +37,5 @@ Enabling the leader election in this way ensures that only one Cluster Agent col
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/cluster_agent/setup

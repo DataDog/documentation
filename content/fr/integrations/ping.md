@@ -54,7 +54,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 2. Clonez le dépôt integrations-extras :
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    git clone https://github.com/DataDog/integrations-extras.git
     ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
@@ -123,6 +123,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

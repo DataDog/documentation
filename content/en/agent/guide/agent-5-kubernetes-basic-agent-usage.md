@@ -60,7 +60,7 @@ spec:
             protocol: UDP
         env:
           - name: API_KEY
-            value: "YOUR_API_KEY"
+            value: "DATADOG_API_KEY"
           - name: KUBERNETES
             value: "yes"
         volumeMounts:
@@ -84,7 +84,7 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
+Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
 
 * Deploy the DaemonSet with the command:
   ```shell

@@ -1,7 +1,6 @@
 ---
 title: View JMX data in jConsole and set up your jmx.yaml to collect them
 kind: faq
-disable_toc: true
 further_reading:
 - link: "/integrations/java/"
   tag: "Documentation"
