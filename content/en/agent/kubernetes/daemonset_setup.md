@@ -20,7 +20,7 @@ Take advantage of [DaemonSets](17) to deploy the Datadog Agent on all your nodes
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-Setting up the agent as a DaemonSet requires 3 simple steps:
+Setting up the agent as a DaemonSet requires 3 simple steps. If you run into issues throughout the process, make sure to check out the [troubleshooting section.][21]
 
 ## 1. Configure RBAC Permissions
 
@@ -34,6 +34,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
 ```
 
+### Verification
+To verify the RBAC permissions are set properly, run the following command:
+```PLACEHOLDER```
+
+You should see:
+```PLACEHOLDER```
+
 ## 2. Install Admission Controller Web Hook
 
 For a seamless experience that doesn't require modifying the deployment of any instrumented app, the agent uses an [Admission Controller Web Hook][19]; the hook will inject the ip of the Datadog agent to each instrumented app as an environment variable (`DD_AGENT_HOST`), allowing services like APM and Statsd to automatically discover the agent.
@@ -44,32 +51,36 @@ To install the hook, launch the following command:
 ```
 The hook will inject said env variable to every pod running on the cluster. To limit the scope to just the instrumented apps, [selectors][20] can be used.
 
+### Verification
+To verify the Admission Controller Web Hook is set properly, run the following command:
+```kubectl get mutatingwebhookconfigurations```
+
+The Datadog webhook should show up.
+
 ## 3. Create The Datadog Agent Manifest
 
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
-Remember to encode your API key using `base64` if you are using secrets:
-
+Next, encode your [API key][4] using `base64` by running the following command: 
 ```shell
 echo -n <DATADOG_API_KEY> | base64
 ```
+Replace the encoded key inside the Secrets object: `api-key: "<YOUR_BASE64_ENCODED_API_KEY>"`
 
 **Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
 
 ```yaml
 # datadog-agent.yaml
-
-# Uncomment this section to use Kubernetes secrets to configure your Datadog API key
-
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: datadog-secret
-#   labels:
-#     app: "datadog"
-# type: Opaque
-# data:
-#   api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
+apiVersion: v1
+kind: Secret
+metadata:
+  name: datadog-secret
+  labels:
+    app: "datadog"
+type: Opaque
+data:
+  ## Set your API key. If you don't have one, create one here: https://app.datadoghq.com/account/settings#api
+  api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -92,37 +103,31 @@ spec:
         imagePullPolicy: Always
         name: datadog-agent
         ports:
+          # Remove if not using Statsd
           - containerPort: 8125
-            ## Custom metrics via DogStatsD - uncomment this section to enable
-            ## custom metrics collection.
-            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
-            ## from other containers.
-            #
-            # hostPort: 8125
+            hostPort: 8125
             name: dogstatsdport
             protocol: UDP
+          # Remove if not using APM
           - containerPort: 8126
-            ## Trace Collection (APM) - uncomment this section to enable APM
-            # hostPort: 8126
+            hostPort: 8126
             name: traceport
             protocol: TCP
         env:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
-          ## - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}
-          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
+          - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}    
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
-
-          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
-          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
+          
+          ## Remove or disable if not using Statsd
+          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "true" }
+                   
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
           - {name: DD_LEADER_ELECTION, value: "true" }
-          - {name: DD_APM_ENABLED, value: "true" }
-
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
@@ -171,9 +176,9 @@ spec:
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
-Replace `<DATADOG_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
+Consult the [Docker integration][8] to discover all of the configuration options.
 
-Deploy the DaemonSet with the command:
+Finally, deploy the DaemonSet with the command:
 
 ```shell
 kubectl create -f datadog-agent.yaml
@@ -438,3 +443,4 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [18]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 [19]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
 [20]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-objectselector
+[21]: /#troubleshooting
