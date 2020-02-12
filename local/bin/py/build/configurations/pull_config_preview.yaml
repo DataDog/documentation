@@ -146,7 +146,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: dd-tracing
       globs:
       - 'docs/trace_collection.md'
       options:
