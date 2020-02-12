@@ -25,7 +25,7 @@ Use the Datadog-Carbon Black integration in order to forward your Carbon Black D
 
 ### Installation
 
-First, install and setup the [Carbon Black Defense log shipper][1]
+First, install and setup the [Carbon Black Defense log shipper][1].
 
 ### Configuration
 
