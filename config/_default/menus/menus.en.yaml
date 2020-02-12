@@ -894,15 +894,28 @@ main:
     parent: "tracing"
     weight: 5
 
+  ## TRACING - Profiling
+
+  - name: "Profiling"
+    url: "tracing/profiling/"
+    parent: "tracing"
+    identifier: "profiling"
+    weight: 6
+  - name: "Java"
+    url: "tracing/profiling/java"
+    identifier: "profiling_java"
+    parent: "profiling"
+    weight: 601
+
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
-    weight: 6
+    weight: 7
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
-    weight: 7
+    weight: 8
 
   ## TRACING - Using the APM UI
 
@@ -910,44 +923,44 @@ main:
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 8
+    weight: 9
   - name: "Services List"
     url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 801
+    weight: 901
   - name: "Service Page"
     url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 802
+    weight: 902
   - name: "Resource Page"
     url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 803
+    weight: 903
   - name: "Trace View"
     url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 804
+    weight: 904
   - name: "Service Map"
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 805
+    weight: 905
 
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 9
+    weight: 10
 
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 10
+    weight: 11
   - name: Agent APM metrics
     url: "tracing/troubleshooting/agent_apm_metrics"
     identifier: "tracing_troubleshooting_apm_metrics"
     parent: "tracing_troubleshooting"
-    weight: 10
+    weight: 12
 
 
 ##########

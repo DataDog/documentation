@@ -1,11 +1,6 @@
 ---
 title: Profiling Java Applications
 kind: documentation
-aliases:
-- /tracing/java
-- /tracing/languages/java
-- /agent/apm/java/
-further_reading:
 ---
 
 ## Installation and Getting Started
@@ -24,19 +19,20 @@ Finally, add the following JVM argument when starting your application in your I
 
 **Note**:
 
-* The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][1].
+- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][1].
 
-* `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc.
+- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc.
 
-* Profiling and tracing are shipped within the same `dd-java-agent.jar` library. However, you can choose if you want to activate tracing or not, and same for profiling. To enable tracing, please follow the [enable tracing documentation][2].
+- Profiling and tracing are shipped within the same `dd-java-agent.jar` library. However, you can choose if you want to activate tracing or not, and same for profiling. To enable tracing, please follow the [enable tracing documentation][2].
 
 ## Enable profiling
 
 Enable profiling by adding `-Ddd.profiling.enabled=true` to the JVM command line (in addition to any existing APM agent parameters).
 
 Because profiles are sent directly to Datadog, you need to pass a [Datadog api key][3] by:
-* either adding `-Ddd.profiling.apikey.file=/etc/path-to-api-key-file`. This file should only contain the api key as a string
-* or via the `DD_PROFILING_APIKEY` environment variable
+
+- either adding `-Ddd.profiling.apikey.file=/etc/path-to-api-key-file`. This file should only contain the api key as a string
+- or via the `DD_PROFILING_APIKEY` environment variable
 
 ## Compatibility
 
