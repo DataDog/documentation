@@ -17,7 +17,7 @@ dependencies:
 
 The TCP RTT check reports on roundtrip times between the host the Agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
 
-This check is only shipped in the 64-bit DEB and RPM Datadog Agent packages.
+This check is only shipped in the 64-bit DEB and RPM Datadog Agent v5 packages.  For instructions on how to build the go-metro binary for other versions of the Agent, see the [Datadog/go-metro usage](https://github.com/DataDog/go-metro#usage)
 
 ## Setup
 
