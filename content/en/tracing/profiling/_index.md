@@ -2,9 +2,9 @@
 title: Profiling
 kind: Documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-  tags: "Blog"
-  text: "Introducing always-on production profiling in Datadog."
+    - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
+      tags: 'Blog'
+      text: 'Introducing always-on production profiling in Datadog.'
 ---
 
 <div class="alert alert-info">
@@ -27,21 +27,21 @@ Each line represents a profile for a process on which Datadog profiling was runn
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][3]. By default the following facets are available:
 
-| Facet | Definition |
-|---- | ---- |
-| Env | |
-| Service | |
-| Version | |
-| Host | |
-| Runtime | |
-| Language | |
+|  Facet   |  Definition |
+| -------- | ----------- |
+| Env      |             |
+| Service  |             |
+| Version  |             |
+| Host     |             |
+| Runtime  |             |
+| Language |             |
 
 And the following measures are available:
 
-| Measure | Definition |
-| --- | --- |
-| CPU | |
-| Mem Allocation | |
+|  Measure        | Definition |
+| --------------- | ---------- |
+| CPU             |            |
+| Mem Allocation  |            |
 
 ## Profile
 
@@ -56,19 +56,18 @@ The profile header contains information associated to your profile like: the ser
 
 Below the profile header you can find 4 tabs:
 
-| Tab | Definition |
-| ---- | ---- |
-| Profiles |  |
-| Analysis | |
-| Metrics |  |
-| Runtime Info | |
+| Tab          |  Definition |
+| ------------ | ----------- |
+| Profiles     |             |
+| Analysis     |             |
+| Metrics      |             |
+| Runtime Info |             |
 
 ### Profile types
 
 In the **Profiles** tab you can see all profile types available for a given language. Depending of the language, the information collected about your profile differs. Refer to the dedicated profile types section for your language to see which one are collected:
 
 - [Java][4]
-
 
 ## Troubleshooting
 
