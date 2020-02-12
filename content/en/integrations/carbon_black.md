@@ -25,10 +25,7 @@ Use the Datadog-Carbon Black integration in order to forward your Carbon Black D
 
 ### Installation
 
-First, install and setup the [Carbon Black Defense log shipper][1]. The shipper is available for:
-
-- [RPM based Linux distributions][2]
-- [Docker][3]
+First, install and setup the [Carbon Black Defense log shipper][1]
 
 ### Configuration
 
@@ -95,7 +92,5 @@ You can find your Carbon Black Defense server URL within your Carbon Black dashb
 Need help? Contact [Datadog support][5].
 
 [1]: https://github.com/carbonblack/cb-defense-syslog-tls
-[2]: https://github.com/carbonblack/cb-defense-syslog-tls#installation
-[3]: https://github.com/carbonblack/cb-defense-syslog-tls#installation-via-docker
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /help
