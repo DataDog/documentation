@@ -184,7 +184,7 @@ Additional properties allowed in each `request` object:
 [2]: /dashboards/screenboard
 [3]: /dashboards/querying
 [4]: /tracing/app_analytics/search/#search-bar
-[5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[5]: /logs/explorer/search/#search-syntax
 [6]: /events
 [7]: /dashboards/template_variables
 [8]: /dashboards/widgets/#full-screen

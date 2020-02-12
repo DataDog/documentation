@@ -35,4 +35,4 @@ The `Index` object describes the configuration of a log index. It has the follow
 
 **Note**:  You need an API and applications key with Admin right to interact with this endpoint.
 
-[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[1]: /logs/explorer/search/#search-syntax

@@ -60,7 +60,7 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure
 [3]: /agent
-[4]: https://docs.datadoghq.com/account_management/billing/serverless
+[4]: /account_management/billing/serverless
 [5]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
 [6]: /account_management/users/default_roles
 [7]: https://app.datadoghq.com/account/billing_history
