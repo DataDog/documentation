@@ -76,9 +76,9 @@ To create multiple instances in the same Agent check to monitor two Apache servi
 init_config:
 
 instances:
-    - apache_status_url: http://localhost/server-status?auto
+    - apache_status_url: "http://localhost/server-status?auto"
 
-    - apache_status_url: http://<REMOTE_APACHE_ENDPOINT>/server-status?auto
+    - apache_status_url: "http://<REMOTE_APACHE_ENDPOINT>/server-status?auto"
 ```
 
 ### Tagging
