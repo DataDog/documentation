@@ -35,7 +35,14 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## 2. Install Admission Controller Web Hook
+
+For a seamless experience that doesn't require modifying the deployment of any instrumented app, the agent uses an [Admission Controller Web Hook][19]; the hook will inject the ip of the Datadog agent to each instrumented app as an environment variable (`DD_AGENT_HOST`), allowing services like APM and Statsd to automatically discover the agent.
+
+To install the hook, launch the following command: 
+```
 <PLACEHOLDER>
+```
+The hook will inject said env variable to every pod running on the cluster. To limit the scope to just the instrumented apps, [selectors][20] can be used.
 
 ## 3. Create The Datadog Agent Manifest
 
@@ -429,4 +436,5 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [16]: /agent/kubernetes/dogstatsd
 [17]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 [18]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-[19]:
+[19]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
+[20]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-objectselector
