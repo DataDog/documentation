@@ -1,44 +1,46 @@
 ---
 title: Quick Start - Distributed Tracing
 further_reading:
-- link: "tracing/setup/"
-  tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/"
-  tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
-  tag: "Documentation"
-  text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
-  tag: "Documentation"
-  text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
-  tag: "Documentation"
-  text: "Understand how to read a Datadog Trace"
+    - link: 'tracing/setup/'
+      tag: 'Documentation'
+      text: 'Learn how to setup APM tracing with your application'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Discover the list of services reporting to Datadog'
+    - link: 'tracing/visualization/service'
+      tag: 'Documentation'
+      text: 'Learn more about services in Datadog'
+    - link: 'tracing/visualization/resource'
+      tag: 'Documentation'
+      text: 'Dive into your resource performance and traces'
+    - link: 'tracing/visualization/trace'
+      tag: 'Documentation'
+      text: 'Understand how to read a Datadog Trace'
 kind: guide
 aliases:
-  - /tracing/faq/distributed-tracing
+    - /tracing/faq/distributed-tracing
 ---
 
-If you have read the [first example of tracing][1] and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
+If you have read the [first example of tracing][1] and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct _subject_ parameter, it responds with a _thought_, otherwise, it responds with an error:
 
 {{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview"  style="width:70%;">}}
 
-* Request:
+- Request:
+
     ```bash
     curl 'localhost:5000/think/?subject=technology&subject=foo_bar'
     ```
 
-* Response:
+- Response:
+
     ```json
     {
-      "technology": {
-        "error": false,
-        "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
-        "author": "Richard Feynman"
-      },
-      "foo_bar": {"error": true, "reason": "Subject unknown"}
+        "technology": {
+            "error": false,
+            "quote": "For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.",
+            "author": "Richard Feynman"
+        },
+        "foo_bar": { "error": true, "reason": "Subject unknown" }
     }
     ```
 
@@ -46,7 +48,8 @@ If you have read the [first example of tracing][1] and want understand how traci
 
 We have two modules:
 
-* **Thinker API**: Catches the users request and forwards it to the **thinker-microservice**
+- **Thinker API**: Catches the users request and forwards it to the **thinker-microservice**
+
     ```python
     import blinker as _
     import requests
@@ -74,7 +77,8 @@ We have two modules:
 
     ```
 
-* **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple *subjects* and answers with a *thought* if the *subject* is "technology":
+- **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple _subjects_ and answers with a _thought_ if the _subject_ is "technology":
+
     ```python
     import asyncio
 
@@ -132,8 +136,8 @@ Once the code is executed, we start to see data in [APM][3]. On the [service Lis
 
 Clicking on **thinker-api** directs you to it's automatically generated [service dashboard][5]. Here we can see more detailed performance data, as well as a list of all of the resources associated with this particular service:
 
-* [Graphs illustrating service performance][6]
-* [A list of resources][7] attached to this particular service:
+- [Graphs illustrating service performance][6]
+- [A list of resources][7] attached to this particular service:
 
 {{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started"  style="width:80%;">}}
 
@@ -141,18 +145,18 @@ The first function executed in this example is `think_handler()`, which handles 
 
 Selecting the **thinker_handler** resource directs you to it's automatically generated [resource dashboard][7] and a list of traces for this particular resource:
 
-* [Graphs illustrating resource performances][8]
-* [A list of sampled traces][9] attached to this particular resource:
+- [Graphs illustrating resource performances][8]
+- [A list of sampled traces][9] attached to this particular resource:
 
 {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started"  style="width:50%;">}}
 
 Selecting a trace opens the _trace panel_ containing information such as:
 
-* The timestamp of the request
-* The status of the request (i.e., `200`)
-* The different services encountered by the request: (i.e., **thinker_hander** and **thinker-microservice**)
-* The time spent by your application processing the traced functions
-* Extra tags such as *http.method* and *http.url* ...
+- The timestamp of the request
+- The status of the request (i.e., `200`)
+- The different services encountered by the request: (i.e., **thinker_hander** and **thinker-microservice**)
+- The time spent by your application processing the traced functions
+- Extra tags such as _http.method_ and _http.url_ ...
 
 {{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started"  style="width:80%;">}}
 
@@ -166,10 +170,10 @@ tracer.current_span().set_tag('subject', subject)
 
 Which allows you to get more context every time `think()` is called and traced:
 
-* The first time `think` is executed, the *subject* is **technology** and everything goes well:
+- The first time `think` is executed, the _subject_ is **technology** and everything goes well:
     {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1"  style="width:80%;">}}
 
-* The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error:
+- The second time `think` is executed, the _subject_ is **foo_bar** which is not an expected value and leads to an error:
     {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2"  style="width:80%;">}}
 
     The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules][11].
