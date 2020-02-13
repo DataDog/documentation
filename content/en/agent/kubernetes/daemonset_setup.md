@@ -106,7 +106,12 @@ spec:
         ports:
           # Remove if not using Statsd
           - containerPort: 8125
-            hostPort: 8125
+            ## Custom metrics via DogStatsD - uncomment this section to enable
+            ## custom metrics collection.
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
+            ## from other containers.
+            #
+            # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           # Remove if not using APM
@@ -122,8 +127,8 @@ spec:
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
           
-          ## Remove or disable if not using Statsd
-          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "true" }
+          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
+          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
                    
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
@@ -212,40 +217,45 @@ For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name 
 
 ### APM and Distributed Tracing
 
-The APM trace agent is enabled by default. If using APM, the tracing libraries will automatically discover the agent.
+The APM trace agent is listening on port 8126 by default. To enable APM, initalize the tracer in your instrumented app(s); there's no need to specify a host or port as the tracers will default to the agent location, `DD_AGENT_HOST`.
+
+Refer to the [language-specific APM instrumentation docs][22] for more information
+
 To disable the APM trace agent from listening to events, add the following flag to your Datadog agent YAML file:
 ```yaml
 - {name: DD_APM_ENABLED, value: "false" }
 ```
 
-and remove the `containerPort: 8126` mapping: 
+Then, remove the `containerPort: 8126` mapping: 
 ```yaml
-# Remove if not using APM
 - containerPort: 8126
   hostPort: 8126
   name: traceport
   protocol: TCP
 ```
 
-### DogStatsD
+Lastly, apply the configuration for the changes to take effect: 
 
-DogStatsD is enabled by default. If using custom metrics, DogStatsD libraries will automatically discover the agent.
-To disable DogStatsD, remove the following flag from your Datadog agent YAML file:
-
-```yaml
-- {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "true" }
+```shell
+kubectl apply -f datadog-agent.yaml
 ```
 
-and remove the `containerPort: 8125` mapping:
-```yaml
-# Remove if not using APM
-- containerPort: 8125
-  hostPort: 8125
-  name: dogstatsdport
-  protocol: UDP
+### DogStatsD
+
+To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
+
+```text
+(...)
+      env:
+        (...)
+        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+          value: "true"
+(...)
 ```
 
 Learn more about this in the [Kubernetes DogStatsD documentation][16]
+
+To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
 ### Log Collection
 
@@ -407,3 +417,4 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [19]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
 [20]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-objectselector
 [21]: /#troubleshooting
+[22]: /tracing/setup
