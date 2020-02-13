@@ -156,6 +156,18 @@ listen stats
     mode http
     stats enable
     stats uri /
+    
+# This section is to reload DNS Records
+# You can replace XXX.XXX.XXX.XXX with your DNS Server IP.
+# For HAProxy 1.8 and newer
+resolvers my-dns
+    nameserver dns1 XXX.XXX.XXX.XXX:53
+    nameserver dns2 XXX.XXX.XXX.XXX:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
 
 # This declares the endpoint where your Agents connects for
 # sending metrics (e.g. the value of "dd_url").
@@ -194,24 +206,36 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 trace.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 process.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
@@ -220,7 +244,8 @@ backend datadog-logs
         * `yum install ca-certificates` (CentOS, Redhat)
 The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+HAProxy 1.8 and newer allows DNS service discovery to detect server changes and automatically apply them to configuration.
+If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
@@ -251,6 +276,18 @@ listen stats
     stats enable
     stats uri /
 
+# This section is to reload DNS Records
+# You can replace XXX.XXX.XXX.XXX with your DNS Server IP.
+# For HAProxy 1.8 and newer
+resolvers my-dns
+    nameserver dns1 XXX.XXX.XXX.XXX:53
+    nameserver dns2 XXX.XXX.XXX.XXX:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
+
 # This declares the endpoint where your Agents connects for
 # sending metrics (e.g. the value of "dd_url").
 frontend metrics-forwarder
@@ -288,24 +325,36 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 trace.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 process.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    # The following configuration is for older HAProxy versions
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
@@ -316,7 +365,8 @@ backend datadog-logs
 
 The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+HAProxy 1.8 and newer allows DNS service discovery to detect server changes and automatically apply them to configuration.
+If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{% /tab %}}
 {{< /tabs >}}
