@@ -730,15 +730,19 @@ main:
     parent: "monitor_types"
     weight: 113
     identifier: "monitor_apm"
+  - name: "Real User Monitoring"
+    url: "monitors/monitor_types/real_user_monitoring/"
+    parent: "monitor_types"
+    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 114
+    weight: 115
     identifier: "monitor_watchdog"
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 115
+    weight: 116
 
 
   ## MONITORS -  Manage monitor
