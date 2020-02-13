@@ -36,10 +36,14 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 
 ### Verification
 To verify the RBAC permissions are set properly, run the following command:
-```PLACEHOLDER```
+```
+PLACEHOLDER
+```
 
 You should see:
-```PLACEHOLDER```
+```
+PLACEHOLDER
+```
 
 ## 2. Install Admission Controller Web Hook
 
