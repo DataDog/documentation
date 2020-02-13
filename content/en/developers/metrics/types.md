@@ -54,7 +54,7 @@ The majority of data that Datadog receives is submitted by the Agent, either thr
 
 Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
 
-Refer to the Submission and In-App Types section to see how different metric submission types are mapped to their corresponding in-app types.
+Refer to the [Submission and In-App Types](#submission-types-and-datadog-in-app-types) section to see how different metric submission types are mapped to their corresponding in-app types.
 
 ## Metric types
 
