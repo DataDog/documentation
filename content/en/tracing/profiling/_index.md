@@ -13,11 +13,11 @@ Datadog Profiling is in beta, reach out to <a href="/help/">Datadog Support</a> 
 
 Profiling libraries are shipped within the following tracing language library, refer to the dedicated language page to learn how to enable profile connection for your application:
 
-- [Java][1]
+{{< partial name="profiling/profiling-languages.html" >}}
 
 ## Profile explorer
 
-Once your profile collection is setup, profils are available in the [APM > Profiling][2] page within Datadog:
+Once your profile collection is setup, profils are available in the [APM > Profiling][1] page within Datadog:
 
 {{< img src="tracing/profiling/profiling_main_page.png" alt="Profiling main page">}}
 
@@ -25,7 +25,7 @@ Each line represents a profile for a process on which Datadog profiling was runn
 
 ### Search
 
-You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][3]. By default the following facets are available:
+You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][2]. By default the following facets are available:
 
 |  Facet   |  Definition |
 | -------- | ----------- |
@@ -67,7 +67,7 @@ Below the profile header you can find 4 tabs:
 
 In the **Profiles** tab you can see all profile types available for a given language. Depending of the language, the information collected about your profile differs. Refer to the dedicated profile types section for your language to see which one are collected:
 
-- [Java][4]
+{{< partial name="profiling/profiling-languages.html" >}}
 
 ## Troubleshooting
 
@@ -76,7 +76,7 @@ Datadog profiling is in beta. It will not work with some configurations or envir
 - Datadog profiling does not work with serverless.
 - Datadog profiling does not work with complex proxy configuration. Profiles are sent directly from your application to Datadog.
 
-In case you have done all the necessary configuration steps and do not see profiles on the [profile search page](#search-profiles), please turn on [debug mode][5] and open a support ticket with debug files and following information:
+In case you have done all the necessary configuration steps and do not see profiles on the [profile search page](#search-profiles), please turn on [debug mode][3] and open a support ticket with debug files and following information:
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
@@ -85,8 +85,6 @@ In case you have done all the necessary configuration steps and do not see profi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiling/java
-[2]: https://app.datadoghq.com/profiling
-[3]: /tracing/send_traces/#configure-your-environment
-[4]: /tracing/profiling/java#profile-types
-[5]: /tracing/troubleshooting/#tracer-debug-mode
+[1]: https://app.datadoghq.com/profiling
+[2]: /tracing/send_traces/#configure-your-environment
+[3]: /tracing/troubleshooting/#tracer-debug-mode
