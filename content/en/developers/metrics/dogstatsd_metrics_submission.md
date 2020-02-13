@@ -389,7 +389,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 #### Code examples
 
-Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `SET` type in the [metric types][6] documentation.
+Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -533,16 +533,16 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 #### Configuration
 
-* Configure the aggregation to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][8]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent.
-* Configure the percentile aggregation to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][8]. By default, only `95pc` percentile is sent.
+* Configure the aggregation to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][7]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent.
+* Configure the percentile aggregation to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][7]. By default, only `95pc` percentile is sent.
 
 #### Code examples
 
-The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -713,7 +713,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 ##### Configuration
 
@@ -721,7 +721,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -817,11 +817,11 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 | Method                                                | Datadog Storage type                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more. |
 
 #### Code examples
 
-The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][10] documentation.
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1113,12 +1113,11 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /developers/metrics/types/?tab=count#metric-type-definition
+[2]: /developers/metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
-[5]: /developers/metrics/types/?tab=gauge#metric-type-definition
-[6]: /developers/metrics/types/?tab=set#metric-type-definition
-[7]: /developers/metrics/types/?tab=histogram#metric-type-definition
-[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /metrics/distributions
-[10]: /developers/metrics/types/?tab=distribution#metric-type-definition
+[5]: /developers/metrics/types/?tab=gauge#definition
+[6]: /developers/metrics/types/?tab=histogram#definition
+[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /metrics/distributions
+[9]: /developers/metrics/types/?tab=distribution#definition

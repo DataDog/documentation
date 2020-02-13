@@ -117,7 +117,7 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 
 | Aggregation           | Description                                                                                                                                          | Datadog In-app Type |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                                                                      | GAUGE               |
+| `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                                                                     | GAUGE               |
 | `count:<METRIC_NAME>` | Represents the number of points sampled in the time interval, `X`. The Agent then sends it as a RATE so it would show in app the value `X/interval`. | RATE                |
 | `max:<METRIC_NAME>`   | Represents the maximum value of those `X` values sent in the time interval.                                                                          | GAUGE               |
 | `min:<METRIC_NAME>`   | Represents the minimum value of those `X` sent in the time interval.                                                                                 | GAUGE               |
