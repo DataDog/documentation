@@ -168,34 +168,7 @@ datadog:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-Update your [datadog-values.yaml][7] file with the following APM configuration:
-
-```text
-datadog:
-  (...)
-  apmEnabled: true
-  nonLocalTraffic: true
-
-(...)
-
-daemonset:
-  (...)
-  useHostPort: true
-```
-
-Update the `env` section of your application's manifest with the following:
-
-```yaml
-env:
-  - name: DD_AGENT_HOST
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
-```
-
-Then upgrade your Datadog Helm chart.
-
-Finally, point your application-level tracers to the host IP using the environment variable `DD_AGENT_HOST`. For example, in Python:
+The APM trace agent is listening on port 8126 by default. To enable APM, initalize your tracer to point to `DD_AGENT_HOST`. For example, in Python:
 
 ```python
 import os
@@ -206,6 +179,21 @@ tracer.configure(
     port=os.environ['DD_TRACE_AGENT_PORT'],
 )
 ```
+
+To disable the APM agent from running and listening on port 8126, update your [datadog-values.yaml][7] file with the following APM configuration:
+
+```text
+datadog:
+  (...)
+  apmEnabled: false
+
+(...)
+
+daemonset:
+  (...)
+  useHostPort: false
+```
+Then upgrade your Datadog Helm chart.
 
 Refer to the [language-specific APM instrumentation docs][9] for more examples.
 
