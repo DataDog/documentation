@@ -12,3 +12,9 @@ Architecture:
 
 $1:
 - content/en/([^/]+)/.*
+
+FAQ:
+- content/en/*/faq/*
+
+Guide:
+- content/en/*/guide/*
