@@ -1,33 +1,8 @@
-Agent:
-- content/en/agent/**/*
+Architecture:
+- local/**/*
+- layouts/**/*
+- config/**/*
+- src/**/*
 
-API:
-- content/en/api/**/*
-
-"Cloud Functions":
-- content/en/graphing/infrastructure/serverless.md
-
-Developers:
-- content/en/developers/**/*
-
-Integration:
-- content/en/getting_started/integrations/**/*
-- content/en/integrations/**/*
-
-Logs:
-- content/en/logs/**/*
-
-Monitors:
-- content/en/monitors/**/*
-
-"Network Performance Monitoring":
-- content/en/network_performance_monitoring/**/*
-
-RUM:
-- content/en/real_user_monitoring/**/*
-
-Synthetics:
-- content/en/api/synthetics/**/*
-
-Tracing:
-- content/en/tracing/**/*
+$1:
+- content/en/([^/]+)/.*
