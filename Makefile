@@ -94,6 +94,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/android.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
+	@if [ -d content/en/developers/datadog_operator ]; then \
+	find ./content/en/developers/datadog_operator -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 
 clean-node:  ## Remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

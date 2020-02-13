@@ -1476,6 +1476,34 @@ main:
     identifier: "dev_tools_service_check_api"
     weight: 403
 
+ ##  DEVELOPERS - Datadog Operator
+
+  - name: "Kubernetes Operator"
+    url: "developers/datadog_operator/"
+    parent: "dev_tools"
+    identifier: "dev_tools_operator"
+    weight: 5
+  - name: "Getting Started"
+    url: "/developers/datadog_operator/getting_started"
+    parent: "dev_tools_operator"
+    identifier: "dev_tools_operator_gs"
+    weight: 501
+  - name: "Custom Check"
+    url: "/developers/datadog_operator/custom_check"
+    parent: "dev_tools_operator"
+    identifier: "dev_tools_operator_custom_check"
+    weight: 502
+  - name: "Cluster Agent"
+    url: "/developers/datadog_operator/cluster_agent_setup"
+    parent: "dev_tools_operator"
+    identifier: "dev_tools_operator_dca"
+    weight: 503
+  - name: "Data Collected"
+    url: "/developers/datadog_operator/data_collected"
+    parent: "dev_tools_operator"
+    identifier: "dev_tools_operator_data_collected"
+    weight: 504
+
   - name: "Libraries"
     url: "developers/libraries/"
     parent: "dev_tools"

@@ -164,3 +164,74 @@
             - link: "tracing/visualization/"
               tag: "Documentation"
               text: "Explore your services, resources and traces"
+
+  - repo_name: datadog-operator
+    contents:
+
+    - action: pull-and-push-file
+      branch: gus/doc-refactoring
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/developers/datadog_operator/'
+        file_name: '_index.md'
+        link_relative: true
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Datadog Operator
+          kind: documentation
+          description: "Deploy the Datadog Agent on Kubernetes."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/README.md"]
+
+    - action: pull-and-push-file
+      branch: gus/doc-refactoring
+      globs:
+      - 'docs/getting_started.md'
+      options:
+        dest_path: '/developers/datadog_operator/'
+        file_name: 'getting_started.md'
+        front_matters:
+          title: Getting started with the Datadog Operator
+          kind: documentation
+          description: "Deploy the Datadog Agent with the Datadog operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md"]
+
+    - action: pull-and-push-file
+      branch: gus/doc-refactoring
+      globs:
+      - 'docs/custom_check.md'
+      options:
+        dest_path: '/developers/datadog_operator/'
+        file_name: 'custom_check.md'
+        front_matters:
+          title: Custom Check
+          kind: documentation
+          description: "Deploy Custom Check with the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/docs/custom_check.md"]
+
+    - action: pull-and-push-file
+      branch: gus/doc-refactoring
+      globs:
+      - 'docs/cluster_agent_setup.md'
+      options:
+        dest_path: '/developers/datadog_operator/'
+        file_name: 'cluster_agent_setup.md'
+        front_matters:
+          title: Cluster Agent setup with Operator
+          kind: documentation
+          description: "Deploy the Datadog Cluster Agent with the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/docs/cluster_agent_setup.md"]
+
+    - action: pull-and-push-file
+      branch: gus/doc-refactoring
+      globs:
+      - 'docs/data_collected.md'
+      options:
+        dest_path: '/developers/datadog_operator/'
+        file_name: 'data_collected.md'
+        front_matters:
+          title: Data collected by the Operator
+          kind: documentation
+          disable_toc: true
+          description: "Metrics and events collected by the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/docs/data_collected.md"]

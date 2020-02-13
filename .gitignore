@@ -9,6 +9,8 @@ integrations_data
 content/en/developers/integrations/*.md
 content/en/developers/amazon_cloudformation.md
 
+# Developers/ Operators
+content/en/developers/datadog_operator/*
 # Agent section
 content/en/agent/basic_agent_usage/heroku.md
 
