@@ -53,5 +53,5 @@ To display the Apdex on your [service page][2], select it in the configuration m
 
 {{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List"  >}}
 
-[1]: http://apdex.org/overview.html
+[1]: https://www.apdex.org/overview.html
 [2]: https://app.datadoghq.com/apm/services
