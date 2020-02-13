@@ -1,6 +1,9 @@
 Github:
 - .github/**/*
 
+Images:
+- static/images/**/*
+
 Architecture:
 - local/**/*
 - layouts/**/*
