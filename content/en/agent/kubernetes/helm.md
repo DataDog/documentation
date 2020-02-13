@@ -168,7 +168,7 @@ datadog:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-The APM trace agent is listening on port 8126 by default. To enable APM, initalize your tracer; there's no need to specify a host or port as the tracers will default to the agent location, `DD_AGENT_HOST`.
+The APM trace agent is listening on port 8126 by default. To enable APM, initalize the tracer in your instrumented app(s); there's no need to specify a host or port as the tracers will default to the agent location, `DD_AGENT_HOST`.
 
 Refer to the [language-specific APM instrumentation docs][9] for more information.
 
