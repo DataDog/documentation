@@ -67,7 +67,7 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 
 #### DogStatsD and Docker
 
-Libraries that communicate over HTTP using the [Datadog API][11] don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD need the library configured to connect with the Agent. Each library handles this configuration differently, so refer to the individual library's documentation for more details.
+Libraries that communicate over HTTP using the [Datadog API][11] don't require any special Docker configuration. However, applications using libraries that integrate with DogStatsD or StatsD need the library configured to connect with the Agent. Each library handles this configuration differently, so refer to the individual library's documentation for more details.
 
 After your code is configured, run your custom application container using [the `--link` option][12] to create a network connection between your application container and the Datadog Agent container.
 
