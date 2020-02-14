@@ -208,8 +208,8 @@ backend datadog-metrics
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership haproxy-app.agent.datadoghq.com:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
@@ -217,8 +217,8 @@ backend datadog-traces
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 trace.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership trace.agent.datadoghq.com:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
@@ -226,8 +226,8 @@ backend datadog-processes
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 process.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership process.datadoghq.com:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
@@ -235,8 +235,8 @@ backend datadog-logs
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 **Note**: Download the certificate with the following command:
@@ -327,8 +327,8 @@ backend datadog-metrics
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
@@ -336,8 +336,8 @@ backend datadog-traces
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 trace.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership trace.agent.datadoghq.eu:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
@@ -345,8 +345,8 @@ backend datadog-processes
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 process.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server mothership process.datadoghq.eu:443 check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
@@ -354,8 +354,8 @@ backend datadog-logs
     option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # The following configuration is for older HAProxy versions
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
