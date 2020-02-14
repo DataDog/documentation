@@ -359,6 +359,8 @@ In addition to the required DogStatsD configuration (`url` and `port`), the foll
 | `statsd_namespace`     | String          | `null`      | Namespace to prefix all metrics, events, and service checks.                                                   |
 
 For more information, see the [DogStatsD module][1] documentation.
+
+
 [1]: https://datadogpy.readthedocs.io/en/latest
 {{% /tab %}}
 {{% tab "Ruby" %}}

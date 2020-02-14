@@ -1,28 +1,28 @@
 ---
 title: DogStatsD over Unix Domain Socket
 kind: documentation
-description: "Usage documentation for DogStatsD over Unix Domain Sockets"
+description: 'Usage documentation for DogStatsD over Unix Domain Sockets'
 aliases:
-- /developers/metrics/unix_socket/
+    - /developers/metrics/unix_socket/
 further_reading:
-- link: "developers/dogstatsd"
-  tag: "Documentation"
-  text: "Introduction to DogStatsD"
-- link: "developers/libraries"
-  tag: "Documentation"
-  text: "Official and Community created API and DogStatsD client libraries"
-- link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
-  tag: "GitHub"
-  text: "DogStatsD source code"
+    - link: 'developers/dogstatsd'
+      tag: 'Documentation'
+      text: 'Introduction to DogStatsD'
+    - link: 'developers/libraries'
+      tag: 'Documentation'
+      text: 'Official and Community created API and DogStatsD client libraries'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+      tag: 'GitHub'
+      text: 'DogStatsD source code'
 ---
 
 Starting with v6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP when running on Linux systems.
 
 While UDP works great on `localhost`, it can be a challenge to set up in containerized environments. Unix Domain Sockets allow you to establish the connection with a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 
-* Bypassing the networking stack brings a significant performance improvement for high traffic
-* While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
-* DogStatsD can detect the container from which metrics originated and tag those metrics accordingly.
+- Bypassing the networking stack brings a significant performance improvement for high traffic
+- While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
+- DogStatsD can detect the container from which metrics originated and tag those metrics accordingly.
 
 ## How it works
 
@@ -44,7 +44,7 @@ To enable the Agent DogStatsD server:
     ## @param dogstatsd_socket - string - optional - default: ""
     ## Listen for Dogstatsd metrics on a Unix Socket (*nix only). Set to a valid filesystem path to enable.
     #
-    dogstatsd_socket: "/var/run/datadog/dsd.socket"
+    dogstatsd_socket: '/var/run/datadog/dsd.socket'
     ```
 
 2. [Restart your Agent][3].
@@ -58,7 +58,7 @@ To enable the Agent DogStatsD server:
 The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
 
 | Language | Library                              |
-|----------|--------------------------------------|
+| -------- | ------------------------------------ |
 | Golang   | [DataDog/datadog-go][4]              |
 | Java     | [DataDog/java-dogstatsd-client][5]   |
 | Python   | [DataDog/datadogpy][6]               |
@@ -91,8 +91,8 @@ When running in a containerized environment, the socket file needs to be accessi
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-* Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
-* Start your containers with `-v /var/run/datadog:/var/run/datadog:ro`
+- Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
+- Start your containers with `-v /var/run/datadog:/var/run/datadog:ro`
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -101,27 +101,27 @@ Mount the folder in your `datadog-agent` container:
 
 ```yaml
 volumeMounts:
-  - name: dsdsocket
-    mountPath: /var/run/datadog
+    - name: dsdsocket
+      mountPath: /var/run/datadog
 ##...
 volumes:
-- hostPath:
-    path: /var/run/datadog/
-  name: dsdsocket
+    - hostPath:
+          path: /var/run/datadog/
+      name: dsdsocket
 ```
 
 Expose the same folder in your client containers:
 
 ```yaml
 volumeMounts:
-  - name: dsdsocket
-    mountPath: /var/run/datadog
-    readOnly: true
+    - name: dsdsocket
+      mountPath: /var/run/datadog
+      readOnly: true
 ## ...
 volumes:
-- hostPath:
-    path: /var/run/datadog/
-  name: dsdsocket
+    - hostPath:
+          path: /var/run/datadog/
+      name: dsdsocket
 ```
 
 **Note**: Remove `readOnly: true` if your client containers need write access to the socket.
@@ -147,7 +147,7 @@ To use origin detection:
     dogstatsd_origin_detection: true
     ```
 
-    **Note**: For the containerized Agent, set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION` to true.
+     **Note**: For the containerized Agent, set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION` to true.
 
 2. [Restart your Agent][3].
 
