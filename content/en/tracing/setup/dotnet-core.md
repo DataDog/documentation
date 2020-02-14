@@ -91,7 +91,7 @@ curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_V
 sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 ```
 
-For Alpine or other [Musl-based distributions][3] running .NET Tracer version `1.13.0` or newer, download the tar archive with the musl-linked binary:
+For Alpine or other [Musl-based distributions][3] installing .NET Tracer version `1.13.0` or newer, download the tar archive with the musl-linked binary:
 
 ```bash
 sudo mkdir -p /opt/datadog
