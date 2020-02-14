@@ -21,7 +21,11 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ### Serverless
 
-Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 40 custom metrics per billed function. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. For more information, see the [Serverless billing page][4] and the [Datadog Pricing page][5].
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. 
+
+Pro and Enterprise plans include 40 custom metrics per billed function. Distributed traces incur charges based on the analyzed spans consumed. 
+
+For more information, see the [Serverless billing page][4] and the [Datadog Pricing page][5].
 
 ## Invoicing
 
