@@ -125,6 +125,7 @@ Similar to [annotating Kubernetes Pods][6], Services can be annotated with the f
   ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
   ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
+  ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 ```
 
 The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip`  tags are automatically added to the instances.
@@ -160,6 +161,7 @@ metadata:
           "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
         }
       ]
+    ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
 spec:
   ports:
   - port: 80
