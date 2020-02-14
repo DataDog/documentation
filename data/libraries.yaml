@@ -276,6 +276,10 @@ Tracing:
       official: true
       authors: Datadog
       notes: gem is called 'ddtrace'.
+  - Rust:
+    - name: datadog-apm
+      link: https://github.com/pipefy/datadog-apm-rust
+      authors: Pipefy
   - Scala:
     - name: scala-opentracing
       link: https://github.com/Colisweb/scala-opentracing
