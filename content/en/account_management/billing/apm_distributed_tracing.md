@@ -74,15 +74,26 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million Analyzed Spans
 
 For Kubernetes, APM is priced by nodes not by pods.
 
+### Case 6: Lambda Functions and Analyzed Spans
+
+Continuously invoking a Lambda function every hour for an entire month while sending 20 million Analyzed Spans.
+
+| Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
+|-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
+| Lambda Function   | 1          | [$5 per month][7]                                               | 1 * $5  | $5               |
+| Analyzed Spans    | 20 million | $1.70 per million Analyzed Spans | 20 * $1.70 | $34               |
+| Total             |            |                                                                             | $5 + $34 | **$39 per month** |
+
+
 ### FAQs
 
 **1. What is classified as an APM host for billing?**
 
-A [host][3] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][4].
+A [host][3] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][8] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][4].
 
 **2. How is billing calculated if I deploy one agent per container?**
 
-It is recommended to [setup running][8] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (No. of containers)
+It is recommended to [setup running][9] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (No. of containers)
 
 **3. What happens to my bill if I have to suddenly scale my environment?**
 
@@ -94,7 +105,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **5. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][3] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Analyzed Span][9] count. To estimate how many Analyzed Spans each of your service can send, use the [Event Estimator][8].
+APM is billed on the basis of [hosts][3] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Analyzed Span][10] count. To estimate how many Analyzed Spans each of your service can send, use the [Event Estimator][9].
 
 **6. Can I use App Analytics without APM?**
 
@@ -107,12 +118,15 @@ No. App Analytics is an additional functionality available along with APM which 
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
+
 [1]: /tracing
 [2]: /tracing/app_analytics/?tab=java
 [3]: /account_management/billing/pricing/#infrastructure-monitoring
 [4]: /account_management/billing/pricing/#apm
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com
-[7]: /tracing/send_traces/#datadog-agent
-[8]: /account_management/billing
-[9]: /tracing/visualization
+[7]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
+[8]: /tracing/send_traces/#datadog-agent
+[9]: /account_management/billing
+[10]: /tracing/visualization
