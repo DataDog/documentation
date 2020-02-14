@@ -82,7 +82,7 @@ export function handleLanguageBasedRedirects() {
 			}
 		}
 
-		datadogLogs.logger.debug("Lang-Redirects", { requested_url: baseURL, subdomain, uri, acceptLanguage, previewPath, logMsg });
+		datadogLogs.logger.debug("Lang-Redirects", { message: logMsg, requested_url: baseURL, subdomain, uri, acceptLanguage, previewPath });
 	}
 }
 
