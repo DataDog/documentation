@@ -99,7 +99,7 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For other distributions, download the tar archive with the glibc-linked library:
+For other distributions, download the tar archive with the glibc-linked binary:
 
 ```bash
 sudo mkdir -p /opt/datadog
