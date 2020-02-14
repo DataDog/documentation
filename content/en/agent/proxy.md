@@ -158,7 +158,7 @@ listen stats
     stats uri /
     
 # This section is to reload DNS Records
-# You can replace XXX.XXX.XXX.XXX with your DNS Server IP.
+# Replace <DNS_SERVER_IP> with your DNS Server IP.
 # For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 XXX.XXX.XXX.XXX:53
